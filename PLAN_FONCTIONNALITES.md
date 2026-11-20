@@ -53,22 +53,22 @@ Travailler sur `develop` dans l’ordre des incréments. Le [cahier des charges]
 
 ### Objectif, diagnostic et cadence
 
-- [ ] DEV-034 Étendre le parcours avec niveau de départ, niveau cible, compétences attendues, critères, dates et état de préparation. Conserver la date cible initiale pour les KPI.
-- [ ] DEV-035 Ajouter le formulaire d’objectif côté professeur et l’attribution d’un objectif autonome côté admin. Afficher les critères de réussite à l’élève.
-- [ ] DEV-036 Implémenter le diagnostic initial dans Évaluations et transmettre son résultat à Apprentissage. Permettre au professeur de confirmer le point de départ et d’influer sur les modules restant à travailler.
-- [ ] DEV-037 Vérifier le prérequis A1 avant de confirmer un parcours A2. Accepter un A1 validé ou des acquis confirmés par le diagnostic.
-- [ ] DEV-038 Ajouter les modèles Standard et Intensif. Proposer A1 en un mois et A2 en deux mois à partir d’un A1 acquis.
-- [ ] DEV-039 Créer le formulaire de disponibilités par jour, avec le nombre de séances et la durée prévue. Permettre une cadence différente selon les jours.
+- [x] DEV-034 Étendre le parcours avec niveau de départ, niveau cible, compétences attendues, critères, dates et état de préparation. Conserver la date cible initiale pour les KPI.
+- [x] DEV-035 Ajouter le formulaire d’objectif côté professeur et l’attribution d’un objectif autonome côté admin. Afficher les critères de réussite à l’élève.
+- [x] DEV-036 Implémenter le diagnostic initial dans Évaluations et transmettre son résultat à Apprentissage. Permettre au professeur de confirmer le point de départ et d’influer sur les modules restant à travailler.
+- [x] DEV-037 Vérifier le prérequis A1 avant de confirmer un parcours A2. Accepter un A1 validé ou des acquis confirmés par le diagnostic.
+- [x] DEV-038 Ajouter les modèles Standard et Intensif. Proposer A1 en un mois et A2 en deux mois à partir d’un A1 acquis.
+- [x] DEV-039 Créer le formulaire de disponibilités par jour, avec le nombre de séances et la durée prévue. Permettre une cadence différente selon les jours.
 
 ### Génération, validation et replanification
 
-- [ ] DEV-040 Implémenter le calcul de capacité entre les dates du parcours. Compter les activités obligatoires, les révisions et les créneaux d’évaluation.
-- [ ] DEV-041 Distribuer les activités dans les créneaux en respectant l’ordre des prérequis. Donner à chaque séance sa propre échéance et son propre état.
-- [ ] DEV-042 Afficher la charge hebdomadaire, le calendrier proposé et les activités qui débordent. Proposer un ajustement de cadence ou d’échéance si le programme dépasse la capacité.
-- [ ] DEV-043 Enregistrer la proposition et permettre sa validation par le professeur référent ou par l’élève autonome. Afficher les séances du calendrier validé et les rattrapages dans l’espace élève.
-- [ ] DEV-044 Recalculer les séances restantes dans Apprentissage quand les disponibilités changent. Appliquer en transaction une révision fondée sur la version courante du planning. Conserver les séances terminées et l’historique des échéances révisées.
-- [ ] DEV-045 Gérer la mise en pause et la reprise d’un objectif. Republier pour l’élève les activités restantes selon le nouveau calendrier validé.
-- [ ] DEV-046 Tester la charge de deux séances de 45 minutes par jour sur sept jours, les créneaux insuffisants, plusieurs séances le même jour et la replanification avant et après un retard.
+- [x] DEV-040 Implémenter le calcul de capacité entre les dates du parcours. Compter les activités obligatoires, les révisions et les créneaux d’évaluation.
+- [x] DEV-041 Distribuer les activités dans les créneaux en respectant l’ordre des prérequis. Donner à chaque séance sa propre échéance et son propre état.
+- [x] DEV-042 Afficher la charge hebdomadaire, le calendrier proposé et les activités qui débordent. Proposer un ajustement de cadence ou d’échéance si le programme dépasse la capacité.
+- [x] DEV-043 Enregistrer la proposition et permettre sa validation par le professeur référent ou par l’élève autonome. Afficher les séances du calendrier validé et les rattrapages dans l’espace élève.
+- [x] DEV-044 Recalculer les séances restantes dans Apprentissage quand les disponibilités changent. Appliquer en transaction une révision fondée sur la version courante du planning. Conserver les séances terminées et l’historique des échéances révisées.
+- [x] DEV-045 Gérer la mise en pause et la reprise d’un objectif. Republier pour l’élève les activités restantes selon le nouveau calendrier validé.
+- [x] DEV-046 Tester la charge de deux séances de 45 minutes par jour sur sept jours, les créneaux insuffisants, plusieurs séances le même jour et la replanification avant et après un retard.
 
 ## Incrément 5 · Administrer la médiathèque et publier le catalogue
 
