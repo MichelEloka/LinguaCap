@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.UUID;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
+import org.linguacap.common.Outbox;
 
 /** Tentatives d'évaluation : réponses en cours, remise horodatée, correction et résultat (DEV-061 à DEV-071). */
 @ApplicationScoped
@@ -155,7 +156,10 @@ class ExamStore {
                 update.setObject(8, id);
                 update.executeUpdate();
             }
-            return find(connection, id, false);
+            Attempt submitted = find(connection, id, false);
+            emit(connection, "assessment.attempt_submitted", submitted, result == null);
+            if (result != null) emit(connection, "assessment.attempt_graded", submitted, false);
+            return submitted;
         });
     }
 
@@ -184,8 +188,28 @@ class ExamStore {
                 update.setObject(8, id);
                 update.executeUpdate();
             }
-            return find(connection, id, false);
+            Attempt graded = find(connection, id, false);
+            emit(connection, "assessment.attempt_graded", graded, true);
+            return graded;
         });
+    }
+
+    /** Remise ou correction (DEV-073) : états, dates et résultats par compétence, sans les réponses ni les productions. */
+    private void emit(Connection connection, String type, Attempt attempt, boolean pending) throws SQLException {
+        var data = json.createObjectNode().put("attemptId", attempt.id().toString())
+                .put("enrollmentId", attempt.enrollmentId().toString()).put("kind", attempt.kind())
+                .put("number", attempt.number()).put("status", attempt.status())
+                .put("submittedAt", attempt.submittedAt() == null ? null : attempt.submittedAt().toString())
+                .put("dueAt", attempt.dueAt() == null ? null : attempt.dueAt().toString()).put("onTime", attempt.onTime());
+        if (type.endsWith("_submitted")) {
+            data.put("needsGrading", pending);
+        } else {
+            data.put("wasPending", pending).put("gradedAt", attempt.gradedAt() == null ? null : attempt.gradedAt().toString())
+                    .put("decision", attempt.decision()).put("percent", attempt.percent());
+            data.set("scores", attempt.scores());
+        }
+        Outbox.emit(connection, "assessment.outbox_events", type, "attempt", attempt.id().toString(), attempt.learnerId(),
+                null, data);
     }
 
     private List<Attempt> list(String sql, UUID parameter) {

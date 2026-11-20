@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -3758,6 +3758,9 @@
                   "items": {
                     "$ref": "#/components/schemas/Grade"
                   }
+                },
+                "tracking": {
+                  "$ref": "#/components/schemas/TrackingSummary"
                 }
               }
             }
@@ -3773,6 +3776,9 @@
           "learnersWithResults": {
             "type": "integer",
             "minimum": 0
+          },
+          "freshness": {
+            "$ref": "#/components/schemas/Freshness"
           }
         }
       },
@@ -3790,6 +3796,10 @@
             "type": "string",
             "minLength": 1,
             "maxLength": 500
+          },
+          "alertId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Alerte à laquelle répond l’encouragement."
           }
         }
       },
@@ -3818,6 +3828,23 @@
           "sentAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "alertId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "resumedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Première activité de l’élève après cet encouragement."
           }
         }
       },
@@ -4773,6 +4800,12 @@
             "items": {
               "$ref": "#/components/schemas/Message"
             }
+          },
+          "tracking": {
+            "$ref": "#/components/schemas/TrackingSummary"
+          },
+          "freshness": {
+            "$ref": "#/components/schemas/Freshness"
           }
         }
       },
@@ -6571,6 +6604,213 @@
           },
           "onTime": {
             "type": "boolean"
+          }
+        }
+      },
+      "TrackingAlert": {
+        "type": "object",
+        "required": [
+          "id",
+          "status",
+          "reason",
+          "lateSessions",
+          "midtermOverdue",
+          "openedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "open",
+              "suspended",
+              "closed"
+            ],
+            "description": "Suspendue pendant une pause."
+          },
+          "reason": {
+            "type": "string"
+          },
+          "lateSessions": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "nextMilestone": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "midterm",
+              "final",
+              null
+            ]
+          },
+          "nextMilestoneDueAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "midtermOverdue": {
+            "type": "boolean",
+            "description": "Bilan obligatoire arrivé à échéance sans remise."
+          },
+          "openedAt": {
+            "type": "string"
+          },
+          "closedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "encouragedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "TrackingSummary": {
+        "type": "object",
+        "description": "Synthèse de Suivi fondée sur les événements des services ; vide sans parcours.",
+        "properties": {
+          "enrollmentId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "goalStatus": {
+            "type": "string"
+          },
+          "targetDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "initialTargetDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "resumeDate": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastActivityAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Dernière activité pédagogique, distincte de la dernière connexion."
+          },
+          "practiceMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Temps de pratique estimé ; les pauses de plus de dix minutes ne comptent pas."
+          },
+          "sessionsCompleted": {
+            "type": "integer"
+          },
+          "sessionsOnTime": {
+            "type": "integer"
+          },
+          "pendingGrading": {
+            "type": "integer"
+          },
+          "lateSessions": {
+            "type": "integer"
+          },
+          "nextDueAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "alert": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TrackingAlert"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "alerts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TrackingAlert"
+            },
+            "description": "Fiche élève : historique des alertes."
+          },
+          "sessions": {
+            "type": "array",
+            "description": "Fiche élève : séances du calendrier validé.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "sessionId": {
+                  "$ref": "#/components/schemas/Uuid"
+                },
+                "dueAt": {
+                  "type": "string"
+                },
+                "completedAt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "milestone": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "late": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "results": {
+            "type": "object",
+            "description": "Dernier résultat du bilan (midterm) et de l’examen blanc (final), par compétence."
+          }
+        }
+      },
+      "Freshness": {
+        "type": "object",
+        "properties": {
+          "syncedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Fin du dernier traitement réussi."
+          },
+          "lastStatus": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       }

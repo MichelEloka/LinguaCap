@@ -33,6 +33,7 @@ class GoalStore {
 
     @Inject AgroalDataSource dataSource;
     @Inject ObjectMapper json;
+    @Inject LearningEvents events;
 
     @FunctionalInterface
     interface Work<T> {
@@ -109,6 +110,7 @@ class GoalStore {
                 }
             }
             writeAvailability(connection, id, availability);
+            events.goalSet(connection, id);
             return id;
         });
     }
@@ -311,6 +313,7 @@ class GoalStore {
                 goal.setInt(3, number);
                 goal.executeUpdate();
             }
+            events.planValidated(connection, enrollmentId, number);
             return null;
         });
     }
@@ -324,6 +327,7 @@ class GoalStore {
                 update.setObject(1, enrollmentId);
                 if (update.executeUpdate() == 0) throw HttpError.conflict("Seul un parcours en cours peut être mis en pause.");
             }
+            events.goalStatus(connection, enrollmentId, "learning.goal_paused", "paused");
             return null;
         });
     }

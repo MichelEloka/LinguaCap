@@ -25,6 +25,7 @@ class CourseStore {
     private static final Logger LOG = Logger.getLogger(CourseStore.class);
 
     @Inject AgroalDataSource dataSource;
+    @Inject LearningEvents events;
     @Inject ObjectMapper json;
 
     @FunctionalInterface
@@ -76,9 +77,12 @@ class CourseStore {
     SessionSummary record(UUID sessionId, UUID enrollmentId, String activityId, UUID learnerId, JsonNode state,
                           boolean complete, UUID attemptId) {
         return transaction("record progress", connection -> {
-            try (var lock = connection.prepareStatement("select id from learning.sessions where id = ? for update")) {
+            OffsetDateTime completedBefore;
+            try (var lock = connection.prepareStatement("select completed_at from learning.sessions where id = ? for update")) {
                 lock.setObject(1, sessionId);
-                lock.executeQuery().close();
+                try (var rows = lock.executeQuery()) {
+                    completedBefore = rows.next() ? rows.getObject(1, OffsetDateTime.class) : null;
+                }
             }
             try (var upsert = connection.prepareStatement("""
                     insert into learning.activity_progress (session_id, activity_id, learner_id, enrollment_id, state)
@@ -124,6 +128,7 @@ class CourseStore {
                 start.setObject(1, sessionId);
                 start.executeUpdate();
             }
+            events.progress(connection, enrollmentId, sessionId, learnerId, activityId, complete, completedBefore);
             return session(connection, sessionId).summary();
         });
     }

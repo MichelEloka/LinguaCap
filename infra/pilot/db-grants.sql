@@ -26,11 +26,15 @@ GRANT SELECT, INSERT, UPDATE ON learning.enrollments, learning.sessions, learnin
     learning.activity_progress TO lingua_learning;
 GRANT SELECT, INSERT, UPDATE, DELETE ON learning.availabilities TO lingua_learning;
 GRANT SELECT, INSERT, UPDATE ON learning.plan_revisions, learning.session_due_history TO lingua_learning;
+GRANT SELECT, INSERT ON learning.outbox_events TO lingua_learning;
 
 GRANT USAGE ON SCHEMA assessment TO lingua_assessment;
 GRANT SELECT, INSERT ON assessment.quiz_attempts TO lingua_assessment;
 GRANT SELECT, INSERT, UPDATE ON assessment.exam_attempts TO lingua_assessment;
+GRANT SELECT, INSERT ON assessment.outbox_events TO lingua_assessment;
 
 GRANT USAGE ON SCHEMA tracking TO lingua_tracking;
-GRANT SELECT, INSERT ON tracking.encouragements TO lingua_tracking;
+GRANT SELECT, INSERT, UPDATE ON tracking.encouragements TO lingua_tracking;
+GRANT SELECT, INSERT, UPDATE, DELETE ON tracking.event_log, tracking.checkpoints, tracking.goals, tracking.sessions,
+    tracking.activity, tracking.alerts, tracking.job_runs TO lingua_tracking;
 COMMIT;

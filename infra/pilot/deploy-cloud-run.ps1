@@ -142,7 +142,8 @@ $dependsOn = @{
     learning = @('identity', 'catalogue', 'assessment', 'media');
     # Évaluations lit le parcours chez Apprentissage, lui signale remises et résultats et dépose l'oral par Médias.
     assessment = @('identity', 'catalogue', 'learning', 'media');
-    tracking = @('identity', 'learning'); 'api-gateway' = $databaseModules
+    # Suivi lit par lots les événements d'Identités, d'Apprentissage et d'Évaluations.
+    tracking = @('identity', 'learning', 'assessment'); 'api-gateway' = $databaseModules
 }
 
 # Apprentissage et Évaluations s'appellent l'un l'autre : l'adresse d'un service pas encore déployé est

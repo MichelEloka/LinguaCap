@@ -31,6 +31,7 @@ public class ExamLinkResource {
     @Inject GoalStore goals;
     @Inject CourseStore courses;
     @Inject AgroalDataSource dataSource;
+    @Inject LearningEvents events;
 
     /** Parcours lisible par l'appelant, avec l'échéance des créneaux du bilan et de l'examen blanc. */
     @GET
@@ -114,14 +115,23 @@ public class ExamLinkResource {
 
     /** Un objectif en pause garde son état ; un objectif validé ne revient pas en arrière. */
     private void updateGoal(UUID enrollmentId, String status) {
-        try (Connection connection = dataSource.getConnection();
-             var update = connection.prepareStatement("""
+        try (Connection connection = dataSource.getConnection()) {
+            connection.setAutoCommit(false);
+            try (var update = connection.prepareStatement("""
                      update learning.enrollments set goal_status = ?
-                     where id = ? and goal_status not in ('paused', 'validated')
+                     where id = ? and goal_status not in ('paused', 'validated') and goal_status <> ?
                      """)) {
-            update.setString(1, status);
-            update.setObject(2, enrollmentId);
-            update.executeUpdate();
+                update.setString(1, status);
+                update.setObject(2, enrollmentId);
+                update.setString(3, status);
+                if (update.executeUpdate() > 0) events.goalStatus(connection, enrollmentId, "learning.goal_status_changed", status);
+                connection.commit();
+            } catch (SQLException | RuntimeException error) {
+                connection.rollback();
+                throw error;
+            } finally {
+                connection.setAutoCommit(true);
+            }
         } catch (SQLException error) {
             throw failure("update goal status", error);
         }

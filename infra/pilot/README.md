@@ -58,7 +58,8 @@ Appels entre services privés : chaque appelant reçoit l’adresse du service a
 | Médias | Identités |
 | Évaluations | Identités (droits de correction), Catalogue (définition figée des évaluations), Apprentissage (contexte du parcours, remises et résultats), Médias (sons d’écoute et productions orales privées) |
 | Apprentissage | Identités, Catalogue, Évaluations, Médias (adresses temporaires des supports d’une séance) |
-| Suivi | Identités, Apprentissage |
+| Suivi | Identités, Apprentissage, Évaluations (événements lus par lots) |
+| Cloud Scheduler (`linguacap-scheduler`) | Suivi : `POST /v1/internal/tracking/jobs/sync`, toutes les 15 minutes |
 
 Un nouvel appel se configure avant de publier le code qui l’utilise, par exemple pour Médias :
 
@@ -67,6 +68,19 @@ $media = gcloud run services describe linguacap-media --region=europe-west1 --fo
 gcloud run services update linguacap-learning --region=europe-west1 --update-env-vars="MEDIA_URL=$media"
 gcloud run services add-iam-policy-binding linguacap-media --region=europe-west1 `
   --member=serviceAccount:linguacap-learning@linguacap-prod-dvfjor.iam.gserviceaccount.com --role=roles/run.invoker
+```
+
+Traitement périodique du suivi : le compte `linguacap-scheduler` n’a que le rôle `roles/run.invoker` sur `linguacap-tracking`. Cloud Run vérifie son jeton OIDC et Suivi contrôle en plus que le jeton porte ce compte (variable `LINGUACAP_SCHEDULER_ACCOUNT`). Le traitement importe les événements à partir du dernier point de reprise, met à jour les synthèses puis ouvre, met à jour, suspend ou clôt les alertes ; le relancer ne crée aucun doublon.
+
+```powershell
+gcloud services enable cloudscheduler.googleapis.com
+gcloud iam service-accounts create linguacap-scheduler --display-name="LinguaCap Cloud Scheduler"
+$scheduler = "linguacap-scheduler@linguacap-prod-dvfjor.iam.gserviceaccount.com"
+gcloud run services add-iam-policy-binding linguacap-tracking --region=europe-west1 --member="serviceAccount:$scheduler" --role=roles/run.invoker
+gcloud run services update linguacap-tracking --region=europe-west1 --update-env-vars="LINGUACAP_SCHEDULER_ACCOUNT=$scheduler"
+$tracking = gcloud run services describe linguacap-tracking --region=europe-west1 --format='value(status.url)'
+gcloud scheduler jobs create http linguacap-tracking-sync --location=europe-west1 --schedule="*/15 * * * *" `
+  --uri="$tracking/v1/internal/tracking/jobs/sync" --http-method=POST --oidc-service-account-email=$scheduler --oidc-token-audience=$tracking
 ```
 
 ## Première mise en ligne (manuelle)
