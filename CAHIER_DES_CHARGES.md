@@ -2,7 +2,9 @@
 
 LinguaCap aide un élève à atteindre un objectif de langue à une date donnée. L’élève indique le temps qu’il peut consacrer à l’apprentissage. La plateforme propose un calendrier de cours, d’exercices et d’évaluations. Le professeur suit la progression de ses élèves et intervient quand un retard ou une difficulté menace l’objectif.
 
-La première version propose deux parcours complets d’allemand, **A1 et A2**, avec des objectifs intensifs d’un mois pour A1 et de deux mois pour A2. Elle comprend un catalogue administrable qui permet de publier d’autres niveaux, comme B1, B2 ou C1, sans déploiement de l’application.
+La première version propose deux parcours complets d’allemand, **A1 et A2**, avec des objectifs intensifs d’un mois pour A1 et de deux mois pour A2. Elle comprend un catalogue administrable qui permet de composer des leçons et des évaluations avec du texte, des images et des enregistrements audio, puis de publier d’autres niveaux, comme B1, B2 ou C1, depuis l’interface.
+
+Le [document d’architecture](ARCHITECTURE.md) décrit les services et leurs responsabilités. Le [backlog](PLAN_FONCTIONNALITES.md) ordonne leur réalisation jusqu’au pilote. Le [plan de déploiement](PLAN_DEPLOIEMENT.md) détaille la CI et la mise en ligne.
 
 ## 1. Périmètre du MVP
 
@@ -11,7 +13,8 @@ La première version propose deux parcours complets d’allemand, **A1 et A2**, 
 | Comptes | Invitations, activation, récupération d’accès et gestion des rôles. Un élève peut être accompagné ou autonome. |
 | Objectifs | Niveau de départ, niveau cible, date de début, date cible, critères de réussite et cadence. |
 | Calendrier | Proposition de planning à partir des disponibilités, jusqu’à sept jours par semaine et plusieurs séances par jour. Ajustement des séances restantes en cours de parcours. |
-| Contenu | Parcours complets A1 et A2 en allemand, avec leçons, audio, exercices, révisions et examens blancs. |
+| Contenu | Parcours complets A1 et A2 en allemand, avec leçons illustrées, activités d’écoute, exercices, révisions et examens blancs. |
+| Médias pédagogiques | Médiathèque d’images et d’audios, aperçu, réutilisation et insertion dans les leçons, exercices et évaluations. |
 | Évaluation | Diagnostic initial, bilan intermédiaire et examen blanc final. Autocorrection des réponses fermées et correction humaine des productions écrites et orales de l’examen. |
 | Suivi professeur | Liste d’élèves, fiche de suivi, alertes de retard, corrections à traiter et messages d’encouragement. |
 | Administration | Gestion des comptes et rattachements, consultation de l’usage et des indicateurs globaux, édition et publication de niveaux depuis le catalogue. |
@@ -30,7 +33,7 @@ La première version propose deux parcours complets d’allemand, **A1 et A2**, 
 | Administrateur | Inviter des professeurs ou des élèves, gérer les rôles et l’état des comptes, rattacher ou réaffecter un élève, attribuer un parcours autonome, désigner un correcteur, consulter les fiches utilisateurs et les KPI globaux, administrer le catalogue. |
 | Professeur | Inviter des élèves dans sa propre liste, valider et ajuster leurs parcours, consulter leur activité et leurs résultats, corriger leurs productions et envoyer des encouragements. |
 | Élève | Activer son compte, renseigner ou modifier ses disponibilités, suivre son calendrier, effectuer les activités, rendre ses évaluations et consulter ses résultats et messages. |
-| Permission « Catalogue » | Créer, modifier, prévisualiser et publier des contenus et niveaux. Cette permission peut être donnée à un développeur ou à un responsable pédagogique. Les accès aux fiches élèves relèvent des rôles de suivi. |
+| Permission « Catalogue » | Créer, modifier, prévisualiser et publier des contenus et niveaux. Déposer et réutiliser des ressources dans la médiathèque pédagogique. Cette permission peut être donnée à un développeur ou à un responsable pédagogique. Les accès aux fiches élèves relèvent des rôles de suivi. |
 | Correcteur désigné | Consulter et corriger les productions qui lui sont attribuées, y compris celles d’un élève autonome. |
 
 L’inscription se fait sur invitation. L’administrateur est à l’origine des comptes professeurs et contrôle l’attribution des droits. Un professeur invite par e-mail un élève que la plateforme rattache à sa liste lors de l’activation. L’administrateur peut aussi inviter un élève sans professeur et lui attribuer un parcours.
@@ -71,7 +74,13 @@ Un objectif peut être en préparation, en cours, en attente d’évaluation, en
 
 Le catalogue suit la structure **langue → niveau → version de parcours → modules → activités et évaluations**. Chaque module décrit ce que l’élève doit savoir faire, les prérequis, les activités et leur durée estimée.
 
-Les parcours A1 et A2 couvrent la lecture, l’écoute, l’expression écrite et l’expression orale. Les activités peuvent associer consignes, texte, audio, exercices fermés, réponse écrite et production orale. En A1, l’élève peut par exemple s’entraîner à se présenter, comprendre une annonce simple ou écrire un bref message. En A2, il peut pratiquer des échanges courants, comprendre une demande simple ou expliquer son emploi du temps.
+Les parcours A1 et A2 couvrent la lecture, l’écoute, l’expression écrite et l’expression orale. Les activités peuvent associer un texte, une image ou un audio à des consignes, un exercice fermé, une réponse écrite ou une production orale. En A1, l’élève peut écouter une annonce, associer un mot à une illustration ou écrire un bref message. En A2, il peut s’appuyer sur une image pour décrire une situation ou écouter un échange pour en identifier la demande.
+
+### Utiliser les images et l’audio
+
+Les images et les sons peuvent figurer dans une leçon, dans la consigne d’un exercice ou comme support d’évaluation. Le lecteur s’adapte à la largeur de l’écran. L’élève garde la main sur la lecture, la pause et la réécoute des sons, selon les règles de l’activité. Une ressource indisponible affiche un message et une action de réessai. Une séance dont un support obligatoire manque reste incomplète.
+
+Chaque image informative dispose d’un texte alternatif adapté à son usage. Une image décorative est identifiée comme telle. Les transcriptions des audios peuvent être affichées pour les leçons, puis rendues accessibles au moment prévu pour les exercices et évaluations. Lors d’une épreuve d’écoute, leur disponibilité tient compte de la compétence évaluée et des modalités prévues par l’éditeur.
 
 ### Évaluer chaque objectif
 
@@ -82,6 +91,8 @@ Les parcours A1 et A2 couvrent la lecture, l’écoute, l’expression écrite e
 | Examen blanc | Évaluer les quatre compétences selon les critères publiés avec le parcours. | Résultats, retour du correcteur et décision de validation. |
 
 Les exercices à réponse fermée donnent un résultat immédiat. Les productions écrites et orales de l’examen sont évaluées avec la grille de la version du parcours. L’élève remet un texte ou un enregistrement audio. Le professeur référent, ou le correcteur désigné pour un élève autonome, enregistre son appréciation et les points à travailler.
+
+Pour une production orale, l’élève peut enregistrer sa réponse ou joindre un fichier dans un format accepté, l’écouter avant la remise et relancer un envoi interrompu. LinguaCap confirme la remise lorsque les réponses et les fichiers nécessaires sont enregistrés. Les productions écrites et orales relèvent de l’espace d’évaluation privé. Seuls l’élève et les personnes habilitées à corriger sa tentative y accèdent.
 
 Le niveau est validé dans LinguaCap lorsque les résultats satisfont les critères de réussite configurés et que toutes les corrections requises sont terminées. L’application distingue les états **en attente de correction**, **validé** et **à consolider**. Après un échec, l’élève voit les compétences à retravailler et peut effectuer une nouvelle tentative. Les tentatives et leurs résultats restent consultables.
 
@@ -99,15 +110,17 @@ Depuis l’alerte, le professeur peut consulter le détail, envoyer un encourage
 
 ## 6. Administration du catalogue
 
-L’espace **Administration → Catalogue** permet à une personne habilitée de créer un niveau par langue, de le positionner dans l’ordre des niveaux et de préciser ses prérequis. Elle peut préparer les modules, télécharger ou associer les supports audio, rédiger les exercices et leurs corrigés, puis configurer le diagnostic, le bilan, l’examen blanc et les critères de réussite.
+L’espace **Administration → Catalogue** permet à une personne habilitée de créer un niveau par langue, de le positionner dans l’ordre des niveaux et de préciser ses prérequis. Elle peut préparer les modules, associer leurs supports, rédiger les exercices et leurs corrigés, puis configurer le diagnostic, le bilan, l’examen blanc et les critères de réussite.
+
+La médiathèque permet de déposer une image ou un audio, de lui donner un titre, d’indiquer sa provenance et ses droits d’utilisation, puis de le prévisualiser et de le réutiliser dans plusieurs contenus. L’éditeur renseigne les textes alternatifs, les légendes et les transcriptions au moment d’associer la ressource à une activité, selon le contexte. Si un fichier ne respecte pas les formats ou les limites de dépôt, l’interface indique la cause du refus et permet un nouvel essai.
 
 La publication suit trois étapes.
 
 1. **Brouillon.** L’éditeur peut enregistrer un parcours incomplet et reprendre son travail.
-2. **Prévisualisation.** L’éditeur vérifie l’expérience élève, l’ordre des modules, les durées, les ressources, les prérequis et les évaluations.
-3. **Publication.** Le niveau apparaît dans les parcours attribuables une fois les éléments obligatoires renseignés. Une nouvelle version peut être publiée après révision du contenu. L’éditeur peut retirer une version du catalogue pour les nouvelles inscriptions.
+2. **Prévisualisation.** L’éditeur vérifie l’expérience élève, l’affichage des images, la lecture des sons et leurs textes associés. Il vérifie aussi l’ordre des modules, les durées, les prérequis et les évaluations.
+3. **Publication.** Le niveau apparaît dans les parcours attribuables une fois les éléments obligatoires renseignés et les médias nécessaires disponibles. Une nouvelle version peut être publiée après révision du contenu ou remplacement d’un média. L’éditeur peut retirer une version du catalogue pour les nouvelles inscriptions.
 
-Une inscription référence la version utilisée au démarrage. Lorsqu’une version est remplacée ou retirée du catalogue, les élèves déjà inscrits gardent l’accès à leurs séances, évaluations et résultats sur cette version. Les nouvelles attributions utilisent la version publiée disponible.
+Une inscription référence la version utilisée au démarrage. Lorsqu’une version est remplacée ou retirée du catalogue, les élèves déjà inscrits gardent l’accès aux contenus, images et sons de leurs séances et évaluations, ainsi qu’à leurs résultats. Les nouvelles attributions utilisent la version publiée disponible.
 
 Un administrateur doit pouvoir préparer puis publier **B1**, le rendre attribuable à un élève et répéter la même opération pour B2 ou C1 depuis l’interface. Le modèle de catalogue permet aussi d’associer des niveaux à d’autres langues au fil de l’évolution du produit.
 
@@ -137,6 +150,8 @@ L’indicateur principal du pilote est le **taux d’objectifs validés à l’�
 5. **Réagir à un retard.** Plusieurs séances manquées entraînent une alerte de risque unique. Le professeur trouve les activités concernées, envoie un encouragement, puis voit la reprise lorsque l’élève travaille de nouveau.
 6. **Publier un niveau.** L’administrateur crée et prévisualise un B1 en brouillon, ajoute son contenu et ses évaluations, puis le publie depuis le catalogue. Un professeur peut l’attribuer sans déploiement. Une nouvelle version laisse les inscriptions en cours sur leur version initiale.
 7. **Vérifier les indicateurs.** Avec un petit jeu de parcours aux résultats connus, l’administrateur retrouve les bons nombres d’élèves actifs, de séances à temps et d’objectifs validés dans le filtre de niveau et de cadence attendu.
+8. **Construire une activité multimédia.** L’éditeur dépose une illustration et un audio, renseigne les textes associés et réutilise un support dans deux activités. Il prévisualise puis publie le cours. L’élève voit l’illustration et peut mettre le son en pause et le réécouter sur ordinateur et mobile. Un fichier refusé ou indisponible donne un motif et une action de réessai.
+9. **Protéger une remise et préserver les versions.** Un élève réessaie le dépôt de son oral après une interruption et obtient une seule remise confirmée. Son correcteur peut écouter le fichier. Une personne sans habilitation reçoit un refus. Lorsque l’éditeur remplace l’image ou l’audio dans une nouvelle version du cours, l’élève déjà inscrit retrouve les supports de sa version initiale.
 
 ## 9. Après le lancement
 
