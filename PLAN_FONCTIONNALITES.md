@@ -4,17 +4,17 @@ Travailler sur `develop` dans l’ordre des incréments. Le [cahier des charges]
 
 ## Incrément 1 · Initialiser l’application et les services
 
-- [ ] DEV-001 Reprendre l’interface React et Vite dans `linguacap-react/`, ajouter TypeScript, migrer les points d’entrée JSX et créer les routes de connexion, élève, professeur et administration.
-- [ ] DEV-002 Ajouter les commandes de démarrage, de vérification TypeScript, de test et de build. Versionner le verrou npm, le Maven Wrapper et les versions Java 21 et Node retenues.
-- [ ] DEV-003 Initialiser le projet Maven avec les six services Java 21 et Quarkus pour Identités, Catalogue, Médias, Apprentissage, Évaluations et Suivi. Préparer une image JVM indépendante par service et un contrôle de santé.
-- [ ] DEV-004 Créer la passerelle API Quarkus et ses routes. Préparer les appels HTTP interservices et le Worker Cloudflare en TypeScript pour le site et le proxy `/api/*`. Configurer le proxy de développement.
-- [ ] DEV-005 Définir les contrats HTTP et les schémas JSON des routes, des erreurs et des événements pour Java et TypeScript. Vérifier les entrées au point de réception et propager un identifiant de requête entre services.
-- [ ] DEV-006 Ajouter les règles Git pour ignorer les variables privées, les dépendances installées et les dossiers de build. Publier un modèle de configuration contenant des valeurs fictives.
-- [ ] DEV-007 Initialiser Supabase CLI et les migrations du PostgreSQL commun. Démarrer la base, Auth, Storage et la boîte e-mail locale. Ajouter des données fictives reproductibles pour les tests.
-- [ ] DEV-008 Créer un schéma privé et un rôle SQL d’exécution par service. Configurer JDBC avec des pools bornés et préparer le pooler Supabase en mode session sur TLS pour les services hébergés.
-- [ ] DEV-009 Tester le démarrage d’une première image Quarkus et l’appel d’un service depuis la passerelle locale. Vérifier qu’un rôle SQL ne peut pas consulter ni modifier les tables d’un autre service. Valider ensuite les identités IAM et la connexion JDBC à la première recette Cloud Run.
-- [ ] DEV-010 Connecter l’interface à l’API LinguaCap et configurer le client public Supabase pour Auth et les transferts Storage autorisés. Remonter les erreurs de configuration dans le bon environnement.
-- [ ] DEV-011 Ajouter la CI GitHub Actions dès l’incrément 1 dans `.github/workflows/ci.yml`. Sur les push et pull requests vers `develop` et `production`, vérifier les types, les tests et le build npm, exécuter `./mvnw --batch-mode verify` et tester le démarrage d’une première image. Utiliser des données de test et rendre les résultats CI requis pour fusionner vers `production`.
+- [x] DEV-001 Reprendre l’interface React et Vite dans `linguacap-react/`, ajouter TypeScript, migrer les points d’entrée JSX et créer les routes de connexion, élève, professeur et administration.
+- [x] DEV-002 Ajouter les commandes de démarrage, de vérification TypeScript, de test et de build. Versionner le verrou npm, le Maven Wrapper et les versions Java 21 et Node retenues.
+- [x] DEV-003 Initialiser le projet Maven avec les six services Java 21 et Quarkus pour Identités, Catalogue, Médias, Apprentissage, Évaluations et Suivi. Préparer une image JVM indépendante par service et un contrôle de santé.
+- [x] DEV-004 Créer la passerelle API Quarkus et ses routes. Préparer les appels HTTP interservices et le Worker Cloudflare en TypeScript pour le site et le proxy `/api/*`. Configurer le proxy de développement.
+- [x] DEV-005 Définir les contrats HTTP et les schémas JSON des routes, des erreurs et des événements pour Java et TypeScript. Vérifier les entrées au point de réception et propager un identifiant de requête entre services.
+- [x] DEV-006 Ajouter les règles Git pour ignorer les variables privées, les dépendances installées et les dossiers de build. Publier un modèle de configuration contenant des valeurs fictives.
+- [x] DEV-007 Initialiser Supabase CLI et les migrations du PostgreSQL commun. Démarrer la base, Auth, Storage et la boîte e-mail locale. Ajouter des données fictives reproductibles pour les tests.
+- [x] DEV-008 Créer un schéma privé et un rôle SQL d’exécution par service. Configurer JDBC avec des pools bornés et préparer le pooler Supabase en mode session sur TLS pour les services hébergés.
+- [x] DEV-009 Tester le démarrage d’une première image Quarkus et l’appel d’un service depuis la passerelle locale. Vérifier qu’un rôle SQL ne peut pas consulter ni modifier les tables d’un autre service. Valider ensuite les identités IAM et la connexion JDBC à la première recette Cloud Run.
+- [x] DEV-010 Connecter l’interface à l’API LinguaCap et configurer le client public Supabase pour Auth et les transferts Storage autorisés. Remonter les erreurs de configuration dans le bon environnement.
+- [x] DEV-011 Ajouter la CI GitHub Actions dès l’incrément 1 dans `.github/workflows/ci.yml`. Sur les push et pull requests vers `develop` et `production`, vérifier les types, les tests et le build npm, exécuter `./mvnw --batch-mode verify` et tester le démarrage d’une première image. Utiliser des données de test et rendre les résultats CI requis pour fusionner vers `production`.
 
 ## Incrément 2 · Ouvrir les comptes et protéger les données
 
