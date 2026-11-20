@@ -187,6 +187,8 @@ export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, o
 
   return (
     <form className="stack" onSubmit={submit}>
+      {/* Consigne et texte support (lecture) de l'exercice. */}
+      {activity.lesson?.description && <p className="pilot-lesson-text">{activity.lesson.description}</p>}
       {activityPlacements(activity).map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} />)}
       <Transcript text={activity.transcript} />
       {activity.questions.map((question) => (

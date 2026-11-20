@@ -21,7 +21,9 @@ import org.linguacap.common.Permissions;
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class InternalMediaResource {
-    private static final int MAX_ITEMS = 60;
+    // Une séance ou une évaluation lit quelques dizaines de supports ; un parcours publié en référence plusieurs centaines.
+    private static final int MAX_GRANTS = 150;
+    private static final int MAX_PUBLISHED = 1000;
 
     @Inject Actor actor;
     @Inject IdentityClient identities;
@@ -40,7 +42,7 @@ public class InternalMediaResource {
         String token = actor.token();
         if (token.isEmpty()) throw HttpError.unauthorized("Le jeton de l’utilisateur est requis.");
         List<ReadGrant> grants = new ArrayList<>();
-        for (MediaStore.Ref ref : refs(request)) {
+        for (MediaStore.Ref ref : refs(request, MAX_GRANTS)) {
             MediaStore.FileRow file = store.file(ref.assetId(), ref.version(), false);
             if (file == null) continue;
             store.grant(actorId, file);
@@ -58,13 +60,13 @@ public class InternalMediaResource {
         if (!Permissions.canEditCatalogue(identities.current(actorId))) {
             throw HttpError.forbidden("La publication requiert la permission Catalogue.");
         }
-        List<MediaStore.Ref> refs = refs(request);
+        List<MediaStore.Ref> refs = refs(request, MAX_PUBLISHED);
         store.publish(refs);
         return Map.of("published", refs.size());
     }
 
-    private static List<MediaStore.Ref> refs(Refs request) {
-        if (request == null || request.items() == null || request.items().size() > MAX_ITEMS) {
+    private static List<MediaStore.Ref> refs(Refs request, int max) {
+        if (request == null || request.items() == null || request.items().size() > max) {
             throw HttpError.badRequest("Liste de médias invalide.");
         }
         LinkedHashSet<MediaStore.Ref> refs = new LinkedHashSet<>();

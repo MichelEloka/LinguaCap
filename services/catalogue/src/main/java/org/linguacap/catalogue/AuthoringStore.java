@@ -8,6 +8,8 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.sql.Array;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -183,6 +185,7 @@ class AuthoringStore {
                 }
             }
             Map<String, List<Placement>> placements = placements(connection, versionId);
+            Map<String, List<Question>> versionQuestions = versionQuestions(connection, versionId);
             Map<String, List<Activity>> activities = new LinkedHashMap<>();
             try (var query = connection.prepareStatement("""
                     select a.module_id, a.id, a.kind, a.title, a.estimated_minutes, a.competences, a.lesson_id,
@@ -198,11 +201,12 @@ class AuthoringStore {
                         Lesson lesson = lessonId == null ? null : new Lesson(rows.getString("lesson_title"),
                                 rows.getString("description"), rows.getString("transcript"));
                         List<Question> questions = lessonId == null || "lesson".equals(kind) ? List.of()
-                                : questions(connection, lessonId);
+                                : versionQuestions.getOrDefault(lessonId, List.of());
+                        // La consigne, le texte à lire et la transcription d'un exercice sont rendus comme ceux d'une leçon :
+                        // une nouvelle version les reprend et l'éditeur les affiche.
                         activities.computeIfAbsent(rows.getString("module_id"), key -> new ArrayList<>())
                                 .add(new Activity(rows.getString("id"), kind, rows.getString("title"),
-                                        rows.getInt("estimated_minutes"), texts(rows.getArray("competences")),
-                                        "lesson".equals(kind) || "review".equals(kind) ? lesson : null, questions,
+                                        rows.getInt("estimated_minutes"), texts(rows.getArray("competences")), lesson, questions,
                                         placements.getOrDefault(rows.getString("id"), List.of())));
                     }
                 }
@@ -269,90 +273,101 @@ class AuthoringStore {
                 }
             }
             String prefix = levelId + "-v" + number + "-";
-            String diagnosticLesson = null;
-            if (diagnostic != null) {
-                diagnosticLesson = prefix + "diagnostic";
-                insertLesson(connection, diagnosticLesson, levelId, versionId, diagnostic.title(), diagnostic.description(), "");
-                insertQuestions(connection, diagnosticLesson, diagnostic.questions(), true);
-            }
-            int modulePosition = 0;
-            for (Module module : modules) {
-                try (var insert = connection.prepareStatement("""
-                        insert into catalogue.modules (version_id, id, position, title, objective, prerequisites)
-                        values (?, ?, ?, ?, ?, ?)
-                        """)) {
-                    insert.setObject(1, versionId);
-                    insert.setString(2, module.id());
-                    insert.setInt(3, ++modulePosition);
-                    insert.setString(4, VersionDocument.text(module.title()));
-                    insert.setString(5, VersionDocument.text(module.objective()));
-                    insert.setArray(6, connection.createArrayOf("text", VersionDocument.nonNull(module.prerequisites()).toArray()));
-                    insert.executeUpdate();
+            String diagnosticLesson = diagnostic == null ? null : prefix + "diagnostic";
+            // Un niveau complet compte des milliers de lignes : chaque table est écrite en un lot (un aller-retour avec
+            // la base), dans l'ordre imposé par les clés étrangères.
+            try (var lessons = connection.prepareStatement("""
+                         insert into catalogue.lessons (id, level_id, title, description, transcript, media_ids, version_id)
+                         values (?, ?, ?, ?, ?, '{}', ?)
+                         """);
+                 var questions = connection.prepareStatement("""
+                         insert into catalogue.questions (lesson_id, id, position, prompt, module_ref) values (?, ?, ?, ?, ?)
+                         """);
+                 var options = connection.prepareStatement("""
+                         insert into catalogue.options (lesson_id, question_id, id, position, label, correct) values (?, ?, ?, ?, ?, ?)
+                         """);
+                 var moduleRows = connection.prepareStatement("""
+                         insert into catalogue.modules (version_id, id, position, title, objective, prerequisites)
+                         values (?, ?, ?, ?, ?, ?)
+                         """);
+                 var activityRows = connection.prepareStatement("""
+                         insert into catalogue.activities (version_id, id, module_id, position, kind, title,
+                             estimated_minutes, competences, lesson_id)
+                         values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                         """);
+                 var placementRows = connection.prepareStatement("""
+                         insert into catalogue.media_placements (version_id, activity_id, position, asset_id,
+                             asset_version, usage, alt, caption, transcript_visibility, decorative, question_id, option_id)
+                         values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                         """);
+                 var assessmentRows = connection.prepareStatement("""
+                         insert into catalogue.version_assessments (version_id, kind, title, description, parts)
+                         values (?, ?, ?, ?, ?::jsonb)
+                         """)) {
+                if (diagnostic != null) {
+                    addLesson(lessons, diagnosticLesson, levelId, versionId, diagnostic.title(), diagnostic.description(), "");
+                    addQuestions(questions, options, diagnosticLesson, diagnostic.questions(), true);
                 }
-                int activityPosition = 0;
-                for (Activity activity : VersionDocument.nonNull(module.activities())) {
-                    String lessonId = null;
-                    boolean graded = "exercise".equals(activity.kind()) || "assessment".equals(activity.kind());
-                    if (activity.lesson() != null || graded) {
-                        lessonId = prefix + activity.id();
-                        Lesson lesson = activity.lesson();
-                        insertLesson(connection, lessonId, levelId, versionId,
-                                lesson == null ? activity.title() : orPlaceholder(lesson.title(), activity.title()),
-                                lesson == null ? "" : VersionDocument.text(lesson.description()),
-                                lesson == null ? "" : VersionDocument.text(lesson.transcript()));
-                        if (graded) insertQuestions(connection, lessonId, activity.questions(), false);
-                    }
-                    try (var insert = connection.prepareStatement("""
-                            insert into catalogue.activities (version_id, id, module_id, position, kind, title,
-                                estimated_minutes, competences, lesson_id)
-                            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
-                            """)) {
-                        insert.setObject(1, versionId);
-                        insert.setString(2, activity.id());
-                        insert.setString(3, module.id());
-                        insert.setInt(4, ++activityPosition);
-                        insert.setString(5, activity.kind());
-                        insert.setString(6, VersionDocument.text(activity.title()));
-                        insert.setInt(7, activity.estimatedMinutes());
-                        insert.setArray(8, connection.createArrayOf("text", VersionDocument.nonNull(activity.competences()).toArray()));
-                        insert.setString(9, lessonId);
-                        insert.executeUpdate();
-                    }
-                    int placementPosition = 0;
-                    for (Placement placement : VersionDocument.nonNull(activity.placements())) {
-                        try (var insert = connection.prepareStatement("""
-                                insert into catalogue.media_placements (version_id, activity_id, position, asset_id,
-                                    asset_version, usage, alt, caption, transcript_visibility, decorative, question_id, option_id)
-                                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                                """)) {
-                            insert.setObject(1, versionId);
-                            insert.setString(2, activity.id());
-                            insert.setInt(3, ++placementPosition);
-                            insert.setString(4, placement.assetId());
-                            insert.setInt(5, placement.assetVersion());
-                            insert.setString(6, placement.usage());
-                            insert.setString(7, placement.decorative() ? "" : VersionDocument.text(placement.alt()));
-                            insert.setString(8, blankToNull(placement.caption()));
-                            insert.setString(9, placement.transcriptVisibility());
-                            insert.setBoolean(10, placement.decorative());
-                            insert.setString(11, placement.questionId());
-                            insert.setString(12, placement.optionId());
-                            insert.executeUpdate();
+                int modulePosition = 0;
+                for (Module module : modules) {
+                    moduleRows.setObject(1, versionId);
+                    moduleRows.setString(2, module.id());
+                    moduleRows.setInt(3, ++modulePosition);
+                    moduleRows.setString(4, VersionDocument.text(module.title()));
+                    moduleRows.setString(5, VersionDocument.text(module.objective()));
+                    moduleRows.setArray(6, connection.createArrayOf("text", VersionDocument.nonNull(module.prerequisites()).toArray()));
+                    moduleRows.addBatch();
+                    int activityPosition = 0;
+                    for (Activity activity : VersionDocument.nonNull(module.activities())) {
+                        String lessonId = null;
+                        boolean graded = "exercise".equals(activity.kind()) || "assessment".equals(activity.kind());
+                        if (activity.lesson() != null || graded) {
+                            lessonId = prefix + activity.id();
+                            Lesson lesson = activity.lesson();
+                            addLesson(lessons, lessonId, levelId, versionId,
+                                    lesson == null ? activity.title() : orPlaceholder(lesson.title(), activity.title()),
+                                    lesson == null ? "" : VersionDocument.text(lesson.description()),
+                                    lesson == null ? "" : VersionDocument.text(lesson.transcript()));
+                            if (graded) addQuestions(questions, options, lessonId, activity.questions(), false);
+                        }
+                        activityRows.setObject(1, versionId);
+                        activityRows.setString(2, activity.id());
+                        activityRows.setString(3, module.id());
+                        activityRows.setInt(4, ++activityPosition);
+                        activityRows.setString(5, activity.kind());
+                        activityRows.setString(6, VersionDocument.text(activity.title()));
+                        activityRows.setInt(7, activity.estimatedMinutes());
+                        activityRows.setArray(8, connection.createArrayOf("text", VersionDocument.nonNull(activity.competences()).toArray()));
+                        activityRows.setString(9, lessonId);
+                        activityRows.addBatch();
+                        int placementPosition = 0;
+                        for (Placement placement : VersionDocument.nonNull(activity.placements())) {
+                            placementRows.setObject(1, versionId);
+                            placementRows.setString(2, activity.id());
+                            placementRows.setInt(3, ++placementPosition);
+                            placementRows.setString(4, placement.assetId());
+                            placementRows.setInt(5, placement.assetVersion());
+                            placementRows.setString(6, placement.usage());
+                            placementRows.setString(7, placement.decorative() ? "" : VersionDocument.text(placement.alt()));
+                            placementRows.setString(8, blankToNull(placement.caption()));
+                            placementRows.setString(9, placement.transcriptVisibility());
+                            placementRows.setBoolean(10, placement.decorative());
+                            placementRows.setString(11, placement.questionId());
+                            placementRows.setString(12, placement.optionId());
+                            placementRows.addBatch();
                         }
                     }
                 }
-            }
-            for (Assessment assessment : VersionDocument.nonNull(assessments)) {
-                try (var insert = connection.prepareStatement("""
-                        insert into catalogue.version_assessments (version_id, kind, title, description, parts)
-                        values (?, ?, ?, ?, ?::jsonb)
-                        """)) {
-                    insert.setObject(1, versionId);
-                    insert.setString(2, assessment.kind());
-                    insert.setString(3, VersionDocument.text(assessment.title()));
-                    insert.setString(4, VersionDocument.text(assessment.description()));
-                    insert.setString(5, write(VersionDocument.nonNull(assessment.parts())));
-                    insert.executeUpdate();
+                for (Assessment assessment : VersionDocument.nonNull(assessments)) {
+                    assessmentRows.setObject(1, versionId);
+                    assessmentRows.setString(2, assessment.kind());
+                    assessmentRows.setString(3, VersionDocument.text(assessment.title()));
+                    assessmentRows.setString(4, VersionDocument.text(assessment.description()));
+                    assessmentRows.setString(5, write(VersionDocument.nonNull(assessment.parts())));
+                    assessmentRows.addBatch();
+                }
+                for (var batch : List.of(lessons, questions, options, moduleRows, activityRows, placementRows, assessmentRows)) {
+                    batch.executeBatch();
                 }
             }
             try (var update = connection.prepareStatement("""
@@ -442,36 +457,27 @@ class AuthoringStore {
         }
     }
 
-    private void insertLesson(Connection connection, String id, String levelId, UUID versionId, String title,
-                              String description, String transcript) throws SQLException {
-        try (var insert = connection.prepareStatement("""
-                insert into catalogue.lessons (id, level_id, title, description, transcript, media_ids, version_id)
-                values (?, ?, ?, ?, ?, '{}', ?)
-                """)) {
-            insert.setString(1, id);
-            insert.setString(2, levelId);
-            insert.setString(3, title);
-            insert.setString(4, description);
-            insert.setString(5, transcript);
-            insert.setObject(6, versionId);
-            insert.executeUpdate();
-        }
+    private static void addLesson(PreparedStatement lessons, String id, String levelId, UUID versionId, String title,
+                                  String description, String transcript) throws SQLException {
+        lessons.setString(1, id);
+        lessons.setString(2, levelId);
+        lessons.setString(3, title);
+        lessons.setString(4, description);
+        lessons.setString(5, transcript);
+        lessons.setObject(6, versionId);
+        lessons.addBatch();
     }
 
-    private void insertQuestions(Connection connection, String lessonId, List<Question> questions, boolean diagnostic)
-            throws SQLException {
+    private static void addQuestions(PreparedStatement questionRows, PreparedStatement optionRows, String lessonId,
+                                     List<Question> questions, boolean diagnostic) throws SQLException {
         int position = 0;
         for (Question question : VersionDocument.nonNull(questions)) {
-            try (var insert = connection.prepareStatement("""
-                    insert into catalogue.questions (lesson_id, id, position, prompt, module_ref) values (?, ?, ?, ?, ?)
-                    """)) {
-                insert.setString(1, lessonId);
-                insert.setString(2, question.id());
-                insert.setInt(3, ++position);
-                insert.setString(4, VersionDocument.text(question.prompt()));
-                insert.setString(5, diagnostic ? question.moduleRef() : null);
-                insert.executeUpdate();
-            }
+            questionRows.setString(1, lessonId);
+            questionRows.setString(2, question.id());
+            questionRows.setInt(3, ++position);
+            questionRows.setString(4, VersionDocument.text(question.prompt()));
+            questionRows.setString(5, diagnostic ? question.moduleRef() : null);
+            questionRows.addBatch();
             int optionPosition = 0;
             boolean correctSeen = false;
             for (Option option : VersionDocument.nonNull(question.options())) {
@@ -479,17 +485,13 @@ class AuthoringStore {
                 // et le contrôle de publication signale l'écart.
                 boolean correct = option.correct() && !correctSeen;
                 correctSeen |= correct;
-                try (var insert = connection.prepareStatement("""
-                        insert into catalogue.options (lesson_id, question_id, id, position, label, correct) values (?, ?, ?, ?, ?, ?)
-                        """)) {
-                    insert.setString(1, lessonId);
-                    insert.setString(2, question.id());
-                    insert.setString(3, option.id());
-                    insert.setInt(4, ++optionPosition);
-                    insert.setString(5, VersionDocument.text(option.label()));
-                    insert.setBoolean(6, correct);
-                    insert.executeUpdate();
-                }
+                optionRows.setString(1, lessonId);
+                optionRows.setString(2, question.id());
+                optionRows.setString(3, option.id());
+                optionRows.setInt(4, ++optionPosition);
+                optionRows.setString(5, VersionDocument.text(option.label()));
+                optionRows.setBoolean(6, correct);
+                optionRows.addBatch();
             }
         }
     }
@@ -503,22 +505,44 @@ class AuthoringStore {
                 """)) {
             query.setString(1, lessonId);
             try (var rows = query.executeQuery()) {
-                while (rows.next()) {
-                    Question question = questions.computeIfAbsent(rows.getString("id"), id -> {
-                        try {
-                            return new Question(id, rows.getString("prompt"), rows.getString("module_ref"), new ArrayList<>());
-                        } catch (SQLException error) {
-                            throw new IllegalStateException(error);
-                        }
-                    });
-                    if (rows.getString("option_id") != null) {
-                        question.options().add(new Option(rows.getString("option_id"), rows.getString("label"),
-                                rows.getBoolean("correct")));
-                    }
-                }
+                while (rows.next()) collect(questions, rows);
             }
         }
         return List.copyOf(questions.values());
+    }
+
+    /** Questions de toutes les leçons d'une version, en une requête, rangées par leçon. */
+    private Map<String, List<Question>> versionQuestions(Connection connection, UUID versionId) throws SQLException {
+        Map<String, Map<String, Question>> byLesson = new LinkedHashMap<>();
+        try (var query = connection.prepareStatement("""
+                select q.lesson_id, q.id, q.prompt, q.module_ref, o.id as option_id, o.label, o.correct
+                from catalogue.questions q
+                join catalogue.lessons l on l.id = q.lesson_id
+                left join catalogue.options o on o.lesson_id = q.lesson_id and o.question_id = q.id
+                where l.version_id = ? order by q.lesson_id, q.position, o.position
+                """)) {
+            query.setObject(1, versionId);
+            try (var rows = query.executeQuery()) {
+                while (rows.next()) {
+                    collect(byLesson.computeIfAbsent(rows.getString("lesson_id"), key -> new LinkedHashMap<>()), rows);
+                }
+            }
+        }
+        Map<String, List<Question>> result = new LinkedHashMap<>();
+        byLesson.forEach((lessonId, questions) -> result.put(lessonId, List.copyOf(questions.values())));
+        return result;
+    }
+
+    private static void collect(Map<String, Question> questions, ResultSet rows) throws SQLException {
+        String id = rows.getString("id");
+        Question question = questions.get(id);
+        if (question == null) {
+            question = new Question(id, rows.getString("prompt"), rows.getString("module_ref"), new ArrayList<>());
+            questions.put(id, question);
+        }
+        if (rows.getString("option_id") != null) {
+            question.options().add(new Option(rows.getString("option_id"), rows.getString("label"), rows.getBoolean("correct")));
+        }
     }
 
     private Map<String, List<Placement>> placements(Connection connection, UUID versionId) throws SQLException {
