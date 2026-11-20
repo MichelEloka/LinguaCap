@@ -40,6 +40,20 @@ async function login(email) {
   return session.access_token;
 }
 
+async function createAccount(label, role, teacherId) {
+  const email = `${label}-${suffix}@example.org`;
+  const user = await auth('/admin/users', {
+    method: 'POST', headers: {
+      apikey: local.secret,
+      ...(!local.secret.startsWith('sb_secret_') ? { Authorization: `Bearer ${local.secret}` } : {}),
+    },
+    body: { email, password, email_confirm: true },
+  });
+  localSql(local.container, `insert into identity.profiles(id,display_name,role,teacher_id)
+    values ('${user.id}', 'Recette ${label}', '${role}', ${teacherId ? `'${teacherId}'` : 'null'});`);
+  return { id: user.id, email, token: await login(email) };
+}
+
 async function createStaff(label, role) {
   const email = `${label}-${suffix}@example.org`;
   const user = await auth('/admin/users', {
@@ -275,34 +289,54 @@ await api('/admin/users', teacher.token, { status: 403 });
 // --- Parcours versionné, séances et progression (incrément 3) -----------------------------------------
 const tracks = await api('/tracks', otherTeacher.token);
 const a1 = tracks.find((track) => track.levelCode === 'A1');
-assert.ok(a1, 'Le parcours A1 publié est attribuable');
+const a2 = tracks.find((track) => track.levelCode === 'A2');
+assert.ok(a1 && a2, 'Les parcours A1 et A2 publiés sont attribuables');
 assert.equal(a1.activityCount, 2);
 assert.equal(a1.totalMinutes, 15);
-const due = new Date(Date.now() + 2 * 86_400_000).toISOString().slice(0, 10);
-const enrollmentFor = (learnerId, firstSessionDue = due) => ({ learnerId, trackVersionId: a1.versionId, firstSessionDue });
+assert.equal(a2.prerequisiteLevelCode, 'A1');
+const inDays = (days) => {
+  const date = new Date(Date.now() + days * 86_400_000);
+  return new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Paris' }).format(date);
+};
+// Les parcours de recette démarrent demain : une séance du jour passerait « en retard » après 20 h à Paris.
+const goalFor = (learnerId, extra = {}) => ({
+  learnerId, trackVersionId: a1.versionId, startLevel: 'A0', template: 'intensive', startDate: inDays(1), ...extra,
+});
+const goalPath = (enrollmentId, suffix) => `/learning/enrollments/${enrollmentId}/${suffix}`;
 
 // Le référent actuel de l'élève est le professeur « tiers » depuis la réaffectation.
-await post('/learning/enrollments', teacher.token, enrollmentFor(learner.id), 403);
-await post('/learning/enrollments', staffToken, enrollmentFor(learner.id), 403);
-await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id, '2020-01-01'), 400);
-const enrolled = await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id), 201);
+await post('/learning/enrollments', teacher.token, goalFor(learner.id), 403);
+await post('/learning/enrollments', staffToken, goalFor(learner.id), 403);
+await post('/learning/enrollments', otherTeacher.token, goalFor(learner.id, { startDate: '2020-01-01' }), 400);
+const enrolled = await post('/learning/enrollments', otherTeacher.token, goalFor(learner.id), 201);
 assert.equal(enrolled.trackVersionNumber, 1);
-assert.equal(enrolled.sessions.length, 1);
-assert.equal(enrolled.sessions[0].status, 'planned');
-assert.equal(enrolled.sessions[0].activities.length, 2);
-await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id), 409);
+assert.equal(enrolled.goal.status, 'preparing');
+assert.equal(enrolled.goal.initialTargetDate, enrolled.goal.targetDate);
+assert.equal(enrolled.sessions.length, 0, 'Les séances attendent la validation du planning');
+assert.equal(enrolled.proposal.number, 1);
+await post(goalPath(enrolled.id, 'proposal/validate'), learnerToken, { number: 1 }, 403);
+const mainPlan = await post(goalPath(enrolled.id, 'proposal/validate'), otherTeacher.token, { number: 1 });
+assert.equal(mainPlan.goal.status, 'active');
+assert.deepEqual(mainPlan.sessions[0].activities.map((activity) => activity.id),
+  ['commander-au-cafe', 'quiz-la-commande', 'revision-au-cafe']);
+assert.equal(mainPlan.sessions[0].status, 'planned');
+await post('/learning/enrollments', otherTeacher.token, goalFor(learner.id), 409);
 assert.equal((await api('/learning/enrollment', learnerToken)).id, enrolled.id);
 
 const autonomousToken = await login(autonomousEmail);
-const autoEnrollment = await post('/learning/enrollments', admin.token, enrollmentFor(autonomous.id), 201);
-const autoSession = autoEnrollment.sessions[0].id;
+const autoEnrollment = await post('/learning/enrollments', admin.token, goalFor(autonomous.id), 201);
+const autoPlan = await post(goalPath(autoEnrollment.id, 'proposal/validate'), autonomousToken, { number: autoEnrollment.proposal.number });
+const autoSession = autoPlan.sessions[0].id;
 const sessionPath = `/learning/sessions/${autoSession}`;
 const progressPath = (activity) => `${sessionPath}/activities/${activity}/progress`;
 await api(sessionPath, learnerToken, { status: 403 });
 let detail = await api(sessionPath, autonomousToken);
-const [lessonActivity, exercise] = detail.activities;
+const activityOf = (session, id) => session.activities.find((activity) => activity.id === id);
+const lessonActivity = activityOf(detail, 'commander-au-cafe');
+const exercise = activityOf(detail, 'quiz-la-commande');
 assert.equal(lessonActivity.kind, 'lesson');
 assert.equal(exercise.kind, 'exercise');
+assert.equal(activityOf(detail, 'revision-au-cafe').kind, 'review');
 const illustration = lessonActivity.placements.find((placement) => placement.usage === 'illustration');
 assert.ok(illustration.alt.length > 10, 'Le visuel a son alternative textuelle');
 assert.ok(lessonActivity.transcript, 'La transcription de la leçon est disponible à la demande');
@@ -315,12 +349,13 @@ await api(`/media/${illustration.assetId}/versions/9`, autonomousToken, { status
 
 await put(progressPath('quiz-la-commande'), autonomousToken, { state: { answers: { 'cafe-question': 'the' } } });
 detail = await api(sessionPath, autonomousToken);
-assert.equal(detail.activities[1].state.answers['cafe-question'], 'the', 'La progression reprend après fermeture');
+assert.equal(activityOf(detail, 'quiz-la-commande').state.answers['cafe-question'], 'the', 'La progression reprend après fermeture');
 assert.equal(detail.session.status, 'in_progress');
 const lessonDone = await put(progressPath('commander-au-cafe'), autonomousToken, { completed: true });
 const lessonReplay = await put(progressPath('commander-au-cafe'), autonomousToken, { completed: true });
-assert.ok(lessonDone.activities[0].completedAt);
-assert.equal(lessonReplay.activities[0].completedAt, lessonDone.activities[0].completedAt, 'Une fin rejouée n’est pas recomptée');
+assert.ok(activityOf(lessonDone, 'commander-au-cafe').completedAt);
+assert.equal(activityOf(lessonReplay, 'commander-au-cafe').completedAt, activityOf(lessonDone, 'commander-au-cafe').completedAt,
+  'Une fin rejouée n’est pas recomptée');
 await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true }, 400);
 await put(progressPath('commander-au-cafe'), learnerToken, { state: {} }, 404);
 const looseGrade = await api('/assessments/quiz', autonomousToken, {
@@ -334,14 +369,16 @@ const sessionGrade = await api('/assessments/quiz', autonomousToken, {
 });
 assert.equal(sessionGrade.sessionId, autoSession);
 assert.equal(sessionGrade.activityId, 'quiz-la-commande');
-const finished = await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id });
+const quizDone = await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id });
+assert.equal(quizDone.status, 'in_progress', 'La révision reste à faire');
+assert.equal(activityOf(await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id }),
+  'quiz-la-commande').completedAt, activityOf(quizDone, 'quiz-la-commande').completedAt);
+const finished = await put(progressPath('revision-au-cafe'), autonomousToken, { completed: true });
 assert.equal(finished.status, 'completed');
 assert.ok(finished.completedAt);
-assert.equal((await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id })).completedAt,
-  finished.completedAt);
 detail = await api(sessionPath, autonomousToken);
-assert.ok(detail.activities[1].transcript, 'La transcription de l’exercice est disponible après la réponse');
-assert.equal(detail.activities[1].attemptId, sessionGrade.id);
+assert.ok(activityOf(detail, 'quiz-la-commande').transcript, 'La transcription de l’exercice est disponible après la réponse');
+assert.equal(activityOf(detail, 'quiz-la-commande').attemptId, sessionGrade.id);
 
 const autonomousSheet = await api(`/tracking/learners/${autonomous.id}`, admin.token);
 assert.equal(autonomousSheet.enrollment.sessions[0].status, 'completed');
@@ -351,6 +388,119 @@ await api(`/tracking/learners/${autonomous.id}`, staffToken, { status: 403 });
 assert.equal((await api(`/tracking/learners/${learner.id}`, otherTeacher.token)).enrollment.sessions[0].status, 'planned');
 console.log('Recette des séances réussie · parcours versionné, attribution, contenu et médias versionnés, reprise, '
   + 'fin idempotente, exercice corrigé et fiche professeur.');
+
+// --- Planning personnalisé (incrément 4) ------------------------------------------------------------
+const templates = await api('/learning/templates', learnerToken);
+const intensive = templates.find((template) => template.id === 'intensive');
+assert.equal(intensive.days.length, 7);
+assert.ok(intensive.days.every((day) => day.sessions === 2 && day.minutes === 45));
+
+const mainProposal = await api(goalPath(enrolled.id, 'proposal'), otherTeacher.token);
+assert.equal(mainProposal.status, 'validated');
+assert.ok(mainProposal.weeks.some((week) => week.availableMinutes === 630),
+  'Deux séances de 45 minutes sept jours sur sept donnent 10 h 30 par semaine');
+const firstDay = mainProposal.sessions.filter((session) => session.date === mainProposal.sessions[0].date);
+assert.ok(firstDay.length >= 2 && firstDay[1].slot === 2, 'Plusieurs séances le même jour, chacune avec son échéance');
+assert.ok(mainProposal.sessions.some((session) => session.items.some((item) => item.id === 'bilan-intermediaire')));
+assert.ok(mainProposal.sessions.at(-1).items.some((item) => item.id === 'examen-blanc'), 'L’examen blanc ferme le planning');
+assert.equal((await api('/tracking/overview', otherTeacher.token)).learners
+  .find((entry) => entry.learnerId === learner.id).progress.enrollment.levelCode, 'A1');
+
+// Créneaux insuffisants : débordement, ajustements chiffrés, validation refusée puis ajustement appliqué.
+const autoId = autoEnrollment.id;
+const tight = await put(goalPath(autoId, 'availability'), autonomousToken,
+  { days: [{ weekday: 1, sessions: 1, minutes: 10 }], targetDate: inDays(3) });
+assert.ok(tight.overflowCount > 0, 'Le programme déborde de la date cible');
+assert.equal(tight.validatable, false);
+assert.ok(tight.suggestions.length > 0, 'Des ajustements sont proposés');
+await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: tight.number }, 409);
+const remedy = tight.suggestions.find((suggestion) => suggestion.kind === 'target_date') ?? tight.suggestions[0];
+const adjusted = await put(goalPath(autoId, 'availability'), autonomousToken,
+  { days: remedy.availability, targetDate: remedy.targetDate });
+assert.equal(adjusted.overflowCount, 0, `L’ajustement « ${remedy.label} » fait tenir le programme`);
+await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: tight.number }, 409);
+
+// Replanification après un retard : la séance en retard est remplacée, son retard reste dans l'historique.
+const pending = (await api('/learning/enrollment', autonomousToken)).sessions.find((session) => session.status !== 'completed');
+localSql(local.container, `update learning.sessions set due_at = now() - interval '1 day' where id = '${pending.id}';`);
+assert.equal((await api('/learning/enrollment', autonomousToken)).sessions.find((session) => session.id === pending.id).status, 'late');
+const replanned = await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: adjusted.number });
+assert.equal(replanned.goal.validatedRevision, adjusted.number);
+assert.ok(replanned.supersededSessions >= 1);
+assert.ok(replanned.sessions.some((session) => session.status === 'completed'), 'Les séances terminées sont conservées');
+assert.ok(!replanned.sessions.some((session) => session.id === pending.id), 'La séance en retard est remplacée');
+assert.ok(!replanned.sessions.filter((session) => session.status !== 'completed')
+  .some((session) => session.activities.some((activity) => activity.id === 'commander-au-cafe')), 'Le travail fait n’est pas replanifié');
+assert.equal(replanned.goal.initialTargetDate, autoEnrollment.goal.initialTargetDate, 'La date cible initiale est conservée');
+assert.equal(replanned.goal.targetDate, remedy.targetDate);
+assert.equal(localQuery(local.container,
+  `select count(*) from learning.session_due_history where session_id = '${pending.id}' and was_late;`), '1');
+
+// Pause et reprise à une nouvelle date.
+const paused = await post(goalPath(autoId, 'pause'), autonomousToken, {});
+assert.equal(paused.goal.status, 'paused');
+const open = paused.sessions.find((session) => session.status !== 'completed');
+await put(`/learning/sessions/${open.id}/activities/${open.activities[0].id}/progress`, autonomousToken, { state: {} }, 409);
+await post(goalPath(enrolled.id, 'pause'), learnerToken, {}, 403);
+const resumeDate = inDays(5);
+const resumed = await post(goalPath(autoId, 'resume'), autonomousToken, { resumeDate, targetDate: inDays(45) });
+assert.equal(resumed.startDate, resumeDate);
+const reactivated = await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: resumed.number });
+assert.equal(reactivated.goal.status, 'active');
+assert.ok(reactivated.sessions.filter((session) => session.status !== 'completed')
+  .every((session) => session.dueAt.slice(0, 10) >= resumeDate), 'Les activités restantes reprennent à la nouvelle date');
+
+// Diagnostic et prérequis A1 d'un parcours A2 accompagné : le professeur confirme le point de départ.
+const learnerA2 = await createAccount('eleve-a2', 'learner', teacher.id);
+const a2Goal = await post('/learning/enrollments', teacher.token,
+  { learnerId: learnerA2.id, trackVersionId: a2.versionId, startLevel: 'A1', template: 'intensive' }, 201);
+assert.equal(a2Goal.goal.prerequisiteLevel, 'A1');
+assert.equal(a2Goal.goal.prerequisiteMet, false);
+assert.equal(a2Goal.proposal.validatable, false);
+await post(goalPath(a2Goal.id, 'proposal/validate'), teacher.token, { number: a2Goal.proposal.number }, 409);
+await put(goalPath(a2Goal.id, 'starting-point'), teacher.token, { acquiredModules: [], prerequisiteMet: true }, 409);
+const diagnostic = await api(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token);
+assert.equal(diagnostic.lessonId, 'diagnostic-a2');
+assert.ok(diagnostic.questions.every((question) => question.options.every((option) => !('correct' in option))));
+const diagGrade = await api('/assessments/diagnostics', learnerA2.token, {
+  method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'diagnostic-a2', answers: { 'diag-prerequis': 'cafe', 'diag-journee': 'sept' } },
+});
+assert.equal(diagGrade.kind, 'diagnostic');
+assert.deepEqual(diagGrade.moduleScores, { 'ma-journee': { correct: 1, total: 1 }, prerequis: { correct: 1, total: 1 } });
+const afterDiag = await post(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token, { attemptId: diagGrade.id });
+assert.deepEqual(afterDiag.goal.diagnosticModules, ['ma-journee']);
+assert.equal(afterDiag.goal.diagnosticPrerequisite, true);
+assert.equal(afterDiag.goal.prerequisiteMet, false, 'Le professeur confirme le point de départ d’un élève accompagné');
+await put(goalPath(a2Goal.id, 'starting-point'), learnerA2.token, { acquiredModules: ['ma-journee'], prerequisiteMet: true }, 403);
+await put(goalPath(a2Goal.id, 'starting-point'), teacher.token, { acquiredModules: ['inconnu'] }, 400);
+const confirmed = await put(goalPath(a2Goal.id, 'starting-point'), teacher.token, { acquiredModules: ['ma-journee'], prerequisiteMet: true });
+assert.equal(confirmed.goal.prerequisiteMet, true);
+assert.deepEqual(confirmed.goal.acquiredModules, ['ma-journee']);
+const a2Proposal = await api(goalPath(a2Goal.id, 'proposal'), teacher.token);
+const a2Items = a2Proposal.sessions.flatMap((session) => session.items.map((item) => item.id));
+assert.ok(!a2Items.includes('raconter-sa-journee'), 'Les modules acquis ne sont pas replanifiés');
+assert.ok(a2Items.includes('examen-blanc'));
+assert.equal((await post(goalPath(a2Goal.id, 'proposal/validate'), teacher.token, { number: a2Proposal.number })).goal.status, 'active');
+
+// Élève autonome : son diagnostic s'applique directement et il valide lui-même son planning.
+const learnerAuto = await createAccount('autonome-a1', 'learner', null);
+const a1Goal = await post('/learning/enrollments', admin.token,
+  { learnerId: learnerAuto.id, trackVersionId: a1.versionId, startLevel: 'A0', template: 'standard' }, 201);
+assert.equal(a1Goal.goal.template, 'standard');
+const a1Diag = await api('/assessments/diagnostics', learnerAuto.token, {
+  method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'diagnostic-a1', answers: { 'diag-cafe-1': 'cafe', 'diag-cafe-2': 'bitte' } },
+});
+await post(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token, { attemptId: a1Diag.id }, 409);
+const applied = await post(goalPath(a1Goal.id, 'diagnostic'), learnerAuto.token, { attemptId: a1Diag.id });
+assert.deepEqual(applied.goal.acquiredModules, ['au-cafe'], 'Le diagnostic d’un élève autonome s’applique directement');
+const a1Proposal = await api(goalPath(a1Goal.id, 'proposal'), learnerAuto.token);
+assert.ok(!a1Proposal.sessions.some((session) => session.items.some((item) => item.id === 'commander-au-cafe')));
+await post(goalPath(a1Goal.id, 'proposal/validate'), teacher.token, { number: a1Proposal.number }, 403);
+assert.equal((await post(goalPath(a1Goal.id, 'proposal/validate'), learnerAuto.token, { number: a1Proposal.number })).goal.status, 'active');
+console.log('Recette du planning réussie · modèles, charge hebdomadaire, débordement et ajustements, proposition périmée, '
+  + 'replanification après retard, pause et reprise, diagnostic, prérequis A2 et validation par le référent ou l’élève autonome.');
 
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
@@ -399,6 +549,7 @@ if (process.argv.includes('--browser')) {
     await expect(page.getByText('Leçon terminée')).toBeVisible();
     await page.getByRole('button', { name: 'Valider mes réponses' }).click();
     await expect(page.getByText('Résultat enregistré · 1 / 1')).toBeVisible();
+    await page.getByRole('button', { name: 'J’ai terminé la révision' }).click();
     await expect(page.getByText('Séance terminée. Bravo !')).toBeVisible();
     await expect(page.getByText('Lire la transcription')).toHaveCount(2);
     console.log('Recette navigateur réussie · accueil, séance, visuel, audio, reprise après rechargement et exercice sur mobile.');
@@ -413,7 +564,7 @@ if (process.argv.includes('--browser')) {
     const followUp = teacherPage.getByRole('dialog');
     await expect(followUp.getByText('Séance 1 · Au café')).toBeVisible();
     await expect(followUp.getByText('Terminée', { exact: true })).toBeVisible();
-    await expect(followUp.getByText('2 / 2 activités terminées', { exact: false })).toBeVisible();
+    await expect(followUp.getByText('3 / 3 activités terminées', { exact: false })).toBeVisible();
     console.log('Recette navigateur réussie · fiche élève du professeur référent.');
 
     const adminPage = await browser.newPage({ viewport: { width: 1280, height: 900 } });
