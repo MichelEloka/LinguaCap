@@ -1,0 +1,227 @@
+package org.linguacap.assessment;
+
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.agroal.api.AgroalDataSource;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.GET;
+import jakarta.ws.rs.HeaderParam;
+import jakarta.ws.rs.POST;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import java.util.regex.Pattern;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.linguacap.common.Actor;
+import org.linguacap.common.HttpError;
+import org.linguacap.common.IdentityClient;
+import org.linguacap.common.ServiceClient;
+
+@Path("/v1/assessments")
+@Produces(MediaType.APPLICATION_JSON)
+public class AssessmentResource {
+    private static final Pattern LESSON_ID = Pattern.compile("[a-z0-9]+(?:-[a-z0-9]+)*");
+    private static final Pattern ANSWER_ID = Pattern.compile("[A-Za-z0-9][A-Za-z0-9_.-]{0,79}");
+    private static final Pattern REQUEST_KEY = Pattern.compile("[A-Za-z0-9_-]{8,128}");
+
+    @Inject Actor actor;
+    @Inject IdentityClient identities;
+    @Inject ServiceClient services;
+    @Inject AgroalDataSource dataSource;
+    @Inject ObjectMapper mapper;
+
+    @ConfigProperty(name = "lingua.services.catalogue")
+    String catalogueUrl;
+
+    @POST
+    @Path("/quiz")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Grade quiz(QuizRequest request, @HeaderParam("Idempotency-Key") String requestKey) {
+        UUID learnerId = actor.id();
+        if (!"learner".equals(identities.current(learnerId).path("role").asText())) {
+            throw HttpError.forbidden("Seul un élève peut remettre un quiz.");
+        }
+        validate(request, requestKey);
+        String lessonId = request.lessonId();
+        String answersJson = mapper.valueToTree(request.answers()).toString();
+        Grade prior = findExisting(learnerId, requestKey, lessonId, answersJson);
+        if (prior != null) {
+            return prior;
+        }
+        JsonNode answerKey = services.request(catalogueUrl,
+                "/v1/internal/lessons/" + lessonId + "/answer-key", "GET", learnerId, null).path("answers");
+        if (!answerKey.isObject() || answerKey.isEmpty() || answerKey.size() > 100) {
+            throw HttpError.unavailable("Le corrigé de ce quiz est indisponible.");
+        }
+        if (request.answers().size() != answerKey.size()) {
+            throw HttpError.badRequest("Réponds à toutes les questions avant de remettre le quiz.");
+        }
+        int correct = 0;
+        for (Map.Entry<String, String> answer : request.answers().entrySet()) {
+            JsonNode expected = answerKey.get(answer.getKey());
+            if (expected == null || !expected.isTextual()) {
+                throw HttpError.badRequest("Une réponse ne correspond pas à ce quiz.");
+            }
+            if (answer.getValue().equals(expected.textValue())) {
+                correct++;
+            }
+        }
+        return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size());
+    }
+
+    @GET
+    @Path("/results")
+    public List<Grade> results(@QueryParam("learnerId") String requestedLearnerId) {
+        UUID learnerId = authorizeLearner(actor.id(), requestedLearnerId);
+        String sql = """
+                SELECT id, lesson_id, correct, total, submitted_at
+                FROM assessment.quiz_attempts
+                WHERE learner_id = ?
+                ORDER BY submitted_at DESC, id DESC
+                """;
+        try (var connection = dataSource.getConnection();
+             var statement = connection.prepareStatement(sql)) {
+            statement.setObject(1, learnerId);
+            try (var rows = statement.executeQuery()) {
+                List<Grade> results = new ArrayList<>();
+                while (rows.next()) {
+                    results.add(readGrade(rows));
+                }
+                return results;
+            }
+        } catch (SQLException ignored) {
+            throw HttpError.unavailable("Les résultats de cet élève sont indisponibles.");
+        }
+    }
+
+    private UUID authorizeLearner(UUID callerId, String requestedLearnerId) {
+        if (requestedLearnerId != null) {
+            UUID id = readLearnerId(requestedLearnerId);
+            if (!callerId.equals(id)) {
+                identities.learner(callerId, id);
+                return id;
+            }
+        }
+        if (!"learner".equals(identities.current(callerId).path("role").asText())) {
+            throw HttpError.forbidden("Sélectionne un élève auquel ton compte a accès.");
+        }
+        return callerId;
+    }
+
+    private static UUID readLearnerId(String value) {
+        try {
+            UUID id = UUID.fromString(value);
+            if (id.toString().equalsIgnoreCase(value)) {
+                return id;
+            }
+        } catch (IllegalArgumentException ignored) {
+            // Both invalid shapes use the same response.
+        }
+        throw HttpError.badRequest("Identifiant élève invalide.");
+    }
+
+    private Grade findExisting(UUID learnerId, String requestKey, String lessonId, String answersJson) {
+        if (requestKey == null) {
+            return null;
+        }
+        try (var connection = dataSource.getConnection()) {
+            return findExisting(connection, learnerId, requestKey, lessonId, answersJson);
+        } catch (SQLException ignored) {
+            throw HttpError.unavailable("Le quiz est temporairement indisponible.");
+        }
+    }
+
+    private Grade storeAttempt(UUID learnerId, String requestKey, String lessonId, String answersJson,
+                               int correct, int total) {
+        String sql = """
+                INSERT INTO assessment.quiz_attempts (learner_id, lesson_id, answers, correct, total, request_key)
+                VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?)
+                ON CONFLICT (learner_id, request_key) DO NOTHING
+                RETURNING id, lesson_id, correct, total, submitted_at
+                """;
+        try (var connection = dataSource.getConnection();
+             var statement = connection.prepareStatement(sql)) {
+            statement.setObject(1, learnerId);
+            statement.setString(2, lessonId);
+            statement.setString(3, answersJson);
+            statement.setInt(4, correct);
+            statement.setInt(5, total);
+            statement.setString(6, requestKey);
+            try (var rows = statement.executeQuery()) {
+                if (rows.next()) {
+                    return readGrade(rows);
+                }
+            }
+            Grade prior = findExisting(connection, learnerId, requestKey, lessonId, answersJson);
+            if (prior != null) {
+                return prior;
+            }
+        } catch (SQLException ignored) {
+            throw HttpError.unavailable("Le résultat du quiz n’a pas pu être enregistré.");
+        }
+        throw HttpError.unavailable("Le résultat du quiz n’a pas pu être enregistré.");
+    }
+
+    private static Grade findExisting(Connection connection, UUID learnerId, String requestKey, String lessonId,
+                                      String answersJson) throws SQLException {
+        String sql = """
+                SELECT id, lesson_id, correct, total, submitted_at, answers = CAST(? AS jsonb) AS same_answers
+                FROM assessment.quiz_attempts
+                WHERE learner_id = ? AND request_key = ?
+                """;
+        try (var statement = connection.prepareStatement(sql)) {
+            statement.setString(1, answersJson);
+            statement.setObject(2, learnerId);
+            statement.setString(3, requestKey);
+            try (var rows = statement.executeQuery()) {
+                if (!rows.next()) {
+                    return null;
+                }
+                if (!lessonId.equals(rows.getString("lesson_id")) || !rows.getBoolean("same_answers")) {
+                    throw HttpError.conflict("Cette clé de remise a déjà été utilisée pour d’autres réponses.");
+                }
+                return readGrade(rows);
+            }
+        }
+    }
+
+    private static Grade readGrade(ResultSet row) throws SQLException {
+        return new Grade(row.getObject("id", UUID.class).toString(), row.getString("lesson_id"),
+                row.getInt("correct"), row.getInt("total"),
+                row.getObject("submitted_at", OffsetDateTime.class).toString());
+    }
+
+    private static void validate(QuizRequest request, String requestKey) {
+        if (request == null || request.lessonId() == null || request.lessonId().length() > 100
+                || !LESSON_ID.matcher(request.lessonId()).matches()) {
+            throw HttpError.badRequest("Identifiant de leçon invalide.");
+        }
+        Map<String, String> answers = request.answers();
+        if (answers == null || answers.isEmpty() || answers.size() > 100) {
+            throw HttpError.badRequest("Les réponses du quiz sont requises.");
+        }
+        boolean invalidAnswer = answers.entrySet().stream().anyMatch(answer ->
+                !ANSWER_ID.matcher(answer.getKey()).matches() || answer.getValue() == null
+                        || !ANSWER_ID.matcher(answer.getValue()).matches());
+        if (invalidAnswer) {
+            throw HttpError.badRequest("Une réponse a un identifiant invalide.");
+        }
+        if (requestKey != null && !REQUEST_KEY.matcher(requestKey).matches()) {
+            throw HttpError.badRequest("Clé de remise invalide.");
+        }
+    }
+
+    public record QuizRequest(String lessonId, Map<String, String> answers) {}
+
+    public record Grade(String id, String lessonId, int correct, int total, String submittedAt) {}
+}

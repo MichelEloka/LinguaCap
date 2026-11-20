@@ -1,0 +1,22 @@
+BEGIN;
+GRANT USAGE ON SCHEMA identity TO lingua_identity;
+GRANT SELECT, INSERT ON identity.profiles TO lingua_identity;
+GRANT SELECT, INSERT, UPDATE ON identity.invitations TO lingua_identity;
+
+GRANT USAGE ON SCHEMA catalogue TO lingua_catalogue;
+GRANT SELECT, INSERT, UPDATE ON catalogue.levels TO lingua_catalogue;
+GRANT SELECT ON catalogue.lessons, catalogue.questions, catalogue.options TO lingua_catalogue;
+
+GRANT USAGE ON SCHEMA media TO lingua_media;
+GRANT SELECT ON media.assets TO lingua_media;
+GRANT SELECT, INSERT, UPDATE, DELETE ON media.storage_read_grants TO lingua_media;
+
+GRANT USAGE ON SCHEMA learning TO lingua_learning;
+GRANT SELECT, INSERT, UPDATE ON learning.goal_plans TO lingua_learning;
+
+GRANT USAGE ON SCHEMA assessment TO lingua_assessment;
+GRANT SELECT, INSERT ON assessment.quiz_attempts TO lingua_assessment;
+
+GRANT USAGE ON SCHEMA tracking TO lingua_tracking;
+GRANT SELECT, INSERT ON tracking.encouragements TO lingua_tracking;
+COMMIT;
