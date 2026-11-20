@@ -1,0 +1,1654 @@
+{
+  "levelId": "a2",
+  "modules": [
+    {
+      "id": "a2-reisen",
+      "file": "01-reisen.json"
+    },
+    {
+      "id": "a2-gesundheit",
+      "file": "02-gesundheit.json"
+    },
+    {
+      "id": "a2-wohnen",
+      "file": "03-wohnen.json"
+    },
+    {
+      "id": "a2-arbeit",
+      "file": "04-arbeit.json"
+    },
+    {
+      "id": "a2-beziehungen",
+      "file": "05-beziehungen.json"
+    },
+    {
+      "id": "a2-kultur",
+      "file": "06-kultur.json"
+    },
+    {
+      "id": "a2-berlin",
+      "file": "07-berlin.json"
+    },
+    {
+      "id": "a2-einkaufen",
+      "file": "08-einkaufen.json"
+    }
+  ],
+  "settings": {
+    "expectedCompetences": [
+      "lecture",
+      "ecoute",
+      "expression-ecrite",
+      "expression-orale"
+    ],
+    "successCriteria": "Obtenir au moins 60 % à l’examen blanc A2, sans compétence sous 30 % : comprendre l’essentiel de textes et de conversations sur des sujets familiers, écrire un message simple et cohérent, raconter une expérience passée et organiser une activité à l’oral.",
+    "passPercent": 60,
+    "reviewMinutes": 10,
+    "midtermMinutes": 40,
+    "finalMinutes": 75
+  },
+  "diagnostic": {
+    "title": "Test de positionnement A2",
+    "description": "Ce test vérifie d’abord que vos acquis du niveau A1 sont solides (présent, articles et accusatif, verbes séparables, heure, possessifs, verbes de modalité), puis situe votre niveau dans chacun des huit modules A2 : voyages, santé, logement, travail, relations, culture, Berlin et achats. Il dure environ 15 minutes et ne compte pas dans votre note. Répondez sans aide ni dictionnaire : votre parcours sera adapté à vos résultats.",
+    "questions": [
+      {
+        "id": "q1",
+        "moduleRef": "prerequis",
+        "prompt": "Mein Kollege … sehr gut Spanisch sprechen.",
+        "options": [
+          {
+            "id": "a",
+            "label": "kannst",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "könnt",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "kann",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "können",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "moduleRef": "prerequis",
+        "prompt": "Hast du Geschwister? — Ja, ich habe … Bruder und zwei Schwestern.",
+        "options": [
+          {
+            "id": "a",
+            "label": "einen",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "ein",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "einem",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "eine",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "moduleRef": "prerequis",
+        "prompt": "Quelle phrase est correcte ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Ich aufstehe jeden Tag um sieben Uhr.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Ich stehe jeden Tag um sieben Uhr auf.",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "Jeden Tag ich stehe um sieben Uhr auf.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Ich jeden Tag um sieben Uhr aufstehe.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "moduleRef": "prerequis",
+        "prompt": "« Der Deutschkurs beginnt um Viertel vor zehn. » À quelle heure commence le cours ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "À 10 h 15.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "À 9 h 15.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "À 10 h 45.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "À 9 h 45.",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "moduleRef": "prerequis",
+        "prompt": "Das ist meine Freundin Sara, und das ist … Bruder Tom. (Tom est le frère de Sara.)",
+        "options": [
+          {
+            "id": "a",
+            "label": "sein",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "ihre",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "ihr",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "seine",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q6",
+        "moduleRef": "a2-reisen",
+        "prompt": "Letzten Sommer … wir mit dem Zug nach Italien …",
+        "options": [
+          {
+            "id": "a",
+            "label": "haben … gefahren",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "sind … gefahren",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "sind … gefahrt",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "haben … gefahrt",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "moduleRef": "a2-reisen",
+        "prompt": "Im Juli fliegen wir zuerst … Schweiz und dann … Wien.",
+        "options": [
+          {
+            "id": "a",
+            "label": "in die … nach",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "nach der … in",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "zu der … nach",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "nach … in",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q8",
+        "moduleRef": "a2-gesundheit",
+        "prompt": "Le médecin vous interdit de faire du sport cette semaine. Que dit-il ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Sie müssen diese Woche keinen Sport machen.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Sie wollen diese Woche keinen Sport machen.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Sie dürfen diese Woche keinen Sport machen.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "Sie möchten diese Woche keinen Sport machen.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q9",
+        "moduleRef": "a2-wohnen",
+        "prompt": "Stell bitte die Blumen … Tisch.",
+        "options": [
+          {
+            "id": "a",
+            "label": "auf den",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "auf dem",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "auf der",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "auf das",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q10",
+        "moduleRef": "a2-arbeit",
+        "prompt": "Quelle fin de phrase est correcte en allemand standard écrit ? « Ich lerne Deutsch, weil … »",
+        "options": [
+          {
+            "id": "a",
+            "label": "… ich möchte in Wien arbeiten.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "… möchte ich in Wien arbeiten.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "… ich in Wien arbeiten möchte.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "… ich arbeiten in Wien möchte.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q11",
+        "moduleRef": "a2-beziehungen",
+        "prompt": "Wie findest du Jonas? — Ich finde, er ist ein sehr … Mensch.",
+        "options": [
+          {
+            "id": "a",
+            "label": "nette",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "netten",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "nettes",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "netter",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q12",
+        "moduleRef": "a2-kultur",
+        "prompt": "Ich fahre … mit dem Fahrrad als mit dem Bus, das ist gesünder.",
+        "options": [
+          {
+            "id": "a",
+            "label": "lieber",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "gerner",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "mehr gern",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "am liebsten",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q13",
+        "moduleRef": "a2-berlin",
+        "prompt": "Als Kind … ich nicht schwimmen. Ich habe es erst mit zwanzig gelernt.",
+        "options": [
+          {
+            "id": "a",
+            "label": "kann",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "konnte",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "könnte",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "gekonnt",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q14",
+        "moduleRef": "a2-einkaufen",
+        "prompt": "Welcher Pullover gefällt dir am besten? — Dieser … Pullover hier.",
+        "options": [
+          {
+            "id": "a",
+            "label": "blauen",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "blauer",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "blaues",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "blaue",
+            "correct": true
+          }
+        ]
+      }
+    ]
+  },
+  "assessments": [
+    {
+      "kind": "midterm",
+      "title": "Bilan intermédiaire A2 : modules 1 à 4",
+      "description": "Bilan de 40 minutes sur les modules Reisen, Gesundheit, Wohnen et Arbeit : lecture (10 min), écoute (10 min), expression écrite (12 min) et expression orale (8 min). Les quatre compétences ont le même poids dans la note.",
+      "parts": [
+        {
+          "id": "bilan-lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : un courriel et deux affichettes",
+          "instructions": "Lisez le courriel de Lena et les deux affichettes, puis répondez aux questions 1 à 5. Pour chaque question, une seule réponse est correcte. Durée conseillée : 10 minutes.\n\nTEXTE 1 — COURRIEL\n\nLiebe Clara,\n\nvielen Dank für deine Nachricht! Entschuldige bitte, dass ich erst jetzt antworte. Die letzten Wochen waren sehr anstrengend, denn ich bin umgezogen: Seit dem 1. März wohne ich in Leipzig. Ich habe dort eine Stelle als Krankenpflegerin in einer Klinik gefunden.\n\nMeine neue Wohnung liegt im dritten Stock und hat zwei Zimmer, eine kleine Küche und einen Balkon. Leider gibt es keinen Aufzug, und mit den vielen Kartons war das gar nicht so einfach! Zum Glück haben mir zwei Kollegen beim Umzug geholfen.\n\nDie Arbeit gefällt mir gut, aber ich muss oft am Wochenende arbeiten. In der ersten Woche war ich auch noch krank: Ich hatte eine starke Erkältung und musste zwei Tage im Bett bleiben. Jetzt geht es mir wieder gut.\n\nHast du Lust, mich im April zu besuchen? Das letzte Wochenende im April habe ich frei. Von Berlin aus bist du mit dem Zug in gut einer Stunde hier, und du kannst gern bei mir auf dem Sofa im Wohnzimmer schlafen.\n\nSchreib mir bald!\nViele Grüße\nLena\n\nTEXTE 2 — AFFICHETTES\n\nIm Hausflur:\nLiebe Nachbarinnen und Nachbarn, am Dienstag, 18. März, gibt es im ganzen Haus von 8 bis 13 Uhr kein Wasser, denn wir reparieren die Leitungen im Keller. Bitte füllen Sie vorher ein paar Flaschen mit Wasser. Vielen Dank für Ihr Verständnis! Ihre Hausverwaltung\n\nAn der Tür der Arztpraxis:\nPraxis Dr. Sommer – Wir machen Urlaub! Vom 24. bis 28. März ist die Praxis geschlossen. In dringenden Fällen gehen Sie bitte zu Dr. Aydin, Goethestraße 12. Ab Montag, 31. März, sind wir wieder für Sie da.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Texte 1 : pourquoi Lena répond-elle seulement maintenant ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Elle était en vacances en Italie.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Elle a été très occupée par son déménagement.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Elle n’avait plus accès à Internet.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Elle a dû travailler plusieurs semaines à Berlin.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Texte 1 : qu’est-ce qui a compliqué le déménagement ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "L’immeuble n’a pas d’ascenseur.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "L’appartement n’avait pas encore de cuisine.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Ses collègues n’ont pas pu l’aider.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Les cartons ne passaient pas par la porte du balcon.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Texte 1 : que s’est-il passé pendant la première semaine de travail de Lena ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Elle a changé de service à la clinique.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Elle a dû être opérée à la clinique.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Elle a perdu les clés de son appartement.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Elle est restée deux jours au lit à cause d’un gros rhume.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Texte 2, affichette du couloir : que doivent faire les habitants ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Quitter l’immeuble le mardi matin.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Appeler la gérance avant le 18 mars.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Remplir quelques bouteilles d’eau à l’avance.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Vider leur cave avant les travaux.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Texte 2 : le 26 mars, vous avez besoin d’un médecin en urgence. Où allez-vous, d’après l’affichette du cabinet ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Au cabinet du Dr Sommer, ouvert le matin.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Chez le Dr Aydin, dans la Goethestraße.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "À la pharmacie de la Goethestraße.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Nulle part : il faut attendre le 31 mars.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a2-bilan-lesen-bild",
+              "usage": "illustration",
+              "caption": "Un courriel et deux affichettes",
+              "transcriptVisibility": "hidden"
+            }
+          ]
+        },
+        {
+          "id": "bilan-hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : quatre scènes du quotidien",
+          "instructions": "Vous allez entendre quatre scènes : un message sur un répondeur, une annonce à la gare, un appel au sujet d’un appartement et une conversation entre collègues. Lisez d’abord les questions 1 à 5, puis écoutez l’enregistrement deux fois au maximum, comme lors d’un examen officiel. Pour chaque question, une seule réponse est correcte. La transcription n’est pas affichée. Durée conseillée : 10 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Scène 1 : quel nouveau rendez-vous le cabinet médical propose-t-il ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Jeudi à 10 h.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Vendredi à 8 h 30.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Vendredi à 9 h 30.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Jeudi à 8 h 30.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Scène 2 : que doivent faire les voyageurs pour Hambourg ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Rester sur le quai 7 : le train a dix minutes de retard.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Prendre un bus de remplacement.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Aller sur le quai 12.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Prendre le train suivant, à 14 h 12.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Scène 3 : où se trouve la machine à laver ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Dans la cuisine.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Dans la salle de bains.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Dans le jardin, sous un abri.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "À la cave, pour tous les locataires.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Scène 3 : combien coûte le loyer, charges comprises ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "680 euros.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "580 euros.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "860 euros.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "618 euros.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Scène 4 : pourquoi Tom n’était-il pas au bureau hier ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Il était malade.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Il était en voyage d’affaires.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Il avait un entretien d’embauche.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Sa voiture était en panne.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a2-bilan-hoeren-audio",
+              "usage": "audio",
+              "caption": "Quatre scènes du quotidien",
+              "transcriptVisibility": "hidden"
+            }
+          ]
+        },
+        {
+          "id": "bilan-schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Écrit : raconter un voyage dans un courriel",
+          "instructions": "Vous venez de rentrer d’un week-end de trois jours à Hambourg. Votre amie allemande Julia vous a écrit : « Und, wie war deine Reise? Erzähl mal! »\n\nRépondez-lui par un courriel de 60 à 80 mots. Traitez les quatre points suivants :\n• où vous avez logé et comment c’était ;\n• ce que vous avez fait (au moins deux activités) ;\n• un petit problème pendant le voyage (météo, santé ou transport) ;\n• proposez-lui de vous voir pour lui montrer vos photos (jour, heure et lieu).\n\nRacontez au passé composé allemand (Perfekt). Commencez par une formule d’appel (Liebe Julia, …) et terminez par une salutation (Viele Grüße …). Durée conseillée : 12 minutes.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les quatre points sont traités, le message a la forme d’un courriel (appel, salutation) et compte 60 à 80 mots",
+              "maxPoints": 2
+            },
+            {
+              "id": "coherence",
+              "label": "Cohérence : idées dans un ordre logique, reliées par des connecteurs simples (und, aber, dann, denn, weil)",
+              "maxPoints": 1
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : mots du voyage, du logement, de la météo ou de la santé adaptés et assez variés",
+              "maxPoints": 1
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire : Perfekt correct (haben ou sein, participe passé), verbe conjugué à la bonne place, prépositions de lieu",
+              "maxPoints": 1
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "bilan-sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Oral : parler de soi et résoudre une situation",
+          "instructions": "Enregistrez-vous en une seule fois (2 à 3 minutes au total). Vous pouvez préparer quelques notes, mais ne lisez pas un texte entièrement rédigé. Durée conseillée : 8 minutes, préparation comprise.\n\nPARTIE 1 — PARLER DE SOI (environ 1 min 30)\nPrésentez-vous brièvement (nom, ville, travail ou études, logement), puis racontez votre dernier voyage : où vous êtes allé(e), quand, avec qui, comment vous avez voyagé, ce que vous avez fait et ce qui vous a plu ou déplu.\n\nPARTIE 2 — RÉSOUDRE UNE SITUATION (environ 1 minute)\nVous êtes malade et ne pouvez pas aller travailler demain. Laissez un message vocal à votre responsable, Frau Krüger :\n• saluez-la et dites qui vous êtes ;\n• expliquez ce que vous avez et ce que le médecin vous a dit ;\n• dites combien de jours vous devez rester à la maison ;\n• proposez une solution pour la réunion importante de mardi (un collègue, une visioconférence, une autre date…).\nTerminez poliment.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les deux parties sont traitées ; le récit est au passé et le message vocal contient les informations demandées",
+              "maxPoints": 2
+            },
+            {
+              "id": "aisance",
+              "label": "Aisance et cohérence : discours compréhensible, peu d’hésitations, idées reliées (und, aber, dann, weil)",
+              "maxPoints": 1
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : voyage, santé et travail ; formules polies adaptées à une responsable (Sie)",
+              "maxPoints": 1
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire et prononciation : Perfekt, verbes de modalité, place du verbe ; prononciation compréhensible",
+              "maxPoints": 1
+            }
+          ],
+          "placements": []
+        }
+      ]
+    },
+    {
+      "kind": "final",
+      "title": "Examen blanc A2",
+      "description": "Examen blanc de 75 minutes sur l’ensemble des huit modules, dans l’esprit d’un examen A2 officiel : lecture (20 min), écoute (15 min), expression écrite (20 min) et expression orale (20 min, préparation comprise). Les quatre compétences ont le même poids. Pour réussir, il faut au moins 60 % au total, sans compétence sous 30 %.",
+      "parts": [
+        {
+          "id": "examen-lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : un article et trois petites annonces",
+          "instructions": "Lisez l’article du magazine municipal et les trois petites annonces, puis répondez aux questions 1 à 8. Pour chaque question, une seule réponse est correcte. Pour les questions 5 à 8, choisissez l’annonce qui convient à chaque situation ; si aucune annonce ne convient, choisissez « Aucune annonce ». Durée conseillée : 20 minutes.\n\nTEXTE 1 — ARTICLE\n\nBerlin mit dem Fahrrad entdecken\n\nBerlin ist die größte Stadt Deutschlands. Viele Touristen fahren dort mit dem Bus oder mit der U-Bahn von einer Sehenswürdigkeit zur nächsten. Es geht aber auch anders: Immer mehr Besucher mieten ein Fahrrad. Das ist billiger als ein Taxi und viel besser für die Umwelt.\n\nEine beliebte Tour führt an der früheren Mauer entlang. Von 1961 bis 1989 teilte die Mauer die Stadt in Ost und West, und viele Berliner konnten ihre Familie auf der anderen Seite jahrelang nicht besuchen. Heute zeigt eine Linie aus Steinen im Boden, wo die Mauer stand. In der Bernauer Straße kann man noch ein Stück der Mauer sehen, und eine Ausstellung erzählt die Geschichte der geteilten Stadt.\n\nDie Tour ist etwa 15 Kilometer lang und dauert mit Pausen ungefähr vier Stunden. Ein Fahrrad kostet 12 Euro am Tag, einen Helm bekommt man kostenlos dazu. Für weniger sportliche Leute gibt es E-Bikes: Sie sind etwas teurer, aber die Fahrt ist weniger anstrengend.\n\nTEXTE 2 — PETITES ANNONCES\n\nA — Kleidertausch im Jugendzentrum\nIhr Kleiderschrank ist zu voll? Bringen Sie bis zu zehn saubere Kleidungsstücke mit und nehmen Sie dafür andere mit nach Hause – ganz ohne Geld! Samstag, 14 bis 18 Uhr, Lindenstraße 4. Kinderkleidung können wir leider nicht annehmen.\n\nB — Sprachcafé „Deutsch am Mittwoch“\nSie möchten Ihr Deutsch verbessern und neue Leute kennenlernen? Jeden Mittwoch ab 19 Uhr in der Stadtbibliothek. Der Eintritt ist frei, eine Anmeldung ist nicht nötig. Getränke kosten 1 Euro.\n\nC — Zimmer in WG frei\nWir (zwei Studentinnen und ein Koch) suchen ab 1. Mai eine Mitbewohnerin oder einen Mitbewohner. Das Zimmer ist 14 m² groß, möbliert und kostet 390 Euro warm. Bis zur U-Bahn sind es fünf Minuten. Haustiere sind leider nicht erlaubt. Besichtigung am Sonntag ab 15 Uhr.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Texte 1 : selon l’article, pourquoi de plus en plus de visiteurs louent-ils un vélo ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Les bus et le métro ne vont pas jusqu’aux monuments.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "C’est moins cher que le taxi et bien meilleur pour l’environnement.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Les voitures sont interdites dans le centre-ville.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Les hôtels prêtent des vélos gratuitement.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Texte 1 : comment voit-on aujourd’hui où passait le Mur ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Grâce à une ligne de pierres dans le sol.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Grâce à des panneaux sur chaque bâtiment.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Grâce à une ligne rouge peinte dans les rues.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Grâce à une rangée d’arbres.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Texte 1 : que trouve-t-on dans la Bernauer Straße ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Le point de départ de toutes les visites à vélo.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Une agence de location de vélos électriques.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Un morceau du Mur et une exposition sur la ville divisée.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Un monument consacré à la réunification.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Texte 1 : qu’est-ce qui est vrai à propos de la visite à vélo ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Le casque coûte 12 euros de plus.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Le vélo électrique coûte le même prix que le vélo normal.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Elle fait environ 50 kilomètres.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Avec les pauses, elle dure environ quatre heures.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Texte 2 : votre collègue veut pratiquer l’allemand en soirée et rencontrer des gens, sans s’inscrire à l’avance. Quelle annonce lui conseillez-vous ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Annonce A (Kleidertausch)",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Annonce B (Sprachcafé)",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Annonce C (Zimmer in WG)",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Aucune annonce",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Texte 2 : votre ami cherche une chambre meublée à partir de mai. Il vit avec son chat. Quelle annonce lui conseillez-vous ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Annonce A (Kleidertausch)",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Annonce B (Sprachcafé)",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Annonce C (Zimmer in WG)",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Aucune annonce",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Texte 2 : vous avez des pulls et des jeans que vous ne mettez plus, et vous aimeriez d’autres vêtements sans rien payer. Quelle annonce vous intéresse ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Annonce A (Kleidertausch)",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Annonce B (Sprachcafé)",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Annonce C (Zimmer in WG)",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Aucune annonce",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Texte 2 : une étudiante cherche, pour le printemps, une chambre à moins de 400 euros près du métro. Elle ne peut la visiter que le week-end. Quelle annonce lui conseillez-vous ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Annonce A (Kleidertausch)",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Annonce B (Sprachcafé)",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Annonce C (Zimmer in WG)",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Aucune annonce",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a2-examen-lesen-bild",
+              "usage": "illustration",
+              "caption": "Un article et trois petites annonces",
+              "transcriptVisibility": "hidden"
+            }
+          ]
+        },
+        {
+          "id": "examen-hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : un message, deux conversations et une émission de radio",
+          "instructions": "Vous allez entendre quatre scènes : un message vocal, une conversation dans un magasin, une conversation entre amis et un extrait d’émission de radio. Lisez d’abord les questions 1 à 8, puis écoutez l’enregistrement deux fois au maximum, comme lors d’un examen officiel. Pour chaque question, une seule réponse est correcte. La transcription n’est pas affichée. Durée conseillée : 15 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Scène 1 : où aura lieu la fête de Ben ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Dans son appartement.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Dans un restaurant de la Rosenstraße.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Chez sa sœur.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Dans le jardin de ses parents.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Scène 1 : que doit apporter Nora ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Une salade.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Un gâteau.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Des boissons.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Des chaises de jardin.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Scène 2 : quel est le problème de la veste ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Il manque un bouton.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "La fermeture éclair est cassée.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Elle a une tache.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Elle est trop petite.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Scène 2 : avec quoi la cliente repart-elle ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Avec le remboursement de la veste.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Avec la même veste, réparée.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Avec une veste grise en taille M.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Avec un bon d’achat.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Scène 3 : pourquoi Paul n’est-il pas monté à la tour de télévision ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "La tour était fermée le dimanche.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "La file d’attente était trop longue et il devait être à la gare.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Les billets étaient trop chers.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Il faisait trop mauvais pour voir quelque chose.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Scène 3 : comment Paul s’est-il surtout déplacé dans Berlin ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "À vélo, loué à l’hôtel.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "En taxi, pour gagner du temps.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "À pied, pour tout voir.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "En métro, avec un billet de trois jours.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Scène 4 : que reçoivent les bénévoles à l’entrée du parc ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Des gants et des sacs-poubelle.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Un tee-shirt de l’opération.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Une soupe chaude.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Un plan du parc.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Scène 4 : quel temps fera-t-il samedi ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Du soleil et de la chaleur toute la journée.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "De la pluie le matin, puis du soleil.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Un temps sec et frais le matin, de la pluie l’après-midi.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "De la neige et beaucoup de vent.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a2-examen-hoeren-audio",
+              "usage": "audio",
+              "caption": "Quatre scènes : message, magasin, amis, radio",
+              "transcriptVisibility": "hidden"
+            }
+          ]
+        },
+        {
+          "id": "examen-schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Écrit : un courriel après un séjour à Berlin",
+          "instructions": "Vous avez passé un long week-end à Berlin chez votre amie Katrin. De retour chez vous, vous lui écrivez un courriel de 80 à 100 mots. Traitez les quatre points suivants :\n• remerciez-la et dites ce qui vous a le plus plu à Berlin, en donnant votre avis ;\n• racontez une visite ou une sortie que vous avez faite ensemble ;\n• racontez un petit problème avec un vêtement acheté pendant le séjour (trop petit, abîmé…) et ce que vous avez fait ;\n• invitez-la chez vous : proposez une date et une activité.\n\nRacontez au passé (Perfekt, war, hatte) et faites au moins une comparaison. Commencez par une formule d’appel et terminez par une salutation. Durée conseillée : 20 minutes.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les quatre points sont traités, le message a la forme d’un courriel (appel, salutation) et compte 80 à 100 mots",
+              "maxPoints": 2
+            },
+            {
+              "id": "coherence",
+              "label": "Cohérence : texte organisé, idées reliées par des connecteurs (denn, weil, dass, dann, aber)",
+              "maxPoints": 2
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : lexique varié et précis (ville, sorties, vêtements, invitation), formules amicales adaptées",
+              "maxPoints": 2
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire : temps du passé, subordonnées avec le verbe à la fin, adjectifs déclinés, comparatif ou superlatif",
+              "maxPoints": 2
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "examen-sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Oral : raconter une expérience et organiser une activité",
+          "instructions": "Enregistrez-vous en une seule fois (3 à 4 minutes au total). Prenez une dizaine de minutes pour préparer des notes, mais ne lisez pas un texte entièrement rédigé. Durée conseillée : 20 minutes, préparation comprise.\n\nPARTIE 1 — PARLER DE SOI ET RACONTER (environ 2 minutes)\nPrésentez-vous (famille, logement, travail ou études, loisirs). Puis racontez une fête ou une tradition que vous avez vécue (anniversaire, mariage, fête de fin d’année, fête nationale…) : quand et où c’était, avec qui, ce que vous avez fait, mangé ou offert, et ce que vous en avez pensé. Si vous le pouvez, comparez avec une fête en Allemagne ou dans un autre pays.\n\nPARTIE 2 — ORGANISER UNE ACTIVITÉ (environ 1 min 30)\nVotre collègue Jana quitte l’entreprise vendredi prochain. Avec votre collègue Max, vous voulez lui offrir un cadeau. Laissez un message vocal à Max :\n• proposez deux idées de cadeau, dites laquelle vous préférez et pourquoi ;\n• proposez un magasin et un moment pour l’acheter ensemble ;\n• dites combien chacun pourrait payer ;\n• demandez-lui son avis et ce qu’il peut organiser de son côté (une carte, un gâteau…).",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les deux parties sont traitées ; le récit est au passé et le message contient les quatre éléments demandés",
+              "maxPoints": 2
+            },
+            {
+              "id": "aisance",
+              "label": "Aisance et cohérence : discours suivi et compréhensible, idées reliées (zuerst, dann, weil, dass, aber)",
+              "maxPoints": 2
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : lexique varié (fêtes, relations, achats), formules pour proposer, comparer et donner son avis",
+              "maxPoints": 2
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire et prononciation : temps du passé, comparatif, datif (schenken, gefallen), place du verbe ; prononciation claire",
+              "maxPoints": 2
+            }
+          ],
+          "placements": []
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-bilan-lesen-bild",
+      "kind": "image",
+      "title": "Bilan A2 — un courriel et deux affichettes",
+      "alt": "Trois vignettes : une enveloppe pour le courriel de Lena, une goutte d’eau barrée pour l’affichette du couloir et un stéthoscope pour l’affichette du cabinet médical.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "mail",
+            "label": "E-Mail von Lena"
+          },
+          {
+            "icon": "droplet-off",
+            "label": "Im Hausflur"
+          },
+          {
+            "icon": "stethoscope",
+            "label": "Praxis Dr. Sommer"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-bilan-hoeren-audio",
+      "kind": "audio",
+      "title": "Bilan A2 — quatre scènes du quotidien",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Arztpraxis",
+          "text": "Guten Tag, Herr Martin, hier ist die Praxis Doktor Berger. Sie haben am Donnerstag um zehn Uhr einen Termin bei uns. Leider ist Frau Doktor Berger an diesem Tag nicht da. Können Sie stattdessen am Freitag um halb neun kommen? Bitte rufen Sie uns kurz zurück. Und bringen Sie bitte Ihre Versichertenkarte mit. Auf Wiederhören!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Bahnhof",
+          "text": "Achtung, eine Durchsage für die Reisenden an Gleis sieben! Der Intercity nach Hamburg, planmäßige Abfahrt vierzehn Uhr zwölf, fährt heute von Gleis zwölf ab. Ich wiederhole: Der Intercity nach Hamburg fährt heute von Gleis zwölf. Der Zug hat etwa zehn Minuten Verspätung. Wir bitten um Entschuldigung."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Roth",
+          "text": "Hier ist Roth, guten Tag."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Karim",
+          "text": "Guten Tag, Frau Roth. Hier ist Karim Haddad. Ich rufe wegen der Wohnung in der Lindenstraße an. Ist sie noch frei?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Roth",
+          "text": "Ja, sie ist noch frei. Sie hat zwei Zimmer und liegt im Erdgeschoss, mit einem kleinen Garten."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Karim",
+          "text": "Und wie hoch ist die Miete?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Roth",
+          "text": "Sechshundertachtzig Euro warm, also mit Nebenkosten."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Karim",
+          "text": "Gibt es eine Waschmaschine in der Wohnung?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Roth",
+          "text": "In der Wohnung nicht, aber im Keller steht eine Waschmaschine für alle Mieter."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Karim",
+          "text": "Gut. Kann ich die Wohnung bald ansehen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Roth",
+          "text": "Gern. Kommen Sie doch am Freitag um siebzehn Uhr."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Sabine",
+          "text": "Hallo Tom! Gestern warst du nicht im Büro. Warst du krank?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Tom",
+          "text": "Nein, nein. Ich hatte ein Vorstellungsgespräch bei einer anderen Firma."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Sabine",
+          "text": "Wirklich? Und wie war es?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Tom",
+          "text": "Ganz gut, glaube ich. Die Stelle ist interessant, weil ich viel reisen kann. Aber ich weiß noch nicht, ob ich sie bekomme."
+        }
+      ]
+    },
+    {
+      "key": "a2-examen-lesen-bild",
+      "kind": "image",
+      "title": "Examen blanc A2 — un article et trois annonces",
+      "alt": "Quatre vignettes : un vélo pour l’article sur Berlin, puis un tee-shirt, une tasse de café et un lit pour les annonces A, B et C.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "bike",
+            "label": "Berlin mit dem Fahrrad"
+          },
+          {
+            "icon": "shirt",
+            "label": "A · Kleidertausch"
+          },
+          {
+            "icon": "coffee",
+            "label": "B · Sprachcafé"
+          },
+          {
+            "icon": "bed-single",
+            "label": "C · Zimmer in WG"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-examen-hoeren-audio",
+      "kind": "audio",
+      "title": "Examen blanc A2 — message, magasin, amis et radio",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Ben",
+          "text": "Hallo Nora, hier ist Ben. Du weißt ja, am Samstag werde ich dreißig! Meine Wohnung ist zu klein, deshalb feiern wir im Garten meiner Eltern, in der Rosenstraße sieben. Wir fangen um vier Uhr an. Kannst du bitte einen Salat mitbringen? Um die Getränke und den Kuchen kümmert sich meine Schwester. Ruf mich bis Donnerstag zurück, ja? Ich freue mich auf dich!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Kundin",
+          "text": "Guten Tag. Ich habe diese Jacke letzte Woche hier gekauft, aber der Reißverschluss ist schon kaputt."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Oh, das tut mir leid. Haben Sie den Kassenbon dabei?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Kundin",
+          "text": "Ja, hier. Könnten Sie mir bitte eine neue Jacke geben, aber in Größe M? Diese hier ist mir ein bisschen zu groß."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Einen Moment, bitte. Hm, in Größe M haben wir sie leider nur noch in Grau."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Kundin",
+          "text": "Grau ist auch schön. Die nehme ich."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Und, Paul, wie war dein Wochenende in Berlin?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Toll! Am Samstag habe ich eine Führung zur Geschichte der Mauer gemacht. Am Sonntag wollte ich noch auf den Fernsehturm, aber das ging nicht: Die Schlange war viel zu lang, und ich musste um drei Uhr am Bahnhof sein."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Schade! Und wie bist du in der Stadt herumgefahren?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Meistens mit der U-Bahn. Ich hatte ein Ticket für drei Tage und konnte damit so oft fahren, wie ich wollte."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Radio",
+          "text": "Und hier noch ein Tipp für das Wochenende: Am Samstag sammeln Freiwillige von zehn bis dreizehn Uhr Müll im Stadtpark und am Fluss. Handschuhe und Müllsäcke bekommen alle Helferinnen und Helfer kostenlos am Eingang. Danach gibt es für alle eine warme Suppe."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Radio",
+          "text": "Und das Wetter am Samstag? Am Vormittag bleibt es trocken, aber kühl, bei zwölf Grad. Am Nachmittag kommt Regen. Also: Nehmen Sie eine warme Jacke mit!"
+        }
+      ]
+    }
+  ]
+}
