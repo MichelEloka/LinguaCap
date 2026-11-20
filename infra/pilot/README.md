@@ -56,7 +56,7 @@ Appels entre services privés : chaque appelant reçoit l’adresse du service a
 | Passerelle | les six services |
 | Catalogue | Identités, Médias (publication des fichiers d’un parcours) |
 | Médias | Identités |
-| Évaluations | Identités, Catalogue |
+| Évaluations | Identités (droits de correction), Catalogue (définition figée des évaluations), Apprentissage (contexte du parcours, remises et résultats), Médias (sons d’écoute et productions orales privées) |
 | Apprentissage | Identités, Catalogue, Évaluations, Médias (adresses temporaires des supports d’une séance) |
 | Suivi | Identités, Apprentissage |
 

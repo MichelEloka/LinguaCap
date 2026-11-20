@@ -74,12 +74,15 @@ public class Gateway {
         String learnerQuery = "";
         var params = uri.getQueryParameters();
         if (!params.isEmpty()) {
-            String learner = params.getFirst("learnerId");
-            if (!method.equals("GET") || !List.of("learning/progress", "learning/enrollment", "assessments/results", "tracking/messages").contains(path)
-                    || params.size() != 1 || learner == null || !learner.matches(UUID_PATH) || params.get("learnerId").size() != 1) {
+            // Seuls learnerId (lectures d'un élève) et enrollmentId (tentatives d'un parcours) sont relayés.
+            String name = path.equals("assessments/exams") ? "enrollmentId" : "learnerId";
+            String value = params.getFirst(name);
+            if (!method.equals("GET") || !List.of("learning/progress", "learning/enrollment", "assessments/results",
+                            "tracking/messages", "assessments/exams").contains(path)
+                    || params.size() != 1 || value == null || !value.matches(UUID_PATH) || params.get(name).size() != 1) {
                 throw HttpError.badRequest("Paramètre de recherche invalide.");
             }
-            learnerQuery = "?learnerId=" + learner;
+            learnerQuery = "?" + name + "=" + value;
         }
         if (!method.equals("GET") && (body == null || !body.isObject())) {
             throw HttpError.badRequest("Un objet JSON est attendu.");
@@ -103,7 +106,8 @@ public class Gateway {
             if (path.equals("learning/goal") || path.equals("learning/progress") || path.equals("learning/enrollment")
                     || path.equals("learning/templates") || path.matches("learning/sessions/" + UUID_PATH)
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal|diagnostic)")) return learning;
-            if (path.equals("assessments/results")) return assessment;
+            if (path.equals("assessments/results") || path.equals("assessments/grading") || path.equals("assessments/exams")
+                    || path.matches("assessments/exams/" + UUID_PATH)) return assessment;
             if (path.equals("tracking/overview") || path.equals("tracking/messages")
                     || path.matches("tracking/learners/" + UUID_PATH)) return tracking;
         }
@@ -117,11 +121,14 @@ public class Gateway {
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal/validate|pause|resume|diagnostic)")) {
                 return learning;
             }
-            if (path.equals("assessments/diagnostics")) return assessment;
+            if (path.equals("assessments/diagnostics") || path.equals("assessments/exams")
+                    || path.matches("assessments/exams/" + UUID_PATH + "/(submit|recordings|grading)")
+                    || path.matches("assessments/exams/" + UUID_PATH + "/recordings/" + UUID_PATH + "/finalize")) return assessment;
             if (path.equals("tracking/messages")) return tracking;
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
+            if (path.matches("assessments/exams/" + UUID_PATH + "/answers")) return assessment;
             if (path.matches("catalogue/levels/" + LEVEL) || path.matches("catalogue/versions/" + UUID_PATH)) return catalogue;
             if (path.matches("media/" + SLUG) && !path.equals("media/uploads")) return media;
             if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")
@@ -135,11 +142,12 @@ public class Gateway {
                                       JsonNode body, String requestId) {
         // Le jeton Supabase de l'utilisateur ne part que vers Médias, directement ou via la séance d'Apprentissage
         // qui demande les adresses temporaires de ses supports : les politiques Storage s'appliquent à l'utilisateur.
+        // Les évaluations lisent et déposent aussi des fichiers privés (sons d'écoute, enregistrements oraux).
         String token = target.equals(media) || method.equals("GET") && path.matches("/v1/learning/sessions/" + UUID_PATH)
-                ? user.token() : "";
+                || path.startsWith("/v1/assessments/exams") ? user.token() : "";
         String email = path.equals("/v1/me") ? user.email() : "";
         String key = path.equals("/v1/assessments/quiz") || path.equals("/v1/assessments/diagnostics")
-                ? headers.getHeaderString("Idempotency-Key") : null;
+                || path.matches("/v1/assessments/exams/" + UUID_PATH + "/submit") ? headers.getHeaderString("Idempotency-Key") : null;
         if (key != null && !key.matches("[A-Za-z0-9._-]{1,128}")) {
             throw HttpError.badRequest("Clé de remise invalide.");
         }

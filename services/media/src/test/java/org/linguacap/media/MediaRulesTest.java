@@ -52,6 +52,17 @@ class MediaRulesTest {
     }
 
     @Test
+    void lesEnregistrementsDuNavigateurSontReconnus() {
+        assertEquals("audio/webm", MediaRules.detect(bytes(0x1A, 0x45, 0xDF, 0xA3)));
+        assertEquals("audio/ogg", MediaRules.detect(bytes('O', 'g', 'g', 'S')));
+        assertEquals("audio/mp4", MediaRules.detect(bytes(0, 0, 0, 0x20, 'f', 't', 'y', 'p')));
+        assertNull(MediaRules.productionRefusal("audio/webm", 4000, 4000, bytes(0x1A, 0x45, 0xDF, 0xA3)));
+        assertTrue(MediaRules.productionRefusal("audio/webm", 4000, 4000, bytes(0xFF, 0xD8, 0xFF)).contains("audio"));
+        assertTrue(MediaRules.productionRefusal("video/webm", 4000, 4000, bytes()).contains("pas accepté"));
+        assertTrue(MediaRules.productionRefusal("audio/ogg", 26L * 1024 * 1024, 26L * 1024 * 1024, bytes('O', 'g', 'g', 'S')).contains("25 Mo"));
+    }
+
+    @Test
     void lIdentifiantEstTireDuTitre() {
         assertEquals("tasse-de-cafe-a-berlin", MediaRules.slug("Tasse de café à Berlin !"));
         assertEquals("media", MediaRules.slug("  ¿¿  "));

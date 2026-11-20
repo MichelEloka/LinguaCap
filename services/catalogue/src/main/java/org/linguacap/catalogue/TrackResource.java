@@ -1,5 +1,8 @@
 package org.linguacap.catalogue;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.agroal.api.AgroalDataSource;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.GET;
@@ -32,6 +35,7 @@ public class TrackResource {
 
     @Inject AgroalDataSource dataSource;
     @Inject Actor actor;
+    @Inject ObjectMapper json;
 
     /** Versions publiées, proposées à l'attribution par un professeur ou l'administration. */
     @GET
@@ -193,6 +197,38 @@ public class TrackResource {
         }
     }
 
+    /**
+     * Bilan intermédiaire (midterm) ou examen blanc (final) d'une version publiée, corrigés et grilles compris
+     * (route interne pour Évaluations, qui fige la définition dans chaque tentative et retire les corrigés pour l'élève).
+     */
+    @GET
+    @Path("/internal/tracks/{versionId}/assessments/{kind}")
+    public AssessmentDefinition assessment(@PathParam("versionId") UUID versionId, @PathParam("kind") String kind) {
+        actor.id();
+        if (!"midterm".equals(kind) && !"final".equals(kind)) throw HttpError.badRequest("Type d’évaluation invalide.");
+        try (var connection = dataSource.getConnection()) {
+            Track header = header(connection, versionId);
+            try (var query = connection.prepareStatement("""
+                    select title, description, parts::text from catalogue.version_assessments where version_id = ? and kind = ?
+                    """)) {
+                query.setObject(1, versionId);
+                query.setString(2, kind);
+                try (var rows = query.executeQuery()) {
+                    if (!rows.next()) {
+                        throw HttpError.notFound("midterm".equals(kind) ? "Ce parcours n’a pas encore de bilan intermédiaire."
+                                : "Ce parcours n’a pas encore d’examen blanc.");
+                    }
+                    return new AssessmentDefinition(kind, rows.getString("title"), rows.getString("description"),
+                            header.planning().passPercent(), header.levelCode(), json.readTree(rows.getString(3)));
+                }
+            }
+        } catch (JsonProcessingException error) {
+            throw HttpError.unavailable("L’évaluation est temporairement indisponible.");
+        } catch (SQLException error) {
+            throw HttpError.unavailable("L’évaluation est temporairement indisponible.");
+        }
+    }
+
     private Track header(Connection connection, UUID versionId) throws SQLException {
         try (var query = connection.prepareStatement("""
                 select v.id, v.number, v.status, l.id as level_id, l.code, l.title, prereq.code as prerequisite,
@@ -261,6 +297,9 @@ public class TrackResource {
     /** Support d'une activité : il illustre l'activité, une question (questionId) ou un choix de réponse (optionId). */
     public record Placement(int position, String assetId, int assetVersion, String usage, String alt, String caption,
                             String transcriptVisibility, boolean decorative, String questionId, String optionId) {}
+
+    public record AssessmentDefinition(String kind, String title, String description, int passPercent, String levelCode,
+                                       JsonNode parts) {}
 
     public record ActivityContent(String moduleId, TrackActivity activity, LessonContent lesson,
                                   List<Question> questions, List<Placement> placements) {}

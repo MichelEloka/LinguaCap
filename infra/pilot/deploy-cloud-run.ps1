@@ -139,10 +139,15 @@ $tag = (git -C $repositoryRoot rev-parse --short HEAD).Trim() + '-' + (Get-Date 
 $dependsOn = @{
     # Catalogue publie les fichiers d'un parcours ; Apprentissage obtient les adresses temporaires des supports.
     identity = @(); media = @('identity'); catalogue = @('identity', 'media');
-    assessment = @('identity', 'catalogue'); learning = @('identity', 'catalogue', 'assessment', 'media');
+    learning = @('identity', 'catalogue', 'assessment', 'media');
+    # Évaluations lit le parcours chez Apprentissage, lui signale remises et résultats et dépose l'oral par Médias.
+    assessment = @('identity', 'catalogue', 'learning', 'media');
     tracking = @('identity', 'learning'); 'api-gateway' = $databaseModules
 }
 
+# Apprentissage et Évaluations s'appellent l'un l'autre : l'adresse d'un service pas encore déployé est
+# ajoutée après coup, une fois tous les services en ligne.
+$deferred = @()
 foreach ($module in $modules) {
     $service = "linguacap-$module"
     $release = Join-Path $repositoryRoot "services/$module/target/quarkus-app"
@@ -156,8 +161,11 @@ foreach ($module in $modules) {
     $variables = @('LINGUACAP_CLOUD_RUN=true')
     $secrets = @('LINGUACAP_INTERNAL_SECRET=linguacap-internal-secret:latest')
     foreach ($dependency in $dependsOn[$module]) {
-        if (!$origins[$dependency]) { throw "Service prealable manquant : $dependency" }
-        $variables += "$($dependency.ToUpperInvariant())_URL=$($origins[$dependency])"
+        if ($origins[$dependency]) {
+            $variables += "$($dependency.ToUpperInvariant())_URL=$($origins[$dependency])"
+        } else {
+            $deferred += ,@($module, $dependency)
+        }
     }
     if ($module -in @('identity', 'media', 'api-gateway')) { $variables += "SUPABASE_URL=$env:SUPABASE_URL" }
     if ($module -in @('media', 'api-gateway')) { $variables += "SUPABASE_PUBLISHABLE_KEY=$env:SUPABASE_PUBLISHABLE_KEY" }
@@ -190,8 +198,16 @@ foreach ($module in $modules) {
         Remove-Item -LiteralPath $envFile -Force
     }
     $origins[$module] = (Cloud run services describe $service "--region=$Region" '--format=value(status.url)').Trim()
-    foreach ($dependency in $dependsOn[$module]) { Allow-Call $dependency $module }
+    foreach ($dependency in $dependsOn[$module]) { if ($origins[$dependency]) { Allow-Call $dependency $module } }
     Write-Host "Service deploye : $module"
+}
+
+foreach ($link in $deferred) {
+    $module, $dependency = $link
+    Cloud run services update "linguacap-$module" "--region=$Region" `
+        "--update-env-vars=$($dependency.ToUpperInvariant())_URL=$($origins[$dependency])" '--format=none' | Out-Null
+    Allow-Call $dependency $module
+    Write-Host "Appel ajoute : $module vers $dependency"
 }
 
 Write-Host "Passerelle : $($origins['api-gateway'])"

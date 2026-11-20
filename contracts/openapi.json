@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -2245,6 +2245,470 @@
           }
         }
       }
+    },
+    "/assessments/exams": {
+      "get": {
+        "operationId": "listExams",
+        "summary": "Tentatives d’un parcours, historique compris",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/EnrollmentIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tentatives d’un parcours, historique compris",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExamSummary"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "startExam",
+        "summary": "Ouvrir ou reprendre le bilan ou l’examen blanc (201 à l’ouverture, 200 à la reprise)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "enrollmentId",
+                  "kind"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "enrollmentId": {
+                    "$ref": "#/components/schemas/Uuid"
+                  },
+                  "kind": {
+                    "type": "string",
+                    "enum": [
+                      "midterm",
+                      "final"
+                    ],
+                    "description": "Bilan intermédiaire ou examen blanc."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tentative en cours reprise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Ouvrir ou reprendre le bilan ou l’examen blanc (201 à l’ouverture, 200 à la reprise)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}": {
+      "get": {
+        "operationId": "getExam",
+        "summary": "Tentative de l’élève, ou remise à corriger",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tentative de l’élève, ou remise à corriger",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}/answers": {
+      "put": {
+        "operationId": "saveExamAnswers",
+        "summary": "Enregistrer la progression de la tentative",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "answers": {
+                    "type": "object"
+                  },
+                  "texts": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enregistrer la progression de la tentative",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}/recordings": {
+      "post": {
+        "operationId": "reserveRecording",
+        "summary": "Réserver le dépôt d’un enregistrement oral",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "partId",
+                  "mimeType",
+                  "size"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "partId": {
+                    "$ref": "#/components/schemas/Slug"
+                  },
+                  "mimeType": {
+                    "type": "string",
+                    "enum": [
+                      "audio/webm",
+                      "audio/ogg",
+                      "audio/mpeg",
+                      "audio/mp4",
+                      "audio/wav"
+                    ]
+                  },
+                  "size": {
+                    "type": "integer",
+                    "minimum": 1,
+                    "maximum": 26214400
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Réserver le dépôt d’un enregistrement oral",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RecordingReservation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}/recordings/{productionId}/finalize": {
+      "post": {
+        "operationId": "finalizeRecording",
+        "summary": "Contrôler l’enregistrement reçu et le rattacher à la partie orale",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ProductionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contrôler l’enregistrement reçu et le rattacher à la partie orale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}/submit": {
+      "post": {
+        "operationId": "submitExam",
+        "summary": "Remettre la tentative (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Remettre la tentative (idempotent)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exams/{attemptId}/grading": {
+      "post": {
+        "operationId": "gradeExam",
+        "summary": "Corriger l’écrit et l’oral avec la grille",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "parts"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "parts": {
+                    "type": "object",
+                    "description": "Par partie : points par critère et commentaire.",
+                    "additionalProperties": {
+                      "type": "object",
+                      "properties": {
+                        "points": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "integer",
+                            "minimum": 0
+                          }
+                        },
+                        "comment": {
+                          "type": "string",
+                          "maxLength": 2000
+                        }
+                      }
+                    }
+                  },
+                  "feedback": {
+                    "type": "string",
+                    "maxLength": 4000
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Corriger l’écrit et l’oral avec la grille",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExamView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/grading": {
+      "get": {
+        "operationId": "gradingQueue",
+        "summary": "Remises en attente que l’appelant peut corriger",
+        "responses": {
+          "200": {
+            "description": "Remises en attente que l’appelant peut corriger",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GradingQueueItem"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2396,6 +2860,32 @@
           "pattern": "^[abc][12]$"
         },
         "example": "b1"
+      },
+      "AttemptIdPath": {
+        "name": "attemptId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "5d4c3b2a-1f0e-4d9c-8b7a-695847362514"
+      },
+      "ProductionIdPath": {
+        "name": "productionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "1a2b3c4d-5e6f-4a7b-8c9d-0e1f2a3b4c5d"
+      },
+      "EnrollmentIdQuery": {
+        "name": "enrollmentId",
+        "in": "query",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        }
       }
     },
     "responses": {
@@ -4210,6 +4700,10 @@
             "items": {
               "$ref": "#/components/schemas/ActivityDetail"
             }
+          },
+          "enrollmentId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Parcours de la séance, pour ouvrir le bilan et l’examen blanc."
           }
         }
       },
@@ -5627,6 +6121,456 @@
           },
           "maxBytes": {
             "type": "integer"
+          }
+        }
+      },
+      "ExamStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "submitted",
+          "graded"
+        ]
+      },
+      "ExamDecision": {
+        "type": "string",
+        "enum": [
+          "validated",
+          "to_consolidate",
+          "completed"
+        ],
+        "description": "Examen blanc : validé dans LinguaCap ou à consolider. Bilan : completed."
+      },
+      "ExamSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "number",
+          "status",
+          "title",
+          "startedAt",
+          "onTime"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ],
+            "description": "Bilan intermédiaire ou examen blanc."
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExamStatus"
+          },
+          "title": {
+            "type": "string"
+          },
+          "startedAt": {
+            "type": "string"
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "dueAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "gradedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "onTime": {
+            "type": "boolean",
+            "description": "Remise au plus tard à l’échéance du créneau, même corrigée après."
+          },
+          "percent": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "decision": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ExamDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ExamRecording": {
+        "type": "object",
+        "required": [
+          "partId",
+          "productionId",
+          "mimeType"
+        ],
+        "properties": {
+          "partId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "productionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Lecture de cinq minutes, réservée à l’élève et aux correcteurs habilités."
+          }
+        }
+      },
+      "ExamResult": {
+        "type": "object",
+        "required": [
+          "scores",
+          "percent",
+          "decision"
+        ],
+        "properties": {
+          "scores": {
+            "type": "object",
+            "description": "Points, maximum et pourcentage par compétence (ou par partie pour closedScores).",
+            "additionalProperties": {
+              "type": "object",
+              "required": [
+                "points",
+                "max",
+                "percent"
+              ],
+              "properties": {
+                "points": {
+                  "type": "integer"
+                },
+                "max": {
+                  "type": "integer"
+                },
+                "percent": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "percent": {
+            "type": "integer"
+          },
+          "decision": {
+            "$ref": "#/components/schemas/ExamDecision"
+          },
+          "review": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "description": "Activités du parcours à revoir pour les compétences sous le seuil.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "activityId": {
+                  "$ref": "#/components/schemas/Slug"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "moduleId": {
+                  "$ref": "#/components/schemas/Slug"
+                },
+                "moduleTitle": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "feedback": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "comments": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "gradedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "ExamView": {
+        "type": "object",
+        "required": [
+          "id",
+          "enrollmentId",
+          "learnerId",
+          "kind",
+          "number",
+          "status",
+          "definition",
+          "answers",
+          "texts",
+          "recordings",
+          "media",
+          "onTime",
+          "canGrade"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "enrollmentId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ],
+            "description": "Bilan intermédiaire ou examen blanc."
+          },
+          "number": {
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/ExamStatus"
+          },
+          "definition": {
+            "type": "object",
+            "description": "Définition figée de la version attribuée (parties, questions, grilles), sans corrigé."
+          },
+          "answers": {
+            "type": "object",
+            "description": "Choix enregistrés, par partie puis par question."
+          },
+          "texts": {
+            "type": "object",
+            "description": "Productions écrites, par partie."
+          },
+          "recordings": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ExamRecording"
+            }
+          },
+          "media": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Adresses temporaires des supports, par « assetId@version »."
+          },
+          "closedScores": {
+            "oneOf": [
+              {
+                "type": "object",
+                "description": "Points, maximum et pourcentage par compétence (ou par partie pour closedScores).",
+                "additionalProperties": {
+                  "type": "object",
+                  "required": [
+                    "points",
+                    "max",
+                    "percent"
+                  ],
+                  "properties": {
+                    "points": {
+                      "type": "integer"
+                    },
+                    "max": {
+                      "type": "integer"
+                    },
+                    "percent": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "dueAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "startedAt": {
+            "type": "string"
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "onTime": {
+            "type": "boolean"
+          },
+          "result": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/ExamResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "canGrade": {
+            "type": "boolean",
+            "description": "L’appelant peut corriger cette remise maintenant."
+          }
+        }
+      },
+      "RecordingReservation": {
+        "type": "object",
+        "required": [
+          "id",
+          "attemptId",
+          "partId",
+          "mimeType",
+          "status",
+          "expiresAt",
+          "maxBytes"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "attemptId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "partId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "size": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "available",
+              "rejected",
+              "abandoned"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "expiresAt": {
+            "type": "string"
+          },
+          "uploadUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Dépôt direct dans l’espace privé des productions (POST, jeton de l’élève)."
+          },
+          "maxBytes": {
+            "type": "integer"
+          }
+        }
+      },
+      "GradingQueueItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "learnerName",
+          "kind",
+          "number",
+          "title",
+          "submittedAt",
+          "onTime"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ],
+            "description": "Bilan intermédiaire ou examen blanc."
+          },
+          "number": {
+            "type": "integer"
+          },
+          "levelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "submittedAt": {
+            "type": "string"
+          },
+          "dueAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "onTime": {
+            "type": "boolean"
           }
         }
       }

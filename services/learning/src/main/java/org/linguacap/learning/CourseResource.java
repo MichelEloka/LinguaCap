@@ -89,7 +89,8 @@ public class CourseResource {
                     transcriptAllowed && lesson.isObject() ? nullable(lesson.path("transcript")) : null,
                     content.path("questions"), placements));
         }
-        return new SessionDetail(session.summary(), session.trackVersionId(), session.levelCode(), withFiles(callerId, activities));
+        return new SessionDetail(session.summary(), session.enrollmentId(), session.trackVersionId(), session.levelCode(),
+                withFiles(callerId, activities));
     }
 
     /**
@@ -183,8 +184,8 @@ public class CourseResource {
                     + "puis indiquez que la révision est terminée.";
         }
         return Planner.MIDTERM.equals(activity.id())
-                ? "Créneau réservé au bilan intermédiaire : votre professeur l’ouvrira le moment venu."
-                : "Créneau réservé à l’examen blanc : il s’ouvrira à la fin du parcours.";
+                ? "Bilan intermédiaire : il vérifie vos acquis sur les modules déjà travaillés, compétence par compétence."
+                : "Examen blanc : lecture, écoute, écrit et oral, corrigés avec la grille publiée avec votre parcours.";
     }
 
     /** La tentative doit appartenir à l'élève et avoir été remise pour cette séance et cette activité. */
@@ -250,6 +251,6 @@ public class CourseResource {
         }
     }
 
-    public record SessionDetail(SessionSummary session, UUID trackVersionId, String levelCode,
+    public record SessionDetail(SessionSummary session, UUID enrollmentId, UUID trackVersionId, String levelCode,
                                 List<ActivityDetail> activities) {}
 }
