@@ -1006,6 +1006,156 @@ localSql(local.container, readFileSync(new URL('db-isolation.sql', import.meta.u
 console.log('Recette des comptes réussie · premier admin, invitations, réémission, annulation, expiration, équipe et permissions, '
   + 'correcteur, réaffectation, désactivation, événements et isolation des rôles SQL.');
 
+// --- Contenus A1/A2 : import, publication, parcours intensif accompagné et parcours autonome (incrément 9) ---
+const { importContent } = await import('../content/import-content.mjs');
+const { loadLevel } = await import('../content/content-lib.mjs');
+const contentA1 = loadLevel('a1');
+const contentA2 = loadLevel('a2');
+const importState = join(tmpdir(), `linguacap-import-${suffix}.json`);
+const imported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
+  publish: true, statePath: importState, log: () => {} });
+assert.deepEqual(imported.map((result) => [result.levelId, result.published]), [['a1', true], ['a2', true]]);
+const reimported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
+  publish: true, statePath: importState, log: () => {} });
+assert.ok(reimported.every((result) => result.unchanged), 'Un second import reconnaît les médias et les versions déjà publiés');
+await post(`/catalogue/versions/${imported[0].versionId}/publish`, staffToken, {}, 409);
+
+const contentTracks = await api('/tracks', teacher.token);
+const trackA1 = contentTracks.find((track) => track.levelCode === 'A1');
+const trackA2 = contentTracks.find((track) => track.levelCode === 'A2');
+assert.equal(trackA1.versionId, imported[0].versionId, 'La version A1 importée est celle proposée à l’attribution');
+assert.equal(trackA2.versionId, imported[1].versionId);
+const activitiesOf = (level) => level.modules.flatMap((module) => module.activities);
+assert.equal(trackA1.activityCount, activitiesOf(contentA1).length);
+assert.equal(trackA1.totalMinutes, activitiesOf(contentA1).reduce((sum, activity) => sum + activity.estimatedMinutes, 0));
+assert.equal(trackA2.activityCount, activitiesOf(contentA2).length);
+assert.equal(trackA2.prerequisiteLevelCode, 'A1', 'Le parcours A2 requiert le niveau A1');
+
+// Corrigés lus dans les fichiers de contenu : activité → question → bon choix.
+const keyOf = (questions) => Object.fromEntries((questions ?? []).map((question) =>
+  [question.id, question.options.find((option) => option.correct).id]));
+const exerciseKeys = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2)]
+  .filter((activity) => activity.kind === 'exercise').map((activity) => [activity.id, keyOf(activity.questions)]));
+const diagnosticAnswers = (level, mastered) => Object.fromEntries(level.diagnostic.questions.map((question) =>
+  [question.id, question.options.find((option) => option.correct === mastered.includes(question.moduleRef)).id]));
+const workSession = async (sessionId, token) => {
+  const path = `/learning/sessions/${sessionId}`;
+  const session = await api(path, token);
+  for (const activity of session.activities) {
+    const progress = `${path}/activities/${activity.id}/progress`;
+    if (activity.kind === 'exercise') {
+      const answers = exerciseKeys.get(activity.id);
+      assert.ok(answers, `Corrigé connu pour ${activity.id}`);
+      await put(progress, token, { state: { answers } });
+      const grade = await api('/assessments/quiz', token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+        body: { lessonId: activity.lesson.id, answers, sessionId, activityId: activity.id } });
+      assert.equal(grade.correct, grade.total, `Toutes les bonnes réponses de ${activity.id} sont reconnues`);
+      await put(progress, token, { completed: true, attemptId: grade.id });
+    } else if (activity.kind === 'lesson' || activity.kind === 'review') {
+      await put(progress, token, { completed: true });
+    }
+  }
+  return api(path, token);
+};
+const checkSupports = async (session) => {
+  for (const placement of session.activities.flatMap((activity) => activity.placements)) {
+    assert.ok(placement.url, `Le support ${placement.assetId} est servi avec la séance`);
+    if (placement.usage === 'illustration' && !placement.decorative) assert.ok(placement.alt.length >= 10, 'Alternative textuelle présente');
+  }
+  const first = session.activities.flatMap((activity) => activity.placements)[0];
+  if (first) assert.ok((await fetch(first.url, { signal: AbortSignal.timeout(8_000) })).ok, 'Le premier support est lisible');
+};
+
+// A1 intensif accompagné : diagnostic, point de départ confirmé, deux séances par jour, séances faites, retard replanifié.
+const a1Learner = await createAccount('eleve-a1-contenu', 'learner', teacher.id);
+const a1Course = await post('/learning/enrollments', teacher.token,
+  { learnerId: a1Learner.id, trackVersionId: trackA1.versionId, startLevel: 'A0', template: 'intensive', startDate: inDays(1) }, 201);
+const a1Diagnostic = await api(goalPath(a1Course.id, 'diagnostic'), a1Learner.token);
+assert.equal(a1Diagnostic.questions.length, contentA1.diagnostic.questions.length);
+const a1DiagnosticGrade = await api('/assessments/diagnostics', a1Learner.token, { method: 'POST',
+  headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: a1Diagnostic.lessonId, answers: diagnosticAnswers(contentA1, ['a1-hallo']) } });
+const a1Diagnosed = await post(goalPath(a1Course.id, 'diagnostic'), a1Learner.token, { attemptId: a1DiagnosticGrade.id });
+assert.deepEqual(a1Diagnosed.goal.diagnosticModules, ['a1-hallo'], 'Le diagnostic repère le module déjà maîtrisé');
+await put(goalPath(a1Course.id, 'starting-point'), teacher.token, { acquiredModules: ['a1-hallo'] });
+const courseA1Proposal = await api(goalPath(a1Course.id, 'proposal'), teacher.token);
+assert.equal(courseA1Proposal.overflowCount, 0, 'Le programme A1 tient dans le mois intensif');
+const courseA1Planned = courseA1Proposal.sessions.flatMap((session) => session.items.map((item) => item.id));
+assert.ok(!courseA1Planned.some((id) => id.startsWith('a1-hallo-')), 'Le module acquis n’est pas planifié');
+assert.ok(courseA1Planned.includes('bilan-intermediaire') && courseA1Planned.includes('examen-blanc'));
+const courseA1FirstDay = courseA1Proposal.sessions.filter((session) => session.date === courseA1Proposal.sessions[0].date);
+assert.ok(courseA1FirstDay.length >= 2, 'Plusieurs séances par jour en rythme intensif');
+const courseA1Plan = await post(goalPath(a1Course.id, 'proposal/validate'), teacher.token, { number: courseA1Proposal.number });
+assert.equal(courseA1Plan.goal.status, 'active');
+const a1Worked = [];
+for (const session of courseA1Plan.sessions.slice(0, 2)) {
+  await checkSupports(await api(`/learning/sessions/${session.id}`, a1Learner.token));
+  a1Worked.push(await workSession(session.id, a1Learner.token));
+  assert.equal(a1Worked.at(-1).session.status, 'completed', 'Les séances du premier jour se terminent');
+}
+const a1Late = (await api('/learning/enrollment', a1Learner.token)).sessions.find((session) => session.status !== 'completed');
+localSql(local.container, `update learning.sessions set due_at = now() - interval '1 day' where id = '${a1Late.id}';`);
+const a1Availability = await put(goalPath(a1Course.id, 'availability'), teacher.token, { days: intensive.days, targetDate: null });
+assert.equal(a1Availability.validatable, true);
+const a1Replanned = await post(goalPath(a1Course.id, 'proposal/validate'), teacher.token, { number: a1Availability.number });
+assert.ok(a1Replanned.supersededSessions >= 1 && !a1Replanned.sessions.some((session) => session.id === a1Late.id),
+  'La séance en retard est replanifiée');
+assert.equal(a1Replanned.sessions.filter((session) => session.status === 'completed').length, 2, 'Les séances faites restent acquises');
+const a1Sheet = await api(`/tracking/learners/${a1Learner.id}`, teacher.token);
+assert.ok(a1Sheet.results.filter((grade) => grade.kind !== 'diagnostic').length >= 1, 'Les résultats apparaissent dans la fiche');
+
+// A2 autonome : prérequis par le diagnostic, planning validé par l'élève, séance, bilan puis examen blanc corrigés.
+const a2Learner = await createAccount('autonome-a2-contenu', 'learner', null);
+await put(`/admin/users/${a2Learner.id}/reviewer`, admin.token, { reviewerId: staff.id });
+const a2Course = await post('/learning/enrollments', admin.token,
+  { learnerId: a2Learner.id, trackVersionId: trackA2.versionId, startLevel: 'A1', template: 'standard', startDate: inDays(1) }, 201);
+assert.equal(a2Course.goal.prerequisiteMet, false);
+const a2Diagnostic = await api(goalPath(a2Course.id, 'diagnostic'), a2Learner.token);
+const a2DiagnosticGrade = await api('/assessments/diagnostics', a2Learner.token, { method: 'POST',
+  headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: a2Diagnostic.lessonId, answers: diagnosticAnswers(contentA2, ['prerequis']) } });
+const a2Diagnosed = await post(goalPath(a2Course.id, 'diagnostic'), a2Learner.token, { attemptId: a2DiagnosticGrade.id });
+assert.equal(a2Diagnosed.goal.diagnosticPrerequisite, true, 'Le diagnostic confirme les acquis A1');
+const courseA2Proposal = await api(goalPath(a2Course.id, 'proposal'), a2Learner.token);
+assert.equal(courseA2Proposal.validatable, true, 'L’élève autonome peut valider son planning');
+const courseA2Plan = await post(goalPath(a2Course.id, 'proposal/validate'), a2Learner.token, { number: courseA2Proposal.number });
+await checkSupports(await api(`/learning/sessions/${courseA2Plan.sessions[0].id}`, a2Learner.token));
+assert.equal((await workSession(courseA2Plan.sessions[0].id, a2Learner.token)).session.status, 'completed');
+
+const answerExam = async (kind) => {
+  const exam = await post('/assessments/exams', a2Learner.token, { enrollmentId: a2Course.id, kind }, 201);
+  const definition = contentA2.assessments.find((assessment) => assessment.kind === kind);
+  const listening = exam.definition.parts.find((part) => part.competence === 'ecoute');
+  assert.ok(listening.placements.some((placement) => placement.usage === 'audio'), 'La partie d’écoute a son enregistrement');
+  const answers = Object.fromEntries(definition.parts.filter((part) => part.mode === 'closed').map((part) => [part.id, keyOf(part.questions)]));
+  const written = definition.parts.find((part) => part.mode === 'written');
+  await put(`/assessments/exams/${exam.id}/answers`, a2Learner.token,
+    { answers, texts: { [written.id]: 'Liebe Anna, letztes Wochenende war ich in Hamburg. Ich habe den Hafen besucht, weil das Wetter schön war.' } });
+  const oral = definition.parts.find((part) => part.mode === 'oral');
+  const reservation = await post(`/assessments/exams/${exam.id}/recordings`, a2Learner.token,
+    { partId: oral.id, mimeType: 'audio/webm', size: webm.length });
+  const sent = await fetch(reservation.uploadUrl, { method: 'POST', body: webm, signal: AbortSignal.timeout(12_000),
+    headers: { Authorization: `Bearer ${a2Learner.token}`, apikey: local.publishable, 'Content-Type': 'audio/webm', 'x-upsert': 'false' } });
+  assert.ok(sent.ok);
+  await post(`/assessments/exams/${exam.id}/recordings/${reservation.id}/finalize`, a2Learner.token);
+  assert.equal((await submitExam(exam, a2Learner.token)).status, 'submitted');
+  assert.ok((await api('/assessments/grading', staffToken)).some((item) => item.id === exam.id), 'Le correcteur désigné reçoit la copie');
+  const full = (part) => ({ points: Object.fromEntries(part.criteria.map((criterion) => [criterion.id, criterion.maxPoints])) });
+  const graded = await post(`/assessments/exams/${exam.id}/grading`, staffToken, {
+    parts: { [written.id]: full(written), [oral.id]: full(oral) }, feedback: 'Très bon travail sur l’ensemble des compétences.' });
+  assert.equal(graded.status, 'graded');
+  for (const competence of ['lecture', 'ecoute', 'expression-ecrite', 'expression-orale']) {
+    assert.equal(graded.result.scores[competence].percent, 100, `Compétence ${competence} notée`);
+  }
+  return graded;
+};
+assert.equal((await answerExam('midterm')).result.decision, 'completed', 'Le bilan intermédiaire est corrigé');
+assert.equal((await answerExam('final')).result.decision, 'validated', 'L’examen blanc A2 est validé');
+assert.equal((await api('/learning/enrollment', a2Learner.token)).goal.status, 'validated');
+console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1 et ${trackA2.activityCount} A2 `
+  + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (diagnostic, deux séances par jour, retard '
+  + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
+
 // --- Navigateur ----------------------------------------------------------------------------------------
 if (process.argv.includes('--browser')) {
   const require = createRequire(new URL('../../linguacap-react/package.json', import.meta.url));
@@ -1124,6 +1274,28 @@ if (process.argv.includes('--browser')) {
     await examPage.getByLabel('Votre texte').fill('Ich hätte gern einen Kaffee.');
     await typed;
     console.log('Recette navigateur réussie · nouvelle tentative de l’examen blanc, sauvegarde de l’écrit et historique sur mobile.');
+
+    // Séance A1 réelle : textes de leçon et d'exercice, illustrations décrites, sons lisibles, sur mobile.
+    const contentPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await contentPage.goto('http://127.0.0.1:5186/connexion');
+    await contentPage.getByLabel('Adresse e-mail').fill(a1Learner.email);
+    await contentPage.getByLabel('Mot de passe', { exact: true }).fill(password);
+    await contentPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
+    await expect(contentPage.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    const shown = a1Worked.find((session) => session.activities.some((activity) => activity.kind === 'exercise')) ?? a1Worked[0];
+    await contentPage.goto(`http://127.0.0.1:5186/espace/seance/${shown.session.id}`);
+    for (const activity of shown.activities) {
+      await expect(contentPage.getByRole('heading', { name: activity.title })).toBeVisible({ timeout: 15_000 });
+      const firstLine = activity.lesson?.description?.split(/\r?\n/).find((line) => line.trim().length > 12)?.trim();
+      if (firstLine) await expect(contentPage.getByText(firstLine.slice(0, 40), { exact: false }).first()).toBeVisible();
+    }
+    const shownPicture = shown.activities.flatMap((activity) => activity.placements)
+      .find((placement) => placement.usage === 'illustration' && !placement.decorative && !placement.questionId);
+    if (shownPicture) await expect(contentPage.getByRole('img', { name: shownPicture.alt }).first()).toBeVisible();
+    if (shown.activities.some((activity) => activity.placements.some((placement) => placement.usage === 'audio'))) {
+      await expect(contentPage.locator('audio').first()).toBeAttached();
+    }
+    console.log('Recette navigateur réussie · séance A1 importée : textes de leçon et d’exercice, illustrations et sons sur mobile.');
   } finally {
     await browser.close();
   }
