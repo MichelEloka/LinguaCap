@@ -20,22 +20,22 @@ Travailler sur `develop` dans l’ordre des incréments. Le [cahier des charges]
 
 ### Connexion et permissions
 
-- [ ] DEV-012 Créer les tables des profils, des rôles et des permissions Catalogue et Correction. Prévoir l’initialisation du premier administrateur par une opération serveur.
-- [ ] DEV-013 Créer le rattachement professeur–élève avec un seul référent actif. Enregistrer séparément le correcteur désigné pour un élève autonome.
-- [ ] DEV-014 Vérifier la session Supabase Auth à la passerelle. Faire contrôler aux services l’action et la ressource demandées, avec les droits d’Identités pour les rattachements et les correcteurs désignés.
-- [ ] DEV-015 Écrire les politiques Supabase nécessaires pour les accès Auth et Storage. Tester les appels API d’un professeur référent, d’un professeur tiers et d’un éditeur de catalogue sans droit de suivi.
-- [ ] DEV-016 Développer la connexion, la déconnexion et la redirection vers l’espace du rôle connecté. Gérer l’expiration de la session et les accès aux routes privées.
-- [ ] DEV-017 Développer la demande de récupération et la page de choix d’un nouveau mot de passe. Gérer le retour depuis un lien invalide ou expiré.
+- [x] DEV-012 Créer les tables des profils, des rôles et des permissions Catalogue et Correction. Prévoir l’initialisation du premier administrateur par une opération serveur.
+- [x] DEV-013 Créer le rattachement professeur–élève avec un seul référent actif. Enregistrer séparément le correcteur désigné pour un élève autonome.
+- [x] DEV-014 Vérifier la session Supabase Auth à la passerelle. Faire contrôler aux services l’action et la ressource demandées, avec les droits d’Identités pour les rattachements et les correcteurs désignés.
+- [x] DEV-015 Écrire les politiques Supabase nécessaires pour les accès Auth et Storage. Tester les appels API d’un professeur référent, d’un professeur tiers et d’un éditeur de catalogue sans droit de suivi.
+- [x] DEV-016 Développer la connexion, la déconnexion et la redirection vers l’espace du rôle connecté. Gérer l’expiration de la session et les accès aux routes privées.
+- [x] DEV-017 Développer la demande de récupération et la page de choix d’un nouveau mot de passe. Gérer le retour depuis un lien invalide ou expiré.
 
 ### Invitations et gestion des utilisateurs
 
-- [ ] DEV-018 Créer la table des invitations avec adresse, rôle, référent prévu, date d’envoi, expiration et état. Ajouter les contraintes pour éviter les doublons.
-- [ ] DEV-019 Implémenter l’envoi d’invitation dans le service Quarkus Identités. Configurer l’accès privilégié à Supabase Auth dans ce service. Autoriser l’admin à inviter des professeurs ou des élèves et le professeur à inviter ses élèves.
-- [ ] DEV-020 Développer les formulaires d’invitation et leur liste. Ajouter l’annulation, la réémission et la gestion d’une adresse qui correspond à un compte existant.
-- [ ] DEV-021 Créer la page d’activation. Lier le compte Auth à l’invitation et créer le rattachement après acceptation, à partir du rôle enregistré côté serveur.
-- [ ] DEV-022 Développer la liste et la fiche admin des utilisateurs avec rôle, état, invitation, activation, référent et dernière activité. Ajouter la gestion des rôles et permissions autorisés et la désactivation du compte.
-- [ ] DEV-023 Ajouter la réaffectation de professeur et la désignation d’un correcteur. Conserver l’historique de l’élève et appliquer les nouveaux droits dès le changement.
-- [ ] DEV-024 Tester les invitations depuis l’admin et un compte professeur, le cas autonome et la réémission sans doublon. Vérifier que les accès retirés échouent aussi directement côté serveur. Préparer la trace métier de l’invitation et de l’activation pour Suivi.
+- [x] DEV-018 Créer la table des invitations avec adresse, rôle, référent prévu, date d’envoi, expiration et état. Ajouter les contraintes pour éviter les doublons.
+- [x] DEV-019 Implémenter l’envoi d’invitation dans le service Quarkus Identités. Configurer l’accès privilégié à Supabase Auth dans ce service. Autoriser l’admin à inviter des professeurs ou des élèves et le professeur à inviter ses élèves.
+- [x] DEV-020 Développer les formulaires d’invitation et leur liste. Ajouter l’annulation, la réémission et la gestion d’une adresse qui correspond à un compte existant.
+- [x] DEV-021 Créer la page d’activation. Lier le compte Auth à l’invitation et créer le rattachement après acceptation, à partir du rôle enregistré côté serveur.
+- [x] DEV-022 Développer la liste et la fiche admin des utilisateurs avec rôle, état, invitation, activation, référent et dernière activité. Ajouter la gestion des rôles et permissions autorisés et la désactivation du compte.
+- [x] DEV-023 Ajouter la réaffectation de professeur et la désignation d’un correcteur. Conserver l’historique de l’élève et appliquer les nouveaux droits dès le changement.
+- [x] DEV-024 Tester les invitations depuis l’admin et un compte professeur, le cas autonome et la réémission sans doublon. Vérifier que les accès retirés échouent aussi directement côté serveur. Préparer la trace métier de l’invitation et de l’activation pour Suivi.
 
 ## Incrément 3 · Livrer une première séance A1 de bout en bout
 

@@ -88,6 +88,6 @@ Le détail des étapes, des secrets GitHub et des droits Google Cloud se trouve 
 ## Avancement
 
 - **Incrément 1 · Socle** : terminé. Interface TypeScript, sept services Quarkus, migrations et rôles SQL par service, contrats d’API, CI et livraison automatisée.
-- **Incrément 2 · Comptes et protection des données** : en cours.
+- **Incrément 2 · Comptes et protection des données** : terminé. Invitations avec expiration, renvoi et annulation, premier administrateur, rôle Équipe et permissions Catalogue et Correction, correcteur désigné, réaffectation avec historique, désactivation et traces pour Suivi.
 
 Les incréments suivants sont décrits dans le [backlog](PLAN_FONCTIONNALITES.md).
