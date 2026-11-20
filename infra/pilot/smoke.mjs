@@ -272,6 +272,86 @@ assert.equal(learnerRow.teacherName, 'Recette tiers');
 assert.ok(learnerRow.activatedAt && learnerRow.lastSeenAt && learnerRow.invitedAt);
 await api('/admin/users', teacher.token, { status: 403 });
 
+// --- Parcours versionné, séances et progression (incrément 3) -----------------------------------------
+const tracks = await api('/tracks', otherTeacher.token);
+const a1 = tracks.find((track) => track.levelCode === 'A1');
+assert.ok(a1, 'Le parcours A1 publié est attribuable');
+assert.equal(a1.activityCount, 2);
+assert.equal(a1.totalMinutes, 15);
+const due = new Date(Date.now() + 2 * 86_400_000).toISOString().slice(0, 10);
+const enrollmentFor = (learnerId, firstSessionDue = due) => ({ learnerId, trackVersionId: a1.versionId, firstSessionDue });
+
+// Le référent actuel de l'élève est le professeur « tiers » depuis la réaffectation.
+await post('/learning/enrollments', teacher.token, enrollmentFor(learner.id), 403);
+await post('/learning/enrollments', staffToken, enrollmentFor(learner.id), 403);
+await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id, '2020-01-01'), 400);
+const enrolled = await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id), 201);
+assert.equal(enrolled.trackVersionNumber, 1);
+assert.equal(enrolled.sessions.length, 1);
+assert.equal(enrolled.sessions[0].status, 'planned');
+assert.equal(enrolled.sessions[0].activities.length, 2);
+await post('/learning/enrollments', otherTeacher.token, enrollmentFor(learner.id), 409);
+assert.equal((await api('/learning/enrollment', learnerToken)).id, enrolled.id);
+
+const autonomousToken = await login(autonomousEmail);
+const autoEnrollment = await post('/learning/enrollments', admin.token, enrollmentFor(autonomous.id), 201);
+const autoSession = autoEnrollment.sessions[0].id;
+const sessionPath = `/learning/sessions/${autoSession}`;
+const progressPath = (activity) => `${sessionPath}/activities/${activity}/progress`;
+await api(sessionPath, learnerToken, { status: 403 });
+let detail = await api(sessionPath, autonomousToken);
+const [lessonActivity, exercise] = detail.activities;
+assert.equal(lessonActivity.kind, 'lesson');
+assert.equal(exercise.kind, 'exercise');
+const illustration = lessonActivity.placements.find((placement) => placement.usage === 'illustration');
+assert.ok(illustration.alt.length > 10, 'Le visuel a son alternative textuelle');
+assert.ok(lessonActivity.transcript, 'La transcription de la leçon est disponible à la demande');
+assert.equal(exercise.transcript, null, 'La transcription de l’exercice attend la réponse');
+assert.ok(exercise.questions.every((question) => question.options.every((option) => !('correct' in option))));
+const versioned = await api(`/media/${illustration.assetId}/versions/${illustration.assetVersion}`, autonomousToken);
+assert.equal(versioned.version, illustration.assetVersion);
+assert.ok((await fetch(versioned.url, { signal: AbortSignal.timeout(8_000) })).ok);
+await api(`/media/${illustration.assetId}/versions/9`, autonomousToken, { status: 404 });
+
+await put(progressPath('quiz-la-commande'), autonomousToken, { state: { answers: { 'cafe-question': 'the' } } });
+detail = await api(sessionPath, autonomousToken);
+assert.equal(detail.activities[1].state.answers['cafe-question'], 'the', 'La progression reprend après fermeture');
+assert.equal(detail.session.status, 'in_progress');
+const lessonDone = await put(progressPath('commander-au-cafe'), autonomousToken, { completed: true });
+const lessonReplay = await put(progressPath('commander-au-cafe'), autonomousToken, { completed: true });
+assert.ok(lessonDone.activities[0].completedAt);
+assert.equal(lessonReplay.activities[0].completedAt, lessonDone.activities[0].completedAt, 'Une fin rejouée n’est pas recomptée');
+await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true }, 400);
+await put(progressPath('commander-au-cafe'), learnerToken, { state: {} }, 404);
+const looseGrade = await api('/assessments/quiz', autonomousToken, {
+  method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'commander-au-cafe', answers: { 'cafe-question': 'cafe' } },
+});
+await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: looseGrade.id }, 409);
+const sessionGrade = await api('/assessments/quiz', autonomousToken, {
+  method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'commander-au-cafe', answers: { 'cafe-question': 'cafe' }, sessionId: autoSession, activityId: 'quiz-la-commande' },
+});
+assert.equal(sessionGrade.sessionId, autoSession);
+assert.equal(sessionGrade.activityId, 'quiz-la-commande');
+const finished = await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id });
+assert.equal(finished.status, 'completed');
+assert.ok(finished.completedAt);
+assert.equal((await put(progressPath('quiz-la-commande'), autonomousToken, { completed: true, attemptId: sessionGrade.id })).completedAt,
+  finished.completedAt);
+detail = await api(sessionPath, autonomousToken);
+assert.ok(detail.activities[1].transcript, 'La transcription de l’exercice est disponible après la réponse');
+assert.equal(detail.activities[1].attemptId, sessionGrade.id);
+
+const autonomousSheet = await api(`/tracking/learners/${autonomous.id}`, admin.token);
+assert.equal(autonomousSheet.enrollment.sessions[0].status, 'completed');
+assert.ok(autonomousSheet.results.some((grade) => grade.id === sessionGrade.id));
+await api(`/tracking/learners/${autonomous.id}`, teacher.token, { status: 403 });
+await api(`/tracking/learners/${autonomous.id}`, staffToken, { status: 403 });
+assert.equal((await api(`/tracking/learners/${learner.id}`, otherTeacher.token)).enrollment.sessions[0].status, 'planned');
+console.log('Recette des séances réussie · parcours versionné, attribution, contenu et médias versionnés, reprise, '
+  + 'fin idempotente, exercice corrigé et fiche professeur.');
+
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
   where learner_id = '${learner.id}' or subject_id in ('${invite.id}', '${first.id}');`).split(',');
@@ -294,14 +374,47 @@ if (process.argv.includes('--browser')) {
     await page.getByLabel('Adresse e-mail').fill(email);
     await page.getByLabel('Mot de passe', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    await expect(page.getByRole('heading', { name: 'Commander au café' })).toBeVisible({ timeout: 15_000 });
+    // Accueil : prochaine séance et message du professeur.
+    await expect(page.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByRole('heading', { name: 'Au café' })).toBeVisible();
     await expect(page.getByText('Bravo pour cette première séance !')).toBeVisible();
+    await page.getByRole('link', { name: 'Commencer la séance' }).click();
+    await expect(page).toHaveURL(/\/espace\/seance\/[0-9a-f-]{36}$/);
+    // Leçon : visuel avec son alternative textuelle, audio pilotable, transcription à la demande.
+    await expect(page.getByRole('heading', { name: 'Commander au café' })).toBeVisible();
+    const picture = page.getByRole('img', { name: 'Une tasse blanche remplie de café posée sur une soucoupe.' });
+    await expect(picture).toBeVisible();
     await page.waitForFunction(() => document.querySelector('.pilot-lesson-image')?.naturalWidth > 0
-      && Number.isFinite(document.querySelector('audio')?.duration));
+      && [...document.querySelectorAll('audio')].every((audio) => Number.isFinite(audio.duration)));
+    await expect(page.getByText('Lire la transcription')).toHaveCount(1);
+    await page.getByRole('button', { name: 'J’ai terminé la leçon' }).click();
+    await expect(page.getByText('Leçon terminée')).toBeVisible();
+    // Exercice : la réponse choisie est sauvegardée et retrouvée après rechargement.
+    const saved = page.waitForResponse((response) => response.url().includes('/activities/quiz-la-commande/progress')
+      && response.request().method() === 'PUT' && response.ok());
     await page.getByRole('radio', { name: 'Un café' }).check();
+    await saved;
+    await page.reload();
+    await expect(page.getByRole('radio', { name: 'Un café' })).toBeChecked({ timeout: 15_000 });
+    await expect(page.getByText('Leçon terminée')).toBeVisible();
     await page.getByRole('button', { name: 'Valider mes réponses' }).click();
     await expect(page.getByText('Résultat enregistré · 1 / 1')).toBeVisible();
-    console.log('Recette navigateur réussie · session Supabase, leçon, médias et quiz sur mobile.');
+    await expect(page.getByText('Séance terminée. Bravo !')).toBeVisible();
+    await expect(page.getByText('Lire la transcription')).toHaveCount(2);
+    console.log('Recette navigateur réussie · accueil, séance, visuel, audio, reprise après rechargement et exercice sur mobile.');
+
+    // Fiche du professeur référent : la séance terminée et le résultat apparaissent.
+    const teacherPage = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+    await teacherPage.goto('http://127.0.0.1:5186/connexion');
+    await teacherPage.getByLabel('Adresse e-mail').fill(otherTeacher.email);
+    await teacherPage.getByLabel('Mot de passe', { exact: true }).fill(password);
+    await teacherPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
+    await teacherPage.getByRole('button', { name: 'Voir le suivi de Élève de recette' }).click({ timeout: 15_000 });
+    const followUp = teacherPage.getByRole('dialog');
+    await expect(followUp.getByText('Séance 1 · Au café')).toBeVisible();
+    await expect(followUp.getByText('Terminée', { exact: true })).toBeVisible();
+    await expect(followUp.getByText('2 / 2 activités terminées', { exact: false })).toBeVisible();
+    console.log('Recette navigateur réussie · fiche élève du professeur référent.');
 
     const adminPage = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await adminPage.goto('http://127.0.0.1:5186/connexion');
