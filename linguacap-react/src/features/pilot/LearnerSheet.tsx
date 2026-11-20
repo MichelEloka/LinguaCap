@@ -1,7 +1,8 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { Badge, Dialog, EmptyState } from '../../components/ui';
 import { requestApi } from '../../integration/api';
-import { formatDue, sessionStatus, type Enrollment, type Grade } from './LearnerSession';
+import { formatDue, sessionStatus, type Grade } from './LearnerSession';
+import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
 
 interface Track {
   versionId: string;
@@ -11,11 +12,12 @@ interface Track {
   moduleCount: number;
   activityCount: number;
   totalMinutes: number;
+  prerequisiteLevelCode: string | null;
 }
 
 interface Sheet {
   profile: { id: string; displayName: string };
-  enrollment: Enrollment | null;
+  enrollment: PlannedEnrollment | null;
   goal: { level: string; targetDate: string } | null;
   results: Grade[];
   completedCount: number;
@@ -57,9 +59,14 @@ function AssignTrack({ learnerId, token, onAssigned }: { learnerId: string; toke
     setBusy(true);
     setError('');
     try {
-      await requestApi<Enrollment>('/learning/enrollments', token, {
+      const targetDate = String(form.get('targetDate') ?? '');
+      await requestApi<PlannedEnrollment>('/learning/enrollments', token, {
         method: 'POST',
-        body: { learnerId, trackVersionId: String(form.get('trackVersionId')), firstSessionDue: String(form.get('firstSessionDue')) },
+        body: {
+          learnerId, trackVersionId: String(form.get('trackVersionId')), startLevel: String(form.get('startLevel')),
+          template: String(form.get('template')), startDate: String(form.get('startDate')),
+          ...(targetDate ? { targetDate } : {}),
+        },
       });
       onAssigned();
     } catch (failure) {
@@ -82,9 +89,22 @@ function AssignTrack({ learnerId, token, onAssigned }: { learnerId: string; toke
           ))}
         </select>
       </label>
-      <label>Échéance de la première séance (20 h)
-        <input type="date" name="firstSessionDue" required min={inDays(0)} defaultValue={inDays(2)} />
+      <label>Niveau de départ
+        <select name="startLevel" defaultValue="A0">
+          <option value="A0">Débutant</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option>
+        </select>
       </label>
+      <label>Rythme
+        <select name="template" defaultValue="intensive">
+          <option value="intensive">Intensif · 2 séances de 45 min par jour (A1 en un mois, A2 en deux mois)</option>
+          <option value="standard">Standard · 1 séance de 30 min du lundi au vendredi</option>
+        </select>
+      </label>
+      <label>Début<input type="date" name="startDate" required min={inDays(0)} defaultValue={inDays(0)} /></label>
+      <label>Date cible (facultative : la durée du rythme par défaut)<input type="date" name="targetDate" min={inDays(1)} /></label>
+      {tracks.some((track) => track.prerequisiteLevelCode) && (
+        <p className="muted">Un parcours A2 suppose A1 validé dans LinguaCap ou confirmé par le diagnostic de l’élève.</p>
+      )}
       {error && <p className="inline-message warning" role="alert">{error}</p>}
       <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Attribution…' : 'Attribuer le parcours'}</button>
     </form>
@@ -115,10 +135,13 @@ export function LearnerSheetDialog({ learnerId, name, token, onClose }: {
     <Dialog title={`Suivi de ${name}`} onClose={onClose}>
       {!sheet ? (error ? <p className="inline-message warning" role="alert">{error}</p> : <p role="status">Chargement de la fiche…</p>) : (
         <div className="stack accounts-detail">
-          <h3>Parcours</h3>
+          {enrollment && <GoalPanel enrollment={enrollment} token={token} viewer="staff" onChanged={() => setReload((value) => value + 1)} />}
+          <h3>Séances</h3>
           {enrollment ? (
             <>
-              <p>Allemand {enrollment.levelCode} · version {enrollment.trackVersionNumber} · attribué le {dateFormat.format(new Date(enrollment.assignedAt))}</p>
+              <p>Allemand {enrollment.levelCode} · version {enrollment.trackVersionNumber} · attribué le {dateFormat.format(new Date(enrollment.assignedAt))}
+                {enrollment.supersededSessions > 0 && ` · ${enrollment.supersededSessions} séance(s) replanifiée(s)`}</p>
+              {enrollment.sessions.length === 0 && <p className="muted">Les séances seront publiées à la validation du planning.</p>}
               <ul className="accounts-history">
                 {enrollment.sessions.map((session) => {
                   const done = session.activities.filter((activity) => activity.status === 'completed').length;

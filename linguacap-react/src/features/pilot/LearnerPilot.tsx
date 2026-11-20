@@ -1,100 +1,20 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
-import { Link, Route, Routes } from 'react-router-dom';
-import { CalendarCheck2, CalendarDays, ChartNoAxesCombined, Clock, MessageSquare, PlayCircle } from 'lucide-react';
+import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { CalendarCheck2, ChartNoAxesCombined, ClipboardList, Clock, MessageSquare, PlayCircle } from 'lucide-react';
 import { Badge, EmptyState } from '../../components/ui';
 import { requestApi } from '../../integration/api';
 import { formatDue, SessionPage, sessionStatus, type Enrollment, type Grade, type SessionSummary } from './LearnerSession';
+import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
 import './pilot.css';
 
-interface Level { id: string; code: string; title: string; status: string }
-interface Goal {
-  level: string;
-  pace: 'standard' | 'intensive';
-  startDate: string;
-  targetDate: string;
-  studyDays: number[];
-  sessionsPerDay: number;
-  minutesPerSession: number;
-}
 interface Message { id: string; text: string; sentAt: string }
 
-const weekdays = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi', 'Dimanche'];
 const dateDisplay = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' });
 
 function errorText(error: unknown) {
   return error instanceof Error && error.name !== 'TimeoutError'
     ? error.message : 'Le service est momentanément indisponible. Réessayez.';
-}
-
-function GoalEditor({ goal, levels, token, saved }: {
-  goal: Goal | null; levels: Level[]; token: string; saved: (goal: Goal) => void;
-}) {
-  const [schedule, setSchedule] = useState<Goal>(goal ?? {
-    level: levels[0]?.code ?? '', pace: 'standard', startDate: '', targetDate: '',
-    studyDays: [1, 2, 3, 4, 5], sessionsPerDay: 1, minutesPerSession: 25,
-  });
-  const [busy, setBusy] = useState(false);
-  const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-  const update = <Key extends keyof Goal>(key: Key, value: Goal[Key]) =>
-    setSchedule((current) => ({ ...current, [key]: value }));
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError('');
-    setNotice('');
-    setBusy(true);
-    // Send the editable fields only. The server owns audit timestamps.
-    const { level, pace, startDate, targetDate, studyDays, sessionsPerDay, minutesPerSession } = schedule;
-    try {
-      const result = await requestApi<Goal>('/learning/goal', token, {
-        method: 'PUT', body: { level, pace, startDate, targetDate, studyDays, sessionsPerDay, minutesPerSession },
-      });
-      setSchedule(result);
-      saved(result);
-      setNotice('Votre objectif a été enregistré.');
-    } catch (failure) {
-      setError(errorText(failure));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <section className="panel stack" aria-labelledby="pilot-goal">
-      <div className="panel-heading"><h2 id="pilot-goal">Mon objectif</h2><CalendarDays aria-hidden="true" /></div>
-      <form className="stack" onSubmit={submit}>
-        <div className="pilot-form-grid">
-          <label className="field">Niveau visé<select required value={schedule.level} onChange={(event) => update('level', event.target.value)}>
-            {levels.map((level) => <option key={level.id} value={level.code}>{level.code} · {level.title}</option>)}
-          </select></label>
-          <label className="field">Rythme<select value={schedule.pace} onChange={(event) => update('pace', event.target.value === 'intensive' ? 'intensive' : 'standard')}>
-            <option value="standard">Standard</option><option value="intensive">Intensif</option>
-          </select></label>
-          <label className="field">Début<input required type="date" value={schedule.startDate} onChange={(event) => update('startDate', event.target.value)} /></label>
-          <label className="field">Date cible<input required type="date" min={schedule.startDate || undefined} value={schedule.targetDate} onChange={(event) => update('targetDate', event.target.value)} /></label>
-          <label className="field">Séances par jour<input required type="number" min={1} max={6} value={schedule.sessionsPerDay} onChange={(event) => update('sessionsPerDay', Number(event.target.value))} /></label>
-          <label className="field">Minutes par séance<input required type="number" min={10} max={180} value={schedule.minutesPerSession} onChange={(event) => update('minutesPerSession', Number(event.target.value))} /></label>
-        </div>
-        <fieldset className="pilot-options">
-          <legend>Jours d’étude</legend>
-          {weekdays.map((name, index) => {
-            const day = index + 1;
-            return <label key={name}><input type="checkbox" checked={schedule.studyDays.includes(day)}
-              onChange={(event) => update('studyDays', event.target.checked
-                ? [...schedule.studyDays, day].sort((left, right) => left - right)
-                : schedule.studyDays.filter((value) => value !== day))} /> {name}</label>;
-          })}
-        </fieldset>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        {notice && <p className="inline-message" role="status">{notice}</p>}
-        <button className="btn btn-primary" type="submit" disabled={busy || !schedule.studyDays.length || !levels.length}>
-          {busy ? 'Enregistrement…' : 'Enregistrer mon objectif'}
-        </button>
-      </form>
-    </section>
-  );
 }
 
 function isToday(value: string) {
@@ -126,13 +46,16 @@ function NextSessions({ enrollment }: { enrollment: Enrollment | null }) {
   }
   const next = enrollment.sessions.find((session) => session.status !== 'completed') ?? null;
   const today = enrollment.sessions.filter((session) => isToday(session.dueAt));
+  const late = enrollment.sessions.filter((session) => session.status === 'late');
   return (
     <section className="panel stack" aria-labelledby="pilot-next">
       <div className="panel-heading">
         <h2 id="pilot-next">Ma prochaine séance</h2>
         <Badge tone="blue">Allemand {enrollment.levelCode}</Badge>
       </div>
-      {next ? (
+      {enrollment.sessions.length === 0 ? (
+        <p className="muted">Vos séances apparaîtront ici dès que votre planning sera validé.</p>
+      ) : next ? (
         <article className="pilot-next stack">
           <h3>{next.title}</h3>
           <p className="muted"><Clock size={15} aria-hidden="true" /> À terminer avant le {formatDue(next.dueAt)} · environ {next.estimatedMinutes} min</p>
@@ -146,6 +69,17 @@ function NextSessions({ enrollment }: { enrollment: Enrollment | null }) {
           <SessionLink session={next} />
         </article>
       ) : <EmptyState title="Toutes vos séances sont terminées" description="Les prochaines séances apparaîtront ici dès qu’elles seront planifiées." />}
+      {late.length > 0 && (
+        <>
+          <h3>À rattraper</h3>
+          <ul className="pilot-list">
+            {late.map((session) => (
+              <li key={session.id}><span>{session.title} · échéance dépassée le {formatDue(session.dueAt)}</span>
+                <Link className="text-link" to={`/espace/seance/${session.id}`}>Rattraper</Link></li>
+            ))}
+          </ul>
+        </>
+      )}
       <h3>Aujourd’hui</h3>
       {today.length === 0 ? <p className="muted">Aucune séance n’arrive à échéance aujourd’hui.</p> : (
         <ul className="pilot-list">
@@ -167,7 +101,7 @@ function NextSessions({ enrollment }: { enrollment: Enrollment | null }) {
   );
 }
 
-interface LearnerData { enrollment: Enrollment | null; goal: Goal | null; levels: Level[]; results: Grade[]; messages: Message[] }
+interface LearnerData { enrollment: PlannedEnrollment | null; results: Grade[]; messages: Message[] }
 
 function LearnerHome({ token }: { token: string }) {
   const [data, setData] = useState<LearnerData | null>(null);
@@ -177,11 +111,10 @@ function LearnerHome({ token }: { token: string }) {
   useEffect(() => {
     let active = true;
     Promise.all([
-      requestApi<Enrollment | null>('/learning/enrollment', token),
-      requestApi<Goal | null>('/learning/goal', token), requestApi<Level[]>('/levels', token),
+      requestApi<PlannedEnrollment | null>('/learning/enrollment', token),
       requestApi<Grade[]>('/assessments/results', token), requestApi<Message[]>('/tracking/messages', token),
-    ]).then(([enrollment, goal, levels, results, messages]) => {
-      if (active) setData({ enrollment, goal, levels, results, messages });
+    ]).then(([enrollment, results, messages]) => {
+      if (active) setData({ enrollment, results, messages });
     }).catch((error: unknown) => { if (active) setFailure(errorText(error)); });
     return () => { active = false; };
   }, [token, retry]);
@@ -194,12 +127,11 @@ function LearnerHome({ token }: { token: string }) {
     <div className="pilot-grid">
       <NextSessions enrollment={data.enrollment} />
       <div className="stack">
-        <GoalEditor goal={data.goal} levels={data.levels} token={token}
-          saved={(goal) => setData((current) => current && ({ ...current, goal }))} />
+        {data.enrollment && <GoalPanel enrollment={data.enrollment} token={token} viewer="learner" onChanged={() => setRetry((value) => value + 1)} />}
         <section className="panel stack" aria-labelledby="pilot-results">
           <div className="panel-heading"><h2 id="pilot-results">Mes résultats</h2><ChartNoAxesCombined aria-hidden="true" /></div>
           {data.results.length === 0 ? <EmptyState title="Aucun résultat enregistré" description="Terminez un exercice pour retrouver votre score ici." />
-            : <ul className="pilot-list">{data.results.map((item) => <li key={item.id}><time dateTime={item.submittedAt}>{dateDisplay.format(new Date(item.submittedAt))}</time><strong>{item.correct} / {item.total}</strong></li>)}</ul>}
+            : <ul className="pilot-list">{data.results.filter((item) => item.kind !== 'diagnostic').map((item) => <li key={item.id}><time dateTime={item.submittedAt}>{dateDisplay.format(new Date(item.submittedAt))}</time><strong>{item.correct} / {item.total}</strong></li>)}</ul>}
         </section>
         <section className="panel stack" aria-labelledby="pilot-messages">
           <div className="panel-heading"><h2 id="pilot-messages">Mes messages</h2><MessageSquare aria-hidden="true" /></div>
@@ -211,11 +143,82 @@ function LearnerHome({ token }: { token: string }) {
   );
 }
 
+interface DiagnosticContent { lessonId: string; title: string; description: string; questions: { id: string; prompt: string; options: { id: string; text: string }[] }[] }
+
+/** Diagnostic initial : les réponses sont corrigées par module puis transmises au parcours (DEV-036). */
+function DiagnosticPage({ token }: { token: string }) {
+  const navigate = useNavigate();
+  const [enrollmentId, setEnrollmentId] = useState<string | null>(null);
+  const [content, setContent] = useState<DiagnosticContent | null>(null);
+  const [answers, setAnswers] = useState<Record<string, string>>({});
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const key = useRef<string | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    requestApi<Enrollment | null>('/learning/enrollment', token).then(async (enrollment) => {
+      if (!enrollment) throw new Error('Aucun parcours ne vous est encore attribué.');
+      const diagnostic = await requestApi<DiagnosticContent>(`/learning/enrollments/${encodeURIComponent(enrollment.id)}/diagnostic`, token);
+      if (!active) return;
+      setEnrollmentId(enrollment.id);
+      setContent(diagnostic);
+    }).catch((failure: unknown) => { if (active) setError(errorText(failure)); });
+    return () => { active = false; };
+  }, [token]);
+
+  async function submit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    if (!content || !enrollmentId || busy) return;
+    setBusy(true);
+    setError('');
+    key.current ??= crypto.randomUUID();
+    try {
+      const grade = await requestApi<Grade>('/assessments/diagnostics', token, {
+        method: 'POST', body: { lessonId: content.lessonId, answers }, idempotencyKey: key.current,
+      });
+      await requestApi(`/learning/enrollments/${encodeURIComponent(enrollmentId)}/diagnostic`, token, {
+        method: 'POST', body: { attemptId: grade.id },
+      });
+      navigate('/espace', { replace: true });
+    } catch (failure) {
+      setError(errorText(failure));
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section className="panel stack" aria-labelledby="pilot-diagnostic">
+      <Link className="text-link" to="/espace">Retour à mon espace</Link>
+      <div className="panel-heading"><h2 id="pilot-diagnostic"><ClipboardList size={20} aria-hidden="true" /> {content?.title ?? 'Diagnostic'}</h2></div>
+      {!content ? (error ? <p className="inline-message warning" role="alert">{error}</p> : <p role="status">Chargement du diagnostic…</p>) : (
+        <form className="stack" onSubmit={submit}>
+          <p>{content.description}</p>
+          {content.questions.map((question) => (
+            <fieldset className="pilot-options" key={question.id}>
+              <legend>{question.prompt}</legend>
+              {question.options.map((option) => (
+                <label key={option.id}><input type="radio" name={question.id} required value={option.id}
+                  checked={answers[question.id] === option.id}
+                  onChange={() => { key.current = null; setAnswers((current) => ({ ...current, [question.id]: option.id })); }} /> {option.text}</label>
+              ))}
+            </fieldset>
+          ))}
+          {error && <p className="inline-message warning" role="alert">{error}</p>}
+          <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Envoi…' : 'Envoyer mes réponses'}</button>
+        </form>
+      )}
+    </section>
+  );
+}
+
 export function LearnerPilot({ token }: { token: string }) {
   return (
     <Routes>
       <Route index element={<LearnerHome token={token} />} />
       <Route path="seance/:sessionId" element={<SessionPage token={token} />} />
+      <Route path="diagnostic" element={<DiagnosticPage token={token} />} />
     </Routes>
   );
 }

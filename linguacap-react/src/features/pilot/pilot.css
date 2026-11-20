@@ -48,3 +48,18 @@
 .pilot-session .text-link { display: inline-flex; align-items: center; gap: .35rem; }
 .pilot-session audio { width: 100%; }
 .pilot-session summary { cursor: pointer; }
+
+.planning-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; }
+.planning-day { border: 1px solid #dbe4ef; border-radius: .75rem; padding: .5rem .7rem; display: grid; gap: .35rem; margin: 0; }
+.planning-day legend { font-weight: 600; padding: 0 .2rem; }
+.planning-day label { display: flex; justify-content: space-between; align-items: center; gap: .4rem; font-size: .92rem; }
+.planning-day input[type="number"] { width: 4.5rem; }
+.planning-summary { display: flex; flex-wrap: wrap; gap: .5rem 1.2rem; align-items: center; }
+.planning-summary span { display: inline-flex; align-items: center; gap: .3rem; }
+.planning-sessions { margin: 0; padding-left: 1.2rem; display: grid; gap: .45rem; }
+.planning-sessions li span { display: block; color: var(--muted); font-size: .92rem; }
+.planning-proposal h4 { margin: .4rem 0 0; }
+.planning-proposal caption { text-align: left; padding-bottom: .3rem; }
+.goal-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .6rem; margin: 0; }
+.goal-facts dt { color: var(--muted); font-size: .85rem; }
+.goal-facts dd { margin: .1rem 0 0; font-weight: 600; }

@@ -28,6 +28,7 @@ export interface Enrollment {
   sessions: SessionSummary[];
 }
 export interface Grade {
+  kind?: 'quiz' | 'diagnostic';
   id: string; lessonId: string; correct: number; total: number; submittedAt: string;
   sessionId?: string | null; activityId?: string | null;
 }
@@ -125,8 +126,10 @@ function LessonActivity({ activity, token, onComplete, busy }: {
       {activity.placements.map((placement) => <MediaPlacement key={placement.position} placement={placement} token={token} />)}
       <Transcript text={activity.transcript} />
       {activity.status === 'completed'
-        ? <p className="inline-message" role="status"><CheckCircle2 size={16} aria-hidden="true" /> Leçon terminée</p>
-        : <button className="btn btn-primary" type="button" onClick={onComplete} disabled={busy}>J’ai terminé la leçon</button>}
+        ? <p className="inline-message" role="status"><CheckCircle2 size={16} aria-hidden="true" /> {activity.kind === 'review' ? 'Révision terminée' : 'Leçon terminée'}</p>
+        : <button className="btn btn-primary" type="button" onClick={onComplete} disabled={busy}>
+            {activity.kind === 'review' ? 'J’ai terminé la révision' : 'J’ai terminé la leçon'}
+          </button>}
     </div>
   );
 }
@@ -307,8 +310,10 @@ export function SessionPage({ token }: { token: string }) {
               </h2>
               <Badge tone="blue">{detail.levelCode}</Badge>
             </div>
-            {activity.kind === 'lesson'
+            {activity.kind === 'lesson' || activity.kind === 'review'
               ? <LessonActivity activity={activity} token={token} busy={busy} onComplete={() => void completeLesson(activity)} />
+              : activity.kind === 'assessment' && activity.questions.length === 0
+                ? <p className="muted">{activity.lesson?.description}</p>
               : <ExerciseActivity activity={activity} sessionId={detail.session.id} token={token} grade={grade}
                   onSaveState={(answers) => saveAnswers(activity, answers)} onGraded={(result, answers) => graded(activity, result, answers)} />}
           </section>

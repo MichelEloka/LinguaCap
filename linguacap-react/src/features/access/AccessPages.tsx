@@ -285,7 +285,7 @@ export function ConnectedPage() {
       {profile && token ? (
         <Suspense fallback={<p role="status">Chargement de votre espace…</p>}>
           {profile.role !== 'learner' ? <StaffPilot key={profile.id} profile={profile} token={token} />
-            : !/^\/espace(\/seance\/[^/]+)?\/?$/.test(pathname) ? <Navigate to="/espace" replace />
+            : !/^\/espace(\/seance\/[^/]+|\/diagnostic)?\/?$/.test(pathname) ? <Navigate to="/espace" replace />
               : <LearnerPilot key={profile.id} token={token} />}
         </Suspense>
       ) : <section className="panel connected-panel stack">
