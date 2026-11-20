@@ -1,6 +1,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { businessServices, localSql, localSupabase, root } from './local.mjs';
 
@@ -17,6 +18,7 @@ const env = {
   QUARKUS_HTTP_HOST: '127.0.0.1',
   LINGUACAP_CLOUD_RUN: 'false',
   LINGUACAP_INTERNAL_SECRET: randomBytes(32).toString('hex'),
+  LINGUACAP_SCHEDULER_ACCOUNT: '',
   API_ORIGIN_SECRET: '',
   SUPABASE_URL: local.api,
   SUPABASE_PUBLIC_URL: local.api,
@@ -25,6 +27,8 @@ const env = {
   SITE_URL: 'http://127.0.0.1:5186/activer-compte',
   DB_JDBC_URL: local.jdbc,
 };
+// La recette lance le traitement périodique de Suivi avec ce secret, à la place de Cloud Scheduler.
+writeFileSync(join(tmpdir(), 'linguacap-recette-secret'), env.LINGUACAP_INTERNAL_SECRET, { mode: 0o600 });
 const passwords = businessServices.map(() => randomBytes(32).toString('hex'));
 const roles = businessServices.map((service, index) => `
   DO $$ BEGIN CREATE ROLE lingua_${service} LOGIN; EXCEPTION WHEN duplicate_object THEN NULL; END $$;

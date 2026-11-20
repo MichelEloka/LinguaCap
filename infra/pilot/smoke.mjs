@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { localQuery, localSql, localSupabase } from './local.mjs';
@@ -847,6 +849,119 @@ await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', descriptio
 console.log('Recette des évaluations réussie · bilan corrigé immédiatement, examen blanc avec écrit et oral privé, remise idempotente, '
   + 'file et grille du référent, remise à temps corrigée après l’échéance, résultat à consolider puis nouvelle tentative, '
   + 'correcteur désigné d’un élève autonome, refus d’accès des tiers.');
+
+// --- Suivi : événements, alertes, relance, reprise et clôture (incrément 7) -------------------------------
+const trackingJobs = process.env.LINGUACAP_SMOKE_TRACKING ?? 'http://127.0.0.1:8086';
+const internalSecret = readFileSync(join(tmpdir(), 'linguacap-recette-secret'), 'utf8').trim();
+const runJob = (kind = 'sync') => json(`${trackingJobs}/v1/internal/tracking/jobs/${kind}`, {
+  method: 'POST', headers: { 'X-Linguacap-Internal': internalSecret } });
+await json(`${trackingJobs}/v1/internal/tracking/jobs/sync`, { method: 'POST', status: 403 });
+const firstRun = await runJob();
+assert.ok(firstRun.imported > 0, 'Les événements des services sont importés');
+assert.deepEqual(firstRun.errors, {});
+const sequences = (producer) => Number(localQuery(local.container,
+  `select last_sequence from tracking.checkpoints where producer = '${producer}';`));
+assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')),
+  'Le point de reprise suit le dernier événement lu');
+assert.equal((await runJob()).imported, 0, 'Un second passage ne réimporte rien');
+
+const followLearner = async (label) => {
+  const account = await createAccount(label, 'learner', teacher.id);
+  const goal = await post('/learning/enrollments', teacher.token, goalFor(account.id), 201);
+  const plan = await post(goalPath(goal.id, 'proposal/validate'), teacher.token, { number: goal.proposal.number });
+  return { ...account, enrollmentId: goal.id, firstSession: plan.sessions[0].id };
+};
+// La première séance passe dans le passé : le retard s'accumule avant le bilan et l'examen blanc.
+const makeLate = (learnerRow) => localSql(local.container, `update tracking.sessions set due_at = now() - interval '10 days'
+  where session_id = '${learnerRow.firstSession}';`);
+const trackingOf = async (learnerId, token = teacher.token) => (await api('/tracking/overview', token)).learners
+  .find((row) => row.learnerId === learnerId).tracking;
+const activeAlerts = (enrollmentId) => Number(localQuery(local.container,
+  `select count(*) from tracking.alerts where enrollment_id = '${enrollmentId}' and status <> 'closed';`));
+
+const lateLearner = await followLearner('suivi-retard');
+await runJob();
+assert.equal((await trackingOf(lateLearner.id)).goalStatus, 'active');
+assert.equal((await trackingOf(lateLearner.id)).alert, null, 'Un élève à jour n’a pas d’alerte');
+makeLate(lateLearner);
+const alertRun = await runJob();
+assert.ok(alertRun.opened >= 1);
+let followed = await trackingOf(lateLearner.id);
+assert.equal(followed.alert.status, 'open');
+assert.equal(followed.lateSessions, 1);
+assert.match(followed.alert.reason, /approche avec du retard/);
+await runJob();
+assert.equal(activeAlerts(lateLearner.enrollmentId), 1, 'Un second contrôle met l’alerte à jour sans la dupliquer');
+
+// Relance depuis l'alerte, puis première activité de reprise.
+const relance = await post('/tracking/messages', teacher.token,
+  { learnerId: lateLearner.id, text: 'On reprend ensemble cette semaine ?', alertId: followed.alert.id });
+assert.equal(relance.alertId, followed.alert.id);
+assert.ok((await api('/tracking/messages', lateLearner.token)).some((message) => message.id === relance.id), 'L’élève voit l’encouragement');
+const lateSession = `/learning/sessions/${lateLearner.firstSession}`;
+const lateDetail = await api(lateSession, lateLearner.token);
+for (const activity of lateDetail.activities) {
+  const progressPath = `${lateSession}/activities/${activity.id}/progress`;
+  if (activity.kind === 'exercise') {
+    const answers = Object.fromEntries(activity.questions.map((question) => [question.id, question.options[0].id]));
+    await put(progressPath, lateLearner.token, { state: { answers } });
+    const grade = await api('/assessments/quiz', lateLearner.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+      body: { lessonId: activity.lesson.id, answers, sessionId: lateLearner.firstSession, activityId: activity.id } });
+    await put(progressPath, lateLearner.token, { completed: true, attemptId: grade.id });
+  } else if (activity.kind !== 'assessment') {
+    await put(progressPath, lateLearner.token, { completed: true });
+  }
+}
+const closingRun = await runJob();
+assert.ok(closingRun.closed >= 1);
+followed = await trackingOf(lateLearner.id);
+assert.equal(followed.alert, null, 'L’alerte se clôt quand le retard est rattrapé');
+assert.equal(followed.lateSessions, 0);
+assert.equal(followed.sessionsCompleted, 1);
+assert.ok(followed.lastActivityAt, 'La dernière activité pédagogique est connue');
+const relanceVue = (await api(`/tracking/messages?learnerId=${lateLearner.id}`, teacher.token)).find((message) => message.id === relance.id);
+assert.ok(relanceVue.resumedAt, 'La reprise après encouragement est enregistrée');
+const sheet = await api(`/tracking/learners/${lateLearner.id}`, teacher.token);
+assert.equal(sheet.tracking.alerts[0].status, 'closed');
+assert.ok(sheet.tracking.alerts[0].encouragedAt);
+assert.ok(sheet.tracking.sessions.length > 1);
+assert.ok(sheet.freshness.syncedAt, 'La fiche indique la fraîcheur du suivi');
+
+// Un événement arrivé tard ne remplace pas un état plus récent.
+localSql(local.container, `insert into learning.outbox_events (id, type, occurred_at, subject_kind, subject_id, learner_id, data)
+  values (gen_random_uuid(), 'learning.goal_status_changed', now() - interval '1 day', 'goal', '${lateLearner.enrollmentId}',
+          '${lateLearner.id}', '{"enrollmentId": "${lateLearner.enrollmentId}", "goalStatus": "to_consolidate"}');`);
+assert.equal((await runJob()).imported, 1);
+assert.equal((await trackingOf(lateLearner.id)).goalStatus, 'active', 'L’état le plus récent reste en place');
+
+// Parcours mis en pause : l'alerte est suspendue, sans relance.
+const pausedLearner = await followLearner('suivi-pause');
+await runJob();
+makeLate(pausedLearner);
+await runJob();
+assert.equal((await trackingOf(pausedLearner.id)).alert.status, 'open');
+await post(goalPath(pausedLearner.enrollmentId, 'pause'), teacher.token, {});
+await runJob();
+const pausedTracking = await trackingOf(pausedLearner.id);
+assert.equal(pausedTracking.goalStatus, 'paused');
+assert.equal(pausedTracking.alert.status, 'suspended', 'L’alerte est suspendue pendant la pause');
+
+// Reprise après coupure et reconstruction : relire depuis le début ne double rien ; la projection se reconstruit.
+localSql(local.container, "update tracking.checkpoints set last_sequence = 0 where producer = 'learning';");
+assert.equal((await runJob()).imported, 0, 'Les événements déjà traités sont dédupliqués par identifiant');
+assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')));
+const rebuilt = await runJob('rebuild');
+assert.equal(rebuilt.imported, Number(localQuery(local.container, 'select count(*) from tracking.event_log;')));
+const afterRebuild = await trackingOf(lateLearner.id);
+assert.equal(afterRebuild.sessionsCompleted, 1);
+assert.equal(afterRebuild.goalStatus, 'active');
+assert.equal(afterRebuild.alert, null);
+assert.equal((await trackingOf(pausedLearner.id)).alert.status, 'suspended');
+assert.ok((await api(`/tracking/messages?learnerId=${lateLearner.id}`, teacher.token)).find((message) => message.id === relance.id).resumedAt,
+  'La reconstruction retrouve la reprise après encouragement');
+await api('/tracking/overview', staffToken, { status: 403 });
+console.log('Recette du suivi réussie · import par lots avec point de reprise, déduplication, retard et alerte, second contrôle '
+  + 'sans doublon, relance liée à l’alerte, reprise puis clôture, événement tardif, pause suspendant l’alerte, reconstruction.');
 
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
