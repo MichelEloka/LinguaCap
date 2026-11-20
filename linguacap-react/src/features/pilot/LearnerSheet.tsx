@@ -3,6 +3,7 @@ import { Badge, Dialog, EmptyState } from '../../components/ui';
 import { requestApi } from '../../integration/api';
 import { formatDue, sessionStatus, type Grade } from './LearnerSession';
 import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
+import type { TrackingAlert, TrackingSummary } from './StaffPilot';
 
 interface Track {
   versionId: string;
@@ -21,8 +22,14 @@ interface Sheet {
   goal: { level: string; targetDate: string } | null;
   results: Grade[];
   completedCount: number;
-  messages: { id: string; text: string; sentAt: string }[];
+  messages: { id: string; text: string; sentAt: string; resumedAt?: string | null; alertId?: string | null }[];
+  tracking?: TrackingSummary & { alerts?: TrackingAlert[] };
 }
+
+const competenceNames: Record<string, string> = {
+  lecture: 'Lecture', ecoute: 'Écoute', 'expression-ecrite': 'Expression écrite', 'expression-orale': 'Expression orale',
+};
+const alertStatus = { open: 'Ouverte', suspended: 'Suspendue (pause)', closed: 'Close' } as const;
 
 const dateFormat = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' });
 
@@ -158,6 +165,39 @@ export function LearnerSheetDialog({ learnerId, name, token, onClose }: {
           {(!enrollment || enrollment.status !== 'active') && (
             <AssignTrack learnerId={learnerId} token={token} onAssigned={() => setReload((value) => value + 1)} />
           )}
+          {sheet.tracking?.enrollmentId && (
+            <section className="stack" aria-labelledby="sheet-tracking">
+              <h3 id="sheet-tracking">Suivi</h3>
+              <dl className="goal-facts">
+                <div><dt>Temps de pratique estimé</dt><dd>{sheet.tracking.practiceMinutes ?? 0} min</dd></div>
+                <div><dt>Dernière activité</dt><dd>{sheet.tracking.lastActivityAt ? dateFormat.format(new Date(sheet.tracking.lastActivityAt)) : 'Aucune'}</dd></div>
+                <div><dt>Séances terminées</dt><dd>{sheet.tracking.sessionsCompleted ?? 0} dont {sheet.tracking.sessionsOnTime ?? 0} à temps</dd></div>
+                <div><dt>Retard</dt><dd>{sheet.tracking.lateSessions ? `${sheet.tracking.lateSessions} séance(s)` : 'À jour'}</dd></div>
+                <div><dt>Corrections en attente</dt><dd>{sheet.tracking.pendingGrading ?? 0}</dd></div>
+              </dl>
+              {Object.entries(sheet.tracking.results ?? {}).map(([kind, result]) => (
+                <div key={kind} className="stack">
+                  <strong>{kind === 'final' ? 'Examen blanc' : 'Bilan intermédiaire'} · {result.percent} %{result.onTime ? ' · remis à temps' : ''}</strong>
+                  <ul className="accounts-history">
+                    {Object.entries(result.scores ?? {}).map(([competence, score]) => (
+                      <li key={competence}><strong>{competenceNames[competence] ?? competence}</strong><span>{score.percent} %</span></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+              {(sheet.tracking.alerts ?? []).length > 0 && (
+                <>
+                  <h4>Alertes</h4>
+                  <ul className="accounts-history">
+                    {(sheet.tracking.alerts ?? []).map((alert) => (
+                      <li key={alert.id}><strong>{alertStatus[alert.status]} · {alert.reason}</strong>
+                        <span>Ouverte le {dateFormat.format(new Date(alert.openedAt))}{alert.closedAt ? ` · close le ${dateFormat.format(new Date(alert.closedAt))}` : ''}</span></li>
+                    ))}
+                  </ul>
+                </>
+              )}
+            </section>
+          )}
           <h3>Résultats</h3>
           {sheet.results.length === 0 ? <p className="muted">Aucun exercice remis.</p> : (
             <ul className="accounts-history">
@@ -169,7 +209,8 @@ export function LearnerSheetDialog({ learnerId, name, token, onClose }: {
           <h3>Encouragements</h3>
           {sheet.messages.length === 0 ? <p className="muted">Aucun encouragement envoyé.</p> : (
             <ul className="accounts-history">
-              {sheet.messages.map((message) => <li key={message.id}><strong>{message.text}</strong><span>{dateFormat.format(new Date(message.sentAt))}</span></li>)}
+              {sheet.messages.map((message) => <li key={message.id}><strong>{message.text}</strong><span>{dateFormat.format(new Date(message.sentAt))}
+                {message.resumedAt ? ` · reprise le ${dateFormat.format(new Date(message.resumedAt))}` : ''}</span></li>)}
             </ul>
           )}
         </div>
