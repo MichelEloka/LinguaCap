@@ -134,11 +134,11 @@ La préparation des contenus A1 et A2 peut commencer en parallèle dès que la s
 
 La rédaction et la validation pédagogique fournissent les leçons, audios, exercices et grilles. Les tâches ci-dessous couvrent leur intégration dans LinguaCap.
 
-- [ ] DEV-093 Intégrer dans le catalogue les modules, médias, diagnostics, bilans et examens blancs A1 et A2. Renseigner les compétences, les prérequis et les durées.
-- [ ] DEV-094 Vérifier les images, l’audio, les textes alternatifs et les transcriptions selon l’usage. Contrôler les corrigés et la couverture des quatre compétences. Corriger les écarts de lecture, d’ordre ou de configuration.
-- [ ] DEV-095 Publier les versions initiales A1 et A2 en recette. Vérifier que les deux niveaux apparaissent dans l’attribution et que l’entrée en A2 applique le prérequis A1.
-- [ ] DEV-096 Exécuter la recette d’un A1 intensif accompagné, avec plusieurs séances par jour et une replanification, puis d’un A2 autonome, de l’attribution jusqu’à la correction.
-- [ ] DEV-097 Corriger les blocages trouvés sur les parcours complets et rejouer les scénarios concernés.
+- [x] DEV-093 Intégrer dans le catalogue les modules, médias, diagnostics, bilans et examens blancs A1 et A2. Renseigner les compétences, les prérequis et les durées.
+- [x] DEV-094 Vérifier les images, l’audio, les textes alternatifs et les transcriptions selon l’usage. Contrôler les corrigés et la couverture des quatre compétences. Corriger les écarts de lecture, d’ordre ou de configuration.
+- [x] DEV-095 Publier les versions initiales A1 et A2 en recette. Vérifier que les deux niveaux apparaissent dans l’attribution et que l’entrée en A2 applique le prérequis A1.
+- [x] DEV-096 Exécuter la recette d’un A1 intensif accompagné, avec plusieurs séances par jour et une replanification, puis d’un A2 autonome, de l’attribution jusqu’à la correction.
+- [x] DEV-097 Corriger les blocages trouvés sur les parcours complets et rejouer les scénarios concernés.
 
 ## Incrément 10 · Déployer et vérifier le MVP en ligne
 
