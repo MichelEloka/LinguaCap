@@ -1075,7 +1075,7 @@ if (process.argv.includes('--browser')) {
     await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette prof' })).toBeVisible();
     await adminPage.keyboard.press('Escape');
     await adminPage.goto('http://127.0.0.1:5186/espace/indicateurs');
-    await expect(adminPage.getByText('Objectifs validés à l’échéance')).toBeVisible({ timeout: 15_000 });
+    await expect(adminPage.getByText('Objectifs validés à l’échéance', { exact: true })).toBeVisible({ timeout: 15_000 });
     await expect(adminPage.getByRole('heading', { name: /Élèves actifs par semaine/ })).toBeVisible();
     await adminPage.goto('http://127.0.0.1:5186/espace/invitations');
     await expect(adminPage.getByRole('row', { name: new RegExp(expiredEmail) })).toBeVisible();
