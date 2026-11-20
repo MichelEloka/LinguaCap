@@ -1,0 +1,165 @@
+name: Déploiement production
+
+on:
+  push:
+    branches: [production]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: linguacap-production
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    name: Détecter les changements à publier
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      actions: read
+      contents: read
+    outputs:
+      services: ${{ steps.plan.outputs.services }}
+      frontend: ${{ steps.plan.outputs.frontend }}
+      database: ${{ steps.plan.outputs.database }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INITIAL_BASELINE: ${{ vars.PRODUCTION_BASELINE_SHA }}
+        shell: bash
+        run: |
+          baseline=$(gh api "repos/$GITHUB_REPOSITORY/actions/workflows/deploy-production.yml/runs?branch=production&status=success&event=push&per_page=20" \
+            --jq ".workflow_runs | map(select(.run_number < $GITHUB_RUN_NUMBER)) | first | .head_sha // empty")
+          baseline=${baseline:-$INITIAL_BASELINE}
+          echo "Comparaison avec la dernière publication réussie : ${baseline:-initialisation complète}"
+          node infra/ci/plan-deploy.mjs --base "$baseline" --head "$GITHUB_SHA" | tee -a "$GITHUB_OUTPUT"
+
+  quality:
+    name: Qualifier la publication
+    needs: plan
+    if: needs.plan.outputs.services != '[]' || needs.plan.outputs.frontend == 'true' || needs.plan.outputs.database == 'true'
+    uses: ./.github/workflows/ci.yml
+
+  database:
+    name: Appliquer les migrations Supabase
+    needs: [plan, quality]
+    if: needs.plan.outputs.database == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - env:
+          SUPABASE_DATABASE_URL: ${{ secrets.SUPABASE_DATABASE_URL }}
+        shell: bash
+        run: |
+          if [[ -z "$SUPABASE_DATABASE_URL" ]]; then
+            echo "::error::Le secret Supabase de l'environnement production est absent."
+            exit 1
+          fi
+          export PGSSLROOTCERT="$PWD/infra/ci/supabase-prod-ca.pem"
+          separator='?'
+          [[ "$SUPABASE_DATABASE_URL" == *\?* ]] && separator='&'
+          connection="${SUPABASE_DATABASE_URL}${separator}sslmode=verify-full&sslrootcert=$PGSSLROOTCERT"
+          echo "::add-mask::$connection"
+          # Les données fictives de supabase/seed.sql ne sont jamais envoyées : pas de --include-seed.
+          npx --yes supabase@3.2.0 db push --yes --db-url "$connection"
+          psql -X -v ON_ERROR_STOP=1 --dbname="$connection" --file=infra/pilot/db-grants.sql
+          psql -X -v ON_ERROR_STOP=1 --dbname="$connection" --file=infra/pilot/db-isolation.sql
+
+  backend:
+    name: Publier les services Quarkus modifiés
+    needs: [plan, quality, database]
+    if: >-
+      ${{ !cancelled() && needs.quality.result == 'success' &&
+          (needs.database.result == 'success' || needs.database.result == 'skipped') &&
+          needs.plan.outputs.services != '[]' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production
+    permissions:
+      contents: read
+      id-token: write
+    env:
+      GOOGLE_CLOUD_PROJECT: linguacap-prod-dvfjor
+      REGION: europe-west1
+      DEPLOYER_SERVICE_ACCOUNT: github-deployer@linguacap-prod-dvfjor.iam.gserviceaccount.com
+      GIT_SHA: ${{ github.sha }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version-file: .java-version
+          cache: maven
+          cache-dependency-path: 'services/**/pom.xml'
+      - uses: docker/setup-buildx-action@v4
+      - uses: google-github-actions/auth@v3
+        with:
+          workload_identity_provider: projects/111036479041/locations/global/workloadIdentityPools/linguacap-github/providers/github-production
+          service_account: github-deployer@linguacap-prod-dvfjor.iam.gserviceaccount.com
+      - uses: google-github-actions/setup-gcloud@v3
+      - env:
+          SERVICES: ${{ needs.plan.outputs.services }}
+        shell: bash
+        run: |
+          mapfile -t targets < <(jq -r '.[]' <<< "$SERVICES")
+          for target in "${targets[@]}"; do
+            SERVICE="$target" bash infra/ci/deploy-service.sh
+          done
+
+  frontend:
+    name: Publier le Worker et le frontend
+    needs: [plan, quality, database, backend]
+    if: >-
+      ${{ !cancelled() && needs.quality.result == 'success' &&
+          (needs.database.result == 'success' || needs.database.result == 'skipped') &&
+          (needs.backend.result == 'success' || needs.backend.result == 'skipped') &&
+          needs.plan.outputs.frontend == 'true' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment: production
+    defaults:
+      run:
+        working-directory: linguacap-react
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: linguacap-react/package-lock.json
+      - run: npm ci
+      - run: npm run build:integration
+        env:
+          VITE_SUPABASE_URL: https://dvfjorbapyxsitbvnoww.supabase.co
+          VITE_SUPABASE_PUBLISHABLE_KEY: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}
+      - env:
+          CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+        shell: bash
+        run: |
+          if [[ -z "$CLOUDFLARE_API_TOKEN" || -z "$CLOUDFLARE_ACCOUNT_ID" ]]; then
+            echo "::error::Les accès Cloudflare de l'environnement production sont requis."
+            exit 1
+          fi
+          npx --yes wrangler@4.165.0 deploy --config ../workers/web-proxy/wrangler.jsonc --keep-vars
+          curl --fail --silent --show-error --retry 4 --retry-all-errors --max-time 16 \
+            https://linguacap.emichfer.org/connexion > /dev/null
+          curl --fail --silent --show-error --retry 4 --retry-all-errors --max-time 16 \
+            https://linguacap.emichfer.org/api/v1/health | jq -e '.status == "ok"'

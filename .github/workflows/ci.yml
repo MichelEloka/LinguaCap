@@ -1,8 +1,11 @@
 name: CI
 
+# Exécutée sur develop et sur les pull requests, et réutilisée par le déploiement de production
+# pour qualifier le commit livré. Les trois jobs sont requis avant d'avancer la branche production.
 on:
+  workflow_call:
   push:
-    branches: [develop, production]
+    branches: [develop]
   pull_request:
     branches: [develop, production]
 
@@ -23,19 +26,21 @@ jobs:
           persist-credentials: false
       - uses: actions/setup-node@v7
         with:
-          node-version: '24'
+          node-version-file: .nvmrc
           cache: npm
           cache-dependency-path: linguacap-react/package-lock.json
       - run: npm ci
+      # build et build:integration lancent d'abord la vérification TypeScript (site et proxy).
       - run: npm run build
       - run: npm run build:integration
       - run: npx playwright install --with-deps chromium
+      # Parcours de l'interface, proxy Cloudflare et respect de contracts/openapi.json.
       - run: npm run test:e2e
 
   backend:
     name: Passerelle et services Quarkus
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
@@ -43,7 +48,61 @@ jobs:
       - uses: actions/setup-java@v5
         with:
           distribution: temurin
-          java-version: '21'
+          java-version-file: .java-version
           cache: maven
           cache-dependency-path: 'services/**/pom.xml'
-      - run: mvn -B -ntp -f services/pom.xml verify
+      - name: Compiler et tester les services
+        working-directory: services
+        run: ./mvnw -B -ntp verify
+      - name: Démarrer l'image JVM de la passerelle
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          docker build --file services/Dockerfile --tag linguacap-gateway:ci \
+            services/api-gateway/target/quarkus-app
+          docker run --detach --name gateway --publish 127.0.0.1:8080:8080 \
+            --env LINGUACAP_CLOUD_RUN=true --env API_ORIGIN_SECRET=secret-de-ci \
+            linguacap-gateway:ci
+          cleanup() {
+            local status=$?
+            if ((status != 0)); then docker logs gateway 2>&1 | tail -n 80; fi
+            docker rm --force gateway > /dev/null
+            exit "$status"
+          }
+          trap cleanup EXIT
+
+          for attempt in {1..30}; do
+            if curl --fail --silent --max-time 2 http://127.0.0.1:8080/q/health/ready \
+                | jq --exit-status '.status == "UP"' > /dev/null; then
+              break
+            fi
+            if ((attempt == 30)); then
+              echo "::error::L'image de la passerelle n'est pas prête après 30 secondes."
+              exit 1
+            fi
+            sleep 1
+          done
+
+          status=$(curl --silent --output /dev/null --write-out '%{http_code}' http://127.0.0.1:8080/api/v1/health)
+          [[ "$status" == 403 ]] || { echo "::error::Sans secret de liaison, la passerelle répond $status au lieu de 403."; exit 1; }
+          curl --fail --silent --header 'X-Linguacap-Origin: secret-de-ci' http://127.0.0.1:8080/api/v1/health \
+            | jq --exit-status '.status == "degraded"'
+          echo "Image de la passerelle démarrée : santé Cloud Run, secret de liaison et format JSON vérifiés."
+
+  delivery:
+    name: Outils de livraison
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+      - name: Tester la sélection des cibles à déployer
+        run: node --test infra/ci/plan-deploy.test.mjs
+      - name: Analyser le script de déploiement
+        run: shellcheck infra/ci/deploy-service.sh
+      - name: Valider les workflows GitHub Actions
+        run: docker run --rm --volume "$PWD:/repo" --workdir /repo rhysd/actionlint:1.7.7 -color

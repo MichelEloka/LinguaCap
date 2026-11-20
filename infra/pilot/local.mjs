@@ -7,9 +7,13 @@ export const businessServices = ['identity', 'catalogue', 'media', 'learning', '
 
 export function localSupabase() {
   const options = { cwd: root, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] };
-  const status = process.platform === 'win32'
-    ? execFileSync('cmd.exe', ['/d', '/s', '/c', 'npx --yes supabase status -o env'], options)
-    : execFileSync('npx', ['--yes', 'supabase', 'status', '-o', 'env'], options);
+  const installedCli = process.env.LINGUACAP_SUPABASE_CLI;
+  const statusArgs = ['status', '-o', 'env'];
+  const status = installedCli
+    ? execFileSync(installedCli, statusArgs, options)
+    : process.platform === 'win32'
+      ? execFileSync('cmd.exe', ['/d', '/s', '/c', 'npx --yes supabase status -o env'], options)
+      : execFileSync('npx', ['--yes', 'supabase', ...statusArgs], options);
   const env = Object.fromEntries([...status.matchAll(/^([A-Z_]+)="?([^"\r\n]+)"?\r?$/gm)]
     .map(([, key, value]) => [key, value]));
   const api = new URL(env.API_URL);

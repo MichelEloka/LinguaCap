@@ -1,0 +1,96 @@
+name: Recette éphémère
+
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: recette-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  pilote:
+    name: Pilote avec Supabase local et navigateur
+    if: github.ref == 'refs/heads/develop'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    env:
+      LINGUACAP_SUPABASE_CLI: supabase
+      SUPABASE_TELEMETRY_DISABLED: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+          cache-dependency-path: linguacap-react/package-lock.json
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version-file: .java-version
+          cache: maven
+          cache-dependency-path: 'services/**/pom.xml'
+      - uses: supabase/setup-cli@v3
+        with:
+          version: '3.2.0'
+
+      - name: Préparer les composants et Chromium
+        run: |
+          npm ci --prefix linguacap-react
+          services/mvnw -B -ntp -f services/pom.xml package -DskipTests
+          npm exec --prefix linguacap-react -- playwright install --with-deps chromium
+
+      - name: Démarrer Supabase local avec les migrations et les données fictives
+        id: local_stack
+        run: |
+          supabase start -x studio,imgproxy,edge-runtime,realtime,logflare,vector,supavisor > /dev/null
+          supabase migration up
+
+      - name: Vérifier le parcours du pilote, les droits et l'isolation SQL
+        shell: bash
+        run: |
+          set -Eeuo pipefail
+          pilot_log="$RUNNER_TEMP/linguacap-pilot.log"
+          node infra/pilot/run-local.mjs > "$pilot_log" 2>&1 &
+          pilot_pid=$!
+          cleanup() {
+            status=$?
+            trap - EXIT
+            kill "$pilot_pid" 2>/dev/null || true
+            wait "$pilot_pid" 2>/dev/null || true
+            if ((status != 0)); then
+              tail -n 120 "$pilot_log"
+            fi
+            exit "$status"
+          }
+          trap cleanup EXIT
+
+          ready=0
+          for _ in {1..90}; do
+            if ! kill -0 "$pilot_pid" 2>/dev/null; then
+              echo "Le lanceur du pilote s’est arrêté." >&2
+              exit 1
+            fi
+            if curl --fail --silent --max-time 3 http://127.0.0.1:8080/api/v1/health |
+                jq --exit-status '.status == "ok"' > /dev/null &&
+                curl --fail --silent --max-time 3 http://127.0.0.1:5186/connexion > /dev/null; then
+              ready=1
+              break
+            fi
+            sleep 1
+          done
+          if ((ready == 0)); then
+            echo "Le pilote n’a pas démarré avant le délai de recette." >&2
+            exit 1
+          fi
+          node infra/pilot/smoke.mjs --browser
+
+      - name: Arrêter les conteneurs de recette
+        if: ${{ always() && steps.local_stack.outcome != 'skipped' }}
+        run: supabase stop --no-backup
