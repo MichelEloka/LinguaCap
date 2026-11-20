@@ -20,6 +20,10 @@ public class Gateway {
     private static final String SLUG = "[a-z0-9][a-z0-9-]{0,79}";
     private static final String UUID_PATH = "[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}";
     private static final String LEVEL = "[abc][12]";
+    /** Filtres acceptés par le tableau de bord des indicateurs, chacun avec sa forme stricte. */
+    private static final Map<String, String> KPI_FILTERS = Map.of("from", "\\d{4}-\\d{2}-\\d{2}", "to", "\\d{4}-\\d{2}-\\d{2}",
+            "startLevel", "A0|[ABC][12]", "level", "[ABC][12]", "template", "standard|intensive|custom",
+            "kind", "accompanied|autonomous");
     private static final UUID HEALTH_ACTOR = new UUID(0, 0);
 
     @Inject ServiceClient services;
@@ -73,7 +77,17 @@ public class Gateway {
         }
         String learnerQuery = "";
         var params = uri.getQueryParameters();
-        if (!params.isEmpty()) {
+        if (!params.isEmpty() && method.equals("GET") && path.equals("tracking/kpis")) {
+            StringBuilder filters = new StringBuilder();
+            for (var entry : params.entrySet()) {
+                String pattern = KPI_FILTERS.get(entry.getKey());
+                if (pattern == null || entry.getValue().size() != 1 || !entry.getValue().get(0).matches(pattern)) {
+                    throw HttpError.badRequest("Filtre d’indicateur invalide.");
+                }
+                filters.append(filters.isEmpty() ? "?" : "&").append(entry.getKey()).append('=').append(entry.getValue().get(0));
+            }
+            learnerQuery = filters.toString();
+        } else if (!params.isEmpty()) {
             // Seuls learnerId (lectures d'un élève) et enrollmentId (tentatives d'un parcours) sont relayés.
             String name = path.equals("assessments/exams") ? "enrollmentId" : "learnerId";
             String value = params.getFirst(name);
@@ -108,7 +122,7 @@ public class Gateway {
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal|diagnostic)")) return learning;
             if (path.equals("assessments/results") || path.equals("assessments/grading") || path.equals("assessments/exams")
                     || path.matches("assessments/exams/" + UUID_PATH)) return assessment;
-            if (path.equals("tracking/overview") || path.equals("tracking/messages")
+            if (path.equals("tracking/overview") || path.equals("tracking/messages") || path.equals("tracking/kpis")
                     || path.matches("tracking/learners/" + UUID_PATH)) return tracking;
         }
         if (method.equals("POST")) {

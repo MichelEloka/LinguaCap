@@ -200,7 +200,7 @@ class TrackingSync {
                             insert into tracking.sessions (session_id, enrollment_id, learner_id, revision, due_at, completed_at, milestone)
                             values (?, ?, ?, ?, ?, ?, ?)
                             on conflict (session_id) do update set due_at = excluded.due_at, revision = excluded.revision,
-                                milestone = excluded.milestone, superseded = false,
+                                milestone = excluded.milestone, superseded = false, superseded_at = null,
                                 completed_at = coalesce(tracking.sessions.completed_at, excluded.completed_at)
                             """)) {
                         upsert.setObject(1, sessionId);
@@ -214,12 +214,13 @@ class TrackingSync {
                     }
                 }
                 try (var supersede = connection.prepareStatement("""
-                        update tracking.sessions set superseded = true
+                        update tracking.sessions set superseded = true, superseded_at = coalesce(superseded_at, ?)
                         where enrollment_id = ? and completed_at is null and revision < ? and not (session_id = any(?))
                         """)) {
-                    supersede.setObject(1, enrollmentId);
-                    supersede.setInt(2, data.path("revision").asInt());
-                    supersede.setArray(3, connection.createArrayOf("uuid", ids.toArray()));
+                    supersede.setObject(1, event.occurredAt());
+                    supersede.setObject(2, enrollmentId);
+                    supersede.setInt(3, data.path("revision").asInt());
+                    supersede.setArray(4, connection.createArrayOf("uuid", ids.toArray()));
                     supersede.executeUpdate();
                 }
                 status(connection, enrollmentId, "active", event.occurredAt(), date(data.path("targetDate")), null);

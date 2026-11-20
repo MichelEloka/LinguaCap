@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.6.0",
+    "version": "1.7.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -2709,6 +2709,53 @@
           }
         }
       }
+    },
+    "/tracking/kpis": {
+      "get": {
+        "operationId": "getKpis",
+        "summary": "Indicateurs du tableau de bord administrateur",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/KpiFrom"
+          },
+          {
+            "$ref": "#/components/parameters/KpiTo"
+          },
+          {
+            "$ref": "#/components/parameters/KpiStartLevel"
+          },
+          {
+            "$ref": "#/components/parameters/KpiLevel"
+          },
+          {
+            "$ref": "#/components/parameters/KpiTemplate"
+          },
+          {
+            "$ref": "#/components/parameters/KpiKind"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Indicateurs",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/KpiDashboard"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2886,6 +2933,72 @@
         "schema": {
           "$ref": "#/components/schemas/Uuid"
         }
+      },
+      "KpiFrom": {
+        "name": "from",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date"
+        },
+        "description": "Début de période (30 jours avant la fin par défaut)."
+      },
+      "KpiTo": {
+        "name": "to",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "format": "date"
+        },
+        "description": "Fin de période (aujourd’hui par défaut)."
+      },
+      "KpiStartLevel": {
+        "name": "startLevel",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "pattern": "^(A0|[ABC][12])$"
+        },
+        "description": "Niveau de départ."
+      },
+      "KpiLevel": {
+        "name": "level",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "$ref": "#/components/schemas/LevelCode"
+        },
+        "description": "Niveau cible."
+      },
+      "KpiTemplate": {
+        "name": "template",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "standard",
+            "intensive",
+            "custom"
+          ]
+        },
+        "description": "Cadence."
+      },
+      "KpiKind": {
+        "name": "kind",
+        "in": "query",
+        "required": false,
+        "schema": {
+          "type": "string",
+          "enum": [
+            "accompanied",
+            "autonomous"
+          ]
+        },
+        "description": "Parcours accompagnés ou autonomes."
       }
     },
     "responses": {
@@ -6811,6 +6924,117 @@
               "string",
               "null"
             ]
+          }
+        }
+      },
+      "Rate": {
+        "type": "object",
+        "required": [
+          "numerator",
+          "denominator"
+        ],
+        "properties": {
+          "numerator": {
+            "type": "integer"
+          },
+          "denominator": {
+            "type": "integer"
+          },
+          "rate": {
+            "type": [
+              "number",
+              "null"
+            ],
+            "description": "Pourcentage à une décimale ; null pour un groupe vide."
+          }
+        }
+      },
+      "KpiDashboard": {
+        "type": "object",
+        "required": [
+          "activation",
+          "activeLearners",
+          "activeLearnersTotal",
+          "sessionsOnTime",
+          "goalsValidated",
+          "goalsAwaitingGrading",
+          "progression",
+          "resumption",
+          "goals",
+          "filters",
+          "freshness"
+        ],
+        "properties": {
+          "activation": {
+            "$ref": "#/components/schemas/Rate",
+            "description": "Invitations dont la fenêtre de sept jours est écoulée ; réussite : première séance terminée dans la fenêtre. Une réémission compte avec son invitation d’origine."
+          },
+          "activeLearners": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "weekStart": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "learners": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "activeLearnersTotal": {
+            "type": "integer"
+          },
+          "sessionsOnTime": {
+            "$ref": "#/components/schemas/Rate",
+            "description": "Séances échues dans la période ; une replanification avant l’échéance remplace la date, un retard constaté reste."
+          },
+          "goalsValidated": {
+            "$ref": "#/components/schemas/Rate",
+            "description": "Indicateur principal : parcours dont la date cible initiale tombe dans la période, validés par une tentative remise au plus tard à cette date."
+          },
+          "goalsAwaitingGrading": {
+            "type": "integer",
+            "description": "Tentatives remises à temps encore en attente de correction."
+          },
+          "progression": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "competence": {
+                  "type": "string"
+                },
+                "learners": {
+                  "type": "integer"
+                },
+                "midterm": {
+                  "type": "number"
+                },
+                "fin": {
+                  "type": "number"
+                },
+                "delta": {
+                  "type": "number"
+                }
+              }
+            }
+          },
+          "resumption": {
+            "$ref": "#/components/schemas/Rate",
+            "description": "Relances pour un retard dont la fenêtre de sept jours est écoulée ; réussite : activité dans ces sept jours."
+          },
+          "goals": {
+            "type": "integer",
+            "description": "Parcours retenus par les filtres."
+          },
+          "filters": {
+            "type": "object"
+          },
+          "freshness": {
+            "$ref": "#/components/schemas/Freshness"
           }
         }
       }
