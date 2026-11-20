@@ -38,6 +38,17 @@ Avancer `production` sur un commit de `develop` dont la CI est verte, par exempl
 
 Le workflow s’authentifie auprès de Google Cloud par fédération d’identité, sans clé stockée, avec le compte `github-deployer`. Il lit dans l’environnement GitHub `production` les secrets `SUPABASE_DATABASE_URL` et `CLOUDFLARE_API_TOKEN` et les variables `SUPABASE_PUBLISHABLE_KEY` et `CLOUDFLARE_ACCOUNT_ID`.
 
+Droits de `github-deployer`, à recréer si le projet Google Cloud est reconstruit :
+
+| Rôle | Portée | Usage |
+| --- | --- | --- |
+| `roles/iam.workloadIdentityUser` | le compte lui-même, pour le pool `linguacap-github` | Connexion depuis le workflow `deploy-production.yml` de la branche `production` |
+| `roles/run.developer` | projet | Lire et mettre à jour les services, créer les révisions et déplacer le trafic |
+| `roles/artifactregistry.writer` | dépôt `linguacap` | Publier les images |
+| `roles/iam.serviceAccountUser` | les 7 comptes d’exécution `linguacap-*` | Déployer une révision avec son compte d’exécution |
+| `roles/run.invoker` | les 6 services privés | Appeler la sonde de santé avant la promotion |
+| `roles/iam.serviceAccountTokenCreator` | le compte lui-même | Obtenir le jeton OIDC de la sonde (`gcloud auth print-identity-token --impersonate-service-account`) |
+
 ## Première mise en ligne (manuelle)
 
 Ces étapes ont servi au premier déploiement et restent utiles pour recréer l’infrastructure.
