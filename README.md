@@ -89,5 +89,6 @@ Le détail des étapes, des secrets GitHub et des droits Google Cloud se trouve 
 
 - **Incrément 1 · Socle** : terminé. Interface TypeScript, sept services Quarkus, migrations et rôles SQL par service, contrats d’API, CI et livraison automatisée.
 - **Incrément 2 · Comptes et protection des données** : terminé. Invitations avec expiration, renvoi et annulation, premier administrateur, rôle Équipe et permissions Catalogue et Correction, correcteur désigné, réaffectation avec historique, désactivation et traces pour Suivi.
+- **Incrément 3 · Première séance A1 de bout en bout** : terminé. Catalogue versionné (langue, niveau, version, modules, activités, compétences, durées), médias versionnés, attribution d’un parcours avec échéance, accueil élève et séance avec visuel, audio et transcription, progression reprise et fin idempotente, exercice corrigé rattaché à sa séance, fiche de suivi du professeur.
 
 Les incréments suivants sont décrits dans le [backlog](PLAN_FONCTIONNALITES.md).

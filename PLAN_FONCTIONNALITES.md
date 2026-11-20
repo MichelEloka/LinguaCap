@@ -39,15 +39,15 @@ Travailler sur `develop` dans l’ordre des incréments. Le [cahier des charges]
 
 ## Incrément 3 · Livrer une première séance A1 de bout en bout
 
-- [ ] DEV-025 Créer dans Catalogue les langues, niveaux, versions, modules ordonnés, compétences, activités et durées estimées. Exposer la lecture d’une version attribuable par API interne.
-- [ ] DEV-026 Créer dans Médias les ressources et leurs versions. Préparer les espaces privés de stockage pour les supports de cours et les productions orales. Ajouter la lecture autorisée d’un support de cours.
-- [ ] DEV-027 Charger un module A1 de démonstration avec une leçon, une image, un court audio et un exercice fermé. Référencer les versions des médias comme dans le futur catalogue administrable.
-- [ ] DEV-028 Créer dans Apprentissage les parcours attribués et les séances, rattachés à une version précise du catalogue. Créer dans Évaluations les réponses et le résultat du quiz. Vérifier l’attribution et l’accès avant de livrer l’activité.
-- [ ] DEV-029 Ajouter l’attribution manuelle d’un parcours de démonstration par le professeur ou l’admin. Enregistrer une première séance avec une échéance.
-- [ ] DEV-030 Créer l’accueil élève avec la prochaine séance et les séances du jour. Afficher le visuel et son alternative textuelle. Ajouter les commandes de lecture et le lien vers la transcription audio lorsqu’elle peut être fournie.
-- [ ] DEV-031 Enregistrer la progression pour reprendre une activité après fermeture ou rafraîchissement. Horodater la fin et éviter le double comptage si la requête est rejouée.
-- [ ] DEV-032 Corriger le quiz dans Évaluations, enregistrer son résultat et l’afficher à l’élève. Récupérer le corrigé auprès de Catalogue par une route interne réservée au service.
-- [ ] DEV-033 Afficher dans Suivi une première fiche professeur en récupérant la séance et le résultat auprès d’Apprentissage et d’Évaluations. Tester le parcours depuis l’invitation jusqu’à cette fiche.
+- [x] DEV-025 Créer dans Catalogue les langues, niveaux, versions, modules ordonnés, compétences, activités et durées estimées. Exposer la lecture d’une version attribuable par API interne.
+- [x] DEV-026 Créer dans Médias les ressources et leurs versions. Préparer les espaces privés de stockage pour les supports de cours et les productions orales. Ajouter la lecture autorisée d’un support de cours.
+- [x] DEV-027 Charger un module A1 de démonstration avec une leçon, une image, un court audio et un exercice fermé. Référencer les versions des médias comme dans le futur catalogue administrable.
+- [x] DEV-028 Créer dans Apprentissage les parcours attribués et les séances, rattachés à une version précise du catalogue. Créer dans Évaluations les réponses et le résultat du quiz. Vérifier l’attribution et l’accès avant de livrer l’activité.
+- [x] DEV-029 Ajouter l’attribution manuelle d’un parcours de démonstration par le professeur ou l’admin. Enregistrer une première séance avec une échéance.
+- [x] DEV-030 Créer l’accueil élève avec la prochaine séance et les séances du jour. Afficher le visuel et son alternative textuelle. Ajouter les commandes de lecture et le lien vers la transcription audio lorsqu’elle peut être fournie.
+- [x] DEV-031 Enregistrer la progression pour reprendre une activité après fermeture ou rafraîchissement. Horodater la fin et éviter le double comptage si la requête est rejouée.
+- [x] DEV-032 Corriger le quiz dans Évaluations, enregistrer son résultat et l’afficher à l’élève. Récupérer le corrigé auprès de Catalogue par une route interne réservée au service.
+- [x] DEV-033 Afficher dans Suivi une première fiche professeur en récupérant la séance et le résultat auprès d’Apprentissage et d’Évaluations. Tester le parcours depuis l’invitation jusqu’à cette fiche.
 
 ## Incrément 4 · Générer et ajuster le planning personnalisé
 
