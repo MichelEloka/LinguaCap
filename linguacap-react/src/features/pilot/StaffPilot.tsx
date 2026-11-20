@@ -1,9 +1,10 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
-import { CalendarDays, ClipboardCheck, Mail, MessageCircle, Plus, RefreshCw, Target, Users } from 'lucide-react';
+import { CalendarDays, ClipboardCheck, ClipboardList, Mail, MessageCircle, Plus, RefreshCw, Target, Users } from 'lucide-react';
 import { Badge, Dialog, EmptyState, PageHeading, StatCard } from '../../components/ui';
 import { canEditCatalogue, requestApi, type Profile } from '../../integration/api';
 import { InvitationsPanel, InviteDialog, UsersPanel } from './AccountsPilot';
+import { LearnerSheetDialog } from './LearnerSheet';
 import '../teacher/teacher.css';
 import './accounts.css';
 
@@ -77,9 +78,10 @@ function MessageDialog({ learner, token, onClose, onDone }: {
   );
 }
 
-function LearnerTable({ learners, onMessage }: {
+function LearnerTable({ learners, onMessage, onOpen }: {
   learners: LearnerOverview[];
   onMessage?: (learner: LearnerOverview) => void;
+  onOpen: (learner: LearnerOverview) => void;
 }) {
   return (
     <div className="table-wrap teacher-table-wrap">
@@ -90,7 +92,7 @@ function LearnerTable({ learners, onMessage }: {
             <th scope="col">Niveau visé</th>
             <th scope="col">Séances terminées</th>
             <th scope="col">Réponses correctes</th>
-            {onMessage && <th scope="col">Action</th>}
+            <th scope="col">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -103,14 +105,20 @@ function LearnerTable({ learners, onMessage }: {
                 <td>{learner.progress.goal?.level ?? 'À définir'}</td>
                 <td>{learner.progress.completedCount}</td>
                 <td>{total ? `${correct} / ${total}` : 'Aucun résultat'}</td>
-                {onMessage && (
-                  <td>
-                    <button type="button" className="btn btn-outline" onClick={() => onMessage(learner)}
-                      aria-label={`Encourager ${learner.profile.displayName}`}>
-                      <MessageCircle size={17} aria-hidden="true" /> Encourager
+                <td>
+                  <span className="accounts-actions">
+                    <button type="button" className="btn btn-outline" onClick={() => onOpen(learner)}
+                      aria-label={`Voir le suivi de ${learner.profile.displayName}`}>
+                      <ClipboardList size={17} aria-hidden="true" /> Suivi
                     </button>
-                  </td>
-                )}
+                    {onMessage && (
+                      <button type="button" className="btn btn-outline" onClick={() => onMessage(learner)}
+                        aria-label={`Encourager ${learner.profile.displayName}`}>
+                        <MessageCircle size={17} aria-hidden="true" /> Encourager
+                      </button>
+                    )}
+                  </span>
+                </td>
               </tr>
             );
           })}
@@ -261,6 +269,7 @@ function LearnersPanel({ admin, token, onNotice }: { admin: boolean; token: stri
   const [error, setError] = useState('');
   const [refresh, setRefresh] = useState(0);
   const [messageTo, setMessageTo] = useState<LearnerOverview | null>(null);
+  const [sheetFor, setSheetFor] = useState<LearnerOverview | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -292,9 +301,11 @@ function LearnersPanel({ admin, token, onNotice }: { admin: boolean; token: stri
         </div>
         {error ? <p className="inline-message warning" role="alert">{error}</p>
           : learners === null ? <p role="status">Chargement du suivi…</p>
-          : learners.length > 0 ? <LearnerTable learners={learners} onMessage={admin ? undefined : setMessageTo} />
+          : learners.length > 0 ? <LearnerTable learners={learners} onMessage={admin ? undefined : setMessageTo} onOpen={setSheetFor} />
           : <EmptyState title="Aucun élève actif" description="Les élèves apparaîtront ici après avoir activé leur compte." />}
       </section>
+      {sheetFor && <LearnerSheetDialog learnerId={sheetFor.learnerId} name={sheetFor.profile.displayName} token={token}
+        onClose={() => { setSheetFor(null); setRefresh((count) => count + 1); }} />}
       {messageTo && <MessageDialog learner={messageTo} token={token} onClose={() => setMessageTo(null)} onDone={(message) => {
         setMessageTo(null);
         onNotice(message);
