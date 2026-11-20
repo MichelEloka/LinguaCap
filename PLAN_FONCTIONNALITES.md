@@ -120,15 +120,15 @@ La préparation des contenus A1 et A2 peut commencer en parallèle dès que la s
 
 ## Incrément 8 · Mettre en place les KPI administrateur
 
-- [ ] DEV-084 Exposer dans Suivi les indicateurs et la fiche admin fondés sur les projections locales. Protéger les requêtes de statistiques par rôle et afficher la fraîcheur des résultats.
-- [ ] DEV-085 Calculer l’activation à sept jours à partir des invitations dont la fenêtre est écoulée et des premières séances terminées. Compter une réémission avec son invitation d’origine.
-- [ ] DEV-086 Calculer les élèves actifs par semaine à partir d’activités pédagogiques enregistrées.
-- [ ] DEV-087 Calculer les séances terminées à temps. Appliquer l’échéance révisée si le déplacement est décidé avant le délai et conserver les retards déjà constatés.
-- [ ] DEV-088 Calculer les objectifs validés à l’échéance à partir de la date cible initiale et de la date de remise de la tentative réussie. Afficher séparément les tentatives en attente de correction.
-- [ ] DEV-089 Calculer l’évolution entre des bilans comparables pour chaque compétence.
-- [ ] DEV-090 Calculer la reprise après encouragement à partir des relances dont la fenêtre de sept jours est écoulée.
-- [ ] DEV-091 Créer le tableau de bord avec filtres par période, niveau de départ, niveau cible, cadence et type de parcours. Afficher les effectifs et traiter les résultats sur des groupes vides.
-- [ ] DEV-092 Tester les six indicateurs avec des données fictives et des résultats calculés à l’avance. Inclure les réémissions d’invitation, les retards replanifiés et les remises à temps corrigées tardivement.
+- [x] DEV-084 Exposer dans Suivi les indicateurs et la fiche admin fondés sur les projections locales. Protéger les requêtes de statistiques par rôle et afficher la fraîcheur des résultats.
+- [x] DEV-085 Calculer l’activation à sept jours à partir des invitations dont la fenêtre est écoulée et des premières séances terminées. Compter une réémission avec son invitation d’origine.
+- [x] DEV-086 Calculer les élèves actifs par semaine à partir d’activités pédagogiques enregistrées.
+- [x] DEV-087 Calculer les séances terminées à temps. Appliquer l’échéance révisée si le déplacement est décidé avant le délai et conserver les retards déjà constatés.
+- [x] DEV-088 Calculer les objectifs validés à l’échéance à partir de la date cible initiale et de la date de remise de la tentative réussie. Afficher séparément les tentatives en attente de correction.
+- [x] DEV-089 Calculer l’évolution entre des bilans comparables pour chaque compétence.
+- [x] DEV-090 Calculer la reprise après encouragement à partir des relances dont la fenêtre de sept jours est écoulée.
+- [x] DEV-091 Créer le tableau de bord avec filtres par période, niveau de départ, niveau cible, cadence et type de parcours. Afficher les effectifs et traiter les résultats sur des groupes vides.
+- [x] DEV-092 Tester les six indicateurs avec des données fictives et des résultats calculés à l’avance. Inclure les réémissions d’invitation, les retards replanifiés et les remises à temps corrigées tardivement.
 
 ## Incrément 9 · Intégrer les parcours complets A1 et A2
 
