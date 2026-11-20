@@ -126,7 +126,7 @@ const teacher = await createStaff('prof', 'teacher');
 const otherTeacher = await createStaff('tiers', 'teacher');
 assert.equal((await api('/me', admin.token)).role, 'admin');
 const levels = await api('/levels', admin.token);
-assert.ok(levels.some((level) => level.code === 'B1' && level.status === 'draft'));
+assert.ok(levels.some((level) => level.code === 'B1'));
 
 // --- Parcours du pilote -------------------------------------------------------------------------------
 const email = `eleve-${suffix}@example.org`;
@@ -145,12 +145,7 @@ assert.equal(lesson.level, 'A1');
 assert.ok(lesson.questions.every((question) => question.options.every((option) => !('correct' in option))));
 await api('/internal/lessons/commander-au-cafe/answer-key', learnerToken, { status: 404 });
 for (const assetId of lesson.mediaIds) {
-  const asset = await api('/media/' + assetId, learnerToken);
-  assert.equal(new URL(asset.url).origin, local.api);
-  const content = await fetch(asset.url, { signal: AbortSignal.timeout(8_000) });
-  assert.ok(content.ok);
-  assert.equal(content.headers.get('content-type')?.split(';')[0], asset.mimeType);
-  assert.ok((await content.arrayBuffer()).byteLength > 100);
+  await api('/media/' + assetId, learnerToken, { status: 403 });
 }
 
 const goal = {
@@ -342,10 +337,17 @@ assert.ok(illustration.alt.length > 10, 'Le visuel a son alternative textuelle')
 assert.ok(lessonActivity.transcript, 'La transcription de la leçon est disponible à la demande');
 assert.equal(exercise.transcript, null, 'La transcription de l’exercice attend la réponse');
 assert.ok(exercise.questions.every((question) => question.options.every((option) => !('correct' in option))));
-const versioned = await api(`/media/${illustration.assetId}/versions/${illustration.assetVersion}`, autonomousToken);
-assert.equal(versioned.version, illustration.assetVersion);
-assert.ok((await fetch(versioned.url, { signal: AbortSignal.timeout(8_000) })).ok);
-await api(`/media/${illustration.assetId}/versions/9`, autonomousToken, { status: 404 });
+// Les supports arrivent avec la séance, avec une adresse temporaire renouvelée à chaque ouverture.
+assert.equal(new URL(illustration.url).origin, local.api);
+const pictureFile = await fetch(illustration.url, { signal: AbortSignal.timeout(8_000) });
+assert.ok(pictureFile.ok);
+assert.equal(pictureFile.headers.get('content-type')?.split(';')[0], illustration.mimeType);
+assert.ok((await pictureFile.arrayBuffer()).byteLength > 100);
+const audioPlacement = lessonActivity.placements.find((placement) => placement.usage === 'audio');
+assert.ok((await fetch(audioPlacement.url, { signal: AbortSignal.timeout(8_000) })).ok, 'L’audio de la leçon est lisible');
+await api(`/media/${illustration.assetId}/versions/${illustration.assetVersion}`, autonomousToken, { status: 403 });
+assert.notEqual((await api(sessionPath, autonomousToken)).activities[0].placements[0].url, illustration.url,
+  'Rouvrir la séance renouvelle les adresses des supports');
 
 await put(progressPath('quiz-la-commande'), autonomousToken, { state: { answers: { 'cafe-question': 'the' } } });
 detail = await api(sessionPath, autonomousToken);
@@ -502,6 +504,193 @@ assert.equal((await post(goalPath(a1Goal.id, 'proposal/validate'), learnerAuto.t
 console.log('Recette du planning réussie · modèles, charge hebdomadaire, débordement et ajustements, proposition périmée, '
   + 'replanification après retard, pause et reprise, diagnostic, prérequis A2 et validation par le référent ou l’élève autonome.');
 
+// --- Médiathèque et catalogue éditable (incrément 5) ------------------------------------------------
+const png = (base64) => Buffer.from(base64, 'base64');
+const firstPicture = png('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==');
+const secondPicture = png('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+const sendFile = (upload, bytes, type, token) => fetch(upload.uploadUrl, {
+  method: 'POST', body: bytes, signal: AbortSignal.timeout(12_000),
+  headers: { Authorization: `Bearer ${token}`, apikey: local.publishable, 'Content-Type': type, 'x-upsert': 'false' },
+});
+const pictureRequest = (extra = {}) => ({
+  title: 'Bretzel de recette', mimeType: 'image/png', size: firstPicture.length, source: 'Recette LinguaCap', license: 'CC0 1.0',
+  alt: 'Un bretzel doré sur une table en bois.', ...extra,
+});
+const objectCount = (upload) => Number(localQuery(local.container,
+  `select count(*) from storage.objects where bucket_id = 'linguacap-course' and name like '%${upload.id}%';`));
+
+// Dépôt réservé aux éditeurs du catalogue, avec les textes exigés selon le type et des tailles bornées.
+await post('/media/uploads', learnerToken, pictureRequest(), 403);
+await post('/media/uploads', teacher.token, pictureRequest(), 403);
+await post('/media/uploads', staffToken, pictureRequest({ alt: '' }), 400);
+await post('/media/uploads', staffToken, pictureRequest({ size: 6 * 1024 * 1024 }), 400);
+await post('/media/uploads', staffToken, pictureRequest({ mimeType: 'video/mp4' }), 400);
+await post('/media/uploads', staffToken, { ...pictureRequest(), mimeType: 'audio/mpeg', alt: null, transcript: '' }, 400);
+
+// Dépôt valide : seul son auteur peut envoyer le fichier au chemin réservé, puis Médias contrôle le fichier reçu.
+const reserved = await post('/media/uploads', staffToken, pictureRequest(), 201);
+assert.equal(reserved.status, 'pending');
+assert.equal(new URL(reserved.uploadUrl).origin, local.api);
+assert.ok(!(await sendFile(reserved, firstPicture, 'image/png', teacher.token)).ok, 'Un autre compte ne peut pas déposer au chemin réservé');
+assert.ok((await sendFile(reserved, firstPicture, 'image/png', staffToken)).ok, 'Le navigateur dépose directement dans le stockage');
+const accepted = await post(`/media/uploads/${reserved.id}/finalize`, staffToken);
+assert.equal(accepted.status, 'available');
+assert.equal(accepted.version, 1);
+assert.deepEqual(await post(`/media/uploads/${reserved.id}/finalize`, staffToken), accepted, 'La finalisation rejouée ne crée rien deux fois');
+await post(`/media/uploads/${reserved.id}/finalize`, admin.token, {}, 404);
+const assetId = accepted.assetId;
+let library = await api('/media', staffToken);
+const pictureAsset = library.find((asset) => asset.id === assetId);
+assert.equal(pictureAsset.credit, 'Recette LinguaCap · CC0 1.0');
+assert.deepEqual(pictureAsset.versions.map((version) => [version.version, version.status]), [[1, 'draft']]);
+const draftFile = await api(`/media/${assetId}/versions/1`, staffToken);
+assert.equal(draftFile.status, 'draft');
+assert.deepEqual(Buffer.from(await (await fetch(draftFile.url)).arrayBuffer()), firstPicture);
+await api(`/media/${assetId}/versions/1`, learnerToken, { status: 403 });
+const renamed = await put(`/media/${assetId}`, staffToken, { title: 'Bretzel', source: 'Recette LinguaCap', license: 'CC0 1.0', alt: 'Un bretzel doré.', transcript: null });
+assert.equal(renamed.title, 'Bretzel');
+
+// Fichier refusé : le contenu ne correspond pas au type annoncé ; il est supprimé du stockage.
+const disguised = Buffer.from('<html><script>alert(1)</script></html>');
+const refusedUpload = await post('/media/uploads', staffToken, pictureRequest({ mimeType: 'image/jpeg', size: disguised.length }), 201);
+assert.ok((await sendFile(refusedUpload, disguised, 'image/jpeg', staffToken)).ok);
+assert.equal(objectCount(refusedUpload), 1);
+const refusal = await api(`/media/uploads/${refusedUpload.id}/finalize`, staffToken, { method: 'POST', body: {}, status: 422 });
+assert.equal(refusal.code, 'INVALID_FILE');
+assert.match(refusal.message, /image JPEG/);
+assert.equal(objectCount(refusedUpload), 0, 'Le fichier refusé est supprimé');
+await post(`/media/uploads/${refusedUpload.id}/finalize`, staffToken, {}, 409);
+
+// Dépôt interrompu : rien n'est reçu, la finalisation le signale ; après expiration il est abandonné.
+const interrupted = await post('/media/uploads', staffToken, pictureRequest(), 201);
+const notReceived = await api(`/media/uploads/${interrupted.id}/finalize`, staffToken, { method: 'POST', body: {}, status: 409 });
+assert.match(notReceived.message, /pas été reçu/);
+localSql(local.container, `update media.uploads set expires_at = now() - interval '1 minute' where id = '${interrupted.id}';`);
+const recent = await api('/media/uploads', staffToken);
+assert.equal(recent.find((upload) => upload.id === interrupted.id).status, 'abandoned');
+assert.equal(recent.find((upload) => upload.id === refusedUpload.id).status, 'rejected');
+assert.equal(recent.find((upload) => upload.id === reserved.id).status, 'available');
+await post(`/media/uploads/${interrupted.id}/finalize`, staffToken, {}, 409);
+console.log('Recette de la médiathèque réussie · dépôt direct, chemin réservé à l’auteur, contrôle du contenu, fichier refusé et supprimé, '
+  + 'dépôt interrompu puis abandonné, aperçu des brouillons réservé aux éditeurs.');
+
+// Niveau B1 de démonstration : ordre et prérequis, brouillon, contrôle de complétude, publication sans redéploiement.
+await api('/catalogue/levels', teacher.token, { status: 403 });
+await api('/catalogue/levels', learnerToken, { status: 403 });
+await put('/catalogue/levels/a1', staffToken, { title: 'Allemand A1', description: '', position: 1, prerequisiteLevelId: 'a2' }, 400);
+let catalogueLevels = await put('/catalogue/levels/b1', staffToken,
+  { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: null });
+let b1Level = catalogueLevels.find((level) => level.id === 'b1');
+assert.equal(b1Level.prerequisiteLevelId, null);
+const openDraft = b1Level.versions.find((version) => version.status === 'draft');
+const b1Draft = openDraft ? await api(`/catalogue/versions/${openDraft.id}`, staffToken)
+  : await post('/catalogue/levels/b1/versions', staffToken, {}, 201);
+assert.equal(b1Draft.status, 'draft');
+await post('/catalogue/levels/b1/versions', staffToken, {}, 409);
+await api(`/catalogue/versions/${b1Draft.id}`, teacher.token, { status: 403 });
+const picturePlacement = (version) => ({
+  assetId, assetVersion: version, usage: 'illustration', alt: 'Un bretzel doré.', caption: 'die Brezel', transcriptVisibility: 'hidden',
+  decorative: false, questionId: null, optionId: null,
+});
+const b1Content = (pictureVersion, objective = 'Commander une spécialité à la boulangerie.') => ({
+  settings: { expectedCompetences: ['lecture', 'ecoute'], successCriteria: 'Réussir 60 % du bilan.', passPercent: 60,
+    reviewMinutes: 10, midtermMinutes: 30, finalMinutes: 60 },
+  diagnostic: null,
+  modules: [{ id: 'baeckerei', title: 'À la boulangerie', objective, prerequisites: [], activities: [
+    { id: 'b1-lecon', kind: 'lesson', title: 'Chez le boulanger', estimatedMinutes: 10, competences: ['lecture'],
+      lesson: { title: 'Chez le boulanger', description: 'Ich hätte gern eine Brezel.', transcript: null }, questions: [],
+      placements: [picturePlacement(pictureVersion)] },
+    { id: 'b1-quiz', kind: 'exercise', title: 'Que demande-t-on ?', estimatedMinutes: 5, competences: ['lecture'],
+      lesson: { title: 'Que demande-t-on ?', description: 'Choisissez la bonne réponse.', transcript: null },
+      questions: [{ id: 'brezel', prompt: 'Que veut dire « eine Brezel » ?', moduleRef: null, options: [
+        { id: 'a', label: 'Un bretzel', correct: true }, { id: 'b', label: 'Une baguette', correct: false }] }],
+      placements: [{ ...picturePlacement(pictureVersion), questionId: 'brezel', optionId: 'a', caption: null }] },
+  ] }],
+  assessments: [{ kind: 'midterm', title: 'Bilan B1', description: '', parts: [
+    { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Lisez puis répondez.', criteria: [], placements: [],
+      questions: [{ id: 'bilan-1', prompt: 'Brezel ?', moduleRef: null, options: [
+        { id: 'a', label: 'Bretzel', correct: true }, { id: 'b', label: 'Pain', correct: false }] }] },
+    { id: 'ecrit', competence: 'expression-ecrite', mode: 'written', title: 'Écrire', instructions: 'Commandez par écrit.',
+      questions: [], placements: [], criteria: [{ id: 'clarte', label: 'La demande est claire', maxPoints: 5 }] },
+  ] }],
+});
+const incomplete = await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1, ''));
+assert.equal(incomplete.checks.publishable, false);
+assert.deepEqual(incomplete.checks.issues.map((issue) => issue.path), ['modules[0].objective']);
+await post(`/catalogue/versions/${b1Draft.id}/publish`, staffToken, {}, 409);
+await put(`/catalogue/versions/${b1Draft.id}`, staffToken, { ...b1Content(1), modules: [{ ...b1Content(1).modules[0], id: 'Bad Id' }] }, 400);
+const saved = await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1));
+assert.equal(saved.checks.publishable, true, JSON.stringify(saved.checks.issues));
+assert.equal(saved.version.assessments[0].parts[1].criteria[0].maxPoints, 5);
+const draftLesson = `b1-v${b1Draft.number}-b1-lecon`;
+await api(`/lessons/${draftLesson}`, learnerToken, { status: 404 });
+assert.equal((await api(`/lessons/${draftLesson}`, staffToken)).title, 'Chez le boulanger');
+const publishedB1 = await post(`/catalogue/versions/${b1Draft.id}/publish`, staffToken);
+assert.equal(publishedB1.version.status, 'published');
+assert.deepEqual(publishedB1.media, [{ assetId, version: 1 }]);
+await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1), 409);
+library = await api('/media', staffToken);
+assert.equal(library.find((asset) => asset.id === assetId).versions[0].status, 'published', 'Les fichiers du parcours sont publiés avec lui');
+const b1Track = (await api('/tracks', teacher.token)).find((track) => track.levelCode === 'B1');
+assert.equal(b1Track.versionId, b1Draft.id, 'Le B1 publié est attribuable sans redéploiement');
+assert.equal(b1Track.prerequisiteLevelCode, null);
+
+// Un élève inscrit sur la version 1 garde ses fichiers quand le média est remplacé dans la version suivante.
+const learnerB1 = await createAccount('eleve-b1', 'learner', teacher.id);
+const enrollB1 = async (learnerId, trackVersionId) => {
+  const goal = await post('/learning/enrollments', teacher.token,
+    { learnerId, trackVersionId, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+  const plan = await post(goalPath(goal.id, 'proposal/validate'), teacher.token, { number: goal.proposal.number });
+  return plan.sessions[0].id;
+};
+const firstSessionB1 = await enrollB1(learnerB1.id, b1Draft.id);
+const placementsOf = async (sessionId, token) => (await api(`/learning/sessions/${sessionId}`, token)).activities
+  .flatMap((activity) => activity.placements.map((placement) => ({ ...placement, activityId: activity.id })));
+let oldPlacements = await placementsOf(firstSessionB1, learnerB1.token);
+const lessonPicture = oldPlacements.find((placement) => placement.activityId === 'b1-lecon');
+assert.equal(lessonPicture.assetVersion, 1);
+assert.ok(lessonPicture.url.includes(reserved.id), 'La séance pointe vers le fichier de la version 1');
+assert.deepEqual(Buffer.from(await (await fetch(lessonPicture.url)).arrayBuffer()), firstPicture);
+const optionPicture = oldPlacements.find((placement) => placement.activityId === 'b1-quiz');
+assert.deepEqual([optionPicture.questionId, optionPicture.optionId], ['brezel', 'a'], 'Un support peut illustrer un choix de réponse');
+
+const replacement = await post('/media/uploads', staffToken, { ...pictureRequest(), assetId, title: '', size: secondPicture.length }, 201);
+assert.equal(replacement.replaces, true);
+assert.ok((await sendFile(replacement, secondPicture, 'image/png', staffToken)).ok);
+const replaced = await post(`/media/uploads/${replacement.id}/finalize`, staffToken);
+assert.deepEqual([replaced.assetId, replaced.version, replaced.title], [assetId, 2, 'Bretzel']);
+const b1Next = await post('/catalogue/levels/b1/versions', staffToken, { fromVersionId: b1Draft.id }, 201);
+assert.equal(b1Next.number, b1Draft.number + 1);
+assert.equal(b1Next.modules[0].activities[0].placements[0].assetVersion, 1, 'La copie reprend les versions figées des fichiers');
+assert.equal(b1Next.assessments.length, 1);
+await api(`/lessons/b1-v${b1Next.number}-b1-lecon`, learnerB1.token, { status: 404 });
+await api(`/media/${assetId}/versions/2`, learnerB1.token, { status: 403 });
+const nextSaved = await put(`/catalogue/versions/${b1Next.id}`, staffToken, b1Content(2));
+assert.equal(nextSaved.checks.publishable, true);
+await post(`/catalogue/versions/${b1Next.id}/publish`, staffToken);
+catalogueLevels = await api('/catalogue/levels', staffToken);
+b1Level = catalogueLevels.find((level) => level.id === 'b1');
+assert.equal(b1Level.versions.find((version) => version.id === b1Draft.id).status, 'retired');
+assert.equal((await api('/tracks', teacher.token)).find((track) => track.levelCode === 'B1').versionId, b1Next.id);
+
+oldPlacements = await placementsOf(firstSessionB1, learnerB1.token);
+const oldPicture = oldPlacements.find((placement) => placement.activityId === 'b1-lecon');
+assert.equal(oldPicture.assetVersion, 1);
+assert.ok(oldPicture.url.includes(reserved.id), 'L’ancien élève garde le fichier de sa version');
+assert.deepEqual(Buffer.from(await (await fetch(oldPicture.url)).arrayBuffer()), firstPicture);
+const learnerB1Next = await createAccount('eleve-b1-v2', 'learner', teacher.id);
+const nextPicture = (await placementsOf(await enrollB1(learnerB1Next.id, b1Next.id), learnerB1Next.token))
+  .find((placement) => placement.activityId === 'b1-lecon');
+assert.equal(nextPicture.assetVersion, 2);
+assert.ok(nextPicture.url.includes(replacement.id), 'Un nouvel élève lit le fichier remplacé');
+assert.deepEqual(Buffer.from(await (await fetch(nextPicture.url)).arrayBuffer()), secondPicture);
+await post(`/catalogue/versions/${b1Next.id}/retire`, staffToken);
+assert.ok(!(await api('/tracks', teacher.token)).some((track) => track.levelCode === 'B1'), 'Une version retirée n’est plus attribuable');
+assert.equal((await placementsOf(firstSessionB1, learnerB1.token)).length, 2, 'Le retrait ne coupe pas l’accès des élèves inscrits');
+await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: 'a2' });
+console.log('Recette du catalogue réussie · niveaux et prérequis, brouillon repris, contrôle de complétude, bilan avec grille, '
+  + 'publication et retrait sans redéploiement, nouvelle version avec média remplacé, ancien élève sur son fichier, brouillons inaccessibles.');
+
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
   where learner_id = '${learner.id}' or subject_id in ('${invite.id}', '${first.id}');`).split(',');
@@ -583,6 +772,33 @@ if (process.argv.includes('--browser')) {
     await adminPage.goto('http://127.0.0.1:5186/espace/invitations');
     await expect(adminPage.getByRole('row', { name: new RegExp(expiredEmail) })).toBeVisible();
     console.log('Recette navigateur réussie · administration des comptes et des invitations.');
+
+    const editorPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await editorPage.goto('http://127.0.0.1:5186/connexion');
+    await editorPage.getByLabel('Adresse e-mail').fill(staffEmail);
+    await editorPage.getByLabel('Mot de passe', { exact: true }).fill(password);
+    await editorPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
+    await editorPage.getByRole('link', { name: 'Médiathèque' }).click({ timeout: 15_000 });
+    await expect(editorPage.getByRole('heading', { name: 'Médiathèque' })).toBeVisible();
+    await editorPage.getByRole('button', { name: 'Déposer un média' }).click();
+    const uploadDialog = editorPage.getByRole('dialog');
+    await uploadDialog.getByLabel(/^Fichier/).setInputFiles({ name: 'brezel.png', mimeType: 'image/png', buffer: secondPicture });
+    await uploadDialog.getByLabel('Titre').fill('Bretzel du navigateur');
+    await uploadDialog.getByLabel('Texte alternatif').fill('Un bretzel photographié de près.');
+    await uploadDialog.getByLabel('Source').fill('Recette navigateur');
+    await uploadDialog.getByLabel('Licence').fill('CC0 1.0');
+    await uploadDialog.getByRole('button', { name: 'Déposer' }).click();
+    await expect(editorPage.getByText('« Bretzel du navigateur » est disponible en version 1.')).toBeVisible({ timeout: 15_000 });
+    await editorPage.getByRole('link', { name: 'Catalogue' }).click();
+    await editorPage.getByRole('link', { name: `Ouvrir B1 version ${b1Next.number}` }).click();
+    await expect(editorPage.getByRole('heading', { name: `B1 · version ${b1Next.number}` })).toBeVisible();
+    await expect(editorPage.getByText('Cette version est figée')).toBeVisible();
+    await editorPage.getByLabel('Activité à prévisualiser').selectOption({ label: 'Chez le boulanger' });
+    await editorPage.getByRole('button', { name: 'Ouvrir l’aperçu élève' }).click();
+    const previewDialog = editorPage.getByRole('dialog');
+    await expect(previewDialog.getByRole('img', { name: 'Un bretzel doré.' })).toBeVisible({ timeout: 15_000 });
+    await editorPage.keyboard.press('Escape');
+    console.log('Recette navigateur réussie · dépôt avec progression depuis la médiathèque et aperçu élève dans l’éditeur, sur mobile.');
   } finally {
     await browser.close();
   }
