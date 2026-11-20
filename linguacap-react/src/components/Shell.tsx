@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
-import { Activity, BookOpen, Building2, CalendarDays, ChartNoAxesCombined, ClipboardList, Files, GraduationCap, Headphones, LayoutDashboard, Menu, MessageSquare, Users, X } from 'lucide-react';
+import { Activity, BookOpen, CalendarDays, ChartNoAxesCombined, ClipboardList, Files, LayoutDashboard, Menu, MessageSquare, Users, X } from 'lucide-react';
 import { isApiMode } from '../app/config';
 import type { Role } from '../domain/types';
 
@@ -11,7 +11,7 @@ const primaryLinks = [
   { path: '/administration', title: 'Administration' },
 ];
 
-const workspaceLinks = {
+export const workspaceLinks = {
   learner: [
     { path: '/eleve', title: 'Tableau de bord', icon: LayoutDashboard, end: true },
     { path: '/eleve/planning', title: 'Planning', icon: CalendarDays },
@@ -33,7 +33,7 @@ const workspaceLinks = {
   ],
 } satisfies Record<Role, { path: string; title: string; icon: typeof Users; end?: boolean }[]>;
 
-const workspaceNames = { learner: 'Espace élève', teacher: 'Espace professeur', admin: 'Administration' };
+export const workspaceNames = { learner: 'Espace élève', teacher: 'Espace professeur', admin: 'Administration' };
 
 export function Logo({ footer = false }: { footer?: boolean }) {
   return <Link className={`brand${footer ? ' brand-footer' : ''}`} to="/" aria-label="LinguaCap, accueil"><img src="/linguacap-logo.png" alt="LinguaCap" /></Link>;
@@ -60,23 +60,6 @@ export function Header() {
         </button>
       </div>
     </header>
-  );
-}
-
-export function WorkspaceNav({ role }: { role: Role }) {
-  const roleIcon = role === 'learner' ? GraduationCap : role === 'teacher' ? Headphones : Building2;
-  const RoleIcon = roleIcon;
-  return (
-    <div className="workspace-nav-wrap">
-      <div className="container workspace-nav-inner">
-        <span className="workspace-label"><RoleIcon size={19} /> {workspaceNames[role]}</span>
-        <nav className="workspace-nav" aria-label={`Pages · ${workspaceNames[role]}`}>
-          {workspaceLinks[role].map(({ path, title, icon: Icon, ...item }) => (
-            <NavLink key={path} to={path} end={'end' in item && item.end}><Icon size={17} aria-hidden="true" />{title}</NavLink>
-          ))}
-        </nav>
-      </div>
-    </div>
   );
 }
 

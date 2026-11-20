@@ -1,12 +1,22 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
-import type { FormEvent } from 'react';
-import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { Activity, BookOpen, KeyRound, LockKeyhole, ShieldCheck, Users } from 'lucide-react';
+import type { FormEvent, ReactNode } from 'react';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
+import { Activity, BookOpen, CalendarDays, ChartNoAxesCombined, KeyRound, LayoutGrid, LockKeyhole, MessageSquare, ShieldCheck, Users } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { Badge, PageHeading } from '../../components/ui';
 import { apiBase, authLinkParams, isApiMode } from '../../app/config';
 import { checkHealth, fetchProfile, roleNames, sessionExpiredEvent, supabase } from '../../integration/api';
 import type { Profile } from '../../integration/api';
+import { staffWorkspaceLinks } from '../pilot/staff-navigation';
+import { WorkspaceFrame } from '../workspace/WorkspaceFrame';
+import './access.css';
+
+const learnerLinks = [
+  { path: '/espace', label: 'Aujourd’hui', icon: LayoutGrid, end: true },
+  { path: '/espace/planning', label: 'Mon planning', icon: CalendarDays },
+  { path: '/espace/resultats', label: 'Mes résultats', icon: ChartNoAxesCombined },
+  { path: '/espace/messages', label: 'Mes messages', icon: MessageSquare },
+];
 
 /** Erreur renvoyée par Supabase dans un lien d'invitation ou de récupération (lien expiré, déjà utilisé…). */
 function linkError(): string {
@@ -17,6 +27,23 @@ function linkError(): string {
 
 const LearnerPilot = lazy(() => import('../pilot/LearnerPilot').then((module) => ({ default: module.LearnerPilot })));
 const StaffPilot = lazy(() => import('../pilot/StaffPilot').then((module) => ({ default: module.StaffPilot })));
+
+function AccessLayout({ children }: { children: ReactNode }) {
+  return (
+    <div className="access-page lc-access">
+      <div className="lc-access-layout">
+        <aside className="lc-access-visual">
+          <div className="lc-access-mark"><BookOpen size={32} strokeWidth={1.5} aria-hidden="true" /></div>
+          <div>
+            <p>LinguaCap</p>
+            <strong>Votre espace d’apprentissage de l’allemand</strong>
+          </div>
+        </aside>
+        {children}
+      </div>
+    </div>
+  );
+}
 
 function errorMessage(error: unknown): string {
   if (error instanceof Error && error.name === 'TimeoutError') return 'Le service a mis trop de temps à répondre.';
@@ -69,7 +96,7 @@ export function SignInPage() {
   }
 
   return (
-    <div className="access-page">
+    <AccessLayout>
       <section className="access-card panel">
         <span className="icon-tile"><LockKeyhole size={23} /></span>
         <h1>{recovering ? 'Réinitialiser le mot de passe' : 'Se connecter à LinguaCap'}</h1>
@@ -98,7 +125,7 @@ export function SignInPage() {
         )}
         {isApiMode && <Link className="text-link" to="/integration">État de l’intégration</Link>}
       </section>
-    </div>
+    </AccessLayout>
   );
 }
 
@@ -163,7 +190,7 @@ export function SetPasswordPage({ invitation = false }: { invitation?: boolean }
   }
 
   return (
-    <div className="access-page">
+    <AccessLayout>
       <section className="access-card panel">
         <span className="icon-tile"><KeyRound size={23} /></span>
         <h1>{invitation ? 'Activer mon compte' : 'Choisir un nouveau mot de passe'}</h1>
@@ -189,7 +216,7 @@ export function SetPasswordPage({ invitation = false }: { invitation?: boolean }
         )}
         <Link className="text-link" to="/connexion">Revenir à la connexion</Link>
       </section>
-    </div>
+    </AccessLayout>
   );
 }
 
@@ -235,7 +262,6 @@ export function IntegrationPage() {
 export function ConnectedPage() {
   const { session, loading } = useSession();
   const navigate = useNavigate();
-  const { pathname } = useLocation();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [failure, setFailure] = useState('');
   const [retry, setRetry] = useState(0);
@@ -276,19 +302,29 @@ export function ConnectedPage() {
     }
   }
 
+  if (profile && token) {
+    const links = profile.role === 'learner'
+      ? learnerLinks
+      : staffWorkspaceLinks(profile).map((link) => ({ ...link, end: link.path === '/espace' }));
+    return (
+      <WorkspaceFrame links={links} title={roleNames[profile.role]} name={profile.displayName}
+        onSignOut={signOut} signingOut={signOutBusy}>
+        {signOutError && <p className="inline-message warning" role="alert">{signOutError}</p>}
+        <Suspense fallback={<p className="panel" role="status">Chargement de votre espace…</p>}>
+          {profile.role === 'learner'
+            ? <LearnerPilot key={profile.id} token={token} name={profile.displayName} />
+            : <StaffPilot key={profile.id} profile={profile} token={token} />}
+        </Suspense>
+      </WorkspaceFrame>
+    );
+  }
+
   return (
     <div className="container workspace-body">
-      <PageHeading title={profile ? `Bonjour ${profile.displayName}` : 'Mon espace'}
-        description={profile ? roleNames[profile.role] : undefined}
+      <PageHeading title="Mon espace"
         action={session && <button className="btn btn-outline" type="button" onClick={signOut} disabled={signOutBusy}>Se déconnecter</button>} />
       {signOutError && <p className="inline-message warning" role="alert">{signOutError}</p>}
-      {profile && token ? (
-        <Suspense fallback={<p role="status">Chargement de votre espace…</p>}>
-          {profile.role !== 'learner' ? <StaffPilot key={profile.id} profile={profile} token={token} />
-            : !/^\/espace(\/seance\/[^/]+|\/diagnostic|\/evaluation\/[^/]+\/(midterm|final))?\/?$/.test(pathname) ? <Navigate to="/espace" replace />
-              : <LearnerPilot key={profile.id} token={token} />}
-        </Suspense>
-      ) : <section className="panel connected-panel stack">
+      <section className="panel connected-panel stack">
         {loading ? <p role="status">Vérification de la session…</p> : !session ? (
           <><h2>Ouvrir une session</h2><p className="muted">Connectez-vous pour retrouver votre espace LinguaCap.</p><Link className="btn btn-primary" to="/connexion">Se connecter</Link></>
         ) : (
@@ -298,7 +334,7 @@ export function ConnectedPage() {
             ) : <p role="status">Lecture du profil…</p>}
           </>
         )}
-      </section>}
+      </section>
     </div>
   );
 }

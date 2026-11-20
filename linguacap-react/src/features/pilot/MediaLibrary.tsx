@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react';
 import { FileAudio, Image as ImageIcon, Pencil, RefreshCw, Upload as UploadIcon } from 'lucide-react';
-import { Badge, Dialog, EmptyState } from '../../components/ui';
+import { Badge, EmptyState, Inspector } from '../../components/ui';
 import { requestApi, uploadToStorage } from '../../integration/api';
 import './catalogue.css';
 
@@ -70,6 +70,7 @@ export function MediaPreview({ assetId, version, token }: { assetId: string; ver
   const [file, setFile] = useState<MediaFile | null>(null);
   const [error, setError] = useState('');
   const [attempt, setAttempt] = useState(0);
+  const renewedKey = useRef('');
 
   useEffect(() => {
     let active = true;
@@ -82,20 +83,35 @@ export function MediaPreview({ assetId, version, token }: { assetId: string; ver
     return () => { active = false; };
   }, [assetId, version, token, attempt]);
 
+  function retry() {
+    renewedKey.current = '';
+    setAttempt((value) => value + 1);
+  }
+
+  function renewAfterLoadError() {
+    const key = `${assetId}/${version}`;
+    if (renewedKey.current === key) {
+      setError('Ce fichier est momentanément inaccessible.');
+      return;
+    }
+    renewedKey.current = key;
+    setAttempt((value) => value + 1);
+  }
+
   if (error) {
     return (
       <div className="stack">
         <p className="inline-message warning" role="alert">{error}</p>
-        <button type="button" className="btn btn-outline" onClick={() => setAttempt((value) => value + 1)}>Réessayer</button>
+        <button type="button" className="btn btn-outline" onClick={retry}>Réessayer</button>
       </div>
     );
   }
-  if (!file) return <p role="status">Chargement de l’aperçu…</p>;
+  if (!file) return <p className="media-preview-loading" role="status">Chargement de l’aperçu…</p>;
   return file.mimeType.startsWith('image/')
-    ? <img className="media-preview-image" src={file.url} alt={file.alt ?? ''} onError={() => setAttempt((value) => value + 1)} />
+    ? <div className="media-preview-frame"><img className="media-preview-image" src={file.url} alt={file.alt ?? ''} onError={renewAfterLoadError} /></div>
     : (
-      <div className="stack">
-        <audio controls preload="metadata" src={file.url} aria-label="Aperçu audio" />
+      <div className="media-preview-frame stack">
+        <audio controls preload="metadata" src={file.url} onError={renewAfterLoadError} aria-label="Aperçu audio" />
         {file.transcript && <details><summary>Transcription</summary><p className="pilot-transcript" lang="de">{file.transcript}</p></details>}
       </div>
     );
@@ -105,23 +121,31 @@ export function MediaPreview({ assetId, version, token }: { assetId: string; ver
  * Dépôt d'un fichier : réservation auprès de Médias, envoi direct vers le stockage avec progression, puis contrôle
  * du fichier reçu. Un envoi interrompu peut être relancé tant que le dépôt n'a pas expiré.
  */
-export function UploadDialog({ token, replace, onClose, onDone }: {
+function UploadInspector({ token, replace, onClose, onDone }: {
   token: string;
   replace?: Asset;
   onClose: () => void;
   onDone: (upload: Upload) => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
-  const [phase, setPhase] = useState<'form' | 'sending' | 'checking' | 'failed'>('form');
+  const [phase, setPhase] = useState<'form' | 'reserving' | 'sending' | 'checking' | 'failed'>('form');
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
   const [retryable, setRetryable] = useState(false);
+  const fileInput = useRef<HTMLInputElement>(null);
   const reservation = useRef<Upload | null>(null);
   const controller = useRef<AbortController | null>(null);
+  const active = useRef(false);
   const mimeType = file ? MIME_ALIASES[file.type] ?? '' : '';
   const kind = mimeType.startsWith('image/') ? 'image' : mimeType.startsWith('audio/') ? 'audio' : replace?.kind ?? 'image';
 
-  useEffect(() => () => controller.current?.abort(), []);
+  useEffect(() => {
+    active.current = true;
+    return () => {
+      active.current = false;
+      controller.current?.abort();
+    };
+  }, []);
 
   async function send(upload: Upload, selected: File, type: string) {
     setPhase('sending');
@@ -130,14 +154,17 @@ export function UploadDialog({ token, replace, onClose, onDone }: {
     controller.current = new AbortController();
     try {
       if (upload.uploadUrl) await uploadToStorage(upload.uploadUrl, selected, type, token, setProgress, controller.current.signal);
+      if (!active.current) return;
       setPhase('checking');
       const result = await requestApi<Upload>(`/media/uploads/${encodeURIComponent(upload.id)}/finalize`, token, { method: 'POST' });
-      onDone(result);
+      if (active.current) onDone(result);
     } catch (failure) {
+      if (!active.current) return;
       const aborted = failure instanceof DOMException && failure.name === 'AbortError';
       setError(aborted ? 'Envoi annulé. Relancez-le dans les 30 minutes, sinon le dépôt sera abandonné.' : getError(failure));
       // Un fichier refusé clôt le dépôt ; un envoi interrompu reste relançable tant que le dépôt attend.
       const uploads = await requestApi<Upload[]>('/media/uploads', token).catch(() => []);
+      if (!active.current) return;
       setRetryable(uploads.find((item) => item.id === upload.id)?.status === 'pending');
       setPhase('failed');
     }
@@ -161,6 +188,7 @@ export function UploadDialog({ token, replace, onClose, onDone }: {
       return;
     }
     setError('');
+    setPhase('reserving');
     try {
       const upload = await requestApi<Upload>('/media/uploads', token, {
         method: 'POST',
@@ -169,30 +197,36 @@ export function UploadDialog({ token, replace, onClose, onDone }: {
           license: read('license'), alt: kind === 'image' ? read('alt') : null, transcript: kind === 'audio' ? read('transcript') : null,
         },
       });
+      if (!active.current) return;
       reservation.current = upload;
       await send(upload, file, mimeType);
     } catch (failure) {
+      if (!active.current) return;
       setError(getError(failure));
+      setPhase('form');
     }
   }
 
   function restart() {
     reservation.current = null;
+    if (fileInput.current) fileInput.current.value = '';
     setFile(null);
     setPhase('form');
     setError('');
     setProgress(0);
   }
 
-  const busy = phase === 'sending' || phase === 'checking';
+  const busy = phase === 'reserving' || phase === 'sending' || phase === 'checking';
   return (
-    <Dialog title={replace ? `Nouvelle version · ${replace.title}` : 'Déposer un média'} onClose={() => { controller.current?.abort(); onClose(); }}>
+    <Inspector title={replace ? `Nouvelle version · ${replace.title}` : 'Déposer un média'} onClose={onClose}>
       <form className="teacher-form stack" onSubmit={submit}>
-        {replace && <p className="muted">Les parcours publiés gardent leur version actuelle ; la nouvelle version sera proposée dans les brouillons.</p>}
-        <fieldset className="stack" disabled={phase !== 'form'}>
-          <label>Fichier (JPEG, PNG ou WebP jusqu’à 5 Mo ; MP3 ou WAV jusqu’à 15 Mo)
-            <input name="file" type="file" required accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/wav,.mp3,.wav"
-              onChange={(event) => setFile(event.currentTarget.files?.[0] ?? null)} />
+        {replace && <p className="inline-message">Les parcours publiés conservent leur fichier actuel. Les brouillons peuvent utiliser la nouvelle version.</p>}
+        <fieldset className="media-upload-fields stack" disabled={phase !== 'form'}>
+          <label>Fichier
+            <input ref={fileInput} name="file" type="file" required accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/wav,.mp3,.wav"
+              aria-describedby="media-upload-formats"
+              onChange={(event) => { setFile(event.currentTarget.files?.[0] ?? null); setError(''); }} />
+            <small id="media-upload-formats" className="muted">JPEG, PNG ou WebP jusqu’à 5 Mo. MP3 ou WAV jusqu’à 15 Mo.</small>
           </label>
           <label>Titre<input name="title" required={!replace} maxLength={120} defaultValue={replace?.title ?? ''} /></label>
           {kind === 'image'
@@ -204,7 +238,8 @@ export function UploadDialog({ token, replace, onClose, onDone }: {
             <label>Licence<input name="license" required maxLength={120} defaultValue={replace?.license ?? ''} placeholder="CC BY 4.0, interne…" /></label>
           </div>
         </fieldset>
-        {phase !== 'form' && (
+        {phase === 'reserving' && <p className="inline-message" role="status">Préparation du dépôt…</p>}
+        {(phase === 'sending' || phase === 'checking') && (
           <div className="stack" aria-live="polite">
             <label className="media-progress">
               {phase === 'checking' ? 'Contrôle du fichier…' : `Envoi : ${progress} %`}
@@ -221,14 +256,14 @@ export function UploadDialog({ token, replace, onClose, onDone }: {
           {phase === 'failed' && <button type="button" className="btn btn-outline" onClick={restart}>Choisir un autre fichier</button>}
           {phase === 'form' && <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>}
           {phase === 'form' && <button type="submit" className="btn btn-primary" disabled={!file}><UploadIcon size={17} aria-hidden="true" /> Déposer</button>}
-          {busy && <span className="muted" role="status">Ne fermez pas la fenêtre pendant l’envoi.</span>}
+          {busy && <span className="muted">Gardez ce panneau ouvert pendant le dépôt.</span>}
         </div>
       </form>
-    </Dialog>
+    </Inspector>
   );
 }
 
-function MetadataDialog({ asset, token, onClose, onDone }: { asset: Asset; token: string; onClose: () => void; onDone: (asset: Asset) => void }) {
+function MetadataInspector({ asset, token, onClose, onDone }: { asset: Asset; token: string; onClose: () => void; onDone: (asset: Asset) => void }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -251,9 +286,9 @@ function MetadataDialog({ asset, token, onClose, onDone }: { asset: Asset; token
   }
 
   return (
-    <Dialog title={`Informations · ${asset.title}`} onClose={onClose}>
+    <Inspector title={`Informations · ${asset.title}`} onClose={onClose}>
       <form className="teacher-form stack" onSubmit={submit}>
-        <p className="muted">Les versions déjà publiées gardent leurs textes ; les brouillons et les prochaines versions reprennent ceux-ci.</p>
+        <p className="muted">Les parcours déjà publiés conservent leurs textes. Ces informations seront utilisées dans les brouillons et les prochaines versions.</p>
         <label>Titre<input name="title" required maxLength={120} defaultValue={asset.title} /></label>
         {asset.kind === 'image'
           ? <label>Texte alternatif<textarea name="alt" rows={2} maxLength={300} defaultValue={asset.alt ?? ''} /></label>
@@ -268,9 +303,14 @@ function MetadataDialog({ asset, token, onClose, onDone }: { asset: Asset; token
           <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
         </div>
       </form>
-    </Dialog>
+    </Inspector>
   );
 }
+
+type LibraryAction =
+  | { type: 'upload'; replace?: Asset }
+  | { type: 'metadata'; asset: Asset }
+  | { type: 'preview'; asset: Asset; version: number };
 
 /** Médiathèque des images et des sons : liste, filtres, aperçu, dépôt, nouvelle version et informations. */
 export function MediaLibraryPanel({ token }: { token: string }) {
@@ -281,9 +321,7 @@ export function MediaLibraryPanel({ token }: { token: string }) {
   const [refresh, setRefresh] = useState(0);
   const [kind, setKind] = useState<'all' | 'image' | 'audio'>('all');
   const [query, setQuery] = useState('');
-  const [uploading, setUploading] = useState<{ replace?: Asset } | null>(null);
-  const [editing, setEditing] = useState<Asset | null>(null);
-  const [previewing, setPreviewing] = useState<{ asset: Asset; version: number } | null>(null);
+  const [action, setAction] = useState<LibraryAction | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -295,17 +333,17 @@ export function MediaLibraryPanel({ token }: { token: string }) {
     return () => { active = false; };
   }, [token, refresh]);
 
-  const search = query.trim().toLowerCase();
+  const normalize = (value: string) => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
+  const search = normalize(query);
   const visible = (assets ?? []).filter((asset) => (kind === 'all' || asset.kind === kind)
-    && (!search || `${asset.title} ${asset.id} ${asset.credit ?? ''}`.toLowerCase().includes(search)));
+    && (!search || normalize(`${asset.title} ${asset.id} ${asset.source ?? ''} ${asset.credit ?? ''}`).includes(search)));
 
   return (
-    <section className="panel stack" aria-labelledby="media-library-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="media-library-title">Médiathèque</h2><p className="muted">Images et sons des parcours, avec leurs versions</p></div>
+    <section className="panel stack catalogue-workspace" aria-label="Médias disponibles">
+      <div className="staff-panel-actions">
         <span className="accounts-actions">
           <button type="button" className="btn btn-outline" onClick={() => setRefresh((value) => value + 1)}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
-          <button type="button" className="btn btn-primary" onClick={() => setUploading({})}><UploadIcon size={17} aria-hidden="true" /> Déposer un média</button>
+          <button type="button" className="btn btn-primary" onClick={() => setAction({ type: 'upload' })}><UploadIcon size={17} aria-hidden="true" /> Déposer un média</button>
         </span>
       </div>
       <div className="media-filters">
@@ -317,34 +355,34 @@ export function MediaLibraryPanel({ token }: { token: string }) {
       {notice && <p className="inline-message" role="status">{notice}</p>}
       {error ? <p className="inline-message warning" role="alert">{error}</p>
         : assets === null ? <p role="status">Chargement de la médiathèque…</p>
-        : visible.length === 0 ? <EmptyState title="Aucun média" description="Déposez une image ou un son pour l’utiliser dans un parcours." />
+        : visible.length === 0 ? <EmptyState
+            title={assets.length ? 'Aucun média trouvé' : 'Aucun média'}
+            description={assets.length ? 'Modifiez la recherche ou le type de fichier.' : 'Déposez une image ou un son pour l’utiliser dans un parcours.'} />
         : (
           <ul className="media-list">
             {visible.map((asset) => {
               const latest = asset.versions[0];
               return (
                 <li key={asset.id}>
-                  <span className="media-kind" aria-hidden="true">{asset.kind === 'image' ? <ImageIcon size={20} /> : <FileAudio size={20} />}</span>
-                  <div className="media-main">
-                    <strong>{asset.title}</strong>
-                    <span className="muted">{asset.id} · {asset.kind === 'image' ? 'image' : 'son'}{latest ? ` · v${latest.version} ${versionStatus[latest.status]} ${formatSize(latest.sizeBytes)}` : ''}</span>
-                    {asset.credit ? <span className="muted">{asset.credit}</span> : <span className="inline-message warning">Source et licence à renseigner</span>}
+                  <div className="media-card-heading">
+                    <span className="media-kind" aria-hidden="true">{asset.kind === 'image' ? <ImageIcon size={20} /> : <FileAudio size={20} />}</span>
+                    {latest && <Badge tone={latest.status === 'published' ? 'green' : latest.status === 'draft' ? 'amber' : 'neutral'}>v{latest.version} · {versionStatus[latest.status]}</Badge>}
                   </div>
-                  <span className="accounts-actions">
-                    <button type="button" className="btn btn-outline" onClick={() => setPreviewing({ asset, version: latestVersion(asset) })}
-                      aria-label={`Aperçu de ${asset.title}`}>Aperçu</button>
-                    <button type="button" className="btn btn-outline" onClick={() => setEditing(asset)} aria-label={`Modifier les informations de ${asset.title}`}>
-                      <Pencil size={16} aria-hidden="true" /> Informations</button>
-                    <button type="button" className="btn btn-outline" onClick={() => setUploading({ replace: asset })} aria-label={`Nouvelle version de ${asset.title}`}>
-                      Nouvelle version</button>
-                  </span>
+                  <div className="media-main">
+                    <h3>{asset.title}</h3>
+                    <span className="muted">{asset.kind === 'image' ? 'Image' : 'Son'}{latest?.sizeBytes ? ` · ${formatSize(latest.sizeBytes)}` : ''}</span>
+                    {asset.credit ? <span className="muted">{asset.credit}</span> : <span className="media-missing-credit">Source et licence à renseigner</span>}
+                  </div>
+                  <button type="button" className="btn btn-outline btn-small"
+                    onClick={() => setAction({ type: 'preview', asset, version: latestVersion(asset) })}
+                    aria-label={`Aperçu de ${asset.title}`}>Consulter le média</button>
                 </li>
               );
             })}
           </ul>
         )}
       {uploads.length > 0 && (
-        <section className="stack" aria-labelledby="media-uploads-title">
+        <section className="stack media-recent" aria-labelledby="media-uploads-title">
           <h3 id="media-uploads-title">Mes dépôts récents</h3>
           <ul className="pilot-list">
             {uploads.map((upload) => (
@@ -356,28 +394,44 @@ export function MediaLibraryPanel({ token }: { token: string }) {
           </ul>
         </section>
       )}
-      {uploading && <UploadDialog token={token} replace={uploading.replace} onClose={() => { setUploading(null); setRefresh((value) => value + 1); }}
+      {action?.type === 'upload' && <UploadInspector token={token} replace={action.replace} onClose={() => { setAction(null); setRefresh((value) => value + 1); }}
         onDone={(upload) => {
-          setUploading(null);
+          setAction(null);
           setNotice(`« ${upload.title} » est disponible en version ${upload.version}.`);
           setRefresh((value) => value + 1);
         }} />}
-      {editing && <MetadataDialog asset={editing} token={token} onClose={() => setEditing(null)} onDone={(asset) => {
-        setEditing(null);
+      {action?.type === 'metadata' && <MetadataInspector asset={action.asset} token={token} onClose={() => setAction(null)} onDone={(asset) => {
+        setAction((current) => current === action ? null : current);
         setAssets((current) => current?.map((item) => item.id === asset.id ? asset : item) ?? null);
         setNotice(`Informations de « ${asset.title} » enregistrées.`);
       }} />}
-      {previewing && (
-        <Dialog title={`Aperçu · ${previewing.asset.title}`} onClose={() => setPreviewing(null)}>
+      {action?.type === 'preview' && (
+        <Inspector title={action.asset.title} onClose={() => setAction(null)}>
           <div className="stack">
-            {previewing.asset.versions.length > 1 && (
-              <label>Version<select value={previewing.version} onChange={(event) => setPreviewing({ ...previewing, version: Number(event.target.value) })}>
-                {previewing.asset.versions.map((item) => <option key={item.version} value={item.version}>v{item.version} · {versionStatus[item.status]}</option>)}
-              </select></label>
+            <div className="media-inspector-meta">
+              <Badge tone="blue">{action.asset.kind === 'image' ? 'Image' : 'Son'}</Badge>
+              <span className="muted">{action.asset.id}</span>
+            </div>
+            <label className="media-version-select">Version du fichier<select value={action.version} disabled={action.asset.versions.length <= 1}
+              onChange={(event) => setAction({ ...action, version: Number(event.target.value) })}>
+              {action.asset.versions.length === 0 && <option value={action.version}>v{action.version}</option>}
+              {action.asset.versions.map((item) => <option key={item.version} value={item.version}>v{item.version} · {versionStatus[item.status]}</option>)}
+            </select></label>
+            <MediaPreview assetId={action.asset.id} version={action.version} token={token} />
+            {(action.asset.source || action.asset.license) && (
+              <dl className="media-credits">
+                {action.asset.source && <div><dt>Source</dt><dd>{action.asset.source}</dd></div>}
+                {action.asset.license && <div><dt>Licence</dt><dd>{action.asset.license}</dd></div>}
+              </dl>
             )}
-            <MediaPreview assetId={previewing.asset.id} version={previewing.version} token={token} />
+            <div className="accounts-actions">
+              <button type="button" className="btn btn-outline" onClick={() => setAction({ type: 'metadata', asset: action.asset })}
+                aria-label={`Modifier les informations de ${action.asset.title}`}><Pencil size={16} aria-hidden="true" /> Modifier les informations</button>
+              <button type="button" className="btn btn-primary" onClick={() => setAction({ type: 'upload', replace: action.asset })}
+                aria-label={`Nouvelle version de ${action.asset.title}`}>Nouvelle version</button>
+            </div>
           </div>
-        </Dialog>
+        </Inspector>
       )}
     </section>
   );

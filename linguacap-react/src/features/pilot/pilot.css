@@ -50,7 +50,8 @@
 .pilot-session summary { cursor: pointer; }
 
 .planning-days { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; }
-.planning-day { border: 1px solid #dbe4ef; border-radius: .75rem; padding: .5rem .7rem; display: grid; gap: .35rem; margin: 0; }
+.planning-day { min-width: 0; border: 1px solid var(--line); border-radius: .85rem; padding: .65rem .75rem; display: grid; gap: .35rem; margin: 0; background: #f6faf7; }
+.planning-day:focus-within { border-color: #5ba497; background: #f0f8f4; }
 .planning-day legend { font-weight: 600; padding: 0 .2rem; }
 .planning-day label { display: flex; justify-content: space-between; align-items: center; gap: .4rem; font-size: .92rem; }
 .planning-day input[type="number"] { width: 4.5rem; }
@@ -61,6 +62,7 @@
 .planning-proposal h4 { margin: .4rem 0 0; }
 .planning-proposal caption { text-align: left; padding-bottom: .3rem; }
 .goal-facts { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: .6rem; margin: 0; }
+.goal-facts > div { padding: .72rem .8rem; background: #f4f8f5; border: 1px solid var(--line); border-radius: .7rem; }
 .goal-facts dt { color: var(--muted); font-size: .85rem; }
 .goal-facts dd { margin: .1rem 0 0; font-weight: 600; }
 

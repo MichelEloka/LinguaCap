@@ -1,9 +1,9 @@
 import { lazy, Suspense, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { FlaskConical } from 'lucide-react';
 import { isApiMode } from './config';
-import { Header, Footer, WorkspaceNav } from '../components/Shell';
+import { Header, Footer, workspaceLinks, workspaceNames } from '../components/Shell';
+import { WorkspaceFrame } from '../features/workspace/WorkspaceFrame';
 import { DemoProvider } from '../demo/context';
 import type { Role } from '../domain/types';
 import HomePage from '../features/home/HomePage';
@@ -38,13 +38,10 @@ function NavigationEffects() {
 function Workspace({ role, children }: { role: Role; children: ReactNode }) {
   if (isApiMode) return <Navigate to="/espace" replace />;
   return (
-    <div className="workspace">
-      <WorkspaceNav role={role} />
-      <div className="container workspace-content">
-        <p className="demo-notice"><FlaskConical size={16} aria-hidden="true" /> Démonstration locale <span>· Comptes fictifs</span></p>
-        <Suspense fallback={<p className="panel" role="status">Chargement de l’espace…</p>}>{children}</Suspense>
-      </div>
-    </div>
+    <WorkspaceFrame demo title={workspaceNames[role]}
+      links={workspaceLinks[role].map(({ title, ...link }) => ({ ...link, label: title }))}>
+      <div className="lc-enter"><Suspense fallback={<p className="panel" role="status">Chargement de l’espace…</p>}>{children}</Suspense></div>
+    </WorkspaceFrame>
   );
 }
 
@@ -53,11 +50,13 @@ function NotFound() {
 }
 
 function AppLayout() {
+  const { pathname } = useLocation();
+  const workspace = /^\/(espace|eleve|professeur|administration)(\/|$)/.test(pathname);
   return (
     <div className="app-shell">
       <NavigationEffects />
       <a className="skip-link" href="#main-content">Aller au contenu</a>
-      <Header />
+      {!workspace && <Header />}
       <main id="main-content" tabIndex={-1}>
         <Suspense fallback={<p className="container workspace-body" role="status">Chargement…</p>}>
           <Routes>
@@ -74,7 +73,7 @@ function AppLayout() {
           </Routes>
         </Suspense>
       </main>
-      <Footer />
+      {!workspace && <Footer />}
     </div>
   );
 }

@@ -47,7 +47,9 @@ export function ProgressBar({ value, label = 'Progression' }: { value: number; l
   return <div className="progress-track" role="progressbar" aria-label={label} aria-valuemin={0} aria-valuemax={100} aria-valuenow={progress}><span style={{ width: `${progress}%` }} /></div>;
 }
 
-export function Dialog({ title, children, onClose }: { title: string; children: ReactNode; onClose: () => void }) {
+interface OverlayProps { title: string; children: ReactNode; onClose: () => void }
+
+function Overlay({ title, children, onClose, inspector = false }: OverlayProps & { inspector?: boolean }) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -60,7 +62,7 @@ export function Dialog({ title, children, onClose }: { title: string; children: 
 
   return (
     <dialog
-      className="lc-dialog"
+      className={inspector ? 'lc-dialog lc-inspector' : 'lc-dialog'}
       aria-labelledby={titleId}
       ref={dialogRef}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
@@ -72,4 +74,12 @@ export function Dialog({ title, children, onClose }: { title: string; children: 
       </div>
     </dialog>
   );
+}
+
+export function Dialog(props: OverlayProps) {
+  return <Overlay {...props} />;
+}
+
+export function Inspector(props: OverlayProps) {
+  return <Overlay {...props} inspector />;
 }

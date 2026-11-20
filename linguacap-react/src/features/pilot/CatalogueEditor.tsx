@@ -1,7 +1,7 @@
 import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
 import { ArrowDown, ArrowLeft, ArrowUp, Eye, Plus, Save, Send, Trash2 } from 'lucide-react';
-import { Badge, Dialog, EmptyState } from '../../components/ui';
+import { Badge, EmptyState, Inspector } from '../../components/ui';
 import { requestApi } from '../../integration/api';
 import { ExerciseActivity, LessonActivity, type ActivityDetail, type Placement } from './LearnerSession';
 import { latestVersion, MediaPreview, versionStatus, type Asset, type MediaFile } from './MediaLibrary';
@@ -87,6 +87,16 @@ function newQuestion(questions: DraftQuestion[]): DraftQuestion {
     id: uniqueId(`q${questions.length + 1}`, questions.map((question) => question.id)), prompt: '', moduleRef: null,
     options: [{ id: 'a', label: '', correct: true }, { id: 'b', label: '', correct: false }],
   };
+}
+
+function EditorItem({ title, initiallyOpen = false, children }: { title: ReactNode; initiallyOpen?: boolean; children: ReactNode }) {
+  const [open, setOpen] = useState(initiallyOpen);
+  return (
+    <details className="editor-item" open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
+      <summary>{title}</summary>
+      {children}
+    </details>
+  );
 }
 
 function MoveButtons({ index, count, label, onMove, onRemove }: {
@@ -329,14 +339,14 @@ function ModuleEditor({ module, modules, onChange, assets, token, onPreview }: {
       )}
       <h4>Activités · {minutes} min</h4>
       {module.activities.map((activity, index) => (
-        <details className="editor-item" key={index} open={!activity.title}>
-          <summary>{kinds[activity.kind]} · {activity.title || activity.id} <span className="muted">{activity.estimatedMinutes} min</span></summary>
+        <EditorItem key={index} initiallyOpen={!activity.title}
+          title={<>{kinds[activity.kind]} · {activity.title || activity.id} <span className="muted">{activity.estimatedMinutes} min</span></>}>
           <MoveButtons index={index} count={module.activities.length} label={`l’activité ${activity.title || activity.id}`}
             onMove={(offset) => update({ activities: move(module.activities, index, offset) })}
             onRemove={() => update({ activities: module.activities.filter((_, position) => position !== index) })} />
           <ActivityEditor activity={activity} assets={assets} token={token} onPreview={() => onPreview(activity)}
             onChange={(value) => update({ activities: replaceAt(module.activities, index, value) })} />
-        </details>
+        </EditorItem>
       ))}
       <button type="button" className="btn btn-outline btn-small" onClick={() => update({
         activities: [...module.activities, {
@@ -413,13 +423,13 @@ function AssessmentEditor({ kind, assessment, onChange, assets, token }: {
       </div>
       <label>Présentation<textarea rows={2} maxLength={2000} value={assessment.description} onChange={(event) => update({ description: event.target.value })} /></label>
       {assessment.parts.map((part, index) => (
-        <details className="editor-item" key={index} open={!part.title}>
-          <summary>Partie {index + 1} · {part.title || competences.find((item) => item.id === part.competence)?.label}</summary>
+        <EditorItem key={index} initiallyOpen={!part.title}
+          title={<>Partie {index + 1} · {part.title || competences.find((item) => item.id === part.competence)?.label}</>}>
           <MoveButtons index={index} count={assessment.parts.length} label={`la partie ${index + 1}`}
             onMove={(offset) => update({ parts: move(assessment.parts, index, offset) })}
             onRemove={() => update({ parts: assessment.parts.filter((_, position) => position !== index) })} />
           <PartEditor part={part} assets={assets} token={token} onChange={(value) => update({ parts: replaceAt(assessment.parts, index, value) })} />
-        </details>
+        </EditorItem>
       ))}
       <button type="button" className="btn btn-outline btn-small" disabled={assessment.parts.length >= 12} onClick={() => update({
         parts: [...assessment.parts, {
@@ -432,7 +442,7 @@ function AssessmentEditor({ kind, assessment, onChange, assets, token }: {
 }
 
 /** Aperçu dans le lecteur élève, avec les fichiers de la version choisie (brouillons compris). */
-function PreviewDialog({ activity, token, onClose }: { activity: DraftActivity; token: string; onClose: () => void }) {
+function ActivityInspector({ activity, token, onClose }: { activity: DraftActivity; token: string; onClose: () => void }) {
   const [placements, setPlacements] = useState<Placement[] | null>(null);
   const [attempt, setAttempt] = useState(0);
 
@@ -457,20 +467,29 @@ function PreviewDialog({ activity, token, onClose }: { activity: DraftActivity; 
   };
   const renew = () => setAttempt((value) => value + 1);
   return (
-    <Dialog title={`Aperçu élève · ${activity.title || activity.id}`} onClose={onClose}>
+    <Inspector title={`Aperçu élève · ${activity.title || activity.id}`} onClose={onClose}>
       <div className="stack pilot-session">
+        <p className="muted">{kinds[activity.kind]} · {activity.estimatedMinutes} min</p>
         {!detail ? <p role="status">Préparation de l’aperçu…</p>
           : graded
             ? <ExerciseActivity activity={detail} sessionId="apercu" token={token} grade={null} onRenew={renew} preview
                 onSaveState={() => undefined} onGraded={async () => undefined} />
             : <LessonActivity activity={detail} onRenew={renew} busy={false} onComplete={() => undefined} preview />}
       </div>
-    </Dialog>
+    </Inspector>
   );
 }
 
-function Section({ title, children, open = false }: { title: string; children: ReactNode; open?: boolean }) {
-  return <details className="panel editor-section" open={open}><summary><h3>{title}</h3></summary><div className="stack">{children}</div></details>;
+const editorSections = [
+  { id: 'catalogue-settings', title: 'Réglages' },
+  { id: 'catalogue-modules', title: 'Modules' },
+  { id: 'catalogue-diagnostic', title: 'Diagnostic initial' },
+  { id: 'catalogue-midterm', title: 'Bilan intermédiaire' },
+  { id: 'catalogue-final', title: 'Examen blanc' },
+];
+
+function Section({ id, title, children, open = false }: { id: string; title: string; children: ReactNode; open?: boolean }) {
+  return <details id={id} className="panel editor-section" open={open}><summary><h3>{title}</h3></summary><div className="stack">{children}</div></details>;
 }
 
 /** Éditeur d'une version : un brouillon s'enregistre d'un bloc et se reprend ; une version publiée se consulte. */
@@ -574,8 +593,8 @@ function VersionEditor({ token }: { token: string }) {
   return (
     <div className="stack catalogue-editor">
       <Link className="text-link" to="/espace/catalogue"><ArrowLeft size={16} aria-hidden="true" /> Retour au catalogue</Link>
-      <section className="panel stack" aria-labelledby="version-title">
-        <div className="teacher-panel-heading">
+      <section className="panel stack catalogue-workspace editor-version-header" aria-labelledby="version-title">
+        <div className="catalogue-heading">
           <div>
             <h2 id="version-title">{version.levelCode} · version {version.number}</h2>
             <p className="muted">{version.levelTitle}{version.updatedAt ? ` · modifiée le ${dateFormat.format(new Date(version.updatedAt))}` : ''}</p>
@@ -595,18 +614,29 @@ function VersionEditor({ token }: { token: string }) {
         )}
         {checks && !readOnly && (
           checks.publishable
-            ? <p className="inline-message" role="status">Tout est complet : la version peut être publiée.</p>
+            ? <p className="inline-message" role="status">{dirty ? 'Enregistrez vos modifications pour actualiser les contrôles de publication.' : 'La version peut être publiée.'}</p>
             : (
-              <div className="stack" aria-labelledby="checks-title">
-                <h3 id="checks-title">À compléter avant publication ({checks.issues.length})</h3>
+              <details className="editor-readiness">
+                <summary>À compléter avant publication ({checks.issues.length})</summary>
+                {dirty && <p className="muted">Contrôles du dernier enregistrement.</p>}
                 <ul className="checks-list">{checks.issues.map((issue, index) => <li key={index}>{issue.message}</li>)}</ul>
-              </div>
+              </details>
             )
         )}
       </section>
 
-      <fieldset className="editor-body" disabled={readOnly || busy !== ''}>
-        <Section title="Réglages et critères de réussite" open>
+      <div className="editor-layout">
+        <nav className="panel editor-navigation" aria-label="Sections de la version">
+          <h3>Dans cette version</h3>
+          {editorSections.map(({ id, title }) => (
+            <a href={`#${id}`} key={id} onClick={() => {
+              const section = document.getElementById(id);
+              if (section instanceof HTMLDetailsElement) section.open = true;
+            }}>{title}</a>
+          ))}
+        </nav>
+        <fieldset className="editor-body" disabled={readOnly || busy !== ''}>
+        <Section id="catalogue-settings" title="Réglages et critères de réussite" open>
           <CompetenceChoice legend="Compétences évaluées" value={content.settings.expectedCompetences}
             onChange={(value) => change({ settings: { ...content.settings, expectedCompetences: value } })} />
           <label>Critères de réussite<textarea rows={3} maxLength={2000} value={content.settings.successCriteria}
@@ -620,17 +650,17 @@ function VersionEditor({ token }: { token: string }) {
           </div>
         </Section>
 
-        <Section title={`Modules (${content.modules.length})`} open>
+        <Section id="catalogue-modules" title={`Modules (${content.modules.length})`} open>
           {content.modules.length === 0 && <EmptyState title="Aucun module" description="Ajoutez un premier module pour structurer le parcours." />}
           {content.modules.map((module, index) => (
-            <details className="editor-item" key={index} open={!module.title}>
-              <summary>Module {index + 1} · {module.title || module.id} <span className="muted">{module.activities.length} activité{module.activities.length > 1 ? 's' : ''}</span></summary>
+            <EditorItem key={index} initiallyOpen={!module.title}
+              title={<>Module {index + 1} · {module.title || module.id} <span className="muted">{module.activities.length} activité{module.activities.length > 1 ? 's' : ''}</span></>}>
               <MoveButtons index={index} count={content.modules.length} label={`le module ${module.title || module.id}`}
                 onMove={(offset) => change({ modules: move(content.modules, index, offset) })}
                 onRemove={() => change({ modules: content.modules.filter((_, position) => position !== index) })} />
               <ModuleEditor module={module} modules={content.modules} assets={assets} token={token} onPreview={setPreview}
                 onChange={(value) => change({ modules: replaceAt(content.modules, index, value) })} />
-            </details>
+            </EditorItem>
           ))}
           <button type="button" className="btn btn-outline" onClick={() => change({
             modules: [...content.modules, {
@@ -640,7 +670,7 @@ function VersionEditor({ token }: { token: string }) {
           })}><Plus size={16} aria-hidden="true" /> Ajouter un module</button>
         </Section>
 
-        <Section title="Diagnostic initial">
+        <Section id="catalogue-diagnostic" title="Diagnostic initial">
           {content.diagnostic ? (
             <>
               <div className="pilot-form-grid">
@@ -661,13 +691,14 @@ function VersionEditor({ token }: { token: string }) {
           )}
         </Section>
 
-        <Section title="Bilan intermédiaire">
+        <Section id="catalogue-midterm" title="Bilan intermédiaire">
           <AssessmentEditor kind="midterm" assessment={midterm} assets={assets} token={token} onChange={(value) => setAssessment('midterm', value)} />
         </Section>
-        <Section title="Examen blanc">
+        <Section id="catalogue-final" title="Examen blanc">
           <AssessmentEditor kind="final" assessment={final} assets={assets} token={token} onChange={(value) => setAssessment('final', value)} />
         </Section>
-      </fieldset>
+        </fieldset>
+      </div>
 
       {notice && <p className="inline-message" role="status">{notice}</p>}
       {error && <p className="inline-message warning" role="alert">{error}</p>}
@@ -691,12 +722,12 @@ function VersionEditor({ token }: { token: string }) {
           </button>
         )}
       </div>
-      {preview && <PreviewDialog activity={preview} token={token} onClose={() => setPreview(null)} />}
+      {preview && <ActivityInspector activity={preview} token={token} onClose={() => setPreview(null)} />}
     </div>
   );
 }
 
-function LevelDialog({ level, levels, token, onClose, onDone }: {
+function LevelInspector({ level, levels, token, onClose, onDone }: {
   level: CatalogueLevel; levels: CatalogueLevel[]; token: string; onClose: () => void; onDone: (levels: CatalogueLevel[]) => void;
 }) {
   const [error, setError] = useState('');
@@ -722,7 +753,7 @@ function LevelDialog({ level, levels, token, onClose, onDone }: {
   }
 
   return (
-    <Dialog title={`Niveau ${level.code}`} onClose={onClose}>
+    <Inspector title={`Modifier le niveau ${level.code}`} onClose={onClose}>
       <form className="teacher-form stack" onSubmit={submit}>
         <label>Titre<input name="title" required maxLength={120} defaultValue={level.title} /></label>
         <label>Description<textarea name="description" rows={3} maxLength={2000} defaultValue={level.description ?? ''} /></label>
@@ -739,11 +770,11 @@ function LevelDialog({ level, levels, token, onClose, onDone }: {
           <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
         </div>
       </form>
-    </Dialog>
+    </Inspector>
   );
 }
 
-function CreateLevelDialog({ token, onClose, onCreate }: { token: string; onClose: () => void; onCreate: (code: string) => void }) {
+function CreateLevelInspector({ token, onClose, onCreate }: { token: string; onClose: () => void; onCreate: (code: string) => void }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -766,7 +797,7 @@ function CreateLevelDialog({ token, onClose, onCreate }: { token: string; onClos
   }
 
   return (
-    <Dialog title="Créer un niveau" onClose={onClose}>
+    <Inspector title="Créer un niveau" onClose={onClose}>
       <form className="teacher-form stack" onSubmit={submit}>
         <label>Code CECRL<input name="code" required pattern="[ABCabc][12]" placeholder="B2" maxLength={2} /></label>
         <label>Titre<input name="title" required maxLength={120} placeholder="Allemand B2" /></label>
@@ -777,7 +808,7 @@ function CreateLevelDialog({ token, onClose, onCreate }: { token: string; onClos
           <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Création…' : 'Créer le niveau'}</button>
         </div>
       </form>
-    </Dialog>
+    </Inspector>
   );
 }
 
@@ -788,8 +819,7 @@ function LevelsView({ token }: { token: string }) {
   const [error, setError] = useState('');
   const [notice, setNotice] = useState('');
   const [refresh, setRefresh] = useState(0);
-  const [editing, setEditing] = useState<CatalogueLevel | null>(null);
-  const [creating, setCreating] = useState(false);
+  const [levelAction, setLevelAction] = useState<'create' | CatalogueLevel | null>(null);
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -839,10 +869,9 @@ function LevelsView({ token }: { token: string }) {
   }
 
   return (
-    <section className="panel stack" aria-labelledby="catalogue-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="catalogue-title">Catalogue</h2><p className="muted">Niveaux d’allemand, ordre, prérequis et versions des parcours</p></div>
-        <button type="button" className="btn btn-outline" onClick={() => setCreating(true)}><Plus size={17} aria-hidden="true" /> Nouveau niveau</button>
+    <section className="panel stack catalogue-workspace" aria-label="Niveaux du catalogue">
+      <div className="staff-panel-actions">
+        <button type="button" className="btn btn-primary" onClick={() => setLevelAction('create')}><Plus size={17} aria-hidden="true" /> Nouveau niveau</button>
       </div>
       {notice && <p className="inline-message" role="status">{notice}</p>}
       {error && <p className="inline-message warning" role="alert">{error}</p>}
@@ -854,15 +883,18 @@ function LevelsView({ token }: { token: string }) {
             return (
               <li key={level.id} className="catalogue-level">
                 <div className="catalogue-level-head">
-                  <div>
-                    <h3>{level.code} · {level.title}</h3>
-                    <p className="muted">{level.prerequisiteLevelCode ? `Prérequis : ${level.prerequisiteLevelCode}` : 'Sans prérequis'}
-                      {' · '}{published ? `version ${published.number} proposée aux attributions` : 'aucune version publiée'}</p>
+                  <div className="catalogue-level-title">
+                    <span className="catalogue-level-mark" aria-hidden="true">{level.code}</span>
+                    <div>
+                      <h3>{level.title}</h3>
+                      <p className="muted"><span className="visually-hidden">Niveau {level.code} · </span>{level.prerequisiteLevelCode ? `Prérequis ${level.prerequisiteLevelCode}` : 'Sans prérequis'}
+                        {' · '}{published ? `version ${published.number} proposée aux attributions` : 'aucune version publiée'}</p>
+                    </div>
                   </div>
                   <span className="accounts-actions">
                     <button type="button" className="icon-btn" disabled={busy || index === 0} onClick={() => void reorder(index, -1)} aria-label={`Monter ${level.code}`}><ArrowUp size={16} /></button>
                     <button type="button" className="icon-btn" disabled={busy || index === levels.length - 1} onClick={() => void reorder(index, 1)} aria-label={`Descendre ${level.code}`}><ArrowDown size={16} /></button>
-                    <button type="button" className="btn btn-outline" onClick={() => setEditing(level)} aria-label={`Modifier le niveau ${level.code}`}>Modifier</button>
+                    <button type="button" className="btn btn-outline" onClick={() => setLevelAction(level)} aria-label={`Modifier le niveau ${level.code}`}>Modifier</button>
                     {drafted
                       ? <Link className="btn btn-primary" to={`/espace/catalogue/versions/${drafted.id}`}>Reprendre le brouillon</Link>
                       : <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void draft(level, published?.id ?? null)}>
@@ -885,13 +917,13 @@ function LevelsView({ token }: { token: string }) {
           })}
         </ol>
       )}
-      {editing && levels && <LevelDialog level={editing} levels={levels} token={token} onClose={() => setEditing(null)} onDone={(updated) => {
-        setEditing(null);
+      {levelAction && levelAction !== 'create' && levels && <LevelInspector level={levelAction} levels={levels} token={token} onClose={() => setLevelAction(null)} onDone={(updated) => {
+        setLevelAction((current) => current === levelAction ? null : current);
         setLevels(updated);
-        setNotice(`Niveau ${editing.code} enregistré.`);
+        setNotice(`Niveau ${levelAction.code} enregistré.`);
       }} />}
-      {creating && <CreateLevelDialog token={token} onClose={() => setCreating(false)} onCreate={(code) => {
-        setCreating(false);
+      {levelAction === 'create' && <CreateLevelInspector token={token} onClose={() => setLevelAction(null)} onCreate={(code) => {
+        setLevelAction((current) => current === 'create' ? null : current);
         setNotice(`Le niveau ${code} est créé : préparez maintenant son parcours.`);
         setRefresh((value) => value + 1);
       }} />}

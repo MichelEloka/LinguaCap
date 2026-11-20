@@ -1,16 +1,16 @@
 :root {
   font-family: 'DM Sans', system-ui, sans-serif;
-  color: #112b56;
+  color: #17283a;
   background: #fff;
   font-synthesis: none;
   font-weight: 400;
   line-height: 1.55;
-  --navy: #0b2554;
-  --blue: #125ee7;
-  --blue-dark: #0b49bf;
-  --muted: #566982;
-  --line: #dfe7f3;
-  --bg: #f4f8fd;
+  --navy: #17283a;
+  --blue: #176b62;
+  --blue-dark: #10554d;
+  --muted: #526477;
+  --line: #dae4df;
+  --bg: #f4f7f4;
   --radius: 18px;
   --shadow: 0 14px 44px rgb(20 58 112 / 8%);
 }
@@ -73,7 +73,7 @@ h3 { font-size: 1.12rem; }
 .btn { min-height: 44px; padding: .65rem 1rem; }
 .icon-button { min-width: 40px; min-height: 40px; padding: .45rem; background: #edf4ff; color: var(--blue-dark); }
 .icon-button:hover { background: #e0edff; }
-.btn-primary { color: #fff; background: var(--blue); box-shadow: 0 7px 20px rgb(18 94 231 / 15%); }
+.btn-primary { color: #fff; background: var(--blue); box-shadow: 0 7px 20px rgb(23 107 98 / 16%); }
 .btn-primary:hover { background: var(--blue-dark); }
 .btn-outline { color: var(--navy); background: #fff; border-color: #cfdced; }
 .btn-outline:hover { background: #f2f7ff; border-color: #b2c8e5; }
@@ -82,7 +82,7 @@ h3 { font-size: 1.12rem; }
 .text-link { color: #154da8; font-weight: 700; font-size: .9375rem; border: 0; background: transparent; padding: 0; }
 .text-link:hover { text-decoration: underline; text-underline-offset: .2em; }
 
-.home-hero { overflow: hidden; background: radial-gradient(ellipse at 82% 47%, #deeaff 0%, #f3f8ff 36%, #fff 75%); }
+.home-hero { overflow: hidden; background: radial-gradient(ellipse at 82% 47%, #daeee2 0%, #f1f7f1 42%, #fff 78%); }
 .hero-grid {
   min-height: 600px; padding-block: clamp(3rem, 6vw, 5rem); display: grid;
   grid-template-columns: 1.16fr .84fr; gap: clamp(2.5rem, 7vw, 6.5rem); align-items: center;
@@ -184,7 +184,7 @@ h3 { font-size: 1.12rem; }
 .badge-amber { color: #825001; background: #fff1d7; }
 .badge-violet { color: #613da1; background: #eee8fb; }
 .progress-track { height: 8px; border-radius: 12px; background: #e5edf8; overflow: hidden; }
-.progress-track > span { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #1260e7, #4a9afa); transition: width .23s ease; }
+.progress-track > span { height: 100%; display: block; border-radius: inherit; background: linear-gradient(90deg, #176b62, #64b99b); transition: width .23s ease; }
 .empty-state { display: grid; justify-items: center; gap: .4rem; text-align: center; padding: 1.65rem .9rem; color: var(--muted); }
 .empty-state strong { color: var(--navy); }
 .stack { display: grid; align-content: start; gap: .9rem; }

@@ -1,0 +1,381 @@
+.staff-workspace,
+.staff-page {
+  min-width: 0;
+}
+
+.staff-page {
+  gap: 1.25rem;
+}
+
+.staff-page .page-heading {
+  margin-bottom: .2rem;
+}
+
+.staff-page .panel > :is(h2, h3, p),
+.staff-section-heading h2 {
+  margin-block: 0;
+}
+
+.staff-page .panel h2 {
+  font-size: clamp(1.1rem, 1.05rem + .38vw, 1.35rem);
+}
+
+.staff-page .panel h3 {
+  font-size: 1rem;
+}
+
+.staff-notice {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+}
+
+.staff-stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: .9rem;
+}
+
+.staff-split,
+.staff-sheet-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: .95rem;
+  align-items: start;
+}
+
+.staff-sheet-grid {
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+}
+
+.staff-split > *,
+.staff-sheet-grid > * {
+  min-width: 0;
+}
+
+.staff-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .55rem;
+}
+
+.staff-section-heading > svg,
+.staff-action-row > svg,
+.staff-search > svg {
+  color: var(--blue);
+  flex: 0 0 auto;
+}
+
+.staff-overview-alerts {
+  display: grid;
+  gap: .18rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.staff-overview-alerts > li + li,
+.staff-sheet-history > li + li {
+  border-top: 1px solid var(--line);
+}
+
+.staff-overview-alerts a {
+  display: flex;
+  padding: .7rem .2rem;
+}
+
+.staff-overview-alerts small,
+.staff-alert-item small {
+  display: block;
+  margin-top: .2rem;
+  color: var(--muted);
+  font-size: .875rem;
+  font-weight: 500;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.staff-action-row {
+  display: flex;
+  gap: .75rem;
+  align-items: center;
+  min-height: 3rem;
+  padding: .65rem .75rem;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  font-size: .9375rem;
+  font-weight: 700;
+}
+
+.staff-action-row:hover,
+.staff-icon-action:hover,
+.staff-person:hover {
+  color: var(--blue-dark);
+}
+
+.staff-action-row:hover,
+.staff-icon-action:hover {
+  background: #f0f7f3;
+}
+
+.staff-action-row .badge {
+  margin-left: auto;
+}
+
+.staff-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+  margin-bottom: 1rem;
+}
+
+.staff-search {
+  display: flex;
+  align-items: center;
+  flex: 1 1 16rem;
+  gap: .65rem;
+  min-width: 0;
+  min-height: 2.65rem;
+  padding-inline: .68rem;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  background: #f6faf8;
+}
+
+.staff-search:focus-within {
+  outline: 2px solid #328a79;
+  outline-offset: 2px;
+}
+
+.staff-search input {
+  min-width: 0;
+  width: 100%;
+  min-height: 2.6rem;
+  padding: .45rem 0;
+  border: 0;
+  color: var(--navy);
+  background: none;
+}
+
+.staff-workspace .staff-search input:focus-visible {
+  outline: none;
+}
+
+.staff-filters select {
+  min-height: 2.65rem;
+  max-width: 100%;
+  padding: .45rem .7rem;
+  border: 1px solid var(--line);
+  border-radius: .65rem;
+  background-color: #fff;
+  color: var(--navy);
+  font: inherit;
+  font-size: .9rem;
+}
+
+.staff-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: .9rem;
+}
+
+.staff-table :is(th, td) {
+  padding: .65rem .55rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: middle;
+}
+
+.staff-table thead {
+  color: var(--muted);
+  background: #f4f8f5;
+  font-size: .86rem;
+}
+
+.staff-table tbody tr:last-child :is(th, td) {
+  border-bottom: 0;
+}
+
+.staff-table tbody tr:hover {
+  background: #f8fbf9;
+}
+
+.staff-person {
+  display: flex;
+  align-items: center;
+  gap: .62rem;
+  min-width: 0;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+.staff-avatar,
+.staff-alert-icon {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.15rem;
+  height: 2.15rem;
+  border-radius: .62rem;
+  background: #e8f3ed;
+  color: #195448;
+  font-size: .75rem;
+  font-weight: 800;
+}
+
+.staff-alert-icon {
+  color: #805019;
+  background: #fff2df;
+}
+
+.staff-cell-stack {
+  display: grid;
+  gap: .3rem;
+  min-width: 0;
+}
+
+.staff-cell-stack .badge {
+  padding: .22rem .45rem;
+  font-size: .75rem;
+}
+
+.staff-row-actions,
+.staff-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.staff-icon-action {
+  display: grid;
+  flex: 0 0 auto;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: .35rem;
+  border: 1px solid var(--line);
+  border-radius: .64rem;
+  color: var(--blue);
+}
+
+.staff-freshness {
+  padding-top: .75rem;
+  border-top: 1px solid var(--line);
+  font-size: .875rem;
+}
+
+.staff-alert-list {
+  display: grid;
+  gap: .5rem;
+}
+
+.staff-alert-item {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  width: 100%;
+  padding: .75rem;
+  border: 1px solid var(--line);
+  border-radius: .75rem;
+  text-align: left;
+}
+
+.staff-alert-item[aria-pressed='true'],
+.staff-alert-item:hover {
+  border-color: #b5d5c8;
+  background: #eff8f3;
+}
+
+.staff-composer {
+  max-width: 44rem;
+}
+
+.staff-side .staff-composer textarea,
+.staff-sheet-grid .staff-composer textarea {
+  width: 100%;
+}
+
+.staff-composer .staff-form-actions {
+  justify-content: flex-end;
+}
+
+.staff-sheet-history li {
+  padding: .6rem 0;
+}
+
+.staff-activity-facts {
+  grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+  gap: .7rem;
+}
+
+.staff-mobile-level {
+  display: none;
+}
+
+.staff-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+@media (width <= 1160px) {
+  .staff-stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .staff-table .staff-secondary-cell {
+    display: none;
+  }
+}
+
+@media (width <= 1000px) {
+  .staff-sheet-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (width <= 720px) {
+  .staff-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (width <= 520px) {
+  .staff-table .staff-grading-cell,
+  .staff-table .staff-level-cell,
+  .staff-table thead th:nth-child(2) {
+    display: none;
+  }
+
+  .staff-table :is(th, td) {
+    padding-inline: .3rem;
+  }
+
+  .staff-table .staff-person {
+    gap: .36rem;
+  }
+
+  .staff-table .staff-avatar {
+    width: 1.65rem;
+    height: 1.65rem;
+  }
+
+  .staff-mobile-level {
+    display: block;
+    color: var(--muted);
+    font-size: .78rem;
+    font-weight: 500;
+  }
+}
+
+/* Barre d'actions d'un panneau dont le titre est porté par l'en-tête de page. */
+.staff-panel-actions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: .5rem; }
+.staff-panel-actions .accounts-actions { justify-content: flex-end; }

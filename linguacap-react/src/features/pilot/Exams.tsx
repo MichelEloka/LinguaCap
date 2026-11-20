@@ -456,8 +456,7 @@ function GradingQueue({ token }: { token: string }) {
   }, [token]);
 
   return (
-    <section className="panel stack" aria-labelledby="grading-queue">
-      <div className="teacher-panel-heading"><div><h2 id="grading-queue">Corrections</h2><p className="muted">Écrits et oraux remis, les plus anciens d’abord</p></div></div>
+    <section className="panel stack" aria-label="Copies à corriger">
       {error ? <p className="inline-message warning" role="alert">{error}</p>
         : queue === null ? <p role="status">Chargement des corrections…</p>
         : queue.length === 0 ? <EmptyState title="Aucune correction en attente" />

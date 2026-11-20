@@ -68,9 +68,8 @@ export function KpiPanel({ token }: { token: string }) {
   }
 
   return (
-    <section className="panel stack" aria-labelledby="kpi-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="kpi-title">Indicateurs</h2><p className="muted">Usages du pilote par période, niveau, cadence et type de parcours</p></div>
+    <section className="panel stack" aria-label="Indicateurs du pilote">
+      <div className="staff-panel-actions">
         <button type="button" className="btn btn-outline" onClick={() => setRefresh((value) => value + 1)}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
       </div>
       <form className="media-filters" onSubmit={apply} aria-label="Filtrer les indicateurs">

@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState, type FormEvent } from 'react';
 import { RefreshCw, Send, UserCog, XCircle } from 'lucide-react';
-import { Badge, Dialog, EmptyState } from '../../components/ui';
+import { Badge, EmptyState, Inspector } from '../../components/ui';
 import { requestApi, roleNames, type AccountRole, type Permission, type Profile } from '../../integration/api';
 import './accounts.css';
 
@@ -125,7 +125,7 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
   }
 
   return (
-    <Dialog title={admin ? 'Inviter un utilisateur' : 'Inviter un élève'} onClose={onClose}>
+    <Inspector title={admin ? 'Inviter un utilisateur' : 'Inviter un élève'} onClose={onClose}>
       <form className="teacher-form stack" onSubmit={submit}>
         <label>Nom complet<input name="displayName" autoComplete="name" required maxLength={140} /></label>
         <label>Adresse e-mail<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
@@ -153,7 +153,7 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
           <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Envoi en cours…' : 'Envoyer l’invitation'}</button>
         </div>
       </form>
-    </Dialog>
+    </Inspector>
   );
 }
 
@@ -194,10 +194,8 @@ export function InvitationsPanel({ token, refresh }: { token: string; refresh: n
   }
 
   return (
-    <section className="panel" aria-labelledby="pilot-invitations-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="pilot-invitations-title">Invitations</h2>
-          <p className="muted">Une invitation par adresse, valable sept jours, renvoyable tant qu’elle n’est pas acceptée.</p></div>
+    <section className="panel" aria-label="Invitations envoyées">
+      <div className="staff-panel-actions">
         <button className="btn btn-outline" type="button" onClick={() => setReload((count) => count + 1)}>
           <RefreshCw size={17} aria-hidden="true" /> Actualiser
         </button>
@@ -385,7 +383,7 @@ function UserDetailDialog({ userId, token, users, currentUserId, onClose, onChan
   const self = user?.id === currentUserId;
 
   return (
-    <Dialog title={user ? `Fiche de ${user.displayName}` : 'Fiche du compte'} onClose={onClose}>
+    <Inspector title={user ? `Fiche de ${user.displayName}` : 'Fiche du compte'} onClose={onClose}>
       {!detail ? (error ? <p className="inline-message warning" role="alert">{error}</p> : <p role="status">Chargement de la fiche…</p>) : user && (
         <div className="stack accounts-detail">
           <dl className="accounts-summary">
@@ -473,6 +471,6 @@ function UserDetailDialog({ userId, token, users, currentUserId, onClose, onChan
           )}
         </div>
       )}
-    </Dialog>
+    </Inspector>
   );
 }
