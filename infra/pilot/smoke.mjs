@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
+import { readFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
 import { localSql, localSupabase } from './local.mjs';
 
@@ -133,7 +134,8 @@ const message = await api('/tracking/messages', teacher.token, {
 });
 assert.ok((await api('/tracking/messages', learnerToken)).some((item) => item.id === message.id));
 await api('/tracking/messages?learnerId=' + learner.id, otherTeacher.token, { status: 403 });
-console.log('Recette réussie · invitation, Auth, cours SQL, médias privés, objectif, résultat, droits professeur et encouragement.');
+localSql(local.container, readFileSync(new URL('db-isolation.sql', import.meta.url), 'utf8'));
+console.log('Recette réussie · invitation, Auth, cours SQL, médias privés, objectif, résultat, droits professeur, encouragement et isolation des rôles SQL.');
 
 if (process.argv.includes('--browser')) {
   const require = createRequire(new URL('../../linguacap-react/package.json', import.meta.url));
