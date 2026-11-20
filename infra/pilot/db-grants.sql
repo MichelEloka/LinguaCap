@@ -17,6 +17,8 @@ GRANT SELECT, INSERT, UPDATE, DELETE ON catalogue.modules, catalogue.activities,
 GRANT USAGE ON SCHEMA media TO lingua_media;
 GRANT SELECT, INSERT, UPDATE ON media.assets, media.asset_versions, media.uploads TO lingua_media;
 GRANT SELECT, INSERT, UPDATE, DELETE ON media.storage_read_grants TO lingua_media;
+GRANT SELECT, INSERT, UPDATE ON media.productions TO lingua_media;
+GRANT SELECT, INSERT, UPDATE, DELETE ON media.production_read_grants TO lingua_media;
 
 GRANT USAGE ON SCHEMA learning TO lingua_learning;
 GRANT SELECT, INSERT, UPDATE ON learning.goal_plans TO lingua_learning;
@@ -27,6 +29,7 @@ GRANT SELECT, INSERT, UPDATE ON learning.plan_revisions, learning.session_due_hi
 
 GRANT USAGE ON SCHEMA assessment TO lingua_assessment;
 GRANT SELECT, INSERT ON assessment.quiz_attempts TO lingua_assessment;
+GRANT SELECT, INSERT, UPDATE ON assessment.exam_attempts TO lingua_assessment;
 
 GRANT USAGE ON SCHEMA tracking TO lingua_tracking;
 GRANT SELECT, INSERT ON tracking.encouragements TO lingua_tracking;
