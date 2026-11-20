@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import { randomBytes, randomUUID } from 'node:crypto';
+import { createRequire } from 'node:module';
 import { localSql, localSupabase } from './local.mjs';
 
 const local = localSupabase();
@@ -133,3 +134,26 @@ const message = await api('/tracking/messages', teacher.token, {
 assert.ok((await api('/tracking/messages', learnerToken)).some((item) => item.id === message.id));
 await api('/tracking/messages?learnerId=' + learner.id, otherTeacher.token, { status: 403 });
 console.log('Recette réussie · invitation, Auth, cours SQL, médias privés, objectif, résultat, droits professeur et encouragement.');
+
+if (process.argv.includes('--browser')) {
+  const require = createRequire(new URL('../../linguacap-react/package.json', import.meta.url));
+  const { chromium, expect } = require('@playwright/test');
+  const browser = await chromium.launch({ channel: process.env.PLAYWRIGHT_CHANNEL });
+  try {
+    const page = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await page.goto('http://127.0.0.1:5186/connexion');
+    await page.getByLabel('Adresse e-mail').fill(email);
+    await page.getByLabel('Mot de passe', { exact: true }).fill(password);
+    await page.getByRole('button', { name: 'Se connecter', exact: true }).click();
+    await expect(page.getByRole('heading', { name: 'Commander au café' })).toBeVisible({ timeout: 15_000 });
+    await expect(page.getByText('Bravo pour cette première séance !')).toBeVisible();
+    await page.waitForFunction(() => document.querySelector('.pilot-lesson-image')?.naturalWidth > 0
+      && Number.isFinite(document.querySelector('audio')?.duration));
+    await page.getByRole('radio', { name: 'Un café' }).check();
+    await page.getByRole('button', { name: 'Valider mes réponses' }).click();
+    await expect(page.getByText('Résultat enregistré · 1 / 1')).toBeVisible();
+    console.log('Recette navigateur réussie · session Supabase, leçon, médias et quiz sur mobile.');
+  } finally {
+    await browser.close();
+  }
+}

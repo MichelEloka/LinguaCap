@@ -87,7 +87,19 @@ foreach ($module in $modules) {
 $existing = @(Cloud iam service-accounts list '--format=value(email)')
 foreach ($module in $modules) {
     if ($roles[$module] -notin $existing) {
-        Cloud iam service-accounts create "linguacap-$module" "--display-name=LinguaCap $module" '--format=none' | Out-Null
+        for ($attempt = 0; $attempt -lt 3; $attempt++) {
+            $creation = & {
+                $ErrorActionPreference = 'Continue'
+                $output = & gcloud.cmd iam service-accounts create "linguacap-$module" "--display-name=LinguaCap $module" "--project=$Project" --quiet 2>&1
+                @{ ExitCode = $LASTEXITCODE; Text = $output -join ' ' }
+            }
+            if ($creation.ExitCode -eq 0) { break }
+            if ($attempt -eq 2 -or $creation.Text -notmatch 'RESOURCE_EXHAUSTED|quota has been reached') {
+                throw "Compte Cloud Run indisponible : $module. $($creation.Text)"
+            }
+            Write-Host 'Quota IAM par minute atteint. Nouvelle tentative dans 60 secondes.'
+            Start-Sleep -Seconds 60
+        }
     }
 }
 
