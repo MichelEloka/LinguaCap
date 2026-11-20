@@ -23,7 +23,7 @@ export function localSupabase() {
   }
   const config = readFileSync(new URL('../../supabase/config.toml', import.meta.url), 'utf8');
   const container = 'supabase_db_' + config.match(/^project_id\s*=\s*"([\w-]+)"/m)?.[1];
-  return { api: api.origin, jdbc: `jdbc:postgresql://${database.host}/${database.pathname.slice(1)}`,
+  return { api: api.origin, jdbc: `jdbc:postgresql://${database.host}/${database.pathname.slice(1)}`, dbUrl: env.DB_URL,
     publishable: env.PUBLISHABLE_KEY || env.ANON_KEY,
     secret: env.SECRET_KEY || env.SERVICE_ROLE_KEY, mail: env.MAILPIT_URL, container };
 }

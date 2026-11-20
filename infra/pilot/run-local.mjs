@@ -1,6 +1,7 @@
 import { execFileSync, spawn } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
+import { createServer } from 'node:http';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { businessServices, localSql, localSupabase, root } from './local.mjs';
@@ -39,8 +40,12 @@ execFileSync(process.execPath, [join(root, 'scripts', 'seed-course-media.mjs')],
   cwd: root, env: { ...env, SUPABASE_SEED_STORAGE_KEY: local.secret }, stdio: 'inherit',
 });
 
-const children = [];
+let control = null;
+const children = new Map();
+const launches = new Map();
+const paused = new Set();
 function start(name, command, args, config, cwd = root) {
+  launches.set(name, () => start(name, command, args, config, cwd));
   const child = spawn(command, args, { cwd, env: config, stdio: ['ignore', 'pipe', 'pipe'], windowsHide: true });
   for (const stream of [child.stdout, child.stderr]) {
     stream.on('data', (data) => {
@@ -49,15 +54,16 @@ function start(name, command, args, config, cwd = root) {
   }
   child.on('error', (error) => { console.error(name, error.message); stop(1); });
   child.on('exit', (code) => {
-    if (!stopping) { console.error(`${name} s’est arrêté.`); stop(code || 1); }
+    if (!stopping && !paused.has(name)) { console.error(`${name} s’est arrêté.`); stop(code || 1); }
   });
-  children.push(child);
+  children.set(name, child);
 }
 
 let stopping = false;
 function stop(code) {
   stopping = true;
-  for (const child of children) child.kill();
+  for (const child of children.values()) child.kill();
+  control?.close();
   process.exitCode = code;
 }
 
@@ -72,5 +78,27 @@ start('web', process.execPath, [join(frontend, 'node_modules', 'vite', 'bin', 'v
   ...process.env, VITE_SUPABASE_URL: local.api, VITE_SUPABASE_PUBLISHABLE_KEY: local.publishable,
   LINGUACAP_API_PROXY: 'http://127.0.0.1:8080',
 }, frontend);
+// Pilotage de la recette (DEV-101) : arrêter puis relancer un service pour éprouver une indisponibilité temporaire.
+// Réservé à la boucle locale et au secret interne de la recette.
+control = createServer((request, response) => {
+  const [, action, name] = (request.url ?? '').split('/');
+  if (request.method !== 'POST' || request.headers['x-linguacap-internal'] !== env.LINGUACAP_INTERNAL_SECRET
+      || !launches.has(name) || name === 'web' || !['stop', 'start'].includes(action)) {
+    response.writeHead(404).end();
+    return;
+  }
+  if (action === 'stop') {
+    const child = children.get(name);
+    paused.add(name);
+    if (child.exitCode !== null) { response.writeHead(204).end(); return; }
+    child.once('exit', () => response.writeHead(204).end());
+    child.kill();
+  } else {
+    if (!paused.has(name)) { response.writeHead(409).end(); return; }
+    paused.delete(name);
+    launches.get(name)();
+    response.writeHead(202).end();
+  }
+}).listen(8099, '127.0.0.1');
 process.on('SIGINT', () => stop(0));
 process.on('SIGTERM', () => stop(0));

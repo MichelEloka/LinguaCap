@@ -1156,6 +1156,76 @@ console.log(`Recette des contenus réussie · import idempotent de ${trackA1.act
   + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (diagnostic, deux séances par jour, retard '
   + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
 
+// --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
+async function control(action, service) {
+  const response = await fetch(`http://127.0.0.1:8099/${action}/${service}`, {
+    method: 'POST', headers: { 'X-Linguacap-Internal': internalSecret }, signal: AbortSignal.timeout(60_000) });
+  assert.ok(response.ok, `${action} ${service} · HTTP ${response.status}`);
+}
+async function ready(port) {
+  for (let attempt = 0; attempt < 120; attempt++) {
+    const response = await fetch(`http://127.0.0.1:${port}/q/health/ready`, { signal: AbortSignal.timeout(2_000) }).catch(() => null);
+    if (response?.ok) return;
+    await new Promise((resolve) => setTimeout(resolve, 500));
+  }
+  throw new Error(`Le service du port ${port} ne redémarre pas.`);
+}
+const health = () => json(gateway + '/api/v1/health');
+const filesOf = (detail) => detail.activities.flatMap((activity) => activity.placements);
+
+// Médias indisponible : la séance reste lisible, ses supports reviennent avec le service.
+const outageSession = a1Worked[0].session.id;
+await control('stop', 'media');
+assert.equal((await health()).status, 'degraded', 'La sonde signale le service indisponible');
+const withoutMedia = await api(`/learning/sessions/${outageSession}`, a1Learner.token);
+assert.ok(withoutMedia.activities.length > 0, 'La séance reste lisible sans la médiathèque');
+assert.ok(filesOf(withoutMedia).every((placement) => !placement.url), 'Les supports attendent le retour de la médiathèque');
+await control('start', 'media');
+await ready(8083);
+assert.equal((await health()).status, 'ok');
+assert.ok(filesOf(await api(`/learning/sessions/${outageSession}`, a1Learner.token)).some((placement) => placement.url),
+  'Les supports sont de nouveau servis');
+
+// Apprentissage indisponible pendant le traitement du suivi : l'erreur est signalée, le point de reprise n'avance pas,
+// puis les événements produits entre-temps sont rattrapés sans perte.
+await runJob();
+let outageDetail = null;
+let outageLesson = null;
+for (const session of a1Replanned.sessions.filter((item) => item.status !== 'completed')) {
+  outageDetail = await api(`/learning/sessions/${session.id}`, a1Learner.token);
+  outageLesson = outageDetail.activities.find((activity) => activity.kind === 'lesson' && activity.status !== 'completed');
+  if (outageLesson) break;
+}
+assert.ok(outageLesson, 'Une leçon reste à faire pour produire un événement');
+await put(`/learning/sessions/${outageDetail.session.id}/activities/${outageLesson.id}/progress`, a1Learner.token, { completed: true });
+const learningBefore = sequences('learning');
+await control('stop', 'learning');
+const syncDuringOutage = await runJob();
+assert.ok(syncDuringOutage.errors.learning, 'Le traitement signale le producteur indisponible');
+assert.equal(sequences('learning'), learningBefore, 'Le point de reprise n’avance pas pendant l’indisponibilité');
+await control('start', 'learning');
+await ready(8084);
+const caughtUp = await runJob();
+assert.deepEqual(caughtUp.errors, {});
+assert.ok(caughtUp.imported >= 1, 'Les événements produits avant la coupure sont rattrapés');
+assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')));
+console.log('Recette des indisponibilités réussie · séance lisible sans la médiathèque puis supports rétablis, '
+  + 'sonde dégradée puis rétablie, suivi interrompu sans perte puis rattrapé après le retour de l’Apprentissage.');
+
+// --- Sauvegarde et restauration (DEV-108) ----------------------------------------------------------------
+const { backup } = await import('./backup.mjs');
+const { restoreCheck } = await import('./restore-check.mjs');
+const backupFolder = join(tmpdir(), `linguacap-sauvegarde-${suffix}`);
+const exported = await backup({ out: backupFolder, dbUrl: local.dbUrl, storage: local.api, storageKey: local.secret, log: () => {} });
+assert.ok(Object.keys(exported.tables).length >= 20, 'Les tables des six services sont exportées');
+assert.ok(exported.tables['learning.sessions'] > 0 && exported.tables['tracking.event_log'] > 0);
+assert.ok(exported.storage['linguacap-course'].files >= 400, 'Les médias des parcours sont copiés');
+assert.ok(exported.storage['linguacap-productions'].files >= 1, 'Les productions orales sont copiées');
+const restoration = restoreCheck(backupFolder);
+assert.deepEqual(restoration.problems, [], 'La restauration retrouve chaque table et chaque fichier');
+console.log(`Recette de sauvegarde réussie · ${restoration.tables} tables et ${restoration.rows} lignes restaurées à l’identique, `
+  + `${exported.storage['linguacap-course'].files + exported.storage['linguacap-productions'].files} fichiers Storage copiés.`);
+
 // --- Navigateur ----------------------------------------------------------------------------------------
 if (process.argv.includes('--browser')) {
   const require = createRequire(new URL('../../linguacap-react/package.json', import.meta.url));
