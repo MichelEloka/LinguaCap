@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -1050,6 +1050,262 @@
           }
         }
       }
+    },
+    "/tracks": {
+      "get": {
+        "operationId": "listTracks",
+        "summary": "Parcours publiés et attribuables",
+        "responses": {
+          "200": {
+            "description": "Parcours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TrackSummary"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/media/{mediaId}/versions/{version}": {
+      "get": {
+        "operationId": "getMediaVersion",
+        "summary": "Version précise d’un média, référencée par un parcours",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MediaIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/MediaVersionPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Média",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaDetail"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/enrollment": {
+      "get": {
+        "operationId": "getEnrollment",
+        "summary": "Parcours attribué et séances de l’élève",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours, ou null s’il n’a pas encore été attribué",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Enrollment"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/enrollments": {
+      "post": {
+        "operationId": "createEnrollment",
+        "summary": "Attribuer un parcours publié et planifier la première séance",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EnrollmentRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Parcours attribué",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Enrollment"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/sessions/{sessionId}": {
+      "get": {
+        "operationId": "getSession",
+        "summary": "Séance avec le contenu de ses activités et la progression",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SessionIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Séance",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionDetail"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/sessions/{sessionId}/activities/{activityId}/progress": {
+      "put": {
+        "operationId": "saveProgress",
+        "summary": "Sauvegarder la progression d’une activité ou la terminer (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SessionIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ActivityIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ProgressRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Séance mise à jour",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SessionSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/tracking/learners/{learnerId}": {
+      "get": {
+        "operationId": "getLearnerSheet",
+        "summary": "Fiche élève du professeur référent ou de l’administration",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Fiche",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerSheet"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1135,6 +1391,35 @@
           "$ref": "#/components/schemas/Uuid"
         },
         "example": "9e8d7c6b-5a49-4382-8716-a5b4c3d2e1f0"
+      },
+      "SessionIdPath": {
+        "name": "sessionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "3c2b1a09-8f7e-4d6c-9b5a-4e3d2c1b0a99"
+      },
+      "ActivityIdPath": {
+        "name": "activityId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Slug"
+        },
+        "example": "quiz-la-commande"
+      },
+      "MediaVersionPath": {
+        "name": "version",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "example": "1"
       }
     },
     "responses": {
@@ -1500,7 +1785,8 @@
           "kind",
           "title",
           "mimeType",
-          "url"
+          "url",
+          "version"
         ],
         "properties": {
           "id": {
@@ -1541,6 +1827,10 @@
               "string",
               "null"
             ]
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
           }
         }
       },
@@ -1641,6 +1931,22 @@
           "submittedAt": {
             "type": "string",
             "format": "date-time"
+          },
+          "sessionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "activityId": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -1660,6 +1966,13 @@
             "additionalProperties": {
               "type": "string"
             }
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Séance de la remise, avec activityId."
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
           }
         }
       },
@@ -2190,6 +2503,509 @@
           }
         },
         "description": "reviewerId null : retire le correcteur désigné."
+      },
+      "TrackSummary": {
+        "type": "object",
+        "required": [
+          "versionId",
+          "levelId",
+          "levelCode",
+          "levelTitle",
+          "language",
+          "number",
+          "moduleCount",
+          "activityCount",
+          "totalMinutes"
+        ],
+        "properties": {
+          "versionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "levelTitle": {
+            "type": "string"
+          },
+          "language": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "moduleCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "activityCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "totalMinutes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "ActivitySummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "kind",
+          "title",
+          "estimatedMinutes",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lesson",
+              "exercise",
+              "review",
+              "assessment"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "estimatedMinutes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "started",
+              "completed"
+            ]
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "SessionSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "moduleId",
+          "title",
+          "dueAt",
+          "status",
+          "estimatedMinutes",
+          "activities"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "title": {
+            "type": "string"
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "in_progress",
+              "completed",
+              "late"
+            ]
+          },
+          "startedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "estimatedMinutes": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivitySummary"
+            }
+          }
+        }
+      },
+      "Enrollment": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "levelCode",
+          "trackVersionId",
+          "trackVersionNumber",
+          "assignedAt",
+          "status",
+          "sessions"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionNumber": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "assignedBy": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "assignedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "active",
+              "completed",
+              "withdrawn"
+            ]
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionSummary"
+            }
+          }
+        }
+      },
+      "EnrollmentRequest": {
+        "type": "object",
+        "required": [
+          "learnerId",
+          "trackVersionId",
+          "firstSessionDue"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "firstSessionDue": {
+            "type": "string",
+            "format": "date",
+            "description": "Jour de la première séance, échéance à 20 h."
+          }
+        }
+      },
+      "SessionPlacement": {
+        "type": "object",
+        "required": [
+          "position",
+          "assetId",
+          "assetVersion",
+          "usage",
+          "transcriptAvailable"
+        ],
+        "properties": {
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "assetId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "assetVersion": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "usage": {
+            "type": "string",
+            "enum": [
+              "illustration",
+              "audio"
+            ]
+          },
+          "alt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "caption": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "transcriptAvailable": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ActivityDetail": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "kind",
+          "title",
+          "estimatedMinutes",
+          "status",
+          "state",
+          "questions",
+          "placements"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lesson",
+              "exercise",
+              "review",
+              "assessment"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "estimatedMinutes": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "competences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "todo",
+              "started",
+              "completed"
+            ]
+          },
+          "state": {
+            "type": "object",
+            "description": "État sauvegardé pour reprendre l’activité."
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "attemptId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "lesson": {
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "id",
+                  "title",
+                  "description"
+                ],
+                "properties": {
+                  "id": {
+                    "$ref": "#/components/schemas/Slug"
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transcript": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Présente seulement quand la règle du support l’autorise."
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Question"
+            }
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SessionPlacement"
+            }
+          }
+        }
+      },
+      "SessionDetail": {
+        "type": "object",
+        "required": [
+          "session",
+          "trackVersionId",
+          "levelCode",
+          "activities"
+        ],
+        "properties": {
+          "session": {
+            "$ref": "#/components/schemas/SessionSummary"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ActivityDetail"
+            }
+          }
+        }
+      },
+      "ProgressRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "state": {
+            "type": "object",
+            "description": "État à sauvegarder (8 Ko au plus)."
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "attemptId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Tentative corrigée, requise pour terminer un exercice."
+          }
+        }
+      },
+      "LearnerSheet": {
+        "type": "object",
+        "required": [
+          "profile",
+          "enrollment",
+          "goal",
+          "results",
+          "completedCount",
+          "messages"
+        ],
+        "properties": {
+          "profile": {
+            "$ref": "#/components/schemas/Profile"
+          },
+          "enrollment": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Enrollment"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "goal": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Goal"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Grade"
+            }
+          },
+          "completedCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "messages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Message"
+            }
+          }
+        }
       }
     }
   }

@@ -196,7 +196,7 @@ public class CatalogueResource {
         }
     }
 
-    private List<Question> readQuestions(Connection connection, String lessonId) throws SQLException {
+    static List<Question> readQuestions(Connection connection, String lessonId) throws SQLException {
         try (var query = connection.prepareStatement("""
                 select q.id as question_id, q.prompt, o.id as option_id, o.label
                 from catalogue.questions q

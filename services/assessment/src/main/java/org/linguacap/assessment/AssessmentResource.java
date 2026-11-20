@@ -76,7 +76,8 @@ public class AssessmentResource {
                 correct++;
             }
         }
-        return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size());
+        return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size(),
+                request.sessionId(), request.activityId());
     }
 
     @GET
@@ -84,7 +85,7 @@ public class AssessmentResource {
     public List<Grade> results(@QueryParam("learnerId") String requestedLearnerId) {
         UUID learnerId = authorizeLearner(actor.id(), requestedLearnerId);
         String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at
+                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id
                 FROM assessment.quiz_attempts
                 WHERE learner_id = ?
                 ORDER BY submitted_at DESC, id DESC
@@ -142,12 +143,13 @@ public class AssessmentResource {
     }
 
     private Grade storeAttempt(UUID learnerId, String requestKey, String lessonId, String answersJson,
-                               int correct, int total) {
+                               int correct, int total, UUID sessionId, String activityId) {
         String sql = """
-                INSERT INTO assessment.quiz_attempts (learner_id, lesson_id, answers, correct, total, request_key)
-                VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?)
+                INSERT INTO assessment.quiz_attempts
+                    (learner_id, lesson_id, answers, correct, total, request_key, session_id, activity_id)
+                VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?, ?, ?)
                 ON CONFLICT (learner_id, request_key) DO NOTHING
-                RETURNING id, lesson_id, correct, total, submitted_at
+                RETURNING id, lesson_id, correct, total, submitted_at, session_id, activity_id
                 """;
         try (var connection = dataSource.getConnection();
              var statement = connection.prepareStatement(sql)) {
@@ -157,6 +159,8 @@ public class AssessmentResource {
             statement.setInt(4, correct);
             statement.setInt(5, total);
             statement.setString(6, requestKey);
+            statement.setObject(7, sessionId);
+            statement.setString(8, activityId);
             try (var rows = statement.executeQuery()) {
                 if (rows.next()) {
                     return readGrade(rows);
@@ -175,7 +179,8 @@ public class AssessmentResource {
     private static Grade findExisting(Connection connection, UUID learnerId, String requestKey, String lessonId,
                                       String answersJson) throws SQLException {
         String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at, answers = CAST(? AS jsonb) AS same_answers
+                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id,
+                       answers = CAST(? AS jsonb) AS same_answers
                 FROM assessment.quiz_attempts
                 WHERE learner_id = ? AND request_key = ?
                 """;
@@ -196,9 +201,11 @@ public class AssessmentResource {
     }
 
     private static Grade readGrade(ResultSet row) throws SQLException {
+        UUID sessionId = row.getObject("session_id", UUID.class);
         return new Grade(row.getObject("id", UUID.class).toString(), row.getString("lesson_id"),
                 row.getInt("correct"), row.getInt("total"),
-                row.getObject("submitted_at", OffsetDateTime.class).toString());
+                row.getObject("submitted_at", OffsetDateTime.class).toString(),
+                sessionId == null ? null : sessionId.toString(), row.getString("activity_id"));
     }
 
     private static void validate(QuizRequest request, String requestKey) {
@@ -216,12 +223,18 @@ public class AssessmentResource {
         if (invalidAnswer) {
             throw HttpError.badRequest("Une réponse a un identifiant invalide.");
         }
+        if ((request.sessionId() == null) != (request.activityId() == null)
+                || request.activityId() != null && (request.activityId().length() > 80 || !LESSON_ID.matcher(request.activityId()).matches())) {
+            throw HttpError.badRequest("La séance et l’activité de la remise vont ensemble.");
+        }
         if (requestKey != null && !REQUEST_KEY.matcher(requestKey).matches()) {
             throw HttpError.badRequest("Clé de remise invalide.");
         }
     }
 
-    public record QuizRequest(String lessonId, Map<String, String> answers) {}
+    /** sessionId et activityId, facultatifs et indissociables, rattachent la remise à une séance. */
+    public record QuizRequest(String lessonId, Map<String, String> answers, UUID sessionId, String activityId) {}
 
-    public record Grade(String id, String lessonId, int correct, int total, String submittedAt) {}
+    public record Grade(String id, String lessonId, int correct, int total, String submittedAt, String sessionId,
+                        String activityId) {}
 }

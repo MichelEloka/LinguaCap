@@ -10,6 +10,7 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
@@ -163,6 +164,55 @@ public class TrackingResource {
             throw HttpError.unavailable("L’encouragement n’a pas pu être envoyé.");
         }
         throw HttpError.unavailable("L’encouragement n’a pas pu être envoyé.");
+    }
+
+    /**
+     * Fiche élève du professeur référent ou de l’administration (DEV-033) : profil, parcours et séances,
+     * objectif, résultats et encouragements, lus auprès des services propriétaires.
+     */
+    @GET
+    @Path("/learners/{id}")
+    public ObjectNode learner(@PathParam("id") String requestedLearnerId) {
+        UUID callerId = actor.id();
+        if (!isEducator(identities.current(callerId).path("role").asText())) {
+            throw HttpError.forbidden("La fiche élève est réservée au professeur référent et à l’administration.");
+        }
+        UUID learnerId = readLearnerId(requestedLearnerId);
+        JsonNode profile = identities.learner(callerId, learnerId);
+        JsonNode enrollment = services.request(learningUrl, "/v1/learning/enrollment?learnerId=" + learnerId,
+                "GET", callerId, null);
+        JsonNode progress = services.request(learningUrl, "/v1/learning/progress?learnerId=" + learnerId,
+                "GET", callerId, null);
+        ObjectNode sheet = mapper.createObjectNode();
+        sheet.set("profile", profile);
+        sheet.set("enrollment", enrollment);
+        sheet.set("goal", progress.path("goal"));
+        sheet.set("results", progress.path("results"));
+        sheet.put("completedCount", progress.path("completedCount").asInt());
+        sheet.set("messages", mapper.valueToTree(messagesFor(learnerId)));
+        return sheet;
+    }
+
+    private List<Message> messagesFor(UUID learnerId) {
+        String sql = """
+                SELECT id, learner_id, author_id, text, sent_at
+                FROM tracking.encouragements
+                WHERE learner_id = ?
+                ORDER BY sent_at DESC, id DESC
+                """;
+        try (var connection = dataSource.getConnection();
+             var statement = connection.prepareStatement(sql)) {
+            statement.setObject(1, learnerId);
+            try (var rows = statement.executeQuery()) {
+                List<Message> messages = new ArrayList<>();
+                while (rows.next()) {
+                    messages.add(readMessage(rows));
+                }
+                return messages;
+            }
+        } catch (SQLException ignored) {
+            throw HttpError.unavailable("Les encouragements de cet élève sont indisponibles.");
+        }
     }
 
     private static Message readMessage(ResultSet row) throws SQLException {

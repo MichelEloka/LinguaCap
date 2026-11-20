@@ -74,7 +74,7 @@ public class Gateway {
         var params = uri.getQueryParameters();
         if (!params.isEmpty()) {
             String learner = params.getFirst("learnerId");
-            if (!method.equals("GET") || !List.of("learning/progress", "assessments/results", "tracking/messages").contains(path)
+            if (!method.equals("GET") || !List.of("learning/progress", "learning/enrollment", "assessments/results", "tracking/messages").contains(path)
                     || params.size() != 1 || learner == null || !learner.matches(UUID_PATH) || params.get("learnerId").size() != 1) {
                 throw HttpError.badRequest("Paramètre de recherche invalide.");
             }
@@ -93,20 +93,26 @@ public class Gateway {
             if (path.equals("invitations") || path.equals("admin/users") || path.matches("admin/users/" + UUID_PATH)) {
                 return identity;
             }
-            if (path.equals("levels") || path.matches("lessons/" + SLUG)) return catalogue;
-            if (path.equals("media") || path.matches("media/" + SLUG)) return media;
-            if (path.equals("learning/goal") || path.equals("learning/progress")) return learning;
+            if (path.equals("levels") || path.equals("tracks") || path.matches("lessons/" + SLUG)) return catalogue;
+            if (path.equals("media") || path.matches("media/" + SLUG) || path.matches("media/" + SLUG + "/versions/[1-9][0-9]{0,3}")) {
+                return media;
+            }
+            if (path.equals("learning/goal") || path.equals("learning/progress") || path.equals("learning/enrollment")
+                    || path.matches("learning/sessions/" + UUID_PATH)) return learning;
             if (path.equals("assessments/results")) return assessment;
-            if (path.equals("tracking/overview") || path.equals("tracking/messages")) return tracking;
+            if (path.equals("tracking/overview") || path.equals("tracking/messages")
+                    || path.matches("tracking/learners/" + UUID_PATH)) return tracking;
         }
         if (method.equals("POST")) {
             if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
             if (path.equals("levels") || path.matches("levels/" + SLUG + "/publish")) return catalogue;
             if (path.equals("assessments/quiz")) return assessment;
+            if (path.equals("learning/enrollments")) return learning;
             if (path.equals("tracking/messages")) return tracking;
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
+            if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")) return learning;
             if (path.matches("admin/users/" + UUID_PATH + "/(status|role|permissions|teacher|reviewer)")) return identity;
         }
         throw HttpError.notFound("Cette route API est inconnue.");
