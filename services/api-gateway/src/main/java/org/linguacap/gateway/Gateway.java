@@ -19,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 public class Gateway {
     private static final String SLUG = "[a-z0-9][a-z0-9-]{0,79}";
     private static final String UUID_PATH = "[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}";
+    private static final String LEVEL = "[abc][12]";
     private static final UUID HEALTH_ACTOR = new UUID(0, 0);
 
     @Inject ServiceClient services;
@@ -94,6 +95,8 @@ public class Gateway {
                 return identity;
             }
             if (path.equals("levels") || path.equals("tracks") || path.matches("lessons/" + SLUG)) return catalogue;
+            if (path.equals("catalogue/levels") || path.matches("catalogue/versions/" + UUID_PATH + "(/checks)?")) return catalogue;
+            if (path.equals("media/uploads")) return media;
             if (path.equals("media") || path.matches("media/" + SLUG) || path.matches("media/" + SLUG + "/versions/[1-9][0-9]{0,3}")) {
                 return media;
             }
@@ -106,7 +109,9 @@ public class Gateway {
         }
         if (method.equals("POST")) {
             if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
-            if (path.equals("levels") || path.matches("levels/" + SLUG + "/publish")) return catalogue;
+            if (path.equals("levels") || path.matches("catalogue/levels/" + LEVEL + "/versions")
+                    || path.matches("catalogue/versions/" + UUID_PATH + "/(publish|retire)")) return catalogue;
+            if (path.equals("media/uploads") || path.matches("media/uploads/" + UUID_PATH + "/finalize")) return media;
             if (path.equals("assessments/quiz")) return assessment;
             if (path.equals("learning/enrollments")
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal/validate|pause|resume|diagnostic)")) {
@@ -117,6 +122,8 @@ public class Gateway {
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
+            if (path.matches("catalogue/levels/" + LEVEL) || path.matches("catalogue/versions/" + UUID_PATH)) return catalogue;
+            if (path.matches("media/" + SLUG) && !path.equals("media/uploads")) return media;
             if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(availability|starting-point)")) return learning;
             if (path.matches("admin/users/" + UUID_PATH + "/(status|role|permissions|teacher|reviewer)")) return identity;
@@ -126,8 +133,10 @@ public class Gateway {
 
     private ServiceClient.Result call(String target, String path, String method, SupabaseAuth.Account user,
                                       JsonNode body, String requestId) {
-        // Only Media uses the user's Supabase token to enforce Storage RLS.
-        String token = target.equals(media) ? user.token() : "";
+        // Le jeton Supabase de l'utilisateur ne part que vers Médias, directement ou via la séance d'Apprentissage
+        // qui demande les adresses temporaires de ses supports : les politiques Storage s'appliquent à l'utilisateur.
+        String token = target.equals(media) || method.equals("GET") && path.matches("/v1/learning/sessions/" + UUID_PATH)
+                ? user.token() : "";
         String email = path.equals("/v1/me") ? user.email() : "";
         String key = path.equals("/v1/assessments/quiz") || path.equals("/v1/assessments/diagnostics")
                 ? headers.getHeaderString("Idempotency-Key") : null;

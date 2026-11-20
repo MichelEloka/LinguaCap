@@ -20,7 +20,7 @@ if ($env:SUPABASE_DB_HOST -notmatch '^[a-z0-9-]+\.pooler\.supabase\.com$' -or
     throw 'La connexion Supabase doit cibler le pooler de session du projet attendu.'
 }
 
-$modules = @('identity', 'catalogue', 'media', 'assessment', 'learning', 'tracking', 'api-gateway')
+$modules = @('identity', 'media', 'catalogue', 'assessment', 'learning', 'tracking', 'api-gateway')
 $databaseModules = $modules | Where-Object { $_ -ne 'api-gateway' }
 $origins = @{}
 $roles = @{}
@@ -137,8 +137,9 @@ Cloud auth print-access-token | docker login "https://$registry" --username oaut
 if ($LASTEXITCODE -ne 0) { throw 'Connexion au registre Docker refusee.' }
 $tag = (git -C $repositoryRoot rev-parse --short HEAD).Trim() + '-' + (Get-Date -Format 'yyyyMMddHHmmss')
 $dependsOn = @{
-    identity = @(); catalogue = @('identity'); media = @('identity');
-    assessment = @('identity', 'catalogue'); learning = @('identity', 'catalogue', 'assessment');
+    # Catalogue publie les fichiers d'un parcours ; Apprentissage obtient les adresses temporaires des supports.
+    identity = @(); media = @('identity'); catalogue = @('identity', 'media');
+    assessment = @('identity', 'catalogue'); learning = @('identity', 'catalogue', 'assessment', 'media');
     tracking = @('identity', 'learning'); 'api-gateway' = $databaseModules
 }
 

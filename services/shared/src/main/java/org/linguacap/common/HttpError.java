@@ -13,6 +13,8 @@ public final class HttpError {
     public static WebApplicationException forbidden(String message) { return create(403, "FORBIDDEN", message); }
     public static WebApplicationException notFound(String message) { return create(404, "NOT_FOUND", message); }
     public static WebApplicationException conflict(String message) { return create(409, "CONFLICT", message); }
+    /** Fichier ou contenu reçu mais refusé par les règles métier (type, taille, signature). */
+    public static WebApplicationException unprocessable(String message) { return create(422, "INVALID_FILE", message); }
     public static WebApplicationException unavailable(String message) { return create(503, "UNAVAILABLE", message); }
 
     private static WebApplicationException create(int status, String code, String message) {

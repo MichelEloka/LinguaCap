@@ -9,13 +9,13 @@ GRANT SELECT, INSERT, UPDATE ON identity.outbox_events TO lingua_identity;
 
 GRANT USAGE ON SCHEMA catalogue TO lingua_catalogue;
 GRANT SELECT, INSERT, UPDATE ON catalogue.levels TO lingua_catalogue;
-GRANT SELECT ON catalogue.lessons, catalogue.questions, catalogue.options TO lingua_catalogue;
-GRANT SELECT ON catalogue.languages, catalogue.competences, catalogue.track_versions, catalogue.modules,
-    catalogue.activities, catalogue.media_placements TO lingua_catalogue;
+GRANT SELECT ON catalogue.languages, catalogue.competences TO lingua_catalogue;
+GRANT SELECT, INSERT, UPDATE ON catalogue.track_versions TO lingua_catalogue;
+GRANT SELECT, INSERT, UPDATE, DELETE ON catalogue.modules, catalogue.activities, catalogue.media_placements,
+    catalogue.lessons, catalogue.questions, catalogue.options, catalogue.version_assessments TO lingua_catalogue;
 
 GRANT USAGE ON SCHEMA media TO lingua_media;
-GRANT SELECT ON media.assets TO lingua_media;
-GRANT SELECT ON media.asset_versions TO lingua_media;
+GRANT SELECT, INSERT, UPDATE ON media.assets, media.asset_versions, media.uploads TO lingua_media;
 GRANT SELECT, INSERT, UPDATE, DELETE ON media.storage_read_grants TO lingua_media;
 
 GRANT USAGE ON SCHEMA learning TO lingua_learning;

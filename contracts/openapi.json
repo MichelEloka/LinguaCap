@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -251,52 +251,6 @@
         }
       }
     },
-    "/levels/{levelId}/publish": {
-      "post": {
-        "operationId": "publishLevel",
-        "summary": "Publier un niveau",
-        "parameters": [
-          {
-            "$ref": "#/components/parameters/LevelIdPath"
-          }
-        ],
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "maxProperties": 0
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Niveau publié",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Level"
-                }
-              }
-            }
-          },
-          "401": {
-            "$ref": "#/components/responses/Error"
-          },
-          "403": {
-            "$ref": "#/components/responses/Error"
-          },
-          "404": {
-            "$ref": "#/components/responses/Error"
-          },
-          "409": {
-            "$ref": "#/components/responses/Error"
-          }
-        }
-      }
-    },
     "/lessons/{lessonId}": {
       "get": {
         "operationId": "getLesson",
@@ -329,7 +283,7 @@
     "/media": {
       "get": {
         "operationId": "listMedia",
-        "summary": "Médiathèque (administration)",
+        "summary": "Médiathèque avec les versions de chaque ressource (éditeurs du catalogue)",
         "responses": {
           "200": {
             "description": "Ressources",
@@ -356,7 +310,7 @@
     "/media/{mediaId}": {
       "get": {
         "operationId": "getMedia",
-        "summary": "Média avec un lien de lecture temporaire",
+        "summary": "Dernière version d’un média, brouillon compris (éditeurs du catalogue)",
         "parameters": [
           {
             "$ref": "#/components/parameters/MediaIdPath"
@@ -372,6 +326,49 @@
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updateMedia",
+        "summary": "Titre, source, licence et textes par défaut",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MediaIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MetadataChange"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Titre, source, licence et textes par défaut",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaMetadata"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
           },
           "401": {
             "$ref": "#/components/responses/Error"
@@ -1078,7 +1075,7 @@
     "/media/{mediaId}/versions/{version}": {
       "get": {
         "operationId": "getMediaVersion",
-        "summary": "Version précise d’un média, référencée par un parcours",
+        "summary": "Version précise d’un média (éditeurs du catalogue) ; les élèves la reçoivent avec leur séance",
         "parameters": [
           {
             "$ref": "#/components/parameters/MediaIdPath"
@@ -1102,6 +1099,9 @@
             "$ref": "#/components/responses/Error"
           },
           "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
             "$ref": "#/components/responses/Error"
           },
           "404": {
@@ -1790,6 +1790,461 @@
           }
         }
       }
+    },
+    "/catalogue/levels": {
+      "get": {
+        "operationId": "listCatalogueLevels",
+        "summary": "Niveaux avec leurs versions (éditeurs du catalogue)",
+        "responses": {
+          "200": {
+            "description": "Niveaux avec leurs versions (éditeurs du catalogue)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogueLevel"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/levels/{levelId}": {
+      "put": {
+        "operationId": "updateCatalogueLevel",
+        "summary": "Titre, ordre et prérequis d’un niveau",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CatalogueLevelPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LevelChange"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Titre, ordre et prérequis d’un niveau",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/CatalogueLevel"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/levels/{levelId}/versions": {
+      "post": {
+        "operationId": "createTrackDraft",
+        "summary": "Nouveau brouillon, vide ou copié d’une version",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/CatalogueLevelPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "fromVersionId": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/Uuid"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Nouveau brouillon, vide ou copié d’une version",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/versions/{versionId}": {
+      "get": {
+        "operationId": "getTrackVersion",
+        "summary": "Document complet d’une version, corrigés compris",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document complet d’une version, corrigés compris",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "saveTrackDraft",
+        "summary": "Enregistrer le brouillon et lister ce qu’il reste à compléter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DraftContent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enregistrer le brouillon et lister ce qu’il reste à compléter",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SavedVersion"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/versions/{versionId}/checks": {
+      "get": {
+        "operationId": "checkTrackVersion",
+        "summary": "Points à compléter avant publication",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Points à compléter avant publication",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Checks"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/versions/{versionId}/publish": {
+      "post": {
+        "operationId": "publishTrackVersion",
+        "summary": "Publier un brouillon complet et ses versions de médias",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Publier un brouillon complet et ses versions de médias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Published"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/versions/{versionId}/retire": {
+      "post": {
+        "operationId": "retireTrackVersion",
+        "summary": "Retirer une version des nouvelles attributions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Retirer une version des nouvelles attributions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VersionSummary"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/media/uploads": {
+      "get": {
+        "operationId": "listUploads",
+        "summary": "Dépôts récents de l’auteur ; les dépôts expirés sont abandonnés",
+        "responses": {
+          "200": {
+            "description": "Dépôts récents de l’auteur ; les dépôts expirés sont abandonnés",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Upload"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "reserveUpload",
+        "summary": "Réserver un dépôt direct vers le stockage privé",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UploadRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Réserver un dépôt direct vers le stockage privé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Upload"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/media/uploads/{uploadId}/finalize": {
+      "post": {
+        "operationId": "finalizeUpload",
+        "summary": "Contrôler le fichier reçu et créer la version (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/UploadIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contrôler le fichier reçu et créer la version (idempotent)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Upload"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -1913,6 +2368,34 @@
           "$ref": "#/components/schemas/Uuid"
         },
         "example": "6a5b4c3d-2e1f-4a0b-9c8d-7e6f5a4b3c2d"
+      },
+      "VersionIdPath": {
+        "name": "versionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "b1000000-0000-4000-8000-000000000001"
+      },
+      "UploadIdPath": {
+        "name": "uploadId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "0f1e2d3c-4b5a-4968-8776-655443322110"
+      },
+      "CatalogueLevelPath": {
+        "name": "levelId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "^[abc][12]$"
+        },
+        "example": "b1"
       }
     },
     "responses": {
@@ -1961,7 +2444,7 @@
           "code": {
             "type": "string",
             "pattern": "^[A-Z][A-Z_]*$",
-            "description": "Code exploitable, par exemple INVALID_INPUT, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT ou UNAVAILABLE."
+            "description": "Code exploitable, par exemple INVALID_INPUT, INVALID_FILE, UNAUTHENTICATED, FORBIDDEN, NOT_FOUND, CONFLICT ou UNAVAILABLE."
           },
           "message": {
             "type": "string",
@@ -2268,6 +2751,30 @@
               "draft",
               "published"
             ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "license": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssetVersion"
+            }
           }
         }
       },
@@ -2324,6 +2831,14 @@
           "version": {
             "type": "integer",
             "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
           }
         }
       },
@@ -3519,6 +4034,37 @@
           },
           "transcriptAvailable": {
             "type": "boolean"
+          },
+          "decorative": {
+            "type": "boolean",
+            "description": "Image décorative : pas de texte alternatif."
+          },
+          "questionId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Question illustrée par ce support."
+          },
+          "optionId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Choix de réponse illustré par ce support."
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Adresse de lecture de cinq minutes, renouvelée à chaque ouverture de la séance ; absente si Médias est indisponible."
+          },
+          "mimeType": {
+            "type": [
+              "string",
+              "null"
+            ]
           }
         }
       },
@@ -4081,6 +4627,1006 @@
             "items": {
               "$ref": "#/components/schemas/Question"
             }
+          }
+        }
+      },
+      "DraftOption": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "correct"
+        ],
+        "additionalProperties": false,
+        "description": "Choix de réponse avec son corrigé : visible des seuls éditeurs du catalogue.",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "correct": {
+            "type": "boolean"
+          }
+        }
+      },
+      "DraftQuestion": {
+        "type": "object",
+        "required": [
+          "id",
+          "prompt",
+          "options"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "prompt": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "moduleRef": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Diagnostic : module évalué ou « prerequis »."
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftOption"
+            },
+            "maxItems": 8
+          }
+        }
+      },
+      "DraftPlacement": {
+        "type": "object",
+        "required": [
+          "assetId",
+          "assetVersion",
+          "usage",
+          "transcriptVisibility",
+          "decorative"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "assetId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "assetVersion": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 9999
+          },
+          "usage": {
+            "type": "string",
+            "enum": [
+              "illustration",
+              "audio"
+            ]
+          },
+          "alt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "caption": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transcriptVisibility": {
+            "type": "string",
+            "enum": [
+              "on_demand",
+              "after_answer",
+              "hidden"
+            ]
+          },
+          "decorative": {
+            "type": "boolean"
+          },
+          "questionId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "optionId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "DraftLesson": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string"
+          },
+          "transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "DraftActivity": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "estimatedMinutes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "maxLength": 40
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lesson",
+              "exercise",
+              "review",
+              "assessment"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "estimatedMinutes": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 240
+          },
+          "competences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "lecture",
+                "ecoute",
+                "expression-ecrite",
+                "expression-orale"
+              ]
+            }
+          },
+          "lesson": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DraftLesson"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftQuestion"
+            }
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftPlacement"
+            }
+          }
+        }
+      },
+      "DraftModule": {
+        "type": "object",
+        "required": [
+          "id",
+          "title",
+          "objective"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "objective": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "prerequisites": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Slug"
+            }
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftActivity"
+            }
+          }
+        }
+      },
+      "DraftSettings": {
+        "type": "object",
+        "required": [
+          "passPercent",
+          "reviewMinutes",
+          "midtermMinutes",
+          "finalMinutes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "expectedCompetences": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "lecture",
+                "ecoute",
+                "expression-ecrite",
+                "expression-orale"
+              ]
+            }
+          },
+          "successCriteria": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "passPercent": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "reviewMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 120
+          },
+          "midtermMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 240
+          },
+          "finalMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 300
+          }
+        }
+      },
+      "DraftDiagnostic": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftQuestion"
+            }
+          }
+        }
+      },
+      "Criterion": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "maxPoints"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "label": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "maxPoints": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "AssessmentPart": {
+        "type": "object",
+        "required": [
+          "id",
+          "competence",
+          "mode"
+        ],
+        "additionalProperties": false,
+        "description": "closed : questions fermées corrigées automatiquement ; written / oral : production corrigée avec la grille.",
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "competence": {
+            "type": "string",
+            "enum": [
+              "lecture",
+              "ecoute",
+              "expression-ecrite",
+              "expression-orale"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "closed",
+              "written",
+              "oral"
+            ]
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "instructions": {
+            "type": "string",
+            "maxLength": 4000
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftQuestion"
+            }
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Criterion"
+            },
+            "maxItems": 10
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftPlacement"
+            }
+          }
+        }
+      },
+      "VersionAssessment": {
+        "type": "object",
+        "required": [
+          "kind",
+          "title"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ],
+            "description": "Bilan intermédiaire ou examen blanc."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "parts": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AssessmentPart"
+            },
+            "maxItems": 12
+          }
+        }
+      },
+      "DraftContent": {
+        "type": "object",
+        "required": [
+          "settings",
+          "modules"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "settings": {
+            "$ref": "#/components/schemas/DraftSettings"
+          },
+          "diagnostic": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DraftDiagnostic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftModule"
+            },
+            "maxItems": 60
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionAssessment"
+            },
+            "maxItems": 2
+          }
+        }
+      },
+      "VersionDocument": {
+        "type": "object",
+        "required": [
+          "id",
+          "levelId",
+          "levelCode",
+          "number",
+          "status",
+          "settings",
+          "modules",
+          "assessments"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelId": {
+            "type": "string"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "levelTitle": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ]
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "settings": {
+            "$ref": "#/components/schemas/DraftSettings"
+          },
+          "diagnostic": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/DraftDiagnostic"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "modules": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftModule"
+            }
+          },
+          "assessments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionAssessment"
+            }
+          }
+        }
+      },
+      "Issue": {
+        "type": "object",
+        "required": [
+          "path",
+          "message"
+        ],
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Emplacement dans le document, par exemple modules[0].activities[1].questions[0].options."
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "Checks": {
+        "type": "object",
+        "required": [
+          "publishable",
+          "issues"
+        ],
+        "properties": {
+          "publishable": {
+            "type": "boolean"
+          },
+          "issues": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Issue"
+            }
+          }
+        }
+      },
+      "SavedVersion": {
+        "type": "object",
+        "required": [
+          "version",
+          "checks"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/VersionDocument"
+          },
+          "checks": {
+            "$ref": "#/components/schemas/Checks"
+          }
+        }
+      },
+      "VersionSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "number",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "retired"
+            ]
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "retiredAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "updatedAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "CatalogueLevel": {
+        "type": "object",
+        "required": [
+          "id",
+          "code",
+          "title",
+          "status",
+          "versions"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "code": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published"
+            ]
+          },
+          "prerequisiteLevelId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "prerequisiteLevelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/VersionSummary"
+            }
+          }
+        }
+      },
+      "LevelChange": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 50
+          },
+          "prerequisiteLevelId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[abc][12]$"
+          }
+        }
+      },
+      "MediaRef": {
+        "type": "object",
+        "required": [
+          "assetId",
+          "version"
+        ],
+        "properties": {
+          "assetId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "Published": {
+        "type": "object",
+        "required": [
+          "version",
+          "media"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "#/components/schemas/VersionSummary"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaRef"
+            }
+          }
+        }
+      },
+      "AssetVersion": {
+        "type": "object",
+        "required": [
+          "version",
+          "mimeType",
+          "status"
+        ],
+        "properties": {
+          "version": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "sizeBytes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "published",
+              "archived"
+            ]
+          },
+          "createdAt": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      },
+      "MetadataChange": {
+        "type": "object",
+        "required": [
+          "title"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "license": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "alt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transcript": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 4000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "UploadRequest": {
+        "type": "object",
+        "required": [
+          "mimeType",
+          "size",
+          "source",
+          "license"
+        ],
+        "additionalProperties": false,
+        "description": "Image : texte alternatif exigé, 5 Mo au plus. Son : transcription exigée, 15 Mo au plus.",
+        "properties": {
+          "assetId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Ressource dont le fichier est remplacé par une nouvelle version."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "image/jpeg",
+              "image/png",
+              "image/webp",
+              "audio/mpeg",
+              "audio/wav"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 15728640
+          },
+          "source": {
+            "type": "string",
+            "maxLength": 200
+          },
+          "license": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "alt": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 300
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "transcript": {
+            "oneOf": [
+              {
+                "type": "string",
+                "maxLength": 4000
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "Upload": {
+        "type": "object",
+        "required": [
+          "id",
+          "assetId",
+          "replaces",
+          "kind",
+          "title",
+          "mimeType",
+          "size",
+          "status",
+          "createdAt",
+          "expiresAt",
+          "maxBytes"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "assetId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "replaces": {
+            "type": "boolean"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "image",
+              "audio"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "image/jpeg",
+              "image/png",
+              "image/webp",
+              "audio/mpeg",
+              "audio/wav"
+            ]
+          },
+          "size": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending",
+              "available",
+              "rejected",
+              "abandoned"
+            ]
+          },
+          "reason": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "version": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "description": "Version créée par un dépôt accepté."
+          },
+          "createdAt": {
+            "type": "string"
+          },
+          "expiresAt": {
+            "type": "string"
+          },
+          "uploadUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Adresse Supabase Storage où le navigateur envoie le fichier (POST, jeton de l’utilisateur), tant que le dépôt attend."
+          },
+          "maxBytes": {
+            "type": "integer"
           }
         }
       }

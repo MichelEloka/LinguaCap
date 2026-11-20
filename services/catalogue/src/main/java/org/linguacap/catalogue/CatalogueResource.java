@@ -98,46 +98,6 @@ public class CatalogueResource {
         }
     }
 
-    @POST
-    @Path("/levels/{id}/publish")
-    public Level publishLevel(@PathParam("id") String id) {
-        requireAdmin();
-        if (!id.matches("[abc][12]")) {
-            throw HttpError.badRequest("Identifiant de niveau invalide.");
-        }
-        try (var connection = dataSource.getConnection();
-             var update = connection.prepareStatement("""
-                     update catalogue.levels level
-                     set status = 'published'
-                     where level.id = ? and level.status = 'draft'
-                       and exists (select 1 from catalogue.lessons lesson where lesson.level_id = level.id)
-                     returning
-                     """ + LEVEL_COLUMNS)) {
-            update.setString(1, id);
-            try (var rows = update.executeQuery()) {
-                if (rows.next()) {
-                    return readLevel(rows);
-                }
-            }
-            try (var lookup = connection.prepareStatement(
-                    "select " + LEVEL_COLUMNS + " from catalogue.levels where id = ?")) {
-                lookup.setString(1, id);
-                try (var rows = lookup.executeQuery()) {
-                    if (!rows.next()) {
-                        throw HttpError.notFound("Niveau introuvable.");
-                    }
-                    Level level = readLevel(rows);
-                    if ("published".equals(level.status())) {
-                        return level;
-                    }
-                }
-            }
-            throw HttpError.conflict("Ajoutez au moins une leçon avant de publier ce niveau.");
-        } catch (SQLException error) {
-            throw HttpError.unavailable("Le catalogue est temporairement indisponible.");
-        }
-    }
-
     @GET
     @Path("/lessons/{id}")
     public Lesson lesson(@PathParam("id") String id) {
@@ -148,7 +108,8 @@ public class CatalogueResource {
                      select l.id, l.title, n.code, l.description, l.transcript, l.media_ids
                      from catalogue.lessons l
                      join catalogue.levels n on n.id = l.level_id
-                     where l.id = ? and (n.status = 'published' or ?)
+                     left join catalogue.track_versions v on v.id = l.version_id
+                     where l.id = ? and (? or n.status = 'published' and (l.version_id is null or v.status <> 'draft'))
                      """)) {
             query.setString(1, id);
             query.setBoolean(2, admin);

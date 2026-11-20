@@ -150,7 +150,8 @@ public class TrackResource {
             }
             List<Placement> placements = new ArrayList<>();
             try (var query = connection.prepareStatement("""
-                    select position, asset_id, asset_version, usage, alt, caption, transcript_visibility
+                    select position, asset_id, asset_version, usage, alt, caption, transcript_visibility, decorative,
+                           question_id, option_id
                     from catalogue.media_placements where version_id = ? and activity_id = ? order by position
                     """)) {
                 query.setObject(1, versionId);
@@ -159,7 +160,8 @@ public class TrackResource {
                     while (rows.next()) {
                         placements.add(new Placement(rows.getInt("position"), rows.getString("asset_id"),
                                 rows.getInt("asset_version"), rows.getString("usage"), rows.getString("alt"),
-                                rows.getString("caption"), rows.getString("transcript_visibility")));
+                                rows.getString("caption"), rows.getString("transcript_visibility"),
+                                rows.getBoolean("decorative"), rows.getString("question_id"), rows.getString("option_id")));
                     }
                 }
             }
@@ -256,8 +258,9 @@ public class TrackResource {
 
     public record LessonContent(String id, String title, String description, String transcript) {}
 
+    /** Support d'une activité : il illustre l'activité, une question (questionId) ou un choix de réponse (optionId). */
     public record Placement(int position, String assetId, int assetVersion, String usage, String alt, String caption,
-                            String transcriptVisibility) {}
+                            String transcriptVisibility, boolean decorative, String questionId, String optionId) {}
 
     public record ActivityContent(String moduleId, TrackActivity activity, LessonContent lesson,
                                   List<Question> questions, List<Placement> placements) {}

@@ -49,6 +49,26 @@ Droits de `github-deployer`, à recréer si le projet Google Cloud est reconstru
 | `roles/run.invoker` | les 6 services privés | Appeler la sonde de santé avant la promotion |
 | `roles/iam.serviceAccountTokenCreator` | le compte lui-même | Obtenir le jeton OIDC de la sonde (`gcloud auth print-identity-token --impersonate-service-account`) |
 
+Appels entre services privés : chaque appelant reçoit l’adresse du service appelé dans une variable `*_URL` et le rôle `roles/run.invoker` sur ce service. Le workflow de livraison conserve ces réglages d’une révision à l’autre.
+
+| Appelant | Services appelés |
+| --- | --- |
+| Passerelle | les six services |
+| Catalogue | Identités, Médias (publication des fichiers d’un parcours) |
+| Médias | Identités |
+| Évaluations | Identités, Catalogue |
+| Apprentissage | Identités, Catalogue, Évaluations, Médias (adresses temporaires des supports d’une séance) |
+| Suivi | Identités, Apprentissage |
+
+Un nouvel appel se configure avant de publier le code qui l’utilise, par exemple pour Médias :
+
+```powershell
+$media = gcloud run services describe linguacap-media --region=europe-west1 --format='value(status.url)'
+gcloud run services update linguacap-learning --region=europe-west1 --update-env-vars="MEDIA_URL=$media"
+gcloud run services add-iam-policy-binding linguacap-media --region=europe-west1 `
+  --member=serviceAccount:linguacap-learning@linguacap-prod-dvfjor.iam.gserviceaccount.com --role=roles/run.invoker
+```
+
 ## Première mise en ligne (manuelle)
 
 Ces étapes ont servi au premier déploiement et restent utiles pour recréer l’infrastructure.

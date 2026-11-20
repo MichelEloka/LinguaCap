@@ -3,6 +3,7 @@ package org.linguacap.learning;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.inject.Inject;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.PUT;
@@ -12,10 +13,13 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
+import org.jboss.logging.Logger;
 import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.ServiceClient;
@@ -24,6 +28,7 @@ import org.linguacap.common.ServiceClient;
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
 public class CourseResource {
+    private static final Logger LOG = Logger.getLogger(CourseResource.class);
     private static final String ACTIVITY_ID = "[a-z0-9]+(-[a-z0-9]+)*";
 
     @Inject Actor actor;
@@ -36,6 +41,8 @@ public class CourseResource {
     String catalogueUrl;
     @ConfigProperty(name = "lingua.services.assessment")
     String assessmentUrl;
+    @ConfigProperty(name = "lingua.services.media")
+    String mediaUrl;
 
     /** Séance avec le contenu de ses activités, livré après vérification de l'inscription. */
     @GET
@@ -69,7 +76,9 @@ public class CourseResource {
                 transcriptAllowed |= available && "audio".equals(placement.path("usage").asText());
                 placements.add(new PlacementView(placement.path("position").asInt(), placement.path("assetId").asText(),
                         placement.path("assetVersion").asInt(), placement.path("usage").asText(),
-                        nullable(placement.path("alt")), nullable(placement.path("caption")), available));
+                        nullable(placement.path("alt")), nullable(placement.path("caption")), available,
+                        placement.path("decorative").asBoolean(false), nullable(placement.path("questionId")),
+                        nullable(placement.path("optionId")), null, null));
             }
             JsonNode lesson = content.path("lesson");
             activities.add(new ActivityDetail(summary.id(), summary.position(), summary.kind(), summary.title(),
@@ -80,7 +89,42 @@ public class CourseResource {
                     transcriptAllowed && lesson.isObject() ? nullable(lesson.path("transcript")) : null,
                     content.path("questions"), placements));
         }
-        return new SessionDetail(session.summary(), session.trackVersionId(), session.levelCode(), activities);
+        return new SessionDetail(session.summary(), session.trackVersionId(), session.levelCode(), withFiles(callerId, activities));
+    }
+
+    /**
+     * Adresses temporaires des supports, demandées à Médias avec le jeton de l'utilisateur après la vérification de
+     * l'accès à la séance. Chaque ouverture ou reprise renouvelle les adresses. Si Médias est indisponible, la séance
+     * reste lisible et chaque support propose de réessayer.
+     */
+    private List<ActivityDetail> withFiles(UUID callerId, List<ActivityDetail> activities) {
+        Map<String, Map<String, Object>> wanted = new LinkedHashMap<>();
+        for (ActivityDetail activity : activities) {
+            for (PlacementView placement : activity.placements()) {
+                wanted.put(placement.assetId() + "@" + placement.assetVersion(),
+                        Map.of("assetId", placement.assetId(), "version", placement.assetVersion()));
+            }
+        }
+        String token = actor.token();
+        if (wanted.isEmpty() || token.isEmpty()) return activities;
+        Map<String, JsonNode> files = new HashMap<>();
+        try {
+            var result = services.exchange(mediaUrl, "/v1/internal/media/read-grants", "POST", callerId,
+                    Map.of("items", List.copyOf(wanted.values())), token, "", false, actor.requestId());
+            if (result.status() != 200 || !result.body().isArray()) {
+                LOG.warnf("Media read grants returned HTTP %d", result.status());
+                return activities;
+            }
+            for (JsonNode file : result.body()) {
+                files.put(file.path("assetId").asText() + "@" + file.path("version").asInt(), file);
+            }
+        } catch (WebApplicationException error) {
+            LOG.warn("Media read grants unavailable");
+            return activities;
+        }
+        return activities.stream().map(activity -> activity.withPlacements(activity.placements().stream()
+                .map(placement -> placement.withFile(files.get(placement.assetId() + "@" + placement.assetVersion())))
+                .toList())).toList();
     }
 
     /**
@@ -185,13 +229,26 @@ public class CourseResource {
 
     public record LessonView(String id, String title, String description) {}
 
+    /** Support d'une activité, d'une question (questionId) ou d'un choix (optionId), avec son adresse temporaire. */
     public record PlacementView(int position, String assetId, int assetVersion, String usage, String alt,
-                                String caption, boolean transcriptAvailable) {}
+                                String caption, boolean transcriptAvailable, boolean decorative, String questionId,
+                                String optionId, String url, String mimeType) {
+        PlacementView withFile(JsonNode file) {
+            if (file == null) return this;
+            return new PlacementView(position, assetId, assetVersion, usage, alt, caption, transcriptAvailable,
+                    decorative, questionId, optionId, file.path("url").asText(null), file.path("mimeType").asText(null));
+        }
+    }
 
     public record ActivityDetail(String id, int position, String kind, String title, int estimatedMinutes,
                                  List<?> competences, String status, JsonNode state, String completedAt,
                                  String attemptId, LessonView lesson, String transcript, JsonNode questions,
-                                 List<PlacementView> placements) {}
+                                 List<PlacementView> placements) {
+        ActivityDetail withPlacements(List<PlacementView> files) {
+            return new ActivityDetail(id, position, kind, title, estimatedMinutes, competences, status, state,
+                    completedAt, attemptId, lesson, transcript, questions, files);
+        }
+    }
 
     public record SessionDetail(SessionSummary session, UUID trackVersionId, String levelCode,
                                 List<ActivityDetail> activities) {}
