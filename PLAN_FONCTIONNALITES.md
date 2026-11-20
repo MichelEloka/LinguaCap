@@ -91,18 +91,18 @@ La préparation des contenus A1 et A2 peut commencer en parallèle dès que la s
 
 ## Incrément 6 · Faire passer et corriger les évaluations
 
-- [ ] DEV-061 Créer le modèle des tentatives d’évaluation, de leurs réponses et de leurs résultats par compétence. Associer chaque tentative à sa grille et à sa version de parcours.
-- [ ] DEV-062 Ajouter le bilan intermédiaire au calendrier et permettre sa remise. Afficher les résultats et les activités à revoir à l’élève et au professeur autorisé.
-- [ ] DEV-063 Construire le déroulé de l’examen blanc pour la lecture, l’écoute, l’écrit et l’oral. Enregistrer la progression dans la tentative.
-- [ ] DEV-064 Ajouter l’écrit et l’oral privé. Enregistrer l’audio dans le navigateur quand il le permet et proposer le dépôt d’un fichier en alternative. Faire déposer l’audio par le parcours direct de Médias et conserver les réponses restantes en cas de reprise.
-- [ ] DEV-065 Lier la production orale à l’élève et à la tentative. Autoriser la lecture au propriétaire et aux correcteurs habilités après contrôle par Évaluations et Identités. Garder l’oral hors de la médiathèque pédagogique.
-- [ ] DEV-066 Traiter la remise finale côté serveur une fois les fichiers requis validés. Enregistrer l’horodatage de remise et empêcher une deuxième tentative si l’élève rejoue la même requête.
-- [ ] DEV-067 Réutiliser l’autocorrection des questions fermées dans les évaluations. Garder les productions écrites et orales ouvertes à la correction humaine.
-- [ ] DEV-068 Créer la file des corrections du professeur et du correcteur désigné. Lier les productions à la grille de leur examen.
-- [ ] DEV-069 Développer le formulaire de correction par compétence avec note et commentaire. Enregistrer la date de correction séparément de la date de remise.
-- [ ] DEV-070 Calculer la décision lorsque toutes les corrections obligatoires sont terminées. Afficher les états en attente de correction, validé dans LinguaCap et à consolider avec les retours par compétence.
-- [ ] DEV-071 Ajouter la nouvelle tentative et l’historique des tentatives précédentes.
-- [ ] DEV-072 Tester l’examen accompagné et l’examen autonome, le refus de lecture d’un audio par un tiers, la remise à temps corrigée après l’échéance et la nouvelle tentative après un résultat à consolider.
+- [x] DEV-061 Créer le modèle des tentatives d’évaluation, de leurs réponses et de leurs résultats par compétence. Associer chaque tentative à sa grille et à sa version de parcours.
+- [x] DEV-062 Ajouter le bilan intermédiaire au calendrier et permettre sa remise. Afficher les résultats et les activités à revoir à l’élève et au professeur autorisé.
+- [x] DEV-063 Construire le déroulé de l’examen blanc pour la lecture, l’écoute, l’écrit et l’oral. Enregistrer la progression dans la tentative.
+- [x] DEV-064 Ajouter l’écrit et l’oral privé. Enregistrer l’audio dans le navigateur quand il le permet et proposer le dépôt d’un fichier en alternative. Faire déposer l’audio par le parcours direct de Médias et conserver les réponses restantes en cas de reprise.
+- [x] DEV-065 Lier la production orale à l’élève et à la tentative. Autoriser la lecture au propriétaire et aux correcteurs habilités après contrôle par Évaluations et Identités. Garder l’oral hors de la médiathèque pédagogique.
+- [x] DEV-066 Traiter la remise finale côté serveur une fois les fichiers requis validés. Enregistrer l’horodatage de remise et empêcher une deuxième tentative si l’élève rejoue la même requête.
+- [x] DEV-067 Réutiliser l’autocorrection des questions fermées dans les évaluations. Garder les productions écrites et orales ouvertes à la correction humaine.
+- [x] DEV-068 Créer la file des corrections du professeur et du correcteur désigné. Lier les productions à la grille de leur examen.
+- [x] DEV-069 Développer le formulaire de correction par compétence avec note et commentaire. Enregistrer la date de correction séparément de la date de remise.
+- [x] DEV-070 Calculer la décision lorsque toutes les corrections obligatoires sont terminées. Afficher les états en attente de correction, validé dans LinguaCap et à consolider avec les retours par compétence.
+- [x] DEV-071 Ajouter la nouvelle tentative et l’historique des tentatives précédentes.
+- [x] DEV-072 Tester l’examen accompagné et l’examen autonome, le refus de lecture d’un audio par un tiers, la remise à temps corrigée après l’échéance et la nouvelle tentative après un résultat à consolider.
 
 ## Incrément 7 · Donner au professeur les moyens d’intervenir
 
