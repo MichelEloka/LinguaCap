@@ -142,13 +142,13 @@ La rédaction et la validation pédagogique fournissent les leçons, audios, exe
 
 ## Incrément 10 · Déployer et vérifier le MVP en ligne
 
-- [ ] DEV-098 Préparer le workflow de livraison indépendant de la CI. Configurer l’identité OIDC GitHub pour Google Cloud, Artifact Registry et l’autorisation de déploiement Cloudflare limitée au site. Préparer le build Vite et le proxy Worker par environnement.
-- [ ] DEV-099 Appliquer les migrations Supabase par service. Configurer les rôles SQL, les connexions JDBC TLS et les espaces privés Storage. Configurer les secrets d’exécution dans Secret Manager.
-- [ ] DEV-100 Déployer et tester séparément les services Quarkus privés et la passerelle sur Cloud Run. Configurer les autorisations d’invocation IAM, tester les digests qualifiés et activer Cloud Scheduler avec son identité dédiée.
-- [ ] DEV-101 Vérifier la compatibilité entre versions de la passerelle, des services et des contrats d’événements avant l’ouverture. Tester l’effet d’une indisponibilité temporaire sur un appel et sur le rattrapage d’une projection.
-- [ ] DEV-102 Configurer et contrôler les journaux corrélés, le suivi des erreurs et les limites de requêtes, connexions, stockage et trafic du pilote.
-- [ ] DEV-103 Configurer le SMTP Resend sur le domaine d’envoi vérifié `notifications.emichfer.org`. Préparer les redirections Auth vers `linguacap.emichfer.org`.
-- [ ] DEV-104 Publier la branche `production` depuis la version validée de `develop`. Livrer le site et le proxy sur Cloudflare, pointer `/api/*` vers la passerelle Cloud Run et rattacher le Worker à `linguacap.emichfer.org`. Vérifier les routes directes du site.
+- [x] DEV-098 Préparer le workflow de livraison indépendant de la CI. Configurer l’identité OIDC GitHub pour Google Cloud, Artifact Registry et l’autorisation de déploiement Cloudflare limitée au site. Préparer le build Vite et le proxy Worker par environnement.
+- [x] DEV-099 Appliquer les migrations Supabase par service. Configurer les rôles SQL, les connexions JDBC TLS et les espaces privés Storage. Configurer les secrets d’exécution dans Secret Manager.
+- [x] DEV-100 Déployer et tester séparément les services Quarkus privés et la passerelle sur Cloud Run. Configurer les autorisations d’invocation IAM, tester les digests qualifiés et activer Cloud Scheduler avec son identité dédiée.
+- [x] DEV-101 Vérifier la compatibilité entre versions de la passerelle, des services et des contrats d’événements avant l’ouverture. Tester l’effet d’une indisponibilité temporaire sur un appel et sur le rattrapage d’une projection.
+- [x] DEV-102 Configurer et contrôler les journaux corrélés, le suivi des erreurs et les limites de requêtes, connexions, stockage et trafic du pilote.
+- [x] DEV-103 Configurer le SMTP Resend sur le domaine d’envoi vérifié `notifications.emichfer.org`. Préparer les redirections Auth vers `linguacap.emichfer.org`.
+- [x] DEV-104 Publier la branche `production` depuis la version validée de `develop`. Livrer le site et le proxy sur Cloudflare, pointer `/api/*` vers la passerelle Cloud Run et rattacher le Worker à `linguacap.emichfer.org`. Vérifier les routes directes du site.
 - [ ] DEV-105 Tester en ligne le HTTPS, la connexion, l’invitation vers une adresse externe et la récupération de compte. Vérifier la réception et l’ouverture des liens.
 - [ ] DEV-106 Vérifier en ligne l’isolation de deux comptes professeurs, l’accès aux remises de l’élève autonome par son correcteur désigné et le refus d’invocation d’un service Cloud Run privé sans identité autorisée. Vérifier le dépôt et la lecture d’une image et d’un audio.
 - [ ] DEV-107 Charger et publier les versions validées d’A1 et d’A2 et leurs médias en production. Vérifier leur disponibilité, les alertes et les KPI avec des comptes de recette. Rejouer la publication B1 de démonstration dans l’environnement de recette.
