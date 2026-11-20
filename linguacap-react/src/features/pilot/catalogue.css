@@ -55,3 +55,8 @@
   .editor-option { flex-wrap: wrap; }
   .media-list li .accounts-actions { width: 100%; }
 }
+
+/* Évaluations : productions lisibles, critères alignés, appréciation mise en avant. */
+.exam-feedback, .exam-production { margin: 0; padding: .75rem 1rem; border-left: 4px solid #2f6fb3; background: #f3f7fc; border-radius: .5rem; white-space: pre-line; }
+.exam-criterion { display: flex; justify-content: space-between; align-items: center; gap: .75rem; flex-wrap: wrap; }
+.exam-criterion input { width: 6rem; }

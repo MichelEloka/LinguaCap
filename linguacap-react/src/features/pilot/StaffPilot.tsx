@@ -5,6 +5,7 @@ import { Dialog, EmptyState, PageHeading, StatCard } from '../../components/ui';
 import { canEditCatalogue, requestApi, type Profile } from '../../integration/api';
 import { InvitationsPanel, InviteDialog, UsersPanel } from './AccountsPilot';
 import { CataloguePanel } from './CatalogueEditor';
+import { GradingPanel } from './Exams';
 import { MediaLibraryPanel } from './MediaLibrary';
 import { LearnerSheetDialog } from './LearnerSheet';
 import '../teacher/teacher.css';
@@ -184,6 +185,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
     ...(educator ? [{ path: 'eleves', label: admin ? 'Élèves' : 'Mes élèves' }] : []),
     ...(educator ? [{ path: 'invitations', label: 'Invitations' }] : []),
     ...(admin ? [{ path: 'utilisateurs', label: 'Utilisateurs' }] : []),
+    ...(educator || profile.permissions.includes('correction') ? [{ path: 'corrections', label: 'Corrections' }] : []),
     ...(canEditCatalogue(profile) ? [{ path: 'catalogue', label: 'Catalogue' }, { path: 'mediatheque', label: 'Médiathèque' }] : []),
   ];
   const allowed = (path: string) => tabs.some((tab) => tab.path === path);
@@ -215,6 +217,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
         {allowed('utilisateurs') && <Route path="utilisateurs" element={<UsersPanel profile={profile} token={token} />} />}
         {allowed('catalogue') && <Route path="catalogue/*" element={<CataloguePanel token={token} />} />}
         {allowed('mediatheque') && <Route path="mediatheque" element={<MediaLibraryPanel token={token} />} />}
+        {allowed('corrections') && <Route path="corrections/*" element={<GradingPanel token={token} />} />}
         <Route path="*" element={<Navigate to="/espace" replace />} />
       </Routes>
       {inviteOpen && <InviteDialog profile={profile} token={token} onClose={() => setInviteOpen(false)} onDone={(invitation) => {

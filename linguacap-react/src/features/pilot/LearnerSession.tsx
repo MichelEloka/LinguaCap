@@ -60,7 +60,7 @@ export interface ActivityDetail {
   questions: Question[];
   placements: Placement[];
 }
-interface SessionDetail { session: SessionSummary; levelCode: string; activities: ActivityDetail[] }
+interface SessionDetail { session: SessionSummary; enrollmentId: string; levelCode: string; activities: ActivityDetail[] }
 
 const dueFormat = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
 export const sessionStatus: Record<SessionStatus, { label: string; tone: 'blue' | 'green' | 'amber' | 'neutral' }> = {
@@ -333,7 +333,17 @@ export function SessionPage({ token }: { token: string }) {
             {activity.kind === 'lesson' || activity.kind === 'review'
               ? <LessonActivity activity={activity} onRenew={renew} busy={busy} onComplete={() => void completeLesson(activity)} />
               : activity.kind === 'assessment' && activity.questions.length === 0
-                ? <p className="muted">{activity.lesson?.description}</p>
+                ? (
+                  <div className="stack">
+                    <p className="muted">{activity.lesson?.description}</p>
+                    {(activity.id === 'bilan-intermediaire' || activity.id === 'examen-blanc') && (
+                      activity.status === 'completed'
+                        ? <Link className="text-link" to={`/espace/evaluation/${detail.enrollmentId}/${activity.id === 'examen-blanc' ? 'final' : 'midterm'}`}>Voir ma tentative et mon résultat</Link>
+                        : <Link className="btn btn-primary" to={`/espace/evaluation/${detail.enrollmentId}/${activity.id === 'examen-blanc' ? 'final' : 'midterm'}`}>
+                            {activity.id === 'examen-blanc' ? 'Passer l’examen blanc' : 'Passer le bilan intermédiaire'}</Link>
+                    )}
+                  </div>
+                )
               : <ExerciseActivity activity={activity} sessionId={detail.session.id} token={token} grade={grade} onRenew={renew}
                   onSaveState={(answers) => saveAnswers(activity, answers)} onGraded={(result, answers) => graded(activity, result, answers)} />}
           </section>

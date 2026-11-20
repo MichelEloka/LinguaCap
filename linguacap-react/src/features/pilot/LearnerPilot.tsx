@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, Route, Routes, useNavigate } from 'react-router-dom';
+import { ExamPage } from './Exams';
 import { CalendarCheck2, ChartNoAxesCombined, ClipboardList, Clock, MessageSquare, PlayCircle } from 'lucide-react';
 import { Badge, EmptyState } from '../../components/ui';
 import { requestApi } from '../../integration/api';
@@ -219,6 +220,7 @@ export function LearnerPilot({ token }: { token: string }) {
       <Route index element={<LearnerHome token={token} />} />
       <Route path="seance/:sessionId" element={<SessionPage token={token} />} />
       <Route path="diagnostic" element={<DiagnosticPage token={token} />} />
+      <Route path="evaluation/:enrollmentId/:kind" element={<ExamPage token={token} />} />
     </Routes>
   );
 }
