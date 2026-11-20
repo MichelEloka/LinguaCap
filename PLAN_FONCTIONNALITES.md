@@ -74,20 +74,20 @@ Travailler sur `develop` dans l’ordre des incréments. Le [cahier des charges]
 
 La préparation des contenus A1 et A2 peut commencer en parallèle dès que la structure du module A1 de démonstration est disponible.
 
-- [ ] DEV-047 Créer les écrans Catalogue pour ajouter et ordonner les niveaux d’une langue et renseigner leurs prérequis.
-- [ ] DEV-048 Construire l’éditeur de modules. Permettre de modifier les objectifs, l’ordre, les durées, les leçons, les exercices et les révisions.
-- [ ] DEV-049 Créer la médiathèque des images et des sons. Lister, filtrer, prévisualiser et réutiliser les ressources autorisées depuis l’éditeur. Associer un fichier à un bloc de cours, à une question ou à un choix de réponse.
-- [ ] DEV-050 Créer l’autorisation de dépôt de Médias. Attribuer une clé d’objet et une session de dépôt liées à l’auteur et à l’usage prévu. Envoyer le fichier du navigateur directement vers Supabase Storage et afficher la progression et les erreurs.
-- [ ] DEV-051 Implémenter la finalisation du dépôt. Contrôler le contenu, le type, la taille et les métadonnées selon les règles du média. Écarter les fichiers invalides et traiter les dépôts abandonnés avec les règles de conservation retenues.
-- [ ] DEV-052 Ajouter le texte alternatif, la légende, la transcription, la source et la licence selon le type et l’usage du média. Vérifier le rendu au clavier et sur mobile. Rendre la transcription visible selon les règles de l’activité ou de l’évaluation.
-- [ ] DEV-053 Autoriser la lecture des brouillons aux éditeurs habilités et la lecture des médias publiés aux comptes qui disposent du bon parcours. Renouveler les accès temporaires lors d’une reprise de séance.
-- [ ] DEV-054 Ajouter l’édition des questions, corrigés, diagnostics, bilans, examens blancs et grilles par compétence.
-- [ ] DEV-055 Développer l’enregistrement et la reprise d’un brouillon ainsi que l’aperçu dans le lecteur élève.
-- [ ] DEV-056 Valider côté serveur les champs nécessaires à la publication. Afficher les activités, supports, durées, prérequis ou critères à compléter.
-- [ ] DEV-057 Implémenter la publication et le retrait. Afficher seulement les versions publiées et disponibles pour les nouvelles attributions.
-- [ ] DEV-058 Permettre de repartir d’une version publiée pour créer un nouveau brouillon. Figer le contenu, les corrigés, le barème et les versions précises des images et des sons. Remplacer un média sans modifier le fichier que les parcours existants référencent.
-- [ ] DEV-059 Tester la création et la publication d’un niveau B1 de démonstration depuis l’admin, son attribution sans redéploiement et l’accès d’un ancien élève à sa version après mise à jour.
-- [ ] DEV-060 Tester en recette un dépôt valide, un fichier refusé et un dépôt interrompu. Vérifier le refus d’accès à un brouillon et la lecture du bon fichier lorsqu’un média est remplacé dans une version suivante.
+- [x] DEV-047 Créer les écrans Catalogue pour ajouter et ordonner les niveaux d’une langue et renseigner leurs prérequis.
+- [x] DEV-048 Construire l’éditeur de modules. Permettre de modifier les objectifs, l’ordre, les durées, les leçons, les exercices et les révisions.
+- [x] DEV-049 Créer la médiathèque des images et des sons. Lister, filtrer, prévisualiser et réutiliser les ressources autorisées depuis l’éditeur. Associer un fichier à un bloc de cours, à une question ou à un choix de réponse.
+- [x] DEV-050 Créer l’autorisation de dépôt de Médias. Attribuer une clé d’objet et une session de dépôt liées à l’auteur et à l’usage prévu. Envoyer le fichier du navigateur directement vers Supabase Storage et afficher la progression et les erreurs.
+- [x] DEV-051 Implémenter la finalisation du dépôt. Contrôler le contenu, le type, la taille et les métadonnées selon les règles du média. Écarter les fichiers invalides et traiter les dépôts abandonnés avec les règles de conservation retenues.
+- [x] DEV-052 Ajouter le texte alternatif, la légende, la transcription, la source et la licence selon le type et l’usage du média. Vérifier le rendu au clavier et sur mobile. Rendre la transcription visible selon les règles de l’activité ou de l’évaluation.
+- [x] DEV-053 Autoriser la lecture des brouillons aux éditeurs habilités et la lecture des médias publiés aux comptes qui disposent du bon parcours. Renouveler les accès temporaires lors d’une reprise de séance.
+- [x] DEV-054 Ajouter l’édition des questions, corrigés, diagnostics, bilans, examens blancs et grilles par compétence.
+- [x] DEV-055 Développer l’enregistrement et la reprise d’un brouillon ainsi que l’aperçu dans le lecteur élève.
+- [x] DEV-056 Valider côté serveur les champs nécessaires à la publication. Afficher les activités, supports, durées, prérequis ou critères à compléter.
+- [x] DEV-057 Implémenter la publication et le retrait. Afficher seulement les versions publiées et disponibles pour les nouvelles attributions.
+- [x] DEV-058 Permettre de repartir d’une version publiée pour créer un nouveau brouillon. Figer le contenu, les corrigés, le barème et les versions précises des images et des sons. Remplacer un média sans modifier le fichier que les parcours existants référencent.
+- [x] DEV-059 Tester la création et la publication d’un niveau B1 de démonstration depuis l’admin, son attribution sans redéploiement et l’accès d’un ancien élève à sa version après mise à jour.
+- [x] DEV-060 Tester en recette un dépôt valide, un fichier refusé et un dépôt interrompu. Vérifier le refus d’accès à un brouillon et la lecture du bon fichier lorsqu’un média est remplacé dans une version suivante.
 
 ## Incrément 6 · Faire passer et corriger les évaluations
 
