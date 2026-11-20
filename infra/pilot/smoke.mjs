@@ -966,7 +966,7 @@ if (process.argv.includes('--browser')) {
     await examPage.goto(`http://127.0.0.1:5186/espace/evaluation/${examGoal.id}/final`);
     await expect(examPage.getByRole('heading', { name: 'Examen blanc B1' })).toBeVisible({ timeout: 15_000 });
     await expect(examPage.getByRole('heading', { name: 'Commander à l’oral' })).toBeVisible();
-    await expect(examPage.getByRole('button', { name: 'Déposer un fichier' }).or(examPage.getByText('Déposer un fichier'))).toBeVisible();
+    await expect(examPage.getByText('Déposer un fichier').first()).toBeVisible();
     await expect(examPage.getByText('Tentative 1')).toBeVisible();
     await expect(examPage.getByText('À consolider')).toBeVisible();
     const typed = examPage.waitForResponse((response) => response.url().includes(`/assessments/exams/${retry.id}/answers`) && response.ok());
