@@ -2,7 +2,7 @@
 // Contrôle de restauration (DEV-108) : la sauvegarde est restaurée dans une base PostgreSQL 17 jetable, puis le nombre
 // de lignes de chaque table est comparé à celui relevé lors de l'export. Les fichiers Storage sont recomptés.
 // Usage : node infra/pilot/restore-check.mjs <dossier de sauvegarde>
-import { execFileSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { createHash, randomBytes } from 'node:crypto';
 import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
@@ -41,10 +41,19 @@ export function restoreCheck(folder) {
   execFileSync('docker', ['run', '-d', '--rm', '--name', name, '-e', `POSTGRES_PASSWORD=${password}`, image], { stdio: 'ignore' });
   try {
     const psql = (sql) => execFileSync('docker', ['exec', name, 'psql', '-U', 'postgres', '-XAtc', sql], { stdio: ['ignore', 'pipe', 'pipe'] }).toString().trim();
+    // L'image démarre d'abord un serveur temporaire d'initialisation, puis le serveur définitif : attendre la fin de
+    // l'initialisation avant de se connecter.
+    const pause = () => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 500);
+    for (let attempt = 0; ; attempt++) {
+      const logs = spawnSync('docker', ['logs', name], { encoding: 'utf8' });
+      if (`${logs.stdout}${logs.stderr}`.includes('PostgreSQL init process complete')) break;
+      if (attempt > 120) throw new Error('La base de contrôle ne termine pas son initialisation.');
+      pause();
+    }
     for (let attempt = 0; ; attempt++) {
       try { psql('select 1'); break; } catch (error) {
         if (attempt > 60) throw error;
-        Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 500);
+        pause();
       }
     }
     // Rôles applicatifs attendus par les objets restaurés (politiques, valeurs par défaut).
@@ -52,11 +61,16 @@ export function restoreCheck(folder) {
       ${['anon', 'authenticated', 'service_role'].map((role) => `if not exists (select from pg_roles where rolname = '${role}') then create role ${role}; end if;`).join(' ')}
     end $$; create schema if not exists auth; create schema if not exists extensions;
     create or replace function auth.uid() returns uuid language sql stable as 'select null::uuid';`);
-    execFileSync('docker', ['exec', '-i', name, 'pg_restore', '-U', 'postgres', '-d', 'postgres', '--no-owner', '--no-privileges'],
-      { input: dump, stdio: ['pipe', 'ignore', 'pipe'], maxBuffer: 1024 * 1024 * 512 });
+    // pg_restore poursuit après une erreur et la signale par son code de sortie : la comparaison des tables décide,
+    // ses messages servent au diagnostic d'un écart.
+    const restore = spawnSync('docker', ['exec', '-i', name, 'pg_restore', '-U', 'postgres', '-d', 'postgres', '--no-owner', '--no-privileges'],
+      { input: dump, encoding: 'utf8', maxBuffer: 1024 * 1024 * 512 });
     const restored = parseCounts(psql(countSql));
     for (const [table, expected] of Object.entries(manifest.tables)) {
       if (restored[table] !== expected) problems.push(`${table} : ${restored[table] ?? 'aucune'} lignes restaurées pour ${expected} exportées`);
+    }
+    if (problems.length && restore.status !== 0) {
+      problems.push(...String(restore.stderr).split('\n').filter((line) => line.includes('error')).slice(0, 8));
     }
   } finally {
     execFileSync('docker', ['stop', name], { stdio: 'ignore' });
