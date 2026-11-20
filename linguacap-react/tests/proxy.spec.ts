@@ -39,3 +39,18 @@ test('le proxy contrôle les en-têtes internes et désactive le cache de l’AP
     globalThis.fetch = originalFetch;
   }
 });
+
+test('le proxy impose HTTPS et ajoute les en-têtes de sécurité au site comme à l’API', async () => {
+  const insecure = await worker.fetch(new Request('http://app.example.test/espace?x=1'), { ASSETS: assets });
+  expect(insecure.status).toBe(301);
+  expect(insecure.headers.get('location')).toBe('https://app.example.test/espace?x=1');
+
+  for (const path of ['/espace', '/api/v1/health']) {
+    const response = await worker.fetch(new Request(`${site}${path}`), { ASSETS: assets });
+    expect(response.headers.get('strict-transport-security')).toBe('max-age=31536000');
+    expect(response.headers.get('x-content-type-options')).toBe('nosniff');
+    expect(response.headers.get('x-frame-options')).toBe('DENY');
+    expect(response.headers.get('content-security-policy')).toContain("frame-ancestors 'none'");
+    expect(response.headers.get('permissions-policy')).toContain('microphone=(self)');
+  }
+});
