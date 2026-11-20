@@ -28,6 +28,14 @@ export function localSupabase() {
     secret: env.SECRET_KEY || env.SERVICE_ROLE_KEY, mail: env.MAILPIT_URL, container };
 }
 
+/** Exécute une requête et renvoie sa valeur brute (format non aligné, sans en-tête). */
+export function localQuery(container, sql) {
+  return execFileSync('docker', ['exec', '-i', container, 'psql', '-U', 'postgres', '-d', 'postgres',
+    '-X', '-q', '-At', '-v', 'ON_ERROR_STOP=1'], {
+    encoding: 'utf8', input: sql, stdio: ['pipe', 'pipe', 'inherit'],
+  }).trim();
+}
+
 export function localSql(container, sql) {
   return execFileSync('docker', ['exec', '-i', container, 'psql', '-U', 'postgres', '-d', 'postgres',
     '-X', '-q', '-v', 'ON_ERROR_STOP=1'], {

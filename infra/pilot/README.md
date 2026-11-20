@@ -58,6 +58,17 @@ Ces étapes ont servi au premier déploiement et restent utiles pour recréer l�
 3. Compiler avec `services/mvnw` et utiliser `deploy-cloud-run.ps1` avec `-Project` et `-Region` depuis la version validée. Le script attend les variables `SUPABASE_URL`, `SUPABASE_PUBLISHABLE_KEY`, `SUPABASE_SECRET_KEY`, `SUPABASE_DB_PASSWORD`, `SUPABASE_DB_HOST`, `SUPABASE_DB_USER` et `SUPABASE_PROJECT_REF` dans le processus. Renseigner `SUPABASE_DB_CA_PATH` avec le chemin du certificat racine officiel téléchargé depuis les paramètres de la base Supabase. Le script authentifie la connexion TLS au pooler, stocke les secrets d’exécution dans Google Secret Manager et associe les identités de service aux droits nécessaires.
 4. Configurer les deux variables Vite publiques correspondant au projet hébergé. Depuis la version publiée sur `production`, utiliser `deploy-web.ps1` avec le projet et la région. Il produit le build d’intégration, récupère l’URL de la passerelle et configure le secret de liaison du Worker. Vérifier le domaine, la sonde et la connexion.
 
-Le compte administrateur initial est créé dans Supabase Auth puis rattaché par un insert SQL explicite dans `identity.profiles` avec son UUID et le rôle `admin`. Les autres comptes sont ajoutés sur invitation, avec le rôle déterminé par Identités.
+## Premier administrateur
+
+Le premier administrateur est créé par une opération serveur, refusée dès qu’un administrateur actif existe :
+
+```sh
+# Pile locale démarrée
+node infra/pilot/bootstrap-admin.mjs --local --email admin@exemple.fr --name "Prénom Nom"
+# Projet hébergé : SUPABASE_URL, SUPABASE_SECRET_KEY et SUPABASE_DATABASE_URL dans le processus
+node infra/pilot/bootstrap-admin.mjs --email admin@exemple.fr --name "Prénom Nom"
+```
+
+Le script enregistre une invitation `admin` avec la fonction SQL `identity.bootstrap_admin_invitation`, puis Supabase Auth envoie le lien d’activation. Les comptes suivants sont invités depuis l’espace d’administration : professeurs, élèves accompagnés ou autonomes, et membres de l’équipe (rôle `staff`), qui reçoivent les permissions Catalogue ou Correction. Une adresse n’a qu’une invitation, valable sept jours, que l’on peut renvoyer ou annuler.
 
 Le pilote contient une séance A1, les réglages de l’objectif et le suivi du résultat. Le catalogue présente A2 et le brouillon B1. L’enrichissement des leçons, les examens complets, les groupes de classe, les alertes automatiques et les indicateurs d’usage détaillés suivent le [backlog du MVP](../../PLAN_FONCTIONNALITES.md).
