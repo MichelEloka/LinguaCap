@@ -963,6 +963,38 @@ await api('/tracking/overview', staffToken, { status: 403 });
 console.log('Recette du suivi réussie · import par lots avec point de reprise, déduplication, retard et alerte, second contrôle '
   + 'sans doublon, relance liée à l’alerte, reprise puis clôture, événement tardif, pause suspendant l’alerte, reconstruction.');
 
+// --- Indicateurs administrateur (incrément 8) ---------------------------------------------------------------
+// Les règles de calcul sont vérifiées sur un jeu fictif calculé à l'avance (KpiRulesTest) ; la recette contrôle
+// l'accès réservé, les filtres, les effectifs et les groupes vides sur les données du pilote.
+await api('/tracking/kpis', teacher.token, { status: 403 });
+await api('/tracking/kpis', staffToken, { status: 403 });
+await api('/tracking/kpis', learnerToken, { status: 403 });
+await api('/tracking/kpis?kind=autre', admin.token, { status: 400 });
+await api('/tracking/kpis?inconnu=1', admin.token, { status: 400 });
+await api('/tracking/kpis?from=2026-02-31', admin.token, { status: 400 });
+await runJob();
+const horizon = `?from=${inDays(-1)}&to=${inDays(120)}`;
+const dashboard = await api('/tracking/kpis' + horizon, admin.token);
+assert.ok(dashboard.goals >= 4, 'Les parcours de la recette sont retenus');
+assert.ok(dashboard.activeLearnersTotal >= 2, 'Les activités pédagogiques comptent les élèves actifs');
+assert.ok(dashboard.activeLearners.length >= 1);
+assert.ok(dashboard.goalsValidated.denominator >= 1);
+assert.ok(dashboard.goalsValidated.numerator >= 1, 'L’examen blanc validé à temps compte à l’échéance');
+assert.ok(dashboard.freshness.syncedAt, 'Le tableau de bord indique la fraîcheur des données');
+for (const rate of [dashboard.activation, dashboard.sessionsOnTime, dashboard.goalsValidated, dashboard.resumption]) {
+  assert.ok(rate.numerator <= rate.denominator);
+  assert.equal(rate.rate, rate.denominator === 0 ? null : Math.round(1000 * rate.numerator / rate.denominator) / 10);
+}
+const autonomousKpis = await api('/tracking/kpis' + horizon + '&kind=autonomous', admin.token);
+const accompaniedKpis = await api('/tracking/kpis' + horizon + '&kind=accompanied', admin.token);
+assert.equal(autonomousKpis.goals + accompaniedKpis.goals, dashboard.goals, 'Parcours accompagnés et autonomes se partagent le total');
+assert.ok(autonomousKpis.goalsValidated.numerator >= 1, 'L’élève autonome validé par son correcteur compte parmi les autonomes');
+const emptyGroup = await api('/tracking/kpis' + horizon + '&level=B2', admin.token);
+assert.equal(emptyGroup.goals, 0);
+assert.equal(emptyGroup.goalsValidated.rate, null, 'Un groupe vide ne produit pas de taux');
+console.log('Recette des indicateurs réussie · accès réservé à l’administration, filtres contrôlés, effectifs, '
+  + 'parcours accompagnés et autonomes, groupe vide et fraîcheur.');
+
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
   where learner_id = '${learner.id}' or subject_id in ('${invite.id}', '${first.id}');`).split(',');
@@ -1041,6 +1073,9 @@ if (process.argv.includes('--browser')) {
     await expect(sheet.getByLabel('Professeur référent')).toHaveValue(otherTeacher.id);
     await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette tiers' })).toContainText('en cours');
     await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette prof' })).toBeVisible();
+    await adminPage.getByRole('link', { name: 'Indicateurs' }).click();
+    await expect(adminPage.getByText('Objectifs validés à l’échéance')).toBeVisible({ timeout: 15_000 });
+    await expect(adminPage.getByRole('heading', { name: /Élèves actifs par semaine/ })).toBeVisible();
     await adminPage.goto('http://127.0.0.1:5186/espace/invitations');
     await expect(adminPage.getByRole('row', { name: new RegExp(expiredEmail) })).toBeVisible();
     console.log('Recette navigateur réussie · administration des comptes et des invitations.');
