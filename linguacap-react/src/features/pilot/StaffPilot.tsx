@@ -6,6 +6,7 @@ import { canEditCatalogue, requestApi, type Profile } from '../../integration/ap
 import { InvitationsPanel, InviteDialog, UsersPanel } from './AccountsPilot';
 import { CataloguePanel } from './CatalogueEditor';
 import { GradingPanel } from './Exams';
+import { KpiPanel } from './KpiPanel';
 import { MediaLibraryPanel } from './MediaLibrary';
 import { LearnerSheetDialog } from './LearnerSheet';
 import '../teacher/teacher.css';
@@ -262,7 +263,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
   const tabs = [
     ...(educator ? [{ path: 'eleves', label: admin ? 'Élèves' : 'Mes élèves' }] : []),
     ...(educator ? [{ path: 'invitations', label: 'Invitations' }] : []),
-    ...(admin ? [{ path: 'utilisateurs', label: 'Utilisateurs' }] : []),
+    ...(admin ? [{ path: 'utilisateurs', label: 'Utilisateurs' }, { path: 'indicateurs', label: 'Indicateurs' }] : []),
     ...(educator || profile.permissions.includes('correction') ? [{ path: 'corrections', label: 'Corrections' }] : []),
     ...(canEditCatalogue(profile) ? [{ path: 'catalogue', label: 'Catalogue' }, { path: 'mediatheque', label: 'Médiathèque' }] : []),
   ];
@@ -295,6 +296,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
         {allowed('utilisateurs') && <Route path="utilisateurs" element={<UsersPanel profile={profile} token={token} />} />}
         {allowed('catalogue') && <Route path="catalogue/*" element={<CataloguePanel token={token} />} />}
         {allowed('mediatheque') && <Route path="mediatheque" element={<MediaLibraryPanel token={token} />} />}
+        {allowed('indicateurs') && <Route path="indicateurs" element={<KpiPanel token={token} />} />}
         {allowed('corrections') && <Route path="corrections/*" element={<GradingPanel token={token} />} />}
         <Route path="*" element={<Navigate to="/espace" replace />} />
       </Routes>
