@@ -77,7 +77,58 @@ public class AssessmentResource {
             }
         }
         return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size(),
-                request.sessionId(), request.activityId());
+                request.sessionId(), request.activityId(), "quiz", null);
+    }
+
+    /** Diagnostic initial (DEV-036) : chaque question situe l'élève sur un module ou sur le prérequis du niveau. */
+    @POST
+    @Path("/diagnostics")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Grade diagnostic(QuizRequest request, @HeaderParam("Idempotency-Key") String requestKey) {
+        UUID learnerId = actor.id();
+        if (!"learner".equals(identities.current(learnerId).path("role").asText())) {
+            throw HttpError.forbidden("Seul un élève passe un diagnostic.");
+        }
+        validate(request, requestKey);
+        if (request.sessionId() != null) {
+            throw HttpError.badRequest("Un diagnostic n’est pas rattaché à une séance.");
+        }
+        String lessonId = request.lessonId();
+        String answersJson = mapper.valueToTree(request.answers()).toString();
+        Grade prior = findExisting(learnerId, requestKey, lessonId, answersJson);
+        if (prior != null) {
+            return prior;
+        }
+        JsonNode key = services.request(catalogueUrl,
+                "/v1/internal/lessons/" + lessonId + "/answer-key", "GET", learnerId, null);
+        JsonNode answerKey = key.path("answers");
+        JsonNode modules = key.path("modules");
+        if (!answerKey.isObject() || answerKey.isEmpty() || !modules.isObject() || modules.isEmpty()) {
+            throw HttpError.badRequest("Ce questionnaire n’est pas un diagnostic.");
+        }
+        if (request.answers().size() != answerKey.size()) {
+            throw HttpError.badRequest("Réponds à toutes les questions avant de remettre le diagnostic.");
+        }
+        int correct = 0;
+        Map<String, int[]> scores = new java.util.TreeMap<>();
+        for (Map.Entry<String, String> answer : request.answers().entrySet()) {
+            JsonNode expected = answerKey.get(answer.getKey());
+            if (expected == null || !expected.isTextual()) {
+                throw HttpError.badRequest("Une réponse ne correspond pas à ce diagnostic.");
+            }
+            boolean right = answer.getValue().equals(expected.textValue());
+            if (right) correct++;
+            String module = modules.path(answer.getKey()).asText("");
+            if (!module.isEmpty()) {
+                int[] score = scores.computeIfAbsent(module, ignored -> new int[2]);
+                score[1]++;
+                if (right) score[0]++;
+            }
+        }
+        var moduleScores = mapper.createObjectNode();
+        scores.forEach((module, score) -> moduleScores.putObject(module).put("correct", score[0]).put("total", score[1]));
+        return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size(), null, null,
+                "diagnostic", moduleScores.toString());
     }
 
     @GET
@@ -85,7 +136,7 @@ public class AssessmentResource {
     public List<Grade> results(@QueryParam("learnerId") String requestedLearnerId) {
         UUID learnerId = authorizeLearner(actor.id(), requestedLearnerId);
         String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id
+                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores
                 FROM assessment.quiz_attempts
                 WHERE learner_id = ?
                 ORDER BY submitted_at DESC, id DESC
@@ -143,13 +194,14 @@ public class AssessmentResource {
     }
 
     private Grade storeAttempt(UUID learnerId, String requestKey, String lessonId, String answersJson,
-                               int correct, int total, UUID sessionId, String activityId) {
+                               int correct, int total, UUID sessionId, String activityId, String kind,
+                               String moduleScores) {
         String sql = """
                 INSERT INTO assessment.quiz_attempts
-                    (learner_id, lesson_id, answers, correct, total, request_key, session_id, activity_id)
-                VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?, ?, ?)
+                    (learner_id, lesson_id, answers, correct, total, request_key, session_id, activity_id, kind, module_scores)
+                VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?, ?, ?, ?, CAST(? AS jsonb))
                 ON CONFLICT (learner_id, request_key) DO NOTHING
-                RETURNING id, lesson_id, correct, total, submitted_at, session_id, activity_id
+                RETURNING id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores
                 """;
         try (var connection = dataSource.getConnection();
              var statement = connection.prepareStatement(sql)) {
@@ -161,6 +213,8 @@ public class AssessmentResource {
             statement.setString(6, requestKey);
             statement.setObject(7, sessionId);
             statement.setString(8, activityId);
+            statement.setString(9, kind);
+            statement.setString(10, moduleScores);
             try (var rows = statement.executeQuery()) {
                 if (rows.next()) {
                     return readGrade(rows);
@@ -179,7 +233,7 @@ public class AssessmentResource {
     private static Grade findExisting(Connection connection, UUID learnerId, String requestKey, String lessonId,
                                       String answersJson) throws SQLException {
         String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id,
+                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores,
                        answers = CAST(? AS jsonb) AS same_answers
                 FROM assessment.quiz_attempts
                 WHERE learner_id = ? AND request_key = ?
@@ -202,10 +256,18 @@ public class AssessmentResource {
 
     private static Grade readGrade(ResultSet row) throws SQLException {
         UUID sessionId = row.getObject("session_id", UUID.class);
+        String scores = row.getString("module_scores");
+        JsonNode moduleScores;
+        try {
+            moduleScores = scores == null ? null : new ObjectMapper().readTree(scores);
+        } catch (com.fasterxml.jackson.core.JsonProcessingException error) {
+            moduleScores = null;
+        }
         return new Grade(row.getObject("id", UUID.class).toString(), row.getString("lesson_id"),
                 row.getInt("correct"), row.getInt("total"),
                 row.getObject("submitted_at", OffsetDateTime.class).toString(),
-                sessionId == null ? null : sessionId.toString(), row.getString("activity_id"));
+                sessionId == null ? null : sessionId.toString(), row.getString("activity_id"),
+                row.getString("kind"), moduleScores);
     }
 
     private static void validate(QuizRequest request, String requestKey) {
@@ -235,6 +297,7 @@ public class AssessmentResource {
     /** sessionId et activityId, facultatifs et indissociables, rattachent la remise à une séance. */
     public record QuizRequest(String lessonId, Map<String, String> answers, UUID sessionId, String activityId) {}
 
+    /** kind : quiz ou diagnostic. moduleScores : pour un diagnostic, bonnes réponses et total par module. */
     public record Grade(String id, String lessonId, int correct, int total, String submittedAt, String sessionId,
-                        String activityId) {}
+                        String activityId, String kind, JsonNode moduleScores) {}
 }

@@ -98,7 +98,8 @@ public class Gateway {
                 return media;
             }
             if (path.equals("learning/goal") || path.equals("learning/progress") || path.equals("learning/enrollment")
-                    || path.matches("learning/sessions/" + UUID_PATH)) return learning;
+                    || path.equals("learning/templates") || path.matches("learning/sessions/" + UUID_PATH)
+                    || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal|diagnostic)")) return learning;
             if (path.equals("assessments/results")) return assessment;
             if (path.equals("tracking/overview") || path.equals("tracking/messages")
                     || path.matches("tracking/learners/" + UUID_PATH)) return tracking;
@@ -107,12 +108,17 @@ public class Gateway {
             if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
             if (path.equals("levels") || path.matches("levels/" + SLUG + "/publish")) return catalogue;
             if (path.equals("assessments/quiz")) return assessment;
-            if (path.equals("learning/enrollments")) return learning;
+            if (path.equals("learning/enrollments")
+                    || path.matches("learning/enrollments/" + UUID_PATH + "/(proposal/validate|pause|resume|diagnostic)")) {
+                return learning;
+            }
+            if (path.equals("assessments/diagnostics")) return assessment;
             if (path.equals("tracking/messages")) return tracking;
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
-            if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")) return learning;
+            if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")
+                    || path.matches("learning/enrollments/" + UUID_PATH + "/(availability|starting-point)")) return learning;
             if (path.matches("admin/users/" + UUID_PATH + "/(status|role|permissions|teacher|reviewer)")) return identity;
         }
         throw HttpError.notFound("Cette route API est inconnue.");
@@ -123,7 +129,8 @@ public class Gateway {
         // Only Media uses the user's Supabase token to enforce Storage RLS.
         String token = target.equals(media) ? user.token() : "";
         String email = path.equals("/v1/me") ? user.email() : "";
-        String key = path.equals("/v1/assessments/quiz") ? headers.getHeaderString("Idempotency-Key") : null;
+        String key = path.equals("/v1/assessments/quiz") || path.equals("/v1/assessments/diagnostics")
+                ? headers.getHeaderString("Idempotency-Key") : null;
         if (key != null && !key.matches("[A-Za-z0-9._-]{1,128}")) {
             throw HttpError.badRequest("Clé de remise invalide.");
         }

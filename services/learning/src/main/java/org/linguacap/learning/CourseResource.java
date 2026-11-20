@@ -2,20 +2,15 @@ package org.linguacap.learning;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.NullNode;
 import jakarta.inject.Inject;
 import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.GET;
-import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
-import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
-import jakarta.ws.rs.core.Response;
 import java.nio.charset.StandardCharsets;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -25,7 +20,7 @@ import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.ServiceClient;
 
-/** Parcours attribués, séances et progression (DEV-028 à DEV-031). */
+/** Séances et progression (DEV-028 à DEV-031, DEV-043). */
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
 public class CourseResource {
@@ -42,49 +37,6 @@ public class CourseResource {
     @ConfigProperty(name = "lingua.services.assessment")
     String assessmentUrl;
 
-    /** Parcours de l'élève et ses séances, ou null si aucun parcours n'a été attribué. */
-    @GET
-    @Path("/enrollment")
-    public JsonNode enrollment(@QueryParam("learnerId") String requestedLearnerId) {
-        UUID learnerId = access.resolve(actor.id(), requestedLearnerId);
-        EnrollmentView enrollment = store.enrollment(learnerId);
-        return enrollment == null ? NullNode.getInstance() : mapper.valueToTree(enrollment);
-    }
-
-    /** Attribue une version publiée du parcours et planifie la première séance avec son échéance. */
-    @POST
-    @Path("/enrollments")
-    @Consumes(MediaType.APPLICATION_JSON)
-    public Response enroll(EnrollmentRequest request) {
-        UUID callerId = actor.id();
-        if (request == null || request.trackVersionId() == null) {
-            throw HttpError.badRequest("Choisissez l’élève, le parcours et l’échéance de la première séance.");
-        }
-        UUID learnerId = LearnerAccess.parse(request.learnerId());
-        access.requireEducatorOf(callerId, learnerId);
-        var dueAt = CourseRules.firstDue(request.firstSessionDue(), LocalDate.now(CourseRules.PILOT_ZONE));
-
-        JsonNode track = services.request(catalogueUrl, "/v1/internal/tracks/" + request.trackVersionId(),
-                "GET", callerId, null);
-        if (!"published".equals(track.path("status").asText())) {
-            throw HttpError.conflict("Cette version du parcours n’est plus proposée aux nouvelles inscriptions.");
-        }
-        JsonNode module = track.path("modules").path(0);
-        if (!module.isObject() || module.path("activities").isEmpty()) {
-            throw HttpError.conflict("Ce parcours ne contient encore aucune activité.");
-        }
-        List<CourseStore.PlannedActivity> activities = new ArrayList<>();
-        for (JsonNode activity : module.path("activities")) {
-            activities.add(new CourseStore.PlannedActivity(activity.path("id").asText(),
-                    activity.path("position").asInt(), activity.path("kind").asText(),
-                    activity.path("title").asText(), activity.path("estimatedMinutes").asInt()));
-        }
-        store.enroll(learnerId, track.path("levelCode").asText(), request.trackVersionId(),
-                track.path("number").asInt(), callerId, module.path("id").asText(), module.path("title").asText(),
-                activities, dueAt);
-        return Response.status(Response.Status.CREATED).entity(store.enrollment(learnerId)).build();
-    }
-
     /** Séance avec le contenu de ses activités, livré après vérification de l'inscription. */
     @GET
     @Path("/sessions/{id}")
@@ -92,15 +44,23 @@ public class CourseResource {
         UUID callerId = actor.id();
         CourseStore.SessionRow session = readable(callerId, sessionId);
         boolean staff = !callerId.equals(session.learnerId());
-        Map<String, CourseStore.ProgressRow> progress = store.progress(sessionId);
+        Map<String, CourseStore.ProgressRow> progress = store.progress(session.enrollmentId());
 
         List<ActivityDetail> activities = new ArrayList<>();
         for (ActivitySummary summary : session.summary().activities()) {
-            JsonNode content = services.request(catalogueUrl, "/v1/internal/tracks/" + session.trackVersionId()
-                    + "/activities/" + summary.id(), "GET", callerId, null);
             CourseStore.ProgressRow row = progress.get(summary.id());
             boolean completed = row != null && row.completedAt() != null;
-
+            JsonNode state = row == null ? mapper.createObjectNode() : row.state();
+            String attemptId = row == null || row.attemptId() == null ? null : row.attemptId().toString();
+            if (isPlanned(summary)) {
+                activities.add(new ActivityDetail(summary.id(), summary.position(), summary.kind(), summary.title(),
+                        summary.estimatedMinutes(), List.of(), summary.status(), state, summary.completedAt(), attemptId,
+                        new LessonView(null, summary.title(), plannedDescription(summary)), null,
+                        mapper.createArrayNode(), List.of()));
+                continue;
+            }
+            JsonNode content = services.request(catalogueUrl, "/v1/internal/tracks/" + session.trackVersionId()
+                    + "/activities/" + summary.id(), "GET", callerId, null);
             List<PlacementView> placements = new ArrayList<>();
             boolean transcriptAllowed = false;
             for (JsonNode placement : content.path("placements")) {
@@ -114,8 +74,7 @@ public class CourseResource {
             JsonNode lesson = content.path("lesson");
             activities.add(new ActivityDetail(summary.id(), summary.position(), summary.kind(), summary.title(),
                     summary.estimatedMinutes(), mapper.convertValue(content.path("activity").path("competences"), List.class),
-                    summary.status(), row == null ? mapper.createObjectNode() : row.state(), summary.completedAt(),
-                    row == null || row.attemptId() == null ? null : row.attemptId().toString(),
+                    summary.status(), state, summary.completedAt(), attemptId,
                     lesson.isObject() ? new LessonView(lesson.path("id").asText(), lesson.path("title").asText(),
                             lesson.path("description").asText()) : null,
                     transcriptAllowed && lesson.isObject() ? nullable(lesson.path("transcript")) : null,
@@ -144,6 +103,12 @@ public class CourseResource {
         if (!"active".equals(session.enrollmentStatus())) {
             throw HttpError.conflict("Ce parcours n’est plus actif.");
         }
+        if ("paused".equals(session.goalStatus())) {
+            throw HttpError.conflict("Votre parcours est en pause : il reprendra à la date convenue.");
+        }
+        if (session.superseded()) {
+            throw HttpError.conflict("Cette séance a été replanifiée : retrouvez ses activités dans votre nouveau calendrier.");
+        }
         ActivitySummary activity = session.summary().activities().stream()
                 .filter(item -> item.id().equals(activityId)).findFirst()
                 .orElseThrow(() -> HttpError.notFound("Activité introuvable dans cette séance."));
@@ -154,9 +119,28 @@ public class CourseResource {
         boolean complete = Boolean.TRUE.equals(request.completed());
         UUID attemptId = null;
         if (complete && !"completed".equals(activity.status()) && CourseRules.requiresAttempt(activity.kind())) {
+            if (isPlanned(activity)) {
+                throw HttpError.conflict("Ce créneau d’évaluation s’ouvrira avec le bilan ou l’examen blanc.");
+            }
             attemptId = verifiedAttempt(learnerId, sessionId, activityId, request.attemptId());
         }
-        return store.record(sessionId, activityId, learnerId, request.state(), complete, attemptId);
+        return store.record(sessionId, session.enrollmentId(), activityId, learnerId, request.state(), complete, attemptId);
+    }
+
+    /** Révisions et créneaux d'évaluation réservés par le planning : ils n'ont pas de contenu dans le catalogue. */
+    private static boolean isPlanned(ActivitySummary activity) {
+        return activity.id().startsWith("revision-") || Planner.MIDTERM.equals(activity.id())
+                || Planner.FINAL.equals(activity.id());
+    }
+
+    private static String plannedDescription(ActivitySummary activity) {
+        if ("review".equals(activity.kind())) {
+            return "Relisez les leçons du module, réécoutez ses enregistrements et refaites ses exercices, "
+                    + "puis indiquez que la révision est terminée.";
+        }
+        return Planner.MIDTERM.equals(activity.id())
+                ? "Créneau réservé au bilan intermédiaire : votre professeur l’ouvrira le moment venu."
+                : "Créneau réservé à l’examen blanc : il s’ouvrira à la fin du parcours.";
     }
 
     /** La tentative doit appartenir à l'élève et avoir été remise pour cette séance et cette activité. */
@@ -188,19 +172,16 @@ public class CourseResource {
         return node == null || node.isNull() || node.isMissingNode() ? null : node.asText();
     }
 
-    public record EnrollmentRequest(String learnerId, UUID trackVersionId, String firstSessionDue) {}
-
     public record ProgressRequest(JsonNode state, Boolean completed, String attemptId) {}
 
     public record ActivitySummary(String id, int position, String kind, String title, int estimatedMinutes,
                                   String status, String completedAt) {}
 
     public record SessionSummary(UUID id, int position, String moduleId, String title, String dueAt, String status,
-                                 String startedAt, String completedAt, int estimatedMinutes,
+                                 String startedAt, String completedAt, int estimatedMinutes, int slot,
                                  List<ActivitySummary> activities) {}
 
-    public record EnrollmentView(UUID id, UUID learnerId, String levelCode, UUID trackVersionId, int trackVersionNumber,
-                                 UUID assignedBy, String assignedAt, String status, List<SessionSummary> sessions) {}
+    public record EnrollmentSessions(List<SessionSummary> current, int superseded) {}
 
     public record LessonView(String id, String title, String description) {}
 

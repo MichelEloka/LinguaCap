@@ -40,12 +40,14 @@ public class TrackResource {
         actor.id();
         String sql = """
                 select v.id, v.number, v.published_at, l.id as level_id, l.code, l.title, lang.name as language,
+                       prereq.code as prerequisite, v.success_criteria,
                        (select count(*) from catalogue.modules m where m.version_id = v.id) as modules,
                        (select count(*) from catalogue.activities a where a.version_id = v.id) as activities,
                        (select coalesce(sum(a.estimated_minutes), 0) from catalogue.activities a where a.version_id = v.id) as minutes
                 from catalogue.track_versions v
                 join catalogue.levels l on l.id = v.level_id
                 join catalogue.languages lang on lang.id = l.language_id
+                left join catalogue.levels prereq on prereq.id = l.prerequisite_level_id
                 where v.status = 'published'
                 order by lang.name, l.position nulls last, l.code
                 """;
@@ -57,7 +59,8 @@ public class TrackResource {
                 tracks.add(new TrackSummary(rows.getObject("id", UUID.class), rows.getString("level_id"),
                         rows.getString("code"), rows.getString("title"), rows.getString("language"),
                         rows.getInt("number"), text(rows.getObject("published_at", OffsetDateTime.class)),
-                        rows.getInt("modules"), rows.getInt("activities"), rows.getInt("minutes")));
+                        rows.getInt("modules"), rows.getInt("activities"), rows.getInt("minutes"),
+                        rows.getString("prerequisite"), rows.getString("success_criteria")));
             }
             return tracks;
         } catch (SQLException error) {
@@ -98,7 +101,7 @@ public class TrackResource {
                 }
             }
             return new Track(header.versionId(), header.levelId(), header.levelCode(), header.levelTitle(),
-                    header.number(), header.status(), List.copyOf(modules.values()));
+                    header.number(), header.status(), List.copyOf(modules.values()), header.planning());
         } catch (SQLException error) {
             throw HttpError.unavailable("Le parcours est temporairement indisponible.");
         }
@@ -166,17 +169,46 @@ public class TrackResource {
         }
     }
 
+    /** Questions du diagnostic de la version, sans corrigé (route interne pour Apprentissage). */
+    @GET
+    @Path("/internal/tracks/{versionId}/diagnostic")
+    public Diagnostic diagnostic(@PathParam("versionId") UUID versionId) {
+        actor.id();
+        try (var connection = dataSource.getConnection()) {
+            Track header = header(connection, versionId);
+            String lessonId = header.planning().diagnosticLessonId();
+            if (lessonId == null) throw HttpError.notFound("Ce parcours n’a pas de diagnostic.");
+            try (var query = connection.prepareStatement("select title, description from catalogue.lessons where id = ?")) {
+                query.setString(1, lessonId);
+                try (var rows = query.executeQuery()) {
+                    if (!rows.next()) throw HttpError.notFound("Diagnostic introuvable.");
+                    return new Diagnostic(lessonId, rows.getString("title"), rows.getString("description"),
+                            CatalogueResource.readQuestions(connection, lessonId));
+                }
+            }
+        } catch (SQLException error) {
+            throw HttpError.unavailable("Le diagnostic est temporairement indisponible.");
+        }
+    }
+
     private Track header(Connection connection, UUID versionId) throws SQLException {
         try (var query = connection.prepareStatement("""
-                select v.id, v.number, v.status, l.id as level_id, l.code, l.title
+                select v.id, v.number, v.status, l.id as level_id, l.code, l.title, prereq.code as prerequisite,
+                       v.expected_competences, v.success_criteria, v.pass_percent, v.review_minutes,
+                       v.midterm_minutes, v.final_minutes, v.diagnostic_lesson_id
                 from catalogue.track_versions v join catalogue.levels l on l.id = v.level_id
+                left join catalogue.levels prereq on prereq.id = l.prerequisite_level_id
                 where v.id = ? and v.status in ('published', 'retired')
                 """)) {
             query.setObject(1, versionId);
             try (var rows = query.executeQuery()) {
                 if (!rows.next()) throw HttpError.notFound("Parcours introuvable.");
                 return new Track(rows.getObject("id", UUID.class), rows.getString("level_id"), rows.getString("code"),
-                        rows.getString("title"), rows.getInt("number"), rows.getString("status"), List.of());
+                        rows.getString("title"), rows.getInt("number"), rows.getString("status"), List.of(),
+                        new Planning(rows.getString("prerequisite"), texts(rows.getArray("expected_competences")),
+                                rows.getString("success_criteria"), rows.getInt("pass_percent"),
+                                rows.getInt("review_minutes"), rows.getInt("midterm_minutes"),
+                                rows.getInt("final_minutes"), rows.getString("diagnostic_lesson_id")));
             }
         }
     }
@@ -203,10 +235,18 @@ public class TrackResource {
     }
 
     public record TrackSummary(UUID versionId, String levelId, String levelCode, String levelTitle, String language,
-                               int number, String publishedAt, int moduleCount, int activityCount, int totalMinutes) {}
+                               int number, String publishedAt, int moduleCount, int activityCount, int totalMinutes,
+                               String prerequisiteLevelCode, String successCriteria) {}
+
+    /** Données de planification publiées avec la version : prérequis, critères, durées des révisions et évaluations. */
+    public record Planning(String prerequisiteLevelCode, List<String> expectedCompetences, String successCriteria,
+                           int passPercent, int reviewMinutes, int midtermMinutes, int finalMinutes,
+                           String diagnosticLessonId) {}
 
     public record Track(UUID versionId, String levelId, String levelCode, String levelTitle, int number, String status,
-                        List<TrackModule> modules) {}
+                        List<TrackModule> modules, Planning planning) {}
+
+    public record Diagnostic(String lessonId, String title, String description, List<Question> questions) {}
 
     public record TrackModule(String id, int position, String title, String objective, List<String> prerequisites,
                               List<TrackActivity> activities) {}

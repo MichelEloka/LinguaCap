@@ -39,6 +39,7 @@ public class LearningResource {
     @Inject ServiceClient services;
     @Inject AgroalDataSource dataSource;
     @Inject ObjectMapper mapper;
+    @Inject GoalStore goals;
 
     @ConfigProperty(name = "lingua.services.assessment")
     String assessmentUrl;
@@ -135,6 +136,16 @@ public class LearningResource {
         progress.put("completedCount", completed.size());
         progress.set("goal", goalFor(learnerId));
         progress.set("results", results);
+        GoalStore.EnrollmentRow enrollment = goals.latest(learnerId);
+        if (enrollment == null) {
+            progress.putNull("enrollment");
+        } else {
+            var summary = progress.putObject("enrollment");
+            summary.put("levelCode", enrollment.levelCode());
+            summary.put("goalStatus", enrollment.goalStatus());
+            summary.put("targetDate", enrollment.targetDate() == null ? null : enrollment.targetDate().toString());
+            summary.put("initialTargetDate", enrollment.initialTargetDate() == null ? null : enrollment.initialTargetDate().toString());
+        }
         return progress;
     }
 

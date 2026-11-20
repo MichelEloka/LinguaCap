@@ -22,6 +22,8 @@ GRANT USAGE ON SCHEMA learning TO lingua_learning;
 GRANT SELECT, INSERT, UPDATE ON learning.goal_plans TO lingua_learning;
 GRANT SELECT, INSERT, UPDATE ON learning.enrollments, learning.sessions, learning.session_activities,
     learning.activity_progress TO lingua_learning;
+GRANT SELECT, INSERT, UPDATE, DELETE ON learning.availabilities TO lingua_learning;
+GRANT SELECT, INSERT, UPDATE ON learning.plan_revisions, learning.session_due_history TO lingua_learning;
 
 GRANT USAGE ON SCHEMA assessment TO lingua_assessment;
 GRANT SELECT, INSERT ON assessment.quiz_attempts TO lingua_assessment;

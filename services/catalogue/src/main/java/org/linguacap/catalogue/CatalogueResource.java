@@ -174,8 +174,9 @@ public class CatalogueResource {
         validateLessonId(id);
         try (var connection = dataSource.getConnection();
              var query = connection.prepareStatement("""
-                     select o.question_id, o.id
+                     select o.question_id, o.id, q.module_ref
                      from catalogue.options o
+                     join catalogue.questions q on q.lesson_id = o.lesson_id and q.id = o.question_id
                      join catalogue.lessons l on l.id = o.lesson_id
                      join catalogue.levels n on n.id = l.level_id
                      where o.lesson_id = ? and o.correct and n.status = 'published'
@@ -183,13 +184,15 @@ public class CatalogueResource {
             query.setString(1, id);
             try (var rows = query.executeQuery()) {
                 Map<String, String> answers = new LinkedHashMap<>();
+                Map<String, String> modules = new LinkedHashMap<>();
                 while (rows.next()) {
                     answers.put(rows.getString("question_id"), rows.getString("id"));
+                    if (rows.getString("module_ref") != null) modules.put(rows.getString("question_id"), rows.getString("module_ref"));
                 }
                 if (answers.isEmpty()) {
                     throw HttpError.notFound("Corrigé indisponible pour cette leçon.");
                 }
-                return new AnswerKey(Map.copyOf(answers));
+                return new AnswerKey(Map.copyOf(answers), Map.copyOf(modules));
             }
         } catch (SQLException error) {
             throw HttpError.unavailable("Le corrigé est temporairement indisponible.");
@@ -249,5 +252,6 @@ public class CatalogueResource {
                          List<String> mediaIds, List<Question> questions) {}
     public record Question(String id, String prompt, List<Option> options) {}
     public record Option(String id, String text) {}
-    public record AnswerKey(Map<String, String> answers) {}
+    /** modules : pour un diagnostic, le module (ou « prerequis ») que chaque question évalue. */
+    public record AnswerKey(Map<String, String> answers, Map<String, String> modules) {}
 }

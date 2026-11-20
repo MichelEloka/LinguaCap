@@ -6,7 +6,6 @@ import io.agroal.api.AgroalDataSource;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
@@ -17,10 +16,10 @@ import java.util.UUID;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
 import org.linguacap.learning.CourseResource.ActivitySummary;
-import org.linguacap.learning.CourseResource.EnrollmentView;
+import org.linguacap.learning.CourseResource.EnrollmentSessions;
 import org.linguacap.learning.CourseResource.SessionSummary;
 
-/** Inscriptions, séances et progression du schéma learning. */
+/** Séances et progression du schéma learning. La progression appartient au parcours, pas à la séance. */
 @ApplicationScoped
 class CourseStore {
     private static final Logger LOG = Logger.getLogger(CourseStore.class);
@@ -33,87 +32,17 @@ class CourseStore {
         T run(Connection connection) throws SQLException;
     }
 
-    record PlannedActivity(String id, int position, String kind, String title, int estimatedMinutes) {}
-
-    record SessionRow(UUID id, UUID enrollmentId, UUID learnerId, String enrollmentStatus, UUID trackVersionId,
-                      String levelCode, SessionSummary summary) {}
+    record SessionRow(UUID id, UUID enrollmentId, UUID learnerId, String enrollmentStatus, String goalStatus,
+                      UUID trackVersionId, String levelCode, boolean superseded, SessionSummary summary) {}
 
     record ProgressRow(String activityId, JsonNode state, OffsetDateTime completedAt, UUID attemptId) {}
 
-    /** Inscription la plus récente de l'élève (l'active en priorité), avec ses séances. */
-    EnrollmentView enrollment(UUID learnerId) {
-        return read("read enrollment", connection -> {
-            try (var query = connection.prepareStatement("""
-                    select id, learner_id, level_code, track_version_id, track_version_number, assigned_by,
-                           assigned_at, status
-                    from learning.enrollments where learner_id = ?
-                    order by (status = 'active') desc, assigned_at desc limit 1
-                    """)) {
-                query.setObject(1, learnerId);
-                try (var rows = query.executeQuery()) {
-                    if (!rows.next()) return null;
-                    UUID id = rows.getObject("id", UUID.class);
-                    return new EnrollmentView(id, rows.getObject("learner_id", UUID.class), rows.getString("level_code"),
-                            rows.getObject("track_version_id", UUID.class), rows.getInt("track_version_number"),
-                            rows.getObject("assigned_by", UUID.class),
-                            rows.getObject("assigned_at", OffsetDateTime.class).toString(), rows.getString("status"),
-                            sessions(connection, id));
-                }
-            }
-        });
-    }
-
-    /** Crée l'inscription et sa première séance, avec ses activités, dans une même transaction. */
-    UUID enroll(UUID learnerId, String levelCode, UUID versionId, int versionNumber, UUID assignedBy,
-                String moduleId, String moduleTitle, List<PlannedActivity> activities, OffsetDateTime dueAt) {
-        return transaction("create enrollment", connection -> {
-            UUID enrollmentId;
-            try (var insert = connection.prepareStatement("""
-                    insert into learning.enrollments (learner_id, level_code, track_version_id, track_version_number, assigned_by)
-                    values (?, ?, ?, ?, ?)
-                    on conflict (learner_id) where status = 'active' do nothing
-                    returning id
-                    """)) {
-                insert.setObject(1, learnerId);
-                insert.setString(2, levelCode);
-                insert.setObject(3, versionId);
-                insert.setInt(4, versionNumber);
-                insert.setObject(5, assignedBy);
-                try (var rows = insert.executeQuery()) {
-                    if (!rows.next()) throw HttpError.conflict("Un parcours est déjà en cours pour cet élève.");
-                    enrollmentId = rows.getObject(1, UUID.class);
-                }
-            }
-            UUID sessionId;
-            try (var insert = connection.prepareStatement("""
-                    insert into learning.sessions (enrollment_id, learner_id, position, module_id, title, due_at)
-                    values (?, ?, 1, ?, ?, ?) returning id
-                    """)) {
-                insert.setObject(1, enrollmentId);
-                insert.setObject(2, learnerId);
-                insert.setString(3, moduleId);
-                insert.setString(4, moduleTitle);
-                insert.setObject(5, dueAt);
-                try (var rows = insert.executeQuery()) {
-                    rows.next();
-                    sessionId = rows.getObject(1, UUID.class);
-                }
-            }
-            for (PlannedActivity activity : activities) {
-                try (var insert = connection.prepareStatement("""
-                        insert into learning.session_activities (session_id, activity_id, position, kind, title, estimated_minutes)
-                        values (?, ?, ?, ?, ?, ?)
-                        """)) {
-                    insert.setObject(1, sessionId);
-                    insert.setString(2, activity.id());
-                    insert.setInt(3, activity.position());
-                    insert.setString(4, activity.kind());
-                    insert.setString(5, activity.title());
-                    insert.setInt(6, activity.estimatedMinutes());
-                    insert.executeUpdate();
-                }
-            }
-            return enrollmentId;
+    /** Séances du planning en vigueur (et terminées), et nombre de séances remplacées par une replanification. */
+    EnrollmentSessions sessions(UUID enrollmentId) {
+        return read("read sessions", connection -> {
+            List<SessionSummary> all = sessions(connection, enrollmentId);
+            List<SessionSummary> current = all.stream().filter(session -> !"superseded".equals(session.status())).toList();
+            return new EnrollmentSessions(current, all.size() - current.size());
         });
     }
 
@@ -121,13 +50,13 @@ class CourseStore {
         return read("read session", connection -> session(connection, sessionId));
     }
 
-    Map<String, ProgressRow> progress(UUID sessionId) {
+    Map<String, ProgressRow> progress(UUID enrollmentId) {
         return read("read progress", connection -> {
             Map<String, ProgressRow> progress = new LinkedHashMap<>();
             try (var query = connection.prepareStatement("""
-                    select activity_id, state, completed_at, attempt_id from learning.activity_progress where session_id = ?
+                    select activity_id, state, completed_at, attempt_id from learning.activity_progress where enrollment_id = ?
                     """)) {
-                query.setObject(1, sessionId);
+                query.setObject(1, enrollmentId);
                 try (var rows = query.executeQuery()) {
                     while (rows.next()) {
                         progress.put(rows.getString("activity_id"), new ProgressRow(rows.getString("activity_id"),
@@ -144,37 +73,40 @@ class CourseStore {
      * Enregistre l'état d'une activité et, si demandé, sa fin. La fin n'est horodatée qu'une fois :
      * une requête rejouée renvoie le même résultat sans double comptage.
      */
-    SessionSummary record(UUID sessionId, String activityId, UUID learnerId, JsonNode state, boolean complete,
-                          UUID attemptId) {
+    SessionSummary record(UUID sessionId, UUID enrollmentId, String activityId, UUID learnerId, JsonNode state,
+                          boolean complete, UUID attemptId) {
         return transaction("record progress", connection -> {
             try (var lock = connection.prepareStatement("select id from learning.sessions where id = ? for update")) {
                 lock.setObject(1, sessionId);
                 lock.executeQuery().close();
             }
             try (var upsert = connection.prepareStatement("""
-                    insert into learning.activity_progress (session_id, activity_id, learner_id, state)
-                    values (?, ?, ?, coalesce(?::jsonb, '{}'::jsonb))
-                    on conflict (session_id, activity_id) do update
+                    insert into learning.activity_progress (session_id, activity_id, learner_id, enrollment_id, state)
+                    values (?, ?, ?, ?, coalesce(?::jsonb, '{}'::jsonb))
+                    on conflict (enrollment_id, activity_id) do update
                         set state = case when learning.activity_progress.completed_at is null and ?::jsonb is not null
                                          then ?::jsonb else learning.activity_progress.state end,
+                            session_id = case when learning.activity_progress.completed_at is null
+                                              then excluded.session_id else learning.activity_progress.session_id end,
                             updated_at = now()
                     """)) {
                 String payload = state == null ? null : state.toString();
                 upsert.setObject(1, sessionId);
                 upsert.setString(2, activityId);
                 upsert.setObject(3, learnerId);
-                upsert.setString(4, payload);
+                upsert.setObject(4, enrollmentId);
                 upsert.setString(5, payload);
                 upsert.setString(6, payload);
+                upsert.setString(7, payload);
                 upsert.executeUpdate();
             }
             if (complete) {
                 try (var finish = connection.prepareStatement("""
                         update learning.activity_progress set completed_at = now(), attempt_id = ?
-                        where session_id = ? and activity_id = ? and completed_at is null
+                        where enrollment_id = ? and activity_id = ? and completed_at is null
                         """)) {
                     finish.setObject(1, attemptId);
-                    finish.setObject(2, sessionId);
+                    finish.setObject(2, enrollmentId);
                     finish.setString(3, activityId);
                     finish.executeUpdate();
                 }
@@ -184,7 +116,7 @@ class CourseStore {
                         completed_at = case when completed_at is null and not exists (
                             select 1 from learning.session_activities sa
                             left join learning.activity_progress p
-                                   on p.session_id = sa.session_id and p.activity_id = sa.activity_id
+                                   on p.enrollment_id = learning.sessions.enrollment_id and p.activity_id = sa.activity_id
                             where sa.session_id = learning.sessions.id and p.completed_at is null
                         ) then now() else completed_at end
                     where id = ?
@@ -198,7 +130,8 @@ class CourseStore {
 
     private SessionRow session(Connection connection, UUID sessionId) throws SQLException {
         try (var query = connection.prepareStatement("""
-                select s.id, s.enrollment_id, s.learner_id, e.status, e.track_version_id, e.level_code
+                select s.id, s.enrollment_id, s.learner_id, s.superseded_at, e.status, e.goal_status, e.track_version_id,
+                       e.level_code
                 from learning.sessions s join learning.enrollments e on e.id = s.enrollment_id
                 where s.id = ?
                 """)) {
@@ -209,8 +142,9 @@ class CourseStore {
                 SessionSummary summary = sessions(connection, enrollmentId).stream()
                         .filter(item -> item.id().equals(sessionId)).findFirst().orElseThrow();
                 return new SessionRow(sessionId, enrollmentId, rows.getObject("learner_id", UUID.class),
-                        rows.getString("status"), rows.getObject("track_version_id", UUID.class),
-                        rows.getString("level_code"), summary);
+                        rows.getString("status"), rows.getString("goal_status"),
+                        rows.getObject("track_version_id", UUID.class), rows.getString("level_code"),
+                        rows.getObject("superseded_at") != null, summary);
             }
         }
     }
@@ -222,7 +156,7 @@ class CourseStore {
                        p.started_at, p.completed_at
                 from learning.session_activities sa
                 join learning.sessions s on s.id = sa.session_id
-                left join learning.activity_progress p on p.session_id = sa.session_id and p.activity_id = sa.activity_id
+                left join learning.activity_progress p on p.enrollment_id = s.enrollment_id and p.activity_id = sa.activity_id
                 where s.enrollment_id = ?
                 order by s.position, sa.position
                 """)) {
@@ -242,8 +176,8 @@ class CourseStore {
         List<SessionSummary> sessions = new ArrayList<>();
         OffsetDateTime now = OffsetDateTime.now();
         try (var query = connection.prepareStatement("""
-                select id, position, module_id, title, due_at, started_at, completed_at
-                from learning.sessions where enrollment_id = ? order by due_at, position
+                select id, position, module_id, title, due_at, started_at, completed_at, superseded_at, slot
+                from learning.sessions where enrollment_id = ? order by due_at, slot, position
                 """)) {
             query.setObject(1, enrollmentId);
             try (var rows = query.executeQuery()) {
@@ -252,12 +186,14 @@ class CourseStore {
                     OffsetDateTime dueAt = rows.getObject("due_at", OffsetDateTime.class);
                     OffsetDateTime startedAt = rows.getObject("started_at", OffsetDateTime.class);
                     OffsetDateTime completedAt = rows.getObject("completed_at", OffsetDateTime.class);
+                    boolean superseded = rows.getObject("superseded_at") != null;
                     List<ActivitySummary> items = activities.getOrDefault(id, List.of());
+                    String status = superseded && completedAt == null ? "superseded"
+                            : CourseRules.sessionStatus(startedAt, completedAt, dueAt, now);
                     sessions.add(new SessionSummary(id, rows.getInt("position"), rows.getString("module_id"),
-                            rows.getString("title"), dueAt.toString(),
-                            CourseRules.sessionStatus(startedAt, completedAt, dueAt, now),
-                            text(startedAt), text(completedAt),
-                            items.stream().mapToInt(ActivitySummary::estimatedMinutes).sum(), List.copyOf(items)));
+                            rows.getString("title"), dueAt.toString(), status, text(startedAt), text(completedAt),
+                            items.stream().mapToInt(ActivitySummary::estimatedMinutes).sum(), rows.getInt("slot"),
+                            List.copyOf(items)));
                 }
             }
         }
