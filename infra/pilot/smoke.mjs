@@ -693,6 +693,161 @@ await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', descriptio
 console.log('Recette du catalogue réussie · niveaux et prérequis, brouillon repris, contrôle de complétude, bilan avec grille, '
   + 'publication et retrait sans redéploiement, nouvelle version avec média remplacé, ancien élève sur son fichier, brouillons inaccessibles.');
 
+// --- Bilan, examen blanc, productions privées et corrections (incrément 6) ---------------------------------
+const choice = (id, right = 'a') => ({ id, prompt: `Question ${id} ?`, moduleRef: null, options: [
+  { id: 'a', label: 'Réponse A', correct: right === 'a' }, { id: 'b', label: 'Réponse B', correct: right === 'b' }] });
+// L'exercice du module travaille aussi l'oral : il sera proposé en révision si l'oral reste sous le seuil.
+const examModules = b1Content(2).modules.map((module) => ({ ...module, activities: module.activities.map((activity) =>
+  activity.id === 'b1-quiz' ? { ...activity, competences: ['lecture', 'expression-orale'] } : activity) }));
+const examContent = { ...b1Content(2), modules: examModules, assessments: [
+  { kind: 'midterm', title: 'Bilan B1', description: 'Lecture des modules travaillés.', parts: [
+    { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Lisez puis répondez.',
+      questions: [choice('m1'), choice('m2', 'b')], criteria: [], placements: [] }] },
+  { kind: 'final', title: 'Examen blanc B1', description: 'Lecture, écrit et oral.', parts: [
+    { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Répondez aux questions.',
+      questions: [choice('l1'), choice('l2', 'b')], criteria: [], placements: [] },
+    { id: 'ecrit', competence: 'expression-ecrite', mode: 'written', title: 'Écrire une commande',
+      instructions: 'Commandez un bretzel par écrit.', questions: [], placements: [],
+      criteria: [{ id: 'clarte', label: 'La demande est claire', maxPoints: 5 }, { id: 'langue', label: 'La langue est correcte', maxPoints: 5 }] },
+    { id: 'oral', competence: 'expression-orale', mode: 'oral', title: 'Commander à l’oral',
+      instructions: 'Enregistrez votre commande.', questions: [], placements: [],
+      criteria: [{ id: 'aisance', label: 'Aisance', maxPoints: 10 }] }] },
+] };
+await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: null });
+const examVersion = await post('/catalogue/levels/b1/versions', staffToken, { fromVersionId: b1Next.id }, 201);
+assert.equal((await put(`/catalogue/versions/${examVersion.id}`, staffToken, examContent)).checks.publishable, true);
+await post(`/catalogue/versions/${examVersion.id}/publish`, staffToken);
+
+const enrollmentOf = async (token) => (await api('/learning/enrollment', token));
+const webm = Buffer.concat([Buffer.from([0x1a, 0x45, 0xdf, 0xa3]), Buffer.alloc(2_044, 7)]);
+const record = async (exam, token) => {
+  const reservation = await post(`/assessments/exams/${exam.id}/recordings`, token, { partId: 'oral', mimeType: 'audio/webm', size: webm.length });
+  assert.equal(reservation.status, 'pending');
+  const sent = await fetch(reservation.uploadUrl, { method: 'POST', body: webm, signal: AbortSignal.timeout(12_000),
+    headers: { Authorization: `Bearer ${token}`, apikey: local.publishable, 'Content-Type': 'audio/webm', 'x-upsert': 'false' } });
+  assert.ok(sent.ok, 'L’enregistrement part directement dans l’espace privé des productions');
+  return { reservation, exam: await post(`/assessments/exams/${exam.id}/recordings/${reservation.id}/finalize`, token) };
+};
+const submitExam = (exam, token, key = randomUUID()) => api(`/assessments/exams/${exam.id}/submit`, token, {
+  method: 'POST', body: {}, headers: { 'Idempotency-Key': key } });
+
+// Examen accompagné : l'élève passe le bilan puis l'examen blanc, son professeur référent corrige.
+const examLearner = await createAccount('eleve-examen', 'learner', teacher.id);
+const examGoal = await post('/learning/enrollments', teacher.token,
+  { learnerId: examLearner.id, trackVersionId: examVersion.id, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+await post(goalPath(examGoal.id, 'proposal/validate'), teacher.token, { number: examGoal.proposal.number });
+assert.deepEqual(await api(`/assessments/exams?enrollmentId=${examGoal.id}`, examLearner.token), []);
+await post('/assessments/exams', teacher.token, { enrollmentId: examGoal.id, kind: 'midterm' }, 403);
+const midterm = await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'midterm' }, 201);
+assert.ok(!JSON.stringify(midterm.definition).includes('correct'), 'Le corrigé ne part pas vers l’élève');
+assert.equal((await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'midterm' })).id, midterm.id,
+  'Rouvrir le bilan reprend la tentative en cours');
+await put(`/assessments/exams/${midterm.id}/answers`, examLearner.token, { answers: { lecture: { m1: 'z' } } }, 400);
+await put(`/assessments/exams/${midterm.id}/answers`, examLearner.token, { answers: { lecture: { m1: 'a', m2: 'a' } } });
+assert.deepEqual((await api(`/assessments/exams/${midterm.id}`, examLearner.token)).answers, { lecture: { m1: 'a', m2: 'a' } },
+  'La progression est enregistrée dans la tentative');
+const midtermKey = randomUUID();
+const midtermResult = await submitExam(midterm, examLearner.token, midtermKey);
+assert.equal(midtermResult.status, 'graded', 'Un bilan sans production est corrigé immédiatement');
+assert.equal(midtermResult.result.decision, 'completed');
+assert.deepEqual(midtermResult.result.scores.lecture, { points: 1, max: 2, percent: 50 });
+assert.ok(midtermResult.result.review.some((item) => item.activityId === 'b1-lecon'), 'Les activités de lecture sont à revoir');
+assert.equal((await submitExam(midterm, examLearner.token, midtermKey)).submittedAt, midtermResult.submittedAt, 'La remise rejouée ne compte qu’une fois');
+await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'midterm' }, 409);
+const midtermSlot = (await enrollmentOf(examLearner.token)).sessions.flatMap((session) => session.activities)
+  .find((activity) => activity.id === 'bilan-intermediaire');
+assert.equal(midtermSlot.status, 'completed', 'La remise termine le créneau du bilan dans le calendrier');
+
+const final = await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'final' }, 201);
+assert.ok(final.dueAt, 'L’examen blanc reprend l’échéance de son créneau');
+const missing = await api(`/assessments/exams/${final.id}/submit`, examLearner.token, {
+  method: 'POST', body: {}, headers: { 'Idempotency-Key': randomUUID() }, status: 409 });
+assert.match(missing.message, /production écrite/);
+await put(`/assessments/exams/${final.id}/answers`, examLearner.token,
+  { answers: { lecture: { l1: 'a', l2: 'b' } }, texts: { ecrit: 'Guten Tag, ich hätte gern eine Brezel, bitte.' } });
+await post(`/assessments/exams/${final.id}/recordings`, examLearner.token, { partId: 'ecrit', mimeType: 'audio/webm', size: 10 }, 400);
+await post(`/assessments/exams/${final.id}/recordings`, examLearner.token, { partId: 'oral', mimeType: 'video/mp4', size: 10 }, 400);
+const intruderUpload = await post(`/assessments/exams/${final.id}/recordings`, examLearner.token, { partId: 'oral', mimeType: 'audio/webm', size: webm.length });
+const intrusion = await fetch(intruderUpload.uploadUrl, { method: 'POST', body: webm,
+  headers: { Authorization: `Bearer ${learnerToken}`, apikey: local.publishable, 'Content-Type': 'audio/webm' } });
+assert.ok(!intrusion.ok, 'Un autre élève ne peut pas déposer dans l’envoi réservé');
+const recorded = await record(final, examLearner.token);
+const ownRecording = recorded.exam.recordings.find((recording) => recording.partId === 'oral');
+assert.equal(ownRecording.productionId, recorded.reservation.id);
+assert.deepEqual(Buffer.from(await (await fetch(ownRecording.url)).arrayBuffer()), webm, 'L’élève réécoute son enregistrement');
+await api(`/assessments/exams/${final.id}`, otherTeacher.token, { status: 403 });
+await api(`/assessments/exams/${final.id}`, learnerToken, { status: 403 });
+const submitted = await submitExam(final, examLearner.token);
+assert.equal(submitted.status, 'submitted');
+assert.equal(submitted.onTime, true);
+assert.equal((await enrollmentOf(examLearner.token)).goal.status, 'awaiting_grading');
+await post(`/assessments/exams/${final.id}/recordings`, examLearner.token, { partId: 'oral', mimeType: 'audio/webm', size: webm.length }, 409);
+
+// File des corrections : le référent voit la remise, le professeur tiers et le correcteur d'un autre élève non.
+assert.ok((await api('/assessments/grading', teacher.token)).some((item) => item.id === final.id));
+assert.ok(!(await api('/assessments/grading', otherTeacher.token)).some((item) => item.id === final.id));
+assert.ok(!(await api('/assessments/grading', staffToken)).some((item) => item.id === final.id));
+await post(`/assessments/exams/${final.id}/grading`, otherTeacher.token, { parts: {} }, 403);
+const toGrade = await api(`/assessments/exams/${final.id}`, teacher.token);
+assert.equal(toGrade.canGrade, true);
+assert.equal(toGrade.texts.ecrit, 'Guten Tag, ich hätte gern eine Brezel, bitte.');
+assert.deepEqual(toGrade.closedScores.lecture, { points: 2, max: 2, percent: 100 });
+const teacherRecording = toGrade.recordings.find((recording) => recording.partId === 'oral');
+assert.ok((await fetch(teacherRecording.url)).ok, 'Le professeur référent écoute la production orale');
+
+// Remise à temps corrigée après l'échéance : elle reste à temps.
+localSql(local.container, `update assessment.exam_attempts set submitted_at = now() - interval '2 days', due_at = now() - interval '1 day'
+  where id = '${final.id}';`);
+await post(`/assessments/exams/${final.id}/grading`, teacher.token,
+  { parts: { ecrit: { points: { clarte: 6, langue: 3 } }, oral: { points: { aisance: 2 } } } }, 400);
+const graded = await post(`/assessments/exams/${final.id}/grading`, teacher.token, {
+  parts: { ecrit: { points: { clarte: 4, langue: 3 }, comment: 'Demande claire.' }, oral: { points: { aisance: 2 }, comment: 'Travaillez l’aisance.' } },
+  feedback: 'Reprenez les dialogues du module avant une nouvelle tentative.' });
+assert.equal(graded.status, 'graded');
+assert.equal(graded.result.decision, 'to_consolidate', 'Une compétence trop faible empêche la validation');
+assert.equal(graded.onTime, true, 'Remise à temps, corrigée après l’échéance');
+assert.ok(new Date(graded.result.gradedAt) > new Date(graded.dueAt));
+assert.deepEqual(graded.result.scores['expression-orale'], { points: 2, max: 10, percent: 20 });
+await post(`/assessments/exams/${final.id}/grading`, teacher.token, { parts: {} }, 409);
+assert.equal((await enrollmentOf(examLearner.token)).goal.status, 'to_consolidate');
+const learnerView = await api(`/assessments/exams/${final.id}`, examLearner.token);
+assert.equal(learnerView.result.comments.oral, 'Travaillez l’aisance.');
+assert.ok(learnerView.result.review.length > 0, 'L’élève voit les activités à retravailler');
+
+// Nouvelle tentative après un résultat à consolider ; l'historique garde la première.
+const retry = await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'final' }, 201);
+assert.equal(retry.number, 2);
+const examHistory = await api(`/assessments/exams?enrollmentId=${examGoal.id}`, teacher.token);
+assert.deepEqual(examHistory.filter((item) => item.kind === 'final').map((item) => [item.number, item.status, item.decision]),
+  [[2, 'in_progress', null], [1, 'graded', 'to_consolidate']]);
+await api(`/assessments/exams?enrollmentId=${examGoal.id}`, otherTeacher.token, { status: 403 });
+
+// Examen autonome : le correcteur désigné (permission Correction) corrige ; le professeur tiers est refusé.
+const examAutonomous = await createAccount('autonome-examen', 'learner', null);
+await put(`/admin/users/${staff.id}/permissions`, admin.token, { permissions: ['catalogue', 'correction'] });
+await put(`/admin/users/${examAutonomous.id}/reviewer`, admin.token, { reviewerId: staff.id });
+const autoGoal = await post('/learning/enrollments', admin.token,
+  { learnerId: examAutonomous.id, trackVersionId: examVersion.id, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+await post(goalPath(autoGoal.id, 'proposal/validate'), examAutonomous.token, { number: autoGoal.proposal.number });
+const autoFinal = await post('/assessments/exams', examAutonomous.token, { enrollmentId: autoGoal.id, kind: 'final' }, 201);
+await put(`/assessments/exams/${autoFinal.id}/answers`, examAutonomous.token,
+  { answers: { lecture: { l1: 'a', l2: 'b' } }, texts: { ecrit: 'Ich möchte zwei Brezeln.' } });
+await record(autoFinal, examAutonomous.token);
+await submitExam(autoFinal, examAutonomous.token);
+assert.ok((await api('/assessments/grading', staffToken)).some((item) => item.id === autoFinal.id), 'Le correcteur désigné voit la remise');
+assert.ok(!(await api('/assessments/grading', teacher.token)).some((item) => item.id === autoFinal.id));
+await api(`/assessments/exams/${autoFinal.id}`, teacher.token, { status: 403 });
+const reviewerView = await api(`/assessments/exams/${autoFinal.id}`, staffToken);
+assert.ok((await fetch(reviewerView.recordings[0].url)).ok, 'Le correcteur désigné écoute la production orale');
+const validated = await post(`/assessments/exams/${autoFinal.id}/grading`, staffToken, {
+  parts: { ecrit: { points: { clarte: 5, langue: 4 } }, oral: { points: { aisance: 8 } } }, feedback: 'Très bien.' });
+assert.equal(validated.result.decision, 'validated');
+assert.equal((await enrollmentOf(examAutonomous.token)).goal.status, 'validated');
+await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: 'a2' });
+console.log('Recette des évaluations réussie · bilan corrigé immédiatement, examen blanc avec écrit et oral privé, remise idempotente, '
+  + 'file et grille du référent, remise à temps corrigée après l’échéance, résultat à consolider puis nouvelle tentative, '
+  + 'correcteur désigné d’un élève autonome, refus d’accès des tiers.');
+
 // --- Traces métier pour Suivi ---------------------------------------------------------------------------
 const events = localQuery(local.container, `select string_agg(distinct type, ',' order by type) from identity.outbox_events
   where learner_id = '${learner.id}' or subject_id in ('${invite.id}', '${first.id}');`).split(',');
@@ -801,6 +956,23 @@ if (process.argv.includes('--browser')) {
     await expect(previewDialog.getByRole('img', { name: 'Un bretzel doré.' })).toBeVisible({ timeout: 15_000 });
     await editorPage.keyboard.press('Escape');
     console.log('Recette navigateur réussie · dépôt avec progression depuis la médiathèque et aperçu élève dans l’éditeur, sur mobile.');
+
+    const examPage = await browser.newPage({ viewport: { width: 390, height: 844 } });
+    await examPage.goto('http://127.0.0.1:5186/connexion');
+    await examPage.getByLabel('Adresse e-mail').fill(examLearner.email);
+    await examPage.getByLabel('Mot de passe', { exact: true }).fill(password);
+    await examPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
+    await expect(examPage.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    await examPage.goto(`http://127.0.0.1:5186/espace/evaluation/${examGoal.id}/final`);
+    await expect(examPage.getByRole('heading', { name: 'Examen blanc B1' })).toBeVisible({ timeout: 15_000 });
+    await expect(examPage.getByRole('heading', { name: 'Commander à l’oral' })).toBeVisible();
+    await expect(examPage.getByRole('button', { name: 'Déposer un fichier' }).or(examPage.getByText('Déposer un fichier'))).toBeVisible();
+    await expect(examPage.getByText('Tentative 1')).toBeVisible();
+    await expect(examPage.getByText('À consolider')).toBeVisible();
+    const typed = examPage.waitForResponse((response) => response.url().includes(`/assessments/exams/${retry.id}/answers`) && response.ok());
+    await examPage.getByLabel('Votre texte').fill('Ich hätte gern einen Kaffee.');
+    await typed;
+    console.log('Recette navigateur réussie · nouvelle tentative de l’examen blanc, sauvegarde de l’écrit et historique sur mobile.');
   } finally {
     await browser.close();
   }
