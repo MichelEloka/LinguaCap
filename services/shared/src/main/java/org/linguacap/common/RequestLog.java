@@ -22,8 +22,14 @@ public class RequestLog {
 
     /** Identifiant de la requête en cours, ou un nouvel identifiant hors requête. */
     public static String current() {
+        String id = active();
+        return id.isEmpty() ? UUID.randomUUID().toString() : id;
+    }
+
+    /** Identifiant de la requête en cours, vide hors requête. */
+    public static String active() {
         Object value = MDC.get(KEY);
-        return value instanceof String id && !id.isEmpty() ? id : UUID.randomUUID().toString();
+        return value instanceof String id && id.matches("[A-Za-z0-9-]{1,64}") ? id : "";
     }
 
     @ServerRequestFilter(preMatching = true)

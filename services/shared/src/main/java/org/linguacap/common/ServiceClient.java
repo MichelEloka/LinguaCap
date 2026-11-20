@@ -62,7 +62,9 @@ public class ServiceClient {
             if (emailVerified && !email.isEmpty() && email.chars().allMatch(ch -> ch >= 33 && ch <= 126)) {
                 request.header(Actor.EMAIL, email).header(Actor.EMAIL_VERIFIED, "true");
             }
-            if (!requestId.isEmpty()) request.header("X-Request-Id", requestId);
+            // L'identifiant de la requête en cours suit aussi les appels internes (traitement périodique, cascades).
+            String correlation = requestId.isEmpty() ? RequestLog.active() : requestId;
+            if (!correlation.isEmpty()) request.header(RequestLog.HEADER, correlation);
             if (!idempotencyKey.isEmpty()) request.header("Idempotency-Key", idempotencyKey);
             if (cloudRun) request.header("X-Serverless-Authorization", "Bearer " + tokenFor(base));
             var publisher = HttpRequest.BodyPublishers.noBody();
