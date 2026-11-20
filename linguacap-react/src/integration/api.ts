@@ -69,6 +69,38 @@ export async function requestApi<T = unknown>(
   return response.json();
 }
 
+/**
+ * Envoie un fichier directement dans Supabase Storage, au chemin réservé par Médias, avec la progression.
+ * La politique de stockage n'accepte que l'auteur du dépôt, avant son expiration.
+ */
+export function uploadToStorage(url: string, file: File, contentType: string, token: string,
+  onProgress: (percent: number) => void, signal: AbortSignal): Promise<void> {
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open('POST', url);
+    request.setRequestHeader('Authorization', `Bearer ${token}`);
+    if (supabaseKey) request.setRequestHeader('apikey', supabaseKey);
+    request.setRequestHeader('Content-Type', contentType);
+    request.setRequestHeader('x-upsert', 'false');
+    request.upload.onprogress = (event) => {
+      if (event.lengthComputable) onProgress(Math.round((event.loaded / event.total) * 100));
+    };
+    request.onload = () => {
+      // Un fichier déjà reçu lors d'un essai précédent est signalé en doublon : la finalisation le contrôlera.
+      if (request.status >= 200 && request.status < 300 || /Duplicate|already exists/i.test(request.responseText)) {
+        onProgress(100);
+        resolve();
+      } else {
+        reject(new Error('Le stockage a refusé le fichier. Réessayez ou recommencez le dépôt.'));
+      }
+    };
+    request.onerror = () => reject(new Error('L’envoi a été interrompu : vérifiez la connexion puis réessayez.'));
+    request.onabort = () => reject(new DOMException('Envoi annulé.', 'AbortError'));
+    signal.addEventListener('abort', () => request.abort(), { once: true });
+    request.send(file);
+  });
+}
+
 export async function checkHealth(): Promise<'ok' | 'degraded'> {
   const result = await requestApi('/health');
   if (typeof result === 'object' && result !== null && 'status' in result &&

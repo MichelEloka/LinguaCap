@@ -1,9 +1,11 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
-import { CalendarDays, ClipboardCheck, ClipboardList, Mail, MessageCircle, Plus, RefreshCw, Target, Users } from 'lucide-react';
-import { Badge, Dialog, EmptyState, PageHeading, StatCard } from '../../components/ui';
+import { CalendarDays, ClipboardCheck, ClipboardList, Mail, MessageCircle, RefreshCw, Target, Users } from 'lucide-react';
+import { Dialog, EmptyState, PageHeading, StatCard } from '../../components/ui';
 import { canEditCatalogue, requestApi, type Profile } from '../../integration/api';
 import { InvitationsPanel, InviteDialog, UsersPanel } from './AccountsPilot';
+import { CataloguePanel } from './CatalogueEditor';
+import { MediaLibraryPanel } from './MediaLibrary';
 import { LearnerSheetDialog } from './LearnerSheet';
 import '../teacher/teacher.css';
 import './accounts.css';
@@ -13,14 +15,6 @@ interface LearnerOverview {
   profile: Pick<Profile, 'id' | 'displayName'> & { teacherId: string | null };
   progress: { completedCount: number; goal: { level: string } | null };
   results: { correct: number; total: number }[];
-}
-
-interface CatalogueLevel {
-  id: string;
-  code: string;
-  title: string;
-  status: 'draft' | 'published';
-  version: number;
 }
 
 function getError(error: unknown) {
@@ -128,142 +122,6 @@ function LearnerTable({ learners, onMessage, onOpen }: {
   );
 }
 
-function CreateLevelDialog({ token, onClose, onCreate }: {
-  token: string;
-  onClose: () => void;
-  onCreate: (level: CatalogueLevel) => void;
-}) {
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy) return;
-    const form = new FormData(event.currentTarget);
-    setBusy(true);
-    setError('');
-    try {
-      const level = await requestApi<CatalogueLevel>('/levels', token, {
-        method: 'POST',
-        body: {
-          code: readFormText(form, 'code').toUpperCase(),
-          title: readFormText(form, 'title'),
-          description: readFormText(form, 'description'),
-        },
-      });
-      onCreate(level);
-    } catch (requestError) {
-      setError(getError(requestError));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <Dialog title="Créer un niveau" onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        <label>Code CECRL<input name="code" required pattern="[ABCabc][12]" placeholder="B2" maxLength={2} /></label>
-        <label>Titre<input name="title" required maxLength={120} placeholder="Allemand B2" /></label>
-        <label>Description<textarea name="description" rows={4} maxLength={2000} /></label>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>
-          <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Création en cours…' : 'Créer le brouillon'}</button>
-        </div>
-      </form>
-    </Dialog>
-  );
-}
-
-function CataloguePanel({ token }: { token: string }) {
-  const [levels, setLevels] = useState<CatalogueLevel[] | null>(null);
-  const [loadError, setLoadError] = useState('');
-  const [actionError, setActionError] = useState('');
-  const [notice, setNotice] = useState('');
-  const [refresh, setRefresh] = useState(0);
-  const [createOpen, setCreateOpen] = useState(false);
-  const [publishing, setPublishing] = useState<string | null>(null);
-
-  useEffect(() => {
-    let active = true;
-    setLoadError('');
-    requestApi<CatalogueLevel[]>('/levels', token).then(
-      (data) => { if (active) setLevels(data); },
-      (error: unknown) => { if (active) setLoadError(getError(error)); },
-    );
-    return () => { active = false; };
-  }, [token, refresh]);
-
-  async function publish(level: CatalogueLevel) {
-    setPublishing(level.id);
-    setActionError('');
-    setNotice('');
-    try {
-      const updated = await requestApi<CatalogueLevel>(`/levels/${encodeURIComponent(level.id)}/publish`, token, {
-        method: 'POST',
-      });
-      setLevels((current) => current?.map((item) => item.id === updated.id ? updated : item) ?? [updated]);
-      setNotice(`Le niveau ${updated.code} est publié.`);
-    } catch (requestError) {
-      setActionError(getError(requestError));
-    } finally {
-      setPublishing(null);
-    }
-  }
-
-  return (
-    <section className="panel" aria-labelledby="pilot-levels-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="pilot-levels-title">Catalogue</h2><p className="muted">Niveaux d’allemand et état de publication</p></div>
-        <button type="button" className="btn btn-outline" onClick={() => setCreateOpen(true)} disabled={!levels}>
-          <Plus size={17} aria-hidden="true" /> Nouveau niveau
-        </button>
-      </div>
-      {loadError ? (
-        <div className="stack">
-          <p className="inline-message warning" role="alert">{loadError}</p>
-          <button className="btn btn-outline" type="button" onClick={() => setRefresh((count) => count + 1)}>Réessayer</button>
-        </div>
-      ) : levels === null ? (
-        <p role="status">Chargement du catalogue…</p>
-      ) : levels.length === 0 ? (
-        <EmptyState title="Aucun niveau dans le catalogue" />
-      ) : (
-        <div className="teacher-table-wrap">
-          <table className="teacher-table">
-            <thead><tr><th scope="col">Code</th><th scope="col">Niveau</th><th scope="col">Statut</th><th scope="col">Action</th></tr></thead>
-            <tbody>
-              {levels.map((level) => (
-                <tr key={level.id}>
-                  <th scope="row">{level.code}</th>
-                  <td>{level.title}</td>
-                  <td><Badge tone={level.status === 'published' ? 'green' : 'amber'}>
-                    {level.status === 'published' ? 'Publié' : 'Brouillon'}
-                  </Badge></td>
-                  <td>{level.status === 'draft' && (
-                    <button type="button" className="btn btn-outline" disabled={publishing !== null}
-                      onClick={() => void publish(level)} aria-label={`Publier ${level.code}`}>
-                      {publishing === level.id ? 'Publication en cours…' : 'Publier'}
-                    </button>
-                  )}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      {actionError && <p className="inline-message warning" role="alert">{actionError}</p>}
-      {createOpen && <CreateLevelDialog token={token} onClose={() => setCreateOpen(false)} onCreate={(level) => {
-        setLevels((current) => [...(current ?? []), level].sort((a, b) => a.code.localeCompare(b.code)));
-        setCreateOpen(false);
-        setActionError('');
-        setNotice(`Le niveau ${level.code} a été créé en brouillon.`);
-      }} />}
-    </section>
-  );
-}
-
 function LearnersPanel({ admin, token, onNotice }: { admin: boolean; token: string; onNotice: (message: string) => void }) {
   const [learners, setLearners] = useState<LearnerOverview[] | null>(null);
   const [error, setError] = useState('');
@@ -326,7 +184,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
     ...(educator ? [{ path: 'eleves', label: admin ? 'Élèves' : 'Mes élèves' }] : []),
     ...(educator ? [{ path: 'invitations', label: 'Invitations' }] : []),
     ...(admin ? [{ path: 'utilisateurs', label: 'Utilisateurs' }] : []),
-    ...(canEditCatalogue(profile) ? [{ path: 'catalogue', label: 'Catalogue' }] : []),
+    ...(canEditCatalogue(profile) ? [{ path: 'catalogue', label: 'Catalogue' }, { path: 'mediatheque', label: 'Médiathèque' }] : []),
   ];
   const allowed = (path: string) => tabs.some((tab) => tab.path === path);
 
@@ -355,7 +213,8 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
         {allowed('eleves') && <Route path="eleves" element={<LearnersPanel admin={admin} token={token} onNotice={setNotice} />} />}
         {allowed('invitations') && <Route path="invitations" element={<InvitationsPanel token={token} refresh={invitationsRefresh} />} />}
         {allowed('utilisateurs') && <Route path="utilisateurs" element={<UsersPanel profile={profile} token={token} />} />}
-        {allowed('catalogue') && <Route path="catalogue" element={<CataloguePanel token={token} />} />}
+        {allowed('catalogue') && <Route path="catalogue/*" element={<CataloguePanel token={token} />} />}
+        {allowed('mediatheque') && <Route path="mediatheque" element={<MediaLibraryPanel token={token} />} />}
         <Route path="*" element={<Navigate to="/espace" replace />} />
       </Routes>
       {inviteOpen && <InviteDialog profile={profile} token={token} onClose={() => setInviteOpen(false)} onDone={(invitation) => {

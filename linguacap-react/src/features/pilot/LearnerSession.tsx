@@ -33,9 +33,21 @@ export interface Grade {
   sessionId?: string | null; activityId?: string | null;
 }
 
-interface Placement { position: number; assetId: string; assetVersion: number; usage: 'illustration' | 'audio'; alt: string | null; caption: string | null }
-interface Question { id: string; prompt: string; options: { id: string; text: string }[] }
-interface ActivityDetail {
+/** Support d'une activité, d'une question ou d'un choix de réponse, avec son adresse de lecture temporaire. */
+export interface Placement {
+  position: number;
+  assetId: string;
+  assetVersion: number;
+  usage: 'illustration' | 'audio';
+  alt: string | null;
+  caption: string | null;
+  decorative?: boolean;
+  questionId?: string | null;
+  optionId?: string | null;
+  url?: string | null;
+}
+export interface Question { id: string; prompt: string; options: { id: string; text: string }[] }
+export interface ActivityDetail {
   id: string;
   kind: 'lesson' | 'exercise' | 'review' | 'assessment';
   title: string;
@@ -49,7 +61,6 @@ interface ActivityDetail {
   placements: Placement[];
 }
 interface SessionDetail { session: SessionSummary; levelCode: string; activities: ActivityDetail[] }
-interface MediaFile { url: string; mimeType: string }
 
 const dueFormat = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
 export const sessionStatus: Record<SessionStatus, { label: string; tone: 'blue' | 'green' | 'amber' | 'neutral' }> = {
@@ -68,79 +79,77 @@ function errorText(error: unknown) {
     ? error.message : 'Le service est momentanément indisponible. Réessayez.';
 }
 
-/** Support de cours : image avec son alternative textuelle ou audio avec ses commandes, et réessai si indisponible. */
-function MediaPlacement({ placement, token }: { placement: Placement; token: string }) {
-  const [file, setFile] = useState<MediaFile | null>(null);
-  const [error, setError] = useState('');
-  const [attempt, setAttempt] = useState(0);
+/**
+ * Support de cours : image avec son alternative textuelle (vide si décorative) ou audio avec ses commandes.
+ * L'adresse est temporaire : si elle a expiré ou manque, onRenew redemande la séance, qui renouvelle les adresses.
+ */
+export function MediaPlacement({ placement, onRenew, compact = false }: { placement: Placement; onRenew: () => void; compact?: boolean }) {
+  const [failed, setFailed] = useState(false);
+  useEffect(() => { setFailed(false); }, [placement.url]);
 
-  useEffect(() => {
-    let active = true;
-    setError('');
-    requestApi<MediaFile>(`/media/${encodeURIComponent(placement.assetId)}/versions/${placement.assetVersion}`, token).then(
-      (data) => { if (active) setFile(data); },
-      (failure: unknown) => { if (active) setError(errorText(failure)); },
-    );
-    return () => { active = false; };
-  }, [placement.assetId, placement.assetVersion, token, attempt]);
-
-  const retry = () => { setFile(null); setAttempt((value) => value + 1); };
-  if (error) {
+  if (!placement.url || failed) {
     return (
       <div className="stack">
         <p className="inline-message warning" role="alert">Cette ressource est indisponible pour le moment.</p>
-        <button className="btn btn-outline" type="button" onClick={retry}>Réessayer</button>
+        <button className="btn btn-outline" type="button" onClick={onRenew}>Réessayer</button>
       </div>
     );
   }
-  if (!file) return <p role="status">Chargement du support…</p>;
   if (placement.usage === 'illustration') {
     return (
-      <figure className="pilot-figure">
-        <img className="pilot-lesson-image" src={file.url} alt={placement.alt ?? ''}
-          onError={() => setError('Le lien de l’image a expiré.')} />
+      <figure className={compact ? 'pilot-figure pilot-figure-compact' : 'pilot-figure'}>
+        <img className={compact ? 'pilot-option-image' : 'pilot-lesson-image'} src={placement.url}
+          alt={placement.decorative ? '' : placement.alt ?? ''} onError={() => setFailed(true)} />
         {placement.caption && <figcaption lang="de">{placement.caption}</figcaption>}
       </figure>
     );
   }
   return (
     <div className="stack">
-      <strong><Volume2 size={17} aria-hidden="true" /> {placement.caption ?? 'Écouter l’enregistrement'}</strong>
-      <audio controls preload="metadata" src={file.url} aria-label={placement.caption ?? 'Enregistrement audio'}
-        onError={() => setError('Le lien audio a expiré.')} />
+      {!compact && <strong><Volume2 size={17} aria-hidden="true" /> {placement.caption ?? 'Écouter l’enregistrement'}</strong>}
+      <audio controls preload="metadata" src={placement.url} aria-label={placement.caption ?? 'Enregistrement audio'}
+        onError={() => setFailed(true)} />
     </div>
   );
 }
+
+const activityPlacements = (activity: ActivityDetail) => activity.placements.filter((placement) => !placement.questionId);
+const questionPlacements = (activity: ActivityDetail, questionId: string) =>
+  activity.placements.filter((placement) => placement.questionId === questionId && !placement.optionId);
+const optionPlacements = (activity: ActivityDetail, questionId: string, optionId: string) =>
+  activity.placements.filter((placement) => placement.questionId === questionId && placement.optionId === optionId);
 
 function Transcript({ text }: { text: string | null }) {
   if (!text) return null;
   return <details><summary>Lire la transcription</summary><p className="pilot-transcript" lang="de">{text}</p></details>;
 }
 
-function LessonActivity({ activity, token, onComplete, busy }: {
-  activity: ActivityDetail; token: string; onComplete: () => void; busy: boolean;
+export function LessonActivity({ activity, onRenew, onComplete, busy, preview = false }: {
+  activity: ActivityDetail; onRenew: () => void; onComplete: () => void; busy: boolean; preview?: boolean;
 }) {
   return (
     <div className="stack">
-      {activity.lesson && <p>{activity.lesson.description}</p>}
-      {activity.placements.map((placement) => <MediaPlacement key={placement.position} placement={placement} token={token} />)}
+      {activity.lesson && <p className="pilot-lesson-text">{activity.lesson.description}</p>}
+      {activityPlacements(activity).map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} />)}
       <Transcript text={activity.transcript} />
       {activity.status === 'completed'
         ? <p className="inline-message" role="status"><CheckCircle2 size={16} aria-hidden="true" /> {activity.kind === 'review' ? 'Révision terminée' : 'Leçon terminée'}</p>
-        : <button className="btn btn-primary" type="button" onClick={onComplete} disabled={busy}>
+        : <button className="btn btn-primary" type="button" onClick={onComplete} disabled={busy || preview}>
             {activity.kind === 'review' ? 'J’ai terminé la révision' : 'J’ai terminé la leçon'}
           </button>}
     </div>
   );
 }
 
-function ExerciseActivity({ activity, sessionId, token, grade, onSaveState, onGraded }: {
+export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, onSaveState, onGraded, preview = false }: {
   activity: ActivityDetail;
   sessionId: string;
   token: string;
   grade: Grade | null;
+  onRenew: () => void;
   onSaveState: (answers: Record<string, string>) => void;
   onGraded: (grade: Grade, answers: Record<string, string>) => Promise<void>;
+  preview?: boolean;
 }) {
   const [answers, setAnswers] = useState<Record<string, string>>(activity.state.answers ?? {});
   const [error, setError] = useState('');
@@ -157,7 +166,7 @@ function ExerciseActivity({ activity, sessionId, token, grade, onSaveState, onGr
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (busy || !activity.lesson) return;
+    if (busy || !activity.lesson || preview) return;
     setBusy(true);
     setError('');
     key.current ??= crypto.randomUUID();
@@ -178,23 +187,31 @@ function ExerciseActivity({ activity, sessionId, token, grade, onSaveState, onGr
 
   return (
     <form className="stack" onSubmit={submit}>
-      {activity.placements.map((placement) => <MediaPlacement key={placement.position} placement={placement} token={token} />)}
+      {activityPlacements(activity).map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} />)}
       <Transcript text={activity.transcript} />
       {activity.questions.map((question) => (
         <fieldset className="pilot-options" key={question.id} disabled={completed}>
           <legend>{question.prompt}</legend>
-          {question.options.map((option) => (
-            <label key={option.id}>
-              <input type="radio" required name={question.id} value={option.id} checked={answers[question.id] === option.id}
-                onChange={() => choose(question.id, option.id)} /> {option.text}
-            </label>
+          {questionPlacements(activity, question.id).map((placement) => (
+            <div className="pilot-question-media" key={placement.position}><MediaPlacement placement={placement} onRenew={onRenew} /></div>
           ))}
+          {question.options.map((option) => {
+            const media = optionPlacements(activity, question.id, option.id);
+            return (
+              <label key={option.id} className={media.length ? 'pilot-option-with-media' : undefined}>
+                <input type="radio" required name={question.id} value={option.id} checked={answers[question.id] === option.id}
+                  onChange={() => choose(question.id, option.id)} /> {option.text}
+                {media.map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} compact />)}
+              </label>
+            );
+          })}
         </fieldset>
       ))}
       {error && <p className="inline-message warning" role="alert">{error}</p>}
       {grade && <p className="inline-message" role="status">Résultat enregistré · {grade.correct} / {grade.total}</p>}
+      {preview && <p className="muted">Aperçu : la remise et la correction sont désactivées.</p>}
       {!completed && (
-        <button className="btn btn-primary" type="submit" disabled={busy || !activity.questions.length}>
+        <button className="btn btn-primary" type="submit" disabled={busy || preview || !activity.questions.length}>
           {busy ? 'Correction…' : 'Valider mes réponses'}
         </button>
       )}
@@ -246,6 +263,9 @@ export function SessionPage({ token }: { token: string }) {
     const first = detail?.activities.find((activity) => activity.status === 'todo');
     if (first && detail?.activities[0]?.id === first.id) void save(first.id, { state: {} }).catch(() => undefined);
   }, [detail, save]);
+
+  // Les adresses des supports durent cinq minutes : redemander la séance les renouvelle.
+  const renew = useCallback(() => setReload((value) => value + 1), []);
 
   async function completeLesson(activity: ActivityDetail) {
     setBusy(true);
@@ -311,10 +331,10 @@ export function SessionPage({ token }: { token: string }) {
               <Badge tone="blue">{detail.levelCode}</Badge>
             </div>
             {activity.kind === 'lesson' || activity.kind === 'review'
-              ? <LessonActivity activity={activity} token={token} busy={busy} onComplete={() => void completeLesson(activity)} />
+              ? <LessonActivity activity={activity} onRenew={renew} busy={busy} onComplete={() => void completeLesson(activity)} />
               : activity.kind === 'assessment' && activity.questions.length === 0
                 ? <p className="muted">{activity.lesson?.description}</p>
-              : <ExerciseActivity activity={activity} sessionId={detail.session.id} token={token} grade={grade}
+              : <ExerciseActivity activity={activity} sessionId={detail.session.id} token={token} grade={grade} onRenew={renew}
                   onSaveState={(answers) => saveAnswers(activity, answers)} onGraded={(result, answers) => graded(activity, result, answers)} />}
           </section>
         );
