@@ -1,14 +1,20 @@
 import { lazy, Suspense, useEffect, useState } from 'react';
 import type { FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import { Activity, BookOpen, KeyRound, LockKeyhole, ShieldCheck, Users } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { Badge, PageHeading } from '../../components/ui';
-import { apiBase, isApiMode } from '../../app/config';
-import { checkHealth, fetchProfile, supabase } from '../../integration/api';
+import { apiBase, authLinkParams, isApiMode } from '../../app/config';
+import { checkHealth, fetchProfile, roleNames, sessionExpiredEvent, supabase } from '../../integration/api';
 import type { Profile } from '../../integration/api';
 
-const roleNames = { learner: 'Élève', teacher: 'Professeur', admin: 'Administration' };
+/** Erreur renvoyée par Supabase dans un lien d'invitation ou de récupération (lien expiré, déjà utilisé…). */
+function linkError(): string {
+  const code = authLinkParams.get('error_code') ?? authLinkParams.get('error');
+  if (!code) return '';
+  return code === 'otp_expired' ? 'Ce lien a expiré ou a déjà été utilisé.' : 'Ce lien n’est pas valide.';
+}
+
 const LearnerPilot = lazy(() => import('../pilot/LearnerPilot').then((module) => ({ default: module.LearnerPilot })));
 const StaffPilot = lazy(() => import('../pilot/StaffPilot').then((module) => ({ default: module.StaffPilot })));
 
@@ -33,10 +39,12 @@ function useSession() {
 
 export function SignInPage() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { session } = useSession();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [recovering, setRecovering] = useState(false);
+  const [recovering, setRecovering] = useState(searchParams.get('recuperation') === '1');
+  const expired = searchParams.get('session') === 'expiree';
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -79,6 +87,7 @@ export function SignInPage() {
           <RecoveryRequest email={email} setEmail={setEmail} back={() => setRecovering(false)} />
         ) : (
           <form className="stack" onSubmit={submit}>
+            {expired && <p className="inline-message warning" role="status">Votre session a expiré. Reconnectez-vous pour continuer.</p>}
             <p className="muted">Connectez-vous avec l’adresse associée à votre invitation.</p>
             <label className="field">Adresse e-mail<input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
             <label className="field">Mot de passe<input required type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
@@ -127,6 +136,7 @@ function RecoveryRequest({ email, setEmail, back }: { email: string; setEmail: (
 export function SetPasswordPage({ invitation = false }: { invitation?: boolean }) {
   const { session, loading } = useSession();
   const navigate = useNavigate();
+  const [invalidLink] = useState(linkError);
   const [password, setPassword] = useState('');
   const [confirmation, setConfirmation] = useState('');
   const [busy, setBusy] = useState(false);
@@ -157,14 +167,26 @@ export function SetPasswordPage({ invitation = false }: { invitation?: boolean }
       <section className="access-card panel">
         <span className="icon-tile"><KeyRound size={23} /></span>
         <h1>{invitation ? 'Activer mon compte' : 'Choisir un nouveau mot de passe'}</h1>
-        {loading ? <p role="status">Vérification du lien…</p> : session ? (
+        {invalidLink && !session ? (
+          <div className="stack">
+            <p className="inline-message warning" role="alert">{invalidLink}</p>
+            {invitation
+              ? <p className="muted">Demandez à la personne qui vous a invité de renvoyer l’invitation. Si vous aviez déjà choisi un mot de passe, connectez-vous directement.</p>
+              : <Link className="btn btn-primary" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
+          </div>
+        ) : loading ? <p role="status">Vérification du lien…</p> : session ? (
           <form className="stack" onSubmit={submit}>
             <label className="field">Nouveau mot de passe<input type="password" required minLength={8} autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
             <label className="field">Confirmer le mot de passe<input type="password" required minLength={8} autoComplete="new-password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} /></label>
             {error && <p className="inline-message warning" role="alert">{error}</p>}
             <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
           </form>
-        ) : <p className="muted">Ouvrez un lien d’invitation ou de récupération valide pour continuer.</p>}
+        ) : (
+          <div className="stack">
+            <p className="muted">Ouvrez un lien d’invitation ou de récupération valide pour continuer.</p>
+            {!invitation && <Link className="btn btn-outline" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
+          </div>
+        )}
         <Link className="text-link" to="/connexion">Revenir à la connexion</Link>
       </section>
     </div>
@@ -212,6 +234,8 @@ export function IntegrationPage() {
 
 export function ConnectedPage() {
   const { session, loading } = useSession();
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
   const [profile, setProfile] = useState<Profile | null>(null);
   const [failure, setFailure] = useState('');
   const [retry, setRetry] = useState(0);
@@ -228,6 +252,15 @@ export function ConnectedPage() {
       .catch((error: unknown) => { if (active) setFailure(errorMessage(error)); });
     return () => { active = false; };
   }, [token, retry]);
+
+  // Une session refusée par l'API (expirée ou révoquée) ferme l'espace et renvoie vers la connexion.
+  useEffect(() => {
+    function expire() {
+      void supabase?.auth.signOut({ scope: 'local' }).finally(() => navigate('/connexion?session=expiree', { replace: true }));
+    }
+    window.addEventListener(sessionExpiredEvent, expire);
+    return () => window.removeEventListener(sessionExpiredEvent, expire);
+  }, [navigate]);
 
   async function signOut() {
     if (!supabase || signOutBusy) return;
@@ -251,7 +284,9 @@ export function ConnectedPage() {
       {signOutError && <p className="inline-message warning" role="alert">{signOutError}</p>}
       {profile && token ? (
         <Suspense fallback={<p role="status">Chargement de votre espace…</p>}>
-          {profile.role === 'learner' ? <LearnerPilot key={profile.id} token={token} /> : <StaffPilot key={profile.id} profile={profile} token={token} />}
+          {profile.role !== 'learner' ? <StaffPilot key={profile.id} profile={profile} token={token} />
+            : pathname.replace(/\/+$/, '') !== '/espace' ? <Navigate to="/espace" replace />
+              : <LearnerPilot key={profile.id} token={token} />}
         </Suspense>
       ) : <section className="panel connected-panel stack">
         {loading ? <p role="status">Vérification de la session…</p> : !session ? (

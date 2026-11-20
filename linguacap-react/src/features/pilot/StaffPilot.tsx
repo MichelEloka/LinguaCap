@@ -1,12 +1,15 @@
 import { useEffect, useState, type FormEvent } from 'react';
-import { BookOpen, CalendarDays, ClipboardCheck, Mail, MessageCircle, Plus, RefreshCw, Target, Users } from 'lucide-react';
+import { NavLink, Navigate, Route, Routes } from 'react-router-dom';
+import { CalendarDays, ClipboardCheck, Mail, MessageCircle, Plus, RefreshCw, Target, Users } from 'lucide-react';
 import { Badge, Dialog, EmptyState, PageHeading, StatCard } from '../../components/ui';
-import { requestApi, type Profile } from '../../integration/api';
+import { canEditCatalogue, requestApi, type Profile } from '../../integration/api';
+import { InvitationsPanel, InviteDialog, UsersPanel } from './AccountsPilot';
 import '../teacher/teacher.css';
+import './accounts.css';
 
 interface LearnerOverview {
   learnerId: string;
-  profile: Profile & { teacherId: string | null };
+  profile: Pick<Profile, 'id' | 'displayName'> & { teacherId: string | null };
   progress: { completedCount: number; goal: { level: string } | null };
   results: { correct: number; total: number }[];
 }
@@ -19,82 +22,12 @@ interface CatalogueLevel {
   version: number;
 }
 
-interface InvitationReceipt {
-  email: string;
-  status: 'sent' | 'accepted';
-}
-
 function getError(error: unknown) {
   return error instanceof Error ? error.message : 'Cette action est temporairement indisponible.';
 }
 
 function readFormText(data: FormData, key: string) {
   return String(data.get(key) ?? '').trim();
-}
-
-function InviteDialog({ admin, token, onClose, onDone }: {
-  admin: boolean;
-  token: string;
-  onClose: () => void;
-  onDone: (message: string) => void;
-}) {
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy) return;
-    const form = new FormData(event.currentTarget);
-    const displayName = readFormText(form, 'displayName');
-    if (!displayName) {
-      setError('Renseignez le nom de la personne à inviter.');
-      return;
-    }
-    setBusy(true);
-    setError('');
-    try {
-      const receipt = await requestApi<InvitationReceipt>('/invitations', token, {
-        method: 'POST',
-        body: {
-          email: readFormText(form, 'email').toLowerCase(),
-          displayName,
-          role: admin ? readFormText(form, 'role') : 'learner',
-          teacherId: null,
-        },
-      });
-      onDone(receipt.status === 'accepted'
-        ? `Le compte ${receipt.email} a été activé.`
-        : `Invitation envoyée à ${receipt.email}.`);
-    } catch (requestError) {
-      setError(getError(requestError));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <Dialog title={admin ? 'Inviter un utilisateur' : 'Inviter un élève'} onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        <label>Nom complet<input name="displayName" autoComplete="name" required maxLength={140} /></label>
-        <label>Adresse e-mail<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
-        {admin && (
-          <label>Rôle
-            <select name="role" defaultValue="learner">
-              <option value="learner">Élève autonome</option>
-              <option value="teacher">Professeur</option>
-            </select>
-          </label>
-        )}
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button className="btn btn-outline" type="button" onClick={onClose}>Fermer</button>
-          <button className="btn btn-primary" type="submit" disabled={busy}>
-            {busy ? 'Envoi en cours…' : 'Envoyer l’invitation'}
-          </button>
-        </div>
-      </form>
-    </Dialog>
-  );
 }
 
 function MessageDialog({ learner, token, onClose, onDone }: {
@@ -323,13 +256,10 @@ function CataloguePanel({ token }: { token: string }) {
   );
 }
 
-export function StaffPilot({ profile, token }: { profile: Profile; token: string }) {
-  const admin = profile.role === 'admin';
+function LearnersPanel({ admin, token, onNotice }: { admin: boolean; token: string; onNotice: (message: string) => void }) {
   const [learners, setLearners] = useState<LearnerOverview[] | null>(null);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
   const [refresh, setRefresh] = useState(0);
-  const [inviteOpen, setInviteOpen] = useState(false);
   const [messageTo, setMessageTo] = useState<LearnerOverview | null>(null);
 
   useEffect(() => {
@@ -343,17 +273,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
   }, [token, refresh]);
 
   return (
-    <div className="teacher-space">
-      <PageHeading
-        title={admin ? 'Administration' : 'Espace professeur'}
-        description={profile.displayName}
-        action={(
-          <button type="button" className="btn btn-primary" onClick={() => setInviteOpen(true)}>
-            <Mail size={17} aria-hidden="true" /> {admin ? 'Inviter un utilisateur' : 'Inviter un élève'}
-          </button>
-        )}
-      />
-      {notice && <p className="inline-message" role="status">{notice}</p>}
+    <>
       {learners && !error && (
         <div className="teacher-stats">
           <StatCard label={admin ? 'Élèves inscrits' : 'Mes élèves'} value={learners.length} icon={<Users size={19} />} />
@@ -375,14 +295,62 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
           : learners.length > 0 ? <LearnerTable learners={learners} onMessage={admin ? undefined : setMessageTo} />
           : <EmptyState title="Aucun élève actif" description="Les élèves apparaîtront ici après avoir activé leur compte." />}
       </section>
-      {admin && <CataloguePanel token={token} />}
-      {inviteOpen && <InviteDialog admin={admin} token={token} onClose={() => setInviteOpen(false)} onDone={(message) => {
-        setInviteOpen(false);
-        setNotice(message);
-      }} />}
       {messageTo && <MessageDialog learner={messageTo} token={token} onClose={() => setMessageTo(null)} onDone={(message) => {
         setMessageTo(null);
-        setNotice(message);
+        onNotice(message);
+      }} />}
+    </>
+  );
+}
+
+export function StaffPilot({ profile, token }: { profile: Profile; token: string }) {
+  const admin = profile.role === 'admin';
+  const educator = admin || profile.role === 'teacher';
+  const [notice, setNotice] = useState('');
+  const [inviteOpen, setInviteOpen] = useState(false);
+  const [invitationsRefresh, setInvitationsRefresh] = useState(0);
+
+  // Les onglets suivent le rôle et les permissions : l'équipe sans permission ne voit aucun élève.
+  const tabs = [
+    ...(educator ? [{ path: 'eleves', label: admin ? 'Élèves' : 'Mes élèves' }] : []),
+    ...(educator ? [{ path: 'invitations', label: 'Invitations' }] : []),
+    ...(admin ? [{ path: 'utilisateurs', label: 'Utilisateurs' }] : []),
+    ...(canEditCatalogue(profile) ? [{ path: 'catalogue', label: 'Catalogue' }] : []),
+  ];
+  const allowed = (path: string) => tabs.some((tab) => tab.path === path);
+
+  return (
+    <div className="teacher-space">
+      <PageHeading
+        title={admin ? 'Administration' : educator ? 'Espace professeur' : 'Espace équipe'}
+        description={profile.displayName}
+        action={educator && (
+          <button type="button" className="btn btn-primary" onClick={() => setInviteOpen(true)}>
+            <Mail size={17} aria-hidden="true" /> {admin ? 'Inviter un utilisateur' : 'Inviter un élève'}
+          </button>
+        )}
+      />
+      {notice && <p className="inline-message" role="status">{notice}</p>}
+      {tabs.length > 0 && (
+        <nav className="pilot-tabs" aria-label="Sections de l’espace">
+          {tabs.map((tab) => <NavLink key={tab.path} to={`/espace/${tab.path}`}>{tab.label}</NavLink>)}
+        </nav>
+      )}
+      <Routes>
+        <Route index element={tabs.length > 0 ? <Navigate to={tabs[0].path} replace /> : (
+          <EmptyState title="Aucune permission active"
+            description="L’administration peut vous attribuer la permission Catalogue ou Correction." />
+        )} />
+        {allowed('eleves') && <Route path="eleves" element={<LearnersPanel admin={admin} token={token} onNotice={setNotice} />} />}
+        {allowed('invitations') && <Route path="invitations" element={<InvitationsPanel token={token} refresh={invitationsRefresh} />} />}
+        {allowed('utilisateurs') && <Route path="utilisateurs" element={<UsersPanel profile={profile} token={token} />} />}
+        {allowed('catalogue') && <Route path="catalogue" element={<CataloguePanel token={token} />} />}
+        <Route path="*" element={<Navigate to="/espace" replace />} />
+      </Routes>
+      {inviteOpen && <InviteDialog profile={profile} token={token} onClose={() => setInviteOpen(false)} onDone={(invitation) => {
+        setInviteOpen(false);
+        setInvitationsRefresh((count) => count + 1);
+        setNotice(`Invitation envoyée à ${invitation.email}. Le lien reste valable sept jours.`);
       }} />}
     </div>
   );

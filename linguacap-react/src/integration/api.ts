@@ -1,6 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
 import { apiBase, isApiMode, supabaseKey, supabaseUrl } from '../app/config';
-import type { Role } from '../domain/types';
 
 function createAuthClient() {
   if (!isApiMode || !supabaseUrl || !supabaseKey) return null;
@@ -13,13 +12,30 @@ function createAuthClient() {
 
 export const supabase = createAuthClient();
 
+/** Rôles des comptes réels. staff : membre de l'équipe (« Équipe »), sans élèves. */
+export type AccountRole = 'learner' | 'teacher' | 'admin' | 'staff';
+export type Permission = 'catalogue' | 'correction';
+
 export interface Profile {
   id: string;
   displayName: string;
-  role: Role;
+  role: AccountRole;
+  permissions: Permission[];
 }
 
-const roles = new Set(['learner', 'teacher', 'admin']);
+export const roleNames: Record<AccountRole, string> = {
+  learner: 'Élève', teacher: 'Professeur', admin: 'Administration', staff: 'Équipe',
+};
+
+const roles = new Set<string>(['learner', 'teacher', 'admin', 'staff']);
+const permissions = new Set<string>(['catalogue', 'correction']);
+
+/** Émis quand l'API refuse une session expirée : l'espace connecté renvoie alors vers la connexion. */
+export const sessionExpiredEvent = 'linguacap:session-expired';
+
+export function canEditCatalogue(profile: Profile) {
+  return profile.role === 'admin' || profile.permissions.includes('catalogue');
+}
 
 export async function requestApi<T = unknown>(
   path: string,
@@ -40,6 +56,7 @@ export async function requestApi<T = unknown>(
     signal: AbortSignal.timeout(8000),
   });
   const isJson = response.headers.get('content-type')?.includes('application/json');
+  if (response.status === 401 && token) window.dispatchEvent(new Event(sessionExpiredEvent));
   if (!response.ok) {
     const details: unknown = isJson ? await response.json().catch(() => null) : null;
     const message = typeof details === 'object' && details !== null &&
@@ -66,7 +83,12 @@ export async function fetchProfile(token: string): Promise<Profile> {
   if (typeof result === 'object' && result !== null && 'id' in result &&
       typeof result.id === 'string' && 'displayName' in result && typeof result.displayName === 'string' &&
       'role' in result && typeof result.role === 'string' && roles.has(result.role)) {
-    return result as Profile;
+    // Une passerelle antérieure à l'incrément 2 ne renvoie pas encore les permissions.
+    const granted = 'permissions' in result && Array.isArray(result.permissions) ? result.permissions : [];
+    return {
+      id: result.id, displayName: result.displayName, role: result.role as AccountRole,
+      permissions: granted.filter((item): item is Permission => typeof item === 'string' && permissions.has(item)),
+    };
   }
   throw new Error('Le profil renvoyé par Identités ne correspond pas au contrat attendu.');
 }

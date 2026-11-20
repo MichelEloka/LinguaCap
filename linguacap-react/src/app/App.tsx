@@ -66,7 +66,7 @@ function AppLayout() {
           <Route path="/activer-compte" element={<SetPasswordPage invitation />} />
           <Route path="/reinitialiser" element={<SetPasswordPage />} />
           <Route path="/integration" element={<IntegrationPage />} />
-          <Route path="/espace" element={<ConnectedPage />} />
+          <Route path="/espace/*" element={<ConnectedPage />} />
           <Route path="/eleve/*" element={<Workspace role="learner"><LearnerSpace /></Workspace>} />
           <Route path="/professeur/*" element={<Workspace role="teacher"><TeacherSpace /></Workspace>} />
           <Route path="/administration/*" element={<Workspace role="admin"><AdminSpace /></Workspace>} />
