@@ -19,6 +19,7 @@ import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
 
+/** Envoi des liens d'activation par Supabase Auth, qui les achemine par le SMTP configuré (Resend). */
 @ApplicationScoped
 class SupabaseInvites {
     private static final Logger LOG = Logger.getLogger(SupabaseInvites.class);
@@ -37,43 +38,72 @@ class SupabaseInvites {
         }
     }
 
-    UUID send(String email, String displayName) {
+    /**
+     * Envoie le lien d'activation et renvoie l'identifiant Auth du compte.
+     * Si la personne a déjà validé son adresse (lien ouvert, invitation ensuite annulée ou expirée),
+     * Supabase refuse une nouvelle invitation : un lien de choix du mot de passe la remplace.
+     */
+    UUID send(String email, String displayName, UUID knownUserId) {
+        HttpResponse<String> response = post("/auth/v1/invite",
+                Map.of("email", email, "data", Map.of("display_name", displayName)));
+        if (response.statusCode() / 100 == 2) {
+            try {
+                return UUID.fromString(json.readTree(response.body()).path("id").asText());
+            } catch (IOException | IllegalArgumentException error) {
+                throw HttpError.unavailable("L’envoi de l’invitation n’a pas abouti. Réessaie plus tard.");
+            }
+        }
+        String code = errorCode(response);
+        if ("email_exists".equals(code) || "user_already_exists".equals(code)) {
+            if (knownUserId == null) {
+                throw HttpError.conflict("Cette adresse a déjà un compte d’authentification : la personne peut se "
+                        + "connecter, ou choisir un mot de passe avec « Mot de passe oublié ».");
+            }
+            HttpResponse<String> recovery = post("/auth/v1/recover", Map.of("email", email));
+            if (recovery.statusCode() / 100 == 2) return knownUserId;
+            throw failure(recovery, errorCode(recovery));
+        }
+        throw failure(response, code);
+    }
+
+    private HttpResponse<String> post(String path, Map<String, ?> body) {
         String base = supabaseUrl.orElseThrow().replaceAll("/+$", "");
         String redirect = URLEncoder.encode(siteUrl.orElseThrow(), StandardCharsets.UTF_8);
         String key = adminKey.orElseThrow();
         try {
-            URI endpoint = URI.create(base + "/auth/v1/invite?redirect_to=" + redirect);
-            String payload = json.writeValueAsString(Map.of("email", email, "data", Map.of("display_name", displayName)));
-            HttpRequest.Builder request = HttpRequest.newBuilder(endpoint)
+            HttpRequest.Builder request = HttpRequest.newBuilder(URI.create(base + path + "?redirect_to=" + redirect))
                     .timeout(Duration.ofSeconds(10))
                     .header("apikey", key)
                     .header("Content-Type", "application/json")
                     .header("Accept", "application/json")
-                    .POST(HttpRequest.BodyPublishers.ofString(payload));
+                    .POST(HttpRequest.BodyPublishers.ofString(json.writeValueAsString(body)));
             if (!key.startsWith("sb_secret_")) {
                 request.header("Authorization", "Bearer " + key);
             }
-
-            HttpResponse<String> response = client.send(request.build(), HttpResponse.BodyHandlers.ofString());
-            if (response.statusCode() / 100 == 2) {
-                return UUID.fromString(json.readTree(response.body()).path("id").asText());
-            }
-
-            LOG.warnf("Supabase invite request returned HTTP %d", response.statusCode());
-            if (response.statusCode() == 400 || response.statusCode() == 409 || response.statusCode() == 422) {
-                JsonNode error = json.readTree(response.body());
-                String code = error.path("error_code").asText();
-                if ("email_exists".equals(code) || "user_already_exists".equals(code)) {
-                    throw HttpError.conflict("Cette adresse correspond déjà à un compte Supabase.");
-                }
-            }
-            throw HttpError.unavailable("L’envoi de l’invitation n’a pas abouti. Réessaie plus tard.");
+            return client.send(request.build(), HttpResponse.BodyHandlers.ofString());
         } catch (InterruptedException error) {
             Thread.currentThread().interrupt();
             throw HttpError.unavailable("L’envoi de l’invitation a été interrompu.");
         } catch (IOException | IllegalArgumentException error) {
-            LOG.warnf("Supabase invite operation failed (%s)", error.getClass().getSimpleName());
+            LOG.warnf("Supabase Auth request %s failed (%s)", path, error.getClass().getSimpleName());
             throw HttpError.unavailable("L’envoi de l’invitation n’a pas abouti. Réessaie plus tard.");
         }
+    }
+
+    private String errorCode(HttpResponse<String> response) {
+        try {
+            JsonNode error = json.readTree(response.body());
+            return error.path("error_code").asText(error.path("code").asText(""));
+        } catch (IOException error) {
+            return "";
+        }
+    }
+
+    private RuntimeException failure(HttpResponse<String> response, String code) {
+        LOG.warnf("Supabase Auth email request returned HTTP %d (%s)", response.statusCode(), code);
+        if (response.statusCode() == 429 || code.startsWith("over_email_send_rate_limit")) {
+            return HttpError.conflict("Un e-mail vient déjà d’être envoyé à cette adresse. Réessayez dans une minute.");
+        }
+        return HttpError.unavailable("L’envoi de l’invitation n’a pas abouti. Réessaie plus tard.");
     }
 }

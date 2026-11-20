@@ -4,9 +4,10 @@
 -- Les comptes de connexion de la recette sont créés à la volée par infra/pilot/smoke.mjs.
 -- Ce fichier n'est jamais appliqué en production : le workflow de livraison utilise `supabase db push` sans --include-seed.
 
+-- Aucun administrateur fictif : le premier administrateur est créé par infra/pilot/bootstrap-admin.mjs.
 insert into identity.profiles (id, display_name, role, teacher_id) values
-    ('00000000-0000-4000-8000-000000000001', 'Démo · Administratrice', 'admin', null),
     ('00000000-0000-4000-8000-000000000010', 'Démo · Marie Laurent', 'teacher', null),
+    ('00000000-0000-4000-8000-000000000011', 'Démo · Jonas Weber (équipe)', 'staff', null),
     ('00000000-0000-4000-8000-000000000101', 'Démo · Alice Martin', 'learner', '00000000-0000-4000-8000-000000000010'),
     ('00000000-0000-4000-8000-000000000102', 'Démo · Thomas Dubois', 'learner', '00000000-0000-4000-8000-000000000010'),
     ('00000000-0000-4000-8000-000000000103', 'Démo · Lucas Bernard', 'learner', null)
@@ -36,3 +37,14 @@ insert into tracking.encouragements (id, learner_id, author_id, text, sent_at) v
     ('00000000-0000-4000-8000-000000002001', '00000000-0000-4000-8000-000000000102', '00000000-0000-4000-8000-000000000010',
      'Courage Thomas, une séance de 30 minutes aujourd’hui et tu rattrapes ton planning !', '2026-11-12T17:00:00Z')
 on conflict (id) do nothing;
+
+-- Jonas (équipe) édite le catalogue et corrige les productions de Lucas, élève autonome.
+insert into identity.permissions (profile_id, permission) values
+    ('00000000-0000-4000-8000-000000000011', 'catalogue'),
+    ('00000000-0000-4000-8000-000000000011', 'correction')
+on conflict do nothing;
+
+insert into identity.reviewer_assignments (id, learner_id, reviewer_id, started_at) values
+    ('00000000-0000-4000-8000-000000003001', '00000000-0000-4000-8000-000000000103',
+     '00000000-0000-4000-8000-000000000011', '2026-11-09T08:00:00Z')
+on conflict do nothing;

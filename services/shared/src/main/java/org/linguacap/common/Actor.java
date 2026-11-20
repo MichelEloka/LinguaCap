@@ -44,4 +44,10 @@ public class Actor {
         return authorization != null && authorization.startsWith("Bearer ")
                 ? authorization.substring(7) : "";
     }
+
+    /** Identifiant de la requête d'origine transmis par la passerelle, pour relier traces et événements. */
+    public String requestId() {
+        String value = headers.getHeaderString("X-Request-Id");
+        return value != null && value.matches("[A-Za-z0-9-]{1,64}") ? value : "";
+    }
 }

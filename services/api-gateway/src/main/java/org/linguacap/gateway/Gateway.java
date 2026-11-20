@@ -90,6 +90,9 @@ public class Gateway {
     private String destination(String path, String method) {
         if (method.equals("GET")) {
             if (path.equals("me") || path.equals("learners") || path.matches("learners/" + UUID_PATH)) return identity;
+            if (path.equals("invitations") || path.equals("admin/users") || path.matches("admin/users/" + UUID_PATH)) {
+                return identity;
+            }
             if (path.equals("levels") || path.matches("lessons/" + SLUG)) return catalogue;
             if (path.equals("media") || path.matches("media/" + SLUG)) return media;
             if (path.equals("learning/goal") || path.equals("learning/progress")) return learning;
@@ -97,12 +100,15 @@ public class Gateway {
             if (path.equals("tracking/overview") || path.equals("tracking/messages")) return tracking;
         }
         if (method.equals("POST")) {
-            if (path.equals("invitations")) return identity;
+            if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
             if (path.equals("levels") || path.matches("levels/" + SLUG + "/publish")) return catalogue;
             if (path.equals("assessments/quiz")) return assessment;
             if (path.equals("tracking/messages")) return tracking;
         }
-        if (method.equals("PUT") && path.equals("learning/goal")) return learning;
+        if (method.equals("PUT")) {
+            if (path.equals("learning/goal")) return learning;
+            if (path.matches("admin/users/" + UUID_PATH + "/(status|role|permissions|teacher|reviewer)")) return identity;
+        }
         throw HttpError.notFound("Cette route API est inconnue.");
     }
 

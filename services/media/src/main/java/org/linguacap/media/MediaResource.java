@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.Response;
 import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.IdentityClient;
+import org.linguacap.common.Permissions;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -39,7 +40,7 @@ public class MediaResource {
     @GET
     public List<MediaMetadata> media() {
         if (!isAdmin(actor.id())) {
-            throw HttpError.forbidden("La médiathèque est réservée à l’administration.");
+            throw HttpError.forbidden("La médiathèque requiert la permission Catalogue.");
         }
         try (var connection = dataSource.getConnection();
              var query = connection.prepareStatement("select " + ASSET_COLUMNS + " from media.assets order by title");
@@ -99,8 +100,9 @@ public class MediaResource {
         }
     }
 
+    /** Administration ou permission Catalogue : médiathèque pédagogique et brouillons. */
     private boolean isAdmin(UUID actorId) {
-        return "admin".equals(identities.current(actorId).path("role").asText());
+        return Permissions.canEditCatalogue(identities.current(actorId));
     }
 
     private static Asset readAsset(ResultSet row) throws SQLException {

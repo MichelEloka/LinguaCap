@@ -1,7 +1,11 @@
 BEGIN;
 GRANT USAGE ON SCHEMA identity TO lingua_identity;
-GRANT SELECT, INSERT ON identity.profiles TO lingua_identity;
+GRANT SELECT, INSERT, UPDATE ON identity.profiles TO lingua_identity;
 GRANT SELECT, INSERT, UPDATE ON identity.invitations TO lingua_identity;
+GRANT SELECT, INSERT, DELETE ON identity.permissions TO lingua_identity;
+GRANT SELECT, INSERT, UPDATE ON identity.teacher_assignments TO lingua_identity;
+GRANT SELECT, INSERT, UPDATE ON identity.reviewer_assignments TO lingua_identity;
+GRANT SELECT, INSERT, UPDATE ON identity.outbox_events TO lingua_identity;
 
 GRANT USAGE ON SCHEMA catalogue TO lingua_catalogue;
 GRANT SELECT, INSERT, UPDATE ON catalogue.levels TO lingua_catalogue;

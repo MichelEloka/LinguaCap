@@ -13,6 +13,7 @@ import jakarta.ws.rs.core.Response;
 import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.IdentityClient;
+import org.linguacap.common.Permissions;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -231,13 +232,14 @@ public class CatalogueResource {
         }
     }
 
+    /** Administration ou permission Catalogue : édition et lecture des brouillons. */
     private boolean isAdmin() {
-        return "admin".equals(identities.current(actor.id()).path("role").asText());
+        return Permissions.canEditCatalogue(identities.current(actor.id()));
     }
 
     private void requireAdmin() {
         if (!isAdmin()) {
-            throw HttpError.forbidden("Le catalogue est réservé à l’administration.");
+            throw HttpError.forbidden("L’édition du catalogue requiert la permission Catalogue.");
         }
     }
 
