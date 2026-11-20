@@ -4,7 +4,7 @@ Application React et TypeScript issue de la maquette de LinguaCap. Les visuels d
 
 ## Démarrer en local
 
-Depuis `linguacap-react/`, avec Node.js 22 récent ou 24 et npm.
+Depuis `linguacap-react/`, avec Node.js 24 (voir `.nvmrc` à la racine) et npm.
 
 ```sh
 npm ci
@@ -41,10 +41,7 @@ npm run build:integration
 
 En mode intégration, `/integration` vérifie la disponibilité des six services et `/connexion` utilise Supabase Auth. Les liens d’invitation et de récupération reviennent respectivement sur `/activer-compte` et `/reinitialiser`. Après connexion, `/espace` ouvre le parcours pilote correspondant au profil stocké dans PostgreSQL. Le catalogue, les médias, l’objectif, le quiz, les résultats et les messages utilisent les services Java. La [recette du pilote](../infra/pilot/README.md) décrit le démarrage de l’ensemble.
 
-| Route à fournir par la passerelle | Contrat initial |
-| --- | --- |
-| `GET /api/v1/health` | JSON `{ "status": "ok" }` ou `{ "status": "degraded" }` pour la sonde. |
-| `GET /api/v1/me` | Requête authentifiée avec `Authorization: Bearer <jeton Supabase>`. Réponse JSON `id`, `displayName` et `role` (`learner`, `teacher` ou `admin`). |
+Les routes disponibles et leurs formats sont décrits dans [contracts/openapi.json](../contracts/openapi.json). Le test `tests/contract.spec.ts` vérifie que l’interface n’appelle que des routes déclarées. Les appels authentifiés envoient `Authorization: Bearer <jeton Supabase>`.
 
 Le [Worker de bordure](../workers/web-proxy/wrangler.jsonc) est configuré pour servir `dist/` et relayer `/api/v1/*` sur `https://linguacap.emichfer.org`. En hébergement, configurer `API_UPSTREAM` et le secret `API_ORIGIN_SECRET` côté Worker. La passerelle accepte le secret dans `X-Linguacap-Origin` et valide séparément la session utilisateur. Le [plan de déploiement](../PLAN_DEPLOIEMENT.md) décrit la publication.
 
