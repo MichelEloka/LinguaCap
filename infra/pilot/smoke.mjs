@@ -1167,10 +1167,13 @@ if (process.argv.includes('--browser')) {
     await page.getByLabel('Adresse e-mail').fill(email);
     await page.getByLabel('Mot de passe', { exact: true }).fill(password);
     await page.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    // Accueil : prochaine séance et message du professeur.
-    await expect(page.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    // Accueil : prochaine séance, puis message du professeur dans sa rubrique (barre de navigation mobile).
+    const mobileNav = page.getByRole('navigation', { name: 'Raccourcis mobiles' });
+    await expect(page.getByText('Ma prochaine séance')).toBeVisible({ timeout: 15_000 });
     await expect(page.getByRole('heading', { name: 'Au café' })).toBeVisible();
+    await mobileNav.getByRole('link', { name: 'Mes messages' }).click();
     await expect(page.getByText('Bravo pour cette première séance !')).toBeVisible();
+    await mobileNav.getByRole('link', { name: 'Aujourd’hui' }).click();
     await page.getByRole('link', { name: 'Commencer la séance' }).click();
     await expect(page).toHaveURL(/\/espace\/seance\/[0-9a-f-]{36}$/);
     // Leçon : visuel avec son alternative textuelle, audio pilotable, transcription à la demande.
@@ -1203,8 +1206,10 @@ if (process.argv.includes('--browser')) {
     await teacherPage.getByLabel('Adresse e-mail').fill(otherTeacher.email);
     await teacherPage.getByLabel('Mot de passe', { exact: true }).fill(password);
     await teacherPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    await teacherPage.getByRole('button', { name: 'Voir le suivi de Élève de recette' }).click({ timeout: 15_000 });
-    const followUp = teacherPage.getByRole('dialog');
+    await teacherPage.getByRole('navigation', { name: 'Sections de l’application' }).getByRole('link', { name: 'Mes élèves' })
+      .click({ timeout: 15_000 });
+    await teacherPage.getByRole('link', { name: 'Voir le suivi de Élève de recette' }).click({ timeout: 15_000 });
+    const followUp = teacherPage.getByRole('region', { name: 'Séances', exact: true });
     await expect(followUp.getByText('Séance 1 · Au café')).toBeVisible();
     await expect(followUp.getByText('Terminée', { exact: true })).toBeVisible();
     await expect(followUp.getByText('3 / 3 activités terminées', { exact: false })).toBeVisible();
@@ -1236,7 +1241,8 @@ if (process.argv.includes('--browser')) {
     await editorPage.getByLabel('Adresse e-mail').fill(staffEmail);
     await editorPage.getByLabel('Mot de passe', { exact: true }).fill(password);
     await editorPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    await editorPage.getByRole('link', { name: 'Médiathèque' }).click({ timeout: 15_000 });
+    const editorNav = editorPage.getByRole('navigation', { name: 'Raccourcis mobiles' });
+    await editorNav.getByRole('link', { name: 'Médiathèque' }).click({ timeout: 15_000 });
     await expect(editorPage.getByRole('heading', { name: 'Médiathèque' })).toBeVisible();
     await editorPage.getByRole('button', { name: 'Déposer un média' }).click();
     const uploadDialog = editorPage.getByRole('dialog');
@@ -1247,7 +1253,7 @@ if (process.argv.includes('--browser')) {
     await uploadDialog.getByLabel('Licence').fill('CC0 1.0');
     await uploadDialog.getByRole('button', { name: 'Déposer' }).click();
     await expect(editorPage.getByText('« Bretzel du navigateur » est disponible en version 1.')).toBeVisible({ timeout: 15_000 });
-    await editorPage.getByRole('link', { name: 'Catalogue' }).click();
+    await editorNav.getByRole('link', { name: 'Catalogue' }).click();
     await editorPage.getByRole('link', { name: `Ouvrir B1 version ${b1Next.number}` }).click();
     await expect(editorPage.getByRole('heading', { name: `B1 · version ${b1Next.number}` })).toBeVisible();
     await expect(editorPage.getByText('Cette version est figée')).toBeVisible();
@@ -1263,7 +1269,7 @@ if (process.argv.includes('--browser')) {
     await examPage.getByLabel('Adresse e-mail').fill(examLearner.email);
     await examPage.getByLabel('Mot de passe', { exact: true }).fill(password);
     await examPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    await expect(examPage.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    await expect(examPage.getByText('Ma prochaine séance')).toBeVisible({ timeout: 15_000 });
     await examPage.goto(`http://127.0.0.1:5186/espace/evaluation/${examGoal.id}/final`);
     await expect(examPage.getByRole('heading', { name: 'Examen blanc B1' })).toBeVisible({ timeout: 15_000 });
     await expect(examPage.getByRole('heading', { name: 'Commander à l’oral' })).toBeVisible();
@@ -1281,11 +1287,11 @@ if (process.argv.includes('--browser')) {
     await contentPage.getByLabel('Adresse e-mail').fill(a1Learner.email);
     await contentPage.getByLabel('Mot de passe', { exact: true }).fill(password);
     await contentPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
-    await expect(contentPage.getByRole('heading', { name: 'Ma prochaine séance' })).toBeVisible({ timeout: 15_000 });
+    await expect(contentPage.getByText('Ma prochaine séance')).toBeVisible({ timeout: 15_000 });
     const shown = a1Worked.find((session) => session.activities.some((activity) => activity.kind === 'exercise')) ?? a1Worked[0];
     await contentPage.goto(`http://127.0.0.1:5186/espace/seance/${shown.session.id}`);
     for (const activity of shown.activities) {
-      await expect(contentPage.getByRole('heading', { name: activity.title })).toBeVisible({ timeout: 15_000 });
+      await expect(contentPage.getByRole('heading', { name: activity.title, exact: true })).toBeVisible({ timeout: 15_000 });
       const firstLine = activity.lesson?.description?.split(/\r?\n/).find((line) => line.trim().length > 12)?.trim();
       if (firstLine) await expect(contentPage.getByText(firstLine.slice(0, 40), { exact: false }).first()).toBeVisible();
     }
