@@ -346,6 +346,8 @@ assert.ok((await pictureFile.arrayBuffer()).byteLength > 100);
 const audioPlacement = lessonActivity.placements.find((placement) => placement.usage === 'audio');
 assert.ok((await fetch(audioPlacement.url, { signal: AbortSignal.timeout(8_000) })).ok, 'L’audio de la leçon est lisible');
 await api(`/media/${illustration.assetId}/versions/${illustration.assetVersion}`, autonomousToken, { status: 403 });
+// La signature est horodatée à la seconde : une nouvelle ouverture un peu plus tard en produit une autre.
+await new Promise((resolve) => setTimeout(resolve, 1_100));
 assert.notEqual((await api(sessionPath, autonomousToken)).activities[0].placements[0].url, illustration.url,
   'Rouvrir la séance renouvelle les adresses des supports');
 
