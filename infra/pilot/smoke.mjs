@@ -312,7 +312,10 @@ if (process.argv.includes('--browser')) {
     await expect(adminPage).toHaveURL(/\/espace\/utilisateurs$/);
     await expect(adminPage.getByRole('row', { name: /Élève de recette/ })).toBeVisible({ timeout: 15_000 });
     await adminPage.getByRole('button', { name: 'Ouvrir la fiche de Élève de recette' }).click();
-    await expect(adminPage.getByRole('dialog').getByText('Recette tiers').first()).toBeVisible();
+    const sheet = adminPage.getByRole('dialog');
+    await expect(sheet.getByLabel('Professeur référent')).toHaveValue(otherTeacher.id);
+    await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette tiers' })).toContainText('en cours');
+    await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette prof' })).toBeVisible();
     await adminPage.goto('http://127.0.0.1:5186/espace/invitations');
     await expect(adminPage.getByRole('row', { name: new RegExp(expiredEmail) })).toBeVisible();
     console.log('Recette navigateur réussie · administration des comptes et des invitations.');
