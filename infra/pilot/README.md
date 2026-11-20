@@ -83,6 +83,60 @@ gcloud scheduler jobs create http linguacap-tracking-sync --location=europe-west
   --uri="$tracking/v1/internal/tracking/jobs/sync" --http-method=POST --oidc-service-account-email=$scheduler --oidc-token-audience=$tracking
 ```
 
+## Exploitation du pilote
+
+### Journaux corrélés et erreurs
+
+La passerelle attribue à chaque appel un identifiant, renvoyé à l’interface dans l’en-tête `X-Request-Id` et transmis aux services appelés. Chaque ligne de journal le porte entre parenthèses, et chaque requête laisse une ligne de synthèse (`org.linguacap.requests` : méthode, route, statut, durée, sans paramètres ni contenu). Retrouver un appel dans tous les services :
+
+```powershell
+gcloud logging read '"<identifiant>"' --project=linguacap-prod-dvfjor --freshness=1d --format="table(resource.labels.service_name,timestamp,textPayload)"
+```
+
+Les traces d’exception Java des journaux Cloud Run sont regroupées par Cloud Error Reporting (console Google Cloud › Error Reporting) ; les réponses 5xx sont journalisées en avertissement.
+
+### Limites du pilote
+
+| Ressource | Limite | Où |
+| --- | --- | --- |
+| Instances Cloud Run | 1 instance au plus par service, 20 requêtes simultanées | révision Cloud Run (`deploy-service.sh`) |
+| Connexions PostgreSQL | 3 par service (18 au total), attente de 4 s au plus | `quarkus.datasource.jdbc.*` |
+| Corps de requête | 64 Ko par service, 1 Mo pour la passerelle et le Catalogue (versions complètes de niveau) | `quarkus.http.limits.max-body-size` |
+| Appels entre services | 3 s de connexion, 7 s de réponse ; 10 s entre le Worker et la passerelle | `ServiceClient`, Worker |
+| Fichiers | images 5 Mo, sons 15 Mo, productions orales 25 Mo ; 20 dépôts en attente par auteur | Médias |
+| Supports d’une séance | 150 adresses temporaires par lecture ; 1 000 médias par publication | Médias |
+| Site | HTTPS imposé (redirection 301), HSTS, `nosniff`, pas d’intégration dans un cadre tiers | Worker |
+
+### Indisponibilité temporaire d’un service
+
+La recette arrête puis relance des services (canal de pilotage de `run-local.mjs`) : sans Médias, une séance reste lisible et ses supports proposent de réessayer, la sonde de la passerelle passe à `degraded` ; sans Apprentissage, le traitement de Suivi signale l’erreur sans avancer son point de reprise, puis rattrape les événements au passage suivant. Les services se publient avant la passerelle et chaque contrat reste compatible avec la version précédente (ajouts seulement), car Cloud Run ne publie que les services modifiés.
+
+### Revenir à une version précédente
+
+- **Service Cloud Run** : lister les révisions, puis rendre le trafic à la précédente (immédiat, sans reconstruction).
+
+  ```powershell
+  gcloud run revisions list --service=linguacap-catalogue --region=europe-west1 --project=linguacap-prod-dvfjor
+  gcloud run services update-traffic linguacap-catalogue --region=europe-west1 --project=linguacap-prod-dvfjor --to-revisions=<révision>=100
+  ```
+
+  Une révision se repère par le commit qu’elle porte (`linguacap-<service>-ci-<commit>-…`). Revenir en arrière sur un service et pas sur ceux qui en dépendent reste possible tant que la migration de base correspondante est additive.
+- **Site et Worker** : `npx wrangler deployments list --config workers/web-proxy/wrangler.jsonc`, puis `npx wrangler rollback <version> --config workers/web-proxy/wrangler.jsonc`.
+- **Base** : les migrations ne se défont pas automatiquement ; une correction passe par une nouvelle migration, ou par la restauration d’une sauvegarde.
+
+### Sauvegarde et restauration
+
+[backup.mjs](backup.mjs) exporte les schémas des six services (`pg_dump`, PostgreSQL 17 en conteneur) et copie les fichiers des deux espaces Storage ; [restore-check.mjs](restore-check.mjs) restaure l’export dans une base jetable et compare chaque table et chaque fichier au relevé de l’export. La recette exécute les deux à chaque passage.
+
+En production (l’URL PostgreSQL et la clé serveur sont demandées sans écho ; le dossier contient des données personnelles, à garder hors du dépôt sur un support chiffré) :
+
+```powershell
+node infra/pilot/backup.mjs --out D:\sauvegardes\linguacap-2026-11-20 --storage https://dvfjorbapyxsitbvnoww.supabase.co
+node infra/pilot/restore-check.mjs D:\sauvegardes\linguacap-2026-11-20
+```
+
+Restaurer réellement : appliquer les migrations sur la base cible (`supabase db push`), puis `pg_restore --data-only --no-owner` de l’export, puis `db-grants.sql` ; redéposer les fichiers dans les espaces Storage de même nom. Les comptes d’authentification (schéma `auth`, géré par Supabase) ne font pas partie de l’export : ils se conservent dans le projet Supabase ou se recréent par invitation.
+
 ## Première mise en ligne (manuelle)
 
 Ces étapes ont servi au premier déploiement et restent utiles pour recréer l’infrastructure.
