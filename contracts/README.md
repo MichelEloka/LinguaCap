@@ -5,7 +5,9 @@ Ce dossier est la source de vérité des échanges entre l'interface, la passere
 | Fichier | Contenu | Vérifié par |
 | --- | --- | --- |
 | [openapi.json](openapi.json) | API publique `/api/v1` : routes, paramètres, corps de requête, réponses et format d'erreur `{ code, message }`. | `ContractRoutesTest` (passerelle Quarkus) et `tests/contract.spec.ts` (React). |
-| [events/event-envelope.schema.json](events/event-envelope.schema.json) | Enveloppe commune des événements métier lus par Suivi (incrément 7). | À brancher avec la table de sortie des services. |
+| [events/event-envelope.schema.json](events/event-envelope.schema.json) | Enveloppe commune des événements métier lus par Suivi (incrément 7). | Identités écrit déjà ses événements dans `identity.outbox_events`. |
+
+Événements émis par Identités, dans la même transaction que l’action : `identity.invitation_sent`, `identity.invitation_cancelled`, `identity.account_activated`, `identity.account_disabled`, `identity.account_enabled`, `identity.role_changed`, `identity.permissions_changed`, `identity.teacher_assigned` et `identity.reviewer_assigned`.
 
 ## Règles
 

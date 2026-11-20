@@ -35,6 +35,7 @@ Le [document d’architecture](ARCHITECTURE.md) décrit les services et leurs re
 | Élève | Activer son compte, renseigner ou modifier ses disponibilités, suivre son calendrier, effectuer les activités, rendre ses évaluations et consulter ses résultats et messages. |
 | Permission « Catalogue » | Créer, modifier, prévisualiser et publier des contenus et niveaux. Déposer et réutiliser des ressources dans la médiathèque pédagogique. Cette permission peut être donnée à un développeur ou à un responsable pédagogique. Les accès aux fiches élèves relèvent des rôles de suivi. |
 | Correcteur désigné | Consulter et corriger les productions qui lui sont attribuées, y compris celles d’un élève autonome. |
+| Équipe | Compte sans élèves pour un développeur ou un responsable pédagogique. L’administrateur l’invite et lui attribue la permission « Catalogue », la permission « Correction » ou les deux. Ce rôle ne donne aucun accès aux fiches élèves. |
 
 L’inscription se fait sur invitation. L’administrateur est à l’origine des comptes professeurs et contrôle l’attribution des droits. Un professeur invite par e-mail un élève que la plateforme rattache à sa liste lors de l’activation. L’administrateur peut aussi inviter un élève sans professeur et lui attribuer un parcours.
 
