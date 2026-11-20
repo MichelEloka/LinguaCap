@@ -6,6 +6,7 @@ import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.*;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.linguacap.common.HttpError;
+import org.linguacap.common.RequestLog;
 import org.linguacap.common.Secrets;
 import org.linguacap.common.ServiceClient;
 import java.util.List;
@@ -43,7 +44,7 @@ public class Gateway {
     @Path("health")
     public Response health() {
         verifyOrigin();
-        String requestId = UUID.randomUUID().toString();
+        String requestId = RequestLog.current();
         var checks = List.of(identity, catalogue, media, learning, assessment, tracking).stream()
                 .map(service -> CompletableFuture.supplyAsync(() -> services.exchange(service, "/q/health/ready",
                                 "GET", HEALTH_ACTOR, null, "", "", false, requestId).status() == 200)
@@ -69,7 +70,7 @@ public class Gateway {
     private Response forward(String method, String path, JsonNode body) {
         verifyOrigin();
         String base = destination(path, method);
-        String requestId = UUID.randomUUID().toString();
+        String requestId = RequestLog.current();
         var user = auth.verify(headers.getHeaderString(HttpHeaders.AUTHORIZATION));
         if (!path.equals("me")) {
             var profile = call(identity, "/v1/me", "GET", user, null, requestId);
