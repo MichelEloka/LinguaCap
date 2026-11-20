@@ -106,17 +106,17 @@ La préparation des contenus A1 et A2 peut commencer en parallèle dès que la s
 
 ## Incrément 7 · Donner au professeur les moyens d’intervenir
 
-- [ ] DEV-073 Publier les événements métier utiles au suivi depuis les services qui les possèdent. Couvrir les invitations et activations, les objectifs et révisions, les séances terminées, les remises et corrections et les relances.
-- [ ] DEV-074 Enregistrer les événements dans une table d’envoi du service producteur, dans la même transaction que l’action métier. Prévoir l’export interservice, le point de reprise et les tentatives après échec.
-- [ ] DEV-075 Projeter les événements dans Suivi et dédupliquer leur traitement par identifiant. Tester la reprise, le traitement après arrivée tardive et la reconstruction de la projection.
-- [ ] DEV-076 Calculer le temps de pratique estimé à partir de l’activité, séparément de la dernière connexion. Arrêter le comptage pendant l’inactivité.
-- [ ] DEV-077 Développer la liste des élèves du professeur, les filtres par niveau, état et échéance, et la mise en avant des alertes et corrections ouvertes.
-- [ ] DEV-078 Compléter la fiche élève avec objectif, planning, retard, résultats par compétence, corrections et historique des encouragements.
-- [ ] DEV-079 Créer les alertes par objectif et implémenter la règle de risque selon la cadence et le prochain jalon. Détecter aussi le bilan obligatoire arrivé à échéance.
-- [ ] DEV-080 Développer le traitement périodique dans le service Suivi et l’exposer à l’identité dédiée de Cloud Scheduler. Mettre à jour l’alerte existante, la suspendre pendant une pause et la clôturer lorsque le risque disparaît.
-- [ ] DEV-081 Ajouter les actions « envoyer un encouragement » et « revoir le planning » depuis la fiche ou l’alerte. Utiliser le flux de replanification déjà construit.
-- [ ] DEV-082 Afficher l’encouragement à l’élève et enregistrer sa première activité de reprise pour le suivi. Afficher les rattrapages directement à l’élève autonome.
-- [ ] DEV-083 Tester le cycle retard, alerte, relance, reprise et clôture. Tester une deuxième exécution du contrôle et un parcours mis en pause.
+- [x] DEV-073 Publier les événements métier utiles au suivi depuis les services qui les possèdent. Couvrir les invitations et activations, les objectifs et révisions, les séances terminées, les remises et corrections et les relances.
+- [x] DEV-074 Enregistrer les événements dans une table d’envoi du service producteur, dans la même transaction que l’action métier. Prévoir l’export interservice, le point de reprise et les tentatives après échec.
+- [x] DEV-075 Projeter les événements dans Suivi et dédupliquer leur traitement par identifiant. Tester la reprise, le traitement après arrivée tardive et la reconstruction de la projection.
+- [x] DEV-076 Calculer le temps de pratique estimé à partir de l’activité, séparément de la dernière connexion. Arrêter le comptage pendant l’inactivité.
+- [x] DEV-077 Développer la liste des élèves du professeur, les filtres par niveau, état et échéance, et la mise en avant des alertes et corrections ouvertes.
+- [x] DEV-078 Compléter la fiche élève avec objectif, planning, retard, résultats par compétence, corrections et historique des encouragements.
+- [x] DEV-079 Créer les alertes par objectif et implémenter la règle de risque selon la cadence et le prochain jalon. Détecter aussi le bilan obligatoire arrivé à échéance.
+- [x] DEV-080 Développer le traitement périodique dans le service Suivi et l’exposer à l’identité dédiée de Cloud Scheduler. Mettre à jour l’alerte existante, la suspendre pendant une pause et la clôturer lorsque le risque disparaît.
+- [x] DEV-081 Ajouter les actions « envoyer un encouragement » et « revoir le planning » depuis la fiche ou l’alerte. Utiliser le flux de replanification déjà construit.
+- [x] DEV-082 Afficher l’encouragement à l’élève et enregistrer sa première activité de reprise pour le suivi. Afficher les rattrapages directement à l’élève autonome.
+- [x] DEV-083 Tester le cycle retard, alerte, relance, reprise et clôture. Tester une deuxième exécution du contrôle et un parcours mis en pause.
 
 ## Incrément 8 · Mettre en place les KPI administrateur
 
