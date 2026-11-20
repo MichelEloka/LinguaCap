@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://linguacap.emichfer.org/contracts/events/event-envelope.schema.json",
+  "title": "Enveloppe d'un événement métier LinguaCap",
+  "description": "Format commun des événements écrits dans la table de sortie d'un service, dans la même transaction que l'action métier, puis lus par Suivi. Les copies, enregistrements, corrigés et mots de passe restent hors des événements.",
+  "type": "object",
+  "required": ["eventId", "type", "version", "producer", "occurredAt", "subject", "data"],
+  "additionalProperties": false,
+  "properties": {
+    "eventId": { "type": "string", "format": "uuid", "description": "Clé de déduplication côté consommateur." },
+    "type": { "type": "string", "pattern": "^[a-z]+(\\.[a-z_]+)+$", "examples": ["identity.invitation_sent", "learning.session_completed", "assessment.attempt_submitted"] },
+    "version": { "type": "integer", "minimum": 1, "description": "Version du schéma de data pour ce type." },
+    "producer": { "type": "string", "enum": ["identity", "catalogue", "media", "learning", "assessment", "tracking"] },
+    "occurredAt": { "type": "string", "format": "date-time", "description": "Horodatage serveur de l'action métier." },
+    "requestId": { "type": "string", "description": "Identifiant de la requête d'origine, pour relier les traces." },
+    "subject": {
+      "type": "object",
+      "required": ["kind", "id"],
+      "additionalProperties": false,
+      "properties": {
+        "kind": { "type": "string", "enum": ["account", "invitation", "goal", "plan_revision", "session", "attempt", "grading", "encouragement"] },
+        "id": { "type": "string", "minLength": 1 }
+      }
+    },
+    "learnerId": { "type": "string", "format": "uuid" },
+    "data": { "type": "object", "description": "Identifiants, états et horodatages utiles au type d'événement." }
+  }
+}
