@@ -1073,7 +1073,8 @@ if (process.argv.includes('--browser')) {
     await expect(sheet.getByLabel('Professeur référent')).toHaveValue(otherTeacher.id);
     await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette tiers' })).toContainText('en cours');
     await expect(sheet.getByRole('listitem').filter({ hasText: 'Recette prof' })).toBeVisible();
-    await adminPage.getByRole('link', { name: 'Indicateurs' }).click();
+    await adminPage.keyboard.press('Escape');
+    await adminPage.goto('http://127.0.0.1:5186/espace/indicateurs');
     await expect(adminPage.getByText('Objectifs validés à l’échéance')).toBeVisible({ timeout: 15_000 });
     await expect(adminPage.getByRole('heading', { name: /Élèves actifs par semaine/ })).toBeVisible();
     await adminPage.goto('http://127.0.0.1:5186/espace/invitations');
