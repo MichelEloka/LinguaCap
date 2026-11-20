@@ -17,14 +17,61 @@ from pathlib import Path
 
 from faster_whisper import WhisperModel
 
-NUMBERS = {"eins": "1", "zwei": "2", "drei": "3", "vier": "4", "fünf": "5", "sechs": "6", "sieben": "7", "acht": "8",
-           "neun": "9", "zehn": "10", "elf": "11", "zwölf": "12", "zwanzig": "20", "dreißig": "30", "hundert": "100"}
+UNITS = {"null": 0, "eins": 1, "ein": 1, "eine": 1, "zwei": 2, "drei": 3, "vier": 4, "fünf": 5, "sechs": 6, "sieben": 7,
+         "acht": 8, "neun": 9}
+TEENS = {"zehn": 10, "elf": 11, "zwölf": 12, "dreizehn": 13, "vierzehn": 14, "fünfzehn": 15, "sechzehn": 16,
+         "siebzehn": 17, "achtzehn": 18, "neunzehn": 19}
+TENS = {"zwanzig": 20, "dreißig": 30, "vierzig": 40, "fünfzig": 50, "sechzig": 60, "siebzig": 70, "achtzig": 80,
+        "neunzig": 90}
+
+
+def below_hundred(word):
+    if word in TEENS:
+        return TEENS[word]
+    if word in TENS:
+        return TENS[word]
+    if "und" in word:
+        unit, _, ten = word.partition("und")
+        if unit in UNITS and ten in TENS:
+            return UNITS[unit] + TENS[ten]
+    return UNITS.get(word)
+
+
+def number(word):
+    """Nombre écrit en toutes lettres (jusqu'à 9 999) → valeur, sinon None. « eins » seul reste un nombre."""
+    word = word.replace("ß", "ss").replace("ss", "ß") if "dreiss" in word else word
+    total = 0
+    rest = word
+    if "tausend" in rest:
+        head, _, rest = rest.partition("tausend")
+        value = 1 if head in ("", "ein", "eins") else below_hundred(head)
+        if value is None:
+            return None
+        total += value * 1000
+    if "hundert" in rest:
+        head, _, rest = rest.partition("hundert")
+        value = 1 if head in ("", "ein", "eins") else UNITS.get(head)
+        if value is None:
+            return None
+        total += value * 100
+    if rest:
+        value = below_hundred(rest)
+        if value is None:
+            return None
+        total += value
+    return total if word else None
 
 
 def words(text):
-    text = unicodedata.normalize("NFC", text.lower()).replace("ß", "ss")
+    text = unicodedata.normalize("NFC", text.lower())
+    text = re.sub(r"(?<=\d)[.,](?=\d{3})", "", text)  # 1.000 → 1000
     text = re.sub(r"[^\w\s]", " ", text)
-    return [NUMBERS.get(word, word) for word in text.split()]
+    result = []
+    for word in text.split():
+        value = number(word) if not word.isdigit() and word not in ("ein", "eine") else None
+        result.append(str(value) if value is not None else word.replace("ß", "ss"))
+    # Les chiffres dictés un à un (« null eins sieben ») et les nombres lus d'un bloc (« 0176 ») se comparent chiffre à chiffre.
+    return [digit for word in result for digit in (list(word) if word.isdigit() else [word])]
 
 
 def wer(expected, heard):

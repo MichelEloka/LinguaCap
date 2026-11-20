@@ -94,6 +94,7 @@ function checkMedia(where, media, keys) {
         }
         if (!VOICES.has(line.voice)) fail(at, `voix « ${line.voice} » inconnue`);
         sized(at, line.text, 1, 400, 'une réplique');
+        if (line.say !== undefined) sized(at, line.say, 1, 400, 'la prononciation imposée (say)');
         if (line.name !== undefined) sized(at, line.name, 1, 20, 'le nom du locuteur');
         if (/[«»]|\bfrançais\b/i.test(line.text ?? '')) warn(at, 'le son ne doit contenir que de l’allemand');
         characters += text(line.text).length;

@@ -13,7 +13,7 @@ export const sourcesDir = join(root, 'resource-langue', 'extraits');
 /** Origine et licence enregistrées dans la médiathèque (crédit « source · licence »). */
 export const CREDITS = {
   dib: { source: 'Deutsch im Blick, 2e éd., COERLL, Université du Texas à Austin', license: 'CC BY 4.0' },
-  piper: { source: 'LinguaCap, voix de synthèse Piper (Thorsten, Kerstin)', license: 'Voix CC0' },
+  piper: { source: 'LinguaCap, voix de synthèse Piper Thorsten (voix féminines par transformation)', license: 'Voix CC0' },
   lucide: { source: 'LinguaCap, pictogrammes Lucide', license: 'ISC' },
 };
 

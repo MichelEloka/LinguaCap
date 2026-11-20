@@ -27,14 +27,17 @@ VOICES_DIR = Path("/voices")
 SOURCES = ROOT / "resource-langue" / "extraits"  # enregistrements natifs sous licence libre (non versionnés)
 RATE = 22050
 
-# Voix logiques des scripts → modèle Piper (Thorsten et Kerstin, jeux de données CC0), débit et hauteur.
-# « frau » et « mann » reprennent ces deux voix avec une hauteur légèrement décalée (le débit ne change pas),
-# pour distinguer les personnages d'un dialogue. Le modèle multi-locuteurs MLS a été écarté : la reconnaissance
-# vocale y a relevé des passages incohérents.
+# Voix logiques des scripts → modèle Piper Thorsten (jeu de données CC0), débit et hauteur. Les voix féminines
+# relèvent ensemble la hauteur et les formants de Thorsten. Contrôle par reconnaissance vocale réplique par réplique :
+# - Kerstin (seule voix féminine CC0) déforme les énoncés courts et les débuts de phrase (1 phrase courte sur 16
+#   reconnue, un tiers des répliques de 5 à 8 mots en écart) : écartée ;
+# - Thorsten décalé de 1,25 à 1,35 reste aussi intelligible que Thorsten (18 à 20 phrases sur 24, contre 19) ;
+# - un décalage de hauteur à formants conservés (rubberband) dégrade l'intelligibilité (9 sur 24) ;
+# - les voix M-AILABS (Ramona, Eva K) n'ont pas de licence vérifiable, MLS produit des passages incohérents.
 VOICES = {
     "sprecher": {"model": "de_DE-thorsten-high", "scale": 1.0, "pitch": 1.0},
-    "sprecherin": {"model": "de_DE-kerstin-low", "scale": 1.0, "pitch": 1.0},
-    "frau": {"model": "de_DE-kerstin-low", "scale": 0.96, "pitch": 1.09},
+    "sprecherin": {"model": "de_DE-thorsten-high", "scale": 1.0, "pitch": 1.27},
+    "frau": {"model": "de_DE-thorsten-high", "scale": 0.97, "pitch": 1.32},
     "mann": {"model": "de_DE-thorsten-high", "scale": 1.03, "pitch": 0.92},
 }
 GAP = 0.35  # silence par défaut entre deux répliques, en secondes
@@ -86,7 +89,8 @@ def render(item, slow, target):
             continue
         if previous_was_line:
             pieces.append(np.zeros(int(RATE * GAP), dtype=np.int16))
-        pieces.append(synthesize_line(line["text"], VOICES[line["voice"]], slow))
+        # « say » : prononciation imposée (noms de lettres, mots étrangers) ; la transcription garde « text ».
+        pieces.append(synthesize_line(line.get("say") or line["text"], VOICES[line["voice"]], slow))
         previous_was_line = True
     pieces.append(np.zeros(int(RATE * 0.4), dtype=np.int16))
     with tempfile.TemporaryDirectory() as tmp:
