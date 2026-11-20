@@ -1,0 +1,667 @@
+.lc-learner-layout {
+  display: grid;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.lc-learner-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.68fr) minmax(0, 1fr);
+  align-items: start;
+  gap: 1.25rem;
+}
+
+.lc-learner-side {
+  display: grid;
+  min-width: 0;
+  gap: 1.25rem;
+}
+
+.lc-learner-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+
+.lc-goal-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 24%);
+  overflow: hidden;
+  border-radius: 1.25rem;
+  color: #fff;
+  background: #102e67;
+  box-shadow: 0 14px 28px rgb(11 42 91 / 10%);
+}
+
+.lc-goal-main {
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+  background: radial-gradient(circle at 82% 15%, transparent 0 15%, rgb(95 150 236 / 9%) 15% 25%, transparent 25%);
+}
+
+.lc-goal-aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: .7rem;
+  padding: clamp(1.3rem, 3vw, 2rem);
+  background: #1a4688;
+}
+
+.lc-goal-icon,
+.lc-tile-icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  flex: 0 0 auto;
+  display: inline-grid;
+  place-items: center;
+  border-radius: .8rem;
+  color: #1261df;
+  background: #eaf2ff;
+}
+
+.lc-goal-icon {
+  color: #e4eeff;
+  background: rgb(244 248 255 / 12%);
+}
+
+.lc-goal-label {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  color: #dce9ff;
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.lc-goal-main h2 {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .75rem;
+  margin: .9rem 0 .6rem;
+  color: #fff;
+  font-size: clamp(1.9rem, 4vw, 2.65rem);
+}
+
+.lc-goal-main h2 span {
+  padding: .25rem .7rem;
+  background: rgb(255 255 255 / 15%);
+  border-radius: .6rem;
+  font-size: 1.25rem;
+  letter-spacing: normal;
+}
+
+.lc-goal-main p {
+  margin: 0 0 1.5rem;
+  color: #dce9ff;
+}
+
+.lc-goal-progress {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .45rem .75rem;
+  margin-bottom: .65rem;
+}
+
+.lc-goal-progress strong,
+.lc-goal-aside strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.lc-goal-progress span {
+  color: #dce9ff;
+  font-size: .875rem;
+}
+
+.lc-goal-aside a {
+  color: #fff;
+  font-size: .875rem;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.lc-week-panel,
+.lc-next-card,
+.lc-coach-card,
+.lc-planning-info,
+.lc-lesson-content,
+.lc-quiz-panel,
+.lc-assessment-card,
+.lc-message {
+  min-width: 0;
+  padding: clamp(1rem, 2.5vw, 1.55rem);
+}
+
+.lc-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: .55rem 1rem;
+}
+
+.lc-section-head h2,
+.lc-section-head h3,
+.lc-section-head p {
+  margin-block: 0;
+}
+
+.lc-section-head h2 + p {
+  margin-top: .35rem;
+}
+
+.lc-section-head h3 {
+  font-size: 1rem;
+}
+
+.lc-date-label,
+.lc-assessment-date,
+.lc-audio-heading {
+  display: inline-flex;
+  align-items: center;
+  gap: .45rem;
+  color: #456183;
+  font-size: .875rem;
+}
+
+.lc-week-days {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: .45rem;
+  margin: 1.25rem 0 1.35rem;
+}
+
+.lc-week-day {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .35rem;
+  min-height: 4.55rem;
+  min-width: 0;
+  padding: .35rem .15rem;
+  border: 1px solid transparent;
+  border-radius: .75rem;
+  color: #456183;
+  background: #f1f6fc;
+  font-size: .875rem;
+}
+
+.lc-week-day strong {
+  color: #183768;
+  font-size: 1.05rem;
+}
+
+.lc-week-day-active,
+.lc-week-day-active strong {
+  color: #fff;
+}
+
+.lc-week-day-active {
+  background: #1261df;
+  box-shadow: 0 6px 12px rgb(18 97 223 / 18%);
+}
+
+.lc-day-mark {
+  position: absolute;
+  top: .27rem;
+  right: .28rem;
+  color: #298463;
+}
+
+.lc-week-day-active .lc-day-mark {
+  color: #fff;
+}
+
+.lc-day-late {
+  width: .37rem;
+  height: .37rem;
+  border-radius: 50%;
+  background: #bd681b;
+}
+
+.lc-week-day-active .lc-day-late {
+  background: #ffd88e;
+}
+
+.lc-sessions-head {
+  margin-bottom: .55rem;
+}
+
+.lc-lesson-row {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: .65rem .8rem;
+  align-items: center;
+  padding-block: .8rem;
+  border-top: 1px solid #e7edf6;
+}
+
+.lc-lesson-copy {
+  min-width: 0;
+}
+
+.lc-lesson-copy small,
+.lc-message time {
+  display: block;
+  margin-top: .2rem;
+  color: #526985;
+  font-size: .875rem;
+}
+
+.lc-quiet {
+  margin: .5rem 0 0;
+  padding: 1.2rem;
+  border-radius: .75rem;
+  background: #f5f8fd;
+  color: #47607e;
+}
+
+.lc-panel-link,
+.lc-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  justify-self: start;
+  padding: 0;
+  color: #0655c0;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.lc-week-panel > .lc-panel-link {
+  margin-top: .8rem;
+}
+
+.lc-next-card {
+  background: linear-gradient(140deg, #fff 0%, #f3f8ff 100%);
+}
+
+.lc-next-card h2,
+.lc-planning-info > .lc-tile-icon + h2 {
+  margin: .65rem 0 .45rem;
+}
+
+.lc-next-card-foot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: .5rem .9rem;
+  padding-top: .8rem;
+  border-top: 1px solid #e7edf6;
+  font-size: .875rem;
+}
+
+.lc-coach-quote {
+  margin: .9rem 0;
+  padding: .85rem 1rem;
+  border-radius: .75rem;
+  background: #f0f5fd;
+  line-height: 1.55;
+}
+
+.lc-schedule-form,
+.lc-quiz-panel form,
+.lc-oral-field {
+  display: grid;
+  gap: 1rem;
+}
+
+.lc-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: .7rem;
+}
+
+.lc-form-label {
+  display: grid;
+  gap: .4rem;
+  font-weight: 600;
+}
+
+.lc-form-label input,
+.lc-form-label select,
+.lc-form-label textarea {
+  width: 100%;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: .65rem .72rem;
+  border: 1px solid #cbd8eb;
+  border-radius: .6rem;
+  background: #fff;
+  color: #133467;
+  font: inherit;
+  font-weight: 400;
+}
+
+.lc-form-label textarea {
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.lc-available-days,
+.lc-quiz-panel fieldset {
+  min-inline-size: 0;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.lc-available-days legend,
+.lc-quiz-panel legend {
+  margin-bottom: .55rem;
+  font-weight: 700;
+}
+
+.lc-day-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem .6rem;
+}
+
+.lc-day-options label {
+  display: inline-flex;
+  gap: .28rem;
+  align-items: center;
+  padding: .35rem .5rem;
+  border: 1px solid #dbe6f4;
+  border-radius: .5rem;
+  font-size: .875rem;
+}
+
+.lc-day-options input,
+.lc-quiz-option input {
+  accent-color: #1261df;
+}
+
+.lc-form-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .65rem;
+}
+
+.lc-form-caption {
+  margin-block: 0;
+  font-size: .875rem;
+}
+
+.lc-form-error,
+.lc-answer-note {
+  margin: 0;
+  padding: .75rem .9rem;
+  border-radius: .65rem;
+  background: #fff2e6;
+  color: #823e15;
+}
+
+.lc-answer-correct {
+  background: #e9f9f2;
+  color: #185f42;
+}
+
+.lc-lesson-figure {
+  margin: .85rem 0 1rem;
+}
+
+.lc-lesson-figure img {
+  display: block;
+  width: 100%;
+  max-height: 22rem;
+  object-fit: cover;
+  border-radius: .85rem;
+  background: #eaf2ff;
+}
+
+.lc-lesson-figure figcaption {
+  margin-top: .4rem;
+  color: #526985;
+  font-size: .875rem;
+}
+
+.lc-audio-card {
+  display: grid;
+  align-items: start;
+  justify-items: start;
+  gap: .6rem;
+  margin-block: .65rem;
+  padding: .8rem 1rem;
+  border: 1px solid #dce7f7;
+  border-radius: .85rem;
+  background: #f4f8fe;
+}
+
+.lc-audio-card audio {
+  width: 100%;
+}
+
+@media (max-width: 560px) {
+  .lc-lesson-figure img { max-height: 15rem; }
+}
+
+.lc-audio-card summary {
+  cursor: pointer;
+  color: #0655c0;
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.lc-audio-card details p {
+  margin: .55rem 0 0;
+}
+
+.lc-phrases {
+  display: grid;
+  gap: .55rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.lc-phrases li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  align-items: baseline;
+  gap: .5rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid #e7edf6;
+}
+
+.lc-phrases span {
+  color: #456183;
+}
+
+.lc-quiz-options {
+  display: grid;
+  gap: .55rem;
+}
+
+.lc-quiz-option {
+  display: flex;
+  align-items: center;
+  gap: .65rem;
+  padding: .75rem .9rem;
+  border: 1px solid #d8e4f4;
+  border-radius: .7rem;
+  cursor: pointer;
+}
+
+.lc-quiz-option:has(input:checked) {
+  border-color: #75a6ef;
+  background: #eff6ff;
+}
+
+.lc-quiz-option.lc-choice-correct {
+  border-color: #7fc7a0;
+  background: #edf9f1;
+}
+
+.lc-quiz-panel > .btn {
+  margin-top: 1rem;
+}
+
+.lc-learner-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+}
+
+.lc-assessment-card {
+  display: grid;
+  justify-items: start;
+  gap: .6rem;
+}
+
+.lc-assessment-card .lc-section-head {
+  width: 100%;
+}
+
+.lc-assessment-card h2,
+.lc-assessment-card p {
+  margin-block: 0;
+}
+
+.lc-assessment-card .btn {
+  margin-top: .25rem;
+}
+
+.lc-oral-actions {
+  align-items: flex-start;
+}
+
+.lc-file-label {
+  display: grid;
+  gap: .45rem;
+  padding: .65rem .7rem;
+  border: 1px dashed #aac3e7;
+  border-radius: .7rem;
+  background: #f7faff;
+  cursor: pointer;
+}
+
+.lc-file-label > span {
+  display: inline-flex;
+  gap: .45rem;
+  align-items: center;
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.lc-file-label input {
+  max-width: 100%;
+  color: #375680;
+  font-size: .875rem;
+}
+
+.lc-recording {
+  color: #a11f34;
+  font-size: .875rem;
+  font-weight: 700;
+}
+
+.lc-assessment-score {
+  margin: .8rem 0;
+  color: #1261df;
+  font-size: 1.95rem;
+  font-weight: 800;
+}
+
+.lc-written-answer {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.lc-result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: .65rem;
+  padding-block: .8rem;
+  border-bottom: 1px solid #e7edf6;
+}
+
+.lc-result-row p {
+  margin: .2rem 0 0;
+  color: #526985;
+  font-size: .875rem;
+}
+
+.lc-result-row strong {
+  flex: 0 0 auto;
+}
+
+.lc-message {
+  display: flex;
+  align-items: flex-start;
+  gap: .85rem;
+}
+
+.lc-message h2 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.lc-message p {
+  margin: .75rem 0 0;
+  overflow-wrap: anywhere;
+  line-height: 1.6;
+}
+
+@media (max-width: 780px) {
+  .lc-learner-columns {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lc-learner-stats {
+    gap: .6rem;
+  }
+}
+
+@media (max-width: 570px) {
+  .lc-goal-card,
+  .lc-learner-stats {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .lc-goal-aside {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    align-items: center;
+    justify-content: start;
+  }
+
+  .lc-goal-aside .lc-goal-icon {
+    grid-row: span 2;
+  }
+
+  .lc-goal-aside a {
+    grid-column: 2;
+  }
+
+  .lc-week-days {
+    gap: .25rem;
+  }
+
+  .lc-week-day {
+    min-height: 3.65rem;
+  }
+
+  .lc-lesson-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .lc-lesson-row .lc-lesson-action {
+    grid-column: 2;
+    justify-self: start;
+  }
+
+  .lc-form-grid,
+  .lc-phrases li {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

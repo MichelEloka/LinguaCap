@@ -1,0 +1,49 @@
+name: CI
+
+on:
+  push:
+    branches: [develop, production]
+  pull_request:
+    branches: [develop, production]
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    name: Frontend et proxy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: linguacap-react
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+          cache: npm
+          cache-dependency-path: linguacap-react/package-lock.json
+      - run: npm ci
+      - run: npm run build
+      - run: npm run build:integration
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:e2e
+
+  backend:
+    name: Passerelle et services Quarkus
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+          cache-dependency-path: 'services/**/pom.xml'
+      - run: mvn -B -ntp -f services/pom.xml verify
