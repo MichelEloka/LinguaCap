@@ -1,0 +1,165 @@
+// Données de base de l'aperçu : profils, parcours A1 d'une élève (vrais contenus du module « Essen »), suivi
+// professeur, catalogue et médiathèque. Les autres modules ajoutent leurs écrans et leurs routes.
+import { readFileSync } from 'node:fs';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
+const repo = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
+export const day = (offset, hour = 18) => { const date = new Date(); date.setDate(date.getDate() + offset); date.setHours(hour, 0, 0, 0); return date.toISOString(); };
+
+export const profiles = {
+  learner: { id: 'u-l1', displayName: 'Camille Martin', role: 'learner', permissions: [] },
+  teacher: { id: 't1', displayName: 'Marie Weber', role: 'teacher', permissions: [] },
+  staff: { id: 's1', displayName: 'Jonas Richter', role: 'staff', permissions: ['catalogue', 'correction'] },
+  admin: { id: 'a1', displayName: 'Inès Morel', role: 'admin', permissions: [] },
+};
+
+const essen = JSON.parse(readFileSync(join(repo, 'content', 'de', 'a1', '05-essen.json'), 'utf8'));
+const media = new Map(essen.media.map((item) => [item.key, item]));
+export const mediaUrl = (key) => {
+  const item = media.get(key);
+  return item.kind === 'audio' ? `/__media/audio/${key}.mp3` : `/__media/images/${key}.${item.photo ? 'jpg' : 'png'}`;
+};
+
+/** Activités d'une séance construites à partir des vrais contenus (leçon, exercice, écoute). */
+export function activitiesOf(ids, completed = 1) {
+  return ids.map((id) => essen.activities.find((activity) => activity.id === id)).filter(Boolean).map((activity, index) => ({
+    id: activity.id, kind: activity.kind, title: activity.title, estimatedMinutes: activity.estimatedMinutes,
+    status: index < completed ? 'completed' : 'todo', state: {}, attemptId: null,
+    lesson: { id: `a1-v2-${activity.id}`, title: activity.lesson.title, description: activity.lesson.description },
+    transcript: index < completed ? 'Kellner : Guten Tag! Was möchten Sie trinken?\nPaula : Ich möchte einen Cappuccino, bitte.' : null,
+    questions: (activity.questions ?? []).map((question) => ({ id: question.id, prompt: question.prompt,
+      options: question.options.map((option) => ({ id: option.id, text: option.label })) })),
+    placements: (activity.placements ?? []).map((placement, position) => ({
+      position: position + 1, assetId: placement.media, assetVersion: 1, usage: placement.usage,
+      alt: placement.alt ?? media.get(placement.media)?.alt ?? null, caption: placement.caption ?? null, decorative: Boolean(placement.decorative),
+      questionId: placement.questionId ?? null, optionId: placement.optionId ?? null, transcriptAvailable: placement.usage === 'audio',
+      url: mediaUrl(placement.media), mimeType: media.get(placement.media)?.kind === 'audio' ? 'audio/mpeg' : 'image/png',
+    })),
+  }));
+}
+
+const summary = (id, position, title, offset, status, minutes = 45) => ({
+  id, position, title, dueAt: day(offset), status, completedAt: status === 'completed' ? day(offset, 12) : null, estimatedMinutes: minutes,
+  activities: [
+    { id: `${id}-a`, kind: 'lesson', title: 'Leçon', estimatedMinutes: 15, status: status === 'completed' ? 'completed' : 'todo' },
+    { id: `${id}-b`, kind: 'exercise', title: 'Exercice', estimatedMinutes: 15, status: status === 'completed' ? 'completed' : 'todo' },
+  ],
+});
+export const sessions = [
+  summary('s1', 1, 'Hallo! Se saluer', -3, 'completed'), summary('s2', 2, 'Les nombres', -2, 'completed'),
+  summary('s3', 3, 'Au marché', 0, 'in_progress'), summary('s4', 4, 'Au restaurant', 0, 'planned'),
+  summary('s5', 5, 'Mes loisirs', 1, 'planned'), summary('s6', 6, 'Ma famille', -1, 'late'),
+  summary('s7', 7, 'La ville', 2, 'planned'), summary('s8', 8, 'Bilan intermédiaire', 4, 'planned', 30),
+];
+export const goal = {
+  startLevel: 'A0', targetLevel: 'A1', startDate: day(-4).slice(0, 10), targetDate: day(26).slice(0, 10), initialTargetDate: day(26).slice(0, 10),
+  template: 'intensive', status: 'active', resumeDate: null, successCriteria: 'Obtenir au moins 60 % à l’examen blanc A1.',
+  expectedCompetences: ['lecture', 'ecoute', 'expression-ecrite', 'expression-orale'], prerequisiteLevel: null, prerequisiteMet: true,
+  acquiredModules: ['a1-hallo'], diagnosticLessonId: 'a1-v2-diagnostic', diagnosticAttemptId: 'g0', diagnosticModules: ['a1-hallo'],
+  diagnosticPrerequisite: null, startingPointConfirmedAt: day(-4), accompanied: true,
+};
+const availability = Array.from({ length: 7 }, (_, index) => ({ weekday: index + 1, sessions: 2, minutes: 45 }));
+export const enrollment = {
+  id: 'e1', levelCode: 'A1', trackVersionNumber: 2, assignedAt: day(-4), status: 'active', sessions, goal, availability,
+  proposal: { number: 2, status: 'validated', overflowCount: 0, validatable: false }, supersededSessions: 1,
+};
+export const proposal = {
+  number: 2, status: 'validated', startDate: goal.startDate, targetDate: goal.targetDate, availability, capacityMinutes: 2700,
+  requiredMinutes: 1300, overflowCount: 0, overflow: [], suggestions: [], validatable: false,
+  weeks: [{ start: day(-4).slice(0, 10), availableMinutes: 630, plannedMinutes: 540 }, { start: day(3).slice(0, 10), availableMinutes: 630, plannedMinutes: 450 }],
+  sessions: sessions.map((session) => ({ date: session.dueAt.slice(0, 10), slot: 1, dueAt: session.dueAt, title: session.title, minutes: 45,
+    items: [{ id: `${session.id}-a`, kind: 'lesson', title: session.title, minutes: 15 }] })),
+};
+export const grades = [
+  { kind: 'quiz', id: 'g1', lessonId: 'l1', correct: 5, total: 6, submittedAt: day(-3, 11) },
+  { kind: 'quiz', id: 'g2', lessonId: 'l2', correct: 3, total: 6, submittedAt: day(-2, 11) },
+  { kind: 'quiz', id: 'g3', lessonId: 'l3', correct: 6, total: 6, submittedAt: day(-1, 11) },
+  { kind: 'quiz', id: 'g4', lessonId: 'l4', correct: 4, total: 5, submittedAt: day(0, 9) },
+];
+export const messages = [
+  { id: 'm1', text: 'Bravo pour cette première séance ! Continue comme ça.', sentAt: day(-2, 9) },
+  { id: 'm2', text: 'Pense à rattraper la séance « Ma famille » avant vendredi.', sentAt: day(-1, 9) },
+];
+export const alert = { id: 'al1', status: 'open', reason: 'Le bilan intermédiaire approche avec du retard (1 séance).', lateSessions: 1,
+  nextMilestone: 'Bilan intermédiaire', nextMilestoneDueAt: day(4), midtermOverdue: false, openedAt: day(-1), closedAt: null, encouragedAt: null };
+const learnerRow = (id, name, level, status, completed, extra = {}) => ({
+  learnerId: id, profile: { id, displayName: name, teacherId: 't1' }, progress: { completedCount: completed, goal: { level } }, results: [],
+  tracking: { enrollmentId: `e-${id}`, levelCode: level, goalStatus: status, nextDueAt: day(1), lateSessions: 0, pendingGrading: 0, alert: null,
+    practiceMinutes: completed * 40, sessionsCompleted: completed, lastActivityAt: day(-1), ...extra },
+});
+export const overview = { freshness: { syncedAt: day(0, 8) }, learners: [
+  learnerRow('u-l1', 'Camille Martin', 'A1', 'active', 2, { lateSessions: 1, alert, nextDueAt: day(0) }),
+  learnerRow('u-l2', 'Yanis Benali', 'A2', 'awaiting_grading', 9, { pendingGrading: 1, nextDueAt: day(3) }),
+  learnerRow('u-l3', 'Awa Diallo', 'A1', 'active', 4),
+  learnerRow('u-l4', 'Léa Kaya', 'A2', 'validated', 21),
+  learnerRow('u-l5', 'Tomás Rivera', 'A1', 'paused', 6),
+] };
+export const sheet = { profile: { id: 'u-l1', displayName: 'Camille Martin' }, enrollment, goal: { level: 'A1', targetDate: goal.targetDate }, results: grades,
+  completedCount: 2, messages: messages.map((message) => ({ ...message, resumedAt: null })),
+  tracking: { enrollmentId: 'e1', practiceMinutes: 95, lastActivityAt: day(-1), sessionsCompleted: 2, sessionsOnTime: 2, lateSessions: 1, pendingGrading: 0, alert, alerts: [alert] } };
+export const levels = [
+  { id: 'a1', code: 'A1', title: 'Allemand A1', description: 'Premiers pas', position: 1, status: 'published', prerequisiteLevelId: null, prerequisiteLevelCode: null,
+    versions: [{ id: 'v-a1-2', number: 2, status: 'published', publishedAt: day(-1), retiredAt: null, updatedAt: day(-1) },
+      { id: 'v-a1-1', number: 1, status: 'retired', publishedAt: day(-30), retiredAt: day(-1), updatedAt: day(-30) }] },
+  { id: 'a2', code: 'A2', title: 'Allemand A2', description: 'Échanges du quotidien', position: 2, status: 'published', prerequisiteLevelId: 'a1', prerequisiteLevelCode: 'A1',
+    versions: [{ id: 'v-a2-2', number: 2, status: 'published', publishedAt: day(-1), retiredAt: null, updatedAt: day(-1) }] },
+];
+export const assets = [...media.values()].slice(0, 10).map((item, index) => ({
+  id: item.key, kind: item.kind, title: `${item.title} [${item.key}]`, mimeType: item.kind === 'audio' ? 'audio/mpeg' : 'image/png',
+  alt: item.alt ?? null, transcript: item.kind === 'audio' ? 'Transcription' : null, credit: 'Deutsch im Blick · CC BY 4.0', source: 'Deutsch im Blick', license: 'CC BY 4.0',
+  status: 'published', updatedAt: day(-index), versions: [{ version: 1, mimeType: 'image/png', sizeBytes: 120000, status: 'published', createdAt: day(-index) }],
+}));
+export const queue = [
+  { id: 'x1', learnerId: 'u-l2', learnerName: 'Yanis Benali', kind: 'midterm', number: 1, levelCode: 'A2', title: 'Bilan intermédiaire A2', submittedAt: day(-1), dueAt: day(1), onTime: true },
+  { id: 'x2', learnerId: 'u-l4', learnerName: 'Léa Kaya', kind: 'final', number: 1, levelCode: 'A2', title: 'Examen blanc A2', submittedAt: day(-2), dueAt: day(-3), onTime: false },
+];
+export const invitations = [
+  { id: 'i1', email: 'lea.k@exemple.fr', displayName: 'Léa Kaya', role: 'learner', teacherId: 't1', teacherName: 'Marie Weber', invitedByName: 'Marie Weber',
+    status: 'pending', sendCount: 1, createdAt: day(-1), lastSentAt: day(-1), expiresAt: day(6), acceptedAt: null },
+  { id: 'i2', email: 'tomas.r@exemple.fr', displayName: 'Tomás Rivera', role: 'learner', teacherId: 't1', teacherName: 'Marie Weber', invitedByName: 'Marie Weber',
+    status: 'accepted', sendCount: 2, createdAt: day(-9), lastSentAt: day(-7), expiresAt: day(-2), acceptedAt: day(-6) },
+];
+
+export const screens = [
+  { name: 'eleve-accueil', role: 'learner', path: '/espace' },
+  { name: 'eleve-planning', role: 'learner', path: '/espace/planning' },
+  { name: 'eleve-resultats', role: 'learner', path: '/espace/resultats' },
+  { name: 'eleve-messages', role: 'learner', path: '/espace/messages' },
+  { name: 'eleve-seance', role: 'learner', path: '/espace/seance/s3' },
+  { name: 'prof-accueil', role: 'teacher', path: '/espace' },
+  { name: 'prof-eleves', role: 'teacher', path: '/espace/eleves' },
+  { name: 'prof-alertes', role: 'teacher', path: '/espace/alertes' },
+  { name: 'prof-fiche', role: 'teacher', path: '/espace/eleves/u-l1' },
+  { name: 'prof-invitations', role: 'teacher', path: '/espace/invitations' },
+  { name: 'prof-corrections', role: 'teacher', path: '/espace/corrections' },
+  { name: 'equipe-accueil', role: 'staff', path: '/espace' },
+  { name: 'equipe-catalogue', role: 'staff', path: '/espace/catalogue' },
+  { name: 'equipe-mediatheque', role: 'staff', path: '/espace/mediatheque' },
+  { name: 'visiteur-connexion', role: 'visitor', path: '/connexion' },
+  { name: 'visiteur-accueil', role: 'visitor', path: '/' },
+];
+
+export function api(role, method, rawPath) {
+  const path = rawPath.split('?')[0];
+  if (path === '/me') return profiles[role] ?? { __status: 401, body: { code: 'UNAUTHENTICATED', message: 'Session requise.' } };
+  if (path === '/health') return { status: 'ok' };
+  if (path === '/learning/enrollment') return enrollment;
+  if (path === '/assessments/results') return grades;
+  if (path === '/tracking/messages') return messages;
+  if (/^\/learning\/sessions\/[^/]+$/.test(path)) {
+    return { session: sessions[2], enrollmentId: 'e1', levelCode: 'A1', activities: activitiesOf(['a1-essen-wortschatz', 'a1-essen-dialog', 'a1-essen-esskultur', 'a1-essen-obst-hoeren']) };
+  }
+  if (/\/progress$/.test(path)) return { session: sessions[2], enrollmentId: 'e1', levelCode: 'A1', activities: activitiesOf(['a1-essen-wortschatz', 'a1-essen-dialog', 'a1-essen-esskultur']) };
+  if (/^\/learning\/enrollments\/[^/]+\/proposal$/.test(path)) return proposal;
+  if (path === '/learning/templates') return [];
+  if (path === '/tracking/overview') return overview;
+  if (/^\/tracking\/learners\//.test(path)) return sheet;
+  if (path === '/assessments/grading') return queue;
+  if (path === '/invitations') return invitations;
+  if (path === '/catalogue/levels') return levels;
+  if (path === '/media') return assets;
+  if (path === '/media/uploads') return [];
+  if (path === '/tracks') return [];
+  return undefined;
+}

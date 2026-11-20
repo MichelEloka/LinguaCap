@@ -1,511 +1,298 @@
-import { useEffect, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
-import { ArrowDown, ArrowLeft, ArrowUp, Eye, Plus, Save, Send, Trash2 } from 'lucide-react';
-import { Badge, EmptyState, Inspector } from '../../components/ui';
+import {
+  Archive, ArrowDown, ArrowLeft, ArrowUp, CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, CircleAlert, CopyPlus, Eye,
+  GraduationCap, Info, Layers, Library, Pencil, PenLine, Plus, RefreshCw, Save, Send, Settings2, Stethoscope,
+} from 'lucide-react';
+import { Badge, EmptyState, StatCard } from '../../components/ui';
+import { Callout, Drawer, Segmented, Skeleton, SkeletonCard, TabPanel, Tabs, Timeline, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { ExerciseActivity, LessonActivity, type ActivityDetail, type Placement } from './LearnerSession';
-import { latestVersion, MediaPreview, versionStatus, type Asset, type MediaFile } from './MediaLibrary';
-import './catalogue.css';
+import type { Asset, MediaFile } from './MediaLibrary';
+import {
+  ActivityEditor, AssessmentsEditor, DiagnosticEditor, EditorContext, IssueFlag, KindTile, ModuleEditor, SettingsEditor, formatMinutes,
+  issueCount, kinds, move, newActivity, replaceAt, uniqueId,
+  type Assessment, type Checks, type Content, type DraftActivity, type Kind, type Status, type VersionDoc,
+} from './editor-forms';
+import { ConfirmDialog, IconAction } from './editor-parts';
+import './editor.css';
 
-type Competence = 'lecture' | 'ecoute' | 'expression-ecrite' | 'expression-orale';
-type Kind = 'lesson' | 'exercise' | 'review' | 'assessment';
-type Status = 'draft' | 'published' | 'retired';
-interface DraftOption { id: string; label: string; correct: boolean }
-interface DraftQuestion { id: string; prompt: string; moduleRef: string | null; options: DraftOption[] }
-interface DraftPlacement {
-  assetId: string; assetVersion: number; usage: 'illustration' | 'audio'; alt: string | null; caption: string | null;
-  transcriptVisibility: 'on_demand' | 'after_answer' | 'hidden'; decorative: boolean; questionId: string | null; optionId: string | null;
-}
-interface DraftLesson { title: string; description: string; transcript: string | null }
-interface DraftActivity {
-  id: string; kind: Kind; title: string; estimatedMinutes: number; competences: Competence[];
-  lesson: DraftLesson | null; questions: DraftQuestion[]; placements: DraftPlacement[];
-}
-interface DraftModule { id: string; title: string; objective: string; prerequisites: string[]; activities: DraftActivity[] }
-interface Settings {
-  expectedCompetences: Competence[]; successCriteria: string; passPercent: number; reviewMinutes: number;
-  midtermMinutes: number; finalMinutes: number;
-}
-interface DraftDiagnostic { title: string; description: string; questions: DraftQuestion[] }
-interface Criterion { id: string; label: string; maxPoints: number }
-interface Part {
-  id: string; competence: Competence; mode: 'closed' | 'written' | 'oral'; title: string; instructions: string;
-  questions: DraftQuestion[]; criteria: Criterion[]; placements: DraftPlacement[];
-}
-interface Assessment { kind: 'midterm' | 'final'; title: string; description: string; parts: Part[] }
-interface Content { settings: Settings; diagnostic: DraftDiagnostic | null; modules: DraftModule[]; assessments: Assessment[] }
-interface VersionDoc extends Content {
-  id: string; levelId: string; levelCode: string; levelTitle: string; number: number; status: Status;
-  publishedAt: string | null; updatedAt: string | null;
-}
-interface Checks { publishable: boolean; issues: { path: string; message: string }[] }
 interface VersionSummary { id: string; number: number; status: Status; publishedAt: string | null; retiredAt: string | null; updatedAt: string | null }
 interface CatalogueLevel {
   id: string; code: string; title: string; description: string | null; position: number | null; status: 'draft' | 'published';
   prerequisiteLevelId: string | null; prerequisiteLevelCode: string | null; versions: VersionSummary[];
 }
 
-const competences: { id: Competence; label: string }[] = [
-  { id: 'lecture', label: 'Lecture' }, { id: 'ecoute', label: 'Écoute' },
-  { id: 'expression-ecrite', label: 'Expression écrite' }, { id: 'expression-orale', label: 'Expression orale' },
-];
-const kinds: Record<Kind, string> = { lesson: 'Leçon', exercise: 'Exercice', review: 'Révision', assessment: 'Évaluation' };
 const statusLabel: Record<Status, { label: string; tone: 'amber' | 'green' | 'neutral' }> = {
   draft: { label: 'Brouillon', tone: 'amber' }, published: { label: 'Publiée', tone: 'green' }, retired: { label: 'Retirée', tone: 'neutral' },
 };
 const dateFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+const timeFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 function getError(error: unknown) {
   return error instanceof Error ? error.message : 'Cette action est temporairement indisponible.';
 }
 
-/**
- * Identifiant unique proposé à la création : il reste stable ensuite pour que la progression des élèves suive.
- * Le planning réserve les révisions de module (revision-…), le diagnostic, le bilan et l'examen blanc.
- */
-function uniqueId(base: string, taken: string[]) {
-  const safe = base.startsWith('revision-') || ['diagnostic', 'bilan-intermediaire', 'examen-blanc'].includes(base) ? `a-${base}` : base;
-  let candidate = safe;
-  for (let index = 2; taken.includes(candidate); index++) candidate = `${safe}-${index}`;
-  return candidate;
-}
-
-function move<T>(items: T[], index: number, offset: number) {
-  const target = index + offset;
-  if (target < 0 || target >= items.length) return items;
-  const next = [...items];
-  [next[index], next[target]] = [next[target], next[index]];
-  return next;
-}
-
-function replaceAt<T>(items: T[], index: number, value: T) {
-  return items.map((item, position) => position === index ? value : item);
-}
-
-function newQuestion(questions: DraftQuestion[]): DraftQuestion {
-  return {
-    id: uniqueId(`q${questions.length + 1}`, questions.map((question) => question.id)), prompt: '', moduleRef: null,
-    options: [{ id: 'a', label: '', correct: true }, { id: 'b', label: '', correct: false }],
-  };
-}
-
-function EditorItem({ title, initiallyOpen = false, children }: { title: ReactNode; initiallyOpen?: boolean; children: ReactNode }) {
-  const [open, setOpen] = useState(initiallyOpen);
-  return (
-    <details className="editor-item" open={open} onToggle={(event) => setOpen(event.currentTarget.open)}>
-      <summary>{title}</summary>
-      {children}
-    </details>
-  );
-}
-
-function MoveButtons({ index, count, label, onMove, onRemove }: {
-  index: number; count: number; label: string; onMove: (offset: number) => void; onRemove: () => void;
-}) {
-  return (
-    <span className="editor-tools">
-      <button type="button" className="icon-btn" onClick={() => onMove(-1)} disabled={index === 0} aria-label={`Monter ${label}`}><ArrowUp size={16} /></button>
-      <button type="button" className="icon-btn" onClick={() => onMove(1)} disabled={index === count - 1} aria-label={`Descendre ${label}`}><ArrowDown size={16} /></button>
-      <button type="button" className="icon-btn" onClick={onRemove} aria-label={`Supprimer ${label}`}><Trash2 size={16} /></button>
-    </span>
-  );
-}
-
-function CompetenceChoice({ value, onChange, legend }: { value: Competence[]; onChange: (value: Competence[]) => void; legend: string }) {
-  return (
-    <fieldset className="editor-checks">
-      <legend>{legend}</legend>
-      {competences.map((item) => (
-        <label key={item.id}>
-          <input type="checkbox" checked={value.includes(item.id)}
-            onChange={(event) => onChange(event.target.checked ? [...value, item.id] : value.filter((entry) => entry !== item.id))} /> {item.label}
-        </label>
-      ))}
-    </fieldset>
-  );
-}
-
-/** Questions fermées avec leur corrigé : une seule bonne réponse, deux à huit choix. */
-function QuestionsEditor({ questions, onChange, moduleRefs }: {
-  questions: DraftQuestion[]; onChange: (questions: DraftQuestion[]) => void; moduleRefs?: { id: string; label: string }[];
-}) {
-  return (
-    <div className="stack">
-      {questions.map((question, index) => {
-        const update = (value: Partial<DraftQuestion>) => onChange(replaceAt(questions, index, { ...question, ...value }));
-        return (
-          <fieldset className="editor-question" key={index}>
-            <legend>Question {index + 1} <code>{question.id}</code></legend>
-            <MoveButtons index={index} count={questions.length} label={`la question ${index + 1}`}
-              onMove={(offset) => onChange(move(questions, index, offset))} onRemove={() => onChange(questions.filter((_, position) => position !== index))} />
-            <label>Énoncé<textarea rows={2} maxLength={500} value={question.prompt} onChange={(event) => update({ prompt: event.target.value })} /></label>
-            {moduleRefs && (
-              <label>Module évalué<select value={question.moduleRef ?? ''} onChange={(event) => update({ moduleRef: event.target.value || null })}>
-                <option value="">À choisir</option>
-                {moduleRefs.map((ref) => <option key={ref.id} value={ref.id}>{ref.label}</option>)}
-              </select></label>
-            )}
-            <div className="stack" role="group" aria-label={`Choix de la question ${index + 1}`}>
-              {question.options.map((option, optionIndex) => (
-                <div className="editor-option" key={optionIndex}>
-                  <label className="editor-correct">
-                    <input type="radio" name={`correct-${question.id}-${index}`} checked={option.correct}
-                      onChange={() => update({ options: question.options.map((item, position) => ({ ...item, correct: position === optionIndex })) })} />
-                    <span className="visually-hidden">Bonne réponse : choix {option.id}</span>
-                  </label>
-                  <label className="editor-grow"><span className="visually-hidden">Libellé du choix {option.id}</span>
-                    <input maxLength={300} value={option.label} placeholder={`Choix ${option.id}`}
-                      onChange={(event) => update({ options: replaceAt(question.options, optionIndex, { ...option, label: event.target.value }) })} />
-                  </label>
-                  <button type="button" className="icon-btn" disabled={question.options.length <= 2} aria-label={`Supprimer le choix ${option.id}`}
-                    onClick={() => update({ options: question.options.filter((_, position) => position !== optionIndex) })}><Trash2 size={16} /></button>
-                </div>
-              ))}
-              <button type="button" className="btn btn-outline btn-small" disabled={question.options.length >= 8}
-                onClick={() => update({ options: [...question.options, { id: uniqueId(String.fromCharCode(97 + question.options.length), question.options.map((item) => item.id)), label: '', correct: false }] })}>
-                <Plus size={15} aria-hidden="true" /> Ajouter un choix
-              </button>
-            </div>
-          </fieldset>
-        );
-      })}
-      <button type="button" className="btn btn-outline btn-small" onClick={() => onChange([...questions, newQuestion(questions)])}>
-        <Plus size={15} aria-hidden="true" /> Ajouter une question
-      </button>
-    </div>
-  );
-}
-
-/** Supports d'une activité ou d'une partie : média versionné de la médiathèque, cible, textes et transcription. */
-function PlacementsEditor({ placements, questions, assets, token, onChange }: {
-  placements: DraftPlacement[]; questions: DraftQuestion[]; assets: Asset[]; token: string; onChange: (placements: DraftPlacement[]) => void;
-}) {
-  const [adding, setAdding] = useState('');
-  const [previewing, setPreviewing] = useState<number | null>(null);
-
-  function add() {
-    const asset = assets.find((item) => item.id === adding);
-    if (!asset) return;
-    onChange([...placements, {
-      assetId: asset.id, assetVersion: latestVersion(asset), usage: asset.kind === 'image' ? 'illustration' : 'audio',
-      alt: asset.kind === 'image' ? asset.alt : null, caption: null, transcriptVisibility: asset.kind === 'audio' ? 'on_demand' : 'hidden',
-      decorative: false, questionId: null, optionId: null,
-    }]);
-    setAdding('');
-  }
-
-  return (
-    <div className="stack">
-      {placements.map((placement, index) => {
-        const asset = assets.find((item) => item.id === placement.assetId);
-        const update = (value: Partial<DraftPlacement>) => onChange(replaceAt(placements, index, { ...placement, ...value }));
-        const target = placement.optionId ? `${placement.questionId}/${placement.optionId}` : placement.questionId ?? '';
-        const newest = asset ? latestVersion(asset) : placement.assetVersion;
-        return (
-          <fieldset className="editor-placement" key={index}>
-            <legend>{placement.usage === 'audio' ? 'Son' : 'Image'} · {asset?.title ?? placement.assetId}</legend>
-            <MoveButtons index={index} count={placements.length} label={`le support ${index + 1}`}
-              onMove={(offset) => onChange(move(placements, index, offset))} onRemove={() => onChange(placements.filter((_, position) => position !== index))} />
-            <div className="pilot-form-grid">
-              <label>Version du fichier<select value={placement.assetVersion} onChange={(event) => update({ assetVersion: Number(event.target.value) })}>
-                {(asset?.versions ?? [{ version: placement.assetVersion, status: 'published' as const }]).map((item) => (
-                  <option key={item.version} value={item.version}>v{item.version} · {versionStatus[item.status]}</option>
-                ))}
-              </select></label>
-              <label>Illustre<select value={target} onChange={(event) => {
-                const [questionId, optionId] = event.target.value.split('/');
-                update({ questionId: questionId || null, optionId: optionId || null });
-              }}>
-                <option value="">L’activité</option>
-                {questions.map((question, questionIndex) => [
-                  <option key={question.id} value={question.id}>Question {questionIndex + 1}</option>,
-                  ...question.options.map((option) => (
-                    <option key={`${question.id}/${option.id}`} value={`${question.id}/${option.id}`}>Question {questionIndex + 1} · choix {option.id}</option>
-                  )),
-                ])}
-              </select></label>
-            </div>
-            {newest > placement.assetVersion && (
-              <p className="inline-message">Une version plus récente existe (v{newest}).{' '}
-                <button type="button" className="text-link" onClick={() => update({ assetVersion: newest })}>Utiliser la v{newest}</button></p>
-            )}
-            {placement.usage === 'illustration' && (
-              <>
-                <label className="editor-inline"><input type="checkbox" checked={placement.decorative}
-                  onChange={(event) => update({ decorative: event.target.checked })} /> Image décorative (sans texte alternatif)</label>
-                {!placement.decorative && <label>Texte alternatif<textarea rows={2} maxLength={300} value={placement.alt ?? ''}
-                  onChange={(event) => update({ alt: event.target.value })} /></label>}
-              </>
-            )}
-            <div className="pilot-form-grid">
-              <label>Légende<input maxLength={300} value={placement.caption ?? ''} onChange={(event) => update({ caption: event.target.value || null })} /></label>
-              {placement.usage === 'audio' && (
-                <label>Transcription<select value={placement.transcriptVisibility}
-                  onChange={(event) => update({ transcriptVisibility: event.target.value as DraftPlacement['transcriptVisibility'] })}>
-                  <option value="on_demand">À la demande</option>
-                  <option value="after_answer">Après la réponse</option>
-                  <option value="hidden">Masquée</option>
-                </select></label>
-              )}
-            </div>
-            <button type="button" className="btn btn-outline btn-small" onClick={() => setPreviewing(previewing === index ? null : index)}>
-              <Eye size={15} aria-hidden="true" /> {previewing === index ? 'Masquer l’aperçu' : 'Aperçu du fichier'}
-            </button>
-            {previewing === index && <MediaPreview assetId={placement.assetId} version={placement.assetVersion} token={token} />}
-          </fieldset>
-        );
-      })}
-      <div className="editor-add-media">
-        <label>Ajouter un support<select value={adding} onChange={(event) => setAdding(event.target.value)}>
-          <option value="">Choisir dans la médiathèque</option>
-          {assets.map((asset) => <option key={asset.id} value={asset.id}>{asset.kind === 'image' ? 'Image' : 'Son'} · {asset.title}</option>)}
-        </select></label>
-        <button type="button" className="btn btn-outline btn-small" disabled={!adding} onClick={add}><Plus size={15} aria-hidden="true" /> Ajouter</button>
-      </div>
-    </div>
-  );
-}
-
-function ActivityEditor({ activity, onChange, assets, token, onPreview }: {
-  activity: DraftActivity; onChange: (activity: DraftActivity) => void; assets: Asset[]; token: string; onPreview: () => void;
-}) {
-  const update = (value: Partial<DraftActivity>) => onChange({ ...activity, ...value });
-  const graded = activity.kind === 'exercise' || activity.kind === 'assessment';
-  const lesson = activity.lesson ?? { title: activity.title, description: '', transcript: null };
-  return (
-    <div className="stack">
-      <div className="pilot-form-grid">
-        <label>Titre<input maxLength={120} value={activity.title} onChange={(event) => update({ title: event.target.value })} /></label>
-        <label>Type<select value={activity.kind} onChange={(event) => {
-          const kind = event.target.value as Kind;
-          update({ kind, lesson: kind === 'lesson' || kind === 'review' ? lesson : activity.lesson });
-        }}>
-          {Object.entries(kinds).map(([id, label]) => <option key={id} value={id}>{label}</option>)}
-        </select></label>
-        <label>Durée estimée (minutes)<input type="number" min={1} max={240} value={activity.estimatedMinutes}
-          onChange={(event) => update({ estimatedMinutes: Number(event.target.value) })} /></label>
-        <label>Identifiant<input value={activity.id} maxLength={40} pattern="[a-z0-9]+(-[a-z0-9]+)*"
-          onChange={(event) => update({ id: event.target.value })} aria-describedby={`id-help-${activity.id}`} />
-          <small id={`id-help-${activity.id}`} className="muted">Gardez-le d’une version à l’autre pour que la progression suive.</small></label>
-      </div>
-      <CompetenceChoice legend="Compétences travaillées" value={activity.competences} onChange={(value) => update({ competences: value })} />
-      {(activity.kind === 'lesson' || activity.kind === 'review' || graded) && (
-        <fieldset className="stack editor-subsection">
-          <legend>{graded ? 'Consigne' : 'Contenu de la leçon'}</legend>
-          <label>Titre affiché<input maxLength={120} value={lesson.title} onChange={(event) => update({ lesson: { ...lesson, title: event.target.value } })} /></label>
-          <label>{graded ? 'Consigne' : 'Texte'}<textarea rows={graded ? 2 : 6} value={lesson.description}
-            onChange={(event) => update({ lesson: { ...lesson, description: event.target.value } })} /></label>
-          <label>Transcription des sons<textarea rows={3} lang="de" value={lesson.transcript ?? ''}
-            onChange={(event) => update({ lesson: { ...lesson, transcript: event.target.value || null } })} /></label>
-        </fieldset>
-      )}
-      {graded && (
-        <fieldset className="stack editor-subsection"><legend>Questions et corrigé</legend>
-          <QuestionsEditor questions={activity.questions} onChange={(questions) => update({ questions })} />
-        </fieldset>
-      )}
-      <fieldset className="stack editor-subsection"><legend>Images et sons</legend>
-        <PlacementsEditor placements={activity.placements} questions={graded ? activity.questions : []} assets={assets} token={token}
-          onChange={(placements) => update({ placements })} />
-      </fieldset>
-      <button type="button" className="btn btn-outline btn-small" onClick={onPreview}><Eye size={15} aria-hidden="true" /> Aperçu élève</button>
-    </div>
-  );
-}
-
-function ModuleEditor({ module, modules, onChange, assets, token, onPreview }: {
-  module: DraftModule; modules: DraftModule[]; onChange: (module: DraftModule) => void; assets: Asset[]; token: string;
-  onPreview: (activity: DraftActivity) => void;
-}) {
-  const update = (value: Partial<DraftModule>) => onChange({ ...module, ...value });
-  const allActivityIds = modules.flatMap((item) => item.activities.map((activity) => activity.id));
-  const minutes = module.activities.reduce((sum, activity) => sum + (activity.estimatedMinutes || 0), 0);
-  return (
-    <div className="stack">
-      <div className="pilot-form-grid">
-        <label>Titre<input maxLength={120} value={module.title} onChange={(event) => update({ title: event.target.value })} /></label>
-        <label>Identifiant<input maxLength={64} value={module.id} pattern="[a-z0-9]+(-[a-z0-9]+)*" onChange={(event) => update({ id: event.target.value })} /></label>
-      </div>
-      <label>Objectif<textarea rows={2} maxLength={500} value={module.objective} onChange={(event) => update({ objective: event.target.value })}
-        placeholder="Ce que l’élève saura faire à la fin du module" /></label>
-      {modules.length > 1 && (
-        <fieldset className="editor-checks"><legend>Prérequis</legend>
-          {modules.filter((item) => item.id !== module.id).map((item) => (
-            <label key={item.id}><input type="checkbox" checked={module.prerequisites.includes(item.id)} onChange={(event) => update({
-              prerequisites: event.target.checked ? [...module.prerequisites, item.id] : module.prerequisites.filter((entry) => entry !== item.id),
-            })} /> {item.title || item.id}</label>
-          ))}
-        </fieldset>
-      )}
-      <h4>Activités · {minutes} min</h4>
-      {module.activities.map((activity, index) => (
-        <EditorItem key={index} initiallyOpen={!activity.title}
-          title={<>{kinds[activity.kind]} · {activity.title || activity.id} <span className="muted">{activity.estimatedMinutes} min</span></>}>
-          <MoveButtons index={index} count={module.activities.length} label={`l’activité ${activity.title || activity.id}`}
-            onMove={(offset) => update({ activities: move(module.activities, index, offset) })}
-            onRemove={() => update({ activities: module.activities.filter((_, position) => position !== index) })} />
-          <ActivityEditor activity={activity} assets={assets} token={token} onPreview={() => onPreview(activity)}
-            onChange={(value) => update({ activities: replaceAt(module.activities, index, value) })} />
-        </EditorItem>
-      ))}
-      <button type="button" className="btn btn-outline btn-small" onClick={() => update({
-        activities: [...module.activities, {
-          id: uniqueId(`${module.id}-activite-${module.activities.length + 1}`.slice(0, 36), allActivityIds), kind: 'lesson', title: '',
-          estimatedMinutes: 10, competences: [], lesson: { title: '', description: '', transcript: null }, questions: [], placements: [],
-        }],
-      })}><Plus size={15} aria-hidden="true" /> Ajouter une activité</button>
-    </div>
-  );
-}
-
-function PartEditor({ part, onChange, assets, token }: { part: Part; onChange: (part: Part) => void; assets: Asset[]; token: string }) {
-  const update = (value: Partial<Part>) => onChange({ ...part, ...value });
-  const production = part.mode !== 'closed';
-  return (
-    <div className="stack">
-      <div className="pilot-form-grid">
-        <label>Titre<input maxLength={120} value={part.title} onChange={(event) => update({ title: event.target.value })} /></label>
-        <label>Compétence<select value={part.competence} onChange={(event) => {
-          const competence = event.target.value as Competence;
-          update({ competence, mode: competence === 'expression-ecrite' ? 'written' : competence === 'expression-orale' ? 'oral' : 'closed' });
-        }}>
-          {competences.map((item) => <option key={item.id} value={item.id}>{item.label}</option>)}
-        </select></label>
-      </div>
-      <label>Consigne<textarea rows={3} maxLength={4000} value={part.instructions} onChange={(event) => update({ instructions: event.target.value })} /></label>
-      {production ? (
-        <fieldset className="stack editor-subsection"><legend>Grille de correction ({part.mode === 'written' ? 'production écrite' : 'production orale'})</legend>
-          {part.criteria.map((criterion, index) => (
-            <div className="editor-option" key={index}>
-              <label className="editor-grow">Critère<input maxLength={200} value={criterion.label}
-                onChange={(event) => update({ criteria: replaceAt(part.criteria, index, { ...criterion, label: event.target.value }) })} /></label>
-              <label className="editor-points">Points<input type="number" min={1} max={100} value={criterion.maxPoints}
-                onChange={(event) => update({ criteria: replaceAt(part.criteria, index, { ...criterion, maxPoints: Number(event.target.value) }) })} /></label>
-              <button type="button" className="icon-btn" aria-label={`Supprimer le critère ${index + 1}`}
-                onClick={() => update({ criteria: part.criteria.filter((_, position) => position !== index) })}><Trash2 size={16} /></button>
-            </div>
-          ))}
-          <button type="button" className="btn btn-outline btn-small" disabled={part.criteria.length >= 10} onClick={() => update({
-            criteria: [...part.criteria, { id: uniqueId(`critere-${part.criteria.length + 1}`, part.criteria.map((item) => item.id)), label: '', maxPoints: 5 }],
-          })}><Plus size={15} aria-hidden="true" /> Ajouter un critère</button>
-        </fieldset>
-      ) : (
-        <fieldset className="stack editor-subsection"><legend>Questions et corrigé</legend>
-          <QuestionsEditor questions={part.questions} onChange={(questions) => update({ questions })} />
-        </fieldset>
-      )}
-      <fieldset className="stack editor-subsection"><legend>Images et sons</legend>
-        <PlacementsEditor placements={part.placements} questions={production ? [] : part.questions} assets={assets} token={token}
-          onChange={(placements) => update({ placements })} />
-      </fieldset>
-    </div>
-  );
-}
-
-function AssessmentEditor({ kind, assessment, onChange, assets, token }: {
-  kind: Assessment['kind']; assessment: Assessment | undefined; onChange: (value: Assessment | undefined) => void; assets: Asset[]; token: string;
-}) {
-  const name = kind === 'midterm' ? 'Bilan intermédiaire' : 'Examen blanc';
-  if (!assessment) {
-    return (
-      <button type="button" className="btn btn-outline btn-small" onClick={() => onChange({ kind, title: name, description: '', parts: [] })}>
-        <Plus size={15} aria-hidden="true" /> Ajouter le {name.toLowerCase()}
-      </button>
-    );
-  }
-  const update = (value: Partial<Assessment>) => onChange({ ...assessment, ...value });
-  return (
-    <div className="stack">
-      <div className="pilot-form-grid">
-        <label>Titre<input maxLength={120} value={assessment.title} onChange={(event) => update({ title: event.target.value })} /></label>
-        <span className="editor-end"><button type="button" className="btn btn-outline btn-small" onClick={() => onChange(undefined)}>
-          <Trash2 size={15} aria-hidden="true" /> Retirer le {name.toLowerCase()}</button></span>
-      </div>
-      <label>Présentation<textarea rows={2} maxLength={2000} value={assessment.description} onChange={(event) => update({ description: event.target.value })} /></label>
-      {assessment.parts.map((part, index) => (
-        <EditorItem key={index} initiallyOpen={!part.title}
-          title={<>Partie {index + 1} · {part.title || competences.find((item) => item.id === part.competence)?.label}</>}>
-          <MoveButtons index={index} count={assessment.parts.length} label={`la partie ${index + 1}`}
-            onMove={(offset) => update({ parts: move(assessment.parts, index, offset) })}
-            onRemove={() => update({ parts: assessment.parts.filter((_, position) => position !== index) })} />
-          <PartEditor part={part} assets={assets} token={token} onChange={(value) => update({ parts: replaceAt(assessment.parts, index, value) })} />
-        </EditorItem>
-      ))}
-      <button type="button" className="btn btn-outline btn-small" disabled={assessment.parts.length >= 12} onClick={() => update({
-        parts: [...assessment.parts, {
-          id: uniqueId(`partie-${assessment.parts.length + 1}`, assessment.parts.map((item) => item.id)), competence: 'lecture', mode: 'closed',
-          title: '', instructions: '', questions: [], criteria: [], placements: [],
-        }],
-      })}><Plus size={15} aria-hidden="true" /> Ajouter une partie</button>
-    </div>
-  );
+function useCompact() {
+  const query = '(max-width: 980px)';
+  const [compact, setCompact] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
+  useEffect(() => {
+    const list = window.matchMedia(query);
+    const update = () => setCompact(list.matches);
+    list.addEventListener('change', update);
+    return () => list.removeEventListener('change', update);
+  }, []);
+  return compact;
 }
 
 /** Aperçu dans le lecteur élève, avec les fichiers de la version choisie (brouillons compris). */
-function ActivityInspector({ activity, token, onClose }: { activity: DraftActivity; token: string; onClose: () => void }) {
-  const [placements, setPlacements] = useState<Placement[] | null>(null);
+function ActivityPreview({ activities, initial, token, onClose }: { activities: DraftActivity[]; initial: DraftActivity; token: string; onClose: () => void }) {
+  const [current, setCurrent] = useState(initial);
+  const [device, setDevice] = useState<'desktop' | 'mobile'>('desktop');
+  const [resolved, setResolved] = useState<{ activity: DraftActivity; placements: Placement[] } | null>(null);
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     let active = true;
-    Promise.all(activity.placements.map(async (placement, index): Promise<Placement> => {
+    Promise.all(current.placements.map(async (placement, index): Promise<Placement> => {
       const file = await requestApi<MediaFile>(`/media/${encodeURIComponent(placement.assetId)}/versions/${placement.assetVersion}`, token)
         .catch(() => null);
       return { ...placement, position: index + 1, url: file?.url ?? null };
-    })).then((resolved) => { if (active) setPlacements(resolved); });
+    })).then((placements) => { if (active) setResolved({ activity: current, placements }); });
     return () => { active = false; };
-  }, [activity, token, attempt]);
+  }, [current, token, attempt]);
 
-  const graded = activity.kind === 'exercise' || activity.kind === 'assessment';
-  const audio = activity.placements.some((placement) => placement.usage === 'audio' && placement.transcriptVisibility === 'on_demand');
+  const position = activities.findIndex((activity) => activity.id === current.id);
+  const graded = current.kind === 'exercise' || current.kind === 'assessment';
+  const audio = current.placements.some((placement) => placement.usage === 'audio' && placement.transcriptVisibility === 'on_demand');
+  const placements = resolved?.activity === current ? resolved.placements : null;
   const detail: ActivityDetail | null = placements && {
-    id: activity.id, kind: activity.kind, title: activity.title, estimatedMinutes: activity.estimatedMinutes, status: 'todo', state: {},
-    attemptId: null, lesson: activity.lesson ? { id: 'apercu', title: activity.lesson.title, description: activity.lesson.description } : null,
-    transcript: audio ? activity.lesson?.transcript ?? null : null,
-    questions: activity.questions.map((question) => ({ id: question.id, prompt: question.prompt, options: question.options.map((option) => ({ id: option.id, text: option.label })) })),
+    id: current.id, kind: current.kind, title: current.title, estimatedMinutes: current.estimatedMinutes, status: 'todo', state: {},
+    attemptId: null, lesson: current.lesson ? { id: 'apercu', title: current.lesson.title, description: current.lesson.description } : null,
+    transcript: audio ? current.lesson?.transcript ?? null : null,
+    questions: current.questions.map((question) => ({ id: question.id, prompt: question.prompt, options: question.options.map((option) => ({ id: option.id, text: option.label })) })),
     placements,
   };
   const renew = () => setAttempt((value) => value + 1);
+  const go = (offset: number) => { const next = activities[position + offset]; if (next) setCurrent(next); };
   return (
-    <Inspector title={`Aperçu élève · ${activity.title || activity.id}`} onClose={onClose}>
-      <div className="stack pilot-session">
-        <p className="muted">{kinds[activity.kind]} · {activity.estimatedMinutes} min</p>
-        {!detail ? <p role="status">Préparation de l’aperçu…</p>
-          : graded
-            ? <ExerciseActivity activity={detail} sessionId="apercu" token={token} grade={null} onRenew={renew} preview
-                onSaveState={() => undefined} onGraded={async () => undefined} />
-            : <LessonActivity activity={detail} onRenew={renew} busy={false} onComplete={() => undefined} preview />}
+    <Drawer wide title={`Aperçu élève · ${current.title || current.id}`} onClose={onClose}
+      description={`${kinds[current.kind].label} · ${current.estimatedMinutes} min · tel que l’élève le verra`}
+      footer={activities.length > 1 && position >= 0 ? (
+        <div className="ed-preview-nav">
+          <button type="button" className="btn btn-ghost" disabled={position <= 0} onClick={() => go(-1)}><ChevronLeft size={17} aria-hidden="true" /> Précédente</button>
+          <span>{position + 1} / {activities.length}</span>
+          <button type="button" className="btn btn-secondary" disabled={position >= activities.length - 1} onClick={() => go(1)}>Suivante <ChevronRight size={17} aria-hidden="true" /></button>
+        </div>
+      ) : undefined}>
+      <div className="ed-preview-toolbar">
+        <Segmented label="Format d’affichage" value={device} onChange={setDevice}
+          options={[{ value: 'desktop', label: 'Ordinateur' }, { value: 'mobile', label: 'Téléphone' }]} />
+        <span className="ed-preview-note"><Info size={15} aria-hidden="true" /> Remise et correction désactivées</span>
       </div>
-    </Inspector>
+      <div className={`ed-device is-${device}`}>
+        <div className="ed-device-screen pilot-session">
+          <header className="ed-device-head">
+            <KindTile kind={current.kind} />
+            <div><small>{kinds[current.kind].label} · {current.estimatedMinutes} min</small><h3>{current.lesson?.title || current.title || current.id}</h3></div>
+          </header>
+          {!detail ? <SkeletonCard lines={4} label="Préparation de l’aperçu…" />
+            : graded
+              ? <ExerciseActivity key={current.id} activity={detail} sessionId="apercu" token={token} grade={null} onRenew={renew} preview
+                  onSaveState={() => undefined} onGraded={async () => undefined} />
+              : <LessonActivity key={current.id} activity={detail} onRenew={renew} busy={false} onComplete={() => undefined} preview />}
+        </div>
+      </div>
+    </Drawer>
   );
 }
 
-const editorSections = [
-  { id: 'catalogue-settings', title: 'Réglages' },
-  { id: 'catalogue-modules', title: 'Modules' },
-  { id: 'catalogue-diagnostic', title: 'Diagnostic initial' },
-  { id: 'catalogue-midterm', title: 'Bilan intermédiaire' },
-  { id: 'catalogue-final', title: 'Examen blanc' },
-];
+type Tab = 'settings' | 'modules' | 'diagnostic' | 'assessments';
+const plurals: Record<Kind, string> = { lesson: 'leçons', exercise: 'exercices', review: 'révisions', assessment: 'évaluations' };
 
-function Section({ id, title, children, open = false }: { id: string; title: string; children: ReactNode; open?: boolean }) {
-  return <details id={id} className="panel editor-section" open={open}><summary><h3>{title}</h3></summary><div className="stack">{children}</div></details>;
+/** Contrôle de publication : état de la version et points à compléter, chacun ouvrant l'endroit à corriger. */
+function PublicationCard({ version, checks, dirty, describe, onIssue, children }: {
+  version: VersionDoc; checks: Checks | null; dirty: boolean; describe: (path: string) => { label: string; icon: ReactNode }; onIssue: (path: string) => void;
+  children?: ReactNode;
+}) {
+  const [expanded, setExpanded] = useState(false);
+  const titleId = useId();
+  let tone: 'success' | 'warning' | 'neutral' = 'neutral';
+  let icon: ReactNode = <Archive size={22} aria-hidden="true" />;
+  let title = '';
+  let text: ReactNode = '';
+  const issues = version.status === 'draft' ? checks?.issues ?? [] : [];
+  if (version.status === 'published') {
+    tone = 'success';
+    icon = <CheckCircle2 size={22} aria-hidden="true" />;
+    title = 'Version publiée';
+    text = version.publishedAt ? `Proposée aux nouvelles attributions depuis le ${dateFormat.format(new Date(version.publishedAt))}.` : 'Proposée aux nouvelles attributions.';
+  } else if (version.status === 'retired') {
+    title = 'Version retirée';
+    text = 'Elle n’est plus proposée ; les élèves inscrits la conservent.';
+  } else if (!checks) {
+    title = 'Contrôle en cours…';
+  } else if (checks.publishable) {
+    tone = 'success';
+    icon = <CheckCircle2 size={22} aria-hidden="true" />;
+    title = 'Prête à publier';
+    text = dirty ? 'Enregistrez vos modifications pour actualiser les contrôles de publication.' : 'Tous les contrôles sont validés.';
+  } else {
+    tone = 'warning';
+    icon = <CircleAlert size={22} aria-hidden="true" />;
+    title = `${checks.issues.length} point${checks.issues.length > 1 ? 's' : ''} à compléter`;
+    text = dirty ? 'Contrôles du dernier enregistrement. Ouvrez un point pour le corriger.' : 'Ouvrez un point pour le corriger dans l’éditeur.';
+  }
+  const limit = 3;
+  const shown = expanded ? issues : issues.slice(0, limit);
+  return (
+    <section className={`ed-publication is-${tone}`} aria-labelledby={titleId}>
+      <header>
+        <span className="ed-publication-icon">{icon}</span>
+        <div><p className="ed-overline">Contrôle de publication</p><h3 id={titleId}>{title}</h3></div>
+      </header>
+      {text && <p className="ed-publication-text">{text}</p>}
+      {children}
+      {issues.length > 0 && (
+        <ol className="ed-issues lc-stagger" aria-label="Points à compléter avant publication">
+          {shown.map((issue, index) => {
+            const area = describe(issue.path);
+            return (
+              <li key={`${issue.path}-${index}`}>
+                <button type="button" className="ed-issue" onClick={() => onIssue(issue.path)}>
+                  <span className="ed-issue-area">{area.icon}{area.label}</span>
+                  <span className="ed-issue-text">{issue.message}</span>
+                  <ChevronRight size={16} aria-hidden="true" className="ed-row-chevron" />
+                </button>
+              </li>
+            );
+          })}
+        </ol>
+      )}
+      {issues.length > limit && (
+        <button type="button" className="text-link ed-issues-more" onClick={() => setExpanded(!expanded)} aria-expanded={expanded}>
+          {expanded ? 'Réduire la liste' : issues.length - limit > 1 ? `Afficher les ${issues.length - limit} autres points` : 'Afficher le dernier point'}
+          <ChevronDown size={15} aria-hidden="true" className={expanded ? 'is-up' : undefined} />
+        </button>
+      )}
+    </section>
+  );
+}
+
+/** Plan du parcours : modules repliables et leurs activités, avec type, durée et points à compléter. */
+function Plan({ content, selection, onSelect, issues, readOnly, locked, onAddModule, open, onToggle }: {
+  content: Content; selection: { module: number; activity: number | null }; onSelect: (module: number, activity: number | null) => void;
+  issues: Checks['issues']; readOnly: boolean; locked: boolean; onAddModule: () => void; open: boolean; onToggle: () => void;
+}) {
+  const [expanded, setExpanded] = useState<Set<number>>(() => new Set([selection.module]));
+  const body = useRef<HTMLDivElement>(null);
+  useEffect(() => { setExpanded(new Set([selection.module])); }, [selection.module]);
+  // Garde l'élément ouvert visible dans le plan (sans faire défiler la page).
+  useEffect(() => {
+    const frame = requestAnimationFrame(() => {
+      const list = body.current;
+      const node = list?.querySelector<HTMLElement>('[aria-current="true"]');
+      if (!list || !node) return;
+      const top = node.offsetTop - list.offsetTop;
+      if (top < list.scrollTop || top + node.offsetHeight > list.scrollTop + list.clientHeight) {
+        list.scrollTo({ top: Math.max(0, top - list.clientHeight / 3), behavior: 'smooth' });
+      }
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [selection.module, selection.activity, expanded]);
+  const activities = content.modules.reduce((sum, module) => sum + module.activities.length, 0);
+  const minutes = content.modules.reduce((sum, module) => sum + module.activities.reduce((total, activity) => total + (activity.estimatedMinutes || 0), 0), 0);
+  const toggle = (index: number) => setExpanded((current) => {
+    const next = new Set(current);
+    if (next.has(index)) next.delete(index); else next.add(index);
+    return next;
+  });
+  return (
+    <nav className={`ed-plan${open ? '' : ' is-closed'}`} aria-label="Plan du parcours">
+      <div className="ed-plan-head">
+        <span className="ed-plan-head-icon" aria-hidden="true"><Layers size={17} /></span>
+        <div><h3>Plan du parcours</h3><small>{content.modules.length} modules · {activities} activités · {formatMinutes(minutes)}</small></div>
+        <button type="button" className="icon-button ed-plan-toggle" aria-expanded={open} onClick={onToggle}
+          aria-label={open ? 'Replier le plan du parcours' : 'Déplier le plan du parcours'}><ChevronDown size={18} aria-hidden="true" /></button>
+      </div>
+      <div className="ed-plan-body" ref={body}>
+        {content.modules.length === 0 && <p className="ed-plan-empty">Aucun module pour l’instant.</p>}
+        <ol className="ed-plan-tree">
+          {content.modules.map((module, index) => {
+            const isOpen = expanded.has(index);
+            const total = module.activities.reduce((sum, activity) => sum + (activity.estimatedMinutes || 0), 0);
+            const current = selection.module === index && selection.activity === null;
+            return (
+              <li key={index} className={`ed-plan-module${isOpen ? ' is-open' : ''}`}>
+                <div className="ed-plan-row">
+                  <button type="button" className="ed-plan-caret" aria-expanded={isOpen} onClick={() => toggle(index)}
+                    aria-label={`${isOpen ? 'Replier' : 'Déplier'} le module ${index + 1}`}><ChevronRight size={16} aria-hidden="true" /></button>
+                  <button type="button" className="ed-plan-node" aria-current={current ? 'true' : undefined} onClick={() => onSelect(index, null)}>
+                    <span className="ed-plan-num" aria-hidden="true">{index + 1}</span>
+                    <span className="ed-plan-text"><strong>{module.title || module.id}</strong>
+                      <small>{module.activities.length} activité{module.activities.length > 1 ? 's' : ''} · {formatMinutes(total)}</small></span>
+                    <IssueFlag count={issueCount(issues, `modules[${index}]`)} />
+                  </button>
+                </div>
+                {isOpen && (
+                  <ol className="ed-plan-activities">
+                    {module.activities.map((activity, position) => (
+                      <li key={position}>
+                        <button type="button" className="ed-plan-node is-activity" onClick={() => onSelect(index, position)}
+                          aria-current={selection.module === index && selection.activity === position ? 'true' : undefined}>
+                          <KindTile kind={activity.kind} size="sm" />
+                          <span className="ed-plan-text"><strong>{activity.title || activity.id}</strong></span>
+                          <IssueFlag count={issueCount(issues, `modules[${index}].activities[${position}]`)} />
+                          <small className="ed-plan-min">{activity.estimatedMinutes} min</small>
+                        </button>
+                      </li>
+                    ))}
+                    {module.activities.length === 0 && <li className="ed-plan-empty">Aucune activité</li>}
+                  </ol>
+                )}
+              </li>
+            );
+          })}
+        </ol>
+        {!readOnly && <button type="button" className="ed-plan-add" onClick={onAddModule} disabled={locked}><Plus size={16} aria-hidden="true" /> Ajouter un module</button>}
+      </div>
+    </nav>
+  );
+}
+
+function EditorSkeleton() {
+  return (
+    <div className="ed-editor" role="status" aria-label="Chargement de la version…">
+      <div className="ed-top"><SkeletonCard lines={4} label="Chargement de la version…" /><SkeletonCard lines={3} label="Chargement des contrôles…" /></div>
+      <Skeleton height={44} radius={12} />
+      <div className="ed-modules"><SkeletonCard lines={8} /><SkeletonCard lines={6} /></div>
+    </div>
+  );
 }
 
 /** Éditeur d'une version : un brouillon s'enregistre d'un bloc et se reprend ; une version publiée se consulte. */
 function VersionEditor({ token }: { token: string }) {
   const { versionId = '' } = useParams();
   const navigate = useNavigate();
+  const toast = useToast();
+  const compact = useCompact();
   const [version, setVersion] = useState<VersionDoc | null>(null);
   const [content, setContent] = useState<Content | null>(null);
   const [checks, setChecks] = useState<Checks | null>(null);
   const [assets, setAssets] = useState<Asset[]>([]);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState('');
   const [dirty, setDirty] = useState(false);
   const [preview, setPreview] = useState<DraftActivity | null>(null);
   const [previewId, setPreviewId] = useState('');
+  const [tab, setTab] = useState<Tab>('modules');
+  const [selection, setSelection] = useState<{ module: number; activity: number | null }>({ module: 0, activity: 0 });
+  const [assessmentKind, setAssessmentKind] = useState<Assessment['kind']>('midterm');
+  const [planOpen, setPlanOpen] = useState(() => typeof window === 'undefined' || !window.matchMedia('(max-width: 980px)').matches);
+  const [focusPath, setFocusPath] = useState<string | null>(null);
+  const [confirm, setConfirm] = useState<'publish' | 'retire' | null>(null);
+  const stage = useRef<HTMLDivElement>(null);
+  const saveRef = useRef<() => void>(() => undefined);
   const id = encodeURIComponent(versionId);
 
   useEffect(() => {
@@ -522,26 +309,122 @@ function VersionEditor({ token }: { token: string }) {
       setChecks(verified);
       setAssets(media);
       setDirty(false);
+      setSelection({ module: 0, activity: document.modules[0]?.activities.length ? 0 : null });
+      setPreviewId(document.modules[0]?.activities[0]?.id ?? '');
     }).catch((failure: unknown) => { if (active) setError(getError(failure)); });
     return () => { active = false; };
   }, [id, token]);
 
-  if (error && !version) return <section className="panel stack"><p className="inline-message warning" role="alert">{error}</p><Link className="text-link" to="/espace/catalogue">Retour au catalogue</Link></section>;
-  if (!version || !content) return <p role="status">Chargement de la version…</p>;
+  // Ctrl + S enregistre ; quitter la page avec des modifications non enregistrées demande confirmation.
+  useEffect(() => {
+    const keydown = (event: KeyboardEvent) => {
+      if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 's') { event.preventDefault(); saveRef.current(); }
+    };
+    window.addEventListener('keydown', keydown);
+    return () => window.removeEventListener('keydown', keydown);
+  }, []);
+  useEffect(() => {
+    if (!dirty) return;
+    const leave = (event: BeforeUnloadEvent) => { event.preventDefault(); };
+    window.addEventListener('beforeunload', leave);
+    return () => window.removeEventListener('beforeunload', leave);
+  }, [dirty]);
+
+  // Point à compléter ouvert : ouvre la section, fait défiler jusqu'au champ et le met en évidence.
+  useEffect(() => {
+    if (!focusPath) return;
+    const frame = requestAnimationFrame(() => {
+      let path = focusPath;
+      let target: HTMLElement | null = null;
+      while (path && !target) {
+        target = document.querySelector<HTMLElement>(`.ed-editor [data-path="${CSS.escape(path)}"]`);
+        if (target) break;
+        const shorter = path.replace(/(\.[^.[\]]+|\[\d+\])$/, '');
+        if (shorter === path) break;
+        path = shorter;
+      }
+      setFocusPath(null);
+      if (!target) return;
+      for (let details = target.closest('details'); details; details = details.parentElement?.closest('details') ?? null) details.open = true;
+      target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      target.querySelector<HTMLElement>('input:not([type="hidden"]):not(:disabled), textarea:not(:disabled), select:not(:disabled)')?.focus({ preventScroll: true });
+      const flashed = target;
+      flashed.classList.remove('is-flash');
+      void flashed.offsetWidth;
+      flashed.classList.add('is-flash');
+      window.setTimeout(() => flashed.classList.remove('is-flash'), 1800);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [focusPath, tab, selection]);
+
+  if (error && !version) {
+    return (
+      <div className="ed-load-error">
+        <Callout tone="warning" title="Cette version ne peut pas être ouverte"><p role="alert">{error}</p></Callout>
+        <Link className="btn btn-secondary" to="/espace/catalogue"><ArrowLeft size={16} aria-hidden="true" /> Retour au catalogue</Link>
+      </div>
+    );
+  }
+  if (!version || !content) return <EditorSkeleton />;
 
   const readOnly = version.status !== 'draft';
+  const locked = readOnly || busy !== '';
+  const issues = readOnly ? [] : checks?.issues ?? [];
   const activities = content.modules.flatMap((module) => module.activities);
-  const change =(value: Partial<Content>) => { setContent({ ...content, ...value }); setDirty(true); setNotice(''); };
-  const moduleRefs = [...content.modules.map((module) => ({ id: module.id, label: module.title || module.id })), { id: 'prerequis', label: 'Prérequis du niveau' }];
+  const minutes = activities.reduce((sum, activity) => sum + (activity.estimatedMinutes || 0), 0);
+  const supports = activities.reduce((sum, activity) => sum + activity.placements.length, 0);
+  const composition = (Object.keys(kinds) as Kind[]).map((kind) => ({ kind, count: activities.filter((activity) => activity.kind === kind).length }))
+    .filter((item) => item.count > 0);
+  const change = (value: Partial<Content>) => { setContent({ ...content, ...value }); setDirty(true); };
+  const moduleIndex = Math.min(selection.module, content.modules.length - 1);
+  const currentModule = content.modules[moduleIndex];
+  const activityIndex = currentModule && selection.activity !== null && selection.activity < currentModule.activities.length ? selection.activity : null;
+  const currentActivity = activityIndex !== null ? currentModule?.activities[activityIndex] : undefined;
+
+  function select(module: number, activity: number | null) {
+    setSelection({ module, activity });
+    const target = activity !== null ? content?.modules[module]?.activities[activity] : undefined;
+    if (target) setPreviewId(target.id);
+    if (compact) {
+      setPlanOpen(false);
+      requestAnimationFrame(() => stage.current?.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+    }
+  }
+
+  function describe(path: string): { label: string; icon: ReactNode } {
+    if (path.startsWith('settings')) return { label: 'Réglages', icon: <Settings2 size={13} aria-hidden="true" /> };
+    if (path.startsWith('diagnostic')) return { label: 'Diagnostic', icon: <Stethoscope size={13} aria-hidden="true" /> };
+    const assessment = /^assessments\[(\d+)\]/.exec(path);
+    if (assessment) {
+      const kind = content?.assessments[Number(assessment[1])]?.kind;
+      return { label: kind === 'final' ? 'Examen blanc' : 'Bilan intermédiaire', icon: <GraduationCap size={13} aria-hidden="true" /> };
+    }
+    const module = /^modules\[(\d+)\](?:\.activities\[(\d+)\])?/.exec(path);
+    if (module) return { label: `Module ${Number(module[1]) + 1}${module[2] !== undefined ? ` · activité ${Number(module[2]) + 1}` : ''}`, icon: <Layers size={13} aria-hidden="true" /> };
+    return { label: 'Modules', icon: <Layers size={13} aria-hidden="true" /> };
+  }
+
+  function goTo(path: string) {
+    if (path.startsWith('settings')) setTab('settings');
+    else if (path.startsWith('diagnostic')) setTab('diagnostic');
+    else if (path.startsWith('assessments')) {
+      const kind = content?.assessments[Number(/^assessments\[(\d+)\]/.exec(path)?.[1] ?? 0)]?.kind;
+      if (kind) setAssessmentKind(kind);
+      setTab('assessments');
+    } else {
+      const match = /^modules\[(\d+)\](?:\.activities\[(\d+)\])?/.exec(path);
+      setTab('modules');
+      if (match) select(Number(match[1]), match[2] !== undefined ? Number(match[2]) : null);
+    }
+    setFocusPath(path);
+  }
 
   async function run(label: string, action: () => Promise<void>) {
     setBusy(label);
-    setError('');
-    setNotice('');
     try {
       await action();
     } catch (failure) {
-      setError(getError(failure));
+      toast(getError(failure), 'warning');
     } finally {
       setBusy('');
     }
@@ -555,8 +438,9 @@ function VersionEditor({ token }: { token: string }) {
     setContent({ settings: saved.version.settings, diagnostic: saved.version.diagnostic, modules: saved.version.modules, assessments: saved.version.assessments });
     setChecks(saved.checks);
     setDirty(false);
-    setNotice(saved.checks.publishable ? 'Brouillon enregistré : il est prêt à être publié.' : 'Brouillon enregistré. Vous pourrez le reprendre plus tard.');
+    toast(saved.checks.publishable ? 'Brouillon enregistré : il est prêt à être publié.' : 'Brouillon enregistré. Vous pourrez le reprendre plus tard.');
   });
+  saveRef.current = () => { if (!readOnly && dirty && !busy) void save(); };
 
   const publish = () => run('publish', async () => {
     if (dirty) {
@@ -567,13 +451,13 @@ function VersionEditor({ token }: { token: string }) {
     }
     const published = await requestApi<{ version: VersionSummary; media: { assetId: string; version: number }[] }>(`/catalogue/versions/${id}/publish`, token, { method: 'POST' });
     setVersion({ ...version, status: published.version.status, publishedAt: published.version.publishedAt });
-    setNotice(`Version ${version.number} publiée${published.media.length ? ` avec ${published.media.length} fichier${published.media.length > 1 ? 's' : ''}` : ''} : elle est proposée aux nouvelles attributions.`);
+    toast(`Version ${version.number} publiée${published.media.length ? ` avec ${published.media.length} fichier${published.media.length > 1 ? 's' : ''}` : ''} : elle est proposée aux nouvelles attributions.`);
   });
 
   const retire = () => run('retire', async () => {
     const retired = await requestApi<VersionSummary>(`/catalogue/versions/${id}/retire`, token, { method: 'POST' });
     setVersion({ ...version, status: retired.status });
-    setNotice('Version retirée des nouvelles attributions. Les élèves inscrits gardent leur version.');
+    toast('Version retirée des nouvelles attributions. Les élèves inscrits gardent leur version.');
   });
 
   const copy = () => run('copy', async () => {
@@ -583,155 +467,200 @@ function VersionEditor({ token }: { token: string }) {
     navigate(`/espace/catalogue/versions/${draft.id}`);
   });
 
-  const midterm = content.assessments.find((item) => item.kind === 'midterm');
-  const final = content.assessments.find((item) => item.kind === 'final');
   const setAssessment = (kind: Assessment['kind'], value: Assessment | undefined) => change({
     assessments: [...content.assessments.filter((item) => item.kind !== kind), ...(value ? [value] : [])]
       .sort((a, b) => (a.kind === 'midterm' ? 0 : 1) - (b.kind === 'midterm' ? 0 : 1)),
   });
 
+  function addModule() {
+    if (!content) return;
+    change({
+      modules: [...content.modules, {
+        id: uniqueId(`module-${content.modules.length + 1}`, content.modules.map((module) => module.id)), title: '', objective: '',
+        prerequisites: [], activities: [],
+      }],
+    });
+    setTab('modules');
+    select(content.modules.length, null);
+  }
+
+  function addActivity(index: number, kind: Kind) {
+    const module = content?.modules[index];
+    if (!content || !module) return;
+    const created = newActivity(kind, module.id, content.modules.flatMap((item) => item.activities.map((activity) => activity.id)));
+    change({ modules: replaceAt(content.modules, index, { ...module, activities: [...module.activities, created] }) });
+    select(index, module.activities.length);
+  }
+
+  const saveState = busy === 'save' ? { tone: 'busy', title: 'Enregistrement…', short: 'En cours…', note: 'Gardez la page ouverte.' }
+    : busy === 'publish' ? { tone: 'busy', title: 'Publication…', short: 'En cours…', note: 'Gardez la page ouverte.' }
+    : version.status === 'published' ? { tone: 'published', title: 'Version publiée', short: 'Publiée', note: 'Lecture seule' }
+    : version.status === 'retired' ? { tone: 'retired', title: 'Version retirée', short: 'Retirée', note: 'Lecture seule' }
+    : dirty ? { tone: 'dirty', title: 'Modifications non enregistrées', short: 'Non enregistré', note: 'Ctrl + S pour enregistrer' }
+    : { tone: 'saved', title: 'Brouillon enregistré', short: 'Enregistré', note: version.updatedAt ? `le ${timeFormat.format(new Date(version.updatedAt))}` : 'Aucune modification' };
+
+  const tabs = [
+    { id: 'settings', label: 'Réglages', icon: <Settings2 size={16} aria-hidden="true" /> },
+    { id: 'modules', label: 'Modules', icon: <Layers size={16} aria-hidden="true" />, count: content.modules.length },
+    { id: 'diagnostic', label: 'Diagnostic', icon: <Stethoscope size={16} aria-hidden="true" />, count: content.diagnostic?.questions.length },
+    { id: 'assessments', label: 'Évaluations', icon: <GraduationCap size={16} aria-hidden="true" />, count: content.assessments.length },
+  ];
+
   return (
-    <div className="stack catalogue-editor">
-      <Link className="text-link" to="/espace/catalogue"><ArrowLeft size={16} aria-hidden="true" /> Retour au catalogue</Link>
-      <section className="panel stack catalogue-workspace editor-version-header" aria-labelledby="version-title">
-        <div className="catalogue-heading">
-          <div>
-            <h2 id="version-title">{version.levelCode} · version {version.number}</h2>
-            <p className="muted">{version.levelTitle}{version.updatedAt ? ` · modifiée le ${dateFormat.format(new Date(version.updatedAt))}` : ''}</p>
-          </div>
-          <Badge tone={statusLabel[version.status].tone}>{statusLabel[version.status].label}</Badge>
-        </div>
-        {readOnly && <p className="inline-message">Cette version est figée : contenus, corrigés et versions des fichiers ne changent plus. Créez un brouillon à partir d’elle pour la faire évoluer.</p>}
-        {activities.length > 0 && (
-          <div className="editor-add-media">
-            <label>Activité à prévisualiser<select value={previewId} onChange={(event) => setPreviewId(event.target.value)}>
-              {activities.map((activity) => <option key={activity.id} value={activity.id}>{activity.title || activity.id}</option>)}
-            </select></label>
-            <button type="button" className="btn btn-outline btn-small"
-              onClick={() => setPreview(activities.find((activity) => activity.id === previewId) ?? activities[0])}>
-              <Eye size={15} aria-hidden="true" /> Ouvrir l’aperçu élève</button>
-          </div>
-        )}
-        {checks && !readOnly && (
-          checks.publishable
-            ? <p className="inline-message" role="status">{dirty ? 'Enregistrez vos modifications pour actualiser les contrôles de publication.' : 'La version peut être publiée.'}</p>
-            : (
-              <details className="editor-readiness">
-                <summary>À compléter avant publication ({checks.issues.length})</summary>
-                {dirty && <p className="muted">Contrôles du dernier enregistrement.</p>}
-                <ul className="checks-list">{checks.issues.map((issue, index) => <li key={index}>{issue.message}</li>)}</ul>
-              </details>
-            )
-        )}
-      </section>
-
-      <div className="editor-layout">
-        <nav className="panel editor-navigation" aria-label="Sections de la version">
-          <h3>Dans cette version</h3>
-          {editorSections.map(({ id, title }) => (
-            <a href={`#${id}`} key={id} onClick={() => {
-              const section = document.getElementById(id);
-              if (section instanceof HTMLDetailsElement) section.open = true;
-            }}>{title}</a>
-          ))}
-        </nav>
-        <fieldset className="editor-body" disabled={readOnly || busy !== ''}>
-        <Section id="catalogue-settings" title="Réglages et critères de réussite" open>
-          <CompetenceChoice legend="Compétences évaluées" value={content.settings.expectedCompetences}
-            onChange={(value) => change({ settings: { ...content.settings, expectedCompetences: value } })} />
-          <label>Critères de réussite<textarea rows={3} maxLength={2000} value={content.settings.successCriteria}
-            onChange={(event) => change({ settings: { ...content.settings, successCriteria: event.target.value } })} /></label>
-          <div className="pilot-form-grid">
-            {([['passPercent', 'Seuil de réussite (%)', 1, 100], ['reviewMinutes', 'Révision par module (min)', 0, 120],
-              ['midtermMinutes', 'Bilan intermédiaire (min)', 0, 240], ['finalMinutes', 'Examen blanc (min)', 0, 300]] as const).map(([key, label, min, max]) => (
-              <label key={key}>{label}<input type="number" min={min} max={max} value={content.settings[key]}
-                onChange={(event) => change({ settings: { ...content.settings, [key]: Number(event.target.value) } })} /></label>
-            ))}
-          </div>
-        </Section>
-
-        <Section id="catalogue-modules" title={`Modules (${content.modules.length})`} open>
-          {content.modules.length === 0 && <EmptyState title="Aucun module" description="Ajoutez un premier module pour structurer le parcours." />}
-          {content.modules.map((module, index) => (
-            <EditorItem key={index} initiallyOpen={!module.title}
-              title={<>Module {index + 1} · {module.title || module.id} <span className="muted">{module.activities.length} activité{module.activities.length > 1 ? 's' : ''}</span></>}>
-              <MoveButtons index={index} count={content.modules.length} label={`le module ${module.title || module.id}`}
-                onMove={(offset) => change({ modules: move(content.modules, index, offset) })}
-                onRemove={() => change({ modules: content.modules.filter((_, position) => position !== index) })} />
-              <ModuleEditor module={module} modules={content.modules} assets={assets} token={token} onPreview={setPreview}
-                onChange={(value) => change({ modules: replaceAt(content.modules, index, value) })} />
-            </EditorItem>
-          ))}
-          <button type="button" className="btn btn-outline" onClick={() => change({
-            modules: [...content.modules, {
-              id: uniqueId(`module-${content.modules.length + 1}`, content.modules.map((module) => module.id)), title: '', objective: '',
-              prerequisites: [], activities: [],
-            }],
-          })}><Plus size={16} aria-hidden="true" /> Ajouter un module</button>
-        </Section>
-
-        <Section id="catalogue-diagnostic" title="Diagnostic initial">
-          {content.diagnostic ? (
-            <>
-              <div className="pilot-form-grid">
-                <label>Titre<input maxLength={120} value={content.diagnostic.title}
-                  onChange={(event) => change({ diagnostic: { ...content.diagnostic!, title: event.target.value } })} /></label>
-                <span className="editor-end"><button type="button" className="btn btn-outline btn-small" onClick={() => change({ diagnostic: null })}>
-                  <Trash2 size={15} aria-hidden="true" /> Retirer le diagnostic</button></span>
+    <EditorContext.Provider value={{ readOnly, locked, assets, token, issues, onPreview: setPreview }}>
+      <div className={`ed-editor lc-enter${readOnly ? ' is-readonly' : ''}`}>
+        <div className="ed-top">
+          <div className="ed-top-main">
+            <section className="kit-card ed-hero" aria-labelledby="version-title">
+              <Link className="ed-back" to="/espace/catalogue"><ArrowLeft size={16} aria-hidden="true" /> Catalogue</Link>
+              <div className="ed-hero-title">
+                <span className="ed-code-tile is-lg" aria-hidden="true">{version.levelCode}</span>
+                <div>
+                  <h2 id="version-title">{version.levelCode} · version {version.number}</h2>
+                  <p>{version.levelTitle}{version.updatedAt ? ` · modifiée le ${dateFormat.format(new Date(version.updatedAt))}` : ''}</p>
+                </div>
+                <Badge tone={statusLabel[version.status].tone}>{statusLabel[version.status].label}</Badge>
               </div>
-              <label>Présentation<textarea rows={2} value={content.diagnostic.description}
-                onChange={(event) => change({ diagnostic: { ...content.diagnostic!, description: event.target.value } })} /></label>
-              <QuestionsEditor questions={content.diagnostic.questions} moduleRefs={moduleRefs}
-                onChange={(questions) => change({ diagnostic: { ...content.diagnostic!, questions } })} />
-            </>
-          ) : (
-            <button type="button" className="btn btn-outline btn-small" onClick={() => change({
-              diagnostic: { title: `Diagnostic ${version.levelCode}`, description: '', questions: [] },
-            })}><Plus size={15} aria-hidden="true" /> Ajouter un diagnostic</button>
+              <div className="ed-hero-foot">
+                <dl className="ed-stats">
+                  <div><dt>Modules</dt><dd>{content.modules.length}</dd></div>
+                  <div><dt>Activités</dt><dd>{activities.length}</dd></div>
+                  <div><dt>Durée</dt><dd>{formatMinutes(minutes)}</dd></div>
+                  <div><dt>Médias</dt><dd>{supports}</dd></div>
+                </dl>
+                {composition.length > 0 && (
+                  <div className="ed-composition">
+                    <div className="ed-composition-bar" role="img"
+                      aria-label={`Répartition des activités : ${composition.map((item) => `${item.count} ${plurals[item.kind]}`).join(', ')}`}>
+                      {composition.map((item) => <span key={item.kind} className={`is-${item.kind}`} style={{ flexGrow: item.count }} />)}
+                    </div>
+                    <ul className="ed-composition-legend" aria-hidden="true">
+                      {composition.map((item) => <li key={item.kind} className={`is-${item.kind}`}><i />{kinds[item.kind].label}<b>{item.count}</b></li>)}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            </section>
+            {activities.length > 0 && (
+              <section className="kit-card ed-preview-card" aria-label="Aperçu élève">
+                <span className="ed-preview-icon" aria-hidden="true"><Eye size={20} /></span>
+                <label className="field">Activité à prévisualiser<select value={previewId} onChange={(event) => setPreviewId(event.target.value)}>
+                  {content.modules.map((module, index) => module.activities.length > 0 && (
+                    <optgroup key={index} label={`Module ${index + 1} · ${module.title || module.id}`}>
+                      {module.activities.map((activity) => <option key={activity.id} value={activity.id}>{activity.title || activity.id}</option>)}
+                    </optgroup>
+                  ))}
+                </select></label>
+                <button type="button" className="btn btn-soft"
+                  onClick={() => setPreview(activities.find((activity) => activity.id === previewId) ?? activities[0])}>
+                  <Eye size={17} aria-hidden="true" /> Ouvrir l’aperçu élève</button>
+              </section>
+            )}
+          </div>
+          <PublicationCard version={version} checks={checks} dirty={dirty} describe={describe} onIssue={goTo}>
+            {readOnly && <Callout tone="info">Cette version est figée : contenus, corrigés et versions des fichiers ne changent plus. Créez un brouillon à partir d’elle pour la faire évoluer.</Callout>}
+          </PublicationCard>
+        </div>
+
+        <Tabs label="Parties de la version" idPrefix="version" value={tab} onChange={(value) => setTab(value as Tab)} tabs={tabs} />
+        <TabPanel id={tab} idPrefix="version">
+          {tab === 'settings' && <SettingsEditor settings={content.settings} onChange={(settings) => change({ settings })} />}
+          {tab === 'modules' && (
+            <div className="ed-modules">
+              <Plan content={content} selection={{ module: moduleIndex, activity: activityIndex }} onSelect={select} issues={issues} readOnly={readOnly}
+                locked={locked} onAddModule={addModule} open={planOpen} onToggle={() => setPlanOpen(!planOpen)} />
+              <div className="ed-stage" ref={stage}>
+                {!currentModule ? (
+                  <div className="ed-empty-card">
+                    <EmptyState icon={<Layers size={26} />} title="Aucun module" description="Ajoutez un premier module pour structurer le parcours."
+                      action={readOnly ? undefined : <button type="button" className="btn btn-primary" onClick={addModule} disabled={locked}><Plus size={16} aria-hidden="true" /> Ajouter un module</button>} />
+                  </div>
+                ) : currentActivity && activityIndex !== null ? (
+                  <ActivityEditor key={`${moduleIndex}-${activityIndex}`} activity={currentActivity} path={`modules[${moduleIndex}].activities[${activityIndex}]`}
+                    moduleLabel={`Module ${moduleIndex + 1} · ${currentModule.title || currentModule.id}`} index={activityIndex} count={currentModule.activities.length}
+                    onChange={(value) => change({ modules: replaceAt(content.modules, moduleIndex, { ...currentModule, activities: replaceAt(currentModule.activities, activityIndex, value) }) })}
+                    onMove={(offset) => {
+                      change({ modules: replaceAt(content.modules, moduleIndex, { ...currentModule, activities: move(currentModule.activities, activityIndex, offset) }) });
+                      setSelection({ module: moduleIndex, activity: Math.max(0, Math.min(currentModule.activities.length - 1, activityIndex + offset)) });
+                    }}
+                    onRemove={() => {
+                      change({ modules: replaceAt(content.modules, moduleIndex, { ...currentModule, activities: currentModule.activities.filter((_, position) => position !== activityIndex) }) });
+                      setSelection({ module: moduleIndex, activity: null });
+                    }} />
+                ) : (
+                  <ModuleEditor key={moduleIndex} module={currentModule} modules={content.modules} index={moduleIndex} path={`modules[${moduleIndex}]`}
+                    onChange={(value) => change({ modules: replaceAt(content.modules, moduleIndex, value) })}
+                    onMove={(offset) => {
+                      change({ modules: move(content.modules, moduleIndex, offset) });
+                      setSelection({ module: Math.max(0, Math.min(content.modules.length - 1, moduleIndex + offset)), activity: null });
+                    }}
+                    onRemove={() => {
+                      change({ modules: content.modules.filter((_, position) => position !== moduleIndex) });
+                      setSelection({ module: Math.max(0, moduleIndex - 1), activity: null });
+                    }}
+                    onOpenActivity={(position) => select(moduleIndex, position)} onAddActivity={(kind) => addActivity(moduleIndex, kind)} />
+                )}
+              </div>
+            </div>
           )}
-        </Section>
+          {tab === 'diagnostic' && <DiagnosticEditor diagnostic={content.diagnostic} modules={content.modules} levelCode={version.levelCode}
+            onChange={(diagnostic) => change({ diagnostic })} />}
+          {tab === 'assessments' && <AssessmentsEditor assessments={content.assessments} kind={assessmentKind} onKind={setAssessmentKind} onChange={setAssessment} />}
+        </TabPanel>
 
-        <Section id="catalogue-midterm" title="Bilan intermédiaire">
-          <AssessmentEditor kind="midterm" assessment={midterm} assets={assets} token={token} onChange={(value) => setAssessment('midterm', value)} />
-        </Section>
-        <Section id="catalogue-final" title="Examen blanc">
-          <AssessmentEditor kind="final" assessment={final} assets={assets} token={token} onChange={(value) => setAssessment('final', value)} />
-        </Section>
-        </fieldset>
-      </div>
+        <div className={`ed-actionbar is-${saveState.tone}`} role="region" aria-label="Enregistrement et publication">
+          <div className="ed-savestate" role="status">
+            <span className="ed-savestate-dot" aria-hidden="true" />
+            <span><strong><span className="ed-hide-sm">{saveState.title}</span><span className="ed-show-sm">{saveState.short}</span></strong><small>{saveState.note}</small></span>
+          </div>
+          <div className="ed-actionbar-buttons">
+            {version.status === 'draft' && (
+              <>
+                <button type="button" className="btn btn-secondary" onClick={() => void save()} disabled={busy !== '' || !dirty}>
+                  <Save size={17} aria-hidden="true" /> {busy === 'save' ? 'Enregistrement…' : 'Enregistrer'}
+                </button>
+                <button type="button" className="btn btn-primary" onClick={() => setConfirm('publish')} disabled={busy !== ''}>
+                  <Send size={17} aria-hidden="true" /> {busy === 'publish' ? 'Publication…' : 'Publier'}
+                </button>
+              </>
+            )}
+            {version.status === 'published' && (
+              <button type="button" className="btn btn-ghost" onClick={() => setConfirm('retire')} disabled={busy !== ''}>
+                <Archive size={17} aria-hidden="true" /> <span className="ed-hide-sm">Retirer des attributions</span><span className="ed-show-sm">Retirer</span>
+              </button>
+            )}
+            {readOnly && (
+              <button type="button" className="btn btn-primary" onClick={() => void copy()} disabled={busy !== ''} aria-label="Nouveau brouillon à partir de cette version">
+                <CopyPlus size={17} aria-hidden="true" /> Nouveau brouillon
+              </button>
+            )}
+          </div>
+        </div>
 
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      {error && <p className="inline-message warning" role="alert">{error}</p>}
-      <div className="editor-actions">
-        {!readOnly && (
-          <>
-            <button type="button" className="btn btn-outline" onClick={() => void save()} disabled={busy !== ''}>
-              <Save size={17} aria-hidden="true" /> {busy === 'save' ? 'Enregistrement…' : dirty ? 'Enregistrer le brouillon' : 'Enregistré'}
-            </button>
-            <button type="button" className="btn btn-primary" onClick={() => void publish()} disabled={busy !== ''}>
-              <Send size={17} aria-hidden="true" /> {busy === 'publish' ? 'Publication…' : 'Publier cette version'}
-            </button>
-          </>
+        {confirm === 'publish' && (
+          <ConfirmDialog title={`Publier la version ${version.number} ?`} confirm="Publier" onConfirm={() => void publish()} onClose={() => setConfirm(null)}>
+            <p>Elle sera proposée aux nouvelles attributions du niveau {version.levelCode}. Ses contenus, corrigés et fichiers seront ensuite figés.</p>
+            {dirty && <p>Vos modifications seront d’abord enregistrées.</p>}
+            {checks && !checks.publishable && !dirty && <Callout tone="warning">{checks.issues.length} point{checks.issues.length > 1 ? 's restent' : ' reste'} à compléter : la publication sera refusée.</Callout>}
+          </ConfirmDialog>
         )}
-        {version.status === 'published' && (
-          <button type="button" className="btn btn-outline" onClick={() => void retire()} disabled={busy !== ''}>Retirer des attributions</button>
+        {confirm === 'retire' && (
+          <ConfirmDialog title="Retirer cette version ?" confirm="Retirer" tone="danger" onConfirm={() => void retire()} onClose={() => setConfirm(null)}>
+            <p>Elle ne sera plus proposée aux nouvelles attributions. Les élèves inscrits gardent leur version.</p>
+          </ConfirmDialog>
         )}
-        {readOnly && (
-          <button type="button" className="btn btn-primary" onClick={() => void copy()} disabled={busy !== ''}>
-            <Plus size={17} aria-hidden="true" /> Nouveau brouillon à partir de cette version
-          </button>
-        )}
+        {preview && <ActivityPreview activities={activities} initial={preview} token={token} onClose={() => setPreview(null)} />}
       </div>
-      {preview && <ActivityInspector activity={preview} token={token} onClose={() => setPreview(null)} />}
-    </div>
+    </EditorContext.Provider>
   );
 }
 
-function LevelInspector({ level, levels, token, onClose, onDone }: {
+function LevelDrawer({ level, levels, token, onClose, onDone }: {
   level: CatalogueLevel; levels: CatalogueLevel[]; token: string; onClose: () => void; onDone: (levels: CatalogueLevel[]) => void;
 }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const formId = useId();
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -753,30 +682,33 @@ function LevelInspector({ level, levels, token, onClose, onDone }: {
   }
 
   return (
-    <Inspector title={`Modifier le niveau ${level.code}`} onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
+    <Drawer title={`Modifier le niveau ${level.code}`} description="Titre, présentation, ordre dans le catalogue et niveau prérequis." onClose={onClose}
+      footer={<div className="ed-drawer-actions">
+        <button type="button" className="btn btn-ghost" onClick={onClose}>Annuler</button>
+        <button type="submit" form={formId} className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
+      </div>}>
+      <form id={formId} className="ed-fields" onSubmit={submit}>
+        <div className="ed-drawer-hero"><span className="ed-code-tile is-lg" aria-hidden="true">{level.code}</span><p>Les versions déjà publiées ne changent pas ; ces informations s’affichent dans le catalogue.</p></div>
         <label>Titre<input name="title" required maxLength={120} defaultValue={level.title} /></label>
-        <label>Description<textarea name="description" rows={3} maxLength={2000} defaultValue={level.description ?? ''} /></label>
-        <div className="pilot-form-grid">
+        <label>Description<textarea name="description" rows={4} maxLength={2000} defaultValue={level.description ?? ''} /></label>
+        <div className="ed-grid-2">
           <label>Position<input name="position" type="number" min={1} max={50} defaultValue={level.position ?? ''} /></label>
           <label>Niveau prérequis<select name="prerequisite" defaultValue={level.prerequisiteLevelId ?? ''}>
             <option value="">Aucun</option>
             {levels.filter((item) => item.id !== level.id).map((item) => <option key={item.id} value={item.id}>{item.code} · {item.title}</option>)}
           </select></label>
         </div>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>
-          <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
-        </div>
+        {error && <Callout tone="warning"><p role="alert">{error}</p></Callout>}
       </form>
-    </Inspector>
+    </Drawer>
   );
 }
 
-function CreateLevelInspector({ token, onClose, onCreate }: { token: string; onClose: () => void; onCreate: (code: string) => void }) {
+function CreateLevelDrawer({ token, onClose, onCreate }: { token: string; onClose: () => void; onCreate: (code: string) => void }) {
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const [code, setCode] = useState('');
+  const formId = useId();
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -797,27 +729,93 @@ function CreateLevelInspector({ token, onClose, onCreate }: { token: string; onC
   }
 
   return (
-    <Inspector title="Créer un niveau" onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        <label>Code CECRL<input name="code" required pattern="[ABCabc][12]" placeholder="B2" maxLength={2} /></label>
+    <Drawer title="Créer un niveau" description="Un niveau du CECRL, puis son parcours en versions successives." onClose={onClose}
+      footer={<div className="ed-drawer-actions">
+        <button type="button" className="btn btn-ghost" onClick={onClose}>Annuler</button>
+        <button type="submit" form={formId} className="btn btn-primary" disabled={busy}>{busy ? 'Création…' : 'Créer le niveau'}</button>
+      </div>}>
+      <form id={formId} className="ed-fields" onSubmit={submit}>
+        <div className="ed-drawer-hero"><span className="ed-code-tile is-lg" aria-hidden="true">{code.toUpperCase() || '··'}</span><p>Choisissez le code CECRL (A1 à C2) et un titre clair pour les élèves.</p></div>
+        <label>Code CECRL<input name="code" required pattern="[ABCabc][12]" placeholder="B2" maxLength={2} value={code} onChange={(event) => setCode(event.target.value)} /></label>
         <label>Titre<input name="title" required maxLength={120} placeholder="Allemand B2" /></label>
-        <label>Description<textarea name="description" rows={3} maxLength={2000} /></label>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>
-          <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Création…' : 'Créer le niveau'}</button>
-        </div>
+        <label>Description<textarea name="description" rows={4} maxLength={2000} /></label>
+        {error && <Callout tone="warning"><p role="alert">{error}</p></Callout>}
       </form>
-    </Inspector>
+    </Drawer>
+  );
+}
+
+const versionIcon = { draft: PenLine, published: CheckCircle2, retired: Archive };
+
+function versionMeta(item: VersionSummary) {
+  if (item.status === 'published') return item.publishedAt ? `Publiée le ${dateFormat.format(new Date(item.publishedAt))}` : 'Publiée';
+  if (item.status === 'retired') return item.retiredAt ? `Retirée le ${dateFormat.format(new Date(item.retiredAt))}` : 'Retirée';
+  return item.updatedAt ? `Brouillon modifié le ${dateFormat.format(new Date(item.updatedAt))}` : 'Brouillon';
+}
+
+/** Carte d'un niveau : identité, prérequis, version proposée et chronologie des versions. */
+function LevelCard({ level, index, count, busy, onMove, onEdit, onDraft }: {
+  level: CatalogueLevel; index: number; count: number; busy: boolean; onMove: (offset: number) => void; onEdit: () => void;
+  onDraft: (fromVersionId: string | null) => void;
+}) {
+  const drafted = level.versions.find((item) => item.status === 'draft');
+  const published = level.versions.find((item) => item.status === 'published');
+  const titleId = `level-${level.id}`;
+  return (
+    <article className="kit-card ed-level" aria-labelledby={titleId}>
+      <header className="ed-level-head">
+        <span className="ed-code-tile" aria-hidden="true">{level.code}</span>
+        <div className="ed-level-title">
+          <h3 id={titleId}>{level.title}</h3>
+          <p>{level.description || 'Sans description'}</p>
+        </div>
+        <div className="ed-tools">
+          <IconAction icon={ArrowUp} label={`Monter ${level.code}`} disabled={busy || index === 0} onClick={() => onMove(-1)} />
+          <IconAction icon={ArrowDown} label={`Descendre ${level.code}`} disabled={busy || index === count - 1} onClick={() => onMove(1)} />
+          <IconAction icon={Pencil} label={`Modifier le niveau ${level.code}`} onClick={onEdit} />
+        </div>
+      </header>
+      <dl className="ed-level-facts">
+        <div><dt>Prérequis</dt><dd>{level.prerequisiteLevelCode ?? 'Aucun'}</dd></div>
+        <div><dt>Proposée</dt><dd>{published ? `Version ${published.number}` : 'Aucune'}</dd></div>
+        <div><dt>Position</dt><dd>{level.position ?? '—'}</dd></div>
+      </dl>
+      <section className="ed-level-versions" aria-label={`Versions de ${level.code}`}>
+        {level.versions.length === 0 ? <p className="ed-muted">Aucune version : créez le parcours de ce niveau.</p> : (
+          <Timeline items={level.versions.map((item) => {
+            const Icon = versionIcon[item.status];
+            return {
+              id: item.id,
+              tone: item.status === 'published' ? 'success' : item.status === 'draft' ? 'warning' : undefined,
+              icon: <Icon size={14} />,
+              title: (
+                <span className="ed-version-line">
+                  <Link className="ed-version-link" to={`/espace/catalogue/versions/${item.id}`} aria-label={`Ouvrir ${level.code} version ${item.number}`}>
+                    Version {item.number}<ChevronRight size={15} aria-hidden="true" /></Link>
+                  <Badge tone={statusLabel[item.status].tone}>{statusLabel[item.status].label}</Badge>
+                </span>
+              ),
+              meta: versionMeta(item),
+            };
+          })} />
+        )}
+      </section>
+      <footer className="ed-level-foot">
+        {drafted
+          ? <Link className="btn btn-primary btn-block" to={`/espace/catalogue/versions/${drafted.id}`}><PenLine size={16} aria-hidden="true" /> Reprendre le brouillon</Link>
+          : <button type="button" className="btn btn-secondary btn-block" disabled={busy} onClick={() => onDraft(published?.id ?? null)}>
+              <Plus size={16} aria-hidden="true" /> {published ? 'Nouvelle version' : 'Créer le parcours'}</button>}
+      </footer>
+    </article>
   );
 }
 
 /** Niveaux, ordre, prérequis et versions de parcours (DEV-047, DEV-057, DEV-058). */
 function LevelsView({ token }: { token: string }) {
   const navigate = useNavigate();
+  const toast = useToast();
   const [levels, setLevels] = useState<CatalogueLevel[] | null>(null);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
   const [refresh, setRefresh] = useState(0);
   const [levelAction, setLevelAction] = useState<'create' | CatalogueLevel | null>(null);
   const [busy, setBusy] = useState(false);
@@ -833,14 +831,13 @@ function LevelsView({ token }: { token: string }) {
 
   async function draft(level: CatalogueLevel, fromVersionId: string | null) {
     setBusy(true);
-    setError('');
     try {
       const created = await requestApi<VersionDoc>(`/catalogue/levels/${encodeURIComponent(level.id)}/versions`, token, {
         method: 'POST', body: { fromVersionId },
       });
       navigate(`/espace/catalogue/versions/${created.id}`);
     } catch (failure) {
-      setError(getError(failure));
+      toast(getError(failure), 'warning');
       setBusy(false);
     }
   }
@@ -850,7 +847,6 @@ function LevelsView({ token }: { token: string }) {
     if (!levels) return;
     const ordered = move(levels, index, offset);
     setBusy(true);
-    setError('');
     try {
       let latest = levels;
       for (const [position, level] of ordered.entries()) {
@@ -862,72 +858,59 @@ function LevelsView({ token }: { token: string }) {
       }
       setLevels(latest);
     } catch (failure) {
-      setError(getError(failure));
+      toast(getError(failure), 'warning');
     } finally {
       setBusy(false);
     }
   }
 
+  const all = levels ?? [];
+  const publishedCount = all.filter((level) => level.versions.some((item) => item.status === 'published')).length;
+  const draftCount = all.filter((level) => level.versions.some((item) => item.status === 'draft')).length;
+
   return (
-    <section className="panel stack catalogue-workspace" aria-label="Niveaux du catalogue">
-      <div className="staff-panel-actions">
+    <div className="ed-catalogue lc-enter">
+      <div className="ed-catalogue-bar">
+        <div className="ed-catalogue-stats">
+          <StatCard label="Niveaux" value={levels ? all.length : '—'} icon={<Library size={20} />} />
+          <StatCard label="Parcours publiés" value={levels ? publishedCount : '—'} icon={<CheckCircle2 size={20} />} />
+          <StatCard label="Brouillons en cours" value={levels ? draftCount : '—'} icon={<PenLine size={20} />} />
+        </div>
         <button type="button" className="btn btn-primary" onClick={() => setLevelAction('create')}><Plus size={17} aria-hidden="true" /> Nouveau niveau</button>
       </div>
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      {error && <p className="inline-message warning" role="alert">{error}</p>}
-      {levels === null ? (!error && <p role="status">Chargement du catalogue…</p>) : levels.length === 0 ? <EmptyState title="Aucun niveau dans le catalogue" /> : (
-        <ol className="catalogue-levels">
-          {levels.map((level, index) => {
-            const drafted = level.versions.find((item) => item.status === 'draft');
-            const published = level.versions.find((item) => item.status === 'published');
-            return (
-              <li key={level.id} className="catalogue-level">
-                <div className="catalogue-level-head">
-                  <div className="catalogue-level-title">
-                    <span className="catalogue-level-mark" aria-hidden="true">{level.code}</span>
-                    <div>
-                      <h3>{level.title}</h3>
-                      <p className="muted"><span className="visually-hidden">Niveau {level.code} · </span>{level.prerequisiteLevelCode ? `Prérequis ${level.prerequisiteLevelCode}` : 'Sans prérequis'}
-                        {' · '}{published ? `version ${published.number} proposée aux attributions` : 'aucune version publiée'}</p>
-                    </div>
-                  </div>
-                  <span className="accounts-actions">
-                    <button type="button" className="icon-btn" disabled={busy || index === 0} onClick={() => void reorder(index, -1)} aria-label={`Monter ${level.code}`}><ArrowUp size={16} /></button>
-                    <button type="button" className="icon-btn" disabled={busy || index === levels.length - 1} onClick={() => void reorder(index, 1)} aria-label={`Descendre ${level.code}`}><ArrowDown size={16} /></button>
-                    <button type="button" className="btn btn-outline" onClick={() => setLevelAction(level)} aria-label={`Modifier le niveau ${level.code}`}>Modifier</button>
-                    {drafted
-                      ? <Link className="btn btn-primary" to={`/espace/catalogue/versions/${drafted.id}`}>Reprendre le brouillon</Link>
-                      : <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void draft(level, published?.id ?? null)}>
-                          {published ? 'Nouvelle version' : 'Créer le parcours'}</button>}
-                  </span>
-                </div>
-                {level.versions.length > 0 && (
-                  <ul className="catalogue-versions">
-                    {level.versions.map((item) => (
-                      <li key={item.id}>
-                        <Link to={`/espace/catalogue/versions/${item.id}`} aria-label={`Ouvrir ${level.code} version ${item.number}`}>Version {item.number}</Link>
-                        <Badge tone={statusLabel[item.status].tone}>{statusLabel[item.status].label}</Badge>
-                        <span className="muted">{item.publishedAt ? `publiée le ${dateFormat.format(new Date(item.publishedAt))}` : item.updatedAt ? `modifiée le ${dateFormat.format(new Date(item.updatedAt))}` : ''}</span>
-                      </li>
-                    ))}
-                  </ul>
-                )}
-              </li>
-            );
-          })}
+      {error && !levels ? (
+        <div className="ed-load-error">
+          <Callout tone="warning" title="Le catalogue est indisponible"><p role="alert">{error}</p></Callout>
+          <button type="button" className="btn btn-secondary" onClick={() => setRefresh((value) => value + 1)}><RefreshCw size={16} aria-hidden="true" /> Réessayer</button>
+        </div>
+      ) : levels === null ? (
+        <div className="ed-level-grid">{Array.from({ length: 3 }, (_, index) => <SkeletonCard key={index} lines={5} label="Chargement du catalogue…" />)}</div>
+      ) : levels.length === 0 ? (
+        <div className="ed-empty-card">
+          <EmptyState icon={<Library size={26} />} title="Aucun niveau dans le catalogue" description="Créez un niveau, puis préparez son parcours."
+            action={<button type="button" className="btn btn-primary" onClick={() => setLevelAction('create')}><Plus size={16} aria-hidden="true" /> Créer un premier niveau</button>} />
+        </div>
+      ) : (
+        <ol className="ed-level-grid lc-stagger">
+          {levels.map((level, index) => (
+            <li key={level.id}>
+              <LevelCard level={level} index={index} count={levels.length} busy={busy} onMove={(offset) => void reorder(index, offset)}
+                onEdit={() => setLevelAction(level)} onDraft={(from) => void draft(level, from)} />
+            </li>
+          ))}
         </ol>
       )}
-      {levelAction && levelAction !== 'create' && levels && <LevelInspector level={levelAction} levels={levels} token={token} onClose={() => setLevelAction(null)} onDone={(updated) => {
+      {levelAction && levelAction !== 'create' && levels && <LevelDrawer level={levelAction} levels={levels} token={token} onClose={() => setLevelAction(null)} onDone={(updated) => {
         setLevelAction((current) => current === levelAction ? null : current);
         setLevels(updated);
-        setNotice(`Niveau ${levelAction.code} enregistré.`);
+        toast(`Niveau ${levelAction.code} enregistré.`);
       }} />}
-      {levelAction === 'create' && <CreateLevelInspector token={token} onClose={() => setLevelAction(null)} onCreate={(code) => {
+      {levelAction === 'create' && <CreateLevelDrawer token={token} onClose={() => setLevelAction(null)} onCreate={(code) => {
         setLevelAction((current) => current === 'create' ? null : current);
-        setNotice(`Le niveau ${code} est créé : préparez maintenant son parcours.`);
+        toast(`Le niveau ${code} est créé : préparez maintenant son parcours.`);
         setRefresh((value) => value + 1);
       }} />}
-    </section>
+    </div>
   );
 }
 

@@ -1,7 +1,7 @@
-import { lazy, Suspense, useEffect, useState } from 'react';
+import { lazy, Suspense, useEffect, useId, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Activity, BookOpen, CalendarDays, ChartNoAxesCombined, KeyRound, LayoutGrid, LockKeyhole, MessageSquare, ShieldCheck, Users } from 'lucide-react';
+import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Headphones, KeyRound, LayoutGrid, LockKeyhole, MailCheck, MessageSquare, ShieldCheck, Sparkles, Users } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { Badge, PageHeading } from '../../components/ui';
 import { apiBase, authLinkParams, isApiMode } from '../../app/config';
@@ -28,18 +28,61 @@ function linkError(): string {
 const LearnerPilot = lazy(() => import('../pilot/LearnerPilot').then((module) => ({ default: module.LearnerPilot })));
 const StaffPilot = lazy(() => import('../pilot/StaffPilot').then((module) => ({ default: module.StaffPilot })));
 
+/** Écran d'accès en deux panneaux : présentation de l'application et formulaire (empilés sur mobile). */
 function AccessLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="access-page lc-access">
-      <div className="lc-access-layout">
-        <aside className="lc-access-visual">
-          <div className="lc-access-mark"><BookOpen size={32} strokeWidth={1.5} aria-hidden="true" /></div>
-          <div>
-            <p>LinguaCap</p>
-            <strong>Votre espace d’apprentissage de l’allemand</strong>
+    <div className="acc">
+      <aside className="acc-brand">
+        <Link to="/" className="acc-logo" aria-label="LinguaCap, page d’accueil"><img src="/favicon.svg" alt="" /><span>Lingua<b>Cap</b></span></Link>
+        <div className="acc-pitch">
+          <p className="acc-kicker">Allemand · niveaux A1 et A2</p>
+          <h2>Votre parcours d’allemand, séance après séance.</h2>
+          <ul>
+            <li><CalendarCheck2 size={18} aria-hidden="true" />Un planning adapté à votre rythme</li>
+            <li><Headphones size={18} aria-hidden="true" />Des leçons avec des voix natives et des exercices corrigés</li>
+            <li><MessageSquare size={18} aria-hidden="true" />Le suivi et les encouragements de votre professeur</li>
+          </ul>
+        </div>
+        <div className="acc-preview" aria-hidden="true">
+          <div className="acc-card acc-card-session">
+            <span className="acc-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" /><circle cx="18" cy="18" r="15" /></svg></span>
+            <div><small>Ma prochaine séance</small><strong>Au café</strong><em>45 min · aujourd’hui</em></div>
           </div>
-        </aside>
-        {children}
+          <div className="acc-card acc-card-word"><span className="acc-article">der</span><strong>Kaffee</strong><em>le café</em></div>
+          <div className="acc-card acc-card-score"><Sparkles size={16} /><strong>6 / 6</strong><em>Exercice réussi</em></div>
+        </div>
+      </aside>
+      <div className="acc-panel">{children}</div>
+    </div>
+  );
+}
+
+/** En-tête du formulaire d'accès : pictogramme, titre (h1) et phrase d'accompagnement. */
+function AccessHead({ icon, title, children }: { icon: ReactNode; title: string; children?: ReactNode }) {
+  return (
+    <header className="acc-head">
+      <span className="acc-head-icon">{icon}</span>
+      <h1>{title}</h1>
+      {children && <p>{children}</p>}
+    </header>
+  );
+}
+
+/** Champ de mot de passe avec bouton d'affichage (placé hors du libellé pour garder un nom accessible exact). */
+function PasswordField({ label, value, onChange, autoComplete, minLength }: {
+  label: string; value: string; onChange: (value: string) => void; autoComplete: string; minLength?: number;
+}) {
+  const id = useId();
+  const [visible, setVisible] = useState(false);
+  return (
+    <div className="field acc-password">
+      <label htmlFor={id}>{label}</label>
+      <div className="acc-password-box">
+        <input id={id} required type={visible ? 'text' : 'password'} minLength={minLength} autoComplete={autoComplete} value={value} onChange={(event) => onChange(event.target.value)} />
+        <button type="button" className="acc-reveal" onClick={() => setVisible(!visible)} aria-pressed={visible}
+          aria-label={visible ? 'Masquer le mot de passe' : 'Afficher le mot de passe'}>
+          {visible ? <EyeOff size={18} aria-hidden="true" /> : <Eye size={18} aria-hidden="true" />}
+        </button>
       </div>
     </div>
   );
@@ -97,33 +140,40 @@ export function SignInPage() {
 
   return (
     <AccessLayout>
-      <section className="access-card panel">
-        <span className="icon-tile"><LockKeyhole size={23} /></span>
-        <h1>{recovering ? 'Réinitialiser le mot de passe' : 'Se connecter à LinguaCap'}</h1>
+      <section className="acc-form">
         {!isApiMode ? (
-          <div className="stack">
-            <p className="muted">Explorez les trois espaces avec des comptes fictifs. Vos actions restent dans ce navigateur.</p>
-            <Link className="btn btn-primary" to="/eleve"><BookOpen size={17} /> Espace élève</Link>
-            <Link className="btn btn-outline" to="/professeur"><Users size={17} /> Espace professeur</Link>
-            <Link className="btn btn-outline" to="/administration"><ShieldCheck size={17} /> Administration</Link>
-            <Link className="text-link" to="/integration">Vérifier l’intégration API</Link>
-          </div>
+          <>
+            <AccessHead icon={<LayoutGrid size={22} />} title="Se connecter à LinguaCap">Explorez les trois espaces avec des comptes fictifs. Vos actions restent dans ce navigateur.</AccessHead>
+            <nav className="acc-demo" aria-label="Espaces de démonstration">
+              <Link to="/eleve"><span className="acc-demo-icon is-learner"><BookOpen size={19} /></span><span><strong>Espace élève</strong><small>Planning, séances et résultats</small></span><ArrowRight size={17} /></Link>
+              <Link to="/professeur"><span className="acc-demo-icon is-teacher"><Users size={19} /></span><span><strong>Espace professeur</strong><small>Suivi des élèves et corrections</small></span><ArrowRight size={17} /></Link>
+              <Link to="/administration"><span className="acc-demo-icon is-admin"><ShieldCheck size={19} /></span><span><strong>Administration</strong><small>Comptes, catalogue et indicateurs</small></span><ArrowRight size={17} /></Link>
+            </nav>
+            <Link className="text-link acc-foot" to="/integration">Vérifier l’intégration API</Link>
+          </>
         ) : !supabase ? (
-          <p className="inline-message warning" role="status">La configuration Auth de cet environnement est incomplète. Vérifiez-la depuis la page d’intégration.</p>
+          <>
+            <AccessHead icon={<LockKeyhole size={22} />} title="Se connecter à LinguaCap" />
+            <p className="inline-message warning" role="status">La configuration Auth de cet environnement est incomplète. Vérifiez-la depuis la page d’intégration.</p>
+          </>
         ) : recovering ? (
-          <RecoveryRequest email={email} setEmail={setEmail} back={() => setRecovering(false)} />
+          <>
+            <AccessHead icon={<KeyRound size={22} />} title="Réinitialiser le mot de passe">Indiquez votre adresse : nous vous enverrons un lien pour choisir un nouveau mot de passe.</AccessHead>
+            <RecoveryRequest email={email} setEmail={setEmail} back={() => setRecovering(false)} />
+          </>
         ) : (
-          <form className="stack" onSubmit={submit}>
-            {expired && <p className="inline-message warning" role="status">Votre session a expiré. Reconnectez-vous pour continuer.</p>}
-            <p className="muted">Connectez-vous avec l’adresse associée à votre invitation.</p>
-            <label className="field">Adresse e-mail<input required type="email" autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
-            <label className="field">Mot de passe<input required type="password" autoComplete="current-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-            {error && <p className="inline-message warning" role="alert">{error}</p>}
-            <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Connexion en cours…' : 'Se connecter'}</button>
-            <button className="text-link" type="button" onClick={() => { setError(''); setRecovering(true); }}>Mot de passe oublié</button>
-          </form>
+          <>
+            <AccessHead icon={<LockKeyhole size={22} />} title="Se connecter à LinguaCap">Connectez-vous avec l’adresse associée à votre invitation.</AccessHead>
+            <form className="acc-fields" onSubmit={submit}>
+              {expired && <p className="inline-message warning" role="status">Votre session a expiré. Reconnectez-vous pour continuer.</p>}
+              <label className="field">Adresse e-mail<input required type="email" autoComplete="email" placeholder="prenom.nom@exemple.fr" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
+              <PasswordField label="Mot de passe" autoComplete="current-password" value={password} onChange={setPassword} />
+              <button className="text-link acc-forgot" type="button" onClick={() => { setError(''); setRecovering(true); }}>Mot de passe oublié</button>
+              {error && <p className="inline-message warning" role="alert">{error}</p>}
+              <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={busy}>{busy ? 'Connexion en cours…' : 'Se connecter'}</button>
+            </form>
+          </>
         )}
-        {isApiMode && <Link className="text-link" to="/integration">État de l’intégration</Link>}
       </section>
     </AccessLayout>
   );
@@ -151,12 +201,25 @@ function RecoveryRequest({ email, setEmail, back }: { email: string; setEmail: (
   }
 
   return (
-    <form className="stack" onSubmit={submit}>
-      <label className="field">Adresse e-mail<input type="email" required autoComplete="email" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Envoi en cours…' : 'Demander un lien'}</button>
-      <button className="text-link" type="button" onClick={back}>Revenir à la connexion</button>
+    <form className="acc-fields" onSubmit={submit}>
+      <label className="field">Adresse e-mail<input type="email" required autoComplete="email" placeholder="prenom.nom@exemple.fr" value={email} onChange={(event) => setEmail(event.target.value)} /></label>
+      {notice && <p className="acc-notice" role="status"><MailCheck size={18} aria-hidden="true" />{notice}</p>}
+      <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={busy}>{busy ? 'Envoi en cours…' : 'Demander un lien'}</button>
+      <button className="text-link acc-back" type="button" onClick={back}><ArrowLeft size={16} aria-hidden="true" />Revenir à la connexion</button>
     </form>
+  );
+}
+
+/** Indications en direct sur le nouveau mot de passe (longueur, correspondance). */
+function PasswordHints({ password, confirmation }: { password: string; confirmation: string }) {
+  const rules = [
+    { ok: password.length >= 8, text: 'Au moins 8 caractères' },
+    { ok: password.length > 0 && password === confirmation, text: 'Les deux saisies correspondent' },
+  ];
+  return (
+    <ul className="acc-hints" aria-label="Règles du mot de passe">
+      {rules.map(({ ok, text }) => <li key={text} className={ok ? 'is-ok' : undefined}><span aria-hidden="true" />{text}<span className="sr-only">{ok ? ' : respecté' : ' : à compléter'}</span></li>)}
+    </ul>
   );
 }
 
@@ -191,30 +254,36 @@ export function SetPasswordPage({ invitation = false }: { invitation?: boolean }
 
   return (
     <AccessLayout>
-      <section className="access-card panel">
-        <span className="icon-tile"><KeyRound size={23} /></span>
-        <h1>{invitation ? 'Activer mon compte' : 'Choisir un nouveau mot de passe'}</h1>
+      <section className="acc-form">
+        <AccessHead icon={<KeyRound size={22} />} title={invitation ? 'Activer mon compte' : 'Choisir un nouveau mot de passe'}>
+          {invitation ? 'Bienvenue ! Choisissez le mot de passe qui protégera votre espace.' : 'Choisissez un mot de passe d’au moins 8 caractères.'}
+        </AccessHead>
         {invalidLink && !session ? (
-          <div className="stack">
+          <div className="acc-fields">
             <p className="inline-message warning" role="alert">{invalidLink}</p>
             {invitation
               ? <p className="muted">Demandez à la personne qui vous a invité de renvoyer l’invitation. Si vous aviez déjà choisi un mot de passe, connectez-vous directement.</p>
-              : <Link className="btn btn-primary" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
+              : <Link className="btn btn-primary btn-lg btn-block" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
           </div>
-        ) : loading ? <p role="status">Vérification du lien…</p> : session ? (
-          <form className="stack" onSubmit={submit}>
-            <label className="field">Nouveau mot de passe<input type="password" required minLength={8} autoComplete="new-password" value={password} onChange={(event) => setPassword(event.target.value)} /></label>
-            <label className="field">Confirmer le mot de passe<input type="password" required minLength={8} autoComplete="new-password" value={confirmation} onChange={(event) => setConfirmation(event.target.value)} /></label>
+        ) : loading ? (
+          <div className="acc-fields" role="status" aria-label="Vérification du lien…">
+            <span className="kit-skeleton" style={{ height: 44 }} /><span className="kit-skeleton" style={{ height: 44 }} /><span className="kit-skeleton" style={{ height: 48 }} />
+          </div>
+        ) : session ? (
+          <form className="acc-fields" onSubmit={submit}>
+            <PasswordField label="Nouveau mot de passe" minLength={8} autoComplete="new-password" value={password} onChange={setPassword} />
+            <PasswordField label="Confirmer le mot de passe" minLength={8} autoComplete="new-password" value={confirmation} onChange={setConfirmation} />
+            <PasswordHints password={password} confirmation={confirmation} />
             {error && <p className="inline-message warning" role="alert">{error}</p>}
-            <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
+            <button className="btn btn-primary btn-lg btn-block" type="submit" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
           </form>
         ) : (
-          <div className="stack">
+          <div className="acc-fields">
             <p className="muted">Ouvrez un lien d’invitation ou de récupération valide pour continuer.</p>
-            {!invitation && <Link className="btn btn-outline" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
+            {!invitation && <Link className="btn btn-secondary btn-block" to="/connexion?recuperation=1">Demander un nouveau lien</Link>}
           </div>
         )}
-        <Link className="text-link" to="/connexion">Revenir à la connexion</Link>
+        <Link className="text-link acc-back acc-foot" to="/connexion"><ArrowLeft size={16} aria-hidden="true" />Revenir à la connexion</Link>
       </section>
     </AccessLayout>
   );
@@ -295,6 +364,7 @@ export function ConnectedPage() {
     try {
       const { error } = await supabase.auth.signOut({ scope: 'local' });
       if (error) setSignOutError('La déconnexion a échoué. Réessayez.');
+      else navigate('/', { replace: true });
     } catch {
       setSignOutError('La déconnexion a échoué. Réessayez.');
     } finally {

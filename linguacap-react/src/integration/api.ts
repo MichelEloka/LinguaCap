@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { createClient } from '@supabase/supabase-js';
 import { apiBase, isApiMode, supabaseKey, supabaseUrl } from '../app/config';
 
@@ -123,4 +124,15 @@ export async function fetchProfile(token: string): Promise<Profile> {
     };
   }
   throw new Error('Le profil renvoyé par Identités ne correspond pas au contrat attendu.');
+}
+
+/** Session Supabase en cours : chargement, puis connecté ou non. Sans Supabase (démonstration), jamais connecté. */
+export function useSignedIn() {
+  const [state, setState] = useState({ loading: Boolean(supabase), signedIn: false });
+  useEffect(() => {
+    if (!supabase) return;
+    const { data } = supabase.auth.onAuthStateChange((_event, session) => setState({ loading: false, signedIn: Boolean(session) }));
+    return () => data.subscription.unsubscribe();
+  }, []);
+  return state;
 }

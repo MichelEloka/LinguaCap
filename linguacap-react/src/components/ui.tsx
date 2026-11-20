@@ -1,6 +1,7 @@
 import { useEffect, useId, useRef } from 'react';
 import type { ReactNode } from 'react';
-import { X } from 'lucide-react';
+import { Inbox, X } from 'lucide-react';
+import { Drawer } from '../design/kit';
 
 export function PageHeading({ title, description, eyebrow, action }: {
   title: ReactNode;
@@ -9,7 +10,7 @@ export function PageHeading({ title, description, eyebrow, action }: {
   action?: ReactNode;
 }) {
   return (
-    <div className="page-heading">
+    <div className="page-heading lc-enter">
       <div>
         {eyebrow && <p className="eyebrow">{eyebrow}</p>}
         <h1>{title}</h1>
@@ -28,18 +29,25 @@ export function StatCard({ label, value, note, icon }: {
 }) {
   return (
     <article className="stat-card">
-      {icon && <span className="icon-tile" aria-hidden="true">{icon}</span>}
+      {icon && <span className="stat-icon" aria-hidden="true">{icon}</span>}
       <div><span className="stat-label">{label}</span><strong>{value}</strong>{note && <small>{note}</small>}</div>
     </article>
   );
 }
 
-export function Badge({ tone = 'neutral', children }: { tone?: 'blue' | 'green' | 'amber' | 'neutral' | 'violet'; children: ReactNode }) {
+export type BadgeTone = 'blue' | 'green' | 'amber' | 'neutral' | 'violet' | 'red';
+
+export function Badge({ tone = 'neutral', children }: { tone?: BadgeTone; children: ReactNode }) {
   return <span className={`badge badge-${tone}`}>{children}</span>;
 }
 
-export function EmptyState({ title, description, action }: { title: string; description?: string; action?: ReactNode }) {
-  return <div className="empty-state"><strong>{title}</strong>{description && <p>{description}</p>}{action}</div>;
+export function EmptyState({ title, description, action, icon }: { title: string; description?: string; action?: ReactNode; icon?: ReactNode }) {
+  return (
+    <div className="empty-state">
+      <span className="empty-icon" aria-hidden="true">{icon ?? <Inbox size={26} />}</span>
+      <strong>{title}</strong>{description && <p>{description}</p>}{action}
+    </div>
+  );
 }
 
 export function ProgressBar({ value, label = 'Progression' }: { value: number; label?: string }) {
@@ -49,7 +57,8 @@ export function ProgressBar({ value, label = 'Progression' }: { value: number; l
 
 interface OverlayProps { title: string; children: ReactNode; onClose: () => void }
 
-function Overlay({ title, children, onClose, inspector = false }: OverlayProps & { inspector?: boolean }) {
+/** Fenêtre centrée, réservée aux confirmations et choix courts. Les fiches et formulaires utilisent Inspector. */
+export function Dialog({ title, children, onClose }: OverlayProps) {
   const dialogRef = useRef<HTMLDialogElement>(null);
   const titleId = useId();
 
@@ -61,13 +70,9 @@ function Overlay({ title, children, onClose, inspector = false }: OverlayProps &
   }, []);
 
   return (
-    <dialog
-      className={inspector ? 'lc-dialog lc-inspector' : 'lc-dialog'}
-      aria-labelledby={titleId}
-      ref={dialogRef}
+    <dialog className="lc-dialog" aria-labelledby={titleId} ref={dialogRef}
       onCancel={(event) => { event.preventDefault(); onClose(); }}
-      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}
-    >
+      onClick={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <div className="dialog-body">
         <div className="panel-heading"><h2 id={titleId}>{title}</h2><button className="icon-button" type="button" onClick={onClose} aria-label="Fermer"><X size={20} /></button></div>
         {children}
@@ -76,10 +81,7 @@ function Overlay({ title, children, onClose, inspector = false }: OverlayProps &
   );
 }
 
-export function Dialog(props: OverlayProps) {
-  return <Overlay {...props} />;
-}
-
-export function Inspector(props: OverlayProps) {
-  return <Overlay {...props} inspector />;
+/** Panneau latéral pour une fiche, un formulaire ou un aperçu (bas de l'écran sur mobile). */
+export function Inspector({ title, children, onClose, wide }: OverlayProps & { wide?: boolean }) {
+  return <Drawer title={title} onClose={onClose} wide={wide}>{children}</Drawer>;
 }

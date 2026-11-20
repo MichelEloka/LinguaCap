@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { BookOpen, ChevronRight, Ellipsis, GraduationCap, LogOut, Menu, X } from 'lucide-react';
+import { ChevronsLeft, ChevronsRight, Ellipsis, LogOut, X } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Avatar } from '../../design/kit';
 import './workspace.css';
 
 export interface WorkspaceLink {
@@ -10,8 +11,17 @@ export interface WorkspaceLink {
   label: string;
   icon: LucideIcon;
   end?: boolean;
+  /** Libellé court pour la barre de navigation mobile. */
+  short?: string;
 }
 
+const COLLAPSED_KEY = 'linguacap.sidebar.collapsed';
+
+/**
+ * Cadre de l'application connectée : barre latérale repliable (bureau), barre supérieure avec le menu du compte,
+ * barre de navigation en bas de l'écran (mobile) et panneau « Plus » pour les sections suivantes.
+ * Le logo ramène à la page principale de l'espace ; la page vitrine n'est accessible qu'après déconnexion.
+ */
 export function WorkspaceFrame({ links, title, name, children, onSignOut, signingOut, demo }: {
   links: WorkspaceLink[];
   title: string;
@@ -22,78 +32,115 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
   demo?: boolean;
 }) {
   const { pathname } = useLocation();
-  const [menuAt, setMenuAt] = useState<string | null>(null);
-  const menuButton = useRef<HTMLButtonElement>(null);
+  const [moreAt, setMoreAt] = useState<string | null>(null);
+  const [collapsed, setCollapsed] = useState(() => localStorage.getItem(COLLAPSED_KEY) === '1');
+  const [menuOpen, setMenuOpen] = useState(false);
+  const moreButton = useRef<HTMLButtonElement>(null);
   const navigation = useRef<HTMLElement>(null);
-  const expanded = menuAt === pathname;
+  const menu = useRef<HTMLDivElement>(null);
+  const moreOpen = moreAt === pathname;
+  const home = links[0]?.path ?? '/espace';
   const active = links.find(({ path, end }) => pathname === path || (!end && pathname.startsWith(path + '/')));
-  const initials = name?.trim().split(/\s+/).slice(0, 2).map((part) => part[0]).join('').toUpperCase();
-  const overflow = links.length > 4;
+  const mobileCount = links.length > 5 ? 4 : links.length;
+  // Écrans hors de la navigation (séance, évaluation, diagnostic) : le fil d'Ariane les nomme quand même.
+  const screen = active?.label ?? (/\/seance\//.test(pathname) ? 'Séance' : /\/evaluation\//.test(pathname) ? 'Évaluation'
+    : /\/diagnostic/.test(pathname) ? 'Diagnostic' : undefined);
+
+  useEffect(() => { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); }, [collapsed]);
+  useEffect(() => { setMenuOpen(false); }, [pathname]);
 
   useEffect(() => {
-    if (!expanded) return;
-    const activeLink = navigation.current?.querySelector<HTMLAnchorElement>('[aria-current="page"]')
-      ?? navigation.current?.querySelector<HTMLAnchorElement>('nav a');
-    activeLink?.focus();
+    if (!moreOpen) return;
+    navigation.current?.querySelector<HTMLAnchorElement>('[aria-current="page"], nav a')?.focus();
     const dismiss = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        setMenuAt(null);
-        menuButton.current?.focus();
-      }
+      if (event.key === 'Escape') { setMoreAt(null); moreButton.current?.focus(); }
     };
     window.addEventListener('keydown', dismiss);
     return () => window.removeEventListener('keydown', dismiss);
-  }, [expanded]);
+  }, [moreOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const close = (event: MouseEvent | KeyboardEvent) => {
+      if (event instanceof KeyboardEvent ? event.key === 'Escape' : !menu.current?.contains(event.target as Node)) setMenuOpen(false);
+    };
+    window.addEventListener('mousedown', close);
+    window.addEventListener('keydown', close);
+    return () => { window.removeEventListener('mousedown', close); window.removeEventListener('keydown', close); };
+  }, [menuOpen]);
+
+  const account = demo ? (
+    <div className="ws-role-switch" aria-label="Changer d’espace de démonstration">
+      <Link to="/eleve">Élève</Link><Link to="/professeur">Professeur</Link><Link to="/administration">Admin</Link>
+    </div>
+  ) : name && (
+    <div className="ws-account">
+      <Avatar name={name} size={36} />
+      <div className="ws-account-text"><strong>{name}</strong><small>{title}</small></div>
+      {onSignOut && <button className="ws-icon-button" type="button" onClick={onSignOut} disabled={signingOut} title="Se déconnecter" aria-label="Se déconnecter">
+        <LogOut size={18} aria-hidden="true" /></button>}
+    </div>
+  );
 
   return (
-    <div className="lc-workspace">
-      {expanded && <button className="lc-nav-scrim" type="button" onClick={() => { setMenuAt(null); menuButton.current?.focus(); }} aria-label="Fermer le panneau de navigation" />}
-      <aside ref={navigation} className={`lc-sidebar${expanded ? ' is-open' : ''}`} id="workspace-navigation">
-        <Link to="/" className="lc-app-brand" aria-label="LinguaCap, accueil" onClick={() => setMenuAt(null)}>
-          <span className="lc-app-mark"><BookOpen size={21} aria-hidden="true" /></span>
-          <span>Lingua<span>Cap</span></span>
-        </Link>
-        <div className="lc-sidebar-context"><GraduationCap size={16} aria-hidden="true" /> {title}</div>
-        <nav className="lc-sidebar-nav" aria-label="Sections de l’application">
+    <div className={`ws${collapsed ? ' is-collapsed' : ''}`}>
+      {moreOpen && <button className="ws-scrim" type="button" onClick={() => { setMoreAt(null); moreButton.current?.focus(); }} aria-label="Fermer le panneau de navigation" />}
+      <aside ref={navigation} className={`ws-sidebar${moreOpen ? ' is-open' : ''}`} id="workspace-navigation">
+        <div className="ws-brand-row">
+          <Link to={home} className="ws-brand" aria-label="LinguaCap, page principale" onClick={() => setMoreAt(null)}>
+            <img src="/linguacap-logo.png" alt="" className="ws-logo" />
+            <img src="/favicon.svg" alt="" className="ws-logo-mark" />
+          </Link>
+          <button className="ws-icon-button ws-close" type="button" onClick={() => setMoreAt(null)} aria-label="Fermer le menu"><X size={20} aria-hidden="true" /></button>
+        </div>
+        <p className="ws-context">{title}</p>
+        <nav className="ws-nav" aria-label="Sections de l’application">
           {links.map(({ path, label, icon: Icon, end }) => (
-            <NavLink to={path} end={end} key={path} onClick={() => setMenuAt(null)}>
-              <Icon size={19} strokeWidth={1.75} aria-hidden="true" />
+            <NavLink to={path} end={end} key={path} onClick={() => setMoreAt(null)} title={collapsed ? label : undefined}>
+              <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
               <span>{label}</span>
-              <ChevronRight className="lc-nav-arrow" size={14} aria-hidden="true" />
             </NavLink>
           ))}
         </nav>
-        <div className="lc-sidebar-footer">
-          {demo ? <>
-            <span className="lc-sidebar-label">Changer d’espace</span>
-            <div className="lc-role-switch" onClick={() => setMenuAt(null)}>
-              <Link to="/eleve">Élève</Link><Link to="/professeur">Professeur</Link><Link to="/administration">Admin</Link>
-            </div>
-          </> : name && <div className="lc-account">
-            <span className="lc-avatar" aria-hidden="true">{initials || 'LC'}</span>
-            <div><strong>{name}</strong><small>{title}</small></div>
-            {onSignOut && <button className="lc-sign-out" type="button" onClick={onSignOut} disabled={signingOut} title="Se déconnecter" aria-label="Se déconnecter"><LogOut size={18} aria-hidden="true" /></button>}
-          </div>}
+        <div className="ws-sidebar-foot">
+          {account}
+          <button className="ws-collapse" type="button" onClick={() => setCollapsed(!collapsed)} aria-pressed={collapsed}
+            aria-label={collapsed ? 'Déplier la barre latérale' : 'Replier la barre latérale'}>
+            {collapsed ? <ChevronsRight size={18} aria-hidden="true" /> : <ChevronsLeft size={18} aria-hidden="true" />}
+            <span>Replier</span>
+          </button>
         </div>
       </aside>
-      <div className="lc-workspace-main">
-        <header className="lc-workspace-top">
-          <button ref={menuButton} className="lc-workspace-menu" type="button" aria-controls="workspace-navigation"
-            aria-label={expanded ? 'Fermer le menu' : 'Ouvrir le menu'} aria-expanded={expanded}
-            onClick={() => setMenuAt(expanded ? null : pathname)}>
-            {expanded ? <X size={22} aria-hidden="true" /> : <Menu size={22} aria-hidden="true" />}
-          </button>
-          <div className="lc-breadcrumb"><span>{title}</span>{active && <><ChevronRight size={14} aria-hidden="true" /><strong>{active.label}</strong></>}</div>
-          {demo ? <span className="lc-demo-chip"><i /> Démonstration</span> : name && <span className="lc-top-avatar" title={name} aria-hidden="true">{initials || 'LC'}</span>}
+
+      <div className="ws-main">
+        <header className="ws-top">
+          <Link to={home} className="ws-top-brand" aria-label="LinguaCap, page principale"><img src="/favicon.svg" alt="" /></Link>
+          <div className="ws-crumb"><span>{title}</span>{screen && <strong>{screen}</strong>}</div>
+          {demo ? <span className="ws-demo-chip"><i /> Démonstration</span> : name && (
+            <div className="ws-menu" ref={menu}>
+              <button type="button" className="ws-menu-button" aria-haspopup="menu" aria-expanded={menuOpen} onClick={() => setMenuOpen(!menuOpen)}
+                aria-label={`Compte de ${name}`}>
+                <Avatar name={name} size={34} />
+              </button>
+              {menuOpen && (
+                <div className="ws-menu-panel" role="menu">
+                  <div className="ws-menu-head"><Avatar name={name} size={40} /><div><strong>{name}</strong><small>{title}</small></div></div>
+                  {onSignOut && <button type="button" role="menuitem" onClick={onSignOut} disabled={signingOut}><LogOut size={17} aria-hidden="true" /> Se déconnecter</button>}
+                </div>
+              )}
+            </div>
+          )}
         </header>
-        <div className="lc-workspace-content">{children}</div>
-        <nav className="lc-mobile-nav" aria-label="Raccourcis mobiles">
-          {links.slice(0, overflow ? 3 : 4).map(({ path, label, icon: Icon, end }) => (
-            <NavLink to={path} end={end} key={path}><Icon size={19} strokeWidth={1.8} aria-hidden="true" /><span>{label}</span></NavLink>
+        <div className="ws-content" key={active?.path ?? pathname.split('/').slice(0, 3).join('/')}>{children}</div>
+        <nav className="ws-tabbar" aria-label="Raccourcis mobiles">
+          {links.slice(0, mobileCount).map(({ path, label, short, icon: Icon, end }) => (
+            <NavLink to={path} end={end} key={path}><Icon size={21} strokeWidth={1.8} aria-hidden="true" /><span>{short ?? label}</span></NavLink>
           ))}
-          {overflow && <button type="button" onClick={() => setMenuAt(expanded ? null : pathname)} aria-expanded={expanded} aria-controls="workspace-navigation">
-            <Ellipsis size={21} aria-hidden="true" /><span>Plus</span>
-          </button>}
+          {links.length > mobileCount && (
+            <button ref={moreButton} type="button" onClick={() => setMoreAt(moreOpen ? null : pathname)} aria-expanded={moreOpen} aria-controls="workspace-navigation">
+              <Ellipsis size={22} aria-hidden="true" /><span>Plus</span>
+            </button>
+          )}
         </nav>
       </div>
     </div>

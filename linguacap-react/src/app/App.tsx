@@ -2,6 +2,8 @@ import { lazy, Suspense, useEffect } from 'react';
 import type { ReactNode } from 'react';
 import { Link, Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { isApiMode } from './config';
+import { useSignedIn } from '../integration/api';
+import { ToastProvider } from '../design/kit';
 import { Header, Footer, workspaceLinks, workspaceNames } from '../components/Shell';
 import { WorkspaceFrame } from '../features/workspace/WorkspaceFrame';
 import { DemoProvider } from '../demo/context';
@@ -40,27 +42,42 @@ function Workspace({ role, children }: { role: Role; children: ReactNode }) {
   return (
     <WorkspaceFrame demo title={workspaceNames[role]}
       links={workspaceLinks[role].map(({ title, ...link }) => ({ ...link, label: title }))}>
-      <div className="lc-enter"><Suspense fallback={<p className="panel" role="status">Chargement de l’espace…</p>}>{children}</Suspense></div>
+      <Suspense fallback={<p className="panel" role="status">Chargement de l’espace…</p>}>{children}</Suspense>
     </WorkspaceFrame>
   );
 }
 
+/** La page vitrine est réservée aux visiteurs : une fois connecté, l'adresse d'accueil mène à l'espace. */
+function PublicHome() {
+  const { loading, signedIn } = useSignedIn();
+  if (!isApiMode) return <HomePage />;
+  if (loading) return null;
+  return signedIn ? <Navigate to="/espace" replace /> : <HomePage />;
+}
+
 function NotFound() {
-  return <div className="container workspace-body"><section className="panel stack"><h1>Page introuvable</h1><p>Cette adresse ne correspond à aucune page LinguaCap.</p><Link className="btn btn-primary" to="/">Revenir à l’accueil</Link></section></div>;
+  return (
+    <div className="container workspace-body not-found">
+      <section className="panel stack lc-enter"><p className="eyebrow">Erreur 404</p><h1>Page introuvable</h1>
+        <p className="muted">Cette adresse ne correspond à aucune page LinguaCap.</p><Link className="btn btn-primary" to="/">Revenir à l’accueil</Link></section>
+    </div>
+  );
 }
 
 function AppLayout() {
   const { pathname } = useLocation();
   const workspace = /^\/(espace|eleve|professeur|administration)(\/|$)/.test(pathname);
+  // Les écrans d'accès sont des écrans d'application : sans l'en-tête ni le pied de page de la vitrine.
+  const bare = workspace || /^\/(connexion|activer-compte|reinitialiser)(\/|$)/.test(pathname);
   return (
     <div className="app-shell">
       <NavigationEffects />
       <a className="skip-link" href="#main-content">Aller au contenu</a>
-      {!workspace && <Header />}
+      {!bare && <Header />}
       <main id="main-content" tabIndex={-1}>
         <Suspense fallback={<p className="container workspace-body" role="status">Chargement…</p>}>
           <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<PublicHome />} />
           <Route path="/connexion" element={<SignInPage />} />
           <Route path="/activer-compte" element={<SetPasswordPage invitation />} />
           <Route path="/reinitialiser" element={<SetPasswordPage />} />
@@ -73,11 +90,11 @@ function AppLayout() {
           </Routes>
         </Suspense>
       </main>
-      {!workspace && <Footer />}
+      {!bare && <Footer />}
     </div>
   );
 }
 
 export default function App() {
-  return isApiMode ? <AppLayout /> : <DemoProvider><AppLayout /></DemoProvider>;
+  return <ToastProvider>{isApiMode ? <AppLayout /> : <DemoProvider><AppLayout /></DemoProvider>}</ToastProvider>;
 }

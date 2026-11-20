@@ -5,12 +5,14 @@ interface StaffWorkspaceLink {
   path: string;
   label: string;
   icon: LucideIcon;
+  /** Libellé court de la barre de navigation mobile. */
+  short?: string;
 }
 
 export function staffWorkspaceLinks(profile: Profile): StaffWorkspaceLink[] {
   const admin = profile.role === 'admin';
   const educator = admin || profile.role === 'teacher';
-  const items: StaffWorkspaceLink[] = [{ path: '/espace', label: 'Vue d’ensemble', icon: LayoutGrid }];
+  const items: StaffWorkspaceLink[] = [{ path: '/espace', label: 'Vue d’ensemble', short: 'Accueil', icon: LayoutGrid }];
 
   if (educator) {
     items.push(

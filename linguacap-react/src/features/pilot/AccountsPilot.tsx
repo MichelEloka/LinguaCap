@@ -1,8 +1,11 @@
-import { useEffect, useMemo, useState, type FormEvent } from 'react';
-import { RefreshCw, Send, UserCog, XCircle } from 'lucide-react';
-import { Badge, EmptyState, Inspector } from '../../components/ui';
-import { requestApi, roleNames, type AccountRole, type Permission, type Profile } from '../../integration/api';
-import './accounts.css';
+import { useEffect, useMemo, useState, type FormEvent, type MouseEvent } from 'react';
+import { Ban, ChevronRight, Clock3, MailCheck, RefreshCw, Send, TimerOff, UserRound, UsersRound, X } from 'lucide-react';
+import { Badge, Dialog, EmptyState } from '../../components/ui';
+import { Avatar, Callout, Chip, Drawer, SearchField, Segmented, SkeletonCard, Toolbar, useToast } from '../../design/kit';
+import { requestApi, type AccountRole, type Permission, type Profile } from '../../integration/api';
+import { formatDate, formatRelative, getError, RoleBadge, StateBadge } from './admin-common';
+import { UserSheet } from './admin-user-sheet';
+import './admin.css';
 
 type InvitationStatus = 'pending' | 'accepted' | 'expired' | 'cancelled';
 
@@ -39,37 +42,15 @@ export interface AdminUser {
   createdAt: string;
 }
 
-interface Assignment {
-  personId: string;
-  personName: string;
-  assignedByName: string | null;
-  startedAt: string;
-  endedAt: string | null;
-}
-
-interface AdminUserDetail {
-  user: AdminUser;
-  teacherHistory: Assignment[];
-  reviewerHistory: Assignment[];
-}
-
-const dateFormat = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' });
-const dateTimeFormat = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium', timeStyle: 'short' });
 const permissionNames: Record<Permission, string> = { catalogue: 'Catalogue', correction: 'Correction' };
-const invitationStatus: Record<InvitationStatus, { label: string; tone: 'blue' | 'green' | 'amber' | 'neutral' }> = {
-  pending: { label: 'En attente', tone: 'blue' },
-  accepted: { label: 'Acceptée', tone: 'green' },
-  expired: { label: 'Expirée', tone: 'amber' },
-  cancelled: { label: 'Annulée', tone: 'neutral' },
+const invitationStatus: Record<InvitationStatus, { label: string; filter: string; tone: 'blue' | 'green' | 'amber' | 'neutral'; icon: typeof Clock3 }> = {
+  pending: { label: 'En attente', filter: 'En attente', tone: 'blue', icon: Clock3 },
+  accepted: { label: 'Acceptée', filter: 'Acceptées', tone: 'green', icon: MailCheck },
+  expired: { label: 'Expirée', filter: 'Expirées', tone: 'amber', icon: TimerOff },
+  cancelled: { label: 'Annulée', filter: 'Annulées', tone: 'neutral', icon: Ban },
 };
 
-function formatDate(value: string | null, withTime = false) {
-  return value ? (withTime ? dateTimeFormat : dateFormat).format(new Date(value)) : '—';
-}
-
-function getError(error: unknown) {
-  return error instanceof Error ? error.message : 'Cette action est temporairement indisponible.';
-}
+const normalize = (value: string) => value.toLocaleLowerCase('fr').normalize('NFD').replace(/[̀-ͯ]/g, '');
 
 function useAdminUsers(token: string, enabled: boolean, refresh = 0) {
   const [users, setUsers] = useState<AdminUser[] | null>(null);
@@ -87,6 +68,15 @@ function useAdminUsers(token: string, enabled: boolean, refresh = 0) {
   return { users, error };
 }
 
+const inviteRoles: { value: Exclude<AccountRole, 'admin'>; label: string }[] = [
+  { value: 'learner', label: 'Élève' }, { value: 'teacher', label: 'Professeur' }, { value: 'staff', label: 'Équipe' },
+];
+const inviteRoleHints: Record<Exclude<AccountRole, 'admin'>, string> = {
+  learner: 'Suit un parcours, avec un professeur référent ou en autonomie.',
+  teacher: 'Suit ses élèves, définit leurs parcours et corrige leurs productions.',
+  staff: 'Prépare le catalogue ou corrige ; les permissions se règlent ensuite dans sa fiche.',
+};
+
 export function InviteDialog({ profile, token, onClose, onDone }: {
   profile: Profile;
   token: string;
@@ -96,7 +86,7 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
   const admin = profile.role === 'admin';
   const { users } = useAdminUsers(token, admin);
   const teachers = (users ?? []).filter((user) => user.role === 'teacher' && user.status === 'active');
-  const [role, setRole] = useState<AccountRole>('learner');
+  const [role, setRole] = useState<Exclude<AccountRole, 'admin'>>('learner');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -125,19 +115,24 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
   }
 
   return (
-    <Inspector title={admin ? 'Inviter un utilisateur' : 'Inviter un élève'} onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        <label>Nom complet<input name="displayName" autoComplete="name" required maxLength={140} /></label>
-        <label>Adresse e-mail<input name="email" type="email" autoComplete="email" required maxLength={254} /></label>
+    <Drawer title={admin ? 'Inviter un utilisateur' : 'Inviter un élève'} onClose={onClose}
+      description="La personne reçoit un lien d’activation par e-mail."
+      footer={<>
+        <button className="btn btn-outline" type="button" onClick={onClose}>Fermer</button>
+        <button className="btn btn-primary" type="submit" form="admin-invite-form" disabled={busy}>
+          <Send size={17} aria-hidden="true" /> {busy ? 'Envoi en cours…' : 'Envoyer l’invitation'}
+        </button>
+      </>}>
+      <form id="admin-invite-form" className="admin-form" onSubmit={submit}>
         {admin && (
-          <label>Rôle
-            <select name="role" value={role} onChange={(event) => setRole(event.target.value as AccountRole)}>
-              <option value="learner">Élève</option>
-              <option value="teacher">Professeur</option>
-              <option value="staff">Équipe (catalogue, correction)</option>
-            </select>
-          </label>
+          <div className="admin-form-block">
+            <span className="admin-field-label">Rôle</span>
+            <Segmented label="Rôle" options={inviteRoles} value={role} onChange={setRole} />
+            <p className="admin-hint">{inviteRoleHints[role]}</p>
+          </div>
         )}
+        <label>Nom complet<input name="displayName" autoComplete="name" required maxLength={140} placeholder="Prénom Nom" /></label>
+        <label>Adresse e-mail<input name="email" type="email" autoComplete="email" required maxLength={254} placeholder="prenom.nom@exemple.fr" /></label>
         {admin && role === 'learner' && (
           <label>Professeur référent
             <select name="teacherId" defaultValue="">
@@ -146,24 +141,24 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
             </select>
           </label>
         )}
-        <p className="muted">Le lien d’activation reste valable sept jours. Inviter de nouveau la même adresse renvoie l’invitation existante.</p>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button className="btn btn-outline" type="button" onClick={onClose}>Fermer</button>
-          <button className="btn btn-primary" type="submit" disabled={busy}>{busy ? 'Envoi en cours…' : 'Envoyer l’invitation'}</button>
-        </div>
+        <Callout tone="info" title="Valable sept jours">Inviter de nouveau la même adresse renvoie l’invitation existante.</Callout>
+        {error && <div role="alert"><Callout tone="warning">{error}</Callout></div>}
       </form>
-    </Inspector>
+    </Drawer>
   );
 }
 
-export function InvitationsPanel({ token, refresh }: { token: string; refresh: number }) {
+/** `learnersOnly` : vue d'un professeur, qui n'invite que des élèves (la colonne Rôle n'apporte rien). */
+export function InvitationsPanel({ token, refresh, learnersOnly = false }: { token: string; refresh: number; learnersOnly?: boolean }) {
+  const toast = useToast();
   const [invitations, setInvitations] = useState<Invitation[] | null>(null);
   const [loadError, setLoadError] = useState('');
   const [actionError, setActionError] = useState('');
-  const [notice, setNotice] = useState('');
   const [busy, setBusy] = useState<string | null>(null);
   const [reload, setReload] = useState(0);
+  const [status, setStatus] = useState<InvitationStatus | null>(null);
+  const [query, setQuery] = useState('');
+  const [cancelling, setCancelling] = useState<Invitation | null>(null);
 
   useEffect(() => {
     let active = true;
@@ -178,14 +173,13 @@ export function InvitationsPanel({ token, refresh }: { token: string; refresh: n
   async function act(invitation: Invitation, action: 'resend' | 'cancel') {
     setBusy(invitation.id);
     setActionError('');
-    setNotice('');
     try {
       const id = encodeURIComponent(invitation.id);
       const updated = action === 'resend'
         ? await requestApi<Invitation>(`/invitations/${id}/resend`, token, { method: 'POST' })
         : await requestApi<Invitation>(`/invitations/${id}/cancel`, token, { method: 'POST' });
       setInvitations((current) => current?.map((item) => item.id === updated.id ? updated : item) ?? [updated]);
-      setNotice(action === 'resend' ? `Invitation renvoyée à ${updated.email}.` : `Invitation de ${updated.email} annulée.`);
+      toast(action === 'resend' ? `Invitation renvoyée à ${updated.email}.` : `Invitation de ${updated.email} annulée.`);
     } catch (error) {
       setActionError(getError(error));
     } finally {
@@ -193,48 +187,89 @@ export function InvitationsPanel({ token, refresh }: { token: string; refresh: n
     }
   }
 
+  const counts = useMemo(() => {
+    const result: Record<InvitationStatus, number> = { pending: 0, accepted: 0, expired: 0, cancelled: 0 };
+    for (const invitation of invitations ?? []) result[invitation.status] += 1;
+    return result;
+  }, [invitations]);
+  const search = normalize(query.trim());
+  const visible = (invitations ?? []).filter((invitation) => (!status || invitation.status === status)
+    && (!search || normalize(`${invitation.displayName} ${invitation.email}`).includes(search)));
+
   return (
-    <section className="panel" aria-label="Invitations envoyées">
-      <div className="staff-panel-actions">
-        <button className="btn btn-outline" type="button" onClick={() => setReload((count) => count + 1)}>
-          <RefreshCw size={17} aria-hidden="true" /> Actualiser
-        </button>
+    <section className="kit-card is-flush admin-panel lc-enter" aria-label="Invitations envoyées">
+      <div className="admin-panel-head">
+        <Toolbar>
+          <SearchField value={query} onChange={setQuery} label="Rechercher une invitation" placeholder="Nom ou adresse e-mail" />
+          <button className="icon-button admin-refresh" type="button" onClick={() => setReload((count) => count + 1)} aria-label="Actualiser les invitations" title="Actualiser">
+            <RefreshCw size={18} aria-hidden="true" />
+          </button>
+        </Toolbar>
+        <div className="admin-filter-row">
+          <div className="admin-chips" role="group" aria-label="Filtrer par état">
+            <Chip selected={status === null} onClick={() => setStatus(null)}>Toutes <span className="admin-chip-count">{invitations?.length ?? 0}</span></Chip>
+            {(Object.keys(invitationStatus) as InvitationStatus[]).map((key) => (
+              <Chip key={key} selected={status === key} onClick={() => setStatus(status === key ? null : key)}>
+                {invitationStatus[key].filter} <span className="admin-chip-count">{counts[key]}</span>
+              </Chip>
+            ))}
+          </div>
+        </div>
       </div>
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      {actionError && <p className="inline-message warning" role="alert">{actionError}</p>}
-      {loadError ? <p className="inline-message warning" role="alert">{loadError}</p>
-        : invitations === null ? <p role="status">Chargement des invitations…</p>
-        : invitations.length === 0 ? <EmptyState title="Aucune invitation" description="Les invitations envoyées apparaîtront ici." />
+      {actionError && <div className="admin-panel-message" role="alert"><Callout tone="warning">{actionError}</Callout></div>}
+      {loadError ? <div className="admin-panel-message" role="alert"><Callout tone="warning">{loadError}</Callout></div>
+        : invitations === null ? <div className="admin-panel-message"><SkeletonCard lines={4} label="Chargement des invitations…" /></div>
+        : invitations.length === 0 ? <EmptyState icon={<Send size={26} />} title="Aucune invitation" description="Les invitations envoyées apparaîtront ici, avec leur état." />
+        : visible.length === 0 ? <EmptyState icon={<Send size={26} />} title="Aucune invitation pour ce filtre" description="Modifiez la recherche ou choisissez un autre état."
+          action={<button type="button" className="btn btn-soft btn-sm" onClick={() => { setStatus(null); setQuery(''); }}>Tout afficher</button>} />
         : (
-          <div className="teacher-table-wrap">
-            <table className="teacher-table accounts-table">
+          <div className="admin-table-wrap">
+            <table className="admin-table admin-invitations-table">
               <thead><tr>
-                <th scope="col">Personne</th><th scope="col">Rôle</th><th scope="col">Référent</th>
-                <th scope="col">Statut</th><th scope="col">Dernier envoi</th><th scope="col">Actions</th>
+                <th scope="col">Personne</th>{!learnersOnly && <th scope="col">Rôle</th>}<th scope="col">État</th>
+                <th scope="col">Dernier envoi</th><th scope="col"><span className="sr-only">Actions</span></th>
               </tr></thead>
-              <tbody>
-                {invitations.map((invitation) => {
-                  const status = invitationStatus[invitation.status];
+              <tbody className="lc-stagger">
+                {visible.map((invitation) => {
+                  const state = invitationStatus[invitation.status];
+                  const StateIcon = state.icon;
                   const open = invitation.status === 'pending' || invitation.status === 'expired';
                   return (
-                    <tr key={invitation.id}>
-                      <th scope="row"><span className="accounts-person"><strong>{invitation.displayName}</strong><small>{invitation.email}</small></span></th>
-                      <td>{roleNames[invitation.role]}</td>
-                      <td>{invitation.role === 'learner' ? invitation.teacherName ?? 'Autonome' : '—'}</td>
-                      <td>
-                        <Badge tone={status.tone}>{status.label}</Badge>
-                        {invitation.status === 'pending' && invitation.sendCount === 0 && <small className="accounts-hint">Envoi à relancer</small>}
-                        {invitation.status === 'pending' && <small className="accounts-hint">Expire le {formatDate(invitation.expiresAt)}</small>}
-                        {invitation.status === 'accepted' && <small className="accounts-hint">Le {formatDate(invitation.acceptedAt)}</small>}
+                    <tr key={invitation.id} className={open ? undefined : 'is-closed'}>
+                      <th scope="row" className="admin-cell-person">
+                        <span className="admin-person">
+                          <Avatar name={invitation.displayName} size={36} />
+                          <span><strong>{invitation.displayName}</strong><small>{invitation.email}</small></span>
+                        </span>
+                      </th>
+                      {!learnersOnly && <td className="admin-cell-role">
+                        <span className="admin-cell-stack">
+                          <RoleBadge role={invitation.role} />
+                          {invitation.role === 'learner' && <small>{invitation.teacherName ? `Avec ${invitation.teacherName}` : 'Autonome'}</small>}
+                        </span>
+                      </td>}
+                      <td className="admin-cell-state">
+                        <span className="admin-cell-stack">
+                          <Badge tone={state.tone}><StateIcon size={13} aria-hidden="true" />{state.label}</Badge>
+                          {invitation.status === 'pending' && invitation.sendCount === 0 && <small className="is-warning">Envoi à relancer</small>}
+                          {invitation.status === 'pending' && <small>Expire le {formatDate(invitation.expiresAt)}</small>}
+                          {invitation.status === 'expired' && <small>Depuis le {formatDate(invitation.expiresAt)}</small>}
+                          {invitation.status === 'accepted' && <small>Le {formatDate(invitation.acceptedAt)}</small>}
+                        </span>
                       </td>
-                      <td>{formatDate(invitation.lastSentAt, true)}{invitation.sendCount > 1 && <small className="accounts-hint">{invitation.sendCount} envois</small>}</td>
-                      <td>
+                      <td className="admin-cell-sent">
+                        <span className="admin-cell-stack">
+                          <span>{invitation.lastSentAt ? formatRelative(invitation.lastSentAt) : 'Pas encore envoyée'}</span>
+                          <small>{invitation.sendCount > 1 ? `${invitation.sendCount} envois` : invitation.invitedByName ? `Par ${invitation.invitedByName}` : ''}</small>
+                        </span>
+                      </td>
+                      <td className="admin-cell-actions">
                         {open && (
-                          <span className="accounts-actions">
-                            <button type="button" className="btn btn-outline" disabled={busy !== null} onClick={() => void act(invitation, 'resend')}
-                              aria-label={`Renvoyer l’invitation de ${invitation.email}`}><Send size={16} aria-hidden="true" /> Renvoyer</button>
-                            <button type="button" className="btn btn-outline" disabled={busy !== null} onClick={() => void act(invitation, 'cancel')}
-                              aria-label={`Annuler l’invitation de ${invitation.email}`}><XCircle size={16} aria-hidden="true" /> Annuler</button>
+                          <span className="admin-actions">
+                            <button type="button" className="btn btn-soft btn-sm" disabled={busy !== null} onClick={() => void act(invitation, 'resend')}
+                              aria-label={`Renvoyer l’invitation de ${invitation.email}`}><Send size={15} aria-hidden="true" /> Renvoyer</button>
+                            <button type="button" className="btn btn-ghost btn-sm admin-cancel" disabled={busy !== null} onClick={() => setCancelling(invitation)}
+                              aria-label={`Annuler l’invitation de ${invitation.email}`}><X size={15} aria-hidden="true" /> Annuler</button>
                           </span>
                         )}
                       </td>
@@ -245,232 +280,150 @@ export function InvitationsPanel({ token, refresh }: { token: string; refresh: n
             </table>
           </div>
         )}
+      {invitations && invitations.length > 0 && (
+        <p className="admin-panel-foot">{visible.length} invitation{visible.length > 1 ? 's' : ''} affichée{visible.length > 1 ? 's' : ''} sur {invitations.length}</p>
+      )}
+      {cancelling && (
+        <Dialog title="Annuler cette invitation ?" onClose={() => setCancelling(null)}>
+          <div className="admin-confirm">
+            <p>Le lien envoyé à <strong>{cancelling.email}</strong> ne fonctionnera plus. Vous pourrez inviter de nouveau cette adresse plus tard.</p>
+            <div className="admin-confirm-actions">
+              <button type="button" className="btn btn-outline" onClick={() => setCancelling(null)}>Garder l’invitation</button>
+              <button type="button" className="btn btn-danger" onClick={() => { const target = cancelling; setCancelling(null); void act(target, 'cancel'); }}>
+                <X size={17} aria-hidden="true" /> Annuler l’invitation
+              </button>
+            </div>
+          </div>
+        </Dialog>
+      )}
     </section>
   );
 }
 
-const roleFilters: { value: AccountRole | 'all'; label: string }[] = [
-  { value: 'all', label: 'Tous' }, { value: 'learner', label: 'Élèves' }, { value: 'teacher', label: 'Professeurs' },
+const roleFilters: { value: AccountRole; label: string }[] = [
+  { value: 'learner', label: 'Élèves' }, { value: 'teacher', label: 'Professeurs' },
   { value: 'staff', label: 'Équipe' }, { value: 'admin', label: 'Administration' },
 ];
+
+function Attachment({ user, learners }: { user: AdminUser; learners: number }) {
+  if (user.role !== 'learner') {
+    const followed = user.role === 'teacher' ? <small>{learners ? `${learners} élève${learners > 1 ? 's' : ''} suivi${learners > 1 ? 's' : ''}` : 'Aucun élève suivi'}</small> : null;
+    if (user.role === 'admin') return <span className="admin-muted">Accès complet</span>;
+    return user.permissions.length || followed
+      ? <span className="admin-permissions">{followed}{user.permissions.map((item) => <span key={item}>{permissionNames[item]}</span>)}</span>
+      : <span className="admin-muted">Aucune permission</span>;
+  }
+  if (user.teacherName) {
+    return <span className="admin-attach"><Avatar name={user.teacherName} size={24} /><span>{user.teacherName}<small>Professeur référent</small></span></span>;
+  }
+  return (
+    <span className="admin-attach is-autonomous">
+      <span className="admin-attach-icon" aria-hidden="true"><UserRound size={14} /></span>
+      <span>Autonome<small>{user.reviewerName ? `Correcteur : ${user.reviewerName}` : 'Sans correcteur désigné'}</small></span>
+    </span>
+  );
+}
 
 export function UsersPanel({ profile, token }: { profile: Profile; token: string }) {
   const [refresh, setRefresh] = useState(0);
   const { users, error } = useAdminUsers(token, true, refresh);
-  const [filter, setFilter] = useState<AccountRole | 'all'>('all');
+  const [role, setRole] = useState<AccountRole | null>(null);
+  const [state, setState] = useState<'all' | 'active' | 'disabled'>('all');
+  const [query, setQuery] = useState('');
   const [selected, setSelected] = useState<string | null>(null);
-  const visible = useMemo(() => (users ?? []).filter((user) => filter === 'all' || user.role === filter), [users, filter]);
+  const search = normalize(query.trim());
+  const visible = useMemo(() => (users ?? []).filter((user) => (!role || user.role === role)
+    && (state === 'all' || user.status === state)
+    && (!search || normalize(`${user.displayName} ${user.email ?? ''}`).includes(search))), [users, role, state, search]);
+  const roleCount = (value: AccountRole) => (users ?? []).filter((user) => user.role === value).length;
+  const disabledCount = (users ?? []).filter((user) => user.status === 'disabled').length;
+  const followers = useMemo(() => {
+    const result = new Map<string, number>();
+    for (const user of users ?? []) if (user.teacherId && user.status === 'active') result.set(user.teacherId, (result.get(user.teacherId) ?? 0) + 1);
+    return result;
+  }, [users]);
+
+  function openRow(event: MouseEvent<HTMLTableRowElement>, id: string) {
+    if ((event.target as HTMLElement).closest('button, a')) return;
+    setSelected(id);
+  }
 
   return (
-    <section className="panel" aria-labelledby="pilot-users-title">
-      <div className="teacher-panel-heading">
-        <div><h2 id="pilot-users-title">Comptes</h2><p className="muted">Rôles, état, rattachements et dernière activité</p></div>
-        <button className="btn btn-outline" type="button" onClick={() => setRefresh((count) => count + 1)}>
-          <RefreshCw size={17} aria-hidden="true" /> Actualiser
-        </button>
+    <section className="kit-card is-flush admin-panel lc-enter" aria-labelledby="admin-users-title">
+      <h2 id="admin-users-title" className="sr-only">Comptes</h2>
+      <div className="admin-panel-head">
+        <Toolbar>
+          <SearchField value={query} onChange={setQuery} label="Rechercher un compte" placeholder="Nom ou adresse e-mail" />
+          <button className="icon-button admin-refresh" type="button" onClick={() => setRefresh((count) => count + 1)} aria-label="Actualiser les comptes" title="Actualiser">
+            <RefreshCw size={18} aria-hidden="true" />
+          </button>
+        </Toolbar>
+        <div className="admin-filter-row">
+          <div className="admin-chips" role="group" aria-label="Filtrer par rôle">
+            <Chip selected={role === null} onClick={() => setRole(null)}>Tous <span className="admin-chip-count">{users?.length ?? 0}</span></Chip>
+            {roleFilters.map((item) => (
+              <Chip key={item.value} selected={role === item.value} onClick={() => setRole(role === item.value ? null : item.value)}>
+                {item.label} <span className="admin-chip-count">{roleCount(item.value)}</span>
+              </Chip>
+            ))}
+          </div>
+          <div className="admin-chips" role="group" aria-label="Filtrer par état">
+            {(['active', 'disabled'] as const).map((value) => (
+              <Chip key={value} selected={state === value} onClick={() => setState(state === value ? 'all' : value)}>
+                <i className={`admin-dot${value === 'active' ? ' is-active' : ''}`} aria-hidden="true" />
+                {value === 'active' ? 'Actifs' : 'Désactivés'} <span className="admin-chip-count">{value === 'active' ? (users?.length ?? 0) - disabledCount : disabledCount}</span>
+              </Chip>
+            ))}
+          </div>
+        </div>
       </div>
-      <div className="teacher-filters" role="group" aria-label="Filtrer par rôle">
-        {roleFilters.map((item) => (
-          <button key={item.value} type="button" aria-pressed={filter === item.value} onClick={() => setFilter(item.value)}>{item.label}</button>
-        ))}
-      </div>
-      {error ? <p className="inline-message warning" role="alert">{error}</p>
-        : users === null ? <p role="status">Chargement des comptes…</p>
-        : visible.length === 0 ? <EmptyState title="Aucun compte pour ce filtre" />
+      {error ? <div className="admin-panel-message" role="alert"><Callout tone="warning">{error}</Callout></div>
+        : users === null ? <div className="admin-panel-message"><SkeletonCard lines={5} label="Chargement des comptes…" /></div>
+        : visible.length === 0 ? <EmptyState icon={<UsersRound size={26} />} title="Aucun compte pour ce filtre" description="Modifiez la recherche ou les filtres."
+          action={<button type="button" className="btn btn-soft btn-sm" onClick={() => { setRole(null); setState('all'); setQuery(''); }}>Tout afficher</button>} />
         : (
-          <div className="teacher-table-wrap">
-            <table className="teacher-table accounts-table">
+          <div className="admin-table-wrap">
+            <table className="admin-table admin-users-table">
               <thead><tr>
-                <th scope="col">Compte</th><th scope="col">Rôle</th><th scope="col">État</th><th scope="col">Rattachement</th>
-                <th scope="col">Invitation · activation</th><th scope="col">Dernière activité</th><th scope="col">Fiche</th>
+                <th scope="col">Compte</th><th scope="col">Rôle</th><th scope="col">Rattachement et accès</th>
+                <th scope="col">Dernière activité</th><th scope="col">État</th><th scope="col"><span className="sr-only">Fiche</span></th>
               </tr></thead>
-              <tbody>
+              <tbody className="lc-stagger">
                 {visible.map((user) => (
-                  <tr key={user.id}>
-                    <th scope="row"><span className="accounts-person"><strong>{user.displayName}</strong><small>{user.email ?? 'Adresse non liée à une invitation'}</small></span></th>
-                    <td>{roleNames[user.role]}{user.permissions.length > 0 && <small className="accounts-hint">{user.permissions.map((item) => permissionNames[item]).join(' · ')}</small>}</td>
-                    <td><Badge tone={user.status === 'active' ? 'green' : 'neutral'}>{user.status === 'active' ? 'Actif' : 'Désactivé'}</Badge></td>
-                    <td>{user.role !== 'learner' ? '—' : user.teacherName
-                      ? <>Professeur : {user.teacherName}</>
-                      : <>Autonome{user.reviewerName && <small className="accounts-hint">Correcteur : {user.reviewerName}</small>}</>}</td>
-                    <td>{formatDate(user.invitedAt)} · {formatDate(user.activatedAt)}</td>
-                    <td>{formatDate(user.lastSeenAt, true)}</td>
-                    <td><button type="button" className="btn btn-outline" onClick={() => setSelected(user.id)} aria-label={`Ouvrir la fiche de ${user.displayName}`}>
-                      <UserCog size={16} aria-hidden="true" /> Fiche</button></td>
+                  <tr key={user.id} className={`is-clickable${user.status === 'disabled' ? ' is-disabled' : ''}${selected === user.id ? ' is-selected' : ''}`}
+                    onClick={(event) => openRow(event, user.id)}>
+                    <th scope="row" className="admin-cell-person">
+                      <span className="admin-person">
+                        <Avatar name={user.displayName} size={38} />
+                        <span><strong>{user.displayName}{user.id === profile.id && <em className="admin-you">vous</em>}</strong>
+                          <small>{user.email ?? 'Adresse non liée à une invitation'}</small></span>
+                      </span>
+                    </th>
+                    <td className="admin-cell-role"><RoleBadge role={user.role} /></td>
+                    <td className="admin-cell-attach"><Attachment user={user} learners={followers.get(user.id) ?? 0} /></td>
+                    <td className="admin-cell-seen">
+                      {user.lastSeenAt ? <span className="admin-cell-stack"><span><span className="admin-mobile-label">Dernière activité </span>{formatRelative(user.lastSeenAt)}</span><small>{formatDate(user.lastSeenAt, true)}</small></span>
+                        : <span className="admin-muted">{user.activatedAt ? 'Jamais connecté' : 'Pas encore activé'}</span>}
+                    </td>
+                    <td className="admin-cell-state"><StateBadge active={user.status === 'active'} /></td>
+                    <td className="admin-cell-open">
+                      <button type="button" className="icon-button admin-open" onClick={() => setSelected(user.id)} aria-label={`Ouvrir la fiche de ${user.displayName}`} title="Ouvrir la fiche">
+                        <ChevronRight size={18} aria-hidden="true" />
+                      </button>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
         )}
+      {users && users.length > 0 && (
+        <p className="admin-panel-foot">{visible.length} compte{visible.length > 1 ? 's' : ''} affiché{visible.length > 1 ? 's' : ''} sur {users.length}</p>
+      )}
       {selected && users && (
-        <UserDetailDialog userId={selected} token={token} users={users} currentUserId={profile.id}
+        <UserSheet userId={selected} token={token} users={users} currentUserId={profile.id}
           onClose={() => setSelected(null)} onChanged={() => setRefresh((count) => count + 1)} />
       )}
     </section>
-  );
-}
-
-function History({ title, entries, empty }: { title: string; entries: Assignment[]; empty: string }) {
-  return (
-    <div className="stack">
-      <h3>{title}</h3>
-      {entries.length === 0 ? <p className="muted">{empty}</p> : (
-        <ul className="accounts-history">
-          {entries.map((entry) => (
-            <li key={`${entry.personId}-${entry.startedAt}`}>
-              <strong>{entry.personName}</strong>
-              <span>du {formatDate(entry.startedAt)} {entry.endedAt ? `au ${formatDate(entry.endedAt)}` : '· en cours'}
-                {entry.assignedByName && ` · par ${entry.assignedByName}`}</span>
-            </li>
-          ))}
-        </ul>
-      )}
-    </div>
-  );
-}
-
-function UserDetailDialog({ userId, token, users, currentUserId, onClose, onChanged }: {
-  userId: string;
-  token: string;
-  users: AdminUser[];
-  currentUserId: string;
-  onClose: () => void;
-  onChanged: () => void;
-}) {
-  const [detail, setDetail] = useState<AdminUserDetail | null>(null);
-  const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
-  const [busy, setBusy] = useState(false);
-  const id = encodeURIComponent(userId);
-
-  useEffect(() => {
-    let active = true;
-    requestApi<AdminUserDetail>(`/admin/users/${id}`, token).then(
-      (data) => { if (active) setDetail(data); },
-      (requestError: unknown) => { if (active) setError(getError(requestError)); },
-    );
-    return () => { active = false; };
-  }, [token, id]);
-
-  // Chaque modification garde son adresse en toutes lettres : le test de contrat vérifie chaque appel.
-  const requests = {
-    status: (body: unknown) => requestApi<AdminUserDetail>(`/admin/users/${id}/status`, token, { method: 'PUT', body }),
-    role: (body: unknown) => requestApi<AdminUserDetail>(`/admin/users/${id}/role`, token, { method: 'PUT', body }),
-    permissions: (body: unknown) => requestApi<AdminUserDetail>(`/admin/users/${id}/permissions`, token, { method: 'PUT', body }),
-    teacher: (body: unknown) => requestApi<AdminUserDetail>(`/admin/users/${id}/teacher`, token, { method: 'PUT', body }),
-    reviewer: (body: unknown) => requestApi<AdminUserDetail>(`/admin/users/${id}/reviewer`, token, { method: 'PUT', body }),
-  };
-
-  async function change(path: keyof typeof requests, body: unknown, message: string) {
-    setBusy(true);
-    setError('');
-    setNotice('');
-    try {
-      setDetail(await requests[path](body));
-      setNotice(message);
-      onChanged();
-    } catch (requestError) {
-      setError(getError(requestError));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  const user = detail?.user;
-  const teachers = users.filter((item) => item.role === 'teacher' && item.status === 'active');
-  const reviewers = users.filter((item) => item.role !== 'learner' && item.status === 'active' && item.permissions.includes('correction'));
-  const self = user?.id === currentUserId;
-
-  return (
-    <Inspector title={user ? `Fiche de ${user.displayName}` : 'Fiche du compte'} onClose={onClose}>
-      {!detail ? (error ? <p className="inline-message warning" role="alert">{error}</p> : <p role="status">Chargement de la fiche…</p>) : user && (
-        <div className="stack accounts-detail">
-          <dl className="accounts-summary">
-            <div><dt>Rôle</dt><dd>{roleNames[user.role]}</dd></div>
-            <div><dt>État</dt><dd>{user.status === 'active' ? 'Actif' : 'Désactivé'}</dd></div>
-            <div><dt>Adresse</dt><dd>{user.email ?? '—'}</dd></div>
-            <div><dt>Activé le</dt><dd>{formatDate(user.activatedAt)}</dd></div>
-            <div><dt>Dernière activité</dt><dd>{formatDate(user.lastSeenAt, true)}</dd></div>
-          </dl>
-          {notice && <p className="inline-message" role="status">{notice}</p>}
-          {error && <p className="inline-message warning" role="alert">{error}</p>}
-
-          <div className="accounts-row">
-            <span>{user.status === 'active' ? 'Le compte peut se connecter et utiliser LinguaCap.' : 'Toutes les actions de ce compte sont refusées.'}</span>
-            <button type="button" className="btn btn-outline" disabled={busy || self}
-              onClick={() => void change('status', { status: user.status === 'active' ? 'disabled' : 'active' },
-                user.status === 'active' ? 'Compte désactivé.' : 'Compte réactivé.')}>
-              {user.status === 'active' ? 'Désactiver le compte' : 'Réactiver le compte'}
-            </button>
-          </div>
-
-          {user.role === 'learner' ? (
-            <>
-              <form className="accounts-row" onSubmit={(event) => {
-                event.preventDefault();
-                const teacherId = String(new FormData(event.currentTarget).get('teacherId') ?? '');
-                void change('teacher', { teacherId: teacherId || null }, teacherId ? 'Professeur référent mis à jour.' : 'L’élève est maintenant autonome.');
-              }}>
-                <label>Professeur référent
-                  <select name="teacherId" defaultValue={user.teacherId ?? ''} key={user.teacherId ?? 'autonome'}>
-                    <option value="">Aucun : élève autonome</option>
-                    {teachers.map((teacher) => <option key={teacher.id} value={teacher.id}>{teacher.displayName}</option>)}
-                  </select>
-                </label>
-                <button type="submit" className="btn btn-outline" disabled={busy}>Réaffecter</button>
-              </form>
-              {!user.teacherId && (
-                <form className="accounts-row" onSubmit={(event) => {
-                  event.preventDefault();
-                  const reviewerId = String(new FormData(event.currentTarget).get('reviewerId') ?? '');
-                  void change('reviewer', { reviewerId: reviewerId || null }, reviewerId ? 'Correcteur désigné.' : 'Désignation retirée.');
-                }}>
-                  <label>Correcteur désigné
-                    <select name="reviewerId" defaultValue={user.reviewerId ?? ''} key={user.reviewerId ?? 'aucun'}>
-                      <option value="">Aucun correcteur</option>
-                      {reviewers.map((reviewer) => <option key={reviewer.id} value={reviewer.id}>{reviewer.displayName}</option>)}
-                    </select>
-                  </label>
-                  <button type="submit" className="btn btn-outline" disabled={busy}>Désigner</button>
-                </form>
-              )}
-              <History title="Professeurs référents" entries={detail.teacherHistory} empty="Aucun professeur référent à ce jour." />
-              <History title="Correcteurs désignés" entries={detail.reviewerHistory} empty="Aucun correcteur désigné." />
-            </>
-          ) : (
-            <>
-              <form className="accounts-row" onSubmit={(event) => {
-                event.preventDefault();
-                const role = String(new FormData(event.currentTarget).get('role'));
-                void change('role', { role }, 'Rôle mis à jour.');
-              }}>
-                <label>Rôle
-                  <select name="role" defaultValue={user.role} key={user.role} disabled={self}>
-                    <option value="teacher">Professeur</option>
-                    <option value="staff">Équipe</option>
-                    <option value="admin">Administration</option>
-                  </select>
-                </label>
-                <button type="submit" className="btn btn-outline" disabled={busy || self}>Changer le rôle</button>
-              </form>
-              <form className="accounts-row" onSubmit={(event) => {
-                event.preventDefault();
-                const form = new FormData(event.currentTarget);
-                void change('permissions', { permissions: (['catalogue', 'correction'] as Permission[]).filter((item) => form.get(item) === 'on') },
-                  'Permissions mises à jour.');
-              }}>
-                <fieldset className="accounts-permissions" key={user.permissions.join(',')}>
-                  <legend>Permissions</legend>
-                  <label><input type="checkbox" name="catalogue" defaultChecked={user.permissions.includes('catalogue')} /> Catalogue : niveaux, contenus et médiathèque</label>
-                  <label><input type="checkbox" name="correction" defaultChecked={user.permissions.includes('correction')} /> Correction : productions des élèves autonomes désignés</label>
-                </fieldset>
-                <button type="submit" className="btn btn-outline" disabled={busy}>Enregistrer</button>
-              </form>
-            </>
-          )}
-        </div>
-      )}
-    </Inspector>
   );
 }

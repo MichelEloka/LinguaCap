@@ -1,8 +1,15 @@
-import { useEffect, useRef, useState, type FormEvent } from 'react';
-import { FileAudio, Image as ImageIcon, Pencil, RefreshCw, Upload as UploadIcon } from 'lucide-react';
-import { Badge, EmptyState, Inspector } from '../../components/ui';
+import { useEffect, useId, useRef, useState, type DragEvent, type FormEvent } from 'react';
+import {
+  AudioLines, CheckCircle2, CloudUpload, FileClock, History, Image as ImageIcon, Inbox, Pencil, RefreshCw, Upload as UploadIcon,
+} from 'lucide-react';
+import { Badge, EmptyState, ProgressBar } from '../../components/ui';
+import {
+  AudioPlayer, Callout, Drawer, Facts, ListItem, ProgressRing, Skeleton, TabPanel, Tabs, Timeline, Toolbar, SearchField, useToast,
+} from '../../design/kit';
 import { requestApi, uploadToStorage } from '../../integration/api';
-import './catalogue.css';
+import { LessonContent } from './LessonContent';
+import { AssetTile, KindChips, assetVersionTone, filterAssets, formatClock, formatSize, useAudioDuration } from './editor-media';
+import './editor.css';
 
 export interface AssetVersion { version: number; mimeType: string; sizeBytes: number | null; status: 'draft' | 'published' | 'archived'; createdAt: string | null }
 export interface Asset {
@@ -44,6 +51,7 @@ const MIME_ALIASES: Record<string, string> = {
   'audio/mpeg': 'audio/mpeg', 'audio/mp3': 'audio/mpeg', 'audio/wav': 'audio/wav', 'audio/x-wav': 'audio/wav',
   'audio/wave': 'audio/wav', 'audio/vnd.wave': 'audio/wav',
 };
+const FORMAT_NAMES: Record<string, string> = { 'image/jpeg': 'JPEG', 'image/png': 'PNG', 'image/webp': 'WebP', 'audio/mpeg': 'MP3', 'audio/wav': 'WAV' };
 const uploadStatus: Record<Upload['status'], { label: string; tone: 'green' | 'amber' | 'neutral' | 'blue' }> = {
   pending: { label: 'En attente', tone: 'blue' },
   available: { label: 'Disponible', tone: 'green' },
@@ -51,14 +59,11 @@ const uploadStatus: Record<Upload['status'], { label: string; tone: 'green' | 'a
   abandoned: { label: 'Abandonné', tone: 'neutral' },
 };
 export const versionStatus: Record<AssetVersion['status'], string> = { draft: 'brouillon', published: 'publiée', archived: 'archivée' };
+const dateFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', year: 'numeric' });
+const dateTime = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' });
 
 function getError(error: unknown) {
   return error instanceof Error ? error.message : 'Cette action est temporairement indisponible.';
-}
-
-function formatSize(bytes: number | null) {
-  if (!bytes) return '';
-  return bytes >= 1024 * 1024 ? `${(bytes / (1024 * 1024)).toFixed(1)} Mo` : `${Math.max(1, Math.round(bytes / 1024))} Ko`;
 }
 
 export function latestVersion(asset: Asset) {
@@ -100,42 +105,87 @@ export function MediaPreview({ assetId, version, token }: { assetId: string; ver
 
   if (error) {
     return (
-      <div className="stack">
-        <p className="inline-message warning" role="alert">{error}</p>
-        <button type="button" className="btn btn-outline" onClick={retry}>Réessayer</button>
+      <div className="ed-preview-error">
+        <Callout tone="warning">{error}</Callout>
+        <button type="button" className="btn btn-secondary btn-sm" onClick={retry}><RefreshCw size={15} aria-hidden="true" /> Réessayer</button>
       </div>
     );
   }
-  if (!file) return <p className="media-preview-loading" role="status">Chargement de l’aperçu…</p>;
+  if (!file) {
+    return <div className="ed-preview-stage is-loading" role="status" aria-label="Chargement de l’aperçu…"><Skeleton height="100%" radius={12} /></div>;
+  }
   return file.mimeType.startsWith('image/')
-    ? <div className="media-preview-frame"><img className="media-preview-image" src={file.url} alt={file.alt ?? ''} onError={renewAfterLoadError} /></div>
+    ? <figure className="ed-preview-stage"><img className="ed-preview-image" src={file.url} alt={file.alt ?? ''} onError={renewAfterLoadError} /></figure>
     : (
-      <div className="media-preview-frame stack">
-        <audio controls preload="metadata" src={file.url} onError={renewAfterLoadError} aria-label="Aperçu audio" />
-        {file.transcript && <details><summary>Transcription</summary><p className="pilot-transcript" lang="de">{file.transcript}</p></details>}
+      <div className="ed-preview-audio">
+        <AudioPlayer src={file.url} title="Aperçu audio" onError={renewAfterLoadError} />
+        {file.transcript && (
+          <details className="ed-transcript">
+            <summary>Transcription</summary>
+            <LessonContent text={file.transcript} compact />
+          </details>
+        )}
       </div>
     );
 }
+
+const fileTitle = (name: string) => {
+  const base = name.replace(/\.[^.]+$/, '').replace(/[-_]+/g, ' ').trim();
+  return base ? base.charAt(0).toUpperCase() + base.slice(1) : '';
+};
+
+/** Fichier choisi : vignette locale (image) ou durée (son), nom, format et poids. */
+function ChosenFile({ file, kind, mimeType }: { file: File; kind: Asset['kind']; mimeType: string }) {
+  const [url, setUrl] = useState<string | null>(null);
+  useEffect(() => {
+    const objectUrl = URL.createObjectURL(file);
+    setUrl(objectUrl);
+    return () => URL.revokeObjectURL(objectUrl);
+  }, [file]);
+  const duration = useAudioDuration(kind === 'audio' && mimeType ? url : null);
+  return (
+    <span className="ed-drop-file">
+      <span className={`ed-drop-thumb is-${kind}`}>
+        {kind === 'image' && url && mimeType ? <img src={url} alt="" /> : kind === 'audio' ? <AudioLines size={26} aria-hidden="true" /> : <ImageIcon size={26} aria-hidden="true" />}
+      </span>
+      <span className="ed-drop-file-text">
+        <strong>{file.name}</strong>
+        <small>{[FORMAT_NAMES[mimeType] ?? 'Format non pris en charge', formatSize(file.size), duration !== null ? formatClock(duration) : ''].filter(Boolean).join(' · ')}</small>
+        <small className="ed-drop-hint">Cliquez ou glissez un autre fichier pour le remplacer.</small>
+      </span>
+    </span>
+  );
+}
+
+const phases = [
+  { id: 'reserving', label: 'Réservation' },
+  { id: 'sending', label: 'Envoi' },
+  { id: 'checking', label: 'Contrôle' },
+] as const;
 
 /**
  * Dépôt d'un fichier : réservation auprès de Médias, envoi direct vers le stockage avec progression, puis contrôle
  * du fichier reçu. Un envoi interrompu peut être relancé tant que le dépôt n'a pas expiré.
  */
-function UploadInspector({ token, replace, onClose, onDone }: {
+function UploadDrawer({ token, replace, onClose, onDone }: {
   token: string;
   replace?: Asset;
   onClose: () => void;
   onDone: (upload: Upload) => void;
 }) {
   const [file, setFile] = useState<File | null>(null);
+  const [title, setTitle] = useState(replace?.title ?? '');
   const [phase, setPhase] = useState<'form' | 'reserving' | 'sending' | 'checking' | 'failed'>('form');
   const [progress, setProgress] = useState(0);
   const [error, setError] = useState('');
   const [retryable, setRetryable] = useState(false);
+  const [dragging, setDragging] = useState(false);
   const fileInput = useRef<HTMLInputElement>(null);
+  const progressRef = useRef<HTMLDivElement>(null);
   const reservation = useRef<Upload | null>(null);
   const controller = useRef<AbortController | null>(null);
   const active = useRef(false);
+  const formId = useId();
   const mimeType = file ? MIME_ALIASES[file.type] ?? '' : '';
   const kind = mimeType.startsWith('image/') ? 'image' : mimeType.startsWith('audio/') ? 'audio' : replace?.kind ?? 'image';
 
@@ -147,6 +197,22 @@ function UploadInspector({ token, replace, onClose, onDone }: {
     };
   }, []);
 
+  function choose(selected: File | null) {
+    setFile(selected);
+    setError(selected && !MIME_ALIASES[selected.type] ? 'Formats acceptés : images JPEG, PNG ou WebP, sons MP3 ou WAV.' : '');
+    if (selected && !title.trim()) setTitle(fileTitle(selected.name));
+  }
+
+  function drop(event: DragEvent<HTMLLabelElement>) {
+    event.preventDefault();
+    setDragging(false);
+    if (phase !== 'form') return;
+    const files = event.dataTransfer.files;
+    if (!files.length) return;
+    if (fileInput.current) fileInput.current.files = files;
+    choose(files[0]);
+  }
+
   async function send(upload: Upload, selected: File, type: string) {
     setPhase('sending');
     setProgress(0);
@@ -155,6 +221,7 @@ function UploadInspector({ token, replace, onClose, onDone }: {
     try {
       if (upload.uploadUrl) await uploadToStorage(upload.uploadUrl, selected, type, token, setProgress, controller.current.signal);
       if (!active.current) return;
+      setProgress(100);
       setPhase('checking');
       const result = await requestApi<Upload>(`/media/uploads/${encodeURIComponent(upload.id)}/finalize`, token, { method: 'POST' });
       if (active.current) onDone(result);
@@ -217,55 +284,84 @@ function UploadInspector({ token, replace, onClose, onDone }: {
   }
 
   const busy = phase === 'reserving' || phase === 'sending' || phase === 'checking';
+  useEffect(() => { if (busy) progressRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, [busy]);
+  const step = phase === 'reserving' ? 0 : phase === 'sending' ? 1 : phase === 'checking' ? 2 : -1;
+  const footer = (
+    <div className="ed-drawer-actions">
+      {busy && <span className="ed-foot-note">Gardez ce panneau ouvert pendant le dépôt.</span>}
+      {phase === 'sending' && <button type="button" className="btn btn-secondary" onClick={() => controller.current?.abort()}>Annuler l’envoi</button>}
+      {phase === 'failed' && <button type="button" className="btn btn-secondary" onClick={restart}>Choisir un autre fichier</button>}
+      {phase === 'failed' && retryable && reservation.current && file && (
+        <button type="button" className="btn btn-primary" onClick={() => void send(reservation.current!, file, mimeType)}><RefreshCw size={16} aria-hidden="true" /> Relancer l’envoi</button>
+      )}
+      {phase === 'form' && <button type="button" className="btn btn-ghost" onClick={onClose}>Annuler</button>}
+      {phase === 'form' && <button type="submit" form={formId} className="btn btn-primary" disabled={!file}><UploadIcon size={17} aria-hidden="true" /> Déposer</button>}
+    </div>
+  );
+
   return (
-    <Inspector title={replace ? `Nouvelle version · ${replace.title}` : 'Déposer un média'} onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        {replace && <p className="inline-message">Les parcours publiés conservent leur fichier actuel. Les brouillons peuvent utiliser la nouvelle version.</p>}
-        <fieldset className="media-upload-fields stack" disabled={phase !== 'form'}>
-          <label>Fichier
-            <input ref={fileInput} name="file" type="file" required accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/wav,.mp3,.wav"
-              aria-describedby="media-upload-formats"
-              onChange={(event) => { setFile(event.currentTarget.files?.[0] ?? null); setError(''); }} />
-            <small id="media-upload-formats" className="muted">JPEG, PNG ou WebP jusqu’à 5 Mo. MP3 ou WAV jusqu’à 15 Mo.</small>
+    <Drawer title={replace ? `Nouvelle version · ${replace.title}` : 'Déposer un média'} onClose={onClose} footer={footer}
+      description={replace ? 'Les parcours publiés conservent leur fichier actuel ; les brouillons peuvent utiliser la nouvelle version.' : 'Une image ou un son, avec ses crédits, pour l’utiliser dans les parcours.'}>
+      <form id={formId} className="ed-upload-form" onSubmit={submit}>
+        <fieldset className="ed-fields" disabled={phase !== 'form'}>
+          <label className={`ed-drop${dragging ? ' is-dragging' : ''}${file ? ' has-file' : ''}`}
+            onDragOver={(event) => { event.preventDefault(); if (phase === 'form') setDragging(true); }}
+            onDragLeave={() => setDragging(false)} onDrop={drop}>
+            <span className="ed-drop-label">Fichier</span>
+            <input ref={fileInput} className="sr-only" name="file" type="file" required accept="image/jpeg,image/png,image/webp,audio/mpeg,audio/wav,.mp3,.wav"
+              aria-describedby="media-upload-formats" onChange={(event) => choose(event.currentTarget.files?.[0] ?? null)} />
+            {file ? <ChosenFile file={file} kind={kind} mimeType={mimeType} /> : (
+              <span className="ed-drop-zone">
+                <span className="ed-drop-icon"><CloudUpload size={28} aria-hidden="true" /></span>
+                <strong>Glissez une image ou un son ici</strong>
+                <small>ou cliquez pour parcourir vos dossiers</small>
+              </span>
+            )}
           </label>
-          <label>Titre<input name="title" required={!replace} maxLength={120} defaultValue={replace?.title ?? ''} /></label>
+          <small id="media-upload-formats" className="ed-help">JPEG, PNG ou WebP jusqu’à 5 Mo. MP3 ou WAV jusqu’à 15 Mo.</small>
+          <label>Titre<input name="title" required={!replace} maxLength={120} value={title} onChange={(event) => setTitle(event.target.value)} /></label>
           {kind === 'image'
             ? <label>Texte alternatif<textarea name="alt" required rows={2} maxLength={300} defaultValue={replace?.alt ?? ''}
-                aria-describedby="upload-alt-help" /><small id="upload-alt-help" className="muted">Décrit l’image pour les lecteurs d’écran.</small></label>
+                aria-describedby="upload-alt-help" /><small id="upload-alt-help" className="ed-help">Décrit l’image pour les lecteurs d’écran.</small></label>
             : <label>Transcription<textarea name="transcript" required rows={4} maxLength={4000} defaultValue={replace?.transcript ?? ''} lang="de" /></label>}
-          <div className="pilot-form-grid">
+          <div className="ed-grid-2">
             <label>Source<input name="source" required maxLength={200} defaultValue={replace?.source ?? ''} placeholder="Auteur, banque d’images…" /></label>
             <label>Licence<input name="license" required maxLength={120} defaultValue={replace?.license ?? ''} placeholder="CC BY 4.0, interne…" /></label>
           </div>
         </fieldset>
-        {phase === 'reserving' && <p className="inline-message" role="status">Préparation du dépôt…</p>}
-        {(phase === 'sending' || phase === 'checking') && (
-          <div className="stack" aria-live="polite">
-            <label className="media-progress">
-              {phase === 'checking' ? 'Contrôle du fichier…' : `Envoi : ${progress} %`}
-              <progress max={100} value={progress} />
-            </label>
+        {step >= 0 && (
+          <div className="ed-upload-progress" aria-live="polite" ref={progressRef}>
+            <ProgressRing value={phase === 'reserving' ? 4 : progress} size={68} stroke={7}
+              label={phase === 'checking' ? 'Contrôle du fichier' : `Envoi : ${progress} %`}>
+              {phase === 'checking' ? <CheckCircle2 size={24} aria-hidden="true" className="ed-pulse" /> : <strong>{progress}%</strong>}
+            </ProgressRing>
+            <div className="ed-upload-progress-main">
+              <strong>{phase === 'reserving' ? 'Préparation du dépôt…' : phase === 'checking' ? 'Contrôle du fichier…' : `Envoi : ${progress} %`}</strong>
+              <ol className="ed-upload-steps">
+                {phases.map((item, index) => (
+                  <li key={item.id} className={index < step ? 'is-done' : index === step ? 'is-current' : ''}>{item.label}</li>
+                ))}
+              </ol>
+              <ProgressBar value={phase === 'reserving' ? 4 : progress} label="Progression de l’envoi" />
+            </div>
           </div>
         )}
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          {phase === 'sending' && <button type="button" className="btn btn-outline" onClick={() => controller.current?.abort()}>Annuler l’envoi</button>}
-          {phase === 'failed' && retryable && reservation.current && file && (
-            <button type="button" className="btn btn-primary" onClick={() => void send(reservation.current!, file, mimeType)}>Relancer l’envoi</button>
-          )}
-          {phase === 'failed' && <button type="button" className="btn btn-outline" onClick={restart}>Choisir un autre fichier</button>}
-          {phase === 'form' && <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>}
-          {phase === 'form' && <button type="submit" className="btn btn-primary" disabled={!file}><UploadIcon size={17} aria-hidden="true" /> Déposer</button>}
-          {busy && <span className="muted">Gardez ce panneau ouvert pendant le dépôt.</span>}
-        </div>
+        {error && <Callout tone="warning" title={phase === 'failed' ? 'Le dépôt n’a pas abouti' : undefined}><p role="alert">{error}</p></Callout>}
       </form>
-    </Inspector>
+    </Drawer>
   );
 }
 
-function MetadataInspector({ asset, token, onClose, onDone }: { asset: Asset; token: string; onClose: () => void; onDone: (asset: Asset) => void }) {
+/** Fiche d'un média : aperçu, crédits, versions ; modification des informations dans le même panneau. */
+function AssetDrawer({ asset, token, onClose, onUpdated, onReplace }: {
+  asset: Asset; token: string; onClose: () => void; onUpdated: (asset: Asset) => void; onReplace: () => void;
+}) {
+  const [version, setVersion] = useState(latestVersion(asset));
+  const [editing, setEditing] = useState(false);
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
+  const formId = useId();
+  const shown = asset.versions.find((item) => item.version === version);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -274,10 +370,12 @@ function MetadataInspector({ asset, token, onClose, onDone }: { asset: Asset; to
     setBusy(true);
     setError('');
     try {
-      onDone(await requestApi<Asset>(`/media/${encodeURIComponent(asset.id)}`, token, {
+      const updated = await requestApi<Asset>(`/media/${encodeURIComponent(asset.id)}`, token, {
         method: 'PUT',
         body: { title: read('title'), source: read('source'), license: read('license'), alt: read('alt') || null, transcript: read('transcript') || null },
-      }));
+      });
+      onUpdated(updated);
+      setEditing(false);
     } catch (failure) {
       setError(getError(failure));
     } finally {
@@ -285,42 +383,97 @@ function MetadataInspector({ asset, token, onClose, onDone }: { asset: Asset; to
     }
   }
 
+  if (editing) {
+    return (
+      <Drawer title={`Informations · ${asset.title}`} onClose={onClose}
+        description="Les parcours déjà publiés conservent leurs textes. Ces informations serviront aux brouillons et aux prochaines versions."
+        footer={<div className="ed-drawer-actions">
+          <button type="button" className="btn btn-ghost" onClick={() => setEditing(false)}>Annuler</button>
+          <button type="submit" form={formId} className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
+        </div>}>
+        <form id={formId} className="ed-fields" onSubmit={submit}>
+          <label>Titre<input name="title" required maxLength={120} defaultValue={asset.title} /></label>
+          {asset.kind === 'image'
+            ? <label>Texte alternatif<textarea name="alt" rows={3} maxLength={300} defaultValue={asset.alt ?? ''} /></label>
+            : <label>Transcription<textarea name="transcript" rows={6} maxLength={4000} defaultValue={asset.transcript ?? ''} lang="de" /></label>}
+          <div className="ed-grid-2">
+            <label>Source<input name="source" maxLength={200} defaultValue={asset.source ?? ''} /></label>
+            <label>Licence<input name="license" maxLength={120} defaultValue={asset.license ?? ''} /></label>
+          </div>
+          {error && <Callout tone="warning"><p role="alert">{error}</p></Callout>}
+        </form>
+      </Drawer>
+    );
+  }
+
   return (
-    <Inspector title={`Informations · ${asset.title}`} onClose={onClose}>
-      <form className="teacher-form stack" onSubmit={submit}>
-        <p className="muted">Les parcours déjà publiés conservent leurs textes. Ces informations seront utilisées dans les brouillons et les prochaines versions.</p>
-        <label>Titre<input name="title" required maxLength={120} defaultValue={asset.title} /></label>
-        {asset.kind === 'image'
-          ? <label>Texte alternatif<textarea name="alt" rows={2} maxLength={300} defaultValue={asset.alt ?? ''} /></label>
-          : <label>Transcription<textarea name="transcript" rows={4} maxLength={4000} defaultValue={asset.transcript ?? ''} lang="de" /></label>}
-        <div className="pilot-form-grid">
-          <label>Source<input name="source" maxLength={200} defaultValue={asset.source ?? ''} /></label>
-          <label>Licence<input name="license" maxLength={120} defaultValue={asset.license ?? ''} /></label>
-        </div>
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-        <div className="teacher-form-actions">
-          <button type="button" className="btn btn-outline" onClick={onClose}>Fermer</button>
-          <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Enregistrement…' : 'Enregistrer'}</button>
-        </div>
-      </form>
-    </Inspector>
+    <Drawer wide={asset.kind === 'image'} title={asset.title} onClose={onClose}
+      description={<span className="ed-sheet-sub">{asset.kind === 'image' ? <ImageIcon size={14} aria-hidden="true" /> : <AudioLines size={14} aria-hidden="true" />}
+        {asset.kind === 'image' ? 'Image' : 'Son'} · <code>{asset.id}</code></span>}
+      footer={<div className="ed-drawer-actions">
+        <button type="button" className="btn btn-secondary" onClick={() => setEditing(true)}
+          aria-label={`Modifier les informations de ${asset.title}`}><Pencil size={16} aria-hidden="true" /> Modifier les informations</button>
+        <button type="button" className="btn btn-primary" onClick={onReplace}
+          aria-label={`Nouvelle version de ${asset.title}`}><UploadIcon size={16} aria-hidden="true" /> Nouvelle version</button>
+      </div>}>
+      <MediaPreview assetId={asset.id} version={version} token={token} />
+      <Facts items={[
+        { label: 'Version affichée', value: <span className="ed-fact-badge">v{version}{shown && <Badge tone={assetVersionTone[shown.status]}>{versionStatus[shown.status]}</Badge>}</span> },
+        { label: 'Format', value: FORMAT_NAMES[shown?.mimeType ?? asset.mimeType] ?? (shown?.mimeType ?? asset.mimeType) },
+        { label: 'Poids', value: formatSize(shown?.sizeBytes ?? null) || '—' },
+        { label: 'Mis à jour', value: asset.updatedAt ? dateFormat.format(new Date(asset.updatedAt)) : '—' },
+      ]} />
+      <section className="ed-sheet-section" aria-labelledby={`${formId}-credits`}>
+        <h3 id={`${formId}-credits`}>Crédits</h3>
+        {asset.source || asset.license
+          ? <Facts items={[{ label: 'Source', value: asset.source ?? '—' }, { label: 'Licence', value: asset.license ?? '—' }]} />
+          : <Callout tone="warning" title="Source et licence à renseigner">Complétez-les avant d’utiliser ce média dans un parcours publié.</Callout>}
+        {asset.credit && asset.credit !== [asset.source, asset.license].filter(Boolean).join(' · ') && <p className="ed-credit-line">{asset.credit}</p>}
+      </section>
+      {asset.kind === 'image' && (
+        <section className="ed-sheet-section" aria-labelledby={`${formId}-alt`}>
+          <h3 id={`${formId}-alt`}>Texte alternatif</h3>
+          {asset.alt ? <blockquote className="ed-quote">{asset.alt}</blockquote> : <Callout tone="warning">Aucun texte alternatif : ajoutez-en un pour les lecteurs d’écran.</Callout>}
+        </section>
+      )}
+      <section className="ed-sheet-section" aria-labelledby={`${formId}-versions`}>
+        <h3 id={`${formId}-versions`}><History size={17} aria-hidden="true" /> Versions</h3>
+        {asset.versions.length === 0 ? <p className="ed-muted">Aucune version enregistrée.</p> : (
+          <Timeline items={asset.versions.map((item) => ({
+            id: String(item.version),
+            tone: item.status === 'published' ? 'success' : item.status === 'draft' ? 'warning' : undefined,
+            icon: item.status === 'published' ? <CheckCircle2 size={15} /> : item.status === 'draft' ? <FileClock size={15} /> : <History size={15} />,
+            title: (
+              <span className="ed-version-line">
+                {item.version === version
+                  ? <span className="ed-version-name">Version {item.version}</span>
+                  : <button type="button" className="ed-version-link" onClick={() => setVersion(item.version)}>Version {item.version}</button>}
+                <Badge tone={assetVersionTone[item.status]}>{versionStatus[item.status]}</Badge>
+                {item.version === version && <span className="ed-shown">Affichée</span>}
+              </span>
+            ),
+            meta: [item.createdAt ? `Déposée le ${dateFormat.format(new Date(item.createdAt))}` : '', FORMAT_NAMES[item.mimeType] ?? '', formatSize(item.sizeBytes)].filter(Boolean).join(' · '),
+          }))} />
+        )}
+      </section>
+    </Drawer>
   );
 }
 
 type LibraryAction =
   | { type: 'upload'; replace?: Asset }
-  | { type: 'metadata'; asset: Asset }
-  | { type: 'preview'; asset: Asset; version: number };
+  | { type: 'asset'; asset: Asset };
 
-/** Médiathèque des images et des sons : liste, filtres, aperçu, dépôt, nouvelle version et informations. */
+/** Médiathèque des images et des sons : vignettes, filtres, fiche, dépôt, nouvelle version et informations. */
 export function MediaLibraryPanel({ token }: { token: string }) {
+  const toast = useToast();
   const [assets, setAssets] = useState<Asset[] | null>(null);
   const [uploads, setUploads] = useState<Upload[]>([]);
   const [error, setError] = useState('');
-  const [notice, setNotice] = useState('');
   const [refresh, setRefresh] = useState(0);
-  const [kind, setKind] = useState<'all' | 'image' | 'audio'>('all');
+  const [kind, setKind] = useState<'all' | Asset['kind']>('all');
   const [query, setQuery] = useState('');
+  const [tab, setTab] = useState('library');
   const [action, setAction] = useState<LibraryAction | null>(null);
 
   useEffect(() => {
@@ -333,106 +486,96 @@ export function MediaLibraryPanel({ token }: { token: string }) {
     return () => { active = false; };
   }, [token, refresh]);
 
-  const normalize = (value: string) => value.normalize('NFD').replace(/\p{Diacritic}/gu, '').toLowerCase().trim();
-  const search = normalize(query);
-  const visible = (assets ?? []).filter((asset) => (kind === 'all' || asset.kind === kind)
-    && (!search || normalize(`${asset.title} ${asset.id} ${asset.source ?? ''} ${asset.credit ?? ''}`).includes(search)));
+  const reload = () => setRefresh((value) => value + 1);
+  const visible = filterAssets(assets ?? [], kind, query);
+  const missingCredits = (assets ?? []).filter((asset) => !asset.source && !asset.credit).length;
 
   return (
-    <section className="panel stack catalogue-workspace" aria-label="Médias disponibles">
-      <div className="staff-panel-actions">
-        <span className="accounts-actions">
-          <button type="button" className="btn btn-outline" onClick={() => setRefresh((value) => value + 1)}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
+    <div className="ed-library lc-enter">
+      <div className="ed-library-head">
+        <Tabs label="Sections de la médiathèque" idPrefix="media" value={tab} onChange={setTab} tabs={[
+          { id: 'library', label: 'Bibliothèque', icon: <ImageIcon size={16} aria-hidden="true" />, count: assets?.length },
+          { id: 'uploads', label: 'Mes dépôts', icon: <Inbox size={16} aria-hidden="true" />, count: uploads.length },
+        ]} />
+        <div className="ed-library-actions">
+          <button type="button" className="icon-button ed-icon-outline" onClick={reload} aria-label="Actualiser" title="Actualiser"><RefreshCw size={18} aria-hidden="true" /></button>
           <button type="button" className="btn btn-primary" onClick={() => setAction({ type: 'upload' })}><UploadIcon size={17} aria-hidden="true" /> Déposer un média</button>
-        </span>
+        </div>
       </div>
-      <div className="media-filters">
-        <label>Type<select value={kind} onChange={(event) => setKind(event.target.value as typeof kind)}>
-          <option value="all">Tous</option><option value="image">Images</option><option value="audio">Sons</option>
-        </select></label>
-        <label>Rechercher<input type="search" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Titre, identifiant, source" /></label>
-      </div>
-      {notice && <p className="inline-message" role="status">{notice}</p>}
-      {error ? <p className="inline-message warning" role="alert">{error}</p>
-        : assets === null ? <p role="status">Chargement de la médiathèque…</p>
-        : visible.length === 0 ? <EmptyState
-            title={assets.length ? 'Aucun média trouvé' : 'Aucun média'}
-            description={assets.length ? 'Modifiez la recherche ou le type de fichier.' : 'Déposez une image ou un son pour l’utiliser dans un parcours.'} />
-        : (
-          <ul className="media-list">
-            {visible.map((asset) => {
-              const latest = asset.versions[0];
-              return (
-                <li key={asset.id}>
-                  <div className="media-card-heading">
-                    <span className="media-kind" aria-hidden="true">{asset.kind === 'image' ? <ImageIcon size={20} /> : <FileAudio size={20} />}</span>
-                    {latest && <Badge tone={latest.status === 'published' ? 'green' : latest.status === 'draft' ? 'amber' : 'neutral'}>v{latest.version} · {versionStatus[latest.status]}</Badge>}
+
+      {tab === 'library' ? (
+        <TabPanel id="library" idPrefix="media">
+          <div className="ed-library-body">
+            <Toolbar label="Filtrer les médias">
+              <SearchField label="Rechercher un média" placeholder="Titre, identifiant, source" value={query} onChange={setQuery} />
+              {assets && <KindChips assets={assets} value={kind} onChange={setKind} />}
+            </Toolbar>
+            {missingCredits > 0 && <Callout tone="warning">{missingCredits > 1 ? `${missingCredits} médias sans source ni licence : complétez leurs crédits depuis leur fiche.` : 'Un média sans source ni licence : complétez ses crédits depuis sa fiche.'}</Callout>}
+            {error ? (
+              <div className="ed-load-error"><Callout tone="warning" title="La médiathèque est indisponible"><p role="alert">{error}</p></Callout>
+                <button type="button" className="btn btn-secondary" onClick={reload}><RefreshCw size={16} aria-hidden="true" /> Réessayer</button></div>
+            ) : assets === null ? (
+              <div className="ed-media-grid" role="status" aria-label="Chargement de la médiathèque…">
+                {Array.from({ length: 10 }, (_, index) => (
+                  <div key={index} className="ed-tile is-skeleton" aria-hidden="true">
+                    <Skeleton height="auto" radius={0} /><span className="ed-tile-body"><Skeleton width="80%" /><Skeleton width="50%" height={11} /></span>
                   </div>
-                  <div className="media-main">
-                    <h3>{asset.title}</h3>
-                    <span className="muted">{asset.kind === 'image' ? 'Image' : 'Son'}{latest?.sizeBytes ? ` · ${formatSize(latest.sizeBytes)}` : ''}</span>
-                    {asset.credit ? <span className="muted">{asset.credit}</span> : <span className="media-missing-credit">Source et licence à renseigner</span>}
-                  </div>
-                  <button type="button" className="btn btn-outline btn-small"
-                    onClick={() => setAction({ type: 'preview', asset, version: latestVersion(asset) })}
-                    aria-label={`Aperçu de ${asset.title}`}>Consulter le média</button>
-                </li>
-              );
-            })}
-          </ul>
-        )}
-      {uploads.length > 0 && (
-        <section className="stack media-recent" aria-labelledby="media-uploads-title">
-          <h3 id="media-uploads-title">Mes dépôts récents</h3>
-          <ul className="pilot-list">
-            {uploads.map((upload) => (
-              <li key={upload.id}>
-                <p><strong>{upload.title}</strong>{upload.version ? ` · v${upload.version}` : ''}{upload.reason ? ` · ${upload.reason}` : ''}</p>
-                <Badge tone={uploadStatus[upload.status].tone}>{uploadStatus[upload.status].label}</Badge>
-              </li>
-            ))}
-          </ul>
-        </section>
+                ))}
+              </div>
+            ) : visible.length === 0 ? (
+              <div className="ed-empty-card">
+                <EmptyState icon={<ImageIcon size={26} />} title={assets.length ? 'Aucun média trouvé' : 'Aucun média pour l’instant'}
+                  description={assets.length ? 'Modifiez la recherche ou le type de fichier.' : 'Déposez une image ou un son pour l’utiliser dans un parcours.'}
+                  action={assets.length
+                    ? <button type="button" className="btn btn-secondary" onClick={() => { setQuery(''); setKind('all'); }}>Effacer les filtres</button>
+                    : <button type="button" className="btn btn-primary" onClick={() => setAction({ type: 'upload' })}><UploadIcon size={16} aria-hidden="true" /> Déposer un premier fichier</button>} />
+              </div>
+            ) : (
+              <ul className="ed-media-grid lc-stagger">
+                {visible.map((asset) => (
+                  <li key={asset.id}>
+                    <AssetTile asset={asset} token={token} label={`Ouvrir la fiche de ${asset.title}`} onOpen={() => setAction({ type: 'asset', asset })} />
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        </TabPanel>
+      ) : (
+        <TabPanel id="uploads" idPrefix="media">
+          <section className="kit-card is-flush ed-uploads" aria-label="Mes dépôts récents">
+            {uploads.length === 0
+              ? <EmptyState icon={<Inbox size={26} />} title="Aucun dépôt récent" description="Vos derniers dépôts apparaîtront ici avec leur état." />
+              : (
+                <ul className="kit-list lc-stagger">
+                  {uploads.map((upload) => (
+                    <ListItem as="li" key={upload.id}
+                      leading={<span className={`ed-upload-icon is-${upload.status}`}>{upload.kind === 'audio' ? <AudioLines size={18} aria-hidden="true" /> : <ImageIcon size={18} aria-hidden="true" />}</span>}
+                      title={upload.title}
+                      subtitle={[upload.version ? `Version ${upload.version}` : upload.replaces ? 'Nouvelle version' : 'Nouveau média',
+                        `déposé le ${dateTime.format(new Date(upload.createdAt))}`, formatSize(upload.size), upload.reason ?? ''].filter(Boolean).join(' · ')}
+                      trailing={<Badge tone={uploadStatus[upload.status].tone}>{uploadStatus[upload.status].label}</Badge>} />
+                  ))}
+                </ul>
+              )}
+          </section>
+        </TabPanel>
       )}
-      {action?.type === 'upload' && <UploadInspector token={token} replace={action.replace} onClose={() => { setAction(null); setRefresh((value) => value + 1); }}
+
+      {action?.type === 'upload' && <UploadDrawer token={token} replace={action.replace} onClose={() => { setAction(null); reload(); }}
         onDone={(upload) => {
           setAction(null);
-          setNotice(`« ${upload.title} » est disponible en version ${upload.version}.`);
-          setRefresh((value) => value + 1);
+          if (upload.status === 'available' || upload.version) toast(`« ${upload.title} » est disponible en version ${upload.version}.`);
+          else toast(`« ${upload.title} » n’a pas été accepté${upload.reason ? ` : ${upload.reason}` : '.'}`, 'warning');
+          reload();
         }} />}
-      {action?.type === 'metadata' && <MetadataInspector asset={action.asset} token={token} onClose={() => setAction(null)} onDone={(asset) => {
-        setAction((current) => current === action ? null : current);
-        setAssets((current) => current?.map((item) => item.id === asset.id ? asset : item) ?? null);
-        setNotice(`Informations de « ${asset.title} » enregistrées.`);
-      }} />}
-      {action?.type === 'preview' && (
-        <Inspector title={action.asset.title} onClose={() => setAction(null)}>
-          <div className="stack">
-            <div className="media-inspector-meta">
-              <Badge tone="blue">{action.asset.kind === 'image' ? 'Image' : 'Son'}</Badge>
-              <span className="muted">{action.asset.id}</span>
-            </div>
-            <label className="media-version-select">Version du fichier<select value={action.version} disabled={action.asset.versions.length <= 1}
-              onChange={(event) => setAction({ ...action, version: Number(event.target.value) })}>
-              {action.asset.versions.length === 0 && <option value={action.version}>v{action.version}</option>}
-              {action.asset.versions.map((item) => <option key={item.version} value={item.version}>v{item.version} · {versionStatus[item.status]}</option>)}
-            </select></label>
-            <MediaPreview assetId={action.asset.id} version={action.version} token={token} />
-            {(action.asset.source || action.asset.license) && (
-              <dl className="media-credits">
-                {action.asset.source && <div><dt>Source</dt><dd>{action.asset.source}</dd></div>}
-                {action.asset.license && <div><dt>Licence</dt><dd>{action.asset.license}</dd></div>}
-              </dl>
-            )}
-            <div className="accounts-actions">
-              <button type="button" className="btn btn-outline" onClick={() => setAction({ type: 'metadata', asset: action.asset })}
-                aria-label={`Modifier les informations de ${action.asset.title}`}><Pencil size={16} aria-hidden="true" /> Modifier les informations</button>
-              <button type="button" className="btn btn-primary" onClick={() => setAction({ type: 'upload', replace: action.asset })}
-                aria-label={`Nouvelle version de ${action.asset.title}`}>Nouvelle version</button>
-            </div>
-          </div>
-        </Inspector>
-      )}
-    </section>
+      {action?.type === 'asset' && <AssetDrawer key={action.asset.id} asset={action.asset} token={token} onClose={() => setAction(null)}
+        onReplace={() => setAction({ type: 'upload', replace: action.asset })}
+        onUpdated={(asset) => {
+          setAssets((current) => current?.map((item) => item.id === asset.id ? asset : item) ?? null);
+          setAction({ type: 'asset', asset });
+          toast(`Informations de « ${asset.title} » enregistrées.`);
+        }} />}
+    </div>
   );
 }

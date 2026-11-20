@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { Activity, BookOpen, CalendarDays, ChartNoAxesCombined, ClipboardList, Files, LayoutDashboard, Menu, MessageSquare, Users, X } from 'lucide-react';
 import { isApiMode } from '../app/config';
 import type { Role } from '../domain/types';
@@ -41,20 +41,20 @@ export function Logo({ footer = false }: { footer?: boolean }) {
 
 export function Header() {
   const [expanded, setExpanded] = useState(false);
-  const pathname = useLocation().pathname;
-  const links = isApiMode
-    ? [primaryLinks[0], { path: '/espace', title: 'Mon espace' }, { path: '/integration', title: 'Intégration' }]
-    : primaryLinks;
+  // En mode réel, la vitrine ne s'adresse qu'aux visiteurs : liens vers ses sections, puis connexion.
+  const sections = [{ href: '/#parcours', title: 'Le parcours' }, { href: '/#methode', title: 'La méthode' }, { href: '/#espaces', title: 'Pour qui' }];
 
   return (
     <header className="site-header">
       <div className="container header-inner">
         <Logo />
         <nav className={`primary-nav${expanded ? ' is-open' : ''}`} id="main-navigation" aria-label="Navigation principale">
-          {links.map((link) => <NavLink key={link.path} to={link.path} end={'end' in link && link.end} onClick={() => setExpanded(false)}>{link.title}</NavLink>)}
-          {expanded && <Link className="mobile-access" to="/connexion" onClick={() => setExpanded(false)}>{isApiMode ? 'Connexion' : 'Accès à la démo'}</Link>}
+          {isApiMode
+            ? sections.map((link) => <a key={link.href} href={link.href} onClick={() => setExpanded(false)}>{link.title}</a>)
+            : primaryLinks.map((link) => <NavLink key={link.path} to={link.path} end={'end' in link && link.end} onClick={() => setExpanded(false)}>{link.title}</NavLink>)}
+          {expanded && <Link className="mobile-access" to="/connexion" onClick={() => setExpanded(false)}>{isApiMode ? 'Se connecter' : 'Accès à la démo'}</Link>}
         </nav>
-        <Link className="btn btn-primary header-cta" to={isApiMode && pathname === '/connexion' ? '/espace' : '/connexion'}>{isApiMode ? 'Connexion' : 'Mon espace'}</Link>
+        <Link className="btn btn-primary header-cta" to="/connexion">{isApiMode ? 'Se connecter' : 'Mon espace'}</Link>
         <button className="icon-button menu-toggle" type="button" aria-label={expanded ? 'Fermer le menu' : 'Ouvrir le menu'} aria-controls="main-navigation" aria-expanded={expanded} onClick={() => setExpanded(!expanded)}>
           {expanded ? <X size={23} /> : <Menu size={23} />}
         </button>
@@ -68,8 +68,8 @@ export function Footer() {
     <footer className="site-footer">
       <div className="container footer-inner">
         <Logo footer />
-        <span>Allemand · A1 et A2</span>
-        <Link to="/integration"><Activity size={16} /> État de l’intégration</Link>
+        <span>Allemand · A1 et A2 · Apprendre à son rythme</span>
+        <Link to="/integration"><Activity size={15} /> État du service</Link>
         {!isApiMode && <span className="footer-mode">Données de démonstration</span>}
       </div>
     </footer>

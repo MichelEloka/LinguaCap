@@ -1,0 +1,66 @@
+/* Calendrier par semaine de l'espace élève (voir learner-calendar.tsx). */
+
+.lx-week-wrap { container: lx-week / inline-size; min-width: 0; }
+.lx-week { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); gap: .5rem; margin: 0; padding: 0; list-style: none; }
+.lx-day { position: relative; display: grid; align-content: start; gap: .5rem; min-width: 0; min-height: 112px; padding: .6rem .55rem;
+  background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--r-md);
+  transition: border-color var(--t-fast) ease, background var(--t-fast) ease; }
+.lx-day.is-today { background: var(--brand-50); border-color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand); }
+.lx-day.is-off { background: repeating-linear-gradient(135deg, var(--surface-2) 0 7px, var(--canvas) 7px 14px); }
+.lx-day-head { display: flex; align-items: baseline; justify-content: space-between; gap: .3rem; }
+.lx-day-name { color: var(--muted); font-size: var(--text-xs); font-weight: 700; text-transform: capitalize; }
+.lx-day-num { color: var(--ink); font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+.lx-day.is-today .lx-day-name, .lx-day.is-today .lx-day-num { color: var(--brand-600); }
+.lx-day-off { align-self: end; color: var(--subtle); font-size: var(--text-xs); font-weight: 600; }
+
+.lx-events { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.lx-event { --tone: var(--line-strong); display: flex; align-items: flex-start; gap: .4rem; width: 100%; min-width: 0; padding: .4rem .5rem;
+  text-align: left; font-size: var(--text-xs); line-height: 1.25; background: var(--surface); border: 1px solid var(--line);
+  border-left: 3px solid var(--tone); border-radius: var(--r-sm);
+  transition: transform var(--t-fast) var(--ease), box-shadow var(--t-fast) var(--ease), border-color var(--t-fast) ease; }
+button.lx-event:hover { transform: translateY(-1px); box-shadow: var(--shadow-sm); border-color: var(--line-strong); border-left-color: var(--tone); }
+.lx-event.is-done { --tone: var(--success); }
+.lx-event.is-current { --tone: var(--brand); }
+.lx-event.is-todo { --tone: var(--brand-100); }
+.lx-event.is-late { --tone: var(--warning); background: var(--warning-50); }
+.lx-event.is-plan { --tone: var(--violet); }
+.lx-event-text { display: grid; gap: .1rem; min-width: 0; }
+.lx-event-text strong { display: -webkit-box; overflow: hidden; color: var(--ink); font-weight: 700; overflow-wrap: anywhere;
+  -webkit-box-orient: vertical; -webkit-line-clamp: 2; line-clamp: 2; }
+.lx-event-text small { color: var(--muted); font-size: var(--text-xs); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lx-event.is-done .lx-event-text strong { color: var(--ink-2); }
+.lx-event-dot { display: none; width: 10px; height: 10px; flex-shrink: 0; border-radius: 50%; background: var(--tone); }
+.lx-event.is-todo .lx-event-dot { background: var(--surface); box-shadow: inset 0 0 0 2px var(--brand); }
+
+/* Légende et navigation entre semaines */
+.lx-legend { display: flex; flex-wrap: wrap; gap: .35rem 1rem; margin: 0; padding: 0; list-style: none; color: var(--muted); font-size: var(--text-xs); font-weight: 600; }
+.lx-legend li { display: inline-flex; align-items: center; gap: .4rem; }
+.lx-legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+.lx-legend-dot.is-done { background: var(--success); }
+.lx-legend-dot.is-current { background: var(--brand); }
+.lx-legend-dot.is-todo { box-shadow: inset 0 0 0 2px var(--brand); }
+.lx-legend-dot.is-late { background: var(--warning); }
+.lx-legend-dot.is-plan { background: var(--violet); }
+.lx-pager { display: inline-flex; align-items: center; gap: .25rem; min-width: 0; }
+.lx-pager-button { width: 36px; height: 36px; border: 1px solid var(--line); background: var(--surface); }
+.lx-pager-label { display: grid; min-width: 0; padding-inline: .35rem; text-align: center; color: var(--ink); font-size: var(--text-sm); font-weight: 700; line-height: 1.2; white-space: nowrap; }
+.lx-pager-label small { color: var(--muted); font-size: var(--text-xs); font-weight: 600; }
+.lx-pager-today { margin-left: .25rem; }
+
+/* Conteneur étroit : frise en pastilles, agenda en lignes */
+@container lx-week (max-width: 560px) {
+  .lx-week.is-strip { gap: .3rem; }
+  .is-strip .lx-day { min-height: 84px; padding: .5rem .15rem; justify-items: center; text-align: center; gap: .45rem; }
+  .is-strip .lx-day-head { flex-direction: column; align-items: center; gap: .15rem; }
+  .is-strip .lx-events { display: flex; flex-wrap: wrap; justify-content: center; gap: .25rem; }
+  .is-strip .lx-event { width: auto; padding: 0; background: none; border: 0; }
+  .is-strip .lx-event-dot { display: block; }
+  .is-strip .lx-event-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+  .is-strip .lx-day-off { display: none; }
+
+  .lx-week.is-agenda { grid-template-columns: minmax(0, 1fr); gap: .4rem; }
+  .is-agenda .lx-day { grid-template-columns: 3.4rem minmax(0, 1fr); align-items: start; min-height: 0; padding: .55rem .6rem; }
+  .is-agenda .lx-day.is-empty { display: none; }
+  .is-agenda .lx-day-head { flex-direction: column; align-items: flex-start; gap: .1rem; }
+  .is-agenda .lx-event { padding: .55rem .65rem; font-size: var(--text-sm); }
+}

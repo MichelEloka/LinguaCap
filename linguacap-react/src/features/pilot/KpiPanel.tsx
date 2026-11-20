@@ -1,7 +1,10 @@
-import { useEffect, useState, type FormEvent } from 'react';
-import { RefreshCw } from 'lucide-react';
-import { EmptyState, StatCard } from '../../components/ui';
+import { useEffect, useState, type ReactNode } from 'react';
+import { AlertTriangle, CalendarCheck2, CircleCheck, Hourglass, Loader2, MessageCircleHeart, RefreshCw, RotateCcw, SlidersHorizontal, TrendingDown, TrendingUp, UserCheck, UsersRound } from 'lucide-react';
+import { EmptyState, ProgressBar } from '../../components/ui';
+import { Bars, Callout, Card, Drawer, ProgressRing, Segmented, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { formatRelative, getError } from './admin-common';
+import './admin.css';
 
 interface Rate { numerator: number; denominator: number; rate: number | null }
 interface Dashboard {
@@ -18,22 +21,103 @@ interface Dashboard {
   freshness: { syncedAt: string | null; lastStatus: string | null };
 }
 
+type Filters = Record<'from' | 'to' | 'startLevel' | 'level' | 'template' | 'kind', string>;
+
+const emptyFilters: Filters = { from: '', to: '', startLevel: '', level: '', template: '', kind: '' };
+const filterKeys = Object.keys(emptyFilters) as (keyof Filters)[];
 const competenceNames: Record<string, string> = {
   lecture: 'Lecture', ecoute: 'Écoute', 'expression-ecrite': 'Expression écrite', 'expression-orale': 'Expression orale',
 };
 const dayFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
+const compactDay = new Intl.DateTimeFormat('fr-FR', { day: '2-digit', month: '2-digit' });
+const periodFormat = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
 const stamp = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium', timeStyle: 'short' });
 
-function getError(error: unknown) {
-  return error instanceof Error ? error.message : 'Les indicateurs sont temporairement indisponibles.';
+/** Vrai tant que la requête média correspond (largeur d'écran). */
+function useMedia(query: string) {
+  const [matches, setMatches] = useState(() => typeof window !== 'undefined' && window.matchMedia(query).matches);
+  useEffect(() => {
+    const list = window.matchMedia(query);
+    const update = () => setMatches(list.matches);
+    update();
+    list.addEventListener('change', update);
+    return () => list.removeEventListener('change', update);
+  }, [query]);
+  return matches;
+}
+
+/** Une date « AAAA-MM-JJ » est lue comme un jour local (et non minuit UTC). */
+function localDate(value: string) {
+  return new Date(/^\d{4}-\d{2}-\d{2}$/.test(value) ? `${value}T00:00:00` : value);
 }
 
 function percent(rate: Rate) {
-  return rate.rate === null ? '—' : `${rate.rate.toLocaleString('fr-FR')} %`;
+  return rate.rate === null ? '—' : `${rate.rate.toLocaleString('fr-FR', { maximumFractionDigits: 1 })} %`;
 }
 
-function share(rate: Rate, unit: string) {
-  return rate.denominator === 0 ? `Aucun ${unit} dans ce groupe` : `${rate.numerator} sur ${rate.denominator} ${unit}`;
+function share(rate: Rate, unit: string, none: string) {
+  return rate.denominator === 0 ? none : `${rate.numerator} sur ${rate.denominator} ${unit}`;
+}
+
+function RateCard({ icon, title, rate, unit, none }: { icon: ReactNode; title: string; rate: Rate; unit: string; none: string }) {
+  const empty = rate.denominator === 0 || rate.rate === null;
+  return (
+    <article className={`admin-rate${empty ? ' is-empty' : ''}`}>
+      <span className="admin-rate-icon" aria-hidden="true">{icon}</span>
+      <div className="admin-rate-main">
+        <h3>{title}</h3>
+        <p>{share(rate, unit, none)}</p>
+        {!empty && <ProgressBar value={rate.rate ?? 0} label={title} />}
+      </div>
+      <strong className="admin-rate-value">{percent(rate)}</strong>
+    </article>
+  );
+}
+
+function Freshness({ freshness }: { freshness: Dashboard['freshness'] }) {
+  const failed = freshness.lastStatus === 'failed';
+  const running = freshness.lastStatus === 'running';
+  const stale = !freshness.syncedAt || Date.now() - new Date(freshness.syncedAt).getTime() > 36 * 3_600_000;
+  const tone = failed || !freshness.syncedAt ? 'is-warning' : stale ? 'is-stale' : '';
+  return (
+    <span className={`admin-freshness ${tone}`} title={freshness.syncedAt ? `Suivi actualisé le ${stamp.format(new Date(freshness.syncedAt))}` : undefined}>
+      {running ? <Loader2 size={15} aria-hidden="true" /> : failed || !freshness.syncedAt ? <AlertTriangle size={15} aria-hidden="true" /> : <CircleCheck size={15} aria-hidden="true" />}
+      {freshness.syncedAt ? `Suivi actualisé ${formatRelative(freshness.syncedAt)}` : 'Suivi pas encore actualisé'}
+      {failed && ' · dernière actualisation en échec'}
+      {running && ' · actualisation en cours'}
+    </span>
+  );
+}
+
+/** Champs de filtre, dans la barre (bureau) ou dans le panneau latéral (mobile) ; chaque choix s'applique aussitôt. */
+function FilterFields({ filters, period, onChange }: {
+  filters: Filters; period?: { from: string; to: string }; onChange: (key: keyof Filters) => (value: string) => void;
+}) {
+  return (
+    <>
+      <div className="admin-kpi-period">
+        <label>Du<input type="date" name="from" value={filters.from || period?.from || ''} max={filters.to || period?.to || undefined}
+          onChange={(event) => onChange('from')(event.target.value)} /></label>
+        <label>Au<input type="date" name="to" value={filters.to || period?.to || ''} min={filters.from || period?.from || undefined}
+          onChange={(event) => onChange('to')(event.target.value)} /></label>
+      </div>
+      <label>Niveau de départ<select name="startLevel" value={filters.startLevel} onChange={(event) => onChange('startLevel')(event.target.value)}>
+        <option value="">Tous</option><option value="A0">Débutant</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option>
+      </select></label>
+      <label>Niveau cible<select name="level" value={filters.level} onChange={(event) => onChange('level')(event.target.value)}>
+        <option value="">Tous</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option>
+      </select></label>
+      <label>Cadence<select name="template" value={filters.template} onChange={(event) => onChange('template')(event.target.value)}>
+        <option value="">Toutes</option><option value="intensive">Intensif</option><option value="standard">Standard</option><option value="custom">Personnalisée</option>
+      </select></label>
+      <div className="admin-kpi-kind">
+        <span className="admin-field-label" aria-hidden="true">Parcours</span>
+        <Segmented label="Type de parcours" value={filters.kind} onChange={onChange('kind')} options={[
+          { value: '', label: 'Tous' }, { value: 'accompanied', label: 'Accompagnés' }, { value: 'autonomous', label: 'Autonomes' },
+        ]} />
+      </div>
+    </>
+  );
 }
 
 /**
@@ -41,91 +125,145 @@ function share(rate: Rate, unit: string) {
  * cible, cadence et type de parcours, avec leurs effectifs et la date d'actualisation du suivi.
  */
 export function KpiPanel({ token }: { token: string }) {
-  const [query, setQuery] = useState('');
+  const [filters, setFilters] = useState<Filters>(emptyFilters);
   const [data, setData] = useState<Dashboard | null>(null);
   const [error, setError] = useState('');
   const [refresh, setRefresh] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const params = new URLSearchParams();
+  for (const key of filterKeys) if (filters[key]) params.set(key, filters[key]);
+  const query = params.toString();
 
   useEffect(() => {
     let active = true;
     setError('');
+    setLoading(true);
     requestApi<Dashboard>(`/tracking/kpis?${query}`, token).then(
       (result) => { if (active) setData(result); },
-      (failure: unknown) => { if (active) setError(getError(failure)); },
-    );
+      (failure: unknown) => { if (active) setError(getError(failure, 'Les indicateurs sont temporairement indisponibles.')); },
+    ).finally(() => { if (active) setLoading(false); });
     return () => { active = false; };
   }, [query, token, refresh]);
 
-  function apply(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    const form = new FormData(event.currentTarget);
-    const params = new URLSearchParams();
-    for (const key of ['from', 'to', 'startLevel', 'level', 'template', 'kind']) {
-      const value = String(form.get(key) ?? '');
-      if (value) params.set(key, value);
-    }
-    setQuery(params.toString());
-  }
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const set = (key: keyof Filters) => (value: string) => setFilters((current) => ({ ...current, [key]: value }));
+  const filtered = filterKeys.some((key) => filters[key]);
+  const activeCount = filterKeys.filter((key) => filters[key]).length;
+  const weeks = data?.activeLearners ?? [];
+  const narrow = useMedia('(max-width: 760px)');
+  const weekLabel = weeks.length > 10 || (narrow && weeks.length > 5) ? compactDay : dayFormat;
+  const goals = data?.goalsValidated;
 
   return (
-    <section className="panel stack" aria-label="Indicateurs du pilote">
-      <div className="staff-panel-actions">
-        <button type="button" className="btn btn-outline" onClick={() => setRefresh((value) => value + 1)}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
-      </div>
-      <form className="media-filters" onSubmit={apply} aria-label="Filtrer les indicateurs">
-        <label>Du<input type="date" name="from" defaultValue={data?.filters.from} /></label>
-        <label>Au<input type="date" name="to" defaultValue={data?.filters.to} /></label>
-        <label>Niveau de départ<select name="startLevel" defaultValue="">
-          <option value="">Tous</option><option value="A0">Débutant</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option>
-        </select></label>
-        <label>Niveau cible<select name="level" defaultValue="">
-          <option value="">Tous</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option>
-        </select></label>
-        <label>Cadence<select name="template" defaultValue="">
-          <option value="">Toutes</option><option value="intensive">Intensif</option><option value="standard">Standard</option><option value="custom">Personnalisée</option>
-        </select></label>
-        <label>Parcours<select name="kind" defaultValue="">
-          <option value="">Tous</option><option value="accompanied">Accompagnés</option><option value="autonomous">Autonomes</option>
-        </select></label>
-        <button type="submit" className="btn btn-primary btn-small">Appliquer</button>
+    <div className={`admin-kpi lc-enter${loading && data ? ' is-loading' : ''}`}>
+      <form className="admin-kpi-bar" aria-label="Filtrer les indicateurs" onSubmit={(event) => event.preventDefault()}>
+        <FilterFields filters={filters} period={data?.filters} onChange={set} />
+        {filtered && <button type="button" className="btn btn-ghost btn-sm admin-kpi-reset" onClick={() => setFilters(emptyFilters)}>
+          <RotateCcw size={15} aria-hidden="true" /> Réinitialiser</button>}
       </form>
-      {error ? <p className="inline-message warning" role="alert">{error}</p> : !data ? <p role="status">Calcul des indicateurs…</p> : (
+      <div className="admin-kpi-mobile-bar">
+        <button type="button" className="btn btn-outline" onClick={() => setFiltersOpen(true)}>
+          <SlidersHorizontal size={17} aria-hidden="true" /> Filtres{activeCount > 0 && <span className="admin-chip-count is-strong">{activeCount}</span>}
+        </button>
+        {filtered && <button type="button" className="btn btn-ghost btn-sm" onClick={() => setFilters(emptyFilters)}><RotateCcw size={15} aria-hidden="true" /> Réinitialiser</button>}
+      </div>
+      {filtersOpen && (
+        <Drawer title="Filtrer les indicateurs" description="Les indicateurs se mettent à jour à chaque choix." onClose={() => setFiltersOpen(false)}
+          footer={<>
+            {filtered && <button type="button" className="btn btn-ghost" onClick={() => setFilters(emptyFilters)}>Réinitialiser</button>}
+            <button type="button" className="btn btn-primary" onClick={() => setFiltersOpen(false)}>Voir les indicateurs</button>
+          </>}>
+          <form className="admin-kpi-sheet" aria-label="Filtrer les indicateurs" onSubmit={(event) => { event.preventDefault(); setFiltersOpen(false); }}>
+            <FilterFields filters={filters} period={data?.filters} onChange={set} />
+          </form>
+        </Drawer>
+      )}
+
+      {error ? <div role="alert"><Callout tone="warning" title="Indicateurs indisponibles">{error}</Callout></div> : !data || !goals ? (
+        <div className="admin-kpi-skeleton"><SkeletonCard lines={4} label="Calcul des indicateurs…" /><SkeletonCard lines={4} /><SkeletonCard lines={3} /></div>
+      ) : (
         <>
-          <p className="muted">Du {new Date(data.filters.from).toLocaleDateString('fr-FR')} au {new Date(data.filters.to).toLocaleDateString('fr-FR')} · {data.goals} parcours retenus
-            {data.freshness.syncedAt ? ` · suivi actualisé le ${stamp.format(new Date(data.freshness.syncedAt))}` : ' · suivi pas encore actualisé'}</p>
-          <div className="teacher-stats">
-            <StatCard label="Objectifs validés à l’échéance" value={percent(data.goalsValidated)}
-              note={`${share(data.goalsValidated, 'parcours')}${data.goalsAwaitingGrading ? ` · ${data.goalsAwaitingGrading} en attente de correction` : ''}`} />
-            <StatCard label="Activation à sept jours" value={percent(data.activation)} note={share(data.activation, 'invitations')} />
-            <StatCard label="Séances terminées à temps" value={percent(data.sessionsOnTime)} note={share(data.sessionsOnTime, 'séances échues')} />
-            <StatCard label="Reprise après encouragement" value={percent(data.resumption)} note={share(data.resumption, 'relances')} />
+          <div className="admin-kpi-meta">
+            <p>Du <strong>{periodFormat.format(localDate(data.filters.from))}</strong> au <strong>{periodFormat.format(localDate(data.filters.to))}</strong>
+              <span aria-hidden="true"> · </span>{data.goals} parcours retenu{data.goals > 1 ? 's' : ''}</p>
+            <span className="admin-kpi-meta-end">
+              <Freshness freshness={data.freshness} />
+              <button type="button" className="icon-button" onClick={() => setRefresh((value) => value + 1)} aria-label="Actualiser les indicateurs" title="Actualiser">
+                <RefreshCw size={17} aria-hidden="true" />
+              </button>
+            </span>
           </div>
-          <div className="pilot-grid">
-            <section className="stack" aria-labelledby="kpi-weeks">
-              <h3 id="kpi-weeks">Élèves actifs par semaine · {data.activeLearnersTotal} sur la période</h3>
-              <table className="teacher-table">
-                <thead><tr><th scope="col">Semaine du</th><th scope="col">Élèves actifs</th></tr></thead>
-                <tbody>{data.activeLearners.map((week) => (
-                  <tr key={week.weekStart}><th scope="row">{dayFormat.format(new Date(week.weekStart))}</th><td>{week.learners}</td></tr>
-                ))}</tbody>
-              </table>
+
+          <div className="admin-kpi-top lc-stagger">
+            <section className={`admin-kpi-hero${goals.denominator === 0 ? ' is-empty' : ''}`} aria-labelledby="kpi-goals">
+              <div className="admin-kpi-hero-head">
+                <span className="admin-kpi-eyebrow">Indicateur principal</span>
+                <h2 id="kpi-goals">Objectifs validés à l’échéance</h2>
+              </div>
+              <div className="admin-kpi-hero-body">
+                <ProgressRing value={goals.rate ?? 0} size={150} stroke={13}
+                  label={goals.rate === null ? 'Aucun parcours arrivé à échéance' : `${percent(goals)} des objectifs validés à l’échéance`}>
+                  <span className="admin-kpi-ring"><strong>{percent(goals)}</strong><small>{goals.rate === null ? 'sans données' : 'validés'}</small></span>
+                </ProgressRing>
+                <dl className="admin-kpi-figures">
+                  <div><dt>Objectifs validés</dt><dd>{goals.numerator}</dd></div>
+                  <div><dt>Parcours arrivés à échéance</dt><dd>{goals.denominator}</dd></div>
+                  <div className={data.goalsAwaitingGrading ? 'is-waiting' : undefined}>
+                    <dt><Hourglass size={14} aria-hidden="true" /> En attente de correction</dt><dd>{data.goalsAwaitingGrading}</dd>
+                  </div>
+                </dl>
+              </div>
+              <p className="admin-kpi-note">{goals.denominator === 0 ? 'Aucun parcours de ce groupe n’est encore arrivé à échéance. '
+                : ''}Se lit avec la charge prévue, l’assiduité, le point de départ et le nombre de parcours observés.</p>
             </section>
-            <section className="stack" aria-labelledby="kpi-progression">
-              <h3 id="kpi-progression">Progression entre le bilan et l’examen blanc</h3>
-              {data.progression.length === 0 ? <EmptyState title="Aucun élève n’a encore passé les deux évaluations" /> : (
-                <table className="teacher-table">
-                  <thead><tr><th scope="col">Compétence</th><th scope="col">Bilan</th><th scope="col">Examen blanc</th><th scope="col">Écart</th><th scope="col">Élèves</th></tr></thead>
-                  <tbody>{data.progression.map((row) => (
-                    <tr key={row.competence}><th scope="row">{competenceNames[row.competence] ?? row.competence}</th>
-                      <td>{row.midterm} %</td><td>{row.fin} %</td><td>{row.delta > 0 ? '+' : ''}{row.delta} pts</td><td>{row.learners}</td></tr>
-                  ))}</tbody>
-                </table>
-              )}
-            </section>
+            <div className="admin-kpi-rates">
+              <RateCard icon={<UserCheck size={19} />} title="Activation à sept jours" rate={data.activation} unit="invitations" none="Aucune invitation dans ce groupe" />
+              <RateCard icon={<CalendarCheck2 size={19} />} title="Séances terminées à temps" rate={data.sessionsOnTime} unit="séances échues" none="Aucune séance échue dans ce groupe" />
+              <RateCard icon={<MessageCircleHeart size={19} />} title="Reprise après encouragement" rate={data.resumption} unit="relances" none="Aucune relance dans ce groupe" />
+            </div>
           </div>
-          <p className="muted">L’indicateur principal du pilote est le taux d’objectifs validés à l’échéance. Il se lit avec la charge prévue, l’assiduité, le point de départ et le nombre de parcours observés.</p>
+
+          <div className="admin-kpi-bottom lc-stagger">
+            <Card title="Élèves actifs par semaine" icon={<UsersRound size={18} />} className="admin-kpi-weeks"
+              action={<span className="badge badge-blue">{data.activeLearnersTotal} élève{data.activeLearnersTotal > 1 ? 's' : ''} sur la période</span>}>
+              {weeks.length === 0 || weeks.every((item) => item.learners === 0)
+                ? <EmptyState icon={<UsersRound size={26} />} title="Aucun élève actif sur la période" description="Élargissez la période ou retirez un filtre." />
+                : <Bars label="Élèves actifs par semaine" height={190} data={weeks.map((item) => ({
+                  label: weekLabel.format(localDate(item.weekStart)), value: item.learners, muted: item.learners === 0,
+                }))} />}
+            </Card>
+            <Card title="Progression entre le bilan et l’examen blanc" icon={<TrendingUp size={18} />} className="admin-kpi-progress">
+              {data.progression.length === 0
+                ? <EmptyState icon={<TrendingUp size={26} />} title="Aucun élève n’a encore passé les deux évaluations" />
+                : (
+                  <>
+                    <p className="admin-kpi-legend"><span><i className="is-midterm" aria-hidden="true" />Bilan intermédiaire</span><span><i className="is-final" aria-hidden="true" />Examen blanc</span></p>
+                    <ul className="admin-kpi-competences">
+                      {data.progression.map((row) => (
+                        <li key={row.competence}>
+                          <div className="admin-kpi-competence-head">
+                            <strong>{competenceNames[row.competence] ?? row.competence}</strong>
+                            <small>{row.learners} élève{row.learners > 1 ? 's' : ''}</small>
+                            <span className={`admin-delta${row.delta > 0 ? ' is-up' : row.delta < 0 ? ' is-down' : ''}`}>
+                              {row.delta > 0 ? <TrendingUp size={14} aria-hidden="true" /> : row.delta < 0 ? <TrendingDown size={14} aria-hidden="true" /> : null}
+                              {row.delta > 0 ? '+' : row.delta < 0 ? '−' : ''}{Math.abs(row.delta)} pts
+                            </span>
+                          </div>
+                          <div className="admin-kpi-pair">
+                            <span className="admin-kpi-track"><span className="is-midterm" style={{ width: `${Math.min(100, Math.max(0, row.midterm))}%` }} /></span>
+                            <b><span className="sr-only">Bilan : </span>{row.midterm} %</b>
+                            <span className="admin-kpi-track"><span className="is-final" style={{ width: `${Math.min(100, Math.max(0, row.fin))}%` }} /></span>
+                            <b><span className="sr-only">Examen blanc : </span>{row.fin} %</b>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
+                  </>
+                )}
+            </Card>
+          </div>
         </>
       )}
-    </section>
+    </div>
   );
 }

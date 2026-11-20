@@ -1262,12 +1262,15 @@ if (process.argv.includes('--browser')) {
     await saved;
     await page.reload();
     await expect(page.getByRole('radio', { name: 'Un café' })).toBeChecked({ timeout: 15_000 });
-    await expect(page.getByText('Leçon terminée')).toBeVisible();
+    // La séance affiche une activité à la fois : son sommaire indique la leçon terminée.
+    const steps = page.getByRole('navigation', { name: 'Activités de la séance' });
+    await expect(steps.getByRole('button', { name: /^Commander au café.*terminée/ })).toBeVisible();
     await page.getByRole('button', { name: 'Valider mes réponses' }).click();
     await expect(page.getByText('Résultat enregistré · 1 / 1')).toBeVisible();
+    await expect(page.getByText('Lire la transcription')).toHaveCount(1);
+    await page.getByRole('button', { name: 'Suivant', exact: true }).click();
     await page.getByRole('button', { name: 'J’ai terminé la révision' }).click();
-    await expect(page.getByText('Séance terminée. Bravo !')).toBeVisible();
-    await expect(page.getByText('Lire la transcription')).toHaveCount(2);
+    await expect(page.getByRole('heading', { name: 'Séance terminée. Bravo !' })).toBeVisible();
     console.log('Recette navigateur réussie · accueil, séance, visuel, audio, reprise après rechargement et exercice sur mobile.');
 
     // Fiche du professeur référent : la séance terminée et le résultat apparaissent.
@@ -1360,16 +1363,19 @@ if (process.argv.includes('--browser')) {
     await expect(contentPage.getByText('Ma prochaine séance')).toBeVisible({ timeout: 15_000 });
     const shown = a1Worked.find((session) => session.activities.some((activity) => activity.kind === 'exercise')) ?? a1Worked[0];
     await contentPage.goto(`http://127.0.0.1:5186/espace/seance/${shown.session.id}`);
+    // Une activité à la fois : chacune s'ouvre depuis le sommaire de la séance, avec ses textes, images et sons.
+    const escape = (text) => text.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    const contentSteps = contentPage.getByRole('navigation', { name: 'Activités de la séance' });
     for (const activity of shown.activities) {
+      await contentSteps.getByRole('button', { name: new RegExp('^' + escape(activity.title)) }).click({ timeout: 15_000 });
       await expect(contentPage.getByRole('heading', { name: activity.title, exact: true })).toBeVisible({ timeout: 15_000 });
+      // Le rendu enrichi découpe les lignes (articles, répliques) : on retrouve leurs premiers mots dans l'ordre.
       const firstLine = activity.lesson?.description?.split(/\r?\n/).find((line) => line.trim().length > 12)?.trim();
-      if (firstLine) await expect(contentPage.getByText(firstLine.slice(0, 40), { exact: false }).first()).toBeVisible();
-    }
-    const shownPicture = shown.activities.flatMap((activity) => activity.placements)
-      .find((placement) => placement.usage === 'illustration' && !placement.decorative && !placement.questionId);
-    if (shownPicture) await expect(contentPage.getByRole('img', { name: shownPicture.alt }).first()).toBeVisible();
-    if (shown.activities.some((activity) => activity.placements.some((placement) => placement.usage === 'audio'))) {
-      await expect(contentPage.locator('audio').first()).toBeAttached();
+      const words = firstLine?.match(/[\p{L}\p{N}]+/gu)?.slice(0, 4) ?? [];
+      if (words.length) await expect(contentPage.locator('main')).toContainText(new RegExp(words.map(escape).join('[^\\p{L}\\p{N}]*'), 'u'));
+      const picture = activity.placements.find((placement) => placement.usage === 'illustration' && !placement.decorative && !placement.questionId);
+      if (picture) await expect(contentPage.getByRole('img', { name: picture.alt }).first()).toBeVisible();
+      if (activity.placements.some((placement) => placement.usage === 'audio')) await expect(contentPage.locator('audio').first()).toBeAttached();
     }
     console.log('Recette navigateur réussie · séance A1 importée : textes de leçon et d’exercice, illustrations et sons sur mobile.');
   } finally {

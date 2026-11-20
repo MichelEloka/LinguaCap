@@ -1,91 +1,188 @@
+import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen, CalendarDays, Check, Globe2, Headphones, LayoutDashboard, Play, Target, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCheck, Flame, Headphones, LayoutDashboard, MessageSquare, Play, Sparkles, Target, Users } from 'lucide-react';
 import { isApiMode } from '../../app/config';
-import { Badge, ProgressBar } from '../../components/ui';
+import './home.css';
 
 const roles = [
-  { title: 'Apprendre', name: 'Espace élève', path: '/eleve', icon: BookOpen, description: 'Retrouvez vos séances, pratiquez avec des images et des sons, puis suivez vos résultats.' },
-  { title: 'Accompagner', name: 'Espace professeur', path: '/professeur', icon: Users, description: 'Fixez les objectifs, suivez les retards et corrigez les évaluations de vos élèves.' },
-  { title: 'Organiser', name: 'Administration', path: '/administration', icon: LayoutDashboard, description: 'Gérez les accès, enrichissez le catalogue et consultez les indicateurs du pilote.' },
+  { title: 'Apprendre', name: 'Espace élève', path: '/eleve', icon: BookOpen, tone: 'is-brand',
+    description: 'Vos séances du jour, des leçons avec images et voix natives, des exercices corrigés et vos résultats.' },
+  { title: 'Accompagner', name: 'Espace professeur', path: '/professeur', icon: Users, tone: 'is-violet',
+    description: 'Invitez vos élèves, fixez leurs objectifs, repérez les retards et corrigez leurs évaluations.' },
+  { title: 'Organiser', name: 'Administration', path: '/administration', icon: LayoutDashboard, tone: 'is-accent',
+    description: 'Gérez les accès, enrichissez le catalogue A1 et A2 et suivez les indicateurs du pilote.' },
 ];
 
-function JourneyPreview() {
+const steps = [
+  { icon: Target, title: 'Choisissez votre objectif', text: 'Niveau visé, date cible et jours d’étude : votre planning se construit tout seul.' },
+  { icon: CalendarDays, title: 'Suivez vos séances', text: 'Leçon, écoute, exercices : chaque séance tient en quelques minutes et reprend là où vous vous êtes arrêté.' },
+  { icon: MessageSquare, title: 'Progressez accompagné', text: 'Votre professeur voit vos résultats, corrige vos évaluations et vous encourage.' },
+];
+
+const week = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+
+/** Maquette animée de l'écran « Aujourd'hui » de l'élève (décorative). */
+function AppMockup() {
   return (
-    <div className="journey-art">
-      <div className="journey-preview">
-        <div className="row between"><Badge tone="blue"><Globe2 size={14} /> Aperçu du parcours</Badge><span className="preview-icon"><Target size={21} /></span></div>
-        <h2>Bonjour Camille<span className="preview-dot">.</span></h2>
-        <div className="preview-goal">
-          <div className="row between"><strong>Allemand A1</strong><Badge tone="blue">Intensif</Badge></div>
-          <p>Se présenter et échanger au quotidien</p>
-          <ProgressBar value={38} label="Progression de l’exemple" />
-          <div className="row between preview-count"><span>3 séances terminées</span><strong>3 / 8</strong></div>
-        </div>
-        <div className="preview-week">
-          <div className="row between"><strong>Cette semaine</strong><CalendarDays size={17} /></div>
-          <div className="preview-days" aria-hidden="true">
-            {['Lun', 'Mar', 'Mer', 'Jeu', 'Ven', 'Sam', 'Dim'].map((day, index) => (
-              <div className={index === 3 ? 'active' : ''} key={day}><span>{day}</span><b>{index < 3 ? <Check size={14} /> : index === 3 ? '•' : '–'}</b></div>
+    <div className="home-mock" aria-hidden="true">
+      <div className="home-mock-window">
+        <div className="home-mock-bar"><i /><i /><i /><span>linguacap.app/espace</span></div>
+        <div className="home-mock-body">
+          <div className="home-mock-head">
+            <div><small>Mercredi</small><strong>Bonjour Camille</strong></div>
+            <span className="home-mock-streak"><Flame size={14} /> 4 jours</span>
+          </div>
+          <div className="home-mock-goal">
+            <span className="home-mock-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" /><circle cx="18" cy="18" r="15" /></svg><b>38 %</b></span>
+            <div><small>Objectif</small><strong>Allemand A1</strong><em>3 séances sur 8</em></div>
+          </div>
+          <div className="home-mock-week">
+            {week.map((day, index) => (
+              <span key={index} className={index < 2 ? 'is-done' : index === 2 ? 'is-today' : undefined}>
+                <small>{day}</small><b>{index < 2 && <Check size={12} />}</b>
+              </span>
             ))}
           </div>
-        </div>
-        <div className="preview-session">
-          <span className="icon-tile"><Headphones size={22} /></span>
-          <div><strong>Commander au café</strong><span>Écoute · 20 min</span></div>
-          <Link className="icon-button preview-play" to="/eleve/seances/premiere-seance" aria-label="Essayer la séance Commander au café"><Play size={18} /></Link>
+          <div className="home-mock-next">
+            <span className="home-mock-icon"><Headphones size={18} /></span>
+            <div><small>Séance du jour</small><strong>Au café</strong></div>
+            <span className="home-mock-play"><Play size={15} /></span>
+          </div>
         </div>
       </div>
-    </div>
-  );
-}
-
-function PilotPreview() {
-  return (
-    <div className="journey-art">
-      <div className="journey-preview stack">
-        <div className="row between"><Badge tone="blue"><Globe2 size={14} /> Pilote sur invitation</Badge><span className="preview-icon"><BookOpen size={21} /></span></div>
-        <h2>Votre première séance d’allemand</h2>
-        <div className="preview-session"><span className="icon-tile"><Headphones size={22} /></span><div><strong>Écoutez et pratiquez</strong><span>Une leçon avec image, audio et quiz</span></div></div>
-        <div className="preview-session"><span className="icon-tile"><Target size={22} /></span><div><strong>Choisissez votre cadence</strong><span>Un objectif, une date cible et vos jours d’étude</span></div></div>
-        <Link className="text-link" to="/activer-compte">Vous avez reçu une invitation ?</Link>
-      </div>
+      <div className="home-mock-float home-mock-word"><span className="is-der">der</span><strong>Kaffee</strong></div>
+      <div className="home-mock-float home-mock-word is-second"><span className="is-die">die</span><strong>Milch</strong></div>
+      <div className="home-mock-float home-mock-score"><CheckCircle2 size={18} /><div><strong>Bonne réponse</strong><small>Ich möchte einen Kaffee.</small></div></div>
     </div>
   );
 }
 
 export default function HomePage() {
+  const primary = isApiMode
+    ? <Link className="btn btn-primary btn-lg" to="/connexion">Se connecter <ArrowRight size={18} /></Link>
+    : <Link className="btn btn-primary btn-lg" to="/eleve">Essayer l’espace élève <ArrowRight size={18} /></Link>;
+
   return (
-    <>
+    <div className="home">
       <section className="home-hero">
-        <div className="container hero-grid">
-          <div className="hero-copy">
-            <p className="eyebrow"><span className="eyebrow-line" /> {isApiMode ? 'Pilote d’allemand A1' : 'Parcours d’allemand A1 et A2'}</p>
+        <div className="container home-hero-grid">
+          <div className="home-hero-copy">
+            <p className="home-pill"><Sparkles size={14} /> {isApiMode ? 'Pilote d’allemand A1 et A2 sur invitation' : 'Parcours d’allemand A1 et A2'}</p>
             <h1>Un objectif clair.<br /><span>Un parcours qui s’adapte.</span></h1>
-            <p className="hero-intro">{isApiMode ? 'Choisissez votre objectif, suivez votre première leçon et retrouvez vos résultats. Votre professeur peut suivre votre progression et vous écrire.' : 'Apprenez l’allemand selon vos disponibilités. Votre planning organise leçons, exercices et évaluations. Votre professeur vous accompagne au fil des séances.'}</p>
-            <div className="hero-actions">
-              <Link className="btn btn-primary" to={isApiMode ? '/connexion' : '/eleve'}>{isApiMode ? 'Ouvrir mon espace' : 'Essayer l’espace élève'}</Link>
-              {isApiMode ? <Link className="btn btn-outline" to="/integration">Vérifier l’intégration</Link> : <a className="btn btn-outline" href="#espaces">Découvrir les espaces</a>}
+            <p className="home-intro">Apprenez l’allemand à votre rythme : votre planning organise leçons, exercices et évaluations, et votre professeur vous accompagne séance après séance.</p>
+            <div className="home-actions">
+              {primary}
+              <a className="btn btn-secondary btn-lg" href="#parcours">Découvrir le parcours</a>
             </div>
-            <div className="hero-note"><CalendarDays size={19} aria-hidden="true" /><span>Planifiez une ou plusieurs séances par jour.</span></div>
+            <ul className="home-proof">
+              <li><b>A1 → A2</b><span>deux niveaux complets</span></li>
+              <li><b>Voix natives</b><span>dans chaque leçon</span></li>
+              <li><b>1 professeur</b><span>qui suit vos progrès</span></li>
+            </ul>
           </div>
-          {isApiMode ? <PilotPreview /> : <JourneyPreview />}
+          <AppMockup />
         </div>
       </section>
-      <section className="role-section" id="espaces">
+
+      <section className="home-section" id="parcours">
         <div className="container">
-          <div className="section-heading"><h2>{isApiMode ? 'Les espaces LinguaCap' : 'Explorez les trois espaces'}</h2>{!isApiMode && <p className="muted">Les comptes et les contenus présentés ici sont des exemples.</p>}</div>
-          <div className="role-grid">
-            {roles.map(({ title, name, path, icon: Icon, description }) => (
-              <article className="role-card panel" key={path}>
-                <span className="icon-tile"><Icon size={23} /></span>
+          <header className="home-section-head">
+            <p className="eyebrow"><span className="eyebrow-line" /> Le parcours</p>
+            <h2>Trois étapes, puis une habitude.</h2>
+          </header>
+          <ol className="home-steps lc-stagger">
+            {steps.map(({ icon: Icon, title, text }, index) => (
+              <li key={title}>
+                <span className="home-step-number">{index + 1}</span>
+                <span className="home-step-icon"><Icon size={22} /></span>
                 <h3>{title}</h3>
-                <p className="muted">{isApiMode && path === '/professeur' ? 'Invitez vos élèves, suivez leurs objectifs et résultats, et encouragez-les.' : description}</p>
-                {!isApiMode && <Link className="text-link" to={path}>{name}</Link>}
-              </article>
+                <p>{text}</p>
+              </li>
             ))}
+          </ol>
+        </div>
+      </section>
+
+      <section className="home-section is-tinted" id="methode">
+        <div className="container">
+          <header className="home-section-head">
+            <p className="eyebrow"><span className="eyebrow-line" /> La méthode</p>
+            <h2>Tout ce qu’il faut pour pratiquer, au même endroit.</h2>
+          </header>
+          <div className="home-bento lc-stagger">
+            <article className="home-tile is-wide">
+              <div className="home-tile-text">
+                <span className="home-tile-icon is-brand"><Headphones size={20} /></span>
+                <h3>Des leçons vivantes</h3>
+                <p>Vocabulaire classé par genre, dialogues illustrés et enregistrements de voix natives, avec vitesse réglable.</p>
+              </div>
+              <div className="home-tile-art home-vocab" aria-hidden="true">
+                <span><i className="is-der">der</i>Bahnhof</span>
+                <span><i className="is-die">die</i>Straße</span>
+                <span><i className="is-das">das</i>Brötchen</span>
+                <div className="home-wave">{Array.from({ length: 28 }, (_, index) => <b key={index} style={{ animationDelay: `${(index % 7) * 90}ms` }} />)}</div>
+              </div>
+            </article>
+            <article className="home-tile">
+              <span className="home-tile-icon is-success"><CheckCircle2 size={20} /></span>
+              <h3>Corrigé tout de suite</h3>
+              <p>Chaque exercice vous dit ce qui est juste et pourquoi, sans attendre.</p>
+            </article>
+            <article className="home-tile">
+              <span className="home-tile-icon is-accent"><CalendarDays size={20} /></span>
+              <h3>Un planning qui s’adapte</h3>
+              <p>Une séance manquée ? Le planning se réorganise pour tenir votre date.</p>
+            </article>
+            <article className="home-tile is-wide">
+              <div className="home-tile-text">
+                <span className="home-tile-icon is-violet"><ClipboardCheck size={20} /></span>
+                <h3>Des évaluations pour valider chaque niveau</h3>
+                <p>Compréhension, expression et vocabulaire : vos résultats montrent clairement ce qui est acquis.</p>
+              </div>
+              <div className="home-tile-art home-bars" aria-hidden="true">
+                {[62, 78, 54, 88, 71].map((value, index) => <span key={index} style={{ '--h': `${value}%`, animationDelay: `${index * 80}ms` } as CSSProperties} />)}
+              </div>
+            </article>
           </div>
         </div>
       </section>
-    </>
+
+      <section className="home-section" id="espaces">
+        <div className="container">
+          <header className="home-section-head">
+            <p className="eyebrow"><span className="eyebrow-line" /> {isApiMode ? 'Pour qui' : 'Démonstration'}</p>
+            <h2>{isApiMode ? 'Les espaces LinguaCap' : 'Explorez les trois espaces'}</h2>
+            {!isApiMode && <p className="muted">Les comptes et les contenus présentés ici sont des exemples.</p>}
+          </header>
+          <div className="home-roles lc-stagger">
+            {roles.map(({ title, name, path, icon: Icon, tone, description }) => {
+              const body = (
+                <>
+                  <span className={`home-tile-icon ${tone}`}><Icon size={22} /></span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  {!isApiMode && <span className="home-role-link">{name} <ArrowRight size={16} /></span>}
+                </>
+              );
+              return isApiMode
+                ? <article className="home-role" key={path}>{body}</article>
+                : <Link className="home-role is-link" to={path} key={path}>{body}</Link>;
+            })}
+          </div>
+        </div>
+      </section>
+
+      <section className="home-cta">
+        <div className="container home-cta-inner">
+          <div>
+            <h2>{isApiMode ? 'Vous avez reçu une invitation ?' : 'Prêt à commencer ?'}</h2>
+            <p>{isApiMode ? 'Ouvrez le lien reçu par e-mail pour activer votre compte, puis connectez-vous.' : 'Ouvrez l’espace élève et suivez votre première séance.'}</p>
+          </div>
+          {isApiMode
+            ? <Link className="btn btn-lg home-cta-button" to="/connexion">Se connecter <ArrowRight size={18} /></Link>
+            : <Link className="btn btn-lg home-cta-button" to="/eleve/seances/premiere-seance">Essayer une séance <ArrowRight size={18} /></Link>}
+        </div>
+      </section>
+    </div>
   );
 }

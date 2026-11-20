@@ -1,214 +1,205 @@
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
-import { Link, Route, Routes, useNavigate, useParams } from 'react-router-dom';
-import { ArrowLeft, CheckCircle2, ClipboardCheck, Mic, Square, Upload as UploadIcon } from 'lucide-react';
-import { Badge, EmptyState } from '../../components/ui';
-import { requestApi, uploadToStorage } from '../../integration/api';
-import './catalogue.css';
-import './pilot.css';
+import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 'react';
+import { Link, Route, Routes, useParams } from 'react-router-dom';
+import {
+  AlertTriangle, ArrowLeft, Check, CheckCircle2, CircleAlert, ClipboardCheck, CloudCheck, Flag, Headphones, Hourglass,
+  LoaderCircle, PenLine, Send, Target,
+} from 'lucide-react';
+import { Badge, Dialog } from '../../components/ui';
+import { AudioPlayer, Callout, Card, Facts, ProgressRing, SkeletonCard, Timeline, useToast } from '../../design/kit';
+import { requestApi } from '../../integration/api';
+import { LessonContent } from './LessonContent';
+import type { Enrollment } from './LearnerSession';
+import { OralRecorder } from './exams-recorder';
+import { GradingWorkspace } from './exams-grading';
+import {
+  AttemptHistory, ClosedAnswers, CompetenceIcon, ExamMedia, ProductionText, ResultSummary, competenceNames, competenceTone, countWords,
+  dateTime, examNames, fromNow, getError, partState, plural, shortDate, statusBadge, timeOnly,
+  type ExamKind, type ExamPart, type ExamSummary, type ExamView,
+} from './exams-shared';
+import './exams.css';
 
-type ExamKind = 'midterm' | 'final';
-type Mode = 'closed' | 'written' | 'oral';
-interface ExamOption { id: string; label: string }
-interface ExamQuestion { id: string; prompt: string; options: ExamOption[] }
-interface ExamPlacement { assetId: string; assetVersion: number; usage: 'illustration' | 'audio'; alt: string | null; caption: string | null; decorative: boolean; questionId: string | null; optionId: string | null }
-interface ExamPart {
-  id: string; competence: string; mode: Mode; title: string; instructions: string;
-  questions: ExamQuestion[]; criteria: { id: string; label: string; maxPoints: number }[]; placements: ExamPlacement[];
-}
-interface Score { points: number; max: number; percent: number }
-interface ExamView {
-  id: string; enrollmentId: string; learnerId: string; kind: ExamKind; number: number; status: 'in_progress' | 'submitted' | 'graded';
-  definition: { title: string; description: string; passPercent: number; levelCode: string; parts: ExamPart[] };
-  answers: Record<string, Record<string, string>>; texts: Record<string, string>;
-  recordings: { partId: string; productionId: string; mimeType: string; url: string | null }[];
-  media: Record<string, string>; closedScores: Record<string, Score> | null; dueAt: string | null; startedAt: string;
-  submittedAt: string | null; onTime: boolean; canGrade: boolean;
-  result: null | {
-    scores: Record<string, Score>; percent: number; decision: 'validated' | 'to_consolidate' | 'completed';
-    review: { activityId: string; title: string; moduleTitle: string }[] | null; feedback: string | null;
-    comments: Record<string, string>; gradedAt: string | null;
-  };
-}
-interface ExamSummary {
-  id: string; kind: ExamKind; number: number; status: ExamView['status']; title: string; startedAt: string;
-  submittedAt: string | null; dueAt: string | null; gradedAt: string | null; onTime: boolean; percent: number | null;
-  decision: 'validated' | 'to_consolidate' | 'completed' | null;
-}
-interface Reservation { id: string; uploadUrl: string | null; maxBytes: number }
-interface QueueItem {
-  id: string; learnerId: string; learnerName: string; kind: ExamKind; number: number; levelCode: string | null; title: string;
-  submittedAt: string; dueAt: string | null; onTime: boolean;
-}
+export { examNames };
 
-export const examNames: Record<ExamKind, string> = { midterm: 'Bilan intermédiaire', final: 'Examen blanc' };
-const competenceNames: Record<string, string> = {
-  lecture: 'Lecture', ecoute: 'Écoute', 'expression-ecrite': 'Expression écrite', 'expression-orale': 'Expression orale',
-};
-const decisions = {
-  validated: { label: 'Validé dans LinguaCap', tone: 'green' as const },
-  to_consolidate: { label: 'À consolider', tone: 'amber' as const },
-  completed: { label: 'Bilan corrigé', tone: 'blue' as const },
-};
-const dateTime = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
-const RECORDING_TYPES = ['audio/webm', 'audio/ogg', 'audio/mp4', 'audio/mpeg', 'audio/wav'];
-const FILE_TYPES: Record<string, string> = {
-  'audio/webm': 'audio/webm', 'audio/ogg': 'audio/ogg', 'audio/mp4': 'audio/mp4', 'audio/x-m4a': 'audio/mp4', 'audio/m4a': 'audio/mp4',
-  'audio/mpeg': 'audio/mpeg', 'audio/mp3': 'audio/mpeg', 'audio/wav': 'audio/wav', 'audio/x-wav': 'audio/wav', 'audio/wave': 'audio/wav',
-};
+type SaveState = { status: 'idle' | 'pending' | 'saving' | 'saved' | 'error'; at: Date | null };
+const UMLAUTS = ['ä', 'ö', 'ü', 'ß', 'Ä', 'Ö', 'Ü'];
+const LETTERS = 'ABCDEFGHIJ';
 
-function getError(error: unknown) {
-  return error instanceof Error && error.name !== 'TimeoutError' ? error.message : 'Le service est momentanément indisponible. Réessayez.';
-}
-
-function statusBadge(exam: { status: ExamView['status']; decision?: ExamSummary['decision'] }) {
-  if (exam.status === 'in_progress') return <Badge tone="blue">En cours</Badge>;
-  if (exam.status === 'submitted') return <Badge tone="amber">En attente de correction</Badge>;
-  const decision = exam.decision ? decisions[exam.decision] : decisions.completed;
-  return <Badge tone={decision.tone}>{decision.label}</Badge>;
-}
-
-function Placements({ part, exam, questionId = null }: { part: ExamPart; exam: ExamView; questionId?: string | null }) {
+/** État de l'enregistrement automatique des réponses. */
+function SaveIndicator({ state }: { state: SaveState }) {
+  const busy = state.status === 'pending' || state.status === 'saving';
+  const text = busy ? 'Enregistrement…'
+    : state.status === 'saved' && state.at ? `Enregistré à ${timeOnly.format(state.at)}`
+    : state.status === 'error' ? 'Échec de l’enregistrement'
+    : 'Enregistrement automatique';
+  const Icon = busy ? LoaderCircle : state.status === 'error' ? AlertTriangle : CloudCheck;
   return (
-    <>
-      {part.placements.filter((placement) => (placement.questionId ?? null) === questionId && !placement.optionId).map((placement, index) => {
-        const url = exam.media[`${placement.assetId}@${placement.assetVersion}`];
-        if (!url) return <p key={index} className="muted">Support disponible pendant la tentative.</p>;
-        return placement.usage === 'audio'
-          ? <audio key={index} controls preload="metadata" src={url} aria-label={placement.caption ?? 'Document sonore'} />
-          : <figure key={index} className="pilot-figure"><img className="pilot-lesson-image" src={url} alt={placement.decorative ? '' : placement.alt ?? ''} />
-              {placement.caption && <figcaption lang="de">{placement.caption}</figcaption>}</figure>;
-      })}
-    </>
+    <span className={`ev-save is-${state.status}`}>
+      <Icon size={15} aria-hidden="true" /><span>{text}</span>
+    </span>
   );
 }
 
-/** Enregistrement oral : micro du navigateur quand il le permet, sinon dépôt d'un fichier ; écoute avant envoi. */
-function OralPart({ part, exam, token, onSaved }: { part: ExamPart; exam: ExamView; token: string; onSaved: (exam: ExamView) => void }) {
-  const [recorder, setRecorder] = useState<MediaRecorder | null>(null);
-  const [clip, setClip] = useState<{ blob: Blob; type: string; url: string } | null>(null);
-  const [progress, setProgress] = useState<number | null>(null);
-  const [error, setError] = useState('');
-  const chunks = useRef<Blob[]>([]);
-  const saved = exam.recordings.find((recording) => recording.partId === part.id);
-  const canRecord = typeof window !== 'undefined' && 'MediaRecorder' in window && !!navigator.mediaDevices?.getUserMedia;
-
-  useEffect(() => () => { if (clip) URL.revokeObjectURL(clip.url); }, [clip]);
-
-  async function start() {
-    setError('');
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const type = RECORDING_TYPES.find((candidate) => MediaRecorder.isTypeSupported(candidate)) ?? '';
-      const media = new MediaRecorder(stream, type ? { mimeType: type } : undefined);
-      chunks.current = [];
-      media.ondataavailable = (event) => { if (event.data.size) chunks.current.push(event.data); };
-      media.onstop = () => {
-        stream.getTracks().forEach((track) => track.stop());
-        const recorded = (media.mimeType || type).split(';')[0];
-        const blob = new Blob(chunks.current, { type: recorded });
-        setClip({ blob, type: recorded, url: URL.createObjectURL(blob) });
-        setRecorder(null);
-      };
-      media.start();
-      setRecorder(media);
-    } catch {
-      setError('Le micro n’est pas disponible : autorisez-le ou déposez un fichier audio.');
-    }
-  }
-
-  function choose(file: File | null) {
-    setError('');
-    if (!file) return;
-    const type = FILE_TYPES[file.type];
-    if (!type) {
-      setError('Formats acceptés : WebM, Ogg, MP4, MP3 ou WAV.');
-      return;
-    }
-    setClip({ blob: file, type, url: URL.createObjectURL(file) });
-  }
-
-  async function send() {
-    if (!clip) return;
-    setError('');
-    setProgress(0);
-    try {
-      const reservation = await requestApi<Reservation>(`/assessments/exams/${encodeURIComponent(exam.id)}/recordings`, token, {
-        method: 'POST', body: { partId: part.id, mimeType: clip.type, size: clip.blob.size },
-      });
-      if (clip.blob.size > reservation.maxBytes) throw new Error('L’enregistrement dépasse 25 Mo.');
-      if (reservation.uploadUrl) {
-        const file = new File([clip.blob], `oral.${clip.type.split('/')[1]}`, { type: clip.type });
-        await uploadToStorage(reservation.uploadUrl, file, clip.type, token, setProgress, new AbortController().signal);
-      }
-      const updated = await requestApi<ExamView>(
-        `/assessments/exams/${encodeURIComponent(exam.id)}/recordings/${encodeURIComponent(reservation.id)}/finalize`, token, { method: 'POST' });
-      setClip(null);
-      onSaved(updated);
-    } catch (failure) {
-      setError(`${getError(failure)} Vous pouvez relancer l’envoi.`);
-    } finally {
-      setProgress(null);
-    }
-  }
-
+/** Question fermée : carte avec la consigne, ses supports et des choix en tuiles. */
+function QuestionCard({ part, exam, index, onAnswer }: {
+  part: ExamPart; exam: ExamView; index: number; onAnswer: (questionId: string, optionId: string) => void;
+}) {
+  const question = part.questions[index];
+  const chosen = exam.answers[part.id]?.[question.id];
   return (
-    <div className="stack">
-      {saved?.url && !clip && (
-        <div className="stack">
-          <p className="inline-message" role="status"><CheckCircle2 size={16} aria-hidden="true" /> Enregistrement envoyé</p>
-          <audio controls preload="metadata" src={saved.url} aria-label={`Mon enregistrement · ${part.title}`} />
+    <div className={`ev-question${chosen ? ' is-answered' : ''}`}>
+      <fieldset>
+        <legend><span className="ev-q-head"><span className="ev-q-num">{index + 1}</span><span className="ev-q-prompt">{question.prompt}</span></span></legend>
+        <ExamMedia part={part} exam={exam} questionId={question.id} />
+        <div className="ev-choices">
+          {question.options.map((option, position) => {
+            const picture = part.placements.find((placement) => placement.questionId === question.id && placement.optionId === option.id && placement.usage === 'illustration');
+            const url = picture ? exam.media[`${picture.assetId}@${picture.assetVersion}`] : undefined;
+            return (
+              <label key={option.id} className={`ev-choice${url ? ' has-picture' : ''}`}>
+                <input type="radio" name={`${part.id}-${question.id}`} checked={chosen === option.id} onChange={() => onAnswer(question.id, option.id)} />
+                {url && <img src={url} alt={picture?.decorative ? '' : picture?.alt ?? ''} />}
+                <span className="ev-choice-key" aria-hidden="true">{LETTERS[position] ?? position + 1}</span>
+                <span className="ev-choice-text">{option.label}</span>
+                <span className="ev-choice-check" aria-hidden="true"><Check size={14} strokeWidth={3} /></span>
+              </label>
+            );
+          })}
         </div>
-      )}
-      {exam.status === 'in_progress' && (
-        <>
-          <div className="accounts-actions">
-            {canRecord && (recorder
-              ? <button type="button" className="btn btn-primary" onClick={() => recorder.stop()}><Square size={16} aria-hidden="true" /> Arrêter</button>
-              : <button type="button" className="btn btn-outline" onClick={() => void start()}><Mic size={16} aria-hidden="true" /> {saved ? 'Réenregistrer' : 'Enregistrer'}</button>)}
-            <label className="btn btn-outline">
-              <UploadIcon size={16} aria-hidden="true" /> Déposer un fichier
-              <input className="visually-hidden" type="file" accept="audio/*" onChange={(event) => choose(event.currentTarget.files?.[0] ?? null)} />
-            </label>
-          </div>
-          {recorder && <p role="status" className="inline-message">Enregistrement en cours…</p>}
-          {clip && (
-            <div className="stack">
-              <audio controls src={clip.url} aria-label="Écouter avant l’envoi" />
-              <button type="button" className="btn btn-primary" disabled={progress !== null} onClick={() => void send()}>
-                {progress === null ? 'Envoyer cet enregistrement' : `Envoi : ${progress} %`}</button>
-            </div>
-          )}
-        </>
-      )}
-      {error && <p className="inline-message warning" role="alert">{error}</p>}
+      </fieldset>
     </div>
   );
 }
 
-function ResultPanel({ exam }: { exam: ExamView }) {
-  if (!exam.result) return null;
-  const decision = decisions[exam.result.decision];
+/** Zone d'écriture : grand champ, caractères allemands, compteur de mots et enregistrement automatique visible. */
+function WritingPad({ value, onChange, save }: { value: string; onChange: (text: string) => void; save: SaveState }) {
+  const id = useId();
+  const area = useRef<HTMLTextAreaElement>(null);
+  const words = countWords(value);
+  function insert(character: string) {
+    const field = area.current;
+    if (!field) return;
+    const start = field.selectionStart ?? value.length;
+    const end = field.selectionEnd ?? value.length;
+    onChange(`${value.slice(0, start)}${character}${value.slice(end)}`.slice(0, 8000));
+    requestAnimationFrame(() => { field.focus(); field.setSelectionRange(start + 1, start + 1); });
+  }
   return (
-    <section className="panel stack" aria-labelledby="exam-result">
-      <div className="panel-heading"><h2 id="exam-result">Résultat · {exam.result.percent} %</h2><Badge tone={decision.tone}>{decision.label}</Badge></div>
-      <ul className="pilot-list">
-        {Object.entries(exam.result.scores).map(([competence, score]) => (
-          <li key={competence}><span>{competenceNames[competence] ?? competence}</span><strong>{score.points} / {score.max} · {score.percent} %</strong></li>
+    <div className="ev-writer">
+      <div className="ev-writer-head">
+        <label htmlFor={id}>Votre texte</label>
+        <div className="ev-umlauts" role="group" aria-label="Caractères allemands">
+          {UMLAUTS.map((character) => (
+            <button key={character} type="button" lang="de" onMouseDown={(event) => event.preventDefault()} onClick={() => insert(character)}
+              aria-label={`Insérer ${character}`}>{character}</button>
+          ))}
+        </div>
+      </div>
+      <textarea ref={area} id={id} rows={10} maxLength={8000} lang="de" value={value} aria-describedby={`${id}-count`}
+        placeholder="Schreiben Sie hier …" onChange={(event) => onChange(event.target.value)} />
+      <div className="ev-writer-foot" id={`${id}-count`}>
+        <span className="ev-words"><b>{words}</b> {words > 1 ? 'mots' : 'mot'}</span>
+        <span className="ev-chars">{value.length} / 8000 caractères</span>
+        <SaveIndicator state={save} />
+      </div>
+    </div>
+  );
+}
+
+/** En-tête de l'épreuve : titre, état de la tentative, échéance et repères. */
+function ExamHero({ kind, exam }: { kind: ExamKind; exam: ExamView | null }) {
+  const level = exam?.definition.levelCode;
+  const facts = exam ? [
+    { label: 'Échéance', value: exam.dueAt
+      ? <span className="ev-fact">{shortDate.format(new Date(exam.dueAt))} · {timeOnly.format(new Date(exam.dueAt))}
+        {exam.status === 'in_progress' && <small>{fromNow(exam.dueAt)}</small>}</span>
+      : 'Aucune' },
+    { label: 'Seuil de réussite', value: `${exam.definition.passPercent} %` },
+    { label: 'Parties', value: exam.definition.parts.length },
+    exam.submittedAt
+      ? { label: 'Remise', value: <span className="ev-fact">{shortDate.format(new Date(exam.submittedAt))}<small>{exam.onTime ? 'dans les délais' : 'après l’échéance'}</small></span> }
+      : { label: 'Commencée', value: shortDate.format(new Date(exam.startedAt)) },
+  ] : [];
+  return (
+    <header className={`ev-hero${exam ? '' : ' is-plain'}`}>
+      <div className="ev-hero-main">
+        <span className="ev-hero-icon" aria-hidden="true"><ClipboardCheck size={26} /></span>
+        <div className="ev-hero-text">
+          <p className="eyebrow">{examNames[kind]}{level ? ` · niveau ${level}` : ''}</p>
+          <h1 id="exam-title">{exam?.definition.title ?? examNames[kind]}</h1>
+          <p className="ev-hero-desc">{exam?.definition.description || (kind === 'final'
+            ? 'Lecture, écoute, écrit et oral, dans les conditions de l’examen.' : 'Un point d’étape sur les modules déjà travaillés.')}</p>
+          {exam && (
+            <div className="ev-hero-badges">
+              {statusBadge({ status: exam.status, decision: exam.result?.decision ?? null })}
+              <Badge tone="neutral">Tentative {exam.number}</Badge>
+            </div>
+          )}
+        </div>
+      </div>
+      {exam && <div className="ev-hero-facts"><Facts items={facts} /></div>}
+    </header>
+  );
+}
+
+/** Avant la première tentative : ce qu'il faut prévoir, puis le bouton pour commencer. */
+function StartCard({ kind, busy, onStart }: { kind: ExamKind; busy: boolean; onStart: () => void }) {
+  const tips = [
+    { icon: <Target size={18} />, title: 'Partie par partie', text: 'Un sommaire indique ce qui est fait et ce qu’il reste à compléter.' },
+    { icon: <Headphones size={18} />, title: 'Un casque et un micro', text: 'Pour écouter les documents et enregistrer l’oral. Un fichier audio peut aussi être déposé.' },
+    { icon: <CloudCheck size={18} />, title: 'Rien n’est perdu', text: 'Vos réponses sont enregistrées au fur et à mesure : vous pouvez reprendre plus tard.' },
+    { icon: <Send size={18} />, title: 'Une seule remise', text: 'Remettez la tentative quand toutes les parties sont prêtes.' },
+  ];
+  return (
+    <Card className="ev-start" title="Avant de commencer" description="Installez-vous au calme : prévoyez du temps pour chaque partie.">
+      <ul className="ev-tips lc-stagger">
+        {tips.map((tip) => (
+          <li key={tip.title}><span className="ev-icon-tile is-brand" aria-hidden="true">{tip.icon}</span><div><strong>{tip.title}</strong><small>{tip.text}</small></div></li>
         ))}
       </ul>
-      {exam.result.feedback && <blockquote className="exam-feedback">{exam.result.feedback}</blockquote>}
-      {Object.entries(exam.result.comments).filter(([, comment]) => comment).map(([partId, comment]) => (
-        <p key={partId}><strong>{exam.definition.parts.find((part) => part.id === partId)?.title ?? partId} :</strong> {comment}</p>
-      ))}
-      {exam.result.review && exam.result.review.length > 0 && (
-        <div className="stack">
-          <h3>Activités à revoir</h3>
-          <ul>{exam.result.review.map((item) => <li key={item.activityId}>{item.moduleTitle} · {item.title}</li>)}</ul>
+      <div className="ev-start-action">
+        <button type="button" className="btn btn-primary btn-lg" disabled={busy} onClick={onStart}>
+          {busy ? <LoaderCircle size={18} className="ev-spin" aria-hidden="true" /> : <PenLine size={18} aria-hidden="true" />}
+          Commencer le {examNames[kind].toLowerCase()}
+        </button>
+      </div>
+    </Card>
+  );
+}
+
+/** Tentative remise : étapes jusqu'au résultat et récapitulatif de la copie. */
+function SubmittedView({ exam }: { exam: ExamView }) {
+  return (
+    <div className="ev-submitted">
+      <Card className="ev-waiting" title="Copie remise, correction en cours" icon={<Hourglass size={18} />}
+        description="Votre résultat sera disponible après la correction de l’écrit et de l’oral.">
+        <Timeline items={[
+          { id: 'start', title: 'Tentative commencée', meta: dateTime.format(new Date(exam.startedAt)), tone: 'success', icon: <Check size={14} /> },
+          { id: 'sent', title: 'Copie remise', meta: exam.submittedAt ? `${dateTime.format(new Date(exam.submittedAt))}${exam.onTime ? ' · dans les délais' : ' · après l’échéance'}` : undefined, tone: 'success', icon: <Check size={14} /> },
+          { id: 'grading', title: 'Correction de l’écrit et de l’oral', meta: 'Par votre professeur ou votre correcteur', tone: 'brand', icon: <Hourglass size={14} /> },
+          { id: 'result', title: 'Résultat et conseils', meta: 'Ils s’afficheront sur cette page', icon: <Flag size={14} /> },
+        ]} />
+      </Card>
+      <Card className="ev-recap" title="Votre copie" description="Ce que vous avez remis, partie par partie." icon={<ClipboardCheck size={18} />}>
+        <div className="ev-recap-list">
+          {exam.definition.parts.map((part) => {
+            const recording = exam.recordings.find((entry) => entry.partId === part.id);
+            return (
+              <section key={part.id} className="ev-recap-part" aria-labelledby={`recap-${part.id}`}>
+                <header>
+                  <span className={`ev-icon-tile is-${competenceTone(part.competence)}`}><CompetenceIcon competence={part.competence} size={16} /></span>
+                  <div><h3 id={`recap-${part.id}`}>{part.title}</h3><small>{competenceNames[part.competence] ?? part.competence} · {partState(part, exam).label}</small></div>
+                </header>
+                {part.mode === 'closed' && <ClosedAnswers part={part} exam={exam} />}
+                {part.mode === 'written' && <div className="ev-paper is-compact"><ProductionText text={exam.texts[part.id] ?? ''} /></div>}
+                {part.mode === 'oral' && (recording?.url
+                  ? <div className="ev-audio"><AudioPlayer src={recording.url} title={`Mon enregistrement · ${part.title}`} /></div>
+                  : <p className="muted">Aucun enregistrement.</p>)}
+              </section>
+            );
+          })}
         </div>
-      )}
-      {exam.submittedAt && <p className="muted">Remis le {dateTime.format(new Date(exam.submittedAt))}{exam.onTime ? ' · dans les délais' : ' · après l’échéance'}
-        {exam.result.gradedAt ? ` · corrigé le ${dateTime.format(new Date(exam.result.gradedAt))}` : ''}</p>}
-    </section>
+      </Card>
+    </div>
   );
 }
 
@@ -216,33 +207,71 @@ function ResultPanel({ exam }: { exam: ExamView }) {
 function ExamPage({ token }: { token: string }) {
   const { enrollmentId = '', kind = 'midterm' } = useParams();
   const examKind: ExamKind = kind === 'final' ? 'final' : 'midterm';
+  const toast = useToast();
   const [history, setHistory] = useState<ExamSummary[] | null>(null);
   const [exam, setExam] = useState<ExamView | null>(null);
   const [error, setError] = useState('');
+  const [loadError, setLoadError] = useState('');
   const [busy, setBusy] = useState(false);
   const [refresh, setRefresh] = useState(0);
+  const [confirming, setConfirming] = useState(false);
+  const [save, setSave] = useState<SaveState>({ status: 'idle', at: null });
+  const [activePart, setActivePart] = useState('');
+  const [sessionOf, setSessionOf] = useState<Record<string, string>>({});
   const submitKey = useRef<string | null>(null);
   const saveTimer = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     let active = true;
+    setLoadError('');
     requestApi<ExamSummary[]>(`/assessments/exams?enrollmentId=${encodeURIComponent(enrollmentId)}`, token).then(async (list) => {
       if (!active) return;
       const mine = list.filter((item) => item.kind === examKind);
-      setHistory(mine);
       if (mine[0]) setExam(await requestApi<ExamView>(`/assessments/exams/${encodeURIComponent(mine[0].id)}`, token));
-    }).catch((failure: unknown) => { if (active) setError(getError(failure)); });
+      setHistory(mine);
+    }).catch((failure: unknown) => { if (active) setLoadError(getError(failure)); });
     return () => { active = false; };
   }, [enrollmentId, examKind, token, refresh]);
 
+  // Activités à revoir : retrouver la séance de chaque activité pour l'ouvrir d'un geste.
+  const reviewCount = exam?.result?.review?.length ?? 0;
+  useEffect(() => {
+    if (!reviewCount) return;
+    let active = true;
+    requestApi<Enrollment | null>('/learning/enrollment', token).then((enrollment) => {
+      if (!active || !enrollment || enrollment.id !== enrollmentId) return;
+      setSessionOf(Object.fromEntries(enrollment.sessions.flatMap((session) => session.activities.map((activity) => [activity.id, session.id]))));
+    }).catch(() => undefined);
+    return () => { active = false; };
+  }, [reviewCount, enrollmentId, token]);
+
+  // Partie visible à l'écran : mise en avant dans le sommaire.
+  const partIds = exam?.status === 'in_progress' ? exam.definition.parts.map((part) => part.id).join('|') : '';
+  useEffect(() => {
+    if (!partIds || typeof IntersectionObserver === 'undefined') return;
+    const ids = partIds.split('|');
+    setActivePart((current) => current || ids[0]);
+    const observer = new IntersectionObserver((entries) => {
+      const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+      if (visible) setActivePart(visible.target.id.replace('exam-part-', ''));
+    }, { rootMargin: '-25% 0px -60% 0px' });
+    ids.forEach((id) => { const node = document.getElementById(`exam-part-${id}`); if (node) observer.observe(node); });
+    return () => observer.disconnect();
+  }, [partIds]);
+
   const persist = useCallback((next: ExamView) => {
     window.clearTimeout(saveTimer.current);
+    setSave((current) => ({ ...current, status: 'pending' }));
     saveTimer.current = window.setTimeout(() => {
+      setSave((current) => ({ ...current, status: 'saving' }));
       void requestApi<ExamView>(`/assessments/exams/${encodeURIComponent(next.id)}/answers`, token, {
         method: 'PUT', body: { answers: next.answers, texts: next.texts },
-      }).catch((failure: unknown) => setError(getError(failure)));
+      }).then(() => { setSave({ status: 'saved', at: new Date() }); setError(''); })
+        .catch((failure: unknown) => { setSave((current) => ({ ...current, status: 'error' })); setError(getError(failure)); });
     }, 500);
   }, [token]);
+
+  useEffect(() => () => window.clearTimeout(saveTimer.current), []);
 
   async function start() {
     setBusy(true);
@@ -251,6 +280,13 @@ function ExamPage({ token }: { token: string }) {
       const opened = await requestApi<ExamView>('/assessments/exams', token, { method: 'POST', body: { enrollmentId, kind: examKind } });
       setExam(opened);
       submitKey.current = null;
+      setSave({ status: 'idle', at: null });
+      // La nouvelle tentative rejoint l'historique sans recharger la page.
+      setHistory((list) => [{
+        id: opened.id, kind: opened.kind, number: opened.number, status: opened.status, title: opened.definition.title, startedAt: opened.startedAt,
+        submittedAt: null, dueAt: opened.dueAt, gradedAt: null, onTime: opened.onTime, percent: null, decision: null,
+      }, ...(list ?? []).filter((item) => item.id !== opened.id)]);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (failure) {
       setError(getError(failure));
     } finally {
@@ -258,9 +294,9 @@ function ExamPage({ token }: { token: string }) {
     }
   }
 
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+  async function submit() {
     if (!exam || busy) return;
+    setConfirming(false);
     setBusy(true);
     setError('');
     window.clearTimeout(saveTimer.current);
@@ -271,219 +307,174 @@ function ExamPage({ token }: { token: string }) {
         method: 'POST', idempotencyKey: submitKey.current,
       }));
       setRefresh((value) => value + 1);
+      toast('Tentative remise. Votre résultat arrivera après la correction.');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (failure) {
       setError(getError(failure));
     } finally {
       setBusy(false);
     }
+  }
+
+  function goTo(partId: string) {
+    setActivePart(partId);
+    document.getElementById(`exam-part-${partId}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   const update = (next: ExamView) => { setExam(next); persist(next); };
   const latest = history?.[0];
   const canRetry = latest?.status === 'graded' && latest.decision === 'to_consolidate';
+  const parts = exam?.definition.parts ?? [];
+  const states = exam ? parts.map((part) => partState(part, exam)) : [];
+  const done = states.filter((state) => state.done).length;
+  const historyCard = history && history.length > 1 ? <AttemptHistory history={history} currentId={exam?.id} /> : null;
+  const errorBox = error && <div role="alert"><Callout tone="warning" title="Une action n’a pas abouti">{error}</Callout></div>;
 
   return (
-    <div className="stack pilot-session">
-      <Link className="text-link" to="/espace"><ArrowLeft size={16} aria-hidden="true" /> Retour à mon espace</Link>
-      <section className="panel stack" aria-labelledby="exam-title">
-        <div className="panel-heading">
-          <h2 id="exam-title"><ClipboardCheck size={20} aria-hidden="true" /> {exam?.definition.title ?? examNames[examKind]}</h2>
-          {exam && statusBadge({ status: exam.status, decision: exam.result?.decision ?? null })}
+    <div className="ev-page lc-enter">
+      <Link className="text-link ev-back" to="/espace"><ArrowLeft size={16} aria-hidden="true" /> Retour à mon espace</Link>
+      <ExamHero kind={examKind} exam={exam} />
+
+      {loadError && (
+        <div role="alert" className="ev-load-error">
+          <Callout tone="warning" title="L’évaluation n’a pas pu être chargée">{loadError}</Callout>
+          <button type="button" className="btn btn-outline" onClick={() => setRefresh((value) => value + 1)}>Réessayer</button>
         </div>
-        {exam?.definition.description && <p>{exam.definition.description}</p>}
-        {exam?.dueAt && <p className="muted">À remettre avant le {dateTime.format(new Date(exam.dueAt))}</p>}
-        {history === null && !error && <p role="status">Chargement de l’évaluation…</p>}
-        {history !== null && (!exam || canRetry) && (
-          <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void start()}>
-            {canRetry ? 'Commencer une nouvelle tentative' : `Commencer le ${examNames[examKind].toLowerCase()}`}</button>
-        )}
-        {exam?.status === 'submitted' && <p className="inline-message" role="status">Tentative remise{exam.onTime ? ' dans les délais' : ''}. Votre résultat sera disponible après la correction de l’écrit et de l’oral.</p>}
-        {error && <p className="inline-message warning" role="alert">{error}</p>}
-      </section>
+      )}
+      {history === null && !loadError && (
+        <div className="ev-loading"><SkeletonCard lines={3} label="Chargement de l’évaluation…" /><SkeletonCard lines={5} /></div>
+      )}
 
-      {exam && exam.status === 'graded' && <ResultPanel exam={exam} />}
+      {history !== null && !exam && (<>{errorBox}<StartCard kind={examKind} busy={busy} onStart={() => void start()} /></>)}
 
-      {exam && exam.status === 'in_progress' && (
-        <form className="stack" onSubmit={submit}>
-          {exam.definition.parts.map((part) => (
-            <section className="panel stack" key={part.id} aria-labelledby={`part-${part.id}`}>
-              <div className="panel-heading"><h2 id={`part-${part.id}`}>{part.title}</h2><Badge tone="blue">{competenceNames[part.competence] ?? part.competence}</Badge></div>
-              {part.instructions && <p className="pilot-lesson-text">{part.instructions}</p>}
-              <Placements part={part} exam={exam} />
-              {part.mode === 'closed' && part.questions.map((question) => (
-                <fieldset className="pilot-options" key={question.id}>
-                  <legend>{question.prompt}</legend>
-                  <Placements part={part} exam={exam} questionId={question.id} />
-                  {question.options.map((option) => (
-                    <label key={option.id}>
-                      <input type="radio" name={`${part.id}-${question.id}`} checked={exam.answers[part.id]?.[question.id] === option.id}
-                        onChange={() => update({ ...exam, answers: { ...exam.answers, [part.id]: { ...exam.answers[part.id], [question.id]: option.id } } })} /> {option.label}
-                    </label>
-                  ))}
-                </fieldset>
-              ))}
-              {part.mode === 'written' && (
-                <label>Votre texte<textarea rows={8} maxLength={8000} lang="de" value={exam.texts[part.id] ?? ''}
-                  onChange={(event) => update({ ...exam, texts: { ...exam.texts, [part.id]: event.target.value } })} /></label>
-              )}
-              {part.mode === 'oral' && <OralPart part={part} exam={exam} token={token} onSaved={setExam} />}
-            </section>
-          ))}
-          <div className="editor-actions">
-            <button type="submit" className="btn btn-primary" disabled={busy}>{busy ? 'Remise…' : 'Remettre ma tentative'}</button>
-            <span className="muted">Vos réponses sont enregistrées au fur et à mesure.</span>
+      {exam?.status === 'graded' && (
+        <>
+          {errorBox}
+          <ResultSummary exam={exam} extra={historyCard}
+            reviewHref={(activityId) => (sessionOf[activityId] ? `/espace/seance/${sessionOf[activityId]}` : '/espace/planning')}
+            action={canRetry && latest?.id === exam.id ? (
+              <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void start()}>
+                {busy ? <LoaderCircle size={17} className="ev-spin" aria-hidden="true" /> : <PenLine size={17} aria-hidden="true" />} Commencer une nouvelle tentative
+              </button>
+            ) : undefined} />
+        </>
+      )}
+
+      {exam?.status === 'submitted' && (<>{errorBox}<SubmittedView exam={exam} />{historyCard}</>)}
+
+      {exam?.status === 'in_progress' && (
+        <div className="ev-sheet">
+          <aside className="ev-aside" aria-label="Avancement de l’épreuve">
+            <div className="ev-progress">
+              <ProgressRing value={parts.length ? (done / parts.length) * 100 : 0} size={58} stroke={6} label={`${done} parties complètes sur ${parts.length}`}>
+                <strong className="ev-progress-count">{done}/{parts.length}</strong>
+              </ProgressRing>
+              <div><strong>{done === parts.length ? 'Tout est prêt' : plural(done, 'partie complète', 'parties complètes')}</strong>
+                <small>{done === parts.length ? 'Vous pouvez remettre votre tentative.' : `sur ${parts.length} · ${plural(parts.length - done, 'partie restante', 'parties restantes')}`}</small></div>
+            </div>
+            <ol className="kit-steps ev-segments" aria-hidden="true">
+              {states.map((state, index) => <li key={parts[index].id} className={state.done ? 'is-done' : parts[index].id === activePart ? 'is-current' : ''} />)}
+            </ol>
+            <nav className="ev-partnav" aria-label="Parties de l’épreuve">
+              <ol>
+                {parts.map((part, index) => (
+                  <li key={part.id}>
+                    <button type="button" className={`ev-navitem${states[index].done ? ' is-done' : ''}`} aria-current={part.id === activePart ? 'step' : undefined}
+                      onClick={() => goTo(part.id)}>
+                      <span className="ev-navdot" aria-hidden="true">{states[index].done ? <Check size={14} strokeWidth={3} /> : index + 1}</span>
+                      <span className="ev-navtext"><strong>{part.title}</strong><small>{states[index].label}</small></span>
+                    </button>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+          </aside>
+
+          <div className="ev-main">
+            <form className="ev-form" onSubmit={(event: FormEvent<HTMLFormElement>) => { event.preventDefault(); if (!busy) setConfirming(true); }}>
+              <div className="ev-parts">
+                {parts.map((part, index) => (
+                  <section className="ev-part" key={part.id} id={`exam-part-${part.id}`} aria-labelledby={`part-${part.id}`}>
+                    <header className="ev-part-head">
+                      <span className={`ev-part-icon is-${competenceTone(part.competence)}`}><CompetenceIcon competence={part.competence} size={20} /></span>
+                      <div>
+                        <p className="ev-part-kicker">Partie {index + 1} sur {parts.length} · {competenceNames[part.competence] ?? part.competence}</p>
+                        <h2 id={`part-${part.id}`}>{part.title}</h2>
+                      </div>
+                      {states[index].done
+                        ? <Badge tone="green"><Check size={13} strokeWidth={3} aria-hidden="true" /> Complète</Badge>
+                        : <Badge tone="neutral">{states[index].label}</Badge>}
+                    </header>
+                    {part.instructions && <div className="ev-instructions"><LessonContent text={part.instructions} compact /></div>}
+                    <ExamMedia part={part} exam={exam} />
+                    {part.mode === 'closed' && (
+                      <div className="ev-questions">
+                        {part.questions.map((question, position) => (
+                          <QuestionCard key={question.id} part={part} exam={exam} index={position}
+                            onAnswer={(questionId, optionId) => update({ ...exam, answers: { ...exam.answers, [part.id]: { ...exam.answers[part.id], [questionId]: optionId } } })} />
+                        ))}
+                      </div>
+                    )}
+                    {part.mode === 'written' && (
+                      <WritingPad value={exam.texts[part.id] ?? ''} save={save}
+                        onChange={(text) => update({ ...exam, texts: { ...exam.texts, [part.id]: text } })} />
+                    )}
+                    {part.mode === 'oral' && <OralRecorder part={part} exam={exam} token={token} onSaved={setExam} />}
+                  </section>
+                ))}
+              </div>
+
+              <div className="ev-actionbar">
+                {errorBox}
+                <div className="ev-actionbar-row">
+                  <div className="ev-actionbar-info">
+                    <strong>{done}/{parts.length} parties complètes</strong>
+                    <SaveIndicator state={save} />
+                  </div>
+                  <button type="submit" className="btn btn-primary btn-lg" disabled={busy}>
+                    {busy ? <LoaderCircle size={18} className="ev-spin" aria-hidden="true" /> : <Send size={18} aria-hidden="true" />}
+                    {busy ? 'Remise…' : 'Remettre ma tentative'}
+                  </button>
+                </div>
+              </div>
+            </form>
+            {historyCard}
           </div>
-        </form>
+        </div>
       )}
 
-      {history && history.some((item) => item.id !== exam?.id) && (
-        <section className="panel stack" aria-labelledby="exam-history">
-          <h2 id="exam-history">Tentatives précédentes</h2>
-          <ul className="pilot-list">
-            {history.filter((item) => item.id !== exam?.id).map((item) => (
-              <li key={item.id}><span>Tentative {item.number}{item.submittedAt ? ` · remise le ${dateTime.format(new Date(item.submittedAt))}` : ''}</span>
-                <span>{item.percent !== null ? `${item.percent} % ` : ''}{statusBadge(item)}</span></li>
-            ))}
-          </ul>
-        </section>
+      {confirming && exam?.status === 'in_progress' && (
+        <Dialog title="Remettre votre tentative ?" onClose={() => setConfirming(false)}>
+          <div className="ev-confirm">
+            <ul className="ev-confirm-list">
+              {parts.map((part, index) => (
+                <li key={part.id} className={states[index].done ? 'is-done' : 'is-todo'}>
+                  {states[index].done ? <CheckCircle2 size={18} aria-hidden="true" /> : <CircleAlert size={18} aria-hidden="true" />}
+                  <span><strong>{part.title}</strong><small>{states[index].label}</small></span>
+                </li>
+              ))}
+            </ul>
+            {done < parts.length
+              ? <Callout tone="warning" title={plural(parts.length - done, 'partie à compléter', 'parties à compléter')}>
+                  L’écrit et l’oral sont nécessaires à la correction ; une question sans réponse ne rapporte pas de point.</Callout>
+              : <Callout tone="success" title="Toutes les parties sont complètes">Votre copie est prête à être corrigée.</Callout>}
+            <p className="muted">Après la remise, vous ne pourrez plus modifier vos réponses.</p>
+            <div className="ev-confirm-actions">
+              <button type="button" className="btn btn-ghost" onClick={() => setConfirming(false)}>Continuer à répondre</button>
+              <button type="button" className="btn btn-primary" onClick={() => void submit()} disabled={busy}>
+                <Send size={17} aria-hidden="true" /> Remettre ma tentative</button>
+            </div>
+          </div>
+        </Dialog>
       )}
     </div>
-  );
-}
-
-/** Correction d'une remise : questions fermées corrigées, écrit et oral notés critère par critère (DEV-069). */
-function GradingPage({ token }: { token: string }) {
-  const { attemptId = '' } = useParams();
-  const navigate = useNavigate();
-  const [exam, setExam] = useState<ExamView | null>(null);
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    requestApi<ExamView>(`/assessments/exams/${encodeURIComponent(attemptId)}`, token).then(
-      (data) => { if (active) setExam(data); },
-      (failure: unknown) => { if (active) setError(getError(failure)); },
-    );
-    return () => { active = false; };
-  }, [attemptId, token]);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (!exam) return;
-    const form = new FormData(event.currentTarget);
-    const parts: Record<string, { points: Record<string, number>; comment: string }> = {};
-    for (const part of exam.definition.parts.filter((item) => item.mode !== 'closed')) {
-      parts[part.id] = {
-        points: Object.fromEntries(part.criteria.map((criterion) => [criterion.id, Number(form.get(`${part.id}:${criterion.id}`))])),
-        comment: String(form.get(`${part.id}:comment`) ?? ''),
-      };
-    }
-    setBusy(true);
-    setError('');
-    try {
-      setExam(await requestApi<ExamView>(`/assessments/exams/${encodeURIComponent(exam.id)}/grading`, token, {
-        method: 'POST', body: { parts, feedback: String(form.get('feedback') ?? '') },
-      }));
-    } catch (failure) {
-      setError(getError(failure));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  if (!exam) return <section className="panel stack">{error ? <p className="inline-message warning" role="alert">{error}</p> : <p role="status">Chargement de la remise…</p>}</section>;
-  return (
-    <div className="stack pilot-session">
-      <button type="button" className="text-link" onClick={() => navigate('/espace/corrections')}><ArrowLeft size={16} aria-hidden="true" /> Retour aux corrections</button>
-      <section className="panel stack" aria-labelledby="grading-title">
-        <div className="panel-heading"><h2 id="grading-title">{exam.definition.title} · tentative {exam.number}</h2>{statusBadge({ status: exam.status, decision: exam.result?.decision ?? null })}</div>
-        {exam.submittedAt && <p className="muted">Remise le {dateTime.format(new Date(exam.submittedAt))}{exam.onTime ? ' · dans les délais' : ' · après l’échéance'}</p>}
-      </section>
-      {exam.status === 'graded' && <ResultPanel exam={exam} />}
-      <form className="stack" onSubmit={submit}>
-        <fieldset className="editor-body" disabled={!exam.canGrade || busy}>
-          {exam.definition.parts.map((part) => (
-            <section className="panel stack" key={part.id} aria-labelledby={`grade-${part.id}`}>
-              <div className="panel-heading"><h2 id={`grade-${part.id}`}>{part.title}</h2><Badge tone="blue">{competenceNames[part.competence] ?? part.competence}</Badge></div>
-              {part.instructions && <p className="muted pilot-lesson-text">{part.instructions}</p>}
-              {part.mode === 'closed' && exam.closedScores?.[part.id] && (
-                <p>Questions fermées corrigées automatiquement : <strong>{exam.closedScores[part.id].points} / {exam.closedScores[part.id].max}</strong></p>
-              )}
-              {part.mode === 'written' && <blockquote className="exam-production" lang="de">{exam.texts[part.id] || 'Aucun texte remis.'}</blockquote>}
-              {part.mode === 'oral' && (() => {
-                const recording = exam.recordings.find((item) => item.partId === part.id);
-                return recording?.url
-                  ? <audio controls preload="metadata" src={recording.url} aria-label={`Production orale · ${part.title}`} />
-                  : <p className="inline-message warning">L’enregistrement n’est pas disponible pour le moment.</p>;
-              })()}
-              {part.mode !== 'closed' && exam.status === 'submitted' && (
-                <div className="stack">
-                  {part.criteria.map((criterion) => (
-                    <label key={criterion.id} className="exam-criterion">{criterion.label} (sur {criterion.maxPoints})
-                      <input name={`${part.id}:${criterion.id}`} type="number" min={0} max={criterion.maxPoints} required inputMode="numeric" />
-                    </label>
-                  ))}
-                  <label>Commentaire<textarea name={`${part.id}:comment`} rows={3} maxLength={2000} /></label>
-                </div>
-              )}
-            </section>
-          ))}
-          {exam.status === 'submitted' && (
-            <section className="panel stack">
-              <label>Appréciation générale et points à travailler<textarea name="feedback" rows={4} maxLength={4000} /></label>
-              {error && <p className="inline-message warning" role="alert">{error}</p>}
-              <button type="submit" className="btn btn-primary">{busy ? 'Enregistrement…' : 'Enregistrer la correction'}</button>
-            </section>
-          )}
-        </fieldset>
-      </form>
-    </div>
-  );
-}
-
-function GradingQueue({ token }: { token: string }) {
-  const [queue, setQueue] = useState<QueueItem[] | null>(null);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    let active = true;
-    requestApi<QueueItem[]>('/assessments/grading', token).then(
-      (data) => { if (active) setQueue(data); },
-      (failure: unknown) => { if (active) setError(getError(failure)); },
-    );
-    return () => { active = false; };
-  }, [token]);
-
-  return (
-    <section className="panel stack" aria-label="Copies à corriger">
-      {error ? <p className="inline-message warning" role="alert">{error}</p>
-        : queue === null ? <p role="status">Chargement des corrections…</p>
-        : queue.length === 0 ? <EmptyState title="Aucune correction en attente" />
-        : (
-          <ul className="media-list">
-            {queue.map((item) => (
-              <li key={item.id}>
-                <div className="media-main">
-                  <strong>{item.learnerName}</strong>
-                  <span className="muted">{item.levelCode ? `${item.levelCode} · ` : ''}{item.title} · tentative {item.number}</span>
-                  <span className="muted">Remise le {dateTime.format(new Date(item.submittedAt))}</span>
-                </div>
-                {item.onTime ? <Badge tone="green">Dans les délais</Badge> : <Badge tone="amber">Après l’échéance</Badge>}
-                <Link className="btn btn-primary" to={`/espace/corrections/${item.id}`} aria-label={`Corriger ${item.title} de ${item.learnerName}`}>Corriger</Link>
-              </li>
-            ))}
-          </ul>
-        )}
-    </section>
   );
 }
 
 export function GradingPanel({ token }: { token: string }) {
   return (
     <Routes>
-      <Route index element={<GradingQueue token={token} />} />
-      <Route path=":attemptId" element={<GradingPage token={token} />} />
+      <Route path=":attemptId?" element={<GradingWorkspace token={token} />} />
     </Routes>
   );
 }

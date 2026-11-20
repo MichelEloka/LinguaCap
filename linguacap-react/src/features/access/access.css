@@ -1,49 +1,102 @@
-.lc-access {
-  align-items: center;
-  padding: clamp(1rem, 6vw, 4.2rem);
-  background: #f4f7f4;
+/* Écrans d'accès (connexion, activation, réinitialisation) : panneau de marque + formulaire. */
+.acc { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); min-height: 100vh; min-height: 100dvh; background: var(--surface); }
+
+/* Panneau de marque */
+.acc-brand { position: relative; isolation: isolate; overflow: hidden; display: flex; flex-direction: column; gap: 2rem;
+  padding: clamp(1.5rem, 4vw, 3rem); color: #fff;
+  background: radial-gradient(120% 90% at 100% 0%, rgb(31 107 255 / 55%) 0%, transparent 55%),
+              radial-gradient(90% 70% at 0% 100%, rgb(31 107 255 / 28%) 0%, transparent 60%),
+              linear-gradient(160deg, var(--night-2), var(--night)); }
+.acc-brand::before { content: ''; position: absolute; inset: 0; z-index: -1; opacity: .5;
+  background-image: radial-gradient(rgb(255 255 255 / 14%) 1px, transparent 1px); background-size: 22px 22px;
+  mask-image: linear-gradient(180deg, transparent, #000 30%, #000 70%, transparent); }
+.acc-logo { display: inline-flex; align-items: center; gap: .7rem; align-self: flex-start; color: #fff; font-size: 1.25rem; font-weight: 800; letter-spacing: -.02em; }
+.acc-logo img { width: 40px; height: 40px; border-radius: 12px; box-shadow: 0 0 0 1px rgb(255 255 255 / 18%), 0 8px 20px rgb(0 0 0 / 25%); }
+.acc-logo b { color: #8fb6ff; font-weight: 800; }
+.acc-pitch { max-width: 30rem; margin-top: auto; animation: lc-fade-up var(--t-slow) var(--ease) both; }
+.acc-kicker { display: inline-flex; padding: .3rem .7rem; margin-bottom: 1rem; border-radius: var(--r-full); background: rgb(255 255 255 / 10%);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 16%); color: #cfe0ff; font-size: var(--text-xs); font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.acc-pitch h2 { margin: 0 0 1.4rem; color: #fff; font-size: clamp(1.8rem, 3.2vw, 2.6rem); line-height: 1.12; letter-spacing: -.035em; }
+.acc-pitch ul { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; }
+.acc-pitch li { display: flex; align-items: center; gap: .75rem; color: #dbe6ff; font-weight: 600; }
+.acc-pitch li svg { flex-shrink: 0; width: 34px; height: 34px; padding: 8px; border-radius: 10px; background: rgb(255 255 255 / 10%); color: #9fc0ff; }
+
+/* Aperçu animé de l'application */
+.acc-preview { position: relative; height: 190px; margin-bottom: auto; }
+.acc-card { position: absolute; display: flex; align-items: center; gap: .75rem; padding: .85rem 1rem; border-radius: var(--r-lg); color: var(--ink);
+  background: rgb(255 255 255 / 96%); box-shadow: 0 18px 40px rgb(3 12 36 / 35%); animation: acc-float 6s ease-in-out infinite; }
+.acc-card small { display: block; color: var(--muted); font-size: var(--text-xs); font-weight: 700; }
+.acc-card strong { display: block; font-size: var(--text-md); }
+.acc-card em { display: block; color: var(--subtle); font-size: var(--text-xs); font-style: normal; font-weight: 600; }
+.acc-card-session { left: 0; top: 18px; width: 250px; }
+.acc-card-word { left: 210px; top: 104px; animation-delay: -2s; }
+.acc-card-word strong { font-size: 1.05rem; }
+.acc-card-score { left: 290px; top: 0; animation-delay: -4s; }
+.acc-card-score svg { color: var(--accent); }
+.acc-article { padding: .2rem .5rem; border-radius: 8px; background: var(--der-50); color: var(--der); font-size: var(--text-xs); font-weight: 800; }
+.acc-ring { width: 44px; height: 44px; flex-shrink: 0; }
+.acc-ring svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+.acc-ring circle { fill: none; stroke-width: 4; }
+.acc-ring circle:first-child { stroke: var(--brand-100); }
+.acc-ring circle:last-child { stroke: var(--brand); stroke-linecap: round; stroke-dasharray: 94.25; stroke-dashoffset: 94.25; animation: acc-ring 1.6s .4s var(--ease) forwards; }
+@keyframes acc-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
+@keyframes acc-ring { to { stroke-dashoffset: 33; } }
+
+/* Panneau du formulaire */
+.acc-panel { display: grid; place-items: center; padding: clamp(1.5rem, 5vw, 4rem) clamp(1.25rem, 5vw, 3rem); background: var(--surface); }
+.acc-form { display: grid; gap: 1.5rem; width: min(100%, 410px); animation: lc-fade-up var(--t-slow) var(--ease) .05s both; }
+.acc-head { display: grid; gap: .55rem; }
+.acc-head-icon { display: grid; place-items: center; width: 48px; height: 48px; margin-bottom: .4rem; border-radius: 14px;
+  background: var(--brand-50); color: var(--brand); box-shadow: inset 0 0 0 1px var(--brand-100); }
+.acc-head h1 { margin: 0; font-size: clamp(1.5rem, 2.4vw, 1.85rem); letter-spacing: -.03em; line-height: 1.15; }
+.acc-head p { margin: 0; color: var(--muted); }
+.acc-fields { display: grid; gap: 1rem; }
+.acc-fields input { min-height: 46px; }
+.acc-password-box { position: relative; }
+.acc-password-box input { width: 100%; padding-right: 3rem; }
+.acc-reveal { position: absolute; right: 4px; top: 50%; translate: 0 -50%; display: grid; place-items: center; width: 38px; height: 38px;
+  border-radius: var(--r-sm); color: var(--subtle); transition: color var(--t-fast) ease, background var(--t-fast) ease; }
+.acc-reveal:hover { color: var(--ink); background: var(--canvas); }
+.acc-forgot { justify-self: end; margin-top: -.4rem; font-size: var(--text-sm); }
+.acc-back { display: inline-flex; align-items: center; gap: .4rem; justify-self: center; font-size: var(--text-sm); }
+.acc-foot { justify-self: center; padding-top: 1rem; border-top: 1px solid var(--line); width: 100%; text-align: center; justify-content: center; font-size: var(--text-sm); }
+.acc-notice { display: flex; gap: .6rem; align-items: flex-start; margin: 0; padding: .8rem 1rem; border-radius: var(--r-md);
+  background: var(--success-50); color: var(--ink-2); font-size: var(--text-sm); animation: lc-scale-in var(--t-base) var(--ease) both; }
+.acc-notice svg { flex-shrink: 0; color: var(--success); margin-top: 1px; }
+.acc-hints { display: grid; gap: .35rem; margin: -.25rem 0 0; padding: 0; list-style: none; font-size: var(--text-sm); color: var(--muted); }
+.acc-hints li { display: flex; align-items: center; gap: .5rem; transition: color var(--t-base) ease; }
+.acc-hints li > span:first-child { width: 16px; height: 16px; border-radius: 50%; box-shadow: inset 0 0 0 2px var(--line-strong);
+  transition: background var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease); }
+.acc-hints li.is-ok { color: var(--success); }
+.acc-hints li.is-ok > span:first-child { background: var(--success); box-shadow: inset 0 0 0 4px var(--success-50); animation: lc-pop var(--t-slow) var(--ease-spring) both; }
+
+/* Accès de démonstration */
+.acc-demo { display: grid; gap: .6rem; }
+.acc-demo a { display: flex; align-items: center; gap: .85rem; padding: .85rem 1rem; border: 1px solid var(--line); border-radius: var(--r-lg); color: var(--ink);
+  background: var(--surface); transition: border-color var(--t-fast) ease, box-shadow var(--t-base) var(--ease), transform var(--t-base) var(--ease); }
+.acc-demo a:hover { border-color: var(--brand-100); box-shadow: var(--shadow-md); transform: translateY(-2px); }
+.acc-demo a > span:nth-child(2) { flex: 1; display: grid; min-width: 0; }
+.acc-demo small { color: var(--muted); font-size: var(--text-xs); font-weight: 600; }
+.acc-demo a > svg { color: var(--subtle); transition: transform var(--t-fast) var(--ease), color var(--t-fast) ease; }
+.acc-demo a:hover > svg { color: var(--brand); transform: translateX(3px); }
+.acc-demo-icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; }
+.acc-demo-icon.is-learner { background: var(--brand-50); color: var(--brand); }
+.acc-demo-icon.is-teacher { background: var(--violet-50); color: var(--violet); }
+.acc-demo-icon.is-admin { background: var(--accent-50); color: var(--accent); }
+
+/* Tablette : aperçu réduit */
+@media (max-width: 1100px) {
+  .acc-card-score { display: none; }
+  .acc-card-word { left: 150px; }
 }
-.lc-access-layout {
-  display: grid;
-  grid-template-columns: minmax(240px, .95fr) minmax(300px, 1fr);
-  width: min(100%, 940px);
-  min-height: 488px;
-  overflow: hidden;
-  border: 1px solid #dae4df;
-  border-radius: 25px;
-  background: white;
-  box-shadow: 0 18px 50px #17283a13;
-}
-.lc-access-visual {
-  position: relative;
-  isolation: isolate;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 2.2rem;
-  padding: clamp(1.7rem, 4vw, 3rem);
-  color: #effbf5;
-  background: linear-gradient(145deg, #162b35, #166252);
-}
-.lc-access-visual::before, .lc-access-visual::after {
-  position: absolute; z-index: -1; content: ''; border-radius: 50%; aspect-ratio: 1;
-  width: 365px; right: -140px; top: -110px; border: 1px solid #b5f4d945;
-}
-.lc-access-visual::after { right: -83px; top: -145px; background: #c9f3e10f; }
-.lc-access-visual p { color: #b4eed7; font-size: .92rem; font-weight: 750; margin-bottom: .5rem; }
-.lc-access-visual strong { font-size: clamp(1.65rem, 3.65vw, 2.8rem); line-height: 1.13; letter-spacing: -.045em; display: block; max-width: 14ch; }
-.lc-access-mark { display: grid; place-items: center; width: 67px; aspect-ratio: 1; border-radius: 20px; color: #193e35; background: #b4eed7; }
-.lc-access-layout .access-card.panel {
-  width: 100%; align-content: center; border: 0; border-radius: 0;
-  box-shadow: none; padding: clamp(1.25rem, 5vw, 3.4rem);
-}
-.lc-access-layout .access-card > .text-link { justify-self: start; }
-@media (width <= 675px) {
-  .lc-access-layout { grid-template-columns: 1fr; min-height: auto; border-radius: 18px; }
-  .lc-access-visual { flex-direction: row; justify-content: flex-start; align-items: center; gap: 1rem; padding: 1.2rem; }
-  .lc-access-mark { width: 42px; border-radius: 12px; }
-  .lc-access-mark svg { width: 22px; }
-  .lc-access-visual p { margin: 0; }
-  .lc-access-visual strong { max-width: none; font-size: .87rem; line-height: 1.4; font-weight: 500; letter-spacing: 0; }
+
+/* Mobile : bandeau de marque compact au-dessus du formulaire */
+@media (max-width: 860px) {
+  .acc { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+  .acc-brand { gap: 1.1rem; padding: 1.25rem 1.25rem 1.6rem; }
+  .acc-pitch { margin-top: 0; }
+  .acc-kicker { margin-bottom: .6rem; }
+  .acc-pitch h2 { margin: 0; font-size: 1.35rem; }
+  .acc-pitch ul, .acc-preview { display: none; }
+  .acc-panel { place-items: start center; margin-top: -1rem; padding: 1.75rem 1.25rem 2.5rem; border-radius: var(--r-xl) var(--r-xl) 0 0; position: relative; }
 }
