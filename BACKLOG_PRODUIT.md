@@ -8,7 +8,7 @@ Ce backlog prolonge le [backlog du MVP](PLAN_FONCTIONNALITES.md). Il rassemble l
 
 | Code | Sens |
 |---|---|
-| **P0** | En cours de développement (incrément « Parcours »). |
+| **P0** | Incrément « Parcours » : livré en production le 21 novembre 2026. |
 | **P1** | Prolonge directement l’incrément en cours ; à faire juste après. |
 | **P2** | Nécessaire avant l’ouverture publique : monétisation, accompagnement, motivation. |
 | **P3** | Croissance : écoles, compétitions, temps réel. |
@@ -26,16 +26,16 @@ Ce backlog prolonge le [backlog du MVP](PLAN_FONCTIONNALITES.md). Il rassemble l
 
 | ID | Fonctionnalité | Priorité | Complexité | Dépend de |
 |---|---|---|---|---|
-| EVO-001 | Langues : choix par le professeur et l’élève autonome, allemand seul ouvert | P0 | M | — |
-| EVO-002 | Test de niveau à l’ouverture du compte, niveau annoncé | P0 | L | EVO-001 |
-| EVO-003 | Objectif, durée et difficulté choisis par l’élève | P0 | M | EVO-002 |
-| EVO-004 | Parcours multi-niveaux construit et réparti sur les jours | P0 | L | EVO-003 |
-| EVO-005 | Contrat d’engagement élève–professeur négocié | P0 | L | EVO-004 |
-| EVO-006 | Ajout de cours et adaptation du planning par le professeur | P0 | M | EVO-004 |
-| EVO-007 | Bibliothèque libre : tous les cours et exercices à tout moment | P0 | M | EVO-001 |
-| EVO-008 | Accueil en étapes (élève) et en questions (professeur) | P0 | M | EVO-001 à EVO-004 |
-| EVO-009 | Barre latérale pliable à volonté, contenu sur toute la largeur | P0 | S | — (livré) |
-| EVO-010 | En-tête revu | P0 | S | — (livré avec la refonte) |
+| EVO-001 | Langues : choix par le professeur et l’élève autonome, allemand seul ouvert | P0 · livré | M | — |
+| EVO-002 | Test de niveau à l’ouverture du compte, niveau annoncé | P0 · livré | L | EVO-001 |
+| EVO-003 | Objectif, durée et difficulté choisis par l’élève | P0 · livré | M | EVO-002 |
+| EVO-004 | Parcours multi-niveaux construit et réparti sur les jours | P0 · livré | L | EVO-003 |
+| EVO-005 | Contrat d’engagement élève–professeur négocié | P0 · livré | L | EVO-004 |
+| EVO-006 | Ajout de cours et adaptation du planning par le professeur | P0 · livré | M | EVO-004 |
+| EVO-007 | Bibliothèque libre : tous les cours et exercices à tout moment | P0 · livré | M | EVO-001 |
+| EVO-008 | Accueil en étapes (élève) et en questions (professeur) | P0 · livré | M | EVO-001 à EVO-004 |
+| EVO-009 | Barre latérale pliable à volonté, contenu sur toute la largeur | P0 · livré | S | — (livré) |
+| EVO-010 | En-tête revu | P0 · livré | S | — (livré avec la refonte) |
 | EVO-011 | Centre de notifications (contrats, questions, messages) | P1 | M | EVO-005 |
 | EVO-012 | Messagerie dans les deux sens (l’élève répond au professeur) | P1 | M | — |
 | EVO-013 | Questions sur un élément du cours, réponses du professeur | P1 | M | EVO-011, EVO-012 |
@@ -59,7 +59,7 @@ Ce backlog prolonge le [backlog du MVP](PLAN_FONCTIONNALITES.md). Il rassemble l
 | EVO-031 | Ouvrir une deuxième langue (catalogue multi-langues complet) | P2 | M | EVO-001 |
 | EVO-032 | Calibrer le test de niveau et les seuils de difficulté | P2 | S | EVO-002, EVO-003 |
 
-## P0 · En cours : incrément « Parcours »
+## P0 · Livré : incrément « Parcours » (en production le 21 novembre 2026)
 
 - **EVO-001 Langues.** Liste des langues courantes (allemand, anglais, espagnol, italien, portugais, néerlandais, français langue étrangère, arabe, chinois, japonais, russe, coréen, turc, polonais). Toutes sont affichées, seul l’allemand est ouvert, les autres sont grisées « Bientôt ».
   - Le professeur choisit les langues qu’il enseigne.
@@ -141,7 +141,7 @@ Ce backlog prolonge le [backlog du MVP](PLAN_FONCTIONNALITES.md). Il rassemble l
 
 ## Ordre proposé
 
-1. **Incrément « Parcours »** (P0, en cours) : EVO-001 à EVO-010.
+1. **Incrément « Parcours »** (P0, livré le 21 novembre 2026) : EVO-001 à EVO-010.
 2. **Incrément « Échanges »** : EVO-011, 012, 013, 015, puis 014.
 3. **Incrément « Examens »** : EVO-017, 019, puis 018.
 4. **Incrément « Ouverture »** : EVO-016, 031, 024, 023, 022.

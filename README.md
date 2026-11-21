@@ -9,6 +9,7 @@ LinguaCap aide un élève à atteindre un objectif de langue à une date donnée
 | [Cahier des charges](CAHIER_DES_CHARGES.md) | Usages, règles métier et critères de recette du MVP |
 | [Architecture](ARCHITECTURE.md) | Services, données, médias et échanges |
 | [Backlog](PLAN_FONCTIONNALITES.md) | Incréments DEV-001 à DEV-109 et avancement |
+| [Backlog produit](BACKLOG_PRODUIT.md) | Évolutions après le MVP (EVO-001 à EVO-032), priorités et complexité |
 | [Plan de déploiement](PLAN_DEPLOIEMENT.md) | Environnements, CI et mise en ligne |
 | [Contrats](contracts/README.md) | API publique `/api/v1` et événements |
 | [Recette et livraison](infra/pilot/README.md) | Pile locale, recette, déploiement automatisé |
@@ -100,4 +101,6 @@ Le détail des étapes, des secrets GitHub et des droits Google Cloud se trouve 
 
 - **Incrément 10 · Mise en ligne du MVP** : en cours. Livraison automatisée vérifiée (fédération d’identité GitHub, images par empreinte, révisions sans trafic avant promotion, migrations et rôles SQL, TLS vérifié vers la base, secrets par service, Cloud Scheduler dédié, services privés refusant tout appel sans identité), HTTPS imposé et en-têtes de sécurité, journaux corrélés par identifiant de requête, indisponibilités éprouvées en recette, sauvegarde et restauration vérifiées en recette, nouvelle interface des espaces. Restent les contrôles en ligne avec des comptes réels (invitation externe, récupération, isolation, dépôt de médias), la publication des parcours A1/A2 en production, une sauvegarde de production et l’ouverture du pilote (voir [exploitation](infra/pilot/README.md#exploitation-du-pilote)).
 
-Les incréments suivants sont décrits dans le [backlog](PLAN_FONCTIONNALITES.md).
+- **Incrément « Parcours » (après le MVP)** : livré en production le 21 novembre 2026. Langues (allemand ouvert, 13 autres « Bientôt »), accueil en questions du professeur, test de niveau à paliers A1, A2 et B1 (54 questions, 18 sons), objectif et durée avec difficulté calculée, parcours construit du niveau initial au niveau visé et réparti sur les jours choisis, contrat d’engagement négocié entre l’élève et son professeur, ajout de cours et passage forcé par le professeur, bibliothèque libre et entraînement au bilan intermédiaire. L’import du test de niveau en production reste à lancer (`import-content.mjs --placement --publish`).
+
+La suite est décrite dans le [backlog produit](BACKLOG_PRODUIT.md) ; le MVP reste suivi dans le [backlog du MVP](PLAN_FONCTIONNALITES.md).
