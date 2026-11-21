@@ -99,5 +99,6 @@ public class AdminUserResource {
     public record Assignment(UUID personId, String personName, UUID assignedBy, String assignedByName,
                              String startedAt, String endedAt) {}
 
-    public record AdminUserDetail(AdminUser user, List<Assignment> teacherHistory, List<Assignment> reviewerHistory) {}
+    public record AdminUserDetail(AdminUser user, List<Assignment> teacherHistory, List<Assignment> reviewerHistory,
+                                  IdentityResource.TeacherProfile teacherProfile) {}
 }

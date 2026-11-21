@@ -68,6 +68,8 @@ public class KpiResource {
         for (JsonNode learner : services.request(identityUrl, "/v1/learners", "GET", callerId, null)) {
             accompanied.put(learner.path("id").asText(), learner.hasNonNull("teacherId"));
         }
+        JsonNode teacherProfiles = services.request(identityUrl, "/v1/internal/identity/teacher-profiles", "GET",
+                callerId, null);
         try (Connection connection = dataSource.getConnection()) {
             KpiRules.Dashboard dashboard = KpiRules.compute(filters, OffsetDateTime.now(), invitations(connection),
                     goals(connection, accompanied), sessions(connection), activity(connection), attempts(connection),
@@ -77,6 +79,8 @@ public class KpiResource {
             applied.put("from", start.toString()).put("to", end.toString()).put("startLevel", startLevel)
                     .put("level", level).put("template", template).put("kind", kind);
             result.set("freshness", freshness(connection));
+            result.set("teacherOnboarding", json.valueToTree(
+                    TeacherOnboardingKpis.compute(teacherProfiles, TeacherOnboardingKpis.trend(connection, start, end))));
             return result;
         } catch (SQLException error) {
             LOG.errorf("KPI computation failed (SQLSTATE %s)", error.getSQLState());

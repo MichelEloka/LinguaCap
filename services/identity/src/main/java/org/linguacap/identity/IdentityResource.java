@@ -1,5 +1,6 @@
 package org.linguacap.identity;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.NullNode;
@@ -49,13 +50,29 @@ public class IdentityResource {
     @PUT
     @Path("/me/teacher-profile")
     @Consumes(MediaType.APPLICATION_JSON)
-    public CurrentProfile teacherProfile(TeacherProfileRequest request) {
+    public CurrentProfile teacherProfile(JsonNode body) {
         Account caller = accounts.current();
         if (!caller.is("teacher")) {
             throw HttpError.forbidden("Le profil enseignant est réservé aux professeurs.");
         }
-        store.saveTeacherProfile(caller.id(), AccountRules.checkTeacherProfile(request, open()), accounts.requestId());
+        store.saveTeacherProfile(caller.id(), AccountRules.checkTeacherProfile(teacherProfileRequest(body), open()),
+                accounts.requestId());
         return current(caller);
+    }
+
+    private TeacherProfileRequest teacherProfileRequest(JsonNode body) {
+        if (body == null || !body.isObject()) {
+            throw HttpError.badRequest("Le questionnaire doit être un objet JSON.");
+        }
+        if ((body.has("acceptingNewStudents") || body.has("courseCreationMode"))
+                && (!body.path("acceptingNewStudents").isBoolean() || !body.path("courseCreationMode").isTextual())) {
+            throw HttpError.badRequest("Indiquez votre disponibilité et comment vous souhaitez construire vos cours.");
+        }
+        try {
+            return json.treeToValue(body, TeacherProfileRequest.class);
+        } catch (JsonProcessingException error) {
+            throw HttpError.badRequest("Vérifiez les réponses du questionnaire.");
+        }
     }
 
     /** Professeur référent de l'élève connecté, ou null pour un élève autonome. */
@@ -123,14 +140,16 @@ public class IdentityResource {
 
     public record LanguageChoice(String languageId) {}
 
-    /** maxLearners, gradingDelayHours et bio sont facultatifs ; une nouvelle soumission remplace la précédente. */
+    /** Les deux choix sont fournis ensemble ; leur absence laisse les réponses précédentes inchangées. */
     public record TeacherProfileRequest(List<String> languages, List<String> levels, Integer maxLearners,
-                                        Integer gradingDelayHours, String bio) {}
+                                        Integer gradingDelayHours, String bio, Boolean acceptingNewStudents,
+                                        String courseCreationMode) {}
 
     /** onboardedAt : première validation du questionnaire (null tant qu'il reste à remplir). */
     public record TeacherProfile(List<String> languages, List<String> levels, Integer maxLearners,
-                                 Integer gradingDelayHours, String bio, String onboardedAt) {
-        static final TeacherProfile EMPTY = new TeacherProfile(List.of(), List.of(), null, null, "", null);
+                                 Integer gradingDelayHours, String bio, String onboardedAt,
+                                 Boolean acceptingNewStudents, String courseCreationMode) {
+        static final TeacherProfile EMPTY = new TeacherProfile(List.of(), List.of(), null, null, "", null, null, null);
     }
 
     public record TeacherCard(UUID id, String displayName, String bio, Integer gradingDelayHours,

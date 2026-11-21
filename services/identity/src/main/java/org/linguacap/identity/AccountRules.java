@@ -227,6 +227,13 @@ final class AccountRules {
         if (levels.isEmpty()) {
             throw HttpError.badRequest("Indiquez au moins un niveau enseigné.");
         }
+        String courseCreationMode = request.courseCreationMode();
+        if ((request.acceptingNewStudents() == null) != (courseCreationMode == null)) {
+            throw HttpError.badRequest("Indiquez votre disponibilité et comment vous souhaitez construire vos cours.");
+        }
+        if (courseCreationMode != null && !"self".equals(courseCreationMode) && !"linguacap".equals(courseCreationMode)) {
+            throw HttpError.badRequest("Indiquez comment vous souhaitez construire vos cours.");
+        }
         Integer maxLearners = request.maxLearners();
         if (maxLearners != null && (maxLearners < 1 || maxLearners > 500)) {
             throw HttpError.badRequest("Le nombre d’élèves souhaité doit être compris entre 1 et 500.");
@@ -239,6 +246,7 @@ final class AccountRules {
         if (bio.length() > MAX_BIO_LENGTH) {
             throw HttpError.badRequest("La présentation doit tenir en " + MAX_BIO_LENGTH + " caractères.");
         }
-        return new TeacherProfileRequest(List.copyOf(languages), List.copyOf(levels), maxLearners, delay, bio);
+        return new TeacherProfileRequest(List.copyOf(languages), List.copyOf(levels), maxLearners, delay, bio,
+                request.acceptingNewStudents(), courseCreationMode);
     }
 }

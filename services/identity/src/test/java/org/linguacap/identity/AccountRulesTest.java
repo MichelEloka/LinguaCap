@@ -25,7 +25,7 @@ class AccountRulesTest {
 
     private static TeacherProfileRequest teacherProfile(List<String> languages, List<String> levels, Integer maxLearners,
                                                         Integer gradingDelayHours, String bio) {
-        return new TeacherProfileRequest(languages, levels, maxLearners, gradingDelayHours, bio);
+        return new TeacherProfileRequest(languages, levels, maxLearners, gradingDelayHours, bio, true, "self");
     }
 
     private static Account account(String role, String status, UUID teacherId, String... permissions) {
@@ -153,18 +153,23 @@ class AccountRulesTest {
     @Test
     void leQuestionnaireDuProfesseurEstNormalise() {
         TeacherProfileRequest profile = AccountRules.checkTeacherProfile(
-                new TeacherProfileRequest(List.of("DE", " de"), List.of("b1", "A1", "A1"), 12, 48, "  Bonjour  "), OPEN);
+                new TeacherProfileRequest(List.of("DE", " de"), List.of("b1", "A1", "A1"), 12, 48, "  Bonjour  ",
+                        false, "linguacap"), OPEN);
         assertEquals(List.of("de"), profile.languages());
         assertEquals(List.of("A1", "B1"), profile.levels());
         assertEquals(12, profile.maxLearners());
         assertEquals(48, profile.gradingDelayHours());
         assertEquals("Bonjour", profile.bio());
+        assertEquals(false, profile.acceptingNewStudents());
+        assertEquals("linguacap", profile.courseCreationMode());
 
         TeacherProfileRequest minimal = AccountRules.checkTeacherProfile(
-                new TeacherProfileRequest(List.of("de"), List.of("A2"), null, null, null), OPEN);
+                new TeacherProfileRequest(List.of("de"), List.of("A2"), null, null, null, null, null), OPEN);
         assertNull(minimal.maxLearners());
         assertNull(minimal.gradingDelayHours());
         assertEquals("", minimal.bio());
+        assertNull(minimal.acceptingNewStudents());
+        assertNull(minimal.courseCreationMode());
     }
 
     @Test
@@ -183,6 +188,12 @@ class AccountRulesTest {
         assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("A1"), null, 36, ""), OPEN));
         assertRefused(400, () -> AccountRules.checkTeacherProfile(
                 teacherProfile(List.of("de"), List.of("A1"), null, null, "x".repeat(501)), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(new TeacherProfileRequest(
+                List.of("de"), List.of("A1"), null, null, null, false, null), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(new TeacherProfileRequest(
+                List.of("de"), List.of("A1"), null, null, null, null, "self"), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(new TeacherProfileRequest(
+                List.of("de"), List.of("A1"), null, null, null, true, "externally"), OPEN));
     }
 
     @Test

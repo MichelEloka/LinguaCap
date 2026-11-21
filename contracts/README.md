@@ -14,7 +14,7 @@ Chaque producteur écrit ses événements dans sa table de sortie (`identity.out
 | --- | --- | --- |
 | Identités | `identity.invitation_sent`, `identity.invitation_cancelled`, `identity.account_activated`, `identity.account_disabled`, `identity.account_enabled`, `identity.role_changed`, `identity.permissions_changed`, `identity.teacher_assigned`, `identity.reviewer_assigned` | Identifiants, rôle, référent, invitation d’origine. |
 | | `identity.language_chosen` | Sujet `account` : langue choisie par l’élève autonome (`languageId`) et langue précédente (`previousLanguageId`). |
-| | `identity.teacher_profile_updated` | Sujet `account` : langues et niveaux enseignés du professeur, `onboarding` vrai lors du questionnaire d’accueil. |
+| | `identity.teacher_profile_updated` | Sujet `account` : langues, niveaux, nombre d’élèves envisagé et délai de correction. `acceptingNewStudents` et `courseCreationMode` sont présents seulement si ces deux réponses ont été soumises, `onboarding` est vrai lors de la première validation. La présentation reste dans Identités. |
 | Apprentissage | `learning.goal_set` | Parcours, niveau, rythme, dates de départ, cible et cible initiale. |
 | | `learning.plan_validated` | Révision, date cible, séances actives avec échéance et jalon (`midterm`, `final`). |
 | | `learning.activity_progressed`, `learning.session_completed` | Séance, activité, fin, échéance et remise à temps. |

@@ -6019,7 +6019,8 @@
         "required": [
           "user",
           "teacherHistory",
-          "reviewerHistory"
+          "reviewerHistory",
+          "teacherProfile"
         ],
         "properties": {
           "user": {
@@ -6038,6 +6039,13 @@
               "$ref": "#/components/schemas/Assignment"
             },
             "description": "Correcteurs désignés, du plus récent au plus ancien."
+          },
+          "teacherProfile": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/TeacherProfile" },
+              { "type": "null" }
+            ],
+            "description": "Réponses du professeur, ou null pour un autre rôle ou en l’absence de profil."
           }
         }
       },
@@ -8757,7 +8765,8 @@
           "resumption",
           "goals",
           "filters",
-          "freshness"
+          "freshness",
+          "teacherOnboarding"
         ],
         "properties": {
           "activation": {
@@ -8830,8 +8839,65 @@
           },
           "freshness": {
             "$ref": "#/components/schemas/Freshness"
+          },
+          "teacherOnboarding": {
+            "$ref": "#/components/schemas/TeacherOnboardingDashboard"
           }
         }
+      },
+      "TeacherOnboardingDashboard": {
+        "type": "object",
+        "description": "Répartitions actuelles des professeurs actifs et tendance des réponses explicites dans la période. Les filtres de parcours concernent les indicateurs élèves.",
+        "required": [
+          "teachers", "byLanguage", "byLevel", "byAvailability", "byCourseMode",
+          "byMaxLearners", "byGradingDelayHours", "trend"
+        ],
+        "properties": {
+          "teachers": { "type": "integer", "minimum": 0 },
+          "byLanguage": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "byLevel": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "byAvailability": {
+            "type": "object",
+            "required": ["yes", "no", "unknown"],
+            "properties": {
+              "yes": { "type": "integer", "minimum": 0 },
+              "no": { "type": "integer", "minimum": 0 },
+              "unknown": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "byCourseMode": {
+            "type": "object",
+            "required": ["self", "linguacap", "unknown"],
+            "properties": {
+              "self": { "type": "integer", "minimum": 0 },
+              "linguacap": { "type": "integer", "minimum": 0 },
+              "unknown": { "type": "integer", "minimum": 0 }
+            }
+          },
+          "byMaxLearners": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "byGradingDelayHours": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "trend": {
+            "type": "array",
+            "description": "Dernière réponse explicite par professeur et jour, dates Europe/Paris dans la période incluse.",
+            "items": {
+              "type": "object",
+              "required": ["date", "responses", "accepting", "notAccepting", "self", "linguacap"],
+              "properties": {
+                "date": { "type": "string", "format": "date" },
+                "responses": { "type": "integer", "minimum": 0 },
+                "accepting": { "type": "integer", "minimum": 0 },
+                "notAccepting": { "type": "integer", "minimum": 0 },
+                "self": { "type": "integer", "minimum": 0 },
+                "linguacap": { "type": "integer", "minimum": 0 }
+              }
+            }
+          }
+        }
+      },
+      "TeacherOnboardingCounts": {
+        "type": "object",
+        "description": "Effectifs par valeur déclarée. La clé unknown regroupe les valeurs manquantes.",
+        "additionalProperties": { "type": "integer", "minimum": 0 }
       },
       "LanguageId": {
         "type": "string",
@@ -9270,7 +9336,9 @@
           "maxLearners",
           "gradingDelayHours",
           "bio",
-          "onboardedAt"
+          "onboardedAt",
+          "acceptingNewStudents",
+          "courseCreationMode"
         ],
         "properties": {
           "languages": {
@@ -9319,8 +9387,23 @@
               "null"
             ],
             "format": "date-time"
+          },
+          "acceptingNewStudents": {
+            "type": ["boolean", "null"],
+            "description": "Disponibilité déclarée, ou null si le professeur n’a pas répondu."
+          },
+          "courseCreationMode": {
+            "oneOf": [
+              { "$ref": "#/components/schemas/TeacherCourseCreationMode" },
+              { "type": "null" }
+            ],
+            "description": "Choix du professeur, ou null s’il n’a pas répondu."
           }
         }
+      },
+      "TeacherCourseCreationMode": {
+        "type": "string",
+        "enum": ["self", "linguacap"]
       },
       "TeacherProfileRequest": {
         "type": "object",
@@ -9329,6 +9412,11 @@
           "levels"
         ],
         "additionalProperties": false,
+        "description": "Les deux choix d’accueil sont fournis ensemble. Leur omission préserve les choix déjà enregistrés.",
+        "dependentRequired": {
+          "acceptingNewStudents": ["courseCreationMode"],
+          "courseCreationMode": ["acceptingNewStudents"]
+        },
         "properties": {
           "languages": {
             "type": "array",
@@ -9374,6 +9462,12 @@
           "bio": {
             "type": "string",
             "maxLength": 500
+          },
+          "acceptingNewStudents": {
+            "type": "boolean"
+          },
+          "courseCreationMode": {
+            "$ref": "#/components/schemas/TeacherCourseCreationMode"
           }
         }
       },

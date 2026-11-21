@@ -184,9 +184,10 @@ class IdentityStore {
                     user = adminUser(rows);
                 }
             }
+            TeacherProfile teaching = "teacher".equals(user.role()) ? teacherProfile(connection, id) : null;
             return new AdminUserDetail(user,
                     history(connection, "teacher_assignments", "teacher_id", id),
-                    history(connection, "reviewer_assignments", "reviewer_id", id));
+                    history(connection, "reviewer_assignments", "reviewer_id", id), teaching);
         });
     }
 
@@ -368,22 +369,52 @@ class IdentityStore {
 
     /** Profil enseignant, ou null tant que le professeur n'a pas rempli son questionnaire d'accueil. */
     TeacherProfile teacherProfile(UUID teacherId) {
-        return db.read("read teacher profile", connection -> {
+        return db.read("read teacher profile", connection -> teacherProfile(connection, teacherId));
+    }
+
+    private TeacherProfile teacherProfile(Connection connection, UUID teacherId) throws SQLException {
+        try (PreparedStatement statement = connection.prepareStatement("""
+                select languages, levels, max_learners, grading_delay_hours, bio, onboarded_at,
+                       accepting_new_students, course_creation_mode
+                from identity.teacher_profiles where profile_id = ?
+                """)) {
+            statement.setObject(1, teacherId);
+            try (ResultSet rows = statement.executeQuery()) {
+                if (!rows.next()) return null;
+                return new TeacherProfile(texts(rows.getArray("languages")), texts(rows.getArray("levels")),
+                        rows.getObject("max_learners", Integer.class),
+                        rows.getObject("grading_delay_hours", Integer.class), rows.getString("bio"),
+                        text(rows.getObject("onboarded_at", OffsetDateTime.class)),
+                        rows.getObject("accepting_new_students", Boolean.class),
+                        rows.getString("course_creation_mode"));
+            }
+        }
+    }
+
+    List<TeacherKpiProfile> teacherKpiProfiles() {
+        return db.read("read teacher KPI profiles", connection -> {
             try (PreparedStatement statement = connection.prepareStatement("""
-                    select languages, levels, max_learners, grading_delay_hours, bio, onboarded_at
-                    from identity.teacher_profiles where profile_id = ?
-                    """)) {
-                statement.setObject(1, teacherId);
-                try (ResultSet rows = statement.executeQuery()) {
-                    if (!rows.next()) return null;
-                    return new TeacherProfile(texts(rows.getArray("languages")), texts(rows.getArray("levels")),
+                    select tp.languages, tp.levels, tp.max_learners, tp.grading_delay_hours,
+                           tp.accepting_new_students, tp.course_creation_mode
+                    from identity.profiles p
+                    left join identity.teacher_profiles tp on tp.profile_id = p.id
+                    where p.role = 'teacher' and p.status = 'active'
+                    """); ResultSet rows = statement.executeQuery()) {
+                List<TeacherKpiProfile> data = new ArrayList<>();
+                while (rows.next()) {
+                    data.add(new TeacherKpiProfile(texts(rows.getArray("languages")), texts(rows.getArray("levels")),
                             rows.getObject("max_learners", Integer.class),
-                            rows.getObject("grading_delay_hours", Integer.class), rows.getString("bio"),
-                            text(rows.getObject("onboarded_at", OffsetDateTime.class)));
+                            rows.getObject("grading_delay_hours", Integer.class),
+                            rows.getObject("accepting_new_students", Boolean.class),
+                            rows.getString("course_creation_mode")));
                 }
+                return data;
             }
         });
     }
+
+    record TeacherKpiProfile(List<String> languages, List<String> levels, Integer maxLearners,
+                             Integer gradingDelayHours, Boolean acceptingNewStudents, String courseCreationMode) {}
 
     /** Langues enseignées par un professeur, dans l'ordre qu'il a indiqué (vide avant son questionnaire). */
     List<String> teacherLanguages(UUID teacherId) {
@@ -409,12 +440,16 @@ class IdentityStore {
             Array levels = connection.createArrayOf("text", profile.levels().toArray());
             try (PreparedStatement upsert = connection.prepareStatement("""
                     insert into identity.teacher_profiles
-                        (profile_id, languages, levels, max_learners, grading_delay_hours, bio, onboarded_at, updated_at)
-                    values (?, ?, ?, ?, ?, ?, now(), now())
+                        (profile_id, languages, levels, max_learners, grading_delay_hours, bio,
+                         accepting_new_students, course_creation_mode, onboarded_at, updated_at)
+                    values (?, ?, ?, ?, ?, ?, ?, ?, now(), now())
                     on conflict (profile_id) do update set
                         languages = excluded.languages, levels = excluded.levels,
                         max_learners = excluded.max_learners, grading_delay_hours = excluded.grading_delay_hours,
-                        bio = excluded.bio, onboarded_at = coalesce(identity.teacher_profiles.onboarded_at, now()),
+                        bio = excluded.bio,
+                        accepting_new_students = coalesce(excluded.accepting_new_students, identity.teacher_profiles.accepting_new_students),
+                        course_creation_mode = coalesce(excluded.course_creation_mode, identity.teacher_profiles.course_creation_mode),
+                        onboarded_at = coalesce(identity.teacher_profiles.onboarded_at, now()),
                         updated_at = now()
                     """)) {
                 upsert.setObject(1, teacherId);
@@ -423,6 +458,8 @@ class IdentityStore {
                 upsert.setObject(4, profile.maxLearners(), Types.INTEGER);
                 upsert.setObject(5, profile.gradingDelayHours(), Types.INTEGER);
                 upsert.setString(6, profile.bio());
+                upsert.setObject(7, profile.acceptingNewStudents(), Types.BOOLEAN);
+                upsert.setString(8, profile.courseCreationMode());
                 upsert.executeUpdate();
             } finally {
                 languages.free();
@@ -431,6 +468,12 @@ class IdentityStore {
             Map<String, Object> data = new HashMap<>();
             data.put("languages", profile.languages());
             data.put("levels", profile.levels());
+            if (profile.acceptingNewStudents() != null) {
+                data.put("acceptingNewStudents", profile.acceptingNewStudents());
+                data.put("courseCreationMode", profile.courseCreationMode());
+            }
+            data.put("maxLearners", profile.maxLearners());
+            data.put("gradingDelayHours", profile.gradingDelayHours());
             data.put("onboarding", onboarding);
             db.record(connection, "identity.teacher_profile_updated", "account", teacherId, null, requestId, data);
             return null;
