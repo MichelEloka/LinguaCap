@@ -203,6 +203,8 @@ function parseTeacherProfile(value: unknown): TeacherProfile | null {
     levels: strings(data.levels).filter((code): code is LevelCode => levelSet.has(code)),
     maxLearners: typeof data.maxLearners === 'number' ? data.maxLearners : null,
     gradingDelayHours: delay === 24 || delay === 48 || delay === 72 || delay === 168 ? delay : null,
+    acceptingNewStudents: typeof data.acceptingNewStudents === 'boolean' ? data.acceptingNewStudents : null,
+    courseCreationMode: data.courseCreationMode === 'self' || data.courseCreationMode === 'linguacap' ? data.courseCreationMode : null,
     bio: typeof data.bio === 'string' ? data.bio : '',
     onboardedAt: nullableString(data.onboardedAt),
   };

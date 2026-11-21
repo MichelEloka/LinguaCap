@@ -2,8 +2,11 @@
 import { useEffect, useState, type FormEvent } from 'react';
 import { BookOpen, CircleCheck, GraduationCap, History, KeyRound, PenLine, Power, ShieldCheck, UserRoundCheck } from 'lucide-react';
 import { Dialog } from '../../components/ui';
+import { LanguageFlag } from '../../components/LanguagePicker';
 import { Avatar, Callout, Drawer, Facts, Segmented, SkeletonCard, Timeline, useToast } from '../../design/kit';
+import { languageName } from '../../domain/languages';
 import { requestApi, roleNames, type AccountRole, type Permission } from '../../integration/api';
+import type { TeacherProfile } from '../../integration/v2';
 import type { AdminUser } from './AccountsPilot';
 import { formatDate, formatRelative, getError, RoleBadge, SheetSection, StateBadge, SwitchRow } from './admin-common';
 
@@ -19,6 +22,7 @@ interface AdminUserDetail {
   user: AdminUser;
   teacherHistory: Assignment[];
   reviewerHistory: Assignment[];
+  teacherProfile?: TeacherProfile | null;
 }
 
 const permissionDetails: Record<Permission, { title: string; description: string; icon: typeof BookOpen }> = {
@@ -66,6 +70,30 @@ function AssignmentTimeline({ title, entries, empty }: { title: string; entries:
         }))} />
       )}
     </div>
+  );
+}
+
+function TeacherResponses({ response }: { response: TeacherProfile | null | undefined }) {
+  return (
+    <SheetSection icon={<GraduationCap size={18} />} title="Réponses d’accueil du professeur">
+      {!response?.onboardedAt ? <p className="admin-history-empty">Le professeur n’a pas encore terminé son accueil.</p> : <>
+        <Facts items={[
+          { label: 'Langues enseignées', value: response.languages.length ? (
+            <span className="admin-response-flags">
+              {response.languages.map((id) => <span key={id}><LanguageFlag languageId={id} />{languageName(id)}</span>)}
+            </span>
+          ) : 'Non renseignées' },
+          { label: 'Niveaux enseignés', value: response.levels.join(', ') || 'Non renseignés' },
+          { label: 'Nouveaux élèves', value: response.acceptingNewStudents === true ? 'Disponible'
+            : response.acceptingNewStudents === false ? 'A déjà ses élèves' : 'Non renseigné' },
+          { label: 'Construction des cours', value: response.courseCreationMode === 'self' ? 'Par le professeur'
+            : response.courseCreationMode === 'linguacap' ? 'Avec LinguaCap' : 'Non renseignée' },
+          { label: 'Nombre d’élèves envisagé', value: response.maxLearners ?? 'Non renseigné' },
+          { label: 'Délai de correction', value: response.gradingDelayHours === null ? 'Non renseigné' : `${response.gradingDelayHours} h` },
+        ]} />
+        {response.bio && <div className="admin-response-bio"><h4>Présentation</h4><p>{response.bio}</p></div>}
+      </>}
+    </SheetSection>
   );
 }
 
@@ -153,6 +181,7 @@ export function UserSheet({ userId, token, users, currentUserId, onClose, onChan
               { label: 'Activé le', value: formatDate(user.activatedAt) },
               { label: 'Dernière activité', value: user.lastSeenAt ? <span title={formatDate(user.lastSeenAt, true)}>{formatRelative(user.lastSeenAt)}</span> : 'Jamais' },
             ]} />
+            {user.role === 'teacher' && <TeacherResponses response={detail.teacherProfile} />}
 
             {user.role === 'learner' ? (
               <>

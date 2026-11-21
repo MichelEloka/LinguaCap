@@ -3,7 +3,9 @@ import { AlertTriangle, CalendarCheck2, CircleCheck, Hourglass, Loader2, Message
 import { EmptyState, ProgressBar } from '../../components/ui';
 import { Bars, Callout, Card, Drawer, ProgressRing, Segmented, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import type { TeacherOnboardingStats as TeacherStats } from '../../integration/v2';
 import { formatRelative, getError } from './admin-common';
+import { TeacherOnboardingStats } from './TeacherOnboardingStats';
 import './admin.css';
 
 interface Rate { numerator: number; denominator: number; rate: number | null }
@@ -19,6 +21,7 @@ interface Dashboard {
   goals: number;
   filters: { from: string; to: string };
   freshness: { syncedAt: string | null; lastStatus: string | null };
+  teacherOnboarding?: TeacherStats;
 }
 
 type Filters = Record<'from' | 'to' | 'startLevel' | 'level' | 'template' | 'kind', string>;
@@ -262,6 +265,7 @@ export function KpiPanel({ token }: { token: string }) {
                 )}
             </Card>
           </div>
+          {data.teacherOnboarding && <TeacherOnboardingStats stats={data.teacherOnboarding} />}
         </>
       )}
     </div>

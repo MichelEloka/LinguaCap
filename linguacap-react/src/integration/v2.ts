@@ -78,10 +78,12 @@ export interface TrackLanguageFields { languageId: string }
 // ---------------------------------------------------------------------------------------------------------------------
 
 export type GradingDelayHours = 24 | 48 | 72 | 168;
+export type CourseCreationMode = 'self' | 'linguacap';
 export const gradingDelays: readonly GradingDelayHours[] = [24, 48, 72, 168];
 export interface TeacherProfile {
   languages: string[]; levels: LevelCode[]; maxLearners: number | null;
   gradingDelayHours: GradingDelayHours | null; bio: string; onboardedAt: string | null;
+  acceptingNewStudents: boolean | null; courseCreationMode: CourseCreationMode | null;
 }
 /** GET /me, PUT /me/language, PUT /me/teacher-profile. */
 export interface CurrentProfileV2 {
@@ -95,6 +97,17 @@ export interface LanguageChoiceRequest { languageId: string }
 export interface TeacherProfileRequest {
   languages: string[]; levels: LevelCode[]; maxLearners?: number | null;
   gradingDelayHours?: GradingDelayHours | null; bio?: string;
+  acceptingNewStudents: boolean; courseCreationMode: CourseCreationMode;
+}
+export interface TeacherOnboardingStats {
+  teachers: number;
+  byLanguage: Record<string, number>;
+  byLevel: Record<string, number>;
+  byAvailability: Record<'yes' | 'no' | 'unknown', number>;
+  byCourseMode: Record<CourseCreationMode | 'unknown', number>;
+  byMaxLearners: Record<string, number>;
+  byGradingDelayHours: Record<string, number>;
+  trend: { date: string; responses: number; accepting: number; notAccepting: number; self: number; linguacap: number }[];
 }
 /** GET /me/teacher (ou `null` pour un élève autonome). */
 export interface TeacherCard { id: string; displayName: string; bio: string; gradingDelayHours: number | null; languages: string[] }

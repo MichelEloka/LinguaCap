@@ -233,7 +233,10 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
     if (!moved.current) return;
     moved.current = false;
     card.current?.querySelector<HTMLElement>('[data-pt-focus]')?.focus({ preventScroll: true });
-    if (card.current && card.current.getBoundingClientRect().top < 64) card.current.scrollIntoView({ block: 'start', behavior: 'smooth' });
+    if (card.current && card.current.getBoundingClientRect().top < 64) {
+      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      card.current.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
+    }
   }, [index]);
 
   const persist = useCallback((next: Record<string, string>) => {
@@ -338,7 +341,7 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
         <div className="pt-top">
           <div className="pt-top-row">
             <p className="pt-tier"><LevelMark code={tier} size="sm" state="current" /> <span>{tierName(tier, tierInfo?.title)}</span></p>
-            <p className="pt-count" aria-live="polite"><strong>{index + 1}</strong>/{total}</p>
+            <p className="pt-count" aria-live="polite">Question <strong>{index + 1}</strong>/{total}</p>
           </div>
           <ol className="pt-dots" aria-label="Questions du palier">
             {questions.map((item, position) => (
@@ -349,6 +352,7 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
               </li>
             ))}
           </ol>
+          <SaveState status={save} />
         </div>
 
         <article ref={card} key={question.id} className={`pt-card is-${direction}`} aria-labelledby={`pt-q-${question.id}`} onKeyDown={keyboard}>
@@ -387,7 +391,6 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
           <button type="button" className="btn btn-ghost" onClick={() => goTo(index - 1)} disabled={index === 0}>
             <ArrowLeft size={18} aria-hidden="true" /> Précédent
           </button>
-          <SaveState status={save} />
           {last || answered === total ? (
             <button type="button" className="btn btn-primary" onClick={() => void submit()} disabled={busy}>
               {busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Check size={18} aria-hidden="true" />}

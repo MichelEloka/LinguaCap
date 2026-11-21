@@ -1,5 +1,5 @@
 import { useId, type ReactNode } from 'react';
-import { Check, Clock3, Lock } from 'lucide-react';
+import { Check, Clock3, Globe2, Lock } from 'lucide-react';
 import { languages as staticLanguages, languageStatusLabels, type LanguageStatus } from '../domain/languages';
 import './language-picker.css';
 
@@ -47,8 +47,17 @@ interface MultipleProps extends BaseProps {
 
 export type LanguagePickerProps = SingleProps | MultipleProps;
 
-function monogram(id: string) {
-  return id.slice(0, 2).toUpperCase();
+const countries: Readonly<Record<string, string>> = {
+  de: 'de', en: 'gb', es: 'es', it: 'it', pt: 'pt', nl: 'nl', fr: 'fr',
+  ar: 'sa', zh: 'cn', ja: 'jp', ru: 'ru', ko: 'kr', tr: 'tr', pl: 'pl',
+};
+const flags = import.meta.glob<string>('./flags/*.png', { eager: true, import: 'default', query: '?url' });
+
+export function LanguageFlag({ languageId }: { languageId: string }) {
+  const source = flags[`./flags/${countries[languageId]}.png`];
+  return <span className="lgp-flag" aria-hidden="true">
+    {source ? <img src={source} alt="" width={32} height={32} /> : <Globe2 size={22} />}
+  </span>;
 }
 
 /**
@@ -97,7 +106,7 @@ export function LanguagePicker(props: LanguagePickerProps) {
                 checked={isSelected} disabled={unavailable}
                 onChange={(event) => toggle(language.id, event.target.checked)} />
               <span className="lgp-card">
-                <span className="lgp-mono" aria-hidden="true">{monogram(language.id)}</span>
+                <LanguageFlag languageId={language.id} />
                 <span className="lgp-text">
                   <span className="lgp-name">{language.name}</span>
                   <span className="lgp-native" lang={language.id} dir="auto">{language.nativeName}</span>

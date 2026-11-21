@@ -31,14 +31,14 @@ function NextSession({ enrollment, next, path }: { enrollment: PlannedEnrollment
   return (
     <section className="ld-hero ld-area-hero" aria-labelledby="ld-next-title">
       <div className="ld-hero-copy">
+        <p className="ld-hero-caption">Ma prochaine séance</p>
+        <h2 id="ld-next-title">{next?.title ?? (completed ? 'Toutes vos séances sont terminées' : 'Votre parcours se prépare')}</h2>
         <div className="ld-hero-tags">
           <span className="ld-hero-tag"><BookOpen size={14} aria-hidden="true" /> {enrollment ? `${path ? languageName(path.languageId) : 'Allemand'} · ${enrollment.levelCode}` : 'Mon parcours'}</span>
           {path && path.steps.length > 1 && <span className="ld-hero-tag">Objectif {path.targetLevel}</span>}
           {next && <span className="ld-hero-tag">Séance {next.position} sur {sessions.length}</span>}
           {next?.status === 'late' && <span className="ld-hero-tag is-late">En retard</span>}
         </div>
-        <p className="ld-hero-caption">Ma prochaine séance</p>
-        <h2 id="ld-next-title">{next?.title ?? (completed ? 'Toutes vos séances sont terminées' : 'Votre parcours se prépare')}</h2>
         {next ? (
           <>
             <ul className="ld-hero-meta">
@@ -52,6 +52,7 @@ function NextSession({ enrollment, next, path }: { enrollment: PlannedEnrollment
                     {activity.status === 'completed' ? <Check size={14} aria-hidden="true" /> : activityIcons[activity.kind] ?? <BookOpen size={15} aria-hidden="true" />}
                     <span>{activity.title}</span>
                     {activity.status === 'completed' && <span className="sr-only"> (terminée)</span>}
+                    {activity.status === 'started' && <span className="sr-only"> (en cours)</span>}
                   </li>
                 ))}
               </ol>
@@ -68,7 +69,7 @@ function NextSession({ enrollment, next, path }: { enrollment: PlannedEnrollment
         </div>
       </div>
       <div className="ld-hero-visual">
-        <ProgressRing value={ring} size={152} stroke={12} color="var(--accent)"
+        <ProgressRing value={ring} size={136} stroke={8} color="var(--accent)"
           label={next ? `${done} activité${done > 1 ? 's' : ''} terminée${done > 1 ? 's' : ''} sur ${total}` : completed ? 'Parcours terminé' : 'Aucune séance'}>
           <span className="ld-ring-text">
             {next ? <><strong>{done}/{total}</strong><small>activités</small></>

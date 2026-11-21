@@ -9,11 +9,12 @@ import { RotateCcw } from 'lucide-react';
 import { Callout, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { languages as staticLanguages, languageName } from '../../domain/languages';
-import type {
-  Language, OnboardingState, OnboardingStepId, PathProposal, PathView, PlacementView,
+import {
+  onboardingStepLabels, type Language, type OnboardingState, type OnboardingStepId, type PathProposal, type PathView, type PlacementView,
 } from '../../integration/v2';
 import { errorText, firstName, ofLanguage } from './onboarding-kit';
 import { OnboardingStepper, type StepperItem } from './onboarding-stepper';
+import { WelcomeJourney } from './WelcomeJourney';
 import { StepLanguage } from './step-language';
 import { StepPlacement } from './step-placement';
 import { StepResult } from './step-result';
@@ -24,6 +25,7 @@ import { StepStart } from './step-start';
 import './onboarding.css';
 
 const order: OnboardingStepId[] = ['language', 'placement', 'result', 'objective', 'days', 'planning', 'start'];
+const journeySteps = order.map((id) => onboardingStepLabels[id]);
 export const onboardingSlugs: Record<OnboardingStepId, string> = {
   language: 'langue', placement: 'test', result: 'niveau', objective: 'objectif', days: 'jours', planning: 'planning', start: 'depart',
 };
@@ -112,7 +114,7 @@ export function LearnerOnboarding({ token, name, state, reload }: {
 
   const go = useCallback((id: OnboardingStepId) => {
     navigate(`/espace/accueil/${onboardingSlugs[id]}`);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
   }, [navigate]);
 
   /** Relit l'état d'accueil (et donc la tentative et le parcours) puis passe à l'étape demandée. */
@@ -150,7 +152,10 @@ export function LearnerOnboarding({ token, name, state, reload }: {
         <div className="ob-head-text">
           <p className="eyebrow">{started ? 'Votre parcours est prêt' : `Bienvenue, ${firstName(name)}`}</p>
           <h1>{started ? 'C’est parti !' : `Construisons votre parcours${state.languageId ? ` ${ofLanguage(languageLabel)}` : ''}`}</h1>
-          {!focus && !started && <p className="ob-head-desc">Quelques minutes suffisent : votre niveau, votre objectif et vos jours d’étude. Tout est enregistré au fur et à mesure.</p>}
+          {!focus && !started && <p className="ob-head-desc">Choisissez votre objectif et vos jours d’étude. Vous pouvez reprendre la préparation là où vous l’avez laissée.</p>}
+        </div>
+        <div className="ob-journey">
+          <WelcomeJourney steps={journeySteps} current={order.indexOf(step)} variant="learner" />
         </div>
         <OnboardingStepper items={items} current={step} onSelect={go} />
       </header>

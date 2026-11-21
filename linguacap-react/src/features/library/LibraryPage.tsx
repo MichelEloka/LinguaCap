@@ -257,6 +257,10 @@ export function LibraryPage({ token }: { token: string }) {
           </div>
 
           <div className="lib-toolbar">
+            <div className="lib-toolbar-intro">
+              <span className="lib-toolbar-icon" aria-hidden="true"><LibraryBig size={19} /></span>
+              <h2>Explorer le niveau {level.levelCode}</h2>
+            </div>
             <SearchField label={`Rechercher une activité du niveau ${level.levelCode}`} placeholder="Rechercher une leçon, un exercice…" value={query} onChange={setQuery} />
           </div>
 

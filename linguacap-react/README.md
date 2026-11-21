@@ -43,6 +43,8 @@ En mode intégration, `/integration` vérifie la disponibilité des six services
 
 Les routes disponibles et leurs formats sont décrits dans [contracts/openapi.json](../contracts/openapi.json). Le test `tests/contract.spec.ts` vérifie que l’interface n’appelle que des routes déclarées. Les appels authentifiés envoient `Authorization: Bearer <jeton Supabase>`.
 
+Les drapeaux du sélecteur sont issus de [Twemoji](https://github.com/twitter/twemoji/tree/v14.0.2), par Twitter, Inc. et ses contributeurs, sous licence [CC BY 4.0](https://github.com/twitter/twemoji/blob/v14.0.2/LICENSE-GRAPHICS). Ils sont livrés avec l’application.
+
 Le [Worker de bordure](../workers/web-proxy/wrangler.jsonc) est configuré pour servir `dist/` et relayer `/api/v1/*` sur `https://linguacap.emichfer.org`. En hébergement, configurer `API_UPSTREAM` et le secret `API_ORIGIN_SECRET` côté Worker. La passerelle accepte le secret dans `X-Linguacap-Origin` et valide séparément la session utilisateur. Le [plan de déploiement](../PLAN_DEPLOIEMENT.md) décrit la publication.
 
 ## Organisation

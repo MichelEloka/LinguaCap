@@ -1,4 +1,4 @@
-/** Étape 3 : révélation du niveau (badge animé), détail par palier et par compétence, puis passage à l'objectif. */
+/** Niveau de départ, résultats par compétence et accès à l’objectif. */
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, Headphones, LibraryBig, Sparkles, Sprout } from 'lucide-react';
 import { Badge } from '../../components/ui';
@@ -17,7 +17,7 @@ function CompetenceBar({ name, score, threshold }: { name: string; score: Compet
     <li className="rs-skill">
       <span className="rs-skill-name"><Icon size={15} aria-hidden="true" />{competenceLabels[name] ?? name}</span>
       <span className="rs-skill-bar" role="img" aria-label={`${competenceLabels[name] ?? name} : ${score.correct} sur ${score.total}, ${score.percent} %`}>
-        <span className={score.percent >= threshold ? 'is-ok' : 'is-low'} style={{ width: `${Math.max(3, score.percent)}%` }} />
+        <span className={score.percent >= threshold ? 'is-ok' : 'is-low'} style={{ width: `${score.percent}%` }} />
         <i style={{ left: `${threshold}%` }} />
       </span>
       <b aria-hidden="true">{score.correct}/{score.total}</b>
@@ -28,7 +28,7 @@ function CompetenceBar({ name, score, threshold }: { name: string; score: Compet
 function TierCard({ tier, index }: { tier: PlacementTier; index: number }) {
   const reached = tier.percent !== null;
   return (
-    <article className={`rs-tier is-${tier.status}`} style={{ ['--delay' as string]: `${700 + index * 140}ms` }} aria-labelledby={`rs-tier-${tier.code}`}>
+    <article className={`rs-tier is-${tier.status}`} style={{ ['--delay' as string]: `${Math.min(index, 4) * 50}ms` }} aria-labelledby={`rs-tier-${tier.code}`}>
       <header>
         <LevelMark code={tier.code} size="sm" state={tier.status === 'passed' ? 'done' : tier.status === 'locked' ? 'locked' : undefined} />
         <div><h3 id={`rs-tier-${tier.code}`}>Palier {tier.code}</h3><small>{tier.title.startsWith(`${tier.code} · `) ? tier.title.slice(tier.code.length + 3) : tier.title}</small></div>
@@ -64,9 +64,7 @@ export function StepResult({ attempt, state, languageName, onContinue }: {
     <section className="rs" aria-labelledby="rs-title">
       <div className={`rs-hero lvl-${placed}`}>
         <div className="rs-badge" aria-hidden="true">
-          <span className="rs-halo is-1" /><span className="rs-halo is-2" /><span className="rs-halo is-3" />
-          {Array.from({ length: 8 }, (_, index) => <span key={index} className={`rs-ray is-${index + 1}`} />)}
-          <span className="rs-coin">{beginner ? <Sprout size={46} /> : <strong>{placed}</strong>}</span>
+          <span className="rs-coin">{beginner ? <Sprout size={38} strokeWidth={1.6} /> : <strong>{placed}</strong>}</span>
         </div>
         <div className="rs-hero-copy">
           <p className="rs-kicker"><Sparkles size={15} aria-hidden="true" /> {result?.declaredBeginner ? 'Votre point de départ' : `Votre niveau ${ofLanguage(languageName)}`}</p>

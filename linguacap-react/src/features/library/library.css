@@ -7,6 +7,16 @@
 .lib-page > .page-heading { margin-bottom: 0; }
 .lib-loading { display: grid; gap: 1rem; }
 .lib-page .kit-callout > div { display: grid; justify-items: start; gap: .5rem; }
+.lib-page .lib-toolbar {
+  display: grid; grid-template-columns: minmax(185px, 1fr) minmax(250px, .82fr); align-items: center; gap: .8rem 1rem;
+  padding: .8rem 1rem; border: 1px solid var(--line); border-radius: var(--r-lg); background: var(--surface);
+}
+.lib-toolbar-intro { display: flex; align-items: center; gap: .7rem; }
+.lib-toolbar-intro h2 { font-size: var(--text-md); }
+.lib-toolbar-icon { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 10px; color: var(--brand); background: var(--brand-50); }
+@container lib (max-width: 570px) {
+  .lib-page .lib-toolbar { grid-template-columns: 1fr; gap: .65rem; }
+}
 
 /* Niveaux */
 .lib-levels { display: flex; gap: .6rem; min-width: 0; overflow-x: auto; padding: .15rem .1rem .35rem; scrollbar-width: none; }

@@ -1,6 +1,5 @@
 /**
- * Fil des sept étapes de l'accueil : pastilles reliées sur grand écran (les étapes terminées restent cliquables),
- * « Étape 3 sur 7 » et barre segmentée sur petit écran.
+ * Navigation entre les étapes accessibles de l’accueil sur tous les écrans.
  */
 import { Check, Lock, Minus } from 'lucide-react';
 import { onboardingStepLabels, type OnboardingStep, type OnboardingStepId } from '../../integration/v2';
@@ -12,21 +11,10 @@ export interface StepperItem { id: OnboardingStepId; status: StepVisual; reachab
 export function OnboardingStepper({ items, current, onSelect }: {
   items: StepperItem[]; current: OnboardingStepId; onSelect: (id: OnboardingStepId) => void;
 }) {
-  const index = Math.max(0, items.findIndex((item) => item.id === current));
   const done = items.filter((item) => item.status === 'done' || item.status === 'skipped').length;
-  const progress = items.length > 1 ? (index / (items.length - 1)) * 100 : 0;
   return (
     <nav className="obs" aria-label="Étapes de l’accueil">
-      <div className="obs-compact" aria-hidden="true">
-        <span className="obs-compact-count">Étape {index + 1} sur {items.length}</span>
-        <strong>{onboardingStepLabels[current]}</strong>
-        <span className="obs-compact-bar">
-          {items.map((item, position) => (
-            <i key={item.id} className={position < index || item.status === 'done' ? 'is-done' : position === index ? 'is-current' : undefined} />
-          ))}
-        </span>
-      </div>
-      <ol className="obs-track" style={{ ['--obs-progress' as string]: progress }}>
+      <ol className="obs-track">
         {items.map((item, position) => {
           const isCurrent = item.id === current;
           const finished = item.status === 'done' || item.status === 'skipped';
@@ -45,7 +33,7 @@ export function OnboardingStepper({ items, current, onSelect }: {
                 <span aria-current={isCurrent ? 'step' : undefined}>
                   <span className="obs-dot" aria-hidden="true">{mark}</span>
                   <span className="obs-label">{onboardingStepLabels[item.id]}</span>
-                  {!isCurrent && <span className="sr-only">{finished ? ', terminée' : ', à venir'}</span>}
+                  {!isCurrent && <span className="sr-only">{finished ? ', terminée' : state === 'blocked' ? ', bloquée' : ', à venir'}</span>}
                 </span>
               )}
             </li>

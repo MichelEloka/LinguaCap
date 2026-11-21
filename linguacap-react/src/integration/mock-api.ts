@@ -17,7 +17,7 @@ import type {
   LibraryActivity, OnboardingState, OnboardingStep, PathPermissions, PathProposal, PathSession, PathStatus, PathStep, PathView,
   PendingContract, PlacementAttemptStatus, PlacementCompetence, PlacementQuestionContent, PlacementSummary, PlacementTestDocument,
   PlacementTestSummary, PlacementTier, PlacementTierContent, PlacementView, PlanItem, PlannedSession, PracticePart, PracticeSummary,
-  PracticeView, StartLevel, Suggestion, TeacherCard, TeacherProfile,
+  CourseCreationMode, PracticeView, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats, TeacherProfile,
 } from './v2';
 import { difficultyCodes, difficultyLabels, difficultyThresholds, gradingDelays, levelCodes, levelLabels, PLACEMENT_DONT_KNOW } from './v2';
 import { findLanguage, languages as staticLanguages } from '../domain/languages';
@@ -218,9 +218,11 @@ interface ExamRec {
   submitKeys: string[]; result: Json | null;
 }
 interface MessageRec { id: string; learnerId: string; authorId: string; text: string; sentAt: string }
+interface TeacherResponseRec { teacherId: string; date: string; accepting: boolean; mode: CourseCreationMode }
 interface State {
   version: number; users: UserRec[]; invitations: InvitationRec[]; placementTests: PlacementTestDocument[]; placements: PlacementRec[];
   paths: PathRec[]; practice: PracticeRec[]; grades: GradeRec[]; exams: ExamRec[]; messages: MessageRec[];
+  teacherResponses?: TeacherResponseRec[];
 }
 
 const STATE_VERSION = 1;
@@ -320,10 +322,26 @@ function saveTeacherProfile(actor: UserRec, body: Json) {
   if (delay !== null && !gradingDelays.includes(delay as 24)) throw invalid('Délai de correction inconnu.');
   const bio = typeof body.bio === 'string' ? body.bio.trim() : actor.teacherProfile?.bio ?? '';
   if (bio.length > 500) throw invalid('La présentation ne doit pas dépasser 500 caractères.');
+  const newAnswers = 'acceptingNewStudents' in body || 'courseCreationMode' in body;
+  let acceptingNewStudents = actor.teacherProfile?.acceptingNewStudents ?? null;
+  let courseCreationMode = actor.teacherProfile?.courseCreationMode ?? null;
+  if (newAnswers) {
+    if (typeof body.acceptingNewStudents !== 'boolean' || (body.courseCreationMode !== 'self' && body.courseCreationMode !== 'linguacap')) {
+      throw invalid('Renseignez la disponibilité et le mode de construction des cours.');
+    }
+    acceptingNewStudents = body.acceptingNewStudents;
+    courseCreationMode = body.courseCreationMode;
+    const date = parisDate.format(new Date());
+    const data = state();
+    const answers = data.teacherResponses ?? [];
+    data.teacherResponses = answers.filter((item) => item.teacherId !== actor.id || item.date !== date);
+    data.teacherResponses.push({ teacherId: actor.id, date, accepting: acceptingNewStudents, mode: courseCreationMode });
+  }
   actor.teacherProfile = {
     languages: [...new Set(languages.map(String))], levels: levelCodes.filter((code) => levels.includes(code)),
     maxLearners: maxLearners as number | null, gradingDelayHours: delay as TeacherProfile['gradingDelayHours'], bio,
     onboardedAt: actor.teacherProfile?.onboardedAt ?? now(),
+    acceptingNewStudents, courseCreationMode,
   };
   return profileOf(actor);
 }
@@ -1826,9 +1844,38 @@ const requireAdmin = (actor: UserRec) => { if (actor.role !== 'admin') throw for
 function adminDetail(id: string) {
   const user = userById(id);
   if (!user) throw notFound('Compte introuvable.');
-  return { user: adminUser(user), teacherHistory: [], reviewerHistory: [] };
+  return { user: adminUser(user), teacherProfile: user.role === 'teacher' ? user.teacherProfile : null, teacherHistory: [], reviewerHistory: [] };
 }
 const emptyRate = { numerator: 0, denominator: 0, rate: null };
+const parisDate = new Intl.DateTimeFormat('sv-SE', { timeZone: 'Europe/Paris', year: 'numeric', month: '2-digit', day: '2-digit' });
+
+function teacherOnboardingStats(from: string, to: string): TeacherOnboardingStats {
+  const teachers = state().users.filter((user) => user.role === 'teacher' && user.status === 'active');
+  const result: TeacherOnboardingStats = {
+    teachers: teachers.length, byLanguage: {}, byLevel: {}, byMaxLearners: {}, byGradingDelayHours: {},
+    byAvailability: { yes: 0, no: 0, unknown: 0 }, byCourseMode: { self: 0, linguacap: 0, unknown: 0 }, trend: [],
+  };
+  const increment = (bucket: Record<string, number>, key: string) => { bucket[key] = (bucket[key] ?? 0) + 1; };
+  for (const { teacherProfile: profile } of teachers) {
+    for (const id of profile?.languages.length ? profile.languages : ['unknown']) increment(result.byLanguage, id);
+    for (const code of profile?.levels.length ? profile.levels : ['unknown']) increment(result.byLevel, code);
+    increment(result.byMaxLearners, String(profile?.maxLearners ?? 'unknown'));
+    increment(result.byGradingDelayHours, String(profile?.gradingDelayHours ?? 'unknown'));
+    increment(result.byAvailability, profile?.acceptingNewStudents === true ? 'yes' : profile?.acceptingNewStudents === false ? 'no' : 'unknown');
+    increment(result.byCourseMode, profile?.courseCreationMode ?? 'unknown');
+  }
+  const days = new Map<string, TeacherOnboardingStats['trend'][number]>();
+  for (const item of state().teacherResponses ?? []) {
+    if (item.date < from || item.date > to) continue;
+    const day = days.get(item.date) ?? { date: item.date, responses: 0, accepting: 0, notAccepting: 0, self: 0, linguacap: 0 };
+    day.responses++;
+    if (item.accepting) day.accepting++;
+    else day.notAccepting++;
+    day[item.mode]++;
+    days.set(item.date, day);
+  }
+  return { ...result, trend: [...days.values()].sort((a, b) => a.date.localeCompare(b.date)) };
+}
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Routage
@@ -1977,11 +2024,13 @@ const routes: [Method, RegExp, Handler][] = [
     state().messages.push(message);
     return { status: 201, body: { id: message.id, text: message.text, sentAt: message.sentAt } };
   }],
-  ['GET', /^\/tracking\/kpis$/, ({ actor }) => {
+  ['GET', /^\/tracking\/kpis$/, ({ actor, query }) => {
     requireAdmin(actor);
+    const from = query.get('from') || addDays(today(), -56);
+    const to = query.get('to') || today();
     return { activation: emptyRate, activeLearners: [], activeLearnersTotal: 0, sessionsOnTime: emptyRate, goalsValidated: emptyRate, goalsAwaitingGrading: 0,
       progression: [], resumption: emptyRate, goals: state().paths.reduce((sum, path) => sum + path.steps.filter((step) => step.enrollmentId).length, 0),
-      filters: { from: addDays(today(), -56), to: today() }, freshness: { syncedAt: now(), lastStatus: 'succeeded' } };
+      filters: { from, to }, freshness: { syncedAt: now(), lastStatus: 'succeeded' }, teacherOnboarding: teacherOnboardingStats(from, to) };
   }],
 
   // Élèves, invitations, comptes
@@ -2140,8 +2189,10 @@ function seed(): State {
       user(IDS.yanis, 'Yanis Benali', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
       user(IDS.awa, 'Awa Diallo', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
       user(IDS.weber, 'Marie Weber', 'teacher', { teacherProfile: { languages: ['de'], levels: ['A1', 'A2'], maxLearners: 25, gradingDelayHours: 48,
-        bio: 'Professeure d’allemand depuis douze ans, j’aime les cours vivants et les petits progrès de chaque semaine.', onboardedAt: at(created, 10) } }),
-      user(IDS.braun, 'Lukas Braun', 'teacher', { teacherProfile: { languages: ['de'], levels: [], maxLearners: null, gradingDelayHours: null, bio: '', onboardedAt: null } }),
+        bio: 'Professeure d’allemand depuis douze ans, j’aime les cours vivants et les petits progrès de chaque semaine.', onboardedAt: at(created, 10),
+        acceptingNewStudents: true, courseCreationMode: 'linguacap' } }),
+      user(IDS.braun, 'Lukas Braun', 'teacher', { teacherProfile: { languages: ['de'], levels: [], maxLearners: null, gradingDelayHours: null, bio: '',
+        onboardedAt: null, acceptingNewStudents: null, courseCreationMode: null } }),
       user(IDS.morel, 'Inès Morel', 'admin'),
       user(IDS.richter, 'Jonas Richter', 'staff', { permissions: ['catalogue', 'correction'] }),
     ],
@@ -2150,6 +2201,7 @@ function seed(): State {
       description: 'Trois paliers alignés sur le cadre européen : A1, A2 puis B1. Le test s’arrête au premier palier non validé.',
       tiers: placementBank(), updatedAt: at(created, 9), publishedAt: at(created, 9) }],
     placements: [], paths: [], practice: [], grades: [], exams: [], messages: [],
+    teacherResponses: [{ teacherId: IDS.weber, date: created, accepting: true, mode: 'linguacap' }],
   };
   const invitation = (learner: UserRec): InvitationRec => ({ id: newId(), email: learner.email, displayName: learner.displayName, role: 'learner',
     teacherId: IDS.weber, languageId: 'de', invitedBy: IDS.weber, status: 'accepted', sendCount: 1, createdAt: at(created, 11), lastSentAt: at(created, 11),
