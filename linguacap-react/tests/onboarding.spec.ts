@@ -68,4 +68,6 @@ test('l’élève retrouve la signature, le choix des langues et l’entrée du 
   await page.getByRole('button', { name: 'Choisir cette langue' }).click();
   await expect(page.getByRole('heading', { name: /Situons votre niveau/ })).toBeVisible();
   await expect(page.locator('.welcome-journey-trail.is-drawn')).not.toHaveCount(0);
+  await page.getByRole('button', { name: 'Commencer le test' }).click();
+  await expect(page.locator('.pt-count')).toHaveText(/^Question 1\/\d+$/);
 });

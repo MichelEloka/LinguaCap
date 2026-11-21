@@ -1713,7 +1713,7 @@ if (process.argv.includes('--browser')) {
     // Banque de recette : huit questions par palier, « richtig » est la bonne réponse.
     const answerTier = async (choice) => {
       for (let number = 1; number <= 8; number++) {
-        await expect(welcome.getByText(`${number}/8`, { exact: true })).toBeVisible({ timeout: 15_000 });
+        await expect(welcome.locator('.pt-count')).toHaveText(`Question ${number}/8`, { timeout: 15_000 });
         await welcome.getByText(choice, { exact: true }).click();
       }
     };
