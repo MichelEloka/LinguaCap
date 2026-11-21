@@ -160,6 +160,7 @@ export function AvailabilityEditor({ value, targetDate, busy, onSave }: {
 
 interface WeekView { start: Date; planned: number; available: number; days: CalendarDay[] }
 
+const loadWindow = 8;
 const suggestionIcons: Record<Suggestion['kind'], typeof Clock> = { minutes: Timer, sessions: Layers, days: CalendarPlus, target_date: CalendarClock };
 const suggestionKinds: Record<Suggestion['kind'], string> = {
   minutes: 'Séances plus longues', sessions: 'Plus de séances', days: 'Plus de jours', target_date: 'Nouvelle date cible',
@@ -209,6 +210,9 @@ export function ProposalView({ proposal, busy, onApply, onValidate }: {
   });
   const current = weeks[Math.min(page, weeks.length - 1)];
   const usage = proposal.capacityMinutes ? Math.round((proposal.requiredMinutes / proposal.capacityMinutes) * 100) : 0;
+  // Un parcours sur plusieurs niveaux compte des dizaines de semaines : la charge montre huit semaines autour de celle affichée.
+  const firstBar = Math.max(0, Math.min(page - 3, weeks.length - loadWindow));
+  const loadWeeks = weeks.slice(firstBar, firstBar + loadWindow);
   const weekEmpty = current && current.days.every((day) => !day.events.length);
 
   return (
@@ -228,8 +232,8 @@ export function ProposalView({ proposal, busy, onApply, onValidate }: {
         {weeks.length > 0 && (
           <div className="lp-load">
             <h3>Charge hebdomadaire</h3>
-            <Bars height={150} label="Charge hebdomadaire (temps planifié par semaine)" data={weeks.map((week, index) => ({
-              label: formatMonthDay(week.start), value: week.planned, display: hours(week.planned), muted: index !== page,
+            <Bars height={150} label="Charge hebdomadaire (temps planifié par semaine)" data={loadWeeks.map((week, index) => ({
+              label: formatMonthDay(week.start), value: week.planned, display: hours(week.planned), muted: firstBar + index !== page,
             }))} />
           </div>
         )}

@@ -1,13 +1,14 @@
 /** Liste des élèves : recherche, filtres en puces, tableau (cartes sur mobile) et encouragement en panneau latéral. */
 import { useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { Bell, ClipboardList, MessageCircle, RefreshCw, SearchX, UserPlus } from 'lucide-react';
+import { Bell, ClipboardList, FileSignature, MessageCircle, RefreshCw, SearchX, UserPlus } from 'lucide-react';
 import { Badge, EmptyState, PageHeading, ProgressBar } from '../../components/ui';
 import { Avatar, Card, Chip, SearchField, Segmented, SkeletonCard, Toolbar } from '../../design/kit';
 import {
   EncourageDrawer, StaffError, dateTime, dayOffset, dueWithinWeek, goalStatusNames, goalStatusOf, learnerUrl, levelOf, openAlert,
   plural, relativeDay, shortDate, successRate, useOverview, type LearnerOverview,
 } from './staff-kit';
+import { learnersAwaitingDecision, usePendingContracts } from './staff-contracts';
 
 interface Filter { id: string; label: string; test: (learner: LearnerOverview) => boolean }
 
@@ -19,7 +20,7 @@ const baseFilters: Filter[] = [
   { id: 'copies', label: 'Copies à corriger', test: (learner) => (learner.tracking?.pendingGrading ?? 0) > 0 },
 ];
 
-function LearnerRow({ learner, onMessage }: { learner: LearnerOverview; onMessage?: (learner: LearnerOverview) => void }) {
+function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview; contract: boolean; onMessage?: (learner: LearnerOverview) => void }) {
   const tracking = learner.tracking ?? {};
   const name = learner.profile.displayName;
   const level = levelOf(learner);
@@ -47,6 +48,7 @@ function LearnerRow({ learner, onMessage }: { learner: LearnerOverview; onMessag
           <span className="staff-mobile-only">{level && <Badge tone="blue">{level}</Badge>}</span>
           <Badge tone={status.tone}>{status.label}</Badge>
           {alert && <Badge tone="red"><Bell size={12} aria-hidden="true" /> Alerte</Badge>}
+          {contract && <Badge tone="amber"><FileSignature size={12} aria-hidden="true" /> Contrat à valider</Badge>}
           {pending > 0 && <Badge tone="violet">{plural(pending, 'copie', 'copies')}</Badge>}
         </span>
       </td>
@@ -87,6 +89,8 @@ function LearnerRow({ learner, onMessage }: { learner: LearnerOverview; onMessag
 
 export function LearnersPage({ admin, token }: { admin: boolean; token: string }) {
   const { learners, freshness, error, reload } = useOverview(token);
+  const contracts = usePendingContracts(token);
+  const awaiting = learnersAwaitingDecision(contracts.data);
   const [params, setParams] = useSearchParams();
   const [messageTo, setMessageTo] = useState<LearnerOverview | null>(null);
   const [query, setQuery] = useState('');
@@ -95,7 +99,9 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
   const statuses = [...new Set(all.map((learner) => learner.tracking?.goalStatus).filter((code): code is string => Boolean(code)))]
     .filter((code) => code in goalStatusNames);
   const filters: Filter[] = [
-    ...baseFilters,
+    ...baseFilters.slice(0, 2),
+    { id: 'contrat', label: 'Contrat à valider', test: (learner: LearnerOverview) => awaiting.has(learner.learnerId) },
+    ...baseFilters.slice(2),
     ...statuses.map((code) => ({ id: `etat-${code}`, label: goalStatusNames[code], test: (learner: LearnerOverview) => learner.tracking?.goalStatus === code })),
   ].filter((filter) => filter.id === 'tous' || all.some(filter.test));
   const filter = filters.find((item) => item.id === params.get('filtre')) ?? filters[0];
@@ -105,6 +111,7 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
     && (level === 'tous' || levelOf(learner) === level)
     && (!search || learner.profile.displayName.toLocaleLowerCase('fr').includes(search)))
     .sort((a, b) => Number(Boolean(openAlert(b))) - Number(Boolean(openAlert(a)))
+      || Number(awaiting.has(b.learnerId)) - Number(awaiting.has(a.learnerId))
       || (b.tracking?.pendingGrading ?? 0) - (a.tracking?.pendingGrading ?? 0)
       || a.profile.displayName.localeCompare(b.profile.displayName, 'fr'));
   const description = learners
@@ -160,7 +167,7 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
                       </tr>
                     </thead>
                     <tbody className="lc-stagger">
-                      {visible.map((learner) => <LearnerRow key={learner.learnerId} learner={learner} onMessage={admin ? undefined : setMessageTo} />)}
+                      {visible.map((learner) => <LearnerRow key={learner.learnerId} learner={learner} contract={awaiting.has(learner.learnerId)} onMessage={admin ? undefined : setMessageTo} />)}
                     </tbody>
                   </table>
                 </div>

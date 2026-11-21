@@ -126,6 +126,15 @@ if (activeAdmins === 0) {
 }
 const teacher = await createStaff('prof', 'teacher');
 const otherTeacher = await createStaff('tiers', 'teacher');
+// 2. Professeurs : questionnaire d'accueil (l'interface l'affiche tant que onboardedAt est nul), langues ouvertes seulement.
+assert.equal((await api('/me', teacher.token)).teacherProfile?.onboardedAt ?? null, null, 'Le profil d’un nouveau professeur est à remplir');
+await put('/me/teacher-profile', teacher.token, { languages: ['en'], levels: ['A1'] }, 409);
+for (const account of [teacher, otherTeacher]) {
+  const onboarded = await put('/me/teacher-profile', account.token,
+    { languages: ['de'], levels: ['A1', 'A2'], gradingDelayHours: 48, bio: 'Professeur de recette.' });
+  assert.ok(onboarded.teacherProfile.onboardedAt, 'Le questionnaire d’accueil est enregistré');
+  assert.deepEqual(onboarded.teacherProfile.languages, ['de']);
+}
 assert.equal((await api('/me', admin.token)).role, 'admin');
 const levels = await api('/levels', admin.token);
 assert.ok(levels.some((level) => level.code === 'B1'));
@@ -311,7 +320,13 @@ assert.equal(enrolled.goal.status, 'preparing');
 assert.equal(enrolled.goal.initialTargetDate, enrolled.goal.targetDate);
 assert.equal(enrolled.sessions.length, 0, 'Les séances attendent la validation du planning');
 assert.equal(enrolled.proposal.number, 1);
-await post(goalPath(enrolled.id, 'proposal/validate'), learnerToken, { number: 1 }, 403);
+// L'attribution enveloppe l'inscription dans un parcours (origine « assignment ») : contrat n°1 accepté d'office.
+// Dans les bornes du contrat, l'élève comme son référent valident le planning ; un ancien référent est refusé.
+const assignedPath = await api('/learning/path', learnerToken);
+assert.equal((await api('/learning/enrollment', learnerToken)).pathId, assignedPath.id, 'L’attribution crée un parcours');
+assert.deepEqual([assignedPath.origin, assignedPath.contract.current?.status, assignedPath.contract.current?.proposedBy],
+  ['assignment', 'accepted', 'teacher']);
+await post(goalPath(enrolled.id, 'proposal/validate'), teacher.token, { number: 1 }, 403);
 const mainPlan = await post(goalPath(enrolled.id, 'proposal/validate'), otherTeacher.token, { number: 1 });
 assert.equal(mainPlan.goal.status, 'active');
 assert.deepEqual(mainPlan.sessions[0].activities.map((activity) => activity.id),
@@ -412,18 +427,20 @@ assert.ok(mainProposal.sessions.at(-1).items.some((item) => item.id === 'examen-
 assert.equal((await api('/tracking/overview', otherTeacher.token)).learners
   .find((entry) => entry.learnerId === learner.id).progress.enrollment.levelCode, 'A1');
 
-// Créneaux insuffisants : débordement, ajustements chiffrés, validation refusée puis ajustement appliqué.
+// Créneaux insuffisants : validation refusée, puis jours rétablis et proposition périmée refusée.
 const autoId = autoEnrollment.id;
-const tight = await put(goalPath(autoId, 'availability'), autonomousToken,
-  { days: [{ weekday: 1, sessions: 1, minutes: 10 }], targetDate: inDays(3) });
-assert.ok(tight.overflowCount > 0, 'Le programme déborde de la date cible');
+// Le parcours est démarré : sa date cible est fixée par le contrat et ne change que par un avenant.
+await put(goalPath(autoId, 'availability'), autonomousToken,
+  { days: [{ weekday: 1, sessions: 1, minutes: 10 }], targetDate: inDays(3) }, 409);
+// Des jours sous l'engagement hebdomadaire du contrat bloquent la validation (le débordement est contrôlé sur un
+// brouillon, dans la recette des parcours multi-niveaux).
+const tight = await put(goalPath(autoId, 'availability'), autonomousToken, { days: [{ weekday: 1, sessions: 1, minutes: 10 }] });
 assert.equal(tight.validatable, false);
-assert.ok(tight.suggestions.length > 0, 'Des ajustements sont proposés');
+assert.equal(tight.blockingReason, 'commitment', 'Dix minutes par semaine passent sous l’engagement du contrat');
 await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: tight.number }, 409);
-const remedy = tight.suggestions.find((suggestion) => suggestion.kind === 'target_date') ?? tight.suggestions[0];
-const adjusted = await put(goalPath(autoId, 'availability'), autonomousToken,
-  { days: remedy.availability, targetDate: remedy.targetDate });
-assert.equal(adjusted.overflowCount, 0, `L’ajustement « ${remedy.label} » fait tenir le programme`);
+const adjusted = await put(goalPath(autoId, 'availability'), autonomousToken, { days: intensive.days });
+assert.equal(adjusted.overflowCount, 0, 'Le rythme intensif fait tenir le programme');
+assert.equal(adjusted.validatable, true, `Proposition validable : ${adjusted.blockingReason}`);
 await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: tight.number }, 409);
 
 // Replanification après un retard : la séance en retard est remplacée, son retard reste dans l'historique.
@@ -438,7 +455,7 @@ assert.ok(!replanned.sessions.some((session) => session.id === pending.id), 'La 
 assert.ok(!replanned.sessions.filter((session) => session.status !== 'completed')
   .some((session) => session.activities.some((activity) => activity.id === 'commander-au-cafe')), 'Le travail fait n’est pas replanifié');
 assert.equal(replanned.goal.initialTargetDate, autoEnrollment.goal.initialTargetDate, 'La date cible initiale est conservée');
-assert.equal(replanned.goal.targetDate, remedy.targetDate);
+assert.equal(replanned.goal.targetDate, autoEnrollment.goal.targetDate, 'La date cible du contrat est conservée');
 assert.equal(localQuery(local.container,
   `select count(*) from learning.session_due_history where session_id = '${pending.id}' and was_late;`), '1');
 
@@ -449,7 +466,8 @@ const open = paused.sessions.find((session) => session.status !== 'completed');
 await put(`/learning/sessions/${open.id}/activities/${open.activities[0].id}/progress`, autonomousToken, { state: {} }, 409);
 await post(goalPath(enrolled.id, 'pause'), learnerToken, {}, 403);
 const resumeDate = inDays(5);
-const resumed = await post(goalPath(autoId, 'resume'), autonomousToken, { resumeDate, targetDate: inDays(45) });
+await post(goalPath(autoId, 'resume'), autonomousToken, { resumeDate, targetDate: inDays(45) }, 409);
+const resumed = await post(goalPath(autoId, 'resume'), autonomousToken, { resumeDate });
 assert.equal(resumed.startDate, resumeDate);
 const reactivated = await post(goalPath(autoId, 'proposal/validate'), autonomousToken, { number: resumed.number });
 assert.equal(reactivated.goal.status, 'active');
@@ -462,7 +480,7 @@ const a2Goal = await post('/learning/enrollments', teacher.token,
   { learnerId: learnerA2.id, trackVersionId: a2.versionId, startLevel: 'A1', template: 'intensive' }, 201);
 assert.equal(a2Goal.goal.prerequisiteLevel, 'A1');
 assert.equal(a2Goal.goal.prerequisiteMet, false);
-assert.equal(a2Goal.proposal.validatable, false);
+assert.equal(a2Goal.proposal.validatable, false, 'Un prérequis non confirmé empêche la validation (le bouton n’est pas proposé)');
 await post(goalPath(a2Goal.id, 'proposal/validate'), teacher.token, { number: a2Goal.proposal.number }, 409);
 await put(goalPath(a2Goal.id, 'starting-point'), teacher.token, { acquiredModules: [], prerequisiteMet: true }, 409);
 const diagnostic = await api(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token);
@@ -1156,6 +1174,276 @@ console.log(`Recette des contenus réussie · import idempotent de ${trackA1.act
   + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (diagnostic, deux séances par jour, retard '
   + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
 
+// --- Parcours multi-niveaux : langues, test de niveau, objectif, contrat, ajouts et bibliothèque (incrément Parcours) ---
+const fiveDays = (minutes) => [1, 2, 3, 4, 5].map((weekday) => ({ weekday, sessions: 1, minutes }));
+const bandOf = (weekly) => [['light', 150], ['moderate', 300], ['sustained', 450], ['intensive', 630], ['very_intensive', 840]]
+  .find(([, max]) => weekly <= max)?.[0] ?? 'unrealistic';
+const sqlList = (sql) => localQuery(local.container, sql).split(',').filter(Boolean);
+
+// 1. Langues : l'allemand seul est ouvert, les autres arrivent bientôt.
+const languages = await api('/languages', teacher.token);
+assert.ok(languages.length >= 14, 'Au moins quatorze langues sont listées');
+assert.deepEqual(languages.filter((language) => language.status === 'available').map((language) => language.id), ['de']);
+assert.ok(languages.filter((language) => language.id !== 'de').every((language) => language.status === 'coming_soon'));
+const germanLevels = languages.find((language) => language.id === 'de').levels;
+assert.equal(germanLevels.find((level) => level.code === 'A1').trackVersionId, trackA1.versionId, 'Les niveaux publiés de la langue');
+
+// 3. Banque du test de niveau : brouillon de l'éditeur, contrôle de complétude, publication.
+const bankQuestion = (code, index) => ({
+  id: `recette-${code.toLowerCase()}-${index}`, competence: 'lecture', moduleRef: null, placements: [],
+  prompt: `Question de recette ${code} n° ${index} : choisissez « richtig ».`,
+  options: [{ id: 'a', label: 'richtig', correct: true }, { id: 'b', label: 'falsch', correct: false }, { id: 'c', label: 'vielleicht', correct: false }],
+});
+const bankTier = (code, drawCount = 8) => ({ code, title: `Palier ${code}`, passPercent: 67, minCompetencePercent: 34, drawCount,
+  questions: Array.from({ length: 8 }, (_, index) => bankQuestion(code, index + 1)) });
+await api('/catalogue/placement-tests', teacher.token, { status: 403 });
+const bankDraft = await post('/catalogue/placement-tests', staffToken, { languageId: 'de' }, 201);
+assert.equal(bankDraft.status, 'draft');
+const bankContent = { title: 'Test de niveau de recette', description: 'Deux paliers de lecture.', tiers: [bankTier('A1'), bankTier('A2', 9)] };
+const incompleteBank = await put(`/catalogue/placement-tests/${bankDraft.id}`, staffToken, bankContent);
+assert.equal(incompleteBank.checks.publishable, false);
+assert.deepEqual(incompleteBank.checks.issues.map((issue) => issue.path), ['tiers[1].drawCount'], 'Un palier tire plus de questions qu’il n’en a');
+await post(`/catalogue/placement-tests/${bankDraft.id}/publish`, staffToken, {}, 409);
+const completeBank = await put(`/catalogue/placement-tests/${bankDraft.id}`, staffToken, { ...bankContent, tiers: [bankTier('A1'), bankTier('A2')] });
+assert.equal(completeBank.checks.publishable, true, JSON.stringify(completeBank.checks.issues));
+const publishedBank = await post(`/catalogue/placement-tests/${bankDraft.id}/publish`, staffToken);
+assert.equal(publishedBank.test.status, 'published');
+assert.equal(publishedBank.test.questionCount, 16);
+await put(`/catalogue/placement-tests/${bankDraft.id}`, staffToken, bankContent, 409);
+assert.ok((await api('/languages', teacher.token)).find((language) => language.id === 'de').placementAvailable);
+
+// 4. Élève suivi : invité avec sa langue, qu'il ne peut pas changer.
+const followedEmail = `parcours-suivi-${suffix}@example.org`;
+const followedInvite = await post('/invitations', teacher.token,
+  { email: followedEmail, displayName: 'Élève suivi de recette', role: 'learner', languageId: 'de' }, 201);
+assert.equal(followedInvite.languageId, 'de');
+await post('/invitations', teacher.token,
+  { email: `parcours-anglais-${suffix}@example.org`, displayName: 'Refus', role: 'learner', languageId: 'en' }, 409);
+const followedToken = await followInvitation(followedEmail);
+const followedMe = await api('/me', followedToken);
+assert.deepEqual([followedMe.languageId, followedMe.teacherId], ['de', teacher.id], 'La langue vient de l’invitation');
+await put('/me/language', followedToken, { languageId: 'de' }, 403);
+assert.equal((await api('/me/teacher', followedToken)).id, teacher.id);
+const followedStart = await api('/learning/onboarding', followedToken);
+assert.deepEqual([followedStart.accompanied, followedStart.languageLocked, followedStart.completed], [true, true, false]);
+
+// 5. Élève autonome : langue, puis test de niveau à paliers.
+const solo = await createAccount('parcours-autonome', 'learner', null);
+const soloStart = await api('/learning/onboarding', solo.token);
+assert.deepEqual([soloStart.steps[0].id, soloStart.steps[0].status, soloStart.completed], ['language', 'current', false]);
+assert.equal(await api('/me/teacher', solo.token), null);
+await post('/assessments/placements', solo.token, {}, 409);
+await put('/me/language', solo.token, { languageId: 'en' }, 409);
+assert.equal((await put('/me/language', solo.token, { languageId: 'de' })).languageId, 'de');
+let soloTest = await post('/assessments/placements', solo.token, {}, 201);
+assert.equal(soloTest.currentTier, 'A1');
+assert.equal(soloTest.questions.length, 8);
+assert.ok(soloTest.questions.every((question) => question.options.every((option) => !('correct' in option))), 'Aucun corrigé exposé');
+assert.equal((await post('/assessments/placements', solo.token, {})).id, soloTest.id, 'Le test en cours est repris');
+await put(`/assessments/placements/${soloTest.id}/answers`, solo.token, { tier: 'A1', answers: { [soloTest.questions[0].id]: 'z' } }, 400);
+soloTest = await put(`/assessments/placements/${soloTest.id}/answers`, solo.token, { tier: 'A1', answers: { [soloTest.questions[0].id]: 'a' } });
+assert.equal(soloTest.savedAnswers[soloTest.questions[0].id], 'a', 'Les réponses sont enregistrées en cours de palier');
+const tierAnswers = (view, right) => Object.fromEntries(view.questions.map((question) => [question.id, right ? 'a' : 'dontknow']));
+const submitTier = (view, tier, answers, key = randomUUID()) => api(`/assessments/placements/${view.id}/submit`, solo.token,
+  { method: 'POST', body: { tier, answers }, headers: { 'Idempotency-Key': key } });
+const tierKey = randomUUID();
+const afterA1 = await submitTier(soloTest, 'A1', tierAnswers(soloTest, true), tierKey);
+assert.deepEqual([afterA1.tiers[0].status, afterA1.currentTier], ['passed', 'A2'], 'Palier A1 réussi');
+const replayedTier = await submitTier(soloTest, 'A1', tierAnswers(soloTest, true), tierKey);
+assert.deepEqual([replayedTier.currentTier, replayedTier.tiers], [afterA1.currentTier, afterA1.tiers], 'La remise rejouée renvoie le même état');
+const placed = await submitTier(afterA1, 'A2', tierAnswers(afterA1, false));
+assert.equal(placed.status, 'completed');
+assert.equal(placed.result.placedLevel, 'A1', 'A1 réussi puis A2 échoué : niveau A1');
+assert.ok(placed.retakeAvailableAt, 'Un nouvel essai est possible plus tard');
+await post('/assessments/placements', solo.token, { restart: true }, 409);
+await api(`/assessments/placements?learnerId=${solo.id}`, teacher.token, { status: 403 });
+assert.deepEqual((await api(`/assessments/placements/${placed.id}`, admin.token)).questions, [], 'Un tiers ne voit pas les questions');
+
+// 6. Débutant déclaré : niveau A0 sans questions.
+const beginner = await post('/assessments/placements', followedToken, { declaredBeginner: true }, 201);
+assert.deepEqual([beginner.status, beginner.result.placedLevel, beginner.result.declaredBeginner], ['completed', 'A0', true]);
+assert.equal((await api(`/assessments/placements?learnerId=${followedMe.id}`, teacher.token))[0].placedLevel, 'A0');
+await api(`/assessments/placements?learnerId=${followedMe.id}`, otherTeacher.token, { status: 403 });
+
+// 7. Estimation de la charge et barème de difficulté.
+const estimate = await post('/learning/paths/estimate', solo.token, { targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(181) });
+assert.equal(estimate.startLevel, 'A1', 'Le départ suit le résultat du test');
+assert.deepEqual(estimate.levels.map((level) => level.levelCode), ['A2']);
+assert.ok(estimate.requiredMinutes > 1000, 'La charge vient du parcours A2 publié');
+assert.equal(estimate.difficulty.code, bandOf(estimate.requiredWeeklyMinutes), 'Difficulté selon le barème hebdomadaire');
+assert.equal(estimate.bands.length, 6);
+const rushed = await post('/learning/paths/estimate', solo.token, { targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(4) });
+assert.equal(rushed.difficulty.code, 'unrealistic', 'Trois jours pour un niveau : irréaliste');
+await post('/learning/paths', solo.token, { placementAttemptId: placed.id, targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(4) }, 409);
+
+// 10. Élève autonome : contrat accepté d'office au démarrage, avenant accepté immédiatement.
+let soloPath = await post('/learning/paths', solo.token,
+  { placementAttemptId: placed.id, targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(181) }, 201);
+assert.deepEqual([soloPath.status, soloPath.sessions.length, soloPath.permissions.canChangeObjective], ['draft', 0, true]);
+const soloProposal = await put(`/learning/paths/${soloPath.id}/availability`, solo.token, { days: fiveDays(45) });
+assert.equal(soloProposal.validatable, true, soloProposal.blockingReason);
+soloPath = await post(`/learning/paths/${soloPath.id}/proposal/validate`, solo.token, { number: soloProposal.number });
+assert.equal(soloPath.status, 'active');
+assert.deepEqual([soloPath.contract.current?.number, soloPath.contract.current?.status, soloPath.contract.engaged], [1, 'accepted', true]);
+const soloAmendment = await post(`/learning/paths/${soloPath.id}/contracts`, solo.token,
+  { targetLevel: 'A2', targetDate: inDays(200), weeklyMinutes: 60, availability: fiveDays(45) }, 201);
+assert.deepEqual([soloAmendment.number, soloAmendment.status], [2, 'accepted'], 'L’avenant de l’élève autonome s’applique');
+assert.deepEqual((await api(`/learning/paths/${soloPath.id}/contracts`, solo.token)).map((contract) => [contract.number, contract.status]),
+  [[2, 'accepted'], [1, 'superseded']]);
+assert.equal((await api('/learning/path', solo.token)).targetDate, inDays(200));
+
+// 8. Parcours A0 → A2 de l'élève suivi : brouillon, débordement, deux niveaux sans mélange, démarrage.
+let followedPath = await post('/learning/paths', followedToken,
+  { placementAttemptId: beginner.id, targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(241) }, 201);
+assert.deepEqual(followedPath.steps.map((step) => [step.levelCode, step.status]), [['A1', 'planned'], ['A2', 'planned']]);
+const overloaded = await put(`/learning/paths/${followedPath.id}/availability`, followedToken,
+  { days: [{ weekday: 1, sessions: 1, minutes: 10 }], targetDate: inDays(240) });
+assert.ok(overloaded.overflowCount > 0, 'Dix minutes par semaine ne suffisent pas');
+assert.equal(overloaded.blockingReason, 'overflow');
+assert.ok(overloaded.suggestions.length > 0, 'Des ajustements sont proposés');
+await post(`/learning/paths/${followedPath.id}/proposal/validate`, followedToken, { number: overloaded.number }, 409);
+const followedProposal = await put(`/learning/paths/${followedPath.id}/availability`, followedToken, { days: fiveDays(60) });
+assert.equal(followedProposal.overflowCount, 0);
+assert.deepEqual([...new Set(followedProposal.sessions.map((session) => session.levelCode))], ['A1', 'A2'], 'Séances A1 puis A2');
+assert.ok(followedProposal.sessions.every((session) => session.items.every((item) => item.levelCode === session.levelCode)),
+  'Une séance ne mélange jamais deux niveaux');
+assert.deepEqual(followedProposal.levels.map((level) => level.levelCode), ['A1', 'A2']);
+await post(`/learning/paths/${followedPath.id}/proposal/validate`, teacher.token, { number: followedProposal.number }, 403);
+followedPath = await post(`/learning/paths/${followedPath.id}/proposal/validate`, followedToken, { number: followedProposal.number });
+assert.deepEqual(followedPath.steps.map((step) => step.status), ['active', 'planned'], 'Niveau 1 actif, niveau 2 prévu');
+assert.ok(followedPath.sessions.some((session) => session.levelCode === 'A2' && session.locked && session.id === null),
+  'Les séances A2 sont une projection verrouillée');
+assert.ok(followedPath.sessions.filter((session) => session.levelCode === 'A1').every((session) => session.id && !session.locked));
+assert.equal((await api('/learning/enrollment', followedToken)).pathId, followedPath.id);
+assert.deepEqual([followedPath.contract.pending?.number, followedPath.contract.pending?.status, followedPath.contract.engaged],
+  [1, 'pending_teacher', false], 'L’élève suivi démarre, son contrat attend le professeur');
+assert.equal((await api('/learning/onboarding', followedToken)).completed, true);
+
+// 9. Contrat : contre-proposition, refus, nouvelle proposition, acceptation, engagement.
+assert.ok((await api('/learning/contracts/pending', teacher.token)).some((item) => item.pathId === followedPath.id && item.contract.number === 1));
+assert.ok(!(await api('/learning/contracts/pending', otherTeacher.token)).some((item) => item.pathId === followedPath.id));
+await api('/learning/contracts/pending', followedToken, { status: 403 });
+await api(`/learning/path?learnerId=${followedMe.id}`, otherTeacher.token, { status: 403 });
+const counterTerms = { targetLevel: 'A2', targetDate: inDays(271), weeklyMinutes: 90, availability: fiveDays(60), note: 'Prenons un mois de plus.' };
+await post(`/learning/paths/${followedPath.id}/contracts`, otherTeacher.token, counterTerms, 403);
+const counter = await post(`/learning/paths/${followedPath.id}/contracts`, teacher.token, counterTerms, 201);
+assert.deepEqual([counter.number, counter.status, counter.proposedBy], [2, 'pending_learner', 'teacher']);
+const afterCounter = await api(`/learning/paths/${followedPath.id}/contracts`, followedToken);
+assert.deepEqual(afterCounter.map((contract) => [contract.number, contract.status]), [[2, 'pending_learner'], [1, 'rejected']]);
+assert.equal(afterCounter[0].canAccept, true);
+assert.ok(!(await api('/learning/contracts/pending', teacher.token)).some((item) => item.pathId === followedPath.id),
+  'Seuls les contrats en attente du professeur lui sont listés');
+await post(`/learning/paths/${followedPath.id}/contracts/2/accept`, teacher.token, {}, 403);
+followedPath = await post(`/learning/paths/${followedPath.id}/contracts/2/reject`, followedToken, { note: 'Je préfère garder ma date.' });
+assert.deepEqual([followedPath.contract.pending, followedPath.contract.engaged], [null, false]);
+const third = await post(`/learning/paths/${followedPath.id}/contracts`, followedToken,
+  { targetLevel: 'A2', targetDate: inDays(251), weeklyMinutes: 100, availability: fiveDays(60) }, 201);
+assert.deepEqual([third.number, third.status], [3, 'pending_teacher']);
+followedPath = await post(`/learning/paths/${followedPath.id}/contracts/3/accept`, teacher.token, { note: 'Validé, bon courage !' });
+assert.deepEqual([followedPath.contract.current?.number, followedPath.contract.engaged, followedPath.targetDate], [3, true, inDays(251)]);
+const underCommitment = await put(`/learning/paths/${followedPath.id}/availability`, followedToken, { days: [{ weekday: 1, sessions: 1, minutes: 60 }] });
+assert.deepEqual([underCommitment.blockingReason, underCommitment.validatable], ['commitment', false], 'Les jours restent au-dessus de l’engagement');
+await post(`/learning/paths/${followedPath.id}/proposal/validate`, followedToken, { number: underCommitment.number }, 409);
+await put(`/learning/paths/${followedPath.id}/availability`, followedToken, { days: fiveDays(60), targetDate: inDays(300) }, 409);
+const restored = await put(`/learning/paths/${followedPath.id}/availability`, teacher.token, { days: fiveDays(60) });
+assert.equal(restored.validatable, true, restored.blockingReason);
+followedPath = await post(`/learning/paths/${followedPath.id}/proposal/validate`, teacher.token, { number: restored.number });
+
+// 11. Ajout de cours par le professeur : activité d'une autre version, servie depuis sa version source.
+const reisenLesson = contentA2.modules.find((module) => module.id === 'a2-reisen').activities.find((activity) => activity.kind === 'lesson');
+const additionRequest = { stepLevel: 'A1', trackVersionId: trackA2.versionId, moduleId: 'a2-reisen', activityId: reisenLesson.id,
+  placement: 'next', note: 'Pour préparer le voyage.' };
+await post(`/learning/paths/${followedPath.id}/additions`, followedToken, additionRequest, 403);
+const added = await post(`/learning/paths/${followedPath.id}/additions`, teacher.token, additionRequest, 201);
+assert.deepEqual([added.addition.sourceLevelCode, added.addition.status], ['A2', 'planned']);
+const addedItem = added.proposal.sessions[0].items[0];
+assert.ok(addedItem.id.startsWith('ajout-') && addedItem.id.endsWith(reisenLesson.id), `Élément ajouté en tête : ${addedItem.id}`);
+assert.deepEqual([addedItem.sourceVersionId, addedItem.sourceActivityId, addedItem.additionId],
+  [trackA2.versionId, reisenLesson.id, added.addition.id]);
+assert.equal(added.proposal.validatable, true, added.proposal.blockingReason);
+followedPath = await post(`/learning/paths/${followedPath.id}/proposal/validate`, teacher.token, { number: added.proposal.number });
+const addedSession = followedPath.sessions.find((session) => session.activities.some((activity) => activity.id === addedItem.id));
+assert.ok(addedSession?.id, 'La séance du cours ajouté est ouverte');
+assert.ok(addedSession.activities.find((activity) => activity.id === addedItem.id).added);
+const addedDetail = (await api(`/learning/sessions/${addedSession.id}`, followedToken)).activities.find((activity) => activity.id === addedItem.id);
+assert.equal(addedDetail.title, reisenLesson.title, 'Le contenu vient de la version source');
+assert.ok(addedDetail.lesson, 'La leçon ajoutée est servie');
+const addedDone = await put(`/learning/sessions/${addedSession.id}/activities/${addedItem.id}/progress`, followedToken, { completed: true });
+assert.equal(addedDone.activities.find((activity) => activity.id === addedItem.id).status, 'completed');
+assert.equal((await api(`/learning/paths/${followedPath.id}/additions`, followedToken)).find((item) => item.id === added.addition.id).status, 'completed');
+await post(`/learning/paths/${followedPath.id}/additions/${added.addition.id}/remove`, teacher.token, {}, 409);
+
+// 12. Passage au niveau suivant : refusé à l'élève avant l'examen blanc, forcé par le professeur.
+await post(`/learning/paths/${followedPath.id}/advance`, followedToken, {}, 409);
+const firstStep = followedPath.steps[0];
+followedPath = await post(`/learning/paths/${followedPath.id}/advance`, teacher.token, {});
+assert.deepEqual(followedPath.steps.map((step) => step.status), ['completed', 'active'], 'Le niveau A2 est ouvert');
+const secondEnrollment = followedPath.steps[1].enrollmentId;
+assert.equal(localQuery(local.container, `select status from learning.enrollments where id = '${firstStep.enrollmentId}';`), 'completed');
+assert.equal((await api('/learning/enrollment', followedToken)).id, secondEnrollment);
+const stepEvents = sqlList(`select string_agg(distinct type, ',' order by type) from learning.outbox_events
+  where data->>'enrollmentId' = '${secondEnrollment}';`);
+for (const type of ['learning.goal_set', 'learning.plan_validated']) assert.ok(stepEvents.includes(type), `${type} émis pour le niveau A2`);
+const pathEvents = sqlList(`select string_agg(distinct type, ',' order by type) from learning.outbox_events
+  where subject_id = '${followedPath.id}' or subject_id like '${followedPath.id}:%';`);
+for (const type of ['learning.path_created', 'learning.path_started', 'learning.path_step_activated', 'learning.contract_proposed',
+  'learning.contract_rejected', 'learning.contract_accepted', 'learning.path_addition_created']) {
+  assert.ok(pathEvents.includes(type), `Événement ${type} enregistré`);
+}
+assert.equal(localQuery(local.container, `select count(*) from learning.outbox_events
+  where subject_kind in ('path', 'contract') and data::jsonb ? 'enrollmentId';`), '0', 'Aucun événement de parcours ne porte enrollmentId');
+
+// 13. Bibliothèque : tous les niveaux publiés, activité avec ses supports, exercice libre corrigé.
+const learnerLibrary = await api('/learning/library', solo.token);
+assert.equal(learnerLibrary.languageId, 'de');
+const libraryA1 = learnerLibrary.levels.find((level) => level.levelCode === 'A1');
+assert.equal(libraryA1.trackVersionId, trackA1.versionId);
+assert.ok(learnerLibrary.levels.find((level) => level.levelCode === 'A2').current, 'Le niveau en cours est signalé');
+assert.deepEqual(libraryA1.practice.map((item) => [item.kind, item.available]), [['midterm', true], ['final', false]],
+  'L’examen de passage de niveau n’est pas proposé en entraînement');
+const dialog = await api(`/learning/library/${trackA1.versionId}/activities/a1-hallo-dialog`, solo.token);
+assert.deepEqual([dialog.status, dialog.trackVersionId, dialog.moduleId], ['todo', trackA1.versionId, 'a1-hallo']);
+const dialogFile = dialog.placements.find((placement) => placement.url);
+assert.ok(dialogFile && (await fetch(dialogFile.url, { signal: AbortSignal.timeout(8_000) })).ok, 'Le support de l’activité est lisible');
+const freeExercise = libraryA1.modules.flatMap((module) => module.activities).find((activity) => activity.kind === 'exercise');
+const freeDetail = await api(`/learning/library/${trackA1.versionId}/activities/${freeExercise.id}`, solo.token);
+assert.ok(freeDetail.questions.every((question) => question.options.every((option) => !('correct' in option))), 'Sans corrigé');
+const freeGrade = await api('/assessments/quiz', solo.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: freeExercise.lessonId, answers: exerciseKeys.get(freeExercise.id) } });
+assert.equal(freeGrade.correct, freeGrade.total, 'L’exercice libre est corrigé');
+const libraryAgain = (await api('/learning/library', solo.token)).levels.find((level) => level.levelCode === 'A1');
+assert.equal(libraryAgain.modules.flatMap((module) => module.activities).find((activity) => activity.id === freeExercise.id).lastResult?.correct,
+  freeGrade.correct, 'Le dernier score est affiché');
+await api(`/learning/library?learnerId=${solo.id}`, teacher.token, { status: 403 });
+assert.ok((await api(`/learning/library?learnerId=${followedMe.id}`, teacher.token)).levels.length >= 2, 'Le référent consulte la bibliothèque');
+
+// 14. Examen blanc d'entraînement : bilan intermédiaire seulement, sans corrigé, sans événement, nouvel essai après 12 h.
+const assessmentEvents = () => localQuery(local.container, 'select count(*) from assessment.outbox_events;');
+const eventsBefore = assessmentEvents();
+const practiceRequest = { trackVersionId: trackA1.versionId, kind: 'midterm' };
+await post('/assessments/practice', solo.token, { ...practiceRequest, kind: 'final' }, 409);
+const practice = await post('/assessments/practice', solo.token, practiceRequest, 201);
+assert.equal(practice.mode, 'practice');
+const closedParts = practice.definition.parts.filter((part) => part.mode === 'closed');
+assert.ok(closedParts.length > 0 && closedParts.every((part) => part.questions.every((question) =>
+  question.options.every((option) => !('correct' in option)))), 'Aucun corrigé dans l’entraînement');
+assert.equal((await post('/assessments/practice', solo.token, practiceRequest)).id, practice.id, 'L’entraînement en cours est repris');
+await put(`/assessments/practice/${practice.id}/answers`, solo.token, { answers: Object.fromEntries(closedParts.map((part) =>
+  [part.id, Object.fromEntries(part.questions.map((question) => [question.id, question.options[0].id]))])) });
+const practiceKey = randomUUID();
+const submitPractice = () => api(`/assessments/practice/${practice.id}/submit`, solo.token,
+  { method: 'POST', body: {}, headers: { 'Idempotency-Key': practiceKey } });
+const practiced = await submitPractice();
+assert.equal(practiced.status, 'submitted');
+assert.ok(Number.isInteger(practiced.result.percent) && practiced.nextAttemptAt, 'Score par partie, nouvel essai daté');
+assert.equal((await submitPractice()).submittedAt, practiced.submittedAt, 'La remise rejouée ne compte qu’une fois');
+await post('/assessments/practice', solo.token, practiceRequest, 409);
+assert.equal((await api('/assessments/practice', solo.token)).find((item) => item.id === practice.id).percent, practiced.result.percent);
+assert.equal(assessmentEvents(), eventsBefore, 'L’entraînement n’émet aucun événement');
+console.log('Recette des parcours réussie · langues, banque du test de niveau, test à paliers idempotent, débutant déclaré, '
+  + 'estimation et difficulté, parcours A0 → A2 sans mélange de niveaux, contrat (contre-proposition, refus, acceptation, '
+  + 'engagement), avenant autonome, ajout de cours d’une autre version, passage forcé, bibliothèque et entraînement sans événement.');
+
 // --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
 async function control(action, service) {
   const response = await fetch(`http://127.0.0.1:8099/${action}/${service}`, {
@@ -1378,6 +1666,104 @@ if (process.argv.includes('--browser')) {
       if (activity.placements.some((placement) => placement.usage === 'audio')) await expect(contentPage.locator('audio').first()).toBeAttached();
     }
     console.log('Recette navigateur réussie · séance A1 importée : textes de leçon et d’exercice, illustrations et sons sur mobile.');
+
+    // Incrément Parcours : accueil complet d'un élève autonome, questionnaire d'un nouveau professeur, décision de contrat.
+    const signIn = async (viewport, accountEmail) => {
+      const signedIn = await browser.newPage({ viewport });
+      await signedIn.goto('http://127.0.0.1:5186/connexion');
+      await signedIn.getByLabel('Adresse e-mail').fill(accountEmail);
+      await signedIn.getByLabel('Mot de passe', { exact: true }).fill(password);
+      await signedIn.getByRole('button', { name: 'Se connecter', exact: true }).click();
+      return signedIn;
+    };
+    const phone = { width: 390, height: 844 };
+
+    // (a) Élève autonome sans parcours : l'espace l'envoie vers l'accueil, de la langue au départ, sur mobile.
+    const newcomer = await createAccount('navigateur-autonome', 'learner', null);
+    const welcome = await signIn(phone, newcomer.email);
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/langue$/, { timeout: 15_000 });
+    await expect(welcome.getByRole('navigation', { name: 'Étapes de l’accueil' })).toBeVisible();
+    await expect(welcome.getByRole('radio', { name: /^Anglais/ })).toBeDisabled();
+    await expect(welcome.getByRole('radio', { name: /^Allemand/ })).toBeChecked();
+    await welcome.getByRole('button', { name: 'Choisir cette langue' }).click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/test$/, { timeout: 15_000 });
+    await welcome.getByRole('button', { name: 'Commencer le test' }).click();
+    // Banque de recette : huit questions par palier, « richtig » est la bonne réponse.
+    const answerTier = async (choice) => {
+      for (let number = 1; number <= 8; number++) {
+        await expect(welcome.getByText(`${number}/8`, { exact: true })).toBeVisible({ timeout: 15_000 });
+        await welcome.getByText(choice, { exact: true }).click();
+      }
+    };
+    await answerTier('richtig');
+    await welcome.getByRole('button', { name: 'Valider le palier A1' }).click();
+    await expect(welcome.getByRole('heading', { name: 'Bravo, vous passez au palier A2' })).toBeVisible({ timeout: 15_000 });
+    await welcome.getByRole('button', { name: 'Commencer le palier A2' }).click();
+    await answerTier('Je ne sais pas');
+    await welcome.getByRole('button', { name: 'Valider le palier A2' }).click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/niveau$/, { timeout: 15_000 });
+    await expect(welcome.getByRole('heading', { name: 'A1 · Découverte', level: 2 })).toBeVisible();
+    await welcome.getByRole('button', { name: 'Choisir mon objectif' }).click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/objectif$/);
+    await welcome.getByRole('button', { name: /^3 mois, jusqu’au/ }).click();
+    const objective = welcome.getByRole('button', { name: 'Valider mon objectif' });
+    await expect(objective).toBeEnabled({ timeout: 15_000 });
+    await objective.click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/jours$/, { timeout: 15_000 });
+    await welcome.getByRole('button', { name: 'Voir mon planning' }).click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/planning$/, { timeout: 15_000 });
+    const planned = welcome.getByRole('button', { name: 'Valider mon planning' });
+    await expect(planned).toBeEnabled({ timeout: 15_000 });
+    await planned.click();
+    await expect(welcome).toHaveURL(/\/espace\/accueil\/depart$/, { timeout: 15_000 });
+    await expect(welcome.getByRole('heading', { name: 'Bravo Recette, votre parcours est prêt' })).toBeVisible();
+    await expect(welcome.getByText('Votre contrat est en vigueur')).toBeVisible();
+    const newcomerPath = await api('/learning/path', newcomer.token);
+    assert.deepEqual([newcomerPath.status, newcomerPath.startLevel, newcomerPath.targetLevel, newcomerPath.contract.current?.status],
+      ['active', 'A1', 'A2', 'accepted'], 'L’accueil démarre le parcours de l’élève autonome');
+    await welcome.getByRole('link', { name: 'Aller à mon accueil' }).click();
+    await expect(welcome).toHaveURL(/\/espace$/);
+    await expect(welcome.getByRole('navigation', { name: 'Raccourcis mobiles' }).getByRole('link', { name: /^Bibliothèque/ })).toBeVisible();
+    console.log('Recette navigateur réussie · accueil de l’élève autonome sur mobile : langue, test à paliers, niveau, objectif, jours, planning, départ.');
+
+    // (b) Nouveau professeur : questionnaire d'accueil en plein écran jusqu'à « Valider mon profil ».
+    const newTeacher = await createStaff('navigateur-prof', 'teacher');
+    const questionnaire = await signIn(phone, newTeacher.email);
+    await expect(questionnaire.getByRole('heading', { name: 'Bienvenue Recette !' })).toBeVisible({ timeout: 15_000 });
+    await questionnaire.getByRole('button', { name: 'Commencer', exact: true }).click();
+    await expect(questionnaire.getByRole('heading', { name: 'Quelles langues enseignez-vous ?' })).toBeVisible();
+    await expect(questionnaire.getByRole('checkbox', { name: /^Allemand/ })).toBeChecked();
+    await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
+    await questionnaire.getByRole('checkbox', { name: /^B1/ }).check();
+    for (let question = 0; question < 4; question++) await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
+    await expect(questionnaire.getByRole('heading', { name: 'Tout est prêt ?' })).toBeVisible();
+    await questionnaire.getByRole('button', { name: 'Valider mon profil' }).click();
+    await expect(questionnaire.getByRole('heading', { name: 'Tout est prêt ?' })).toBeHidden({ timeout: 15_000 });
+    const savedProfile = (await api('/me', newTeacher.token)).teacherProfile;
+    assert.ok(savedProfile.onboardedAt, 'Le questionnaire est enregistré');
+    assert.deepEqual([savedProfile.languages, savedProfile.levels], [['de'], ['A1', 'A2', 'B1']]);
+    console.log('Recette navigateur réussie · questionnaire d’accueil d’un nouveau professeur sur mobile.');
+
+    // (c) Professeur référent : décision d'un contrat en attente depuis la rubrique « Contrats ».
+    const contractLearner = await createAccount('navigateur-suivi', 'learner', teacher.id);
+    localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${contractLearner.id}';`);
+    const contractTest = await post('/assessments/placements', contractLearner.token, { declaredBeginner: true }, 201);
+    let contractPath = await post('/learning/paths', contractLearner.token,
+      { placementAttemptId: contractTest.id, targetLevel: 'A1', startDate: inDays(1), targetDate: inDays(121) }, 201);
+    const contractProposal = await put(`/learning/paths/${contractPath.id}/availability`, contractLearner.token, { days: fiveDays(45) });
+    contractPath = await post(`/learning/paths/${contractPath.id}/proposal/validate`, contractLearner.token, { number: contractProposal.number });
+    assert.equal(contractPath.contract.pending?.status, 'pending_teacher');
+    const referent = await signIn({ width: 1280, height: 900 }, teacher.email);
+    await referent.getByRole('navigation', { name: 'Sections de l’application' }).getByRole('link', { name: /^Contrats/ })
+      .click({ timeout: 15_000 });
+    await expect(referent.getByRole('heading', { name: 'Contrats', exact: true })).toBeVisible({ timeout: 15_000 });
+    await referent.getByRole('region', { name: 'Contrats à valider' })
+      .getByRole('button', { name: 'Examiner le contrat de Recette navigateur-suivi' }).click({ timeout: 15_000 });
+    await referent.getByRole('button', { name: 'Valider le contrat' }).click();
+    await expect(referent.getByText('Contrat de Recette navigateur-suivi validé', { exact: false })).toBeVisible({ timeout: 15_000 });
+    const decided = await api('/learning/path', contractLearner.token);
+    assert.deepEqual([decided.contract.current?.number, decided.contract.current?.status, decided.contract.engaged], [1, 'accepted', true]);
+    console.log('Recette navigateur réussie · décision de contrat par le professeur référent.');
   } finally {
     await browser.close();
   }

@@ -1,6 +1,6 @@
 # Contenus pédagogiques LinguaCap
 
-Ce dossier contient les parcours d’allemand **A1** et **A2** au format source. L’importeur les publie dans le catalogue par l’API de la plateforme : médias déposés dans la médiathèque, puis brouillon de version enregistré, contrôlé et publié.
+Ce dossier contient les parcours d’allemand **A1** et **A2** et le **test de niveau** au format source. L’importeur les publie dans le catalogue par l’API de la plateforme : médias déposés dans la médiathèque, puis brouillon enregistré, contrôlé et publié.
 
 ```
 content/
@@ -9,6 +9,7 @@ content/
     a1/level.json           réglages, ordre des modules, diagnostic, bilan intermédiaire, examen blanc
     a1/01-hallo.json …      un fichier par module : activités et médias du module
     a2/…                    même organisation pour A2
+    placement/placement.json  test de niveau : paliers A1, A2, B1, questions et scripts des sons d’écoute
     media/audio/*.mp3       sons générés (voix de synthèse) ou extraits de Deutsch im Blick
     media/images/*.png      illustrations générées
 ```
@@ -108,15 +109,44 @@ Les chemins `native.file` et `photo.file` sont relatifs à `resource-langue/extr
 
 `level.json` contient `levelId` (`a1` ou `a2`), `modules` (ordre des modules : `{ "id": "a1-hallo", "file": "01-hallo.json" }`), `settings` (compétences attendues, critères de réussite, seuil, durées), `diagnostic`, `assessments` (bilan `midterm` et examen blanc `final`, chacun avec quatre parties : lecture et écoute fermées, écrit et oral notés avec une grille) et `media` (médias des évaluations). Les questions du diagnostic portent `moduleRef` : un module du niveau ou `prerequis`.
 
+## Test de niveau
+
+`placement/placement.json` décrit la banque du test de niveau d’allemand, importée dans `catalogue.placement_tests` (un brouillon par langue, une banque publiée ; la précédente est retirée à la publication). Le test ne mesure que la compréhension : lecture et écoute.
+
+```jsonc
+{
+  "languageId": "de", "title": "Test de niveau d’allemand", "description": "…", "sources": ["…"],
+  "tiers": [
+    { "code": "A1", "title": "A1 · Découverte", "passPercent": 67, "minCompetencePercent": 34, "drawCount": 12,
+      "questions": [
+        { "id": "a1-l01", "competence": "lecture", "moduleRef": "a1-hallo",
+          "prompt": "Choisissez la forme qui convient.\n\n– Woher ___ du?\n– Ich komme aus Spanien.",
+          "options": [ { "id": "a", "label": "komme", "correct": false }, … ], "placements": [] },
+        { "id": "a1-h01", "competence": "ecoute", "moduleRef": "a1-essen", "prompt": "…",
+          "options": [ … ], "placements": [ { "media": "placement-a1-h01", "usage": "audio", "transcriptVisibility": "hidden" } ] }
+      ] }
+  ],
+  "media": [ /* sons de synthèse, même format que dans un module ; clés « placement-… » */ ]
+}
+```
+
+- **Paliers** `A1`, `A2`, `B1`, dans l’ordre, à partir de A1. Un palier est réussi à `passPercent` (67 %) sans compétence sous `minCompetencePercent` (34 %) ; le test s’arrête au premier palier échoué et le niveau retenu est le dernier palier réussi (sinon « débutant »).
+- **Banque de 18 questions par palier** : 12 de lecture (6 de vocabulaire et grammaire, 6 textes courts de la vie courante suivis d’une question de compréhension) et 6 d’écoute. Évaluations en tire `drawCount` = 12 au hasard, au prorata des compétences (8 lecture, 4 écoute), et mélange l’ordre des choix ; le choix « Je ne sais pas » (`dontknow`, identifiant réservé) est ajouté à chaque question.
+- **Questions** : consigne en français, textes et sons en allemand ; l’énoncé d’une question de lecture contient le texte à lire puis la question (1 500 caractères au plus, sauts de ligne conservés). Trois choix, une seule bonne réponse indiscutable, distracteurs plausibles repris du texte ou du son, sans indice de forme (la bonne réponse n’est ni toujours au même rang, ni trop souvent la plus longue : le contrôle le signale). `moduleRef` (facultatif) rattache la question à un module du parcours du même niveau pour les statistiques.
+- **Calibrage** : descripteurs du CECRL et formats des épreuves de lecture et d’écoute du Goethe-Zertifikat A1, A2 et B1 (annonces, courriels, petites annonces à apparier, articles, règlements, messages téléphoniques, dialogues, interviews, émissions de radio), avec une difficulté croissante d’un palier à l’autre : textes plus longs, syntaxe plus complexe, réponses à inférer.
+- **Écoute** : un son par question, transcription masquée (`hidden`), 10 secondes à 1 minute. Les sons du palier A1 sont lus plus lentement, comme ceux du niveau A1.
+
 ## Vérifier, générer, importer
 
 ```bash
-node infra/content/check-content.mjs                 # structure, corrigés, médias, compétences
+node infra/content/check-content.mjs                 # structure, corrigés, médias, compétences, test de niveau
 PLAYWRIGHT_CHANNEL=msedge node infra/content/render-images.mjs     # illustrations et photos → media/images
 docker build -t linguacap-tts infra/content/tts
-MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-piper-voices:/voices:ro -v "$(pwd -W):/repo" -w /repo   linguacap-tts python infra/content/tts/synthesize.py            # synthèse et enregistrements natifs → media/audio
-node infra/content/expected-transcripts.mjs > expected.json       # contrôle des sons par reconnaissance vocale
-docker build -t linguacap-asr infra/content/asr                   # puis check_audio.py --expected … (voir le script)
-node infra/content/import-content.mjs --dry-run                   # fichiers présents, taille des documents
+MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-piper-voices:/voices:ro -v "$(pwd -W):/repo" -w /repo   linguacap-tts python infra/content/tts/synthesize.py            # synthèse et enregistrements natifs → media/audio (niveaux et test de niveau ; --only clé … pour quelques sons)
+node infra/content/expected-transcripts.mjs expected.json [a1 a2 placement]   # texte attendu de chaque son
+docker build -t linguacap-asr infra/content/asr
+MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-whisper-models:/models -v "$(pwd -W)/infra/content/asr:/work:ro"   -v "$(pwd -W)/content/de/media/audio:/audio:ro" -v "$(pwd -W):/out" linguacap-asr   python /work/check_audio.py --expected /out/expected.json --audio /audio --report /out/report.json   # contrôle des sons par reconnaissance vocale
+node infra/content/import-content.mjs --dry-run [--placement]     # fichiers présents, taille des documents
 node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --publish    # dépôt des médias, brouillons, contrôle, publication
+node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --placement --publish    # test de niveau
 ```

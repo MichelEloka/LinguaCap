@@ -160,9 +160,13 @@ function ExerciseResult({ grade, transcript }: { grade: Grade | null; transcript
   );
 }
 
+/**
+ * Exercice corrigé. Dans une séance, `sessionId` rattache la correction à l'activité de la séance ; sans séance
+ * (bibliothèque, exercice libre), la correction est enregistrée seule et relue dans les résultats.
+ */
 export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, onSaveState, onGraded, preview = false }: {
   activity: ActivityDetail;
-  sessionId: string;
+  sessionId?: string;
   token: string;
   grade: Grade | null;
   onRenew: () => void;
@@ -206,7 +210,7 @@ export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, o
     try {
       const result = await requestApi<Grade>('/assessments/quiz', token, {
         method: 'POST',
-        body: { lessonId: activity.lesson.id, answers, sessionId, activityId: activity.id },
+        body: sessionId ? { lessonId: activity.lesson.id, answers, sessionId, activityId: activity.id } : { lessonId: activity.lesson.id, answers },
         idempotencyKey: key.current,
       });
       await onGraded(result, answers);

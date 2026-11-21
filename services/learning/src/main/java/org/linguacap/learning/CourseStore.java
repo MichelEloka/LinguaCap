@@ -34,7 +34,11 @@ class CourseStore {
     }
 
     record SessionRow(UUID id, UUID enrollmentId, UUID learnerId, String enrollmentStatus, String goalStatus,
-                      UUID trackVersionId, String levelCode, boolean superseded, SessionSummary summary) {}
+                      UUID trackVersionId, String levelCode, boolean superseded, SessionSummary summary,
+                      Map<String, Source> sources) {}
+
+    /** Version et activité d'origine d'une activité ajoutée par le professeur (contenu lu dans cette version). */
+    record Source(UUID versionId, String activityId) {}
 
     record ProgressRow(String activityId, JsonNode state, OffsetDateTime completedAt, UUID attemptId) {}
 
@@ -149,9 +153,26 @@ class CourseStore {
                 return new SessionRow(sessionId, enrollmentId, rows.getObject("learner_id", UUID.class),
                         rows.getString("status"), rows.getString("goal_status"),
                         rows.getObject("track_version_id", UUID.class), rows.getString("level_code"),
-                        rows.getObject("superseded_at") != null, summary);
+                        rows.getObject("superseded_at") != null, summary, sources(connection, sessionId));
             }
         }
+    }
+
+    private static Map<String, Source> sources(Connection connection, UUID sessionId) throws SQLException {
+        Map<String, Source> sources = new LinkedHashMap<>();
+        try (var query = connection.prepareStatement("""
+                select activity_id, source_version_id, source_activity_id from learning.session_activities
+                where session_id = ? and source_version_id is not null
+                """)) {
+            query.setObject(1, sessionId);
+            try (var rows = query.executeQuery()) {
+                while (rows.next()) {
+                    sources.put(rows.getString("activity_id"), new Source(rows.getObject("source_version_id", UUID.class),
+                            rows.getString("source_activity_id")));
+                }
+            }
+        }
+        return sources;
     }
 
     private List<SessionSummary> sessions(Connection connection, UUID enrollmentId) throws SQLException {

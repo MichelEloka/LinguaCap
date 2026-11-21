@@ -20,7 +20,7 @@ import org.linguacap.identity.InvitationResource.Invitation;
 @ApplicationScoped
 class InvitationStore {
     private static final String SELECT = """
-            select i.id, i.email, i.display_name, i.role, i.teacher_id, t.display_name as teacher_name,
+            select i.id, i.email, i.display_name, i.role, i.teacher_id, t.display_name as teacher_name, i.language_id,
                    i.invited_by, ib.display_name as invited_by_name, i.invited_user_id, i.created_at, i.sent_at,
                    i.last_sent_at, i.send_count, i.expires_at, i.cancelled_at, i.accepted_at, now() as checked_at
             from identity.invitations i
@@ -32,12 +32,12 @@ class InvitationStore {
 
     /** Ligne d'invitation avec son statut calculé au moment de la lecture. */
     record Row(UUID id, String email, String displayName, String role, UUID teacherId, String teacherName,
-               UUID invitedBy, String invitedByName, UUID invitedUserId, OffsetDateTime createdAt,
+               String languageId, UUID invitedBy, String invitedByName, UUID invitedUserId, OffsetDateTime createdAt,
                OffsetDateTime sentAt, OffsetDateTime lastSentAt, int sendCount, OffsetDateTime expiresAt,
                OffsetDateTime cancelledAt, OffsetDateTime acceptedAt, String status) {
 
         Invitation view() {
-            return new Invitation(id, email, displayName, role, teacherId, teacherName, invitedBy, invitedByName,
+            return new Invitation(id, email, displayName, role, teacherId, teacherName, languageId, invitedBy, invitedByName,
                     status, sendCount, IdentityStore.text(createdAt), IdentityStore.text(sentAt),
                     IdentityStore.text(lastSentAt), IdentityStore.text(expiresAt),
                     IdentityStore.text(cancelledAt), IdentityStore.text(acceptedAt));
@@ -76,15 +76,16 @@ class InvitationStore {
 
     /**
      * Crée l'invitation, ou met à jour l'invitation existante de cette adresse (réémission) :
-     * nouveaux nom, rôle et référent, annulation levée et validité repartant pour sept jours.
+     * nouveaux nom, rôle, référent et langue, annulation levée et validité repartant pour sept jours.
      */
-    Row reserve(Account caller, String email, String displayName, String role, UUID teacherId) {
+    Row reserve(Account caller, String email, String displayName, String role, UUID teacherId, String languageId) {
         return db.transaction("reserve invitation", connection -> {
             Row existing = find(connection, "i.email = ?", email, true);
             if (existing == null) {
                 try (PreparedStatement insert = connection.prepareStatement("""
-                        insert into identity.invitations (id, email, display_name, role, teacher_id, invited_by, expires_at)
-                        values (?, ?, ?, ?, ?, ?, now() + interval '7 days')
+                        insert into identity.invitations
+                            (id, email, display_name, role, teacher_id, invited_by, expires_at, language_id)
+                        values (?, ?, ?, ?, ?, ?, now() + interval '7 days', ?)
                         """)) {
                     insert.setObject(1, UUID.randomUUID());
                     insert.setString(2, email);
@@ -92,6 +93,7 @@ class InvitationStore {
                     insert.setString(4, role);
                     insert.setObject(5, teacherId);
                     insert.setObject(6, caller.id());
+                    insert.setString(7, languageId);
                     insert.executeUpdate();
                 }
                 return find(connection, "i.email = ?", email, false);
@@ -107,14 +109,15 @@ class InvitationStore {
             }
             try (PreparedStatement update = connection.prepareStatement("""
                     update identity.invitations
-                    set display_name = ?, role = ?, teacher_id = ?, cancelled_at = null,
+                    set display_name = ?, role = ?, teacher_id = ?, language_id = ?, cancelled_at = null,
                         expires_at = now() + interval '7 days'
                     where id = ?
                     """)) {
                 update.setString(1, displayName);
                 update.setString(2, role);
                 update.setObject(3, teacherId);
-                update.setObject(4, existing.id());
+                update.setString(4, languageId);
+                update.setObject(5, existing.id());
                 update.executeUpdate();
             }
             return find(connection, "i.id = ?", existing.id(), false);
@@ -159,6 +162,7 @@ class InvitationStore {
             Map<String, Object> data = new HashMap<>();
             data.put("role", row.role());
             data.put("teacherId", row.teacherId() == null ? null : row.teacherId().toString());
+            data.put("languageId", row.languageId());
             data.put("sendCount", row.sendCount());
             data.put("reissued", reissued);
             data.put("by", actorId == null ? null : actorId.toString());
@@ -208,7 +212,7 @@ class InvitationStore {
         OffsetDateTime now = rows.getObject("checked_at", OffsetDateTime.class);
         return new Row(rows.getObject("id", UUID.class), rows.getString("email"), rows.getString("display_name"),
                 rows.getString("role"), rows.getObject("teacher_id", UUID.class), rows.getString("teacher_name"),
-                rows.getObject("invited_by", UUID.class), rows.getString("invited_by_name"),
+                rows.getString("language_id"), rows.getObject("invited_by", UUID.class), rows.getString("invited_by_name"),
                 rows.getObject("invited_user_id", UUID.class), rows.getObject("created_at", OffsetDateTime.class),
                 rows.getObject("sent_at", OffsetDateTime.class), rows.getObject("last_sent_at", OffsetDateTime.class),
                 rows.getInt("send_count"), expiresAt, cancelledAt, acceptedAt,

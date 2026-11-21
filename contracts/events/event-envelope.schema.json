@@ -18,7 +18,7 @@
       "required": ["kind", "id"],
       "additionalProperties": false,
       "properties": {
-        "kind": { "type": "string", "enum": ["account", "invitation", "goal", "plan_revision", "session", "attempt", "grading", "encouragement"] },
+        "kind": { "type": "string", "enum": ["account", "invitation", "goal", "plan_revision", "session", "attempt", "grading", "encouragement", "path", "contract"] },
         "id": { "type": "string", "minLength": 1 }
       }
     },

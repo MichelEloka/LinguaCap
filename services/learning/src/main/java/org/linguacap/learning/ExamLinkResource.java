@@ -8,6 +8,7 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -20,6 +21,8 @@ import org.linguacap.common.HttpError;
 /**
  * Lien avec Évaluations (DEV-062, DEV-066, DEV-070), en routes internes : contexte d'un parcours pour ouvrir une
  * tentative, puis remise et résultat qui terminent le créneau du calendrier et mettent à jour l'état de l'objectif.
+ * Dans un parcours multi-niveaux, la remise de l'examen blanc ouvre le niveau suivant et sa validation sur le dernier
+ * niveau termine le parcours.
  */
 @Path("/v1/internal/learning/enrollments/{id}")
 @Produces(MediaType.APPLICATION_JSON)
@@ -32,6 +35,7 @@ public class ExamLinkResource {
     @Inject CourseStore courses;
     @Inject AgroalDataSource dataSource;
     @Inject LearningEvents events;
+    @Inject PathResource pathResource;
 
     /** Parcours lisible par l'appelant, avec l'échéance des créneaux du bilan et de l'examen blanc. */
     @GET
@@ -73,8 +77,24 @@ public class ExamLinkResource {
                 default -> "awaiting_grading";
             };
             updateGoal(enrollmentId, status);
+            followPath(enrollmentId, event, status);
         }
         return context(enrollmentId);
+    }
+
+    /**
+     * Parcours multi-niveaux : la remise de l'examen blanc du niveau actif ouvre le niveau suivant (l'élève n'attend
+     * pas le correcteur) ; sa validation sur le dernier niveau termine le parcours. Un niveau déjà terminé (reprise
+     * d'un examen « à consolider ») ne rouvre rien. Un échec est journalisé sans annuler la remise : le passage reste
+     * possible ensuite par POST /learning/paths/{pathId}/advance.
+     */
+    private void followPath(UUID enrollmentId, ExamEvent event, String status) {
+        try {
+            pathResource.onExamEvent(enrollmentId, event.kind(), event.event(),
+                    "awaiting_grading".equals(status) ? null : status, actor.id());
+        } catch (WebApplicationException error) {
+            LOG.warnf("Path follow-up after exam event failed (HTTP %d)", error.getResponse().getStatus());
+        }
     }
 
     private OffsetDateTime due(UUID enrollmentId, String activityId) {

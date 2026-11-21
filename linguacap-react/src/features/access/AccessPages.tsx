@@ -1,7 +1,7 @@
 import { lazy, Suspense, useEffect, useId, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Headphones, KeyRound, LayoutGrid, LockKeyhole, MailCheck, MessageSquare, ShieldCheck, Sparkles, Users } from 'lucide-react';
+import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Handshake, Headphones, KeyRound, LayoutGrid, LibraryBig, LockKeyhole, MailCheck, MessageSquare, ShieldCheck, Sparkles, Users } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { Badge, PageHeading } from '../../components/ui';
 import { apiBase, authLinkParams, isApiMode } from '../../app/config';
@@ -11,11 +11,15 @@ import { staffWorkspaceLinks } from '../pilot/staff-navigation';
 import { WorkspaceFrame } from '../workspace/WorkspaceFrame';
 import './access.css';
 
+// Les quatre premiers liens forment la barre du bas sur mobile (les suivants passent dans « Plus ») : « Mes messages »
+// y reste, comme avant l'arrivée de la bibliothèque et du contrat.
 const learnerLinks = [
   { path: '/espace', label: 'Aujourd’hui', icon: LayoutGrid, end: true },
   { path: '/espace/planning', label: 'Mon planning', icon: CalendarDays },
-  { path: '/espace/resultats', label: 'Mes résultats', icon: ChartNoAxesCombined },
+  { path: '/espace/bibliotheque', label: 'Bibliothèque', icon: LibraryBig },
   { path: '/espace/messages', label: 'Mes messages', icon: MessageSquare },
+  { path: '/espace/contrat', label: 'Mon contrat', icon: Handshake },
+  { path: '/espace/resultats', label: 'Mes résultats', icon: ChartNoAxesCombined },
 ];
 
 /** Erreur renvoyée par Supabase dans un lien d'invitation ou de récupération (lien expiré, déjà utilisé…). */

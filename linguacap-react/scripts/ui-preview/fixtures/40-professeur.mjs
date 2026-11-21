@@ -36,11 +36,6 @@ export const screens = [
   { name: 'prof-fiche-resultats', role: 'teacher', path: '/espace/eleves/u-l1?onglet=resultats',
     setup: (page) => override(page, '**/api/v1/tracking/learners/**', withExam) },
   { name: 'prof-fiche-messages', role: 'teacher', path: '/espace/eleves/u-l1?onglet=messages' },
-  { name: 'prof-fiche-attribuer', role: 'teacher', path: '/espace/eleves/u-l6', setup: async (page) => {
-    await page.route('**/api/v1/tracks', (route) => route.fulfill({ json: tracks }));
-    await override(page, '**/api/v1/tracking/learners/**', withoutTrack);
-    await page.getByRole('button', { name: 'Attribuer un parcours' }).first().click();
-  } },
   { name: 'prof-eleves-semaine', role: 'teacher', path: '/espace/eleves?filtre=semaine' },
   { name: 'prof-alertes-detail', role: 'teacher', path: '/espace/alertes',
     setup: (page) => page.getByRole('button', { name: /Camille Martin/ }).first().click() },

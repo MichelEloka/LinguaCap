@@ -24,7 +24,7 @@ import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.ServiceClient;
 
-/** Séances et progression (DEV-028 à DEV-031, DEV-043). */
+/** Séances et progression (DEV-028 à DEV-031, DEV-043) ; une activité ajoutée se lit dans sa version source. */
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
 public class CourseResource {
@@ -66,8 +66,12 @@ public class CourseResource {
                         mapper.createArrayNode(), List.of()));
                 continue;
             }
-            JsonNode content = services.request(catalogueUrl, "/v1/internal/tracks/" + session.trackVersionId()
-                    + "/activities/" + summary.id(), "GET", callerId, null);
+            // Une activité ajoutée par le professeur se lit dans sa version source, sous son identifiant d'origine.
+            CourseStore.Source source = session.sources().get(summary.id());
+            UUID contentVersion = source == null ? session.trackVersionId() : source.versionId();
+            String contentActivity = source == null ? summary.id() : source.activityId();
+            JsonNode content = services.request(catalogueUrl, "/v1/internal/tracks/" + contentVersion
+                    + "/activities/" + contentActivity, "GET", callerId, null);
             List<PlacementView> placements = new ArrayList<>();
             boolean transcriptAllowed = false;
             for (JsonNode placement : content.path("placements")) {

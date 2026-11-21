@@ -1,6 +1,8 @@
 """Synthèse des sons des contenus LinguaCap (voix Piper hors ligne).
 
-Chaque média audio décrit par un « script » (répliques et pauses) devient un MP3 dans content/de/media/audio.
+Chaque média audio décrit par un « script » (répliques et pauses) devient un MP3 dans content/de/media/audio :
+sons des niveaux A1 et A2 et sons d'écoute du test de niveau (content/de/placement/placement.json).
+Les sons du niveau A1 et du palier A1 du test sont lus plus lentement.
 Un enregistrement natif (« native ») est repris de resource-langue/extraits, éventuellement découpé, au même volume.
 Un son déjà généré pour le même script et les mêmes voix n'est pas refait (empreinte dans manifest.json).
 
@@ -135,6 +137,18 @@ def audio_media():
         for item in level_data.get("media", []):
             if item.get("kind") == "audio" and (item.get("script") or item.get("native")):
                 yield level, item
+    # Test de niveau : chaque son prend le palier de la question qui l'utilise (lecture plus lente au palier A1).
+    placement_file = CONTENT / "placement" / "placement.json"
+    if placement_file.exists():
+        placement = json.loads(placement_file.read_text(encoding="utf-8"))
+        tiers = {}
+        for tier in placement.get("tiers", []):
+            for question in tier.get("questions", []):
+                for placement_item in question.get("placements", []):
+                    tiers.setdefault(placement_item.get("media"), tier.get("code", "").lower())
+        for item in placement.get("media", []):
+            if item.get("kind") == "audio" and item.get("script"):
+                yield tiers.get(item["key"], "placement"), item
 
 
 def main():

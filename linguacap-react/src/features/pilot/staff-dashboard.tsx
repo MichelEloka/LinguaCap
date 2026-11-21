@@ -2,7 +2,7 @@
 import { useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, Bell, BellRing, BookOpen, CalendarClock, CalendarDays, ChevronRight, ClipboardCheck, FolderOpen, KeyRound,
+  ArrowRight, Bell, BellRing, BookOpen, CalendarClock, CalendarDays, ChevronRight, ClipboardCheck, FileSignature, FolderOpen, KeyRound,
   MessageCircle, PartyPopper, TrendingUp, UserPlus, UserRoundCog, Users, type LucideIcon,
 } from 'lucide-react';
 import { Badge, EmptyState, PageHeading, StatCard } from '../../components/ui';
@@ -13,6 +13,8 @@ import {
   DateTile, EncourageDrawer, StaffError, dayOffset, dueWithinWeek, formatMinutes, goalStatusOf, learnerUrl, levelOf,
   needsFollowUp, openAlert, plural, relativeDay, useOverview, type LearnerOverview,
 } from './staff-kit';
+import { LevelRoute, formatShortDay, usePendingContracts } from './staff-contracts';
+import { difficultyTones, formatMinutes as minutesLabel, type PendingContract } from '../../integration/v2';
 
 const todayLabel = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 
@@ -76,6 +78,34 @@ function recentActivity(learners: LearnerOverview[]): TimelineEntry[] {
   return events.sort((a, b) => b.at - a.at).slice(0, 5);
 }
 
+/** Contrats envoyés par les élèves et qui attendent la décision du professeur. */
+function ContractsCard({ contracts }: { contracts: PendingContract[] }) {
+  return (
+    <Card title="Contrats à valider" description="Vos élèves ont déjà commencé avec ces conditions" icon={<FileSignature size={18} />} flush
+      className="staff-contracts-card" action={<Link className="btn btn-ghost btn-sm" to="/espace/contrats">Tout voir <ArrowRight size={16} aria-hidden="true" /></Link>}>
+      <ul className="staff-rows lc-stagger">
+        {contracts.slice(0, 3).map((item) => (
+          <li key={`${item.pathId}-${item.contract.number}`}>
+            <Link className="staff-agenda-item" to={`/espace/contrats?contrat=${encodeURIComponent(item.pathId)}`}
+              aria-label={`Examiner le contrat de ${item.learnerName}`}>
+              <Avatar name={item.learnerName} size={40} />
+              <span className="staff-row-main">
+                <strong>{item.learnerName}</strong>
+                <small>Objectif le {formatShortDay(item.contract.terms.targetDate)} · {minutesLabel(item.contract.terms.weeklyMinutes)} par semaine</small>
+              </span>
+              <span className="staff-agenda-end">
+                <LevelRoute from={item.contract.terms.startLevel} to={item.contract.terms.targetLevel} />
+                <span className={`badge badge-${difficultyTones[item.contract.terms.difficulty.code]}`}>{item.contract.terms.difficulty.label}</span>
+                <ChevronRight size={18} aria-hidden="true" />
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
 interface Shortcut { to: string; label: string; hint: string; icon: LucideIcon; count?: number }
 
 function Shortcuts({ items }: { items: Shortcut[] }) {
@@ -103,6 +133,7 @@ function DashboardSkeleton() {
 
 function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) {
   const { learners, error, reload } = useOverview(token);
+  const pendingContracts = usePendingContracts(token);
   const [messageTo, setMessageTo] = useState<LearnerOverview | null>(null);
 
   if (error) return <StaffError message={error} onRetry={reload} />;
@@ -130,7 +161,10 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
   const upcoming = learners.filter((learner) => learner.tracking?.nextDueAt)
     .sort((a, b) => new Date(a.tracking?.nextDueAt ?? 0).getTime() - new Date(b.tracking?.nextDueAt ?? 0).getTime()).slice(0, 5);
   const activity = recentActivity(learners);
+  const toDecide = (pendingContracts.data ?? []).filter((item) => item.contract.status === 'pending_teacher')
+    .sort((a, b) => a.contract.createdAt.localeCompare(b.contract.createdAt));
   const shortcuts: Shortcut[] = [
+    { to: '/espace/contrats', label: 'Valider les contrats', hint: toDecide.length ? plural(toDecide.length, 'contrat en attente', 'contrats en attente') : 'Rien en attente', icon: FileSignature, count: toDecide.length },
     { to: '/espace/invitations', label: admin ? 'Inviter un utilisateur' : 'Inviter un élève', hint: 'Lien valable sept jours', icon: UserPlus },
     { to: '/espace/corrections', label: 'Corriger les copies', hint: corrections ? plural(corrections, 'copie en attente', 'copies en attente') : 'Rien en attente', icon: ClipboardCheck, count: corrections },
     { to: '/espace/alertes', label: 'Traiter les alertes', hint: alerts ? plural(alerts, 'alerte ouverte', 'alertes ouvertes') : 'Aucune alerte', icon: Bell, count: alerts },
@@ -160,6 +194,7 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
 
       <div className="staff-dash">
         <div className="staff-col">
+          {toDecide.length > 0 && <ContractsCard contracts={toDecide} />}
           <Card title="À relancer" description="Alertes ouvertes et séances en retard" icon={<BellRing size={18} />} flush
             action={followUp.length > 0 && <Link className="btn btn-ghost btn-sm" to="/espace/alertes">Tout voir <ArrowRight size={16} aria-hidden="true" /></Link>}>
             {followUp.length ? (

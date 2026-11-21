@@ -1,7 +1,9 @@
 import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCheck, Flame, Headphones, LayoutDashboard, MessageSquare, Play, Sparkles, Target, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCheck, Clock3, Flame, GraduationCap, Headphones, LayoutDashboard, MessageSquare, Play, Sparkles, Target, Users } from 'lucide-react';
 import { isApiMode } from '../../app/config';
+import { languages, languageStatusLabels } from '../../domain/languages';
+import { levelLabel } from '../../integration/v2';
 import './home.css';
 
 const roles = [
@@ -20,6 +22,50 @@ const steps = [
 ];
 
 const week = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
+const openLanguages = languages.filter((language) => language.status === 'available');
+const soonLanguages = languages.filter((language) => language.status !== 'available');
+
+/** Langues de LinguaCap (liste statique) : les langues ouvertes en avant, les suivantes annoncées. */
+function LanguagesSection() {
+  return (
+    <section className="home-section is-tinted" id="langues">
+      <div className="container">
+        <header className="home-section-head">
+          <p className="eyebrow"><span className="eyebrow-line" /> Les langues</p>
+          <h2>L’allemand aujourd’hui, d’autres langues bientôt.</h2>
+          <p className="muted">Chaque langue ouvre avec son test de niveau, ses parcours et ses professeurs.</p>
+        </header>
+        <div className="home-languages">
+          {openLanguages.map((language) => (
+            <article key={language.id} className="home-lang-feature">
+              <div className="home-lang-feature-top">
+                <span className="home-lang-mono" aria-hidden="true">{language.id.toUpperCase()}</span>
+                <span className="home-lang-open"><i aria-hidden="true" />{languageStatusLabels.available}</span>
+              </div>
+              <h3>{language.name}</h3>
+              <p className="home-lang-native" lang={language.id}>{language.nativeName}</p>
+              <ul className="home-lang-levels" aria-label="Niveaux proposés">
+                {language.levels.map((level) => <li key={level}><GraduationCap size={15} aria-hidden="true" />{levelLabel(level)}</li>)}
+              </ul>
+              <p className="home-lang-text">Test de niveau, parcours sur mesure jusqu’à votre objectif et professeur qui vous accompagne.</p>
+            </article>
+          ))}
+          <div className="home-lang-soon">
+            <p className="home-lang-soon-title"><Clock3 size={15} aria-hidden="true" /> {languageStatusLabels.coming_soon} sur LinguaCap</p>
+            <ul className="home-lang-grid lc-stagger" aria-label="Langues bientôt disponibles">
+              {soonLanguages.map((language) => (
+                <li key={language.id} className="home-lang">
+                  <span className="home-lang-mono" aria-hidden="true">{language.id.toUpperCase()}</span>
+                  <span className="home-lang-name"><strong>{language.name}</strong><small lang={language.id} dir="auto">{language.nativeName}</small></span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /** Maquette animée de l'écran « Aujourd'hui » de l'élève (décorative). */
 function AppMockup() {
@@ -171,6 +217,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <LanguagesSection />
 
       <section className="home-cta">
         <div className="container home-cta-inner">

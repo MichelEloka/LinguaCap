@@ -116,6 +116,8 @@ export function GoalPanel({ enrollment, token, viewer, onChanged }: {
   const id = encodeURIComponent(enrollment.id);
   const learner = viewer === 'learner';
   const canPlan = !learner || !goal.accompanied;
+  // Inscription rattachée à un parcours démarré : la date cible relève du contrat (un changement direct répond 409).
+  const pathLinked = Boolean((enrollment as PlannedEnrollment & { pathId?: string | null }).pathId);
 
   useEffect(() => {
     let active = true;
@@ -150,7 +152,11 @@ export function GoalPanel({ enrollment, token, viewer, onChanged }: {
       'Disponibilités enregistrées : une nouvelle proposition a été calculée.');
     if (saved) setEditing(false);
   };
-  const apply = (suggestion: Suggestion) => saveAvailability(suggestion.availability, suggestion.targetDate);
+  const apply = (suggestion: Suggestion) => saveAvailability(suggestion.availability, pathLinked ? undefined : suggestion.targetDate);
+  const shownProposal = proposal && pathLinked
+    ? { ...proposal, suggestions: proposal.suggestions.filter((suggestion) => suggestion.kind !== 'target_date'
+      && !(suggestion as Suggestion & { requiresAmendment?: boolean }).requiresAmendment) }
+    : proposal;
   const validate = () => proposal && run(
     () => requestApi(`/learning/enrollments/${id}/proposal/validate`, token, { method: 'POST', body: { number: proposal.number } }),
     'Planning validé : les séances sont publiées.');
@@ -325,7 +331,7 @@ export function GoalPanel({ enrollment, token, viewer, onChanged }: {
                 {proposal.status === 'proposed' && !proposal.validatable && proposal.overflowCount === 0 && goal.prerequisiteMet && (
                   <Callout tone="info">{goal.accompanied ? 'Le professeur référent valide cette proposition.' : 'L’élève valide cette proposition.'}</Callout>
                 )}
-                <ProposalView proposal={proposal} busy={busy} onApply={(suggestion) => void apply(suggestion)} onValidate={() => void validate()} />
+                <ProposalView proposal={shownProposal ?? proposal} busy={busy} onApply={(suggestion) => void apply(suggestion)} onValidate={() => void validate()} />
               </>
             )}
           </Card>
@@ -336,7 +342,10 @@ export function GoalPanel({ enrollment, token, viewer, onChanged }: {
         <Drawer title={learner ? 'Mes disponibilités' : 'Disponibilités de l’élève'} onClose={() => setEditing(false)}
           description="Choisissez les jours et la durée des séances : une nouvelle proposition de planning sera calculée.">
           {error && <div role="alert"><Callout tone="warning" title="Enregistrement impossible">{error}</Callout></div>}
-          <AvailabilityEditor value={enrollment.availability} targetDate={goal.targetDate} busy={busy}
+          {pathLinked && (
+            <Callout tone="info">La date cible fait partie du contrat : pour la changer, proposez un avenant depuis {learner ? 'votre contrat' : 'l’onglet « Parcours »'}.</Callout>
+          )}
+          <AvailabilityEditor value={enrollment.availability} targetDate={pathLinked ? undefined : goal.targetDate} busy={busy}
             onSave={(days, targetDate) => void saveAvailability(days, targetDate)} />
         </Drawer>
       )}

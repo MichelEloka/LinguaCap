@@ -8,6 +8,7 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeMap;
 import java.util.function.Function;
 
@@ -24,8 +25,21 @@ final class Planner {
     /** Créneaux d'un jour de la semaine (1 = lundi) : nombre de séances et durée de chacune. */
     record Day(int weekday, int sessions, int minutes) {}
 
-    /** Élément à placer : activité, révision ou créneau d'évaluation. */
-    record Item(String id, String kind, String title, int minutes, String moduleId) {}
+    /**
+     * Élément à placer : activité, révision ou créneau d'évaluation. Dans un parcours multi-niveaux, l'élément porte
+     * son niveau ; une activité ajoutée par le professeur porte aussi sa version source et son ajout d'origine.
+     */
+    record Item(String id, String kind, String title, int minutes, String moduleId, String levelCode,
+                String sourceVersionId, String sourceActivityId, String additionId) {
+        /** Élément d'un parcours d'un seul niveau (forme historique). */
+        Item(String id, String kind, String title, int minutes, String moduleId) {
+            this(id, kind, title, minutes, moduleId, null, null, null, null);
+        }
+
+        Item withLevel(String level) {
+            return new Item(id, kind, title, minutes, moduleId, level, sourceVersionId, sourceActivityId, additionId);
+        }
+    }
 
     record Session(LocalDate date, int slot, int capacity, List<Item> items) {
         int minutes() {
@@ -101,17 +115,23 @@ final class Planner {
     }
 
     static Plan plan(LocalDate from, LocalDate target, List<Day> availability, List<Item> items) {
-        Plan plan = fill(from, target, availability, items);
-        if (plan.fits()) return plan;
-        return new Plan(plan.from(), plan.target(), plan.availability(), plan.sessions(), plan.overflow(),
-                plan.capacityMinutes(), plan.requiredMinutes(), plan.weeks(), suggestions(from, target, availability, items));
+        return plan(from, target, availability, items, MAX_DAYS);
     }
 
-    private static Plan fill(LocalDate from, LocalDate target, List<Day> availability, List<Item> items) {
+    /** Même calcul sur un horizon plus long (parcours de plusieurs niveaux). */
+    static Plan plan(LocalDate from, LocalDate target, List<Day> availability, List<Item> items, int maxDays) {
+        Plan plan = fill(from, target, availability, items, maxDays);
+        if (plan.fits()) return plan;
+        return new Plan(plan.from(), plan.target(), plan.availability(), plan.sessions(), plan.overflow(),
+                plan.capacityMinutes(), plan.requiredMinutes(), plan.weeks(),
+                suggestions(from, target, availability, items, maxDays));
+    }
+
+    private static Plan fill(LocalDate from, LocalDate target, List<Day> availability, List<Item> items, int maxDays) {
         Map<Integer, Day> byWeekday = new LinkedHashMap<>();
         for (Day day : availability) byWeekday.put(day.weekday(), day);
         List<Session> slots = new ArrayList<>();
-        LocalDate last = target.isAfter(from.plusDays(MAX_DAYS)) ? from.plusDays(MAX_DAYS) : target;
+        LocalDate last = target.isAfter(from.plusDays(maxDays)) ? from.plusDays(maxDays) : target;
         for (LocalDate date = from; !date.isAfter(last); date = date.plusDays(1)) {
             Day day = byWeekday.get(date.getDayOfWeek().getValue());
             if (day == null) continue;
@@ -130,6 +150,12 @@ final class Planner {
             while (index < slots.size()) {
                 Session current = slots.get(index);
                 boolean empty = current.items().isEmpty();
+                // Une séance ne mélange jamais deux niveaux : un changement de niveau passe au créneau suivant.
+                if (!empty && !Objects.equals(current.items().get(0).levelCode(), item.levelCode())) {
+                    index++;
+                    used = 0;
+                    continue;
+                }
                 // Un élément plus long qu'une séance occupe seule une séance entière plutôt que d'être coupé.
                 if (item.minutes() <= current.capacity() - used || empty && item.minutes() > current.capacity()) {
                     current.items().add(item);
@@ -168,12 +194,13 @@ final class Planner {
     }
 
     /** Propose d'augmenter la durée ou le nombre de séances, d'ajouter des jours ou de repousser l'échéance. */
-    private static List<Suggestion> suggestions(LocalDate from, LocalDate target, List<Day> availability, List<Item> items) {
+    private static List<Suggestion> suggestions(LocalDate from, LocalDate target, List<Day> availability, List<Item> items,
+                                                int maxDays) {
         List<Suggestion> suggestions = new ArrayList<>();
         if (availability.isEmpty()) {
             List<Day> weekdays = new ArrayList<>();
             for (int weekday = 1; weekday <= 5; weekday++) weekdays.add(new Day(weekday, 1, 30));
-            if (fill(from, target, weekdays, items).fits()) {
+            if (fill(from, target, weekdays, items, maxDays).fits()) {
                 suggestions.add(new Suggestion("days", "Ajouter une séance de 30 min du lundi au vendredi", weekdays, target));
             }
             return suggestions;
@@ -181,7 +208,7 @@ final class Planner {
         for (int minutes = step(maxMinutes(availability)); minutes <= 240; minutes += 5) {
             int duration = minutes;
             List<Day> candidate = map(availability, day -> new Day(day.weekday(), day.sessions(), Math.max(day.minutes(), duration)));
-            if (fill(from, target, candidate, items).fits()) {
+            if (fill(from, target, candidate, items, maxDays).fits()) {
                 suggestions.add(new Suggestion("minutes", "Allonger les séances à " + minutes + " min", candidate, target));
                 break;
             }
@@ -189,7 +216,7 @@ final class Planner {
         for (int extra = 1; extra <= 5; extra++) {
             int added = extra;
             List<Day> candidate = map(availability, day -> new Day(day.weekday(), Math.min(6, day.sessions() + added), day.minutes()));
-            if (fill(from, target, candidate, items).fits()) {
+            if (fill(from, target, candidate, items, maxDays).fits()) {
                 suggestions.add(new Suggestion("sessions", "Ajouter " + extra + " séance" + (extra > 1 ? "s" : "")
                         + " par jour travaillé", candidate, target));
                 break;
@@ -205,16 +232,22 @@ final class Planner {
                 }
             }
             candidate.sort(Comparator.comparingInt(Day::weekday));
-            if (fill(from, target, candidate, items).fits()) {
+            if (fill(from, target, candidate, items, maxDays).fits()) {
                 suggestions.add(new Suggestion("days", "Travailler les sept jours de la semaine", List.copyOf(candidate), target));
             }
         }
-        for (LocalDate later = target.plusDays(1); !later.isAfter(from.plusDays(MAX_DAYS)); later = later.plusDays(1)) {
-            if (fill(from, later, availability, items).fits()) {
-                suggestions.add(new Suggestion("target_date", "Repousser l’échéance au " + later, availability, later));
-                break;
-            }
+        // La capacité ne fait que croître avec l'échéance : la première date qui suffit se cherche par dichotomie.
+        LocalDate horizon = from.plusDays(maxDays);
+        if (!target.isBefore(horizon) || !fill(from, horizon, availability, items, maxDays).fits()) return suggestions;
+        long low = target.toEpochDay() + 1;
+        long high = horizon.toEpochDay();
+        while (low < high) {
+            long middle = (low + high) / 2;
+            if (fill(from, LocalDate.ofEpochDay(middle), availability, items, maxDays).fits()) high = middle;
+            else low = middle + 1;
         }
+        LocalDate later = LocalDate.ofEpochDay(low);
+        suggestions.add(new Suggestion("target_date", "Repousser l’échéance au " + later, availability, later));
         return suggestions;
     }
 

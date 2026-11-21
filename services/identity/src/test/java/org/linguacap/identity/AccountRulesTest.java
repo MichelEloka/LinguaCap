@@ -3,6 +3,7 @@ package org.linguacap.identity;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -15,10 +16,17 @@ import java.util.Set;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
+import org.linguacap.identity.IdentityResource.TeacherProfileRequest;
 
 class AccountRulesTest {
     private static final OffsetDateTime NOW = OffsetDateTime.parse("2026-11-21T10:00:00Z");
     private static final UUID ADMIN = UUID.randomUUID();
+    private static final Set<String> OPEN = Set.of("de");
+
+    private static TeacherProfileRequest teacherProfile(List<String> languages, List<String> levels, Integer maxLearners,
+                                                        Integer gradingDelayHours, String bio) {
+        return new TeacherProfileRequest(languages, levels, maxLearners, gradingDelayHours, bio);
+    }
 
     private static Account account(String role, String status, UUID teacherId, String... permissions) {
         return new Account(UUID.randomUUID(), "Compte " + role, role, teacherId, status, null, Set.of(permissions));
@@ -106,6 +114,86 @@ class AccountRulesTest {
         assertRefused(400, () -> AccountRules.checkTeacherAssignment(learner, active("staff")));
         assertRefused(400, () -> AccountRules.checkTeacherAssignment(learner, account("teacher", "disabled", null)));
         assertRefused(404, () -> AccountRules.checkTeacherAssignment(active("teacher"), active("teacher")));
+    }
+
+    @Test
+    void lesLanguesOuvertesSontLuesDansLaConfiguration() {
+        assertEquals(Set.of("de"), AccountRules.openLanguages("de"));
+        assertEquals(Set.of("de", "en"), AccountRules.openLanguages(" de, EN ,xx,,"));
+        assertTrue(AccountRules.openLanguages("").isEmpty());
+        assertTrue(AccountRules.openLanguages(null).isEmpty());
+        assertEquals(14, AccountRules.KNOWN_LANGUAGES.size());
+    }
+
+    @Test
+    void seulLEleveAutonomeChoisitSaLangueParmiLesLanguesOuvertes() {
+        Account autonomous = active("learner");
+        assertEquals("de", AccountRules.checkLanguageChoice(autonomous, " DE ", OPEN));
+        assertRefused(403, () -> AccountRules.checkLanguageChoice(account("learner", "active", UUID.randomUUID()), "de", OPEN));
+        assertRefused(403, () -> AccountRules.checkLanguageChoice(active("teacher"), "de", OPEN));
+        assertRefused(400, () -> AccountRules.checkLanguageChoice(autonomous, null, OPEN));
+        assertRefused(400, () -> AccountRules.checkLanguageChoice(autonomous, "xx", OPEN));
+        assertRefused(409, () -> AccountRules.checkLanguageChoice(autonomous, "en", OPEN));
+    }
+
+    @Test
+    void laLangueDUneInvitationRespecteLesLanguesDuProfesseur() {
+        assertNull(AccountRules.checkInvitationLanguage("learner", null, List.of("de"), OPEN));
+        assertNull(AccountRules.checkInvitationLanguage("learner", "  ", List.of("de"), OPEN));
+        assertEquals("de", AccountRules.checkInvitationLanguage("learner", "de", List.of("de"), OPEN));
+        // Professeur pas encore accueilli : toute langue ouverte est acceptée.
+        assertEquals("de", AccountRules.checkInvitationLanguage("learner", "De", List.of(), OPEN));
+        assertEquals("de", AccountRules.checkInvitationLanguage("learner", "de", null, OPEN));
+        assertRefused(409, () -> AccountRules.checkInvitationLanguage("learner", "de", List.of("en"), Set.of("de", "en")));
+        assertRefused(409, () -> AccountRules.checkInvitationLanguage("learner", "en", List.of("de", "en"), OPEN));
+        assertRefused(400, () -> AccountRules.checkInvitationLanguage("learner", "klingon", List.of(), OPEN));
+        assertRefused(400, () -> AccountRules.checkInvitationLanguage("teacher", "de", List.of(), OPEN));
+    }
+
+    @Test
+    void leQuestionnaireDuProfesseurEstNormalise() {
+        TeacherProfileRequest profile = AccountRules.checkTeacherProfile(
+                new TeacherProfileRequest(List.of("DE", " de"), List.of("b1", "A1", "A1"), 12, 48, "  Bonjour  "), OPEN);
+        assertEquals(List.of("de"), profile.languages());
+        assertEquals(List.of("A1", "B1"), profile.levels());
+        assertEquals(12, profile.maxLearners());
+        assertEquals(48, profile.gradingDelayHours());
+        assertEquals("Bonjour", profile.bio());
+
+        TeacherProfileRequest minimal = AccountRules.checkTeacherProfile(
+                new TeacherProfileRequest(List.of("de"), List.of("A2"), null, null, null), OPEN);
+        assertNull(minimal.maxLearners());
+        assertNull(minimal.gradingDelayHours());
+        assertEquals("", minimal.bio());
+    }
+
+    @Test
+    void leQuestionnaireDuProfesseurRefuseLesReponsesInvalides() {
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(null, OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of(), List.of("A1"), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of(), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(null, List.of("A1"), null, null, ""), OPEN));
+        assertRefused(409, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de", "en"), List.of("A1"), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("xx"), List.of("A1"), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("D1"), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(
+                teacherProfile(List.of("de"), Arrays.asList("A1", null), null, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("A1"), 0, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("A1"), 501, null, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("A1"), null, 36, ""), OPEN));
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(
+                teacherProfile(List.of("de"), List.of("A1"), null, null, "x".repeat(501)), OPEN));
+    }
+
+    @Test
+    void leCompteGardeSonConstructeurHistoriqueEtExposeSaLangue() {
+        Account legacy = active("learner");
+        assertNull(legacy.languageId());
+        assertFalse(legacy.accompanied());
+        Account learner = new Account(UUID.randomUUID(), "Élève", "learner", UUID.randomUUID(), "active", null, Set.of(), "de");
+        assertTrue(learner.accompanied());
+        assertEquals("de", learner.toProfile().languageId());
+        assertEquals(learner.teacherId(), learner.toProfile().teacherId());
     }
 
     @Test

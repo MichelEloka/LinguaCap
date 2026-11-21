@@ -1,31 +1,22 @@
-import { useEffect, useId, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Activity, AlarmClock, AlertTriangle, ArrowLeft, BarChart3, Bell, CalendarClock, CalendarDays, Check, CheckCircle2, ClipboardCheck,
-  Clock, ListChecks, MessageCircle, MessagesSquare, PauseCircle, Play, RefreshCw, Route, Send, ShieldCheck, Target, Timer, Trophy,
+  Clock, FileSignature, ListChecks, MessageCircle, MessagesSquare, PauseCircle, Play, RefreshCw, Route, Send, ShieldCheck, Target, Timer, Trophy,
 } from 'lucide-react';
 import { Badge, EmptyState, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
 import {
-  Avatar, Bars, Card, Drawer, ProgressRing, Segmented, Skeleton, SkeletonCard, TabPanel, Tabs, Timeline, useToast, type TimelineEntry,
+  Avatar, Bars, Card, ProgressRing, Segmented, Skeleton, SkeletonCard, TabPanel, Tabs, Timeline, type TimelineEntry,
 } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { formatDue, sessionStatus, type Grade, type SessionSummary } from './LearnerSession';
 import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
+import { StaffPathTab } from './staff-path';
 import type { TrackingAlert, TrackingSummary } from './StaffPilot';
 import {
   DateTile, StaffComposer, StaffError, dateTime, dayOffset, errorText, formatMinutes, goalStatusOf, mediumDate, plural, relativeDay, shortDate,
 } from './staff-kit';
-
-interface Track {
-  versionId: string;
-  levelCode: string;
-  levelTitle: string;
-  number: number;
-  moduleCount: number;
-  activityCount: number;
-  totalMinutes: number;
-  prerequisiteLevelCode: string | null;
-}
+import { learnersAwaitingDecision, usePendingContracts } from './staff-contracts';
 
 interface Sheet {
   profile: { id: string; displayName: string };
@@ -55,101 +46,10 @@ type SessionFilter = 'toutes' | 'a-faire' | 'retard' | 'terminees';
 const sessionFilters: { value: SessionFilter; label: string }[] = [
   { value: 'toutes', label: 'Toutes' }, { value: 'a-faire', label: 'À faire' }, { value: 'retard', label: 'En retard' }, { value: 'terminees', label: 'Terminées' },
 ];
-const tabIds = ['seances', 'objectif', 'resultats', 'messages'] as const;
+const tabIds = ['seances', 'parcours', 'resultats', 'messages'] as const;
 type SheetTab = typeof tabIds[number];
-
-function inDays(days: number) {
-  const date = new Date();
-  date.setDate(date.getDate() + days);
-  const pad = (value: number) => String(value).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
-}
-
-/** Attribution d'un parcours publié et de l'échéance de la première séance (DEV-029). */
-function AssignTrack({ learnerId, token, formId, onAssigned, onBusy }: {
-  learnerId: string; token: string; formId: string; onAssigned: () => void; onBusy: (busy: boolean) => void;
-}) {
-  const [tracks, setTracks] = useState<Track[] | null>(null);
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-
-  useEffect(() => {
-    let active = true;
-    requestApi<Track[]>('/tracks', token).then(
-      (data) => { if (active) setTracks(data); },
-      (failure: unknown) => { if (active) setError(errorText(failure)); },
-    );
-    return () => { active = false; };
-  }, [token]);
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy) return;
-    const form = new FormData(event.currentTarget);
-    setBusy(true);
-    onBusy(true);
-    setError('');
-    try {
-      const targetDate = String(form.get('targetDate') ?? '');
-      await requestApi<PlannedEnrollment>('/learning/enrollments', token, {
-        method: 'POST',
-        body: {
-          learnerId, trackVersionId: String(form.get('trackVersionId')), startLevel: String(form.get('startLevel')),
-          template: String(form.get('template')), startDate: String(form.get('startDate')),
-          ...(targetDate ? { targetDate } : {}),
-        },
-      });
-      onAssigned();
-    } catch (failure) {
-      setError(errorText(failure));
-    } finally {
-      setBusy(false);
-      onBusy(false);
-    }
-  }
-
-  if (tracks === null) return error ? <StaffError message={error} /> : <SkeletonCard lines={4} label="Chargement des parcours…" />;
-  if (tracks.length === 0) {
-    return <EmptyState icon={<Route size={26} />} title="Aucun parcours publié" description="Publiez une version de parcours dans le catalogue pour l’attribuer." />;
-  }
-  return (
-    <form id={formId} className="staff-form" onSubmit={submit}>
-      <label>Parcours
-        <select name="trackVersionId" required defaultValue={tracks[0].versionId}>
-          {tracks.map((track) => (
-            <option key={track.versionId} value={track.versionId}>
-              {track.levelTitle} · version {track.number} · {track.activityCount} activités, {track.totalMinutes} min
-            </option>
-          ))}
-        </select>
-      </label>
-      <div className="staff-form-row">
-        <label>Niveau de départ
-          <select name="startLevel" defaultValue="A0">
-            <option value="A0">Débutant</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option>
-          </select>
-        </label>
-        <label>Début<input type="date" name="startDate" required min={inDays(0)} defaultValue={inDays(0)} /></label>
-      </div>
-      <fieldset className="staff-rhythm">
-        <legend>Rythme</legend>
-        <label className="staff-rhythm-option">
-          <input type="radio" name="template" value="intensive" defaultChecked />
-          <span><strong>Intensif</strong><small>2 séances de 45 min par jour · A1 en un mois, A2 en deux mois</small></span>
-        </label>
-        <label className="staff-rhythm-option">
-          <input type="radio" name="template" value="standard" />
-          <span><strong>Standard</strong><small>1 séance de 30 min du lundi au vendredi</small></span>
-        </label>
-      </fieldset>
-      <label>Date cible (facultative : la durée du rythme par défaut)<input type="date" name="targetDate" min={inDays(1)} /></label>
-      {tracks.some((track) => track.prerequisiteLevelCode) && (
-        <p className="staff-hint">Un parcours A2 suppose A1 validé dans LinguaCap ou confirmé par le diagnostic de l’élève.</p>
-      )}
-      {error && <p className="inline-message warning" role="alert">{error}</p>}
-    </form>
-  );
-}
+/** Anciennes adresses : l'onglet « Objectif et planning » est devenu « Parcours ». */
+const tabAliases: Record<string, SheetTab> = { objectif: 'parcours' };
 
 function Figure({ icon, label, value, tone }: { icon: ReactNode; label: string; value: ReactNode; tone?: 'warning' | 'success' }) {
   return (
@@ -182,7 +82,7 @@ function SessionRow({ session }: { session: SessionSummary }) {
   );
 }
 
-function SessionsTab({ sheet, onAssign, onPlanning }: { sheet: Sheet; onAssign: () => void; onPlanning: () => void }) {
+function SessionsTab({ sheet, onPath }: { sheet: Sheet; onPath: () => void }) {
   const [filter, setFilter] = useState<SessionFilter>('toutes');
   const enrollment = sheet.enrollment;
   const sessions = enrollment?.sessions ?? [];
@@ -202,11 +102,11 @@ function SessionsTab({ sheet, onAssign, onPlanning }: { sheet: Sheet; onAssign: 
           ? ` · ${plural(enrollment.supersededSessions, 'séance replanifiée', 'séances replanifiées')}` : ''}` : undefined}
         action={sessions.length > 0 && <Segmented label="Filtrer les séances" value={filter} onChange={setFilter} options={sessionFilters} />}>
         {!enrollment ? (
-          <EmptyState icon={<Route size={26} />} title="Aucun parcours attribué" description="Attribuez un parcours publié pour planifier les séances."
-            action={<button type="button" className="btn btn-primary" onClick={onAssign}>Attribuer un parcours</button>} />
+          <EmptyState icon={<Route size={26} />} title="Pas encore de séances" description="Les séances apparaîtront dès que l’élève aura construit et validé son parcours."
+            action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le parcours</button>} />
         ) : sessions.length === 0 ? (
           <EmptyState icon={<CalendarClock size={26} />} title="Séances bientôt publiées" description="Les séances seront publiées à la validation du planning."
-            action={<button type="button" className="btn btn-outline" onClick={onPlanning}>Voir le planning</button>} />
+            action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le planning</button>} />
         ) : visible.length === 0 ? (
           <EmptyState icon={<CheckCircle2 size={26} />} title="Aucune séance dans ce filtre" />
         ) : (
@@ -382,19 +282,17 @@ function SheetSkeleton() {
 }
 
 export function LearnerSheetPage({ learnerId, token, canMessage = false }: { learnerId: string; token: string; canMessage?: boolean }) {
-  const toast = useToast();
   const [params, setParams] = useSearchParams();
   const [sheet, setSheet] = useState<Sheet | null>(null);
   const [error, setError] = useState('');
   const [reload, setReload] = useState(0);
   const [focusComposer, setFocusComposer] = useState(false);
-  const [assignOpen, setAssignOpen] = useState(false);
-  const [assigning, setAssigning] = useState(false);
-  const formId = useId();
   const id = encodeURIComponent(learnerId);
   const refresh = () => setReload((value) => value + 1);
-  const requested = params.get('onglet');
-  const tab: SheetTab = tabIds.find((item) => item === requested) ?? 'seances';
+  const requested = params.get('onglet') ?? '';
+  const tab: SheetTab = tabIds.find((item) => item === requested) ?? tabAliases[requested] ?? 'seances';
+  const pending = usePendingContracts(token);
+  const contractToDecide = learnersAwaitingDecision(pending.data).has(learnerId);
 
   function openTab(next: string) {
     setFocusComposer(false);
@@ -438,6 +336,8 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
                     : sheet.goal && <Badge tone="blue">Objectif {sheet.goal.level}</Badge>}
                   <Badge tone={status.tone}>{status.label}</Badge>
                   {openAlert && <Badge tone="red"><Bell size={12} aria-hidden="true" /> Alerte ouverte</Badge>}
+                  {contractToDecide && <button type="button" className="badge badge-amber staff-badge-button" onClick={() => openTab('parcours')}>
+                    <FileSignature size={12} aria-hidden="true" /> Contrat à valider</button>}
                 </span>
               </div>
               <div className="staff-profile-actions">
@@ -469,21 +369,16 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
 
           <Tabs label="Sections de la fiche" idPrefix="fiche" value={tab} onChange={openTab} tabs={[
             { id: 'seances', label: 'Séances', icon: <CalendarDays size={17} aria-hidden="true" />, count: sessions.length },
-            { id: 'objectif', label: 'Objectif et planning', icon: <Target size={17} aria-hidden="true" /> },
+            { id: 'parcours', label: 'Parcours', icon: <Route size={17} aria-hidden="true" /> },
             { id: 'resultats', label: 'Résultats', icon: <BarChart3 size={17} aria-hidden="true" />, count: sheet.results.length },
             { id: 'messages', label: 'Messages', icon: <MessagesSquare size={17} aria-hidden="true" />, count: sheet.messages.length },
           ]} />
           <TabPanel id={tab} idPrefix="fiche">
-            {tab === 'seances' && <SessionsTab sheet={sheet} onAssign={() => setAssignOpen(true)} onPlanning={() => openTab('objectif')} />}
-            {tab === 'objectif' && (
-              <div className="staff-page-body">
-                {(!enrollment || enrollment.status !== 'active') && (
-                  <Card title="Attribuer un parcours" icon={<Route size={18} />} className="staff-assign-card"
-                    description={enrollment ? 'Le parcours précédent est terminé : attribuez le suivant.' : 'Choisissez un parcours publié, le rythme et la date de début.'}
-                    action={<button type="button" className="btn btn-primary btn-sm" onClick={() => setAssignOpen(true)}>Attribuer</button>} />
-                )}
-                {enrollment && <GoalPanel enrollment={enrollment} token={token} viewer="staff" onChanged={refresh} />}
-              </div>
+            {tab === 'seances' && <SessionsTab sheet={sheet} onPath={() => openTab('parcours')} />}
+            {tab === 'parcours' && (
+              <StaffPathTab learnerId={learnerId} learnerName={sheet.profile.displayName} token={token}
+                onChanged={() => { refresh(); pending.reload(); }}
+                legacy={enrollment ? <GoalPanel enrollment={enrollment} token={token} viewer="staff" onChanged={refresh} /> : undefined} />
             )}
             {tab === 'resultats' && <ResultsTab sheet={sheet} />}
             {tab === 'messages' && <MessagesTab sheet={sheet} learnerId={learnerId} token={token} canMessage={canMessage} autoFocus={focusComposer} onSent={refresh} />}
@@ -491,19 +386,6 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
         </>
       )}
 
-      {assignOpen && (
-        <Drawer title="Attribuer un parcours" description={sheet?.profile.displayName} onClose={() => setAssignOpen(false)}
-          footer={<>
-            <button type="button" className="btn btn-outline" onClick={() => setAssignOpen(false)}>Annuler</button>
-            <button type="submit" form={formId} className="btn btn-primary" disabled={assigning}>{assigning ? 'Attribution…' : 'Attribuer le parcours'}</button>
-          </>}>
-          <AssignTrack learnerId={learnerId} token={token} formId={formId} onBusy={setAssigning} onAssigned={() => {
-            setAssignOpen(false);
-            toast('Parcours attribué : le planning est proposé dans l’onglet Objectif et planning.');
-            refresh();
-          }} />
-        </Drawer>
-      )}
     </div>
   );
 }

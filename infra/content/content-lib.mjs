@@ -45,6 +45,25 @@ export function allMedia(level) {
   return [...level.modules.flatMap((module) => module.media ?? []), ...(level.media ?? [])];
 }
 
+/** Banque du test de niveau (content/de/placement/placement.json) : paliers, questions, sons d'écoute. */
+export const placementFile = join(contentDir, 'placement', 'placement.json');
+
+/** Test de niveau source, ou null s'il n'est pas encore rédigé. */
+export function loadPlacement() {
+  return existsSync(placementFile) ? JSON.parse(readFileSync(placementFile, 'utf8')) : null;
+}
+
+/** Médias du test de niveau, chacun avec le palier (a1, a2, b1…) de la question qui l'utilise. */
+export function placementMedia(placement) {
+  const tiers = new Map();
+  for (const tier of placement?.tiers ?? []) {
+    for (const question of tier.questions ?? []) {
+      for (const item of question.placements ?? []) if (!tiers.has(item.media)) tiers.set(item.media, tier.code.toLowerCase());
+    }
+  }
+  return (placement?.media ?? []).map((media) => ({ ...media, tier: tiers.get(media.key) ?? null }));
+}
+
 /** Transcription affichée à l'élève : une réplique par ligne, précédée du nom du locuteur s'il est donné. */
 export function transcriptOf(media) {
   if (media.native) return media.transcript.trim();

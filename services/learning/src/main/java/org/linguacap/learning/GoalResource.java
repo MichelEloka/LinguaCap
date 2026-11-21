@@ -30,7 +30,11 @@ import org.linguacap.common.IdentityClient;
 import org.linguacap.common.ServiceClient;
 import org.linguacap.learning.Planner.Day;
 
-/** Objectif, disponibilités, diagnostic, propositions de planning, validation, pause et reprise (incrément 4). */
+/**
+ * Objectif, disponibilités, diagnostic, propositions de planning, validation, pause et reprise (incrément 4).
+ * Sur une inscription liée à un parcours, ces routes historiques délèguent au parcours (PathResource) et gardent
+ * leurs formes : la proposition renvoyée est un sur-ensemble de l'ancienne, avec les mêmes noms de champs.
+ */
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
 public class GoalResource {
@@ -40,6 +44,7 @@ public class GoalResource {
     @Inject ServiceClient services;
     @Inject GoalStore goals;
     @Inject CourseStore courses;
+    @Inject PathResource pathResource;
     @Inject ObjectMapper mapper;
 
     @ConfigProperty(name = "lingua.services.catalogue")
@@ -94,9 +99,10 @@ public class GoalResource {
         String prerequisite = text(track.path("planning").path("prerequisiteLevelCode"));
         boolean prerequisiteMet = prerequisite == null || goals.hasValidated(learnerId, prerequisite);
 
-        UUID enrollmentId = goals.create(learnerId, levelCode, request.trackVersionId(), track.path("number").asInt(),
-                callerId, startLevel, start, target, template, prerequisite, prerequisiteMet, model.days());
-        propose(goals.byId(enrollmentId), callerId, null);
+        // L'attribution crée un parcours d'un niveau (origine « assignment ») : contrat n°1 accepté d'office,
+        // proposition n°1 à valider par le professeur comme avant.
+        UUID enrollmentId = pathResource.assign(learnerId, track, callerId, access.role(callerId), startLevel, start,
+                target, template, prerequisite, prerequisiteMet, model.days());
         return Response.status(Response.Status.CREATED).entity(view(goals.byId(enrollmentId), callerId)).build();
     }
 
@@ -104,11 +110,16 @@ public class GoalResource {
     @PUT
     @Path("/enrollments/{id}/availability")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ProposalView availability(@PathParam("id") UUID enrollmentId, AvailabilityRequest request) {
+    public Object availability(@PathParam("id") UUID enrollmentId, AvailabilityRequest request) {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
         active(row);
         if (request == null) throw HttpError.badRequest("Les disponibilités sont requises.");
+        PathStore.PathRow path = pathResource.pathOfEnrollment(enrollmentId);
+        if (path != null) {
+            return pathResource.changeAvailability(path, access.viewer(callerId, row.learnerId()), request.days(),
+                    request.targetDate() == null ? null : date(request.targetDate()));
+        }
         List<Day> days = GoalRules.checkAvailability(request.days());
         LocalDate target = request.targetDate() == null ? null : date(request.targetDate());
         goals.replaceAvailability(enrollmentId, days, target);
@@ -117,9 +128,15 @@ public class GoalResource {
 
     @GET
     @Path("/enrollments/{id}/proposal")
-    public ProposalView proposal(@PathParam("id") UUID enrollmentId) {
+    public Object proposal(@PathParam("id") UUID enrollmentId) {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
+        PathStore.PathRow path = pathResource.pathOfEnrollment(enrollmentId);
+        if (path != null) {
+            Object current = pathResource.currentProposal(path, access.viewer(callerId, row.learnerId()));
+            if (current == null) throw HttpError.notFound("Aucune proposition de planning pour ce parcours.");
+            return current;
+        }
         GoalStore.ProposalRow proposal = goals.proposal(enrollmentId);
         if (proposal == null) throw HttpError.notFound("Aucune proposition de planning pour ce parcours.");
         return proposalView(proposal, row, callerId);
@@ -133,6 +150,12 @@ public class GoalResource {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
         if (request == null || request.number() == null) throw HttpError.badRequest("Indiquez la proposition à valider.");
+        PathStore.PathRow path = pathResource.pathOfEnrollment(enrollmentId);
+        if (path != null) {
+            active(row);
+            pathResource.validateProposal(path, access.viewer(callerId, row.learnerId()), request.number());
+            return view(goals.byId(enrollmentId), callerId);
+        }
         if (!canValidate(callerId, row)) {
             throw HttpError.forbidden(accompanied(callerId, row)
                     ? "Le professeur référent valide le planning d’un élève accompagné."
@@ -149,6 +172,12 @@ public class GoalResource {
     public EnrollmentView pause(@PathParam("id") UUID enrollmentId) {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
+        PathStore.PathRow path = pathResource.pathOfEnrollment(enrollmentId);
+        if (path != null) {
+            active(row);
+            pathResource.pausePath(path, access.viewer(callerId, row.learnerId()));
+            return view(goals.byId(enrollmentId), callerId);
+        }
         requirePlanner(callerId, row);
         goals.pause(enrollmentId);
         return view(goals.byId(enrollmentId), callerId);
@@ -158,13 +187,18 @@ public class GoalResource {
     @POST
     @Path("/enrollments/{id}/resume")
     @Consumes(MediaType.APPLICATION_JSON)
-    public ProposalView resume(@PathParam("id") UUID enrollmentId, ResumeRequest request) {
+    public Object resume(@PathParam("id") UUID enrollmentId, ResumeRequest request) {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
-        requirePlanner(callerId, row);
         if (request == null || request.resumeDate() == null) throw HttpError.badRequest("Indiquez la date de reprise.");
         LocalDate resume = date(request.resumeDate());
         LocalDate target = request.targetDate() == null ? null : date(request.targetDate());
+        PathStore.PathRow path = pathResource.pathOfEnrollment(enrollmentId);
+        if (path != null) {
+            active(row);
+            return pathResource.resumePath(path, access.viewer(callerId, row.learnerId()), resume, target);
+        }
+        requirePlanner(callerId, row);
         GoalRules.checkDates(resume, target == null ? row.targetDate() : target, LocalDate.now(CourseRules.PILOT_ZONE));
         goals.planResume(enrollmentId, resume, target);
         return propose(goals.byId(enrollmentId), callerId, resume);
@@ -216,7 +250,7 @@ public class GoalResource {
         }
         boolean autonomous = !accompanied(learnerId, row);
         goals.recordDiagnostic(enrollmentId, UUID.fromString(request.attemptId()), acquired, prerequisite, autonomous, learnerId);
-        if (autonomous) propose(goals.byId(enrollmentId), learnerId, null);
+        if (autonomous) repropose(goals.byId(enrollmentId), learnerId);
         return view(goals.byId(enrollmentId), learnerId);
     }
 
@@ -245,11 +279,21 @@ public class GoalResource {
             prerequisiteMet = true;
         }
         goals.confirmStartingPoint(enrollmentId, List.copyOf(new HashSet<>(request.acquiredModules())), prerequisiteMet, callerId);
-        propose(goals.byId(enrollmentId), callerId, null);
+        repropose(goals.byId(enrollmentId), callerId);
         return view(goals.byId(enrollmentId), callerId);
     }
 
     // --- Calcul d'une proposition --------------------------------------------------------------------------
+
+    /** Nouvelle proposition après un changement du point de départ : celle du parcours s'il y en a un. */
+    private void repropose(GoalStore.EnrollmentRow row, UUID callerId) {
+        PathStore.PathRow path = pathResource.pathOfEnrollment(row.id());
+        if (path != null) {
+            if ("active".equals(path.status())) pathResource.repropose(path, access.viewer(callerId, row.learnerId()));
+            return;
+        }
+        propose(row, callerId, null);
+    }
 
     private ProposalView propose(GoalStore.EnrollmentRow row, UUID callerId, LocalDate resumeDate) {
         JsonNode track = track(row.trackVersionId(), callerId);
@@ -308,7 +352,8 @@ public class GoalResource {
 
     private EnrollmentView view(GoalStore.EnrollmentRow row, UUID callerId) {
         JsonNode planning = track(row.trackVersionId(), callerId).path("planning");
-        GoalStore.ProposalRow proposal = goals.proposal(row.id());
+        PathStore.PathRow path = pathResource.pathOfEnrollment(row.id());
+        GoalStore.ProposalRow proposal = path == null ? goals.proposal(row.id()) : null;
         CourseResource.EnrollmentSessions sessions = courses.sessions(row.id());
         GoalView goal = new GoalView(row.startLevel(), row.levelCode(), row.startDate().toString(),
                 row.targetDate() == null ? null : row.targetDate().toString(),
@@ -320,13 +365,21 @@ public class GoalResource {
                 row.diagnosticAttemptId() == null ? null : row.diagnosticAttemptId().toString(), row.diagnosticModules(),
                 row.diagnosticPrerequisite(), row.startingPointConfirmedAt() == null ? null : row.startingPointConfirmedAt().toString(),
                 row.validatedRevision(), accompanied(callerId, row));
-        ProposalSummary summary = proposal == null ? null : new ProposalSummary(proposal.number(), proposal.status(),
-                proposal.capacityMinutes(), proposal.requiredMinutes(), proposal.overflowCount(),
-                proposal.createdAt().toString(), "proposed".equals(proposal.status()) && proposal.overflowCount() == 0
-                && row.prerequisiteMet() && canValidate(callerId, row));
+        ProposalSummary summary;
+        if (path != null) {
+            // Proposition du parcours : la validation porte sur le niveau actif.
+            summary = "active".equals(row.status()) && path.open()
+                    ? pathResource.proposalSummary(path, access.viewer(callerId, row.learnerId())) : null;
+        } else {
+            summary = proposal == null ? null : new ProposalSummary(proposal.number(), proposal.status(),
+                    proposal.capacityMinutes(), proposal.requiredMinutes(), proposal.overflowCount(),
+                    proposal.createdAt().toString(), "proposed".equals(proposal.status()) && proposal.overflowCount() == 0
+                    && row.prerequisiteMet() && canValidate(callerId, row));
+        }
         return new EnrollmentView(row.id(), row.learnerId(), row.levelCode(), row.trackVersionId(),
                 row.trackVersionNumber(), row.assignedBy(), row.assignedAt().toString(), row.status(), goal,
-                goals.availability(row.id()), summary, sessions.current(), sessions.superseded());
+                goals.availability(row.id()), summary, sessions.current(), sessions.superseded(),
+                path == null ? null : path.id());
     }
 
     // --- Droits --------------------------------------------------------------------------------------------
@@ -415,5 +468,5 @@ public class GoalResource {
     public record EnrollmentView(UUID id, UUID learnerId, String levelCode, UUID trackVersionId, int trackVersionNumber,
                                  UUID assignedBy, String assignedAt, String status, GoalView goal, List<Day> availability,
                                  ProposalSummary proposal, List<CourseResource.SessionSummary> sessions,
-                                 int supersededSessions) {}
+                                 int supersededSessions, UUID pathId) {}
 }

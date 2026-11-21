@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 // Contrôle des contenus pédagogiques (DEV-094) : structure, identifiants, corrigés, supports, textes alternatifs,
 // transcriptions et couverture des quatre compétences. Usage :
-//   node infra/content/check-content.mjs                      tous les niveaux de content/de
+//   node infra/content/check-content.mjs                      tous les niveaux de content/de et le test de niveau
 //   node infra/content/check-content.mjs content/de/a1/02-zahlen.json   un module
+//   node infra/content/check-content.mjs content/de/placement/placement.json   le test de niveau seul
 import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
 import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -310,6 +311,103 @@ function checkLevel(directory) {
     + `${context.questions} questions d’exercice · ${audio} sons · ${images} images · compétences ${COMPETENCES.map((c) => `${c} ${context.coverage[c] ?? 0}`).join(', ')}`);
 }
 
+const TIER_CODES = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
+
+/**
+ * Test de niveau : paliers successifs à partir de A1, banque de 18 questions par palier (12 lecture, 6 écoute) pour
+ * 12 tirées (8 et 4), trois choix et une seule bonne réponse, un son par question d'écoute (transcription masquée).
+ */
+function checkPlacement(file) {
+  const placement = JSON.parse(readFileSync(file, 'utf8'));
+  const where = 'placement/placement.json';
+  const keys = new Map();
+  if (!/^[a-z]{2}$/.test(placement.languageId ?? '')) fail(where, 'languageId : code de langue à deux lettres');
+  sized(where, placement.title, 3, 120, 'le titre');
+  sized(where, placement.description, 20, 2000, 'la présentation');
+  if (!Array.isArray(placement.sources) || placement.sources.length === 0) fail(where, 'indiquer au moins une source');
+  checkMedia(where, placement.media ?? [], keys);
+  // Modules des parcours de chaque niveau : moduleRef (facultatif) rattache une question à un module pour les statistiques.
+  const modulesOf = (code) => {
+    const levelFile = join(root, 'content/de', code.toLowerCase(), 'level.json');
+    return existsSync(levelFile) ? new Set((JSON.parse(readFileSync(levelFile, 'utf8')).modules ?? []).map((entry) => entry.id)) : null;
+  };
+  const ids = new Set();
+  const used = new Set();
+  const tiers = placement.tiers ?? [];
+  if (tiers.length === 0) fail(where, 'au moins un palier attendu');
+  tiers.forEach((tier, index) => {
+    const at = `${where} › palier ${tier.code}`;
+    if (TIER_CODES.indexOf(tier.code) !== index) fail(at, 'les paliers se suivent à partir de A1 (A1, A2, B1…)');
+    sized(at, tier.title, 3, 120, 'le titre');
+    if (!(tier.passPercent >= 50 && tier.passPercent <= 90)) fail(at, 'seuil de réussite de 50 à 90 %');
+    if (!(tier.minCompetencePercent >= 0 && tier.minCompetencePercent <= tier.passPercent)) {
+      fail(at, 'seuil par compétence de 0 % au seuil de réussite');
+    }
+    const questions = tier.questions ?? [];
+    if (!Number.isInteger(tier.drawCount) || tier.drawCount < 1 || tier.drawCount > questions.length) {
+      fail(at, `drawCount de 1 à ${questions.length} (taille de la banque)`);
+    }
+    const count = { lecture: 0, ecoute: 0 };
+    let longest = 0;
+    const keysUsed = {};
+    const modules = modulesOf(tier.code ?? '');
+    for (const question of questions) {
+      const questionAt = `${at} › question ${question?.id}`;
+      if (!ID.test(question?.id ?? '') || ids.has(question.id)) fail(questionAt, 'identifiant invalide ou en double dans le test');
+      ids.add(question.id);
+      if (!['lecture', 'ecoute'].includes(question.competence)) fail(questionAt, 'compétence lecture ou ecoute attendue');
+      else count[question.competence]++;
+      sized(questionAt, question.prompt, 10, 1500, 'l’énoncé');
+      if (question.moduleRef !== null && question.moduleRef !== undefined
+          && !(modules ? modules.has(question.moduleRef) : ID.test(question.moduleRef))) {
+        fail(questionAt, `moduleRef « ${question.moduleRef} » : un module du parcours ${tier.code} ou null`);
+      }
+      const options = question.options ?? [];
+      if (options.length !== 3) fail(questionAt, 'trois choix attendus (le choix « Je ne sais pas » est ajouté au test)');
+      const optionIds = new Set();
+      for (const option of options) {
+        if (!ID.test(option?.id ?? '') || option.id === 'dontknow' || optionIds.has(option.id)) {
+          fail(questionAt, `choix « ${option?.id} » invalide, réservé ou en double`);
+        }
+        optionIds.add(option.id);
+        sized(questionAt, option.label, 1, 300, `le libellé du choix ${option.id}`);
+        if (typeof option.correct !== 'boolean') fail(questionAt, `le choix ${option.id} doit indiquer correct: true ou false`);
+      }
+      const right = options.filter((option) => option.correct === true);
+      if (right.length !== 1) fail(questionAt, 'une seule bonne réponse attendue');
+      const labels = options.map((option) => text(option.label).toLowerCase());
+      if (new Set(labels).size !== labels.length) fail(questionAt, 'deux choix ont le même libellé');
+      if (right.length === 1) {
+        keysUsed[right[0].id] = (keysUsed[right[0].id] ?? 0) + 1;
+        const lengths = options.map((option) => text(option.label).length);
+        const max = Math.max(...lengths);
+        if (text(right[0].label).length === max && lengths.filter((length) => length === max).length === 1) longest++;
+      }
+      checkPlacements(questionAt, question.placements, [], keys, used);
+      const sounds = (question.placements ?? []).filter((item) => item.usage === 'audio');
+      if (question.competence === 'ecoute' && sounds.length !== 1) fail(questionAt, 'une question d’écoute a exactement un son');
+      if (question.competence === 'lecture' && sounds.length > 0) fail(questionAt, 'une question de lecture n’a pas de son');
+      if (sounds.some((item) => (item.transcriptVisibility ?? 'hidden') !== 'hidden')) {
+        fail(questionAt, 'la transcription d’un son du test reste masquée (hidden)');
+      }
+      for (const item of sounds) {
+        if (!existsSync(join(root, 'content/de/media/audio', `${item.media}.mp3`))) warn(questionAt, `son ${item.media}.mp3 pas encore généré`);
+      }
+    }
+    if (count.lecture < 8 || count.ecoute < 4) fail(at, `au moins 8 questions de lecture et 4 d’écoute (actuellement ${count.lecture} et ${count.ecoute})`);
+    if (count.lecture !== 12 || count.ecoute !== 6) warn(at, `banque attendue : 12 lecture et 6 écoute (actuellement ${count.lecture} et ${count.ecoute})`);
+    // Pas d'indice de forme : la bonne réponse n'est ni toujours au même rang, ni trop souvent le choix le plus long.
+    if (Object.values(keysUsed).some((value) => value > questions.length / 2)) warn(at, 'bonne réponse trop souvent au même rang');
+    if (longest > questions.length / 3) warn(at, `bonne réponse strictement la plus longue dans ${longest} questions sur ${questions.length}`);
+    console.log(`Test de niveau ${tier.code} · ${questions.length} questions (${count.lecture} lecture, ${count.ecoute} écoute) · `
+      + `${tier.drawCount} tirées · seuil ${tier.passPercent} %`);
+  });
+  for (const item of placement.media ?? []) {
+    if (!used.has(item.key)) fail(`${where} › média ${item.key}`, 'jamais utilisé');
+    if (!/^placement-/.test(item.key ?? '')) fail(`${where} › média ${item.key}`, 'la clé d’un son du test commence par « placement- »');
+  }
+}
+
 // --level-only : contrôle level.json (diagnostic, évaluations, médias) sans relire les fichiers de modules.
 const levelOnly = process.argv.includes('--level-only');
 const targets = process.argv.slice(2).filter((argument) => argument !== '--level-only');
@@ -318,10 +416,14 @@ if (targets.length === 0) {
     const directory = join(root, 'content/de', level);
     if (existsSync(join(directory, 'level.json'))) checkLevel(directory);
   }
+  const placement = join(root, 'content/de/placement/placement.json');
+  if (existsSync(placement) && !levelOnly) checkPlacement(placement);
 } else {
   for (const target of targets) {
     const path = resolve(target);
-    if (statSync(path).isDirectory()) {
+    if (basename(path) === 'placement.json') {
+      checkPlacement(path);
+    } else if (statSync(path).isDirectory()) {
       checkLevel(path);
     } else {
       const context = { moduleIds: new Set(), activityIds: new Set(), keys: new Map(), coverage: {}, minutes: 0, activities: 0, questions: 0 };

@@ -1,10 +1,12 @@
 /** Écrans « Mes résultats », « Mes messages » et liste des séances du planning de l'élève. */
-import { ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, Gauge, ListChecks, MessageCircle, Sparkles, TrendingUp } from 'lucide-react';
+import { useMemo, useState } from 'react';
+import { ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, ChevronDown, ChevronUp, Gauge, ListChecks, Lock, MessageCircle, Sparkles, TrendingUp } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge, EmptyState } from '../../components/ui';
 import { Bars, Card, Facts, ProgressRing } from '../../design/kit';
+import type { PathSession } from '../../integration/v2';
 import type { Grade, SessionSummary } from './LearnerSession';
-import { dayHeading, dayKey, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
+import { addDays, dayHeading, dayKey, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
 import { byDate, gradeTitle, passed, plural, scoreColor, scoreOf, SessionRow, TeacherAvatar, type LearnerMessage } from './learner-common';
 
 const shortDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
@@ -42,6 +44,96 @@ export function SessionsByWeek({ sessions }: { sessions: SessionSummary[] }) {
         </div>
       )}
     </Card>
+  );
+}
+
+/** Séance d'un parcours sous la forme d'une ligne de séance ordinaire (séances ouvertes uniquement). */
+export function pathSessionSummary(session: PathSession): SessionSummary | null {
+  if (!session.id || session.locked || session.status === 'locked') return null;
+  return {
+    id: session.id, position: session.position, title: session.title, dueAt: session.dueAt, status: session.status,
+    completedAt: session.completedAt, estimatedMinutes: session.estimatedMinutes,
+    activities: session.activities.map(({ id, kind, title, estimatedMinutes, status }) => ({ id, kind, title, estimatedMinutes, status })),
+  };
+}
+
+/** Séance d'un niveau futur : grisée, sans lien, elle s'ouvrira avec son niveau. */
+export function LockedSessionRow({ session }: { session: PathSession }) {
+  return (
+    <div className="kit-list-item ld-session-row is-locked" aria-label={`${session.title}, niveau ${session.levelCode}, verrouillée jusqu’à l’ouverture du niveau`}>
+      <span className="ld-status-icon is-locked" aria-hidden="true"><Lock size={16} /></span>
+      <span className="kit-list-main" aria-hidden="true">
+        <strong>{session.title}</strong>
+        <small>{relativeMoment(session.dueAt)} · {session.estimatedMinutes} min · {plural(session.activities.length, 'activité')}</small>
+      </span>
+      <span className="kit-list-end" aria-hidden="true"><Badge tone="neutral">{session.levelCode}</Badge></span>
+    </div>
+  );
+}
+
+/**
+ * Séances d'un parcours multi-niveaux par semaine : les séances ouvertes mènent à la séance, celles des niveaux futurs
+ * sont grisées et verrouillées.
+ */
+export function PathSessionsByWeek({ sessions, emptyText = 'Vos séances seront publiées à la validation du planning.', pageSize = 4 }: {
+  sessions: PathSession[]; emptyText?: string; pageSize?: number;
+}) {
+  const weeks = useMemo(() => {
+    const map = new Map<string, { start: Date; items: PathSession[] }>();
+    for (const session of byDate(sessions, (item) => item.dueAt)) {
+      const start = startOfWeek(new Date(session.dueAt));
+      const key = dayKey(start);
+      if (!map.has(key)) map.set(key, { start, items: [] });
+      map.get(key)?.items.push(session);
+    }
+    return [...map.values()];
+  }, [sessions]);
+  // La liste s'ouvre sur la semaine en cours ; les semaines passées et suivantes s'affichent à la demande.
+  const current = Math.max(0, weeks.findIndex((week) => addDays(week.start, 7) > new Date()));
+  const [from, setFrom] = useState<number | null>(null);
+  const [count, setCount] = useState(pageSize);
+  const start = from ?? current;
+  const visible = weeks.slice(start, start + count);
+  const after = weeks.length - start - visible.length;
+  if (!sessions.length) {
+    return <EmptyState icon={<CalendarCheck2 size={26} />} title="Aucune séance à afficher" description={emptyText} />;
+  }
+  return (
+    <div className="ld-path-weeks">
+      {start > 0 && (
+        <button type="button" className="btn btn-ghost btn-sm ld-more" onClick={() => { setCount(count + start); setFrom(0); }}>
+          <ChevronUp size={16} aria-hidden="true" /> Voir les semaines précédentes ({start})
+        </button>
+      )}
+      <div className="ld-weeks">
+        {visible.map((week) => {
+          const open = week.items.filter((session) => !session.locked);
+          const finished = open.filter((session) => session.status === 'completed').length;
+          const locked = open.length === 0;
+          return (
+            <section key={dayKey(week.start)} className={`ld-week-group${locked ? ' is-locked' : ''}`} aria-label={`Semaine du ${formatDayLong(week.start)}`}>
+              <header>
+                <strong>Semaine du {formatMonthDay(week.start)}</strong>
+                <span className="ld-week-count">{locked ? <><Lock size={13} aria-hidden="true" /> {week.items[0].levelCode}</> : `${finished}/${open.length}`}</span>
+                <span className="ld-meter" aria-hidden="true"><span style={{ width: `${open.length ? (finished / open.length) * 100 : 0}%` }} /></span>
+              </header>
+              <ul className="kit-list ld-list">
+                {week.items.map((session, index) => {
+                  const summary = pathSessionSummary(session);
+                  return <li key={session.id ?? `${session.date}-${session.slot}-${index}`}>{summary ? <SessionRow session={summary} /> : <LockedSessionRow session={session} />}</li>;
+                })}
+              </ul>
+            </section>
+          );
+        })}
+      </div>
+      {after > 0 && (
+        <button type="button" className="btn btn-soft ld-more" onClick={() => setCount(count + pageSize)}>
+          <ChevronDown size={16} aria-hidden="true" /> Afficher {Math.min(pageSize, after)} semaine{Math.min(pageSize, after) > 1 ? 's' : ''} de plus
+          <span className="ld-more-count">{plural(after, 'semaine restante', 'semaines restantes')}</span>
+        </button>
+      )}
+    </div>
   );
 }
 

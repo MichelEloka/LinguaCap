@@ -1,4 +1,4 @@
-import { Bell, BookOpen, ClipboardCheck, FolderOpen, LayoutGrid, Mail, TrendingUp, UserRoundCog, Users, type LucideIcon } from 'lucide-react';
+import { Bell, BookOpen, ClipboardCheck, FileSignature, FolderOpen, LayoutGrid, Mail, TrendingUp, UserRoundCog, Users, type LucideIcon } from 'lucide-react';
 import { canEditCatalogue, type Profile } from '../../integration/api';
 
 interface StaffWorkspaceLink {
@@ -17,6 +17,8 @@ export function staffWorkspaceLinks(profile: Profile): StaffWorkspaceLink[] {
   if (educator) {
     items.push(
       { path: '/espace/eleves', label: admin ? 'Élèves' : 'Mes élèves', icon: Users },
+      // Le compteur de contrats en attente demanderait un champ dans WorkspaceFrame (gelé) : il est affiché sur l'accueil.
+      { path: '/espace/contrats', label: 'Contrats', icon: FileSignature },
       { path: '/espace/alertes', label: 'Alertes', icon: Bell },
       { path: '/espace/invitations', label: 'Invitations', icon: Mail },
     );

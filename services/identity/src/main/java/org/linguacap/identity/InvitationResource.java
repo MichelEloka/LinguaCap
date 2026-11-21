@@ -11,6 +11,7 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.util.List;
 import java.util.UUID;
+import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.linguacap.common.HttpError;
 
 @Path("/v1/invitations")
@@ -20,6 +21,9 @@ public class InvitationResource {
     @Inject IdentityStore store;
     @Inject InvitationStore invitations;
     @Inject SupabaseInvites supabase;
+
+    @ConfigProperty(name = "lingua.languages.open", defaultValue = "de")
+    String openLanguages;
 
     /** L'administration voit toutes les invitations, un professeur celles de sa liste. */
     @GET
@@ -48,9 +52,13 @@ public class InvitationResource {
                     : HttpError.badRequest("L’invitation doit cibler un professeur, un élève ou un membre de l’équipe.");
         }
         UUID teacherId = resolveTeacher(caller, role, request.teacherId());
+        String languageId = AccountRules.checkInvitationLanguage(role, request.languageId(),
+                teacherId == null ? List.of() : store.teacherLanguages(teacherId),
+                AccountRules.openLanguages(openLanguages));
         supabase.requireConfigured();
 
-        InvitationStore.Row reserved = invitations.reserve(caller, email, request.displayName().strip(), role, teacherId);
+        InvitationStore.Row reserved = invitations.reserve(caller, email, request.displayName().strip(), role, teacherId,
+                languageId);
         return Response.status(Response.Status.CREATED).entity(send(caller, reserved, reserved.sendCount() > 0)).build();
     }
 
@@ -101,10 +109,14 @@ public class InvitationResource {
         return requestedTeacher;
     }
 
-    public record InvitationRequest(String email, String displayName, String role, UUID teacherId) {}
+    /**
+     * languageId (facultatif, élèves seulement) : langue apprise, parmi les langues ouvertes et celles du professeur
+     * référent. Sans langue, l'élève reçoit à l'activation la première langue de son professeur, ou la choisit.
+     */
+    public record InvitationRequest(String email, String displayName, String role, UUID teacherId, String languageId) {}
 
     public record Invitation(UUID id, String email, String displayName, String role, UUID teacherId,
-                             String teacherName, UUID invitedBy, String invitedByName, String status, int sendCount,
+                             String teacherName, String languageId, UUID invitedBy, String invitedByName, String status, int sendCount,
                              String createdAt, String sentAt, String lastSentAt, String expiresAt,
                              String cancelledAt, String acceptedAt) {}
 }

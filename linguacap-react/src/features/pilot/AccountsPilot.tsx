@@ -1,8 +1,10 @@
 import { useEffect, useMemo, useState, type FormEvent, type MouseEvent } from 'react';
-import { Ban, ChevronRight, Clock3, MailCheck, RefreshCw, Send, TimerOff, UserRound, UsersRound, X } from 'lucide-react';
+import { Ban, ChevronRight, Clock3, Languages, MailCheck, RefreshCw, Send, TimerOff, UserRound, UsersRound, X } from 'lucide-react';
 import { Badge, Dialog, EmptyState } from '../../components/ui';
 import { Avatar, Callout, Chip, Drawer, SearchField, Segmented, SkeletonCard, Toolbar, useToast } from '../../design/kit';
 import { requestApi, type AccountRole, type Permission, type Profile } from '../../integration/api';
+import { LanguagePicker } from '../../components/LanguagePicker';
+import { availableLanguages, languageName, languages as allLanguages } from '../../domain/languages';
 import { formatDate, formatRelative, getError, RoleBadge, StateBadge } from './admin-common';
 import { UserSheet } from './admin-user-sheet';
 import './admin.css';
@@ -23,6 +25,8 @@ export interface Invitation {
   lastSentAt: string | null;
   expiresAt: string;
   acceptedAt: string | null;
+  /** Langue apprise par l'élève invité (absente d'une passerelle antérieure aux parcours). */
+  languageId?: string | null;
 }
 
 export interface AdminUser {
@@ -40,6 +44,8 @@ export interface AdminUser {
   activatedAt: string | null;
   lastSeenAt: string | null;
   createdAt: string;
+  /** Langue apprise par un élève (null pour l'équipe ou un élève autonome qui ne l'a pas choisie). */
+  languageId?: string | null;
 }
 
 const permissionNames: Record<Permission, string> = { catalogue: 'Catalogue', correction: 'Correction' };
@@ -77,9 +83,18 @@ const inviteRoleHints: Record<Exclude<AccountRole, 'admin'>, string> = {
   staff: 'Prépare le catalogue ou corrige ; les permissions se règlent ensuite dans sa fiche.',
 };
 
-export function InviteDialog({ profile, token, onClose, onDone }: {
+/** Langues proposées à l'invitation : langues ouvertes, limitées à celles du professeur quand il les a indiquées. */
+function invitationLanguages(teacherLanguages?: readonly string[]) {
+  const open = availableLanguages.map((language) => language.id);
+  const taught = (teacherLanguages ?? []).filter((id) => open.includes(id));
+  return taught.length ? taught : open;
+}
+
+export function InviteDialog({ profile, token, teacherLanguages, onClose, onDone }: {
   profile: Profile;
   token: string;
+  /** Langues enseignées par le professeur qui invite (profil professeur). */
+  teacherLanguages?: readonly string[];
   onClose: () => void;
   onDone: (invitation: Invitation) => void;
 }) {
@@ -87,6 +102,11 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
   const { users } = useAdminUsers(token, admin);
   const teachers = (users ?? []).filter((user) => user.role === 'teacher' && user.status === 'active');
   const [role, setRole] = useState<Exclude<AccountRole, 'admin'>>('learner');
+  const selectable = invitationLanguages(admin ? undefined : teacherLanguages);
+  const [languageId, setLanguageId] = useState<string | null>(selectable[0] ?? null);
+  const learnerInvite = !admin || role === 'learner';
+  // Les langues ouvertes, celles du professeur, puis quelques langues à venir pour situer l'offre.
+  const shownLanguages = allLanguages.filter((language) => selectable.includes(language.id) || language.status === 'available');
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
 
@@ -105,6 +125,8 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
           displayName: String(form.get('displayName') ?? '').trim(),
           role: admin ? role : 'learner',
           teacherId: admin && role === 'learner' && teacherId ? teacherId : null,
+          // La langue ne concerne que les invitations d'élèves (le serveur refuse les autres).
+          ...(learnerInvite && languageId ? { languageId } : {}),
         },
       }));
     } catch (requestError) {
@@ -140,6 +162,13 @@ export function InviteDialog({ profile, token, onClose, onDone }: {
               {teachers.map((teacher) => <option key={teacher.id} value={teacher.id}>{teacher.displayName}</option>)}
             </select>
           </label>
+        )}
+        {learnerInvite && (
+          <div className="admin-form-block">
+            <LanguagePicker label="Langue apprise" languages={shownLanguages} selectable={selectable} value={languageId}
+              onChange={setLanguageId} className="staff-invite-languages"
+              description={admin ? 'L’élève commencera son parcours dans cette langue.' : 'Parmi les langues que vous enseignez. Les autres langues ouvriront bientôt.'} />
+          </div>
         )}
         <Callout tone="info" title="Valable sept jours">Inviter de nouveau la même adresse renvoie l’invitation existante.</Callout>
         {error && <div role="alert"><Callout tone="warning">{error}</Callout></div>}
@@ -239,7 +268,8 @@ export function InvitationsPanel({ token, refresh, learnersOnly = false }: { tok
                       <th scope="row" className="admin-cell-person">
                         <span className="admin-person">
                           <Avatar name={invitation.displayName} size={36} />
-                          <span><strong>{invitation.displayName}</strong><small>{invitation.email}</small></span>
+                          <span><strong>{invitation.displayName}</strong><small>{invitation.email}</small>
+                            {invitation.role === 'learner' && invitation.languageId && <span className="staff-language"><Languages size={12} aria-hidden="true" />{languageName(invitation.languageId)}</span>}</span>
                         </span>
                       </th>
                       {!learnersOnly && <td className="admin-cell-role">
@@ -313,13 +343,22 @@ function Attachment({ user, learners }: { user: AdminUser; learners: number }) {
       ? <span className="admin-permissions">{followed}{user.permissions.map((item) => <span key={item}>{permissionNames[item]}</span>)}</span>
       : <span className="admin-muted">Aucune permission</span>;
   }
+  const language = <span className={`staff-language${user.languageId ? '' : ' is-empty'}`}><Languages size={12} aria-hidden="true" />{user.languageId ? languageName(user.languageId) : 'Langue à choisir'}</span>;
   if (user.teacherName) {
-    return <span className="admin-attach"><Avatar name={user.teacherName} size={24} /><span>{user.teacherName}<small>Professeur référent</small></span></span>;
+    return (
+      <span className="staff-attach-stack">
+        <span className="admin-attach"><Avatar name={user.teacherName} size={24} /><span>{user.teacherName}<small>Professeur référent</small></span></span>
+        {user.languageId !== undefined && language}
+      </span>
+    );
   }
   return (
-    <span className="admin-attach is-autonomous">
-      <span className="admin-attach-icon" aria-hidden="true"><UserRound size={14} /></span>
-      <span>Autonome<small>{user.reviewerName ? `Correcteur : ${user.reviewerName}` : 'Sans correcteur désigné'}</small></span>
+    <span className="staff-attach-stack">
+      <span className="admin-attach is-autonomous">
+        <span className="admin-attach-icon" aria-hidden="true"><UserRound size={14} /></span>
+        <span>Autonome<small>{user.reviewerName ? `Correcteur : ${user.reviewerName}` : 'Sans correcteur désigné'}</small></span>
+      </span>
+      {user.languageId !== undefined && language}
     </span>
   );
 }

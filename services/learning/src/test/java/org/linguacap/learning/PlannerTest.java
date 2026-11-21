@@ -116,4 +116,39 @@ class PlannerTest {
         assertEquals(List.of("quiz-cafe", "revision-au-cafe", Planner.MIDTERM, "lecon-courses", "revision-courses",
                 Planner.FINAL), resumed);
     }
+
+    @Test
+    void leConstructeurHistoriqueLaisseLeNiveauEtLaSourceVides() {
+        Item item = new Item("lecon", "lesson", "Leçon", 10, "m");
+        assertEquals(null, item.levelCode());
+        assertEquals(null, item.sourceVersionId());
+        assertEquals(null, item.sourceActivityId());
+        assertEquals(null, item.additionId());
+        assertEquals("A2", item.withLevel("A2").levelCode());
+        assertEquals("lecon", item.withLevel("A2").id());
+    }
+
+    @Test
+    void unChangementDeNiveauPasseAuCreneauSuivant() {
+        List<Item> items = List.of(
+                new Item("a1-fin", "lesson", "Fin A1", 10, "m").withLevel("A1"),
+                new Item("a2-debut", "lesson", "Début A2", 10, "m").withLevel("A2"),
+                new Item("a2-suite", "lesson", "Suite A2", 10, "m").withLevel("A2"));
+        Plan plan = Planner.plan(MONDAY, MONDAY.plusDays(6), everyDay(2, 45), items);
+        assertTrue(plan.fits());
+        assertEquals(2, plan.sessions().size());
+        assertEquals(List.of("a1-fin"), plan.sessions().get(0).items().stream().map(Item::id).toList());
+        assertEquals(List.of("a2-debut", "a2-suite"), plan.sessions().get(1).items().stream().map(Item::id).toList());
+        // Le créneau suivant peut être la deuxième séance du même jour.
+        assertEquals(MONDAY, plan.sessions().get(1).date());
+        assertEquals(2, plan.sessions().get(1).slot());
+    }
+
+    @Test
+    void unHorizonPlusLongPermetDePlanifierAuDelaDeTreizeMois() {
+        LocalDate target = MONDAY.plusDays(800);
+        List<Item> items = activities(700, 30);
+        assertFalse(Planner.plan(MONDAY, target, List.of(new Day(1, 1, 30), new Day(4, 1, 30)), items).fits());
+        assertTrue(Planner.plan(MONDAY, target, everyDay(1, 30), items, 900).fits());
+    }
 }

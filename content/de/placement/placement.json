@@ -1,0 +1,843 @@
+{
+  "languageId": "de",
+  "title": "Test de niveau d’allemand",
+  "description": "Ce test situe votre niveau de compréhension de l’allemand, du niveau A1 au niveau B1 du Cadre européen commun de référence pour les langues. Il avance par paliers : chaque palier compte 12 questions, 8 de lecture et 4 d’écoute. Vous passez au palier suivant si vous réussissez au moins deux tiers des questions, sans compétence très en retrait. Les consignes sont en français, les textes et les enregistrements en allemand. Si vous ne connaissez pas la réponse, choisissez « Je ne sais pas » plutôt que de répondre au hasard : votre résultat sera plus juste. Comptez de 10 à 25 minutes.",
+  "sources": [
+    "Contenu original LinguaCap, rédigé d’après les descripteurs du CECRL (A1, A2, B1) et les formats de tâches des examens Goethe-Zertifikat A1, A2 et B1 (lecture et écoute) ; aucun texte ni enregistrement n’est repris."
+  ],
+  "tiers": [
+    {
+      "code": "A1",
+      "title": "A1 · Découverte",
+      "passPercent": 67,
+      "minCompetencePercent": 34,
+      "drawCount": 12,
+      "questions": [
+        {
+          "id": "a1-l01",
+          "competence": "lecture",
+          "moduleRef": "a1-hallo",
+          "prompt": "Choisissez la forme qui convient.\n\n– Woher ___ du?\n– Ich komme aus Spanien.",
+          "options": [
+            { "id": "a", "label": "komme", "correct": false },
+            { "id": "b", "label": "kommt", "correct": false },
+            { "id": "c", "label": "kommst", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l02",
+          "competence": "lecture",
+          "moduleRef": "a1-essen",
+          "prompt": "Choisissez la forme qui convient.\n\nNein danke, ich trinke ___ Kaffee. Ich trinke nur Tee.",
+          "options": [
+            { "id": "a", "label": "keinen", "correct": true },
+            { "id": "b", "label": "keine", "correct": false },
+            { "id": "c", "label": "kein", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l03",
+          "competence": "lecture",
+          "moduleRef": "a1-kurs",
+          "prompt": "Choisissez le mot qui convient.\n\nHeute ist Montag. Morgen ist ___.",
+          "options": [
+            { "id": "a", "label": "Sonntag", "correct": false },
+            { "id": "b", "label": "Dienstag", "correct": true },
+            { "id": "c", "label": "Mittwoch", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l04",
+          "competence": "lecture",
+          "moduleRef": "a1-alltag",
+          "prompt": "Vous voulez dire : « Le cours commence à neuf heures. » Quelle phrase est correcte ?",
+          "options": [
+            { "id": "a", "label": "Um neun Uhr der Kurs fängt an.", "correct": false },
+            { "id": "b", "label": "Um neun Uhr anfängt der Kurs.", "correct": false },
+            { "id": "c", "label": "Um neun Uhr fängt der Kurs an.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l05",
+          "competence": "lecture",
+          "moduleRef": "a1-familie",
+          "prompt": "Choisissez le mot qui convient.\n\nIch habe ___ 14. Mai Geburtstag.",
+          "options": [
+            { "id": "a", "label": "am", "correct": true },
+            { "id": "b", "label": "im", "correct": false },
+            { "id": "c", "label": "um", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l06",
+          "competence": "lecture",
+          "moduleRef": "a1-familie",
+          "prompt": "Choisissez le mot qui convient.\n\nLisa hat einen Bruder. ___ Bruder heißt Max.",
+          "options": [
+            { "id": "a", "label": "Sein", "correct": false },
+            { "id": "b", "label": "Ihr", "correct": true },
+            { "id": "c", "label": "Ihre", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l07",
+          "competence": "lecture",
+          "moduleRef": "a1-alltag",
+          "prompt": "Lisez l’affiche, puis répondez.\n\nBäckerei Schulz\nMontag bis Freitag: 6.30 bis 18.00 Uhr\nSamstag: 7.00 bis 13.00 Uhr\nSonntag: geschlossen\n\nVous voulez acheter du pain samedi à 15 heures. Est-ce possible ?",
+          "options": [
+            { "id": "a", "label": "Oui, la boulangerie ferme à 18 heures.", "correct": false },
+            { "id": "b", "label": "Non, le samedi, elle ferme à 13 heures.", "correct": true },
+            { "id": "c", "label": "Non, elle est fermée le samedi.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l08",
+          "competence": "lecture",
+          "moduleRef": "a1-stadt",
+          "prompt": "Lisez le message, puis répondez.\n\nLiebe Julia,\nich bin jetzt in Hamburg. Die Stadt ist schön, aber das Wetter ist nicht gut: Es regnet jeden Tag. Mein Hotel ist klein und liegt direkt am Bahnhof. Am Freitag fahre ich nach Berlin zu meiner Schwester.\nViele Grüße\nPaul\n\nQu’est-ce qui est vrai ?",
+          "options": [
+            { "id": "a", "label": "Il fait beau à Hambourg cette semaine.", "correct": false },
+            { "id": "b", "label": "Paul loge chez sa sœur à Hambourg.", "correct": false },
+            { "id": "c", "label": "Son hôtel est à côté de la gare.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l09",
+          "competence": "lecture",
+          "moduleRef": "a1-stadt",
+          "prompt": "Lisez la petite annonce, puis répondez.\n\nFahrrad zu verkaufen\n3 Jahre alt, blau, sehr gut. Preis: 120 Euro.\nBitte nur abends anrufen: 0171 2385490\n\nQuand faut-il téléphoner ?",
+          "options": [
+            { "id": "a", "label": "Le soir.", "correct": true },
+            { "id": "b", "label": "Le matin.", "correct": false },
+            { "id": "c", "label": "Le week-end.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l10",
+          "competence": "lecture",
+          "moduleRef": "a1-kurs",
+          "prompt": "Lisez l’information, puis répondez.\n\nLiebe Kursteilnehmerinnen und Kursteilnehmer,\nder Deutschkurs A1 ist heute nicht in Raum 12, sondern in Raum 21 im zweiten Stock.\nIhre Sprachschule Lingua\n\nOù a lieu le cours aujourd’hui ?",
+          "options": [
+            { "id": "a", "label": "Dans la salle 12, comme d’habitude.", "correct": false },
+            { "id": "b", "label": "Dans la salle 21, au deuxième étage.", "correct": true },
+            { "id": "c", "label": "Dans la salle 21, au premier étage.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l11",
+          "competence": "lecture",
+          "moduleRef": "a1-alltag",
+          "prompt": "Lisez le message, puis répondez.\n\nHallo Mama! Ich komme heute erst um acht Uhr nach Hause. Nach der Schule gehe ich mit Tim in die Bibliothek. Wir lernen zusammen für den Mathetest. Ich esse bei Tim. Bis später! Lena\n\nQue fait Lena après l’école ?",
+          "options": [
+            { "id": "a", "label": "Elle va seule à la bibliothèque du quartier.", "correct": false },
+            { "id": "b", "label": "Elle rentre manger à la maison avec Tim.", "correct": false },
+            { "id": "c", "label": "Elle étudie avec Tim à la bibliothèque.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-l12",
+          "competence": "lecture",
+          "moduleRef": "a1-familie",
+          "prompt": "Lisez l’invitation, puis répondez.\n\nLiebe Freunde,\nich werde 30! Am Samstag, dem 12. Juli, mache ich eine Party im Garten. Wir beginnen um 19 Uhr. Das Essen mache ich, aber bitte bringt etwas zu trinken mit. Antwortet mir bitte bis Mittwoch.\nEure Anna\n\nQu’est-ce que les invités doivent apporter ?",
+          "options": [
+            { "id": "a", "label": "Quelque chose à boire.", "correct": true },
+            { "id": "b", "label": "Quelque chose à manger.", "correct": false },
+            { "id": "c", "label": "Un cadeau pour Anna.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a1-h01",
+          "competence": "ecoute",
+          "moduleRef": "a1-essen",
+          "prompt": "Vous êtes dans une boulangerie. Écoutez le dialogue, puis répondez.\n\nCombien la cliente paie-t-elle ?",
+          "options": [
+            { "id": "a", "label": "3,20 €", "correct": false },
+            { "id": "b", "label": "2,40 €", "correct": false },
+            { "id": "c", "label": "4,20 €", "correct": true }
+          ],
+          "placements": [{ "media": "placement-a1-h01", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a1-h02",
+          "competence": "ecoute",
+          "moduleRef": "a1-zahlen",
+          "prompt": "Vous êtes à la gare. Écoutez l’annonce, puis répondez.\n\nDe quelle voie part le train pour Munich ?",
+          "options": [
+            { "id": "a", "label": "Voie 3.", "correct": false },
+            { "id": "b", "label": "Voie 7.", "correct": true },
+            { "id": "c", "label": "Voie 10.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a1-h02", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a1-h03",
+          "competence": "ecoute",
+          "moduleRef": "a1-freizeit",
+          "prompt": "Écoutez le message sur le répondeur, puis répondez.\n\nPourquoi Markus appelle-t-il Sabine ?",
+          "options": [
+            { "id": "a", "label": "Il est malade et ne viendra pas demain.", "correct": true },
+            { "id": "b", "label": "La piscine est fermée demain pour travaux.", "correct": false },
+            { "id": "c", "label": "Il veut aller au cinéma avec elle samedi.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a1-h03", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a1-h04",
+          "competence": "ecoute",
+          "moduleRef": "a1-alltag",
+          "prompt": "Écoutez le dialogue au téléphone, puis répondez.\n\nQuand est le rendez-vous de M. Weber ?",
+          "options": [
+            { "id": "a", "label": "Jeudi à 11 h 30.", "correct": false },
+            { "id": "b", "label": "Mardi à 10 h 30.", "correct": false },
+            { "id": "c", "label": "Jeudi à 10 h 30.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-a1-h04", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a1-h05",
+          "competence": "ecoute",
+          "moduleRef": "a1-freizeit",
+          "prompt": "Écoutez le dialogue, puis répondez.\n\nQue fait Julia dimanche ?",
+          "options": [
+            { "id": "a", "label": "Elle va voir sa grand-mère.", "correct": true },
+            { "id": "b", "label": "Elle travaille au supermarché.", "correct": false },
+            { "id": "c", "label": "Elle joue au football avec Leon.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a1-h05", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a1-h06",
+          "competence": "ecoute",
+          "moduleRef": "a1-stadt",
+          "prompt": "Écoutez le dialogue dans la rue, puis répondez.\n\nOù se trouve la poste ?",
+          "options": [
+            { "id": "a", "label": "Deuxième rue à droite, à côté du supermarché.", "correct": false },
+            { "id": "b", "label": "Deuxième rue à gauche, à côté du supermarché.", "correct": true },
+            { "id": "c", "label": "Tout droit, en face du supermarché.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a1-h06", "usage": "audio", "transcriptVisibility": "hidden" }]
+        }
+      ]
+    },
+    {
+      "code": "A2",
+      "title": "A2 · Survie",
+      "passPercent": 67,
+      "minCompetencePercent": 34,
+      "drawCount": 12,
+      "questions": [
+        {
+          "id": "a2-l01",
+          "competence": "lecture",
+          "moduleRef": "a2-reisen",
+          "prompt": "Choisissez la forme qui convient.\n\nLetztes Jahr ___ wir mit dem Zug nach Wien gefahren.",
+          "options": [
+            { "id": "a", "label": "haben", "correct": false },
+            { "id": "b", "label": "hatten", "correct": false },
+            { "id": "c", "label": "sind", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l02",
+          "competence": "lecture",
+          "moduleRef": "a2-arbeit",
+          "prompt": "Choisissez la forme qui convient.\n\nMaria schreibt, dass sie am Wochenende leider nicht ___.",
+          "options": [
+            { "id": "a", "label": "kommen kann", "correct": true },
+            { "id": "b", "label": "kann kommen", "correct": false },
+            { "id": "c", "label": "kommen könnt", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l03",
+          "competence": "lecture",
+          "moduleRef": "a2-berlin",
+          "prompt": "Choisissez la forme qui convient.\n\nIch fahre jeden Tag mit ___ Fahrrad zur Arbeit.",
+          "options": [
+            { "id": "a", "label": "das", "correct": false },
+            { "id": "b", "label": "dem", "correct": true },
+            { "id": "c", "label": "den", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l04",
+          "competence": "lecture",
+          "moduleRef": "a2-wohnen",
+          "prompt": "Choisissez la forme qui convient.\n\nKannst du die Milch bitte in ___ Kühlschrank stellen?",
+          "options": [
+            { "id": "a", "label": "den", "correct": true },
+            { "id": "b", "label": "dem", "correct": false },
+            { "id": "c", "label": "der", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l05",
+          "competence": "lecture",
+          "moduleRef": "a2-beziehungen",
+          "prompt": "Choisissez la forme qui convient.\n\nAls Kind ___ ich nie allein in die Stadt fahren. Meine Eltern haben es nicht erlaubt.",
+          "options": [
+            { "id": "a", "label": "darf", "correct": false },
+            { "id": "b", "label": "durfte", "correct": true },
+            { "id": "c", "label": "dürfte", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l06",
+          "competence": "lecture",
+          "moduleRef": "a2-gesundheit",
+          "prompt": "Choisissez le mot qui convient.\n\nIch habe starke Kopfschmerzen. Ich gehe schnell in die ___ und kaufe Tabletten.",
+          "options": [
+            { "id": "a", "label": "Apotheke", "correct": true },
+            { "id": "b", "label": "Bäckerei", "correct": false },
+            { "id": "c", "label": "Bibliothek", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l07",
+          "competence": "lecture",
+          "moduleRef": "a2-einkaufen",
+          "prompt": "Lisez le plan du grand magasin, puis répondez.\n\nKaufhaus Merkur – Wegweiser\n4. Stock: Restaurant, Kundenservice\n3. Stock: Spielwaren, Bücher, Schreibwaren\n2. Stock: Herrenmode, Sportbekleidung, Sportgeräte\n1. Stock: Damenmode, Schuhe\nErdgeschoss: Kosmetik, Taschen, Schmuck\nUntergeschoss: Lebensmittel, Haushaltswaren\n\nVotre neveu a huit ans. Vous voulez lui offrir un jeu de société. Où allez-vous ?",
+          "options": [
+            { "id": "a", "label": "Au 2e étage.", "correct": false },
+            { "id": "b", "label": "Au sous-sol.", "correct": false },
+            { "id": "c", "label": "Au 3e étage.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l08",
+          "competence": "lecture",
+          "moduleRef": "a2-beziehungen",
+          "prompt": "Lisez le courriel, puis répondez.\n\nHallo Jonas,\nvielen Dank für deine Einladung zum Grillen am Samstag! Ich komme sehr gern, aber ich kann erst gegen sieben Uhr da sein, weil ich bis sechs arbeiten muss. Soll ich einen Salat mitbringen? Meine Freundin Katrin ist am Wochenende bei mir zu Besuch. Darf sie mitkommen? Sie isst kein Fleisch, aber sie bringt sich Gemüse zum Grillen mit.\nBis Samstag!\nMarco\n\nQue demande Marco à Jonas ?",
+          "options": [
+            { "id": "a", "label": "S’il peut arriver avant six heures.", "correct": false },
+            { "id": "b", "label": "S’il peut venir avec Katrin.", "correct": true },
+            { "id": "c", "label": "S’il doit apporter de la viande.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l09",
+          "competence": "lecture",
+          "moduleRef": "a2-wohnen",
+          "prompt": "Lisez l’information affichée dans l’immeuble, puis répondez.\n\nLiebe Mieterinnen und Mieter,\nam Dienstag, dem 14. März, gibt es von 9 bis 12 Uhr im ganzen Haus kein Wasser. Ein Techniker repariert die Leitungen im Keller. Bitte füllen Sie vorher genug Wasser in Flaschen. Ab 12 Uhr funktioniert alles wieder normal.\nIhre Hausverwaltung\n\nQue se passe-t-il mardi matin ?",
+          "options": [
+            { "id": "a", "label": "Il n’y aura pas d’eau dans l’immeuble.", "correct": true },
+            { "id": "b", "label": "Un technicien passera dans chaque appartement.", "correct": false },
+            { "id": "c", "label": "La cave sera fermée toute la journée.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l10",
+          "competence": "lecture",
+          "moduleRef": "a2-arbeit",
+          "prompt": "Lisez l’article, puis répondez.\n\nEin ganz besonderes Café\nIn Lindau hat im Mai ein neues Café aufgemacht: Hier arbeiten nur Rentnerinnen und Rentner. Die Idee hatte die 67-jährige Helga Brand. „Als Rentnerin hatte ich plötzlich zu viel Zeit“, erzählt sie. Heute backt sie dreimal pro Woche Kuchen für das Café. Die Gäste sind übrigens nicht nur ältere Leute: Am Nachmittag kommen auch viele Studenten, weil der Kaffee hier besonders günstig ist.\n\nPourquoi beaucoup d’étudiants viennent-ils dans ce café ?",
+          "options": [
+            { "id": "a", "label": "Parce qu’ils y travaillent l’après-midi.", "correct": false },
+            { "id": "b", "label": "Parce que Helga Brand leur fait des gâteaux.", "correct": false },
+            { "id": "c", "label": "Parce que le café n’y coûte pas cher.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l11",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez la situation et les trois annonces, puis choisissez l’annonce qui convient.\n\nVous cherchez une activité pour le week-end : un cours de cuisine pour toute la famille, avec vos enfants de 9 et 12 ans.\n\nA – Kochschule „Pfeffer“: Italienisch kochen für Erwachsene. Dienstags und donnerstags von 18 bis 21 Uhr.\n\nB – Familienküche im Bürgerhaus: Eltern und Kinder ab 8 Jahren kochen zusammen. Jeden Samstag von 10 bis 13 Uhr.\n\nC – Backen für Kinder von 6 bis 10 Jahren: Kekse und Kuchen. Sonntags um 15 Uhr. Die Eltern warten bitte im Café.",
+          "options": [
+            { "id": "a", "label": "Annonce A", "correct": false },
+            { "id": "b", "label": "Annonce B", "correct": true },
+            { "id": "c", "label": "Annonce C", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-l12",
+          "competence": "lecture",
+          "moduleRef": "a2-berlin",
+          "prompt": "Lisez les informations du musée, puis répondez.\n\nStadtmuseum – Öffnungszeiten und Preise\nDienstag bis Sonntag 10 bis 18 Uhr, donnerstags bis 21 Uhr. Montags geschlossen.\nEintritt: Erwachsene 8 €, Schüler und Studenten 5 €, Kinder unter 6 Jahren frei.\nAm ersten Sonntag im Monat ist der Eintritt für alle Besucher kostenlos.\nFührungen: samstags um 11 Uhr (Anmeldung an der Kasse).\n\nVous êtes étudiant et vous voulez visiter le musée sans payer. Quand pouvez-vous y aller ?",
+          "options": [
+            { "id": "a", "label": "Le premier dimanche du mois.", "correct": true },
+            { "id": "b", "label": "Le jeudi soir, jusqu’à 21 heures.", "correct": false },
+            { "id": "c", "label": "Le samedi, pour la visite de 11 heures.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "a2-h01",
+          "competence": "ecoute",
+          "moduleRef": "a2-gesundheit",
+          "prompt": "Écoutez le message sur le répondeur, puis répondez.\n\nQuel nouveau rendez-vous le cabinet médical propose-t-il à M. Krüger ?",
+          "options": [
+            { "id": "a", "label": "Demain à 9 heures.", "correct": false },
+            { "id": "b", "label": "Vendredi à 13 h 45.", "correct": false },
+            { "id": "c", "label": "Vendredi à 14 h 15.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-a2-h01", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a2-h02",
+          "competence": "ecoute",
+          "moduleRef": "a2-reisen",
+          "prompt": "Vous êtes à la gare. Écoutez l’annonce, puis répondez.\n\nQu’est-ce qui est vrai pour le train vers Stuttgart ?",
+          "options": [
+            { "id": "a", "label": "Il part à l’heure, mais de la voie 9.", "correct": false },
+            { "id": "b", "label": "Il a environ 20 minutes de retard et part de la voie 4.", "correct": false },
+            { "id": "c", "label": "Il a environ 20 minutes de retard et part de la voie 9.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-a2-h02", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a2-h03",
+          "competence": "ecoute",
+          "moduleRef": "a2-einkaufen",
+          "prompt": "Écoutez le dialogue dans le magasin, puis répondez.\n\nQue veut la cliente ?",
+          "options": [
+            { "id": "a", "label": "Rendre la veste et récupérer son argent.", "correct": true },
+            { "id": "b", "label": "Échanger la veste contre une taille plus grande.", "correct": false },
+            { "id": "c", "label": "Acheter la même veste dans une autre couleur.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a2-h03", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a2-h04",
+          "competence": "ecoute",
+          "moduleRef": "a2-reisen",
+          "prompt": "Écoutez la conversation, puis répondez.\n\nQu’a fait Sophie dimanche ?",
+          "options": [
+            { "id": "a", "label": "Elle est allée au zoo.", "correct": false },
+            { "id": "b", "label": "Elle a visité un musée.", "correct": true },
+            { "id": "c", "label": "Elle a fait un tour du port en bateau.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a2-h04", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a2-h05",
+          "competence": "ecoute",
+          "moduleRef": "a2-arbeit",
+          "prompt": "Écoutez l’interview à la radio, puis répondez.\n\nQu’est-ce que Mme Albers aime le plus dans son travail ?",
+          "options": [
+            { "id": "a", "label": "Commencer très tôt le matin.", "correct": false },
+            { "id": "b", "label": "Avoir ses après-midi libres.", "correct": false },
+            { "id": "c", "label": "Le contact avec les passagers.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-a2-h05", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "a2-h06",
+          "competence": "ecoute",
+          "moduleRef": "a2-reisen",
+          "prompt": "Écoutez le dialogue à la réception de l’hôtel, puis répondez.\n\nOù M. Bauer peut-il garer sa voiture ?",
+          "options": [
+            { "id": "a", "label": "Sur le parking de l’hôtel.", "correct": false },
+            { "id": "b", "label": "Dans un parking à 200 mètres.", "correct": true },
+            { "id": "c", "label": "Dans la rue, devant l’hôtel.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-a2-h06", "usage": "audio", "transcriptVisibility": "hidden" }]
+        }
+      ]
+    },
+    {
+      "code": "B1",
+      "title": "B1 · Seuil",
+      "passPercent": 67,
+      "minCompetencePercent": 34,
+      "drawCount": 12,
+      "questions": [
+        {
+          "id": "b1-l01",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez la forme qui convient.\n\nDas ist die Kollegin, ___ ich gestern mein Auto geliehen habe.",
+          "options": [
+            { "id": "a", "label": "die", "correct": false },
+            { "id": "b", "label": "deren", "correct": false },
+            { "id": "c", "label": "der", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l02",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez la forme qui convient.\n\nWenn ich mehr Zeit ___, würde ich öfter ins Theater gehen.",
+          "options": [
+            { "id": "a", "label": "hätte", "correct": true },
+            { "id": "b", "label": "habe", "correct": false },
+            { "id": "c", "label": "hatte", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l03",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez la forme qui convient.\n\nDie Rechnung muss bis Freitag bezahlt ___.",
+          "options": [
+            { "id": "a", "label": "worden", "correct": false },
+            { "id": "b", "label": "werden", "correct": true },
+            { "id": "c", "label": "wird", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l04",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le mot qui convient.\n\nIch lerne Deutsch, ___ später in Österreich studieren zu können.",
+          "options": [
+            { "id": "a", "label": "damit", "correct": false },
+            { "id": "b", "label": "weil", "correct": false },
+            { "id": "c", "label": "um", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l05",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le mot qui convient.\n\n– Hast du schon mit Anna über das Problem gesprochen?\n– Ja, wir haben gestern lange ___ gesprochen.",
+          "options": [
+            { "id": "a", "label": "darüber", "correct": true },
+            { "id": "b", "label": "worüber", "correct": false },
+            { "id": "c", "label": "über es", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l06",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le verbe qui convient.\n\nWir haben lange diskutiert, aber bis morgen müssen wir eine Entscheidung ___.",
+          "options": [
+            { "id": "a", "label": "nehmen", "correct": false },
+            { "id": "b", "label": "treffen", "correct": true },
+            { "id": "c", "label": "stellen", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l07",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet extrait de blog, puis répondez.\n\nSeit drei Monaten wohne ich jetzt in Leipzig. Ehrlich gesagt hatte ich am Anfang große Zweifel, ob der Umzug eine gute Idee war: Ich kannte niemanden, und meine neue Stelle in der Universitätsbibliothek war anstrengender, als ich gedacht hatte. Dann hat mich eine Kollegin in ihren Chor mitgenommen. Inzwischen singe ich dort jeden Dienstag, und nach der Probe gehen wir oft noch zusammen etwas trinken. Heute fühle ich mich hier richtig zu Hause – auch wenn ich meine Familie in Hamburg natürlich vermisse.\n\nQu’est-ce qui a aidé la personne qui écrit à se sentir chez elle à Leipzig ?",
+          "options": [
+            { "id": "a", "label": "Une collègue qui l’a emmenée dans une chorale.", "correct": true },
+            { "id": "b", "label": "Son nouveau travail à la bibliothèque, qui lui a plu tout de suite.", "correct": false },
+            { "id": "c", "label": "Les visites régulières de sa famille de Hambourg.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l08",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez l’article, puis répondez.\n\nLeihen statt kaufen\nIn immer mehr deutschen Städten gibt es sogenannte Leihläden. Dort kann man Dinge ausleihen, die man nur selten braucht, zum Beispiel eine Bohrmaschine, ein Zelt oder eine Nähmaschine. In Bonn hat der Verein „Teilbar“ vor zwei Jahren einen solchen Laden eröffnet. Mitglieder zahlen 30 Euro im Jahr und dürfen dafür so viele Gegenstände ausleihen, wie sie möchten. „Es ist doch sinnlos, dass jeder Haushalt eine eigene Bohrmaschine besitzt, die er zweimal im Jahr benutzt“, sagt die Vereinsgründerin Miriam Koch. Fast alle Gegenstände im Laden haben Bürgerinnen und Bürger gespendet, die sie selbst nicht mehr brauchten.\n\nD’après l’article, d’où viennent la plupart des objets du magasin ?",
+          "options": [
+            { "id": "a", "label": "Ils sont achetés avec les cotisations des membres.", "correct": false },
+            { "id": "b", "label": "Ils sont prêtés par des entreprises de la ville.", "correct": false },
+            { "id": "c", "label": "Ils ont été donnés par des habitants.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l09",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez la situation et les trois annonces, puis choisissez l’annonce qui convient.\n\nVotre amie Clara cherche un emploi pour l’été. Elle parle bien anglais, aime le contact avec les gens et ne peut travailler que le matin.\n\nA – Für Juli und August suchen wir freundliche Aushilfen für unser Eiscafé am Marktplatz. Arbeitszeit: täglich von 14 bis 22 Uhr. Gute Bezahlung!\n\nB – Die Touristeninformation sucht für die Sommermonate (Juni bis September) eine Aushilfe. Sie beraten Gäste aus aller Welt; Englischkenntnisse sind erforderlich. Arbeitszeit: Montag bis Freitag, 8 bis 13 Uhr.\n\nC – Bäckerei sucht ab sofort einen Fahrer oder eine Fahrerin für die Auslieferung am frühen Morgen (4 bis 8 Uhr). Führerschein Klasse B erforderlich. Unbefristete Stelle.",
+          "options": [
+            { "id": "a", "label": "Annonce A", "correct": false },
+            { "id": "b", "label": "Annonce B", "correct": true },
+            { "id": "c", "label": "Annonce C", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l10",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez les avis de lecteurs publiés sous l’article « Faut-il interdire les voitures dans le centre-ville ? », puis répondez.\n\nJonas, 34 Jahre: Ich wohne mitten in der Altstadt, und der Verkehrslärm ist kaum auszuhalten. Ohne Autos könnten meine Kinder endlich sicher draußen spielen.\n\nPetra, 58 Jahre: Natürlich wäre weniger Verkehr angenehmer. Aber man sollte auch an die älteren Menschen denken. Ich kann nicht mehr gut laufen und bin auf mein Auto angewiesen, wenn ich zum Arzt in die Innenstadt muss. Ein Verbot wäre für Leute wie mich eine Katastrophe.\n\nAhmet, 23 Jahre: Ich fahre sowieso überall mit dem Fahrrad hin. Wenn dadurch mehr Platz für Radwege entsteht, bin ich sofort dafür.\n\nQui est contre l’interdiction des voitures ?",
+          "options": [
+            { "id": "a", "label": "Jonas", "correct": false },
+            { "id": "b", "label": "Ahmet", "correct": false },
+            { "id": "c", "label": "Petra", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l11",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet extrait du règlement de la bibliothèque, puis répondez.\n\nBenutzungsordnung der Stadtbibliothek (Auszug)\n§ 3 Ausleihe: Bücher können für vier Wochen ausgeliehen werden. Die Leihfrist kann online oder an der Theke um weitere vier Wochen verlängert werden, sofern das Medium nicht von einer anderen Person vorbestellt wurde. DVDs und Zeitschriften werden nur für eine Woche ausgeliehen und können nicht verlängert werden.\n§ 4 Gebühren: Für Medien, die zu spät zurückgegeben werden, wird pro Tag und Medium eine Gebühr von 0,50 € erhoben.\n\nDans quel cas ne peut-on pas prolonger le prêt d’un livre ?",
+          "options": [
+            { "id": "a", "label": "Quand une autre personne l’a réservé.", "correct": true },
+            { "id": "b", "label": "Quand on veut le prolonger en ligne.", "correct": false },
+            { "id": "c", "label": "Quand on l’a emprunté il y a plus d’une semaine.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-l12",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez le courriel, puis répondez.\n\nSehr geehrte Damen und Herren,\nam 3. Mai habe ich in Ihrem Onlineshop einen Rucksack bestellt (Bestellnummer 48213). Laut Ihrer Website sollte er innerhalb von drei Werktagen geliefert werden. Inzwischen sind zwei Wochen vergangen, und ich habe weder den Rucksack noch eine Nachricht von Ihnen erhalten. Da ich am 25. Mai in den Urlaub fahre und den Rucksack extra dafür gekauft habe, bitte ich Sie, mir das Geld zurückzuzahlen, falls Sie nicht bis zum 20. Mai liefern können.\nMit freundlichen Grüßen\nKarin Vogt\n\nQue demande Mme Vogt ?",
+          "options": [
+            { "id": "a", "label": "Qu’on la rembourse tout de suite, car elle n’a plus besoin du sac.", "correct": false },
+            { "id": "b", "label": "Qu’on lui envoie un autre modèle, car le sac est arrivé abîmé.", "correct": false },
+            { "id": "c", "label": "Qu’on la rembourse si le sac n’est pas livré d’ici le 20 mai.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b1-h01",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez le message sur le répondeur, puis répondez.\n\nQue doit faire Mme Schneider ?",
+          "options": [
+            { "id": "a", "label": "Attendre jeudi matin le technicien, comme c’était prévu.", "correct": false },
+            { "id": "b", "label": "Rappeler pour choisir l’un des deux nouveaux créneaux.", "correct": true },
+            { "id": "c", "label": "Apporter elle-même la machine à laver au magasin.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b1-h01", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b1-h02",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez les informations routières à la radio, puis répondez.\n\nQue conseille la police aux automobilistes ?",
+          "options": [
+            { "id": "a", "label": "D’attendre sur une aire de repos que la route soit libre.", "correct": false },
+            { "id": "b", "label": "De sortir à Kirchheim et de continuer par la nationale.", "correct": true },
+            { "id": "c", "label": "De rester sur la voie de droite jusqu’à la sortie d’Ulm.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b1-h02", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b1-h03",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Vous participez à une visite guidée. Écoutez les explications, puis répondez.\n\nQu’est-ce qui est interdit pendant la visite ?",
+          "options": [
+            { "id": "a", "label": "Prendre des photos dans les salles d’exposition.", "correct": false },
+            { "id": "b", "label": "Prendre des photos dans la halle de production.", "correct": true },
+            { "id": "c", "label": "Fabriquer sa propre tablette dans la boutique.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b1-h03", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b1-h04",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez la conversation entre deux amis, puis répondez.\n\nPourquoi Felix refuse-t-il le poste à Vienne ?",
+          "options": [
+            { "id": "a", "label": "Le salaire y est moins bon que dans son poste actuel.", "correct": false },
+            { "id": "b", "label": "Son chef lui a proposé une augmentation pour qu’il reste.", "correct": false },
+            { "id": "c", "label": "Il veut continuer à travailler en partie depuis chez lui.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-b1-h04", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b1-h05",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez l’extrait d’une émission de radio, puis répondez.\n\nQue dit Mme Hartmann de l’interdiction des portables dans son école ?",
+          "options": [
+            { "id": "a", "label": "Les élèves se parlent de nouveau pendant les pauses.", "correct": true },
+            { "id": "b", "label": "Les élèves n’ont plus jamais le droit d’utiliser leur portable.", "correct": false },
+            { "id": "c", "label": "Les parents ont du mal à joindre leurs enfants.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b1-h05", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b1-h06",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez l’annonce, puis répondez.\n\nOù peut-on retirer ses commandes début mars ?",
+          "options": [
+            { "id": "a", "label": "Dans la boutique de la gare centrale.", "correct": true },
+            { "id": "b", "label": "Dans la boutique de la Goethestraße.", "correct": false },
+            { "id": "c", "label": "Nulle part : elles sont seulement livrées.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b1-h06", "usage": "audio", "transcriptVisibility": "hidden" }]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "placement-a1-h01", "kind": "audio", "title": "Test de niveau A1 · écoute 1 : à la boulangerie",
+      "script": [
+        { "voice": "mann", "name": "Verkäufer", "text": "Guten Tag! Was möchten Sie?" },
+        { "voice": "frau", "name": "Kundin", "text": "Ich möchte drei Brötchen, bitte." },
+        { "voice": "mann", "name": "Verkäufer", "text": "Gern. Sonst noch etwas?" },
+        { "voice": "frau", "name": "Kundin", "text": "Ja, ein Stück Apfelkuchen." },
+        { "voice": "mann", "name": "Verkäufer", "text": "Das macht zusammen vier Euro zwanzig." },
+        { "voice": "frau", "name": "Kundin", "text": "Bitte schön. Auf Wiedersehen!" }
+      ]
+    },
+    {
+      "key": "placement-a1-h02", "kind": "audio", "title": "Test de niveau A1 · écoute 2 : annonce à la gare",
+      "script": [
+        { "voice": "sprecherin", "text": "Achtung, eine Information für die Fahrgäste nach München." },
+        { "pause": 0.5 },
+        { "voice": "sprecherin", "text": "Der Zug nach München fährt heute nicht von Gleis drei. Er fährt von Gleis sieben. Abfahrt ist um zehn Uhr fünfzehn." },
+        { "pause": 0.8 },
+        { "voice": "sprecherin", "text": "Ich wiederhole: Der Zug nach München fährt heute von Gleis sieben." }
+      ]
+    },
+    {
+      "key": "placement-a1-h03", "kind": "audio", "title": "Test de niveau A1 · écoute 3 : message de Markus",
+      "script": [
+        { "voice": "mann", "name": "Markus", "text": "Hallo Sabine, hier ist Markus. Wir wollen doch morgen zusammen schwimmen gehen. Aber ich bin krank. Ich habe Fieber." },
+        { "voice": "mann", "name": "Markus", "text": "Vielleicht am Samstag? Bitte ruf mich an. Tschüs!" }
+      ]
+    },
+    {
+      "key": "placement-a1-h04", "kind": "audio", "title": "Test de niveau A1 · écoute 4 : un rendez-vous chez le médecin",
+      "script": [
+        { "voice": "frau", "name": "Praxis", "text": "Praxis Doktor Becker, guten Tag." },
+        { "voice": "mann", "name": "Herr Weber", "text": "Guten Tag, hier ist Weber. Ich brauche bitte einen Termin." },
+        { "voice": "frau", "name": "Praxis", "text": "Geht es am Donnerstag um halb elf?" },
+        { "voice": "mann", "name": "Herr Weber", "text": "Am Donnerstag um halb elf? Ja, das geht. Vielen Dank!" }
+      ]
+    },
+    {
+      "key": "placement-a1-h05", "kind": "audio", "title": "Test de niveau A1 · écoute 5 : le week-end de Julia",
+      "script": [
+        { "voice": "mann", "name": "Leon", "text": "Hallo Julia! Was machst du am Wochenende?" },
+        { "voice": "frau", "name": "Julia", "text": "Am Samstag arbeite ich im Supermarkt. Aber am Sonntag besuche ich meine Oma. Und du?" },
+        { "voice": "mann", "name": "Leon", "text": "Ich spiele am Sonntag Fußball." }
+      ]
+    },
+    {
+      "key": "placement-a1-h06", "kind": "audio", "title": "Test de niveau A1 · écoute 6 : demander son chemin",
+      "script": [
+        { "voice": "frau", "name": "Passantin", "text": "Entschuldigung, wo ist hier die Post?" },
+        { "voice": "mann", "name": "Passant", "text": "Die Post? Gehen Sie hier geradeaus und dann die zweite Straße links. Die Post ist neben dem Supermarkt." },
+        { "voice": "frau", "name": "Passantin", "text": "Vielen Dank!" }
+      ]
+    },
+    {
+      "key": "placement-a2-h01", "kind": "audio", "title": "Test de niveau A2 · écoute 1 : message du cabinet médical",
+      "script": [
+        { "voice": "frau", "name": "Praxis", "text": "Guten Tag, Herr Krüger, hier ist die Praxis Doktor Lindner. Sie haben morgen um neun Uhr einen Termin bei uns. Leider ist Frau Doktor Lindner krank." },
+        { "voice": "frau", "name": "Praxis", "text": "Können Sie stattdessen am Freitag um Viertel nach zwei kommen? Bitte rufen Sie uns kurz zurück und sagen Sie uns, ob das geht. Vielen Dank und auf Wiederhören!" }
+      ]
+    },
+    {
+      "key": "placement-a2-h02", "kind": "audio", "title": "Test de niveau A2 · écoute 2 : retard d’un train",
+      "script": [
+        { "voice": "sprecherin", "text": "Information zum Regionalexpress nach Stuttgart, Abfahrt vierzehn Uhr zwölf." },
+        { "voice": "sprecherin", "text": "Wegen einer technischen Störung hat dieser Zug heute etwa zwanzig Minuten Verspätung. Außerdem fährt er heute nicht von Gleis vier, sondern von Gleis neun ab." },
+        { "voice": "sprecherin", "text": "Wir bitten um Ihr Verständnis." }
+      ]
+    },
+    {
+      "key": "placement-a2-h03", "kind": "audio", "title": "Test de niveau A2 · écoute 3 : au magasin de vêtements",
+      "script": [
+        { "voice": "frau", "name": "Kundin", "text": "Guten Tag. Ich habe diese Jacke letzte Woche hier gekauft. Sie ist mir leider zu klein." },
+        { "voice": "mann", "name": "Verkäufer", "text": "Möchten Sie sie umtauschen? Wir haben die Jacke auch in Größe vierzig." },
+        { "voice": "frau", "name": "Kundin", "text": "Nein, danke. Die Farbe gefällt mir eigentlich auch nicht so gut. Kann ich mein Geld zurückbekommen?" },
+        { "voice": "mann", "name": "Verkäufer", "text": "Natürlich. Haben Sie den Kassenbon dabei?" },
+        { "voice": "frau", "name": "Kundin", "text": "Ja, hier, bitte." }
+      ]
+    },
+    {
+      "key": "placement-a2-h04", "kind": "audio", "title": "Test de niveau A2 · écoute 4 : un week-end à Hambourg",
+      "script": [
+        { "voice": "mann", "name": "Tim", "text": "Na, Sophie, wie war dein Wochenende in Hamburg?" },
+        { "voice": "frau", "name": "Sophie", "text": "Super! Am Samstag haben wir eine Hafenrundfahrt gemacht, und am Abend waren wir im Theater. Eigentlich wollten wir am Sonntag in den Zoo gehen, aber es hat den ganzen Tag geregnet. Deshalb sind wir ins Museum gegangen.", "say": "Super! Am Samstag haben wir eine Hafen Rundfahrt gemacht, und am Abend waren wir im Theater. Eigentlich wollten wir am Sonntag in den Zoo gehen, aber es hat den ganzen Tag geregnet. Deshalb sind wir ins Museum gegangen." },
+        { "voice": "mann", "name": "Tim", "text": "Und wie bist du zurückgefahren?" },
+        { "voice": "frau", "name": "Sophie", "text": "Mit dem Bus. Der war viel billiger als der Zug." }
+      ]
+    },
+    {
+      "key": "placement-a2-h05", "kind": "audio", "title": "Test de niveau A2 · écoute 5 : interview d’une conductrice de bus",
+      "script": [
+        { "voice": "sprecher", "name": "Moderator", "text": "Heute ist Frau Albers bei uns im Studio. Sie arbeitet als Busfahrerin in Köln. Frau Albers, wie sieht Ihr Arbeitstag aus?" },
+        { "voice": "frau", "name": "Frau Albers", "text": "Ich fange meistens sehr früh an, schon um halb fünf. Das ist manchmal anstrengend, aber dafür habe ich nachmittags frei und kann meine Kinder von der Schule abholen." },
+        { "voice": "frau", "name": "Frau Albers", "text": "Am meisten gefällt mir aber der Kontakt mit den Fahrgästen. Viele kenne ich schon seit Jahren." }
+      ]
+    },
+    {
+      "key": "placement-a2-h06", "kind": "audio", "title": "Test de niveau A2 · écoute 6 : à la réception de l’hôtel",
+      "script": [
+        { "voice": "mann", "name": "Herr Bauer", "text": "Guten Abend. Ich habe ein Einzelzimmer für zwei Nächte reserviert. Mein Name ist Bauer." },
+        { "voice": "frau", "name": "Rezeption", "text": "Guten Abend, Herr Bauer. Sie haben Zimmer dreihundertzwölf im dritten Stock. Frühstück gibt es von sechs bis zehn Uhr im Restaurant im Erdgeschoss." },
+        { "voice": "mann", "name": "Herr Bauer", "text": "Danke. Gibt es hier auch einen Parkplatz?" },
+        { "voice": "frau", "name": "Rezeption", "text": "Leider nicht direkt am Hotel. Aber zweihundert Meter weiter ist ein Parkhaus. Dort kostet es zwölf Euro pro Nacht." }
+      ]
+    },
+    {
+      "key": "placement-b1-h01", "kind": "audio", "title": "Test de niveau B1 · écoute 1 : message d’un service de réparation",
+      "script": [
+        { "voice": "mann", "name": "Herr Berger", "text": "Guten Tag, Frau Schneider, hier spricht Thomas Berger von der Firma Elektro Haas. Es geht um die Reparatur Ihrer Waschmaschine. Wir hatten ja Donnerstagvormittag vereinbart, aber unser Techniker ist leider krank geworden.", "say": "Guten Tag, Frau Schneider, hier spricht Thomas Berger von der Firma Elektro Haas. Es geht um die Reparatur Ihrer Waschmaschine. Wir hatten ja Donnerstag Vormittag vereinbart, aber unser Techniker ist leider krank geworden." },
+        { "voice": "mann", "name": "Herr Berger", "text": "Ich könnte Ihnen jetzt entweder Freitagnachmittag ab vierzehn Uhr oder Montag früh um acht anbieten. Geben Sie mir bitte bis morgen Mittag Bescheid, welcher Termin Ihnen lieber ist." },
+        { "voice": "mann", "name": "Herr Berger", "text": "Sie erreichen mich unter null zwei null eins, sieben acht neun drei vier. Vielen Dank und auf Wiederhören!" }
+      ]
+    },
+    {
+      "key": "placement-b1-h02", "kind": "audio", "title": "Test de niveau B1 · écoute 2 : informations routières",
+      "script": [
+        { "voice": "sprecher", "text": "Und nun die Verkehrsmeldungen." },
+        { "voice": "sprecher", "text": "Auf der A8 zwischen Stuttgart und Ulm ist nach einem Unfall die rechte Fahrspur gesperrt. Es hat sich ein Stau von etwa acht Kilometern gebildet.", "say": "Auf der A acht zwischen Stuttgart und Ulm ist nach einem Unfall die rechte Fahrspur gesperrt. Es hat sich ein Stau von etwa acht Kilometern gebildet." },
+        { "voice": "sprecher", "text": "Die Polizei empfiehlt, die Autobahn bei Kirchheim zu verlassen und über die Bundesstraße zehn auszuweichen. Wer nach München möchte, sollte mindestens eine halbe Stunde mehr Zeit einplanen." }
+      ]
+    },
+    {
+      "key": "placement-b1-h03", "kind": "audio", "title": "Test de niveau B1 · écoute 3 : visite guidée d’un musée",
+      "script": [
+        { "voice": "frau", "name": "Museumsführerin", "text": "Herzlich willkommen im Schokoladenmuseum! Bevor wir mit der Führung beginnen, noch ein paar Hinweise. Die Führung dauert etwa eine Stunde." },
+        { "voice": "frau", "name": "Museumsführerin", "text": "Fotografieren ist überall erlaubt, nur in der Produktionshalle nicht, weil die Maschinen dort sehr empfindlich auf Blitzlicht reagieren. Am Ende der Führung dürfen Sie an unserem Schokoladenbrunnen probieren." },
+        { "voice": "frau", "name": "Museumsführerin", "text": "Und wer möchte, kann danach in unserem Museumsladen eine eigene Tafel Schokolade gestalten. Das kostet allerdings fünf Euro extra und muss vorher an der Kasse angemeldet werden.", "say": "Und wer möchte, kann danach in unserem Museums Laden eine eigene Tafel Schokolade gestalten. Das kostet allerdings fünf Euro extra und muss vorher an der Kasse angemeldet werden." }
+      ]
+    },
+    {
+      "key": "placement-b1-h04", "kind": "audio", "title": "Test de niveau B1 · écoute 4 : une offre d’emploi refusée",
+      "script": [
+        { "voice": "mann", "name": "Felix", "text": "Du, Lena, ich habe mich übrigens entschieden: Ich nehme die Stelle in Wien nicht an." },
+        { "voice": "frau", "name": "Lena", "text": "Wirklich? Ich dachte, das Gehalt ist viel besser als hier." },
+        { "voice": "mann", "name": "Felix", "text": "Schon, aber die Wohnungen in Wien sind auch viel teurer. Und vor allem müsste ich dort jeden Tag bis sieben im Büro sitzen. Hier kann ich zweimal pro Woche von zu Hause aus arbeiten. Das ist mir im Moment wichtiger, seit meine Tochter in den Kindergarten geht." },
+        { "voice": "frau", "name": "Lena", "text": "Verstehe. Und weiß dein Chef schon, dass du bleibst?" },
+        { "voice": "mann", "name": "Felix", "text": "Nein, das sage ich ihm morgen." }
+      ]
+    },
+    {
+      "key": "placement-b1-h05", "kind": "audio", "title": "Test de niveau B1 · écoute 5 : débat à la radio sur les portables à l’école",
+      "script": [
+        { "voice": "sprecher", "name": "Moderator", "text": "In unserer Sendung geht es heute um die Frage, ob Handys an Schulen verboten werden sollten. Bei mir im Studio sind die Lehrerin Monika Hartmann und der Schüler Lukas Brandt." },
+        { "voice": "sprecher", "name": "Moderator", "text": "Frau Hartmann, an Ihrer Schule sind Handys seit einem Jahr verboten. Wie sind Ihre Erfahrungen?" },
+        { "voice": "frau", "name": "Frau Hartmann", "text": "Ehrlich gesagt besser, als ich erwartet hatte. In den Pausen reden die Schülerinnen und Schüler wieder miteinander, statt nur auf ihre Bildschirme zu schauen." },
+        { "voice": "frau", "name": "Frau Hartmann", "text": "Im Unterricht dürfen sie das Handy übrigens benutzen, zum Beispiel für eine Recherche, aber nur, wenn ich es erlaube." },
+        { "voice": "mann", "name": "Lukas", "text": "Ein komplettes Verbot finde ich trotzdem übertrieben. Viele von uns haben einen langen Schulweg, und unsere Eltern wollen uns jederzeit erreichen können." }
+      ]
+    },
+    {
+      "key": "placement-b1-h06", "kind": "audio", "title": "Test de niveau B1 · écoute 6 : annonce dans un magasin",
+      "script": [
+        { "voice": "sprecherin", "text": "Liebe Kundinnen und Kunden, wegen Umbauarbeiten bleibt unsere Filiale in der Goethestraße vom ersten bis zum fünfzehnten März geschlossen." },
+        { "voice": "sprecherin", "text": "In dieser Zeit können Sie Ihre Bestellungen in unserer Filiale am Hauptbahnhof abholen, die ab sofort auch sonntags von zehn bis achtzehn Uhr geöffnet hat. Online-Bestellungen liefern wir wie gewohnt nach Hause." },
+        { "voice": "sprecherin", "text": "Ab dem sechzehnten März begrüßen wir Sie dann wieder in der Goethestraße, mit einem größeren Angebot und einer neuen Bäckerei." }
+      ]
+    }
+  ]
+}

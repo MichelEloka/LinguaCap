@@ -21,6 +21,11 @@ public class Gateway {
     private static final String SLUG = "[a-z0-9][a-z0-9-]{0,79}";
     private static final String UUID_PATH = "[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}";
     private static final String LEVEL = "[abc][12]";
+    /** Numéro de contrat d'un parcours. */
+    private static final String NUMBER = "[1-9][0-9]{0,3}";
+    /** Lectures d'un élève relayées avec ?learnerId= (professeur référent ou administration). */
+    private static final List<String> LEARNER_READS = List.of("learning/progress", "learning/enrollment", "assessments/results",
+            "tracking/messages", "assessments/exams", "learning/path", "learning/library", "assessments/placements");
     /** Filtres acceptés par le tableau de bord des indicateurs, chacun avec sa forme stricte. */
     private static final Map<String, String> KPI_FILTERS = Map.of("from", "\\d{4}-\\d{2}-\\d{2}", "to", "\\d{4}-\\d{2}-\\d{2}",
             "startLevel", "A0|[ABC][12]", "level", "[ABC][12]", "template", "standard|intensive|custom",
@@ -92,8 +97,7 @@ public class Gateway {
             // Seuls learnerId (lectures d'un élève) et enrollmentId (tentatives d'un parcours) sont relayés.
             String name = path.equals("assessments/exams") ? "enrollmentId" : "learnerId";
             String value = params.getFirst(name);
-            if (!method.equals("GET") || !List.of("learning/progress", "learning/enrollment", "assessments/results",
-                            "tracking/messages", "assessments/exams").contains(path)
+            if (!method.equals("GET") || !LEARNER_READS.contains(path)
                     || params.size() != 1 || value == null || !value.matches(UUID_PATH) || params.get(name).size() != 1) {
                 throw HttpError.badRequest("Paramètre de recherche invalide.");
             }
@@ -125,6 +129,17 @@ public class Gateway {
                     || path.matches("assessments/exams/" + UUID_PATH)) return assessment;
             if (path.equals("tracking/overview") || path.equals("tracking/messages") || path.equals("tracking/kpis")
                     || path.matches("tracking/learners/" + UUID_PATH)) return tracking;
+            // Parcours multi-niveaux : langues, test de niveau, entraînement, parcours, contrats, ajouts et bibliothèque.
+            if (path.equals("me/teacher")) return identity;
+            if (path.equals("languages") || path.equals("catalogue/placement-tests")
+                    || path.matches("catalogue/placement-tests/" + UUID_PATH)) return catalogue;
+            if (path.equals("assessments/placements") || path.matches("assessments/placements/" + UUID_PATH)
+                    || path.equals("assessments/practice") || path.matches("assessments/practice/" + UUID_PATH)) return assessment;
+            if (path.equals("learning/onboarding") || path.equals("learning/path") || path.equals("learning/contracts/pending")
+                    || path.matches("learning/paths/" + UUID_PATH + "/(proposal|contracts|additions)")
+                    || path.equals("learning/library") || path.matches("learning/library/" + UUID_PATH + "/activities/" + SLUG)) {
+                return learning;
+            }
         }
         if (method.equals("POST")) {
             if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
@@ -140,6 +155,18 @@ public class Gateway {
                     || path.matches("assessments/exams/" + UUID_PATH + "/(submit|recordings|grading)")
                     || path.matches("assessments/exams/" + UUID_PATH + "/recordings/" + UUID_PATH + "/finalize")) return assessment;
             if (path.equals("tracking/messages")) return tracking;
+            if (path.equals("catalogue/placement-tests") || path.matches("catalogue/placement-tests/" + UUID_PATH + "/publish")) {
+                return catalogue;
+            }
+            if (path.equals("assessments/placements") || path.matches("assessments/placements/" + UUID_PATH + "/submit")
+                    || path.equals("assessments/practice") || path.matches("assessments/practice/" + UUID_PATH + "/submit")) {
+                return assessment;
+            }
+            // L'estimation est testée avant les motifs à identifiant.
+            if (path.equals("learning/paths/estimate") || path.equals("learning/paths")) return learning;
+            if (path.matches("learning/paths/" + UUID_PATH + "/(proposal/validate|pause|resume|advance|contracts|additions)")
+                    || path.matches("learning/paths/" + UUID_PATH + "/contracts/" + NUMBER + "/(accept|reject)")
+                    || path.matches("learning/paths/" + UUID_PATH + "/additions/" + UUID_PATH + "/remove")) return learning;
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
@@ -149,6 +176,10 @@ public class Gateway {
             if (path.matches("learning/sessions/" + UUID_PATH + "/activities/" + SLUG + "/progress")
                     || path.matches("learning/enrollments/" + UUID_PATH + "/(availability|starting-point)")) return learning;
             if (path.matches("admin/users/" + UUID_PATH + "/(status|role|permissions|teacher|reviewer)")) return identity;
+            if (path.equals("me/language") || path.equals("me/teacher-profile")) return identity;
+            if (path.matches("catalogue/placement-tests/" + UUID_PATH)) return catalogue;
+            if (path.matches("assessments/(placements|practice)/" + UUID_PATH + "/answers")) return assessment;
+            if (path.matches("learning/paths/" + UUID_PATH + "/(objective|availability)")) return learning;
         }
         throw HttpError.notFound("Cette route API est inconnue.");
     }
@@ -157,12 +188,16 @@ public class Gateway {
                                       JsonNode body, String requestId) {
         // Le jeton Supabase de l'utilisateur ne part que vers Médias, directement ou via la séance d'Apprentissage
         // qui demande les adresses temporaires de ses supports : les politiques Storage s'appliquent à l'utilisateur.
-        // Les évaluations lisent et déposent aussi des fichiers privés (sons d'écoute, enregistrements oraux).
+        // Les évaluations lisent et déposent aussi des fichiers privés (sons d'écoute, enregistrements oraux), comme le
+        // test de niveau, l'entraînement et les activités de la bibliothèque (adresses temporaires des supports).
         String token = target.equals(media) || method.equals("GET") && path.matches("/v1/learning/sessions/" + UUID_PATH)
-                || path.startsWith("/v1/assessments/exams") ? user.token() : "";
+                || path.startsWith("/v1/assessments/exams") || path.startsWith("/v1/assessments/placements")
+                || path.startsWith("/v1/assessments/practice")
+                || method.equals("GET") && path.matches("/v1/learning/library/" + UUID_PATH + "/activities/" + SLUG) ? user.token() : "";
         String email = path.equals("/v1/me") ? user.email() : "";
         String key = path.equals("/v1/assessments/quiz") || path.equals("/v1/assessments/diagnostics")
-                || path.matches("/v1/assessments/exams/" + UUID_PATH + "/submit") ? headers.getHeaderString("Idempotency-Key") : null;
+                || path.matches("/v1/assessments/(exams|placements|practice)/" + UUID_PATH + "/submit")
+                ? headers.getHeaderString("Idempotency-Key") : null;
         if (key != null && !key.matches("[A-Za-z0-9._-]{1,128}")) {
             throw HttpError.badRequest("Clé de remise invalide.");
         }

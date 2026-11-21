@@ -1,9 +1,15 @@
 /** Accueil « Aujourd’hui » de l'élève : prochaine séance, objectif, semaine, séances à faire, résultats et dernier message. */
 import { useState } from 'react';
-import { ArrowRight, BookOpen, CalendarCheck2, CalendarClock, CalendarDays, ChartNoAxesCombined, Check, Clock, Flag, ListChecks, MessageCircle, Play, Target } from 'lucide-react';
+import {
+  ArrowRight, BookOpen, CalendarCheck2, CalendarClock, CalendarDays, ChartNoAxesCombined, Check, ClipboardCheck, Clock, Flag, Handshake, LibraryBig,
+  ListChecks, MessageCircle, PencilLine, Play, Target,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge, EmptyState } from '../../components/ui';
 import { Callout, Card, ProgressRing, Sparkline } from '../../design/kit';
+import { languageName } from '../../domain/languages';
+import { formatMinutes, type PathView } from '../../integration/v2';
+import { LevelMark, levelName, longDate, ofLanguage } from '../onboarding/onboarding-kit';
 import { goalStatus, paceLabel, showDate, type PlannedEnrollment } from './GoalPanel';
 import { sessionStatus, type Grade, type SessionSummary } from './LearnerSession';
 import {
@@ -15,7 +21,7 @@ import {
   type LearnerMessage,
 } from './learner-common';
 
-function NextSession({ enrollment, next }: { enrollment: PlannedEnrollment | null; next?: SessionSummary }) {
+function NextSession({ enrollment, next, path }: { enrollment: PlannedEnrollment | null; next?: SessionSummary; path: PathView | null }) {
   const sessions = enrollment?.sessions ?? [];
   const completed = Boolean(sessions.length && !next);
   const action = next?.status === 'planned' ? 'Commencer la séance' : 'Reprendre la séance';
@@ -26,7 +32,8 @@ function NextSession({ enrollment, next }: { enrollment: PlannedEnrollment | nul
     <section className="ld-hero ld-area-hero" aria-labelledby="ld-next-title">
       <div className="ld-hero-copy">
         <div className="ld-hero-tags">
-          <span className="ld-hero-tag"><BookOpen size={14} aria-hidden="true" /> {enrollment ? `Allemand · ${enrollment.levelCode}` : 'Mon parcours'}</span>
+          <span className="ld-hero-tag"><BookOpen size={14} aria-hidden="true" /> {enrollment ? `${path ? languageName(path.languageId) : 'Allemand'} · ${enrollment.levelCode}` : 'Mon parcours'}</span>
+          {path && path.steps.length > 1 && <span className="ld-hero-tag">Objectif {path.targetLevel}</span>}
           {next && <span className="ld-hero-tag">Séance {next.position} sur {sessions.length}</span>}
           {next?.status === 'late' && <span className="ld-hero-tag is-late">En retard</span>}
         </div>
@@ -56,8 +63,8 @@ function NextSession({ enrollment, next }: { enrollment: PlannedEnrollment | nul
         <div className="ld-hero-actions">
           {next
             ? <Link className="btn btn-lg ld-hero-action" to={`/espace/seance/${next.id}`}><Play size={18} fill="currentColor" aria-hidden="true" /> {action}</Link>
-            : <Link className="btn btn-lg ld-hero-action" to={completed ? '/espace/resultats' : '/espace/planning'}>
-                {completed ? 'Voir mes résultats' : 'Voir mon planning'} <ArrowRight size={18} aria-hidden="true" /></Link>}
+            : <Link className="btn btn-lg ld-hero-action" to={completed ? '/espace/resultats' : enrollment || path ? '/espace/planning' : '/espace/accueil'}>
+                {completed ? 'Voir mes résultats' : enrollment || path ? 'Voir mon planning' : 'Construire mon parcours'} <ArrowRight size={18} aria-hidden="true" /></Link>}
         </div>
       </div>
       <div className="ld-hero-visual">
@@ -73,7 +80,7 @@ function NextSession({ enrollment, next }: { enrollment: PlannedEnrollment | nul
   );
 }
 
-function GoalCard({ enrollment }: { enrollment: PlannedEnrollment | null }) {
+function GoalCard({ enrollment, path }: { enrollment: PlannedEnrollment | null; path: PathView | null }) {
   if (!enrollment) {
     return (
       <Card className="ld-area-goal" title="Mon objectif" icon={<Target size={19} />}>
@@ -85,18 +92,29 @@ function GoalCard({ enrollment }: { enrollment: PlannedEnrollment | null }) {
   const complete = sessions.filter((session) => session.status === 'completed').length;
   const percent = sessions.length ? Math.round((complete / sessions.length) * 100) : 0;
   const status = goalStatus[goal.status];
-  const remaining = goal.targetDate ? daysFromToday(localDate(goal.targetDate)) : null;
+  const target = path?.targetDate ?? goal.targetDate;
+  const remaining = target ? daysFromToday(localDate(target)) : null;
   return (
-    <Card className="ld-area-goal ld-goal" title="Mon objectif" description={`Allemand ${goal.targetLevel}`} icon={<Target size={19} />}
-      action={<Badge tone={status.tone}>{status.label}</Badge>}>
+    <Card className="ld-area-goal ld-goal" title="Mon objectif" description={path ? `${languageName(path.languageId)} ${path.targetLevel}` : `Allemand ${goal.targetLevel}`}
+      icon={<Target size={19} />} action={<Badge tone={status.tone}>{status.label}</Badge>}>
+      {path && path.steps.length > 1 && (
+        <ol className="ld-goal-levels" aria-label="Niveaux du parcours">
+          {path.steps.map((step) => (
+            <li key={step.id} className={`lvl-${step.levelCode} is-${step.status}`}>
+              <LevelMark code={step.levelCode} size="sm" state={step.status === 'active' ? 'current' : step.status === 'completed' ? 'done' : 'planned'} />
+              <span>{step.status === 'active' ? 'En cours' : step.status === 'completed' ? 'Terminé' : 'À venir'}</span>
+            </li>
+          ))}
+        </ol>
+      )}
       <div className="ld-goal-body">
         <ProgressRing value={percent} size={96} stroke={9} label={`Parcours réalisé à ${percent} %`}>
           <span className="ld-ring-text"><strong>{percent} %</strong><small>du parcours</small></span>
         </ProgressRing>
         <dl className="ld-goal-facts">
           <div><dt>Séances terminées</dt><dd>{complete} / {sessions.length}</dd></div>
-          <div><dt>Date cible</dt><dd>{showDate(goal.targetDate)}</dd></div>
-          <div><dt>Rythme</dt><dd>{paceLabel(goal.template)}</dd></div>
+          <div><dt>Date cible</dt><dd>{path ? longDate(path.targetDate) : showDate(goal.targetDate)}</dd></div>
+          <div><dt>Rythme</dt><dd>{path ? path.difficulty.label : paceLabel(goal.template)}</dd></div>
         </dl>
       </div>
       {remaining !== null && remaining >= 0 && (
@@ -223,13 +241,53 @@ function MessagePreview({ messages }: { messages: LearnerMessage[] }) {
   );
 }
 
-export function HomeView({ enrollment, results, messages }: { enrollment: PlannedEnrollment | null; results: Grade[]; messages: LearnerMessage[] }) {
+function LibraryCard({ path }: { path: PathView | null }) {
+  const shortcuts = [
+    { icon: <BookOpen size={15} aria-hidden="true" />, label: 'Revoir une leçon' },
+    { icon: <PencilLine size={15} aria-hidden="true" />, label: 'Refaire un exercice' },
+    { icon: <ClipboardCheck size={15} aria-hidden="true" />, label: 'S’entraîner au bilan' },
+  ];
+  return (
+    <section className="ld-area-library ld-library" aria-labelledby="ld-library-title">
+      <div className="ld-library-head">
+        <span className="ld-library-icon" aria-hidden="true"><LibraryBig size={22} /></span>
+        <div>
+          <h2 id="ld-library-title">Bibliothèque</h2>
+          <p>Tous les cours {path ? `${ofLanguage(languageName(path.languageId))} ` : ''}à tout moment, en plus de vos séances.</p>
+        </div>
+      </div>
+      <ul className="ld-library-shortcuts">{shortcuts.map((item) => <li key={item.label}>{item.icon}{item.label}</li>)}</ul>
+      <Link className="btn btn-soft btn-sm ld-library-link" to="/espace/bibliotheque">Ouvrir la bibliothèque <ArrowRight size={15} aria-hidden="true" /></Link>
+    </section>
+  );
+}
+
+/** Bandeau d'une proposition de contrat qui attend la réponse de l'élève. */
+function ContractBanner({ path }: { path: PathView }) {
+  const pending = path.contract.pending;
+  if (!pending?.canAccept) return null;
+  return (
+    <section className="ld-contract-banner lc-enter" aria-labelledby="ld-contract-title">
+      <span className="ld-contract-icon" aria-hidden="true"><Handshake size={22} /></span>
+      <div className="ld-contract-text">
+        <h2 id="ld-contract-title">{pending.proposedBy === 'teacher' ? 'Votre professeur vous propose un nouveau contrat' : 'Un nouveau contrat vous est proposé'}</h2>
+        <p>{levelName(pending.terms.targetLevel)} le {longDate(pending.terms.targetDate)} · au moins {formatMinutes(pending.terms.weeklyMinutes)} par semaine</p>
+      </div>
+      <Link className="btn btn-primary ld-contract-action" to="/espace/contrat">Voir la proposition <ArrowRight size={16} aria-hidden="true" /></Link>
+    </section>
+  );
+}
+
+export function HomeView({ enrollment, results, messages, path = null }: {
+  enrollment: PlannedEnrollment | null; results: Grade[]; messages: LearnerMessage[]; path?: PathView | null;
+}) {
   const sessions = enrollment?.sessions ?? [];
   const next = sessions.find((session) => session.status !== 'completed');
   const goal = enrollment?.goal;
   const diagnosticPending = Boolean(goal?.diagnosticLessonId && !goal.diagnosticAttemptId);
   return (
     <div className="ld-home">
+      {path && <ContractBanner path={path} />}
       {diagnosticPending && (
         <div className="ld-notice lc-enter">
           <Callout tone="tip" title="Diagnostic initial à passer">
@@ -239,12 +297,13 @@ export function HomeView({ enrollment, results, messages }: { enrollment: Planne
         </div>
       )}
       <div className="ld-home-grid lc-stagger">
-        <NextSession enrollment={enrollment} next={next} />
+        <NextSession enrollment={enrollment} next={next} path={path} />
         <TodoCard sessions={sessions} />
         <WeekCard sessions={sessions} />
-        <GoalCard enrollment={enrollment} />
+        <GoalCard enrollment={enrollment} path={path} />
         <ResultsPreview results={results} sessions={sessions} />
         <MessagePreview messages={messages} />
+        <LibraryCard path={path} />
       </div>
     </div>
   );

@@ -1,15 +1,20 @@
 #!/usr/bin/env node
 // Écrit le texte attendu de chaque son (clé → texte prononcé) pour le contrôle par reconnaissance vocale.
-// Usage : node infra/content/expected-transcripts.mjs <fichier de sortie> [a1|a2 …]
+// Usage : node infra/content/expected-transcripts.mjs <fichier de sortie> [a1|a2|placement …]
+//   sans niveau : tous les niveaux et le test de niveau.
 import { writeFileSync } from 'node:fs';
-import { allMedia, availableLevels, loadLevel, spokenText } from './content-lib.mjs';
+import { allMedia, availableLevels, loadLevel, loadPlacement, placementMedia, spokenText } from './content-lib.mjs';
 
-const [output, ...levels] = process.argv.slice(2);
+const [output, ...targets] = process.argv.slice(2);
 const expected = {};
-for (const levelId of levels.length ? levels : availableLevels()) {
+for (const target of targets.length ? targets : [...availableLevels(), 'placement']) {
+  if (target === 'placement') {
+    for (const media of placementMedia(loadPlacement())) if (media.kind === 'audio') expected[media.key] = spokenText(media);
+    continue;
+  }
   let level;
   try {
-    level = loadLevel(levelId);
+    level = loadLevel(target);
   } catch {
     // Niveau en cours de rédaction : seuls les modules présents sont contrôlés.
     continue;

@@ -4,6 +4,7 @@ import { Ellipsis, LogOut, PanelLeftClose, PanelLeftOpen, X } from 'lucide-react
 import type { LucideIcon } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Avatar } from '../../design/kit';
+import { useWorkspaceBadges } from './badges';
 import './workspace.css';
 
 export interface WorkspaceLink {
@@ -32,6 +33,11 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
   demo?: boolean;
 }) {
   const { pathname } = useLocation();
+  const badges = useWorkspaceBadges();
+  const badge = (path: string) => {
+    const count = badges.get(path);
+    return count ? <b className="ws-badge">{count}<span className="sr-only"> en attente</span></b> : null;
+  };
   const [moreAt, setMoreAt] = useState<string | null>(null);
   // Barre latérale pliable à volonté ; sans choix enregistré, elle démarre repliée sur tablette.
   const [collapsed, setCollapsed] = useState(() => {
@@ -116,6 +122,7 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
             <NavLink to={path} end={end} key={path} onClick={() => setMoreAt(null)} title={collapsed ? label : undefined}>
               <Icon size={20} strokeWidth={1.8} aria-hidden="true" />
               <span>{label}</span>
+              {badge(path)}
             </NavLink>
           ))}
         </nav>
@@ -152,7 +159,7 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
         <div className="ws-content" key={active?.path ?? pathname.split('/').slice(0, 3).join('/')}>{children}</div>
         <nav className="ws-tabbar" aria-label="Raccourcis mobiles">
           {links.slice(0, mobileCount).map(({ path, label, short, icon: Icon, end }) => (
-            <NavLink to={path} end={end} key={path}><Icon size={21} strokeWidth={1.8} aria-hidden="true" /><span>{short ?? label}</span></NavLink>
+            <NavLink to={path} end={end} key={path}><Icon size={21} strokeWidth={1.8} aria-hidden="true" /><span>{short ?? label}</span>{badge(path)}</NavLink>
           ))}
           {links.length > mobileCount && (
             <button ref={moreButton} type="button" onClick={() => setMoreAt(moreOpen ? null : pathname)} aria-expanded={moreOpen} aria-controls="workspace-navigation">

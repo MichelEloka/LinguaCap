@@ -39,6 +39,49 @@ class LearnerAccess {
         identities.learner(callerId, learnerId);
     }
 
+    /**
+     * Appelant d'une action sur le parcours d'un élève : l'élève lui-même, son professeur référent ou l'administration.
+     * accompanied : l'élève a un professeur référent ; languageId : langue de l'élève si Identités la connaît.
+     */
+    record Viewer(UUID callerId, UUID learnerId, String role, boolean accompanied, UUID teacherId, String languageId) {
+        boolean learner() {
+            return callerId.equals(learnerId);
+        }
+
+        boolean teacher() {
+            return !learner() && "teacher".equals(role);
+        }
+
+        boolean admin() {
+            return !learner() && "admin".equals(role);
+        }
+
+        boolean educator() {
+            return teacher() || admin();
+        }
+
+        PathRules.Caller caller() {
+            return new PathRules.Caller(learner(), teacher(), admin(), accompanied);
+        }
+
+        ContractRules.Party party() {
+            return learner() ? ContractRules.Party.LEARNER : educator() ? ContractRules.Party.EDUCATOR : null;
+        }
+    }
+
+    /** Vérifie l'accès (Identités répond 403 ou 404 sinon) et décrit l'appelant vis-à-vis de cet élève. */
+    Viewer viewer(UUID callerId, UUID learnerId) {
+        var learner = identities.learner(callerId, learnerId);
+        boolean self = callerId.equals(learnerId);
+        String role = self ? "learner" : role(callerId);
+        if (!self && !"teacher".equals(role) && !"admin".equals(role)) {
+            throw HttpError.forbidden("Seuls l’élève, son professeur référent et l’administration ont accès à ce parcours.");
+        }
+        UUID teacherId = learner.hasNonNull("teacherId") ? UUID.fromString(learner.path("teacherId").asText()) : null;
+        String languageId = learner.hasNonNull("languageId") ? learner.path("languageId").asText() : null;
+        return new Viewer(callerId, learnerId, role, teacherId != null, teacherId, languageId);
+    }
+
     static UUID parse(String value) {
         if (value != null) {
             try {

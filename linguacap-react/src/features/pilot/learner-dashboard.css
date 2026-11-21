@@ -32,18 +32,19 @@
 
 /* ---------- Accueil ---------- */
 .ld-home { display: grid; gap: 1rem; min-width: 0; }
-.ld-home-grid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "todo" "week" "goal" "results" "message"; gap: 1rem; }
+.ld-home-grid { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "hero" "todo" "week" "goal" "results" "message" "library"; gap: 1rem; }
 .ld-area-hero { grid-area: hero; }
 .ld-area-goal { grid-area: goal; }
 .ld-area-week { grid-area: week; }
 .ld-area-todo { grid-area: todo; }
 .ld-area-results { grid-area: results; }
 .ld-area-message { grid-area: message; }
+.ld-area-library { grid-area: library; }
 @container ld-page (min-width: 640px) {
-  .ld-home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "hero hero" "todo todo" "week week" "goal results" "message message"; }
+  .ld-home-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-areas: "hero hero" "todo todo" "week week" "goal results" "message library"; }
 }
 @container ld-page (min-width: 940px) {
-  .ld-home-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "hero hero goal" "week week week" "todo todo results" "todo todo message"; }
+  .ld-home-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-areas: "hero hero goal" "week week week" "todo todo results" "todo todo message" "todo todo library"; }
 }
 
 /* Carte « prochaine séance » */
@@ -234,3 +235,47 @@
   background: linear-gradient(90deg, var(--canvas) 25%, var(--surface-2) 50%, var(--canvas) 75%); background-size: 200% 100%;
   animation: lc-shimmer 1.4s linear infinite; }
 .ld-empty-card .empty-state { padding-block: 3rem; }
+
+/* ---------- Parcours multi-niveaux (incrément « Parcours ») ---------- */
+/* Bandeau d'une proposition de contrat */
+.ld-contract-banner { display: flex; flex-wrap: wrap; align-items: center; gap: .85rem 1rem; padding: 1rem 1.15rem; border-radius: var(--r-xl);
+  background: linear-gradient(120deg, var(--accent-50), var(--surface) 70%); border: 1px solid color-mix(in srgb, var(--accent) 40%, var(--line));
+  box-shadow: var(--shadow-sm); }
+.ld-contract-icon { display: grid; place-items: center; width: 46px; height: 46px; flex-shrink: 0; border-radius: 14px; color: var(--surface); background: var(--accent);
+  box-shadow: 0 8px 18px color-mix(in srgb, var(--accent) 35%, transparent); animation: lc-pop var(--t-slow) var(--ease-spring) both; }
+.ld-contract-text { display: grid; flex: 1 1 18rem; gap: .15rem; min-width: 0; }
+.ld-contract-text h2 { font-size: 1.05rem; }
+.ld-contract-text p { color: var(--ink-2); font-size: var(--text-sm); }
+@container ld-page (max-width: 520px) { .ld-contract-action { width: 100%; } }
+
+/* Niveaux du parcours dans « Mon objectif » */
+.ld-goal-levels { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; padding: 0; list-style: none; }
+.ld-goal-levels li { display: inline-flex; align-items: center; gap: .4rem; padding: .25rem .65rem .25rem .3rem; border-radius: var(--r-full); background: var(--lvl-50, var(--canvas));
+  color: var(--ink-2); font-size: var(--text-xs); font-weight: 700; }
+.ld-goal-levels li.is-planned { background: var(--surface-2); color: var(--muted); }
+
+/* Accès à la bibliothèque */
+.ld-library { display: flex; flex-direction: column; gap: .85rem; padding: 1.25rem; border-radius: var(--r-lg); border: 1px solid var(--line); box-shadow: var(--shadow-sm);
+  background: radial-gradient(circle at 100% 0%, var(--violet-50) 0, transparent 55%), var(--surface); }
+.ld-library-head { display: flex; align-items: flex-start; gap: .75rem; }
+.ld-library-head > div { display: grid; gap: .15rem; }
+.ld-library-head h2 { font-size: 1.02rem; }
+.ld-library-head p { color: var(--muted); font-size: var(--text-sm); }
+.ld-library-icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 12px; color: var(--surface);
+  background: linear-gradient(135deg, var(--violet), var(--brand)); }
+.ld-library-shortcuts { display: flex; flex-wrap: wrap; gap: .4rem; margin: 0; padding: 0; list-style: none; }
+.ld-library-shortcuts li { display: inline-flex; align-items: center; gap: .35rem; padding: .3rem .65rem; border-radius: var(--r-full); color: var(--ink-2);
+  background: var(--surface-2); border: 1px solid var(--line); font-size: var(--text-xs); font-weight: 700; }
+.ld-library-shortcuts svg { color: var(--violet); }
+.ld-library-link { align-self: flex-start; margin-top: auto; }
+
+/* Séances verrouillées d'un niveau futur */
+.ld-session-row.is-locked { cursor: default; background: repeating-linear-gradient(135deg, var(--surface) 0 10px, var(--surface-2) 10px 20px); }
+.ld-session-row.is-locked .kit-list-main strong { color: var(--muted); }
+.ld-status-icon.is-locked { color: var(--subtle); background: var(--canvas); }
+.ld-week-group.is-locked { border-style: dashed; }
+.ld-week-group.is-locked header { background: var(--canvas); }
+.ld-week-group.is-locked .ld-week-count { display: inline-flex; align-items: center; gap: .25rem; color: var(--subtle); }
+.ld-path-weeks { display: grid; grid-template-columns: minmax(0, 1fr); gap: .25rem; padding-bottom: 1rem; }
+.ld-path-weeks > .ld-more { justify-self: center; }
+.ld-more-count { color: var(--muted); font-size: var(--text-xs); font-weight: 600; }

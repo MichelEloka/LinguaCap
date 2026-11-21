@@ -81,38 +81,50 @@ class GoalStore {
     UUID create(UUID learnerId, String levelCode, UUID versionId, int versionNumber, UUID assignedBy, String startLevel,
                 LocalDate startDate, LocalDate targetDate, String template, String prerequisiteLevel,
                 boolean prerequisiteMet, List<Day> availability) {
-        return transaction("create goal", connection -> {
-            UUID id;
-            try (var insert = connection.prepareStatement("""
-                    insert into learning.enrollments
-                        (learner_id, level_code, track_version_id, track_version_number, assigned_by, start_level,
-                         start_date, target_date, initial_target_date, template, goal_status, prerequisite_level,
-                         prerequisite_met)
-                    values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'preparing', ?, ?)
-                    on conflict (learner_id) where status = 'active' do nothing
-                    returning id
-                    """)) {
-                insert.setObject(1, learnerId);
-                insert.setString(2, levelCode);
-                insert.setObject(3, versionId);
-                insert.setInt(4, versionNumber);
-                insert.setObject(5, assignedBy);
-                insert.setString(6, startLevel);
-                insert.setObject(7, startDate);
-                insert.setObject(8, targetDate);
-                insert.setObject(9, targetDate);
-                insert.setString(10, template);
-                insert.setString(11, prerequisiteLevel);
-                insert.setBoolean(12, prerequisiteMet);
-                try (var rows = insert.executeQuery()) {
-                    if (!rows.next()) throw HttpError.conflict("Un parcours est déjà en cours pour cet élève.");
-                    id = rows.getObject(1, UUID.class);
-                }
+        return transaction("create goal", connection -> insertEnrollment(connection, learnerId, levelCode, versionId,
+                versionNumber, assignedBy, startLevel, startDate, targetDate, template, "preparing", prerequisiteLevel,
+                prerequisiteMet, availability));
+    }
+
+    /**
+     * Inscription d'un niveau dans la transaction en cours, avec ses disponibilités et l'événement goal_set.
+     * Un seul parcours actif par élève : un autre niveau actif fait échouer la création (409).
+     */
+    UUID insertEnrollment(Connection connection, UUID learnerId, String levelCode, UUID versionId, int versionNumber,
+                          UUID assignedBy, String startLevel, LocalDate startDate, LocalDate targetDate, String template,
+                          String goalStatus, String prerequisiteLevel, boolean prerequisiteMet, List<Day> availability)
+            throws SQLException {
+        UUID id;
+        try (var insert = connection.prepareStatement("""
+                insert into learning.enrollments
+                    (learner_id, level_code, track_version_id, track_version_number, assigned_by, start_level,
+                     start_date, target_date, initial_target_date, template, goal_status, prerequisite_level,
+                     prerequisite_met)
+                values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                on conflict (learner_id) where status = 'active' do nothing
+                returning id
+                """)) {
+            insert.setObject(1, learnerId);
+            insert.setString(2, levelCode);
+            insert.setObject(3, versionId);
+            insert.setInt(4, versionNumber);
+            insert.setObject(5, assignedBy);
+            insert.setString(6, startLevel);
+            insert.setObject(7, startDate);
+            insert.setObject(8, targetDate);
+            insert.setObject(9, targetDate);
+            insert.setString(10, template);
+            insert.setString(11, goalStatus);
+            insert.setString(12, prerequisiteLevel);
+            insert.setBoolean(13, prerequisiteMet);
+            try (var rows = insert.executeQuery()) {
+                if (!rows.next()) throw HttpError.conflict("Un parcours est déjà en cours pour cet élève.");
+                id = rows.getObject(1, UUID.class);
             }
-            writeAvailability(connection, id, availability);
-            events.goalSet(connection, id);
-            return id;
-        });
+        }
+        writeAvailability(connection, id, availability);
+        events.goalSet(connection, id);
+        return id;
     }
 
     List<Day> availability(UUID enrollmentId) {
@@ -269,23 +281,7 @@ class GoalStore {
             if (!prerequisiteMet) {
                 throw HttpError.conflict("Le prérequis du niveau doit être validé ou confirmé par le diagnostic.");
             }
-            try (var history = connection.prepareStatement("""
-                    insert into learning.session_due_history (session_id, revision_number, previous_due_at, was_late, reason)
-                    select id, ?, due_at, due_at < now(), 'replanned' from learning.sessions
-                    where enrollment_id = ? and completed_at is null and superseded_at is null
-                    """)) {
-                history.setInt(1, number);
-                history.setObject(2, enrollmentId);
-                history.executeUpdate();
-            }
-            try (var supersede = connection.prepareStatement("""
-                    update learning.sessions set superseded_at = now()
-                    where enrollment_id = ? and completed_at is null and superseded_at is null
-                    """)) {
-                supersede.setObject(1, enrollmentId);
-                supersede.executeUpdate();
-            }
-            insertSessions(connection, enrollmentId, number, plan.path("sessions"));
+            replaceSessions(connection, enrollmentId, number, plan.path("sessions"));
             try (var previous = connection.prepareStatement("""
                     update learning.plan_revisions set status = 'superseded' where enrollment_id = ? and status = 'validated'
                     """)) {
@@ -394,6 +390,41 @@ class GoalStore {
         });
     }
 
+    /**
+     * Remplace les séances non terminées d'une inscription par celles d'une révision validée : leur échéance et un
+     * éventuel retard restent dans l'historique, les séances terminées sont conservées. Les activités ajoutées par le
+     * professeur gardent leur version source (colonnes source_*).
+     */
+    void replaceSessions(Connection connection, UUID enrollmentId, int revision, JsonNode sessions) throws SQLException {
+        supersedeOpenSessions(connection, enrollmentId, revision);
+        insertSessions(connection, enrollmentId, revision, sessions);
+    }
+
+    /** Écarte les séances non terminées (replanification ou fin d'un niveau) en gardant leur échéance dans l'historique. */
+    void supersedeOpenSessions(Connection connection, UUID enrollmentId, int revision) throws SQLException {
+        try (var history = connection.prepareStatement("""
+                insert into learning.session_due_history (session_id, revision_number, previous_due_at, was_late, reason)
+                select id, ?, due_at, due_at < now(), 'replanned' from learning.sessions
+                where enrollment_id = ? and completed_at is null and superseded_at is null
+                """)) {
+            history.setInt(1, revision);
+            history.setObject(2, enrollmentId);
+            history.executeUpdate();
+        }
+        try (var supersede = connection.prepareStatement("""
+                update learning.sessions set superseded_at = now()
+                where enrollment_id = ? and completed_at is null and superseded_at is null
+                """)) {
+            supersede.setObject(1, enrollmentId);
+            supersede.executeUpdate();
+        }
+    }
+
+    /** Remplace les disponibilités d'une inscription dans la transaction en cours. */
+    void replaceAvailability(Connection connection, UUID enrollmentId, List<Day> days) throws SQLException {
+        writeAvailability(connection, enrollmentId, days);
+    }
+
     private void insertSessions(Connection connection, UUID enrollmentId, int revision, JsonNode sessions) throws SQLException {
         int position;
         UUID learnerId;
@@ -431,9 +462,14 @@ class GoalStore {
             }
             int index = 0;
             for (JsonNode item : session.path("items")) {
+                // Une activité ajoutée par le professeur porte sa version source : le contenu y est lu.
+                String sourceVersion = text(item.path("sourceVersionId"));
+                String sourceActivity = text(item.path("sourceActivityId"));
+                boolean sourced = sourceVersion != null && sourceActivity != null;
                 try (var insert = connection.prepareStatement("""
-                        insert into learning.session_activities (session_id, activity_id, position, kind, title, estimated_minutes)
-                        values (?, ?, ?, ?, ?, ?)
+                        insert into learning.session_activities (session_id, activity_id, position, kind, title,
+                            estimated_minutes, source_version_id, source_activity_id, addition_id)
+                        values (?, ?, ?, ?, ?, ?, ?::uuid, ?, ?::uuid)
                         """)) {
                     insert.setObject(1, sessionId);
                     insert.setString(2, item.path("id").asText());
@@ -441,6 +477,9 @@ class GoalStore {
                     insert.setString(4, item.path("kind").asText());
                     insert.setString(5, item.path("title").asText());
                     insert.setInt(6, Math.max(1, item.path("minutes").asInt()));
+                    insert.setString(7, sourced ? sourceVersion : null);
+                    insert.setString(8, sourced ? sourceActivity : null);
+                    insert.setString(9, text(item.path("additionId")));
                     insert.executeUpdate();
                 }
             }
@@ -497,6 +536,10 @@ class GoalStore {
         } finally {
             array.free();
         }
+    }
+
+    private static String text(JsonNode node) {
+        return node == null || node.isNull() || node.isMissingNode() || node.asText().isEmpty() ? null : node.asText();
     }
 
     private JsonNode parse(String value) {

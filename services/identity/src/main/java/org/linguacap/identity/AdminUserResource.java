@@ -90,10 +90,11 @@ public class AdminUserResource {
     public record TeacherChange(UUID teacherId) {}
     public record ReviewerChange(UUID reviewerId) {}
 
+    /** languageId : langue apprise par un élève (null pour l'équipe et pour un élève autonome qui ne l'a pas choisie). */
     public record AdminUser(UUID id, String displayName, String email, String role, String status,
-                            List<String> permissions, UUID teacherId, String teacherName, UUID reviewerId,
-                            String reviewerName, String invitedAt, String activatedAt, String lastSeenAt,
-                            String createdAt, String disabledAt) {}
+                            List<String> permissions, UUID teacherId, String teacherName, String languageId,
+                            UUID reviewerId, String reviewerName, String invitedAt, String activatedAt,
+                            String lastSeenAt, String createdAt, String disabledAt) {}
 
     public record Assignment(UUID personId, String personName, UUID assignedBy, String assignedByName,
                              String startedAt, String endedAt) {}

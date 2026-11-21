@@ -1,23 +1,26 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CalendarDays, RotateCcw } from 'lucide-react';
 import { EmptyState, PageHeading } from '../../components/ui';
 import { Callout, Card, Skeleton, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import type { PathView } from '../../integration/v2';
 import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
 import type { Grade } from './LearnerSession';
 import { capitalize, daysFromToday } from './learner-calendar';
 import { plural, type LearnerMessage } from './learner-common';
 import { HomeView } from './learner-home';
+import { LearnerPath } from './learner-path';
 import { MessagesView, ResultsView, SessionsByWeek } from './learner-views';
 import './learner-dashboard.css';
 
-interface LearnerData { enrollment: PlannedEnrollment | null; results: Grade[]; messages: LearnerMessage[] }
+interface LearnerData { enrollment: PlannedEnrollment | null; results: Grade[]; messages: LearnerMessage[]; path: PathView | null }
 type View = 'home' | 'planning' | 'results' | 'messages';
 
 const formatDay = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
 const sectionTitle = { planning: 'Mon planning', results: 'Mes résultats', messages: 'Mes messages' };
 const sectionText = {
-  planning: 'Votre objectif, vos disponibilités et le calendrier de vos séances.',
+  planning: 'Vos niveaux, vos jours d’étude et toutes vos séances, semaine après semaine.',
   results: 'Vos scores aux exercices et leur évolution.',
   messages: 'Les encouragements et conseils de votre professeur.',
 };
@@ -50,8 +53,10 @@ export function LearnerDashboard({ token, name, view }: { token: string; name: s
       requestApi<PlannedEnrollment | null>('/learning/enrollment', token),
       requestApi<Grade[]>('/assessments/results', token),
       requestApi<LearnerMessage[]>('/tracking/messages', token),
-    ]).then(([enrollment, results, messages]) => {
-      if (active) setData({ enrollment, results, messages });
+      // Parcours multi-niveaux : absent d'un service antérieur à l'incrément, l'espace garde alors l'ancien planning.
+      requestApi<PathView | null>('/learning/path', token).catch(() => null),
+    ]).then(([enrollment, results, messages, path]) => {
+      if (active) setData({ enrollment, results, messages, path });
     }).catch((error: unknown) => {
       if (active) setFailure(error instanceof Error && error.name !== 'TimeoutError' ? error.message : 'Le service est momentanément indisponible. Réessayez.');
     });
@@ -85,7 +90,7 @@ export function LearnerDashboard({ token, name, view }: { token: string; name: s
     );
   }
 
-  const { enrollment, messages } = data;
+  const { enrollment, messages, path } = data;
   const results = data.results.filter((item) => item.kind !== 'diagnostic');
   const sessions = enrollment?.sessions ?? [];
 
@@ -93,12 +98,14 @@ export function LearnerDashboard({ token, name, view }: { token: string; name: s
     <div className="ld-page lc-enter" key={view}>
       <PageHeading title={pageTitle} description={description} />
       {errorBanner}
-      {view === 'home' && <HomeView enrollment={enrollment} results={results} messages={messages} />}
-      {view === 'planning' && (
+      {view === 'home' && <HomeView enrollment={enrollment} results={results} messages={messages} path={path} />}
+      {view === 'planning' && path && <LearnerPath token={token} path={path} onChanged={refresh} />}
+      {view === 'planning' && !path && (
         <div className="ld-planning">
           {enrollment
             ? <GoalPanel enrollment={enrollment} token={token} viewer="learner" onChanged={refresh} />
-            : <Card><EmptyState icon={<CalendarDays size={26} />} title="Aucun parcours attribué" description="Votre planning apparaîtra ici dès qu’un parcours vous sera attribué." /></Card>}
+            : <Card><EmptyState icon={<CalendarDays size={26} />} title="Aucun parcours pour le moment" description="Votre planning apparaîtra ici dès que votre parcours sera construit."
+                action={<Link className="btn btn-primary" to="/espace/accueil">Construire mon parcours</Link>} /></Card>}
           <SessionsByWeek sessions={sessions} />
         </div>
       )}

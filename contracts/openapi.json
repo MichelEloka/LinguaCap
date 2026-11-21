@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.7.0",
+    "version": "1.8.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -2756,6 +2756,1670 @@
           }
         }
       }
+    },
+    "/languages": {
+      "get": {
+        "operationId": "listLanguages",
+        "summary": "Langues de LinguaCap, leur statut et leurs niveaux publiés",
+        "responses": {
+          "200": {
+            "description": "Langues de LinguaCap, leur statut et leurs niveaux publiés",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/placement-tests": {
+      "get": {
+        "operationId": "listPlacementTests",
+        "summary": "Banques du test de niveau (éditeurs du catalogue)",
+        "responses": {
+          "200": {
+            "description": "Banques du test de niveau (éditeurs du catalogue)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlacementTestSummary"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "createPlacementTest",
+        "summary": "Créer un brouillon de banque, vide ou copié d’une banque existante",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "languageId"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "languageId": {
+                    "$ref": "#/components/schemas/LanguageId"
+                  },
+                  "fromTestId": {
+                    "$ref": "#/components/schemas/Uuid"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Brouillon créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementTestDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/placement-tests/{testId}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/TestIdPath"
+        }
+      ],
+      "get": {
+        "operationId": "getPlacementTest",
+        "summary": "Banque du test de niveau avec corrigés (éditeurs)",
+        "responses": {
+          "200": {
+            "description": "Banque du test de niveau avec corrigés (éditeurs)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementTestDocument"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "updatePlacementTest",
+        "summary": "Enregistrer le contenu d’un brouillon et le contrôler",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlacementTestContent"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enregistrer le contenu d’un brouillon et le contrôler",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementTestSaved"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/placement-tests/{testId}/publish": {
+      "post": {
+        "operationId": "publishPlacementTest",
+        "summary": "Publier la banque (l’ancienne est retirée) et ses médias",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/TestIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Publier la banque (l’ancienne est retirée) et ses médias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementTestPublished"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/me/language": {
+      "put": {
+        "operationId": "chooseLanguage",
+        "summary": "Choisir sa langue (élève autonome ; refusé pour un élève suivi)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LanguageChoiceRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Choisir sa langue (élève autonome ; refusé pour un élève suivi)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/me/teacher-profile": {
+      "put": {
+        "operationId": "saveTeacherProfile",
+        "summary": "Enregistrer le profil du professeur (questionnaire d’accueil)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeacherProfileRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Enregistrer le profil du professeur (questionnaire d’accueil)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentProfile"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/me/teacher": {
+      "get": {
+        "operationId": "getMyTeacher",
+        "summary": "Professeur référent de l’élève, ou null pour un élève autonome",
+        "responses": {
+          "200": {
+            "description": "Professeur référent de l’élève, ou null pour un élève autonome",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/TeacherCard"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/placements": {
+      "get": {
+        "operationId": "listPlacements",
+        "summary": "Tentatives du test de niveau de l’élève (ou d’un élève suivi)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tentatives du test de niveau de l’élève (ou d’un élève suivi)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PlacementSummary"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "startPlacement",
+        "summary": "Démarrer ou reprendre le test de niveau, ou se déclarer débutant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlacementStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Tentative en cours reprise",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementView"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Tentative créée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/placements/{attemptId}": {
+      "get": {
+        "operationId": "getPlacement",
+        "summary": "Tentative du test de niveau (sans questions pour un tiers)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tentative du test de niveau (sans questions pour un tiers)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/placements/{attemptId}/answers": {
+      "put": {
+        "operationId": "savePlacementAnswers",
+        "summary": "Sauvegarder les réponses du palier en cours",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlacementAnswersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sauvegarder les réponses du palier en cours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/placements/{attemptId}/submit": {
+      "post": {
+        "operationId": "submitPlacementTier",
+        "summary": "Remettre le palier en cours (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PlacementAnswersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Remettre le palier en cours (idempotent)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlacementView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/practice": {
+      "get": {
+        "operationId": "listPractice",
+        "summary": "Examens blancs d’entraînement de l’élève",
+        "responses": {
+          "200": {
+            "description": "Examens blancs d’entraînement de l’élève",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PracticeSummary"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "startPractice",
+        "summary": "Démarrer ou reprendre un entraînement (bilan intermédiaire seulement)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PracticeStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Entraînement en cours repris",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeView"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Entraînement créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/practice/{attemptId}": {
+      "get": {
+        "operationId": "getPractice",
+        "summary": "Entraînement de l’élève",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Entraînement de l’élève",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/practice/{attemptId}/answers": {
+      "put": {
+        "operationId": "savePracticeAnswers",
+        "summary": "Sauvegarder les réponses d’un entraînement",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PracticeAnswersRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Sauvegarder les réponses d’un entraînement",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/practice/{attemptId}/submit": {
+      "post": {
+        "operationId": "submitPractice",
+        "summary": "Remettre un entraînement (idempotent, score sans corrigé)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Remettre un entraînement (idempotent, score sans corrigé)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PracticeView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/onboarding": {
+      "get": {
+        "operationId": "getOnboarding",
+        "summary": "État de l’accueil de l’élève (étapes, test, parcours)",
+        "responses": {
+          "200": {
+            "description": "État de l’accueil de l’élève (étapes, test, parcours)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnboardingState"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/estimate": {
+      "post": {
+        "operationId": "estimatePath",
+        "summary": "Estimer la charge d’un objectif (élève ; professeur ou administration avec learnerId)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EstimateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Estimer la charge d’un objectif (élève ; professeur ou administration avec learnerId)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Estimate"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths": {
+      "post": {
+        "operationId": "createPath",
+        "summary": "Créer le parcours en brouillon et sa première proposition",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathCreateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Parcours créé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/path": {
+      "get": {
+        "operationId": "getPath",
+        "summary": "Parcours ouvert de l’élève, ou null",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Parcours ouvert de l’élève, ou null",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/PathView"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/objective": {
+      "put": {
+        "operationId": "changePathObjective",
+        "summary": "Changer l’objectif d’un brouillon",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ObjectiveRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Changer l’objectif d’un brouillon",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/availability": {
+      "put": {
+        "operationId": "changePathAvailability",
+        "summary": "Changer les jours et calculer une nouvelle proposition",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PathAvailabilityRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Changer les jours et calculer une nouvelle proposition",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathProposal"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/proposal": {
+      "get": {
+        "operationId": "getPathProposal",
+        "summary": "Proposition de planning en cours (ou la révision validée)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Proposition de planning en cours (ou la révision validée)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathProposal"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/proposal/validate": {
+      "post": {
+        "operationId": "validatePathProposal",
+        "summary": "Valider la proposition (démarre un brouillon)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "number"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "number": {
+                    "type": "integer",
+                    "minimum": 1
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Valider la proposition (démarre un brouillon)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/pause": {
+      "post": {
+        "operationId": "pausePath",
+        "summary": "Mettre le parcours en pause",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mettre le parcours en pause",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/resume": {
+      "post": {
+        "operationId": "resumePath",
+        "summary": "Reprendre le parcours à une date et proposer un planning",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "resumeDate"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                  "resumeDate": {
+                    "type": "string",
+                    "format": "date"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Reprendre le parcours à une date et proposer un planning",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathProposal"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/advance": {
+      "post": {
+        "operationId": "advancePath",
+        "summary": "Ouvrir le niveau suivant (examen blanc remis, ou passage forcé par le professeur)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Ouvrir le niveau suivant (examen blanc remis, ou passage forcé par le professeur)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/contracts": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/PathIdPath"
+        }
+      ],
+      "get": {
+        "operationId": "listContracts",
+        "summary": "Contrats du parcours, les plus récents d’abord",
+        "responses": {
+          "200": {
+            "description": "Contrats du parcours, les plus récents d’abord",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Contract"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "proposeContract",
+        "summary": "Proposer un contrat, une contre-proposition ou un avenant",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContractRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Contrat proposé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Contract"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/contracts/{number}/accept": {
+      "post": {
+        "operationId": "acceptContract",
+        "summary": "Accepter le contrat en attente (partie adverse)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ContractNumberPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContractDecision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Accepter le contrat en attente (partie adverse)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/contracts/{number}/reject": {
+      "post": {
+        "operationId": "rejectContract",
+        "summary": "Refuser le contrat en attente (partie adverse)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ContractNumberPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContractDecision"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Refuser le contrat en attente (partie adverse)",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PathView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/contracts/pending": {
+      "get": {
+        "operationId": "listPendingContracts",
+        "summary": "Contrats qui attendent la décision du professeur ou de l’administration",
+        "responses": {
+          "200": {
+            "description": "Contrats qui attendent la décision du professeur ou de l’administration",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PendingContract"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/additions": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/PathIdPath"
+        }
+      ],
+      "get": {
+        "operationId": "listAdditions",
+        "summary": "Cours ajoutés au parcours",
+        "responses": {
+          "200": {
+            "description": "Cours ajoutés au parcours",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Addition"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "addCourse",
+        "summary": "Ajouter un module ou une activité (référent ou administration) et proposer un planning",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AdditionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Cours ajouté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionCreated"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/paths/{pathId}/additions/{additionId}/remove": {
+      "post": {
+        "operationId": "removeCourse",
+        "summary": "Retirer un cours ajouté non terminé et proposer un planning",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/PathIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/AdditionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Retirer un cours ajouté non terminé et proposer un planning",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AdditionRemoved"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/library": {
+      "get": {
+        "operationId": "getLibrary",
+        "summary": "Bibliothèque : toutes les versions publiées de la langue de l’élève",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Bibliothèque : toutes les versions publiées de la langue de l’élève",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Library"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/library/{versionId}/activities/{activityId}": {
+      "get": {
+        "operationId": "getLibraryActivity",
+        "summary": "Activité de la bibliothèque, sans corrigé, avec adresses temporaires des médias",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/LibraryActivityIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Activité de la bibliothèque, sans corrigé, avec adresses temporaires des médias",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LibraryActivity"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -2999,6 +4663,53 @@
           ]
         },
         "description": "Parcours accompagnés ou autonomes."
+      },
+      "TestIdPath": {
+        "name": "testId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "c1000000-0000-4000-8000-000000000001"
+      },
+      "PathIdPath": {
+        "name": "pathId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "a7b6c5d4-e3f2-4a1b-9c8d-7e6f5a4b3c2d"
+      },
+      "ContractNumberPath": {
+        "name": "number",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9999
+        },
+        "example": "1"
+      },
+      "AdditionIdPath": {
+        "name": "additionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "d4c3b2a1-0f9e-4d8c-8b7a-6f5e4d3c2b1a"
+      },
+      "LibraryActivityIdPath": {
+        "name": "activityId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Slug"
+        },
+        "example": "a1-hallo-dialog"
       }
     },
     "responses": {
@@ -3077,7 +4788,10 @@
           "id",
           "displayName",
           "role",
-          "permissions"
+          "permissions",
+          "languageId",
+          "teacherId",
+          "teacherProfile"
         ],
         "properties": {
           "id": {
@@ -3095,6 +4809,38 @@
             "items": {
               "$ref": "#/components/schemas/Permission"
             }
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Langue étudiée (élève) : invitation, ou choix de l’élève autonome."
+          },
+          "teacherId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "teacherProfile": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/TeacherProfile"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Profil du professeur ; null pour les autres rôles."
           }
         }
       },
@@ -3104,7 +4850,8 @@
           "id",
           "displayName",
           "role",
-          "teacherId"
+          "teacherId",
+          "languageId"
         ],
         "properties": {
           "id": {
@@ -3120,6 +4867,16 @@
             "oneOf": [
               {
                 "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
               },
               {
                 "type": "null"
@@ -3163,6 +4920,17 @@
                 "type": "null"
               }
             ]
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Langue de l’élève invité (langues du professeur)."
           }
         },
         "description": "Une adresse a une seule invitation : inviter de nouveau une adresse non activée réémet son invitation."
@@ -3979,7 +5747,8 @@
           "status",
           "sendCount",
           "createdAt",
-          "expiresAt"
+          "expiresAt",
+          "languageId"
         ],
         "properties": {
           "id": {
@@ -4081,6 +5850,16 @@
               "null"
             ],
             "format": "date-time"
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         }
       },
@@ -4362,7 +6141,8 @@
           "number",
           "moduleCount",
           "activityCount",
-          "totalMinutes"
+          "totalMinutes",
+          "languageId"
         ],
         "properties": {
           "versionId": {
@@ -4418,6 +6198,9 @@
               "string",
               "null"
             ]
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
           }
         }
       },
@@ -4556,7 +6339,8 @@
           "sessions",
           "goal",
           "availability",
-          "supersededSessions"
+          "supersededSessions",
+          "pathId"
         ],
         "properties": {
           "id": {
@@ -4619,6 +6403,17 @@
             "type": "integer",
             "minimum": 0,
             "description": "Séances remplacées par une replanification."
+          },
+          "pathId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Parcours multi-niveaux auquel appartient cette inscription."
           }
         }
       },
@@ -7037,6 +8832,3307 @@
             "$ref": "#/components/schemas/Freshness"
           }
         }
+      },
+      "LanguageId": {
+        "type": "string",
+        "pattern": "^[a-z]{2}$",
+        "description": "Code ISO 639-1 de la langue."
+      },
+      "StartLevel": {
+        "type": "string",
+        "pattern": "^(A0|[ABC][12])$",
+        "description": "Niveau de départ : A0 (débutant) ou un niveau du cadre européen."
+      },
+      "CompetenceScore": {
+        "type": "object",
+        "required": [
+          "correct",
+          "total",
+          "percent"
+        ],
+        "properties": {
+          "correct": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "percent": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          }
+        }
+      },
+      "DayList": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/Day"
+        },
+        "maxItems": 7
+      },
+      "LanguageLevel": {
+        "type": "object",
+        "required": [
+          "code",
+          "title",
+          "published",
+          "trackVersionId",
+          "plannedMinutes",
+          "moduleCount"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "published": {
+            "type": "boolean"
+          },
+          "trackVersionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "plannedMinutes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0
+          },
+          "moduleCount": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "Language": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "nativeName",
+          "status",
+          "position",
+          "placementAvailable",
+          "levels"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "nativeName": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "coming_soon"
+            ]
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "placementAvailable": {
+            "type": "boolean"
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguageLevel"
+            }
+          }
+        }
+      },
+      "PlacementTestStatus": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "published",
+          "retired"
+        ]
+      },
+      "PlacementTestSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "languageId",
+          "number",
+          "status",
+          "title",
+          "questionCount",
+          "updatedAt",
+          "publishedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlacementTestStatus"
+          },
+          "title": {
+            "type": "string"
+          },
+          "questionCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "PlacementQuestionContent": {
+        "type": "object",
+        "required": [
+          "id",
+          "competence",
+          "moduleRef",
+          "prompt",
+          "options",
+          "placements"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "competence": {
+            "type": "string",
+            "enum": [
+              "lecture",
+              "ecoute"
+            ]
+          },
+          "moduleRef": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "label",
+                "correct"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "correct": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "assetId",
+                "assetVersion",
+                "usage",
+                "alt",
+                "caption",
+                "transcriptVisibility",
+                "decorative"
+              ],
+              "properties": {
+                "assetId": {
+                  "$ref": "#/components/schemas/Slug"
+                },
+                "assetVersion": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "usage": {
+                  "type": "string",
+                  "enum": [
+                    "audio",
+                    "illustration"
+                  ]
+                },
+                "alt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "caption": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "transcriptVisibility": {
+                  "type": "string",
+                  "enum": [
+                    "hidden",
+                    "on_demand",
+                    "after_answer"
+                  ]
+                },
+                "decorative": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PlacementTierContent": {
+        "type": "object",
+        "required": [
+          "code",
+          "title",
+          "passPercent",
+          "minCompetencePercent",
+          "drawCount",
+          "questions"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "passPercent": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "minCompetencePercent": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 100
+          },
+          "drawCount": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlacementQuestionContent"
+            }
+          }
+        }
+      },
+      "PlacementTestContent": {
+        "type": "object",
+        "required": [
+          "title",
+          "description",
+          "tiers"
+        ],
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 120
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlacementTierContent"
+            }
+          }
+        }
+      },
+      "PlacementTestDocument": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/PlacementTestContent"
+          },
+          {
+            "type": "object",
+            "required": [
+              "id",
+              "languageId",
+              "number",
+              "status",
+              "updatedAt",
+              "publishedAt"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "languageId": {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              "number": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "status": {
+                "$ref": "#/components/schemas/PlacementTestStatus"
+              },
+              "updatedAt": {
+                "type": "string",
+                "format": "date-time"
+              },
+              "publishedAt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          }
+        ],
+        "description": "Banque de questions avec corrigés : réservée aux éditeurs du catalogue."
+      },
+      "PlacementTestSaved": {
+        "type": "object",
+        "required": [
+          "test",
+          "checks"
+        ],
+        "properties": {
+          "test": {
+            "$ref": "#/components/schemas/PlacementTestDocument"
+          },
+          "checks": {
+            "$ref": "#/components/schemas/Checks"
+          }
+        }
+      },
+      "PlacementTestPublished": {
+        "type": "object",
+        "required": [
+          "test",
+          "media"
+        ],
+        "properties": {
+          "test": {
+            "$ref": "#/components/schemas/PlacementTestSummary"
+          },
+          "media": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MediaRef"
+            }
+          }
+        }
+      },
+      "TeacherProfile": {
+        "type": "object",
+        "required": [
+          "languages",
+          "levels",
+          "maxLearners",
+          "gradingDelayHours",
+          "bio",
+          "onboardedAt"
+        ],
+        "properties": {
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguageId"
+            }
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelCode"
+            }
+          },
+          "maxLearners": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 500
+          },
+          "gradingDelayHours": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  24,
+                  48,
+                  72,
+                  168
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bio": {
+            "type": "string",
+            "maxLength": 500
+          },
+          "onboardedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "TeacherProfileRequest": {
+        "type": "object",
+        "required": [
+          "languages",
+          "levels"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguageId"
+            },
+            "minItems": 1,
+            "maxItems": 20,
+            "uniqueItems": true
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelCode"
+            },
+            "minItems": 1,
+            "uniqueItems": true
+          },
+          "maxLearners": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "maximum": 500
+          },
+          "gradingDelayHours": {
+            "oneOf": [
+              {
+                "type": "integer",
+                "enum": [
+                  24,
+                  48,
+                  72,
+                  168
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "bio": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "LanguageChoiceRequest": {
+        "type": "object",
+        "required": [
+          "languageId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          }
+        }
+      },
+      "TeacherCard": {
+        "type": "object",
+        "required": [
+          "id",
+          "displayName",
+          "bio",
+          "gradingDelayHours",
+          "languages"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "bio": {
+            "type": "string"
+          },
+          "gradingDelayHours": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "languages": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LanguageId"
+            }
+          }
+        }
+      },
+      "PlacementAttemptStatus": {
+        "type": "string",
+        "enum": [
+          "in_progress",
+          "completed",
+          "abandoned"
+        ]
+      },
+      "PlacementTier": {
+        "type": "object",
+        "required": [
+          "code",
+          "title",
+          "status",
+          "questionCount",
+          "passPercent",
+          "correct",
+          "total",
+          "percent",
+          "competences"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "locked",
+              "current",
+              "passed",
+              "failed"
+            ]
+          },
+          "questionCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "passPercent": {
+            "type": "integer"
+          },
+          "correct": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "total": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "percent": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "competences": {
+            "oneOf": [
+              {
+                "type": "object",
+                "properties": {
+                  "lecture": {
+                    "$ref": "#/components/schemas/CompetenceScore"
+                  },
+                  "ecoute": {
+                    "$ref": "#/components/schemas/CompetenceScore"
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "PlacementQuestion": {
+        "type": "object",
+        "required": [
+          "id",
+          "competence",
+          "prompt",
+          "options",
+          "placements"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "competence": {
+            "type": "string",
+            "enum": [
+              "lecture",
+              "ecoute"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "text"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "text": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "position",
+                "usage",
+                "url",
+                "mimeType",
+                "alt",
+                "caption"
+              ],
+              "properties": {
+                "position": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "usage": {
+                  "type": "string",
+                  "enum": [
+                    "audio",
+                    "illustration"
+                  ]
+                },
+                "url": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "mimeType": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "alt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "caption": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "description": "Question sans corrigé ; « dontknow » est une réponse acceptée (comptée fausse)."
+      },
+      "PlacementResult": {
+        "type": "object",
+        "required": [
+          "placedLevel",
+          "label",
+          "summary",
+          "beyondTest",
+          "declaredBeginner"
+        ],
+        "properties": {
+          "placedLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "label": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "beyondTest": {
+            "type": "boolean"
+          },
+          "declaredBeginner": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlacementView": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "languageId",
+          "testId",
+          "testNumber",
+          "status",
+          "currentTier",
+          "tiers",
+          "questions",
+          "savedAnswers",
+          "result",
+          "startedAt",
+          "completedAt",
+          "retakeAvailableAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "testId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "testNumber": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlacementAttemptStatus"
+          },
+          "currentTier": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "tiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlacementTier"
+            }
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlacementQuestion"
+            }
+          },
+          "savedAnswers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "result": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/PlacementResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "retakeAvailableAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "description": "Tentative du test de niveau. Les questions du palier en cours ne sont servies qu’à l’élève (liste vide pour un tiers)."
+      },
+      "PlacementSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "languageId",
+          "status",
+          "placedLevel",
+          "startedAt",
+          "completedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "status": {
+            "$ref": "#/components/schemas/PlacementAttemptStatus"
+          },
+          "placedLevel": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/StartLevel"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "PlacementStartRequest": {
+        "type": "object",
+        "required": [],
+        "additionalProperties": false,
+        "properties": {
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "restart": {
+            "type": "boolean"
+          },
+          "declaredBeginner": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PlacementAnswersRequest": {
+        "type": "object",
+        "required": [
+          "tier",
+          "answers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "tier": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "maxProperties": 60
+          }
+        }
+      },
+      "PracticePart": {
+        "type": "object",
+        "required": [
+          "id",
+          "competence",
+          "mode",
+          "title",
+          "instructions",
+          "questions",
+          "placements",
+          "criteria",
+          "selfPractice"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "competence": {
+            "type": "string"
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "closed",
+              "written",
+              "oral"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "instructions": {
+            "type": "string"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "prompt",
+                "options"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "prompt": {
+                  "type": "string"
+                },
+                "options": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "label"
+                    ],
+                    "properties": {
+                      "id": {
+                        "type": "string"
+                      },
+                      "label": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "placements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "position",
+                "assetId",
+                "assetVersion",
+                "usage",
+                "alt",
+                "caption"
+              ],
+              "properties": {
+                "position": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "assetId": {
+                  "$ref": "#/components/schemas/Slug"
+                },
+                "assetVersion": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "usage": {
+                  "type": "string",
+                  "enum": [
+                    "audio",
+                    "illustration"
+                  ]
+                },
+                "alt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "caption": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "label",
+                "maxPoints"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "maxPoints": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "selfPractice": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PracticeView": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "trackVersionId",
+          "levelCode",
+          "kind",
+          "mode",
+          "status",
+          "definition",
+          "answers",
+          "media",
+          "result",
+          "startedAt",
+          "submittedAt",
+          "nextAttemptAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ]
+          },
+          "mode": {
+            "type": "string",
+            "enum": [
+              "practice"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "submitted"
+            ]
+          },
+          "definition": {
+            "type": "object",
+            "required": [
+              "title",
+              "description",
+              "levelCode",
+              "passPercent",
+              "parts"
+            ],
+            "properties": {
+              "title": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "levelCode": {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              "passPercent": {
+                "type": "integer"
+              },
+              "parts": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/PracticePart"
+                }
+              }
+            }
+          },
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "media": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Clé « assetId@version » → adresse de lecture temporaire."
+          },
+          "result": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "percent",
+              "passed",
+              "parts",
+              "competences"
+            ],
+            "properties": {
+              "percent": {
+                "type": "integer"
+              },
+              "passed": {
+                "type": "boolean"
+              },
+              "parts": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object",
+                  "required": [
+                    "correct",
+                    "total"
+                  ],
+                  "properties": {
+                    "correct": {
+                      "type": "integer"
+                    },
+                    "total": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              },
+              "competences": {
+                "type": "object",
+                "additionalProperties": {
+                  "$ref": "#/components/schemas/CompetenceScore"
+                }
+              }
+            }
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "nextAttemptAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        },
+        "description": "Examen blanc d’entraînement : parties fermées corrigées, aucun corrigé révélé, aucun événement."
+      },
+      "PracticeSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "trackVersionId",
+          "levelCode",
+          "kind",
+          "status",
+          "title",
+          "percent",
+          "startedAt",
+          "submittedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "in_progress",
+              "submitted"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "percent": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "PracticeStartRequest": {
+        "type": "object",
+        "required": [
+          "trackVersionId",
+          "kind"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "midterm",
+              "final"
+            ]
+          }
+        },
+        "description": "Seul le bilan intermédiaire (midterm) est proposé en entraînement libre : final répond 409 (examen de passage de niveau)."
+      },
+      "PracticeAnswersRequest": {
+        "type": "object",
+        "required": [
+          "answers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "DifficultyCode": {
+        "type": "string",
+        "enum": [
+          "light",
+          "moderate",
+          "sustained",
+          "intensive",
+          "very_intensive",
+          "unrealistic"
+        ]
+      },
+      "Difficulty": {
+        "type": "object",
+        "required": [
+          "code",
+          "label",
+          "requiredWeeklyMinutes"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/DifficultyCode"
+          },
+          "label": {
+            "type": "string"
+          },
+          "requiredWeeklyMinutes": {
+            "type": "integer",
+            "minimum": 0
+          }
+        }
+      },
+      "DifficultyBand": {
+        "type": "object",
+        "required": [
+          "code",
+          "label",
+          "maxWeeklyMinutes",
+          "minWeeks",
+          "earliestTargetDate"
+        ],
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/DifficultyCode"
+          },
+          "label": {
+            "type": "string"
+          },
+          "maxWeeklyMinutes": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "minWeeks": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "earliestTargetDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          }
+        }
+      },
+      "EstimateRequest": {
+        "type": "object",
+        "required": [
+          "targetLevel",
+          "targetDate"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "pathId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "Estimate": {
+        "type": "object",
+        "required": [
+          "languageId",
+          "startLevel",
+          "targetLevel",
+          "startDate",
+          "targetDate",
+          "weeks",
+          "requiredMinutes",
+          "levels",
+          "requiredWeeklyMinutes",
+          "requiredDailyMinutes",
+          "difficulty",
+          "bands",
+          "allowedTargets",
+          "minTargetDate",
+          "maxTargetDate",
+          "suggestedAvailability"
+        ],
+        "properties": {
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "weeks": {
+            "type": "number",
+            "minimum": 0
+          },
+          "requiredMinutes": {
+            "type": "integer"
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "levelCode",
+                "trackVersionId",
+                "plannedMinutes"
+              ],
+              "properties": {
+                "levelCode": {
+                  "$ref": "#/components/schemas/LevelCode"
+                },
+                "trackVersionId": {
+                  "$ref": "#/components/schemas/Uuid"
+                },
+                "plannedMinutes": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "requiredWeeklyMinutes": {
+            "type": "integer"
+          },
+          "requiredDailyMinutes": {
+            "type": "object",
+            "required": [
+              "fiveDays",
+              "sevenDays"
+            ],
+            "properties": {
+              "fiveDays": {
+                "type": "integer"
+              },
+              "sevenDays": {
+                "type": "integer"
+              }
+            }
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/Difficulty"
+          },
+          "bands": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DifficultyBand"
+            }
+          },
+          "allowedTargets": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelCode"
+            }
+          },
+          "minTargetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "maxTargetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "suggestedAvailability": {
+            "$ref": "#/components/schemas/DayList"
+          }
+        }
+      },
+      "OnboardingState": {
+        "type": "object",
+        "required": [
+          "accompanied",
+          "languageId",
+          "languageLocked",
+          "teacher",
+          "placement",
+          "path",
+          "steps",
+          "completed",
+          "blockedReason"
+        ],
+        "properties": {
+          "accompanied": {
+            "type": "boolean"
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "languageLocked": {
+            "type": "boolean"
+          },
+          "teacher": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "id",
+              "displayName"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "displayName": {
+                "type": "string"
+              }
+            }
+          },
+          "placement": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "attemptId",
+              "status",
+              "placedLevel",
+              "completedAt"
+            ],
+            "properties": {
+              "attemptId": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "status": {
+                "$ref": "#/components/schemas/PlacementAttemptStatus"
+              },
+              "placedLevel": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/StartLevel"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "completedAt": {
+                "type": [
+                  "string",
+                  "null"
+                ],
+                "format": "date-time"
+              }
+            }
+          },
+          "path": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "id",
+              "status",
+              "validatedRevision"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "active",
+                  "completed"
+                ]
+              },
+              "validatedRevision": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "status"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "enum": [
+                    "language",
+                    "placement",
+                    "result",
+                    "objective",
+                    "days",
+                    "planning",
+                    "start"
+                  ]
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "done",
+                    "current",
+                    "todo",
+                    "skipped",
+                    "blocked"
+                  ]
+                }
+              }
+            }
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "blockedReason": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "language_unavailable",
+                  "placement_unavailable",
+                  "no_target_available"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "PathCreateRequest": {
+        "type": "object",
+        "required": [
+          "placementAttemptId",
+          "targetLevel",
+          "startDate",
+          "targetDate"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "placementAttemptId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          }
+        }
+      },
+      "ObjectiveRequest": {
+        "type": "object",
+        "required": [
+          "targetLevel",
+          "startDate",
+          "targetDate"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          }
+        }
+      },
+      "PathAvailabilityRequest": {
+        "type": "object",
+        "required": [
+          "days"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "days": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          }
+        }
+      },
+      "PlanItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "minutes",
+          "moduleId",
+          "levelCode",
+          "sourceVersionId",
+          "sourceActivityId",
+          "additionId"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lesson",
+              "exercise",
+              "review",
+              "assessment"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer"
+          },
+          "moduleId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "levelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceVersionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sourceActivityId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "additionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "PlannedSession": {
+        "type": "object",
+        "required": [
+          "date",
+          "slot",
+          "dueAt",
+          "title",
+          "moduleId",
+          "minutes",
+          "capacity",
+          "levelCode",
+          "items"
+        ],
+        "properties": {
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "slot": {
+            "type": "integer"
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": {
+            "type": "string"
+          },
+          "moduleId": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer"
+          },
+          "capacity": {
+            "type": "integer"
+          },
+          "levelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanItem"
+            }
+          }
+        }
+      },
+      "PathSuggestion": {
+        "type": "object",
+        "required": [
+          "kind",
+          "label",
+          "availability",
+          "targetDate",
+          "requiresAmendment"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "minutes",
+              "sessions",
+              "days",
+              "target_date"
+            ]
+          },
+          "label": {
+            "type": "string"
+          },
+          "availability": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "requiresAmendment": {
+            "type": "boolean"
+          }
+        }
+      },
+      "LevelSpan": {
+        "type": "object",
+        "required": [
+          "levelCode",
+          "stepPosition",
+          "firstDate",
+          "lastDate",
+          "minutes",
+          "sessionCount"
+        ],
+        "properties": {
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "stepPosition": {
+            "type": "integer"
+          },
+          "firstDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "lastDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "minutes": {
+            "type": "integer"
+          },
+          "sessionCount": {
+            "type": "integer"
+          }
+        }
+      },
+      "PathProposal": {
+        "type": "object",
+        "required": [
+          "number",
+          "baseRevision",
+          "status",
+          "startDate",
+          "targetDate",
+          "availability",
+          "capacityMinutes",
+          "requiredMinutes",
+          "overflowCount",
+          "createdAt",
+          "sessions",
+          "overflow",
+          "weeks",
+          "suggestions",
+          "validatable",
+          "pathId",
+          "difficulty",
+          "feasibility",
+          "levels",
+          "blockingReason"
+        ],
+        "properties": {
+          "number": {
+            "type": "integer"
+          },
+          "baseRevision": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "proposed",
+              "validated"
+            ]
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "availability": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "capacityMinutes": {
+            "type": "integer"
+          },
+          "requiredMinutes": {
+            "type": "integer"
+          },
+          "overflowCount": {
+            "type": "integer"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlannedSession"
+            }
+          },
+          "overflow": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PlanItem"
+            }
+          },
+          "weeks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "start",
+                "availableMinutes",
+                "plannedMinutes"
+              ],
+              "properties": {
+                "start": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "availableMinutes": {
+                  "type": "integer"
+                },
+                "plannedMinutes": {
+                  "type": "integer"
+                }
+              }
+            }
+          },
+          "suggestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PathSuggestion"
+            }
+          },
+          "validatable": {
+            "type": "boolean"
+          },
+          "pathId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/Difficulty"
+          },
+          "feasibility": {
+            "type": "object",
+            "required": [
+              "code",
+              "loadPercent"
+            ],
+            "properties": {
+              "code": {
+                "type": "string",
+                "enum": [
+                  "comfortable",
+                  "tight",
+                  "insufficient"
+                ]
+              },
+              "loadPercent": {
+                "type": "integer"
+              }
+            }
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelSpan"
+            }
+          },
+          "blockingReason": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "overflow",
+                  "objective_locked",
+                  "commitment",
+                  "not_allowed",
+                  "stale"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "description": "Proposition de planning multi-niveaux : sur-ensemble de Proposal, mêmes noms de champs."
+      },
+      "PathStep": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "levelCode",
+          "levelTitle",
+          "trackVersionId",
+          "trackVersionNumber",
+          "status",
+          "enrollmentId",
+          "goalStatus",
+          "plannedMinutes",
+          "firstDate",
+          "lastDate",
+          "sessionsTotal",
+          "sessionsCompleted",
+          "finalDecision"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "levelTitle": {
+            "type": "string"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionNumber": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "active",
+              "completed",
+              "withdrawn"
+            ]
+          },
+          "enrollmentId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "goalStatus": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "plannedMinutes": {
+            "type": "integer"
+          },
+          "firstDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "lastDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "sessionsTotal": {
+            "type": "integer"
+          },
+          "sessionsCompleted": {
+            "type": "integer"
+          },
+          "finalDecision": {
+            "oneOf": [
+              {
+                "type": "string",
+                "enum": [
+                  "validated",
+                  "to_consolidate"
+                ]
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "PathSession": {
+        "type": "object",
+        "required": [
+          "id",
+          "enrollmentId",
+          "stepPosition",
+          "levelCode",
+          "locked",
+          "position",
+          "date",
+          "slot",
+          "dueAt",
+          "moduleId",
+          "title",
+          "status",
+          "estimatedMinutes",
+          "startedAt",
+          "completedAt",
+          "activities"
+        ],
+        "properties": {
+          "id": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "enrollmentId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "stepPosition": {
+            "type": "integer"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "locked": {
+            "type": "boolean"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "slot": {
+            "type": "integer"
+          },
+          "dueAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "moduleId": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "in_progress",
+              "completed",
+              "late",
+              "locked"
+            ]
+          },
+          "estimatedMinutes": {
+            "type": "integer"
+          },
+          "startedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "completedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "activities": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "position",
+                "kind",
+                "title",
+                "estimatedMinutes",
+                "status",
+                "completedAt",
+                "added"
+              ],
+              "properties": {
+                "id": {
+                  "$ref": "#/components/schemas/Slug"
+                },
+                "position": {
+                  "type": "integer"
+                },
+                "kind": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "estimatedMinutes": {
+                  "type": "integer"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": [
+                    "todo",
+                    "started",
+                    "completed"
+                  ]
+                },
+                "completedAt": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "format": "date-time"
+                },
+                "added": {
+                  "type": "boolean"
+                }
+              }
+            }
+          }
+        },
+        "description": "Séance d’un niveau futur : id null, locked vrai, status locked (projection de la révision validée)."
+      },
+      "ContractTerms": {
+        "type": "object",
+        "required": [
+          "startLevel",
+          "targetLevel",
+          "startDate",
+          "targetDate",
+          "weeklyMinutes",
+          "availability",
+          "requiredMinutes",
+          "difficulty"
+        ],
+        "properties": {
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "weeklyMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5040
+          },
+          "availability": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "requiredMinutes": {
+            "type": "integer"
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/Difficulty"
+          }
+        }
+      },
+      "Contract": {
+        "type": "object",
+        "required": [
+          "pathId",
+          "number",
+          "status",
+          "proposedBy",
+          "proposerId",
+          "terms",
+          "note",
+          "createdAt",
+          "decidedAt",
+          "decidedBy",
+          "decisionNote",
+          "canAccept",
+          "canReject"
+        ],
+        "properties": {
+          "pathId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "pending_teacher",
+              "pending_learner",
+              "accepted",
+              "rejected",
+              "superseded",
+              "withdrawn"
+            ]
+          },
+          "proposedBy": {
+            "type": "string",
+            "enum": [
+              "learner",
+              "teacher",
+              "admin",
+              "system"
+            ]
+          },
+          "proposerId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "terms": {
+            "$ref": "#/components/schemas/ContractTerms"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "decidedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "decidedBy": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "decisionNote": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "canAccept": {
+            "type": "boolean"
+          },
+          "canReject": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ContractRequest": {
+        "type": "object",
+        "required": [
+          "targetLevel",
+          "targetDate",
+          "weeklyMinutes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "weeklyMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 5040
+          },
+          "availability": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      },
+      "ContractDecision": {
+        "type": "object",
+        "required": [],
+        "additionalProperties": false,
+        "properties": {
+          "note": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      },
+      "PathPermissions": {
+        "type": "object",
+        "required": [
+          "canEditAvailability",
+          "canValidate",
+          "canChangeObjective",
+          "canProposeContract",
+          "canDecideContract",
+          "canPause",
+          "canAddCourses",
+          "canAdvance"
+        ],
+        "properties": {
+          "canEditAvailability": {
+            "type": "boolean"
+          },
+          "canValidate": {
+            "type": "boolean"
+          },
+          "canChangeObjective": {
+            "type": "boolean"
+          },
+          "canProposeContract": {
+            "type": "boolean"
+          },
+          "canDecideContract": {
+            "type": "boolean"
+          },
+          "canPause": {
+            "type": "boolean"
+          },
+          "canAddCourses": {
+            "type": "boolean"
+          },
+          "canAdvance": {
+            "type": "boolean"
+          }
+        }
+      },
+      "PathView": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "languageId",
+          "status",
+          "accompanied",
+          "origin",
+          "startLevel",
+          "targetLevel",
+          "startDate",
+          "targetDate",
+          "initialTargetDate",
+          "weeklyMinutes",
+          "requiredMinutes",
+          "difficulty",
+          "placementAttemptId",
+          "paused",
+          "pausedAt",
+          "resumeDate",
+          "validatedRevision",
+          "steps",
+          "availability",
+          "proposal",
+          "sessions",
+          "contract",
+          "permissions"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "draft",
+              "active",
+              "completed",
+              "withdrawn"
+            ]
+          },
+          "accompanied": {
+            "type": "boolean"
+          },
+          "origin": {
+            "type": "string",
+            "enum": [
+              "onboarding",
+              "assignment",
+              "migration"
+            ]
+          },
+          "startLevel": {
+            "$ref": "#/components/schemas/StartLevel"
+          },
+          "targetLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "startDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "targetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "initialTargetDate": {
+            "type": "string",
+            "format": "date"
+          },
+          "weeklyMinutes": {
+            "type": "integer"
+          },
+          "requiredMinutes": {
+            "type": "integer"
+          },
+          "difficulty": {
+            "$ref": "#/components/schemas/Difficulty"
+          },
+          "placementAttemptId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "paused": {
+            "type": "boolean"
+          },
+          "pausedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "resumeDate": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date"
+          },
+          "validatedRevision": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PathStep"
+            }
+          },
+          "availability": {
+            "$ref": "#/components/schemas/DayList"
+          },
+          "proposal": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "number",
+              "status",
+              "overflowCount",
+              "validatable",
+              "createdAt"
+            ],
+            "properties": {
+              "number": {
+                "type": "integer"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "proposed",
+                  "validated"
+                ]
+              },
+              "overflowCount": {
+                "type": "integer"
+              },
+              "validatable": {
+                "type": "boolean"
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "sessions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PathSession"
+            }
+          },
+          "contract": {
+            "type": "object",
+            "required": [
+              "current",
+              "pending",
+              "engaged"
+            ],
+            "properties": {
+              "current": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Contract"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "pending": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Contract"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "engaged": {
+                "type": "boolean"
+              }
+            }
+          },
+          "permissions": {
+            "$ref": "#/components/schemas/PathPermissions"
+          }
+        },
+        "description": "Parcours multi-niveaux : une inscription par niveau, créée à l’ouverture du niveau."
+      },
+      "PendingContract": {
+        "type": "object",
+        "required": [
+          "pathId",
+          "learnerId",
+          "learnerName",
+          "languageId",
+          "contract",
+          "path"
+        ],
+        "properties": {
+          "pathId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "contract": {
+            "$ref": "#/components/schemas/Contract"
+          },
+          "path": {
+            "type": "object",
+            "required": [
+              "startLevel",
+              "targetLevel",
+              "targetDate",
+              "status"
+            ],
+            "properties": {
+              "startLevel": {
+                "$ref": "#/components/schemas/StartLevel"
+              },
+              "targetLevel": {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              "targetDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "active",
+                  "completed",
+                  "withdrawn"
+                ]
+              }
+            }
+          }
+        }
+      },
+      "AdditionRequest": {
+        "type": "object",
+        "required": [
+          "stepLevel",
+          "trackVersionId",
+          "moduleId",
+          "placement"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "stepLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "placement": {
+            "type": "string",
+            "enum": [
+              "next",
+              "end_of_level"
+            ]
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 500
+          }
+        }
+      },
+      "Addition": {
+        "type": "object",
+        "required": [
+          "id",
+          "pathId",
+          "stepLevel",
+          "sourceTrackVersionId",
+          "sourceLevelCode",
+          "moduleId",
+          "activityId",
+          "title",
+          "minutes",
+          "placement",
+          "note",
+          "addedBy",
+          "addedAt",
+          "removedAt",
+          "status"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "pathId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "stepLevel": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "sourceTrackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "sourceLevelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "activityId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Slug"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "minutes": {
+            "type": "integer"
+          },
+          "placement": {
+            "type": "string",
+            "enum": [
+              "next",
+              "end_of_level"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "addedBy": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "addedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "removedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "planned",
+              "in_progress",
+              "completed"
+            ]
+          }
+        }
+      },
+      "AdditionCreated": {
+        "type": "object",
+        "required": [
+          "addition",
+          "proposal"
+        ],
+        "properties": {
+          "addition": {
+            "$ref": "#/components/schemas/Addition"
+          },
+          "proposal": {
+            "$ref": "#/components/schemas/PathProposal"
+          }
+        }
+      },
+      "AdditionRemoved": {
+        "type": "object",
+        "required": [
+          "proposal"
+        ],
+        "properties": {
+          "proposal": {
+            "$ref": "#/components/schemas/PathProposal"
+          }
+        }
+      },
+      "LibraryActivityItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "title",
+          "estimatedMinutes",
+          "competences",
+          "lessonId",
+          "lastResult"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "kind": {
+            "type": "string",
+            "enum": [
+              "lesson",
+              "exercise"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "estimatedMinutes": {
+            "type": "integer"
+          },
+          "competences": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lessonId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "lastResult": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "correct",
+              "total",
+              "submittedAt"
+            ],
+            "properties": {
+              "correct": {
+                "type": "integer"
+              },
+              "total": {
+                "type": "integer"
+              },
+              "submittedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
+      },
+      "Library": {
+        "type": "object",
+        "required": [
+          "languageId",
+          "levels"
+        ],
+        "properties": {
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null (et aucun niveau) tant que l’élève autonome n’a pas choisi sa langue."
+          },
+          "levels": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "levelCode",
+                "levelTitle",
+                "trackVersionId",
+                "number",
+                "inPath",
+                "current",
+                "modules",
+                "practice"
+              ],
+              "properties": {
+                "levelCode": {
+                  "$ref": "#/components/schemas/LevelCode"
+                },
+                "levelTitle": {
+                  "type": "string"
+                },
+                "trackVersionId": {
+                  "$ref": "#/components/schemas/Uuid"
+                },
+                "number": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "inPath": {
+                  "type": "boolean"
+                },
+                "current": {
+                  "type": "boolean"
+                },
+                "modules": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "id",
+                      "position",
+                      "title",
+                      "objective",
+                      "activities"
+                    ],
+                    "properties": {
+                      "id": {
+                        "$ref": "#/components/schemas/Slug"
+                      },
+                      "position": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "objective": {
+                        "type": "string"
+                      },
+                      "activities": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/LibraryActivityItem"
+                        }
+                      }
+                    }
+                  }
+                },
+                "practice": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "required": [
+                      "kind",
+                      "title",
+                      "available"
+                    ],
+                    "properties": {
+                      "kind": {
+                        "type": "string",
+                        "enum": [
+                          "midterm",
+                          "final"
+                        ]
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "available": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Toutes les versions publiées de la langue de l’élève, sans corrigé. Entraînement : bilan intermédiaire seulement."
+      },
+      "LibraryActivity": {
+        "allOf": [
+          {
+            "$ref": "#/components/schemas/ActivityDetail"
+          },
+          {
+            "type": "object",
+            "required": [
+              "trackVersionId",
+              "levelCode",
+              "moduleId",
+              "moduleTitle"
+            ],
+            "properties": {
+              "trackVersionId": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "levelCode": {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              "moduleId": {
+                "$ref": "#/components/schemas/Slug"
+              },
+              "moduleTitle": {
+                "type": "string"
+              }
+            }
+          }
+        ],
+        "description": "Activité de bibliothèque : forme d’ActivityDetail (status todo, state vide, sans corrigé) avec sa version et son module."
       }
     }
   }

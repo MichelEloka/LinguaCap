@@ -79,11 +79,10 @@ public class ExamResource {
         if (!learnerId.toString().equals(context.path("learnerId").asText())) {
             throw HttpError.forbidden("Seul l’élève passe son évaluation.");
         }
-        if (!"active".equals(context.path("status").asText())) throw HttpError.conflict("Ce parcours n’est plus actif.");
-        if ("paused".equals(context.path("goalStatus").asText())) {
-            throw HttpError.conflict("Votre parcours est en pause : l’évaluation reprendra avec lui.");
-        }
         String kind = request.kind();
+        String refusal = startRefusal(context, kind);
+        if (refusal != null) throw HttpError.conflict(refusal);
+        boolean retake = retakeOfCompletedLevel(context, kind);
         List<ExamStore.Attempt> previous = store.forEnrollment(request.enrollmentId()).stream()
                 .filter(attempt -> attempt.kind().equals(kind)).toList();
         boolean resuming = previous.stream().anyMatch(attempt -> "in_progress".equals(attempt.status()));
@@ -99,7 +98,8 @@ public class ExamResource {
         JsonNode definition = services.request(catalogueUrl, "/v1/internal/tracks/" + context.path("trackVersionId").asText()
                 + "/assessments/" + kind, "GET", learnerId, null);
         if (definition.path("parts").isEmpty()) throw HttpError.conflict("Cette évaluation n’a pas encore de contenu.");
-        String due = context.path("midterm".equals(kind) ? "midtermDueAt" : "finalDueAt").asText(null);
+        // La reprise d'un niveau terminé n'a plus de créneau au calendrier : elle n'a pas d'échéance.
+        String due = retake ? null : context.path("midterm".equals(kind) ? "midtermDueAt" : "finalDueAt").asText(null);
         ExamStore.Attempt attempt = store.open(learnerId, request.enrollmentId(),
                 UUID.fromString(context.path("trackVersionId").asText()), kind, definition,
                 definition.path("passPercent").asInt(60), due == null ? null : OffsetDateTime.parse(due));
@@ -249,6 +249,27 @@ public class ExamResource {
         ExamStore.Attempt graded = store.grade(id, graderId, grading, result, review, feedback);
         notifyLearning(graded, "graded", graderId);
         return view(graded, graderId, true, true);
+    }
+
+    /**
+     * Ouverture ou reprise d'une tentative : sur un niveau en cours qui n'est pas en pause, ou pour l'examen blanc
+     * « à consolider » d'un niveau terminé du parcours (l'élève a déjà ouvert le niveau suivant). Renvoie le refus,
+     * ou null si la tentative est permise.
+     */
+    static String startRefusal(JsonNode context, String kind) {
+        String status = context.path("status").asText();
+        if ("active".equals(status)) {
+            return "paused".equals(context.path("goalStatus").asText())
+                    ? "Votre parcours est en pause : l’évaluation reprendra avec lui." : null;
+        }
+        if (retakeOfCompletedLevel(context, kind)) return null;
+        return "completed".equals(status) ? "Ce niveau est terminé : seul un examen blanc à consolider peut encore être repris."
+                : "Ce parcours n’est plus actif.";
+    }
+
+    static boolean retakeOfCompletedLevel(JsonNode context, String kind) {
+        return "completed".equals(context.path("status").asText()) && "final".equals(kind)
+                && "to_consolidate".equals(context.path("goalStatus").asText());
     }
 
     private ExamStore.Attempt owned(UUID learnerId, UUID id) {

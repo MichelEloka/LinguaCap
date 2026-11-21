@@ -1,5 +1,5 @@
-import { useState, type ReactNode } from 'react';
-import { Navigate, Route, Routes, useParams } from 'react-router-dom';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { Navigate, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import { Mail, MailCheck, UserCheck, UserPlus } from 'lucide-react';
 import { PageHeading } from '../../components/ui';
 import { useToast } from '../../design/kit';
@@ -14,6 +14,9 @@ import { staffWorkspaceLinks } from './staff-navigation';
 import { StaffHome } from './staff-dashboard';
 import { LearnersPage } from './staff-learners';
 import { AlertsPage } from './staff-alerts';
+import { ContractsPage, usePendingContracts } from './staff-contracts';
+import { useWorkspaceBadge } from '../workspace/badges';
+import { TeacherOnboarding, useTeacherProfile } from './teacher-onboarding';
 import './staff-workspace.css';
 
 export type { TrackingAlert, TrackingSummary } from './staff-kit';
@@ -34,7 +37,7 @@ const inviteSteps = [
   { icon: UserCheck, title: 'Suivez l’élève', text: 'Son compte créé, il rejoint votre liste d’élèves.' },
 ];
 
-function StaffInvitations({ profile, token }: { profile: Profile; token: string }) {
+function StaffInvitations({ profile, token, teacherLanguages }: { profile: Profile; token: string; teacherLanguages?: readonly string[] }) {
   const toast = useToast();
   const [inviteOpen, setInviteOpen] = useState(false);
   const [refresh, setRefresh] = useState(0);
@@ -55,7 +58,7 @@ function StaffInvitations({ profile, token }: { profile: Profile; token: string 
         ))}
       </ol>
       <InvitationsPanel token={token} refresh={refresh} learnersOnly={!admin} />
-      {inviteOpen && <InviteDialog profile={profile} token={token} onClose={() => setInviteOpen(false)} onDone={(invitation) => {
+      {inviteOpen && <InviteDialog profile={profile} token={token} teacherLanguages={teacherLanguages} onClose={() => setInviteOpen(false)} onDone={(invitation) => {
         setInviteOpen(false);
         setRefresh((count) => count + 1);
         toast(`Invitation envoyée à ${invitation.email}.`);
@@ -64,21 +67,41 @@ function StaffInvitations({ profile, token }: { profile: Profile; token: string 
   );
 }
 
+/** Compteur des contrats à valider sur le lien « Contrats », relu à chaque changement d'écran. */
+function ContractsBadge({ token, pathname }: { token: string; pathname: string }) {
+  const pending = usePendingContracts(token);
+  const { reload } = pending;
+  const first = useRef(true);
+  useEffect(() => {
+    if (first.current) { first.current = false; return; }
+    reload();
+  }, [pathname]); // eslint-disable-line react-hooks/exhaustive-deps
+  useWorkspaceBadge('/espace/contrats', pending.data?.length);
+  return null;
+}
+
 export function StaffPilot({ profile, token }: { profile: Profile; token: string }) {
+  const { pathname } = useLocation();
   const admin = profile.role === 'admin';
   const educator = admin || profile.role === 'teacher';
   const links = staffWorkspaceLinks(profile);
   const allowed = (path: string) => links.some(link => link.path === `/espace/${path}`);
+  const teacher = useTeacherProfile(profile, token);
 
   return (
     <div className="staff-workspace">
+      {teacher.needsOnboarding && (
+        <TeacherOnboarding name={profile.displayName} token={token} initial={teacher.teacherProfile} onDone={teacher.update} />
+      )}
+      {educator && <ContractsBadge token={token} pathname={pathname} />}
       <Routes>
         <Route index element={<StaffHome profile={profile} educator={educator} token={token} />} />
         {educator && <>
           <Route path="eleves" element={<LearnersPage admin={admin} token={token} />} />
           <Route path="eleves/:learnerId" element={<LearnerDetail admin={admin} token={token} />} />
           <Route path="alertes" element={<AlertsPage admin={admin} token={token} />} />
-          <Route path="invitations" element={<StaffInvitations profile={profile} token={token} />} />
+          <Route path="contrats" element={<ContractsPage admin={admin} token={token} />} />
+          <Route path="invitations" element={<StaffInvitations profile={profile} token={token} teacherLanguages={teacher.teacherProfile?.languages} />} />
         </>}
         {admin && <Route path="utilisateurs" element={<StaffSection title="Utilisateurs" description="Retrouvez chaque compte, son rôle, son rattachement et son accès."><UsersPanel profile={profile} token={token} /></StaffSection>} />}
         {admin && <Route path="indicateurs" element={<StaffSection title="Indicateurs" description="Usages du pilote par période, niveau, cadence et type de parcours."><KpiPanel token={token} /></StaffSection>} />}
