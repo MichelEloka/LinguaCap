@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { ReactNode } from 'react';
-import { ChevronsLeft, ChevronsRight, Ellipsis, LogOut, X } from 'lucide-react';
+import { Ellipsis, LogOut, PanelLeftClose, PanelLeftOpen, X } from 'lucide-react';
 import type { LucideIcon } from 'lucide-react';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { Avatar } from '../../design/kit';
@@ -33,7 +33,11 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
 }) {
   const { pathname } = useLocation();
   const [moreAt, setMoreAt] = useState<string | null>(null);
-  const [collapsed, setCollapsed] = useState(() => localStorage.getItem(COLLAPSED_KEY) === '1');
+  // Barre latérale pliable à volonté ; sans choix enregistré, elle démarre repliée sur tablette.
+  const [collapsed, setCollapsed] = useState(() => {
+    const stored = localStorage.getItem(COLLAPSED_KEY);
+    return stored === null ? window.matchMedia('(max-width: 1100px)').matches : stored === '1';
+  });
   const [menuOpen, setMenuOpen] = useState(false);
   const moreButton = useRef<HTMLButtonElement>(null);
   const navigation = useRef<HTMLElement>(null);
@@ -48,6 +52,19 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
 
   useEffect(() => { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); }, [collapsed]);
   useEffect(() => { setMenuOpen(false); }, [pathname]);
+
+  // Ctrl + B (ou Cmd + B) plie ou déplie la barre, sauf pendant une saisie.
+  useEffect(() => {
+    const toggle = (event: KeyboardEvent) => {
+      if (!(event.ctrlKey || event.metaKey) || event.key.toLowerCase() !== 'b' || event.altKey || event.shiftKey) return;
+      const target = event.target as HTMLElement | null;
+      if (target?.closest('input, textarea, select, [contenteditable="true"]')) return;
+      event.preventDefault();
+      setCollapsed((value) => !value);
+    };
+    window.addEventListener('keydown', toggle);
+    return () => window.removeEventListener('keydown', toggle);
+  }, []);
 
   useEffect(() => {
     if (!moreOpen) return;
@@ -104,16 +121,17 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
         </nav>
         <div className="ws-sidebar-foot">
           {account}
-          <button className="ws-collapse" type="button" onClick={() => setCollapsed(!collapsed)} aria-pressed={collapsed}
-            aria-label={collapsed ? 'Déplier la barre latérale' : 'Replier la barre latérale'}>
-            {collapsed ? <ChevronsRight size={18} aria-hidden="true" /> : <ChevronsLeft size={18} aria-hidden="true" />}
-            <span>Replier</span>
-          </button>
         </div>
       </aside>
 
       <div className="ws-main">
         <header className="ws-top">
+          <button className="ws-icon-button ws-toggle" type="button" onClick={() => setCollapsed(!collapsed)} aria-pressed={!collapsed}
+            aria-controls="workspace-navigation" aria-keyshortcuts="Control+B"
+            aria-label={collapsed ? 'Déplier la barre latérale' : 'Replier la barre latérale'}>
+            {collapsed ? <PanelLeftOpen size={20} aria-hidden="true" /> : <PanelLeftClose size={20} aria-hidden="true" />}
+            <span className="ws-tip" aria-hidden="true">{collapsed ? 'Déplier' : 'Replier'} la barre latérale<kbd>Ctrl</kbd><kbd>B</kbd></span>
+          </button>
           <Link to={home} className="ws-top-brand" aria-label="LinguaCap, page principale"><img src="/favicon.svg" alt="" /></Link>
           <div className="ws-crumb"><span>{title}</span>{screen && <strong>{screen}</strong>}</div>
           {demo ? <span className="ws-demo-chip"><i /> Démonstration</span> : name && (

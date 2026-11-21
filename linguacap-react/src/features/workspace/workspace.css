@@ -31,20 +31,18 @@
 .ws-icon-button { width: 36px; height: 36px; display: grid; place-items: center; flex-shrink: 0; border-radius: var(--r-sm); color: var(--muted);
   transition: background var(--t-fast) ease, color var(--t-fast) ease; }
 .ws-icon-button:hover:not(:disabled) { background: var(--canvas); color: var(--ink); }
-.ws-collapse { display: flex; align-items: center; gap: .6rem; min-height: 36px; padding: 0 .7rem; border-radius: var(--r-sm); color: var(--subtle);
   font-size: var(--text-sm); font-weight: 600; white-space: nowrap; }
-.ws-collapse:hover { background: var(--canvas); color: var(--ink-2); }
 .ws-role-switch { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 3px; background: var(--canvas); border-radius: var(--r-md); }
 .ws-role-switch a { padding: .4rem .2rem; border-radius: 9px; text-align: center; font-size: var(--text-xs); font-weight: 700; color: var(--muted); }
 .ws-role-switch a:hover { background: var(--surface); color: var(--ink); }
 
 /* Barre repliée en rail d'icônes */
 .ws.is-collapsed .ws-logo, .ws.is-collapsed .ws-context, .ws.is-collapsed .ws-nav span, .ws.is-collapsed .ws-account-text,
-.ws.is-collapsed .ws-collapse span, .ws.is-collapsed .ws-role-switch { display: none; }
+.ws.is-collapsed .ws-role-switch { display: none; }
 .ws.is-collapsed .ws-logo-mark { display: block; }
 .ws.is-collapsed .ws-brand-row { justify-content: center; padding: 0; }
 .ws.is-collapsed .ws-nav { margin-top: 1.4rem; }
-.ws.is-collapsed .ws-nav a, .ws.is-collapsed .ws-collapse { justify-content: center; padding-inline: 0; }
+.ws.is-collapsed .ws-nav a { justify-content: center; padding-inline: 0; }
 .ws.is-collapsed .ws-account { flex-direction: column; padding: 0; }
 
 /* Zone principale */
@@ -52,6 +50,15 @@
 .ws-top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; gap: .85rem; min-height: 60px; padding: 0 clamp(1rem, 3vw, 2rem);
   background: rgb(242 245 251 / 82%); backdrop-filter: saturate(1.5) blur(14px); border-bottom: 1px solid transparent; }
 .ws-top-brand { display: none; }
+.ws-toggle { position: relative; margin-left: -.5rem; }
+/* Infobulle immédiate du bouton de la barre latérale, avec son raccourci clavier. */
+.ws-tip { position: absolute; left: 0; top: calc(100% + .5rem); z-index: 40; display: flex; align-items: center; gap: .3rem; padding: .45rem .6rem;
+  border-radius: var(--r-sm); background: var(--night); color: #fff; font-size: var(--text-xs); font-weight: 600; white-space: nowrap;
+  box-shadow: var(--shadow-md); opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity var(--t-fast) ease, transform var(--t-fast) var(--ease); }
+.ws-tip kbd { padding: .05rem .35rem; border-radius: 5px; background: rgb(255 255 255 / 16%); box-shadow: inset 0 -1px 0 rgb(255 255 255 / 20%);
+  font: inherit; font-size: .68rem; font-weight: 800; }
+.ws-tip kbd:first-of-type { margin-left: .35rem; }
+.ws-toggle:hover .ws-tip, .ws-toggle:focus-visible .ws-tip { opacity: 1; transform: none; transition-delay: .15s; }
 .ws-top-brand img { width: 30px; height: 30px; }
 .ws-crumb { display: flex; align-items: center; gap: .5rem; min-width: 0; color: var(--muted); font-size: var(--text-sm); font-weight: 600; }
 .ws-crumb strong { color: var(--ink); font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
@@ -70,20 +77,9 @@
 .ws-menu-head small { color: var(--muted); font-size: var(--text-xs); }
 .ws-menu-panel button { display: flex; align-items: center; gap: .6rem; width: 100%; padding: .6rem; border-radius: var(--r-sm); font-weight: 600; color: var(--ink-2); }
 .ws-menu-panel button:hover { background: var(--canvas); color: var(--danger); }
-.ws-content { flex: 1; width: 100%; max-width: 1280px; margin: 0 auto; padding: clamp(1rem, 2.5vw, 1.75rem) clamp(1rem, 3vw, 2rem) 3rem;
+.ws-content { flex: 1; width: 100%; max-width: 1920px; margin: 0 auto; padding: clamp(1rem, 2.5vw, 1.75rem) clamp(1rem, 2.6vw, 2.5rem) 3rem;
   animation: lc-fade-up var(--t-slow) var(--ease) both; }
 .ws-tabbar, .ws-scrim { display: none; }
-
-/* Tablette : barre latérale en rail */
-@media (max-width: 1100px) and (min-width: 761px) {
-  .ws { --ws-side: 76px; }
-  .ws .ws-logo, .ws .ws-context, .ws .ws-nav span, .ws .ws-account-text, .ws .ws-collapse, .ws .ws-role-switch { display: none; }
-  .ws .ws-logo-mark { display: block; }
-  .ws .ws-brand-row { justify-content: center; padding: 0; }
-  .ws .ws-nav { margin-top: 1.4rem; }
-  .ws .ws-nav a { justify-content: center; padding-inline: 0; }
-  .ws .ws-account { flex-direction: column; padding: 0; }
-}
 
 /* Mobile : barre du haut, barre de navigation en bas, panneau « Plus » */
 @media (max-width: 760px) {
@@ -94,7 +90,7 @@
   .ws.is-collapsed .ws-sidebar :is(.ws-logo, .ws-context, .ws-nav span, .ws-account-text) { display: revert; }
   .ws.is-collapsed .ws-logo-mark { display: none; }
   .ws.is-collapsed .ws-nav a { justify-content: flex-start; padding-inline: .7rem; }
-  .ws-collapse { display: none; }
+  .ws-toggle { display: none; }
   .ws-icon-button.ws-close { display: grid; }
   .ws-scrim { display: block; position: fixed; inset: 0; z-index: 25; background: rgb(11 31 79 / 30%); animation: lc-fade-in var(--t-base) ease both; }
   .ws-top { min-height: 56px; background: rgb(255 255 255 / 88%); border-bottom-color: var(--line); }

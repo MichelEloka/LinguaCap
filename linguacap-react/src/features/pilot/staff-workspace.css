@@ -19,7 +19,7 @@
 .staff-error-icon { display: grid; color: var(--warning); }
 
 /* ---------- Indicateurs ---------- */
-.staff-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s-4); }
+.staff-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 215px), 1fr)); gap: var(--s-4); }
 .staff-kpis.is-three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .staff-kpi { display: grid; border-radius: var(--r-lg); }
 .staff-kpi > .stat-card { height: 100%; }
