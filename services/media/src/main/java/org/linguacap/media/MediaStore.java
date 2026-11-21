@@ -9,10 +9,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.HexFormat;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
@@ -336,24 +338,35 @@ class MediaStore {
 
     /** Publie les versions référencées par un parcours publié : elles deviennent lisibles par ses élèves. */
     void publish(List<Ref> refs) {
+        if (refs.isEmpty()) return;
+        // Deux requêtes pour toute la liste (et non deux par fichier) : un parcours complet référence plus de 200 fichiers
+        // et la publication doit tenir dans le délai des appels entre services.
+        String[] assetIds = refs.stream().map(Ref::assetId).toArray(String[]::new);
+        Integer[] versions = refs.stream().map(Ref::version).toArray(Integer[]::new);
         transaction("publish versions", connection -> {
+            Set<String> published = new HashSet<>();
+            try (var update = connection.prepareStatement("""
+                    update media.asset_versions v set status = 'published'
+                    from unnest(?::text[], ?::integer[]) as ref(asset_id, version)
+                    where v.asset_id = ref.asset_id and v.version = ref.version and v.status in ('draft', 'published')
+                    returning v.asset_id, v.version
+                    """)) {
+                update.setArray(1, connection.createArrayOf("text", assetIds));
+                update.setArray(2, connection.createArrayOf("integer", versions));
+                try (var rows = update.executeQuery()) {
+                    while (rows.next()) published.add(rows.getString(1) + "#" + rows.getInt(2));
+                }
+            }
             for (Ref ref : refs) {
-                try (var update = connection.prepareStatement("""
-                        update media.asset_versions set status = 'published'
-                        where asset_id = ? and version = ? and status in ('draft', 'published')
-                        """)) {
-                    update.setString(1, ref.assetId());
-                    update.setInt(2, ref.version());
-                    if (update.executeUpdate() == 0) {
-                        throw HttpError.notFound("Le média " + ref.assetId() + " (version " + ref.version()
-                                + ") est introuvable : choisissez une version disponible dans la médiathèque.");
-                    }
+                if (!published.contains(ref.assetId() + "#" + ref.version())) {
+                    throw HttpError.notFound("Le média " + ref.assetId() + " (version " + ref.version()
+                            + ") est introuvable : choisissez une version disponible dans la médiathèque.");
                 }
-                try (var update = connection.prepareStatement(
-                        "update media.assets set status = 'published' where id = ? and status <> 'published'")) {
-                    update.setString(1, ref.assetId());
-                    update.executeUpdate();
-                }
+            }
+            try (var update = connection.prepareStatement(
+                    "update media.assets set status = 'published' where id = any(?::text[]) and status <> 'published'")) {
+                update.setArray(1, connection.createArrayOf("text", assetIds));
+                update.executeUpdate();
             }
             return null;
         });
