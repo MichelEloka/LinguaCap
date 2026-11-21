@@ -93,6 +93,18 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 - **EVO-036 Drapeaux dans le choix des langues** à la place des lettres (DE, EN…). Choisir un drapeau représentatif pour les langues parlées dans plusieurs pays (arabe, chinois, portugais, espagnol), avec le nom de la langue toujours visible.
 - **EVO-037 Réponses d’accueil des professeurs.** L’administration consulte les réponses de chaque professeur dans sa fiche : langues, niveaux, disponibilité pour de nouveaux élèves, choix de construction des cours, nombre d’élèves envisagé, délai de correction. Ces réponses alimentent les indicateurs (répartitions, tendances).
 
+### État du P0 sur `develop`
+
+| ID | Réalisation |
+|---|---|
+| EVO-033 | Le professeur choisit ses langues, sa disponibilité et son mode de construction des cours avant les niveaux, le nombre d’élèves envisagé et le délai de correction. La présentation et la carte concernent les professeurs disponibles. Les autres arrivent aux invitations. Les anciens profils complètent leurs réponses manquantes en conservant leurs réglages. |
+| EVO-034 | Le « L » animé suit la progression des deux accueils. La progression reste lisible avec l’option de réduction des animations du système. |
+| EVO-035 | L’accueil élève, le test, l’annonce du niveau, l’objectif, les jours d’étude, Aujourd’hui et la bibliothèque partagent la même hiérarchie visuelle et s’adaptent au mobile. |
+| EVO-036 | Les noms restent visibles à côté de drapeaux graphiques intégrés à l’application. Les repères retenus sont l’Arabie saoudite pour l’arabe, la Chine pour le mandarin, le Portugal pour le portugais et l’Espagne pour l’espagnol. |
+| EVO-037 | Les six familles de réponses sont visibles dans la fiche de chaque professeur. Les indicateurs présentent les répartitions actuelles et la tendance des réponses sur la période choisie. Une réponse manquante est comptée séparément. Plusieurs enregistrements du même professeur le même jour comptent pour une seule réponse. |
+
+La création de la fiche prépare l’annuaire prévu en EVO-023. La construction et la modification des cours par le professeur restent dans le périmètre d’EVO-052.
+
 ## P1 · Correctifs
 
 - **EVO-038 Débutant déclaré.** Un élève qui se déclare totalement débutant a un parcours déjà adapté : aucun diagnostic ni question supplémentaire. Le bandeau « Diagnostic initial à passer » ne doit plus apparaître pour lui.
@@ -208,7 +220,6 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 - Les tarifs de chaque abonnement, et si les élèves d’un professeur abonné sont gratuits.
 - La durée exacte de la période d’essai des comptes gratuits (14 jours ?) et le contenu du questionnaire d’avis.
 - Le nom du « suiveur », et s’il peut envoyer des encouragements.
-- Les drapeaux des langues parlées dans plusieurs pays (arabe, chinois, portugais, espagnol).
 - La suppression d’un compte à la demande de l’utilisateur : immédiate, ou après un délai de rétractation ?
 - L’annuaire des professeurs : avis d’élèves et tarif propre au professeur ?
 - Les premiers mini-jeux à faire, et la période du classement (semaine ou mois).

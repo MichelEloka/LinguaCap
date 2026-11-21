@@ -129,12 +129,26 @@ const otherTeacher = await createStaff('tiers', 'teacher');
 // 2. Professeurs : questionnaire d'accueil (l'interface l'affiche tant que onboardedAt est nul), langues ouvertes seulement.
 assert.equal((await api('/me', teacher.token)).teacherProfile?.onboardedAt ?? null, null, 'Le profil d’un nouveau professeur est à remplir');
 await put('/me/teacher-profile', teacher.token, { languages: ['en'], levels: ['A1'] }, 409);
-for (const account of [teacher, otherTeacher]) {
-  const onboarded = await put('/me/teacher-profile', account.token,
-    { languages: ['de'], levels: ['A1', 'A2'], gradingDelayHours: 48, bio: 'Professeur de recette.' });
+const teaching = { languages: ['de'], levels: ['A1', 'A2'], gradingDelayHours: 48, maxLearners: 12, bio: 'Professeur de recette.' };
+const legacyTeaching = (await put('/me/teacher-profile', teacher.token, teaching)).teacherProfile;
+assert.deepEqual([legacyTeaching.acceptingNewStudents, legacyTeaching.courseCreationMode], [null, null]);
+await put('/me/teacher-profile', teacher.token, { ...teaching, acceptingNewStudents: true }, 400);
+await put('/me/teacher-profile', teacher.token, { ...teaching, acceptingNewStudents: null, courseCreationMode: null }, 400);
+await put('/me/teacher-profile', teacher.token, { ...teaching, acceptingNewStudents: 'false', courseCreationMode: 'self' }, 400);
+await put('/me/teacher-profile', teacher.token, { ...teaching, acceptingNewStudents: false, courseCreationMode: 'autre' }, 400);
+for (const [account, acceptingNewStudents, courseCreationMode] of [[teacher, true, 'self'], [otherTeacher, false, 'linguacap']]) {
+  const onboarded = await put('/me/teacher-profile', account.token, { ...teaching, acceptingNewStudents, courseCreationMode });
   assert.ok(onboarded.teacherProfile.onboardedAt, 'Le questionnaire d’accueil est enregistré');
   assert.deepEqual(onboarded.teacherProfile.languages, ['de']);
+  assert.deepEqual([onboarded.teacherProfile.acceptingNewStudents, onboarded.teacherProfile.courseCreationMode], [
+    acceptingNewStudents, courseCreationMode,
+  ]);
+  const adminProfile = (await api(`/admin/users/${account.id}`, admin.token)).teacherProfile;
+  assert.deepEqual(adminProfile, onboarded.teacherProfile, 'La fiche admin contient toutes les réponses du professeur');
+  const reread = (await put('/me/teacher-profile', account.token, teaching)).teacherProfile;
+  assert.deepEqual(reread, onboarded.teacherProfile, 'Une ancienne soumission préserve les deux réponses explicites');
 }
+await api(`/admin/users/${teacher.id}`, otherTeacher.token, { status: 403 });
 assert.equal((await api('/me', admin.token)).role, 'admin');
 const levels = await api('/levels', admin.token);
 assert.ok(levels.some((level) => level.code === 'B1'));
@@ -993,6 +1007,14 @@ await api('/tracking/kpis?from=2026-02-31', admin.token, { status: 400 });
 await runJob();
 const horizon = `?from=${inDays(-1)}&to=${inDays(120)}`;
 const dashboard = await api('/tracking/kpis' + horizon, admin.token);
+const teacherKpis = dashboard.teacherOnboarding;
+assert.ok(teacherKpis.teachers >= 2 && teacherKpis.byLanguage.de >= 2 && teacherKpis.byLevel.A1 >= 2);
+assert.ok(teacherKpis.byAvailability.yes >= 1 && teacherKpis.byAvailability.no >= 1);
+assert.ok(teacherKpis.byCourseMode.self >= 1 && teacherKpis.byCourseMode.linguacap >= 1);
+assert.ok(teacherKpis.byMaxLearners['12'] >= 2 && teacherKpis.byGradingDelayHours['48'] >= 2);
+assert.ok(teacherKpis.trend.some(day => /^\d{4}-\d{2}-\d{2}$/.test(day.date) && day.responses >= 1));
+assert.ok(teacherKpis.trend.some(day => day.accepting >= 1 && day.self >= 1));
+assert.ok(teacherKpis.trend.some(day => day.notAccepting >= 1 && day.linguacap >= 1));
 assert.ok(dashboard.goals >= 4, 'Les parcours de la recette sont retenus');
 assert.ok(dashboard.activeLearnersTotal >= 2, 'Les activités pédagogiques comptent les élèves actifs');
 assert.ok(dashboard.activeLearners.length >= 1);
@@ -1734,6 +1756,10 @@ if (process.argv.includes('--browser')) {
     await expect(questionnaire.getByRole('heading', { name: 'Quelles langues enseignez-vous ?' })).toBeVisible();
     await expect(questionnaire.getByRole('checkbox', { name: /^Allemand/ })).toBeChecked();
     await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
+    await questionnaire.getByRole('radio', { name: /Je souhaite accueillir de nouveaux élèves/ }).check();
+    await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
+    await questionnaire.getByRole('radio', { name: /LinguaCap construit mes cours/ }).check();
+    await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
     await questionnaire.getByRole('checkbox', { name: /^B1/ }).check();
     for (let question = 0; question < 4; question++) await questionnaire.getByRole('button', { name: 'Continuer', exact: true }).click();
     await expect(questionnaire.getByRole('heading', { name: 'Tout est prêt ?' })).toBeVisible();
@@ -1742,6 +1768,8 @@ if (process.argv.includes('--browser')) {
     const savedProfile = (await api('/me', newTeacher.token)).teacherProfile;
     assert.ok(savedProfile.onboardedAt, 'Le questionnaire est enregistré');
     assert.deepEqual([savedProfile.languages, savedProfile.levels], [['de'], ['A1', 'A2', 'B1']]);
+    assert.equal(savedProfile.acceptingNewStudents, true);
+    assert.equal(savedProfile.courseCreationMode, 'linguacap');
     console.log('Recette navigateur réussie · questionnaire d’accueil d’un nouveau professeur sur mobile.');
 
     // (c) Professeur référent : décision d'un contrat en attente depuis la rubrique « Contrats ».

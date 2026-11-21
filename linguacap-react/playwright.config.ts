@@ -13,10 +13,14 @@ export default defineConfig({
     ...devices['Desktop Chrome'],
     ...(process.env.PLAYWRIGHT_CHANNEL ? { channel: process.env.PLAYWRIGHT_CHANNEL } : {}),
   },
-  webServer: {
+  webServer: [{
     command: 'npm run dev -- --port 5183 --strictPort',
     url: baseURL,
     reuseExistingServer: false,
     env: { VITE_LINGUACAP_MODE: 'demo' },
-  },
+  }, {
+    command: 'npm run dev:mock -- --port 5191 --strictPort',
+    url: 'http://127.0.0.1:5191',
+    reuseExistingServer: false,
+  }],
 });
