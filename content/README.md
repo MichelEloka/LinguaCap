@@ -2,6 +2,32 @@
 
 Ce dossier contient les parcours d’allemand **A1** et **A2** et le **test de niveau** au format source. L’importeur les publie dans le catalogue par l’API de la plateforme : médias déposés dans la médiathèque, puis brouillon enregistré, contrôlé et publié.
 
+## Préparer le kit V3
+
+La V3 ajoute l’entrée en allemand par l’alphabet et les sons, des ateliers de réemploi après chaque thème et des débits audio progressifs. Les sources se trouvent dans [v3/source](v3/source) et le [guide](v3/README.md) décrit le parcours et les consignes d’import. Le kit est généré dans `target/linguacap-cours-v3-kit`, avec ses pages hors ligne, ses JSON et ses MP3.
+
+```powershell
+$voiceDir = New-Item -ItemType Directory -Path target/linguacap-piper-voices-v3 -Force
+$voiceBase = "https://huggingface.co/rhasspy/piper-voices/resolve/cf910fb59f1d79ab3b625a63993a108751c6c25d/de/de_DE"
+foreach ($speaker in @("thorsten", "kerstin")) {
+    foreach ($extension in @("onnx", "onnx.json")) {
+        $voiceFile = "de_DE-${speaker}-medium.${extension}"
+        curl.exe -fLsS --retry 2 "$voiceBase/$speaker/medium/$voiceFile" -o (Join-Path $voiceDir.FullName $voiceFile)
+        if ($LASTEXITCODE -ne 0) { throw "Téléchargement de $voiceFile interrompu." }
+    }
+}
+docker build -t linguacap-tts-v3 -f infra/content/tts/Dockerfile.v3 infra/content/tts
+node infra/content/build-v3.mjs
+docker run --rm -v "$($PWD.Path):/repo" -v "$($voiceDir.FullName):/voices:ro" -w /repo linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/target/linguacap-cours-v3-kit/content/de
+Push-Location target/linguacap-cours-v3-kit
+node infra/content/check-content.mjs
+node infra/content/import-content.mjs --dry-run
+Pop-Location
+Compress-Archive -Path target/linguacap-cours-v3-kit/* -DestinationPath target/LinguaCap-Cours-Allemand-V3.zip -Force
+```
+
+Le manifeste audio du kit contient les profils, durées, voix et empreintes des fichiers générés.
+
 ```
 content/
   README.md                 ce document

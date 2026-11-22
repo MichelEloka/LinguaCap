@@ -23,12 +23,12 @@ Les quatre signes supplémentaires sont Ä, Ö, Ü et ß. Pour les trois premier
 1. Rappel (5 min). Masquez le tableau. Dites les quatre groupes aussi loin que possible. Réécoutez seulement le groupe qui pose problème, puis mélangez vos cartons J, V, W et Z.
 2. Petites suites (5 min). Préparez quatre suites de trois lettres, par exemple W–E–G, Z–O–E, J–A–N et L–E–A. Lisez chaque suite à voix haute, cachez-la puis écrivez-la de mémoire.
 3. Apprendre trois énoncés (5 min). « Wie heißen Sie? » demande le nom poliment. « Ich heiße Jana. » donne le nom. « Wie schreibt man das? » demande comment cela s’écrit. Écoutez le petit dialogue et répétez seulement ces énoncés.
-4. Réparer un malentendu (5 min). Apprenez « Noch einmal, bitte. » (encore une fois, s’il vous plaît) et « Langsam, bitte. » (lentement, s’il vous plaît). Dites le nom, arrêtez-vous, puis redonnez-le plus lentement après une de ces demandes.`,
+4. Réparer un malentendu (5 min). Apprenez « Noch einmal, bitte. » (encore une fois, s’il vous plaît) et « Langsam, bitte. » (lentement, s’il vous plaît). Redonnez le nom plus lentement après cette demande. Pour clarifier une lettre, ajoutez un exemple avec « wie », comme « J wie Jana » (J comme Jana).`,
     dialogue: [
       'Guten Tag. Wie heißen Sie?',
-      { text: 'Ich heiße Jana. J, A, N, A.', say: 'Ich heiße Jana. Jot. Ah. Enn. Ah.' },
+      'Ich heiße Jana. J, A, N, A.',
       'Noch einmal, bitte. Langsam, bitte.',
-      { text: 'J, A, N, A. Jana.', say: 'Jot. Ah. Enn. Ah. Jana.' },
+      'J. A. N. A. Jana.',
       'Danke, Jana!',
     ],
     quiz: [

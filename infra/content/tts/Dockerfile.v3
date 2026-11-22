@@ -1,0 +1,7 @@
+# Piper >= 1.5 est nécessaire aux voix réentraînées pour les contenus V3.
+FROM python:3.12-slim
+RUN apt-get update && apt-get install -y --no-install-recommends ffmpeg \
+    && rm -rf /var/lib/apt/lists/*
+RUN pip install --no-cache-dir piper-tts==1.8.0
+ENV PYTHONDONTWRITEBYTECODE=1
+WORKDIR /work
