@@ -30,25 +30,26 @@ Le manifeste audio du kit contient les profils, durées, voix et empreintes des 
 
 ## Préparer le kit V4
 
-La V4 ajoute quatre blocs sur la santé et les transports en A1, puis les démarches courantes et les connecteurs en A2. Les [sources](v4/source) définissent les nouveaux modules et leur place dans le [parcours V4](v4/README.md). Le kit est produit dans `target/linguacap-cours-v4-kit`.
+La V4 complète ajoute huit blocs à la V3. Les [sources](v4/source) définissent les nouveaux modules et leur place dans le [parcours V4](v4/README.md). Le kit est produit dans `target/linguacap-cours-v4-complete-kit`.
 
-Une fois l’image Docker et les modèles installés comme ci-dessus, lancez les commandes suivantes. Si le kit V3 a déjà été généré, le moteur vérifie ses empreintes et réutilise ses MP3 dans la V4.
+Une fois l’image Docker et les modèles installés comme ci-dessus, lancez les commandes suivantes. Si le premier kit V4 ou le kit V3 a déjà été généré, le moteur vérifie ses empreintes et réutilise ses MP3 dans la V4 complète.
 
 ```powershell
 node infra/content/build-v3.mjs --v4
 $voiceDir = Get-Item target/linguacap-piper-voices-v3
-$oldAudio = "target/linguacap-cours-v3-kit/content/de/media/audio"
-$newAudio = "target/linguacap-cours-v4-kit/content/de/media/audio"
-if ((Test-Path "$oldAudio/manifest-v3.json") -and !(Test-Path "$newAudio/manifest-v3.json")) {
+$oldAudio = @("target/linguacap-cours-v4-kit/content/de/media/audio", "target/linguacap-cours-v3-kit/content/de/media/audio") |
+    Where-Object { Test-Path -LiteralPath "$_/manifest-v3.json" } | Select-Object -First 1
+$newAudio = "target/linguacap-cours-v4-complete-kit/content/de/media/audio"
+if ($oldAudio -and !(Test-Path -LiteralPath "$newAudio/manifest-v3.json")) {
     New-Item -ItemType Directory -Path $newAudio -Force | Out-Null
     Get-ChildItem -Path $oldAudio -File | Where-Object { $_.Extension -eq ".mp3" -or $_.Name -eq "manifest-v3.json" } | Copy-Item -Destination $newAudio
 }
-docker run --rm -v "$($PWD.Path):/repo" -v "$($voiceDir.FullName):/voices:ro" -w /repo linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/target/linguacap-cours-v4-kit/content/de
-Push-Location target/linguacap-cours-v4-kit
+docker run --rm -v "$($PWD.Path):/repo" -v "$($voiceDir.FullName):/voices:ro" -w /repo linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/target/linguacap-cours-v4-complete-kit/content/de
+Push-Location target/linguacap-cours-v4-complete-kit
 node infra/content/check-content.mjs
 node infra/content/import-content.mjs --dry-run
 Pop-Location
-Compress-Archive -Path target/linguacap-cours-v4-kit/* -DestinationPath target/LinguaCap-Cours-Allemand-V4.zip -Force
+Compress-Archive -Path target/linguacap-cours-v4-complete-kit/* -DestinationPath target/LinguaCap-Cours-Allemand-V4-Complete.zip -Force
 ```
 
 ```

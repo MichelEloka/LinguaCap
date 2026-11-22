@@ -27,7 +27,7 @@ export default [
 6 min — Prenez la fiche qui demande le plus de précisions et préparez un message vocal de 30 secondes. Demandez quand quelqu’un peut venir, puis proposez deux créneaux. Modèle : Kann jemand vorbeikommen? Am Mittwoch bin ich ab vierzehn Uhr zu Hause. Am Donnerstag geht es nur vormittags. Réécoutez-vous et vérifiez que la personne peut identifier le problème, la pièce et au moins une disponibilité.`,
     drill: `4 min — Écoutez la conversation sans lire. Notez qui appelle, où se trouve le problème et depuis quand il est présent. Résumez en une phrase en français avant de reprendre les mots allemands.
 
-5 min — À la seconde écoute, relevez ce que fait le robinet lorsqu’il est fermé. Notez les deux créneaux, celui qui est accepté et les indications d’accès. Contrôlez ensuite la différence entre Donnerstag um zehn et Freitag zwischen vierzehn und sechzehn Uhr en écoutant ces répliques une nouvelle fois.
+5 min — À la seconde écoute, relevez ce que fait le robinet lorsqu’il est fermé. Notez les deux créneaux, celui qui est accepté et les indications d’accès. « In der zweiten Etage » et « im zweiten Stock » signifient « au deuxième étage ». Contrôlez ensuite la différence entre Donnerstag um zehn et Freitag zwischen vierzehn und sechzehn Uhr en réécoutant ces répliques.
 
 5 min — Rejouez le début à partir de cette fiche : chauffage / chambre / lundi matin / le radiateur reste froid. Dans le rôle de la régie, demandez si d’autres pièces sont touchées. Changez de rôle et répondez avec les informations suivantes : la chambre seule est concernée ; le salon est chauffé. Répétez une fois sans lire vos phrases complètes.
 
@@ -46,7 +46,7 @@ export default [
       "Verstehe. Unser Techniker kann am Donnerstag um zehn Uhr vorbeikommen.",
       "Da bin ich bei der Arbeit. Haben Sie am Freitag nach zwei Uhr Zeit?",
       "Ja, am Freitag zwischen vierzehn und sechzehn Uhr. Kann dann jemand die Tür öffnen?",
-      "Ja, ich bin zu Hause. Die Wohnung ist im zweiten Stock links. Bitte klingeln Sie bei Berger.",
+      "Ja, ich bin zu Hause. Die Wohnung ist in der zweiten Etage, gleich links. Bitte klingeln Sie bei Berger.",
       "Alles klar. Ich schicke Ihnen die Bestätigung gleich per E-Mail.",
       "Danke. Soll ich dem Techniker den Wasserhahn zeigen?",
       "Ja, bitte. Er meldet sich kurz vor dem Termin telefonisch bei Ihnen.",
@@ -56,7 +56,7 @@ export default [
       ["Depuis quand le problème est-il présent ?", ["Depuis hier soir", "Depuis jeudi matin", "Depuis deux semaines"], "Seit gestern Abend indique le début du problème."],
       ["Quand le robinet goutte-t-il ?", ["Même lorsqu’il est fermé", "Seulement après utilisation", "Seulement le soir"], "Auch wenn er zu ist précise que le problème persiste quand le robinet est fermé."],
       ["Quel créneau est finalement accepté ?", ["Vendredi de 14 h à 16 h", "Jeudi à 10 h", "Vendredi de 10 h à 12 h"], "Am Freitag zwischen vierzehn und sechzehn Uhr désigne la nouvelle plage de passage."],
-      ["Où se trouve le logement ?", ["Au deuxième étage à gauche", "Au deuxième étage à droite", "Au premier étage à gauche"], "Im zweiten Stock links donne à la fois l’étage et le côté."],
+      ["Où se trouve le logement ?", ["Au deuxième étage à gauche", "Au deuxième étage à droite", "Au premier étage à gauche"], "In der zweiten Etage, gleich links donne à la fois l’étage et le côté."],
       ["Comment dire que le chauffage reste froid depuis lundi ?", ["Seit Montag bleibt die Heizung kalt.", "Bis Montag bleibt die Heizung kalt.", "Am Montag ist die Heizung nicht mehr kalt."], "Seit situe le début d’une situation qui dure. Bis introduit une limite."],
       ["Quelle phrase donne au technicien un intervalle de passage ?", ["Können Sie zwischen neun und elf Uhr kommen?", "Können Sie am Freitag seit elf Uhr kommen?", "Können Sie am Mittwoch um neun und elf Uhr kommen?"], "Zwischen neun und elf Uhr veut dire que la personne peut passer à n’importe quel moment dans cet intervalle."],
       ["Quelle phrase indique à quelle sonnette sonner ?", ["Bitte klingeln Sie bei Weber.", "Bitte rufen Sie Weber morgen an.", "Die Wohnung liegt hinter dem Haus."], "Bei Weber après klingeln désigne le nom à chercher sur les sonnettes."],
@@ -112,7 +112,7 @@ export default [
     dialogue: [
       "Interessierst du dich für den Fotokurs am Samstag?",
       "Ja. Ich habe mich gestern angemeldet, aber ich warte noch auf die Bestätigung. Und du?",
-      "Ich interessiere mich für den Kochkurs am Mittwoch. Ich möchte wissen, was wir mitbringen müssen.",
+      "Ich interessiere mich für den Kurs am Mittwoch. Da kochen wir zusammen. Was muss ich mitbringen?",
       "Mit wem kannst du darüber sprechen?",
       "Mit dem Kursleiter, Herrn Brand. Er kommt aber erst um achtzehn Uhr ins Bürgerhaus.",
       "Dann warten wir hier vor dem Eingang. Ist das dein Handy?",

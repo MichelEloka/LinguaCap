@@ -7,7 +7,8 @@ import { renderWorkbook } from './render-v3-workbook.mjs';
 import sounds from '../../content/v3/source/a1-sons.mjs';
 
 const edition = process.argv.includes('--v4') ? 'v4' : 'v3';
-const bundle = join(root, 'target', `linguacap-cours-${edition}-kit`);
+const kitDirectory = edition === 'v4' ? 'linguacap-cours-v4-complete-kit' : 'linguacap-cours-v3-kit';
+const bundle = join(root, 'target', kitDirectory);
 const content = join(bundle, 'content', 'de');
 const sourceNote = 'LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU).';
 const levels = ['a1', 'a2'];
@@ -161,11 +162,13 @@ async function compileLevel(levelId) {
     modules.push(makeWorkshop(workshop, previous, [module.id], baseModule.audioProfile, nativeByKey));
   }
   if (edition === 'v4') {
-    const extensions = (await import(`../../content/v4/source/${levelId}.mjs`)).default;
-    if (extensions.length !== 2 || new Set(extensions.map(({ id }) => id)).size !== extensions.length) {
-      throw new Error(`Deux nouveaux modules aux identifiants distincts sont attendus pour ${levelId}.`);
+    for (const source of [levelId, `${levelId}-complements`]) {
+      const extensions = (await import(`../../content/v4/source/${source}.mjs`)).default;
+      if (extensions.length !== 2 || new Set(extensions.map(({ id }) => id)).size !== extensions.length) {
+        throw new Error(`Deux modules aux identifiants distincts sont attendus dans ${source}.mjs.`);
+      }
+      modules = extendModules(modules, extensions, nativeByKey);
     }
-    modules = extendModules(modules, extensions, nativeByKey);
   }
   const files = modules.map(({ id }, index) => ({ id, file: `${String(index + 1).padStart(2, '0')}-${id}.json` }));
   // Les deux évaluations interviennent après les séquences d’apprentissage de leur niveau.
