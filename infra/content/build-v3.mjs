@@ -6,7 +6,8 @@ import { allMedia, imageFile, loadLevel, root } from './content-lib.mjs';
 import { renderWorkbook } from './render-v3-workbook.mjs';
 import sounds from '../../content/v3/source/a1-sons.mjs';
 
-const bundle = join(root, 'target', 'linguacap-cours-v3-kit');
+const edition = process.argv.includes('--v4') ? 'v4' : 'v3';
+const bundle = join(root, 'target', `linguacap-cours-${edition}-kit`);
 const content = join(bundle, 'content', 'de');
 const sourceNote = 'LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU).';
 const levels = ['a1', 'a2'];
@@ -64,13 +65,19 @@ function makeWorkshop(spec, id, prerequisites, audioProfile, nativeByKey) {
     `${index + 1}. ${prompt}\n${answer} — ${feedback}`).join('\n\n');
   return {
     id, title, objective: goal, prerequisites, audioProfile,
-    sources: [sourceNote, ...(native ? ['Deutsch im Blick, phonétique chapitre 1, voix originale, tempo ajusté, CC BY 4.0.'] : [])],
+    sources: [
+      ...(spec.sources ?? [sourceNote]),
+      ...(native ? ['Deutsch im Blick, phonétique chapitre 1, voix originale, tempo ajusté, CC BY 4.0.'] : []),
+    ],
     media: [...(model ? [model] : []), dialog],
     activities: [
-      activity(id, 'guide', 'Comprendre et repérer', 20, model ? ['lecture', 'ecoute', 'expression-orale'] : ['lecture'],
+      activity(id, 'guide', spec.guideTitle ?? 'Comprendre et repérer', 20, model ? ['lecture', 'ecoute', 'expression-orale'] : ['lecture'],
         guide, model ? [audioPlacement(model.key, 'on_demand')] : []),
-      activity(id, 'pratique', 'Écouter et s’entraîner', 20, ['ecoute', 'expression-orale'],
+      activity(id, 'pratique', spec.drillTitle ?? 'Écouter et s’entraîner', 20, ['ecoute', 'expression-orale'],
         drill, [audioPlacement(dialog.key, 'on_demand')]),
+      ...(spec.lesson ? [
+        activity(id, 'approfondir', spec.lessonTitle, 20, ['lecture', 'expression-ecrite'], spec.lesson),
+      ] : []),
       activity(id, 'controle', 'Vérifier sa compréhension', 12, ['ecoute', 'lecture'],
         'Faites une première écoute pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Répondez de mémoire aux questions de réemploi. Vérifiez ensuite vos réponses dans l’activité suivante.',
         [audioPlacement(dialog.key, 'after_answer')], questions),
@@ -79,6 +86,27 @@ function makeWorkshop(spec, id, prerequisites, audioProfile, nativeByKey) {
       activity(id, 'mission', 'Réaliser la mission', 20, ['expression-ecrite', 'expression-orale'], task),
     ],
   };
+}
+
+function extendModules(modules, extensions, nativeByKey) {
+  const after = new Map();
+  const moduleIds = new Set(modules.map(({ id }) => id));
+  for (const spec of extensions) {
+    if (!moduleIds.has(spec.after) || after.has(spec.after) || moduleIds.has(spec.id)) {
+      throw new Error(`Impossible d’insérer le module ${spec.id} après ${spec.after}.`);
+    }
+    if (!spec.lessonTitle || !spec.lesson || !spec.soundModel?.length || !spec.sources?.length) {
+      throw new Error(`Le module ${spec.id} requiert une troisième leçon, un modèle audio et des sources.`);
+    }
+    after.set(spec.after, spec);
+  }
+  return modules.flatMap((module) => {
+    const prerequisites = module.prerequisites.map((key) => after.get(key)?.id ?? key);
+    const preceding = { ...module, prerequisites };
+    const spec = after.get(module.id);
+    if (!spec) return [preceding];
+    return [preceding, makeWorkshop(spec, spec.id, [module.id], spec.audioProfile ?? module.audioProfile, nativeByKey)];
+  });
 }
 
 function withModuleProfiles(module, levelId, index, prerequisites) {
@@ -116,7 +144,7 @@ async function compileLevel(levelId) {
   if (workshops.length !== base.length || base.some(({ id }) => workshops.filter((item) => item.id === id).length !== 1)) {
     throw new Error(`Un atelier par module est attendu pour ${levelId}.`);
   }
-  const modules = [];
+  let modules = [];
   let previous = null;
   if (levelId === 'a1') {
     for (const spec of sounds) {
@@ -132,6 +160,13 @@ async function compileLevel(levelId) {
     previous = `${module.id}-atelier`;
     modules.push(makeWorkshop(workshop, previous, [module.id], baseModule.audioProfile, nativeByKey));
   }
+  if (edition === 'v4') {
+    const extensions = (await import(`../../content/v4/source/${levelId}.mjs`)).default;
+    if (extensions.length !== 2 || new Set(extensions.map(({ id }) => id)).size !== extensions.length) {
+      throw new Error(`Deux nouveaux modules aux identifiants distincts sont attendus pour ${levelId}.`);
+    }
+    modules = extendModules(modules, extensions, nativeByKey);
+  }
   const files = modules.map(({ id }, index) => ({ id, file: `${String(index + 1).padStart(2, '0')}-${id}.json` }));
   // Les deux évaluations interviennent après les séquences d’apprentissage de leur niveau.
   prepareAudioReferences(level.media, level.assessments.flatMap(({ parts }) => parts));
@@ -144,10 +179,14 @@ async function compileLevel(levelId) {
     oral.instructions = oral.instructions.replace('Name · Alter', 'Name (épelez votre nom) · Alter');
     oral.criteria[0].label = 'Tâches réalisées : présentation avec nom épelé, une question et une réponse par carte, trois demandes adaptées';
   }
+  if (edition === 'v4' && levelId === 'a2') {
+    const final = level.assessments.find(({ kind }) => kind === 'final');
+    final.description = final.description.replace('sur l’ensemble des huit modules', 'sur les grands thèmes du niveau A2');
+  }
   const directory = join(content, levelId);
   write(join(directory, 'level.json'), { ...level, modules: files });
   modules.forEach((module, index) => write(join(directory, files[index].file), module));
-  writeFileSync(join(bundle, `${levelId.toUpperCase()}.html`), renderWorkbook({ ...level, modules }));
+  writeFileSync(join(bundle, `${levelId.toUpperCase()}.html`), renderWorkbook({ ...level, modules }, edition.toUpperCase()));
 
   // Les images sont distribuées depuis les médias préparés. L’outil audio prépare les MP3 à l’étape suivante.
   for (const media of allMedia({ ...level, modules })) {
@@ -171,8 +210,8 @@ Object.assign(voices, {
   license: 'Données Thorsten et modèle de base rdh : CC0. Données Kerstin : CC0. Voix de base Hi-Fi TTS de Cori Samuel : CC BY 4.0.',
   url: 'https://huggingface.co/rhasspy/piper-voices/tree/cf910fb59f1d79ab3b625a63993a108751c6c25d/de/de_DE',
   licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
-  used: 'Toutes les synthèses vocales V3, avec débits progressifs par niveau.',
+  used: `Toutes les synthèses vocales du kit ${edition.toUpperCase()}, avec débits progressifs par niveau.`,
 });
 write(join(content, 'media', 'credits.json'), credits);
-copy(join(root, 'content', 'v3', 'README.md'), join(bundle, 'README.md'));
+copy(join(root, 'content', edition, 'README.md'), join(bundle, 'README.md'));
 console.log(bundle);

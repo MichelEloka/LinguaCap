@@ -6,7 +6,7 @@ function escape(value = '') {
   })[char]);
 }
 
-export function renderWorkbook(level) {
+export function renderWorkbook(level, edition = 'V3') {
   const media = new Map(allMedia(level).map((item) => [item.key, item]));
   const code = level.levelId.toUpperCase();
   const minutes = level.modules.reduce((total, module) =>
@@ -66,7 +66,7 @@ export function renderWorkbook(level) {
 <html lang="fr">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>LinguaCap · Allemand ${code} · V3</title>
+<title>LinguaCap · Allemand ${code} · ${escape(edition)}</title>
 <style>
   :root{font-family:system-ui,sans-serif;color:#182536;background:#f2f6f4;line-height:1.6}
   body{width:min(calc(100% - 2rem),52rem);margin:2rem auto 4rem}
@@ -79,7 +79,7 @@ export function renderWorkbook(level) {
   figure{margin:1rem 0}figcaption{color:#455d54}audio,img{display:block;max-width:100%}img{max-height:20rem;object-fit:contain}
   @media print{body{width:100%;margin:0}header,section,nav{border:0;padding:.5rem}}
 </style>
-<header><h1>Allemand ${code} · LinguaCap V3</h1>
+<header><h1>Allemand ${code} · LinguaCap ${escape(edition)}</h1>
   <p>${level.modules.length} modules · ${Math.floor(minutes / 60)} h ${String(minutes % 60).padStart(2, '0')} d’activités</p>
   <p>Ouvrez une activité pour lire la consigne et écouter les enregistrements. Répondez avant de consulter la transcription ou la correction.</p>
 </header>

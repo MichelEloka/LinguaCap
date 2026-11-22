@@ -82,9 +82,9 @@ export default [
     ],
     soundModel: [
       "Ich komme später, weil mein Bus Verspätung hat.",
-      "Ich komme später, denn mein Bus hat Verspätung.",
+      "Wir nehmen den Bus, denn das Wetter ist schlecht.",
       "Der Aufzug ist kaputt. Deshalb nehmen wir die Treppe.",
-      "Der Aufzug ist kaputt. Trotzdem komme ich pünktlich.",
+      "Es regnet stark. Trotzdem findet das Fest statt.",
     ],
     guide: `4 min — Lisez ces trois messages d’un cours du soir fictif. « Wir treffen uns heute in Raum 12, weil Raum 7 geschlossen ist. » « Der Drucker funktioniert nicht. Deshalb schickt die Lehrerin das Blatt per E-Mail. » « Am Abend regnet es. Trotzdem findet der Fahrradkurs statt. » Repérez ce qui explique une décision, ce qui en résulte et ce qui arrive malgré un obstacle. Dessinez des flèches entre les deux idées.
 
