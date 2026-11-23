@@ -29,11 +29,11 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 
 | ID | Élément | Priorité | Complexité | Dépend de |
 |---|---|---|---|---|
-| EVO-033 | Accueil du professeur repensé : questions qui s’adaptent | P0 | M | — |
-| EVO-034 | Animation signature : le « L » du logo parcourt le chemin des questions | P0 | M | EVO-033, EVO-035 |
-| EVO-035 | Accueil et espace élève : interface du même niveau d’exigence | P0 | M | — |
-| EVO-036 | Drapeaux dans le choix des langues | P0 | S | — |
-| EVO-037 | Réponses d’accueil des professeurs visibles par l’administration et dans les statistiques | P0 | S | EVO-033 |
+| EVO-033 | Accueil du professeur repensé : questions qui s’adaptent | P0 · livré | M | — |
+| EVO-034 | Animation signature : le « L » du logo parcourt le chemin des questions | P0 · livré | M | EVO-033, EVO-035 |
+| EVO-035 | Accueil et espace élève : interface du même niveau d’exigence | P0 · livré | M | — |
+| EVO-036 | Drapeaux dans le choix des langues | P0 · livré | S | — |
+| EVO-037 | Réponses d’accueil des professeurs visibles par l’administration et dans les statistiques | P0 · livré | S | EVO-033 |
 | EVO-038 | Débutant déclaré : parcours adapté d’office, sans diagnostic | P1 | S | — |
 | EVO-039 | Parcours d’un élève invisible côté professeur | P1 | M | — |
 | EVO-040 | Voix de synthèse A1 ralenties | P1 | M | — |
@@ -74,7 +74,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-029 | Écoles : directeur, professeurs, marque de l’école | P4 | XL | EVO-024, EVO-025 |
 | EVO-030 | Compétitions entre élèves d’une école | P4 | M | EVO-027, EVO-029 |
 
-## P0 · Interface (prioritaire sur tout)
+## P0 · Interface (prioritaire sur tout) — livré le 23 novembre 2026
 
 - **EVO-033 Accueil du professeur repensé.** Les questions suivantes dépendent des réponses précédentes. L’ordre :
   1. Langues enseignées.
@@ -243,3 +243,11 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 | EVO-010 | En-tête revu | S |
 
 Correctif livré ensuite : publication des médias d’un parcours en deux requêtes, pour rester dans le délai des appels internes.
+
+**Incrément « Accueil sublimé »**, en production le 23 novembre 2026 : EVO-033 à EVO-037.
+- Accueils plein écran « Le souffle » pour le professeur et l'élève : toile nuit, chemin des étapes où le « L » du logo voyage en s'étirant comme le vent, ouverture et fin animées.
+- Questions du professeur qui s'adaptent, avec sa carte de présentation construite en direct.
+- Révélation du niveau et carnet de route de l'élève.
+- Drapeaux dans le choix des langues.
+- Réponses d'accueil des professeurs dans la fiche administrateur et les indicateurs.
+- Espace élève retravaillé, avec le chemin du niveau de départ au niveau visé.
