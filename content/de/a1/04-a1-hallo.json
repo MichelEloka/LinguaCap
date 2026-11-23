@@ -1,0 +1,2742 @@
+{
+  "id": "a1-hallo",
+  "title": "Hallo ! Se saluer et se présenter",
+  "objective": "Saluer et prendre congé selon le moment de la journée, se présenter (nom, origine, ville, langues), demander comment ça va, épeler son nom, choisir entre « du » et « Sie », et faire connaissance avec quelqu’un : poser des questions, réagir et faire répéter.",
+  "prerequisites": [
+    "a1-rythme"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "Deutsch im Blick, Kapitel 1 « Ankunft in Würzburg » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Begrüßungen, persönliche Informationen, Herkunft)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : Chapter 1 « Hallo » (A et B) — situation de rencontre dans un contexte universitaire avec différence d’âge (qui propose le « du »), questions sur l’origine et le lieu (Ist das eine Stadt oder ein Dorf?), formules pour réagir et faire répéter, nuances entre Auf Wiedersehen, Bis bald et Bis später, tâche d’échange oral à deux (Exchanging Information) et bilan (Self-Reflection)",
+    "Deutsch im Blick, Kapitel 1 (COERLL, Université du Texas à Austin) : enregistrements natifs voc/voc_01_01_begr.mp3, voc/voc_01_08_wiegehts.mp3, voc/voc_01_04_herkunft.mp3, pho/pho_01_01_abc.mp3, pho/pho_01_09_h.mp3, pho/pho_01_11_j.mp3, pho/pho_01_23_v.mp3, pho/pho_01_24_w.mp3, pho/pho_01_27_z.mp3 et photos k03/027-100, k03/027-101, k06/040-160 (CC BY 4.0)"
+  ],
+  "grammarFocus": [
+    "heissen-kommen-sein"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-hallo.mjs",
+  "vocabulary": [
+    {
+      "id": "guten-morgen",
+      "word": "Guten Morgen!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bonjour ! (le matin)",
+      "example": "Guten Morgen, Frau Weber!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "guten-tag",
+      "word": "Guten Tag!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bonjour ! (dans la journée)",
+      "example": "Guten Tag! Wie heißen Sie?",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "guten-abend",
+      "word": "Guten Abend!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bonsoir !",
+      "example": "Guten Abend, Herr Braun!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "gute-nacht",
+      "word": "Gute Nacht!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bonne nuit ! (avant d’aller dormir)",
+      "example": "Gute Nacht, bis morgen!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "hallo",
+      "word": "Hallo!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Salut ! Bonjour ! (familier)",
+      "example": "Hallo! Ich bin Jonas.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "tschues",
+      "word": "Tschüs!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Salut ! Au revoir ! (familier)",
+      "example": "Tschüs! Bis morgen!",
+      "note": "on écrit aussi Tschüss",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "auf-wiedersehen",
+      "word": "Auf Wiedersehen!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Au revoir ! (poli)",
+      "example": "Auf Wiedersehen, Frau Lang!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "bis-bald",
+      "word": "Bis bald!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À bientôt !",
+      "example": "Danke für heute. Bis bald!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "freut-mich",
+      "word": "Freut mich!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Enchanté(e) !",
+      "example": "Ich heiße Anna. – Freut mich!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "wie-gehts",
+      "word": "Wie geht’s?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Comment ça va ? (familier)",
+      "example": "Hallo Anna! Wie geht’s?",
+      "note": "poli : Wie geht es Ihnen?",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "das-tut-mir-leid",
+      "word": "Das tut mir leid!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je suis désolé(e) !",
+      "example": "Ich bin krank. – Oh, das tut mir leid!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "heissen",
+      "word": "heißen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’appeler",
+      "example": "Wie heißen Sie?",
+      "note": "ich heiße, du heißt, er heißt, Sie heißen",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "kommen",
+      "word": "kommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "venir",
+      "example": "Woher kommen Sie?",
+      "note": "kommen aus + pays ou ville : Ich komme aus Belgien.",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "wohnen",
+      "word": "wohnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "habiter",
+      "example": "Wo wohnen Sie?",
+      "note": "wohnen in + ville : Ich wohne in Köln.",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sein",
+      "word": "sein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être",
+      "example": "Bitte pünktlich sein!",
+      "note": "irrégulier : ich bin, du bist, er ist, Sie sind",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "sprechen",
+      "word": "sprechen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "parler",
+      "example": "Sprechen Sie Deutsch?",
+      "note": "ich spreche, du sprichst",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "woher",
+      "word": "woher",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "d’où",
+      "example": "Woher kommst du?",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "wo-wohnst-du",
+      "word": "Wo wohnst du?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Où habites-tu ?",
+      "example": "Wo wohnst du? – In Würzburg.",
+      "note": "poli : Wo wohnen Sie?",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "name",
+      "word": "Name",
+      "article": "der",
+      "plural": "Namen",
+      "partOfSpeech": "noun",
+      "translation": "le nom",
+      "example": "Mein Name ist Walter Brückner.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "land",
+      "word": "Land",
+      "article": "das",
+      "plural": "Länder",
+      "partOfSpeech": "noun",
+      "translation": "le pays",
+      "example": "Welches Land ist das?",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "stadt",
+      "word": "Stadt",
+      "article": "die",
+      "plural": "Städte",
+      "partOfSpeech": "noun",
+      "translation": "la ville",
+      "example": "Freiburg ist eine Stadt.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "dorf",
+      "word": "Dorf",
+      "article": "das",
+      "plural": "Dörfer",
+      "partOfSpeech": "noun",
+      "translation": "le village",
+      "example": "Horben ist ein Dorf bei Freiburg.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "sprache",
+      "word": "Sprache",
+      "article": "die",
+      "plural": "Sprachen",
+      "partOfSpeech": "noun",
+      "translation": "la langue",
+      "example": "Welche Sprachen sprichst du?",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "student",
+      "word": "Student",
+      "article": "der",
+      "plural": "Studenten",
+      "partOfSpeech": "noun",
+      "translation": "l’étudiant",
+      "example": "Walter ist Student.",
+      "note": "féminin : die Studentin, die Studentinnen",
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "muede",
+      "word": "müde",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "fatigué(e)",
+      "example": "Ich bin sehr müde.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-hallo-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : les salutations",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : les salutations",
+        "description": "En allemand, on salue différemment selon le moment de la journée et selon la personne.\n\nSALUER\n• Guten Morgen! — Bonjour ! (le matin, jusqu’à 10 h environ)\n• Guten Tag! — Bonjour ! (dans la journée)\n• Guten Abend! — Bonsoir !\n• Hallo! — Salut ! (entre amis, collègues, jeunes)\n\nPRENDRE CONGÉ\n• Auf Wiedersehen! — Au revoir ! (poli)\n• Tschüs! — Salut ! Ciao ! (familier)\n• Gute Nacht! — Bonne nuit ! (avant d’aller dormir)\n• Bis morgen! — À demain !\n• Bis bald! — À bientôt !\n\nÊTRE POLI\n• Danke! — Merci !   • Bitte! — S’il vous plaît / Je vous en prie.\n• Entschuldigung! — Pardon ! Excusez-moi !\n• Freut mich! — Enchanté(e) !\n\nDU OU SIE ?\n« du » (tu) s’emploie avec les amis, la famille, les enfants et souvent entre étudiants. « Sie » (vous de politesse, toujours avec une majuscule) s’emploie avec les adultes qu’on ne connaît pas, au travail, dans les magasins. Dans le doute, choisissez « Sie ».\n\nÉcoutez l’enregistrement et répétez chaque formule à voix haute.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "Guten Morgen, Guten Tag, Guten Abend, Gute Nacht",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les salutations",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-begruessungen",
+      "kind": "lesson",
+      "title": "Écouter et répéter : saluer et dire comment ça va (voix natives)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Begrüßungen und Wie geht’s? — voix natives",
+        "description": "Écoutez deux enregistrements authentiques du manuel Deutsch im Blick, lus par des voix natives. Après chaque expression, une pause vous laisse le temps de répéter à voix haute. Imitez aussi la mélodie : la voix descend à la fin d’une salutation (Guten Tag!) et à la fin d’une question en W (Wie geht’s?).\n\n1. SALUER ET PRENDRE CONGÉ\n• Hallo! — Guten Morgen! — Guten Tag! — Guten Abend! — Gute Nacht!\n• Tschüss! (on écrit aussi Tschüs) — Auf Wiedersehen!\n• Mach’s gut! — Salut, prends soin de toi ! (familier, quand on part)\n• Bis bald! — À bientôt !   • Bis morgen! — À demain !\n• Bis nächste Woche! — À la semaine prochaine !   • Bis Samstag! — À samedi !\n• Bis dann! / Bis später! — À tout à l’heure ! À plus tard !\nRemarquez : Guten Morgen, Guten Tag, Guten Abend, mais Gute Nacht, sans n : die Nacht est un mot féminin.\n\n2. COMMENT ÇA VA ?\n• Wie geht’s? (familier) — Wie geht es Ihnen? (poli, avec Sie)\nRéponses positives (positive Reaktionen) :\n• Sehr gut, danke! — Très bien, merci !\n• Es geht mir gut. / Es geht mir prima. — Je vais bien. / Je vais très bien.\n• Ausgezeichnet! — Toll! — Wunderbar! — Excellent ! Super ! Merveilleux !\nRéponses négatives (negative Reaktionen) :\n• Was ist los? — Qu’est-ce qui ne va pas ?\n• Es geht mir nicht so gut. / Es geht mir schlecht. — Je ne vais pas très bien. / Je vais mal.\n• Ich fühle mich schlecht. — Je me sens mal.\n• Ich bin müde. / Ich bin krank. — Je suis fatigué(e). / Je suis malade.\n• Ich habe Kopfschmerzen. — J’ai mal à la tête.\nRemarquez : on dit « Es geht mir gut » (mot à mot : « ça va bien pour moi »), avec mir.\n\nPRONONCIATION\n• Le w de Wie et de Wiedersehen se dit [v] ; ie se dit « i » long.\n• Le ü de Tschüss et de müde se dit comme le « u » de « tu ».\n• Après a, le ch se prononce au fond de la gorge (Nacht) ; après e et i, c’est un souffle doux, la langue contre le palais (schlecht, ich, nicht).\n\nÀ VOUS\n1. Écoutez une première fois en lisant la transcription, puis une deuxième fois sans la regarder, en répétant pendant chaque pause.\n2. Quelle formule choisissez-vous ? Il est 8 heures et vous arrivez au cours. Vous quittez une amie que vous revoyez samedi. Vous allez vous coucher. (Solutions : Guten Morgen! — Tschüss! Bis Samstag! — Gute Nacht!)\n3. On vous demande « Wie geht’s? ». Répondez à voix haute de trois façons : une réponse positive, « Es geht mir nicht so gut », puis une réponse négative avec une raison (Ich bin müde. / Ich habe Kopfschmerzen.).\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-begruessungen-native",
+          "usage": "audio",
+          "caption": "Saluer et prendre congé (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-wiegehts-native",
+          "usage": "audio",
+          "caption": "Wie geht’s ? Réponses positives et négatives (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : le premier jour du cours",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : le premier jour du cours",
+        "description": "Anna et Jonas se rencontrent au cours d’allemand de Frau Weber, à Würzburg. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nFrau Weber : Guten Morgen! Ich bin Frau Weber, Ihre Lehrerin. Wie heißen Sie?\nAnna : Guten Morgen! Ich heiße Anna Rossi.\nFrau Weber : Woher kommen Sie, Frau Rossi?\nAnna : Ich komme aus Italien, aus Mailand. Aber ich wohne jetzt hier in Würzburg.\nJonas : Hallo Anna! Ich bin Jonas. Ich komme aus Frankreich.\nAnna : Hallo Jonas! Freut mich. Wie geht's?\nJonas : Gut, danke! Und dir?\nAnna : Auch gut, danke.\n\nGRAMMAIRE : TROIS VERBES UTILES\n• heißen (s’appeler) : ich heiße — du heißt — Sie heißen\n• kommen (venir) : ich komme — du kommst — Sie kommen\n• sein (être) : ich bin — du bist — Sie sind — er/sie ist\n\nLES QUESTIONS EN W\n• Wie heißt du? / Wie heißen Sie? — Comment tu t’appelles ? / Comment vous appelez-vous ?\n• Woher kommst du? — D’où viens-tu ?\n• Wo wohnst du? — Où habites-tu ?\n• Wie geht's? — Comment ça va ? (familier) / Wie geht es Ihnen? (poli)\nDans une question en W, le verbe conjugué est en deuxième position, juste après le mot interrogatif.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : der erste Kurstag",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-herkunft",
+      "kind": "exercise",
+      "title": "Écouter : Woher kommen Sie ? Pays et drapeaux",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Woher kommst du? — Länder",
+        "description": "Écoutez l’enregistrement authentique (voix native, manuel Deutsch im Blick) : deux questions pour demander l’origine, puis une liste de pays. Répondez ensuite aux questions ; certaines s’appuient sur une photo. Vous pouvez réécouter autant de fois que nécessaire ; la transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• Woher kommst du? / Woher kommen Sie? — D’où viens-tu ? / D’où venez-vous ?\n• kommen aus — venir de : Ich komme aus Kanada.\n• das Land, die Länder — le pays, les pays\n\nPAYS AVEC OU SANS ARTICLE\nLa plupart des pays n’ont pas d’article : Ich komme aus Deutschland, aus Frankreich, aus Belgien. Quelques-uns en ont un : die Schweiz, die Türkei, die Niederlande et die USA (ces deux derniers sont au pluriel). Après aus, l’article change : aus der Schweiz, aus der Türkei, aus den Niederlanden, aus den USA.\n\nLES VILLES ONT AUSSI UN NOM ALLEMAND\nBeaucoup de villes étrangères ont un nom allemand : Lisbonne se dit Lissabon, Bruxelles se dit Brüssel, Copenhague se dit Kopenhagen. Cherchez-en d’autres sur la carte météo de la dernière question.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Comment demande-t-on à une personne adulte qu’on ne connaît pas d’où elle vient ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Woher kommst du?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wo wohnen Sie?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Woher kommen Sie?",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Wie heißen Sie?",
+              "correct": false
+            }
+          ],
+          "explanation": "Woher demande l’origine et Sie est la forme polie pour un adulte inconnu : Woher kommen Sie? « Woher kommst du? » tutoie ; « Wo wohnen Sie? » demande où l’on habite.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Voici le drapeau des États-Unis (die USA). Quelle phrase entend-on dans l’enregistrement ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich komme aus USA.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich komme aus den USA.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich komme aus die USA.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich komme von den USA.",
+              "correct": false
+            }
+          ],
+          "explanation": "Die USA est un pluriel : après aus, l’article devient den (aus den USA). Sans article ou avec die, la phrase est fausse, et von ne sert pas à dire son pays d’origine.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Welches Land ist das? Le nom de ce pays est dans l’enregistrement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Österreich",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Belgien",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Schweiz",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Deutschland",
+              "correct": true
+            }
+          ],
+          "explanation": "Le drapeau noir, rouge et or est celui de l’Allemagne, Deutschland, cité dans l’enregistrement. Le drapeau autrichien est rouge et blanc ; le suisse porte une croix blanche.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Lesquels de ces pays entend-on avec l’article « die » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Schweiz und die Türkei",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Spanien und die Polen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Österreich und die Ungarn",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Frankreich und die Italien",
+              "correct": false
+            }
+          ],
+          "explanation": "La plupart des pays s’emploient sans article : Spanien, Polen, Österreich, Frankreich. Die Schweiz et die Türkei font partie des rares pays avec l’article die.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel autre nom entend-on juste après « die Niederlande » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Belgien",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Holland",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Luxemburg",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dänemark",
+              "correct": false
+            }
+          ],
+          "explanation": "L’enregistrement dit « die Niederlande », puis « Holland » : deux noms pour les Pays-Bas. Belgien et Luxemburg apparaissent ailleurs dans la liste.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Sur cette carte météo, les villes portent leur nom allemand. Anna, du dialogue, vient de Milan, dans le nord de l’Italie. Comment dit-on « Milan » en allemand ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Rom",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nizza",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Madrid",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mailand",
+              "correct": true
+            }
+          ],
+          "explanation": "Milan se dit Mailand en allemand ; Anna le dit dans le dialogue : « Ich komme aus Italien, aus Mailand ». Rom est Rome et Nizza est Nice.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-hallo-herkunft-native",
+          "usage": "audio",
+          "caption": "Herkunft : questions et pays (voix native)",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-flagge-usa-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-flagge-de-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-europakarte-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q6",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-aussprache",
+      "kind": "lesson",
+      "title": "Aussprache : l’alphabet et cinq lettres pièges",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Aussprache : das Alphabet — buchstabieren",
+        "description": "Écoutez l’alphabet allemand lu par une voix native, puis des mots qui commencent par cinq lettres pièges pour un francophone. Répétez chaque lettre et chaque mot pendant la pause.\n\nLE NOM DES LETTRES\nA [a] — B [bé] — C [tsé] — D [dé] — E [é] — F [èf] — G [gué] — H [ha] — I [i] — J [yot] — K [ka] — L [èl] — M [èm] — N [èn] — O [o] — P [pé] — Q [kou] — R [èr] — S [ès] — T [té] — U [ou] — V [faou] — W [vé] — X [iks] — Y [upsilon] — Z [tsèt]\nAttention : E se dit [é] (jamais « eu »), G se dit [gué], U se dit [ou], W se dit [vé] comme notre V, et V se dit [faou].\n\nCINQ LETTRES PIÈGES DANS LES MOTS\n• H — En début de mot, le h se prononce toujours : soufflez comme pour faire de la buée sur une vitre. das Heimweh (le mal du pays), historisch, die Hälfte (la moitié), das Haus. Sans souffle, « Haus » devient « aus » : c’est un autre mot !\n• J — se prononce comme le « y » de « yaourt » : jetzt (maintenant), das Jahr (l’année), joggen, die Jugendherberge (l’auberge de jeunesse).\n• V — se prononce le plus souvent [f], comme dans « fou » : die Verkehrsmittel (les moyens de transport), vierzig (40), vorstellen (présenter), verbringen (passer du temps). Dans quelques mots d’origine étrangère, il se dit [v] : die Universität, das Video.\n• W — se prononce [v], comme dans « vous » : wandern (faire de la randonnée), die Wolke (le nuage), wir (nous), Würzburg.\n• Z — se prononce [ts], comme dans « tsé-tsé » : der Zug (le train), das Zimmer (la chambre), zurück (en arrière, de retour), ziehen (tirer). Posez la langue comme pour un « t », puis laissez filer l’air en « s ».\n\nÉPELER\nOn épelle avec le nom des lettres : « Wie schreibt man das? — W – Ü – R – Z – B – U – R – G. » Pour une lettre double, on dit « Doppel- » ou « zwei » : Zimmer, Z – I – Doppel-M – E – R.\n\nÀ VOUS\n1. Écoutez l’alphabet et répétez chaque lettre pendant la pause.\n2. Écoutez les mots des cinq lettres pièges et répétez-les en exagérant le souffle du h et le [ts] du z.\n3. Lisez à voix haute : « Das Haus hat vierzig Zimmer. » — « Jetzt fahren wir mit dem Zug nach Würzburg. »\n4. Épelez à voix haute votre prénom, votre nom et le nom de votre ville.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-abc-native",
+          "usage": "audio",
+          "caption": "Das Alphabet (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-buchstabe-h-native",
+          "usage": "audio",
+          "caption": "H : das Heimweh, historisch, die Hälfte, das Haus",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-buchstabe-j-native",
+          "usage": "audio",
+          "caption": "J : jetzt, das Jahr, joggen, die Jugendherberge",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-buchstabe-v-native",
+          "usage": "audio",
+          "caption": "V : die Verkehrsmittel, vierzig, vorstellen, verbringen",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-buchstabe-w-native",
+          "usage": "audio",
+          "caption": "W : wandern, die Wolke, wir, Würzburg",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-buchstabe-z-native",
+          "usage": "audio",
+          "caption": "Z : der Zug, das Zimmer, zurück, ziehen",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-lesen",
+      "kind": "exercise",
+      "title": "Lire : trois participants se présentent",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Wer ist im Kurs?",
+        "description": "Lisez les trois présentations publiées sur le forum du cours, puis répondez aux questions.\n\nLEA\nHallo! Ich heiße Lea Schmidt. Ich komme aus Österreich, aus Wien. Ich wohne in Würzburg und studiere Biologie. Ich spreche Deutsch, Englisch und ein bisschen Spanisch.\n\nKARIM\nGuten Tag! Mein Name ist Karim Haddad. Ich komme aus Marokko und wohne seit zwei Monaten in Frankfurt. Ich bin Ingenieur. Ich spreche Arabisch, Französisch und jetzt auch ein bisschen Deutsch.\n\nSOFIA\nHallo zusammen! Ich bin Sofia, ich komme aus Portugal. Ich wohne in Berlin. Ich bin Studentin und lerne Deutsch. Bis bald!",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Woher kommt Lea?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aus Deutschland.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Aus Österreich.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Aus Portugal.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lea écrit « Ich komme aus Österreich, aus Wien ». Elle habite à Würzburg, en Allemagne : ne confondez pas l’origine (aus) et le lieu de vie (in).",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Où habite Karim ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "À Würzburg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "À Berlin.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "À Francfort.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Au Maroc.",
+              "correct": false
+            }
+          ],
+          "explanation": "Karim écrit « wohne seit zwei Monaten in Frankfurt ». Il vient du Maroc (aus Marokko) mais habite à Francfort ; Würzburg et Berlin sont les villes de Lea et de Sofia.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quelle est la profession de Karim ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il est ingénieur.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il est étudiant en biologie.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il est professeur d’allemand.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich bin Ingenieur » : Karim est ingénieur. C’est Lea qui étudie la biologie (« Ich studiere Biologie »).",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Qui parle un peu espagnol ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sofia.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Karim.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Lea.",
+              "correct": true
+            }
+          ],
+          "explanation": "Lea écrit « Ich spreche Deutsch, Englisch und ein bisschen Spanisch » ; ein bisschen veut dire « un peu ». Sofia vient du Portugal, mais elle ne parle pas d’espagnol dans son message.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "« Ich bin Studentin und lerne Deutsch. » Qui écrit cette phrase ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Lea.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sofia.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Karim.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sofia écrit « Ich bin Studentin und lerne Deutsch ». Studentin est le féminin de Student. Lea étudie aussi, mais elle dit « Ich studiere Biologie ».",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-hallo-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : trois petites rencontres",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Wer sagt was?",
+        "description": "Écoutez les trois petites scènes (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Scène 1 : à quel moment de la journée se passe la rencontre ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le matin.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le soir.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "La nuit.",
+              "correct": false
+            }
+          ],
+          "explanation": "Frau Lang dit « Guten Morgen, Herr Braun! » : Guten Morgen s’emploie le matin. Le soir, on dirait Guten Abend ; Gute Nacht sert seulement à prendre congé avant de dormir.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Scène 1 : comment va Monsieur Braun ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Très bien.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Pas très bien, il est fatigué.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Bien, merci.",
+              "correct": false
+            }
+          ],
+          "explanation": "Herr Braun répond « Ach, nicht so gut. Ich bin sehr müde » : il ne va pas très bien, il est très fatigué (müde).",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Scène 2 : d’où vient Tim ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "De Hambourg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "De Suisse.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "De Brême.",
+              "correct": true
+            }
+          ],
+          "explanation": "À la question « Woher kommst du? », Tim répond « Aus Bremen ». C’est Mia qui vient de Hambourg.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Scène 2 : pourquoi Tim et Mia se disent-ils « du » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ils sont jeunes et se rencontrent à une fête.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ils travaillent ensemble depuis longtemps.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mia est la professeure de Tim.",
+              "correct": false
+            }
+          ],
+          "explanation": "Mia et Tim sont jeunes et se rencontrent à une fête (« Tolle Party, oder? ») : ils se tutoient tout de suite (Wie heißt du?). Entre collègues ou avec une professeure, on commence par Sie.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Scène 3 : comment s’écrit le nom de la cliente ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kowalski",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Novak",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nowak",
+              "correct": true
+            }
+          ],
+          "explanation": "La cliente épelle N, O, W, A, K. Le W allemand s’appelle « vé » : on peut croire entendre un V. Kowalski et Novak ne correspondent pas aux lettres épelées.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-hallo-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Trois petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-morgen-bild",
+          "usage": "illustration",
+          "alt": "Un soleil qui se lève.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-abend-bild",
+          "usage": "illustration",
+          "alt": "Un soleil qui se couche.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-nacht-bild",
+          "usage": "illustration",
+          "alt": "Une lune et des étoiles.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "c",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-hoersaal",
+      "kind": "exercise",
+      "title": "Écouter : faire connaissance à l’université",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Sagen wir du?",
+        "description": "Sara est étudiante. Avant le cours, elle fait la connaissance de Walter. Écoutez leur conversation (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. La transcription s’affichera après votre réponse.\n\nAVANT D’ÉCOUTER\n• Ist hier frei? — Cette place est libre ?\n• Wie bitte? — Pardon ? (pour faire répéter)\n• Wo ist das? — Où est-ce ?\n• Ist das eine Stadt oder ein Dorf? — C’est une ville ou un village ?\n• Interessant! / Wirklich? — Intéressant ! / Vraiment ?\n• jung — jeune ; viel Arbeit — beaucoup de travail\n• Mir geht’s so lala. — Comme ci, comme ça.\n• Das tut mir leid! — Je suis désolé(e) !\n• Sagen wir du? — On se dit « du » ?\n\nDU OU SIE ?\nEntre étudiants, on se dit « du ». Mais quand il y a une différence d’âge ou de position (une personne beaucoup plus âgée, un professeur, un chef), c’est la personne la plus âgée ou de rang supérieur qui propose le « du ». En attendant, on dit « Sie ».\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Comment s’écrit le nom de famille de Walter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bruckner",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Brückler",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Brückner",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Brükner",
+              "correct": false
+            }
+          ],
+          "explanation": "Walter épelle « B, R, Ü, C, K, N, E, R » : le nom a un ü (avec tréma) et ck. Brückler contient un L, Bruckner n’a pas de tréma et Brükner n’a pas de c.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "D’où vient Walter et où habite-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il vient de Freiburg et habite à Hambourg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Il vient de Hambourg et habite à Freiburg.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Il vient de Hambourg et habite à Horben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Il vient de Douala et habite à Freiburg.",
+              "correct": false
+            }
+          ],
+          "explanation": "Walter dit « Ich komme aus Hamburg. Aber ich wohne jetzt hier in Freiburg ». Kommen aus donne l’origine, wohnen in le lieu de vie. Horben est le village de Sara.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Horben, qu’est-ce que c’est ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une grande ville près de Hambourg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Un petit village près de Freiburg.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Une petite ville au Cameroun.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sara explique « Das ist ein Dorf bei Freiburg. Es ist klein, aber sehr schön ». Ein Dorf est un village et bei signifie « près de ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que fait Sara ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle étudie l’histoire.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle travaille dans un café, mais elle n’étudie pas.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elle enseigne la biologie à l’université.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Elle étudie la biologie et travaille aussi dans un café.",
+              "correct": true
+            }
+          ],
+          "explanation": "Sara dit « Ich studiere Biologie. Und ich arbeite auch in einem Café » : les deux sont vrais. C’est Walter qui étudie l’histoire (Geschichte).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Qui propose de se dire « du » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sara, parce qu’elle est la plus jeune.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Walter, le plus âgé des deux : à l’université, les étudiants se disent « du ».",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Walter, parce qu’il est le professeur de Sara.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Personne : ils se disent « Sie » jusqu’à la fin.",
+              "correct": false
+            }
+          ],
+          "explanation": "Walter, le plus âgé, propose « Sagen wir du? » et rappelle qu’à l’université tous les étudiants se disent du. C’est à la personne la plus âgée de proposer le tutoiement.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Comment va Walter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Très bien, merci.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bien, mais il est fatigué.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Comme ci, comme ça : il a beaucoup de travail.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Mal : il est malade.",
+              "correct": false
+            }
+          ],
+          "explanation": "Walter répond « Ach, so lala. Ich habe viel Arbeit » : so lala veut dire « comme ci, comme ça » et viel Arbeit « beaucoup de travail ». Sara réagit par « Das tut mir leid! ».",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-hallo-hoersaal-audio-v3",
+          "usage": "audio",
+          "caption": "Sara et Walter font connaissance",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-hoersaal-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : heißen, kommen, sein",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : heißen, kommen, sein",
+        "description": "Choisissez ou écrivez la forme qui complète chaque phrase. Rappel : ich -e, du -st, er/sie -t, Sie -en ; le verbe sein est irrégulier (ich bin, du bist, er ist, Sie sind). Dans les phrases à remettre en ordre, touchez les étiquettes dans l’ordre de la phrase.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Ich … Jonas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "heißt",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "heiße",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "heißen",
+              "correct": false
+            }
+          ],
+          "explanation": "Avec ich, le verbe se termine par -e : ich heiße. Heißt va avec du ou er/sie, heißen avec wir ou Sie.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Woher … du?",
+          "options": [
+            {
+              "id": "a",
+              "label": "kommst",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "komme",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kommen",
+              "correct": false
+            }
+          ],
+          "explanation": "Avec du, le verbe se termine par -st : du kommst. Le piège est de garder la forme de ich (komme).",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Wie … Sie, bitte?",
+          "options": [
+            {
+              "id": "a",
+              "label": "heißt",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "heiße",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "heißen",
+              "correct": true
+            }
+          ],
+          "explanation": "Le Sie de politesse se conjugue comme un pluriel, avec -en : Wie heißen Sie? La majuscule de Sie signale le vouvoiement.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Das … Frau Weber, unsere Lehrerin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ist",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "bist",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "sind",
+              "correct": false
+            }
+          ],
+          "explanation": "Das (c’est, voici) se construit comme er ou sie, à la 3e personne : das ist. Bin va avec ich, bist avec du, sind avec wir ou Sie.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "… wohnst du? — In Würzburg.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wie",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Woher",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wo",
+              "correct": true
+            }
+          ],
+          "explanation": "La réponse « In Würzburg » indique le lieu où l’on habite : on pose la question avec wo (où). Woher demande l’origine (aus …) et wie la manière ou le nom.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "À la banque, vous saluez l’employé que vous ne connaissez pas. Que dites-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo! Wie geht's dir?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Guten Tag! Wie geht es Ihnen?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Tschüs! Bis bald!",
+              "correct": false
+            }
+          ],
+          "explanation": "Avec un adulte inconnu, on emploie Sie et Ihnen : Wie geht es Ihnen? « Wie geht’s dir? » tutoie, et « Tschüs! » sert à partir, pas à saluer en arrivant.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez avec le verbe kommen à la bonne forme.",
+          "text": "Woher [[1]] du? – Ich [[2]] aus Belgien.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kommst"
+              ],
+              "size": 8,
+              "hint": "kommen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "komme"
+              ],
+              "size": 8,
+              "hint": "kommen"
+            }
+          ],
+          "explanation": "Du kommst, ich komme : seule la terminaison change selon la personne (-st avec du, -e avec ich). Le radical komm- ne bouge pas."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Complétez la présentation de Karim avec sein ou kommen.",
+          "text": "Das [[1]] Karim. Er [[2]] aus Marokko und [[3]] Ingenieur.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ist"
+              ],
+              "size": 5,
+              "hint": "sein"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kommt"
+              ],
+              "size": 7,
+              "hint": "kommen"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ist"
+              ],
+              "size": 5,
+              "hint": "sein"
+            }
+          ],
+          "explanation": "Pour parler d’une autre personne (er, sie, das), sein donne ist et kommen se termine par -t : er kommt. Bin et bist sont réservés à ich et à du."
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Remettez la fin de la phrase dans l’ordre : Anna vient d’Italie, mais elle habite maintenant à Würzburg.",
+          "answers": [
+            [
+              "Ich komme aus Italien,",
+              "aber",
+              "ich",
+              "wohne",
+              "jetzt",
+              "in Würzburg."
+            ],
+            [
+              "Ich komme aus Italien,",
+              "aber",
+              "jetzt",
+              "wohne",
+              "ich",
+              "in Würzburg."
+            ]
+          ],
+          "explanation": "Aber (mais) relie deux phrases sans changer leur ordre : le verbe wohne reste en 2e position (aber ich wohne jetzt …). Si jetzt vient en premier, le sujet passe après le verbe : aber jetzt wohne ich …"
+        },
+        {
+          "id": "q10",
+          "type": "match",
+          "prompt": "Associez chaque question à la réponse qui convient.",
+          "pairs": [
+            {
+              "left": "Wie heißen Sie?",
+              "right": "Ich heiße Anna Rossi."
+            },
+            {
+              "left": "Woher kommst du?",
+              "right": "Aus Frankreich."
+            },
+            {
+              "left": "Wo wohnst du?",
+              "right": "In Würzburg."
+            },
+            {
+              "left": "Wie geht’s?",
+              "right": "Gut, danke!"
+            }
+          ],
+          "explanation": "Woher appelle aus + pays (l’origine) et wo appelle in + ville (le lieu de vie). Wie heißen Sie? demande le nom, Wie geht’s? demande comment on va."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-hallo-rollenspiel",
+      "kind": "lesson",
+      "title": "Découvrir : réagir et faire répéter",
+      "estimatedMinutes": 12,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : réagir et faire répéter",
+        "description": "Se présenter, c’est bien ; faire connaissance, c’est mieux ! Dans une vraie conversation, on pose des questions, on réagit et on fait répéter quand on ne comprend pas.\n\nRÉAGIR ET MONTRER SON INTÉRÊT\n• Interessant! — Intéressant !\n• Wirklich? — Vraiment ?\n• Ach ja? Ich auch! — Ah oui ? Moi aussi !\n• Super! / Toll! — Super !\n• Das tut mir leid! — Je suis désolé(e) ! (quand ça ne va pas)\n\nDIRE COMMENT ÇA VA\n• Mir geht’s sehr gut / gut / so lala / nicht so gut. — Je vais très bien / bien / comme ci, comme ça / pas très bien.\n• Wie geht’s dir? (avec du) — Wie geht es Ihnen? (avec Sie)\n\nQUAND ON NE COMPREND PAS\n• Wie bitte? — Pardon ? (pour faire répéter)\n• Wie schreibt man das? — Comment ça s’écrit ?\n• Wo ist das? Ist das eine Stadt oder ein Dorf? — Où est-ce ? C’est une ville ou un village ?\nUn mot vous manque ? Faites un geste et continuez en allemand.\n\nLES QUESTIONS FERMÉES (OUI / NON)\nLe verbe conjugué se place en premier : Studierst du? Arbeitest du? Wohnst du hier?\nRéponses : Ja, ich studiere Musik. — Nein, ich arbeite.\n\nPRENDRE CONGÉ\n• Auf Wiedersehen! — poli, plutôt formel.\n• Tschüs! — familier.\n• Bis bald! — on pense se revoir bientôt. Bis morgen! — on se revoit demain.\n• Bis später! — seulement si l’on se revoit plus tard dans la journée.\n\nMODÈLE : APRÈS LE COURS D’ALLEMAND\nLina : Hallo! Ich bin Lina. Und wie heißt du?\nMalik : Ich heiße Malik.\nLina : Wie bitte?\nMalik : Malik. M – A – L – I – K.\nLina : Freut mich, Malik! Wie geht’s dir?\nMalik : Nicht so gut. Ich bin müde. Und dir?\nLina : Oh, das tut mir leid! Mir geht’s gut, danke. Woher kommst du?\nMalik : Ich komme aus Tunesien. Und du?\nLina : Ich komme aus Österreich, aus Graz.\nMalik : Graz? Ist das groß oder klein?\nLina : Groß! Und sehr schön.\nMalik : Interessant! Studierst du?\nLina : Ja, ich studiere Musik. Ich spiele Gitarre. Spielst du auch Gitarre?\nMalik : Nein, aber ich spiele Fußball.\nLina : Super! Tschüs, Malik! Bis morgen!\nMalik : Tschüs, Lina! Bis morgen!\n\nÀ VOUS\n1. Lisez le modèle à voix haute en jouant les deux rôles. Changez de voix pour chaque personnage.\n2. Repérez les trois réactions de Lina et de Malik (Wie bitte?, Das tut mir leid!, Interessant!) et dites quand on les emploie.\n3. Relisez la scène en remplaçant les informations de Malik par les vôtres : prénom, pays, ville, études ou travail.\n4. Rejouez la scène avec Sie, face à une personne plus âgée : Guten Tag! Wie heißen Sie? Woher kommen Sie? Arbeiten Sie hier? C’est la personne la plus âgée qui peut proposer « Sagen wir du? ».\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-rollenspiel-bild",
+          "usage": "illustration",
+          "caption": "Réagir, faire répéter, prendre congé",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : saluer et faire connaissance",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : saluer et faire connaissance",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Imitez aussi la mélodie : la voix descend à la fin d’une question en W (Woher kommst du?).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-hallo-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Guten Morgen! Wie geht es Ihnen?",
+          "accept": [
+            "Guten Morgen! Wie geht es Ihnen?"
+          ],
+          "explanation": "Dans Ihnen, ih se prononce comme un i long. Guten Morgen se dit le matin ; la voix descend à la fin de la question.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich komme aus Frankreich.",
+          "accept": [
+            "Ich komme aus Frankreich."
+          ],
+          "explanation": "Le ch de ich est un souffle doux près du palais ; on le retrouve à la fin de Frankreich, où ei se dit « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich wohne jetzt in Berlin.",
+          "accept": [
+            "Ich wohne jetzt in Berlin."
+          ],
+          "explanation": "W se prononce comme un v français : wohne se dit « vône ». Jetzt commence par le son « y ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie bitte? Wie schreibt man das?",
+          "accept": [
+            "Wie bitte? Wie schreibt man das?"
+          ],
+          "explanation": "Wie bitte? fait répéter poliment. Dans schreibt, sch se dit « ch » et ei se dit « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Freut mich! Woher kommst du?",
+          "accept": [
+            "Freut mich! Woher kommst du?"
+          ],
+          "explanation": "Dans freut, eu se dit « oï ». Dans woher, l’accent tombe sur -her et le h se prononce.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Tschüs, bis morgen!",
+          "accept": [
+            "Tschüs, bis morgen!",
+            "Tschüss, bis morgen!"
+          ],
+          "explanation": "Tschüs commence par « tch » et contient un ü : arrondissez les lèvres comme pour « u ». Bis morgen : on se revoit demain.",
+          "threshold": 80
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-sprechen",
+      "kind": "mission",
+      "title": "Mission : se présenter au groupe",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : se présenter au groupe",
+        "description": "Le cours commence : chaque participant se présente à l’oral, puis sur le forum du groupe. Écoutez d’abord la présentation de Clara.\n\nMODÈLE\nHallo! Ich heiße Clara Martin. Ich komme aus Frankreich, aus Lyon. Ich wohne jetzt in Köln. Ich bin Studentin. Ich spreche Französisch, Englisch und ein bisschen Deutsch.\n\nPOUR VOUS AIDER\n• Ich heiße … / Mein Name ist …\n• Ich komme aus … (pays, ville)\n• Ich wohne in …\n• Ich bin Student / Studentin. — Ich arbeite in …\n• Ich spreche … und ein bisschen Deutsch.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-hallo-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "La présentation de Clara",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez-vous en 30 à 45 secondes : saluez, donnez votre nom, votre pays d’origine, votre ville et les langues que vous parlez. Terminez par une question à la personne en face de vous, par exemple « Und du? Woher kommst du? ».",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez votre message pour le forum du cours, comme Lea, Karim et Sofia : au moins cinq phrases, avec une salutation au début et une formule pour prendre congé à la fin.",
+          "maxChars": 600,
+          "minWords": 25
+        },
+        "checklist": [
+          "J’ai donné mon nom, mon origine (Ich komme aus …) et ma ville (Ich wohne in …).",
+          "J’ai nommé au moins deux langues avec « Ich spreche … ».",
+          "Dans chaque phrase, le verbe conjugué est en deuxième position.",
+          "Avec ich, mes verbes se terminent par -e : ich heiße, ich komme, ich wohne.",
+          "J’ai salué au début et pris congé à la fin (Bis bald! / Tschüs!)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-hallo-wortschatz-bild",
+      "kind": "image",
+      "title": "Salutations selon le moment de la journée",
+      "alt": "Quatre vignettes : un soleil levant pour Guten Morgen, un soleil pour Guten Tag, un coucher de soleil pour Guten Abend et une lune pour Gute Nacht.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "sunrise",
+            "label": "Guten Morgen!"
+          },
+          {
+            "icon": "sun",
+            "label": "Guten Tag!"
+          },
+          {
+            "icon": "sunset",
+            "label": "Guten Abend!"
+          },
+          {
+            "icon": "moon-star",
+            "label": "Gute Nacht!"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-hallo-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les salutations",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Guten Morgen!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Tag!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Abend!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Hallo!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Auf Wiedersehen!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Tschüs!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Gute Nacht!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bis morgen!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bis bald!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Danke!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bitte!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Entschuldigung!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Freut mich!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-dialog-bild",
+      "kind": "image",
+      "title": "Le premier jour du cours",
+      "alt": "Une salle de classe : la professeure Frau Weber dit « Guten Morgen! », Anna répond « Ich heiße Anna » et Jonas dit « Hallo Anna! ».",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Frau Weber",
+            "say": "Guten Morgen!"
+          },
+          {
+            "name": "Anna",
+            "say": "Ich heiße Anna."
+          },
+          {
+            "name": "Jonas",
+            "say": "Hallo Anna!"
+          }
+        ],
+        "items": [
+          "book-open",
+          "pencil"
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-hallo-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : le premier jour du cours",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Frau Weber",
+          "text": "Guten Morgen! Ich bin Frau Weber, Ihre Lehrerin. Wie heißen Sie?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Anna",
+          "text": "Guten Morgen! Ich heiße Anna Rossi."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Weber",
+          "text": "Woher kommen Sie, Frau Rossi?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Anna",
+          "text": "Ich komme aus Italien, aus Mailand. Aber ich wohne jetzt hier in Würzburg."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Hallo Anna! Ich bin Jonas. Ich komme aus Frankreich."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Anna",
+          "text": "Hallo Jonas! Freut mich. Wie geht's?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Gut, danke! Und dir?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Anna",
+          "text": "Auch gut, danke."
+        }
+      ]
+    },
+    {
+      "key": "a1-hallo-lesen-bild",
+      "kind": "image",
+      "title": "Le forum du cours",
+      "alt": "Trois profils du forum du cours : Lea de Vienne, Karim du Maroc et Sofia du Portugal.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "user-round",
+            "label": "Lea · Wien"
+          },
+          {
+            "icon": "user-round",
+            "label": "Karim · Marokko"
+          },
+          {
+            "icon": "user-round",
+            "label": "Sofia · Portugal"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-hallo-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Trois petites rencontres",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Lang",
+          "text": "Guten Morgen, Herr Braun! Wie geht es Ihnen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Braun",
+          "text": "Guten Morgen, Frau Lang. Ach, nicht so gut. Ich bin sehr müde."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Mia",
+          "text": "Hallo! Ich bin Mia. Und du? Wie heißt du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tim",
+          "text": "Hi Mia, ich bin Tim. Tolle Party, oder?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Mia",
+          "text": "Ja, super! Woher kommst du, Tim?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tim",
+          "text": "Aus Bremen. Und du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Mia",
+          "text": "Ich komme aus Hamburg."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Hotel",
+          "text": "Guten Tag! Wie ist Ihr Name, bitte?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Kundin",
+          "text": "Nowak. N, O, W, A, K."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Hotel",
+          "text": "Danke, Frau Nowak. Herzlich willkommen!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-morgen-bild",
+      "kind": "image",
+      "title": "Le matin",
+      "alt": "Un soleil qui se lève.",
+      "image": {
+        "layout": "single",
+        "icon": "sunrise"
+      }
+    },
+    {
+      "key": "a1-hallo-abend-bild",
+      "kind": "image",
+      "title": "Le soir",
+      "alt": "Un soleil qui se couche.",
+      "image": {
+        "layout": "single",
+        "icon": "sunset"
+      }
+    },
+    {
+      "key": "a1-hallo-nacht-bild",
+      "kind": "image",
+      "title": "La nuit",
+      "alt": "Une lune et des étoiles.",
+      "image": {
+        "layout": "single",
+        "icon": "moon-star"
+      }
+    },
+    {
+      "key": "a1-hallo-hoersaal-audio-v3",
+      "kind": "audio",
+      "title": "Sagen wir du ? — faire connaissance à l’université",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Entschuldigung, ist der Platz hier frei?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Ja, bitte. Guten Morgen!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Guten Morgen! Ich heiße Sara, Sara Mballa."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Freut mich. Mein Name ist Walter Brückner."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Wie bitte? Können Sie das bitte buchstabieren?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Brückner. B, R, Ü, C, K, N, E, R."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Danke, Herr Brückner. Woher kommen Sie?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Ich komme aus Hamburg. Aber ich wohne jetzt hier in Freiburg. Und Sie, Frau Mballa?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ich komme aus Kamerun, aus Douala. Jetzt wohne ich in Horben."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Horben? Wo ist das? Ist das eine Stadt oder ein Dorf?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Das ist ein Dorf bei Freiburg. Es ist klein, aber sehr schön."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Studieren Sie hier?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ja, ich studiere Biologie. Und ich arbeite auch in einem Café."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Interessant! Ich studiere Geschichte. Ich bin nicht mehr jung, aber ich lerne sehr gern."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Wirklich? Das finde ich toll!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Hier an der Uni sagen alle Studenten du. Sagen wir du? Ich bin Walter."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ja, gern! Ich bin Sara. Und wie geht's dir, Walter?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Ach, so lala. Ich habe viel Arbeit."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Oh, das tut mir leid!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Nach dem Kurs."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Walter",
+          "text": "Tschüs, Sara! Bis morgen!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Tschüs, Walter! Bis morgen an der Uni!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-hoersaal-bild",
+      "kind": "image",
+      "title": "Faire connaissance à l’université",
+      "alt": "Une salle de cours à l’université : Sara demande « Ist hier frei? » et Walter répond « Ja, bitte! ». On voit une toque d’étudiant et un livre ouvert.",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Sara",
+            "say": "Ist hier frei?"
+          },
+          {
+            "name": "Walter",
+            "say": "Ja, bitte!"
+          }
+        ],
+        "items": [
+          "graduation-cap",
+          "book-open"
+        ]
+      }
+    },
+    {
+      "key": "a1-hallo-rollenspiel-bild",
+      "kind": "image",
+      "title": "Réagir dans une conversation",
+      "alt": "Six vignettes : une ampoule (Interessant!), un point d’interrogation (Wirklich?), un visage souriant (Ach ja? Ich auch!), un visage triste (Das tut mir leid!), une oreille (Wie bitte?) et une main qui salue (Tschüs! Bis bald!).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "lightbulb",
+            "label": "Interessant!"
+          },
+          {
+            "icon": "circle-question-mark",
+            "label": "Wirklich?"
+          },
+          {
+            "icon": "smile",
+            "label": "Ach ja? Ich auch!"
+          },
+          {
+            "icon": "frown",
+            "label": "Das tut mir leid!"
+          },
+          {
+            "icon": "ear",
+            "label": "Wie bitte?"
+          },
+          {
+            "icon": "hand",
+            "label": "Tschüs! Bis bald!"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-hallo-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "La présentation de Clara",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Clara",
+          "text": "Hallo! Ich heiße Clara Martin. Ich komme aus Frankreich, aus Lyon. Ich wohne jetzt in Köln. Ich bin Studentin. Ich spreche Französisch, Englisch und ein bisschen Deutsch."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-begruessungen-native",
+      "kind": "audio",
+      "title": "Saluer et prendre congé — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_01_01_begr.mp3",
+        "clip": [
+          3.4,
+          47.6
+        ]
+      },
+      "transcript": "Hallo!\nGuten Morgen!\nGuten Tag!\nGuten Abend!\nGute Nacht!\nTschüss!\nAuf Wiedersehen!\nMach’s gut!\nBis bald!\nBis morgen!\nBis nächste Woche!\nBis Samstag!\nBis dann!\nBis später!",
+      "v3SourceKey": "a1-hallo-begruessungen-native"
+    },
+    {
+      "key": "a1-hallo-wiegehts-native",
+      "kind": "audio",
+      "title": "Wie geht’s ? — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_01_08_wiegehts.mp3",
+        "clip": [
+          0,
+          56.5
+        ]
+      },
+      "transcript": "Wie geht’s?\nWie geht es Ihnen?\nPositive Reaktionen\nSehr gut, danke!\nEs geht mir gut.\nEs geht mir prima.\nAusgezeichnet!\nToll!\nWunderbar!\nNegative Reaktionen\nWas ist los?\nEs geht mir nicht so gut.\nEs geht mir schlecht.\nIch fühle mich schlecht.\nIch bin müde.\nIch bin krank.\nIch habe Kopfschmerzen.",
+      "v3SourceKey": "a1-hallo-wiegehts-native"
+    },
+    {
+      "key": "a1-hallo-herkunft-native",
+      "kind": "audio",
+      "title": "Herkunft : questions et pays — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_01_04_herkunft.mp3",
+        "clip": [
+          4.3,
+          89.8
+        ]
+      },
+      "transcript": "kommen aus\nWoher kommst du?\nWoher kommen Sie?\ndas Land\ndie Länder\nIch komme aus Texas.\ndie USA\nIch komme aus den USA.\nBelgien\nDeutschland\nFrankreich\nItalien\nKanada\nLuxemburg\nMexiko\ndie Niederlande\nHolland\nÖsterreich\nPolen\ndie Schweiz\nSpanien\ndie Türkei\nUngarn",
+      "v3SourceKey": "a1-hallo-herkunft-native"
+    },
+    {
+      "key": "a1-hallo-flagge-usa-foto",
+      "kind": "image",
+      "title": "Le drapeau des États-Unis",
+      "alt": "Le drapeau des États-Unis : des bandes horizontales rouges et blanches et, en haut à gauche, des étoiles blanches sur un fond bleu.",
+      "photo": {
+        "file": "dib-images/k03/img-027-101.png"
+      }
+    },
+    {
+      "key": "a1-hallo-flagge-de-foto",
+      "kind": "image",
+      "title": "Un drapeau noir, rouge et or",
+      "alt": "Un drapeau à trois bandes horizontales, noire, rouge et or, avec au centre un écusson doré portant un aigle noir.",
+      "photo": {
+        "file": "dib-images/k03/img-027-100.png"
+      }
+    },
+    {
+      "key": "a1-hallo-europakarte-foto",
+      "kind": "image",
+      "title": "Carte météo de l’Europe",
+      "alt": "Une carte météo de l’Europe du vendredi 24 août 2012, avec des soleils, des nuages et la température de nombreuses villes, écrites avec leur nom allemand.",
+      "photo": {
+        "file": "dib-images/k06/img-040-160.png"
+      }
+    },
+    {
+      "key": "a1-hallo-abc-native",
+      "kind": "audio",
+      "title": "Das Alphabet — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_01_abc.mp3"
+      },
+      "transcript": "A, B, C, D, E, F, G\nH, I, J, K, L, M, N\nO, P, Q, R, S, T, U\nV, W, X, Y, Z",
+      "v3SourceKey": "a1-hallo-abc-native"
+    },
+    {
+      "key": "a1-hallo-buchstabe-h-native",
+      "kind": "audio",
+      "title": "La lettre h — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_09_h.mp3"
+      },
+      "transcript": "das Heimweh\nhistorisch\ndie Hälfte\ndas Haus",
+      "v3SourceKey": "a1-hallo-buchstabe-h-native"
+    },
+    {
+      "key": "a1-hallo-buchstabe-j-native",
+      "kind": "audio",
+      "title": "La lettre j — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_11_j.mp3"
+      },
+      "transcript": "jetzt\ndas Jahr\njoggen\ndie Jugendherberge",
+      "v3SourceKey": "a1-hallo-buchstabe-j-native"
+    },
+    {
+      "key": "a1-hallo-buchstabe-v-native",
+      "kind": "audio",
+      "title": "La lettre v — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_23_v.mp3"
+      },
+      "transcript": "die Verkehrsmittel\nvierzig\nvorstellen\nverbringen",
+      "v3SourceKey": "a1-hallo-buchstabe-v-native"
+    },
+    {
+      "key": "a1-hallo-buchstabe-w-native",
+      "kind": "audio",
+      "title": "La lettre w — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_24_w.mp3"
+      },
+      "transcript": "wandern\ndie Wolke\nwir\nWürzburg",
+      "v3SourceKey": "a1-hallo-buchstabe-w-native"
+    },
+    {
+      "key": "a1-hallo-buchstabe-z-native",
+      "kind": "audio",
+      "title": "La lettre z — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_27_z.mp3"
+      },
+      "transcript": "der Zug\ndas Zimmer\nzurück\nziehen",
+      "v3SourceKey": "a1-hallo-buchstabe-z-native"
+    },
+    {
+      "key": "a1-hallo-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Guten Morgen! Wie geht es Ihnen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich komme aus Frankreich."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich wohne jetzt in Berlin."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie bitte? Wie schreibt man das?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Freut mich! Woher kommst du?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : saluer et faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Tschüs, bis morgen!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-lexique",
+      "kind": "audio",
+      "title": "Lexique · Hallo ! Se saluer et se présenter",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Guten Morgen!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Tag!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Abend!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Gute Nacht!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Hallo!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Tschüs!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Auf Wiedersehen!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bis bald!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Freut mich!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie geht’s?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das tut mir leid!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "heißen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wohnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sprechen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "woher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wo wohnst du?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Name, die Namen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Land, die Länder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Stadt, die Städte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Dorf, die Dörfer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Sprache, die Sprachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Student, die Studenten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "müde"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

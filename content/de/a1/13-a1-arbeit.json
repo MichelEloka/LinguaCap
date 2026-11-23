@@ -1,0 +1,1526 @@
+{
+  "id": "a1-arbeit",
+  "title": "Parler de son métier, de ses études et de ses horaires",
+  "objective": "Dire ce que l’on fait, où l’on travaille ou étudie et à quelles heures, puis vérifier ces renseignements.",
+  "prerequisites": [
+    "a1-alltag-atelier"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "Textes, dialogue et exercices originaux LinguaCap V4.",
+    "Repères : Deutsch im Blick, chapitre 2 « An der Uni » et chapitre 8 sur les métiers, ainsi que la liste de vocabulaire Goethe-Zertifikat A1 Start Deutsch 1."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-arbeit.mjs",
+  "vocabulary": [
+    {
+      "id": "arbeiten",
+      "word": "arbeiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "travailler",
+      "example": "Wo arbeiten Sie?",
+      "note": "du arbeitest, er arbeitet",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "studieren",
+      "word": "studieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire des études",
+      "example": "Was studieren Sie?",
+      "note": "studieren an der Uni",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "beruf",
+      "word": "Beruf",
+      "article": "der",
+      "plural": "Berufe",
+      "partOfSpeech": "noun",
+      "translation": "le métier, la profession",
+      "example": "Was sind Sie von Beruf?",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "arbeit",
+      "word": "Arbeit",
+      "article": "die",
+      "plural": "Arbeiten",
+      "partOfSpeech": "noun",
+      "translation": "le travail",
+      "example": "Die Arbeit fängt um acht Uhr an.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "job",
+      "word": "Job",
+      "article": "der",
+      "plural": "Jobs",
+      "partOfSpeech": "noun",
+      "translation": "le petit boulot, l’emploi",
+      "example": "Mein Job ist im Kino.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "verkaeufer",
+      "word": "Verkäufer",
+      "article": "der",
+      "plural": "Verkäufer",
+      "partOfSpeech": "noun",
+      "translation": "le vendeur",
+      "example": "Jona ist Verkäufer.",
+      "note": "féminin : die Verkäuferin, die Verkäuferinnen",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "fahrer",
+      "word": "Fahrer",
+      "article": "der",
+      "plural": "Fahrer",
+      "partOfSpeech": "noun",
+      "translation": "le chauffeur, le conducteur",
+      "example": "Ben arbeitet als Fahrer.",
+      "note": "féminin : die Fahrerin, die Fahrerinnen",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "firma",
+      "word": "Firma",
+      "article": "die",
+      "plural": "Firmen",
+      "partOfSpeech": "noun",
+      "translation": "l’entreprise",
+      "example": "Die Firma ist in Köln.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "laden",
+      "word": "Laden",
+      "article": "der",
+      "plural": "Läden",
+      "partOfSpeech": "noun",
+      "translation": "le magasin, la boutique",
+      "example": "Ich arbeite in einem Laden.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "buchladen",
+      "word": "Buchladen",
+      "article": "der",
+      "plural": "Buchläden",
+      "partOfSpeech": "noun",
+      "translation": "la librairie",
+      "example": "Der Buchladen ist am Markt.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "kino",
+      "word": "Kino",
+      "article": "das",
+      "plural": "Kinos",
+      "partOfSpeech": "noun",
+      "translation": "le cinéma",
+      "example": "Am Freitag arbeite ich im Kino.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "uni",
+      "word": "Uni",
+      "article": "die",
+      "plural": "Unis",
+      "partOfSpeech": "noun",
+      "translation": "l’université (familier)",
+      "example": "Ich studiere an der Uni.",
+      "note": "forme courte de die Universität",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "als",
+      "word": "als",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "comme, en tant que",
+      "example": "Ich arbeite als Verkäuferin.",
+      "note": "als + métier, sans article",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "bei",
+      "word": "bei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "chez (un employeur)",
+      "example": "Ich arbeite bei Nordlicht.",
+      "note": "bei + nom de l’entreprise",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "von-bis",
+      "word": "von … bis …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "de … à … (une plage horaire)",
+      "example": "Ich arbeite von neun bis elf Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "zeit-haben",
+      "word": "Zeit haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir le temps, être libre",
+      "example": "Hast du am Freitag Zeit?",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-treffen",
+      "word": "sich treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se retrouver, se rencontrer",
+      "example": "Treffen wir uns vor dem Buchladen?",
+      "note": "wir treffen uns",
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "genau",
+      "word": "genau",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "exactement, précisément",
+      "example": "Wo arbeitest du genau?",
+      "note": null,
+      "audio": {
+        "media": "a1-arbeit-lexique",
+        "line": 17
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-arbeit-guide",
+      "kind": "lesson",
+      "title": "Découvrir : présenter son activité et son lieu",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : présenter son activité et son lieu",
+        "description": "ÉTUDES, MÉTIER, LIEU ET HORAIRES · 15 MIN\n\n1. Lire deux profils (4 min). « Ich heiße Liv. Ich studiere Kunst an der Uni. Am Montag habe ich von neun bis elf Uhr Kurs. » / « Ich heiße Ben. Ich arbeite als Fahrer. Am Samstag arbeite ich von acht bis zwölf Uhr. » Repérez pour chaque personne l’activité, le jour et les deux heures. Qui étudie ? Qui travaille ?\n\n2. Le métier, l’employeur, le lieu (4 min). Chaque petit mot a son rôle :\n• als + métier, sans article : Ich arbeite als Verkäuferin. — Je travaille comme vendeuse.\n• bei + employeur : Ich arbeite bei Nordlicht. — Je travaille chez Nordlicht.\n• in + lieu : Ich arbeite in einem Laden. — Je travaille dans un magasin.\n• an der Uni : la formule habituelle pour l’université : Ich studiere Kunst an der Uni.\n\n3. Une heure ou une plage horaire (3 min). « Um neun Uhr » donne une heure précise ; « von neun bis elf Uhr » donne le début et la fin. Comparez « Ich fange um neun Uhr an » (le début seulement) et « Ich arbeite von neun bis elf Uhr » (toute la plage). Le jour se dit avec am : am Dienstag, am Freitag.\n\n4. Le jour en premier (2 min). Comme dans le module sur la journée, le verbe reste en 2e position quand la phrase commence par le jour : Ich arbeite am Freitag. → Am Freitag arbeite ich.\n\n5. Écouter et dire (2 min). Écoutez les cinq modèles et dites à quoi sert chacun : métier, employeur, lieu, études ou horaire. Puis dites trois phrases sur vous à voix haute, en changeant le métier, le lieu ou l’horaire.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-arbeit-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-arbeit-profile",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-arbeit-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : les horaires de quelqu’un",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : les horaires de quelqu’un",
+        "description": "JONA ET ELIF FONT CONNAISSANCE · 12 MIN\n\nTROIS QUESTIONS UTILES\n• Was machst du? — Qu’est-ce que tu fais (dans la vie) ?\n• Wo arbeitest du? — Où travailles-tu ?\n• Wann arbeitest du? — Quand travailles-tu ?\nEt pour proposer un moment : Hast du danach Zeit? — Treffen wir uns vor dem Buchladen?\n\nÀ VOUS\n1. Écoutez le dialogue sans lire la transcription : qui étudie et qui travaille ?\n2. Réécoutez et repérez la matière d’Elif, le métier et le lieu de travail de Jona, puis les heures du vendredi. Attention à vierzehn (14) et achtzehn (18).\n3. Repérez la question de vérification « Bis achtzehn Uhr? » : on répète l’information pour être sûr d’avoir bien compris.\n4. Lisez la transcription et répétez chaque réplique pendant une pause. Redites ensuite le dialogue en remplaçant la matière, le métier ou le jour par les vôtres.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-arbeit-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-arbeit-treffen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-arbeit-approfondir",
+      "kind": "lesson",
+      "title": "Comprendre : une fiche et un message",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : une fiche et un message",
+        "description": "LA FICHE DE NIKA · 12 MIN\n\n1. Lire une fiche (4 min). « Name: Nika. Studium: Musik. Ort: Uni. Kurs: Dienstag, 10–12 Uhr. Job: Kino, Freitag, 15–20 Uhr. » La fiche contient deux lignes : les études et le travail. Pour chacune, repérez le jour, le lieu et la plage horaire. Was studiert Nika? Musik. Wo arbeitet Nika? Im Kino.\n\n2. Choisir le bon petit mot (3 min). Lisez ces phrases et dites pourquoi chaque mot convient :\n• Ich studiere Musik an der Uni. (l’université)\n• Ich arbeite als Verkäuferin. (le métier)\n• Ich arbeite bei der Firma Lichtweg. (l’employeur)\n• Ich arbeite in einem Kino. (le lieu)\n\n3. Lire un message (3 min). Un ami écrit à Nika : « Treffen wir uns am Freitag um vier Uhr? ». Nika répond : « Am Freitag arbeite ich von fünfzehn bis zwanzig Uhr. Geht es am Dienstag um dreizehn Uhr? ». Repérez le créneau refusé et le créneau proposé. Vérifiez sur la fiche : le mardi, le cours de Nika finit à 12 h, elle est donc libre à 13 h.\n\n4. Le jour ou le lieu en tête (2 min). Dites à voix haute : « Am Freitag arbeite ich im Kino. » puis « Im Kino arbeite ich am Freitag. ». Dans les deux cas, le verbe arbeite reste en 2e position et le sujet ich passe derrière lui.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-arbeit-nika",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-arbeit-nachricht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-arbeit-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un emploi du temps",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un emploi du temps",
+        "description": "Écoutez de nouveau le dialogue entre Jona et Elif et complétez les fiches : les heures peuvent s’écrire en chiffres. Complétez ensuite les phrases, remettez les mots dans l’ordre, puis écrivez les deux phrases dictées. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-arbeit-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-entrainer-q9",
+          "usage": "audio",
+          "questionId": "q9",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez le dialogue et complétez la fiche d’Elif.",
+          "text": "Studium: [[1]] · Kurs am Freitag: von [[2]] bis [[3]] Uhr",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Design"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "9",
+                "neun"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "11",
+                "elf"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Elif dit « Ich studiere Design an der Uni » et, pour le vendredi, « von neun bis elf Uhr » : von donne le début, bis la fin."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez maintenant la fiche de Jona.",
+          "text": "Beruf: [[1]] · Ort: ein [[2]] am Markt · Freitag: von [[3]] bis [[4]] Uhr",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Verkäufer"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Buchladen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "14",
+                "vierzehn"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "18",
+                "achtzehn"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Jona dit « Ich arbeite als Verkäufer » et « In einem Buchladen am Markt ». Le vendredi, il travaille « von vierzehn bis achtzehn Uhr » : 14 h, puis 18 h, pas 4 h ni 8 h."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Où et quand Jona et Elif se retrouvent-ils ? Complétez.",
+          "text": "Treffpunkt: um [[1]] Uhr vor dem [[2]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "19",
+                "neunzehn"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Buchladen"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ],
+          "explanation": "Jona propose « um neunzehn Uhr » puis « Treffen wir uns vor dem Buchladen? », et Elif accepte. Neunzehn (19) n’est pas neun (9) : écoutez la fin du mot."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Complétez avec als, bei, in ou an.",
+          "text": "Ich arbeite [[1]] Verkäuferin [[2]] Nordlicht, [[3]] einem Laden. Ich studiere Musik [[4]] der Uni.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "als"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bei"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "in"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "an"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "Als introduit le métier (sans article), bei l’employeur, in le lieu (in einem Laden) ; pour l’université, on dit an der Uni."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre. La phrase commence par « Am Freitag ».",
+          "answers": [
+            [
+              "Am Freitag",
+              "arbeite",
+              "ich",
+              "von vierzehn bis achtzehn Uhr."
+            ]
+          ],
+          "explanation": "Le jour est en tête : le verbe arbeite reste en 2e position et le sujet ich passe derrière. « Am Freitag ich arbeite » calque le français."
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre. La phrase commence par « Am Dienstag ».",
+          "answers": [
+            [
+              "Am Dienstag",
+              "habe",
+              "ich",
+              "von zehn bis zwölf Uhr",
+              "Kurs."
+            ]
+          ],
+          "explanation": "Après « Am Dienstag », le verbe habe vient en 2e position, puis ich. La plage horaire précède le nom Kurs, qui ferme la phrase : « … von zehn bis zwölf Uhr Kurs »."
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Associez chaque question à la réponse de Jona ou d’Elif.",
+          "pairs": [
+            {
+              "left": "Was machst du?",
+              "right": "Ich studiere Design an der Uni."
+            },
+            {
+              "left": "Wo arbeitest du genau?",
+              "right": "In einem Buchladen am Markt."
+            },
+            {
+              "left": "Wann arbeitest du am Freitag?",
+              "right": "Von vierzehn bis achtzehn Uhr."
+            },
+            {
+              "left": "Hast du danach Zeit?",
+              "right": "Ja, um neunzehn Uhr."
+            }
+          ],
+          "explanation": "Was demande l’activité, wo le lieu (in …), wann le moment (von … bis …). « Hast du Zeit? » demande si l’on est libre : on répond par oui ou non et une heure."
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase sur un horaire de travail et écrivez-la.",
+          "accept": [
+            "Am Montag arbeite ich von acht bis zwölf Uhr."
+          ],
+          "voice": "frau",
+          "explanation": "Am Montag en tête : arbeite en 2e position, puis ich. Von acht bis zwölf Uhr donne la plage ; les nombres peuvent s’écrire en chiffres (8, 12).",
+          "showWordCount": true
+        },
+        {
+          "id": "q9",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase sur un métier et écrivez-la.",
+          "accept": [
+            "Ich arbeite als Verkäufer in einem Buchladen."
+          ],
+          "voice": "mann",
+          "explanation": "Als + métier, sans article : als Verkäufer. Dans Verkäufer, äu se prononce « oï ». Buchladen est un nom composé, en un seul mot, avec une majuscule.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-arbeit-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : parler de son travail",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : parler de son travail",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Quand la phrase commence par le jour, faites entendre le verbe juste après : Am Freitag ARBEITE ich …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-arbeit-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-arbeit-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich arbeite als Verkäuferin.",
+          "accept": [
+            "Ich arbeite als Verkäuferin."
+          ],
+          "explanation": "Dans Verkäuferin, v se prononce [f] et äu se dit « oï » : « fer-KOÏ-fe-rin ». Als s’emploie sans article devant le métier.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich studiere Design an der Uni.",
+          "accept": [
+            "Ich studiere Design an der Uni."
+          ],
+          "explanation": "Studiere commence par « cht ». Design se prononce à l’anglaise, et Uni avec un u comme dans « ou ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Am Freitag arbeite ich von zwei bis sechs Uhr.",
+          "accept": [
+            "Am Freitag arbeite ich von zwei bis sechs Uhr.",
+            "Am Freitag arbeite ich von 2 bis 6 Uhr."
+          ],
+          "explanation": "Le verbe arbeite vient juste après Am Freitag. Zwei commence par « ts » et sechs se termine par « ks ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wo arbeitest du genau?",
+          "accept": [
+            "Wo arbeitest du genau?"
+          ],
+          "explanation": "Wo se prononce « vo ». Genau commence par un g dur, comme dans « gâteau », et au se dit « ao ». La voix descend à la fin.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hast du am Freitag Zeit?",
+          "accept": [
+            "Hast du am Freitag Zeit?"
+          ],
+          "explanation": "Question sans mot interrogatif : le verbe hast ouvre la phrase et la voix monte à la fin. Zeit se dit « tsaït ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Um neunzehn Uhr habe ich Zeit.",
+          "accept": [
+            "Um neunzehn Uhr habe ich Zeit.",
+            "Um 19 Uhr habe ich Zeit."
+          ],
+          "explanation": "Neunzehn (19), avec la fin -zehn, ne se confond pas avec neun (9). Après Um neunzehn Uhr, le verbe habe vient avant ich.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-arbeit-controle",
+      "kind": "exercise",
+      "title": "Vérifier : métier, lieu et horaires",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : métier, lieu et horaires",
+        "description": "Écoutez le dialogue une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les trois dernières questions portent sur les phrases à employer pour parler de soi. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-arbeit-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-arbeit-buchladen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a1-arbeit-kino",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a1-arbeit-cafe",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : qu’est-ce qu’Elif étudie ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le design",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "La musique",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’allemand",
+              "correct": false
+            }
+          ],
+          "explanation": "Elif se présente : « Ich studiere Design an der Uni ». La musique est la matière de Nika, dans la fiche ; l’allemand n’est pas cité.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : à quelle heure le cours d’Elif finit-il vendredi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "12 h",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "11 h",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "9 h",
+              "correct": false
+            }
+          ],
+          "explanation": "« Von neun bis elf Uhr » : von donne le début (9 h) et bis la fin (11 h). Midi n’est pas mentionné.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : quel métier Jona indique-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Livreur",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Enseignant",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vendeur",
+              "correct": true
+            }
+          ],
+          "explanation": "Jona dit « Ich arbeite als Verkäufer bei Nordlicht » : als introduit le métier, et Verkäufer veut dire « vendeur ». Nordlicht est le nom de l’employeur.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : dans quel lieu Jona travaille-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une librairie",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Un cinéma",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un café",
+              "correct": false
+            }
+          ],
+          "explanation": "« In einem Buchladen am Markt » : der Buchladen est une librairie (das Buch, le livre). Le cinéma est le lieu de travail de Nika, pas de Jona.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Écoute : à quelle heure les deux personnes proposent-elles de se retrouver ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "14 h",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "19 h",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "18 h",
+              "correct": false
+            }
+          ],
+          "explanation": "Jona travaille jusqu’à 18 h, puis il propose « um neunzehn Uhr » devant la librairie. 14 h et 18 h sont le début et la fin de son travail.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quelle phrase indique le métier ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich arbeite bei Nordlicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich arbeite in einem Buchladen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich arbeite als Verkäuferin.",
+              "correct": true
+            }
+          ],
+          "explanation": "Als + nom de métier, sans article : « Ich arbeite als Verkäuferin ». Bei donne l’employeur (bei Nordlicht) et in le lieu (in einem Buchladen).",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Quelle phrase indique où vous étudiez ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich studiere Musik an der Uni.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich arbeite bei Nordlicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich arbeite als Verkäufer.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich studiere Musik an der Uni » : studieren et an der Uni situent les études. Les deux autres phrases parlent de travail (arbeiten).",
+          "type": "choice"
+        },
+        {
+          "id": "q8",
+          "prompt": "Quelle phrase indique une plage de travail de 14 h à 18 h ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich arbeite am Freitag um vier Uhr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich arbeite von vierzehn bis achtzehn Uhr.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich fange um achtzehn Uhr an.",
+              "correct": false
+            }
+          ],
+          "explanation": "Une plage horaire se dit von … bis … : von vierzehn bis achtzehn Uhr. « Um vier Uhr » donne une heure précise, et anfangen seulement le début.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-arbeit-mission",
+      "kind": "mission",
+      "title": "Mission : se présenter et fixer un rendez-vous",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : se présenter et fixer un rendez-vous",
+        "description": "Vous rencontrez une personne de votre cours d’allemand. Elle vous demande ce que vous faites, puis elle propose de vous voir vendredi à 16 heures. Ce créneau ne vous convient pas : vous expliquez pourquoi et vous proposez un autre moment.\n\nMODÈLE\nIch heiße Jona. Ich arbeite als Verkäufer bei Nordlicht, in einem Buchladen am Markt. Am Freitag arbeite ich von vierzehn bis achtzehn Uhr. Um sechzehn Uhr? Da arbeite ich. Aber um neunzehn Uhr habe ich Zeit. Treffen wir uns vor dem Buchladen?\n\nPOUR VOUS AIDER\n• Ich studiere … an der Uni. / Ich arbeite als … bei … in …\n• Am … arbeite ich von … bis … Uhr. / Am … habe ich von … bis … Uhr Kurs.\n• Da arbeite ich. / Da habe ich Kurs. — Geht es am … um … Uhr? / Um … Uhr habe ich Zeit.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre réponse : présentez votre activité (études ou travail), votre lieu et deux horaires de la semaine. Répondez ensuite à la proposition « Treffen wir uns am Freitag um sechzehn Uhr? » : refusez en expliquant pourquoi, puis proposez un autre jour et une autre heure.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez votre profil en quatre phrases (activité, lieu, jours et horaires), puis un court message qui confirme le nouveau rendez-vous avec le jour, l’heure et le lieu.",
+          "maxChars": 700,
+          "minWords": 30
+        },
+        "checklist": [
+          "J’ai employé als pour le métier, bei pour l’employeur, in pour le lieu ou an der Uni pour les études.",
+          "J’ai donné au moins une plage horaire avec von … bis … et un jour avec am.",
+          "J’ai refusé 16 heures avec une raison (Da arbeite ich. / Da habe ich Kurs.) et proposé un autre créneau.",
+          "Quand ma phrase commence par le jour ou l’heure, le verbe vient juste après, avant le sujet.",
+          "Le rendez-vous confirmé dans mon message est le nouveau, pas celui que j’ai refusé."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-arbeit-modele",
+      "kind": "audio",
+      "title": "Parler de son métier, de ses études et de ses horaires · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich studiere Kunst an der Uni."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich arbeite als Verkäuferin."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich arbeite bei Nordlicht."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich arbeite in einem Laden."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Am Freitag arbeite ich von zwei bis sechs Uhr."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-dialogue",
+      "kind": "audio",
+      "title": "Parler de son métier, de ses études et de ses horaires · scène",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Jona",
+          "text": "Hallo! Ich heiße Jona. Was machst du?"
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Ich heiße Elif. Ich studiere Design an der Uni."
+        },
+        {
+          "voice": "mann",
+          "name": "Jona",
+          "text": "Hast du am Freitag Kurs?"
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Ja, von neun bis elf Uhr. Und du? Studierst du auch?"
+        },
+        {
+          "voice": "mann",
+          "name": "Jona",
+          "text": "Nein, ich arbeite als Verkäufer bei Nordlicht."
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Nordlicht? Wo arbeitest du genau?"
+        },
+        {
+          "voice": "mann",
+          "name": "Jona",
+          "text": "In einem Buchladen am Markt. Am Freitag arbeite ich von vierzehn bis achtzehn Uhr."
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Bis achtzehn Uhr? Hast du danach Zeit?"
+        },
+        {
+          "voice": "mann",
+          "name": "Jona",
+          "text": "Ja, um neunzehn Uhr. Treffen wir uns vor dem Buchladen?"
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Ja, gern. Bis Freitag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-arbeit-profile",
+      "kind": "image",
+      "title": "Deux profils : études et travail",
+      "alt": "Deux fiches. Liv : « Ich studiere Kunst an der Uni. Am Montag habe ich von neun bis elf Uhr Kurs. » Ben : « Ich arbeite als Fahrer. Am Samstag arbeite ich von acht bis zwölf Uhr. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "cards",
+        "height": 400,
+        "size": 28,
+        "cards": [
+          {
+            "icon": "palette",
+            "title": "Liv",
+            "subtitle": "studiert",
+            "lines": [
+              "Ich studiere Kunst [an der Uni].",
+              {
+                "icon": "clock",
+                "text": "Am Montag habe ich [von neun bis elf Uhr] Kurs."
+              }
+            ]
+          },
+          {
+            "icon": "car-front",
+            "title": "Ben",
+            "subtitle": "arbeitet",
+            "lines": [
+              "Ich arbeite [als Fahrer].",
+              {
+                "icon": "clock",
+                "text": "Am Samstag arbeite ich [von acht bis zwölf Uhr]."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-treffen",
+      "kind": "image",
+      "title": "Jona et Elif font connaissance",
+      "alt": "Dans la rue, Jona demande à Elif « Was machst du? » et Elif lui retourne la question : « Und du? Studierst du auch? ». En haut : un livre ouvert, une serviette, une toque d’étudiant et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Jona",
+            "say": "Was machst du?"
+          },
+          {
+            "name": "Elif",
+            "say": "Und du? Studierst du auch?"
+          }
+        ],
+        "items": [
+          "book-open",
+          "briefcase",
+          "graduation-cap",
+          "clock"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-nika",
+      "kind": "image",
+      "title": "La fiche de Nika",
+      "alt": "Fiche de Nika : Studium Musik, Ort Uni, Kurs Dienstag de 10 à 12 heures, Job au cinéma (Kino) le vendredi de 15 à 20 heures.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "form",
+        "icon": "id-card",
+        "title": "Nika",
+        "subtitle": "Studium und Job",
+        "size": 30,
+        "fields": [
+          {
+            "label": "Studium",
+            "value": "Musik"
+          },
+          {
+            "label": "Ort",
+            "value": "Uni"
+          },
+          {
+            "label": "Kurs",
+            "value": "Dienstag, 10–12 Uhr",
+            "wide": true
+          },
+          {
+            "label": "Job",
+            "value": "Kino, Freitag, 15–20 Uhr",
+            "wide": true
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-nachricht",
+      "kind": "image",
+      "title": "Un rendez-vous refusé, un autre proposé",
+      "alt": "Échange de messages : un ami écrit « Treffen wir uns am Freitag um vier Uhr? » ; Nika répond « Am Freitag arbeite ich von fünfzehn bis zwanzig Uhr. Geht es am Dienstag um dreizehn Uhr? ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Nika",
+        "size": 31,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Treffen wir uns am Freitag um vier Uhr?"
+          },
+          {
+            "from": "Nika",
+            "text": "Am Freitag arbeite ich [von fünfzehn bis zwanzig Uhr]. Geht es [am Dienstag um dreizehn Uhr]?"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-buchladen",
+      "kind": "image",
+      "title": "Une librairie",
+      "alt": "Un livre ouvert, pour une librairie.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "book-open"
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-kino",
+      "kind": "image",
+      "title": "Un cinéma",
+      "alt": "Un clap de cinéma.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "clapperboard"
+      }
+    },
+    {
+      "key": "v4-a1-arbeit-cafe",
+      "kind": "image",
+      "title": "Un café",
+      "alt": "Une tasse de café fumante.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "coffee"
+      }
+    },
+    {
+      "key": "a1-arbeit-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un emploi du temps",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Am Montag arbeite ich von acht bis zwölf Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-entrainer-q9",
+      "kind": "audio",
+      "title": "Dictée q9 · S’entraîner : noter un emploi du temps",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Ich arbeite als Verkäufer in einem Buchladen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich arbeite als Verkäuferin."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich studiere Design an der Uni."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Freitag arbeite ich von zwei bis sechs Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wo arbeitest du genau?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du am Freitag Zeit?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : parler de son travail",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Um neunzehn Uhr habe ich Zeit."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-arbeit-lexique",
+      "kind": "audio",
+      "title": "Lexique · Parler de son métier, de ses études et de ses horaires",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "arbeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "studieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Beruf, die Berufe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Arbeit, die Arbeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Job, die Jobs"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Verkäufer, die Verkäufer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fahrer, die Fahrer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Firma, die Firmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Laden, die Läden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Buchladen, die Buchläden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kino, die Kinos"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Uni, die Unis"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "als"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bei"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "von … bis …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zeit haben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "genau"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

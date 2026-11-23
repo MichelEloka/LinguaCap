@@ -12,15 +12,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.UUID;
 import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.IdentityClient;
 
 /**
- * Bibliothèque en accès libre : toutes les versions publiées de la langue de l'élève, leçons et exercices lisibles à
- * tout moment, hors parcours. Les exercices libres sont corrigés par Évaluations (POST /assessments/quiz sans séance) ;
- * l'entraînement se limite au bilan intermédiaire, l'examen blanc restant l'examen de passage du parcours.
+ * Bibliothèque en accès libre : toutes les versions publiées de la langue de l'élève, leçons, exercices, missions et
+ * lexiques des modules lisibles à tout moment, hors parcours. Les exercices libres sont corrigés par Évaluations
+ * (POST /assessments/exercises ou /assessments/quiz, sans séance) ; l'entraînement se limite au bilan intermédiaire,
+ * l'examen blanc restant l'examen de passage du parcours.
  */
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
@@ -30,6 +32,7 @@ public class LibraryResource {
     @Inject Actor actor;
     @Inject IdentityClient identities;
     @Inject LibraryContent content;
+    @Inject LexiconContent lexicons;
 
     /** Élève consulté : lui-même, ou l'élève demandé par son professeur référent ou l'administration. */
     record Reader(UUID learnerId, boolean staff, String languageId) {}
@@ -42,7 +45,9 @@ public class LibraryResource {
         if (reader.languageId() == null) return new Library(null, List.of());
         List<JsonNode> tracks = content.publishedTracks(callerId, reader.languageId());
         if (tracks.isEmpty()) return new Library(reader.languageId(), List.of());
-        Map<String, LastResult> results = content.lastResults(callerId, reader.learnerId());
+        JsonNode grades = content.grades(callerId, reader.learnerId());
+        Map<String, LastResult> results = LibraryContent.lastResults(grades);
+        Set<String> toReview = LibraryContent.toReview(grades);
         LibraryContent.PathVersions path = content.pathVersions(reader.learnerId());
         List<LibraryLevel> levels = new ArrayList<>();
         for (JsonNode summary : tracks) {
@@ -51,7 +56,7 @@ public class LibraryResource {
             if (track == null) continue;
             levels.add(new LibraryLevel(summary.path("levelCode").asText(), summary.path("levelTitle").asText(),
                     versionId, summary.path("number").asInt(), path.inPath().contains(versionId),
-                    versionId.equals(path.current()), LibraryContent.modules(track, results),
+                    versionId.equals(path.current()), LibraryContent.modules(track, results, toReview),
                     LibraryContent.practice(content.midtermAvailable(callerId, track))));
         }
         return new Library(reader.languageId(), List.copyOf(levels));
@@ -76,6 +81,30 @@ public class LibraryResource {
             throw HttpError.notFound("Cette activité ne fait pas partie de la bibliothèque.");
         }
         return content.activity(callerId, reader.learnerId(), reader.staff(), track, activityId);
+    }
+
+    /**
+     * Lexique d'un module d'une version publiée de la langue de l'élève : entrées dans l'ordre du module, son de chacune
+     * en segment du son de lexique, avec son adresse temporaire. Sans learnerId, un membre de l'équipe pédagogique
+     * consulte toute version publiée.
+     */
+    @GET
+    @Path("/library/{versionId}/modules/{moduleId}/lexicon")
+    public LexiconContent.Lexicon lexicon(@PathParam("versionId") UUID versionId, @PathParam("moduleId") String moduleId,
+                                          @QueryParam("learnerId") String requestedLearnerId) {
+        UUID callerId = actor.id();
+        if (!moduleId.matches(ACTIVITY_ID) || moduleId.length() > 64) {
+            throw HttpError.notFound("Module introuvable dans la bibliothèque.");
+        }
+        Reader reader = reader(callerId, requestedLearnerId, true);
+        JsonNode track = content.track(callerId, versionId);
+        if (track == null || !"published".equals(track.path("status").asText())
+                || reader.learnerId() != null && !Objects.equals(reader.languageId(), LibraryContent.languageOf(track))) {
+            throw HttpError.notFound("Ce module ne fait pas partie de la bibliothèque.");
+        }
+        LexiconContent.Lexicon lexicon = lexicons.lexicon(callerId, versionId, moduleId);
+        if (lexicon == null) throw HttpError.notFound("Module introuvable dans la bibliothèque.");
+        return lexicon;
     }
 
     private Reader reader(UUID callerId, String requestedLearnerId, boolean staffWithoutLearner) {
@@ -111,12 +140,17 @@ public class LibraryResource {
     public record LibraryLevel(String levelCode, String levelTitle, UUID trackVersionId, int number, boolean inPath,
                                boolean current, List<LibraryModule> modules, List<Practice> practice) {}
 
+    /** vocabularyCount : nombre d'entrées du lexique du module (0 si le module n'en a pas). */
     public record LibraryModule(String id, int position, String title, String objective,
-                                List<LibraryActivityItem> activities) {}
+                                List<LibraryActivityItem> activities, int vocabularyCount) {}
 
-    /** lastResult : dernier score de l'exercice, remis librement ou en séance (null pour une leçon). */
+    /**
+     * kind : lesson, exercise ou mission. lastResult : dernier score de l'exercice, remis librement ou en séance (null
+     * pour une leçon ou une mission) ; toReview : ce dernier résultat porte des questions à revoir.
+     */
     public record LibraryActivityItem(String id, String kind, String title, int estimatedMinutes,
-                                      List<String> competences, String lessonId, LastResult lastResult) {}
+                                      List<String> competences, String lessonId, LastResult lastResult,
+                                      boolean toReview) {}
 
     public record LastResult(int correct, int total, String submittedAt) {}
 
@@ -138,11 +172,12 @@ public class LibraryResource {
 
     /**
      * Forme d'une activité de séance (CourseResource.ActivityDetail) sans progression ni corrigé : status « todo »,
-     * état vide, completedAt et attemptId à null, complétée par la version et le module d'origine.
+     * état vide, completedAt et attemptId à null, complétée par la version et le module d'origine. questions : vues
+     * élève typées ; mission : définition d'une activité « mission » (null sinon).
      */
     public record LibraryActivity(String id, int position, String kind, String title, int estimatedMinutes,
                                   List<String> competences, String status, JsonNode state, String completedAt,
                                   String attemptId, LibraryLesson lesson, String transcript, JsonNode questions,
                                   List<LibraryPlacement> placements, UUID trackVersionId, String levelCode,
-                                  String moduleId, String moduleTitle) {}
+                                  String moduleId, String moduleTitle, CourseResource.MissionDefinition mission) {}
 }

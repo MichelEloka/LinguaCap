@@ -1,0 +1,1225 @@
+{
+  "id": "a1-rythme",
+  "title": "Consonnes et rythme · Se faire comprendre",
+  "objective": "Prononcer les consonnes fréquentes dans des mots familiers, marquer les groupes de sens et faire répéter une question simple.",
+  "prerequisites": [
+    "a1-voyelles"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-rythme.mjs",
+  "vocabulary": [
+    {
+      "id": "schule",
+      "word": "Schule",
+      "article": "die",
+      "plural": "Schulen",
+      "partOfSpeech": "noun",
+      "translation": "l’école",
+      "example": "Die Schule ist gleich hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "bahnhof",
+      "word": "Bahnhof",
+      "article": "der",
+      "plural": "Bahnhöfe",
+      "partOfSpeech": "noun",
+      "translation": "la gare",
+      "example": "Wo ist der Bahnhof?",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "strasse",
+      "word": "Straße",
+      "article": "die",
+      "plural": "Straßen",
+      "partOfSpeech": "noun",
+      "translation": "la rue",
+      "example": "Die Schule ist in der Weberstraße.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "park",
+      "word": "Park",
+      "article": "der",
+      "plural": "Parks",
+      "partOfSpeech": "noun",
+      "translation": "le parc",
+      "example": "Der Park ist gleich hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "zug",
+      "word": "Zug",
+      "article": "der",
+      "plural": "Züge",
+      "partOfSpeech": "noun",
+      "translation": "le train",
+      "example": "Der Zug kommt um vier.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "zeit",
+      "word": "Zeit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le temps (disponible)",
+      "example": "Hast du Zeit?",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "jahr",
+      "word": "Jahr",
+      "article": "das",
+      "plural": "Jahre",
+      "partOfSpeech": "noun",
+      "translation": "l’année, l’an",
+      "example": "Ein Jahr hat zwölf Monate.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "vater",
+      "word": "Vater",
+      "article": "der",
+      "plural": "Väter",
+      "partOfSpeech": "noun",
+      "translation": "le père",
+      "example": "Mein Vater ist hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "wasser",
+      "word": "Wasser",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’eau",
+      "example": "Wasser, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "sport",
+      "word": "Sport",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le sport",
+      "example": "Ich mache gern Sport.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "entschuldigung",
+      "word": "Entschuldigung!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Excusez-moi ! Pardon !",
+      "example": "Entschuldigung! Wo ist die Schule?",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "wo-ist",
+      "word": "Wo ist …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Où est … ?",
+      "example": "Wo ist der Bahnhof?",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "gleich-hier",
+      "word": "gleich hier",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "juste ici, tout près",
+      "example": "Der Park ist gleich hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "vielen-dank",
+      "word": "Vielen Dank!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Merci beaucoup !",
+      "example": "Vielen Dank! Tschüs!",
+      "note": null,
+      "audio": {
+        "media": "a1-rythme-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-rythme-guide",
+      "kind": "lesson",
+      "title": "Découvrir : les consonnes fréquentes",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : les consonnes fréquentes",
+        "description": "CONSONNES FRÉQUENTES · 15 MIN\n\n1. Les débuts de mots (5 min). J se prononce comme le « y » de « yaourt » : ja, das Jahr. W se dit comme un v français : wir, das Wasser. V se dit le plus souvent comme un f : vier, der Vater ; dans quelques mots venus d’autres langues, on entend un v : die Vase. Z se dit « ts » : die Zeit, der Zug. Écoutez le modèle et répétez chaque série.\n2. sch, sp et st (4 min). Sch se prononce comme le ch français : die Schule, schreiben. Au début d’un mot, sp et st se lisent « chp » et « cht » : der Sport, die Straße. Dites « die Schule », « der Sport », puis « die Straße ».\n3. ich et Buch (4 min). Dans ich, l’air passe près du palais, la langue proche de la position du i : c’est un souffle doux. Après a, o ou u, comme dans Buch et Nacht, le bruit se forme plus en arrière, au fond de la gorge. Deux productions compréhensibles suffisent pour commencer.\n4. Récapituler (2 min). Dites ja, was, vier, Zeit, Schule et ich. Réécoutez seulement les deux mots qui vous demandent un nouvel essai.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-rythme-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-rythme-konsonanten",
+          "usage": "illustration",
+          "caption": "j · w · v · z · sch, sp, st · ch",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-rythme-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : accent, rythme et mélodie",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : accent, rythme et mélodie",
+        "description": "PRONONCER DES GROUPES · 12 MIN\n\n1. L’accent du mot (3 min). En allemand, l’accent tombe le plus souvent sur la première syllabe : WAS-ser, SCHU-le, BAHN-hof. Les préfixes comme ent- ne sont pas accentués : ent-SCHUL-di-gung. Dites « Wasser, bitte. » d’un seul mouvement, en appuyant sur WAS.\n2. Le rythme (3 min). Découpez « Wo ist / der Bahnhof? » et « Der Bahnhof / ist hier. » avec une très légère pause à la barre. Mettez en relief le mot important, Bahnhof.\n3. La mélodie (3 min). Dans « Ist der Bahnhof hier? », question fermée (réponse oui ou non), la voix monte légèrement à la fin. Dans « Wo ist der Bahnhof? », question en W, elle redescend.\n4. La scène (3 min). Écoutez une première fois : quel lieu cherche-t-on ? Réécoutez en lisant la transcription, puis répétez « Wie bitte? Die Schule? » et la réponse « Die Schule ist gleich hier. ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-rythme-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-rythme-melodie",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-rythme-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : consonnes, accent et questions",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : consonnes, accent et questions",
+        "description": "Associez les mots à leur premier son, trouvez la syllabe accentuée, puis remettez les questions dans l’ordre et complétez les répliques de la scène.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Associez chaque mot au son qui l’ouvre (approximation française).",
+          "pairs": [
+            {
+              "left": "ja",
+              "right": "« y » comme dans « yaourt »"
+            },
+            {
+              "left": "wir",
+              "right": "« v » comme dans « vous »"
+            },
+            {
+              "left": "vier",
+              "right": "« f » comme dans « fou »"
+            },
+            {
+              "left": "Zeit",
+              "right": "« ts » comme dans « tsé-tsé »"
+            },
+            {
+              "left": "Schule",
+              "right": "« ch » comme dans « chat »"
+            },
+            {
+              "left": "Sport",
+              "right": "« chp »"
+            }
+          ],
+          "explanation": "J se dit « y », W « v » et V « f » dans les mots allemands courants. Z se dit « ts », sch « ch », et sp en début de mot se dit « chp »."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Dans quel mot le v se prononce-t-il comme un v français ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "vier",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vater",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vase",
+              "correct": true
+            }
+          ],
+          "explanation": "Dans les mots allemands courants, v se dit comme un f : vier, Vater. Vase vient d’une autre langue et garde le son v."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Où tombe l’accent dans Entschuldigung ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sur la 1re syllabe : ent-",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sur la 2e syllabe : -schul-",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sur la dernière syllabe : -gung",
+              "correct": false
+            }
+          ],
+          "explanation": "Le préfixe ent- n’est jamais accentué : l’accent tombe sur la syllabe du radical, SCHUL. Accentuer la dernière syllabe, comme en français, gêne la compréhension."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour demander où est l’école.",
+          "answers": [
+            [
+              "Entschuldigung,",
+              "wo",
+              "ist",
+              "die",
+              "Schule?"
+            ]
+          ],
+          "explanation": "Après Entschuldigung, la question commence par le mot interrogatif wo, suivi du verbe ist, puis du groupe die Schule. En fin de question en W, la voix descend."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour poser une question fermée (réponse oui ou non).",
+          "answers": [
+            [
+              "Ist",
+              "der",
+              "Bahnhof",
+              "hier?"
+            ]
+          ],
+          "explanation": "Dans une question fermée, le verbe conjugué vient en premier : Ist der Bahnhof hier? La voix monte à la fin, alors qu’elle descend dans « Wo ist der Bahnhof? »."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Complétez les répliques de la scène.",
+          "text": "[[1]] bitte? Die Schule? – Die Schule ist [[2]] hier.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wie"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gleich"
+              ],
+              "size": 7,
+              "hint": "tout près"
+            }
+          ],
+          "explanation": "Wie bitte? fait répéter poliment ; bitte seul ne suffit pas. Gleich hier signifie « juste ici, tout près »."
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez les mots avec sch, z ou w.",
+          "text": "die [[1]]ule – der [[2]]ug – das [[3]]asser",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Sch"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Z"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "W"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ],
+          "explanation": "Le son « ch » s’écrit sch (Schule), le son « ts » s’écrit z (Zug) et le son « v » de Wasser s’écrit w. Un francophone écrit souvent v pour ce son."
+        }
+      ]
+    },
+    {
+      "id": "a1-rythme-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : demander un lieu",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : demander un lieu",
+        "description": "Écoutez chaque modèle, puis dites la phrase avec le même accent et la même mélodie : la voix descend à la fin d’une question en W et monte à la fin d’une question fermée.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-rythme-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-rythme-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-rythme-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-rythme-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-rythme-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-rythme-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Entschuldigung, wo ist die Schule?",
+          "accept": [
+            "Entschuldigung, wo ist die Schule?"
+          ],
+          "explanation": "Accentuez SCHUL dans Entschuldigung et dans Schule ; sch se dit « ch ». La voix descend à la fin de la question en W.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ist der Bahnhof hier?",
+          "accept": [
+            "Ist der Bahnhof hier?"
+          ],
+          "explanation": "Question fermée : la voix monte légèrement sur hier. Appuyez sur BAHN et soufflez le h de -hof.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie bitte? Die Schule?",
+          "accept": [
+            "Wie bitte? Die Schule?"
+          ],
+          "explanation": "Wie se dit avec un son v. La voix monte sur Die Schule? pour vérifier le mot entendu.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Schule ist gleich hier.",
+          "accept": [
+            "Die Schule ist gleich hier."
+          ],
+          "explanation": "Gleich : ei se dit « aï » et le ch final est le souffle doux de ich. Mettez le relief sur Schule.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Der Zug kommt um vier.",
+          "accept": [
+            "Der Zug kommt um vier.",
+            "Der Zug kommt um 4."
+          ],
+          "explanation": "Z se dit « ts » et v se dit f : « tsouk », « fir ». Le g final de Zug se prononce presque comme un k.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Vielen Dank!",
+          "accept": [
+            "Vielen Dank!"
+          ],
+          "explanation": "V se dit f : « filen ». Le k final de Dank doit s’entendre nettement.",
+          "threshold": 80
+        }
+      ]
+    },
+    {
+      "id": "a1-rythme-controle",
+      "kind": "exercise",
+      "title": "Vérifier : demander un lieu et faire répéter",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : demander un lieu et faire répéter",
+        "description": "Écoutez la scène une première fois pour la situation, puis lisez les questions et réécoutez pour les détails. Les deux dernières questions portent sur les consonnes. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-rythme-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-rythme-schule",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a1-rythme-bahnhof",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a1-rythme-laden",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quel lieu cherche la première voix ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une école",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Une gare",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un magasin",
+              "correct": false
+            }
+          ],
+          "explanation": "La première voix demande « Ist die Schule hier? » : die Schule est l’école. Une gare se dit der Bahnhof et un magasin der Laden.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quelle expression entend-on pour faire répéter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Auf Wiedersehen!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wie bitte?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Vielen Dank!",
+              "correct": false
+            }
+          ],
+          "explanation": "« Wie bitte? Die Schule? » : wie bitte sert à faire répéter (« Pardon ? »). Vielen Dank remercie et Auf Wiedersehen sert à prendre congé.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Dans quelle rue se trouve le lieu ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wiesenstraße",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Waldstraße",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weberstraße",
+              "correct": true
+            }
+          ],
+          "explanation": "La réponse « in der Weberstraße » est reprise par la première voix : « In der Weberstraße? ». Le W initial se prononce comme un v ; Wiesenstraße et Waldstraße ne sont jamais dites.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Le lieu est-il proche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Oui, tout près",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Non, dans une autre ville",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "La personne ne sait pas",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Schule ist gleich hier » : gleich hier veut dire « juste ici, tout près ». Rien n’évoque une autre ville.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel début ressemble à « ts » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "J dans Jahr",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Z dans Zug",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "W dans Wasser",
+              "correct": false
+            }
+          ],
+          "explanation": "Z se prononce « ts » : Zug, Zeit. J se dit comme le « y » de « yaourt » (Jahr) et W comme un v français (Wasser).",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel mot commence par le son de sch ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zeit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vater",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Schule",
+              "correct": true
+            }
+          ],
+          "explanation": "Sch se prononce comme le ch français : Schule. Zeit commence par « ts » et Vater par un son f.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-rythme-mission",
+      "kind": "mission",
+      "title": "Mission : demander son chemin",
+      "estimatedMinutes": 15,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : demander son chemin",
+        "description": "Vous êtes dans une ville allemande et vous cherchez un lieu. Vous demandez poliment, vous faites répéter la réponse, puis vous remerciez.\n\nMODÈLE\n– Entschuldigung. Wo ist der Park?\n– Der Park ist gleich hier, in der Lindenstraße.\n– Wie bitte? In der Lindenstraße?\n– Ja, gleich hier.\n– Vielen Dank!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-rythme-weg",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez la scène pour trois lieux : die Schule, der Bahnhof et der Park. Jouez les deux rôles. Pour chaque lieu, demandez où il est, faites répéter une fois avec « Wie bitte? », puis remerciez. Donnez à chaque lieu une rue de votre choix.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez votre meilleur échange en quatre ou cinq répliques, comme le modèle.",
+          "maxChars": 500,
+          "minWords": 15
+        },
+        "checklist": [
+          "J’ai commencé par « Entschuldigung » et posé la question avec wo en tête.",
+          "J’ai fait répéter avec « Wie bitte? » en reprenant le mot important.",
+          "J’ai prononcé sch (Schule) comme un ch français et z comme « ts ».",
+          "Ma voix descend à la fin d’une question en W et monte à la fin d’une question fermée."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-rythme-modele",
+      "kind": "audio",
+      "title": "Consonnes et rythme · Se faire comprendre · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ja. Das Jahr. Wir. Das Wasser."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Vier. Der Vater. Die Vase. Die Zeit. Der Zug."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die Schule. Schreiben. Der Sport. Die Straße."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich. Das Buch. Die Nacht."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Wo ist der Bahnhof? Der Bahnhof ist hier. Ist der Bahnhof hier?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-dialogue",
+      "kind": "audio",
+      "title": "Consonnes et rythme · Se faire comprendre · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Entschuldigung. Ist die Schule hier?"
+        },
+        {
+          "voice": "mann",
+          "text": "Wie bitte? Die Schule?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja. Wo ist die Schule?"
+        },
+        {
+          "voice": "mann",
+          "text": "Die Schule ist gleich hier, in der Weberstraße."
+        },
+        {
+          "voice": "frau",
+          "text": "In der Weberstraße? Vielen Dank!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-rythme-konsonanten",
+      "kind": "image",
+      "title": "Six consonnes fréquentes",
+      "alt": "Six cartes de consonnes, la lettre étudiée en couleur : j dans ja et das Jahr, w dans wir et das Wasser, v dans vier et der Vater, z dans die Zeit et der Zug, sch, sp et st dans die Schule, der Sport et die Straße, ch dans ich et das Buch.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "j",
+            "words": [
+              "[j]a",
+              "das [J]ahr"
+            ]
+          },
+          {
+            "title": "w",
+            "words": [
+              "[w]ir",
+              "das [W]asser"
+            ]
+          },
+          {
+            "title": "v",
+            "words": [
+              "[v]ier",
+              "der [V]ater"
+            ]
+          },
+          {
+            "title": "z",
+            "words": [
+              "die [Z]eit",
+              "der [Z]ug"
+            ]
+          },
+          {
+            "title": "sch · sp · st",
+            "words": [
+              "die [Sch]ule",
+              "der [Sp]ort",
+              "die [St]raße"
+            ]
+          },
+          {
+            "title": "ch",
+            "words": [
+              "i[ch]",
+              "das Bu[ch]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-rythme-melodie",
+      "kind": "image",
+      "title": "Rythme et mélodie de la phrase",
+      "alt": "Fiche de trois phrases, la syllabe accentuée « Bahn » en couleur et une barre pour la pause : « Wo ist / der Bahnhof? » et « Der Bahnhof / ist hier. » avec une flèche qui descend, « Ist der Bahnhof hier? » avec une flèche qui monte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "audio-lines",
+        "title": "Wo ist der Bahnhof?",
+        "subtitle": "Pause bei / · Melodie am Ende",
+        "lines": [
+          {
+            "icon": "arrow-down-right",
+            "text": "Wo ist / der [Bahn]hof?"
+          },
+          {
+            "icon": "arrow-down-right",
+            "text": "Der [Bahn]hof / ist hier."
+          },
+          {
+            "icon": "arrow-up-right",
+            "text": "Ist der [Bahn]hof hier?"
+          }
+        ],
+        "size": 46,
+        "center": true
+      }
+    },
+    {
+      "key": "v4-a1-rythme-schule",
+      "kind": "image",
+      "title": "Une école",
+      "alt": "Un bâtiment d’école avec un drapeau.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "school"
+      }
+    },
+    {
+      "key": "v4-a1-rythme-bahnhof",
+      "kind": "image",
+      "title": "Une gare",
+      "alt": "Un train vu de face.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "train-front"
+      }
+    },
+    {
+      "key": "v4-a1-rythme-laden",
+      "kind": "image",
+      "title": "Un magasin",
+      "alt": "Une boutique avec un auvent.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "store"
+      }
+    },
+    {
+      "key": "v4-a1-rythme-weg",
+      "kind": "image",
+      "title": "Demander un lieu et faire répéter",
+      "alt": "Dans la rue, Mila demande « Entschuldigung. Wo ist der Park? » et Jonas, qui n’a pas bien entendu, répond « Wie bitte? ». En haut : des arbres, un repère de lieu et un panneau indicateur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Mila",
+            "say": "Entschuldigung. Wo ist der Park?"
+          },
+          {
+            "name": "Jonas",
+            "say": "Wie bitte?"
+          }
+        ],
+        "items": [
+          "trees",
+          "map-pin",
+          "signpost"
+        ]
+      }
+    },
+    {
+      "key": "a1-rythme-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Entschuldigung, wo ist die Schule?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ist der Bahnhof hier?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie bitte? Die Schule?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Schule ist gleich hier."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Der Zug kommt um vier."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : demander un lieu",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Vielen Dank!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-rythme-lexique",
+      "kind": "audio",
+      "title": "Lexique · Consonnes et rythme · Se faire comprendre",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Schule, die Schulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bahnhof, die Bahnhöfe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Straße, die Straßen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Park, die Parks"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Zug, die Züge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Zeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Jahr, die Jahre"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vater, die Väter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wasser"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Sport"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Entschuldigung!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wo ist …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gleich hier"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vielen Dank!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

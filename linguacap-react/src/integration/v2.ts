@@ -5,7 +5,9 @@
  * FORBIDDEN 403, NOT_FOUND 404, CONFLICT 409).
  *
  * Ce module ne contient que des types et de petites aides de libellés : aucun appel réseau.
+ * Les ajouts de la V4 (questions typées, missions, lexique) sont décrits dans v4.ts.
  */
+import type { ActivityKind, QuestionView, ServedMission } from './v4';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Fondations
@@ -246,7 +248,8 @@ export interface ValidateProposalRequest { number: number }
 /** Corps de POST /learning/paths/{pathId}/resume. */
 export interface ResumeRequest { resumeDate: string }
 
-export type PlanItemKind = 'lesson' | 'exercise' | 'review' | 'assessment';
+/** V4 : `mission` en plus (activité remise au professeur). */
+export type PlanItemKind = 'lesson' | 'exercise' | 'review' | 'assessment' | 'mission';
 export interface PlanItem {
   id: string; kind: PlanItemKind; title: string; minutes: number;
   moduleId: string | null; levelCode: LevelCode | null; sourceVersionId: string | null; sourceActivityId: string | null; additionId: string | null;
@@ -370,11 +373,16 @@ export interface AdditionRemoved { proposal: PathProposal }
 // Bibliothèque
 // ---------------------------------------------------------------------------------------------------------------------
 
+/** V4 : `kind` peut valoir `mission` ; `toReview` signale un dernier résultat avec des questions « à revoir ». */
 export interface LibraryActivityItem {
-  id: string; kind: 'lesson' | 'exercise'; title: string; estimatedMinutes: number;
+  id: string; kind: 'lesson' | 'exercise' | 'mission'; title: string; estimatedMinutes: number;
   competences: string[]; lessonId: string | null; lastResult: { correct: number; total: number; submittedAt: string } | null;
+  toReview: boolean;
 }
-export interface LibraryModule { id: string; position: number; title: string; objective: string; activities: LibraryActivityItem[] }
+/** V4 : `vocabularyCount` = nombre d'entrées du lexique du module (0 sans lexique). */
+export interface LibraryModule {
+  id: string; position: number; title: string; objective: string; activities: LibraryActivityItem[]; vocabularyCount: number;
+}
 export interface LibraryLevel {
   levelCode: LevelCode; levelTitle: string; trackVersionId: string; number: number;
   inPath: boolean; current: boolean;
@@ -393,15 +401,17 @@ export interface LibraryPlacement {
 /**
  * GET /learning/library/{versionId}/activities/{activityId} : forme d'`ActivityDetail` (CourseResource), sans corrigé,
  * avec `status: 'todo'`, `state: {}`, `completedAt: null`, `attemptId: null`, plus la version et le module.
+ * V4 : questions typées (`QuestionView`, voir v4.ts), `kind` `mission` et sa définition.
  */
 export interface LibraryActivity {
-  id: string; position: number; kind: 'lesson' | 'exercise' | 'review' | 'assessment'; title: string; estimatedMinutes: number;
+  id: string; position: number; kind: ActivityKind; title: string; estimatedMinutes: number;
   competences: string[]; status: 'todo'; state: Record<string, never>; completedAt: null; attemptId: null;
   lesson: { id: string; title: string; description: string } | null;
   transcript: string | null;
-  questions: { id: string; prompt: string; options: { id: string; text: string }[] }[];
+  questions: QuestionView[];
   placements: LibraryPlacement[];
   trackVersionId: string; levelCode: LevelCode; moduleId: string; moduleTitle: string;
+  mission: ServedMission | null;
 }
 /** Ajout de l'incrément à GET /learning/enrollment. */
 export interface EnrollmentPathField { pathId: string | null }

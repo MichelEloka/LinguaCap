@@ -124,7 +124,7 @@ export function LearnerDashboard({ token, name, view }: { token: string; name: s
           <SessionsByWeek sessions={sessions} />
         </div>
       )}
-      {view === 'results' && <ResultsView results={results} sessions={sessions} />}
+      {view === 'results' && <ResultsView results={results} sessions={sessions} token={token} />}
       {view === 'messages' && <MessagesView messages={messages} next={sessions.find((session) => session.status !== 'completed')} autonomous={path ? !path.accompanied : false} />}
     </div>
   );

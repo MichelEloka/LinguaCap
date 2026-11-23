@@ -11,7 +11,9 @@ import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.Response;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,12 +35,16 @@ public class AssessmentResource {
     private static final Pattern LESSON_ID = Pattern.compile("[a-z0-9]+(?:-[a-z0-9]+)*");
     private static final Pattern ANSWER_ID = Pattern.compile("[A-Za-z0-9][A-Za-z0-9_.-]{0,79}");
     private static final Pattern REQUEST_KEY = Pattern.compile("[A-Za-z0-9_-]{8,128}");
+    /** Colonnes lues par readGrade, partagées avec les remises d'exercices typés (ExerciseStore). */
+    static final String GRADE_COLUMNS = "id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, "
+            + "module_scores, pending, flagged, typed";
 
     @Inject Actor actor;
     @Inject IdentityClient identities;
     @Inject ServiceClient services;
     @Inject AgroalDataSource dataSource;
     @Inject ObjectMapper mapper;
+    @Inject ExerciseKeys keys;
 
     @ConfigProperty(name = "lingua.services.catalogue")
     String catalogueUrl;
@@ -58,8 +64,20 @@ public class AssessmentResource {
         if (prior != null) {
             return prior;
         }
-        JsonNode answerKey = services.request(catalogueUrl,
-                "/v1/internal/lessons/" + lessonId + "/answer-key", "GET", learnerId, null).path("answers");
+        var keyResult = services.exchange(catalogueUrl, "/v1/internal/lessons/" + lessonId + "/answer-key", "GET",
+                learnerId, null, "", "", false, actor.requestId());
+        if (keyResult.status() == 404 && typedLesson(lessonId, learnerId)) {
+            throw HttpError.conflict("Cet exercice se remet avec sa correction détaillée : utilisez /assessments/exercises.");
+        }
+        if (keyResult.status() >= 400) {
+            throw new WebApplicationException(Response.status(keyResult.status()).entity(keyResult.body()).build());
+        }
+        JsonNode key = keyResult.body();
+        if (key.path("typed").asBoolean(false)) {
+            // Une leçon typée (trous, ordre, association, dictée, répétition) se remet avec sa correction détaillée.
+            throw HttpError.conflict("Cet exercice se remet avec sa correction détaillée : utilisez /assessments/exercises.");
+        }
+        JsonNode answerKey = key.path("answers");
         if (!answerKey.isObject() || answerKey.isEmpty() || answerKey.size() > 100) {
             throw HttpError.unavailable("Le corrigé de ce quiz est indisponible.");
         }
@@ -78,6 +96,20 @@ public class AssessmentResource {
         }
         return storeAttempt(learnerId, requestKey, lessonId, answersJson, correct, answerKey.size(),
                 request.sessionId(), request.activityId(), "quiz", null);
+    }
+
+    /** Leçon sans aucun choix (le corrigé des choix est alors introuvable) mais avec des questions typées. */
+    private boolean typedLesson(String lessonId, UUID learnerId) {
+        try {
+            JsonNode key = keys.keyOrNull(lessonId, learnerId);
+            if (key == null) return false;
+            for (JsonNode question : key.path("questions")) {
+                if (!AnswerRules.CHOICE.equals(AnswerRules.type(question))) return true;
+            }
+        } catch (WebApplicationException unavailable) {
+            // Clé typée indisponible : le refus d'origine (404) est conservé.
+        }
+        return false;
     }
 
     /** Diagnostic initial (DEV-036) : chaque question situe l'élève sur un module ou sur le prérequis du niveau. */
@@ -135,9 +167,8 @@ public class AssessmentResource {
     @Path("/results")
     public List<Grade> results(@QueryParam("learnerId") String requestedLearnerId) {
         UUID learnerId = authorizeLearner(actor.id(), requestedLearnerId);
-        String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores
-                FROM assessment.quiz_attempts
+        String sql = "SELECT " + GRADE_COLUMNS + """
+                 FROM assessment.quiz_attempts
                 WHERE learner_id = ?
                 ORDER BY submitted_at DESC, id DESC
                 """;
@@ -201,8 +232,8 @@ public class AssessmentResource {
                     (learner_id, lesson_id, answers, correct, total, request_key, session_id, activity_id, kind, module_scores)
                 VALUES (?, ?, CAST(? AS jsonb), ?, ?, ?, ?, ?, ?, CAST(? AS jsonb))
                 ON CONFLICT (learner_id, request_key) DO NOTHING
-                RETURNING id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores
-                """;
+                RETURNING
+                """ + GRADE_COLUMNS;
         try (var connection = dataSource.getConnection();
              var statement = connection.prepareStatement(sql)) {
             statement.setObject(1, learnerId);
@@ -232,9 +263,8 @@ public class AssessmentResource {
 
     private static Grade findExisting(Connection connection, UUID learnerId, String requestKey, String lessonId,
                                       String answersJson) throws SQLException {
-        String sql = """
-                SELECT id, lesson_id, correct, total, submitted_at, session_id, activity_id, kind, module_scores,
-                       answers = CAST(? AS jsonb) AS same_answers
+        String sql = "SELECT " + GRADE_COLUMNS + """
+                , answers = CAST(? AS jsonb) AS same_answers
                 FROM assessment.quiz_attempts
                 WHERE learner_id = ? AND request_key = ?
                 """;
@@ -254,7 +284,8 @@ public class AssessmentResource {
         }
     }
 
-    private static Grade readGrade(ResultSet row) throws SQLException {
+    /** Remise lue avec les colonnes GRADE_COLUMNS ; l'historique vaut pending 0, flagged [] et typed false. */
+    static Grade readGrade(ResultSet row) throws SQLException {
         UUID sessionId = row.getObject("session_id", UUID.class);
         String scores = row.getString("module_scores");
         JsonNode moduleScores;
@@ -267,7 +298,19 @@ public class AssessmentResource {
                 row.getInt("correct"), row.getInt("total"),
                 row.getObject("submitted_at", OffsetDateTime.class).toString(),
                 sessionId == null ? null : sessionId.toString(), row.getString("activity_id"),
-                row.getString("kind"), moduleScores);
+                row.getString("kind"), moduleScores, row.getInt("pending"), texts(row.getArray("flagged")),
+                row.getBoolean("typed"));
+    }
+
+    private static List<String> texts(java.sql.Array array) throws SQLException {
+        if (array == null) return List.of();
+        try {
+            List<String> values = new ArrayList<>();
+            for (Object value : (Object[]) array.getArray()) values.add(String.valueOf(value));
+            return List.copyOf(values);
+        } finally {
+            array.free();
+        }
     }
 
     private static void validate(QuizRequest request, String requestKey) {
@@ -297,7 +340,13 @@ public class AssessmentResource {
     /** sessionId et activityId, facultatifs et indissociables, rattachent la remise à une séance. */
     public record QuizRequest(String lessonId, Map<String, String> answers, UUID sessionId, String activityId) {}
 
-    /** kind : quiz ou diagnostic. moduleScores : pour un diagnostic, bonnes réponses et total par module. */
+    /**
+     * kind : quiz ou diagnostic. moduleScores : pour un diagnostic, bonnes réponses et total par module.
+     * pending : répétitions orales en attente de validation par le professeur ; flagged : questions « à revoir »
+     * (trois échecs de répétition ou enregistrement refusé) ; typed : remise corrigée question par question
+     * (POST /assessments/exercises, correction lisible par GET /assessments/exercises/{id}).
+     */
     public record Grade(String id, String lessonId, int correct, int total, String submittedAt, String sessionId,
-                        String activityId, String kind, JsonNode moduleScores) {}
+                        String activityId, String kind, JsonNode moduleScores, int pending, List<String> flagged,
+                        boolean typed) {}
 }

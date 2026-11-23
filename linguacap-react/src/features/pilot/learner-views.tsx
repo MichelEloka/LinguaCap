@@ -1,17 +1,22 @@
 /** Écrans « Mes résultats », « Mes messages » et liste des séances du planning de l'élève. */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
-  ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, ChevronDown, ChevronUp, Gauge, ListChecks, Lock, MessageCircle, Sparkles, Target,
-  TrendingDown, TrendingUp, Trophy,
+  ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, ChevronDown, ChevronRight, ChevronUp, Eye, Gauge, ListChecks, Lock,
+  MessageCircle, Sparkles, Target, TrendingDown, TrendingUp, Trophy,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../../components/ui';
-import { Bars, Card, ProgressRing } from '../../design/kit';
+import { Bars, Callout, Card, ProgressRing } from '../../design/kit';
+import { supabase } from '../../integration/api';
 import type { PathSession } from '../../integration/v2';
+import type { MissionSummary } from '../../integration/v4';
+import { MissionBadge, MissionDetailDrawer, useMissions } from './study-mission';
+import { ExerciseReviewDrawer } from './study-review';
 import type { Grade, SessionSummary } from './LearnerSession';
 import { addDays, dayHeading, dayKey, daysFromToday, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
 import {
-  byDate, EmptyScene, gradeTitle, LockedTile, passed, plural, scoreColor, scoreOf, SessionRow, TeacherAvatar, type LearnerMessage,
+  byDate, EmptyScene, flaggedOf, gradeTitle, LockedTile, passed, pendingOf, plural, scoreColor, scoreOf, SessionRow, TeacherAvatar,
+  useLessonTitles, type LearnerMessage,
 } from './learner-common';
 
 const shortDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
@@ -152,9 +157,77 @@ export function PathSessionsByWeek({ sessions, emptyText = 'Vos séances seront 
   );
 }
 
-export function ResultsView({ results, sessions }: { results: Grade[]; sessions: SessionSummary[] }) {
+/**
+ * Jeton de la session en cours : celui reçu de l'écran, sinon celui de Supabase (l'écran « Mes résultats » le reçoit
+ * sans jeton ; les missions et le corrigé en ont besoin).
+ */
+function useAccessToken(given?: string) {
+  const [session, setSession] = useState<string | null>(null);
+  useEffect(() => {
+    if (given || !supabase) return;
+    const { data } = supabase.auth.onAuthStateChange((_event, current) => setSession(current?.access_token ?? null));
+    return () => data.subscription.unsubscribe();
+  }, [given]);
+  return given ?? session;
+}
+
+const missionDay = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
+
+/** « Mes missions » : chaque remise avec son statut ; un clic ouvre le détail, le retour du professeur et la reprise. */
+function MissionsCard({ missions, onOpen }: { missions: MissionSummary[]; onOpen: (id: string) => void }) {
+  const redo = missions.filter((mission) => mission.status === 'reviewed' && mission.decision === 'to_redo').length;
+  const waiting = missions.filter((mission) => mission.status === 'submitted').length;
+  return (
+    <Card flush className="ld-results-missions ms-results-missions" title="Mes missions" icon={<Target size={19} />}
+      description={redo ? `${plural(redo, 'mission', 'missions')} à reprendre` : waiting ? `${plural(waiting, 'mission', 'missions')} en attente de retour`
+        : plural(missions.length, 'mission', 'missions')}>
+      <ul className="kit-list ld-list">
+        {missions.map((mission) => {
+          const reviewed = mission.status === 'reviewed';
+          const meta = mission.status === 'draft' ? 'Brouillon en cours'
+            : reviewed && mission.reviewedAt ? `Retour reçu le ${missionDay.format(new Date(mission.reviewedAt))}`
+            : mission.submittedAt ? `Envoyée le ${missionDay.format(new Date(mission.submittedAt))}` : '';
+          return (
+            <li key={mission.id}>
+              <button type="button" className="kit-list-item ms-results-row" onClick={() => onOpen(mission.id)} aria-label={`Ouvrir la mission ${mission.title}`}>
+                <span className={`ms-results-icon is-${reviewed ? mission.decision ?? 'validated' : mission.status}`} aria-hidden="true"><Target size={18} /></span>
+                <span className="kit-list-main"><strong>{mission.title}</strong><small>{mission.levelCode} · {meta}</small></span>
+                <span className="kit-list-end"><MissionBadge mission={mission} /><ChevronRight size={17} aria-hidden="true" /></span>
+              </button>
+            </li>
+          );
+        })}
+      </ul>
+    </Card>
+  );
+}
+
+export function ResultsView({ results, sessions, token }: { results: Grade[]; sessions: SessionSummary[]; token?: string }) {
+  const accessToken = useAccessToken(token);
+  const { missions } = useMissions(accessToken);
+  const titles = useLessonTitles(accessToken);
+  const [reviewing, setReviewing] = useState<{ id: string; title: string } | null>(null);
+  const [missionOpen, setMissionOpen] = useState<string | null>(null);
+  // Une ligne par mission : la remise la plus récente de chaque activité (séance ou bibliothèque).
+  const mine = (missions ?? []).filter((mission, index, list) =>
+    list.findIndex((other) => other.activityId === mission.activityId && other.sessionId === mission.sessionId) === index);
+  const drawers = (
+    <>
+      {reviewing && accessToken && <ExerciseReviewDrawer attemptId={reviewing.id} token={accessToken} title={reviewing.title} onClose={() => setReviewing(null)} />}
+      {missionOpen && accessToken && <MissionDetailDrawer missionId={missionOpen} token={accessToken} viewer="learner" onClose={() => setMissionOpen(null)} />}
+    </>
+  );
   if (results.length === 0) {
-    return (
+    return mine.length > 0 ? (
+      <div className="ld-results-only lc-stagger">
+        <MissionsCard missions={mine} onOpen={setMissionOpen} />
+        <Card className="ld-empty-card">
+          <EmptyScene art="chart" title="Aucun exercice corrigé" description="Terminez un exercice pour retrouver votre score et suivre vos progrès ici."
+            action={<Link className="btn btn-primary" to="/espace">Aller à mes séances <ArrowRight size={16} aria-hidden="true" /></Link>} />
+        </Card>
+        {drawers}
+      </div>
+    ) : (
       <Card className="ld-empty-card">
         <EmptyScene art="chart" title="Aucun résultat enregistré" description="Terminez un exercice pour retrouver votre score et suivre vos progrès ici."
           action={<Link className="btn btn-primary" to="/espace">Aller à mes séances <ArrowRight size={16} aria-hidden="true" /></Link>} />
@@ -184,8 +257,10 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
     { icon: delta < 0 ? <TrendingDown size={16} aria-hidden="true" /> : <TrendingUp size={16} aria-hidden="true" />, label: 'Dernier score',
       value: <>{last} %{delta !== 0 && <small className={delta > 0 ? 'ld-up' : 'ld-down'}> {delta > 0 ? '+' : '−'}{Math.abs(delta)}</small>}</>, tone: 'violet' },
   ];
+  const flagged = results.filter((grade) => flaggedOf(grade).length > 0).length;
+  const waiting = results.filter((grade) => pendingOf(grade) > 0).length;
   return (
-    <div className="ld-results lc-stagger">
+    <div className={`ld-results lc-stagger${mine.length ? ' has-missions' : ''}`}>
       <Card className="ld-results-summary" title="Synthèse" icon={<Gauge size={19} />}>
         <div className="ld-summary-body">
           <ProgressRing value={average} size={128} stroke={11} color={scoreColor(average)} label={`Score moyen : ${average} %`}>
@@ -213,31 +288,52 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
         <Bars data={bars} height={210} max={100} label="Scores des derniers exercices" />
         <p className="ld-chart-note"><span className="ld-swatch is-pass" aria-hidden="true" /> Réussi <span className="ld-swatch is-retry" aria-hidden="true" /> À reprendre (moins de 70 %)</p>
       </Card>
-      <Card flush className="ld-results-list" title="Tous mes résultats" description={plural(results.length, 'exercice corrigé', 'exercices corrigés')} icon={<ChartNoAxesCombined size={19} />}>
+      {mine.length > 0 && <MissionsCard missions={mine} onOpen={setMissionOpen} />}
+      <Card flush className="ld-results-list" title="Tous mes résultats" description={`${plural(results.length, 'exercice corrigé', 'exercices corrigés')} · touchez un exercice pour voir le corrigé`}
+        icon={<ChartNoAxesCombined size={19} />}>
+        {(flagged > 0 || waiting > 0) && (
+          <div className="ms-results-notice">
+            <Callout tone={flagged ? 'tip' : 'info'} title={flagged ? `${plural(flagged, 'exercice', 'exercices')} avec des répétitions à revoir` : 'Répétitions en attente'}>
+              {flagged ? <>Refaites-les dans la <Link className="text-link" to="/espace/bibliotheque">bibliothèque</Link> : une nouvelle manche efface la marque « À revoir ».</> : null}
+              {waiting ? <> {plural(waiting, 'exercice attend', 'exercices attendent')} la validation de vos répétitions enregistrées par votre professeur.</> : null}
+            </Callout>
+          </div>
+        )}
         <ul className="kit-list ld-list">
           {[...ordered].reverse().map((grade) => {
             const score = scoreOf(grade);
-            const name = gradeTitle(grade, sessions);
+            const name = gradeTitle(grade, sessions, titles);
+            const toReview = flaggedOf(grade).length;
+            const pending = pendingOf(grade);
             return (
               <li key={grade.id}>
-                <div className="kit-list-item ld-result-row">
+                <button type="button" className="kit-list-item ld-result-row ms-result-button" onClick={() => setReviewing({ id: grade.id, title: name.title })}
+                  aria-label={`Voir le corrigé : ${name.title}, ${grade.correct} sur ${grade.total}`}>
                   <ProgressRing value={score} size={46} stroke={5} color={scoreColor(score)} label={`Score : ${score} %`}>
                     <span className="ld-ring-mini">{score}</span>
                   </ProgressRing>
                   <span className="kit-list-main">
                     <strong>{name.title}</strong>
                     <small>{name.context ? <span className="ld-result-context">{name.context} · </span> : ''}<time dateTime={grade.submittedAt}>{formatDayLong(new Date(grade.submittedAt))} à {formatClock(grade.submittedAt)}</time></small>
+                    {(toReview > 0 || pending > 0) && (
+                      <span className="ms-result-tags">
+                        {toReview > 0 && <Badge tone="violet">À revoir</Badge>}
+                        {pending > 0 && <Badge tone="amber">En attente de validation</Badge>}
+                      </span>
+                    )}
                   </span>
                   <span className="kit-list-end">
                     <span className="ld-meter ld-result-meter" aria-hidden="true"><span style={{ width: `${score}%`, background: scoreColor(score) }} /></span>
                     <Badge tone={passed(score) ? 'green' : 'amber'}>{grade.correct} / {grade.total}</Badge>
+                    <span className="ms-result-eye" aria-hidden="true"><Eye size={16} /></span>
                   </span>
-                </div>
+                </button>
               </li>
             );
           })}
         </ul>
       </Card>
+      {drawers}
     </div>
   );
 }

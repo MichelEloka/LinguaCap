@@ -1,0 +1,3367 @@
+{
+  "id": "a1-kurs",
+  "title": "Au cours et à l’université : objets, matières, jours de la semaine",
+  "objective": "Nommer les objets de la salle de classe avec leur article (der, die, das), employer ein, eine, kein et keine au nominatif, former le pluriel des noms courants, parler de ses matières, dire les jours de la semaine et donner l’heure officielle simple (Es ist acht Uhr. Der Kurs beginnt um neun Uhr.).",
+  "prerequisites": [
+    "a1-montants"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "Deutsch im Blick, Kapitel 1 « Ankunft in Würzburg » (An der Uni studieren, Studienfächer, Die Woche) et Kapitel 2 « An der Uni » (Im Unterricht, Auf dem Schreibtisch, Alles über den Computer, Es ist Zeit!) (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre 1001-2 « Das Netz » (A : usage d’Internet et du téléphone en Allemagne, phrases générales avec « man », vocabulaire benutzen, schicken, teilen ; B : frais d’études, coût de la vie et BAföG) et chapitre 2001-3 « Die Bildung » (A : étudier en Allemagne), situations et informations culturelles adaptées au niveau A1 (activités a1-kurs-studium-lesen et a1-kurs-netz-hoeren)",
+    "Deutsch im Blick, Kapitel 2 « An der Uni » (Im Unterricht, Auf dem Schreibtisch, Alles über den Computer) et Kapitel 3 (Aussprache : s, z, j) (COERLL, Université du Texas à Austin) : enregistrements natifs voc_02_03_inclass, voc_02_04_desk, voc_02_05_computer, pho_03_02_das-s, pho_03_03_das-z et pho_03_07_das-j, et photos k02/023-071, k02/042-133, k02/042-134, k02/042-132 et k02/009-033 (CC BY 4.0) : activités a1-kurs-dib-unterricht, a1-kurs-aussprache et a1-kurs-was-ist-das"
+  ],
+  "grammarFocus": [
+    "articles-ein-kein-pluriel"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-kurs.mjs",
+  "vocabulary": [
+    {
+      "id": "tisch",
+      "word": "Tisch",
+      "article": "der",
+      "plural": "Tische",
+      "partOfSpeech": "noun",
+      "translation": "la table",
+      "example": "Der Tisch ist groß.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "stuhl",
+      "word": "Stuhl",
+      "article": "der",
+      "plural": "Stühle",
+      "partOfSpeech": "noun",
+      "translation": "la chaise",
+      "example": "Da ist kein Stuhl.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "kuli",
+      "word": "Kuli",
+      "article": "der",
+      "plural": "Kulis",
+      "partOfSpeech": "noun",
+      "translation": "le stylo à bille",
+      "example": "Hier ist ein Kuli.",
+      "note": "forme courte de der Kugelschreiber",
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "bleistift",
+      "word": "Bleistift",
+      "article": "der",
+      "plural": "Bleistifte",
+      "partOfSpeech": "noun",
+      "translation": "le crayon",
+      "example": "Hier ist ein Bleistift.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "tafel",
+      "word": "Tafel",
+      "article": "die",
+      "plural": "Tafeln",
+      "partOfSpeech": "noun",
+      "translation": "le tableau",
+      "example": "Die Tafel ist digital.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "lampe",
+      "word": "Lampe",
+      "article": "die",
+      "plural": "Lampen",
+      "partOfSpeech": "noun",
+      "translation": "la lampe",
+      "example": "Das ist eine Lampe.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "tuer",
+      "word": "Tür",
+      "article": "die",
+      "plural": "Türen",
+      "partOfSpeech": "noun",
+      "translation": "la porte",
+      "example": "Die Tür ist offen.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "uhr",
+      "word": "Uhr",
+      "article": "die",
+      "plural": "Uhren",
+      "partOfSpeech": "noun",
+      "translation": "l’horloge, la montre ; l’heure (dans « acht Uhr »)",
+      "example": "Die Uhr ist neu. Es ist acht Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "tasche",
+      "word": "Tasche",
+      "article": "die",
+      "plural": "Taschen",
+      "partOfSpeech": "noun",
+      "translation": "le sac",
+      "example": "In meiner Tasche ist ein Handy.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "buch",
+      "word": "Buch",
+      "article": "das",
+      "plural": "Bücher",
+      "partOfSpeech": "noun",
+      "translation": "le livre",
+      "example": "Das Buch ist für alle.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "heft",
+      "word": "Heft",
+      "article": "das",
+      "plural": "Hefte",
+      "partOfSpeech": "noun",
+      "translation": "le cahier",
+      "example": "Das ist kein Heft.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "woerterbuch",
+      "word": "Wörterbuch",
+      "article": "das",
+      "plural": "Wörterbücher",
+      "partOfSpeech": "noun",
+      "translation": "le dictionnaire",
+      "example": "Das ist ein Wörterbuch.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "handy",
+      "word": "Handy",
+      "article": "das",
+      "plural": "Handys",
+      "partOfSpeech": "noun",
+      "translation": "le téléphone portable",
+      "example": "Im Kurs ist mein Handy aus.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "fenster",
+      "word": "Fenster",
+      "article": "das",
+      "plural": "Fenster",
+      "partOfSpeech": "noun",
+      "translation": "la fenêtre",
+      "example": "Das Fenster ist offen.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "kurs",
+      "word": "Kurs",
+      "article": "der",
+      "plural": "Kurse",
+      "partOfSpeech": "noun",
+      "translation": "le cours",
+      "example": "Der Kurs beginnt um neun Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "hausaufgabe",
+      "word": "Hausaufgabe",
+      "article": "die",
+      "plural": "Hausaufgaben",
+      "partOfSpeech": "noun",
+      "translation": "le devoir (à la maison)",
+      "example": "Ich habe heute keine Hausaufgaben.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "bibliothek",
+      "word": "Bibliothek",
+      "article": "die",
+      "plural": "Bibliotheken",
+      "partOfSpeech": "noun",
+      "translation": "la bibliothèque",
+      "example": "Am Freitag lerne ich in der Bibliothek.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "woche",
+      "word": "Woche",
+      "article": "die",
+      "plural": "Wochen",
+      "partOfSpeech": "noun",
+      "translation": "la semaine",
+      "example": "Hier ist meine Woche.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "montag",
+      "word": "Montag",
+      "article": "der",
+      "plural": "Montage",
+      "partOfSpeech": "noun",
+      "translation": "le lundi",
+      "example": "Der Kurs ist am Montag.",
+      "note": "tous les jours sont masculins : am Montag, am Dienstag…",
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "wochenende",
+      "word": "Wochenende",
+      "article": "das",
+      "plural": "Wochenenden",
+      "partOfSpeech": "noun",
+      "translation": "le week-end",
+      "example": "Am Wochenende habe ich keine Kurse.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "beginnen",
+      "word": "beginnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "commencer",
+      "example": "Wir beginnen um neun Uhr.",
+      "note": "der Kurs beginnt",
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "studieren",
+      "word": "studieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire des études",
+      "example": "Was studieren Sie?",
+      "note": "à l’université ; ich studiere Medizin (sans article)",
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "lernen",
+      "word": "lernen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apprendre, réviser",
+      "example": "Wir lernen Deutsch.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "kein",
+      "word": "kein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "other",
+      "translation": "pas de, pas un",
+      "example": "Das ist kein Heft. Das ist keine Lampe.",
+      "note": "nie un nom : kein (masc., neutre), keine (fém., pluriel)",
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "wie-spaet",
+      "word": "Wie spät ist es?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Quelle heure est-il ?",
+      "example": "Wie spät ist es? – Es ist zehn Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-kurs-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : les objets de la salle de cours",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : les objets de la salle de cours",
+        "description": "En allemand, chaque nom a un genre : masculin (der), féminin (die) ou neutre (das). Le genre ne correspond pas toujours au français : la table est féminine en français, mais der Tisch est masculin. Apprenez donc toujours un nom avec son article et son pluriel. Et n’oubliez pas : les noms s’écrivent toujours avec une majuscule.\n\nDER (MASCULIN)\n• der Tisch, die Tische — la table\n• der Stuhl, die Stühle — la chaise\n• der Kuli, die Kulis — le stylo à bille\n• der Bleistift, die Bleistifte — le crayon\n• der Radiergummi, die Radiergummis — la gomme\n• der Rucksack, die Rucksäcke — le sac à dos\n• der Computer, die Computer — l’ordinateur\n• der Kurs, die Kurse — le cours\n\nDIE (FÉMININ)\n• die Tafel, die Tafeln — le tableau\n• die Lampe, die Lampen — la lampe\n• die Tür, die Türen — la porte\n• die Uhr, die Uhren — l’horloge, la montre\n• die Tasche, die Taschen — le sac\n• die Übung, die Übungen — l’exercice\n\nDAS (NEUTRE)\n• das Buch, die Bücher — le livre\n• das Heft, die Hefte — le cahier\n• das Lineal, die Lineale — la règle\n• das Handy, die Handys — le téléphone portable\n• das Fenster, die Fenster — la fenêtre\n• das Regal, die Regale — l’étagère\n• das Wörterbuch, die Wörterbücher — le dictionnaire\n\nLE PLURIEL\nAu pluriel, l’article est toujours die, quel que soit le genre : der Tisch → die Tische, die Lampe → die Lampen, das Buch → die Bücher.\nLa terminaison du pluriel varie. Voici les cas les plus fréquents :\n• -e, parfois avec tréma : der Tisch → die Tische ; der Stuhl → die Stühle\n• -n ou -en : die Lampe → die Lampen ; die Tür → die Türen\n• -er avec tréma : das Buch → die Bücher\n• -s (mots en -i, -o, -y, mots étrangers) : der Kuli → die Kulis ; das Handy → die Handys\n• aucune terminaison (mots en -er, -el) : der Computer → die Computer ; das Fenster → die Fenster\nDans le dictionnaire, le pluriel est noté en abrégé : Tisch, der, -e (die Tische) ; Buch, das, -¨er (die Bücher) ; Computer, der, - (die Computer).\n\nASTUCES POUR LE GENRE\n• Les mots en -ung sont féminins, comme beaucoup de mots en -e : die Übung, die Lampe, die Tasche.\n• Un mot composé prend le genre de son dernier mot : die Wörter + das Buch → das Wörterbuch ; der Kurs + der Raum → der Kursraum.\n\nÉcoutez l’enregistrement et répétez chaque mot avec son article et son pluriel.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-kurs-der-bild",
+          "usage": "illustration",
+          "caption": "der : masculin",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-die-bild",
+          "usage": "illustration",
+          "caption": "die : féminin",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-das-bild",
+          "usage": "illustration",
+          "caption": "das : neutre",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter : singulier et pluriel",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-dib-unterricht",
+      "kind": "lesson",
+      "title": "Écouter et répéter : sur le bureau et en cours (voix natives)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Écouter et répéter : sur le bureau et en cours (voix natives)",
+        "description": "Deux enregistrements de locuteurs natifs, tirés du manuel Deutsch im Blick : d’abord des objets du bureau (Auf dem Schreibtisch), puis le vocabulaire de la classe (Im Unterricht). Chaque nom est dit au singulier, puis au pluriel.\n\nCOMMENT TRAVAILLER\n1. Écoutez une première fois sans lire.\n2. Réécoutez et répétez chaque mot pendant la pause, toujours avec son article : der, die ou das.\n3. Écoutez le pluriel : l’article devient toujours die, et la fin du mot change (ou pas).\n4. Placez bien l’accent : il tombe en général sur la première syllabe (der BLEIstift, die HAUSaufgabe, das KLASsenzimmer). Exceptions entendues : das Examen (e-XA-men) et die Klausur (klau-SUR).\n\nAUF DEM SCHREIBTISCH — SUR LE BUREAU\n• das Arbeitsheft, die Arbeitshefte — le cahier d’exercices\n• der Bleistift, die Bleistifte — le crayon\n• das Buch, die Bücher — le livre\n• die Kreide, die Kreiden — la craie\n• der Kugelschreiber, die Kugelschreiber — le stylo à bille ; en plus court : der Kuli, die Kulis\n• das Kurspaket, die Kurspakete — le dossier de cours (les photocopies du cours)\n\nIM UNTERRICHT — EN COURS\n• das Examen, die Examen — l’examen de fin d’études\n• die Hausaufgabe, die Hausaufgaben — le devoir à la maison\n• die Hausaufgaben machen — faire ses devoirs ; die Hausaufgaben abgeben ou einreichen — rendre ses devoirs\n• die Klasse, die Klassen — la classe (le groupe d’élèves)\n• das Klassenzimmer, die Klassenzimmer — la salle de classe\n• die Klausur, die Klausuren — l’examen écrit, le partiel\n• der Kreis, die Kreise — le cercle ; Bilden wir einen Kreis! — Formons un cercle !\n• der Kurs, die Kurse — le cours\n\nÀ REMARQUER\n• Les pluriels entendus suivent les règles du module : -e (die Bleistifte, die Kurse), -n ou -en (die Klassen, die Klausuren), -er avec tréma (die Bücher), -s (die Kulis), aucune terminaison pour les mots en -er (die Kugelschreiber, die Klassenzimmer).\n• Un mot composé prend le genre de son dernier mot : das Heft → das Arbeitsheft ; die Aufgabe → die Hausaufgabe ; das Zimmer → das Klassenzimmer.\n\nÀ VOUS\nMontrez des objets autour de vous et dites à voix haute : Das ist ein Bleistift. — Das sind zwei Bücher. — Das ist kein Kuli, das ist ein Bleistift. Puis répondez : Hast du heute Hausaufgaben? — Ja, ich habe Hausaufgaben. / Nein, ich habe keine Hausaufgaben.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-kurs-schreibtisch-native",
+          "usage": "audio",
+          "caption": "Auf dem Schreibtisch : écouter et répéter (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-unterricht-native",
+          "usage": "audio",
+          "caption": "Im Unterricht : écouter et répéter (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-uni-flur-foto",
+          "usage": "illustration",
+          "caption": "An der Uni: Raum 8 und Raum 9",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : avant le premier cours",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : avant le premier cours",
+        "description": "Jana et Emre étudient à l’université de Hambourg. Avant leur premier cours d’allemand, ils font connaissance dans la salle de cours. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nJana : Hallo! Ist hier der Deutschkurs A1?\nEmre : Ja, genau. Ich bin Emre. Ich studiere Medizin. Und du?\nJana : Ich heiße Jana und studiere Informatik. Wann beginnt der Kurs?\nEmre : Um neun Uhr. Jetzt ist es acht Uhr fünfzig.\nJana : Oh nein, ich habe kein Kursbuch!\nEmre : Kein Problem. Da hinten ist ein Regal. Die Bücher dort sind für alle.\nJana : Super, danke! Und das hier? Ist das ein Heft?\nEmre : Nein, das ist kein Heft. Das ist ein Wörterbuch. Es ist auch für alle.\nJana : Und wo ist die Tafel?\nEmre : Da vorne. Sie ist digital und ganz neu.\nJana : Und der Lehrer? Wie ist er?\nEmre : Herr Wolf? Er ist sehr nett. Ah, da ist er!\nHerr Wolf : Guten Morgen zusammen! Es ist neun Uhr, wir beginnen. Bitte öffnen Sie das Buch auf Seite zwölf.\n\nGRAMMAIRE : LES ARTICLES AU NOMINATIF\nLe nominatif est le cas du sujet (Der Kurs beginnt um neun Uhr.) et du nom qui suit sein (Das ist ein Wörterbuch.).\n\nL’ARTICLE DÉFINI : LE, LA, LES\n• masculin : der Kurs\n• féminin : die Tafel\n• neutre : das Buch\n• pluriel (tous les genres) : die Bücher\n\nL’ARTICLE INDÉFINI : UN, UNE\n• masculin : ein Kuli\n• féminin : eine Lampe\n• neutre : ein Heft\n• pluriel : pas d’article. Das sind Bücher. — Ce sont des livres.\n\nLA NÉGATION KEIN : PAS DE, PAS UN\nkein se construit comme ein. Il nie un nom qui aurait ein, eine ou pas d’article :\n• Das ist kein Kuli. — Ce n’est pas un stylo.\n• Das ist keine Lampe. — Ce n’est pas une lampe.\n• Das ist kein Heft. — Ce n’est pas un cahier.\n• Das sind keine Bücher. — Ce ne sont pas des livres.\nOn emploie nicht pour nier un verbe ou un adjectif : Der Kurs ist nicht teuer.\n\nER, SIE, ES : LE PRONOM SUIT LE GENRE ALLEMAND\n• der Kurs → er : Der Kurs ist gut. Er ist interessant.\n• die Tafel → sie : Die Tafel ist neu. Sie ist digital.\n• das Wörterbuch → es : Das Wörterbuch ist für alle. Es ist im Regal.\n• die Bücher → sie : Die Bücher sind neu. Sie sind für alle.\nAttention : der Tisch (la table) se remplace par er, et das Fenster (la fenêtre) par es.\n\nÀ SAVOIR\nAprès haben, les mots masculins changent de forme (Ich habe einen Kuli) : vous le verrez dans un prochain module. Pour l’instant, employez kein et keine après sein, ou après haben avec des mots féminins, neutres ou pluriels : Ich habe kein Kursbuch. Ich habe keine Tasche.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-kurs-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : avant le premier cours",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-woche",
+      "kind": "lesson",
+      "title": "Découvrir : la semaine, l’heure et les matières",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : la semaine, l’heure et les matières",
+        "description": "LES JOURS DE LA SEMAINE (DIE WOCHENTAGE)\n• der Montag — lundi\n• der Dienstag — mardi\n• der Mittwoch — mercredi\n• der Donnerstag — jeudi\n• der Freitag — vendredi\n• der Samstag — samedi (dans le nord de l’Allemagne : der Sonnabend)\n• der Sonntag — dimanche\n• das Wochenende — le week-end\nTous les jours sont masculins. Heute ist Montag. — Aujourd’hui, c’est lundi.\nPour dire « lundi » (un jour précis), on emploie am : am Montag, am Freitag, am Wochenende.\n\nL’HEURE OFFICIELLE\nDans les horaires de cours ou de train et à la radio, on compte de 0 à 24 heures :\n• Wie spät ist es? / Wie viel Uhr ist es? — Quelle heure est-il ?\n• Es ist acht Uhr. — Il est 8 h.\n• Es ist vierzehn Uhr. — Il est 14 h.\n• Es ist neun Uhr dreißig. — Il est 9 h 30.\n• Es ist zwanzig Uhr fünfzehn. — Il est 20 h 15.\nOn dit l’heure, puis Uhr, puis les minutes : 10:45 = zehn Uhr fünfundvierzig. Attention : 1:00 = ein Uhr (et non « eins Uhr »).\n\nQUAND ? AM + JOUR, UM + HEURE\n• Wann beginnt der Kurs? — Quand le cours commence-t-il ?\n• Um wie viel Uhr? — À quelle heure ?\n• Der Kurs beginnt am Montag um neun Uhr. — Le cours commence lundi à 9 h.\n• Der Kurs ist von neun bis zwölf Uhr. — Le cours a lieu de 9 h à 12 h.\nOn dit d’abord le jour, puis l’heure : am Dienstag um zehn Uhr.\n\nLES MATIÈRES (DIE STUDIENFÄCHER)\n• die Mathematik — les mathématiques\n• die Informatik — l’informatique\n• die Biologie — la biologie\n• die Chemie — la chimie\n• die Medizin — la médecine\n• die Geschichte — l’histoire\n• die Musik — la musique\n• die Kunst — l’art\n• die Wirtschaft — l’économie\n• die Germanistik — les études d’allemand\n• Jura — le droit (toujours sans article)\nLes noms de matières en -ik et en -ie sont féminins. Mais pour dire ce qu’on étudie, on n’emploie pas d’article : Ich studiere Medizin. Mein Lieblingsfach ist Mathematik.\n\nSTUDIEREN OU LERNEN ?\n• studieren : faire des études, à l’université : Ich studiere Biologie in Hamburg.\n• lernen : apprendre, réviser : Ich lerne Deutsch. Heute lerne ich für die Klausur (l’examen).\n\nÀ VOUS\nÉcoutez et répétez les jours, les heures et les matières. Puis dites à voix haute : Heute ist … — Es ist … Uhr. — Mein Deutschkurs ist am … um … Uhr. — Ich studiere … / Ich lerne …",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-kurs-uhr-bild",
+          "usage": "illustration",
+          "caption": "Es ist acht Uhr, neun Uhr, zwölf Uhr, achtzehn Uhr",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-faecher-bild",
+          "usage": "illustration",
+          "caption": "Six matières",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-woche-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter : jours, heures, matières",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : articles, ein, kein et pluriel",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : articles, ein, kein et pluriel",
+        "description": "Choisissez ou écrivez la forme qui complète chaque phrase. Rappel : der (masculin), die (féminin), das (neutre), die (pluriel) ; ein et kein (masculin et neutre), eine et keine (féminin), keine (pluriel) ; am + jour, um + heure ; le pronom suit le genre allemand : der → er, die → sie, das → es.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "… Fenster ist offen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das",
+              "correct": true
+            }
+          ],
+          "explanation": "Das Fenster est neutre, même si « la fenêtre » est féminin en français : il faut apprendre chaque nom avec son article. Die serait le féminin ou le pluriel.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was ist das? — Das ist … Lampe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "kein",
+              "correct": false
+            }
+          ],
+          "explanation": "Lampe est féminin (die Lampe) : « une » se dit eine. Ein va avec un nom masculin ou neutre, et kein nierait la phrase.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Ist das ein Heft? — Nein, das ist … Heft. Das ist ein Buch.",
+          "options": [
+            {
+              "id": "a",
+              "label": "keine",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nicht",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kein",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "keinen",
+              "correct": false
+            }
+          ],
+          "explanation": "Kein nie un nom masculin ou neutre qui aurait ein : ein Heft → kein Heft. Keine va avec un féminin ou un pluriel, et nicht ne se place pas devant un nom de cette façon.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quel est le pluriel de « das Buch » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Buchs",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Buche",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "das Bücher",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Bücher",
+              "correct": true
+            }
+          ],
+          "explanation": "Au pluriel, l’article est toujours die, et Buch prend -er avec tréma : die Bücher. « Das Bücher » garde à tort l’article du singulier.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Der Kurs beginnt … Montag … neun Uhr.",
+          "options": [
+            {
+              "id": "a",
+              "label": "am … um",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "um … am",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "im … um",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "am … am",
+              "correct": false
+            }
+          ],
+          "explanation": "On dit am + jour et um + heure : am Montag um neun Uhr. Le jour vient d’abord, puis l’heure.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Wie ist der Tisch? — … ist groß und schön.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es",
+              "correct": false
+            }
+          ],
+          "explanation": "Le pronom suit le genre allemand, pas le français : der Tisch est masculin, donc er. Sie remplacerait un nom féminin (die Tafel) et es un nom neutre (das Buch).",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez avec l’article défini : der, die ou das.",
+          "text": "[[1]] Tafel ist neu, [[2]] Fenster ist offen und [[3]] Stuhl ist kaputt.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Die"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "das"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "Le genre allemand ne suit pas le français : die Tafel (le tableau) est féminin, das Fenster (la fenêtre) neutre et der Stuhl (la chaise) masculin. Apprenez chaque nom avec son article."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Dans la chambre de Chloé, il y a une lampe, mais pas de chaise, et elle n’a pas de dictionnaire. Complétez avec eine, kein ou keine.",
+          "text": "Im Zimmer ist [[1]] Lampe, aber [[2]] Stuhl. Und ich habe [[3]] Wörterbuch.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "eine"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kein"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "kein"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Die Lampe est féminin : eine Lampe. Der Stuhl et das Wörterbuch se nient avec kein, sans -e. Keine irait avec un féminin ou un pluriel (keine Bücher)."
+        },
+        {
+          "id": "q9",
+          "type": "match",
+          "prompt": "Associez chaque nom à son pluriel.",
+          "pairs": [
+            {
+              "left": "der Tisch",
+              "right": "die Tische"
+            },
+            {
+              "left": "der Stuhl",
+              "right": "die Stühle"
+            },
+            {
+              "left": "die Lampe",
+              "right": "die Lampen"
+            },
+            {
+              "left": "das Buch",
+              "right": "die Bücher"
+            },
+            {
+              "left": "das Handy",
+              "right": "die Handys"
+            },
+            {
+              "left": "das Fenster",
+              "right": "die Fenster"
+            }
+          ],
+          "explanation": "Au pluriel, l’article est toujours die. Les terminaisons varient : -e (Tische), -e avec tréma (Stühle), -n (Lampen), -er avec tréma (Bücher), -s (Handys) ou aucune pour les mots en -er (Fenster)."
+        },
+        {
+          "id": "q10",
+          "type": "fill",
+          "prompt": "Marta décrit sa salle de cours. Mettez les noms entre parenthèses au pluriel.",
+          "text": "Im Kursraum sind zwölf [[1]], sechs [[2]] und zwei [[3]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Stühle"
+              ],
+              "size": 8,
+              "hint": "Stuhl"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Tische"
+              ],
+              "size": 8,
+              "hint": "Tisch"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Fenster"
+              ],
+              "size": 8,
+              "hint": "Fenster"
+            }
+          ],
+          "explanation": "Der Stuhl prend -e et un tréma (Stühle), der Tisch prend -e (Tische), et das Fenster ne change pas, comme beaucoup de noms masculins et neutres en -er. Après un nombre, le nom est au pluriel, sans article."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-kurs-lesen",
+      "kind": "exercise",
+      "title": "Lire : la semaine de Chloé à Vienne",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Chloés Woche in Wien",
+        "description": "Chloé vient de Nantes. Elle passe un semestre à l’université de Vienne, en Autriche. Elle écrit un e-mail à son amie allemande Lisa. Lisez l’e-mail, puis répondez aux questions.\n\nLiebe Lisa,\nwie geht's? Ich bin jetzt in Wien und studiere hier Biologie. Die Uni ist groß und sehr schön!\nHier ist meine Woche:\nAm Montag habe ich um acht Uhr Chemie. Das ist sehr früh!\nAm Dienstag und am Donnerstag habe ich Deutsch, von neun bis zwölf Uhr. Die Lehrerin heißt Frau Gruber. Sie ist sehr nett. Wir sind zwölf im Kurs.\nAm Mittwoch habe ich Biologie, von dreizehn bis siebzehn Uhr. Das Labor ist super: Die Mikroskope sind ganz neu.\nAm Freitag habe ich keine Kurse. Dann lerne ich in der Bibliothek.\nMein Zimmer im Studentenwohnheim ist klein. Da sind ein Bett, ein Tisch und eine Lampe, aber kein Stuhl. Das ist ein Problem!\nUnd du? Wie ist dein Semester?\nLiebe Grüße\nChloé",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Was studiert Chloé?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Chemie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Deutsch.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Biologie.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Medizin.",
+              "correct": false
+            }
+          ],
+          "explanation": "Chloé écrit « Ich bin jetzt in Wien und studiere hier Biologie ». La chimie et l’allemand sont des cours de sa semaine, pas sa matière d’études.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Wann hat Chloé Deutsch?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am Montag und am Mittwoch.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Am Dienstag und am Donnerstag.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nur am Freitag.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Am Dienstag und am Freitag.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Dienstag und am Donnerstag habe ich Deutsch, von neun bis zwölf Uhr. » Le lundi, Chloé a chimie ; le mercredi, biologie ; le vendredi, aucun cours.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Um wie viel Uhr hat Chloé am Montag Chemie?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um acht Uhr.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Um neun Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um zwölf Uhr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Um dreizehn Uhr.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Montag habe ich um acht Uhr Chemie. Das ist sehr früh! » Neun et zwölf Uhr sont les horaires du cours d’allemand, dreizehn Uhr le début de la biologie.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que fait Chloé le vendredi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle a cours de biologie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle a cours d’allemand.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elle n’a pas cours et elle étudie à la bibliothèque.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Elle travaille dans un café.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Freitag habe ich keine Kurse. Dann lerne ich in der Bibliothek. » Keine Kurse veut dire « pas de cours » ; lernen, c’est étudier, réviser.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Qu’est-ce qui manque dans la chambre de Chloé ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une lampe.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Une table.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un lit.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Une chaise.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Da sind ein Bett, ein Tisch und eine Lampe, aber kein Stuhl. » Kein Stuhl : il n’y a pas de chaise. Les trois autres meubles sont dans la chambre.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-kurs-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : cinq scènes à l’université",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "An der Uni",
+        "description": "Écoutez les cinq petites scènes (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Soyez attentif aux jours, aux heures et aux nombres. Les deux dernières questions sont des dictées : écoutez la phrase et écrivez-la, avec les majuscules des noms. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Scène 1 : de quoi Paul a-t-il besoin ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "D’un crayon.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "D’une gomme.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "D’une règle.",
+              "correct": true
+            }
+          ],
+          "explanation": "Paul dit « Ich brauche ein Lineal für die Übung » : das Lineal est la règle. Sara lui propose un crayon (ein Bleistift), mais Paul en a déjà un.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Scène 2 : quelle heure est-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "10 h 50.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "10 h 15.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "15 h 10.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "11 h.",
+              "correct": false
+            }
+          ],
+          "explanation": "Tobias répond « Es ist zehn Uhr fünfzehn » : on dit l’heure, puis Uhr, puis les minutes. 11 h est l’heure du cours de Lina.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Scène 3 : quand a lieu le cours d’allemand cette semaine ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mercredi à 14 h.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mercredi à 12 h.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jeudi à 12 h.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Jeudi à 14 h.",
+              "correct": true
+            }
+          ],
+          "explanation": "Le secrétariat annonce « nicht am Mittwoch, sondern am Donnerstag, um vierzehn Uhr » : nicht … sondern veut dire « pas … mais ». Zwölf est le numéro de la nouvelle salle, pas l’heure.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Scène 4 : qu’étudie David ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Les mathématiques.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "La musique.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’informatique.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "La médecine.",
+              "correct": false
+            }
+          ],
+          "explanation": "David dit « Ich studiere Mathematik ». C’est Nina qui étudie la musique (« Ich studiere Musik »).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Scène 5 : combien de chaises y a-t-il dans la salle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "16 chaises.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "14 chaises.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "12 chaises.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "4 chaises.",
+              "correct": false
+            }
+          ],
+          "explanation": "Frau Brandt constate « wir sind heute sechzehn Personen. Aber hier sind nur zwölf Stühle! » : 16 personnes pour 12 chaises. Vierzehn est le numéro de l’autre salle.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase sur l’horaire du cours et écrivez-la.",
+          "accept": [
+            "Der Kurs beginnt am Montag um neun Uhr."
+          ],
+          "voice": "frau",
+          "explanation": "On dit am + jour, puis um + heure : am Montag um neun Uhr. Kurs, Montag et Uhr sont des noms : ils prennent une majuscule. Le nombre peut s’écrire en chiffres (9).",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase sur le matériel et écrivez-la.",
+          "accept": [
+            "Ich habe kein Wörterbuch, aber zwei Hefte."
+          ],
+          "voice": "mann",
+          "explanation": "Das Wörterbuch est neutre : on le nie avec kein. Hefte est le pluriel de das Heft (-e). N’oubliez pas le ö de Wörterbuch ni la majuscule des noms.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-kurs-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Cinq petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-bleistift-bild",
+          "usage": "illustration",
+          "alt": "Un crayon à papier.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-radiergummi-bild",
+          "usage": "illustration",
+          "alt": "Une gomme à effacer.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-lineal-bild",
+          "usage": "illustration",
+          "alt": "Une règle graduée.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-hoeren-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-was-ist-das",
+      "kind": "exercise",
+      "title": "Was ist das ? Dessins, photos et voix native",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Was ist das? — Le bureau et l’ordinateur",
+        "description": "Regardez les dessins et les photos du manuel Deutsch im Blick et choisissez la bonne réponse. Pour les questions 2 à 4, écoutez l’enregistrement natif « Alles über den Computer » : chaque mot est dit au singulier, puis au pluriel. Vous pouvez réécouter autant de fois que nécessaire. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• der Bildschirm — l’écran\n• die Digitalkamera — l’appareil photo numérique\n• das Dokument — le document\n• der Drucker — l’imprimante\n• die Buchhandlung — la librairie\n• das Regal — l’étagère\n\nRAPPEL\n• un objet : Das ist ein Tisch. / Das ist eine Lampe.\n• plusieurs objets : Das sind Bücher.\n• la négation : Das ist kein Heft. / Das ist keine Lampe.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Regardez le dessin. Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist ein Handy.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist ein Computer.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das ist eine Lampe.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das ist ein Buch.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le dessin montre un écran, un clavier et une souris : c’est un ordinateur, der Computer. Le nom est masculin, d’où ein Computer.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoutez l’enregistrement. Quel est le pluriel de « der Computer » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Computers",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Computern",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Computer",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die Computere",
+              "correct": false
+            }
+          ],
+          "explanation": "Les noms masculins en -er ne prennent pas de terminaison au pluriel : der Computer → die Computer. Seul l’article change ; ni -s ni -n ne s’ajoutent.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoutez encore. Quel est le pluriel de « der Bildschirm » (l’écran) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Bildschirme",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Bildschirms",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Bildschirmen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Bildschirm",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « der Bildschirm, die Bildschirme » : pluriel en -e, comme der Tisch → die Tische.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoutez encore. Quel est le pluriel de « die Digitalkamera » (l’appareil photo numérique) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Digitalkameren",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Digitalkameras",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Digitalkamera",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Digitalkameraen",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « die Digitalkamera, die Digitalkameras » : les mots en -a et beaucoup de mots étrangers font leur pluriel en -s (die Kameras, die Handys).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Regardez le dessin. Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist ein Lampe.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist eine Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist eine Lampe.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das ist ein Kuli.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lampe est féminin (die Lampe) : l’article indéfini est donc eine. « Ein Lampe » est faux, car ein ne s’emploie qu’avec un nom masculin ou neutre.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Regardez le dessin. Ist das ein Stuhl?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, das ist ein Stuhl.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, das ist keine Stuhl. Das ist ein Tisch.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nein, das ist nicht Stuhl. Das ist ein Tisch.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Nein, das ist kein Stuhl. Das ist ein Tisch.",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour nier un nom précédé de ein, on emploie kein : der Stuhl est masculin, donc kein Stuhl. Keine va avec un nom féminin, et nicht ne nie pas un nom de cette façon.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Regardez la photo, prise dans une librairie. Was ist im Regal?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das sind Wörterbücher.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das sind Hefte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das sind Kulis.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das sind Lampen.",
+              "correct": false
+            }
+          ],
+          "explanation": "Les étiquettes disent « Wörterbücher » : das Wörterbuch fait son pluriel comme das Buch, en -er avec tréma. Après « Das sind », le pluriel s’emploie sans article.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-kurs-computer-native",
+          "usage": "audio",
+          "caption": "Alles über den Computer (voix native)",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-computer-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-lampe-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-tisch-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q6",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-woerterbuecher-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q7",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-studium-lesen",
+      "kind": "exercise",
+      "title": "Lire : étudier en Allemagne, ça coûte cher ?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Studieren in Deutschland — Ist das teuer?",
+        "description": "Sur un forum d’étudiants, Karim pose une question sur le coût des études en Allemagne. Inès, une étudiante française qui étudie l’informatique à Leipzig, lui répond. Lisez la question et la réponse, puis répondez aux questions.\n\nKARIM: Hallo! Nächstes Jahr studiere ich in Deutschland. Ist das teuer?\n\nINÈS: Hallo Karim! Ich komme aus Lyon und studiere Informatik in Leipzig. Nein, das Studium ist nicht teuer. An vielen Unis in Deutschland bezahlt man keine Studiengebühren. Nur der Semesterbeitrag kostet Geld: An meiner Uni sind das 250 Euro pro Semester. Das Semesterticket ist auch dabei. Ich fahre also mit dem Bus und mit der Straßenbahn, und das kostet nichts extra!\nMein Zimmer im Studentenwohnheim ist klein, aber schön. Es kostet 310 Euro im Monat. Mittags esse ich in der Mensa. Ein Essen kostet nur 3 Euro. Die Bücher für das Studium kaufe ich nicht. Ich lese sie in der Bibliothek. Sie ist von Montag bis Samstag offen, von 8 bis 22 Uhr.\nIch habe kein Auto, und ich bekomme kein BAföG. Am Freitag und am Samstag arbeite ich in einem Café. Viele Studenten in Deutschland arbeiten. Manche bekommen auch BAföG: Das ist Geld vom Staat für Studenten.\nViel Glück!\nInès\n\nMOTS UTILES\n• die Studiengebühren — les frais de scolarité\n• der Semesterbeitrag — la cotisation semestrielle (à payer chaque semestre)\n• das Semesterticket — l’abonnement de transport des étudiants\n• dabei — compris, inclus\n• die Straßenbahn — le tramway\n• das Studentenwohnheim — la résidence universitaire\n• die Mensa — le restaurant universitaire\n• der Staat — l’État\n• man — on ; le verbe se conjugue comme avec er, sie, es : Man fährt mit dem Bus. — On prend le bus.\n\nTexte adapté de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Selon Inès, que ne paie-t-on pas dans beaucoup d’universités allemandes ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La cotisation semestrielle.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Les frais de scolarité.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Les repas au restaurant universitaire.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "La chambre en résidence universitaire.",
+              "correct": false
+            }
+          ],
+          "explanation": "Inès écrit « An vielen Unis in Deutschland bezahlt man keine Studiengebühren ». La cotisation semestrielle (der Semesterbeitrag), elle, se paie : 250 euros.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Qu’est-ce qui est compris dans la cotisation semestrielle d’Inès ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Les livres pour les études.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Les repas à la Mensa.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le transport en bus et en tramway.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "La chambre en résidence universitaire.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Das Semesterticket ist auch dabei » : l’abonnement de bus et de tramway est compris dans la cotisation. Les livres, Inès les lit à la bibliothèque.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Wie viel kostet das Zimmer von Inès?",
+          "options": [
+            {
+              "id": "a",
+              "label": "250 Euro pro Semester.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "310 Euro pro Semester.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "310 Euro im Monat.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "3 Euro am Tag.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Es kostet 310 Euro im Monat » : im Monat veut dire « par mois ». 250 euros par semestre, c’est la cotisation ; 3 euros, le prix d’un repas.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wann ist die Bibliothek offen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Von Montag bis Freitag, von 8 bis 22 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Von Montag bis Samstag, von 8 bis 12 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jeden Tag, von 8 bis 22 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Von Montag bis Samstag, von 8 bis 22 Uhr.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Sie ist von Montag bis Samstag offen, von 8 bis 22 Uhr. » La bibliothèque est donc fermée le dimanche, et elle ferme à 22 h, pas à midi.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wann arbeitet Inès im Café?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am Freitag und am Samstag.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Am Samstag und am Sonntag.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Von Montag bis Freitag.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Am Freitag und am Sonntag.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Freitag und am Samstag arbeite ich in einem Café. » Inès ne parle pas du dimanche.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Qu’est-ce que le BAföG ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un abonnement pour le bus et le tramway.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Une chambre en résidence universitaire.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un repas bon marché à la Mensa.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "De l’argent de l’État pour des étudiants.",
+              "correct": true
+            }
+          ],
+          "explanation": "Inès explique « Das ist Geld vom Staat für Studenten » : der Staat est l’État. L’abonnement de transport, c’est le Semesterticket.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-kurs-studium-bild",
+          "usage": "illustration",
+          "caption": "La vie étudiante en Allemagne",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-netz-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : un sondage sur Internet à l’université",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Umfrage: Wie benutzt ihr das Netz?",
+        "description": "La radio étudiante de l’université de Hambourg fait un petit sondage sur le campus : comment les gens utilisent-ils Internet et leur téléphone portable ? Écoutez les trois interviews (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Soyez attentif aux jours et aux heures. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• das Netz, das Internet — Internet\n• benutzen — utiliser\n• schicken — envoyer\n• teilen — partager\n• die Nachricht, die Nachrichten — le message\n• vor allem — surtout\n• aus — éteint : Das Handy ist aus.\n• der Dozent, die Dozentin — l’enseignant, l’enseignante à l’université\n• ihr — vous (plusieurs personnes que l’on tutoie) : Wie benutzt ihr das Netz?\n• man — on ; le verbe se conjugue comme avec er, sie, es : In Deutschland benutzt man …\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Que fait Jonas tous les jours avec son téléphone ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il regarde des vidéos en allemand.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Il écoute des podcasts.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il envoie beaucoup de messages.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Il lit ses e-mails de travail.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jonas dit « Ich schicke jeden Tag viele Nachrichten » : schicken veut dire « envoyer » et die Nachricht « le message ». Les vidéos et les podcasts, c’est Amira.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quand le téléphone de Jonas est-il éteint ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le week-end.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Pendant le cours.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le soir.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dans le bus.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Aber im Kurs ist mein Handy aus » : aus veut dire « éteint ». C’est Herr Becker qui éteint son téléphone le week-end.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Wann sieht Amira Videos auf Deutsch?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Von 12 bis 22 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Von 20 bis 21 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Von 22 bis 24 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Von 20 bis 22 Uhr.",
+              "correct": true
+            }
+          ],
+          "explanation": "Amira dit « von zwanzig bis zweiundzwanzig Uhr », de 20 h à 22 h. Dans zweiundzwanzig, l’unité vient d’abord : zwei + zwanzig = 22.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was macht Amira im Bus?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hört Podcasts.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie schickt Nachrichten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sieht Videos.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie liest ein Buch.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Und im Bus höre ich Podcasts » : hören veut dire « écouter ». Les vidéos en allemand, Amira les regarde le soir.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Que partagent Amira et les étudiants de son séminaire dans leur groupe en ligne ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Des podcasts.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Des vidéos en allemand.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Des photos du tableau.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Leurs numéros de téléphone.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Dort teilen wir Fotos von der Tafel » : teilen veut dire « partager » et die Tafel « le tableau ».",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Que dit Herr Becker de son samedi et de son dimanche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il travaille toute la journée sur l’ordinateur.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Il envoie des e-mails à ses étudiants.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il regarde des vidéos sur Internet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Son téléphone est éteint : pas d’Internet, pas d’e-mails.",
+              "correct": true
+            }
+          ],
+          "explanation": "Herr Becker dit « am Samstag und am Sonntag ist mein Handy aus. Kein Internet, keine E-Mails! » Il travaille sur l’ordinateur seulement du lundi au vendredi.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-kurs-netz-audio-v3",
+          "usage": "audio",
+          "caption": "Campus-Radio Hamburg : trois interviews",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-netz-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : la salle, l’heure et les études",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : la salle, l’heure et les études",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Attention à trois sons : s devant une voyelle se dit comme un z français (Samstag), z se dit « ts » (zehn), et st en début de mot se dit « cht » (studiere).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-kurs-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Nein, das ist kein Heft. Das ist das Kursbuch.",
+          "accept": [
+            "Nein, das ist kein Heft. Das ist das Kursbuch."
+          ],
+          "explanation": "Das Heft et das Kursbuch sont neutres : kein Heft, das Kursbuch. Le h de Heft se prononce comme un souffle, et le ch de Kursbuch, après u, se forme au fond de la gorge.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Der Kurs beginnt am Montag um neun Uhr.",
+          "accept": [
+            "Der Kurs beginnt am Montag um neun Uhr.",
+            "Der Kurs beginnt am Montag um 9 Uhr."
+          ],
+          "explanation": "Accentuez les informations : MONtag, NEUN Uhr. Dans neun, eu se dit « oï » ; dans Uhr, le u est long.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie spät ist es? Es ist zehn Uhr.",
+          "accept": [
+            "Wie spät ist es? Es ist zehn Uhr.",
+            "Wie spät ist es? Es ist 10 Uhr."
+          ],
+          "explanation": "Spät commence par « chp » et contient un ä long, proche de « è ». Zehn commence par « ts », jamais par un z français.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich studiere Informatik und lerne Deutsch.",
+          "accept": [
+            "Ich studiere Informatik und lerne Deutsch."
+          ],
+          "explanation": "Studiere commence par « cht » : CHTOU-dié-re. Dans Deutsch, eu se dit « oï » et tsch se dit « tch ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Am Samstag habe ich keine Kurse.",
+          "accept": [
+            "Am Samstag habe ich keine Kurse."
+          ],
+          "explanation": "Le s de Samstag, devant une voyelle, se prononce comme un z français : « zams-tak ». Keine Kurse : pluriel, donc keine.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Bücher sind für alle.",
+          "accept": [
+            "Die Bücher sind für alle."
+          ],
+          "explanation": "Bücher et für contiennent un ü, qui se prononce comme le u français de « lune ». Sans tréma, on entendrait « ou » : Buch, au singulier.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-sprechen",
+      "kind": "mission",
+      "title": "Mission : présenter mon cours et ma semaine",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : présenter mon cours et ma semaine",
+        "description": "Un nouvel ami germanophone veut savoir comment se passe votre semaine. Écoutez d’abord Marta, qui parle de son cours d’allemand.\n\nMODÈLE\nHallo! Ich heiße Marta. Ich komme aus Spanien und studiere Architektur in Berlin. Mein Deutschkurs ist am Montag und am Mittwoch, von achtzehn bis zwanzig Uhr. Der Kursraum ist klein, aber schön. Da sind zwölf Stühle, sechs Tische und eine Tafel. In meiner Tasche sind ein Kursbuch, zwei Hefte, drei Kulis und ein Handy. Ich habe kein Wörterbuch aus Papier: Mein Wörterbuch ist eine App!\n\nPOUR VOUS AIDER\n• Ich studiere … / Ich lerne Deutsch. / Ich arbeite in …\n• Mein Deutschkurs ist am … von … bis … Uhr.\n• Der Kursraum ist … Da sind … Stühle, … Tische und …\n• In meiner Tasche sind …\n• Da ist kein … / Da ist keine … / Ich habe kein …",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-kurs-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Marta parle de son cours",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez votre cours en 45 à 60 secondes, comme Marta : vos études ou votre travail, les jours et les heures du cours, la salle (ce qu’il y a, ce qui manque) et ce qu’il y a dans votre sac. Dites chaque nom avec son article ou au pluriel.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à un ami un message de six à huit phrases, comme Chloé : votre semaine (au moins trois jours avec des heures), vos cours ou votre travail, et votre salle de cours ou votre chambre.",
+          "maxChars": 900,
+          "minWords": 40
+        },
+        "checklist": [
+          "J’ai donné au moins trois jours avec am et des heures avec um ou von … bis.",
+          "J’ai décrit la salle ou ma chambre avec au moins deux noms au pluriel (Stühle, Tische…).",
+          "J’ai employé kein ou keine pour dire ce qui manque.",
+          "Chaque nom commence par une majuscule et a le bon article (der, die, das, ein, eine).",
+          "Dans chaque phrase, le verbe conjugué est en deuxième position."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-kurs-der-bild",
+      "kind": "image",
+      "title": "Objets masculins : der",
+      "alt": "Quatre objets masculins : un crayon, un stylo à bille, une gomme et un sac à dos.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "pencil",
+            "label": "der Bleistift"
+          },
+          {
+            "icon": "pen",
+            "label": "der Kuli"
+          },
+          {
+            "icon": "eraser",
+            "label": "der Radiergummi"
+          },
+          {
+            "icon": "backpack",
+            "label": "der Rucksack"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-die-bild",
+      "kind": "image",
+      "title": "Objets féminins : die",
+      "alt": "Quatre objets féminins : un tableau sur un chevalet, une lampe, une porte ouverte et une horloge.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "presentation",
+            "label": "die Tafel"
+          },
+          {
+            "icon": "lamp",
+            "label": "die Lampe"
+          },
+          {
+            "icon": "door-open",
+            "label": "die Tür"
+          },
+          {
+            "icon": "clock",
+            "label": "die Uhr"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-das-bild",
+      "kind": "image",
+      "title": "Objets neutres : das",
+      "alt": "Quatre objets neutres : un livre ouvert, un cahier, une règle et un téléphone portable.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "book-open",
+            "label": "das Buch"
+          },
+          {
+            "icon": "notebook",
+            "label": "das Heft"
+          },
+          {
+            "icon": "ruler",
+            "label": "das Lineal"
+          },
+          {
+            "icon": "smartphone",
+            "label": "das Handy"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les objets de la salle de cours",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Tisch, die Tische."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stuhl, die Stühle."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuli, die Kulis."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bleistift, die Bleistifte."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Radiergummi, die Radiergummis."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Rucksack, die Rucksäcke."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Computer, die Computer."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tafel, die Tafeln."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lampe, die Lampen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tür, die Türen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Uhr, die Uhren."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tasche, die Taschen."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Buch, die Bücher."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Heft, die Hefte."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Lineal, die Lineale."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Handy, die Handys."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fenster, die Fenster."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wörterbuch, die Wörterbücher."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-dialog-bild",
+      "kind": "image",
+      "title": "Avant le premier cours",
+      "alt": "Une salle de classe : Jana demande « Ist das ein Heft? », Emre répond « Nein, das ist kein Heft. » et le professeur, Herr Wolf, dit « Es ist neun Uhr. ». On voit un livre, un dictionnaire, un tableau et une horloge qui indique 9 heures.",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Jana",
+            "say": "Ist das ein Heft?"
+          },
+          {
+            "name": "Emre",
+            "say": "Nein, das ist kein Heft."
+          },
+          {
+            "name": "Herr Wolf",
+            "say": "Es ist neun Uhr."
+          }
+        ],
+        "items": [
+          "book-open",
+          "book-a",
+          "presentation",
+          "clock9"
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : avant le premier cours",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Hallo! Ist hier der Deutschkurs A1?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Ja, genau. Ich bin Emre. Ich studiere Medizin. Und du?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Ich heiße Jana und studiere Informatik. Wann beginnt der Kurs?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Um neun Uhr. Jetzt ist es acht Uhr fünfzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Oh nein, ich habe kein Kursbuch!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Kein Problem. Da hinten ist ein Regal. Die Bücher dort sind für alle."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Super, danke! Und das hier? Ist das ein Heft?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Nein, das ist kein Heft. Das ist ein Wörterbuch. Es ist auch für alle."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Und wo ist die Tafel?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Da vorne. Sie ist digital und ganz neu."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Und der Lehrer? Wie ist er?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Herr Wolf? Er ist sehr nett. Ah, da ist er!"
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Wolf",
+          "text": "Guten Morgen zusammen! Es ist neun Uhr, wir beginnen. Bitte öffnen Sie das Buch auf Seite zwölf."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-uhr-bild",
+      "kind": "image",
+      "title": "L’heure",
+      "alt": "Quatre horloges : la première indique 8 heures, la deuxième 9 heures, la troisième midi et la quatrième 6 heures, c’est-à-dire 18 heures.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "clock8",
+            "label": "Es ist acht Uhr."
+          },
+          {
+            "icon": "clock9",
+            "label": "Es ist neun Uhr."
+          },
+          {
+            "icon": "clock12",
+            "label": "Es ist zwölf Uhr."
+          },
+          {
+            "icon": "clock6",
+            "label": "Es ist achtzehn Uhr."
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-faecher-bild",
+      "kind": "image",
+      "title": "Les matières",
+      "alt": "Six vignettes : le signe sigma pour les mathématiques, un ordinateur portable pour l’informatique, un microscope pour la biologie, un stéthoscope pour la médecine, un bâtiment à colonnes pour l’histoire et une note de musique.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "sigma",
+            "label": "die Mathematik"
+          },
+          {
+            "icon": "laptop",
+            "label": "die Informatik"
+          },
+          {
+            "icon": "microscope",
+            "label": "die Biologie"
+          },
+          {
+            "icon": "stethoscope",
+            "label": "die Medizin"
+          },
+          {
+            "icon": "landmark",
+            "label": "die Geschichte"
+          },
+          {
+            "icon": "music",
+            "label": "die Musik"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-woche-audio-v3",
+      "kind": "audio",
+      "title": "Jours, heures et matières",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Montag, Dienstag, Mittwoch, Donnerstag, Freitag, Samstag, Sonntag."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Heute ist Montag."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie spät ist es?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist acht Uhr."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie spät ist es jetzt?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist vierzehn Uhr."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Und jetzt?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist neun Uhr dreißig."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Und jetzt?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist zwanzig Uhr fünfzehn."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wann beginnt der Kurs?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Der Kurs beginnt am Montag um neun Uhr."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mathematik, Informatik, Biologie, Chemie, Medizin."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Geschichte, Musik, Kunst, Wirtschaft, Germanistik, Jura."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Was studierst du?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich studiere Medizin. Und ich lerne Deutsch."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-lesen-bild",
+      "kind": "image",
+      "title": "Chloé écrit à Lisa",
+      "alt": "Une petite chambre d’étudiante : Chloé écrit « Liebe Lisa, … » sur son ordinateur portable. On voit aussi un lit, une lampe et un livre ouvert.",
+      "image": {
+        "layout": "scene",
+        "setting": "home",
+        "people": [
+          {
+            "name": "Chloé",
+            "say": "Liebe Lisa, …"
+          }
+        ],
+        "items": [
+          "laptop",
+          "bed",
+          "lamp",
+          "book-open"
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Cinq petites scènes à l’université",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Sara, hast du ein Lineal?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ein Lineal? Nein, leider nicht. Aber hier ist ein Bleistift."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Danke, aber mein Bleistift ist hier. Ich brauche ein Lineal für die Übung."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Vielleicht hat Frau Brandt ein Lineal."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Entschuldigung, wie spät ist es?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tobias",
+          "text": "Es ist zehn Uhr fünfzehn."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Danke! Dann habe ich noch Zeit. Mein Kurs beginnt erst um elf Uhr."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Sekretariat",
+          "text": "Hallo, hier ist das Sekretariat vom Sprachenzentrum. Achtung, Kurs A1: Diese Woche ist der Deutschkurs nicht am Mittwoch, sondern am Donnerstag, um vierzehn Uhr. Und der Raum ist neu: Raum zwölf. Vielen Dank!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Nina",
+          "text": "Hallo! Bist du auch neu hier? Was studierst du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "David",
+          "text": "Ja, ich bin neu. Ich studiere Mathematik. Und du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nina",
+          "text": "Ich studiere Musik. Mathematik finde ich sehr schwer!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "David",
+          "text": "Und ich finde Musik schwer!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene fünf."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brandt",
+          "text": "So, wir sind heute sechzehn Personen. Aber hier sind nur zwölf Stühle!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Ali",
+          "text": "Kein Problem, Frau Brandt. In Raum vierzehn sind noch Stühle."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brandt",
+          "text": "Danke, Ali, das ist sehr nett!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-bleistift-bild",
+      "kind": "image",
+      "title": "Un crayon",
+      "alt": "Un crayon à papier.",
+      "image": {
+        "layout": "single",
+        "icon": "pencil"
+      }
+    },
+    {
+      "key": "a1-kurs-radiergummi-bild",
+      "kind": "image",
+      "title": "Une gomme",
+      "alt": "Une gomme à effacer.",
+      "image": {
+        "layout": "single",
+        "icon": "eraser"
+      }
+    },
+    {
+      "key": "a1-kurs-lineal-bild",
+      "kind": "image",
+      "title": "Une règle",
+      "alt": "Une règle graduée.",
+      "image": {
+        "layout": "single",
+        "icon": "ruler"
+      }
+    },
+    {
+      "key": "a1-kurs-studium-bild",
+      "kind": "image",
+      "title": "La vie étudiante en Allemagne",
+      "alt": "Cinq vignettes : un badge avec le signe euro pour der Semesterbeitrag, un ticket pour das Semesterticket, un lit pour das Studentenwohnheim, des couverts pour die Mensa et des livres rangés pour die Bibliothek.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "badge-euro",
+            "label": "der Semesterbeitrag"
+          },
+          {
+            "icon": "ticket",
+            "label": "das Semesterticket"
+          },
+          {
+            "icon": "bed",
+            "label": "das Studentenwohnheim"
+          },
+          {
+            "icon": "utensils",
+            "label": "die Mensa"
+          },
+          {
+            "icon": "library-big",
+            "label": "die Bibliothek"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-kurs-netz-audio-v3",
+      "kind": "audio",
+      "title": "Campus-Radio Hamburg : comment utilisez-vous Internet ?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Hallo und herzlich willkommen bei Campus-Radio Hamburg! Unser Thema heute: das Netz. Wie benutzt ihr das Internet und das Handy? Wir fragen Leute an der Uni."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Hallo! Wie heißt du, und was studierst du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Hallo! Ich heiße Jonas und ich studiere Medizin."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Wie oft benutzt du das Handy, Jonas?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Oh, sehr oft! Ich schicke jeden Tag viele Nachrichten, vor allem im Gruppenchat. In Deutschland benutzt man Gruppenchats sehr viel. Aber im Kurs ist mein Handy aus. Das ist wichtig!"
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Danke, Jonas! Und du? Wer bist du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Ich bin Amira. Ich komme aus Marokko und studiere Germanistik."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Und wie benutzt du das Netz, Amira?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Vor allem für das Studium. Am Abend, von zwanzig bis zweiundzwanzig Uhr, sehe ich Videos auf Deutsch. Und im Bus höre ich Podcasts. Im Seminar haben wir auch eine Gruppe im Netz. Dort teilen wir Fotos von der Tafel."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Super Idee! Und jetzt noch eine Person. Entschuldigung, sind Sie auch Student?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Becker",
+          "text": "Nein, ich bin Dozent für Informatik."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Dann sind Sie sicher oft im Netz!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Becker",
+          "text": "Ja, natürlich. Von Montag bis Freitag arbeite ich jeden Tag am Computer. Aber am Samstag und am Sonntag ist mein Handy aus. Kein Internet, keine E-Mails! Am Wochenende lese ich lieber ein Buch."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Vielen Dank! Und Sie, liebe Hörerinnen und Hörer? Wie benutzen Sie das Netz? Schicken Sie uns eine Nachricht!"
+        }
+      ]
+    },
+    {
+      "key": "a1-kurs-netz-bild",
+      "kind": "image",
+      "title": "Sondage de la radio étudiante",
+      "alt": "Sur le campus, une journaliste de la radio étudiante tend son micro à Jonas et Amira et demande « Wie benutzt ihr das Netz? ». On voit un micro, une radio et un téléphone portable.",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Reporterin",
+            "say": "Wie benutzt ihr das Netz?"
+          },
+          {
+            "name": "Jonas"
+          },
+          {
+            "name": "Amira"
+          }
+        ],
+        "items": [
+          "mic",
+          "radio",
+          "smartphone"
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Marta parle de son cours d’allemand",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Marta",
+          "text": "Hallo! Ich heiße Marta. Ich komme aus Spanien und studiere Architektur in Berlin. Mein Deutschkurs ist am Montag und am Mittwoch, von achtzehn bis zwanzig Uhr."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Marta",
+          "text": "Der Kursraum ist klein, aber schön. Da sind zwölf Stühle, sechs Tische und eine Tafel."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Marta",
+          "text": "In meiner Tasche sind ein Kursbuch, zwei Hefte, drei Kulis und ein Handy. Ich habe kein Wörterbuch aus Papier: Mein Wörterbuch ist eine App!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-schreibtisch-native",
+      "kind": "audio",
+      "title": "Auf dem Schreibtisch — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_02_04_desk.mp3",
+        "clip": [
+          0,
+          48.4
+        ]
+      },
+      "transcript": "Auf dem Schreibtisch\ndas Arbeitsheft, die Arbeitshefte\nder Bleistift, die Bleistifte\ndas Buch, die Bücher\ndie Kreide, die Kreiden\nder Kugelschreiber, der Kuli\ndie Kugelschreiber, die Kulis\ndas Kurspaket, die Kurspakete",
+      "v3SourceKey": "a1-kurs-schreibtisch-native"
+    },
+    {
+      "key": "a1-kurs-unterricht-native",
+      "kind": "audio",
+      "title": "Im Unterricht — enregistrement natif (extrait)",
+      "native": {
+        "file": "dib-audio/voc/voc_02_03_inclass.mp3",
+        "clip": [
+          0,
+          58.4
+        ]
+      },
+      "transcript": "Im Unterricht\ndas Examen, die Examen\ndie Hausaufgabe, die Hausaufgaben\ndie Hausaufgaben machen\ndie Hausaufgaben abgeben\ndie Hausaufgaben einreichen\ndie Klasse, die Klassen\ndas Klassenzimmer, die Klassenzimmer\ndie Klausur, die Klausuren\nder Kreis, die Kreise\nBilden wir einen Kreis!\nder Kurs, die Kurse",
+      "v3SourceKey": "a1-kurs-unterricht-native"
+    },
+    {
+      "key": "a1-kurs-uni-flur-foto",
+      "kind": "image",
+      "title": "Dans un bâtiment de l’université",
+      "alt": "Le hall d’un bâtiment universitaire : deux portes bleues numérotées 9 et 8, des vitrines d’affichage au mur, une plante verte et, au fond, des portes vitrées.",
+      "photo": {
+        "file": "dib-images/k02/img-023-071.png"
+      }
+    },
+    {
+      "key": "a1-kurs-computer-native",
+      "kind": "audio",
+      "title": "Alles über den Computer — enregistrement natif (extrait)",
+      "native": {
+        "file": "dib-audio/voc/voc_02_05_computer.mp3",
+        "clip": [
+          32.05,
+          66.3
+        ]
+      },
+      "transcript": "der Computer, die Computer\nder Bildschirm, die Bildschirme\ndie Digitalkamera, die Digitalkameras\ndas Dokument, die Dokumente\nder Drucker, die Drucker",
+      "v3SourceKey": "a1-kurs-computer-native"
+    },
+    {
+      "key": "a1-kurs-computer-foto",
+      "kind": "image",
+      "title": "Un ordinateur",
+      "alt": "Dessin au crayon d’un ordinateur de bureau : un écran, un clavier et une souris posée sur un tapis.",
+      "photo": {
+        "file": "dib-images/k02/img-042-133.png"
+      }
+    },
+    {
+      "key": "a1-kurs-lampe-foto",
+      "kind": "image",
+      "title": "Une lampe de bureau",
+      "alt": "Dessin au crayon d’une lampe de bureau articulée, posée sur une table.",
+      "photo": {
+        "file": "dib-images/k02/img-042-134.png"
+      }
+    },
+    {
+      "key": "a1-kurs-tisch-foto",
+      "kind": "image",
+      "title": "Une table",
+      "alt": "Dessin au crayon d’une table basse ronde sur laquelle est posé un petit vase de fleurs.",
+      "photo": {
+        "file": "dib-images/k02/img-042-132.png"
+      }
+    },
+    {
+      "key": "a1-kurs-woerterbuecher-foto",
+      "kind": "image",
+      "title": "Le rayon des dictionnaires",
+      "alt": "Le rayon d’une librairie : des étagères pleines de dictionnaires jaunes, verts et bleus, avec les étiquettes « Wörterbücher », « Englisch » et « Arabisch ».",
+      "photo": {
+        "file": "dib-images/k02/img-009-033.png"
+      }
+    },
+    {
+      "key": "a1-kurs-hoeren-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Écouter : cinq scènes à l’université",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Der Kurs beginnt am Montag um neun Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Écouter : cinq scènes à l’université",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Ich habe kein Wörterbuch, aber zwei Hefte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Nein, das ist kein Heft. Das ist das Kursbuch."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Der Kurs beginnt am Montag um neun Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie spät ist es? Es ist zehn Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich studiere Informatik und lerne Deutsch."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Samstag habe ich keine Kurse."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : la salle, l’heure et les études",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Bücher sind für alle."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-lexique",
+      "kind": "audio",
+      "title": "Lexique · Au cours et à l’université : objets, matières, jours de la semaine",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Tisch, die Tische"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stuhl, die Stühle"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuli, die Kulis"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bleistift, die Bleistifte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tafel, die Tafeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lampe, die Lampen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tür, die Türen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Uhr, die Uhren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tasche, die Taschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Buch, die Bücher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Heft, die Hefte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wörterbuch, die Wörterbücher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Handy, die Handys"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fenster, die Fenster"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kurs, die Kurse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hausaufgabe, die Hausaufgaben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bibliothek, die Bibliotheken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Woche, die Wochen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Montag, die Montage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wochenende, die Wochenenden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beginnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "studieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lernen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie spät ist es?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

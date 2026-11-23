@@ -4,7 +4,7 @@
  * estimation de l'impact, puis nouvelle proposition de planning calculée par le serveur et validation.
  */
 import { useId, useMemo, useState } from 'react';
-import { BookOpen, CalendarCheck, CheckCircle2, ChevronRight, CircleCheck, Layers3, ListPlus, PencilLine, SearchX } from 'lucide-react';
+import { BookOpen, CalendarCheck, CheckCircle2, ChevronRight, CircleCheck, Target, Layers3, ListPlus, PencilLine, SearchX } from 'lucide-react';
 import { Badge, EmptyState, ProgressBar } from '../../components/ui';
 import { Callout, Drawer, Facts, SearchField, Segmented, SkeletonCard, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
@@ -19,7 +19,8 @@ import { plural } from './staff-kit';
 
 interface Choice { level: LibraryLevel; module: LibraryModule; activity: LibraryActivityItem | null }
 
-const kindNames: Record<LibraryActivityItem['kind'], string> = { lesson: 'Leçon', exercise: 'Exercice' };
+const kindNames: Record<LibraryActivityItem['kind'], string> = { lesson: 'Leçon', exercise: 'Exercice', mission: 'Mission' };
+const kindIcons: Record<LibraryActivityItem['kind'], typeof BookOpen> = { lesson: BookOpen, exercise: PencilLine, mission: Target };
 const placementHints: Record<AdditionPlacement, string> = {
   next: 'Les activités ajoutées ouvrent les prochaines séances du niveau.',
   end_of_level: 'Les activités ajoutées se placent juste avant l’examen blanc, pour réviser.',
@@ -38,7 +39,10 @@ function localImpact(path: PathView, added: number) {
 }
 
 function ActivityIcon({ kind }: { kind: LibraryActivityItem['kind'] }) {
-  return <span className={`sac-kind is-${kind}`} aria-hidden="true">{kind === 'lesson' ? <BookOpen size={15} /> : <PencilLine size={15} />}</span>;
+  const Icon = kindIcons[kind] ?? PencilLine;
+  // La feuille de la fiche ne connaît pas encore les missions : leur teinte est donnée ici, avec les jetons.
+  const tone = kind === 'mission' ? { color: 'var(--violet)', background: 'var(--violet-50)' } : undefined;
+  return <span className={`sac-kind is-${kind}`} style={tone} aria-hidden="true"><Icon size={15} /></span>;
 }
 
 export function AddCourseDrawer({ path, learnerName, token, onClose, onChanged }: {

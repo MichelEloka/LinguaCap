@@ -3,10 +3,11 @@
  * « L » du logo, chemin du parcours (le L glisse jusqu'à la position de l'élève) et illustrations des états vides.
  */
 import { useEffect, useId, useLayoutEffect, useMemo, useRef, useState, type ReactNode } from 'react';
-import { AlertTriangle, Check, ChevronRight, Flag, GraduationCap, Lock, Play, BookOpen, ClipboardCheck, PencilLine, RotateCcw } from 'lucide-react';
+import { AlertTriangle, Check, ChevronRight, Target, Flag, GraduationCap, Lock, Play, BookOpen, ClipboardCheck, PencilLine, RotateCcw } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../../components/ui';
-import type { PathStepStatus, PathView } from '../../integration/v2';
+import { requestApi } from '../../integration/api';
+import type { Library, PathStepStatus, PathView } from '../../integration/v2';
 import { LevelMark } from '../onboarding/onboarding-kit';
 import type { EventTone } from './learner-calendar';
 import { daysFromToday, formatClock } from './learner-calendar';
@@ -19,6 +20,7 @@ export const activityIcons: Record<string, ReactNode> = {
   exercise: <PencilLine size={15} aria-hidden="true" />,
   review: <RotateCcw size={15} aria-hidden="true" />,
   assessment: <ClipboardCheck size={15} aria-hidden="true" />,
+  mission: <Target size={15} aria-hidden="true" />,
 };
 
 export function doneActivities(session: SessionSummary) {
@@ -80,15 +82,53 @@ export function TeacherAvatar({ size = 36 }: { size?: number }) {
 
 export interface LearnerMessage { id: string; text: string; sentAt: string }
 
-/** Nom lisible d'un résultat : l'activité et la séance quand elles sont connues. */
-export function gradeTitle(grade: Grade, sessions: SessionSummary[]) {
+/**
+ * Nom lisible d'un résultat : l'activité et la séance quand elles sont connues ; sinon (bibliothèque) le titre de
+ * l'activité retrouvé par sa leçon (`titles`, voir useLessonTitles).
+ */
+export function gradeTitle(grade: Grade, sessions: SessionSummary[], titles?: Map<string, string>) {
   const session = grade.sessionId ? sessions.find((item) => item.id === grade.sessionId) : undefined;
   const activity = session && grade.activityId ? session.activities.find((item) => item.id === grade.activityId) : undefined;
   const kind = grade.kind === 'quiz' ? 'Exercice' : 'Évaluation';
+  const known = titles?.get(grade.lessonId);
+  if (!activity && known) return { title: known, context: session ? session.title : 'Bibliothèque' };
   return { title: activity?.title ?? session?.title ?? kind, context: session ? (activity ? session.title : kind) : undefined };
 }
 
+/** Titres des activités de la bibliothèque par leçon (élève connecté, ou élève suivi avec `learnerId`). */
+export function useLessonTitles(token: string | null | undefined, learnerId?: string) {
+  const [titles, setTitles] = useState<Map<string, string>>(() => new Map());
+  useEffect(() => {
+    if (!token) return;
+    let active = true;
+    const request = learnerId
+      ? requestApi<Library>(`/learning/library?learnerId=${encodeURIComponent(learnerId)}`, token)
+      : requestApi<Library>('/learning/library', token);
+    request.then((library) => {
+      if (!active) return;
+      const map = new Map<string, string>();
+      for (const level of library.levels ?? []) for (const module of level.modules ?? []) {
+        for (const activity of module.activities ?? []) if (activity.lessonId) map.set(activity.lessonId, activity.title);
+      }
+      setTitles(map);
+    }, () => { /* bibliothèque indisponible : les titres génériques restent */ });
+    return () => { active = false; };
+  }, [token, learnerId]);
+  return titles;
+}
+
 export const scoreOf = (grade: Grade) => (grade.total ? Math.round((grade.correct / grade.total) * 100) : 0);
+
+/** V4 : questions « à revoir » d'une note (répétitions échouées trois fois) ; [] pour l'historique ou un service antérieur. */
+export const flaggedOf = (grade: object): string[] => {
+  const value = (grade as { flagged?: unknown }).flagged;
+  return Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : [];
+};
+/** V4 : répétitions enregistrées en attente de la validation du professeur. */
+export const pendingOf = (grade: object): number => {
+  const value = (grade as { pending?: unknown }).pending;
+  return typeof value === 'number' && value > 0 ? value : 0;
+};
 export const passed = (score: number) => score >= 70;
 export const scoreColor = (score: number) => (passed(score) ? 'var(--success)' : 'var(--warning)');
 

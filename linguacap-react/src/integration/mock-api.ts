@@ -2,14 +2,20 @@
  * Simulateur en mémoire de l'API LinguaCap, pour développer les écrans sans services (`npm run dev:mock`).
  *
  * - Chargé seulement en développement quand VITE_LINGUACAP_MOCK=1 (voir api.ts) : jamais dans un build.
- * - Rôle choisi par `?as=eleve-autonome | eleve-suivi | professeur | professeur-nouveau | admin | equipe`, ou à la connexion
- *   par l'adresse saisie (« prof… », « nouveau… », « admin… », « suivi… », « equipe… », sinon élève autonome).
+ * - Rôle choisi par `?as=eleve-autonome | eleve-suivi | eleve-parcours | professeur | professeur-nouveau | admin | equipe`,
+ *   ou à la connexion par l'adresse saisie (« prof… », « nouveau… », « admin… », « parcours… », « suivi… », « equipe… »,
+ *   sinon élève autonome). `eleve-parcours` (Nora Lefèvre) a un parcours A1 → A2 qui commence aujourd'hui : ses premières
+ *   séances portent les activités V4 du module « a1-hallo » (exercice typé, répétition orale, mission, lexique).
  * - État gardé en mémoire et recopié dans sessionStorage (une reprise de Vite ne le perd pas) ; `?reset` repart des données
  *   initiales, `window.linguacapMock.reset()` aussi. Se déconnecter puis se reconnecter sous un autre rôle garde l'état :
  *   un contrat envoyé par l'élève suivi apparaît chez le professeur.
- * - Couvre les routes de l'incrément « Parcours » (formes de v2.ts) et les routes historiques utiles aux écrans
- *   (profil, inscription, séances, résultats, examens simplifiés, suivi, invitations, comptes). Une route absente répond
- *   404 « Route non simulée ».
+ * - Couvre les routes de l'incrément « Parcours » (formes de v2.ts), celles de la V4 « Contenus et pédagogie » (formes de
+ *   v4.ts : exercices typés et corrigé, répétition orale, missions, file de corrections, lexique) et les routes historiques
+ *   utiles aux écrans (profil, inscription, séances, résultats, examens simplifiés, suivi, invitations, comptes). Une route
+ *   absente répond 404 « Route non simulée ».
+ * - Contenus V4 d'exemple : modules « a1-hallo », « a1-zahlen » et « a2-gesundheit » (questions de chaque type, répétition
+ *   orale, missions, lexique) ; Léa (élève suivie) a un exercice « à revoir » et une mission à reprendre, Yanis une mission
+ *   et une répétition enregistrée en attente chez Marie Weber.
  */
 import type {
   Addition, AdditionCreated, AdditionRemoved, CompetenceScore, Contract, ContractProposer, ContractStatus, ContractTerms,
@@ -20,6 +26,13 @@ import type {
   CourseCreationMode, PracticeView, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats, TeacherProfile,
 } from './v2';
 import { difficultyCodes, difficultyLabels, difficultyThresholds, gradingDelays, levelCodes, levelLabels, PLACEMENT_DONT_KNOW } from './v2';
+import type {
+  AnswerNotice, DictationSpec, DictationWord, DraftQuestionV4, ExerciseResult, FillSpec, Grade, Lexicon,
+  LexiconEntry, MatchSpec, MissionDecision, MissionDefinition, MissionSnapshot, MissionStatus, MissionSummary, MissionView, OrderSpec,
+  QuestionItem, QuestionReview, QuestionView, RecordingRef, ReviewerKind, ReviewItem, ReviewQueueItem, SpeakSpec, SpeechAttemptView,
+  SpeechMode, SpeechReviewStatus,
+} from './v4';
+import { countWords, exerciseLimits, missionLimits, speechLimits } from './v4';
 import { findLanguage, languages as staticLanguages } from '../domain/languages';
 
 type Method = 'GET' | 'POST' | 'PUT';
@@ -82,20 +95,26 @@ function shuffle<T>(items: T[]): T[] {
 const percentOf = (correct: number, total: number) => (total ? Math.round((correct * 100) / total) : 0);
 const roundUp5 = (minutes: number) => Math.ceil(minutes / 5) * 5;
 
-/** Son muet d'une seconde : les sons du test et des examens ne sont pas servis par le simulateur. */
-let silentAudio: string | null | undefined;
-function silentAudioUrl(): string | null {
-  if (silentAudio !== undefined) return silentAudio;
-  if (typeof URL === 'undefined' || typeof Blob === 'undefined' || !('createObjectURL' in URL)) return (silentAudio = null);
+/**
+ * Son muet (une seconde par défaut) : les sons du test, des examens, des dictées, des répétitions et du lexique ne sont
+ * pas servis par le simulateur. Le lexique utilise un son plus long, pour que ses segments (start/end) existent.
+ */
+const silentAudio = new Map<number, string | null>();
+function silentAudioUrl(seconds = 1): string | null {
+  if (silentAudio.has(seconds)) return silentAudio.get(seconds) ?? null;
+  if (typeof URL === 'undefined' || typeof Blob === 'undefined' || !('createObjectURL' in URL)) { silentAudio.set(seconds, null); return null; }
   const rate = 8000;
-  const bytes = new Uint8Array(44 + rate);
+  const size = rate * seconds;
+  const bytes = new Uint8Array(44 + size);
   const view = new DataView(bytes.buffer);
   const text = (offset: number, value: string) => [...value].forEach((char, index) => view.setUint8(offset + index, char.charCodeAt(0)));
-  text(0, 'RIFF'); view.setUint32(4, 36 + rate, true); text(8, 'WAVE'); text(12, 'fmt ');
+  text(0, 'RIFF'); view.setUint32(4, 36 + size, true); text(8, 'WAVE'); text(12, 'fmt ');
   view.setUint32(16, 16, true); view.setUint16(20, 1, true); view.setUint16(22, 1, true); view.setUint32(24, rate, true);
-  view.setUint32(28, rate, true); view.setUint16(32, 1, true); view.setUint16(34, 8, true); text(36, 'data'); view.setUint32(40, rate, true);
+  view.setUint32(28, rate, true); view.setUint16(32, 1, true); view.setUint16(34, 8, true); text(36, 'data'); view.setUint32(40, size, true);
   bytes.fill(128, 44);
-  return (silentAudio = URL.createObjectURL(new Blob([bytes], { type: 'audio/wav' })));
+  const url = URL.createObjectURL(new Blob([bytes], { type: 'audio/wav' }));
+  silentAudio.set(seconds, url);
+  return url;
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -104,13 +123,22 @@ function silentAudioUrl(): string | null {
 
 interface MockModule {
   id: string; title: string; objective: string; prerequisites: string[];
-  activities: [string, 'lesson' | 'exercise', string, number, string[]][];
+  activities: [string, 'lesson' | 'exercise' | 'mission', string, number, string[]][];
 }
 interface MockLevelContent {
   code: LevelCode; settings: { reviewMinutes: number; midtermMinutes: number; finalMinutes: number; passPercent: number }; modules: MockModule[];
 }
 interface MockQuestion { id: string; prompt: string; options: { id: string; text: string }[]; answer: string }
 interface MockActivityDetail { lesson: { title: string; description: string } | null; transcript: string | null; questions: MockQuestion[] }
+/** Activité V4 : questions au format du document de version (corrigé compris) et mission. */
+interface MockV4Detail {
+  lesson: { title: string; description: string } | null; transcript: string | null; questions: DraftQuestionV4[];
+  mission?: MissionDefinition;
+}
+interface MockVocabulary {
+  id: string; word: string; article: LexiconEntry['article']; plural: string | null; partOfSpeech: LexiconEntry['partOfSpeech'];
+  translation: string; example: string | null; note: string | null;
+}
 
 const VERSIONS: Record<string, { id: string; number: number; publishedAt: string }> = {
   A1: { id: 'b1000000-0000-4000-8000-0000000000a1', number: 2, publishedAt: '2026-11-12T09:00:00.000Z' },
@@ -196,7 +224,7 @@ interface AdditionRec {
   title: string; minutes: number; placement: 'next' | 'end_of_level'; note: string | null; addedBy: string; addedAt: string;
   removedAt: string | null; removedBy: string | null;
 }
-interface ProgressRec { status: 'started' | 'completed'; completedAt: string | null; state: Json }
+interface ProgressRec { status: 'started' | 'completed'; completedAt: string | null; state: Json; attemptId?: string | null }
 interface PathRec {
   id: string; learnerId: string; languageId: string; status: PathStatus; startLevel: StartLevel; targetLevel: LevelCode; startDate: string;
   targetDate: string; initialTargetDate: string; weeklyMinutes: number; placementAttemptId: string | null;
@@ -211,6 +239,21 @@ interface PracticeRec {
 }
 interface GradeRec {
   id: string; learnerId: string; lessonId: string; activityId: string | null; sessionId: string | null; correct: number; total: number; submittedAt: string;
+  /** V4 : remise typée (/assessments/exercises), clé de remise, manche, corrigé figé, répétitions en attente et questions à revoir. */
+  typed?: boolean; key?: string; roundId?: string; review?: QuestionReview[]; pending?: number; flagged?: string[];
+}
+interface SpeechRec {
+  id: string; learnerId: string; lessonId: string; questionId: string; roundId: string; sessionId: string | null; activityId: string | null;
+  attempt: number; mode: SpeechMode; transcript: string | null; score: number | null; threshold: number; passed: boolean;
+  reviewStatus: SpeechReviewStatus; comment: string | null; recording: RecordingRef | null; uploads: Record<string, string>;
+  quizAttemptId: string | null; reviewedBy: string | null; reviewedAt: string | null; submittedAt: string | null; createdAt: string;
+}
+interface MissionRec {
+  id: string; learnerId: string; trackVersionId: string; levelCode: LevelCode; moduleId: string; activityId: string; lessonId: string;
+  sessionId: string | null; sessionActivityId: string | null; number: number; status: MissionStatus; title: string; definition: MissionSnapshot;
+  text: string; checklist: number[]; recording: RecordingRef | null; uploads: Record<string, string>;
+  reviewerId: string | null; reviewerKind: ReviewerKind | null; submitKey: string | null; submittedAt: string | null;
+  decision: MissionDecision | null; comment: string | null; reviewedBy: string | null; reviewedAt: string | null; createdAt: string; updatedAt: string;
 }
 interface ExamRec {
   id: string; enrollmentId: string; learnerId: string; levelCode: LevelCode; kind: ExamKind; number: number; status: 'in_progress' | 'submitted' | 'graded';
@@ -223,18 +266,22 @@ interface State {
   version: number; users: UserRec[]; invitations: InvitationRec[]; placementTests: PlacementTestDocument[]; placements: PlacementRec[];
   paths: PathRec[]; practice: PracticeRec[]; grades: GradeRec[]; exams: ExamRec[]; messages: MessageRec[];
   teacherResponses?: TeacherResponseRec[];
+  speech: SpeechRec[]; missions: MissionRec[];
+  /** Brouillons de version créés dans l'éditeur du catalogue (documents au format 4). */
+  catalogueDrafts?: Json[];
 }
 
-const STATE_VERSION = 1;
+/** 2 : V4 (exercices typés, répétitions orales, missions). Un état enregistré d'une autre version est abandonné. */
+const STATE_VERSION = 3;
 const STORAGE_KEY = 'linguacap-mock-state';
 const IDS = {
-  autonome: fixedId(0x101), suivi: fixedId(0x102), yanis: fixedId(0x103), awa: fixedId(0x104),
+  autonome: fixedId(0x101), suivi: fixedId(0x102), yanis: fixedId(0x103), awa: fixedId(0x104), parcours: fixedId(0x105),
   weber: fixedId(0x201), braun: fixedId(0x202), morel: fixedId(0x301), richter: fixedId(0x401),
   test: 'c1000000-0000-4000-8000-000000000001',
 };
 /** Rôle du simulateur → compte simulé. */
 export const mockAccounts: Record<string, string> = {
-  'eleve-autonome': IDS.autonome, 'eleve-suivi': IDS.suivi, professeur: IDS.weber, 'professeur-nouveau': IDS.braun,
+  'eleve-autonome': IDS.autonome, 'eleve-suivi': IDS.suivi, 'eleve-parcours': IDS.parcours, professeur: IDS.weber, 'professeur-nouveau': IDS.braun,
   admin: IDS.morel, equipe: IDS.richter,
 };
 
@@ -1369,33 +1416,761 @@ function removeCourse(actor: UserRec, path: PathRec, additionId: string): Additi
 // Activités, séances, bibliothèque, exercices
 // ---------------------------------------------------------------------------------------------------------------------
 
-function syntheticQuestions(title: string): MockQuestion[] {
+/** Questions d'exemple d'un exercice sans contenu détaillé : la deuxième proposition est toujours juste. */
+function syntheticQuestions(title: string): DraftQuestionV4[] {
   return [1, 2, 3].map((number) => ({
-    id: `q${number}`, prompt: `Question ${number} sur « ${title} » : choisissez la bonne réponse.`,
-    options: [{ id: 'a', text: 'Première proposition' }, { id: 'b', text: 'Deuxième proposition (réponse attendue dans le simulateur)' }, { id: 'c', text: 'Troisième proposition' }],
-    answer: 'b',
+    id: `q${number}`, type: 'choice', prompt: `Question ${number} sur « ${title} » : choisissez la bonne réponse.`, moduleRef: null,
+    explanation: 'Dans le simulateur, la deuxième proposition est toujours la réponse attendue ; la vraie API sert l’explication rédigée pour chaque question.',
+    options: [
+      { id: 'a', label: 'Première proposition', correct: false, feedback: null },
+      { id: 'b', label: 'Deuxième proposition (réponse attendue dans le simulateur)', correct: true, feedback: null },
+      { id: 'c', label: 'Troisième proposition', correct: false, feedback: null },
+    ],
+    spec: null,
   }));
 }
+/** Question historique (choix unique) au format du document de version, avec l'explication ajoutée par la V4 s'il y en a une. */
+const legacyQuestion = (activityId: string, question: MockQuestion): DraftQuestionV4 => ({
+  id: question.id, type: 'choice', prompt: question.prompt, moduleRef: null, explanation: EXPLANATIONS[activityId]?.[question.id] ?? null,
+  options: question.options.map((option) => ({ id: option.id, label: option.text, correct: option.id === question.answer, feedback: null })),
+  spec: null,
+});
 function activityContent(level: MockLevelContent, activityId: string) {
   const found = findActivity(level, activityId);
   if (!found) return undefined;
   const [id, kind, title, minutes, competences] = found.activity;
+  const v4 = V4_DETAILS[id];
   const detail = DETAILS[id];
-  const questions = detail?.questions.length ? detail.questions : kind === 'exercise' ? syntheticQuestions(title) : [];
+  const questions: DraftQuestionV4[] = v4 ? v4.questions
+    : detail?.questions.length ? detail.questions.map((question) => legacyQuestion(id, question))
+      : kind === 'exercise' ? syntheticQuestions(title) : [];
   return {
-    module: found.module, id, kind, title, minutes, competences, questions,
-    lesson: detail?.lesson ?? (kind === 'lesson' ? { title, description: `${found.module.objective}\n\nCette leçon, « ${title} », fait partie du module « ${found.module.title} ». Le simulateur en présente un résumé : la vraie API sert la leçon complète, avec ses médias.` } : null),
-    transcript: detail?.transcript ?? null,
+    module: found.module, level, id, kind, title, minutes, competences, questions,
+    mission: v4?.mission ? { description: v4.lesson?.description ?? '', ...v4.mission } : null,
+    lesson: v4?.lesson ?? detail?.lesson ?? (kind === 'lesson' ? { title, description: `${found.module.objective}\n\nCette leçon, « ${title} », fait partie du module « ${found.module.title} ». Le simulateur en présente un résumé : la vraie API sert la leçon complète, avec ses médias.` } : null),
+    transcript: v4?.transcript ?? detail?.transcript ?? null,
   };
 }
+type MockContent = NonNullable<ReturnType<typeof activityContent>>;
 const lessonIdOf = (activityId: string) => `lecon-${activityId}`;
-const withoutAnswers = (questions: MockQuestion[]) => questions.map(({ id, prompt, options }) => ({ id, prompt, options }));
+/** Activité du catalogue d'une leçon : « lecon-<activité> », aussi pour un cours ajouté (« ajout-xxxxxx-<activité> »). */
+function contentOfLesson(lessonId: string): MockContent | undefined {
+  const activityId = lessonId.replace(/^lecon-/, '').replace(/^ajout-[0-9a-f]{6}-/, '');
+  const level = CONTENT.find((item) => findActivity(item, activityId));
+  return level ? activityContent(level, activityId) : undefined;
+}
+const isTyped = (questions: DraftQuestionV4[]) => questions.some((question) => (question.type ?? 'choice') !== 'choice');
+
+// --- Vue élève : identifiants opaques et ordre déterministe (jamais une solution) --------------------------------------
+
+function hex6(text: string) {
+  let value = 0x811c9dc5;
+  for (const char of text) value = Math.imul(value ^ (char.codePointAt(0) ?? 0), 0x01000193) >>> 0;
+  return value.toString(16).padStart(8, '0').slice(0, 6);
+}
+function orderTokens(lessonId: string, question: DraftQuestionV4): QuestionItem[] {
+  const { answers } = question.spec as OrderSpec;
+  const tokens = answers[0].map((text, index) => ({ id: `k${hex6(`${lessonId}|${question.id}|${text}|${index}`)}`, text }))
+    .sort((a, b) => a.id.localeCompare(b.id));
+  const shown = normalizeAnswer(tokens.map((token) => token.text).join(' '));
+  if (tokens.length > 1 && answers.some((answer) => normalizeAnswer(answer.join(' ')) === shown)) tokens.push(tokens.shift() as QuestionItem);
+  return tokens;
+}
+function matchItems(lessonId: string, question: DraftQuestionV4) {
+  const { pairs } = question.spec as MatchSpec;
+  const left = pairs.map((pair, index) => ({ id: `l${hex6(`${lessonId}|${question.id}|${pair.left}|${index}`)}`, text: pair.left }));
+  const right = pairs.map((pair, index) => ({ id: `r${hex6(`${lessonId}|${question.id}|${pair.right}|${index}`)}`, text: pair.right, index }))
+    .sort((a, b) => a.id.localeCompare(b.id));
+  if (right.length > 1 && right.every((item, position) => item.index === position)) right.push(right.shift() as (typeof right)[number]);
+  const solution: Record<string, string> = Object.fromEntries(left.map((item, index) => [item.id, (right.find((entry) => entry.index === index) as (typeof right)[number]).id]));
+  return { left, right: right.map(({ id, text }) => ({ id, text })), solution };
+}
+/** Vue d'une question sans corrigé (forme servie par le catalogue). */
+function questionView(lessonId: string, question: DraftQuestionV4): QuestionView {
+  const base = { id: question.id, prompt: question.prompt };
+  switch (question.type ?? 'choice') {
+    case 'fill': {
+      const spec = question.spec as FillSpec;
+      return { ...base, type: 'fill', text: spec.text, blanks: spec.blanks.map(({ id, accept, size, hint }) => ({
+        id, size: size ?? Math.max(4, ...accept.map((value) => value.length + 2)), hint: hint ?? null })) };
+    }
+    case 'order': return { ...base, type: 'order', tokens: orderTokens(lessonId, question) };
+    case 'match': {
+      const { left, right } = matchItems(lessonId, question);
+      return { ...base, type: 'match', left, right };
+    }
+    case 'dictation': {
+      const spec = question.spec as DictationSpec;
+      return { ...base, type: 'dictation', wordCount: spec.showWordCount ? countWords(spec.accept[0]) : null };
+    }
+    case 'speak': {
+      const spec = question.spec as SpeakSpec;
+      return { ...base, type: 'speak', text: spec.text, threshold: spec.threshold };
+    }
+    default: return { ...base, type: 'choice', options: question.options.map((option) => ({ id: option.id, text: option.label })) };
+  }
+}
+/** Sons des dictées (transcription après la réponse) et des répétitions (à la demande), rattachés à leur question. */
+function questionPlacements(activityId: string, questions: DraftQuestionV4[], answered: boolean) {
+  return questions.filter((question) => question.type === 'dictation' || question.type === 'speak').map((question, index) => ({
+    position: index + 1, assetId: `${activityId}-${question.id}`, assetVersion: 1, usage: 'audio' as const, alt: null, caption: null,
+    transcriptAvailable: question.type === 'speak' || answered, decorative: false, questionId: question.id, optionId: null,
+    url: silentAudioUrl(), mimeType: 'audio/wav',
+  }));
+}
+
+// --- Règles de correction (version simplifiée d'AnswerRules) -----------------------------------------------------------
+
+const UNITS = ['null', 'eins', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf', 'zwölf', 'dreizehn',
+  'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'];
+const TENS = ['', '', 'zwanzig', 'dreißig', 'vierzig', 'fünfzig', 'sechzig', 'siebzig', 'achtzig', 'neunzig'];
+/** Nombre de 0 à 9 999 en toutes lettres (21 → einundzwanzig). */
+function numberWords(value: number): string {
+  if (value < 20) return UNITS[value];
+  if (value < 100) {
+    const unit = value % 10;
+    return unit ? `${unit === 1 ? 'ein' : UNITS[unit]}und${TENS[Math.floor(value / 10)]}` : TENS[value / 10];
+  }
+  if (value < 1000) {
+    const rest = value % 100;
+    return `${Math.floor(value / 100) === 1 ? 'ein' : UNITS[Math.floor(value / 100)]}hundert${rest ? numberWords(rest) : ''}`;
+  }
+  const rest = value % 1000;
+  return `${Math.floor(value / 1000) === 1 ? 'ein' : numberWords(Math.floor(value / 1000))}tausend${rest ? numberWords(rest) : ''}`;
+}
+/** Mots d'une réponse, casse conservée : NFC, espaces insécables, guillemets et ponctuation retirés, nombres en lettres. */
+function answerWords(text: string): string[] {
+  return text.normalize('NFC').replace(/[   ]/g, ' ').replace(/[’‘]/g, '\'').replace(/["„“”«»‚]/g, '')
+    .replace(/(\d)\.(?=\d{3}(?!\d))/g, '$1')
+    .replace(/[.,;:!?¿¡()[\]…–—/]/g, ' ')
+    .replace(/\d+/g, (digits) => (Number(digits) <= 9999 ? numberWords(Number(digits)) : digits))
+    .split(/\s+/).filter((word) => word && word !== '-');
+}
+const lower = (word: string) => word.toLocaleLowerCase('de-DE');
+const normalizeAnswer = (text: string) => answerWords(text).map(lower).join(' ');
+const transliterate = (word: string) => word.replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss');
+function levenshtein(a: string, b: string) {
+  let previous = Array.from({ length: b.length + 1 }, (_, index) => index);
+  for (let i = 1; i <= a.length; i++) {
+    const row = [i];
+    for (let j = 1; j <= b.length; j++) row[j] = Math.min(previous[j] + 1, row[j - 1] + 1, previous[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    previous = row;
+  }
+  return previous[b.length];
+}
+type WordMatch = 'ok' | 'translit' | 'near' | 'wrong';
+function compareWord(expected: string, given: string): WordMatch {
+  const e = lower(expected);
+  const g = lower(given);
+  if (e === g) return 'ok';
+  if (transliterate(e) === transliterate(g)) return 'translit';
+  return levenshtein(e, g) <= (e.length >= 8 ? 2 : 1) ? 'near' : 'wrong';
+}
+/** Nom tapé en minuscule (accepté avec la remarque « case ») ; le premier mot d'une phrase n'est pas contrôlé. */
+const caseSlip = (expected: string, given: string) => expected[0] !== lower(expected[0]) && given[0] === lower(given[0]) && given[0] !== given[0].toLocaleUpperCase('de-DE');
+
+/** Réponse courte (trou) : exacte à la normalisation près, avec les remarques translittération et casse. */
+function matchText(given: string, accepted: string[]): { correct: boolean; notices: AnswerNotice[] } {
+  const words = answerWords(given);
+  let best: { correct: boolean; notices: AnswerNotice[] } = { correct: false, notices: [] };
+  for (const option of accepted) {
+    const expected = answerWords(option);
+    if (expected.length !== words.length || !expected.length) continue;
+    const matches = expected.map((word, index) => compareWord(word, words[index]));
+    if (!matches.every((match) => match === 'ok' || match === 'translit')) continue;
+    const notices: AnswerNotice[] = [];
+    if (matches.includes('translit')) notices.push('transliteration');
+    if (expected.some((word, index) => matches[index] === 'ok' && caseSlip(word, words[index]))) notices.push('case');
+    if (!notices.length) return { correct: true, notices };
+    best = { correct: true, notices };
+  }
+  return best;
+}
+/** Alignement mot à mot (Levenshtein sur les mots) : un mot « near » coûte 0,5, un mot manquant, faux ou en trop 1. */
+function alignWords(expected: string[], given: string[]) {
+  const step: Record<WordMatch, number> = { ok: 0, translit: 0, near: 0.5, wrong: 1 };
+  const cost = Array.from({ length: expected.length + 1 }, (_, i) => Array.from({ length: given.length + 1 }, (_, j) => (i === 0 ? j : j === 0 ? i : 0)));
+  for (let i = 1; i <= expected.length; i++) {
+    for (let j = 1; j <= given.length; j++) {
+      cost[i][j] = Math.min(cost[i - 1][j - 1] + step[compareWord(expected[i - 1], given[j - 1])], cost[i - 1][j] + 1, cost[i][j - 1] + 1);
+    }
+  }
+  const words: DictationWord[] = [];
+  let i = expected.length;
+  let j = given.length;
+  while (i > 0 || j > 0) {
+    if (i > 0 && j > 0) {
+      const match = compareWord(expected[i - 1], given[j - 1]);
+      if (cost[i][j] === cost[i - 1][j - 1] + step[match]) {
+        words.unshift({ expected: expected[i - 1], given: given[j - 1], status: match });
+        i--; j--;
+        continue;
+      }
+    }
+    if (i > 0 && cost[i][j] === cost[i - 1][j] + 1) {
+      words.unshift({ expected: expected[i - 1], given: null, status: 'missing' });
+      i--;
+      continue;
+    }
+    words.unshift({ expected: null, given: given[j - 1], status: 'extra' });
+    j--;
+  }
+  const total = cost[expected.length][given.length];
+  return { words, cost: total, score: Math.max(0, Math.round(100 * (1 - total / Math.max(expected.length, given.length, 1)))) };
+}
+/** Meilleur score de répétition sur les transcriptions proposées × les réponses acceptées. */
+function speechScore(spec: SpeakSpec, transcripts: string[]) {
+  let best = { score: 0, transcript: transcripts[0] ?? '' };
+  for (const transcript of transcripts) {
+    for (const accepted of spec.accept) {
+      const { score } = alignWords(answerWords(accepted), answerWords(transcript));
+      if (score > best.score) best = { score, transcript };
+    }
+  }
+  return best;
+}
+
+// --- Exercices typés : remise et corrigé ---------------------------------------------------------------------------------
+
+const isObject = (value: unknown): value is Json => typeof value === 'object' && value !== null && !Array.isArray(value);
+const speechOfRound = (learnerId: string, roundId: string, questionId: string) => state().speech
+  .filter((item) => item.learnerId === learnerId && item.roundId === roundId && item.questionId === questionId).sort((a, b) => a.attempt - b.attempt);
+const failuresUpTo = (attempt: SpeechRec) => speechOfRound(attempt.learnerId, attempt.roundId, attempt.questionId)
+  .filter((item) => item.mode === 'recognition' && !item.passed && item.attempt <= attempt.attempt).length;
+
+function gradeQuestion(actor: UserRec, lessonId: string, roundId: string, question: DraftQuestionV4, answer: unknown): { review: QuestionReview; speech?: SpeechRec } {
+  const common = { id: question.id, prompt: question.prompt, explanation: question.explanation ?? null };
+  const wrongShape = () => invalid(`Réponse invalide pour la question ${question.id}.`);
+  if (!isObject(answer)) throw wrongShape();
+  switch (question.type ?? 'choice') {
+    case 'fill': {
+      const spec = question.spec as FillSpec;
+      const given = answer.blanks;
+      if (!isObject(given) || Object.values(given).some((value) => typeof value !== 'string' || value.length > exerciseLimits.blankChars)) throw wrongShape();
+      const blanks = Object.fromEntries(spec.blanks.map((blank) => [blank.id, matchText(String(given[blank.id] ?? ''), blank.accept)]));
+      const correct = Object.values(blanks).every((blank) => blank.correct);
+      return { review: { ...common, type: 'fill', status: correct ? 'correct' : 'incorrect', given: { blanks: given as Record<string, string> },
+        expected: { blanks: Object.fromEntries(spec.blanks.map((blank) => [blank.id, blank.accept])), text: spec.text }, feedback: null,
+        notices: [...new Set(Object.values(blanks).flatMap((blank) => (blank.correct ? blank.notices : [])))], detail: { blanks } } };
+    }
+    case 'order': {
+      const tokens = orderTokens(lessonId, question);
+      const order = answer.order;
+      if (!Array.isArray(order) || order.length !== tokens.length || order.length > exerciseLimits.tokens
+        || [...order].sort().join('|') !== tokens.map((token) => token.id).sort().join('|')) throw wrongShape();
+      const sentence = (order as string[]).map((id) => (tokens.find((token) => token.id === id) as QuestionItem).text).join(' ');
+      const { answers } = question.spec as OrderSpec;
+      const correct = answers.some((candidate) => normalizeAnswer(candidate.join(' ')) === normalizeAnswer(sentence));
+      return { review: { ...common, type: 'order', status: correct ? 'correct' : 'incorrect', given: { order: order as string[], sentence },
+        expected: { sentence: answers[0].join(' '), alternatives: answers.slice(1).map((candidate) => candidate.join(' ')) },
+        feedback: null, notices: [], detail: null } };
+    }
+    case 'match': {
+      const { left, right, solution } = matchItems(lessonId, question);
+      const pairs = answer.pairs;
+      if (!isObject(pairs) || Object.keys(pairs).length > exerciseLimits.pairs
+        || Object.entries(pairs).some(([key, value]) => !left.some((item) => item.id === key) || !right.some((item) => item.id === value))) throw wrongShape();
+      const detail = Object.fromEntries(left.map((item) => [item.id, pairs[item.id] === solution[item.id]]));
+      return { review: { ...common, type: 'match', status: Object.values(detail).every(Boolean) ? 'correct' : 'incorrect',
+        given: { pairs: pairs as Record<string, string> },
+        expected: { pairs: solution, labels: Object.fromEntries([...left, ...right].map((item) => [item.id, item.text])) },
+        feedback: null, notices: [], detail: { pairs: detail } } };
+    }
+    case 'dictation': {
+      const spec = question.spec as DictationSpec;
+      if (typeof answer.text !== 'string' || answer.text.length > exerciseLimits.textChars) throw wrongShape();
+      const words = answerWords(answer.text);
+      const best = spec.accept.map((accepted) => ({ accepted, ...alignWords(answerWords(accepted), words) })).sort((a, b) => a.cost - b.cost)[0];
+      const correct = !best.words.some((word) => word.status === 'missing' || word.status === 'wrong' || word.status === 'extra');
+      const notices: AnswerNotice[] = [];
+      if (best.words.some((word) => word.status === 'translit')) notices.push('transliteration');
+      if (best.words.some((word) => word.status === 'near')) notices.push('typo');
+      if (best.words.some((word, index) => index > 0 && word.status === 'ok' && word.expected && word.given && caseSlip(word.expected, word.given))) notices.push('case');
+      return { review: { ...common, type: 'dictation', status: correct ? 'correct' : 'incorrect', given: { text: answer.text },
+        expected: { text: best.accepted }, feedback: null, notices, detail: { score: best.score, words: best.words } } };
+    }
+    case 'speak': {
+      const spec = question.spec as SpeakSpec;
+      if (typeof answer.speechAttemptId !== 'string') throw wrongShape();
+      const speech = state().speech.find((item) => item.id === answer.speechAttemptId && item.learnerId === actor.id);
+      if (!speech || speech.lessonId !== lessonId || speech.questionId !== question.id || speech.roundId !== roundId) {
+        throw conflict(`Essai de répétition introuvable pour la question ${question.id} de cette manche.`);
+      }
+      const attempts = speechOfRound(actor.id, roundId, question.id);
+      const failures = attempts.filter((item) => item.mode === 'recognition' && !item.passed).length;
+      let status: QuestionReview['status'] | null = null;
+      if (speech.passed) status = 'correct';
+      else if (speech.mode === 'recording') status = speech.reviewStatus === 'pending' ? 'pending' : speech.reviewStatus === 'rejected' ? 'flagged' : null;
+      else if (failures >= speechLimits.failuresBeforeSkip) status = 'flagged';
+      if (!status) throw conflict('Répétez la phrase jusqu’à la réussir, ou passez à la suite après trois essais.');
+      return { speech, review: { ...common, type: 'speak', status, given: { speechAttemptId: speech.id, transcript: speech.transcript }, expected: { text: spec.text },
+        feedback: null, notices: [], detail: { score: speech.score, transcript: speech.transcript, attempts: attempts.length, mode: speech.mode, reviewStatus: speech.reviewStatus } } };
+    }
+    default: {
+      const chosen = question.options.find((option) => option.id === answer.choice);
+      if (!chosen) throw wrongShape();
+      const right = question.options.find((option) => option.correct) ?? question.options[0];
+      return { review: { ...common, type: 'choice', status: chosen.correct ? 'correct' : 'incorrect', given: { choice: chosen.id, label: chosen.label },
+        expected: { optionId: right.id, label: right.label }, feedback: chosen.feedback ?? null, notices: [], detail: null } };
+    }
+  }
+}
+
+const publicGradeId = (grade: GradeRec) => (grade.id.includes(':') ? fixedId(Math.abs(hash(grade.id))) : grade.id);
+const gradeView = (grade: GradeRec): Grade => ({
+  kind: 'quiz', id: publicGradeId(grade), lessonId: grade.lessonId, correct: grade.correct, total: grade.total, submittedAt: grade.submittedAt,
+  sessionId: grade.sessionId, activityId: grade.activityId, moduleScores: null, pending: grade.pending ?? 0, flagged: grade.flagged ?? [], typed: grade.typed ?? false,
+});
+function hash(text: string) {
+  let value = 0;
+  for (const char of text) value = (value * 31 + char.charCodeAt(0)) | 0;
+  return value;
+}
+const lastGrade = (learnerId: string, activityId: string) => state().grades
+  .filter((grade) => grade.learnerId === learnerId && grade.activityId === activityId).sort((a, b) => b.submittedAt.localeCompare(a.submittedAt))[0];
+const isUuid = (value: unknown): value is string => typeof value === 'string' && /^[0-9a-fA-F]{8}-(?:[0-9a-fA-F]{4}-){3}[0-9a-fA-F]{12}$/.test(value);
+/** sessionId et l'identifiant d'activité de séance sont indissociables ; la séance doit appartenir à l'élève. */
+function sessionContext(actor: UserRec, sessionId: unknown, activityId: unknown) {
+  if ((sessionId === undefined || sessionId === null) !== (activityId === undefined || activityId === null)) throw invalid('La séance et son activité vont ensemble.');
+  if (sessionId === undefined || sessionId === null) return null;
+  if (typeof sessionId !== 'string' || typeof activityId !== 'string') throw invalid('Séance ou activité invalide.');
+  const { path, session } = sessionOwner(actor, sessionId);
+  if (path.learnerId !== actor.id) throw forbidden();
+  const item = session.items.find((candidate) => candidate.id === activityId);
+  if (!item) throw notFound('Activité introuvable dans cette séance.');
+  return { path, session, item };
+}
+
+/** POST /assessments/exercises : corrige chaque question, fige le corrigé et rattache les essais de répétition. */
+function gradeExercise(actor: UserRec, body: Json, key: string | undefined): ExerciseResult {
+  requireLearner(actor);
+  if (typeof body.lessonId !== 'string' || !isUuid(body.roundId) || !isObject(body.answers)) throw invalid('Leçon, manche (roundId) et réponses attendues.');
+  const context = sessionContext(actor, body.sessionId, body.activityId);
+  const content = contentOfLesson(body.lessonId);
+  if (!content || !content.questions.length) throw notFound('Exercice introuvable.');
+  const existing = key ? state().grades.find((grade) => grade.key === `${actor.id}:${key}`) : undefined;
+  if (existing?.review) return { grade: gradeView(existing), questions: existing.review };
+  const answers = body.answers;
+  // Une manche se remet une fois : les mêmes réponses renvoient la même correction, d'autres réponses sont refusées.
+  const sameRound = state().grades.find((grade) => grade.learnerId === actor.id && grade.roundId === body.roundId && grade.lessonId === body.lessonId);
+  if (sameRound?.review) {
+    const replay = sameRound.review.every((item) => JSON.stringify(item.given && Object.fromEntries(Object.entries(item.given)
+      .filter(([name]) => !['label', 'sentence', 'transcript'].includes(name)))) === JSON.stringify(answers[item.id]));
+    if (replay) return { grade: gradeView(sameRound), questions: sameRound.review };
+    throw conflict('Cette manche est déjà remise : recommencez l’exercice pour une nouvelle manche.');
+  }
+  if (Object.keys(answers).length > exerciseLimits.questions) throw invalid(`${exerciseLimits.questions} réponses au plus.`);
+  const missing = content.questions.filter((question) => !(question.id in answers));
+  if (missing.length) throw invalid(`Répondez à toutes les questions (${missing.map((question) => question.id).join(', ')}).`);
+  const graded = content.questions.map((question) => gradeQuestion(actor, body.lessonId as string, body.roundId as string, question, answers[question.id]));
+  const review = graded.map((item) => item.review);
+  const grade: GradeRec = {
+    id: newId(), key: key ? `${actor.id}:${key}` : undefined, learnerId: actor.id, lessonId: body.lessonId,
+    activityId: context ? context.item.id : content.id, sessionId: context ? context.session.id : null,
+    correct: review.filter((item) => item.status === 'correct').length, total: review.length, submittedAt: now(),
+    typed: true, roundId: body.roundId as string, review,
+    pending: review.filter((item) => item.status === 'pending').length, flagged: review.filter((item) => item.status === 'flagged').map((item) => item.id),
+  };
+  for (const { speech } of graded) if (speech) speech.quizAttemptId = grade.id;
+  state().grades.push(grade);
+  return { grade: gradeView(grade), questions: review };
+}
+
+/** GET /assessments/exercises/{attemptId} : corrigé figé, ou calculé à la volée (sans explication) pour une ancienne remise. */
+function exerciseResult(actor: UserRec, attemptId: string): ExerciseResult {
+  const grade = state().grades.find((item) => publicGradeId(item) === attemptId);
+  if (!grade) throw notFound('Remise introuvable.');
+  readable(actor, grade.learnerId);
+  if (grade.review) return { grade: gradeView(grade), questions: grade.review };
+  const content = contentOfLesson(grade.lessonId) ?? contentOfLesson(grade.activityId ?? '');
+  const questions: QuestionReview[] = (content?.questions ?? []).filter((question) => (question.type ?? 'choice') === 'choice').map((question, index) => {
+    const right = question.options.find((option) => option.correct) ?? question.options[0];
+    return { id: question.id, prompt: question.prompt, type: 'choice', status: index < grade.correct ? 'correct' : 'incorrect', given: null,
+      expected: { optionId: right.id, label: right.label }, explanation: null, feedback: null, notices: [], detail: null };
+  });
+  return { grade: gradeView(grade), questions };
+}
+
+/** Ancienne route des quiz : refusée (409) pour une leçon qui contient des questions typées. */
+function gradeQuiz(actor: UserRec, body: Json, key: string | undefined) {
+  requireLearner(actor);
+  if (typeof body.lessonId !== 'string' || typeof body.answers !== 'object' || body.answers === null) throw invalid('Exercice et réponses attendus.');
+  const activityId = typeof body.activityId === 'string' ? body.activityId : body.lessonId.replace(/^lecon-/, '');
+  const sourceId = activityId.replace(/^ajout-[0-9a-f]{6}-/, '');
+  const level = CONTENT.find((item) => findActivity(item, sourceId));
+  const content = level ? activityContent(level, sourceId) : undefined;
+  if (!content || !content.questions.length) throw notFound('Exercice introuvable.');
+  if (isTyped(content.questions)) throw conflict('Cette leçon contient des questions typées : remettez-la avec /assessments/exercises.');
+  const existing = key ? state().grades.find((grade) => grade.id === `${actor.id}:${key}`) : undefined;
+  if (existing) return gradeView(existing);
+  const answers = body.answers as Record<string, string>;
+  const grade: GradeRec = { id: key ? `${actor.id}:${key}` : newId(), learnerId: actor.id, lessonId: body.lessonId, activityId,
+    sessionId: typeof body.sessionId === 'string' ? body.sessionId : null,
+    correct: content.questions.filter((question) => question.options.find((option) => option.correct)?.id === answers[question.id]).length,
+    total: content.questions.length, submittedAt: now() };
+  state().grades.push(grade);
+  return gradeView(grade);
+}
+
+// --- Répétition orale ----------------------------------------------------------------------------------------------------
+
+/** Correcteur d'un élève : professeur référent, sinon correcteur désigné ; l'administration voit tout. */
+function graderOf(learner: UserRec): { id: string; kind: ReviewerKind } | null {
+  if (learner.teacherId) return { id: learner.teacherId, kind: 'teacher' };
+  if (learner.reviewerId) return { id: learner.reviewerId, kind: 'reviewer' };
+  return null;
+}
+const isGrader = (actor: UserRec, learner: UserRec) => actor.role === 'admin'
+  || (graderOf(learner)?.id === actor.id && (actor.role === 'teacher' || actor.permissions.includes('correction')));
+const recordingView = (recording: RecordingRef | null): RecordingRef | null => (recording ? { ...recording, url: silentAudioUrl(3) } : null);
+
+function speechView(item: SpeechRec): SpeechAttemptView {
+  const failures = failuresUpTo(item);
+  const spec = contentOfLesson(item.lessonId)?.questions.find((question) => question.id === item.questionId)?.spec as SpeakSpec | undefined;
+  return {
+    id: item.id, learnerId: item.learnerId, text: spec?.text ?? null, lessonId: item.lessonId, questionId: item.questionId, roundId: item.roundId, attempt: item.attempt, mode: item.mode,
+    score: item.score, passed: item.passed, threshold: item.threshold, failures, canSkip: failures >= speechLimits.failuresBeforeSkip,
+    transcript: item.transcript, reviewStatus: item.reviewStatus, comment: item.comment, recording: recordingView(item.recording), createdAt: item.createdAt,
+  };
+}
+function speakQuestion(lessonId: unknown, questionId: unknown) {
+  if (typeof lessonId !== 'string' || typeof questionId !== 'string') throw invalid('Leçon et question attendues.');
+  const content = contentOfLesson(lessonId);
+  const question = content?.questions.find((item) => item.id === questionId);
+  if (!content || !question) throw notFound('Question introuvable.');
+  if (question.type !== 'speak') throw conflict('Cette question n’est pas une répétition orale.');
+  return { content, question, spec: question.spec as SpeakSpec };
+}
+function newSpeech(actor: UserRec, body: Json, mode: SpeechMode, spec: SpeakSpec): SpeechRec {
+  if (!isUuid(body.roundId)) throw invalid('Manche (roundId) attendue.');
+  const context = sessionContext(actor, body.sessionId, body.activityId);
+  const previous = speechOfRound(actor.id, body.roundId, String(body.questionId));
+  if (previous.length >= speechLimits.attemptsPerRound) throw conflict('Dix essais au plus par manche : recommencez l’exercice.');
+  return {
+    id: newId(), learnerId: actor.id, lessonId: String(body.lessonId), questionId: String(body.questionId), roundId: body.roundId,
+    sessionId: context?.session.id ?? null, activityId: context?.item.id ?? null, attempt: previous.length + 1, mode, transcript: null, score: null,
+    threshold: spec.threshold, passed: false, reviewStatus: mode === 'recording' ? 'uploading' : 'auto', comment: null, recording: null, uploads: {},
+    quizAttemptId: null, reviewedBy: null, reviewedAt: null, submittedAt: null, createdAt: now(),
+  };
+}
+/** POST /assessments/speech : le serveur recalcule le score à partir des transcriptions du navigateur. */
+function speechAttempt(actor: UserRec, body: Json): SpeechAttemptView {
+  requireLearner(actor);
+  const { spec } = speakQuestion(body.lessonId, body.questionId);
+  const transcripts = body.transcripts;
+  if (!Array.isArray(transcripts) || !transcripts.length || transcripts.length > speechLimits.transcripts
+    || transcripts.some((value) => typeof value !== 'string' || value.length > speechLimits.transcriptChars)) throw invalid('Une à cinq transcriptions de 300 caractères au plus.');
+  const item = newSpeech(actor, body, 'recognition', spec);
+  const best = speechScore(spec, transcripts as string[]);
+  Object.assign(item, { transcript: best.transcript, score: best.score, passed: best.score >= spec.threshold });
+  state().speech.push(item);
+  return speechView(item);
+}
+/** POST /assessments/speech/recordings : essai « enregistrement » et réservation du dépôt dans Médias. */
+function reserveSpeechRecording(actor: UserRec, body: Json) {
+  requireLearner(actor);
+  const { spec } = speakQuestion(body.lessonId, body.questionId);
+  const mimeType = checkRecording(body);
+  const item = newSpeech(actor, body, 'recording', spec);
+  const upload = { id: newId(), uploadUrl: null, maxBytes: RECORDING_MAX_BYTES };
+  item.uploads[upload.id] = mimeType;
+  state().speech.push(item);
+  return { status: 201, body: { attempt: speechView(item), upload } };
+}
+function findSpeech(actor: UserRec, id: string) {
+  const item = state().speech.find((candidate) => candidate.id === id);
+  if (!item) throw notFound('Essai introuvable.');
+  const learner = learnerById(item.learnerId);
+  if (actor.id !== learner.id && !isGrader(actor, learner)) throw forbidden('Cet essai n’est pas confié à votre compte.');
+  return item;
+}
+function finalizeSpeechRecording(actor: UserRec, id: string, productionId: string): SpeechAttemptView {
+  const item = findSpeech(actor, id);
+  if (item.learnerId !== actor.id) throw forbidden();
+  const mimeType = item.uploads[productionId];
+  if (!mimeType) throw notFound('Dépôt introuvable.');
+  if (item.reviewStatus !== 'uploading') throw conflict('Cet enregistrement est déjà envoyé.');
+  Object.assign(item, { recording: { productionId, mimeType, url: null }, reviewStatus: 'pending', submittedAt: now() });
+  return speechView(item);
+}
+/** POST /assessments/speech/{id}/review : la décision met aussi à jour la remise de l'exercice (correct ou à revoir). */
+function reviewSpeech(actor: UserRec, id: string, body: Json): SpeechAttemptView {
+  const item = findSpeech(actor, id);
+  if (!isGrader(actor, learnerById(item.learnerId))) throw forbidden('Seul le correcteur de l’élève valide ses répétitions.');
+  if (item.reviewStatus !== 'pending') throw conflict('Cette répétition n’attend pas de validation.');
+  if (body.decision !== 'validated' && body.decision !== 'rejected') throw invalid('Décision attendue : validated ou rejected.');
+  if (body.comment !== undefined && (typeof body.comment !== 'string' || body.comment.length > 1000)) throw invalid('Commentaire de 1 000 caractères au plus.');
+  const validated = body.decision === 'validated';
+  Object.assign(item, { reviewStatus: body.decision, passed: validated, comment: typeof body.comment === 'string' && body.comment.trim() ? body.comment.trim() : null,
+    reviewedBy: actor.id, reviewedAt: now() });
+  const grade = state().grades.find((candidate) => candidate.id === item.quizAttemptId);
+  const entry = grade?.review?.find((question) => question.id === item.questionId);
+  if (grade && entry && entry.status === 'pending' && entry.type === 'speak') {
+    grade.pending = Math.max(0, (grade.pending ?? 0) - 1);
+    if (validated) grade.correct += 1;
+    else grade.flagged = [...new Set([...(grade.flagged ?? []), item.questionId])];
+    entry.status = validated ? 'correct' : 'flagged';
+    if (entry.detail) Object.assign(entry.detail, { reviewStatus: item.reviewStatus, comment: item.comment });
+  }
+  return speechView(item);
+}
+
+// --- Missions ------------------------------------------------------------------------------------------------------------
+
+const RECORDING_MAX_BYTES = 26_214_400;
+const RECORDING_TYPES = ['audio/webm', 'audio/ogg', 'audio/mpeg', 'audio/mp4', 'audio/wav'];
+function checkRecording(body: Json) {
+  if (typeof body.mimeType !== 'string' || !RECORDING_TYPES.includes(body.mimeType)) throw invalid('Formats acceptés : WebM, Ogg, MP3, MP4 ou WAV.');
+  if (typeof body.size !== 'number' || body.size < 1 || body.size > RECORDING_MAX_BYTES) throw invalid('L’enregistrement dépasse 25 Mo.');
+  return body.mimeType;
+}
+const canReviewMission = (actor: UserRec, mission: MissionRec) => mission.status === 'submitted'
+  && (actor.role === 'admin' || (mission.reviewerId === actor.id && (actor.role === 'teacher' || actor.permissions.includes('correction'))));
+function missionView(mission: MissionRec, actor: UserRec): MissionView {
+  return {
+    id: mission.id, learnerId: mission.learnerId, trackVersionId: mission.trackVersionId, levelCode: mission.levelCode, moduleId: mission.moduleId,
+    activityId: mission.activityId, sessionId: mission.sessionId, sessionActivityId: mission.sessionActivityId, number: mission.number, title: mission.title,
+    definition: mission.definition, status: mission.status, text: mission.text, checklist: mission.checklist, recording: recordingView(mission.recording),
+    reviewerKind: mission.reviewerKind, submittedAt: mission.submittedAt,
+    review: mission.status === 'reviewed' && mission.decision ? { decision: mission.decision, comment: mission.comment, reviewedAt: mission.reviewedAt as string } : null,
+    canReview: canReviewMission(actor, mission), createdAt: mission.createdAt, updatedAt: mission.updatedAt,
+  };
+}
+const missionSummary = (mission: MissionRec): MissionSummary => ({
+  id: mission.id, activityId: mission.activityId, title: mission.title, levelCode: mission.levelCode, moduleId: mission.moduleId, status: mission.status,
+  decision: mission.decision, submittedAt: mission.submittedAt, reviewedAt: mission.reviewedAt, sessionId: mission.sessionId,
+});
+function findMission(actor: UserRec, id: string) {
+  const mission = state().missions.find((item) => item.id === id);
+  if (!mission) throw notFound('Mission introuvable.');
+  const learner = learnerById(mission.learnerId);
+  if (actor.id !== learner.id && actor.role !== 'admin' && mission.reviewerId !== actor.id && !(actor.role === 'teacher' && learner.teacherId === actor.id)) {
+    throw forbidden('Cette mission n’est pas confiée à votre compte.');
+  }
+  return mission;
+}
+function ownDraft(actor: UserRec, id: string) {
+  const mission = findMission(actor, id);
+  if (mission.learnerId !== actor.id) throw forbidden('Seul l’élève modifie sa mission.');
+  if (mission.status !== 'draft') throw conflict('Cette mission est déjà envoyée.');
+  return mission;
+}
+/** POST /assessments/missions : dernière remise de ce contexte (200), ou nouveau brouillon (201). */
+function openMission(actor: UserRec, body: Json) {
+  requireLearner(actor);
+  if (!isUuid(body.trackVersionId) || typeof body.activityId !== 'string') throw invalid('Version et activité attendues.');
+  const level = versionLevel(body.trackVersionId);
+  const content = level ? activityContent(level, body.activityId) : undefined;
+  if (!level || !content) throw notFound('Activité introuvable.');
+  if (content.kind !== 'mission' || !content.mission) throw conflict('Cette activité n’est pas une mission.');
+  const context = sessionContext(actor, body.sessionId, body.sessionActivityId);
+  const sessionId = context?.session.id ?? null;
+  const sessionActivityId = context?.item.id ?? null;
+  const mine = state().missions.filter((item) => item.learnerId === actor.id && item.trackVersionId === body.trackVersionId && item.activityId === content.id)
+    .sort((a, b) => b.number - a.number);
+  const latest = mine.find((item) => item.sessionId === sessionId && item.sessionActivityId === sessionActivityId);
+  if (body.restart === true) {
+    const previous = latest ?? mine[0];
+    if (!previous || !(previous.status === 'sent' || (previous.status === 'reviewed' && previous.decision === 'to_redo'))) {
+      throw conflict('Une mission se reprend après un retour « à reprendre » ou un envoi sans correcteur.');
+    }
+  } else if (latest) {
+    return { status: 200, body: missionView(latest, actor) };
+  }
+  const draft = mine.find((item) => item.status === 'draft');
+  if (draft) {
+    Object.assign(draft, { sessionId, sessionActivityId, updatedAt: now() });
+    return { status: 200, body: missionView(draft, actor) };
+  }
+  const stamp = now();
+  const mission: MissionRec = {
+    id: newId(), learnerId: actor.id, trackVersionId: body.trackVersionId, levelCode: level.code, moduleId: content.module.id, activityId: content.id,
+    lessonId: lessonIdOf(content.id), sessionId, sessionActivityId, number: (mine[0]?.number ?? 0) + 1, status: 'draft', title: content.title,
+    definition: { ...content.mission, description: content.lesson?.description ?? '' }, text: body.restart === true ? mine[0]?.text ?? '' : '',
+    checklist: [], recording: null, uploads: {}, reviewerId: null, reviewerKind: null, submitKey: null, submittedAt: null, decision: null, comment: null,
+    reviewedBy: null, reviewedAt: null, createdAt: stamp, updatedAt: stamp,
+  };
+  state().missions.push(mission);
+  return { status: 201, body: missionView(mission, actor) };
+}
+function saveMission(actor: UserRec, id: string, body: Json): MissionView {
+  const mission = ownDraft(actor, id);
+  if (body.text !== undefined) {
+    if (typeof body.text !== 'string' || body.text.length > missionLimits.textChars) throw invalid('Le texte compte 1 500 caractères au plus.');
+    mission.text = body.text;
+  }
+  if (body.checklist !== undefined) {
+    const items = body.checklist;
+    if (!Array.isArray(items) || new Set(items).size !== items.length
+      || items.some((value) => !Number.isInteger(value) || value < 0 || value >= mission.definition.checklist.length)) throw invalid('Liste de vérification invalide.');
+    mission.checklist = [...(items as number[])].sort((a, b) => a - b);
+  }
+  mission.updatedAt = now();
+  return missionView(mission, actor);
+}
+function reserveMissionRecording(actor: UserRec, id: string, body: Json) {
+  const mission = ownDraft(actor, id);
+  if (!mission.definition.oral) throw conflict('Cette mission n’a pas de partie orale.');
+  const mimeType = checkRecording(body);
+  const upload = { id: newId(), uploadUrl: null, maxBytes: RECORDING_MAX_BYTES };
+  mission.uploads[upload.id] = mimeType;
+  return upload;
+}
+function finalizeMissionRecording(actor: UserRec, id: string, productionId: string): MissionView {
+  const mission = ownDraft(actor, id);
+  const mimeType = mission.uploads[productionId];
+  if (!mimeType) throw notFound('Dépôt introuvable.');
+  Object.assign(mission, { recording: { productionId, mimeType, url: null }, updatedAt: now() });
+  return missionView(mission, actor);
+}
+/** POST …/submit : liste entièrement cochée, texte et enregistrement exigés selon les parties ; destinataire selon l'élève. */
+function submitMission(actor: UserRec, id: string, key: string | undefined): MissionView {
+  const mission = findMission(actor, id);
+  if (mission.learnerId !== actor.id) throw forbidden('Seul l’élève envoie sa mission.');
+  if (mission.status !== 'draft') {
+    if (key && mission.submitKey === key) return missionView(mission, actor);
+    throw conflict('Cette mission est déjà envoyée.');
+  }
+  const { written, oral, checklist } = mission.definition;
+  if (mission.checklist.length !== checklist.length) throw conflict('Cochez chaque point de la liste avant d’envoyer.');
+  if (written) {
+    if (!mission.text.trim()) throw conflict('Écrivez votre texte avant d’envoyer.');
+    if (mission.text.length > written.maxChars) throw conflict(`Le texte dépasse ${written.maxChars} caractères.`);
+    if (countWords(mission.text) < written.minWords) throw conflict(`Écrivez au moins ${written.minWords} mots.`);
+  }
+  if (oral && !mission.recording) throw conflict('Enregistrez votre partie orale avant d’envoyer.');
+  const grader = graderOf(actor);
+  Object.assign(mission, { status: grader ? 'submitted' : 'sent', reviewerId: grader?.id ?? null, reviewerKind: grader?.kind ?? null,
+    submitKey: key ?? null, submittedAt: now(), updatedAt: now() });
+  return missionView(mission, actor);
+}
+function reviewMission(actor: UserRec, id: string, body: Json): MissionView {
+  const mission = findMission(actor, id);
+  if (!canReviewMission(actor, mission)) {
+    if (mission.status !== 'submitted') throw conflict('Cette mission n’attend pas de retour.');
+    throw forbidden('Cette mission est confiée à un autre correcteur.');
+  }
+  if (body.decision !== 'validated' && body.decision !== 'to_redo') throw invalid('Décision attendue : validated ou to_redo.');
+  if (typeof body.comment !== 'string' || body.comment.length > missionLimits.commentChars) throw invalid('Commentaire de 2 000 caractères au plus.');
+  if (body.decision === 'to_redo' && !body.comment.trim()) throw invalid('Expliquez à l’élève ce qu’il doit reprendre.');
+  Object.assign(mission, { status: 'reviewed', decision: body.decision, comment: body.comment.trim() || null, reviewedBy: actor.id, reviewedAt: now(), updatedAt: now() });
+  return missionView(mission, actor);
+}
+
+// --- Catalogue : documents de version au format 4 (éditeur) -------------------------------------------------------------
+
+/** Document d'une version publiée, construit à partir des contenus du simulateur (questions typées, missions, lexique). */
+function versionDocument(code: LevelCode): Json {
+  const level = levelContent(code) as MockLevelContent;
+  const round = (value: number) => Math.round(value * 100) / 100;
+  return {
+    id: VERSIONS[code].id, levelId: code.toLowerCase(), levelCode: code, levelTitle: levelTitle(code), number: VERSIONS[code].number,
+    status: 'published', publishedAt: VERSIONS[code].publishedAt, updatedAt: VERSIONS[code].publishedAt,
+    settings: { expectedCompetences: ['lecture', 'ecoute', 'expression-ecrite', 'expression-orale'],
+      successCriteria: `Obtenir au moins ${level.settings.passPercent} % à l’examen blanc ${code}.`, ...level.settings },
+    diagnostic: null,
+    modules: level.modules.map((module) => ({
+      id: module.id, title: module.title, objective: module.objective, prerequisites: module.prerequisites,
+      vocabulary: (VOCABULARY[module.id] ?? []).map((entry, index) => ({ ...entry,
+        audio: { assetId: `${module.id}-lexique`, assetVersion: 1, start: round(0.3 + index * 2.5), end: round(1.9 + index * 2.5) } })),
+      activities: module.activities.map(([id, kind, title, minutes, competences]) => {
+        const content = activityContent(level, id) as MockContent;
+        return {
+          id, kind, title, estimatedMinutes: minutes, competences,
+          lesson: content.lesson ? { title: content.lesson.title, description: content.lesson.description, transcript: content.transcript } : null,
+          // Le retour d'un choix est absent (et non nul) quand il n'y en a pas, comme dans le catalogue.
+          questions: content.questions.map((question) => ({ ...question,
+            options: question.options.map(({ feedback, ...option }) => (feedback ? { ...option, feedback } : option)) })),
+          placements: [], mission: V4_DETAILS[id]?.mission ?? null,
+        };
+      }),
+    })),
+    assessments: [],
+  };
+}
+function catalogueVersion(actor: UserRec, id: string): Json {
+  if (!canEditCatalogue(actor)) throw forbidden('Réservé aux éditeurs du catalogue.');
+  const draft = (state().catalogueDrafts ?? []).find((item) => item.id === id);
+  if (draft) return draft;
+  const code = Object.entries(VERSIONS).find(([, version]) => version.id === id)?.[0];
+  if (!code) throw notFound('Version introuvable.');
+  return versionDocument(code as LevelCode);
+}
+/** POST /catalogue/levels/{levelId}/versions : brouillon copié de la version publiée. */
+function createCatalogueDraft(actor: UserRec, levelId: string) {
+  const code = levelId.toUpperCase();
+  if (!VERSIONS[code]) throw notFound('Niveau introuvable.');
+  const existing = catalogueVersion(actor, VERSIONS[code].id);
+  const drafts = (state().catalogueDrafts ??= []);
+  if (drafts.some((item) => item.levelCode === code)) throw conflict('Un brouillon existe déjà pour ce niveau.');
+  const draft: Json = { ...structuredClone(existing), id: newId(), number: VERSIONS[code].number + 1, status: 'draft', publishedAt: null, updatedAt: now() };
+  drafts.push(draft);
+  return { status: 201, body: draft };
+}
+/** PUT /catalogue/versions/{id} : seul un brouillon se modifie ; le simulateur ne contrôle pas le document. */
+function saveCatalogueDraft(actor: UserRec, id: string, body: Json) {
+  const draft = catalogueVersion(actor, id);
+  if (draft.status !== 'draft') throw conflict('Une version publiée ne se modifie pas : créez un brouillon.');
+  Object.assign(draft, { settings: body.settings ?? draft.settings, diagnostic: body.diagnostic ?? null, modules: body.modules ?? draft.modules,
+    assessments: body.assessments ?? draft.assessments, updatedAt: now() });
+  return { version: draft, checks: { publishable: true, issues: [] } };
+}
+
+// --- File de corrections et lexique --------------------------------------------------------------------------------------
+
+function reviewQueue(actor: UserRec): ReviewQueueItem[] {
+  if (actor.role === 'learner') throw forbidden();
+  if (actor.role === 'staff' && !actor.permissions.includes('correction')) throw forbidden('Réservé aux correcteurs.');
+  const missions = state().missions.filter((mission) => canReviewMission(actor, mission)).map((mission): ReviewQueueItem => ({
+    kind: 'mission', id: mission.id, learnerId: mission.learnerId, learnerName: learnerById(mission.learnerId).displayName, title: mission.title,
+    levelCode: mission.levelCode, context: mission.sessionId ? 'session' : 'library', submittedAt: mission.submittedAt as string,
+  }));
+  const speech = state().speech.filter((item) => item.reviewStatus === 'pending' && isGrader(actor, learnerById(item.learnerId))).map((item): ReviewQueueItem => {
+    const content = contentOfLesson(item.lessonId);
+    const spec = content?.questions.find((question) => question.id === item.questionId)?.spec as SpeakSpec | undefined;
+    return { kind: 'speech', id: item.id, learnerId: item.learnerId, learnerName: learnerById(item.learnerId).displayName,
+      title: `Prononciation : « ${spec?.text ?? item.questionId} »`, levelCode: content?.level.code ?? null,
+      context: item.sessionId ? 'session' : 'library', submittedAt: item.submittedAt ?? item.createdAt };
+  });
+  return [...missions, ...speech].sort((a, b) => a.submittedAt.localeCompare(b.submittedAt));
+}
+
+/** Ligne du son de lexique : « der Kopf, die Köpfe » pour un nom, le mot seul sinon. */
+const spokenLine = (entry: MockVocabulary) => (entry.partOfSpeech === 'noun'
+  ? [`${entry.article ?? 'die'} ${entry.word}`, entry.plural ? `die ${entry.plural}` : null].filter(Boolean).join(', ') : entry.word);
+function lexiconOf(level: MockLevelContent, module: MockModule): Lexicon {
+  const url = silentAudioUrl(60);
+  let cursor = 0.3;
+  const round = (value: number) => Math.round(value * 100) / 100;
+  const entries = (VOCABULARY[module.id] ?? []).map((entry): LexiconEntry => {
+    const length = 0.6 + 0.07 * spokenLine(entry).length;
+    const audio = { url, start: round(cursor), end: round(cursor + length) };
+    cursor += length + 0.9;
+    return { ...entry, audio };
+  });
+  return { trackVersionId: VERSIONS[level.code].id, levelCode: level.code, moduleId: module.id, moduleTitle: module.title, entries };
+}
+function moduleLexicon(actor: UserRec, versionId: string, moduleId: string): Lexicon {
+  if (actor.role === 'staff' && !canEditCatalogue(actor)) throw forbidden();
+  const level = versionLevel(versionId);
+  const module = level?.modules.find((item) => item.id === moduleId);
+  if (!level || !module) throw notFound('Module introuvable.');
+  return lexiconOf(level, module);
+}
+/** Révision du module : exercices dont le dernier résultat contient des questions « à revoir ». */
+function reviewItemsOf(learnerId: string, level: MockLevelContent, moduleId: string | null): ReviewItem[] {
+  const module = level.modules.find((item) => item.id === moduleId);
+  return (module?.activities ?? []).filter(([, kind]) => kind === 'exercise').flatMap(([id, , title]) => {
+    const last = lastGrade(learnerId, id);
+    return last?.flagged?.length ? [{ activityId: id, title, trackVersionId: VERSIONS[level.code].id, flagged: last.flagged,
+      lastResult: { correct: last.correct, total: last.total } }] : [];
+  });
+}
 
 function libraryView(actor: UserRec, query: URLSearchParams): Library {
   const learner = targetLearner(actor, query);
   const path = latestPath(learner.id);
   const step = path ? activeStep(path) : undefined;
-  const grades = state().grades.filter((grade) => grade.learnerId === learner.id);
   return {
     languageId: learner.languageId,
     levels: (learner.languageId === 'de' ? publishedLevels() : []).map((code) => {
@@ -1406,10 +2181,11 @@ function libraryView(actor: UserRec, query: URLSearchParams): Library {
         modules: level.modules.map((module, index) => ({
           id: module.id, position: index + 1, title: module.title, objective: module.objective,
           activities: module.activities.map(([id, kind, title, minutes, competences]) => {
-            const last = grades.filter((grade) => grade.activityId === id).sort((a, b) => b.submittedAt.localeCompare(a.submittedAt))[0];
+            const last = lastGrade(learner.id, id);
             return { id, kind, title, estimatedMinutes: minutes, competences, lessonId: lessonIdOf(id),
-              lastResult: last ? { correct: last.correct, total: last.total, submittedAt: last.submittedAt } : null };
+              lastResult: last ? { correct: last.correct, total: last.total, submittedAt: last.submittedAt } : null, toReview: Boolean(last?.flagged?.length) };
           }),
+          vocabularyCount: VOCABULARY[module.id]?.length ?? 0,
         })),
         practice: [{ kind: 'midterm' as const, title: `Bilan intermédiaire ${code}`, available: true },
           { kind: 'final' as const, title: `Examen blanc ${code}`, available: false }],
@@ -1428,35 +2204,10 @@ function libraryActivity(actor: UserRec, versionId: string, activityId: string):
     id: content.id, position: content.module.activities.findIndex(([id]) => id === content.id) + 1, kind: content.kind, title: content.title,
     estimatedMinutes: content.minutes, competences: content.competences, status: 'todo', state: {}, completedAt: null, attemptId: null,
     lesson: content.lesson ? { id: lessonIdOf(content.id), ...content.lesson } : null, transcript: content.transcript,
-    questions: withoutAnswers(content.questions), placements: [], trackVersionId: versionId, levelCode: level.code,
-    moduleId: content.module.id, moduleTitle: content.module.title,
+    questions: content.questions.map((question) => questionView(lessonIdOf(content.id), question)),
+    placements: questionPlacements(content.id, content.questions, false), trackVersionId: versionId, levelCode: level.code,
+    moduleId: content.module.id, moduleTitle: content.module.title, mission: content.mission,
   };
-}
-
-/** Corrigé d'un exercice : séance du parcours (avec activityId) ou exercice libre de la bibliothèque. */
-function gradeQuiz(actor: UserRec, body: Json, key: string | undefined) {
-  requireLearner(actor);
-  if (typeof body.lessonId !== 'string' || typeof body.answers !== 'object' || body.answers === null) throw invalid('Exercice et réponses attendus.');
-  const activityId = typeof body.activityId === 'string' ? body.activityId : body.lessonId.replace(/^lecon-/, '');
-  const sourceId = activityId.replace(/^ajout-[0-9a-f]{6}-/, '');
-  const level = CONTENT.find((item) => findActivity(item, sourceId));
-  const content = level ? activityContent(level, sourceId) : undefined;
-  if (!content || !content.questions.length) throw notFound('Exercice introuvable.');
-  const existing = key ? state().grades.find((grade) => grade.id === `${actor.id}:${key}`) : undefined;
-  if (existing) return gradeView(existing);
-  const answers = body.answers as Record<string, string>;
-  const grade: GradeRec = { id: key ? `${actor.id}:${key}` : newId(), learnerId: actor.id, lessonId: body.lessonId, activityId,
-    sessionId: typeof body.sessionId === 'string' ? body.sessionId : null,
-    correct: content.questions.filter((question) => answers[question.id] === question.answer).length, total: content.questions.length, submittedAt: now() };
-  state().grades.push(grade);
-  return gradeView(grade);
-}
-const gradeView = (grade: GradeRec) => ({ kind: 'quiz', id: grade.id.includes(':') ? fixedId(Math.abs(hash(grade.id))) : grade.id, lessonId: grade.lessonId,
-  correct: grade.correct, total: grade.total, submittedAt: grade.submittedAt, sessionId: grade.sessionId, activityId: grade.activityId, moduleScores: null });
-function hash(text: string) {
-  let value = 0;
-  for (const char of text) value = (value * 31 + char.charCodeAt(0)) | 0;
-  return value;
 }
 
 function sessionOwner(actor: UserRec, sessionId: string) {
@@ -1480,18 +2231,28 @@ function sessionDetail(actor: UserRec, sessionId: string) {
   const { path, session } = sessionOwner(actor, sessionId);
   const position = path.liveSessions.filter((item) => item.levelCode === session.levelCode).sort((a, b) => a.dueAt.localeCompare(b.dueAt)).indexOf(session) + 1;
   const level = levelContent(session.levelCode) as MockLevelContent;
+  const module = level.modules.find((item) => item.id === session.moduleId);
+  const lexicon = module && VOCABULARY[module.id]?.length ? lexiconOf(level, module) : null;
   return {
     session: sessionSummary(path, session, position), enrollmentId: session.enrollmentId, trackVersionId: VERSIONS[session.levelCode].id, levelCode: session.levelCode,
+    lexicon,
     activities: session.items.map((item, index) => {
       const sourceLevel = item.sourceActivityId ? CONTENT.find((candidate) => findActivity(candidate, item.sourceActivityId as string)) ?? level : level;
       const content = activityContent(sourceLevel, item.sourceActivityId ?? item.id);
       const progress = path.progress[progressKey(session.levelCode, item.id)];
+      const status = activityStatus(path, session.levelCode, item.id);
       return {
         id: item.id, position: index + 1, kind: item.kind, title: item.title, estimatedMinutes: item.minutes, competences: content?.competences ?? [],
-        status: activityStatus(path, session.levelCode, item.id), state: progress?.state ?? {}, completedAt: progress?.completedAt ?? null, attemptId: null,
+        status, state: progress?.state ?? {}, completedAt: progress?.completedAt ?? null, attemptId: progress?.attemptId ?? null,
         lesson: content?.lesson ? { id: lessonIdOf(content.id), ...content.lesson }
           : item.kind === 'review' ? { id: `lecon-${item.id}`, title: item.title, description: 'Reprenez le vocabulaire et les phrases clés du module, puis refaites les exercices où vous avez hésité.' } : null,
-        transcript: content?.transcript ?? null, questions: content ? withoutAnswers(content.questions) : [], placements: [],
+        transcript: content?.transcript ?? null,
+        questions: content ? content.questions.map((question) => questionView(lessonIdOf(content.id), question)) : [],
+        placements: content ? questionPlacements(content.id, content.questions, status === 'completed') : [],
+        mission: content?.mission ?? null,
+        contentVersionId: content ? item.sourceVersionId ?? VERSIONS[content.level.code].id : null,
+        contentActivityId: content?.id ?? null,
+        reviewItems: item.kind === 'review' ? reviewItemsOf(path.learnerId, level, item.moduleId) : null,
       };
     }),
   };
@@ -1503,12 +2264,20 @@ function recordProgress(actor: UserRec, sessionId: string, activityId: string, b
   const item = session.items.find((candidate) => candidate.id === activityId);
   if (!item) throw notFound('Activité introuvable dans cette séance.');
   if (item.kind === 'assessment' && body.completed) throw conflict('Le bilan et l’examen blanc se terminent par leur remise.');
+  if (item.kind === 'mission' && body.completed) {
+    // Comme Apprentissage : la mission doit être envoyée, depuis cette séance et cette activité.
+    const mission = state().missions.find((candidate) => candidate.id === body.attemptId && candidate.learnerId === actor.id);
+    if (!mission || !['submitted', 'sent', 'reviewed'].includes(mission.status) || mission.sessionId !== session.id || mission.sessionActivityId !== item.id) {
+      throw conflict('Envoyez la mission avant de terminer l’activité.');
+    }
+  }
   const key = progressKey(session.levelCode, activityId);
   const previous = path.progress[key];
   path.progress[key] = {
     status: body.completed || previous?.status === 'completed' ? 'completed' : 'started',
     completedAt: previous?.completedAt ?? (body.completed ? now() : null),
     state: typeof body.state === 'object' && body.state !== null ? body.state as Json : previous?.state ?? {},
+    attemptId: typeof body.attemptId === 'string' ? body.attemptId : previous?.attemptId ?? null,
   };
   if (session.items.every((candidate) => itemDone(path, session.levelCode, candidate.id))) session.completedAt ??= now();
   const position = path.liveSessions.filter((candidate) => candidate.levelCode === session.levelCode).sort((a, b) => a.dueAt.localeCompare(b.dueAt)).indexOf(session) + 1;
@@ -1969,6 +2738,26 @@ const routes: [Method, RegExp, Handler][] = [
   ['GET', /^\/learning\/library$/, ({ actor, query }) => libraryView(actor, query)],
   ['GET', new RegExp(`^/learning/library/${UUID}/activities/${SLUG}$`), ({ actor, params }) => libraryActivity(actor, params[0], params[1])],
   ['POST', /^\/assessments\/quiz$/, ({ actor, body, key }) => gradeQuiz(actor, body, key)],
+  ['GET', new RegExp(`^/learning/library/${UUID}/modules/${SLUG}/lexicon$`), ({ actor, params }) => moduleLexicon(actor, params[0], params[1])],
+
+  // V4 : exercices typés et corrigé, répétition orale, missions, file de corrections
+  ['POST', /^\/assessments\/exercises$/, ({ actor, body, key }) => gradeExercise(actor, body, key)],
+  ['GET', new RegExp(`^/assessments/exercises/${ANY}$`), ({ actor, params }) => exerciseResult(actor, params[0])],
+  ['POST', /^\/assessments\/speech$/, ({ actor, body }) => speechAttempt(actor, body)],
+  ['POST', /^\/assessments\/speech\/recordings$/, ({ actor, body }) => reserveSpeechRecording(actor, body)],
+  ['GET', new RegExp(`^/assessments/speech/${UUID}$`), ({ actor, params }) => speechView(findSpeech(actor, params[0]))],
+  ['POST', new RegExp(`^/assessments/speech/${UUID}/recordings/${UUID}/finalize$`), ({ actor, params }) => finalizeSpeechRecording(actor, params[0], params[1])],
+  ['POST', new RegExp(`^/assessments/speech/${UUID}/review$`), ({ actor, params, body }) => reviewSpeech(actor, params[0], body)],
+  ['GET', /^\/assessments\/missions$/, ({ actor, query }) => state().missions.filter((mission) => mission.learnerId === targetLearner(actor, query).id)
+    .sort((a, b) => b.updatedAt.localeCompare(a.updatedAt)).map(missionSummary)],
+  ['POST', /^\/assessments\/missions$/, ({ actor, body }) => openMission(actor, body)],
+  ['GET', new RegExp(`^/assessments/missions/${UUID}$`), ({ actor, params }) => missionView(findMission(actor, params[0]), actor)],
+  ['PUT', new RegExp(`^/assessments/missions/${UUID}$`), ({ actor, params, body }) => saveMission(actor, params[0], body)],
+  ['POST', new RegExp(`^/assessments/missions/${UUID}/recordings$`), ({ actor, params, body }) => reserveMissionRecording(actor, params[0], body)],
+  ['POST', new RegExp(`^/assessments/missions/${UUID}/recordings/${UUID}/finalize$`), ({ actor, params }) => finalizeMissionRecording(actor, params[0], params[1])],
+  ['POST', new RegExp(`^/assessments/missions/${UUID}/submit$`), ({ actor, params, key }) => submitMission(actor, params[0], key)],
+  ['POST', new RegExp(`^/assessments/missions/${UUID}/review$`), ({ actor, params, body }) => reviewMission(actor, params[0], body)],
+  ['GET', /^\/assessments\/reviews$/, ({ actor }) => reviewQueue(actor)],
   ['GET', /^\/assessments\/results$/, ({ actor, query }) => state().grades.filter((grade) => grade.learnerId === targetLearner(actor, query).id).map(gradeView)],
 
   // Inscription et séances (forme historique)
@@ -2072,8 +2861,19 @@ const routes: [Method, RegExp, Handler][] = [
   ['GET', /^\/catalogue\/levels$/, () => publishedLevels().map((code, index) => ({
     id: code.toLowerCase(), code, title: levelTitle(code), description: '', position: index + 1, status: 'published',
     prerequisiteLevelId: index ? levelCodes[index - 1].toLowerCase() : null, prerequisiteLevelCode: index ? levelCodes[index - 1] : null,
-    versions: [{ id: VERSIONS[code].id, number: VERSIONS[code].number, status: 'published', publishedAt: VERSIONS[code].publishedAt, retiredAt: null, updatedAt: VERSIONS[code].publishedAt }],
+    versions: [
+      ...(state().catalogueDrafts ?? []).filter((draft) => draft.levelCode === code).map((draft) => ({ id: draft.id, number: draft.number, status: 'draft',
+        publishedAt: null, retiredAt: null, updatedAt: draft.updatedAt })),
+      { id: VERSIONS[code].id, number: VERSIONS[code].number, status: 'published', publishedAt: VERSIONS[code].publishedAt, retiredAt: null, updatedAt: VERSIONS[code].publishedAt }],
   }))],
+  // Documents de version au format 4 (questions typées, missions, lexique) pour l'éditeur du catalogue.
+  ['GET', new RegExp(`^/catalogue/versions/${UUID}$`), ({ actor, params }) => catalogueVersion(actor, params[0])],
+  ['GET', new RegExp(`^/catalogue/versions/${UUID}/checks$`), ({ actor, params }) => {
+    catalogueVersion(actor, params[0]);
+    return { publishable: true, issues: [] };
+  }],
+  ['PUT', new RegExp(`^/catalogue/versions/${UUID}$`), ({ actor, params, body }) => saveCatalogueDraft(actor, params[0], body)],
+  ['POST', /^\/catalogue\/levels\/([abc][12])\/versions$/, ({ actor, params }) => createCatalogueDraft(actor, params[0])],
   ['GET', /^\/media$/, () => []],
   ['GET', /^\/media\/uploads$/, () => []],
 ];
@@ -2188,6 +2988,7 @@ function seed(): State {
       user(IDS.suivi, 'Léa Durand', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
       user(IDS.yanis, 'Yanis Benali', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
       user(IDS.awa, 'Awa Diallo', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
+      user(IDS.parcours, 'Nora Lefèvre', 'learner', { teacherId: IDS.weber, languageId: 'de' }),
       user(IDS.weber, 'Marie Weber', 'teacher', { teacherProfile: { languages: ['de'], levels: ['A1', 'A2'], maxLearners: 25, gradingDelayHours: 48,
         bio: 'Professeure d’allemand depuis douze ans, j’aime les cours vivants et les petits progrès de chaque semaine.', onboardedAt: at(created, 10),
         acceptingNewStudents: true, courseCreationMode: 'linguacap' } }),
@@ -2202,14 +3003,18 @@ function seed(): State {
       tiers: placementBank(), updatedAt: at(created, 9), publishedAt: at(created, 9) }],
     placements: [], paths: [], practice: [], grades: [], exams: [], messages: [],
     teacherResponses: [{ teacherId: IDS.weber, date: created, accepting: true, mode: 'linguacap' }],
+    speech: [], missions: [],
   };
   const invitation = (learner: UserRec): InvitationRec => ({ id: newId(), email: learner.email, displayName: learner.displayName, role: 'learner',
     teacherId: IDS.weber, languageId: 'de', invitedBy: IDS.weber, status: 'accepted', sendCount: 1, createdAt: at(created, 11), lastSentAt: at(created, 11),
     expiresAt: at(addDays(created, 7), 11), acceptedAt: at(addDays(created, 1), 8), cancelledAt: null });
-  current.invitations.push(...[IDS.suivi, IDS.yanis, IDS.awa].map((id) => invitation(userById(id) as UserRec)));
+  current.invitations.push(...[IDS.suivi, IDS.yanis, IDS.awa, IDS.parcours].map((id) => invitation(userById(id) as UserRec)));
 
   // Yanis : parcours A1 → A2 démarré il y a dix jours, contrat n°1 en attente du professeur.
   seedPath(userById(IDS.yanis) as UserRec, { placed: 'A0', target: 'A2', startOffset: -10, months: 6, doneUntil: -3 });
+  // Nora : parcours A1 → A2 démarré aujourd'hui, contrat accepté, aucune séance faite (activités V4 du module « a1-hallo »).
+  const nora = seedPath(userById(IDS.parcours) as UserRec, { placed: 'A0', target: 'A2', startOffset: 0, months: 8, doneUntil: -1 });
+  Object.assign(nora.contracts[0], { status: 'accepted', decidedAt: at(today(), 8), decidedBy: IDS.weber, decisionNote: 'Bienvenue, Nora : on y va !' });
   // Awa : parcours A2 démarré il y a trois semaines, contrat accepté et un module A1 ajouté par le professeur.
   const awa = seedPath(userById(IDS.awa) as UserRec, { placed: 'A1', target: 'A2', startOffset: -21, months: 4, doneUntil: -2 });
   const contract = awa.contracts[0];
@@ -2220,7 +3025,92 @@ function seed(): State {
   contract.terms = termsOf(awa, { weeklyMinutes: contract.terms.weeklyMinutes });
   validateCurrent(awa);
   current.messages.push({ id: newId(), learnerId: IDS.awa, authorId: IDS.weber, text: 'Bravo pour cette belle régularité ! J’ai ajouté une révision du module « Essen » avant l’examen blanc.', sentAt: at(addDays(today(), -1), 9) });
+  seedV4();
   return current;
+}
+
+/**
+ * Données V4 : pour Léa (bibliothèque), une répétition « à revoir », un exercice typé corrigé et une mission à reprendre ;
+ * pour Yanis (séance), une mission et une répétition enregistrée qui attendent Marie Weber ; pour Awa, une mission validée.
+ */
+function seedV4() {
+  const lea = userById(IDS.suivi) as UserRec;
+  const yanis = userById(IDS.yanis) as UserRec;
+  const awa = userById(IDS.awa) as UserRec;
+  const weber = userById(IDS.weber) as UserRec;
+  const ago = (days: number, hour: number) => at(addDays(today(), -days), hour);
+  const missionRec = (id: string) => state().missions.find((item) => item.id === id) as MissionRec;
+  const gradeRec = (id: string) => state().grades.find((item) => item.id === id) as GradeRec;
+  const speakLesson = lessonIdOf('a1-hallo-nachsprechen');
+  const practiceLesson = lessonIdOf('a1-hallo-ueben');
+
+  // Léa : trois échecs sur s3, la phrase passe « à revoir ».
+  const round = fixedId(0x501);
+  const say = (questionId: string, transcript: string) => speechAttempt(lea, { lessonId: speakLesson, questionId, roundId: round, transcripts: [transcript] });
+  const tries = [say('s1', 'Guten Morgen'), say('s2', 'Ich heiße Anna'), say('s3', 'Ich komme'), say('s3', 'Ich bin aus Frankfurt'),
+    say('s3', 'Komme aus Frankfurt'), say('s4', 'Ich spreche Deutsch und Französisch')];
+  const spoken = gradeExercise(lea, { lessonId: speakLesson, roundId: round, answers: {
+    s1: { speechAttemptId: tries[0].id }, s2: { speechAttemptId: tries[1].id }, s3: { speechAttemptId: tries[4].id }, s4: { speechAttemptId: tries[5].id },
+  } }, 'apercu-lea-repeter');
+  gradeRec(spoken.grade.id).submittedAt = ago(2, 18);
+  for (const attempt of state().speech) if (attempt.roundId === round) attempt.createdAt = ago(2, 18);
+
+  // Léa : exercice typé avec une graphie translittérée acceptée, un trou faux, une association inversée et un mauvais choix.
+  const practice = V4_DETAILS['a1-hallo-ueben'].questions;
+  const order = questionView(practiceLesson, practice[2]) as Extract<QuestionView, { type: 'order' }>;
+  const { left, solution } = matchItems(practiceLesson, practice[3]);
+  const written = gradeExercise(lea, { lessonId: practiceLesson, roundId: fixedId(0x502), answers: {
+    q1: { blanks: { 1: 'heisse', 2: 'komme' } }, q2: { blanks: { 1: 'ist', 2: 'sind' } },
+    q3: { order: ['Welche', 'Sprachen', 'sprichst', 'du', 'gut?'].map((text) => (order.tokens.find((token) => token.text === text) as QuestionItem).id) },
+    q4: { pairs: { ...solution, [left[0].id]: solution[left[1].id], [left[1].id]: solution[left[0].id] } }, q5: { choice: 'a' },
+  } }, 'apercu-lea-ueben');
+  gradeRec(written.grade.id).submittedAt = ago(1, 19);
+
+  // Léa : mission de bibliothèque envoyée à Marie Weber, à reprendre.
+  const sendMission = (learner: UserRec, body: Json, text: string, key: string) => {
+    const mission = openMission(learner, body).body;
+    saveMission(learner, mission.id, { text, checklist: mission.definition.checklist.map((_, index) => index) });
+    const upload = reserveMissionRecording(learner, mission.id, { mimeType: 'audio/webm', size: 180_000 });
+    finalizeMissionRecording(learner, mission.id, upload.id);
+    return submitMission(learner, mission.id, key);
+  };
+  const leaMission = sendMission(lea, { trackVersionId: VERSIONS.A1.id, activityId: 'a1-hallo-mission' },
+    'Hallo! Ich heiße Léa Durand und ich komme aus Frankreich, aus Lyon. Jetzt ich wohne in Würzburg. Ich spreche Französisch, Englisch und ein bisschen Deutsch. Ich bin Studentin. Freut mich!',
+    'apercu-lea-mission');
+  reviewMission(weber, leaMission.id, { decision: 'to_redo', comment: 'Très bon début, Léa ! Une seule chose à corriger : après « Jetzt », le verbe vient en 2e position (« Jetzt wohne ich in Würzburg. »). Réenregistrez-vous en articulant bien « Würzburg ».' });
+  Object.assign(missionRec(leaMission.id), { createdAt: ago(4, 17), submittedAt: ago(4, 18), reviewedAt: ago(3, 9), updatedAt: ago(3, 9) });
+
+  // Yanis : mission envoyée depuis sa séance, en attente de Marie Weber.
+  const path = latestPath(yanis.id);
+  const sessionWith = (activityId: string) => path?.liveSessions.find((session) => session.items.some((item) => item.id === activityId));
+  const missionSession = sessionWith('a1-hallo-mission');
+  if (missionSession) {
+    const mission = sendMission(yanis, { trackVersionId: VERSIONS.A1.id, activityId: 'a1-hallo-mission', sessionId: missionSession.id, sessionActivityId: 'a1-hallo-mission' },
+      'Guten Tag! Ich heiße Yanis Benali. Ich komme aus Algerien, aber ich wohne jetzt in Marseille. Ich spreche Arabisch, Französisch und ein bisschen Deutsch. Ich lerne Deutsch, weil ich in Berlin studieren möchte. Tschüs!',
+      'apercu-yanis-mission');
+    recordProgress(yanis, missionSession.id, 'a1-hallo-mission', { completed: true, attemptId: mission.id });
+    Object.assign(missionRec(mission.id), { createdAt: ago(1, 18), submittedAt: ago(1, 19), updatedAt: ago(1, 19) });
+  }
+  // Yanis : trois phrases réussies et une répétition enregistrée pour le professeur (navigateur sans reconnaissance vocale).
+  const speakSession = sessionWith('a1-hallo-nachsprechen');
+  if (speakSession) {
+    const context = { lessonId: speakLesson, roundId: fixedId(0x503), sessionId: speakSession.id, activityId: 'a1-hallo-nachsprechen' };
+    const passed = (questionId: string, transcript: string) => ({ speechAttemptId: speechAttempt(yanis, { ...context, questionId, transcripts: [transcript] }).id });
+    const answers: Json = { s1: passed('s1', 'Guten Morgen'), s2: passed('s2', 'Ich heiße Anna'), s3: passed('s3', 'Ich komme aus Frankreich') };
+    const reserved = reserveSpeechRecording(yanis, { ...context, questionId: 's4', mimeType: 'audio/webm', size: 64_000 }).body;
+    finalizeSpeechRecording(yanis, reserved.attempt.id, reserved.upload.id);
+    const result = gradeExercise(yanis, { ...context, answers: { ...answers, s4: { speechAttemptId: reserved.attempt.id } } }, 'apercu-yanis-repeter');
+    recordProgress(yanis, speakSession.id, 'a1-hallo-nachsprechen', { completed: true, attemptId: result.grade.id, state: {} });
+    gradeRec(result.grade.id).submittedAt = ago(2, 19);
+    for (const attempt of state().speech) if (attempt.roundId === context.roundId) Object.assign(attempt, { createdAt: ago(2, 19), submittedAt: attempt.submittedAt && ago(2, 19) });
+  }
+
+  // Awa : mission de bibliothèque validée.
+  const awaMission = sendMission(awa, { trackVersionId: VERSIONS.A2.id, activityId: 'a2-gesundheit-mission' },
+    'Sehr geehrte Damen und Herren, ich habe am Donnerstag um 10 Uhr einen Termin bei Dr. Brandt. Leider kann ich nicht kommen, weil ich arbeiten muss. Wie besprochen komme ich am Freitag um 9 Uhr. Vielen Dank für Ihr Verständnis! Mit freundlichen Grüßen Awa Diallo',
+    'apercu-awa-mission');
+  reviewMission(weber, awaMission.id, { decision: 'validated', comment: 'Parfait, Awa : la subordonnée avec « weil » est juste et la formule de politesse aussi. Bravo !' });
+  Object.assign(missionRec(awaMission.id), { createdAt: ago(6, 17), submittedAt: ago(6, 18), reviewedAt: ago(5, 10), updatedAt: ago(5, 10) });
 }
 
 /** Données initiales : allonge les séances jusqu'à ce que le planning tienne (aucun débordement). */
@@ -2270,7 +3160,8 @@ function seedPath(learner: UserRec, options:{ placed: StartLevel; target: LevelC
     }
     if (session.items.every((item) => itemDone(path, session.levelCode, item.id))) session.completedAt = at(session.date, 19);
   }
-  for (const grade of path.liveSessions.filter((session) => session.completedAt).flatMap((session) => session.items.filter((item) => item.kind === 'exercise')
+  for (const grade of path.liveSessions.filter((session) => session.completedAt).flatMap((session) => session.items.filter((item) => item.kind === 'exercise'
+    && !(V4_DETAILS[item.id] && isTyped(V4_DETAILS[item.id].questions)))
     .map((item) => ({ session, item }))).slice(0, 6)) {
     state().grades.push({ id: newId(), learnerId: learner.id, lessonId: lessonIdOf(grade.item.id), activityId: grade.item.id, sessionId: grade.session.id,
       correct: 3 + (grade.item.id.length % 3), total: 6, submittedAt: grade.session.completedAt as string });
@@ -2312,3 +3203,193 @@ const DETAILS: Record<string, MockActivityDetail> = {
   "a2-reisen-dialog": {"lesson":{"title":"Wie war dein Urlaub? — Raconter ses vacances au passé","description":"Lundi matin, Julia et Tarek se retrouvent devant la machine à café du bureau. Ils rentrent tous les deux de vacances. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte. Repérez les verbes au passé.\n\nDIALOGUE\nJulia : Hallo Tarek! Du bist ja ganz braun. Wie war dein Urlaub?\nTarek : Hallo Julia! Super, danke. Ich war mit meiner Familie zwei Wochen in Kroatien, am Meer.\nJulia : Toll! Seid ihr geflogen?\nTarek : Nein, wir sind mit dem Auto gefahren. Die Fahrt hat elf Stunden gedauert, das war ziemlich anstrengend.\nJulia : Elf Stunden! Und wo habt ihr übernachtet?\nTarek : Wir haben eine Ferienwohnung in Split gemietet, direkt am Strand. Ich bin jeden Morgen im Meer geschwommen.\nJulia : Und wie war das Wetter?\nTarek : Fantastisch. Die Sonne hat jeden Tag geschienen, und es waren über dreißig Grad. Und du? Du bist doch nach Wien gefahren, oder?\nJulia : Ja, mit dem Nachtzug. Ich bin am Samstagmorgen angekommen und habe gleich die Altstadt besichtigt. Am Nachmittag habe ich Schloss Schönbrunn gesehen, und im Café habe ich natürlich eine Sachertorte gegessen.\nTarek : Lecker! Hat dir Wien gefallen?\nJulia : Sehr! Nur am Sonntag hat es den ganzen Tag geregnet. Da bin ich ins Museum gegangen.\nTarek : Und hast du mir etwas mitgebracht?\nJulia : Na klar, Mozartkugeln! Hier, nimm eine!\n\nGRAMMAIRE : LE PASSÉ COMPOSÉ (PERFEKT)\nPour raconter au passé à l’oral et dans les messages, l’allemand emploie surtout le Perfekt : l’auxiliaire haben ou sein, conjugué, en 2e position, et le participe passé à la fin de la phrase.\n• Ich habe die Altstadt besichtigt.   • Wir sind mit dem Auto gefahren.   • Am Sonntag hat es geregnet.\nDans une question sans mot interrogatif, l’auxiliaire vient en 1re position : Seid ihr geflogen? Hat dir Wien gefallen?\n\nHABEN OU SEIN ?\n• La plupart des verbes se conjuguent avec haben : Ich habe ein Hotel gebucht. Sie hat eine Sachertorte gegessen.\n• On emploie sein avec les verbes de déplacement (fahren, fliegen, gehen, kommen, reisen, wandern, schwimmen), avec les verbes de changement d’état (aufstehen, einschlafen) et avec bleiben : Ich bin nach Wien gefahren. Wir sind zu Hause geblieben.\n\nLE PARTICIPE PASSÉ\n• Verbes réguliers : ge- + radical + -t : machen → gemacht, buchen → gebucht, mieten → gemietet, dauern → gedauert, regnen → geregnet\n• Verbes irréguliers : ge- + radical (souvent modifié) + -en : fahren → gefahren, sehen → gesehen, essen → gegessen, fliegen → geflogen, schwimmen → geschwommen, scheinen → geschienen, gehen → gegangen\n• Verbes à particule séparable : ge- se place entre la particule et le radical : ankommen → angekommen, einkaufen → eingekauft, mitbringen → mitgebracht\n• Pas de ge- pour les verbes en -ieren ni pour les verbes à préfixe inséparable (be-, ver-, er-, ge-, et über- dans übernachten) : reservieren → reserviert, besichtigen → besichtigt, besuchen → besucht, verpassen → verpasst, übernachten → übernachtet, gefallen → gefallen\n\nSEIN ET HABEN AU PASSÉ\nPour ces deux verbes, on emploie plutôt le prétérit : ich war, du warst, er/sie war, wir waren, ihr wart, sie/Sie waren ; ich hatte, du hattest, er/sie hatte, wir hatten.\n• Wie war dein Urlaub? — Comment se sont passées tes vacances ?   • Ich war zwei Wochen am Meer.   • Wir hatten Glück mit dem Wetter."},"transcript":null,"questions":[]},
   "a2-reisen-grammatik": {"lesson":{"title":"Ich bin gefahren, ich habe gebucht","description":"Choisissez la forme qui complète correctement chaque phrase.\n\nRAPPELS\n• Perfekt : haben ou sein en 2e position, participe passé à la fin. sein avec les verbes de déplacement et avec bleiben.\n• Participes : gemacht, gesehen, eingekauft ; pas de ge- pour les verbes en -ieren et à préfixe inséparable (reserviert, besucht).\n• Wohin? (accusatif) : nach + ville ou pays sans article ; in + pays avec article ou région (in die Türkei) ; an + eau (an den See). Wo? (datif) : am See, in der Türkei."},"transcript":null,"questions":[{"id":"q1","prompt":"Letzten Sommer … wir nach Portugal geflogen.","options":[{"id":"a","text":"haben"},{"id":"b","text":"sind"},{"id":"c","text":"waren"},{"id":"d","text":"hatten"}],"answer":"b"},{"id":"q2","prompt":"Ich habe das Hotel schon im Januar …","options":[{"id":"a","text":"gebucht"},{"id":"b","text":"gebuchen"},{"id":"c","text":"buchte"},{"id":"d","text":"bebucht"}],"answer":"a"},{"id":"q3","prompt":"Wann seid ihr in Hamburg …?","options":[{"id":"a","text":"angekommt"},{"id":"b","text":"geankommen"},{"id":"c","text":"ankommen"},{"id":"d","text":"angekommen"}],"answer":"d"},{"id":"q4","prompt":"Am Samstag haben wir das Schloss …","options":[{"id":"a","text":"gebesichtigt"},{"id":"b","text":"besichtigen"},{"id":"c","text":"besichtigt"},{"id":"d","text":"gesichtigt"}],"answer":"c"},{"id":"q5","prompt":"Im Juli fahren wir … Schweiz, nach Zürich.","options":[{"id":"a","text":"in die"},{"id":"b","text":"nach der"},{"id":"c","text":"in der"},{"id":"d","text":"zur"}],"answer":"a"},{"id":"q6","prompt":"Ich liebe den Strand! Nächste Woche fahre ich endlich …","options":[{"id":"a","text":"am Meer"},{"id":"b","text":"nach Meer"},{"id":"c","text":"ins Meer"},{"id":"d","text":"ans Meer"}],"answer":"d"},{"id":"q7","prompt":"Wo warst du im Urlaub? — Ich war zwei Wochen …","options":[{"id":"a","text":"in die Berge"},{"id":"b","text":"in den Bergen"},{"id":"c","text":"nach den Bergen"},{"id":"d","text":"an die Berge"}],"answer":"b"},{"id":"q8","prompt":"Au guichet, vous voulez savoir si vous devez changer de train. Que demandez-vous ?","options":[{"id":"a","text":"Hat der Zug Verspätung?"},{"id":"b","text":"Von welchem Gleis fährt der Zug ab?"},{"id":"c","text":"Muss ich umsteigen?"},{"id":"d","text":"Ist das Frühstück inklusive?"}],"answer":"c"}]},
 };
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Contenus V4 d'exemple : une question de chaque type, une répétition orale, deux missions et deux lexiques
+// ---------------------------------------------------------------------------------------------------------------------
+
+const choice = (id: string, prompt: string, explanation: string, options: [string, boolean, string | null][]): DraftQuestionV4 => ({
+  id, type: 'choice', prompt, moduleRef: null, explanation, spec: null,
+  options: options.map(([label, correct, feedback], index) => ({ id: 'abcd'[index], label, correct, feedback })),
+});
+const typed = (id: string, type: NonNullable<DraftQuestionV4['type']>, prompt: string, explanation: string, spec: DraftQuestionV4['spec']): DraftQuestionV4 => ({
+  id, type, prompt, moduleRef: null, explanation, options: [], spec,
+});
+const speak = (id: string, text: string, explanation: string): DraftQuestionV4 =>
+  typed(id, 'speak', 'Écoutez, puis répétez la phrase à voix haute.', explanation, { text, accept: [text], threshold: countWords(text) <= 3 ? 80 : 75 });
+const dictation = (id: string, accept: string[], explanation: string): DraftQuestionV4 =>
+  typed(id, 'dictation', 'Écoutez et écrivez la phrase.', explanation, { accept, showWordCount: true });
+
+/** Activités ajoutées par la V4 : [module, activité placée après, tuple de l'activité]. */
+const V4_ACTIVITIES: [string, string, MockModule['activities'][number]][] = [
+  ['a1-hallo', 'a1-hallo-grammatik', ['a1-hallo-ueben', 'exercise', 'S’entraîner : heißen, kommen, sein', 10, ['lecture', 'expression-ecrite']]],
+  ['a1-hallo', 'a1-hallo-ueben', ['a1-hallo-nachsprechen', 'exercise', 'Répéter à voix haute : se présenter', 8, ['ecoute', 'expression-orale']]],
+  ['a1-hallo', 'a1-hallo-sprechen', ['a1-hallo-mission', 'mission', 'Mission : se présenter au groupe', 15, ['expression-orale', 'expression-ecrite']]],
+  ['a1-zahlen', 'a1-zahlen-hoeren', ['a1-zahlen-diktat', 'exercise', 'Dictée : âge, prix et couleurs', 8, ['ecoute', 'expression-ecrite']]],
+  ['a2-gesundheit', 'a2-gesundheit-grammatik', ['a2-gesundheit-ueben', 'exercise', 'S’entraîner : weil, dass et les verbes à préposition', 10, ['lecture', 'expression-ecrite']]],
+  ['a2-gesundheit', 'a2-gesundheit-sprechen', ['a2-gesundheit-mission', 'mission', 'Mission : déplacer un rendez-vous chez le médecin', 20, ['expression-orale', 'expression-ecrite']]],
+];
+
+const V4_DETAILS: Record<string, MockV4Detail> = {
+  'a1-hallo-ueben': {
+    lesson: { title: 'Ich heiße, ich komme, ich bin', description: 'Complétez, remettez en ordre et associez pour vérifier les trois verbes de la présentation et la place du verbe.\n\nRAPPEL\n• heißen : ich heiße, du heißt, er/sie heißt, Sie heißen\n• kommen : ich komme, du kommst, er/sie kommt, Sie kommen\n• sein : ich bin, du bist, er/sie ist, Sie sind\n• Question en W : le mot interrogatif, puis le verbe conjugué en 2e position (Woher kommen Sie?).' },
+    transcript: null,
+    questions: [
+      typed('q1', 'fill', 'Complétez avec la forme du verbe indiqué.',
+        'Avec « ich », le verbe se termine par -e : ich heiße, ich komme. Les formes « heißt » et « kommst » correspondent à « du ».',
+        { text: 'Ich [[1]] Anna und ich [[2]] aus Italien.', blanks: [{ id: '1', accept: ['heiße'], size: 7, hint: 'heißen' }, { id: '2', accept: ['komme'], size: 7, hint: 'kommen' }] }),
+      typed('q2', 'fill', 'Complétez avec le verbe « sein ».',
+        '« Das » (c’est) et « sie » (elle, ici Frau Weber) demandent la 3e personne du singulier : « ist ». « sind » va avec « wir », « sie » (ils) et « Sie » (vous de politesse).',
+        { text: 'Das [[1]] Frau Weber. Sie kommt aus Wien und [[2]] sehr nett.', blanks: [{ id: '1', accept: ['ist'], size: 5, hint: null }, { id: '2', accept: ['ist'], size: 5, hint: null }] }),
+      typed('q3', 'order', 'Remettez les mots dans l’ordre pour poser la question.',
+        'Le groupe interrogatif « Welche Sprachen » occupe la 1re place, le verbe conjugué « sprichst » la 2e, puis vient le sujet « du ». « gut » se place après le sujet.',
+        { answers: [['Welche', 'Sprachen', 'sprichst', 'du', 'gut?']] }),
+      typed('q4', 'match', 'Associez chaque question à la réponse qui convient.',
+        '« Wie » demande comment, « Woher » d’où l’on vient (réponse avec « aus »), « Wo » où l’on habite (réponse avec « in »). « Wie geht\'s? » demande des nouvelles.',
+        { pairs: [{ left: 'Wie heißt du?', right: 'Ich heiße Jonas.' }, { left: 'Woher kommst du?', right: 'Aus Frankreich.' },
+          { left: 'Wo wohnst du?', right: 'In Würzburg.' }, { left: 'Wie geht\'s?', right: 'Gut, danke!' }] }),
+      choice('q5', 'Vous demandez son nom à votre nouvelle voisine, une dame âgée que vous ne connaissez pas. Que dites-vous ?',
+        'Avec un adulte qu’on ne connaît pas, on vouvoie : « Sie » et le verbe en -en, « Wie heißen Sie? ».', [
+          ['Wie heißt du?', false, '« du » s’emploie avec la famille, les amis, les enfants et entre jeunes : ici, c’est trop familier.'],
+          ['Wie heißen Sie?', true, null],
+          ['Wie heißen du?', false, '« heißen » va avec « Sie » ; avec « du », la forme est « heißt ».'],
+        ]),
+    ],
+  },
+  'a1-hallo-nachsprechen': {
+    lesson: { title: 'Nachsprechen — Répéter', description: 'Écoutez chaque phrase, puis répétez-la à voix haute avec le bouton « Parler ». Votre navigateur reconnaît ce que vous dites et LinguaCap le compare à la phrase modèle.\n\nAprès trois essais, vous pouvez passer à la suite : la phrase sera notée « à revoir ». Sans reconnaissance vocale, enregistrez-vous pour votre professeur.' },
+    transcript: null,
+    questions: [
+      speak('s1', 'Guten Morgen!', 'Le « g » de « Guten » est toujours dur, comme dans « gâteau » ; le « r » de « Morgen » se prononce au fond de la gorge.'),
+      speak('s2', 'Ich heiße Anna.', '« ei » se prononce [aï] et « ß » est un « s » dur : « heiße » se dit [haïsse].'),
+      speak('s3', 'Ich komme aus Frankreich.', 'Après « i » ou « ei », « ch » est un souffle doux (ich-Laut) : « ich », « Frankreich ».'),
+      speak('s4', 'Ich spreche Deutsch und Französisch.', '« sp » en début de mot se prononce [chp] : « spreche ». « eu » se dit [oï] : « Deutsch ».'),
+    ],
+  },
+  'a1-hallo-mission': {
+    lesson: { title: 'Sich vorstellen — Se présenter', description: 'Votre cours d’allemand commence. Frau Weber demande à chaque participant de se présenter au groupe, à l’oral puis par écrit sur le forum du cours.\n\nCONSIGNE\nPrésentez-vous : votre nom, votre pays d’origine, votre ville et les langues que vous parlez. Terminez par une formule de politesse.\n\nEXPRESSIONS UTILES\n• Ich heiße … / Mein Name ist …\n• Ich komme aus … Ich wohne in …\n• Ich spreche … und ein bisschen Deutsch.\n• Freut mich! / Bis bald!' },
+    transcript: null,
+    questions: [],
+    mission: {
+      oral: { prompt: 'Enregistrez votre présentation (30 secondes à une minute et demie) : nom, origine, ville et langues.', maxSeconds: 90 },
+      written: { prompt: 'Écrivez votre message de présentation pour le forum du cours (25 mots au moins).', maxChars: 600, minWords: 25 },
+      checklist: [
+        'J’ai dit mon nom avec « Ich heiße … » ou « Mein Name ist … ».',
+        'J’ai dit d’où je viens et où j’habite (kommen aus, wohnen in).',
+        'J’ai cité au moins une langue que je parle.',
+        'J’ai relu mon texte : verbe en 2e position, majuscule aux noms.',
+      ],
+    },
+  },
+  'a1-zahlen-diktat': {
+    lesson: { title: 'Diktat — Dictée', description: 'Écoutez chaque phrase autant de fois que nécessaire, puis écrivez-la. Les nombres peuvent s’écrire en chiffres ou en lettres. Utilisez la barre ä ö ü ß pour les lettres allemandes.' },
+    transcript: null,
+    questions: [
+      dictation('d1', ['Ich bin zwanzig Jahre alt.'], '« Jahre » est un nom : il prend une majuscule. Pour donner son âge, on dit « Ich bin … Jahre alt ».'),
+      dictation('d2', ['Der Kaffee kostet drei Euro fünfzig.', 'Der Kaffee kostet 3,50 Euro.'],
+        'Pour un prix, on dit les euros puis les centimes : « drei Euro fünfzig » (3,50 €). « Euro » reste au singulier après un nombre.'),
+      dictation('d3', ['Mein Fahrrad ist blau.'], 'Après « ist », la couleur est un adjectif : elle s’écrit en minuscule et ne change pas. « Fahrrad » est un nom : majuscule.'),
+    ],
+  },
+  'a2-gesundheit-ueben': {
+    lesson: { title: 'Weil, dass und Verben mit Präposition', description: 'Après « weil » (parce que) et « dass » (que), le verbe conjugué part à la fin de la phrase. « denn » (car) ne change pas l’ordre des mots.\n\n• Ich bleibe zu Hause, weil ich krank bin.\n• Der Arzt sagt, dass ich viel trinken soll.\n• Ich bleibe zu Hause, denn ich bin krank.\n\nCertains verbes se construisent avec une préposition et un cas fixes : warten auf + accusatif, sprechen mit + datif.' },
+    transcript: null,
+    questions: [
+      typed('g1', 'order', 'Remettez les mots dans l’ordre.',
+        '« weil » introduit une subordonnée : le sujet « ich » suit la conjonction et le verbe conjugué « habe » se place à la fin.',
+        { answers: [['Ich bleibe zu Hause,', 'weil', 'ich', 'Fieber', 'habe.']] }),
+      typed('g2', 'order', 'Remettez les mots dans l’ordre.',
+        'Après « dass », le verbe conjugué va à la fin ; avec un verbe de modalité, l’infinitif « trinken » se place juste avant lui : « … trinken soll ».',
+        { answers: [['Der Arzt sagt,', 'dass', 'ich', 'viel', 'Wasser', 'trinken', 'soll.']] }),
+      typed('g3', 'fill', 'Complétez avec « weil » ou « dass ».',
+        '« glauben, dass … » introduit ce que l’on pense ; la cause s’exprime avec « weil » (ou « da »). Dans les deux cas, le verbe conjugué (hast, geht) est à la fin.',
+        { text: 'Ich glaube, [[1]] du Fieber hast. Du solltest zum Arzt gehen, [[2]] es dir nicht gut geht.',
+          blanks: [{ id: '1', accept: ['dass'], size: 6, hint: null }, { id: '2', accept: ['weil', 'da'], size: 6, hint: null }] }),
+      typed('g4', 'match', 'Associez chaque verbe à la préposition et au cas qu’il demande.',
+        'Ces constructions s’apprennent avec le verbe : auf den Bus warten, an den Termin denken, mit dem Arzt sprechen, Angst vor der Spritze haben.',
+        { pairs: [{ left: 'warten', right: 'auf + accusatif' }, { left: 'denken', right: 'an + accusatif' },
+          { left: 'sprechen', right: 'mit + datif' }, { left: 'Angst haben', right: 'vor + datif' }] }),
+      dictation('g5', ['Mir tut der Kopf weh.'], 'La personne qui a mal est au datif (mir) et la partie du corps est le sujet (der Kopf) ; la particule « weh » se place à la fin.'),
+      choice('g6', 'Votre collègue tousse depuis une semaine. Quel conseil lui donnez-vous ?',
+        'Pour conseiller, on emploie « sollte » conjugué en 2e position et l’infinitif à la fin : « Du solltest zum Arzt gehen. »', [
+          ['Du solltest zum Arzt gehen.', true, null],
+          ['Du solltest zum Arzt gegangen.', false, 'Après un verbe de modalité comme « sollte », le verbe reste à l’infinitif : « gehen ».'],
+          ['Du solltest zum Arzt zu gehen.', false, '« zu » + infinitif ne s’emploie pas après un verbe de modalité.'],
+        ]),
+    ],
+  },
+  'a2-gesundheit-mission': {
+    lesson: { title: 'Einen Termin verschieben — Déplacer un rendez-vous', description: 'Vous avez rendez-vous jeudi à 10 heures chez le docteur Brandt, mais votre responsable vous demande de travailler ce jour-là. Vous appelez le cabinet, puis vous confirmez par courriel.\n\nCONSIGNE\nAu téléphone : saluez, donnez votre nom, expliquez pourquoi vous ne pouvez pas venir (avec « weil ») et proposez un autre jour. Par écrit : confirmez le nouveau rendez-vous en quelques phrases.\n\nEXPRESSIONS UTILES\n• Ich habe am Donnerstag um 10 Uhr einen Termin.\n• Leider kann ich nicht kommen, weil …\n• Geht es auch am Freitag?\n• Mit freundlichen Grüßen' },
+    transcript: null,
+    questions: [],
+    mission: {
+      oral: { prompt: 'Laissez un message sur le répondeur du cabinet (une minute au plus).', maxSeconds: 60 },
+      written: { prompt: 'Écrivez le courriel de confirmation au cabinet (40 mots au moins).', maxChars: 800, minWords: 40 },
+      checklist: [
+        'J’ai salué et donné mon nom.',
+        'J’ai expliqué pourquoi je ne peux pas venir, avec « weil » et le verbe à la fin.',
+        'J’ai proposé un autre jour et une heure.',
+        'J’ai terminé le courriel par « Mit freundlichen Grüßen ».',
+      ],
+    },
+  },
+};
+
+/** Explications ajoutées par la V4 aux questions historiques (les autres restent sans explication dans le simulateur). */
+const EXPLANATIONS: Record<string, Record<string, string>> = {
+  'a1-hallo-grammatik': {
+    q1: 'Avec « ich », le verbe prend la terminaison -e : « ich heiße ». « heißt » va avec « du » ou « er/sie », « heißen » avec « Sie » ou « wir ».',
+    q2: 'Avec « du », la terminaison est -st : « du kommst ». Le verbe se place juste après le mot interrogatif « Woher ».',
+    q3: '« Sie » (vous de politesse) se conjugue comme le pluriel : le verbe se termine par -en, « Sie heißen ».',
+    q4: '« Das ist … » présente une personne ou une chose : « sein » se conjugue « ist » à la 3e personne du singulier.',
+    q5: 'La réponse « In Würzburg » indique où l’on habite : on demande avec « Wo ». « Woher » demande l’origine (réponse avec « aus »).',
+    q6: 'On vouvoie un adulte inconnu, surtout dans un cadre officiel : « Guten Tag! Wie geht es Ihnen? ». « Hallo » et « Wie geht\'s dir? » sont familiers, « Tschüs » sert à partir.',
+  },
+};
+
+const word = (id: string, value: string, partOfSpeech: MockVocabulary['partOfSpeech'], translation: string, example: string,
+  extra: Partial<Pick<MockVocabulary, 'article' | 'plural' | 'note'>> = {}): MockVocabulary => ({
+  id, word: value, article: extra.article ?? null, plural: extra.plural ?? null, partOfSpeech, translation, example, note: extra.note ?? null,
+});
+const VOCABULARY: Record<string, MockVocabulary[]> = {
+  'a1-hallo': [
+    word('hallo', 'Hallo!', 'expression', 'Salut ! Bonjour !', 'Hallo, ich bin Jonas.', { note: 'familier' }),
+    word('guten-morgen', 'Guten Morgen!', 'expression', 'Bonjour ! (le matin)', 'Guten Morgen, Frau Weber!'),
+    word('tschuess', 'Tschüs!', 'expression', 'Salut ! (pour partir)', 'Tschüs, bis morgen!', { note: 'familier ; poli : Auf Wiedersehen!' }),
+    word('heissen', 'heißen', 'verb', 's’appeler', 'Wie heißen Sie?', { note: 'ich heiße, du heißt' }),
+    word('kommen', 'kommen', 'verb', 'venir', 'Ich komme aus Frankreich.', { note: '+ aus : venir de' }),
+    word('wohnen', 'wohnen', 'verb', 'habiter', 'Ich wohne in Würzburg.', { note: '+ in : habiter à' }),
+    word('sprechen', 'sprechen', 'verb', 'parler', 'Ich spreche Französisch und Deutsch.', { note: 'irrégulier : du sprichst, er spricht' }),
+    word('name', 'Name', 'noun', 'le nom', 'Mein Name ist Anna Rossi.', { article: 'der', plural: 'Namen' }),
+    word('land', 'Land', 'noun', 'le pays', 'Aus welchem Land kommst du?', { article: 'das', plural: 'Länder' }),
+    word('sprache', 'Sprache', 'noun', 'la langue', 'Welche Sprachen sprichst du?', { article: 'die', plural: 'Sprachen' }),
+    word('lehrerin', 'Lehrerin', 'noun', 'la professeure', 'Frau Weber ist meine Lehrerin.', { article: 'die', plural: 'Lehrerinnen', note: 'masculin : der Lehrer' }),
+    word('leute', 'Leute', 'noun', 'les gens', 'Die Leute im Kurs sind nett.', { note: 'toujours au pluriel : die Leute' }),
+    word('woher', 'woher', 'adverb', 'd’où', 'Woher kommen Sie?'),
+    word('freut-mich', 'Freut mich!', 'expression', 'Enchanté(e) !', 'Freut mich, Anna!'),
+  ],
+  'a2-gesundheit': [
+    word('kopf', 'Kopf', 'noun', 'la tête', 'Mein Kopf tut weh.', { article: 'der', plural: 'Köpfe' }),
+    word('bauch', 'Bauch', 'noun', 'le ventre', 'Mir tut der Bauch weh.', { article: 'der', plural: 'Bäuche' }),
+    word('hals', 'Hals', 'noun', 'la gorge, le cou', 'Mein Hals tut weh.', { article: 'der', plural: 'Hälse' }),
+    word('ruecken', 'Rücken', 'noun', 'le dos', 'Der Rücken tut mir weh.', { article: 'der', plural: 'Rücken' }),
+    word('fieber', 'Fieber', 'noun', 'la fièvre', 'Ich habe seit gestern Fieber.', { article: 'das' }),
+    word('erkaeltung', 'Erkältung', 'noun', 'le rhume', 'Ich habe eine Erkältung.', { article: 'die', plural: 'Erkältungen' }),
+    word('termin', 'Termin', 'noun', 'le rendez-vous', 'Ich möchte einen Termin vereinbaren.', { article: 'der', plural: 'Termine' }),
+    word('rezept', 'Rezept', 'noun', 'l’ordonnance', 'Der Arzt schreibt mir ein Rezept.', { article: 'das', plural: 'Rezepte', note: 'aussi : la recette de cuisine' }),
+    word('apotheke', 'Apotheke', 'noun', 'la pharmacie', 'Die Apotheke ist gleich um die Ecke.', { article: 'die', plural: 'Apotheken' }),
+    word('wehtun', 'wehtun', 'verb', 'faire mal', 'Mir tut der Kopf weh.', { note: 'séparable : weh|tun ; + datif : mir tut … weh' }),
+    word('sich-ausruhen', 'sich ausruhen', 'verb', 'se reposer', 'Du solltest dich ausruhen.', { note: 'séparable et pronominal : ich ruhe mich aus' }),
+    word('krank', 'krank', 'adjective', 'malade', 'Ich bin krank und bleibe zu Hause.'),
+    word('gesund', 'gesund', 'adjective', 'en bonne santé', 'Obst und Gemüse sind gesund.'),
+    word('gute-besserung', 'Gute Besserung!', 'expression', 'Bon rétablissement !', 'Gute Besserung, Tarek!'),
+  ],
+};
+
+// Les activités V4 rejoignent leurs modules à la suite de l'activité indiquée.
+for (const [moduleId, after, activity] of V4_ACTIVITIES) {
+  const module = CONTENT.flatMap((level) => level.modules).find((item) => item.id === moduleId);
+  if (!module || module.activities.some(([id]) => id === activity[0])) continue;
+  const index = module.activities.findIndex(([id]) => id === after);
+  module.activities.splice(index < 0 ? module.activities.length : index + 1, 0, activity);
+}

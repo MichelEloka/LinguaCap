@@ -17,10 +17,12 @@ import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
 import { pathToFileURL } from 'node:url';
 import {
-  allMedia, audioFile, availableLevels, creditOf, imageFile, loadLevel, loadPlacement, placementMedia, root, transcriptOf,
+  allMedia, audioFile, audioManifest, availableLevels, creditOf, imageFile, levelFormat, loadLevel, loadPlacement,
+  placementMedia, questionType, root, transcriptOf,
 } from './content-lib.mjs';
 
-const MAX_BODY = 1024 * 1024;
+/** Taille maximale d'un document envoyé (passerelle, catalogue et importeur : 2 Mo). */
+export const MAX_BODY = 2 * 1024 * 1024;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 
 /** Titre de l'élément de médiathèque : titre du contenu suivi de sa clé, unique et retrouvable. */
@@ -35,8 +37,47 @@ function mediaFile(media) {
   return { file, mimeType };
 }
 
-/** Document de version attendu par PUT /catalogue/versions/{id}, les médias étant résolus en (assetId, version). */
-export function buildDocument(level, assets) {
+/**
+ * Clé de correction d'une question typée (format 4), champs propres au type seulement :
+ * fill {text, blanks}, order {answers}, match {pairs}, dictation {accept, showWordCount}, speak {text, accept, threshold}.
+ */
+export function questionSpec(question) {
+  switch (questionType(question)) {
+    case 'fill':
+      return { text: question.text, blanks: (question.blanks ?? []).map((blank) => ({
+        id: String(blank.id), accept: blank.accept, size: blank.size ?? null, hint: blank.hint ?? null })) };
+    case 'order':
+      return { answers: question.answers };
+    case 'match':
+      return { pairs: (question.pairs ?? []).map((pair) => ({ left: pair.left, right: pair.right })) };
+    case 'dictation':
+      return { accept: question.accept, showWordCount: question.showWordCount ?? true };
+    case 'speak':
+      return { text: question.text, accept: question.accept ?? [question.text], threshold: question.threshold ?? null };
+    default:
+      return null;
+  }
+}
+
+/**
+ * Son d'une entrée de vocabulaire : segment de la ligne dans le son du lexique (manifeste de synthesize-v3.py), avec
+ * l'élément de médiathèque déposé. null tant que le son ou ses segments manquent.
+ */
+function vocabularyAudio(entry, assets, manifest) {
+  if (!entry.audio) return null;
+  const asset = assets.get(entry.audio.media);
+  const segment = manifest?.[entry.audio.media]?.segments?.[entry.audio.line];
+  if (!asset || !segment) return null;
+  return { assetId: asset.assetId, assetVersion: asset.version, start: segment.start, end: segment.end };
+}
+
+/**
+ * Document de version attendu par PUT /catalogue/versions/{id}, les médias étant résolus en (assetId, version).
+ * Au format 4, les questions portent leur type, leur explication et leur clé (spec), les choix leur retour, les
+ * activités « mission » leur mission et les modules leur vocabulaire (segments du son du lexique, d'après manifest).
+ */
+export function buildDocument(level, assets, { manifest = {} } = {}) {
+  const v4 = levelFormat(level) >= 4;
   const media = new Map(allMedia(level).map((item) => [item.key, item]));
   const placement = (item) => {
     const target = media.get(item.media);
@@ -51,14 +92,24 @@ export function buildDocument(level, assets) {
       decorative: Boolean(item.decorative), questionId: item.questionId ?? null, optionId: item.optionId ?? null,
     };
   };
-  const questions = (list, diagnostic = false) => (list ?? []).map((question) => ({
-    id: question.id, prompt: question.prompt, moduleRef: diagnostic ? question.moduleRef : null,
-    options: question.options.map((option) => ({ id: option.id, label: option.label, correct: option.correct })),
-  }));
-  // Transcription de l'activité : celle des sons qui y sont placés, à lire selon la visibilité choisie.
+  const questions = (list, diagnostic = false) => (list ?? []).map((question) => {
+    const options = (question.options ?? []).map((option) => ({ id: option.id, label: option.label, correct: option.correct,
+      ...(v4 && option.feedback ? { feedback: option.feedback } : {}) }));
+    if (!v4) return { id: question.id, prompt: question.prompt, moduleRef: diagnostic ? question.moduleRef : null, options };
+    const type = questionType(question);
+    return {
+      id: question.id, type, prompt: question.prompt, moduleRef: diagnostic ? question.moduleRef : null,
+      explanation: question.explanation?.trim() || null, options: type === 'choice' ? options : [], spec: questionSpec(question),
+    };
+  });
+  // Transcription de l'activité : celle des sons qui y sont placés, à lire selon la visibilité choisie. Les sons des
+  // questions dictation et speak n'y figurent pas : la phrase dictée ne doit pas être lisible avant la réponse.
   const transcript = (activity) => {
     if (activity.lesson?.transcript) return activity.lesson.transcript;
-    const keys = [...new Set((activity.placements ?? []).filter((item) => item.usage === 'audio').map((item) => item.media))];
+    const hidden = new Set((activity.questions ?? []).filter((question) => ['dictation', 'speak'].includes(questionType(question)))
+      .map((question) => question.id));
+    const keys = [...new Set((activity.placements ?? [])
+      .filter((item) => item.usage === 'audio' && !(item.questionId && hidden.has(item.questionId))).map((item) => item.media))];
     return keys.length ? keys.map((key) => transcriptOf(media.get(key))).join('\n\n') : null;
   };
   return {
@@ -75,7 +126,18 @@ export function buildDocument(level, assets) {
         lesson: { title: activity.lesson.title, description: activity.lesson.description, transcript: transcript(activity) },
         questions: activity.kind === 'exercise' ? questions(activity.questions) : [],
         placements: (activity.placements ?? []).map(placement),
+        ...(v4 ? { mission: activity.kind === 'mission' ? {
+          oral: activity.mission?.oral ? { prompt: activity.mission.oral.prompt, maxSeconds: activity.mission.oral.maxSeconds ?? 120 } : null,
+          written: activity.mission?.written ? { prompt: activity.mission.written.prompt,
+            maxChars: activity.mission.written.maxChars ?? 1500, minWords: activity.mission.written.minWords ?? 0 } : null,
+          checklist: activity.mission?.checklist ?? [],
+        } : null } : {}),
       })),
+      ...(v4 ? { vocabulary: (module.vocabulary ?? []).map((entry) => ({
+        id: entry.id, word: entry.word, article: entry.article ?? null, plural: entry.plural ?? null,
+        partOfSpeech: entry.partOfSpeech, translation: entry.translation, example: entry.example ?? null, note: entry.note ?? null,
+        audio: vocabularyAudio(entry, assets, manifest),
+      })) } : {}),
     })),
     assessments: (level.assessments ?? []).map((assessment) => ({
       kind: assessment.kind, title: assessment.title, description: assessment.description ?? '',
@@ -230,7 +292,9 @@ export async function importContent({ api, token, publishable, levels = availabl
     const assets = await uploadMedia({ call, token, publishable, mediaList: allMedia(level), state, save,
       label: levelId.toUpperCase(), log });
 
-    const document = buildDocument(level, assets);
+    const document = buildDocument(level, assets, { manifest: audioManifest() });
+    const silent = unresolvedVocabulary(level, document);
+    if (silent) throw new Error(`${levelId.toUpperCase()} : ${silent} mot(s) du lexique sans segment audio (régénérez les sons avec synthesize-v3.py).`);
     const body = JSON.stringify(document);
     if (Buffer.byteLength(body) > MAX_BODY) throw new Error(`Document ${levelId} trop volumineux (${Buffer.byteLength(body)} octets).`);
     const digest = sha256(body);
@@ -313,19 +377,32 @@ async function password() {
   return value;
 }
 
+/** Entrées de vocabulaire dont le son n'a pas pu être résolu (segment absent du manifeste audio). */
+function unresolvedVocabulary(level, document) {
+  const expected = level.modules.flatMap((module) => (module.vocabulary ?? []).filter((entry) => entry.audio)).length;
+  const resolved = (document.modules ?? []).flatMap((module) => module.vocabulary ?? []).filter((entry) => entry.audio).length;
+  return expected - resolved;
+}
+
 /** Fichiers présents et taille du document envoyé, sans appel à l'API (médias fictifs). */
-function dryRun(label, mediaList, build) {
+function dryRun(label, mediaList, build, check = () => 0) {
   const assets = new Map();
   let bytes = 0;
+  const missing = [];
   for (const media of mediaList) {
     const { file } = mediaFile(media);
-    if (!existsSync(file)) throw new Error(`Fichier manquant pour ${media.key} : ${file}`);
-    bytes += readFileSync(file).length;
+    if (!existsSync(file)) missing.push(`${media.key} : ${file}`);
+    else bytes += readFileSync(file).length;
     assets.set(media.key, { assetId: `a-${media.key}`.slice(0, 60), version: 1 });
   }
-  const size = Buffer.byteLength(JSON.stringify(build(assets)));
+  const document = build(assets);
+  const size = Buffer.byteLength(JSON.stringify(document));
+  const silent = check(document);
   console.log(`${label} · ${assets.size} médias (${(bytes / 1048576).toFixed(1)} Mo) · document ${(size / 1024).toFixed(0)} Ko`
-    + (size > MAX_BODY ? ' — TROP VOLUMINEUX' : ''));
+    + (size > MAX_BODY ? ' — TROP VOLUMINEUX' : '') + (silent ? ` · ${silent} mot(s) du lexique sans segment audio` : ''));
+  for (const line of missing.slice(0, 10)) console.error(`  Fichier manquant · ${line}`);
+  if (missing.length > 10) console.error(`  … et ${missing.length - 10} autre(s).`);
+  return missing.length === 0 && size <= MAX_BODY && !silent;
 }
 
 async function main() {
@@ -340,12 +417,14 @@ async function main() {
     if (placementOnly) {
       const placement = loadPlacement();
       if (!placement) throw new Error('Test de niveau introuvable : content/de/placement/placement.json');
-      dryRun('Test de niveau', placementMedia(placement), (assets) => buildPlacementDocument(placement, assets));
+      if (!dryRun('Test de niveau', placementMedia(placement), (assets) => buildPlacementDocument(placement, assets))) process.exitCode = 1;
       return;
     }
     for (const levelId of levels) {
       const level = loadLevel(levelId);
-      dryRun(levelId.toUpperCase(), allMedia(level), (assets) => buildDocument(level, assets));
+      const ready = dryRun(levelId.toUpperCase(), allMedia(level), (assets) => buildDocument(level, assets, { manifest: audioManifest() }),
+        (document) => unresolvedVocabulary(level, document));
+      if (!ready) process.exitCode = 1;
     }
     return;
   }

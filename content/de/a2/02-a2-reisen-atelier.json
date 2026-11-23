@@ -1,0 +1,1140 @@
+{
+  "id": "a2-reisen-atelier",
+  "title": "Un train annulé, un nouvel itinéraire",
+  "objective": "Comprendre un changement de trajet, vérifier une correspondance et prévenir son hébergement.",
+  "prerequisites": [
+    "a2-reisen"
+  ],
+  "audioProfile": "a2-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "grammarFocus": [
+    "question-indirecte",
+    "perfekt-haben-sein"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-reisen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "ausfallen",
+      "word": "ausfallen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être annulé (train, cours)",
+      "example": "Bei Schnee können Züge ausfallen.",
+      "note": "séparable : aus|fallen · Perfekt : ist ausgefallen",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "anschluss",
+      "word": "Anschluss",
+      "article": "der",
+      "plural": "Anschlüsse",
+      "partOfSpeech": "noun",
+      "translation": "la correspondance",
+      "example": "Der Anschluss fährt von Gleis drei.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "verbindung",
+      "word": "Verbindung",
+      "article": "die",
+      "plural": "Verbindungen",
+      "partOfSpeech": "noun",
+      "translation": "la liaison, l’itinéraire",
+      "example": "Ich drucke Ihnen die Verbindung aus.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "gelten",
+      "word": "gelten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être valable",
+      "example": "Das Ticket soll auch für den nächsten Zug gelten.",
+      "note": "es gilt · Perfekt : hat gegolten",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "fahrplan",
+      "word": "Fahrplan",
+      "article": "der",
+      "plural": "Fahrpläne",
+      "partOfSpeech": "noun",
+      "translation": "l’horaire (des trains, des bus)",
+      "example": "Auf dem Fahrplan steht 9.13 Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "hinweis",
+      "word": "Hinweis",
+      "article": "der",
+      "plural": "Hinweise",
+      "partOfSpeech": "noun",
+      "translation": "l’avis, l’indication",
+      "example": "Lesen Sie den Hinweis am Gleis.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "schalter",
+      "word": "Schalter",
+      "article": "der",
+      "plural": "Schalter",
+      "partOfSpeech": "noun",
+      "translation": "le guichet",
+      "example": "Am Schalter bekomme ich eine neue Verbindung.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "bahnsteig",
+      "word": "Bahnsteig",
+      "article": "der",
+      "plural": "Bahnsteige",
+      "partOfSpeech": "noun",
+      "translation": "le quai",
+      "example": "Der Zug wartet schon am Bahnsteig.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "bescheid-sagen",
+      "word": "Bescheid sagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prévenir, informer",
+      "example": "Ich möchte meinem Hotel Bescheid sagen.",
+      "note": "jemandem Bescheid sagen : + datif",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "ausdrucken",
+      "word": "ausdrucken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "imprimer",
+      "example": "Können Sie mir die Verbindung ausdrucken?",
+      "note": "séparable : aus|drucken",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "einchecken",
+      "word": "einchecken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire son enregistrement (à l’hôtel)",
+      "example": "Kann ich nach 14 Uhr noch einchecken?",
+      "note": "séparable : ein|checken",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "ungefaehr",
+      "word": "ungefähr",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "environ",
+      "example": "Wann bin ich ungefähr in Leipzig?",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "genug",
+      "word": "genug",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "assez",
+      "example": "Habe ich in Kassel genug Zeit?",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "erst",
+      "word": "erst",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "seulement, pas avant",
+      "example": "Ich komme erst um 14.35 Uhr an.",
+      "note": "erst um … : pas avant … heures",
+      "audio": {
+        "media": "a2-reisen-atelier-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-reisen-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : un train annulé, une correspondance",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : un train annulé, une correspondance",
+        "description": "Lisez cet avis affiché en gare.\n« Der Zug nach Erfurt um 8.42 Uhr fällt aus. Bitte nehmen Sie den Zug um 9.13 Uhr von Gleis 4. Steigen Sie in Gotha um. Ihre Fahrkarte gilt auch für den nächsten Zug. »\nRepérez où le voyageur veut aller (Erfurt), où il doit changer (Gotha) et quel train il doit prendre (9 h 13, voie 4). La dernière phrase lui évite un achat : son billet reste valable (gilt, du verbe gelten).\n\nWOHIN ? WO ? WANN ? — DEMANDER POLIMENT\nWohin? demande la destination, wo? le lieu du changement, wann? l’heure. Au guichet, une question indirecte est plus polie, et le verbe conjugué passe à la fin :\n• Wann fährt der Zug? → Könnten Sie mir sagen, wann der Zug fährt?\n• Von welchem Gleis fährt er? → Könnten Sie mir sagen, von welchem Gleis er fährt?\n• Wo muss ich umsteigen? → Könnten Sie mir sagen, wo ich umsteigen muss?\n\nRACONTER LE TRAJET APRÈS COUP\n« Ich bin über Gotha gefahren und um elf angekommen. Mein Zimmer habe ich schon am Dienstag reserviert. »\nFahren et ankommen expriment un déplacement : Perfekt avec sein. Reservieren se construit avec haben, sans ge- au participe. Avec d’autres notes (bus jusqu’à Arnstadt, arrivée à midi, chambre réservée lundi), on écrirait : Ich bin mit dem Bus nach Arnstadt gefahren und um zwölf angekommen. Das Zimmer habe ich am Montag reserviert.\n\nÀ RETENIR\n• fällt aus (ausfallen) : est annulé · der Anschluss : la correspondance · die Fahrkarte gilt : le billet est valable\n• Lisez l’avis à voix haute, puis résumez le trajet en deux phrases : Ich fahre um 9.13 Uhr von Gleis 4 ab. In Gotha steige ich um.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-reisen-atelier-hinweis",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-reisen-atelier-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un nouvel itinéraire",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un nouvel itinéraire",
+        "description": "Au guichet, une voyageuse apprend que son train pour Leipzig est annulé. L’employé lui propose un autre itinéraire.\n\n1. Écoutez la scène une première fois sans lire les phrases : pourquoi la voyageuse vient-elle au guichet ?\n2. Réécoutez pour compléter ses notes : voies, gare de correspondance, heure d’arrivée. Vous pouvez écrire les nombres en chiffres.\n3. Les deux dernières questions sont des dictées : de nouvelles phrases utiles au guichet.\nAprès validation, la transcription de la scène et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-reisen-atelier-schalter",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Le problème : complétez la première réplique.",
+          "text": "Ich habe eine Fahrkarte nach [[1]]. Mein Zug [[2]] aus.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Leipzig"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "fällt"
+              ],
+              "size": 7,
+              "hint": "ausfallen"
+            }
+          ],
+          "explanation": "La voyageuse va à Leipzig et dit « Mein Zug fällt aus » : le verbe séparable ausfallen (être annulé) se conjugue fällt, et la particule aus va à la fin."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Le départ et le changement : complétez la note.",
+          "text": "Zug um 10.19 Uhr von Gleis [[1]], umsteigen in [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "7",
+                "sieben"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kassel"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "L’employé dit « Nehmen Sie den Zug um zehn Uhr neunzehn von Gleis sieben. Sie müssen in Kassel umsteigen. » Gleis, c’est la voie."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "La correspondance à Kassel : complétez.",
+          "text": "Zeit zum Umsteigen: [[1]] Minuten. Der Anschluss fährt von Gleis [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "20",
+                "zwanzig"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "3",
+                "drei"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "« Ja, Sie haben zwanzig Minuten. Der Anschluss fährt von Gleis drei. » Der Anschluss désigne le train de correspondance."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Le billet : complétez la réponse de l’employé.",
+          "text": "Nein, Ihre Fahrkarte [[1]] auch für diese Verbindung.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "gilt"
+              ],
+              "size": 6,
+              "hint": "gelten"
+            }
+          ],
+          "explanation": "Gelten (être valable) change de voyelle : es gilt. Le billet reste valable pour le nouvel itinéraire, il n’y a rien à racheter."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "L’arrivée à Leipzig : écrivez l’heure.",
+          "text": "Ankunft in Leipzig: [[1]] Uhr [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "14",
+                "vierzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "12",
+                "zwölf"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "À la question « Wann bin ich ungefähr in Leipzig? », l’employé répond « Um vierzehn Uhr zwölf » : 14 h 12. L’heure 10 h 19 est celle du départ."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Pourquoi la voyageuse veut-elle connaître l’heure d’arrivée ? Complétez.",
+          "text": "Ich möchte meinem Hotel [[1]] sagen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Bescheid"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ],
+          "explanation": "Jemandem Bescheid sagen signifie prévenir quelqu’un. La voyageuse veut informer son hôtel de son arrivée tardive ; meinem Hotel est au datif."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la question polie posée au guichet.",
+          "accept": [
+            "Könnten Sie mir sagen, wo ich umsteigen muss?"
+          ],
+          "voice": "sprecherin",
+          "explanation": "Dans la question indirecte introduite par wo, le verbe conjugué muss va à la fin, après l’infinitif umsteigen. Könnten s’écrit avec ö.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez le début du message envoyé à l’hôtel.",
+          "accept": [
+            "Mein Zug ist ausgefallen. Ich komme später an."
+          ],
+          "voice": "sprecher",
+          "explanation": "Ausfallen se conjugue avec sein au Perfekt : ist ausgefallen. Dans « Ich komme später an », la particule an du verbe ankommen termine la phrase.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : le nouvel itinéraire",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : le nouvel itinéraire",
+        "description": "Écoutez une première fois la scène au guichet pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur la langue : choisissez la phrase correcte sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-reisen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "À l’écoute, pourquoi le voyageur parle-t-il au guichet ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Son train est annulé.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Son hôtel a annulé la réservation.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il a perdu son billet.",
+              "correct": false
+            }
+          ],
+          "explanation": "La voyageuse dit « Mein Zug fällt aus » : ausfallen signifie être annulé. Elle a toujours son billet (« Ich habe eine Fahrkarte nach Leipzig ») et l’hôtel n’a rien annulé : elle veut seulement le prévenir.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "À quelle heure part le nouveau train ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "14 h 12",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "10 h 19",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "10 h 09",
+              "correct": false
+            }
+          ],
+          "explanation": "L’employé propose « den Zug um zehn Uhr neunzehn » : départ à 10 h 19. 14 h 12 est l’heure d’arrivée à Leipzig, et 10 h 09 n’est jamais prononcé.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quel délai le voyageur a-t-il pour changer à Kassel ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dix minutes",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Trente minutes",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vingt minutes",
+              "correct": true
+            }
+          ],
+          "explanation": "« Sie haben zwanzig Minuten » répond à la question « Habe ich in Kassel genug Zeit? ». Zwanzig (20) ne se confond ni avec zehn (10) ni avec dreißig (30).",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Doit-il racheter un billet ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Son billet reste valable.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il doit racheter les deux billets.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il doit acheter un billet pour la correspondance.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ihre Fahrkarte gilt auch für diese Verbindung » : gelten signifie être valable. Aucun nouvel achat n’est nécessaire, ni pour le trajet ni pour la correspondance.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Comment demander poliment où changer ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Könnten Sie mir sagen, wohin ich umsteigen muss?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Könnten Sie mir sagen, wo ich umsteigen muss?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Könnten Sie mir sagen, wo muss ich umsteigen?",
+              "correct": false
+            }
+          ],
+          "explanation": "Dans une question indirecte, le verbe conjugué muss passe à la fin : …, wo ich umsteigen muss. Wo demande le lieu du changement ; wohin demanderait une destination.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel récit associe correctement le déplacement et la réservation ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe nach Leipzig gefahren und bin ein Zimmer reserviert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich bin nach Leipzig gefahren und bin ein Zimmer reserviert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich bin nach Leipzig gefahren und habe ein Zimmer reserviert.",
+              "correct": true
+            }
+          ],
+          "explanation": "Fahren exprime un déplacement : ich bin … gefahren. Reservieren se construit avec haben : ich habe … reserviert. Les autres phrases inversent ou répètent les auxiliaires.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : au guichet de la gare",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : au guichet de la gare",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute, comme au guichet. Montez la voix à la fin des questions fermées (Muss ich …? Habe ich …?). Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-reisen-atelier-verbindung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis expliquez votre problème.",
+          "text": "Mein Zug fällt aus.",
+          "accept": [
+            "Mein Zug fällt aus."
+          ],
+          "threshold": 75,
+          "explanation": "Le verbe séparable ausfallen se coupe : fällt en 2e position, aus à la fin. Le g final de Zug se prononce [k]."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez s’il faut racheter un billet.",
+          "text": "Muss ich eine neue Fahrkarte kaufen?",
+          "accept": [
+            "Muss ich eine neue Fahrkarte kaufen?"
+          ],
+          "threshold": 75,
+          "explanation": "Question fermée : le verbe de modalité muss ouvre la phrase et l’infinitif kaufen la termine. La voix monte sur kaufen."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez si vous aurez le temps de changer.",
+          "text": "Habe ich in Kassel genug Zeit?",
+          "accept": [
+            "Habe ich in Kassel genug Zeit?"
+          ],
+          "threshold": 75,
+          "explanation": "Le h de habe s’aspire. Genug se termine par le son [k] et Zeit commence par [ts]."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez poliment où changer de train.",
+          "text": "Könnten Sie mir sagen, wo ich umsteigen muss?",
+          "accept": [
+            "Könnten Sie mir sagen, wo ich umsteigen muss?"
+          ],
+          "threshold": 75,
+          "explanation": "Question indirecte : le verbe muss passe à la fin. Accentuez UM-steigen, la particule séparable porte l’accent."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis dites que vous voulez prévenir votre hôtel.",
+          "text": "Ich möchte meinem Hotel Bescheid sagen.",
+          "accept": [
+            "Ich möchte meinem Hotel Bescheid sagen."
+          ],
+          "threshold": 75,
+          "explanation": "Bescheid sagen signifie prévenir. Dans Hotel, l’accent tombe sur la deuxième syllabe : ho-TEL, et le h se prononce."
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : prévenir l’hôtel d’un retard",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : prévenir l’hôtel d’un retard",
+        "description": "Situation : votre train de 9 h est annulé. Le tableau affiche un départ à 10 h 40 avec changement à Fulda et arrivée à 14 h 05, mais le site ne dit pas clairement si votre billet reste valable. Au guichet, on vous annonce finalement une arrivée à 14 h 35.\n\nModèles au guichet : Mein Zug ist ausgefallen. Muss ich ein neues Ticket kaufen? Können Sie mir sagen, wo ich umsteigen muss?\nModèle pour l’hôtel : Guten Tag, mein Zug ist ausgefallen. Ich komme erst um 14.35 Uhr an. Kann ich dann noch einchecken?\n\nPréparez quelques mots-clés, puis réalisez les deux parties. Vérifiez que la même heure d’arrivée figure à l’oral et à l’écrit.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-reisen-atelier-mail",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez ce que vous dites au guichet (une minute environ) : expliquez le problème, confirmez le départ de 10 h 40 et le changement à Fulda, puis posez une question polie sur votre billet.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à l’hôtel un message de 35 à 50 mots : expliquez le retard, donnez la nouvelle heure d’arrivée (14 h 35) et demandez si vous pourrez encore faire l’enregistrement.",
+          "maxChars": 800,
+          "minWords": 35
+        },
+        "checklist": [
+          "J’ai expliqué que mon train de 9 h est annulé.",
+          "J’ai confirmé le départ de 10 h 40 et la correspondance à Fulda.",
+          "J’ai posé au guichet une question polie sur la validité de mon billet.",
+          "Mon message à l’hôtel donne la nouvelle heure d’arrivée : 14 h 35.",
+          "J’ai relu les verbes : ist ausgefallen avec sein, et la particule an à la fin dans « Ich komme … an »."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-reisen-atelier-dialogue",
+      "kind": "audio",
+      "title": "Un train annulé, un nouvel itinéraire · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Guten Morgen. Ich habe eine Fahrkarte nach Leipzig. Mein Zug fällt aus. Wie komme ich jetzt dorthin?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nehmen Sie den Zug um zehn Uhr neunzehn von Gleis sieben. Sie müssen in Kassel umsteigen."
+        },
+        {
+          "voice": "frau",
+          "text": "Habe ich in Kassel genug Zeit? Ich kenne den Bahnhof nicht."
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, Sie haben zwanzig Minuten. Der Anschluss fährt von Gleis drei."
+        },
+        {
+          "voice": "frau",
+          "text": "Gut. Muss ich eine neue Fahrkarte kaufen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nein, Ihre Fahrkarte gilt auch für diese Verbindung."
+        },
+        {
+          "voice": "frau",
+          "text": "Wann bin ich ungefähr in Leipzig? Ich möchte meinem Hotel Bescheid sagen."
+        },
+        {
+          "voice": "mann",
+          "text": "Um vierzehn Uhr zwölf. Wenn Sie möchten, drucke ich Ihnen die Verbindung aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a2-reisen-atelier-hinweis",
+      "kind": "image",
+      "title": "Avis en gare : un train supprimé",
+      "alt": "Avis en gare « Hinweis – Zugausfall » : « Der Zug nach Erfurt um 8.42 Uhr fällt aus. Bitte nehmen Sie den Zug um 9.13 Uhr von Gleis 4. Steigen Sie in Gotha um. Ihre Fahrkarte gilt auch für den nächsten Zug. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "station",
+        "icon": "triangle-alert",
+        "title": "Hinweis",
+        "subtitle": "Zugausfall",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "circle-x",
+            "text": "Der Zug nach Erfurt um 8.42 Uhr [fällt aus]."
+          },
+          {
+            "icon": "train-front",
+            "text": "Bitte nehmen Sie den Zug um [9.13 Uhr] von [Gleis 4]."
+          },
+          {
+            "icon": "repeat",
+            "text": "Steigen Sie in [Gotha] um."
+          },
+          {
+            "icon": "ticket",
+            "text": "Ihre Fahrkarte [gilt] auch für den nächsten Zug."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-reisen-atelier-schalter",
+      "kind": "image",
+      "title": "Au guichet : le train est supprimé",
+      "alt": "Au guichet de la gare, la voyageuse explique à l’employé « Mein Zug fällt aus. ». En haut : un train, une horloge avec une alerte, un billet et un hôtel.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "station",
+        "people": [
+          {
+            "name": "Reisende",
+            "say": "Mein Zug fällt aus."
+          },
+          {
+            "name": "Mitarbeiter"
+          }
+        ],
+        "items": [
+          "train-front",
+          "clock-alert",
+          "ticket",
+          "hotel"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-reisen-atelier-verbindung",
+      "kind": "image",
+      "title": "Le nouvel itinéraire, étape par étape",
+      "alt": "Nouvel itinéraire : départ à 10:19 de la voie 7 ; changement à Kassel, avec 20 minutes de correspondance, voie 3 ; arrivée à Leipzig à 14:12. Note : le billet reste valable pour cette liaison.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "route",
+        "setting": "station",
+        "height": 400,
+        "title": "Neue Verbindung nach Leipzig",
+        "steps": [
+          {
+            "icon": "train-front",
+            "label": "ab 10:19",
+            "sub": "Gleis 7"
+          },
+          {
+            "icon": "repeat",
+            "label": "Kassel",
+            "sub": "umsteigen\n20 Minuten · Gleis 3"
+          },
+          {
+            "icon": "flag",
+            "label": "Leipzig",
+            "sub": "an 14:12"
+          }
+        ],
+        "links": [
+          {
+            "icon": "train-front",
+            "label": "Zug"
+          },
+          {
+            "icon": "train-front",
+            "label": "Anschluss"
+          }
+        ],
+        "note": "Ihre Fahrkarte gilt auch für diese Verbindung.",
+        "noteIcon": "ticket"
+      }
+    },
+    {
+      "key": "v4-a2-reisen-atelier-mail",
+      "kind": "image",
+      "title": "Prévenir l’hôtel d’une arrivée tardive",
+      "alt": "Courriel à l’hôtel, objet « Späte Ankunft » : « Guten Tag, mein Zug ist ausgefallen. Ich komme erst um 14.35 Uhr an. Kann ich dann noch einchecken? Viele Grüße, Malik Haddad »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 31,
+        "meta": [
+          [
+            "An",
+            "Hotel am Fluss"
+          ],
+          [
+            "Betreff",
+            "Späte Ankunft"
+          ]
+        ],
+        "lines": [
+          "Guten Tag,",
+          "mein Zug ist [ausgefallen]. Ich komme erst [um 14.35 Uhr] an. Kann ich dann noch einchecken?",
+          "Viele Grüße",
+          "Malik Haddad"
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-atelier-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter un nouvel itinéraire",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnten Sie mir sagen, wo ich umsteigen muss?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un nouvel itinéraire",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Mein Zug ist ausgefallen. Ich komme später an."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : au guichet de la gare",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Zug fällt aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : au guichet de la gare",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Muss ich eine neue Fahrkarte kaufen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : au guichet de la gare",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Habe ich in Kassel genug Zeit?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : au guichet de la gare",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnten Sie mir sagen, wo ich umsteigen muss?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : au guichet de la gare",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich möchte meinem Hotel Bescheid sagen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Un train annulé, un nouvel itinéraire",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "ausfallen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Anschluss, die Anschlüsse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Verbindung, die Verbindungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gelten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fahrplan, die Fahrpläne"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Hinweis, die Hinweise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Schalter, die Schalter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bahnsteig, die Bahnsteige"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bescheid sagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausdrucken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einchecken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ungefähr"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "genug"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erst"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -9,6 +9,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 import org.linguacap.learning.LibraryResource.LastResult;
 import org.linguacap.learning.LibraryResource.LibraryModule;
@@ -89,5 +90,66 @@ class LibraryContentTest {
         assertEquals("en", LibraryContent.languageOf(json("{'languageId': 'en'}")));
         assertEquals("de", LibraryContent.languageOf(json("{'languageId': null}")));
         assertFalse(LibraryContent.KINDS.contains("assessment"));
+    }
+
+    private static final JsonNode V4 = json("""
+            {'versionId': '7d0c1f5e-8a54-4c0e-9d7a-2f4f3c2b1a00', 'levelCode': 'A1', 'status': 'published',
+             'modules': [
+               {'id': 'a1-sante', 'position': 1, 'title': 'Santé', 'objective': 'Dire où on a mal', 'vocabularyCount': 18,
+                'activities': [
+                 {'id': 'a1-sante-repeter', 'position': 1, 'kind': 'exercise', 'title': 'Répéter', 'estimatedMinutes': 8,
+                  'competences': ['expression-orale'], 'lessonId': 'a1-v4-a1-sante-repeter'},
+                 {'id': 'a1-sante-quiz', 'position': 2, 'kind': 'exercise', 'title': 'Vérifier', 'estimatedMinutes': 10,
+                  'competences': ['lecture'], 'lessonId': 'a1-v4-a1-sante-quiz'},
+                 {'id': 'a1-sante-mission', 'position': 3, 'kind': 'mission', 'title': 'Mission : déplacer un rendez-vous',
+                  'estimatedMinutes': 20, 'competences': ['expression-orale'], 'lessonId': 'a1-v4-a1-sante-mission'}]}]}
+            """);
+
+    @Test
+    void lesMissionsEtLeLexiqueSontEnAccesLibre() {
+        List<LibraryModule> modules = LibraryContent.modules(V4, Map.of());
+        assertEquals(18, modules.get(0).vocabularyCount());
+        assertEquals(0, LibraryContent.modules(TRACK, Map.of()).get(0).vocabularyCount(), "catalogue antérieur : 0");
+        LibraryResource.LibraryActivityItem mission = modules.get(0).activities().get(2);
+        assertEquals("mission", mission.kind());
+        assertNull(mission.lastResult());
+        assertFalse(mission.toReview());
+        assertEquals("a1-sante", LibraryContent.moduleOf(V4, "a1-sante-mission").path("id").asText());
+    }
+
+    @Test
+    void unExerciceEstARevoirTantQueSonDernierResultatPorteDesQuestionsARevoir() {
+        JsonNode flagged = json("""
+                [{'id': '2', 'lessonId': 'a1-v4-a1-sante-repeter', 'kind': 'quiz', 'correct': 4, 'total': 5, 'flagged': ['q3'],
+                  'submittedAt': '2026-11-21T09:00:00Z'},
+                 {'id': '1', 'lessonId': 'a1-v4-a1-sante-quiz', 'kind': 'quiz', 'correct': 2, 'total': 8, 'flagged': [],
+                  'submittedAt': '2026-11-20T09:00:00Z'}]
+                """);
+        assertEquals(Set.of("a1-v4-a1-sante-repeter"), LibraryContent.toReview(flagged));
+        List<LibraryModule> modules = LibraryContent.modules(V4, LibraryContent.lastResults(flagged),
+                LibraryContent.toReview(flagged));
+        assertTrue(modules.get(0).activities().get(0).toReview());
+        assertEquals(new LastResult(4, 5, "2026-11-21T09:00:00Z"), modules.get(0).activities().get(0).lastResult());
+        assertFalse(modules.get(0).activities().get(1).toReview(), "un score faible n'est pas un marquage « à revoir »");
+
+        JsonNode redone = json("""
+                [{'id': '3', 'lessonId': 'a1-v4-a1-sante-repeter', 'kind': 'quiz', 'correct': 5, 'total': 5, 'flagged': [],
+                  'submittedAt': '2026-11-22T09:00:00Z'},
+                 {'id': '2', 'lessonId': 'a1-v4-a1-sante-repeter', 'kind': 'quiz', 'correct': 4, 'total': 5, 'flagged': ['q3'],
+                  'submittedAt': '2026-11-21T09:00:00Z'}]
+                """);
+        assertTrue(LibraryContent.toReview(redone).isEmpty(), "la reprise réussie efface le marquage");
+        assertTrue(LibraryContent.toReview(json("[{'lessonId': 'x', 'correct': 1, 'total': 1}]")).isEmpty(),
+                "résultat antérieur à la V4 : rien à revoir");
+    }
+
+    @Test
+    void unExerciceTypeCompteCommeUnQuizPourLeDernierScore() {
+        JsonNode grades = json("""
+                [{'id': '1', 'lessonId': 'a1-v4-a1-sante-repeter', 'kind': 'exercise', 'correct': 3, 'total': 5,
+                  'submittedAt': '2026-11-21T09:00:00Z', 'typed': true}]
+                """);
+        assertEquals(Map.of("a1-v4-a1-sante-repeter", new LastResult(3, 5, "2026-11-21T09:00:00Z")),
+                LibraryContent.lastResults(grades));
     }
 }

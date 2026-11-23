@@ -88,10 +88,12 @@ function libraryLevel(code, versionId, current) {
   const folder = join(repo, 'content', 'de', code.toLowerCase());
   const modules = readdirSync(folder).filter((file) => /^\d\d-.*\.json$/.test(file)).sort().map((file, index) => {
     const module = JSON.parse(readFileSync(join(folder, file), 'utf8'));
-    return { id: module.id, position: index + 1, title: module.title, objective: module.objective ?? '',
-      activities: module.activities.map((activity, position) => ({ id: activity.id, kind: activity.kind === 'exercise' ? 'exercise' : 'lesson',
+    return { id: module.id, position: index + 1, title: module.title, objective: module.objective ?? '', vocabularyCount: module.vocabulary?.length ?? 0,
+      activities: module.activities.map((activity, position) => ({ id: activity.id,
+        kind: activity.kind === 'exercise' || activity.kind === 'mission' ? activity.kind : 'lesson',
         title: activity.title, estimatedMinutes: activity.estimatedMinutes, competences: [], lessonId: null,
-        lastResult: current && index < 1 && position % 3 === 1 ? { correct: 5, total: 6, submittedAt: day(-2) } : null })) };
+        lastResult: current && index < 1 && position % 3 === 1 ? { correct: 5, total: 6, submittedAt: day(-2) } : null,
+        toReview: current && index < 1 && position === 4 })) };
   });
   return { levelCode: code, levelTitle: `Allemand ${code}`, trackVersionId: versionId, number: 2, inPath: true, current, modules,
     practice: [{ kind: 'midterm', title: 'Bilan intermédiaire', available: true }, { kind: 'final', title: 'Examen blanc', available: false }] };

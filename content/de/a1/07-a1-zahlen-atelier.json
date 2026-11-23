@@ -1,0 +1,1198 @@
+{
+  "id": "a1-zahlen-atelier",
+  "title": "Vérifier des coordonnées par téléphone",
+  "objective": "Repérer un nom, un numéro de téléphone et un code postal, puis redire les chiffres pour les vérifier.",
+  "prerequisites": [
+    "a1-zahlen"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-zahlen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "telefonnummer",
+      "word": "Telefonnummer",
+      "article": "die",
+      "plural": "Telefonnummern",
+      "partOfSpeech": "noun",
+      "translation": "le numéro de téléphone",
+      "example": "Wie ist Ihre Telefonnummer?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "nummer",
+      "word": "Nummer",
+      "article": "die",
+      "plural": "Nummern",
+      "partOfSpeech": "noun",
+      "translation": "le numéro",
+      "example": "Können Sie die Nummer bitte wiederholen?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "alter",
+      "word": "Alter",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’âge",
+      "example": "Alter: 42.",
+      "note": "sur une fiche",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "anmeldung",
+      "word": "Anmeldung",
+      "article": "die",
+      "plural": "Anmeldungen",
+      "partOfSpeech": "noun",
+      "translation": "l’inscription ; l’accueil",
+      "example": "Die Anmeldung ist hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "gruppe",
+      "word": "Gruppe",
+      "article": "die",
+      "plural": "Gruppen",
+      "partOfSpeech": "noun",
+      "translation": "le groupe",
+      "example": "Ich bin in der Gruppe blau.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "platz",
+      "word": "Platz",
+      "article": "der",
+      "plural": "Plätze",
+      "partOfSpeech": "noun",
+      "translation": "la place",
+      "example": "Ihr Platz ist Nummer vierzehn.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "wiederholen",
+      "word": "wiederholen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "répéter",
+      "example": "Können Sie das bitte wiederholen?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "genau",
+      "word": "genau",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "exactement ; oui, c’est ça",
+      "example": "Wohnen Sie in Hamburg? – Ja, genau.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "dann",
+      "word": "dann",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ensuite, puis",
+      "example": "Null, eins, sieben, sechs. Dann: vier, drei.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "ihr-poli",
+      "word": "Ihr",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "pronoun",
+      "translation": "votre (poli)",
+      "example": "Wie ist Ihre Postleitzahl?",
+      "note": "majuscule comme Sie ; Ihre devant un nom féminin",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "wie-alt",
+      "word": "Wie alt sind Sie?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Quel âge avez-vous ?",
+      "example": "Wie alt sind Sie? – Ich bin zweiundzwanzig.",
+      "note": "familier : Wie alt bist du?",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "null",
+      "word": "null",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "zéro",
+      "example": "Null, eins, sieben, sechs.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "vierzehn",
+      "word": "vierzehn",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "quatorze",
+      "example": "Vierzehn oder vierzig?",
+      "note": "-zehn : de 13 à 19",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "vierzig",
+      "word": "vierzig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "quarante",
+      "example": "Ich bin vierzig Jahre alt.",
+      "note": "-zig : les dizaines à partir de 20",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "dreissig",
+      "word": "dreißig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "trente",
+      "example": "Er ist dreißig Jahre alt.",
+      "note": "avec ß, sans -zig",
+      "audio": {
+        "media": "a1-zahlen-atelier-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-zahlen-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : lire une fiche et dire les nombres",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : lire une fiche et dire les nombres",
+        "description": "LIRE UNE FICHE · 15 MIN\n\n1. Lire une fiche (5 min). Sur une fiche d’inscription, on lit « Name: Jan Wolf. Alter: 42. Wohnort: Bremen. Postleitzahl: 28195. Platz: 14. Gruppe: blau. » Repérez les renseignements sans traduire chaque mot : quel nombre indique l’âge ? Quel groupe de chiffres donne le code postal ? Lisez le code postal chiffre par chiffre : zwei, acht, eins, neun, fünf.\n\n2. Les nombres (5 min). Dans « zweiundvierzig », l’unité vient avant la dizaine : « zwei und vierzig » donne 42. Comparez vierzehn (14) et vierzig (40), sechzehn (16) et sechzig (60) : -zehn pour les nombres de 13 à 19, -zig pour les dizaines. Cachez les chiffres, dites chaque nombre à voix haute, puis vérifiez.\n\n3. Faire vérifier (5 min). Lisez les deux rôles : « Wie ist Ihre Postleitzahl? » / « Zwei, acht, eins, neun, fünf. » / « Wie bitte? Eins, neun, fünf am Ende? » / « Ja, genau. ». Marquez une pause entre les groupes de chiffres. Redites la fin avec le code 30159 : drei, null, eins, fünf, neun.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-zahlen-atelier-fiche",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-zahlen-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : Lea Berg s’inscrit",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : Lea Berg s’inscrit",
+        "description": "AU GUICHET · 12 MIN\n\nLea Berg s’inscrit à un cours. À l’accueil, on note ses coordonnées.\n\n1. Les nombres pièges (3 min). Lisez 13, 30, 17, 70, 35 et 53 : dreizehn / dreißig, siebzehn / siebzig, fünfunddreißig / dreiundfünfzig. Attention : dreißig s’écrit avec ß, et siebzig perd le -en de sieben.\n2. Première écoute (3 min). Sans la transcription : quelles informations Lea donne-t-elle ? Nom, âge, téléphone, code postal, ville ?\n3. Deuxième écoute (3 min). Écoutez comment l’accueil répète « vier, drei, acht, zwei » pour vérifier, et comment Lea confirme : « Ja, genau ».\n4. Répéter (3 min). Lisez la transcription et répétez les répliques de Lea pendant les pauses, avec une petite pause entre les groupes de chiffres.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-zahlen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-zahlen-atelier-zahlen",
+          "usage": "illustration",
+          "caption": "-zehn ou -zig / -ßig ? Les unités d’abord : fünfunddreißig = 35",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-zahlen-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : noter et dicter des coordonnées",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter et dicter des coordonnées",
+        "description": "Réécoutez l’inscription de Lea sans la transcription et complétez sa fiche, puis travaillez les nombres et les formules du guichet. Pour les dictées, vous pouvez écrire les nombres en chiffres ou en lettres. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-zahlen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-entrainer-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez la fiche d’inscription.",
+          "text": "Name: Lea [[1]] · Wohnort: [[2]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Berg"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Hamburg"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "Lea dit « Ich heiße Lea Berg », puis confirme « Ja, genau. In Hamburg. » à la question « Wohnen Sie in Hamburg? »."
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Associez chaque nombre à son nom allemand.",
+          "pairs": [
+            {
+              "left": "13",
+              "right": "dreizehn"
+            },
+            {
+              "left": "30",
+              "right": "dreißig"
+            },
+            {
+              "left": "17",
+              "right": "siebzehn"
+            },
+            {
+              "left": "70",
+              "right": "siebzig"
+            },
+            {
+              "left": "35",
+              "right": "fünfunddreißig"
+            },
+            {
+              "left": "53",
+              "right": "dreiundfünfzig"
+            }
+          ],
+          "explanation": "-zehn forme les nombres de 13 à 19, -zig (ou -ßig pour 30) les dizaines. Pour 35 et 53, l’unité vient en premier : fünf-und-dreißig, drei-und-fünfzig."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Complétez la question de l’accueil.",
+          "text": "Wie ist [[1]] Telefonnummer?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Ihre"
+              ],
+              "size": 6,
+              "hint": "votre (poli)"
+            }
+          ],
+          "explanation": "Ihre (votre) correspond au Sie de politesse et prend aussi une majuscule. Avec du, on dirait deine Telefonnummer."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour faire répéter le numéro poliment.",
+          "answers": [
+            [
+              "Können",
+              "Sie",
+              "die Nummer",
+              "bitte",
+              "wiederholen?"
+            ],
+            [
+              "Können",
+              "Sie",
+              "bitte",
+              "die Nummer",
+              "wiederholen?"
+            ]
+          ],
+          "explanation": "Dans cette question polie, können vient en tête et l’infinitif wiederholen va à la fin de la phrase. Bitte peut se placer avant ou après die Nummer."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Complétez la confirmation.",
+          "text": "Wohnen Sie in Hamburg? – Ja, [[1]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "genau"
+              ],
+              "size": 7,
+              "hint": "exactement"
+            }
+          ],
+          "explanation": "Ja, genau veut dire « oui, exactement » : on confirme une information répétée. Pour corriger, on dirait « Nein, in Bremen »."
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la question.",
+          "voice": "mann",
+          "accept": [
+            "Wie ist Ihre Telefonnummer?"
+          ],
+          "explanation": "Telefonnummer s’écrit en un seul mot, avec deux m. Ihre prend une majuscule parce qu’il correspond au Sie de politesse.",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "frau",
+          "accept": [
+            "Ich bin dreiundvierzig Jahre alt."
+          ],
+          "explanation": "Dreiundvierzig : on entend l’unité avant la dizaine, drei-und-vierzig, soit 43. En lettres, le nombre forme un seul mot ; 43 en chiffres est aussi accepté.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : au guichet",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : au guichet",
+        "description": "Écoutez chaque modèle, puis dites la phrase. Articulez nettement la fin des nombres : -zehn ou -zig.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-zahlen-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie ist Ihre Telefonnummer?",
+          "accept": [
+            "Wie ist Ihre Telefonnummer?"
+          ],
+          "explanation": "Accentuez TE dans Telefonnummer. La voix descend à la fin de cette question en W.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich bin zweiundzwanzig Jahre alt.",
+          "accept": [
+            "Ich bin zweiundzwanzig Jahre alt.",
+            "Ich bin 22 Jahre alt."
+          ],
+          "explanation": "L’unité vient d’abord : zwei-und-zwanzig. Zw se dit « tsv ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Vierzehn oder vierzig?",
+          "accept": [
+            "Vierzehn oder vierzig?",
+            "14 oder 40?"
+          ],
+          "explanation": "Vierzehn se termine par « tséne », vierzig par « tsik » : c’est cette fin qui distingue 14 et 40.",
+          "threshold": 80
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Meine Hausnummer ist vierzehn.",
+          "accept": [
+            "Meine Hausnummer ist vierzehn.",
+            "Meine Hausnummer ist 14."
+          ],
+          "explanation": "Hausnummer : soufflez le h et accentuez HAUS. Vierzehn commence par un son f.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Können Sie die Nummer bitte wiederholen?",
+          "accept": [
+            "Können Sie die Nummer bitte wiederholen?"
+          ],
+          "explanation": "Ö de können : lèvres arrondies. Accentuez -HO- dans wiederholen.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ja, genau. In Hamburg.",
+          "accept": [
+            "Ja, genau. In Hamburg."
+          ],
+          "explanation": "Genau : accent sur la deuxième syllabe, ge-NAU. Le h de Hamburg se souffle.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : âge, numéro et code postal",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : âge, numéro et code postal",
+        "description": "Écoutez la scène une première fois pour la situation, puis lisez les questions et réécoutez pour les chiffres. Les deux dernières questions vous demandent de réutiliser les nombres et les formules. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-zahlen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quel âge a Lea Berg ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "22 ans",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "20 ans",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "24 ans",
+              "correct": false
+            }
+          ],
+          "explanation": "Lea dit « Ich bin zweiundzwanzig Jahre alt » : zwei-und-zwanzig, l’unité avant la dizaine, donne 22. Vingt-quatre se dirait vierundzwanzig.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : quels sont les quatre premiers chiffres du numéro ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "0167",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "0176",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "0716",
+              "correct": false
+            }
+          ],
+          "explanation": "Elle dicte « Null, eins, sieben, sechs » : 0-1-7-6. Attention à l’ordre de sieben (7) et sechs (6), faciles à intervertir.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : quels sont les quatre derniers chiffres du numéro ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "4832",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "4328",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "4382",
+              "correct": true
+            }
+          ],
+          "explanation": "Après « Dann », on entend « vier, drei, acht, zwei », et l’accueil le répète pour vérifier : 4-3-8-2.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : quel code postal Lea donne-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "20457",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "20475",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "24057",
+              "correct": false
+            }
+          ],
+          "explanation": "Le code postal est dicté chiffre par chiffre : « zwei, null, vier, fünf, sieben ». Les autres choix intervertissent deux chiffres.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Comment dis-tu le nombre 34 ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vierzehn",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vierunddreißig",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dreiundvierzig",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour 34, on dit l’unité, puis und, puis la dizaine : vier-und-dreißig. Dreiundvierzig ferait 43 et vierzehn 14.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Tu n’as pas compris le numéro. Que peux-tu dire à la réception ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wie alt sind Sie?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Woher kommen Sie?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Können Sie die Nummer bitte wiederholen?",
+              "correct": true
+            }
+          ],
+          "explanation": "Wiederholen veut dire « répéter » : c’est la demande polie quand on n’a pas compris. « Wie alt sind Sie? » demande l’âge et « Woher kommen Sie? » l’origine.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : donner ses coordonnées au guichet",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : donner ses coordonnées au guichet",
+        "description": "Vous vous inscrivez à un cours. Au guichet, l’employée vous demande vos coordonnées. Vous les dictez lentement, chiffre par chiffre, et vous confirmez quand elle répète. Ensuite, vous remplissez la fiche d’inscription.\n\nMODÈLE\n– Wie ist Ihre Telefonnummer?\n– Null, eins, fünf, sechs. Dann: drei, neun, acht, zwei.\n– Drei, neun, acht, zwei?\n– Ja, genau.\n– Und Ihre Postleitzahl?\n– Zwei, acht, eins, neun, fünf.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-zahlen-atelier-telefon",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-zahlen-atelier-formular",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez vos réponses au guichet, avec des coordonnées inventées : votre nom, votre âge, votre numéro de téléphone et votre code postal. Dictez les numéros chiffre par chiffre, par groupes, avec une pause entre les groupes. Terminez par « Ja, genau », comme si l’employée avait répété.",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Remplissez la fiche : une ligne par information (Name, Alter, Wohnort, Telefonnummer, Postleitzahl). Ajoutez une phrase avec votre âge en toutes lettres : Ich bin … Jahre alt.",
+          "maxChars": 400,
+          "minWords": 12
+        },
+        "checklist": [
+          "J’ai dicté mon numéro chiffre par chiffre, en groupes, avec une pause entre les groupes.",
+          "J’ai bien distingué les nombres en -zehn et en -zig (vierzehn, vierzig).",
+          "J’ai dit mon âge avec l’unité avant la dizaine (zweiundzwanzig).",
+          "Ma fiche contient les cinq informations, et ses chiffres sont ceux de mon enregistrement."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-zahlen-atelier-dialogue",
+      "kind": "audio",
+      "title": "Vérifier des coordonnées par téléphone · scène",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Guten Tag! Wie heißen Sie?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ich heiße Lea Berg. Ich bin zweiundzwanzig Jahre alt."
+        },
+        {
+          "voice": "mann",
+          "text": "Wie ist Ihre Telefonnummer?"
+        },
+        {
+          "voice": "frau",
+          "text": "Null, eins, sieben, sechs. Dann: vier, drei, acht, zwei."
+        },
+        {
+          "voice": "mann",
+          "text": "Vier, drei, acht, zwei. Danke! Wie ist Ihre Postleitzahl?"
+        },
+        {
+          "voice": "frau",
+          "text": "Zwei, null, vier, fünf, sieben."
+        },
+        {
+          "voice": "mann",
+          "text": "Wohnen Sie in Hamburg?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, genau. In Hamburg."
+        }
+      ]
+    },
+    {
+      "key": "v4-a1-zahlen-atelier-fiche",
+      "kind": "image",
+      "title": "Une fiche d’inscription remplie",
+      "alt": "Fiche « Anmeldung » remplie : Name Jan Wolf, Alter 42, Wohnort Bremen, Postleitzahl 28195, Platz 14, Gruppe blau.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "form",
+        "icon": "clipboard-list",
+        "title": "Anmeldung",
+        "fields": [
+          {
+            "label": "Name",
+            "value": "Jan Wolf",
+            "wide": true
+          },
+          {
+            "label": "Alter",
+            "value": "42"
+          },
+          {
+            "label": "Wohnort",
+            "value": "Bremen"
+          },
+          {
+            "label": "Postleitzahl",
+            "value": "28195"
+          },
+          {
+            "label": "Platz",
+            "value": "14"
+          },
+          {
+            "label": "Gruppe",
+            "value": "blau"
+          }
+        ],
+        "size": 28
+      }
+    },
+    {
+      "key": "v4-a1-zahlen-atelier-zahlen",
+      "kind": "image",
+      "title": "Des nombres faciles à confondre",
+      "alt": "Trois cartes de nombres, la partie qui change en couleur : 13 dreizehn et 30 dreißig, 17 siebzehn et 70 siebzig, 35 fünfunddreißig et 53 dreiundfünfzig.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "13 · 30",
+            "words": [
+              "drei[zehn]",
+              "drei[ßig]"
+            ]
+          },
+          {
+            "title": "17 · 70",
+            "words": [
+              "sieb[zehn]",
+              "sieb[zig]"
+            ]
+          },
+          {
+            "title": "35 · 53",
+            "words": [
+              "[fünf]und[dreißig]",
+              "[drei]und[fünfzig]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-zahlen-atelier-telefon",
+      "kind": "image",
+      "title": "Dicter son numéro au guichet",
+      "alt": "Au guichet des inscriptions, l’employée demande « Wie ist Ihre Telefonnummer? » et Ali commence à dicter chiffre par chiffre : « Null, eins, fünf, sechs … ». En haut : un téléphone, un porte-bloc et un crayon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Wie ist Ihre Telefonnummer?"
+          },
+          {
+            "name": "Ali",
+            "say": "Null, eins, fünf, sechs …"
+          }
+        ],
+        "items": [
+          "phone-call",
+          "clipboard-list",
+          "pencil"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-zahlen-atelier-formular",
+      "kind": "image",
+      "title": "Une fiche vierge à remplir",
+      "alt": "Fiche d’inscription vierge à remplir après l’écoute : Name, Alter, Wohnort, Telefonnummer et Postleitzahl.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "form",
+        "icon": "clipboard-pen",
+        "title": "Anmeldung",
+        "subtitle": "Bitte ausfüllen",
+        "fields": [
+          {
+            "label": "Name",
+            "wide": true
+          },
+          {
+            "label": "Alter"
+          },
+          {
+            "label": "Wohnort"
+          },
+          {
+            "label": "Telefonnummer"
+          },
+          {
+            "label": "Postleitzahl"
+          }
+        ],
+        "size": 31
+      }
+    },
+    {
+      "key": "a1-zahlen-atelier-entrainer-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · S’entraîner : noter et dicter des coordonnées",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Wie ist Ihre Telefonnummer?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter et dicter des coordonnées",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Ich bin dreiundvierzig Jahre alt."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie ist Ihre Telefonnummer?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich bin zweiundzwanzig Jahre alt."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Vierzehn oder vierzig?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meine Hausnummer ist vierzehn."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Können Sie die Nummer bitte wiederholen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : au guichet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ja, genau. In Hamburg."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Vérifier des coordonnées par téléphone",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Telefonnummer, die Telefonnummern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nummer, die Nummern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Alter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Anmeldung, die Anmeldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Gruppe, die Gruppen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Platz, die Plätze"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wiederholen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "genau"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dann"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ihr"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie alt sind Sie?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "null"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vierzehn"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vierzig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dreißig"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

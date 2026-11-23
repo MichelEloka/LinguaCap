@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.8.0",
+    "version": "1.9.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -4420,6 +4420,736 @@
           }
         }
       }
+    },
+    "/assessments/exercises": {
+      "post": {
+        "operationId": "submitExercise",
+        "summary": "Remettre un exercice typé et recevoir le corrigé de chaque question (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExerciseSubmitRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Note et corrigé par question",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseResult"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/exercises/{attemptId}": {
+      "get": {
+        "operationId": "getExerciseResult",
+        "summary": "Corrigé d’une remise (élève, professeur référent, administration)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/AttemptIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Note et corrigé par question",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExerciseResult"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/speech": {
+      "post": {
+        "operationId": "submitSpeechAttempt",
+        "summary": "Envoyer le texte reconnu d’un essai de répétition orale",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpeechAttemptRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Essai noté par le serveur",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeechAttemptView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/speech/recordings": {
+      "post": {
+        "operationId": "reserveSpeechRecording",
+        "summary": "Réserver le dépôt d’un enregistrement de répétition pour le professeur",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpeechRecordingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Essai en attente de dépôt et réservation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeechRecordingReservation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/speech/{speechId}": {
+      "get": {
+        "operationId": "getSpeechAttempt",
+        "summary": "Essai de répétition orale, avec l’adresse de l’enregistrement",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SpeechIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Essai de répétition orale",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeechAttemptView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/speech/{speechId}/recordings/{productionId}/finalize": {
+      "post": {
+        "operationId": "finalizeSpeechRecording",
+        "summary": "Contrôler l’enregistrement reçu et le soumettre au professeur",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SpeechIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ProductionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Essai en attente de validation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeechAttemptView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/speech/{speechId}/review": {
+      "post": {
+        "operationId": "reviewSpeechAttempt",
+        "summary": "Valider ou refuser une répétition enregistrée (correcteur)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/SpeechIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpeechReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Essai validé ou refusé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpeechAttemptView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions": {
+      "get": {
+        "operationId": "listMissions",
+        "summary": "Missions d’un élève (récentes d’abord)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Missions",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/MissionSummary"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "openMission",
+        "summary": "Ouvrir le brouillon d’une mission, ou relire la dernière remise de ce contexte",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissionStartRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Dernière remise de ce contexte",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Nouveau brouillon",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions/{missionId}": {
+      "get": {
+        "operationId": "getMission",
+        "summary": "Mission (élève propriétaire ou correcteur), avec l’adresse de l’enregistrement",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mission",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "saveMission",
+        "summary": "Enregistrer le brouillon d’une mission (texte, liste cochée)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissionUpdateRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Brouillon enregistré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions/{missionId}/recordings": {
+      "post": {
+        "operationId": "reserveMissionRecording",
+        "summary": "Réserver le dépôt de l’enregistrement d’une mission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissionRecordingRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Réservation du dépôt",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UploadReservation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions/{missionId}/recordings/{productionId}/finalize": {
+      "post": {
+        "operationId": "finalizeMissionRecording",
+        "summary": "Contrôler l’enregistrement reçu et le rattacher à la mission",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ProductionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mission",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          },
+          "422": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions/{missionId}/submit": {
+      "post": {
+        "operationId": "submitMission",
+        "summary": "Envoyer la mission au professeur référent ou au correcteur (idempotent)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/IdempotencyKey"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mission envoyée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/missions/{missionId}/review": {
+      "post": {
+        "operationId": "reviewMission",
+        "summary": "Rendre le retour d’une mission (correcteur)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/MissionIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MissionReviewRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mission corrigée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MissionView"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/assessments/reviews": {
+      "get": {
+        "operationId": "listReviewQueue",
+        "summary": "File des missions et répétitions à corriger (professeur, correcteur, administration)",
+        "responses": {
+          "200": {
+            "description": "Remises à corriger, les plus anciennes d’abord",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ReviewQueueItem"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/library/{versionId}/modules/{moduleId}/lexicon": {
+      "get": {
+        "operationId": "getModuleLexicon",
+        "summary": "Lexique d’un module, avec les adresses temporaires de ses sons",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/VersionIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/ModuleIdPath"
+          },
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lexique du module",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Lexicon"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -4710,6 +5440,33 @@
           "$ref": "#/components/schemas/Slug"
         },
         "example": "a1-hallo-dialog"
+      },
+      "MissionIdPath": {
+        "name": "missionId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "e5d4c3b2-a1f0-4e9d-8c7b-6a5f4e3d2c1b"
+      },
+      "SpeechIdPath": {
+        "name": "speechId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "f6e5d4c3-b2a1-4f0e-9d8c-7b6a5f4e3d2c"
+      },
+      "ModuleIdPath": {
+        "name": "moduleId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Slug"
+        },
+        "example": "a1-hallo"
       }
     },
     "responses": {
@@ -5426,7 +6183,10 @@
           "lessonId",
           "correct",
           "total",
-          "submittedAt"
+          "submittedAt",
+          "pending",
+          "flagged",
+          "typed"
         ],
         "properties": {
           "id": {
@@ -5495,6 +6255,22 @@
                 "type": "null"
               }
             ]
+          },
+          "pending": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Répétitions orales envoyées en enregistrement, en attente du professeur (0 pour l’historique)."
+          },
+          "flagged": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Questions « à revoir » (trois échecs de répétition), comptées fausses."
+          },
+          "typed": {
+            "type": "boolean",
+            "description": "Remise par /assessments/exercises (questions typées)."
           }
         }
       },
@@ -6042,8 +6818,12 @@
           },
           "teacherProfile": {
             "oneOf": [
-              { "$ref": "#/components/schemas/TeacherProfile" },
-              { "type": "null" }
+              {
+                "$ref": "#/components/schemas/TeacherProfile"
+              },
+              {
+                "type": "null"
+              }
             ],
             "description": "Réponses du professeur, ou null pour un autre rôle ou en l’absence de profil."
           }
@@ -6236,7 +7016,8 @@
               "lesson",
               "exercise",
               "review",
-              "assessment"
+              "assessment",
+              "mission"
             ]
           },
           "title": {
@@ -6523,13 +7304,7 @@
             "minimum": 1
           },
           "kind": {
-            "type": "string",
-            "enum": [
-              "lesson",
-              "exercise",
-              "review",
-              "assessment"
-            ]
+            "$ref": "#/components/schemas/ActivityKind"
           },
           "title": {
             "type": "string"
@@ -6609,14 +7384,58 @@
           "questions": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/Question"
-            }
+              "$ref": "#/components/schemas/QuestionView"
+            },
+            "description": "Questions typées, sans corrigé."
           },
           "placements": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/SessionPlacement"
             }
+          },
+          "mission": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionSnapshot"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Activité mission : consigne, parties et liste de vérification."
+          },
+          "contentVersionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Version du catalogue d’origine (aussi pour un cours ajouté)."
+          },
+          "contentActivityId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Slug"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Activité du catalogue d’origine."
+          },
+          "reviewItems": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "$ref": "#/components/schemas/ReviewItem"
+            },
+            "description": "Révision du module (revision-<module>) : exercices à reprendre."
           }
         }
       },
@@ -6647,6 +7466,17 @@
           "enrollmentId": {
             "$ref": "#/components/schemas/Uuid",
             "description": "Parcours de la séance, pour ouvrir le bilan et l’examen blanc."
+          },
+          "lexicon": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Lexicon"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Lexique du module de la séance (null s’il est indisponible)."
           }
         }
       },
@@ -7092,6 +7922,14 @@
           },
           "correct": {
             "type": "boolean"
+          },
+          "feedback": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 500,
+            "description": "Retour propre à ce choix, affiché après la remise ; absent s’il n’y en a pas."
           }
         }
       },
@@ -7123,7 +7961,50 @@
             "items": {
               "$ref": "#/components/schemas/DraftOption"
             },
-            "maxItems": 8
+            "maxItems": 8,
+            "description": "Choix de réponse (choice) ; vide pour les autres types."
+          },
+          "type": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/QuestionType"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Null : choice. Le diagnostic et les parties d’évaluation restent en choice."
+          },
+          "explanation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 1500,
+            "description": "Explication affichée après la remise."
+          },
+          "spec": {
+            "description": "Champs propres au type (null pour choice) : fill {text, blanks}, order {answers}, match {pairs}, dictation {accept, showWordCount}, speak {text, accept, threshold}.",
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FillSpec"
+              },
+              {
+                "$ref": "#/components/schemas/OrderSpec"
+              },
+              {
+                "$ref": "#/components/schemas/MatchSpec"
+              },
+              {
+                "$ref": "#/components/schemas/DictationSpec"
+              },
+              {
+                "$ref": "#/components/schemas/SpeakSpec"
+              },
+              {
+                "type": "null"
+              }
+            ]
           }
         }
       },
@@ -7240,7 +8121,8 @@
               "lesson",
               "exercise",
               "review",
-              "assessment"
+              "assessment",
+              "mission"
             ]
           },
           "title": {
@@ -7285,6 +8167,17 @@
             "items": {
               "$ref": "#/components/schemas/DraftPlacement"
             }
+          },
+          "mission": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionDefinition"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Activité mission seulement."
           }
         }
       },
@@ -7319,6 +8212,14 @@
             "items": {
               "$ref": "#/components/schemas/DraftActivity"
             }
+          },
+          "vocabulary": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftVocabularyEntry"
+            },
+            "maxItems": 60,
+            "description": "Lexique du module."
           }
         }
       },
@@ -8849,46 +9750,114 @@
         "type": "object",
         "description": "Répartitions actuelles des professeurs actifs et tendance des réponses explicites dans la période. Les filtres de parcours concernent les indicateurs élèves.",
         "required": [
-          "teachers", "byLanguage", "byLevel", "byAvailability", "byCourseMode",
-          "byMaxLearners", "byGradingDelayHours", "trend"
+          "teachers",
+          "byLanguage",
+          "byLevel",
+          "byAvailability",
+          "byCourseMode",
+          "byMaxLearners",
+          "byGradingDelayHours",
+          "trend"
         ],
         "properties": {
-          "teachers": { "type": "integer", "minimum": 0 },
-          "byLanguage": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
-          "byLevel": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "teachers": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "byLanguage": {
+            "$ref": "#/components/schemas/TeacherOnboardingCounts"
+          },
+          "byLevel": {
+            "$ref": "#/components/schemas/TeacherOnboardingCounts"
+          },
           "byAvailability": {
             "type": "object",
-            "required": ["yes", "no", "unknown"],
+            "required": [
+              "yes",
+              "no",
+              "unknown"
+            ],
             "properties": {
-              "yes": { "type": "integer", "minimum": 0 },
-              "no": { "type": "integer", "minimum": 0 },
-              "unknown": { "type": "integer", "minimum": 0 }
+              "yes": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "no": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unknown": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           },
           "byCourseMode": {
             "type": "object",
-            "required": ["self", "linguacap", "unknown"],
+            "required": [
+              "self",
+              "linguacap",
+              "unknown"
+            ],
             "properties": {
-              "self": { "type": "integer", "minimum": 0 },
-              "linguacap": { "type": "integer", "minimum": 0 },
-              "unknown": { "type": "integer", "minimum": 0 }
+              "self": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "linguacap": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "unknown": {
+                "type": "integer",
+                "minimum": 0
+              }
             }
           },
-          "byMaxLearners": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
-          "byGradingDelayHours": { "$ref": "#/components/schemas/TeacherOnboardingCounts" },
+          "byMaxLearners": {
+            "$ref": "#/components/schemas/TeacherOnboardingCounts"
+          },
+          "byGradingDelayHours": {
+            "$ref": "#/components/schemas/TeacherOnboardingCounts"
+          },
           "trend": {
             "type": "array",
             "description": "Dernière réponse explicite par professeur et jour, dates Europe/Paris dans la période incluse.",
             "items": {
               "type": "object",
-              "required": ["date", "responses", "accepting", "notAccepting", "self", "linguacap"],
+              "required": [
+                "date",
+                "responses",
+                "accepting",
+                "notAccepting",
+                "self",
+                "linguacap"
+              ],
               "properties": {
-                "date": { "type": "string", "format": "date" },
-                "responses": { "type": "integer", "minimum": 0 },
-                "accepting": { "type": "integer", "minimum": 0 },
-                "notAccepting": { "type": "integer", "minimum": 0 },
-                "self": { "type": "integer", "minimum": 0 },
-                "linguacap": { "type": "integer", "minimum": 0 }
+                "date": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "responses": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "accepting": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "notAccepting": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "self": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "linguacap": {
+                  "type": "integer",
+                  "minimum": 0
+                }
               }
             }
           }
@@ -8897,7 +9866,10 @@
       "TeacherOnboardingCounts": {
         "type": "object",
         "description": "Effectifs par valeur déclarée. La clé unknown regroupe les valeurs manquantes.",
-        "additionalProperties": { "type": "integer", "minimum": 0 }
+        "additionalProperties": {
+          "type": "integer",
+          "minimum": 0
+        }
       },
       "LanguageId": {
         "type": "string",
@@ -9389,13 +10361,20 @@
             "format": "date-time"
           },
           "acceptingNewStudents": {
-            "type": ["boolean", "null"],
+            "type": [
+              "boolean",
+              "null"
+            ],
             "description": "Disponibilité déclarée, ou null si le professeur n’a pas répondu."
           },
           "courseCreationMode": {
             "oneOf": [
-              { "$ref": "#/components/schemas/TeacherCourseCreationMode" },
-              { "type": "null" }
+              {
+                "$ref": "#/components/schemas/TeacherCourseCreationMode"
+              },
+              {
+                "type": "null"
+              }
             ],
             "description": "Choix du professeur, ou null s’il n’a pas répondu."
           }
@@ -9403,7 +10382,10 @@
       },
       "TeacherCourseCreationMode": {
         "type": "string",
-        "enum": ["self", "linguacap"]
+        "enum": [
+          "self",
+          "linguacap"
+        ]
       },
       "TeacherProfileRequest": {
         "type": "object",
@@ -9414,8 +10396,12 @@
         "additionalProperties": false,
         "description": "Les deux choix d’accueil sont fournis ensemble. Leur omission préserve les choix déjà enregistrés.",
         "dependentRequired": {
-          "acceptingNewStudents": ["courseCreationMode"],
-          "courseCreationMode": ["acceptingNewStudents"]
+          "acceptingNewStudents": [
+            "courseCreationMode"
+          ],
+          "courseCreationMode": [
+            "acceptingNewStudents"
+          ]
         },
         "properties": {
           "languages": {
@@ -10780,7 +11766,8 @@
               "lesson",
               "exercise",
               "review",
-              "assessment"
+              "assessment",
+              "mission"
             ]
           },
           "title": {
@@ -12024,7 +13011,8 @@
           "estimatedMinutes",
           "competences",
           "lessonId",
-          "lastResult"
+          "lastResult",
+          "toReview"
         ],
         "properties": {
           "id": {
@@ -12034,7 +13022,8 @@
             "type": "string",
             "enum": [
               "lesson",
-              "exercise"
+              "exercise",
+              "mission"
             ]
           },
           "title": {
@@ -12077,6 +13066,10 @@
                 "format": "date-time"
               }
             }
+          },
+          "toReview": {
+            "type": "boolean",
+            "description": "Dernier résultat avec des questions « à revoir »."
           }
         }
       },
@@ -12141,7 +13134,8 @@
                       "position",
                       "title",
                       "objective",
-                      "activities"
+                      "activities",
+                      "vocabularyCount"
                     ],
                     "properties": {
                       "id": {
@@ -12161,6 +13155,11 @@
                         "items": {
                           "$ref": "#/components/schemas/LibraryActivityItem"
                         }
+                      },
+                      "vocabularyCount": {
+                        "type": "integer",
+                        "minimum": 0,
+                        "description": "Entrées du lexique du module."
                       }
                     }
                   }
@@ -12226,7 +13225,1978 @@
             }
           }
         ],
-        "description": "Activité de bibliothèque : forme d’ActivityDetail (status todo, state vide, sans corrigé) avec sa version et son module."
+        "description": "Activité de bibliothèque : forme d’ActivityDetail (status todo, state vide, questions typées sans corrigé, mission) avec sa version et son module."
+      },
+      "ActivityKind": {
+        "type": "string",
+        "enum": [
+          "lesson",
+          "exercise",
+          "review",
+          "assessment",
+          "mission"
+        ]
+      },
+      "QuestionType": {
+        "type": "string",
+        "enum": [
+          "choice",
+          "fill",
+          "order",
+          "match",
+          "dictation",
+          "speak"
+        ],
+        "description": "Type de question ; absent ou nul : choice."
+      },
+      "QuestionItem": {
+        "type": "object",
+        "required": [
+          "id",
+          "text"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          }
+        },
+        "description": "Choix, jeton (order) ou élément à associer (match) ; identifiant opaque."
+      },
+      "ChoiceQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "options"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "choice"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionItem"
+            }
+          }
+        }
+      },
+      "FillQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "text",
+          "blanks"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "fill"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string",
+            "description": "Texte à trous : chaque trou y figure sous la forme [[id]]."
+          },
+          "blanks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "size",
+                "hint"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": 1
+                },
+                "hint": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "OrderQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "tokens"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "order"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "tokens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionItem"
+            },
+            "description": "Jetons (k + 6 caractères hexadécimaux), dans un ordre déterministe qui n’est jamais une solution."
+          }
+        }
+      },
+      "MatchQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "left",
+          "right"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "match"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "left": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionItem"
+            }
+          },
+          "right": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionItem"
+            }
+          }
+        }
+      },
+      "DictationQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "wordCount"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "dictation"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "wordCount": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          }
+        },
+        "description": "Le son de la dictée est un support de la question (questionId)."
+      },
+      "SpeakQuestionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "text",
+          "threshold"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "speak"
+            ]
+          },
+          "prompt": {
+            "type": "string"
+          },
+          "text": {
+            "type": "string"
+          },
+          "threshold": {
+            "type": "integer",
+            "minimum": 50,
+            "maximum": 100
+          }
+        }
+      },
+      "QuestionView": {
+        "description": "Question vue par l’élève (séance, bibliothèque), selon son type.",
+        "oneOf": [
+          {
+            "$ref": "#/components/schemas/ChoiceQuestionView"
+          },
+          {
+            "$ref": "#/components/schemas/FillQuestionView"
+          },
+          {
+            "$ref": "#/components/schemas/OrderQuestionView"
+          },
+          {
+            "$ref": "#/components/schemas/MatchQuestionView"
+          },
+          {
+            "$ref": "#/components/schemas/DictationQuestionView"
+          },
+          {
+            "$ref": "#/components/schemas/SpeakQuestionView"
+          }
+        ],
+        "discriminator": {
+          "propertyName": "type",
+          "mapping": {
+            "choice": "#/components/schemas/ChoiceQuestionView",
+            "fill": "#/components/schemas/FillQuestionView",
+            "order": "#/components/schemas/OrderQuestionView",
+            "match": "#/components/schemas/MatchQuestionView",
+            "dictation": "#/components/schemas/DictationQuestionView",
+            "speak": "#/components/schemas/SpeakQuestionView"
+          }
+        }
+      },
+      "ExerciseAnswer": {
+        "description": "Réponse à une question, selon son type.",
+        "oneOf": [
+          {
+            "type": "object",
+            "required": [
+              "choice"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "choice": {
+                "type": "string",
+                "maxLength": 80
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "blanks"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "blanks": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 80
+                },
+                "maxProperties": 20
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "order"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "order": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 20
+                },
+                "maxItems": 16
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "pairs"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "pairs": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string",
+                  "maxLength": 20
+                },
+                "maxProperties": 8
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "text"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "text": {
+                "type": "string",
+                "maxLength": 500
+              }
+            }
+          },
+          {
+            "type": "object",
+            "required": [
+              "speechAttemptId"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "speechAttemptId": {
+                "$ref": "#/components/schemas/Uuid"
+              }
+            }
+          }
+        ]
+      },
+      "ExerciseSubmitRequest": {
+        "type": "object",
+        "required": [
+          "lessonId",
+          "roundId",
+          "answers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "roundId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Manche de l’exercice ; « Refaire » en ouvre une nouvelle."
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Séance de la remise, avec activityId."
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "answers": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/ExerciseAnswer"
+            },
+            "maxProperties": 30,
+            "description": "Identifiant de question vers sa réponse ; toutes les questions doivent avoir une réponse."
+          }
+        }
+      },
+      "AnswerNotice": {
+        "type": "string",
+        "enum": [
+          "transliteration",
+          "case",
+          "typo"
+        ],
+        "description": "Graphie translittérée, majuscule du nom, faute de frappe (réponse acceptée)."
+      },
+      "QuestionReview": {
+        "type": "object",
+        "required": [
+          "id",
+          "type",
+          "prompt",
+          "status",
+          "given",
+          "expected",
+          "explanation",
+          "feedback",
+          "notices",
+          "detail"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "type": {
+            "$ref": "#/components/schemas/QuestionType"
+          },
+          "prompt": {
+            "type": "string",
+            "description": "Énoncé de la question."
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "correct",
+              "incorrect",
+              "pending",
+              "flagged"
+            ]
+          },
+          "given": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Réponse remise (forme d’ExerciseAnswer), avec des textes d’affichage : label (choice), sentence (order), transcript (speak)."
+          },
+          "expected": {
+            "description": "choice : {optionId, label} ; fill : {blanks: {id: [réponses acceptées]}} ; order : {sentence, alternatives} ; match : {pairs: {gauche: droite}} ; dictation et speak : {text}.",
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "optionId",
+                  "label"
+                ],
+                "properties": {
+                  "optionId": {
+                    "type": "string"
+                  },
+                  "label": {
+                    "type": "string"
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "blanks"
+                ],
+                "properties": {
+                  "blanks": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "array",
+                      "items": {
+                        "type": "string"
+                      }
+                    }
+                  },
+                  "text": {
+                    "type": "string",
+                    "description": "Texte à trous."
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "sentence",
+                  "alternatives"
+                ],
+                "properties": {
+                  "sentence": {
+                    "type": "string"
+                  },
+                  "alternatives": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pairs"
+                ],
+                "properties": {
+                  "pairs": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    }
+                  },
+                  "labels": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Texte de chaque élément (gauche et droite) par identifiant."
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "text"
+                ],
+                "properties": {
+                  "text": {
+                    "type": "string"
+                  }
+                }
+              }
+            ]
+          },
+          "explanation": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Null pour une ancienne tentative corrigée à la volée."
+          },
+          "feedback": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Retour propre au choix donné (choice)."
+          },
+          "notices": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/AnswerNotice"
+            }
+          },
+          "detail": {
+            "description": "fill : {blanks: {id: {correct, notices}}} ; match : {pairs: {gauche: bool}} ; dictation : {score, words} ; speak : {score, transcript, attempts, mode, reviewStatus} ; null sinon.",
+            "oneOf": [
+              {
+                "type": "object",
+                "required": [
+                  "blanks"
+                ],
+                "properties": {
+                  "blanks": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object",
+                      "required": [
+                        "correct",
+                        "notices"
+                      ],
+                      "properties": {
+                        "correct": {
+                          "type": "boolean"
+                        },
+                        "notices": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/AnswerNotice"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "pairs"
+                ],
+                "properties": {
+                  "pairs": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "boolean"
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "score",
+                  "words"
+                ],
+                "properties": {
+                  "score": {
+                    "type": "integer",
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "words": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "required": [
+                        "expected",
+                        "given",
+                        "status"
+                      ],
+                      "properties": {
+                        "expected": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "given": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "status": {
+                          "type": "string",
+                          "enum": [
+                            "ok",
+                            "near",
+                            "translit",
+                            "missing",
+                            "wrong",
+                            "extra"
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "object",
+                "required": [
+                  "score",
+                  "transcript",
+                  "attempts",
+                  "mode",
+                  "reviewStatus"
+                ],
+                "properties": {
+                  "score": {
+                    "type": [
+                      "integer",
+                      "null"
+                    ],
+                    "minimum": 0,
+                    "maximum": 100
+                  },
+                  "transcript": {
+                    "type": [
+                      "string",
+                      "null"
+                    ]
+                  },
+                  "attempts": {
+                    "type": "integer",
+                    "minimum": 0
+                  },
+                  "mode": {
+                    "$ref": "#/components/schemas/SpeechMode"
+                  },
+                  "reviewStatus": {
+                    "$ref": "#/components/schemas/SpeechReviewStatus"
+                  },
+                  "comment": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "description": "Commentaire du professeur après sa décision."
+                  }
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ExerciseResult": {
+        "type": "object",
+        "required": [
+          "grade",
+          "questions"
+        ],
+        "properties": {
+          "grade": {
+            "$ref": "#/components/schemas/Grade"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/QuestionReview"
+            }
+          }
+        },
+        "description": "Note et correction de chaque question, figées à la remise. Une manche se remet une fois : la même remise rejouée renvoie la même correction, d’autres réponses sont refusées (409)."
+      },
+      "SpeechMode": {
+        "type": "string",
+        "enum": [
+          "recognition",
+          "recording"
+        ]
+      },
+      "SpeechReviewStatus": {
+        "type": "string",
+        "enum": [
+          "auto",
+          "uploading",
+          "pending",
+          "validated",
+          "rejected"
+        ]
+      },
+      "RecordingRef": {
+        "type": "object",
+        "required": [
+          "productionId",
+          "mimeType",
+          "url"
+        ],
+        "properties": {
+          "productionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "mimeType": {
+            "type": "string"
+          },
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Lecture de cinq minutes, réservée à l’élève et à ses correcteurs."
+          }
+        }
+      },
+      "SpeechAttemptRequest": {
+        "type": "object",
+        "required": [
+          "lessonId",
+          "questionId",
+          "roundId",
+          "transcripts"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "questionId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "roundId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Séance de l’essai, avec activityId (absents en bibliothèque)."
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "transcripts": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "minItems": 1,
+            "maxItems": 5
+          }
+        }
+      },
+      "SpeechRecordingRequest": {
+        "type": "object",
+        "required": [
+          "lessonId",
+          "questionId",
+          "roundId",
+          "mimeType",
+          "size"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "questionId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "roundId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Séance de l’essai, avec activityId (absents en bibliothèque)."
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "audio/webm",
+              "audio/ogg",
+              "audio/mpeg",
+              "audio/mp4",
+              "audio/wav"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 26214400
+          }
+        }
+      },
+      "SpeechReviewRequest": {
+        "type": "object",
+        "required": [
+          "decision"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "type": "string",
+            "enum": [
+              "validated",
+              "rejected"
+            ]
+          },
+          "comment": {
+            "type": "string",
+            "maxLength": 1000
+          }
+        }
+      },
+      "SpeechAttemptView": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "lessonId",
+          "questionId",
+          "roundId",
+          "attempt",
+          "mode",
+          "score",
+          "passed",
+          "threshold",
+          "failures",
+          "canSkip",
+          "transcript",
+          "text",
+          "reviewStatus",
+          "comment",
+          "recording",
+          "createdAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "questionId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "roundId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "attempt": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          },
+          "mode": {
+            "$ref": "#/components/schemas/SpeechMode"
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "maximum": 100
+          },
+          "passed": {
+            "type": "boolean"
+          },
+          "threshold": {
+            "type": "integer",
+            "minimum": 50,
+            "maximum": 100
+          },
+          "failures": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "canSkip": {
+            "type": "boolean",
+            "description": "Vrai après 3 échecs dans la manche."
+          },
+          "transcript": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "text": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Phrase à répéter."
+          },
+          "reviewStatus": {
+            "$ref": "#/components/schemas/SpeechReviewStatus"
+          },
+          "comment": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "recording": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RecordingRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "UploadReservation": {
+        "type": "object",
+        "required": [
+          "id",
+          "uploadUrl",
+          "maxBytes"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "uploadUrl": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Dépôt direct dans l’espace privé des productions (jeton de l’élève)."
+          },
+          "maxBytes": {
+            "type": "integer"
+          }
+        },
+        "description": "Réservation d’un dépôt dans Médias (forme RecordingReservation ; ces champs sont garantis)."
+      },
+      "SpeechRecordingReservation": {
+        "type": "object",
+        "required": [
+          "attempt",
+          "upload"
+        ],
+        "properties": {
+          "attempt": {
+            "$ref": "#/components/schemas/SpeechAttemptView"
+          },
+          "upload": {
+            "$ref": "#/components/schemas/UploadReservation"
+          }
+        }
+      },
+      "MissionOral": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "maxSeconds"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "maxSeconds": {
+            "type": "integer",
+            "minimum": 30,
+            "maximum": 120
+          }
+        }
+      },
+      "MissionWritten": {
+        "type": "object",
+        "required": [
+          "prompt",
+          "maxChars",
+          "minWords"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "prompt": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "maxChars": {
+            "type": "integer",
+            "minimum": 200,
+            "maximum": 1500
+          },
+          "minWords": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 200
+          }
+        }
+      },
+      "MissionDefinition": {
+        "type": "object",
+        "required": [
+          "oral",
+          "written",
+          "checklist"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "oral": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionOral"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "written": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionWritten"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 160
+            },
+            "minItems": 2,
+            "maxItems": 6
+          }
+        },
+        "description": "Au moins une partie (orale ou écrite). La situation et la consigne sont la description de la leçon."
+      },
+      "MissionSnapshot": {
+        "type": "object",
+        "required": [
+          "description",
+          "oral",
+          "written",
+          "checklist"
+        ],
+        "properties": {
+          "description": {
+            "type": "string"
+          },
+          "oral": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionOral"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "written": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionWritten"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "description": "Définition figée dans la remise, avec la consigne."
+      },
+      "MissionStatus": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "submitted",
+          "sent",
+          "reviewed"
+        ],
+        "description": "sent : remise sans destinataire (auto-vérification seulement)."
+      },
+      "MissionDecision": {
+        "type": "string",
+        "enum": [
+          "validated",
+          "to_redo"
+        ]
+      },
+      "MissionStartRequest": {
+        "type": "object",
+        "required": [
+          "trackVersionId",
+          "activityId"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "sessionId": {
+            "$ref": "#/components/schemas/Uuid",
+            "description": "Séance, avec sessionActivityId (absents en bibliothèque)."
+          },
+          "sessionActivityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "restart": {
+            "type": "boolean",
+            "description": "Après to_redo ou sent : nouveau brouillon (numéro + 1), prérempli avec le texte précédent."
+          }
+        }
+      },
+      "MissionUpdateRequest": {
+        "type": "object",
+        "required": [],
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 1500
+          },
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 5
+            },
+            "maxItems": 6,
+            "uniqueItems": true,
+            "description": "Indices des points cochés (0 = premier)."
+          }
+        }
+      },
+      "MissionRecordingRequest": {
+        "type": "object",
+        "required": [
+          "mimeType",
+          "size"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "mimeType": {
+            "type": "string",
+            "enum": [
+              "audio/webm",
+              "audio/ogg",
+              "audio/mpeg",
+              "audio/mp4",
+              "audio/wav"
+            ]
+          },
+          "size": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 26214400
+          }
+        }
+      },
+      "MissionReviewRequest": {
+        "type": "object",
+        "required": [
+          "decision",
+          "comment"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "decision": {
+            "$ref": "#/components/schemas/MissionDecision"
+          },
+          "comment": {
+            "type": "string",
+            "maxLength": 2000
+          }
+        }
+      },
+      "MissionView": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "trackVersionId",
+          "levelCode",
+          "moduleId",
+          "activityId",
+          "sessionId",
+          "sessionActivityId",
+          "number",
+          "title",
+          "definition",
+          "status",
+          "text",
+          "checklist",
+          "recording",
+          "reviewerKind",
+          "submittedAt",
+          "review",
+          "canReview",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "sessionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "sessionActivityId": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "number": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "title": {
+            "type": "string"
+          },
+          "definition": {
+            "$ref": "#/components/schemas/MissionSnapshot"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MissionStatus"
+          },
+          "text": {
+            "type": "string"
+          },
+          "checklist": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "recording": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/RecordingRef"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "reviewerKind": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "teacher",
+              "reviewer"
+            ]
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "review": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "decision",
+              "comment",
+              "reviewedAt"
+            ],
+            "properties": {
+              "decision": {
+                "$ref": "#/components/schemas/MissionDecision"
+              },
+              "comment": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "reviewedAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          },
+          "canReview": {
+            "type": "boolean"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "MissionSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "activityId",
+          "title",
+          "levelCode",
+          "moduleId",
+          "status",
+          "decision",
+          "submittedAt",
+          "reviewedAt",
+          "sessionId"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "title": {
+            "type": "string"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "status": {
+            "$ref": "#/components/schemas/MissionStatus"
+          },
+          "decision": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/MissionDecision"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "submittedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "reviewedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "sessionId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "ReviewQueueItem": {
+        "type": "object",
+        "required": [
+          "kind",
+          "id",
+          "learnerId",
+          "learnerName",
+          "title",
+          "levelCode",
+          "context",
+          "submittedAt"
+        ],
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": [
+              "mission",
+              "speech"
+            ]
+          },
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerName": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "levelCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "context": {
+            "type": "string",
+            "enum": [
+              "session",
+              "library"
+            ]
+          },
+          "submittedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "PartOfSpeech": {
+        "type": "string",
+        "enum": [
+          "noun",
+          "verb",
+          "adjective",
+          "adverb",
+          "preposition",
+          "conjunction",
+          "pronoun",
+          "number",
+          "expression",
+          "other"
+        ]
+      },
+      "LexiconAudio": {
+        "type": "object",
+        "required": [
+          "url",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "url": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "start": {
+            "type": "number",
+            "minimum": 0
+          },
+          "end": {
+            "type": "number",
+            "minimum": 0
+          }
+        },
+        "description": "Segment (secondes) du son de lexique du module, avec son adresse temporaire."
+      },
+      "LexiconEntry": {
+        "type": "object",
+        "required": [
+          "id",
+          "word",
+          "article",
+          "plural",
+          "partOfSpeech",
+          "translation",
+          "example",
+          "note",
+          "audio"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "word": {
+            "type": "string"
+          },
+          "article": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "der",
+              "die",
+              "das"
+            ]
+          },
+          "plural": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "partOfSpeech": {
+            "$ref": "#/components/schemas/PartOfSpeech"
+          },
+          "translation": {
+            "type": "string"
+          },
+          "example": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 120
+          },
+          "audio": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LexiconAudio"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "Lexicon": {
+        "type": "object",
+        "required": [
+          "trackVersionId",
+          "levelCode",
+          "moduleId",
+          "moduleTitle",
+          "entries"
+        ],
+        "properties": {
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "moduleId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "moduleTitle": {
+            "type": "string"
+          },
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LexiconEntry"
+            }
+          }
+        }
+      },
+      "ReviewItem": {
+        "type": "object",
+        "required": [
+          "activityId",
+          "title",
+          "trackVersionId",
+          "flagged",
+          "lastResult"
+        ],
+        "properties": {
+          "activityId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "title": {
+            "type": "string"
+          },
+          "trackVersionId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "flagged": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "lastResult": {
+            "type": "object",
+            "required": [
+              "correct",
+              "total"
+            ],
+            "properties": {
+              "correct": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "total": {
+                "type": "integer",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "description": "Exercice à reprendre, listé dans la révision du module."
+      },
+      "FillSpec": {
+        "type": "object",
+        "required": [
+          "text",
+          "blanks"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "blanks": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "id",
+                "accept"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9_-]{1,20}$"
+                },
+                "accept": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "maxLength": 80
+                  },
+                  "minItems": 1,
+                  "maxItems": 10
+                },
+                "size": {
+                  "type": "integer",
+                  "minimum": 1,
+                  "maximum": 80
+                },
+                "hint": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "maxLength": 120
+                }
+              }
+            },
+            "minItems": 1,
+            "maxItems": 20
+          }
+        }
+      },
+      "OrderSpec": {
+        "type": "object",
+        "required": [
+          "answers"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "answers": {
+            "type": "array",
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "maxLength": 80
+              },
+              "minItems": 2,
+              "maxItems": 16
+            },
+            "minItems": 1,
+            "maxItems": 10,
+            "description": "Solutions acceptées, chacune en jetons ; toutes avec le même multiensemble de jetons."
+          }
+        }
+      },
+      "MatchSpec": {
+        "type": "object",
+        "required": [
+          "pairs"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "pairs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": [
+                "left",
+                "right"
+              ],
+              "additionalProperties": false,
+              "properties": {
+                "left": {
+                  "type": "string",
+                  "maxLength": 120
+                },
+                "right": {
+                  "type": "string",
+                  "maxLength": 120
+                }
+              }
+            },
+            "minItems": 2,
+            "maxItems": 8
+          }
+        }
+      },
+      "DictationSpec": {
+        "type": "object",
+        "required": [
+          "accept"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "accept": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 500
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "showWordCount": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SpeakSpec": {
+        "type": "object",
+        "required": [
+          "text",
+          "accept"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "accept": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "minItems": 1,
+            "maxItems": 10
+          },
+          "threshold": {
+            "type": "integer",
+            "minimum": 50,
+            "maximum": 100
+          }
+        }
+      },
+      "DraftVocabularyEntry": {
+        "type": "object",
+        "required": [
+          "id",
+          "word",
+          "partOfSpeech",
+          "translation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "word": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "article": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "der",
+              "die",
+              "das"
+            ]
+          },
+          "plural": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "partOfSpeech": {
+            "$ref": "#/components/schemas/PartOfSpeech"
+          },
+          "translation": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "example": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 300
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 120
+          },
+          "audio": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "required": [
+              "assetId",
+              "assetVersion",
+              "start",
+              "end"
+            ],
+            "additionalProperties": false,
+            "properties": {
+              "assetId": {
+                "$ref": "#/components/schemas/Slug"
+              },
+              "assetVersion": {
+                "type": "integer",
+                "minimum": 1
+              },
+              "start": {
+                "type": "number",
+                "minimum": 0
+              },
+              "end": {
+                "type": "number",
+                "minimum": 0
+              }
+            }
+          }
+        },
+        "description": "Son en lecture seule : segment du média de lexique du module, résolu à l’import."
       }
     }
   }

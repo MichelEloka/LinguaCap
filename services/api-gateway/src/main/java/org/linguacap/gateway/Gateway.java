@@ -25,7 +25,10 @@ public class Gateway {
     private static final String NUMBER = "[1-9][0-9]{0,3}";
     /** Lectures d'un élève relayées avec ?learnerId= (professeur référent ou administration). */
     private static final List<String> LEARNER_READS = List.of("learning/progress", "learning/enrollment", "assessments/results",
-            "tracking/messages", "assessments/exams", "learning/path", "learning/library", "assessments/placements");
+            "tracking/messages", "assessments/exams", "learning/path", "learning/library", "assessments/placements",
+            "assessments/missions");
+    /** Lexique d'un module de la bibliothèque (V4) : lu aussi avec ?learnerId= par le référent ou l'administration. */
+    private static final String LEXICON = "learning/library/" + UUID_PATH + "/modules/" + SLUG + "/lexicon";
     /** Filtres acceptés par le tableau de bord des indicateurs, chacun avec sa forme stricte. */
     private static final Map<String, String> KPI_FILTERS = Map.of("from", "\\d{4}-\\d{2}-\\d{2}", "to", "\\d{4}-\\d{2}-\\d{2}",
             "startLevel", "A0|[ABC][12]", "level", "[ABC][12]", "template", "standard|intensive|custom",
@@ -97,7 +100,8 @@ public class Gateway {
             // Seuls learnerId (lectures d'un élève) et enrollmentId (tentatives d'un parcours) sont relayés.
             String name = path.equals("assessments/exams") ? "enrollmentId" : "learnerId";
             String value = params.getFirst(name);
-            if (!method.equals("GET") || !LEARNER_READS.contains(path)
+            boolean learnerRead = LEARNER_READS.contains(path) || path.matches(LEXICON);
+            if (!method.equals("GET") || !learnerRead
                     || params.size() != 1 || value == null || !value.matches(UUID_PATH) || params.get(name).size() != 1) {
                 throw HttpError.badRequest("Paramètre de recherche invalide.");
             }
@@ -140,6 +144,10 @@ public class Gateway {
                     || path.equals("learning/library") || path.matches("learning/library/" + UUID_PATH + "/activities/" + SLUG)) {
                 return learning;
             }
+            // V4 : corrigé par question, répétition orale, missions, file de corrections et lexique du module.
+            if (path.matches("assessments/(exercises|speech|missions)/" + UUID_PATH) || path.equals("assessments/missions")
+                    || path.equals("assessments/reviews")) return assessment;
+            if (path.matches(LEXICON)) return learning;
         }
         if (method.equals("POST")) {
             if (path.equals("invitations") || path.matches("invitations/" + UUID_PATH + "/(resend|cancel)")) return identity;
@@ -167,6 +175,14 @@ public class Gateway {
             if (path.matches("learning/paths/" + UUID_PATH + "/(proposal/validate|pause|resume|advance|contracts|additions)")
                     || path.matches("learning/paths/" + UUID_PATH + "/contracts/" + NUMBER + "/(accept|reject)")
                     || path.matches("learning/paths/" + UUID_PATH + "/additions/" + UUID_PATH + "/remove")) return learning;
+            // V4 : « speech/recordings » ne correspond jamais au motif d'identifiant (UUID hexadécimal).
+            if (path.equals("assessments/exercises") || path.equals("assessments/speech")
+                    || path.equals("assessments/speech/recordings") || path.equals("assessments/missions")
+                    || path.matches("assessments/speech/" + UUID_PATH + "/review")
+                    || path.matches("assessments/missions/" + UUID_PATH + "/(recordings|submit|review)")
+                    || path.matches("assessments/(speech|missions)/" + UUID_PATH + "/recordings/" + UUID_PATH + "/finalize")) {
+                return assessment;
+            }
         }
         if (method.equals("PUT")) {
             if (path.equals("learning/goal")) return learning;
@@ -180,6 +196,7 @@ public class Gateway {
             if (path.matches("catalogue/placement-tests/" + UUID_PATH)) return catalogue;
             if (path.matches("assessments/(placements|practice)/" + UUID_PATH + "/answers")) return assessment;
             if (path.matches("learning/paths/" + UUID_PATH + "/(objective|availability)")) return learning;
+            if (path.matches("assessments/missions/" + UUID_PATH)) return assessment;
         }
         throw HttpError.notFound("Cette route API est inconnue.");
     }
@@ -190,13 +207,18 @@ public class Gateway {
         // qui demande les adresses temporaires de ses supports : les politiques Storage s'appliquent à l'utilisateur.
         // Les évaluations lisent et déposent aussi des fichiers privés (sons d'écoute, enregistrements oraux), comme le
         // test de niveau, l'entraînement et les activités de la bibliothèque (adresses temporaires des supports).
+        // V4 : missions et répétitions orales (enregistrements de l'élève) et sons du lexique de la bibliothèque.
         String token = target.equals(media) || method.equals("GET") && path.matches("/v1/learning/sessions/" + UUID_PATH)
                 || path.startsWith("/v1/assessments/exams") || path.startsWith("/v1/assessments/placements")
                 || path.startsWith("/v1/assessments/practice")
-                || method.equals("GET") && path.matches("/v1/learning/library/" + UUID_PATH + "/activities/" + SLUG) ? user.token() : "";
+                || path.startsWith("/v1/assessments/missions") || path.startsWith("/v1/assessments/speech")
+                || method.equals("GET") && path.matches("/v1/learning/library/" + UUID_PATH + "/activities/" + SLUG)
+                || method.equals("GET") && path.matches("/v1/" + LEXICON + "([?]learnerId=" + UUID_PATH + ")?")
+                ? user.token() : "";
         String email = path.equals("/v1/me") ? user.email() : "";
         String key = path.equals("/v1/assessments/quiz") || path.equals("/v1/assessments/diagnostics")
-                || path.matches("/v1/assessments/(exams|placements|practice)/" + UUID_PATH + "/submit")
+                || path.equals("/v1/assessments/exercises")
+                || path.matches("/v1/assessments/(exams|placements|practice|missions)/" + UUID_PATH + "/submit")
                 ? headers.getHeaderString("Idempotency-Key") : null;
         if (key != null && !key.matches("[A-Za-z0-9._-]{1,128}")) {
             throw HttpError.badRequest("Clé de remise invalide.");

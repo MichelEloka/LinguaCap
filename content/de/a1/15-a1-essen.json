@@ -1,0 +1,3516 @@
+{
+  "id": "a1-essen",
+  "title": "Guten Appetit ! Manger, boire et faire les courses",
+  "objective": "Nommer les aliments et les boissons courants, dire ce qu’on aime ou non (gern, nicht gern), commander au café et au restaurant, faire ses courses en demandant une quantité et un prix (Was kostet …?, Ich möchte …) et employer l’accusatif de l’article indéfini et négatif (einen, eine, ein, keinen). Distinguer et prononcer les deux sons de « ch » (ich, ach).",
+  "prerequisites": [
+    "a1-sante"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "Deutsch im Blick, Kapitel 3 « Der Alltag und das Studentenleben » (Frühstück, Geschäfte, Supermarkt, Obst und Gemüse, Bäckerei) et Kapitel 4 « Freizeit und Ausgehen » (essen gehen, Trinkgeld) (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre 1001-4 « Das Essen » — notes culturelles des parties A (cuisine traditionnelle, tendance végétarienne, « Mahlzeit », noms autrichiens des aliments), B (repas de la journée, « Guten Appetit! », faire ses courses en Allemagne) et C (le pain, la restauration rapide allemande, commander et payer à un stand), adaptées dans les activités a1-essen-esskultur et a1-essen-imbiss",
+    "Deutsch im Blick, Kapitel 3 (Wortschatz : Das Frühstück, Das Mittagessen, Im Gemüseladen) et Kapitel 4 (Aussprache : das ch) (COERLL, Université du Texas à Austin) : enregistrements natifs voc_03_02_breakfast, voc_03_05_lunch, voc_03_09_greengrocer, pho_04_05_das-ch et pho_04_06_ch-tonguetwisters, et photos k03/014-051, k03/029-109, k03/001-001, k03/034-122 et k03/025-094 (CC BY 4.0), dans les activités a1-essen-nachsprechen, a1-essen-obst-hoeren et a1-essen-aussprache-ch et en illustration de a1-essen-wortschatz et a1-essen-esskultur"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-essen.mjs",
+  "vocabulary": [
+    {
+      "id": "kaffee",
+      "word": "Kaffee",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le café",
+      "example": "Ich möchte einen Kaffee, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "tee",
+      "word": "Tee",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le thé",
+      "example": "Ich trinke sehr gern Tee.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "wasser",
+      "word": "Wasser",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’eau",
+      "example": "Ein Wasser, bitte.",
+      "note": "das Mineralwasser : l’eau minérale",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "milch",
+      "word": "Milch",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le lait",
+      "example": "Wir haben keine Milch mehr.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "brot",
+      "word": "Brot",
+      "article": "das",
+      "plural": "Brote",
+      "partOfSpeech": "noun",
+      "translation": "le pain",
+      "example": "Das Brot ist dunkel und sehr lecker.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "broetchen",
+      "word": "Brötchen",
+      "article": "das",
+      "plural": "Brötchen",
+      "partOfSpeech": "noun",
+      "translation": "le petit pain",
+      "example": "Sechs Brötchen, bitte.",
+      "note": "en Bavière et en Autriche : die Semmel",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "kaese",
+      "word": "Käse",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le fromage",
+      "example": "Was kostet der Käse?",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "ei",
+      "word": "Ei",
+      "article": "das",
+      "plural": "Eier",
+      "partOfSpeech": "noun",
+      "translation": "l’œuf",
+      "example": "Zum Frühstück esse ich zwei Eier.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "apfel",
+      "word": "Apfel",
+      "article": "der",
+      "plural": "Äpfel",
+      "partOfSpeech": "noun",
+      "translation": "la pomme",
+      "example": "Ich esse jeden Tag einen Apfel.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "kartoffel",
+      "word": "Kartoffel",
+      "article": "die",
+      "plural": "Kartoffeln",
+      "partOfSpeech": "noun",
+      "translation": "la pomme de terre",
+      "example": "Ich möchte ein Kilo Kartoffeln.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "tomate",
+      "word": "Tomate",
+      "article": "die",
+      "plural": "Tomaten",
+      "partOfSpeech": "noun",
+      "translation": "la tomate",
+      "example": "Was kosten die Tomaten?",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "obst",
+      "word": "Obst",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les fruits",
+      "example": "Am Samstag kaufe ich Obst auf dem Markt.",
+      "note": "sans pluriel : das Obst = les fruits en général",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "gemuese",
+      "word": "Gemüse",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les légumes",
+      "example": "Isst du gern Gemüse?",
+      "note": "sans pluriel : das Gemüse = les légumes en général",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "fleisch",
+      "word": "Fleisch",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la viande",
+      "example": "Ich esse kein Fleisch.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "fisch",
+      "word": "Fisch",
+      "article": "der",
+      "plural": "Fische",
+      "partOfSpeech": "noun",
+      "translation": "le poisson",
+      "example": "Ich esse sehr gern Fisch.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "nudel",
+      "word": "Nudel",
+      "article": "die",
+      "plural": "Nudeln",
+      "partOfSpeech": "noun",
+      "translation": "la pâte (les pâtes)",
+      "example": "Ich esse gern Nudeln mit Tomatensoße.",
+      "note": "surtout au pluriel : die Nudeln",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "kuchen",
+      "word": "Kuchen",
+      "article": "der",
+      "plural": "Kuchen",
+      "partOfSpeech": "noun",
+      "translation": "le gâteau",
+      "example": "Ein Stück Kuchen, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "kilo",
+      "word": "Kilo",
+      "article": "das",
+      "plural": "Kilos",
+      "partOfSpeech": "noun",
+      "translation": "le kilo",
+      "example": "Ein Kilo Äpfel, bitte.",
+      "note": "sans « de » : ein Kilo Äpfel",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "flasche",
+      "word": "Flasche",
+      "article": "die",
+      "plural": "Flaschen",
+      "partOfSpeech": "noun",
+      "translation": "la bouteille",
+      "example": "Eine Flasche Wasser, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "rechnung",
+      "word": "Rechnung",
+      "article": "die",
+      "plural": "Rechnungen",
+      "partOfSpeech": "noun",
+      "translation": "l’addition, la facture",
+      "example": "Die Rechnung, bitte!",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "essen",
+      "word": "essen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "manger",
+      "example": "Was essen Sie gern?",
+      "note": "du isst, er isst",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "trinken",
+      "word": "trinken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "boire",
+      "example": "Was möchten Sie trinken?",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "moechten",
+      "word": "möchten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "vouloir (poli), aimer (je voudrais)",
+      "example": "Was möchten Sie?",
+      "note": "ich möchte, du möchtest, er möchte (sans -t)",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "kosten",
+      "word": "kosten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "coûter",
+      "example": "Die Tomaten kosten drei Euro.",
+      "note": "Was kostet der Käse? Was kosten die Äpfel?",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "gern",
+      "word": "gern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "volontiers ; aimer (faire)",
+      "example": "Ich esse gern Fisch.",
+      "note": "après le verbe conjugué ; nicht gern : ne pas aimer",
+      "audio": {
+        "media": "a1-essen-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-essen-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : les aliments et les boissons",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : les aliments et les boissons",
+        "description": "En allemand, chaque nom a un genre : masculin (der), féminin (die) ou neutre (das). Apprenez toujours le nom avec son article : il vous servira pour commander et pour faire les courses.\n\nLES BOISSONS (die Getränke)\n• der Kaffee — le café   • der Tee — le thé   • der Saft — le jus (der Orangensaft, der Apfelsaft)\n• die Milch — le lait   • das Wasser — l’eau (das Mineralwasser — l’eau minérale)\n• das Bier — la bière   • der Wein — le vin\n• die Apfelschorle — du jus de pomme mélangé à de l’eau gazeuse, très apprécié en Allemagne\n\nLE PETIT-DÉJEUNER (das Frühstück)\n• das Brot — le pain   • das Brötchen — le petit pain   • die Butter — le beurre\n• die Marmelade — la confiture   • der Käse — le fromage   • die Wurst — la saucisse, la charcuterie\n• das Ei — l’œuf   • der Joghurt — le yaourt   • das Müsli — le muesli\n\nLES FRUITS ET LES LÉGUMES (das Obst, das Gemüse)\n• der Apfel — la pomme   • die Banane — la banane   • die Orange — l’orange   • die Erdbeere — la fraise\n• die Tomate — la tomate   • die Kartoffel — la pomme de terre   • die Karotte — la carotte   • der Salat — la salade\n\nLES PLATS ET LES DESSERTS\n• das Fleisch — la viande   • das Hähnchen — le poulet   • der Fisch — le poisson\n• die Nudeln — les pâtes   • der Reis — le riz   • die Suppe — la soupe\n• der Kuchen — le gâteau   • das Eis — la glace   • die Schokolade — le chocolat\n\nLE PLURIEL\nIl n’y a pas une règle unique : der Apfel → die Äpfel, die Tomate → die Tomaten, das Ei → die Eier, das Brötchen → die Brötchen. Apprenez le pluriel des mots les plus utiles. Au pluriel, l’article est toujours « die ».\n\nAIMER OU NE PAS AIMER : GERN\n« gern » se place après le verbe conjugué :\n• Ich esse gern Fisch. — J’aime le poisson.\n• Ich trinke sehr gern Tee. — J’aime beaucoup le thé.\n• Ich esse nicht gern Fleisch. — Je n’aime pas la viande.\n• Isst du gern Gemüse? — Ja, sehr gern! / Nein, nicht so gern.\nRemarquez : quand on parle d’un aliment en général, on n’emploie pas d’article : Ich trinke gern Kaffee.\nPour dire ce qu’on préfère : Mein Lieblingsessen ist Pizza. Mein Lieblingsgetränk ist Apfelsaft.\n\nÉcoutez l’enregistrement et répétez chaque mot avec son article.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-essen-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "der Kaffee, die Milch, das Wasser, der Apfel, die Banane, das Ei",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-spaghettieis-foto",
+          "usage": "illustration",
+          "caption": "das Eis : un « Spaghettieis », glace à la vanille en forme de spaghettis, spécialité des glaciers allemands",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les aliments et les boissons",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-nachsprechen",
+      "kind": "lesson",
+      "title": "Écouter et répéter : le petit-déjeuner et le déjeuner (voix authentiques)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Frühstück und Mittagessen — Écouter et répéter",
+        "description": "Voici deux enregistrements authentiques : une voix allemande lit les mots du petit-déjeuner (das Frühstück), puis ceux du déjeuner (das Mittagessen), souvent au singulier puis au pluriel. Après chaque mot, une pause vous laisse le temps de répéter.\n\nCOMMENT TRAVAILLER\n1. Écoutez une première fois sans lire, en regardant les photos : quels mots reconnaissez-vous ?\n2. Écoutez une deuxième fois et répétez chaque mot pendant la pause, toujours avec son article.\n3. Affichez la transcription et vérifiez les mots que vous n’avez pas compris.\n\nÀ REMARQUER : L’ACCENT\n• En général, l’accent tombe sur la première syllabe : das Brötchen (BRÖT-chen), der Honig (HO-nig), der Joghurt (JO-ghurt), die Nudeln (NU-deln), die Mensa (MEN-sa).\n• Dans un mot composé, c’est le premier élément qui porte l’accent : das Frühstück (FRÜH-stück), das Mittagessen (MIT-tag-essen), die Speisekarte (SPEI-se-karte).\n• Le préfixe ge- n’est jamais accentué : das Getränk (ge-TRÄNK), das Gemüse (ge-MÜ-se), das Gericht (ge-RICHT).\n• Certains mots venus d’autres langues sont accentués plus loin : der Kakao (ka-KA-o), der Salat (sa-LAT), die Margarine (mar-ga-RI-ne).\n\nÀ REMARQUER : LE PLURIEL\n• -e : das Brot → die Brote, das Getränk → die Getränke, der Salat → die Salate\n• -er : das Ei → die Eier\n• -n ou -en : die Semmel → die Semmeln, die Margarine → die Margarinen, die Beilage → die Beilagen\n• -s : der Joghurt → die Joghurts\n• Umlaut et -e : der Speiseplan → die Speisepläne\n• pas de changement : das Brötchen → die Brötchen, der Käse → die Käse, der Döner → die Döner, der Hamburger → die Hamburger\n• un pluriel irrégulier : die Mensa → die Mensen\n• Certains mots n’ont pas de pluriel (die Butter, der Honig, der Kakao, die Milch, das Gemüse) ; d’autres s’emploient surtout au pluriel (die Nudeln, die Pommes).\n• Le premier enregistrement contient aussi un verbe, essen (manger) : il n’a pas d’article.\n\nMOTS UTILES\n• die Semmel — le petit pain en Bavière et en Autriche (ailleurs : das Brötchen)\n• der Honig — le miel   • der Kakao — le chocolat chaud   • das Getränk — la boisson\n• die Beilage — l’accompagnement (riz, pâtes, frites…)   • das Gericht — le plat\n• die Dönerbude — le stand de döner   • die Mensa — le restaurant universitaire\n• die Pommes / die Fritten — les frites   • das Sandwich (pluriel : die Sandwiche ou die Sandwiches) — le sandwich\n• der Imbiss / der Schnellimbiss — le snack, le stand de restauration rapide\n• das Wiener Schnitzel — l’escalope de veau panée à la viennoise\n• der Speiseplan — le menu de la Mensa ou de la cantine   • die Speisekarte — la carte du restaurant\n\nÀ VOUS\nDites à voix haute ce que vous mangez le matin et à midi, avec les mots entendus. Exemple : Zum Frühstück esse ich zwei Brötchen mit Butter und Honig, und ich trinke einen Kakao. Mittags esse ich in der Mensa Nudeln mit Gemüse oder einen Salat.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-essen-fruehstueck-foto",
+          "usage": "illustration",
+          "caption": "Un petit-déjeuner : das Brot, die Butter, der Honig, die Marmelade, die Eier, der Kaffee, der Orangensaft",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-fruehstueck-native",
+          "usage": "audio",
+          "caption": "Das Frühstück : de « das Brot » à « das Müsli »",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-broetchen-foto",
+          "usage": "illustration",
+          "caption": "die Brötchen (en Bavière et en Autriche : die Semmeln)",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-mittagessen-native",
+          "usage": "audio",
+          "caption": "Das Mittagessen : de « das Mittagessen » à « die Speisekarten »",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : au café",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : au café",
+        "description": "Paula et son ami Emre font une pause dans un café de Hambourg, un samedi après-midi. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nKellner : Guten Tag! Was möchten Sie trinken?\nPaula : Ich möchte einen Cappuccino, bitte.\nEmre : Und ich nehme eine Apfelschorle.\nKellner : Gern. Möchten Sie auch etwas essen? Wir haben heute Apfelkuchen und Käsekuchen.\nPaula : Oh, ich esse sehr gern Käsekuchen! Ein Stück Käsekuchen, bitte.\nEmre : Für mich keinen Kuchen, danke. Haben Sie auch eine Suppe?\nKellner : Ja, eine Tomatensuppe mit Brot.\nEmre : Prima, dann nehme ich eine Tomatensuppe.\n(Une demi-heure plus tard.)\nPaula : Entschuldigung, wir möchten bitte zahlen!\nKellner : Zusammen oder getrennt?\nPaula : Getrennt, bitte.\nKellner : Der Cappuccino und der Käsekuchen: Das macht acht Euro vierzig.\nPaula : Hier sind neun Euro. Stimmt so!\nKellner : Vielen Dank! Und für Sie die Apfelschorle und die Suppe: neun Euro fünfzig.\nEmre : Kann ich mit Karte zahlen?\nKellner : Ja, natürlich.\n\nMOTS UTILES\n• der Kellner / die Kellnerin — le serveur / la serveuse   • zahlen — payer\n• der Käsekuchen — le gâteau au fromage blanc   • getrennt — séparément\n\nGRAMMAIRE : L’ACCUSATIF AVEC EIN ET KEIN\nAprès « ich möchte », « ich nehme », « ich kaufe », « ich esse », « ich trinke », « haben Sie …? » ou « es gibt », le nom est complément d’objet direct : il est à l’accusatif. Bonne nouvelle : seul le masculin change !\n• masculin : der Kaffee → Ich möchte einen Kaffee. → Ich möchte keinen Kaffee.\n• féminin : die Suppe → Ich nehme eine Suppe. → Ich nehme keine Suppe.\n• neutre : das Wasser → Ich möchte ein Wasser. → Ich möchte kein Wasser.\n• pluriel : die Brötchen → Ich kaufe Brötchen. → Ich kaufe keine Brötchen.\n\nKEIN OU NICHT ?\n• « kein » s’emploie devant un nom, à la place de « ein » ou quand il n’y a pas d’article : Ich esse keinen Fisch. Ich trinke keine Milch.\n• « nicht » porte sur un verbe, un adjectif ou « gern » : Ich esse nicht gern Fisch. Der Kaffee ist nicht heiß.\n\nICH MÖCHTE — JE VOUDRAIS\nC’est la forme polie pour commander : ich möchte, du möchtest, er/sie möchte, wir möchten, Sie möchten. Attention : pas de -t à la 3e personne du singulier : Sie möchte einen Tee (elle voudrait un thé). On peut aussi dire « Ich nehme … » (je prends).\n\nAU CAFÉ : PHRASES UTILES\n• Was möchten Sie trinken? — Que désirez-vous boire ?\n• Ein Stück Kuchen, bitte. — Une part de gâteau, s’il vous plaît.\n• Zahlen, bitte! / Die Rechnung, bitte! — L’addition, s’il vous plaît !\n• Zusammen oder getrennt? — Ensemble ou séparément ? En Allemagne, chacun paie souvent sa part.\n• Stimmt so! — Gardez la monnaie ! Le service est compris dans les prix, mais on laisse un pourboire (das Trinkgeld) d’environ 5 à 10 % en arrondissant la somme : pour 8,40 €, Paula donne 9 €.\n• Kann ich mit Karte zahlen? — Est-ce que je peux payer par carte ?",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-essen-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : im Café",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-einkaufen",
+      "kind": "lesson",
+      "title": "Comprendre : faire les courses, quantités et prix",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : faire les courses, quantités et prix",
+        "description": "Au marché (auf dem Markt), à la boulangerie (in der Bäckerei) ou au supermarché (im Supermarkt), il faut savoir demander une quantité et comprendre un prix.\n\nLES PRIX\n• 1,00 € — ein Euro\n• 2,50 € — zwei Euro fünfzig\n• 0,80 € — achtzig Cent\n• 3,99 € — drei Euro neunundneunzig\n• 12,40 € — zwölf Euro vierzig\nOn écrit une virgule (2,50 €). On dit le nombre d’euros, puis les centimes, sans répéter « Cent ». « Euro » ne prend pas de -s : zehn Euro. Attention à ne pas confondre neunzehn (19) et neunzig (90) !\n\nDEMANDER LE PRIX\n• Was kostet der Käse? — Combien coûte le fromage ? → Er kostet vier Euro.\n• Was kosten die Äpfel? — Combien coûtent les pommes ? → Zwei Euro zwanzig das Kilo.\n• Wie viel kostet das? — Combien ça coûte ?\n• Das macht zusammen … — Ça fait … en tout.\nAvec un nom au pluriel, le verbe devient « kosten ».\n\nLES QUANTITÉS\n• ein Kilo Äpfel — un kilo de pommes   • ein Pfund Tomaten — une livre (500 g) de tomates\n• hundert Gramm Käse — cent grammes de fromage   • ein Liter Milch — un litre de lait\n• eine Flasche Wasser — une bouteille d’eau   • ein Glas Marmelade — un pot de confiture\n• eine Schale Erdbeeren — une barquette de fraises   • ein Stück Kuchen — une part de gâteau\n• sechs Brötchen — six petits pains\nAttention : pas de « de » en allemand. On dit « ein Kilo Äpfel », et non « ein Kilo von Äpfeln ».\n\nFAIRE SES COURSES : PHRASES UTILES\n• Was darf es sein? / Was bekommen Sie? — Vous désirez ?\n• Ich möchte ein Kilo Kartoffeln, bitte. / Ich hätte gern … — Je voudrais …\n• Sonst noch etwas? — Et avec ceci ?\n• Nein, danke, das ist alles. — Non merci, ce sera tout.\n• Haben Sie …? — Avez-vous … ?\n\nÀ VOUS\n1. Écoutez la scène au marché sans lire la transcription : qu’achète Frau Berger ?\n2. Réécoutez et repérez chaque quantité avec son prix, puis vérifiez le total annoncé : 2,20 € + 1,50 € + 2,50 €.\n3. Lisez le rôle de la cliente à voix haute, en marquant bien les prix.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-essen-einkaufen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-einkaufen-audio-v3",
+          "usage": "audio",
+          "caption": "Au marché : ein Kilo Äpfel, bitte!",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-obst-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : les fruits au marché, singulier et pluriel",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Im Gemüseladen — Ein Apfel, zwei Äpfel",
+        "description": "Au marché ou chez le marchand de fruits et légumes (im Gemüseladen), on achète rarement un seul fruit : il faut connaître le pluriel. Écoutez l’enregistrement authentique (vous pouvez le réécouter autant de fois que nécessaire) : chaque nom est dit au singulier, puis au pluriel. Répondez ensuite aux questions. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• die Apfelsine — l’orange (surtout dans le nord de l’Allemagne ; ailleurs, on dit plutôt die Orange)\n• die Aprikose — l’abricot   • die Birne — la poire\n• die Aubergine — l’aubergine : le mot vient du français et se prononce presque comme en français\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Regardez la photo prise sur un marché. Quels fruits voit-on tout devant, au premier plan ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Äpfel",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Birnen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Bananen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die Orangen",
+              "correct": false
+            }
+          ],
+          "explanation": "Au premier plan de l’étal, on voit des régimes de bananes : die Bananen. Les pommes, les poires et les oranges ne sont pas sur la photo.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoutez le début de l’enregistrement. Quel est le pluriel de « der Apfel » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Apfel",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Äpfel",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Apfeln",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Äpfeln",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « der Apfel, die Äpfel » : le pluriel prend un tréma, sans terminaison. Sans tréma (die Apfel), le mot reste un singulier ; Apfeln n’existe pas.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quel fruit n’entendez-vous pas dans l’enregistrement ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Banane",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Aprikose",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Erdbeere",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die Birne",
+              "correct": false
+            }
+          ],
+          "explanation": "L’enregistrement cite Apfel, Apfelsine, Orange, Aprikose, Aubergine, Banane et Birne. Die Erdbeere (la fraise) n’y figure pas : elle vient du lexique du module.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quel est l’article de « Aubergine » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "das",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « die Aubergine, die Auberginen » : le mot est féminin, comme en français. Les noms terminés par -e sont très souvent féminins (die Banane, die Birne).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "« die Apfelsine » et « die Orange » désignent le même fruit. Quels sont leurs pluriels ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Apfelsinen, die Orangen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Apfelsines, die Oranges",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Apfelsine, die Orange",
+              "correct": false
+            }
+          ],
+          "explanation": "Ces deux noms féminins en -e prennent -n au pluriel : die Apfelsinen, die Orangen. Le -s du pluriel français ne s’emploie pas ici.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Écoutez les pluriels de die Aprikose, die Banane et die Birne. Comment se forme le pluriel de ces noms féminins en -e ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "On ajoute -s : die Bananes.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le mot ne change pas : die Banane.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "On ajoute -n : die Bananen.",
+              "correct": true
+            }
+          ],
+          "explanation": "Die Aprikose → die Aprikosen, die Banane → die Bananen, die Birne → die Birnen : les noms féminins en -e ajoutent -n. « Bananes » est une habitude du français.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-essen-obst-native",
+          "usage": "audio",
+          "caption": "Im Gemüseladen : de « der Apfel » à « die Birnen »",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-markt-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-lesen",
+      "kind": "exercise",
+      "title": "Lire : la carte d’un café",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Die Speisekarte — La carte",
+        "description": "Jakob propose à sa collègue Marie de déjeuner au « Café am Markt ». Lisez son message et la carte du café, puis répondez aux questions.\n\nNACHRICHT VON JAKOB\nHallo Marie! Gehen wir morgen zusammen ins Café am Markt? Ich esse kein Fleisch, aber dort gibt es auch Nudeln mit Tomatensoße. Um zwölf Uhr? Ich habe nur eine Stunde Mittagspause. Bis morgen! Jakob\n\nSPEISEKARTE — CAFÉ AM MARKT\nMontag bis Samstag 8–18 Uhr, Sonntag geschlossen\n\nFRÜHSTÜCK (bis 11.30 Uhr)\n• Kleines Frühstück: 2 Brötchen, Butter, Marmelade, Kaffee oder Tee — 5,90 €\n• Großes Frühstück: 2 Brötchen, Butter, Käse, Wurst, 1 Ei, Orangensaft, Kaffee oder Tee — 9,80 €\n• Müsli mit Joghurt und Obst — 4,50 €\n\nMITTAGSTISCH (12–14 Uhr)\n• Gemüsesuppe mit Brot — 5,20 €\n• Nudeln mit Tomatensoße (vegetarisch) — 8,50 €\n• Hähnchen mit Kartoffeln und Salat — 11,90 €\n• Fisch mit Reis — 12,50 €\n\nKUCHEN (pro Stück)\n• Apfelkuchen — 3,20 €\n• Schokoladenkuchen — 3,60 €\n\nGETRÄNKE\n• Kaffee — 2,40 €   • Cappuccino — 3,10 €   • Tee — 2,20 €\n• Mineralwasser (0,5 l) — 2,50 €   • Apfelschorle (0,4 l) — 3,00 €\n\nMOTS UTILES\n• der Mittagstisch — le menu du midi   • die Mittagspause — la pause de midi\n• vegetarisch — végétarien   • geschlossen — fermé",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Jusqu’à quelle heure peut-on prendre le petit-déjeuner ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jusqu’à 11 h.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Jusqu’à 12 h.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jusqu’à 11 h 30.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Jusqu’à 18 h.",
+              "correct": false
+            }
+          ],
+          "explanation": "La carte indique « FRÜHSTÜCK (bis 11.30 Uhr) » : bis veut dire « jusqu’à ». 18 h est l’heure de fermeture du café et 12 h le début du Mittagstisch.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Qu’y a-t-il dans le « Großes Frühstück », mais pas dans le « Kleines Frühstück » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du beurre et de la confiture.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Des petits pains.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du café ou du thé.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Un œuf et du jus d’orange.",
+              "correct": true
+            }
+          ],
+          "explanation": "Le Großes Frühstück ajoute Käse, Wurst, 1 Ei et Orangensaft. Les petits pains, le beurre et le café ou le thé figurent dans les deux formules.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Pourquoi Jakob propose-t-il ce café ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Parce qu’on y trouve un plat sans viande.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Parce que le café est ouvert le dimanche.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Parce que le poisson y est bon marché.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Parce qu’il a deux heures de pause.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jakob écrit « Ich esse kein Fleisch, aber dort gibt es auch Nudeln mit Tomatensoße » : il cherche un plat sans viande. Le café est fermé le dimanche et Jakob n’a qu’une heure de pause.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Marie prend le poulet avec des pommes de terre et une eau minérale. Combien paie-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "14,90 €",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "14,40 €",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "15,00 €",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "11,00 €",
+              "correct": false
+            }
+          ],
+          "explanation": "Hähnchen mit Kartoffeln und Salat coûte 11,90 € et le Mineralwasser 2,50 € : 11,90 € + 2,50 € = 14,40 €.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Après le repas, Jakob commande un café et une part de gâteau au chocolat. Combien paie-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "5,60 €",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "6,70 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "6,00 €",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "5,80 €",
+              "correct": false
+            }
+          ],
+          "explanation": "Kaffee (2,40 €) + Schokoladenkuchen (3,60 €) = 6,00 €. Avec l’Apfelkuchen (3,20 €), il paierait 5,60 €.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-essen-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-esskultur",
+      "kind": "exercise",
+      "title": "Lire : manger en Allemagne",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Essen in Deutschland — L’e-mail de Manon",
+        "description": "Manon, une étudiante française, passe un semestre à Paderborn, en Allemagne. Elle écrit à son amie Nora, qui apprend aussi l’allemand. Lisez son e-mail, puis répondez aux questions.\n\nE-MAIL VON MANON\nLiebe Nora,\nwie geht’s? Ich wohne jetzt in Paderborn, und das Essen hier ist ganz anders als in Frankreich!\nZum Frühstück essen meine Mitbewohner Brot oder Brötchen mit Butter, Käse oder Marmelade. Das Brot ist dunkel und sehr lecker.\nTraditionell ist das Mittagessen in Deutschland groß und warm: Fleisch, Kartoffeln und Gemüse. Aber heute essen viele Leute mittags nur einen Salat oder eine Suppe. Ich esse mittags in der Mensa. Viele Studenten essen kein Fleisch, und die Mensa hat jeden Tag auch ein vegetarisches Essen.\nAm Abend essen wir oft kalt: Das ist das „Abendbrot“ mit Brot, Käse, Wurst und Tomaten.\nVor dem Essen sagt man: „Guten Appetit!“ Und mittags sagen viele Leute bei der Arbeit: „Mahlzeit!“\nIm Supermarkt ist auch vieles anders. Die Tüten kosten Geld. Ich bringe also immer eine Tasche mit. An der Kasse packe ich alles selbst ein. Am Sonntag sind die Supermärkte geschlossen. Darum kaufe ich immer am Samstag ein.\nMein Freund Florian kommt aus Wien. Er sagt nicht „Brötchen“, er sagt „Semmel“. Und die Kartoffel heißt in Österreich „Erdapfel“!\nLiebe Grüße\nManon\n\nMOTS UTILES\n• anders als — différent de   • lecker — délicieux\n• der Mitbewohner — le colocataire   • die Mensa — le restaurant universitaire\n• traditionell — traditionnellement   • mittags — à midi\n• die Tüte — le sac en plastique ou en papier du magasin   • die Tasche — le sac, le cabas\n• die Kasse — la caisse   • ein|packen — ranger dans un sac\n• also, darum — donc, c’est pourquoi\n• « Mahlzeit » — mot à mot : « le repas »\n\nTexte adapté de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Que mangent les colocataires de Manon au petit-déjeuner ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Des céréales avec du lait.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Des croissants avec un café.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du pain ou des petits pains avec du beurre, du fromage ou de la confiture.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Des œufs et de la saucisse.",
+              "correct": false
+            }
+          ],
+          "explanation": "Manon écrit « Zum Frühstück essen meine Mitbewohner Brot oder Brötchen mit Butter, Käse oder Marmelade ». Il n’est question ni de croissants ni de céréales.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "D’après Manon, comment est le déjeuner traditionnel en Allemagne ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "C’est un repas froid avec du pain, du fromage et de la charcuterie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "C’est une salade ou une soupe.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "C’est un repas végétarien à la Mensa.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "C’est un grand repas chaud : de la viande, des pommes de terre et des légumes.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Traditionell ist das Mittagessen in Deutschland groß und warm: Fleisch, Kartoffeln und Gemüse. » La salade ou la soupe, c’est ce que beaucoup mangent aujourd’hui, pas la tradition.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Qu’est-ce que l’« Abendbrot » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un repas froid du soir, avec du pain, du fromage, de la charcuterie et des tomates.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Un pain spécial qu’on achète le soir.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un repas chaud qu’on mange le soir en famille.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le pain noir du petit-déjeuner.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Abend essen wir oft kalt: Das ist das Abendbrot mit Brot, Käse, Wurst und Tomaten. » L’Abendbrot est le repas froid du soir, pas une sorte de pain.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quand dit-on « Mahlzeit! » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le matin, pour dire bonjour.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "À midi, au travail.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le soir, avant l’Abendbrot.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Au restaurant, pour demander l’addition.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Und mittags sagen viele Leute bei der Arbeit: Mahlzeit! » On le dit à midi, entre collègues. Avant de manger, on souhaite plutôt « Guten Appetit! ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Pourquoi Manon fait-elle toujours ses courses le samedi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Parce que les sacs sont gratuits le samedi.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Parce qu’elle travaille le dimanche.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Parce que les supermarchés sont fermés le dimanche.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Parce que la Mensa est fermée le samedi.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Sonntag sind die Supermärkte geschlossen. Darum kaufe ich immer am Samstag ein. » Darum (c’est pourquoi) introduit la conséquence. Les sacs, eux, sont toujours payants.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Florian vient de Vienne. Comment appelle-t-il un petit pain (ein Brötchen) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Semmel",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "ein Erdapfel",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine Brezel",
+              "correct": false
+            }
+          ],
+          "explanation": "Manon écrit « Er sagt nicht Brötchen, er sagt Semmel ». Der Erdapfel est le mot autrichien pour la pomme de terre (die Kartoffel), pas pour le petit pain.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-essen-esskultur-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-schweinebraten-foto",
+          "usage": "illustration",
+          "caption": "Un déjeuner traditionnel et chaud : Schweinebraten (rôti de porc) mit Spätzle und Rotkohl",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : à la boulangerie, à la maison, au restaurant",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Was kaufen sie? Was essen sie?",
+        "description": "Écoutez les trois petites scènes (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Pour les prix, attention à la différence entre « neunzehn » (19) et « neunzig » (90). Les deux dernières questions sont des dictées : écoutez la phrase et écrivez-la. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• das Vollkornbrot — le pain complet   • das Schnitzel — l’escalope panée\n• die Pommes — les frites   • kein … mehr — plus de …",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Scène 1 : combien le client paie-t-il en tout ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "2,40 €",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "3,50 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "5,90 €",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "5,19 €",
+              "correct": false
+            }
+          ],
+          "explanation": "La boulangère additionne « zwei Euro vierzig » pour les six petits pains et « drei Euro fünfzig » pour le pain : « Zusammen fünf Euro neunzig ». 2,40 € et 3,50 € ne sont que des parties du total.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Scène 2 : quel fruit Tim doit-il acheter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Des pommes.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Des bananes.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Du raisin.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lisa dit « Äpfel haben wir noch. Aber kaufst du bitte Bananen? » : il reste des pommes, Tim doit acheter des bananes.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Scène 2 : qu’est-ce qui manque à la maison ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du lait et du vin.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Des pommes et du fromage.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du vin et de la bière.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Du lait et du fromage.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Wir haben keine Milch mehr und keinen Käse » : kein … mehr veut dire « plus de ». Il reste des pommes et de la bière, et Lisa ne veut pas de vin.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Scène 3 : pourquoi l’homme ne prend-il pas d’escalope (Schnitzel) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il n’y en a plus aujourd’hui.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il ne mange pas de viande.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "C’est trop cher.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Il n’aime pas les frites.",
+              "correct": false
+            }
+          ],
+          "explanation": "La serveuse répond « Wir haben heute kein Schnitzel mehr » : il n’y en a plus aujourd’hui. L’homme voulait justement un Schnitzel, il mange donc de la viande.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Scène 3 : qu’est-ce que l’homme commande finalement ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du poisson avec du riz et un verre de vin rouge.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Du poisson avec des pommes de terre et un verre de vin blanc.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Du poisson avec des pommes de terre et une eau minérale.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Une escalope avec des frites et un verre de vin blanc.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Dann nehme ich Fisch mit Kartoffeln. Und ein Glas Weißwein » : Weißwein est le vin blanc. Il refuse l’eau (« Nein, danke ») et le poisson n’est pas servi avec du riz.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "frau",
+          "accept": [
+            "Wir haben keine Milch mehr."
+          ],
+          "explanation": "Milch est féminin (die Milch) : la négation devient keine. Kein … mehr signifie « plus de ». Milch prend une majuscule, comme tous les noms allemands.",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "mann",
+          "accept": [
+            "Die Tomaten kosten drei Euro das Kilo."
+          ],
+          "explanation": "Die Tomaten est un pluriel : le verbe est kosten, avec -en. On dit « drei Euro », sans -s, et « das Kilo » pour le prix au kilo.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-essen-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Trois petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-apfel-bild",
+          "usage": "illustration",
+          "alt": "Une pomme.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-banane-bild",
+          "usage": "illustration",
+          "alt": "Une banane.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-trauben-bild",
+          "usage": "illustration",
+          "alt": "Une grappe de raisin.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-hoeren-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-imbiss",
+      "kind": "exercise",
+      "title": "Écouter : à l’Imbiss",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Currywurst oder Döner? — Au stand de restauration rapide",
+        "description": "Après le cours, Manon et son ami Jonas ont faim. Ils s’arrêtent à un « Imbiss », un petit stand de restauration rapide. En Allemagne, la restauration rapide, ce n’est pas seulement le hamburger : on mange aussi une Currywurst (une saucisse coupée en morceaux, avec une sauce tomate au curry), un Döner (un pain garni de viande grillée, arrivé en Allemagne avec les immigrés turcs) ou une Brezel (un bretzel). Écoutez la scène (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• der Imbiss — le stand de restauration rapide   • die Pommes — les frites\n• Ich bekomme … — Je vais prendre … (pour commander)\n• ohne — sans : ohne Zwiebeln — sans oignons\n• scharf — épicé, piquant\n• Für hier oder zum Mitnehmen? — Sur place ou à emporter ?\n• Ich lade dich ein. — Je t’invite (c’est moi qui paie).\n• Schmeckt der Döner? — Le döner est bon ? → Sehr lecker! — Délicieux !\n• gesund — bon pour la santé\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Pourquoi Manon ne prend-elle pas de Currywurst ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle ne mange pas de viande.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle n’aime pas beaucoup la saucisse.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Il n’y a plus de Currywurst.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "La Currywurst est trop chère.",
+              "correct": false
+            }
+          ],
+          "explanation": "Manon dit « Ich esse nicht so gern Wurst » : elle n’aime pas beaucoup la saucisse. Elle commande un döner, elle mange donc de la viande.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Comment Manon veut-elle son döner ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Avec des oignons et très épicé.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sans oignons et très épicé.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Avec du ketchup et de la mayonnaise.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sans oignons et pas trop épicé.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Aber ohne Zwiebeln, bitte », puis « Bitte nicht so scharf » : sans oignons et pas trop épicé. Le ketchup, c’est la commande de Jonas.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Où Manon et Jonas mangent-ils ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ils emportent leur repas à la maison.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ils emportent leur repas au parc.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sur place, à l’Imbiss.",
+              "correct": true
+            }
+          ],
+          "explanation": "Au vendeur qui demande « Für hier oder zum Mitnehmen? », Jonas répond « Für hier » : ils mangent sur place.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Combien coûte la Currywurst avec des frites ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "5,80 €",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "5,18 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "6,50 €",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "8,50 €",
+              "correct": false
+            }
+          ],
+          "explanation": "Le vendeur dit « Die Currywurst mit Pommes kostet fünf Euro achtzig » : 5,80 €. Achtzig (80) n’est pas achtzehn (18) ; 6,50 € est le prix du döner.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Qui paie, et combien ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Manon paie 16,30 € pour les deux.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Chacun paie sa part.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jonas paie 13,60 € pour les deux.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Jonas paie 16,30 € pour les deux.",
+              "correct": true
+            }
+          ],
+          "explanation": "Jonas dit « Zusammen. Manon, ich lade dich ein! » : il invite et paie les deux repas, « sechzehn Euro dreißig », soit 16,30 €. 13,60 € inverse les chiffres.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Jonas mange deux Currywurst par semaine. Qu’en pense Manon ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "C’est trop cher.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ce n’est pas très bon pour la santé.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "C’est une bonne idée, elle veut faire pareil.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "La Currywurst n’est pas bonne dans cet Imbiss.",
+              "correct": false
+            }
+          ],
+          "explanation": "Manon réagit : « Das ist aber nicht sehr gesund, Jonas! » Gesund veut dire « bon pour la santé » ; elle ne parle pas du prix.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-essen-imbiss-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-imbiss-audio-v3",
+          "usage": "audio",
+          "caption": "À l’Imbiss : Currywurst ou Döner ?",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : einen, eine, ein, kein, gern et les prix",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : einen, eine, ein, kein, gern et les prix",
+        "description": "Choisissez ou écrivez la forme qui convient. Rappels : à l’accusatif, seul le masculin change (der Kaffee → einen Kaffee, keinen Kaffee) ; « kein » s’emploie devant un nom, « nicht » devant « gern » ; avec un nom au pluriel, on demande « Was kosten …? » ; pas de « de » après une quantité (ein Kilo Äpfel). Pour l’ordre des mots, touchez les étiquettes dans l’ordre de la phrase.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Ich möchte … Kaffee, bitte.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "einen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine",
+              "correct": false
+            }
+          ],
+          "explanation": "Kaffee est masculin (der Kaffee) : après möchte, il est complément d’objet, donc à l’accusatif, et ein devient einen. À l’accusatif, seul le masculin change.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Wir haben … Milch. Kaufst du bitte einen Liter?",
+          "options": [
+            {
+              "id": "a",
+              "label": "kein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "keinen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "keine",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "nicht",
+              "correct": false
+            }
+          ],
+          "explanation": "Milch est féminin (die Milch) : pour nier un nom, on emploie kein, ici keine. Nicht ne se place pas devant un nom sans article.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Isst du gern Fisch? — Nein, ich esse nicht … Fisch.",
+          "options": [
+            {
+              "id": "a",
+              "label": "kein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "keinen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "möchte",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "gern",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour dire qu’on n’aime pas, on nie gern : Ich esse nicht gern Fisch. Kein nierait le nom : Ich esse keinen Fisch veut dire « je ne mange pas de poisson ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was … die Tomaten? — Drei Euro das Kilo.",
+          "options": [
+            {
+              "id": "a",
+              "label": "kosten",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "kostet",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kostest",
+              "correct": false
+            }
+          ],
+          "explanation": "Die Tomaten est un pluriel : le verbe prend -en, Was kosten die Tomaten? Kostet va avec un nom au singulier (Was kostet der Käse?).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Sur l’étiquette, vous lisez 2,70 €. Comment dit-on ce prix ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "zwei Euro siebzehn",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "sieben Euro zwanzig",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "zwei Euro siebzig",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "zwanzig Euro sieben",
+              "correct": false
+            }
+          ],
+          "explanation": "On dit d’abord les euros, puis les centimes : 2,70 € se dit zwei Euro siebzig. Siebzehn vaut 17, pas 70.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Au marché, vous voulez un kilo de pommes de terre. Que dites-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich möchte ein Kilo von Kartoffeln, bitte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich möchte eine Kilo Kartoffeln, bitte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich möchte einen Kilo Kartoffeln, bitte.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich möchte ein Kilo Kartoffeln, bitte.",
+              "correct": true
+            }
+          ],
+          "explanation": "Après une quantité, l’allemand n’a pas de « de » : ein Kilo Kartoffeln. Das Kilo est neutre, d’où ein, ni eine ni einen.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez la commande avec einen, eine ou ein.",
+          "text": "Ich möchte [[1]] Tee, [[2]] Apfelschorle und [[3]] Stück Kuchen, bitte.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "einen"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "eine"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ein"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Après möchte, le nom est à l’accusatif : der Tee → einen Tee, die Apfelschorle → eine Apfelschorle, das Stück → ein Stück. Seul le masculin prend -en."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Le réfrigérateur est vide. Complétez avec keinen, keine ou kein.",
+          "text": "Wir haben [[1]] Käse, [[2]] Milch und [[3]] Brot mehr.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "keinen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "keine"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "kein"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "Kein prend les terminaisons de ein : der Käse → keinen Käse, die Milch → keine Milch, das Brot → kein Brot. Ici, haben est suivi de l’accusatif."
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre : je n’aime pas le café.",
+          "answers": [
+            [
+              "Ich",
+              "trinke",
+              "nicht",
+              "gern",
+              "Kaffee"
+            ],
+            [
+              "Ich",
+              "trinke",
+              "Kaffee",
+              "nicht",
+              "gern"
+            ]
+          ],
+          "explanation": "Le verbe trinke est en 2e position et nicht se place juste devant gern : Ich trinke nicht gern Kaffee (ou Ich trinke Kaffee nicht gern). Kein Kaffee voudrait dire « pas de café »."
+        },
+        {
+          "id": "q10",
+          "type": "match",
+          "prompt": "Associez chaque prix à sa lecture.",
+          "pairs": [
+            {
+              "left": "2,70 €",
+              "right": "zwei Euro siebzig"
+            },
+            {
+              "left": "7,20 €",
+              "right": "sieben Euro zwanzig"
+            },
+            {
+              "left": "0,90 €",
+              "right": "neunzig Cent"
+            },
+            {
+              "left": "19,00 €",
+              "right": "neunzehn Euro"
+            },
+            {
+              "left": "9,50 €",
+              "right": "neun Euro fünfzig"
+            }
+          ],
+          "explanation": "On lit les euros, puis les centimes, sans répéter « Cent » : 9,50 € = neun Euro fünfzig. Sous un euro, on dit les centimes : neunzig Cent. -zehn (19) n’est pas -zig (90)."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-essen-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : le ch et les commandes",
+      "estimatedMinutes": 10,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : le ch et les commandes",
+        "description": "LE CH ALLEMAND · 10 MIN\n\nEn allemand, ch ne se prononce jamais comme dans le français « chat ». Il note deux sons qui n’existent pas en français, et vous les entendez partout dans ce module : ich möchte, die Milch, das Brötchen, der Kuchen, kochen.\n\n1. LE ICH-LAUT, comme dans « ich »\nAprès e, i, ä, ö, ü, ei, eu, ie et après une consonne (l, n, r) : ich, möchte, München, die Milch, manchmal. Toujours aussi dans la terminaison -chen : das Brötchen, das Hähnchen. Placez la langue comme pour le « y » de « yaourt », la pointe contre les dents du bas, et soufflez fort sans faire vibrer la voix. Ne dites ni « isch » ni « ik ».\n\n2. LE ACH-LAUT, comme dans « ach »\nAprès a, o, u et au : machen, die Nacht, kochen, suchen, der Kuchen, auch. Le son se forme au fond de la bouche, à l’endroit du r français : soufflez fort en frottant. Ne le remplacez pas par un k : kochen ne se dit pas « koken ».\n\nC’EST LA VOYELLE QUI DÉCIDE\na, o, u, au → ach-Laut ; les autres voyelles et les consonnes → ich-Laut. Avec un tréma, le son change : das Buch (ach) → die Bücher (ich), die Nacht (ach) → die Nächte (ich). Attention : chs se prononce [ks] dans sechs.\n\nÀ VOUS\n1. Écoutez les deux enregistrements natifs : six mots avec le ich-Laut, six avec le ach-Laut, puis un virelangue : « Machen Drachen manchmal nachts echt freche Sachen, oder lachen Drachen manchmal acht freche Lacher? » Répétez chaque mot pendant la pause.\n2. Écoutez ensuite chaque modèle et dites la phrase. La reconnaissance vocale compare votre phrase au modèle : articulez sans vous presser.\n\nEnregistrements : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-essen-ch-native",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-ch-zungenbrecher-native",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich möchte einen Kaffee, bitte.",
+          "accept": [
+            "Ich möchte einen Kaffee, bitte."
+          ],
+          "explanation": "Ich et möchte ont le ich-Laut : un souffle doux, la langue en avant. Einen, avec -en, signale le masculin der Kaffee.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Den Apfelkuchen, bitte!",
+          "accept": [
+            "Den Apfelkuchen, bitte!"
+          ],
+          "explanation": "Dans Apfelkuchen, ch suit un u : c’est le ach-Laut, frotté au fond de la bouche (ne dites pas « kouken »). Pf se prononce p et f d’un seul coup, et l’accent tombe sur AP-.",
+          "threshold": 80
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich trinke gern Milch.",
+          "accept": [
+            "Ich trinke gern Milch."
+          ],
+          "explanation": "Après l, ch est un ich-Laut : Milch. Gern se place juste après le verbe conjugué.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wir kochen heute Nudeln.",
+          "accept": [
+            "Wir kochen heute Nudeln."
+          ],
+          "explanation": "Après o, kochen a le ach-Laut. Dans heute, eu se prononce « oï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Was kostet das Brötchen?",
+          "accept": [
+            "Was kostet das Brötchen?"
+          ],
+          "explanation": "La terminaison -chen a toujours le ich-Laut : Brötchen. Pour ö, dites « é » en arrondissant les lèvres.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Rechnung, bitte!",
+          "accept": [
+            "Die Rechnung, bitte!"
+          ],
+          "explanation": "Après e, ch est un ich-Laut : Rechnung. C’est la formule pour demander l’addition, comme « Zahlen, bitte! ».",
+          "threshold": 80
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-sprechen",
+      "kind": "mission",
+      "title": "Mission : mes habitudes alimentaires",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : mes habitudes alimentaires",
+        "description": "Un nouveau groupe de conversation se présente : chacun dit ce qu’il mange et boit volontiers. Samedi, vous invitez aussi des amis à dîner et vous écrivez la liste des courses à votre colocataire. Écoutez d’abord Nadia.\n\nMODÈLE\nHallo, ich bin Nadia. Zum Frühstück esse ich gern Müsli mit Joghurt und Obst. Dazu trinke ich einen Tee. Kaffee trinke ich nicht so gern. Mittags esse ich oft einen Salat oder eine Suppe. Ich esse kein Fleisch, aber ich esse sehr gern Fisch. Mein Lieblingsessen ist Fisch mit Reis und Gemüse.\n\nPOUR VOUS AIDER\n• Zum Frühstück esse ich … Dazu trinke ich …\n• Ich esse gern … / Ich trinke nicht gern … / Ich esse kein Fleisch.\n• Mein Lieblingsessen ist …\n• Wir brauchen ein Kilo …, zwei Flaschen …, sechs …",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-essen-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Nadia parle de ce qu’elle aime manger",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez vos habitudes en une minute environ : votre petit-déjeuner, deux choses que vous aimez, une chose que vous n’aimez pas et votre plat préféré. Terminez en commandant au café une boisson et une part de gâteau, puis demandez l’addition.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à votre colocataire un message de cinq ou six phrases pour le dîner de samedi : ce que vous cuisinez, ce qu’il faut acheter avec les quantités (ein Kilo …, zwei Flaschen …) et ce que vos amis aiment ou n’aiment pas. Exemple de début : « Hallo Ben! Am Samstag kochen wir Nudeln mit Tomatensoße. Wir brauchen … »",
+          "maxChars": 800,
+          "minWords": 30
+        },
+        "checklist": [
+          "J’ai dit ce que je mange au petit-déjeuner et ce que j’aime ou n’aime pas (gern, nicht gern).",
+          "J’ai commandé une boisson et un gâteau avec « Ich möchte einen / eine / ein … », puis demandé l’addition.",
+          "Devant un nom masculin, j’ai écrit einen ou keinen (einen Tee, keinen Käse).",
+          "Mon message donne au moins trois achats avec une quantité, sans « von » (ein Kilo Tomaten).",
+          "Dans chaque phrase, le verbe conjugué est en deuxième position."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-essen-wortschatz-bild",
+      "kind": "image",
+      "title": "Les aliments et les boissons",
+      "alt": "Six vignettes : une tasse de café, une bouteille de lait, un verre d’eau, une pomme, une banane et un œuf.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "coffee",
+            "label": "der Kaffee"
+          },
+          {
+            "icon": "milk",
+            "label": "die Milch"
+          },
+          {
+            "icon": "glass-water",
+            "label": "das Wasser"
+          },
+          {
+            "icon": "apple",
+            "label": "der Apfel"
+          },
+          {
+            "icon": "banana",
+            "label": "die Banane"
+          },
+          {
+            "icon": "egg",
+            "label": "das Ei"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les aliments et les boissons",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Kaffee."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Tee."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Saft."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Milch."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wasser."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Bier."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Wein."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Apfelschorle."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Brot."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Brötchen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Butter."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Marmelade."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Käse."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wurst."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Ei, die Eier."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Joghurt."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Müsli."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Apfel, die Äpfel."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Banane."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Orange."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erdbeere."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tomate."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kartoffel."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Karotte."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Salat."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fleisch."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Hähnchen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fisch."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nudeln."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Reis."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Suppe."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuchen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Eis."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schokolade."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "frau",
+          "text": "Ich esse sehr gern Fisch."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "mann",
+          "text": "Ich trinke nicht gern Milch."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "frau",
+          "text": "Und isst du gern Gemüse?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, sehr gern!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-dialog-bild",
+      "kind": "image",
+      "title": "Au café",
+      "alt": "Un café : le serveur demande « Was möchten Sie trinken? », Paula répond « Einen Cappuccino, bitte! » et Emre dit « Eine Apfelschorle! ». Sur la table, une tasse de café, une part de gâteau et un bol de soupe.",
+      "image": {
+        "layout": "scene",
+        "setting": "cafe",
+        "people": [
+          {
+            "name": "Kellner",
+            "say": "Was möchten Sie trinken?"
+          },
+          {
+            "name": "Paula",
+            "say": "Einen Cappuccino, bitte!"
+          },
+          {
+            "name": "Emre",
+            "say": "Eine Apfelschorle!"
+          }
+        ],
+        "items": [
+          "coffee",
+          "cake-slice",
+          "soup"
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-essen-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : au café",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Guten Tag! Was möchten Sie trinken?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Paula",
+          "text": "Ich möchte einen Cappuccino, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Und ich nehme eine Apfelschorle."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Gern. Möchten Sie auch etwas essen? Wir haben heute Apfelkuchen und Käsekuchen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Paula",
+          "text": "Oh, ich esse sehr gern Käsekuchen! Ein Stück Käsekuchen, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Für mich keinen Kuchen, danke. Haben Sie auch eine Suppe?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Ja, eine Tomatensuppe mit Brot."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Prima, dann nehme ich eine Tomatensuppe."
+        },
+        {
+          "pause": 2.5
+        },
+        {
+          "voice": "frau",
+          "name": "Paula",
+          "text": "Entschuldigung, wir möchten bitte zahlen!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Zusammen oder getrennt?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Paula",
+          "text": "Getrennt, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Der Cappuccino und der Käsekuchen: Das macht acht Euro vierzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Paula",
+          "text": "Hier sind neun Euro. Stimmt so!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Vielen Dank! Und für Sie die Apfelschorle und die Suppe: neun Euro fünfzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Emre",
+          "text": "Kann ich mit Karte zahlen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kellner",
+          "text": "Ja, natürlich."
+        }
+      ]
+    },
+    {
+      "key": "a1-essen-einkaufen-bild",
+      "kind": "image",
+      "title": "Au marché",
+      "alt": "Chez le marchand de fruits et légumes : des pommes, des carottes, un panier et des pièces de monnaie. Le vendeur demande « Was darf es sein? » et Frau Berger répond « Ein Kilo Äpfel, bitte. ».",
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Verkäufer",
+            "say": "Was darf es sein?"
+          },
+          {
+            "name": "Frau Berger",
+            "say": "Ein Kilo Äpfel, bitte."
+          }
+        ],
+        "items": [
+          "apple",
+          "carrot",
+          "shopping-basket",
+          "coins"
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-einkaufen-audio-v3",
+      "kind": "audio",
+      "title": "Au marché",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Guten Morgen! Was darf es sein?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Guten Morgen! Ich möchte ein Kilo Äpfel, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Gern. Sonst noch etwas?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Und was kosten die Tomaten?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Die Tomaten kosten drei Euro das Kilo."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Dann nehme ich ein Pfund Tomaten. Haben Sie auch Erdbeeren?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Ja, die Erdbeeren sind heute sehr gut. Eine Schale kostet zwei Euro fünfzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Gut, eine Schale, bitte. Das ist alles."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Also: Die Äpfel kosten zwei Euro zwanzig, die Tomaten ein Euro fünfzig und die Erdbeeren zwei Euro fünfzig. Das macht zusammen sechs Euro zwanzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Hier sind zehn Euro, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Verkäufer",
+          "text": "Und drei Euro achtzig zurück. Vielen Dank und einen schönen Tag noch!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Berger",
+          "text": "Vielen Dank, gleichfalls! Tschüs, bis bald!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-lesen-bild",
+      "kind": "image",
+      "title": "La carte du Café am Markt",
+      "alt": "Quatre vignettes pour les rubriques de la carte : un croissant pour das Frühstück, des couverts pour der Mittagstisch, une part de gâteau pour der Kuchen et un gobelet avec une paille pour die Getränke.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "croissant",
+            "label": "das Frühstück"
+          },
+          {
+            "icon": "utensils",
+            "label": "der Mittagstisch"
+          },
+          {
+            "icon": "cake-slice",
+            "label": "der Kuchen"
+          },
+          {
+            "icon": "cup-soda",
+            "label": "die Getränke"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "À la boulangerie, à la maison, au restaurant",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Bäckerin",
+          "text": "Guten Morgen! Was bekommen Sie?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kunde",
+          "text": "Guten Morgen! Sechs Brötchen, bitte. Und ein Brot."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Bäckerin",
+          "text": "Ein Weißbrot oder ein Vollkornbrot?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kunde",
+          "text": "Ein Vollkornbrot, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Bäckerin",
+          "text": "Gern. Darf es sonst noch etwas sein?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Kunde",
+          "text": "Nein, danke. Das ist alles."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Bäckerin",
+          "text": "Sechs Brötchen, das sind zwei Euro vierzig, und das Brot kostet drei Euro fünfzig. Zusammen fünf Euro neunzig, bitte."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Tim, gehst du heute in den Supermarkt?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tim",
+          "text": "Ja, um fünf Uhr. Brauchen wir etwas?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Ja! Wir haben keine Milch mehr und keinen Käse."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tim",
+          "text": "Okay, Milch und Käse. Und Obst? Äpfel?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Nein, Äpfel haben wir noch. Aber kaufst du bitte Bananen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tim",
+          "text": "Bananen, gut. Und eine Flasche Wein für heute Abend?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Nein, keinen Wein. Wir haben noch Bier."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Kellnerin",
+          "text": "Guten Abend! Was möchten Sie essen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Gast",
+          "text": "Ich möchte ein Schnitzel mit Pommes, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Kellnerin",
+          "text": "Oh, das tut mir leid. Wir haben heute kein Schnitzel mehr."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Gast",
+          "text": "Schade! Haben Sie Fisch?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Kellnerin",
+          "text": "Ja, Fisch mit Kartoffeln und Salat. Der ist heute sehr gut!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Gast",
+          "text": "Gut, dann nehme ich Fisch mit Kartoffeln. Und ein Glas Weißwein, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Kellnerin",
+          "text": "Gern. Möchten Sie auch ein Wasser?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Gast",
+          "text": "Nein, danke."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-apfel-bild",
+      "kind": "image",
+      "title": "Des pommes",
+      "alt": "Une pomme.",
+      "image": {
+        "layout": "single",
+        "icon": "apple"
+      }
+    },
+    {
+      "key": "a1-essen-banane-bild",
+      "kind": "image",
+      "title": "Des bananes",
+      "alt": "Une banane.",
+      "image": {
+        "layout": "single",
+        "icon": "banana"
+      }
+    },
+    {
+      "key": "a1-essen-trauben-bild",
+      "kind": "image",
+      "title": "Du raisin",
+      "alt": "Une grappe de raisin.",
+      "image": {
+        "layout": "single",
+        "icon": "grape"
+      }
+    },
+    {
+      "key": "a1-essen-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Nadia parle de ce qu’elle aime manger",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Hallo, ich bin Nadia. Zum Frühstück esse ich gern Müsli mit Joghurt und Obst. Dazu trinke ich einen Tee. Kaffee trinke ich nicht so gern."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Mittags esse ich oft einen Salat oder eine Suppe. Ich esse kein Fleisch, aber ich esse sehr gern Fisch. Mein Lieblingsessen ist Fisch mit Reis und Gemüse."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Am Samstag kaufe ich auf dem Markt ein: Obst, Gemüse und Käse. Am Sonntag gehe ich mit Freunden ins Café. Dort bestelle ich immer einen Cappuccino und ein Stück Apfelkuchen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-esskultur-bild",
+      "kind": "image",
+      "title": "Manger en Allemagne",
+      "alt": "Quatre vignettes : une tasse de café pour das Frühstück, une marmite pour das Mittagessen, un sandwich pour das Abendbrot et un sac de courses pour die Tasche.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "coffee",
+            "label": "das Frühstück"
+          },
+          {
+            "icon": "cooking-pot",
+            "label": "das Mittagessen"
+          },
+          {
+            "icon": "sandwich",
+            "label": "das Abendbrot"
+          },
+          {
+            "icon": "shopping-bag",
+            "label": "die Tasche"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-imbiss-bild",
+      "kind": "image",
+      "title": "À l’Imbiss",
+      "alt": "Un stand de restauration rapide dans la rue : le vendeur demande « Was darf es sein? », Jonas répond « Eine Currywurst, bitte! » et Manon « Einen Döner, bitte! ». On voit un sandwich, un gobelet et des pièces de monnaie.",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Verkäufer",
+            "say": "Was darf es sein?"
+          },
+          {
+            "name": "Jonas",
+            "say": "Eine Currywurst, bitte!"
+          },
+          {
+            "name": "Manon",
+            "say": "Einen Döner, bitte!"
+          }
+        ],
+        "items": [
+          "sandwich",
+          "cup-soda",
+          "coins"
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-imbiss-audio-v3",
+      "kind": "audio",
+      "title": "À l’Imbiss : Currywurst ou Döner ?",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Manon, hast du auch Hunger? Hier ist ein Imbiss. Die Currywurst ist hier super!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Currywurst? Ich esse nicht so gern Wurst. Gibt es hier auch Döner?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Ja, klar! Döner, Pommes und auch Brezeln."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Hallo! Was darf es sein?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Eine Currywurst mit Pommes, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Mit Ketchup oder mit Mayo?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Nur mit Ketchup, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Und ich bekomme einen Döner. Aber ohne Zwiebeln, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Gern. Scharf oder nicht scharf?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Bitte nicht so scharf, danke."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Für hier oder zum Mitnehmen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Für hier."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Und was trinkt ihr?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Ich nehme ein Wasser, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Und für mich eine Apfelschorle."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Zusammen oder getrennt?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Zusammen. Manon, ich lade dich ein!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Oh, danke, Jonas! Das ist nett."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Also: Die Currywurst mit Pommes kostet fünf Euro achtzig, der Döner sechs Euro fünfzig, und die Getränke kosten zusammen vier Euro. Das macht sechzehn Euro dreißig."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Hier sind zwanzig Euro."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Verkäufer",
+          "text": "Und drei Euro siebzig zurück. Guten Appetit!"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Und, Manon? Schmeckt der Döner?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Ja, sehr lecker! Und deine Currywurst?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Super, wie immer! Ich esse hier jede Woche zwei Currywürste."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Manon",
+          "text": "Zwei Currywürste pro Woche? Das ist aber nicht sehr gesund, Jonas!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Ja, ja. Aber es schmeckt so gut!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-spaghettieis-foto",
+      "kind": "image",
+      "title": "Un Spaghettieis",
+      "alt": "Une coupe de Spaghettieis : de la glace à la vanille en forme de spaghettis, nappée de coulis de fraise et de copeaux de chocolat blanc, avec deux gaufrettes en forme de cœur.",
+      "photo": {
+        "file": "dib-images/k03/img-025-094.png"
+      }
+    },
+    {
+      "key": "a1-essen-fruehstueck-foto",
+      "kind": "image",
+      "title": "Une table de petit-déjeuner",
+      "alt": "Une table de petit-déjeuner : du pain, des croissants, du beurre, du miel, de la confiture, deux œufs à la coque, deux tasses de café, des verres de jus d’orange, du lait, du muesli et des fruits.",
+      "photo": {
+        "file": "dib-images/k03/img-014-051.png"
+      }
+    },
+    {
+      "key": "a1-essen-fruehstueck-native",
+      "kind": "audio",
+      "title": "Das Frühstück — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_03_02_breakfast.mp3",
+        "clip": [
+          25,
+          93
+        ]
+      },
+      "transcript": "das Brot, die Brote\ndas Brötchen, die Semmel\ndie Brötchen, die Semmeln\ndie Butter\ndas Ei, die Eier\nessen\ndas Getränk, die Getränke\nder Honig\nder Joghurt, die Joghurts\nder Kaffee\nder Kakao\nder Käse, die Käse\ndie Margarine, die Margarinen\ndie Milch\ndas Müsli",
+      "v3SourceKey": "a1-essen-fruehstueck-native"
+    },
+    {
+      "key": "a1-essen-broetchen-foto",
+      "kind": "image",
+      "title": "Des petits pains (Brötchen)",
+      "alt": "Gros plan sur une corbeille de petits pains ronds et dorés, saupoudrés de farine, certains aux raisins secs.",
+      "photo": {
+        "file": "dib-images/k03/img-029-109.png"
+      }
+    },
+    {
+      "key": "a1-essen-mittagessen-native",
+      "kind": "audio",
+      "title": "Das Mittagessen — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_03_05_lunch.mp3",
+        "clip": [
+          0,
+          86.3
+        ]
+      },
+      "transcript": "das Mittagessen\ndie Beilage, die Beilagen\nder Döner, die Döner\ndie Dönerbude, die Dönerbuden\ndas Gemüse\ndas Gericht, die Gerichte\nder Hamburger, die Hamburger\ndie Mensa, die Mensen\ndie Nudeln\ndie Pommes, die Fritten\nder Salat, die Salate\ndas Sandwich, die Sandwiche\nder Schnellimbiss, der Imbiss, die Schnellimbisse\ndas Wiener Schnitzel\nder Speiseplan, die Speisepläne\ndie Speisekarte, die Speisekarten",
+      "v3SourceKey": "a1-essen-mittagessen-native"
+    },
+    {
+      "key": "a1-essen-markt-foto",
+      "kind": "image",
+      "title": "Un étal de fruits et légumes au marché",
+      "alt": "Un étal de marché : au premier plan, des régimes de bananes ; derrière, du raisin blanc et noir, des tomates, des abricots et des pêches, une balance et des étiquettes de prix écrites à la main ; le marchand, tête baissée, écrit derrière l’étal.",
+      "photo": {
+        "file": "dib-images/k03/img-001-001.png"
+      }
+    },
+    {
+      "key": "a1-essen-obst-native",
+      "kind": "audio",
+      "title": "Im Gemüseladen — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_03_09_greengrocer.mp3",
+        "clip": [
+          12.9,
+          53.6
+        ]
+      },
+      "transcript": "der Apfel, die Äpfel\ndie Apfelsine, die Apfelsinen\ndie Orange, die Orangen\ndie Aprikose, die Aprikosen\ndie Aubergine, die Auberginen\ndie Banane, die Bananen\ndie Birne, die Birnen",
+      "v3SourceKey": "a1-essen-obst-native"
+    },
+    {
+      "key": "a1-essen-schweinebraten-foto",
+      "kind": "image",
+      "title": "Schweinebraten mit Spätzle und Rotkohl",
+      "alt": "Des tranches de rôti de porc nappées de sauce brune, servies avec des Spätzle (des pâtes aux œufs) et du chou rouge.",
+      "photo": {
+        "file": "dib-images/k03/img-034-122.png"
+      }
+    },
+    {
+      "key": "a1-essen-ch-native",
+      "kind": "audio",
+      "title": "Aussprache : ich-Laut et ach-Laut — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_04_05_das-ch.mp3"
+      },
+      "transcript": "zeichnen\nmöchte\nzum Griechen gehen\ngefährlich\nich\nMünchen\nmachen\ndas Schach\ndie Nacht\nlachen\nim Internet suchen\nkochen",
+      "v3SourceKey": "a1-essen-ch-native"
+    },
+    {
+      "key": "a1-essen-ch-zungenbrecher-native",
+      "kind": "audio",
+      "title": "Zungenbrecher : Machen Drachen manchmal … — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_04_06_ch-tonguetwisters.mp3",
+        "clip": [
+          0,
+          6.4
+        ]
+      },
+      "transcript": "Machen Drachen manchmal nachts echt freche Sachen,\noder lachen Drachen manchmal acht freche Lacher?",
+      "v3SourceKey": "a1-essen-ch-zungenbrecher-native"
+    },
+    {
+      "key": "a1-essen-hoeren-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Écouter : à la boulangerie, à la maison, au restaurant",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Wir haben keine Milch mehr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Écouter : à la boulangerie, à la maison, au restaurant",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Die Tomaten kosten drei Euro das Kilo."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich möchte einen Kaffee, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Den Apfelkuchen, bitte!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich trinke gern Milch."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir kochen heute Nudeln."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Was kostet das Brötchen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : le ch et les commandes",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Rechnung, bitte!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-lexique",
+      "kind": "audio",
+      "title": "Lexique · Guten Appetit ! Manger, boire et faire les courses",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Kaffee"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Tee"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wasser"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Milch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Brot, die Brote"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Brötchen, die Brötchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Käse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Ei, die Eier"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Apfel, die Äpfel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kartoffel, die Kartoffeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tomate, die Tomaten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Obst"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gemüse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fleisch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fisch, die Fische"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nudel, die Nudeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuchen, die Kuchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kilo, die Kilos"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Flasche, die Flaschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Rechnung, die Rechnungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "essen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "trinken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "möchten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kosten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gern"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

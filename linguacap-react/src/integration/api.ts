@@ -22,7 +22,8 @@ function createAuthClient(): AuthClient | null {
 }
 
 /** Rôles du simulateur, choisis par ?as=… ou d'après l'adresse saisie à la connexion. */
-export const mockRoles = ['eleve-autonome', 'eleve-suivi', 'professeur', 'professeur-nouveau', 'admin', 'equipe'] as const;
+/** `eleve-parcours` : élève suivie avec un parcours A1 → A2 en cours (séances V4 : exercices typés, mission, lexique). */
+export const mockRoles = ['eleve-autonome', 'eleve-suivi', 'eleve-parcours', 'professeur', 'professeur-nouveau', 'admin', 'equipe'] as const;
 const mockRoleKey = 'linguacap-mock-role';
 const mockSignedOutKey = 'linguacap-mock-sortie';
 
@@ -32,6 +33,7 @@ function mockRoleFromEmail(email: string): (typeof mockRoles)[number] {
   if (value.includes('prof')) return 'professeur';
   if (value.includes('admin')) return 'admin';
   if (value.includes('equipe') || value.includes('équipe')) return 'equipe';
+  if (value.includes('parcours')) return 'eleve-parcours';
   if (value.includes('suivi')) return 'eleve-suivi';
   return 'eleve-autonome';
 }
@@ -116,7 +118,7 @@ export function canEditCatalogue(profile: Profile) {
 export async function requestApi<T = unknown>(
   path: string,
   token?: string,
-  options?: { method: 'POST' | 'PUT'; body?: unknown; idempotencyKey?: string },
+  options?: { method: 'POST' | 'PUT'; body?: unknown; idempotencyKey?: string; keepalive?: boolean },
 ): Promise<T> {
   if (isMockMode) {
     const { mockRequest } = await import('./mock-api');
@@ -133,6 +135,8 @@ export async function requestApi<T = unknown>(
     body: options ? JSON.stringify(options.body ?? {}) : undefined,
     credentials: 'same-origin',
     cache: 'no-store',
+    // `keepalive` : la requête survit à la fermeture ou au rechargement de la page (sauvegardes de dernière seconde).
+    keepalive: options?.keepalive ?? false,
     signal: AbortSignal.timeout(8000),
   });
   const isJson = response.headers.get('content-type')?.includes('application/json');

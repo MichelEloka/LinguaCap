@@ -119,6 +119,12 @@ button.lib-level:hover { border-color: var(--lvl); transform: translateY(-1px); 
 .lib-kind.is-exercise { color: var(--violet); background: var(--violet-50); }
 .lib-skills { color: var(--subtle); }
 .lib-todo { color: var(--muted); font-size: var(--text-xs); font-weight: 700; }
+.lib-kind.is-mission { color: var(--success); background: var(--success-50); }
+.lib-review-mark { display: inline-flex; align-items: center; gap: .25rem; padding: .15rem .5rem; border-radius: var(--r-full); background: var(--violet-50); color: var(--violet);
+  font-size: var(--text-xs); font-weight: 800; white-space: nowrap; animation: lc-pop var(--t-slow) var(--ease-spring) both; }
+.lib-module-meta .lib-meta-review { color: var(--violet); }
+.lib-module-meta .lib-meta-review svg { color: var(--violet); }
+.lib-module-tools { display: flex; flex-wrap: wrap; gap: .5rem; }
 @container lib (max-width: 980px) {
   .lib-module-back { display: inline-flex; }
 }
@@ -130,6 +136,8 @@ button.lib-level:hover { border-color: var(--lvl); transform: translateY(-1px); 
   .lib-banner { align-items: flex-start; }
   .lib-banner .lv-mark { --size: 44px; }
   .lib-skills { display: none; }
+  /* Écran étroit : la marque « À revoir » se réduit à son drapeau (le texte reste lu par les lecteurs d'écran). */
+  .lib-review-mark { gap: 0; padding: .3rem; font-size: 0; }
   .lib-activities .kit-list-item { padding-inline: 1rem; }
 }
 

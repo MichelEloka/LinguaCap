@@ -5,7 +5,7 @@
  */
 import { useMemo, useState, type ReactNode } from 'react';
 import {
-  ArrowRight, BookOpen, CalendarClock, CalendarPlus, CalendarRange, ChevronLeft, ChevronRight, CircleCheck, ClipboardCheck, Clock,
+  ArrowRight, BookOpen, CalendarClock, CalendarPlus, CalendarRange, ChevronLeft, ChevronRight, CircleCheck, ClipboardCheck, Clock, Target,
   Flag, Layers, ListChecks, LoaderCircle, PencilLine, Plus, RotateCcw, Timer, TriangleAlert,
 } from 'lucide-react';
 import { Bars, Callout, Drawer, Facts, ListItem } from '../../design/kit';
@@ -20,6 +20,7 @@ const itemKinds: Record<string, { label: string; icon: typeof BookOpen }> = {
   exercise: { label: 'Exercice', icon: PencilLine },
   review: { label: 'Révision', icon: RotateCcw },
   assessment: { label: 'Évaluation', icon: ClipboardCheck },
+  mission: { label: 'Mission', icon: Target },
 };
 const suggestionIcons: Record<Suggestion['kind'], typeof Clock> = { minutes: Timer, sessions: Layers, days: CalendarPlus, target_date: CalendarClock };
 const suggestionKinds: Record<Suggestion['kind'], string> = {

@@ -2,9 +2,51 @@
 
 Ce dossier contient les parcours d’allemand **A1** et **A2** et le **test de niveau** au format source. L’importeur les publie dans le catalogue par l’API de la plateforme : médias déposés dans la médiathèque, puis brouillon enregistré, contrôlé et publié.
 
-## Préparer le kit V3
+La **V4** est le contenu officiel (`content/de/{a1,a2}`, format 4) : questions typées avec explications, missions remises au professeur, lexique structuré par module, voix A1 ralenties. Elle est **générée** : on ne modifie pas `content/de/{a1,a2}` à la main, mais ses sources.
 
-La V3 ajoute l’entrée en allemand par l’alphabet et les sons, des ateliers de réemploi après chaque thème et des débits audio progressifs. Les sources se trouvent dans [v3/source](v3/source) et le [guide](v3/README.md) décrit le parcours et les consignes d’import. Le kit est généré dans `target/linguacap-cours-v3-kit`, avec ses pages hors ligne, ses JSON et ses MP3.
+```
+content/
+  README.md                  ce document
+  base/de/                   V2 de référence, source de la construction (ne pas modifier)
+    a1/, a2/                 modules et niveaux V2
+    media/audio/*.mp3        MP3 d’origine : source des enregistrements natifs ralentis
+    media/credits.json       crédits de la V2
+  v3/source/                 ateliers de réemploi et modules de sons (V3)
+  v4/source/                 modules ajoutés en V4, illustrations V4 (images-v4.json)
+  v4/pedagogy/a1, a2/        couches pédagogiques par module et _level.mjs (voir v4/pedagogy/README.md)
+  de/                        sortie : V4 officielle importée dans le catalogue
+    a1/level.json            format 4, réglages, budget de durée, diagnostic, bilan, examen blanc
+    a1/NN-<module>.json      un fichier par module : vocabulaire, activités, médias
+    a2/…                     même organisation pour A2
+    placement/placement.json test de niveau (non généré)
+    media/audio/*.mp3        sons générés (synthèse, natifs ralentis, lexique, répétitions, dictées) et test de niveau
+    media/audio/manifest-v3.json  profils, durées, empreintes et segments du lexique
+    media/images/*.png|jpg   seul dépôt d’images (V2, V3, V4)
+    media/credits.json       crédits de la V4
+  b1-v1/                     B1 en préparation (kit séparé : build-b1.mjs)
+```
+
+## Produire la V4
+
+Prérequis : Node.js 22, Docker (images `linguacap-tts-v3` et `linguacap-asr`), modèles Piper dans `target/linguacap-piper-voices-v3` (téléchargement ci-dessous), Edge ou Chrome pour le rendu des images. Les commandes partent de la racine du dépôt (Git Bash).
+
+```bash
+node infra/content/build-v4.mjs                       # 1. V4 dans content/de (modules périmés supprimés) ; --level a1, --out <dossier> pour un aperçu
+MSYS_NO_PATHCONV=1 docker run --rm -v "$(pwd -W):/repo" -v "$(pwd -W)/target/linguacap-piper-voices-v3:/voices:ro" -w /repo   linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/content/de      # 2. sons (seuls les sons modifiés sont refaits)
+PLAYWRIGHT_CHANNEL=msedge node infra/content/render-images.mjs                                  # 3. images absentes ou modifiées
+node infra/content/check-content.mjs --strict                                                   # 4. contrôles (format 4 : voir plus bas)
+node infra/content/expected-transcripts.mjs target/expected.json a1 a2 --segments               # 5. textes attendus, segments du lexique compris
+MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-whisper-models:/models -v "$(pwd -W)/infra/content/asr:/work:ro"   -v "$(pwd -W)/content/de/media/audio:/audio:ro" -v "$(pwd -W)/target:/out" linguacap-asr   python /work/check_audio.py --expected /out/expected.json --audio /audio --report /out/asr-report.json   # 6. reconnaissance vocale
+node infra/content/import-content.mjs --dry-run                                                 # 7. fichiers présents, document < 2 Mo
+node infra/content/build-v4.mjs --kit target/linguacap-cours-v4-kit                             # facultatif : kit hors ligne (A1.html, A2.html)
+```
+
+- **Construction** (`build-v4.mjs`) : composition du kit V4 (V2 de référence, ateliers V3, ajouts V4), illustrations V4, couches pédagogiques, puis automatiquement : retrait des activités `-correction`, explications reprises des quiz des ateliers, mission provisoire tirée de la tâche des ateliers (à remplacer dans la couche), sons et supports des questions `dictation` et `speak` (`<activité>-<question>`), son du lexique `<module>-lexique` (une ligne par entrée, segments), prérequis en chaîne dans l’ordre du niveau, profils audio, `level.json` au format 4.
+- **Sons** (`synthesize-v3.py`) : voix Piper Thorsten et Kerstin ; enregistrements natifs tirés de `content/base/de/media/audio`, ralentis sans changer la hauteur. Profils : A1 tout entier ralenti (débit de synthèse 1,30 au moins, natifs à 0,88 au plus), A2 progressif. Lexique, modèles à répéter et dictées A1 au profil le plus lent. MP3 mono (48 kb/s pour la synthèse, 64 kb/s pour les natifs). Les sons du lexique reçoivent dans le manifeste un segment `{ start, end }` par ligne, que l’importeur transmet au catalogue.
+- **Reconnaissance vocale** : `check_audio.py` retranscrit chaque son (et chaque segment du lexique avec `--segments`) et signale un écart de mots supérieur à 25 % ; `--keys <expression>` limite le contrôle (par exemple aux nouveaux sons) et `--model medium` donne un second avis sur les cas signalés. Les nombres écrits en chiffres (« 14.00 Uhr », « 4,50 € », « am 12. Mai ») et les composés coupés en deux sont comparés comme le texte attendu. La synthèse Piper varie d’une prise à l’autre : un son mal reconnu se régénère avec `--only <clé> --force`. Sur un mot isolé d’un segment du lexique, la reconnaissance est peu fiable (« bei » entendu « bye ») : on juge le son sur le lexique entier, contrôlé avec ses segments. Kerstin (`frau`, `sprecherin`) prononce mal certains mots courts (« Hals ») ; Thorsten (`mann`, `sprecher`) est plus intelligible sur les mots isolés et lit les lexiques.
+- **Test de niveau** : ses sons restent produits par `synthesize.py` (V2) ; lancez-le avec `--only placement-…`, car `content/de/{a1,a2}` est désormais au format 4.
+
+Modèles Piper et image de synthèse :
 
 ```powershell
 $voiceDir = New-Item -ItemType Directory -Path target/linguacap-piper-voices-v3 -Force
@@ -17,52 +59,10 @@ foreach ($speaker in @("thorsten", "kerstin")) {
     }
 }
 docker build -t linguacap-tts-v3 -f infra/content/tts/Dockerfile.v3 infra/content/tts
-node infra/content/build-v3.mjs
-docker run --rm -v "$($PWD.Path):/repo" -v "$($voiceDir.FullName):/voices:ro" -w /repo linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/target/linguacap-cours-v3-kit/content/de
-Push-Location target/linguacap-cours-v3-kit
-node infra/content/check-content.mjs
-node infra/content/import-content.mjs --dry-run
-Pop-Location
-Compress-Archive -Path target/linguacap-cours-v3-kit/* -DestinationPath target/LinguaCap-Cours-Allemand-V3.zip -Force
+docker build -t linguacap-asr infra/content/asr
 ```
 
-Le manifeste audio du kit contient les profils, durées, voix et empreintes des fichiers générés.
-
-## Préparer le kit V4
-
-La V4 complète ajoute huit blocs à la V3. Les [sources](v4/source) définissent les nouveaux modules et leur place dans le [parcours V4](v4/README.md). Le kit est produit dans `target/linguacap-cours-v4-complete-kit`.
-
-Une fois l’image Docker et les modèles installés comme ci-dessus, lancez les commandes suivantes. Si le premier kit V4 ou le kit V3 a déjà été généré, le moteur vérifie ses empreintes et réutilise ses MP3 dans la V4 complète.
-
-```powershell
-node infra/content/build-v3.mjs --v4
-$voiceDir = Get-Item target/linguacap-piper-voices-v3
-$oldAudio = @("target/linguacap-cours-v4-kit/content/de/media/audio", "target/linguacap-cours-v3-kit/content/de/media/audio") |
-    Where-Object { Test-Path -LiteralPath "$_/manifest-v3.json" } | Select-Object -First 1
-$newAudio = "target/linguacap-cours-v4-complete-kit/content/de/media/audio"
-if ($oldAudio -and !(Test-Path -LiteralPath "$newAudio/manifest-v3.json")) {
-    New-Item -ItemType Directory -Path $newAudio -Force | Out-Null
-    Get-ChildItem -Path $oldAudio -File | Where-Object { $_.Extension -eq ".mp3" -or $_.Name -eq "manifest-v3.json" } | Copy-Item -Destination $newAudio
-}
-docker run --rm -v "$($PWD.Path):/repo" -v "$($voiceDir.FullName):/voices:ro" -w /repo linguacap-tts-v3 python -B infra/content/tts/synthesize-v3.py --content /repo/target/linguacap-cours-v4-complete-kit/content/de
-Push-Location target/linguacap-cours-v4-complete-kit
-node infra/content/check-content.mjs
-node infra/content/import-content.mjs --dry-run
-Pop-Location
-Compress-Archive -Path target/linguacap-cours-v4-complete-kit/* -DestinationPath target/LinguaCap-Cours-Allemand-V4-Complete.zip -Force
-```
-
-```
-content/
-  README.md                 ce document
-  de/
-    a1/level.json           réglages, ordre des modules, diagnostic, bilan intermédiaire, examen blanc
-    a1/01-hallo.json …      un fichier par module : activités et médias du module
-    a2/…                    même organisation pour A2
-    placement/placement.json  test de niveau : paliers A1, A2, B1, questions et scripts des sons d’écoute
-    media/audio/*.mp3       sons générés (voix de synthèse) ou extraits de Deutsch im Blick
-    media/images/*.png      illustrations générées
-```
+Les kits historiques restent reproductibles à partir de la V2 de référence : `node infra/content/build-v3.mjs` (V3, `target/linguacap-cours-v3-kit`) et `node infra/content/build-v3.mjs --v4` (kit V4 d’avant les couches, `target/linguacap-cours-v4-complete-kit`), puis `synthesize-v3.py --content /repo/target/<kit>/content/de`.
 
 ## Sources et licences
 
@@ -70,9 +70,11 @@ content/
 - **Der und mehr** (German 1001–2002, Kennesaw State University, Affordable Learning Georgia, CC BY 4.0) fournit des situations, des notes culturelles et des tâches, adaptées et réécrites pour le niveau, avec attribution en fin d’activité.
 - Les autres textes, dialogues, exercices et évaluations de LinguaCap sont originaux.
 - Les ressources sous licence non commerciale (Willkommen, AOT) ou à droits réservés (Goethe-Institut, Deutsche Welle) ne sont **pas** intégrées.
-- Les illustrations composées utilisent les pictogrammes **Lucide** (licence ISC). Les voix de synthèse viennent du modèle **Piper Thorsten** (jeu de données CC0), les voix féminines par transformation de hauteur (détail dans `media/credits.json`).
+- Les illustrations composées utilisent les pictogrammes **Lucide** (licence ISC). Les voix de synthèse viennent des modèles **Piper Thorsten** et **Kerstin** (jeux de données CC0 ; Kerstin préentraînée sur une voix Hi-Fi TTS CC BY 4.0), détail dans `de/media/credits.json`.
 
 ## Fichier de module
+
+Le format est commun à toutes les versions ; le **format 4** (V4, `"format": 4` dans `level.json`) ajoute les champs signalés. Pour la V4, ces fichiers sont produits par `build-v4.mjs` : on écrit une couche dans `v4/pedagogy` (voir son [guide](v4/pedagogy/README.md)).
 
 ```jsonc
 {
@@ -80,8 +82,12 @@ content/
   "title": "Hallo ! Se saluer et se présenter",   // 120 caractères au plus
   "objective": "…",                       // ce que l’élève sait faire à la fin (500 caractères au plus)
   "prerequisites": [],                    // identifiants d’autres modules du même niveau
+  "audioProfile": "a1-suite",             // profil de débit des sons (V3 et V4)
   "sources": ["Deutsch im Blick, Kapitel 1 (COERLL, CC BY 4.0) : thèmes et vocabulaire de base"],
-  "activities": [ /* 5 à 12 activités, 55 à 180 minutes au total, voir ci-dessous */ ],
+  "layer": "content/v4/pedagogy/a1/a1-hallo.mjs",   // format 4 : couche fusionnée, ou null
+  "grammarFocus": ["heissen-kommen-sein"],          // format 4, facultatif : module de grammaire
+  "vocabulary": [ /* format 4 : lexique du module, voir ci-dessous */ ],
+  "activities": [ /* 5 à 12 activités (4 à 16 au format 4), 55 à 180 minutes au total, voir ci-dessous */ ],
   "media": [ /* médias utilisés par les activités du module */ ]
 }
 ```
@@ -91,16 +97,40 @@ content/
 | Champ | Règle |
 | --- | --- |
 | `id` | unique dans le niveau, préfixé par l’identifiant du module, 40 caractères au plus, jamais `revision-…` |
-| `kind` | `lesson` (lecture et écoute guidées) ou `exercise` (questions corrigées automatiquement) |
+| `kind` | `lesson` (lecture et écoute guidées), `exercise` (questions corrigées automatiquement) ou, au format 4, `mission` (production remise au professeur) |
 | `estimatedMinutes` | 5 à 20 minutes ; un module totalise 55 à 180 minutes |
 | `competences` | parmi `lecture`, `ecoute`, `expression-ecrite`, `expression-orale` |
 | `lesson.title` | titre affiché |
 | `lesson.description` | texte affiché à l’élève, en texte brut : explications en français, exemples et textes en allemand. Sauts de ligne conservés, puces `• `, intertitres en MAJUSCULES. Pour un exercice : consigne et, pour la lecture, le texte à lire. |
 | `lesson.transcript` | laisser `null` : l’importeur y place la transcription du ou des sons de l’activité |
-| `questions` | exercices seulement : 4 à 8 questions, chacune 3 ou 4 choix et **une seule** bonne réponse |
+| `questions` | exercices seulement : 4 à 8 questions à choix (format 4 : 3 à 10 questions typées, chacune avec son `explanation`) |
+| `mission` | format 4, activités `mission` seulement : `{ oral: { prompt, maxSeconds } ou null, written: { prompt, maxChars, minWords } ou null, checklist: [2 à 6 points] }` ; la situation est dans `lesson.description` |
 | `placements` | supports : un son et/ou une ou plusieurs images, rattachés à l’activité, à une question (`questionId`) ou à un choix (`questionId` + `optionId`) |
 
 Questions : `id` en minuscules (`q1`, `q2`…), `prompt` ≤ 500 caractères, choix `a`, `b`, `c`, `d` avec `label` ≤ 300 caractères. Les distracteurs sont plausibles ; la bonne réponse n’est pas toujours la première.
+
+Au format 4, `type` vaut `choice` (défaut), `fill`, `order`, `match`, `dictation` ou `speak`, et chaque question porte une `explanation` (10 à 600 caractères) affichée après la remise, avec la réponse attendue :
+
+```jsonc
+{ "id": "q1", "type": "choice", "prompt": "…", "explanation": "…", "options": [ { "id": "a", "label": "…", "correct": true, "feedback": null }, … ] }
+{ "id": "q2", "type": "fill", "prompt": "Complétez avec le connecteur.", "text": "Ich bleibe zu Hause, [[1]] ich krank bin.",
+  "blanks": [ { "id": "1", "accept": ["weil"], "size": 6, "hint": null } ], "explanation": "…" }
+{ "id": "q3", "type": "order", "prompt": "Remettez les mots dans l’ordre.", "answers": [ ["Ich bleibe zu Hause,", "weil", "ich", "krank", "bin."] ], "explanation": "…" }
+{ "id": "q4", "type": "match", "prompt": "Associez…", "pairs": [ { "left": "warten", "right": "auf + accusatif" }, … ], "explanation": "…" }
+{ "id": "q5", "type": "dictation", "prompt": "Écoutez et écrivez.", "accept": ["Der Zug fährt um zehn Uhr ab."], "voice": "mann", "showWordCount": true, "explanation": "…" }
+{ "id": "q6", "type": "speak", "prompt": "Écoutez puis répétez.", "text": "Ich habe Kopfschmerzen.", "accept": ["Ich habe Kopfschmerzen."], "threshold": 75, "explanation": "…" }
+```
+
+Une dictée et une répétition ont leur son `<activité>-<question>`, rattaché à la question (transcription `after_answer` pour la dictée, `on_demand` pour le modèle à répéter) ; ces sons ne figurent pas dans la transcription de l’activité.
+
+### Vocabulaire (format 4)
+
+```jsonc
+{ "id": "kopf", "word": "Kopf", "article": "der", "plural": "Köpfe", "partOfSpeech": "noun", "translation": "la tête",
+  "example": "Mein Kopf tut weh.", "note": null, "audio": { "media": "a1-sante-lexique", "line": 0 } }
+```
+
+`partOfSpeech` : noun, verb, adjective, adverb, preposition, conjunction, pronoun, number, expression, other. Un nom a son article (sauf note « toujours au pluriel ») et une majuscule. `audio` désigne une ligne du son du lexique (`segments: true`) ; l’importeur la remplace par l’élément de médiathèque et le segment `{ start, end }` lu dans `media/audio/manifest-v3.json`.
 
 Placements : `{ "media": "clé", "usage": "audio" | "illustration", "alt": "…", "caption": "…", "transcriptVisibility": "on_demand" | "after_answer" | "hidden", "decorative": false, "questionId": null, "optionId": null }`. Une image non décorative a un texte alternatif en français qui décrit ce qu’on voit. Un son d’exercice d’écoute utilise `after_answer`.
 
@@ -157,7 +187,7 @@ Les chemins `native.file` et `photo.file` sont relatifs à `resource-langue/extr
 
 ## Fichier de niveau
 
-`level.json` contient `levelId` (`a1` ou `a2`), `modules` (ordre des modules : `{ "id": "a1-hallo", "file": "01-hallo.json" }`), `settings` (compétences attendues, critères de réussite, seuil, durées), `diagnostic`, `assessments` (bilan `midterm` et examen blanc `final`, chacun avec quatre parties : lecture et écoute fermées, écrit et oral notés avec une grille) et `media` (médias des évaluations). Les questions du diagnostic portent `moduleRef` : un module du niveau ou `prerequis`.
+`level.json` contient `levelId` (`a1`, `a2` ou `b1`), au format 4 `format: 4`, `layer` (couche `_level.mjs` ou null) et `activityMinutes` (`{ min, max }`, budget de durée des activités), `modules` (ordre des modules : `{ "id": "a1-hallo", "file": "01-hallo.json" }`), `settings` (compétences attendues, critères de réussite, seuil, durées), `diagnostic`, `assessments` (bilan `midterm` et examen blanc `final`, chacun avec quatre parties : lecture et écoute fermées, écrit et oral notés avec une grille) et `media` (médias des évaluations). Les questions du diagnostic portent `moduleRef` : un module du niveau ou `prerequis`.
 
 ## Test de niveau
 
@@ -186,17 +216,15 @@ Les chemins `native.file` et `photo.file` sont relatifs à `resource-langue/extr
 - **Calibrage** : descripteurs du CECRL et formats des épreuves de lecture et d’écoute du Goethe-Zertifikat A1, A2 et B1 (annonces, courriels, petites annonces à apparier, articles, règlements, messages téléphoniques, dialogues, interviews, émissions de radio), avec une difficulté croissante d’un palier à l’autre : textes plus longs, syntaxe plus complexe, réponses à inférer.
 - **Écoute** : un son par question, transcription masquée (`hidden`), 10 secondes à 1 minute. Les sons du palier A1 sont lus plus lentement, comme ceux du niveau A1.
 
-## Vérifier, générer, importer
+## Vérifier et importer
 
 ```bash
-node infra/content/check-content.mjs                 # structure, corrigés, médias, compétences, test de niveau
-PLAYWRIGHT_CHANNEL=msedge node infra/content/render-images.mjs     # illustrations et photos → media/images
-docker build -t linguacap-tts infra/content/tts
-MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-piper-voices:/voices:ro -v "$(pwd -W):/repo" -w /repo   linguacap-tts python infra/content/tts/synthesize.py            # synthèse et enregistrements natifs → media/audio (niveaux et test de niveau ; --only clé … pour quelques sons)
-node infra/content/expected-transcripts.mjs expected.json [a1 a2 placement]   # texte attendu de chaque son
-docker build -t linguacap-asr infra/content/asr
-MSYS_NO_PATHCONV=1 docker run --rm -v linguacap-whisper-models:/models -v "$(pwd -W)/infra/content/asr:/work:ro"   -v "$(pwd -W)/content/de/media/audio:/audio:ro" -v "$(pwd -W):/out" linguacap-asr   python /work/check_audio.py --expected /out/expected.json --audio /audio --report /out/report.json   # contrôle des sons par reconnaissance vocale
-node infra/content/import-content.mjs --dry-run [--placement]     # fichiers présents, taille des documents
+node infra/content/check-content.mjs [--strict] [content/de/a1 | <module>.json | placement.json]   # structure, corrigés, médias, compétences, format 4
+node infra/content/import-content.mjs --dry-run [--level a1] [--placement]     # fichiers présents, taille des documents (2 Mo au plus), segments du lexique
 node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --publish    # dépôt des médias, brouillons, contrôle, publication
 node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --placement --publish    # test de niveau
 ```
+
+Un document au format 4 (questions typées, missions, vocabulaire) n’est accepté que par un catalogue à jour : ordre de mise en production imposé, migrations, services, passerelle, front, puis import. L’importeur refuse un niveau dont des mots du lexique n’ont pas de segment audio (sons à régénérer).
+
+Le contrôle au format 4 vérifie en plus : types et tailles des questions, repères `[[id]]` des trous, solutions `order` de mêmes jetons, paires uniques, son et transcription des dictées et répétitions, explications, missions et compétences, vocabulaire et son du lexique, gabarits d’illustration V4, absence d’activité `-correction` et de texte qui annonce un corrigé, consignes hors application, budget de durée et place du bilan, débit des sons A1 (EVO-040) d’après le manifeste audio, taille du document d’import. Sans `--strict`, les règles de complétude ne sont des erreurs que pour les modules dotés d’une couche pédagogique.

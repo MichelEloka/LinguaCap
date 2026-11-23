@@ -1,0 +1,1227 @@
+{
+  "id": "a1-kurs-atelier",
+  "title": "Trouver sa salle et préparer son matériel",
+  "objective": "Comprendre le jour, l’heure et la salle d’un cours, puis dire quel objet manque.",
+  "prerequisites": [
+    "a1-kurs"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-kurs-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "deutschkurs",
+      "word": "Deutschkurs",
+      "article": "der",
+      "plural": "Deutschkurse",
+      "partOfSpeech": "noun",
+      "translation": "le cours d’allemand",
+      "example": "Der Deutschkurs ist am Dienstag.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "raum",
+      "word": "Raum",
+      "article": "der",
+      "plural": "Räume",
+      "partOfSpeech": "noun",
+      "translation": "la salle",
+      "example": "Der Kurs ist in Raum zwanzig.",
+      "note": "in Raum 20 : sans article devant le numéro",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "stift",
+      "word": "Stift",
+      "article": "der",
+      "plural": "Stifte",
+      "partOfSpeech": "noun",
+      "translation": "le stylo, le crayon",
+      "example": "Hast du einen Stift?",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "heft",
+      "word": "Heft",
+      "article": "das",
+      "plural": "Hefte",
+      "partOfSpeech": "noun",
+      "translation": "le cahier",
+      "example": "Ich habe nur ein Heft.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "tasche",
+      "word": "Tasche",
+      "article": "die",
+      "plural": "Taschen",
+      "partOfSpeech": "noun",
+      "translation": "le sac",
+      "example": "Mein Buch ist in der Tasche.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "dienstag",
+      "word": "Dienstag",
+      "article": "der",
+      "plural": "Dienstage",
+      "partOfSpeech": "noun",
+      "translation": "le mardi",
+      "example": "Bis Dienstag!",
+      "note": "am Dienstag : mardi, ce mardi-là",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "beginnen",
+      "word": "beginnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "commencer",
+      "example": "Die Kurse beginnen um neun Uhr.",
+      "note": "er beginnt",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "mitbringen",
+      "word": "mitbringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apporter",
+      "example": "Bitte ein Heft mitbringen.",
+      "note": "séparable : mit|bringen ; Bring bitte ein Heft mit!",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "brauchen",
+      "word": "brauchen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir besoin de",
+      "example": "Wir brauchen ein Buch.",
+      "note": "+ accusatif : Ich brauche einen Stift.",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "wann",
+      "word": "wann",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "quand",
+      "example": "Wann ist der Deutschkurs?",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "um-neun-uhr",
+      "word": "um neun Uhr",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à neuf heures",
+      "example": "Der Kurs beginnt um neun Uhr.",
+      "note": "um + heure : um zehn Uhr, um halb neun",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "am-mittwoch",
+      "word": "am Mittwoch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "mercredi (ce jour-là), le mercredi",
+      "example": "Der Kurs ist am Mittwoch in Raum sieben.",
+      "note": "am (= an dem) + jour : am Montag, am Freitag",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "kein",
+      "word": "kein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "other",
+      "translation": "pas de, aucun",
+      "example": "Hier ist kein Stift.",
+      "note": "kein, keine ; keinen pour un masculin après haben",
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "nur",
+      "word": "nur",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "seulement",
+      "example": "Ich habe nur ein Heft.",
+      "note": null,
+      "audio": {
+        "media": "a1-kurs-atelier-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-kurs-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : le jour, l’heure, la salle et le matériel",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : le jour, l’heure, la salle et le matériel",
+        "description": "À LIRE AU TABLEAU · 15 MIN\n\n1. Lire l’annonce (5 min). Au tableau, on lit : « Deutschkurs: Mittwoch, zehn Uhr, Raum sieben. Bitte ein Heft und einen Stift mitbringen. Am Freitag ist der Kurs in Raum neun. » Repérez le premier jour, l’heure, la salle et les deux objets à apporter. Quel renseignement change le vendredi ? (La salle : neuf au lieu de sept.)\n\n2. Nommer le matériel (5 min). Lisez der Stift, die Tasche et das Heft avec leur article. Comparez « Das ist ein Stift », « Das ist eine Tasche » et « Das ist ein Heft ». Pour dire qu’un objet manque : « Hier ist kein Stift », « Hier ist keine Tasche ». Après haben, le masculin change : « Ich habe einen Stift », « Ich habe keinen Stift ».\n\n3. Dire quand et où (5 min). « Wann? » demande un jour ou une heure, « Wo? » un lieu. On dit am + jour, um + heure, in + salle : « am Mittwoch », « um zehn Uhr », « in Raum sieben ». Dites les trois informations d’un trait : « Der Kurs ist am Mittwoch um zehn Uhr in Raum sieben. » Pour emprunter un stylo : « Hast du einen Stift? » — « Ja, hier ist ein Stift. » ou « Nein, ich habe keinen Stift. »",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-kurs-atelier-tafel",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-kurs-atelier-material",
+          "usage": "illustration",
+          "caption": "der Stift · die Tasche · das Heft",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-kurs-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : avant le cours",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : avant le cours",
+        "description": "UNE QUESTION DE SALLE · 12 MIN\n\n1. Première écoute (3 min). Écoutez la scène sans lire la transcription : de quoi parlent les deux personnes ?\n2. Deuxième écoute (4 min). Repérez le jour, l’heure et la salle du cours. Attention : la première personne propose une salle, l’autre la corrige.\n3. L’objet qui manque (2 min). Repérez l’objet que la première personne emprunte et celui qu’elle a déjà. Où est son livre ?\n4. Relire et répéter (3 min). Ouvrez la transcription et lisez les deux rôles à voix haute. Redites ensuite la scène en changeant le jour, l’heure et la salle : « am Montag », « um zehn Uhr », « in Raum acht ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-kurs-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-kurs-atelier-raum",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-kurs-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : quand, où et avec quel matériel",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : quand, où et avec quel matériel",
+        "description": "Réécoutez la scène pour compléter l’annonce du cours, puis travaillez ein, eine, einen, kein, keinen et l’ordre des mots. Les deux dernières questions sont des dictées. La transcription de la scène s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-kurs-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-entrainer-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez l’annonce du cours.",
+          "text": "Deutschkurs: am [[1]], um [[2]] Uhr, in Raum [[3]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Dienstag"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "neun",
+                "9"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "zwanzig",
+                "20"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "On entend « Am Dienstag. Er beginnt um neun Uhr », puis « Nein, er ist in Raum zwanzig ». La salle zwölf (12) est une fausse piste, corrigée aussitôt."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez avec ein, eine ou einen.",
+          "text": "Das ist [[1]] Stift. Das ist [[2]] Tasche. Hast du [[3]] Stift?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ein"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "eine"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "einen"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Der Stift donne ein Stift, die Tasche donne eine Tasche. Après haben, le masculin prend -en : Hast du einen Stift? Le féminin et le neutre ne changent pas."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Complétez avec kein, keine ou keinen.",
+          "text": "Hier ist [[1]] Heft. Und ich habe [[2]] Stift.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kein"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "keinen"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "Kein se comporte comme ein : das Heft → kein Heft. Après haben, le masculin der Stift devient keinen Stift. « Ich habe nicht einen Stift » ne se dit pas pour « je n’ai pas de stylo »."
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Associez chaque question à la bonne réponse.",
+          "pairs": [
+            {
+              "left": "Wann ist der Kurs?",
+              "right": "Am Dienstag."
+            },
+            {
+              "left": "Um wie viel Uhr beginnt er?",
+              "right": "Um neun Uhr."
+            },
+            {
+              "left": "Wo ist der Kurs?",
+              "right": "In Raum zwanzig."
+            },
+            {
+              "left": "Hast du einen Stift?",
+              "right": "Ja, hier ist ein Stift."
+            }
+          ],
+          "explanation": "Am introduit le jour, um l’heure, in le lieu. À une question oui/non comme Hast du …?, on répond par ja ou nein."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre. Commencez par « Am Freitag ».",
+          "answers": [
+            [
+              "Am Freitag",
+              "ist",
+              "der Kurs",
+              "in Raum neun."
+            ]
+          ],
+          "explanation": "Quand le jour ouvre la phrase, le verbe ist reste en 2e position et le sujet der Kurs passe après : Am Freitag ist der Kurs in Raum neun."
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase et écrivez-la.",
+          "accept": [
+            "Der Kurs ist am Montag in Raum acht.",
+            "Der Kurs ist am Montag in Raum 8."
+          ],
+          "voice": "frau",
+          "explanation": "Am Montag : am devant un jour ; in Raum acht : pas d’article devant le numéro de salle. Montag et Raum sont des noms, avec une majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase et écrivez-la.",
+          "accept": [
+            "Ich habe keinen Stift, nur ein Heft."
+          ],
+          "voice": "mann",
+          "explanation": "Keinen Stift : der Stift est masculin et complément de haben, d’où -en. Ein Heft ne change pas (neutre). Nur veut dire « seulement ».",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : le cours et le matériel",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : le cours et le matériel",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. La voix monte à la fin d’une question oui/non (Ist der Kurs …?) et descend après un mot en W (Wann …?).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-kurs-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-kurs-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wann ist der Deutschkurs?",
+          "accept": [
+            "Wann ist der Deutschkurs?"
+          ],
+          "explanation": "Wann commence par un son [v]. Dans Deutschkurs, eu se dit « oï » et sch « ch » ; l’accent tombe sur Deutsch.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Der Kurs beginnt um neun Uhr.",
+          "accept": [
+            "Der Kurs beginnt um neun Uhr.",
+            "Der Kurs beginnt um 9 Uhr."
+          ],
+          "explanation": "Um se dit « oum ». Dans neun, eu se dit « oï ». Accentuez beginnt sur la deuxième syllabe : be-GINNT.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ist der Kurs in Raum zwölf?",
+          "accept": [
+            "Ist der Kurs in Raum zwölf?",
+            "Ist der Kurs in Raum 12?"
+          ],
+          "explanation": "Zwölf commence par [ts] et contient un ö, lèvres arrondies. Dans Raum, au se dit « aou ». La voix monte à la fin.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hast du einen Stift?",
+          "accept": [
+            "Hast du einen Stift?"
+          ],
+          "explanation": "Le h de hast se prononce. Stift commence par « cht » : st en début de mot se dit comme dans Straße.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Nein, ich habe keinen Stift.",
+          "accept": [
+            "Nein, ich habe keinen Stift."
+          ],
+          "explanation": "Keinen : ei se dit « aï » et on entend bien la fin -nen. Le ch de ich est un souffle doux.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Mein Buch ist in der Tasche.",
+          "accept": [
+            "Mein Buch ist in der Tasche."
+          ],
+          "explanation": "Buch : u se dit « ou » et ch se forme au fond de la gorge. Tasche : sch se dit « ch ».",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : le cours et le matériel",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : le cours et le matériel",
+        "description": "Écoutez la scène une première fois pour la situation, puis lisez les questions et réécoutez pour les détails. Les deux dernières questions portent sur l’article d’un nom et sur la façon d’annoncer un cours. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-kurs-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-kurs-atelier-stift",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a1-kurs-atelier-buch",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a1-kurs-atelier-heft",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q4",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quel jour a lieu le cours ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mardi",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Jeudi",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vendredi",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « Wann ist der Deutschkurs? – Am Dienstag. » : Dienstag est le mardi. Jeudi se dirait Donnerstag et vendredi Freitag.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : à quelle heure commence le cours ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "12 h",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "9 h",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "10 h",
+              "correct": false
+            }
+          ],
+          "explanation": "« Er beginnt um neun Uhr » : neun = 9. Zwölf (12) est un numéro de salle, cité dans la question qui suit.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : dans quelle salle a lieu le cours ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Salle 12",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Salle 2",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Salle 20",
+              "correct": true
+            }
+          ],
+          "explanation": "La première personne demande « Ist der Kurs in Raum zwölf? » et l’autre corrige : « Nein, er ist in Raum zwanzig. » Zwanzig = 20 ; zwölf = 12.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : qu’est-ce que la première personne demande à emprunter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un stylo",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Un livre",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un cahier",
+              "correct": false
+            }
+          ],
+          "explanation": "« Hast du einen Stift? Ich habe nur ein Heft. » : elle emprunte un stylo (der Stift). Elle a déjà un cahier, et son livre est dans son sac.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel article accompagne « Heft » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "der",
+              "correct": false
+            }
+          ],
+          "explanation": "On dit das Heft, ein Heft. Le genre allemand ne suit pas le français (« le cahier ») : on apprend chaque nom avec son article.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Le cours commence vendredi à 10 h. Quelle phrase le dit ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Kurs beginnt am Dienstag um zehn Uhr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Kurs beginnt am Freitag um zwölf Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Kurs beginnt am Freitag um zehn Uhr.",
+              "correct": true
+            }
+          ],
+          "explanation": "Freitag = vendredi et zehn = 10 : am Freitag um zehn Uhr. La première phrase garde Dienstag (mardi), la deuxième dit zwölf (12 h).",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-kurs-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : annoncer un changement de salle",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : annoncer un changement de salle",
+        "description": "Vous êtes responsable du groupe de votre cours d’allemand. Cette semaine, le cours change de salle. Vous prévenez le groupe par un message vocal, puis par écrit.\n\nMODÈLE\nHallo! Der Deutschkurs ist am Montag um zehn Uhr. Er ist nicht in Raum zwölf, er ist in Raum acht. Bringt bitte ein Heft und einen Stift mit. Ich habe keinen Stift. Hat jemand einen Stift für mich? Bis Montag!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-kurs-atelier-nachricht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez le message vocal pour le groupe : le jour, l’heure, l’ancienne salle et la nouvelle salle, puis deux objets à apporter. Terminez en demandant à emprunter un objet qui vous manque.",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez le même message pour le groupe : le jour, l’heure, la nouvelle salle et deux objets à apporter. Ajoutez une phrase avec kein pour dire ce qui vous manque.",
+          "maxChars": 500,
+          "minWords": 20
+        },
+        "checklist": [
+          "J’ai donné le jour avec am, l’heure avec um et la salle avec in Raum.",
+          "J’ai distingué clairement l’ancienne salle et la nouvelle.",
+          "J’ai nommé deux objets avec le bon article (ein Heft, einen Stift, eine Tasche).",
+          "J’ai dit ce qui me manque avec kein (keinen Stift, kein Heft) ou demandé « Hat jemand …? ».",
+          "Mon message écrit et mon message vocal donnent les mêmes informations."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-kurs-atelier-dialogue",
+      "kind": "audio",
+      "title": "Trouver sa salle et préparer son matériel · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hallo! Wann ist der Deutschkurs?"
+        },
+        {
+          "voice": "mann",
+          "text": "Am Dienstag. Er beginnt um neun Uhr."
+        },
+        {
+          "voice": "frau",
+          "text": "Ist der Kurs in Raum zwölf?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nein, er ist in Raum zwanzig."
+        },
+        {
+          "voice": "frau",
+          "text": "Hast du einen Stift? Ich habe nur ein Heft."
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, hier ist ein Stift. Brauchst du auch ein Buch?"
+        },
+        {
+          "voice": "frau",
+          "text": "Nein, danke. Mein Buch ist in der Tasche."
+        },
+        {
+          "voice": "mann",
+          "text": "Gut. Dann bis Dienstag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-kurs-atelier-tafel",
+      "kind": "image",
+      "title": "L’annonce au tableau",
+      "alt": "Annonce au tableau de la classe : « Deutschkurs: Mittwoch, zehn Uhr, Raum sieben. Bitte ein Heft und einen Stift mitbringen. Am Freitag ist der Kurs in Raum neun. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "classroom",
+        "icon": "presentation",
+        "title": "Deutschkurs",
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Mittwoch, zehn Uhr, Raum sieben."
+          },
+          {
+            "icon": "pencil",
+            "text": "Bitte ein Heft und einen Stift mitbringen."
+          },
+          {
+            "icon": "triangle-alert",
+            "text": "Am Freitag ist der Kurs in Raum neun."
+          }
+        ],
+        "size": 38
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-material",
+      "kind": "image",
+      "title": "Le matériel du cours",
+      "alt": "Trois vignettes : un stylo (der Stift), un sac à main (die Tasche) et un cahier (das Heft).",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "pen",
+            "label": "der Stift"
+          },
+          {
+            "icon": "handbag",
+            "label": "die Tasche"
+          },
+          {
+            "icon": "notebook",
+            "label": "das Heft"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-raum",
+      "kind": "image",
+      "title": "Avant le cours d’allemand",
+      "alt": "Dans le couloir de l’école, Sara demande à Tim « Hallo! Wann ist der Deutschkurs? ». En haut : un calendrier, une horloge et une porte ouverte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Sara",
+            "say": "Hallo! Wann ist der Deutschkurs?"
+          },
+          {
+            "name": "Tim"
+          }
+        ],
+        "items": [
+          "calendar-days",
+          "clock",
+          "door-open"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-stift",
+      "kind": "image",
+      "title": "Un stylo",
+      "alt": "Un stylo à bille.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "pen"
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-buch",
+      "kind": "image",
+      "title": "Un livre",
+      "alt": "Un livre fermé.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "book"
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-heft",
+      "kind": "image",
+      "title": "Un cahier",
+      "alt": "Un cahier à spirale.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "notebook"
+      }
+    },
+    {
+      "key": "v4-a1-kurs-atelier-nachricht",
+      "kind": "image",
+      "title": "Message : le cours change de salle",
+      "alt": "Message de Sara sur le téléphone de Tim : « Der Kurs ist am Montag um zehn Uhr in Raum acht. Bring bitte ein Heft mit. ». Tim répond « Danke! Bis Montag! ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Sara",
+        "subtitle": "Deutschkurs",
+        "size": 31,
+        "messages": [
+          {
+            "from": "Sara",
+            "time": "08:12",
+            "text": "Der Kurs ist [am Montag] [um zehn Uhr] [in Raum acht]. Bring bitte ein Heft mit."
+          },
+          {
+            "side": "right",
+            "text": "Danke! Bis Montag!"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-kurs-atelier-entrainer-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · S’entraîner : quand, où et avec quel matériel",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Der Kurs ist am Montag in Raum acht."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : quand, où et avec quel matériel",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Ich habe keinen Stift, nur ein Heft."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wann ist der Deutschkurs?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Der Kurs beginnt um neun Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ist der Kurs in Raum zwölf?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du einen Stift?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Nein, ich habe keinen Stift."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : le cours et le matériel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Buch ist in der Tasche."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-kurs-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Trouver sa salle et préparer son matériel",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Deutschkurs, die Deutschkurse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Raum, die Räume"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stift, die Stifte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Heft, die Hefte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tasche, die Taschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Dienstag, die Dienstage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beginnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitbringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "brauchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wann"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "um neun Uhr"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "am Mittwoch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nur"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

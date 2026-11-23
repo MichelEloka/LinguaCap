@@ -1,17 +1,24 @@
-import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookOpen, CalendarClock, Check, CheckCircle2, ClipboardCheck, Flag, PencilLine, RotateCcw, Trophy,
+  ArrowLeft, ArrowRight, BookOpen, CalendarClock, Check, ClipboardCheck, Flag, PencilLine, RotateCcw, Target, Trophy,
 } from 'lucide-react';
 import { Badge, ProgressBar } from '../../components/ui';
-import { Callout, Facts, ListItem, ProgressRing, SkeletonCard } from '../../design/kit';
+import { Facts, ListItem, ProgressRing, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import type {
+  ActivityKind, ExerciseAnswer, ExerciseState, Lexicon, MissionDefinition, MissionView, QuestionItem, QuestionView, ReviewItem,
+} from '../../integration/v4';
 import { LessonContent } from './LessonContent';
-import { MediaPlacement, MediaSequence, Transcript } from './study-media';
-import { QuestionCard } from './study-question';
+import { MediaSequence, Transcript } from './study-media';
+import { activityPlacements, ExerciseActivity } from './study-exercise';
+import { LexiconButton } from './study-lexicon';
+import { MissionActivity } from './study-mission';
 import './learner-session.css';
 
 export { MediaPlacement } from './study-media';
+export { ExerciseActivity } from './study-exercise';
+export { MissionActivity } from './study-mission';
 
 export type SessionStatus = 'planned' | 'in_progress' | 'completed' | 'late';
 type ActivityStatus = 'todo' | 'started' | 'completed';
@@ -39,6 +46,8 @@ export interface Grade {
   kind?: 'quiz' | 'diagnostic';
   id: string; lessonId: string; correct: number; total: number; submittedAt: string;
   sessionId?: string | null; activityId?: string | null;
+  /** V4 : réponses en attente du professeur, questions « à revoir », exercice typé. */
+  pending?: number; flagged?: string[]; typed?: boolean;
 }
 
 /** Support d'une activité, d'une question ou d'un choix de réponse, avec son adresse de lecture temporaire. */
@@ -54,21 +63,28 @@ export interface Placement {
   optionId?: string | null;
   url?: string | null;
 }
-export interface Question { id: string; prompt: string; options: { id: string; text: string }[] }
+/** Question vue par l'élève : forme typée de la V4, ou ancien choix sans `type` (aperçu de l'éditeur, anciens services). */
+export type Question = QuestionView | { id: string; prompt: string; options: QuestionItem[]; type?: undefined | null };
 export interface ActivityDetail {
   id: string;
-  kind: 'lesson' | 'exercise' | 'review' | 'assessment';
+  kind: ActivityKind;
   title: string;
   estimatedMinutes: number;
   status: ActivityStatus;
-  state: { answers?: Record<string, string> };
+  /** Exercice : `{answers, roundId}` (ancienne forme `{answers: {q1: 'b'}}` relue comme un choix). */
+  state: { answers?: Record<string, string | ExerciseAnswer>; roundId?: string };
   attemptId: string | null;
   lesson: { id: string; title: string; description: string } | null;
   transcript: string | null;
   questions: Question[];
   placements: Placement[];
+  /** V4 : définition de la mission, activité d'origine au catalogue, exercices à reprendre (révision du module). */
+  mission?: MissionDefinition | null;
+  contentVersionId?: string | null;
+  contentActivityId?: string | null;
+  reviewItems?: ReviewItem[] | null;
 }
-interface SessionDetail { session: SessionSummary; enrollmentId: string; levelCode: string; activities: ActivityDetail[] }
+interface SessionDetail { session: SessionSummary; enrollmentId: string; levelCode: string; activities: ActivityDetail[]; lexicon?: Lexicon | null }
 
 const dueFormat = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' });
 const dayFormat = new Intl.DateTimeFormat('fr-FR', { weekday: 'long', day: 'numeric', month: 'long' });
@@ -88,18 +104,40 @@ function errorText(error: unknown) {
     ? error.message : 'Le service est momentanément indisponible. Réessayez.';
 }
 
-const activityPlacements = (activity: ActivityDetail) => activity.placements.filter((placement) => !placement.questionId);
-const questionPlacements = (activity: ActivityDetail, questionId: string) =>
-  activity.placements.filter((placement) => placement.questionId === questionId && !placement.optionId);
-const optionPlacements = (activity: ActivityDetail, questionId: string, optionId: string) =>
-  activity.placements.filter((placement) => placement.questionId === questionId && placement.optionId === optionId);
-
-const activityKind = {
+const activityKinds: Record<ActivityKind, { label: string; icon: typeof BookOpen }> = {
   lesson: { label: 'Leçon', icon: BookOpen },
   exercise: { label: 'Exercice', icon: PencilLine },
   review: { label: 'Révision', icon: RotateCcw },
   assessment: { label: 'Évaluation', icon: ClipboardCheck },
+  mission: { label: 'Mission', icon: Target },
 };
+/** Libellé et icône d'un type d'activité (un type inconnu d'un service plus récent s'affiche comme une leçon). */
+const activityKind = (kind: string) => activityKinds[kind as ActivityKind] ?? activityKinds.lesson;
+
+/** Révision du module : exercices dont des questions sont « à revoir », à reprendre dans la bibliothèque. */
+function ReviewItems({ items }: { items: ReviewItem[] }) {
+  return (
+    <section className="study-retake" aria-labelledby="study-retake-title">
+      <header>
+        <span className="study-retake-icon" aria-hidden="true"><Flag size={17} /></span>
+        <div>
+          <h3 id="study-retake-title">À reprendre</h3>
+          <p>Ces exercices ont des questions à revoir : refaites-les dans la bibliothèque pour consolider.</p>
+        </div>
+      </header>
+      <ul className="kit-list">
+        {items.map((item) => (
+          <ListItem key={`${item.trackVersionId}/${item.activityId}`} as="li"
+            href={`/espace/bibliotheque/${encodeURIComponent(item.trackVersionId)}/${encodeURIComponent(item.activityId)}`}
+            leading={<span className="study-retake-kind" aria-hidden="true"><PencilLine size={16} /></span>}
+            title={item.title}
+            subtitle={`${item.flagged.length} question${item.flagged.length > 1 ? 's' : ''} à revoir · dernier score ${item.lastResult.correct} / ${item.lastResult.total}`}
+            trailing={<><Badge tone="violet">À revoir</Badge><ArrowRight size={16} aria-hidden="true" /></>} />
+        ))}
+      </ul>
+    </section>
+  );
+}
 
 export function LessonActivity({ activity, onRenew, onComplete, busy, preview = false }: {
   activity: ActivityDetail; onRenew: () => void; onComplete: () => void; busy: boolean; preview?: boolean;
@@ -110,6 +148,7 @@ export function LessonActivity({ activity, onRenew, onComplete, busy, preview = 
       <MediaSequence placements={activityPlacements(activity)} onRenew={onRenew}
         after={activity.transcript ? <Transcript text={activity.transcript} /> : undefined} />
       {activity.lesson?.description && <LessonContent text={activity.lesson.description} />}
+      {review && activity.reviewItems && activity.reviewItems.length > 0 && <ReviewItems items={activity.reviewItems} />}
       <div className={`study-finish${activity.status === 'completed' ? ' is-done' : ''}`}>
         {activity.status === 'completed' ? (
           <p className="study-finish-done" role="status">
@@ -126,154 +165,6 @@ export function LessonActivity({ activity, onRenew, onComplete, busy, preview = 
         )}
       </div>
     </div>
-  );
-}
-
-function encouragement(percent: number | null) {
-  if (percent === null) return { title: 'Exercice terminé', text: 'Vos réponses sont enregistrées.' };
-  if (percent >= 90) return { title: 'Excellent !', text: 'Vous maîtrisez cette activité. Continuez sur cette lancée.' };
-  if (percent >= 70) return { title: 'Très bien !', text: 'Encore un petit effort et ce sera parfait.' };
-  if (percent >= 50) return { title: 'Bon travail', text: 'Relisez la consigne et les mots utiles pour consolider.' };
-  return { title: 'Ne lâchez rien', text: 'C’est en pratiquant qu’on progresse : réécoutez, relisez, puis passez à la suite.' };
-}
-
-function ExerciseResult({ grade, transcript }: { grade: Grade | null; transcript: string | null }) {
-  const percent = grade && grade.total ? Math.round((grade.correct / grade.total) * 100) : null;
-  const tone = percent === null || percent >= 70 ? 'success' : percent >= 50 ? 'brand' : 'accent';
-  const cheer = encouragement(percent);
-  return (
-    <section className={`study-result is-${tone}`} aria-label="Résultat de l’exercice">
-      <div className="study-result-head">
-        {grade ? (
-          <ProgressRing value={percent ?? 0} size={88} stroke={8} color={`var(--${tone})`} label={`${grade.correct} bonnes réponses sur ${grade.total}`}>
-            <strong className="study-result-score">{grade.correct}<small>/{grade.total}</small></strong>
-          </ProgressRing>
-        ) : <span className="study-result-icon" aria-hidden="true"><CheckCircle2 size={30} /></span>}
-        <div className="study-result-text">
-          <h3>{cheer.title}</h3>
-          {grade && <p className="study-result-line" role="status">Résultat enregistré · {grade.correct} / {grade.total}</p>}
-          <p className="study-result-note">{cheer.text}</p>
-        </div>
-      </div>
-      <Transcript text={transcript} />
-    </section>
-  );
-}
-
-/**
- * Exercice corrigé. Dans une séance, `sessionId` rattache la correction à l'activité de la séance ; sans séance
- * (bibliothèque, exercice libre), la correction est enregistrée seule et relue dans les résultats.
- */
-export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, onSaveState, onGraded, preview = false }: {
-  activity: ActivityDetail;
-  sessionId?: string;
-  token: string;
-  grade: Grade | null;
-  onRenew: () => void;
-  onSaveState: (answers: Record<string, string>) => void;
-  onGraded: (grade: Grade, answers: Record<string, string>) => Promise<void>;
-  preview?: boolean;
-}) {
-  const [answers, setAnswers] = useState<Record<string, string>>(activity.state.answers ?? {});
-  const [error, setError] = useState('');
-  const [busy, setBusy] = useState(false);
-  const [missing, setMissing] = useState<string[]>([]);
-  const key = useRef<string | null>(null);
-  const cards = useRef<Record<string, HTMLFieldSetElement | null>>({});
-  const completed = activity.status === 'completed';
-  const total = activity.questions.length;
-  const answered = activity.questions.filter((question) => answers[question.id]).length;
-  const showResult = completed || Boolean(grade);
-
-  function choose(questionId: string, optionId: string) {
-    key.current = null;
-    const next = { ...answers, [questionId]: optionId };
-    setAnswers(next);
-    setMissing((list) => list.filter((id) => id !== questionId));
-    onSaveState(next);
-  }
-
-  async function submit(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    if (busy || !activity.lesson || preview) return;
-    const left = activity.questions.filter((question) => !answers[question.id]).map((question) => question.id);
-    if (left.length) {
-      setMissing(left);
-      const card = cards.current[left[0]];
-      card?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      card?.querySelector('input')?.focus({ preventScroll: true });
-      return;
-    }
-    setBusy(true);
-    setError('');
-    key.current ??= crypto.randomUUID();
-    try {
-      const result = await requestApi<Grade>('/assessments/quiz', token, {
-        method: 'POST',
-        body: sessionId ? { lessonId: activity.lesson.id, answers, sessionId, activityId: activity.id } : { lessonId: activity.lesson.id, answers },
-        idempotencyKey: key.current,
-      });
-      await onGraded(result, answers);
-      key.current = null;
-    } catch (failure) {
-      setError(errorText(failure));
-    } finally {
-      setBusy(false);
-    }
-  }
-
-  return (
-    <form className="study-body" onSubmit={submit} noValidate>
-      {activity.lesson?.description && <LessonContent text={activity.lesson.description} />}
-      <MediaSequence placements={activityPlacements(activity)} onRenew={onRenew} after={!showResult && activity.transcript ? <Transcript text={activity.transcript} /> : undefined} />
-      {total > 0 && (
-        <div className="study-questions">
-          {activity.questions.map((question, index) => {
-            const media = questionPlacements(activity, question.id);
-            return (
-              <QuestionCard key={question.id} index={index} prompt={question.prompt} name={question.id} options={question.options}
-                value={answers[question.id]} onChoose={(optionId) => choose(question.id, optionId)} locked={completed}
-                missing={missing.includes(question.id)} cardRef={(node) => { cards.current[question.id] = node; }}
-                media={media.length > 0 ? media.map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} />) : undefined}
-                extras={(optionId) => {
-                  const list = optionPlacements(activity, question.id, optionId);
-                  if (!list.length) return undefined;
-                  const pictures = list.filter((placement) => placement.usage === 'illustration');
-                  const sounds = list.filter((placement) => placement.usage === 'audio');
-                  return {
-                    label: pictures.find((placement) => !placement.decorative && placement.alt)?.alt ?? undefined,
-                    picture: pictures.length ? pictures.map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} compact />) : undefined,
-                    audio: sounds.length ? sounds.map((placement) => <MediaPlacement key={placement.position} placement={placement} onRenew={onRenew} compact />) : undefined,
-                  };
-                }} />
-            );
-          })}
-        </div>
-      )}
-      {error && <p className="inline-message warning" role="alert">{error}</p>}
-      {missing.length > 0 && (
-        <p className="inline-message warning" role="alert">
-          {missing.length === 1 ? 'Il reste une question sans réponse.' : `Il reste ${missing.length} questions sans réponse.`}
-        </p>
-      )}
-      {showResult && <ExerciseResult grade={grade} transcript={activity.transcript} />}
-      {preview && <Callout tone="info">Aperçu : la remise et la correction sont désactivées.</Callout>}
-      {!completed && (
-        <div className="study-submit">
-          {total > 0 && (
-            <div className="study-submit-count">
-              <ProgressRing value={(answered / total) * 100} size={42} stroke={5} label={`${answered} réponses sur ${total}`}>
-                <small>{answered}/{total}</small>
-              </ProgressRing>
-              <span>{answered === total ? 'Toutes les réponses sont prêtes.' : answered === 0 ? 'Choisissez une réponse par question.' : `${answered} réponse${answered > 1 ? 's' : ''} sur ${total}`}</span>
-            </div>
-          )}
-          <button className="btn btn-primary btn-lg" type="submit" disabled={busy || preview || !total}>
-            {busy ? 'Correction…' : 'Valider mes réponses'}
-          </button>
-        </div>
-      )}
-    </form>
   );
 }
 
@@ -308,7 +199,7 @@ function StudyRail({ activities, view, finished, onGo }: {
       <ol ref={list}>
         {activities.map((activity, index) => {
           const state = stepState(activity);
-          const { icon: Icon, label } = activityKind[activity.kind];
+          const { icon: Icon, label } = activityKind(activity.kind);
           return (
             <li key={activity.id}>
               <button type="button" className={`study-step is-${state}`} aria-current={activity.id === view ? 'step' : undefined} onClick={() => onGo(activity.id)}>
@@ -380,12 +271,16 @@ function SessionComplete({ detail, grades, token }: { detail: SessionDetail; gra
           <h3>Vos exercices</h3>
           <ul className="kit-list">
             {results.map(({ activity, grade }) => (
-              <ListItem key={activity.id} as="li" title={activity.title} subtitle={activityKind[activity.kind].label}
+              <ListItem key={activity.id} as="li" title={activity.title} subtitle={activityKind(activity.kind).label}
                 leading={<ProgressRing value={grade.total ? (grade.correct / grade.total) * 100 : 0} size={40} stroke={5}
                   color={grade.total && grade.correct / grade.total >= .7 ? 'var(--success)' : 'var(--brand)'} label={`${grade.correct} sur ${grade.total}`}>
                   <small className="study-mini-score">{grade.total ? Math.round((grade.correct / grade.total) * 100) : 0}</small>
                 </ProgressRing>}
-                trailing={<Badge tone={grade.total && grade.correct / grade.total >= .7 ? 'green' : 'blue'}>{grade.correct} / {grade.total}</Badge>} />
+                trailing={<>
+                  {(grade.flagged?.length ?? 0) > 0 && <Badge tone="violet">À revoir</Badge>}
+                  {(grade.pending ?? 0) > 0 && <Badge tone="amber">En attente</Badge>}
+                  <Badge tone={grade.total && grade.correct / grade.total >= .7 ? 'green' : 'blue'}>{grade.correct} / {grade.total}</Badge>
+                </>} />
             ))}
           </ul>
         </div>
@@ -412,7 +307,8 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
   const [view, setView] = useState<string | null>(null);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [flash, setFlash] = useState<string | null>(null);
-  const saveTimer = useRef<number | undefined>(undefined);
+  /** Sauvegardes d'état en attente, une par activité (une saisie dans une activité n'annule pas celle d'une autre). */
+  const pendingSaves = useRef(new Map<string, { timer: number; run: () => void }>());
   const stage = useRef<HTMLDivElement>(null);
   const moved = useRef(false);
   const id = encodeURIComponent(sessionId);
@@ -434,7 +330,7 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
   // Ouvrir une activité la marque commencée : la séance passe « en cours » et sa reprise est possible.
   const save = useCallback(async (activityId: string, body: { state?: object; completed?: boolean; attemptId?: string }) => {
     const activity = encodeURIComponent(activityId);
-    const session = await requestApi<SessionSummary>(`/learning/sessions/${id}/activities/${activity}/progress`, token, { method: 'PUT', body });
+    const session = await requestApi<SessionSummary>(`/learning/sessions/${id}/activities/${activity}/progress`, token, { method: 'PUT', body, keepalive: true });
     setDetail((current) => current && ({
       ...current,
       session,
@@ -475,6 +371,22 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
     return () => window.clearTimeout(timer);
   }, [flash]);
 
+  // En quittant la séance (autre écran, onglet masqué ou fermé) : envoyer tout de suite les réponses en attente.
+  useEffect(() => {
+    const saves = pendingSaves.current;
+    const flush = () => {
+      for (const { timer, run } of [...saves.values()]) { window.clearTimeout(timer); run(); }
+    };
+    const hidden = () => { if (document.visibilityState === 'hidden') flush(); };
+    window.addEventListener('pagehide', flush);
+    document.addEventListener('visibilitychange', hidden);
+    return () => {
+      window.removeEventListener('pagehide', flush);
+      document.removeEventListener('visibilitychange', hidden);
+      flush();
+    };
+  }, []);
+
   // Les adresses des supports durent cinq minutes : redemander la séance les renouvelle.
   const renew = useCallback(() => setReload((value) => value + 1), []);
 
@@ -512,23 +424,38 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
     }
   }
 
-  function saveAnswers(activity: ActivityDetail, answers: Record<string, string>) {
-    // Les réponses restent affichées si l'élève change d'activité puis revient.
+  function saveAnswers(activity: ActivityDetail, state: ExerciseState) {
+    // Les réponses (et la manche) restent affichées si l'élève change d'activité puis revient.
     setDetail((current) => current && ({
       ...current,
-      activities: current.activities.map((item) => item.id === activity.id ? { ...item, state: { ...item.state, answers } } : item),
+      activities: current.activities.map((item) => item.id === activity.id ? { ...item, state } : item),
     }));
-    window.clearTimeout(saveTimer.current);
-    saveTimer.current = window.setTimeout(() => {
-      void save(activity.id, { state: { answers } }).catch(() => undefined);
-    }, 400);
+    const saves = pendingSaves.current;
+    window.clearTimeout(saves.get(activity.id)?.timer);
+    const run = () => {
+      saves.delete(activity.id);
+      void save(activity.id, { state }).catch(() => undefined);
+    };
+    saves.set(activity.id, { timer: window.setTimeout(run, 400), run });
   }
 
-  async function graded(activity: ActivityDetail, grade: Grade, answers: Record<string, string>) {
-    window.clearTimeout(saveTimer.current);
+  async function graded(activity: ActivityDetail, grade: Grade, state: ExerciseState) {
+    window.clearTimeout(pendingSaves.current.get(activity.id)?.timer);
+    pendingSaves.current.delete(activity.id);
     setGrades((current) => [grade, ...current.filter((item) => item.id !== grade.id)]);
-    await save(activity.id, { state: { answers }, completed: true, attemptId: grade.id });
+    await save(activity.id, { state, completed: true, attemptId: grade.id });
     setReload((value) => value + 1);
+  }
+
+  // Mission remise : l'activité se termine avec l'identifiant de la remise (contrôlé par Apprentissage).
+  async function missionSubmitted(activity: ActivityDetail, mission: MissionView) {
+    setActionError('');
+    try {
+      await save(activity.id, { completed: true, attemptId: mission.id });
+      setReload((value) => value + 1);
+    } catch (failure) {
+      setActionError(errorText(failure));
+    }
   }
 
   if (!detail) {
@@ -577,10 +504,15 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
             <h1 id="pilot-session-title">Séance {session.position} · {session.title}</h1>
             <p className="study-head-due"><CalendarClock size={15} aria-hidden="true" /> Avant le {formatDue(session.dueAt)} · environ {session.estimatedMinutes} min</p>
           </div>
-          {total > 0 && (
-            <div className="study-head-progress">
-              <p><strong>{completedCount}</strong> / {total} activités</p>
-              <ProgressBar value={(completedCount / total) * 100} label="Progression de la séance" />
+          {(total > 0 || detail.lexicon) && (
+            <div className="study-head-side">
+              {detail.lexicon && detail.lexicon.entries.length > 0 && <LexiconButton lexicon={detail.lexicon} onRenew={renew} />}
+              {total > 0 && (
+                <div className="study-head-progress">
+                  <p><strong>{completedCount}</strong> / {total} activités</p>
+                  <ProgressBar value={(completedCount / total) * 100} label="Progression de la séance" />
+                </div>
+              )}
             </div>
           )}
         </div>
@@ -607,7 +539,8 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
                 )}
                 <ActivityView activity={current} index={index} total={total} detail={detail} grades={grades} token={token} busy={busy}
                   onRenew={renew} onComplete={() => void completeLesson(current)}
-                  onSaveState={(answers) => saveAnswers(current, answers)} onGraded={(result, answers) => graded(current, result, answers)} />
+                  onSaveState={(state) => saveAnswers(current, state)} onGraded={(result, state) => graded(current, result, state)}
+                  onMissionSubmitted={(mission) => void missionSubmitted(current, mission)} />
                 <nav className="study-pager" aria-label="Changer d’activité">
                   <button className="btn btn-ghost" type="button" disabled={!previous} onClick={() => previous && go(previous.id, 'prev')}>
                     <ArrowLeft size={18} aria-hidden="true" /> Précédent
@@ -636,13 +569,14 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
   );
 }
 
-function ActivityView({ activity, index, total, detail, grades, token, busy, onRenew, onComplete, onSaveState, onGraded }: {
+function ActivityView({ activity, index, total, detail, grades, token, busy, onRenew, onComplete, onSaveState, onGraded, onMissionSubmitted }: {
   activity: ActivityDetail; index: number; total: number; detail: SessionDetail; grades: Grade[]; token: string; busy: boolean;
-  onRenew: () => void; onComplete: () => void; onSaveState: (answers: Record<string, string>) => void;
-  onGraded: (grade: Grade, answers: Record<string, string>) => Promise<void>;
+  onRenew: () => void; onComplete: () => void; onSaveState: (state: ExerciseState) => void;
+  onGraded: (grade: Grade, state: ExerciseState) => Promise<void>;
+  onMissionSubmitted: (mission: MissionView) => void;
 }) {
   const grade = activity.attemptId ? grades.find((item) => item.id === activity.attemptId) ?? null : null;
-  const { icon: Icon, label } = activityKind[activity.kind];
+  const { icon: Icon, label } = activityKind(activity.kind);
   return (
     <article className="study-activity" aria-labelledby={`activity-${activity.id}`}>
       <header className="study-activity-head">
@@ -653,7 +587,9 @@ function ActivityView({ activity, index, total, detail, grades, token, busy, onR
         </div>
         {activity.status === 'completed' && <span className="study-activity-done"><Badge tone="green"><Check size={13} strokeWidth={3} aria-hidden="true" /> Terminée</Badge></span>}
       </header>
-      {activity.kind === 'lesson' || activity.kind === 'review'
+      {activity.kind === 'mission'
+        ? <MissionActivity activity={activity} token={token} sessionId={detail.session.id} onSubmitted={onMissionSubmitted} onRenew={onRenew} />
+        : activity.kind === 'lesson' || activity.kind === 'review' || !(activity.kind in activityKinds)
         ? <LessonActivity activity={activity} onRenew={onRenew} busy={busy} onComplete={onComplete} />
         : activity.kind === 'assessment' && activity.questions.length === 0
           ? (

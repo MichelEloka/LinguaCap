@@ -1,13 +1,14 @@
 /**
  * Bibliothèque de l'élève (/espace/bibliotheque) : tous les niveaux de sa langue (les niveaux non publiés sont grisés),
- * modules et activités avec le dernier score, recherche, et entraînement au bilan intermédiaire. L'examen blanc, qui
- * valide un niveau, n'est jamais proposé ici : il se passe dans le parcours.
+ * modules et activités avec le dernier score et la marque « À revoir », lexique et missions de chaque module, recherche,
+ * et entraînement au bilan intermédiaire (sans corrigé). L'examen blanc, qui valide un niveau, n'est jamais proposé ici :
+ * il se passe dans le parcours.
  */
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, ClipboardCheck, Clock, Dumbbell, EyeOff, Headphones, LibraryBig, LoaderCircle, Lock, Mic,
-  PencilLine, RotateCcw, ShieldCheck, Trophy,
+  ArrowLeft, ArrowRight, BookA, BookOpen, Check, ChevronRight, ClipboardCheck, Clock, Dumbbell, EyeOff, Flag, Headphones, LibraryBig, LoaderCircle,
+  Lock, Mic, PencilLine, RotateCcw, ShieldCheck, Target, Trophy,
 } from 'lucide-react';
 import { Badge, PageHeading } from '../../components/ui';
 import { Callout, Card, ListItem, ProgressRing, SearchField, Skeleton, SplitView, useToast } from '../../design/kit';
@@ -18,11 +19,12 @@ import {
 } from '../../integration/v2';
 import { errorText, LevelMark, levelName, momentText } from '../onboarding/onboarding-kit';
 import { EmptyScene, LogoL, NightDecor } from '../pilot/learner-common';
+import { LexiconLoader } from '../pilot/study-lexicon';
 import '../pilot/learner-dashboard.css';
 import './library.css';
 
-const kindIcons = { lesson: BookOpen, exercise: PencilLine };
-const kindLabels = { lesson: 'Leçon', exercise: 'Exercice' };
+const kindIcons: Record<LibraryActivityItem['kind'], typeof BookOpen> = { lesson: BookOpen, exercise: PencilLine, mission: Target };
+const kindLabels: Record<LibraryActivityItem['kind'], string> = { lesson: 'Leçon', exercise: 'Exercice', mission: 'Mission' };
 const competenceIcons: Record<string, typeof BookOpen> = { lecture: BookOpen, ecoute: Headphones, 'expression-ecrite': PencilLine, 'expression-orale': Mic };
 
 export const scorePercent = (result: { correct: number; total: number }) => (result.total ? Math.round((result.correct / result.total) * 100) : 0);
@@ -36,6 +38,7 @@ export function activityHref(level: Pick<LibraryLevel, 'trackVersionId'>, activi
 function ActivityRow({ level, activity, module }: { level: LibraryLevel; activity: LibraryActivityItem; module?: string }) {
   const Icon = kindIcons[activity.kind] ?? BookOpen;
   const score = activity.lastResult ? scorePercent(activity.lastResult) : null;
+  const toReview = Boolean(activity.toReview);
   return (
     <ListItem as="li" href={activityHref(level, activity)}
       leading={<span className={`lib-kind is-${activity.kind}`} aria-hidden="true"><Icon size={17} /></span>}
@@ -43,9 +46,10 @@ function ActivityRow({ level, activity, module }: { level: LibraryLevel; activit
       subtitle={<>{module ? `${module} · ` : ''}{kindLabels[activity.kind] ?? 'Activité'} · {activity.estimatedMinutes} min
         {activity.competences.length > 0 && <span className="lib-skills"> · {activity.competences.map((name) => competenceLabels[name] ?? name).join(', ')}</span>}</>}
       trailing={<>
+        {toReview && <span className="lib-review-mark"><Flag size={12} aria-hidden="true" /> À revoir</span>}
         {score !== null && activity.lastResult
           ? <Badge tone={score >= 70 ? 'green' : 'amber'}>{activity.lastResult.correct}/{activity.lastResult.total}</Badge>
-          : activity.kind === 'exercise' ? <span className="lib-todo">À faire</span> : null}
+          : activity.kind === 'exercise' || activity.kind === 'mission' ? <span className="lib-todo">À faire</span> : null}
         <ChevronRight size={18} aria-hidden="true" />
       </>} />
   );
@@ -54,7 +58,11 @@ function ActivityRow({ level, activity, module }: { level: LibraryLevel; activit
 function moduleProgress(module: LibraryModule) {
   const exercises = module.activities.filter((activity) => activity.kind === 'exercise');
   const done = exercises.filter((activity) => activity.lastResult).length;
-  return { done, total: exercises.length, minutes: module.activities.reduce((sum, activity) => sum + activity.estimatedMinutes, 0) };
+  return {
+    done, total: exercises.length, minutes: module.activities.reduce((sum, activity) => sum + activity.estimatedMinutes, 0),
+    toReview: module.activities.filter((activity) => activity.toReview).length,
+    missions: module.activities.filter((activity) => activity.kind === 'mission').length,
+  };
 }
 
 /** Entraînement au bilan intermédiaire : démarrage ou reprise, dernier score et délai avant un nouvel essai. */
@@ -112,7 +120,7 @@ function PracticeCard({ level, history, token }: { level: LibraryLevel; history:
   );
 }
 
-function ModuleDetail({ level, module, onBack }: { level: LibraryLevel; module: LibraryModule; onBack: () => void }) {
+function ModuleDetail({ level, module, token, onBack }: { level: LibraryLevel; module: LibraryModule; token: string; onBack: () => void }) {
   const progress = moduleProgress(module);
   const competences = [...new Set(module.activities.flatMap((activity) => activity.competences))];
   return (
@@ -127,8 +135,16 @@ function ModuleDetail({ level, module, onBack }: { level: LibraryLevel; module: 
         <div className="lib-module-meta">
           <span><Clock size={15} aria-hidden="true" /> {formatMinutes(progress.minutes)}</span>
           <span><Trophy size={15} aria-hidden="true" /> {progress.done}/{progress.total} exercices faits</span>
+          {progress.toReview > 0 && <span className="lib-meta-review"><Flag size={15} aria-hidden="true" /> {progress.toReview} à revoir</span>}
+          {progress.missions > 0 && <span><Target size={15} aria-hidden="true" /> {progress.missions} mission{progress.missions > 1 ? 's' : ''}</span>}
+          {module.vocabularyCount > 0 && <span><BookA size={15} aria-hidden="true" /> {module.vocabularyCount} mots</span>}
           {competences.map((name) => { const Icon = competenceIcons[name] ?? BookOpen; return <span key={name} className="lib-chip"><Icon size={13} aria-hidden="true" />{competenceLabels[name] ?? name}</span>; })}
         </div>
+        {module.vocabularyCount > 0 && (
+          <div className="lib-module-tools">
+            <LexiconLoader key={`${level.trackVersionId}/${module.id}`} token={token} versionId={level.trackVersionId} moduleId={module.id} />
+          </div>
+        )}
       </header>
       <ul className="kit-list lib-activities lc-stagger">
         {module.activities.map((activity) => <ActivityRow key={activity.id} level={level} activity={activity} />)}
@@ -300,7 +316,7 @@ export function LibraryPage({ token }: { token: string }) {
                         <ListItem as="li" key={item.id} current={item.id === module.id} onClick={() => select({ module: item.id })}
                           leading={<span className="lib-module-badge" aria-hidden="true">{item.position}</span>}
                           title={item.title}
-                          subtitle={`${item.activities.length} activités · ${formatMinutes(progress.minutes)}`}
+                          subtitle={`${item.activities.length} activités · ${formatMinutes(progress.minutes)}${progress.toReview ? ` · ${progress.toReview} à revoir` : ''}`}
                           trailing={progress.total ? (
                             <ProgressRing value={(progress.done / progress.total) * 100} size={34} stroke={4} color="var(--success)"
                               label={`${progress.done} exercices faits sur ${progress.total}`}><small className="lib-ring-mini">{progress.done}</small></ProgressRing>
@@ -310,7 +326,7 @@ export function LibraryPage({ token }: { token: string }) {
                   </ul>
                 </nav>
               )}
-              detail={<ModuleDetail level={level} module={module} onBack={() => select({ module: null })} />} />
+              detail={<ModuleDetail level={level} module={module} token={token} onBack={() => select({ module: null })} />} />
           ) : (
             <Card><EmptyScene art="books" title="Ce niveau n’a pas encore de module" description="Ses modules apparaîtront ici dès leur publication." /></Card>
           )}

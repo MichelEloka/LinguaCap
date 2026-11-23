@@ -1,0 +1,1091 @@
+{
+  "id": "a1-hallo-atelier",
+  "title": "Faire connaissance au premier cours",
+  "objective": "Donner son nom, son origine et sa ville, poser les mêmes questions et demander de répéter.",
+  "prerequisites": [
+    "a1-hallo"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-hallo-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "herkunft",
+      "word": "Herkunft",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’origine",
+      "example": "Herkunft: Marokko.",
+      "note": "sur une fiche",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "wohnort",
+      "word": "Wohnort",
+      "article": "der",
+      "plural": "Wohnorte",
+      "partOfSpeech": "noun",
+      "translation": "le lieu de résidence",
+      "example": "Wohnort: Bonn.",
+      "note": "sur une fiche",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "vorname",
+      "word": "Vorname",
+      "article": "der",
+      "plural": "Vornamen",
+      "partOfSpeech": "noun",
+      "translation": "le prénom",
+      "example": "Vorname: Mira.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "kurs",
+      "word": "Kurs",
+      "article": "der",
+      "plural": "Kurse",
+      "partOfSpeech": "noun",
+      "translation": "le cours",
+      "example": "Der Kurs beginnt heute.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "jetzt",
+      "word": "jetzt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "maintenant",
+      "example": "Jetzt wohne ich in Aachen.",
+      "note": "en tête de phrase, le sujet passe après le verbe",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ein-bisschen",
+      "word": "ein bisschen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "un peu",
+      "example": "Ich spreche ein bisschen Deutsch.",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "deutsch",
+      "word": "Deutsch",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’allemand (la langue)",
+      "example": "Ich lerne Deutsch.",
+      "note": "sans article dans : Ich spreche Deutsch.",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "franzoesisch",
+      "word": "Französisch",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le français (la langue)",
+      "example": "Karim spricht Französisch.",
+      "note": "sans article dans : Ich spreche Französisch.",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "freut-mich-auch",
+      "word": "Freut mich auch!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Enchanté(e) aussi !",
+      "example": "Freut mich! – Freut mich auch!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "und-du",
+      "word": "Und du?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Et toi ?",
+      "example": "Ich komme aus Marokko. Und du?",
+      "note": "poli : Und Sie?",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "bis-morgen",
+      "word": "Bis morgen!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À demain !",
+      "example": "Tschüs, Nora! Bis morgen!",
+      "note": null,
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "welche-sprachen",
+      "word": "Welche Sprachen sprichst du?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Quelles langues parles-tu ?",
+      "example": "Welche Sprachen sprichst du? – Deutsch und Französisch.",
+      "note": "poli : Welche Sprachen sprechen Sie?",
+      "audio": {
+        "media": "a1-hallo-atelier-lexique",
+        "line": 11
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-hallo-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : se présenter et poser trois questions",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : se présenter et poser trois questions",
+        "description": "FAIRE CONNAISSANCE · 15 MIN\n\n1. Lire une présentation (5 min). Voici la présentation d’une nouvelle élève : « Guten Morgen! Ich heiße Lina. Ich komme aus Frankreich. Jetzt wohne ich in Aachen. Ich spreche Französisch und ein bisschen Deutsch. » Repérez son prénom, son pays d’origine, sa ville actuelle et ses langues, sans traduire chaque mot. Relisez à voix haute en marquant une pause à chaque point.\n\n2. Les trois questions (5 min). « Wie heißt du? » demande le nom, « Woher kommst du? » l’origine et « Wo wohnst du? » le lieu de vie. « Aus Frankreich » répond à woher, « in Aachen » répond à wo. Avec un adulte que l’on vouvoie, on dit : « Wie heißen Sie? », « Woher kommen Sie? », « Wo wohnen Sie? ». Remarquez aussi « Jetzt wohne ich in Aachen » : quand jetzt ouvre la phrase, le sujet passe après le verbe.\n\n3. Faire répéter (5 min). Lisez les deux rôles à voix haute : « Hallo, ich heiße Bo. » / « Wie bitte? » / « Bo. B–O. » / « Danke! Ich heiße Lina. Freut mich! ». Distinguez la salutation, l’information et la réaction. Redites la scène avec votre prénom, en l’épelant après « Wie bitte? ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-hallo-atelier-bo",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-hallo-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : Nora et Karim font connaissance",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : Nora et Karim font connaissance",
+        "description": "LA SCÈNE · 12 MIN\n\nNora et Karim font connaissance avant le cours.\n\n1. Première écoute (3 min). Sans lire la transcription : qui vient d’où ? Qui habite où ?\n2. Deuxième écoute (4 min). Lisez la transcription en même temps. Repérez les trois questions (Wie heißt du? Woher kommst du? Wo wohnst du?) et la demande de répétition : « Wie bitte? Welche Sprachen sprichst du? ».\n3. Du ou Sie (3 min). Observez le tableau : avec Sie, le verbe se termine par -en et Sie prend une majuscule.\n4. Répéter (2 min). Répétez les répliques de Karim pendant les pauses, puis redites-les avec vos propres informations.\n\nDU → SIE\n• Wie heißt du? → Wie heißen Sie?\n• Woher kommst du? → Woher kommen Sie?\n• Wo wohnst du? → Wo wohnen Sie?\n• Welche Sprachen sprichst du? → Welche Sprachen sprechen Sie?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-hallo-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-hallo-atelier-fragen",
+          "usage": "illustration",
+          "caption": "du : -st, -t · Sie : -en",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-hallo-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : fiches et questions",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : fiches et questions",
+        "description": "Réécoutez la scène entre Nora et Karim, sans la transcription, et complétez leurs fiches. Ensuite, réutilisez les questions avec Sie, aus et in. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-hallo-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez la fiche de Karim.",
+          "text": "Herkunft: [[1]] · Wohnort: [[2]] · Sprachen: Deutsch und [[3]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Marokko"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Köln"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Französisch"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ],
+          "explanation": "Karim dit « Ich komme aus Marokko », « In Köln » et « Deutsch und Französisch ». Herkunft est l’origine et Wohnort le lieu de vie : ne les intervertissez pas."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez la fiche de Nora.",
+          "text": "Herkunft: [[1]] · Wohnort: [[2]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Portugal"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bonn"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Nora répond « Aus Portugal. Ich wohne jetzt in Bonn. » : aus donne l’origine, wohnen in le lieu de vie. Köln est la ville de Karim."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Vous parlez à une personne que vous vouvoyez. Complétez les questions.",
+          "text": "Wie [[1]] Sie? Woher [[2]] Sie? Wo [[3]] Sie?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "heißen"
+              ],
+              "size": 8,
+              "hint": "heißen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kommen"
+              ],
+              "size": 8,
+              "hint": "kommen"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "wohnen"
+              ],
+              "size": 8,
+              "hint": "wohnen"
+            }
+          ],
+          "explanation": "Avec Sie, le verbe prend la terminaison -en, comme à l’infinitif : heißen, kommen, wohnen. Avec du, on aurait heißt, kommst, wohnst."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Complétez avec aus ou in.",
+          "text": "Ich komme [[1]] Portugal. Ich wohne jetzt [[2]] Bonn.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "aus"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "in"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "Kommen aus indique l’origine, wohnen in le lieu où l’on habite. « Ich wohne aus Bonn » est une faute fréquente : aus ne sert qu’à dire d’où l’on vient."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre, en commençant par « Jetzt ».",
+          "answers": [
+            [
+              "Jetzt",
+              "wohne",
+              "ich",
+              "in",
+              "Aachen."
+            ]
+          ],
+          "explanation": "Quand jetzt ouvre la phrase, le verbe reste en 2e position et le sujet ich passe derrière : Jetzt wohne ich in Aachen. « Jetzt ich wohne » est la faute typique."
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Associez chaque réplique à la réaction qui convient.",
+          "pairs": [
+            {
+              "left": "Ich heiße Karim.",
+              "right": "Freut mich!"
+            },
+            {
+              "left": "Wie bitte?",
+              "right": "Karim. K, A, R, I, M."
+            },
+            {
+              "left": "Woher kommst du?",
+              "right": "Aus Marokko. Und du?"
+            },
+            {
+              "left": "Bis morgen, Nora!",
+              "right": "Tschüs, bis morgen!"
+            }
+          ],
+          "explanation": "On répond à une présentation par Freut mich!, à Wie bitte? en répétant ou en épelant, à Woher par aus + pays, et à Bis morgen par une formule de départ."
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Karim dit « Bis morgen, Nora! ». Que veut-il dire ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "À demain, Nora !",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "À tout à l’heure, Nora !",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bonjour, Nora !",
+              "correct": false
+            }
+          ],
+          "explanation": "Morgen veut dire « demain » : bis morgen, c’est « à demain ». « À tout à l’heure » se dirait bis später, et pour saluer en arrivant on dit Hallo."
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : faire connaissance",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : faire connaissance",
+        "description": "Écoutez chaque modèle, puis dites la phrase sans vous presser. Vous pourrez ensuite redire ces phrases avec vos propres informations.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-hallo-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-hallo-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hallo! Ich heiße Nora. Wie heißt du?",
+          "accept": [
+            "Hallo! Ich heiße Nora. Wie heißt du?"
+          ],
+          "explanation": "Dans heiße et heißt, ei se dit « aï » et ß se prononce comme un s dur. La voix descend à la fin de la question.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Freut mich auch! Woher kommst du?",
+          "accept": [
+            "Freut mich auch! Woher kommst du?"
+          ],
+          "explanation": "Eu se dit « oï » dans freut. Le ch de mich et de auch n’est pas le même : doux après i, au fond de la gorge après au.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich komme aus Marokko. Und du?",
+          "accept": [
+            "Ich komme aus Marokko. Und du?"
+          ],
+          "explanation": "Accentuez la deuxième syllabe de Marokko (ma-ROK-ko). « Und du? » renvoie la question avec une voix qui monte.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich wohne jetzt in Bonn.",
+          "accept": [
+            "Ich wohne jetzt in Bonn."
+          ],
+          "explanation": "W se dit comme un v : « vône ». Jetzt commence par le son « y » et se termine par « tst ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie bitte? Welche Sprachen sprichst du?",
+          "accept": [
+            "Wie bitte? Welche Sprachen sprichst du?"
+          ],
+          "explanation": "Sp se dit « chp » au début de Sprachen et de sprichst. Le ch de Sprachen, après a, se forme au fond de la gorge.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie heißen Sie? Woher kommen Sie?",
+          "accept": [
+            "Wie heißen Sie? Woher kommen Sie?"
+          ],
+          "explanation": "Avec Sie, les verbes se terminent par -en. Sie se prononce « zi » : le s devant une voyelle est sonore.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : faire connaissance",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : faire connaissance",
+        "description": "Écoutez la scène une première fois pour la situation, puis lisez les questions et réécoutez pour les détails. Les deux dernières questions vous demandent de réutiliser les formules. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-hallo-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quel prénom la première personne donne-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nora",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Laura",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Karim",
+              "correct": false
+            }
+          ],
+          "explanation": "La première voix dit « Hallo! Ich heiße Nora ». Karim est le prénom de l’autre personne, et Laura n’est jamais prononcé.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : d’où vient Karim ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "D’Allemagne",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Du Maroc",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Du Portugal",
+              "correct": false
+            }
+          ],
+          "explanation": "À la question « Woher kommst du? », Karim répond « Ich komme aus Marokko ». Le Portugal est le pays de Nora.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : dans quelle ville Nora habite-t-elle maintenant ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Köln",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Berlin",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bonn",
+              "correct": true
+            }
+          ],
+          "explanation": "Nora dit « Ich wohne jetzt in Bonn » : jetzt (maintenant) annonce sa ville actuelle. Köln est la ville de Karim.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : quelles langues parle Karim ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "L’allemand et le français",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le français et le portugais",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’allemand et l’anglais",
+              "correct": false
+            }
+          ],
+          "explanation": "Karim dit deux fois « Deutsch und Französisch », la seconde fois après « Wie bitte? ». Personne ne parle portugais ni anglais dans la scène.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Tu parles à une personne que tu vouvoies. Comment demandes-tu son nom ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wo wohnen Sie?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wie heißen Sie?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wie heißt du?",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour vouvoyer, on emploie Sie et le verbe en -en : Wie heißen Sie? « Wie heißt du? » tutoie, et « Wo wohnen Sie? » demande le lieu de vie, pas le nom.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Tu habites à Bremen. Quelle phrase le dit ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich komme aus Bremen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich heiße Bremen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich wohne in Bremen.",
+              "correct": true
+            }
+          ],
+          "explanation": "Wohnen in indique la ville où l’on habite : Ich wohne in Bremen. « Ich komme aus Bremen » dirait qu’on vient de Brême, et heißen sert à donner son nom.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-hallo-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : faire connaissance au premier cours",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : faire connaissance au premier cours",
+        "description": "Premier jour du cours : Mira, une nouvelle participante, s’assoit à côté de vous. Vous vous présentez, vous lui posez des questions et vous faites répéter ce que vous n’avez pas compris. Ensuite, vous présentez Mira au groupe par écrit, d’après sa fiche.\n\nMODÈLE\n– Hallo! Ich heiße Karim. Wie heißt du?\n– Ich heiße Mira.\n– Wie bitte?\n– Mira. M, I, R, A.\n– Freut mich, Mira! Woher kommst du?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-hallo-atelier-steckbrief",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre partie de la conversation avec Mira : saluez, dites votre nom, votre origine et votre ville, puis posez-lui trois questions (nom, origine, ville ou langues). Faites-lui répéter une réponse avec « Wie bitte? ».",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez la présentation de Mira à la première personne, d’après sa fiche, comme si elle parlait (Ich heiße …). Ajoutez une phrase sur vous : Ich heiße …, ich komme aus …",
+          "maxChars": 500,
+          "minWords": 20
+        },
+        "checklist": [
+          "J’ai posé les trois questions avec du : Wie heißt du? Woher kommst du? Wo wohnst du?",
+          "J’ai fait répéter une réponse avec « Wie bitte? ».",
+          "J’ai employé aus pour l’origine et in pour la ville (Ich komme aus Italien, ich wohne in Bonn).",
+          "Dans chaque phrase écrite, le verbe conjugué est en deuxième position."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-hallo-atelier-dialogue",
+      "kind": "audio",
+      "title": "Faire connaissance au premier cours · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hallo! Ich heiße Nora. Wie heißt du?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ich heiße Karim. Freut mich!"
+        },
+        {
+          "voice": "frau",
+          "text": "Freut mich auch! Woher kommst du?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ich komme aus Marokko. Und du?"
+        },
+        {
+          "voice": "frau",
+          "text": "Aus Portugal. Ich wohne jetzt in Bonn. Wo wohnst du?"
+        },
+        {
+          "voice": "mann",
+          "text": "In Köln. Ich spreche Deutsch und Französisch."
+        },
+        {
+          "voice": "frau",
+          "text": "Wie bitte? Welche Sprachen sprichst du?"
+        },
+        {
+          "voice": "mann",
+          "text": "Deutsch und Französisch. Bis morgen, Nora!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-hallo-atelier-bo",
+      "kind": "image",
+      "title": "Faire répéter un prénom",
+      "alt": "Au premier cours, Bo dit « Hallo, ich heiße Bo. » et Lina, qui n’a pas compris, répond « Wie bitte? ». En haut : un livre ouvert et un crayon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Bo",
+            "say": "Hallo, ich heiße Bo."
+          },
+          {
+            "name": "Lina",
+            "say": "Wie bitte?"
+          }
+        ],
+        "items": [
+          "book-open",
+          "pencil"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-hallo-atelier-fragen",
+      "kind": "image",
+      "title": "Les trois questions, avec du et avec Sie",
+      "alt": "Tableau à deux colonnes, du et Sie : « Wie heißt du? / Wie heißen Sie? », « Woher kommst du? / Woher kommen Sie? », « Wo wohnst du? / Wo wohnen Sie? ». La terminaison du verbe est en couleur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "table",
+        "icon": "messages-square",
+        "title": "Fragen: du oder Sie?",
+        "subtitle": "Name · Herkunft · Wohnort",
+        "columns": [
+          "du",
+          "Sie"
+        ],
+        "rows": [
+          [
+            "Wie heiß[t] du?",
+            "Wie heiß[en] Sie?"
+          ],
+          [
+            "Woher komm[st] du?",
+            "Woher komm[en] Sie?"
+          ],
+          [
+            "Wo wohn[st] du?",
+            "Wo wohn[en] Sie?"
+          ]
+        ],
+        "rowIcons": [
+          "user-round",
+          "earth",
+          "house"
+        ],
+        "size": 31,
+        "center": true
+      }
+    },
+    {
+      "key": "v4-a1-hallo-atelier-steckbrief",
+      "kind": "image",
+      "title": "La fiche de Mira",
+      "alt": "Fiche « Steckbrief » remplie : Vorname Mira, Herkunft Italien, Wohnort Bonn, Sprache Italienisch. En dessous : « Ich heiße Mira. Ich komme aus Italien. Ich wohne in Bonn. Ich spreche Italienisch. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "form",
+        "icon": "id-card",
+        "title": "Steckbrief",
+        "fields": [
+          {
+            "label": "Vorname",
+            "value": "Mira"
+          },
+          {
+            "label": "Herkunft",
+            "value": "Italien"
+          },
+          {
+            "label": "Wohnort",
+            "value": "Bonn"
+          },
+          {
+            "label": "Sprache",
+            "value": "Italienisch"
+          }
+        ],
+        "lines": [
+          "Ich heiße Mira. Ich komme [aus] Italien. Ich wohne [in] Bonn. Ich spreche Italienisch."
+        ],
+        "size": 34
+      }
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hallo! Ich heiße Nora. Wie heißt du?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Freut mich auch! Woher kommst du?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich komme aus Marokko. Und du?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich wohne jetzt in Bonn."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie bitte? Welche Sprachen sprichst du?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : faire connaissance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie heißen Sie? Woher kommen Sie?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-hallo-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Faire connaissance au premier cours",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Herkunft"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Wohnort, die Wohnorte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vorname, die Vornamen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kurs, die Kurse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "jetzt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ein bisschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Deutsch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Französisch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Freut mich auch!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Und du?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bis morgen!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Welche Sprachen sprichst du?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

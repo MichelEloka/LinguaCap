@@ -1,39 +1,11 @@
 {
   "levelId": "a2",
-  "modules": [
-    {
-      "id": "a2-reisen",
-      "file": "01-reisen.json"
-    },
-    {
-      "id": "a2-gesundheit",
-      "file": "02-gesundheit.json"
-    },
-    {
-      "id": "a2-wohnen",
-      "file": "03-wohnen.json"
-    },
-    {
-      "id": "a2-arbeit",
-      "file": "04-arbeit.json"
-    },
-    {
-      "id": "a2-beziehungen",
-      "file": "05-beziehungen.json"
-    },
-    {
-      "id": "a2-kultur",
-      "file": "06-kultur.json"
-    },
-    {
-      "id": "a2-berlin",
-      "file": "07-berlin.json"
-    },
-    {
-      "id": "a2-einkaufen",
-      "file": "08-einkaufen.json"
-    }
-  ],
+  "format": 4,
+  "layer": "content/v4/pedagogy/a2/_level.mjs",
+  "activityMinutes": {
+    "min": 2050,
+    "max": 2200
+  },
   "settings": {
     "expectedCompetences": [
       "lecture",
@@ -434,8 +406,8 @@
   "assessments": [
     {
       "kind": "midterm",
-      "title": "Bilan intermédiaire A2 : modules 1 à 4",
-      "description": "Bilan de 40 minutes sur les modules Reisen, Gesundheit, Wohnen et Arbeit : lecture (10 min), écoute (10 min), expression écrite (12 min) et expression orale (8 min). Les quatre compétences ont le même poids dans la note.",
+      "title": "Bilan intermédiaire A2 : modules 1 à 10",
+      "description": "Bilan de 40 minutes sur la première moitié du parcours : voyages, santé, logement, démarches et réparations, travail. Lecture (10 min), écoute (10 min), expression écrite (12 min) et expression orale (8 min). Les quatre compétences ont le même poids dans la note.",
       "parts": [
         {
           "id": "bilan-lesen",
@@ -726,7 +698,7 @@
           "criteria": [],
           "placements": [
             {
-              "media": "a2-bilan-hoeren-audio",
+              "media": "a2-bilan-hoeren-audio-v3",
               "usage": "audio",
               "caption": "Quatre scènes du quotidien",
               "transcriptVisibility": "hidden"
@@ -800,7 +772,7 @@
     {
       "kind": "final",
       "title": "Examen blanc A2",
-      "description": "Examen blanc de 75 minutes sur l’ensemble des huit modules, dans l’esprit d’un examen A2 officiel : lecture (20 min), écoute (15 min), expression écrite (20 min) et expression orale (20 min, préparation comprise). Les quatre compétences ont le même poids. Pour réussir, il faut au moins 60 % au total, sans compétence sous 30 %.",
+      "description": "Examen blanc de 75 minutes sur les grands thèmes du niveau A2, dans l’esprit d’un examen A2 officiel : lecture (20 min), écoute (15 min), expression écrite (20 min) et expression orale (20 min, préparation comprise). Les quatre compétences ont le même poids. Pour réussir, il faut au moins 60 % au total, sans compétence sous 30 %.",
       "parts": [
         {
           "id": "examen-lesen",
@@ -1247,7 +1219,7 @@
           "criteria": [],
           "placements": [
             {
-              "media": "a2-examen-hoeren-audio",
+              "media": "a2-examen-hoeren-audio-v3",
               "usage": "audio",
               "caption": "Quatre scènes : message, magasin, amis, radio",
               "transcriptVisibility": "hidden"
@@ -1344,7 +1316,7 @@
       }
     },
     {
-      "key": "a2-bilan-hoeren-audio",
+      "key": "a2-bilan-hoeren-audio-v3",
       "kind": "audio",
       "title": "Bilan A2 — quatre scènes du quotidien",
       "script": [
@@ -1493,7 +1465,10 @@
           "name": "Tom",
           "text": "Ganz gut, glaube ich. Die Stelle ist interessant, weil ich viel reisen kann. Aber ich weiß noch nicht, ob ich sie bekomme."
         }
-      ]
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "audioProfile": "a2-suite"
     },
     {
       "key": "a2-examen-lesen-bild",
@@ -1523,7 +1498,7 @@
       }
     },
     {
-      "key": "a2-examen-hoeren-audio",
+      "key": "a2-examen-hoeren-audio-v3",
       "kind": "audio",
       "title": "Examen blanc A2 — message, magasin, amis et radio",
       "script": [
@@ -1648,7 +1623,92 @@
           "name": "Radio",
           "text": "Und das Wetter am Samstag? Am Vormittag bleibt es trocken, aber kühl, bei zwölf Grad. Am Nachmittag kommt Regen. Also: Nehmen Sie eine warme Jacke mit!"
         }
-      ]
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "audioProfile": "a2-suite"
+    }
+  ],
+  "modules": [
+    {
+      "id": "a2-reisen",
+      "file": "01-a2-reisen.json"
+    },
+    {
+      "id": "a2-reisen-atelier",
+      "file": "02-a2-reisen-atelier.json"
+    },
+    {
+      "id": "a2-gesundheit",
+      "file": "03-a2-gesundheit.json"
+    },
+    {
+      "id": "a2-gesundheit-atelier",
+      "file": "04-a2-gesundheit-atelier.json"
+    },
+    {
+      "id": "a2-wohnen",
+      "file": "05-a2-wohnen.json"
+    },
+    {
+      "id": "a2-wohnen-atelier",
+      "file": "06-a2-wohnen-atelier.json"
+    },
+    {
+      "id": "a2-demarches",
+      "file": "07-a2-demarches.json"
+    },
+    {
+      "id": "a2-reparations",
+      "file": "08-a2-reparations.json"
+    },
+    {
+      "id": "a2-arbeit",
+      "file": "09-a2-arbeit.json"
+    },
+    {
+      "id": "a2-arbeit-atelier",
+      "file": "10-a2-arbeit-atelier.json"
+    },
+    {
+      "id": "a2-connecteurs",
+      "file": "11-a2-connecteurs.json"
+    },
+    {
+      "id": "a2-beziehungen",
+      "file": "12-a2-beziehungen.json"
+    },
+    {
+      "id": "a2-beziehungen-atelier",
+      "file": "13-a2-beziehungen-atelier.json"
+    },
+    {
+      "id": "a2-verbes-prepositions",
+      "file": "14-a2-verbes-prepositions.json"
+    },
+    {
+      "id": "a2-kultur",
+      "file": "15-a2-kultur.json"
+    },
+    {
+      "id": "a2-kultur-atelier",
+      "file": "16-a2-kultur-atelier.json"
+    },
+    {
+      "id": "a2-berlin",
+      "file": "17-a2-berlin.json"
+    },
+    {
+      "id": "a2-berlin-atelier",
+      "file": "18-a2-berlin-atelier.json"
+    },
+    {
+      "id": "a2-einkaufen",
+      "file": "19-a2-einkaufen.json"
+    },
+    {
+      "id": "a2-einkaufen-atelier",
+      "file": "20-a2-einkaufen-atelier.json"
     }
   ]
 }

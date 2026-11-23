@@ -1,0 +1,3144 @@
+{
+  "id": "a1-familie",
+  "title": "Herzlichen Glückwunsch ! Famille et fêtes",
+  "objective": "Présenter sa famille et sa situation familiale, employer les possessifs (mein, dein, sein, ihr, unser, euer) au nominatif et à l’accusatif, dire les mois, les saisons et une date, connaître les grandes fêtes allemandes, féliciter quelqu’un et écrire une invitation.",
+  "prerequisites": [
+    "a1-freizeit-atelier"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "Deutsch im Blick, Kapitel 5 « Familie, Feste und Feiertage » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Die Familie, Wie ist meine Familie?, Feiertage & Feste, Feiern & Beziehungen)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre « Die Heimat », partie A (sondage de rue « Was bedeutet Heimat für Sie? », présentation de deux photos ou objets qui évoquent la Heimat, entretien avec un partenaire, stratégies pour continuer à parler allemand) et partie D (Heimweh et lieux personnels)",
+    "Deutsch im Blick, Kapitel 5 et 6 (COERLL, Université du Texas à Austin) : enregistrements natifs voc_05_01_family, voc_05_03_holidays, pho_05_01_dipthongs, pho_05_02_ie-vs-ei et pho_05_03_tripthongs ; photos k06/034-136, k05/019-067, k05/021-077 et k05/020-071 (CC BY 4.0)"
+  ],
+  "grammarFocus": [
+    "possessivartikel"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-familie.mjs",
+  "vocabulary": [
+    {
+      "id": "familie",
+      "word": "Familie",
+      "article": "die",
+      "plural": "Familien",
+      "partOfSpeech": "noun",
+      "translation": "la famille",
+      "example": "Meine Familie ist groß.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "vater",
+      "word": "Vater",
+      "article": "der",
+      "plural": "Väter",
+      "partOfSpeech": "noun",
+      "translation": "le père",
+      "example": "Mein Vater heißt Klaus.",
+      "note": "familier : Papa",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "mutter",
+      "word": "Mutter",
+      "article": "die",
+      "plural": "Mütter",
+      "partOfSpeech": "noun",
+      "translation": "la mère",
+      "example": "Meine Mutter heißt Petra.",
+      "note": "familier : Mama",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "eltern",
+      "word": "Eltern",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les parents",
+      "example": "Meine Eltern wohnen in Köln.",
+      "note": "toujours au pluriel",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "bruder",
+      "word": "Bruder",
+      "article": "der",
+      "plural": "Brüder",
+      "partOfSpeech": "noun",
+      "translation": "le frère",
+      "example": "Ich habe einen Bruder.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "schwester",
+      "word": "Schwester",
+      "article": "die",
+      "plural": "Schwestern",
+      "partOfSpeech": "noun",
+      "translation": "la sœur",
+      "example": "Meine Schwester ist ledig.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "geschwister",
+      "word": "Geschwister",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les frères et sœurs",
+      "example": "Hast du Geschwister?",
+      "note": "toujours au pluriel",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "sohn",
+      "word": "Sohn",
+      "article": "der",
+      "plural": "Söhne",
+      "partOfSpeech": "noun",
+      "translation": "le fils",
+      "example": "Wir haben einen Sohn.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "tochter",
+      "word": "Tochter",
+      "article": "die",
+      "plural": "Töchter",
+      "partOfSpeech": "noun",
+      "translation": "la fille (enfant)",
+      "example": "Das ist ihre Tochter Lina.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "kind",
+      "word": "Kind",
+      "article": "das",
+      "plural": "Kinder",
+      "partOfSpeech": "noun",
+      "translation": "l’enfant",
+      "example": "Ich habe ein Kind.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "grosseltern",
+      "word": "Großeltern",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les grands-parents",
+      "example": "Wir essen bei meinen Großeltern.",
+      "note": "toujours au pluriel ; familier : Oma und Opa",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "onkel",
+      "word": "Onkel",
+      "article": "der",
+      "plural": "Onkel",
+      "partOfSpeech": "noun",
+      "translation": "l’oncle",
+      "example": "Mein Onkel spielt Gitarre.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "tante",
+      "word": "Tante",
+      "article": "die",
+      "plural": "Tanten",
+      "partOfSpeech": "noun",
+      "translation": "la tante",
+      "example": "Meine Tante wohnt in Wien.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "verheiratet",
+      "word": "verheiratet",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "marié(e)",
+      "example": "Felix ist verheiratet.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "ledig",
+      "word": "ledig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "célibataire",
+      "example": "Meine Schwester ist ledig.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "geburtstag",
+      "word": "Geburtstag",
+      "article": "der",
+      "plural": "Geburtstage",
+      "partOfSpeech": "noun",
+      "translation": "l’anniversaire",
+      "example": "Wann hast du Geburtstag?",
+      "note": "Geburtstag haben : avoir son anniversaire",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "feiern",
+      "word": "feiern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "fêter, faire la fête",
+      "example": "Am Sonntag feiern wir zusammen.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "geschenk",
+      "word": "Geschenk",
+      "article": "das",
+      "plural": "Geschenke",
+      "partOfSpeech": "noun",
+      "translation": "le cadeau",
+      "example": "Ich habe ein Geschenk für dich.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "einladung",
+      "word": "Einladung",
+      "article": "die",
+      "plural": "Einladungen",
+      "partOfSpeech": "noun",
+      "translation": "l’invitation",
+      "example": "Danke für die Einladung!",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "einladen",
+      "word": "einladen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "inviter",
+      "example": "Ich möchte dich zu meiner Party einladen.",
+      "note": "séparable : ein|laden ; ich lade dich ein",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "monat",
+      "word": "Monat",
+      "article": "der",
+      "plural": "Monate",
+      "partOfSpeech": "noun",
+      "translation": "le mois",
+      "example": "Welcher Monat ist das?",
+      "note": "tous les mois sont masculins : der Mai",
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "jahr",
+      "word": "Jahr",
+      "article": "das",
+      "plural": "Jahre",
+      "partOfSpeech": "noun",
+      "translation": "l’année, l’an",
+      "example": "Frohes neues Jahr!",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "datum",
+      "word": "Datum",
+      "article": "das",
+      "plural": "Daten",
+      "partOfSpeech": "noun",
+      "translation": "la date",
+      "example": "Welches Datum ist heute?",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "herzlichen-glueckwunsch",
+      "word": "Herzlichen Glückwunsch!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Félicitations ! Joyeux anniversaire !",
+      "example": "Herzlichen Glückwunsch zum Geburtstag!",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "frohe-weihnachten",
+      "word": "Frohe Weihnachten!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Joyeux Noël !",
+      "example": "Frohe Weihnachten und bis bald!",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-familie-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : la famille",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : la famille",
+        "description": "Pour parler de la famille, on demande : « Hast du Geschwister? » (As-tu des frères et sœurs ?) ou « Wie groß ist deine Familie? » (Ta famille est-elle grande ?).\n\nLES PARENTS ET LES ENFANTS\n• der Vater — le père   • die Mutter — la mère\n• die Eltern — les parents (toujours au pluriel)\n• der Sohn — le fils   • die Tochter — la fille\n• das Kind (die Kinder) — l’enfant   • das Baby — le bébé\n• der Bruder — le frère   • die Schwester — la sœur\n• die Geschwister — les frères et sœurs\nEn famille, on dit souvent Mama, Papa, Oma et Opa.\n\nLA FAMILLE ÉLARGIE\n• der Großvater (Opa) — le grand-père   • die Großmutter (Oma) — la grand-mère\n• die Großeltern — les grands-parents\n• der Enkel / die Enkelin — le petit-fils / la petite-fille\n• der Onkel — l’oncle   • die Tante — la tante\n• der Cousin / die Cousine — le cousin / la cousine\n• der Neffe / die Nichte — le neveu / la nièce\n\nLE COUPLE\n• der Mann — le mari (et aussi : l’homme)\n• die Frau — la femme, l’épouse\n• der Freund / die Freundin — l’ami / l’amie, mais aussi le petit ami / la petite amie\n\nDÉCRIRE SA FAMILLE\n• Ich bin verheiratet / ledig / geschieden. — Je suis marié(e) / célibataire / divorcé(e).\n• Ich habe zwei Kinder, einen Sohn und eine Tochter.\n• Ich habe einen Bruder und eine Schwester.\n• Ich habe keine Geschwister. Ich bin Einzelkind. — Je suis enfant unique.\n• Meine Familie ist groß / klein.\n• Mein Opa ist lustig (drôle). Meine Schwester ist sympathisch (sympathique).\n\nBON À SAVOIR\n« Geschwister » désigne l’ensemble des frères et sœurs : le français n’a pas de mot unique pour cela. Après « haben », l’article est à l’accusatif : Ich habe einen Bruder (der Bruder), eine Schwester (die Schwester), ein Kind (das Kind).\n\nÉcoutez l’enregistrement et répétez chaque mot avec son article.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-personen-bild",
+          "usage": "illustration",
+          "caption": "Masculin (der) et féminin (die)",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "Die Familie",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les mots de la famille",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-aussprache",
+      "kind": "lesson",
+      "title": "Aussprache : ei, ie, eu, au",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Aussprache — Les diphtongues ei, ie, eu, au",
+        "description": "Dans « Einzelkind », « Neujahr » ou « Haus », deux voyelles se fondent en un seul son glissé : c’est une diphtongue. Le piège, pour un francophone, est de lire ces lettres comme en français. Lisez les règles, puis écoutez les trois enregistrements de locuteurs natifs et répétez chaque mot.\n\nAU = [aou]\nOuvrez grand la bouche sur « a », puis arrondissez les lèvres vers « ou », dans la même syllabe : das Haus, die Maus, laufen (courir). Ne dites jamais « o » comme dans le français « au » : Haus ne se prononce pas comme « os ».\n\nEI ET AI = [aï]\nPartez de « a » et glissez vers « i » : das Einzelkind, der Freitag, im Mai. Ne dites jamais « è » comme dans « neige » : mein, zwei, heiraten (se marier).\n\nEU ET ÄU = [oï]\nPartez d’un « o » ouvert et glissez vers « i » : das Neujahr, deutsch, du läufst (tu cours). « eu » ne se prononce jamais comme dans « deux ». « äu » sonne exactement comme « eu » : das Haus → die Häuser, laufen → du läufst.\n\nIE OU EI ? LE PIÈGE\n• ie = un « i » long, comme dans « lit » : lieben (aimer), die Geliebte (la bien-aimée), die Schwiegermutter (la belle-mère), das Genie (le génie), das Bier (la bière).\n• ei = [aï] : bleiben (rester), der Freitag (le vendredi), schweigen (se taire), langweilig (ennuyeux), heiraten (se marier).\nDans l’enregistrement 2, les mots vont par paires : d’abord un mot en ie, puis un mot en ei.\n\nLES TRIPHTONGUES (POUR LE PLAISIR)\nTrois voyelles dans une seule syllabe, surtout dans des onomatopées et quelques verbes : Miau (le miaou du chat), jauchzen (pousser des cris de joie), jaulen (hurler, pour un chien), klauen (piquer, voler : familier), trauen (faire confiance), schauen (regarder), Aua! (Aïe !).\n\nÀ VOUS\n1. Enregistrement 1 : répétez chaque mot en exagérant le glissement : a → ou, a → i, o → i.\n2. Enregistrement 2 : répétez les paires. Puis réécoutez sans la transcription et dites pour chaque mot si vous entendez [i] ou [aï].\n3. Enregistrement 3 : répétez les triphtongues, puis dites « Aua! » comme si vous vous étiez cogné.\n4. Lisez à voix haute, lentement, en vérifiant chaque diphtongue : Mein Bruder heiratet im Mai, an einem Freitag. Die Feier ist im Haus von meiner Tante. Wir singen viele deutsche Lieder.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-aussprache-diphthonge-audio",
+          "usage": "audio",
+          "caption": "1. au, ei, eu : neuf mots",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-aussprache-ie-ei-audio",
+          "usage": "audio",
+          "caption": "2. ie ou ei ? Cinq paires",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-aussprache-triphthonge-audio",
+          "usage": "audio",
+          "caption": "3. Les triphtongues",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : les photos de famille",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : les photos de famille",
+        "description": "Pendant la pause de midi, au bureau, Sophie montre à son collègue Amir des photos de sa famille sur son téléphone. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nAmir : Sophie, wer ist das auf dem Foto?\nSophie : Das ist meine Familie. Hier sind meine Eltern. Mein Vater heißt Klaus und meine Mutter heißt Petra.\nAmir : Und der Mann hier? Ist das dein Bruder?\nSophie : Ja, das ist mein Bruder Felix. Er ist 32 und wohnt in Hamburg. Er ist verheiratet. Seine Frau heißt Julia, und das ist ihre Tochter Lina. Sie ist drei.\nAmir : Oh, sie ist süß! Hast du nur einen Bruder?\nSophie : Ja. Und du? Hast du Geschwister?\nAmir : Ja, zwei Schwestern. Unsere Familie ist groß! Meine Schwester Yasmin ist ledig und studiert in Berlin. Meine Schwester Rania ist verheiratet und hat zwei Söhne.\nSophie : Und deine Eltern? Wo wohnen sie?\nAmir : In Köln. Am Sonntag hat mein Vater Geburtstag. Wir feiern alle zusammen.\nSophie : Toll! Hast du schon ein Geschenk für deinen Vater?\nAmir : Ja, ein Buch. Er liest sehr gern.\n\nGRAMMAIRE : LES POSSESSIFS\nLe possessif dépend de la personne qui possède :\n• ich → mein (mon, ma, mes)\n• du → dein (ton, ta, tes)\n• er → sein (son, sa, ses : à lui)\n• sie → ihr (son, sa, ses : à elle)\n• wir → unser (notre, nos)\n• ihr → euer (votre, vos : à vous plusieurs, qu’on tutoie)\n• Sie → Ihr (votre, vos : forme de politesse, avec une majuscule)\n\nSEIN OU IHR ?\nEn français, « sa femme » ne dit pas si le possesseur est un homme ou une femme. En allemand, si :\n• Felix ist verheiratet. Seine Frau heißt Julia. (la femme de Felix → sein)\n• Yasmin studiert in Berlin. Ihr Bruder heißt Amir. (le frère de Yasmin → ihr)\n« ihr » veut aussi dire « leur » : Felix und Julia → ihre Tochter Lina.\n\nLA TERMINAISON\nLe possessif prend les mêmes terminaisons que « ein » et « kein ». Elle dépend du nom qui suit :\n• masculin : Das ist mein Bruder. → accusatif : Ich besuche meinen Bruder.\n• neutre : Das ist mein Kind. → accusatif : Ich liebe mein Kind.\n• féminin : Das ist meine Mutter. → accusatif : Ich rufe meine Mutter an.\n• pluriel : Das sind meine Eltern. → accusatif : Ich besuche meine Eltern.\nSeul le masculin change à l’accusatif (-en) : Hast du ein Geschenk für deinen Vater?\nAttention : « euer » perd son deuxième e quand il prend une terminaison : eure Mutter, euren Vater.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : les photos de famille",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-heimat-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : « Was ist Heimat für Sie? »",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Umfrage in Wien — Was ist Heimat?",
+        "description": "Une radio de Vienne fait un sondage dans la rue. Sa question : « Was ist Heimat für Sie? » (Qu’est-ce que la Heimat pour vous ?). Trois personnes répondent : Mehmet, Frau Huber et Jonas. Lisez d’abord les mots utiles, puis écoutez le sondage (vous pouvez le réécouter autant de fois que nécessaire) et répondez aux questions. La transcription s’affichera après votre réponse.\n\nPOUR COMPRENDRE\n• die Umfrage — le sondage\n• die Heimat — le pays, la région ou la ville d’où l’on vient ; le lieu où l’on se sent chez soi\n• die Heimatstadt — la ville natale\n• schon zwanzig Jahre — depuis déjà vingt ans\n• das Dorf — le village ; die Berge — les montagnes\n• einmal im Jahr — une fois par an ; noch — encore, toujours\n• zu Hause — chez soi, à la maison\n• der Ort — le lieu ; die Sprache — la langue ; das Gefühl — le sentiment\n\nBON À SAVOIR\n« Heimat » n’a pas d’équivalent exact en français. Pour certains, c’est un lieu : un pays, une ville, un village. Pour d’autres, ce sont des personnes, une langue ou une cuisine. Le mot a une longue histoire et il est parfois employé dans des discours politiques : quand vous l’employez, parlez de ce qui compte pour vous personnellement. Le mal du pays se dit « das Heimweh ».\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Mehmet : qu’est-ce que la Heimat pour lui ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Seulement la ville d’Izmir.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Son travail à Vienne.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sa famille.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "La langue turque.",
+              "correct": false
+            }
+          ],
+          "explanation": "Mehmet conclut « Für mich ist Heimat meine Familie » : sa femme et ses enfants vivent avec lui à Vienne. Izmir compte aussi pour lui, mais pas « seulement » Izmir.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Mehmet: Wer wohnt in Izmir?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Seine Mutter und sein Bruder.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Seine Frau und seine Kinder.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seine Eltern.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Seine Mutter und seine Schwester.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Meine Mutter und mein Bruder wohnen dort », c’est-à-dire à Izmir. Sa femme et ses enfants sont à Vienne ; il ne parle ni de son père ni d’une sœur.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Frau Huber : d’où vient-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "De Vienne.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "D’un petit village du Tyrol.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "D’une grande ville du Tyrol.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "De Graz.",
+              "correct": false
+            }
+          ],
+          "explanation": "Frau Huber dit « ich komme aus einem kleinen Dorf in Tirol » : ein Dorf est un village, klein veut dire petit. Elle habite aujourd’hui à Vienne, mais elle n’en vient pas.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Frau Huber va au Tyrol une fois par an. Pourquoi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Pour rendre visite à sa mère.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Pour faire du ski avec ses enfants.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Pour fêter Noël avec son frère.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Pour fêter l’anniversaire de sa sœur.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Meine Schwester wohnt noch im Dorf, und wir feiern zusammen ihren Geburtstag » : elle y va pour l’anniversaire de sa sœur. Ihren renvoie à la sœur : son anniversaire à elle.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Jonas : que dit-il de ses parents ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ils habitent ensemble à Graz.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ils sont divorcés : son père habite à Salzbourg et sa mère à Graz.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ils sont divorcés : son père habite à Graz et sa mère à Salzbourg.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Ils habitent à Vienne, comme lui.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jonas dit « Meine Eltern sind geschieden. Mein Vater wohnt in Graz und meine Mutter wohnt in Salzburg ». Geschieden = divorcés ; l’autre réponse inverse les deux villes.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was ist Heimat für Jonas?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Gefühl: seine Freunde und seine Sprache.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Stadt Graz.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seine Eltern.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Berge und sein Dorf.",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour Jonas, « Heimat ist kein Ort » : ce sont « meine Freunde und meine Sprache. Heimat ist ein Gefühl ». Les montagnes et le village, c’est la Heimat de Frau Huber.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-familie-heimat-hoeren-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-heimat-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Umfrage in Wien : trois réponses",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-kalender",
+      "kind": "lesson",
+      "title": "Découvrir : mois, saisons, dates et fêtes",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : mois, saisons, dates et fêtes",
+        "description": "Voici l’essentiel pour parler de l’année, des dates et des fêtes.\n\nLES MOIS (die Monate)\nJanuar, Februar, März, April, Mai, Juni, Juli, August, September, Oktober, November, Dezember. Tous les mois sont masculins : der Mai, der Dezember.\n\nLES SAISONS (die Jahreszeiten)\n• der Frühling — le printemps (März, April, Mai)\n• der Sommer — l’été (Juni, Juli, August)\n• der Herbst — l’automne (September, Oktober, November)\n• der Winter — l’hiver (Dezember, Januar, Februar)\nAvec un mois ou une saison, on dit « im » : im Mai, im Sommer. Im Winter ist es kalt.\n\nLA DATE : LES NOMBRES ORDINAUX\nPour dire la date, on emploie l’ordinal (le premier, le deuxième…) :\n• de 1 à 19 : nombre + -te → der zweite, der vierte, der zehnte, der neunzehnte. Quatre formes sont à apprendre par cœur : der erste (1.), der dritte (3.), der siebte (7.), der achte (8.).\n• à partir de 20 : nombre + -ste → der zwanzigste, der einundzwanzigste, der dreißigste.\n• À l’écrit, on met un point après le chiffre : der 1. Mai = der erste Mai.\n\nDEMANDER ET DIRE LA DATE\n• Der Wievielte ist heute? / Welches Datum ist heute? — Heute ist der erste Mai. (der … -te)\n• Wann hast du Geburtstag? — Am dritten Juni. / Ich habe am 3. Juni Geburtstag. (am … -ten)\nRécapitulatif : am + jour ou date (am Montag, am 3. Juni) ; im + mois ou saison (im Juni, im Sommer) ; um + heure (um 8 Uhr).\n\nLES GRANDES FÊTES EN ALLEMAGNE\n• der Karneval (appelé aussi Fasching ou Fastnacht) : en février, parfois en mars. Défilés et déguisements, surtout à Cologne, Mayence et Düsseldorf.\n• Ostern (Pâques) : en mars ou en avril. Les enfants cherchent les œufs cachés par le lièvre de Pâques (der Osterhase).\n• der Tag der Deutschen Einheit : le 3 octobre, la fête nationale.\n• Weihnachten (Noël) : la grande fête familiale a lieu le soir du 24 décembre (Heiligabend), avec le sapin et les cadeaux ; le 25 et le 26 décembre sont fériés. En décembre, on se retrouve au marché de Noël (der Weihnachtsmarkt).\n• Silvester (la Saint-Sylvestre) : le 31 décembre, avec un feu d’artifice à minuit. Le 1er janvier, c’est Neujahr.\n\nSOUHAITS ET FÉLICITATIONS\n• Herzlichen Glückwunsch zum Geburtstag! / Alles Gute zum Geburtstag! — Joyeux anniversaire !\n• Herzlichen Glückwunsch! — Félicitations ! (mariage, naissance, examen…)\n• Frohe Weihnachten! — Joyeux Noël !\n• Frohe Ostern! — Joyeuses Pâques !\n• Guten Rutsch! — Bon passage à la nouvelle année ! (avant le 31 décembre à minuit)\n• Frohes neues Jahr! — Bonne année !\n\nÉcoutez l’enregistrement et répétez. Puis répondez à voix haute : Wann hast du Geburtstag? Was ist deine Lieblingsjahreszeit?",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-jahreszeiten-bild",
+          "usage": "illustration",
+          "caption": "Die Jahreszeiten : les quatre saisons",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-feste-bild",
+          "usage": "illustration",
+          "caption": "Les fêtes de l’année",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-kalender-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les mois, les dates et les vœux",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-natif-wortschatz",
+      "kind": "lesson",
+      "title": "Écouter et répéter : la famille et les fêtes (voix natives)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Familie und Feste — Écouter des voix natives",
+        "description": "Voici deux enregistrements de locuteurs natifs, tirés du manuel Deutsch im Blick. Écoutez chaque mot, mettez en pause et répétez à voix haute, toujours avec l’article. Affichez la transcription seulement si vous en avez besoin.\n\nENREGISTREMENT 1 : LA FAMILLE AU SINGULIER ET AU PLURIEL\nLa plupart des noms sont dits au singulier, puis au pluriel. Écoutez ce qui change :\n• l’article : au pluriel, c’est toujours « die » : der Bruder → die Brüder, das Kind → die Kinder.\n• l’Umlaut : a, o, u deviennent souvent ä, ö, ü : der Bruder → die Brüder, die Großmutter → die Großmütter, der Großvater → die Großväter.\n• la terminaison : -n (die Familie → die Familien), -er (das Kind → die Kinder, das Familienmitglied → die Familienmitglieder), -s pour des mots venus d’autres langues (der Cousin → die Cousins).\n• certains mots n’existent qu’au pluriel : die Eltern, die Geschwister. D’autres ne sont dits qu’au singulier dans l’enregistrement : das Einzelkind, die Frau.\n• nouveaux mots : das Enkelkind (le petit-enfant), das Familienmitglied (le membre de la famille).\nRemarquez l’accent : il tombe en général sur la première syllabe (BRUder, GROSSmutter, ENkelkind), mais on dit faMIlie. Cousin et Cousine se prononcent presque comme en français.\n\nENREGISTREMENT 2 : LES FÊTES\n• Pfingsten — la Pentecôte (on prononce le p et le f : [pf])\n• Silvester — la Saint-Sylvestre\n• der Tag der Arbeit — la fête du Travail (le 1er mai)\n• der Tag der Deutschen Einheit — la fête de l’Unité allemande (le 3 octobre)\n• Weihnachten — Noël ; Frohe Weihnachten! / Fröhliche Weihnachten! — Joyeux Noël !\n• der Weihnachtsbaum (die Weihnachtsbäume) — le sapin de Noël ; den Weihnachtsbaum schmücken — décorer le sapin\n• das Weihnachtslied (die Weihnachtslieder) — le chant de Noël\n• der Weihnachtsmarkt (die Weihnachtsmärkte) — le marché de Noël\nRemarquez le « ch » de Weihnachten : après a, il se prononce au fond de la gorge, comme dans « ach ».\n\nÀ VOUS\n1. Réécoutez l’enregistrement 1. Après chaque singulier, mettez en pause et dites le pluriel avant de l’entendre.\n2. Présentez votre famille avec trois noms au pluriel : Ich habe zwei Brüder. Meine Großeltern haben vier Enkelkinder.\n3. Souhaitez « Joyeux Noël » de deux façons, puis dites ce que vous faites à Noël : Wir schmücken den Weihnachtsbaum. Wir gehen auf den Weihnachtsmarkt.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-natif-familie-audio",
+          "usage": "audio",
+          "caption": "1. La famille : singulier et pluriel",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-natif-feste-audio",
+          "usage": "audio",
+          "caption": "2. Les fêtes : de la Pentecôte à Noël",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-fotos",
+      "kind": "exercise",
+      "title": "Photos : familles et fêtes en Allemagne",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Was sehen Sie? — Familie und Feste",
+        "description": "Regardez chaque photo ou dessin, puis choisissez la bonne réponse. Les images viennent du manuel Deutsch im Blick : une famille en briques de construction, une photo de mariage et deux cartes d’anniversaire envoyées par des amis allemands.\n\nPOUR COMPRENDRE\n• der Baustein — la brique de construction (le jouet)\n• die Bank — le banc ; der Kinderwagen — la poussette ; sitzen — être assis\n• die Hochzeit — le mariage ; die Braut — la mariée ; der Bräutigam — le marié ; der Gast (die Gäste) — l’invité\n• die Karte — la carte ; die Torte — le gâteau ; die Kerze — la bougie ; die Blume — la fleur ; der Stern — l’étoile\n• Was steht auf der Karte? — Qu’est-ce qui est écrit sur la carte ?\n• Viel Glück! — Bonne chance !\n\nBON À SAVOIR\nEn Allemagne, la coccinelle (der Marienkäfer) et le trèfle à quatre feuilles (das Kleeblatt) sont des porte-bonheur : on les trouve souvent sur les cartes de vœux. Pour un anniversaire, on écrit aussi : Alles Gute zum Geburtstag! ou Herzlichen Glückwunsch zum Geburtstag!\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Eine Familie aus Bausteinen: Vater, Mutter, Tochter und Baby. Wer sitzt im Kinderwagen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Vater.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Tochter.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Baby.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Mutter.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le bébé est dans la poussette verte (der Kinderwagen) ; les parents sont assis sur le banc et la fillette se tient debout à côté de son père.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was feiert diese Familie?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Hochzeit.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Einen Geburtstag.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weihnachten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Silvester.",
+              "correct": false
+            }
+          ],
+          "explanation": "La mariée en robe blanche avec un bouquet (die Braut) et le marié en costume (der Bräutigam) : c’est un mariage, eine Hochzeit. Rien n’évoque un gâteau, un sapin ou un feu d’artifice.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Eine Karte zum Geburtstag. Was sehen Sie auf der Karte?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Einen Weihnachtsbaum und einen Stern.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ostereier und einen Osterhasen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Maske und ein Kostüm.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Eine Torte, Blumen und Geschenke.",
+              "correct": true
+            }
+          ],
+          "explanation": "La carte montre un gâteau aux fraises avec des bougies (eine Torte), des fleurs et des cadeaux. Le sapin et l’étoile évoquent Noël, les œufs Pâques et le masque le carnaval.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was steht auf dieser Karte?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Frohe Weihnachten!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Viel Glück zum Geburtstag!",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Frohe Ostern!",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Herzlichen Glückwunsch zur Hochzeit!",
+              "correct": false
+            }
+          ],
+          "explanation": "On lit « Viel Glück zum Geburtstag » à côté du trèfle et de la coccinelle, deux porte-bonheur. Les autres formules servent pour Noël, Pâques ou un mariage.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-familie-foto-familie-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-foto-hochzeit-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-foto-torte-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-foto-glueck-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-lesen",
+      "kind": "exercise",
+      "title": "Lire : une année de fêtes en famille",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Unser Jahr — le blog de Hanna",
+        "description": "Hanna habite à Cologne. Sur son blog, elle raconte les fêtes de sa famille. Lisez le texte, puis répondez aux questions.\n\nHallo, ich bin Hanna! Ich bin 26 Jahre alt und wohne in Köln. Ich bin ledig, aber ich habe einen Freund. Er heißt Malik. Meine Familie ist groß und wir feiern sehr gern. Hier ist unser Jahr!\n\nKARNEVAL\nIm Februar, manchmal auch im März, ist Karneval. In Köln ist das sehr wichtig! Wir tragen Kostüme und feiern auf der Straße. Mein Vater ist jedes Jahr ein Pirat.\n\nOSTERN\nOstern ist im März oder im April. Wir essen bei meinen Großeltern. Meine Nichte Ella ist vier. Sie sucht Ostereier im Garten.\n\nMEIN GEBURTSTAG\nIch habe am 3. Juni Geburtstag. Ich mache immer ein Picknick im Park, und meine Freunde bringen Kuchen mit.\n\nWEIHNACHTEN\nAm 24. Dezember ist Heiligabend. Am Abend essen wir zusammen und öffnen die Geschenke. Bei uns gibt es Würstchen mit Kartoffelsalat. Das ist unsere Tradition!\n\nSILVESTER\nSilvester feiere ich mit Malik und unseren Freunden. Um Mitternacht gibt es ein Feuerwerk und alle rufen: Frohes neues Jahr!",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quelle est la situation familiale de Hanna ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle est mariée avec Malik.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle est célibataire, mais elle a un petit ami.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Elle est divorcée.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Elle a une fille de quatre ans.",
+              "correct": false
+            }
+          ],
+          "explanation": "Hanna écrit « Ich bin ledig, aber ich habe einen Freund. Er heißt Malik » : ledig = célibataire, et ein Freund désigne ici un petit ami. Elle n’est pas mariée avec Malik.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Que fait le père de Hanna au carnaval ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il se déguise en pirate.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il fait la cuisine pour toute la famille.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il reste à la maison.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Il cache des œufs dans le jardin.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Mein Vater ist jedes Jahr ein Pirat » : au carnaval, il se déguise chaque année en pirate. Ce sont les enfants qui cherchent les œufs, à Pâques.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Qui est Ella ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La sœur de Hanna.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "La fille de Hanna.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "La nièce de Hanna.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "La grand-mère de Hanna.",
+              "correct": false
+            }
+          ],
+          "explanation": "Hanna écrit « Meine Nichte Ella ist vier » : die Nichte est la nièce. Hanna n’a pas d’enfant ; sa fille se dirait die Tochter.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quand est l’anniversaire de Hanna ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le 3 mars.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le 13 juin.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le 30 juin.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le 3 juin.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Ich habe am 3. Juni Geburtstag » : le point après 3 marque un ordinal, am dritten Juni. Ni mars, ni le 13, ni le 30 juin ne figurent dans le texte.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Que mange la famille de Hanna le soir du 24 décembre ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Des saucisses avec de la salade de pommes de terre.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Une oie rôtie.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du poisson.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Du gâteau.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Bei uns gibt es Würstchen mit Kartoffelsalat. Das ist unsere Tradition! » : des petites saucisses avec une salade de pommes de terre, le plat du 24 décembre chez Hanna.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-familie-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : anniversaires, photos et fêtes",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wann? Wer? Was?",
+        "description": "Écoutez les quatre petites scènes : deux conversations, une fête et un message vocal. Vous pouvez réécouter autant de fois que nécessaire, puis répondez aux questions. Pour finir, écrivez les deux phrases dictées. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Scène 1 : quand est l’anniversaire d’Elif ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le 3 mai.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le 13 mai.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le 13 mars.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le 30 mai.",
+              "correct": false
+            }
+          ],
+          "explanation": "Elif répond « Am dreizehnten Mai » : dreizehn = 13, avec l’ordinal en -ten. Ne confondez pas avec dritten (3), ni Mai (mai) avec März (mars).",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Scène 2 : qui est Sven ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le mari de Katja.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le frère de Nele.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’oncle de Nele.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le cousin de Nele.",
+              "correct": false
+            }
+          ],
+          "explanation": "Nele dit « Das ist meine Schwester Katja. Und das ist ihr Mann, Sven » : ihr Mann, c’est le mari de Katja (ihr renvoie à une femme). L’oncle, c’est Jürgen, l’homme à la guitare.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Scène 3 : quelle fête célèbre-t-on ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Noël.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le carnaval.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Pâques.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "La Saint-Sylvestre.",
+              "correct": true
+            }
+          ],
+          "explanation": "Le compte à rebours à minuit, « Frohes neues Jahr! » et le feu d’artifice (das Feuerwerk) : c’est Silvester, la Saint-Sylvestre.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Scène 4 : qui fête son anniversaire dimanche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La tante de Finn.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le frère de Finn.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le cousin de Finn.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Le fils de Finn.",
+              "correct": false
+            }
+          ],
+          "explanation": "Tante Ruth dit « Am Sonntag hat mein Sohn Leo Geburtstag » : le fils de la tante de Finn est son cousin. Ce n’est donc ni son frère ni son fils.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Scène 4 : qu’est-ce que Finn doit apporter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un gâteau.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Son ballon de football.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Des fleurs.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sa guitare.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Bring bitte deinen Ball mit! » : Leo veut jouer au football avec Finn, qui doit apporter son ballon. Mitbringen veut dire apporter ; deinen = ton (accusatif masculin).",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "frau",
+          "accept": [
+            "Ich habe am dritten Juni Geburtstag.",
+            "Ich habe am 3. Juni Geburtstag."
+          ],
+          "explanation": "Pour une date, am + ordinal en -ten : am dritten Juni. Dritte est irrégulier, comme erste et siebte. Geburtstag est un nom : majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "mann",
+          "accept": [
+            "Seine Frau heißt Julia und ihre Tochter heißt Lina."
+          ],
+          "explanation": "Seine Frau : la femme d’un homme (Felix) → sein. Ihre Tochter : la fille du couple → ihr (leur). Frau et Tochter sont féminins, d’où la terminaison -e.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-familie-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Quatre petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-weihnachten-bild",
+          "usage": "illustration",
+          "alt": "Un sapin de Noël.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-karneval-bild",
+          "usage": "illustration",
+          "alt": "Deux masques de théâtre.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-ostern-bild",
+          "usage": "illustration",
+          "alt": "Un œuf de Pâques.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-silvester-bild",
+          "usage": "illustration",
+          "alt": "Des étincelles, comme un feu d’artifice.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "d",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-hoeren-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : possessifs et dates",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : possessifs et dates",
+        "description": "Choisissez ou écrivez la forme qui complète chaque phrase. Rappel : Das ist mein Bruder. → Ich besuche meinen Bruder. (seul le masculin change à l’accusatif) ; meine devant un nom féminin ou pluriel ; sein = à lui, ihr = à elle ou à eux. Après « am », la date se termine par -ten : am ersten, am dritten, am zwanzigsten.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Mein Vater hat eine Schwester. Sie ist meine …",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nichte",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Cousine",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Großmutter",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Tante",
+              "correct": true
+            }
+          ],
+          "explanation": "La sœur de votre père est votre tante, die Tante. La cousine serait sa fille, la nièce la fille de votre frère ou de votre sœur.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Am Sonntag besuche ich … Großvater. Er hat Geburtstag.",
+          "options": [
+            {
+              "id": "a",
+              "label": "mein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "meine",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "meinen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "meiner",
+              "correct": false
+            }
+          ],
+          "explanation": "Besuchen est suivi de l’accusatif et der Großvater est masculin : mein → meinen. Seul le masculin change à l’accusatif ; meine irait avec un nom féminin.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Lina ist die Tochter von Felix und Julia. Felix ist … Vater.",
+          "options": [
+            {
+              "id": "a",
+              "label": "sein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ihr",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "seine",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ihre",
+              "correct": false
+            }
+          ],
+          "explanation": "On parle du père de Lina, une fille : on emploie ihr (à elle). Vater est masculin et sujet : ihr, sans terminaison. Sein irait si l’enfant était un garçon.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Kinder, wo ist … Mutter? — Im Garten!",
+          "options": [
+            {
+              "id": "a",
+              "label": "euer",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eure",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "euren",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ihr",
+              "correct": false
+            }
+          ],
+          "explanation": "On s’adresse à plusieurs enfants qu’on tutoie : euer (votre). Devant die Mutter, il prend -e et perd son deuxième e : eure Mutter. Euren serait l’accusatif masculin.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Der Tag der Deutschen Einheit ist am … Oktober.",
+          "options": [
+            {
+              "id": "a",
+              "label": "drei",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dritte",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dritten",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "dreiten",
+              "correct": false
+            }
+          ],
+          "explanation": "Après am, l’ordinal se termine par -ten : am dritten Oktober. Dritte est irrégulier, comme erste et siebte : « dreiten » n’existe pas.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Votre collègue vous dit : « Morgen habe ich Geburtstag! » Le lendemain, que lui dites-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Herzlichen Glückwunsch zum Geburtstag!",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Guten Rutsch!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Frohe Ostern!",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Frohes neues Jahr!",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour un anniversaire : « Herzlichen Glückwunsch zum Geburtstag! ». Guten Rutsch et Frohes neues Jahr s’emploient au Nouvel An, Frohe Ostern à Pâques.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Sophie présente sa famille. Complétez avec mein ou meine.",
+          "text": "Das sind [[1]] Eltern. [[2]] Vater heißt Klaus und [[3]] Mutter heißt Petra.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "meine"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Mein"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "meine"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "Mein reste sans terminaison devant un nom masculin sujet (mein Vater) ; il prend -e devant un nom féminin (meine Mutter) et au pluriel (meine Eltern)."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Complétez avec sein, seine, ihr ou ihre.",
+          "text": "Felix ist verheiratet. [[1]] Frau heißt Julia. Yasmin studiert in Berlin. [[2]] Bruder heißt Amir.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Seine"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Ihr"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "La femme de Felix (un homme) → seine Frau ; le frère de Yasmin (une femme) → ihr Bruder. Le possesseur choisit sein ou ihr, le nom qui suit donne la terminaison."
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Complétez avec la bonne forme du possessif. Attention : für est suivi de l’accusatif.",
+          "text": "Hast du ein Geschenk für [[1]] Vater? – Ja, und auch für [[2]] Schwester.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "deinen"
+              ],
+              "size": 8,
+              "hint": "dein"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "meine"
+              ],
+              "size": 8,
+              "hint": "mein"
+            }
+          ],
+          "explanation": "Après für, l’accusatif : dein → deinen devant un nom masculin (der Vater). Devant die Schwester, meine ne change pas, car seul le masculin prend -en."
+        },
+        {
+          "id": "q10",
+          "type": "match",
+          "prompt": "Associez chaque date écrite à sa lecture.",
+          "pairs": [
+            {
+              "left": "am 1. Mai",
+              "right": "am ersten Mai"
+            },
+            {
+              "left": "am 3. Oktober",
+              "right": "am dritten Oktober"
+            },
+            {
+              "left": "am 7. Juli",
+              "right": "am siebten Juli"
+            },
+            {
+              "left": "am 20. Juni",
+              "right": "am zwanzigsten Juni"
+            },
+            {
+              "left": "am 24. Dezember",
+              "right": "am vierundzwanzigsten Dezember"
+            }
+          ],
+          "explanation": "Après am, l’ordinal se termine par -ten jusqu’à 19 (am zweiten) et par -sten à partir de 20 (am zwanzigsten). Erste, dritte et siebte sont irréguliers."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-familie-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : la famille et les dates",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : la famille et les dates",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Soignez les diphtongues (ei = « aï », eu = « oï ») et la finale -er, qui se dit comme un petit « a » (Bruder, Schwester).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-familie-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hast du Geschwister?",
+          "accept": [
+            "Hast du Geschwister?"
+          ],
+          "explanation": "Question oui/non : le verbe hast ouvre la phrase et la voix monte à la fin. Dans Geschwister, le w se prononce [v] et la finale -er se dit « a ».",
+          "threshold": 80
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich habe einen Bruder und eine Schwester.",
+          "accept": [
+            "Ich habe einen Bruder und eine Schwester."
+          ],
+          "explanation": "Après haben, l’accusatif : einen Bruder (masculin), eine Schwester (féminin). Dans einen et eine, ei se dit « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Meine Eltern wohnen in Köln.",
+          "accept": [
+            "Meine Eltern wohnen in Köln."
+          ],
+          "explanation": "Eltern est toujours au pluriel : meine Eltern, sie wohnen. Dans Köln, le ö est bref, lèvres arrondies, comme dans « œuf ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wann hast du Geburtstag?",
+          "accept": [
+            "Wann hast du Geburtstag?"
+          ],
+          "explanation": "Wann (quand) ouvre la question et le verbe hast suit. Accentuez Ge-BURTS-tag ; la voix descend à la fin d’une question en W.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Am vierzehnten Juni habe ich Geburtstag.",
+          "accept": [
+            "Am vierzehnten Juni habe ich Geburtstag.",
+            "Am 14. Juni habe ich Geburtstag."
+          ],
+          "explanation": "Am + ordinal en -ten pour une date. La date ouvre la phrase : le verbe habe passe avant le sujet ich.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Herzlichen Glückwunsch zum Geburtstag!",
+          "accept": [
+            "Herzlichen Glückwunsch zum Geburtstag!"
+          ],
+          "explanation": "La formule complète pour souhaiter un bon anniversaire. Dans Glückwunsch, arrondissez les lèvres sur ü ; l’accent tombe sur GLÜCK-.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-sprechen",
+      "kind": "mission",
+      "title": "Mission : présenter sa famille et inviter à une fête",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : présenter sa famille et inviter à une fête",
+        "description": "Votre groupe d’allemand se retrouve pour la fin de l’année. Chacun présente sa famille en une minute et dit ce qu’est la Heimat pour lui. Ensuite, vous envoyez une invitation pour une fête. Écoutez d’abord Marta.\n\nMODÈLE\nHallo! Ich heiße Marta, ich bin 34 und verheiratet. Mein Mann heißt Jakub, er kommt aus Polen. Wir haben einen Sohn, Oskar. Er ist sechs Jahre alt. Ich habe zwei Geschwister: Mein Bruder Daniel wohnt in München, und meine Schwester Eva ist ledig und wohnt in Wien. Meine Eltern wohnen in Graz. Ich habe am 14. Juni Geburtstag. Im Dezember feiern wir alle zusammen Weihnachten. Das ist unser Lieblingsfest!\n\nL’INVITATION DE MARTA\nLiebe Freunde,\nam 14. Juni habe ich Geburtstag und ich mache eine Party. Ich lade euch herzlich ein!\nWann? Am 14. Juni um 19 Uhr\nWo? Bei mir, Gartenstraße 8\nBitte antwortet bis zum 7. Juni.\nLiebe Grüße\nMarta\n\nPOUR VOUS AIDER\n• Ich bin verheiratet / ledig. Ich habe … Kinder / keine Kinder.\n• Ich habe einen Bruder / eine Schwester / … Geschwister. / Ich bin Einzelkind.\n• Mein Bruder heißt … Er wohnt in … / Meine Mutter ist …\n• Ich habe am … Geburtstag. — Im Dezember feiern wir … Das ist mein Lieblingsfest.\n• Heimat ist für mich meine Familie / mein Dorf / meine Sprache / ein Gefühl.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-familie-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Marta présente sa famille",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-heimat-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez votre famille en une minute environ, comme Marta : votre situation, vos frères et sœurs, deux personnes de votre famille (prénom, ville), votre date d’anniversaire et votre fête préférée. Terminez par une phrase sur votre Heimat : « Heimat ist für mich … ».",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez une invitation à une fête (anniversaire, Noël, Saint-Sylvestre…) sur le modèle de celle de Marta : une formule d’appel, la fête, la date avec am …, l’heure, le lieu, la date limite pour répondre et une formule pour finir.",
+          "maxChars": 600,
+          "minWords": 25
+        },
+        "checklist": [
+          "J’ai présenté au moins trois personnes de ma famille avec mein, meine ou meine Eltern.",
+          "J’ai employé sein ou ihr au moins une fois (Seine Frau heißt … / Ihr Sohn ist …).",
+          "J’ai dit une date avec am + ordinal en -ten (am vierzehnten Juni).",
+          "Mon invitation donne la fête, la date, l’heure, le lieu et la date limite de réponse.",
+          "Mon invitation commence par Liebe … ou Lieber … et se termine par Liebe Grüße."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-familie-personen-bild",
+      "kind": "image",
+      "title": "Masculin et féminin dans la famille",
+      "alt": "Six vignettes : un symbole masculin pour der Vater, der Sohn et der Bruder, un symbole féminin pour die Mutter, die Tochter et die Schwester.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "mars",
+            "label": "der Vater"
+          },
+          {
+            "icon": "venus",
+            "label": "die Mutter"
+          },
+          {
+            "icon": "mars",
+            "label": "der Sohn"
+          },
+          {
+            "icon": "venus",
+            "label": "die Tochter"
+          },
+          {
+            "icon": "mars",
+            "label": "der Bruder"
+          },
+          {
+            "icon": "venus",
+            "label": "die Schwester"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-wortschatz-bild",
+      "kind": "image",
+      "title": "La famille",
+      "alt": "Six vignettes : des lunettes pour die Großeltern, deux personnes pour die Eltern, un groupe de personnes pour die Geschwister, un enfant debout pour das Kind, un bébé pour das Baby et une maison avec un cœur pour die Familie.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "glasses",
+            "label": "die Großeltern"
+          },
+          {
+            "icon": "users-round",
+            "label": "die Eltern"
+          },
+          {
+            "icon": "users",
+            "label": "die Geschwister"
+          },
+          {
+            "icon": "person-standing",
+            "label": "das Kind"
+          },
+          {
+            "icon": "baby",
+            "label": "das Baby"
+          },
+          {
+            "icon": "house-heart",
+            "label": "die Familie"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les membres de la famille",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Vater"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mutter"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Eltern"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Sohn"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tochter"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kind"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bruder"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schwester"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Geschwister"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Großvater"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Großmutter"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Großeltern"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Onkel"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tante"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Cousin"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Cousine"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Neffe"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nichte"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich bin verheiratet."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich bin ledig."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich habe einen Bruder und eine Schwester."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich habe keine Geschwister. Ich bin Einzelkind."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-dialog-bild",
+      "kind": "image",
+      "title": "Les photos de famille",
+      "alt": "Un bureau pendant la pause de midi : Amir demande « Wer ist das auf dem Foto? » et Sophie répond « Das ist meine Familie. ». Sur la table : un téléphone, un café et un cadeau.",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Amir",
+            "say": "Wer ist das auf dem Foto?"
+          },
+          {
+            "name": "Sophie",
+            "say": "Das ist meine Familie."
+          }
+        ],
+        "items": [
+          "smartphone",
+          "coffee",
+          "gift"
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : les photos de famille",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "Sophie, wer ist das auf dem Foto?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sophie",
+          "text": "Das ist meine Familie. Hier sind meine Eltern. Mein Vater heißt Klaus und meine Mutter heißt Petra."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "Und der Mann hier? Ist das dein Bruder?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sophie",
+          "text": "Ja, das ist mein Bruder Felix. Er ist zweiunddreißig und wohnt in Hamburg. Er ist verheiratet. Seine Frau heißt Julia, und das ist ihre Tochter Lina. Sie ist drei."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "Oh, sie ist süß! Hast du nur einen Bruder?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sophie",
+          "text": "Ja. Und du? Hast du Geschwister?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "Ja, zwei Schwestern. Unsere Familie ist groß! Meine Schwester Yasmin ist ledig und studiert in Berlin. Meine Schwester Rania ist verheiratet und hat zwei Söhne."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sophie",
+          "text": "Und deine Eltern? Wo wohnen sie?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "In Köln. Am Sonntag hat mein Vater Geburtstag. Wir feiern alle zusammen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sophie",
+          "text": "Toll! Hast du schon ein Geschenk für deinen Vater?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Amir",
+          "text": "Ja, ein Buch. Er liest sehr gern."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-heimat-hoeren-bild",
+      "kind": "image",
+      "title": "Un sondage dans une rue de Vienne",
+      "alt": "Dans une rue de Vienne, une journaliste de radio demande à Mehmet « Was ist Heimat für Sie? » et il répond « Gute Frage! ». Autour d’eux : un micro et une radio.",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Reporterin",
+            "say": "Was ist Heimat für Sie?"
+          },
+          {
+            "name": "Mehmet",
+            "say": "Gute Frage!"
+          }
+        ],
+        "items": [
+          "mic",
+          "radio"
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-heimat-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Umfrage in Wien : qu’est-ce que la Heimat ?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Hallo und guten Tag! Wir sind heute in Wien, auf der Straße. Unsere Frage ist: Was ist Heimat für Sie?"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Entschuldigung, haben Sie kurz Zeit? Was ist Heimat für Sie?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Mehmet",
+          "text": "Heimat? Gute Frage! Ich heiße Mehmet. Ich komme aus der Türkei, aus Izmir, aber ich wohne schon zwanzig Jahre hier in Wien. Meine Frau und meine Kinder sind hier. Für mich ist Heimat meine Familie."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und Izmir?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Mehmet",
+          "text": "Izmir ist auch meine Heimat. Meine Mutter und mein Bruder wohnen dort. Ich habe also zwei Heimatstädte: Izmir und Wien."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Vielen Dank! Und Sie? Was ist Heimat für Sie?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Huber",
+          "text": "Ich heiße Gerda Huber und ich bin achtundsechzig. Ich wohne in Wien, aber ich komme aus einem kleinen Dorf in Tirol. Heimat, das sind für mich die Berge, mein Dorf und das Essen von meiner Mutter."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Fahren Sie oft nach Tirol?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Huber",
+          "text": "Einmal im Jahr. Meine Schwester wohnt noch im Dorf, und wir feiern zusammen ihren Geburtstag. Dann bin ich wieder zu Hause."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Danke schön! Und du? Was ist Heimat für dich?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Jonas",
+          "text": "Ich bin Jonas, ich bin neunzehn und ich studiere hier in Wien. Ich komme aus Graz. Meine Eltern sind geschieden. Mein Vater wohnt in Graz und meine Mutter wohnt in Salzburg."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und wo ist dann deine Heimat?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Jonas",
+          "text": "Für mich ist Heimat kein Ort. Heimat, das sind meine Freunde und meine Sprache. Heimat ist ein Gefühl."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Vielen Dank! Tschüss aus Wien!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-heimat-bild",
+      "kind": "image",
+      "title": "Heimat, das ist …",
+      "alt": "Six vignettes : un groupe de personnes (meine Familie), une maison (mein Dorf, meine Stadt), une montagne (die Berge), un symbole de traduction (meine Sprache), une casserole (das Essen von Mama) et un cœur (ein Gefühl).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "users",
+            "label": "meine Familie"
+          },
+          {
+            "icon": "house",
+            "label": "mein Dorf, meine Stadt"
+          },
+          {
+            "icon": "mountain",
+            "label": "die Berge"
+          },
+          {
+            "icon": "languages",
+            "label": "meine Sprache"
+          },
+          {
+            "icon": "cooking-pot",
+            "label": "das Essen von Mama"
+          },
+          {
+            "icon": "heart",
+            "label": "ein Gefühl"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-jahreszeiten-bild",
+      "kind": "image",
+      "title": "Les quatre saisons",
+      "alt": "Quatre vignettes : une fleur pour der Frühling, un soleil pour der Sommer, une feuille pour der Herbst et un flocon de neige pour der Winter.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "flower",
+            "label": "der Frühling"
+          },
+          {
+            "icon": "sun",
+            "label": "der Sommer"
+          },
+          {
+            "icon": "leaf",
+            "label": "der Herbst"
+          },
+          {
+            "icon": "snowflake",
+            "label": "der Winter"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-feste-bild",
+      "kind": "image",
+      "title": "Les fêtes de l’année",
+      "alt": "Six vignettes : des masques pour der Karneval, un œuf pour Ostern, un sapin pour Weihnachten, des étincelles pour Silvester, un gâteau pour der Geburtstag et un paquet cadeau pour das Geschenk.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "drama",
+            "label": "der Karneval"
+          },
+          {
+            "icon": "egg",
+            "label": "Ostern"
+          },
+          {
+            "icon": "tree-pine",
+            "label": "Weihnachten"
+          },
+          {
+            "icon": "sparkles",
+            "label": "Silvester"
+          },
+          {
+            "icon": "cake",
+            "label": "der Geburtstag"
+          },
+          {
+            "icon": "gift",
+            "label": "das Geschenk"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-kalender-audio-v3",
+      "kind": "audio",
+      "title": "Les mois, les saisons, les dates et les vœux",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Januar, Februar, März, April, Mai, Juni."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Juli, August, September, Oktober, November, Dezember."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Frühling"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Sommer"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Herbst"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Winter"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der erste Mai"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der dritte Juni"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der siebte Juli"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der zwanzigste Oktober"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "der einunddreißigste Dezember"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nina",
+          "text": "Sag mal, der Wievielte ist heute?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Jan",
+          "text": "Heute ist der erste März."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "frau",
+          "name": "Nina",
+          "text": "Und wann hast du Geburtstag?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Jan",
+          "text": "Ich habe am dritten Juni Geburtstag."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Herzlichen Glückwunsch zum Geburtstag!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Frohe Weihnachten!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Frohe Ostern!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Rutsch!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Frohes neues Jahr!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-lesen-bild",
+      "kind": "image",
+      "title": "Le calendrier des fêtes",
+      "alt": "Un calendrier orné d’un cœur.",
+      "image": {
+        "layout": "single",
+        "icon": "calendar-heart"
+      }
+    },
+    {
+      "key": "a1-familie-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Anniversaires, photos et fêtes : quatre petites scènes",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Mehmet",
+          "text": "Elif, wann hast du Geburtstag?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Am dreizehnten Mai. Und du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Mehmet",
+          "text": "Ich habe im Winter Geburtstag, am zweiten Januar."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Elif",
+          "text": "Oh, das ist ja kurz nach Silvester!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Schau mal, Malte, das ist ein Foto von meiner Familie."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Malte",
+          "text": "Schön! Wer ist die Frau hier?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Das ist meine Schwester Katja. Und das ist ihr Mann, Sven. Sie sind seit zwei Jahren verheiratet."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Malte",
+          "text": "Und der Mann mit der Gitarre?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Das ist mein Onkel Jürgen. Er spielt auf jeder Party Gitarre!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Erik",
+          "text": "Schnell, es ist fast Mitternacht!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Ida",
+          "text": "Zehn, neun, acht, sieben, sechs, fünf, vier, drei, zwei, eins!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Erik",
+          "text": "Frohes neues Jahr!"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Ida",
+          "text": "Frohes neues Jahr! Oh, schau mal, das Feuerwerk!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Tante Ruth",
+          "text": "Hallo Finn, hier ist Tante Ruth. Am Sonntag hat mein Sohn Leo Geburtstag. Er wird zehn! Wir feiern um drei Uhr bei uns im Garten. Kannst du kommen? Leo möchte so gern mit dir Fußball spielen. Bring bitte deinen Ball mit! Bis Sonntag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-weihnachten-bild",
+      "kind": "image",
+      "title": "Noël",
+      "alt": "Un sapin de Noël.",
+      "image": {
+        "layout": "single",
+        "icon": "tree-pine"
+      }
+    },
+    {
+      "key": "a1-familie-karneval-bild",
+      "kind": "image",
+      "title": "Le carnaval",
+      "alt": "Deux masques de théâtre.",
+      "image": {
+        "layout": "single",
+        "icon": "drama"
+      }
+    },
+    {
+      "key": "a1-familie-ostern-bild",
+      "kind": "image",
+      "title": "Pâques",
+      "alt": "Un œuf de Pâques.",
+      "image": {
+        "layout": "single",
+        "icon": "egg"
+      }
+    },
+    {
+      "key": "a1-familie-silvester-bild",
+      "kind": "image",
+      "title": "La Saint-Sylvestre",
+      "alt": "Des étincelles, comme un feu d’artifice.",
+      "image": {
+        "layout": "single",
+        "icon": "sparkles"
+      }
+    },
+    {
+      "key": "a1-familie-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Marta présente sa famille",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Marta",
+          "text": "Hallo! Ich heiße Marta, ich bin vierunddreißig und verheiratet. Mein Mann heißt Jakub, er kommt aus Polen. Wir haben einen Sohn, Oskar. Er ist sechs Jahre alt. Ich habe zwei Geschwister: Mein Bruder Daniel wohnt in München, und meine Schwester Eva ist ledig und wohnt in Wien."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Marta",
+          "text": "Meine Eltern wohnen in Graz. Ich habe am vierzehnten Juni Geburtstag. Im Dezember feiern wir alle zusammen Weihnachten. Das ist unser Lieblingsfest!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-aussprache-diphthonge-audio",
+      "kind": "audio",
+      "title": "Les diphtongues au, ei, eu — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_05_01_dipthongs.mp3"
+      },
+      "transcript": "das Haus, die Maus, laufen\ndas Einzelkind, Freitag, im Mai\ndas Neujahr, deutsch, läufst",
+      "v3SourceKey": "a1-familie-aussprache-diphthonge-audio"
+    },
+    {
+      "key": "a1-familie-aussprache-ie-ei-audio",
+      "kind": "audio",
+      "title": "ie ou ei ? — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_05_02_ie-vs-ei.mp3"
+      },
+      "transcript": "lieben, bleiben\ndie Geliebte, der Freitag\ndie Schwiegermutter, schweigen\ndas Genie, langweilig\ndas Bier, heiraten",
+      "v3SourceKey": "a1-familie-aussprache-ie-ei-audio"
+    },
+    {
+      "key": "a1-familie-aussprache-triphthonge-audio",
+      "kind": "audio",
+      "title": "Les triphtongues — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_05_03_tripthongs.mp3"
+      },
+      "transcript": "Miau, jauchzen, jaulen\nklauen, trauen, schauen\nAua",
+      "v3SourceKey": "a1-familie-aussprache-triphthonge-audio"
+    },
+    {
+      "key": "a1-familie-natif-familie-audio",
+      "kind": "audio",
+      "title": "La famille au singulier et au pluriel — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_05_01_family.mp3",
+        "clip": [
+          0,
+          69.8
+        ]
+      },
+      "transcript": "die Familie, die Familien\nder Bruder, die Brüder\nder Cousin, die Cousins\ndas Einzelkind\ndie Eltern\ndas Enkelkind, die Enkelkinder\ndas Familienmitglied, die Familienmitglieder\ndie Frau\ndie Geschwister\ndie Großmutter, die Großmütter\nder Großvater, die Großväter\ndas Kind, die Kinder",
+      "v3SourceKey": "a1-familie-natif-familie-audio"
+    },
+    {
+      "key": "a1-familie-natif-feste-audio",
+      "kind": "audio",
+      "title": "Les fêtes, de la Pentecôte à Noël — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_05_03_holidays.mp3",
+        "clip": [
+          79.4,
+          126.6
+        ]
+      },
+      "transcript": "Pfingsten\nSilvester\nTag der Arbeit\nTag der Deutschen Einheit\nWeihnachten\nFrohe / Fröhliche Weihnachten!\nder Weihnachtsbaum, die Weihnachtsbäume\nden Weihnachtsbaum schmücken\ndas Weihnachtslied, die Weihnachtslieder\nder Weihnachtsmarkt, die Weihnachtsmärkte",
+      "v3SourceKey": "a1-familie-natif-feste-audio"
+    },
+    {
+      "key": "a1-familie-foto-familie-bild",
+      "kind": "image",
+      "title": "Une famille en briques de construction",
+      "alt": "Sculptures colorées en briques de construction : un père avec un appareil photo et une mère assis sur un banc rouge, une fillette debout qui tient la main du père et un bébé dans une poussette verte.",
+      "photo": {
+        "file": "dib-images/k06/img-034-136.png"
+      }
+    },
+    {
+      "key": "a1-familie-foto-hochzeit-bild",
+      "kind": "image",
+      "title": "Une photo de mariage",
+      "alt": "Photo de groupe en noir et blanc devant un bâtiment, sous de grands arbres : au centre, la mariée en robe blanche avec un bouquet et le marié en costume, entourés de la famille et des invités ; des jeunes femmes tiennent des bouquets.",
+      "photo": {
+        "file": "dib-images/k05/img-019-067.png"
+      }
+    },
+    {
+      "key": "a1-familie-foto-torte-bild",
+      "kind": "image",
+      "title": "Une carte d’anniversaire",
+      "alt": "Carte d’anniversaire peinte à l’aquarelle : un gâteau aux fraises avec des bougies, deux ballons, un bouquet de fleurs, des cadeaux, deux coupes et une bouteille de champagne, avec des vœux manuscrits comme « Alles Liebe zum Geburtstag! ».",
+      "photo": {
+        "file": "dib-images/k05/img-021-077.png",
+        "crop": [
+          0,
+          0,
+          0.485,
+          1
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-foto-glueck-bild",
+      "kind": "image",
+      "title": "Une carte « Viel Glück zum Geburtstag »",
+      "alt": "Carte d’anniversaire en forme de trèfle à quatre feuilles vert, avec une grosse coccinelle rouge et noire et l’inscription « Viel Glück zum Geburtstag ».",
+      "photo": {
+        "file": "dib-images/k05/img-020-071.png",
+        "crop": [
+          0,
+          0,
+          0.49,
+          1
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-hoeren-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Écouter : anniversaires, photos et fêtes",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Ich habe am dritten Juni Geburtstag."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Écouter : anniversaires, photos et fêtes",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Seine Frau heißt Julia und ihre Tochter heißt Lina."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du Geschwister?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe einen Bruder und eine Schwester."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meine Eltern wohnen in Köln."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wann hast du Geburtstag?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am vierzehnten Juni habe ich Geburtstag."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : la famille et les dates",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Herzlichen Glückwunsch zum Geburtstag!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-lexique",
+      "kind": "audio",
+      "title": "Lexique · Herzlichen Glückwunsch ! Famille et fêtes",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Familie, die Familien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vater, die Väter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mutter, die Mütter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Eltern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bruder, die Brüder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schwester, die Schwestern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Geschwister"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Sohn, die Söhne"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tochter, die Töchter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kind, die Kinder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Großeltern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Onkel, die Onkel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tante, die Tanten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verheiratet"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ledig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Geburtstag, die Geburtstage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "feiern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Geschenk, die Geschenke"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Einladung, die Einladungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einladen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Monat, die Monate"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Jahr, die Jahre"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Datum, die Daten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Herzlichen Glückwunsch!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Frohe Weihnachten!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

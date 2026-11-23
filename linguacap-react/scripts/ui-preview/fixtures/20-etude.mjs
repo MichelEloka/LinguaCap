@@ -6,11 +6,11 @@
 import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { day, enrollment, grades as coreGrades, mediaUrl } from './00-core.mjs';
+import { contentModule, day, enrollment, grades as coreGrades, mediaUrl, questionView } from './00-core.mjs';
 
 const repo = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..', '..');
 const read = (path) => JSON.parse(readFileSync(join(repo, path), 'utf8'));
-const essen = read('content/de/a1/05-essen.json');
+const essen = contentModule('a1-essen');
 const level = read('content/de/a1/level.json');
 const media = new Map(essen.media.map((item) => [item.key, item]));
 
@@ -26,8 +26,7 @@ function activity(id, status = 'todo', extra = {}) {
     id, kind: source.kind, title: source.title, estimatedMinutes: source.estimatedMinutes, status, state: {}, attemptId: null,
     lesson: { id: `a1-v2-${id}`, title: source.lesson.title, description: source.lesson.description },
     transcript: visible ? scriptOf(audio.media) : null,
-    questions: (source.questions ?? []).map((question) => ({ id: question.id, prompt: question.prompt,
-      options: question.options.map((option) => ({ id: option.id, text: option.label })) })),
+    questions: (source.questions ?? []).map(questionView), mission: null, contentVersionId: 'v-a1-2', contentActivityId: id, reviewItems: null,
     placements: (source.placements ?? []).map((placement, position) => ({
       position: position + 1, assetId: placement.media, assetVersion: 1, usage: placement.usage,
       alt: placement.alt ?? media.get(placement.media)?.alt ?? null, caption: placement.caption ?? null, decorative: Boolean(placement.decorative),
@@ -37,11 +36,53 @@ function activity(id, status = 'todo', extra = {}) {
   };
 }
 
+const studyGrade = (id, activityId, correct, submittedAt, sessionId) => {
+  const total = essen.activities.find((item) => item.id === activityId).questions.length;
+  return { kind: 'quiz', id, lessonId: `a1-v2-${activityId}`, correct: Math.min(correct, total), total, submittedAt, sessionId, activityId,
+    moduleScores: null, pending: 0, flagged: [], typed: true };
+};
 const studyGrades = [
-  { kind: 'quiz', id: 'g-imbiss', lessonId: 'a1-v2-a1-essen-imbiss', correct: 5, total: 6, submittedAt: day(0, 10), sessionId: 'etude-exercice', activityId: 'a1-essen-imbiss' },
-  { kind: 'quiz', id: 'g-lesen', lessonId: 'a1-v2-a1-essen-lesen', correct: 4, total: 5, submittedAt: day(-1, 10), sessionId: 'etude-terminee', activityId: 'a1-essen-lesen' },
-  { kind: 'quiz', id: 'g-grammatik', lessonId: 'a1-v2-a1-essen-grammatik', correct: 3, total: 6, submittedAt: day(-1, 11), sessionId: 'etude-terminee', activityId: 'a1-essen-grammatik' },
+  studyGrade('g-imbiss', 'a1-essen-imbiss', 5, day(0, 10), 'etude-exercice'),
+  studyGrade('g-lesen', 'a1-essen-lesen', 4, day(-1, 10), 'etude-terminee'),
+  studyGrade('g-grammatik', 'a1-essen-grammatik', 7, day(-1, 11), 'etude-terminee'),
 ];
+
+/** Corrigé d'une remise (forme d'ExerciseResult) : les `grade.correct` premières questions justes, les autres fausses. */
+function exerciseResult(grade) {
+  const source = essen.activities.find((item) => item.id === grade.activityId);
+  const questions = source.questions.map((question, index) => {
+    const right = index < grade.correct;
+    const view = questionView(question);
+    const type = question.type ?? 'choice';
+    const common = { id: question.id, type, prompt: question.prompt, status: right ? 'correct' : 'incorrect',
+      explanation: question.explanation ?? null, feedback: null, notices: [], detail: null };
+    if (type === 'fill') {
+      return { ...common, given: { blanks: Object.fromEntries(question.blanks.map((blank) => [blank.id, right ? blank.accept[0] : '…'])) },
+        expected: { blanks: Object.fromEntries(question.blanks.map((blank) => [blank.id, blank.accept])), text: question.text },
+        detail: { blanks: Object.fromEntries(question.blanks.map((blank) => [blank.id, { correct: right, notices: [] }])) } };
+    }
+    if (type === 'order') {
+      const order = right ? question.answers[0].map((text) => view.tokens.find((token) => token.text === text).id) : view.tokens.map((token) => token.id);
+      return { ...common, given: { order, sentence: order.map((id) => view.tokens.find((token) => token.id === id).text).join(' ') },
+        expected: { sentence: question.answers[0].join(' '), alternatives: question.answers.slice(1).map((answer) => answer.join(' ')) } };
+    }
+    if (type === 'match') {
+      const solution = Object.fromEntries(view.left.map((item, index) => [item.id, `r${index}`]));
+      const given = right ? solution : Object.fromEntries(view.left.map((item, index) => [item.id, `r${(index + 1) % view.left.length}`]));
+      return { ...common, given: { pairs: given }, detail: { pairs: Object.fromEntries(view.left.map((item) => [item.id, given[item.id] === solution[item.id]])) },
+        expected: { pairs: solution, labels: Object.fromEntries([...view.left, ...view.right].map((item) => [item.id, item.text])) } };
+    }
+    if (type === 'dictation') {
+      const words = question.accept[0].split(/\s+/).map((word, position) => ({ expected: word, given: right || position ? word : null, status: right || position ? 'ok' : 'missing' }));
+      return { ...common, given: { text: words.filter((word) => word.given).map((word) => word.given).join(' ') }, expected: { text: question.accept[0] },
+        detail: { score: right ? 100 : 80, words } };
+    }
+    const chosen = right ? question.options.find((option) => option.correct) : question.options.find((option) => !option.correct);
+    const expected = question.options.find((option) => option.correct);
+    return { ...common, given: { choice: chosen.id, label: chosen.label }, expected: { optionId: expected.id, label: expected.label }, feedback: chosen.feedback ?? null };
+  });
+  return { grade, questions };
+}
 
 function session(id, position, title, activities) {
   const done = activities.every((item) => item.status === 'completed');
@@ -108,6 +149,19 @@ async function useStudyApi(page) {
       return route.fulfill({ json: summaryOf(detail) });
     }
     if (method === 'GET' && path === '/assessments/results') return route.fulfill({ json: grades });
+    const reviewed = path.match(/^\/assessments\/exercises\/([^/]+)$/);
+    if (method === 'GET' && reviewed) {
+      const grade = grades.find((item) => item.id === decodeURIComponent(reviewed[1]));
+      return grade?.activityId ? route.fulfill({ json: exerciseResult(grade) }) : route.fulfill({ status: 404, json: { code: 'NOT_FOUND', message: 'Remise introuvable.' } });
+    }
+    if (method === 'POST' && path === '/assessments/exercises') {
+      const total = Object.keys(body?.answers ?? {}).length;
+      const grade = { kind: 'quiz', id: `g-${body?.activityId}`, lessonId: body?.lessonId, correct: Math.max(0, total - 1), total,
+        submittedAt: new Date().toISOString(), sessionId: body?.sessionId ?? null, activityId: body?.activityId ?? null, moduleScores: null,
+        pending: 0, flagged: [], typed: true };
+      grades.unshift(grade);
+      return route.fulfill({ json: exerciseResult(grade) });
+    }
     if (method === 'POST' && path === '/assessments/quiz') {
       const total = Object.keys(body?.answers ?? {}).length;
       const grade = { kind: 'quiz', id: `g-${body?.activityId}`, lessonId: body?.lessonId, correct: Math.max(0, total - 1), total,

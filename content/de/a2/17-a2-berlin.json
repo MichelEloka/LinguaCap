@@ -1,0 +1,3598 @@
+{
+  "id": "a2-berlin",
+  "title": "Auf nach Berlin ! Ville et histoire",
+  "objective": "Présenter les grands monuments de Berlin, raconter simplement l’histoire du Mur (1961, 1989, 1990) avec le prétérit des verbes de modalité, de sein, de haben et de « es gibt », situer des événements dans le temps (vor, seit, von … bis) et demander ou décrire un itinéraire à pied et en transports en commun (ligne, arrêt, correspondance).",
+  "prerequisites": [
+    "a2-kultur-atelier"
+  ],
+  "audioProfile": "a2-suite",
+  "sources": [
+    "Deutsch im Blick, Kapitel 10 « Auf nach Berlin! » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Geschichte, Krieg und Frieden, Sehenswürdigkeiten, nach dem Weg fragen, Wegbeschreibungen)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre « Berlin » — notes culturelles de Berlin B, C et D (ville divisée et institutions en double, quartiers ou Kieze, Museumsinsel, population venue de quelque 190 pays, currywurst) adaptées dans le texte « Berlin – eine Stadt, viele Kieze », et tâche de Berlin A (programme de visite d’au moins quatre lieux dans un ordre logique) et de Berlin D (journée idéale dans Berlin) adaptée dans le dialogue « Ein Tag in Berlin »",
+    "Deutsch im Blick, Kapitel 6 et 10 (COERLL, Université du Texas à Austin) : enregistrements natifs voc_10_07_askdir.mp3, voc_10_08_givedir.mp3 et voc_10_01_history.mp3 (deux extraits) et photos k10/031-104, k10/026-077, k10/028-085, k10/030-099 et k06/023-093 (CC BY 4.0)"
+  ],
+  "grammarFocus": [
+    "praeteritum-modalverben-sein-haben",
+    "vor-seit-von-bis",
+    "itineraire-datif"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-berlin.mjs",
+  "vocabulary": [
+    {
+      "id": "sehenswuerdigkeit",
+      "word": "Sehenswürdigkeit",
+      "article": "die",
+      "plural": "Sehenswürdigkeiten",
+      "partOfSpeech": "noun",
+      "translation": "le monument, le lieu à voir",
+      "example": "Berlin hat viele Sehenswürdigkeiten.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "tor",
+      "word": "Tor",
+      "article": "das",
+      "plural": "Tore",
+      "partOfSpeech": "noun",
+      "translation": "la porte (monumentale)",
+      "example": "Wir treffen uns vor dem Brandenburger Tor.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "turm",
+      "word": "Turm",
+      "article": "der",
+      "plural": "Türme",
+      "partOfSpeech": "noun",
+      "translation": "la tour",
+      "example": "Der Fernsehturm ist 368 Meter hoch.",
+      "note": "der Fernsehturm : la tour de télévision",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "mauer",
+      "word": "Mauer",
+      "article": "die",
+      "plural": "Mauern",
+      "partOfSpeech": "noun",
+      "translation": "le mur",
+      "example": "Die Mauer stand von 1961 bis 1989 mitten in Berlin.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "grenze",
+      "word": "Grenze",
+      "article": "die",
+      "plural": "Grenzen",
+      "partOfSpeech": "noun",
+      "translation": "la frontière",
+      "example": "An der Grenze mussten wir lange warten.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "geschichte",
+      "word": "Geschichte",
+      "article": "die",
+      "plural": "Geschichten",
+      "partOfSpeech": "noun",
+      "translation": "l’histoire",
+      "example": "Die Geschichte von Berlin ist spannend.",
+      "note": "aussi : une histoire, un récit",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "wiedervereinigung",
+      "word": "Wiedervereinigung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la réunification",
+      "example": "Die Wiedervereinigung war 1990.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "krieg",
+      "word": "Krieg",
+      "article": "der",
+      "plural": "Kriege",
+      "partOfSpeech": "noun",
+      "translation": "la guerre",
+      "example": "Nach dem Krieg war Berlin geteilt.",
+      "note": "der Frieden : la paix",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "geteilt",
+      "word": "geteilt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "divisé, partagé",
+      "example": "Berlin war über vierzig Jahre geteilt.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "damals",
+      "word": "damals",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "à l’époque",
+      "example": "Damals war ich neunzehn.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "frueher",
+      "word": "früher",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "autrefois, avant",
+      "example": "Früher gab es hier eine Mauer.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "u-bahn",
+      "word": "U-Bahn",
+      "article": "die",
+      "plural": "U-Bahnen",
+      "partOfSpeech": "noun",
+      "translation": "le métro",
+      "example": "Nehmen Sie lieber die U-Bahn.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "s-bahn",
+      "word": "S-Bahn",
+      "article": "die",
+      "plural": "S-Bahnen",
+      "partOfSpeech": "noun",
+      "translation": "le train urbain (comme le RER)",
+      "example": "Die S-Bahn fährt bis zum Ostbahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "strassenbahn",
+      "word": "Straßenbahn",
+      "article": "die",
+      "plural": "Straßenbahnen",
+      "partOfSpeech": "noun",
+      "translation": "le tramway",
+      "example": "Die Straßenbahn hält vor dem Bahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "linie",
+      "word": "Linie",
+      "article": "die",
+      "plural": "Linien",
+      "partOfSpeech": "noun",
+      "translation": "la ligne",
+      "example": "Nehmen Sie die Linie U5.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "haltestelle",
+      "word": "Haltestelle",
+      "article": "die",
+      "plural": "Haltestellen",
+      "partOfSpeech": "noun",
+      "translation": "l’arrêt",
+      "example": "Wo ist die nächste Haltestelle?",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "einsteigen",
+      "word": "einsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "monter (dans un véhicule)",
+      "example": "Hier können Sie in die U6 einsteigen.",
+      "note": "séparable : ein|steigen · Perfekt : ist eingestiegen",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "aussteigen",
+      "word": "aussteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "descendre (d’un véhicule)",
+      "example": "Am Ostbahnhof müssen Sie aussteigen.",
+      "note": "séparable : aus|steigen · Perfekt : ist ausgestiegen",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "umsteigen",
+      "word": "umsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "changer (de ligne)",
+      "example": "Am Alexanderplatz müssen Sie umsteigen.",
+      "note": "séparable : um|steigen · Perfekt : ist umgestiegen",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "abbiegen",
+      "word": "abbiegen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "tourner (dans une rue)",
+      "example": "An der Kreuzung müssen Sie links abbiegen.",
+      "note": "séparable : Biegen Sie links ab.",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "geradeaus",
+      "word": "geradeaus",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "tout droit",
+      "example": "Gehen Sie geradeaus bis zur Ampel.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "kreuzung",
+      "word": "Kreuzung",
+      "article": "die",
+      "plural": "Kreuzungen",
+      "partOfSpeech": "noun",
+      "translation": "le carrefour",
+      "example": "Nehmen Sie die nächste Kreuzung rechts.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "ampel",
+      "word": "Ampel",
+      "article": "die",
+      "plural": "Ampeln",
+      "partOfSpeech": "noun",
+      "translation": "le feu (de circulation)",
+      "example": "An der Ampel biegen Sie rechts ab.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "richtung",
+      "word": "Richtung",
+      "article": "die",
+      "plural": "Richtungen",
+      "partOfSpeech": "noun",
+      "translation": "la direction",
+      "example": "Fahren Sie Richtung Ostbahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "sich-auskennen",
+      "word": "sich auskennen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "connaître les lieux, s’y retrouver",
+      "example": "In Berlin muss man sich gut auskennen.",
+      "note": "séparable : Ich kenne mich hier nicht aus.",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 24
+      }
+    },
+    {
+      "id": "in-der-naehe",
+      "word": "in der Nähe",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à proximité, près de",
+      "example": "Die Station ist ganz in der Nähe.",
+      "note": "in der Nähe von + datif",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 25
+      }
+    },
+    {
+      "id": "seit",
+      "word": "seit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "depuis",
+      "example": "Seit 1990 ist Deutschland wieder vereint.",
+      "note": "+ datif ; avec le présent",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 26
+      }
+    },
+    {
+      "id": "vor",
+      "word": "vor",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "il y a (temps)",
+      "example": "Vor dreißig Jahren war die Stadt geteilt.",
+      "note": "+ datif : vor zwei Jahren",
+      "audio": {
+        "media": "a2-berlin-lexique",
+        "line": 27
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-berlin-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : monuments, histoire et transports",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Berlin entdecken — Les mots de la ville",
+        "description": "Berlin est la capitale de l’Allemagne réunifiée. Cette leçon réunit les mots pour visiter la ville, parler de son histoire et s’y déplacer. Apprenez toujours les noms avec leur article.\n\nLES LIEUX À VOIR (die Sehenswürdigkeiten)\n• das Brandenburger Tor — la porte de Brandebourg, symbole de l’unité allemande\n• der Reichstag (das Reichstagsgebäude) — le Reichstag, siège du Bundestag, avec sa coupole de verre\n• die East Side Gallery — le plus long morceau du Mur encore debout, couvert de peintures\n• die Museumsinsel — l’île aux musées, au milieu de la Spree\n• der Fernsehturm — la tour de télévision de l’Alexanderplatz\n• das Viertel / der Bezirk — le quartier / l’arrondissement : Mitte, Kreuzberg, Prenzlauer Berg\n• besichtigen — visiter (un monument, une ville)\n\nL’HISTOIRE (die Geschichte)\n• die Mauer — le mur ; der Mauerbau (1961) — la construction du Mur ; der Mauerfall (1989) — la chute du Mur\n• die Grenze — la frontière ; der Osten / der Westen — l’Est / l’Ouest\n• die DDR — la RDA (Allemagne de l’Est) ; die BRD (die Bundesrepublik Deutschland) — la RFA\n• die Wiedervereinigung (1990) — la réunification\n• der Krieg — la guerre ; der Frieden — la paix\n\nSE DÉPLACER (unterwegs sein)\n• die U-Bahn — le métro ; die S-Bahn — le train urbain (comme le RER) ; die Straßenbahn — le tramway ; der Bus — le bus\n• die Linie — la ligne : Nehmen Sie die Linie U5.\n• die Haltestelle — l’arrêt ; die Station — la station ; Richtung Alexanderplatz — direction Alexanderplatz\n• einsteigen, aussteigen, umsteigen — monter, descendre, changer (de ligne)\n• die Fahrkarte — le ticket\n\nSITUER DANS LE TEMPS\n• vor dreißig Jahren — il y a trente ans (vor + datif : vor einem Jahr, vor zwei Wochen)\n• seit 1990 — depuis 1990 (la situation dure encore : verbe au présent)\n• von 1961 bis 1989 — de 1961 à 1989\n• 1961 ou im Jahr 1961 — en 1961 (jamais « in 1961 »)\n• damals — à l’époque ; früher — autrefois ; heute — aujourd’hui\n\nÉcoutez l’enregistrement, répétez chaque mot à voix haute, puis lisez la transcription si besoin.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-berlin-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "Six lieux célèbres de Berlin",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-verkehr-bild",
+          "usage": "illustration",
+          "caption": "Se déplacer à Berlin",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les mots de Berlin",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : demander son chemin à Berlin",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Wie komme ich zur East Side Gallery?",
+        "description": "Chloé, une touriste française, sort du Neues Museum, sur la Museumsinsel. Elle veut aller à la East Side Gallery et demande son chemin à un passant, Herr Krüger. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nChloé : Entschuldigung, können Sie mir vielleicht helfen? Ich kenne mich hier nicht aus.\nHerr Krüger : Gern. Wohin möchten Sie denn?\nChloé : Zur East Side Gallery. Kann ich zu Fuß gehen?\nHerr Krüger : Das ist ziemlich weit, zu Fuß brauchen Sie ungefähr vierzig Minuten. Nehmen Sie lieber die U-Bahn. Die Station Museumsinsel ist ganz in der Nähe. Fahren Sie mit der U5 bis zum Alexanderplatz, das sind nur zwei Stationen.\nChloé : Und dann?\nHerr Krüger : Am Alexanderplatz steigen Sie in die S-Bahn um, Richtung Ostbahnhof. Am Ostbahnhof steigen Sie aus. Von dort sind es nur fünf Minuten zu Fuß: Gehen Sie Richtung Spree, dann sehen Sie die Mauer schon.\nChloé : Also: mit der U5 bis zum Alexanderplatz, dort umsteigen und mit der S-Bahn bis zum Ostbahnhof. Vielen Dank! Sie kennen sich aber gut aus.\nHerr Krüger : Na ja, ich bin Berliner. Ich wohne schon immer hier im Osten. Wissen Sie, als Kind konnte ich nicht einfach in den Westen fahren. Da war die Mauer.\nChloé : Wirklich? Und wann durften Sie zum ersten Mal nach West-Berlin?\nHerr Krüger : Im November 1989, nach dem Mauerfall. Ich war damals neunzehn. Wir wollten alle sofort in den Westen! An der Grenze mussten wir stundenlang warten, aber das war uns egal.\nChloé : Das ist ja spannend! Danke für alles und noch einen schönen Tag!\nHerr Krüger : Gern geschehen. Viel Spaß in Berlin!\n\nGRAMMAIRE : LE PRÉTÉRIT DES VERBES DE MODALITÉ\nPour raconter le passé, on emploie surtout le parfait (ich bin gefahren). Mais avec les verbes de modalité, avec sein, haben et « es gibt », on préfère le prétérit, même à l’oral.\n• können → ich konnte (je pouvais, j’ai pu)\n• müssen → ich musste (je devais, j’ai dû)\n• wollen → ich wollte (je voulais)\n• dürfen → ich durfte (j’avais le droit)\n• sollen → ich sollte ; mögen → ich mochte\nFormation : radical sans Umlaut + -te + terminaison.\nich konnte — du konntest — er/sie konnte — wir konnten — ihr konntet — sie/Sie konnten\nAttention : ich et er/sie ont la même forme, sans -t final : ich musste, er musste.\nL’infinitif va à la fin de la phrase : Als Kind konnte ich nicht in den Westen fahren.\n\nSEIN, HABEN, ES GIBT\n• sein → ich war, du warst, er war, wir waren : Ich war damals neunzehn.\n• haben → ich hatte, du hattest, er hatte, wir hatten : Wir hatten kein Auto.\n• es gibt → es gab : Es gab nur wenige Autos.\n\nDEMANDER ET INDIQUER LE CHEMIN\n• Wie komme ich zum Alexanderplatz / zur East Side Gallery? (zu + dem = zum ; zu + der = zur)\n• Nehmen Sie die U5. — Fahren Sie bis zum Alexanderplatz.\n• Steigen Sie am Alexanderplatz um. — Steigen Sie am Ostbahnhof aus. (verbes séparables : la particule va à la fin)\n• Gehen Sie geradeaus / nach links / nach rechts. — Das ist gleich da drüben.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-berlin-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : Wie komme ich zur East Side Gallery?",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-lesen",
+      "kind": "exercise",
+      "title": "Vérifier : lire l’histoire du Mur de Berlin",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Die Berliner Mauer: eine kurze Geschichte",
+        "description": "Lisez cette page d’un guide de Berlin, puis répondez aux questions.\n\nDIE BERLINER MAUER (1961–1989)\n\nNach dem Zweiten Weltkrieg teilten die vier Siegermächte – die USA, Großbritannien, Frankreich und die Sowjetunion – Berlin in vier Sektoren. 1949 entstanden zwei deutsche Staaten: im Westen die Bundesrepublik Deutschland, im Osten die DDR. Ost-Berlin wurde die Hauptstadt der DDR.\n\nViele Menschen wollten nicht in der DDR leben: Bis 1961 gingen Millionen in den Westen. In der Nacht zum 13. August 1961 sperrten Soldaten deshalb die Grenze. Danach baute die DDR eine Mauer quer durch die Stadt und rund um West-Berlin, insgesamt etwa 155 Kilometer. Von einem Tag auf den anderen konnten sich Familien und Freunde nicht mehr besuchen. Mindestens 140 Menschen starben an der Mauer.\n\nIm Herbst 1989 demonstrierten in der DDR Hunderttausende friedlich für Freiheit. Am Abend des 9. November öffnete sich die Grenze, und die Berliner feierten die ganze Nacht, viele sogar oben auf der Mauer. Seit dem 3. Oktober 1990 ist Deutschland wieder vereint.\n\nHeute zeigt eine doppelte Reihe aus Pflastersteinen, wo die Mauer früher stand. Das längste Stück steht noch an der Spree: die East Side Gallery. 1990 bemalten Künstlerinnen und Künstler aus über 20 Ländern diese 1,3 Kilometer lange Mauer.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Was war Ost-Berlin ab 1949?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Sektor der USA.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Hauptstadt der Bundesrepublik.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Hauptstadt der DDR.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Ein Teil von West-Berlin.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le texte dit qu’en 1949 deux États sont nés et qu’« Ost-Berlin wurde die Hauptstadt der DDR ». Les secteurs, dont celui des États-Unis, datent de l’après-guerre et concernaient toute la ville.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Warum baute die DDR die Mauer?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil viele Menschen die DDR verlassen wollten.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil die Sowjetunion Berlin in vier Sektoren teilen wollte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil die Berliner für Freiheit demonstrierten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil West-Berlin mehr Platz brauchte.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Viele Menschen wollten nicht in der DDR leben: Bis 1961 gingen Millionen in den Westen. » Les soldats ont fermé la frontière « deshalb », pour arrêter ces départs. Les manifestations datent de 1989.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Was passierte in der Nacht zum 13. August 1961?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Berliner feierten auf der Mauer.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Deutschland war wieder vereint.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Künstler bemalten die Mauer.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Soldaten sperrten die Grenze.",
+              "correct": true
+            }
+          ],
+          "explanation": "« In der Nacht zum 13. August 1961 sperrten Soldaten deshalb die Grenze. » La fête sur le Mur a eu lieu en 1989 et les artistes ont peint la East Side Gallery en 1990.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wie lang war die Mauer insgesamt?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Etwa 1,3 Kilometer.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Etwa 155 Kilometer.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Etwa 140 Kilometer.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Etwa 20 Kilometer.",
+              "correct": false
+            }
+          ],
+          "explanation": "« … rund um West-Berlin, insgesamt etwa 155 Kilometer. » 1,3 km est la longueur de la East Side Gallery, et 140 le nombre minimal de personnes mortes au Mur.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Was ist am 3. Oktober 1990 passiert?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Grenze hat sich geöffnet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die DDR hat die Mauer gebaut.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Deutschland ist wieder ein Land geworden.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die vier Siegermächte haben Berlin geteilt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Seit dem 3. Oktober 1990 ist Deutschland wieder vereint » : c’est la réunification. La frontière, elle, s’est ouverte le 9 novembre 1989.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Woran sieht man heute, wo die Mauer stand?",
+          "options": [
+            {
+              "id": "a",
+              "label": "An Bildern von Künstlern in allen Straßen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "An einer doppelten Reihe aus Pflastersteinen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "An einer Linie aus roten Lampen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "An kleinen Bäumen entlang der Straße.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Heute zeigt eine doppelte Reihe aus Pflastersteinen, wo die Mauer früher stand. » Les peintures d’artistes se trouvent seulement sur la East Side Gallery.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-geschichte-woerter",
+      "kind": "exercise",
+      "title": "Vérifier : écouter les mots de l’histoire allemande",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Deutsche Geschichte — der, die oder das?",
+        "description": "Un locuteur natif, enregistré pour le manuel Deutsch im Blick, lit des mots pour parler de l’histoire allemande, toujours avec leur article. Extrait 1 : les deux États allemands et les mots pour parler d’une époque. Extrait 2 : les grandes étapes du XXe siècle et le temps qui passe. Lisez d’abord la liste et les questions, puis écoutez (autant de fois que nécessaire) : repérez l’article de chaque nom et répondez. La transcription s’affichera après votre réponse.\n\nLES MOTS (sans article : à vous de l’entendre !)\nExtrait 1\n• Berliner Mauer — le Mur de Berlin\n• Bundesrepublik Deutschland (BRD) — la République fédérale d’Allemagne (RFA)\n• Deutsche Demokratische Republik (DDR) — la République démocratique allemande (RDA)\n• Sowjetunion — l’Union soviétique ; DDR — la RDA (écoutez bien l’adjectif qui précède ces deux noms)\n• Epoche — l’époque ; Ereignis — l’événement ; Gegenwart — le présent\nExtrait 2\n• Vergangenheit — le passé ; Zukunft — l’avenir\n• Weimarer Republik — la république de Weimar (1919-1933)\n• Wiederaufbau — la reconstruction, après 1945\n• Wiedervereinigung — la réunification, en 1990\n• Wirtschaft — l’économie ; Wirtschaftswunder — le « miracle économique » de la RFA dans les années 1950 ; Wirtschaftskrise — la crise économique\n\nASTUCE : LE GENRE DES NOMS\n• Un nom composé prend le genre de son dernier élément : die Wirtschaft + die Krise → die Wirtschaftskrise.\n• Les noms en -ung, -heit, -keit et -schaft sont toujours féminins : die Wiedervereinigung, die Vergangenheit, die Wirtschaft.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Extrait 1 : comment dit-on « l’ex-RDA » dans l’enregistrement ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die frühere DDR",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die alte DDR",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die ehemalige DDR",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die damalige DDR",
+              "correct": false
+            }
+          ],
+          "explanation": "Le locuteur dit « die ehemalige DDR » : ehemalig signifie « ancien, ex- ». Früher et damals ont un sens proche, mais ce ne sont pas les mots entendus.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Extrait 1 : quel article entendez-vous devant « Ereignis » (l’événement) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « das Ereignis, die Ereignisse ». Les noms en -nis sont souvent neutres (das Ergebnis, das Zeugnis), mais l’article s’apprend toujours avec le mot.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Extrait 1 : quel pluriel de « Ereignis » entendez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Ereignissen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Ereignis",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Ereignise",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Ereignisse",
+              "correct": true
+            }
+          ],
+          "explanation": "Les noms en -nis doublent le s au pluriel et ajoutent -e : die Ereignisse. « Ereignissen » est la forme du datif pluriel, pas celle qu’on entend après die.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Extrait 1 : quel article entendez-vous devant « Gegenwart » (le présent) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "der",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "das",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « die Gegenwart » : le présent est féminin, comme die Vergangenheit (le passé) et die Zukunft (l’avenir).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Extrait 2 : quel article entendez-vous devant « Wiederaufbau » (la reconstruction) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "das",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "der",
+              "correct": true
+            }
+          ],
+          "explanation": "On entend « der Wiederaufbau » : un nom composé prend le genre de son dernier élément, der Aufbau. Ne le confondez pas avec die Wiedervereinigung, féminin en -ung.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Extrait 2 : quel article entendez-vous devant « Wirtschaftswunder » (le miracle économique) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « das Wirtschaftswunder » : le dernier élément, das Wunder (le miracle), donne le genre. Die Wirtschaft, au début du mot, ne compte pas.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-geschichte-1-native",
+          "usage": "audio",
+          "caption": "Extrait 1 : deux États allemands",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-geschichte-2-native",
+          "usage": "audio",
+          "caption": "Extrait 2 : du passé à l’avenir",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-hoeren",
+      "kind": "exercise",
+      "title": "Vérifier : écouter une annonce, une visite et un rendez-vous",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Unterwegs in Berlin",
+        "description": "Vous allez entendre trois scènes : une annonce dans la S-Bahn, une visite guidée devant la porte de Brandebourg et un appel entre deux amis. Lisez d’abord les questions, puis écoutez (autant de fois que nécessaire) et répondez. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Szene 1 : Sie möchten mit der U6 nach Hallesches Tor fahren. Was müssen Sie heute machen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "An der Friedrichstraße in einen Regionalzug umsteigen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vor dem Bahnhof den Ersatzbus nehmen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "In der S-Bahn bleiben und bis Hallesches Tor fahren.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit der U6 in die andere Richtung fahren.",
+              "correct": false
+            }
+          ],
+          "explanation": "L’annonce précise que la U6 ne circule pas entre Friedrichstraße et Hallesches Tor, et les voyageurs « nehmen bitte den Ersatzbus vor dem Bahnhof » : le bus de remplacement devant la gare.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Szene 2 : Wann baute man das Brandenburger Tor?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Von 1688 bis 1691.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Von 1871 bis 1874.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Von 1961 bis 1989.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Von 1788 bis 1791.",
+              "correct": true
+            }
+          ],
+          "explanation": "Le guide dit « von siebzehnhundertachtundachtzig bis siebzehnhunderteinundneunzig » : de 1788 à 1791. La période 1961–1989 est celle du Mur.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Szene 2 : Was durfte man von 1961 bis 1989 am Brandenburger Tor nicht machen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Durch das Tor gehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Fotos von der Quadriga machen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vor dem Tor eine Pause machen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit dem Bus zum Reichstag fahren.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Niemand durfte hier durchgehen, weder von Osten noch von Westen. » Durfte, prétérit de dürfen : personne n’avait le droit de passer sous la porte.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Szene 2 : Um wie viel Uhr trifft sich die Gruppe wieder vor dem Tor?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um 14.00 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um 15.30 Uhr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um 14.30 Uhr.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Um 13.30 Uhr.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Wir treffen uns um halb drei wieder hier » : halb drei, c’est la demi-heure avant trois heures, donc 14 h 30, et non 15 h 30.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Szene 3 : Womit fährt Jana zu Malik?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit dem Bus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit der S-Bahn.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Mit der U-Bahn.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit dem Fahrrad.",
+              "correct": false
+            }
+          ],
+          "explanation": "Malik conseille « Nimm lieber die S-Bahn », directe du Zoo à la Warschauer Straße en vingt minutes. Le bus prend presque une heure et la U-Bahn impose un changement.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Szene 3 : Wann und wo treffen sich Jana und Malik?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um vier Uhr vor dem Hotel am Zoo.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um Viertel vor vier auf der Oberbaumbrücke.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um vier Uhr am Ausgang der Station.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Um Viertel nach vier am Ausgang der Station.",
+              "correct": true
+            }
+          ],
+          "explanation": "Jana ne peut pas à quatre heures et propose « Lieber um Viertel nach vier » ; Malik confirme « Viertel nach vier am Ausgang » : 16 h 15 à la sortie de la station.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Trois scènes en ville",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-bus-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-sbahn-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-ubahn-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-fahrrad-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "optionId": "d",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-kieze",
+      "kind": "exercise",
+      "title": "Vérifier : lire « Berlin, une ville de quartiers »",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Berlin – eine Stadt, viele Kieze",
+        "description": "Lisez cet article d’un magazine de voyage sur le Berlin d’aujourd’hui, puis répondez aux questions.\n\nBERLIN – EINE STADT, VIELE KIEZE\n\nBerlin ist die größte Stadt Deutschlands, und hier leben Menschen aus rund 190 Ländern. Die Stadt hat zwölf Bezirke, aber die Berliner sprechen lieber von ihrem „Kiez“. So nennen sie ihr Viertel mit seinen Cafés, Läden und Nachbarn.\n\nWeil Berlin über vierzig Jahre lang in Ost und West geteilt war, gibt es viele Dinge zweimal. Die Stadt hat zum Beispiel zwei Zoos: den Zoologischen Garten im Westen und den Tierpark im Osten. Auch bei den Universitäten ist das so: Die Humboldt-Universität liegt im früheren Osten, die Freie Universität im Westen.\n\nKreuzberg lag früher im Westen, direkt an der Mauer. Seit den Sechziger- und Siebzigerjahren sind hier viele Familien aus der Türkei zu Hause. Kreuzberg ist bunter und lauter als viele andere Viertel, und manche sagen, dass es hier den besten Döner der Stadt gibt. Prenzlauer Berg im früheren Osten ist ruhiger. Dort gibt es schöne alte Häuser. Nach dem Mauerfall sind viele junge Leute dorthin gezogen, und heute sieht man dort gemütliche Cafés und sehr viele Familien mit Kindern.\n\nWenn man Kunst liebt, besucht man die Museumsinsel. Ihre fünf Museen gehören seit 1999 zum Weltkulturerbe der UNESCO. Insgesamt hat Berlin über 170 Museen!\n\nUnd wenn man Hunger hat? Dann probiert man eine Currywurst. Man erzählt, dass eine Frau 1949 an ihrem Imbiss in Berlin die erste Currywurst verkauft hat. Heute bekommt man sie an jeder Ecke, sogar vegan.\n\nMOTS UTILES\n• der Kiez — le quartier (mot berlinois) ; der Bezirk — l’arrondissement\n• geteilt — divisé(e) ; früher — autrefois ; im früheren Osten — dans l’ancien Berlin-Est\n• der Tierpark — le parc zoologique ; bunt — coloré, varié ; gemütlich — chaleureux, où l’on se sent bien\n• das Weltkulturerbe — le patrimoine mondial\n\nTexte adapté de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Was ist ein „Kiez“?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein typisches Berliner Essen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Berliner Wort für ein Viertel.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ein Museum auf der Museumsinsel.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ein anderes Wort für die Grenze zwischen Ost und West.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Berliner sprechen lieber von ihrem „Kiez“. So nennen sie ihr Viertel » : der Kiez est le mot berlinois pour le quartier. Ce n’est pas un plat : la spécialité citée est la currywurst.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Warum gibt es in Berlin viele Dinge zweimal?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Stadt zwölf Bezirke hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil Menschen aus rund 190 Ländern in Berlin leben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil die Stadt lange in Ost und West geteilt war.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Weil Berlin die größte Stadt Deutschlands ist.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Weil Berlin über vierzig Jahre lang in Ost und West geteilt war, gibt es viele Dinge zweimal » : deux zoos, deux grandes universités. Les douze arrondissements ne l’expliquent pas.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Welcher Satz stimmt?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Freie Universität liegt im Westen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Humboldt-Universität liegt im Westen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Tierpark liegt im Westen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Zoologische Garten liegt im Osten.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Humboldt-Universität liegt im früheren Osten, die Freie Universität im Westen. » Le Tierpark est à l’Est et le Zoologischer Garten à l’Ouest : les autres phrases inversent les côtés.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was sagt der Text über Kreuzberg und Prenzlauer Berg?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Prenzlauer Berg ist lauter als Kreuzberg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kreuzberg lag früher im Osten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Prenzlauer Berg ist ruhiger als Kreuzberg.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "In Prenzlauer Berg gibt es den besten Döner der Stadt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Prenzlauer Berg im früheren Osten ist ruhiger » ; Kreuzberg est « bunter und lauter ». Kreuzberg était à l’Ouest, et c’est là qu’on situe le meilleur döner.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Was ist über die Museumsinsel richtig?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie gehört seit 1989 zum Weltkulturerbe.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie liegt in Kreuzberg.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Auf der Insel gibt es über 170 Museen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ihre fünf Museen gehören seit 1999 zum Weltkulturerbe.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Ihre fünf Museen gehören seit 1999 zum Weltkulturerbe der UNESCO. » Les plus de 170 musées sont ceux de toute la ville, pas de l’île.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Was erzählt man über die Currywurst?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Frau hat 1949 in Berlin die erste Currywurst verkauft.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Man bekommt sie nur in Kreuzberg.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie kommt aus der Türkei.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es gibt sie erst seit dem Mauerfall.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le texte rapporte ce qu’on raconte (« Man erzählt, dass … ») : une femme aurait vendu la première currywurst à son stand (Imbiss), à Berlin, en 1949. Aujourd’hui, on la trouve « an jeder Ecke », pas seulement à Kreuzberg."
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-kieze-bild",
+          "usage": "illustration",
+          "caption": "Les mots du Berlin d’aujourd’hui",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-sehenswuerdigkeiten",
+      "kind": "exercise",
+      "title": "Vérifier : reconnaître cinq symboles de Berlin",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Was ist das? — Berliner Wahrzeichen",
+        "description": "Avant votre visite, lisez ces fiches d’un petit guide de Berlin. Ensuite, regardez chaque photo, tirée du manuel Deutsch im Blick, et répondez aux questions.\n\nFÜNF BERLINER WAHRZEICHEN\n\nDAS BRANDENBURGER TOR\nMan baute das Tor von 1788 bis 1791. Oben steht die Quadriga: eine Göttin auf einem Wagen mit vier Pferden. Heute ist das Tor ein Symbol für die deutsche Einheit.\n\nDAS REICHSTAGSGEBÄUDE\nHier arbeitet seit 1999 der Bundestag, das deutsche Parlament. Über dem Eingang stehen die Worte „Dem deutschen Volke“. Auf dem Dach gibt es eine große Kuppel aus Glas. Man kann sie kostenlos besichtigen, aber man muss sich vorher anmelden.\n\nDIE ALTE NATIONALGALERIE\nDieses Museum steht auf der Museumsinsel. Es sieht aus wie ein antiker Tempel, und vor der Treppe steht ein Reiter aus Bronze. Im Museum sieht man Bilder und Skulpturen aus dem 19. Jahrhundert.\n\nDIE KAISER-WILHELM-GEDÄCHTNISKIRCHE\nDie Kirche steht im Westen der Stadt, ganz in der Nähe vom Kurfürstendamm. 1943, im Zweiten Weltkrieg, zerstörten Bomben die Kirche. Die Ruine des alten Turms mit der großen Uhr steht noch heute, und daneben steht ein moderner Turm. Die Berliner nennen die Ruine „den hohlen Zahn“.\n\nDIE BERLINER FLAGGE\nDie Flagge der Stadt ist rot-weiß-rot. Auf dem weißen Streifen in der Mitte sieht man einen schwarzen Bären. Der Bär ist das Symbol von Berlin.\n\nMOTS UTILES\n• das Wahrzeichen — le monument emblématique, le symbole d’une ville\n• die Säule — la colonne ; die Kuppel — la coupole ; der Turm — la tour ; die Ruine — la ruine\n• der Eingang — l’entrée ; die Treppe — l’escalier ; der Reiter — le cavalier\n• zerstören — détruire ; hohl — creux ; der Zahn — la dent\n• der Bär — l’ours (accusatif : den Bären, einen Bären)\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Foto 1 : Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "das Reichstagsgebäude",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Alte Nationalgalerie",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "das Brandenburger Tor",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die Kaiser-Wilhelm-Gedächtniskirche",
+              "correct": false
+            }
+          ],
+          "explanation": "Une porte à colonnes surmontée d’un char tiré par quatre chevaux : c’est la Quadriga de la porte de Brandebourg, décrite dans la première fiche.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Foto 2 : Was ist das? Lesen Sie die Inschrift.",
+          "options": [
+            {
+              "id": "a",
+              "label": "das Reichstagsgebäude",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "das Brandenburger Tor",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Alte Nationalgalerie",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "der Fernsehturm",
+              "correct": false
+            }
+          ],
+          "explanation": "L’inscription « Dem deutschen Volke » se trouve au-dessus de l’entrée du Reichstagsgebäude, siège du Bundestag. La Nationalgalerie porte l’inscription « Der deutschen Kunst ».",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Foto 3 : Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Kaiser-Wilhelm-Gedächtniskirche",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das Reichstagsgebäude",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "das Brandenburger Tor",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Alte Nationalgalerie",
+              "correct": true
+            }
+          ],
+          "explanation": "Un bâtiment en forme de temple antique avec un cavalier en bronze devant l’escalier : c’est l’Alte Nationalgalerie, sur la Museumsinsel.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Foto 4 : Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Fernsehturm",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Kaiser-Wilhelm-Gedächtniskirche",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Alte Nationalgalerie",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "das Rote Rathaus",
+              "correct": false
+            }
+          ],
+          "explanation": "La tour en ruine avec sa grande horloge et la tour moderne à côté : c’est la Kaiser-Wilhelm-Gedächtniskirche, que les Berlinois appellent « den hohlen Zahn ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Foto 5 : Welches Tier sieht man auf der Berliner Flagge?",
+          "options": [
+            {
+              "id": "a",
+              "label": "einen Adler",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "einen Löwen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "einen Bären",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "ein Pferd",
+              "correct": false
+            }
+          ],
+          "explanation": "« Auf dem weißen Streifen in der Mitte sieht man einen schwarzen Bären. » Der Bär devient einen Bären à l’accusatif : c’est un nom masculin faible.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was muss man machen, wenn man die Kuppel des Reichstagsgebäudes besichtigen möchte?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man muss sich vorher anmelden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Man muss ein teures Ticket kaufen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man muss Mitglied des Bundestags sein.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Man muss am Abend kommen.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Man kann sie kostenlos besichtigen, aber man muss sich vorher anmelden. » La visite de la coupole est gratuite (kostenlos) : aucun billet cher n’est à acheter.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Was ist 1943 mit der Gedächtniskirche passiert?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man hat einen modernen Turm gebaut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Bundestag ist dort eingezogen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bomben haben die Kirche zerstört.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Kirche hat eine große Uhr bekommen.",
+              "correct": false
+            }
+          ],
+          "explanation": "« 1943, im Zweiten Weltkrieg, zerstörten Bomben die Kirche. » La fiche ne dit pas que la tour moderne date de 1943 ; la grande horloge appartient à l’ancienne tour.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-tor-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-reichstag-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-nationalgalerie-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-gedaechtniskirche-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-flagge-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : le prétérit et les indications de temps",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Konnte, musste, war, gab es – vor, seit, von … bis",
+        "description": "Complétez, remettez dans l’ordre ou associez, puis écrivez la phrase dictée.\n\nRAPPELS\n• Prétérit des verbes de modalité : radical sans Umlaut + -te + terminaison. ich konnte, du konntest, er konnte, wir konnten, ihr konntet, sie konnten (de même : musste, wollte, durfte). Ich et er/sie ont la même forme, sans -t final.\n• sein → ich war, wir waren ; haben → ich hatte, wir hatten ; es gibt → es gab.\n• Avec un verbe de modalité, l’infinitif va à la fin : Als Kind konnte ich nicht in den Westen fahren.\n• vor + datif = il y a (vor zwei Jahren) ; seit = depuis, avec le présent (seit 1990) ; von … bis = de … à (von 1961 bis 1989).",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q8",
+          "prompt": "Die Mauer fiel … über dreißig Jahren.",
+          "options": [
+            {
+              "id": "a",
+              "label": "seit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "vor",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "von",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "in",
+              "correct": false
+            }
+          ],
+          "explanation": "Vor + datif situe un moment passé : vor über dreißig Jahren, « il y a plus de trente ans » (datif pluriel Jahren). Seit s’emploie pour une situation qui dure encore, avec le présent.",
+          "type": "choice"
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Complétez au prétérit.",
+          "text": "Als Kind [[1]] ich nicht in den Westen fahren. Die Grenze war zu.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "konnte"
+              ],
+              "size": 8,
+              "hint": "können"
+            }
+          ],
+          "explanation": "Prétérit de können : radical sans Umlaut + -te, ich konnte. Könnte (avec ö) est un conditionnel, et kann un présent qui ne convient pas à « als Kind »."
+        },
+        {
+          "id": "q10",
+          "type": "fill",
+          "prompt": "Complétez au prétérit.",
+          "text": "Früher [[1]] wir jeden Tag eine Stunde mit dem Bus zur Schule fahren.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "mussten"
+              ],
+              "size": 9,
+              "hint": "müssen"
+            }
+          ],
+          "explanation": "Avec wir, la terminaison est -en : wir mussten (müssen perd son Umlaut au prétérit). Musste convient à ich ou er, pas à wir."
+        },
+        {
+          "id": "q11",
+          "type": "fill",
+          "prompt": "Complétez au prétérit.",
+          "text": "Damals [[1]] du nicht allein mit der U-Bahn fahren, oder?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "durftest"
+              ],
+              "size": 10,
+              "hint": "dürfen"
+            }
+          ],
+          "explanation": "Avec du, le prétérit prend -st : du durftest. Durfte est la forme de ich et er/sie ; darfst est le présent."
+        },
+        {
+          "id": "q12",
+          "type": "fill",
+          "prompt": "Complétez au prétérit.",
+          "text": "Meine Eltern [[1]] damals kein Auto, und es [[2]] nur wenige Busse.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hatten"
+              ],
+              "size": 8,
+              "hint": "haben"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gab"
+              ],
+              "size": 5,
+              "hint": "es gibt"
+            }
+          ],
+          "explanation": "Meine Eltern est un pluriel : sie hatten, prétérit de haben. Es gibt devient es gab au prétérit ; « es war » ne s’emploie pas pour dire « il y avait » des bus."
+        },
+        {
+          "id": "q13",
+          "type": "fill",
+          "prompt": "Complétez avec les mots qui délimitent la période.",
+          "text": "[[1]] 1961 [[2]] 1989 stand die Mauer mitten in Berlin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "von"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bis"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Une période fermée, avec un début et une fin, s’exprime avec von … bis : de 1961 à 1989. Seit s’emploie pour une situation qui dure encore aujourd’hui."
+        },
+        {
+          "id": "q14",
+          "type": "fill",
+          "prompt": "Complétez avec vor, seit ou von.",
+          "text": "Deutschland ist [[1]] 1990 wieder vereint.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "seit"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "La réunification commence en 1990 et dure encore : seit, avec le présent ist. « Vor 1990 » signifierait « avant 1990 »."
+        },
+        {
+          "id": "q15",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre. Commencez par « An der Grenze ».",
+          "answers": [
+            [
+              "An der Grenze",
+              "mussten",
+              "wir",
+              "stundenlang",
+              "warten."
+            ]
+          ],
+          "explanation": "An der Grenze occupe la première position : le verbe de modalité mussten suit directement, puis le sujet wir ; l’infinitif warten va à la fin."
+        },
+        {
+          "id": "q16",
+          "type": "match",
+          "prompt": "Associez chaque verbe à sa forme au prétérit (ich ou es).",
+          "pairs": [
+            {
+              "left": "können",
+              "right": "konnte"
+            },
+            {
+              "left": "müssen",
+              "right": "musste"
+            },
+            {
+              "left": "dürfen",
+              "right": "durfte"
+            },
+            {
+              "left": "wollen",
+              "right": "wollte"
+            },
+            {
+              "left": "sein",
+              "right": "war"
+            },
+            {
+              "left": "es gibt",
+              "right": "es gab"
+            }
+          ],
+          "explanation": "Les verbes de modalité perdent leur Umlaut au prétérit et prennent -te : konnte, musste, durfte, wollte. Sein et es gibt ont des formes irrégulières : war, es gab."
+        },
+        {
+          "id": "q17",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase sur le passé de la ville.",
+          "accept": [
+            "Früher gab es hier eine Mauer."
+          ],
+          "voice": "sprecher",
+          "explanation": "Es gab est le prétérit de es gibt. Früher occupe la première position : le verbe gab vient juste après, puis le sujet es.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-grammatik-q17",
+          "usage": "audio",
+          "questionId": "q17",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-wegbeschreibung",
+      "kind": "lesson",
+      "title": "Écouter et répéter : demander et indiquer le chemin",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Nach dem Weg fragen — Wegbeschreibungen",
+        "description": "Deux enregistrements de locuteurs natifs, tirés du manuel Deutsch im Blick : d’abord les phrases pour demander son chemin, puis celles pour l’indiquer. Le lieu cherché est toujours le zoo (der Zoo). Écoutez une première fois en suivant la liste, puis réécoutez : après chaque phrase, mettez en pause et répétez à voix haute en imitant la prononciation et la mélodie.\n\n1. NACH DEM WEG FRAGEN — DEMANDER SON CHEMIN\n• Entschuldigen Sie. / Entschuldigung. — Excusez-moi.\n• Ich kenne mich hier nicht aus. — Je ne connais pas le coin.\n• Können Sie mir vielleicht helfen? — Vous pourriez m’aider ?\n• Wie komme ich zum Zoo? — Comment est-ce que je vais au zoo ?\n• Wo ist der Zoo? — Où est le zoo ?\n• Vielen Dank. — Merci beaucoup.\n\n2. WEGBESCHREIBUNGEN — INDIQUER LE CHEMIN\n• Auf der rechten Seite. / Auf der linken Seite. — Sur la droite. / Sur la gauche.\n• Biegen Sie rechts ab. / Biegen Sie links ab. — Tournez à droite. / Tournez à gauche.\n• Der Zoo ist in der Nähe von … — Le zoo est près de … (la phrase reste ouverte : à vous de la compléter)\n• Der Zoo ist ungefähr zehn Minuten zu Fuß / mit dem Bus. — Le zoo est à dix minutes environ à pied / en bus.\n• Fahren Sie mit dem Bus. / Fahren Sie mit der U-Bahn. — Prenez le bus. / Prenez le métro.\n• Gehen Sie geradeaus. — Allez tout droit.\n• Gleich da drüben. — Juste là-bas.\n• Nehmen Sie die nächste Kreuzung rechts. / … links. — Au prochain carrefour, prenez à droite. / … à gauche.\n\nÀ REMARQUER EN ÉCOUTANT\n• L’impératif de politesse commence par le verbe, suivi de Sie : Biegen Sie …, Fahren Sie …, Gehen Sie …, Nehmen Sie … Avec un verbe séparable, la particule va à la fin : Biegen Sie rechts ab.\n• Après zu, mit et von, on emploie le datif : zum Zoo (zu + dem), mit dem Bus, mit der U-Bahn, in der Nähe vom Bahnhof (von + dem).\n• L’accent de « Entschuldigung » tombe sur -schul- : ent-SCHUL-di-gung. Dans « drüben », le ü se prononce comme le « u » français de « tu ».\n\nÀ VOUS\nRemplacez « der Zoo » par un lieu de Berlin et dites à voix haute trois questions et trois réponses, par exemple : Entschuldigung, wie komme ich zum Brandenburger Tor? — Fahren Sie mit der U5 bis zur Station Brandenburger Tor. Das Tor ist in der Nähe vom Reichstag. L’exercice « Répéter à voix haute » qui suit vérifie ensuite votre prononciation sur des phrases de ce type.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-berlin-weg-fragen-native",
+          "usage": "audio",
+          "caption": "Nach dem Weg fragen — enregistrement natif",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-weg-beschreiben-native",
+          "usage": "audio",
+          "caption": "Wegbeschreibungen — enregistrement natif",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : demander son chemin, raconter le passé",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : demander son chemin, raconter le passé",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute. Faites entendre la particule séparable à la fin (ab, um, aus) et l’infinitif après konnte. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-berlin-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis abordez un passant.",
+          "text": "Entschuldigung, ich kenne mich hier nicht aus.",
+          "accept": [
+            "Entschuldigung, ich kenne mich hier nicht aus."
+          ],
+          "threshold": 75,
+          "explanation": "Entschuldigung est accentué sur « schul ». Dans sich auskennen, la particule aus termine la phrase et porte l’accent."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez le chemin.",
+          "text": "Wie komme ich zum Brandenburger Tor?",
+          "accept": [
+            "Wie komme ich zum Brandenburger Tor?"
+          ],
+          "threshold": 75,
+          "explanation": "Zum = zu dem, car das Tor est neutre. La voix descend à la fin : c’est une question avec un mot interrogatif."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis indiquez où tourner.",
+          "text": "Biegen Sie an der Kreuzung links ab.",
+          "accept": [
+            "Biegen Sie an der Kreuzung links ab."
+          ],
+          "threshold": 75,
+          "explanation": "Impératif de politesse : le verbe biegen ouvre la phrase, Sie suit, et la particule ab termine la consigne."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis indiquez la correspondance.",
+          "text": "Am Alexanderplatz steigen Sie in die S-Bahn um.",
+          "accept": [
+            "Am Alexanderplatz steigen Sie in die S-Bahn um."
+          ],
+          "threshold": 75,
+          "explanation": "Umsteigen est séparable : steigen vient en 2e position, um à la fin. Dans S-Bahn, on prononce la lettre s : « èss »."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : un fait d’histoire.",
+          "text": "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig stand hier die Mauer.",
+          "accept": [
+            "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig stand hier die Mauer.",
+            "Von 1961 bis 1989 stand hier die Mauer."
+          ],
+          "threshold": 75,
+          "explanation": "Les années se lisent par centaines : neunzehnhundert-einundsechzig. Stand est le prétérit de stehen."
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : un souvenir d’enfance.",
+          "text": "Als Kind konnte ich nicht in den Westen fahren.",
+          "accept": [
+            "Als Kind konnte ich nicht in den Westen fahren."
+          ],
+          "threshold": 75,
+          "explanation": "Konnte, prétérit de können, n’a pas d’Umlaut ; l’infinitif fahren va à la fin. Le w de Westen se prononce [v]."
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-wege",
+      "kind": "exercise",
+      "title": "S’entraîner : comprendre et donner un itinéraire",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wie komme ich dahin?",
+        "description": "Voici deux lignes du centre de Berlin (extrait simplifié du réseau) et des phrases utiles pour demander et indiquer le chemin. Lisez-les, puis répondez aux questions.\n\nZWEI LINIEN IM ZENTRUM\n• U5 : Hauptbahnhof – Bundestag – Brandenburger Tor – Unter den Linden – Museumsinsel – Rotes Rathaus – Alexanderplatz\n• S-Bahn (S5, S7) : Zoologischer Garten – Tiergarten – Bellevue – Hauptbahnhof – Friedrichstraße – Hackescher Markt – Alexanderplatz – Jannowitzbrücke – Ostbahnhof – Warschauer Straße\n\nDEMANDER LE CHEMIN\n• Entschuldigung, ich kenne mich hier nicht aus. Können Sie mir helfen?\n• Wie komme ich zum Fernsehturm / zur Museumsinsel?\n• Wo ist die nächste Haltestelle?\n\nINDIQUER LE CHEMIN\n• Gehen Sie geradeaus bis zur Ampel. — Allez tout droit jusqu’au feu.\n• Biegen Sie an der nächsten Kreuzung links / rechts ab. — Tournez à gauche / à droite au prochain carrefour.\n• Das ist gleich da drüben / ganz in der Nähe / auf der rechten Seite. — C’est juste là / tout près / sur la droite.\n• Fahren Sie drei Stationen. — Faites trois stations.\n• Steigen Sie an der Friedrichstraße in die U6 um. — Changez à Friedrichstraße pour prendre la U6.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Sie sind am Hauptbahnhof und möchten zum Brandenburger Tor. Was ist richtig?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie nehmen die S-Bahn und steigen an der Friedrichstraße aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie nehmen die U5 und fahren zwei Stationen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie nehmen die U5 und steigen am Alexanderplatz um.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie nehmen die S5 bis zum Ostbahnhof.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sur la ligne U5, Brandenburger Tor vient deux stations après Hauptbahnhof (Hauptbahnhof – Bundestag – Brandenburger Tor). La S-Bahn n’y passe pas, et l’Alexanderplatz est dans l’autre direction.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Sie fahren mit der S-Bahn vom Zoologischen Garten und möchten zum Bundestag. Wo steigen Sie um?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am Hauptbahnhof.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "An der Friedrichstraße.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Am Ostbahnhof.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie müssen nicht umsteigen.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le Bundestag se trouve sur la U5, pas sur la S-Bahn. Les deux lignes se croisent au Hauptbahnhof : on y change. Friedrichstraße n’est pas desservie par la U5 de l’extrait.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Sie sind an der Museumsinsel und möchten zum Ostbahnhof. Was sagt Ihnen eine Berlinerin?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Fahren Sie mit der U5 bis zum Hauptbahnhof und steigen Sie dort aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nehmen Sie die S-Bahn, Sie müssen nicht umsteigen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Fahren Sie mit der U5 bis zum Alexanderplatz und steigen Sie dort in die S-Bahn um.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Fahren Sie mit der U5 bis zur Warschauer Straße.",
+              "correct": false
+            }
+          ],
+          "explanation": "Museumsinsel est sur la U5 et Ostbahnhof sur la S-Bahn ; les deux lignes se rejoignent à l’Alexanderplatz. La U5 ne va ni au Ostbahnhof ni à la Warschauer Straße.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Vous êtes perdu(e) et vous abordez une passante. Quelle phrase est la plus naturelle et la plus polie pour commencer ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie müssen mir jetzt den Weg zeigen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Hallo, wo bin ich hier?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich kenne Sie nicht. Wo ist der Weg?",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Entschuldigung, ich kenne mich hier nicht aus. Können Sie mir helfen?",
+              "correct": true
+            }
+          ],
+          "explanation": "On s’excuse (Entschuldigung), on explique qu’on ne connaît pas le quartier (ich kenne mich hier nicht aus) et on pose une question polie. « Sie müssen mir … zeigen » est un ordre impoli.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "« Biegen Sie an der nächsten Kreuzung links ab. » Que devez-vous faire ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Tourner à gauche au prochain carrefour.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Aller tout droit jusqu’au prochain carrefour.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Traverser la rue au feu.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Prendre la prochaine rue à droite.",
+              "correct": false
+            }
+          ],
+          "explanation": "Abbiegen signifie tourner ; links, à gauche ; an der nächsten Kreuzung, au prochain carrefour. Geradeaus voudrait dire « tout droit » et rechts « à droite ».",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Wie komme ich … Fernsehturm? — Der ist am Alexanderplatz.",
+          "options": [
+            {
+              "id": "a",
+              "label": "zur",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "zum",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nach",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "in",
+              "correct": false
+            }
+          ],
+          "explanation": "Der Fernsehturm est masculin : zu + dem = zum. Zur s’emploie devant un nom féminin (zur Museumsinsel) et nach devant une ville ou un pays sans article.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez la question et la réponse.",
+          "text": "Wie komme ich [[1]] Museumsinsel? – Fahren Sie mit [[2]] U5 bis zum Alexanderplatz.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zur",
+                "zu der"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Die Museumsinsel est féminin : zu + der = zur. Après mit, on emploie aussi le datif : die U5 devient mit der U5."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Complétez avec la particule de chaque verbe.",
+          "text": "Am Alexanderplatz steigen Sie in die S-Bahn [[1]], und am Ostbahnhof steigen Sie [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "um"
+              ],
+              "size": 4,
+              "hint": "umsteigen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "aus"
+              ],
+              "size": 4,
+              "hint": "aussteigen"
+            }
+          ],
+          "explanation": "Umsteigen (changer) et aussteigen (descendre) sont séparables : la particule va à la fin de la phrase. Einsteigen voudrait dire monter."
+        },
+        {
+          "id": "q9",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez l’indication donnée par la passante.",
+          "accept": [
+            "Die nächste Haltestelle ist auf der linken Seite."
+          ],
+          "voice": "frau",
+          "explanation": "Auf der linken Seite : auf + datif, d’où der linken pour un nom féminin. Die Haltestelle (l’arrêt) s’écrit en un seul mot.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-wege-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-wege-q9",
+          "usage": "audio",
+          "questionId": "q9",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-tagesplan",
+      "kind": "exercise",
+      "title": "Vérifier : écouter le programme d’une journée",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Ein Tag in Berlin",
+        "description": "Inès, une étudiante française, n’a plus qu’une journée libre à Berlin. Son ami berlinois Lukas lui propose un programme : quatre étapes, dans un ordre qui évite les détours. Lisez d’abord les questions, puis écoutez (autant de fois que nécessaire) et répondez. La transcription s’affichera après votre réponse.\n\nASTUCE\nPendant l’écoute, repérez les mots qui structurent le programme : zuerst (d’abord), danach (ensuite), zu Mittag (à midi), am Nachmittag (l’après-midi), am Abend (le soir). Les prix et les nombres sont dits en toutes lettres : vier Euro fünfzig = 4,50 €.\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wohin gehen Inès und Lukas zuerst?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Auf den Fernsehturm.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zur East Side Gallery.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ins Neue Museum auf der Museumsinsel.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Nach Kreuzberg.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lukas dit « Zuerst gehen wir auf die Museumsinsel » et cite le Neues Museum. Zuerst (d’abord) ouvre le programme ; Kreuzberg vient le soir.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Warum beginnen sie dort?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil das Museum am Nachmittag geschlossen ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil Inès’ Hotel ganz in der Nähe ist.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil Lukas’ Schwester dort arbeitet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil es dort die beste Currywurst gibt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« … weil dein Hotel ganz in der Nähe ist » : l’hôtel d’Inès est tout près de l’île aux musées. La sœur de Lukas n’intervient que le soir.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Warum fahren sie nicht auf den Fernsehturm?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil man oft lange warten muss und Inès Angst hat, wenn sie so hoch oben ist.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil der Turm am Samstag geschlossen ist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil das Ticket zu teuer ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil der Turm nicht das höchste Bauwerk Deutschlands ist.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lukas prévient qu’« am Samstag muss man dort oft über eine Stunde warten » et Inès avoue « ich habe ein bisschen Angst, wenn ich so hoch oben bin ». Ni le prix ni une fermeture ne sont évoqués.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wie viel kostet die Currywurst an Lukas’ Imbiss?",
+          "options": [
+            {
+              "id": "a",
+              "label": "5,40 Euro.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "4,15 Euro.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "14,50 Euro.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "4,50 Euro.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Sie kostet nur vier Euro fünfzig » : 4,50 €. On dit d’abord les euros, puis les centimes ; 5,40 € inverserait les deux nombres.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wie kommen sie am Nachmittag zur East Side Gallery?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit der U5 bis zum Ostbahnhof.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit der S-Bahn bis zum Ostbahnhof.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Mit der S-Bahn bis zur Warschauer Straße.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zu Fuß über die Oberbaumbrücke.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Nachmittag fahren wir mit der S-Bahn bis zum Ostbahnhof. » Ensuite seulement, ils longent la East Side Gallery à pied jusqu’à l’Oberbaumbrücke.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was machen sie am Abend?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie essen eine Currywurst am Alexanderplatz.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie besuchen noch einmal das Neue Museum.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie essen mit Lukas’ Schwester in einem türkischen Restaurant in Kreuzberg.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie fahren mit Merve auf den Fernsehturm.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le soir, ils vont à Kreuzberg retrouver Merve, la sœur de Lukas, qui connaît « ein türkisches Restaurant ». La currywurst, c’était à midi à l’Alexanderplatz.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-berlin-tagesplan-audio-v3",
+          "usage": "audio",
+          "caption": "Lukas propose un programme à Inès",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-tagesplan-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-sprechen",
+      "kind": "mission",
+      "title": "Mission : une carte postale de Berlin",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Grüße aus Berlin! — Raconter une visite",
+        "description": "Écoutez Lina, qui raconte son séjour à Berlin à sa grand-mère, puis préparez votre propre récit.\n\nMODÈLE\nLiebe Oma,\nseit drei Tagen bin ich jetzt in Berlin, und die Stadt ist toll! Gestern wollte ich die Kuppel vom Reichstag besichtigen. Man muss sich vorher online anmelden, aber zum Glück hatte ich einen Termin. Danach bin ich mit der U5 zur Museumsinsel gefahren. Heute war ich an der East Side Gallery. Vor über dreißig Jahren war die Stadt hier noch geteilt – unglaublich! Leider konnte ich nicht lange bleiben, es gab nämlich ein Gewitter.\nViele Grüße\ndeine Lina\n\nPOUR PRÉPARER\nImaginez que vous êtes à Berlin depuis quelques jours.\n1. Depuis quand vous êtes là : Ich bin seit … in Berlin.\n2. Ce que vous vouliez faire et ce que vous avez pu (ou pas pu) faire : Ich wollte … / Ich konnte … / Ich musste …\n3. Un monument et un fait d’histoire : Das Brandenburger Tor … / Von 1961 bis 1989 … / Vor über dreißig Jahren …\n4. Vos trajets : Ich bin mit der U-Bahn gefahren. Am Alexanderplatz musste ich umsteigen.\n5. Votre impression et votre programme pour demain : Berlin ist … Morgen …\n\nAvant d’envoyer, vérifiez : le verbe conjugué est-il en deuxième position ? L’infinitif est-il à la fin après konnte, wollte ou musste ? Les noms ont-ils une majuscule ?",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-berlin-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "La carte postale de Lina",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Racontez à un ami votre séjour à Berlin (une minute environ, sans lire) : depuis quand vous êtes là, ce que vous vouliez faire et ce que vous avez pu faire, un monument avec un fait d’histoire, vos trajets et votre programme pour demain.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez une carte postale de Berlin de 60 à 80 mots à un ami ou à quelqu’un de votre famille. Employez au moins deux verbes au prétérit (war, hatte, konnte, wollte, musste, es gab), une indication de temps (seit, vor, von … bis) et un moyen de transport.",
+          "maxChars": 1000,
+          "minWords": 60
+        },
+        "checklist": [
+          "J’ai employé au moins deux verbes au prétérit : war, hatte, konnte, wollte, musste ou es gab.",
+          "Après konnte, wollte ou musste, l’infinitif est à la fin de la phrase.",
+          "J’ai situé un fait dans le temps avec seit, vor ou von … bis.",
+          "J’ai cité un monument de Berlin et un moyen de transport (mit der U-Bahn, mit der S-Bahn …).",
+          "Ma carte commence par une formule d’appel et se termine par une salutation (Viele Grüße …)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-berlin-wortschatz-bild",
+      "kind": "image",
+      "title": "Six lieux célèbres de Berlin",
+      "alt": "Six vignettes : un monument à colonnes pour la porte de Brandebourg, une coupole pour le Reichstag, une palette de peintre pour la East Side Gallery, un tableau pour l’île aux musées, une tour d’antenne pour la tour de télévision et un mur de briques pour le Mur.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "landmark",
+            "label": "das Brandenburger Tor"
+          },
+          {
+            "icon": "dome",
+            "label": "der Reichstag"
+          },
+          {
+            "icon": "palette",
+            "label": "die East Side Gallery"
+          },
+          {
+            "icon": "image",
+            "label": "die Museumsinsel"
+          },
+          {
+            "icon": "radio-tower",
+            "label": "der Fernsehturm"
+          },
+          {
+            "icon": "brick-wall",
+            "label": "die Mauer"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-verkehr-bild",
+      "kind": "image",
+      "title": "Les transports en commun à Berlin",
+      "alt": "Six vignettes : une rame de métro devant un tunnel, un train, un tramway, un bus, un repère de carte pour l’arrêt et un ticket.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "train-front-tunnel",
+            "label": "die U-Bahn"
+          },
+          {
+            "icon": "train-front",
+            "label": "die S-Bahn"
+          },
+          {
+            "icon": "tram-front",
+            "label": "die Straßenbahn"
+          },
+          {
+            "icon": "bus-front",
+            "label": "der Bus"
+          },
+          {
+            "icon": "map-pin",
+            "label": "die Haltestelle"
+          },
+          {
+            "icon": "ticket",
+            "label": "die Fahrkarte"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les mots de Berlin",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "das Brandenburger Tor"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Reichstag"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die East Side Gallery",
+          "say": "die Ihst-Said-Gälleri"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Museumsinsel",
+          "say": "die Museums Insel"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fernsehturm"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Sehenswürdigkeit"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mauer"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Mauerfall"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Grenze"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Osten und der Westen"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wiedervereinigung"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Krieg und der Frieden"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die U-Bahn"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die S-Bahn"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Straßenbahn"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Linie"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Haltestelle"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "text": "einsteigen, aussteigen, umsteigen"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fahrkarte"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "vor dreißig Jahren"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "seit neunzehnhundertneunzig"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie komme ich zum Brandenburger Tor?"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Nehmen Sie die U5 und steigen Sie am Alexanderplatz um."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-dialog-bild",
+      "kind": "image",
+      "title": "Demander son chemin près de la Museumsinsel",
+      "alt": "Une rue de Berlin : Chloé, un plan à la main, demande « Zur East Side Gallery? » et Herr Krüger répond « Nehmen Sie die U5! ». On voit aussi une rame de métro et un repère de carte.",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Chloé",
+            "say": "Zur East Side Gallery?"
+          },
+          {
+            "name": "Herr Krüger",
+            "say": "Nehmen Sie die U5!"
+          }
+        ],
+        "items": [
+          "map",
+          "train-front-tunnel",
+          "map-pin"
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : Wie komme ich zur East Side Gallery?",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Entschuldigung, können Sie mir vielleicht helfen? Ich kenne mich hier nicht aus."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Gern. Wohin möchten Sie denn?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Zur East Side Gallery. Kann ich zu Fuß gehen?",
+          "say": "Zur Ihst-Said-Gälleri. Kann ich zu Fuß gehen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Das ist ziemlich weit, zu Fuß brauchen Sie ungefähr vierzig Minuten. Nehmen Sie lieber die U-Bahn. Die Station Museumsinsel ist ganz in der Nähe. Fahren Sie mit der U5 bis zum Alexanderplatz, das sind nur zwei Stationen.",
+          "say": "Das ist ziemlich weit, zu Fuß brauchen Sie ungefähr vierzig Minuten. Nehmen Sie lieber die U-Bahn. Die Station Museums Insel ist ganz in der Nähe. Fahren Sie mit der U5 bis zum Alexanderplatz, das sind nur zwei Stationen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Und wie geht es dann weiter?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Am Alexanderplatz steigen Sie in die S-Bahn um, Richtung Ostbahnhof. Am Ostbahnhof steigen Sie aus. Von dort sind es nur fünf Minuten zu Fuß: Gehen Sie Richtung Spree, dann sehen Sie die Mauer schon."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Also: mit der U5 bis zum Alexanderplatz, dort umsteigen und mit der S-Bahn bis zum Ostbahnhof. Vielen Dank! Sie kennen sich aber gut aus."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Na ja, ich bin Berliner. Ich wohne schon immer hier im Osten. Wissen Sie, als Kind konnte ich nicht einfach in den Westen fahren. Da war die Mauer."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Wirklich? Und wann durften Sie zum ersten Mal nach West-Berlin?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Im November neunzehnhundertneunundachtzig, nach dem Mauerfall. Ich war damals neunzehn. Wir wollten alle sofort in den Westen! An der Grenze mussten wir stundenlang warten, aber das war uns egal."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Chloé",
+          "text": "Das ist ja spannend! Danke für alles und noch einen schönen Tag!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Gern geschehen. Viel Spaß in Berlin!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-lesen-bild",
+      "kind": "image",
+      "title": "Trois dates de l’histoire de Berlin",
+      "alt": "Trois vignettes chronologiques : un mur de briques pour la construction du Mur en 1961, des confettis pour la chute du Mur en 1989 et une poignée de main pour la réunification en 1990.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "brick-wall",
+            "label": "1961: der Mauerbau"
+          },
+          {
+            "icon": "party-popper",
+            "label": "1989: der Mauerfall"
+          },
+          {
+            "icon": "handshake",
+            "label": "1990: die Wiedervereinigung"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Unterwegs in Berlin : trois scènes",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Nächster Halt: Friedrichstraße. Ausstieg links. Hier können Sie in die U6 und in die Regionalzüge umsteigen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Bitte beachten Sie: Wegen Bauarbeiten fährt die U6 heute nicht zwischen Friedrichstraße und Hallesches Tor. Fahrgäste in Richtung Hallesches Tor nehmen bitte den Ersatzbus vor dem Bahnhof."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Stadtführerin",
+          "text": "So, meine Damen und Herren, hier stehen wir vor dem Brandenburger Tor. Man baute das Tor von siebzehnhundertachtundachtzig bis siebzehnhunderteinundneunzig. Oben sehen Sie die Quadriga, eine Göttin auf einem Wagen mit vier Pferden."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Stadtführerin",
+          "text": "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig stand das Tor direkt an der Mauer. Niemand durfte hier durchgehen, weder von Osten noch von Westen. Heute ist es ein Symbol für die deutsche Einheit."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Stadtführerin",
+          "text": "Sie haben jetzt eine halbe Stunde Pause. Wir treffen uns um halb drei wieder hier vor dem Tor. Dann gehen wir zusammen zum Reichstag."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Hallo Malik, hier ist Jana. Ich bin noch im Hotel am Zoo. Wie komme ich am schnellsten zu dir, zur Warschauer Straße?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Malik",
+          "text": "Hi Jana! Mit dem Bus dauert es fast eine Stunde, und mit der U-Bahn musst du umsteigen. Nimm lieber die S-Bahn. Die fährt direkt vom Bahnhof Zoo bis zur Warschauer Straße, ungefähr zwanzig Minuten."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Super. Und wo treffen wir uns?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Malik",
+          "text": "Am Ausgang der S-Bahn-Station. Sagen wir um vier?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Jana",
+          "text": "Um vier schaffe ich es nicht, ich muss noch etwas essen. Lieber um Viertel nach vier."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Malik",
+          "text": "Okay, Viertel nach vier am Ausgang. Dann gehen wir zusammen über die Oberbaumbrücke. Bis gleich!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-bus-bild",
+      "kind": "image",
+      "title": "Le bus",
+      "alt": "Un bus vu de face.",
+      "image": {
+        "layout": "single",
+        "icon": "bus-front"
+      }
+    },
+    {
+      "key": "a2-berlin-sbahn-bild",
+      "kind": "image",
+      "title": "La S-Bahn",
+      "alt": "Un train vu de face.",
+      "image": {
+        "layout": "single",
+        "icon": "train-front"
+      }
+    },
+    {
+      "key": "a2-berlin-ubahn-bild",
+      "kind": "image",
+      "title": "La U-Bahn",
+      "alt": "Une rame de métro devant l’entrée d’un tunnel.",
+      "image": {
+        "layout": "single",
+        "icon": "train-front-tunnel"
+      }
+    },
+    {
+      "key": "a2-berlin-fahrrad-bild",
+      "kind": "image",
+      "title": "Le vélo",
+      "alt": "Un vélo vu de profil.",
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "key": "a2-berlin-kieze-bild",
+      "kind": "image",
+      "title": "Les mots du Berlin d’aujourd’hui",
+      "alt": "Six vignettes : un repère sur une carte pour le quartier, une empreinte de patte pour le zoo, une toque de diplômé pour l’université, un tableau pour le musée, une tasse pour le café et des couverts pour la currywurst.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "map-pinned",
+            "label": "der Kiez"
+          },
+          {
+            "icon": "paw-print",
+            "label": "der Zoo, der Tierpark"
+          },
+          {
+            "icon": "graduation-cap",
+            "label": "die Universität"
+          },
+          {
+            "icon": "image",
+            "label": "das Museum"
+          },
+          {
+            "icon": "coffee",
+            "label": "das Café"
+          },
+          {
+            "icon": "utensils",
+            "label": "die Currywurst"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-wege-bild",
+      "kind": "image",
+      "title": "Demander où est l’arrêt",
+      "alt": "Une rue de Berlin : Marco demande « Wo ist die nächste Haltestelle? » et une passante répond « Gleich da drüben, links! ». On voit un panneau indicateur, un plan et une rame de métro.",
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Marco",
+            "say": "Wo ist die nächste Haltestelle?"
+          },
+          {
+            "name": "Passantin",
+            "say": "Gleich da drüben, links!"
+          }
+        ],
+        "items": [
+          "signpost",
+          "map",
+          "train-front-tunnel"
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-tagesplan-audio-v3",
+      "kind": "audio",
+      "title": "Ein Tag in Berlin : le programme de Lukas",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Lukas, morgen ist mein letzter freier Tag in Berlin. Ich möchte so viel wie möglich sehen. Hast du eine Idee?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Klar, ich habe schon einen Plan gemacht. Zuerst gehen wir auf die Museumsinsel, weil dein Hotel ganz in der Nähe ist. Im Neuen Museum kannst du die Nofretete sehen. Sie ist über dreitausend Jahre alt.",
+          "say": "Klar, ich habe schon einen Plan gemacht. Zuerst gehen wir auf die Museums Insel, weil dein Hotel ganz in der Nähe ist. Im Neuen Museum kannst du die Nofretete sehen. Sie ist über dreitausend Jahre alt."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Toll! Und danach möchte ich unbedingt auf den Fernsehturm. Er ist doch das höchste Bauwerk Deutschlands, oder?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Ja, er ist dreihundertachtundsechzig Meter hoch. Aber am Samstag muss man dort oft über eine Stunde warten."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Eine Stunde? Und ehrlich gesagt habe ich ein bisschen Angst, wenn ich so hoch oben bin."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Dann bleiben wir lieber unten. Vom Museum gehen wir zu Fuß zum Alexanderplatz, das dauert nur fünfzehn Minuten. Dort essen wir zu Mittag. Ich kenne einen Imbiss mit der besten Currywurst der Stadt, und sie kostet nur vier Euro fünfzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Currywurst habe ich noch nie probiert. Ist sie scharf?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Nur ein bisschen. Am Nachmittag fahren wir mit der S-Bahn bis zum Ostbahnhof. Von dort gehen wir an der East Side Gallery entlang bis zur Oberbaumbrücke. Früher war die Brücke ein Grenzübergang. Heute ist sie für mich die schönste Brücke Berlins.",
+          "say": "Nur ein bisschen. Am Nachmittag fahren wir mit der S-Bahn bis zum Ostbahnhof. Von dort gehen wir an der Ihst-Said-Gälleri entlang bis zur Oberbaumbrücke. Früher war die Brücke ein Grenzübergang. Heute ist sie für mich die schönste Brücke Berlins."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Und was machen wir am Abend?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Am Abend gehen wir über die Brücke nach Kreuzberg. Dort treffen wir meine Schwester Merve. Sie kennt ein türkisches Restaurant, das viel besser ist als alle Restaurants am Alexanderplatz."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Das klingt perfekt! Wann treffen wir uns?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Um halb zehn vor deinem Hotel. Dann sind wir um zehn im Museum. Bis morgen!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-tagesplan-bild",
+      "kind": "image",
+      "title": "Lukas et Inès préparent leur journée",
+      "alt": "Une rue de Berlin : Inès demande « Was machen wir morgen? » et Lukas répond « Ich habe einen Plan! ». On voit un plan de la ville, un tableau de musée, la tour de télévision et des couverts.",
+      "image": {
+        "layout": "scene",
+        "setting": "city",
+        "people": [
+          {
+            "name": "Inès",
+            "say": "Was machen wir morgen?"
+          },
+          {
+            "name": "Lukas",
+            "say": "Ich habe einen Plan!"
+          }
+        ],
+        "items": [
+          "map",
+          "image",
+          "radio-tower",
+          "utensils"
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "La carte postale de Lina",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Liebe Oma, seit drei Tagen bin ich jetzt in Berlin, und die Stadt ist toll! Gestern wollte ich die Kuppel vom Reichstag besichtigen. Man muss sich vorher online anmelden, aber zum Glück hatte ich einen Termin. Danach bin ich mit der U5 zur Museumsinsel gefahren.",
+          "say": "Liebe Oma, seit drei Tagen bin ich jetzt in Berlin, und die Stadt ist toll! Gestern wollte ich die Kuppel vom Reichstag besichtigen. Man muss sich vorher online anmelden, aber zum Glück hatte ich einen Termin. Danach bin ich mit der U5 zur Museums Insel gefahren."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Heute war ich an der East Side Gallery. Vor über dreißig Jahren war die Stadt hier noch geteilt, unglaublich! Leider konnte ich nicht lange bleiben, es gab nämlich ein Gewitter. Viele Grüße, deine Lina.",
+          "say": "Heute war ich an der Ihst-Said-Gälleri. Vor über dreißig Jahren war die Stadt hier noch geteilt, unglaublich! Leider konnte ich nicht lange bleiben, es gab nämlich ein Gewitter. Viele Grüße, deine Lina."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-geschichte-1-native",
+      "kind": "audio",
+      "title": "Deutsche Geschichte (1) — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_10_01_history.mp3",
+        "clip": [
+          5.2,
+          37.2
+        ]
+      },
+      "transcript": "die Berliner Mauer\ndie Bundesrepublik Deutschland\ndie Deutsche Demokratische Republik\ndie ehemalige Sowjetunion\ndie ehemalige DDR\ndie Epoche, die Epochen\ndas Ereignis, die Ereignisse\ndie Gegenwart",
+      "v3SourceKey": "a2-berlin-geschichte-1-native"
+    },
+    {
+      "key": "a2-berlin-geschichte-2-native",
+      "kind": "audio",
+      "title": "Deutsche Geschichte (2) — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_10_01_history.mp3",
+        "clip": [
+          139.6,
+          163
+        ]
+      },
+      "transcript": "die Vergangenheit\ndie Weimarer Republik\nder Wiederaufbau\ndie Wiedervereinigung\ndie Wirtschaft\ndas Wirtschaftswunder\ndie Wirtschaftskrise\ndie Zukunft",
+      "v3SourceKey": "a2-berlin-geschichte-2-native"
+    },
+    {
+      "key": "a2-berlin-tor-foto",
+      "kind": "image",
+      "title": "La porte de Brandebourg (photo)",
+      "alt": "Photo : une grande porte en pierre à colonnes, surmontée d’une statue de char tiré par quatre chevaux, devant une place pavée où marchent de nombreux touristes, par temps gris.",
+      "photo": {
+        "file": "dib-images/k10/img-031-104.png"
+      }
+    },
+    {
+      "key": "a2-berlin-reichstag-foto",
+      "kind": "image",
+      "title": "Le Reichstag, fronton et inscription (photo)",
+      "alt": "Photo : le fronton sculpté d’un grand bâtiment en pierre, au-dessus de hautes colonnes, avec l’inscription « Dem deutschen Volke » en grandes lettres.",
+      "photo": {
+        "file": "dib-images/k10/img-026-077.png"
+      }
+    },
+    {
+      "key": "a2-berlin-nationalgalerie-foto",
+      "kind": "image",
+      "title": "L’Alte Nationalgalerie sur l’île aux musées (photo)",
+      "alt": "Photo : un bâtiment en forme de temple antique, avec des colonnes, l’inscription « Der deutschen Kunst » et un drapeau sur le toit ; devant l’escalier, la statue en bronze d’un cavalier.",
+      "photo": {
+        "file": "dib-images/k10/img-028-085.png"
+      }
+    },
+    {
+      "key": "a2-berlin-gedaechtniskirche-foto",
+      "kind": "image",
+      "title": "L’église du Souvenir (photo)",
+      "alt": "Photo : la tour en ruine d’une ancienne église, avec une grande horloge dorée, et à côté une haute tour moderne et sombre ; en bas, une rue avec des voitures et des passants.",
+      "photo": {
+        "file": "dib-images/k10/img-030-099.png"
+      }
+    },
+    {
+      "key": "a2-berlin-flagge-foto",
+      "kind": "image",
+      "title": "Le drapeau de Berlin",
+      "alt": "Drapeau à trois bandes horizontales, rouge, blanche et rouge ; sur la large bande blanche du milieu, un ours noir dressé sur ses pattes arrière, la langue rouge.",
+      "photo": {
+        "file": "dib-images/k06/img-023-093.png"
+      }
+    },
+    {
+      "key": "a2-berlin-weg-fragen-native",
+      "kind": "audio",
+      "title": "Nach dem Weg fragen — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_10_07_askdir.mp3",
+        "clip": [
+          3.85,
+          28.3
+        ]
+      },
+      "transcript": "Entschuldigen Sie.\nEntschuldigung.\nIch kenne mich hier nicht aus.\nKönnen Sie mir vielleicht helfen?\nWie komme ich zum Zoo?\nWo ist der Zoo?\nVielen Dank.",
+      "v3SourceKey": "a2-berlin-weg-fragen-native"
+    },
+    {
+      "key": "a2-berlin-weg-beschreiben-native",
+      "kind": "audio",
+      "title": "Wegbeschreibungen — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_10_08_givedir.mp3",
+        "clip": [
+          4,
+          62.7
+        ]
+      },
+      "transcript": "Auf der rechten Seite.\nAuf der linken Seite.\nBiegen Sie rechts ab.\nBiegen Sie links ab.\nDer Zoo ist in der Nähe von …\nDer Zoo ist ungefähr zehn Minuten zu Fuß.\nDer Zoo ist ungefähr zehn Minuten mit dem Bus.\nFahren Sie mit dem Bus.\nFahren Sie mit der U-Bahn.\nGehen Sie geradeaus.\nGleich da drüben.\nNehmen Sie die nächste Kreuzung rechts.\nNehmen Sie die nächste Kreuzung links.",
+      "v3SourceKey": "a2-berlin-weg-beschreiben-native"
+    },
+    {
+      "key": "a2-berlin-grammatik-q17",
+      "kind": "audio",
+      "title": "Dictée q17 · S’entraîner : le prétérit et les indications de temps",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Früher gab es hier eine Mauer."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Entschuldigung, ich kenne mich hier nicht aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie komme ich zum Brandenburger Tor?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Biegen Sie an der Kreuzung links ab."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Alexanderplatz steigen Sie in die S-Bahn um."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig stand hier die Mauer."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : demander son chemin, raconter le passé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Als Kind konnte ich nicht in den Westen fahren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-wege-q9",
+      "kind": "audio",
+      "title": "Dictée q9 · S’entraîner : comprendre et donner un itinéraire",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Die nächste Haltestelle ist auf der linken Seite."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-lexique",
+      "kind": "audio",
+      "title": "Lexique · Auf nach Berlin ! Ville et histoire",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Sehenswürdigkeit, die Sehenswürdigkeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Tor, die Tore"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Turm, die Türme"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mauer, die Mauern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Grenze, die Grenzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Geschichte, die Geschichten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wiedervereinigung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Krieg, die Kriege"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "geteilt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "damals"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "früher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die U-Bahn, die U-Bahnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die S-Bahn, die S-Bahnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Straßenbahn, die Straßenbahnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Linie, die Linien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Haltestelle, die Haltestellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "aussteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abbiegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "geradeaus"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kreuzung, die Kreuzungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ampel, die Ampeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Richtung, die Richtungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich auskennen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in der Nähe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "seit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vor"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

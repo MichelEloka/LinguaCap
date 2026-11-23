@@ -1,0 +1,1185 @@
+{
+  "id": "a1-essen-atelier",
+  "title": "Commander au café et vérifier le prix",
+  "objective": "Commander une boisson et un aliment, corriger une commande et comprendre un prix.",
+  "prerequisites": [
+    "a1-essen"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-essen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "karte",
+      "word": "Karte",
+      "article": "die",
+      "plural": "Karten",
+      "partOfSpeech": "noun",
+      "translation": "la carte (du café ; bancaire)",
+      "example": "Mit Karte, bitte.",
+      "note": "die Speisekarte : la carte du restaurant",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "saft",
+      "word": "Saft",
+      "article": "der",
+      "plural": "Säfte",
+      "partOfSpeech": "noun",
+      "translation": "le jus",
+      "example": "Ich möchte einen Apfelsaft.",
+      "note": "der Apfelsaft, der Orangensaft",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "suppe",
+      "word": "Suppe",
+      "article": "die",
+      "plural": "Suppen",
+      "partOfSpeech": "noun",
+      "translation": "la soupe",
+      "example": "Ich nehme eine Suppe.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "butter",
+      "word": "Butter",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le beurre",
+      "example": "Ein Brötchen mit Butter, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "kaesebrot",
+      "word": "Käsebrot",
+      "article": "das",
+      "plural": "Käsebrote",
+      "partOfSpeech": "noun",
+      "translation": "la tartine au fromage",
+      "example": "Ein Käsebrot, bitte.",
+      "note": "das Brot : le pain",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "stueck",
+      "word": "Stück",
+      "article": "das",
+      "plural": "Stücke",
+      "partOfSpeech": "noun",
+      "translation": "le morceau, la part",
+      "example": "Ein Stück Kuchen, bitte.",
+      "note": "sans « de » : ein Stück Kuchen",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "bestellen",
+      "word": "bestellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "commander",
+      "example": "Möchten Sie bestellen?",
+      "note": null,
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "nehmen",
+      "word": "nehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prendre",
+      "example": "Was nehmen Sie?",
+      "note": "ich nehme, du nimmst, er nimmt",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "zahlen",
+      "word": "zahlen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "payer",
+      "example": "Kann ich mit Karte zahlen?",
+      "note": "Zahlen, bitte ! : l’addition, s’il vous plaît !",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "zusammen",
+      "word": "zusammen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ensemble ; en tout",
+      "example": "Was kostet das zusammen?",
+      "note": "Zusammen oder getrennt ? : ensemble ou séparément ?",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "mit",
+      "word": "mit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "avec",
+      "example": "Ein Brötchen mit Butter, bitte.",
+      "note": "+ datif",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "ohne",
+      "word": "ohne",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "sans",
+      "example": "Das andere ohne Butter.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "bar",
+      "word": "bar",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "en espèces",
+      "example": "Ich zahle bar.",
+      "note": "contraire : mit Karte",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "was-kostet",
+      "word": "Was kostet …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Combien coûte … ?",
+      "example": "Was kostet der Tee?",
+      "note": "au pluriel : Was kosten die Brötchen?",
+      "audio": {
+        "media": "a1-essen-atelier-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-essen-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : commander et vérifier le prix",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : commander et vérifier le prix",
+        "description": "LA CARTE DU CAFÉ · 15 MIN\n\n1. Lire la carte (5 min). La carte du café indique « Tee 2,20 € · Apfelsaft 2,80 € · Suppe 4,50 € · Käsebrot 3,20 € ». Choisissez une boisson et un plat, calculez le total, puis dites le prix à voix haute. On dit d’abord les euros, puis les centimes : 2,20 € se dit « zwei Euro zwanzig ».\n\n2. Commander (5 min). Dans « Ich möchte einen Tee, eine Suppe und ein Käsebrot », observez les trois formes de l’article après ich möchte : le masculin prend einen (der Tee), le féminin eine (die Suppe) et le neutre ein (das Käsebrot). Redites la commande en remplaçant le thé par « einen Apfelsaft », une fois lentement, puis à vitesse normale.\n\n3. Rectifier et payer (5 min). Lisez les deux voix : « Eine Suppe und einen Tee? » / « Keinen Tee, bitte. Einen Apfelsaft. Was kostet das zusammen? » / « Sieben Euro dreißig. » / « Mit Karte, bitte. ». Pour refuser, kein prend la même terminaison que ein : keinen Tee, keine Suppe, kein Käsebrot. Vérifiez le total sur le ticket : 4,50 € + 2,80 € = 7,30 €. Relisez ensuite l’échange en changeant le plat.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-essen-atelier-karte",
+          "usage": "illustration",
+          "caption": "einen Tee · eine Suppe · ein Käsebrot",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-essen-atelier-rechnung",
+          "usage": "illustration",
+          "caption": "Sieben Euro dreißig. Mit Karte, bitte.",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-essen-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : une commande au comptoir",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : une commande au comptoir",
+        "description": "COMMANDER ET PAYER · 12 MIN\n\nPHRASES UTILES\n• Was möchten Sie? — Que désirez-vous ?\n• Einen Tee und zwei Brötchen, bitte. — Un thé et deux petits pains, s’il vous plaît.\n• mit Butter / ohne Butter — avec / sans beurre\n• Nein, keinen Kaffee, danke. — Non, pas de café, merci.\n• Was kostet das zusammen? — Combien ça coûte en tout ?\n• Bar oder mit Karte? — En espèces ou par carte ?\n\nÀ VOUS\n1. Écoutez la scène sans lire la transcription : qu’est-ce que le client commande, et qu’est-ce qu’il refuse ?\n2. Réécoutez et repérez les détails : le nombre de petits pains, combien avec du beurre, le total et le moyen de paiement.\n3. Affichez la transcription et lisez le rôle du client à voix haute.\n4. Redites la commande en changeant un élément : einen Apfelsaft au lieu du thé, puis keine Suppe au lieu de keinen Kaffee.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-essen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-essen-atelier-bestellen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-essen-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : einen, eine, ein et les prix",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : einen, eine, ein et les prix",
+        "description": "Réécoutez la commande au comptoir et complétez les répliques. Entraînez-vous ensuite à choisir einen, eine ou ein, à rectifier avec kein et à lire des prix. Les deux dernières questions sont des dictées : écrivez les nombres en toutes lettres. La transcription de la scène s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-essen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez la commande du client.",
+          "text": "[[1]] Tee und [[2]] Brötchen, bitte. [[3]] Brötchen mit Butter, das andere ohne Butter.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Einen"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zwei",
+                "2"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Ein"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Der Tee est masculin : einen Tee. Le client prend zwei Brötchen, dont un seul avec du beurre : das Brötchen est neutre, d’où ein Brötchen."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez la fin de la scène.",
+          "text": "Nein, [[1]] Kaffee, danke. Was kostet das [[2]]? – Sechs Euro [[3]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "keinen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zusammen"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "fünfzig",
+                "50"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Der Kaffee est masculin : la négation est keinen Kaffee. Zusammen demande le total, et la serveuse répond « Sechs Euro fünfzig » (6,50 €)."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Complétez la commande avec einen, eine ou ein.",
+          "text": "Ich möchte [[1]] Apfelsaft, [[2]] Suppe und [[3]] Käsebrot.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "einen"
+              ],
+              "size": 6,
+              "hint": "der"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "eine"
+              ],
+              "size": 6,
+              "hint": "die"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ein"
+              ],
+              "size": 6,
+              "hint": "das"
+            }
+          ],
+          "explanation": "Après ich möchte, le nom est à l’accusatif : der Apfelsaft → einen, die Suppe → eine, das Käsebrot → ein. Seul le masculin change."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Le serveur s’est trompé. Rectifiez avec keine ou kein.",
+          "text": "[[1]] Suppe, bitte, und [[2]] Käsebrot. Nur einen Tee.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Keine"
+              ],
+              "size": 6,
+              "hint": "die Suppe"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kein"
+              ],
+              "size": 6,
+              "hint": "das Käsebrot"
+            }
+          ],
+          "explanation": "Kein prend les terminaisons de ein : die Suppe → keine Suppe, das Käsebrot → kein Käsebrot. Nicht ne s’emploie pas devant un nom avec ein."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour demander le total.",
+          "answers": [
+            [
+              "Was",
+              "kostet",
+              "das",
+              "zusammen?"
+            ]
+          ],
+          "explanation": "Après le mot interrogatif was, le verbe kostet vient en 2e position, puis le sujet das. Zusammen se place à la fin."
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Associez chaque prix de la carte à sa lecture.",
+          "pairs": [
+            {
+              "left": "2,20 €",
+              "right": "zwei Euro zwanzig"
+            },
+            {
+              "left": "2,80 €",
+              "right": "zwei Euro achtzig"
+            },
+            {
+              "left": "3,20 €",
+              "right": "drei Euro zwanzig"
+            },
+            {
+              "left": "4,50 €",
+              "right": "vier Euro fünfzig"
+            },
+            {
+              "left": "7,30 €",
+              "right": "sieben Euro dreißig"
+            }
+          ],
+          "explanation": "On lit les euros, puis les centimes, sans répéter « Cent » : 4,50 € = vier Euro fünfzig. Dreißig (30) s’écrit avec ß."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "mann",
+          "accept": [
+            "Ich möchte einen Tee und zwei Brötchen."
+          ],
+          "explanation": "Der Tee est masculin : einen Tee après möchte. Brötchen garde le ö et ne change pas au pluriel : ein Brötchen, zwei Brötchen.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "frau",
+          "accept": [
+            "Die Suppe kostet vier Euro fünfzig."
+          ],
+          "explanation": "On dit les euros, puis les centimes : vier Euro fünfzig (4,50 €). Suppe est un nom : majuscule. Kostet va avec un seul objet.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : commander au café",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : commander au café",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Marquez bien la fin de einen et de keinen : c’est elle qui montre le masculin.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-essen-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-essen-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich möchte einen Tee, bitte.",
+          "accept": [
+            "Ich möchte einen Tee, bitte."
+          ],
+          "explanation": "Einen se prononce en deux syllabes, EI-nen : le -en final signale le masculin der Tee. Ich et möchte gardent un souffle doux.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Eine Suppe und ein Käsebrot, bitte.",
+          "accept": [
+            "Eine Suppe und ein Käsebrot, bitte.",
+            "1 Suppe und 1 Käsebrot, bitte."
+          ],
+          "explanation": "Eine pour le féminin, ein pour le neutre. Dans Käsebrot, ä se dit « è » et l’accent tombe sur la 1re syllabe.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Nein, keinen Kaffee, danke.",
+          "accept": [
+            "Nein, keinen Kaffee, danke."
+          ],
+          "explanation": "Keinen, comme einen, garde la terminaison -en du masculin : c’est der Kaffee qu’on refuse. Nein et keinen ont le même « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Was kostet das zusammen?",
+          "accept": [
+            "Was kostet das zusammen?"
+          ],
+          "explanation": "Le w de was se prononce comme un v. Zusammen commence par « ts » et porte l’accent sur -sam-.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Das macht sieben Euro dreißig.",
+          "accept": [
+            "Das macht sieben Euro dreißig.",
+            "Das macht 7,30 Euro.",
+            "Das macht 7 Euro 30."
+          ],
+          "explanation": "Euro se dit « oïro ». Dreißig : ei se dit « aï » et ß se prononce comme un s dur.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Mit Karte, bitte.",
+          "accept": [
+            "Mit Karte, bitte."
+          ],
+          "explanation": "Le r de Karte s’entend à peine après le a. C’est la réponse à « Bar oder mit Karte? ».",
+          "threshold": 80
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : une commande au café",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : une commande au café",
+        "description": "Écoutez la scène une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails : la commande, le beurre et le prix. Les deux dernières questions vérifient les phrases à réemployer. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-essen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quelle boisson est commandée ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du thé",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Du café",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du jus",
+              "correct": false
+            }
+          ],
+          "explanation": "Le client commande « Einen Tee und zwei Brötchen », puis refuse le café : « Nein, keinen Kaffee, danke ». Aucun jus n’est commandé.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : combien de petits pains sont commandés ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Trois",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Deux",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Un",
+              "correct": false
+            }
+          ],
+          "explanation": "« Zwei Brötchen, bitte » : deux petits pains. Le client parle ensuite d’« ein Brötchen » et de « das andere » (l’autre), ce qui fait bien deux.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : combien de petits pains sont demandés avec du beurre ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Deux",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Aucun",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un",
+              "correct": true
+            }
+          ],
+          "explanation": "« Ein Brötchen mit Butter, bitte. Das andere ohne Butter » : un seul petit pain avec du beurre ; ohne veut dire « sans ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : quel total est annoncé ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "6,50 €",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "6,15 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "7,50 €",
+              "correct": false
+            }
+          ],
+          "explanation": "La serveuse annonce « Sechs Euro fünfzig » : 6,50 €. Fünfzig (50) se distingue de fünfzehn (15).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Tu veux un jus. Quelle commande est correcte ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich möchte eine Saft, bitte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich möchte einen Saft, bitte.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich möchte ein Saft, bitte.",
+              "correct": false
+            }
+          ],
+          "explanation": "Der Saft est masculin : après möchte, ein devient einen (Ich möchte einen Saft). Eine va avec un nom féminin, ein avec un nom neutre.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Tu veux connaître le prix total. Que demandes-tu ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wie ist Ihre Telefonnummer?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wie viel Uhr ist es?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Was kostet das zusammen?",
+              "correct": true
+            }
+          ],
+          "explanation": "Zusammen veut dire « ensemble, en tout » : « Was kostet das zusammen? » demande le total. Les deux autres questions demandent un numéro de téléphone et l’heure.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-essen-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : commander pour deux et rectifier",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : commander pour deux et rectifier",
+        "description": "Vous êtes au café avec un ami. Vous commandez pour vous deux. Le serveur se trompe dans une boisson : vous rectifiez, puis vous demandez le total et vous payez.\n\nLA CARTE\nTee 2,20 € · Kaffee 2,40 € · Apfelsaft 2,80 € · Suppe 4,50 € · Käsebrot 3,20 € · Brötchen 1,20 €\n\nMODÈLE\n– Guten Tag! Was möchten Sie?\n– Einen Apfelsaft, einen Tee und zwei Käsebrote, bitte.\n– Zwei Käsebrote, einen Apfelsaft und einen Kaffee?\n– Nein, keinen Kaffee. Einen Tee, bitte. Was kostet das zusammen?\n– Elf Euro vierzig.\n– Mit Karte, bitte.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre rôle de client : commandez pour deux personnes (une boisson et un plat chacune), rectifiez la boisson que le serveur a mal comprise avec « Nein, keinen … », demandez le total, puis dites comment vous payez.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez la commande définitive comme un ticket : chaque article avec sa quantité et son prix d’après la carte, puis la question « Was kostet das zusammen? » et le total écrit en toutes lettres.",
+          "maxChars": 500,
+          "minWords": 15
+        },
+        "checklist": [
+          "J’ai employé einen, eine ou ein selon le genre du nom (einen Tee, eine Suppe, ein Käsebrot).",
+          "J’ai rectifié une boisson avec keinen, keine ou kein.",
+          "Mon total correspond aux prix de la carte et je l’ai dit avec les euros, puis les centimes.",
+          "J’ai demandé « Was kostet das zusammen? » et dit comment je paie (bar ou mit Karte)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-essen-atelier-dialogue",
+      "kind": "audio",
+      "title": "Commander au café et vérifier le prix · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Guten Tag! Was möchten Sie?"
+        },
+        {
+          "voice": "mann",
+          "text": "Einen Tee und zwei Brötchen, bitte."
+        },
+        {
+          "voice": "frau",
+          "text": "Mit Butter?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ein Brötchen mit Butter, bitte. Das andere ohne Butter."
+        },
+        {
+          "voice": "frau",
+          "text": "Möchten Sie auch einen Kaffee?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nein, keinen Kaffee, danke. Was kostet das zusammen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Sechs Euro fünfzig."
+        },
+        {
+          "voice": "mann",
+          "text": "Danke. Mit Karte, bitte."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-essen-atelier-karte",
+      "kind": "image",
+      "title": "La carte du café",
+      "alt": "Carte d’un café : der Tee 2,20 €, der Apfelsaft 2,80 €, die Suppe 4,50 €, das Käsebrot 3,20 €.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "cafe",
+        "icon": "coffee",
+        "title": "Speisekarte",
+        "subtitle": "Getränke und Speisen",
+        "rows": [
+          [
+            "der Tee",
+            "2,20 €"
+          ],
+          [
+            "der Apfelsaft",
+            "2,80 €"
+          ],
+          [
+            "die Suppe",
+            "4,50 €"
+          ],
+          [
+            "das Käsebrot",
+            "3,20 €"
+          ]
+        ],
+        "size": 36
+      }
+    },
+    {
+      "key": "v4-a1-essen-atelier-rechnung",
+      "kind": "image",
+      "title": "Le ticket après la commande corrigée",
+      "alt": "Ticket de caisse d’un café : 1 Suppe 4,50 €, 1 Apfelsaft 2,80 €, Summe 7,30 €, payé par carte. À droite, un bol de soupe.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "receipt",
+        "setting": "cafe",
+        "icon": "soup",
+        "title": "Café am Eck",
+        "subtitle": "Tisch 4",
+        "lines": [
+          [
+            "1 × Suppe",
+            "4,50 €"
+          ],
+          [
+            "1 × Apfelsaft",
+            "2,80 €"
+          ]
+        ],
+        "total": [
+          "Summe",
+          "7,30 €"
+        ],
+        "notes": [
+          "Bezahlt mit Karte",
+          "Vielen Dank!"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-essen-atelier-bestellen",
+      "kind": "image",
+      "title": "Commander au café",
+      "alt": "Au café, la serveuse demande « Guten Tag! Was möchten Sie? » et le client demande « Was kostet das zusammen? ». En haut : une tasse, un croissant et un ticket de caisse.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "cafe",
+        "people": [
+          {
+            "name": "Bedienung",
+            "say": "Guten Tag! Was möchten Sie?"
+          },
+          {
+            "name": "Gast",
+            "say": "Was kostet das zusammen?"
+          }
+        ],
+        "items": [
+          "coffee",
+          "croissant",
+          "receipt-euro"
+        ]
+      }
+    },
+    {
+      "key": "a1-essen-atelier-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : einen, eine, ein et les prix",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Ich möchte einen Tee und zwei Brötchen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : einen, eine, ein et les prix",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Die Suppe kostet vier Euro fünfzig."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich möchte einen Tee, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Eine Suppe und ein Käsebrot, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Nein, keinen Kaffee, danke."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Was kostet das zusammen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das macht sieben Euro dreißig."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : commander au café",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mit Karte, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-essen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Commander au café et vérifier le prix",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Karte, die Karten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Saft, die Säfte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Suppe, die Suppen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Butter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Käsebrot, die Käsebrote"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Stück, die Stücke"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bestellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zusammen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ohne"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bar"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Was kostet …?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

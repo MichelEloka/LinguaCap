@@ -1,5 +1,6 @@
 /**
- * Question à choix du mode étude (exercices de séance et diagnostic) : carte numérotée, choix en tuiles.
+ * Questions du mode étude (exercices de séance, bibliothèque et diagnostic) : carte numérotée commune à tous les types
+ * (`QuestionFrame`) et question à choix (`QuestionCard`), choix en tuiles.
  * Chaque choix reste un bouton radio natif dont le nom accessible est le texte du choix ; l'image d'un choix
  * illustré fait partie de la tuile (un clic dessus sélectionne la réponse), son enregistrement reste à côté.
  */
@@ -10,7 +11,40 @@ import './learner-session.css';
 
 export interface ChoiceExtra { label?: string; picture?: ReactNode; audio?: ReactNode }
 
-export function QuestionCard({ index, prompt, name, options, value, onChoose, locked = false, missing = false, media, extras, cardRef }: {
+/**
+ * Carte d'une question : numéro (coché une fois la réponse prête), consigne, type facultatif (« Dictée »…), supports,
+ * saisie propre au type et rappel si la question est restée sans réponse à la remise.
+ */
+export function QuestionFrame({ index, prompt, tag, answered = false, locked = false, missing = false, missingText = 'Choisissez une réponse.',
+  media, children, cardRef, className = '' }: {
+  index: number;
+  prompt: string;
+  tag?: ReactNode;
+  answered?: boolean;
+  locked?: boolean;
+  missing?: boolean;
+  missingText?: string;
+  media?: ReactNode;
+  children: ReactNode;
+  cardRef?: Ref<HTMLFieldSetElement>;
+  className?: string;
+}) {
+  return (
+    <fieldset ref={cardRef} className={`study-question${missing ? ' is-missing' : ''}${answered ? ' is-answered' : ''}${locked ? ' is-locked' : ''} ${className}`.trim()}>
+      <legend className="study-question-head">
+        <span className="study-question-num" aria-hidden="true">{answered && !locked ? <Check size={15} strokeWidth={3} /> : index + 1}</span>
+        <span className="sr-only">Question {index + 1} : </span>
+        <span className="study-question-prompt">{prompt}</span>
+        {tag && <span className="study-question-tag">{tag}</span>}
+      </legend>
+      {media && <div className="study-question-media">{media}</div>}
+      {children}
+      {missing && <p className="study-question-missing"><AlertCircle size={15} aria-hidden="true" /> {missingText}</p>}
+    </fieldset>
+  );
+}
+
+export function QuestionCard({ index, prompt, name, options, value, onChoose, locked = false, missing = false, media, extras, cardRef, tag }: {
   index: number;
   prompt: string;
   name: string;
@@ -23,18 +57,13 @@ export function QuestionCard({ index, prompt, name, options, value, onChoose, lo
   media?: ReactNode;
   extras?: (optionId: string) => ChoiceExtra | undefined;
   cardRef?: Ref<HTMLFieldSetElement>;
+  tag?: ReactNode;
 }) {
   const pointer = useRef(false);
   const visual = options.some((option) => extras?.(option.id)?.picture);
   const short = !visual && options.every((option) => (option.text ?? '').trim().length <= 30);
   return (
-    <fieldset ref={cardRef} className={`study-question${missing ? ' is-missing' : ''}${value ? ' is-answered' : ''}${locked ? ' is-locked' : ''}`}>
-      <legend className="study-question-head">
-        <span className="study-question-num" aria-hidden="true">{value && !locked ? <Check size={15} strokeWidth={3} /> : index + 1}</span>
-        <span className="sr-only">Question {index + 1} : </span>
-        <span className="study-question-prompt">{prompt}</span>
-      </legend>
-      {media && <div className="study-question-media">{media}</div>}
+    <QuestionFrame index={index} prompt={prompt} tag={tag} answered={Boolean(value)} locked={locked} missing={missing} media={media} cardRef={cardRef}>
       <div className={`study-choices${visual ? ' is-visual' : short ? ' is-short' : ''}`}>
         {options.map((option, position) => {
           const extra = extras?.(option.id);
@@ -59,7 +88,6 @@ export function QuestionCard({ index, prompt, name, options, value, onChoose, lo
           );
         })}
       </div>
-      {missing && <p className="study-question-missing"><AlertCircle size={15} aria-hidden="true" /> Choisissez une réponse.</p>}
-    </fieldset>
+    </QuestionFrame>
   );
 }

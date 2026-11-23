@@ -1,0 +1,3302 @@
+{
+  "id": "a1-zahlen",
+  "title": "Nombres, couleurs et coordonnées",
+  "objective": "Compter de 0 à 100, dire son âge, donner et noter un numéro de téléphone, une adresse avec son code postal et une adresse e-mail, nommer les couleurs, remplir un formulaire d’inscription simple, comprendre des prix simples en euros et en francs suisses et conjuguer au présent les verbes réguliers et le verbe « haben ».",
+  "prerequisites": [
+    "a1-hallo-atelier"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "Deutsch im Blick, Kapitel 1 « Ankunft in Würzburg » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Zahlen, Die Farben, Weitere persönliche Informationen, Geld, Handy usw.)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : Chapter 2 « Das Geld » (B et C, fortement simplifié) — voyage en Autriche et en Suisse avec de l’argent liquide, euro et franc suisse, prix d’un premier achat comparé à la monnaie de son pays, rapport des Allemands à l’argent liquide et aux moyens de paiement, origine du papier-monnaie (Chine) et premiers billets européens (Suède)",
+    "Deutsch im Blick, Kapitel 1 et 2 (COERLL, Université du Texas à Austin) : enregistrements natifs voc/voc_01_05_zahlen.mp3, voc/voc_01_07_farben.mp3, pho/pho_01_28_strangea.mp3, pho/pho_01_29_strangeo.mp3, pho/pho_01_30_strangeu.mp3, pho/pho_01_31_strangeb.mp3, pho/pho_02_01_awoeue.mp3 et photos k03/037-141, k08/034-106, k06/040-159 (CC BY 4.0)"
+  ],
+  "grammarFocus": [
+    "present-verbes-reguliers-haben"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-zahlen.mjs",
+  "vocabulary": [
+    {
+      "id": "zahl",
+      "word": "Zahl",
+      "article": "die",
+      "plural": "Zahlen",
+      "partOfSpeech": "noun",
+      "translation": "le nombre",
+      "example": "Schreiben Sie die Zahl in Buchstaben.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "alt",
+      "word": "alt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "âgé ; vieux",
+      "example": "Wie alt sind Sie?",
+      "note": "l’âge se dit avec sein : Ich bin 25 Jahre alt.",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "jahr",
+      "word": "Jahr",
+      "article": "das",
+      "plural": "Jahre",
+      "partOfSpeech": "noun",
+      "translation": "l’an, l’année",
+      "example": "Ich bin achtundzwanzig Jahre alt.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "handy",
+      "word": "Handy",
+      "article": "das",
+      "plural": "Handys",
+      "partOfSpeech": "noun",
+      "translation": "le téléphone portable",
+      "example": "Mein Handy ist schwarz.",
+      "note": "faux ami : un ordinateur portable se dit der Laptop",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "handynummer",
+      "word": "Handynummer",
+      "article": "die",
+      "plural": "Handynummern",
+      "partOfSpeech": "noun",
+      "translation": "le numéro de portable",
+      "example": "Wie ist Ihre Handynummer?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "adresse",
+      "word": "Adresse",
+      "article": "die",
+      "plural": "Adressen",
+      "partOfSpeech": "noun",
+      "translation": "l’adresse",
+      "example": "Was ist Ihre Adresse?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "strasse",
+      "word": "Straße",
+      "article": "die",
+      "plural": "Straßen",
+      "partOfSpeech": "noun",
+      "translation": "la rue",
+      "example": "In welcher Straße wohnen Sie?",
+      "note": "on écrit la rue, puis le numéro : Lindenstraße 14",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "postleitzahl",
+      "word": "Postleitzahl",
+      "article": "die",
+      "plural": "Postleitzahlen",
+      "partOfSpeech": "noun",
+      "translation": "le code postal",
+      "example": "Die Postleitzahl ist 97074.",
+      "note": "abréviation : PLZ",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "e-mail-adresse",
+      "word": "E-Mail-Adresse",
+      "article": "die",
+      "plural": "E-Mail-Adressen",
+      "partOfSpeech": "noun",
+      "translation": "l’adresse e-mail",
+      "example": "Wie ist Ihre E-Mail-Adresse?",
+      "note": "@ se dit « at », le point se dit « Punkt »",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "preis",
+      "word": "Preis",
+      "article": "der",
+      "plural": "Preise",
+      "partOfSpeech": "noun",
+      "translation": "le prix",
+      "example": "Der Preis ist fünfundneunzig Euro.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "kosten",
+      "word": "kosten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "coûter",
+      "example": "Wie viel kosten die T-Shirts?",
+      "note": "Was kostet das? : combien ça coûte ?",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "euro",
+      "word": "Euro",
+      "article": "der",
+      "plural": "Euros",
+      "partOfSpeech": "noun",
+      "translation": "l’euro",
+      "example": "Das Handy kostet neunundfünfzig Euro.",
+      "note": "après un nombre, sans -s : zwanzig Euro",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "bezahlen",
+      "word": "bezahlen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "payer",
+      "example": "Wie bezahlen Sie?",
+      "note": "bar bezahlen : payer en espèces ; mit Karte bezahlen : payer par carte",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "karte",
+      "word": "Karte",
+      "article": "die",
+      "plural": "Karten",
+      "partOfSpeech": "noun",
+      "translation": "la carte (bancaire)",
+      "example": "Kann ich mit Karte bezahlen?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "teuer",
+      "word": "teuer",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "cher",
+      "example": "Die Schweiz ist teuer!",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "farbe",
+      "word": "Farbe",
+      "article": "die",
+      "plural": "Farben",
+      "partOfSpeech": "noun",
+      "translation": "la couleur",
+      "example": "Welche Farbe hat dein Handy?",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "rot",
+      "word": "rot",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "rouge",
+      "example": "Die T-Shirts sind rot.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "blau",
+      "word": "blau",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "bleu",
+      "example": "Das Meer ist blau.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "gruen",
+      "word": "grün",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "vert",
+      "example": "Das Blatt ist grün.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "schwarz",
+      "word": "schwarz",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "noir",
+      "example": "Der Kaffee ist schwarz.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "weiss",
+      "word": "weiß",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "blanc",
+      "example": "Der Schnee ist weiß.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "haben",
+      "word": "haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir",
+      "example": "Haben Sie eine Handynummer?",
+      "note": "ich habe, du hast, er hat, wir haben, ihr habt",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "arbeiten",
+      "word": "arbeiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "travailler",
+      "example": "Arbeiten Sie hier in Würzburg?",
+      "note": "du arbeitest, er arbeitet",
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "lernen",
+      "word": "lernen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apprendre",
+      "example": "Wir lernen Deutsch.",
+      "note": null,
+      "audio": {
+        "media": "a1-zahlen-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-zahlen-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : les nombres de 0 à 100",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : les nombres de 0 à 100",
+        "description": "Les nombres servent partout : pour dire son âge, donner son numéro de téléphone ou son adresse, comprendre un prix.\n\nDE 0 À 12 : À APPRENDRE PAR CŒUR\n• 0 null — 1 eins — 2 zwei — 3 drei — 4 vier\n• 5 fünf — 6 sechs — 7 sieben — 8 acht\n• 9 neun — 10 zehn — 11 elf — 12 zwölf\n\nDE 13 À 19 : UNITÉ + ZEHN\n• 13 dreizehn — 14 vierzehn — 15 fünfzehn — 16 sechzehn\n• 17 siebzehn — 18 achtzehn — 19 neunzehn\nAttention : on écrit sechzehn (sans le s de sechs) et siebzehn (sans le en de sieben).\n\nLES DIZAINES\n• 20 zwanzig — 30 dreißig — 40 vierzig — 50 fünfzig\n• 60 sechzig — 70 siebzig — 80 achtzig — 90 neunzig — 100 hundert\nAttention : 30 se termine en -ßig (dreißig) et non en -zig ; sechzig et siebzig perdent aussi des lettres.\n\nDE 21 À 99 : L’UNITÉ D’ABORD\nOn dit d’abord l’unité, puis « und », puis la dizaine, en un seul mot :\n• 21 einundzwanzig (mot à mot : « un-et-vingt »)\n• 34 vierunddreißig\n• 57 siebenundfünfzig\n• 99 neunundneunzig\nAstuce : quand vous entendez « dreiundvierzig », pensez d’abord au 3 à droite, puis au 4 à sa gauche : 43.\nAttention : on dit eins, mais einundzwanzig (sans s).\n\nL’ÂGE\n• Wie alt bist du? / Wie alt sind Sie? — Quel âge as-tu ? / Quel âge avez-vous ?\n• Ich bin 25 (fünfundzwanzig) Jahre alt. — J’ai 25 ans.\nEn allemand, on « est » 25 ans : on emploie sein, jamais haben.\n\nLE NUMÉRO DE TÉLÉPHONE\n• Wie ist deine Handynummer? — Quel est ton numéro de portable ?\n• Wie ist Ihre Telefonnummer? — Quel est votre numéro de téléphone ?\n• On dicte le numéro chiffre par chiffre (0176 : null – eins – sieben – sechs) ou par groupes de deux (34 : vierunddreißig).\n• Au téléphone, on dit souvent « zwo » au lieu de « zwei », pour ne pas confondre avec « drei ».\n\nLES NOMBRES AU QUOTIDIEN\n• das Alter — l’âge\n• die Handynummer — le numéro de portable\n• die Hausnummer — le numéro dans la rue\n• die Postleitzahl (PLZ) — le code postal\n• der Preis — le prix : Das kostet 20 Euro.\n• die Buslinie — la ligne de bus : der Bus Nummer 14\n\nÉcoutez l’enregistrement : chaque nombre est lu lentement. Répétez à voix haute pendant la pause, puis réécoutez en cachant le texte et dites chaque nombre avant la voix.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-zahlen-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "Les nombres au quotidien : âge, téléphone, adresse, prix, bus",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les nombres",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : l’inscription au cours d’allemand",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : l’inscription au cours d’allemand",
+        "description": "Awa Diallo vient du Mali et habite à Würzburg. Elle s’inscrit à un cours d’allemand à la Volkshochschule (l’université populaire, qui propose des cours pour adultes dans chaque ville). Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nHerr Krüger : Guten Tag! Bitte schön?\nAwa : Guten Tag! Ich lerne Deutsch. Ist hier die Kursanmeldung?\nHerr Krüger : Ja, hier sind Sie richtig. Wie ist Ihr Name, bitte?\nAwa : Diallo, Awa Diallo. D – I – A – L – L – O.\nHerr Krüger : Danke. Und wie alt sind Sie, Frau Diallo?\nAwa : Ich bin achtundzwanzig Jahre alt.\nHerr Krüger : Was ist Ihre Adresse?\nAwa : Lindenstraße vierzehn, in Würzburg.\nHerr Krüger : Und die Postleitzahl?\nAwa : Neun, sieben, null, sieben, vier. (97074)\nHerr Krüger : Haben Sie auch eine Handynummer?\nAwa : Ja. Null, eins, fünf, zwei, dreiundvierzig, achtundsechzig, einundneunzig. (0152 43 68 91)\nHerr Krüger : Und Ihre E-Mail-Adresse?\nAwa : Awa Punkt Diallo at beispiel Punkt de. (awa.diallo@beispiel.de)\nHerr Krüger : Danke. Arbeiten Sie hier in Würzburg?\nAwa : Ja, ich arbeite als Köchin. Und ich brauche Deutsch für die Arbeit.\nHerr Krüger : Sehr gut. Ihr Kurs ist in Raum dreiundzwanzig. Er kostet fünfundneunzig Euro.\nAwa : Raum dreiundzwanzig. Vielen Dank!\nHerr Krüger : Bitte sehr. Auf Wiedersehen, Frau Diallo!\n\nDONNER SES COORDONNÉES\n• Wie ist Ihr Name? — Mein Name ist … / Ich heiße …\n• Wie alt sind Sie? — Ich bin … Jahre alt.\n• Was ist Ihre Adresse? — Lindenstraße 14, 97074 Würzburg.\nEn Allemagne, on écrit la rue, puis le numéro, puis le code postal (cinq chiffres) et la ville.\n• Wie ist Ihre Handynummer? — 0152 43 68 91.\n• Wie ist Ihre E-Mail-Adresse? — @ se dit « at » (prononcé comme « ète ») et le point se dit « Punkt ».\n\nGRAMMAIRE : LE PRÉSENT DES VERBES RÉGULIERS\nOn enlève -en à l’infinitif pour trouver le radical (wohn-en → wohn-), puis on ajoute la terminaison de la personne.\nwohnen (habiter)\n• ich wohne — j’habite\n• du wohnst — tu habites\n• er/sie/es wohnt — il/elle habite\n• wir wohnen — nous habitons\n• ihr wohnt — vous habitez (plusieurs personnes que l’on tutoie)\n• sie wohnen — ils/elles habitent\n• Sie wohnen — vous habitez (politesse, une ou plusieurs personnes)\nDe la même façon : lernen (apprendre), kommen (venir), machen (faire), brauchen (avoir besoin de), kaufen (acheter), spielen (jouer).\n\nDEUX PETITES DIFFICULTÉS\n• Radical terminé par -t ou -d : on ajoute un -e- pour pouvoir prononcer. arbeiten → du arbeitest, er arbeitet, ihr arbeitet ; finden → du findest, er findet.\n• Radical terminé par -s, -ß ou -z : avec du, on ajoute seulement -t. heißen → du heißt ; tanzen → du tanzt.\n\nSIE, SIE OU SIE ?\n• sie wohnt (verbe en -t) — elle habite\n• sie wohnen (verbe en -en, minuscule) — ils/elles habitent\n• Sie wohnen (verbe en -en, majuscule) — vous habitez\n\nLE VERBE HABEN (AVOIR)\n• ich habe — wir haben\n• du hast — ihr habt\n• er/sie/es hat — sie/Sie haben\nAttention : du hast et er hat perdent le b.\nExemples : Haben Sie eine Handynummer? — Ich habe eine Frage. — Hast du eine E-Mail-Adresse?",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-zahlen-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : die Kursanmeldung",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-nachsprechen",
+      "kind": "lesson",
+      "title": "Découvrir et répéter : les couleurs et les nombres (voix natives)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir et répéter : les couleurs et les nombres (voix natives)",
+        "description": "LES COULEURS\n• rot — rouge • blau — bleu • grün — vert • gelb — jaune\n• orange — orange • braun — marron • schwarz — noir • weiß — blanc\n• grau — gris • rosa — rose • lila — violet • beige — beige • bunt — multicolore\n• hell — clair : hellblau (bleu clair) ; dunkel — foncé : dunkelblau (bleu foncé)\n\nDEMANDER ET DIRE LA COULEUR\n• Welche Farbe hat dein Handy? — De quelle couleur est ton portable ? (mot à mot : « Quelle couleur a ton portable ? »)\n• Mein Handy ist schwarz. — Mon portable est noir.\n• Was ist deine Lieblingsfarbe? — Meine Lieblingsfarbe ist Grün. — Ma couleur préférée est le vert.\nAprès « ist », la couleur s’écrit avec une minuscule et ne change jamais : Das Auto ist rot. Die Bücher sind rot. Quand la couleur est un nom, elle prend une majuscule : Meine Lieblingsfarbe ist Blau. On dit mein Handy, mais meine Tasche, meine Lieblingsfarbe : Tasche et Farbe sont des mots féminins.\n\n1. ÉCOUTER LES COULEURS (premier enregistrement)\nUne voix lit six couleurs dans une phrase (Die Kirsche ist rot …), puis Sara et Felix parlent de la couleur de leur portable. Répétez chaque phrase pendant la pause.\n\n2. LES NOMBRES DE 13 À 99 (voix native)\ndreizehn … neunzehn — zwanzig, einundzwanzig — dreißig, vierzig, fünfzig, sechzig, siebzig, achtzig, neunzig, hundert, zweihundert (200) — zweiunddreißig, vierundvierzig, fünfundfünfzig, sechsundsechzig, siebenundsiebzig, achtundachtzig, neunundneunzig.\n• L’accent tombe sur la première partie du nombre : DREIzehn, ZWANzig, VIERundvierzig.\n• Ne confondez pas -zehn (13 à 19) et -zig (20, 30, 40…) : vierzehn (14) — vierzig (40). Le g final de -zig se prononce souvent comme le ch de « ich ».\n• Dans les nombres composés, on entend l’unité d’abord, puis und, puis la dizaine : vierundvierzig (44), achtundachtzig (88).\n\n3. LES COULEURS (voix native)\n• au se dit [aou] : blau, braun, grau. ei se dit [aï] et ß est un s dur : weiß se prononce à peu près « vaïss ».\n• schwarz se prononce à peu près « chvarts » : sch comme le « ch » français, w comme [v], z comme [ts].\n• ü se dit comme le « u » de « tu » : grün. Le g de gelb et de grün est toujours dur, comme dans « gare ».\n\nÀ VOUS\n1. Écoutez et répétez chaque mot pendant la pause, d’abord en lisant la transcription, puis sans la regarder.\n2. Réécoutez les nombres sans la transcription et dites chaque nombre en même temps que la voix.\n3. Répondez à voix haute : Welche Farbe hat dein Handy? — Was ist deine Lieblingsfarbe? — Dites la couleur de trois objets autour de vous : Mein … ist …\n\nEnregistrements natifs : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-zahlen-farben-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-farben-audio-v3",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-zahlen-native",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-farben-native",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-aussprache",
+      "kind": "lesson",
+      "title": "Aussprache : ä, ö, ü et ß",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Aussprache : ä, ö, ü, ß",
+        "description": "Les trémas (die Umlaute) changent le son de a, o et u. Ce n’est pas un détail : un tréma oublié change le sens du mot (schon « déjà », schön « beau » ; das Buch « le livre », die Bücher « les livres »). Bonne nouvelle : les sons ö et ü existent en français ! Écoutez les enregistrements (voix native) et répétez chaque mot pendant la pause.\n\nÄ, ä — COMME LE « È » DE « MÈRE »\nähnlich (semblable), die Anwältin (l’avocate), ärgern (fâcher), die Ästhetik\nÄ marque souvent un pluriel ou un mot de la même famille : das Glas → die Gläser ; der Anhang → anhängen.\n\nÖ, ö — COMME LE « EU » DE « PEU » OU DE « PEUR »\nÖsterreich (l’Autriche), öffnen (ouvrir), das Öl (l’huile), ökologisch, zwölf, ich möchte\nPosition de la bouche : dites « é », puis arrondissez les lèvres comme pour « o », sans bouger la langue.\n\nÜ, ü — COMME LE « U » DE « TU »\ndie Übung (l’exercice), überzeugen (convaincre), kühl (frais), amüsieren, fünf, grün\nPosition de la bouche : dites « i », puis arrondissez les lèvres comme pour « ou ».\nPiège : sans tréma, le u allemand se prononce « ou » : das Buch, die U-Bahn. Distinguez bien Buch (« ou ») et Bücher (« u »).\n\nß — ESZETT, UN S TOUJOURS DUR\ndie Straße (la rue), spaßen (plaisanter), heißen (s’appeler), außen (dehors), dreißig, weiß\nOn écrit ß après une voyelle longue ou après ei et au ; après une voyelle brève, on écrit ss : der Pass, Tschüss. En Suisse, on écrit toujours ss : Strasse. Et attention : ß n’est pas un B !\n\nSANS CLAVIER ALLEMAND\nRemplacez ä, ö, ü par ae, oe, ue et ß par ss : Mueller = Müller, Strasse = Straße.\n\nLES PAIRES (dernier enregistrement)\nÉcoutez d’abord des mots avec ä, ö et ü, puis la différence entre la voyelle simple et la voyelle avec tréma : der Anhang — anhängen ; schon — schön ; das Buch — die Bücher.\n\nÀ VOUS\n1. Écoutez chaque enregistrement et répétez chaque mot pendant la pause.\n2. Lisez à voix haute en exagérant la différence : schon — schön ; das Buch — die Bücher ; der Anhang — anhängen.\n3. Présentez-vous comme Jürgen Müller : « Ich heiße Jürgen Müller. Ich komme aus Österreich. Ich wohne in der Schönbrunner Straße zwölf und bin fünfundfünfzig Jahre alt. »\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-zahlen-umlaut-ae-native",
+          "usage": "audio",
+          "caption": "Ä, ä (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-umlaut-oe-native",
+          "usage": "audio",
+          "caption": "Ö, ö (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-umlaut-ue-native",
+          "usage": "audio",
+          "caption": "Ü, ü (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-eszett-native",
+          "usage": "audio",
+          "caption": "ß, Eszett (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-umlaut-paare-native",
+          "usage": "audio",
+          "caption": "ä, ö, ü dans les mots, puis les paires (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-lesen",
+      "kind": "exercise",
+      "title": "Lire : un formulaire et un e-mail",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Paulo im Fitnessstudio",
+        "description": "Paulo s’inscrit dans une salle de sport à Leipzig. Il remplit le formulaire, puis il écrit un e-mail à la salle de sport. Lisez les deux documents, puis répondez aux questions.\n\nANMELDUNG — FITNESSSTUDIO SPORTPUNKT LEIPZIG\nFamilienname: Costa\nVorname: Paulo\nAlter: 19\nStraße, Hausnummer: Gohliser Straße 45\nPLZ, Ort: 04155 Leipzig\nHandynummer: 0176 34 52 80\nE-Mail: paulo.costa@beispiel.de\nBeruf: Student\nSport: Fußball, Schwimmen\nUnterschrift: Paulo Costa\n\nE-MAIL\nBetreff: Meine Anmeldung\nHallo,\nich heiße Paulo Costa und trainiere jetzt im Sportpunkt. Leider ist mein Formular nicht ganz richtig. Meine Handynummer ist 0176 34 25 80. Und ich wohne in der Gohliser Straße 54, nicht 45.\nIch habe auch eine Frage: Die T-Shirts im Studio sind rot. Haben Sie die T-Shirts auch in Blau? Blau ist meine Lieblingsfarbe!\nViele Grüße\nPaulo Costa",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wie alt ist Paulo?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Neun.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Neunzig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Neunzehn.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Neunundzwanzig.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le formulaire indique « Alter: 19 », soit neunzehn (neun + zehn). Neunzig vaut 90 et neun 9 : -zehn marque les nombres de 13 à 19, -zig les dizaines.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Pourquoi Paulo écrit-il un e-mail à la salle de sport ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Son formulaire contient deux erreurs et il a une question.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il veut annuler son inscription.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Il a perdu son téléphone portable.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Il cherche une équipe de football.",
+              "correct": false
+            }
+          ],
+          "explanation": "Paulo écrit « Leider ist mein Formular nicht ganz richtig » : le numéro de portable et le numéro de rue sont faux. Puis « Ich habe auch eine Frage » sur les T-shirts. Il ne veut pas annuler.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quel est le bon numéro de portable de Paulo ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "0176 34 52 80",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "0176 43 25 80",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "0176 34 25 08",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "0176 34 25 80",
+              "correct": true
+            }
+          ],
+          "explanation": "Dans l’e-mail, Paulo corrige : « Meine Handynummer ist 0176 34 25 80 ». Le formulaire (34 52 80) inversait deux chiffres : c’est l’e-mail qui donne le bon numéro.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wo wohnt Paulo?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Gohliser Straße fünfundvierzig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Gohliser Straße vierundfünfzig.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Gohliser Straße vierzehn.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Gohliser Straße fünfundfünfzig.",
+              "correct": false
+            }
+          ],
+          "explanation": "Paulo écrit « Gohliser Straße 54, nicht 45 » : 54 se dit vierundfünfzig, l’unité (vier) avant la dizaine (fünfzig). Fünfundvierzig (45) est le numéro erroné du formulaire.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Welche Farbe haben die T-Shirts im Studio?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sind blau.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sind schwarz.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sind rot.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie sind grün.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die T-Shirts im Studio sind rot » : les T-shirts sont rouges. Paulo demande s’ils existent en bleu, sa couleur préférée ; ils ne sont donc pas bleus.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-zahlen-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : numéros, âge, e-mail et prix",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Zahlen hören",
+        "description": "Écoutez les quatre petites scènes (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Attention aux nombres : on entend l’unité avant la dizaine. Les deux dernières questions sont des dictées : écoutez la phrase et écrivez-la, les nombres en chiffres ou en lettres. Les transcriptions s’affichent après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Scène 1 : quel est le nouveau numéro de portable de Lena ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "0151 86 34 72",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "0151 68 34 27",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "0151 68 43 27",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "0151 86 43 72",
+              "correct": false
+            }
+          ],
+          "explanation": "Lena dicte « null, eins, fünf, eins, achtundsechzig, dreiundvierzig, siebenundzwanzig » : 68, 43, 27. Dans chaque paire, l’unité vient d’abord : achtundsechzig = 68, pas 86."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Scène 2 : quel âge a le grand-père d’Emma ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "17 ans.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "71 ans.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "61 ans.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "77 ans.",
+              "correct": false
+            }
+          ],
+          "explanation": "Opa dit « Ich bin heute einundsiebzig Jahre alt » : ein-und-siebzig = 71. Siebzehn (17) finit par -zehn, et 61 se dirait einundsechzig."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Scène 3 : quelle est l’adresse e-mail de Monsieur Kaya ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "s.kaja@beispiel.de",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "s-kaya@beispiel.de",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "s.kaya@beispiel.com",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "s.kaya@beispiel.de",
+              "correct": true
+            }
+          ],
+          "explanation": "M. Kaya dit « S Punkt Kaya at beispiel Punkt de » et précise « Nein, mit Y » : s.kaya@beispiel.de. Punkt est le point et at l’arobase ; l’adresse finit par de, pas par com."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Scène 4 : qu’achète Monsieur Yilmaz pour sa fille ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un téléphone portable.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Un ordinateur portable.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Une montre.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich brauche ein Handy für meine Tochter » : das Handy est le téléphone portable, un faux ami pour un francophone. Un ordinateur portable se dit der Laptop."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Scène 4 : combien coûte l’achat et quelle couleur Monsieur Yilmaz choisit-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "95 euros, en violet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "59 euros, en vert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "59 euros, en violet.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "95 euros, en vert.",
+              "correct": false
+            }
+          ],
+          "explanation": "La vendeuse annonce « neunundfünfzig Euro » (59) et le client choisit « Lila, bitte! » : lila veut dire violet. 95 inverserait les chiffres ; le vert est l’autre couleur proposée."
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase et écrivez-la.",
+          "accept": [
+            "Ich bin achtundzwanzig Jahre alt und wohne in Würzburg.",
+            "Ich bin 28 Jahre alt und wohne in Würzburg."
+          ],
+          "voice": "frau",
+          "explanation": "Achtundzwanzig = 28 : l’unité (acht) puis la dizaine (zwanzig), en un seul mot. L’âge se dit avec sein (ich bin), et wohnen in donne le lieu où l’on habite.",
+          "showWordCount": true
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Dictée : écoutez la phrase et écrivez-la.",
+          "accept": [
+            "Das Handy kostet neunundfünfzig Euro, nicht fünfundneunzig.",
+            "Das Handy kostet 59 Euro, nicht 95."
+          ],
+          "voice": "mann",
+          "explanation": "Neunundfünfzig = 59 et fünfundneunzig = 95 : les mêmes chiffres, mais l’unité se dit toujours en premier. Das Handy est neutre et prend une majuscule, comme tous les noms.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-zahlen-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Quatre petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-handy-bild",
+          "usage": "illustration",
+          "alt": "Un téléphone portable.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-laptop-bild",
+          "usage": "illustration",
+          "alt": "Un ordinateur portable ouvert.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-uhr-bild",
+          "usage": "illustration",
+          "alt": "Une montre-bracelet.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-hoeren-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-geld-lesen",
+      "kind": "exercise",
+      "title": "Lire : euros ou francs ? Payer en voyage",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Euro oder Franken? — Chloés Reiseblog",
+        "description": "Chloé, une étudiante canadienne, voyage en Autriche et en Suisse. Sur son blog, elle raconte comment elle paie et combien coûtent les choses. Lisez ses deux messages, puis répondez aux questions.\n\nMOTS UTILES\n• bezahlen — payer ; bar bezahlen — payer en espèces\n• das Bargeld — l’argent liquide ; die Karte — la carte bancaire\n• der Geldautomat — le distributeur de billets ; gleich nebenan — juste à côté\n• der Franken (CHF) — le franc suisse\n• teuer — cher ; nur — seulement ; man — on\n• nicht …, sondern … — pas …, mais …\n• eine Tafel Schokolade — une tablette de chocolat\n\nWIEN\nHallo aus Wien! Ich heiße Chloé, ich bin zweiundzwanzig Jahre alt und komme aus Kanada, aus Montréal. Ich mache eine Reise durch Österreich und die Schweiz. In Kanada bezahle ich mit Dollar. In Österreich bezahle ich mit Euro, wie in Deutschland. Ich bezahle gern mit Karte. Aber im Café Sonne sagt der Kellner: „Nur Bargeld, bitte!“ Kein Problem: Der Geldautomat ist gleich nebenan. Ein Kaffee kostet hier vier Euro, ein Stück Sachertorte sieben Euro. Meine Freundin Jana aus Köln sagt: „In Deutschland bezahlen auch viele Leute gern bar.“\n\nZÜRICH\nJetzt bin ich in Zürich. In der Schweiz bezahlt man nicht mit Euro, sondern mit Franken. Die Schweiz ist teuer: Ein Kaffee kostet hier sechs Franken. In Montréal kostet ein Kaffee nur drei Dollar! Aber die Schweizer Schokolade ist super, und eine Tafel kostet nur zwei Franken. Ich kaufe zehn Tafeln für meine Familie. Bis bald!\n\nLE SAVIEZ-VOUS ?\nL’euro est la monnaie de l’Allemagne et de l’Autriche ; la Suisse et le Liechtenstein utilisent le franc suisse (CHF). Le premier papier-monnaie est né en Chine ; en Europe, les premiers billets de banque apparaissent en Suède au XVIIe siècle.\n\nTexte adapté de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Avec quelle monnaie Chloé paie-t-elle en Autriche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "En dollars.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "En francs suisses.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "En euros.",
+              "correct": true
+            }
+          ],
+          "explanation": "Chloé écrit « In Österreich bezahle ich mit Euro, wie in Deutschland ». Le dollar est la monnaie du Canada et le franc celle de la Suisse.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quel problème Chloé a-t-elle au café Sonne ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le café accepte seulement l’argent liquide.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sa carte bancaire ne marche pas.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le café est fermé.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le café n’a plus de Sachertorte.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le serveur dit « Nur Bargeld, bitte! » : seulement de l’argent liquide. Sa carte n’est pas en panne : le café n’accepte simplement pas les cartes.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Was kostet ein Stück Sachertorte in Wien?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vier Euro.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Siebzehn Euro.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sechs Franken.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sieben Euro.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Ein Stück Sachertorte sieben Euro » : sieben = 7. Vier Euro est le prix du café, et siebzehn (17) se terminerait par -zehn.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que dit Jana, l’amie de Chloé, sur l’Allemagne ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Tout le monde paie par carte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Beaucoup de gens aiment payer en espèces.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "On paie en francs suisses.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Les cafés sont très chers.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jana dit « In Deutschland bezahlen auch viele Leute gern bar » : viele Leute = beaucoup de gens, bar = en espèces. Elle ne dit pas que tout le monde paie par carte.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Pourquoi Chloé trouve-t-elle la Suisse chère ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une tablette de chocolat coûte dix francs.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Un café coûte six francs à Zurich, mais seulement trois dollars à Montréal.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Un café coûte sept francs à Zurich.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le distributeur de billets prend beaucoup d’argent.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ein Kaffee kostet hier sechs Franken. In Montréal kostet ein Kaffee nur drei Dollar! » Le chocolat, lui, coûte seulement deux francs la tablette : ce n’est pas lui qui est cher.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Combien de tablettes de chocolat Chloé achète-t-elle, et pour qui ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Deux, pour Jana.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Douze, pour sa famille.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dix, pour sa famille.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Dix, pour Jana.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich kaufe zehn Tafeln für meine Familie » : zehn = 10, pour sa famille. Zwei est le prix d’une tablette en francs, et douze se dirait zwölf.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-zahlen-geld-bild",
+          "usage": "illustration",
+          "caption": "Euro, Franken, Bargeld, Karte",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-geld-hoeren",
+      "kind": "exercise",
+      "title": "Écouter : une enquête sur l’argent",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Bar oder mit Karte?",
+        "description": "Une journaliste de radio interroge trois personnes, à Berlin, à Graz et à Bâle (Basel). Elle pose deux questions : « Wie bezahlen Sie? » (Comment payez-vous ?) et « Was kostet …? » (Combien coûte … ?). Écoutez l’enquête (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Attention aux nombres : -zehn (13 à 19) ou -zig (20, 30…) ? Et on entend l’unité avant la dizaine ! La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• bar — en espèces ; mit Karte — par carte ; mit dem Handy — avec le portable\n• das Bargeld — l’argent liquide ; in der Tasche — sur soi (mot à mot : dans la poche)\n• fast immer — presque toujours ; schnell — rapide ; teuer — cher ; ungefähr — environ\n• der Döner — le kebab ; die Kinokarte — la place de cinéma ; das Mittagessen — le déjeuner\n• im Restaurant — au restaurant ; auf dem Markt — au marché\n• Grüezi! — Bonjour ! (en Suisse alémanique)\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Berlin : comment Herr Krause paie-t-il presque toujours ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Par carte bancaire.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "En espèces.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Avec son téléphone portable.",
+              "correct": false
+            }
+          ],
+          "explanation": "Herr Krause répond « Fast immer bar. Ich habe gern Bargeld in der Tasche » : bar veut dire en espèces. C’est Lea qui paie avec son portable.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Berlin : combien coûte un döner, d’après Herr Krause ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "17 €",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "6 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "7 €",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "9 €",
+              "correct": false
+            }
+          ],
+          "explanation": "« Sieben Euro! Das ist teuer! » : sieben = 7. Siebzehn (17) aurait la fin -zehn.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Graz : comment Lea paie-t-elle, et pourquoi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "En espèces : elle aime avoir de l’argent sur elle.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Par carte : c’est moins cher.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Avec son portable : c’est très rapide.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Avec son portable : c’est gratuit.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lea dit « Mit dem Handy! Das ist super schnell » : schnell veut dire rapide. Elle ne parle ni de prix ni de gratuité.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Graz : combien coûte une place de cinéma ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "30 €",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "3 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "14 €",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "13 €",
+              "correct": true
+            }
+          ],
+          "explanation": "« Dreizehn Euro » : drei + zehn = 13. Dreißig (30) se termine par -ßig et vierzehn (14) commence par vier.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Bâle : où Herr Brunner paie-t-il en espèces ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Au restaurant.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Au marché.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Au cinéma.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Nulle part : il paie toujours par carte.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Im Restaurant bezahle ich mit Karte. Aber auf dem Markt bezahle ich bar » : par carte au restaurant, en espèces (bar) au marché.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Bâle : combien coûte environ un déjeuner au restaurant ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "25 francs",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "52 francs",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "25 euros",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "35 francs",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ungefähr fünfundzwanzig Franken » : fünf-und-zwanzig = 25, en francs puisqu’on est en Suisse. 52 inverserait l’unité et la dizaine.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-zahlen-geld-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Une enquête : bar oder mit Karte ?",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-karte-bild",
+          "usage": "illustration",
+          "alt": "Une carte bancaire.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-bargeld-bild",
+          "usage": "illustration",
+          "alt": "Un billet de banque.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-handy-bild",
+          "usage": "illustration",
+          "alt": "Un téléphone portable.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "optionId": "c",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-fotos",
+      "kind": "exercise",
+      "title": "Lire : couleurs, argent et températures en photos",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Was sehen Sie? — Farben, Geld, Grad",
+        "description": "Regardez les trois photos du manuel Deutsch im Blick et répondez aux questions en allemand.\n\nMOTS UTILES\n• die Ampel — le feu (de circulation) ; der Fußgänger — le piéton\n• die Münze — la pièce de monnaie ; der Franken — le franc suisse\n• Wie viel Geld ist das? — Combien d’argent est-ce ?\n• die Wetterkarte — la carte météo ; der Grad — le degré\n• Wie warm ist es in Berlin? — Es sind achtzehn Grad. — Quelle température fait-il à Berlin ? — Il fait 18 degrés.\n\nLE SAVIEZ-VOUS ?\nEn Allemagne, on attend en général le bonhomme vert pour traverser, même quand la rue est vide. Sur les cartes météo, les températures sont en degrés Celsius, comme en France.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Welche Farben hat die Ampel?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Rot und gelb.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Gelb und grün.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Rot und grün.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Blau und weiß.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le feu montre un bonhomme vert en haut et un bonhomme rouge en bas : rot und grün. Ce feu pour piétons n’a pas de lumière jaune (gelb).",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Diese Münze kommt aus der Schweiz. Wie viel Geld ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zehn Franken.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Zehn Euro.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elf Franken.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zwanzig Franken.",
+              "correct": false
+            }
+          ],
+          "explanation": "La pièce porte « 10 FR » et la croix suisse : zehn Franken. En Suisse, on ne paie pas en euros.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Regardez la carte météo. Wie warm ist es in Berlin?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Acht Grad.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Achtzig Grad.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Achtundzwanzig Grad.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Achtzehn Grad.",
+              "correct": true
+            }
+          ],
+          "explanation": "Sur la carte, Berlin affiche 18 degrés : acht + zehn = achtzehn. Achtzig (80) est une dizaine et achtundzwanzig vaut 28.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Sur la même carte : wie warm ist es in München?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zwölf Grad.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zweiundzwanzig Grad.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Zweiunddreißig Grad.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zwanzig Grad.",
+              "correct": false
+            }
+          ],
+          "explanation": "München affiche 22 degrés : zwei-und-zwanzig, l’unité avant la dizaine. Zwölf vaut 12 et zweiunddreißig 32.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Sur la même carte : in welcher Stadt sind es siebzehn Grad?",
+          "options": [
+            {
+              "id": "a",
+              "label": "In Rostock.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "In Hamburg.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "In Köln.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In Stuttgart.",
+              "correct": false
+            }
+          ],
+          "explanation": "Siebzehn = 17 : sieben perd -en devant -zehn. Sur la carte, ce nombre s’affiche à Rostock, au bord de la mer Baltique ; Hamburg, Köln et Stuttgart ont d’autres températures.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-zahlen-ampel-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-muenze-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-wetterkarte-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : verbes réguliers, haben et nombres",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : verbes réguliers, haben et nombres",
+        "description": "Choisissez ou écrivez la forme qui complète chaque phrase. Rappel : ich -e, du -st, er/sie/es -t, wir -en, ihr -t, sie/Sie -en. Avec un radical en -t (arbeiten), on ajoute -e- : du arbeitest, er arbeitet. Le verbe haben : ich habe, du hast, er hat, wir haben, ihr habt, sie/Sie haben. Dans les phrases à remettre en ordre, touchez les étiquettes dans l’ordre de la phrase.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Anna und Tom, wo … ihr?",
+          "options": [
+            {
+              "id": "a",
+              "label": "wohnen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "wohnst",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wohnt",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "wohne",
+              "correct": false
+            }
+          ],
+          "explanation": "Ihr (vous, à plusieurs personnes que l’on tutoie) se conjugue avec -t : ihr wohnt. Wohnen va avec wir, sie ou Sie, et wohnst avec du.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Wie alt sind Sie? — Ich … dreiundvierzig Jahre alt.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bin",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "habe",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ist",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "hat",
+              "correct": false
+            }
+          ],
+          "explanation": "L’âge se dit avec sein : Ich bin 43 Jahre alt. « Ich habe … Jahre » est un calque du français « j’ai … ans ».",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Mein Freund Paul … als Taxifahrer in Köln.",
+          "options": [
+            {
+              "id": "a",
+              "label": "arbeitest",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "arbeiten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "arbeit",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "arbeitet",
+              "correct": true
+            }
+          ],
+          "explanation": "Mein Freund Paul, c’est er : la terminaison est -t. Le radical arbeit- se termine déjà par -t, on ajoute donc -e- : er arbeitet.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "… du eine E-Mail-Adresse?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Habe",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Hast",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Hat",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Habt",
+              "correct": false
+            }
+          ],
+          "explanation": "Avec du, haben devient hast : le b disparaît. Hat va avec er ou sie, habt avec ihr ; dans une question oui/non, le verbe vient en premier.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Comment écrit-on 68 en toutes lettres ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "sechsundachtzig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "sechzigacht",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "achtundsechzig",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "achtundsechszig",
+              "correct": false
+            }
+          ],
+          "explanation": "On écrit l’unité, puis und, puis la dizaine, en un seul mot : acht-und-sechzig. Sechsundachtzig vaut 86, et sechzig s’écrit sans le s de sechs.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Die Sonne ist gelb und der Schnee ist …",
+          "options": [
+            {
+              "id": "a",
+              "label": "weiß",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "schwarz",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "grün",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "rot",
+              "correct": false
+            }
+          ],
+          "explanation": "Der Schnee (la neige) est blanc : weiß. La phrase reprend le modèle « Der Schnee ist weiß » de la leçon sur les couleurs ; schwarz veut dire noir.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez avec le verbe entre parenthèses à la bonne forme.",
+          "text": "Wir [[1]] Deutsch, und ihr [[2]] Englisch. Paul [[3]] in Köln.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "lernen"
+              ],
+              "size": 8,
+              "hint": "lernen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "lernt"
+              ],
+              "size": 8,
+              "hint": "lernen"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "arbeitet"
+              ],
+              "size": 10,
+              "hint": "arbeiten"
+            }
+          ],
+          "explanation": "Wir prend -en (wir lernen) et ihr prend -t (ihr lernt). Arbeiten a un radical en -t : on ajoute -e- devant la terminaison, Paul arbeitet."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Complétez avec le verbe haben.",
+          "text": "[[1]] du eine Handynummer? – Ja, und ich [[2]] auch eine E-Mail-Adresse.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Hast"
+              ],
+              "size": 6,
+              "hint": "haben"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "habe"
+              ],
+              "size": 6,
+              "hint": "haben"
+            }
+          ],
+          "explanation": "Haben perd le b avec du et er : du hast, er hat. Avec ich, la forme est régulière : ich habe. Dans la question, le verbe vient en premier."
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour dire votre âge (34 ans).",
+          "answers": [
+            [
+              "Ich",
+              "bin",
+              "vierunddreißig",
+              "Jahre",
+              "alt."
+            ]
+          ],
+          "explanation": "On dit son âge avec sein, et alt termine la phrase : Ich bin vierunddreißig Jahre alt. Le calque du français « j’ai 34 ans » (Ich habe …) est une faute fréquente."
+        },
+        {
+          "id": "q10",
+          "type": "match",
+          "prompt": "Associez chaque nombre à son écriture en lettres.",
+          "pairs": [
+            {
+              "left": "14",
+              "right": "vierzehn"
+            },
+            {
+              "left": "40",
+              "right": "vierzig"
+            },
+            {
+              "left": "16",
+              "right": "sechzehn"
+            },
+            {
+              "left": "60",
+              "right": "sechzig"
+            },
+            {
+              "left": "43",
+              "right": "dreiundvierzig"
+            },
+            {
+              "left": "34",
+              "right": "vierunddreißig"
+            }
+          ],
+          "explanation": "-zehn donne 13 à 19, -zig les dizaines (30 fait exception : dreißig). Dans 43, on dit l’unité d’abord : drei-und-vierzig. Sechzehn et sechzig perdent le s de sechs."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-zahlen-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : âge, numéro, adresse et prix",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : âge, numéro, adresse et prix",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Dans les nombres, accentuez la première partie et dites bien l’unité avant la dizaine.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-zahlen-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-zahlen-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich bin fünfundzwanzig Jahre alt.",
+          "accept": [
+            "Ich bin fünfundzwanzig Jahre alt.",
+            "Ich bin 25 Jahre alt."
+          ],
+          "explanation": "Fünf-und-zwanzig se dit d’un seul souffle, avec l’accent sur fünf. Le ü de fünf se prononce lèvres arrondies, comme le « u » de « tu ».",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie ist Ihre Telefonnummer?",
+          "accept": [
+            "Wie ist Ihre Telefonnummer?"
+          ],
+          "explanation": "Ihre (votre) commence par un i long. Dans Telefonnummer, l’accent tombe sur -fon- et le double m se prononce comme un seul.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich wohne in der Lindenstraße vierzehn.",
+          "accept": [
+            "Ich wohne in der Lindenstraße vierzehn.",
+            "Ich wohne in der Lindenstraße 14."
+          ],
+          "explanation": "Straße se prononce « chtrâsse » : st en début de mot se dit « cht » et ß est un s dur. Vierzehn : accent sur vier.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich habe eine neue Handynummer.",
+          "accept": [
+            "Ich habe eine neue Handynummer."
+          ],
+          "explanation": "Neue contient eu, qui se dit « oï ». Le h de habe et de Handy se prononce : soufflez légèrement.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Welche Farbe hat dein Handy?",
+          "accept": [
+            "Welche Farbe hat dein Handy?"
+          ],
+          "explanation": "Welche commence par un son [v] et se termine par le ch doux de « ich ». La voix descend à la fin de la question en W.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Das kostet neunundfünfzig Euro.",
+          "accept": [
+            "Das kostet neunundfünfzig Euro.",
+            "Das kostet 59 Euro.",
+            "Das kostet 59 €."
+          ],
+          "explanation": "Neun-und-fünfzig = 59 : l’unité d’abord. Euro se prononce « oïro », comme eu dans neu.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-zahlen-sprechen",
+      "kind": "mission",
+      "title": "Mission : donner ses coordonnées à l’inscription",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : donner ses coordonnées à l’inscription",
+        "description": "Vous vous inscrivez à un cours d’allemand. À l’accueil, vous donnez vos coordonnées à l’oral, puis vous remplissez la fiche. Écoutez d’abord Julien.\n\nMODÈLE\nGuten Tag! Mein Name ist Julien Morel. Morel: M – O – R – E – L. Ich bin vierunddreißig Jahre alt. Ich komme aus Belgien und wohne jetzt in Köln. Meine Adresse ist Bonner Straße 81, 50677 Köln. Meine Handynummer ist 0170 52 36 18. Meine E-Mail-Adresse ist julien.morel@beispiel.de. Meine Lieblingsfarbe ist Grün.\n\nLA FICHE\nANMELDUNG — DEUTSCHKURS A1\nFamilienname · Vorname · Alter · Straße, Hausnummer · PLZ, Ort · Handynummer · E-Mail · Sprachen\n\nVous pouvez donner des coordonnées inventées.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-zahlen-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Julien donne ses coordonnées",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez-vous à l’accueil : dites votre nom et épelez-le, votre âge, votre adresse avec le code postal, votre numéro de portable, votre adresse e-mail et votre couleur préférée. Dictez le numéro chiffre par chiffre ou par paires.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez votre fiche d’inscription en reprenant les rubriques ci-dessus (une ligne par rubrique). Puis présentez une amie ou un collègue en quatre phrases avec er ou sie, comme : « Das ist Marie. Sie wohnt in Lyon. Sie ist dreißig Jahre alt. Sie lernt Deutsch. »",
+          "maxChars": 800,
+          "minWords": 30
+        },
+        "checklist": [
+          "J’ai dit mon âge avec « Ich bin … Jahre alt », et non avec haben.",
+          "J’ai dicté mon numéro avec l’unité avant la dizaine dans les paires (81 = einundachtzig).",
+          "J’ai épelé mon nom et lu mon e-mail avec « at » et « Punkt ».",
+          "Ma fiche contient toutes les rubriques : la rue, puis le numéro, puis le code postal et la ville.",
+          "Dans les quatre phrases sur une autre personne, les verbes se terminent par -t : sie wohnt, er arbeitet, sie hat."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-zahlen-wortschatz-bild",
+      "kind": "image",
+      "title": "Les nombres au quotidien",
+      "alt": "Six vignettes : un gâteau d’anniversaire pour l’âge, un téléphone portable, une maison pour le numéro dans la rue, une boîte aux lettres pour le code postal, le symbole de l’euro pour le prix et un bus.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "cake",
+            "label": "das Alter"
+          },
+          {
+            "icon": "smartphone",
+            "label": "die Handynummer"
+          },
+          {
+            "icon": "house",
+            "label": "die Hausnummer"
+          },
+          {
+            "icon": "mailbox",
+            "label": "die Postleitzahl"
+          },
+          {
+            "icon": "euro",
+            "label": "der Preis"
+          },
+          {
+            "icon": "bus",
+            "label": "die Buslinie"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-zahlen-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les nombres de 0 à 100",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Null, eins, zwei, drei, vier."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Fünf, sechs, sieben, acht."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Neun, zehn, elf, zwölf."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Dreizehn, vierzehn, fünfzehn, sechzehn."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Siebzehn, achtzehn, neunzehn."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zwanzig, dreißig, vierzig, fünfzig."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Sechzig, siebzig, achtzig, neunzig, hundert."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Einundzwanzig."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vierunddreißig."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Siebenundfünfzig."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Neunundneunzig."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie alt sind Sie?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich bin fünfundzwanzig Jahre alt."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie ist Ihre Handynummer?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Null, eins, sieben, sechs, vierunddreißig, achtundfünfzig, zwölf."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-dialog-bild",
+      "kind": "image",
+      "title": "L’inscription à la Volkshochschule",
+      "alt": "Un bureau d’accueil : Herr Krüger demande « Wie ist Ihr Name? » et Awa répond « Diallo, Awa Diallo. ». Sur le bureau, on voit un formulaire, un stylo et un téléphone portable.",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Herr Krüger",
+            "say": "Wie ist Ihr Name?"
+          },
+          {
+            "name": "Awa",
+            "say": "Diallo, Awa Diallo."
+          }
+        ],
+        "items": [
+          "clipboard-list",
+          "pen",
+          "smartphone"
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-zahlen-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : l’inscription au cours",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Guten Tag! Bitte schön?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Guten Tag! Ich lerne Deutsch. Ist hier die Kursanmeldung?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Ja, hier sind Sie richtig. Wie ist Ihr Name, bitte?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Diallo, Awa Diallo. D, I, A, L, L, O."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Danke. Und wie alt sind Sie, Frau Diallo?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Ich bin achtundzwanzig Jahre alt."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Was ist Ihre Adresse?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Lindenstraße vierzehn, in Würzburg."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Und die Postleitzahl?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Neun, sieben, null, sieben, vier."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Haben Sie auch eine Handynummer?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Ja. Null, eins, fünf, zwei, dreiundvierzig, achtundsechzig, einundneunzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Und Ihre E-Mail-Adresse?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Awa Punkt Diallo at beispiel Punkt de."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Danke. Arbeiten Sie hier in Würzburg?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Ja, ich arbeite als Köchin. Und ich brauche Deutsch für die Arbeit."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Sehr gut. Ihr Kurs ist in Raum dreiundzwanzig. Er kostet fünfundneunzig Euro."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Awa",
+          "text": "Raum dreiundzwanzig. Vielen Dank!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krüger",
+          "text": "Bitte sehr. Auf Wiedersehen, Frau Diallo!"
+        }
+      ]
+    },
+    {
+      "key": "a1-zahlen-farben-bild",
+      "kind": "image",
+      "title": "Les couleurs",
+      "alt": "Six vignettes : des cerises (rot), une feuille (grün), un soleil (gelb), des vagues (blau), un flocon de neige (weiß) et une tasse de café (schwarz).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "cherry",
+            "label": "rot · die Kirsche"
+          },
+          {
+            "icon": "leaf",
+            "label": "grün · das Blatt"
+          },
+          {
+            "icon": "sun",
+            "label": "gelb · die Sonne"
+          },
+          {
+            "icon": "waves",
+            "label": "blau · das Meer"
+          },
+          {
+            "icon": "snowflake",
+            "label": "weiß · der Schnee"
+          },
+          {
+            "icon": "coffee",
+            "label": "schwarz · der Kaffee"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-zahlen-farben-audio-v3",
+      "kind": "audio",
+      "title": "Les couleurs",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Rot. Die Kirsche ist rot."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Grün. Das Blatt ist grün."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Gelb. Die Sonne ist gelb."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Blau. Das Meer ist blau."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Weiß. Der Schnee ist weiß."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Schwarz. Der Kaffee ist schwarz."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Orange, braun, grau, rosa, lila, bunt."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Hellblau, dunkelblau. Hellgrün, dunkelgrün."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Welche Farbe hat dein Handy, Felix?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Mein Handy ist schwarz. Und dein Handy?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Mein Handy ist rosa. Rosa ist meine Lieblingsfarbe!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-lesen-bild",
+      "kind": "image",
+      "title": "L’inscription à la salle de sport",
+      "alt": "Quatre vignettes : un formulaire, une enveloppe pour l’e-mail, un haltère pour la salle de sport et un tee-shirt.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "clipboard-list",
+            "label": "das Formular"
+          },
+          {
+            "icon": "mail",
+            "label": "die E-Mail"
+          },
+          {
+            "icon": "dumbbell",
+            "label": "das Fitnessstudio"
+          },
+          {
+            "icon": "shirt",
+            "label": "das T-Shirt"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-zahlen-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Quatre petites scènes avec des nombres",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Hallo Ben, hier ist Lena. Ich habe eine neue Handynummer."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Ben",
+          "text": "Ah, super! Moment, ich schreibe. Wie ist die Nummer?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Null, eins, fünf, eins, achtundsechzig, dreiundvierzig, siebenundzwanzig."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Ben",
+          "text": "Danke, Lena. Bis bald!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Emma",
+          "text": "Alles Gute zum Geburtstag, Opa! Wie alt bist du jetzt?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Opa",
+          "text": "Danke, Emma! Ich bin heute einundsiebzig Jahre alt."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Emma",
+          "text": "Wow! Und du bist so fit!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Bibliothek",
+          "text": "So, Herr Kaya. Und wie ist Ihre E-Mail-Adresse?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kaya",
+          "text": "S Punkt Kaya at beispiel Punkt de."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Bibliothek",
+          "text": "Schreibt man Kaya mit J?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kaya",
+          "text": "Nein, mit Y. K, A, Y, A."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Bibliothek",
+          "text": "Vielen Dank, Herr Kaya, das ist alles."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Guten Tag! Was kann ich für Sie tun?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Yilmaz",
+          "text": "Guten Tag! Ich brauche ein Handy für meine Tochter. Sie ist zwölf."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Hier, das Handy ist gut. Es kostet neunundfünfzig Euro."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Yilmaz",
+          "text": "Gut. Haben Sie das Handy auch in Lila?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Ja, in Lila und in Grün."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Yilmaz",
+          "text": "Lila, bitte! Lila ist ihre Lieblingsfarbe."
+        }
+      ]
+    },
+    {
+      "key": "a1-zahlen-handy-bild",
+      "kind": "image",
+      "title": "Un téléphone portable",
+      "alt": "Un téléphone portable.",
+      "image": {
+        "layout": "single",
+        "icon": "smartphone"
+      }
+    },
+    {
+      "key": "a1-zahlen-laptop-bild",
+      "kind": "image",
+      "title": "Un ordinateur portable",
+      "alt": "Un ordinateur portable ouvert.",
+      "image": {
+        "layout": "single",
+        "icon": "laptop"
+      }
+    },
+    {
+      "key": "a1-zahlen-uhr-bild",
+      "kind": "image",
+      "title": "Une montre",
+      "alt": "Une montre-bracelet.",
+      "image": {
+        "layout": "single",
+        "icon": "watch"
+      }
+    },
+    {
+      "key": "a1-zahlen-geld-bild",
+      "kind": "image",
+      "title": "Payer en Autriche et en Suisse",
+      "alt": "Quatre vignettes : le symbole de l’euro, le symbole du franc suisse, un billet de banque pour l’argent liquide et une carte bancaire.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "euro",
+            "label": "der Euro (€)"
+          },
+          {
+            "icon": "swiss-franc",
+            "label": "der Franken (CHF)"
+          },
+          {
+            "icon": "banknote",
+            "label": "das Bargeld"
+          },
+          {
+            "icon": "credit-card",
+            "label": "die Karte"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-zahlen-geld-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Une enquête : bar oder mit Karte ?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Hallo und herzlich willkommen! Unser Thema heute: Geld. Wie bezahlen die Leute in Berlin, in Graz und in Basel?"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Wir sind in Berlin. Guten Tag! Wie heißen Sie, bitte?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krause",
+          "text": "Krause. Dieter Krause."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Herr Krause, wie bezahlen Sie: bar oder mit Karte?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krause",
+          "text": "Fast immer bar. Ich habe gern Bargeld in der Tasche."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und was kostet ein Döner hier in Berlin?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Krause",
+          "text": "Sieben Euro! Das ist teuer!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Danke schön, Herr Krause!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Jetzt sind wir in Graz, in Österreich. Hallo! Wie heißt du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lea",
+          "text": "Ich heiße Lea. Ich bin einundzwanzig und studiere hier in Graz."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Lea, wie bezahlst du?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lea",
+          "text": "Mit dem Handy! Das ist super schnell."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und was kostet eine Kinokarte hier in Graz?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lea",
+          "text": "Dreizehn Euro. Ich gehe gern ins Kino!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Danke, Lea! Tschüs!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und jetzt sind wir in Basel, in der Schweiz. Grüezi! Wie heißen Sie?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Brunner",
+          "text": "Grüezi! Ich heiße Urs Brunner."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Herr Brunner, wie bezahlen Sie?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Brunner",
+          "text": "Im Restaurant bezahle ich mit Karte. Aber auf dem Markt bezahle ich bar."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Und was kostet ein Mittagessen im Restaurant hier in Basel?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Brunner",
+          "text": "Ungefähr fünfundzwanzig Franken. Die Schweiz ist teuer!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporterin",
+          "text": "Vielen Dank, Herr Brunner! Auf Wiedersehen!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Brunner",
+          "text": "Auf Wiedersehen!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-karte-bild",
+      "kind": "image",
+      "title": "Une carte bancaire",
+      "alt": "Une carte bancaire.",
+      "image": {
+        "layout": "single",
+        "icon": "credit-card"
+      }
+    },
+    {
+      "key": "a1-zahlen-bargeld-bild",
+      "kind": "image",
+      "title": "De l’argent liquide",
+      "alt": "Un billet de banque.",
+      "image": {
+        "layout": "single",
+        "icon": "banknote"
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-zahlen-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Julien donne ses coordonnées",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Julien",
+          "text": "Guten Tag! Mein Name ist Julien Morel. Morel: M, O, R, E, L. Ich bin vierunddreißig Jahre alt. Ich komme aus Belgien und wohne jetzt in Köln."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Julien",
+          "text": "Meine Adresse ist Bonner Straße einundachtzig, fünf, null, sechs, sieben, sieben Köln. Meine Handynummer ist null, eins, sieben, null, zweiundfünfzig, sechsunddreißig, achtzehn."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Julien",
+          "text": "Meine E-Mail-Adresse ist Julien Punkt Morel at beispiel Punkt de. Meine Lieblingsfarbe ist Grün."
+        }
+      ]
+    },
+    {
+      "key": "a1-zahlen-zahlen-native",
+      "kind": "audio",
+      "title": "Les nombres de 13 à 99 — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_01_05_zahlen.mp3",
+        "clip": [
+          51.45,
+          128.6
+        ]
+      },
+      "transcript": "dreizehn\nvierzehn\nfünfzehn\nsechzehn\nsiebzehn\nachtzehn\nneunzehn\nzwanzig\neinundzwanzig\ndreißig\nvierzig\nfünfzig\nsechzig\nsiebzig\nachtzig\nneunzig\nhundert\nzweihundert\nzweiunddreißig\nvierundvierzig\nfünfundfünfzig\nsechsundsechzig\nsiebenundsiebzig\nachtundachtzig\nneunundneunzig",
+      "v3SourceKey": "a1-zahlen-zahlen-native"
+    },
+    {
+      "key": "a1-zahlen-farben-native",
+      "kind": "audio",
+      "title": "Les couleurs — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_01_07_farben.mp3",
+        "clip": [
+          2.2,
+          48.5
+        ]
+      },
+      "transcript": "beige\nblau\nbraun\ngelb\ngrau\ngrün\nlila\nrosa\nrot\nschwarz\nweiß\ndunkel\nhell\nbunt\nWelche Farbe hat dein Auto?\ndie Lieblingsfarbe\nWas ist deine Lieblingsfarbe?",
+      "v3SourceKey": "a1-zahlen-farben-native"
+    },
+    {
+      "key": "a1-zahlen-umlaut-ae-native",
+      "kind": "audio",
+      "title": "Le son ä — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_28_strangea.mp3"
+      },
+      "transcript": "Ä, ä\nähnlich\ndie Anwältin\närgern\ndie Ästhetik",
+      "v3SourceKey": "a1-zahlen-umlaut-ae-native"
+    },
+    {
+      "key": "a1-zahlen-umlaut-oe-native",
+      "kind": "audio",
+      "title": "Le son ö — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_29_strangeo.mp3"
+      },
+      "transcript": "Ö, ö\nÖsterreich\nöffnen\ndas Öl\nökologisch",
+      "v3SourceKey": "a1-zahlen-umlaut-oe-native"
+    },
+    {
+      "key": "a1-zahlen-umlaut-ue-native",
+      "kind": "audio",
+      "title": "Le son ü — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_30_strangeu.mp3"
+      },
+      "transcript": "Ü, ü\ndie Übung\nüberzeugen\nkühl\namüsieren",
+      "v3SourceKey": "a1-zahlen-umlaut-ue-native"
+    },
+    {
+      "key": "a1-zahlen-eszett-native",
+      "kind": "audio",
+      "title": "La lettre ß — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_31_strangeb.mp3"
+      },
+      "transcript": "Eszett\ndie Straße\nspaßen\nheißen\naußen",
+      "v3SourceKey": "a1-zahlen-eszett-native"
+    },
+    {
+      "key": "a1-zahlen-umlaut-paare-native",
+      "kind": "audio",
+      "title": "ä, ö, ü dans les mots et les paires — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_02_01_awoeue.mp3",
+        "clip": [
+          0,
+          40.5
+        ]
+      },
+      "transcript": "ä\nanhängen\nbeschäftigt\ndie Gläser\ndie Universität\nö\nder Dosenöffner\ndie Körbe\num zwölf Uhr\nich möchte\nü\ndie Bücher\ndie Küche\ndie Prüfung\nüben\nder Anhang, anhängen\nschon, schön\ndas Buch, die Bücher",
+      "v3SourceKey": "a1-zahlen-umlaut-paare-native"
+    },
+    {
+      "key": "a1-zahlen-ampel-foto",
+      "kind": "image",
+      "title": "Un feu pour piétons",
+      "alt": "Un feu pour piétons photographié de nuit : en haut, un bonhomme vert qui marche ; en bas, un bonhomme rouge immobile. Des feuilles dépassent sur la droite.",
+      "photo": {
+        "file": "dib-images/k03/img-037-141.png"
+      }
+    },
+    {
+      "key": "a1-zahlen-muenze-foto",
+      "kind": "image",
+      "title": "Une pièce suisse",
+      "alt": "Les deux faces d’une pièce suisse de 2011 : d’un côté un ours et des tresses d’oignons, de l’autre la croix suisse, le mot HELVETICA et la valeur « 10 FR ».",
+      "photo": {
+        "file": "dib-images/k08/img-034-106.png"
+      }
+    },
+    {
+      "key": "a1-zahlen-wetterkarte-foto",
+      "kind": "image",
+      "title": "Carte météo de l’Allemagne",
+      "alt": "Une carte météo de l’Allemagne du vendredi 24 août 2012 à 18 heures, avec des soleils, des nuages et la température de seize lieux, dont Hamburg, Berlin, Köln, Frankfurt et München.",
+      "photo": {
+        "file": "dib-images/k06/img-040-159.png"
+      }
+    },
+    {
+      "key": "a1-zahlen-hoeren-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Écouter : numéros, âge, e-mail et prix",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Ich bin achtundzwanzig Jahre alt und wohne in Würzburg."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Écouter : numéros, âge, e-mail et prix",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Das Handy kostet neunundfünfzig Euro, nicht fünfundneunzig."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich bin fünfundzwanzig Jahre alt."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie ist Ihre Telefonnummer?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich wohne in der Lindenstraße vierzehn."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe eine neue Handynummer."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Welche Farbe hat dein Handy?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : âge, numéro, adresse et prix",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das kostet neunundfünfzig Euro."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-zahlen-lexique",
+      "kind": "audio",
+      "title": "Lexique · Nombres, couleurs et coordonnées",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Zahl, die Zahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "alt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Jahr, die Jahre"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Handy, die Handys"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Handynummer, die Handynummern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Adresse, die Adressen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Straße, die Straßen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Postleitzahl, die Postleitzahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die E-Mail-Adresse, die E-Mail-Adressen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Preis, die Preise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kosten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Euro, die Euros"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bezahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Karte, die Karten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "teuer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Farbe, die Farben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "rot"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "blau"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "grün"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schwarz"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "weiß"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "haben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "arbeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lernen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -1,0 +1,1558 @@
+{
+  "id": "a1-transports",
+  "title": "Prendre le bon bus ou le bon train",
+  "objective": "Lire un horaire, demander un trajet simple, acheter un billet et reconnaître un changement de quai ou d’heure.",
+  "prerequisites": [
+    "a1-stadt-atelier"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "Textes, dialogue et exercices originaux LinguaCap V4.",
+    "Repères de progression : Deutsch im Blick, chapitre 1 « Mit dem Bus zur Uni », et Der und mehr, chapitre « Die Stadt »."
+  ],
+  "grammarFocus": [
+    "verbes-separables-trajet"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-transports.mjs",
+  "vocabulary": [
+    {
+      "id": "bus",
+      "word": "Bus",
+      "article": "der",
+      "plural": "Busse",
+      "partOfSpeech": "noun",
+      "translation": "le bus",
+      "example": "Fährt dieser Bus zum Rathaus?",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "zug",
+      "word": "Zug",
+      "article": "der",
+      "plural": "Züge",
+      "partOfSpeech": "noun",
+      "translation": "le train",
+      "example": "Wann fährt der nächste Zug?",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "strassenbahn",
+      "word": "Straßenbahn",
+      "article": "die",
+      "plural": "Straßenbahnen",
+      "partOfSpeech": "noun",
+      "translation": "le tramway",
+      "example": "Ich fahre mit der Straßenbahn zum Bahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "fahrkarte",
+      "word": "Fahrkarte",
+      "article": "die",
+      "plural": "Fahrkarten",
+      "partOfSpeech": "noun",
+      "translation": "le billet (de transport)",
+      "example": "Eine Fahrkarte nach Bonn, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "gleis",
+      "word": "Gleis",
+      "article": "das",
+      "plural": "Gleise",
+      "partOfSpeech": "noun",
+      "translation": "la voie (à la gare)",
+      "example": "Der Zug fährt von Gleis vier ab.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "abfahrt",
+      "word": "Abfahrt",
+      "article": "die",
+      "plural": "Abfahrten",
+      "partOfSpeech": "noun",
+      "translation": "le départ",
+      "example": "Abfahrt: zehn Uhr fünf.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "ankunft",
+      "word": "Ankunft",
+      "article": "die",
+      "plural": "Ankünfte",
+      "partOfSpeech": "noun",
+      "translation": "l’arrivée",
+      "example": "Die Ankunft in Bonn ist um zehn Uhr vierzig.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "linie",
+      "word": "Linie",
+      "article": "die",
+      "plural": "Linien",
+      "partOfSpeech": "noun",
+      "translation": "la ligne (de bus, de tram)",
+      "example": "Nehmen Sie die Linie zwei.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "richtung",
+      "word": "Richtung",
+      "article": "die",
+      "plural": "Richtungen",
+      "partOfSpeech": "noun",
+      "translation": "la direction",
+      "example": "Nehmen Sie den Bus Richtung Bahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "einsteigen",
+      "word": "einsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "monter (dans un véhicule)",
+      "example": "Bitte hier einsteigen.",
+      "note": "séparable : ein|steigen — Ich steige an der Post ein.",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "umsteigen",
+      "word": "umsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "changer (de bus, de train)",
+      "example": "Am Rathaus umsteigen.",
+      "note": "séparable : um|steigen — Ich steige am Rathaus um.",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "aussteigen",
+      "word": "aussteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "descendre (d’un véhicule)",
+      "example": "Wo muss ich aussteigen?",
+      "note": "séparable : aus|steigen — Ich steige am Museum aus.",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "abfahren",
+      "word": "abfahren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "partir (véhicule, voyageur)",
+      "example": "Ich möchte um neun Uhr abfahren.",
+      "note": "séparable : ab|fahren — Der Zug fährt um zehn Uhr ab.",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ankommen",
+      "word": "ankommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "arriver",
+      "example": "Wann möchten Sie in Bonn ankommen?",
+      "note": "séparable : an|kommen — Ich komme um elf Uhr an.",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "nach",
+      "word": "nach",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "à, vers (une ville, un pays)",
+      "example": "Ich fahre nach Bonn.",
+      "note": "nach Bonn, mais zum Bahnhof (lieu en ville)",
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "naechste",
+      "word": "nächste",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "prochain(e)",
+      "example": "Wann fährt der nächste Zug?",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "wann",
+      "word": "wann",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "quand",
+      "example": "Wann fährt der Bus?",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "nur-hin",
+      "word": "nur hin",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "aller simple",
+      "example": "Eine Fahrkarte, nur hin.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "hin-und-zurueck",
+      "word": "hin und zurück",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "aller-retour",
+      "example": "Einmal Bonn, hin und zurück, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "gute-fahrt",
+      "word": "Gute Fahrt!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bon voyage !",
+      "example": "Hier ist Ihre Fahrkarte. Gute Fahrt!",
+      "note": null,
+      "audio": {
+        "media": "a1-transports-lexique",
+        "line": 19
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-transports-guide",
+      "kind": "lesson",
+      "title": "Découvrir : lire un horaire et trouver la bonne ligne",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : lire un horaire et trouver la bonne ligne",
+        "description": "LIRE UN HORAIRE · 15 MIN\n\n1. Lire un panneau (4 min). Le panneau des départs affiche « 08:04 · Bus 3 · Rathaus / 08:14 · Bus 6 · Stadtpark / 08:24 · Bus 3 · Rathaus ». Il est 08:10 et vous allez à la mairie (das Rathaus). Le bus de 08:04 est déjà parti et celui de 08:14 va au Stadtpark : vous prenez le bus 3 de 08:24. Lisez les trois heures à voix haute : acht Uhr vier, acht Uhr vierzehn, acht Uhr vierundzwanzig.\n\n2. Demander la bonne ligne (4 min). « Fährt dieser Bus zum Rathaus? » demande si le bus va à la mairie. « Ich fahre mit dem Bus » donne le moyen de transport. Comparez mit dem Bus, mit dem Zug (noms en der) et mit der Straßenbahn (nom en die). Un lieu de la ville prend zum ou zur (zum Rathaus, zum Bahnhof, zur Post) ; une ville prend nach (nach Bonn).\n\n3. Lire l’heure et la voie (4 min). Sur un horaire, Abfahrt indique le départ, Ankunft l’arrivée et Gleis la voie. Lisez « Zug nach Bonn: Abfahrt 10:05, Ankunft 10:40, Gleis 2 ». On demande « Wann fährt der Zug ab? » et « Von welchem Gleis fährt der Zug ab? ». On répond en distinguant um zehn Uhr fünf (l’heure) et von Gleis zwei (la voie).\n\n4. Dire son trajet (3 min). Écoutez les modèles, puis dites à voix haute : « Ich nehme den Bus drei um acht Uhr vierundzwanzig. Ich steige am Rathaus aus. » Dans abfahren et aussteigen, la particule (ab, aus) se place à la fin de la phrase.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-transports-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-transports-abfahrt",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-transports-zug",
+          "usage": "illustration",
+          "caption": "Abfahrt = départ · Ankunft = arrivée · Gleis = voie",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-transports-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : acheter un billet au guichet",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : acheter un billet au guichet",
+        "description": "AU GUICHET DE LA GARE · 12 MIN\n\nUn voyageur veut aller à Bonn. Écoutez la conversation au guichet : l’heure, la voie, le prix et le type de billet.\n\nFORMULES UTILES\n• Wohin möchten Sie fahren? — Où voulez-vous aller ?\n• Nach Bonn, bitte. — À Bonn, s’il vous plaît.\n• Wann fährt der nächste Zug? — Quand part le prochain train ?\n• Fährt der Zug von Gleis zwei? — Le train part-il de la voie 2 ?\n• Was kostet die Fahrkarte? — Combien coûte le billet ?\n• Nur hin? — Un aller simple ? (aller-retour : hin und zurück)\n• Gute Fahrt! — Bon voyage !\n\nÀ VOUS\n1. Écoutez sans lire la transcription : quel moyen de transport, quelle destination ?\n2. Réécoutez pour repérer l’heure, la voie, le prix et le type de billet. Attention : le voyageur propose une voie, mais la réponse « Heute nicht » en annonce une autre.\n3. Réécoutez en lisant la transcription, puis répétez les répliques du voyageur pendant une pause.\n4. Dites à voix haute la demande d’un voyageur qui va à Köln : « Eine Fahrkarte nach Köln, bitte. Nur hin. Wann fährt der nächste Zug? », puis faites répéter le prix avec « Wie bitte? ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-transports-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-transports-schalter",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-transports-fahrkarte",
+          "usage": "illustration",
+          "caption": "Einfache Fahrt = nur hin (aller simple)",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-transports-approfondir",
+      "kind": "lesson",
+      "title": "Comprendre : un trajet avec une correspondance",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : un trajet avec une correspondance",
+        "description": "EINSTEIGEN, UMSTEIGEN, AUSSTEIGEN · 12 MIN\n\nTROIS VERBES SÉPARABLES\n• einsteigen — monter (dans le bus, le train)\n• umsteigen — changer (de bus, de train)\n• aussteigen — descendre\nAu présent, la particule (ein, um, aus) se détache et se place à la fin de la phrase : Ich steige am Rathaus aus. Le verbe conjugué (steige) reste en deuxième position.\nSi le lieu vient en tête, le sujet passe juste après le verbe : Am Rathaus steige ich aus. La particule reste à la fin.\nSur une affiche ou dans une consigne à l’infinitif, les deux parties restent collées : Am Rathaus aussteigen.\n\n1. Suivre une consigne (4 min). Au point de départ, une affiche dit « Bus 4 Richtung Bahnhof. Am Rathaus aussteigen. Dort in die Straßenbahn 2 Richtung Museum einsteigen. ». Repérez la ligne de départ, l’arrêt de correspondance et la direction finale. Le trajet se fait dans cet ordre : Bus 4 nehmen, am Rathaus aussteigen, Straßenbahn 2 nehmen.\n\n2. Voir où va le verbe (4 min). Lisez à voix haute les deux versions de chaque phrase : « Ich steige am Bahnhof ein. / Am Bahnhof steige ich ein. » — « Ich steige am Rathaus um. / Am Rathaus steige ich um. »\n\n3. Choisir un trajet (4 min). Vous partez de la poste pour le musée et vous voulez arriver avant 09:30. Le tableau propose « Bus 4, 09:05, am Rathaus umsteigen, Museum 09:27 » et « Bus 7, 09:12, direkt, Museum 09:35 ». Seul le bus 4 arrive à temps, avec une correspondance. Dites les trois étapes à voix haute : « An der Post nehme ich den Bus 4. Am Rathaus steige ich um. Am Museum steige ich aus. » Si l’on préfère un trajet direct et qu’on peut arriver plus tard, on prend le bus 7.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-transports-umsteigen",
+          "usage": "illustration",
+          "caption": "einsteigen · umsteigen · aussteigen",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-transports-verbindungen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-transports-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : einsteigen, umsteigen, aussteigen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "S’entraîner : einsteigen, umsteigen, aussteigen",
+        "description": "Remettez les phrases dans l’ordre, complétez-les, puis écrivez deux phrases dictées.\nRappel : au présent, le verbe conjugué est en deuxième position et la particule (ein, um, aus, ab, an) se place à la fin : Ich steige am Rathaus um. Si la phrase commence par un lieu ou une heure, le sujet vient juste après le verbe : Am Rathaus steige ich um.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-transports-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-entrainer-q9",
+          "usage": "audio",
+          "questionId": "q9",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre, en commençant par le lieu.",
+          "answers": [
+            [
+              "Am Rathaus",
+              "steige",
+              "ich",
+              "um."
+            ]
+          ],
+          "explanation": "Le lieu am Rathaus occupe la 1re place, le verbe steige la 2e : le sujet ich passe donc après le verbe. La particule um de umsteigen termine la phrase."
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre, en commençant par l’heure.",
+          "answers": [
+            [
+              "Um acht Uhr",
+              "steige",
+              "ich",
+              "an der Post",
+              "ein."
+            ]
+          ],
+          "explanation": "Um acht Uhr en tête, puis le verbe steige et le sujet ich (inversion). Le lieu vient ensuite et la particule ein de einsteigen ferme la phrase."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Le trajet de la poste au musée : complétez avec ein, um ou aus.",
+          "text": "An der Post steige ich in den Bus Nummer 4 [[1]]. Am Rathaus steige ich [[2]]. Am Museum steige ich [[3]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ein"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "um"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "aus"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "Au départ, on monte (einsteigen) ; à la correspondance, on change (umsteigen) ; à l’arrivée, on descend (aussteigen). Au présent, la particule se place toujours à la fin."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Demandez où descendre : complétez avec le verbe aussteigen.",
+          "text": "Wo [[1]] ich [[2]]? – Am Museum.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "steige"
+              ],
+              "size": 8,
+              "hint": "aussteigen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "aus"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "Dans une question avec wo, le verbe conjugué vient en 2e position (steige) et la particule aus termine la question : Wo steige ich aus? On ne garde pas aussteige d’un bloc."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Votre ami a inversé les deux arrêts. Corrigez son message pour le trajet bus 4, puis tram 2 jusqu’au musée.",
+          "text": "Ich steige am [[1]] um und steige am [[2]] aus.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Rathaus"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Museum"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "On change de véhicule (umsteigen) à la correspondance, au Rathaus ; on descend (aussteigen) au bout du trajet, au Museum. L’ami avait écrit les deux arrêts à l’envers."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Complétez avec nach, von ou zum.",
+          "text": "Ich fahre [[1]] Bonn. Der Zug fährt [[2]] Gleis vier ab. In Bonn nehme ich den Bus [[3]] Rathaus.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "nach"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "von"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "zum",
+                "zu dem"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Nach introduit une ville (nach Bonn), von la voie de départ (von Gleis vier) et zum un lieu de la ville en der ou das (zum Rathaus). Um ne sert que pour l’heure."
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Associez chaque verbe à son sens.",
+          "pairs": [
+            {
+              "left": "einsteigen",
+              "right": "monter"
+            },
+            {
+              "left": "umsteigen",
+              "right": "changer de véhicule"
+            },
+            {
+              "left": "aussteigen",
+              "right": "descendre"
+            },
+            {
+              "left": "abfahren",
+              "right": "partir"
+            },
+            {
+              "left": "ankommen",
+              "right": "arriver"
+            }
+          ],
+          "explanation": "Les cinq verbes sont séparables : ein-, um-, aus-, ab- et an- se placent à la fin au présent (Der Zug fährt um zehn Uhr ab. Ich komme um elf Uhr an.)."
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "mann",
+          "accept": [
+            "Am Rathaus steigen Sie in die Straßenbahn um."
+          ],
+          "explanation": "Am Rathaus en tête, puis le verbe et le sujet (steigen Sie) ; la particule um termine la phrase. Straßenbahn s’écrit en un seul mot, avec ß.",
+          "showWordCount": true
+        },
+        {
+          "id": "q9",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "frau",
+          "accept": [
+            "Der Zug fährt um zehn Uhr von Gleis vier ab."
+          ],
+          "explanation": "Um annonce l’heure et von Gleis la voie ; la particule ab de abfahren termine la phrase. Er fährt prend un tréma. Les nombres peuvent s’écrire en chiffres.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-transports-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : au guichet et dans le bus",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : au guichet et dans le bus",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Faites bien entendre la particule à la fin des phrases (ab, um, aus).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-transports-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-transports-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Fährt dieser Bus zum Rathaus?",
+          "accept": [
+            "Fährt dieser Bus zum Rathaus?"
+          ],
+          "explanation": "Question fermée : le verbe fährt ouvre la phrase et la voix monte à la fin. Le ä de fährt se prononce comme un è long.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Eine Fahrkarte nach Bonn, bitte.",
+          "accept": [
+            "Eine Fahrkarte nach Bonn, bitte."
+          ],
+          "explanation": "Le ch de nach se forme au fond de la gorge, comme après a dans Nacht. Fahrkarte est accentué sur la première syllabe : FAHR-karte.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wann fährt der nächste Zug?",
+          "accept": [
+            "Wann fährt der nächste Zug?"
+          ],
+          "explanation": "Dans nächste, ch est le souffle doux de ich. Zug commence par [ts]. La voix descend à la fin de la question en W.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Am Rathaus steige ich um.",
+          "accept": [
+            "Am Rathaus steige ich um."
+          ],
+          "explanation": "Le lieu en tête entraîne l’inversion steige ich. Dans steige, st se dit « cht » ; la particule um termine la phrase.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich steige am Museum aus.",
+          "accept": [
+            "Ich steige am Museum aus."
+          ],
+          "explanation": "Museum se dit en trois syllabes, mu-SE-um. La particule aus, à la fin, porte le sens : descendre.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Der Zug fährt von Gleis vier ab.",
+          "accept": [
+            "Der Zug fährt von Gleis vier ab.",
+            "Der Zug fährt von Gleis 4 ab."
+          ],
+          "explanation": "Von Gleis vier donne la voie. Le v de von et de vier se prononce f ; ab, à la fin, complète le verbe abfahren.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-transports-controle",
+      "kind": "exercise",
+      "title": "Vérifier : au guichet de la gare",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : au guichet de la gare",
+        "description": "Écoutez la scène une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions demandent de réemployer les formules du module. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-transports-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quelle ville est la destination ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bonn",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Berlin",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bremen",
+              "correct": false
+            }
+          ],
+          "explanation": "À la question « Wohin möchten Sie fahren? », le voyageur répond « Nach Bonn, bitte ». Nach introduit la ville de destination ; Berlin et Bremen ne sont pas cités.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : à quelle heure part le prochain train ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "10 h 05",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "10 h 15",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "10 h 50",
+              "correct": false
+            }
+          ],
+          "explanation": "La guichetière dit « Um zehn Uhr fünfzehn ». 10 h 05 est l’heure de l’horaire lu dans la leçon. Fünfzehn (15) et fünfzig (50) se ressemblent : écoutez la fin -zehn.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : de quelle voie part-il aujourd’hui ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Voie 2",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Voie 8",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Voie 4",
+              "correct": true
+            }
+          ],
+          "explanation": "Le voyageur propose « Gleis zwei », mais on lui répond « Heute nicht. Er fährt heute von Gleis vier ab. » Il confirme : « Gut, Gleis vier. »",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : combien le billet coûte-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "8,50 €",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "8,15 €",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "10,50 €",
+              "correct": false
+            }
+          ],
+          "explanation": "« Acht Euro fünfzig » : on dit les euros, puis les centimes, sans « und ». 8,15 € se dirait acht Euro fünfzehn.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Écoute : quel billet le voyageur achète-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Deux allers simples",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Un aller simple",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Un aller-retour",
+              "correct": false
+            }
+          ],
+          "explanation": "« Nur hin? – Ja, nur hin. Eine Fahrkarte, bitte. » Nur hin désigne un aller simple, pour une seule personne ; un aller-retour se dit hin und zurück.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Vous devez changer de véhicule à la mairie. Quelle phrase convient ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich steige am Rathaus ein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich fahre zum Rathaus.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich steige am Rathaus um.",
+              "correct": true
+            }
+          ],
+          "explanation": "Umsteigen veut dire changer de véhicule : Ich steige am Rathaus um. Einsteigen signifie monter, et « Ich fahre zum Rathaus » donne seulement la destination.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Quel groupe de mots introduit la voie dans une phrase sur le départ ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Von Gleis vier",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Um Gleis vier",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nach Gleis vier",
+              "correct": false
+            }
+          ],
+          "explanation": "On part d’une voie : von Gleis vier. Um introduit l’heure (um zehn Uhr) et nach une ville de destination (nach Bonn).",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-transports-mission",
+      "kind": "mission",
+      "title": "Mission : organiser un trajet en train et en ville",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : organiser un trajet en train et en ville",
+        "description": "SITUATION\nVous allez à Bonn chez une amie, Lara. À la gare, vous achetez votre billet au guichet. Le tableau indique :\nZug nach Bonn · Abfahrt 14:20 · Gleis 3 · Ankunft 15:05 · Fahrkarte 9,80 €\nMais une annonce précise : le train part aujourd’hui de la voie 6.\nÀ Bonn, Lara habite près du musée : il faut prendre le bus 4, changer à l’hôtel de ville (Rathaus) pour la Straßenbahn 2, puis descendre au Museum.\n\nMODÈLE (un autre trajet)\nAu guichet : Guten Tag! Eine Fahrkarte nach Köln, bitte. Nur hin. Wann fährt der nächste Zug? Fährt er von Gleis eins? – Wie bitte? Was kostet die Fahrkarte?\nLe message : Hallo Tom! Mein Zug fährt um neun Uhr ab, heute von Gleis fünf. Ich komme um zehn Uhr an. Am Bahnhof nehme ich den Bus 3. Am Markt steige ich um, und an der Uni steige ich aus. Bis gleich!",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre passage au guichet, en jouant seulement le voyageur : saluez, demandez un aller simple pour Bonn, demandez l’heure du prochain train et vérifiez la voie (Fährt der Zug von Gleis drei?), puis faites répéter le prix avec « Wie bitte? ».",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez un message à Lara : l’heure de départ, la voie d’aujourd’hui, l’heure d’arrivée, puis votre trajet en ville avec umsteigen et aussteigen (Am Rathaus steige ich um …).",
+          "maxChars": 600,
+          "minWords": 30
+        },
+        "checklist": [
+          "J’ai demandé un aller simple avec « Eine Fahrkarte nach Bonn, bitte. Nur hin. ».",
+          "J’ai demandé l’heure avec wann et vérifié la voie avec von Gleis ….",
+          "Mon message donne la voie d’aujourd’hui (6), pas celle du tableau (3).",
+          "La particule est à la fin : Der Zug fährt … ab, ich komme … an, ich steige … um, ich steige … aus.",
+          "Quand je commence par le lieu ou l’heure, le verbe vient avant ich (Am Rathaus steige ich um.)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-transports-modele",
+      "kind": "audio",
+      "title": "Prendre le bon bus ou le bon train · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Fährt dieser Bus zum Rathaus?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich fahre mit der Straßenbahn zum Bahnhof."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Wann fährt der Zug nach Bonn ab?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Der Zug fährt um zehn Uhr fünf von Gleis zwei ab."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich steige am Rathaus aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-dialogue",
+      "kind": "audio",
+      "title": "Prendre le bon bus ou le bon train · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Guten Tag! Wohin möchten Sie fahren?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nach Bonn, bitte. Wann fährt der nächste Zug?"
+        },
+        {
+          "voice": "frau",
+          "text": "Um zehn Uhr fünfzehn."
+        },
+        {
+          "voice": "mann",
+          "text": "Fährt der Zug von Gleis zwei?"
+        },
+        {
+          "voice": "frau",
+          "text": "Heute nicht. Er fährt heute von Gleis vier ab."
+        },
+        {
+          "voice": "mann",
+          "text": "Gut, Gleis vier. Was kostet die Fahrkarte?"
+        },
+        {
+          "voice": "frau",
+          "text": "Acht Euro fünfzig. Nur hin?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, nur hin. Eine Fahrkarte, bitte."
+        },
+        {
+          "voice": "frau",
+          "text": "Hier ist Ihre Fahrkarte. Gute Fahrt!"
+        },
+        {
+          "voice": "mann",
+          "text": "Danke schön. Auf Wiedersehen!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-transports-abfahrt",
+      "kind": "image",
+      "title": "Le panneau des départs de bus",
+      "alt": "Panneau des départs, il est 8 h 10 : 08:04 Bus 3 vers Rathaus, 08:14 Bus 6 vers Stadtpark, 08:24 Bus 3 vers Rathaus.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "table",
+        "setting": "station",
+        "icon": "bus-front",
+        "title": "Abfahrt",
+        "subtitle": "Jetzt: 08:10 Uhr",
+        "columns": [
+          "Zeit",
+          "Linie",
+          "Richtung"
+        ],
+        "rows": [
+          [
+            "08:04",
+            "Bus 3",
+            "Rathaus"
+          ],
+          [
+            "08:14",
+            "Bus 6",
+            "Stadtpark"
+          ],
+          [
+            "08:24",
+            "Bus 3",
+            "Rathaus"
+          ]
+        ],
+        "rowIcons": [
+          "clock",
+          "clock",
+          "clock"
+        ],
+        "size": 36,
+        "center": true
+      }
+    },
+    {
+      "key": "v4-a1-transports-zug",
+      "kind": "image",
+      "title": "L’horaire du train pour Bonn",
+      "alt": "Fiche horaire « Zug nach Bonn » : Abfahrt 10:05 Uhr, Ankunft 10:40 Uhr, Gleis 2.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "station",
+        "icon": "train-front",
+        "title": "Zug nach Bonn",
+        "size": 44,
+        "rows": [
+          [
+            "Abfahrt",
+            "10:05 Uhr"
+          ],
+          [
+            "Ankunft",
+            "10:40 Uhr"
+          ],
+          [
+            "Gleis",
+            "2"
+          ]
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-transports-schalter",
+      "kind": "image",
+      "title": "Au guichet de la gare",
+      "alt": "Au guichet, l’employée demande « Wohin möchten Sie fahren? » et le voyageur demande « Wann fährt der nächste Zug? ». En haut : un billet, un train et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "station",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Wohin möchten Sie fahren?"
+          },
+          {
+            "name": "Reisender",
+            "say": "Wann fährt der nächste Zug?"
+          }
+        ],
+        "items": [
+          "ticket",
+          "train-front",
+          "clock"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-transports-fahrkarte",
+      "kind": "image",
+      "title": "Un billet aller simple",
+      "alt": "Billet de train « Fahrkarte, Einfache Fahrt » : von Mainz Hbf nach Wiesbaden Hbf, Datum 14.03., 2. Klasse, nur hin, 1 Person, Preis 4,90 €.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "ticket",
+        "setting": "station",
+        "icon": "train-front",
+        "title": "Fahrkarte",
+        "subtitle": "Einfache Fahrt",
+        "fields": [
+          [
+            "Von",
+            "Mainz Hbf"
+          ],
+          [
+            "Nach",
+            "Wiesbaden Hbf"
+          ],
+          [
+            "Datum",
+            "14.03."
+          ],
+          [
+            "Klasse",
+            "2. Klasse"
+          ],
+          [
+            "Fahrt",
+            "nur hin"
+          ],
+          [
+            "Personen",
+            "1"
+          ]
+        ],
+        "price": "4,90 €",
+        "stub": "Gute Fahrt!"
+      }
+    },
+    {
+      "key": "v4-a1-transports-umsteigen",
+      "kind": "image",
+      "title": "Un trajet avec une correspondance",
+      "alt": "Trajet en trois étapes : à la Post, monter dans le bus 4 ; au Rathaus, descendre et changer ; prendre le tramway 2 jusqu’au Museum et descendre.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "route",
+        "setting": "city",
+        "title": "Von der Post zum Museum",
+        "steps": [
+          {
+            "icon": "mail",
+            "label": "Post",
+            "sub": "[einsteigen]"
+          },
+          {
+            "icon": "building",
+            "label": "Rathaus",
+            "sub": "[aussteigen] und [umsteigen]"
+          },
+          {
+            "icon": "landmark",
+            "label": "Museum",
+            "sub": "[aussteigen]"
+          }
+        ],
+        "links": [
+          {
+            "icon": "bus-front",
+            "label": "Bus 4"
+          },
+          {
+            "icon": "tram-front",
+            "label": "Straßenbahn 2"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-transports-verbindungen",
+      "kind": "image",
+      "title": "Deux trajets vers le musée",
+      "alt": "Tableau de deux trajets depuis la Post : bus 4 à 09:05, correspondance au Rathaus, arrivée au Museum à 09:27 ; bus 7 à 09:12, direct, arrivée à 09:35.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "table",
+        "setting": "city",
+        "icon": "route",
+        "title": "Von der Post zum Museum",
+        "subtitle": "zwei Verbindungen",
+        "columns": [
+          "Abfahrt",
+          "Linie",
+          "Umsteigen",
+          "Ankunft"
+        ],
+        "rows": [
+          [
+            "09:05",
+            "Bus 4",
+            "am Rathaus",
+            "09:27"
+          ],
+          [
+            "09:12",
+            "Bus 7",
+            "direkt",
+            "09:35"
+          ]
+        ],
+        "size": 36,
+        "center": true
+      }
+    },
+    {
+      "key": "a1-transports-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : einsteigen, umsteigen, aussteigen",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Am Rathaus steigen Sie in die Straßenbahn um."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-entrainer-q9",
+      "kind": "audio",
+      "title": "Dictée q9 · S’entraîner : einsteigen, umsteigen, aussteigen",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Der Zug fährt um zehn Uhr von Gleis vier ab."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Fährt dieser Bus zum Rathaus?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Eine Fahrkarte nach Bonn, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wann fährt der nächste Zug?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Rathaus steige ich um."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich steige am Museum aus."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : au guichet et dans le bus",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Der Zug fährt von Gleis vier ab."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-transports-lexique",
+      "kind": "audio",
+      "title": "Lexique · Prendre le bon bus ou le bon train",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Bus, die Busse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Zug, die Züge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Straßenbahn, die Straßenbahnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fahrkarte, die Fahrkarten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gleis, die Gleise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Abfahrt, die Abfahrten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ankunft, die Ankünfte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Linie, die Linien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Richtung, die Richtungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "aussteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abfahren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ankommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nach"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nächste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wann"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nur hin"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "hin und zurück"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Gute Fahrt!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

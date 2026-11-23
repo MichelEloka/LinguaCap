@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState, type FormEvent } from 'react';
-import { Link, Route, Routes, useParams } from 'react-router-dom';
+import { Link, Route, Routes, useLocation, useParams } from 'react-router-dom';
 import {
   AlertTriangle, ArrowLeft, Check, CheckCircle2, CircleAlert, ClipboardCheck, CloudCheck, Flag, Headphones, Hourglass,
   LoaderCircle, PenLine, Send, Target,
@@ -11,6 +11,7 @@ import { LessonContent } from './LessonContent';
 import type { Enrollment } from './LearnerSession';
 import { OralRecorder } from './exams-recorder';
 import { GradingWorkspace } from './exams-grading';
+import { CorrectionsTabs, ReviewsWorkspace, correctionSection, useCorrectionCounts } from './reviews-grading';
 import {
   AttemptHistory, ClosedAnswers, CompetenceIcon, ExamMedia, ProductionText, ResultSummary, competenceNames, competenceTone, countWords,
   dateTime, examNames, fromNow, getError, partState, plural, shortDate, statusBadge, timeOnly,
@@ -471,11 +472,25 @@ function ExamPage({ token }: { token: string }) {
   );
 }
 
+/**
+ * Page Corrections : onglets « Copies | Missions | Répétitions orales » au-dessus de la file et du détail. Les routes
+ * des missions et des répétitions passent avant celle des copies (`:attemptId?`).
+ */
 export function GradingPanel({ token }: { token: string }) {
+  const { pathname } = useLocation();
+  const section = correctionSection(pathname);
+  const { counts, refresh } = useCorrectionCounts(token, pathname);
   return (
-    <Routes>
-      <Route path=":attemptId?" element={<GradingWorkspace token={token} />} />
-    </Routes>
+    <div className="rv-panel">
+      <CorrectionsTabs section={section} counts={counts} />
+      <div className="kit-tabpanel" role="tabpanel" id={`corrections-panel-${section}`} aria-labelledby={`corrections-${section}`}>
+        <Routes>
+          <Route path="missions/:reviewId?" element={<ReviewsWorkspace token={token} kind="mission" onChanged={refresh} />} />
+          <Route path="oral/:reviewId?" element={<ReviewsWorkspace token={token} kind="speech" onChanged={refresh} />} />
+          <Route path=":attemptId?" element={<GradingWorkspace token={token} />} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

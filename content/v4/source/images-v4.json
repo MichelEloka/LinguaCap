@@ -1,0 +1,4754 @@
+{
+  "description": "Illustrations des 27 modules ajoutés en V4 (A1, A2). Chaque entrée indique le média à créer (clé, fichier PNG, titre, texte alternatif, crédit), l’activité du kit V4 qui l’emploie et son usage : « illustration » pour l’activité entière, « option » pour un choix de réponse (questionId et optionId), « question » pour une question. Dans le placement, usage vaut toujours « illustration » et transcriptVisibility « hidden ». Le champ image décrit le rendu de infra/content/render-images.mjs.",
+  "credit": "Illustration LinguaCap",
+  "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+  "layouts": {
+    "existing": [
+      "grid",
+      "single",
+      "scene"
+    ],
+    "added": [
+      "document",
+      "cards",
+      "form",
+      "table",
+      "messages",
+      "receipt",
+      "ticket",
+      "clocks",
+      "route",
+      "plan",
+      "words",
+      "letters",
+      "dates"
+    ],
+    "note": "Les mises en page ajoutées doivent être admises par infra/content/check-content.mjs avant la fusion dans les sources V4."
+  },
+  "images": [
+    {
+      "media": "v4-a1-abc-alphabet",
+      "file": "content/de/media/images/v4-a1-abc-alphabet.png",
+      "module": "a1-abc",
+      "activity": "a1-abc-guide",
+      "usage": "illustration",
+      "title": "L’alphabet allemand en quatre groupes",
+      "alt": "Tableau de l’alphabet allemand en quatre rangées : A à G, H à N, O à U, puis V à Z. Les lettres J, V, W et Z, dont le nom allemand surprend un francophone, sont en couleur.",
+      "caption": "Das Alphabet : A–G, H–N, O–U, V–Z",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "letters",
+        "rows": [
+          "ABCDEFG",
+          "HIJKLMN",
+          "OPQRSTU",
+          "VWXYZ"
+        ],
+        "accent": [
+          "J",
+          "V",
+          "W",
+          "Z"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-abc-namen",
+      "file": "content/de/media/images/v4-a1-abc-namen.png",
+      "module": "a1-abc",
+      "activity": "a1-abc-guide",
+      "usage": "illustration",
+      "title": "Le nom allemand de J, V, W et Z",
+      "alt": "Quatre cartes de lettres avec leur nom allemand : J se dit « Jot », V « Vau », W « We » et Z « Zett ».",
+      "caption": "J = Jot · V = Vau · W = We · Z = Zett",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "letters",
+        "colorful": true,
+        "tile": 180,
+        "rows": [
+          [
+            {
+              "letter": "J",
+              "name": "Jot"
+            },
+            {
+              "letter": "V",
+              "name": "Vau"
+            },
+            {
+              "letter": "W",
+              "name": "We"
+            },
+            {
+              "letter": "Z",
+              "name": "Zett"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-abc-umlaute",
+      "file": "content/de/media/images/v4-a1-abc-umlaute.png",
+      "module": "a1-abc",
+      "activity": "a1-abc-pratique",
+      "usage": "illustration",
+      "title": "Les signes Ä, Ö, Ü et ß",
+      "alt": "Quatre cartes : Ä (A-Umlaut), Ö (O-Umlaut) et Ü (U-Umlaut), avec leurs deux points bien visibles, puis ß, dont le nom est « Eszett ».",
+      "caption": "Ä, Ö, Ü : A-, O-, U-Umlaut · ß : Eszett",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "letters",
+        "colorful": true,
+        "tile": 180,
+        "rows": [
+          [
+            {
+              "letter": "Ä",
+              "name": "A-Umlaut"
+            },
+            {
+              "letter": "Ö",
+              "name": "O-Umlaut"
+            },
+            {
+              "letter": "Ü",
+              "name": "U-Umlaut"
+            },
+            {
+              "letter": "ß",
+              "name": "Eszett"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-abc-anmeldung",
+      "file": "content/de/media/images/v4-a1-abc-anmeldung.png",
+      "module": "a1-abc",
+      "activity": "a1-abc-mission",
+      "usage": "illustration",
+      "title": "À l’accueil : épeler son prénom",
+      "alt": "À l’accueil d’une école de langues, l’employé demande « Wie schreibt man das? » et Vera épelle son prénom : « V, E, R, A. ». Sur le comptoir : un porte-bloc, un crayon et une carte d’identité.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Mitarbeiter",
+            "say": "Wie schreibt man das?"
+          },
+          {
+            "name": "Vera",
+            "say": "V, E, R, A."
+          }
+        ],
+        "items": [
+          "clipboard-list",
+          "pencil",
+          "id-card"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-umlaute",
+      "file": "content/de/media/images/v4-a1-voyelles-umlaute.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-guide",
+      "usage": "illustration",
+      "title": "Avec ou sans tréma",
+      "alt": "Trois cartes de mots, la voyelle en couleur : schon et schön (o, puis ö), Buch et Bücher (u, puis ü), spät et Käse (ä).",
+      "caption": "schon / schön · Buch / Bücher · spät, Käse",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "words",
+        "groups": [
+          {
+            "title": "o · ö",
+            "words": [
+              "sch[o]n",
+              "sch[ö]n"
+            ]
+          },
+          {
+            "title": "u · ü",
+            "words": [
+              "B[u]ch",
+              "B[ü]cher"
+            ]
+          },
+          {
+            "title": "ä",
+            "words": [
+              "sp[ä]t",
+              "K[ä]se"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-gruppen",
+      "file": "content/de/media/images/v4-a1-voyelles-gruppen.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-guide",
+      "usage": "illustration",
+      "title": "Deux lettres, une voyelle",
+      "alt": "Quatre cartes de groupes de lettres, le groupe en couleur dans chaque mot : ei dans mein et zwei, ie dans sieben et hier, eu et äu dans neu et Häuser, au dans Haus et blau.",
+      "caption": "ei · ie · eu / äu · au",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "words",
+        "groups": [
+          {
+            "title": "ei",
+            "words": [
+              "m[ei]n",
+              "zw[ei]"
+            ]
+          },
+          {
+            "title": "ie",
+            "words": [
+              "s[ie]ben",
+              "h[ie]r"
+            ]
+          },
+          {
+            "title": "eu · äu",
+            "words": [
+              "n[eu]",
+              "H[äu]ser"
+            ]
+          },
+          {
+            "title": "au",
+            "words": [
+              "H[au]s",
+              "bl[au]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-buecher",
+      "file": "content/de/media/images/v4-a1-voyelles-buecher.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-pratique",
+      "usage": "illustration",
+      "title": "Mes livres, ton livre",
+      "alt": "Deux étudiants comparent leurs livres. Ella dit « Hier sind meine Bücher. » et Tom répond « Das hier ist mein Buch. ». En haut : un livre fermé, un livre ouvert et une pile de livres.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Ella",
+            "say": "Hier sind meine Bücher."
+          },
+          {
+            "name": "Tom",
+            "say": "Das hier ist mein Buch."
+          }
+        ],
+        "items": [
+          "book",
+          "book-open",
+          "book-copy"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-buch-grau",
+      "file": "content/de/media/images/v4-a1-voyelles-buch-grau.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-controle",
+      "usage": "option",
+      "questionId": "q2",
+      "optionId": "a",
+      "question": "Quelle est la couleur du livre désigné par dein Buch ?",
+      "optionLabel": "Gris",
+      "title": "Un livre gris",
+      "alt": "Un livre gris.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#868e96"
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-buch-blau",
+      "file": "content/de/media/images/v4-a1-voyelles-buch-blau.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-controle",
+      "usage": "option",
+      "questionId": "q2",
+      "optionId": "b",
+      "question": "Quelle est la couleur du livre désigné par dein Buch ?",
+      "optionLabel": "Bleu",
+      "title": "Un livre bleu",
+      "alt": "Un livre bleu.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#1f6feb"
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-buch-gruen",
+      "file": "content/de/media/images/v4-a1-voyelles-buch-gruen.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-controle",
+      "usage": "option",
+      "questionId": "q2",
+      "optionId": "c",
+      "question": "Quelle est la couleur du livre désigné par dein Buch ?",
+      "optionLabel": "Vert",
+      "title": "Un livre vert",
+      "alt": "Un livre vert.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#2b8a3e"
+      }
+    },
+    {
+      "media": "v4-a1-voyelles-etiketten",
+      "file": "content/de/media/images/v4-a1-voyelles-etiketten.png",
+      "module": "a1-voyelles",
+      "activity": "a1-voyelles-mission",
+      "usage": "illustration",
+      "title": "Deux étiquettes pour la mission",
+      "alt": "Deux étiquettes : un livre bleu légendé « ein blaues Buch » et deux livres verts empilés légendés « zwei grüne Bücher ».",
+      "caption": "ein blaues Buch · zwei grüne Bücher",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "book",
+            "label": "ein blaues Buch",
+            "color": "#1f6feb"
+          },
+          {
+            "icon": "book-copy",
+            "label": "zwei grüne Bücher",
+            "color": "#2b8a3e"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-rythme-konsonanten",
+      "file": "content/de/media/images/v4-a1-rythme-konsonanten.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-guide",
+      "usage": "illustration",
+      "title": "Six consonnes fréquentes",
+      "alt": "Six cartes de consonnes, la lettre étudiée en couleur : j dans ja et das Jahr, w dans wir et das Wasser, v dans vier et der Vater, z dans die Zeit et der Zug, sch, sp et st dans die Schule, der Sport et die Straße, ch dans ich et das Buch.",
+      "caption": "j · w · v · z · sch, sp, st · ch",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "j",
+            "words": [
+              "[j]a",
+              "das [J]ahr"
+            ]
+          },
+          {
+            "title": "w",
+            "words": [
+              "[w]ir",
+              "das [W]asser"
+            ]
+          },
+          {
+            "title": "v",
+            "words": [
+              "[v]ier",
+              "der [V]ater"
+            ]
+          },
+          {
+            "title": "z",
+            "words": [
+              "die [Z]eit",
+              "der [Z]ug"
+            ]
+          },
+          {
+            "title": "sch · sp · st",
+            "words": [
+              "die [Sch]ule",
+              "der [Sp]ort",
+              "die [St]raße"
+            ]
+          },
+          {
+            "title": "ch",
+            "words": [
+              "i[ch]",
+              "das Bu[ch]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-rythme-melodie",
+      "file": "content/de/media/images/v4-a1-rythme-melodie.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-pratique",
+      "usage": "illustration",
+      "title": "Rythme et mélodie de la phrase",
+      "alt": "Fiche de trois phrases, la syllabe accentuée « Bahn » en couleur et une barre pour la pause : « Wo ist / der Bahnhof? » et « Der Bahnhof / ist hier. » avec une flèche qui descend, « Ist der Bahnhof hier? » avec une flèche qui monte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "audio-lines",
+        "title": "Wo ist der Bahnhof?",
+        "subtitle": "Pause bei / · Melodie am Ende",
+        "lines": [
+          {
+            "icon": "arrow-down-right",
+            "text": "Wo ist / der [Bahn]hof?"
+          },
+          {
+            "icon": "arrow-down-right",
+            "text": "Der [Bahn]hof / ist hier."
+          },
+          {
+            "icon": "arrow-up-right",
+            "text": "Ist der [Bahn]hof hier?"
+          }
+        ],
+        "size": 46,
+        "center": true
+      }
+    },
+    {
+      "media": "v4-a1-rythme-schule",
+      "file": "content/de/media/images/v4-a1-rythme-schule.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Quel lieu cherche la première voix ?",
+      "optionLabel": "Une école",
+      "title": "Une école",
+      "alt": "Un bâtiment d’école avec un drapeau.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "school"
+      }
+    },
+    {
+      "media": "v4-a1-rythme-bahnhof",
+      "file": "content/de/media/images/v4-a1-rythme-bahnhof.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Quel lieu cherche la première voix ?",
+      "optionLabel": "Une gare",
+      "title": "Une gare",
+      "alt": "Un train vu de face.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "train-front"
+      }
+    },
+    {
+      "media": "v4-a1-rythme-laden",
+      "file": "content/de/media/images/v4-a1-rythme-laden.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Quel lieu cherche la première voix ?",
+      "optionLabel": "Un magasin",
+      "title": "Un magasin",
+      "alt": "Une boutique avec un auvent.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "store"
+      }
+    },
+    {
+      "media": "v4-a1-rythme-weg",
+      "file": "content/de/media/images/v4-a1-rythme-weg.png",
+      "module": "a1-rythme",
+      "activity": "a1-rythme-mission",
+      "usage": "illustration",
+      "title": "Demander un lieu et faire répéter",
+      "alt": "Dans la rue, Mila demande « Entschuldigung. Wo ist der Park? » et Jonas, qui n’a pas bien entendu, répond « Wie bitte? ». En haut : des arbres, un repère de lieu et un panneau indicateur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Mila",
+            "say": "Entschuldigung. Wo ist der Park?"
+          },
+          {
+            "name": "Jonas",
+            "say": "Wie bitte?"
+          }
+        ],
+        "items": [
+          "trees",
+          "map-pin",
+          "signpost"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-hallo-atelier-bo",
+      "file": "content/de/media/images/v4-a1-hallo-atelier-bo.png",
+      "module": "a1-hallo-atelier",
+      "activity": "a1-hallo-atelier-guide",
+      "usage": "illustration",
+      "title": "Faire répéter un prénom",
+      "alt": "Au premier cours, Bo dit « Hallo, ich heiße Bo. » et Lina, qui n’a pas compris, répond « Wie bitte? ». En haut : un livre ouvert et un crayon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Bo",
+            "say": "Hallo, ich heiße Bo."
+          },
+          {
+            "name": "Lina",
+            "say": "Wie bitte?"
+          }
+        ],
+        "items": [
+          "book-open",
+          "pencil"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-hallo-atelier-fragen",
+      "file": "content/de/media/images/v4-a1-hallo-atelier-fragen.png",
+      "module": "a1-hallo-atelier",
+      "activity": "a1-hallo-atelier-pratique",
+      "usage": "illustration",
+      "title": "Les trois questions, avec du et avec Sie",
+      "alt": "Tableau à deux colonnes, du et Sie : « Wie heißt du? / Wie heißen Sie? », « Woher kommst du? / Woher kommen Sie? », « Wo wohnst du? / Wo wohnen Sie? ». La terminaison du verbe est en couleur.",
+      "caption": "du : -st, -t · Sie : -en",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "icon": "messages-square",
+        "title": "Fragen: du oder Sie?",
+        "subtitle": "Name · Herkunft · Wohnort",
+        "columns": [
+          "du",
+          "Sie"
+        ],
+        "rows": [
+          [
+            "Wie heiß[t] du?",
+            "Wie heiß[en] Sie?"
+          ],
+          [
+            "Woher komm[st] du?",
+            "Woher komm[en] Sie?"
+          ],
+          [
+            "Wo wohn[st] du?",
+            "Wo wohn[en] Sie?"
+          ]
+        ],
+        "rowIcons": [
+          "user-round",
+          "earth",
+          "house"
+        ],
+        "size": 31,
+        "center": true
+      }
+    },
+    {
+      "media": "v4-a1-hallo-atelier-steckbrief",
+      "file": "content/de/media/images/v4-a1-hallo-atelier-steckbrief.png",
+      "module": "a1-hallo-atelier",
+      "activity": "a1-hallo-atelier-mission",
+      "usage": "illustration",
+      "title": "La fiche de Mira",
+      "alt": "Fiche « Steckbrief » remplie : Vorname Mira, Herkunft Italien, Wohnort Bonn, Sprache Italienisch. En dessous : « Ich heiße Mira. Ich komme aus Italien. Ich wohne in Bonn. Ich spreche Italienisch. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "form",
+        "icon": "id-card",
+        "title": "Steckbrief",
+        "fields": [
+          {
+            "label": "Vorname",
+            "value": "Mira"
+          },
+          {
+            "label": "Herkunft",
+            "value": "Italien"
+          },
+          {
+            "label": "Wohnort",
+            "value": "Bonn"
+          },
+          {
+            "label": "Sprache",
+            "value": "Italienisch"
+          }
+        ],
+        "lines": [
+          "Ich heiße Mira. Ich komme [aus] Italien. Ich wohne [in] Bonn. Ich spreche Italienisch."
+        ],
+        "size": 34
+      }
+    },
+    {
+      "media": "v4-a1-zahlen-atelier-fiche",
+      "file": "content/de/media/images/v4-a1-zahlen-atelier-fiche.png",
+      "module": "a1-zahlen-atelier",
+      "activity": "a1-zahlen-atelier-guide",
+      "usage": "illustration",
+      "title": "Une fiche d’inscription remplie",
+      "alt": "Fiche « Anmeldung » remplie : Name Jan Wolf, Alter 42, Wohnort Bremen, Postleitzahl 28195, Platz 14, Gruppe blau.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "form",
+        "icon": "clipboard-list",
+        "title": "Anmeldung",
+        "fields": [
+          {
+            "label": "Name",
+            "value": "Jan Wolf",
+            "wide": true
+          },
+          {
+            "label": "Alter",
+            "value": "42"
+          },
+          {
+            "label": "Wohnort",
+            "value": "Bremen"
+          },
+          {
+            "label": "Postleitzahl",
+            "value": "28195"
+          },
+          {
+            "label": "Platz",
+            "value": "14"
+          },
+          {
+            "label": "Gruppe",
+            "value": "blau"
+          }
+        ],
+        "size": 28
+      }
+    },
+    {
+      "media": "v4-a1-zahlen-atelier-zahlen",
+      "file": "content/de/media/images/v4-a1-zahlen-atelier-zahlen.png",
+      "module": "a1-zahlen-atelier",
+      "activity": "a1-zahlen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Des nombres faciles à confondre",
+      "alt": "Trois cartes de nombres, la partie qui change en couleur : 13 dreizehn et 30 dreißig, 17 siebzehn et 70 siebzig, 35 fünfunddreißig et 53 dreiundfünfzig.",
+      "caption": "-zehn ou -zig / -ßig ? Les unités d’abord : fünfunddreißig = 35",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "13 · 30",
+            "words": [
+              "drei[zehn]",
+              "drei[ßig]"
+            ]
+          },
+          {
+            "title": "17 · 70",
+            "words": [
+              "sieb[zehn]",
+              "sieb[zig]"
+            ]
+          },
+          {
+            "title": "35 · 53",
+            "words": [
+              "[fünf]und[dreißig]",
+              "[drei]und[fünfzig]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-zahlen-atelier-telefon",
+      "file": "content/de/media/images/v4-a1-zahlen-atelier-telefon.png",
+      "module": "a1-zahlen-atelier",
+      "activity": "a1-zahlen-atelier-mission",
+      "usage": "illustration",
+      "title": "Dicter son numéro au guichet",
+      "alt": "Au guichet des inscriptions, l’employée demande « Wie ist Ihre Telefonnummer? » et Ali commence à dicter chiffre par chiffre : « Null, eins, fünf, sechs … ». En haut : un téléphone, un porte-bloc et un crayon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Wie ist Ihre Telefonnummer?"
+          },
+          {
+            "name": "Ali",
+            "say": "Null, eins, fünf, sechs …"
+          }
+        ],
+        "items": [
+          "phone-call",
+          "clipboard-list",
+          "pencil"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-zahlen-atelier-formular",
+      "file": "content/de/media/images/v4-a1-zahlen-atelier-formular.png",
+      "module": "a1-zahlen-atelier",
+      "activity": "a1-zahlen-atelier-mission",
+      "usage": "illustration",
+      "title": "Une fiche vierge à remplir",
+      "alt": "Fiche d’inscription vierge à remplir après l’écoute : Name, Alter, Wohnort, Telefonnummer et Postleitzahl.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "form",
+        "icon": "clipboard-pen",
+        "title": "Anmeldung",
+        "subtitle": "Bitte ausfüllen",
+        "fields": [
+          {
+            "label": "Name",
+            "wide": true
+          },
+          {
+            "label": "Alter"
+          },
+          {
+            "label": "Wohnort"
+          },
+          {
+            "label": "Telefonnummer"
+          },
+          {
+            "label": "Postleitzahl"
+          }
+        ],
+        "size": 31
+      }
+    },
+    {
+      "media": "v4-a1-montants-zahlen",
+      "file": "content/de/media/images/v4-a1-montants-zahlen.png",
+      "module": "a1-montants",
+      "activity": "a1-montants-guide",
+      "usage": "illustration",
+      "title": "Centaines et fins de nombres",
+      "alt": "Quatre cartes : 100, 200, 300 (einhundert, zweihundert, dreihundert) ; 115 einhundertfünfzehn et 150 einhundertfünfzig ; 116 einhundertsechzehn et 160 einhundertsechzig ; 1.000 eintausend. La partie qui change est en couleur.",
+      "caption": "fünfzehn = 15 · fünfzig = 50",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "words",
+        "wordSize": 30,
+        "titleSize": 32,
+        "groups": [
+          {
+            "title": "100 · 200 · 300",
+            "words": [
+              "ein[hundert]",
+              "zwei[hundert]",
+              "drei[hundert]"
+            ]
+          },
+          {
+            "title": "115 · 150",
+            "words": [
+              "einhundert[fünfzehn]",
+              "einhundert[fünfzig]"
+            ]
+          },
+          {
+            "title": "116 · 160",
+            "words": [
+              "einhundert[sechzehn]",
+              "einhundert[sechzig]"
+            ]
+          },
+          {
+            "title": "1.000",
+            "words": [
+              "[eintausend]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-montants-preise",
+      "file": "content/de/media/images/v4-a1-montants-preise.png",
+      "module": "a1-montants",
+      "activity": "a1-montants-guide",
+      "usage": "illustration",
+      "title": "Les étiquettes du magasin",
+      "alt": "Panneau de prix d’un magasin : der Tisch 115 €, der Stuhl 150 €, das Fahrrad 240 €, das Sofa 600 €, das Klavier 1.000 €. Dans 1.000, le point sépare les milliers.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "shop",
+        "icon": "tag",
+        "title": "Unsere Preise",
+        "subtitle": "Möbel, Fahrräder, Instrumente",
+        "rows": [
+          [
+            "der Tisch",
+            "115 €"
+          ],
+          [
+            "der Stuhl",
+            "150 €"
+          ],
+          [
+            "das Fahrrad",
+            "240 €"
+          ],
+          [
+            "das Sofa",
+            "600 €"
+          ],
+          [
+            "das Klavier",
+            "1.000 €"
+          ]
+        ],
+        "size": 33
+      }
+    },
+    {
+      "media": "v4-a1-montants-laden",
+      "file": "content/de/media/images/v4-a1-montants-laden.png",
+      "module": "a1-montants",
+      "activity": "a1-montants-pratique",
+      "usage": "illustration",
+      "title": "Demander un prix au magasin",
+      "alt": "Dans un magasin de meubles, la cliente demande au vendeur « Was kostet der Schreibtisch? ». En haut : une lampe de bureau, une lampe et une étiquette de prix.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Kundin",
+            "say": "Was kostet der Schreibtisch?"
+          },
+          {
+            "name": "Verkäufer"
+          }
+        ],
+        "items": [
+          "lamp-desk",
+          "lamp",
+          "tag"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-montants-anzeigen",
+      "file": "content/de/media/images/v4-a1-montants-anzeigen.png",
+      "module": "a1-montants",
+      "activity": "a1-montants-approfondir",
+      "usage": "illustration",
+      "title": "Trois annonces de vélos",
+      "alt": "Trois petites annonces : Fahrrad A à 125 €, Abholung am Samstag ; Fahrrad B à 152 €, Abholung am Sonntag ; Fahrrad C à 280 €, Abholung am Samstag oder Sonntag.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "cards",
+        "setting": "street",
+        "height": 400,
+        "size": 28,
+        "cards": [
+          {
+            "icon": "bike",
+            "title": "Fahrrad A",
+            "intro": [
+              {
+                "icon": "tag",
+                "text": "[125 €]"
+              }
+            ],
+            "lines": [
+              {
+                "icon": "calendar-days",
+                "text": "Abholung am Samstag"
+              }
+            ]
+          },
+          {
+            "icon": "bike",
+            "title": "Fahrrad B",
+            "intro": [
+              {
+                "icon": "tag",
+                "text": "[152 €]"
+              }
+            ],
+            "lines": [
+              {
+                "icon": "calendar-days",
+                "text": "Abholung am Sonntag"
+              }
+            ]
+          },
+          {
+            "icon": "bike",
+            "title": "Fahrrad C",
+            "intro": [
+              {
+                "icon": "tag",
+                "text": "[280 €]"
+              }
+            ],
+            "lines": [
+              {
+                "icon": "calendar-days",
+                "text": "Abholung am Samstag oder Sonntag"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-montants-angebot",
+      "file": "content/de/media/images/v4-a1-montants-angebot.png",
+      "module": "a1-montants",
+      "activity": "a1-montants-approfondir",
+      "usage": "illustration",
+      "title": "Un prix qui passe à mille euros",
+      "alt": "Deux panneaux : « Angebot bis Freitag : 950 € » et « Ab Samstag : 1.000 € ».",
+      "caption": "neunhundertfünfzig Euro · eintausend Euro",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "cards",
+        "height": 400,
+        "size": 64,
+        "center": true,
+        "cards": [
+          {
+            "icon": "badge-percent",
+            "title": "Angebot bis Freitag",
+            "lines": [
+              "[950 €]"
+            ]
+          },
+          {
+            "icon": "tag",
+            "title": "Ab Samstag",
+            "lines": [
+              "[1.000 €]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-tafel",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-tafel.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-guide",
+      "usage": "illustration",
+      "title": "L’annonce au tableau",
+      "alt": "Annonce au tableau de la classe : « Deutschkurs: Mittwoch, zehn Uhr, Raum sieben. Bitte ein Heft und einen Stift mitbringen. Am Freitag ist der Kurs in Raum neun. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "classroom",
+        "icon": "presentation",
+        "title": "Deutschkurs",
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Mittwoch, zehn Uhr, Raum sieben."
+          },
+          {
+            "icon": "pencil",
+            "text": "Bitte ein Heft und einen Stift mitbringen."
+          },
+          {
+            "icon": "triangle-alert",
+            "text": "Am Freitag ist der Kurs in Raum neun."
+          }
+        ],
+        "size": 38
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-material",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-material.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-guide",
+      "usage": "illustration",
+      "title": "Le matériel du cours",
+      "alt": "Trois vignettes : un stylo (der Stift), un sac à main (die Tasche) et un cahier (das Heft).",
+      "caption": "der Stift · die Tasche · das Heft",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "pen",
+            "label": "der Stift"
+          },
+          {
+            "icon": "handbag",
+            "label": "die Tasche"
+          },
+          {
+            "icon": "notebook",
+            "label": "das Heft"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-raum",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-raum.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-pratique",
+      "usage": "illustration",
+      "title": "Avant le cours d’allemand",
+      "alt": "Dans le couloir de l’école, Sara demande à Tim « Hallo! Wann ist der Deutschkurs? ». En haut : un calendrier, une horloge et une porte ouverte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Sara",
+            "say": "Hallo! Wann ist der Deutschkurs?"
+          },
+          {
+            "name": "Tim"
+          }
+        ],
+        "items": [
+          "calendar-days",
+          "clock",
+          "door-open"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-stift",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-stift.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "a",
+      "question": "Écoute : qu’est-ce que la première personne demande à emprunter ?",
+      "optionLabel": "Un stylo",
+      "title": "Un stylo",
+      "alt": "Un stylo à bille.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "pen"
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-buch",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-buch.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "b",
+      "question": "Écoute : qu’est-ce que la première personne demande à emprunter ?",
+      "optionLabel": "Un livre",
+      "title": "Un livre",
+      "alt": "Un livre fermé.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "book"
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-heft",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-heft.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "c",
+      "question": "Écoute : qu’est-ce que la première personne demande à emprunter ?",
+      "optionLabel": "Un cahier",
+      "title": "Un cahier",
+      "alt": "Un cahier à spirale.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "notebook"
+      }
+    },
+    {
+      "media": "v4-a1-kurs-atelier-nachricht",
+      "file": "content/de/media/images/v4-a1-kurs-atelier-nachricht.png",
+      "module": "a1-kurs-atelier",
+      "activity": "a1-kurs-atelier-mission",
+      "usage": "illustration",
+      "title": "Message : le cours change de salle",
+      "alt": "Message de Sara sur le téléphone de Tim : « Der Kurs ist am Montag um zehn Uhr in Raum acht. Bring bitte ein Heft mit. ». Tim répond « Danke! Bis Montag! ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Sara",
+        "subtitle": "Deutschkurs",
+        "size": 31,
+        "messages": [
+          {
+            "from": "Sara",
+            "time": "08:12",
+            "text": "Der Kurs ist [am Montag] [um zehn Uhr] [in Raum acht]. Bring bitte ein Heft mit."
+          },
+          {
+            "side": "right",
+            "text": "Danke! Bis Montag!"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-profile",
+      "file": "content/de/media/images/v4-a1-arbeit-profile.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-guide",
+      "usage": "illustration",
+      "title": "Deux profils : études et travail",
+      "alt": "Deux fiches. Liv : « Ich studiere Kunst an der Uni. Am Montag habe ich von neun bis elf Uhr Kurs. » Ben : « Ich arbeite als Fahrer. Am Samstag arbeite ich von acht bis zwölf Uhr. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "cards",
+        "height": 400,
+        "size": 28,
+        "cards": [
+          {
+            "icon": "palette",
+            "title": "Liv",
+            "subtitle": "studiert",
+            "lines": [
+              "Ich studiere Kunst [an der Uni].",
+              {
+                "icon": "clock",
+                "text": "Am Montag habe ich [von neun bis elf Uhr] Kurs."
+              }
+            ]
+          },
+          {
+            "icon": "car-front",
+            "title": "Ben",
+            "subtitle": "arbeitet",
+            "lines": [
+              "Ich arbeite [als Fahrer].",
+              {
+                "icon": "clock",
+                "text": "Am Samstag arbeite ich [von acht bis zwölf Uhr]."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-treffen",
+      "file": "content/de/media/images/v4-a1-arbeit-treffen.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-pratique",
+      "usage": "illustration",
+      "title": "Jona et Elif font connaissance",
+      "alt": "Dans la rue, Jona demande à Elif « Was machst du? » et Elif lui retourne la question : « Und du? Studierst du auch? ». En haut : un livre ouvert, une serviette, une toque d’étudiant et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Jona",
+            "say": "Was machst du?"
+          },
+          {
+            "name": "Elif",
+            "say": "Und du? Studierst du auch?"
+          }
+        ],
+        "items": [
+          "book-open",
+          "briefcase",
+          "graduation-cap",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-nika",
+      "file": "content/de/media/images/v4-a1-arbeit-nika.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-approfondir",
+      "usage": "illustration",
+      "title": "La fiche de Nika",
+      "alt": "Fiche de Nika : Studium Musik, Ort Uni, Kurs Dienstag de 10 à 12 heures, Job au cinéma (Kino) le vendredi de 15 à 20 heures.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "form",
+        "icon": "id-card",
+        "title": "Nika",
+        "subtitle": "Studium und Job",
+        "size": 30,
+        "fields": [
+          {
+            "label": "Studium",
+            "value": "Musik"
+          },
+          {
+            "label": "Ort",
+            "value": "Uni"
+          },
+          {
+            "label": "Kurs",
+            "value": "Dienstag, 10–12 Uhr",
+            "wide": true
+          },
+          {
+            "label": "Job",
+            "value": "Kino, Freitag, 15–20 Uhr",
+            "wide": true
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-nachricht",
+      "file": "content/de/media/images/v4-a1-arbeit-nachricht.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-approfondir",
+      "usage": "illustration",
+      "title": "Un rendez-vous refusé, un autre proposé",
+      "alt": "Échange de messages : un ami écrit « Treffen wir uns am Freitag um vier Uhr? » ; Nika répond « Am Freitag arbeite ich von fünfzehn bis zwanzig Uhr. Geht es am Dienstag um dreizehn Uhr? ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Nika",
+        "size": 31,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Treffen wir uns am Freitag um vier Uhr?"
+          },
+          {
+            "from": "Nika",
+            "text": "Am Freitag arbeite ich [von fünfzehn bis zwanzig Uhr]. Geht es [am Dienstag um dreizehn Uhr]?"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-buchladen",
+      "file": "content/de/media/images/v4-a1-arbeit-buchladen.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "a",
+      "question": "Écoute : dans quel lieu Jona travaille-t-il ?",
+      "optionLabel": "Une librairie",
+      "title": "Une librairie",
+      "alt": "Un livre ouvert, pour une librairie.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "book-open"
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-kino",
+      "file": "content/de/media/images/v4-a1-arbeit-kino.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "b",
+      "question": "Écoute : dans quel lieu Jona travaille-t-il ?",
+      "optionLabel": "Un cinéma",
+      "title": "Un cinéma",
+      "alt": "Un clap de cinéma.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "clapperboard"
+      }
+    },
+    {
+      "media": "v4-a1-arbeit-cafe",
+      "file": "content/de/media/images/v4-a1-arbeit-cafe.png",
+      "module": "a1-arbeit",
+      "activity": "a1-arbeit-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "c",
+      "question": "Écoute : dans quel lieu Jona travaille-t-il ?",
+      "optionLabel": "Un café",
+      "title": "Un café",
+      "alt": "Une tasse de café fumante.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "coffee"
+      }
+    },
+    {
+      "media": "v4-a1-alltag-atelier-uhren",
+      "file": "content/de/media/images/v4-a1-alltag-atelier-uhren.png",
+      "module": "a1-alltag-atelier",
+      "activity": "a1-alltag-atelier-guide",
+      "usage": "illustration",
+      "title": "Le carnet de Mina en quatre horloges",
+      "alt": "Quatre horloges : 7 h 30 « um halb acht », se lever ; 8 h 15 « um Viertel nach acht », prendre le petit-déjeuner ; 9 h « um neun Uhr », le cours commence ; 17 h 45 « um Viertel vor sechs », faire les courses.",
+      "caption": "halb acht = 7 h 30 · Viertel nach acht = 8 h 15 · Viertel vor sechs = 17 h 45",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "clocks",
+        "items": [
+          {
+            "time": "07:30",
+            "label": "um halb acht",
+            "sub": "aufstehen",
+            "icon": "alarm-clock"
+          },
+          {
+            "time": "08:15",
+            "label": "um Viertel nach acht",
+            "sub": "frühstücken",
+            "icon": "coffee"
+          },
+          {
+            "time": "09:00",
+            "label": "um neun Uhr",
+            "sub": "Kursbeginn",
+            "icon": "school"
+          },
+          {
+            "time": "17:45",
+            "label": "um Viertel vor sechs",
+            "sub": "einkaufen",
+            "icon": "shopping-cart"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-alltag-atelier-montag",
+      "file": "content/de/media/images/v4-a1-alltag-atelier-montag.png",
+      "module": "a1-alltag-atelier",
+      "activity": "a1-alltag-atelier-pratique",
+      "usage": "illustration",
+      "title": "Une question sur la journée de lundi",
+      "alt": "Dans la cuisine, Ella demande à Noah « Wann stehst du am Montag auf? ». En haut : un réveil, une tasse et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "kitchen",
+        "people": [
+          {
+            "name": "Ella",
+            "say": "Wann stehst du am Montag auf?"
+          },
+          {
+            "name": "Noah"
+          }
+        ],
+        "items": [
+          "alarm-clock",
+          "coffee",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-alltag-atelier-telefon",
+      "file": "content/de/media/images/v4-a1-alltag-atelier-telefon.png",
+      "module": "a1-alltag-atelier",
+      "activity": "a1-alltag-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "a",
+      "question": "Écoute : quelle action est prévue à 20 h ?",
+      "optionLabel": "Téléphoner",
+      "title": "Téléphoner",
+      "alt": "Un combiné de téléphone.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "phone"
+      }
+    },
+    {
+      "media": "v4-a1-alltag-atelier-einkaufen",
+      "file": "content/de/media/images/v4-a1-alltag-atelier-einkaufen.png",
+      "module": "a1-alltag-atelier",
+      "activity": "a1-alltag-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "b",
+      "question": "Écoute : quelle action est prévue à 20 h ?",
+      "optionLabel": "Faire les courses",
+      "title": "Faire les courses",
+      "alt": "Un chariot de courses.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "shopping-cart"
+      }
+    },
+    {
+      "media": "v4-a1-alltag-atelier-bus",
+      "file": "content/de/media/images/v4-a1-alltag-atelier-bus.png",
+      "module": "a1-alltag-atelier",
+      "activity": "a1-alltag-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "c",
+      "question": "Écoute : quelle action est prévue à 20 h ?",
+      "optionLabel": "Prendre le bus",
+      "title": "Prendre le bus",
+      "alt": "Un autobus.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "bus"
+      }
+    },
+    {
+      "media": "v4-a1-sante-nachricht",
+      "file": "content/de/media/images/v4-a1-sante-nachricht.png",
+      "module": "a1-sante",
+      "activity": "a1-sante-guide",
+      "usage": "illustration",
+      "title": "Mina prévient Ivo",
+      "alt": "Message de Mina sur le téléphone d’Ivo : « Hallo, Ivo. Ich bin heute nicht im Kurs. Ich habe Kopfschmerzen und Husten. Morgen rufe ich in der Praxis an. Bis bald! Mina »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Mina",
+        "size": 33,
+        "messages": [
+          {
+            "from": "Mina",
+            "time": "07:45",
+            "text": "Hallo, Ivo. Ich bin heute nicht im Kurs. Ich habe [Kopfschmerzen] und [Husten]. Morgen rufe ich in der Praxis an. Bis bald! Mina"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-sante-schmerzen",
+      "file": "content/de/media/images/v4-a1-sante-schmerzen.png",
+      "module": "a1-sante",
+      "activity": "a1-sante-guide",
+      "usage": "illustration",
+      "title": "Dire où l’on a mal",
+      "alt": "Quatre cartes : der Kopf, « Ich habe Kopfschmerzen. Mein Kopf tut weh. » ; der Hals, « Ich habe Halsschmerzen. Mein Hals tut weh. » ; der Bauch, « Ich habe Bauchschmerzen. Mein Bauch tut weh. » ; der Husten, « Ich habe Husten. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "titleSize": 30,
+        "groups": [
+          {
+            "title": "der Kopf",
+            "words": [
+              "Ich habe [Kopf]schmerzen.",
+              "Mein [Kopf] tut weh."
+            ]
+          },
+          {
+            "title": "der Hals",
+            "words": [
+              "Ich habe [Hals]schmerzen.",
+              "Mein [Hals] tut weh."
+            ]
+          },
+          {
+            "title": "der Bauch",
+            "words": [
+              "Ich habe [Bauch]schmerzen.",
+              "Mein [Bauch] tut weh."
+            ]
+          },
+          {
+            "title": "der Husten",
+            "words": [
+              "Ich habe [Husten]."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-sante-anruf",
+      "file": "content/de/media/images/v4-a1-sante-anruf.png",
+      "module": "a1-sante",
+      "activity": "a1-sante-pratique",
+      "usage": "illustration",
+      "title": "Appeler le cabinet médical",
+      "alt": "Au téléphone, l’accueil du cabinet dit « Praxis am Markt, guten Morgen. » et le patient répond « Ich möchte einen Termin, bitte. ». En haut : un téléphone, un stéthoscope, un calendrier et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "doctor",
+        "people": [
+          {
+            "name": "Empfang",
+            "say": "Praxis am Markt, guten Morgen."
+          },
+          {
+            "name": "Patient",
+            "say": "Ich möchte einen Termin, bitte."
+          }
+        ],
+        "items": [
+          "phone-call",
+          "stethoscope",
+          "calendar-days",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-sante-schilder",
+      "file": "content/de/media/images/v4-a1-sante-schilder.png",
+      "module": "a1-sante",
+      "activity": "a1-sante-approfondir",
+      "usage": "illustration",
+      "title": "La pharmacie et le cabinet",
+      "alt": "Deux panneaux. Linden-Apotheke : Bahnhofstraße 8, heute geöffnet 8–18 Uhr. Praxis am Park : Gartenstraße 12, Eingang neben dem Café, Termine nach Vereinbarung.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "cards",
+        "setting": "street",
+        "height": 400,
+        "size": 28,
+        "cards": [
+          {
+            "icon": "pill",
+            "title": "Linden-Apotheke",
+            "lines": [
+              {
+                "icon": "map-pin",
+                "text": "Bahnhofstraße 8"
+              },
+              {
+                "icon": "clock",
+                "text": "Heute geöffnet: 8–18 Uhr"
+              }
+            ]
+          },
+          {
+            "icon": "stethoscope",
+            "title": "Praxis am Park",
+            "lines": [
+              {
+                "icon": "map-pin",
+                "text": "Gartenstraße 12"
+              },
+              {
+                "icon": "door-open",
+                "text": "Eingang neben dem Café"
+              },
+              {
+                "icon": "calendar-days",
+                "text": "Termine nach Vereinbarung"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-essen-atelier-karte",
+      "file": "content/de/media/images/v4-a1-essen-atelier-karte.png",
+      "module": "a1-essen-atelier",
+      "activity": "a1-essen-atelier-guide",
+      "usage": "illustration",
+      "title": "La carte du café",
+      "alt": "Carte d’un café : der Tee 2,20 €, der Apfelsaft 2,80 €, die Suppe 4,50 €, das Käsebrot 3,20 €.",
+      "caption": "einen Tee · eine Suppe · ein Käsebrot",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "cafe",
+        "icon": "coffee",
+        "title": "Speisekarte",
+        "subtitle": "Getränke und Speisen",
+        "rows": [
+          [
+            "der Tee",
+            "2,20 €"
+          ],
+          [
+            "der Apfelsaft",
+            "2,80 €"
+          ],
+          [
+            "die Suppe",
+            "4,50 €"
+          ],
+          [
+            "das Käsebrot",
+            "3,20 €"
+          ]
+        ],
+        "size": 36
+      }
+    },
+    {
+      "media": "v4-a1-essen-atelier-rechnung",
+      "file": "content/de/media/images/v4-a1-essen-atelier-rechnung.png",
+      "module": "a1-essen-atelier",
+      "activity": "a1-essen-atelier-guide",
+      "usage": "illustration",
+      "title": "Le ticket après la commande corrigée",
+      "alt": "Ticket de caisse d’un café : 1 Suppe 4,50 €, 1 Apfelsaft 2,80 €, Summe 7,30 €, payé par carte. À droite, un bol de soupe.",
+      "caption": "Sieben Euro dreißig. Mit Karte, bitte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "receipt",
+        "setting": "cafe",
+        "icon": "soup",
+        "title": "Café am Eck",
+        "subtitle": "Tisch 4",
+        "lines": [
+          [
+            "1 × Suppe",
+            "4,50 €"
+          ],
+          [
+            "1 × Apfelsaft",
+            "2,80 €"
+          ]
+        ],
+        "total": [
+          "Summe",
+          "7,30 €"
+        ],
+        "notes": [
+          "Bezahlt mit Karte",
+          "Vielen Dank!"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-essen-atelier-bestellen",
+      "file": "content/de/media/images/v4-a1-essen-atelier-bestellen.png",
+      "module": "a1-essen-atelier",
+      "activity": "a1-essen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Commander au café",
+      "alt": "Au café, la serveuse demande « Guten Tag! Was möchten Sie? » et le client demande « Was kostet das zusammen? ». En haut : une tasse, un croissant et un ticket de caisse.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "cafe",
+        "people": [
+          {
+            "name": "Bedienung",
+            "say": "Guten Tag! Was möchten Sie?"
+          },
+          {
+            "name": "Gast",
+            "say": "Was kostet das zusammen?"
+          }
+        ],
+        "items": [
+          "coffee",
+          "croissant",
+          "receipt-euro"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-freizeit-atelier-chat",
+      "file": "content/de/media/images/v4-a1-freizeit-atelier-chat.png",
+      "module": "a1-freizeit-atelier",
+      "activity": "a1-freizeit-atelier-guide",
+      "usage": "illustration",
+      "title": "Deux amis organisent leur dimanche",
+      "alt": "Échange de messages avec Aylin : « Am Sonntag können wir Rad fahren. Hast du um zwei Uhr Zeit? » — « Um zwei kann ich nicht. Ich gehe auch lieber ins Schwimmbad. Hast du um vier Zeit? » — « Ja, das passt. Wir treffen uns vor dem Schwimmbad. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Aylin",
+        "size": 28,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Am Sonntag [können] wir Rad fahren. Hast du um zwei Uhr Zeit?"
+          },
+          {
+            "from": "Aylin",
+            "text": "Um zwei [kann] ich nicht. Ich gehe auch [lieber] ins Schwimmbad. Hast du um vier Zeit?"
+          },
+          {
+            "side": "right",
+            "text": "Ja, das passt. Wir treffen uns vor dem Schwimmbad."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-freizeit-atelier-samstag",
+      "file": "content/de/media/images/v4-a1-freizeit-atelier-samstag.png",
+      "module": "a1-freizeit-atelier",
+      "activity": "a1-freizeit-atelier-pratique",
+      "usage": "illustration",
+      "title": "Une proposition pour samedi",
+      "alt": "Dans un parc, Aylin demande « Hast du am Samstag Zeit? » et Lukas répond « Ja, ich habe Zeit. ». En haut : un calendrier, une horloge et un téléphone portable.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "park",
+        "people": [
+          {
+            "name": "Aylin",
+            "say": "Hast du am Samstag Zeit?"
+          },
+          {
+            "name": "Lukas",
+            "say": "Ja, ich habe Zeit."
+          }
+        ],
+        "items": [
+          "calendar-days",
+          "clock",
+          "smartphone"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-freizeit-atelier-fussball",
+      "file": "content/de/media/images/v4-a1-freizeit-atelier-fussball.png",
+      "module": "a1-freizeit-atelier",
+      "activity": "a1-freizeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Écoute : quelle activité est proposée en premier ?",
+      "optionLabel": "Jouer au football",
+      "title": "Jouer au football",
+      "alt": "Un ballon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "volleyball"
+      }
+    },
+    {
+      "media": "v4-a1-freizeit-atelier-kino",
+      "file": "content/de/media/images/v4-a1-freizeit-atelier-kino.png",
+      "module": "a1-freizeit-atelier",
+      "activity": "a1-freizeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Écoute : quelle activité est proposée en premier ?",
+      "optionLabel": "Aller au cinéma",
+      "title": "Aller au cinéma",
+      "alt": "Un clap de cinéma.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "clapperboard"
+      }
+    },
+    {
+      "media": "v4-a1-freizeit-atelier-rad",
+      "file": "content/de/media/images/v4-a1-freizeit-atelier-rad.png",
+      "module": "a1-freizeit-atelier",
+      "activity": "a1-freizeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Écoute : quelle activité est proposée en premier ?",
+      "optionLabel": "Faire du vélo",
+      "title": "Faire du vélo",
+      "alt": "Un vélo vu de profil.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "media": "v4-a1-familie-atelier-einladung",
+      "file": "content/de/media/images/v4-a1-familie-atelier-einladung.png",
+      "module": "a1-familie-atelier",
+      "activity": "a1-familie-atelier-guide",
+      "usage": "illustration",
+      "title": "L’invitation de Sara",
+      "alt": "Carte d’invitation : « Hallo Ali! Mein Bruder Emil hat am dritten Juni Geburtstag. Meine Eltern feiern mit ihm am fünften Juni. Die Party beginnt um sieben Uhr abends bei uns. Kommst du auch? Viele Grüße, Sara »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "party",
+        "icon": "party-popper",
+        "title": "Einladung",
+        "size": 30,
+        "lines": [
+          "Hallo Ali!",
+          "Mein Bruder Emil hat [am dritten Juni] Geburtstag.",
+          "Meine Eltern feiern mit ihm [am fünften Juni].",
+          "Die Party beginnt [um sieben Uhr abends] bei uns.",
+          "Kommst du auch?"
+        ],
+        "footer": "Viele Grüße, Sara"
+      }
+    },
+    {
+      "media": "v4-a1-familie-atelier-daten",
+      "file": "content/de/media/images/v4-a1-familie-atelier-daten.png",
+      "module": "a1-familie-atelier",
+      "activity": "a1-familie-atelier-guide",
+      "usage": "illustration",
+      "title": "Lire une date",
+      "alt": "Trois feuillets de calendrier : 3 juin, « am dritten Juni » ; 5 juin, « am fünften Juni » ; 12 mai, « am zwölften Mai ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "dates",
+        "items": [
+          {
+            "day": "3.",
+            "month": "Juni",
+            "label": "am dritten Juni"
+          },
+          {
+            "day": "5.",
+            "month": "Juni",
+            "label": "am fünften Juni"
+          },
+          {
+            "day": "12.",
+            "month": "Mai",
+            "label": "am zwölften Mai"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-familie-atelier-mein-dein",
+      "file": "content/de/media/images/v4-a1-familie-atelier-mein-dein.png",
+      "module": "a1-familie-atelier",
+      "activity": "a1-familie-atelier-pratique",
+      "usage": "illustration",
+      "title": "mein, meine, dein, deine",
+      "alt": "Trois cartes : der Bruder avec « mein Bruder, dein Bruder » ; die Schwester avec « meine Schwester, deine Schwester » ; die Eltern avec « meine Eltern, deine Eltern ». Le déterminant est en couleur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "der Bruder",
+            "words": [
+              "[mein] Bruder",
+              "[dein] Bruder"
+            ]
+          },
+          {
+            "title": "die Schwester",
+            "words": [
+              "[meine] Schwester",
+              "[deine] Schwester"
+            ]
+          },
+          {
+            "title": "die Eltern",
+            "words": [
+              "[meine] Eltern",
+              "[deine] Eltern"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-familie-atelier-party",
+      "file": "content/de/media/images/v4-a1-familie-atelier-party.png",
+      "module": "a1-familie-atelier",
+      "activity": "a1-familie-atelier-mission",
+      "usage": "illustration",
+      "title": "Inviter à une fête",
+      "alt": "À une fête d’anniversaire, Sara demande « Kommst du auch? » et Ali répond « Ja, gern! ». En haut : un gâteau, un cadeau et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "party",
+        "people": [
+          {
+            "name": "Sara",
+            "say": "Kommst du auch?"
+          },
+          {
+            "name": "Ali",
+            "say": "Ja, gern!"
+          }
+        ],
+        "items": [
+          "cake",
+          "gift",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-anzeige",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-anzeige.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-guide",
+      "usage": "illustration",
+      "title": "L’annonce du logement",
+      "alt": "Petite annonce : « Kleine Wohnung in der Lindenstraße 8. Zwei Zimmer, eine Küche, kein Balkon. Fünf Minuten zu Fuß vom Bahnhof. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "home",
+        "icon": "house",
+        "title": "Kleine Wohnung",
+        "subtitle": "Lindenstraße 8",
+        "size": 36,
+        "lines": [
+          {
+            "icon": "bed-double",
+            "text": "Zwei Zimmer, eine Küche, [kein] Balkon."
+          },
+          {
+            "icon": "footprints",
+            "text": "Fünf Minuten zu Fuß vom Bahnhof."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-plan",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-plan.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-guide",
+      "usage": "illustration",
+      "title": "Du Bahnhof à la Lindenstraße",
+      "alt": "Plan simple : on part du Bahnhof en bas, on va tout droit jusqu’à l’Apotheke, puis on tourne à droite dans la Lindenstraße jusqu’au numéro 8. Encadré : « Gehen Sie geradeaus bis zur Apotheke. Biegen Sie dort rechts ab. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "plan",
+        "setting": "street",
+        "streets": [
+          {
+            "points": [
+              [
+                420,
+                660
+              ],
+              [
+                420,
+                -20
+              ]
+            ],
+            "name": "Bahnhofstraße",
+            "labelAt": [
+              420,
+              76
+            ],
+            "rotate": -90
+          },
+          {
+            "points": [
+              [
+                -20,
+                190
+              ],
+              [
+                980,
+                190
+              ]
+            ],
+            "name": "Lindenstraße",
+            "labelAt": [
+              150,
+              190
+            ]
+          }
+        ],
+        "route": [
+          [
+            420,
+            505
+          ],
+          [
+            420,
+            190
+          ],
+          [
+            745,
+            190
+          ]
+        ],
+        "places": [
+          {
+            "at": [
+              420,
+              570
+            ],
+            "icon": "train-front",
+            "label": "Bahnhof",
+            "labelSide": "right"
+          },
+          {
+            "at": [
+              532,
+              292
+            ],
+            "icon": "pill",
+            "label": "Apotheke",
+            "labelSide": "right"
+          },
+          {
+            "at": [
+              830,
+              96
+            ],
+            "icon": "house",
+            "label": "Lindenstraße 8",
+            "labelSide": "left"
+          }
+        ],
+        "labels": [
+          {
+            "text": "geradeaus",
+            "at": [
+              312,
+              372
+            ]
+          },
+          {
+            "text": "rechts",
+            "at": [
+              520,
+              132
+            ]
+          }
+        ],
+        "legendAt": "left:24px;bottom:24px;max-width:330px",
+        "legend": [
+          "Gehen Sie [geradeaus] bis zur Apotheke.",
+          "Biegen Sie dort [rechts] ab."
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-strasse",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-strasse.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-pratique",
+      "usage": "illustration",
+      "title": "Demander son chemin en sortant de la gare",
+      "alt": "Devant la gare, une voyageuse demande « Wie komme ich zur Rosenstraße? » et un passant répond « Gehen Sie zuerst geradeaus. ». En haut : un train, une valise et un plan.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "street",
+        "people": [
+          {
+            "name": "Reisende",
+            "say": "Wie komme ich zur Rosenstraße?"
+          },
+          {
+            "name": "Passant",
+            "say": "Gehen Sie zuerst geradeaus."
+          }
+        ],
+        "items": [
+          "train-front",
+          "luggage",
+          "map"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-baeckerei",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-baeckerei.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Écoute : jusqu’à quel lieu faut-il d’abord aller tout droit ?",
+      "optionLabel": "La boulangerie",
+      "title": "La boulangerie",
+      "alt": "Un croissant, pour une boulangerie.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "croissant"
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-apotheke",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-apotheke.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Écoute : jusqu’à quel lieu faut-il d’abord aller tout droit ?",
+      "optionLabel": "La pharmacie",
+      "title": "La pharmacie",
+      "alt": "Une gélule, pour une pharmacie.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "pill"
+      }
+    },
+    {
+      "media": "v4-a1-stadt-atelier-post",
+      "file": "content/de/media/images/v4-a1-stadt-atelier-post.png",
+      "module": "a1-stadt-atelier",
+      "activity": "a1-stadt-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Écoute : jusqu’à quel lieu faut-il d’abord aller tout droit ?",
+      "optionLabel": "La poste",
+      "title": "La poste",
+      "alt": "Une enveloppe, pour la poste.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "mail"
+      }
+    },
+    {
+      "media": "v4-a1-transports-abfahrt",
+      "file": "content/de/media/images/v4-a1-transports-abfahrt.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-guide",
+      "usage": "illustration",
+      "title": "Le panneau des départs de bus",
+      "alt": "Panneau des départs, il est 8 h 10 : 08:04 Bus 3 vers Rathaus, 08:14 Bus 6 vers Stadtpark, 08:24 Bus 3 vers Rathaus.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "setting": "station",
+        "icon": "bus-front",
+        "title": "Abfahrt",
+        "subtitle": "Jetzt: 08:10 Uhr",
+        "columns": [
+          "Zeit",
+          "Linie",
+          "Richtung"
+        ],
+        "rows": [
+          [
+            "08:04",
+            "Bus 3",
+            "Rathaus"
+          ],
+          [
+            "08:14",
+            "Bus 6",
+            "Stadtpark"
+          ],
+          [
+            "08:24",
+            "Bus 3",
+            "Rathaus"
+          ]
+        ],
+        "rowIcons": [
+          "clock",
+          "clock",
+          "clock"
+        ],
+        "size": 36,
+        "center": true
+      }
+    },
+    {
+      "media": "v4-a1-transports-zug",
+      "file": "content/de/media/images/v4-a1-transports-zug.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-guide",
+      "usage": "illustration",
+      "title": "L’horaire du train pour Bonn",
+      "alt": "Fiche horaire « Zug nach Bonn » : Abfahrt 10:05 Uhr, Ankunft 10:40 Uhr, Gleis 2.",
+      "caption": "Abfahrt = départ · Ankunft = arrivée · Gleis = voie",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "station",
+        "icon": "train-front",
+        "title": "Zug nach Bonn",
+        "size": 44,
+        "rows": [
+          [
+            "Abfahrt",
+            "10:05 Uhr"
+          ],
+          [
+            "Ankunft",
+            "10:40 Uhr"
+          ],
+          [
+            "Gleis",
+            "2"
+          ]
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-transports-schalter",
+      "file": "content/de/media/images/v4-a1-transports-schalter.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-pratique",
+      "usage": "illustration",
+      "title": "Au guichet de la gare",
+      "alt": "Au guichet, l’employée demande « Wohin möchten Sie fahren? » et le voyageur demande « Wann fährt der nächste Zug? ». En haut : un billet, un train et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "station",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Wohin möchten Sie fahren?"
+          },
+          {
+            "name": "Reisender",
+            "say": "Wann fährt der nächste Zug?"
+          }
+        ],
+        "items": [
+          "ticket",
+          "train-front",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-transports-fahrkarte",
+      "file": "content/de/media/images/v4-a1-transports-fahrkarte.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-pratique",
+      "usage": "illustration",
+      "title": "Un billet aller simple",
+      "alt": "Billet de train « Fahrkarte, Einfache Fahrt » : von Mainz Hbf nach Wiesbaden Hbf, Datum 14.03., 2. Klasse, nur hin, 1 Person, Preis 4,90 €.",
+      "caption": "Einfache Fahrt = nur hin (aller simple)",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "ticket",
+        "setting": "station",
+        "icon": "train-front",
+        "title": "Fahrkarte",
+        "subtitle": "Einfache Fahrt",
+        "fields": [
+          [
+            "Von",
+            "Mainz Hbf"
+          ],
+          [
+            "Nach",
+            "Wiesbaden Hbf"
+          ],
+          [
+            "Datum",
+            "14.03."
+          ],
+          [
+            "Klasse",
+            "2. Klasse"
+          ],
+          [
+            "Fahrt",
+            "nur hin"
+          ],
+          [
+            "Personen",
+            "1"
+          ]
+        ],
+        "price": "4,90 €",
+        "stub": "Gute Fahrt!"
+      }
+    },
+    {
+      "media": "v4-a1-transports-umsteigen",
+      "file": "content/de/media/images/v4-a1-transports-umsteigen.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-approfondir",
+      "usage": "illustration",
+      "title": "Un trajet avec une correspondance",
+      "alt": "Trajet en trois étapes : à la Post, monter dans le bus 4 ; au Rathaus, descendre et changer ; prendre le tramway 2 jusqu’au Museum et descendre.",
+      "caption": "einsteigen · umsteigen · aussteigen",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "route",
+        "setting": "city",
+        "title": "Von der Post zum Museum",
+        "steps": [
+          {
+            "icon": "mail",
+            "label": "Post",
+            "sub": "[einsteigen]"
+          },
+          {
+            "icon": "building",
+            "label": "Rathaus",
+            "sub": "[aussteigen] und [umsteigen]"
+          },
+          {
+            "icon": "landmark",
+            "label": "Museum",
+            "sub": "[aussteigen]"
+          }
+        ],
+        "links": [
+          {
+            "icon": "bus-front",
+            "label": "Bus 4"
+          },
+          {
+            "icon": "tram-front",
+            "label": "Straßenbahn 2"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a1-transports-verbindungen",
+      "file": "content/de/media/images/v4-a1-transports-verbindungen.png",
+      "module": "a1-transports",
+      "activity": "a1-transports-approfondir",
+      "usage": "illustration",
+      "title": "Deux trajets vers le musée",
+      "alt": "Tableau de deux trajets depuis la Post : bus 4 à 09:05, correspondance au Rathaus, arrivée au Museum à 09:27 ; bus 7 à 09:12, direct, arrivée à 09:35.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "setting": "city",
+        "icon": "route",
+        "title": "Von der Post zum Museum",
+        "subtitle": "zwei Verbindungen",
+        "columns": [
+          "Abfahrt",
+          "Linie",
+          "Umsteigen",
+          "Ankunft"
+        ],
+        "rows": [
+          [
+            "09:05",
+            "Bus 4",
+            "am Rathaus",
+            "09:27"
+          ],
+          [
+            "09:12",
+            "Bus 7",
+            "direkt",
+            "09:35"
+          ]
+        ],
+        "size": 36,
+        "center": true
+      }
+    },
+    {
+      "media": "v4-a2-reisen-atelier-hinweis",
+      "file": "content/de/media/images/v4-a2-reisen-atelier-hinweis.png",
+      "module": "a2-reisen-atelier",
+      "activity": "a2-reisen-atelier-guide",
+      "usage": "illustration",
+      "title": "Avis en gare : un train supprimé",
+      "alt": "Avis en gare « Hinweis – Zugausfall » : « Der Zug nach Erfurt um 8.42 Uhr fällt aus. Bitte nehmen Sie den Zug um 9.13 Uhr von Gleis 4. Steigen Sie in Gotha um. Ihre Fahrkarte gilt auch für den nächsten Zug. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "station",
+        "icon": "triangle-alert",
+        "title": "Hinweis",
+        "subtitle": "Zugausfall",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "circle-x",
+            "text": "Der Zug nach Erfurt um 8.42 Uhr [fällt aus]."
+          },
+          {
+            "icon": "train-front",
+            "text": "Bitte nehmen Sie den Zug um [9.13 Uhr] von [Gleis 4]."
+          },
+          {
+            "icon": "repeat",
+            "text": "Steigen Sie in [Gotha] um."
+          },
+          {
+            "icon": "ticket",
+            "text": "Ihre Fahrkarte [gilt] auch für den nächsten Zug."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reisen-atelier-schalter",
+      "file": "content/de/media/images/v4-a2-reisen-atelier-schalter.png",
+      "module": "a2-reisen-atelier",
+      "activity": "a2-reisen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Au guichet : le train est supprimé",
+      "alt": "Au guichet de la gare, la voyageuse explique à l’employé « Mein Zug fällt aus. ». En haut : un train, une horloge avec une alerte, un billet et un hôtel.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "station",
+        "people": [
+          {
+            "name": "Reisende",
+            "say": "Mein Zug fällt aus."
+          },
+          {
+            "name": "Mitarbeiter"
+          }
+        ],
+        "items": [
+          "train-front",
+          "clock-alert",
+          "ticket",
+          "hotel"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reisen-atelier-verbindung",
+      "file": "content/de/media/images/v4-a2-reisen-atelier-verbindung.png",
+      "module": "a2-reisen-atelier",
+      "activity": "a2-reisen-atelier-correction",
+      "usage": "illustration",
+      "title": "Le nouvel itinéraire, étape par étape",
+      "alt": "Nouvel itinéraire : départ à 10:19 de la voie 7 ; changement à Kassel, avec 20 minutes de correspondance, voie 3 ; arrivée à Leipzig à 14:12. Note : le billet reste valable pour cette liaison.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "route",
+        "setting": "station",
+        "height": 400,
+        "title": "Neue Verbindung nach Leipzig",
+        "steps": [
+          {
+            "icon": "train-front",
+            "label": "ab 10:19",
+            "sub": "Gleis 7"
+          },
+          {
+            "icon": "repeat",
+            "label": "Kassel",
+            "sub": "umsteigen\n20 Minuten · Gleis 3"
+          },
+          {
+            "icon": "flag",
+            "label": "Leipzig",
+            "sub": "an 14:12"
+          }
+        ],
+        "links": [
+          {
+            "icon": "train-front",
+            "label": "Zug"
+          },
+          {
+            "icon": "train-front",
+            "label": "Anschluss"
+          }
+        ],
+        "note": "Ihre Fahrkarte gilt auch für diese Verbindung.",
+        "noteIcon": "ticket"
+      }
+    },
+    {
+      "media": "v4-a2-reisen-atelier-mail",
+      "file": "content/de/media/images/v4-a2-reisen-atelier-mail.png",
+      "module": "a2-reisen-atelier",
+      "activity": "a2-reisen-atelier-mission",
+      "usage": "illustration",
+      "title": "Prévenir l’hôtel d’une arrivée tardive",
+      "alt": "Courriel à l’hôtel, objet « Späte Ankunft » : « Guten Tag, mein Zug ist ausgefallen. Ich komme erst um 14.35 Uhr an. Kann ich dann noch einchecken? Viele Grüße, Malik Haddad »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 31,
+        "meta": [
+          [
+            "An",
+            "Hotel am Fluss"
+          ],
+          [
+            "Betreff",
+            "Späte Ankunft"
+          ]
+        ],
+        "lines": [
+          "Guten Tag,",
+          "mein Zug ist [ausgefallen]. Ich komme erst [um 14.35 Uhr] an. Kann ich dann noch einchecken?",
+          "Viele Grüße",
+          "Malik Haddad"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-gesundheit-atelier-bestaetigung",
+      "file": "content/de/media/images/v4-a2-gesundheit-atelier-bestaetigung.png",
+      "module": "a2-gesundheit-atelier",
+      "activity": "a2-gesundheit-atelier-guide",
+      "usage": "illustration",
+      "title": "La confirmation du cabinet",
+      "alt": "Confirmation de rendez-vous d’un cabinet médical : « Ihr Termin ist am Dienstag um 8.30 Uhr. Bitte kommen Sie eine Viertelstunde früher. Bringen Sie Ihre Versichertenkarte mit. Am Empfang bekommen Sie ein Formular. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "setting": "doctor",
+        "icon": "calendar-check",
+        "title": "Terminbestätigung",
+        "subtitle": "Hausarztpraxis am Ring",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Ihr Termin ist [am Dienstag um 8.30 Uhr]."
+          },
+          {
+            "icon": "clock",
+            "text": "Bitte kommen Sie eine [Viertelstunde früher]."
+          },
+          {
+            "icon": "id-card",
+            "text": "Bringen Sie Ihre [Versichertenkarte] mit."
+          },
+          {
+            "icon": "clipboard-list",
+            "text": "Am Empfang bekommen Sie ein [Formular]."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-gesundheit-atelier-uhrzeiten",
+      "file": "content/de/media/images/v4-a2-gesundheit-atelier-uhrzeiten.png",
+      "module": "a2-gesundheit-atelier",
+      "activity": "a2-gesundheit-atelier-guide",
+      "usage": "illustration",
+      "title": "Trois heures à confirmer",
+      "alt": "Trois horloges : 8 h 30, « halb neun » ; 10 h 15, « Viertel nach zehn » ; 10 h 45, « Viertel vor elf ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "clocks",
+        "items": [
+          {
+            "time": "08:30",
+            "label": "halb neun",
+            "sub": "8.30 Uhr"
+          },
+          {
+            "time": "10:15",
+            "label": "Viertel nach zehn",
+            "sub": "10.15 Uhr"
+          },
+          {
+            "time": "10:45",
+            "label": "Viertel vor elf",
+            "sub": "10.45 Uhr"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-gesundheit-atelier-anruf",
+      "file": "content/de/media/images/v4-a2-gesundheit-atelier-anruf.png",
+      "module": "a2-gesundheit-atelier",
+      "activity": "a2-gesundheit-atelier-pratique",
+      "usage": "illustration",
+      "title": "Demander un rendez-vous par téléphone",
+      "alt": "Au téléphone, l’accueil du cabinet demande « Wie kann ich Ihnen helfen? » et le patient demande « Haben Sie einen Termin frei? ». En haut : un téléphone, un calendrier et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "doctor",
+        "people": [
+          {
+            "name": "Empfang",
+            "say": "Wie kann ich Ihnen helfen?"
+          },
+          {
+            "name": "Patient",
+            "say": "Haben Sie einen Termin frei?"
+          }
+        ],
+        "items": [
+          "phone-call",
+          "calendar-days",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-gesundheit-atelier-mail",
+      "file": "content/de/media/images/v4-a2-gesundheit-atelier-mail.png",
+      "module": "a2-gesundheit-atelier",
+      "activity": "a2-gesundheit-atelier-mission",
+      "usage": "illustration",
+      "title": "Déplacer le rendez-vous par écrit",
+      "alt": "Courriel au cabinet, objet « Termin am Freitag » : « Sehr geehrte Damen und Herren, leider kann ich am Freitag um halb zwei nicht kommen. Haben Sie am Montagvormittag noch einen Termin frei? Mit freundlichen Grüßen »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 30,
+        "meta": [
+          [
+            "An",
+            "Hausarztpraxis am Ring"
+          ],
+          [
+            "Betreff",
+            "Termin am Freitag"
+          ]
+        ],
+        "lines": [
+          "Sehr geehrte Damen und Herren,",
+          "leider kann ich am Freitag [um halb zwei] nicht kommen. Haben Sie [am Montagvormittag] noch einen Termin frei?",
+          "Mit freundlichen Grüßen"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-wohnen-atelier-anzeige",
+      "file": "content/de/media/images/v4-a2-wohnen-atelier-anzeige.png",
+      "module": "a2-wohnen-atelier",
+      "activity": "a2-wohnen-atelier-guide",
+      "usage": "illustration",
+      "title": "L’annonce de la chambre en colocation",
+      "alt": "Annonce : « Helles WG-Zimmer, 14 m², frei ab 1. Oktober. Kaltmiete: 395 Euro, Nebenkosten: 75 Euro. Das Bett und der Schrank bleiben im Zimmer. Fahrräder können im Hof stehen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "home",
+        "icon": "house",
+        "title": "Helles WG-Zimmer, 14 m²",
+        "subtitle": "frei ab 1. Oktober",
+        "size": 31,
+        "rows": [
+          [
+            "Kaltmiete",
+            "395 Euro"
+          ],
+          [
+            "Nebenkosten",
+            "75 Euro"
+          ]
+        ],
+        "lines": [
+          {
+            "icon": "bed-double",
+            "text": "Das Bett und der Schrank bleiben im Zimmer."
+          },
+          {
+            "icon": "bike",
+            "text": "Fahrräder können im Hof stehen."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-wohnen-atelier-zimmer",
+      "file": "content/de/media/images/v4-a2-wohnen-atelier-zimmer.png",
+      "module": "a2-wohnen-atelier",
+      "activity": "a2-wohnen-atelier-guide",
+      "usage": "illustration",
+      "title": "Wo ? et Wohin ? dans une chambre",
+      "alt": "Plan d’une chambre vue de dessus : le lit contre le mur de gauche, la chaise devant la fenêtre, l’armoire à côté de la porte. Une flèche déplace la table du milieu de la pièce à côté de la fenêtre. Encadré : Wo? Das Bett steht an der Wand. Wohin? Ich stelle den Tisch neben das Fenster.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "plan",
+        "room": [
+          36,
+          44,
+          500,
+          556
+        ],
+        "openings": [
+          {
+            "kind": "window",
+            "at": [
+              170,
+              44,
+              340,
+              44
+            ]
+          },
+          {
+            "kind": "door",
+            "at": [
+              400,
+              600,
+              500,
+              600
+            ]
+          }
+        ],
+        "furniture": [
+          {
+            "rect": [
+              60,
+              210,
+              150,
+              260
+            ],
+            "label": "das Bett"
+          },
+          {
+            "rect": [
+              195,
+              72,
+              120,
+              72
+            ],
+            "label": "der Stuhl"
+          },
+          {
+            "rect": [
+              242,
+              512,
+              150,
+              64
+            ],
+            "label": "der Schrank"
+          },
+          {
+            "rect": [
+              230,
+              280,
+              150,
+              96
+            ],
+            "label": "der Tisch",
+            "ghost": true
+          },
+          {
+            "rect": [
+              358,
+              70,
+              150,
+              96
+            ],
+            "label": "der Tisch"
+          }
+        ],
+        "arrows": [
+          {
+            "points": [
+              [
+                382,
+                300
+              ],
+              [
+                436,
+                262
+              ],
+              [
+                436,
+                186
+              ]
+            ]
+          }
+        ],
+        "labels": [
+          {
+            "text": "das Fenster",
+            "at": [
+              255,
+              22
+            ]
+          },
+          {
+            "text": "die Tür",
+            "at": [
+              450,
+              622
+            ]
+          }
+        ],
+        "legendAt": "left:566px;top:44px;max-width:372px",
+        "legend": [
+          "[Wo?]",
+          "Das Bett steht an [der] Wand.",
+          "Der Stuhl steht vor [dem] Fenster.",
+          "Der Schrank steht neben [der] Tür.",
+          "[Wohin?]",
+          "Ich stelle den Tisch neben [das] Fenster."
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-wohnen-atelier-wg",
+      "file": "content/de/media/images/v4-a2-wohnen-atelier-wg.png",
+      "module": "a2-wohnen-atelier",
+      "activity": "a2-wohnen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Visite d’une chambre en colocation",
+      "alt": "Dans l’appartement, la colocataire accueille le visiteur : « Willkommen in unserer WG. ». Il demande ce qui s’ajoute au loyer : « Was kommt noch dazu? ». En haut : un lit, une lampe et une clé.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "home",
+        "people": [
+          {
+            "name": "Mitbewohnerin",
+            "say": "Willkommen in unserer WG."
+          },
+          {
+            "name": "Besucher",
+            "say": "Was kommt noch dazu?"
+          }
+        ],
+        "items": [
+          "bed-double",
+          "lamp",
+          "key-round"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-demarches-antrag",
+      "file": "content/de/media/images/v4-a2-demarches-antrag.png",
+      "module": "a2-demarches",
+      "activity": "a2-demarches-guide",
+      "usage": "illustration",
+      "title": "Le formulaire de carte de médiathèque",
+      "alt": "Formulaire « Bibliotheksausweis – Antrag » de la Stadtbibliothek West, rempli : Berger, Lina, Bergweg 8, 34117 Kassel, lina.berger@example.com ; le champ Telefonnummer (freiwillig) reste vide. En bas : apporter Ausweis et Adressnachweis.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "form",
+        "icon": "library",
+        "title": "Bibliotheksausweis – Antrag",
+        "subtitle": "Stadtbibliothek West",
+        "size": 27,
+        "fields": [
+          {
+            "label": "Familienname *",
+            "value": "Berger"
+          },
+          {
+            "label": "Vorname *",
+            "value": "Lina"
+          },
+          {
+            "label": "Straße und Hausnummer *",
+            "value": "Bergweg 8"
+          },
+          {
+            "label": "PLZ und Ort *",
+            "value": "34117 Kassel"
+          },
+          {
+            "label": "E-Mail-Adresse *",
+            "value": "lina.berger@example.com"
+          },
+          {
+            "label": "Telefonnummer",
+            "note": "freiwillig"
+          }
+        ],
+        "lines": [
+          {
+            "icon": "paperclip",
+            "text": "Zur Anmeldung mitbringen: [Ausweis] und [Adressnachweis]"
+          }
+        ],
+        "footer": "* Pflichtfeld"
+      }
+    },
+    {
+      "media": "v4-a2-demarches-erinnerung",
+      "file": "content/de/media/images/v4-a2-demarches-erinnerung.png",
+      "module": "a2-demarches",
+      "activity": "a2-demarches-guide",
+      "usage": "illustration",
+      "title": "Le rappel : date limite et rendez-vous",
+      "alt": "Courriel de rappel : « Ihre Unterlagen müssen bis Freitag, 12 Uhr, vorliegen. Ihr Termin ist am Montag um 10 Uhr. Bitte bestätigen Sie den Termin über den Link in dieser E-Mail. » En bas, un bouton « Termin bestätigen ».",
+      "caption": "bis = date limite · am … um … = rendez-vous",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Erinnerung",
+        "size": 30,
+        "meta": [
+          [
+            "Von",
+            "Stadtbibliothek West"
+          ],
+          [
+            "Betreff",
+            "Ihr Termin am Montag"
+          ]
+        ],
+        "lines": [
+          "Ihre Unterlagen müssen [bis Freitag, 12 Uhr], vorliegen.",
+          "Ihr Termin ist [am Montag um 10 Uhr].",
+          "Bitte bestätigen Sie den Termin über den Link in dieser E-Mail."
+        ],
+        "button": "Termin bestätigen"
+      }
+    },
+    {
+      "media": "v4-a2-demarches-telefon",
+      "file": "content/de/media/images/v4-a2-demarches-telefon.png",
+      "module": "a2-demarches",
+      "activity": "a2-demarches-pratique",
+      "usage": "illustration",
+      "title": "Déplacer un rendez-vous par téléphone",
+      "alt": "Au téléphone avec la médiathèque, une femme demande « Kann ich den Termin verschieben? » et l’employé demande « Haben Sie die Nummer? ». En haut : une bibliothèque, un téléphone, un calendrier et un document.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Anruferin",
+            "say": "Kann ich den Termin verschieben?"
+          },
+          {
+            "name": "Mitarbeiter",
+            "say": "Haben Sie die Nummer?"
+          }
+        ],
+        "items": [
+          "library",
+          "phone-call",
+          "calendar-days",
+          "file-text"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-demarches-status",
+      "file": "content/de/media/images/v4-a2-demarches-status.png",
+      "module": "a2-demarches",
+      "activity": "a2-demarches-approfondir",
+      "usage": "illustration",
+      "title": "Trois avis sur le dossier en ligne",
+      "alt": "Trois avis du dossier W-314. 08.40 : « Antrag gespeichert. Bitte laden Sie den Adressnachweis noch hoch. » 09.10 : « Unterlagen erhalten. Ihr Termin am Freitag um 16.45 Uhr ist bestätigt. » 11.20 : « Ihre Bitte um einen anderen Termin ist eingegangen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "inbox",
+        "title": "Stadtbibliothek West",
+        "subtitle": "Vorgang W-314",
+        "size": 26,
+        "messages": [
+          {
+            "from": "08.40",
+            "text": "Antrag [gespeichert]. Bitte laden Sie den Adressnachweis noch hoch."
+          },
+          {
+            "from": "09.10",
+            "text": "Unterlagen [erhalten]. Ihr Termin am Freitag um 16.45 Uhr ist [bestätigt]."
+          },
+          {
+            "from": "11.20",
+            "text": "Ihre Bitte um einen anderen Termin ist [eingegangen]. Bis zur neuen Bestätigung bleibt der Termin am Freitag bestehen."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-demarches-upload",
+      "file": "content/de/media/images/v4-a2-demarches-upload.png",
+      "module": "a2-demarches",
+      "activity": "a2-demarches-approfondir",
+      "usage": "illustration",
+      "title": "Un fichier refusé : lequel déposer ?",
+      "alt": "Page de dépôt en ligne avec un message d’erreur : « Datei zu groß. Erlaubt: PDF oder JPG, maximal 2 MB. » En dessous, trois fichiers : Adressnachweis.pdf (3 MB), Adressnachweis.jpg (1 MB) et Ausweis.pdf (1 MB).",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "upload",
+        "title": "Adressnachweis hochladen",
+        "subtitle": "Vorgang W-314",
+        "size": 31,
+        "intro": [
+          {
+            "icon": "triangle-alert",
+            "text": "[Datei zu groß.] Erlaubt: PDF oder JPG, maximal 2 MB."
+          }
+        ],
+        "rows": [
+          [
+            "Adressnachweis.pdf",
+            "3 MB"
+          ],
+          [
+            "Adressnachweis.jpg",
+            "1 MB"
+          ],
+          [
+            "Ausweis.pdf",
+            "1 MB"
+          ]
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reparations-pannen",
+      "file": "content/de/media/images/v4-a2-reparations-pannen.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-guide",
+      "usage": "illustration",
+      "title": "Quatre pannes dans un logement",
+      "alt": "Quatre vignettes : un robinet, « Der Wasserhahn tropft. » ; un radiateur, « Die Heizung bleibt kalt. » ; une porte, « Die Tür schließt nicht richtig. » ; une ampoule, « Das Licht flackert. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "faucet",
+            "label": "Der Wasserhahn tropft."
+          },
+          {
+            "icon": "heater",
+            "label": "Die Heizung bleibt kalt."
+          },
+          {
+            "icon": "door-open",
+            "label": "Die Tür schließt nicht richtig."
+          },
+          {
+            "icon": "lightbulb",
+            "label": "Das Licht flackert."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reparations-anruf",
+      "file": "content/de/media/images/v4-a2-reparations-anruf.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-pratique",
+      "usage": "illustration",
+      "title": "Appeler la gestion de l’immeuble",
+      "alt": "Chez elle, Nora Berger téléphone à la gestion de l’immeuble : « Guten Tag, hier ist Nora Berger. ». En haut : un téléphone, une clé à molette et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "home",
+        "people": [
+          {
+            "name": "Nora Berger",
+            "say": "Guten Tag, hier ist Nora Berger."
+          },
+          {
+            "name": "Hausverwaltung"
+          }
+        ],
+        "items": [
+          "phone-call",
+          "wrench",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reparations-avis",
+      "file": "content/de/media/images/v4-a2-reparations-avis.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-approfondir",
+      "usage": "illustration",
+      "title": "Le signalement et la réponse de la régie",
+      "alt": "N. Weber écrit : « Birkenstraße 6, 2. Stock links. Seit Samstag schließt die Tür zum Balkon nicht mehr richtig. Könnte jemand am Mittwoch nach zwei Uhr kommen? » La régie répond : « Der Techniker kommt am Mittwoch zwischen 15 und 17 Uhr. Bitte bestätigen Sie bis Dienstag, 18 Uhr. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "mail",
+        "title": "Hausverwaltung Nord",
+        "subtitle": "Birkenstraße 6",
+        "size": 25,
+        "messages": [
+          {
+            "side": "right",
+            "from": "N. Weber",
+            "text": "Ich wohne in der Birkenstraße 6, 2. Stock links. [Seit Samstag] schließt die Tür zum Balkon nicht mehr richtig. Könnte jemand am Mittwoch nach zwei Uhr kommen?"
+          },
+          {
+            "from": "Hausverwaltung Nord",
+            "text": "Der Techniker kommt am Mittwoch [zwischen 15 und 17 Uhr]. Bitte bestätigen Sie [bis Dienstag, 18 Uhr]. Halten Sie den Zugang zur Balkontür frei."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-reparations-wasserhahn",
+      "file": "content/de/media/images/v4-a2-reparations-wasserhahn.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Quel élément du logement pose problème ?",
+      "optionLabel": "Le robinet de la salle de bain",
+      "title": "Le robinet",
+      "alt": "Un robinet.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "faucet"
+      }
+    },
+    {
+      "media": "v4-a2-reparations-heizung",
+      "file": "content/de/media/images/v4-a2-reparations-heizung.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Quel élément du logement pose problème ?",
+      "optionLabel": "Le radiateur de la chambre",
+      "title": "Le radiateur",
+      "alt": "Un radiateur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "heater"
+      }
+    },
+    {
+      "media": "v4-a2-reparations-balkontuer",
+      "file": "content/de/media/images/v4-a2-reparations-balkontuer.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Quel élément du logement pose problème ?",
+      "optionLabel": "La porte du balcon",
+      "title": "La porte du balcon",
+      "alt": "Une porte entrouverte.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "door-open"
+      }
+    },
+    {
+      "media": "v4-a2-reparations-klingel",
+      "file": "content/de/media/images/v4-a2-reparations-klingel.png",
+      "module": "a2-reparations",
+      "activity": "a2-reparations-mission",
+      "usage": "illustration",
+      "title": "Le tableau des sonnettes",
+      "alt": "Tableau des sonnettes de l’immeuble Birkenstraße 6 : Seidel au 3e étage, Weber au 2e étage à gauche, Schuster au 2e étage à droite, Berger au 1er étage. En dessous : « Bitte klingeln Sie bei Seidel. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "icon": "bell-ring",
+        "title": "Birkenstraße 6",
+        "subtitle": "Klingeln",
+        "size": 33,
+        "rows": [
+          [
+            "Seidel",
+            "3. Stock"
+          ],
+          [
+            "Weber",
+            "2. Stock links"
+          ],
+          [
+            "Schuster",
+            "2. Stock rechts"
+          ],
+          [
+            "Berger",
+            "1. Stock"
+          ]
+        ],
+        "rowIcons": [
+          "bell",
+          "bell",
+          "bell",
+          "bell"
+        ],
+        "lines": [
+          {
+            "icon": "info",
+            "text": "Bitte klingeln Sie [bei Seidel]."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-anzeige",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-anzeige.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-guide",
+      "usage": "illustration",
+      "title": "L’offre d’apprentissage de la boulangerie",
+      "alt": "Offre d’apprentissage « Ausbildung – Bäckerei Kornhaus » : « Bäckerei Kornhaus sucht ab 1. September einen Auszubildenden oder eine Auszubildende. Sie arbeiten gern im Team und fangen früh an. Senden Sie Ihren Lebenslauf und Ihr letztes Zeugnis bis zum 12. Juni an Frau Weber. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "shop",
+        "icon": "croissant",
+        "title": "Ausbildung",
+        "subtitle": "Bäckerei Kornhaus",
+        "size": 30,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Bäckerei Kornhaus sucht [ab 1. September] einen Auszubildenden oder eine Auszubildende."
+          },
+          {
+            "icon": "users",
+            "text": "Sie arbeiten gern im Team und fangen früh an."
+          },
+          {
+            "icon": "mail",
+            "text": "Senden Sie Ihren [Lebenslauf] und Ihr letztes [Zeugnis] [bis zum 12. Juni] an Frau Weber."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-werkstatt",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-werkstatt.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-pratique",
+      "usage": "illustration",
+      "title": "Appeler l’atelier pour une offre",
+      "alt": "Au téléphone, l’employée de l’atelier demande « Was kann ich für Sie tun? » et le candidat demande « Ist die Stelle noch frei? ». En haut : un vélo, une clé à molette et un téléphone.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Was kann ich für Sie tun?"
+          },
+          {
+            "name": "Bewerber",
+            "say": "Ist die Stelle noch frei?"
+          }
+        ],
+        "items": [
+          "bike",
+          "wrench",
+          "phone-call"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-fahrrad",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-fahrrad.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Quel domaine concerne l’apprentissage ?",
+      "optionLabel": "La réparation de vélos",
+      "title": "La réparation de vélos",
+      "alt": "Un vélo vu de profil.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-tickets",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-tickets.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Quel domaine concerne l’apprentissage ?",
+      "optionLabel": "La vente de billets",
+      "title": "La vente de billets",
+      "alt": "Un billet.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "ticket"
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-kueche",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-kueche.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Quel domaine concerne l’apprentissage ?",
+      "optionLabel": "La cuisine",
+      "title": "La cuisine",
+      "alt": "Une toque de cuisinier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "chef-hat"
+      }
+    },
+    {
+      "media": "v4-a2-arbeit-atelier-mail",
+      "file": "content/de/media/images/v4-a2-arbeit-atelier-mail.png",
+      "module": "a2-arbeit-atelier",
+      "activity": "a2-arbeit-atelier-mission",
+      "usage": "illustration",
+      "title": "Un courriel de candidature",
+      "alt": "Courriel, objet « Bewerbung um die Ausbildung » : « Sehr geehrte Damen und Herren, ich bewerbe mich um die Ausbildung ab September, weil ich gern praktisch arbeite. Letzten Sommer war ich in einer Werkstatt. Meinen Lebenslauf finden Sie im Anhang. » Pièce jointe : Lebenslauf.pdf.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 27,
+        "meta": [
+          [
+            "An",
+            "Fahrradwerkstatt"
+          ],
+          [
+            "Betreff",
+            "Bewerbung um die Ausbildung"
+          ]
+        ],
+        "lines": [
+          "Sehr geehrte Damen und Herren,",
+          "ich bewerbe mich um die Ausbildung ab September, [weil ich gern praktisch arbeite]. Letzten Sommer [war] ich in einer Werkstatt.",
+          "Meinen Lebenslauf finden Sie im Anhang.",
+          "Mit freundlichen Grüßen",
+          {
+            "icon": "paperclip",
+            "text": "Lebenslauf.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-connecteurs-schema",
+      "file": "content/de/media/images/v4-a2-connecteurs-schema.png",
+      "module": "a2-connecteurs",
+      "activity": "a2-connecteurs-guide",
+      "usage": "illustration",
+      "title": "Quatre connecteurs et la place du verbe",
+      "alt": "Quatre cartes. weil (cause, verbe à la fin) : « Ich komme später, weil mein Bus Verspätung hat. » denn (cause, verbe en 2e position) : « …, denn mein Bus hat Verspätung. » deshalb (conséquence) : « Deshalb nehmen wir die Treppe. » trotzdem (opposition) : « Trotzdem findet das Fest statt. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "cards",
+        "size": 30,
+        "cards": [
+          {
+            "icon": "circle-help",
+            "title": "weil",
+            "subtitle": "Grund · Verb am Ende",
+            "lines": [
+              "Ich komme später, [weil] mein Bus Verspätung [hat]."
+            ]
+          },
+          {
+            "icon": "message-circle-question",
+            "title": "denn",
+            "subtitle": "Grund · Verb auf Platz 2",
+            "lines": [
+              "Ich komme später, [denn] mein Bus [hat] Verspätung."
+            ]
+          },
+          {
+            "icon": "circle-arrow-right",
+            "title": "deshalb",
+            "subtitle": "Folge · Verb direkt danach",
+            "lines": [
+              "Der Aufzug ist kaputt. [Deshalb] [nehmen] wir die Treppe."
+            ]
+          },
+          {
+            "icon": "umbrella",
+            "title": "trotzdem",
+            "subtitle": "Gegensatz · Verb direkt danach",
+            "lines": [
+              "Es regnet stark. [Trotzdem] [findet] das Fest statt."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-connecteurs-abendkurs",
+      "file": "content/de/media/images/v4-a2-connecteurs-abendkurs.png",
+      "module": "a2-connecteurs",
+      "activity": "a2-connecteurs-guide",
+      "usage": "illustration",
+      "title": "Trois messages du cours du soir",
+      "alt": "Trois messages dans le groupe d’un cours du soir : « Wir treffen uns heute in Raum 12, weil Raum 7 geschlossen ist. » — « Der Drucker funktioniert nicht. Deshalb schickt die Lehrerin das Blatt per E-Mail. » — « Am Abend regnet es. Trotzdem findet der Fahrradkurs statt. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "messages-square",
+        "title": "Abendkurs",
+        "subtitle": "Gruppe",
+        "size": 28,
+        "messages": [
+          {
+            "from": "Sekretariat",
+            "text": "Wir treffen uns heute in Raum 12, [weil] Raum 7 geschlossen ist."
+          },
+          {
+            "from": "Sekretariat",
+            "text": "Der Drucker funktioniert nicht. [Deshalb] schickt die Lehrerin das Blatt per E-Mail."
+          },
+          {
+            "from": "Fahrradkurs",
+            "text": "Am Abend regnet es. [Trotzdem] findet der Fahrradkurs statt."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-connecteurs-raum",
+      "file": "content/de/media/images/v4-a2-connecteurs-raum.png",
+      "module": "a2-connecteurs",
+      "activity": "a2-connecteurs-pratique",
+      "usage": "illustration",
+      "title": "Un atelier de réparation change de salle",
+      "alt": "Deux bénévoles d’un atelier de réparation. Elle dit « Wir können hier nicht arbeiten. », il répond « Ich habe heute wenig Zeit. ». En haut : une clé à molette, une clé, une porte et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Organisatorin",
+            "say": "Wir können hier nicht arbeiten."
+          },
+          {
+            "name": "Helfer",
+            "say": "Ich habe heute wenig Zeit."
+          }
+        ],
+        "items": [
+          "wrench",
+          "key-round",
+          "door-open",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-connecteurs-kueche",
+      "file": "content/de/media/images/v4-a2-connecteurs-kueche.png",
+      "module": "a2-connecteurs",
+      "activity": "a2-connecteurs-approfondir",
+      "usage": "illustration",
+      "title": "Deux notes pour la cuisine collective",
+      "alt": "Deux notes. Notiz 1 : « Die Lieferung kommt erst um zwölf. Deshalb können wir um elf noch nicht kochen. Wir öffnen trotzdem um halb eins, denn die Suppe ist schon fertig. » Notiz 2 : « Wir verschieben den Kochkurs, weil zwei Personen fehlen. Die Gäste können trotzdem zum Mittagessen kommen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "cards",
+        "setting": "kitchen",
+        "size": 31,
+        "cards": [
+          {
+            "icon": "cooking-pot",
+            "title": "Notiz 1",
+            "lines": [
+              "Die Lieferung kommt erst um zwölf. [Deshalb] können wir um elf noch nicht kochen.",
+              "Wir öffnen [trotzdem] um halb eins, [denn] die Suppe ist schon fertig."
+            ]
+          },
+          {
+            "icon": "chef-hat",
+            "title": "Notiz 2",
+            "lines": [
+              "Wir verschieben den Kochkurs, [weil] zwei Personen fehlen.",
+              "Die Gäste können [trotzdem] zum Mittagessen kommen."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-connecteurs-zettel",
+      "file": "content/de/media/images/v4-a2-connecteurs-zettel.png",
+      "module": "a2-connecteurs",
+      "activity": "a2-connecteurs-correction",
+      "usage": "illustration",
+      "title": "L’affichette sur la porte",
+      "alt": "Affichette « Heute: neuer Raum! » : « Wir sind im Raum neben der Bibliothek. Bitte den Seiteneingang benutzen. Beginn wie geplant um 15 Uhr. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "icon": "info",
+        "title": "Heute: neuer Raum!",
+        "size": 38,
+        "lines": [
+          {
+            "icon": "map-pin",
+            "text": "Wir sind im Raum [neben der Bibliothek]."
+          },
+          {
+            "icon": "door-open",
+            "text": "Bitte den [Seiteneingang] benutzen."
+          },
+          {
+            "icon": "clock",
+            "text": "Beginn wie geplant um [15 Uhr]."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-chat",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-chat.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-guide",
+      "usage": "illustration",
+      "title": "Une invitation déplacée",
+      "alt": "Échange de messages avec Emre : « Hast du am Freitag Lust auf einen Spaziergang? Ich bin ab sechs am Fluss. » — « Danke für die Einladung! Am Freitag helfe ich meinem Bruder. Hast du am Samstag um elf Zeit? Wir können uns an der Brücke treffen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Emre",
+        "size": 30,
+        "messages": [
+          {
+            "from": "Emre",
+            "text": "Hast du am Freitag Lust auf einen Spaziergang? Ich bin ab sechs am Fluss."
+          },
+          {
+            "side": "right",
+            "text": "Danke für die Einladung! Am Freitag helfe ich meinem Bruder. [Hast du am Samstag um elf Zeit?] Wir können uns an der Brücke treffen."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-einladung",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-einladung.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Une invitation pour le week-end",
+      "alt": "Chez elle, l’hôtesse demande à son ami « Hast du Lust, vorbeizukommen? » et il propose « Treffen wir uns am Sonntag? ». En haut : des cotillons, un cadeau et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "home",
+        "people": [
+          {
+            "name": "Gastgeberin",
+            "say": "Hast du Lust, vorbeizukommen?"
+          },
+          {
+            "name": "Freund",
+            "say": "Treffen wir uns am Sonntag?"
+          }
+        ],
+        "items": [
+          "party-popper",
+          "gift",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-geburtstag",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-geburtstag.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "a",
+      "question": "Quelle est l’occasion de la première invitation ?",
+      "optionLabel": "Un anniversaire",
+      "title": "Un anniversaire",
+      "alt": "Un gâteau d’anniversaire avec des bougies.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "cake"
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-schulausflug",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-schulausflug.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "b",
+      "question": "Quelle est l’occasion de la première invitation ?",
+      "optionLabel": "Une sortie scolaire",
+      "title": "Une sortie scolaire",
+      "alt": "Une école.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "school"
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-umzug",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-umzug.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-controle",
+      "usage": "option",
+      "questionId": "q1",
+      "optionId": "c",
+      "question": "Quelle est l’occasion de la première invitation ?",
+      "optionLabel": "Un déménagement",
+      "title": "Un déménagement",
+      "alt": "Un carton fermé.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "package"
+      }
+    },
+    {
+      "media": "v4-a2-beziehungen-atelier-regen",
+      "file": "content/de/media/images/v4-a2-beziehungen-atelier-regen.png",
+      "module": "a2-beziehungen-atelier",
+      "activity": "a2-beziehungen-atelier-mission",
+      "usage": "illustration",
+      "title": "Proposer un autre lieu à cause de la pluie",
+      "alt": "Message à Emre : « Im Park wird es wohl regnen. Wollen wir uns um drei im Café am Markt treffen? ». Emre répond « Gute Idee! Bis Sonntag um drei. ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Emre",
+        "size": 31,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Im Park wird es wohl regnen. Wollen wir uns [um drei] [im Café am Markt] treffen?"
+          },
+          {
+            "from": "Emre",
+            "text": "Gute Idee! Bis Sonntag um drei."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-verbes-prepositions-aushang",
+      "file": "content/de/media/images/v4-a2-verbes-prepositions-aushang.png",
+      "module": "a2-verbes-prepositions",
+      "activity": "a2-verbes-prepositions-guide",
+      "usage": "illustration",
+      "title": "L’annonce de la maison de quartier",
+      "alt": "Affiche « Fotokurs am Samstag » : « Wir bieten am Samstag einen Fotokurs an. Interessieren Sie sich für den Kurs? Schreiben Sie uns bis Mittwoch. Warten Sie dann auf unsere Bestätigung. Fragen zum Programm? Sprechen Sie mit dem Kursleiter, Herrn Stein. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "city",
+        "icon": "camera",
+        "title": "Fotokurs am Samstag",
+        "subtitle": "Bürgerhaus",
+        "size": 30,
+        "lines": [
+          "Wir bieten am Samstag einen Fotokurs an.",
+          "Interessieren Sie sich [für den] Kurs? Schreiben Sie uns bis Mittwoch.",
+          "Warten Sie dann [auf unsere] Bestätigung.",
+          "Fragen zum Programm? Sprechen Sie [mit dem] Kursleiter, Herrn Stein."
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-verbes-prepositions-schema",
+      "file": "content/de/media/images/v4-a2-verbes-prepositions-schema.png",
+      "module": "a2-verbes-prepositions",
+      "activity": "a2-verbes-prepositions-guide",
+      "usage": "illustration",
+      "title": "Trois verbes et leur préposition",
+      "alt": "Tableau de trois verbes : warten auf + accusatif (auf den Bus, auf die Bestätigung) ; sprechen mit + datif (mit dem Kursleiter, mit der Kursleiterin) ; sich interessieren für + accusatif (für den Fotokurs, für die Ausstellung).",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "icon": "link",
+        "title": "Verben mit Präposition",
+        "columns": [
+          "Verb",
+          "Kasus",
+          "Beispiele"
+        ],
+        "size": 29,
+        "center": true,
+        "rows": [
+          [
+            "warten [auf]",
+            "+ Akkusativ",
+            "[auf den] Bus\n[auf die] Bestätigung"
+          ],
+          [
+            "sprechen [mit]",
+            "+ Dativ",
+            "[mit dem] Kursleiter\n[mit der] Kursleiterin"
+          ],
+          [
+            "sich interessieren [für]",
+            "+ Akkusativ",
+            "[für den] Fotokurs\n[für die] Ausstellung"
+          ]
+        ],
+        "rowIcons": [
+          "hourglass",
+          "messages-square",
+          "heart"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-verbes-prepositions-eingang",
+      "file": "content/de/media/images/v4-a2-verbes-prepositions-eingang.png",
+      "module": "a2-verbes-prepositions",
+      "activity": "a2-verbes-prepositions-pratique",
+      "usage": "illustration",
+      "title": "Attendre devant la maison de quartier",
+      "alt": "Devant l’entrée d’une maison de quartier, Mia demande à Leon « Worauf wartest du genau? » et Leon répond « Auf die Bestätigung. ». En haut : un appareil photo, une toque de cuisinier, un téléphone portable et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "city",
+        "people": [
+          {
+            "name": "Mia",
+            "say": "Worauf wartest du genau?"
+          },
+          {
+            "name": "Leon",
+            "say": "Auf die Bestätigung."
+          }
+        ],
+        "items": [
+          "camera",
+          "chef-hat",
+          "smartphone",
+          "clock"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-verbes-prepositions-fragen",
+      "file": "content/de/media/images/v4-a2-verbes-prepositions-fragen.png",
+      "module": "a2-verbes-prepositions",
+      "activity": "a2-verbes-prepositions-approfondir",
+      "usage": "illustration",
+      "title": "Une chose ou une personne : quelle question ?",
+      "alt": "Tableau à deux colonnes. Chose : « Worauf wartest du? – Auf den Bescheid. », « Womit fährst du? – Mit der Straßenbahn. », « Wofür interessierst du dich? – Für den Zeichenkurs. ». Personne : « Auf wen wartest du? – Auf den Trainer. », « Mit wem sprichst du? – Mit der Lehrerin. ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "table",
+        "icon": "circle-help",
+        "title": "Sache oder Person?",
+        "columns": [
+          "Sache",
+          "Person"
+        ],
+        "size": 30,
+        "center": true,
+        "rows": [
+          [
+            "[Worauf] wartest du?\nAuf den Bescheid.",
+            "[Auf wen] wartest du?\nAuf den Trainer."
+          ],
+          [
+            "[Womit] fährst du?\nMit der Straßenbahn.",
+            "[Mit wem] sprichst du?\nMit der Lehrerin."
+          ],
+          [
+            "[Wofür] interessierst du dich?\nFür den Zeichenkurs.",
+            "—"
+          ]
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-kultur-atelier-plakat",
+      "file": "content/de/media/images/v4-a2-kultur-atelier-plakat.png",
+      "module": "a2-kultur-atelier",
+      "activity": "a2-kultur-atelier-guide",
+      "usage": "illustration",
+      "title": "L’affiche de la fête de la cour",
+      "alt": "Affiche « Hoffest am Samstag » : « Am Samstag findet unser Hoffest statt. Wir beginnen um drei. Bei Regen treffen wir uns im Gemeindehaus. Bitte bringen Sie Ihren eigenen Becher mit. Getränke gibt es vor Ort. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "party",
+        "icon": "party-popper",
+        "title": "Hoffest am Samstag",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Am Samstag findet unser Hoffest statt."
+          },
+          {
+            "icon": "clock",
+            "text": "Wir beginnen [um drei]."
+          },
+          {
+            "icon": "cloud-rain",
+            "text": "Bei Regen treffen wir uns [im Gemeindehaus]."
+          },
+          {
+            "icon": "cup-soda",
+            "text": "Bitte bringen Sie Ihren [eigenen Becher] mit."
+          },
+          {
+            "icon": "glass-water",
+            "text": "Getränke gibt es vor Ort."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-kultur-atelier-orte",
+      "file": "content/de/media/images/v4-a2-kultur-atelier-orte.png",
+      "module": "a2-kultur-atelier",
+      "activity": "a2-kultur-atelier-guide",
+      "usage": "illustration",
+      "title": "Deux lieux à comparer",
+      "alt": "Deux fiches : der Garten, 30 places au soleil ; der Saal, 50 places, à l’abri en cas de pluie.",
+      "caption": "Der Saal ist größer als der Garten.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "cards",
+        "height": 400,
+        "size": 34,
+        "center": true,
+        "cards": [
+          {
+            "icon": "trees",
+            "title": "der Garten",
+            "lines": [
+              {
+                "icon": "users",
+                "text": "30 Plätze"
+              },
+              {
+                "icon": "sun",
+                "text": "in der Sonne"
+              }
+            ]
+          },
+          {
+            "icon": "building",
+            "title": "der Saal",
+            "lines": [
+              {
+                "icon": "users",
+                "text": "50 Plätze"
+              },
+              {
+                "icon": "umbrella",
+                "text": "bei Regen geschützt"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-kultur-atelier-hof",
+      "file": "content/de/media/images/v4-a2-kultur-atelier-hof.png",
+      "module": "a2-kultur-atelier",
+      "activity": "a2-kultur-atelier-pratique",
+      "usage": "illustration",
+      "title": "Proposer son aide pour la fête",
+      "alt": "Dans la cour, une nouvelle voisine dit « Ich bin neu im Viertel. » et l’organisateur lui demande « Möchten Sie auch mitmachen? ». En haut : des couverts, une note de musique et un soleil derrière un nuage.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "party",
+        "people": [
+          {
+            "name": "Nachbarin",
+            "say": "Ich bin neu im Viertel."
+          },
+          {
+            "name": "Organisator",
+            "say": "Möchten Sie auch mitmachen?"
+          }
+        ],
+        "items": [
+          "utensils",
+          "music",
+          "cloud-sun"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-berlin-atelier-route",
+      "file": "content/de/media/images/v4-a2-berlin-atelier-route.png",
+      "module": "a2-berlin-atelier",
+      "activity": "a2-berlin-atelier-guide",
+      "usage": "illustration",
+      "title": "De l’Alexanderplatz à la porte de Brandebourg",
+      "alt": "Trajet en trois étapes : rendez-vous à l’Alexanderplatz, S-Bahn jusqu’à Friedrichstraße où l’on descend, puis à pied jusqu’au Brandenburger Tor. Note : « Bei Regen warten wir am Bahnhof auf dich. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "route",
+        "setting": "city",
+        "height": 400,
+        "title": "Treffpunkt Alexanderplatz",
+        "steps": [
+          {
+            "icon": "map-pin",
+            "label": "Alexanderplatz",
+            "sub": "Treffpunkt"
+          },
+          {
+            "icon": "signpost",
+            "label": "Friedrichstraße",
+            "sub": "aussteigen"
+          },
+          {
+            "icon": "landmark",
+            "label": "Brandenburger Tor",
+            "sub": "Ziel"
+          }
+        ],
+        "links": [
+          {
+            "icon": "train-front",
+            "label": "mit der S-Bahn"
+          },
+          {
+            "icon": "footprints",
+            "label": "zu Fuß"
+          }
+        ],
+        "note": "Bei Regen warten wir am Bahnhof auf dich.",
+        "noteIcon": "umbrella"
+      }
+    },
+    {
+      "media": "v4-a2-berlin-atelier-mauer",
+      "file": "content/de/media/images/v4-a2-berlin-atelier-mauer.png",
+      "module": "a2-berlin-atelier",
+      "activity": "a2-berlin-atelier-guide",
+      "usage": "illustration",
+      "title": "Le Mur de Berlin en deux dates",
+      "alt": "Frise : « Früher war Berlin geteilt. » De 1961 à 1989, le Mur de Berlin était debout ; le 9 novembre 1989, beaucoup de gens ont pu de nouveau franchir la frontière.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "route",
+        "variant": "timeline",
+        "setting": "city",
+        "height": 400,
+        "stepWidth": 330,
+        "title": "Früher [war] Berlin geteilt.",
+        "steps": [
+          {
+            "icon": "brick-wall",
+            "label": "1961 – 1989",
+            "sub": "Die Berliner Mauer [stand]."
+          },
+          {
+            "icon": "door-open",
+            "label": "9. November 1989",
+            "sub": "Viele Menschen [konnten] die Grenze wieder überqueren."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-berlin-atelier-weg",
+      "file": "content/de/media/images/v4-a2-berlin-atelier-weg.png",
+      "module": "a2-berlin-atelier",
+      "activity": "a2-berlin-atelier-pratique",
+      "usage": "illustration",
+      "title": "Demander la suite du trajet",
+      "alt": "Dans une rue de Berlin, une visiteuse demande « Wie geht es dann weiter? » et un passant répond « Gehen Sie bis Unter den Linden. ». En haut : un monument, un train, un plan et des traces de pas.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "city",
+        "people": [
+          {
+            "name": "Besucherin",
+            "say": "Wie geht es dann weiter?"
+          },
+          {
+            "name": "Passant",
+            "say": "Gehen Sie bis Unter den Linden."
+          }
+        ],
+        "items": [
+          "landmark",
+          "train-front",
+          "map",
+          "footprints"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-berlin-atelier-plan",
+      "file": "content/de/media/images/v4-a2-berlin-atelier-plan.png",
+      "module": "a2-berlin-atelier",
+      "activity": "a2-berlin-atelier-mission",
+      "usage": "illustration",
+      "title": "Plan simplifié : de Friedrichstraße à la porte",
+      "alt": "Plan simplifié : on sort de la station Friedrichstraße, on marche jusqu’à Unter den Linden, on tourne à droite et on voit le Brandenburger Tor au bout de la rue, environ 15 minutes à pied depuis la station. Encadré : les étapes du trajet et la durée de la marche.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "plan",
+        "setting": "city",
+        "streets": [
+          {
+            "points": [
+              [
+                200,
+                660
+              ],
+              [
+                200,
+                -20
+              ]
+            ],
+            "name": "Friedrichstraße",
+            "labelAt": [
+              200,
+              78
+            ],
+            "rotate": -90
+          },
+          {
+            "points": [
+              [
+                -20,
+                190
+              ],
+              [
+                980,
+                190
+              ]
+            ],
+            "name": "Unter den Linden",
+            "labelAt": [
+              100,
+              190
+            ]
+          }
+        ],
+        "route": [
+          [
+            200,
+            505
+          ],
+          [
+            200,
+            190
+          ],
+          [
+            735,
+            190
+          ]
+        ],
+        "places": [
+          {
+            "at": [
+              200,
+              570
+            ],
+            "icon": "train-front",
+            "label": "S-Bahnhof Friedrichstraße",
+            "labelSide": "right"
+          },
+          {
+            "at": [
+              830,
+              190
+            ],
+            "icon": "landmark",
+            "label": "Brandenburger Tor",
+            "labelSide": "bottom"
+          }
+        ],
+        "labels": [
+          {
+            "text": "rechts",
+            "at": [
+              300,
+              132
+            ]
+          }
+        ],
+        "legendAt": "right:24px;bottom:24px;max-width:390px",
+        "legend": [
+          "Du fährst mit der S-Bahn bis [Friedrichstraße].",
+          "Du gehst bis [Unter den Linden].",
+          "Dort biegst du [rechts] ab. Das Tor siehst du am Ende der Straße.",
+          "Zu Fuß brauchst du [ca. 15 Minuten]."
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-umtausch",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-umtausch.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-guide",
+      "usage": "illustration",
+      "title": "Les conditions d’échange du magasin",
+      "alt": "Affichette « Umtausch » : « Ein Umtausch ist bis zum 28. Mai möglich. Bitte bringen Sie den Kassenbon mit. Die Ware darf nicht getragen sein. Ist ein anderes Modell teurer, zahlen Sie den Unterschied. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "shop",
+        "icon": "refresh-ccw",
+        "title": "Umtausch",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Ein Umtausch ist [bis zum 28. Mai] möglich."
+          },
+          {
+            "icon": "receipt",
+            "text": "Bitte bringen Sie den [Kassenbon] mit."
+          },
+          {
+            "icon": "shirt",
+            "text": "Die Ware darf [nicht getragen] sein."
+          },
+          {
+            "icon": "euro",
+            "text": "Ist ein anderes Modell teurer, zahlen Sie den [Unterschied]."
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-groessen",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-groessen.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-guide",
+      "usage": "illustration",
+      "title": "Article, couleur, taille",
+      "alt": "Trois vignettes : une veste bleue, « die Jacke · blau · M » ; un manteau gris, « der Mantel · grau · L » ; une chemise blanche dessinée en gris clair, « das Hemd · weiß · S ».",
+      "caption": "diese blaue Jacke · diesen grauen Mantel · dieses weiße Hemd",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 400,
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "jacket",
+            "label": "die Jacke · blau · M",
+            "color": "#1f6feb"
+          },
+          {
+            "icon": "jacket",
+            "label": "der Mantel · grau · L",
+            "color": "#868e96"
+          },
+          {
+            "icon": "shirt",
+            "label": "das Hemd · weiß · S",
+            "color": "#adb5bd"
+          }
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-kasse",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-kasse.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-pratique",
+      "usage": "illustration",
+      "title": "Échanger une veste en caisse",
+      "alt": "À la caisse d’un magasin de vêtements, la cliente dit « Ich möchte die Jacke umtauschen. » et le vendeur demande « Haben Sie den Kassenbon dabei? ». En haut : une veste, un ticket de caisse et une étiquette.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 600,
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Kundin",
+            "say": "Ich möchte die Jacke umtauschen."
+          },
+          {
+            "name": "Verkäufer",
+            "say": "Haben Sie den Kassenbon dabei?"
+          }
+        ],
+        "items": [
+          "jacket",
+          "receipt",
+          "tag"
+        ]
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-karte",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-karte.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "a",
+      "question": "Comment le client souhaite-t-il payer ?",
+      "optionLabel": "Par carte",
+      "title": "Par carte",
+      "alt": "Une carte bancaire.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "credit-card"
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-bar",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-bar.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "b",
+      "question": "Comment le client souhaite-t-il payer ?",
+      "optionLabel": "En espèces",
+      "title": "En espèces",
+      "alt": "Un billet de banque.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "banknote"
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-ueberweisung",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-ueberweisung.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-controle",
+      "usage": "option",
+      "questionId": "q4",
+      "optionId": "c",
+      "question": "Comment le client souhaite-t-il payer ?",
+      "optionLabel": "Par virement",
+      "title": "Par virement",
+      "alt": "Une façade de banque à colonnes, pour un virement.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 480,
+      "height": 480,
+      "image": {
+        "layout": "single",
+        "icon": "landmark"
+      }
+    },
+    {
+      "media": "v4-a2-einkaufen-atelier-kassenbon",
+      "file": "content/de/media/images/v4-a2-einkaufen-atelier-kassenbon.png",
+      "module": "a2-einkaufen-atelier",
+      "activity": "a2-einkaufen-atelier-mission",
+      "usage": "illustration",
+      "title": "Le ticket du pull acheté lundi",
+      "alt": "Ticket de caisse du magasin « Mode am Markt », bon numéro 2318, lundi : Pullover, rot, Gr. M, 35,00 € ; somme 35,00 € ; payé en espèces ; échange possible pendant 14 jours avec le ticket. À droite, un haut.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "width": 960,
+      "height": 640,
+      "image": {
+        "layout": "receipt",
+        "setting": "shop",
+        "icon": "shirt",
+        "title": "Mode am Markt",
+        "subtitle": "Bon-Nr. 2318 · Montag",
+        "lines": [
+          [
+            "Pullover, rot, Gr. M",
+            "35,00 €"
+          ]
+        ],
+        "total": [
+          "Summe",
+          "35,00 €"
+        ],
+        "notes": [
+          "Bar bezahlt",
+          "Umtausch innerhalb von 14 Tagen nur mit Kassenbon"
+        ]
+      }
+    }
+  ]
+}

@@ -31,16 +31,20 @@ import org.linguacap.learning.LibraryResource.LibraryPlacement;
 import org.linguacap.learning.LibraryResource.Practice;
 
 /**
- * Contenu de la bibliothèque : versions publiées lues dans le catalogue, derniers scores lus dans Évaluations et
- * adresses temporaires des supports demandées à Médias avec le jeton de l'utilisateur (même logique que les séances).
- * Aucun corrigé n'est servi : le catalogue livre les activités sans réponses attendues.
+ * Contenu de la bibliothèque : versions publiées lues dans le catalogue, derniers scores (et exercices « à revoir »)
+ * lus dans Évaluations et adresses temporaires des supports demandées à Médias avec le jeton de l'utilisateur (même
+ * logique que les séances). Aucun corrigé n'est servi : le catalogue livre les questions en vues élève, sans réponses
+ * attendues ni explications, et Apprentissage retire encore toute clé de corrigé par sécurité.
  */
 @ApplicationScoped
 class LibraryContent {
     private static final Logger LOG = Logger.getLogger(LibraryContent.class);
     static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
-    /** Seules les leçons et les exercices sont en accès libre : révisions et évaluations restent dans le parcours. */
-    static final Set<String> KINDS = Set.of("lesson", "exercise");
+    /**
+     * Leçons, exercices et missions sont en accès libre : révisions et évaluations restent dans le parcours. Une
+     * mission remise depuis la bibliothèque est envoyée au correcteur de l'élève (Évaluations).
+     */
+    static final Set<String> KINDS = Set.of("lesson", "exercise", "mission");
     /** Langue des versions publiées avant les parcours multi-langues : tout le catalogue était en allemand. */
     static final String LEGACY_LANGUAGE = "de";
 
@@ -102,29 +106,39 @@ class LibraryContent {
      * la bibliothèque reste lisible sans les scores.
      */
     Map<String, LastResult> lastResults(UUID callerId, UUID learnerId) {
+        return lastResults(grades(callerId, learnerId));
+    }
+
+    /** Résultats de l'élève, du plus récent au plus ancien ; un tableau vide si Évaluations est indisponible. */
+    JsonNode grades(UUID callerId, UUID learnerId) {
+        if (learnerId == null) return mapper.createArrayNode();
         String path = "/v1/assessments/results" + (callerId.equals(learnerId) ? "" : "?learnerId=" + learnerId);
-        JsonNode grades;
         try {
-            grades = services.request(assessmentUrl, path, "GET", callerId, null);
+            return services.request(assessmentUrl, path, "GET", callerId, null);
         } catch (WebApplicationException error) {
             LOG.warnf("Assessment results unavailable for the library (HTTP %d)", error.getResponse().getStatus());
-            return Map.of();
+            return mapper.createArrayNode();
         }
-        return lastResults(grades);
     }
 
     /** Les résultats arrivent du plus récent au plus ancien : le premier de chaque leçon est le dernier score. */
     static Map<String, LastResult> lastResults(JsonNode grades) {
         Map<String, LastResult> results = new HashMap<>();
-        if (grades == null || !grades.isArray()) return results;
-        for (JsonNode grade : grades) {
-            String lessonId = grade.path("lessonId").asText("");
-            String kind = grade.path("kind").asText("quiz");
-            if (lessonId.isEmpty() || !"quiz".equals(kind) || results.containsKey(lessonId)) continue;
-            results.put(lessonId, new LastResult(grade.path("correct").asInt(), grade.path("total").asInt(),
-                    grade.path("submittedAt").asText()));
-        }
+        CourseRules.latestGrades(grades).forEach((lessonId, grade) -> results.put(lessonId,
+                new LastResult(grade.path("correct").asInt(), grade.path("total").asInt(), grade.path("submittedAt").asText())));
         return results;
+    }
+
+    /**
+     * Exercices « à revoir » (clé : leçon) : leur dernier résultat porte des questions à revoir (Grade.flagged). Une
+     * reprise réussie, plus récente, efface le marquage.
+     */
+    static Set<String> toReview(JsonNode grades) {
+        Set<String> lessons = new HashSet<>();
+        CourseRules.latestGrades(grades).forEach((lessonId, grade) -> {
+            if (!CourseRules.flagged(grade).isEmpty()) lessons.add(lessonId);
+        });
+        return Set.copyOf(lessons);
     }
 
     /**
@@ -225,7 +239,8 @@ class LibraryContent {
         }
         List<String> competences = new ArrayList<>();
         for (JsonNode competence : activity.path("competences")) competences.add(competence.asText());
-        JsonNode questions = content.path("questions").isArray() ? content.path("questions") : mapper.createArrayNode();
+        // Vues élève typées, sans corrigé : le corrigé de chaque question n'arrive qu'avec le résultat de la remise.
+        JsonNode questions = CourseRules.publicQuestions(content.path("questions"));
         return new LibraryActivity(activity.path("id").asText(activityId), activity.path("position").asInt(),
                 activity.path("kind").asText(), activity.path("title").asText(), activity.path("estimatedMinutes").asInt(),
                 List.copyOf(competences), "todo", mapper.createObjectNode(), null, null,
@@ -233,7 +248,7 @@ class LibraryContent {
                         lesson.path("description").asText()) : null,
                 transcriptAllowed && lesson.isObject() ? nullable(lesson.path("transcript")) : null,
                 questions, withFiles(callerId, placements), versionId, track.path("levelCode").asText(),
-                module.path("id").asText(), module.path("title").asText());
+                module.path("id").asText(), module.path("title").asText(), CourseRules.missionDefinition(content));
     }
 
     /**
@@ -283,7 +298,7 @@ class LibraryContent {
         return languageId.isEmpty() ? LEGACY_LANGUAGE : languageId;
     }
 
-    /** Module contenant une leçon ou un exercice de la version, ou null (activité absente ou hors accès libre). */
+    /** Module contenant une leçon, un exercice ou une mission de la version, ou null (absente ou hors accès libre). */
     static JsonNode moduleOf(JsonNode track, String activityId) {
         for (JsonNode module : track.path("modules")) {
             for (JsonNode activity : module.path("activities")) {
@@ -295,8 +310,13 @@ class LibraryContent {
         return null;
     }
 
-    /** Modules d'une version et leurs leçons et exercices, avec le dernier score de chaque exercice. */
+    /** Modules d'une version et leurs leçons, exercices et missions, avec le dernier score de chaque exercice. */
     static List<LibraryModule> modules(JsonNode track, Map<String, LastResult> results) {
+        return modules(track, results, Set.of());
+    }
+
+    /** toReview : leçons des exercices « à revoir » (voir {@link #toReview(JsonNode)}). */
+    static List<LibraryModule> modules(JsonNode track, Map<String, LastResult> results, Set<String> toReview) {
         List<LibraryModule> modules = new ArrayList<>();
         for (JsonNode module : track.path("modules")) {
             List<LibraryActivityItem> activities = new ArrayList<>();
@@ -304,14 +324,16 @@ class LibraryContent {
                 String kind = activity.path("kind").asText();
                 if (!KINDS.contains(kind)) continue;
                 String lessonId = nullable(activity.path("lessonId"));
+                boolean exercise = "exercise".equals(kind) && lessonId != null;
                 List<String> competences = new ArrayList<>();
                 for (JsonNode competence : activity.path("competences")) competences.add(competence.asText());
                 activities.add(new LibraryActivityItem(activity.path("id").asText(), kind, activity.path("title").asText(),
                         activity.path("estimatedMinutes").asInt(), List.copyOf(competences), lessonId,
-                        "exercise".equals(kind) && lessonId != null ? results.get(lessonId) : null));
+                        exercise ? results.get(lessonId) : null, exercise && toReview.contains(lessonId)));
             }
             modules.add(new LibraryModule(module.path("id").asText(), module.path("position").asInt(),
-                    module.path("title").asText(), module.path("objective").asText(""), List.copyOf(activities)));
+                    module.path("title").asText(), module.path("objective").asText(""), List.copyOf(activities),
+                    module.path("vocabularyCount").asInt(0)));
         }
         return List.copyOf(modules);
     }

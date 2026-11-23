@@ -1,0 +1,3714 @@
+{
+  "id": "a2-reisen",
+  "title": "Gute Reise ! Voyager et raconter ses vacances",
+  "objective": "Réserver un billet de train et une chambre d’hôtel, se débrouiller à la gare et à la réception, dire où l’on part (nach Wien, in die Schweiz, ans Meer, in die Berge), parler du temps qu’il fait et raconter ses vacances au passé composé (Perfekt avec haben ou sein).",
+  "prerequisites": [],
+  "audioProfile": "a2-debut",
+  "sources": [
+    "Deutsch im Blick, Kapitel 6 « Durch Deutschland und die Welt reisen » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Reisen, Verkehrsmittel, Unterkunft, Reiseziele, Wie war’s dort?, Wetter)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre « Die Reise » (A : raisons de passer ses vacances chez soi, arguments avec erstens … et einerseits … andererseits, destinations préférées des Allemands et essor du camping ; D : jeu de rôle pour organiser un voyage avec un ami, würde gern) et chapitre « Das Auto » (C : effet des transports sur l’environnement), adaptés dans les activités « Urlaub auf Balkonien » et « Wohin fahren wir im Sommer? »",
+    "Deutsch im Blick, Kapitel 6 (COERLL, Université du Texas à Austin) : enregistrements natifs voc_06_06_onatrip, voc_06_04_modes, voc_06_12_weather, pho_06_01_voiced-voiceless-stops, pho_06_03_bp, pho_06_04_dt, pho_06_05_gk, pho_06_06_s et pho_06_07_vf, et photos k01/001-001, k06/041-164, k06/041-165, k06/041-166 et k06/041-167 (CC BY 4.0), dans les activités « Auf einer Reise », « Wie ist das Wetter? » et « Aussprache »"
+  ],
+  "grammarFocus": [
+    "perfekt-haben-sein",
+    "participe-passe",
+    "destinations-nach-in-an"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-reisen.mjs",
+  "vocabulary": [
+    {
+      "id": "zug",
+      "word": "Zug",
+      "article": "der",
+      "plural": "Züge",
+      "partOfSpeech": "noun",
+      "translation": "le train",
+      "example": "Der Zug fährt um acht Uhr zwölf ab.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "flugzeug",
+      "word": "Flugzeug",
+      "article": "das",
+      "plural": "Flugzeuge",
+      "partOfSpeech": "noun",
+      "translation": "l’avion",
+      "example": "Wir sind mit dem Flugzeug nach Lissabon geflogen.",
+      "note": "mit dem Flugzeug fliegen",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "bahnhof",
+      "word": "Bahnhof",
+      "article": "der",
+      "plural": "Bahnhöfe",
+      "partOfSpeech": "noun",
+      "translation": "la gare",
+      "example": "Wir treffen uns am Bahnhof.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "fahrkarte",
+      "word": "Fahrkarte",
+      "article": "die",
+      "plural": "Fahrkarten",
+      "partOfSpeech": "noun",
+      "translation": "le billet (de train, de bus)",
+      "example": "Ich kaufe die Fahrkarte am Automaten.",
+      "note": "einfach : aller simple · hin und zurück : aller-retour",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "gleis",
+      "word": "Gleis",
+      "article": "das",
+      "plural": "Gleise",
+      "partOfSpeech": "noun",
+      "translation": "la voie, le quai",
+      "example": "Der Zug fährt von Gleis sechs ab.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "abfahrt",
+      "word": "Abfahrt",
+      "article": "die",
+      "plural": "Abfahrten",
+      "partOfSpeech": "noun",
+      "translation": "le départ",
+      "example": "Die Abfahrt ist um zehn Uhr vierzehn.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "ankunft",
+      "word": "Ankunft",
+      "article": "die",
+      "plural": "Ankünfte",
+      "partOfSpeech": "noun",
+      "translation": "l’arrivée",
+      "example": "Die Ankunft in Hamburg ist um zwölf Uhr fünf.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "umsteigen",
+      "word": "umsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "changer (de train, de bus)",
+      "example": "Muss ich in Köln umsteigen?",
+      "note": "séparable : um|steigen · Perfekt : ist umgestiegen",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "ankommen",
+      "word": "ankommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "arriver",
+      "example": "Wir wollen am Abend ankommen.",
+      "note": "séparable : an|kommen · Perfekt : ist angekommen",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "verpassen",
+      "word": "verpassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rater, manquer",
+      "example": "Wir haben den Zug verpasst.",
+      "note": "Perfekt sans ge- : hat verpasst",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "reservieren",
+      "word": "reservieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "réserver",
+      "example": "Möchten Sie einen Sitzplatz reservieren?",
+      "note": "Perfekt sans ge- : hat reserviert",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "uebernachten",
+      "word": "übernachten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "passer la nuit, loger",
+      "example": "Wir haben in einer Pension übernachtet.",
+      "note": "Perfekt sans ge- : hat übernachtet",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "einzelzimmer",
+      "word": "Einzelzimmer",
+      "article": "das",
+      "plural": "Einzelzimmer",
+      "partOfSpeech": "noun",
+      "translation": "la chambre simple",
+      "example": "Ich habe ein Einzelzimmer reserviert.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "doppelzimmer",
+      "word": "Doppelzimmer",
+      "article": "das",
+      "plural": "Doppelzimmer",
+      "partOfSpeech": "noun",
+      "translation": "la chambre double",
+      "example": "Haben Sie noch ein Doppelzimmer frei?",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "jugendherberge",
+      "word": "Jugendherberge",
+      "article": "die",
+      "plural": "Jugendherbergen",
+      "partOfSpeech": "noun",
+      "translation": "l’auberge de jeunesse",
+      "example": "Wir übernachten in einer Jugendherberge.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "ferienwohnung",
+      "word": "Ferienwohnung",
+      "article": "die",
+      "plural": "Ferienwohnungen",
+      "partOfSpeech": "noun",
+      "translation": "la location de vacances",
+      "example": "Wir haben eine Ferienwohnung am Strand gemietet.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "koffer",
+      "word": "Koffer",
+      "article": "der",
+      "plural": "Koffer",
+      "partOfSpeech": "noun",
+      "translation": "la valise",
+      "example": "Mein Koffer ist zu schwer.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "rucksack",
+      "word": "Rucksack",
+      "article": "der",
+      "plural": "Rucksäcke",
+      "partOfSpeech": "noun",
+      "translation": "le sac à dos",
+      "example": "Ich reise nur mit einem Rucksack.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "gepaeck",
+      "word": "Gepäck",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les bagages",
+      "example": "Mein Gepäck ist nicht angekommen.",
+      "note": "toujours au singulier en allemand",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "reisepass",
+      "word": "Reisepass",
+      "article": "der",
+      "plural": "Reisepässe",
+      "partOfSpeech": "noun",
+      "translation": "le passeport",
+      "example": "Ihren Reisepass, bitte!",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "urlaub",
+      "word": "Urlaub",
+      "article": "der",
+      "plural": "Urlaube",
+      "partOfSpeech": "noun",
+      "translation": "les vacances, le congé",
+      "example": "Wie war dein Urlaub?",
+      "note": "Urlaub machen : partir en vacances",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "meer",
+      "word": "Meer",
+      "article": "das",
+      "plural": "Meere",
+      "partOfSpeech": "noun",
+      "translation": "la mer",
+      "example": "Im August fahren wir ans Meer.",
+      "note": "wohin? ans Meer · wo? am Meer",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "berg",
+      "word": "Berg",
+      "article": "der",
+      "plural": "Berge",
+      "partOfSpeech": "noun",
+      "translation": "la montagne",
+      "example": "Am vorletzten Tag sind wir auf einen Berg gestiegen.",
+      "note": "wohin? in die Berge · wo? in den Bergen",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "wetter",
+      "word": "Wetter",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le temps (météo)",
+      "example": "Wie ist das Wetter heute?",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "regnen",
+      "word": "regnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pleuvoir",
+      "example": "Am Sonntag hat es den ganzen Tag geregnet.",
+      "note": "es regnet : il pleut",
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 24
+      }
+    },
+    {
+      "id": "sonnig",
+      "word": "sonnig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "ensoleillé",
+      "example": "Heute ist es sonnig und warm.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 25
+      }
+    },
+    {
+      "id": "bewoelkt",
+      "word": "bewölkt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "nuageux, couvert",
+      "example": "Im Norden ist es noch bewölkt.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 26
+      }
+    },
+    {
+      "id": "gewitter",
+      "word": "Gewitter",
+      "article": "das",
+      "plural": "Gewitter",
+      "partOfSpeech": "noun",
+      "translation": "l’orage",
+      "example": "Am Nachmittag gibt es ein Gewitter.",
+      "note": null,
+      "audio": {
+        "media": "a2-reisen-lexique",
+        "line": 27
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-reisen-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : le vocabulaire du voyage et de la météo",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Unterwegs — Transports, logement, destinations et météo",
+        "description": "Pour voyager, il faut savoir nommer les moyens de transport, le logement et les bagages, dire où l’on va et parler du temps qu’il fait. Apprenez chaque nom avec son article et son pluriel.\n\nDIE VERKEHRSMITTEL — LES TRANSPORTS\n• der Zug (die Züge) — le train   • die Bahn — le train, le chemin de fer\n• das Flugzeug (die Flugzeuge) — l’avion   • der Bus (die Busse) — le bus, le car\n• das Auto (die Autos) — la voiture   • das Schiff (die Schiffe) — le bateau\n• das Fahrrad (die Fahrräder) — le vélo\nOn dit : mit dem Zug / mit dem Auto / mit der Bahn fahren, mais mit dem Flugzeug fliegen.\n\nAM BAHNHOF — À LA GARE\n• der Bahnhof — la gare   • der Flughafen — l’aéroport   • das Gleis — la voie (Gleis 6 = voie 6)\n• die Fahrkarte (das Ticket) — le billet   • einfach — aller simple   • hin und zurück — aller-retour\n• die Abfahrt — le départ   • die Ankunft — l’arrivée   • die Verspätung — le retard\n• abfahren — partir   • ankommen — arriver   • umsteigen — changer de train   • verpassen — rater\n\nDIE UNTERKUNFT — LE LOGEMENT\n• das Hotel   • die Pension — la petite pension   • die Jugendherberge — l’auberge de jeunesse\n• die Ferienwohnung — la location de vacances   • der Campingplatz — le camping\n• das Einzelzimmer / das Doppelzimmer — la chambre simple / double   • mit Frühstück — petit-déjeuner compris\n• buchen, reservieren — réserver   • übernachten — passer la nuit\n\nDAS GEPÄCK — LES BAGAGES\n• der Koffer — la valise   • der Rucksack — le sac à dos\n• der Reisepass / der Ausweis — le passeport / la carte d’identité\n• die Sonnenbrille — les lunettes de soleil   • die Sonnencreme — la crème solaire\n\nWOHIN? — OÙ VA-T-ON ?\n• nach + ville ou pays sans article : nach Wien, nach Italien, nach Hause\n• in + accusatif pour les pays avec article et pour la montagne : in die Schweiz, in die Türkei, in die USA, in die Berge\n• an + accusatif pour la mer, un lac, la plage : ans Meer (= an das Meer), an den See, an den Strand\nAttention : à la question wohin? (où va-t-on ?) on répond avec l’accusatif, à la question wo? (où est-on ?) avec le datif.\n• Ich fahre ans Meer. → Ich bin am Meer.   • Wir fahren in die Berge. → Wir sind in den Bergen.\n\nDAS WETTER — LA MÉTÉO\n• Wie ist das Wetter? — Quel temps fait-il ?\n• Die Sonne scheint. Es ist sonnig. — Il y a du soleil.   • Es ist bewölkt. — Le ciel est nuageux.\n• Es regnet. (der Regen) — Il pleut.   • Es schneit. (der Schnee) — Il neige.\n• Es ist windig. (der Wind) — Il y a du vent.   • Es gibt ein Gewitter. — Il y a un orage.\n• heiß — très chaud   • warm — chaud, doux   • kühl — frais   • kalt — froid\n• Es sind 25 Grad. — Il fait 25 degrés.\n\nÉcoutez l’enregistrement et répétez chaque mot avec son article. Puis répondez à voix haute : Wohin fährst du gern in Urlaub? Wie ist das Wetter heute?",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-verkehrsmittel-bild",
+          "usage": "illustration",
+          "caption": "Die Verkehrsmittel",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-unterkunft-bild",
+          "usage": "illustration",
+          "caption": "Unterkunft und Gepäck",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-wetter-bild",
+          "usage": "illustration",
+          "caption": "Das Wetter",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter le vocabulaire du voyage",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-dib-unterwegs",
+      "kind": "lesson",
+      "title": "Écouter et répéter : en voyage, avec des voix natives",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Auf einer Reise — À la gare, les bagages et les transports",
+        "description": "Ces deux enregistrements viennent du manuel Deutsch im Blick : un locuteur natif lit le vocabulaire du voyage, chaque nom au singulier puis au pluriel, parfois suivi d’une phrase d’exemple. Vous entendez ainsi une vraie voix allemande, avec son rythme et son intonation.\n\nCOMMENT TRAVAILLER\n1. Écoutez le premier enregistrement (la gare, les billets, les bagages) une fois sans lire.\n2. Réécoutez-le en mettant en pause après chaque mot ou chaque phrase, et répétez à voix haute, avec l’article.\n3. Affichez la transcription pour vérifier l’orthographe. Faites de même avec le second enregistrement (les moyens de transport).\n\nREMARQUEZ\n• Dans les mots composés, l’accent tombe sur la première partie : der Bahnhof (BAHN-hof), die Fahrkarte (FAHR-karte), die Haltestelle (HAL-te-stelle), der Reiseführer (REI-se-führer), der Reisepass (REI-se-pass).\n• Beaucoup de pluriels prennent un Umlaut : der Bahnhof → die Bahnhöfe, das Fahrrad → die Fahrräder, der Fuß → die Füße. Pour der Reisepass, le locuteur dit die Pässe (pluriel de der Pass) ; on dit aussi die Reisepässe.\n• Certains noms ne changent pas au pluriel, seul l’article change : der Koffer → die Koffer, der Reiseführer → die Reiseführer.\n• das Gepäck (les bagages) est un singulier en allemand : Mein Gepäck ist nicht angekommen. — Mes bagages ne sont pas arrivés.\n• die Karte peut être le billet, la carte postale ou la carte géographique ; die Landkarte est toujours une carte géographique. Im Reiseführer stehen viele gute Tipps. — Il y a beaucoup de bons conseils dans le guide.\n• Ihren Reisepass, bitte! — Votre passeport, s’il vous plaît ! (le contrôle à la frontière ou à l’aéroport)\n• Avec un moyen de transport : mit + datif. mit dem Bus, mit dem Fahrrad, mit der Bahn. Avec l’avion, on dit fliegen : mit dem Flugzeug fliegen. À pied : zu Fuß gehen.\n\nÀ VOUS\nRépondez à voix haute, en phrases complètes : Wie fährst du zur Arbeit oder zur Uni? Was nimmst du auf eine Reise mit? (Ich nehme einen Koffer, einen Reiseführer und meinen Reisepass mit.)\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-dib-bahnsteig-foto",
+          "usage": "illustration",
+          "caption": "Am Bahnhof: Die S-Bahn steht am Gleis.",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-unterwegs-native",
+          "usage": "audio",
+          "caption": "Auf einer Reise — la gare, les billets, les bagages (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-verkehrsmittel-native",
+          "usage": "audio",
+          "caption": "Die Verkehrsmittel — les moyens de transport (voix native)",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-unterwegs",
+      "kind": "lesson",
+      "title": "Comprendre : à la gare et à l’hôtel",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Am Schalter und an der Rezeption — Réserver un billet et une chambre",
+        "description": "Amira veut passer le week-end à Hambourg. Elle achète son billet au guichet de la gare de Cologne (das Reisezentrum). À Hambourg, Paul Duval, un client français, arrive à son hôtel. Écoutez les deux scènes une première fois sans lire, puis une deuxième fois en suivant le texte.\n\n1. IM REISEZENTRUM — AU GUICHET DE LA GARE\nHerr Vogt : Guten Tag! Was kann ich für Sie tun?\nAmira : Guten Tag. Ich möchte am Freitag nach Hamburg fahren. Wann fährt morgens ein Zug?\nHerr Vogt : Um acht Uhr zwölf fährt ein Zug. Er kommt um zwölf Uhr fünf in Hamburg an.\nAmira : Und muss ich irgendwo umsteigen?\nHerr Vogt : Nein, der Zug fährt direkt.\nAmira : Sehr gut. Dann eine Fahrkarte, bitte, hin und zurück, zweite Klasse. Ich komme am Sonntagabend zurück.\nHerr Vogt : Mit dem Sparpreis kostet das neunundsiebzig Euro. Möchten Sie auch einen Sitzplatz reservieren?\nAmira : Ja, gern. Einen Platz am Fenster, bitte.\nHerr Vogt : Gern. Mit Reservierung sind es zweiundachtzig Euro fünfzig.\nAmira : Kann ich mit Karte bezahlen?\nHerr Vogt : Natürlich. Ihr Zug fährt von Gleis sechs ab. Gute Reise!\n\n2. AN DER REZEPTION — À LA RÉCEPTION DE L’HÔTEL\nFrau Lindner : Guten Abend und herzlich willkommen im Hotel Elbblick!\nHerr Duval : Guten Abend. Ich habe ein Einzelzimmer für zwei Nächte reserviert. Mein Name ist Duval.\nFrau Lindner : Einen Moment, bitte. Ja, Herr Duval, ein Einzelzimmer mit Dusche, von Freitag bis Sonntag.\nHerr Duval : Danke. Ist das Frühstück inklusive?\nFrau Lindner : Ja, das Frühstück ist im Preis inbegriffen. Es gibt Frühstück von sieben bis zehn Uhr im Erdgeschoss.\nHerr Duval : Und gibt es WLAN im Zimmer?\nFrau Lindner : Ja, das Passwort steht auf Ihrer Zimmerkarte. Sie haben Zimmer zweihundertvierzehn im zweiten Stock. Der Aufzug ist dort links.\nHerr Duval : Vielen Dank. Wann muss ich am Sonntag auschecken?\nFrau Lindner : Bis elf Uhr. Einen schönen Aufenthalt!\n\nPHRASES UTILES À LA GARE\n• Wann fährt der nächste Zug nach …? — Quand part le prochain train pour … ?\n• Einmal nach Hamburg, hin und zurück, bitte. — Un aller-retour pour Hambourg, s’il vous plaît.\n• Muss ich umsteigen? — Est-ce que je dois changer de train ?\n• Von welchem Gleis fährt der Zug ab? — De quelle voie part le train ?\n• Ich möchte einen Sitzplatz reservieren. — Je voudrais réserver une place assise.\n\nPHRASES UTILES À L’HÔTEL\n• Ich habe ein Zimmer reserviert. Mein Name ist … — J’ai réservé une chambre. Je m’appelle …\n• Haben Sie noch ein Doppelzimmer frei? — Avez-vous encore une chambre double de libre ?\n• Was kostet eine Nacht? — Combien coûte une nuit ?\n• Ist das Frühstück inklusive? — Le petit-déjeuner est-il compris ?\n• Wann muss ich auschecken? — À quelle heure dois-je libérer la chambre ?\n\nBON À SAVOIR\nEn Allemagne, on achète son billet au guichet, au distributeur (der Fahrkartenautomat) ou dans l’application de la compagnie ferroviaire. Le Sparpreis, moins cher, n’est valable que dans le train choisi. Les trains rapides relient directement les grandes villes. Pour demander poliment, on dit « Ich möchte … » ou « Ich hätte gern … » plutôt que « Ich will … ».\n\nÀ VOUS\nRelisez à voix haute les répliques d’Amira, puis celles de Herr Duval, en changeant la destination, le jour, la classe et le type de chambre. Repérez dans chaque scène la question qui fait avancer l’échange. L’exercice « Répéter à voix haute » de ce module vérifie ensuite la prononciation des phrases utiles.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-bahnhof-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-hotel-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-unterwegs-audio-v3",
+          "usage": "audio",
+          "caption": "Au guichet de la gare, puis à la réception de l’hôtel",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : « Wie war dein Urlaub ? »",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Wie war dein Urlaub? — Raconter ses vacances au passé",
+        "description": "Lundi matin, Julia et Tarek se retrouvent devant la machine à café du bureau. Ils rentrent tous les deux de vacances. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte. Repérez les verbes au passé.\n\nDIALOGUE\nJulia : Hallo Tarek! Du bist ja ganz braun. Wie war dein Urlaub?\nTarek : Hallo Julia! Super, danke. Ich war mit meiner Familie zwei Wochen in Kroatien, am Meer.\nJulia : Toll! Seid ihr nach Kroatien geflogen?\nTarek : Nein, wir sind mit dem Auto gefahren. Die Fahrt hat elf Stunden gedauert, das war ziemlich anstrengend.\nJulia : Elf Stunden! Und wo habt ihr übernachtet?\nTarek : Wir haben eine Ferienwohnung in Split gemietet, direkt am Strand. Ich bin jeden Morgen im Meer geschwommen.\nJulia : Und wie war das Wetter?\nTarek : Fantastisch. Die Sonne hat jeden Tag geschienen, und es waren über dreißig Grad. Und du? Du bist doch nach Wien gefahren, oder?\nJulia : Ja, mit dem Nachtzug. Ich bin am Samstagmorgen angekommen und habe gleich die Altstadt besichtigt. Am Nachmittag habe ich Schloss Schönbrunn gesehen, und im Café habe ich natürlich eine Sachertorte gegessen.\nTarek : Lecker! Hat dir Wien gefallen?\nJulia : Sehr! Nur am Sonntag hat es den ganzen Tag geregnet. Da bin ich ins Museum gegangen.\nTarek : Und hast du mir etwas mitgebracht?\nJulia : Na klar, Mozartkugeln! Hier, nimm eine!\n\nGRAMMAIRE : LE PASSÉ COMPOSÉ (PERFEKT)\nPour raconter au passé à l’oral et dans les messages, l’allemand emploie surtout le Perfekt : l’auxiliaire haben ou sein, conjugué, en 2e position, et le participe passé à la fin de la phrase.\n• Ich habe die Altstadt besichtigt.   • Wir sind mit dem Auto gefahren.   • Am Sonntag hat es geregnet.\nDans une question sans mot interrogatif, l’auxiliaire vient en 1re position : Seid ihr geflogen? Hat dir Wien gefallen?\n\nHABEN OU SEIN ?\n• La plupart des verbes se conjuguent avec haben : Ich habe ein Hotel gebucht. Sie hat eine Sachertorte gegessen.\n• On emploie sein avec les verbes de déplacement (fahren, fliegen, gehen, kommen, reisen, wandern, schwimmen), avec les verbes de changement d’état (aufstehen, einschlafen) et avec bleiben : Ich bin nach Wien gefahren. Wir sind zu Hause geblieben.\n\nLE PARTICIPE PASSÉ\n• Verbes réguliers : ge- + radical + -t : machen → gemacht, buchen → gebucht, mieten → gemietet, dauern → gedauert, regnen → geregnet\n• Verbes irréguliers : ge- + radical (souvent modifié) + -en : fahren → gefahren, sehen → gesehen, essen → gegessen, fliegen → geflogen, schwimmen → geschwommen, scheinen → geschienen, gehen → gegangen\n• Verbes à particule séparable : ge- se place entre la particule et le radical : ankommen → angekommen, einkaufen → eingekauft, mitbringen → mitgebracht\n• Pas de ge- pour les verbes en -ieren ni pour les verbes à préfixe inséparable (be-, ver-, er-, ge-, et über- dans übernachten) : reservieren → reserviert, besichtigen → besichtigt, besuchen → besucht, verpassen → verpasst, übernachten → übernachtet, gefallen → gefallen\n\nSEIN ET HABEN AU PASSÉ\nPour ces deux verbes, on emploie plutôt le prétérit : ich war, du warst, er/sie war, wir waren, ihr wart, sie/Sie waren ; ich hatte, du hattest, er/sie hatte, wir hatten.\n• Wie war dein Urlaub? — Comment se sont passées tes vacances ?   • Ich war zwei Wochen am Meer.   • Wir hatten Glück mit dem Wetter.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : Wie war dein Urlaub?",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-lesen",
+      "kind": "exercise",
+      "title": "Vérifier : lire un courriel de retour de vacances",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Zurück aus den Bergen!",
+        "description": "Lisez le courriel que Sophie écrit à son amie Maren après ses vacances, puis répondez aux questions.\n\nVon: Sophie Brandt\nAn: Maren Vogel\nBetreff: Zurück aus den Bergen!\n\nLiebe Maren,\n\nseit Sonntag bin ich wieder in Frankfurt. Der Urlaub im Allgäu war wunderschön, aber nicht immer ganz entspannt!\n\nAm ersten Tag hatte unsere S-Bahn Verspätung, und wir haben den Zug nach Oberstdorf verpasst. Wir haben dann den nächsten Zug genommen und sind erst am Abend angekommen. Wir haben in einer kleinen Pension übernachtet. Das Zimmer war einfach, aber sehr sauber, und das Frühstück war super: frisches Brot, Käse aus der Region und selbst gemachte Marmelade!\n\nLeider hat es die ersten drei Tage fast nur geregnet. Wir haben ein Museum besucht und viel gelesen. Am vierten Tag hat endlich die Sonne geschienen, und danach sind wir jeden Tag gewandert. Am vorletzten Tag sind wir sogar auf einen Berg gestiegen, fast 2 000 Meter hoch! Das war anstrengend, aber der Blick war fantastisch.\n\nUnd du? Fährst du im August wirklich mit Jonas ans Meer? Dann schick mir bitte ein Foto vom Strand!\n\nLiebe Grüße\nSophie",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Seit wann ist Sophie wieder zu Hause?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Seit Freitag.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Seit Samstag.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seit Sonntag.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Seit einer Woche.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le courriel commence par « seit Sonntag bin ich wieder in Frankfurt » : Sophie est rentrée dimanche et elle est chez elle depuis. Seit indique le point de départ d’une situation qui dure.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Warum ist Sophie erst am Abend in Oberstdorf angekommen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Zug nach Oberstdorf ist nicht gefahren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat am Morgen zu lange geschlafen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie ist mit dem Auto gefahren und stand im Stau.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die S-Bahn hatte Verspätung, deshalb hat sie den Zug verpasst.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Am ersten Tag hatte unsere S-Bahn Verspätung, und wir haben den Zug nach Oberstdorf verpasst » : le retard de la S-Bahn leur a fait rater le train. Celui-ci a bien circulé, ils ont pris le suivant.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Was sagt Sophie über die Pension?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Zimmer war einfach, aber das Frühstück war sehr gut.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das Zimmer war groß und sehr modern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Frühstück war teuer und nicht gut.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das Zimmer war leider nicht sauber.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sophie écrit « Das Zimmer war einfach, aber sehr sauber, und das Frühstück war super ». Einfach veut dire simple, ni grand ni moderne, et sauber veut dire propre.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was hat Sophie an den Regentagen gemacht?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie ist trotzdem jeden Tag gewandert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat ein Museum besucht und viel gelesen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie ist ins Schwimmbad gegangen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie ist früher nach Frankfurt zurückgefahren.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Leider hat es die ersten drei Tage fast nur geregnet. Wir haben ein Museum besucht und viel gelesen. » Les randonnées commencent seulement au quatrième jour, avec le soleil.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wie war die Bergtour am vorletzten Tag?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kurz und ein bisschen langweilig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Gefährlich, weil es ein Gewitter gab.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Leicht, aber ohne schönen Blick.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Anstrengend, aber mit einem fantastischen Blick.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Das war anstrengend, aber der Blick war fantastisch » : la montée à près de 2 000 mètres était fatigante (anstrengend), mais la vue magnifique. Aucun orage n’est mentionné.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was möchte Sophie von Maren bekommen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Postkarte aus den Bergen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ein Foto vom Strand.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Käse aus der Region.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Adresse der Pension.",
+              "correct": false
+            }
+          ],
+          "explanation": "À la fin, Sophie écrit « Dann schick mir bitte ein Foto vom Strand! », car Maren part à la mer en août. La carte postale et le fromage ne sont pas demandés.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-hoeren",
+      "kind": "exercise",
+      "title": "Vérifier : écouter à la gare, au téléphone, à la radio",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Unterwegs hören",
+        "description": "Écoutez les quatre scènes : une annonce en gare, une réservation par téléphone, la météo à la radio et une conversation entre amis. Vous pouvez réécouter autant de fois que nécessaire, puis répondez aux questions. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Szene 1 : Von welchem Gleis fährt der Zug nach München heute ab?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Von Gleis 3.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Von Gleis 4.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Von Gleis 7.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Von Gleis 14.",
+              "correct": false
+            }
+          ],
+          "explanation": "L’annonce dit « Der Zug nach München … fährt heute von Gleis sieben ab ». Gleis drei est le quai où l’annonce est faite (« Achtung an Gleis drei! ») et 14 vient de l’heure de départ, 10 h 14."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Szene 2 : Wie viele Nächte bleibt Herr Kaya in der Pension?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zwei Nächte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Drei Nächte.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Vier Nächte.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Fünf Nächte.",
+              "correct": false
+            }
+          ],
+          "explanation": "Herr Kaya réserve « vom zwölften bis zum fünfzehnten August » et la réceptionniste confirme « das sind drei Nächte » : les nuits du 12, du 13 et du 14."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Szene 2 : Was kostet das Zimmer?",
+          "options": [
+            {
+              "id": "a",
+              "label": "59 Euro pro Nacht, mit Frühstück.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "95 Euro pro Nacht, ohne Frühstück.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "95 Euro für drei Nächte, mit Frühstück.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "95 Euro pro Nacht, mit Frühstück.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Es kostet fünfundneunzig Euro pro Nacht » et « das Frühstück ist dabei » : 95 € par nuit, petit-déjeuner compris. En allemand, on dit l’unité avant la dizaine : fünf-und-neunzig = 95, pas 59."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Szene 3 : Wie ist das Wetter am Sonntag im Süden?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Sonne scheint.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Es regnet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es gibt Gewitter.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es ist bewölkt.",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour dimanche, le bulletin annonce « im Norden noch bewölkt, aber im Süden scheint die Sonne ». La pluie et les orages concernent samedi ; les nuages, dimanche dans le nord."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Szene 4 : Wie ist Max nach Stockholm gereist?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit dem Flugzeug.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit dem Auto.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mit dem Schiff.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit dem Zug.",
+              "correct": true
+            }
+          ],
+          "explanation": "Max raconte « Wir sind mit dem Zug nach Stockholm gefahren ». Mit + datif indique le moyen de transport ; aucun avion, aucune voiture, aucun bateau n’est mentionné."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Szene 4 : Was ist am letzten Tag passiert?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es hat den ganzen Tag geregnet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Max hat den Zug verpasst.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Max hat seine Kamera im Zug vergessen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Max ist im kalten See krank geworden.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am letzten Tag habe ich meine Kamera im Zug vergessen. » Max ne parle ni de pluie ni de train raté, et il s’est baigné malgré l’eau fraîche (18 degrés) sans tomber malade."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Scène 1 : écoutez la phrase de l’annonce sur le retard et écrivez-la.",
+          "accept": [
+            "Der Zug hat circa fünfzehn Minuten Verspätung.",
+            "Der Zug hat circa 15 Minuten Verspätung.",
+            "Der Zug hat zirka fünfzehn Minuten Verspätung."
+          ],
+          "voice": "sprecher",
+          "explanation": "Circa (environ) précède le nombre de minutes. Die Verspätung prend une majuscule comme tout nom ; dans fünfzehn, écrivez le ü et le z.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Quatre scènes de voyage",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-sonne-bild",
+          "usage": "illustration",
+          "alt": "Un soleil.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-regen-bild",
+          "usage": "illustration",
+          "alt": "Un nuage d’où tombe la pluie.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-gewitter-bild",
+          "usage": "illustration",
+          "alt": "Un nuage traversé par un éclair.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-wolke-bild",
+          "usage": "illustration",
+          "alt": "Un gros nuage.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "d",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-dib-wetter",
+      "kind": "exercise",
+      "title": "Vérifier : la météo avec des voix natives",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Wie ist das Wetter?",
+        "description": "Écoutez les deux enregistrements : un locuteur natif lit le vocabulaire de la météo du manuel Deutsch im Blick, d’abord la pluie, le soleil et la neige, puis le bulletin météo, le vent et les nuages. Répétez chaque mot à voix haute. Ensuite, regardez les dessins et répondez aux questions : toutes les bonnes réponses s’entendent dans les enregistrements. La transcription s’affichera après votre réponse.\n\nRAPPEL\nPour parler du temps qu’il fait, l’allemand emploie le pronom es, comme « il » en français : Es regnet. Es schneit. Souvent, le verbe ou l’adjectif vient d’un nom :\n• der Regen → regnen → es regnet   • der Schnee → schneien → es schneit\n• die Sonne → sonnig → es ist sonnig   • der Wind → windig → es ist windig   • die Wolke → bewölkt → es ist bewölkt\n• der Wetterbericht — le bulletin météo   • die Wettervorhersage — les prévisions météo\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wie ist das Wetter auf dem Bild?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es schneit.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es ist sonnig.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Es ist bewölkt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es regnet.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le dessin montre un soleil : es ist sonnig (de die Sonne). L’enregistrement dit aussi « Die Sonne scheint den ganzen Tag ». Bewölkt décrirait un ciel couvert de nuages.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Wie ist das Wetter auf dem Bild?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es ist sonnig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es schneit.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es ist windig.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es regnet.",
+              "correct": true
+            }
+          ],
+          "explanation": "Le nuage d’où tombe la pluie correspond à der Regen, d’où le verbe regnen : es regnet. Comme le « il » de « il pleut », es est ici un sujet impersonnel.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Wie ist das Wetter auf dem Bild?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es schneit.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Es regnet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es ist sonnig.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es ist windig.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le flocon représente der Schnee, d’où le verbe schneien : es schneit. Es regnet parlerait de pluie, pas de neige.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wie ist das Wetter auf dem Bild?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es regnet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es ist sonnig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es ist windig.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Es schneit.",
+              "correct": false
+            }
+          ],
+          "explanation": "L’éolienne et les traits de vent illustrent der Wind ; l’adjectif windig donne « Es ist windig ». Le dessin ne montre ni pluie ni neige.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Le ciel est gris et couvert de nuages, mais il ne pleut pas. Wie ist das Wetter?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es ist sonnig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es ist bewölkt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Es regnet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es schneit.",
+              "correct": false
+            }
+          ],
+          "explanation": "Un ciel gris et couvert, sans pluie : es ist bewölkt (de die Wolke, le nuage). Es regnet supposerait de la pluie, ce que l’énoncé exclut.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Il pleut très fort, « il pleut des cordes ». Quelle expression entendue dans le premier enregistrement le dit ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Sonne scheint den ganzen Tag.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es ist windig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es gießt wie aus Eimern.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Es ist bewölkt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Es gießt wie aus Eimern » se traduit mot à mot par « il verse comme des seaux » : il pleut à verse. C’est la seule phrase du premier enregistrement qui parle d’une très forte pluie.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-dib-wetter-native-1",
+          "usage": "audio",
+          "caption": "Regen, Sonne, Schnee (voix native)",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-wetter-native-2",
+          "usage": "audio",
+          "caption": "Wetterbericht, Wind, Wolken (voix native)",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-sonne-foto",
+          "usage": "illustration",
+          "alt": "Dessin au trait d’un soleil rayonnant.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-regen-foto",
+          "usage": "illustration",
+          "alt": "Dessin au trait d’un nuage d’où tombe la pluie.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-schnee-foto",
+          "usage": "illustration",
+          "alt": "Dessin au trait d’un flocon de neige à six branches.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-dib-wind-foto",
+          "usage": "illustration",
+          "alt": "Dessin au trait d’une éolienne dont les pales tournent sous des traits de vent.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-balkonien",
+      "kind": "exercise",
+      "title": "Vérifier : lire « Urlaub auf Balkonien »",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Urlaub auf Balkonien – warum eigentlich nicht?",
+        "description": "Lisez l’article d’un magazine de voyage, puis répondez aux questions.\n\nURLAUB AUF BALKONIEN – WARUM EIGENTLICH NICHT?\n\nDie Deutschen reisen sehr gern ins Ausland, am liebsten in den warmen Süden: nach Spanien, nach Italien oder in die Türkei. Aber immer mehr Menschen bleiben im Urlaub zu Hause oder fahren nicht weit weg. Man nennt das „Urlaub auf Balkonien“. Hier sind fünf gute Gründe dafür.\n\nErstens hat man keinen Reisestress. Man muss keinen Koffer packen, und man steht nicht stundenlang im Stau.\n\nZweitens spart man viel Geld, weil man kein Flugticket und kein Hotel bezahlen muss.\n\nDrittens lernt man die eigene Region besser kennen. Viele Leute wohnen seit Jahren in ihrer Stadt, aber sie haben das Museum oder den See in der Nähe noch nie besucht.\n\nViertens schläft man im eigenen Bett. Das ist besonders wichtig, wenn man kleine Kinder hat.\n\nFünftens ist Urlaub zu Hause gut für die Umwelt, denn Flugzeuge und Autos verschmutzen die Luft.\n\nEinerseits ist Balkonien also praktisch und billig. Andererseits wollen viele Leute im Urlaub etwas Neues erleben. Für sie gibt es einen Kompromiss: Camping im eigenen Land! Seit der Corona-Zeit machen viel mehr Deutsche Campingurlaub. Sie fahren mit dem Zelt oder mit dem Wohnmobil an die Nordsee, an einen See oder in die Alpen.\n\nUnd Sie? Verbringen Sie Ihren nächsten Urlaub lieber auf Balkonien oder am anderen Ende der Welt?\n\nMOTS UTILES\n• Balkonien — mot inventé à partir de der Balkon (le balcon)   • der Grund (die Gründe) — la raison\n• erstens, zweitens, drittens, viertens, fünftens — premièrement, deuxièmement … Le verbe suit directement : Erstens hat man …\n• der Stau — l’embouteillage   • sparen — économiser   • die Umwelt — l’environnement   • verschmutzen — polluer\n• einerseits … andererseits — d’un côté … de l’autre   • erleben — vivre, découvrir\n• das Zelt — la tente   • das Wohnmobil — le camping-car   • verbringen — passer (du temps)\n\nTexte adapté de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wohin reisen die Deutschen am liebsten?",
+          "options": [
+            {
+              "id": "a",
+              "label": "In den kalten Norden, zum Beispiel nach Schweden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "In den warmen Süden, zum Beispiel nach Spanien oder Italien.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nach Amerika und nach Kanada.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In die Berge, zum Beispiel nach Österreich.",
+              "correct": false
+            }
+          ],
+          "explanation": "L’article commence par « am liebsten in den warmen Süden: nach Spanien, nach Italien oder in die Türkei ». Am liebsten signifie « de préférence ». Le nord, l’Amérique et les montagnes ne sont pas cités.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was bedeutet „Urlaub auf Balkonien“?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Urlaub auf einer Insel im Süden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Urlaub in einem Hotel mit Balkon.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Urlaub zu Hause oder nicht weit weg.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Urlaub auf einem Campingplatz in den Alpen.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Immer mehr Menschen bleiben im Urlaub zu Hause oder fahren nicht weit weg. Man nennt das „Urlaub auf Balkonien“. » Balkonien est un pays imaginaire formé sur der Balkon : on reste chez soi.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Warum spart man bei einem Urlaub zu Hause Geld?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil man kein Flugticket und kein Hotel bezahlen muss.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil die Museen in der Region nichts kosten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil man im Urlaub weniger einkauft.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die Hotels in Deutschland billig sind.",
+              "correct": false
+            }
+          ],
+          "explanation": "Deuxième raison : « Zweitens spart man viel Geld, weil man kein Flugticket und kein Hotel bezahlen muss. » Le texte ne dit rien du prix des musées ni des achats.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was haben viele Leute in ihrer eigenen Stadt noch nie gemacht?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sind dort noch nie Fahrrad gefahren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie haben dort noch nie im Hotel übernachtet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie haben das Museum oder den See in der Nähe noch nie besucht.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie haben dort noch nie Freunde getroffen.",
+              "correct": false
+            }
+          ],
+          "explanation": "Troisième raison : beaucoup d’habitants « haben das Museum oder den See in der Nähe noch nie besucht ». Noch nie signifie « jamais encore ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wann ist es laut Artikel besonders wichtig, im eigenen Bett zu schlafen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn man krank ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn man kleine Kinder hat.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wenn man Rückenschmerzen hat.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Wenn man lange im Stau gestanden hat.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Viertens schläft man im eigenen Bett. Das ist besonders wichtig, wenn man kleine Kinder hat. » Wenn introduit la condition : quand on a de jeunes enfants.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was machen seit der Corona-Zeit viel mehr Deutsche?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie fliegen öfter ans andere Ende der Welt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie bleiben im Urlaub immer auf dem Balkon.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie reisen mit dem Schiff in den Süden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie machen Campingurlaub im eigenen Land.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Seit der Corona-Zeit machen viel mehr Deutsche Campingurlaub » : sous la tente ou en camping-car, mais dans leur propre pays (an die Nordsee, in die Alpen), pas au bout du monde.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-balkonien-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-planen",
+      "kind": "exercise",
+      "title": "Vérifier : écouter des amis organiser un voyage",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Wohin fahren wir im Sommer?",
+        "description": "Felix et Selin, deux amis qui habitent à Berlin, préparent leurs vacances d’été. Felix rêve de partir très loin ; Selin préfère une destination plus proche. Lisez d’abord les mots utiles, puis écoutez la conversation autant de fois que nécessaire et répondez aux questions. La transcription s’affichera après votre réponse.\n\nMOTS UTILES\n• das Fernweh — l’envie de partir loin (le contraire de das Heimweh, le mal du pays)\n• Hast du Lust, im Sommer zu verreisen? — As-tu envie de partir en voyage cet été ?\n• Ich würde gern … — J’aimerais bien …   • Wie wäre es mit …? — Que dirais-tu de … ?   • Wir könnten … — Nous pourrions …\n• die Ostsee — la mer Baltique   • Rügen — la plus grande île d’Allemagne, sur la mer Baltique\n• baden — se baigner   • das Fischbrötchen — le sandwich au poisson, spécialité du nord de l’Allemagne\n• Einverstanden! — D’accord !   • Versprochen! — Promis !\n\nET APRÈS ?\nAprès avoir répondu, relisez la transcription et repérez comment Selin fait ses propositions : Wie wäre es mit der Ostsee? Wir könnten zelten! Ces formules servent à proposer une sortie ou un voyage sans imposer son idée.\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wohin möchte Felix zuerst reisen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "An die Ostsee.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nach Spanien.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nach Thailand.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "In die Alpen.",
+              "correct": false
+            }
+          ],
+          "explanation": "Felix dit d’abord « Ich würde gern nach Thailand fliegen ». La mer Baltique (die Ostsee) est la proposition de Selin, qu’il accepte ensuite.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Warum ist Selin gegen diese Idee?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie fliegt nicht gern, weil sie Angst hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat im Sommer keinen Urlaub.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie war schon zweimal in Thailand.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Reise ist zu teuer, und der lange Flug ist schlecht für die Umwelt.",
+              "correct": true
+            }
+          ],
+          "explanation": "Selin répond « Das ist mir zu teuer » (le vol coûte près de 1 000 euros) et ajoute qu’un si long vol « ist auch schlecht für die Umwelt ». Elle ne parle ni de peur de l’avion ni de congés.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Was hat Selin letztes Jahr auf Rügen gemacht?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hat jeden Tag im Meer gebadet und ist mit dem Fahrrad über die Insel gefahren.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hat gezeltet und jeden Abend Fischbrötchen gegessen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat in einem Hotel am Hafen gearbeitet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie hat viele Museen besucht, weil es oft geregnet hat.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Wir haben jeden Tag im Meer gebadet und sind mit dem Fahrrad über die ganze Insel gefahren. » Le camping et les sandwichs au poisson concernent le projet de cette année, pas le séjour passé.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wie reisen Felix und Selin nach Rügen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit dem Auto.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit dem Bus.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mit dem Flugzeug.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit dem Zug.",
+              "correct": true
+            }
+          ],
+          "explanation": "Selin préfère « lieber mit dem Zug » : trois heures depuis Berlin et 30 euros avec le Sparpreis. La voiture est la première idée de Felix, que Selin écarte.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wo übernachten die beiden auf Rügen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "In einer Jugendherberge.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "In einem Hotel am Meer.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Auf einem Campingplatz, im Zelt.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Bei Selins Familie.",
+              "correct": false
+            }
+          ],
+          "explanation": "Selin propose « Wir könnten zelten! » et Felix accepte : « Aber okay, wir zelten! ». Ils dormiront sous la tente sur un camping au bord de la plage ; l’hôtel est jugé trop cher.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Wann und wie lange fahren sie weg?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Wochenende im Juni.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Woche im Juli.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Zwei Wochen im Juli.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zwei Wochen im August.",
+              "correct": false
+            }
+          ],
+          "explanation": "Selin a congé « vom zwölften bis zum neunzehnten Juli » et propose « Eine Woche? » : une semaine en juillet. Felix répond « Perfekt, ich auch! ».",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-planen-audio-v3",
+          "usage": "audio",
+          "caption": "Felix et Selin préparent leurs vacances",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-planen-auto-bild",
+          "usage": "illustration",
+          "alt": "Une voiture.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-planen-bus-bild",
+          "usage": "illustration",
+          "alt": "Un autobus.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-planen-flugzeug-bild",
+          "usage": "illustration",
+          "alt": "Un avion en vol.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-planen-zug-bild",
+          "usage": "illustration",
+          "alt": "Un train vu de face.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "d",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : le Perfekt et les destinations",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Ich bin gefahren, ich habe gebucht",
+        "description": "Complétez, remettez dans l’ordre ou choisissez la forme correcte, puis écrivez la phrase dictée.\n\nRAPPELS\n• Perfekt : haben ou sein conjugué en 2e position, participe passé à la fin. On emploie sein avec les verbes de déplacement (fahren, fliegen, gehen, ankommen…) et avec bleiben.\n• Participes : gemacht, gesehen, eingekauft ; pas de ge- pour les verbes en -ieren et à préfixe inséparable (reserviert, besichtigt, besucht).\n• Wohin? (accusatif) : nach + ville ou pays sans article ; in + pays avec article ou région (in die Türkei, in die Berge) ; an + mer, lac, plage (ans Meer, an den See). Wo? (datif) : am See, in der Türkei, in den Bergen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q5",
+          "prompt": "Im Juli fahren wir … Schweiz, nach Zürich.",
+          "options": [
+            {
+              "id": "a",
+              "label": "in die",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "nach der",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "in der",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "zur",
+              "correct": false
+            }
+          ],
+          "explanation": "Die Schweiz est un pays avec article : pour la destination (wohin?), on emploie in + accusatif, in die Schweiz. Nach s’emploie seulement devant une ville ou un pays sans article (nach Zürich).",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Ich liebe den Strand! Nächste Woche fahre ich endlich …",
+          "options": [
+            {
+              "id": "a",
+              "label": "am Meer",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nach Meer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ins Meer",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ans Meer",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour aller à la mer, on emploie an + accusatif : an das Meer, contracté en ans Meer. Am Meer répond à wo? (on y est déjà) et ins Meer voudrait dire « dans l’eau ».",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Wo warst du im Urlaub? — Ich war zwei Wochen …",
+          "options": [
+            {
+              "id": "a",
+              "label": "in die Berge",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "in den Bergen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nach den Bergen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "an die Berge",
+              "correct": false
+            }
+          ],
+          "explanation": "La question wo? demande où l’on était : in + datif pluriel, in den Bergen, avec le -n du datif pluriel. In die Berge répond à wohin?, quand on y va.",
+          "type": "choice"
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Complétez au Perfekt : auxiliaire, puis participe passé.",
+          "text": "Letzten Sommer [[1]] wir nach Portugal [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sind"
+              ],
+              "size": 6,
+              "hint": "haben ou sein ?"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "geflogen"
+              ],
+              "size": 10,
+              "hint": "fliegen"
+            }
+          ],
+          "explanation": "Fliegen est un verbe de déplacement : Perfekt avec sein (wir sind). Son participe est irrégulier : geflogen. L’auxiliaire est en 2e position, le participe à la fin."
+        },
+        {
+          "id": "q10",
+          "type": "fill",
+          "prompt": "Complétez au Perfekt : auxiliaire, puis participe passé.",
+          "text": "Ich [[1]] das Hotel schon im Januar [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "habe"
+              ],
+              "size": 6,
+              "hint": "haben ou sein ?"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gebucht"
+              ],
+              "size": 10,
+              "hint": "buchen"
+            }
+          ],
+          "explanation": "Buchen n’exprime pas de déplacement : Perfekt avec haben. C’est un verbe régulier : ge- + buch + -t, gebucht."
+        },
+        {
+          "id": "q11",
+          "type": "fill",
+          "prompt": "Complétez au Perfekt : auxiliaire, puis participe passé.",
+          "text": "Wann [[1]] ihr in Hamburg [[2]]?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "seid"
+              ],
+              "size": 6,
+              "hint": "haben ou sein ?"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "angekommen"
+              ],
+              "size": 12,
+              "hint": "ankommen"
+            }
+          ],
+          "explanation": "Ankommen exprime un déplacement : Perfekt avec sein (ihr seid). Pour un verbe séparable, ge- se place entre la particule et le radical : an-ge-kommen."
+        },
+        {
+          "id": "q12",
+          "type": "fill",
+          "prompt": "Complétez au Perfekt : auxiliaire, puis participe passé.",
+          "text": "Am Samstag [[1]] wir das Schloss [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "haben"
+              ],
+              "size": 6,
+              "hint": "haben ou sein ?"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "besichtigt"
+              ],
+              "size": 12,
+              "hint": "besichtigen"
+            }
+          ],
+          "explanation": "Besichtigen se conjugue avec haben. Les verbes à préfixe inséparable (be-, ver-, er-…) n’ont pas de ge- au participe : besichtigt, et non gebesichtigt."
+        },
+        {
+          "id": "q13",
+          "type": "fill",
+          "prompt": "Complétez au Perfekt : auxiliaire, puis participe passé.",
+          "text": "Am Wochenende [[1]] wir zu Hause [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sind"
+              ],
+              "size": 6,
+              "hint": "haben ou sein ?"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "geblieben"
+              ],
+              "size": 11,
+              "hint": "bleiben"
+            }
+          ],
+          "explanation": "Bleiben se conjugue avec sein, même s’il n’exprime aucun mouvement. Son participe est irrégulier : geblieben."
+        },
+        {
+          "id": "q14",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre. Commencez par « Am Sonntag ».",
+          "answers": [
+            [
+              "Am Sonntag",
+              "bin",
+              "ich",
+              "ins Museum",
+              "gegangen."
+            ]
+          ],
+          "explanation": "Am Sonntag occupe la première position : l’auxiliaire bin suit immédiatement, puis le sujet ich ; le participe gegangen ferme la phrase. Gehen exprime un déplacement, d’où sein."
+        },
+        {
+          "id": "q15",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase : un trajet raconté au Perfekt.",
+          "accept": [
+            "Wir sind mit dem Nachtzug nach Wien gefahren."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Fahren se conjugue avec sein : wir sind … gefahren. Mit dem Nachtzug (mit + datif) indique le moyen de transport ; der Nachtzug s’écrit en un seul mot, avec une majuscule.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-reisen-grammatik-q15",
+          "usage": "audio",
+          "questionId": "q15",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-aussprache",
+      "kind": "lesson",
+      "title": "Prononciation : b, d, g en fin de mot (Auslautverhärtung)",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Aussprache — der Urlaub, der Strand, der Berg",
+        "description": "Écoutez bien der Urlaub, der Strand, der Flug : le b se prononce [p], le d [t] et le g [k]. C’est l’Auslautverhärtung, le « durcissement final », une règle très régulière de l’allemand. Les six courts enregistrements viennent du manuel Deutsch im Blick et sont lus par un locuteur natif.\n\nCONSONNES SONORES ET SOURDES\nLes consonnes vont par paires : b/p, d/t, g/k, s [z]/s [s], v/f. Les deux consonnes d’une paire se forment au même endroit de la bouche ; seule la voix change. Posez la main sur la gorge et dites « bbbb » puis « pppp » : avec b, d et g, la gorge vibre (consonnes sonores) ; avec p, t et k, elle ne vibre pas (consonnes sourdes).\n• p et b : les deux lèvres se ferment.\n• t et d : la pointe de la langue touche la gencive, juste derrière les dents du haut.\n• k et g : l’arrière de la langue touche le fond du palais.\nEn allemand, p, t et k sont suivis d’un petit souffle : placez la main devant la bouche et dites Post, Tag, Koffer. Vous devez sentir l’air.\n\nLA RÈGLE\nÀ la fin d’un mot ou d’une syllabe, b, d, g, s et v perdent leur voix : b → [p], d → [t], g → [k], s → [s], v → [f]. Au début d’un mot ou entre deux voyelles, ils gardent leur prononciation normale. Comparez dans les enregistrements :\n• die Urlaube — der Urlaub [p]   • geben — gab [p]   • die Liebe — lieb [p]\n• die Strände — der Strand [t]   • sandig — der Sand [t]   • einladen — einlud [t]\n• fliegen — der Flug [k]   • die Berge — der Berg [k]\n• lesen [z] — las [s]   • die Preise — der Preis   • die Häuser — das Haus\n• brave [v] — brav [f]\nLa règle vaut aussi à la fin d’une syllabe, à l’intérieur d’un mot : das Flugzeug [k], abfahren [p], der Abflug [p] et [k], Hamburg [k].\n\nLE PIÈGE POUR UN FRANCOPHONE\nEn français, une consonne finale garde sa voix : « la robe », « la mode », « la bague ». En allemand, non : der Tag se prononce [taːk], der Hund [hʊnt], der Zug [tsuːk]. À l’écrit, en revanche, on garde b, d et g : pour savoir comment écrire un mot, pensez au pluriel ou à un mot de la même famille (der Strand → die Strände, donc d ; der Berg → die Berge, donc g).\nCas particulier : la terminaison -ig. En allemand standard, on la prononce comme ich : billig, ruhig, wichtig. Dans le sud (Bavière, Autriche, Suisse), on entend aussi [ik]. Écoutez comment le locuteur prononce billig.\n\nÀ VOUS\nÉcoutez chaque enregistrement, mettez en pause après chaque paire et répétez en exagérant la différence. Puis lisez à voix haute : Wir machen Urlaub am Strand. — Der Zug nach Hamburg fährt ab. — Das Flugzeug fliegt über den Berg. — Das Kind sitzt mit dem Hund im Zug. L’exercice « Répéter à voix haute » qui suit vérifie votre prononciation sur ces phrases.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-aussprache-ptk",
+          "usage": "audio",
+          "caption": "1. Les paires p, b, t, d, k, g",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-aussprache-bp",
+          "usage": "audio",
+          "caption": "2. b en fin de mot → [p]",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-aussprache-dt",
+          "usage": "audio",
+          "caption": "3. d en fin de mot → [t]",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-aussprache-gk",
+          "usage": "audio",
+          "caption": "4. g en fin de mot → [k]",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-aussprache-s",
+          "usage": "audio",
+          "caption": "5. s en fin de mot → [s]",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-aussprache-vf",
+          "usage": "audio",
+          "caption": "6. v en fin de mot → [f]",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : à la gare et en voyage",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : à la gare et en voyage",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute. Faites entendre le durcissement final : Zug [k], Urlaub [p], Strand [t]. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-reisen-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-reisen-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez un aller-retour au guichet.",
+          "text": "Einmal nach Hamburg, hin und zurück, bitte.",
+          "accept": [
+            "Einmal nach Hamburg, hin und zurück, bitte."
+          ],
+          "threshold": 75,
+          "explanation": "Formule du guichet pour un aller-retour. Dans Hamburg, le g final se prononce [k] : on entend « Hambourk »."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez de quelle voie part le train.",
+          "text": "Von welchem Gleis fährt der Zug ab?",
+          "accept": [
+            "Von welchem Gleis fährt der Zug ab?"
+          ],
+          "threshold": 75,
+          "explanation": "Après le mot interrogatif, le verbe fährt vient en 2e position et la particule ab se place à la fin. Le g final de Zug se prononce [k]."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis annoncez votre réservation à la réception.",
+          "text": "Ich habe das Zimmer schon reserviert.",
+          "accept": [
+            "Ich habe das Zimmer schon reserviert."
+          ],
+          "threshold": 75,
+          "explanation": "Reserviert, sans ge- (verbe en -ieren), porte l’accent sur la dernière syllabe. Dans Zimmer, le z se prononce [ts]."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis signalez que vos bagages ne sont pas arrivés.",
+          "text": "Mein Gepäck ist nicht angekommen.",
+          "accept": [
+            "Mein Gepäck ist nicht angekommen."
+          ],
+          "threshold": 75,
+          "explanation": "Das Gepäck est un singulier : on dit ist, pas sind. Accentuez la particule du participe : AN-gekommen."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez en faisant entendre les consonnes finales.",
+          "text": "Wir machen Urlaub am Strand.",
+          "accept": [
+            "Wir machen Urlaub am Strand."
+          ],
+          "threshold": 75,
+          "explanation": "Durcissement final : Urlaub se termine par le son [p] et Strand par le son [t], même si l’on écrit b et d."
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez en faisant entendre les g finaux.",
+          "text": "Das Flugzeug fliegt über den Berg.",
+          "accept": [
+            "Das Flugzeug fliegt über den Berg."
+          ],
+          "threshold": 75,
+          "explanation": "Flug- et Berg finissent par le son [k]. Dans fliegt, le g placé devant t se prononce aussi [k]."
+        }
+      ]
+    },
+    {
+      "id": "a2-reisen-sprechen",
+      "kind": "mission",
+      "title": "Mission : raconter ses dernières vacances",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mein letzter Urlaub — Raconter un voyage",
+        "description": "Écoutez Nadia raconter ses dernières vacances, puis préparez votre propre récit.\n\nMODÈLE\nLetzten Sommer war ich mit meiner Schwester eine Woche in Lissabon. Wir sind mit dem Flugzeug geflogen und haben in einem kleinen Hotel in der Altstadt übernachtet. Das Wetter war super, jeden Tag fast dreißig Grad. Wir haben viele Sehenswürdigkeiten besichtigt, wir sind mit der alten Straßenbahn gefahren, und abends haben wir oft Fisch gegessen. Am letzten Tag sind wir an den Strand gefahren. Die Reise war nicht billig, aber wunderschön. Nächstes Jahr möchte ich nach Porto reisen.\n\nPOUR PRÉPARER\n1. Où et quand ? Letzten Sommer / Im Mai / Letztes Jahr war ich in … / am Meer / in den Bergen.\n2. Avec qui ? mit meiner Familie, mit Freunden, allein.\n3. Comment ? Ich bin mit dem Zug / mit dem Auto gefahren. Ich bin geflogen.\n4. Le logement : Wir haben in einem Hotel / in einer Ferienwohnung / in einer Jugendherberge übernachtet.\n5. Les activités : Ich habe … besichtigt / gesehen / gegessen. Ich bin gewandert / geschwommen.\n6. La météo : Das Wetter war schön. Die Sonne hat geschienen. Es hat oft geregnet.\n7. Votre avis : Es war toll / anstrengend / langweilig / günstig / teuer.\n\nPréparez seulement des mots-clés : à l’oral, parlez sans lire un texte rédigé.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-reisen-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Le récit de Nadia",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Racontez vos dernières vacances en une minute environ, sans lire : où et quand, avec qui, comment vous avez voyagé, où vous avez dormi, deux activités, la météo et votre avis.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à un ami allemand un courriel de 60 à 80 mots pour raconter ces vacances. Commencez par « Liebe … » (à une femme) ou « Lieber … » (à un homme) suivi d’une virgule, puis continuez par une minuscule ; terminez par « Liebe Grüße » et votre prénom.",
+          "maxChars": 1000,
+          "minWords": 60
+        },
+        "checklist": [
+          "Dans mes phrases au Perfekt, l’auxiliaire est en 2e position et le participe passé à la fin.",
+          "J’ai employé sein avec fahren, fliegen, gehen, kommen ou wandern, et haben avec les autres verbes.",
+          "J’ai indiqué la destination avec nach, in ou an : nach Wien, in die Berge, ans Meer.",
+          "J’ai parlé de la météo et donné mon avis sur le voyage.",
+          "Mon courriel commence par « Liebe … » ou « Lieber … » et se termine par « Liebe Grüße »."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-reisen-verkehrsmittel-bild",
+      "kind": "image",
+      "title": "Les moyens de transport",
+      "alt": "Six pictogrammes de moyens de transport : un train, un avion, un bus, une voiture, un bateau et un vélo, chacun avec son nom allemand.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "train-front",
+            "label": "der Zug"
+          },
+          {
+            "icon": "plane",
+            "label": "das Flugzeug"
+          },
+          {
+            "icon": "bus",
+            "label": "der Bus"
+          },
+          {
+            "icon": "car",
+            "label": "das Auto"
+          },
+          {
+            "icon": "ship",
+            "label": "das Schiff"
+          },
+          {
+            "icon": "bike",
+            "label": "das Fahrrad"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-unterkunft-bild",
+      "kind": "image",
+      "title": "Logement et bagages",
+      "alt": "Six pictogrammes : un hôtel, un grand lit pour la chambre double, une tente pour le camping, une valise, un sac à dos et un billet.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "hotel",
+            "label": "das Hotel"
+          },
+          {
+            "icon": "bed-double",
+            "label": "das Doppelzimmer"
+          },
+          {
+            "icon": "tent",
+            "label": "der Campingplatz"
+          },
+          {
+            "icon": "luggage",
+            "label": "der Koffer"
+          },
+          {
+            "icon": "backpack",
+            "label": "der Rucksack"
+          },
+          {
+            "icon": "ticket",
+            "label": "die Fahrkarte"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-wetter-bild",
+      "kind": "image",
+      "title": "La météo",
+      "alt": "Six pictogrammes de météo : un soleil, un nuage avec de la pluie, un flocon de neige, des rafales de vent, un nuage et un nuage avec un éclair.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "sun",
+            "label": "die Sonne"
+          },
+          {
+            "icon": "cloud-rain",
+            "label": "der Regen"
+          },
+          {
+            "icon": "snowflake",
+            "label": "der Schnee"
+          },
+          {
+            "icon": "wind",
+            "label": "der Wind"
+          },
+          {
+            "icon": "cloud",
+            "label": "die Wolke"
+          },
+          {
+            "icon": "cloud-lightning",
+            "label": "das Gewitter"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Le vocabulaire du voyage et de la météo",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Zug, die Züge."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Flugzeug, die Flugzeuge."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bus, die Busse."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Auto, die Autos."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Schiff, die Schiffe."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fahrrad, die Fahrräder."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bahnhof."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gleis."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fahrkarte."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Einmal nach Berlin, hin und zurück, bitte."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Der Zug hat zehn Minuten Verspätung."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Muss ich umsteigen?"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Einzelzimmer."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Doppelzimmer."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Jugendherberge."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ferienwohnung."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Koffer."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Rucksack."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich fahre nach Wien."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich fahre in die Schweiz."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wir fahren ans Meer."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wir fahren in die Berge."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die Sonne scheint."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es regnet."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es schneit."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist windig."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist bewölkt."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es gibt ein Gewitter."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist heiß. Es sind dreißig Grad."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-bahnhof-bild",
+      "kind": "image",
+      "title": "Au guichet de la gare",
+      "alt": "Une gare : Amira dit « Nach Hamburg, bitte! » et l’employé, Herr Vogt, répond « Gleis 6. Gute Reise! ». On voit un billet, un train et une horloge.",
+      "image": {
+        "layout": "scene",
+        "setting": "station",
+        "people": [
+          {
+            "name": "Amira",
+            "say": "Nach Hamburg, bitte!"
+          },
+          {
+            "name": "Herr Vogt",
+            "say": "Gleis 6. Gute Reise!"
+          }
+        ],
+        "items": [
+          "ticket",
+          "train-front",
+          "clock"
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-hotel-bild",
+      "kind": "image",
+      "title": "À la réception de l’hôtel",
+      "alt": "La réception d’un hôtel : la réceptionniste, Frau Lindner, dit « Herzlich willkommen! » et Herr Duval répond « Ich habe reserviert ». On voit une clé, une valise et le symbole du wifi.",
+      "image": {
+        "layout": "scene",
+        "setting": "hotel",
+        "people": [
+          {
+            "name": "Frau Lindner",
+            "say": "Herzlich willkommen!"
+          },
+          {
+            "name": "Herr Duval",
+            "say": "Ich habe reserviert."
+          }
+        ],
+        "items": [
+          "key-round",
+          "luggage",
+          "wifi"
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a2-reisen-unterwegs-audio-v3",
+      "kind": "audio",
+      "title": "Au guichet de la gare et à la réception de l’hôtel",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Guten Tag! Was kann ich für Sie tun?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Guten Tag. Ich möchte am Freitag nach Hamburg fahren. Wann fährt morgens ein Zug?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Um acht Uhr zwölf fährt ein Zug. Er kommt um zwölf Uhr fünf in Hamburg an."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Und muss ich irgendwo umsteigen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Nein, der Zug fährt direkt."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Sehr gut. Dann eine Fahrkarte, bitte, hin und zurück, zweite Klasse. Ich komme am Sonntagabend zurück."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Mit dem Sparpreis kostet das neunundsiebzig Euro. Möchten Sie auch einen Sitzplatz reservieren?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Ja, gern. Einen Platz am Fenster, bitte."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Gern. Mit Reservierung sind es zweiundachtzig Euro fünfzig."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Amira",
+          "text": "Kann ich mit Karte bezahlen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Vogt",
+          "text": "Natürlich. Ihr Zug fährt von Gleis sechs ab. Gute Reise!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Lindner",
+          "text": "Guten Abend und herzlich willkommen im Hotel Elbblick!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Duval",
+          "text": "Guten Abend. Ich habe ein Einzelzimmer für zwei Nächte reserviert. Mein Name ist Duval."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Lindner",
+          "text": "Einen Moment, bitte. Ja, Herr Duval, ein Einzelzimmer mit Dusche, von Freitag bis Sonntag."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Duval",
+          "text": "Danke. Ist das Frühstück inklusive?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Lindner",
+          "text": "Ja, das Frühstück ist im Preis inbegriffen. Es gibt Frühstück von sieben bis zehn Uhr im Erdgeschoss."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Duval",
+          "text": "Und gibt es WLAN im Zimmer?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Lindner",
+          "text": "Ja, das Passwort steht auf Ihrer Zimmerkarte. Sie haben Zimmer zweihundertvierzehn im zweiten Stock. Der Aufzug ist dort links."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Herr Duval",
+          "text": "Vielen Dank. Wann muss ich am Sonntag auschecken?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Lindner",
+          "text": "Bis elf Uhr. Einen schönen Aufenthalt!"
+        }
+      ]
+    },
+    {
+      "key": "a2-reisen-dialog-bild",
+      "kind": "image",
+      "title": "Retour de vacances au bureau",
+      "alt": "Au bureau, près de la machine à café : Julia demande « Wie war dein Urlaub? » et Tarek répond « Super! Ich war am Meer ». On voit une tasse de café, un soleil et une voiture.",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Julia",
+            "say": "Wie war dein Urlaub?"
+          },
+          {
+            "name": "Tarek",
+            "say": "Super! Ich war am Meer."
+          }
+        ],
+        "items": [
+          "coffee",
+          "sun",
+          "car"
+        ]
+      }
+    },
+    {
+      "key": "a2-reisen-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : Wie war dein Urlaub?",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Hallo Tarek! Du bist ja ganz braun. Wie war dein Urlaub?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Hallo Julia! Super, danke. Ich war mit meiner Familie zwei Wochen in Kroatien, am Meer."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Toll! Seid ihr nach Kroatien geflogen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Nein, wir sind mit dem Auto gefahren. Die Fahrt hat elf Stunden gedauert, das war ziemlich anstrengend."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Elf Stunden! Und wo habt ihr übernachtet?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Wir haben eine Ferienwohnung in Split gemietet, direkt am Strand. Ich bin jeden Morgen im Meer geschwommen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Und wie war das Wetter?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Fantastisch. Die Sonne hat jeden Tag geschienen, und es waren über dreißig Grad. Und du? Du bist doch nach Wien gefahren, oder?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Ja, mit dem Nachtzug. Ich bin am Samstagmorgen angekommen und habe gleich die Altstadt besichtigt. Am Nachmittag habe ich Schloss Schönbrunn gesehen, und im Café habe ich natürlich eine Sachertorte gegessen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Lecker! Hat dir Wien gefallen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Sehr! Nur am Sonntag hat es den ganzen Tag geregnet. Da bin ich ins Museum gegangen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Tarek",
+          "text": "Und hast du mir etwas mitgebracht?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Julia",
+          "text": "Na klar, Mozartkugeln! Hier, nimm eine!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-lesen-bild",
+      "kind": "image",
+      "title": "Les montagnes de l’Allgäu",
+      "alt": "Des montagnes aux sommets enneigés.",
+      "image": {
+        "layout": "single",
+        "icon": "mountain-snow"
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a2-reisen-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Quatre scènes de voyage",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Achtung an Gleis drei! Der Zug nach München, Abfahrt zehn Uhr vierzehn, fährt heute von Gleis sieben ab. Der Zug hat circa fünfzehn Minuten Verspätung."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brunner",
+          "text": "Pension Seeblick, guten Tag! Was kann ich für Sie tun?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kaya",
+          "text": "Guten Tag, hier ist Kaya. Haben Sie vom zwölften bis zum fünfzehnten August noch ein Doppelzimmer frei?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brunner",
+          "text": "Moment, das sind drei Nächte. Ja, ein Doppelzimmer ist noch frei. Es kostet fünfundneunzig Euro pro Nacht."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kaya",
+          "text": "Ist das Frühstück inklusive?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brunner",
+          "text": "Ja, das Frühstück ist dabei."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kaya",
+          "text": "Prima, dann reserviere ich das Zimmer."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Brunner",
+          "text": "Gern, Herr Kaya. Bis bald!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Radio",
+          "text": "Und nun das Wetter für das Wochenende. Am Samstag regnet es überall, im Süden gibt es am Nachmittag auch Gewitter. Am Sonntag ist es im Norden noch bewölkt, aber im Süden scheint die Sonne, bei bis zu zweiundzwanzig Grad."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Hallo Max! Du warst doch in Schweden. Wie war's?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Max",
+          "text": "Toll! Wir sind mit dem Zug nach Stockholm gefahren und haben dort die Stadt besichtigt. Danach haben wir eine Hütte am See gemietet."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Und wie war das Wetter?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Max",
+          "text": "Nicht so warm, nur achtzehn Grad. Aber ich bin trotzdem jeden Tag im See geschwommen!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lina",
+          "text": "Bei achtzehn Grad? Du bist ja verrückt!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Max",
+          "text": "Vielleicht. Aber am letzten Tag habe ich meine Kamera im Zug vergessen. So ärgerlich!"
+        }
+      ]
+    },
+    {
+      "key": "a2-reisen-sonne-bild",
+      "kind": "image",
+      "title": "Soleil",
+      "alt": "Un soleil.",
+      "image": {
+        "layout": "single",
+        "icon": "sun"
+      }
+    },
+    {
+      "key": "a2-reisen-regen-bild",
+      "kind": "image",
+      "title": "Pluie",
+      "alt": "Un nuage d’où tombe la pluie.",
+      "image": {
+        "layout": "single",
+        "icon": "cloud-rain"
+      }
+    },
+    {
+      "key": "a2-reisen-gewitter-bild",
+      "kind": "image",
+      "title": "Orage",
+      "alt": "Un nuage traversé par un éclair.",
+      "image": {
+        "layout": "single",
+        "icon": "cloud-lightning"
+      }
+    },
+    {
+      "key": "a2-reisen-wolke-bild",
+      "kind": "image",
+      "title": "Ciel nuageux",
+      "alt": "Un gros nuage.",
+      "image": {
+        "layout": "single",
+        "icon": "cloud"
+      }
+    },
+    {
+      "key": "a2-reisen-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Le récit de Nadia",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Letzten Sommer war ich mit meiner Schwester eine Woche in Lissabon. Wir sind mit dem Flugzeug geflogen und haben in einem kleinen Hotel in der Altstadt übernachtet. Das Wetter war super, jeden Tag fast dreißig Grad."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Wir haben viele Sehenswürdigkeiten besichtigt, wir sind mit der alten Straßenbahn gefahren, und abends haben wir oft Fisch gegessen. Am letzten Tag sind wir an den Strand gefahren."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia",
+          "text": "Die Reise war nicht billig, aber wunderschön. Nächstes Jahr möchte ich nach Porto reisen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-balkonien-bild",
+      "kind": "image",
+      "title": "Les vacances à la maison",
+      "alt": "Un canapé, symbole des vacances passées à la maison.",
+      "image": {
+        "layout": "single",
+        "icon": "sofa"
+      }
+    },
+    {
+      "key": "a2-reisen-planen-audio-v3",
+      "kind": "audio",
+      "title": "Wohin fahren wir im Sommer? — Felix et Selin préparent leurs vacances",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Selin, ich habe total Fernweh! Hast du Lust, im Sommer mit mir zu verreisen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Ja, gern! Wohin würdest du denn gern fahren?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Ich würde gern nach Thailand fliegen. Zwei Wochen Sonne, Strand und gutes Essen!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Thailand? Das ist mir zu teuer. Der Flug allein kostet fast tausend Euro. Und so ein langer Flug ist auch schlecht für die Umwelt."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Hm, da hast du recht. Was schlägst du vor?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Wie wäre es mit der Ostsee? Ich war letztes Jahr mit meiner Familie auf Rügen. Wir haben jeden Tag im Meer gebadet und sind mit dem Fahrrad über die ganze Insel gefahren. Das war wunderschön!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Und wie ist das Wetter dort im Sommer? Ich will keine Woche im Regen sitzen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Im Juli ist es meistens warm, oft über zwanzig Grad. Manchmal regnet es, aber dann gehen wir eben ins Museum oder essen Fischbrötchen am Hafen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Fischbrötchen, sehr gut! Und wie kommen wir hin? Mit dem Auto?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Lieber mit dem Zug. Die Fahrt von Berlin dauert nur ungefähr drei Stunden, und mit dem Sparpreis kostet die Fahrkarte nur dreißig Euro."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Einverstanden. Und wo übernachten wir? Ein Hotel am Meer ist bestimmt teuer."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Wir könnten zelten! Auf Rügen gibt es Campingplätze direkt am Strand. Ein Platz für ein Zelt kostet ungefähr zwanzig Euro pro Nacht."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Zelten? Das habe ich noch nie gemacht. Aber okay, wir zelten! Und wie lange bleiben wir?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Eine Woche? Ich habe vom zwölften bis zum neunzehnten Juli Urlaub."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Perfekt, ich auch! Dann buche ich heute Abend die Zugtickets."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Super! Und nächstes Jahr fliegen wir nach Thailand. Versprochen!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Felix",
+          "text": "Das hast du gesagt!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-planen-auto-bild",
+      "kind": "image",
+      "title": "Voiture",
+      "alt": "Une voiture.",
+      "image": {
+        "layout": "single",
+        "icon": "car"
+      }
+    },
+    {
+      "key": "a2-reisen-planen-bus-bild",
+      "kind": "image",
+      "title": "Bus",
+      "alt": "Un autobus.",
+      "image": {
+        "layout": "single",
+        "icon": "bus"
+      }
+    },
+    {
+      "key": "a2-reisen-planen-flugzeug-bild",
+      "kind": "image",
+      "title": "Avion",
+      "alt": "Un avion en vol.",
+      "image": {
+        "layout": "single",
+        "icon": "plane"
+      }
+    },
+    {
+      "key": "a2-reisen-planen-zug-bild",
+      "kind": "image",
+      "title": "Train",
+      "alt": "Un train vu de face.",
+      "image": {
+        "layout": "single",
+        "icon": "train-front"
+      }
+    },
+    {
+      "key": "a2-reisen-dib-bahnsteig-foto",
+      "kind": "image",
+      "title": "Des S-Bahn à quai",
+      "alt": "Photo d’un quai de gare par beau temps : des trains régionaux rouges et blancs (S-Bahn) attendent le long du quai pavé, sous les caténaires, devant des arbres.",
+      "photo": {
+        "file": "dib-images/k01/img-001-001.png"
+      }
+    },
+    {
+      "key": "a2-reisen-dib-unterwegs-native",
+      "kind": "audio",
+      "title": "Auf einer Reise — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_06_06_onatrip.mp3",
+        "clip": [
+          2.6,
+          71
+        ]
+      },
+      "transcript": "der Bahnhof, die Bahnhöfe\ndie Fahrkarte, die Fahrkarten\nder Fahrkartenautomat\ndas Gepäck\nMein Gepäck ist nicht angekommen.\ndie Haltestelle, die Haltestellen\ndie Karte, die Karten\ndie Landkarte\nder Koffer, die Koffer\nder Reiseführer, die Reiseführer\nIm Reiseführer stehen viele gute Tipps.\nder Reisepass, die Pässe\nIhren Reisepass, bitte!",
+      "v3SourceKey": "a2-reisen-dib-unterwegs-native"
+    },
+    {
+      "key": "a2-reisen-dib-verkehrsmittel-native",
+      "kind": "audio",
+      "title": "Die Verkehrsmittel — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_06_04_modes.mp3",
+        "clip": [
+          29.9,
+          78.2
+        ]
+      },
+      "transcript": "die Bahn, die Bahnen\nmit dem Bus fahren\nmit dem Bus reisen\ndas Fahrrad, die Fahrräder\nmit dem Fahrrad fahren\ndas Flugzeug, die Flugzeuge\nmit dem Flugzeug fliegen\nder Fuß, die Füße\nzu Fuß gehen",
+      "v3SourceKey": "a2-reisen-dib-verkehrsmittel-native"
+    },
+    {
+      "key": "a2-reisen-dib-wetter-native-1",
+      "kind": "audio",
+      "title": "Regen, Sonne, Schnee — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_06_12_weather.mp3",
+        "clip": [
+          128.4,
+          170.3
+        ]
+      },
+      "transcript": "der Regen\nregnen\nEs regnet.\nEs gießt wie aus Eimern.\nscheinen\nDie Sonne scheint den ganzen Tag.\nder Schnee\nschneien\nEs schneit.\ndie Sonne\nEs ist sonnig.\nder Sonnenschein",
+      "v3SourceKey": "a2-reisen-dib-wetter-native-1"
+    },
+    {
+      "key": "a2-reisen-dib-wetter-native-2",
+      "kind": "audio",
+      "title": "Wetterbericht, Wind, Wolken — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_06_12_weather.mp3",
+        "clip": [
+          233.4,
+          264
+        ]
+      },
+      "transcript": "der Wetterbericht, die Wetterberichte\ndie Wettervorhersage, die Wettervorhersagen\nder Wind, die Winde\nEs ist windig.\ndie Wolke, die Wolken\nEs ist bewölkt.",
+      "v3SourceKey": "a2-reisen-dib-wetter-native-2"
+    },
+    {
+      "key": "a2-reisen-dib-sonne-foto",
+      "kind": "image",
+      "title": "Dessin : le soleil",
+      "alt": "Dessin au trait d’un soleil rayonnant.",
+      "photo": {
+        "file": "dib-images/k06/img-041-165.png"
+      }
+    },
+    {
+      "key": "a2-reisen-dib-regen-foto",
+      "kind": "image",
+      "title": "Dessin : la pluie",
+      "alt": "Dessin au trait d’un nuage d’où tombe la pluie.",
+      "photo": {
+        "file": "dib-images/k06/img-041-166.png"
+      }
+    },
+    {
+      "key": "a2-reisen-dib-schnee-foto",
+      "kind": "image",
+      "title": "Dessin : la neige",
+      "alt": "Dessin au trait d’un flocon de neige à six branches.",
+      "photo": {
+        "file": "dib-images/k06/img-041-164.png"
+      }
+    },
+    {
+      "key": "a2-reisen-dib-wind-foto",
+      "kind": "image",
+      "title": "Dessin : le vent",
+      "alt": "Dessin au trait d’une éolienne dont les pales tournent sous des traits de vent.",
+      "photo": {
+        "file": "dib-images/k06/img-041-167.png"
+      }
+    },
+    {
+      "key": "a2-reisen-aussprache-ptk",
+      "kind": "audio",
+      "title": "Aussprache : p, b, t, d, k, g — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_01_voiced-voiceless-stops.mp3"
+      },
+      "transcript": "p, b, t, d, k, g",
+      "v3SourceKey": "a2-reisen-aussprache-ptk"
+    },
+    {
+      "key": "a2-reisen-aussprache-bp",
+      "kind": "audio",
+      "title": "Aussprache : b en fin de mot — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_03_bp.mp3"
+      },
+      "transcript": "die Urlaube, der Urlaub\ngeben, gab\ndie Liebe, lieb",
+      "v3SourceKey": "a2-reisen-aussprache-bp"
+    },
+    {
+      "key": "a2-reisen-aussprache-dt",
+      "kind": "audio",
+      "title": "Aussprache : d en fin de mot — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_04_dt.mp3"
+      },
+      "transcript": "die Strände, der Strand\nsandig, der Sand\neinladen, einlud",
+      "v3SourceKey": "a2-reisen-aussprache-dt"
+    },
+    {
+      "key": "a2-reisen-aussprache-gk",
+      "kind": "audio",
+      "title": "Aussprache : g en fin de mot — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_05_gk.mp3"
+      },
+      "transcript": "billiger, billig\nfliegen, der Flug\ndie Berge, der Berg",
+      "v3SourceKey": "a2-reisen-aussprache-gk"
+    },
+    {
+      "key": "a2-reisen-aussprache-s",
+      "kind": "audio",
+      "title": "Aussprache : s en fin de mot — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_06_s.mp3"
+      },
+      "transcript": "lesen, las\ndie Preise, der Preis\ndie Häuser, das Haus",
+      "v3SourceKey": "a2-reisen-aussprache-s"
+    },
+    {
+      "key": "a2-reisen-aussprache-vf",
+      "kind": "audio",
+      "title": "Aussprache : v en fin de mot — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_06_07_vf.mp3"
+      },
+      "transcript": "brave, brav",
+      "v3SourceKey": "a2-reisen-aussprache-vf"
+    },
+    {
+      "key": "a2-reisen-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Vérifier : écouter à la gare, au téléphone, à la radio",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Der Zug hat circa fünfzehn Minuten Verspätung."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-grammatik-q15",
+      "kind": "audio",
+      "title": "Dictée q15 · S’entraîner : le Perfekt et les destinations",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir sind mit dem Nachtzug nach Wien gefahren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Einmal nach Hamburg, hin und zurück, bitte."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Von welchem Gleis fährt der Zug ab?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe das Zimmer schon reserviert."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Gepäck ist nicht angekommen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir machen Urlaub am Strand."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : à la gare et en voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das Flugzeug fliegt über den Berg."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-reisen-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gute Reise ! Voyager et raconter ses vacances",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Zug, die Züge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Flugzeug, die Flugzeuge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bahnhof, die Bahnhöfe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fahrkarte, die Fahrkarten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gleis, die Gleise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Abfahrt, die Abfahrten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ankunft, die Ankünfte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ankommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verpassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "reservieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "übernachten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Einzelzimmer, die Einzelzimmer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Doppelzimmer, die Doppelzimmer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Jugendherberge, die Jugendherbergen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ferienwohnung, die Ferienwohnungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Koffer, die Koffer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Rucksack, die Rucksäcke"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gepäck"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Reisepass, die Reisepässe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Urlaub, die Urlaube"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Meer, die Meere"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Berg, die Berge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wetter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "regnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sonnig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bewölkt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gewitter, die Gewitter"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

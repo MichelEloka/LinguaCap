@@ -78,8 +78,10 @@ try {
         return route.fulfill({ status: 404, json: { code: 'NOT_FOUND', message: 'Route non simulée dans l’aperçu.' } });
       });
       await context.route('**/__media/**', (route) => {
-        const file = join(repo, 'content', 'de', 'media', new URL(route.request().url()).pathname.replace('/__media/', ''));
-        if (!existsSync(file)) return route.fulfill({ status: 404, body: '' });
+        // V4 : contenus officiels dans content/de, sons de référence V2 déplacés dans content/base/de (repli).
+        const relative = decodeURIComponent(new URL(route.request().url()).pathname.replace('/__media/', ''));
+        const file = [join(repo, 'content', 'de', 'media', relative), join(repo, 'content', 'base', 'de', 'media', relative)].find((path) => existsSync(path));
+        if (!file) return route.fulfill({ status: 404, body: '' });
         const type = file.endsWith('.mp3') ? 'audio/mpeg' : file.endsWith('.jpg') ? 'image/jpeg' : 'image/png';
         return route.fulfill({ status: 200, body: readFileSync(file), headers: { 'content-type': type } });
       });

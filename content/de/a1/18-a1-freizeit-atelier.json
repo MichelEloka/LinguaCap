@@ -1,0 +1,1176 @@
+{
+  "id": "a1-freizeit-atelier",
+  "title": "Proposer une sortie et confirmer le rendez-vous",
+  "objective": "Exprimer une préférence, proposer une activité et choisir une heure et un lieu avec quelqu’un.",
+  "prerequisites": [
+    "a1-freizeit"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-freizeit-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "zeit",
+      "word": "Zeit",
+      "article": "die",
+      "plural": "Zeiten",
+      "partOfSpeech": "noun",
+      "translation": "le temps (disponible)",
+      "example": "Hast du am Samstag Zeit?",
+      "note": "Zeit haben : être libre, avoir le temps",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "koennen",
+      "word": "können",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pouvoir",
+      "example": "Wir können ins Kino gehen.",
+      "note": "ich kann, du kannst, wir können ; infinitif à la fin",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "lieber",
+      "word": "lieber",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "plutôt, de préférence",
+      "example": "Ich gehe lieber schwimmen.",
+      "note": "gern → lieber : aimer → préférer",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "kino",
+      "word": "Kino",
+      "article": "das",
+      "plural": "Kinos",
+      "partOfSpeech": "noun",
+      "translation": "le cinéma",
+      "example": "Gehst du gern ins Kino?",
+      "note": "ins Kino gehen : aller au cinéma",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "schwimmbad",
+      "word": "Schwimmbad",
+      "article": "das",
+      "plural": "Schwimmbäder",
+      "partOfSpeech": "noun",
+      "translation": "la piscine",
+      "example": "Wir treffen uns vor dem Schwimmbad.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "park",
+      "word": "Park",
+      "article": "der",
+      "plural": "Parks",
+      "partOfSpeech": "noun",
+      "translation": "le parc",
+      "example": "Wir können im Park Fußball spielen.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "rad-fahren",
+      "word": "Rad fahren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire du vélo",
+      "example": "Am Sonntag können wir Rad fahren.",
+      "note": "ich fahre Rad",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "treffen",
+      "word": "treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rencontrer ; sich treffen : se retrouver",
+      "example": "Wir treffen uns vor dem Kino.",
+      "note": "du triffst, er trifft",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "regnen",
+      "word": "regnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pleuvoir",
+      "example": "Morgen kann es regnen.",
+      "note": "Es regnet : il pleut.",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "leider",
+      "word": "leider",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "malheureusement",
+      "example": "Um vier kann ich leider nicht.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "vor",
+      "word": "vor",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "devant",
+      "example": "Wir treffen uns vor dem Kino.",
+      "note": "lieu : vor + datif (vor dem Kino)",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "samstag",
+      "word": "Samstag",
+      "article": "der",
+      "plural": "Samstage",
+      "partOfSpeech": "noun",
+      "translation": "le samedi",
+      "example": "Hast du am Samstag Zeit?",
+      "note": "am Samstag : samedi (ce samedi-là)",
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "geht-es",
+      "word": "Geht es …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Est-ce possible … ?",
+      "example": "Geht es um fünf?",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "das-passt",
+      "word": "Das passt.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ça me convient.",
+      "example": "Um vier? Ja, das passt.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-atelier-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-freizeit-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : proposer, préférer, déplacer",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : proposer, préférer, déplacer",
+        "description": "PROPOSER UNE SORTIE · 15 MIN\n\n1. Lire un échange (5 min). Lukas écrit à Aylin : « Am Sonntag können wir Rad fahren. Hast du um zwei Uhr Zeit? » Aylin répond : « Um zwei kann ich nicht. Ich gehe auch lieber ins Schwimmbad. Hast du um vier Zeit? » Lukas confirme : « Ja, das passt. Wir treffen uns vor dem Schwimmbad. ». Repérez la première proposition (Rad fahren, um zwei), ce qui change (ins Schwimmbad, um vier) et le lieu du rendez-vous (vor dem Schwimmbad).\n\n2. Aimer, préférer, proposer (5 min). « Ich spiele gern Fußball » dit que vous aimez l’activité. « Ich gehe lieber schwimmen » exprime une préférence : lieber veut dire « plutôt, de préférence ». Pour proposer, on dit « Wir können Rad fahren » : le verbe können est conjugué en deuxième position et l’infinitif (Rad fahren) termine la phrase. Formez à voix haute deux propositions : Wir können tanzen. Wir können Musik hören.\n\n3. Accepter ou déplacer (5 min). Lisez ces quatre répliques et dites leur rôle : « Hast du am Mittwoch Zeit? » (demander), « Ja, gern! » (accepter), « Um vier kann ich leider nicht. » (refuser un horaire), « Geht es um fünf? » (proposer un autre horaire). Dans « Um vier kann ich leider nicht », l’heure ouvre la phrase : kann reste en deuxième position et le sujet ich vient juste après.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-freizeit-atelier-chat",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-freizeit-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : un projet pour samedi",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : un projet pour samedi",
+        "description": "UN PROJET QUI CHANGE · 12 MIN\n\nPHRASES UTILES\n• Hast du am Samstag Zeit? — Tu es libre samedi ?\n• Wir können im Park Fußball spielen. — On peut jouer au foot au parc.\n• Es regnet am Samstag. — Il pleut samedi.\n• Dann können wir ins Kino gehen. — Alors on peut aller au cinéma.\n• Kannst du um vier Uhr? — Tu peux à quatre heures ?\n• Geht es um fünf? — C’est possible à cinq heures ?\n• Treffen wir uns vor dem Kino? — On se retrouve devant le cinéma ?\n\nÀ VOUS\n1. Écoutez la scène sans lire la transcription : quelle activité est proposée d’abord, et pourquoi le projet change-t-il ?\n2. Réécoutez et repérez le jour, l’heure refusée, l’heure acceptée et le lieu du rendez-vous.\n3. Affichez la transcription. Repérez chaque forme de können (können, kannst, kann) et l’infinitif placé à la fin de la phrase.\n4. Lisez les deux rôles à voix haute, puis redites la scène avec une autre activité (schwimmen gehen) et d’autres heures.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-freizeit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-freizeit-atelier-samstag",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-freizeit-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : können, gern et lieber",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : können, gern et lieber",
+        "description": "Réécoutez la scène et complétez le rendez-vous. Entraînez-vous ensuite à conjuguer können, à placer l’infinitif à la fin et à choisir entre gern et lieber. Les deux dernières questions sont des dictées. La transcription de la scène s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-freizeit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez le rendez-vous.",
+          "text": "Am [[1]] gehen sie ins [[2]]. Sie treffen sich um [[3]] Uhr vor dem Kino.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Samstag"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kino"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "fünf",
+                "5"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Il pleut samedi : le football au parc devient « Dann können wir ins Kino gehen ». Quatre heures est refusé, cinq heures accepté (« Ja, fünf Uhr passt »)."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez avec la bonne forme de können.",
+          "text": "Wir [[1]] Fußball spielen. – [[2]] du um vier Uhr? – Um vier [[3]] ich nicht.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "können"
+              ],
+              "size": 7,
+              "hint": "können"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kannst"
+              ],
+              "size": 7,
+              "hint": "können"
+            },
+            {
+              "id": "3",
+              "accept": [
+                "kann"
+              ],
+              "size": 7,
+              "hint": "können"
+            }
+          ],
+          "explanation": "Können change de voyelle au singulier : ich kann, du kannst, mais wir können. Avec ich, il n’y a pas de terminaison : ich kann (pas « ich kanne »)."
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre en commençant par « Am Samstag ».",
+          "answers": [
+            [
+              "Am Samstag",
+              "können",
+              "wir",
+              "Fußball",
+              "spielen"
+            ]
+          ],
+          "explanation": "Am Samstag occupe la 1re place : können reste en 2e position, le sujet wir suit, et l’infinitif spielen ferme la phrase."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre en commençant par « Um vier » pour refuser l’horaire.",
+          "answers": [
+            [
+              "Um vier",
+              "kann",
+              "ich",
+              "leider",
+              "nicht"
+            ]
+          ],
+          "explanation": "L’heure en tête, le verbe kann en 2e position, puis ich. Leider (malheureusement) se place avant nicht, qui termine la phrase."
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Associez chaque phrase française à son équivalent allemand.",
+          "pairs": [
+            {
+              "left": "J’aime jouer au foot.",
+              "right": "Ich spiele gern Fußball."
+            },
+            {
+              "left": "Je préfère aller nager.",
+              "right": "Ich gehe lieber schwimmen."
+            },
+            {
+              "left": "Je n’aime pas danser.",
+              "right": "Ich tanze nicht gern."
+            },
+            {
+              "left": "On peut faire du vélo.",
+              "right": "Wir können Rad fahren."
+            }
+          ],
+          "explanation": "Gern = aimer faire, lieber = préférer, nicht gern = ne pas aimer : ils suivent le verbe conjugué. Avec können, l’autre verbe reste à l’infinitif, à la fin."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Complétez avec gern ou lieber : « Je vais volontiers au cinéma, mais je préfère encore aller nager. »",
+          "text": "Ich gehe [[1]] ins Kino, aber ich gehe noch [[2]] schwimmen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "gern",
+                "gerne"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "lieber"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "Gern dit qu’on aime une activité ; lieber, son comparatif, dit qu’on en préfère une autre. Noch lieber renforce la préférence : « encore plus volontiers »."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "mann",
+          "accept": [
+            "Wir treffen uns um fünf vor dem Kino.",
+            "Wir treffen uns um fünf Uhr vor dem Kino."
+          ],
+          "explanation": "Wir treffen uns : on se retrouve. L’heure (um fünf) vient avant le lieu (vor dem Kino). Kino est un nom : majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase. Écrivez les nombres en toutes lettres.",
+          "voice": "frau",
+          "accept": [
+            "Am Sonntag gehe ich lieber schwimmen."
+          ],
+          "explanation": "Am Sonntag ouvre la phrase : le verbe gehe reste 2e, ich suit, puis lieber. Sonntag, nom de jour, prend une majuscule.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : proposer et répondre",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : proposer et répondre",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Faites monter la voix à la fin des questions qui commencent par le verbe (Hast du …?).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-freizeit-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hast du am Samstag Zeit?",
+          "accept": [
+            "Hast du am Samstag Zeit?"
+          ],
+          "explanation": "Question sans mot interrogatif : le verbe hast ouvre la phrase et la voix monte à la fin. Le h de hast se souffle.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wir können ins Kino gehen.",
+          "accept": [
+            "Wir können ins Kino gehen."
+          ],
+          "explanation": "Le w de wir se prononce comme un v. Dans können, ö se dit « eu » bref, lèvres arrondies.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich gehe lieber schwimmen.",
+          "accept": [
+            "Ich gehe lieber schwimmen."
+          ],
+          "explanation": "Dans lieber, ie se dit comme un i long. Schwimmen commence par « chv » : sch + w.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Um vier kann ich leider nicht.",
+          "accept": [
+            "Um vier kann ich leider nicht.",
+            "Um 4 kann ich leider nicht."
+          ],
+          "explanation": "Vier commence par le son f ; leider se dit « laïder ». La phrase refuse poliment un horaire.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Geht es um fünf Uhr?",
+          "accept": [
+            "Geht es um fünf Uhr?",
+            "Geht es um 5 Uhr?"
+          ],
+          "explanation": "Fünf : ü se dit comme le « u » français. Uhr se prononce « our », le r presque muet.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wir treffen uns vor dem Kino.",
+          "accept": [
+            "Wir treffen uns vor dem Kino."
+          ],
+          "explanation": "Vor se prononce « for ». Treffen a un e bref ; l’accent tombe sur la 1re syllabe : TREF-fen.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : un rendez-vous pour samedi",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : un rendez-vous pour samedi",
+        "description": "Écoutez la scène une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails : l’activité, la météo, l’heure et le lieu. Les deux dernières questions vérifient les phrases à réemployer. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-freizeit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-freizeit-atelier-fussball",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a1-freizeit-atelier-kino",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a1-freizeit-atelier-rad",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : quelle activité est proposée en premier ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jouer au football",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Aller au cinéma",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Faire du vélo",
+              "correct": false
+            }
+          ],
+          "explanation": "La première proposition est « Wir können im Park Fußball spielen ». Le cinéma n’arrive qu’ensuite, à cause de la pluie ; le vélo n’est pas proposé.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : pourquoi changent-ils de projet ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le cinéma est plein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Il va pleuvoir samedi.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le parc ferme tôt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Aber es regnet am Samstag » : regnen veut dire « pleuvoir ». C’est pour cela que le projet devient « Dann können wir ins Kino gehen ».",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : à quelle heure se donnent-ils finalement rendez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "À quatre heures",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "À trois heures",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "À cinq heures",
+              "correct": true
+            }
+          ],
+          "explanation": "Quatre heures est refusé (« Um vier kann ich nicht »). L’autre propose « Geht es um fünf? », et la réponse confirme : « Ja, fünf Uhr passt ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : où se retrouvent-ils ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Devant le cinéma",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Dans le parc",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "À la gare",
+              "correct": false
+            }
+          ],
+          "explanation": "« Treffen wir uns vor dem Kino? » – « Ja, vor dem Kino » : vor signifie « devant ». Le parc était le lieu du premier projet, abandonné.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quelle phrase propose correctement de jouer au football ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir Fußball spielen können.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wir können Fußball spielen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wir können spielen Fußball.",
+              "correct": false
+            }
+          ],
+          "explanation": "Avec können, le verbe conjugué est en 2e position et l’infinitif spielen va à la fin : Wir können Fußball spielen. L’ordre français (« pouvons jouer au football ») est faux en allemand.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Tu veux dire que tu préfères lire. Quelle phrase choisis-tu ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich kann lesen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich lese nicht gern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich lese lieber.",
+              "correct": true
+            }
+          ],
+          "explanation": "Lieber exprime la préférence : Ich lese lieber (je préfère lire). « Ich kann lesen » dit seulement qu’on sait lire, et « nicht gern » qu’on n’aime pas.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : proposer une sortie et confirmer",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : proposer une sortie et confirmer",
+        "description": "Vous voulez sortir ce week-end avec une amie. Vous l’appelez pour proposer une activité. Elle préfère autre chose ou n’est pas libre à l’heure prévue : vous trouvez un accord, puis vous confirmez par message.\n\nMODÈLE : L’APPEL\n– Hallo Aylin! Hast du am Sonntag Zeit? Wir können Rad fahren.\n– Ich gehe lieber ins Schwimmbad. Und um zwei kann ich nicht. Geht es um vier?\n– Ja, um vier passt. Treffen wir uns vor dem Schwimmbad?\n– Ja, gern. Bis Sonntag!\n\nMODÈLE : LE MESSAGE\nHallo Aylin! Am Sonntag gehen wir ins Schwimmbad. Wir treffen uns um vier Uhr vor dem Schwimmbad. Bis Sonntag!",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez l’appel en jouant les deux voix : proposez une activité avec « Wir können … », faites refuser l’heure ou l’activité par votre amie, proposez autre chose, puis confirmez le jour, l’heure et le lieu.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez le message de confirmation envoyé après l’appel : le jour, l’activité retenue, l’heure et le lieu du rendez-vous, avec une salutation et une formule pour finir.",
+          "maxChars": 500,
+          "minWords": 20
+        },
+        "checklist": [
+          "J’ai proposé une activité avec « Wir können … » et l’infinitif à la fin de la phrase.",
+          "J’ai exprimé une préférence avec lieber ou refusé un horaire avec « … kann ich leider nicht ».",
+          "Le jour (am …), l’heure (um …) et le lieu (vor dem …) du nouveau rendez-vous sont clairs.",
+          "Mon message ne reprend pas l’ancien horaire : on sait sans hésiter quel rendez-vous compte."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-freizeit-atelier-dialogue",
+      "kind": "audio",
+      "title": "Proposer une sortie et confirmer le rendez-vous · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hast du am Samstag Zeit? Wir können im Park Fußball spielen."
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, ich habe Zeit. Aber es regnet am Samstag."
+        },
+        {
+          "voice": "frau",
+          "text": "Dann können wir ins Kino gehen. Gehst du gern ins Kino?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, gern. Kannst du um vier Uhr?"
+        },
+        {
+          "voice": "frau",
+          "text": "Um vier kann ich nicht. Geht es um fünf?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, fünf Uhr passt. Treffen wir uns vor dem Kino?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, vor dem Kino. Bis Samstag!"
+        },
+        {
+          "voice": "mann",
+          "text": "Bis Samstag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-freizeit-atelier-chat",
+      "kind": "image",
+      "title": "Deux amis organisent leur dimanche",
+      "alt": "Échange de messages avec Aylin : « Am Sonntag können wir Rad fahren. Hast du um zwei Uhr Zeit? » — « Um zwei kann ich nicht. Ich gehe auch lieber ins Schwimmbad. Hast du um vier Zeit? » — « Ja, das passt. Wir treffen uns vor dem Schwimmbad. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Aylin",
+        "size": 28,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Am Sonntag [können] wir Rad fahren. Hast du um zwei Uhr Zeit?"
+          },
+          {
+            "from": "Aylin",
+            "text": "Um zwei [kann] ich nicht. Ich gehe auch [lieber] ins Schwimmbad. Hast du um vier Zeit?"
+          },
+          {
+            "side": "right",
+            "text": "Ja, das passt. Wir treffen uns vor dem Schwimmbad."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-freizeit-atelier-samstag",
+      "kind": "image",
+      "title": "Une proposition pour samedi",
+      "alt": "Dans un parc, Aylin demande « Hast du am Samstag Zeit? » et Lukas répond « Ja, ich habe Zeit. ». En haut : un calendrier, une horloge et un téléphone portable.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "park",
+        "people": [
+          {
+            "name": "Aylin",
+            "say": "Hast du am Samstag Zeit?"
+          },
+          {
+            "name": "Lukas",
+            "say": "Ja, ich habe Zeit."
+          }
+        ],
+        "items": [
+          "calendar-days",
+          "clock",
+          "smartphone"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-freizeit-atelier-fussball",
+      "kind": "image",
+      "title": "Jouer au football",
+      "alt": "Un ballon.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "volleyball"
+      }
+    },
+    {
+      "key": "v4-a1-freizeit-atelier-kino",
+      "kind": "image",
+      "title": "Aller au cinéma",
+      "alt": "Un clap de cinéma.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "clapperboard"
+      }
+    },
+    {
+      "key": "v4-a1-freizeit-atelier-rad",
+      "kind": "image",
+      "title": "Faire du vélo",
+      "alt": "Un vélo vu de profil.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "key": "a1-freizeit-atelier-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : können, gern et lieber",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Wir treffen uns um fünf vor dem Kino."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : können, gern et lieber",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Am Sonntag gehe ich lieber schwimmen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du am Samstag Zeit?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir können ins Kino gehen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich gehe lieber schwimmen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Um vier kann ich leider nicht."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Geht es um fünf Uhr?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : proposer et répondre",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir treffen uns vor dem Kino."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Proposer une sortie et confirmer le rendez-vous",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Zeit, die Zeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "können"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lieber"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kino, die Kinos"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Schwimmbad, die Schwimmbäder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Park, die Parks"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Rad fahren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "regnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "leider"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vor"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Samstag, die Samstage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Geht es …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das passt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

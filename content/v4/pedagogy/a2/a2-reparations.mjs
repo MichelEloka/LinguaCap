@@ -1,0 +1,302 @@
+// Couche pédagogique V4 · a2-reparations (lot A7, contenu A2).
+// Signaler une panne : la prise de notes devient un exercice à trous sur l’appel, la lecture de l’avis de passage
+// reste une leçon sans tâche hors application, et la mission est remise dans l’application.
+// Les questions du contrôle illustrées (q1, images-v4) restent intactes : seules les explications changent.
+
+const dialogue = { media: 'a2-reparations-dialogue', usage: 'audio', transcriptVisibility: 'after_answer', decorative: false };
+
+export default {
+  module: 'a2-reparations',
+  grammarFocus: ['seit-bis-zwischen', 'demande-polie-koennte-waere'],
+
+  // Scène du kit corrigée : un robinet tropfe « stärker », pas « schneller ». À régénérer.
+  media: [
+    {
+      "key": "a2-reparations-dialogue",
+      "kind": "audio",
+      "title": "Signaler une panne dans son logement · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Guten Tag, hier ist Nora Berger aus der Gartenstraße acht. Seit gestern Abend tropft der Wasserhahn im Bad."
+        },
+        {
+          "voice": "mann",
+          "text": "Guten Tag. Tropft er nur nach dem Benutzen oder auch, wenn er ganz zu ist?"
+        },
+        {
+          "voice": "frau",
+          "text": "Auch wenn er zu ist. Heute tropft er stärker als gestern."
+        },
+        {
+          "voice": "mann",
+          "text": "Verstehe. Unser Techniker kann am Donnerstag um zehn Uhr vorbeikommen."
+        },
+        {
+          "voice": "frau",
+          "text": "Da bin ich bei der Arbeit. Haben Sie am Freitag nach zwei Uhr Zeit?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, am Freitag zwischen vierzehn und sechzehn Uhr. Kann dann jemand die Tür öffnen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, ich bin zu Hause. Die Wohnung ist in der zweiten Etage, gleich links. Bitte klingeln Sie bei Berger."
+        },
+        {
+          "voice": "mann",
+          "text": "Alles klar. Ich schicke Ihnen die Bestätigung gleich per E-Mail."
+        },
+        {
+          "voice": "frau",
+          "text": "Danke. Soll ich dem Techniker den Wasserhahn zeigen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, bitte. Er meldet sich kurz vor dem Termin telefonisch bei Ihnen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ],
+
+  vocabulary: [
+    { id: 'wasserhahn', word: 'Wasserhahn', article: 'der', plural: 'Wasserhähne', partOfSpeech: 'noun', translation: 'le robinet',
+      example: 'Der Wasserhahn im Bad tropft.', note: null },
+    { id: 'tropfen', word: 'tropfen', article: null, plural: null, partOfSpeech: 'verb', translation: 'goutter, fuir',
+      example: 'Der Wasserhahn darf nicht mehr tropfen.', note: null },
+    { id: 'heizkoerper', word: 'Heizkörper', article: 'der', plural: 'Heizkörper', partOfSpeech: 'noun', translation: 'le radiateur',
+      example: 'Der Heizkörper im Schlafzimmer bleibt kalt.', note: null },
+    { id: 'licht', word: 'Licht', article: 'das', plural: 'Lichter', partOfSpeech: 'noun', translation: 'la lumière',
+      example: 'Das Licht im Flur geht nicht mehr an.', note: null },
+    { id: 'funktionieren', word: 'funktionieren', article: null, plural: null, partOfSpeech: 'verb', translation: 'fonctionner, marcher',
+      example: 'Die Heizung muss wieder funktionieren.', note: 'Perfekt sans ge- : hat funktioniert' },
+    { id: 'geraeusch', word: 'Geräusch', article: 'das', plural: 'Geräusche', partOfSpeech: 'noun', translation: 'le bruit',
+      example: 'Die Heizung im Keller macht ein lautes Geräusch.', note: null },
+    { id: 'reparieren', word: 'reparieren', article: null, plural: null, partOfSpeech: 'verb', translation: 'réparer',
+      example: 'Der Techniker kann den Wasserhahn reparieren.', note: 'Perfekt sans ge- : hat repariert' },
+    { id: 'reparatur', word: 'Reparatur', article: 'die', plural: 'Reparaturen', partOfSpeech: 'noun', translation: 'la réparation',
+      example: 'Die Reparatur dauert eine Stunde.', note: null },
+    { id: 'techniker', word: 'Techniker', article: 'der', plural: 'Techniker', partOfSpeech: 'noun', translation: 'le technicien',
+      example: 'Der Techniker kommt am Freitag.', note: 'au féminin : die Technikerin' },
+    { id: 'hausverwaltung', word: 'Hausverwaltung', article: 'die', plural: 'Hausverwaltungen', partOfSpeech: 'noun', translation: 'la gestion de l’immeuble, la régie',
+      example: 'Ich rufe die Hausverwaltung an.', note: null },
+    { id: 'vorbeikommen', word: 'vorbeikommen', article: null, plural: null, partOfSpeech: 'verb', translation: 'passer (chez quelqu’un)',
+      example: 'Kann jemand am Mittwoch vorbeikommen?', note: 'séparable : vorbei|kommen · Perfekt : ist vorbeigekommen' },
+    { id: 'klingeln', word: 'klingeln', article: null, plural: null, partOfSpeech: 'verb', translation: 'sonner',
+      example: 'Bitte klingeln Sie bei Berger.', note: 'bei + nom : à la sonnette de …' },
+    { id: 'klingel', word: 'Klingel', article: 'die', plural: 'Klingeln', partOfSpeech: 'noun', translation: 'la sonnette',
+      example: 'Auf der Klingel steht mein Name.', note: null },
+    { id: 'etage', word: 'Etage', article: 'die', plural: 'Etagen', partOfSpeech: 'noun', translation: 'l’étage',
+      example: 'Die Wohnung ist in der zweiten Etage.', note: 'in der zweiten Etage = im zweiten Stock' },
+    { id: 'keller', word: 'Keller', article: 'der', plural: 'Keller', partOfSpeech: 'noun', translation: 'la cave, le sous-sol',
+      example: 'Die Heizung ist im Keller.', note: null },
+    { id: 'flur', word: 'Flur', article: 'der', plural: 'Flure', partOfSpeech: 'noun', translation: 'le couloir, l’entrée',
+      example: 'Im Flur flackert das Licht.', note: null },
+    { id: 'seit', word: 'seit', article: null, plural: null, partOfSpeech: 'preposition', translation: 'depuis',
+      example: 'Seit Montag bleibt der Heizkörper kalt.', note: '+ datif ; verbe au présent pour ce qui dure encore' },
+    { id: 'zwischen', word: 'zwischen', article: null, plural: null, partOfSpeech: 'preposition', translation: 'entre',
+      example: 'Der Techniker kommt zwischen vierzehn und sechzehn Uhr.', note: 'zwischen … und … : un intervalle' },
+  ],
+
+  activities: {
+    'a2-reparations-guide': {
+      title: 'Découvrir : décrire une panne et depuis quand',
+      estimatedMinutes: 15,
+      lesson: {
+        title: 'Découvrir : décrire une panne et depuis quand',
+        description: `Lisez ces deux signalements envoyés à une régie fictive.
+« Seit Montag bleibt der Heizkörper im Schlafzimmer kalt, auch wenn ich ihn aufdrehe. Im Wohnzimmer ist es warm. »
+« Seit gestern flackert das Licht im Flur. Heute geht es gar nicht mehr an. »
+Repérez dans chacun l’appareil, la pièce, le début du problème et son état actuel. Dans le premier, une seule pièce est touchée : le salon est chauffé.
+
+DÉCRIRE CE QUI NE VA PAS
+• Der Wasserhahn tropft. — Le robinet goutte.
+• Die Heizung bleibt kalt. — Le chauffage reste froid.
+• Die Tür schließt nicht richtig. — La porte ne ferme pas bien.
+• Das Licht flackert. — La lumière clignote.
+On ajoute un lieu et un début : Der Wasserhahn in der Küche tropft seit heute Morgen. Die Heizung im Bad bleibt seit zwei Tagen kalt.
+
+DEPUIS QUAND ? QU’EST-CE QUI A CHANGÉ ?
+Seit + datif donne le début d’un problème qui dure encore ; le verbe reste au présent : Seit Dienstag macht die Heizung im Keller Geräusche. Une seconde phrase décrit l’état actuel : Abends ist es besonders laut. Heute geht das Licht gar nicht mehr an. En tête de phrase, seit Dienstag occupe la première position : le verbe vient juste après.
+
+DEMANDER UN PASSAGE
+Kann jemand vorbeikommen? Am Mittwoch bin ich ab vierzehn Uhr zu Hause. Am Donnerstag geht es nur vormittags.
+Könnte jemand am Mittwoch zwischen vierzehn und sechzehn Uhr vorbeikommen? — Könnte rend la demande plus polie.
+
+ÉCOUTEZ LES MODÈLES
+Écoutez les cinq phrases modèles, puis lisez à voix haute les descriptions de cette page en insistant sur le début du problème. L’exercice « Répéter à voix haute » de ce module vérifie ensuite votre prononciation.`,
+      },
+    },
+
+    'a2-reparations-pratique': {
+      kind: 'exercise',
+      title: 'S’entraîner : noter un rendez-vous de réparation',
+      estimatedMinutes: 12,
+      competences: ['ecoute', 'expression-ecrite'],
+      lesson: {
+        title: 'S’entraîner : noter un rendez-vous de réparation',
+        description: `Une locataire, Nora Berger, téléphone à la gestion de son immeuble.
+
+1. Écoutez l’appel une première fois sans lire les phrases : qui appelle, quel est le problème, depuis quand ?
+2. Réécoutez pour compléter les notes : l’évolution de la panne, les deux créneaux proposés et les indications d’accès. Vous pouvez écrire les nombres en chiffres.
+3. Les deux dernières questions sont des dictées : deux phrases utiles pour signaler une panne.
+Après validation, la transcription de l’appel et l’explication de chaque réponse s’affichent.`,
+      },
+      placements: { remove: ['a2-reparations-dialogue'], add: [dialogue] },
+      questions: [
+        { id: 'q1', type: 'fill', prompt: 'Le problème : complétez la première réplique.',
+          text: 'Seit gestern [[1]] tropft der [[2]] im Bad.',
+          blanks: [{ id: '1', accept: ['Abend'], size: 7, hint: null }, { id: '2', accept: ['Wasserhahn'], size: 11, hint: null }],
+          explanation: 'Nora Berger dit « Seit gestern Abend tropft der Wasserhahn im Bad » : seit gestern Abend en tête, puis le verbe tropft, puis le sujet der Wasserhahn (le robinet).' },
+        { id: 'q2', type: 'fill', prompt: 'Comment la panne évolue-t-elle ? Complétez.',
+          text: 'Heute tropft er [[1]] als gestern.',
+          blanks: [{ id: '1', accept: ['stärker'], size: 10, hint: null }],
+          explanation: '« Heute tropft er stärker als gestern » : le comparatif stärker (plus fort, de stark, avec Umlaut) + als montre que la panne s’aggrave.' },
+        { id: 'q3', type: 'fill', prompt: 'Le premier créneau proposé : complétez la note.',
+          text: 'Donnerstag um [[1]] Uhr: geht nicht, Frau Berger ist bei der [[2]].',
+          blanks: [{ id: '1', accept: ['10', 'zehn'], size: 6, hint: null }, { id: '2', accept: ['Arbeit'], size: 8, hint: null }],
+          explanation: 'Le technicien peut venir « am Donnerstag um zehn Uhr », mais elle répond « Da bin ich bei der Arbeit » : ce créneau est refusé.' },
+        { id: 'q4', type: 'fill', prompt: 'Le créneau retenu : complétez la note.',
+          text: 'Termin: Freitag zwischen [[1]] und [[2]] Uhr.',
+          blanks: [{ id: '1', accept: ['14', 'vierzehn'], size: 9, hint: null }, { id: '2', accept: ['16', 'sechzehn'], size: 9, hint: null }],
+          explanation: 'Elle demande « am Freitag nach zwei Uhr » et la régie confirme « zwischen vierzehn und sechzehn Uhr » : zwischen … und … donne une plage de passage.' },
+        { id: 'q5', type: 'fill', prompt: 'L’accès au logement : complétez.',
+          text: 'Die Wohnung ist in der [[1]] Etage, gleich links. Bitte klingeln Sie bei [[2]].',
+          blanks: [{ id: '1', accept: ['zweiten'], size: 8, hint: null }, { id: '2', accept: ['Berger'], size: 8, hint: null }],
+          explanation: 'In der zweiten Etage : au deuxième étage, avec la terminaison -en après der au datif. Klingeln bei Berger : sonner à la sonnette « Berger ».' },
+        { id: 'q6', type: 'fill', prompt: 'Que fera le technicien avant de venir ? Complétez.',
+          text: 'Er [[1]] sich kurz vor dem Termin telefonisch bei Ihnen.',
+          blanks: [{ id: '1', accept: ['meldet'], size: 8, hint: 'sich melden' }],
+          explanation: 'Sich bei jemandem melden : contacter, donner signe de vie. Le technicien appellera peu avant le rendez-vous (telefonisch).' },
+        { id: 'q7', type: 'dictation', prompt: 'Écoutez et écrivez la phrase : un autre problème dans un logement.',
+          accept: ['Die Tür zum Balkon schließt nicht mehr richtig.'], voice: 'sprecherin',
+          explanation: 'Zum est la contraction de zu dem. Schließt s’écrit avec ß, car le i de schließen est long ; nicht mehr signifie « ne … plus » : la porte fermait avant.' },
+        { id: 'q8', type: 'dictation', prompt: 'Écoutez et écrivez la phrase : une disponibilité pour le technicien.',
+          accept: ['Am Mittwoch bin ich ab vierzehn Uhr zu Hause.', 'Am Mittwoch bin ich ab 14 Uhr zu Hause.'], voice: 'sprecher',
+          explanation: 'Am Mittwoch occupe la première position : le verbe bin suit, puis le sujet ich. Ab vierzehn Uhr signifie « à partir de 14 h » ; zu Hause s’écrit en deux mots.' },
+      ],
+    },
+
+    'a2-reparations-approfondir': {
+      title: 'Comprendre : un avis de passage et l’accès au logement',
+      estimatedMinutes: 15,
+      competences: ['lecture'],
+      lesson: {
+        title: 'Comprendre : un avis de passage et l’accès au logement',
+        description: `Lisez le signalement d’une locataire fictive, puis la réponse de la régie.
+« Hausverwaltung Nord, ich wohne in der Birkenstraße 6, 2. Stock links. Seit Samstag schließt die Tür zum Balkon nicht mehr richtig. Könnte jemand am Mittwoch nach zwei Uhr kommen? — N. Weber »
+« Der Techniker kommt am Mittwoch zwischen 15 und 17 Uhr. Bitte bestätigen Sie bis Dienstag, 18 Uhr. Halten Sie den Zugang zur Balkontür frei. »
+Repérez l’objet (la porte du balcon), le créneau de passage (mercredi entre 15 h et 17 h), l’instruction (laisser l’accès à la porte libre) et la date limite pour répondre (mardi 18 h).
+
+ZWISCHEN, BIS, AB, NACH
+• zwischen 15 und 17 Uhr : à un moment dans cet intervalle.
+• bis Dienstag, 18 Uhr : au plus tard mardi à 18 h, c’est la date limite.
+• ab halb elf : à partir de 10 h 30. • nach zwei Uhr : après 14 h.
+
+QUI OUVRE LA PORTE ?
+• Bitte klingeln Sie bei Weber. — Sonnez à la sonnette « Weber ».
+• Die Wohnung liegt im zweiten Stock links. — L’appartement est au deuxième étage, à gauche.
+• Am Mittwoch öffnet Ihnen meine Nachbarin; bitte klingeln Sie bei Schuster. — Ce jour-là, c’est la voisine qui ouvre : il faut sonner chez Schuster, pas chez Weber.
+
+UN RENDEZ-VOUS ANNULÉ
+« Der Termin am Mittwoch fällt aus. Wir können am Donnerstag zwischen 9 und 11 Uhr kommen. Bitte antworten Sie kurz. »
+Si vous n’êtes là qu’après 10 h 30, proposez poliment une autre plage : Wäre ein Termin ab halb elf möglich? Am Freitag bin ich den ganzen Tag zu Hause. Wäre … möglich? est une formule de politesse, comme könnte.
+
+À RETENIR
+Une réponse claire à la régie contient une salutation, le problème, le créneau proposé, la personne qui ouvre et un détail d’accès. Lisez à voix haute les phrases modèles de cette page : vous les réemploierez dans la mission du module.`,
+      },
+    },
+
+    'a2-reparations-controle': {
+      title: 'Vérifier : un appel à la gestion de l’immeuble',
+      estimatedMinutes: 10,
+      lesson: {
+        title: 'Vérifier : un appel à la gestion de l’immeuble',
+        description: 'Écoutez une première fois l’appel de Nora Berger pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les trois dernières questions portent sur des phrases utiles : répondez sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.',
+      },
+      explanations: {
+        q1: 'Nora Berger dit « Seit gestern Abend tropft der Wasserhahn im Bad » : der Wasserhahn est le robinet, das Bad la salle de bain. Le radiateur et la porte du balcon viennent d’autres signalements du module.',
+        q2: '« Seit gestern Abend » : depuis hier soir. Seit indique le début d’un problème qui dure encore. Jeudi est le premier créneau proposé, pas le début de la panne.',
+        q3: 'Au technicien qui demande s’il goutte seulement après usage, elle répond « Auch wenn er zu ist » : même fermé (zu). « Nur nach dem Benutzen » est justement l’hypothèse qu’elle écarte.',
+        q4: 'Jeudi à 10 h ne convient pas (« Da bin ich bei der Arbeit »). Elle demande vendredi après 14 h et la régie confirme « am Freitag zwischen vierzehn und sechzehn Uhr ».',
+        q5: '« Die Wohnung ist in der zweiten Etage, gleich links » : deuxième étage, à gauche. In der zweiten Etage et im zweiten Stock veulent dire la même chose ; links signifie à gauche.',
+        q6: 'Seit indique le début d’une situation qui dure : seit Montag, depuis lundi. Bis Montag fixerait une fin (jusqu’à lundi), et la phrase avec am Montag dit le contraire.',
+        q7: 'Zwischen neun und elf Uhr donne un intervalle : le technicien peut arriver à tout moment entre 9 h et 11 h. Seit ne s’emploie pas pour un horaire à venir, et « um neun und elf Uhr » donnerait deux heures précises.',
+        q8: 'Klingeln bei + nom : sonner à la sonnette qui porte ce nom. « Bitte rufen Sie Weber morgen an » demande un appel téléphonique, et l’autre phrase situe le logement sans parler de sonnette.',
+      },
+    },
+
+    'a2-reparations-mission': {
+      kind: 'mission',
+      title: 'Mission : signaler une panne et organiser l’accès',
+      estimatedMinutes: 20,
+      competences: ['expression-orale', 'expression-ecrite'],
+      lesson: {
+        title: 'Mission : signaler une panne et organiser l’accès',
+        description: `Situation : depuis mardi soir, le radiateur de votre chambre reste froid quand vous l’allumez ; dans le salon, le chauffage fonctionne. Vous pouvez être présent mercredi après 15 h ou jeudi matin. La régie propose d’abord mercredi à 10 h, impossible pour vous, puis jeudi entre 9 h et 11 h. Plus tard, vous apprenez que votre voisin, qui doit ouvrir, ne sera là qu’à partir de 10 h 30.
+
+Modèles : Der Heizkörper im Schlafzimmer bleibt seit Dienstagabend kalt. Im Wohnzimmer funktioniert die Heizung. Könnten Sie am Donnerstagvormittag kommen? Wäre ein Termin zwischen halb elf und zwölf Uhr möglich? Bitte klingeln Sie bei Seidel.
+
+Choisissez votre étage et le nom sur la sonnette, préparez quelques mots-clés, puis réalisez les deux parties. Vérifiez que la régie ne peut plus prévoir une arrivée à 9 h.`,
+      },
+      mission: {
+        oral: {
+          prompt: 'Enregistrez votre appel à la régie (une minute environ) : décrivez la panne, dites depuis quand elle dure et que le salon est chauffé, refusez mercredi 10 h, acceptez jeudi entre 9 h et 11 h, puis donnez l’étage et le nom sur la sonnette.',
+          maxSeconds: 90,
+        },
+        written: {
+          prompt: 'Votre voisin n’ouvrira qu’à partir de 10 h 30. Écrivez à la régie un message de 50 à 65 mots : rappelez le problème, expliquez le changement, demandez de confirmer une nouvelle plage horaire et indiquez à quelle sonnette sonner.',
+          maxChars: 1000,
+          minWords: 50,
+        },
+        checklist: [
+          'J’ai nommé l’appareil et la pièce : der Heizkörper im Schlafzimmer.',
+          'J’ai dit depuis quand dure la panne avec seit, verbe au présent.',
+          'Mon message écrit propose une plage qui commence à 10 h 30 ou plus tard, avec ab ou zwischen … und ….',
+          'J’ai précisé qui ouvre et à quelle sonnette sonner : Bitte klingeln Sie bei ….',
+          'J’ai relu la place des verbes : Seit Dienstag bleibt …, le verbe juste après le premier élément.',
+        ],
+      },
+    },
+  },
+
+  add: [
+    {
+      after: 'a2-reparations-controle',
+      activity: {
+        id: 'a2-reparations-repeter',
+        kind: 'exercise',
+        title: 'Répéter à voix haute : signaler une panne',
+        estimatedMinutes: 8,
+        competences: ['expression-orale'],
+        lesson: {
+          title: 'Répéter à voix haute : signaler une panne',
+          description: 'Écoutez chaque modèle, puis dites la phrase à voix haute, comme au téléphone avec la régie. Articulez le lieu, le début du problème et les heures. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.',
+          transcript: null,
+        },
+        placements: [],
+        questions: [
+          { id: 'q1', type: 'speak', prompt: 'Écoutez, puis signalez la fuite du robinet.',
+            text: 'Der Wasserhahn im Bad tropft seit gestern Abend.', accept: ['Der Wasserhahn im Bad tropft seit gestern Abend.'], threshold: 75,
+            explanation: 'Wasserhahn s’accentue sur Wasser ; le h de -hahn s’aspire. Dans tropft, prononcez bien le groupe pf.' },
+          { id: 'q2', type: 'speak', prompt: 'Écoutez, puis dites depuis quand le radiateur reste froid.',
+            text: 'Seit Montag bleibt der Heizkörper kalt.', accept: ['Seit Montag bleibt der Heizkörper kalt.'], threshold: 75,
+            explanation: 'Seit Montag en tête : le verbe bleibt suit directement. Dans Heizkörper, ei se dit [aï] et ö s’arrondit comme dans « peur ».' },
+          { id: 'q3', type: 'speak', prompt: 'Écoutez, puis décrivez l’état actuel de la lumière.',
+            text: 'Heute funktioniert das Licht im Flur gar nicht mehr.', accept: ['Heute funktioniert das Licht im Flur gar nicht mehr.'], threshold: 75,
+            explanation: 'Gar nicht mehr renforce la négation : la lumière ne marche plus du tout. Le ch de Licht et de nicht se prononce en souriant, comme dans ich.' },
+          { id: 'q4', type: 'speak', prompt: 'Écoutez, puis demandez poliment un passage dans une plage horaire.',
+            text: 'Könnte jemand am Freitag zwischen vierzehn und sechzehn Uhr vorbeikommen?',
+            accept: ['Könnte jemand am Freitag zwischen vierzehn und sechzehn Uhr vorbeikommen?', 'Könnte jemand am Freitag zwischen 14 und 16 Uhr vorbeikommen?'], threshold: 75,
+            explanation: 'Könnte rend la demande polie ; l’infinitif vorbeikommen ferme la question. Accentuez la particule : vor-BEI-kommen.' },
+          { id: 'q5', type: 'speak', prompt: 'Écoutez, puis indiquez au technicien où sonner.',
+            text: 'Bitte klingeln Sie bei Berger im zweiten Stock.', accept: ['Bitte klingeln Sie bei Berger im zweiten Stock.'], threshold: 75,
+            explanation: 'À l’impératif de politesse, le verbe klingeln ouvre la phrase avant Sie. Im zweiten Stock : au deuxième étage.' },
+        ],
+      },
+    },
+  ],
+};

@@ -1,14 +1,16 @@
 import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
-  Activity, AlarmClock, AlertTriangle, ArrowLeft, BarChart3, Bell, CalendarClock, CalendarDays, Check, CheckCircle2, ClipboardCheck,
-  Clock, FileSignature, ListChecks, MessageCircle, MessagesSquare, PauseCircle, Play, RefreshCw, Route, Send, ShieldCheck, Target, Timer, Trophy,
+  Activity, AlarmClock, AlertTriangle, ArrowLeft, ArrowRight, BarChart3, Bell, CalendarClock, CalendarDays, Check, CheckCircle2, ChevronRight,
+  ClipboardCheck, Clock, Eye, FileSignature, Flag, ListChecks, MessageCircle, MessagesSquare, Mic, PauseCircle, Play, RefreshCw, Route,
+  Send, ShieldCheck, Target, Timer, Trophy,
 } from 'lucide-react';
 import { Badge, EmptyState, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
 import {
   Avatar, Bars, Card, ProgressRing, Segmented, Skeleton, SkeletonCard, TabPanel, Tabs, Timeline, type TimelineEntry,
 } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import type { MissionSummary } from '../../integration/v4';
 import { formatDue, sessionStatus, type Grade, type SessionSummary } from './LearnerSession';
 import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
 import { StaffPathTab } from './staff-path';
@@ -17,6 +19,10 @@ import {
   DateTile, StaffComposer, StaffError, dateTime, dayOffset, errorText, formatMinutes, goalStatusOf, mediumDate, plural, relativeDay, shortDate,
 } from './staff-kit';
 import { learnersAwaitingDecision, usePendingContracts } from './staff-contracts';
+import { flaggedOf, gradeTitle, pendingOf, useLessonTitles } from './learner-common';
+import { MissionBadge, MissionDetailDrawer, useMissions } from './study-mission';
+import { ExerciseReviewDrawer } from './study-review';
+import './reviews.css';
 
 interface Sheet {
   profile: { id: string; displayName: string };
@@ -150,7 +156,89 @@ function scoreTone(percent: number) {
   return percent >= 80 ? 'success' : percent >= 50 ? 'brand' : 'warning';
 }
 
-function ResultsTab({ sheet }: { sheet: Sheet }) {
+/** Points d'attention de la fiche : missions à corriger, répétitions à valider et questions « à revoir ». */
+function AttentionCard({ sheet, missions, titles, onReview }: {
+  sheet: Sheet; missions: MissionSummary[]; titles: Map<string, string>; onReview: (attemptId: string) => void;
+}) {
+  const sessions = sheet.enrollment?.sessions ?? [];
+  const grades = [...sheet.results].filter((grade) => grade.kind !== 'diagnostic')
+    .sort((a, b) => new Date(b.submittedAt).getTime() - new Date(a.submittedAt).getTime());
+  const awaiting = grades.filter((grade) => pendingOf(grade) > 0);
+  const flagged = grades.filter((grade) => flaggedOf(grade).length > 0);
+  const toCorrect = missions.filter((mission) => mission.status === 'submitted');
+  if (!awaiting.length && !flagged.length && !toCorrect.length) return null;
+  return (
+    <Card title="Points d’attention" description="Ce qui attend votre regard ou une reprise de l’élève." icon={<Flag size={18} />} flush className="rv-attention">
+      <ul className="staff-rows rv-attention-list">
+        {toCorrect.map((mission) => (
+          <li key={`m-${mission.id}`} className="rv-attention-row">
+            <span className="rv-attention-icon is-mission" aria-hidden="true"><Target size={17} /></span>
+            <span className="staff-row-main"><strong>Mission « {mission.title} »</strong>
+              <small>À corriger{mission.submittedAt ? ` · envoyée ${relativeDay(mission.submittedAt)}` : ''}</small></span>
+            <Link className="btn btn-soft btn-sm" to={`/espace/corrections/missions/${encodeURIComponent(mission.id)}`}
+              aria-label={`Corriger la mission ${mission.title}`}>Corriger <ArrowRight size={15} aria-hidden="true" /></Link>
+          </li>
+        ))}
+        {awaiting.map((grade) => (
+          <li key={`p-${grade.id}`} className="rv-attention-row">
+            <span className="rv-attention-icon is-pending" aria-hidden="true"><Mic size={17} /></span>
+            <span className="staff-row-main"><strong>{gradeTitle(grade, sessions, titles).title}</strong>
+              <small>{plural(pendingOf(grade), 'répétition enregistrée', 'répétitions enregistrées')} à valider</small></span>
+            <Link className="btn btn-soft btn-sm" to="/espace/corrections/oral" aria-label={`Écouter les répétitions de ${gradeTitle(grade, sessions, titles).title}`}>
+              Écouter <ArrowRight size={15} aria-hidden="true" /></Link>
+          </li>
+        ))}
+        {flagged.map((grade) => (
+          <li key={`f-${grade.id}`} className="rv-attention-row">
+            <span className="rv-attention-icon is-flagged" aria-hidden="true"><Flag size={17} /></span>
+            <span className="staff-row-main"><strong>{gradeTitle(grade, sessions, titles).title}</strong>
+              <small>{plural(flaggedOf(grade).length, 'répétition signalée', 'répétitions signalées')} « à revoir » · {relativeDay(grade.submittedAt)}</small></span>
+            <button type="button" className="btn btn-ghost btn-sm" onClick={() => onReview(grade.id)}
+              aria-label={`Voir le corrigé : ${gradeTitle(grade, sessions, titles).title}`}><Eye size={15} aria-hidden="true" /> Corrigé</button>
+          </li>
+        ))}
+      </ul>
+    </Card>
+  );
+}
+
+const missionDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
+
+/** Missions de l'élève, des plus récentes aux plus anciennes ; chacune s'ouvre dans un panneau latéral. */
+function MissionsCard({ missions, error, onOpen }: { missions: MissionSummary[] | null; error: string; onOpen: (id: string) => void }) {
+  const sent = missions?.filter((mission) => mission.status !== 'draft').length ?? 0;
+  return (
+    <Card title="Missions" icon={<Target size={18} />} flush className="rv-missions"
+      description={missions?.length ? plural(sent, 'mission envoyée', 'missions envoyées') : undefined}>
+      {missions === null ? <div className="rv-pad"><SkeletonCard lines={2} label="Chargement des missions…" /></div>
+        : missions.length === 0 ? (
+          <EmptyState icon={<Target size={24} />} title="Aucune mission pour le moment"
+            description={error ? 'Les missions ne sont pas disponibles pour le moment.' : 'Les missions réalisées par l’élève apparaîtront ici, avec votre retour.'} />
+        ) : (
+          <ul className="kit-list rv-mission-list lc-stagger">
+            {missions.map((mission) => (
+              <li key={mission.id}>
+                <button type="button" className="kit-list-item" onClick={() => onOpen(mission.id)} aria-label={`Ouvrir la mission ${mission.title}`}>
+                  <span className="rv-attention-icon is-mission" aria-hidden="true"><Target size={17} /></span>
+                  <span className="kit-list-main"><strong>{mission.title}</strong>
+                    <small>{mission.levelCode} · {mission.submittedAt ? `envoyée le ${missionDate.format(new Date(mission.submittedAt))}` : 'brouillon en cours'}
+                      {mission.sessionId ? ' · séance' : ' · bibliothèque'}</small></span>
+                  <span className="kit-list-end"><MissionBadge mission={mission} viewer="staff" /><ChevronRight size={17} aria-hidden="true" /></span>
+                </button>
+              </li>
+            ))}
+          </ul>
+        )}
+    </Card>
+  );
+}
+
+function ResultsTab({ sheet, learnerId, token }: { sheet: Sheet; learnerId: string; token: string }) {
+  const { missions, error: missionsError } = useMissions(token, learnerId);
+  const titles = useLessonTitles(token, learnerId);
+  const [reviewing, setReviewing] = useState<string | null>(null);
+  const [missionOpen, setMissionOpen] = useState<string | null>(null);
+  const sessions = sheet.enrollment?.sessions ?? [];
   const exams = Object.entries(sheet.tracking?.results ?? {});
   const grades = [...sheet.results].sort((a, b) => new Date(a.submittedAt).getTime() - new Date(b.submittedAt).getTime());
   const percent = (grade: Grade) => grade.total ? Math.round((grade.correct / grade.total) * 100) : 0;
@@ -165,9 +253,20 @@ function ResultsTab({ sheet }: { sheet: Sheet }) {
     seen.set(day, count);
     return { label: count > 1 ? `${day} (${count})` : day, value: percent(grade), display: `${percent(grade)} %` };
   });
+  const drawers = (
+    <>
+      {reviewing && <ExerciseReviewDrawer attemptId={reviewing} token={token} onClose={() => setReviewing(null)} />}
+      {missionOpen && <MissionDetailDrawer missionId={missionOpen} token={token} viewer="staff" onClose={() => setMissionOpen(null)} />}
+    </>
+  );
 
-  if (!exams.length && !grades.length) {
-    return <Card><EmptyState icon={<BarChart3 size={26} />} title="Aucun exercice remis" description="Les scores apparaîtront ici dès le premier exercice terminé." /></Card>;
+  if (!exams.length && !grades.length && !missions?.length) {
+    return (
+      <Card>
+        {missions === null ? <SkeletonCard lines={3} label="Chargement des résultats…" />
+          : <EmptyState icon={<BarChart3 size={26} />} title="Aucun exercice remis" description="Les scores et les missions apparaîtront ici dès le premier exercice terminé." />}
+      </Card>
+    );
   }
   return (
     <div className="staff-page-body">
@@ -176,6 +275,8 @@ function ResultsTab({ sheet }: { sheet: Sheet }) {
         <StatCard label="Exercices remis" value={grades.length} note={grades.length ? `Dernier ${relativeDay(grades[grades.length - 1].submittedAt)}` : undefined} icon={<ListChecks size={20} />} />
         <StatCard label="Meilleur score" value={best === null ? '—' : `${best} %`} icon={<Trophy size={20} />} />
       </div>
+
+      <AttentionCard sheet={sheet} missions={missions ?? []} titles={titles} onReview={setReviewing} />
 
       {exams.length > 0 && (
         <div className="staff-exams">
@@ -215,20 +316,39 @@ function ResultsTab({ sheet }: { sheet: Sheet }) {
           </Card>
           <Card title="Derniers exercices" icon={<ListChecks size={18} />} flush>
             <ul className="staff-rows">
-              {[...grades].reverse().slice(0, 8).map((grade) => (
-                <li key={grade.id} className="staff-grade">
-                  <span className={`staff-score is-${scoreTone(percent(grade))}`}>{percent(grade)}%</span>
-                  <span className="staff-row-main">
-                    <strong>{grade.correct} / {grade.total} bonnes réponses</strong>
-                    <small>Remis {relativeDay(grade.submittedAt)}</small>
-                  </span>
-                  {grade.kind === 'diagnostic' && <Badge tone="violet">Diagnostic</Badge>}
-                </li>
-              ))}
+              {[...grades].reverse().slice(0, 8).map((grade) => {
+                const flagged = flaggedOf(grade).length;
+                const waiting = pendingOf(grade);
+                const reviewable = grade.kind !== 'diagnostic';
+                const title = reviewable ? gradeTitle(grade, sessions, titles).title : 'Diagnostic';
+                return (
+                  <li key={grade.id} className="staff-grade">
+                    <span className={`staff-score is-${scoreTone(percent(grade))}`}>{percent(grade)}%</span>
+                    <span className="staff-row-main">
+                      <strong>{title}</strong>
+                      <small>{grade.correct} / {grade.total} bonnes réponses · remis {relativeDay(grade.submittedAt)}</small>
+                      {(flagged > 0 || waiting > 0) && (
+                        <span className="staff-tags">
+                          {flagged > 0 && <Badge tone="violet">À revoir · {flagged}</Badge>}
+                          {waiting > 0 && <Badge tone="amber">En attente de validation · {waiting}</Badge>}
+                        </span>
+                      )}
+                    </span>
+                    {grade.kind === 'diagnostic' && <Badge tone="violet">Diagnostic</Badge>}
+                    {reviewable && (
+                      <button type="button" className="icon-button rv-review-button" onClick={() => setReviewing(grade.id)}
+                        aria-label={`Voir le corrigé : ${title}`} title="Voir le corrigé"><Eye size={17} aria-hidden="true" /></button>
+                    )}
+                  </li>
+                );
+              })}
             </ul>
           </Card>
         </div>
       )}
+
+      <MissionsCard missions={missions} error={missionsError} onOpen={setMissionOpen} />
+      {drawers}
     </div>
   );
 }
@@ -380,7 +500,7 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
                 onChanged={() => { refresh(); pending.reload(); }}
                 legacy={enrollment ? <GoalPanel enrollment={enrollment} token={token} viewer="staff" onChanged={refresh} /> : undefined} />
             )}
-            {tab === 'resultats' && <ResultsTab sheet={sheet} />}
+            {tab === 'resultats' && <ResultsTab sheet={sheet} learnerId={learnerId} token={token} />}
             {tab === 'messages' && <MessagesTab sheet={sheet} learnerId={learnerId} token={token} canMessage={canMessage} autoFocus={focusComposer} onSent={refresh} />}
           </TabPanel>
         </>

@@ -1,0 +1,1429 @@
+{
+  "id": "a1-sante",
+  "title": "Dire où l’on a mal et trouver de l’aide",
+  "objective": "Nommer un symptôme simple, demander où se trouve une pharmacie et vérifier les détails d’un rendez-vous.",
+  "prerequisites": [
+    "a1-arbeit"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "Textes, dialogue et exercices originaux LinguaCap V4.",
+    "Repères de progression : Deutsch im Blick, chapitre 7 « Gesundheit und Fitness » et descripteurs A1 du CECRL."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-sante.mjs",
+  "vocabulary": [
+    {
+      "id": "kopf",
+      "word": "Kopf",
+      "article": "der",
+      "plural": "Köpfe",
+      "partOfSpeech": "noun",
+      "translation": "la tête",
+      "example": "Mein Kopf tut weh.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "hals",
+      "word": "Hals",
+      "article": "der",
+      "plural": "Hälse",
+      "partOfSpeech": "noun",
+      "translation": "la gorge ; le cou",
+      "example": "Mein Hals tut weh.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "bauch",
+      "word": "Bauch",
+      "article": "der",
+      "plural": "Bäuche",
+      "partOfSpeech": "noun",
+      "translation": "le ventre",
+      "example": "Mein Bauch tut weh.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "schmerz",
+      "word": "Schmerz",
+      "article": "der",
+      "plural": "Schmerzen",
+      "partOfSpeech": "noun",
+      "translation": "la douleur",
+      "example": "Haben Sie Schmerzen?",
+      "note": "surtout au pluriel : Ich habe Schmerzen.",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "kopfschmerzen",
+      "word": "Kopfschmerzen",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le mal de tête",
+      "example": "Ich habe Kopfschmerzen und Husten.",
+      "note": "toujours au pluriel, sans article : Ich habe Kopfschmerzen.",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "halsschmerzen",
+      "word": "Halsschmerzen",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le mal de gorge",
+      "example": "Seit gestern habe ich Halsschmerzen.",
+      "note": "toujours au pluriel ; de même : Bauchschmerzen",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "husten",
+      "word": "Husten",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la toux",
+      "example": "Ich habe Husten.",
+      "note": "Ich habe Husten : je tousse.",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "tut-weh",
+      "word": "tut weh",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "… fait mal",
+      "example": "Mein Kopf tut weh.",
+      "note": "verbe séparable weh|tun",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "krank",
+      "word": "krank",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "malade",
+      "example": "Ich bin krank.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "termin",
+      "word": "Termin",
+      "article": "der",
+      "plural": "Termine",
+      "partOfSpeech": "noun",
+      "translation": "le rendez-vous",
+      "example": "Ich möchte einen Termin, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "praxis",
+      "word": "Praxis",
+      "article": "die",
+      "plural": "Praxen",
+      "partOfSpeech": "noun",
+      "translation": "le cabinet (médical)",
+      "example": "Die Praxis ist in der Marktstraße fünf.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "apotheke",
+      "word": "Apotheke",
+      "article": "die",
+      "plural": "Apotheken",
+      "partOfSpeech": "noun",
+      "translation": "la pharmacie",
+      "example": "Wo ist die nächste Apotheke?",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "arzt",
+      "word": "Arzt",
+      "article": "der",
+      "plural": "Ärzte",
+      "partOfSpeech": "noun",
+      "translation": "le médecin",
+      "example": "Ich gehe heute zum Arzt.",
+      "note": "féminin : die Ärztin, die Ärztinnen",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "seit",
+      "word": "seit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "depuis",
+      "example": "Ich habe seit gestern Husten.",
+      "note": "+ datif ; avec le présent, comme en français",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "gestern",
+      "word": "gestern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "hier",
+      "example": "Seit gestern Abend habe ich Halsschmerzen.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "morgen",
+      "word": "morgen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "demain",
+      "example": "Morgen rufe ich in der Praxis an.",
+      "note": "heute Morgen : ce matin",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "anrufen",
+      "word": "anrufen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "téléphoner, appeler",
+      "example": "Ich möchte in der Praxis anrufen.",
+      "note": "séparable : an|rufen ; ich rufe … an",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "helfen",
+      "word": "helfen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "aider",
+      "example": "Können Sie mir bitte helfen?",
+      "note": "+ datif : mir, Ihnen",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "offen",
+      "word": "offen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "ouvert",
+      "example": "Ist die Apotheke noch offen?",
+      "note": "contraire : geschlossen",
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "das-passt",
+      "word": "Das passt.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ça me convient.",
+      "example": "Heute um elf Uhr? Ja, das passt.",
+      "note": null,
+      "audio": {
+        "media": "a1-sante-lexique",
+        "line": 19
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-sante-guide",
+      "kind": "lesson",
+      "title": "Découvrir : dire où l’on a mal",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : dire où l’on a mal",
+        "description": "DIRE QU’ON NE VA PAS BIEN · 15 MIN\n\n1. Lire un message (4 min). Mina écrit à Ivo : « Hallo, Ivo. Ich bin heute nicht im Kurs. Ich habe Kopfschmerzen und Husten. Morgen rufe ich in der Praxis an. Bis bald! Mina ». À la première lecture, trouvez la raison du message. À la seconde, repérez ce que Mina ressent, le jour où elle manque le cours (heute) et le jour où elle téléphonera au cabinet (morgen).\n\n2. Nommer une douleur (4 min). « Ich habe Kopfschmerzen » signifie « j’ai mal à la tête ». On peut aussi dire « Mein Kopf tut weh ». Le mot en -schmerzen se forme avec la partie du corps :\n• der Kopf → Kopfschmerzen — Mein Kopf tut weh.\n• der Hals → Halsschmerzen — Mein Hals tut weh.\n• der Bauch → Bauchschmerzen — Mein Bauch tut weh.\nPour dire que vous toussez : « Ich habe Husten ». Kopfschmerzen est un pluriel qui s’emploie sans article : Ich habe Kopfschmerzen.\n\n3. Dire depuis quand (4 min). « Seit wann? » signifie « depuis quand ? ». Comme en français, on répond au présent : « Ich habe seit gestern Halsschmerzen ». Si « seit gestern » ouvre la phrase, le verbe reste en deuxième position et le sujet passe après : « Seit gestern habe ich Halsschmerzen ». Retenez : seit heute Morgen (depuis ce matin), seit gestern (depuis hier), seit gestern Abend (depuis hier soir), seit Montag (depuis lundi). Sans seit, « morgen » veut dire « demain ».\n\n4. Écouter les modèles (3 min). Écoutez les cinq phrases du modèle audio et répétez-les pendant les pauses. Dites ensuite à voix haute deux phrases sur un personnage inventé : ce qu’il a et depuis quand.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-sante-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-sante-nachricht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-sante-schmerzen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-sante-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : prendre rendez-vous au téléphone",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : prendre rendez-vous au téléphone",
+        "description": "AU TÉLÉPHONE AVEC LE CABINET · 12 MIN\n\nPHRASES UTILES\n• Ich möchte einen Termin, bitte. — Je voudrais un rendez-vous, s’il vous plaît.\n• Haben Sie Schmerzen? — Avez-vous mal ?\n• Seit wann haben Sie Halsschmerzen? — Depuis quand avez-vous mal à la gorge ?\n• Können Sie heute um neun Uhr kommen? — Pouvez-vous venir aujourd’hui à neuf heures ?\n• Um neun Uhr kann ich leider nicht. Geht es später? — À neuf heures, je ne peux malheureusement pas. C’est possible plus tard ?\n• Können Sie die Uhrzeit bitte wiederholen? — Pouvez-vous répéter l’heure, s’il vous plaît ?\n• Das passt, danke! — Ça me convient, merci !\n\nÀ VOUS\n1. Écoutez l’appel sans lire la transcription : pourquoi la personne téléphone-t-elle ?\n2. Réécoutez et repérez cinq informations : le symptôme, depuis quand, l’horaire proposé d’abord, l’horaire retenu et l’adresse du cabinet.\n3. Affichez la transcription. Repérez l’horaire refusé (um neun Uhr) et la reprise finale, qui confirme tout : « Heute um elf Uhr, Marktstraße fünf ».\n4. Lisez à voix haute le rôle du patient, puis redites-le avec d’autres données : mal au ventre depuis ce matin, rendez-vous demain à neuf heures.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-sante-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-sante-anruf",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-sante-approfondir",
+      "kind": "lesson",
+      "title": "Comprendre : trouver une pharmacie ou un cabinet",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : trouver une pharmacie ou un cabinet",
+        "description": "PHARMACIE OU CABINET ? · 12 MIN\n\n1. Distinguer deux lieux (3 min). Lisez les deux panneaux : « Linden-Apotheke. Bahnhofstraße 8. Heute geöffnet: 8–18 Uhr. » et « Praxis am Park. Gartenstraße 12. Eingang neben dem Café. Termine nach Vereinbarung. ». Repérez la pharmacie (die Apotheke), le cabinet médical (die Praxis), l’adresse de chacun et l’entrée du cabinet. « Termine nach Vereinbarung » signifie « sur rendez-vous ».\n\n2. Demander de l’aide (3 min). Lisez chaque question avec sa réponse :\n• Können Sie mir bitte helfen? — Ja, natürlich.\n• Wo ist die nächste Apotheke? — In der Bahnhofstraße, Nummer acht.\n• Ist die Apotheke noch offen? — Ja, bis achtzehn Uhr.\nRedites ensuite l’échange à voix haute avec une autre rue et un autre numéro.\n\n3. Confirmer le rendez-vous (3 min). La Praxis am Park propose « Mittwoch, 9 Uhr oder Donnerstag, 15 Uhr ». Vous êtes en cours mercredi matin : le seul créneau possible est jeudi. On confirme ainsi : « Guten Tag, der Termin am Donnerstag um fünfzehn Uhr passt. Ist der Eingang neben dem Café? Vielen Dank. » Le jour prend am, l’heure prend um.\n\n4. Attention aux nombres (3 min). Un ami a compris « Gartenstraße 21 » au lieu de 12. Dites les deux nombres à voix haute : zwölf (12) et einundzwanzig (21). Dans einundzwanzig, l’unité vient avant la dizaine : « un et vingt ». Dites ensuite l’adresse exacte du cabinet et l’endroit de l’entrée.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-sante-schilder",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-sante-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : symptômes, seit et rendez-vous",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : symptômes, seit et rendez-vous",
+        "description": "Réécoutez l’appel au cabinet et complétez la fiche de la réception. Entraînez-vous ensuite à dire depuis quand on a mal et à fixer un rendez-vous (am + jour, um + heure). Les deux dernières questions sont des dictées. La transcription de l’appel s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-sante-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez l’appel et complétez la fiche : pourquoi le patient appelle-t-il ?",
+          "text": "Der Patient hat [[1]] und Husten, seit gestern [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Halsschmerzen"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Abend"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Le patient dit « Ich habe Halsschmerzen und Husten », puis « Seit gestern Abend » : il a mal à la gorge depuis hier soir. Halsschmerzen s’écrit en un seul mot, avec deux s."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez le rendez-vous finalement retenu.",
+          "text": "Termin: heute um [[1]] Uhr, Marktstraße [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "elf",
+                "11"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "fünf",
+                "5"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Neuf heures est refusé ; la réception propose « heute um elf Uhr » et le patient le répète avec l’adresse : « Marktstraße fünf »."
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Associez chaque phrase française à son équivalent allemand.",
+          "pairs": [
+            {
+              "left": "J’ai mal à la tête.",
+              "right": "Mein Kopf tut weh."
+            },
+            {
+              "left": "J’ai mal à la gorge.",
+              "right": "Ich habe Halsschmerzen."
+            },
+            {
+              "left": "J’ai mal au ventre.",
+              "right": "Mein Bauch tut weh."
+            },
+            {
+              "left": "Je tousse.",
+              "right": "Ich habe Husten."
+            }
+          ],
+          "explanation": "Deux tournures disent la douleur : Ich habe …schmerzen ou Mein … tut weh (der Kopf, der Hals, der Bauch). Pour la toux, on dit Ich habe Husten."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre en commençant par « Seit gestern ».",
+          "answers": [
+            [
+              "Seit gestern",
+              "habe",
+              "ich",
+              "Halsschmerzen"
+            ]
+          ],
+          "explanation": "Seit gestern occupe la 1re place : le verbe habe reste en 2e position et le sujet ich passe après. Comme en français, la douleur qui dure encore se dit au présent."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Complétez le message : « Je ne suis pas en cours aujourd’hui. Je tousse depuis hier. »",
+          "text": "Ich bin [[1]] nicht im Kurs. Ich habe [[2]] gestern Husten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "heute"
+              ],
+              "size": 7,
+              "hint": "aujourd’hui"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "seit"
+              ],
+              "size": 6,
+              "hint": "depuis"
+            }
+          ],
+          "explanation": "Heute veut dire « aujourd’hui » et seit « depuis » : Ich habe seit gestern Husten. Le piège est d’employer morgen, qui signifie « demain »."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Vous ne pouvez pas venir mercredi. Complétez avec am ou um.",
+          "text": "[[1]] Mittwoch kann ich leider nicht. Geht es am Donnerstag [[2]] fünfzehn Uhr?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Am"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "um"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ],
+          "explanation": "On dit am devant un jour (am Mittwoch, am Donnerstag) et um devant une heure (um fünfzehn Uhr). Quand am Mittwoch ouvre la phrase, kann reste en 2e position."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "mann",
+          "accept": [
+            "Mein Hals tut seit Montag weh."
+          ],
+          "explanation": "Weh se place à la fin : Mein Hals tut seit Montag weh. Hals et Montag sont des noms, avec une majuscule ; seit Montag dit depuis quand.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "mann",
+          "accept": [
+            "Wo ist die nächste Apotheke?"
+          ],
+          "explanation": "Nächste prend un tréma (ä) et Apotheke s’écrit avec th, prononcé comme un simple t. C’est la question à poser pour trouver la pharmacie la plus proche.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-sante-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : dire où l’on a mal",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : dire où l’on a mal",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Articulez chaque mot : la reconnaissance vocale compare votre phrase au modèle.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-sante-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-sante-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich habe Kopfschmerzen und Husten.",
+          "accept": [
+            "Ich habe Kopfschmerzen und Husten."
+          ],
+          "explanation": "Dans Kopfschmerzen, prononcez bien pf puis sch : Kopf-schmer-zen. Le h de Husten se souffle, comme dans habe.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Mein Bauch tut weh.",
+          "accept": [
+            "Mein Bauch tut weh."
+          ],
+          "explanation": "Après au, le ch de Bauch se forme au fond de la bouche (ach-Laut). Weh se prononce avec un e long : « vé ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Seit gestern habe ich Halsschmerzen.",
+          "accept": [
+            "Seit gestern habe ich Halsschmerzen."
+          ],
+          "explanation": "Seit commence par le son « z » et ei se dit « aï ». Après seit gestern, le verbe habe vient avant ich.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich möchte einen Termin, bitte.",
+          "accept": [
+            "Ich möchte einen Termin, bitte."
+          ],
+          "explanation": "Termin : accent sur la 2e syllabe, ter-MIN. Ich et möchte ont le même souffle doux du ich-Laut.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Um neun Uhr kann ich leider nicht.",
+          "accept": [
+            "Um neun Uhr kann ich leider nicht.",
+            "Um 9 Uhr kann ich leider nicht."
+          ],
+          "explanation": "Neun se dit « noïn » et leider « laïder ». C’est la phrase pour refuser poliment un horaire.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wo ist die nächste Apotheke?",
+          "accept": [
+            "Wo ist die nächste Apotheke?"
+          ],
+          "explanation": "Le w de wo se prononce comme un v français. Dans nächste, le ä se dit « è » et ch est un souffle doux.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-sante-controle",
+      "kind": "exercise",
+      "title": "Vérifier : un rendez-vous chez le médecin",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : un rendez-vous chez le médecin",
+        "description": "Écoutez l’appel une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails : symptômes, durée, horaire et adresse. Les deux dernières questions vérifient les phrases à réemployer. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-sante-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : pourquoi la personne appelle-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Pour prendre rendez-vous",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Pour annuler un cours",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Pour demander un numéro de téléphone",
+              "correct": false
+            }
+          ],
+          "explanation": "La personne dit tout de suite « Ich möchte einen Termin, bitte » : der Termin est le rendez-vous. Il n’est question ni d’un cours ni d’un numéro de téléphone.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : quels sont ses symptômes ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mal au ventre et mal à la gorge",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mal à la gorge et toux",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Mal à la tête et toux",
+              "correct": false
+            }
+          ],
+          "explanation": "Elle répond « Ich habe Halsschmerzen und Husten » : der Hals est la gorge, der Husten la toux. Kopfschmerzen (la tête) et Bauchschmerzen (le ventre) ne sont pas dits.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : depuis quand a-t-elle mal à la gorge ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Depuis ce matin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Depuis lundi matin",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Depuis hier soir",
+              "correct": true
+            }
+          ],
+          "explanation": "À la question « Seit wann haben Sie Halsschmerzen? », elle répond « Seit gestern Abend » : depuis hier soir. « Heute Morgen » voudrait dire « ce matin ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : quelle heure est finalement acceptée ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "11 h",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "9 h",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "10 h",
+              "correct": false
+            }
+          ],
+          "explanation": "Le premier horaire, « um neun Uhr », est refusé (« kann ich leider nicht »). La réception propose « heute um elf Uhr » et la personne confirme : « Das passt ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Écoute : où se trouve le cabinet ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Au 5, Gartenstraße",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Au 5, Marktstraße",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Au 15, Marktstraße",
+              "correct": false
+            }
+          ],
+          "explanation": "La réception dit « Die Praxis ist in der Marktstraße fünf » et le patient le répète. Fünf (5) n’est pas fünfzehn (15) ; la Gartenstraße est l’adresse d’un autre cabinet.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Vous voulez dire « J’ai mal au ventre depuis ce matin ». Quelle phrase convient ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe morgen Bauchschmerzen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe seit heute Morgen Kopfschmerzen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe seit heute Morgen Bauchschmerzen.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Seit heute Morgen » veut dire « depuis ce matin » et Bauchschmerzen « mal au ventre ». Sans seit, « morgen » signifie « demain » ; Kopfschmerzen désigne le mal de tête.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Quelle phrase confirme un rendez-vous proposé jeudi à 15 h ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Termin am Donnerstag um fünfzehn Uhr passt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Termin am Mittwoch um fünfzehn Uhr passt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Termin am Donnerstag um fünf Uhr passt.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jeudi se dit Donnerstag, avec am pour le jour et um pour l’heure. 15 h se dit fünfzehn Uhr ; fünf Uhr serait 5 h, et Mittwoch est mercredi.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-sante-mission",
+      "kind": "mission",
+      "title": "Mission : déplacer un rendez-vous",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : déplacer un rendez-vous",
+        "description": "Vous avez mal à la gorge et vous avez rendez-vous à la Praxis am Park mercredi à neuf heures. Mais vous avez cours ce matin-là. Vous appelez le cabinet pour déplacer le rendez-vous, puis vous confirmez par écrit.\n\nMODÈLE : L’APPEL\n– Praxis am Park, guten Tag.\n– Guten Tag, hier ist Sami Keller. Ich habe seit Montag Halsschmerzen. Ich habe am Mittwoch um neun Uhr einen Termin, aber um neun Uhr kann ich leider nicht. Geht es am Donnerstag?\n– Ja, am Donnerstag um fünfzehn Uhr.\n– Am Donnerstag um fünfzehn Uhr. Das passt, danke!\n\nMODÈLE : LE MESSAGE\nGuten Tag, ich habe seit Montag Halsschmerzen. Der Termin am Mittwoch um neun Uhr passt leider nicht. Der neue Termin am Donnerstag um fünfzehn Uhr passt. Vielen Dank! Sami Keller",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre rôle dans l’appel au cabinet : présentez-vous, dites ce que vous avez et depuis quand, expliquez que l’ancien créneau ne vous convient pas, demandez un autre jour, puis répétez le nouveau jour et la nouvelle heure pour confirmer.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez le message au cabinet pour déplacer le rendez-vous : une salutation, votre symptôme et depuis quand, l’ancien créneau (jour et heure), le nouveau créneau, une formule de politesse et votre nom.",
+          "maxChars": 600,
+          "minWords": 25
+        },
+        "checklist": [
+          "J’ai dit ce que j’ai (Ich habe … / Mein … tut weh) et depuis quand, avec seit.",
+          "J’ai nommé l’ancien et le nouveau rendez-vous, chacun avec am + jour et um + heure.",
+          "Quand une phrase commence par seit … ou am …, le verbe est en deuxième position.",
+          "On distingue sans hésiter l’heure du rendez-vous et le numéro de la rue.",
+          "Mon message se termine par une formule de politesse et mon nom."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-sante-modele",
+      "kind": "audio",
+      "title": "Dire où l’on a mal et trouver de l’aide · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe Kopfschmerzen und Husten."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Mein Kopf tut weh."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Seit wann haben Sie Halsschmerzen?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Seit gestern habe ich Halsschmerzen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Entschuldigung, wo ist die nächste Apotheke?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-dialogue",
+      "kind": "audio",
+      "title": "Dire où l’on a mal et trouver de l’aide · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Praxis am Markt, guten Morgen."
+        },
+        {
+          "voice": "mann",
+          "text": "Guten Morgen. Ich möchte einen Termin, bitte."
+        },
+        {
+          "voice": "frau",
+          "text": "Ja. Haben Sie Schmerzen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, ich habe Halsschmerzen und Husten."
+        },
+        {
+          "voice": "frau",
+          "text": "Seit wann haben Sie Halsschmerzen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Seit gestern Abend."
+        },
+        {
+          "voice": "frau",
+          "text": "Können Sie heute um neun Uhr kommen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Um neun Uhr kann ich leider nicht. Geht es später?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, heute um elf Uhr. Die Praxis ist in der Marktstraße fünf."
+        },
+        {
+          "voice": "mann",
+          "text": "Heute um elf Uhr, Marktstraße fünf. Das passt, danke!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-sante-nachricht",
+      "kind": "image",
+      "title": "Mina prévient Ivo",
+      "alt": "Message de Mina sur le téléphone d’Ivo : « Hallo, Ivo. Ich bin heute nicht im Kurs. Ich habe Kopfschmerzen und Husten. Morgen rufe ich in der Praxis an. Bis bald! Mina »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Mina",
+        "size": 33,
+        "messages": [
+          {
+            "from": "Mina",
+            "time": "07:45",
+            "text": "Hallo, Ivo. Ich bin heute nicht im Kurs. Ich habe [Kopfschmerzen] und [Husten]. Morgen rufe ich in der Praxis an. Bis bald! Mina"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-sante-schmerzen",
+      "kind": "image",
+      "title": "Dire où l’on a mal",
+      "alt": "Quatre cartes : der Kopf, « Ich habe Kopfschmerzen. Mein Kopf tut weh. » ; der Hals, « Ich habe Halsschmerzen. Mein Hals tut weh. » ; der Bauch, « Ich habe Bauchschmerzen. Mein Bauch tut weh. » ; der Husten, « Ich habe Husten. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "titleSize": 30,
+        "groups": [
+          {
+            "title": "der Kopf",
+            "words": [
+              "Ich habe [Kopf]schmerzen.",
+              "Mein [Kopf] tut weh."
+            ]
+          },
+          {
+            "title": "der Hals",
+            "words": [
+              "Ich habe [Hals]schmerzen.",
+              "Mein [Hals] tut weh."
+            ]
+          },
+          {
+            "title": "der Bauch",
+            "words": [
+              "Ich habe [Bauch]schmerzen.",
+              "Mein [Bauch] tut weh."
+            ]
+          },
+          {
+            "title": "der Husten",
+            "words": [
+              "Ich habe [Husten]."
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-sante-anruf",
+      "kind": "image",
+      "title": "Appeler le cabinet médical",
+      "alt": "Au téléphone, l’accueil du cabinet dit « Praxis am Markt, guten Morgen. » et le patient répond « Ich möchte einen Termin, bitte. ». En haut : un téléphone, un stéthoscope, un calendrier et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "doctor",
+        "people": [
+          {
+            "name": "Empfang",
+            "say": "Praxis am Markt, guten Morgen."
+          },
+          {
+            "name": "Patient",
+            "say": "Ich möchte einen Termin, bitte."
+          }
+        ],
+        "items": [
+          "phone-call",
+          "stethoscope",
+          "calendar-days",
+          "clock"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-sante-schilder",
+      "kind": "image",
+      "title": "La pharmacie et le cabinet",
+      "alt": "Deux panneaux. Linden-Apotheke : Bahnhofstraße 8, heute geöffnet 8–18 Uhr. Praxis am Park : Gartenstraße 12, Eingang neben dem Café, Termine nach Vereinbarung.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "cards",
+        "setting": "street",
+        "height": 400,
+        "size": 28,
+        "cards": [
+          {
+            "icon": "pill",
+            "title": "Linden-Apotheke",
+            "lines": [
+              {
+                "icon": "map-pin",
+                "text": "Bahnhofstraße 8"
+              },
+              {
+                "icon": "clock",
+                "text": "Heute geöffnet: 8–18 Uhr"
+              }
+            ]
+          },
+          {
+            "icon": "stethoscope",
+            "title": "Praxis am Park",
+            "lines": [
+              {
+                "icon": "map-pin",
+                "text": "Gartenstraße 12"
+              },
+              {
+                "icon": "door-open",
+                "text": "Eingang neben dem Café"
+              },
+              {
+                "icon": "calendar-days",
+                "text": "Termine nach Vereinbarung"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-sante-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : symptômes, seit et rendez-vous",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Mein Hals tut seit Montag weh."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : symptômes, seit et rendez-vous",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Wo ist die nächste Apotheke?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe Kopfschmerzen und Husten."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Bauch tut weh."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Seit gestern habe ich Halsschmerzen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich möchte einen Termin, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Um neun Uhr kann ich leider nicht."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : dire où l’on a mal",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wo ist die nächste Apotheke?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-sante-lexique",
+      "kind": "audio",
+      "title": "Lexique · Dire où l’on a mal et trouver de l’aide",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Kopf, die Köpfe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Hals, die Hälse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bauch, die Bäuche"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Schmerz, die Schmerzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kopfschmerzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Halsschmerzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Husten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "tut weh"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "krank"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Termin, die Termine"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Praxis, die Praxen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Apotheke, die Apotheken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Arzt, die Ärzte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "seit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gestern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "morgen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "anrufen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "helfen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "offen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das passt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

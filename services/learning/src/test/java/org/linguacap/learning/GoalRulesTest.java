@@ -23,7 +23,7 @@ class GoalRulesTest {
     void lIntensifViseA1EnUnMoisEtA2EnDeuxMois() {
         assertEquals(LocalDate.of(2026, 12, 23), GoalRules.defaultTarget("intensive", "A1", TODAY));
         assertEquals(LocalDate.of(2027, 1, 23), GoalRules.defaultTarget("intensive", "A2", TODAY));
-        assertEquals(LocalDate.of(2027, 2, 23), GoalRules.defaultTarget("standard", "A1", TODAY));
+        assertEquals(LocalDate.of(2027, 4, 23), GoalRules.defaultTarget("standard", "A1", TODAY));
         var intensive = GoalRules.template("intensive");
         assertEquals(7, intensive.days().size());
         assertTrue(intensive.days().stream().allMatch(day -> day.sessions() == 2 && day.minutes() == 45));

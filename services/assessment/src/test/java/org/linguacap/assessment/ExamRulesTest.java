@@ -44,6 +44,27 @@ class ExamRulesTest {
     }
 
     @Test
+    void niExplicationNiRetourNiCléTypéeNeSontServisÀLÉlève() {
+        JsonNode exam = json("""
+                {'kind':'midterm','parts':[{'id':'lecture','competence':'lecture','mode':'closed','title':'Lecture','questions':[
+                  {'id':'q1','type':'choice','prompt':'Warum kommt Jonas nicht?','explanation':'Il dit : « weil ich krank bin ».',
+                   'spec':{'accept':['krank']},'feedback':'Relisez la deuxième phrase.',
+                   'options':[{'id':'a','label':'Er ist krank.','correct':true,'feedback':'Oui : weil ich krank bin.'},
+                              {'id':'b','label':'Er hat keine Zeit.','correct':false,'feedback':'Non, il ne parle pas de temps.'}]},
+                  {'id':'q2','type':'fill','prompt':'Complétez.','text':'Ich warte [[1]] den Bus.',
+                   'blanks':[{'id':'1','accept':['auf'],'size':4}],'accept':['auf'],'answers':[['auf']],'pairs':{'l1':'r1'}}]}]}
+                """);
+        String visible = ExamRules.withoutAnswers(exam).toString();
+        for (String leak : List.of("correct", "explanation", "spec", "feedback", "accept", "answers", "pairs",
+                "weil ich krank bin", "Relisez")) {
+            assertFalse(visible.contains(leak), "fuite de corrigé : " + leak + " dans " + visible);
+        }
+        assertTrue(visible.contains("Er ist krank.") && visible.contains("Ich warte [[1]] den Bus."), "l'énoncé reste");
+        assertTrue(visible.contains("\"size\":4"), "la taille du trou reste");
+        assertTrue(exam.toString().contains("explanation"), "la définition figée garde ses explications");
+    }
+
+    @Test
     void laProgressionNAccepteQueLesChoixDeLEvaluation() {
         ExamRules.checkProgress(EXAM, json("{'lecture':{'q1':'a'}}"), json("{'ecrit':'Ich möchte…'}"));
         assertThrows(WebApplicationException.class, () -> ExamRules.checkProgress(EXAM, json("{'lecture':{'q1':'z'}}"), null));

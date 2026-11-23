@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 import { fileURLToPath } from 'node:url';
 import { localQuery, localSql, localSupabase } from './local.mjs';
+import { answerActivity, assertAllRight, completeMission, isTyped, leaks, sendMission, submitExercise } from './smoke-answers.mjs';
 
 const local = localSupabase();
 const suffix = randomBytes(6).toString('hex');
@@ -885,8 +886,13 @@ console.log('Recette des évaluations réussie · bilan corrigé immédiatement,
 // --- Suivi : événements, alertes, relance, reprise et clôture (incrément 7) -------------------------------
 const trackingJobs = process.env.LINGUACAP_SMOKE_TRACKING ?? 'http://127.0.0.1:8086';
 const internalSecret = readFileSync(join(tmpdir(), 'linguacap-recette-secret'), 'utf8').trim();
-const runJob = (kind = 'sync') => json(`${trackingJobs}/v1/internal/tracking/jobs/${kind}`, {
-  method: 'POST', headers: { 'X-Linguacap-Internal': internalSecret } });
+const runJob = async (kind = 'sync', { allowErrors = false } = {}) => {
+  const result = await json(`${trackingJobs}/v1/internal/tracking/jobs/${kind}`, {
+    method: 'POST', headers: { 'X-Linguacap-Internal': internalSecret } });
+  // V4 : les nouveaux événements (exercise_flagged, mission_submitted, mission_reviewed) ne bloquent jamais le suivi.
+  if (!allowErrors) assert.deepEqual(result.errors ?? {}, {}, `Le suivi traite tous les événements (${kind})`);
+  return result;
+};
 await json(`${trackingJobs}/v1/internal/tracking/jobs/sync`, { method: 'POST', status: 403 });
 const firstRun = await runJob();
 assert.ok(firstRun.imported > 0, 'Les événements des services sont importés');
@@ -1066,36 +1072,76 @@ const trackA2 = contentTracks.find((track) => track.levelCode === 'A2');
 assert.equal(trackA1.versionId, imported[0].versionId, 'La version A1 importée est celle proposée à l’attribution');
 assert.equal(trackA2.versionId, imported[1].versionId);
 const activitiesOf = (level) => level.modules.flatMap((module) => module.activities);
+for (const [level, result] of [[contentA1, imported[0]], [contentA2, imported[1]]]) {
+  assert.ok(level.format >= 4, `Contenu V4 importé (${level.levelId})`);
+  assert.deepEqual(activitiesOf(level).filter((activity) => activity.id.endsWith('-correction')).map((activity) => activity.id), [],
+    'Aucune activité « -correction » : le corrigé s’affiche après la remise');
+  assert.deepEqual(level.modules.filter((module) => !module.vocabulary?.length).map((module) => module.id), [], 'Un lexique par module');
+  const document = JSON.stringify(await api(`/catalogue/versions/${result.versionId}`, staffToken));
+  assert.ok(Buffer.byteLength(document) < 2 * 1024 * 1024, `Document de version sous 2 Mo (${Buffer.byteLength(document)} octets)`);
+}
 assert.equal(trackA1.activityCount, activitiesOf(contentA1).length);
 assert.equal(trackA1.totalMinutes, activitiesOf(contentA1).reduce((sum, activity) => sum + activity.estimatedMinutes, 0));
 assert.equal(trackA2.activityCount, activitiesOf(contentA2).length);
 assert.equal(trackA2.prerequisiteLevelCode, 'A1', 'Le parcours A2 requiert le niveau A1');
 
-// Corrigés lus dans les fichiers de contenu : activité → question → bon choix.
+// Corrigés lus dans les fichiers de contenu. Diagnostic et examens restent à choix unique : activité → question → bon choix.
+// Les exercices (questions typées, répétitions orales) sont répondus par smoke-answers.mjs à partir du contenu et de la vue.
 const keyOf = (questions) => Object.fromEntries((questions ?? []).map((question) =>
   [question.id, question.options.find((option) => option.correct).id]));
-const exerciseKeys = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2)]
-  .filter((activity) => activity.kind === 'exercise').map((activity) => [activity.id, keyOf(activity.questions)]));
+const contentActivities = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2)].map((activity) => [activity.id, activity]));
+const sourceOf = (activity) => {
+  const source = contentActivities.get(activity.contentActivityId ?? activity.id);
+  assert.ok(source, `Contenu connu pour ${activity.id}`);
+  return source;
+};
 const diagnosticAnswers = (level, mastered) => Object.fromEntries(level.diagnostic.questions.map((question) =>
   [question.id, question.options.find((option) => option.correct === mastered.includes(question.moduleRef)).id]));
+/** Dépôt direct d'un enregistrement (répétition ou mission) dans l'espace privé des productions, avec le jeton de l'élève. */
+const uploadRecording = (token) => async (reservation) => {
+  if (!reservation.uploadUrl) return;
+  const sent = await fetch(reservation.uploadUrl, { method: 'POST', body: webm, signal: AbortSignal.timeout(12_000),
+    headers: { Authorization: `Bearer ${token}`, apikey: local.publishable, 'Content-Type': 'audio/webm', 'x-upsert': 'false' } });
+  assert.ok(sent.ok, `Dépôt de l’enregistrement · HTTP ${sent.status}`);
+};
+/** Questions servies sans corrigé dans toutes les activités d'une séance ou d'une bibliothèque. */
+const assertNoLeak = (activities, label) => assert.deepEqual(activities.flatMap((activity) => leaks(activity.questions)
+  .map((path) => `${activity.id}${path}`)), [], `${label} : aucune clé de corrigé dans les questions servies`);
+/**
+ * Fait une séance comme un élève : exercices remis par /assessments/exercises (répétitions orales comprises, corrigé
+ * entièrement juste avec une explication par question), missions écrites, enregistrées, cochées et envoyées, leçons et
+ * révisions terminées. Renvoie la séance relue et les missions envoyées.
+ */
 const workSession = async (sessionId, token) => {
   const path = `/learning/sessions/${sessionId}`;
   const session = await api(path, token);
+  assertNoLeak(session.activities, `Séance ${sessionId}`);
+  const missions = [];
   for (const activity of session.activities) {
     const progress = `${path}/activities/${activity.id}/progress`;
     if (activity.kind === 'exercise') {
-      const answers = exerciseKeys.get(activity.id);
-      assert.ok(answers, `Corrigé connu pour ${activity.id}`);
-      await put(progress, token, { state: { answers } });
-      const grade = await api('/assessments/quiz', token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
-        body: { lessonId: activity.lesson.id, answers, sessionId, activityId: activity.id } });
-      assert.equal(grade.correct, grade.total, `Toutes les bonnes réponses de ${activity.id} sont reconnues`);
-      await put(progress, token, { completed: true, attemptId: grade.id });
+      const { answers, roundId } = await answerActivity({ api, token, content: sourceOf(activity), view: activity,
+        lessonId: activity.lesson.id, sessionId, activityId: activity.id });
+      await put(progress, token, { state: { answers, roundId } });
+      const result = await submitExercise({ api, token, lessonId: activity.lesson.id, roundId, answers, sessionId, activityId: activity.id });
+      assertAllRight(result, activity.id);
+      await put(progress, token, { completed: true, attemptId: result.grade.id });
+    } else if (activity.kind === 'mission') {
+      assert.ok(activity.mission?.checklist?.length >= 2, `Définition de la mission ${activity.id}`);
+      await put(progress, token, { completed: true, attemptId: randomUUID() }, 409);
+      const mission = await sendMission({ api, token, upload: uploadRecording(token), open: {
+        trackVersionId: activity.contentVersionId, activityId: activity.contentActivityId ?? activity.id, sessionId, sessionActivityId: activity.id } });
+      assert.ok(['submitted', 'sent'].includes(mission.status), `Mission ${activity.id} envoyée`);
+      assert.deepEqual([mission.sessionId, mission.sessionActivityId], [sessionId, activity.id]);
+      await put(progress, token, { completed: true, attemptId: mission.id });
+      missions.push(mission);
     } else if (activity.kind === 'lesson' || activity.kind === 'review') {
       await put(progress, token, { completed: true });
     }
   }
-  return api(path, token);
+  const after = await api(path, token);
+  after.missions = missions;
+  return after;
 };
 const checkSupports = async (session) => {
   for (const placement of session.activities.flatMap((activity) => activity.placements)) {
@@ -1121,7 +1167,8 @@ await put(goalPath(a1Course.id, 'starting-point'), teacher.token, { acquiredModu
 const courseA1Proposal = await api(goalPath(a1Course.id, 'proposal'), teacher.token);
 assert.equal(courseA1Proposal.overflowCount, 0, 'Le programme A1 tient dans le mois intensif');
 const courseA1Planned = courseA1Proposal.sessions.flatMap((session) => session.items.map((item) => item.id));
-assert.ok(!courseA1Planned.some((id) => id.startsWith('a1-hallo-')), 'Le module acquis n’est pas planifié');
+assert.ok(!courseA1Proposal.sessions.some((session) => session.items.some((item) => item.moduleId === 'a1-hallo')),
+  'Le module acquis n’est pas planifié');
 assert.ok(courseA1Planned.includes('bilan-intermediaire') && courseA1Planned.includes('examen-blanc'));
 const courseA1FirstDay = courseA1Proposal.sessions.filter((session) => session.date === courseA1Proposal.sessions[0].date);
 assert.ok(courseA1FirstDay.length >= 2, 'Plusieurs séances par jour en rythme intensif');
@@ -1427,12 +1474,20 @@ const dialog = await api(`/learning/library/${trackA1.versionId}/activities/a1-h
 assert.deepEqual([dialog.status, dialog.trackVersionId, dialog.moduleId], ['todo', trackA1.versionId, 'a1-hallo']);
 const dialogFile = dialog.placements.find((placement) => placement.url);
 assert.ok(dialogFile && (await fetch(dialogFile.url, { signal: AbortSignal.timeout(8_000) })).ok, 'Le support de l’activité est lisible');
-const freeExercise = libraryA1.modules.flatMap((module) => module.activities).find((activity) => activity.kind === 'exercise');
+const freeExercise = libraryA1.modules.flatMap((module) => module.activities)
+  .find((activity) => activity.kind === 'exercise' && isTyped(contentActivities.get(activity.id)));
+assert.ok(freeExercise, 'La bibliothèque A1 propose un exercice à questions typées');
 const freeDetail = await api(`/learning/library/${trackA1.versionId}/activities/${freeExercise.id}`, solo.token);
-assert.ok(freeDetail.questions.every((question) => question.options.every((option) => !('correct' in option))), 'Sans corrigé');
-const freeGrade = await api('/assessments/quiz', solo.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
-  body: { lessonId: freeExercise.lessonId, answers: exerciseKeys.get(freeExercise.id) } });
-assert.equal(freeGrade.correct, freeGrade.total, 'L’exercice libre est corrigé');
+assertNoLeak([freeDetail], 'Bibliothèque');
+const freeLesson = freeDetail.lesson?.id ?? freeExercise.lessonId;
+await api('/assessments/quiz', solo.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: freeLesson, answers: { q1: 'a' } }, status: 409 });
+const freeAnswers = await answerActivity({ api, token: solo.token, content: contentActivities.get(freeExercise.id), view: freeDetail, lessonId: freeLesson });
+const freeResult = await submitExercise({ api, token: solo.token, lessonId: freeLesson, ...freeAnswers });
+assertAllRight(freeResult, 'Exercice libre');
+const freeGrade = freeResult.grade;
+assert.deepEqual(await api(`/assessments/exercises/${freeGrade.id}`, solo.token), freeResult, 'Le corrigé figé est relu à l’identique');
+await api(`/assessments/exercises/${freeGrade.id}`, teacher.token, { status: 403 });
 const libraryAgain = (await api('/learning/library', solo.token)).levels.find((level) => level.levelCode === 'A1');
 assert.equal(libraryAgain.modules.flatMap((module) => module.activities).find((activity) => activity.id === freeExercise.id).lastResult?.correct,
   freeGrade.correct, 'Le dernier score est affiché');
@@ -1466,7 +1521,138 @@ console.log('Recette des parcours réussie · langues, banque du test de niveau,
   + 'estimation et difficulté, parcours A0 → A2 sans mélange de niveaux, contrat (contre-proposition, refus, acceptation, '
   + 'engagement), avenant autonome, ajout de cours d’une autre version, passage forcé, bibliothèque et entraînement sans événement.');
 
+// --- V4 : corrigé par question, répétition orale validée, missions et lexique ------------------------------------
+// 1. L'ancienne route des quiz refuse une leçon typée, mais corrige toujours la leçon de démonstration.
+const demoQuiz = await api('/assessments/quiz', learnerToken, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: lesson.id, answers: { 'cafe-question': 'cafe' } } });
+assert.deepEqual([demoQuiz.correct, demoQuiz.typed, demoQuiz.pending, demoQuiz.flagged], [1, false, 0, []], 'La leçon de démonstration reste un quiz');
+
+// 2. Répétition orale : trois échecs → « à revoir » chez le référent et en bibliothèque, puis la reprise efface le marquage.
+const speakActivity = activitiesOf(contentA1).find((activity) => activity.questions?.some((question) => question.type === 'speak'));
+assert.ok(speakActivity, 'Le contenu A1 contient une répétition orale');
+const speakQuestion = speakActivity.questions.find((question) => question.type === 'speak');
+const speakView = await api(`/learning/library/${trackA1.versionId}/activities/${speakActivity.id}`, followedToken);
+assertNoLeak([speakView], 'Répétition');
+const speakLesson = speakView.lesson?.id ?? libraryA1.modules.flatMap((module) => module.activities).find((item) => item.id === speakActivity.id).lessonId;
+const speakRound = await answerActivity({ api, token: followedToken, content: speakActivity, view: speakView, lessonId: speakLesson,
+  fail: [speakQuestion.id] });
+const flaggedResult = await submitExercise({ api, token: followedToken, lessonId: speakLesson, ...speakRound });
+assert.deepEqual([flaggedResult.grade.flagged, flaggedResult.grade.correct, flaggedResult.grade.total],
+  [[speakQuestion.id], speakView.questions.length - 1, speakView.questions.length], 'Trois échecs : la phrase est à revoir et comptée fausse');
+assert.equal(flaggedResult.questions.find((question) => question.id === speakQuestion.id).status, 'flagged');
+assert.ok((await api(`/assessments/results?learnerId=${followedMe.id}`, teacher.token)).some((grade) => grade.id === flaggedResult.grade.id
+  && grade.flagged.includes(speakQuestion.id)), 'Le référent voit la phrase à revoir');
+const toReview = async () => (await api('/learning/library', followedToken)).levels.find((level) => level.levelCode === 'A1').modules
+  .flatMap((module) => module.activities).find((activity) => activity.id === speakActivity.id).toReview;
+assert.equal(await toReview(), true, 'La bibliothèque marque l’exercice « à revoir »');
+const redone = await answerActivity({ api, token: followedToken, content: speakActivity, view: speakView, lessonId: speakLesson });
+assertAllRight(await submitExercise({ api, token: followedToken, lessonId: speakLesson, ...redone }), 'Reprise de la répétition');
+assert.equal(await toReview(), false, 'La reprise en bibliothèque efface le marquage');
+
+// 3. Enregistrement de repli : en attente du professeur, visible dans sa file, puis validé (correct + 1, pending 0).
+const recordedRound = await answerActivity({ api, token: followedToken, content: speakActivity, view: speakView, lessonId: speakLesson,
+  record: [speakQuestion.id], upload: uploadRecording(followedToken) });
+const pendingResult = await submitExercise({ api, token: followedToken, lessonId: speakLesson, ...recordedRound });
+assert.deepEqual([pendingResult.grade.pending, pendingResult.grade.correct], [1, pendingResult.grade.total - 1], 'Répétition en attente');
+const speechId = recordedRound.attempts[speakQuestion.id].id;
+assert.ok((await api('/assessments/reviews', teacher.token)).some((item) => item.kind === 'speech' && item.id === speechId
+  && item.context === 'library'), 'Le référent reçoit la répétition enregistrée');
+await api('/assessments/reviews', followedToken, { status: 403 });
+await api(`/assessments/speech/${speechId}`, otherTeacher.token, { status: 403 });
+assert.ok((await api(`/assessments/speech/${speechId}`, teacher.token)).recording?.url, 'Le professeur écoute l’enregistrement');
+await post(`/assessments/speech/${speechId}/review`, otherTeacher.token, { decision: 'validated' }, 403);
+assert.equal((await post(`/assessments/speech/${speechId}/review`, teacher.token, { decision: 'validated', comment: 'Bien prononcé.' })).reviewStatus, 'validated');
+const validatedResult = await api(`/assessments/exercises/${pendingResult.grade.id}`, followedToken);
+assert.deepEqual([validatedResult.grade.correct, validatedResult.grade.pending], [validatedResult.grade.total, 0], 'Validée : correct + 1, pending 0');
+assert.equal(validatedResult.questions.find((question) => question.id === speakQuestion.id).status, 'correct');
+
+// 4. Missions : élève suivi → son référent (refusée à un tiers), à reprendre puis numéro 2 ; contrôles de remise.
+const missionA1 = activitiesOf(contentA1).find((activity) => activity.kind === 'mission');
+const missionA2 = activitiesOf(contentA2).find((activity) => activity.kind === 'mission');
+assert.ok(missionA1 && missionA2, 'Les contenus A1 et A2 contiennent des missions');
+const missionOpen = { trackVersionId: trackA1.versionId, activityId: missionA1.id };
+const draft = await post('/assessments/missions', followedToken, missionOpen, 201);
+assert.deepEqual([draft.number, draft.status, draft.sessionId], [1, 'draft', null], 'Brouillon de bibliothèque');
+assert.equal((await post('/assessments/missions', followedToken, missionOpen)).id, draft.id, 'Le brouillon ouvert est repris (200)');
+await put(`/assessments/missions/${draft.id}`, followedToken, { text: 'x'.repeat(1_501) }, 400);
+await put(`/assessments/missions/${draft.id}`, followedToken, { checklist: [0] });
+await api(`/assessments/missions/${draft.id}/submit`, followedToken, { method: 'POST', body: {}, headers: { 'Idempotency-Key': randomUUID() }, status: 409 });
+await api(`/assessments/missions/${draft.id}/submit`, followedToken, { method: 'POST', body: {}, status: 400 });
+await put(`/assessments/missions/${draft.id}`, teacher.token, { checklist: [] }, 404);
+const followedMission = await completeMission({ api, token: followedToken, mission: draft, upload: uploadRecording(followedToken) });
+assert.deepEqual([followedMission.status, followedMission.reviewerKind], ['submitted', 'teacher'], 'La mission arrive chez le référent');
+assert.ok((await api('/assessments/reviews', teacher.token)).some((item) => item.kind === 'mission' && item.id === draft.id
+  && item.context === 'library'), 'Elle figure dans la file du référent');
+assert.ok(!(await api('/assessments/reviews', otherTeacher.token)).some((item) => item.id === draft.id), 'Pas dans celle d’un tiers');
+await api(`/assessments/missions/${draft.id}`, otherTeacher.token, { status: 403 });
+await post(`/assessments/missions/${draft.id}/review`, otherTeacher.token, { decision: 'validated', comment: 'Bien.' }, 403);
+const teacherMission = await api(`/assessments/missions/${draft.id}`, teacher.token);
+assert.ok(teacherMission.canReview && teacherMission.recording?.url, 'Le référent lit le texte et écoute l’enregistrement');
+await post(`/assessments/missions/${draft.id}/review`, teacher.token, { decision: 'to_redo', comment: '' }, 400);
+const toRedo = await post(`/assessments/missions/${draft.id}/review`, teacher.token,
+  { decision: 'to_redo', comment: 'Ajoutez votre ville et relisez la place du verbe.' });
+assert.deepEqual([toRedo.status, toRedo.review?.decision], ['reviewed', 'to_redo']);
+assert.equal((await api(`/assessments/missions/${draft.id}`, followedToken)).review.comment, 'Ajoutez votre ville et relisez la place du verbe.');
+const secondTry = await post('/assessments/missions', followedToken, { ...missionOpen, restart: true }, 201);
+assert.deepEqual([secondTry.number, secondTry.status, secondTry.text], [2, 'draft', followedMission.text], 'Reprise : numéro 2 prérempli');
+assert.ok((await api(`/assessments/missions?learnerId=${followedMe.id}`, teacher.token)).filter((item) => item.activityId === missionA1.id).length >= 2);
+
+// Élève autonome avec correcteur désigné : la mission arrive chez le correcteur ; sans correcteur : envoyée (auto-vérification).
+const reviewerMission = await sendMission({ api, token: a2Learner.token, upload: uploadRecording(a2Learner.token),
+  open: { trackVersionId: trackA2.versionId, activityId: missionA2.id } });
+assert.deepEqual([reviewerMission.status, reviewerMission.reviewerKind], ['submitted', 'reviewer'], 'La mission arrive chez le correcteur');
+assert.ok((await api('/assessments/reviews', staffToken)).some((item) => item.id === reviewerMission.id));
+assert.equal((await post(`/assessments/missions/${reviewerMission.id}/review`, staffToken,
+  { decision: 'validated', comment: 'Très clair, bravo.' })).review.decision, 'validated');
+const soloMission = await sendMission({ api, token: solo.token, upload: uploadRecording(solo.token),
+  open: { trackVersionId: trackA2.versionId, activityId: missionA2.id } });
+assert.deepEqual([soloMission.status, soloMission.reviewerKind, soloMission.canReview], ['sent', null, false], 'Sans correcteur : envoyée');
+await post(`/assessments/missions/${soloMission.id}/review`, admin.token, { decision: 'validated', comment: 'Bien.' }, 409);
+
+// 5. Mission de séance : l'activité se termine avec l'identifiant de la mission envoyée au référent.
+const missionSessionRow = (await api('/learning/enrollment', a1Learner.token)).sessions.find((session) => session.status !== 'completed'
+  && session.activities.some((activity) => activity.kind === 'mission') && !session.activities.some((activity) => activity.kind === 'assessment'));
+assert.ok(missionSessionRow, 'Une séance A1 contient une mission');
+const missionWorked = await workSession(missionSessionRow.id, a1Learner.token);
+assert.equal(missionWorked.session.status, 'completed', 'La séance avec mission se termine');
+assert.ok(missionWorked.missions.length && missionWorked.missions.every((mission) => mission.reviewerKind === 'teacher'));
+assert.ok((await api('/assessments/reviews', teacher.token)).some((item) => item.id === missionWorked.missions[0].id && item.context === 'session'));
+
+// 6. Lexique de séance et de bibliothèque : adresses présentes et segments ordonnés.
+const checkLexicon = async (lexicon, label) => {
+  assert.ok(lexicon?.entries?.length > 0, `${label} : lexique servi`);
+  for (const entry of lexicon.entries) {
+    assert.ok(entry.audio?.url && entry.audio.start < entry.audio.end, `${label} : son de « ${entry.word} »`);
+    if (entry.partOfSpeech === 'noun' && !/pluriel/.test(entry.note ?? '')) assert.ok(entry.article, `${label} : article de ${entry.word}`);
+  }
+  assert.ok((await fetch(lexicon.entries[0].audio.url, { signal: AbortSignal.timeout(8_000) })).ok, `${label} : son lisible`);
+};
+await checkLexicon(missionWorked.lexicon, 'Séance');
+const lexiconPath = `/learning/library/${trackA1.versionId}/modules/${missionWorked.session.moduleId}/lexicon`;
+await checkLexicon(await api(lexiconPath, followedToken), 'Bibliothèque');
+await checkLexicon(await api(`${lexiconPath}?learnerId=${followedMe.id}`, teacher.token), 'Bibliothèque vue du référent');
+await api(`${lexiconPath}?learnerId=${followedMe.id}`, otherTeacher.token, { status: 403 });
+// Seuls les niveaux importés depuis la V4 portent un lexique ; le B1 fabriqué par la recette du catalogue n'en a pas.
+for (const level of (await api('/learning/library', followedToken)).levels.filter((item) => ['A1', 'A2'].includes(item.levelCode))) {
+  assert.deepEqual(level.modules.filter((module) => !(module.vocabularyCount > 0)).map((module) => module.id), [],
+    `Lexique annoncé pour chaque module ${level.levelCode}`);
+}
+
+// 7. Événements de la V4 : publiés sans enrollmentId, traités par le suivi sans erreur.
+const v4Events = sqlList(`select string_agg(distinct type, ',' order by type) from assessment.outbox_events
+  where subject_kind in ('exercise', 'mission');`);
+for (const type of ['assessment.exercise_flagged', 'assessment.mission_reviewed', 'assessment.mission_submitted']) {
+  assert.ok(v4Events.includes(type), `Événement ${type} enregistré`);
+}
+assert.equal(localQuery(local.container, `select count(*) from assessment.outbox_events
+  where subject_kind in ('exercise', 'mission') and data::jsonb ? 'enrollmentId';`), '0', 'Aucun événement V4 ne porte enrollmentId');
+await runJob();
+console.log('Recette V4 réussie · corrigé par question sans fuite, quiz refusé sur une leçon typée, répétition orale à revoir puis '
+  + 'reprise, enregistrement validé par le référent, missions (référent, tiers refusé, à reprendre, correcteur désigné, '
+  + 'auto-vérification, séance), lexiques et événements.');
+
 // --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
+
 async function control(action, service) {
   const response = await fetch(`http://127.0.0.1:8099/${action}/${service}`, {
     method: 'POST', headers: { 'X-Linguacap-Internal': internalSecret }, signal: AbortSignal.timeout(60_000) });
@@ -1510,7 +1696,7 @@ assert.ok(outageLesson, 'Une leçon reste à faire pour produire un événement'
 await put(`/learning/sessions/${outageDetail.session.id}/activities/${outageLesson.id}/progress`, a1Learner.token, { completed: true });
 const learningBefore = sequences('learning');
 await control('stop', 'learning');
-const syncDuringOutage = await runJob();
+const syncDuringOutage = await runJob('sync', { allowErrors: true });
 assert.ok(syncDuringOutage.errors.learning, 'Le traitement signale le producteur indisponible');
 assert.equal(sequences('learning'), learningBefore, 'Le point de reprise n’avance pas pendant l’indisponibilité');
 await control('start', 'learning');

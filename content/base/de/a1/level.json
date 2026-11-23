@@ -1,0 +1,1524 @@
+{
+  "levelId": "a1",
+  "modules": [
+    {
+      "id": "a1-hallo",
+      "file": "01-hallo.json"
+    },
+    {
+      "id": "a1-zahlen",
+      "file": "02-zahlen.json"
+    },
+    {
+      "id": "a1-kurs",
+      "file": "03-kurs.json"
+    },
+    {
+      "id": "a1-alltag",
+      "file": "04-alltag.json"
+    },
+    {
+      "id": "a1-essen",
+      "file": "05-essen.json"
+    },
+    {
+      "id": "a1-freizeit",
+      "file": "06-freizeit.json"
+    },
+    {
+      "id": "a1-familie",
+      "file": "07-familie.json"
+    },
+    {
+      "id": "a1-stadt",
+      "file": "08-stadt.json"
+    }
+  ],
+  "settings": {
+    "expectedCompetences": [
+      "lecture",
+      "ecoute",
+      "expression-ecrite",
+      "expression-orale"
+    ],
+    "successCriteria": "Obtenir au moins 60 % à l’examen blanc A1, sans compétence sous 30 % : comprendre des textes et des annonces simples du quotidien, écrire un court message personnel et se présenter puis échanger sur des sujets familiers.",
+    "passPercent": 60,
+    "reviewMinutes": 10,
+    "midtermMinutes": 30,
+    "finalMinutes": 60
+  },
+  "diagnostic": {
+    "title": "Test de positionnement A1",
+    "description": "Ce petit test de 12 questions (environ 10 minutes) sert seulement à situer votre point de départ : ce n’est pas un examen et il n’y a ni note ni échec. Les questions vont du plus simple au plus difficile, il est donc tout à fait normal de ne pas tout savoir, surtout si vous débutez. Répondez spontanément, sans dictionnaire ; si vous hésitez, choisissez la réponse qui vous semble la plus probable. Vos réponses servent à adapter votre parcours : les notions que vous maîtrisez déjà pourront être considérées comme acquises.",
+    "questions": [
+      {
+        "id": "q1",
+        "moduleRef": "a1-hallo",
+        "prompt": "On vous demande : « Woher kommen Sie? » Que répondez-vous ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Ich heiße Claire Martin.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Ich komme aus Frankreich.",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "Gut, danke. Und Ihnen?",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "moduleRef": "a1-zahlen",
+        "prompt": "Comment dit-on « 47 » en allemand ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "siebenundvierzig",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "vierundsiebzig",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "vierzigsieben",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "siebzehn",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "moduleRef": "a1-zahlen",
+        "prompt": "Complétez : « Wir … zwei Kinder. »",
+        "options": [
+          {
+            "id": "a",
+            "label": "hat",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "habt",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "haben",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "habe",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "moduleRef": "a1-kurs",
+        "prompt": "Complétez : « Das ist … Kuli, das ist ein Bleistift. »",
+        "options": [
+          {
+            "id": "a",
+            "label": "nicht",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "keine",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "nein",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "kein",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "moduleRef": "a1-kurs",
+        "prompt": "Quel est le pluriel de « das Buch » ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "die Buchs",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "die Bücher",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "die Büchen",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q6",
+        "moduleRef": "a1-alltag",
+        "prompt": "Quelle phrase est correcte ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Ich aufstehe um sieben Uhr.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Um sieben Uhr ich stehe auf.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Um sieben Uhr stehe ich auf.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "Um sieben Uhr aufstehe ich.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "moduleRef": "a1-alltag",
+        "prompt": "« Es ist halb neun. » Quelle heure est-il ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "8 h 30",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "9 h 30",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "8 h 15",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q8",
+        "moduleRef": "a1-essen",
+        "prompt": "Au café, le serveur vous dit : « Das macht drei Euro neunzig. » Combien payez-vous ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "3,19 €",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "9,30 €",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "3,09 €",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "3,90 €",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q9",
+        "moduleRef": "a1-essen",
+        "prompt": "Complétez : « Ich möchte … Apfelsaft und … Brezel, bitte. »",
+        "options": [
+          {
+            "id": "a",
+            "label": "ein … ein",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "einen … eine",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "einen … einen",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "eine … ein",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q10",
+        "moduleRef": "a1-freizeit",
+        "prompt": "Complétez : « Kommst du am Samstag mit ins Kino? — Nein, ich … leider nicht. Ich habe keine Zeit. »",
+        "options": [
+          {
+            "id": "a",
+            "label": "kann",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "kannst",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "können",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q11",
+        "moduleRef": "a1-familie",
+        "prompt": "Lena et Tom présentent leur fils à des amis. Complétez : « Das ist … Sohn Max. »",
+        "options": [
+          {
+            "id": "a",
+            "label": "ihr",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "unsere",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "euer",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "unser",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q12",
+        "moduleRef": "a1-stadt",
+        "prompt": "Une dame que vous ne connaissez pas vous demande le chemin de la gare. Vous lui conseillez de prendre le bus n° 5. Que dites-vous ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Nimm bitte den Bus Nummer fünf.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Nehmt bitte den Bus Nummer fünf.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Nehmen Sie bitte den Bus Nummer fünf.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "Nehmen Sie bitte der Bus Nummer fünf.",
+            "correct": false
+          }
+        ]
+      }
+    ]
+  },
+  "assessments": [
+    {
+      "kind": "midterm",
+      "title": "Bilan intermédiaire A1",
+      "description": "Ce bilan de 30 minutes porte sur les modules 1 à 4 : se présenter, les nombres et les informations personnelles, le cours d’allemand et la journée. Il comporte quatre parties : lecture (5 questions), écoute (5 questions), expression écrite et expression orale. Chaque compétence compte pour 5 points. Le bilan ne sert pas à valider le niveau : il vous montre ce qui est acquis et ce qu’il faut revoir avant la deuxième moitié du parcours.",
+      "parts": [
+        {
+          "id": "lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : s’inscrire à un cours d’allemand",
+          "instructions": "Lisez les trois documents, puis répondez aux questions 1 à 5. Pour chaque question, une seule réponse est correcte. Durée conseillée : 8 minutes.\n\nDOCUMENT 1 — UNE E-MAIL À L’ÉCOLE DE LANGUES\nGuten Tag, Frau Krüger,\nmein Name ist Marco Bianchi. Ich komme aus Italien, aus Neapel, und wohne jetzt in Leipzig. Ich bin 29 Jahre alt und Koch von Beruf. Ich stehe jeden Tag um halb sechs auf und arbeite von 7 bis 15 Uhr. Am Wochenende arbeite ich auch. Am Abend habe ich Zeit. Welcher Kurs ist gut für mich?\nViele Grüße\nMarco Bianchi\n\nDOCUMENT 2 — LES COURS DE L’ÉCOLE LINDENHOF\nDeutsch A1 – unsere Kurse\n• Kurs A: Montag und Mittwoch, 9:00 bis 11:30 Uhr, Raum 101\n• Kurs B: Dienstag und Donnerstag, 18:30 bis 20:00 Uhr, Raum 204\n• Kurs C: Samstag, 10:00 bis 14:00 Uhr, Raum 204\nInformation: Büro, Raum 002, Montag bis Freitag, 8 bis 16 Uhr\n\nDOCUMENT 3 — UNE NOTE SUR LA PORTE DE LA SALLE 204\nLiebe Kursteilnehmerinnen und Kursteilnehmer,\nheute ist Raum 204 leider geschlossen. Der Kurs B ist heute in Raum 310. Bitte bringen Sie Ihr Wörterbuch mit. Das Kursbuch brauchen Sie heute nicht.\nIhre Lehrerin\nAnja Krüger",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Document 1 : quelle est la profession de Marco ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Il est étudiant.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Il est professeur.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Il est cuisinier.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Document 1 : à quelle heure Marco se lève-t-il ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "À 5 h 30.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "À 6 h 30.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "À 7 h.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Documents 1 et 2 : quel cours est possible pour Marco ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Le cours A.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Le cours B.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Le cours C.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Document 3 : aujourd’hui, où a lieu le cours B ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Dans la salle 204.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Dans la salle 101.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Au bureau, salle 002.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Dans la salle 310.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Document 3 : qu’est-ce que les participants apportent aujourd’hui ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Leur dictionnaire.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Leur livre de cours.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Un cahier et un crayon.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": []
+        },
+        {
+          "id": "hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : cinq courtes scènes",
+          "instructions": "Vous allez entendre cinq courtes scènes : un message sur un répondeur, deux dialogues dans une école de langues, une conversation entre amis et une question dans la rue. Lisez d’abord les questions 1 à 5, puis écoutez l’enregistrement, deux fois si nécessaire. Pour chaque question, une seule réponse est correcte. Durée conseillée : 7 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Scène 1 : quel est le numéro de téléphone de l’école de langues ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "0341 64 38 72",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "0341 46 83 72",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "0341 46 38 72",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Scène 2 : quelle est l’adresse de Mme Jansen ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Bergstraße 18",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Bergstraße 80",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Bergstraße 8",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Scène 3 : qu’est-ce que Lisa donne à Tom ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Un stylo et un cahier.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Un crayon et un cahier.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Un crayon et un livre.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Seulement un stylo.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Scène 4 : que fait Jan samedi après-midi ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Il fait les courses.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Il dort.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Il regarde la télévision.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Il range l’appartement.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Scène 5 : quelle heure est-il ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "3 h 15",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "2 h 45",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "3 h 45",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "2 h 15",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a1-bilan-hoeren-audio",
+              "usage": "audio",
+              "caption": "Cinq courtes scènes",
+              "transcriptVisibility": "hidden",
+              "decorative": false,
+              "questionId": null,
+              "optionId": null
+            }
+          ]
+        },
+        {
+          "id": "schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Expression écrite : répondre à une camarade de cours",
+          "instructions": "Durée conseillée : 8 minutes.\n\nJulia, une camarade de votre cours d’allemand, vous écrit ce message :\n\n« Hallo! Ich heiße Julia und komme aus Österreich. Und du? Wer bist du? Was machst du jeden Tag? Lernen wir zusammen Deutsch? Wann hast du Zeit?\nLiebe Grüße, Julia »\n\nRépondez à Julia en allemand. Écrivez 30 à 40 mots et traitez les trois points suivants :\n1. Présentez-vous : nom, pays, ville, âge.\n2. Décrivez votre journée : l’heure à laquelle vous vous levez, ce que vous faites le matin et le soir.\n3. Proposez un jour et une heure pour apprendre ensemble.\nCommencez par une salutation et terminez par une formule de fin.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les trois points sont traités, 30 à 40 mots, salutation et formule de fin",
+              "maxPoints": 2
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : mots simples et adaptés (présentation, journée, jours et heures)",
+              "maxPoints": 2
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire et orthographe : présent, verbe en 2e position, verbes séparables, majuscule des noms",
+              "maxPoints": 1
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Expression orale : se présenter, questionner, demander",
+          "instructions": "Enregistrez-vous en une seule fois : 2 à 3 minutes en allemand, en parlant lentement et clairement. Vous pouvez préparer quelques notes pendant 3 minutes, mais ne lisez pas un texte entièrement rédigé. Durée conseillée : 7 minutes, préparation comprise.\n\nTÂCHE 1 — SE PRÉSENTER\nPrésentez-vous à votre nouveau groupe à l’aide de ces mots : Name (épelez votre nom de famille) · Land · Wohnort · Alter · Sprachen · Beruf · Telefonnummer.\n\nTÂCHE 2 — POSER DES QUESTIONS ET Y RÉPONDRE\nThème : « Mein Tag ». Pour chaque carte, posez une question à un ou une camarade, puis donnez vous-même une réponse.\nCartes : Aufstehen? · Frühstück? · Deutschkurs? · Abend?\nExemple : carte « Wochenende? » → « Was machst du am Wochenende? » — « Am Wochenende schlafe ich lange. »\n\nTÂCHE 3 — FORMULER UNE DEMANDE\nEn cours, vous avez besoin de quelque chose. Pour chaque carte, formulez une demande à un ou une camarade, puis imaginez la réponse.\nCartes : Kuli · Uhrzeit · Wörterbuch\nExemple : carte « Heft » → « Hast du ein Heft für mich? » — « Ja, hier, bitte. »",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâches réalisées : présentation complète, une question et une réponse par carte, trois demandes formulées",
+              "maxPoints": 2
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire et formules : mots du quotidien et formules de politesse adaptés",
+              "maxPoints": 2
+            },
+            {
+              "id": "correction",
+              "label": "Correction et prononciation : phrases simples correctes, prononciation compréhensible",
+              "maxPoints": 1
+            }
+          ],
+          "placements": []
+        }
+      ]
+    },
+    {
+      "kind": "final",
+      "title": "Examen blanc A1",
+      "description": "Cet examen blanc de 60 minutes reprend l’ensemble du niveau A1 dans les conditions d’un examen : lecture (8 questions), écoute (8 questions), expression écrite et expression orale. Chaque compétence compte pour 8 points, soit 32 points au total. Pour valider le niveau, il faut obtenir au moins 60 % au total, sans aucune compétence sous 30 %. Prévoyez un endroit calme, un casque ou des écouteurs et un micro.",
+      "parts": [
+        {
+          "id": "lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : messages, annonces et informations pratiques",
+          "instructions": "Lisez les quatre documents, puis répondez aux questions 1 à 8. Pour chaque question, une seule réponse est correcte. Durée conseillée : 15 minutes.\n\nDOCUMENT 1 — UN MESSAGE DE KEMAL\nHallo Ben,\nheute Abend kann ich leider nicht ins Kino kommen. Ich muss bis 21 Uhr arbeiten. Wollen wir am Sonntag Fußball spielen? Das Wetter ist dann super: Sonne und 22 Grad! Wir treffen uns um 15 Uhr im Stadtpark, am Nordeingang. Ich bringe den Ball mit.\nBis Sonntag!\nKemal\n\nDOCUMENT 2 — UNE E-MAIL DE SOPHIE\nLiebe Anna,\nwie geht es dir? Am Wochenende fahre ich nach Hamburg. Mein Opa hat am Sonntag Geburtstag, er wird 75! Meine Eltern, mein Bruder und meine Tante Petra mit ihren zwei Kindern kommen auch. Wir essen alle zusammen im Restaurant. Am Montag bin ich wieder in Köln. Hast du am Dienstag Zeit? Dann trinken wir zusammen einen Kaffee.\nLiebe Grüße\nSophie\n\nDOCUMENT 3 — UNE AFFICHE DU CAFÉ SONNENSCHEIN (voir aussi le tableau des prix)\nBäckerei und Café Sonnenschein\nÖffnungszeiten: Montag bis Freitag 6:30 bis 18:30 Uhr, Samstag 7:00 bis 14:00 Uhr, Sonntag geschlossen\nAngebot der Woche: Kaffee und ein Stück Kuchen zusammen nur 3,90 Euro!\n\nDOCUMENT 4 — UNE PETITE ANNONCE\nWohnung zu vermieten\nSchöne 2-Zimmer-Wohnung im 3. Stock, 54 m², mit Küche, Bad und Balkon. Die Wohnung ist hell und ruhig. Sie hat keine Möbel, nur die Küche ist komplett. Miete: 620 Euro im Monat. Frei ab 1. Mai. Die Bushaltestelle (Linie 7) ist direkt vor dem Haus.\nKontakt: Frau Becker, Telefon 0761 33 48 20 (Montag bis Freitag ab 17 Uhr)",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Document 1 : pourquoi Kemal ne va-t-il pas au cinéma ce soir ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Il est malade.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Il n’a pas d’argent.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Il travaille jusqu’à 21 h.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Document 1 : quand et où Kemal veut-il retrouver Ben ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Dimanche à 15 h, au parc.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Dimanche à 5 h, au parc.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Samedi à 15 h, au stade.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Ce soir à 21 h, devant le cinéma.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Document 2 : pourquoi Sophie va-t-elle à Hambourg ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Pour le mariage de sa tante.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Pour l’anniversaire de son grand-père.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Pour son travail.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Document 2 : quel jour Sophie est-elle de retour à Cologne ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Dimanche.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Mardi.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Lundi.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Document 3 : vous voulez aller au café samedi à 15 h. Est-ce possible ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Oui, le café ferme à 18 h 30.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Non, le samedi, le café ferme à 14 h.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Non, le café est fermé tout le samedi.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Document 3 : cette semaine, vous prenez un café et une part de gâteau. Combien payez-vous ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "5,20 €",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "2,40 €",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "2,80 €",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "3,90 €",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Document 4 : qu’est-ce qui est vrai ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "L’appartement a trois pièces.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "L’appartement est meublé.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "L’appartement est au rez-de-chaussée.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "L’appartement a un balcon.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Document 4 : quand peut-on téléphoner à Mme Becker ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Du lundi au vendredi, à partir de 17 h.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Le samedi matin.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Tous les jours jusqu’à 17 h.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a1-examen-lesen-bild",
+              "usage": "illustration",
+              "alt": "Tableau des prix du Café Sonnenschein : croissant 1,30 €, petit pain au fromage 2,90 €, café 2,40 €, part de gâteau aux pommes 2,80 €, jus d’orange 2,60 €.",
+              "caption": "Document 3 : le tableau des prix du Café Sonnenschein",
+              "transcriptVisibility": "hidden",
+              "decorative": false,
+              "questionId": null,
+              "optionId": null
+            }
+          ]
+        },
+        {
+          "id": "hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : annonces, messages et dialogues",
+          "instructions": "Vous allez entendre six courtes scènes : une annonce à la gare, un dialogue à la boulangerie, un message sur un répondeur et trois conversations. Lisez d’abord les questions 1 à 8, puis écoutez l’enregistrement, deux fois si nécessaire. Pour chaque question, une seule réponse est correcte. Durée conseillée : 15 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Scène 1 : à quelle heure part le train pour Nuremberg ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "À 10 h 12.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "À 10 h 40.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "À 10 h 14.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Scène 1 : de quelle voie part le train ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Voie 3.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Voie 13.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Voie 5.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Voie 15.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Scène 2 : combien le client paie-t-il ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "5,20 €",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "2,50 €",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "5,02 €",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "4,20 €",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Scène 3 : pourquoi le pique-nique n’est-il pas possible ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Lara est malade.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Il va pleuvoir samedi.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Le parc est fermé.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Scène 3 : à quelle heure Lara propose-t-elle de retrouver Tim ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "À 20 h.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "À 20 h 15.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "À 19 h 15.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "À 19 h 45.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Scène 4 : quand est l’anniversaire de la sœur de Sara ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Le 12 juin.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Le 20 juillet.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Le 12 juillet.",
+                  "correct": true
+                },
+                {
+                  "id": "d",
+                  "label": "Le 2 juillet.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Scène 5 : comment va-t-on à la poste ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Tout droit, puis la deuxième rue à gauche.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Tout droit, puis la deuxième rue à droite.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Tout droit, puis la première rue à gauche.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "À gauche, puis tout droit jusqu’au supermarché.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Scène 6 : qu’est-ce que Marie n’a pas encore ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Un lit.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Une table.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Un balcon.",
+                  "correct": false
+                },
+                {
+                  "id": "d",
+                  "label": "Un canapé.",
+                  "correct": true
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "a1-examen-hoeren-audio",
+              "usage": "audio",
+              "caption": "Six courtes scènes",
+              "transcriptVisibility": "hidden",
+              "decorative": false,
+              "questionId": null,
+              "optionId": null
+            }
+          ]
+        },
+        {
+          "id": "schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Expression écrite : répondre à une invitation",
+          "instructions": "Durée conseillée : 15 minutes.\n\nVotre collègue Markus vous envoie cette invitation :\n\n« Hallo! Ich feiere am Samstag meinen Geburtstag. Die Party beginnt um 19 Uhr bei mir zu Hause, in der Rosenstraße 5. Kommst du?\nViele Grüße, Markus »\n\nRépondez à Markus en allemand. Écrivez 40 à 50 mots et traitez les trois points suivants :\n1. Remerciez-le pour l’invitation et dites si vous venez (si vous ne pouvez pas venir, expliquez pourquoi).\n2. Demandez comment aller chez lui (bus, tram, chemin depuis la gare…).\n3. Proposez d’apporter quelque chose à manger ou à boire.\nCommencez par une salutation et terminez par une formule de fin.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâche réalisée : les trois points sont traités, 40 à 50 mots, salutation et formule de fin",
+              "maxPoints": 3
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire : mots et formules adaptés (remercier, accepter ou refuser, demander le chemin, proposer)",
+              "maxPoints": 3
+            },
+            {
+              "id": "grammaire",
+              "label": "Grammaire et orthographe : présent, verbe en 2e position, questions, accusatif, majuscule des noms",
+              "maxPoints": 2
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Expression orale : se présenter, échanger, demander",
+          "instructions": "Enregistrez-vous en une seule fois : 3 à 4 minutes en allemand, en parlant lentement et clairement. Vous avez 5 minutes pour préparer quelques notes ; ne lisez pas un texte entièrement rédigé. Durée conseillée : 15 minutes, préparation comprise.\n\nTÂCHE 1 — SE PRÉSENTER\nPrésentez-vous à l’aide de ces mots : Name · Alter · Land · Wohnort · Sprachen · Beruf · Familie · Hobby.\n\nTÂCHE 2 — POSER DES QUESTIONS ET Y RÉPONDRE\nThème : « Essen und Freizeit ». Pour chaque carte, posez une question à un ou une camarade, puis donnez vous-même une réponse.\nCartes : Frühstück? · Lieblingsessen? · Sport? · Wochenende?\nExemple : carte « Getränk? » → « Was trinkst du gern? » — « Ich trinke gern Tee. »\n\nTÂCHE 3 — FORMULER UNE DEMANDE\nPour chaque situation, formulez une demande polie (avec « Sie » ou « du » selon la personne), puis imaginez la réponse.\n• À la gare, au guichet : vous voulez un billet pour Munich.\n• Dans la rue, à une personne inconnue : vous cherchez la pharmacie.\n• Chez votre amie : il fait chaud, vous voulez ouvrir la fenêtre.\nExemple : au café, au serveur → « Einen Tee, bitte. » — « Kommt sofort! »",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "tache",
+              "label": "Tâches réalisées : présentation complète, une question et une réponse par carte, trois demandes adaptées",
+              "maxPoints": 3
+            },
+            {
+              "id": "vocabulaire",
+              "label": "Vocabulaire et formules : mots adaptés aux thèmes, choix juste entre du et Sie, formules de politesse",
+              "maxPoints": 3
+            },
+            {
+              "id": "correction",
+              "label": "Correction et prononciation : phrases simples correctes, prononciation compréhensible",
+              "maxPoints": 2
+            }
+          ],
+          "placements": []
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-bilan-hoeren-audio",
+      "kind": "audio",
+      "title": "Bilan intermédiaire A1 — écoute : cinq courtes scènes",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Lange",
+          "text": "Guten Tag, hier ist Petra Lange von der Sprachschule Lindenhof. Das ist eine Nachricht für Herrn Morel. Ihr Deutschkurs beginnt am Dienstag um neun Uhr. Bitte rufen Sie uns zurück. Unsere Nummer ist null drei vier eins, sechsundvierzig, achtunddreißig, zweiundsiebzig. Auf Wiederhören!"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Empfang",
+          "text": "Guten Tag! Wie ist Ihr Name, bitte?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Jansen",
+          "text": "Jansen. J, A, N, S, E, N."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Empfang",
+          "text": "Danke, Frau Jansen. Und wie ist Ihre Adresse?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Jansen",
+          "text": "Bergstraße achtzehn, hier in Leipzig."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Tom",
+          "text": "Lisa, hast du einen Kuli für mich?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Nein, ich habe keinen Kuli. Aber ich habe einen Bleistift. Hier, bitte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Tom",
+          "text": "Danke! Und hast du auch ein Heft?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lisa",
+          "text": "Ja, klar. Hier ist ein Heft."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Nina",
+          "text": "Jan, was machst du am Samstag?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jan",
+          "text": "Am Samstag schlafe ich lange. Ich stehe erst um zehn Uhr auf und frühstücke. Am Nachmittag räume ich die Wohnung auf, und am Abend sehe ich fern."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene fünf."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Passant",
+          "text": "Entschuldigung, wie spät ist es?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Passantin",
+          "text": "Es ist Viertel vor drei."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Passant",
+          "text": "Oh, schon! Mein Kurs beginnt um drei. Vielen Dank!"
+        }
+      ]
+    },
+    {
+      "key": "a1-examen-hoeren-audio",
+      "kind": "audio",
+      "title": "Examen blanc A1 — écoute : six courtes scènes",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Achtung, eine Information für Reisende nach Nürnberg: Der Regionalexpress fährt heute nicht um zehn Uhr zwölf, sondern um zehn Uhr vierzig. Er fährt heute nicht von Gleis drei, sondern von Gleis fünf."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Guten Morgen! Was möchten Sie, bitte?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Kunde",
+          "text": "Ich möchte vier Brötchen und ein Stück Käsekuchen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Gern. Darf es sonst noch etwas sein?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Kunde",
+          "text": "Nein, danke. Was kostet das zusammen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Das macht fünf Euro zwanzig."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Lara",
+          "text": "Hallo Tim, hier ist Lara. Am Samstag regnet es leider, also geht das Picknick im Park nicht. Wollen wir ins Kino gehen? Der Film beginnt um acht. Treffen wir uns um Viertel vor acht vor dem Kino? Ruf mich bitte an. Tschüs!"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Sara, wann hat deine Schwester Geburtstag?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Am zwölften Juli. Sie wird zwanzig! Wir feiern bei meinen Eltern im Garten."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Jonas",
+          "text": "Schön! Und was schenkst du ihr?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ich schenke ihr ein Buch und Blumen."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene fünf."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Passantin",
+          "text": "Entschuldigung, wo ist hier die Post?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Passant",
+          "text": "Gehen Sie geradeaus und dann die zweite Straße links. Die Post ist neben dem Supermarkt."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Passantin",
+          "text": "Vielen Dank für Ihre Hilfe!"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene sechs."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Ali",
+          "text": "Und, Marie, wie ist deine neue Wohnung?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Marie",
+          "text": "Super! Sie hat zwei Zimmer und einen Balkon. Die Küche ist leider sehr klein. Ein Bett und einen Tisch habe ich schon, aber ich habe noch kein Sofa."
+        }
+      ]
+    },
+    {
+      "key": "a1-examen-lesen-bild",
+      "kind": "image",
+      "title": "Café Sonnenschein : le tableau des prix",
+      "alt": "Tableau des prix du Café Sonnenschein : croissant 1,30 €, petit pain au fromage 2,90 €, café 2,40 €, part de gâteau aux pommes 2,80 €, jus d’orange 2,60 €.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "croissant",
+            "label": "Croissant · 1,30 €"
+          },
+          {
+            "icon": "sandwich",
+            "label": "Käsebrötchen · 2,90 €"
+          },
+          {
+            "icon": "coffee",
+            "label": "Kaffee · 2,40 €"
+          },
+          {
+            "icon": "cake-slice",
+            "label": "Apfelkuchen · 2,80 €"
+          },
+          {
+            "icon": "citrus",
+            "label": "Orangensaft · 2,60 €"
+          }
+        ]
+      }
+    }
+  ]
+}

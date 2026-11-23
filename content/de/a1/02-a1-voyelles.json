@@ -1,0 +1,1309 @@
+{
+  "id": "a1-voyelles",
+  "title": "Voyelles · Lire les premiers mots",
+  "objective": "Distinguer ä, ö, ü, les suites ei, ie, eu et au, et reproduire des contrastes de voyelles dans des mots courts.",
+  "prerequisites": [
+    "a1-abc"
+  ],
+  "audioProfile": "a1-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-voyelles.mjs",
+  "vocabulary": [
+    {
+      "id": "buch",
+      "word": "Buch",
+      "article": "das",
+      "plural": "Bücher",
+      "partOfSpeech": "noun",
+      "translation": "le livre",
+      "example": "Mein Buch ist blau.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "haus",
+      "word": "Haus",
+      "article": "das",
+      "plural": "Häuser",
+      "partOfSpeech": "noun",
+      "translation": "la maison",
+      "example": "Das Haus ist neu.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "kaese",
+      "word": "Käse",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le fromage",
+      "example": "Der Käse ist gut.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "schoen",
+      "word": "schön",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "beau, joli",
+      "example": "Das Buch ist sehr schön.",
+      "note": "avec tréma ; sans tréma, schon veut dire « déjà »",
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "schon",
+      "word": "schon",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "déjà",
+      "example": "Ich bin schon hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "neu",
+      "word": "neu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "neuf, nouveau",
+      "example": "Das Buch ist neu.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "blau",
+      "word": "blau",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "bleu",
+      "example": "Dein Buch ist blau.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "gruen",
+      "word": "grün",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "vert",
+      "example": "Mein Buch ist grün.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "spaet",
+      "word": "spät",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "tard",
+      "example": "Es ist schon spät.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "hier",
+      "word": "hier",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ici",
+      "example": "Die Bücher sind hier.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "mein",
+      "word": "mein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "pronoun",
+      "translation": "mon",
+      "example": "Das hier ist mein Buch.",
+      "note": "au pluriel : meine Bücher",
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "dein",
+      "word": "dein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "pronoun",
+      "translation": "ton",
+      "example": "Dein Buch ist blau.",
+      "note": "au pluriel : deine Bücher",
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "zwei",
+      "word": "zwei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "deux",
+      "example": "Hier sind zwei Bücher.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "drei",
+      "word": "drei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "trois",
+      "example": "Eins, zwei, drei.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sieben",
+      "word": "sieben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "number",
+      "translation": "sept",
+      "example": "Ich habe sieben Bücher.",
+      "note": null,
+      "audio": {
+        "media": "a1-voyelles-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-voyelles-guide",
+      "kind": "lesson",
+      "title": "Découvrir : de la lettre au son",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : de la lettre au son",
+        "description": "DE LA LETTRE AU SON · 15 MIN\n\nPour prononcer un mot allemand, lisez les groupes de lettres : un groupe peut correspondre à un seul son. Écoutez et reproduisez d’abord des mots entiers.\n\n1. Les trémas (5 min). Comparez schon (déjà) et schön (beau). Pour ö, dites « é » en arrondissant les lèvres : on obtient le « eu » de « peu ». Pour ü, gardez les lèvres arrondies comme pour le « u » de « lune ». Ä se rapproche d’un « è » : spät, Käse. Comparez Buch et Bücher : les deux points changent le son et le mot.\n2. ei et ie (4 min). Dans mein et zwei, ei se dit « aï ». Dans sieben et hier, ie est un i long. Retenez : on prononce la deuxième lettre du groupe. Évitez de faire deux syllabes dans mein.\n3. eu, äu et au (3 min). Eu et äu se prononcent de la même façon, à peu près « oï » : neu, Häuser. Au se dit « aou » : Haus, blau. Alternez neu et Haus et écoutez la différence.\n4. Premiers blocs (3 min). Répétez « zwei Bücher », « mein Haus », « hier », « sehr schön ». Dites chaque bloc d’une seule respiration, en regardant les points sur les voyelles.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-voyelles-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-voyelles-umlaute",
+          "usage": "illustration",
+          "caption": "schon / schön · Buch / Bücher · spät, Käse",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-voyelles-gruppen",
+          "usage": "illustration",
+          "caption": "ei · ie · eu / äu · au",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-voyelles-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : voyelles longues, brèves et arrondies",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : voyelles longues, brèves et arrondies",
+        "description": "ENTENDRE LES VOYELLES · 12 MIN\n\n1. I long, i bref (4 min). Réécoutez bieten et bitten dans le modèle. Dans bieten, le i est tenu ; dans bitten, suivi de deux consonnes, il est bref. Seule la voyelle change de durée, pas le reste du mot. Répétez trois fois, puis dites « sieben Bücher ».\n2. Une phrase d’un trait (3 min). Lisez à voix haute « Mein Buch ist neu. Die Bücher sind hier. ». Repérez les deux points de Bücher, puis les groupes ei (mein), eu (neu) et ie (hier).\n3. La petite scène (5 min). Premier passage : parle-t-on de livres ou de vêtements ? Deuxième passage : repérez un nombre et une couleur. Troisième passage : lisez la transcription et répétez chaque réplique pendant une pause.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-voyelles-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-voyelles-buecher",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-voyelles-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : écrire les voyelles",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : écrire les voyelles",
+        "description": "Associez les groupes de lettres à leur son, puis complétez les mots avec la bonne voyelle. Pour les trémas, utilisez la barre de caractères (ä, ö, ü).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Associez chaque groupe de lettres au son qu’il note (approximation française).",
+          "pairs": [
+            {
+              "left": "ei (mein)",
+              "right": "« aï »"
+            },
+            {
+              "left": "ie (hier)",
+              "right": "« i » long"
+            },
+            {
+              "left": "eu (neu)",
+              "right": "« oï »"
+            },
+            {
+              "left": "au (Haus)",
+              "right": "« aou »"
+            },
+            {
+              "left": "ö (schön)",
+              "right": "« eu » de « peu »"
+            },
+            {
+              "left": "ü (grün)",
+              "right": "« u » de « lune »"
+            }
+          ],
+          "explanation": "Ei se lit « aï » et ie se lit « i » : on prononce la deuxième lettre du groupe. Eu se dit « oï », au « aou ». Ö et ü sont des voyelles arrondies, proches du « eu » et du « u » français."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez avec u ou ü.",
+          "text": "ein B[[1]]ch – zwei B[[2]]cher – Das Buch ist gr[[3]]n.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "u"
+              ],
+              "size": 2,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ü"
+              ],
+              "size": 2,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ü"
+              ],
+              "size": 2,
+              "hint": null
+            }
+          ],
+          "explanation": "Le pluriel Bücher prend un tréma : u devient ü. Grün s’écrit aussi avec ü. Sans les points, le son change et le mot n’existe pas (Bucher, grun)."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Complétez avec ei, ie ou eu.",
+          "text": "M[[1]]n Buch ist h[[2]]r. Zw[[3]] Bücher sind n[[4]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ei"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ie"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ei"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "eu"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ],
+          "explanation": "Mein et zwei s’écrivent ei (son « aï »), hier s’écrit ie (i long) et neu s’écrit eu (son « oï »). Le piège : écrire ie pour le son « aï »."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Écrivez le pluriel de Haus.",
+          "text": "ein Haus – zwei [[1]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Häuser"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Au pluriel, Haus prend un tréma et la terminaison -er : Häuser. Le groupe äu se prononce comme eu, « oï »."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Dans quel mot le i est-il long ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "bitten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "bieten",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Tisch",
+              "correct": false
+            }
+          ],
+          "explanation": "Le groupe ie note un i long : bieten. Dans bitten et Tisch, le i est suivi de plusieurs consonnes (tt, sch) : il reste bref."
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Associez chaque mot à sa traduction.",
+          "pairs": [
+            {
+              "left": "schon",
+              "right": "déjà"
+            },
+            {
+              "left": "schön",
+              "right": "beau"
+            },
+            {
+              "left": "spät",
+              "right": "tard"
+            },
+            {
+              "left": "neu",
+              "right": "neuf"
+            }
+          ],
+          "explanation": "Schon et schön ne diffèrent que par le tréma, mais n’ont pas le même sens : déjà et beau. Spät (tard) se prononce avec un ä proche de « è »."
+        },
+        {
+          "id": "q7",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour reprendre la fin de la scène.",
+          "answers": [
+            [
+              "Das",
+              "neue",
+              "Buch",
+              "ist",
+              "schön."
+            ]
+          ],
+          "explanation": "Le verbe conjugué ist vient en 2e position, après le groupe sujet « Das neue Buch ». On y entend eu (« oï ») dans neue et le ö arrondi de schön."
+        }
+      ]
+    },
+    {
+      "id": "a1-voyelles-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : voyelles et trémas",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : voyelles et trémas",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase. Exagérez un peu les voyelles : lèvres bien arrondies pour ö et ü, i bien long dans ie.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-voyelles-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-voyelles-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Mein Buch ist neu.",
+          "accept": [
+            "Mein Buch ist neu."
+          ],
+          "explanation": "Ei se dit « aï » dans mein, eu se dit « oï » dans neu. Le ch de Buch, après u, se forme au fond de la gorge.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Bücher sind hier.",
+          "accept": [
+            "Die Bücher sind hier."
+          ],
+          "explanation": "Arrondissez les lèvres sur le ü de Bücher, comme pour « u ». Dans hier, ie est un i long.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Zwei Bücher, bitte.",
+          "accept": [
+            "Zwei Bücher, bitte.",
+            "2 Bücher, bitte."
+          ],
+          "explanation": "Zwei commence par « ts » et ei se dit « aï ». Gardez le ü arrondi de Bücher.",
+          "threshold": 80
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Das Haus ist blau.",
+          "accept": [
+            "Das Haus ist blau."
+          ],
+          "explanation": "Au se dit « aou » dans Haus et dans blau. Soufflez le h de Haus : sans lui, on entendrait aus.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Das ist sehr schön.",
+          "accept": [
+            "Das ist sehr schön."
+          ],
+          "explanation": "Schön : dites « é » en arrondissant les lèvres. Sans tréma, schon voudrait dire « déjà ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Sieben Häuser sind neu.",
+          "accept": [
+            "Sieben Häuser sind neu.",
+            "7 Häuser sind neu."
+          ],
+          "explanation": "Le i de sieben est long. Äu dans Häuser et eu dans neu se prononcent de la même façon, « oï ».",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-voyelles-controle",
+      "kind": "exercise",
+      "title": "Vérifier : voyelles et trémas",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : voyelles et trémas",
+        "description": "Écoutez la scène une première fois pour la situation, puis lisez les questions et réécoutez pour les détails. Les deux dernières questions portent sur l’écriture des voyelles. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-voyelles-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-voyelles-buch-grau",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q2",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a1-voyelles-buch-blau",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q2",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a1-voyelles-buch-gruen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q2",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Combien de livres la première voix compte-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Trois",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Deux",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un",
+              "correct": false
+            }
+          ],
+          "explanation": "La première voix compte « Eins, zwei, drei » et l’autre reprend « Drei Bücher? » : il y a trois livres. Zwei (deux) n’est qu’une étape du comptage.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quelle est la couleur du livre désigné par dein Buch ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Gris",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bleu",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Vert",
+              "correct": false
+            }
+          ],
+          "explanation": "« Oh, dein Buch ist blau » : le livre de l’autre personne (dein Buch) est bleu. Grün (vert) décrit « mein Buch », le livre de la première voix.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quel mot veut dire « neuf » dans la question ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "blau",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "grün",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "neu",
+              "correct": true
+            }
+          ],
+          "explanation": "Dans « Ist das Buch neu? », neu veut dire « neuf, nouveau » ; eu s’y prononce « oï ». Blau et grün sont des couleurs.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quel adjectif clôt la scène ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "schön",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "schon",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "spät",
+              "correct": false
+            }
+          ],
+          "explanation": "La scène finit par « Das neue Buch ist schön » : on entend le ö arrondi. Schon, sans tréma, signifie « déjà », et spät « tard ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel groupe se lit comme un i long ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "eu",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ie",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "ei",
+              "correct": false
+            }
+          ],
+          "explanation": "Ie se lit comme un i long : sieben, hier. Ei se lit « aï » (mein, zwei) et eu se lit « oï » (neu).",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel couple garde les signes attendus ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Buch – Bucher",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Büch – Bucher",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Buch – Bücher",
+              "correct": true
+            }
+          ],
+          "explanation": "Le singulier Buch s’écrit avec u, le pluriel Bücher avec ü. Supprimer les points (Bucher) ou en ajouter au singulier (Büch) donne un mot qui n’existe pas.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-voyelles-mission",
+      "kind": "mission",
+      "title": "Mission : présenter ses livres",
+      "estimatedMinutes": 15,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : présenter ses livres",
+        "description": "Vous montrez vos livres à une personne du cours. Vous dites combien il y en a, de quelle couleur ils sont et s’ils sont neufs, en faisant bien entendre les voyelles.\n\nMODÈLE\nHier sind zwei Bücher. Mein Buch ist blau. Meine Bücher sind grün. Das Buch ist neu und sehr schön.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-voyelles-etiketten",
+          "usage": "illustration",
+          "caption": "ein blaues Buch · zwei grüne Bücher",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez une courte présentation de vos livres, réels ou imaginaires : combien il y en a, leur couleur (blau, grün…) et s’ils sont neufs. Employez au moins une fois Bücher, hier, zwei et schön.",
+          "maxSeconds": 45
+        },
+        "written": {
+          "prompt": "Écrivez les phrases que vous avez dites (au moins trois phrases), avec tous les trémas.",
+          "maxChars": 400,
+          "minWords": 12
+        },
+        "checklist": [
+          "J’ai fait entendre la différence entre ei (zwei, mein) et ie (hier, sieben).",
+          "J’ai arrondi les lèvres pour ü dans Bücher et pour ö dans schön.",
+          "J’ai donné un nombre et une couleur pour mes livres.",
+          "Mon texte garde tous les trémas : Bücher, schön, grün."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-voyelles-modele",
+      "kind": "audio",
+      "title": "Voyelles · Lire les premiers mots · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Schon. Schön. Schon, schön."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Spät. Käse. Spät, Käse."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Buch. Bücher. Buch, Bücher."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Mein. Zwei. Sieben. Hier."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Neu. Häuser. Haus. Blau."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Bieten. Bitten. Bieten, bitten."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Zwei Bücher. Mein Haus. Hier. Sehr schön."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-dialogue",
+      "kind": "audio",
+      "title": "Voyelles · Lire les premiers mots · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hier sind meine Bücher. Eins, zwei, drei."
+        },
+        {
+          "voice": "mann",
+          "text": "Drei Bücher? Das hier ist mein Buch."
+        },
+        {
+          "voice": "frau",
+          "text": "Oh, dein Buch ist blau. Mein Buch ist grün."
+        },
+        {
+          "voice": "mann",
+          "text": "Ja. Und das hier? Ist das Buch neu?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja. Das neue Buch ist schön."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-voyelles-umlaute",
+      "kind": "image",
+      "title": "Avec ou sans tréma",
+      "alt": "Trois cartes de mots, la voyelle en couleur : schon et schön (o, puis ö), Buch et Bücher (u, puis ü), spät et Käse (ä).",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "groups": [
+          {
+            "title": "o · ö",
+            "words": [
+              "sch[o]n",
+              "sch[ö]n"
+            ]
+          },
+          {
+            "title": "u · ü",
+            "words": [
+              "B[u]ch",
+              "B[ü]cher"
+            ]
+          },
+          {
+            "title": "ä",
+            "words": [
+              "sp[ä]t",
+              "K[ä]se"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-gruppen",
+      "kind": "image",
+      "title": "Deux lettres, une voyelle",
+      "alt": "Quatre cartes de groupes de lettres, le groupe en couleur dans chaque mot : ei dans mein et zwei, ie dans sieben et hier, eu et äu dans neu et Häuser, au dans Haus et blau.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "groups": [
+          {
+            "title": "ei",
+            "words": [
+              "m[ei]n",
+              "zw[ei]"
+            ]
+          },
+          {
+            "title": "ie",
+            "words": [
+              "s[ie]ben",
+              "h[ie]r"
+            ]
+          },
+          {
+            "title": "eu · äu",
+            "words": [
+              "n[eu]",
+              "H[äu]ser"
+            ]
+          },
+          {
+            "title": "au",
+            "words": [
+              "H[au]s",
+              "bl[au]"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-buecher",
+      "kind": "image",
+      "title": "Mes livres, ton livre",
+      "alt": "Deux étudiants comparent leurs livres. Ella dit « Hier sind meine Bücher. » et Tom répond « Das hier ist mein Buch. ». En haut : un livre fermé, un livre ouvert et une pile de livres.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "classroom",
+        "people": [
+          {
+            "name": "Ella",
+            "say": "Hier sind meine Bücher."
+          },
+          {
+            "name": "Tom",
+            "say": "Das hier ist mein Buch."
+          }
+        ],
+        "items": [
+          "book",
+          "book-open",
+          "book-copy"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-buch-grau",
+      "kind": "image",
+      "title": "Un livre gris",
+      "alt": "Un livre gris.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#868e96"
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-buch-blau",
+      "kind": "image",
+      "title": "Un livre bleu",
+      "alt": "Un livre bleu.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#1f6feb"
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-buch-gruen",
+      "kind": "image",
+      "title": "Un livre vert",
+      "alt": "Un livre vert.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "book",
+        "color": "#2b8a3e"
+      }
+    },
+    {
+      "key": "v4-a1-voyelles-etiketten",
+      "kind": "image",
+      "title": "Deux étiquettes pour la mission",
+      "alt": "Deux étiquettes : un livre bleu légendé « ein blaues Buch » et deux livres verts empilés légendés « zwei grüne Bücher ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "book",
+            "label": "ein blaues Buch",
+            "color": "#1f6feb"
+          },
+          {
+            "icon": "book-copy",
+            "label": "zwei grüne Bücher",
+            "color": "#2b8a3e"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-voyelles-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Buch ist neu."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Bücher sind hier."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Zwei Bücher, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das Haus ist blau."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das ist sehr schön."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : voyelles et trémas",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Sieben Häuser sind neu."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-voyelles-lexique",
+      "kind": "audio",
+      "title": "Lexique · Voyelles · Lire les premiers mots",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "das Buch, die Bücher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Haus, die Häuser"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Käse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schön"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schon"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "neu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "blau"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "grün"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "spät"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "hier"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zwei"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "drei"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sieben"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

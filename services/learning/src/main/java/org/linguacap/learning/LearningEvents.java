@@ -68,8 +68,8 @@ public class LearningEvents {
                         .put("initialTargetDate", text(rows.getObject("initial_target_date", LocalDate.class)))
                         .put("assignedBy", text(rows.getObject("assigned_by", UUID.class)))
                         .put("assignedAt", text(rows.getObject("assigned_at", OffsetDateTime.class)));
-                Outbox.emit(connection, TABLE, "learning.goal_set", "goal", enrollmentId.toString(),
-                        rows.getObject("learner_id", UUID.class), null, data);
+                emitGoalState(connection, enrollmentId, "learning.goal_set", "goal", enrollmentId.toString(),
+                        rows.getObject("learner_id", UUID.class), data);
             }
         }
     }
@@ -108,8 +108,8 @@ public class LearningEvents {
                 }
             }
         }
-        Outbox.emit(connection, TABLE, "learning.plan_validated", "plan_revision", enrollmentId + ":" + revision,
-                learnerId, null, data);
+        emitGoalState(connection, enrollmentId, "learning.plan_validated", "plan_revision", enrollmentId + ":" + revision,
+                learnerId, data);
     }
 
     void goalStatus(Connection connection, UUID enrollmentId, String type, String status) throws SQLException {
@@ -122,9 +122,51 @@ public class LearningEvents {
                         .put("goalStatus", status == null ? rows.getString("goal_status") : status)
                         .put("resumeDate", text(rows.getObject("resume_date", LocalDate.class)))
                         .put("targetDate", text(rows.getObject("target_date", LocalDate.class)));
-                Outbox.emit(connection, TABLE, type, "goal", enrollmentId.toString(),
-                        rows.getObject("learner_id", UUID.class), null, data);
+                emitGoalState(connection, enrollmentId, type, "goal", enrollmentId.toString(),
+                        rows.getObject("learner_id", UUID.class), data);
             }
+        }
+    }
+
+    /**
+     * Événement d'état de l'objectif, horodaté par l'horloge de l'objectif (EVO-042). La valeur par défaut de la
+     * table, now(), est l'heure du DÉBUT de la transaction : elle ne suit pas toujours l'ordre réel des actions sur un
+     * objectif (horloge du serveur recalée en arrière, transactions qui se chevauchent), et Suivi, qui garde l'état le
+     * plus récent selon occurredAt, écartait alors l'action la plus récente, par exemple une pause qui suit la
+     * validation du planning. L'heure est lue sous le verrou de l'inscription, que toute action sur l'état de l'objectif
+     * prend avant d'émettre : elle suit l'ordre des séquences et reste strictement croissante pour un même objectif.
+     * L'enveloppe ne change pas (mêmes colonnes que {@link Outbox#emit}, heure fournie au lieu de la valeur par défaut).
+     */
+    private void emitGoalState(Connection connection, UUID enrollmentId, String type, String subjectKind,
+                               String subjectId, UUID learnerId, ObjectNode data) throws SQLException {
+        OffsetDateTime previous;
+        OffsetDateTime clock;
+        try (var lock = connection.prepareStatement("""
+                select goal_event_at, clock_timestamp() as clock from learning.enrollments where id = ? for update
+                """)) {
+            lock.setObject(1, enrollmentId);
+            try (var rows = lock.executeQuery()) {
+                if (!rows.next()) throw new SQLException("Inscription introuvable pour l’événement " + type, "P0002");
+                previous = rows.getObject("goal_event_at", OffsetDateTime.class);
+                clock = rows.getObject("clock", OffsetDateTime.class);
+            }
+        }
+        OffsetDateTime occurredAt = GoalRules.eventTime(previous, clock);
+        try (var update = connection.prepareStatement("update learning.enrollments set goal_event_at = ? where id = ?")) {
+            update.setObject(1, occurredAt);
+            update.setObject(2, enrollmentId);
+            update.executeUpdate();
+        }
+        try (var insert = connection.prepareStatement("insert into " + TABLE
+                + " (id, type, occurred_at, subject_kind, subject_id, learner_id, data) values (?, ?, ?, ?, ?, ?, ?::jsonb)")) {
+            insert.setObject(1, UUID.randomUUID());
+            insert.setString(2, type);
+            insert.setObject(3, occurredAt);
+            insert.setString(4, subjectKind);
+            insert.setString(5, subjectId);
+            insert.setObject(6, learnerId);
+            insert.setString(7, data.toString());
+            insert.executeUpdate();
         }
     }
 

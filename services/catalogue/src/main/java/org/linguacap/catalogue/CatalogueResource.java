@@ -128,6 +128,10 @@ public class CatalogueResource {
         }
     }
 
+    /**
+     * Corrigé des questions à choix d'une leçon (quiz et diagnostic). typed : la leçon contient des questions typées,
+     * qui se corrigent par la clé d'exercice (exercise-key) ; Évaluations refuse alors la remise en quiz.
+     */
     @GET
     @Path("/internal/lessons/{id}/answer-key")
     public AnswerKey answerKey(@PathParam("id") String id) {
@@ -140,9 +144,21 @@ public class CatalogueResource {
                      join catalogue.questions q on q.lesson_id = o.lesson_id and q.id = o.question_id
                      join catalogue.lessons l on l.id = o.lesson_id
                      join catalogue.levels n on n.id = l.level_id
-                     where o.lesson_id = ? and o.correct and n.status = 'published'
+                     where o.lesson_id = ? and o.correct and q.type = 'choice' and n.status = 'published'
+                     """);
+             var typedQuery = connection.prepareStatement("""
+                     select exists (
+                         select 1 from catalogue.questions q
+                         join catalogue.lessons l on l.id = q.lesson_id
+                         join catalogue.levels n on n.id = l.level_id
+                         where q.lesson_id = ? and q.type <> 'choice' and n.status = 'published')
                      """)) {
             query.setString(1, id);
+            typedQuery.setString(1, id);
+            boolean typed;
+            try (var rows = typedQuery.executeQuery()) {
+                typed = rows.next() && rows.getBoolean(1);
+            }
             try (var rows = query.executeQuery()) {
                 Map<String, String> answers = new LinkedHashMap<>();
                 Map<String, String> modules = new LinkedHashMap<>();
@@ -150,39 +166,19 @@ public class CatalogueResource {
                     answers.put(rows.getString("question_id"), rows.getString("id"));
                     if (rows.getString("module_ref") != null) modules.put(rows.getString("question_id"), rows.getString("module_ref"));
                 }
-                if (answers.isEmpty()) {
+                if (answers.isEmpty() && !typed) {
                     throw HttpError.notFound("Corrigé indisponible pour cette leçon.");
                 }
-                return new AnswerKey(Map.copyOf(answers), Map.copyOf(modules));
+                return new AnswerKey(Map.copyOf(answers), Map.copyOf(modules), typed);
             }
         } catch (SQLException error) {
             throw HttpError.unavailable("Le corrigé est temporairement indisponible.");
         }
     }
 
-    static List<Question> readQuestions(Connection connection, String lessonId) throws SQLException {
-        try (var query = connection.prepareStatement("""
-                select q.id as question_id, q.prompt, o.id as option_id, o.label
-                from catalogue.questions q
-                join catalogue.options o on o.lesson_id = q.lesson_id and o.question_id = q.id
-                where q.lesson_id = ?
-                order by q.position, o.position
-                """)) {
-            query.setString(1, lessonId);
-            try (var rows = query.executeQuery()) {
-                Map<String, Question> questions = new LinkedHashMap<>();
-                while (rows.next()) {
-                    String id = rows.getString("question_id");
-                    Question question = questions.get(id);
-                    if (question == null) {
-                        question = new Question(id, rows.getString("prompt"), new ArrayList<>());
-                        questions.put(id, question);
-                    }
-                    question.options().add(new Option(rows.getString("option_id"), rows.getString("label")));
-                }
-                return List.copyOf(questions.values());
-            }
-        }
+    /** Vues élève des questions d'une leçon, sans aucun corrigé (voir {@link QuestionViews}). */
+    static List<QuestionViews.View> readQuestions(Connection connection, String lessonId) throws SQLException {
+        return QuestionViews.publicViews(lessonId, QuestionViews.read(connection, lessonId));
     }
 
     private static Level readLevel(ResultSet row) throws SQLException {
@@ -209,10 +205,12 @@ public class CatalogueResource {
 
     public record CreateLevel(String code, String title, String description) {}
     public record Level(String id, String code, String title, String status, String description, int version) {}
+    /** questions : vues élève typées (QuestionViews.View), sans corrigé. */
     public record Lesson(String id, String title, String level, String description, String transcript,
-                         List<String> mediaIds, List<Question> questions) {}
-    public record Question(String id, String prompt, List<Option> options) {}
-    public record Option(String id, String text) {}
-    /** modules : pour un diagnostic, le module (ou « prerequis ») que chaque question évalue. */
-    public record AnswerKey(Map<String, String> answers, Map<String, String> modules) {}
+                         List<String> mediaIds, List<QuestionViews.View> questions) {}
+    /**
+     * answers : bonne option de chaque question à choix ; modules : pour un diagnostic, le module (ou « prerequis »)
+     * que chaque question évalue ; typed : la leçon contient des questions typées (corrigées par exercise-key).
+     */
+    public record AnswerKey(Map<String, String> answers, Map<String, String> modules, boolean typed) {}
 }

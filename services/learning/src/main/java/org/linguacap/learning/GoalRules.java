@@ -1,6 +1,8 @@
 package org.linguacap.learning;
 
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -28,7 +30,9 @@ final class GoalRules {
     /** Modèles modifiables : Standard (cinq séances de 30 min) et Intensif (deux séances de 45 min chaque jour). */
     static final List<Template> TEMPLATES = List.of(
             new Template("standard", "Standard", "Une séance de 30 minutes du lundi au vendredi.",
-                    week(5, 1, 30), Period.ofMonths(3), Period.ofMonths(4), Period.ofMonths(4)),
+                    // Durées calibrées sur la V4 (A1 ≈ 2 600 min, A2 ≈ 2 400 min avec révisions et évaluations) : à 150 min par
+                    // semaine en séances de 30 min, le remplissage laisse ~10 % de marge, d'où cinq mois pour chaque niveau.
+                    week(5, 1, 30), Period.ofMonths(5), Period.ofMonths(5), Period.ofMonths(5)),
             new Template("intensive", "Intensif", "Deux séances de 45 minutes chaque jour : A1 en un mois, A2 en deux mois.",
                     week(7, 2, 45), Period.ofMonths(1), Period.ofMonths(2), Period.ofMonths(2)));
 
@@ -89,5 +93,21 @@ final class GoalRules {
     static boolean canValidate(boolean callerIsLearner, String callerRole, boolean accompanied) {
         if ("admin".equals(callerRole)) return true;
         return accompanied ? "teacher".equals(callerRole) : callerIsLearner;
+    }
+
+    /** Écart minimal entre deux événements d'état d'un même objectif : la précision de timestamptz. */
+    static final Duration EVENT_TICK = Duration.ofNanos(1_000);
+
+    /**
+     * Heure d'un événement d'état de l'objectif (goal_set, plan_validated, goal_paused, goal_status_changed) : Suivi
+     * garde l'état porté par l'événement le plus récent selon cette heure. C'est l'horloge du serveur, lue après
+     * l'action, sans jamais revenir avant ni égaler l'heure du précédent événement de ce même objectif : une horloge
+     * recalée en arrière ou deux transactions qui se chevauchent ne peuvent plus faire passer une pause avant la
+     * validation qui la précède (EVO-042). {@code previous} : heure du précédent événement, ou null.
+     */
+    static OffsetDateTime eventTime(OffsetDateTime previous, OffsetDateTime clock) {
+        if (previous == null) return clock;
+        OffsetDateTime floor = previous.plus(EVENT_TICK);
+        return clock.isBefore(floor) ? floor : clock;
     }
 }

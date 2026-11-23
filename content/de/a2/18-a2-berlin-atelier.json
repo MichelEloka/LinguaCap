@@ -1,0 +1,1186 @@
+{
+  "id": "a2-berlin-atelier",
+  "title": "Composer une visite de Berlin avec un détour",
+  "objective": "Comprendre une correspondance en ville et présenter un itinéraire qui inclut une étape historique.",
+  "prerequisites": [
+    "a2-berlin"
+  ],
+  "audioProfile": "a2-suite",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "grammarFocus": [
+    "itineraire-datif",
+    "imperatif-politesse",
+    "praeteritum-sein-koennen"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-berlin-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "gedenkstaette",
+      "word": "Gedenkstätte",
+      "article": "die",
+      "plural": "Gedenkstätten",
+      "partOfSpeech": "noun",
+      "translation": "le mémorial, le lieu de mémoire",
+      "example": "Die Gedenkstätte liegt an der Bernauer Straße.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "denkmal",
+      "word": "Denkmal",
+      "article": "das",
+      "plural": "Denkmäler",
+      "partOfSpeech": "noun",
+      "translation": "le monument",
+      "example": "Vor dem Denkmal machen wir ein Foto.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "station",
+      "word": "Station",
+      "article": "die",
+      "plural": "Stationen",
+      "partOfSpeech": "noun",
+      "translation": "la station",
+      "example": "Von der Station sind es fünfzehn Minuten zu Fuß.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "ende",
+      "word": "Ende",
+      "article": "das",
+      "plural": "Enden",
+      "partOfSpeech": "noun",
+      "translation": "la fin, le bout",
+      "example": "Das Tor sehen Sie am Ende der Straße.",
+      "note": "am Ende der Straße : au bout de la rue",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "ecke",
+      "word": "Ecke",
+      "article": "die",
+      "plural": "Ecken",
+      "partOfSpeech": "noun",
+      "translation": "le coin",
+      "example": "Biegen Sie an der nächsten Ecke links ab.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "umweg",
+      "word": "Umweg",
+      "article": "der",
+      "plural": "Umwege",
+      "partOfSpeech": "noun",
+      "translation": "le détour",
+      "example": "Wir machen einen kleinen Umweg zur Mauer.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "zu-fuss",
+      "word": "zu Fuß",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à pied",
+      "example": "Wir gehen zu Fuß zum Brandenburger Tor.",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "brauchen",
+      "word": "brauchen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "mettre (du temps), avoir besoin de",
+      "example": "Wie lange brauche ich zu Fuß?",
+      "note": null,
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "zuerst",
+      "word": "zuerst",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "d’abord",
+      "example": "Zuerst fahren wir mit der S-Bahn.",
+      "note": "en tête de phrase, le verbe suit directement",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "danach",
+      "word": "danach",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ensuite, après",
+      "example": "Danach gehen wir zur Gedenkstätte.",
+      "note": "en tête de phrase, le verbe suit directement",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "ueberqueren",
+      "word": "überqueren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "traverser, franchir",
+      "example": "Am 9. November 1989 konnten viele Menschen die Grenze wieder überqueren.",
+      "note": "inséparable · Perfekt : hat überquert",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "erzaehlen",
+      "word": "erzählen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "raconter",
+      "example": "Meine Großmutter kann viel von 1989 erzählen.",
+      "note": "Perfekt : hat erzählt",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "warten",
+      "word": "warten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "attendre",
+      "example": "Bei Regen warten wir am Bahnhof auf dich.",
+      "note": "warten auf + accusatif",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "grossmutter",
+      "word": "Großmutter",
+      "article": "die",
+      "plural": "Großmütter",
+      "partOfSpeech": "noun",
+      "translation": "la grand-mère",
+      "example": "Meine Großmutter war 1989 in Berlin.",
+      "note": "familier : die Oma",
+      "audio": {
+        "media": "a2-berlin-atelier-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-berlin-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : un itinéraire avec un détour historique",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : un itinéraire avec un détour historique",
+        "description": "Lisez cette note envoyée à un visiteur.\n« Wir treffen uns am Alexanderplatz. Von dort fahren wir mit der S-Bahn bis Friedrichstraße. Dann gehen wir zu Fuß zum Brandenburger Tor. Bei Regen warten wir am Bahnhof auf dich. »\nRepérez les trois étapes : rendez-vous à l’Alexanderplatz, S-Bahn jusqu’à Friedrichstraße, marche jusqu’à la porte de Brandebourg. En cas de pluie, le groupe attend à la gare.\n\nRACONTER UN TRAJET EN ÉTAPES\n• Zuerst fahren wir mit der S-Bahn bis Friedrichstraße. Dann gehen wir zu Fuß bis Unter den Linden. Danach biegen wir rechts ab.\n• Zuerst, dann et danach occupent la première position : le verbe conjugué suit directement.\n• Après mit, on emploie le datif : mit der S-Bahn, mit dem Bus, mit der U-Bahn.\n• Pour vérifier le trajet : Wo muss ich aussteigen? Muss ich umsteigen? Biege ich an der nächsten Ecke links ab?\n\nUN DÉTOUR PAR L’HISTOIRE\n« Früher war Berlin geteilt. Die Berliner Mauer stand von 1961 bis 1989. Am 9. November 1989 konnten viele Menschen die Grenze wieder überqueren. »\nLa première phrase décrit une situation (war), la dernière un événement daté (konnten). Sein et les verbes de modalité s’emploient au prétérit, même à l’oral. Repères : 1961, construction du Mur ; 9 novembre 1989, ouverture de la frontière.\n\nÀ VOUS\nLisez la note à voix haute, puis présentez à voix haute un trajet en trois étapes avec zuerst, dann et danach. Ajoutez une phrase d’histoire : Früher war Berlin geteilt.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-berlin-atelier-route",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-berlin-atelier-mauer",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-berlin-atelier-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un trajet dans Berlin",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un trajet dans Berlin",
+        "description": "Dans la rue, une visiteuse demande son chemin pour aller de l’Alexanderplatz à la porte de Brandebourg. Aujourd’hui, le métro ne circule pas sur ce trajet.\n\n1. Écoutez la scène une première fois sans lire les phrases : où va la visiteuse, et quel transport lui conseille-t-on ?\n2. Réécoutez pour compléter ses notes : le moyen de transport, la direction à prendre, la durée de marche et le détour historique proposé.\n3. Les deux dernières questions sont des dictées : de nouvelles phrases pour guider un visiteur.\nAprès validation, la transcription de la scène et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-berlin-atelier-weg",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "La question de la visiteuse : complétez.",
+          "text": "Entschuldigung, wie komme ich vom Alexanderplatz [[1]] Brandenburger Tor?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zum",
+                "zu dem"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ],
+          "explanation": "Das Brandenburger Tor est neutre : zu + dem = zum. Zu demande toujours le datif, comme vom (von + dem) au début de la question."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Le transport : complétez la réponse du passant.",
+          "text": "Heute fährt die [[1]] dort nicht. Nehmen Sie die [[2]] bis Friedrichstraße.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "U-Bahn"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "S-Bahn"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Le passant explique que le métro (die U-Bahn) ne circule pas aujourd’hui sur ce trajet et conseille le train urbain (die S-Bahn) jusqu’à Friedrichstraße."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "La direction à pied : complétez.",
+          "text": "Gehen Sie bis zur Straße Unter den Linden. Dort biegen Sie [[1]] [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "rechts"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ab"
+              ],
+              "size": 4,
+              "hint": "abbiegen"
+            }
+          ],
+          "explanation": "On entend « Dort biegen Sie rechts ab » : tourner à droite. Abbiegen est séparable : la particule ab termine la phrase."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "La durée de marche depuis la station : écrivez le nombre en chiffres ou en lettres.",
+          "text": "Ungefähr [[1]] Minuten zu Fuß.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "fünfzehn",
+                "15"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "Le passant répond « Ungefähr fünfzehn Minuten » : environ quinze minutes. Fünfzehn (15) se termine par -zehn, fünfzig (50) par -zig."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Le souvenir de la visiteuse : complétez au prétérit.",
+          "text": "Meine Großmutter [[1]] 1989 in Berlin. Sie hat mir oft davon erzählt.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "war"
+              ],
+              "size": 5,
+              "hint": "sein"
+            }
+          ],
+          "explanation": "Pour une situation passée, sein s’emploie au prétérit : sie war. La phrase suivante, au Perfekt (hat … erzählt), raconte une action répétée."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Le détour historique : complétez.",
+          "text": "Dann können Sie später zur [[1]] an der Bernauer Straße fahren.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Gedenkstätte"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ],
+          "explanation": "Die Gedenkstätte est le mémorial du Mur, à la Bernauer Straße. Zur (zu + der) confirme que le nom est féminin."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez l’indication donnée au visiteur.",
+          "accept": [
+            "Steigen Sie an der nächsten Station aus."
+          ],
+          "voice": "sprecher",
+          "explanation": "Impératif de politesse : le verbe steigen ouvre la phrase et la particule aus la termine. An der nächsten Station : an + datif féminin.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase d’histoire.",
+          "accept": [
+            "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig war die Stadt geteilt.",
+            "Von 1961 bis 1989 war die Stadt geteilt."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Von … bis délimite la période du Mur. Sein s’emploie au prétérit pour une situation passée : die Stadt war geteilt. Vous pouvez écrire les années en chiffres.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : le trajet jusqu’à la porte de Brandebourg",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : le trajet jusqu’à la porte de Brandebourg",
+        "description": "Écoutez une première fois la scène pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur la langue : choisissez la phrase correcte sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-berlin-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quelle est la première destination de la visite ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La porte de Brandebourg",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le mémorial de la Bernauer Straße",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Alexanderplatz",
+              "correct": false
+            }
+          ],
+          "explanation": "La visiteuse demande « wie komme ich vom Alexanderplatz zum Brandenburger Tor? » : l’Alexanderplatz est le point de départ, la porte de Brandebourg la destination. Le mémorial n’est proposé qu’ensuite.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quel moyen de transport est conseillé pour commencer ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le bus",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le S-Bahn",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le métro U-Bahn",
+              "correct": false
+            }
+          ],
+          "explanation": "« Heute fährt die U-Bahn dort nicht. Nehmen Sie die S-Bahn bis Friedrichstraße. » Le métro est justement exclu aujourd’hui, et aucun bus n’est mentionné.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quelle direction suivre en arrivant à Unter den Linden ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Tourner à gauche",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Faire demi-tour",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Tourner à droite",
+              "correct": true
+            }
+          ],
+          "explanation": "« Dort biegen Sie rechts ab » : rechts abbiegen signifie tourner à droite. Links voudrait dire à gauche ; personne ne parle de faire demi-tour.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Combien de temps faut-il marcher depuis la station ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Environ quinze minutes",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Environ cinq minutes",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Environ cinquante minutes",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ungefähr fünfzehn Minuten » : environ quinze minutes à pied. Fünfzehn (15) se distingue de fünfzig (50) par sa fin en -zehn.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quelle phrase donne correctement une instruction de trajet ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie fahren mit der S-Bahn seit Friedrichstraße.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Fahren Sie mit der S-Bahn bis Friedrichstraße.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Fahren Sie mit die S-Bahn bis Friedrichstraße.",
+              "correct": false
+            }
+          ],
+          "explanation": "L’impératif de politesse commence par le verbe : Fahren Sie. Mit se construit avec le datif (mit der S-Bahn, et non mit die), et bis marque l’arrêt final ; seit indiquerait une durée.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quelle phrase décrit une situation historique révolue ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Früher ist Berlin geteilt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Früher Berlin geteilt war.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Früher war Berlin geteilt.",
+              "correct": true
+            }
+          ],
+          "explanation": "Früher occupe la première position, donc le verbe war vient juste après : Früher war Berlin geteilt. Le présent ist présenterait la division comme actuelle.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : guider un visiteur",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : guider un visiteur",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute, comme si vous guidiez un visiteur. Faites entendre la particule à la fin des verbes séparables. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-berlin-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-berlin-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez combien de temps il faut marcher.",
+          "text": "Wie lange brauche ich zu Fuß?",
+          "accept": [
+            "Wie lange brauche ich zu Fuß?"
+          ],
+          "threshold": 75,
+          "explanation": "Wie lange demande une durée. Dans brauche, au se prononce « ao » et ch se prononce au fond de la gorge."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis conseillez un moyen de transport.",
+          "text": "Nehmen Sie die S-Bahn bis Friedrichstraße.",
+          "accept": [
+            "Nehmen Sie die S-Bahn bis Friedrichstraße."
+          ],
+          "threshold": 75,
+          "explanation": "Impératif de politesse : le verbe nehmen ouvre la phrase. Dans Straße, le ß se prononce comme un s dur."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis indiquez la direction.",
+          "text": "Dort biegen Sie rechts ab.",
+          "accept": [
+            "Dort biegen Sie rechts ab."
+          ],
+          "threshold": 75,
+          "explanation": "Après dort en tête, le verbe biegen suit, puis Sie ; la particule ab termine la phrase. Le r de rechts se prononce au fond de la gorge."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis dites où se trouve la porte.",
+          "text": "Das Tor sehen Sie am Ende der Straße.",
+          "accept": [
+            "Das Tor sehen Sie am Ende der Straße."
+          ],
+          "threshold": 75,
+          "explanation": "Das Tor est placé en tête pour insister ; le verbe sehen garde la 2e position. Am Ende der Straße : au bout de la rue."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : un fait d’histoire.",
+          "text": "Früher war Berlin geteilt.",
+          "accept": [
+            "Früher war Berlin geteilt."
+          ],
+          "threshold": 75,
+          "explanation": "Früher est suivi directement du verbe war. Dans geteilt, ei se prononce « aï »."
+        }
+      ]
+    },
+    {
+      "id": "a2-berlin-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : guider un ami dans Berlin",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : guider un ami dans Berlin",
+        "description": "Situation : vous faites visiter Berlin à des amis. Rendez-vous à l’Alexanderplatz, puis S-Bahn jusqu’à Friedrichstraße et environ quinze minutes à pied jusqu’à la porte de Brandebourg : on va jusqu’à Unter den Linden, puis on tourne à droite. Un ami arrivera après le départ du groupe et devra vous rejoindre seul.\n\nModèles : Zuerst fahren wir mit der S-Bahn bis Friedrichstraße. Du steigst an der Station Friedrichstraße aus. Dann gehst du ungefähr fünfzehn Minuten zu Fuß. Früher war Berlin geteilt. Bei Regen warten wir im Bahnhof.\n\nPréparez quelques mots-clés, puis réalisez les deux parties. Avant d’envoyer, relisez votre message comme si vous étiez votre ami : l’ordre des étapes, l’arrêt et le lieu d’attente sont-ils clairs ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-berlin-atelier-plan",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez le trajet à un ami en le tutoyant (une minute environ) : les étapes avec zuerst, dann et danach, l’arrêt où descendre, la durée de marche, puis un fait d’histoire sur le Mur.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à l’ami qui arrive plus tard un message de 45 à 65 mots : où vous rejoindre, le chemin depuis la gare et un endroit couvert où attendre s’il pleut.",
+          "maxChars": 900,
+          "minWords": 45
+        },
+        "checklist": [
+          "Mon trajet suit l’ordre des étapes avec zuerst, dann et danach, chacun suivi du verbe.",
+          "J’ai dit où descendre et combien de temps il faut marcher.",
+          "Après mit, j’ai employé le datif : mit der S-Bahn, mit dem Bus.",
+          "J’ai ajouté un fait d’histoire au prétérit (war, stand ou konnten).",
+          "Mon message indique le lieu du rendez-vous et l’endroit où attendre en cas de pluie."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a2-berlin-atelier-dialogue",
+      "kind": "audio",
+      "title": "Composer une visite de Berlin avec un détour · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Entschuldigung, wie komme ich vom Alexanderplatz zum Brandenburger Tor?"
+        },
+        {
+          "voice": "mann",
+          "text": "Heute fährt die U-Bahn dort nicht. Nehmen Sie die S-Bahn bis Friedrichstraße."
+        },
+        {
+          "voice": "frau",
+          "text": "Und an der Friedrichstraße steige ich aus. Wie geht es dann weiter?"
+        },
+        {
+          "voice": "mann",
+          "text": "Gehen Sie bis zur Straße Unter den Linden. Dort biegen Sie rechts ab. Das Tor sehen Sie am Ende der Straße."
+        },
+        {
+          "voice": "frau",
+          "text": "Wie lange brauche ich von der Station zu Fuß?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ungefähr fünfzehn Minuten. Möchten Sie danach noch etwas über die Berliner Mauer sehen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja. Meine Großmutter war 1989 in Berlin. Sie hat mir oft davon erzählt."
+        },
+        {
+          "voice": "mann",
+          "text": "Dann können Sie später zur Gedenkstätte an der Bernauer Straße fahren."
+        }
+      ]
+    },
+    {
+      "key": "v4-a2-berlin-atelier-route",
+      "kind": "image",
+      "title": "De l’Alexanderplatz à la porte de Brandebourg",
+      "alt": "Trajet en trois étapes : rendez-vous à l’Alexanderplatz, S-Bahn jusqu’à Friedrichstraße où l’on descend, puis à pied jusqu’au Brandenburger Tor. Note : « Bei Regen warten wir am Bahnhof auf dich. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "route",
+        "setting": "city",
+        "height": 400,
+        "title": "Treffpunkt Alexanderplatz",
+        "steps": [
+          {
+            "icon": "map-pin",
+            "label": "Alexanderplatz",
+            "sub": "Treffpunkt"
+          },
+          {
+            "icon": "signpost",
+            "label": "Friedrichstraße",
+            "sub": "aussteigen"
+          },
+          {
+            "icon": "landmark",
+            "label": "Brandenburger Tor",
+            "sub": "Ziel"
+          }
+        ],
+        "links": [
+          {
+            "icon": "train-front",
+            "label": "mit der S-Bahn"
+          },
+          {
+            "icon": "footprints",
+            "label": "zu Fuß"
+          }
+        ],
+        "note": "Bei Regen warten wir am Bahnhof auf dich.",
+        "noteIcon": "umbrella"
+      }
+    },
+    {
+      "key": "v4-a2-berlin-atelier-mauer",
+      "kind": "image",
+      "title": "Le Mur de Berlin en deux dates",
+      "alt": "Frise : « Früher war Berlin geteilt. » De 1961 à 1989, le Mur de Berlin était debout ; le 9 novembre 1989, beaucoup de gens ont pu de nouveau franchir la frontière.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "route",
+        "variant": "timeline",
+        "setting": "city",
+        "height": 400,
+        "stepWidth": 330,
+        "title": "Früher [war] Berlin geteilt.",
+        "steps": [
+          {
+            "icon": "brick-wall",
+            "label": "1961 – 1989",
+            "sub": "Die Berliner Mauer [stand]."
+          },
+          {
+            "icon": "door-open",
+            "label": "9. November 1989",
+            "sub": "Viele Menschen [konnten] die Grenze wieder überqueren."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-berlin-atelier-weg",
+      "kind": "image",
+      "title": "Demander la suite du trajet",
+      "alt": "Dans une rue de Berlin, une visiteuse demande « Wie geht es dann weiter? » et un passant répond « Gehen Sie bis Unter den Linden. ». En haut : un monument, un train, un plan et des traces de pas.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "city",
+        "people": [
+          {
+            "name": "Besucherin",
+            "say": "Wie geht es dann weiter?"
+          },
+          {
+            "name": "Passant",
+            "say": "Gehen Sie bis Unter den Linden."
+          }
+        ],
+        "items": [
+          "landmark",
+          "train-front",
+          "map",
+          "footprints"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-berlin-atelier-plan",
+      "kind": "image",
+      "title": "Plan simplifié : de Friedrichstraße à la porte",
+      "alt": "Plan simplifié : on sort de la station Friedrichstraße, on marche jusqu’à Unter den Linden, on tourne à droite et on voit le Brandenburger Tor au bout de la rue, environ 15 minutes à pied depuis la station. Encadré : les étapes du trajet et la durée de la marche.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "plan",
+        "setting": "city",
+        "streets": [
+          {
+            "points": [
+              [
+                200,
+                660
+              ],
+              [
+                200,
+                -20
+              ]
+            ],
+            "name": "Friedrichstraße",
+            "labelAt": [
+              200,
+              78
+            ],
+            "rotate": -90
+          },
+          {
+            "points": [
+              [
+                -20,
+                190
+              ],
+              [
+                980,
+                190
+              ]
+            ],
+            "name": "Unter den Linden",
+            "labelAt": [
+              100,
+              190
+            ]
+          }
+        ],
+        "route": [
+          [
+            200,
+            505
+          ],
+          [
+            200,
+            190
+          ],
+          [
+            735,
+            190
+          ]
+        ],
+        "places": [
+          {
+            "at": [
+              200,
+              570
+            ],
+            "icon": "train-front",
+            "label": "S-Bahnhof Friedrichstraße",
+            "labelSide": "right"
+          },
+          {
+            "at": [
+              830,
+              190
+            ],
+            "icon": "landmark",
+            "label": "Brandenburger Tor",
+            "labelSide": "bottom"
+          }
+        ],
+        "labels": [
+          {
+            "text": "rechts",
+            "at": [
+              300,
+              132
+            ]
+          }
+        ],
+        "legendAt": "right:24px;bottom:24px;max-width:390px",
+        "legend": [
+          "Du fährst mit der S-Bahn bis [Friedrichstraße].",
+          "Du gehst bis [Unter den Linden].",
+          "Dort biegst du [rechts] ab. Das Tor siehst du am Ende der Straße.",
+          "Zu Fuß brauchst du [ca. 15 Minuten]."
+        ]
+      }
+    },
+    {
+      "key": "a2-berlin-atelier-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter un trajet dans Berlin",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Steigen Sie an der nächsten Station aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un trajet dans Berlin",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Von neunzehnhunderteinundsechzig bis neunzehnhundertneunundachtzig war die Stadt geteilt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : guider un visiteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie lange brauche ich zu Fuß?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : guider un visiteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Nehmen Sie die S-Bahn bis Friedrichstraße."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : guider un visiteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Dort biegen Sie rechts ab."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : guider un visiteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das Tor sehen Sie am Ende der Straße."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : guider un visiteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Früher war Berlin geteilt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-berlin-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Composer une visite de Berlin avec un détour",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Gedenkstätte, die Gedenkstätten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Denkmal, die Denkmäler"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Station, die Stationen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Ende, die Enden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ecke, die Ecken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Umweg, die Umwege"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zu Fuß"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "brauchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zuerst"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "danach"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "überqueren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erzählen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "warten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Großmutter, die Großmütter"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

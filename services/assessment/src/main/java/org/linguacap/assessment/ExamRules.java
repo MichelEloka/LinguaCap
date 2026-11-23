@@ -33,12 +33,23 @@ final class ExamRules {
 
     record Result(Map<String, Score> scores, int percent, String decision, List<String> weakCompetences) {}
 
-    /** Définition remise à l'élève : les choix ne portent plus leur corrigé. */
+    /** Champs de corrigé d'une question : jamais servis à l'élève (explications et retours compris). */
+    private static final List<String> QUESTION_ANSWERS = List.of("correct", "explanation", "spec", "feedback", "accept",
+            "answers", "pairs");
+    private static final List<String> OPTION_ANSWERS = List.of("correct", "feedback");
+
+    /** Définition remise à l'élève : ni corrigé des choix, ni explication, ni retour, ni clé de question typée. */
     static JsonNode withoutAnswers(JsonNode definition) {
         ObjectNode copy = definition.deepCopy();
         for (JsonNode part : copy.path("parts")) {
             for (JsonNode question : part.path("questions")) {
-                for (JsonNode option : question.path("options")) ((ObjectNode) option).remove("correct");
+                if (question.isObject()) ((ObjectNode) question).remove(QUESTION_ANSWERS);
+                for (JsonNode blank : question.path("blanks")) {
+                    if (blank.isObject()) ((ObjectNode) blank).remove("accept");
+                }
+                for (JsonNode option : question.path("options")) {
+                    if (option.isObject()) ((ObjectNode) option).remove(OPTION_ANSWERS);
+                }
             }
         }
         return copy;

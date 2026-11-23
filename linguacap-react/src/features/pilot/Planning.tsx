@@ -1,6 +1,6 @@
 import { useMemo, useState, type FormEvent } from 'react';
 import {
-  ArrowRight, BookOpen, CalendarClock, CalendarPlus, CalendarRange, CircleCheck, ClipboardCheck, Clock, Layers, ListChecks, Minus, PencilLine,
+  ArrowRight, BookOpen, CalendarClock, CalendarPlus, CalendarRange, CircleCheck, ClipboardCheck, Clock, Target, Layers, ListChecks, Minus, PencilLine,
   Plus, RotateCcw, Timer,
 } from 'lucide-react';
 import { ProgressBar } from '../../components/ui';
@@ -43,6 +43,7 @@ const itemKinds: Record<string, { label: string; icon: typeof BookOpen }> = {
   exercise: { label: 'Exercice', icon: PencilLine },
   review: { label: 'Révision', icon: RotateCcw },
   assessment: { label: 'Évaluation', icon: ClipboardCheck },
+  mission: { label: 'Mission', icon: Target },
 };
 
 function Stepper({ label, value, min, max, step, suffix, disabled, onChange }: {

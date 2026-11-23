@@ -24,11 +24,13 @@ import org.linguacap.catalogue.VersionDocument.MediaRef;
 import org.linguacap.catalogue.VersionDocument.Part;
 import org.linguacap.catalogue.VersionDocument.Diagnostic;
 import org.linguacap.catalogue.VersionDocument.Lesson;
+import org.linguacap.catalogue.VersionDocument.Mission;
 import org.linguacap.catalogue.VersionDocument.Module;
 import org.linguacap.catalogue.VersionDocument.Option;
 import org.linguacap.catalogue.VersionDocument.Placement;
 import org.linguacap.catalogue.VersionDocument.Question;
 import org.linguacap.catalogue.VersionDocument.Settings;
+import org.linguacap.catalogue.VersionDocument.VocabularyEntry;
 import org.linguacap.common.HttpError;
 
 /** Édition des versions de parcours : un brouillon s'enregistre d'un bloc, une version publiée est figée. */
@@ -179,7 +181,7 @@ class AuthoringStore {
                     try (var rows = query.executeQuery()) {
                         if (rows.next()) {
                             diagnostic = new Diagnostic(rows.getString("title"), rows.getString("description"),
-                                    questions(connection, diagnosticLesson));
+                                    QuestionViews.read(connection, diagnosticLesson));
                         }
                     }
                 }
@@ -189,7 +191,7 @@ class AuthoringStore {
             Map<String, List<Activity>> activities = new LinkedHashMap<>();
             try (var query = connection.prepareStatement("""
                     select a.module_id, a.id, a.kind, a.title, a.estimated_minutes, a.competences, a.lesson_id,
-                           l.title as lesson_title, l.description, l.transcript
+                           a.mission::text as mission, l.title as lesson_title, l.description, l.transcript
                     from catalogue.activities a left join catalogue.lessons l on l.id = a.lesson_id
                     where a.version_id = ? order by a.module_id, a.position
                     """)) {
@@ -200,26 +202,29 @@ class AuthoringStore {
                         String kind = rows.getString("kind");
                         Lesson lesson = lessonId == null ? null : new Lesson(rows.getString("lesson_title"),
                                 rows.getString("description"), rows.getString("transcript"));
-                        List<Question> questions = lessonId == null || "lesson".equals(kind) ? List.of()
-                                : versionQuestions.getOrDefault(lessonId, List.of());
+                        List<Question> questions = lessonId == null || "lesson".equals(kind) || "mission".equals(kind)
+                                ? List.of() : versionQuestions.getOrDefault(lessonId, List.of());
                         // La consigne, le texte à lire et la transcription d'un exercice sont rendus comme ceux d'une leçon :
                         // une nouvelle version les reprend et l'éditeur les affiche.
                         activities.computeIfAbsent(rows.getString("module_id"), key -> new ArrayList<>())
                                 .add(new Activity(rows.getString("id"), kind, rows.getString("title"),
                                         rows.getInt("estimated_minutes"), texts(rows.getArray("competences")), lesson, questions,
-                                        placements.getOrDefault(rows.getString("id"), List.of())));
+                                        placements.getOrDefault(rows.getString("id"), List.of()),
+                                        readJson(rows.getString("mission"), Mission.class)));
                     }
                 }
             }
             List<Module> modules = new ArrayList<>();
             try (var query = connection.prepareStatement("""
-                    select id, title, objective, prerequisites from catalogue.modules where version_id = ? order by position
+                    select id, title, objective, prerequisites, vocabulary::text as vocabulary
+                    from catalogue.modules where version_id = ? order by position
                     """)) {
                 query.setObject(1, versionId);
                 try (var rows = query.executeQuery()) {
                     while (rows.next()) {
                         modules.add(new Module(rows.getString("id"), rows.getString("title"), rows.getString("objective"),
-                                texts(rows.getArray("prerequisites")), activities.getOrDefault(rows.getString("id"), List.of())));
+                                texts(rows.getArray("prerequisites")), activities.getOrDefault(rows.getString("id"), List.of()),
+                                vocabulary(rows.getString("vocabulary"))));
                     }
                 }
             }
@@ -281,19 +286,21 @@ class AuthoringStore {
                          values (?, ?, ?, ?, ?, '{}', ?)
                          """);
                  var questions = connection.prepareStatement("""
-                         insert into catalogue.questions (lesson_id, id, position, prompt, module_ref) values (?, ?, ?, ?, ?)
+                         insert into catalogue.questions (lesson_id, id, position, prompt, module_ref, type, explanation, spec)
+                         values (?, ?, ?, ?, ?, ?, ?, ?::jsonb)
                          """);
                  var options = connection.prepareStatement("""
-                         insert into catalogue.options (lesson_id, question_id, id, position, label, correct) values (?, ?, ?, ?, ?, ?)
+                         insert into catalogue.options (lesson_id, question_id, id, position, label, correct, feedback)
+                         values (?, ?, ?, ?, ?, ?, ?)
                          """);
                  var moduleRows = connection.prepareStatement("""
-                         insert into catalogue.modules (version_id, id, position, title, objective, prerequisites)
-                         values (?, ?, ?, ?, ?, ?)
+                         insert into catalogue.modules (version_id, id, position, title, objective, prerequisites, vocabulary)
+                         values (?, ?, ?, ?, ?, ?, ?::jsonb)
                          """);
                  var activityRows = connection.prepareStatement("""
                          insert into catalogue.activities (version_id, id, module_id, position, kind, title,
-                             estimated_minutes, competences, lesson_id)
-                         values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                             estimated_minutes, competences, lesson_id, mission)
+                         values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?::jsonb)
                          """);
                  var placementRows = connection.prepareStatement("""
                          insert into catalogue.media_placements (version_id, activity_id, position, asset_id,
@@ -316,12 +323,15 @@ class AuthoringStore {
                     moduleRows.setString(4, VersionDocument.text(module.title()));
                     moduleRows.setString(5, VersionDocument.text(module.objective()));
                     moduleRows.setArray(6, connection.createArrayOf("text", VersionDocument.nonNull(module.prerequisites()).toArray()));
+                    moduleRows.setString(7, writeJson(vocabulary(module.vocabulary())));
                     moduleRows.addBatch();
                     int activityPosition = 0;
                     for (Activity activity : VersionDocument.nonNull(module.activities())) {
                         String lessonId = null;
                         boolean graded = "exercise".equals(activity.kind()) || "assessment".equals(activity.kind());
-                        if (activity.lesson() != null || graded) {
+                        boolean mission = "mission".equals(activity.kind());
+                        // Une mission a toujours sa leçon : la situation et la consigne lues par l'élève.
+                        if (activity.lesson() != null || graded || mission) {
                             lessonId = prefix + activity.id();
                             Lesson lesson = activity.lesson();
                             addLesson(lessons, lessonId, levelId, versionId,
@@ -339,6 +349,8 @@ class AuthoringStore {
                         activityRows.setInt(7, activity.estimatedMinutes());
                         activityRows.setArray(8, connection.createArrayOf("text", VersionDocument.nonNull(activity.competences()).toArray()));
                         activityRows.setString(9, lessonId);
+                        activityRows.setString(10, mission && activity.mission() != null
+                                ? writeJson(activity.mission().normalized()) : null);
                         activityRows.addBatch();
                         int placementPosition = 0;
                         for (Placement placement : VersionDocument.nonNull(activity.placements())) {
@@ -472,11 +484,15 @@ class AuthoringStore {
                                      List<Question> questions, boolean diagnostic) throws SQLException {
         int position = 0;
         for (Question question : VersionDocument.nonNull(questions)) {
+            QuestionSpecs.Spec spec = QuestionSpecs.specOf(question);
             questionRows.setString(1, lessonId);
             questionRows.setString(2, question.id());
             questionRows.setInt(3, ++position);
             questionRows.setString(4, VersionDocument.text(question.prompt()));
             questionRows.setString(5, diagnostic ? question.moduleRef() : null);
+            questionRows.setString(6, QuestionSpecs.typeOf(question));
+            questionRows.setString(7, blankToNull(question.explanation()));
+            questionRows.setString(8, spec == null ? null : QuestionSpecs.write(spec));
             questionRows.addBatch();
             int optionPosition = 0;
             boolean correctSeen = false;
@@ -491,31 +507,18 @@ class AuthoringStore {
                 optionRows.setInt(4, ++optionPosition);
                 optionRows.setString(5, VersionDocument.text(option.label()));
                 optionRows.setBoolean(6, correct);
+                optionRows.setString(7, blankToNull(option.feedback()));
                 optionRows.addBatch();
             }
         }
-    }
-
-    private List<Question> questions(Connection connection, String lessonId) throws SQLException {
-        Map<String, Question> questions = new LinkedHashMap<>();
-        try (var query = connection.prepareStatement("""
-                select q.id, q.prompt, q.module_ref, o.id as option_id, o.label, o.correct
-                from catalogue.questions q left join catalogue.options o on o.lesson_id = q.lesson_id and o.question_id = q.id
-                where q.lesson_id = ? order by q.position, o.position
-                """)) {
-            query.setString(1, lessonId);
-            try (var rows = query.executeQuery()) {
-                while (rows.next()) collect(questions, rows);
-            }
-        }
-        return List.copyOf(questions.values());
     }
 
     /** Questions de toutes les leçons d'une version, en une requête, rangées par leçon. */
     private Map<String, List<Question>> versionQuestions(Connection connection, UUID versionId) throws SQLException {
         Map<String, Map<String, Question>> byLesson = new LinkedHashMap<>();
         try (var query = connection.prepareStatement("""
-                select q.lesson_id, q.id, q.prompt, q.module_ref, o.id as option_id, o.label, o.correct
+                select q.lesson_id, q.id, q.type, q.prompt, q.module_ref, q.explanation, q.spec::text as spec,
+                       o.id as option_id, o.label, o.correct, o.feedback
                 from catalogue.questions q
                 join catalogue.lessons l on l.id = q.lesson_id
                 left join catalogue.options o on o.lesson_id = q.lesson_id and o.question_id = q.id
@@ -537,11 +540,48 @@ class AuthoringStore {
         String id = rows.getString("id");
         Question question = questions.get(id);
         if (question == null) {
-            question = new Question(id, rows.getString("prompt"), rows.getString("module_ref"), new ArrayList<>());
+            question = new Question(id, rows.getString("type"), rows.getString("prompt"), rows.getString("module_ref"),
+                    rows.getString("explanation"), new ArrayList<>(), QuestionSpecs.read(rows.getString("spec")));
             questions.put(id, question);
         }
         if (rows.getString("option_id") != null) {
-            question.options().add(new Option(rows.getString("option_id"), rows.getString("label"), rows.getBoolean("correct")));
+            question.options().add(new Option(rows.getString("option_id"), rows.getString("label"),
+                    rows.getBoolean("correct"), rows.getString("feedback")));
+        }
+    }
+
+    /** Vocabulaire enregistré (jsonb), dans l'ordre du module. */
+    private List<VocabularyEntry> vocabulary(String value) throws SQLException {
+        if (value == null || value.isBlank()) return List.of();
+        try {
+            return json.readValue(value, new TypeReference<List<VocabularyEntry>>() {});
+        } catch (JsonProcessingException error) {
+            throw new SQLException("Vocabulaire illisible", "XX000", error);
+        }
+    }
+
+    /** Vocabulaire à enregistrer : textes sans espaces de bord, champs facultatifs vides à null. */
+    private static List<VocabularyEntry> vocabulary(List<VocabularyEntry> entries) {
+        return VersionDocument.nonNull(entries).stream().map(entry -> new VocabularyEntry(entry.id(),
+                VersionDocument.text(entry.word()), entry.article(), blankToNull(entry.plural()), entry.partOfSpeech(),
+                VersionDocument.text(entry.translation()), blankToNull(entry.example()), blankToNull(entry.note()),
+                entry.audio())).toList();
+    }
+
+    private <T> T readJson(String value, Class<T> type) throws SQLException {
+        if (value == null || value.isBlank()) return null;
+        try {
+            return json.readValue(value, type);
+        } catch (JsonProcessingException error) {
+            throw new SQLException("Contenu illisible", "XX000", error);
+        }
+    }
+
+    private String writeJson(Object value) throws SQLException {
+        try {
+            return json.writeValueAsString(value);
+        } catch (JsonProcessingException error) {
+            throw new SQLException("Contenu non sérialisable", "XX000", error);
         }
     }
 

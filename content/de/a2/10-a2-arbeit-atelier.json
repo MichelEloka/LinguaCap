@@ -1,0 +1,1184 @@
+{
+  "id": "a2-arbeit-atelier",
+  "title": "Se renseigner sur une offre d’apprentissage",
+  "objective": "Identifier les exigences d’une offre, laisser ses coordonnées et expliquer son intérêt pour une formation.",
+  "prerequisites": [
+    "a2-arbeit"
+  ],
+  "audioProfile": "a2-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "grammarFocus": [
+    "weil-verbe-final",
+    "praeteritum-sein-haben",
+    "zurueckrufen-separable"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-arbeit-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "auszubildende",
+      "word": "Auszubildende",
+      "article": "der",
+      "plural": "Auszubildenden",
+      "partOfSpeech": "noun",
+      "translation": "l’apprenti, l’apprentie",
+      "example": "Die Bäckerei sucht ab September eine Auszubildende.",
+      "note": "se décline comme un adjectif : ein Auszubildender ; familier : der Azubi",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "ausbilder",
+      "word": "Ausbilder",
+      "article": "der",
+      "plural": "Ausbilder",
+      "partOfSpeech": "noun",
+      "translation": "le formateur, le maître d’apprentissage",
+      "example": "Kann ich heute mit dem Ausbilder sprechen?",
+      "note": "au féminin : die Ausbilderin",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "fahrrad",
+      "word": "Fahrrad",
+      "article": "das",
+      "plural": "Fahrräder",
+      "partOfSpeech": "noun",
+      "translation": "le vélo",
+      "example": "Zu Hause repariere ich mein Fahrrad selbst.",
+      "note": "die Fahrradwerkstatt : l’atelier de réparation de vélos",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "kunde",
+      "word": "Kunde",
+      "article": "der",
+      "plural": "Kunden",
+      "partOfSpeech": "noun",
+      "translation": "le client",
+      "example": "Der Kunde wartet an der Kasse.",
+      "note": "au féminin : die Kundin",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "kontakt",
+      "word": "Kontakt",
+      "article": "der",
+      "plural": "Kontakte",
+      "partOfSpeech": "noun",
+      "translation": "le contact",
+      "example": "Ich hatte dort viel Kontakt mit Kunden.",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "team",
+      "word": "Team",
+      "article": "das",
+      "plural": "Teams",
+      "partOfSpeech": "noun",
+      "translation": "l’équipe",
+      "example": "Ich arbeite gern im Team.",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "praktisch",
+      "word": "praktisch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "pratique, concret",
+      "example": "Ich bewerbe mich, weil ich gern praktisch arbeite.",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "beginnen",
+      "word": "beginnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "commencer",
+      "example": "Die Ausbildung soll am ersten August beginnen.",
+      "note": "Perfekt : hat begonnen",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "wegen",
+      "word": "wegen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "à cause de, au sujet de",
+      "example": "Ich rufe wegen der Ausbildung an.",
+      "note": "+ génitif (der Ausbildung)",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "anrufen",
+      "word": "anrufen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "appeler (au téléphone)",
+      "example": "Ich möchte morgen noch einmal anrufen.",
+      "note": "séparable : an|rufen · Ich rufe an.",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "telefonnummer",
+      "word": "Telefonnummer",
+      "article": "die",
+      "plural": "Telefonnummern",
+      "partOfSpeech": "noun",
+      "translation": "le numéro de téléphone",
+      "example": "Kann ich Ihnen meine Telefonnummer geben?",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "hinterlassen",
+      "word": "hinterlassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "laisser (un message, un numéro)",
+      "example": "Kann ich meine Telefonnummer hinterlassen?",
+      "note": "inséparable · Perfekt : hat hinterlassen",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "erreichbar",
+      "word": "erreichbar",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "joignable",
+      "example": "Ich bin ab fünfzehn Uhr erreichbar.",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "wieder-da-sein",
+      "word": "wieder da sein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être de retour",
+      "example": "Sie wird morgen wieder da sein.",
+      "note": "Sie ist erst morgen wieder da.",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "anhang",
+      "word": "Anhang",
+      "article": "der",
+      "plural": "Anhänge",
+      "partOfSpeech": "noun",
+      "translation": "la pièce jointe",
+      "example": "Meinen Lebenslauf finden Sie im Anhang.",
+      "note": "im Anhang : en pièce jointe",
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "anbei",
+      "word": "anbei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ci-joint",
+      "example": "Anbei sende ich Ihnen meinen Lebenslauf.",
+      "note": null,
+      "audio": {
+        "media": "a2-arbeit-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-arbeit-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : une offre d’apprentissage",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : une offre d’apprentissage",
+        "description": "Lisez cette annonce.\n« Bäckerei Kornhaus sucht ab 1. September einen Auszubildenden oder eine Auszubildende. Sie arbeiten gern im Team und fangen früh an. Senden Sie Ihren Lebenslauf und Ihr letztes Zeugnis bis zum 12. Juni an Frau Weber. »\nRepérez le poste (une place d’apprentissage), le début (le 1er septembre), la date limite (le 12 juin) et la personne à contacter (Frau Weber). Le profil demande d’aimer le travail en équipe et de commencer tôt.\n\nAU TÉLÉPHONE : QUATRE DEMANDES UTILES\n• Ich rufe wegen der Ausbildung an. — J’appelle au sujet de la formation.\n• Ist die Stelle noch frei? — La place est-elle encore libre ?\n• Könnte ich Frau Weber sprechen? — Pourrais-je parler à Mme Weber ?\n• Bis wann kann ich mich bewerben? — Jusqu’à quand puis-je postuler ?\nPour parler d’un rappel, le verbe zurückrufen se sépare : Sie ruft mich morgen um elf zurück. Après un verbe de modalité, il reste soudé : Sie kann mich morgen zurückrufen.\n\nPRÉSENTER SON EXPÉRIENCE ET SA RAISON\nLisez la note d’une candidate : « In meiner Stadt war ich zwei Wochen in einer Bäckerei. Ich hatte dort viel Kontakt mit Kunden. Ich bewerbe mich, weil ich gern mit anderen Menschen arbeite. »\nPour une expérience passée, on emploie le prétérit de sein et de haben : ich war, ich hatte. Pour la raison, weil renvoie le verbe conjugué à la fin : …, weil ich gern mit anderen Menschen arbeite.\n\nAU TÉLÉPHONE OU PAR COURRIEL ?\nAu téléphone, une phrase courte suffit : Ich rufe wegen der Ausbildung als Bäcker an. Dans un courriel, on nomme le poste et on annonce les pièces jointes : Ich bewerbe mich um die Ausbildung ab September. Anbei sende ich Ihnen meinen Lebenslauf.\nLisez ces phrases à voix haute : l’exercice « Répéter à voix haute » de ce module les reprend.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-arbeit-atelier-anzeige",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-arbeit-atelier-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter les informations d’un appel",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter les informations d’un appel",
+        "description": "Un jeune homme appelle un atelier de réparation de vélos au sujet d’une place d’apprentissage.\n\n1. Écoutez l’appel une première fois sans lire les phrases : pourquoi appelle-t-il, et quand la formation commence-t-elle ?\n2. Réécoutez pour compléter les notes : son expérience, les documents à envoyer et le rappel prévu. Vous pouvez écrire les nombres en chiffres.\n3. Les deux dernières questions sont des dictées : deux phrases utiles pour une candidature.\nAprès validation, la transcription de l’appel et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-arbeit-atelier-werkstatt",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Le motif de l’appel : complétez.",
+          "text": "Ich rufe wegen der [[1]] in Ihrer Fahrradwerkstatt an. Ist die Stelle noch [[2]]?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Ausbildung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "frei"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Le candidat appelle « wegen der Ausbildung » (au sujet de la formation) et demande si la place est encore libre : « Ist die Stelle noch frei? »."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Le début de la formation : complétez.",
+          "text": "Die Ausbildung beginnt am ersten [[1]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "August"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "L’employée répond « Die Ausbildung beginnt am ersten August » : le 1er août. Lundi, entendu plus loin, est la date limite pour les documents."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "L’expérience du candidat : complétez avec le verbe entendu.",
+          "text": "Letztes Jahr [[1]] ich zwei Wochen in einer Werkstatt.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "war"
+              ],
+              "size": 6,
+              "hint": "sein"
+            }
+          ],
+          "explanation": "Pour une expérience passée, on emploie le prétérit de sein : ich war. Letztes Jahr est en tête, donc le verbe war suit directement, avant ich."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Les documents à envoyer : complétez.",
+          "text": "Schicken Sie uns bitte Ihren [[1]] und Ihr letztes [[2]] bis Montag.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Lebenslauf"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Zeugnis"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "Il faut envoyer le CV (der Lebenslauf, d’où Ihren) et le dernier bulletin ou certificat (das Zeugnis, d’où Ihr), au plus tard lundi."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Le rappel : complétez.",
+          "text": "Sie ruft Sie morgen nach [[1]] Uhr [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "15",
+                "fünfzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zurück"
+              ],
+              "size": 7,
+              "hint": "zurückrufen"
+            }
+          ],
+          "explanation": "La formatrice rappellera « morgen nach fünfzehn Uhr ». Zurückrufen est séparable : ruft en 2e position, zurück à la fin de la phrase."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "La disponibilité du candidat : complétez.",
+          "text": "Ich bin ab fünfzehn Uhr [[1]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "erreichbar"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ],
+          "explanation": "Erreichbar signifie joignable. Ab fünfzehn Uhr : à partir de 15 h, ce qui correspond au rappel prévu après 15 h."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la question posée au téléphone.",
+          "accept": [
+            "Könnte ich bitte mit der Ausbilderin sprechen?"
+          ],
+          "voice": "mann",
+          "explanation": "Könnte rend la question polie ; l’infinitif sprechen va à la fin. Sprechen mit + datif : mit der Ausbilderin, la formatrice.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase d’un courriel de candidature.",
+          "accept": [
+            "Meinen Lebenslauf finden Sie im Anhang."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Meinen Lebenslauf (accusatif) est en tête, puis le verbe finden et le sujet Sie. Im Anhang signifie « en pièce jointe ».",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-arbeit-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : un appel pour une place d’apprentissage",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : un appel pour une place d’apprentissage",
+        "description": "Écoutez une première fois l’appel à l’atelier pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur des phrases utiles : répondez sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-arbeit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-arbeit-atelier-fahrrad",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a2-arbeit-atelier-tickets",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a2-arbeit-atelier-kueche",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quel domaine concerne l’apprentissage ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La réparation de vélos",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "La vente de billets",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "La cuisine",
+              "correct": false
+            }
+          ],
+          "explanation": "Le candidat appelle « wegen der Ausbildung in Ihrer Fahrradwerkstatt » : das Fahrrad (le vélo) + die Werkstatt (l’atelier). Il répare aussi des vélos chez lui ; ni billets ni cuisine ne sont évoqués.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quand commence la formation ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le 1er avril",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le 1er août",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le lundi suivant",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Ausbildung beginnt am ersten August » : le 1er août. Lundi est la date limite pour envoyer les documents, pas le début de la formation.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quelles pièces faut-il envoyer ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une lettre manuscrite et une photo",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Un CV et un permis de conduire",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un CV et le dernier bulletin ou certificat scolaire",
+              "correct": true
+            }
+          ],
+          "explanation": "« Schicken Sie uns bitte Ihren Lebenslauf und Ihr letztes Zeugnis » : le CV et le dernier bulletin ou certificat. Aucune photo, lettre manuscrite ou permis n’est demandé.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quand la formatrice rappellera-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Demain après 15 h",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Aujourd’hui à 15 h",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Lundi avant 15 h",
+              "correct": false
+            }
+          ],
+          "explanation": "La formatrice n’est là que demain : « ruft sie Sie morgen nach fünfzehn Uhr zurück ». Nach signifie « après » ; aujourd’hui, elle est absente (« Sie ist erst morgen wieder da »).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quelle phrase donne une raison avec un ordre des mots correct ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich bewerbe mich, weil arbeite ich gern im Team.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich bewerbe mich, weil ich gern im Team arbeite.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich bewerbe mich, weil ich arbeite gern im Team.",
+              "correct": false
+            }
+          ],
+          "explanation": "Dans la proposition introduite par weil, le verbe conjugué arbeite va à la fin : weil ich gern im Team arbeite. Les deux autres phrases laissent arbeite en 1re ou en 2e position, comme dans une principale.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Comment demander poliment de laisser son numéro ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kann ich meine Telefonnummer zurückrufen?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kann ich meine Telefonnummer anrufen?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Kann ich meine Telefonnummer hinterlassen?",
+              "correct": true
+            }
+          ],
+          "explanation": "Eine Nummer hinterlassen : laisser son numéro. Zurückrufen (rappeler) et anrufen (appeler) s’emploient avec une personne, pas avec un numéro que l’on laisse.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-arbeit-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : appeler pour une formation",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : appeler pour une formation",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute, comme au téléphone. Parlez lentement et articulez les dates et les heures. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-arbeit-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-arbeit-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis annoncez le motif de votre appel.",
+          "text": "Ich rufe wegen der Ausbildung an.",
+          "accept": [
+            "Ich rufe wegen der Ausbildung an."
+          ],
+          "threshold": 75,
+          "explanation": "La particule an de anrufen termine la phrase. Dans Ausbildung, l’accent porte sur Aus."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez si la place est libre.",
+          "text": "Ist die Stelle noch frei?",
+          "accept": [
+            "Ist die Stelle noch frei?"
+          ],
+          "threshold": 75,
+          "explanation": "Question fermée : le verbe ist ouvre la phrase et la voix monte sur frei. Le st de Stelle se prononce « cht »."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis présentez votre expérience.",
+          "text": "Letztes Jahr war ich zwei Wochen in einer Werkstatt.",
+          "accept": [
+            "Letztes Jahr war ich zwei Wochen in einer Werkstatt.",
+            "Letztes Jahr war ich 2 Wochen in einer Werkstatt."
+          ],
+          "threshold": 75,
+          "explanation": "Prétérit de sein : war, juste après Letztes Jahr. Le w de Werkstatt se prononce [v] et zwei commence par [ts]."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez la date limite de candidature.",
+          "text": "Bis wann kann ich mich bewerben?",
+          "accept": [
+            "Bis wann kann ich mich bewerben?"
+          ],
+          "threshold": 75,
+          "explanation": "Bis wann? demande une date limite. Le verbe pronominal sich bewerben devient mich bewerben avec ich."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis dites à partir de quand vous êtes joignable.",
+          "text": "Ich bin ab fünfzehn Uhr erreichbar.",
+          "accept": [
+            "Ich bin ab fünfzehn Uhr erreichbar.",
+            "Ich bin ab 15 Uhr erreichbar."
+          ],
+          "threshold": 75,
+          "explanation": "Ab fünfzehn Uhr : à partir de 15 h. Erreichbar s’accentue sur reich ; le r final sonne presque comme un « a »."
+        }
+      ]
+    },
+    {
+      "id": "a2-arbeit-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : se renseigner et postuler",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : se renseigner et postuler",
+        "description": "Situation : un atelier propose une place d’apprentissage qui commence en septembre. Vous avez une expérience à présenter (par exemple deux semaines dans une entreprise l’été dernier) et vous êtes joignable à certains moments. Au téléphone, on vous annonce que la formatrice ne pourra pas vous rappeler à 15 h, mais à 16 h 30.\n\nModèles : Ich rufe wegen der Ausbildung an. Ist die Stelle noch frei? Letzten Sommer war ich zwei Wochen in einer Werkstatt. Ab halb fünf bin ich erreichbar. Ich bewerbe mich um die Ausbildung, weil ich gern praktisch arbeite. Meinen Lebenslauf finden Sie im Anhang.\n\nChoisissez le poste, votre expérience et vos créneaux, préparez quelques mots-clés, puis réalisez les deux parties. Vérifiez que l’appel et le courriel concernent la même offre.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-arbeit-atelier-mail",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre appel à l’atelier (une minute environ) : demandez si la place est encore libre, présentez une expérience datée au prétérit, puis convenez du rappel à 16 h 30 en confirmant l’heure.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez à la formatrice un courriel de 45 à 65 mots : nommez la formation et sa date de début, donnez votre motivation avec weil et annoncez votre CV en pièce jointe.",
+          "maxChars": 1000,
+          "minWords": 45
+        },
+        "checklist": [
+          "J’ai demandé si la place était encore libre.",
+          "J’ai présenté une expérience au prétérit, avec une date : Letzten Sommer war ich …",
+          "J’ai confirmé le rappel à 16 h 30.",
+          "Mon courriel nomme la formation, la date de début et le CV en pièce jointe.",
+          "Après weil, le verbe conjugué est à la fin de la proposition."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-arbeit-atelier-dialogue",
+      "kind": "audio",
+      "title": "Se renseigner sur une offre d’apprentissage · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Werkstatt Rad und Weg, guten Tag. Was kann ich für Sie tun?"
+        },
+        {
+          "voice": "mann",
+          "text": "Guten Tag, ich rufe wegen der Ausbildung in Ihrer Fahrradwerkstatt an. Ist die Stelle noch frei?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja. Die Ausbildung beginnt am ersten August. Waren Sie schon einmal in einer Werkstatt?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, letztes Jahr war ich zwei Wochen in einer Werkstatt. Fahrräder repariere ich auch zu Hause."
+        },
+        {
+          "voice": "frau",
+          "text": "Gut. Schicken Sie uns bitte Ihren Lebenslauf und Ihr letztes Zeugnis bis Montag."
+        },
+        {
+          "voice": "mann",
+          "text": "Mache ich. Kann ich heute mit der Ausbilderin sprechen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Sie ist erst morgen wieder da. Wenn Sie mir Ihre Nummer geben, ruft sie Sie morgen nach fünfzehn Uhr zurück."
+        },
+        {
+          "voice": "mann",
+          "text": "Sehr gern. Ich bin ab fünfzehn Uhr erreichbar. Vielen Dank!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-anzeige",
+      "kind": "image",
+      "title": "L’offre d’apprentissage de la boulangerie",
+      "alt": "Offre d’apprentissage « Ausbildung – Bäckerei Kornhaus » : « Bäckerei Kornhaus sucht ab 1. September einen Auszubildenden oder eine Auszubildende. Sie arbeiten gern im Team und fangen früh an. Senden Sie Ihren Lebenslauf und Ihr letztes Zeugnis bis zum 12. Juni an Frau Weber. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "shop",
+        "icon": "croissant",
+        "title": "Ausbildung",
+        "subtitle": "Bäckerei Kornhaus",
+        "size": 30,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Bäckerei Kornhaus sucht [ab 1. September] einen Auszubildenden oder eine Auszubildende."
+          },
+          {
+            "icon": "users",
+            "text": "Sie arbeiten gern im Team und fangen früh an."
+          },
+          {
+            "icon": "mail",
+            "text": "Senden Sie Ihren [Lebenslauf] und Ihr letztes [Zeugnis] [bis zum 12. Juni] an Frau Weber."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-werkstatt",
+      "kind": "image",
+      "title": "Appeler l’atelier pour une offre",
+      "alt": "Au téléphone, l’employée de l’atelier demande « Was kann ich für Sie tun? » et le candidat demande « Ist die Stelle noch frei? ». En haut : un vélo, une clé à molette et un téléphone.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Mitarbeiterin",
+            "say": "Was kann ich für Sie tun?"
+          },
+          {
+            "name": "Bewerber",
+            "say": "Ist die Stelle noch frei?"
+          }
+        ],
+        "items": [
+          "bike",
+          "wrench",
+          "phone-call"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-fahrrad",
+      "kind": "image",
+      "title": "La réparation de vélos",
+      "alt": "Un vélo vu de profil.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-tickets",
+      "kind": "image",
+      "title": "La vente de billets",
+      "alt": "Un billet.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "ticket"
+      }
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-kueche",
+      "kind": "image",
+      "title": "La cuisine",
+      "alt": "Une toque de cuisinier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "chef-hat"
+      }
+    },
+    {
+      "key": "v4-a2-arbeit-atelier-mail",
+      "kind": "image",
+      "title": "Un courriel de candidature",
+      "alt": "Courriel, objet « Bewerbung um die Ausbildung » : « Sehr geehrte Damen und Herren, ich bewerbe mich um die Ausbildung ab September, weil ich gern praktisch arbeite. Letzten Sommer war ich in einer Werkstatt. Meinen Lebenslauf finden Sie im Anhang. » Pièce jointe : Lebenslauf.pdf.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 27,
+        "meta": [
+          [
+            "An",
+            "Fahrradwerkstatt"
+          ],
+          [
+            "Betreff",
+            "Bewerbung um die Ausbildung"
+          ]
+        ],
+        "lines": [
+          "Sehr geehrte Damen und Herren,",
+          "ich bewerbe mich um die Ausbildung ab September, [weil ich gern praktisch arbeite]. Letzten Sommer [war] ich in einer Werkstatt.",
+          "Meinen Lebenslauf finden Sie im Anhang.",
+          "Mit freundlichen Grüßen",
+          {
+            "icon": "paperclip",
+            "text": "Lebenslauf.pdf"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-arbeit-atelier-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter les informations d’un appel",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Könnte ich bitte mit der Ausbilderin sprechen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter les informations d’un appel",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meinen Lebenslauf finden Sie im Anhang."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : appeler pour une formation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich rufe wegen der Ausbildung an."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : appeler pour une formation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ist die Stelle noch frei?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : appeler pour une formation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Letztes Jahr war ich zwei Wochen in einer Werkstatt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : appeler pour une formation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Bis wann kann ich mich bewerben?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : appeler pour une formation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich bin ab fünfzehn Uhr erreichbar."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-arbeit-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Se renseigner sur une offre d’apprentissage",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Auszubildende, die Auszubildenden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausbilder, die Ausbilder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fahrrad, die Fahrräder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kunde, die Kunden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kontakt, die Kontakte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Team, die Teams"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "praktisch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beginnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "anrufen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Telefonnummer, die Telefonnummern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "hinterlassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erreichbar"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wieder da sein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Anhang, die Anhänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "anbei"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -1,18 +1,17 @@
 #!/usr/bin/env node
-// Prépare un dépôt minimal autonome dans target, à partir du contenu versionné.
+// Prépare un dépôt minimal autonome dans target, à partir de la V2 de référence (content/base/de) et des sources V3/V4.
+// Usage : node infra/content/build-v3.mjs [--v4]. La V4 officielle (content/de) est construite par build-v4.mjs, qui
+// reprend la composition des niveaux exportée ici (composeLevel) avant d'y fusionner les couches pédagogiques.
 import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
-import { allMedia, imageFile, loadLevel, root } from './content-lib.mjs';
+import { pathToFileURL } from 'node:url';
+import { allMedia, baseDir, imageFile, loadLevel, root } from './content-lib.mjs';
 import { renderWorkbook } from './render-v3-workbook.mjs';
 import sounds from '../../content/v3/source/a1-sons.mjs';
 
-const edition = process.argv.includes('--v4') ? 'v4' : 'v3';
-const kitDirectory = edition === 'v4' ? 'linguacap-cours-v4-complete-kit' : 'linguacap-cours-v3-kit';
-const bundle = join(root, 'target', kitDirectory);
-const content = join(bundle, 'content', 'de');
 const sourceNote = 'LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU).';
 const levels = ['a1', 'a2'];
-const voiceAttribution = {
+export const voiceAttribution = {
   credit: 'LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)',
   license: 'Jeux de données des voix : CC0 et CC BY 4.0',
 };
@@ -41,6 +40,9 @@ function activity(moduleId, suffix, title, estimatedMinutes, competences, descri
 function speech(key, title, script) {
   return { key, kind: 'audio', title, script, ...voiceAttribution };
 }
+
+/** Texte de l'activité de contrôle d'un atelier ; build-v4 le remplace (la correction s'affiche après la remise). */
+export const CONTROL_DESCRIPTION = 'Faites une première écoute pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Répondez de mémoire aux questions de réemploi. Vérifiez ensuite vos réponses dans l’activité suivante.';
 
 function makeWorkshop(spec, id, prerequisites, audioProfile, nativeByKey) {
   const { title, goal, guide, drill, dialogue, quiz, task } = spec;
@@ -79,8 +81,7 @@ function makeWorkshop(spec, id, prerequisites, audioProfile, nativeByKey) {
       ...(spec.lesson ? [
         activity(id, 'approfondir', spec.lessonTitle, 20, ['lecture', 'expression-ecrite'], spec.lesson),
       ] : []),
-      activity(id, 'controle', 'Vérifier sa compréhension', 12, ['ecoute', 'lecture'],
-        'Faites une première écoute pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Répondez de mémoire aux questions de réemploi. Vérifiez ensuite vos réponses dans l’activité suivante.',
+      activity(id, 'controle', 'Vérifier sa compréhension', 12, ['ecoute', 'lecture'], CONTROL_DESCRIPTION,
         [audioPlacement(dialog.key, 'after_answer')], questions),
       activity(id, 'correction', 'Comprendre ses réponses', 8, ['lecture', 'expression-ecrite'],
         `CORRECTION COMMENTÉE · 8 MIN\n\n${correction}\n\nSans regarder le corrigé, reformulez deux réponses dans votre cahier. Rejouez la phrase qui vous a aidé à les trouver.`),
@@ -89,7 +90,7 @@ function makeWorkshop(spec, id, prerequisites, audioProfile, nativeByKey) {
   };
 }
 
-function extendModules(modules, extensions, nativeByKey) {
+function extendModules(modules, extensions, nativeByKey, specs) {
   const after = new Map();
   const moduleIds = new Set(modules.map(({ id }) => id));
   for (const spec of extensions) {
@@ -100,6 +101,7 @@ function extendModules(modules, extensions, nativeByKey) {
       throw new Error(`Le module ${spec.id} requiert une troisième leçon, un modèle audio et des sources.`);
     }
     after.set(spec.after, spec);
+    specs?.set(spec.id, spec);
   }
   return modules.flatMap((module) => {
     const prerequisites = module.prerequisites.map((key) => after.get(key)?.id ?? key);
@@ -136,8 +138,13 @@ function prepareAudioReferences(media, activities) {
   }
 }
 
-async function compileLevel(levelId) {
-  const level = loadLevel(levelId);
+/**
+ * Compose un niveau du kit (V3, ou V4 complète avec edition 'v4') : modules V2 de référence, ateliers V3, modules de
+ * sons et modules ajoutés en V4. Renvoie le niveau (sans moduleFiles), ses modules dans l'ordre et, pour chaque module
+ * généré à partir d'une source (atelier, sons, V4), sa spécification d'origine (quiz avec explications, tâche…).
+ */
+export async function composeLevel(levelId, { edition = 'v3' } = {}) {
+  const level = loadLevel(levelId, baseDir);
   const base = level.modules;
   delete level.moduleFiles;
   const nativeByKey = new Map(allMedia({ ...level, modules: base }).filter((media) => media.native).map((media) => [media.key, media]));
@@ -147,10 +154,12 @@ async function compileLevel(levelId) {
   }
   let modules = [];
   let previous = null;
+  const specs = new Map();
   if (levelId === 'a1') {
     for (const spec of sounds) {
       const profile = spec.id === 'a1-abc' ? 'a1-alphabet' : 'a1-debut';
       modules.push(makeWorkshop(spec, spec.id, previous ? [previous] : [], profile, nativeByKey));
+      specs.set(spec.id, spec);
       previous = spec.id;
     }
   }
@@ -160,6 +169,7 @@ async function compileLevel(levelId) {
     const workshop = workshops.find(({ id }) => id === module.id);
     previous = `${module.id}-atelier`;
     modules.push(makeWorkshop(workshop, previous, [module.id], baseModule.audioProfile, nativeByKey));
+    specs.set(previous, workshop);
   }
   if (edition === 'v4') {
     for (const source of [levelId, `${levelId}-complements`]) {
@@ -167,10 +177,9 @@ async function compileLevel(levelId) {
       if (extensions.length !== 2 || new Set(extensions.map(({ id }) => id)).size !== extensions.length) {
         throw new Error(`Deux modules aux identifiants distincts sont attendus dans ${source}.mjs.`);
       }
-      modules = extendModules(modules, extensions, nativeByKey);
+      modules = extendModules(modules, extensions, nativeByKey, specs);
     }
   }
-  const files = modules.map(({ id }, index) => ({ id, file: `${String(index + 1).padStart(2, '0')}-${id}.json` }));
   // Les deux évaluations interviennent après les séquences d’apprentissage de leur niveau.
   prepareAudioReferences(level.media, level.assessments.flatMap(({ parts }) => parts));
   level.media.forEach((media) => { if (media.script) media.audioProfile = `${levelId}-suite`; });
@@ -186,6 +195,29 @@ async function compileLevel(levelId) {
     const final = level.assessments.find(({ kind }) => kind === 'final');
     final.description = final.description.replace('sur l’ensemble des huit modules', 'sur les grands thèmes du niveau A2');
   }
+  return { level, modules, specs };
+}
+
+/** Crédits des médias du kit, d'après ceux de la V2 de référence. */
+export function composeCredits(edition) {
+  const credits = JSON.parse(readFileSync(join(baseDir, 'media', 'credits.json'), 'utf8'));
+  credits.sources[0].changes += ' ; tempo de plusieurs enregistrements adapté au niveau en V3, hauteur conservée';
+  const voices = credits.sources.find(({ name }) => name.startsWith('Piper'));
+  Object.assign(voices, {
+    name: 'Piper 1.8 · Thorsten et Kerstin',
+    author: 'Thorsten Müller, OHF Voice et Cori Samuel (Hi-Fi TTS, locutrice 92)',
+    license: 'Données Thorsten et modèle de base rdh : CC0. Données Kerstin : CC0. Voix de base Hi-Fi TTS de Cori Samuel : CC BY 4.0.',
+    url: 'https://huggingface.co/rhasspy/piper-voices/tree/cf910fb59f1d79ab3b625a63993a108751c6c25d/de/de_DE',
+    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
+    used: `Toutes les synthèses vocales du kit ${edition.toUpperCase()}, avec débits progressifs par niveau.`,
+  });
+  return credits;
+}
+
+async function compileLevel(levelId, edition, bundle) {
+  const content = join(bundle, 'content', 'de');
+  const { level, modules } = await composeLevel(levelId, { edition });
+  const files = modules.map(({ id }, index) => ({ id, file: `${String(index + 1).padStart(2, '0')}-${id}.json` }));
   const directory = join(content, levelId);
   write(join(directory, 'level.json'), { ...level, modules: files });
   modules.forEach((module, index) => write(join(directory, files[index].file), module));
@@ -201,20 +233,16 @@ async function compileLevel(levelId) {
     total + module.activities.reduce((minutes, entry) => minutes + entry.estimatedMinutes, 0), 0)} min.`);
 }
 
-for (const level of levels) await compileLevel(level);
-const kit = ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'icons.txt'];
-for (const name of kit) copy(join(root, 'infra', 'content', name), join(bundle, 'infra', 'content', name));
-const credits = JSON.parse(readFileSync(join(root, 'content', 'de', 'media', 'credits.json'), 'utf8'));
-credits.sources[0].changes += ' ; tempo de plusieurs enregistrements adapté au niveau en V3, hauteur conservée';
-const voices = credits.sources.find(({ name }) => name.startsWith('Piper'));
-Object.assign(voices, {
-  name: 'Piper 1.8 · Thorsten et Kerstin',
-  author: 'Thorsten Müller, OHF Voice et Cori Samuel (Hi-Fi TTS, locutrice 92)',
-  license: 'Données Thorsten et modèle de base rdh : CC0. Données Kerstin : CC0. Voix de base Hi-Fi TTS de Cori Samuel : CC BY 4.0.',
-  url: 'https://huggingface.co/rhasspy/piper-voices/tree/cf910fb59f1d79ab3b625a63993a108751c6c25d/de/de_DE',
-  licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
-  used: `Toutes les synthèses vocales du kit ${edition.toUpperCase()}, avec débits progressifs par niveau.`,
-});
-write(join(content, 'media', 'credits.json'), credits);
-copy(join(root, 'content', edition, 'README.md'), join(bundle, 'README.md'));
-console.log(bundle);
+async function main() {
+  const edition = process.argv.includes('--v4') ? 'v4' : 'v3';
+  const kitDirectory = edition === 'v4' ? 'linguacap-cours-v4-complete-kit' : 'linguacap-cours-v3-kit';
+  const bundle = join(root, 'target', kitDirectory);
+  for (const level of levels) await compileLevel(level, edition, bundle);
+  const kit = ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'icons.txt'];
+  for (const name of kit) copy(join(root, 'infra', 'content', name), join(bundle, 'infra', 'content', name));
+  write(join(bundle, 'content', 'de', 'media', 'credits.json'), composeCredits(edition));
+  copy(join(root, 'content', edition, 'README.md'), join(bundle, 'README.md'));
+  console.log(bundle);
+}
+
+if (import.meta.url === pathToFileURL(process.argv[1] ?? '').href) await main();

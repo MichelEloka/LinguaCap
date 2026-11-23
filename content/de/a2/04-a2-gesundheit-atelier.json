@@ -1,0 +1,1147 @@
+{
+  "id": "a2-gesundheit-atelier",
+  "title": "Obtenir un rendez-vous au téléphone",
+  "objective": "Décrire une gêne et sa durée, puis confirmer un rendez-vous et les consignes d’accueil.",
+  "prerequisites": [
+    "a2-gesundheit"
+  ],
+  "audioProfile": "a2-debut",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "grammarFocus": [
+    "seit-wehtun",
+    "sollen-consigne-rapportee"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-gesundheit-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "frei",
+      "word": "frei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "libre, disponible",
+      "example": "Haben Sie diese Woche einen Termin frei?",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "passt-das",
+      "word": "Passt das?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Est-ce que cela vous convient ?",
+      "example": "Am Mittwoch um acht Uhr wäre etwas frei. Passt das?",
+      "note": "verbe passen : das passt mir (+ datif)",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "viertelstunde",
+      "word": "Viertelstunde",
+      "article": "die",
+      "plural": "Viertelstunden",
+      "partOfSpeech": "noun",
+      "translation": "le quart d’heure",
+      "example": "Bitte kommen Sie eine Viertelstunde früher.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "viertel",
+      "word": "Viertel",
+      "article": "das",
+      "plural": "Viertel",
+      "partOfSpeech": "noun",
+      "translation": "le quart",
+      "example": "Es ist Viertel nach zehn.",
+      "note": "Viertel nach zehn = 10 h 15 · Viertel vor elf = 10 h 45",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "halb",
+      "word": "halb",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "demi, et demie (pour l’heure)",
+      "example": "Kommen Sie bitte um halb elf.",
+      "note": "halb elf = 10 h 30 : la demi-heure avant onze heures",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "frueher",
+      "word": "früher",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "plus tôt",
+      "example": "Kommen Sie bitte zehn Minuten früher.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "spaeter",
+      "word": "später",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "plus tard",
+      "example": "Geht es am selben Tag etwas später?",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "empfang",
+      "word": "Empfang",
+      "article": "der",
+      "plural": "Empfänge",
+      "partOfSpeech": "noun",
+      "translation": "l’accueil (d’un cabinet, d’un hôtel)",
+      "example": "Am Empfang bekommen Sie ein Formular.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "formular",
+      "word": "Formular",
+      "article": "das",
+      "plural": "Formulare",
+      "partOfSpeech": "noun",
+      "translation": "le formulaire",
+      "example": "Sie bekommen ein kurzes Formular.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "ausfuellen",
+      "word": "ausfüllen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "remplir (un formulaire)",
+      "example": "Muss ich vorher etwas ausfüllen?",
+      "note": "séparable : aus|füllen",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "mitbringen",
+      "word": "mitbringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apporter",
+      "example": "Ich soll meine Versichertenkarte mitbringen.",
+      "note": "séparable : mit|bringen · Perfekt : hat mitgebracht",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "liste",
+      "word": "Liste",
+      "article": "die",
+      "plural": "Listen",
+      "partOfSpeech": "noun",
+      "translation": "la liste",
+      "example": "Bringen Sie die Liste Ihrer Medikamente mit.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "ausweis",
+      "word": "Ausweis",
+      "article": "der",
+      "plural": "Ausweise",
+      "partOfSpeech": "noun",
+      "translation": "la pièce d’identité",
+      "example": "Bringen Sie bitte Ihren Ausweis mit.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "schulter",
+      "word": "Schulter",
+      "article": "die",
+      "plural": "Schultern",
+      "partOfSpeech": "noun",
+      "translation": "l’épaule",
+      "example": "Seit zwei Tagen tun mir die Schultern weh.",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "richtig-verstanden",
+      "word": "Habe ich das richtig verstanden?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Est-ce que j’ai bien compris ?",
+      "example": "Habe ich das richtig verstanden: am Dienstag um acht Uhr dreißig?",
+      "note": null,
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "auf-wiederhoeren",
+      "word": "Auf Wiederhören",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "au revoir (au téléphone)",
+      "example": "Vielen Dank für Ihre Hilfe. Auf Wiederhören!",
+      "note": "en face à face : Auf Wiedersehen",
+      "audio": {
+        "media": "a2-gesundheit-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-gesundheit-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : appeler un cabinet médical",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : appeler un cabinet médical",
+        "description": "Lisez la confirmation envoyée par ce cabinet fictif.\n« Ihr Termin ist am Dienstag um 8.30 Uhr. Bitte kommen Sie eine Viertelstunde früher. Bringen Sie Ihre Versichertenkarte mit. Am Empfang bekommen Sie ein Formular. »\nRepérez le rendez-vous (mardi, 8 h 30), l’heure d’arrivée (un quart d’heure avant, donc 8 h 15), l’objet à apporter (la carte d’assurance maladie) et l’étape sur place (un formulaire à l’accueil).\n\nDIRE DEPUIS QUAND ON A MAL\nSeit + datif s’emploie avec le présent pour une gêne qui dure encore : Seit gestern tut mir das rechte Ohr weh. Avec wehtun, c’est la partie du corps qui commande le verbe : Seit zwei Tagen tun mir die Schultern weh (pluriel, donc tun). Autres modèles : Seit gestern tut mir der Hals weh. Seit zwei Tagen tun mir die Füße weh. Seit Montag habe ich Husten.\n\nLIRE ET CONFIRMER UNE HEURE\n• halb neun = 8 h 30 : la demi-heure avant neuf heures\n• Viertel nach zehn = 10 h 15\n• Viertel vor elf = 10 h 45\nPour confirmer, on reprend l’heure au format numérique : Habe ich das richtig verstanden: am Dienstag um acht Uhr dreißig?\n\nRAPPORTER UNE CONSIGNE\nBringen Sie Ihren Ausweis mit. → Ich soll meinen Ausweis mitbringen. Sollen rapporte ce qu’une autre personne demande ; l’infinitif mitbringen va à la fin.\n\nÀ RETENIR POUR APPELER\n• Ouvrir : Guten Morgen, hier ist … Seit Montag tut mir das Ohr weh.\n• Demander un autre créneau : Geht es am Donnerstagvormittag?\n• Confirmer : Also am Donnerstag um neun Uhr. Ich soll meine Versichertenkarte mitbringen.\nLisez ces répliques à voix haute : l’exercice « Répéter à voix haute » de ce module vérifie ensuite votre prononciation.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-gesundheit-atelier-bestaetigung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-gesundheit-atelier-uhrzeiten",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-gesundheit-atelier-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un rendez-vous au téléphone",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un rendez-vous au téléphone",
+        "description": "Un patient appelle le cabinet « Praxis am Park » pour obtenir un rendez-vous dans la semaine.\n\n1. Écoutez l’appel une première fois sans lire les phrases : quelle est la gêne, et depuis quand ?\n2. Réécoutez pour compléter : le créneau refusé, le créneau accepté, les objets à apporter et l’heure d’arrivée. Vous pouvez écrire les nombres en chiffres.\n3. Les deux dernières questions sont des dictées : de nouvelles phrases utiles pour appeler un cabinet.\nAprès validation, la transcription de l’appel et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-gesundheit-atelier-anruf",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "La gêne et sa durée : complétez la phrase du patient.",
+          "text": "Seit [[1]] tut mir der [[2]] weh.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "gestern"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Hals"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Le patient dit « Seit gestern tut mir der Hals weh » : il a mal à la gorge depuis hier. Der Hals désigne à la fois le cou et la gorge."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Le premier créneau proposé, que le patient refuse : complétez.",
+          "text": "Am Mittwoch um [[1]] Uhr wäre etwas frei.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "acht",
+                "8"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "La secrétaire propose « am Mittwoch um acht Uhr », mais le patient répond « Um acht muss ich arbeiten ». Wäre etwas frei signifie « il y aurait une place »."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Le créneau accepté : complétez l’heure.",
+          "text": "Dann kommen Sie bitte am Mittwoch um [[1]] elf.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "halb"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Halb elf, c’est la demi-heure avant onze heures : 10 h 30. Le patient le confirme en reprenant « zehn Uhr dreißig »."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Les deux choses à apporter : complétez.",
+          "text": "Bringen Sie Ihre [[1]] und die Liste Ihrer [[2]] mit.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Versichertenkarte"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Medikamente"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ],
+          "explanation": "Il faut apporter la carte d’assurance maladie (die Versichertenkarte) et la liste des médicaments (die Medikamente, au pluriel). La particule mit de mitbringen termine la phrase."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Où le patient reçoit-il le formulaire ? Complétez.",
+          "text": "Sie bekommen am [[1]] ein kurzes Formular.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Empfang"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "Der Empfang, c’est l’accueil du cabinet : le formulaire se remplit sur place. Am est la contraction de an dem (datif, réponse à wo?)."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Calculez l’heure d’arrivée : le patient doit venir dix minutes plus tôt. Écrivez les minutes.",
+          "text": "Ich soll um zehn Uhr [[1]] in der Praxis sein.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zwanzig",
+                "20"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Le rendez-vous est à 10 h 30 et la secrétaire dit « Kommen Sie bitte zehn Minuten früher » : il faut arriver à 10 h 20. Früher signifie plus tôt."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase : une gêne qui dure depuis lundi.",
+          "accept": [
+            "Seit Montag tun mir die Ohren weh."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Die Ohren est un pluriel : le verbe se conjugue tun. Mir, au datif, désigne la personne qui a mal, et la particule weh termine la phrase.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la consigne rapportée par le patient.",
+          "accept": [
+            "Ich soll meine Versichertenkarte mitbringen."
+          ],
+          "voice": "sprecher",
+          "explanation": "Sollen rapporte la consigne du cabinet : ich soll, sans terminaison. L’infinitif mitbringen s’écrit en un mot et se place à la fin.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-gesundheit-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : le rendez-vous et les consignes",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : le rendez-vous et les consignes",
+        "description": "Écoutez une première fois l’appel au cabinet pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur la langue : choisissez la phrase correcte sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-gesundheit-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Depuis quand la personne a-t-elle mal à la gorge ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Depuis hier",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Depuis mercredi dernier",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Depuis dix jours",
+              "correct": false
+            }
+          ],
+          "explanation": "Le patient dit « Seit gestern tut mir der Hals weh » : seit gestern signifie depuis hier. Mercredi est le jour du rendez-vous, et aucune durée de dix jours n’est mentionnée.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Pourquoi le premier rendez-vous ne lui convient-il pas ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle prend le train.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle travaille à cette heure-là.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Elle n’a pas sa carte.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Um acht muss ich arbeiten » : à 8 h, la personne travaille. Elle ne parle ni de train ni de carte ; elle demande seulement un créneau plus tard le même jour.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quel rendez-vous est confirmé ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mercredi à 11 h 30",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Jeudi à 8 h",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mercredi à 10 h 30",
+              "correct": true
+            }
+          ],
+          "explanation": "La secrétaire propose « am Mittwoch um halb elf » et le patient confirme « zehn Uhr dreißig ». Halb elf est la demi-heure avant onze heures : 10 h 30, et non 11 h 30.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que faut-il apporter ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "La carte d’assurance et la liste des médicaments",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le formulaire imprimé et un billet",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Uniquement la carte d’assurance",
+              "correct": false
+            }
+          ],
+          "explanation": "« Bringen Sie Ihre Versichertenkarte und die Liste Ihrer Medikamente mit » : deux choses à apporter. Le formulaire, lui, est remis sur place, à l’accueil (am Empfang).",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Comment dire que les oreilles font mal depuis deux jours ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Seit zwei Tage tun mich die Ohren weh.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Seit zwei Tagen tun mir die Ohren weh.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Seit zwei Tagen tut mir die Ohren weh.",
+              "correct": false
+            }
+          ],
+          "explanation": "Die Ohren est un pluriel, donc le verbe est tun, et la personne qui a mal est au datif : mir. Seit demande aussi le datif : seit zwei Tagen, avec -n. « tut mir die Ohren » oublie l’accord.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quelle reformulation confirme qu’il faut arriver dix minutes en avance ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich soll zehn Minuten später kommen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich muss zehn Minuten am Empfang warten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich soll zehn Minuten früher kommen.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Kommen Sie bitte zehn Minuten früher » : früher signifie plus tôt. Ich soll rapporte la consigne de la secrétaire ; später dirait le contraire, et elle ne parle pas d’attendre à l’accueil.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-gesundheit-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : au téléphone avec le cabinet",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : au téléphone avec le cabinet",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute, comme au téléphone. Articulez bien les heures : c’est l’information que votre interlocuteur doit noter. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-gesundheit-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-gesundheit-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis dites depuis quand vous avez mal.",
+          "text": "Seit gestern tut mir der Hals weh.",
+          "accept": [
+            "Seit gestern tut mir der Hals weh."
+          ],
+          "threshold": 75,
+          "explanation": "Seit gestern ouvre la phrase : le verbe tut suit directement. Le h de Hals s’aspire et weh se prononce avec un e long."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez un rendez-vous dans la semaine.",
+          "text": "Haben Sie diese Woche einen Termin frei?",
+          "accept": [
+            "Haben Sie diese Woche einen Termin frei?"
+          ],
+          "threshold": 75,
+          "explanation": "Question fermée : le verbe haben ouvre la phrase et la voix monte sur frei. Dans Woche, le ch après o se prononce au fond de la gorge."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez un créneau plus tard le même jour.",
+          "text": "Geht es am selben Tag etwas später?",
+          "accept": [
+            "Geht es am selben Tag etwas später?"
+          ],
+          "threshold": 75,
+          "explanation": "Geht es …? est une façon polie de demander si c’est possible. Le g final de Tag se prononce [k] et le ä de später comme le « è » de « mère »."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis confirmez le rendez-vous.",
+          "text": "Also am Mittwoch um halb elf.",
+          "accept": [
+            "Also am Mittwoch um halb elf.",
+            "Also am Mittwoch um halb 11."
+          ],
+          "threshold": 75,
+          "explanation": "Halb elf signifie 10 h 30. Dans Mittwoch, l’accent porte sur MITT, et le ch final se prononce au fond de la gorge."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez s’il y a un formulaire à remplir.",
+          "text": "Muss ich vorher etwas ausfüllen?",
+          "accept": [
+            "Muss ich vorher etwas ausfüllen?"
+          ],
+          "threshold": 75,
+          "explanation": "Le verbe de modalité muss ouvre la question et l’infinitif ausfüllen la termine. Accentuez la particule : AUS-füllen ; le ü se dit comme le « u » français."
+        }
+      ]
+    },
+    {
+      "id": "a2-gesundheit-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : obtenir puis déplacer un rendez-vous",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : obtenir puis déplacer un rendez-vous",
+        "description": "Situation : vous avez mal à la tête depuis deux jours. Vendredi, vous êtes libre, sauf entre 9 h et midi. Au téléphone, le cabinet vous propose d’abord 9 h, puis 13 h 30, en vous demandant de passer à l’accueil dix minutes avant. Plus tard, un nouvel empêchement vous oblige à déplacer ce rendez-vous.\n\nModèles pour l’appel : Seit zwei Tagen habe ich Kopfschmerzen. Um neun muss ich arbeiten. Geht es am Freitag etwas später? Also am Freitag um halb zwei. Ich soll zehn Minuten früher kommen.\nModèle pour le message : Leider kann ich am Freitag um halb zwei nicht kommen. Haben Sie am Montagvormittag noch einen Termin frei?\n\nPréparez quelques mots-clés, puis réalisez les deux parties. Avant d’envoyer, vérifiez que vous ne confondez pas l’heure du rendez-vous (13 h 30) et l’heure d’arrivée (13 h 20).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-gesundheit-atelier-mail",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre appel au cabinet (une minute environ) : décrivez votre gêne et sa durée, refusez le créneau de 9 h en donnant la raison, demandez un créneau l’après-midi, puis confirmez le rendez-vous de 13 h 30 et votre heure d’arrivée.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Un nouvel empêchement survient. Écrivez au cabinet un message de 35 à 50 mots pour déplacer le rendez-vous du vendredi à 13 h 30 vers lundi matin. Commencez par une formule d’ouverture et terminez par une formule de fin.",
+          "maxChars": 800,
+          "minWords": 35
+        },
+        "checklist": [
+          "J’ai dit depuis quand j’ai mal : Seit zwei Tagen habe ich Kopfschmerzen.",
+          "J’ai refusé le créneau de 9 h en donnant la raison.",
+          "J’ai confirmé le rendez-vous de 13 h 30 et l’heure d’arrivée, dix minutes avant.",
+          "Mon message nomme le rendez-vous à déplacer (vendredi, 13 h 30) et propose lundi matin.",
+          "Mon message commence par « Sehr geehrte Damen und Herren » et se termine par « Mit freundlichen Grüßen »."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-gesundheit-atelier-dialogue",
+      "kind": "audio",
+      "title": "Obtenir un rendez-vous au téléphone · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Praxis am Park, guten Morgen. Wie kann ich Ihnen helfen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Guten Morgen. Seit gestern tut mir der Hals weh. Haben Sie diese Woche einen Termin frei?"
+        },
+        {
+          "voice": "frau",
+          "text": "Am Mittwoch um acht Uhr wäre etwas frei. Passt das?"
+        },
+        {
+          "voice": "mann",
+          "text": "Um acht muss ich arbeiten. Geht es am selben Tag etwas später?"
+        },
+        {
+          "voice": "frau",
+          "text": "Dann kommen Sie bitte am Mittwoch um halb elf. Bringen Sie Ihre Versichertenkarte und die Liste Ihrer Medikamente mit."
+        },
+        {
+          "voice": "mann",
+          "text": "Also am Mittwoch um zehn Uhr dreißig. Muss ich vorher etwas ausfüllen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, Sie bekommen am Empfang ein kurzes Formular. Kommen Sie bitte zehn Minuten früher."
+        },
+        {
+          "voice": "mann",
+          "text": "Alles klar. Vielen Dank für Ihre Hilfe. Auf Wiederhören!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a2-gesundheit-atelier-bestaetigung",
+      "kind": "image",
+      "title": "La confirmation du cabinet",
+      "alt": "Confirmation de rendez-vous d’un cabinet médical : « Ihr Termin ist am Dienstag um 8.30 Uhr. Bitte kommen Sie eine Viertelstunde früher. Bringen Sie Ihre Versichertenkarte mit. Am Empfang bekommen Sie ein Formular. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "setting": "doctor",
+        "icon": "calendar-check",
+        "title": "Terminbestätigung",
+        "subtitle": "Hausarztpraxis am Ring",
+        "size": 31,
+        "lines": [
+          {
+            "icon": "calendar-days",
+            "text": "Ihr Termin ist [am Dienstag um 8.30 Uhr]."
+          },
+          {
+            "icon": "clock",
+            "text": "Bitte kommen Sie eine [Viertelstunde früher]."
+          },
+          {
+            "icon": "id-card",
+            "text": "Bringen Sie Ihre [Versichertenkarte] mit."
+          },
+          {
+            "icon": "clipboard-list",
+            "text": "Am Empfang bekommen Sie ein [Formular]."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-gesundheit-atelier-uhrzeiten",
+      "kind": "image",
+      "title": "Trois heures à confirmer",
+      "alt": "Trois horloges : 8 h 30, « halb neun » ; 10 h 15, « Viertel nach zehn » ; 10 h 45, « Viertel vor elf ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "clocks",
+        "items": [
+          {
+            "time": "08:30",
+            "label": "halb neun",
+            "sub": "8.30 Uhr"
+          },
+          {
+            "time": "10:15",
+            "label": "Viertel nach zehn",
+            "sub": "10.15 Uhr"
+          },
+          {
+            "time": "10:45",
+            "label": "Viertel vor elf",
+            "sub": "10.45 Uhr"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-gesundheit-atelier-anruf",
+      "kind": "image",
+      "title": "Demander un rendez-vous par téléphone",
+      "alt": "Au téléphone, l’accueil du cabinet demande « Wie kann ich Ihnen helfen? » et le patient demande « Haben Sie einen Termin frei? ». En haut : un téléphone, un calendrier et une horloge.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "doctor",
+        "people": [
+          {
+            "name": "Empfang",
+            "say": "Wie kann ich Ihnen helfen?"
+          },
+          {
+            "name": "Patient",
+            "say": "Haben Sie einen Termin frei?"
+          }
+        ],
+        "items": [
+          "phone-call",
+          "calendar-days",
+          "clock"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-gesundheit-atelier-mail",
+      "kind": "image",
+      "title": "Déplacer le rendez-vous par écrit",
+      "alt": "Courriel au cabinet, objet « Termin am Freitag » : « Sehr geehrte Damen und Herren, leider kann ich am Freitag um halb zwei nicht kommen. Haben Sie am Montagvormittag noch einen Termin frei? Mit freundlichen Grüßen »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Neue E-Mail",
+        "size": 30,
+        "meta": [
+          [
+            "An",
+            "Hausarztpraxis am Ring"
+          ],
+          [
+            "Betreff",
+            "Termin am Freitag"
+          ]
+        ],
+        "lines": [
+          "Sehr geehrte Damen und Herren,",
+          "leider kann ich am Freitag [um halb zwei] nicht kommen. Haben Sie [am Montagvormittag] noch einen Termin frei?",
+          "Mit freundlichen Grüßen"
+        ]
+      }
+    },
+    {
+      "key": "a2-gesundheit-atelier-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter un rendez-vous au téléphone",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Seit Montag tun mir die Ohren weh."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un rendez-vous au téléphone",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich soll meine Versichertenkarte mitbringen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : au téléphone avec le cabinet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Seit gestern tut mir der Hals weh."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : au téléphone avec le cabinet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Haben Sie diese Woche einen Termin frei?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : au téléphone avec le cabinet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Geht es am selben Tag etwas später?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : au téléphone avec le cabinet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Also am Mittwoch um halb elf."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : au téléphone avec le cabinet",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Muss ich vorher etwas ausfüllen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-gesundheit-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Obtenir un rendez-vous au téléphone",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "frei"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Passt das?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Viertelstunde, die Viertelstunden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Viertel, die Viertel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "halb"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "früher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "später"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Empfang, die Empfänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Formular, die Formulare"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausfüllen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitbringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Liste, die Listen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausweis, die Ausweise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schulter, die Schultern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Habe ich das richtig verstanden?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Auf Wiederhören"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

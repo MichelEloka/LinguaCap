@@ -1,0 +1,3289 @@
+{
+  "id": "a2-kultur",
+  "title": "Typisch deutsch ? École, traditions, environnement",
+  "objective": "Distinguer clichés et réalités sur l’Allemagne, expliquer simplement le système scolaire et l’apprentissage (Ausbildung), trier ses déchets et parler d’écologie au quotidien, présenter les grandes fêtes de l’année, reconnaître quelques variantes régionales de l’allemand (Autriche, Suisse), choisir entre du et Sie, comparer avec le comparatif et le superlatif (als, so … wie, am besten) et donner son avis (Ich finde, dass … ; Meiner Meinung nach … ; Ich glaube, …).",
+  "prerequisites": [
+    "a2-verbes-prepositions"
+  ],
+  "audioProfile": "a2-suite",
+  "sources": [
+    "Deutsch im Blick, Kapitel 9 « Was ist deutsch? » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Was ist deutsch? ; An der Schule ; Nach der Schule ; Die Umwelt)",
+    "Deutsch im Blick, Kapitel 5 « Familie, Feste und Feiertage » (COERLL, Université du Texas à Austin, CC BY 4.0) : fêtes et jours fériés",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre « Die Grenze » (2001, parties A et D) — mots régionaux et dialectes de l’allemand (Brötchen, Kartoffel, Sahne…), continuum des dialectes de Hambourg à Zurich, la Suisse hors de l’UE et de la zone euro mais dans l’espace Schengen ; scénarios d’échange des chapitres « Die Grenze » et « Das Ausland » (2002) — épeler son nom, choisir entre du et Sie (c’est la personne la plus âgée ou de rang supérieur qui décide), « Bis später » seulement si l’on se revoit vraiment, s’installer et étudier à l’étranger ; situations du blog de Chloé et du podcast « Neu in Graz »",
+    "Deutsch im Blick, Kapitel 5, 9 et 10 (COERLL, Université du Texas à Austin) : enregistrements natifs voc_09_01_deutsch, voc_09_05_umwelt et voc_10_05_germans, et photos k05/011-037, k05/014-050, k05/028-105, k09/001-005 et k09/030-099 (CC BY 4.0)"
+  ],
+  "grammarFocus": [
+    "comparatif-superlatif",
+    "avis-dass-meinung"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-kultur.mjs",
+  "vocabulary": [
+    {
+      "id": "grundschule",
+      "word": "Grundschule",
+      "article": "die",
+      "plural": "Grundschulen",
+      "partOfSpeech": "noun",
+      "translation": "l’école primaire",
+      "example": "Alle Kinder gehen zuerst in die Grundschule.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "gymnasium",
+      "word": "Gymnasium",
+      "article": "das",
+      "plural": "Gymnasien",
+      "partOfSpeech": "noun",
+      "translation": "le lycée (filière générale)",
+      "example": "Felix geht aufs Gymnasium.",
+      "note": "faux ami : ce n’est pas une salle de sport",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "abitur",
+      "word": "Abitur",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’examen de fin d’études secondaires",
+      "example": "Nach dem Gymnasium macht man das Abitur.",
+      "note": "comparable au baccalauréat",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "note",
+      "word": "Note",
+      "article": "die",
+      "plural": "Noten",
+      "partOfSpeech": "noun",
+      "translation": "la note",
+      "example": "Eine Eins ist die beste Note.",
+      "note": "de 1 (sehr gut) à 6 (ungenügend)",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "fach",
+      "word": "Fach",
+      "article": "das",
+      "plural": "Fächer",
+      "partOfSpeech": "noun",
+      "translation": "la matière (scolaire)",
+      "example": "Mein Lieblingsfach ist Geschichte.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ausbildung",
+      "word": "Ausbildung",
+      "article": "die",
+      "plural": "Ausbildungen",
+      "partOfSpeech": "noun",
+      "translation": "la formation professionnelle",
+      "example": "Jana macht eine Ausbildung zur Elektronikerin.",
+      "note": "en alternance : entreprise et école professionnelle",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "betrieb",
+      "word": "Betrieb",
+      "article": "der",
+      "plural": "Betriebe",
+      "partOfSpeech": "noun",
+      "translation": "l’entreprise",
+      "example": "Der Azubi arbeitet drei Tage im Betrieb.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "berufsschule",
+      "word": "Berufsschule",
+      "article": "die",
+      "plural": "Berufsschulen",
+      "partOfSpeech": "noun",
+      "translation": "l’école professionnelle",
+      "example": "Zwei Tage pro Woche lernt sie in der Berufsschule.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "studieren",
+      "word": "studieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire des études supérieures",
+      "example": "Meine Schwester möchte Medizin studieren.",
+      "note": "réviser un examen : lernen",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "umwelt",
+      "word": "Umwelt",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’environnement",
+      "example": "Wir wollen die Umwelt schützen.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "muell",
+      "word": "Müll",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les déchets, les ordures",
+      "example": "Bei uns trennen alle den Müll.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "trennen",
+      "word": "trennen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "trier, séparer",
+      "example": "In Deutschland muss man den Müll trennen.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "biotonne",
+      "word": "Biotonne",
+      "article": "die",
+      "plural": "Biotonnen",
+      "partOfSpeech": "noun",
+      "translation": "la poubelle des déchets organiques",
+      "example": "Kartoffelschalen kommen in die Biotonne.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "altpapier",
+      "word": "Altpapier",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les vieux papiers",
+      "example": "Alte Zeitungen kommen ins Altpapier.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "pfand",
+      "word": "Pfand",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la consigne",
+      "example": "Für die Flasche bekomme ich 25 Cent Pfand zurück.",
+      "note": "die Pfandflasche : la bouteille consignée",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "umweltfreundlich",
+      "word": "umweltfreundlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "écologique",
+      "example": "Das Fahrrad ist umweltfreundlich.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sparen",
+      "word": "sparen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "économiser",
+      "example": "Ich möchte Energie sparen.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "vorurteil",
+      "word": "Vorurteil",
+      "article": "das",
+      "plural": "Vorurteile",
+      "partOfSpeech": "noun",
+      "translation": "le préjugé",
+      "example": "Ich glaube, das ist ein Vorurteil.",
+      "note": "v se prononce [f] ; accent sur VOR",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "klischee",
+      "word": "Klischee",
+      "article": "das",
+      "plural": "Klischees",
+      "partOfSpeech": "noun",
+      "translation": "le cliché",
+      "example": "Die Pünktlichkeit ist ein Klischee.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "tradition",
+      "word": "Tradition",
+      "article": "die",
+      "plural": "Traditionen",
+      "partOfSpeech": "noun",
+      "translation": "la tradition",
+      "example": "Diese Tradition ist bei uns sehr wichtig.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "puenktlich",
+      "word": "pünktlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "ponctuel, à l’heure",
+      "example": "Bei der Arbeit sind alle pünktlich.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "feiertag",
+      "word": "Feiertag",
+      "article": "der",
+      "plural": "Feiertage",
+      "partOfSpeech": "noun",
+      "translation": "le jour férié",
+      "example": "Der 3. Oktober ist ein Feiertag.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "fest",
+      "word": "Fest",
+      "article": "das",
+      "plural": "Feste",
+      "partOfSpeech": "noun",
+      "translation": "la fête",
+      "example": "Der Karneval ist das schönste Fest im Jahr.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "weihnachtsmarkt",
+      "word": "Weihnachtsmarkt",
+      "article": "der",
+      "plural": "Weihnachtsmärkte",
+      "partOfSpeech": "noun",
+      "translation": "le marché de Noël",
+      "example": "Wir treffen uns auf dem Weihnachtsmarkt.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "meinung",
+      "word": "Meinung",
+      "article": "die",
+      "plural": "Meinungen",
+      "partOfSpeech": "noun",
+      "translation": "l’opinion, l’avis",
+      "example": "Meiner Meinung nach ist das System sinnvoll.",
+      "note": "Meiner Meinung nach + verbe en 2e position",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 24
+      }
+    },
+    {
+      "id": "finden",
+      "word": "finden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "trouver (donner son avis)",
+      "example": "Ich finde, dass das System sinnvoll ist.",
+      "note": "Ich finde, dass … : verbe conjugué à la fin",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 25
+      }
+    },
+    {
+      "id": "glauben",
+      "word": "glauben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "croire",
+      "example": "Ich glaube, das ist ein Klischee.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 26
+      }
+    },
+    {
+      "id": "sinnvoll",
+      "word": "sinnvoll",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "sensé, utile",
+      "example": "Ich finde die Mülltrennung sinnvoll.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 27
+      }
+    },
+    {
+      "id": "duzen",
+      "word": "duzen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "tutoyer",
+      "example": "Wollen wir uns duzen?",
+      "note": "das Du anbieten : proposer le tutoiement",
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 28
+      }
+    },
+    {
+      "id": "siezen",
+      "word": "siezen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "vouvoyer",
+      "example": "Meine Professorin muss ich siezen.",
+      "note": null,
+      "audio": {
+        "media": "a2-kultur-lexique",
+        "line": 29
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-kultur-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : école, formation et environnement",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Schule, Ausbildung, Umwelt — Les mots-clés",
+        "description": "Qu’est-ce qui est « typiquement allemand » ? Ce module part de trois sujets dont on parle souvent : l’école, la formation professionnelle et l’environnement. N’oubliez pas que l’Allemagne est un État fédéral de seize Länder (die Bundesländer) : chaque Land organise ses écoles à sa façon.\n\nL’ÉCOLE (die Schule)\n• die Grundschule — l’école primaire (en général de 6 à 10 ans)\n• die weiterführende Schule — l’école secondaire : das Gymnasium, die Realschule, die Gesamtschule…\n• das Abitur — l’examen de fin d’études secondaires, comparable au baccalauréat\n• der Schüler / die Schülerin — l’élève\n• das Fach (die Fächer) — la matière\n• die Note — la note : de 1 (sehr gut) à 6 (ungenügend). Ici, 1 est la meilleure note !\n• die Ferien — les vacances (scolaires)\n\nLA FORMATION (die Ausbildung)\n• eine Ausbildung machen — suivre une formation professionnelle en alternance\n• der / die Auszubildende, familier : der / die Azubi — l’apprenti(e)\n• der Betrieb — l’entreprise\n• die Berufsschule — l’école professionnelle\n• studieren, das Studium — faire des études supérieures (à l’université)\n• sich bewerben (um eine Stelle / bei einer Firma) — postuler (à un poste / dans une entreprise)\n\nL’ENVIRONNEMENT (die Umwelt)\n• der Müll, der Abfall — les déchets\n• den Müll trennen, die Mülltrennung — trier les déchets, le tri\n• die Biotonne — la poubelle des déchets organiques\n• der gelbe Sack, die gelbe Tonne — les emballages (plastique, métal)\n• das Altpapier — les vieux papiers\n• der Restmüll — les autres déchets\n• das Pfand — la consigne ; die Pfandflasche — la bouteille consignée\n• Energie sparen, Strom sparen — économiser l’énergie, l’électricité\n• umweltfreundlich — écologique\n• mit dem Fahrrad / mit Bus und Bahn fahren — se déplacer à vélo / en transports en commun\nLes couleurs des poubelles peuvent changer d’une ville à l’autre : regardez les autocollants sur les conteneurs.\n\nATTENTION AUX FAUX AMIS\n• das Gymnasium = le lycée (une salle de sport se dit « das Fitnessstudio » ou, à l’école, « die Turnhalle »)\n• studieren = faire des études supérieures ; pour réviser un examen, on dit « lernen » : Ich lerne für die Prüfung.\n• die Hochschule = un établissement d’enseignement supérieur, pas un lycée.\n\nÉcoutez l’enregistrement et répétez chaque mot et chaque phrase à voix haute.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-kultur-wortschatz-bild",
+          "usage": "illustration",
+          "caption": "Das Abitur, die Ausbildung, die Mülltrennung, die Pfandflasche, das Fahrrad, der Strom",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter : école, formation, environnement",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-native-wortschatz",
+      "kind": "lesson",
+      "title": "Écouter et répéter : clichés, valeurs et traditions (voix natives)",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Rund um die Deutschen — Was ist deutsch?",
+        "description": "Voici deux enregistrements de locuteurs natifs tirés du manuel Deutsch im Blick. Le premier rassemble des mots pour parler des clichés et des traditions, le second des qualités qu’on associe souvent à l’Allemagne. Écoutez une première fois en suivant la liste, puis réécoutez : mettez l’enregistrement en pause après chaque mot et répétez-le à voix haute, avec son article.\n\n1. RUND UM DIE DEUTSCHEN — CLICHÉS ET TRADITIONS\n• keinen Humor haben — ne pas avoir d’humour\n• jammern — se plaindre, râler\n• pünktlich sein — être ponctuel ; überpünktlich sein — être ponctuel à l’excès, toujours en avance\n• die Sitte, die Sitten — la coutume, les coutumes\n• tauschen — échanger\n• die Tradition, die Traditionen — la tradition, les traditions\n• die Umfrage, die Umfragen — le sondage, les sondages\n• das Vorurteil, die Vorurteile — le préjugé, les préjugés\nRemarquez :\n• Les noms en -ion sont féminins et accentués sur la fin : die TradiTION, die TradiTIOnen.\n• Le préfixe über- renforce un adjectif : pünktlich → überpünktlich.\n• Dans Vorurteil, le v se prononce « f » et l’accent tombe sur VOR.\n\n2. WAS IST DEUTSCH? — DES VALEURS (ET UN DÉFAUT)\n• die Leistung, die Leistungen — la performance, le résultat\n• der Mut — le courage\n• die Sicherheit — la sécurité\n• sparsam — économe ; sauber — propre\n• die Toleranz — la tolérance\n• die Unabhängigkeit — l’indépendance\n• unverschämt — effronté, insolent (voici le défaut !)\n• verantwortlich — responsable ; die Verantwortung — la responsabilité\n• das Vertrauen — la confiance\n• die Wahrheit, die Wahrheiten — la vérité, les vérités\nRemarquez :\n• Les noms en -ung, -heit et -keit sont toujours féminins : die Leistung, die Wahrheit, die Unabhängigkeit.\n• Au début d’un mot, sp se prononce « chp » : sparsam. Devant une voyelle, s se prononce « z » : sauber, die Sicherheit.\n• Comme dans Vorurteil, le v de verantwortlich et de Vertrauen se prononce « f ».\n\nÀ VOUS\n1. Répétez chaque mot juste après le locuteur, en imitant sa mélodie.\n2. Cachez la transcription. Mettez sur pause après chaque singulier et dites le pluriel avant de l’entendre.\n3. Donnez votre avis à voix haute en trois ou quatre phrases : Man sagt, die Deutschen sind überpünktlich und haben keinen Humor. Ich glaube, das ist ein Vorurteil. Meiner Meinung nach sind viele Deutsche sparsam und umweltfreundlich. Bei uns ist die Tradition … sehr wichtig.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-kultur-deutsche-native",
+          "usage": "audio",
+          "caption": "Rund um die Deutschen : clichés et traditions",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-werte-native",
+          "usage": "audio",
+          "caption": "Was ist deutsch? : des valeurs, au singulier et au pluriel",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : clichés et avis",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : clichés et avis",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute. Soignez les voyelles avec Umlaut (pünktlich, Müll) et le « sp » de sparsam, prononcé « chp ». Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-kultur-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : nuancer un cliché.",
+          "text": "Ich glaube, das stimmt nur teilweise.",
+          "accept": [
+            "Ich glaube, das stimmt nur teilweise."
+          ],
+          "threshold": 75,
+          "explanation": "Teilweise (en partie) est accentué sur TEIL, et ei se prononce « aï ». Sans dass, la seconde partie garde l’ordre normal : das stimmt …"
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : un cliché sur les Allemands.",
+          "text": "Viele Deutsche sind sehr pünktlich.",
+          "accept": [
+            "Viele Deutsche sind sehr pünktlich."
+          ],
+          "threshold": 75,
+          "explanation": "Le ü de pünktlich se prononce lèvres arrondies, comme le « u » de « tu ». Viele nuance le cliché : pas tous les Allemands."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : donner son avis.",
+          "text": "Meiner Meinung nach sind viele Deutsche sparsam.",
+          "accept": [
+            "Meiner Meinung nach sind viele Deutsche sparsam."
+          ],
+          "threshold": 75,
+          "explanation": "Meiner Meinung nach est suivi directement du verbe sind. Au début d’un mot, sp se prononce « chp » : sparsam."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : parler du tri des déchets.",
+          "text": "Bei uns trennen alle den Müll.",
+          "accept": [
+            "Bei uns trennen alle den Müll."
+          ],
+          "threshold": 75,
+          "explanation": "Le ü de Müll est bref, suivi de deux l. Trennen garde un e bref : TREN-nen."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : comparer deux moyens de transport.",
+          "text": "Das Fahrrad ist billiger als das Auto.",
+          "accept": [
+            "Das Fahrrad ist billiger als das Auto."
+          ],
+          "threshold": 75,
+          "explanation": "Billiger als : comparatif en -er suivi de als. Entre deux voyelles, le g de billiger se prononce comme un vrai g."
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez, puis répétez : parler d’une tradition.",
+          "text": "Diese Tradition ist bei uns sehr wichtig.",
+          "accept": [
+            "Diese Tradition ist bei uns sehr wichtig."
+          ],
+          "threshold": 75,
+          "explanation": "Les noms en -tion se prononcent « tsion » et sont accentués sur la fin : Tradi-TION. Le -ig de wichtig se dit comme le « ch » de ich."
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : le tri des déchets en colocation",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Ist das typisch deutsch? — Est-ce typiquement allemand ?",
+        "description": "Hugo vient de Lille. Il fait un stage à Fribourg-en-Brisgau (Freiburg) et habite en colocation (in einer WG) avec Lena. Ce soir, dans la cuisine, il découvre le tri des déchets… Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nLena : Hugo, warte mal! Der Joghurtbecher kommt nicht in den Restmüll, sondern in den gelben Sack.\nHugo : Echt? In Frankreich trennen wir auch den Müll, aber hier gibt es viel mehr Tonnen als bei uns!\nLena : Das stimmt. Also: Papier kommt in die blaue Tonne, Essensreste kommen in die Biotonne, Plastik und Dosen in den gelben Sack. Und Glas bringen wir zum Container.\nHugo : Und die leeren Wasserflaschen?\nLena : Die bringst du in den Supermarkt. Für jede Plastikflasche bekommst du fünfundzwanzig Cent Pfand zurück.\nHugo : Ach so! Ehrlich gesagt finde ich das ziemlich kompliziert. Ist das typisch deutsch?\nLena : Vielleicht! Aber ich finde, dass das System sinnvoll ist. Und meiner Meinung nach ist es nicht so schwierig wie die deutsche Grammatik!\nHugo : Ha, da hast du recht! Und was ist für dich noch typisch deutsch? Die Pünktlichkeit?\nLena : Ich glaube, das ist ein Klischee. Mein Bruder kommt zum Beispiel immer zu spät. Und unsere Züge sind auch nicht immer pünktlich!\nHugo : Stimmt! Hier in Freiburg fahre ich jetzt fast immer Fahrrad. Das ist billiger als das Auto, und in der Stadt bin ich damit am schnellsten.\nLena : Siehst du? Du bist schon fast so deutsch wie ich!\nHugo : Na ja, nicht ganz. Das Brot hier ist wirklich gut, aber das Baguette aus meiner Bäckerei in Lille ist immer noch das beste!\nLena : Typisch französisch!\n\nGRAMMAIRE 1 : COMPARER\n• Le comparatif : adjectif + -er, suivi de « als ». billig → billiger als ; schnell → schneller als.\n  Das Fahrrad ist billiger als das Auto. Hier gibt es mehr Tonnen als in Frankreich.\n• L’égalité : so + adjectif + wie (« genauso » pour insister, « nicht so … wie » à la forme négative).\n  Du bist fast so deutsch wie ich. Das ist nicht so schwierig wie die Grammatik.\n• Le superlatif :\n  – après un verbe : am + adjectif + -sten. Mit dem Fahrrad bin ich am schnellsten.\n  – devant un nom (même sous-entendu) : der / die / das + adjectif + -ste. die schönste Stadt, das beste Baguette ; Das Baguette aus Lille ist das beste.\n• Beaucoup d’adjectifs courts prennent un Umlaut : alt → älter → am ältesten ; groß → größer → am größten ; jung → jünger → am jüngsten ; warm → wärmer → am wärmsten.\n• Formes irrégulières : gut → besser → am besten ; viel → mehr → am meisten ; gern → lieber → am liebsten ; hoch → höher → am höchsten.\n• Après -t, -d, -s, -ß, -z ou -sch, le superlatif prend en général un -e- : am ältesten, am heißesten, am kürzesten (mais : am größten).\n• Attention : « als » après un comparatif (größer als), « wie » pour l’égalité (so groß wie).\n\nGRAMMAIRE 2 : DONNER SON AVIS\n• Ich finde, dass das System sinnvoll ist. — Après « dass », le verbe conjugué va à la fin.\n• Ich finde das System sinnvoll. / Ich finde, das System ist sinnvoll. — Sans « dass », l’ordre reste normal.\n• Meiner Meinung nach ist das nicht so schwierig. — « Meiner Meinung nach » occupe la première place : le verbe vient juste après.\n• Ich glaube, das ist ein Klischee. / Ich glaube, dass das ein Klischee ist. — Je crois que c’est un cliché.\n• Réagir : Da hast du recht. — Das stimmt (nicht). — Das stimmt nur teilweise. — Das sehe ich anders. — Das kommt darauf an.\n\nUn cliché contient parfois une part de vérité, mais il ne décrit jamais tout le monde. Pour nuancer : « viele Deutsche … », « manche … », « nicht alle … », « Das stimmt nur teilweise. »",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-kultur-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : Lena et Hugo dans la cuisine",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-native-umwelt",
+      "kind": "exercise",
+      "title": "Vérifier : les mots de l’environnement (voix native)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Die Umwelt — Wörter aus der Aufnahme",
+        "description": "Un locuteur natif lit une liste de mots du manuel Deutsch im Blick sur l’environnement. Écoutez (autant de fois que nécessaire), puis répondez aux questions : toutes les réponses s’entendent dans l’enregistrement. La transcription s’affichera après votre réponse.\n\nPOUR BIEN COMPRENDRE\n• der Müll — les déchets ; das Recycling — le recyclage\n• sparen — économiser ; der Strom — l’électricité ; verbrauchen — consommer\n• die Taste — la touche (d’un appareil)\n• der Treibhauseffekt — l’effet de serre ; tropfen — goutter\n• das Umweltbewusstsein — la conscience écologique ; umweltfreundlich — écologique\n• der Unfall — l’accident ; verträglich — supportable, sans danger\n• der Verkehr — la circulation ; der Wasserhahn — le robinet\n\nL’IMAGE\nSur ce chalet de montagne (en Bavière, d’après le manuel), un panneau peint en écriture gothique s’adresse aux randonneurs : « Bergfreunde und Wandersleut’, geht nicht ab von Weg und Steig, haltet sauber Wald und Flur, sonst wird zum Müllplatz die Natur. » (Amis de la montagne et randonneurs, ne quittez pas les chemins, gardez propres la forêt et les champs, sinon la nature devient une décharge.)\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Comment dit-on « le tri des déchets » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Müll",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das Recycling",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Mülltrennung",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "der Verkehr",
+              "correct": false
+            }
+          ],
+          "explanation": "Die Mülltrennung vient de trennen (séparer, trier) : c’est le tri des déchets. Der Müll désigne les déchets eux-mêmes et das Recycling leur recyclage.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quel verbe entendez-vous juste après « die Umwelt » ? Die Umwelt …",
+          "options": [
+            {
+              "id": "a",
+              "label": "schonen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "schützen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "trennen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "verbrauchen",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « die Umwelt schonen » : ménager, préserver l’environnement. Schützen a un sens proche, mais ce n’est pas le mot lu ; verbrauchen signifie consommer.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Comment appelle-t-on, familièrement, une personne qui ne fait aucun effort pour l’environnement ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "das Umweltbewusstsein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "der Umweltmuffel",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "umweltfreundlich",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "der Unfall",
+              "correct": false
+            }
+          ],
+          "explanation": "Der Umweltmuffel désigne familièrement quelqu’un qui ne fait aucun effort pour l’environnement (ein Muffel : un ronchon). Das Umweltbewusstsein est au contraire la conscience écologique.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Pour ne pas gaspiller l’eau, que faut-il faire ? Complétez l’expression entendue : den Wasserhahn …",
+          "options": [
+            {
+              "id": "a",
+              "label": "aufmachen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "tropfen lassen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "verbrauchen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "zudrehen",
+              "correct": true
+            }
+          ],
+          "explanation": "On entend « den Wasserhahn zudrehen » : fermer le robinet en le tournant. Le laisser goutter (tropfen lassen) ou l’ouvrir (aufmachen) gaspillerait l’eau.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel est le pluriel de « die Veranstaltung » (l’événement) ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Veranstaltungen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Veranstaltungs",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Veranstalter",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Veranstaltung",
+              "correct": false
+            }
+          ],
+          "explanation": "Les noms en -ung sont féminins et prennent -en au pluriel : die Veranstaltung, die Veranstaltungen. Der Veranstalter est l’organisateur, pas l’événement.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Laquelle de ces expressions entendez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "an etwas denken",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf etwas warten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "an etwas teilnehmen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "mit etwas spielen",
+              "correct": false
+            }
+          ],
+          "explanation": "Le locuteur lit « teilnehmen an etwas », puis « an etwas teilnehmen » : participer à quelque chose (an + datif). Les autres expressions ne figurent pas dans la liste.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-umwelt-native",
+          "usage": "audio",
+          "caption": "Die Umwelt : les mots de l’environnement",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-berghuette-foto",
+          "usage": "illustration",
+          "caption": "„Haltet sauber Wald und Flur“ — un panneau sur un chalet de montagne",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-lesen",
+      "kind": "exercise",
+      "title": "Vérifier : lire une lettre sur l’école allemande",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Schule in Deutschland — Le courriel de Katrin",
+        "description": "Sandrine, une Française, a demandé à son amie allemande Katrin comment fonctionne l’école en Allemagne. Lisez la réponse de Katrin, puis répondez aux questions.\n\nBetreff: Schule in Deutschland\n\nLiebe Sandrine,\n\nvielen Dank für deine Mail! Du möchtest wissen, wie die Schule in Deutschland funktioniert. Das ist nicht so einfach, denn jedes Bundesland hat sein eigenes System. Aber ich versuche es!\n\nIn den meisten Bundesländern gehen alle Kinder zuerst vier Jahre in die Grundschule. Danach wechseln sie auf eine weiterführende Schule, zum Beispiel aufs Gymnasium oder auf die Realschule. Unser Sohn Felix ist auf dem Gymnasium und macht in drei Jahren Abitur. Sein Schultag ist kürzer als in Frankreich: Der Unterricht beginnt um acht Uhr, und Felix ist meistens schon um halb zwei zu Hause.\n\nUnsere Tochter Jana hat letztes Jahr die Realschule abgeschlossen. Sie wollte nicht studieren, sondern lieber praktisch arbeiten. Jetzt macht sie eine Ausbildung zur Elektronikerin. Drei Tage pro Woche arbeitet sie in einem Betrieb, zwei Tage lernt sie in der Berufsschule. Und sie verdient schon ihr eigenes Geld! Das findet sie natürlich am besten.\n\nIch finde, dass dieses System gut für junge Leute ist, die lieber praktisch lernen. Wie ist es bei euch in Frankreich?\n\nLiebe Grüße\nKatrin",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Warum ist es nicht einfach, das deutsche Schulsystem zu erklären?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil jedes Bundesland sein eigenes System hat.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil Katrin das System nicht gut kennt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil alle Kinder auf Privatschulen gehen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil es jedes Jahr neue Regeln gibt.",
+              "correct": false
+            }
+          ],
+          "explanation": "Katrin écrit « Das ist nicht so einfach, denn jedes Bundesland hat sein eigenes System ». Chaque Land organise ses écoles ; elle ne parle ni d’écoles privées ni de nouvelles règles.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Wie lange gehen die Kinder in den meisten Bundesländern in die Grundschule?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zwei Jahre.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Drei Jahre.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vier Jahre.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sechs Jahre.",
+              "correct": false
+            }
+          ],
+          "explanation": "« In den meisten Bundesländern gehen alle Kinder zuerst vier Jahre in die Grundschule » : quatre ans, en général de 6 à 10 ans.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Was stimmt über Felix?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er macht eine Ausbildung.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er geht aufs Gymnasium und macht später Abitur.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er geht noch in die Grundschule.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er hat die Realschule abgeschlossen.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Unser Sohn Felix ist auf dem Gymnasium und macht in drei Jahren Abitur. » C’est sa sœur Jana qui a terminé la Realschule et fait une Ausbildung.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Wie ist Felix’ Schultag im Vergleich zu einem Schultag in Frankreich?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Länger.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Genauso lang.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er beginnt später.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Kürzer.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Sein Schultag ist kürzer als in Frankreich » : les cours commencent à 8 h et Felix rentre souvent vers 13 h 30. Kürzer est le comparatif de kurz, le contraire de länger.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Was macht Jana jetzt?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie studiert Elektrotechnik an der Universität.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie macht das Abitur am Gymnasium.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie lernt einen Beruf im Betrieb und in der Berufsschule.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie arbeitet drei Tage pro Woche als Lehrerin.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jana fait une Ausbildung : « Drei Tage pro Woche arbeitet sie in einem Betrieb, zwei Tage lernt sie in der Berufsschule. » Elle a justement choisi de ne pas étudier à l’université.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was findet Jana an ihrer Ausbildung am besten?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Berufsschule.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die kurzen Schultage.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Arbeit mit Kindern.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dass sie schon ihr eigenes Geld verdient.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Und sie verdient schon ihr eigenes Geld! Das findet sie natürlich am besten. » Das reprend le fait de gagner son argent ; am besten est le superlatif de gut.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-feste",
+      "kind": "lesson",
+      "title": "Comprendre : fêtes et jours fériés en Allemagne",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Feste und Feiertage — L’année des fêtes",
+        "description": "Les fêtes rythment l’année en Allemagne. Les jours fériés (die Feiertage) ne sont pas les mêmes partout : certains Länder en ont quelques-uns de plus, surtout les régions catholiques du sud.\n\nL’ANNÉE DES FÊTES\n• Silvester (31. Dezember) et Neujahr (1. Januar) : on fête le Nouvel An entre amis, avec un feu d’artifice (das Feuerwerk) à minuit. Avant minuit, on se souhaite « Guten Rutsch! », après « Frohes neues Jahr! ». Beaucoup regardent à la télévision un vieux sketch anglais, « Dinner for One ».\n• Karneval, Fasching ou Fastnacht (février ou mars) : surtout en Rhénanie (Köln, Mainz, Düsseldorf) et dans le sud. On se déguise (das Kostüm) et on regarde les défilés du Rosenmontag. Dans le nord et l’est, beaucoup de gens ne le fêtent pas.\n• Ostern (mars ou avril) : le Vendredi saint (Karfreitag) et le lundi de Pâques (Ostermontag) sont fériés. Les enfants cherchent les œufs colorés (das Osterei) cachés par le lapin de Pâques (der Osterhase).\n• der Tag der Arbeit (1. Mai) : jour férié ; dans le sud, beaucoup de villages dressent un « Maibaum ».\n• der Tag der Deutschen Einheit (3. Oktober) : la fête nationale, en souvenir de la réunification de 1990.\n• Sankt Martin (11. November) : le soir, les enfants défilent dans les rues avec des lanternes et chantent.\n• die Adventszeit (décembre) : la couronne de l’Avent avec ses quatre bougies (die Kerze), le calendrier de l’Avent et les marchés de Noël (der Weihnachtsmarkt). Dans la nuit du 5 au 6 décembre, le Nikolaus remplit les bottes que les enfants ont posées devant la porte.\n• Weihnachten : le moment le plus important est le soir du 24 décembre (der Heiligabend). On décore le sapin (der Weihnachtsbaum) et on échange les cadeaux (die Bescherung). Le 25 et le 26 décembre sont fériés.\n\nCOMPARER AVEC VOTRE PAYS\n• In Deutschland bekommen die Kinder die Geschenke schon am 24. Dezember, in Frankreich oft erst am Morgen des 25.\n• Der Karneval ist in Köln viel wichtiger als in Berlin.\n• Der Nationalfeiertag ist in Deutschland am 3. Oktober, in Frankreich am 14. Juli, in Belgien am 21. Juli und in der Schweiz am 1. August.\n\nSOUHAITER\n• Frohe Weihnachten! — Joyeux Noël !\n• Frohe Ostern! — Joyeuses Pâques !\n• Guten Rutsch! — Bonne fin d’année ! (juste avant le Nouvel An)\n• Frohes neues Jahr! — Bonne année !\n• Alles Gute zum Geburtstag! — Joyeux anniversaire !\n\nÉcoutez trois personnes qui parlent de leur fête préférée. Et vous, quelle est votre fête préférée ? Dites-le en une ou deux phrases : Mein Lieblingsfest ist …, weil …",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-kultur-feste-bild",
+          "usage": "illustration",
+          "caption": "Der Weihnachtsbaum, das Osterei, das Kostüm, das Feuerwerk, die Kerze, der Nationalfeiertag",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-feste-audio-v3",
+          "usage": "audio",
+          "caption": "Trois personnes présentent leur fête préférée",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-bilder",
+      "kind": "exercise",
+      "title": "Vérifier : traditions et lieux en images",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Was sehen Sie? — Traditionen in Bildern",
+        "description": "Observez quatre images tirées du manuel Deutsch im Blick : une peinture ancienne, une photo de Noël, une gravure de conte et un paysage de montagne. Lisez chaque question en allemand et choisissez la bonne réponse. Pour les fêtes, aidez-vous de l’activité « Fêtes et jours fériés en Allemagne ».\n\nPOUR BIEN LIRE\n• das Gemälde — le tableau ; der Bischof — l’évêque ; der Stiefel — la botte\n• der Stall — l’étable ; die Figur — la figurine ; die Zuckerstange — le sucre d’orge\n• das Märchen — le conte ; die Hexe — la sorcière ; der Lebkuchen — le pain d’épice\n• das Fachwerkhaus — la maison à colombages ; die Fahne — le drapeau ; das Kreuz — la croix\n\nLE SAVIEZ-VOUS ?\nÀ partir de 1812, deux frères linguistes ont publié un grand recueil de contes populaires, les « Contes de l’enfance et du foyer » (Kinder- und Hausmärchen). Hänsel und Gretel, Rotkäppchen (le Petit Chaperon rouge), Aschenputtel (Cendrillon) et Schneewittchen (Blanche-Neige) font partie de la culture commune des pays germanophones.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Ein altes Gemälde: Ein Bischof mit Mitra und goldenem Stab hält ein Buch mit drei goldenen Kugeln. In der Nacht zum 6. Dezember stellen die Kinder ihre Stiefel vor die Tür, und er füllt sie mit kleinen Geschenken. Wer ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Osterhase",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sankt Martin",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "der Nikolaus",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "der Weihnachtsmann",
+              "correct": false
+            }
+          ],
+          "explanation": "L’évêque à la mitre et la nuit du 5 au 6 décembre, quand les enfants posent leurs bottes devant la porte : c’est le Nikolaus. Sankt Martin se fête le 11 novembre avec des lanternes."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Auf einem Holzschrank stehen ein kleiner Stall, viele kleine Figuren und ein Tier. Vorne liegen rot-weiße Zuckerstangen. Was ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein Adventskranz",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Weihnachtskrippe",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "ein Osterei",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ein Maibaum",
+              "correct": false
+            }
+          ],
+          "explanation": "Une petite étable (der Stall) avec des figurines et un animal : c’est une crèche de Noël, die Weihnachtskrippe. Der Adventskranz est une couronne à quatre bougies."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Eine alte Zeichnung: Zwei Kinder stehen vor einem kleinen Haus mitten im Wald. Das Haus ist aus Lebkuchen, und darin wohnt eine böse Hexe. Welches deutsche Märchen ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Rotkäppchen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Aschenputtel",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Schneewittchen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Hänsel und Gretel",
+              "correct": true
+            }
+          ],
+          "explanation": "Deux enfants, une maison en pain d’épice (Lebkuchen) au milieu de la forêt et une méchante sorcière : c’est Hänsel und Gretel. Rotkäppchen rencontre un loup, pas une sorcière."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Ein großes Fachwerkhaus steht auf einer grünen Wiese, hinter ihm sieht man hohe Berge mit Schnee. Auf dem Dach weht eine rote Fahne mit einem weißen Kreuz. In welchem Land ist das?",
+          "options": [
+            {
+              "id": "a",
+              "label": "In der Schweiz.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "In Österreich.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "In Belgien.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In Deutschland.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le drapeau rouge à croix blanche est celui de la Suisse. Le drapeau autrichien a trois bandes rouge, blanche, rouge, sans croix."
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-nikolaus-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-krippe-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-maerchen-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-schweiz-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-hoeren",
+      "kind": "exercise",
+      "title": "Vérifier : écouter un micro-trottoir sur le « typiquement allemand »",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Straßenumfrage: Was ist für Sie typisch deutsch?",
+        "description": "Un journaliste interroge trois personnes dans les rues de Cologne : qu’est-ce qui est, pour elles, typiquement allemand ? Écoutez (autant de fois que nécessaire), puis répondez aux questions. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Ingrid: Wie viele Mülleimer hat sie zu Hause?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zwei.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Drei.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vier.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Fünf.",
+              "correct": true
+            }
+          ],
+          "explanation": "Ingrid dit « Bei mir zu Hause gibt es fünf verschiedene Mülleimer! ». Ne confondez pas fünf (5) et vier (4).",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was ist Ingrid wichtiger als ein bisschen Platz in der Küche?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Umwelt zu schützen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Mit ihrer Enkelin zu lachen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ordnung in der Wohnung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Pünktlich zu sein.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich finde, dass wir so die Umwelt schützen. Und das ist mir wichtiger als ein bisschen Platz in der Küche. » Das reprend la protection de l’environnement ; c’est sa petite-fille qui en rit.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Kofi: Was denkt er über die Pünktlichkeit der Deutschen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Deutschen sind immer und überall pünktlich.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bei der Arbeit sind sie pünktlich, bei Partys nicht immer.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Deutschen kommen nie pünktlich.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In Ghana ist man pünktlicher als in Deutschland.",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour Kofi, le cliché « stimmt nur teilweise » : « Bei der Arbeit kommen alle pünktlich », mais à une fête, ses collègues arrivent « oft eine Stunde später ».",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was ist für Kofi typisch deutsch?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Autos.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Bier.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Brot.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Der Fußball.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Nicht das Bier und nicht die Autos, sondern das Brot! » : nicht … sondern écarte la bière et les voitures. Kofi admire les plus de 3 000 sortes de pain.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Lisa: Was sagt sie über den Karneval?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er ist in ganz Deutschland gleich wichtig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie findet ihn zu laut.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie feiert ihn lieber in Berlin.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In Berlin und Hamburg ist er nicht so wichtig wie in Köln.",
+              "correct": true
+            }
+          ],
+          "explanation": "Lisa dit « in Berlin oder Hamburg ist er nicht so wichtig wie bei uns » : à Cologne (bei uns), le carnaval est la plus belle fête de l’année. Nicht so … wie exprime une inégalité.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was macht Lisa am Sonntag?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie geht einkaufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie geht mit ihrer Familie spazieren.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie arbeitet in einem Geschäft.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie zeigt Touristen die Stadt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Sonntag gehe ich mit meiner Familie im Park spazieren. » Elle rappelle justement que presque tous les magasins sont fermés (zu) le dimanche.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Lisa : écoutez sa phrase sur le carnaval et écrivez-la.",
+          "accept": [
+            "Hier in Köln ist der Karneval das schönste Fest im Jahr."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Das schönste Fest : devant un nom, le superlatif prend l’article et la terminaison -e. Köln s’écrit avec ö et der Karneval avec un K.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Micro-trottoir à Cologne",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-autos-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-bier-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-brot-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-fussball-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "optionId": "d",
+          "decorative": false
+        },
+        {
+          "media": "a2-kultur-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-dach-lesen",
+      "kind": "exercise",
+      "title": "Vérifier : lire « Une langue, plusieurs pays »",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Deutsch ist nicht gleich Deutsch — Allemagne, Autriche, Suisse",
+        "description": "L’allemand est langue officielle en Allemagne, en Autriche, en Suisse (à côté du français, de l’italien et du romanche) et au Liechtenstein ; il l’est aussi, avec d’autres langues, au Luxembourg et en Belgique. D’une région à l’autre, l’accent, les salutations et certains mots changent. Chloé, une étudiante de Nantes, raconte son voyage sur son blog. Lisez son texte, puis répondez aux questions.\n\nPOUR BIEN LIRE\n• nämlich — en effet ; übrigens — d’ailleurs ; trotzdem — pourtant\n• der Alltag — la vie de tous les jours ; die Zeitung — le journal\n• die Grenze — la frontière ; der Ausweis — la carte d’identité\n• das Fazit — le bilan ; sich kaum verstehen — avoir du mal à se comprendre\n\nEIN MONAT, DREI LÄNDER – UND DREIMAL DEUTSCH?\n\nIm Sommer bin ich einen Monat durch Deutschland, Österreich und die Schweiz gereist. Ich habe gedacht, dass mein Deutsch ziemlich gut ist. Aber schon am ersten Morgen in München hatte ich ein Problem. In der Bäckerei wollte ich zwei Brötchen kaufen, und die Verkäuferin hat gelacht: „Sie meinen zwei Semmeln?“ In Bayern und in Österreich sagt man nämlich „Semmel“, in Berlin „Schrippe“ und in vielen anderen Regionen „Brötchen“.\n\nIn Wien habe ich einen Apfelstrudel mit Sahne bestellt. Der Kellner hat freundlich geantwortet: „Mit Schlagobers, sehr gern!“ Und die Kartoffeln heißen dort oft „Erdäpfel“. Auch die Grüße sind nicht überall gleich: In Österreich und in Bayern hört man „Grüß Gott“ oder „Servus“, in Norddeutschland „Moin“ und in der Schweiz „Grüezi“.\n\nAm schwierigsten war Zürich. Im Alltag sprechen die Leute dort Schweizerdeutsch, und am Anfang habe ich fast nichts verstanden. Aber in der Schule, in der Zeitung und mit Touristen benutzen sie Hochdeutsch. Die Schweiz ist übrigens nicht in der EU, und man bezahlt mit Franken. Trotzdem musste ich an der Grenze meinen Ausweis nicht zeigen, denn die Schweiz gehört zum Schengen-Raum.\n\nMein Fazit: Deutsch klingt nicht überall gleich. Wenn eine Frau aus Hamburg und ein Mann aus Zürich Dialekt sprechen, verstehen sie sich kaum. Aber mit Hochdeutsch kommt man überall weiter. Und jedes neue Wort ist eine schöne Erinnerung an die Reise!\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Wo sagt man „Semmel“ statt „Brötchen“?",
+          "options": [
+            {
+              "id": "a",
+              "label": "In Berlin und in Hamburg.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "In der Schweiz.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "In Bayern und in Österreich.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Nur in München.",
+              "correct": false
+            }
+          ],
+          "explanation": "« In Bayern und in Österreich sagt man nämlich „Semmel“ » ; à Berlin, on dit « Schrippe ». Munich est en Bavière, mais le mot ne s’arrête pas à cette ville.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was bedeutet „Schlagobers“?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kartoffeln.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Apfelstrudel.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Brötchen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sahne.",
+              "correct": true
+            }
+          ],
+          "explanation": "Chloé commande un strudel « mit Sahne » et le serveur répond « Mit Schlagobers » : à Vienne, Schlagobers désigne la crème fouettée. Les pommes de terre, elles, s’appellent Erdäpfel.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Welchen Gruß hört man in Norddeutschland?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Grüezi!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Moin!",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Servus!",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Grüß Gott!",
+              "correct": false
+            }
+          ],
+          "explanation": "« … in Norddeutschland „Moin“ ». Grüß Gott et Servus s’entendent en Autriche et en Bavière, Grüezi en Suisse.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Warum war Zürich für Chloé am schwierigsten?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Leute dort im Alltag Schweizerdeutsch sprechen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil man dort vor allem Französisch spricht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil die Leute nicht mit Touristen sprechen wollten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil sie mit Franken bezahlen musste.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am schwierigsten war Zürich. Im Alltag sprechen die Leute dort Schweizerdeutsch » : au début, elle ne comprenait presque rien. Payer en francs n’est pas un problème de langue.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Was stimmt über die Schweiz?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie ist in der EU, und man bezahlt mit Euro.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ist nicht in der EU, aber sie gehört zum Schengen-Raum.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "An der Grenze muss man immer seinen Ausweis zeigen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "In der Schule und in der Zeitung benutzt man nur Schweizerdeutsch.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Schweiz ist übrigens nicht in der EU, und man bezahlt mit Franken », mais elle « gehört zum Schengen-Raum » : Chloé n’a pas eu à montrer sa carte d’identité.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel bilan Chloé tire-t-elle de son voyage ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Il faut apprendre tous les dialectes avant de partir.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Les Suisses et les Autrichiens ne comprennent pas l’allemand standard.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’allemand change selon les régions, mais avec l’allemand standard (Hochdeutsch), on se fait comprendre partout.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "L’allemand d’Autriche est le plus facile à comprendre.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Deutsch klingt nicht überall gleich … Aber mit Hochdeutsch kommt man überall weiter. » Elle ne conseille pas d’apprendre les dialectes : l’allemand standard suffit pour se faire comprendre.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-dach-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-du-sie-hoeren",
+      "kind": "exercise",
+      "title": "Vérifier : écouter « du ou Sie ? »",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Podcast „Neu in Graz“: Du oder Sie?",
+        "description": "Dans le podcast « Neu in Graz » (Nouveau à Graz), destiné aux étudiants étrangers, Inès, une étudiante toulousaine en semestre Erasmus en Autriche, raconte ses premières semaines et ses petites gaffes. Écoutez (autant de fois que nécessaire), puis répondez aux questions. La transcription s’affichera après votre réponse.\n\nÀ NOTER\n• duzen — dire « du » ; siezen — dire « Sie »\n• das Du anbieten — proposer de se tutoyer\n• peinlich — gênant ; die Nachbarin — la voisine ; das Treppenhaus — la cage d’escalier\n• die Studierenden — les étudiants ; der Chor — la chorale\n• Tschüss! — Salut ! ; Bis nächste Woche! — À la semaine prochaine !\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Warum war die erste Begegnung mit der Nachbarin peinlich?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Inès hat den Namen der Nachbarin vergessen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Inès hat „Sie“ gesagt, aber die Nachbarin wollte „du“.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Inès hat sofort „du“ gesagt, aber die Nachbarin wollte „Sie“.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Nachbarin hat Inès nicht verstanden.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich war nervös und habe sofort „du“ gesagt. » La voisine répond « Wir sagen hier noch Sie, junge Frau » : elle voulait être vouvoyée.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Was hat der Tandempartner Inès erklärt? Wer bietet das Du an?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die ältere Person oder der Chef.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die jüngere Person.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Person, die neu ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Person, die zuerst „Hallo“ sagt.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die ältere Person oder der Chef bietet das Du an, nicht die junge Studentin. » C’est donc la voisine, plus âgée, qui a proposé le tutoiement.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Wen siezt Inès an der Uni?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die anderen Studierenden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ihre Professorin.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Leute im Chor.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Jakob aus ihrem Kurs.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Mit den anderen Studierenden sage ich immer „du“ … Aber meine Professorin sieze ich natürlich. » Siezen signifie vouvoyer.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Was bedeutet „Bis später!“ in Österreich und in Deutschland?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir sehen uns vielleicht irgendwann wieder.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich rufe dich heute Abend an.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wir sehen uns wirklich bald wieder, zum Beispiel am selben Tag.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Wir sehen uns nächste Woche wieder.",
+              "correct": false
+            }
+          ],
+          "explanation": "On dit « Bis später » seulement « wenn man sich wirklich bald wiedersieht, zum Beispiel am selben Tag ». Pour la semaine suivante, on dit « Bis nächste Woche ».",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Wo hat Inès österreichische Freunde gefunden?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Im Seminar.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Im Sportverein.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "In der Mensa.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Im Uni-Chor.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Ja, im Uni-Chor. Wir singen jeden Mittwoch » : ses amis autrichiens viennent de la chorale de l’université. Au séminaire, elle ne cite que Jakob, un camarade de cours.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Was ist Inès’ Tipp für neue Studierende?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Immer sofort „du“ sagen, das ist freundlicher.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn man unsicher ist, zuerst „Sie“ sagen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nur Hochdeutsch sprechen und nie Dialekt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Keine Fehler machen, denn die Leute sind ungeduldig.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Wenn ihr nicht wisst, ob ihr „du“ oder „Sie“ sagen sollt, dann sagt zuerst „Sie“. » Elle ajoute que les gens sont patients : il ne faut pas avoir peur des fautes.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-du-sie-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Podcast « Neu in Graz » : Inès raconte ses débuts en Autriche",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : comparer et donner son avis",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Besser als, so gut wie, am besten",
+        "description": "Complétez, remettez dans l’ordre ou associez, puis écrivez la phrase dictée.\n\nRAPPELS\n• Comparatif : adjectif + -er, suivi de als : schneller als, billiger als. Beaucoup d’adjectifs courts prennent un Umlaut : alt → älter, groß → größer.\n• Égalité : so + adjectif + wie ; à la forme négative, nicht so … wie. Jamais « so … als » ni « -er wie ».\n• Superlatif : am + adjectif + -sten après un verbe (am schnellsten) ; der / die / das + adjectif + -ste devant un nom (der höchste Berg). Après -t, -d, -s, -ß ou -z, on ajoute un -e- : am ältesten.\n• Formes irrégulières : gut, besser, am besten ; gern, lieber, am liebsten ; viel, mehr, am meisten ; hoch, höher, am höchsten.\n• Donner son avis : après dass, le verbe conjugué va à la fin (Ich finde, dass das System sinnvoll ist). Meiner Meinung nach occupe la première position : le verbe suit immédiatement.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q4",
+          "prompt": "Die Zugspitze ist der … Berg in Deutschland.",
+          "options": [
+            {
+              "id": "a",
+              "label": "höhere",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "hochste",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "höchste",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "am höchsten",
+              "correct": false
+            }
+          ],
+          "explanation": "Devant un nom, le superlatif prend l’article et une terminaison : der höchste Berg (hoch → höher → höchst-, avec Umlaut et sans c). Am höchsten s’emploie seulement sans nom, après un verbe.",
+          "type": "choice"
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Complétez avec le comparatif de l’adjectif et le mot qui introduit la comparaison.",
+          "text": "Mit dem Fahrrad ist man in der Stadt oft [[1]] [[2]] mit dem Auto.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "schneller"
+              ],
+              "size": 10,
+              "hint": "schnell"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "als"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Le comparatif se forme avec -er (schnell → schneller) et le second terme est introduit par als. Wie sert à l’égalité : so schnell wie."
+        },
+        {
+          "id": "q10",
+          "type": "fill",
+          "prompt": "Comparez trois villes : complétez.",
+          "text": "Köln ist [[1]] als Hamburg, und Hamburg ist nicht so groß [[2]] Berlin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kleiner"
+              ],
+              "size": 9,
+              "hint": "klein"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wie"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Cologne compte moins d’habitants que Hambourg : kleiner als (comparatif + als). L’égalité et sa négation se construisent avec so … wie : nicht so groß wie Berlin, jamais « so groß als »."
+        },
+        {
+          "id": "q11",
+          "type": "fill",
+          "prompt": "Complétez avec les formes irrégulières de gut.",
+          "text": "Mein Deutsch ist gut, Paulas Deutsch ist [[1]], aber Ben spricht am [[2]] Deutsch.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "besser"
+              ],
+              "size": 8,
+              "hint": "gut"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "besten"
+              ],
+              "size": 8,
+              "hint": "gut"
+            }
+          ],
+          "explanation": "Gut est irrégulier : gut, besser, am besten. Après un verbe (spricht), le superlatif prend la forme am … -sten : am besten, et non « am gutesten »."
+        },
+        {
+          "id": "q12",
+          "type": "fill",
+          "prompt": "Lena a 25 ans, son frère 28 et sa sœur 31. Complétez.",
+          "text": "Ihr Bruder ist [[1]] als Lena, aber ihre Schwester ist am [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "älter"
+              ],
+              "size": 8,
+              "hint": "alt"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ältesten"
+              ],
+              "size": 10,
+              "hint": "alt"
+            }
+          ],
+          "explanation": "Alt prend un Umlaut au comparatif et au superlatif : älter, am ältesten. Après -t, le superlatif ajoute un -e- : ältesten, pas « ältsten »."
+        },
+        {
+          "id": "q13",
+          "type": "fill",
+          "prompt": "Complétez avec les formes de gern.",
+          "text": "Ich trinke gern Tee, [[1]] trinke ich Kaffee, und am [[2]] trinke ich Kakao.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "lieber"
+              ],
+              "size": 8,
+              "hint": "gern"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "liebsten"
+              ],
+              "size": 10,
+              "hint": "gern"
+            }
+          ],
+          "explanation": "Gern a des formes irrégulières : gern, lieber, am liebsten. « Mehr gern » et « am gernsten » n’existent pas. Lieber en tête de phrase est suivi du verbe trinke."
+        },
+        {
+          "id": "q14",
+          "type": "order",
+          "prompt": "Donnez votre avis avec dass : remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich finde,",
+              "dass",
+              "die Mülltrennung",
+              "sinnvoll",
+              "ist."
+            ]
+          ],
+          "explanation": "Après dass, le verbe conjugué ist va à la fin de la proposition. « dass die Mülltrennung ist sinnvoll » garde l’ordre d’une principale, ce qui est faux."
+        },
+        {
+          "id": "q15",
+          "type": "order",
+          "prompt": "Donnez votre avis. Commencez par « Meiner Meinung nach ».",
+          "answers": [
+            [
+              "Meiner Meinung nach",
+              "ist",
+              "der ruhige Sonntag",
+              "sehr angenehm."
+            ]
+          ],
+          "explanation": "Meiner Meinung nach occupe la première position : le verbe conjugué ist vient juste après, puis le sujet der ruhige Sonntag. Ce n’est pas une subordonnée : le verbe ne va pas à la fin."
+        },
+        {
+          "id": "q16",
+          "type": "match",
+          "prompt": "Associez chaque adjectif à son comparatif.",
+          "pairs": [
+            {
+              "left": "gut",
+              "right": "besser"
+            },
+            {
+              "left": "viel",
+              "right": "mehr"
+            },
+            {
+              "left": "gern",
+              "right": "lieber"
+            },
+            {
+              "left": "hoch",
+              "right": "höher"
+            },
+            {
+              "left": "groß",
+              "right": "größer"
+            }
+          ],
+          "explanation": "Ces adjectifs courants ont un comparatif irrégulier ou avec Umlaut : gut → besser, viel → mehr, gern → lieber, hoch → höher (sans c), groß → größer."
+        },
+        {
+          "id": "q17",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez l’avis de cette personne.",
+          "accept": [
+            "Ich glaube, dass das ein Klischee ist."
+          ],
+          "voice": "sprecher",
+          "explanation": "Après dass, le verbe ist termine la phrase. Das Klischee, le cliché, prend une majuscule ; une virgule précède dass.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a2-kultur-grammatik-q17",
+          "usage": "audio",
+          "questionId": "q17",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a2-kultur-sprechen",
+      "kind": "mission",
+      "title": "Mission : typiquement allemand, typiquement de chez moi",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Typisch deutsch, typisch bei uns — Comparer et donner son avis",
+        "description": "Écoutez Thomas, un Belge qui vit à Hanovre. Il compare l’Allemagne et la Belgique et donne son avis. Préparez ensuite votre propre intervention, puis votre message pour le forum.\n\nMODÈLE\nHallo, ich bin Thomas und komme aus Brüssel. Seit zwei Jahren lebe ich in Hannover. Was ist für mich typisch deutsch? Ich finde, dass viele Deutsche sehr umweltfreundlich sind. Sie trennen den Müll genauer als wir in Belgien, und viele fahren mit dem Fahrrad zur Arbeit. Man sagt, die Deutschen sind immer pünktlich. Meiner Meinung nach stimmt das nur teilweise: Meine Kollegen sind pünktlich, meine Züge leider nicht immer! Die Schule ist hier anders als bei uns. In Belgien dauert der Schultag länger, hier haben viele Kinder schon am frühen Nachmittag frei. Und die Traditionen? Am schönsten finde ich den Weihnachtsmarkt. Aber die besten Pommes gibt es natürlich in Belgien!\n\nPOUR PRÉPARER\n1. Votre expérience : Ich lerne seit … Deutsch. / Ich war schon einmal in … / Ich kenne Deutschland aus Filmen, aus dem Internet …\n2. Un cliché : Man sagt, die Deutschen sind … Ich glaube, das stimmt (nicht / nur teilweise), weil …\n3. Comparer : In Deutschland ist … größer / billiger / wichtiger als in … ; … ist (nicht) so … wie bei uns.\n4. Votre avis : Ich finde, dass … ; Meiner Meinung nach …\n5. Le meilleur : Am besten gefällt mir … ; Die schönste Tradition ist …\n\nNuancez : un cliché ne décrit jamais tout le monde (viele, manche, nicht alle, das stimmt nur teilweise). À l’oral, parlez à partir de mots-clés, sans lire un texte rédigé.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a2-kultur-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Thomas compare l’Allemagne et la Belgique",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Présentez en une à deux minutes ce qui vous semble typiquement allemand et typique de votre pays : votre expérience, un cliché et votre avis, une comparaison entre les deux pays et ce que vous préférez.",
+          "maxSeconds": 120
+        },
+        "written": {
+          "prompt": "Répondez sur le forum du cours à la question « Was ist typisch deutsch – und was ist typisch für dein Land? » en 60 à 80 mots : deux thèmes au choix (école, environnement, fêtes, ponctualité, cuisine), un comparatif avec als, une comparaison avec so … wie, votre avis et un superlatif pour finir.",
+          "maxChars": 1000,
+          "minWords": 60
+        },
+        "checklist": [
+          "J’ai employé au moins un comparatif suivi de als et une comparaison avec so … wie.",
+          "Après dass, le verbe conjugué est à la fin ; après « Meiner Meinung nach », il vient juste après.",
+          "J’ai nuancé un cliché : viele, manche, nicht alle ou « Das stimmt nur teilweise ».",
+          "Mon message parle de deux thèmes et se termine par un superlatif (am besten, das schönste …)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-kultur-wortschatz-bild",
+      "kind": "image",
+      "title": "École, formation et environnement",
+      "alt": "Six vignettes : une toque de diplômé (das Abitur), une clé à molette (die Ausbildung), le symbole du recyclage (die Mülltrennung), une bouteille (die Pfandflasche), un vélo (das Fahrrad) et une prise électrique (der Strom).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "graduation-cap",
+            "label": "das Abitur"
+          },
+          {
+            "icon": "wrench",
+            "label": "die Ausbildung"
+          },
+          {
+            "icon": "recycle",
+            "label": "die Mülltrennung"
+          },
+          {
+            "icon": "milk",
+            "label": "die Pfandflasche"
+          },
+          {
+            "icon": "bike",
+            "label": "das Fahrrad"
+          },
+          {
+            "icon": "plug-zap",
+            "label": "der Strom"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-kultur-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "École, formation et environnement : mots et exemples",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "die Grundschule. Alle Kinder gehen zuerst in die Grundschule."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gymnasium. Nach dem Gymnasium macht man das Abitur."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "die Note. Eine Eins ist die beste Note."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ausbildung. Mein Bruder macht eine Ausbildung zum Koch."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "der Azubi. Der Azubi arbeitet im Betrieb und lernt in der Berufsschule."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "studieren. Meine Schwester studiert Medizin."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "die Umwelt. Wir wollen die Umwelt schützen."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "den Müll trennen. Bei uns trennen alle den Müll."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "die Biotonne. Kartoffelschalen kommen in die Biotonne."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "der gelbe Sack. Der Joghurtbecher kommt in den gelben Sack."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "das Altpapier. Alte Zeitungen kommen ins Altpapier."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Pfand. Für die Flasche bekomme ich fünfundzwanzig Cent Pfand zurück."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Energie sparen. Ich mache das Licht aus und spare Energie."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fahrrad. Ich fahre jeden Tag mit dem Fahrrad zur Arbeit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-dialog-bild",
+      "kind": "image",
+      "title": "Lena et Hugo trient les déchets",
+      "alt": "Dans une cuisine, Lena dit « Das kommt in den gelben Sack! » et Hugo demande « Ist das typisch deutsch? ». Autour d’eux : le symbole du recyclage, une poubelle, un emballage en carton et un journal.",
+      "image": {
+        "layout": "scene",
+        "setting": "kitchen",
+        "people": [
+          {
+            "name": "Lena",
+            "say": "Das kommt in den gelben Sack!"
+          },
+          {
+            "name": "Hugo",
+            "say": "Ist das typisch deutsch?"
+          }
+        ],
+        "items": [
+          "recycle",
+          "trash",
+          "carton",
+          "newspaper"
+        ]
+      }
+    },
+    {
+      "key": "a2-kultur-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : Lena et Hugo dans la cuisine",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Hugo, warte mal! Der Joghurtbecher kommt nicht in den Restmüll, sondern in den gelben Sack."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Echt? In Frankreich trennen wir auch den Müll, aber hier gibt es viel mehr Tonnen als bei uns!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Das stimmt. Also: Papier kommt in die blaue Tonne, Essensreste kommen in die Biotonne, Plastik und Dosen in den gelben Sack. Und Glas bringen wir zum Container."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Und die leeren Wasserflaschen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Die bringst du in den Supermarkt. Für jede Plastikflasche bekommst du fünfundzwanzig Cent Pfand zurück."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Ach so! Ehrlich gesagt finde ich das ziemlich kompliziert. Ist das typisch deutsch?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Vielleicht! Aber ich finde, dass das System sinnvoll ist. Und meiner Meinung nach ist es nicht so schwierig wie die deutsche Grammatik!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Ha, da hast du recht! Und was ist für dich noch typisch deutsch? Die Pünktlichkeit?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Ich glaube, das ist ein Klischee. Mein Bruder kommt zum Beispiel immer zu spät. Und unsere Züge sind auch nicht immer pünktlich!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Stimmt! Hier in Freiburg fahre ich jetzt fast immer Fahrrad. Das ist billiger als das Auto, und in der Stadt bin ich damit am schnellsten."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Siehst du? Du bist schon fast so deutsch wie ich!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Na ja, nicht ganz. Das Brot hier ist wirklich gut, aber das Baguette aus meiner Bäckerei in Lille ist immer noch das beste!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Ha, das ist typisch französisch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-lesen-bild",
+      "kind": "image",
+      "title": "Le parcours scolaire et professionnel",
+      "alt": "Quatre vignettes : une école (die Grundschule), un livre ouvert (das Gymnasium), une usine (der Betrieb) et un cahier avec un stylo (die Berufsschule).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "school",
+            "label": "die Grundschule"
+          },
+          {
+            "icon": "book-open",
+            "label": "das Gymnasium"
+          },
+          {
+            "icon": "factory",
+            "label": "der Betrieb"
+          },
+          {
+            "icon": "notebook-pen",
+            "label": "die Berufsschule"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-kultur-feste-bild",
+      "kind": "image",
+      "title": "Fêtes et traditions",
+      "alt": "Six vignettes : un sapin (der Weihnachtsbaum), un œuf (das Osterei), un masque (das Kostüm), des étincelles (das Feuerwerk), une flamme (die Kerze) et un drapeau (der Nationalfeiertag).",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "tree-pine",
+            "label": "der Weihnachtsbaum"
+          },
+          {
+            "icon": "egg",
+            "label": "das Osterei"
+          },
+          {
+            "icon": "venetian-mask",
+            "label": "das Kostüm"
+          },
+          {
+            "icon": "sparkles",
+            "label": "das Feuerwerk"
+          },
+          {
+            "icon": "flame",
+            "label": "die Kerze"
+          },
+          {
+            "icon": "flag",
+            "label": "der Nationalfeiertag"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-kultur-feste-audio-v3",
+      "kind": "audio",
+      "title": "Ma fête préférée : trois témoignages",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Was ist Ihr Lieblingsfest? Drei Menschen erzählen."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "mann",
+          "name": "Jannik",
+          "text": "Mein Lieblingsfest ist Silvester. Ich feiere immer mit meinen Freunden in Berlin. Um Mitternacht gehen wir auf die Straße und sehen uns das Feuerwerk an. Das ist das lauteste Fest im Jahr, aber auch das lustigste!"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Ich liebe die Adventszeit. Nach der Arbeit treffe ich mich oft mit Kolleginnen auf dem Weihnachtsmarkt. Wir trinken heißen Kakao oder Glühwein und essen gebrannte Mandeln. Im Dezember ist es kalt und früh dunkel, aber auf dem Markt ist es richtig gemütlich."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "name": "Klaus",
+          "text": "Für mich ist Sankt Martin am schönsten. Am elften November gehe ich mit meinen Enkeln zum Laternenumzug. Die Kinder tragen bunte Laternen und singen Lieder, und am Ende gibt es ein großes Feuer. Das habe ich schon als Kind geliebt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Micro-trottoir : qu’est-ce qui est typiquement allemand ?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Reporter",
+          "text": "Hallo und herzlich willkommen! Heute machen wir eine Umfrage in Köln. Unsere Frage: Was ist für Sie typisch deutsch?"
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "frau",
+          "name": "Ingrid",
+          "text": "Ich heiße Ingrid und bin einundsiebzig. Typisch deutsch? Ich glaube, das ist die Mülltrennung. Bei mir zu Hause gibt es fünf verschiedene Mülleimer! Meine Enkelin lacht immer darüber."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Ingrid",
+          "text": "Aber ich finde, dass wir so die Umwelt schützen. Und das ist mir wichtiger als ein bisschen Platz in der Küche."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporter",
+          "text": "Danke schön! Und Sie?"
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Kofi",
+          "text": "Ich bin Kofi. Ich komme aus Ghana und lebe seit acht Jahren in Köln. Viele sagen, die Deutschen sind immer pünktlich. Meiner Meinung nach stimmt das nur teilweise. Bei der Arbeit kommen alle pünktlich, das ist richtig. Aber zu einer Party kommen meine Kollegen oft eine Stunde später!"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Kofi",
+          "text": "Und was ist für mich typisch deutsch? Nicht das Bier und nicht die Autos, sondern das Brot! Hier gibt es mehr als dreitausend Brotsorten. Das finde ich fantastisch."
+        },
+        {
+          "pause": 1
+        },
+        {
+          "voice": "sprecher",
+          "name": "Reporter",
+          "text": "Und was meinen Sie?"
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Lisa",
+          "text": "Ich bin Lisa, ich bin neunzehn. Ehrlich gesagt finde ich die Frage schwierig. Hier in Köln ist der Karneval das schönste Fest im Jahr. Aber in Berlin oder Hamburg ist er nicht so wichtig wie bei uns."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Lisa",
+          "text": "Vielleicht ist der ruhige Sonntag typisch deutsch: Fast alle Geschäfte sind zu. Viele Touristen finden das komisch, aber ich mag das. Am Sonntag gehe ich mit meiner Familie im Park spazieren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-autos-bild",
+      "kind": "image",
+      "title": "Les voitures",
+      "alt": "Une voiture.",
+      "image": {
+        "layout": "single",
+        "icon": "car"
+      }
+    },
+    {
+      "key": "a2-kultur-bier-bild",
+      "kind": "image",
+      "title": "La bière",
+      "alt": "Une chope de bière.",
+      "image": {
+        "layout": "single",
+        "icon": "beer"
+      }
+    },
+    {
+      "key": "a2-kultur-brot-bild",
+      "kind": "image",
+      "title": "Le pain",
+      "alt": "Un épi de blé.",
+      "image": {
+        "layout": "single",
+        "icon": "wheat"
+      }
+    },
+    {
+      "key": "a2-kultur-fussball-bild",
+      "kind": "image",
+      "title": "Le football",
+      "alt": "Un ballon de sport.",
+      "image": {
+        "layout": "single",
+        "icon": "volleyball"
+      }
+    },
+    {
+      "key": "a2-kultur-dach-lesen-bild",
+      "kind": "image",
+      "title": "À la boulangerie, à Munich",
+      "alt": "Dans une boulangerie, Chloé demande « Zwei Brötchen, bitte! » et la vendeuse répond « Sie meinen zwei Semmeln? ». Sur le comptoir : un croissant, des épis de blé et des pièces de monnaie.",
+      "image": {
+        "layout": "scene",
+        "setting": "shop",
+        "people": [
+          {
+            "name": "Chloé",
+            "say": "Zwei Brötchen, bitte!"
+          },
+          {
+            "name": "Verkäuferin",
+            "say": "Sie meinen zwei Semmeln?"
+          }
+        ],
+        "items": [
+          "croissant",
+          "wheat",
+          "coins"
+        ]
+      }
+    },
+    {
+      "key": "a2-kultur-du-sie-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Podcast « Neu in Graz » : du ou Sie ?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Hallo und herzlich willkommen bei „Neu in Graz“, dem Podcast für internationale Studierende! Heute ist Inès bei mir. Sie kommt aus Toulouse und studiert seit Oktober hier in Graz. Hallo, Inès!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Hallo! Danke für die Einladung."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Wie schreibt man eigentlich deinen Namen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "I, N, E, S. Und auf dem E gibt es einen Akzent. Hier sagen viele einfach Ines, aber das ist kein Problem."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Und warum bist du nach Graz gekommen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Für mein Erasmus-Semester. Die Uni ist sehr gut. Und ehrlich gesagt liebe ich auch das Essen hier, vor allem das Kürbiskernöl!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Wir duzen uns hier im Podcast. Aber war das Thema Du und Sie am Anfang schwierig für dich?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Oh ja! In der ersten Woche habe ich im Treppenhaus meine Nachbarin getroffen, eine ältere Dame. Ich war nervös und habe sofort „du“ gesagt. Sie hat gelächelt und geantwortet: „Wir sagen hier noch Sie, junge Frau.“ Das war mir so peinlich!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Und wie ist es heute?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Heute duzen wir uns! Nach zwei Monaten hat sie mich zum Kaffee eingeladen und gesagt: „Ich bin die Gerda. Wollen wir uns duzen?“ Mein Tandempartner hat mir dann die Regel erklärt: Die ältere Person oder der Chef bietet das Du an, nicht die junge Studentin."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Genau so ist es. Und an der Uni?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Mit den anderen Studierenden sage ich immer „du“, das ist ganz normal. Aber meine Professorin sieze ich natürlich."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Gab es noch eine Überraschung?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Ja! Nach dem ersten Seminar habe ich zu Jakob, einem Studenten aus meinem Kurs, gesagt: „Bis später!“ Er war ganz überrascht und hat gefragt: „Ach ja? Wann denn? Sehen wir uns heute noch?“"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Bei uns sagt man das sehr oft, auch wenn man sich erst nächste Woche wiedersieht. Aber hier sagt man „Bis später“ nur, wenn man sich wirklich bald wiedersieht, zum Beispiel am selben Tag. Jetzt sage ich einfach „Tschüss“ oder „Bis nächste Woche“."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Und hast du schon österreichische Freunde gefunden?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Ja, im Uni-Chor. Wir singen jeden Mittwoch, und danach gehen wir zusammen etwas trinken. Am ersten Abend haben wir gleich unsere Handynummern ausgetauscht. Am Wochenende fahren wir manchmal zusammen in die Berge."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Super! Und hast du einen Tipp für neue Studierende?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Inès",
+          "text": "Habt keine Angst vor Fehlern! Die Leute hier sind sehr geduldig. Und wenn ihr nicht wisst, ob ihr „du“ oder „Sie“ sagen sollt, dann sagt zuerst „Sie“. Vielleicht bietet euch die andere Person dann das Du an."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Danke, Inès! Und euch allen: Servus und bis nächste Woche!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Thomas compare l’Allemagne et la Belgique",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Thomas",
+          "text": "Hallo, ich bin Thomas und komme aus Brüssel. Seit zwei Jahren lebe ich in Hannover. Was ist für mich typisch deutsch? Ich finde, dass viele Deutsche sehr umweltfreundlich sind. Sie trennen den Müll genauer als wir in Belgien, und viele fahren mit dem Fahrrad zur Arbeit."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Thomas",
+          "text": "Man sagt, die Deutschen sind immer pünktlich. Meiner Meinung nach stimmt das nur teilweise: Meine Kollegen sind pünktlich, meine Züge leider nicht immer!"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Thomas",
+          "text": "Die Schule ist hier anders als bei uns. In Belgien dauert der Schultag länger, hier haben viele Kinder schon am frühen Nachmittag frei. Und die Traditionen? Am schönsten finde ich den Weihnachtsmarkt. Aber die besten Pommes gibt es natürlich in Belgien!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-deutsche-native",
+      "kind": "audio",
+      "title": "Rund um die Deutschen — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_10_05_germans.mp3",
+        "clip": [
+          68.2,
+          109
+        ]
+      },
+      "transcript": "keinen Humor haben\njammern\npünktlich sein\nüberpünktlich sein\ndie Sitte, die Sitten\ntauschen\ndie Tradition, die Traditionen\ndie Umfrage, die Umfragen\ndas Vorurteil, die Vorurteile",
+      "v3SourceKey": "a2-kultur-deutsche-native"
+    },
+    {
+      "key": "a2-kultur-werte-native",
+      "kind": "audio",
+      "title": "Was ist deutsch? — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_09_01_deutsch.mp3",
+        "clip": [
+          67.4,
+          103.6
+        ]
+      },
+      "transcript": "die Leistung, die Leistungen\nder Mut\ndie Sicherheit\nsparsam\nsauber\ndie Toleranz\ndie Unabhängigkeit\nunverschämt\nverantwortlich\ndie Verantwortung\ndas Vertrauen\ndie Wahrheit, die Wahrheiten",
+      "v3SourceKey": "a2-kultur-werte-native"
+    },
+    {
+      "key": "a2-kultur-umwelt-native",
+      "kind": "audio",
+      "title": "Die Umwelt — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_09_05_umwelt.mp3",
+        "clip": [
+          85.95,
+          161.4
+        ]
+      },
+      "transcript": "der Müll\ndie Mülltrennung\ndas Ozon\ndas Recycling\nsparen\nder Strom\ndie Taste\nteilnehmen an etwas\nan etwas teilnehmen\nder Treibhauseffekt\ntrennen\ntropfen\ndie Umwelt\ndie Umwelt schonen\ndas Umweltbewusstsein\numweltfreundlich\nder Umweltmuffel\nder Unfall\nverbrauchen\nverträglich\ndie Veranstaltung\nVeranstaltungen\nder Verkehr\nder Wasserhahn\nden Wasserhahn zudrehen",
+      "v3SourceKey": "a2-kultur-umwelt-native"
+    },
+    {
+      "key": "a2-kultur-berghuette-foto",
+      "kind": "image",
+      "title": "Une fenêtre de chalet fleurie",
+      "alt": "Fenêtre d’un chalet en bois aux volets bruns, avec une jardinière de géraniums roses ; au-dessus, un panneau peint en écriture gothique, décoré d’edelweiss et de gentianes, demande aux randonneurs de respecter la nature.",
+      "photo": {
+        "file": "dib-images/k09/img-030-099.png"
+      }
+    },
+    {
+      "key": "a2-kultur-nikolaus-foto",
+      "kind": "image",
+      "title": "Saint Nicolas",
+      "alt": "Peinture ancienne : saint Nicolas en évêque, avec une mitre blanche, une crosse dorée et un grand manteau rouge et or ; il tient un livre sur lequel sont posées trois boules dorées.",
+      "photo": {
+        "file": "dib-images/k05/img-028-105.png"
+      }
+    },
+    {
+      "key": "a2-kultur-krippe-foto",
+      "kind": "image",
+      "title": "Une crèche de Noël",
+      "alt": "Une crèche de Noël posée sur un meuble en bois : une petite étable couverte de mousse, des santons, un bœuf couché et un petit père Noël ; au premier plan, des sucres d’orge rouges et blancs.",
+      "photo": {
+        "file": "dib-images/k05/img-014-050.png"
+      }
+    },
+    {
+      "key": "a2-kultur-maerchen-foto",
+      "kind": "image",
+      "title": "Hänsel et Gretel",
+      "alt": "Gravure ancienne en noir et blanc : une petite maison décorée comme un gâteau, au milieu des arbres, avec deux enfants devant la porte et un oiseau sur une branche.",
+      "photo": {
+        "file": "dib-images/k05/img-011-037.png"
+      }
+    },
+    {
+      "key": "a2-kultur-schweiz-foto",
+      "kind": "image",
+      "title": "Une villa dans les Alpes suisses",
+      "alt": "Une grande villa à colombages au toit vert, surmontée d’un drapeau rouge à croix blanche, sur un alpage entouré de sapins, devant de hautes montagnes enneigées.",
+      "photo": {
+        "file": "dib-images/k09/img-001-005.png"
+      }
+    },
+    {
+      "key": "a2-kultur-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich glaube, das stimmt nur teilweise."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Viele Deutsche sind sehr pünktlich."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meiner Meinung nach sind viele Deutsche sparsam."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Bei uns trennen alle den Müll."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das Fahrrad ist billiger als das Auto."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : clichés et avis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Diese Tradition ist bei uns sehr wichtig."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Vérifier : écouter un micro-trottoir sur le « typiquement allemand »",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hier in Köln ist der Karneval das schönste Fest im Jahr."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-grammatik-q17",
+      "kind": "audio",
+      "title": "Dictée q17 · S’entraîner : comparer et donner son avis",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich glaube, dass das ein Klischee ist."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-kultur-lexique",
+      "kind": "audio",
+      "title": "Lexique · Typisch deutsch ? École, traditions, environnement",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Grundschule, die Grundschulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gymnasium, die Gymnasien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Abitur"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Note, die Noten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fach, die Fächer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ausbildung, die Ausbildungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Betrieb, die Betriebe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Berufsschule, die Berufsschulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "studieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Umwelt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Müll"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "trennen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Biotonne, die Biotonnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Altpapier"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Pfand"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umweltfreundlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sparen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Vorurteil, die Vorurteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Klischee, die Klischees"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tradition, die Traditionen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "pünktlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Feiertag, die Feiertage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fest, die Feste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Weihnachtsmarkt, die Weihnachtsmärkte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Meinung, die Meinungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "finden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "glauben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sinnvoll"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "duzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "siezen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

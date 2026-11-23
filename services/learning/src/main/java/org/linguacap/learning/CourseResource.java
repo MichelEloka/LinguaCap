@@ -13,7 +13,6 @@ import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,25 +23,29 @@ import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.ServiceClient;
 
-/** Séances et progression (DEV-028 à DEV-031, DEV-043) ; une activité ajoutée se lit dans sa version source. */
+/**
+ * Séances et progression (DEV-028 à DEV-031, DEV-043) ; une activité ajoutée se lit dans sa version source.
+ * Les questions sont servies en vues élève typées, sans corrigé ; une mission se termine avec sa remise, vérifiée
+ * auprès d'Évaluations ; la séance porte le lexique de son module.
+ */
 @Path("/v1/learning")
 @Produces(MediaType.APPLICATION_JSON)
 public class CourseResource {
     private static final Logger LOG = Logger.getLogger(CourseResource.class);
     private static final String ACTIVITY_ID = "[a-z0-9]+(-[a-z0-9]+)*";
+    private static final String REVISION = "revision-";
 
     @Inject Actor actor;
     @Inject LearnerAccess access;
     @Inject ServiceClient services;
     @Inject CourseStore store;
+    @Inject LexiconContent lexicons;
     @Inject ObjectMapper mapper;
 
     @ConfigProperty(name = "lingua.services.catalogue")
     String catalogueUrl;
     @ConfigProperty(name = "lingua.services.assessment")
     String assessmentUrl;
-    @ConfigProperty(name = "lingua.services.media")
-    String mediaUrl;
 
     /** Séance avec le contenu de ses activités, livré après vérification de l'inscription. */
     @GET
@@ -60,10 +63,12 @@ public class CourseResource {
             JsonNode state = row == null ? mapper.createObjectNode() : row.state();
             String attemptId = row == null || row.attemptId() == null ? null : row.attemptId().toString();
             if (isPlanned(summary)) {
+                List<ReviewItem> reviewItems = summary.id().startsWith(REVISION)
+                        ? reviewItems(callerId, session, summary.id().substring(REVISION.length()), staff) : null;
                 activities.add(new ActivityDetail(summary.id(), summary.position(), summary.kind(), summary.title(),
                         summary.estimatedMinutes(), List.of(), summary.status(), state, summary.completedAt(), attemptId,
                         new LessonView(null, summary.title(), plannedDescription(summary)), null,
-                        mapper.createArrayNode(), List.of()));
+                        mapper.createArrayNode(), List.of(), null, null, null, reviewItems));
                 continue;
             }
             // Une activité ajoutée par le professeur se lit dans sa version source, sous son identifiant d'origine.
@@ -91,18 +96,10 @@ public class CourseResource {
                     lesson.isObject() ? new LessonView(lesson.path("id").asText(), lesson.path("title").asText(),
                             lesson.path("description").asText()) : null,
                     transcriptAllowed && lesson.isObject() ? nullable(lesson.path("transcript")) : null,
-                    content.path("questions"), placements));
+                    CourseRules.publicQuestions(content.path("questions")), placements,
+                    CourseRules.missionDefinition(content), contentVersion, contentActivity, null));
         }
-        return new SessionDetail(session.summary(), session.enrollmentId(), session.trackVersionId(), session.levelCode(),
-                withFiles(callerId, activities));
-    }
-
-    /**
-     * Adresses temporaires des supports, demandées à Médias avec le jeton de l'utilisateur après la vérification de
-     * l'accès à la séance. Chaque ouverture ou reprise renouvelle les adresses. Si Médias est indisponible, la séance
-     * reste lisible et chaque support propose de réessayer.
-     */
-    private List<ActivityDetail> withFiles(UUID callerId, List<ActivityDetail> activities) {
+        JsonNode vocabulary = vocabulary(callerId, session);
         Map<String, Map<String, Object>> wanted = new LinkedHashMap<>();
         for (ActivityDetail activity : activities) {
             for (PlacementView placement : activity.placements()) {
@@ -110,31 +107,61 @@ public class CourseResource {
                         Map.of("assetId", placement.assetId(), "version", placement.assetVersion()));
             }
         }
-        String token = actor.token();
-        if (wanted.isEmpty() || token.isEmpty()) return activities;
-        Map<String, JsonNode> files = new HashMap<>();
+        wanted.putAll(LexiconContent.audioRefs(vocabulary));
+        // Adresses temporaires des supports et du son de lexique, en une demande à Médias.
+        Map<String, JsonNode> files = lexicons.files(callerId, wanted);
+        List<ActivityDetail> withFiles = activities.stream().map(activity -> activity.withPlacements(activity.placements()
+                .stream().map(placement -> placement.withFile(files.get(placement.assetId() + "@" + placement.assetVersion())))
+                .toList())).toList();
+        LexiconContent.Lexicon lexicon = vocabulary == null ? null : LexiconContent.lexicon(vocabulary, files);
+        return new SessionDetail(session.summary(), session.enrollmentId(), session.trackVersionId(), session.levelCode(),
+                withFiles, lexicon == null || lexicon.entries().isEmpty() ? null : lexicon);
+    }
+
+    /**
+     * Vocabulaire du module de la séance (version du parcours, puis version source d'un cours ajouté). Un module
+     * absent du catalogue (404) ou un catalogue indisponible donnent une séance sans lexique.
+     */
+    private JsonNode vocabulary(UUID callerId, CourseStore.SessionRow session) {
+        String moduleId = session.summary().moduleId();
+        if (moduleId == null || !moduleId.matches(ACTIVITY_ID) || moduleId.length() > 64) return null;
+        List<UUID> versions = new ArrayList<>();
+        versions.add(session.trackVersionId());
+        session.sources().values().forEach(source -> {
+            if (!versions.contains(source.versionId())) versions.add(source.versionId());
+        });
         try {
-            var result = services.exchange(mediaUrl, "/v1/internal/media/read-grants", "POST", callerId,
-                    Map.of("items", List.copyOf(wanted.values())), token, "", false, actor.requestId());
-            if (result.status() != 200 || !result.body().isArray()) {
-                LOG.warnf("Media read grants returned HTTP %d", result.status());
-                return activities;
-            }
-            for (JsonNode file : result.body()) {
-                files.put(file.path("assetId").asText() + "@" + file.path("version").asInt(), file);
+            for (UUID versionId : versions) {
+                JsonNode vocabulary = lexicons.vocabulary(callerId, versionId, moduleId);
+                if (vocabulary != null) return vocabulary;
             }
         } catch (WebApplicationException error) {
-            LOG.warn("Media read grants unavailable");
-            return activities;
+            LOG.warnf("Module vocabulary unavailable (HTTP %d)", error.getResponse().getStatus());
         }
-        return activities.stream().map(activity -> activity.withPlacements(activity.placements().stream()
-                .map(placement -> placement.withFile(files.get(placement.assetId() + "@" + placement.assetVersion())))
-                .toList())).toList();
+        return null;
+    }
+
+    /**
+     * Révision d'un module : exercices à reprendre, d'après les derniers résultats de l'élève. Si le catalogue ou
+     * Évaluations sont indisponibles, la révision reste lisible sans liste.
+     */
+    private List<ReviewItem> reviewItems(UUID callerId, CourseStore.SessionRow session, String moduleId, boolean staff) {
+        try {
+            JsonNode track = services.request(catalogueUrl, "/v1/internal/tracks/" + session.trackVersionId(), "GET",
+                    callerId, null);
+            JsonNode grades = services.request(assessmentUrl, "/v1/assessments/results"
+                    + (staff ? "?learnerId=" + session.learnerId() : ""), "GET", callerId, null);
+            return CourseRules.reviewItems(track, moduleId, grades);
+        } catch (WebApplicationException error) {
+            LOG.warnf("Review items unavailable (HTTP %d)", error.getResponse().getStatus());
+            return List.of();
+        }
     }
 
     /**
      * Sauvegarde l'état d'une activité (reprise après fermeture) et, si demandé, sa fin horodatée.
-     * Une activité notée se termine avec la tentative qui la corrige. Rejouer la requête ne compte rien deux fois.
+     * Une activité notée se termine avec la tentative qui la corrige, une mission avec sa remise.
+     * Rejouer la requête ne compte rien deux fois.
      */
     @PUT
     @Path("/sessions/{id}/activities/{activityId}/progress")
@@ -171,14 +198,16 @@ public class CourseResource {
             if (isPlanned(activity)) {
                 throw HttpError.conflict("Ce créneau d’évaluation s’ouvrira avec le bilan ou l’examen blanc.");
             }
-            attemptId = verifiedAttempt(learnerId, sessionId, activityId, request.attemptId());
+            attemptId = "mission".equals(activity.kind())
+                    ? verifiedMission(learnerId, sessionId, activityId, request.attemptId())
+                    : verifiedAttempt(learnerId, sessionId, activityId, request.attemptId());
         }
         return store.record(sessionId, session.enrollmentId(), activityId, learnerId, request.state(), complete, attemptId);
     }
 
     /** Révisions et créneaux d'évaluation réservés par le planning : ils n'ont pas de contenu dans le catalogue. */
     private static boolean isPlanned(ActivitySummary activity) {
-        return activity.id().startsWith("revision-") || Planner.MIDTERM.equals(activity.id())
+        return activity.id().startsWith(REVISION) || Planner.MIDTERM.equals(activity.id())
                 || Planner.FINAL.equals(activity.id());
     }
 
@@ -208,6 +237,31 @@ public class CourseResource {
         throw HttpError.conflict("Cette remise ne correspond pas à l’exercice de la séance.");
     }
 
+    /**
+     * La mission (son identifiant tient lieu de tentative) est lue dans Évaluations : elle doit être remise par l'élève,
+     * depuis cette séance et pour cette activité de la séance.
+     */
+    private UUID verifiedMission(UUID learnerId, UUID sessionId, String activityId, String missionId) {
+        if (missionId == null) {
+            throw HttpError.badRequest("Remettez la mission avant de la terminer.");
+        }
+        UUID id;
+        try {
+            id = UUID.fromString(missionId);
+        } catch (IllegalArgumentException error) {
+            throw HttpError.badRequest("Identifiant de mission invalide.");
+        }
+        var result = services.exchange(assessmentUrl, "/v1/assessments/missions/" + id, "GET", learnerId, null,
+                actor.token(), "", false, actor.requestId());
+        if (result.status() >= 500) {
+            throw HttpError.unavailable("La remise de la mission ne peut pas être vérifiée : réessayez dans un instant.");
+        }
+        if (result.status() != 200 || !CourseRules.missionCompletes(result.body(), learnerId, sessionId, activityId)) {
+            throw HttpError.conflict("Cette remise ne correspond pas à la mission de la séance.");
+        }
+        return id;
+    }
+
     private CourseStore.SessionRow readable(UUID callerId, UUID sessionId) {
         CourseStore.SessionRow session = store.session(sessionId);
         if (session == null) throw HttpError.notFound("Séance introuvable.");
@@ -221,6 +275,7 @@ public class CourseResource {
         return node == null || node.isNull() || node.isMissingNode() ? null : node.asText();
     }
 
+    /** attemptId : tentative qui corrige un exercice, ou identifiant de la mission remise. */
     public record ProgressRequest(JsonNode state, Boolean completed, String attemptId) {}
 
     public record ActivitySummary(String id, int position, String kind, String title, int estimatedMinutes,
@@ -245,16 +300,43 @@ public class CourseResource {
         }
     }
 
+    /**
+     * Définition d'une mission : situation et consigne (description de la leçon), partie orale et/ou écrite et liste
+     * de vérification à cocher avant l'envoi.
+     */
+    public record MissionDefinition(String description, MissionOral oral, MissionWritten written, List<String> checklist) {}
+
+    /** Enregistrement de maxSeconds secondes au plus (arrêt automatique côté navigateur). */
+    public record MissionOral(String prompt, int maxSeconds) {}
+
+    /** Texte de maxChars caractères au plus et de minWords mots au moins. */
+    public record MissionWritten(String prompt, int maxChars, int minWords) {}
+
+    /** Exercice à reprendre lors d'une révision de module, avec ses questions à revoir et son dernier score. */
+    public record ReviewItem(String activityId, String title, UUID trackVersionId, List<String> flagged,
+                             ReviewScore lastResult) {}
+
+    public record ReviewScore(int correct, int total) {}
+
+    /**
+     * Activité d'une séance. questions : vues élève typées, sans corrigé ; mission : définition d'une activité
+     * « mission » (null sinon) ; contentVersionId et contentActivityId : version et activité où le contenu est lu
+     * (version source d'un cours ajouté par le professeur ; null pour une révision ou un créneau d'évaluation) ;
+     * reviewItems : exercices à reprendre, pour une révision de module seulement (null sinon).
+     */
     public record ActivityDetail(String id, int position, String kind, String title, int estimatedMinutes,
                                  List<?> competences, String status, JsonNode state, String completedAt,
                                  String attemptId, LessonView lesson, String transcript, JsonNode questions,
-                                 List<PlacementView> placements) {
+                                 List<PlacementView> placements, MissionDefinition mission, UUID contentVersionId,
+                                 String contentActivityId, List<ReviewItem> reviewItems) {
         ActivityDetail withPlacements(List<PlacementView> files) {
             return new ActivityDetail(id, position, kind, title, estimatedMinutes, competences, status, state,
-                    completedAt, attemptId, lesson, transcript, questions, files);
+                    completedAt, attemptId, lesson, transcript, questions, files, mission, contentVersionId,
+                    contentActivityId, reviewItems);
         }
     }
 
+    /** lexicon : vocabulaire du module de la séance (null si le module n'en a pas). */
     public record SessionDetail(SessionSummary session, UUID enrollmentId, UUID trackVersionId, String levelCode,
-                                List<ActivityDetail> activities) {}
+                                List<ActivityDetail> activities, LexiconContent.Lexicon lexicon) {}
 }

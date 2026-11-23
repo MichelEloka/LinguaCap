@@ -10,6 +10,8 @@ const read = (path) => JSON.parse(readFileSync(join(repo, 'content', 'de', path)
 const level = read('a1/level.json');
 const files = level.modules.map((item) => read(`a1/${item.file}`));
 const media = new Map([...files.flatMap((file) => file.media ?? []), ...(level.media ?? [])].map((item) => [item.key, item]));
+/** Première leçon du module « Essen » (illustrée), ouverte dans l'aperçu élève : son titre suit le contenu. */
+const essenLesson = files.find((file) => file.id === 'a1-essen').activities.find((activity) => activity.kind === 'lesson').title;
 
 function fileOf(key) {
   for (const [folder, ext, type] of [['images', 'png', 'image/png'], ['images', 'jpg', 'image/jpeg'], ['audio', 'mp3', 'audio/mpeg']]) {
@@ -29,12 +31,30 @@ const placementOf = (placement) => ({
   caption: placement.caption ?? null, transcriptVisibility: placement.transcriptVisibility ?? (placement.usage === 'audio' ? 'on_demand' : 'hidden'),
   decorative: Boolean(placement.decorative), questionId: placement.questionId ?? null, optionId: placement.optionId ?? null,
 });
-const questionOf = (question) => ({ id: question.id, prompt: question.prompt, moduleRef: question.moduleRef ?? null,
-  options: question.options.map((option) => ({ id: option.id, label: option.label, correct: Boolean(option.correct) })) });
+/** Champs propres au type d'une question (document de version V4) ; null pour un choix. */
+function specOf(question) {
+  switch (question.type ?? 'choice') {
+    case 'fill': return { text: question.text, blanks: question.blanks };
+    case 'order': return { answers: question.answers };
+    case 'match': return { pairs: question.pairs };
+    case 'dictation': return { accept: question.accept, showWordCount: Boolean(question.showWordCount) };
+    case 'speak': return { text: question.text, accept: question.accept ?? [question.text], threshold: question.threshold ?? 75 };
+    default: return null;
+  }
+}
+const questionOf = (question) => ({ id: question.id, type: question.type ?? 'choice', prompt: question.prompt, moduleRef: question.moduleRef ?? null,
+  explanation: question.explanation ?? null,
+  options: (question.options ?? []).map((option) => ({ id: option.id, label: option.label, correct: Boolean(option.correct),
+    ...(option.feedback ? { feedback: option.feedback } : {}) })),
+  spec: specOf(question) });
+/** Lexique du module : le son est un segment du média « <module>-lexique », résolu à l'import (ici, segments réguliers). */
+const vocabularyOf = (file) => (file.vocabulary ?? []).map(({ audio, ...entry }, index) => ({ ...entry,
+  audio: audio ? { assetId: audio.media, assetVersion: 1, start: Math.round(index * 2.5 * 100) / 100, end: Math.round((index * 2.5 + 1.6) * 100) / 100 } : null }));
 const modules = files.map((file) => ({
-  id: file.id, title: file.title, objective: file.objective, prerequisites: file.prerequisites ?? [],
+  id: file.id, title: file.title, objective: file.objective, prerequisites: file.prerequisites ?? [], vocabulary: vocabularyOf(file),
   activities: file.activities.map((activity) => ({
     id: activity.id, kind: activity.kind, title: activity.title, estimatedMinutes: activity.estimatedMinutes, competences: activity.competences ?? [],
+    mission: activity.kind === 'mission' ? activity.mission ?? null : null,
     lesson: activity.lesson ? { title: activity.lesson.title, description: activity.lesson.description, transcript: activity.lesson.transcript ?? null } : null,
     questions: (activity.questions ?? []).map(questionOf), placements: (activity.placements ?? []).map(placementOf),
   })),
@@ -63,7 +83,7 @@ draft.modules.push({
       lesson: { title: 'Am Bahnhof', description: '', transcript: null }, questions: [], placements: [] },
     { id: 'a1-unterwegs-fahrplan', kind: 'exercise', title: 'Lire un horaire de train', estimatedMinutes: 10, competences: ['lecture'],
       lesson: { title: 'Der Fahrplan', description: 'Lisez l’horaire, puis répondez aux questions.\n\nABFAHRT\nICE 1537 — Berlin Hbf — 9:12 — Gleis 4\nRE 4 — Köln — 9:20 — Gleis 2', transcript: null },
-      questions: [{ id: 'q1', prompt: 'Où part le train pour Berlin ?', moduleRef: null,
+      questions: [{ id: 'q1', type: 'choice', prompt: 'Où part le train pour Berlin ?', moduleRef: null, explanation: null, spec: null,
         options: [{ id: 'a', label: 'Voie 4', correct: false }, { id: 'b', label: 'Voie 2', correct: false }, { id: 'c', label: 'Voie 9', correct: false }] }],
       placements: [] },
   ],
@@ -181,7 +201,7 @@ export const screens = [
   { name: 'equipe-version-publiee', role: 'staff', path: '/espace/catalogue/versions/v-a1-2', setup: richData },
   { name: 'equipe-apercu', role: 'staff', path: '/espace/catalogue/versions/v-a1-2', setup: async (page) => {
     await richData(page);
-    await page.getByLabel('Activité à prévisualiser').selectOption({ label: 'Les aliments et les boissons' });
+    await page.getByLabel('Activité à prévisualiser').selectOption({ label: essenLesson });
     await page.getByRole('button', { name: 'Ouvrir l’aperçu élève' }).click();
     await page.getByRole('dialog').getByRole('img').first().waitFor();
   } },
@@ -241,7 +261,7 @@ screens.push({ name: 'equipe-recette-ancres', role: 'staff', path: '/espace/medi
   await page.getByRole('link', { name: 'Ouvrir A1 version 2' }).click();
   await expect(page.getByRole('heading', { name: 'A1 · version 2' })).toBeVisible();
   await expect(page.getByText('Cette version est figée')).toBeVisible();
-  await page.getByLabel('Activité à prévisualiser').selectOption({ label: 'Les aliments et les boissons' });
+  await page.getByLabel('Activité à prévisualiser').selectOption({ label: essenLesson });
   await page.getByRole('button', { name: 'Ouvrir l’aperçu élève' }).click();
   await expect(page.getByRole('dialog').getByRole('img', { name: /^Six vignettes : une tasse de café/ })).toBeVisible({ timeout: 15_000 });
   console.log('Ancres de la recette : toutes présentes.');

@@ -40,7 +40,7 @@ export function rowCounts(dbUrl) {
 async function listObjects(storage, key, bucket, prefix = '') {
   const files = [];
   for (let offset = 0; ; offset += 1000) {
-    const response = await fetch(`${storage}/storage/v1/object/list/${bucket}`, {
+    const response = await fetchWithRetry(`${storage}/storage/v1/object/list/${bucket}`, {
       method: 'POST', headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
       body: JSON.stringify({ prefix, limit: 1000, offset, sortBy: { column: 'name', order: 'asc' } }),
     });
@@ -72,7 +72,7 @@ export async function backup({ out, dbUrl, storage, storageKey, log = console.lo
       const files = await listObjects(storage, storageKey, bucket);
       let bytes = 0;
       for (const path of files) {
-        const response = await fetch(`${storage}/storage/v1/object/${bucket}/${path.split('/').map(encodeURIComponent).join('/')}`, {
+        const response = await fetchWithRetry(`${storage}/storage/v1/object/${bucket}/${path.split('/').map(encodeURIComponent).join('/')}`, {
           headers: { apikey: storageKey, Authorization: `Bearer ${storageKey}` },
         });
         if (!response.ok) throw new Error(`Téléchargement de ${bucket}/${path} refusé (HTTP ${response.status}).`);
@@ -88,6 +88,18 @@ export async function backup({ out, dbUrl, storage, storageKey, log = console.lo
   }
   writeFileSync(join(out, 'manifest.json'), JSON.stringify(manifest, null, 2));
   return manifest;
+}
+
+/** Une coupure réseau passagère (connexion expirée, réinitialisée) ne doit pas faire échouer une copie de mille fichiers. */
+async function fetchWithRetry(url, options, attempts = 3) {
+  for (let attempt = 1; ; attempt++) {
+    try {
+      return await fetch(url, { ...options, signal: AbortSignal.timeout(60_000) });
+    } catch (error) {
+      if (attempt >= attempts) throw error;
+      await new Promise((resolveDelay) => setTimeout(resolveDelay, 1_000 * attempt));
+    }
+  }
 }
 
 async function secret(name, label) {

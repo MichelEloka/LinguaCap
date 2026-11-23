@@ -1,39 +1,11 @@
 {
   "levelId": "a1",
-  "modules": [
-    {
-      "id": "a1-hallo",
-      "file": "01-hallo.json"
-    },
-    {
-      "id": "a1-zahlen",
-      "file": "02-zahlen.json"
-    },
-    {
-      "id": "a1-kurs",
-      "file": "03-kurs.json"
-    },
-    {
-      "id": "a1-alltag",
-      "file": "04-alltag.json"
-    },
-    {
-      "id": "a1-essen",
-      "file": "05-essen.json"
-    },
-    {
-      "id": "a1-freizeit",
-      "file": "06-freizeit.json"
-    },
-    {
-      "id": "a1-familie",
-      "file": "07-familie.json"
-    },
-    {
-      "id": "a1-stadt",
-      "file": "08-stadt.json"
-    }
-  ],
+  "format": 4,
+  "layer": "content/v4/pedagogy/a1/_level.mjs",
+  "activityMinutes": {
+    "min": 2200,
+    "max": 2300
+  },
   "settings": {
     "expectedCompetences": [
       "lecture",
@@ -49,7 +21,7 @@
   },
   "diagnostic": {
     "title": "Test de positionnement A1",
-    "description": "Ce petit test de 12 questions (environ 10 minutes) sert seulement à situer votre point de départ : ce n’est pas un examen et il n’y a ni note ni échec. Les questions vont du plus simple au plus difficile, il est donc tout à fait normal de ne pas tout savoir, surtout si vous débutez. Répondez spontanément, sans dictionnaire ; si vous hésitez, choisissez la réponse qui vous semble la plus probable. Vos réponses servent à adapter votre parcours : les notions que vous maîtrisez déjà pourront être considérées comme acquises.",
+    "description": "Vous vous familiarisez peut-être avec l’allemand pour la première fois. Répondez comme vous le pouvez, sans dictionnaire. Vous pouvez commencer par l’alphabet, les sons et l’épellation avant de travailler les échanges simples. Prévoyez environ 10 minutes pour les 12 questions de ce point de départ.",
     "questions": [
       {
         "id": "q1",
@@ -361,7 +333,7 @@
     {
       "kind": "midterm",
       "title": "Bilan intermédiaire A1",
-      "description": "Ce bilan de 30 minutes porte sur les modules 1 à 4 : se présenter, les nombres et les informations personnelles, le cours d’allemand et la journée. Il comporte quatre parties : lecture (5 questions), écoute (5 questions), expression écrite et expression orale. Chaque compétence compte pour 5 points. Le bilan ne sert pas à valider le niveau : il vous montre ce qui est acquis et ce qu’il faut revoir avant la deuxième moitié du parcours.",
+      "description": "Ce bilan de 30 minutes reprend les premières séquences du parcours, de l’épellation aux horaires de la journée. Lisez trois documents, écoutez cinq scènes, puis préparez un message écrit et un court enregistrement. Chaque compétence compte pour 5 points. Après correction, refaites un exercice et une mission sur votre point le plus fragile.",
       "parts": [
         {
           "id": "lesen",
@@ -615,7 +587,7 @@
           "criteria": [],
           "placements": [
             {
-              "media": "a1-bilan-hoeren-audio",
+              "media": "a1-bilan-hoeren-audio-v3",
               "usage": "audio",
               "caption": "Cinq courtes scènes",
               "transcriptVisibility": "hidden",
@@ -1098,7 +1070,7 @@
           "criteria": [],
           "placements": [
             {
-              "media": "a1-examen-hoeren-audio",
+              "media": "a1-examen-hoeren-audio-v3",
               "usage": "audio",
               "caption": "Six courtes scènes",
               "transcriptVisibility": "hidden",
@@ -1139,12 +1111,12 @@
           "competence": "expression-orale",
           "mode": "oral",
           "title": "Expression orale : se présenter, échanger, demander",
-          "instructions": "Enregistrez-vous en une seule fois : 3 à 4 minutes en allemand, en parlant lentement et clairement. Vous avez 5 minutes pour préparer quelques notes ; ne lisez pas un texte entièrement rédigé. Durée conseillée : 15 minutes, préparation comprise.\n\nTÂCHE 1 — SE PRÉSENTER\nPrésentez-vous à l’aide de ces mots : Name · Alter · Land · Wohnort · Sprachen · Beruf · Familie · Hobby.\n\nTÂCHE 2 — POSER DES QUESTIONS ET Y RÉPONDRE\nThème : « Essen und Freizeit ». Pour chaque carte, posez une question à un ou une camarade, puis donnez vous-même une réponse.\nCartes : Frühstück? · Lieblingsessen? · Sport? · Wochenende?\nExemple : carte « Getränk? » → « Was trinkst du gern? » — « Ich trinke gern Tee. »\n\nTÂCHE 3 — FORMULER UNE DEMANDE\nPour chaque situation, formulez une demande polie (avec « Sie » ou « du » selon la personne), puis imaginez la réponse.\n• À la gare, au guichet : vous voulez un billet pour Munich.\n• Dans la rue, à une personne inconnue : vous cherchez la pharmacie.\n• Chez votre amie : il fait chaud, vous voulez ouvrir la fenêtre.\nExemple : au café, au serveur → « Einen Tee, bitte. » — « Kommt sofort! »",
+          "instructions": "Enregistrez-vous en une seule fois : 3 à 4 minutes en allemand, en parlant lentement et clairement. Vous avez 5 minutes pour préparer quelques notes ; ne lisez pas un texte entièrement rédigé. Durée conseillée : 15 minutes, préparation comprise.\n\nTÂCHE 1 — SE PRÉSENTER\nPrésentez-vous à l’aide de ces mots : Name (épelez votre nom) · Alter · Land · Wohnort · Sprachen · Beruf · Familie · Hobby.\n\nTÂCHE 2 — POSER DES QUESTIONS ET Y RÉPONDRE\nThème : « Essen und Freizeit ». Pour chaque carte, posez une question à un ou une camarade, puis donnez vous-même une réponse.\nCartes : Frühstück? · Lieblingsessen? · Sport? · Wochenende?\nExemple : carte « Getränk? » → « Was trinkst du gern? » — « Ich trinke gern Tee. »\n\nTÂCHE 3 — FORMULER UNE DEMANDE\nPour chaque situation, formulez une demande polie (avec « Sie » ou « du » selon la personne), puis imaginez la réponse.\n• À la gare, au guichet : vous voulez un billet pour Munich.\n• Dans la rue, à une personne inconnue : vous cherchez la pharmacie.\n• Chez votre amie : il fait chaud, vous voulez ouvrir la fenêtre.\nExemple : au café, au serveur → « Einen Tee, bitte. » — « Kommt sofort! »",
           "questions": [],
           "criteria": [
             {
               "id": "tache",
-              "label": "Tâches réalisées : présentation complète, une question et une réponse par carte, trois demandes adaptées",
+              "label": "Tâches réalisées : présentation avec nom épelé, une question et une réponse par carte, trois demandes adaptées",
               "maxPoints": 3
             },
             {
@@ -1165,7 +1137,7 @@
   ],
   "media": [
     {
-      "key": "a1-bilan-hoeren-audio",
+      "key": "a1-bilan-hoeren-audio-v3",
       "kind": "audio",
       "title": "Bilan intermédiaire A1 — écoute : cinq courtes scènes",
       "script": [
@@ -1313,10 +1285,13 @@
           "name": "Passant",
           "text": "Oh, schon! Mein Kurs beginnt um drei. Vielen Dank!"
         }
-      ]
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "audioProfile": "a1-suite"
     },
     {
-      "key": "a1-examen-hoeren-audio",
+      "key": "a1-examen-hoeren-audio-v3",
       "kind": "audio",
       "title": "Examen blanc A1 — écoute : six courtes scènes",
       "script": [
@@ -1487,7 +1462,10 @@
           "name": "Marie",
           "text": "Super! Sie hat zwei Zimmer und einen Balkon. Die Küche ist leider sehr klein. Ein Bett und einen Tisch habe ich schon, aber ich habe noch kein Sofa."
         }
-      ]
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "audioProfile": "a1-suite"
     },
     {
       "key": "a1-examen-lesen-bild",
@@ -1519,6 +1497,100 @@
           }
         ]
       }
+    }
+  ],
+  "modules": [
+    {
+      "id": "a1-abc",
+      "file": "01-a1-abc.json"
+    },
+    {
+      "id": "a1-voyelles",
+      "file": "02-a1-voyelles.json"
+    },
+    {
+      "id": "a1-rythme",
+      "file": "03-a1-rythme.json"
+    },
+    {
+      "id": "a1-hallo",
+      "file": "04-a1-hallo.json"
+    },
+    {
+      "id": "a1-hallo-atelier",
+      "file": "05-a1-hallo-atelier.json"
+    },
+    {
+      "id": "a1-zahlen",
+      "file": "06-a1-zahlen.json"
+    },
+    {
+      "id": "a1-zahlen-atelier",
+      "file": "07-a1-zahlen-atelier.json"
+    },
+    {
+      "id": "a1-montants",
+      "file": "08-a1-montants.json"
+    },
+    {
+      "id": "a1-kurs",
+      "file": "09-a1-kurs.json"
+    },
+    {
+      "id": "a1-kurs-atelier",
+      "file": "10-a1-kurs-atelier.json"
+    },
+    {
+      "id": "a1-alltag",
+      "file": "11-a1-alltag.json"
+    },
+    {
+      "id": "a1-alltag-atelier",
+      "file": "12-a1-alltag-atelier.json"
+    },
+    {
+      "id": "a1-arbeit",
+      "file": "13-a1-arbeit.json"
+    },
+    {
+      "id": "a1-sante",
+      "file": "14-a1-sante.json"
+    },
+    {
+      "id": "a1-essen",
+      "file": "15-a1-essen.json"
+    },
+    {
+      "id": "a1-essen-atelier",
+      "file": "16-a1-essen-atelier.json"
+    },
+    {
+      "id": "a1-freizeit",
+      "file": "17-a1-freizeit.json"
+    },
+    {
+      "id": "a1-freizeit-atelier",
+      "file": "18-a1-freizeit-atelier.json"
+    },
+    {
+      "id": "a1-familie",
+      "file": "19-a1-familie.json"
+    },
+    {
+      "id": "a1-familie-atelier",
+      "file": "20-a1-familie-atelier.json"
+    },
+    {
+      "id": "a1-stadt",
+      "file": "21-a1-stadt.json"
+    },
+    {
+      "id": "a1-stadt-atelier",
+      "file": "22-a1-stadt-atelier.json"
+    },
+    {
+      "id": "a1-transports",
+      "file": "23-a1-transports.json"
     }
   ]
 }

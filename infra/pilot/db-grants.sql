@@ -34,9 +34,10 @@ GRANT SELECT, INSERT, UPDATE ON learning.paths, learning.path_steps, learning.pa
 GRANT SELECT, INSERT, UPDATE, DELETE ON learning.path_availabilities TO lingua_learning;
 
 GRANT USAGE ON SCHEMA assessment TO lingua_assessment;
-GRANT SELECT, INSERT ON assessment.quiz_attempts TO lingua_assessment;
+GRANT SELECT, INSERT, UPDATE ON assessment.quiz_attempts TO lingua_assessment;
 GRANT SELECT, INSERT, UPDATE ON assessment.exam_attempts TO lingua_assessment;
 GRANT SELECT, INSERT, UPDATE ON assessment.placement_attempts, assessment.practice_attempts TO lingua_assessment;
+GRANT SELECT, INSERT, UPDATE ON assessment.speech_attempts, assessment.mission_submissions TO lingua_assessment;
 GRANT SELECT, INSERT ON assessment.outbox_events TO lingua_assessment;
 
 GRANT USAGE ON SCHEMA tracking TO lingua_tracking;

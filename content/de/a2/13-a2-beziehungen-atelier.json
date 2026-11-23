@@ -1,0 +1,1178 @@
+{
+  "id": "a2-beziehungen-atelier",
+  "title": "Inviter un ami et raconter un souvenir",
+  "objective": "Accepter ou déplacer une invitation et raconter un souvenir d’enfance avec un détail personnel.",
+  "prerequisites": [
+    "a2-beziehungen"
+  ],
+  "audioProfile": "a2-suite",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "grammarFocus": [
+    "als-praeteritum-modalverben",
+    "verbes-pronominaux"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-beziehungen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "geburtstag",
+      "word": "Geburtstag",
+      "article": "der",
+      "plural": "Geburtstage",
+      "partOfSpeech": "noun",
+      "translation": "l’anniversaire",
+      "example": "Am Samstag feiere ich meinen Geburtstag.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "feiern",
+      "word": "feiern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "fêter, faire la fête",
+      "example": "Wir wollen am Samstag zusammen feiern.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "vorbeikommen",
+      "word": "vorbeikommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "passer (chez quelqu’un)",
+      "example": "Kannst du am Sonntag vorbeikommen?",
+      "note": "séparable : vorbei|kommen · Perfekt : ist vorbeigekommen",
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "mitbringen",
+      "word": "mitbringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apporter",
+      "example": "Soll ich am Sonntag etwas mitbringen?",
+      "note": "séparable : mit|bringen · Bring bitte Saft mit!",
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "spaziergang",
+      "word": "Spaziergang",
+      "article": "der",
+      "plural": "Spaziergänge",
+      "partOfSpeech": "noun",
+      "translation": "la promenade",
+      "example": "Hast du am Freitag Lust auf einen Spaziergang?",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "bruecke",
+      "word": "Brücke",
+      "article": "die",
+      "plural": "Brücken",
+      "partOfSpeech": "noun",
+      "translation": "le pont",
+      "example": "Wir können uns an der Brücke treffen.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "fluss",
+      "word": "Fluss",
+      "article": "der",
+      "plural": "Flüsse",
+      "partOfSpeech": "noun",
+      "translation": "la rivière, le fleuve",
+      "example": "Ich bin ab sechs am Fluss.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "apfelsaft",
+      "word": "Apfelsaft",
+      "article": "der",
+      "plural": "Apfelsäfte",
+      "partOfSpeech": "noun",
+      "translation": "le jus de pomme",
+      "example": "Bring bitte Apfelsaft mit.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "kuchen",
+      "word": "Kuchen",
+      "article": "der",
+      "plural": "Kuchen",
+      "partOfSpeech": "noun",
+      "translation": "le gâteau",
+      "example": "Kuchen habe ich schon.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "zelten",
+      "word": "zelten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "camper (sous une tente)",
+      "example": "Als Kind durfte ich im Garten zelten.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-erinnern",
+      "word": "sich erinnern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se souvenir",
+      "example": "Sie erinnert sich gern an ihre Kindheit.",
+      "note": "an + accusatif · Daran erinnere ich mich gern.",
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "kindheit",
+      "word": "Kindheit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’enfance",
+      "example": "In meiner Kindheit habe ich oft draußen gespielt.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "duerfen",
+      "word": "dürfen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir le droit de, pouvoir",
+      "example": "Die Kinder dürfen nach der Schule draußen spielen.",
+      "note": "prétérit : ich durfte, wir durften",
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "muessen",
+      "word": "müssen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "devoir",
+      "example": "Wir müssen vor sieben zu Hause sein.",
+      "note": "prétérit : ich musste, wir mussten",
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "leider",
+      "word": "leider",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "malheureusement",
+      "example": "Am Samstag kann ich leider nicht.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "nebenan",
+      "word": "nebenan",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "à côté, d’à côté",
+      "example": "Meine beste Freundin wohnte nebenan.",
+      "note": null,
+      "audio": {
+        "media": "a2-beziehungen-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-beziehungen-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : déplacer une invitation, raconter un souvenir",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : déplacer une invitation, raconter un souvenir",
+        "description": "Lisez ces deux messages.\n« Hast du am Freitag Lust auf einen Spaziergang? Ich bin ab sechs am Fluss. »\n« Danke für die Einladung! Am Freitag helfe ich meinem Bruder. Hast du am Samstag um elf Zeit? Wir können uns an der Brücke treffen. »\nRepérez le jour proposé (vendredi, à partir de six heures), la raison du refus (Ich helfe meinem Bruder) et le nouveau rendez-vous (samedi à onze heures, au pont).\n\nDÉPLACER UNE INVITATION\nOn remercie, on donne une raison courte, puis on propose une autre possibilité :\n• Danke, da kann ich leider nicht. Treffen wir uns am Sonntag?\n• Am Mittwoch muss ich arbeiten. Hast du am Donnerstag Zeit?\n• Ins Kino gehe ich gern, aber nicht am Donnerstag. Geht es auch am Freitag?\nIch treffe mich mit Lara parle de vous ; wir treffen uns propose un rendez-vous commun. Pour confirmer : Gut, dann bis Samstag um elf an der Brücke!\n\nRACONTER UN SOUVENIR\n« Als ich neun war, wohnte meine beste Freundin nebenan. Wir durften jeden Nachmittag zusammen spielen. Ich musste nur vor sieben zu Hause sein. »\nRepérez l’âge (neun), ce qui était permis (wir durften … spielen) et ce qui était obligatoire (ich musste … zu Hause sein).\n• Als + moment unique du passé : le verbe conjugué va à la fin (Als ich neun war, …), puis la principale commence par le verbe : …, durfte ich im Garten spielen.\n• Au prétérit, dürfen et müssen perdent leur tréma : ich durfte, ich musste, wir durften, wir mussten.\n• Pour relancer la conversation : Und du? Was durftest du als Kind?\n\nÀ VOUS\nLisez les deux messages à voix haute, puis complétez à l’oral : Als ich zehn war, durfte ich … Ich musste … Und du?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-beziehungen-atelier-chat",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-beziehungen-atelier-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un rendez-vous déplacé",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un rendez-vous déplacé",
+        "description": "Une jeune femme invite un ami à son anniversaire. Il ne peut pas venir le jour prévu et propose un autre moment.\n\n1. Écoutez la scène une première fois sans lire les phrases : quelle est l’occasion, et qui propose un changement ?\n2. Réécoutez pour compléter les répliques : le nouveau rendez-vous, l’amie Lara, le souvenir d’enfance et ce qu’il faut apporter.\n3. Les deux dernières questions sont des dictées : de nouvelles phrases pour refuser poliment et raconter un souvenir.\nAprès validation, la transcription de la scène et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-beziehungen-atelier-einladung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Pourquoi l’ami ne vient-il pas samedi ? Complétez sa réponse.",
+          "text": "Am Samstag muss ich leider [[1]]. Treffen wir [[2]] vielleicht am Sonntag?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "arbeiten"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "uns"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "L’ami dit « Am Samstag muss ich leider arbeiten » : avec muss, l’infinitif arbeiten va à la fin. Pour proposer un rendez-vous commun, on dit « Treffen wir uns … ? », avec le pronom réfléchi uns."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "À quelle heure est le nouveau rendez-vous ? Écrivez l’heure en chiffres ou en lettres.",
+          "text": "Gern. Komm um [[1]] zu mir.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "drei",
+                "3",
+                "fünfzehn",
+                "15",
+                "drei Uhr",
+                "3 Uhr",
+                "15 Uhr",
+                "fünfzehn Uhr"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "L’hôtesse répond « Komm um drei zu mir » : dimanche à trois heures de l’après-midi, soit 15 h. L’ami le confirme à la fin : « dann bis Sonntag um drei! »."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Qui est Lara ? Complétez les adjectifs.",
+          "text": "Ist das die [[1]] Freundin aus deiner [[2]] Straße?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "nette"
+              ],
+              "size": 7,
+              "hint": "nett"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "alten"
+              ],
+              "size": 7,
+              "hint": "alt"
+            }
+          ],
+          "explanation": "Après die au nominatif, l’adjectif prend -e : die nette Freundin. Après aus (+ datif), deiner Straße appelle -en : aus deiner alten Straße."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Le souvenir d’enfance : complétez avec sein et dürfen au prétérit.",
+          "text": "Als ich klein [[1]], [[2]] ich bei ihr samstags im Garten zelten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "war"
+              ],
+              "size": 5,
+              "hint": "sein"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "durfte"
+              ],
+              "size": 7,
+              "hint": "dürfen"
+            }
+          ],
+          "explanation": "Après als, le verbe conjugué war va à la fin de la subordonnée. La principale commence ensuite par le verbe : durfte ich. Au prétérit, dürfen perd son tréma : ich durfte."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Que faut-il apporter dimanche ?",
+          "text": "Ja, bring bitte [[1]] mit. [[2]] habe ich schon.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Apfelsaft"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kuchen"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "L’hôtesse demande du jus de pomme (der Apfelsaft) et précise que le gâteau (der Kuchen) est déjà prévu. Bring … mit : impératif du verbe séparable mitbringen."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "La dernière réplique : complétez avec le pronom réfléchi.",
+          "text": "Gut, dann bis Sonntag um drei! Ich freue [[1]] darauf.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "mich"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Sich freuen auf : le pronom réfléchi s’accorde avec le sujet ich, donc mich. Darauf renvoie au rendez-vous de dimanche, qui est encore à venir."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez ce refus poli.",
+          "accept": [
+            "Danke für die Einladung, aber am Freitag kann ich leider nicht."
+          ],
+          "voice": "sprecherin",
+          "explanation": "On remercie d’abord (Danke für die Einladung), puis on refuse avec leider. Après am Freitag en tête de proposition, le verbe kann vient avant le sujet ich.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez ce souvenir d’enfance.",
+          "accept": [
+            "Als ich klein war, musste ich früh ins Bett gehen."
+          ],
+          "voice": "sprecher",
+          "explanation": "Après als, war termine la subordonnée ; la principale commence par musste, prétérit de müssen sans tréma. Ins Bett = in das Bett (accusatif de direction).",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-beziehungen-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : une invitation déplacée",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : une invitation déplacée",
+        "description": "Écoutez une première fois la scène pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur la langue : choisissez la phrase correcte sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-beziehungen-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-beziehungen-atelier-geburtstag",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "a"
+        },
+        {
+          "media": "v4-a2-beziehungen-atelier-schulausflug",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "b"
+        },
+        {
+          "media": "v4-a2-beziehungen-atelier-umzug",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false,
+          "questionId": "q1",
+          "optionId": "c"
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quelle est l’occasion de la première invitation ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un anniversaire",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Une sortie scolaire",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un déménagement",
+              "correct": false
+            }
+          ],
+          "explanation": "L’hôtesse dit « Am Samstag feiere ich meinen Geburtstag » : der Geburtstag, c’est l’anniversaire. Rien n’évoque une sortie scolaire ni un déménagement.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Pourquoi l’invitation du samedi est-elle refusée ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle n’aime pas les fêtes.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "La personne doit travailler.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Elle est déjà chez Lara.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Am Samstag muss ich leider arbeiten » : l’invité doit travailler. Il accepte volontiers de venir le dimanche, et il n’est jamais question d’être déjà chez Lara.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Que faisait l’hôte avec Lara pendant son enfance ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle travaillait dans un magasin.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle prenait des cours le dimanche.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elle campait dans le jardin de Lara.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Als ich klein war, durfte ich bei ihr samstags im Garten zelten » : zelten, c’est camper sous une tente ; bei ihr = chez Lara. Il n’est question ni de magasin ni de cours.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que doit apporter l’invité pour dimanche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du jus de pomme",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Un gâteau",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Une tente",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ja, bring bitte Apfelsaft mit. Kuchen habe ich schon. » Der Apfelsaft est le jus de pomme ; le gâteau est déjà prévu, et la tente appartient au souvenir d’enfance.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quelle réponse refuse poliment tout en proposant un nouveau moment ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Danke. Treffen wir uns am Freitag? Ich kann am Freitag nicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Danke! Am Freitag kann ich leider nicht. Treffen wir uns am Samstag?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Freitag geht nicht. Warum fragst du mich?",
+              "correct": false
+            }
+          ],
+          "explanation": "Cette réponse remercie, refuse avec leider (malheureusement) et propose un autre jour : Treffen wir uns am Samstag? L’une des autres propose vendredi tout en le refusant, l’autre est sèche et ne propose rien.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel début de récit a le bon ordre des mots ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Als ich war klein, durfte ich im Garten spielen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Als ich klein war, ich durfte im Garten spielen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Als ich klein war, durfte ich im Garten spielen.",
+              "correct": true
+            }
+          ],
+          "explanation": "Avec als, le verbe conjugué war va à la fin de la subordonnée. Celle-ci occupe la première position : la principale commence donc par le verbe durfte, suivi du sujet ich.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-beziehungen-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : inviter et se souvenir",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : inviter et se souvenir",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute. Montez la voix à la fin des questions fermées et marquez une courte pause après la proposition avec als. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-beziehungen-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-beziehungen-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis invitez votre ami à passer chez vous.",
+          "text": "Hast du Lust, vorbeizukommen?",
+          "accept": [
+            "Hast du Lust, vorbeizukommen?"
+          ],
+          "threshold": 75,
+          "explanation": "Avec Lust haben, l’infinitif prend zu ; pour un verbe séparable, zu s’intercale : vorbei-zu-kommen. L’accent tombe sur vorBEI."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis refusez en donnant la raison.",
+          "text": "Am Samstag muss ich leider arbeiten.",
+          "accept": [
+            "Am Samstag muss ich leider arbeiten."
+          ],
+          "threshold": 75,
+          "explanation": "Am Samstag occupe la première position : le verbe muss suit, puis le sujet ich, et l’infinitif arbeiten termine la phrase."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis proposez un autre jour.",
+          "text": "Treffen wir uns vielleicht am Sonntag?",
+          "accept": [
+            "Treffen wir uns vielleicht am Sonntag?"
+          ],
+          "threshold": 75,
+          "explanation": "Une proposition commune commence par le verbe : Treffen wir uns … ? La voix monte à la fin, sur Sonntag."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis racontez ce souvenir.",
+          "text": "Als ich klein war, durfte ich im Garten zelten.",
+          "accept": [
+            "Als ich klein war, durfte ich im Garten zelten."
+          ],
+          "threshold": 75,
+          "explanation": "Petite pause après « Als ich klein war » ; la principale repart sur le verbe durfte. Dans zelten, le z se prononce [ts]."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez ce que vous pouvez apporter.",
+          "text": "Soll ich am Sonntag etwas mitbringen?",
+          "accept": [
+            "Soll ich am Sonntag etwas mitbringen?"
+          ],
+          "threshold": 75,
+          "explanation": "Soll ich … ? propose un service. La particule mit reste collée à l’infinitif en fin de phrase et porte l’accent : MIT-bringen."
+        }
+      ]
+    },
+    {
+      "id": "a2-beziehungen-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : déplacer un pique-nique et raconter un souvenir",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : déplacer un pique-nique et raconter un souvenir",
+        "description": "Situation : un ami vous propose un pique-nique samedi. Vous n’êtes libre que dimanche à 15 h. Choisissez un lieu qui vous rappelle un souvenir d’enfance. Plus tard, la météo annonce de la pluie pour dimanche : il faut changer de lieu, mais garder l’heure.\n\nModèles :\n• Danke für die Einladung! Am Samstag kann ich leider nicht. Treffen wir uns am Sonntag um drei am See?\n• Als ich acht war, durfte ich hier auf Bäume klettern. Und du?\n• Im Park wird es wohl regnen. Wollen wir uns um drei im Café am Markt treffen?\n\nPréparez quelques mots-clés, puis réalisez les deux parties. Vérifiez que l’heure (15 h) reste la même à l’oral et à l’écrit.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-beziehungen-atelier-regen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre réponse à votre ami (une minute environ) : remerciez, expliquez pourquoi samedi ne va pas, proposez dimanche à 15 h et un lieu, racontez un souvenir lié à ce lieu avec als et durfte ou musste, puis posez-lui une question.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Il va pleuvoir dimanche. Écrivez à votre ami un message de 40 à 60 mots : proposez un autre lieu à la même heure, expliquez pourquoi et demandez-lui de confirmer.",
+          "maxChars": 800,
+          "minWords": 40
+        },
+        "checklist": [
+          "J’ai remercié, donné une raison courte pour samedi et proposé dimanche à 15 h.",
+          "Mon souvenir commence par als, avec le verbe conjugué à la fin : Als ich … war, …",
+          "J’ai employé durfte ou musste au prétérit, sans tréma.",
+          "Mon message écrit garde l’heure de 15 h et donne le nouveau lieu.",
+          "J’ai demandé une confirmation et écrit « wir treffen uns » avec le bon pronom réfléchi."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-beziehungen-atelier-dialogue",
+      "kind": "audio",
+      "title": "Inviter un ami et raconter un souvenir · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hallo! Am Samstag feiere ich meinen Geburtstag. Hast du Lust, vorbeizukommen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Danke! Am Samstag muss ich leider arbeiten. Treffen wir uns vielleicht am Sonntag?"
+        },
+        {
+          "voice": "frau",
+          "text": "Gern. Komm um drei zu mir. Ich lade auch meine Freundin Lara ein."
+        },
+        {
+          "voice": "mann",
+          "text": "Ist das die nette Freundin aus deiner alten Straße?"
+        },
+        {
+          "voice": "frau",
+          "text": "Genau. Als ich klein war, durfte ich bei ihr samstags im Garten zelten. Daran erinnere ich mich gern."
+        },
+        {
+          "voice": "mann",
+          "text": "Das klingt schön. Soll ich am Sonntag etwas mitbringen?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, bring bitte Apfelsaft mit. Kuchen habe ich schon."
+        },
+        {
+          "voice": "mann",
+          "text": "Gut, dann bis Sonntag um drei! Ich freue mich darauf."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-chat",
+      "kind": "image",
+      "title": "Une invitation déplacée",
+      "alt": "Échange de messages avec Emre : « Hast du am Freitag Lust auf einen Spaziergang? Ich bin ab sechs am Fluss. » — « Danke für die Einladung! Am Freitag helfe ich meinem Bruder. Hast du am Samstag um elf Zeit? Wir können uns an der Brücke treffen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Emre",
+        "size": 30,
+        "messages": [
+          {
+            "from": "Emre",
+            "text": "Hast du am Freitag Lust auf einen Spaziergang? Ich bin ab sechs am Fluss."
+          },
+          {
+            "side": "right",
+            "text": "Danke für die Einladung! Am Freitag helfe ich meinem Bruder. [Hast du am Samstag um elf Zeit?] Wir können uns an der Brücke treffen."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-einladung",
+      "kind": "image",
+      "title": "Une invitation pour le week-end",
+      "alt": "Chez elle, l’hôtesse demande à son ami « Hast du Lust, vorbeizukommen? » et il propose « Treffen wir uns am Sonntag? ». En haut : des cotillons, un cadeau et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "home",
+        "people": [
+          {
+            "name": "Gastgeberin",
+            "say": "Hast du Lust, vorbeizukommen?"
+          },
+          {
+            "name": "Freund",
+            "say": "Treffen wir uns am Sonntag?"
+          }
+        ],
+        "items": [
+          "party-popper",
+          "gift",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-geburtstag",
+      "kind": "image",
+      "title": "Un anniversaire",
+      "alt": "Un gâteau d’anniversaire avec des bougies.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "cake"
+      }
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-schulausflug",
+      "kind": "image",
+      "title": "Une sortie scolaire",
+      "alt": "Une école.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "school"
+      }
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-umzug",
+      "kind": "image",
+      "title": "Un déménagement",
+      "alt": "Un carton fermé.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "single",
+        "icon": "package"
+      }
+    },
+    {
+      "key": "v4-a2-beziehungen-atelier-regen",
+      "kind": "image",
+      "title": "Proposer un autre lieu à cause de la pluie",
+      "alt": "Message à Emre : « Im Park wird es wohl regnen. Wollen wir uns um drei im Café am Markt treffen? ». Emre répond « Gute Idee! Bis Sonntag um drei. ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Emre",
+        "size": 31,
+        "messages": [
+          {
+            "side": "right",
+            "text": "Im Park wird es wohl regnen. Wollen wir uns [um drei] [im Café am Markt] treffen?"
+          },
+          {
+            "from": "Emre",
+            "text": "Gute Idee! Bis Sonntag um drei."
+          }
+        ]
+      }
+    },
+    {
+      "key": "a2-beziehungen-atelier-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter un rendez-vous déplacé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Danke für die Einladung, aber am Freitag kann ich leider nicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un rendez-vous déplacé",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Als ich klein war, musste ich früh ins Bett gehen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : inviter et se souvenir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du Lust, vorbeizukommen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : inviter et se souvenir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Samstag muss ich leider arbeiten."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : inviter et se souvenir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Treffen wir uns vielleicht am Sonntag?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : inviter et se souvenir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Als ich klein war, durfte ich im Garten zelten."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : inviter et se souvenir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Soll ich am Sonntag etwas mitbringen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-beziehungen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Inviter un ami et raconter un souvenir",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Geburtstag, die Geburtstage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "feiern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vorbeikommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitbringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Spaziergang, die Spaziergänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Brücke, die Brücken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fluss, die Flüsse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Apfelsaft, die Apfelsäfte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuchen, die Kuchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zelten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich erinnern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kindheit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dürfen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "müssen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "leider"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nebenan"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -1,5 +1,6 @@
 package org.linguacap.catalogue;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,39 +11,107 @@ import java.util.UUID;
 import org.linguacap.common.HttpError;
 
 /**
- * Document d'édition d'une version de parcours : réglages, diagnostic, modules, activités, leçons, questions
- * avec corrigés et supports. Un brouillon s'enregistre d'un bloc ; la publication exige un document complet.
+ * Document d'édition d'une version de parcours : réglages, diagnostic, modules (et leur vocabulaire), activités,
+ * leçons, questions typées avec corrigés, explications et supports, missions. Un brouillon s'enregistre d'un bloc ;
+ * la publication exige un document complet. L'ancien format (questions sans type, sans explication ni clé typée,
+ * modules sans vocabulaire) reste accepté : une question sans type est une question à choix.
  */
 public record VersionDocument(UUID id, String levelId, String levelCode, String levelTitle, int number, String status,
                               String publishedAt, String updatedAt, Settings settings, Diagnostic diagnostic,
                               List<Module> modules, List<Assessment> assessments) {
 
     static final String ID = "[a-z0-9]+(-[a-z0-9]+)*";
-    static final Set<String> KINDS = Set.of("lesson", "exercise", "review", "assessment");
+    static final Set<String> KINDS = Set.of("lesson", "exercise", "review", "assessment", "mission");
     static final Set<String> COMPETENCES = Set.of("lecture", "ecoute", "expression-ecrite", "expression-orale");
     static final Set<String> USAGES = Set.of("illustration", "audio");
     static final Set<String> TRANSCRIPTS = Set.of("on_demand", "after_answer", "hidden");
     static final Set<String> ASSESSMENT_KINDS = Set.of("midterm", "final");
     static final Set<String> MODES = Set.of("closed", "written", "oral");
+    static final Set<String> ARTICLES = Set.of("der", "die", "das");
+    static final Set<String> PARTS_OF_SPEECH = Set.of("noun", "verb", "adjective", "adverb", "preposition",
+            "conjunction", "pronoun", "number", "expression", "other");
+    /** Un exercice typé se remet en une fois (POST /assessments/exercises) : 30 questions au plus. */
+    static final int MAX_TYPED_QUESTIONS = 30;
+    static final int MAX_VOCABULARY = 100;
 
     public record Settings(List<String> expectedCompetences, String successCriteria, int passPercent, int reviewMinutes,
                            int midtermMinutes, int finalMinutes) {}
 
     public record Diagnostic(String title, String description, List<Question> questions) {}
 
-    public record Module(String id, String title, String objective, List<String> prerequisites, List<Activity> activities) {}
+    /** vocabulary : lexique structuré du module (vide dans l'ancien format). */
+    public record Module(String id, String title, String objective, List<String> prerequisites, List<Activity> activities,
+                         List<VocabularyEntry> vocabulary) {
+        public Module(String id, String title, String objective, List<String> prerequisites, List<Activity> activities) {
+            this(id, title, objective, prerequisites, activities, List.of());
+        }
+    }
 
+    /** mission : définition d'une activité « mission » (null pour les autres types). */
     public record Activity(String id, String kind, String title, int estimatedMinutes, List<String> competences,
-                           Lesson lesson, List<Question> questions, List<Placement> placements) {}
+                           Lesson lesson, List<Question> questions, List<Placement> placements, Mission mission) {
+        public Activity(String id, String kind, String title, int estimatedMinutes, List<String> competences,
+                        Lesson lesson, List<Question> questions, List<Placement> placements) {
+            this(id, kind, title, estimatedMinutes, competences, lesson, questions, placements, null);
+        }
+    }
 
     public record Lesson(String title, String description, String transcript) {}
 
-    public record Question(String id, String prompt, String moduleRef, List<Option> options) {}
+    /**
+     * Question : type choice (null dans l'ancien format), fill, order, match, dictation ou speak. Les choix portent
+     * le corrigé d'une question « choice » ; spec porte la clé des autres types. explanation est affichée après la
+     * remise, avec le corrigé.
+     */
+    public record Question(String id, String type, String prompt, String moduleRef, String explanation,
+                           List<Option> options, QuestionSpecs.Spec spec) {
+        public Question(String id, String prompt, String moduleRef, List<Option> options) {
+            this(id, QuestionSpecs.CHOICE, prompt, moduleRef, null, options, null);
+        }
+    }
 
-    public record Option(String id, String label, boolean correct) {}
+    /** feedback : retour affiché après la remise si l'élève a choisi ce choix (absent s'il n'y en a pas). */
+    public record Option(String id, String label, boolean correct,
+                         @JsonInclude(JsonInclude.Include.NON_NULL) String feedback) {
+        public Option(String id, String label, boolean correct) {
+            this(id, label, correct, null);
+        }
+    }
 
     public record Placement(String assetId, int assetVersion, String usage, String alt, String caption,
                             String transcriptVisibility, boolean decorative, String questionId, String optionId) {}
+
+    /**
+     * Mission : production orale (oral) et/ou écrite (written) remise dans l'application, avec la liste de
+     * vérification que l'élève coche avant l'envoi. La situation et la consigne sont dans la leçon de l'activité.
+     */
+    public record Mission(Oral oral, Written written, List<String> checklist) {
+        /** Valeurs par défaut (2 min, 1 500 caractères, aucun minimum de mots) et textes sans espaces de bord. */
+        Mission normalized() {
+            return new Mission(
+                    oral == null ? null : new Oral(text(oral.prompt()), oral.maxSeconds() == null ? 120 : oral.maxSeconds()),
+                    written == null ? null : new Written(text(written.prompt()),
+                            written.maxChars() == null ? 1500 : written.maxChars(),
+                            written.minWords() == null ? 0 : written.minWords()),
+                    nonNull(checklist).stream().map(VersionDocument::text).toList());
+        }
+    }
+
+    /** Partie orale : enregistrement de 30 à 120 secondes. */
+    public record Oral(String prompt, Integer maxSeconds) {}
+
+    /** Partie écrite : texte de 200 à 1 500 caractères au plus, avec un nombre minimal de mots (0 à 200). */
+    public record Written(String prompt, Integer maxChars, Integer minWords) {}
+
+    /**
+     * Entrée du vocabulaire d'un module. article : der, die, das ou null ; note : précision courte (« + accusatif »,
+     * « séparable : an|fangen », « toujours au pluriel »).
+     */
+    public record VocabularyEntry(String id, String word, String article, String plural, String partOfSpeech,
+                                  String translation, String example, String note, VocabularyAudio audio) {}
+
+    /** Son d'une entrée : segment [start, end] (secondes) d'une version de média, publiée avec le parcours. */
+    public record VocabularyAudio(String assetId, int assetVersion, double start, double end) {}
 
     /** Bilan intermédiaire (midterm) ou examen blanc (final) : une partie par compétence. */
     public record Assessment(String kind, String title, String description, List<Part> parts) {}
@@ -89,6 +158,7 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
             if (text(module.title()).length() > 120 || text(module.objective()).length() > 500) {
                 throw HttpError.badRequest("Titre ou objectif trop long dans le module " + module.id() + ".");
             }
+            checkVocabulary(module);
             for (Activity activity : nonNull(module.activities())) {
                 requireId(activity == null ? null : activity.id(), "activité");
                 // Le planning réserve les révisions de module (revision-…), le bilan et l’examen blanc.
@@ -103,7 +173,8 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                         || text(activity.title()).length() > 120 || !COMPETENCES.containsAll(nonNull(activity.competences()))) {
                     throw HttpError.badRequest("Vérifiez le type, le titre, la durée et les compétences de l’activité " + activity.id() + ".");
                 }
-                checkQuestions(activity.questions(), activity.id());
+                checkMissionStructure(activity);
+                checkQuestions(activity.questions(), "l’activité " + activity.id());
                 checkPlacements(activity.placements(), activity.questions(), "l’activité " + activity.id());
             }
         }
@@ -133,6 +204,53 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                     }
                 }
                 checkPlacements(part.placements(), part.questions(), "la partie " + part.id());
+            }
+        }
+    }
+
+    /** Une mission ne porte pas de questions ; seule une activité « mission » porte une définition de mission. */
+    private static void checkMissionStructure(Activity activity) {
+        Mission mission = activity.mission();
+        boolean isMission = "mission".equals(activity.kind());
+        if (mission != null && !isMission) {
+            throw HttpError.badRequest("Seule une activité de type mission porte une mission (" + activity.id() + ").");
+        }
+        if (isMission && !nonNull(activity.questions()).isEmpty()) {
+            throw HttpError.badRequest("Une mission ne comporte pas de questions : retirez-les de " + activity.id() + ".");
+        }
+        if (mission == null) return;
+        Oral oral = mission.oral();
+        Written written = mission.written();
+        if (oral != null && (text(oral.prompt()).length() > 1000
+                || oral.maxSeconds() != null && (oral.maxSeconds() < 30 || oral.maxSeconds() > 120))
+                || written != null && (text(written.prompt()).length() > 1000
+                || written.maxChars() != null && (written.maxChars() < 200 || written.maxChars() > 1500)
+                || written.minWords() != null && (written.minWords() < 0 || written.minWords() > 200))
+                || nonNull(mission.checklist()).size() > 6
+                || nonNull(mission.checklist()).stream().anyMatch(item -> item == null || text(item).length() > 160)) {
+            throw HttpError.badRequest("Vérifiez la mission " + activity.id()
+                    + " : enregistrement de 30 à 120 s, texte de 200 à 1 500 caractères, 6 points de vérification au plus.");
+        }
+    }
+
+    private static void checkVocabulary(Module module) {
+        List<VocabularyEntry> entries = nonNull(module.vocabulary());
+        if (entries.size() > MAX_VOCABULARY) {
+            throw HttpError.badRequest("Le vocabulaire du module " + module.id() + " compte " + MAX_VOCABULARY + " entrées au plus.");
+        }
+        Set<String> ids = new HashSet<>();
+        for (VocabularyEntry entry : entries) {
+            requireId(entry == null ? null : entry.id(), "mot du vocabulaire");
+            VocabularyAudio audio = entry.audio();
+            if (!ids.add(entry.id()) || text(entry.word()).length() > 80 || entry.article() != null && !ARTICLES.contains(entry.article())
+                    || text(entry.plural()).length() > 80
+                    || entry.partOfSpeech() != null && !PARTS_OF_SPEECH.contains(entry.partOfSpeech())
+                    || text(entry.translation()).length() > 160 || text(entry.example()).length() > 300
+                    || text(entry.note()).length() > 120
+                    || audio != null && (audio.assetId() == null || !audio.assetId().matches("[a-z0-9-]{1,64}")
+                            || audio.assetVersion() < 1 || audio.assetVersion() > 9999 || !(audio.start() >= 0)
+                            || !(audio.end() > audio.start()) || audio.end() > 3600)) {
+                throw HttpError.badRequest("Vérifiez le mot « " + text(entry.word()) + " » du vocabulaire du module " + module.id() + ".");
             }
         }
     }
@@ -173,6 +291,7 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                     throw HttpError.badRequest("Vérifiez les choix de la question " + question.id() + ".");
                 }
             }
+            QuestionSpecs.checkStructure(question, owner);
         }
     }
 
@@ -207,6 +326,7 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
             if (nonNull(module.activities()).isEmpty()) {
                 issues.add(new Issue(path + ".activities", "Ajoutez au moins une activité au module « " + text(module.title()) + " »."));
             }
+            checkVocabularyComplete(module, path, issues);
             for (int a = 0; a < nonNull(module.activities()).size(); a++) {
                 Activity activity = module.activities().get(a);
                 String at = path + ".activities[" + a + "]";
@@ -219,8 +339,15 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                     if (nonNull(activity.questions()).isEmpty()) {
                         issues.add(new Issue(at + ".questions", "Ajoutez au moins une question à « " + text(activity.title()) + " »."));
                     }
-                    checkAnswers(activity.questions(), at, issues);
+                    boolean typed = nonNull(activity.questions()).stream()
+                            .anyMatch(question -> !QuestionSpecs.CHOICE.equals(QuestionSpecs.typeOf(question)));
+                    if (typed && activity.questions().size() > MAX_TYPED_QUESTIONS) {
+                        issues.add(new Issue(at + ".questions", "Un exercice typé compte " + MAX_TYPED_QUESTIONS
+                                + " questions au plus : partagez « " + text(activity.title()) + " »."));
+                    }
+                    checkAnswers(activity.questions(), activity.placements(), at, issues, false);
                 }
+                if ("mission".equals(activity.kind())) checkMission(activity, at, issues);
                 checkAlternatives(activity.placements(), at, issues);
             }
         }
@@ -234,7 +361,7 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                             "Rattachez la question « " + text(question.prompt()) + " » à un module ou au prérequis."));
                 }
             }
-            checkAnswers(diagnostic.questions(), "diagnostic", issues);
+            checkAnswers(diagnostic.questions(), List.of(), "diagnostic", issues, true);
         }
         for (int e = 0; e < nonNull(assessments).size(); e++) {
             Assessment assessment = assessments.get(e);
@@ -271,12 +398,49 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                     if (nonNull(part.questions()).isEmpty()) {
                         issues.add(new Issue(partAt + ".questions", "Ajoutez au moins une question à la partie " + label + "."));
                     }
-                    checkAnswers(part.questions(), partAt, issues);
+                    checkAnswers(part.questions(), part.placements(), partAt, issues, true);
                 }
                 checkAlternatives(part.placements(), partAt, issues);
             }
         }
         return new Checks(issues.isEmpty(), List.copyOf(issues));
+    }
+
+    /** Mission complète : partie orale et/ou écrite avec leur consigne, 2 à 6 points de vérification, situation rédigée. */
+    private static void checkMission(Activity activity, String at, List<Issue> issues) {
+        String name = "« " + text(activity.title()) + " »";
+        if (activity.lesson() == null || text(activity.lesson().description()).isBlank()) {
+            issues.add(new Issue(at + ".lesson", "Rédigez la situation et la consigne de la mission " + name + "."));
+        }
+        Mission mission = activity.mission();
+        if (mission == null || mission.oral() == null && mission.written() == null) {
+            issues.add(new Issue(at + ".mission", "Prévoyez une partie orale ou écrite pour la mission " + name + "."));
+            return;
+        }
+        if (mission.oral() != null && text(mission.oral().prompt()).isBlank()) {
+            issues.add(new Issue(at + ".mission.oral.prompt", "Rédigez la consigne orale de la mission " + name + "."));
+        }
+        if (mission.written() != null && text(mission.written().prompt()).isBlank()) {
+            issues.add(new Issue(at + ".mission.written.prompt", "Rédigez la consigne écrite de la mission " + name + "."));
+        }
+        List<String> checklist = nonNull(mission.checklist());
+        if (checklist.size() < 2 || checklist.size() > 6 || checklist.stream().anyMatch(item -> text(item).isBlank())) {
+            issues.add(new Issue(at + ".mission.checklist", "La mission " + name + " compte 2 à 6 points de vérification rédigés."));
+        }
+    }
+
+    /** Vocabulaire publiable : mot, traduction et nature renseignés ; un nom a son article, sauf nom toujours au pluriel. */
+    private static void checkVocabularyComplete(Module module, String path, List<Issue> issues) {
+        List<VocabularyEntry> entries = nonNull(module.vocabulary());
+        for (int v = 0; v < entries.size(); v++) {
+            VocabularyEntry entry = entries.get(v);
+            String at = path + ".vocabulary[" + v + "]";
+            if (text(entry.word()).isBlank() || text(entry.translation()).isBlank() || entry.partOfSpeech() == null) {
+                issues.add(new Issue(at, "Complétez le mot, sa traduction et sa nature (entrée " + entry.id() + " du module " + module.id() + ")."));
+            } else if ("noun".equals(entry.partOfSpeech()) && entry.article() == null && !text(entry.note()).contains("pluriel")) {
+                issues.add(new Issue(at + ".article", "Indiquez l’article du nom « " + text(entry.word()) + " »."));
+            }
+        }
     }
 
     private static void checkAlternatives(List<Placement> placements, String path, List<Issue> issues) {
@@ -289,12 +453,15 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
         }
     }
 
-    /** Versions de médias à publier avec le parcours : supports des activités et des évaluations. */
+    /** Versions de médias à publier avec le parcours : supports des activités et des évaluations, sons du vocabulaire. */
     List<MediaRef> mediaRefs() {
         Set<MediaRef> refs = new java.util.LinkedHashSet<>();
         for (Module module : nonNull(modules)) {
             for (Activity activity : nonNull(module.activities())) {
                 nonNull(activity.placements()).forEach(placement -> refs.add(new MediaRef(placement.assetId(), placement.assetVersion())));
+            }
+            for (VocabularyEntry entry : nonNull(module.vocabulary())) {
+                if (entry.audio() != null) refs.add(new MediaRef(entry.audio().assetId(), entry.audio().assetVersion()));
             }
         }
         for (Assessment assessment : nonNull(assessments)) {
@@ -305,18 +472,33 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
         return List.copyOf(refs);
     }
 
-    private static void checkAnswers(List<Question> questions, String path, List<Issue> issues) {
+    /**
+     * Corrigés à la publication. Le diagnostic et les parties des évaluations restent en questions à choix
+     * (choiceOnly) ; une dictée exige son son, masqué jusqu'à la réponse.
+     */
+    private static void checkAnswers(List<Question> questions, List<Placement> placements, String path, List<Issue> issues,
+                                     boolean choiceOnly) {
         for (int q = 0; q < nonNull(questions).size(); q++) {
             Question question = questions.get(q);
             String at = path + ".questions[" + q + "]";
+            String type = QuestionSpecs.typeOf(question);
             if (text(question.prompt()).isBlank()) issues.add(new Issue(at + ".prompt", "Rédigez l’énoncé de la question " + question.id() + "."));
-            List<Option> options = nonNull(question.options());
-            if (options.size() < 2) issues.add(new Issue(at + ".options", "Proposez au moins deux choix pour « " + text(question.prompt()) + " »."));
-            if (options.stream().filter(Option::correct).count() != 1) {
-                issues.add(new Issue(at + ".options", "Indiquez une seule bonne réponse pour « " + text(question.prompt()) + " »."));
+            if (choiceOnly && !QuestionSpecs.CHOICE.equals(type)) {
+                issues.add(new Issue(at + ".type", "Le diagnostic et les évaluations n’utilisent que des questions à choix ("
+                        + question.id() + ")."));
+                continue;
             }
-            if (options.stream().anyMatch(option -> text(option.label()).isBlank())) {
-                issues.add(new Issue(at + ".options", "Chaque choix de « " + text(question.prompt()) + " » doit avoir un libellé."));
+            QuestionSpecs.checkComplete(question, at, issues);
+            if (QuestionSpecs.DICTATION.equals(type)) {
+                List<Placement> sounds = nonNull(placements).stream()
+                        .filter(placement -> question.id().equals(placement.questionId()) && "audio".equals(placement.usage()))
+                        .toList();
+                if (sounds.isEmpty()) {
+                    issues.add(new Issue(at, "Associez l’enregistrement de la dictée « " + text(question.prompt()) + " »."));
+                } else if (sounds.stream().anyMatch(placement -> "on_demand".equals(placement.transcriptVisibility()))) {
+                    issues.add(new Issue(at, "La transcription de la dictée « " + text(question.prompt())
+                            + " » doit rester masquée jusqu’à la réponse."));
+                }
             }
         }
     }

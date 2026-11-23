@@ -1,4 +1,12 @@
-"""Produit les MP3 V3 à partir des scripts compilés et des extraits natifs V2."""
+"""Produit les MP3 V3/V4 à partir des scripts compilés et des extraits natifs V2.
+
+Les enregistrements natifs sont tirés des MP3 de la V2 de référence (content/base/de/media/audio), ralentis sans
+changer la hauteur (atempo) selon le profil du niveau. Les sons marqués « segments: true » (lexique d'un module)
+reçoivent dans le manifeste un segment { start, end } par réplique prononcée. Sortie mono, débit sobre.
+
+Usage dans le conteneur linguacap-tts-v3 :
+  python -B infra/content/tts/synthesize-v3.py --content /repo/content/de [--level a1] [--only clé …] [--force]
+"""
 import argparse
 from concurrent.futures import ProcessPoolExecutor
 from dataclasses import dataclass
@@ -17,9 +25,15 @@ from piper import PiperVoice
 from piper.config import PiperConfig, SynthesisConfig
 
 
-ORIGINAL_AUDIO = Path(__file__).resolve().parents[3] / "content" / "de" / "media" / "audio"
+ORIGINAL_AUDIO = Path(__file__).resolve().parents[3] / "content" / "base" / "de" / "media" / "audio"
 VOICES_DIR = Path("/voices")
 RATE = 22050
+# Débits MP3 mono : voix de synthèse (22,05 kHz) et enregistrements natifs ralentis (44,1 kHz).
+SPEECH_BITRATE = "48k"
+NATIVE_BITRATE = "64k"
+# Marges autour d'un segment du lexique : délai de l'encodeur MP3 et fin de souffle.
+SEGMENT_LEAD = 0.05
+SEGMENT_TAIL = 0.12
 
 
 @dataclass(frozen=True)
@@ -32,9 +46,12 @@ class Profile:
 PROFILES = {
     "a1-alphabet": Profile(1.38, 0.50, 0.84),
     "a1-debut": Profile(1.32, 0.45, 0.88),
-    "a1-suite": Profile(1.22, 0.40, 0.93),
+    # EVO-040 : toutes les voix A1 sont ralenties, y compris en fin de niveau (synthèse et enregistrements natifs).
+    "a1-suite": Profile(1.30, 0.45, 0.88),
     "a2-debut": Profile(1.10, 0.37, 0.95),
     "a2-suite": Profile(1.04, 0.35, 1.0),
+    "b1-debut": Profile(1.02, 0.31, 1.0),
+    "b1-suite": Profile(0.99, 0.28, 1.0),
 }
 VOICES = {
     "frau": "de_DE-kerstin-medium",
@@ -87,11 +104,11 @@ def voice_digest(model):
 
 def fingerprint(item, profile, source):
     if source:
-        data = ("v3-native-1", profile.native_tempo, sha256_file(source))
+        data = ("v3-native-2", NATIVE_BITRATE, profile.native_tempo, sha256_file(source))
     else:
         models = {VOICES[line["voice"]] for line in item["script"] if "voice" in line}
-        data = ("v3-piper-1", profile.length_scale, profile.line_gap, item["script"], VOICES,
-                {model: voice_digest(model) for model in sorted(models)})
+        data = ("v3-piper-2", SPEECH_BITRATE, bool(item.get("segments")), profile.length_scale, profile.line_gap,
+                item["script"], VOICES, {model: voice_digest(model) for model in sorted(models)})
     return hashlib.sha256(json.dumps(data, sort_keys=True, ensure_ascii=False).encode("utf-8")).hexdigest()
 
 
@@ -113,19 +130,27 @@ def silence(seconds):
 
 
 def render_speech(item, profile, scratch, target):
+    """Synthèse réplique par réplique ; renvoie les bornes (secondes) de chaque réplique prononcée."""
     pieces = [silence(0.25)]
+    samples = len(pieces[0])
+    bounds = []
     previous_was_line = False
     for line in item["script"]:
         if "pause" in line:
             pieces.append(silence(line["pause"]))
+            samples += len(pieces[-1])
             previous_was_line = False
             continue
         if previous_was_line:
             pieces.append(silence(profile.line_gap))
+            samples += len(pieces[-1])
         voice = load_voice(VOICES[line["voice"]])
         config = SynthesisConfig(length_scale=profile.length_scale)
+        start = samples
         for chunk in voice.synthesize(line.get("say") or line["text"], syn_config=config):
             pieces.append(chunk.audio_int16_array)
+            samples += len(chunk.audio_int16_array)
+        bounds.append((start / RATE, samples / RATE))
         previous_was_line = True
     pieces.append(silence(0.35))
     wav = scratch / "joined.wav"
@@ -134,9 +159,20 @@ def render_speech(item, profile, scratch, target):
         handle.writeframes(np.concatenate(pieces).tobytes())
     subprocess.run(
         ["ffmpeg", "-loglevel", "error", "-y", "-i", str(wav), "-af", "loudnorm=I=-18:TP=-2:LRA=9",
-         "-ar", str(RATE), "-ac", "1", "-c:a", "libmp3lame", "-b:a", "64k", str(target)],
+         "-ar", str(RATE), "-ac", "1", "-c:a", "libmp3lame", "-b:a", SPEECH_BITRATE, str(target)],
         check=True,
     )
+    return bounds
+
+
+def segments_of(bounds, seconds):
+    """Segments du lexique : une réplique par segment, avec une marge qui ne déborde pas sur la suivante."""
+    result = []
+    for index, (start, end) in enumerate(bounds):
+        following = bounds[index + 1][0] if index + 1 < len(bounds) else seconds
+        result.append({"start": round(max(0.0, start - SEGMENT_LEAD), 3),
+                       "end": round(min(seconds, end + SEGMENT_TAIL, max(end, following - SEGMENT_LEAD)), 3)})
+    return result
 
 
 def render_native(source, tempo, target):
@@ -145,7 +181,7 @@ def render_native(source, tempo, target):
         return
     subprocess.run(
         ["ffmpeg", "-loglevel", "error", "-y", "-i", str(source), "-map", "0:a:0",
-         "-af", f"atempo={tempo}", "-c:a", "libmp3lame", "-b:a", "80k", str(target)],
+         "-af", f"atempo={tempo}", "-ac", "1", "-c:a", "libmp3lame", "-b:a", NATIVE_BITRATE, str(target)],
         check=True,
     )
 
@@ -169,10 +205,12 @@ def render(job):
             render_native(source, profile.native_tempo, candidate)
             pacing = {"nativeTempo": profile.native_tempo, "sourceKey": source.stem}
         else:
-            render_speech(item, profile, scratch, candidate)
+            bounds = render_speech(item, profile, scratch, candidate)
             pacing = {"lengthScale": profile.length_scale, "lineGapSeconds": profile.line_gap,
                       "voices": sorted({VOICES[line["voice"]] for line in item["script"] if "voice" in line})}
         seconds = duration(candidate)
+        if not source and item.get("segments"):
+            pacing["segments"] = segments_of(bounds, seconds)
         result = {"audioProfile": profile_name, **pacing, "seconds": seconds,
                   "sha256": sha256_file(candidate), "fingerprint": digest}
         candidate.replace(target)
@@ -181,18 +219,20 @@ def render(job):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--content", type=Path, required=True, help="dossier content/de du kit compilé")
-    parser.add_argument("--level", nargs="+", choices=("a1", "a2"), default=["a1", "a2"])
+    parser.add_argument("--content", type=Path, required=True, help="dossier content/de construit (V4 officielle ou kit)")
+    levels = ("a1", "a2", "b1")
+    parser.add_argument("--level", nargs="+", choices=levels)
     parser.add_argument("--only", nargs="+", help="clés audio à régénérer")
     parser.add_argument("--jobs", type=int, choices=range(1, 9), default=4)
     parser.add_argument("--force", action="store_true")
     args = parser.parse_args()
     output = (args.content / "media" / "audio").resolve()
     if output.is_relative_to(ORIGINAL_AUDIO.resolve().parents[1]):
-        parser.error("--content doit désigner le kit compilé, dans un dossier distinct des sources")
+        parser.error("--content ne doit pas désigner la V2 de référence (content/base/de), source des enregistrements natifs")
 
     selected = {}
-    for item, profile_name in content_audio(args.content, args.level):
+    selected_levels = args.level or [level for level in levels if (args.content / level / "level.json").is_file()]
+    for item, profile_name in content_audio(args.content, selected_levels):
         key = item["key"]
         if args.only and key not in args.only:
             continue

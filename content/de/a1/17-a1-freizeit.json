@@ -1,0 +1,3367 @@
+{
+  "id": "a1-freizeit",
+  "title": "Hast du Zeit ? Loisirs et rendez-vous",
+  "objective": "Parler de ses loisirs et de ses sports préférés avec « gern », « lieber » et « am liebsten », dire ce qu’on sait faire et ce qu’on veut faire avec « können » et « wollen », proposer une sortie, accepter ou refuser un rendez-vous et dire simplement quel temps il fait. Prononcer les trois formes du « r » allemand.",
+  "prerequisites": [
+    "a1-essen-atelier"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "Deutsch im Blick, Kapitel 4 « Freizeit und Ausgehen » (COERLL, Université du Texas à Austin, CC BY 4.0) : thèmes et vocabulaire de base (Freizeitaktivitäten, Wohin man gehen kann, Verschiedene Sportarten, Musik und Instrumente, Ins Kino gehen, Hobbys beschreiben)",
+    "Der und mehr, German 1001–2002 Course Materials, Kennesaw State University (S. Peterson, S. Smith, D. Goldblatt, S. Estrella), Affordable Learning Georgia, CC BY 4.0 : chapitre 1002-3 « Der Sport » — partie C (aller voir un match de football professionnel : billets, transports, règlement du stade, préparer la sortie à deux) adaptée dans l’activité a1-freizeit-stadion ; parties A et B (le sport universitaire allemand, les clubs sportifs, fréquence et raisons de faire du sport, présenter une offre sportive et interroger un partenaire) adaptées dans l’activité a1-freizeit-sport",
+    "Deutsch im Blick, Kapitel 4 « Freizeit und Ausgehen » (Wortschatz : Verschiedene Freizeitaktivitäten, Hobbys beschreiben, Verschiedene Sportarten ; Aussprache : das R) (COERLL, Université du Texas à Austin) : enregistrements natifs voc_04_01_freizeitakt, voc_04_10_hobbies, voc_04_07_sport, pho_04_01_das-r, pho_04_02_r-comparisons et pho_04_04_posh-r, et dessins et photos k04/026-102, k04/026-103, k04/026-106, k04/026-109 et k04/030-117 (CC BY 4.0), dans les activités a1-freizeit-nachsprechen, a1-freizeit-sportarten et a1-freizeit-aussprache-r"
+  ],
+  "grammarFocus": [
+    "koennen-wollen"
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-freizeit.mjs",
+  "vocabulary": [
+    {
+      "id": "freizeit",
+      "word": "Freizeit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le temps libre",
+      "example": "Was machst du gern in deiner Freizeit?",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "hobby",
+      "word": "Hobby",
+      "article": "das",
+      "plural": "Hobbys",
+      "partOfSpeech": "noun",
+      "translation": "le loisir, le passe-temps",
+      "example": "Mein Hobby ist Musik.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "zeit",
+      "word": "Zeit",
+      "article": "die",
+      "plural": "Zeiten",
+      "partOfSpeech": "noun",
+      "translation": "le temps (disponible)",
+      "example": "Hast du am Samstag Zeit?",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "spielen",
+      "word": "spielen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "jouer",
+      "example": "Wollen wir Volleyball spielen?",
+      "note": "Fußball / Gitarre spielen",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "lesen",
+      "word": "lesen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "lire",
+      "example": "Am Abend will ich ein Buch lesen.",
+      "note": "ich lese, du liest, er liest",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "schwimmen",
+      "word": "schwimmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "nager",
+      "example": "Wollen wir schwimmen gehen?",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "tanzen",
+      "word": "tanzen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "danser",
+      "example": "Wir wollen heute Abend tanzen.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "rad-fahren",
+      "word": "Rad fahren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire du vélo",
+      "example": "Wollen wir zusammen Rad fahren?",
+      "note": "ich fahre Rad, du fährst Rad",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "treffen",
+      "word": "treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "retrouver, rencontrer",
+      "example": "Am Wochenende will ich Freunde treffen.",
+      "note": "ich treffe, du triffst",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "spazieren-gehen",
+      "word": "spazieren gehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se promener",
+      "example": "Am Sonntag wollen wir spazieren gehen.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "koennen",
+      "word": "können",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pouvoir ; savoir (faire)",
+      "example": "Wir können im Park spielen.",
+      "note": "ich kann, du kannst, er kann ; infinitif à la fin",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "wollen",
+      "word": "wollen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "vouloir",
+      "example": "Wollen wir ins Kino gehen?",
+      "note": "ich will, du willst, er will ; infinitif à la fin",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "muessen",
+      "word": "müssen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "devoir",
+      "example": "Wir müssen heute lernen.",
+      "note": "ich muss, du musst, er muss",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "gern",
+      "word": "gern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "volontiers ; aimer (faire)",
+      "example": "Ich lese gern.",
+      "note": "gern, lieber, am liebsten",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "lieber",
+      "word": "lieber",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "plutôt ; préférer (faire)",
+      "example": "Ich spiele lieber Volleyball als Tennis.",
+      "note": "pour comparer : lieber … als …",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "leider",
+      "word": "leider",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "malheureusement",
+      "example": "Leider habe ich keine Zeit.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "zusammen",
+      "word": "zusammen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "ensemble",
+      "example": "Wir trinken zusammen Kaffee.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "kino",
+      "word": "Kino",
+      "article": "das",
+      "plural": "Kinos",
+      "partOfSpeech": "noun",
+      "translation": "le cinéma",
+      "example": "Am Abend gehen wir ins Kino.",
+      "note": "ins Kino = in das Kino",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "schwimmbad",
+      "word": "Schwimmbad",
+      "article": "das",
+      "plural": "Schwimmbäder",
+      "partOfSpeech": "noun",
+      "translation": "la piscine",
+      "example": "Ich gehe ins Schwimmbad.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "park",
+      "word": "Park",
+      "article": "der",
+      "plural": "Parks",
+      "partOfSpeech": "noun",
+      "translation": "le parc",
+      "example": "Wir spielen im Park Volleyball.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "spass",
+      "word": "Spaß",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le plaisir, l’amusement",
+      "example": "Das macht Spaß!",
+      "note": "Das macht Spaß : c’est amusant",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "wetter",
+      "word": "Wetter",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le temps (météo)",
+      "example": "Wie ist das Wetter heute?",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "sonne",
+      "word": "Sonne",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le soleil",
+      "example": "Die Sonne scheint.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "regnen",
+      "word": "regnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pleuvoir",
+      "example": "Am Samstag kann es regnen.",
+      "note": "es regnet : il pleut",
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "kalt",
+      "word": "kalt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "froid",
+      "example": "Im Winter ist es kalt.",
+      "note": null,
+      "audio": {
+        "media": "a1-freizeit-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-freizeit-wortschatz",
+      "kind": "lesson",
+      "title": "Découvrir : loisirs, sorties et météo",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : loisirs, sorties et météo",
+        "description": "Pour parler du temps libre, on demande : « Was machst du gern in deiner Freizeit? » (Qu’est-ce que tu aimes faire pendant ton temps libre ?). Ici, l’allemand n’emploie pas de verbe « aimer » : on ajoute le petit mot « gern » après le verbe de l’activité. Ich lese gern. — J’aime lire. Ich tanze nicht gern. — Je n’aime pas danser.\n\nLES LOISIRS\n• Musik hören — écouter de la musique\n• lesen — lire\n• fernsehen — regarder la télévision (ich sehe fern)\n• Computerspiele spielen — jouer aux jeux vidéo\n• kochen — faire la cuisine\n• malen — peindre\n• tanzen — danser   • singen — chanter\n• Gitarre spielen / Klavier spielen — jouer de la guitare / du piano\n• Freunde treffen — retrouver des amis\n• spazieren gehen — se promener\n• reisen — voyager\n\nLES SPORTS\n• Sport machen — faire du sport\n• Fußball / Tennis / Volleyball spielen — jouer au football / au tennis / au volley\n• schwimmen — nager\n• Rad fahren — faire du vélo (ich fahre Rad)\n• joggen — courir, faire du jogging\n• wandern — faire de la randonnée\n\nSORTIR : WOHIN GEHST DU?\n• ins Kino — au cinéma (das Kino)\n• ins Theater — au théâtre (das Theater)\n• ins Konzert — au concert (das Konzert)\n• ins Museum — au musée (das Museum)\n• ins Schwimmbad — à la piscine (das Schwimmbad)\n• in die Disco — en boîte de nuit (die Disco)\n• in die Kneipe — au bar, au bistrot (die Kneipe)\n• in den Park — au parc (der Park)\n• essen gehen — aller au restaurant\nPour dire où l’on va, on emploie « in » + l’article à l’accusatif : ins (= in das) devant un nom neutre, in die devant un nom féminin, in den devant un nom masculin.\n\nDONNER SON AVIS\n• Das macht Spaß! — C’est amusant ! Ça me plaît !\n• Das ist interessant / langweilig / gesund / teuer. — C’est intéressant / ennuyeux / bon pour la santé / cher.\n\nLE TEMPS QU’IL FAIT\nLe temps décide souvent de nos sorties : quand il pleut, on va au cinéma ; quand il fait beau, on va à la piscine ou au parc. Pour demander quel temps il fait : « Wie ist das Wetter heute? »\n• Die Sonne scheint. / Es ist sonnig. — Il y a du soleil.\n• Es ist bewölkt. — Le ciel est nuageux.\n• Es regnet. — Il pleut.   • Es schneit. — Il neige.\n• Es ist windig. — Il y a du vent.\n• Es ist heiß / warm / kühl / kalt. — Il fait très chaud / chaud / frais / froid.\n• Es sind 18 Grad. / Es sind minus 3 Grad. — Il fait 18 degrés / moins 3 degrés.\n• Das Wetter ist schön / schlecht. — Il fait beau / mauvais.\nComme « il » dans « il pleut », « es » est un sujet impersonnel : Es regnet. Es schneit. Avec « Grad », le verbe est au pluriel : Es sind 20 Grad.\n\nÀ VOUS\n1. Écoutez le premier enregistrement et répétez chaque expression à voix haute.\n2. Dites trois choses que vous aimez faire et une chose que vous n’aimez pas faire : Ich koche gern. Ich schwimme gern. Ich höre gern Musik. Ich tanze nicht gern.\n3. Écoutez le second enregistrement, sur la météo, et répétez chaque phrase. Dites ensuite quel temps il fait aujourd’hui et ce que vous faites : Es regnet. Ich gehe ins Kino.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-hobbys-bild",
+          "usage": "illustration",
+          "caption": "Musik hören, lesen, Gitarre spielen, Volleyball spielen, Rad fahren, malen",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-orte-bild",
+          "usage": "illustration",
+          "caption": "Wohin gehst du? Les lieux de sortie",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-wortschatz-audio-v3",
+          "usage": "audio",
+          "caption": "Écouter et répéter les loisirs et les sorties",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-wetter-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-wetter-audio-v3",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-nachsprechen",
+      "kind": "lesson",
+      "title": "Écouter et répéter : loisirs et opinions (voix authentiques)",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Freizeit und Hobbys — Écouter et répéter",
+        "description": "Voici deux enregistrements authentiques. Dans le premier, une voix allemande lit des activités de loisirs ; dans le second, des mots et des phrases pour parler de ses hobbys et donner son avis. Après chaque expression, une pause vous laisse le temps de répéter.\n\nCOMMENT TRAVAILLER\n1. Écoutez une première fois sans lire : combien d’activités reconnaissez-vous ?\n2. Écoutez une deuxième fois et répétez chaque expression pendant la pause, en imitant la mélodie.\n3. Affichez la transcription pour vérifier les mots nouveaux.\n\nÀ REMARQUER\n• Dans une expression de loisir, le verbe est à l’infinitif, à la fin : Gitarre spielen, Musik hören, ins Kino gehen, in den Bergen wandern. Dans une phrase, il se conjugue et passe en 2e position : Ich spiele Gitarre. Am Samstag gehe ich ins Kino.\n• Football spielen, c’est jouer au football américain. Le football se dit der Fußball : Fußball spielen.\n• Sport treiben a le même sens que Sport machen : faire du sport.\n• Pour donner son avis : Das ist … ou Ich finde … + adjectif. Das ist interessant. Ich finde mein Hobby entspannend. Das ist zu schwierig für mich!\n• « Ist das nicht gefährlich? » est une question sans mot interrogatif : le verbe est en 1re position.\n• « Ich habe keine Hobbys! » : devant un nom, la négation est kein (keine Hobbys, keine Zeit).\n• das Hobby → die Hobbys : beaucoup de mots venus de l’anglais font leur pluriel en -s.\n\nMOTS UTILES\n• die Freizeit — le temps libre   • mit Freunden ausgehen — sortir avec des amis\n• Freunde besuchen oder treffen — rendre visite à des amis ou les retrouver\n• jagen — chasser   • Karten spielen — jouer aux cartes   • Kleidung kaufen — acheter des vêtements\n• klettern gehen — faire de l’escalade   • zeichnen — dessiner   • Sport treiben — faire du sport\n• in den Bergen wandern — faire de la randonnée en montagne\n• entspannend — relaxant   • gefährlich — dangereux   • kreativ — créatif   • langsam — lent\n• lustig — amusant   • schwierig — difficile   • spannend — passionnant   • ungewöhnlich — inhabituel, original\n\nÀ VOUS\nChoisissez trois activités de l’enregistrement et donnez votre avis à voix haute. Exemple : Ich wandere gern in den Bergen. Das ist gesund und entspannend. Ich spiele nicht gern Karten. Das finde ich langweilig. Klettern? Das ist zu gefährlich für mich!\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-aktivitaeten-native",
+          "usage": "audio",
+          "caption": "Verschiedene Freizeitaktivitäten : de « Computerspiele spielen » à « zeichnen »",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-hobbys-native",
+          "usage": "audio",
+          "caption": "Hobbys beschreiben : donner son avis sur un loisir",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-dialog",
+      "kind": "lesson",
+      "title": "Comprendre : des projets pour samedi",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : des projets pour samedi",
+        "description": "Vendredi midi, à la cafétéria de l’université de Leipzig, Mira et Lukas font des projets pour le week-end. Puis leur ami Deniz arrive. Écoutez le dialogue une première fois sans lire, puis une deuxième fois en suivant le texte.\n\nDIALOGUE\nMira : Hallo Lukas! Was machst du am Samstag?\nLukas : Noch nichts. Warum?\nMira : Am Samstag scheint die Sonne und es ist warm. Wollen wir schwimmen gehen?\nLukas : Ach, ich schwimme nicht so gern. Ich spiele lieber Volleyball. Kannst du Volleyball spielen?\nMira : Nicht so gut. Aber ich will es lernen!\nLukas : Super! Dann können wir im Park spielen. Um zwei Uhr?\nMira : Ja, gern! Und am Abend? Willst du ins Kino gehen?\nLukas : Gute Idee! Ich sehe am liebsten Komödien.\nMira : Ich auch! Oh, da ist Deniz. Hallo Deniz! Wir gehen am Samstag ins Kino. Kommst du mit?\nDeniz : Leider nicht. Am Samstag muss ich arbeiten. Aber am Sonntag habe ich Zeit.\nMira : Schade! Dann trinken wir am Sonntag zusammen Kaffee, okay?\nDeniz : Ja, gern! Bis Sonntag!\n\nGRAMMAIRE : GERN, LIEBER, AM LIEBSTEN\n• gern : ce qu’on aime faire. Ich spiele gern Volleyball. — J’aime jouer au volley.\n• nicht gern : ce qu’on n’aime pas faire. Ich schwimme nicht gern. — Je n’aime pas nager.\n• lieber : ce qu’on préfère. Ich spiele lieber Volleyball. — Je préfère jouer au volley. Pour comparer, on ajoute « als » : Ich spiele lieber Volleyball als Tennis. — Je préfère le volley au tennis.\n• am liebsten : ce qu’on préfère par-dessus tout. Ich sehe am liebsten Komödien. — Ce que je préfère, ce sont les comédies.\nCes mots se placent après le verbe conjugué et son sujet : Ich spiele gern Tennis. Spielst du gern Tennis? Am Samstag spiele ich gern Tennis. « Am liebsten » peut aussi ouvrir la phrase : Am liebsten sehe ich Komödien.\n\nGRAMMAIRE : KÖNNEN ET WOLLEN\n• können (pouvoir, savoir faire) : ich kann, du kannst, er/sie kann, wir können, ihr könnt, sie/Sie können\n• wollen (vouloir) : ich will, du willst, er/sie will, wir wollen, ihr wollt, sie/Sie wollen\nAttention : avec « ich » et avec « er/sie », la forme est la même et n’a pas de terminaison : ich kann, er kann ; ich will, sie will.\n\nLA PHRASE AVEC KÖNNEN OU WOLLEN\nLe verbe de modalité conjugué est à la 2e place ; le deuxième verbe, à l’infinitif, va tout à la fin de la phrase. Les deux verbes forment comme une pince autour du reste de la phrase.\n• Ich kann gut Volleyball spielen.\n• Am Abend können wir ins Kino gehen.\n• Willst du am Samstag schwimmen gehen? (question sans mot interrogatif : le verbe de modalité passe à la 1re place)\n• « Wollen wir … ? » sert à proposer : Wollen wir schwimmen gehen? — Et si on allait nager ?\n\nÀ RETENIR\n« Ich muss arbeiten » (je dois travailler) se construit de la même façon : ich muss, du musst, er/sie muss … et l’infinitif à la fin.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-dialog-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-dialog-audio-v3",
+          "usage": "audio",
+          "caption": "Dialogue : Hast du am Samstag Zeit?",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-lesen",
+      "kind": "exercise",
+      "title": "Lire : petites annonces de loisirs",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Freizeitpartner gesucht!",
+        "description": "Sur le panneau d’affichage du centre culturel de Leipzig, trois personnes cherchent des partenaires pour leurs loisirs. Lisez les annonces, puis répondez aux questions.\n\nJANA, 29 ANS\nHallo! Ich spiele sehr gern Tennis, aber ich habe keinen Partner. Wer will mit mir spielen? Ich habe mittwochs und freitags ab 18 Uhr Zeit. Ich spiele nicht sehr gut, aber ich lerne schnell!\n\nTOBIAS, 41 ANS\nSpielen Sie gern Karten oder Brettspiele? Dann kommen Sie doch zum Spieleabend! Wir spielen jeden Donnerstag um 19 Uhr im Café Linde. Am liebsten spielen wir Schach. Computerspiele? Nein, danke!\n\nAYLA, 23 ANS\nIch bin neu in Leipzig und gehe gern aus: ins Kino, ins Konzert, in die Disco … Aber allein macht das keinen Spaß! Wer will am Wochenende mit mir ausgehen? Samstags muss ich bis 16 Uhr arbeiten, aber am Abend habe ich Zeit.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Was spielt Jana gern?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Schach.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Volleyball.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Tennis.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Karten.",
+              "correct": false
+            }
+          ],
+          "explanation": "Jana écrit « Ich spiele sehr gern Tennis, aber ich habe keinen Partner ». Les échecs (Schach) et les cartes (Karten) apparaissent dans l’annonce de Tobias.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quand Jana est-elle libre ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le mercredi et le vendredi, à partir de 18 h.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Le jeudi à 19 h.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le samedi soir.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Le week-end, à partir de 16 h.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich habe mittwochs und freitags ab 18 Uhr Zeit » : mittwochs veut dire « le mercredi, chaque semaine » et ab 18 Uhr « à partir de 18 h ». Le jeudi à 19 h, c’est la soirée jeux de Tobias.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Où a lieu la soirée jeux de Tobias ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Chez Tobias.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Au café Linde.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Au centre culturel.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dans un club de tennis.",
+              "correct": false
+            }
+          ],
+          "explanation": "Tobias écrit « Wir spielen jeden Donnerstag um 19 Uhr im Café Linde ». Le centre culturel est seulement l’endroit où les annonces sont affichées.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Pourquoi Ayla a-t-elle écrit une annonce ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle cherche un travail pour le samedi.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle veut apprendre à jouer aux échecs.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elle cherche une partenaire de tennis.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Elle est nouvelle à Leipzig et n’aime pas sortir seule.",
+              "correct": true
+            }
+          ],
+          "explanation": "Ayla écrit « Ich bin neu in Leipzig » et « allein macht das keinen Spaß » : sortir seule ne l’amuse pas. Elle travaille le samedi jusqu’à 16 h, mais elle ne cherche pas de travail.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Vous êtes libre le jeudi soir et vous aimez les échecs. Quelle annonce est pour vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "L’annonce d’Ayla.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "L’annonce de Jana.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "L’annonce de Tobias.",
+              "correct": true
+            }
+          ],
+          "explanation": "La soirée jeux de Tobias a lieu le jeudi à 19 h et « Am liebsten spielen wir Schach » : Schach, ce sont les échecs. Jana joue au tennis et Ayla veut sortir le week-end.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-freizeit-lesen-bild",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-hoeren",
+      "kind": "exercise",
+      "title": "Écouter et écrire : rendez-vous et météo",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Écouter et écrire : rendez-vous et météo",
+        "description": "Écoutez les quatre petites scènes : un appel, un bulletin météo à la radio, une conversation entre amis et un message vocal. Vous pouvez réécouter autant de fois que nécessaire, puis répondez aux questions. Ensuite, associez les phrases de Lena à leur sens et écrivez les deux phrases dictées. La transcription s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Scène 1 : pourquoi Sara ne peut-elle pas aller au cinéma ce soir ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Elle doit travailler.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Elle est malade.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Elle doit réviser pour un examen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Elle n’aime pas les comédies.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sara répond « Ich habe morgen eine Prüfung und muss lernen » : eine Prüfung est un examen et lernen veut dire ici réviser. Elle ne parle ni de travail ni de maladie.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Scène 1 : quand et où Paul et Sara se retrouvent-ils ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ce soir, à 19 h 45, devant le cinéma.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vendredi, à 19 h 45, devant le cinéma.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Vendredi, à 20 h, dans un café.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Samedi, à 20 h, devant le cinéma.",
+              "correct": false
+            }
+          ],
+          "explanation": "Sara est libre « am Freitag ». Le film commence à 20 h et Paul propose « um Viertel vor acht vor dem Kino » : Viertel vor acht = 19 h 45, vor dem Kino = devant le cinéma.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Scène 2 : quel temps annonce-t-on pour dimanche ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "De la pluie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Du vent.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "De la neige.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Du soleil.",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour dimanche, la radio annonce « Die Sonne scheint, und es sind vierzehn Grad ». La pluie et le vent sont prévus pour samedi, et personne ne parle de neige.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Scène 3 : qu’est-ce que Lena aime faire le plus ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nager.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Jouer au football.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Faire du jogging.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Faire du vélo.",
+              "correct": false
+            }
+          ],
+          "explanation": "Lena dit « Ich gehe lieber joggen. Aber am liebsten schwimme ich » : am liebsten désigne l’activité préférée entre toutes. Le jogging n’est qu’une préférence face au football.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Scène 4 : que propose Emma à Ben ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jouer au tennis dimanche.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Aller au cinéma mardi.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jouer au tennis mardi à 18 h.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Rendre visite à ses parents dimanche.",
+              "correct": false
+            }
+          ],
+          "explanation": "Emma annule le tennis de dimanche, car ses parents viennent, et propose « Wollen wir am Dienstag um achtzehn Uhr spielen? ». Il s’agit toujours de tennis, pas de cinéma.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Lena parle de ses sports. Associez chaque phrase à son sens.",
+          "pairs": [
+            {
+              "left": "Ich spiele nicht so gern Fußball.",
+              "right": "Je n’aime pas trop jouer au football."
+            },
+            {
+              "left": "Ich schwimme gern.",
+              "right": "J’aime nager."
+            },
+            {
+              "left": "Ich gehe lieber joggen.",
+              "right": "Je préfère aller courir."
+            },
+            {
+              "left": "Am liebsten schwimme ich.",
+              "right": "Ce que je préfère par-dessus tout, c’est nager."
+            }
+          ],
+          "explanation": "Gern = aimer faire ; nicht so gern = ne pas trop aimer ; lieber = préférer ; am liebsten = préférer entre toutes. Ces mots suivent le verbe, sauf am liebsten, qui peut ouvrir la phrase."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "sprecherin",
+          "accept": [
+            "Am Sonntag scheint die Sonne."
+          ],
+          "explanation": "La phrase commence par Am Sonntag : le verbe scheint reste en 2e position et le sujet die Sonne passe après lui. Sonntag et Sonne sont des noms : majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la question.",
+          "voice": "mann",
+          "accept": [
+            "Wollen wir am Freitag ins Kino gehen?"
+          ],
+          "explanation": "Pour proposer, « Wollen wir … ? » : le modal ouvre la question et l’infinitif gehen la termine. Ins = in das, devant das Kino.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-freizeit-hoeren-audio-v3",
+          "usage": "audio",
+          "caption": "Quatre petites scènes",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-regen-bild",
+          "usage": "illustration",
+          "alt": "Un nuage avec des gouttes de pluie.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-wind-bild",
+          "usage": "illustration",
+          "alt": "Des rafales de vent.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-schnee-bild",
+          "usage": "illustration",
+          "alt": "Un nuage avec des flocons de neige.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-sonne-bild",
+          "usage": "illustration",
+          "alt": "Un soleil qui brille.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "d",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-hoeren-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-hoeren-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-stadion",
+      "kind": "exercise",
+      "title": "Écouter : on va au stade ?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Kommst du mit ins Stadion? — Organiser une sortie au match",
+        "description": "Hugo, un étudiant français, passe un semestre en Allemagne. Son amie Katrin lui propose d’aller voir un match de football au stade. Écoutez leur conversation (vous pouvez réécouter autant de fois que nécessaire), puis répondez aux questions. Rappel : « halb » regarde vers l’heure suivante (halb acht = 7 h 30). La transcription s’affichera après votre réponse.\n\nBON À SAVOIR\nEn Allemagne, le football est le sport le plus populaire, et beaucoup de gens vont au stade le week-end. Dans beaucoup de stades, il y a des places debout (Stehplätze), moins chères que les places assises (Sitzplätze). Dans beaucoup de villes, le billet du match sert aussi de ticket pour le bus et le tram. Au stade, il faut respecter un règlement (die Stadionordnung) : certains objets sont interdits.\n\nMOTS UTILES\n• das Stadion — le stade   • das Spiel — le match   • zu Hause spielen — jouer à domicile\n• der Sitzplatz / der Stehplatz — la place assise / la place debout\n• die Stimmung — l’ambiance\n• die Fahrkarte — le ticket (de bus, de train)   • die Bushaltestelle — l’arrêt de bus\n• mit|nehmen — emporter, prendre avec soi   • die Flasche — la bouteille\n• Das darf man nicht. — C’est interdit. (dürfen : avoir le droit de)   • verboten — interdit\n• die Regenjacke — la veste de pluie   • die Bratwurst — la saucisse grillée\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quand le match commence-t-il ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Samedi à 16 h 30.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Samedi à 15 h 30.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Samedi à 14 h 45.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dimanche à 15 h 30.",
+              "correct": false
+            }
+          ],
+          "explanation": "Katrin dit « Das Spiel beginnt um halb vier ». Halb regarde vers l’heure suivante : halb vier = 3 h 30, soit 15 h 30. Un francophone comprend souvent 16 h 30 (« quatre et demie »).",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quelle place Hugo choisit-il, et combien coûte-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une place assise, 25 €.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Une place debout, 20 €.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Une place assise, 12 €.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Une place debout, 12 €.",
+              "correct": true
+            }
+          ],
+          "explanation": "Katrin annonce « ein Stehplatz nur zwölf Euro » et Hugo répond « Dann nehme ich einen Stehplatz », car il est étudiant. La place assise (Sitzplatz) coûte 25 €.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Comment Hugo et Katrin vont-ils au stade ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "À vélo.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "En train.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "En bus.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "À pied.",
+              "correct": false
+            }
+          ],
+          "explanation": "Hugo propose le vélo (« Mit dem Rad? »), mais Katrin répond « Nein, mit dem Bus » : un bus part de la gare directement pour le stade.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Pourquoi Hugo ne paie-t-il rien pour le bus ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le billet du match sert aussi de ticket de bus.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Il a une carte de bus d’étudiant.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le bus est gratuit le samedi.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Katrin paie le bus pour lui.",
+              "correct": false
+            }
+          ],
+          "explanation": "Katrin explique que « das Ticket für das Spiel ist auch eine Fahrkarte für den Bus » : le billet du match sert de titre de transport. Le bus n’est pas gratuit en soi.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Qu’est-ce qui est interdit au stade ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Manger une Bratwurst.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Porter une veste de pluie.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Acheter une boisson.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Apporter une bouteille d’eau.",
+              "correct": true
+            }
+          ],
+          "explanation": "« Flaschen sind im Stadion verboten » : les bouteilles sont interdites. En revanche, « dort kann man etwas trinken und eine Bratwurst essen » : on peut y acheter à boire et à manger.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Où et quand Hugo et Katrin se retrouvent-ils ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "À 14 h 45, à l’arrêt de bus de la gare.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "À 15 h 30, devant le stade.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "À 14 h 45, devant le stade.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "À 15 h 15, à la gare.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Um Viertel vor drei am Bahnhof, an der Bushaltestelle » : Viertel vor drei = 14 h 45, à l’arrêt de bus de la gare. 15 h 30 est l’heure du début du match.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-freizeit-stadion-audio-v3",
+          "usage": "audio",
+          "caption": "Katrin invite Hugo au stade",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-rad-bild",
+          "usage": "illustration",
+          "alt": "Une bicyclette.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "a",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-zug-bild",
+          "usage": "illustration",
+          "alt": "Un train régional.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "b",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-bus-bild",
+          "usage": "illustration",
+          "alt": "Un autobus.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "c",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-zufuss-bild",
+          "usage": "illustration",
+          "alt": "Des traces de pas.",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "optionId": "d",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-sportarten",
+      "kind": "exercise",
+      "title": "Écouter et regarder : quel sport est-ce ?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verschiedene Sportarten — Welcher Sport ist das?",
+        "description": "Écoutez d’abord l’enregistrement authentique : une voix allemande lit des noms de sports et d’objets de sport, souvent avec leur pluriel (vous pouvez le réécouter autant de fois que nécessaire). Puis regardez chaque dessin ou photo et choisissez l’expression entendue qui convient. La transcription s’affichera après votre réponse.\n\nBON À SAVOIR\n• Pour les jeux de balle, on emploie spielen : Fußball spielen, Basketball spielen, Golf spielen, Billard spielen.\n• D’autres sports s’expriment par un seul verbe : angeln (pêcher à la ligne), golfen (jouer au golf), kegeln (jouer aux quilles), reiten (faire du cheval), segeln (faire de la voile ; on dit aussi segeln gehen).\n• Leichtathletik machen — faire de l’athlétisme.\n• Le Kegeln ressemble au bowling. C’est un loisir traditionnel en Allemagne : on joue entre amis, en club ou dans une auberge qui possède une piste de quilles (die Kegelbahn).\n\nMOTS UTILES\n• die Angel — la canne à pêche   • das Pferd — le cheval\n• der Ball — le ballon, la balle : der Basketball, der Fußball, der Golfball   • der Golfschläger — le club de golf\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Regardez le dessin. Was macht man hier?",
+          "options": [
+            {
+              "id": "a",
+              "label": "reiten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "angeln",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "kegeln",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Golf spielen",
+              "correct": false
+            }
+          ],
+          "explanation": "La canne à pêche (die Angel) et le poisson montrent angeln, pêcher à la ligne. Reiten se fait à cheval et kegeln avec des quilles.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Regardez le dessin. Was macht man hier?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Golf spielen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Billard spielen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kegeln",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Basketball spielen",
+              "correct": false
+            }
+          ],
+          "explanation": "Une boule qui roule vers des quilles : c’est kegeln, le jeu de quilles allemand, proche du bowling. Le billard se joue sur une table, avec une queue.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Regardez le dessin. Was macht man hier?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Billard spielen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Basketball spielen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Fußball spielen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Golf spielen",
+              "correct": false
+            }
+          ],
+          "explanation": "Une table, une queue et des boules en triangle : on joue au billard, Billard spielen. Comme pour les autres jeux de balle, on emploie spielen.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Regardez le dessin. Was kann man hier machen?",
+          "options": [
+            {
+              "id": "a",
+              "label": "reiten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Leichtathletik machen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Golf spielen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "segeln gehen",
+              "correct": true
+            }
+          ],
+          "explanation": "Un voilier sur l’eau : on peut y faire de la voile, segeln gehen. Le cheval (reiten) et le golf (Golf spielen) se pratiquent sur la terre ferme.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Regardez la photo. Was machen die Spieler?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie spielen Basketball.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie spielen Fußball.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie spielen Golf.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie spielen Billard.",
+              "correct": false
+            }
+          ],
+          "explanation": "Un terrain en herbe, deux buts et un ballon : sie spielen Fußball. Le basket se joue avec des paniers, et le golf ne se joue pas en équipe autour d’un ballon.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Écoutez : quel est le pluriel de « der Fußball » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Fußballs",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Fußbälle",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Fußballe",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Fußbällen",
+              "correct": false
+            }
+          ],
+          "explanation": "On entend « der Fußball, die Fußbälle » : pluriel en -e avec tréma (a → ä), comme der Ball, die Bälle. Fußballs n’existe pas et Fußbällen est la forme du datif pluriel.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Écoutez : quel est le pluriel de « das Pferd » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Pferds",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Pferden",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Pferde",
+              "correct": true
+            }
+          ],
+          "explanation": "L’enregistrement dit « das Pferd, die Pferde » : pluriel en -e. Le pluriel en -s concerne surtout des mots venus de l’anglais, comme das Hobby, die Hobbys.",
+          "type": "choice"
+        }
+      ],
+      "placements": [
+        {
+          "media": "a1-freizeit-sport-native",
+          "usage": "audio",
+          "caption": "Verschiedene Sportarten : de « angeln » à « segeln gehen »",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-angeln-zeichnung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q1",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-kegeln-zeichnung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q2",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-billard-zeichnung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q3",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-segeln-zeichnung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q4",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-fussball-foto",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "questionId": "q5",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-sport",
+      "kind": "lesson",
+      "title": "Découvrir : le sport à l’université et en club",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : le sport à l’université et en club",
+        "description": "Hugo veut faire du sport pendant son semestre en Allemagne. Lisez le programme du sport universitaire, écoutez Hugo répondre aux questions de Katrin, puis préparez votre propre présentation.\n\nBON À SAVOIR\nContrairement aux universités américaines, les universités allemandes n’ont pas de grandes équipes sportives ni de bourses pour les sportifs. Mais le « Hochschulsport » (le sport universitaire) propose beaucoup de cours, gratuits ou bon marché, à tous les étudiants. Beaucoup d’Allemands font aussi du sport dans un club, « der Verein » (der Sportverein, der Fußballverein) : on devient membre (das Mitglied) et on paie une cotisation.\n\nHOCHSCHULSPORT — UNSER PROGRAMM\n• Volleyball: Montag, 18–20 Uhr, in der Turnhalle — kostenlos\n• Yoga: Dienstag, 17–18 Uhr, im Sportzentrum — 15 € pro Semester\n• Schwimmen: Mittwoch, 7–8 Uhr, im Schwimmbad — 10 € pro Semester\n• Fußball: Donnerstag, 19–21 Uhr, auf dem Sportplatz — kostenlos\n• Fitnessstudio: Montag bis Freitag, 8–22 Uhr — 30 € pro Semester\n(die Turnhalle — le gymnase ; der Sportplatz — le terrain de sport ; kostenlos — gratuit)\n\nMODÈLE\nKatrin : Hugo, machst du gern Sport?\nHugo : Ja, sehr gern! In Frankreich spiele ich Volleyball im Verein.\nKatrin : Und hier in Deutschland?\nHugo : Hier will ich im Hochschulsport Volleyball spielen. Der Kurs ist am Montag von 18 bis 20 Uhr in der Turnhalle, und er ist kostenlos!\nKatrin : Wie oft machst du Sport?\nHugo : Dreimal pro Woche. Am Montag spiele ich Volleyball, und am Mittwoch und am Freitag gehe ich joggen.\nKatrin : Warum machst du so viel Sport?\nHugo : Sport macht Spaß und ist gesund. Ich will fit bleiben. Und im Team finde ich schnell Freunde!\nKatrin : Siehst du auch gern Fußball?\nHugo : Ja, aber in Frankreich nur im Fernsehen. Am Samstag gehe ich mit dir ins Stadion!\n\nWIE OFT? — À QUELLE FRÉQUENCE ?\n• jeden Tag — tous les jours   • einmal pro Woche — une fois par semaine\n• zweimal, dreimal pro Woche — deux, trois fois par semaine\n• oft — souvent   • manchmal — parfois   • selten — rarement   • nie — jamais\n• montags — le lundi (tous les lundis)   • am Wochenende — le week-end\n\nWO? — OÙ ?\n• im Fitnessstudio, im Sportzentrum, im Schwimmbad, im Park, im Verein\n• in der Turnhalle — au gymnase   • auf dem Sportplatz — sur le terrain de sport\nPour dire où l’on va, on dit « ins Schwimmbad » (voir « Wohin gehst du? ») ; pour dire où l’on fait du sport, on dit « im Schwimmbad ».\n\nWARUM? — POURQUOI ?\n• Sport macht Spaß.   • Sport ist gesund.   • Ich will fit bleiben.\n• Im Team finde ich Freunde.   • Ich habe leider keine Zeit.\n\nÀ VOUS\n1. Lisez le modèle à voix haute en jouant Katrin, puis Hugo.\n2. Choisissez un cours dans le programme du Hochschulsport et présentez-le à voix haute en trois ou quatre phrases : quoi, quand, où, combien, pourquoi. Exemple : Ich will Yoga machen. Der Kurs ist am Dienstag von 17 bis 18 Uhr im Sportzentrum. Er kostet 15 Euro pro Semester. Yoga ist gesund!\n3. Répondez à voix haute aux questions de Katrin, pour vous : Machst du gern Sport? Was machst du? Wie oft? Wo? Warum? Siehst du gern Sport im Fernsehen oder im Stadion?\nVérifiez : le verbe conjugué est-il en 2e position (Am Montag spiele ich Volleyball.) ? Avec « will » ou « kann », l’infinitif est-il bien à la fin (Ich will fit bleiben.) ?\n\nSituation adaptée de Der und mehr (Kennesaw State University), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-sport-bild",
+          "usage": "illustration",
+          "caption": "Hochschulsport : quelques cours du programme",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-sport-audio-v3",
+          "usage": "audio",
+          "caption": "Katrin pose des questions à Hugo sur le sport",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : können, wollen, gern et lieber",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : können, wollen, gern et lieber",
+        "description": "Choisissez ou écrivez la forme qui complète chaque phrase. Rappel : können → ich kann, du kannst, er/sie kann, wir können, ihr könnt ; wollen → ich will, du willst, er/sie will, wir wollen, ihr wollt ; müssen → ich muss, du musst, er/sie muss. Le deuxième verbe se met à l’infinitif, à la fin de la phrase. Pour remettre une phrase dans l’ordre, touchez les étiquettes dans l’ordre de la phrase.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "… du Gitarre spielen? — Ja, ein bisschen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kann",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kannst",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Können",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Könnt",
+              "correct": false
+            }
+          ],
+          "explanation": "Le sujet est du : können fait du kannst. Kann va avec ich ou er/sie, können avec wir ou Sie, könnt avec ihr.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Am Samstag … wir ins Schwimmbad gehen. Kommst du mit?",
+          "options": [
+            {
+              "id": "a",
+              "label": "will",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "willst",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wollt",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "wollen",
+              "correct": true
+            }
+          ],
+          "explanation": "Le sujet est wir, placé après le verbe parce que la phrase commence par Am Samstag : wir wollen. Will va avec ich ou er/sie, willst avec du, wollt avec ihr.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quelle phrase est correcte ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Lisa kann sehr gut Klavier spielen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Lisa sehr gut kann Klavier spielen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Lisa kann sehr gut spielen Klavier.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Lisa spielen kann sehr gut Klavier.",
+              "correct": false
+            }
+          ],
+          "explanation": "Le modal conjugué kann est en 2e position et l’infinitif spielen à la fin : les deux verbes encadrent le reste. Placer spielen juste après kann, comme en français, est l’erreur typique.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Complétez : Ich spiele … Fußball als Tennis. (Je préfère le football au tennis.)",
+          "options": [
+            {
+              "id": "a",
+              "label": "am liebsten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "gern",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "lieber",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour comparer deux activités avec als, on emploie lieber (préférer) : Ich spiele lieber Fußball als Tennis. Gern dit seulement qu’on aime ; am liebsten désigne le favori absolu.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Une amie vous propose d’aller au cinéma samedi, mais ce jour-là, vous travaillez. Que répondez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, gern! Um wie viel Uhr?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Leider nicht, am Samstag muss ich arbeiten.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Gute Idee, ich komme mit!",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich gehe am liebsten ins Kino.",
+              "correct": false
+            }
+          ],
+          "explanation": "Vous refusez et donnez la raison : « Leider nicht, am Samstag muss ich arbeiten ». Muss se construit comme kann, avec l’infinitif arbeiten à la fin. Les autres réponses acceptent l’invitation.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Wir wollen tanzen. Heute Abend gehen wir …",
+          "options": [
+            {
+              "id": "a",
+              "label": "in die Disco.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "ins Museum.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ins Schwimmbad.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "in den Park.",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour danser, on va en boîte : in die Disco (die Disco est féminin, d’où in die). Au musée, à la piscine ou au parc, on ne va pas pour danser.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Complétez avec können ou wollen à la bonne forme.",
+          "text": "Lukas [[1]] gut Volleyball spielen, aber Mira [[2]] es lernen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kann"
+              ],
+              "size": 7,
+              "hint": "können"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "will"
+              ],
+              "size": 7,
+              "hint": "wollen"
+            }
+          ],
+          "explanation": "Lukas sait jouer (können), Mira a envie d’apprendre (wollen). Avec er ou sie, ces verbes n’ont pas de terminaison : er kann, sie will, comme avec ich. Kannt ou willt, sur le modèle de er spielt, n’existent pas."
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Complétez la question et la réponse avec wollen et müssen.",
+          "text": "[[1]] du heute Abend ins Kino gehen? – Nein, ich [[2]] für meine Prüfung lernen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Willst"
+              ],
+              "size": 8,
+              "hint": "wollen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "muss"
+              ],
+              "size": 7,
+              "hint": "müssen"
+            }
+          ],
+          "explanation": "Avec du, wollen fait willst ; avec ich, müssen fait muss, sans terminaison. Dans une question oui/non, le modal ouvre la phrase et l’infinitif (gehen, lernen) la termine."
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour proposer une activité.",
+          "answers": [
+            [
+              "Am Samstag",
+              "können",
+              "wir",
+              "im Park",
+              "Volleyball",
+              "spielen."
+            ],
+            [
+              "Am Samstag",
+              "können",
+              "wir",
+              "Volleyball",
+              "im Park",
+              "spielen."
+            ]
+          ],
+          "explanation": "Après Am Samstag, le modal können prend la 2e place et le sujet wir le suit. L’infinitif spielen ferme la phrase. Placer spielen juste après können, comme en français, est fautif."
+        },
+        {
+          "id": "q10",
+          "type": "order",
+          "prompt": "Remettez la question dans l’ordre.",
+          "answers": [
+            [
+              "Willst",
+              "du",
+              "heute Abend",
+              "ins Kino",
+              "gehen?"
+            ]
+          ],
+          "explanation": "Question oui/non : le modal willst est en 1re position, le sujet du le suit et l’infinitif gehen va tout à la fin. Le moment (heute Abend) se place avant le lieu (ins Kino)."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "a1-freizeit-aussprache-r",
+      "kind": "lesson",
+      "title": "Aussprache : le r allemand",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Das R — Trois façons de prononcer le « r »",
+        "description": "Bonne nouvelle pour les francophones : le « r » allemand ressemble beaucoup au « r » français ! Mais selon sa place dans le mot, il se prononce de trois façons. Ce module en est plein : die Freizeit, Rad fahren, der Sport, das Theater, lieber.\n\n1. LE R DE GORGE — en début de mot, après une consonne ou entre deux voyelles\ndie Reise, das Restaurant, der Rock, die Freizeit, die Freunde, hören, spazieren\nIl se prononce au fond de la gorge, comme le « r » de « Paris », avec un frottement un peu plus léger. Inutile de le rouler avec la pointe de la langue : ce r roulé s’entend dans certaines régions (en Bavière, en Autriche, en Suisse), mais ce n’est pas la prononciation standard.\n\n2. LE R ADOUCI — après une voyelle, devant une consonne\ndie Karten, der Garten, ihr fahrt, das Konzert, der Park, die Shorts, die Sportjacke\nLe r perd son frottement et se fond dans la voyelle qui précède : on l’entend à peine. Piège : ne prononcez pas un r français bien appuyé ; Karten ressemble plutôt à « Kaaten ».\n\n3. LE R VOYELLE — dans la terminaison -er\nder Computer, klettern, das Theater, die Oper, die Kleider, der Pullover, der Sportler\nLa finale -er devient un petit « a » bref et ouvert : Computer sonne presque comme « Compiouta », Theater comme « té-A-ta ». Piège : -er ne se prononce jamais « eur », ni « é » comme dans les verbes français en -er.\n\nAPRÈS U, Ü, O, Ö, I\nQuand le r suit une de ces voyelles longues, en fin de mot ou devant une consonne, il s’entend presque comme une petite syllabe « a » : nur, die Uhr, für, die Tür, vor, das Tor, die Körbe, die Hörner. C’est aussi le cas dans des mots très fréquents : wir, ihr, mir, hier.\n\nLES ENREGISTREMENTS\n1. Trois mots qui montrent les trois r : die Reise (r de gorge), die Karten (r adouci), der Computer (r voyelle).\n2. Dix-huit mots en trois séries de six, dans l’ordre des parties 1, 2 et 3 ci-dessus.\n3. Huit mots où le r final se fait « a » : nur, die Uhr, für, die Tür, vor, das Tor, die Körbe, die Hörner.\n\nÀ VOUS\n1. Écoutez chaque série et répétez les mots pendant la pause.\n2. Comparez à voix haute : die Reise — die Karten — der Computer ; der Rock — der Park — der Pullover.\n3. Lisez ces phrases à voix haute, lentement, puis plus vite : Am Freitag fahren wir Rad. Hörst du gern Musik? Ich gehe lieber ins Theater. Wir spielen im Park Karten. Um vier Uhr klettern wir.\n4. Relisez-les en vérifiant la finale -er : un petit « a », jamais « eur ». Vous retrouverez plusieurs de ces phrases dans l’exercice de répétition.\n\nEnregistrements et images : Deutsch im Blick (COERLL, Université du Texas à Austin), CC BY 4.0.",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-r-native",
+          "usage": "audio",
+          "caption": "Trois r : die Reise, die Karten, der Computer",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-r-vergleich-native",
+          "usage": "audio",
+          "caption": "Trois séries : r de gorge, r adouci, r voyelle",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-r-nach-vokal-native",
+          "usage": "audio",
+          "caption": "Le r final après u, ü, o, ö : nur, die Uhr …",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : proposer, accepter, refuser",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : proposer, accepter, refuser",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Soignez le r : de gorge au début d’un mot (Rad), à peine audible après une voyelle (warm), un petit « a » dans la finale -er (lieber).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-freizeit-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-freizeit-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Hast du am Samstag Zeit?",
+          "accept": [
+            "Hast du am Samstag Zeit?"
+          ],
+          "explanation": "Question oui/non : le verbe hast ouvre la phrase et la voix monte à la fin. Le h de hast se prononce, et Zeit commence par le son « ts ».",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wollen wir ins Kino gehen?",
+          "accept": [
+            "Wollen wir ins Kino gehen?"
+          ],
+          "explanation": "Wollen commence par le son [v]. « Wollen wir … ? » sert à proposer ; l’infinitif gehen termine la question.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich spiele lieber Volleyball.",
+          "accept": [
+            "Ich spiele lieber Volleyball."
+          ],
+          "explanation": "Dans lieber, la finale -er se dit comme un petit « a » : « liiba ». Le V de Volleyball se prononce [v], car le mot vient de l’anglais.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Am Samstag muss ich arbeiten.",
+          "accept": [
+            "Am Samstag muss ich arbeiten."
+          ],
+          "explanation": "Après Am Samstag, le verbe muss passe avant le sujet ich. Accentuez la première syllabe : SAMS-tag, AR-beiten.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Sonne scheint und es ist warm.",
+          "accept": [
+            "Die Sonne scheint und es ist warm."
+          ],
+          "explanation": "S devant une voyelle se dit [z] (Sonne) ; sch se dit « ch » (scheint). Dans warm, le r adouci s’entend à peine : « vaam ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich kann nicht so gut schwimmen.",
+          "accept": [
+            "Ich kann nicht so gut schwimmen."
+          ],
+          "explanation": "Kann et schwimmen ont des voyelles brèves. Nicht se termine par le ch doux de ich, suivi d’un t.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-freizeit-sprechen",
+      "kind": "mission",
+      "title": "Mission : proposer une sortie",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : proposer une sortie",
+        "description": "Le week-end arrive : vous proposez une sortie à un ami par message vocal. Un autre ami vous a déjà proposé de faire du vélo dimanche, mais vous n’êtes pas libre : vous lui répondez par écrit. Écoutez d’abord les messages de Selin et de Max.\n\nMODÈLE\nSelin : Hallo Max, hier ist Selin! Hast du am Sonntag Zeit? Das Wetter ist super, die Sonne scheint. Wollen wir zusammen Rad fahren? Wir können zum See fahren und dann ein Eis essen. Um drei Uhr vor dem Café Mondo? Ruf mich an! Tschüs!\nMax : Hallo Selin! Danke, das ist eine tolle Idee. Aber am Sonntag kann ich leider nicht, ich muss für meine Prüfung lernen. Hast du am Montagabend Zeit? Dann können wir ins Kino gehen. Bis bald!\n\nPHRASES UTILES\n• Proposer : Hast du am Samstag Zeit? / Wollen wir ins Kino gehen? / Wir können … / Hast du Lust? / Kommst du mit?\n• Accepter : Ja, gern! / Gute Idee! / Super, das machen wir!\n• Refuser : Leider nicht, ich muss arbeiten. / Tut mir leid, ich habe keine Zeit. / Am Samstag kann ich leider nicht.\n• Fixer le rendez-vous : Um wie viel Uhr? — Um acht Uhr. / Wo? — Vor dem Kino. / Bis Samstag!",
+        "transcript": null
+      },
+      "questions": [],
+      "placements": [
+        {
+          "media": "a1-freizeit-sprechen-audio-v3",
+          "usage": "audio",
+          "caption": "Les messages vocaux de Selin et de Max",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez un message vocal pour un ami, comme Selin : saluez et dites qui parle, demandez s’il est libre, dites quel temps il fait, proposez une activité avec « Wollen wir … ? », donnez l’heure et le lieu, puis terminez (Ruf mich an! / Bis bald!).",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Votre ami vous propose de faire du vélo dimanche, mais vous n’êtes pas libre. Écrivez-lui une réponse de cinq ou six phrases : remerciez, refusez en donnant une raison (ich muss …), dites ce que vous aimez faire (gern, lieber) et proposez un autre jour, une heure et un lieu.",
+          "maxChars": 700,
+          "minWords": 30
+        },
+        "checklist": [
+          "Mon message dit qui parle, propose une activité avec « Wollen wir … ? » et donne le jour, l’heure et le lieu.",
+          "Dans ma réponse écrite, je refuse poliment (Leider …) et je donne une raison avec « ich muss … ».",
+          "J’ai employé gern ou lieber pour dire ce que j’aime faire.",
+          "Avec kann, will ou muss, l’infinitif est à la fin de la phrase.",
+          "J’ai écrit ich kann, ich will et ich muss sans terminaison."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-freizeit-hobbys-bild",
+      "kind": "image",
+      "title": "Les loisirs",
+      "alt": "Six vignettes : un casque audio pour Musik hören, un livre ouvert pour lesen, une guitare pour Gitarre spielen, un ballon de volley pour Volleyball spielen, un vélo pour Rad fahren et une palette de peintre pour malen.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "headphones",
+            "label": "Musik hören"
+          },
+          {
+            "icon": "book-open",
+            "label": "lesen"
+          },
+          {
+            "icon": "guitar",
+            "label": "Gitarre spielen"
+          },
+          {
+            "icon": "volleyball",
+            "label": "Volleyball spielen"
+          },
+          {
+            "icon": "bike",
+            "label": "Rad fahren"
+          },
+          {
+            "icon": "palette",
+            "label": "malen"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-freizeit-orte-bild",
+      "kind": "image",
+      "title": "Les lieux de sortie",
+      "alt": "Six vignettes : du pop-corn pour das Kino, une échelle de piscine pour das Schwimmbad, un disque pour die Disco, un micro pour das Konzert, un bâtiment à colonnes pour das Museum et des arbres pour der Park.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "popcorn",
+            "label": "das Kino"
+          },
+          {
+            "icon": "waves-ladder",
+            "label": "das Schwimmbad"
+          },
+          {
+            "icon": "disc3",
+            "label": "die Disco"
+          },
+          {
+            "icon": "mic-vocal",
+            "label": "das Konzert"
+          },
+          {
+            "icon": "landmark",
+            "label": "das Museum"
+          },
+          {
+            "icon": "trees",
+            "label": "der Park"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-freizeit-wortschatz-audio-v3",
+      "kind": "audio",
+      "title": "Les loisirs et les sorties",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Musik hören"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "lesen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "fernsehen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Computerspiele spielen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "kochen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "malen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "tanzen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "singen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Gitarre spielen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Freunde treffen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "spazieren gehen"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Sport machen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Fußball spielen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Volleyball spielen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "schwimmen"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Rad fahren"
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "wandern"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich gehe ins Kino."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich gehe ins Konzert."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich gehe ins Schwimmbad."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich gehe in die Disco."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich gehe in den Park."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich lese gern."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich tanze nicht gern."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das macht Spaß!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-dialog-bild",
+      "kind": "image",
+      "title": "Des projets pour samedi",
+      "alt": "La cafétéria de l’université : Mira propose « Wollen wir schwimmen gehen? », Lukas répond « Ich spiele lieber Volleyball. » et Deniz dit « Leider nicht! ». On voit aussi un café, un ballon de volley et du pop-corn.",
+      "image": {
+        "layout": "scene",
+        "setting": "cafe",
+        "people": [
+          {
+            "name": "Mira",
+            "say": "Wollen wir schwimmen gehen?"
+          },
+          {
+            "name": "Lukas",
+            "say": "Ich spiele lieber Volleyball."
+          },
+          {
+            "name": "Deniz",
+            "say": "Leider nicht!"
+          }
+        ],
+        "items": [
+          "coffee",
+          "volleyball",
+          "popcorn"
+        ]
+      }
+    },
+    {
+      "key": "a1-freizeit-dialog-audio-v3",
+      "kind": "audio",
+      "title": "Dialogue : des projets pour samedi",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Hallo Lukas! Was machst du am Samstag?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Noch nichts. Warum?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Am Samstag scheint die Sonne und es ist warm. Wollen wir schwimmen gehen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Ach, ich schwimme nicht so gern. Ich spiele lieber Volleyball. Kannst du Volleyball spielen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Nicht so gut. Aber ich will es lernen!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Super! Dann können wir im Park spielen. Um zwei Uhr?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Ja, gern! Und am Abend? Willst du ins Kino gehen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Lukas",
+          "text": "Gute Idee! Ich sehe am liebsten Komödien."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Ich auch! Oh, da ist Deniz. Hallo Deniz! Wir gehen am Samstag ins Kino. Kommst du mit?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Deniz",
+          "text": "Leider nicht. Am Samstag muss ich arbeiten. Aber am Sonntag habe ich Zeit."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Mira",
+          "text": "Schade! Dann trinken wir am Sonntag zusammen Kaffee, okay?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "name": "Deniz",
+          "text": "Ja, gern! Bis Sonntag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-wetter-bild",
+      "kind": "image",
+      "title": "Le temps qu’il fait",
+      "alt": "Six vignettes météo : un soleil pour Die Sonne scheint, un nuage pour Es ist bewölkt, un nuage avec de la pluie pour Es regnet, un nuage avec de la neige pour Es schneit, des rafales pour Es ist windig et un thermomètre avec un flocon pour Es ist kalt.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "sun",
+            "label": "Die Sonne scheint."
+          },
+          {
+            "icon": "cloud",
+            "label": "Es ist bewölkt."
+          },
+          {
+            "icon": "cloud-rain",
+            "label": "Es regnet."
+          },
+          {
+            "icon": "cloud-snow",
+            "label": "Es schneit."
+          },
+          {
+            "icon": "wind",
+            "label": "Es ist windig."
+          },
+          {
+            "icon": "thermometer-snowflake",
+            "label": "Es ist kalt."
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-freizeit-wetter-audio-v3",
+      "kind": "audio",
+      "title": "Le temps qu’il fait",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wie ist das Wetter heute?"
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die Sonne scheint."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist sonnig."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist bewölkt."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es regnet."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es schneit."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist windig."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist heiß."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist warm."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist kühl."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es ist kalt."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es sind achtzehn Grad."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das Wetter ist schön."
+        },
+        {
+          "pause": 1.1
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das Wetter ist schlecht."
+        },
+        {
+          "pause": 1.8
+        },
+        {
+          "voice": "frau",
+          "name": "Emma",
+          "text": "Wie ist das Wetter heute?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Noah",
+          "text": "Schlecht. Es regnet und es ist kalt, nur zehn Grad."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Emma",
+          "text": "Dann gehen wir ins Kino!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-lesen-bild",
+      "kind": "image",
+      "title": "Les petites annonces",
+      "alt": "Trois post-it sur un panneau d’affichage : les annonces de Jana, 29 ans, de Tobias, 41 ans, et d’Ayla, 23 ans.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "sticky-note",
+            "label": "Jana, 29"
+          },
+          {
+            "icon": "sticky-note",
+            "label": "Tobias, 41"
+          },
+          {
+            "icon": "sticky-note",
+            "label": "Ayla, 23"
+          }
+        ]
+      }
+    },
+    {
+      "key": "a1-freizeit-hoeren-audio-v3",
+      "kind": "audio",
+      "title": "Rendez-vous et météo : quatre petites scènes",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Szene eins."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Hallo Sara, hier ist Paul. Hast du heute Abend Zeit? Im Kino gibt es eine neue Komödie."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Heute Abend? Leider nicht. Ich habe morgen eine Prüfung und muss lernen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Schade! Und am Freitag?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Am Freitag habe ich Zeit. Wann beginnt der Film?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Paul",
+          "text": "Um acht Uhr. Treffen wir uns um Viertel vor acht vor dem Kino?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Sara",
+          "text": "Ja, gern. Dann bis Freitag!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene zwei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecher",
+          "name": "Radio",
+          "text": "Und jetzt das Wetter für das Wochenende. Am Samstag ist es kalt und windig, und es regnet den ganzen Tag. Nur acht Grad. Am Sonntag ist das Wetter schön: Die Sonne scheint, und es sind vierzehn Grad."
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene drei."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Kofi",
+          "text": "Lena, spielst du gern Fußball? Wir spielen am Sonntag im Park."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Fußball? Nein, nicht so gern. Ich gehe lieber joggen. Aber am liebsten schwimme ich."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Kofi",
+          "text": "Schwimmen? Das kann ich leider nicht so gut."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Lena",
+          "text": "Kein Problem! Wir können zusammen ins Schwimmbad gehen und üben."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Kofi",
+          "text": "Okay, gute Idee!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "sprecher",
+          "text": "Szene vier."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Emma",
+          "text": "Hallo Ben, hier ist Emma. Du, am Sonntag kann ich leider nicht Tennis spielen. Meine Eltern kommen zu Besuch. Aber am Dienstag habe ich Zeit. Wollen wir am Dienstag um achtzehn Uhr spielen? Ruf mich bitte an! Tschüs!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-regen-bild",
+      "kind": "image",
+      "title": "De la pluie",
+      "alt": "Un nuage avec des gouttes de pluie.",
+      "image": {
+        "layout": "single",
+        "icon": "cloud-rain"
+      }
+    },
+    {
+      "key": "a1-freizeit-wind-bild",
+      "kind": "image",
+      "title": "Du vent",
+      "alt": "Des rafales de vent.",
+      "image": {
+        "layout": "single",
+        "icon": "wind"
+      }
+    },
+    {
+      "key": "a1-freizeit-schnee-bild",
+      "kind": "image",
+      "title": "De la neige",
+      "alt": "Un nuage avec des flocons de neige.",
+      "image": {
+        "layout": "single",
+        "icon": "cloud-snow"
+      }
+    },
+    {
+      "key": "a1-freizeit-sonne-bild",
+      "kind": "image",
+      "title": "Du soleil",
+      "alt": "Un soleil qui brille.",
+      "image": {
+        "layout": "single",
+        "icon": "sun"
+      }
+    },
+    {
+      "key": "a1-freizeit-sprechen-audio-v3",
+      "kind": "audio",
+      "title": "Les messages vocaux de Selin et de Max",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Selin",
+          "text": "Hallo Max, hier ist Selin! Hast du am Sonntag Zeit? Das Wetter ist super, die Sonne scheint. Wollen wir zusammen Rad fahren? Wir können zum See fahren und dann ein Eis essen. Um drei Uhr vor dem Café Mondo? Ruf mich an! Tschüs!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "mann",
+          "name": "Max",
+          "text": "Hallo Selin! Danke, das ist eine tolle Idee. Aber am Sonntag kann ich leider nicht, ich muss für meine Prüfung lernen. Hast du am Montagabend Zeit? Dann können wir ins Kino gehen. Bis bald!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-stadion-audio-v3",
+      "kind": "audio",
+      "title": "Katrin invite Hugo au stade",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Hallo Hugo! Am Samstag spielt unser Team zu Hause. Kommst du mit ins Stadion?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Ins Stadion? Ja, gern! In Frankreich sehe ich Fußball nur im Fernsehen. Wann beginnt das Spiel?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Das Spiel beginnt um halb vier."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Und was kostet ein Ticket?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Ein Sitzplatz kostet fünfundzwanzig Euro, ein Stehplatz nur zwölf Euro."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Dann nehme ich einen Stehplatz. Ich bin Student, ich habe nicht viel Geld."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Ich nehme auch einen Stehplatz. Da ist die Stimmung super!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Wie fahren wir zum Stadion? Mit dem Rad?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Nein, mit dem Bus. Vom Bahnhof fährt ein Bus direkt zum Stadion. Und das Ticket für das Spiel ist auch eine Fahrkarte für den Bus. Der Bus kostet also nichts extra."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Super! Kann ich eine Flasche Wasser mitnehmen?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Nein, das darf man nicht. Flaschen sind im Stadion verboten. Aber dort kann man etwas trinken und eine Bratwurst essen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Okay. Und wie ist das Wetter am Samstag?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Nicht so schön. Es regnet ein bisschen und es ist kalt. Du brauchst eine Regenjacke!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Kein Problem, ich habe eine. Wo treffen wir uns?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Um Viertel vor drei am Bahnhof, an der Bushaltestelle."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Gut, um Viertel vor drei am Bahnhof. Bis Samstag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-rad-bild",
+      "kind": "image",
+      "title": "À vélo",
+      "alt": "Une bicyclette.",
+      "image": {
+        "layout": "single",
+        "icon": "bike"
+      }
+    },
+    {
+      "key": "a1-freizeit-zug-bild",
+      "kind": "image",
+      "title": "En train",
+      "alt": "Un train régional.",
+      "image": {
+        "layout": "single",
+        "icon": "train-front"
+      }
+    },
+    {
+      "key": "a1-freizeit-bus-bild",
+      "kind": "image",
+      "title": "En bus",
+      "alt": "Un autobus.",
+      "image": {
+        "layout": "single",
+        "icon": "bus"
+      }
+    },
+    {
+      "key": "a1-freizeit-zufuss-bild",
+      "kind": "image",
+      "title": "À pied",
+      "alt": "Des traces de pas.",
+      "image": {
+        "layout": "single",
+        "icon": "footprints"
+      }
+    },
+    {
+      "key": "a1-freizeit-sport-bild",
+      "kind": "image",
+      "title": "Le programme du sport universitaire",
+      "alt": "Quatre vignettes : un ballon de volley pour Volleyball, une personne debout pour Yoga, une échelle de piscine pour Schwimmen et un haltère pour Fitnessstudio.",
+      "image": {
+        "layout": "grid",
+        "items": [
+          {
+            "icon": "volleyball",
+            "label": "Volleyball"
+          },
+          {
+            "icon": "person-standing",
+            "label": "Yoga"
+          },
+          {
+            "icon": "waves-ladder",
+            "label": "Schwimmen"
+          },
+          {
+            "icon": "dumbbell",
+            "label": "Fitnessstudio"
+          }
+        ]
+      }
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-freizeit-sport-audio-v3",
+      "kind": "audio",
+      "title": "Katrin pose des questions à Hugo sur le sport",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Hugo, machst du gern Sport?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Ja, sehr gern! In Frankreich spiele ich Volleyball im Verein."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Und hier in Deutschland?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Hier will ich im Hochschulsport Volleyball spielen. Der Kurs ist am Montag von achtzehn bis zwanzig Uhr in der Turnhalle, und er ist kostenlos!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Wie oft machst du Sport?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Dreimal pro Woche. Am Montag spiele ich Volleyball, und am Mittwoch und am Freitag gehe ich joggen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Warum machst du so viel Sport?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Sport macht Spaß und ist gesund. Ich will fit bleiben. Und im Team finde ich schnell Freunde!"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Katrin",
+          "text": "Siehst du auch gern Fußball?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann",
+          "name": "Hugo",
+          "text": "Ja, aber in Frankreich nur im Fernsehen. Am Samstag gehe ich mit dir ins Stadion!"
+        }
+      ]
+    },
+    {
+      "key": "a1-freizeit-aktivitaeten-native",
+      "kind": "audio",
+      "title": "Verschiedene Freizeitaktivitäten — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_04_01_freizeitakt.mp3",
+        "clip": [
+          3.8,
+          73
+        ]
+      },
+      "transcript": "Computerspiele spielen\nfernsehen\nFootball spielen\ndie Freizeit\nmit Freunden ausgehen\nFreunde besuchen oder treffen\nGitarre spielen\njagen\njoggen\nKarten spielen\nins Kino gehen\nKleidung kaufen\nklettern gehen\nins Konzert, ins Theater gehen\nmalen\nMusik hören\nreisen\nschwimmen\nspazieren gehen\nSport treiben\ntanzen\nin den Bergen wandern\nzeichnen",
+      "v3SourceKey": "a1-freizeit-aktivitaeten-native"
+    },
+    {
+      "key": "a1-freizeit-hobbys-native",
+      "kind": "audio",
+      "title": "Hobbys beschreiben — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_04_10_hobbies.mp3",
+        "clip": [
+          3.2,
+          68
+        ]
+      },
+      "transcript": "das Hobby, die Hobbys\nIch habe keine Hobbys!\nIch habe keine Zeit für Hobbys!\nentspannend\nIch finde mein Hobby entspannend.\ngefährlich\nIst das nicht gefährlich?\ngesund\ninteressant\nkreativ\nlangsam\nlangweilig\nlustig\nschwierig\nDas ist zu schwierig für mich!\nspannend\nteuer\nungewöhnlich\nDas ist aber ein ungewöhnliches Hobby!",
+      "v3SourceKey": "a1-freizeit-hobbys-native"
+    },
+    {
+      "key": "a1-freizeit-sport-native",
+      "kind": "audio",
+      "title": "Verschiedene Sportarten — enregistrement natif",
+      "native": {
+        "file": "dib-audio/voc/voc_04_07_sport.mp3",
+        "clip": [
+          0,
+          71.7
+        ]
+      },
+      "transcript": "Verschiedene Sportarten\nangeln, die Angel, die Angeln\nBasketball spielen, der Basketball, die Basketbälle\nBillard spielen\nFußball spielen, der Fußball, die Fußbälle\nGolf spielen, golfen, der Golfball, die Golfbälle\nder Golfschläger, die Golfschläger\nkegeln\nLeichtathletik machen\nreiten, das Pferd, die Pferde\nsegeln gehen",
+      "v3SourceKey": "a1-freizeit-sport-native"
+    },
+    {
+      "key": "a1-freizeit-angeln-zeichnung",
+      "kind": "image",
+      "title": "Dessin : une canne à pêche",
+      "alt": "Dessin en noir et blanc d’une canne à pêche courbée dont la ligne a attrapé un poisson.",
+      "photo": {
+        "file": "dib-images/k04/img-026-102.png"
+      }
+    },
+    {
+      "key": "a1-freizeit-kegeln-zeichnung",
+      "kind": "image",
+      "title": "Dessin : une boule et des quilles",
+      "alt": "Dessin en noir et blanc d’une grosse boule noire qui roule vers des quilles blanches dressées.",
+      "photo": {
+        "file": "dib-images/k04/img-026-103.png"
+      }
+    },
+    {
+      "key": "a1-freizeit-billard-zeichnung",
+      "kind": "image",
+      "title": "Dessin : une table de billard",
+      "alt": "Dessin en noir et blanc d’une table de billard, avec une queue posée sur le tapis et des boules rangées en triangle.",
+      "photo": {
+        "file": "dib-images/k04/img-026-106.png"
+      }
+    },
+    {
+      "key": "a1-freizeit-segeln-zeichnung",
+      "kind": "image",
+      "title": "Dessin : un voilier",
+      "alt": "Dessin en noir et blanc d’un voilier à deux voiles sur l’eau, avec quelques nuages dans le ciel.",
+      "photo": {
+        "file": "dib-images/k04/img-026-109.png"
+      }
+    },
+    {
+      "key": "a1-freizeit-fussball-foto",
+      "kind": "image",
+      "title": "Un match de football amateur",
+      "alt": "Sur un terrain en herbe, des joueurs en maillots jaunes et gris courent autour d’un ballon ; on voit deux buts et des arbres au fond.",
+      "photo": {
+        "file": "dib-images/k04/img-030-117.png"
+      }
+    },
+    {
+      "key": "a1-freizeit-r-native",
+      "kind": "audio",
+      "title": "Aussprache : trois r — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_04_01_das-r.mp3"
+      },
+      "transcript": "die Reise\ndie Karten\nder Computer",
+      "v3SourceKey": "a1-freizeit-r-native"
+    },
+    {
+      "key": "a1-freizeit-r-vergleich-native",
+      "kind": "audio",
+      "title": "Aussprache : r de gorge, r adouci, r voyelle — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_04_02_r-comparisons.mp3"
+      },
+      "transcript": "die Freizeit, die Freunde, das Restaurant, spazieren, der Rock, hören\nder Garten, ihr fahrt, das Konzert, der Park, die Shorts, die Sportjacke\nklettern, das Theater, die Oper, die Kleider, der Pullover, der Sportler",
+      "v3SourceKey": "a1-freizeit-r-vergleich-native"
+    },
+    {
+      "key": "a1-freizeit-r-nach-vokal-native",
+      "kind": "audio",
+      "title": "Aussprache : le r final après u, ü, o, ö — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_04_04_posh-r.mp3"
+      },
+      "transcript": "nur, die Uhr\nfür, die Tür\nvor, das Tor\ndie Körbe, die Hörner",
+      "v3SourceKey": "a1-freizeit-r-nach-vokal-native"
+    },
+    {
+      "key": "a1-freizeit-hoeren-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · Écouter et écrire : rendez-vous et météo",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Sonntag scheint die Sonne."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-hoeren-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · Écouter et écrire : rendez-vous et météo",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Wollen wir am Freitag ins Kino gehen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Hast du am Samstag Zeit?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wollen wir ins Kino gehen?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich spiele lieber Volleyball."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Samstag muss ich arbeiten."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Sonne scheint und es ist warm."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : proposer, accepter, refuser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich kann nicht so gut schwimmen."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-freizeit-lexique",
+      "kind": "audio",
+      "title": "Lexique · Hast du Zeit ? Loisirs et rendez-vous",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Freizeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Hobby, die Hobbys"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Zeit, die Zeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "spielen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lesen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schwimmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "tanzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Rad fahren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "spazieren gehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "können"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wollen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "müssen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lieber"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "leider"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zusammen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Kino, die Kinos"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Schwimmbad, die Schwimmbäder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Park, die Parks"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Spaß"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Wetter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Sonne"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "regnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kalt"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

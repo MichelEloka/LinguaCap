@@ -1,0 +1,1501 @@
+{
+  "id": "a2-demarches",
+  "title": "Faire une démarche et vérifier son rendez-vous",
+  "objective": "Remplir un formulaire simple, préparer les justificatifs à temps et demander puis vérifier une modification de rendez-vous.",
+  "prerequisites": [
+    "a2-wohnen-atelier"
+  ],
+  "audioProfile": "a2-debut",
+  "sources": [
+    "LinguaCap V4 — formulaires, messages, scènes et exercices originaux.",
+    "Inspiration : Deutsch im Blick, chapitre 1 (COERLL), identification et coordonnées ; Conseil de l’Europe, CECR, volume complémentaire (2020), transactions en ligne A2."
+  ],
+  "grammarFocus": [
+    "bis-am-um-dates",
+    "verbes-separables-demarches"
+  ],
+  "layer": "content/v4/pedagogy/a2/a2-demarches.mjs",
+  "vocabulary": [
+    {
+      "id": "antrag",
+      "word": "Antrag",
+      "article": "der",
+      "plural": "Anträge",
+      "partOfSpeech": "noun",
+      "translation": "la demande (dossier)",
+      "example": "Der Antrag für den Bibliotheksausweis ist gespeichert.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "formular",
+      "word": "Formular",
+      "article": "das",
+      "plural": "Formulare",
+      "partOfSpeech": "noun",
+      "translation": "le formulaire",
+      "example": "Ihr Formular ist schon da.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "ausfuellen",
+      "word": "ausfüllen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "remplir (un formulaire)",
+      "example": "Muss ich das Formular noch einmal ausfüllen?",
+      "note": "séparable : aus|füllen · Perfekt : hat ausgefüllt",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "pflichtfeld",
+      "word": "Pflichtfeld",
+      "article": "das",
+      "plural": "Pflichtfelder",
+      "partOfSpeech": "noun",
+      "translation": "le champ obligatoire",
+      "example": "Die E-Mail-Adresse ist ein Pflichtfeld.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "freiwillig",
+      "word": "freiwillig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "facultatif, volontaire",
+      "example": "Die Telefonnummer ist freiwillig.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "hausnummer",
+      "word": "Hausnummer",
+      "article": "die",
+      "plural": "Hausnummern",
+      "partOfSpeech": "noun",
+      "translation": "le numéro (de la rue)",
+      "example": "Die Hausnummer im Formular ist falsch.",
+      "note": "Straße und Hausnummer : Bergweg 8",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "postleitzahl",
+      "word": "Postleitzahl",
+      "article": "die",
+      "plural": "Postleitzahlen",
+      "partOfSpeech": "noun",
+      "translation": "le code postal",
+      "example": "Die Postleitzahl von Kassel-Mitte ist 34117.",
+      "note": "abrégé : PLZ",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "ausweis",
+      "word": "Ausweis",
+      "article": "der",
+      "plural": "Ausweise",
+      "partOfSpeech": "noun",
+      "translation": "la pièce d’identité, la carte",
+      "example": "Bringen Sie bitte Ihren Ausweis mit.",
+      "note": "der Bibliotheksausweis : la carte de bibliothèque",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "adressnachweis",
+      "word": "Adressnachweis",
+      "article": "der",
+      "plural": "Adressnachweise",
+      "partOfSpeech": "noun",
+      "translation": "le justificatif d’adresse",
+      "example": "Laden Sie den Adressnachweis als PDF hoch.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "unterlagen",
+      "word": "Unterlagen",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les documents, le dossier",
+      "example": "Ihre Unterlagen müssen bis Freitag vorliegen.",
+      "note": "toujours au pluriel",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "hochladen",
+      "word": "hochladen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "déposer en ligne, télécharger vers",
+      "example": "Ich kann die Datei nicht hochladen.",
+      "note": "séparable : hoch|laden · Perfekt : hat hochgeladen",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "datei",
+      "word": "Datei",
+      "article": "die",
+      "plural": "Dateien",
+      "partOfSpeech": "noun",
+      "translation": "le fichier",
+      "example": "Die Datei ist zu groß.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "termin",
+      "word": "Termin",
+      "article": "der",
+      "plural": "Termine",
+      "partOfSpeech": "noun",
+      "translation": "le rendez-vous",
+      "example": "Mein Termin ist am Montag um zehn Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "verschieben",
+      "word": "verschieben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "déplacer, reporter",
+      "example": "Könnten Sie den Termin auf Freitag verschieben?",
+      "note": "einen Termin auf + accusatif verschieben",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "bestaetigung",
+      "word": "Bestätigung",
+      "article": "die",
+      "plural": "Bestätigungen",
+      "partOfSpeech": "noun",
+      "translation": "la confirmation",
+      "example": "Bekomme ich eine neue Bestätigung per E-Mail?",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "bestaetigen",
+      "word": "bestätigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "confirmer",
+      "example": "Bitte bestätigen Sie den Termin bis Sonntag.",
+      "note": "Perfekt sans ge- : hat bestätigt",
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "aendern",
+      "word": "ändern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "modifier, corriger",
+      "example": "Können Sie die Hausnummer bitte ändern?",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "unterschrift",
+      "word": "Unterschrift",
+      "article": "die",
+      "plural": "Unterschriften",
+      "partOfSpeech": "noun",
+      "translation": "la signature",
+      "example": "Unten auf dem Formular fehlt noch Ihre Unterschrift.",
+      "note": null,
+      "audio": {
+        "media": "a2-demarches-lexique",
+        "line": 17
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a2-demarches-guide",
+      "kind": "lesson",
+      "title": "Découvrir : un formulaire et les pièces demandées",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : un formulaire et les pièces demandées",
+        "description": "Lisez cette fiche de la médiathèque fictive Stadtbibliothek West.\n« Bibliotheksausweis – Antrag. Pflichtfelder: Familienname, Vorname, Straße und Hausnummer, PLZ und Ort, E-Mail-Adresse. Die Telefonnummer ist freiwillig. Bringen Sie zur Anmeldung Ihren Ausweis und einen Adressnachweis mit. »\nRepérez ce qu’il faut saisir (les Pflichtfelder, champs obligatoires) et ce qu’il faut présenter au rendez-vous : une pièce d’identité (der Ausweis) et un justificatif d’adresse (der Adressnachweis). Le seul champ facultatif (freiwillig) est le numéro de téléphone.\n\nREMPLIR LE FORMULAIRE\nVoici la fiche d’une personne fictive, Lina Berger, qui ne donne pas son téléphone :\nFamilienname: Berger · Vorname: Lina · Straße und Hausnummer: Bergweg 8 · PLZ und Ort: 34117 Kassel · E-Mail-Adresse: lina.berger@example.com\nEn allemand, le numéro suit le nom de la rue, et le code postal (die PLZ, Postleitzahl) précède la ville. Lisez les champs à voix haute en séparant bien la rue du numéro et le code postal de la ville.\n\nDATE LIMITE OU RENDEZ-VOUS ?\n« Ihre Unterlagen müssen bis Freitag, 12 Uhr, vorliegen. Ihr Termin ist am Montag um 10 Uhr. Bitte bestätigen Sie den Termin über den Link in dieser E-Mail. »\nBis annonce une date limite : les documents doivent être arrivés avant vendredi midi. Am … um … donne le rendez-vous : lundi à 10 h. On le redit ainsi : Ich muss den Adressnachweis bis Freitag um zwölf Uhr schicken. Mein Termin ist am Montag um zehn Uhr.\n\nDEMANDER UNE CORRECTION\nLina a saisi un mauvais numéro de rue. Pour le signaler, on cite le champ, l’erreur, puis la bonne valeur : Im Formular steht Bergweg 6. Richtig ist Bergweg 8. Können Sie das bitte ändern?\n\nÉCOUTEZ LES MODÈLES\nÉcoutez les quatre phrases modèles et répétez-les à voix haute. L’exercice « Répéter à voix haute » de ce module vérifie ensuite votre prononciation.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-demarches-modele",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-demarches-antrag",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-demarches-erinnerung",
+          "usage": "illustration",
+          "caption": "bis = date limite · am … um … = rendez-vous",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a2-demarches-pratique",
+      "kind": "exercise",
+      "title": "S’entraîner : noter un rendez-vous déplacé",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : noter un rendez-vous déplacé",
+        "description": "Une femme appelle la médiathèque : elle a déjà un rendez-vous pour sa carte de bibliothèque, mais elle ne peut pas venir.\n\n1. Écoutez l’appel une première fois sans lire les phrases : veut-elle un premier rendez-vous ou déplacer celui qu’elle a déjà ?\n2. Réécoutez pour compléter ses notes : l’ancien et le nouveau créneau, le document à déposer, son format et la date limite. Vous pouvez écrire les nombres en chiffres.\n3. Les deux dernières questions sont des dictées : deux phrases utiles pour une démarche.\nAprès validation, la transcription de l’appel et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-demarches-telefon",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-pratique-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-pratique-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "L’ancien rendez-vous : complétez la note.",
+          "text": "Alter Termin: am [[1]] um [[2]] Uhr.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Donnerstag"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "16",
+                "sechzehn"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "La femme dit « Ich habe einen Termin … am Donnerstag um sechzehn Uhr. Kann ich ihn verschieben? » : c’est l’ancien créneau, qu’elle veut déplacer."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Le nouveau rendez-vous : complétez la note.",
+          "text": "Neuer Termin: am Freitag um [[1]].[[2]] Uhr.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "17",
+                "siebzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "30",
+                "dreißig"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Elle demande « nach siebzehn Uhr » et l’employé propose « um siebzehn Uhr dreißig » : 17 h 30. Elle accepte avec « Ja, danke »."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Le document à déposer : complétez la consigne de l’employé.",
+          "text": "Laden Sie bis Mittwoch um zwölf Uhr einen [[1]] als [[2]] hoch.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Adressnachweis"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "PDF"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Der Adressnachweis est le justificatif d’adresse, à déposer en PDF. Hochladen est séparable : laden en 1re position (impératif), hoch à la fin."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Faut-il remplir à nouveau le formulaire ? Complétez l’échange.",
+          "text": "Muss ich das Formular noch einmal [[1]]? – Nein, Ihr Formular ist schon [[2]].",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ausfüllen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "da"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ],
+          "explanation": "Après le verbe de modalité muss, l’infinitif ausfüllen va à la fin. « Ihr Formular ist schon da » : le formulaire est déjà arrivé, rien à refaire."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Que faut-il apporter vendredi ?",
+          "text": "Soll ich am Freitag auch meinen [[1]] mitbringen? – Ja, bitte.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Ausweis"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ],
+          "explanation": "Elle demande si elle doit apporter « meinen Ausweis », sa pièce d’identité, et l’employé confirme : « Ja, bitte ». Mein- prend -en à l’accusatif masculin."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Que contiendra le nouvel e-mail ?",
+          "text": "In der E-Mail finden Sie den neuen Termin und den [[1]] zum Hochladen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Link"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "Dernière réplique : l’e-mail donne le nouveau rendez-vous et « den Link zum Hochladen », le lien pour déposer le justificatif."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase : on prévient qu’on ne peut pas venir.",
+          "accept": [
+            "Ich kann am Donnerstag leider nicht kommen."
+          ],
+          "voice": "sprecherin",
+          "explanation": "Après le verbe de modalité kann, l’infinitif kommen se place à la fin. Les jours de la semaine sont des noms : Donnerstag prend une majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la consigne du service.",
+          "accept": [
+            "Bitte bringen Sie Ihren Ausweis mit."
+          ],
+          "voice": "mann",
+          "explanation": "À l’impératif de politesse, le verbe bringen ouvre la phrase, suivi de Sie ; la particule mit de mitbringen va à la fin. Ihren prend une majuscule : il renvoie à Sie.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a2-demarches-approfondir",
+      "kind": "exercise",
+      "title": "S’entraîner : lire le statut d’un dossier en ligne",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : lire le statut d’un dossier en ligne",
+        "description": "Votre messagerie affiche trois avis pour le dossier fictif W-314.\n« 08.40: Antrag gespeichert. Bitte laden Sie den Adressnachweis noch hoch. »\n« 09.10: Unterlagen erhalten. Ihr Termin am Freitag um 16.45 Uhr ist bestätigt. »\n« 11.20: Ihre Bitte um einen anderen Termin ist eingegangen. Bis zur neuen Bestätigung bleibt der Termin am Freitag bestehen. »\n\nQuatre participes reviennent souvent dans ces avis : gespeichert (enregistré), erhalten (reçu), eingegangen (parvenu) et bestätigt (confirmé). Une demande « eingegangen » est arrivée au service, mais elle n’est pas encore acceptée.\n\nPlus tard, le formulaire refuse un fichier : « Datei zu groß. Erlaubt: PDF oder JPG, maximal 2 MB. » Vos fichiers : Adressnachweis.pdf (3 MB), Adressnachweis.jpg (1 MB) et Ausweis.pdf (1 MB).\n\nEnfin, un quatrième avis arrive : « Neuer Termin: Montag, 10.15 Uhr. Bitte bestätigen Sie bis Sonntag, 18 Uhr. »\n\nLisez les avis, puis répondez. Distinguez toujours l’heure du rendez-vous de l’heure limite pour répondre.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a2-demarches-status",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a2-demarches-upload",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Associez chaque mot de l’avis à ce qu’il signifie pour votre dossier.",
+          "pairs": [
+            {
+              "left": "gespeichert",
+              "right": "Votre brouillon est conservé."
+            },
+            {
+              "left": "erhalten",
+              "right": "Le service a reçu un document."
+            },
+            {
+              "left": "eingegangen",
+              "right": "Votre demande est arrivée, sans réponse pour l’instant."
+            },
+            {
+              "left": "bestätigt",
+              "right": "Le rendez-vous est fixé."
+            }
+          ],
+          "explanation": "Gespeichert vient de speichern (enregistrer), erhalten signifie recevoir, eingegangen (de eingehen) parvenir, et bestätigt confirmer. Seul bestätigt prouve qu’un rendez-vous est fixé."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Il est 11 h 30. Quel rendez-vous gardez-vous dans votre agenda ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aucun : le rendez-vous de vendredi est annulé.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vendredi à 16 h 45",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Lundi à 10 h 15",
+              "correct": false
+            }
+          ],
+          "explanation": "L’avis de 11 h 20 précise « Bis zur neuen Bestätigung bleibt der Termin am Freitag bestehen » : vendredi 16 h 45 reste valable. Le créneau de lundi n’arrive que dans le quatrième avis."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Quel fichier déposez-vous comme justificatif d’adresse ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Adressnachweis.pdf (3 MB)",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ausweis.pdf (1 MB)",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Adressnachweis.jpg (1 MB)",
+              "correct": true
+            }
+          ],
+          "explanation": "Le site accepte « PDF oder JPG, maximal 2 MB » : le PDF de 3 MB est trop lourd (zu groß). Ausweis.pdf a la bonne taille, mais c’est la pièce d’identité, pas le justificatif d’adresse."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Le dépôt échoue encore. Complétez votre message au service.",
+          "text": "Ich kann den Adressnachweis nicht [[1]]. Kann ich ihn per E-Mail [[2]]?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hochladen"
+              ],
+              "size": 10,
+              "hint": "hoch|laden"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "schicken",
+                "senden"
+              ],
+              "size": 9,
+              "hint": "envoyer"
+            }
+          ],
+          "explanation": "Après kann, les infinitifs vont à la fin : hochladen reste soudé à l’infinitif. Pour envoyer un e-mail ou un document, on dit schicken (ou senden)."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Quatrième avis : que devez-vous faire avant dimanche à 18 h ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Confirmer le nouveau rendez-vous.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Vous présenter au service.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Déposer à nouveau le formulaire.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Bitte bestätigen Sie bis Sonntag, 18 Uhr » : bis fixe l’heure limite pour confirmer. Le rendez-vous lui-même a lieu lundi à 10 h 15."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Répondez au quatrième avis : complétez votre confirmation.",
+          "text": "Dossier W-314: Ich [[1]] den neuen Termin am [[2]] um 10.15 Uhr.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bestätige"
+              ],
+              "size": 10,
+              "hint": "bestätigen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Montag"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Bestätigen se conjugue ich bestätige. Le nouveau rendez-vous est lundi (am Montag) ; dimanche 18 h n’est que la limite pour répondre."
+        }
+      ]
+    },
+    {
+      "id": "a2-demarches-controle",
+      "kind": "exercise",
+      "title": "Vérifier : un rendez-vous déplacé",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : un rendez-vous déplacé",
+        "description": "Écoutez une première fois l’appel à la médiathèque pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur un avis en ligne et sur une formule utile : répondez sans réécouter. Après validation, la transcription et l’explication de chaque réponse s’affichent.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-demarches-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Pourquoi la personne appelle-t-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Pour déplacer son rendez-vous de carte de médiathèque.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Pour renouveler un livre emprunté.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Pour corriger le prix de son abonnement.",
+              "correct": false
+            }
+          ],
+          "explanation": "« Ich habe einen Termin … am Donnerstag um sechzehn Uhr. Kann ich ihn verschieben? » : elle a déjà un rendez-vous pour sa carte et veut le déplacer. Elle ne parle ni de livre ni de prix.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quel nouveau créneau choisit-elle ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mercredi à 12 h",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vendredi à 17 h 30",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Jeudi à 16 h",
+              "correct": false
+            }
+          ],
+          "explanation": "L’employé propose « am Freitag … um siebzehn Uhr dreißig » et elle accepte (« Ja, danke »). Jeudi 16 h est l’ancien rendez-vous ; mercredi midi, la date limite du justificatif.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Que doit-elle déposer en ligne ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Un nouveau formulaire au format PDF",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Une photo de sa carte de médiathèque",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Un justificatif d’adresse au format PDF",
+              "correct": true
+            }
+          ],
+          "explanation": "« Laden Sie … einen Adressnachweis als PDF hoch » : un justificatif d’adresse en PDF. Le formulaire est déjà arrivé (« Ihr Formular ist schon da »).",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Quand doit-elle déposer le document au plus tard ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mercredi à midi",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Jeudi à 16 h",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vendredi à 17 h 30",
+              "correct": false
+            }
+          ],
+          "explanation": "« bis Mittwoch um zwölf Uhr » : bis fixe la date limite, mercredi à midi. Vendredi 17 h 30 est le nouveau rendez-vous, à ne pas confondre avec l’échéance.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Que contient le nouvel e-mail ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Une carte et un code de retrait",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le créneau et le lien de dépôt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Le formulaire et une facture",
+              "correct": false
+            }
+          ],
+          "explanation": "Dernière réplique : « In der E-Mail finden Sie den neuen Termin und den Link zum Hochladen ». Le lien sert à déposer le document ; aucune facture n’est annoncée.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Le site indique : « Ihre Anfrage ist eingegangen. » Que savez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le rendez-vous a déjà été changé.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le formulaire est incomplet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "La demande est arrivée.",
+              "correct": true
+            }
+          ],
+          "explanation": "Eingegangen (de eingehen) signifie que la demande est parvenue au service. Elle n’est pas encore traitée : seul un avis « bestätigt » prouve que le rendez-vous a changé.",
+          "type": "choice"
+        },
+        {
+          "id": "q7",
+          "prompt": "Comment demander de reporter le rendez-vous à lundi ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Könnten Sie den Termin auf Montag verschieben?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Könnten Sie den Termin seit Montag hochladen?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Könnten Sie den Termin bis Montag ausfüllen?",
+              "correct": false
+            }
+          ],
+          "explanation": "Einen Termin auf Montag verschieben : reporter un rendez-vous à lundi (auf + accusatif pour la nouvelle date). Hochladen (déposer un fichier) et ausfüllen (remplir) ne s’emploient pas avec Termin.",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a2-demarches-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : au téléphone avec un service",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : au téléphone avec un service",
+        "description": "Écoutez chaque modèle, puis dites la phrase à voix haute, comme au téléphone. Articulez les jours et les heures : ce sont les informations que votre interlocuteur doit noter. Si la reconnaissance vocale ne comprend pas votre phrase, réécoutez le modèle et réessayez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a2-demarches-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a2-demarches-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez à déplacer votre rendez-vous.",
+          "text": "Kann ich meinen Termin verschieben?",
+          "accept": [
+            "Kann ich meinen Termin verschieben?"
+          ],
+          "threshold": 75,
+          "explanation": "Question fermée : le modal kann ouvre la phrase et l’infinitif verschieben la termine. Accentuez la deuxième syllabe : ver-SCHIE-ben."
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez, puis proposez un autre moment.",
+          "text": "Könnte ich am Freitag nach siebzehn Uhr kommen?",
+          "accept": [
+            "Könnte ich am Freitag nach siebzehn Uhr kommen?",
+            "Könnte ich am Freitag nach 17 Uhr kommen?"
+          ],
+          "threshold": 75,
+          "explanation": "Könnte rend la demande plus polie que kann. Nach siebzehn Uhr veut dire « après 17 h » ; dans siebzehn, le s initial se prononce [z]."
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez, puis demandez s’il faut remplir le formulaire à nouveau.",
+          "text": "Muss ich das Formular noch einmal ausfüllen?",
+          "accept": [
+            "Muss ich das Formular noch einmal ausfüllen?"
+          ],
+          "threshold": 75,
+          "explanation": "Formular s’accentue sur la dernière syllabe : for-mu-LAR. Dans ausfüllen, la particule aus porte l’accent."
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez, puis signalez un problème de dépôt.",
+          "text": "Ich kann den Adressnachweis nicht hochladen.",
+          "accept": [
+            "Ich kann den Adressnachweis nicht hochladen."
+          ],
+          "threshold": 75,
+          "explanation": "Adressnachweis se décompose en Adress-nach-weis, accent sur la première partie. Après kann, hochladen reste soudé à la fin de la phrase."
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez, puis vérifiez que vous avez bien compris.",
+          "text": "Habe ich das richtig verstanden?",
+          "accept": [
+            "Habe ich das richtig verstanden?"
+          ],
+          "threshold": 75,
+          "explanation": "Formule utile pour reformuler une information avant de la noter. Le -ig final de richtig se prononce comme ich."
+        }
+      ]
+    },
+    {
+      "id": "a2-demarches-mission",
+      "kind": "mission",
+      "title": "Mission : déplacer un rendez-vous et compléter son dossier",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : déplacer un rendez-vous et compléter son dossier",
+        "description": "Situation : vous demandez une carte de médiathèque. Votre dossier porte la référence B-506. Le justificatif d’adresse doit être déposé avant mardi à midi. Votre rendez-vous est jeudi à 14 h, mais vous ne pouvez pas venir. Au téléphone, on vous propose vendredi à 15 h 15. Ensuite, le portail affiche « Änderung angefragt » et refuse votre fichier.\n\nModèles : Ich habe einen Termin am Donnerstag um vierzehn Uhr. Kann ich ihn verschieben? Habe ich das richtig verstanden: Mein Termin ist jetzt am Freitag um fünfzehn Uhr fünfzehn? Muss ich den Adressnachweis immer noch bis Dienstag hochladen? Ich kann die Datei nicht hochladen. Kann ich den Adressnachweis als PDF per E-Mail schicken?\n\nPréparez quelques mots-clés, puis réalisez les deux parties. Gardez bien distinctes la date limite (bis Dienstag, 12 Uhr) et le rendez-vous (am Freitag um 15.15 Uhr).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre appel (une minute environ) : donnez la référence du dossier, demandez à déplacer le rendez-vous de jeudi, reformulez le nouveau créneau pour le confirmer et demandez si la date limite change.",
+          "maxSeconds": 90
+        },
+        "written": {
+          "prompt": "Écrivez au service un e-mail de 45 à 65 mots : rappelez la référence et la date limite, demandez la confirmation du nouveau rendez-vous et proposez d’envoyer le justificatif d’adresse en pièce jointe.",
+          "maxChars": 1000,
+          "minWords": 45
+        },
+        "checklist": [
+          "J’ai donné la référence B-506 à l’oral et dans l’e-mail.",
+          "J’ai reformulé le nouveau rendez-vous : vendredi à 15 h 15.",
+          "J’ai distingué la date limite (bis Dienstag) et le rendez-vous (am Freitag um …).",
+          "Mon e-mail demande une confirmation et propose d’envoyer le justificatif en pièce jointe.",
+          "J’ai vérifié les verbes séparables : la particule à la fin (Ich lade … hoch), soudée après un modal (hochladen)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a2-demarches-modele",
+      "kind": "audio",
+      "title": "Faire une démarche et vérifier son rendez-vous · modèles",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meine Adresse ist Bergweg acht in Kassel."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Ich muss den Adressnachweis bis Freitag um zwölf Uhr schicken."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Mein Termin ist am Montag um zehn Uhr."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Können Sie die Hausnummer im Formular ändern?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-dialogue",
+      "kind": "audio",
+      "title": "Faire une démarche et vérifier son rendez-vous · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Guten Tag. Ich habe einen Termin für einen Bibliotheksausweis am Donnerstag um sechzehn Uhr. Kann ich ihn verschieben?"
+        },
+        {
+          "voice": "mann",
+          "text": "Gerne. Haben Sie die Nummer aus Ihrer Bestätigung?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, die Nummer ist W-zwei-acht-vier. Könnte ich am Freitag nach siebzehn Uhr kommen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Am Freitag ist um siebzehn Uhr dreißig noch ein Termin frei. Passt das für Sie?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, danke. Muss ich das Formular noch einmal ausfüllen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Nein, Ihr Formular ist schon da. Laden Sie aber bis Mittwoch um zwölf Uhr einen Adressnachweis als PDF hoch."
+        },
+        {
+          "voice": "frau",
+          "text": "Also bis Mittwoch um zwölf. Soll ich am Freitag auch meinen Ausweis mitbringen?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, bitte. Den Termin am Donnerstag habe ich gelöscht."
+        },
+        {
+          "voice": "frau",
+          "text": "Bekomme ich eine neue Bestätigung per E-Mail?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja. In der E-Mail finden Sie den neuen Termin und den Link zum Hochladen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a2-demarches-antrag",
+      "kind": "image",
+      "title": "Le formulaire de carte de médiathèque",
+      "alt": "Formulaire « Bibliotheksausweis – Antrag » de la Stadtbibliothek West, rempli : Berger, Lina, Bergweg 8, 34117 Kassel, lina.berger@example.com ; le champ Telefonnummer (freiwillig) reste vide. En bas : apporter Ausweis et Adressnachweis.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "form",
+        "icon": "library",
+        "title": "Bibliotheksausweis – Antrag",
+        "subtitle": "Stadtbibliothek West",
+        "size": 27,
+        "fields": [
+          {
+            "label": "Familienname *",
+            "value": "Berger"
+          },
+          {
+            "label": "Vorname *",
+            "value": "Lina"
+          },
+          {
+            "label": "Straße und Hausnummer *",
+            "value": "Bergweg 8"
+          },
+          {
+            "label": "PLZ und Ort *",
+            "value": "34117 Kassel"
+          },
+          {
+            "label": "E-Mail-Adresse *",
+            "value": "lina.berger@example.com"
+          },
+          {
+            "label": "Telefonnummer",
+            "note": "freiwillig"
+          }
+        ],
+        "lines": [
+          {
+            "icon": "paperclip",
+            "text": "Zur Anmeldung mitbringen: [Ausweis] und [Adressnachweis]"
+          }
+        ],
+        "footer": "* Pflichtfeld"
+      }
+    },
+    {
+      "key": "v4-a2-demarches-erinnerung",
+      "kind": "image",
+      "title": "Le rappel : date limite et rendez-vous",
+      "alt": "Courriel de rappel : « Ihre Unterlagen müssen bis Freitag, 12 Uhr, vorliegen. Ihr Termin ist am Montag um 10 Uhr. Bitte bestätigen Sie den Termin über den Link in dieser E-Mail. » En bas, un bouton « Termin bestätigen ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "mail",
+        "title": "Erinnerung",
+        "size": 30,
+        "meta": [
+          [
+            "Von",
+            "Stadtbibliothek West"
+          ],
+          [
+            "Betreff",
+            "Ihr Termin am Montag"
+          ]
+        ],
+        "lines": [
+          "Ihre Unterlagen müssen [bis Freitag, 12 Uhr], vorliegen.",
+          "Ihr Termin ist [am Montag um 10 Uhr].",
+          "Bitte bestätigen Sie den Termin über den Link in dieser E-Mail."
+        ],
+        "button": "Termin bestätigen"
+      }
+    },
+    {
+      "key": "v4-a2-demarches-telefon",
+      "kind": "image",
+      "title": "Déplacer un rendez-vous par téléphone",
+      "alt": "Au téléphone avec la médiathèque, une femme demande « Kann ich den Termin verschieben? » et l’employé demande « Haben Sie die Nummer? ». En haut : une bibliothèque, un téléphone, un calendrier et un document.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Anruferin",
+            "say": "Kann ich den Termin verschieben?"
+          },
+          {
+            "name": "Mitarbeiter",
+            "say": "Haben Sie die Nummer?"
+          }
+        ],
+        "items": [
+          "library",
+          "phone-call",
+          "calendar-days",
+          "file-text"
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-demarches-status",
+      "kind": "image",
+      "title": "Trois avis sur le dossier en ligne",
+      "alt": "Trois avis du dossier W-314. 08.40 : « Antrag gespeichert. Bitte laden Sie den Adressnachweis noch hoch. » 09.10 : « Unterlagen erhalten. Ihr Termin am Freitag um 16.45 Uhr ist bestätigt. » 11.20 : « Ihre Bitte um einen anderen Termin ist eingegangen. »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "messages",
+        "icon": "inbox",
+        "title": "Stadtbibliothek West",
+        "subtitle": "Vorgang W-314",
+        "size": 26,
+        "messages": [
+          {
+            "from": "08.40",
+            "text": "Antrag [gespeichert]. Bitte laden Sie den Adressnachweis noch hoch."
+          },
+          {
+            "from": "09.10",
+            "text": "Unterlagen [erhalten]. Ihr Termin am Freitag um 16.45 Uhr ist [bestätigt]."
+          },
+          {
+            "from": "11.20",
+            "text": "Ihre Bitte um einen anderen Termin ist [eingegangen]. Bis zur neuen Bestätigung bleibt der Termin am Freitag bestehen."
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a2-demarches-upload",
+      "kind": "image",
+      "title": "Un fichier refusé : lequel déposer ?",
+      "alt": "Page de dépôt en ligne avec un message d’erreur : « Datei zu groß. Erlaubt: PDF oder JPG, maximal 2 MB. » En dessous, trois fichiers : Adressnachweis.pdf (3 MB), Adressnachweis.jpg (1 MB) et Ausweis.pdf (1 MB).",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "icon": "upload",
+        "title": "Adressnachweis hochladen",
+        "subtitle": "Vorgang W-314",
+        "size": 31,
+        "intro": [
+          {
+            "icon": "triangle-alert",
+            "text": "[Datei zu groß.] Erlaubt: PDF oder JPG, maximal 2 MB."
+          }
+        ],
+        "rows": [
+          [
+            "Adressnachweis.pdf",
+            "3 MB"
+          ],
+          [
+            "Adressnachweis.jpg",
+            "1 MB"
+          ],
+          [
+            "Ausweis.pdf",
+            "1 MB"
+          ]
+        ]
+      }
+    },
+    {
+      "key": "a2-demarches-pratique-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : noter un rendez-vous déplacé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich kann am Donnerstag leider nicht kommen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-pratique-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : noter un rendez-vous déplacé",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Bitte bringen Sie Ihren Ausweis mit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : au téléphone avec un service",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Kann ich meinen Termin verschieben?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : au téléphone avec un service",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnte ich am Freitag nach siebzehn Uhr kommen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : au téléphone avec un service",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Muss ich das Formular noch einmal ausfüllen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : au téléphone avec un service",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich kann den Adressnachweis nicht hochladen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : au téléphone avec un service",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Habe ich das richtig verstanden?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a2-demarches-lexique",
+      "kind": "audio",
+      "title": "Lexique · Faire une démarche et vérifier son rendez-vous",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Antrag, die Anträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Formular, die Formulare"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausfüllen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Pflichtfeld, die Pflichtfelder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "freiwillig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hausnummer, die Hausnummern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Postleitzahl, die Postleitzahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausweis, die Ausweise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Adressnachweis, die Adressnachweise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Unterlagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "hochladen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Datei, die Dateien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Termin, die Termine"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verschieben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bestätigung, die Bestätigungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bestätigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ändern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Unterschrift, die Unterschriften"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

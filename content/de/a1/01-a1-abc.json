@@ -1,0 +1,1165 @@
+{
+  "id": "a1-abc",
+  "title": "Das Alphabet · Écouter et épeler son nom",
+  "objective": "Identifier les noms des lettres allemandes et épeler correctement un prénom, avec une demande de répétition si nécessaire.",
+  "prerequisites": [],
+  "audioProfile": "a1-alphabet",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU).",
+    "Deutsch im Blick, phonétique chapitre 1, voix originale, tempo ajusté, CC BY 4.0."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-abc.mjs",
+  "vocabulary": [
+    {
+      "id": "alphabet",
+      "word": "Alphabet",
+      "article": "das",
+      "plural": "Alphabete",
+      "partOfSpeech": "noun",
+      "translation": "l’alphabet",
+      "example": "Das Alphabet hat sechsundzwanzig Buchstaben.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "buchstabe",
+      "word": "Buchstabe",
+      "article": "der",
+      "plural": "Buchstaben",
+      "partOfSpeech": "noun",
+      "translation": "la lettre (de l’alphabet)",
+      "example": "Der erste Buchstabe ist J.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "name",
+      "word": "Name",
+      "article": "der",
+      "plural": "Namen",
+      "partOfSpeech": "noun",
+      "translation": "le nom",
+      "example": "Mein Name ist Vera Weber.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "vorname",
+      "word": "Vorname",
+      "article": "der",
+      "plural": "Vornamen",
+      "partOfSpeech": "noun",
+      "translation": "le prénom",
+      "example": "Mein Vorname ist Jana.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "nachname",
+      "word": "Nachname",
+      "article": "der",
+      "plural": "Nachnamen",
+      "partOfSpeech": "noun",
+      "translation": "le nom de famille",
+      "example": "Wie ist Ihr Nachname?",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "heissen",
+      "word": "heißen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’appeler",
+      "example": "Wie heißen Sie?",
+      "note": "ich heiße, du heißt, Sie heißen",
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "schreiben",
+      "word": "schreiben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "écrire",
+      "example": "Bitte schreiben Sie Ihren Namen.",
+      "note": "Wie schreibt man das ? : comment ça s’écrit ?",
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "buchstabieren",
+      "word": "buchstabieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "épeler",
+      "example": "Können Sie das bitte buchstabieren?",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "wie-bitte",
+      "word": "Wie bitte?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Pardon ? Comment ? (pour faire répéter)",
+      "example": "Wie bitte? Wie heißen Sie?",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "noch-einmal",
+      "word": "noch einmal",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "encore une fois",
+      "example": "Noch einmal, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "langsam",
+      "word": "langsam",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "lent ; lentement",
+      "example": "Langsam, bitte!",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "bitte",
+      "word": "bitte",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "s’il vous plaît ; je vous en prie",
+      "example": "Noch einmal, bitte.",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "danke",
+      "word": "danke",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "merci",
+      "example": "Danke, Jana!",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "guten-tag",
+      "word": "Guten Tag!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Bonjour !",
+      "example": "Guten Tag! Wie heißen Sie?",
+      "note": null,
+      "audio": {
+        "media": "a1-abc-lexique",
+        "line": 13
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-abc-guide",
+      "kind": "lesson",
+      "title": "Découvrir : l’alphabet allemand",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Découvrir : l’alphabet allemand",
+        "description": "L’ALPHABET ALLEMAND · 15 MIN\n\nÉcoutez l’alphabet une première fois en suivant le tableau. Vous entendez le nom de chaque lettre : c’est ce nom qu’on utilise pour épeler. Dans un mot, la même lettre peut avoir un autre son.\n\nA B C D E F G | H I J K L M N\nO P Q R S T U | V W X Y Z\n\n1. Écouter par groupes (4 min). Écoutez un groupe à la fois et mettez sur pause après G, après N, puis après U. Reprenez quand vous suivez sans perdre votre place.\n2. Répéter (5 min). Dites les lettres par groupes de trois, en respirant entre deux groupes, et comparez votre voix au modèle. E se dit « é », I se dit « i » et U se dit « ou » : jamais « eu » ni « u ».\n3. Les quatre lettres pièges (4 min). J s’appelle Jot (« yot »), V s’appelle Vau (« faou »), W se dit « vé » et Z se dit « tsètt ». Réécoutez ces quatre lettres. Retenez surtout ceci : quand on vous épelle « vé », on écrit W, pas V.\n4. Épeler un prénom (2 min). Épelez à voix haute LINA, TOM et JANA, puis votre prénom, deux fois de suite, sans regarder le tableau la deuxième fois.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-abc-natif",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-abc-alphabet",
+          "usage": "illustration",
+          "caption": "Das Alphabet : A–G, H–N, O–U, V–Z",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-abc-namen",
+          "usage": "illustration",
+          "caption": "J = Jot · V = Vau · W = We · Z = Zett",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-abc-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : épeler et faire répéter",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : épeler et faire répéter",
+        "description": "ÉPELER À L’ACCUEIL · 12 MIN\n\nL’allemand ajoute quatre signes à l’alphabet : Ä, Ö, Ü et ß. Gardez toujours les deux points (le tréma) de Ä, Ö et Ü : sans eux, c’est un autre mot. ß s’appelle Eszett et se prononce comme un s dur. Vous travaillerez leurs sons au module suivant.\n\nTROIS PHRASES POUR SE PRÉSENTER\n• Wie heißen Sie? — Comment vous appelez-vous ?\n• Ich heiße Jana. — Je m’appelle Jana.\n• Wie schreibt man das? — Comment ça s’écrit ?\n\nDEUX PHRASES POUR FAIRE RÉPÉTER\n• Noch einmal, bitte. — Encore une fois, s’il vous plaît.\n• Langsam, bitte. — Lentement, s’il vous plaît.\nPour préciser une lettre, on ajoute un mot connu avec « wie » (comme) : « J wie Jana ».\n\nÀ VOUS\n1. Écoutez la petite scène sans lire la transcription : quel prénom est épelé ?\n2. Réécoutez en lisant la transcription. Repérez la demande de répétition et la deuxième épellation, plus lente.\n3. Répétez chaque réplique pendant une pause, puis redites la scène avec votre propre prénom.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-abc-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-abc-umlaute",
+          "usage": "illustration",
+          "caption": "Ä, Ö, Ü : A-, O-, U-Umlaut · ß : Eszett",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-abc-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : les lettres et l’épellation",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : les lettres et l’épellation",
+        "description": "Associez les lettres à leur nom, écrivez les noms qu’on vous épelle, puis complétez les phrases de la scène. Les épellations sont notées comme on les entend : « faou » pour V, « vé » pour W, « yot » pour J, « tsètt » pour Z.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Associez chaque lettre à son nom allemand.",
+          "pairs": [
+            {
+              "left": "J",
+              "right": "« yot »"
+            },
+            {
+              "left": "V",
+              "right": "« faou »"
+            },
+            {
+              "left": "W",
+              "right": "« vé »"
+            },
+            {
+              "left": "Z",
+              "right": "« tsètt »"
+            },
+            {
+              "left": "E",
+              "right": "« é »"
+            },
+            {
+              "left": "U",
+              "right": "« ou »"
+            }
+          ],
+          "explanation": "Les noms allemands de J, V, W et Z surprennent un francophone : V se dit « faou » et W « vé ». E se dit « é » et U « ou », jamais « eu » ni « u » comme en français."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "On vous épelle un prénom : « faou – é – èr – a ». Écrivez-le.",
+          "text": "Vorname: [[1]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Vera"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "« Faou » est le nom de V, « é » celui de E et « èr » celui de R : on écrit Vera. Le piège serait d’écrire W, dont le nom est « vé »."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "On vous épelle un nom de famille : « vé – é – bé – é – èr ». Écrivez-le.",
+          "text": "Nachname: [[1]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Weber"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "« Vé » désigne W en allemand : on écrit Weber. Si vous avez écrit Veber, vous avez lu « vé » à la française."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "On vous épelle un prénom : « yot – o – ha – a – èn – èn – a ». Écrivez-le.",
+          "text": "Vorname: [[1]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Johanna"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ],
+          "explanation": "« Yot » est le nom de J et « ha » celui de H : on écrit Johanna, avec deux n. Un francophone écrit souvent Y en entendant « yot »."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "On vous épelle un prénom : « tsètt – o – é ». Écrivez-le.",
+          "text": "Vorname: [[1]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Zoe"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "Z s’appelle « tsètt » : on écrit Zoe. On retrouve ce son [ts] au début de mots comme Zug (le train) ou Zeit (le temps)."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Complétez la scène à l’accueil avec le verbe heißen.",
+          "text": "Wie [[1]] Sie? – Ich [[2]] Vera.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "heißen"
+              ],
+              "size": 8,
+              "hint": "heißen"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "heiße"
+              ],
+              "size": 8,
+              "hint": "heißen"
+            }
+          ],
+          "explanation": "Avec Sie (vous), le verbe se termine par -en : Sie heißen. Avec ich, il se termine par -e : ich heiße. Le ß se prononce comme un s dur."
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Vous n’avez pas compris. Complétez les deux demandes.",
+          "text": "[[1]] einmal, bitte. [[2]], bitte.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Noch"
+              ],
+              "size": 6,
+              "hint": "encore"
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Langsam"
+              ],
+              "size": 8,
+              "hint": "lentement"
+            }
+          ],
+          "explanation": "Noch einmal signifie « encore une fois » et langsam « lentement ». Avec bitte, ces deux formules suffisent pour faire répéter poliment."
+        },
+        {
+          "id": "q8",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre pour demander comment le nom s’écrit.",
+          "answers": [
+            [
+              "Wie",
+              "schreibt",
+              "man",
+              "das?"
+            ]
+          ],
+          "explanation": "Dans une question qui commence par un mot interrogatif comme wie, le verbe conjugué vient juste après : Wie schreibt man das? Man veut dire « on »."
+        },
+        {
+          "id": "q9",
+          "type": "choice",
+          "prompt": "Vous voulez préciser que la première lettre est J. Que dites-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "J wie Jana.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "J mit Jana.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "J aus Jana.",
+              "correct": false
+            }
+          ],
+          "explanation": "Pour préciser une lettre, on donne un mot connu avec wie (comme) : « J wie Jana ». Mit signifie « avec » et aus « de » : ils ne servent pas à épeler."
+        }
+      ]
+    },
+    {
+      "id": "a1-abc-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : se présenter et faire répéter",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : se présenter et faire répéter",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Articulez chaque mot : la reconnaissance vocale compare votre phrase au modèle.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-abc-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-abc-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-abc-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-abc-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-abc-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-abc-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Guten Tag! Wie heißen Sie?",
+          "accept": [
+            "Guten Tag! Wie heißen Sie?"
+          ],
+          "explanation": "Wie heißen Sie? est la question polie pour demander le nom. Le h de heißen se prononce comme un souffle, et ei se dit « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ich heiße Jana.",
+          "accept": [
+            "Ich heiße Jana."
+          ],
+          "explanation": "Le ch de ich est un souffle doux, la langue près du palais. Heiße compte deux syllabes : HEI-ße.",
+          "threshold": 80
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wie schreibt man das?",
+          "accept": [
+            "Wie schreibt man das?"
+          ],
+          "explanation": "Le w de wie se prononce comme un v français. Dans schreibt, sch se dit « ch » et ei se dit « aï ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Noch einmal, bitte.",
+          "accept": [
+            "Noch einmal, bitte."
+          ],
+          "explanation": "Après o, le ch de noch se forme au fond de la gorge. L’accent tombe sur la première syllabe : EIN-mal.",
+          "threshold": 80
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Langsam, bitte.",
+          "accept": [
+            "Langsam, bitte."
+          ],
+          "explanation": "Accentuez la première syllabe : LANG-sam. Le s placé devant une voyelle se prononce comme un z français.",
+          "threshold": 80
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Mein Name ist Vera Weber.",
+          "accept": [
+            "Mein Name ist Vera Weber."
+          ],
+          "explanation": "Vera et Weber commencent par le même son [v], mais pas par la même lettre : V (« faou ») pour Vera, W (« vé ») pour Weber.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-abc-controle",
+      "kind": "exercise",
+      "title": "Vérifier : comprendre un prénom épelé",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : comprendre un prénom épelé",
+        "description": "Écoutez la scène une première fois pour comprendre la situation. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur le nom des lettres. La transcription s’affiche après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-abc-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Quel prénom entendez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jana",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Lana",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Anna",
+              "correct": false
+            }
+          ],
+          "explanation": "Après « Wie heißen Sie? », on entend « Ich heiße Jana », puis les lettres J, A, N, A. Lana et Anna ne commencent pas par le son « yot ».",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Quelle lettre la personne épelle-t-elle en premier ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Y",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "J",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "G",
+              "correct": false
+            }
+          ],
+          "explanation": "La personne épelle d’abord « Jot » : c’est le nom allemand de J. Un francophone pense souvent à Y ou à G, qui s’appellent « upsilon » et « gué ».",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Quelle lettre termine ce prénom ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "E",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "N",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "A",
+              "correct": true
+            }
+          ],
+          "explanation": "La suite épelée est J–A–N–A : le prénom se termine par A, prononcé comme en français.",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Que demande la première personne après la première dictée ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "De répéter plus lentement",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "De donner le numéro de téléphone",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "D’écrire un autre prénom",
+              "correct": false
+            }
+          ],
+          "explanation": "« Noch einmal, bitte. Langsam, bitte. » : noch einmal veut dire « encore une fois » et langsam « lentement ». La personne veut réentendre l’épellation, plus lentement.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Quel nom de lettre correspond à W ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vau",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Une syllabe proche de « vé »",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Jot",
+              "correct": false
+            }
+          ],
+          "explanation": "En allemand, W s’appelle « vé » et V s’appelle Vau (« faou ») : deux noms différents. Jot est le nom de J.",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Quel signe s’appelle Eszett ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ü",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Z",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ß",
+              "correct": true
+            }
+          ],
+          "explanation": "Eszett est le nom de ß, qui se prononce comme un s dur (die Straße). Les deux points de Ü sont un tréma, et Z s’appelle « tsètt ».",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-abc-mission",
+      "kind": "mission",
+      "title": "Mission : épeler son nom à l’accueil",
+      "estimatedMinutes": 15,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : épeler son nom à l’accueil",
+        "description": "Vous vous inscrivez à un cours de langue. À l’accueil, on vous demande votre nom et comment il s’écrit. On ne vous comprend pas du premier coup : vous épelez une deuxième fois, plus lentement.\n\nMODÈLE\n– Guten Tag! Wie heißen Sie?\n– Ich heiße Vera Weber.\n– Wie schreibt man das?\n– V, E, R, A. W, E, B, E, R.\n– Noch einmal, bitte. Langsam, bitte.\n– V … E … R … A. W … E … B … E … R.\n– Danke!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-abc-anmeldung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Enregistrez votre réponse à l’accueil : saluez, dites votre prénom et votre nom (réels ou inventés), puis épelez-les avec les noms allemands des lettres. Imaginez qu’on vous répond « Noch einmal, bitte » : épelez une deuxième fois, plus lentement.",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez la scène en allemand, comme le modèle : la question de l’accueil, votre réponse, la question « Wie schreibt man das? », votre épellation, la demande de répétition et votre deuxième épellation.",
+          "maxChars": 600,
+          "minWords": 15
+        },
+        "checklist": [
+          "J’ai dit « Ich heiße … » avec mon prénom et mon nom.",
+          "J’ai épelé avec les noms allemands des lettres : E se dit « é », U se dit « ou », J se dit « yot ».",
+          "J’ai bien distingué V (« faou ») et W (« vé ») ; si mon nom n’en contient pas, j’ai aussi épelé Vera Weber.",
+          "J’ai épelé une deuxième fois, plus lentement, après « Noch einmal, bitte ».",
+          "Mon texte reprend Wie heißen Sie?, Wie schreibt man das? et Noch einmal, bitte."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-abc-natif",
+      "kind": "audio",
+      "title": "Das Alphabet — enregistrement natif",
+      "native": {
+        "file": "dib-audio/pho/pho_01_01_abc.mp3"
+      },
+      "transcript": "A, B, C, D, E, F, G\nH, I, J, K, L, M, N\nO, P, Q, R, S, T, U\nV, W, X, Y, Z",
+      "v3SourceKey": "a1-hallo-abc-native"
+    },
+    {
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0",
+      "key": "a1-abc-dialogue",
+      "kind": "audio",
+      "title": "Das Alphabet · Écouter et épeler son nom · scène",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Guten Tag. Wie heißen Sie?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ich heiße Jana. J, A, N, A."
+        },
+        {
+          "voice": "mann",
+          "text": "Noch einmal, bitte. Langsam, bitte."
+        },
+        {
+          "voice": "frau",
+          "text": "J. A. N. A. Jana."
+        },
+        {
+          "voice": "mann",
+          "text": "Danke, Jana!"
+        }
+      ]
+    },
+    {
+      "key": "v4-a1-abc-alphabet",
+      "kind": "image",
+      "title": "L’alphabet allemand en quatre groupes",
+      "alt": "Tableau de l’alphabet allemand en quatre rangées : A à G, H à N, O à U, puis V à Z. Les lettres J, V, W et Z, dont le nom allemand surprend un francophone, sont en couleur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "letters",
+        "rows": [
+          "ABCDEFG",
+          "HIJKLMN",
+          "OPQRSTU",
+          "VWXYZ"
+        ],
+        "accent": [
+          "J",
+          "V",
+          "W",
+          "Z"
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-abc-namen",
+      "kind": "image",
+      "title": "Le nom allemand de J, V, W et Z",
+      "alt": "Quatre cartes de lettres avec leur nom allemand : J se dit « Jot », V « Vau », W « We » et Z « Zett ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "letters",
+        "colorful": true,
+        "tile": 180,
+        "rows": [
+          [
+            {
+              "letter": "J",
+              "name": "Jot"
+            },
+            {
+              "letter": "V",
+              "name": "Vau"
+            },
+            {
+              "letter": "W",
+              "name": "We"
+            },
+            {
+              "letter": "Z",
+              "name": "Zett"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-abc-umlaute",
+      "kind": "image",
+      "title": "Les signes Ä, Ö, Ü et ß",
+      "alt": "Quatre cartes : Ä (A-Umlaut), Ö (O-Umlaut) et Ü (U-Umlaut), avec leurs deux points bien visibles, puis ß, dont le nom est « Eszett ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "letters",
+        "colorful": true,
+        "tile": 180,
+        "rows": [
+          [
+            {
+              "letter": "Ä",
+              "name": "A-Umlaut"
+            },
+            {
+              "letter": "Ö",
+              "name": "O-Umlaut"
+            },
+            {
+              "letter": "Ü",
+              "name": "U-Umlaut"
+            },
+            {
+              "letter": "ß",
+              "name": "Eszett"
+            }
+          ]
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-abc-anmeldung",
+      "kind": "image",
+      "title": "À l’accueil : épeler son prénom",
+      "alt": "À l’accueil d’une école de langues, l’employé demande « Wie schreibt man das? » et Vera épelle son prénom : « V, E, R, A. ». Sur le comptoir : un porte-bloc, un crayon et une carte d’identité.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "office",
+        "people": [
+          {
+            "name": "Mitarbeiter",
+            "say": "Wie schreibt man das?"
+          },
+          {
+            "name": "Vera",
+            "say": "V, E, R, A."
+          }
+        ],
+        "items": [
+          "clipboard-list",
+          "pencil",
+          "id-card"
+        ]
+      }
+    },
+    {
+      "key": "a1-abc-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Guten Tag! Wie heißen Sie?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich heiße Jana."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie schreibt man das?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Noch einmal, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Langsam, bitte."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : se présenter et faire répéter",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mein Name ist Vera Weber."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-abc-lexique",
+      "kind": "audio",
+      "title": "Lexique · Das Alphabet · Écouter et épeler son nom",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "das Alphabet, die Alphabete"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Buchstabe, die Buchstaben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Name, die Namen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vorname, die Vornamen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Nachname, die Nachnamen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "heißen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schreiben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "buchstabieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie bitte?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "noch einmal"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "langsam"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bitte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "danke"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Guten Tag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -1,6 +1,7 @@
 package org.linguacap.catalogue;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.agroal.api.AgroalDataSource;
@@ -20,7 +21,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import org.linguacap.catalogue.CatalogueResource.Question;
+import org.linguacap.catalogue.QuestionViews.View;
+import org.linguacap.catalogue.VersionDocument.Mission;
+import org.linguacap.catalogue.VersionDocument.VocabularyEntry;
 import org.linguacap.common.Actor;
 import org.linguacap.common.HttpError;
 
@@ -81,7 +84,7 @@ public class TrackResource {
             Track header = header(connection, versionId);
             Map<String, TrackModule> modules = new LinkedHashMap<>();
             try (var query = connection.prepareStatement("""
-                    select id, position, title, objective, prerequisites
+                    select id, position, title, objective, prerequisites, jsonb_array_length(vocabulary) as vocabulary_count
                     from catalogue.modules where version_id = ? order by position
                     """)) {
                 query.setObject(1, versionId);
@@ -89,7 +92,7 @@ public class TrackResource {
                     while (rows.next()) {
                         modules.put(rows.getString("id"), new TrackModule(rows.getString("id"), rows.getInt("position"),
                                 rows.getString("title"), rows.getString("objective"), texts(rows.getArray("prerequisites")),
-                                new ArrayList<>()));
+                                new ArrayList<>(), rows.getInt("vocabulary_count")));
                     }
                 }
             }
@@ -112,7 +115,10 @@ public class TrackResource {
         }
     }
 
-    /** Contenu d'une activité sans corrigé : leçon, questions et supports avec leur version de fichier. */
+    /**
+     * Contenu d'une activité sans corrigé : leçon, questions (vues élève typées) et supports avec leur version de
+     * fichier, définition d'une mission et niveau de la version.
+     */
     @GET
     @Path("/internal/tracks/{versionId}/activities/{activityId}")
     public ActivityContent activity(@PathParam("versionId") UUID versionId, @PathParam("activityId") String activityId) {
@@ -121,11 +127,13 @@ public class TrackResource {
             throw HttpError.badRequest("Identifiant d’activité invalide.");
         }
         try (var connection = dataSource.getConnection()) {
-            header(connection, versionId);
+            Track header = header(connection, versionId);
             TrackActivity activity;
             String moduleId;
+            Mission mission;
             try (var query = connection.prepareStatement("""
-                    select module_id, id, position, kind, title, estimated_minutes, competences, lesson_id
+                    select module_id, id, position, kind, title, estimated_minutes, competences, lesson_id,
+                           mission::text as mission
                     from catalogue.activities where version_id = ? and id = ?
                     """)) {
                 query.setObject(1, versionId);
@@ -134,10 +142,12 @@ public class TrackResource {
                     if (!rows.next()) throw HttpError.notFound("Activité introuvable dans ce parcours.");
                     moduleId = rows.getString("module_id");
                     activity = activity(rows);
+                    String stored = rows.getString("mission");
+                    mission = stored == null ? null : json.readValue(stored, Mission.class);
                 }
             }
             LessonContent lesson = null;
-            List<Question> questions = List.of();
+            List<View> questions = List.of();
             if (activity.lessonId() != null) {
                 try (var query = connection.prepareStatement(
                         "select id, title, description, transcript from catalogue.lessons where id = ?")) {
@@ -170,9 +180,40 @@ public class TrackResource {
                     }
                 }
             }
-            return new ActivityContent(moduleId, activity, lesson, questions, placements);
-        } catch (SQLException error) {
+            return new ActivityContent(moduleId, activity, lesson, questions, placements, header.levelCode(), mission);
+        } catch (JsonProcessingException | SQLException error) {
             throw HttpError.unavailable("L’activité est temporairement indisponible.");
+        }
+    }
+
+    /**
+     * Vocabulaire d'un module d'une version publiée ou retirée (route interne pour Apprentissage) : entrées dans
+     * l'ordre du module, son de chacune en segment (start, end) d'une version de média.
+     */
+    @GET
+    @Path("/internal/tracks/{versionId}/modules/{moduleId}/vocabulary")
+    public ModuleVocabulary vocabulary(@PathParam("versionId") UUID versionId, @PathParam("moduleId") String moduleId) {
+        actor.id();
+        if (!moduleId.matches(ACTIVITY_ID) || moduleId.length() > 64) {
+            throw HttpError.badRequest("Identifiant de module invalide.");
+        }
+        try (var connection = dataSource.getConnection()) {
+            Track header = header(connection, versionId);
+            try (var query = connection.prepareStatement("""
+                    select title, vocabulary::text as vocabulary from catalogue.modules where version_id = ? and id = ?
+                    """)) {
+                query.setObject(1, versionId);
+                query.setString(2, moduleId);
+                try (var rows = query.executeQuery()) {
+                    if (!rows.next()) throw HttpError.notFound("Module introuvable dans ce parcours.");
+                    List<VocabularyEntry> entries = json.readValue(rows.getString("vocabulary"),
+                            new TypeReference<List<VocabularyEntry>>() {});
+                    return new ModuleVocabulary(versionId, header.levelCode(), moduleId, rows.getString("title"),
+                            List.copyOf(entries));
+                }
+            }
+        } catch (JsonProcessingException | SQLException error) {
+            throw HttpError.unavailable("Le vocabulaire est temporairement indisponible.");
         }
     }
 
@@ -290,10 +331,11 @@ public class TrackResource {
     public record Track(UUID versionId, String levelId, String levelCode, String levelTitle, int number, String status,
                         List<TrackModule> modules, Planning planning, String languageId, List<String> assessmentKinds) {}
 
-    public record Diagnostic(String lessonId, String title, String description, List<Question> questions) {}
+    public record Diagnostic(String lessonId, String title, String description, List<View> questions) {}
 
+    /** vocabularyCount : nombre d'entrées du vocabulaire du module. */
     public record TrackModule(String id, int position, String title, String objective, List<String> prerequisites,
-                              List<TrackActivity> activities) {}
+                              List<TrackActivity> activities, int vocabularyCount) {}
 
     public record TrackActivity(String id, int position, String kind, String title, int estimatedMinutes,
                                 List<String> competences, String lessonId) {}
@@ -307,6 +349,14 @@ public class TrackResource {
     public record AssessmentDefinition(String kind, String title, String description, int passPercent, String levelCode,
                                        JsonNode parts) {}
 
+    /**
+     * Activité servie à Apprentissage et Évaluations : questions en vues élève (aucun corrigé), mission d'une
+     * activité « mission » (null sinon) et niveau de la version.
+     */
     public record ActivityContent(String moduleId, TrackActivity activity, LessonContent lesson,
-                                  List<Question> questions, List<Placement> placements) {}
+                                  List<View> questions, List<Placement> placements, String levelCode, Mission mission) {}
+
+    /** Vocabulaire d'un module : son de chaque entrée en segment {assetId, assetVersion, start, end} ou null. */
+    public record ModuleVocabulary(UUID versionId, String levelCode, String moduleId, String moduleTitle,
+                                   List<VocabularyEntry> entries) {}
 }

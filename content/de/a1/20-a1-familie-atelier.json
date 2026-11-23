@@ -1,0 +1,1217 @@
+{
+  "id": "a1-familie-atelier",
+  "title": "Parler de sa famille et inviter à un anniversaire",
+  "objective": "Distinguer les membres d’une famille, repérer une date et formuler une invitation courte.",
+  "prerequisites": [
+    "a1-familie"
+  ],
+  "audioProfile": "a1-suite",
+  "sources": [
+    "LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU)."
+  ],
+  "layer": "content/v4/pedagogy/a1/a1-familie-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "party",
+      "word": "Party",
+      "article": "die",
+      "plural": "Partys",
+      "partOfSpeech": "noun",
+      "translation": "la fête (entre amis)",
+      "example": "Die Party beginnt um sieben Uhr.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "fest",
+      "word": "Fest",
+      "article": "das",
+      "plural": "Feste",
+      "partOfSpeech": "noun",
+      "translation": "la fête",
+      "example": "Das Fest ist am Samstag.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "kuchen",
+      "word": "Kuchen",
+      "article": "der",
+      "plural": "Kuchen",
+      "partOfSpeech": "noun",
+      "translation": "le gâteau",
+      "example": "Ich bringe einen Kuchen mit.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "mitbringen",
+      "word": "mitbringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "apporter",
+      "example": "Kannst du einen Kuchen mitbringen?",
+      "note": "séparable : mit|bringen ; ich bringe … mit",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "beginnen",
+      "word": "beginnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "commencer",
+      "example": "Wir beginnen um sechs Uhr.",
+      "note": "die Party beginnt um …",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "werden",
+      "word": "werden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "devenir ; (âge) avoir bientôt",
+      "example": "Ich will Lehrerin werden.",
+      "note": "ich werde, du wirst, er/sie wird ; sie wird achtzehn : elle va avoir 18 ans",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "abends",
+      "word": "abends",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "le soir",
+      "example": "Die Party beginnt um sechs Uhr abends.",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "bei",
+      "word": "bei",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "chez",
+      "example": "Wir feiern bei meinen Eltern.",
+      "note": "+ datif : bei mir, bei uns, bei meinen Eltern",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "auch",
+      "word": "auch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "aussi",
+      "example": "Kommst du auch?",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "mein",
+      "word": "mein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "pronoun",
+      "translation": "mon, ma, mes",
+      "example": "Mein Bruder kommt um sieben.",
+      "note": "meine devant un nom féminin ou pluriel : meine Schwester, meine Eltern",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "dein",
+      "word": "dein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "pronoun",
+      "translation": "ton, ta, tes",
+      "example": "Kommt dein Bruder auch?",
+      "note": "deine devant un nom féminin ou pluriel : deine Schwester",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "samstag",
+      "word": "Samstag",
+      "article": "der",
+      "plural": "Samstage",
+      "partOfSpeech": "noun",
+      "translation": "le samedi",
+      "example": "Wir feiern am Samstag.",
+      "note": "am Samstag : samedi",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "mai",
+      "word": "Mai",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "mai",
+      "example": "Jule hat am zwölften Mai Geburtstag.",
+      "note": "les mois sont masculins ; am zwölften Mai",
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ja-gern",
+      "word": "Ja, gern!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Oui, avec plaisir !",
+      "example": "Kommst du auch? – Ja, gern!",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "viele-gruesse",
+      "word": "Viele Grüße",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Amitiés (pour finir un message)",
+      "example": "Viele Grüße, Sara",
+      "note": null,
+      "audio": {
+        "media": "a1-familie-atelier-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "a1-familie-atelier-guide",
+      "kind": "lesson",
+      "title": "Découvrir : l’invitation de Sara",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : l’invitation de Sara",
+        "description": "L’INVITATION DE SARA · 15 MIN\n\n1. Lire (5 min). Lisez l’invitation : « Hallo Ali! Mein Bruder Emil hat am dritten Juni Geburtstag. Meine Eltern feiern mit ihm am fünften Juni. Die Party beginnt um sieben Uhr abends bei uns. Kommst du auch? Viele Grüße, Sara ». Repérez qui fête son anniversaire, la date de l’anniversaire, la date de la fête, l’heure et le lieu. Attention : l’anniversaire (le 3 juin) et la fête (le 5 juin) ne tombent pas le même jour.\n\n2. Désigner la bonne personne (5 min). Comparez « mein Bruder », « meine Schwester » et « meine Eltern » : mein devant un nom masculin ou neutre, meine devant un nom féminin ou pluriel. Pour parler de la famille de votre interlocuteur, remplacez mein par dein et meine par deine. Lisez à voix haute : « Kommt dein Bruder auch? – Ja, mein Bruder kommt. », puis « Kommt deine Schwester auch? – Nein, meine Schwester kommt nicht. »\n\n3. Dire une date (5 min). Lisez « am dritten Juni », « am fünften Juni » et « am zwölften Mai » en regardant les dates 3. Juni, 5. Juni et 12. Mai. Après am, l’ordinal se termine par -ten. Dites ensuite votre date d’anniversaire : « Ich habe am … Geburtstag. »",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-familie-atelier-einladung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-familie-atelier-daten",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-familie-atelier-pratique",
+      "kind": "lesson",
+      "title": "Comprendre : une fête chez les parents",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Comprendre : une fête chez les parents",
+        "description": "UNE FÊTE CHEZ LES PARENTS · 12 MIN\n\nUne jeune femme annonce une fête à un ami. Deux dates reviennent : celle de l’anniversaire et celle de la fête.\n\n1. Première écoute (3 min), sans la transcription : de qui fête-t-on l’anniversaire, et l’ami vient-il ?\n2. Deuxième écoute (4 min) : repérez les deux dates, l’âge, le lieu et les deux heures, celle du début de la fête et celle où arrive le frère. Vérifiez ensuite avec la transcription.\n3. Phrases utiles (5 min). Répétez chaque phrase pendant une pause :\n• Meine Schwester hat am zwölften Mai Geburtstag. — Ma sœur a son anniversaire le 12 mai.\n• Sie wird achtzehn. — Elle va avoir 18 ans.\n• Wir feiern am Samstag bei meinen Eltern. — Nous faisons la fête samedi chez mes parents.\n• Kommt dein Bruder auch? — Ton frère vient aussi ?\n• Ich bringe einen Kuchen mit. — J’apporte un gâteau. (mitbringen est séparable : bringe … mit)",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-familie-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "v4-a1-familie-atelier-mein-dein",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "a1-familie-atelier-entrainer",
+      "kind": "exercise",
+      "title": "S’entraîner : dates, mein et dein",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : dates, mein et dein",
+        "description": "Réécoutez la scène et complétez les notes de l’ami, puis travaillez les possessifs, la place du verbe et les dates. Pour finir, écrivez deux phrases dictées. La transcription de la scène s’affichera après votre réponse.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-familie-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-entrainer-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-entrainer-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Écoutez la scène et complétez les notes de l’ami (les nombres en chiffres).",
+          "text": "Geburtstag von Jule: [[1]]. Mai · Party: Samstag, [[2]]. Mai · Beginn: [[3]] Uhr abends · Ort: bei ihren [[4]]",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "12"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "16"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "6",
+                "18"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Eltern"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "On entend « am zwölften Mai » (12) pour l’anniversaire, « am sechzehnten Mai » (16) pour la fête, « um sechs Uhr abends » (18 h) et « bei meinen Eltern ». Ne confondez pas sechzehn (16) et sechzig (60)."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Complétez la suite des notes.",
+          "text": "Um sieben Uhr kommt ihr [[1]]. Der Gast bringt einen [[2]] mit.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Bruder"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kuchen"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ],
+          "explanation": "La sœur dit « mein Bruder kommt um sieben » : c’est le frère qui arrive à 19 h, une heure après le début. L’ami promet « Ich bringe einen Kuchen mit » : mitbringen veut dire apporter."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Complétez avec mein, meine, dein ou deine.",
+          "text": "Kommt [[1]] Bruder auch? – Ja, [[2]] Bruder kommt. Und [[3]] Eltern?",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "dein"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "mein"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "deine"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ],
+          "explanation": "On interroge l’autre sur son frère : dein Bruder ; il répond pour lui-même : mein Bruder. Devant Eltern, toujours au pluriel, on ajoute -e : deine Eltern."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Am Samstag",
+              "feiern",
+              "wir",
+              "bei meinen Eltern."
+            ]
+          ],
+          "explanation": "Quand la phrase commence par un complément de temps (Am Samstag), le verbe feiern reste en 2e position et le sujet wir vient juste après. « Am Samstag wir feiern » calque le français."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Meine Schwester",
+              "hat",
+              "am zwölften Mai",
+              "Geburtstag."
+            ]
+          ],
+          "explanation": "Dans Geburtstag haben (avoir son anniversaire), hat prend la 2e place et Geburtstag ferme la phrase ; la date se glisse entre les deux."
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Associez chaque question à sa réponse.",
+          "pairs": [
+            {
+              "left": "Wann hat Jule Geburtstag?",
+              "right": "Am zwölften Mai."
+            },
+            {
+              "left": "Wie alt wird sie?",
+              "right": "Achtzehn."
+            },
+            {
+              "left": "Wo feiert ihr?",
+              "right": "Bei meinen Eltern."
+            },
+            {
+              "left": "Wann beginnt die Party?",
+              "right": "Um sechs Uhr abends."
+            },
+            {
+              "left": "Kommt dein Bruder auch?",
+              "right": "Ja, um sieben."
+            }
+          ],
+          "explanation": "Wann appelle une date (am …) ou une heure (um …), wie alt un âge et wo un lieu (bei …). Une question qui commence par le verbe (Kommt …?) appelle ja ou nein."
+        },
+        {
+          "id": "q7",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la phrase.",
+          "voice": "frau",
+          "accept": [
+            "Die Party beginnt um sieben Uhr abends."
+          ],
+          "explanation": "L’heure s’introduit par um : um sieben Uhr abends (19 h). Party est un nom (majuscule) et le verbe beginnt occupe la 2e position.",
+          "showWordCount": true
+        },
+        {
+          "id": "q8",
+          "type": "dictation",
+          "prompt": "Écoutez et écrivez la question.",
+          "voice": "mann",
+          "accept": [
+            "Kommt deine Schwester auch zur Party?"
+          ],
+          "explanation": "Question oui/non : le verbe kommt ouvre la phrase. Deine prend -e devant Schwester, nom féminin ; zur = zu der, devant die Party.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-atelier-repeter",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : annoncer une fête",
+      "estimatedMinutes": 8,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : annoncer une fête",
+        "description": "Écoutez chaque modèle autant de fois que nécessaire, puis dites la phrase sans vous presser. Articulez bien les dates : la terminaison -ten de l’ordinal doit s’entendre.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-familie-atelier-repeter-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-repeter-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-repeter-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-repeter-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-repeter-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "a1-familie-atelier-repeter-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Meine Schwester hat am zwölften Mai Geburtstag.",
+          "accept": [
+            "Meine Schwester hat am zwölften Mai Geburtstag.",
+            "Meine Schwester hat am 12. Mai Geburtstag."
+          ],
+          "explanation": "Am zwölften : -ten après am. Dans zwölften, arrondissez les lèvres sur ö. Accentuez Ge-BURTS-tag.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Wir feiern am Samstag bei meinen Eltern.",
+          "accept": [
+            "Wir feiern am Samstag bei meinen Eltern."
+          ],
+          "explanation": "Dans feiern et meinen, ei se dit « aï ». Eltern commence par un e ouvert, comme « è ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Die Party beginnt um sechs Uhr.",
+          "accept": [
+            "Die Party beginnt um sechs Uhr.",
+            "Die Party beginnt um 6 Uhr."
+          ],
+          "explanation": "L’accent de beginnt tombe sur -GINNT. Dans sechs, chs se prononce « ks ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Kommt dein Bruder auch?",
+          "accept": [
+            "Kommt dein Bruder auch?"
+          ],
+          "explanation": "Question oui/non : la voix monte sur auch. Dans dein, ei se dit « aï » ; la finale -er de Bruder sonne comme un petit « a ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Ja, gern! Ich bringe einen Kuchen mit.",
+          "accept": [
+            "Ja, gern! Ich bringe einen Kuchen mit."
+          ],
+          "explanation": "Mitbringen est séparable : bringe en 2e position, mit à la fin. Dans Kuchen, le ch après u se forme au fond de la gorge.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Écoutez le modèle, puis dites la phrase à voix haute.",
+          "text": "Viele Grüße und bis Samstag!",
+          "accept": [
+            "Viele Grüße und bis Samstag!"
+          ],
+          "explanation": "Viele Grüße termine un message amical. Arrondissez les lèvres sur ü ; ß se prononce comme un s dur.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-atelier-controle",
+      "kind": "exercise",
+      "title": "Vérifier : comprendre une invitation",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Vérifier : comprendre une invitation",
+        "description": "Écoutez la scène une première fois pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Les deux dernières questions portent sur les possessifs et les dates. Après la validation, chaque question affiche la réponse attendue et une explication.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "a1-familie-atelier-dialogue",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "prompt": "Écoute : de qui est-ce l’anniversaire ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "De la sœur",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Du frère",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "De la mère",
+              "correct": false
+            }
+          ],
+          "explanation": "La première voix dit « Meine Schwester Jule hat am zwölften Mai Geburtstag » : Schwester, c’est la sœur. Le frère n’est cité qu’à la fin : il arrive à sept heures.",
+          "type": "choice"
+        },
+        {
+          "id": "q2",
+          "prompt": "Écoute : quel âge Jule va-t-elle avoir ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "16 ans",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "18 ans",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "20 ans",
+              "correct": false
+            }
+          ],
+          "explanation": "À la question « Wird sie zwanzig? », la réponse est « Nein, sie wird achtzehn » : elle va avoir 18 ans. Zwanzig (20) est la supposition erronée de l’ami.",
+          "type": "choice"
+        },
+        {
+          "id": "q3",
+          "prompt": "Écoute : à quelle date a lieu la fête ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Le 12 mai",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Le 6 mai",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Le 16 mai",
+              "correct": true
+            }
+          ],
+          "explanation": "L’anniversaire tombe le 12 mai, mais la fête a lieu « am Samstag, am sechzehnten Mai ». Sechzehn = 16 : ne le confondez pas avec sechs (6).",
+          "type": "choice"
+        },
+        {
+          "id": "q4",
+          "prompt": "Écoute : à quelle heure commence la fête ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "18 h",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "19 h",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "16 h",
+              "correct": false
+            }
+          ],
+          "explanation": "« Die Party beginnt um sechs Uhr abends » : six heures du soir, soit 18 h. 19 h (um sieben) est l’heure à laquelle arrive le frère.",
+          "type": "choice"
+        },
+        {
+          "id": "q5",
+          "prompt": "Comment dit-on « ma sœur » ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Deine Schwester",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Meine Schwester",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Mein Schwester",
+              "correct": false
+            }
+          ],
+          "explanation": "Schwester est féminin : meine Schwester. « Mein Schwester » oublie la terminaison -e, et deine signifie « ta ».",
+          "type": "choice"
+        },
+        {
+          "id": "q6",
+          "prompt": "Comment dis-tu « le 12 mai » pour indiquer la date de ton rendez-vous ?",
+          "options": [
+            {
+              "id": "a",
+              "label": "Im zwölften Mai.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um zwölf Mai.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Am zwölften Mai.",
+              "correct": true
+            }
+          ],
+          "explanation": "Pour une date précise : am + ordinal en -ten, am zwölften Mai. Im s’emploie avec un mois seul (im Mai) et um avec une heure (um zwölf Uhr).",
+          "type": "choice"
+        }
+      ]
+    },
+    {
+      "id": "a1-familie-atelier-mission",
+      "kind": "mission",
+      "title": "Mission : inviter à un anniversaire",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : inviter à un anniversaire",
+        "description": "Une personne de votre famille fête son anniversaire, mais la fête a lieu un autre jour. Vous invitez un ami : d’abord par un message vocal, puis par écrit.\n\nMODÈLE\nHallo Ali! Meine Schwester hat am zwölften Mai Geburtstag. Sie wird achtzehn. Wir feiern am Samstag, am sechzehnten Mai, um sechs Uhr abends bei meinen Eltern. Kommst du auch? Viele Grüße, Sara",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "v4-a1-familie-atelier-party",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [],
+      "mission": {
+        "oral": {
+          "prompt": "Laissez un message vocal à un ami : dites qui fête son anniversaire (mein Bruder, meine Schwester…) et à quelle date, puis donnez séparément la date de la fête, l’heure et le lieu. Terminez en demandant s’il vient.",
+          "maxSeconds": 60
+        },
+        "written": {
+          "prompt": "Écrivez l’invitation en cinq phrases au moins : une salutation, qui fête son anniversaire et quel âge il ou elle aura, la date de la fête avec am …, l’heure avec um …, le lieu, une question (Kommst du auch?) et une formule pour finir.",
+          "maxChars": 600,
+          "minWords": 25
+        },
+        "checklist": [
+          "J’ai employé mein ou meine correctement : mein Bruder, meine Schwester, meine Eltern.",
+          "J’ai bien séparé la date de l’anniversaire et celle de la fête.",
+          "J’ai dit les dates avec am + ordinal en -ten (am zwölften Mai) et l’heure avec um.",
+          "Mon invitation donne le lieu et se termine par une question (Kommst du auch?) et une formule (Viele Grüße)."
+        ]
+      }
+    }
+  ],
+  "media": [
+    {
+      "key": "a1-familie-atelier-dialogue",
+      "kind": "audio",
+      "title": "Parler de sa famille et inviter à un anniversaire · scène",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Hallo! Meine Schwester Jule hat am zwölften Mai Geburtstag."
+        },
+        {
+          "voice": "mann",
+          "text": "Wird sie zwanzig?"
+        },
+        {
+          "voice": "frau",
+          "text": "Nein, sie wird achtzehn. Wir feiern am Samstag, am sechzehnten Mai."
+        },
+        {
+          "voice": "mann",
+          "text": "Wo feiert ihr?"
+        },
+        {
+          "voice": "frau",
+          "text": "Bei meinen Eltern. Die Party beginnt um sechs Uhr abends."
+        },
+        {
+          "voice": "mann",
+          "text": "Kommt dein Bruder auch?"
+        },
+        {
+          "voice": "frau",
+          "text": "Ja, mein Bruder kommt um sieben. Kommst du auch?"
+        },
+        {
+          "voice": "mann",
+          "text": "Ja, gern! Ich bringe einen Kuchen mit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "v4-a1-familie-atelier-einladung",
+      "kind": "image",
+      "title": "L’invitation de Sara",
+      "alt": "Carte d’invitation : « Hallo Ali! Mein Bruder Emil hat am dritten Juni Geburtstag. Meine Eltern feiern mit ihm am fünften Juni. Die Party beginnt um sieben Uhr abends bei uns. Kommst du auch? Viele Grüße, Sara »",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "setting": "party",
+        "icon": "party-popper",
+        "title": "Einladung",
+        "size": 30,
+        "lines": [
+          "Hallo Ali!",
+          "Mein Bruder Emil hat [am dritten Juni] Geburtstag.",
+          "Meine Eltern feiern mit ihm [am fünften Juni].",
+          "Die Party beginnt [um sieben Uhr abends] bei uns.",
+          "Kommst du auch?"
+        ],
+        "footer": "Viele Grüße, Sara"
+      }
+    },
+    {
+      "key": "v4-a1-familie-atelier-daten",
+      "kind": "image",
+      "title": "Lire une date",
+      "alt": "Trois feuillets de calendrier : 3 juin, « am dritten Juni » ; 5 juin, « am fünften Juni » ; 12 mai, « am zwölften Mai ».",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "dates",
+        "items": [
+          {
+            "day": "3.",
+            "month": "Juni",
+            "label": "am dritten Juni"
+          },
+          {
+            "day": "5.",
+            "month": "Juni",
+            "label": "am fünften Juni"
+          },
+          {
+            "day": "12.",
+            "month": "Mai",
+            "label": "am zwölften Mai"
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-familie-atelier-mein-dein",
+      "kind": "image",
+      "title": "mein, meine, dein, deine",
+      "alt": "Trois cartes : der Bruder avec « mein Bruder, dein Bruder » ; die Schwester avec « meine Schwester, deine Schwester » ; die Eltern avec « meine Eltern, deine Eltern ». Le déterminant est en couleur.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "words",
+        "wordSize": 29,
+        "groups": [
+          {
+            "title": "der Bruder",
+            "words": [
+              "[mein] Bruder",
+              "[dein] Bruder"
+            ]
+          },
+          {
+            "title": "die Schwester",
+            "words": [
+              "[meine] Schwester",
+              "[deine] Schwester"
+            ]
+          },
+          {
+            "title": "die Eltern",
+            "words": [
+              "[meine] Eltern",
+              "[deine] Eltern"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "v4-a1-familie-atelier-party",
+      "kind": "image",
+      "title": "Inviter à une fête",
+      "alt": "À une fête d’anniversaire, Sara demande « Kommst du auch? » et Ali répond « Ja, gern! ». En haut : un gâteau, un cadeau et un calendrier.",
+      "credit": "Illustration LinguaCap",
+      "license": "Illustration originale LinguaCap, pictogrammes Lucide (ISC)",
+      "image": {
+        "layout": "scene",
+        "setting": "party",
+        "people": [
+          {
+            "name": "Sara",
+            "say": "Kommst du auch?"
+          },
+          {
+            "name": "Ali",
+            "say": "Ja, gern!"
+          }
+        ],
+        "items": [
+          "cake",
+          "gift",
+          "calendar-days"
+        ]
+      }
+    },
+    {
+      "key": "a1-familie-atelier-entrainer-q7",
+      "kind": "audio",
+      "title": "Dictée q7 · S’entraîner : dates, mein et dein",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Die Party beginnt um sieben Uhr abends."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-entrainer-q8",
+      "kind": "audio",
+      "title": "Dictée q8 · S’entraîner : dates, mein et dein",
+      "script": [
+        {
+          "voice": "mann",
+          "text": "Kommt deine Schwester auch zur Party?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meine Schwester hat am zwölften Mai Geburtstag."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wir feiern am Samstag bei meinen Eltern."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Party beginnt um sechs Uhr."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Kommt dein Bruder auch?"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ja, gern! Ich bringe einen Kuchen mit."
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-repeter-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : annoncer une fête",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Viele Grüße und bis Samstag!"
+        }
+      ],
+      "audioProfile": "a1-debut",
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "a1-familie-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Parler de sa famille et inviter à un anniversaire",
+      "segments": true,
+      "audioProfile": "a1-debut",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Party, die Partys"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fest, die Feste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kuchen, die Kuchen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitbringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beginnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "werden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abends"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bei"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "auch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Samstag, die Samstage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Mai"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ja, gern!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Viele Grüße"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

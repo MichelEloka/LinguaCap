@@ -14,12 +14,41 @@ export const profiles = {
   admin: { id: 'a1', displayName: 'Inès Morel', role: 'admin', permissions: [] },
 };
 
-const essen = JSON.parse(readFileSync(join(repo, 'content', 'de', 'a1', '05-essen.json'), 'utf8'));
+const read = (path) => JSON.parse(readFileSync(join(repo, path), 'utf8'));
+const levelA1 = read('content/de/a1/level.json');
+/** Module A1 par identifiant : la V4 range ses modules dans des fichiers numérotés listés par level.json. */
+export const contentModule = (id) => read(`content/de/a1/${levelA1.modules.find((item) => item.id === id).file}`);
+const essen = contentModule('a1-essen');
 const media = new Map(essen.media.map((item) => [item.key, item]));
 export const mediaUrl = (key) => {
   const item = media.get(key);
-  return item.kind === 'audio' ? `/__media/audio/${key}.mp3` : `/__media/images/${key}.${item.photo ? 'jpg' : 'png'}`;
+  const audio = item ? item.kind === 'audio' : /-(audio|native|q\d+)$/.test(key);
+  return audio ? `/__media/audio/${key}.mp3` : `/__media/images/${key}.${item?.photo ? 'jpg' : 'png'}`;
 };
+
+/**
+ * Vue élève d'une question de contenu, pour tous les types de la V4 (sans corrigé) : identifiants simples pour les
+ * jetons et les éléments à associer, affichés dans un ordre qui n'est jamais la solution.
+ */
+export function questionView(question) {
+  const type = question.type ?? 'choice';
+  const base = { id: question.id, type, prompt: question.prompt };
+  if (type === 'fill') return { ...base, text: question.text, blanks: question.blanks.map((blank) => ({ id: blank.id, size: blank.size ?? 8, hint: blank.hint ?? null })) };
+  if (type === 'order') {
+    const tokens = question.answers[0].map((text, index) => ({ id: `k${String(index).padStart(6, '0')}`, text }));
+    const shown = [...tokens].sort((a, b) => a.text.localeCompare(b.text, 'de'));
+    if (shown.every((token, index) => token === tokens[index])) shown.push(shown.shift());
+    return { ...base, tokens: shown };
+  }
+  if (type === 'match') {
+    const right = question.pairs.map((pair, index) => ({ id: `r${index}`, text: pair.right })).sort((a, b) => a.text.localeCompare(b.text, 'de'));
+    if (right.every((item, index) => item.id === `r${index}`)) right.push(right.shift());
+    return { ...base, left: question.pairs.map((pair, index) => ({ id: `l${index}`, text: pair.left })), right };
+  }
+  if (type === 'dictation') return { ...base, wordCount: question.showWordCount ? question.accept[0].split(/\s+/).length : null };
+  if (type === 'speak') return { ...base, text: question.text, threshold: question.threshold ?? (question.text.split(/\s+/).length <= 3 ? 80 : 75) };
+  return { ...base, options: question.options.map((option) => ({ id: option.id, text: option.label })) };
+}
 
 /** Activités d'une séance construites à partir des vrais contenus (leçon, exercice, écoute). */
 export function activitiesOf(ids, completed = 1) {
@@ -28,8 +57,7 @@ export function activitiesOf(ids, completed = 1) {
     status: index < completed ? 'completed' : 'todo', state: {}, attemptId: null,
     lesson: { id: `a1-v2-${activity.id}`, title: activity.lesson.title, description: activity.lesson.description },
     transcript: index < completed ? 'Kellner : Guten Tag! Was möchten Sie trinken?\nPaula : Ich möchte einen Cappuccino, bitte.' : null,
-    questions: (activity.questions ?? []).map((question) => ({ id: question.id, prompt: question.prompt,
-      options: question.options.map((option) => ({ id: option.id, text: option.label })) })),
+    questions: (activity.questions ?? []).map(questionView), mission: null, contentVersionId: 'v-a1-2', contentActivityId: activity.id, reviewItems: null,
     placements: (activity.placements ?? []).map((placement, position) => ({
       position: position + 1, assetId: placement.media, assetVersion: 1, usage: placement.usage,
       alt: placement.alt ?? media.get(placement.media)?.alt ?? null, caption: placement.caption ?? null, decorative: Boolean(placement.decorative),
@@ -71,11 +99,10 @@ export const proposal = {
   sessions: sessions.map((session) => ({ date: session.dueAt.slice(0, 10), slot: 1, dueAt: session.dueAt, title: session.title, minutes: 45,
     items: [{ id: `${session.id}-a`, kind: 'lesson', title: session.title, minutes: 15 }] })),
 };
+const grade = (id, lessonId, correct, total, submittedAt) => ({ kind: 'quiz', id, lessonId, correct, total, submittedAt, sessionId: null,
+  activityId: null, moduleScores: null, pending: 0, flagged: [], typed: false });
 export const grades = [
-  { kind: 'quiz', id: 'g1', lessonId: 'l1', correct: 5, total: 6, submittedAt: day(-3, 11) },
-  { kind: 'quiz', id: 'g2', lessonId: 'l2', correct: 3, total: 6, submittedAt: day(-2, 11) },
-  { kind: 'quiz', id: 'g3', lessonId: 'l3', correct: 6, total: 6, submittedAt: day(-1, 11) },
-  { kind: 'quiz', id: 'g4', lessonId: 'l4', correct: 4, total: 5, submittedAt: day(0, 9) },
+  grade('g1', 'l1', 5, 6, day(-3, 11)), grade('g2', 'l2', 3, 6, day(-2, 11)), grade('g3', 'l3', 6, 6, day(-1, 11)), grade('g4', 'l4', 4, 5, day(0, 9)),
 ];
 export const messages = [
   { id: 'm1', text: 'Bravo pour cette première séance ! Continue comme ça.', sentAt: day(-2, 9) },
@@ -113,6 +140,16 @@ export const assets = [...media.values()].slice(0, 10).map((item, index) => ({
 export const queue = [
   { id: 'x1', learnerId: 'u-l2', learnerName: 'Yanis Benali', kind: 'midterm', number: 1, levelCode: 'A2', title: 'Bilan intermédiaire A2', submittedAt: day(-1), dueAt: day(1), onTime: true },
   { id: 'x2', learnerId: 'u-l4', learnerName: 'Léa Kaya', kind: 'final', number: 1, levelCode: 'A2', title: 'Examen blanc A2', submittedAt: day(-2), dueAt: day(-3), onTime: false },
+];
+export const missions = [
+  { id: 'm-1', activityId: 'a1-essen-sprechen', title: 'Mission : mes habitudes alimentaires', levelCode: 'A1', moduleId: 'a1-essen', status: 'reviewed',
+    decision: 'validated', submittedAt: day(-2, 19), reviewedAt: day(-1, 9), sessionId: 's2' },
+  { id: 'm-2', activityId: 'a1-hallo-sprechen', title: 'Mission : se présenter au groupe', levelCode: 'A1', moduleId: 'a1-hallo', status: 'submitted',
+    decision: null, submittedAt: day(0, 8), reviewedAt: null, sessionId: 's3' },
+];
+export const reviews = [
+  { kind: 'mission', id: 'm-2', learnerId: 'u-l1', learnerName: 'Camille Martin', title: 'Mission : se présenter au groupe', levelCode: 'A1', context: 'session', submittedAt: day(0, 8) },
+  { kind: 'speech', id: 'sp-1', learnerId: 'u-l3', learnerName: 'Awa Diallo', title: 'Prononciation : « Ich möchte einen Kaffee, bitte. »', levelCode: 'A1', context: 'library', submittedAt: day(-1, 18) },
 ];
 export const invitations = [
   { id: 'i1', email: 'lea.k@exemple.fr', displayName: 'Léa Kaya', role: 'learner', teacherId: 't1', teacherName: 'Marie Weber', invitedByName: 'Marie Weber',
@@ -156,6 +193,9 @@ export function api(role, method, rawPath) {
   if (path === '/tracking/overview') return overview;
   if (/^\/tracking\/learners\//.test(path)) return sheet;
   if (path === '/assessments/grading') return queue;
+  // V4 : missions de l'élève et file des missions et répétitions (écrans détaillés dans 90-contenus-v4.mjs).
+  if (path === '/assessments/missions' && method === 'GET') return missions;
+  if (path === '/assessments/reviews') return role === 'learner' ? undefined : reviews;
   if (path === '/invitations') return invitations;
   if (path === '/catalogue/levels') return levels;
   if (path === '/media') return assets;
