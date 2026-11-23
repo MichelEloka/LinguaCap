@@ -77,10 +77,6 @@
 }
 
 .jy-brand { position: relative; display: flex; align-items: center; gap: .65rem; min-width: 0; }
-.jy-brand img {
-  width: 36px; height: 36px; border-radius: 10px;
-  box-shadow: 0 0 0 1px color-mix(in srgb, var(--surface) 20%, transparent), 0 6px 18px color-mix(in srgb, var(--ink) 45%, transparent);
-}
 .jy-brand-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
 .jy-kicker {
   margin-left: .25rem; padding: .28rem .7rem; overflow: hidden; color: color-mix(in srgb, var(--surface) 82%, transparent);
@@ -122,7 +118,6 @@
   }
   @keyframes jy-band-in { from { opacity: 0; transform: translateY(-12px); } }
   .jy-brand { padding-right: 3.25rem; }
-  .jy-brand img { width: 30px; height: 30px; border-radius: 9px; }
   .jy-brand-name { font-size: 1.02rem; }
   .jy-kicker { padding: .2rem .55rem; font-size: .66rem; }
   .jy-canvas-body, .jy-canvas-body.is-solo { grid-template-columns: minmax(0, 1fr); gap: 0; }

@@ -130,7 +130,6 @@ export function JourneyShell({
           )}
         </div>
         <div className="jy-brand">
-          <img src="/favicon.svg" alt="" width={36} height={36} />
           <span className="jy-brand-name">LinguaCap</span>
           {kicker && <span className="jy-kicker">{kicker}</span>}
         </div>

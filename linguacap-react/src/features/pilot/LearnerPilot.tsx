@@ -1,3 +1,4 @@
+import { createPortal } from 'react-dom';
 import { lazy, Suspense, useCallback, useEffect, useState, type ReactNode } from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 import { SkeletonCard } from '../../design/kit';
@@ -27,11 +28,12 @@ function Waiting({ label }: { label: string }) {
  * la feuille de l'accueil n'est pas encore chargée) masque déjà la barre latérale pour éviter tout clignotement.
  */
 function OnboardingCover() {
-  return (
+  // Rendu dans <body> : la zone de contenu de l'espace est animée (transform) et enfermerait un élément fixe.
+  // Pas de logo ici : celui de l'application suffit, le L apparaît ensuite avec l'accueil.
+  return createPortal(
     <div role="status" aria-label="Préparation de votre accueil…"
-      style={{ position: 'fixed', inset: 0, zIndex: 70, display: 'grid', placeItems: 'center', background: 'var(--night)' }}>
-      <img src="/favicon.svg" alt="" width={56} height={56} style={{ borderRadius: 16, animation: 'lc-fade-in 600ms ease both' }} />
-    </div>
+      style={{ position: 'fixed', inset: 0, zIndex: 2000, background: 'var(--night)' }} />,
+    document.body,
   );
 }
 

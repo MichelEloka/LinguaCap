@@ -1,4 +1,5 @@
 import { lazy, Suspense, useEffect, useId, useState } from 'react';
+import { createPortal } from 'react-dom';
 import type { FormEvent, ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Handshake, Headphones, KeyRound, LayoutGrid, LibraryBig, LockKeyhole, MailCheck, MessageSquare, ShieldCheck, Sparkles, Users } from 'lucide-react';
@@ -386,7 +387,7 @@ export function ConnectedPage() {
         {signOutError && <p className="inline-message warning" role="alert">{signOutError}</p>}
         {/* Un professeur pas encore accueilli ne voit pas l'espace avant l'accueil : la toile nuit le recouvre pendant le chargement. */}
         <Suspense fallback={profile.role === 'teacher' && profile.teacherProfile && !profile.teacherProfile.onboardedAt
-          ? <div className="acc-journey-boot" role="status" aria-label="Préparation de votre accueil…" />
+          ? createPortal(<div className="acc-journey-boot" role="status" aria-label="Préparation de votre accueil…" />, document.body)
           : <p className="panel" role="status">Chargement de votre espace…</p>}>
           {profile.role === 'learner'
             ? <LearnerPilot key={profile.id} token={token} name={profile.displayName} />
