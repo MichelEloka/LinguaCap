@@ -5,11 +5,14 @@ import { LanguagePicker } from '../../components/LanguagePicker';
 import { Callout } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { onboardingBlockedMessages, type Language, type OnboardingState } from '../../integration/v2';
-import { errorText, ofLanguage, theLanguage } from './onboarding-kit';
+import { JourneyActions, JourneyQuestion, JourneyStage } from '../journey';
+import { errorText, firstName, theLanguage } from './onboarding-kit';
+import { useScene } from './onboarding-scene';
 
-export function StepLanguage({ token, state, languages, placementStarted, onDone }: {
-  token: string; state: OnboardingState; languages: Language[]; placementStarted: boolean; onDone: () => Promise<void>;
+export function StepLanguage({ token, state, name, languages, placementStarted, onDone }: {
+  token: string; state: OnboardingState; name: string; languages: Language[]; placementStarted: boolean; onDone: () => Promise<void>;
 }) {
+  const { direction } = useScene();
   const available = languages.filter((language) => language.status === 'available');
   const [choice, setChoice] = useState<string | null>(state.languageId ?? (available.length === 1 ? available[0].id : null));
   const [busy, setBusy] = useState(false);
@@ -34,29 +37,31 @@ export function StepLanguage({ token, state, languages, placementStarted, onDone
   }
 
   const note = state.languageLocked ? 'Choisie par votre professeur' : 'Langue de votre test de niveau';
+  // Langue figée : seule la langue retenue reste affichée, en grand, avec son cadenas.
+  const shown = locked && chosen ? [chosen] : languages;
+  const description = state.languageLocked
+    ? `${teacher ? `${teacher}, votre professeur,` : 'Votre professeur'} a choisi ${chosen ? theLanguage(chosen.name) : 'votre langue'} pour vous. Vous travaillerez ensemble tout au long du parcours : un test court, votre objectif, vos jours d’étude, et c’est parti.`
+    : locked ? 'Votre test de niveau a commencé dans cette langue : poursuivons ensemble.'
+    : 'En quelques minutes, nous construisons votre parcours : un test court pour situer votre niveau, votre objectif, vos jours d’étude. Une langue est ouverte pour le moment, les autres arrivent bientôt.';
+
   return (
-    <section className="ob-card ob-language" aria-labelledby="ob-language-title">
-      <header className="ob-card-head">
-        <span className="ob-card-icon" aria-hidden="true"><Globe2 size={22} /></span>
-        <div>
-          <h2 id="ob-language-title">{locked ? 'Votre langue d’apprentissage' : 'Quelle langue voulez-vous apprendre ?'}</h2>
-          <p>{state.languageLocked
-            ? `${teacher ? `${teacher}, votre professeur,` : 'Votre professeur'} a choisi ${chosen ? theLanguage(chosen.name) : 'votre langue'} pour vous. Vous travaillerez ensemble tout au long du parcours.`
-            : locked ? 'Votre test de niveau a commencé dans cette langue.'
-            : 'Une langue est ouverte pour le moment ; les autres arrivent bientôt.'}</p>
+    <JourneyStage>
+      <JourneyQuestion stepKey="language" direction={direction} eyebrow={`Bienvenue ${firstName(name)}`} icon={<Globe2 />}
+        title={locked ? 'Votre langue d’apprentissage' : 'Quelle langue voulez-vous apprendre ?'} description={description}>
+        {state.blockedReason === 'language_unavailable' && (
+          <Callout tone="warning" title="Langue pas encore ouverte">{onboardingBlockedMessages.language_unavailable}</Callout>
+        )}
+        <div className={`lo-langs${locked ? ' is-locked' : ''}`}>
+          <LanguagePicker label="Langue d’apprentissage" hideLabel languages={shown} value={choice} locked={locked} lockedNote={note}
+            onChange={setChoice} />
         </div>
-      </header>
-      {state.blockedReason === 'language_unavailable' && <Callout tone="warning" title="Langue pas encore ouverte">{onboardingBlockedMessages.language_unavailable}</Callout>}
-      <LanguagePicker label="Langue d’apprentissage" hideLabel languages={languages} value={choice} locked={locked} lockedNote={note}
-        onChange={setChoice} />
-      {error && <div role="alert"><Callout tone="warning" title="Choix non enregistré">{error}</Callout></div>}
-      <footer className="ob-actions">
-        <p className="ob-actions-note">{chosen ? <>Prochaine étape : un test court pour situer votre niveau {ofLanguage(chosen.name)}.</> : 'Choisissez une langue disponible pour continuer.'}</p>
-        <button type="button" className="btn btn-primary btn-lg" disabled={!choice || busy || chosen?.status !== 'available'} onClick={() => void next()}>
-          {busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : null}
-          {locked ? 'Continuer' : 'Choisir cette langue'} <ArrowRight size={18} aria-hidden="true" />
-        </button>
-      </footer>
-    </section>
+        {error && <div role="alert"><Callout tone="warning" title="Choix non enregistré">{error}</Callout></div>}
+      </JourneyQuestion>
+      <JourneyActions primaryType="button" onPrimary={() => void next()} busy={busy}
+        disabled={!choice || chosen?.status !== 'available'}>
+        {busy && <LoaderCircle size={18} className="ob-spin" aria-hidden="true" />}
+        {locked ? 'Continuer' : 'Choisir cette langue'} <ArrowRight size={18} aria-hidden="true" />
+      </JourneyActions>
+    </JourneyStage>
   );
 }

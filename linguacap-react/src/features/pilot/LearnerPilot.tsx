@@ -22,6 +22,19 @@ function Waiting({ label }: { label: string }) {
   return <div className="ld-page"><SkeletonCard lines={4} label={label} /></div>;
 }
 
+/**
+ * L'accueil s'ouvre en plein écran au-dessus de l'espace : pendant son chargement, un voile bleu nuit (styles en ligne,
+ * la feuille de l'accueil n'est pas encore chargée) masque déjà la barre latérale pour éviter tout clignotement.
+ */
+function OnboardingCover() {
+  return (
+    <div role="status" aria-label="Préparation de votre accueil…"
+      style={{ position: 'fixed', inset: 0, zIndex: 70, display: 'grid', placeItems: 'center', background: 'var(--night)' }}>
+      <img src="/favicon.svg" alt="" width={56} height={56} style={{ borderRadius: 16, animation: 'lc-fade-in 600ms ease both' }} />
+    </div>
+  );
+}
+
 /** Pastille sur « Mon contrat » quand le professeur attend la réponse de l'élève ; relue à chaque changement d'écran. */
 function ContractBadge({ token }: { token: string }) {
   const { pathname } = useLocation();
@@ -70,9 +83,9 @@ export function LearnerPilot({ token, name }: { token: string; name: string }) {
       <Route index element={guarded(<LearnerDashboard token={token} name={name} view="home" />)} />
       <Route path="planning" element={guarded(<LearnerDashboard token={token} name={name} view="planning" />)} />
       <Route path="contrat" element={guarded(lazyPage(<LearnerContractPage token={token} />))} />
-      <Route path="accueil/*" element={onboarding === null ? <Waiting label="Préparation de votre accueil…" />
+      <Route path="accueil/*" element={onboarding === null ? <OnboardingCover />
         : onboarding === 'unavailable' ? <Navigate to="/espace" replace />
-        : lazyPage(<LearnerOnboarding token={token} name={name} state={onboarding} reload={reload} />)} />
+        : <Suspense fallback={<OnboardingCover />}><LearnerOnboarding token={token} name={name} state={onboarding} reload={reload} /></Suspense>} />
       <Route path="bibliotheque" element={lazyPage(<LibraryPage token={token} />)} />
       <Route path="bibliotheque/entrainement/:attemptId" element={lazyPage(<PracticeExamPage token={token} />)} />
       <Route path="bibliotheque/:versionId/:activityId" element={lazyPage(<LibraryActivityPage token={token} />)} />

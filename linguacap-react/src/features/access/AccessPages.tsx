@@ -384,7 +384,10 @@ export function ConnectedPage() {
       <WorkspaceFrame links={links} title={roleNames[profile.role]} name={profile.displayName}
         onSignOut={signOut} signingOut={signOutBusy}>
         {signOutError && <p className="inline-message warning" role="alert">{signOutError}</p>}
-        <Suspense fallback={<p className="panel" role="status">Chargement de votre espace…</p>}>
+        {/* Un professeur pas encore accueilli ne voit pas l'espace avant l'accueil : la toile nuit le recouvre pendant le chargement. */}
+        <Suspense fallback={profile.role === 'teacher' && profile.teacherProfile && !profile.teacherProfile.onboardedAt
+          ? <div className="acc-journey-boot" role="status" aria-label="Préparation de votre accueil…" />
+          : <p className="panel" role="status">Chargement de votre espace…</p>}>
           {profile.role === 'learner'
             ? <LearnerPilot key={profile.id} token={token} name={profile.displayName} />
             : <StaffPilot key={profile.id} profile={profile} token={token} />}

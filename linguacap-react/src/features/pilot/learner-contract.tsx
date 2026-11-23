@@ -5,11 +5,11 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CalendarClock, Check, CircleCheck, CircleX, FilePen, Handshake, History, LoaderCircle, Lock, MessageSquareQuote, Minus, Plus,
+  ArrowRight, CalendarClock, Check, CircleCheck, Clock, CircleX, FilePen, Handshake, History, LoaderCircle, Lock, MessageSquareQuote, Minus, Plus,
   RotateCcw, Shuffle, Undo2,
 } from 'lucide-react';
-import { Badge, Dialog, EmptyState, PageHeading } from '../../components/ui';
-import { Avatar, Callout, Card, Drawer, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
+import { Badge, Dialog, PageHeading } from '../../components/ui';
+import { Avatar, Callout, Card, Drawer, Skeleton, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import {
   contractProposerLabels, contractStatusTones, formatMinutes, gradingDelayLabels, levelCodes, levelRank,
@@ -18,6 +18,8 @@ import {
 import {
   addMonthsIso, learnerContractLabels, DifficultyBadge, DifficultyGauge, errorText, LevelMark, levelName, longDate, momentText, WeekSummary,
 } from '../onboarding/onboarding-kit';
+import { daysFromToday, localDate } from './learner-calendar';
+import { EmptyScene } from './learner-common';
 import './learner-path.css';
 
 const statusIcons = { accepted: <Check size={14} />, rejected: <CircleX size={14} />, pending_teacher: <CalendarClock size={14} />,
@@ -43,7 +45,7 @@ function TermsGrid({ terms, compare }: { terms: ContractTerms; compare?: Contrac
         {rows.map((row) => (
           <div key={row.key} className={changed(row.key) ? 'is-changed' : undefined}>
             <dt>{row.label}{changed(row.key) && <Badge tone="blue">Modifié</Badge>}</dt>
-            <dd>{row.value}{changed(row.key) && row.before && <small>Avant : {row.before}</small>}</dd>
+            <dd>{changed(row.key) && row.before && <small className="lct-before"><s>{row.before}</s> <span aria-hidden="true">→</span><span className="sr-only">devient</span></small>}{row.value}</dd>
           </div>
         ))}
         <div><dt>Rythme</dt><dd><DifficultyBadge code={terms.difficulty.code} label={terms.difficulty.label} /> <small>{formatMinutes(terms.difficulty.requiredWeeklyMinutes)} nécessaires par semaine</small></dd></div>
@@ -54,6 +56,26 @@ function TermsGrid({ terms, compare }: { terms: ContractTerms; compare?: Contrac
           <WeekSummary days={terms.availability} />
         </div>
       )}
+    </div>
+  );
+}
+
+/** Temps écoulé du contrat : du début à la date cible, avec le repère d'aujourd'hui. */
+function ContractClock({ from, to }: { from: string; to: string }) {
+  const total = Math.max(1, Math.round((localDate(to).getTime() - localDate(from).getTime()) / 86_400_000));
+  const elapsed = Math.max(0, Math.min(total, -daysFromToday(localDate(from))));
+  const left = Math.max(0, daysFromToday(localDate(to)));
+  const share = (elapsed / total) * 100;
+  return (
+    <div className="lct-clock">
+      <div className="lct-clock-head">
+        <span><strong>Jour {elapsed}</strong> sur {total}</span>
+        <span>{left ? `${left} jour${left > 1 ? 's' : ''} avant la date cible` : 'Date cible atteinte'}</span>
+      </div>
+      <span className="lct-clock-track" role="img" aria-label={`${Math.round(share)} % de la durée du contrat écoulée`}>
+        <span style={{ width: `${share}%` }} /><i style={{ left: `${share}%` }} />
+      </span>
+      <div className="lct-clock-foot"><small>{longDate(from)}</small><small>{longDate(to)}</small></div>
     </div>
   );
 }
@@ -120,7 +142,7 @@ function ContractForm({ token, path, base, title, description, accompanied, onCl
       footer={<>
         <button type="button" className="btn btn-ghost" onClick={onClose}>Annuler</button>
         <button type="button" className="btn btn-primary" disabled={busy || estimating || !estimate || unrealistic || below || unchanged} onClick={() => void send()}>
-          {busy ? <LoaderCircle size={17} className="ob-spin" aria-hidden="true" /> : <FilePen size={17} aria-hidden="true" />}
+          {busy ? <LoaderCircle size={17} className="ld-spin" aria-hidden="true" /> : <FilePen size={17} aria-hidden="true" />}
           {accompanied ? 'Envoyer à mon professeur' : 'Appliquer ces conditions'}
         </button>
       </>}>
@@ -217,11 +239,16 @@ export function LearnerContractPage({ token }: { token: string }) {
     return {
     id: String(contract.number),
     title: <>Contrat n° {contract.number} · {learnerContractLabels[contract.status]}</>,
-    meta: <>Proposé par {contract.proposedBy === 'teacher' ? 'votre professeur' : contract.proposedBy === 'learner' ? 'vous' : contractProposerLabels[contract.proposedBy]} le {momentText(contract.createdAt)}
-      {' '}· {levelName(contract.terms.targetLevel)} le {longDate(contract.terms.targetDate)}, {formatMinutes(contract.terms.weeklyMinutes)} / sem.
-      {contract.decidedAt && <> · décidé le {momentText(contract.decidedAt)}</>}
+    meta: <>
+      <span className="lct-hist-meta">Proposé par {contract.proposedBy === 'teacher' ? 'votre professeur' : contract.proposedBy === 'learner' ? 'vous' : contractProposerLabels[contract.proposedBy]} le {momentText(contract.createdAt)}
+        {contract.decidedAt && <> · décidé le {momentText(contract.decidedAt)}</>}</span>
+      <span className="lct-hist-terms">
+        <span><LevelMark code={contract.terms.targetLevel} size="sm" /> {levelName(contract.terms.targetLevel)}</span>
+        <span><CalendarClock size={13} aria-hidden="true" /> {longDate(contract.terms.targetDate)}</span>
+        <span><Clock size={13} aria-hidden="true" /> {formatMinutes(contract.terms.weeklyMinutes)} / sem.</span>
+      </span>
       {contract.note && <span className="lct-quote">« {contract.note} »</span>}
-      {reason && <span className="lct-quote">Réponse : « {reason} »</span>}</>,
+      {reason && <span className="lct-quote is-answer">Réponse : « {reason} »</span>}</>,
     tone: timelineTones[contract.status], icon: statusIcons[contract.status],
   }; }), [contracts]);
 
@@ -233,7 +260,16 @@ export function LearnerContractPage({ token }: { token: string }) {
         {failure ? (
           <div role="alert"><Callout tone="warning" title="Contrat indisponible"><p>{failure}</p>
             <button type="button" className="btn btn-outline btn-sm" onClick={refresh}><RotateCcw size={15} aria-hidden="true" /> Réessayer</button></Callout></div>
-        ) : <div className="lct-loading"><SkeletonCard lines={4} label="Chargement de votre contrat…" /><SkeletonCard lines={3} /></div>}
+        ) : (
+          <div className="lct lct-loading" role="status" aria-label="Chargement de votre contrat…">
+            <div className="lct-main" aria-hidden="true">
+              <div className="kit-skeleton-card lct-skel"><span className="lct-skel-head"><Skeleton width={52} height={52} radius={26} /><span><Skeleton width="38%" height={11} /><Skeleton width="62%" height={20} /></span></span>
+                <span className="lct-skel-grid">{[0, 1, 2, 3].map((index) => <Skeleton key={index} width="100%" height={64} radius={12} />)}</span></div>
+              <div className="kit-skeleton-card"><Skeleton width="45%" height={18} /><Skeleton width="92%" /><Skeleton width="78%" /><Skeleton width="64%" /></div>
+            </div>
+            <div className="lct-side" aria-hidden="true"><div className="kit-skeleton-card"><Skeleton width="55%" height={16} />{[0, 1, 2].map((index) => <span key={index} className="lct-skel-rule"><Skeleton width={32} height={32} radius={10} /><Skeleton width="80%" /></span>)}</div></div>
+          </div>
+        )}
       </div>
     );
   }
@@ -241,7 +277,7 @@ export function LearnerContractPage({ token }: { token: string }) {
     return (
       <div className="ld-page lc-enter">
         {heading}
-        <Card><EmptyState icon={<Handshake size={26} />} title="Pas encore de contrat" description="Votre contrat naît à la validation de votre premier planning."
+        <Card><EmptyScene art="contract" title="Pas encore de contrat" description="Votre contrat naît à la validation de votre premier planning."
           action={<Link className="btn btn-primary" to="/espace/accueil">Construire mon parcours</Link>} /></Card>
       </div>
     );
@@ -312,7 +348,7 @@ export function LearnerContractPage({ token }: { token: string }) {
                 <button type="button" className="btn btn-ghost" disabled={busy} onClick={() => setForm('counter')}><Shuffle size={16} aria-hidden="true" /> Contre-proposer</button>
                 <button type="button" className="btn btn-outline" disabled={busy || !pending.canReject} onClick={() => setRejecting(true)}><CircleX size={16} aria-hidden="true" /> Refuser</button>
                 <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void decide('accept')}>
-                  {busy ? <LoaderCircle size={17} className="ob-spin" aria-hidden="true" /> : <CircleCheck size={17} aria-hidden="true" />} Accepter
+                  {busy ? <LoaderCircle size={17} className="ld-spin" aria-hidden="true" /> : <CircleCheck size={17} aria-hidden="true" />} Accepter
                 </button>
               </div>
             </section>
@@ -339,14 +375,15 @@ export function LearnerContractPage({ token }: { token: string }) {
                 </div>
                 <Badge tone="green">{learnerContractLabels.accepted}</Badge>
               </header>
+              <ContractClock from={current.terms.startDate} to={current.terms.targetDate} />
               <TermsGrid terms={current.terms} />
             </section>
           ) : !pending && (
-            <Card><EmptyState icon={<Handshake size={26} />} title="Aucun contrat en vigueur" description="Votre contrat apparaîtra à la validation de votre planning." /></Card>
+            <Card><EmptyScene art="contract" title="Aucun contrat en vigueur" description="Votre contrat apparaîtra à la validation de votre planning." /></Card>
           )}
 
           <Card title="Historique" icon={<History size={19} />} description={`${contracts.length} proposition${contracts.length > 1 ? 's' : ''}, de la plus récente à la plus ancienne`}>
-            {history.length ? <Timeline items={history} /> : <p className="lct-text">Aucune proposition pour le moment.</p>}
+            {history.length ? <Timeline items={history} /> : <EmptyScene art="contract" compact title="Aucune proposition pour le moment" />}
           </Card>
         </div>
 

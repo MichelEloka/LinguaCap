@@ -1,15 +1,37 @@
 /** Écrans « Mes résultats », « Mes messages » et liste des séances du planning de l'élève. */
 import { useMemo, useState } from 'react';
-import { ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, ChevronDown, ChevronUp, Gauge, ListChecks, Lock, MessageCircle, Sparkles, TrendingUp } from 'lucide-react';
+import {
+  ArrowRight, Award, CalendarCheck2, ChartNoAxesCombined, ChevronDown, ChevronUp, Gauge, ListChecks, Lock, MessageCircle, Sparkles, Target,
+  TrendingDown, TrendingUp, Trophy,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Badge, EmptyState } from '../../components/ui';
-import { Bars, Card, Facts, ProgressRing } from '../../design/kit';
+import { Badge } from '../../components/ui';
+import { Bars, Card, ProgressRing } from '../../design/kit';
 import type { PathSession } from '../../integration/v2';
 import type { Grade, SessionSummary } from './LearnerSession';
-import { addDays, dayHeading, dayKey, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
-import { byDate, gradeTitle, passed, plural, scoreColor, scoreOf, SessionRow, TeacherAvatar, type LearnerMessage } from './learner-common';
+import { addDays, dayHeading, dayKey, daysFromToday, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
+import {
+  byDate, EmptyScene, gradeTitle, LockedTile, passed, plural, scoreColor, scoreOf, SessionRow, TeacherAvatar, type LearnerMessage,
+} from './learner-common';
 
 const shortDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
+
+/** En-tête d'une semaine : dates, avancement et repère « cette semaine ». */
+function WeekHeader({ start, finished, open, locked, level }: { start: Date; finished: number; open: number; locked?: boolean; level?: string }) {
+  const current = daysFromToday(start) <= 0 && daysFromToday(addDays(start, 6)) >= 0;
+  return (
+    <header>
+      <span className="ld-week-title">
+        <strong>Semaine du {formatMonthDay(start)}</strong>
+        <small>{formatMonthDay(start)} – {formatMonthDay(addDays(start, 6))}{current ? ' · cette semaine' : ''}</small>
+      </span>
+      <span className="ld-week-count">{locked ? <><Lock size={13} aria-hidden="true" /> {level}</> : `${finished}/${open}`}</span>
+      <span className="ld-meter" aria-hidden="true"><span style={{ width: `${open ? (finished / open) * 100 : 0}%` }} /></span>
+    </header>
+  );
+}
+
+const isCurrentWeek = (start: Date) => daysFromToday(start) <= 0 && daysFromToday(addDays(start, 6)) >= 0;
 
 /** Séances du parcours regroupées par semaine (page « Mon planning »). */
 export function SessionsByWeek({ sessions }: { sessions: SessionSummary[] }) {
@@ -25,18 +47,14 @@ export function SessionsByWeek({ sessions }: { sessions: SessionSummary[] }) {
     <Card flush className="ld-sessions" title="Mes séances" icon={<CalendarCheck2 size={19} />}
       description={sessions.length ? `${done} terminée${done > 1 ? 's' : ''} sur ${sessions.length}` : undefined}>
       {sessions.length === 0 ? (
-        <EmptyState icon={<CalendarCheck2 size={26} />} title="Aucune séance planifiée" description="Vos séances seront publiées à la validation du planning." />
+        <EmptyScene art="calendar" title="Aucune séance planifiée" description="Vos séances seront publiées à la validation du planning." />
       ) : (
-        <div className="ld-weeks">
+        <div className="ld-weeks lc-stagger">
           {[...weeks.values()].map((week) => {
             const finished = week.items.filter((session) => session.status === 'completed').length;
             return (
-              <section key={dayKey(week.start)} className="ld-week-group" aria-label={`Semaine du ${formatDayLong(week.start)}`}>
-                <header>
-                  <strong>Semaine du {formatMonthDay(week.start)}</strong>
-                  <span className="ld-week-count">{finished}/{week.items.length}</span>
-                  <span className="ld-meter" aria-hidden="true"><span style={{ width: `${(finished / week.items.length) * 100}%` }} /></span>
-                </header>
+              <section key={dayKey(week.start)} className={`ld-week-group${isCurrentWeek(week.start) ? ' is-current' : ''}`} aria-label={`Semaine du ${formatDayLong(week.start)}`}>
+                <WeekHeader start={week.start} finished={finished} open={week.items.length} />
                 <ul className="kit-list ld-list">{week.items.map((session) => <li key={session.id}><SessionRow session={session} /></li>)}</ul>
               </section>
             );
@@ -61,7 +79,7 @@ export function pathSessionSummary(session: PathSession): SessionSummary | null 
 export function LockedSessionRow({ session }: { session: PathSession }) {
   return (
     <div className="kit-list-item ld-session-row is-locked" aria-label={`${session.title}, niveau ${session.levelCode}, verrouillée jusqu’à l’ouverture du niveau`}>
-      <span className="ld-status-icon is-locked" aria-hidden="true"><Lock size={16} /></span>
+      <LockedTile date={new Date(session.dueAt)} />
       <span className="kit-list-main" aria-hidden="true">
         <strong>{session.title}</strong>
         <small>{relativeMoment(session.dueAt)} · {session.estimatedMinutes} min · {plural(session.activities.length, 'activité')}</small>
@@ -96,7 +114,7 @@ export function PathSessionsByWeek({ sessions, emptyText = 'Vos séances seront 
   const visible = weeks.slice(start, start + count);
   const after = weeks.length - start - visible.length;
   if (!sessions.length) {
-    return <EmptyState icon={<CalendarCheck2 size={26} />} title="Aucune séance à afficher" description={emptyText} />;
+    return <EmptyScene art="calendar" title="Aucune séance à afficher" description={emptyText} />;
   }
   return (
     <div className="ld-path-weeks">
@@ -105,18 +123,15 @@ export function PathSessionsByWeek({ sessions, emptyText = 'Vos séances seront 
           <ChevronUp size={16} aria-hidden="true" /> Voir les semaines précédentes ({start})
         </button>
       )}
-      <div className="ld-weeks">
+      <div className="ld-weeks lc-stagger">
         {visible.map((week) => {
           const open = week.items.filter((session) => !session.locked);
           const finished = open.filter((session) => session.status === 'completed').length;
           const locked = open.length === 0;
           return (
-            <section key={dayKey(week.start)} className={`ld-week-group${locked ? ' is-locked' : ''}`} aria-label={`Semaine du ${formatDayLong(week.start)}`}>
-              <header>
-                <strong>Semaine du {formatMonthDay(week.start)}</strong>
-                <span className="ld-week-count">{locked ? <><Lock size={13} aria-hidden="true" /> {week.items[0].levelCode}</> : `${finished}/${open.length}`}</span>
-                <span className="ld-meter" aria-hidden="true"><span style={{ width: `${open.length ? (finished / open.length) * 100 : 0}%` }} /></span>
-              </header>
+            <section key={dayKey(week.start)} className={`ld-week-group${locked ? ' is-locked' : ''}${isCurrentWeek(week.start) ? ' is-current' : ''}`}
+              aria-label={`Semaine du ${formatDayLong(week.start)}`}>
+              <WeekHeader start={week.start} finished={finished} open={open.length} locked={locked} level={week.items[0].levelCode} />
               <ul className="kit-list ld-list">
                 {week.items.map((session, index) => {
                   const summary = pathSessionSummary(session);
@@ -141,8 +156,8 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
   if (results.length === 0) {
     return (
       <Card className="ld-empty-card">
-        <EmptyState icon={<ChartNoAxesCombined size={26} />} title="Aucun résultat enregistré" description="Terminez un exercice pour retrouver votre score ici."
-          action={<Link className="btn btn-primary" to="/espace">Aller à mes séances</Link>} />
+        <EmptyScene art="chart" title="Aucun résultat enregistré" description="Terminez un exercice pour retrouver votre score et suivre vos progrès ici."
+          action={<Link className="btn btn-primary" to="/espace">Aller à mes séances <ArrowRight size={16} aria-hidden="true" /></Link>} />
       </Card>
     );
   }
@@ -161,30 +176,44 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
   });
   const last = scores.at(-1) ?? 0;
   const previous = scores.at(-2);
+  const delta = previous === undefined ? 0 : last - previous;
+  const stats = [
+    { icon: <ListChecks size={16} aria-hidden="true" />, label: 'Exercices corrigés', value: String(results.length), tone: 'brand' },
+    { icon: <Target size={16} aria-hidden="true" />, label: 'Réussis', value: `${success}/${results.length}`, tone: 'success' },
+    { icon: <Trophy size={16} aria-hidden="true" />, label: 'Meilleur score', value: `${Math.max(...scores)} %`, tone: 'accent' },
+    { icon: delta < 0 ? <TrendingDown size={16} aria-hidden="true" /> : <TrendingUp size={16} aria-hidden="true" />, label: 'Dernier score',
+      value: <>{last} %{delta !== 0 && <small className={delta > 0 ? 'ld-up' : 'ld-down'}> {delta > 0 ? '+' : '−'}{Math.abs(delta)}</small>}</>, tone: 'violet' },
+  ];
   return (
     <div className="ld-results lc-stagger">
       <Card className="ld-results-summary" title="Synthèse" icon={<Gauge size={19} />}>
         <div className="ld-summary-body">
-          <ProgressRing value={average} size={132} stroke={12} color={scoreColor(average)} label={`Score moyen : ${average} %`}>
+          <ProgressRing value={average} size={128} stroke={11} color={scoreColor(average)} label={`Score moyen : ${average} %`}>
             <span className="ld-ring-text"><strong>{average} %</strong><small>moyenne</small></span>
           </ProgressRing>
-          <p className="ld-summary-note">
-            {passed(average) ? <><Sparkles size={16} aria-hidden="true" /> Très bon niveau : continuez sur cette lancée.</>
-              : <><TrendingUp size={16} aria-hidden="true" /> Revoyez les leçons des exercices à reprendre pour progresser.</>}
-          </p>
+          <div className="ld-summary-text">
+            <p className={`ld-summary-note${passed(average) ? ' is-good' : ''}`}>
+              {passed(average) ? <><Sparkles size={16} aria-hidden="true" /> Très bon niveau : continuez sur cette lancée.</>
+                : <><TrendingUp size={16} aria-hidden="true" /> Revoyez les leçons des exercices à reprendre pour progresser.</>}
+            </p>
+            <span className="ld-summary-scale" aria-hidden="true"><span style={{ width: `${average}%` }} /><i style={{ left: '70%' }} /></span>
+            <small className="ld-summary-legend">Seuil de réussite : 70 %</small>
+          </div>
         </div>
-        <Facts items={[
-          { label: 'Exercices', value: results.length },
-          { label: 'Réussis (70 % et plus)', value: `${success} / ${results.length}` },
-          { label: 'Meilleur score', value: `${Math.max(...scores)} %` },
-          { label: 'Dernier score', value: <>{last} %{previous !== undefined && last !== previous && <small className={last > previous ? 'ld-up' : 'ld-down'}> {last > previous ? '+' : '−'}{Math.abs(last - previous)}</small>}</> },
-        ]} />
+        <ul className="ld-stat-tiles">
+          {stats.map((stat) => (
+            <li key={stat.label} className={`is-${stat.tone}`}>
+              <span className="ld-stat-icon">{stat.icon}</span>
+              <span><small>{stat.label}</small><strong>{stat.value}</strong></span>
+            </li>
+          ))}
+        </ul>
       </Card>
       <Card className="ld-results-trend" title="Évolution" description="Score de chaque exercice, du plus ancien au plus récent" icon={<TrendingUp size={19} />}>
-        <Bars data={bars} height={200} max={100} label="Scores des derniers exercices" />
+        <Bars data={bars} height={210} max={100} label="Scores des derniers exercices" />
         <p className="ld-chart-note"><span className="ld-swatch is-pass" aria-hidden="true" /> Réussi <span className="ld-swatch is-retry" aria-hidden="true" /> À reprendre (moins de 70 %)</p>
       </Card>
-      <Card flush className="ld-results-list" title="Tous mes résultats" description={plural(results.length, 'exercice corrigé', 'exercices corrigés')} icon={<ListChecks size={19} />}>
+      <Card flush className="ld-results-list" title="Tous mes résultats" description={plural(results.length, 'exercice corrigé', 'exercices corrigés')} icon={<ChartNoAxesCombined size={19} />}>
         <ul className="kit-list ld-list">
           {[...ordered].reverse().map((grade) => {
             const score = scoreOf(grade);
@@ -197,7 +226,7 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
                   </ProgressRing>
                   <span className="kit-list-main">
                     <strong>{name.title}</strong>
-                    <small>{name.context ? `${name.context} · ` : ''}<time dateTime={grade.submittedAt}>{formatDayLong(new Date(grade.submittedAt))} à {formatClock(grade.submittedAt)}</time></small>
+                    <small>{name.context ? <span className="ld-result-context">{name.context} · </span> : ''}<time dateTime={grade.submittedAt}>{formatDayLong(new Date(grade.submittedAt))} à {formatClock(grade.submittedAt)}</time></small>
                   </span>
                   <span className="kit-list-end">
                     <span className="ld-meter ld-result-meter" aria-hidden="true"><span style={{ width: `${score}%`, background: scoreColor(score) }} /></span>
@@ -213,21 +242,7 @@ export function ResultsView({ results, sessions }: { results: Grade[]; sessions:
   );
 }
 
-function EmptyThread() {
-  return (
-    <div className="ld-empty-thread">
-      <div className="ld-empty-art" aria-hidden="true">
-        <span className="ld-art-bubble is-a"><i /><i /></span>
-        <span className="ld-art-bubble is-b"><i /></span>
-        <span className="ld-art-avatar"><TeacherAvatar size={44} /></span>
-      </div>
-      <EmptyState icon={<MessageCircle size={26} />} title="Aucun message pour le moment"
-        description="Votre professeur vous écrira ici pour vous encourager et vous conseiller." />
-    </div>
-  );
-}
-
-export function MessagesView({ messages, next }: { messages: LearnerMessage[]; next?: SessionSummary }) {
+export function MessagesView({ messages, next, autonomous = false }: { messages: LearnerMessage[]; next?: SessionSummary; autonomous?: boolean }) {
   const ordered = byDate(messages, (message) => message.sentAt);
   const days = new Map<string, { date: Date; items: LearnerMessage[] }>();
   for (const message of ordered) {
@@ -237,23 +252,31 @@ export function MessagesView({ messages, next }: { messages: LearnerMessage[]; n
     days.get(key)?.items.push(message);
   }
   const last = ordered.at(-1);
+  const recent = ordered.filter((message) => daysFromToday(new Date(message.sentAt)) >= -7).length;
   return (
     <div className="ld-messages lc-stagger">
       <section className="kit-card is-flush ld-thread" aria-labelledby="ld-thread-title">
         <header className="kit-card-head ld-thread-head">
-          <TeacherAvatar size={44} />
+          <span className="ld-thread-avatar"><TeacherAvatar size={44} /></span>
           <div><h2 id="ld-thread-title">Votre professeur</h2><p>Encouragements et conseils pour votre parcours</p></div>
           {messages.length > 0 && <div className="kit-card-action"><Badge tone="blue">{plural(messages.length, 'message')}</Badge></div>}
         </header>
-        {messages.length === 0 ? <EmptyThread /> : (
+        {messages.length === 0 ? (
+          <div className="ld-thread-empty">
+            <EmptyScene art="messages" title="Aucun message pour le moment" description={autonomous
+              ? 'Vous apprenez en autonomie : si un professeur vous accompagne un jour, ses conseils arriveront ici.'
+              : 'Votre professeur vous écrira ici pour vous encourager et vous conseiller.'} />
+          </div>
+        ) : (
           <div className="ld-thread-body">
             {[...days.values()].map((day) => (
               <section key={dayKey(day.date)} className="ld-thread-day" aria-label={dayHeading(day.date)}>
                 <p className="ld-day-separator"><span>{dayHeading(day.date)}</span></p>
                 {day.items.map((message, index) => (
-                  <article key={message.id} className={`ld-msg${index === 0 ? ' is-first' : ''}`}>
+                  <article key={message.id} className={`ld-msg${index === 0 ? ' is-first' : ''}${message === last ? ' is-last' : ''}`}>
                     {index === 0 ? <TeacherAvatar size={32} /> : <span className="ld-msg-gap" aria-hidden="true" />}
                     <div className="ld-msg-bubble">
+                      {index === 0 && <span className="ld-msg-author">Votre professeur</span>}
                       <p>{message.text}</p>
                       <time dateTime={message.sentAt}>{formatClock(message.sentAt)}</time>
                     </div>
@@ -267,15 +290,19 @@ export function MessagesView({ messages, next }: { messages: LearnerMessage[]; n
       </section>
       <aside className="ld-messages-side" aria-label="En bref">
         <Card title="En bref" icon={<Award size={19} />}>
-          <Facts items={[
-            { label: 'Messages reçus', value: messages.length },
-            { label: 'Dernier message', value: last ? relativeMoment(last.sentAt) : 'Aucun' },
-          ]} />
+          <ul className="ld-stat-tiles is-stacked">
+            <li className="is-brand"><span className="ld-stat-icon"><MessageCircle size={16} aria-hidden="true" /></span>
+              <span><small>Messages reçus</small><strong>{messages.length}</strong></span></li>
+            <li className="is-violet"><span className="ld-stat-icon"><Sparkles size={16} aria-hidden="true" /></span>
+              <span><small>Ces sept derniers jours</small><strong>{recent}</strong></span></li>
+            <li className="is-success"><span className="ld-stat-icon"><CalendarCheck2 size={16} aria-hidden="true" /></span>
+              <span><small>Dernier message</small><strong>{last ? relativeMoment(last.sentAt) : 'Aucun'}</strong></span></li>
+          </ul>
         </Card>
         {next && (
           <Card interactive className="ld-continue" title="Continuer mon parcours" icon={<CalendarCheck2 size={19} />}>
             <p className="ld-continue-title">{next.title}</p>
-            <p className="muted">{relativeMoment(next.dueAt)} · {next.estimatedMinutes} min</p>
+            <p className="ld-continue-meta">{relativeMoment(next.dueAt)} · {next.estimatedMinutes} min</p>
             <Link className="btn btn-soft btn-block" to={`/espace/seance/${next.id}`}>Ouvrir la séance <ArrowRight size={16} aria-hidden="true" /></Link>
           </Card>
         )}

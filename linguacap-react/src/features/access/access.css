@@ -100,3 +100,7 @@
   .acc-pitch ul, .acc-preview { display: none; }
   .acc-panel { place-items: start center; margin-top: -1rem; padding: 1.75rem 1.25rem 2.5rem; border-radius: var(--r-xl) var(--r-xl) 0 0; position: relative; }
 }
+
+/* Professeur pas encore accueilli : la toile nuit de l'accueil couvre l'espace pendant son chargement (pas d'éclair de l'espace). */
+.acc-journey-boot { position: fixed; inset: 0; z-index: 2000;
+  background: radial-gradient(60% 55% at 30% 20%, color-mix(in srgb, var(--brand) 38%, transparent), transparent 70%), var(--night); }

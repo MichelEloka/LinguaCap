@@ -1,0 +1,144 @@
+/*
+ * Cadre plein écran des accueils (JourneyShell) : toile bleu nuit + scène claire. Uniquement des jetons de la charte,
+ * dérivés par color-mix. Animations : transform et opacity seulement.
+ */
+.jy {
+  --jy-canvas-w: clamp(420px, 42vw, 720px);
+  --jy-glow-a: var(--brand);
+  --jy-glow-b: var(--violet);
+  --jy-soft: color-mix(in srgb, var(--surface) 62%, transparent);
+  position: fixed; inset: 0; width: 100vw; max-width: none; height: 100dvh; max-height: none; margin: 0; padding: 0;
+  overflow: hidden; color: var(--ink); background: var(--night); border: 0;
+  animation: lc-fade-in 420ms ease both;
+}
+.jy.is-teacher { --jy-glow-b: color-mix(in srgb, var(--violet) 85%, var(--brand)); }
+.jy.is-learner { --jy-glow-b: color-mix(in srgb, var(--brand-600) 70%, var(--violet)); }
+.jy.is-fixed { z-index: 70; }
+.jy::backdrop { background: var(--night); }
+.jy.is-leaving { animation: jy-leave 340ms var(--ease) forwards; pointer-events: none; }
+.jy.is-leaving::backdrop { animation: jy-leave 340ms var(--ease) forwards; }
+@keyframes jy-leave { to { opacity: 0; } }
+
+.jy-frame { position: relative; display: grid; grid-template-columns: var(--jy-canvas-w) minmax(0, 1fr); height: 100%; }
+
+/* ---------- Toile du voyage ---------- */
+.jy-canvas {
+  position: relative; isolation: isolate; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: clamp(1rem, 3vh, 2rem);
+  min-width: 0; min-height: 0; margin-right: -28px; padding: 1.6rem calc(2rem + 28px) 1.6rem 2.25rem; overflow: hidden; color: var(--surface);
+  background:
+    radial-gradient(90% 70% at 0% 100%, color-mix(in srgb, var(--night) 55%, var(--ink)), transparent 70%),
+    linear-gradient(168deg, var(--night-2), var(--night) 58%);
+  animation: jy-canvas-in 900ms var(--ease) both;
+}
+@keyframes jy-canvas-in { from { opacity: 0; transform: translateX(-18px); } }
+.jy-sky { position: absolute; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; }
+.jy-aurora { position: absolute; width: 95%; aspect-ratio: 1; border-radius: 50%; opacity: .55; will-change: transform; }
+.jy-aurora.is-1 {
+  top: -32%; left: -28%; background: radial-gradient(closest-side, color-mix(in srgb, var(--jy-glow-a) 62%, transparent), transparent);
+  animation: jy-drift-1 26s ease-in-out infinite alternate;
+}
+.jy-aurora.is-2 {
+  top: 22%; right: -42%; background: radial-gradient(closest-side, color-mix(in srgb, var(--jy-glow-b) 52%, transparent), transparent);
+  animation: jy-drift-2 32s ease-in-out infinite alternate;
+}
+.jy-aurora.is-3 {
+  bottom: -46%; left: 4%; opacity: .45; background: radial-gradient(closest-side, color-mix(in srgb, var(--brand-600) 55%, transparent), transparent);
+  animation: jy-drift-3 38s ease-in-out infinite alternate;
+}
+@keyframes jy-drift-1 { to { transform: translate(18%, 12%) scale(1.15); } }
+@keyframes jy-drift-2 { to { transform: translate(-22%, -10%) scale(.9); } }
+@keyframes jy-drift-3 { to { transform: translate(14%, -16%) scale(1.1); } }
+.jy-dots {
+  position: absolute; inset: 0; opacity: .9;
+  background-image: radial-gradient(color-mix(in srgb, var(--surface) 13%, transparent) 1px, transparent 1.6px); background-size: 24px 24px;
+  mask-image: radial-gradient(110% 80% at 35% 45%, var(--ink) 25%, transparent 80%);
+}
+.jy-words span {
+  position: absolute; top: var(--y); left: var(--x); color: var(--surface); font-size: var(--size); font-family: var(--font-display); font-weight: 800; letter-spacing: -.03em; line-height: 1;
+  white-space: nowrap; opacity: .065;
+  translate: calc(var(--px, 0) * var(--depth) * -18px) calc(var(--py, 0) * var(--depth) * -12px);
+  transition: translate 900ms var(--ease);
+  animation: jy-float calc(14s + var(--i) * 1.7s) ease-in-out calc(var(--i) * -2.3s) infinite alternate;
+}
+.jy-words span:nth-child(3n + 1) { opacity: .09; }
+@keyframes jy-float { from { transform: translateY(-9px); } to { transform: translateY(9px); } }
+.jy-gust { position: absolute; inset: 0; overflow: hidden; }
+.jy-gust i {
+  position: absolute; top: calc(6% + var(--g) * 10.5%); left: -55%; width: 48%; height: 2px; border-radius: 2px; opacity: 0;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--brand-100) 85%, transparent) 70%, transparent);
+  animation: jy-gust 1500ms cubic-bezier(.3, .6, .3, 1) both; animation-delay: calc(var(--g) * 75ms);
+}
+.jy-gust i:nth-child(odd) { width: 34%; height: 1px; animation-duration: 1800ms; }
+.jy-gust i:nth-child(3n) { width: 60%; }
+@keyframes jy-gust {
+  0% { opacity: 0; transform: translateX(0) scaleX(.4); }
+  25% { opacity: .85; }
+  100% { opacity: 0; transform: translateX(340%) scaleX(1); }
+}
+
+.jy-brand { position: relative; display: flex; align-items: center; gap: .65rem; min-width: 0; }
+.jy-brand img {
+  width: 36px; height: 36px; border-radius: 10px;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--surface) 20%, transparent), 0 6px 18px color-mix(in srgb, var(--ink) 45%, transparent);
+}
+.jy-brand-name { font-family: var(--font-display); font-size: 1.15rem; font-weight: 800; letter-spacing: -.02em; white-space: nowrap; }
+.jy-kicker {
+  margin-left: .25rem; padding: .28rem .7rem; overflow: hidden; color: color-mix(in srgb, var(--surface) 82%, transparent);
+  font-size: var(--text-xs); font-weight: 700; letter-spacing: .05em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap;
+  background: color-mix(in srgb, var(--surface) 8%, transparent); border: 1px solid color-mix(in srgb, var(--surface) 14%, transparent);
+  border-radius: var(--r-full);
+}
+.jy-canvas-body { display: grid; grid-template-columns: minmax(196px, 232px) minmax(0, 1fr); gap: clamp(1rem, 2vw, 2rem); min-height: 0; }
+.jy-canvas-body.is-solo { grid-template-columns: minmax(220px, 300px); justify-content: center; }
+.jy-path { min-width: 0; min-height: 0; }
+.jy-canvas-extra { align-self: center; min-width: 0; animation: jy-extra-in 900ms var(--ease) 1500ms both; }
+@keyframes jy-extra-in { from { opacity: 0; transform: translateY(18px) scale(.96); } }
+
+/* ---------- Scène des questions ---------- */
+.jy-scene {
+  position: relative; z-index: 1; display: grid; min-width: 0; min-height: 0; background: var(--surface); border-radius: 28px 0 0 28px;
+  box-shadow: -20px 0 60px color-mix(in srgb, var(--ink) 38%, transparent);
+  animation: jy-scene-in 700ms var(--ease) 120ms both;
+}
+@keyframes jy-scene-in { from { opacity: 0; transform: translateX(28px); } }
+.jy-scene-scroll {
+  display: flex; flex-direction: column; min-height: 0; overflow-x: hidden; overflow-y: auto; overscroll-behavior: contain;
+  border-radius: inherit;
+}
+.jy-head-actions { position: absolute; top: 1rem; right: 1.25rem; z-index: 4; display: flex; gap: .5rem; }
+/* Bureau : le contenu qui défile s'efface sous les actions d'en-tête au lieu de passer derrière elles. */
+@media (min-width: 861px) {
+  .jy-scene::before { content: ''; position: absolute; top: 0; left: 0; right: 0; z-index: 3; height: 4.5rem; pointer-events: none;
+    border-radius: inherit; background: linear-gradient(var(--surface) 55%, color-mix(in srgb, var(--surface) 0%, transparent)); }
+}
+
+.jy-stage { position: relative; display: flex; flex: 1 0 auto; flex-direction: column; min-width: 0; }
+
+/* ---------- Mobile et tablette : bandeau en haut, scène dessous ---------- */
+@media (max-width: 860px) {
+  .jy-frame { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr); }
+  .jy-canvas {
+    grid-template-rows: auto auto; gap: .55rem; margin: 0 0 -22px; padding: .75rem 1rem 1.95rem; animation-name: jy-band-in;
+  }
+  @keyframes jy-band-in { from { opacity: 0; transform: translateY(-12px); } }
+  .jy-brand { padding-right: 3.25rem; }
+  .jy-brand img { width: 30px; height: 30px; border-radius: 9px; }
+  .jy-brand-name { font-size: 1.02rem; }
+  .jy-kicker { padding: .2rem .55rem; font-size: .66rem; }
+  .jy-canvas-body, .jy-canvas-body.is-solo { grid-template-columns: minmax(0, 1fr); gap: 0; }
+  .jy-path { height: 70px; }
+  .jy-canvas-extra { display: none; }
+  .jy-words span { top: var(--my); left: var(--mx); font-size: 1.15rem; opacity: .07; }
+  .jy-words span:nth-child(n + 2) { display: none; }
+  .jy-scene { border-radius: 22px 22px 0 0; box-shadow: 0 -14px 40px color-mix(in srgb, var(--ink) 35%, transparent); animation-name: jy-sheet-in; }
+  @keyframes jy-sheet-in { from { opacity: 0; transform: translateY(24px); } }
+  .jy-head-actions { top: .6rem; right: .7rem; }
+  .jy-head-actions :is(.btn, .icon-button) { color: var(--surface); background: color-mix(in srgb, var(--surface) 10%, transparent); }
+  .jy-head-actions :is(.btn, .icon-button):hover:not(:disabled) { color: var(--surface); background: color-mix(in srgb, var(--surface) 18%, transparent); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .jy, .jy *, .jy::backdrop { animation: none !important; transition: none !important; }
+  .jy-words span { translate: none; }
+  .jy-gust { display: none; }
+}

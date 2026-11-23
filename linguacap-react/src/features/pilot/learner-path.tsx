@@ -5,7 +5,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
-  ArrowRight, CalendarCog, CalendarDays, CalendarRange, CheckCircle2, CirclePause, CirclePlay, Clock, Flag, Handshake, Hourglass,
+  ArrowRight, CalendarCog, CalendarDays, CalendarRange, CheckCircle2, CirclePause, CirclePlay, Clock, Handshake, Hourglass,
   ListChecks, LoaderCircle, Lock, Rocket, Target,
 } from 'lucide-react';
 import { Badge, Dialog } from '../../components/ui';
@@ -13,52 +13,56 @@ import { Callout, Card, Drawer, Segmented, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import {
   contractStatusTones, formatMinutes, pathStepStatusLabels, weeklyCapacity, type Day, type LevelCode, type PathProposal,
-  type PathStep, type PathView, type Suggestion,
+  type PathView, type Suggestion,
 } from '../../integration/v2';
 import { languageName } from '../../domain/languages';
 import {
-  DayPlanner, learnerContractLabels, DifficultyBadge, errorText, isoDay, LevelMark, levelName, longDate, ofLanguage, shortDate, WeekSummary,
+  DayPlanner, learnerContractLabels, DifficultyBadge, errorText, isoDay, levelName, longDate, ofLanguage, shortDate, WeekSummary,
 } from '../onboarding/onboarding-kit';
 import { PathProposalView } from '../onboarding/path-proposal';
+import { JourneyRail, pathProgress, stationState, type JourneyStation } from './learner-common';
 import { PathSessionsByWeek } from './learner-views';
 import './learner-path.css';
 
-const stepTone = { planned: 'neutral', active: 'blue', completed: 'green', withdrawn: 'neutral' } as const;
-
-/** Frise des niveaux du parcours : départ, chaque niveau (avancement, dates), date cible. */
+/** Frise des niveaux du parcours : le chemin du départ au niveau visé, le « L » à la position de l'élève. */
 export function LevelTrack({ path }: { path: PathView }) {
-  const total = path.steps.reduce((sum, step) => sum + step.sessionsTotal, 0);
-  const done = path.steps.reduce((sum, step) => sum + step.sessionsCompleted, 0);
-  return (
-    <ol className="lpa-track" aria-label="Niveaux du parcours">
-      <li className="lpa-node is-start">
-        <LevelMark code={path.startLevel} size="md" state="done" />
-        <span><strong>Départ</strong><small>{levelName(path.startLevel)} · {shortDate(path.startDate)}</small></span>
-      </li>
-      {path.steps.map((step, index) => <StepNode key={step.id} step={step} previous={path.steps[index - 1]} />)}
-      <li className="lpa-node is-goal">
-        <span className="lpa-goal-icon" aria-hidden="true"><Flag size={18} /></span>
-        <span><strong>Objectif {path.targetLevel}</strong><small>{longDate(path.targetDate)} · {total ? Math.round((done / total) * 100) : 0} % fait</small></span>
-      </li>
-    </ol>
-  );
+  const progress = pathProgress(path);
+  const stations: JourneyStation[] = [
+    { key: 'start', code: path.startLevel, title: 'Départ', caption: `${levelName(path.startLevel)} · ${shortDate(path.startDate)}`, state: 'done' },
+    ...progress.steps.map((step, index): JourneyStation => {
+      const state = stationState(step.status);
+      const last = index === progress.steps.length - 1;
+      const decision = step.finalDecision === 'validated' ? 'Validé' : step.finalDecision === 'to_consolidate' ? 'À consolider' : null;
+      const previous = index > 0 ? progress.steps[index - 1].levelCode : path.startLevel;
+      return {
+        key: step.id, code: step.levelCode, state, goal: last, title: levelName(step.levelCode),
+        caption: step.firstDate ? `${shortDate(step.firstDate)} → ${shortDate(step.lastDate)}` : last ? `Objectif le ${shortDate(path.targetDate)}` : 'Dates à venir',
+        extra: state === 'locked'
+          ? <span className="lj-note is-locked"><Lock size={11} aria-hidden="true" /> Après l’examen blanc {previous}</span>
+          : <span className={`lj-note is-${state}`}>{decision ?? pathStepStatusLabels[step.status]} · {step.sessionsCompleted}/{step.sessionsTotal} séances</span>,
+      };
+    }),
+  ];
+  return <JourneyRail size="lg" stations={stations} position={progress.position} marker={`${progress.percent} %`}
+    label={`Niveaux du parcours, de ${levelName(path.startLevel)} à ${levelName(path.targetLevel)} : ${progress.percent} % des séances terminées`} />;
 }
 
-function StepNode({ step, previous }: { step: PathStep; previous?: PathStep }) {
-  const percent = step.sessionsTotal ? Math.round((step.sessionsCompleted / step.sessionsTotal) * 100) : 0;
-  const state = step.status === 'active' ? 'current' : step.status === 'completed' ? 'done' : 'locked';
-  const decision = step.finalDecision === 'validated' ? 'Validé' : step.finalDecision === 'to_consolidate' ? 'À consolider' : null;
+/** Temps prévu par semaine face au temps nécessaire (et à l'engagement du contrat). */
+function CapacityGauge({ capacity, required, commitment }: { capacity: number; required: number; commitment: number | null }) {
+  const top = Math.max(capacity, required, commitment ?? 0) * 1.15 || 1;
+  const enough = capacity >= required;
   return (
-    <li className={`lpa-node lvl-${step.levelCode} is-${step.status}`}>
-      <LevelMark code={step.levelCode} size="md" state={state} />
-      <span className="lpa-node-text">
-        <strong>{levelName(step.levelCode)} <Badge tone={stepTone[step.status]}>{decision ?? pathStepStatusLabels[step.status]}</Badge></strong>
-        <small>{step.firstDate ? `${shortDate(step.firstDate)} → ${shortDate(step.lastDate)}` : 'Dates à venir'} · {step.sessionsCompleted}/{step.sessionsTotal} séances</small>
-        {step.status === 'planned'
-          ? <small className="lpa-lock"><Lock size={12} aria-hidden="true" /> S’ouvre à la remise de l’examen blanc {previous?.levelCode ?? ''}</small>
-          : <span className="lpa-progress" role="img" aria-label={`${percent} % des séances ${step.levelCode} terminées`}><span style={{ width: `${percent}%` }} /></span>}
+    <div className={`lpa-capacity${enough ? ' is-ok' : ' is-short'}`} role="img"
+      aria-label={`Temps prévu : ${formatMinutes(capacity)} par semaine, pour ${formatMinutes(required)} nécessaires`}>
+      <span className="lpa-capacity-track" aria-hidden="true">
+        <span style={{ width: `${(capacity / top) * 100}%` }} />
+        <i style={{ left: `${(required / top) * 100}%` }} />
       </span>
-    </li>
+      <span className="lpa-capacity-legend" aria-hidden="true">
+        <small><b /> Prévu {formatMinutes(capacity)}</small>
+        <small><i /> Nécessaire {formatMinutes(required)}</small>
+      </span>
+    </div>
   );
 }
 
@@ -120,6 +124,7 @@ export function LearnerPath({ token, path, onChanged }: { token: string; path: P
   return (
     <div className="lpa">
       <section className="lpa-hero" aria-labelledby="lpa-title">
+        <span className="lpa-hero-glow" aria-hidden="true"><i /><i /></span>
         <div className="lpa-hero-head">
           <div>
             <p className="lpa-kicker">{languageName(path.languageId)} · {path.paused ? 'En pause' : 'Parcours en cours'}</p>
@@ -134,11 +139,11 @@ export function LearnerPath({ token, path, onChanged }: { token: string; path: P
           </div>
         </div>
         <LevelTrack path={path} />
-        <ul className="lpa-facts">
-          <li><CalendarRange size={17} aria-hidden="true" /><span>Date cible</span><strong>{longDate(path.targetDate)}</strong></li>
-          <li><Clock size={17} aria-hidden="true" /><span>Temps prévu</span><strong>{formatMinutes(capacity)} / sem.</strong></li>
-          <li><Target size={17} aria-hidden="true" /><span>Nécessaire</span><strong>{formatMinutes(path.difficulty.requiredWeeklyMinutes)} / sem.</strong></li>
-          <li><Handshake size={17} aria-hidden="true" /><span>Engagement</span><strong>{engagedMinutes ? `${formatMinutes(engagedMinutes)} / sem.` : 'À confirmer'}</strong></li>
+        <ul className="lpa-facts lc-stagger">
+          <li className="is-violet"><span className="lpa-fact-icon"><CalendarRange size={17} aria-hidden="true" /></span><span>Date cible</span><strong>{longDate(path.targetDate)}</strong></li>
+          <li className="is-brand"><span className="lpa-fact-icon"><Clock size={17} aria-hidden="true" /></span><span>Temps prévu</span><strong>{formatMinutes(capacity)} / sem.</strong></li>
+          <li className={capacity >= path.difficulty.requiredWeeklyMinutes ? 'is-success' : 'is-warning'}><span className="lpa-fact-icon"><Target size={17} aria-hidden="true" /></span><span>Nécessaire</span><strong>{formatMinutes(path.difficulty.requiredWeeklyMinutes)} / sem.</strong></li>
+          <li className="is-accent"><span className="lpa-fact-icon"><Handshake size={17} aria-hidden="true" /></span><span>Engagement</span><strong>{engagedMinutes ? `${formatMinutes(engagedMinutes)} / sem.` : 'À confirmer'}</strong></li>
         </ul>
       </section>
 
@@ -171,6 +176,7 @@ export function LearnerPath({ token, path, onChanged }: { token: string; path: P
               <CalendarCog size={16} aria-hidden="true" /> Modifier mes jours</button>
           ) : undefined}>
           <WeekSummary days={path.availability} />
+          <CapacityGauge capacity={capacity} required={path.difficulty.requiredWeeklyMinutes} commitment={engagedMinutes} />
           <p className="lpa-note">{contract.engaged
             ? `Réorganisez vos jours librement, tant que la semaine garde au moins ${formatMinutes(engagedMinutes ?? 0)} (engagement de votre contrat).`
             : 'Vos jours restent modifiables à tout moment : le planning se recalcule aussitôt.'}</p>
@@ -208,7 +214,7 @@ export function LearnerPath({ token, path, onChanged }: { token: string; path: P
             <button type="button" className="btn btn-ghost" onClick={() => setPanel(null)}>Annuler</button>
             <button type="button" className="btn btn-primary" disabled={busy || !days.length || (engagedMinutes !== null && weeklyCapacity(days) < engagedMinutes)}
               onClick={() => void recompute({ days })}>
-              {busy ? <LoaderCircle size={17} className="ob-spin" aria-hidden="true" /> : <CalendarCog size={17} aria-hidden="true" />} Recalculer mon planning
+              {busy ? <LoaderCircle size={17} className="ld-spin" aria-hidden="true" /> : <CalendarCog size={17} aria-hidden="true" />} Recalculer mon planning
             </button>
           </>}>
           <DayPlanner initial={path.availability} required={path.difficulty.requiredWeeklyMinutes} commitment={engagedMinutes} onChange={setDays} />

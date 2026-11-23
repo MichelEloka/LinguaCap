@@ -1,11 +1,11 @@
 /**
  * Étape 2 : test de niveau. Introduction (paliers, durée, débutant déclaré), puis une question à la fois par palier
- * (« Palier A1 · 3/12 »), son pour l'écoute, choix « Je ne sais pas », sauvegarde automatique et reprise, remise du
- * palier et transition vers le palier suivant.
+ * (« Palier A1 · Question 3/12 »), document à lire ou enregistrement à écouter, choix en cartes et « Je ne sais pas »,
+ * sauvegarde automatique et reprise, remise du palier et passage au palier suivant célébré.
  */
-import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from 'react';
+import { useCallback, useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 import {
-  AlertTriangle, ArrowLeft, ArrowRight, BookOpen, Check, CircleHelp, CloudCheck, Flag, Headphones, LoaderCircle, Lock, PartyPopper,
+  AlertTriangle, ArrowRight, BookOpen, Check, CircleHelp, ClipboardList, CloudCheck, Flag, Headphones, LoaderCircle, Lock, PartyPopper,
   RotateCcw, Sprout, Timer,
 } from 'lucide-react';
 import { AudioPlayer, Callout, ProgressRing } from '../../design/kit';
@@ -14,8 +14,10 @@ import {
   levelLabel, onboardingBlockedMessages, PLACEMENT_DONT_KNOW, placementTierStatusLabels, type LevelCode, type OnboardingState,
   type PlacementQuestion, type PlacementTier, type PlacementView,
 } from '../../integration/v2';
+import { ChoiceGrid, JourneyActions, JourneyQuestion, JourneyStage, prefersReducedMotion, type ChoiceOption } from '../journey';
 import { LessonContent } from '../pilot/LessonContent';
 import { errorText, LevelMark, momentText, ofLanguage, theLanguage } from './onboarding-kit';
+import { CanvasPortal, useScene } from './onboarding-scene';
 
 type SaveStatus = 'idle' | 'pending' | 'saving' | 'saved' | 'error';
 
@@ -24,27 +26,36 @@ function tierName(code: string, title?: string | null) {
   if (!title) return `Palier ${code}`;
   return title.startsWith(code) ? `Palier ${title}` : `Palier ${code} · ${title}`;
 }
+/** « Survie » pour le palier A2 intitulé « A2 · Survie ». */
+function tierTitle(code: string, title?: string | null) {
+  const text = title?.startsWith(`${code} · `) ? title.slice(code.length + 3) : title ?? '';
+  return text || (levelLabel(code).split(' · ')[1] ?? '');
+}
 const LETTERS = 'ABCDEFGH';
 const introTiers: LevelCode[] = ['A1', 'A2', 'B1'];
 
-export function StepPlacement({ token, state, attempt, languageName, onAttempt, onStarted, onCompleted }: {
-  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string;
+export function StepPlacement({ token, state, attempt, languageName, onBack, onShowResult, onAttempt, onStarted, onCompleted }: {
+  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; onBack: () => void; onShowResult: () => void;
   onAttempt: (view: PlacementView) => void; onStarted: (view: PlacementView) => Promise<void>; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
   if (attempt?.status === 'in_progress') {
     return <PlacementQuiz key={`${attempt.id}-${attempt.currentTier ?? ''}`} token={token} attempt={attempt} onAttempt={onAttempt} onCompleted={onCompleted} />;
   }
-  return <PlacementIntro token={token} state={state} attempt={attempt} languageName={languageName} onStarted={onStarted} onCompleted={onCompleted} />;
+  return (
+    <PlacementIntro token={token} state={state} attempt={attempt} languageName={languageName} onBack={onBack} onShowResult={onShowResult}
+      onStarted={onStarted} onCompleted={onCompleted} />
+  );
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
 // Introduction
 // ---------------------------------------------------------------------------------------------------------------------
 
-function PlacementIntro({ token, state, attempt, languageName, onStarted, onCompleted }: {
-  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string;
+function PlacementIntro({ token, state, attempt, languageName, onBack, onShowResult, onStarted, onCompleted }: {
+  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; onBack: () => void; onShowResult: () => void;
   onStarted: (view: PlacementView) => Promise<void>; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
+  const { direction } = useScene();
   const [busy, setBusy] = useState<'test' | 'beginner' | null>(null);
   const [error, setError] = useState('');
   const unavailable = state.blockedReason === 'placement_unavailable';
@@ -52,6 +63,7 @@ function PlacementIntro({ token, state, attempt, languageName, onStarted, onComp
   const retakeOpen = completed && attempt?.retakeAvailableAt ? new Date(attempt.retakeAvailableAt).getTime() <= Date.now() : false;
 
   async function start(declaredBeginner: boolean) {
+    if (busy) return;
     setBusy(declaredBeginner ? 'beginner' : 'test');
     setError('');
     try {
@@ -68,62 +80,79 @@ function PlacementIntro({ token, state, attempt, languageName, onStarted, onComp
   }
 
   const tips = [
-    { icon: <Timer size={18} />, title: '10 à 25 minutes', text: '12 questions par palier, trois paliers au plus.' },
-    { icon: <Headphones size={18} />, title: 'Lecture et écoute', text: 'Prévoyez des écouteurs : chaque son se réécoute à volonté.' },
-    { icon: <CircleHelp size={18} />, title: '« Je ne sais pas »', text: 'Mieux vaut l’avouer que deviner : le résultat sera plus juste.' },
-    { icon: <CloudCheck size={18} />, title: 'Rien n’est perdu', text: 'Vos réponses sont enregistrées : reprenez quand vous voulez.' },
+    { icon: <Timer size={18} />, title: '10 à 25 minutes', text: 'Trois paliers au plus, une question à la fois.' },
+    { icon: <Headphones size={18} />, title: 'Lecture et écoute', text: 'Prévoyez des écouteurs : chaque son se réécoute.' },
+    { icon: <CircleHelp size={18} />, title: 'Le droit de ne pas savoir', text: 'Mieux vaut l’avouer que deviner : le résultat sera plus juste.' },
+    { icon: <CloudCheck size={18} />, title: 'Rien n’est perdu', text: 'Chaque réponse est enregistrée : reprenez quand vous voulez.' },
   ];
 
+  const description = completed
+    ? `Terminé le ${momentText(attempt?.completedAt)}.${attempt?.result ? ` Niveau estimé : ${attempt.result.label}.` : ''}`
+    : 'Le test avance par paliers, du plus simple au plus exigeant, et s’arrête dès qu’un palier devient trop difficile. Il n’y a rien à préparer.';
+  const primary = completed ? 'result' : unavailable ? 'beginner' : 'test';
+
   return (
-    <section className="ob-test-intro" aria-labelledby="ob-test-title">
-      <div className="pt-hero">
-        <div className="pt-hero-copy">
-          <p className="pt-hero-eyebrow">Test de niveau · {languageName}</p>
-          <h2 id="ob-test-title">{completed ? 'Votre test est terminé' : `Situons votre niveau ${ofLanguage(languageName)}`}</h2>
-          <p className="pt-hero-text">{completed
-            ? `Terminé le ${momentText(attempt?.completedAt)}. ${attempt?.result ? `Niveau estimé : ${attempt.result.label}.` : ''}`
-            : 'Le test avance par paliers, du plus simple au plus exigeant, et s’arrête dès qu’un palier devient trop difficile. Il n’y a rien à préparer.'}</p>
-          <div className="pt-hero-actions">
-            {completed ? (
-              <>
-                {retakeOpen && <button type="button" className="btn btn-lg pt-hero-primary" disabled={busy !== null} onClick={() => void start(false)}>
-                  {busy === 'test' ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <RotateCcw size={18} aria-hidden="true" />} Repasser le test</button>}
-                {!retakeOpen && attempt?.retakeAvailableAt && <p className="pt-hero-note">Un nouvel essai sera possible à partir du {momentText(attempt.retakeAvailableAt)}.</p>}
-              </>
-            ) : (
-              <>
-                {!unavailable && (
-                  <button type="button" className="btn btn-lg pt-hero-primary" disabled={busy !== null} onClick={() => void start(false)}>
-                    {busy === 'test' ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Flag size={18} aria-hidden="true" />} Commencer le test
-                  </button>
-                )}
-                <button type="button" className="btn btn-lg pt-hero-secondary" disabled={busy !== null} onClick={() => void start(true)}>
-                  {busy === 'beginner' ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Sprout size={18} aria-hidden="true" />}
-                  Je n’ai jamais étudié {theLanguage(languageName)}
-                </button>
-              </>
-            )}
+    <JourneyStage>
+      <JourneyQuestion stepKey={completed ? 'placement-done' : 'placement-intro'} direction={direction} icon={<ClipboardList />}
+        eyebrow={`Test de niveau · ${languageName}`}
+        title={completed ? 'Votre test est terminé' : `Situons votre niveau ${ofLanguage(languageName)}`} description={description}>
+        {!completed && (
+          <div className="lo-test-intro">
+            <ol className="lo-stairs" aria-label="Paliers du test">
+              {introTiers.map((code, index) => (
+                <li key={code} className={`lvl-${code}`} style={{ '--step': index } as CSSProperties}>
+                  <LevelMark code={code} size="lg" />
+                  <span className="lo-stair-text"><strong>Palier {code}</strong><small>{levelLabel(code).split(' · ')[1]}</small></span>
+                </li>
+              ))}
+            </ol>
+            <ul className="lo-tips lc-stagger">
+              {tips.map((tip) => (
+                <li key={tip.title}>
+                  <span className="lo-tip-icon" aria-hidden="true">{tip.icon}</span>
+                  <span><strong>{tip.title}</strong><small>{tip.text}</small></span>
+                </li>
+              ))}
+            </ul>
           </div>
-        </div>
-        <ol className="pt-stairs" aria-label="Paliers du test">
-          {introTiers.map((code, index) => (
-            <li key={code} style={{ ['--step' as string]: index }}>
-              <LevelMark code={code} size="lg" />
-              <span><strong>Palier {code}</strong><small>{levelLabel(code).split(' · ')[1]}</small></span>
-            </li>
-          ))}
-        </ol>
-      </div>
-      {unavailable && <Callout tone="info" title="Test bientôt disponible">{onboardingBlockedMessages.placement_unavailable} Vous pouvez déjà commencer au début du parcours.</Callout>}
-      {error && <div role="alert"><Callout tone="warning" title="Le test n’a pas pu démarrer">{error}</Callout></div>}
-      {!completed && (
-        <ul className="pt-tips lc-stagger">
-          {tips.map((tip) => (
-            <li key={tip.title}><span className="pt-tip-icon" aria-hidden="true">{tip.icon}</span><div><strong>{tip.title}</strong><small>{tip.text}</small></div></li>
-          ))}
-        </ul>
-      )}
-    </section>
+        )}
+        {completed && !retakeOpen && attempt?.retakeAvailableAt && (
+          <p className="lo-note"><Timer size={16} aria-hidden="true" /> Un nouvel essai sera possible à partir du {momentText(attempt.retakeAvailableAt)}.</p>
+        )}
+        {unavailable && !completed && (
+          <Callout tone="info" title="Test bientôt disponible">{onboardingBlockedMessages.placement_unavailable} Vous pouvez déjà commencer au début du parcours.</Callout>
+        )}
+        {error && <div role="alert"><Callout tone="warning" title="Le test n’a pas pu démarrer">{error}</Callout></div>}
+        {!completed && !unavailable && (
+          <button type="button" className="lo-alt" disabled={busy !== null} onClick={() => void start(true)}>
+            <span className="lo-alt-icon" aria-hidden="true">
+              {busy === 'beginner' ? <LoaderCircle size={20} className="ob-spin" /> : <Sprout size={20} />}
+            </span>
+            <span className="lo-alt-text">
+              <strong>Je n’ai jamais étudié {theLanguage(languageName)}</strong>
+              <small>Pas de test : votre parcours commence au tout début, pas à pas.</small>
+            </span>
+            <ArrowRight className="lo-alt-arrow" size={18} aria-hidden="true" />
+          </button>
+        )}
+        {completed && retakeOpen && (
+          <button type="button" className="lo-alt" disabled={busy !== null} onClick={() => void start(false)}>
+            <span className="lo-alt-icon" aria-hidden="true">
+              {busy === 'test' ? <LoaderCircle size={20} className="ob-spin" /> : <RotateCcw size={20} />}
+            </span>
+            <span className="lo-alt-text"><strong>Repasser le test</strong><small>Un nouvel essai remplace le résultat précédent.</small></span>
+            <ArrowRight className="lo-alt-arrow" size={18} aria-hidden="true" />
+          </button>
+        )}
+      </JourneyQuestion>
+      <JourneyActions onBack={onBack} primaryType="button" busy={primary === 'test' ? busy === 'test' : primary === 'beginner' ? busy === 'beginner' : false}
+        disabled={busy !== null}
+        onPrimary={() => { if (primary === 'result') onShowResult(); else void start(primary === 'beginner'); }}>
+        {primary === 'result' ? <>Voir mon niveau <ArrowRight size={18} aria-hidden="true" /></>
+          : primary === 'beginner' ? <><Sprout size={18} aria-hidden="true" /> Commencer au début du parcours</>
+          : <>{busy === 'test' ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Flag size={18} aria-hidden="true" />} Commencer le test</>}
+      </JourneyActions>
+    </JourneyStage>
   );
 }
 
@@ -135,18 +164,19 @@ function SaveState({ status }: { status: SaveStatus }) {
   const busy = status === 'pending' || status === 'saving';
   const Icon = busy ? LoaderCircle : status === 'error' ? AlertTriangle : CloudCheck;
   const text = busy ? 'Enregistrement…' : status === 'error' ? 'Non enregistré' : status === 'saved' ? 'Réponses enregistrées' : 'Enregistrement automatique';
-  return <span className={`pt-save is-${status}`} role="status"><Icon size={14} className={busy ? 'ob-spin' : undefined} aria-hidden="true" />{text}</span>;
+  return <span className={`lo-save is-${status}`} role="status"><Icon size={14} className={busy ? 'ob-spin' : undefined} aria-hidden="true" />{text}</span>;
 }
 
-function TierLadder({ tiers, current }: { tiers: PlacementTier[]; current: LevelCode | null }) {
+/** Échelle des paliers : réussis, en cours, à venir. */
+function TierLadder({ tiers, current, label = 'Paliers du test' }: { tiers: PlacementTier[]; current: LevelCode | null; label?: string }) {
   return (
-    <ol className="pt-ladder" aria-label="Paliers du test">
+    <ol className="lo-ladder" aria-label={label}>
       {tiers.map((tier) => {
         const state = tier.code === current ? 'current' : tier.status;
         return (
-          <li key={tier.code} className={`is-${state}`}>
+          <li key={tier.code} className={`lvl-${tier.code} is-${state}`}>
             <LevelMark code={tier.code} size="sm" state={state === 'passed' ? 'done' : state === 'locked' ? 'locked' : state === 'current' ? 'current' : undefined} />
-            <span><strong>{tierName(tier.code, tier.title)}</strong>
+            <span><strong>Palier {tier.code}<em> · {tierTitle(tier.code, tier.title)}</em></strong>
               <small>{state === 'passed' && tier.percent !== null ? `Réussi · ${tier.percent} %` : placementTierStatusLabels[tier.status === 'current' || state === 'current' ? 'current' : tier.status]}</small></span>
             {state === 'passed' ? <Check size={16} strokeWidth={3} aria-hidden="true" /> : state === 'locked' ? <Lock size={14} aria-hidden="true" /> : null}
           </li>
@@ -157,66 +187,78 @@ function TierLadder({ tiers, current }: { tiers: PlacementTier[]; current: Level
 }
 
 /**
- * Énoncé d'une question : consigne en français, document allemand à lire (horaires, courriel, annonce…) présenté comme
- * un document, puis la question. Les paragraphes sont séparés par une ligne vide dans la banque de questions.
+ * Énoncé d'une question : consigne en français, document allemand à lire (horaires, courriel, annonce…), puis la question.
+ * Les paragraphes sont séparés par une ligne vide dans la banque de questions.
  */
-function PromptBlock({ prompt, listening }: { prompt: string; listening: boolean }) {
+function splitPrompt(prompt: string, listening: boolean) {
   const parts = prompt.split(/\n{2,}/).map((part) => part.trim()).filter(Boolean);
   const instruction = parts.length > 1 ? parts[0] : null;
   const document = parts.length > 2 ? parts.slice(1, -1).join('\n\n') : parts.length === 2 && !listening ? parts[1] : null;
-  const question = parts.length > 2 ? parts[parts.length - 1] : parts.length === 2 ? (listening ? parts[1] : null) : parts[0];
-  return (
-    <>
-      {instruction && <p className={question ? 'pt-instruction' : 'pt-question'}>{instruction}</p>}
-      {document && <div className="pt-document" lang="de"><LessonContent text={document} compact /></div>}
-      {question && <p className="pt-question">{question}</p>}
-    </>
-  );
+  const question = parts.length > 2 ? parts[parts.length - 1] : parts.length === 2 ? (listening ? parts[1] : null) : parts[0] ?? '';
+  return question ? { title: question, description: instruction, document } : { title: instruction ?? prompt, description: null, document };
 }
 
 function QuestionMedia({ question, onRenew }: { question: PlacementQuestion; onRenew: () => void }) {
   if (!question.placements.length) return null;
   return (
-    <div className="pt-media">
+    <div className="lo-media">
       {[...question.placements].sort((a, b) => a.position - b.position).map((placement) => {
         if (!placement.url) {
           return (
-            <p key={placement.position} className="pt-media-missing" role="alert">
+            <p key={placement.position} className="lo-media-missing" role="alert">
               <AlertTriangle size={16} aria-hidden="true" /> {placement.usage === 'audio' ? 'Le son' : 'L’image'} n’a pas pu être chargé.
               <button type="button" className="btn btn-outline btn-sm" onClick={onRenew}><RotateCcw size={14} aria-hidden="true" /> Réessayer</button>
             </p>
           );
         }
-        return placement.usage === 'audio'
-          ? <AudioPlayer key={placement.position} src={placement.url} title={placement.caption ?? placement.alt ?? 'Écoutez l’enregistrement'} onError={onRenew} />
-          : (
-            <figure key={placement.position} className="pt-figure">
-              <img src={placement.url} alt={placement.alt ?? ''} />
-              {placement.caption && <figcaption>{placement.caption}</figcaption>}
-            </figure>
-          );
+        return placement.usage === 'audio' ? (
+          <div key={placement.position} className="lo-listen">
+            <span className="lo-listen-wave" aria-hidden="true">
+              {Array.from({ length: 18 }, (_, bar) => <i key={bar} style={{ '--b': bar } as CSSProperties} />)}
+            </span>
+            <span className="lo-listen-label" aria-hidden="true"><Headphones size={15} /> Écoutez, autant de fois que nécessaire</span>
+            <AudioPlayer src={placement.url} title={placement.caption ?? placement.alt ?? 'Écoutez l’enregistrement'} onError={onRenew} />
+          </div>
+        ) : (
+          <figure key={placement.position} className="lo-figure">
+            <img src={placement.url} alt={placement.alt ?? ''} />
+            {placement.caption && <figcaption>{placement.caption}</figcaption>}
+          </figure>
+        );
       })}
     </div>
+  );
+}
+
+/** Document à lire, présenté comme un vrai document (affiche, courriel, annonce…). */
+function ReadingDocument({ text }: { text: string }) {
+  return (
+    <div className="lo-doc" lang="de"><LessonContent text={text} compact /></div>
   );
 }
 
 function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
   token: string; attempt: PlacementView; onAttempt: (view: PlacementView) => void; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
+  const { direction: sceneDirection } = useScene();
   const tier = attempt.currentTier ?? attempt.tiers.find((item) => item.status === 'current')?.code ?? 'A1';
   const questions = attempt.questions;
+  const titleId = useId();
   const [answers, setAnswers] = useState<Record<string, string>>(() => ({ ...attempt.savedAnswers }));
   const [index, setIndex] = useState(() => Math.max(0, questions.findIndex((question) => !attempt.savedAnswers[question.id])));
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
+  const [phase, setPhase] = useState<'in' | 'out'>('in');
   const [save, setSave] = useState<SaveStatus>('idle');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
   const [passed, setPassed] = useState<{ tier: PlacementTier; next: PlacementView } | null>(null);
   const timer = useRef<number | undefined>(undefined);
   const advanceTimer = useRef<number | undefined>(undefined);
+  const swapTimer = useRef<number | undefined>(undefined);
+  const pending = useRef<number | null>(null);
   const pointer = useRef(false);
   const submitKey = useRef<string | null>(null);
-  const card = useRef<HTMLElement>(null);
+  const container = useRef<HTMLDivElement>(null);
   const moved = useRef(false);
 
   const total = questions.length;
@@ -226,18 +268,20 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
   const last = index === total - 1;
   const tierInfo = attempt.tiers.find((item) => item.code === tier);
 
-  useEffect(() => () => { window.clearTimeout(timer.current); window.clearTimeout(advanceTimer.current); }, []);
+  useEffect(() => () => {
+    window.clearTimeout(timer.current);
+    window.clearTimeout(advanceTimer.current);
+    window.clearTimeout(swapTimer.current);
+  }, []);
 
-  // Après un changement de question : le focus va sur l'énoncé (lecteurs d'écran, clavier).
+  // Après un changement de question : focus sur l'énoncé (lecteurs d'écran, clavier) et retour en haut de la scène.
   useEffect(() => {
     if (!moved.current) return;
     moved.current = false;
-    card.current?.querySelector<HTMLElement>('[data-pt-focus]')?.focus({ preventScroll: true });
-    if (card.current && card.current.getBoundingClientRect().top < 64) {
-      const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      card.current.scrollIntoView({ block: 'start', behavior: reducedMotion ? 'auto' : 'smooth' });
-    }
-  }, [index]);
+    document.getElementById(titleId)?.focus({ preventScroll: true });
+    const scroller = container.current?.closest('.jy-scene-scroll');
+    if (scroller && scroller.scrollTop > 0) scroller.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+  }, [index, titleId]);
 
   const persist = useCallback((next: Record<string, string>) => {
     window.clearTimeout(timer.current);
@@ -250,12 +294,27 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
     }, 600);
   }, [attempt.id, tier, token]);
 
+  /** La question sortante monte et s'efface, puis l'entrante arrive du bas (l'inverse en revenant en arrière). */
   function goTo(target: number) {
     if (target < 0 || target >= total || target === index) return;
     window.clearTimeout(advanceTimer.current);
     setDirection(target < index ? 'prev' : 'next');
-    moved.current = true;
-    setIndex(target);
+    if (prefersReducedMotion()) {
+      moved.current = true;
+      setIndex(target);
+      return;
+    }
+    pending.current = target;
+    setPhase('out');
+    window.clearTimeout(swapTimer.current);
+    swapTimer.current = window.setTimeout(() => {
+      const next = pending.current;
+      pending.current = null;
+      if (next === null) return;
+      moved.current = true;
+      setIndex(next);
+      setPhase('in');
+    }, 190);
   }
 
   function choose(optionId: string) {
@@ -300,121 +359,117 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
     }
   }
 
-  function keyboard(event: KeyboardEvent<HTMLElement>) {
-    if (event.key === 'Enter' && answers[question.id] && !(event.target instanceof HTMLButtonElement)) {
-      event.preventDefault();
-      if (last) void submit(); else goTo(index + 1);
-    }
-  }
+  if (passed) return <TierPassed passed={passed} onNext={() => onAttempt(passed.next)} />;
 
-  if (passed) {
-    const nextTier = passed.next.tiers.find((item) => item.code === passed.next.currentTier);
+  if (!question) {
     return (
-      <section className="pt-passed" aria-labelledby="pt-passed-title">
-        <div className="pt-passed-medal" aria-hidden="true">
-          {Array.from({ length: 6 }, (_, spark) => <span key={spark} className={`pt-spark is-${spark + 1}`} />)}
-          <ProgressRing value={passed.tier.percent ?? 100} size={128} stroke={10} color="var(--success)" label={`${passed.tier.percent ?? 0} % de bonnes réponses`}>
-            <span className="pt-passed-score"><strong>{passed.tier.percent ?? 0}<small> %</small></strong></span>
-          </ProgressRing>
-        </div>
-        <p className="pt-passed-kicker"><PartyPopper size={16} aria-hidden="true" /> Palier {passed.tier.code} validé</p>
-        <h2 id="pt-passed-title" tabIndex={-1}>Bravo, vous passez au palier {passed.next.currentTier}</h2>
-        <p className="pt-passed-text">
-          {passed.tier.correct !== null && passed.tier.total !== null ? `${passed.tier.correct} bonnes réponses sur ${passed.tier.total}. ` : ''}
-          Le {tierName(passed.next.currentTier ?? 'A2', nextTier?.title).replace('Palier', 'palier')} est un peu plus exigeant : prenez votre temps, et n’hésitez pas à répondre « Je ne sais pas ».
-        </p>
-        <TierLadder tiers={passed.next.tiers} current={passed.next.currentTier} />
-        <button type="button" className="btn btn-primary btn-lg" autoFocus onClick={() => { onAttempt(passed.next); }}>
-          Commencer le palier {passed.next.currentTier} <ArrowRight size={18} aria-hidden="true" />
-        </button>
-      </section>
+      <JourneyStage>
+        <JourneyQuestion stepKey="quiz-empty" direction={sceneDirection} eyebrow={tierName(tier, tierInfo?.title)} title="Aucune question pour ce palier"
+          description="Ce palier ne contient pas de question. Réessayez plus tard." />
+      </JourneyStage>
     );
   }
 
-  if (!question) return <Callout tone="warning" title="Aucune question">Ce palier ne contient pas de question. Réessayez plus tard.</Callout>;
-  const chosen = answers[question.id];
+  const chosen = answers[question.id] ?? null;
   const listening = question.competence === 'ecoute';
+  const prompt = splitPrompt(question.prompt, listening);
+  const short = question.options.every((option) => option.text.length <= 26);
+  const options: ChoiceOption<string>[] = [
+    ...question.options.map((option, position) => ({
+      value: option.id, title: <span lang="de">{option.text}</span>, icon: <span className="lo-letter">{LETTERS[position] ?? position + 1}</span>,
+    })),
+    { value: PLACEMENT_DONT_KNOW, title: 'Je ne sais pas', icon: <CircleHelp /> },
+  ];
+  const swap = (content: ReactNode) => <span key={question.id} className="lo-swap">{content}</span>;
+  const complete = last || answered === total;
 
   return (
-    <div className="pt">
-      <div className="pt-main">
-        <div className="pt-top">
-          <div className="pt-top-row">
-            <p className="pt-tier"><LevelMark code={tier} size="sm" state="current" /> <span>{tierName(tier, tierInfo?.title)}</span></p>
-            <p className="pt-count" aria-live="polite">Question <strong>{index + 1}</strong>/{total}</p>
-          </div>
-          <ol className="pt-dots" aria-label="Questions du palier">
-            {questions.map((item, position) => (
-              <li key={item.id}>
-                <button type="button" onClick={() => goTo(position)} aria-current={position === index ? 'step' : undefined}
-                  className={answers[item.id] ? (answers[item.id] === PLACEMENT_DONT_KNOW ? 'is-unsure' : 'is-done') : undefined}
-                  aria-label={`Question ${position + 1}${answers[item.id] ? ', répondue' : ''}`} />
-              </li>
-            ))}
-          </ol>
-          <SaveState status={save} />
+    <JourneyStage className="lo-quiz">
+      <div className="lo-quiz-head" ref={container}>
+        <div className="lo-quiz-row">
+          <p className={`lo-quiz-tier lvl-${tier}`}><LevelMark code={tier} size="sm" state="current" /><span>{tierName(tier, tierInfo?.title)}</span></p>
+          <p className="pt-count" aria-live="polite">Question <strong>{index + 1}</strong>/{total}</p>
         </div>
-
-        <article ref={card} key={question.id} className={`pt-card is-${direction}`} aria-labelledby={`pt-q-${question.id}`} onKeyDown={keyboard}>
-          <p className={`pt-skill is-${question.competence}`}>
-            {listening ? <Headphones size={15} aria-hidden="true" /> : <BookOpen size={15} aria-hidden="true" />}
-            {listening ? 'Écoute' : 'Lecture'}
-          </p>
-          <QuestionMedia question={question} onRenew={() => void renew()} />
-          <div className="pt-prompt" id={`pt-q-${question.id}`} tabIndex={-1} data-pt-focus>
-            <span className="sr-only">Question {index + 1} sur {total} : </span>
-            <PromptBlock prompt={question.prompt} listening={listening} />
-          </div>
-          <div className="pt-options" role="radiogroup" aria-labelledby={`pt-q-${question.id}`}>
-            {question.options.map((option, position) => (
-              <label key={option.id} className={`pt-option${chosen === option.id ? ' is-checked' : ''}`} onPointerDown={() => { pointer.current = true; }}>
-                <input type="radio" name={`pt-${question.id}`} value={option.id} checked={chosen === option.id}
-                  onKeyDown={() => { pointer.current = false; }} onChange={() => choose(option.id)} />
-                <span className="pt-option-key" aria-hidden="true">{LETTERS[position] ?? position + 1}</span>
-                <span className="pt-option-text" lang="de">{option.text}</span>
-                <span className="pt-option-tick" aria-hidden="true"><Check size={14} strokeWidth={3} /></span>
-              </label>
-            ))}
-            <label className={`pt-option is-unsure${chosen === PLACEMENT_DONT_KNOW ? ' is-checked' : ''}`} onPointerDown={() => { pointer.current = true; }}>
-              <input type="radio" name={`pt-${question.id}`} value={PLACEMENT_DONT_KNOW} checked={chosen === PLACEMENT_DONT_KNOW}
-                onKeyDown={() => { pointer.current = false; }} onChange={() => choose(PLACEMENT_DONT_KNOW)} />
-              <span className="pt-option-key" aria-hidden="true"><CircleHelp size={16} /></span>
-              <span className="pt-option-text">Je ne sais pas</span>
-              <span className="pt-option-tick" aria-hidden="true"><Check size={14} strokeWidth={3} /></span>
-            </label>
-          </div>
-        </article>
-
-        {error && <div role="alert"><Callout tone="warning" title="Remise impossible pour le moment">{error}</Callout></div>}
-
-        <nav className="pt-nav" aria-label="Navigation dans le palier">
-          <button type="button" className="btn btn-ghost" onClick={() => goTo(index - 1)} disabled={index === 0}>
-            <ArrowLeft size={18} aria-hidden="true" /> Précédent
-          </button>
-          {last || answered === total ? (
-            <button type="button" className="btn btn-primary" onClick={() => void submit()} disabled={busy}>
-              {busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Check size={18} aria-hidden="true" />}
-              {firstMissing >= 0 ? `${total - answered} sans réponse` : busy ? 'Correction…' : `Valider le palier ${tier}`}
-            </button>
-          ) : (
-            <button type="button" className={`btn ${chosen ? 'btn-primary' : 'btn-outline'}`} onClick={() => goTo(index + 1)}>
-              Suivant <ArrowRight size={18} aria-hidden="true" />
-            </button>
-          )}
-        </nav>
+        <ol className="lo-quiz-bar" aria-label="Questions du palier" style={{ '--n': total } as CSSProperties}>
+          {questions.map((item, position) => (
+            <li key={item.id}>
+              <button type="button" onClick={() => goTo(position)} aria-current={position === index ? 'step' : undefined}
+                className={answers[item.id] ? (answers[item.id] === PLACEMENT_DONT_KNOW ? 'is-unsure' : 'is-done') : undefined}
+                aria-label={`Question ${position + 1}${answers[item.id] ? ', répondue' : ''}`} />
+            </li>
+          ))}
+        </ol>
+        <SaveState status={save} />
       </div>
 
-      <aside className="pt-side" aria-label="Avancement du test">
-        <div className="pt-side-card">
-          <ProgressRing value={total ? (answered / total) * 100 : 0} size={64} stroke={7} label={`${answered} réponses sur ${total}`}>
-            <span className="pt-side-ring">{answered}/{total}</span>
-          </ProgressRing>
-          <div><strong>{answered === total ? 'Palier complet' : `${total - answered} question${total - answered > 1 ? 's' : ''} restante${total - answered > 1 ? 's' : ''}`}</strong>
-            <small>{answered === total ? 'Validez pour connaître la suite.' : 'Répondez dans l’ordre que vous voulez.'}</small></div>
+      <JourneyQuestion stepKey={`quiz-${tier}`} direction={sceneDirection} titleId={titleId}
+        className={`lo-quiz-q is-${phase} is-${direction}`}
+        eyebrow={swap(<span className={`lo-skill is-${question.competence}`}>
+          {listening ? <Headphones size={14} aria-hidden="true" /> : <BookOpen size={14} aria-hidden="true" />}{listening ? 'Écoute' : 'Lecture'}
+        </span>)}
+        title={swap(<><span className="sr-only">Question {index + 1} sur {total} : </span>{prompt.title}</>)}
+        description={prompt.description ? swap(prompt.description) : undefined}>
+        <div key={question.id} className="lo-swap lo-quiz-body">
+          <QuestionMedia question={question} onRenew={() => void renew()} />
+          {prompt.document && <ReadingDocument text={prompt.document} />}
+          <div className="lo-choices" onPointerDown={() => { pointer.current = true; }} onKeyDown={() => { pointer.current = false; }}>
+            <ChoiceGrid legend="Votre réponse" hideLegend options={options} value={chosen} onChange={choose} columns={short ? 2 : 1} />
+          </div>
         </div>
-        <TierLadder tiers={attempt.tiers} current={tier} />
-        <p className="pt-side-tip"><CircleHelp size={15} aria-hidden="true" /> « Je ne sais pas » compte comme une erreur, mais rend le résultat plus juste qu’une réponse au hasard.</p>
-      </aside>
-    </div>
+        {error && <div role="alert"><Callout tone="warning" title="Remise impossible pour le moment">{error}</Callout></div>}
+      </JourneyQuestion>
+
+      <JourneyActions onBack={() => goTo(index - 1)} backLabel="Précédent" backDisabled={index === 0} primaryType="button" busy={busy}
+        hint={complete ? undefined : <><kbd>1</kbd>–<kbd>{options.length}</kbd> pour répondre</>}
+        onPrimary={() => { if (complete) void submit(); else goTo(index + 1); }}>
+        {complete
+          ? <>{busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Check size={18} aria-hidden="true" />}
+            {firstMissing >= 0 ? `${total - answered} sans réponse` : busy ? 'Correction…' : `Valider le palier ${tier}`}</>
+          : <>Suivant <ArrowRight size={18} aria-hidden="true" /></>}
+      </JourneyActions>
+
+      <CanvasPortal>
+        <aside className="lo-testcard" aria-label="Avancement du test">
+          <div className="lo-testcard-ring">
+            <ProgressRing value={total ? (answered / total) * 100 : 0} size={76} stroke={7} color="var(--brand-100)" label={`${answered} réponses sur ${total}`}>
+              <span className="lo-testcard-score">{answered}<small>/{total}</small></span>
+            </ProgressRing>
+            <span><strong>{answered === total ? 'Palier complet' : `${total - answered} question${total - answered > 1 ? 's' : ''} restante${total - answered > 1 ? 's' : ''}`}</strong>
+              <small>{answered === total ? 'Validez pour connaître la suite.' : 'Dans l’ordre que vous voulez.'}</small></span>
+          </div>
+          <TierLadder tiers={attempt.tiers} current={tier} label="Paliers du test, avancement" />
+          <p className="lo-testcard-tip"><CircleHelp size={15} aria-hidden="true" /> Une réponse au hasard fausse le résultat : préférez « Je ne sais pas ».</p>
+        </aside>
+      </CanvasPortal>
+    </JourneyStage>
+  );
+}
+
+/** Palier réussi : médaille du score, échelle des paliers et passage au palier suivant. */
+function TierPassed({ passed, onNext }: { passed: { tier: PlacementTier; next: PlacementView }; onNext: () => void }) {
+  const { direction } = useScene();
+  const nextCode = passed.next.currentTier ?? 'A2';
+  const nextTier = passed.next.tiers.find((item) => item.code === nextCode);
+  const score = passed.tier.percent ?? 0;
+  return (
+    <JourneyStage className="lo-passed">
+      <JourneyQuestion stepKey={`passed-${passed.tier.code}`} direction={direction} icon={<PartyPopper />} eyebrow={`Palier ${passed.tier.code} validé`}
+        title={`Bravo, vous passez au palier ${nextCode}`}
+        description={<>{passed.tier.correct !== null && passed.tier.total !== null ? `${passed.tier.correct} bonnes réponses sur ${passed.tier.total}. ` : ''}
+          Le {tierName(nextCode, nextTier?.title).replace('Palier', 'palier')} est un peu plus exigeant : prenez votre temps, et n’hésitez pas à dire que vous ne savez pas.</>}>
+        <div className="lo-tierup">
+          <div className={`lo-medal lvl-${passed.tier.code}`} aria-hidden="true">
+            <span className="lo-medal-rays">{Array.from({ length: 12 }, (_, ray) => <i key={ray} style={{ '--r': ray } as CSSProperties} />)}</span>
+            <ProgressRing value={score} size={132} stroke={10} color="var(--success)">
+              <span className="lo-medal-score"><strong>{score}<small> %</small></strong><em>Palier {passed.tier.code}</em></span>
+            </ProgressRing>
+          </div>
+          <TierLadder tiers={passed.next.tiers} current={passed.next.currentTier} />
+        </div>
+      </JourneyQuestion>
+      <JourneyActions primaryType="button" onPrimary={onNext}>
+        Commencer le palier {nextCode} <ArrowRight size={18} aria-hidden="true" />
+      </JourneyActions>
+    </JourneyStage>
   );
 }

@@ -25,7 +25,7 @@ function SaveState({ status }: { status: SaveStatus }) {
   const busy = status === 'pending' || status === 'saving';
   const Icon = busy ? LoaderCircle : status === 'error' ? AlertTriangle : CloudCheck;
   const text = busy ? 'Enregistrement…' : status === 'error' ? 'Échec de l’enregistrement' : status === 'saved' ? 'Réponses enregistrées' : 'Enregistrement automatique';
-  return <span className={`px-save is-${status}`}><Icon size={15} className={busy ? 'ob-spin' : undefined} aria-hidden="true" />{text}</span>;
+  return <span className={`px-save is-${status}`}><Icon size={15} className={busy ? 'ld-spin' : undefined} aria-hidden="true" />{text}</span>;
 }
 
 function PartMedia({ part, exam }: { part: PracticePart; exam: PracticeView }) {
@@ -197,7 +197,7 @@ export function PracticeExamPage({ token }: { token: string }) {
               <div className="px-score-actions">
                 {nextOpen
                   ? <button type="button" className="btn btn-primary" disabled={busy} onClick={() => void again()}>
-                      {busy ? <LoaderCircle size={17} className="ob-spin" aria-hidden="true" /> : <RotateCcw size={17} aria-hidden="true" />} Nouvel entraînement</button>
+                      {busy ? <LoaderCircle size={17} className="ld-spin" aria-hidden="true" /> : <RotateCcw size={17} aria-hidden="true" />} Nouvel entraînement</button>
                   : <p className="px-next"><Hourglass size={15} aria-hidden="true" /> Nouvel essai possible le {momentText(exam.nextAttemptAt)}.</p>}
                 <Link className="btn btn-outline" to={`/espace/bibliotheque?niveau=${exam.levelCode}`}>Revoir les cours</Link>
               </div>
@@ -242,12 +242,32 @@ export function PracticeExamPage({ token }: { token: string }) {
         </div>
       ) : (
         <div className="px-sheet">
+          <nav className="px-parts" aria-label="Parties de l’entraînement">
+            <ol>
+              {parts.map((part, index) => {
+                const Icon = partIcons[part.competence] ?? BookOpen;
+                const graded = part.mode === 'closed' && !part.selfPractice;
+                const done = part.questions.filter((question) => exam.answers[part.id]?.[question.id]).length;
+                const complete = graded && done === part.questions.length;
+                return (
+                  <li key={part.id}>
+                    <button type="button" className={`px-part-pill${complete ? ' is-complete' : ''}${graded ? '' : ' is-self'}`}
+                      onClick={() => document.getElementById(`px-section-${part.id}`)?.scrollIntoView({ behavior: 'smooth', block: 'start' })}>
+                      <span className={`px-pill-icon is-${part.competence}`} aria-hidden="true">{complete ? <Check size={13} strokeWidth={3} /> : <Icon size={14} />}</span>
+                      <span className="px-pill-text"><small>Partie {index + 1}</small>{competenceLabels[part.competence] ?? part.competence}</span>
+                      <span className="px-pill-count">{graded ? `${done}/${part.questions.length}` : 'Libre'}</span>
+                    </button>
+                  </li>
+                );
+              })}
+            </ol>
+          </nav>
           {parts.map((part, index) => {
             const Icon = partIcons[part.competence] ?? BookOpen;
             const done = part.questions.filter((question) => exam.answers[part.id]?.[question.id]).length;
             const graded = part.mode === 'closed' && !part.selfPractice;
             return (
-              <section key={part.id} className="px-part" aria-labelledby={`px-part-${part.id}`}>
+              <section key={part.id} id={`px-section-${part.id}`} className="px-part" aria-labelledby={`px-part-${part.id}`}>
                 <header className="px-part-head">
                   <span className={`px-part-icon is-${part.competence}`} aria-hidden="true"><Icon size={20} /></span>
                   <div><p className="px-part-kicker">Partie {index + 1} sur {parts.length} · {competenceLabels[part.competence] ?? part.competence}</p><h2 id={`px-part-${part.id}`}>{part.title}</h2></div>
@@ -287,7 +307,7 @@ export function PracticeExamPage({ token }: { token: string }) {
                 <span><strong>{answered}/{questions.length} réponses</strong><SaveState status={save} /></span>
               </div>
               <button type="button" className="btn btn-primary btn-lg" disabled={busy} onClick={askSubmit}>
-                {busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : <Send size={18} aria-hidden="true" />} {busy ? 'Remise…' : 'Remettre mon entraînement'}
+                {busy ? <LoaderCircle size={18} className="ld-spin" aria-hidden="true" /> : <Send size={18} aria-hidden="true" />} {busy ? 'Remise…' : 'Remettre mon entraînement'}
               </button>
             </div>
           </div>

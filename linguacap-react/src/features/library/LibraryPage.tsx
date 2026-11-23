@@ -6,17 +6,19 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookOpen, ChevronRight, ClipboardCheck, Clock, Dumbbell, Headphones, LibraryBig, LoaderCircle, Lock, Mic,
-  PencilLine, RotateCcw, SearchX, ShieldCheck, Trophy,
+  ArrowLeft, ArrowRight, BookOpen, Check, ChevronRight, ClipboardCheck, Clock, Dumbbell, EyeOff, Headphones, LibraryBig, LoaderCircle, Lock, Mic,
+  PencilLine, RotateCcw, ShieldCheck, Trophy,
 } from 'lucide-react';
-import { Badge, EmptyState, PageHeading } from '../../components/ui';
-import { Callout, Card, ListItem, ProgressRing, SearchField, SkeletonCard, SplitView, useToast } from '../../design/kit';
+import { Badge, PageHeading } from '../../components/ui';
+import { Callout, Card, ListItem, ProgressRing, SearchField, Skeleton, SplitView, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import {
   competenceLabels, examKindLabels, formatMinutes, levelCodes, type Language, type LevelCode, type Library, type LibraryActivityItem,
   type LibraryLevel, type LibraryModule, type PracticeSummary, type PracticeView,
 } from '../../integration/v2';
 import { errorText, LevelMark, levelName, momentText } from '../onboarding/onboarding-kit';
+import { EmptyScene, LogoL, NightDecor } from '../pilot/learner-common';
+import '../pilot/learner-dashboard.css';
 import './library.css';
 
 const kindIcons = { lesson: BookOpen, exercise: PencilLine };
@@ -84,7 +86,11 @@ function PracticeCard({ level, history, token }: { level: LibraryLevel; history:
       description={`${examKindLabels.midterm} ${level.levelCode}, corrigé automatiquement`}>
       {midterm?.available ? (
         <>
-          <p className="lib-practice-text">Les parties lecture et écoute sont notées ; l’écrit et l’oral se travaillent seuls. Les réponses justes ne sont pas dévoilées, pour que l’entraînement reste utile.</p>
+          <ul className="lib-practice-points">
+            <li><span className="is-scored"><Check size={13} strokeWidth={3} aria-hidden="true" /></span>Lecture et écoute notées</li>
+            <li><span className="is-self"><PencilLine size={13} aria-hidden="true" /></span>Écrit et oral en autonomie</li>
+            <li><span className="is-hidden"><EyeOff size={13} aria-hidden="true" /></span>Sans corrigé : un vrai test</li>
+          </ul>
           {last && (
             <div className="lib-practice-last">
               <ProgressRing value={last.percent ?? 0} size={52} stroke={6} color={(last.percent ?? 0) >= 60 ? 'var(--success)' : 'var(--warning)'} label={`Dernier score : ${last.percent ?? 0} %`}>
@@ -96,11 +102,11 @@ function PracticeCard({ level, history, token }: { level: LibraryLevel; history:
           )}
           {error && <p className="inline-message warning" role="alert">{error}</p>}
           <button type="button" className="btn btn-primary btn-block" disabled={busy} onClick={() => open ? navigate(`/espace/bibliotheque/entrainement/${encodeURIComponent(open.id)}`) : void start()}>
-            {busy ? <LoaderCircle size={17} className="ob-spin" aria-hidden="true" /> : open ? <RotateCcw size={17} aria-hidden="true" /> : <ClipboardCheck size={17} aria-hidden="true" />}
+            {busy ? <LoaderCircle size={17} className="ld-spin" aria-hidden="true" /> : open ? <RotateCcw size={17} aria-hidden="true" /> : <ClipboardCheck size={17} aria-hidden="true" />}
             {open ? 'Reprendre mon entraînement' : last ? 'Nouvel entraînement' : 'Commencer l’entraînement'}
           </button>
         </>
-      ) : <p className="lib-practice-text">Aucun bilan d’entraînement n’est proposé pour ce niveau pour le moment.</p>}
+      ) : <EmptyScene art="chart" compact title="Pas encore d’entraînement" description="Aucun bilan d’entraînement n’est proposé pour ce niveau pour le moment." />}
       <p className="lib-practice-note"><ShieldCheck size={15} aria-hidden="true" /> L’examen blanc, qui valide le niveau, se passe uniquement dans votre parcours.</p>
     </Card>
   );
@@ -199,7 +205,16 @@ export function LibraryPage({ token }: { token: string }) {
             <p>{failure}</p>
             <button type="button" className="btn btn-outline btn-sm" onClick={() => setRetry((value) => value + 1)}><RotateCcw size={15} aria-hidden="true" /> Réessayer</button>
           </Callout></div>
-        ) : <div className="lib-loading"><SkeletonCard lines={2} label="Chargement de la bibliothèque…" /><SkeletonCard lines={6} /><SkeletonCard lines={4} /></div>}
+        ) : (
+          <div className="lib-loading" role="status" aria-label="Chargement de la bibliothèque…">
+            <span className="lib-skel-levels" aria-hidden="true">{[0, 1, 2, 3].map((index) => <Skeleton key={index} width={170} height={60} radius={16} />)}</span>
+            <span className="lib-skel-summary" aria-hidden="true"><span className="lib-skel-banner" /><span className="kit-skeleton-card"><Skeleton width="55%" height={18} /><Skeleton width="80%" /><Skeleton width="70%" /><Skeleton width="100%" height={42} radius={12} /></span></span>
+            <span className="lib-skel-split" aria-hidden="true">
+              <span className="kit-skeleton-card">{[0, 1, 2, 3, 4].map((index) => <span key={index} className="lib-skel-row"><Skeleton width={34} height={34} radius={10} /><Skeleton width={`${80 - index * 8}%`} /></span>)}</span>
+              <span className="kit-skeleton-card"><Skeleton width="40%" height={20} /><Skeleton width="90%" /><Skeleton width="76%" />{[0, 1, 2].map((index) => <span key={index} className="lib-skel-row"><Skeleton width={38} height={38} radius={11} /><Skeleton width={`${70 - index * 10}%`} /></span>)}</span>
+            </span>
+          </div>
+        )}
       </div>
     );
   }
@@ -218,23 +233,26 @@ export function LibraryPage({ token }: { token: string }) {
             <button key={tab.code} type="button" className={`lib-level lvl-${tab.code}`} aria-pressed={tab.code === selected?.code}
               onClick={() => { select({ niveau: tab.code, module: null }); setQuery(''); }}>
               <LevelMark code={tab.code} size="md" />
-              <span><strong>{levelName(tab.code)}</strong><small>{tab.level.current ? 'Votre niveau en cours' : tab.level.inPath ? 'Dans votre parcours' : `${tab.level.modules.length} modules`}</small></span>
+              <span className="lib-level-text"><strong>{levelName(tab.code)}</strong><small>{tab.level.current ? 'Votre niveau en cours' : tab.level.inPath ? 'Dans votre parcours' : `${tab.level.modules.length} modules`}</small></span>
+              {tab.level.current && <span className="lib-level-here" aria-hidden="true"><LogoL /></span>}
             </button>
           ) : (
             <span key={tab.code} className="lib-level is-soon" aria-disabled="true">
               <LevelMark code={tab.code} size="md" state="locked" />
-              <span><strong>{tab.code}</strong><small><Lock size={11} aria-hidden="true" /> Bientôt</small><span className="sr-only">{levelName(tab.code)}, bientôt disponible</span></span>
+              <span className="lib-level-text"><strong>{tab.code}</strong><small><Lock size={11} aria-hidden="true" /> Bientôt</small><span className="sr-only">{levelName(tab.code)}, bientôt disponible</span></span>
             </span>
           )
         ))}
       </nav>
 
       {!level ? (
-        <Card><EmptyState icon={<LibraryBig size={26} />} title="Aucun cours publié pour le moment" description="Les cours apparaîtront ici dès leur publication." /></Card>
+        <Card><EmptyScene art="books" title="Aucun cours publié pour le moment" description="Les cours apparaîtront ici dès leur publication." /></Card>
       ) : (
         <>
           <div className="lib-summary">
             <div className={`lib-banner lvl-${level.levelCode}`}>
+              <NightDecor />
+              <span className="lib-banner-glyph" aria-hidden="true">{level.levelCode}</span>
               <LevelMark code={level.levelCode} size="lg" />
               <div className="lib-banner-text">
                 <p className="lib-banner-kicker">{level.current ? 'Niveau en cours' : level.inPath ? 'Prévu dans votre parcours' : 'Hors de votre parcours'} · version {level.number}</p>
@@ -268,7 +286,8 @@ export function LibraryPage({ token }: { token: string }) {
             <Card flush title={`${results.length} résultat${results.length > 1 ? 's' : ''}`} description={`Pour « ${query.trim()} » dans le niveau ${level.levelCode}`}>
               {results.length
                 ? <ul className="kit-list lib-activities">{results.map(({ module: item, activity }) => <ActivityRow key={activity.id} level={level} activity={activity} module={item.title} />)}</ul>
-                : <EmptyState icon={<SearchX size={26} />} title="Aucune activité trouvée" description="Essayez un autre mot, en français ou en allemand." />}
+                : <EmptyScene art="search" title="Aucune activité trouvée" description="Essayez un autre mot, en français ou en allemand."
+                    action={<button type="button" className="btn btn-soft btn-sm" onClick={() => setQuery('')}>Effacer la recherche</button>} />}
             </Card>
           ) : module ? (
             <SplitView hasDetail={Boolean(moduleParam)}
@@ -293,7 +312,7 @@ export function LibraryPage({ token }: { token: string }) {
               )}
               detail={<ModuleDetail level={level} module={module} onBack={() => select({ module: null })} />} />
           ) : (
-            <Card><EmptyState icon={<BookOpen size={26} />} title="Ce niveau n’a pas encore de module" /></Card>
+            <Card><EmptyScene art="books" title="Ce niveau n’a pas encore de module" description="Ses modules apparaîtront ici dès leur publication." /></Card>
           )}
         </>
       )}

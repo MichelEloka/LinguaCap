@@ -1,16 +1,20 @@
 /** Étape 5 : jours d'étude et jours de repos, avec la faisabilité en direct ; PUT …/availability calcule le planning. */
 import { useEffect, useState } from 'react';
-import { ArrowLeft, ArrowRight, CalendarDays, LoaderCircle } from 'lucide-react';
+import { ArrowRight, CalendarDays, LoaderCircle } from 'lucide-react';
 import { Callout, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { formatMinutes, type Day, type Estimate, type PathProposal, type PathView } from '../../integration/v2';
+import { JourneyActions, JourneyQuestion, JourneyStage } from '../journey';
 import { DayPlanner, errorText } from './onboarding-kit';
+import { useScene } from './onboarding-scene';
 
-export function StepDays({ token, path, onProposal, onBack }: {
-  token: string; path: PathView; onProposal: (proposal: PathProposal) => void; onBack: () => void;
+export function StepDays({ token, path, onDays, onProposal, onBack }: {
+  token: string; path: PathView; onDays?: (days: Day[]) => void; onProposal: (proposal: PathProposal) => void; onBack: () => void;
 }) {
+  const { direction } = useScene();
   const [initial, setInitial] = useState<Day[] | null>(path.availability.length ? path.availability : null);
-  const [days, setDays] = useState<Day[]>(path.availability);
+  const [days, setDaysState] = useState<Day[]>(path.availability);
+  const setDays = (next: Day[]) => { setDaysState(next); onDays?.(next); };
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
 
@@ -40,23 +44,19 @@ export function StepDays({ token, path, onProposal, onBack }: {
 
   const required = path.difficulty.requiredWeeklyMinutes;
   return (
-    <section className="ob-card ob-days" aria-labelledby="ob-days-title">
-      <header className="ob-card-head">
-        <span className="ob-card-icon" aria-hidden="true"><CalendarDays size={22} /></span>
-        <div>
-          <h2 id="ob-days-title">Vos jours d’étude</h2>
-          <p>Votre objectif demande environ <strong>{formatMinutes(required)} par semaine</strong>. Choisissez vos jours d’étude et vos jours de repos : le planning s’adaptera.</p>
-        </div>
-      </header>
-      {initial ? <DayPlanner initial={initial} required={required} onChange={setDays} /> : <SkeletonCard lines={4} label="Préparation de votre semaine…" />}
-      {error && <div role="alert"><Callout tone="warning" title="Planning non calculé">{error}</Callout></div>}
-      <footer className="ob-actions">
-        <button type="button" className="btn btn-ghost" onClick={onBack}><ArrowLeft size={18} aria-hidden="true" /> Modifier mon objectif</button>
-        <button type="button" className="btn btn-primary btn-lg" disabled={busy || !days.length} onClick={() => void submit()}>
-          {busy ? <LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> : null}
-          {busy ? 'Calcul du planning…' : 'Voir mon planning'} {!busy && <ArrowRight size={18} aria-hidden="true" />}
-        </button>
-      </footer>
-    </section>
+    <JourneyStage className="lo-days">
+      <JourneyQuestion stepKey="days" direction={direction} icon={<CalendarDays />} eyebrow="Mes jours"
+        title="Quels jours voulez-vous étudier ?"
+        description={<>Votre objectif demande environ <strong>{formatMinutes(required)} par semaine</strong>. Activez vos jours d’étude, réglez la durée
+          de vos séances, gardez des jours de repos : le planning s’adaptera.</>}>
+        {initial ? <DayPlanner initial={initial} required={required} onChange={setDays} /> : <SkeletonCard lines={4} label="Préparation de votre semaine…" />}
+        {error && <div role="alert"><Callout tone="warning" title="Planning non calculé">{error}</Callout></div>}
+      </JourneyQuestion>
+      <JourneyActions onBack={onBack} backLabel="Modifier mon objectif" primaryType="button" onPrimary={() => void submit()}
+        disabled={!days.length} busy={busy}>
+        {busy && <LoaderCircle size={18} className="ob-spin" aria-hidden="true" />}
+        {busy ? 'Calcul du planning…' : 'Voir mon planning'} {!busy && <ArrowRight size={18} aria-hidden="true" />}
+      </JourneyActions>
+    </JourneyStage>
   );
 }

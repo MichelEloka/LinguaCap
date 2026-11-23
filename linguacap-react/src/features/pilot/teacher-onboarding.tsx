@@ -1,18 +1,21 @@
-import { useEffect, useId, useRef, useState, type FormEvent, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type CSSProperties, type FormEvent, type ReactNode } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookOpenCheck, Check, CircleCheck, Clock3, GraduationCap, Hourglass, Languages, LogOut, Minus, PencilLine,
-  Plus, Sparkles, UserPlus, Users,
+  ArrowRight, BookOpenCheck, CalendarClock, CalendarDays, CircleCheck, Clock3, Eye, GraduationCap, Hourglass, Languages, Lock, LogOut,
+  Minus, PencilLine, Plus, Sparkles, UserPlus, Users, Zap,
 } from 'lucide-react';
-import { Avatar, useToast } from '../../design/kit';
-import { LanguagePicker } from '../../components/LanguagePicker';
+import { Avatar, Skeleton, useToast } from '../../design/kit';
+import { LanguageFlag, LanguagePicker } from '../../components/LanguagePicker';
 import { requestApi, supabase, type Profile } from '../../integration/api';
 import { availableLanguages, findLanguage, languageName } from '../../domain/languages';
 import {
   gradingDelayLabels, gradingDelays, levelCodes, levelLabel,
   type CurrentProfileV2, type GradingDelayHours, type LevelCode, type TeacherProfile,
 } from '../../integration/v2';
-import { WelcomeJourney } from '../onboarding/WelcomeJourney';
+import {
+  ChoiceGrid, JourneyActions, JourneyCelebration, JourneyQuestion, JourneyShell, JourneyStage, prefersReducedMotion,
+  type JourneyStep,
+} from '../journey';
 import './teacher-onboarding.css';
 
 type ProfileWithTeacher = Profile & { teacherProfile?: TeacherProfile | null };
@@ -52,11 +55,19 @@ const stepLabels: Record<StepId, string> = {
   welcome: 'Bienvenue', languages: 'Langues', availability: 'Disponibilité', courses: 'Cours',
   levels: 'Niveaux', learners: 'Élèves', delay: 'Correction', bio: 'Présentation', summary: 'Validation',
 };
+const stepIcons: Record<StepId, ReactNode> = {
+  welcome: <Sparkles />, languages: <Languages />, availability: <UserPlus />, courses: <BookOpenCheck />, levels: <GraduationCap />,
+  learners: <Users />, delay: <Hourglass />, bio: <PencilLine />, summary: <CircleCheck />,
+};
+const teacherWords = ['Willkommen', 'Unterricht', 'Hallo', 'Danke', 'Prima', 'Guten Tag', 'Bitte', 'Toll gemacht'];
 const availabilityLabels = { yes: 'Je souhaite accueillir de nouveaux élèves', no: 'J’ai déjà mes élèves' };
 const availabilityQuestion = 'Êtes-vous à l’écoute de nouveaux élèves sur LinguaCap, ou avez-vous déjà les vôtres ?';
 const courseModeQuestion = 'Voulez-vous construire vos cours vous-même, ou laisser LinguaCap les construire ?';
 const courseModeLabels: Record<CourseCreationMode, string> = {
   self: 'Je construis mes cours', linguacap: 'LinguaCap construit mes cours',
+};
+const courseModeCard: Record<CourseCreationMode, string> = {
+  self: 'Cours construits par vos soins', linguacap: 'Cours préparés par LinguaCap',
 };
 const learnerPresets = [5, 10, 15, 20, 30];
 const delayHints: Record<GradingDelayHours, string> = {
@@ -65,7 +76,12 @@ const delayHints: Record<GradingDelayHours, string> = {
   72: 'Pour un emploi du temps déjà bien rempli.',
   168: 'Pour un suivi plus espacé, une fois par semaine.',
 };
+const delayIcons: Record<GradingDelayHours, ReactNode> = {
+  24: <Zap />, 48: <Clock3 />, 72: <CalendarClock />, 168: <CalendarDays />,
+};
 const MAX_BIO = 500;
+const CLASSROOM = 30;
+const CELEBRATION_MS = 2800;
 const pilotLevels = new Set(findLanguage('de')?.levels ?? []);
 
 interface Answers {
@@ -95,7 +111,7 @@ function initialAnswers(initial: TeacherProfile | null): Answers {
   };
 }
 
-/** « Professeur d’allemand et d’anglais » (élision devant une voyelle). */
+/** « Professeur d’allemand et d’anglais » (élision devant une voyelle). */
 function teacherTitle(languageIds: readonly string[]) {
   const names = languageIds.map((id) => {
     const name = languageName(id).toLowerCase();
@@ -104,53 +120,79 @@ function teacherTitle(languageIds: readonly string[]) {
   return names.length ? `Professeur ${names.length > 1 ? `${names.slice(0, -1).join(', ')} et ${names[names.length - 1]}` : names[0]}` : 'Professeur';
 }
 
-function TeacherPreview({ name, answers }: { name: string; answers: Answers }) {
+/**
+ * Carte de présentation qui se construit au fil des réponses : chaque information apparaît quand sa question est atteinte,
+ * celle de la question en cours est mise en lumière.
+ */
+function TeacherCard({ name, answers, revealed, focus, compact = false }: {
+  name: string; answers: Answers; revealed: (id: QuestionId) => boolean; focus: StepId | null; compact?: boolean;
+}) {
+  const availability = revealed('availability') ? answers.acceptingNewStudents : null;
+  const publicCard = availability !== false;
+  const lit = (id: QuestionId) => (focus === id ? ' is-focus' : '');
   return (
-    <section className="tob-preview" aria-label="Aperçu de votre carte de présentation">
-      <span className="tob-preview-eyebrow"><Sparkles size={14} aria-hidden="true" /> Votre carte de présentation</span>
-      <div className="tob-card">
-        <div className="tob-card-head">
-          <Avatar name={name} size={56} />
-          <div>
-            <strong>{name}</strong>
-            <small>{teacherTitle(answers.languages)}</small>
-          </div>
-        </div>
-        <div className="tob-card-row">
-          {answers.levels.length ? answers.levels.map((level) => <span key={level} className="tob-card-level">{level}</span>)
-            : <span className="tob-card-empty">Niveaux à préciser</span>}
+    <section className={`tob-card${compact ? ' is-compact' : ''}`} aria-label="Aperçu de votre carte de présentation">
+      <div className="tob-card-band" aria-hidden="true">
+        <svg viewBox="0 0 120 40" preserveAspectRatio="none" focusable="false">
+          <path d="M-4 30 C 26 18, 44 34, 72 22 S 110 10, 126 18" />
+          <path d="M-4 38 C 30 26, 52 40, 80 30 S 112 20, 126 26" />
+        </svg>
+        <span className={`tob-card-status${availability === null ? ' is-pending' : ''}${lit('availability')}`}>
+          {availability === null ? <i className="tob-card-status-wait" />
+            : <span key={String(availability)} className={`tob-pop ${availability ? 'is-open' : 'is-closed'}`}>
+              <i />{availability ? 'Accueille de nouveaux élèves' : 'Élèves déjà suivis'}
+            </span>}
+        </span>
+      </div>
+      <div className="tob-card-body">
+        <span className="tob-card-avatar"><Avatar name={name} size={compact ? 52 : 62} /></span>
+        <strong className="tob-card-name">{name}</strong>
+        <span className={`tob-card-title${lit('languages')}`}>
+          {revealed('languages') ? (
+            <span key={answers.languages.join()} className="tob-pop">
+              <span className="tob-card-flags">{answers.languages.slice(0, 3).map((id) => <LanguageFlag key={id} languageId={id} />)}</span>
+              {teacherTitle(answers.languages)}
+            </span>
+          ) : <Skeleton width="70%" height={11} radius={6} />}
+        </span>
+        <div className={`tob-card-levels${lit('levels')}`}>
+          {revealed('levels') ? (answers.levels.length
+            ? answers.levels.map((level) => <span key={level} className="tob-card-level">{level}</span>)
+            : <span className="tob-card-empty">Niveaux à préciser</span>)
+            : <><Skeleton width={34} height={20} radius={20} /><Skeleton width={34} height={20} radius={20} /><Skeleton width={34} height={20} radius={20} /></>}
         </div>
         <ul className="tob-card-facts">
-          <li><Hourglass size={15} />{answers.gradingDelayHours ? `Corrige ${gradingDelayLabels[answers.gradingDelayHours].toLowerCase()}` : 'Délai de correction à préciser'}</li>
-          <li><Users size={15} />{answers.maxLearners ? `Jusqu’à ${answers.maxLearners} élèves` : 'Nombre d’élèves ouvert'}</li>
+          <li className={lit('courses').trim() || undefined}>
+            <BookOpenCheck size={15} aria-hidden="true" />
+            {revealed('courses') && answers.courseCreationMode
+              ? <span key={answers.courseCreationMode} className="tob-pop">{courseModeCard[answers.courseCreationMode]}</span>
+              : <Skeleton width="72%" height={10} radius={6} />}
+          </li>
+          <li className={lit('learners').trim() || undefined}>
+            <Users size={15} aria-hidden="true" />
+            {revealed('learners')
+              ? <span key={String(answers.maxLearners)} className="tob-pop">{answers.maxLearners ? `Jusqu’à ${answers.maxLearners} élèves` : 'Nombre d’élèves ouvert'}</span>
+              : <Skeleton width="58%" height={10} radius={6} />}
+          </li>
+          <li className={lit('delay').trim() || undefined}>
+            <Hourglass size={15} aria-hidden="true" />
+            {revealed('delay')
+              ? <span key={String(answers.gradingDelayHours)} className="tob-pop">
+                {answers.gradingDelayHours ? `Corrige ${gradingDelayLabels[answers.gradingDelayHours].toLowerCase()}` : 'Délai de correction à préciser'}
+              </span>
+              : <Skeleton width="64%" height={10} radius={6} />}
+          </li>
         </ul>
-        <p className={answers.bio.trim() ? 'tob-card-bio' : 'tob-card-bio is-empty'}>
-          {answers.bio.trim() || 'Votre présentation apparaîtra ici.'}
-        </p>
+        {publicCard && (
+          <p className={`tob-card-bio${answers.bio.trim() ? '' : ' is-empty'}${lit('bio')}`}>
+            <span>{answers.bio.trim() || 'Votre présentation apparaîtra ici.'}</span>
+          </p>
+        )}
       </div>
+      <footer className="tob-card-foot">
+        {publicCard ? <><Eye size={14} aria-hidden="true" /> Visible par les élèves</> : <><Lock size={14} aria-hidden="true" /> Profil réservé à votre espace</>}
+      </footer>
     </section>
-  );
-}
-
-function PreferenceChoices<Value extends string>({ label, name, value, options, onChange }: {
-  label: string; name: string; value: Value | null;
-  options: readonly { value: Value; title: string; icon: ReactNode; detail: string }[];
-  onChange: (next: Value) => void;
-}) {
-  return (
-    <fieldset className="tob-preferences">
-      <legend className="sr-only">{label}</legend>
-      <div className="tob-preference-grid lc-stagger">
-        {options.map((option) => (
-          <label key={option.value} className="tob-preference">
-            <input type="radio" name={name} checked={value === option.value} onChange={() => onChange(option.value)} />
-            <span className="tob-preference-icon" aria-hidden="true">{option.icon}</span>
-            <span className="tob-preference-copy"><strong>{option.title}</strong><small>{option.detail}</small></span>
-            <span className="tob-preference-dot" aria-hidden="true">{value === option.value && <Check size={15} strokeWidth={3} />}</span>
-          </label>
-        ))}
-      </div>
-    </fieldset>
   );
 }
 
@@ -169,14 +211,24 @@ function Counter({ value, onChange }: { value: number; onChange: (value: number)
   );
 }
 
+/** Une petite classe qui se remplit avec le nombre d'élèves (décor). */
+function Classroom({ count }: { count: number | null }) {
+  const filled = Math.min(CLASSROOM, count ?? 0);
+  return (
+    <div className="tob-classroom" aria-hidden="true">
+      {Array.from({ length: CLASSROOM }, (_, index) => (
+        <i key={index} className={index < filled ? 'is-on' : undefined} style={{ '--k': index } as CSSProperties} />
+      ))}
+      {count !== null && count > CLASSROOM && <span>+{count - CLASSROOM}</span>}
+    </div>
+  );
+}
+
 export function TeacherOnboarding({ name, token, initial, onDone }: {
   name: string; token: string; initial: TeacherProfile | null; onDone: (profile: TeacherProfile) => void;
 }) {
   const toast = useToast();
   const navigate = useNavigate();
-  const dialog = useRef<HTMLDialogElement>(null);
-  const heading = useRef<HTMLHeadingElement>(null);
-  const headingId = useId();
   const bioId = useId();
   const [step, setStep] = useState<StepId>('welcome');
   const [direction, setDirection] = useState<'forward' | 'back'>('forward');
@@ -184,6 +236,11 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
   const [answers, setAnswers] = useState<Answers>(() => initialAnswers(initial));
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+  const [saved, setSaved] = useState<TeacherProfile | null>(null);
+  const [leaving, setLeaving] = useState(false);
+  const [furthest, setFurthest] = useState(0);
+  const finishing = useRef(false);
+  const timers = useRef<number[]>([]);
   const updating = Boolean(initial?.onboardedAt);
   const baseQuestions = updating && initial ? missingPreferences(initial) : firstTimeQuestions;
   const showCard = answers.acceptingNewStudents === true;
@@ -193,13 +250,10 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
   const index = steps.indexOf(step);
   const question = questions.findIndex((id) => id === step) + 1;
   const first = name.trim().split(/\s+/)[0] || name;
+  const toInvitations = answers.acceptingNewStudents === false;
 
-  useEffect(() => {
-    const element = dialog.current;
-    if (element && !element.open) element.showModal();
-    return () => element?.close();
-  }, []);
-  useEffect(() => { heading.current?.focus({ preventScroll: true }); }, [step]);
+  useEffect(() => { setFurthest((value) => Math.max(value, index)); }, [index]);
+  useEffect(() => () => timers.current.forEach((timer) => window.clearTimeout(timer)), []);
 
   const set = (change: Partial<Answers>) => setAnswers((current) => ({ ...current, ...change }));
   const go = (next: StepId, way: 'forward' | 'back') => { setDirection(way); setError(''); setStep(next); };
@@ -211,9 +265,12 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     : step === 'summary' ? preferencesComplete
     : true;
 
+  /** Une information de la carte apparaît dès que sa question a été atteinte (ou si elle n'est pas posée). */
+  const revealed = (id: QuestionId) => Boolean(saved) || !questions.includes(id) || steps.indexOf(id) <= Math.max(index, furthest);
+
   function next(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!valid || busy) return;
+    if (!valid || busy || saved) return;
     if (step === 'summary') { void submit(); return; }
     if (fromSummary && question) {
       if (step === 'availability' && askBio) {
@@ -260,9 +317,7 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
         setError('Vos préférences n’ont pas été confirmées. Réessayez.');
         return;
       }
-      toast(updating ? 'Vos préférences ont été mises à jour.' : `Votre profil professeur est prêt, ${first}.`);
-      onDone(result.teacherProfile);
-      if (answers.acceptingNewStudents === false) navigate('/espace/invitations', { replace: true });
+      setSaved(result.teacherProfile);
     } catch (failure) {
       setError(failure instanceof Error ? failure.message : 'L’enregistrement est momentanément impossible. Réessayez.');
     } finally {
@@ -270,12 +325,23 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     }
   }
 
+  /** Après la célébration : fondu de sortie, puis l'espace (ou les invitations) prend le relais. */
+  function finish() {
+    if (!saved || finishing.current) return;
+    finishing.current = true;
+    setLeaving(true);
+    const done = () => {
+      toast(updating ? 'Vos préférences ont été mises à jour.' : `Votre profil professeur est prêt, ${first}.`);
+      onDone(saved);
+      if (toInvitations) navigate('/espace/invitations', { replace: true });
+    };
+    if (prefersReducedMotion()) done();
+    else timers.current.push(window.setTimeout(done, 340));
+  }
+
   function signOut() {
     void (supabase?.auth.signOut({ scope: 'local' }) ?? Promise.resolve()).finally(() => navigate('/', { replace: true }));
   }
-
-  const toggleLevel = (level: LevelCode, checked: boolean) =>
-    set({ levels: levelCodes.filter((code) => (code === level ? checked : answers.levels.includes(code))) });
 
   const summaryRows: [QuestionId, string, string][] = [
     ['languages', 'Langues enseignées', answers.languages.map(languageName).join(', ')],
@@ -287,84 +353,75 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
   ];
   if (showCard) summaryRows.push(['bio', 'Présentation', answers.bio.trim() || 'Aucune pour le moment']);
 
-  const content: Record<StepId, { icon: ReactNode; title: string; lead: string; body: ReactNode }> = {
+  const content: Record<StepId, { eyebrow: string; title: string; lead: string; body: ReactNode }> = {
     welcome: {
-      icon: <Sparkles size={22} />, title: updating ? `Complétez vos préférences, ${first}` : `Bienvenue ${first} !`,
+      eyebrow: updating ? 'Nouvelles questions' : 'Accueil professeur',
+      title: updating ? `Complétez vos préférences, ${first}` : `Bienvenue ${first} !`,
       lead: updating ? 'Retrouvez vos réglages existants et répondez aux nouvelles questions.' : 'Préparez votre espace professeur en quelques questions.',
       body: updating ? null : (
-        <ul className="tob-intro lc-stagger">
-          <li><span><Languages size={18} aria-hidden="true" /></span><div><strong>Vos langues et vos niveaux</strong><small>Pour inviter des élèves dans la bonne langue.</small></div></li>
-          <li><span><Users size={18} aria-hidden="true" /></span><div><strong>Votre disponibilité</strong><small>Pour adapter votre espace à vos besoins.</small></div></li>
-          <li><span><PencilLine size={18} aria-hidden="true" /></span><div><strong>La construction des cours</strong><small>Vous choisissez qui prépare vos cours.</small></div></li>
-        </ul>
+        <div className="tob-welcome">
+          <ul className="tob-intro lc-stagger">
+            <li><span><Languages size={20} aria-hidden="true" /></span><div><strong>Vos langues et vos niveaux</strong><small>Pour inviter des élèves dans la bonne langue.</small></div></li>
+            <li><span><Users size={20} aria-hidden="true" /></span><div><strong>Votre disponibilité</strong><small>Pour adapter votre espace à vos besoins.</small></div></li>
+            <li><span><PencilLine size={20} aria-hidden="true" /></span><div><strong>La construction des cours</strong><small>Vous choisissez qui prépare vos cours.</small></div></li>
+          </ul>
+          <p className="tob-welcome-meta"><Clock3 size={15} aria-hidden="true" /> Environ deux minutes · tout reste modifiable ensuite</p>
+        </div>
       ),
     },
     languages: {
-      icon: <Languages size={22} />, title: 'Quelles langues enseignez-vous ?',
-      lead: 'Choisissez une ou plusieurs langues.',
+      eyebrow: '', title: 'Quelles langues enseignez-vous ?',
+      lead: 'Choisissez une ou plusieurs langues. Les autres langues arrivent bientôt sur LinguaCap.',
       body: <LanguagePicker multiple label="Langues enseignées" hideLabel value={answers.languages} onChange={(languages) => set({ languages })} />,
     },
     availability: {
-      icon: <UserPlus size={22} />, title: availabilityQuestion,
+      eyebrow: '', title: availabilityQuestion,
       lead: 'Choisissez l’option qui correspond à votre situation.',
       body: (
-        <PreferenceChoices<'yes' | 'no'>
-          label={availabilityQuestion} name="availability"
+        <ChoiceGrid<'yes' | 'no'> legend={availabilityQuestion} hideLegend layout="tile" columns={2}
           value={answers.acceptingNewStudents === null ? null : answers.acceptingNewStudents ? 'yes' : 'no'}
           onChange={(value) => set({ acceptingNewStudents: value === 'yes' })}
           options={[
-            { value: 'yes', title: availabilityLabels.yes, detail: 'Préparez une présentation que des élèves pourront consulter.', icon: <UserPlus size={20} /> },
-            { value: 'no', title: availabilityLabels.no, detail: 'Invitez les élèves que vous accompagnez déjà.', icon: <Users size={20} /> },
-          ]}
-        />
+            { value: 'yes', title: availabilityLabels.yes, description: 'Préparez une présentation que des élèves pourront consulter.', icon: <UserPlus /> },
+            { value: 'no', title: availabilityLabels.no, description: 'Invitez les élèves que vous accompagnez déjà.', icon: <Users /> },
+          ]} />
       ),
     },
     courses: {
-      icon: <PencilLine size={22} />, title: courseModeQuestion,
+      eyebrow: '', title: courseModeQuestion,
       lead: 'Quel que soit votre choix, vous pourrez modifier vos cours par la suite.',
       body: (
-        <PreferenceChoices<CourseCreationMode>
-          label={courseModeQuestion} name="courseMode" value={answers.courseCreationMode}
-          onChange={(courseCreationMode) => set({ courseCreationMode })}
+        <ChoiceGrid<CourseCreationMode> legend={courseModeQuestion} hideLegend layout="tile" columns={2}
+          value={answers.courseCreationMode} onChange={(courseCreationMode) => set({ courseCreationMode })}
           options={[
-            { value: 'self', title: courseModeLabels.self, detail: 'Vous préparez le contenu et la progression de vos élèves.', icon: <PencilLine size={20} /> },
-            { value: 'linguacap', title: courseModeLabels.linguacap, detail: 'Vous partez des cours préparés par LinguaCap.', icon: <BookOpenCheck size={20} /> },
-          ]}
-        />
+            { value: 'self', title: courseModeLabels.self, description: 'Vous préparez le contenu et la progression de vos élèves.', icon: <PencilLine /> },
+            { value: 'linguacap', title: courseModeLabels.linguacap, description: 'Vous partez des cours préparés par LinguaCap.', icon: <BookOpenCheck /> },
+          ]} />
       ),
     },
     levels: {
-      icon: <GraduationCap size={22} />, title: 'Quels niveaux accompagnez-vous ?',
+      eyebrow: '', title: 'Quels niveaux accompagnez-vous ?',
       lead: 'Sélectionnez tous les niveaux que vous pouvez enseigner. Les parcours A1 et A2 sont disponibles aujourd’hui.',
       body: (
-        <fieldset className="tob-levels">
-          <legend className="sr-only">Niveaux enseignés</legend>
-          <div className="tob-level-grid lc-stagger">
-            {levelCodes.map((level) => {
-              const checked = answers.levels.includes(level);
-              const [, title] = levelLabel(level).split(' · ');
-              return (
-                <label key={level} className={`tob-level${checked ? ' is-checked' : ''}`}>
-                  <input type="checkbox" checked={checked} onChange={(event) => toggleLevel(level, event.target.checked)} />
-                  <span className="tob-level-code">{level}</span>
-                  <span className="tob-level-text"><strong>{title}</strong>
-                    <small>{pilotLevels.has(level) ? 'Parcours prêt' : 'Bientôt'}</small></span>
-                  <span className="tob-level-check" aria-hidden="true">{checked && <Check size={14} strokeWidth={3} />}</span>
-                </label>
-              );
-            })}
-          </div>
-        </fieldset>
+        <ChoiceGrid<LevelCode> multiple legend="Niveaux enseignés" hideLegend layout="tile" columns={3} className="tob-levels"
+          value={answers.levels} onChange={(levels) => set({ levels })}
+          options={levelCodes.map((level) => ({
+            value: level, title: <span className="tob-level-code">{level}</span>, description: levelLabel(level).split(' · ')[1],
+            tag: pilotLevels.has(level) ? 'Parcours prêt' : 'Bientôt', tagTone: pilotLevels.has(level) ? 'success' : 'neutral',
+          }))} />
       ),
     },
     learners: {
-      icon: <Users size={22} />, title: 'Combien d’élèves envisagez-vous de suivre ?',
+      eyebrow: '', title: 'Combien d’élèves envisagez-vous de suivre ?',
       lead: 'Une estimation suffit : elle nous aide à répartir les élèves. Vous pourrez toujours en accueillir davantage.',
       body: (
         <div className="tob-learners">
-          {answers.maxLearners === null ? (
-            <p className="tob-unknown"><Hourglass size={18} aria-hidden="true" /> Vous préciserez plus tard.</p>
-          ) : <Counter value={answers.maxLearners} onChange={(maxLearners) => set({ maxLearners })} />}
+          <div className="tob-learners-main">
+            {answers.maxLearners === null ? (
+              <p className="tob-unknown"><Hourglass size={18} aria-hidden="true" /> Vous préciserez plus tard.</p>
+            ) : <Counter value={answers.maxLearners} onChange={(maxLearners) => set({ maxLearners })} />}
+            <Classroom count={answers.maxLearners} />
+          </div>
           <div className="tob-chips" role="group" aria-label="Nombres suggérés">
             {learnerPresets.map((count) => (
               <button key={count} type="button" className="kit-chip" aria-pressed={answers.maxLearners === count} onClick={() => set({ maxLearners: count })}>
@@ -378,26 +435,20 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
       ),
     },
     delay: {
-      icon: <Clock3 size={22} />, title: 'Sous quel délai corrigez-vous les copies ?',
+      eyebrow: '', title: 'Sous quel délai corrigez-vous les copies ?',
       lead: 'Écrits et oraux des évaluations : vos élèves sauront quand attendre votre retour.',
       body: (
-        <fieldset className="tob-delays">
-          <legend className="sr-only">Délai de correction</legend>
-          <div className="tob-delay-grid lc-stagger">
-            {gradingDelays.map((delay) => (
-              <label key={delay} className={`tob-delay${answers.gradingDelayHours === delay ? ' is-checked' : ''}`}>
-                <input type="radio" name="gradingDelay" checked={answers.gradingDelayHours === delay} onChange={() => set({ gradingDelayHours: delay })} />
-                <span className="tob-delay-icon" aria-hidden="true"><Clock3 size={18} /></span>
-                <span className="tob-delay-text"><strong>{gradingDelayLabels[delay]}</strong><small>{delayHints[delay]}</small></span>
-                {delay === 48 && <span className="tob-delay-tag">Conseillé</span>}
-              </label>
-            ))}
-          </div>
-        </fieldset>
+        <ChoiceGrid<`${GradingDelayHours}`> legend="Délai de correction" hideLegend columns={2}
+          value={answers.gradingDelayHours ? `${answers.gradingDelayHours}` : null}
+          onChange={(value) => set({ gradingDelayHours: Number(value) as GradingDelayHours })}
+          options={gradingDelays.map((delay) => ({
+            value: `${delay}` as `${GradingDelayHours}`, title: gradingDelayLabels[delay], description: delayHints[delay], icon: delayIcons[delay],
+            tag: delay === 48 ? 'Conseillé' : undefined,
+          }))} />
       ),
     },
     bio: {
-      icon: <PencilLine size={22} />, title: 'Présentez-vous en quelques mots',
+      eyebrow: '', title: 'Présentez-vous en quelques mots',
       lead: 'Votre parcours, votre façon d’enseigner, ce qui vous plaît dans la langue : quelques lignes suffisent. Facultatif.',
       body: (
         <div className="tob-presentation">
@@ -407,21 +458,27 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
               placeholder="Professeure d’allemand depuis dix ans, j’aime faire parler mes élèves dès la première séance…" />
             <small className={answers.bio.length > MAX_BIO - 40 ? 'is-near' : undefined}>{answers.bio.length} / {MAX_BIO}</small>
           </div>
-          <TeacherPreview name={name} answers={answers} />
+          <div className="tob-scene-preview">
+            <TeacherCard name={name} answers={answers} revealed={revealed} focus="bio" compact />
+          </div>
         </div>
       ),
     },
     summary: {
-      icon: <BookOpenCheck size={22} />, title: 'Tout est prêt ?',
+      eyebrow: 'Récapitulatif', title: 'Tout est prêt ?',
       lead: showCard ? 'Vérifiez votre profil avant de le valider.' : 'Vérifiez vos réponses avant de passer aux invitations.',
       body: (
         <dl className="tob-summary lc-stagger">
           {summaryRows.map(([target, label, value]) => (
-            <div key={target}>
+            <div key={target} className={target === 'bio' ? 'is-wide' : undefined}>
+              <span className="tob-summary-icon" aria-hidden="true">{stepIcons[target]}</span>
               <dt>{label}</dt>
               <dd>{value}</dd>
               {questions.includes(target) && (
-                <button type="button" className="btn btn-ghost btn-sm" onClick={() => edit(target)} aria-label={`Modifier ${label.toLowerCase()}`}>Modifier</button>
+                <button type="button" className="icon-button tob-summary-edit" onClick={() => edit(target)}
+                  aria-label={`Modifier ${label.toLowerCase()}`} title="Modifier">
+                  <PencilLine size={16} aria-hidden="true" />
+                </button>
               )}
             </div>
           ))}
@@ -430,55 +487,60 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     },
   };
   const current = content[step];
+  const eyebrow = question ? `Question ${question} sur ${questions.length}` : current.eyebrow;
+  const journeySteps: JourneyStep[] = steps.map((id, position) => ({
+    id, label: stepLabels[id], icon: stepIcons[id], reachable: !saved && !busy && position < index,
+  }));
+  const shortcutsHint = ['availability', 'courses', 'delay', 'levels'].includes(step)
+    ? <><kbd>1</kbd>–<kbd>{step === 'levels' ? 6 : step === 'delay' ? 4 : 2}</kbd> pour choisir · <kbd>Entrée</kbd> pour continuer</>
+    : undefined;
 
   return (
-    <dialog ref={dialog} className="tob" aria-labelledby={headingId} onCancel={(event) => event.preventDefault()}>
-      <div className="tob-shell">
-        <aside className="tob-aside">
-          <div className="tob-brand"><img src="/favicon.svg" alt="" /><span>LinguaCap</span></div>
-          <p className="tob-aside-title">Votre espace professeur</p>
-          <ol className="tob-aside-steps" aria-hidden="true">
-            {questions.map((id, position) => (
-              <li key={id} className={index > position + 1 ? 'is-done' : index === position + 1 ? 'is-current' : undefined}>
-                <i>{index > position + 1 ? <Check size={12} strokeWidth={3} /> : position + 1}</i>{stepLabels[id]}
-              </li>
-            ))}
-          </ol>
-        </aside>
-
-        <div className="tob-main">
-          <header className="tob-top">
-            <span className="tob-top-brand"><img src="/favicon.svg" alt="" /> Accueil professeur</span>
-            <button type="button" className="btn btn-ghost btn-sm tob-signout" onClick={signOut}><LogOut size={16} aria-hidden="true" /><span>Se déconnecter</span></button>
-          </header>
-          <div className="tob-journey">
-            <WelcomeJourney steps={steps.map((id) => stepLabels[id])} current={index} label="Avancement de votre accueil" variant="teacher" />
-          </div>
-
-          <form key={step} className={`tob-step is-${direction}`} onSubmit={next} noValidate>
-            <div className="tob-step-inner">
-              <span className="tob-step-icon" aria-hidden="true">{current.icon}</span>
-              <h1 id={headingId} ref={heading} tabIndex={-1}>{current.title}</h1>
-              <p className="tob-lead">{current.lead}</p>
-              {current.body && <div className="tob-body">{current.body}</div>}
-              {error && <p className="inline-message warning" role="alert">{error}</p>}
-            </div>
-            <footer className="tob-actions">
-              {index > 0 ? (
-                <button type="button" className="btn btn-ghost" onClick={back} disabled={busy}>
-                  <ArrowLeft size={17} aria-hidden="true" /> Retour
-                </button>
-              ) : <span />}
-              <button type="submit" className="btn btn-primary btn-lg" disabled={!valid || busy}>
-                {step === 'welcome' ? <>Commencer <ArrowRight size={18} aria-hidden="true" /></>
-                  : step === 'summary' ? <><CircleCheck size={18} aria-hidden="true" /> {busy ? 'Enregistrement…' : showCard ? 'Valider mon profil' : 'Valider et ouvrir les invitations'}</>
-                  : fromSummary && !(step === 'availability' && askBio) ? <>Revenir au récapitulatif <ArrowRight size={18} aria-hidden="true" /></>
-                  : <>Continuer <ArrowRight size={18} aria-hidden="true" /></>}
-              </button>
-            </footer>
-          </form>
+    <JourneyShell variant="teacher" label="Accueil professeur" kicker="Accueil professeur" words={teacherWords}
+      steps={journeySteps} current={saved ? 'summary' : step} celebrate={Boolean(saved)} leaving={leaving}
+      navLabel="Étapes de votre accueil" onSelectStep={(id) => { setFromSummary(false); go(id as StepId, 'back'); }}
+      actions={(
+        <button type="button" className="btn btn-ghost btn-sm tob-signout" onClick={signOut}>
+          <LogOut size={16} aria-hidden="true" /><span>Se déconnecter</span>
+        </button>
+      )}
+      canvas={(
+        <div className="tob-preview">
+          <p className="tob-preview-caption"><i aria-hidden="true" />Aperçu en direct</p>
+          <TeacherCard name={name} answers={answers} revealed={revealed} focus={saved ? null : step} />
         </div>
-      </div>
-    </dialog>
+      )}>
+      {saved ? (
+        <JourneyCelebration eyebrow={updating ? 'Préférences enregistrées' : 'Profil enregistré'}
+          title={updating ? `C’est noté, ${first} !` : `Votre espace est prêt, ${first} !`}
+          description={toInvitations ? 'Place aux invitations : ajoutez les élèves que vous accompagnez déjà.'
+            : 'Votre carte de présentation est enregistrée : les élèves pourront bientôt vous découvrir.'}
+          items={[
+            { icon: <Languages />, label: 'Langues', value: answers.languages.map(languageName).join(', ') },
+            { icon: <GraduationCap />, label: 'Niveaux', value: answers.levels.join(', ') },
+            { icon: <Users />, label: 'Élèves', value: answers.maxLearners ? `Jusqu’à ${answers.maxLearners}` : 'À préciser' },
+            { icon: <Hourglass />, label: 'Correction', value: answers.gradingDelayHours ? gradingDelayLabels[answers.gradingDelayHours] : 'À préciser' },
+          ]}
+          autoContinue={{ after: CELEBRATION_MS, label: toInvitations ? 'Ouverture des invitations…' : 'Ouverture de votre espace…', onContinue: finish }}>
+          <button type="button" className="btn btn-primary btn-lg tob-open" onClick={finish}>
+            {toInvitations ? 'Ouvrir les invitations' : 'Ouvrir mon espace'} <ArrowRight size={18} aria-hidden="true" />
+          </button>
+        </JourneyCelebration>
+      ) : (
+        <JourneyStage onSubmit={next} className={`tob-stage is-${step}`}>
+          <JourneyQuestion stepKey={step} direction={direction} eyebrow={eyebrow} icon={stepIcons[step]} title={current.title}
+            description={current.lead}>
+            {current.body}
+            {error && <p className="inline-message warning" role="alert">{error}</p>}
+          </JourneyQuestion>
+          <JourneyActions onBack={index > 0 ? back : undefined} disabled={!valid} busy={busy} hint={shortcutsHint}>
+            {step === 'welcome' ? <>Commencer <ArrowRight size={18} aria-hidden="true" /></>
+              : step === 'summary' ? <><CircleCheck size={18} aria-hidden="true" /> {busy ? 'Enregistrement…' : showCard ? 'Valider mon profil' : 'Valider et ouvrir les invitations'}</>
+              : fromSummary && !(step === 'availability' && askBio) ? <>Revenir au récapitulatif <ArrowRight size={18} aria-hidden="true" /></>
+              : <>Continuer <ArrowRight size={18} aria-hidden="true" /></>}
+          </JourneyActions>
+        </JourneyStage>
+      )}
+    </JourneyShell>
   );
 }

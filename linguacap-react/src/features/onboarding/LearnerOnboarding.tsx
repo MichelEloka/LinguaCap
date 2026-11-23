@@ -1,20 +1,24 @@
 /**
  * Accueil de l'élève en sept étapes (/espace/accueil/<étape>) : langue, test de niveau, niveau annoncé, objectif et durée,
- * jours d'étude, planning multi-niveaux, départ. L'état vient de GET /learning/onboarding ; chaque étape garde son adresse
- * pour reprendre là où l'élève s'est arrêté et revenir sur une étape terminée.
+ * jours d'étude, planning multi-niveaux, départ. Plein écran au-dessus de l'espace (cadre « Le souffle » de
+ * features/journey) : la toile du voyage et son chemin à gauche, la scène de chaque étape à droite.
+ * L'état vient de GET /learning/onboarding ; chaque étape garde son adresse pour reprendre là où l'élève s'est arrêté
+ * et revenir sur une étape terminée.
  */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState, type ReactNode } from 'react';
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
-import { RotateCcw } from 'lucide-react';
-import { Callout, SkeletonCard } from '../../design/kit';
-import { requestApi } from '../../integration/api';
+import {
+  CalendarDays, CalendarRange, ClipboardList, Gauge, Languages, LibraryBig, LogOut, MessageCircle, Rocket, RotateCcw, Target,
+} from 'lucide-react';
+import { Callout } from '../../design/kit';
+import { requestApi, supabase } from '../../integration/api';
 import { languages as staticLanguages, languageName } from '../../domain/languages';
 import {
-  onboardingStepLabels, type Language, type OnboardingState, type OnboardingStepId, type PathProposal, type PathView, type PlacementView,
+  onboardingStepLabels, type Day, type Language, type OnboardingState, type OnboardingStepId, type PathProposal, type PathView, type PlacementView,
 } from '../../integration/v2';
-import { errorText, firstName, ofLanguage } from './onboarding-kit';
-import { OnboardingStepper, type StepperItem } from './onboarding-stepper';
-import { WelcomeJourney } from './WelcomeJourney';
+import { JourneyMark, JourneyShell, JourneyStage, prefersReducedMotion, type JourneyDirection, type JourneyStep } from '../journey';
+import { errorText } from './onboarding-kit';
+import { JourneyCarnet, LeaveLink, SceneContext, SceneTransition, type CarnetData } from './onboarding-scene';
 import { StepLanguage } from './step-language';
 import { StepPlacement } from './step-placement';
 import { StepResult } from './step-result';
@@ -22,14 +26,19 @@ import { StepObjective } from './step-objective';
 import { StepDays } from './step-days';
 import { StepPlanning } from './step-planning';
 import { StepStart } from './step-start';
-import './onboarding.css';
+import './learner-onboarding.css';
 
 const order: OnboardingStepId[] = ['language', 'placement', 'result', 'objective', 'days', 'planning', 'start'];
-const journeySteps = order.map((id) => onboardingStepLabels[id]);
+const stepIcons: Record<OnboardingStepId, ReactNode> = {
+  language: <Languages size={16} />, placement: <ClipboardList size={16} />, result: <Gauge size={16} />, objective: <Target size={16} />,
+  days: <CalendarDays size={16} />, planning: <CalendarRange size={16} />, start: <Rocket size={16} />,
+};
 export const onboardingSlugs: Record<OnboardingStepId, string> = {
   language: 'langue', placement: 'test', result: 'niveau', objective: 'objectif', days: 'jours', planning: 'planning', start: 'depart',
 };
 const stepOfSlug = Object.fromEntries(Object.entries(onboardingSlugs).map(([id, slug]) => [slug, id])) as Record<string, OnboardingStepId>;
+/** Étapes figées une fois le parcours démarré : on ne revient plus sur l'objectif, les jours ou le planning. */
+const frozenOnceStarted: OnboardingStepId[] = ['objective', 'days', 'planning'];
 
 /** Langues de secours quand GET /languages ne répond pas : liste statique, allemand A1 et A2 publiés. */
 function fallbackLanguages(): Language[] {
@@ -39,6 +48,18 @@ function fallbackLanguages(): Language[] {
     levels: language.levels.map((code) => ({ code: code as Language['levels'][number]['code'], title: `${language.name} ${code}`, published: true,
       trackVersionId: null, plannedMinutes: null, moduleCount: 0 })),
   }));
+}
+
+/** Scène d'attente (chargement initial, planning en préparation) : le L respire au centre de la scène. */
+function SceneLoading({ label }: { label: string }) {
+  return (
+    <JourneyStage>
+      <div className="lo-loading" role="status">
+        <JourneyMark size={64} />
+        <span>{label}</span>
+      </div>
+    </JourneyStage>
+  );
 }
 
 export function LearnerOnboarding({ token, name, state, reload }: {
@@ -53,7 +74,12 @@ export function LearnerOnboarding({ token, name, state, reload }: {
   const [loaded, setLoaded] = useState(false);
   const [failure, setFailure] = useState('');
   const [retry, setRetry] = useState(0);
-  const previous = useRef<OnboardingStepId | null>(null);
+  const [leaving, setLeaving] = useState(false);
+  const [canvasSlot, setCanvasSlot] = useState<HTMLDivElement | null>(null);
+  const [canvasClaims, setCanvasClaims] = useState(0);
+  const claimCanvas = useCallback((delta: number) => setCanvasClaims((value) => Math.max(0, value + delta)), []);
+  /** Semaine en cours de réglage à l'étape « Mes jours » : le carnet de route la suit en direct. */
+  const [draftDays, setDraftDays] = useState<Day[] | null>(null);
 
   const attemptId = state.placement?.attemptId ?? null;
   const pathId = state.path?.id ?? null;
@@ -84,6 +110,7 @@ export function LearnerOnboarding({ token, name, state, reload }: {
     return () => { active = false; };
   }, [attemptId, pathId, token, retry]);
 
+  const ready = loaded && languages !== null;
   const placementDone = (attempt?.status ?? state.placement?.status) === 'completed';
   const draft = path?.status === 'draft' ? path : null;
   const started = path ? path.status !== 'draft' : Boolean(state.path && state.path.status !== 'draft');
@@ -102,20 +129,26 @@ export function LearnerOnboarding({ token, name, state, reload }: {
 
   const defaultStep = useMemo<OnboardingStepId>(() => {
     if (state.completed || started) return 'start';
-    const current = state.steps.find((step) => step.status === 'current')?.id;
+    const current = state.steps.find((item) => item.status === 'current')?.id;
     if (current && reachable(current)) return current;
     return [...order].reverse().find((id) => reachable(id)) ?? 'language';
   }, [state, started, reachable]);
 
   const requested = stepOfSlug[splat.split('/')[0]];
-  const step = requested && reachable(requested) ? requested : defaultStep;
-  const direction = previous.current && order.indexOf(step) < order.indexOf(previous.current) ? 'prev' : 'next';
-  useEffect(() => { previous.current = step; }, [step]);
+  // Pendant le chargement, le chemin montre déjà l'étape demandée (ou celle que l'état d'accueil désigne).
+  const guessed = requested ?? (state.completed ? 'start' : state.steps.find((item) => item.status === 'current')?.id ?? 'language');
+  const step: OnboardingStepId = ready ? (requested && reachable(requested) ? requested : defaultStep) : guessed;
+  const redirect = ready && (!splat || requested !== step);
 
-  const go = useCallback((id: OnboardingStepId) => {
-    navigate(`/espace/accueil/${onboardingSlugs[id]}`);
-    window.scrollTo({ top: 0, behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
-  }, [navigate]);
+  // Sens du déplacement, retenu au changement d'étape (et non recalculé à chaque rendu).
+  const [motion, setMotion] = useState<{ step: OnboardingStepId; direction: JourneyDirection }>({ step, direction: 'forward' });
+  if (motion.step !== step) {
+    setMotion({ step, direction: order.indexOf(step) < order.indexOf(motion.step) ? 'back' : 'forward' });
+    setDraftDays(null);
+  }
+  const direction = motion.step === step ? motion.direction : 'forward';
+
+  const go = useCallback((id: OnboardingStepId) => navigate(`/espace/accueil/${onboardingSlugs[id]}`), [navigate]);
 
   /** Relit l'état d'accueil (et donc la tentative et le parcours) puis passe à l'étape demandée. */
   const advance = useCallback(async (next: OnboardingStepId) => {
@@ -123,82 +156,108 @@ export function LearnerOnboarding({ token, name, state, reload }: {
     go(next);
   }, [reload, go]);
 
-  if (!loaded || !languages) {
-    return (
-      <div className="ob">
-        <header className="ob-head"><p className="eyebrow">Bienvenue</p><h1>Construisons votre parcours</h1></header>
-        <SkeletonCard lines={4} label="Préparation de votre accueil…" />
-      </div>
-    );
+  const leave = useCallback((to: string) => {
+    if (prefersReducedMotion()) { navigate(to); return; }
+    setLeaving(true);
+    window.setTimeout(() => navigate(to), 340);
+  }, [navigate]);
+
+  function signOut() {
+    void (supabase?.auth.signOut({ scope: 'local' }) ?? Promise.resolve()).finally(() => navigate('/', { replace: true }));
   }
 
-  if (requested === undefined && splat) return <Navigate to={`/espace/accueil/${onboardingSlugs[defaultStep]}`} replace />;
-  if (!splat) return <Navigate to={`/espace/accueil/${onboardingSlugs[defaultStep]}`} replace />;
-  if (requested !== step) return <Navigate to={`/espace/accueil/${onboardingSlugs[step]}`} replace />;
-
-  const items: StepperItem[] = order.map((id) => {
-    const status = state.steps.find((item) => item.id === id)?.status ?? 'todo';
-    const visual = id === 'start' && (state.completed || started) ? 'done'
-      : order.indexOf(id) < order.indexOf(step) && status !== 'skipped' && status !== 'blocked' ? 'done' : status;
-    return { id, status: visual, reachable: reachable(id) && !(started && ['objective', 'days', 'planning'].includes(id)) };
+  const celebrate = ready && step === 'start' && (started || state.completed);
+  const steps: JourneyStep[] = order.map((id) => {
+    const server = state.steps.find((item) => item.id === id)?.status ?? 'todo';
+    const status = id === step ? 'current'
+      : id === 'start' && (state.completed || started) ? 'done'
+      : order.indexOf(id) < order.indexOf(step) && server !== 'skipped' && server !== 'blocked' ? 'done'
+      : server === 'current' ? 'todo' : server;
+    return {
+      id, label: onboardingStepLabels[id], icon: stepIcons[id], status,
+      reachable: ready && reachable(id) && !(started && frozenOnceStarted.includes(id)),
+    };
   });
-  const language = languages.find((item) => item.id === (state.languageId ?? 'de'));
+
+  const language = languages?.find((item) => item.id === (state.languageId ?? 'de')) ?? null;
   const languageLabel = language?.name ?? languageName(state.languageId ?? 'de');
-  const focus = step === 'placement' && attempt?.status === 'in_progress';
+  const carnet: CarnetData = {
+    language: state.languageId ? { id: state.languageId, name: languageLabel } : null,
+    // Le niveau s'inscrit au carnet une fois révélé (étape « Votre niveau »), pas pendant le test.
+    level: placementDone && step !== 'placement' ? attempt?.result?.placedLevel ?? state.placement?.placedLevel ?? null : null,
+    levelLabel: placementDone && step !== 'placement' ? attempt?.result?.label ?? null : null,
+    target: path ? { level: path.targetLevel, date: path.targetDate } : null,
+    weeklyMinutes: path ? path.difficulty.requiredWeeklyMinutes : null,
+    days: (step === 'days' ? draftDays : null) ?? proposal?.availability ?? path?.availability ?? [],
+  };
+
+  const scene = !ready ? <SceneLoading label="Préparation de votre accueil…" />
+    : step === 'language' ? (
+      <StepLanguage token={token} state={state} name={name} languages={languages ?? []} placementStarted={Boolean(state.placement)}
+        onDone={() => advance('placement')} />
+    )
+    : step === 'placement' ? (
+      <StepPlacement token={token} state={state} attempt={attempt} languageName={languageLabel} onBack={() => go('language')}
+        onShowResult={() => go('result')} onAttempt={setAttempt} onStarted={async (view) => { setAttempt(view); await reload(); }}
+        onCompleted={async (view) => { setAttempt(view); await advance('result'); }} />
+    )
+    : step === 'result' && attempt ? (
+      <StepResult attempt={attempt} state={state} languageName={languageLabel} onBack={() => go('placement')} onContinue={() => go('objective')} />
+    )
+    : step === 'objective' && attempt ? (
+      <StepObjective token={token} attempt={attempt} language={language} path={draft} onBack={() => go('result')}
+        onSaved={async (view) => { setPath(view); setProposal(null); await advance('days'); }} />
+    )
+    : step === 'days' && draft ? (
+      <StepDays token={token} path={draft} onDays={setDraftDays} onProposal={(next) => { setProposal(next); go('planning'); }}
+        onBack={() => go('objective')} />
+    )
+    : step === 'planning' && draft && proposal ? (
+      <StepPlanning token={token} path={draft} proposal={proposal} onProposal={setProposal} onEditDays={() => go('days')}
+        onValidated={async (view) => { setPath(view); await advance('start'); }} />
+    )
+    : step === 'start' ? <StartLoader token={token} path={path} state={state} name={name} onPath={setPath} />
+    : <SceneLoading label={step === 'planning' ? 'Chargement de votre planning…' : 'Chargement…'} />;
 
   return (
-    <div className={`ob${focus ? ' is-focus' : ''}`}>
-      <header className="ob-head lc-enter">
-        <div className="ob-head-text">
-          <p className="eyebrow">{started ? 'Votre parcours est prêt' : `Bienvenue, ${firstName(name)}`}</p>
-          <h1>{started ? 'C’est parti !' : `Construisons votre parcours${state.languageId ? ` ${ofLanguage(languageLabel)}` : ''}`}</h1>
-          {!focus && !started && <p className="ob-head-desc">Choisissez votre objectif et vos jours d’étude. Vous pouvez reprendre la préparation là où vous l’avez laissée.</p>}
-        </div>
-        <div className="ob-journey">
-          <WelcomeJourney steps={journeySteps} current={order.indexOf(step)} variant="learner" />
-        </div>
-        <OnboardingStepper items={items} current={step} onSelect={go} />
-      </header>
-
-      {failure && (
-        <div role="alert">
-          <Callout tone="warning" title="Chargement incomplet">
-            <p>{failure}</p>
-            <button type="button" className="btn btn-outline btn-sm" onClick={() => setRetry((value) => value + 1)}><RotateCcw size={15} aria-hidden="true" /> Réessayer</button>
-          </Callout>
-        </div>
-      )}
-
-      <div className="ob-stage">
-        <div key={step} className={`ob-pane is-${direction}`}>
-          {step === 'language' && (
-            <StepLanguage token={token} state={state} languages={languages} placementStarted={Boolean(state.placement)}
-              onDone={() => advance('placement')} />
-          )}
-          {step === 'placement' && (
-            <StepPlacement token={token} state={state} attempt={attempt} languageName={languageLabel}
-              onAttempt={setAttempt} onStarted={async (view) => { setAttempt(view); await reload(); }}
-              onCompleted={async (view) => { setAttempt(view); await advance('result'); }} />
-          )}
-          {step === 'result' && attempt && (
-            <StepResult attempt={attempt} state={state} languageName={languageLabel} onContinue={() => go('objective')} />
-          )}
-          {step === 'objective' && attempt && (
-            <StepObjective token={token} attempt={attempt} language={language ?? null} path={draft}
-              onSaved={async (view) => { setPath(view); setProposal(null); await advance('days'); }} />
-          )}
-          {step === 'days' && draft && (
-            <StepDays token={token} path={draft} onProposal={(next) => { setProposal(next); go('planning'); }} onBack={() => go('objective')} />
-          )}
-          {step === 'planning' && draft && proposal && (
-            <StepPlanning token={token} path={draft} proposal={proposal} onProposal={setProposal} onEditDays={() => go('days')}
-              onValidated={async (view) => { setPath(view); await advance('start'); }} />
-          )}
-          {step === 'planning' && draft && !proposal && <SkeletonCard lines={5} label="Chargement de votre planning…" />}
-          {step === 'start' && <StartLoader token={token} path={path} state={state} name={name} onPath={setPath} />}
-        </div>
-      </div>
-    </div>
+    <SceneContext.Provider value={{ direction, leave, canvasSlot, claimCanvas }}>
+      {/* `welcome-journey` (avec `is-learner` posé par le cadre) : ancre des tests e2e écrits pour l'ancien bandeau. */}
+      <JourneyShell variant="learner" label="Accueil de l’élève" kicker="Votre accueil" className="lo-shell welcome-journey"
+        steps={steps} current={step} celebrate={celebrate} onSelectStep={(id) => go(id as OnboardingStepId)} leaving={leaving}
+        actions={(
+          <div className="lo-head">
+            {!celebrate && (
+              <LeaveLink to="/espace/bibliotheque" className="btn btn-ghost btn-sm lo-head-link" title="Explorer la bibliothèque en attendant">
+                <LibraryBig size={17} aria-hidden="true" /><span className="lo-head-label">Explorer la bibliothèque en attendant</span>
+              </LeaveLink>
+            )}
+            <LeaveLink to="/espace/messages" className="icon-button lo-head-icon" aria-label="Mes messages" title="Mes messages">
+              <MessageCircle size={18} aria-hidden="true" />
+            </LeaveLink>
+            <button type="button" className="icon-button lo-head-icon" onClick={signOut} aria-label="Se déconnecter" title="Se déconnecter">
+              <LogOut size={18} aria-hidden="true" />
+            </button>
+          </div>
+        )}
+        canvas={(
+          <div className={`lo-canvas${step === 'result' ? ' is-reveal' : ''}`} ref={setCanvasSlot}>
+            {ready && canvasClaims === 0 && <JourneyCarnet data={carnet} />}
+          </div>
+        )}>
+        {redirect && <Navigate to={`/espace/accueil/${onboardingSlugs[step]}`} replace />}
+        {failure && (
+          <div className="lo-failure" role="alert">
+            <Callout tone="warning" title="Chargement incomplet">
+              <p>{failure}</p>
+              <button type="button" className="btn btn-outline btn-sm" onClick={() => setRetry((value) => value + 1)}>
+                <RotateCcw size={15} aria-hidden="true" /> Réessayer
+              </button>
+            </Callout>
+          </div>
+        )}
+        <SceneTransition sceneKey={ready ? step : 'loading'} direction={direction}>{scene}</SceneTransition>
+      </JourneyShell>
+    </SceneContext.Provider>
   );
 }
 
@@ -216,7 +275,13 @@ function StartLoader({ token, path, state, name, onPath }: {
       .catch((error: unknown) => { if (active) setFailure(errorText(error)); });
     return () => { active = false; };
   }, [needed, token, onPath]);
-  if (failure) return <Callout tone="warning" title="Parcours indisponible">{failure}</Callout>;
-  if (!path || needed) return <SkeletonCard lines={4} label="Chargement de votre parcours…" />;
+  if (failure) {
+    return (
+      <JourneyStage>
+        <div className="lo-failure is-inline" role="alert"><Callout tone="warning" title="Parcours indisponible">{failure}</Callout></div>
+      </JourneyStage>
+    );
+  }
+  if (!path || needed) return <SceneLoading label="Chargement de votre parcours…" />;
   return <StepStart path={path} state={state} name={name} />;
 }
