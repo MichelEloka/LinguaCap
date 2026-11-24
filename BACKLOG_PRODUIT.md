@@ -27,22 +27,24 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 
 ## Vue d’ensemble (éléments à traiter)
 
+✅ livré : en production. ✅ fait, à déployer : terminé et vérifié sur `develop`, en attente du déploiement.
+
 | ID | Élément | Priorité | Complexité | Dépend de |
 |---|---|---|---|---|
-| EVO-033 | Accueil du professeur repensé : questions qui s’adaptent | P0 · livré | M | — |
-| EVO-034 | Animation signature : le « L » du logo parcourt le chemin des questions | P0 · livré | M | EVO-033, EVO-035 |
-| EVO-035 | Accueil et espace élève : interface du même niveau d’exigence | P0 · livré | M | — |
-| EVO-036 | Drapeaux dans le choix des langues | P0 · livré | S | — |
-| EVO-037 | Réponses d’accueil des professeurs visibles par l’administration et dans les statistiques | P0 · livré | S | EVO-033 |
-| EVO-038 | Débutant déclaré : parcours adapté d’office, sans diagnostic | P1 · prêt, à déployer | S | — |
-| EVO-039 | Parcours d’un élève invisible côté professeur | P1 · prêt, à déployer | M | — |
-| EVO-040 | Voix de synthèse A1 ralenties | P1 · prêt, à déployer | M | — |
-| EVO-041 | Organisation des cours rendue cohérente | P1 · prêt, à déployer | L | — |
-| EVO-042 | Fiabiliser la mise en pause dans le suivi | P1 · prêt, à déployer | S | — |
-| EVO-043 | Validation de la prononciation et de la répétition à voix haute | P2 · prêt, à déployer | XL | — |
-| EVO-044 | Corrigé détaillé après un exercice (juste, faux, pourquoi) | P2 · prêt, à déployer | L | — |
+| EVO-033 | Accueil du professeur repensé : questions qui s’adaptent | P0 · ✅ livré | M | — |
+| EVO-034 | Animation signature : le « L » du logo parcourt le chemin des questions | P0 · ✅ livré | M | EVO-033, EVO-035 |
+| EVO-035 | Accueil et espace élève : interface du même niveau d’exigence | P0 · ✅ livré | M | — |
+| EVO-036 | Drapeaux dans le choix des langues | P0 · ✅ livré | S | — |
+| EVO-037 | Réponses d’accueil des professeurs visibles par l’administration et dans les statistiques | P0 · ✅ livré | S | EVO-033 |
+| EVO-038 | Débutant déclaré : parcours adapté d’office, sans diagnostic | P1 · ✅ fait, à déployer | S | — |
+| EVO-039 | Parcours d’un élève invisible côté professeur | P1 · ✅ fait, à déployer | M | — |
+| EVO-040 | Voix de synthèse A1 ralenties | P1 · ✅ fait, à déployer | M | — |
+| EVO-041 | Organisation des cours rendue cohérente | P1 · ✅ fait, à déployer | L | — |
+| EVO-042 | Fiabiliser la mise en pause dans le suivi | P1 · ✅ fait, à déployer | S | — |
+| EVO-043 | Validation de la prononciation et de la répétition à voix haute | P2 · ✅ fait, à déployer | XL | — |
+| EVO-044 | Corrigé détaillé après un exercice (juste, faux, pourquoi) | P2 · ✅ fait, à déployer | L | — |
 | EVO-045 | Espace exercices par niveau et par type | P2 | M | — |
-| EVO-046 | Alphabet et phonétique pour les débutants totaux | P2 | M | EVO-043 |
+| EVO-046 | Alphabet et phonétique pour les débutants totaux | P2 · ✅ fait, à déployer | M | EVO-043 |
 | EVO-047 | Cartes de révision des mots déjà appris | P2 | L | — |
 | EVO-011 | Centre de notifications | P2 | M | — |
 | EVO-012 | Messagerie dans les deux sens | P2 | M | — |
@@ -54,11 +56,11 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-050 | Comptes gratuits avec avis obligatoire, avis facultatif pour les autres | P2 | M | — |
 | EVO-016 | Inscription publique validée par l’administration | P2 | M | EVO-036, EVO-033 |
 | EVO-017 | Examens de passage de niveau exigeants, en plusieurs variantes | P2 | XL | — |
-| EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · prêt, à déployer | XL | EVO-041 |
+| EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · ✅ fait, à déployer | XL | EVO-041 |
 | EVO-052 | Le professeur construit ses cours | P3 | XL | EVO-033, EVO-014 |
 | EVO-053 | Ressources classées par niveau | P3 | S | — |
 | EVO-054 | Clés API : automatisation de l’administration et services tiers | P3 | L | — |
-| EVO-055 | Ciné-club : s’entraîner avec un film (Nicos Weg) et carnet de mots | P2 · prêt, à déployer | L | EVO-051 |
+| EVO-055 | Ciné-club : s’entraîner avec un film (Nicos Weg) et carnet de mots | P2 · ✅ fait, à déployer | L | EVO-051 |
 | EVO-018 | Séries d’examens blancs d’entraînement | P3 | L | EVO-017 |
 | EVO-019 | Équivalences avec les certificats connus | P3 | S | — |
 | EVO-020 | Préparation aux certificats au format réel | P3 | XL | EVO-017, EVO-018 |
@@ -77,7 +79,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 
 ## P0 · Interface (prioritaire sur tout) — livré le 23 novembre 2026
 
-- **EVO-033 Accueil du professeur repensé.** Les questions suivantes dépendent des réponses précédentes. L’ordre :
+- ✅ **EVO-033 Accueil du professeur repensé.** Les questions suivantes dépendent des réponses précédentes. L’ordre :
   1. Langues enseignées.
   2. **« Êtes-vous à l’écoute de nouveaux élèves sur LinguaCap, ou avez-vous déjà les vôtres ? »** Cette question vient avant la carte de présentation et la demande de se présenter.
      - S’il a déjà ses élèves, on ne lui parle pas de l’annuaire et on va droit aux invitations.
@@ -86,53 +88,53 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
   4. Niveaux, délai de correction, puis présentation et carte.
 
   Le style des questions est à rehausser : typographie, rythme, transitions, illustrations.
-- **EVO-034 Animation signature.** Le « L » du logo parcourt le chemin des questions, pour le professeur comme pour l’élève.
+- ✅ **EVO-034 Animation signature.** Le « L » du logo parcourt le chemin des questions, pour le professeur comme pour l’élève.
   - Il s’étire comme un souffle de vent qui progresse à chaque réponse.
   - Le premier lancement doit éblouir l’utilisateur.
   - Le réglage « réduire les animations » est respecté.
-- **EVO-035 Accueil et espace élève.** Même niveau d’exigence que l’accueil du professeur pour les étapes, le test de niveau, l’annonce du niveau, l’objectif, les jours, l’écran « Aujourd’hui » et la bibliothèque.
-- **EVO-036 Drapeaux dans le choix des langues** à la place des lettres (DE, EN…). Choisir un drapeau représentatif pour les langues parlées dans plusieurs pays (arabe, chinois, portugais, espagnol), avec le nom de la langue toujours visible.
-- **EVO-037 Réponses d’accueil des professeurs.** L’administration consulte les réponses de chaque professeur dans sa fiche : langues, niveaux, disponibilité pour de nouveaux élèves, choix de construction des cours, nombre d’élèves envisagé, délai de correction. Ces réponses alimentent les indicateurs (répartitions, tendances).
+- ✅ **EVO-035 Accueil et espace élève.** Même niveau d’exigence que l’accueil du professeur pour les étapes, le test de niveau, l’annonce du niveau, l’objectif, les jours, l’écran « Aujourd’hui » et la bibliothèque.
+- ✅ **EVO-036 Drapeaux dans le choix des langues** à la place des lettres (DE, EN…). Choisir un drapeau représentatif pour les langues parlées dans plusieurs pays (arabe, chinois, portugais, espagnol), avec le nom de la langue toujours visible.
+- ✅ **EVO-037 Réponses d’accueil des professeurs.** L’administration consulte les réponses de chaque professeur dans sa fiche : langues, niveaux, disponibilité pour de nouveaux élèves, choix de construction des cours, nombre d’élèves envisagé, délai de correction. Ces réponses alimentent les indicateurs (répartitions, tendances).
 
 ### État du P0 sur `develop`
 
 | ID | Réalisation |
 |---|---|
-| EVO-033 | Le professeur choisit ses langues, sa disponibilité et son mode de construction des cours avant les niveaux, le nombre d’élèves envisagé et le délai de correction. La présentation et la carte concernent les professeurs disponibles. Les autres arrivent aux invitations. Les anciens profils complètent leurs réponses manquantes en conservant leurs réglages. |
-| EVO-034 | Le « L » animé suit la progression des deux accueils. La progression reste lisible avec l’option de réduction des animations du système. |
-| EVO-035 | L’accueil élève, le test, l’annonce du niveau, l’objectif, les jours d’étude, Aujourd’hui et la bibliothèque partagent la même hiérarchie visuelle et s’adaptent au mobile. |
-| EVO-036 | Les noms restent visibles à côté de drapeaux graphiques intégrés à l’application. Les repères retenus sont l’Arabie saoudite pour l’arabe, la Chine pour le mandarin, le Portugal pour le portugais et l’Espagne pour l’espagnol. |
-| EVO-037 | Les six familles de réponses sont visibles dans la fiche de chaque professeur. Les indicateurs présentent les répartitions actuelles et la tendance des réponses sur la période choisie. Une réponse manquante est comptée séparément. Plusieurs enregistrements du même professeur le même jour comptent pour une seule réponse. |
+| EVO-033 | Le professeur choisit ses langues, sa disponibilité et son mode de construction des cours avant les niveaux, le nombre d’élèves envisagé et le délai de correction. La présentation et la carte concernent les professeurs disponibles. Les autres arrivent aux invitations. Les anciens profils complètent leurs réponses manquantes en conservant leurs réglages. |  · ✅ livré 
+| EVO-034 | Le « L » animé suit la progression des deux accueils. La progression reste lisible avec l’option de réduction des animations du système. |  · ✅ livré 
+| EVO-035 | L’accueil élève, le test, l’annonce du niveau, l’objectif, les jours d’étude, Aujourd’hui et la bibliothèque partagent la même hiérarchie visuelle et s’adaptent au mobile. |  · ✅ livré 
+| EVO-036 | Les noms restent visibles à côté de drapeaux graphiques intégrés à l’application. Les repères retenus sont l’Arabie saoudite pour l’arabe, la Chine pour le mandarin, le Portugal pour le portugais et l’Espagne pour l’espagnol. |  · ✅ livré 
+| EVO-037 | Les six familles de réponses sont visibles dans la fiche de chaque professeur. Les indicateurs présentent les répartitions actuelles et la tendance des réponses sur la période choisie. Une réponse manquante est comptée séparément. Plusieurs enregistrements du même professeur le même jour comptent pour une seule réponse. |  · ✅ livré 
 
 La création de la fiche prépare l’annuaire prévu en EVO-023. La construction et la modification des cours par le professeur restent dans le périmètre d’EVO-052.
 
 ## P1 · Correctifs
 
-- **EVO-038 Débutant déclaré.** Un élève qui se déclare totalement débutant a un parcours déjà adapté : aucun diagnostic ni question supplémentaire. Le bandeau « Diagnostic initial à passer » ne doit plus apparaître pour lui.
-- **EVO-039 Parcours invisible côté professeur.** Constat : une élève suivie s’est déclarée débutante sans passer le test. Son parcours a été généré, mais son professeur la voit « sans parcours ».
+- ✅ **EVO-038 Débutant déclaré.** Un élève qui se déclare totalement débutant a un parcours déjà adapté : aucun diagnostic ni question supplémentaire. Le bandeau « Diagnostic initial à passer » ne doit plus apparaître pour lui.
+- ✅ **EVO-039 Parcours invisible côté professeur.** Constat : une élève suivie s’est déclarée débutante sans passer le test. Son parcours a été généré, mais son professeur la voit « sans parcours ».
   - Le professeur doit voir l’avancement de l’accueil de l’élève (langue, test ou débutant déclaré, objectif, jours, planning).
   - Il doit aussi voir le parcours dès sa création, même en préparation.
   - La fiche doit se mettre à jour sans attendre la synchronisation périodique du suivi.
-- **EVO-040 Voix A1 ralenties.** Régénérer les sons de synthèse A1 avec une lecture plus lente, puis les contrôler par transcription et les republier.
-- **EVO-041 Organisation des cours.** Revoir l’enchaînement des modules et des activités A1 et A2 pour qu’il soit cohérent :
+- ✅ **EVO-040 Voix A1 ralenties.** Régénérer les sons de synthèse A1 avec une lecture plus lente, puis les contrôler par transcription et les republier.
+- ✅ **EVO-041 Organisation des cours.** Revoir l’enchaînement des modules et des activités A1 et A2 pour qu’il soit cohérent :
   - progression des notions ;
   - leçon, puis exercice, puis révision ;
   - titres et consignes homogènes ;
   - durées réalistes.
-- **EVO-042 Mise en pause dans le suivi.** Lors d’une recette, un élève mis en pause est resté « actif » dans le suivi. L’aléa ne s’est pas reproduit au passage suivant. Trouver la cause (ordre des événements) et la corriger.
+- ✅ **EVO-042 Mise en pause dans le suivi.** Lors d’une recette, un élève mis en pause est resté « actif » dans le suivi. L’aléa ne s’est pas reproduit au passage suivant. Trouver la cause (ordre des événements) et la corriger.
 
 ## P2 · Fonctionnalités prioritaires
 
 **Pédagogie**
 
-- **EVO-043 Validation de la prononciation.** Pendant les cours, l’élève doit répéter et prononcer à voix haute, et le système valide : on ne se contente plus de sa déclaration.
+- ✅ **EVO-043 Validation de la prononciation.** Pendant les cours, l’élève doit répéter et prononcer à voix haute, et le système valide : on ne se contente plus de sa déclaration.
   - Micro, reconnaissance vocale et score de prononciation.
   - **Bloquant avec essais** : l’activité ne se valide qu’avec une répétition reconnue. Après 3 essais ratés, l’élève peut continuer, mais son professeur est prévenu et l’exercice revient plus tard.
-- **EVO-044 Corrigé détaillé.** Après un exercice, l’application montre pour chaque question ce qui est juste et ce qui est faux, la bonne réponse et **pourquoi**.
+- ✅ **EVO-044 Corrigé détaillé.** Après un exercice, l’application montre pour chaque question ce qui est juste et ce qui est faux, la bonne réponse et **pourquoi**.
   - Les explications des quelque 565 questions sont générées, relues par l’équipe avant publication, puis modifiables dans l’éditeur du catalogue.
   - Pour la bibliothèque, la règle « aucun corrigé révélé » de l’entraînement est revue.
 - **EVO-045 Espace exercices.** Un espace dédié, indépendant des cours, organisé par niveau et par type : vocabulaire, grammaire, compréhension écrite, compréhension orale, prononciation. Il prolonge la bibliothèque.
-- **EVO-046 Alphabet et phonétique.** Pour un débutant total, le parcours commence par l’alphabet, les sons propres à la langue et la lecture à voix haute, avec répétition validée (EVO-043).
+- ✅ **EVO-046 Alphabet et phonétique.** Pour un débutant total, le parcours commence par l’alphabet, les sons propres à la langue et la lecture à voix haute, avec répétition validée (EVO-043). *Fait avec la V4 : l’A1 commence par « Das Alphabet », « Voyelles » et « Consonnes et rythme », chacun avec six répétitions validées.*
 - **EVO-047 Cartes de révision.** Jeux de cartes sur les mots déjà appris (genre, sens, prononciation), insérés au fil du parcours. La répétition espacée sert à faire retenir.
 
 **Échanges**
@@ -170,7 +172,7 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 
 ## P3 · Avant l’ouverture publique
 
-- **EVO-051 Cours B1 et B2.** Parcours B1 puis B2 complets, au même niveau de qualité que l’A1 et l’A2 : modules, activités,
+- ✅ **EVO-051 Cours B1 et B2.** Parcours B1 puis B2 complets, au même niveau de qualité que l’A1 et l’A2 : modules, activités,
   médias, diagnostic, bilan et examen. Demande du responsable produit : « les cours doivent être adaptés au niveau, même la
   manière de faire cours » ; « on n’est plus sur du A1 et A2 seulement ». **En cours : phase 1 (B1)**, phase 2 (B2) ensuite,
   sur le même socle ; aucun déploiement à ce stade. Choix retenus (24 novembre 2026) :
@@ -227,19 +229,19 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 
 ## Ordre proposé
 
-1. **« Accueil sublimé »** (P0) : EVO-033, 034, 035, 036, 037.
-2. **« Correctifs »** (P1) : EVO-038, 039, 040, 042, puis 041.
-3. **« Pédagogie »** : EVO-044, 045, 046, 043, 047.
+1. ✅ **« Accueil sublimé »** (P0) : EVO-033, 034, 035, 036, 037 — livré.
+2. ✅ **« Correctifs »** (P1) : EVO-038, 039, 040, 042, puis 041 — fait, à déployer.
+3. **« Pédagogie »** : EVO-044 ✅, 045, 046 ✅, 043 ✅, 047 ; et EVO-055 ✅ (Ciné-club).
 4. **« Échanges »** : EVO-011, 012, 013, 015, 014.
 5. **« Administration et confiance »** : EVO-048, 049, 050, 016.
 6. **« Examens »** : EVO-017, 019, 018.
-7. **« Ouverture »** : EVO-031, 051, 052, 053, 054, 024, 023, 022.
+7. **« Ouverture »** : EVO-031, 051 ✅, 052, 053, 054, 024, 023, 022.
 8. **« Motivation »** : EVO-025, 026, 027.
 9. **« Écoles et défis »** : EVO-029, 030, 028, 020, 021.
 
-## Prêt, en attente de déploiement
+## ✅ Fait, en attente de déploiement
 
-**Contenus V4 et pédagogie** (EVO-040, 041, 043, 044), sur `develop` depuis le 23 novembre 2026 :
+**Contenus V4 et pédagogie** (EVO-040, 041, 043, 044, 046), sur `develop` depuis le 23 novembre 2026 :
 - V4 officielle A1 et A2 : 43 modules, 358 activités, 590 questions typées, 43 missions, 862 mots de lexique,
   134 illustrations, voix A1 ralenties, ordre des modules revu.
 - Exercices variés (compléter, remettre en ordre, associer, dictée, répétition orale validée avec trois essais puis « à revoir »),
