@@ -23,7 +23,7 @@ import {
 } from './staff-kit';
 import { LevelRoute, formatDay, learnersAwaitingDecision, startLabel, usePendingContracts } from './staff-contracts';
 import { flaggedOf, gradeTitle, pendingOf, useLessonTitles } from './learner-common';
-import { MissionBadge, MissionDetailDrawer, useMissions } from './study-mission';
+import { MissionBadge, MissionCriteriaAverages, MissionDetailDrawer, MissionScoreTag, useMissions, useScoredMissions } from './study-mission';
 import { ExerciseReviewDrawer } from './study-review';
 import './reviews.css';
 
@@ -292,9 +292,13 @@ function AttentionCard({ sheet, missions, titles, onReview }: {
 
 const missionDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
 
-/** Missions de l'élève, des plus récentes aux plus anciennes ; chacune s'ouvre dans un panneau latéral. */
-function MissionsCard({ missions, error, onOpen }: { missions: MissionSummary[] | null; error: string; onOpen: (id: string) => void }) {
+/**
+ * Missions de l'élève, des plus récentes aux plus anciennes ; chacune s'ouvre dans un panneau latéral. Niveaux B : score
+ * de chaque mission notée sur grille et moyenne par critère sur le niveau.
+ */
+function MissionsCard({ missions, error, onOpen, token }: { missions: MissionSummary[] | null; error: string; onOpen: (id: string) => void; token: string }) {
   const sent = missions?.filter((mission) => mission.status !== 'draft').length ?? 0;
+  const scored = useScoredMissions(token, missions);
   return (
     <Card title="Missions" icon={<Target size={18} />} flush className="rv-missions"
       description={missions?.length ? plural(sent, 'mission envoyée', 'missions envoyées') : undefined}>
@@ -303,6 +307,8 @@ function MissionsCard({ missions, error, onOpen }: { missions: MissionSummary[] 
           <EmptyState icon={<Target size={24} />} title="Aucune mission pour le moment"
             description={error ? 'Les missions ne sont pas disponibles pour le moment.' : 'Les missions réalisées par l’élève apparaîtront ici, avec votre retour.'} />
         ) : (
+          <>
+          <MissionCriteriaAverages views={scored} />
           <ul className="kit-list rv-mission-list lc-stagger">
             {missions.map((mission) => (
               <li key={mission.id}>
@@ -311,11 +317,12 @@ function MissionsCard({ missions, error, onOpen }: { missions: MissionSummary[] 
                   <span className="kit-list-main"><strong>{mission.title}</strong>
                     <small>{mission.levelCode} · {mission.submittedAt ? `envoyée le ${missionDate.format(new Date(mission.submittedAt))}` : 'brouillon en cours'}
                       {mission.sessionId ? ' · séance' : ' · bibliothèque'}</small></span>
-                  <span className="kit-list-end"><MissionBadge mission={mission} viewer="staff" /><ChevronRight size={17} aria-hidden="true" /></span>
+                  <span className="kit-list-end"><MissionScoreTag mission={mission} /><MissionBadge mission={mission} viewer="staff" /><ChevronRight size={17} aria-hidden="true" /></span>
                 </button>
               </li>
             ))}
           </ul>
+          </>
         )}
     </Card>
   );
@@ -439,7 +446,7 @@ function ResultsTab({ sheet, learnerId, token }: { sheet: Sheet; learnerId: stri
         </div>
       )}
 
-      <MissionsCard missions={missions} error={missionsError} onOpen={setMissionOpen} />
+      <MissionsCard missions={missions} error={missionsError} onOpen={setMissionOpen} token={token} />
       {drawers}
     </div>
   );

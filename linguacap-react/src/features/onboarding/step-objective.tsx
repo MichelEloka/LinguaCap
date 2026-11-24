@@ -1,5 +1,6 @@
 /**
- * Étape 4 : objectif et durée. Niveau visé (les cibles non autorisées sont grisées), durée prédéfinie ou dates, et jauge
+ * Étape 4 : objectif et durée. Niveau visé parmi les niveaux publiés de la langue au-dessus du départ (GET /languages, ordre
+ * du catalogue ; les cibles que le serveur n'autorise pas depuis ce départ sont grisées), durée prédéfinie ou dates, et jauge
  * de difficulté en six bandes calculée par POST /learning/paths/estimate : minutes par semaine et par jour. Un rythme
  * « Irréaliste » bloque la suite. Enregistre par POST /learning/paths, ou PUT …/objective si un brouillon existe.
  */
@@ -7,10 +8,11 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { ArrowRight, CalendarRange, ChevronDown, Clock, Flag, Gauge, LoaderCircle, Target, TriangleAlert } from 'lucide-react';
 import { Callout, Segmented } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { catalogueOrder, levelsAbove, nextPublishedLevel, publishedLevels } from '../../integration/languages';
 import { notBefore } from '../../integration/pilot-day';
 import {
-  difficultyLabels, formatMinutes, levelCodes, levelRank, type Estimate, type Language, type LevelCode, type PathView, type PlacementView,
-  type StartLevel,
+  difficultyLabels, formatMinutes, levelCodes, levelRank, type Estimate, type Language, type LanguageLevel, type LevelCode, type PathView,
+  type PlacementView, type StartLevel,
 } from '../../integration/v2';
 import { ChoiceGrid, JourneyActions, JourneyQuestion, JourneyStage, type ChoiceOption } from '../journey';
 import {
@@ -30,9 +32,8 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
   const levels = language?.levels ?? [];
   const startOptions = (['A0', ...levelCodes] as StartLevel[]).filter((code) => levelRank(code) <= levelRank(placed));
   const [startLevel, setStartLevel] = useState<StartLevel>(path?.startLevel ?? placed);
-  const firstTarget = (from: StartLevel) => (levels.find((level) => level.published && levelRank(level.code) > levelRank(from))?.code
-    ?? levelCodes.find((code) => levelRank(code) > levelRank(from)) ?? 'A1') as LevelCode;
-  const [targetLevel, setTargetLevel] = useState<LevelCode>(path?.targetLevel ?? firstTarget(path?.startLevel ?? placed));
+  // Première cible : le premier niveau publié au-dessus du départ (aucune cible tant que le catalogue n'en publie pas).
+  const [targetLevel, setTargetLevel] = useState<LevelCode | null>(path?.targetLevel ?? nextPublishedLevel(language, path?.startLevel ?? placed)?.code ?? null);
   // Un brouillon repris des jours plus tard ne peut pas commencer dans le passé : son début est ramené à aujourd'hui.
   const [startDate, setStartDate] = useState(() => notBefore(path?.startDate ?? isoDay(), isoDay()));
   const [targetDate, setTargetDate] = useState(() => path?.targetDate ?? addMonthsIso(isoDay(), 3));
@@ -44,6 +45,7 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
   const sequence = useRef(0);
 
   useEffect(() => {
+    if (!targetLevel) return;
     const ticket = ++sequence.current;
     setEstimating(true);
     const timer = window.setTimeout(() => {
@@ -74,24 +76,32 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
   const fastest = estimate?.bands.find((band) => band.code === 'very_intensive')?.earliestTargetDate ?? null;
   const tooLate = Boolean(estimate && targetDate > estimate.maxTargetDate);
   const tooSoon = Boolean(estimate && targetDate < estimate.minTargetDate);
-  const ready = Boolean(estimate) && !estimating && !unrealistic && !tooLate && !tooSoon && !estimateError;
-  const targets = useMemo(() => levelCodes.filter((code) => levelRank(code) > levelRank(startLevel))
-    .map((code) => ({ code, level: levels.find((item) => item.code === code) })), [levels, startLevel]);
+  const ready = Boolean(estimate) && Boolean(targetLevel) && !estimating && !unrealistic && !tooLate && !tooSoon && !estimateError;
+  // Cibles : niveaux publiés au-dessus du départ, plus la cible d'un brouillon repris si elle n'est plus publiée (grisée).
+  const targets = useMemo(() => {
+    const kept = levelsAbove(levels, startLevel).filter((level) => level.published || level.code === targetLevel);
+    const known = kept.some((level) => level.code === targetLevel);
+    const orphan: LanguageLevel[] = targetLevel && !known && levelRank(targetLevel) > levelRank(startLevel)
+      ? [{ code: targetLevel, title: targetLevel, published: false, trackVersionId: null, plannedMinutes: null, moduleCount: 0, position: null, prerequisiteCode: null }]
+      : [];
+    return catalogueOrder([...kept, ...orphan]).map((level) => ({ code: level.code, level }));
+  }, [levels, startLevel, targetLevel]);
+  const openLevels = publishedLevels(language);
 
   const targetOptions: ChoiceOption<LevelCode>[] = targets.map(({ code, level }) => {
-    const published = level?.published ?? false;
+    const published = level.published;
     const allowed = estimate ? estimate.allowedTargets.includes(code) : published;
     const span = estimate?.levels.filter((item) => levelRank(item.levelCode) <= levelRank(code)).reduce((sum, item) => sum + item.plannedMinutes, 0);
     return {
       value: code, icon: <LevelMark code={code} size="md" />, title: levelName(code), disabled: !allowed,
       tag: !published ? 'Bientôt' : undefined, tagTone: 'neutral',
       description: !published ? 'Parcours en préparation' : !allowed ? 'Indisponible depuis ce départ'
-        : targetLevel === code && span ? `${formatMinutes(span)} de programme` : levelCount(startLevel, code),
+        : targetLevel === code && span ? `${formatMinutes(span)} de programme` : levelCount(openLevels, startLevel, code),
     };
   });
 
   async function save() {
-    if (!ready || busy) return;
+    if (!ready || busy || !targetLevel) return;
     setBusy(true);
     setError('');
     // Page restée ouverte après minuit : le début d'hier devient aujourd'hui, la durée choisie est conservée.
@@ -123,7 +133,9 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
         )}
 
         <div className="lo-field">
-          <ChoiceGrid legend="Niveau visé" options={targetOptions} value={targetLevel} onChange={setTargetLevel} columns={3} layout="tile" />
+          {targetOptions.length > 0
+            ? <ChoiceGrid legend="Niveau visé" options={targetOptions} value={targetLevel} onChange={setTargetLevel} columns={3} layout="tile" />
+            : <Callout tone="info" title="Aucun parcours publié au-dessus de ce point de départ">Choisissez un point de départ plus bas, ou revenez dès la publication du niveau suivant.</Callout>}
         </div>
 
         <fieldset className="lo-field">
@@ -197,6 +209,8 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
             </>
           ) : estimateError ? (
             <div role="alert"><Callout tone="warning" title="Estimation indisponible">{estimateError}</Callout></div>
+          ) : !targetLevel ? (
+            <p className="lo-pending"><Target size={18} aria-hidden="true" /> Le rythme se calcule dès qu’un niveau visé est choisi.</p>
           ) : (
             <p className="lo-pending"><LoaderCircle size={18} className="ob-spin" aria-hidden="true" /> Calcul de votre rythme…</p>
           )}
@@ -213,7 +227,9 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
   );
 }
 
-function levelCount(start: StartLevel, target: LevelCode) {
-  const count = levelRank(target) - levelRank(start);
+/** Nombre de niveaux publiés du départ à la cible (rang de l'échelle si le catalogue n'est pas connu). */
+function levelCount(published: readonly LanguageLevel[], start: StartLevel, target: LevelCode) {
+  const between = levelsAbove(published, start).filter((level) => levelRank(level.code) <= levelRank(target)).length;
+  const count = between || levelRank(target) - levelRank(start);
   return count > 1 ? `${count} niveaux à parcourir` : 'Le niveau suivant';
 }

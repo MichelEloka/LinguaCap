@@ -301,10 +301,15 @@ public class CourseResource {
     }
 
     /**
-     * Définition d'une mission : situation et consigne (description de la leçon), partie orale et/ou écrite et liste
-     * de vérification à cocher avant l'envoi.
+     * Définition d'une mission : situation et consigne (description de la leçon), partie orale et/ou écrite, liste
+     * de vérification à cocher avant l'envoi et grille de critères du correcteur (criteria, [] sans grille), montrée
+     * à l'élève avant la remise.
      */
-    public record MissionDefinition(String description, MissionOral oral, MissionWritten written, List<String> checklist) {}
+    public record MissionDefinition(String description, MissionOral oral, MissionWritten written, List<String> checklist,
+                                    List<MissionCriterion> criteria) {}
+
+    /** Critère de la grille d'une mission, noté de 0 à maxPoints par le correcteur. */
+    public record MissionCriterion(String id, String label, int maxPoints) {}
 
     /** Enregistrement de maxSeconds secondes au plus (arrêt automatique côté navigateur). */
     public record MissionOral(String prompt, int maxSeconds) {}

@@ -2,6 +2,7 @@
  * Corrigé d'un exercice après la remise : pour chaque question, juste, faux, en attente ou à revoir, la réponse donnée,
  * la réponse attendue, l'explication et les remarques (graphie à retenir, majuscule du nom…). `ExerciseReview` s'affiche
  * dans l'exercice ; `ExerciseReviewDrawer` relit une tentative depuis les résultats (élève, professeur).
+ * Niveaux B : énoncé et explication bilingues (` [fr] ` affiché, ` [fr?] ` replié), voir bilingual.tsx.
  */
 import { useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
@@ -15,6 +16,7 @@ import {
   type ExerciseResult, type FillReview, type MatchReview, type OrderReview, type QuestionReview, type QuestionReviewStatus, type QuestionView,
   type SpeakReview,
 } from '../../integration/v4';
+import { BilingualText } from './bilingual';
 import './study-exercise.css';
 
 const statusIcons: Record<QuestionReviewStatus, typeof Check> = { correct: Check, incorrect: X, pending: Clock3, flagged: Flag };
@@ -234,7 +236,7 @@ export function ReviewCard({ review, view, index, media }: { review: QuestionRev
         <span className="sx-review-mark" aria-hidden="true"><Icon size={16} strokeWidth={3} /></span>
         <div className="sx-review-titles">
           <p className="sx-review-kicker">Question {index + 1}{review.type !== 'choice' ? ` · ${questionTypeLabels[review.type]}` : ''}</p>
-          <h4 id={`sx-review-${review.id}`}>{view?.prompt ?? reviewPrompt(review) ?? questionTypeLabels[review.type]}</h4>
+          <h4 id={`sx-review-${review.id}`}><BilingualText text={view?.prompt ?? reviewPrompt(review) ?? questionTypeLabels[review.type]} /></h4>
         </div>
         <Badge tone={questionReviewStatusTones[review.status]}>{questionReviewStatusLabels[review.status]}</Badge>
       </header>
@@ -248,7 +250,7 @@ export function ReviewCard({ review, view, index, media }: { review: QuestionRev
         {review.explanation && (
           <div className="sx-why">
             <span className="sx-why-icon" aria-hidden="true"><Lightbulb size={16} /></span>
-            <div><strong>Pourquoi ?</strong><p>{review.explanation}</p></div>
+            <div><strong>Pourquoi ?</strong><p><BilingualText text={review.explanation} /></p></div>
           </div>
         )}
       </div>

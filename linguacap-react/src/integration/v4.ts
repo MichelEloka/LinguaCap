@@ -276,20 +276,39 @@ export const speechFallbackLabel = 'Enregistrer pour mon professeur';
 // Missions
 // ---------------------------------------------------------------------------------------------------------------------
 
-/** Partie orale : enregistrement de 30 à 120 secondes (arrêt automatique côté navigateur). */
+/**
+ * Partie orale : enregistrement de 30 à 300 secondes (arrêt automatique côté navigateur). Fourchettes conseillées par
+ * niveau (contrôle des contenus) : A1-A2 30 à 120 s, B1 90 à 180 s, B2 120 à 300 s.
+ */
 export interface MissionOral { prompt: string; maxSeconds: number }
-/** Partie écrite : 200 à 1 500 caractères au plus, `minWords` de 0 à 200. */
+/**
+ * Partie écrite : `maxChars` de 200 à 3 000, `minWords` de 0 à 400. Fourchettes conseillées par niveau : A1-A2
+ * 200 à 1 500 caractères et 0 à 200 mots, B1 1 000 à 1 500 et 40 à 120, B2 1 500 à 3 000 et 100 à 220.
+ */
 export interface MissionWritten { prompt: string; maxChars: number; minWords: number }
+/**
+ * Critère de la grille d'une mission, noté par le correcteur de 0 à `maxPoints` : identifiant unique au format `ID`
+ * (`aufgabe`, `kohaerenz`…), libellé de 3 à 200 caractères (peut porter ` [fr] ` ou ` [fr?] `), `maxPoints` de 1 à 20.
+ * Même forme que les critères des parties d'examen (`VersionDocument.Criterion`).
+ */
+export interface MissionCriterion { id: string; label: string; maxPoints: number }
 /**
  * Définition d'une mission (contenu, document du catalogue, `ActivityDetail.mission`) : au moins une partie, liste de
  * vérification de 2 à 6 points (160 caractères au plus). La situation et la consigne sont la description de la leçon.
+ *
+ * `criteria` (niveaux B) : grille de 0 à 6 critères, 4 ou 5 en B1 et B2 (20 points). Absente ou vide : mission sans
+ * grille, comportement V4 (A1, A2). Les services servent toujours le champ (`[]` sans grille) ; il reste facultatif ici
+ * pour les documents et contenus anciens : le lire avec `missionCriteriaOf`.
  */
-export interface MissionDefinition { oral: MissionOral | null; written: MissionWritten | null; checklist: string[] }
-/** Définition figée dans une remise : la consigne (`description`) en plus. */
+export interface MissionDefinition {
+  oral: MissionOral | null; written: MissionWritten | null; checklist: string[];
+  criteria?: MissionCriterion[];
+}
+/** Définition figée dans une remise : la consigne (`description`) en plus, et la grille telle qu'à l'ouverture. */
 export interface MissionSnapshot extends MissionDefinition { description: string }
 /**
  * Définition servie avec l'activité (`ActivityDetail.mission`, `LibraryActivity.mission`) : Apprentissage y joint la
- * consigne (`description`, aussi dans `lesson.description`).
+ * consigne (`description`, aussi dans `lesson.description`) et recopie la grille, visible avant la remise.
  */
 export interface ServedMission extends MissionDefinition { description?: string }
 
@@ -308,8 +327,20 @@ export interface MissionStartRequest {
 export interface MissionUpdateRequest { text?: string; checklist?: number[] }
 /** Corps de POST /assessments/missions/{missionId}/recordings. */
 export interface MissionRecordingRequest { mimeType: string; size: number }
-/** Corps de POST /assessments/missions/{missionId}/review (correcteur). */
-export interface MissionReviewRequest { decision: MissionDecision; comment: string }
+/**
+ * Corps de POST /assessments/missions/{missionId}/review (correcteur). La décision reste libre (commentaire exigé pour
+ * `to_redo`). `points` = {idCritère: entier de 0 à maxPoints} : exigé pour chaque critère quand la définition a une
+ * grille (clé manquante, inconnue ou hors bornes : 400), refusé sans grille, même vide (`{}` : 400).
+ */
+export interface MissionReviewRequest { decision: MissionDecision; comment: string; points?: Record<string, number> }
+/**
+ * Retour du correcteur (`MissionView.review`). `points`, `score` et `maxScore` : null pour une mission sans grille ;
+ * avec grille, `score` = somme des points et `maxScore` = somme des `maxPoints` (20 en B1 et B2).
+ */
+export interface MissionReview {
+  decision: MissionDecision; comment: string | null; reviewedAt: string;
+  points: Record<string, number> | null; score: number | null; maxScore: number | null;
+}
 
 /** Réponse de GET, PUT, …/finalize, …/submit et …/review sur /assessments/missions/{missionId}. */
 export interface MissionView {
@@ -325,20 +356,75 @@ export interface MissionView {
   /** Destinataire : professeur référent, sinon correcteur désigné ; null = envoyée sans destinataire (`sent`). */
   reviewerKind: ReviewerKind | null;
   submittedAt: string | null;
-  review: { decision: MissionDecision; comment: string | null; reviewedAt: string } | null;
+  /** Points par critère visibles seulement ici, après le retour (jamais avant). */
+  review: MissionReview | null;
   canReview: boolean;
   createdAt: string; updatedAt: string;
 }
-/** Élément de GET /assessments/missions[?learnerId] (récentes d'abord). */
+/**
+ * Élément de GET /assessments/missions[?learnerId] (récentes d'abord). `score` et `maxScore` : retour sur grille, sinon
+ * null (mission sans grille ou pas encore corrigée).
+ */
 export interface MissionSummary {
   id: string; activityId: string; title: string; levelCode: LevelCode; moduleId: string; status: MissionStatus;
   decision: MissionDecision | null; submittedAt: string | null; reviewedAt: string | null; sessionId: string | null;
+  score: number | null; maxScore: number | null;
 }
 
+/** Bornes techniques communes (catalogue, Évaluations, base, interface) ; les fourchettes par niveau sont plus étroites. */
 export const missionLimits = {
-  textChars: 1500, minSeconds: 30, maxSeconds: 120, checklistMin: 2, checklistMax: 6, checklistItemChars: 160,
-  writtenMinChars: 200, writtenMaxChars: 1500, minWordsMax: 200, commentChars: 2000,
+  textChars: 3000, minSeconds: 30, maxSeconds: 300, checklistMin: 2, checklistMax: 6, checklistItemChars: 160,
+  writtenMinChars: 200, writtenMaxChars: 3000, minWordsMax: 400, commentChars: 2000,
+  criteriaMax: 6, criterionLabelMinChars: 3, criterionLabelChars: 200, criterionMaxPoints: 20,
 } as const;
+
+/** Seuil de présélection de la décision : « Validée » à partir de 60 % du score (12/20), sinon « À reprendre ». */
+export const missionPassPercent = 60;
+
+/** Grille d'une définition de mission (`[]` sans grille ou pour un contenu ancien). */
+export function missionCriteriaOf(definition: { criteria?: MissionCriterion[] | null } | null | undefined): MissionCriterion[] {
+  return definition?.criteria ?? [];
+}
+
+/** Total des points d'une grille (20 en B1 et B2) ; 0 sans grille. */
+export function missionMaxScore(criteria: readonly MissionCriterion[]): number {
+  return criteria.reduce((sum, criterion) => sum + criterion.maxPoints, 0);
+}
+
+/**
+ * Score d'une notation, ou null tant qu'un critère n'est pas noté (ou noté hors de 0 … maxPoints, ou non entier) :
+ * le bouton « Envoyer » du correcteur reste désactivé dans ce cas.
+ */
+export function missionScore(criteria: readonly MissionCriterion[], points: Readonly<Record<string, number | null | undefined>>): number | null {
+  let total = 0;
+  for (const criterion of criteria) {
+    const value = points[criterion.id];
+    if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > criterion.maxPoints) return null;
+    total += value;
+  }
+  return total;
+}
+
+/** Décision présélectionnée d'après le score (60 % ou plus : validée) ; null sans score. Le correcteur reste libre. */
+export function suggestedMissionDecision(score: number | null, maxScore: number): MissionDecision | null {
+  if (score === null || maxScore <= 0) return null;
+  return score * 100 >= missionPassPercent * maxScore ? 'validated' : 'to_redo';
+}
+
+/**
+ * Codes de correction de l'écrit (niveaux B), cités par le correcteur dans son commentaire et rappelés à l'élève par
+ * la même légende.
+ */
+export const correctionCodes = [
+  { code: 'G', label: 'Grammaire' },
+  { code: 'W', label: 'Vocabulaire (Wortschatz)' },
+  { code: 'R', label: 'Orthographe (Rechtschreibung)' },
+  { code: 'St', label: 'Place des mots (Stellung)' },
+  { code: 'A', label: 'Registre : du ou Sie (Anrede)' },
+] as const;
+
+/** Modèle proposé pour le commentaire d'une mission notée sur grille (préremplit le champ existant). */
+export const missionCommentTemplate = 'Points forts : \nÀ retravailler (2 points au plus) : \nRelance : ';
 
 // ---------------------------------------------------------------------------------------------------------------------
 // File de corrections : GET /assessments/reviews (professeur, correcteur, administration)

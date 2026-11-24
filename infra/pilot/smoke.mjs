@@ -630,39 +630,49 @@ await post(`/media/uploads/${interrupted.id}/finalize`, staffToken, {}, 409);
 console.log('Recette de la médiathèque réussie · dépôt direct, chemin réservé à l’auteur, contrôle du contenu, fichier refusé et supprimé, '
   + 'dépôt interrompu puis abandonné, aperçu des brouillons réservé aux éditeurs.');
 
-// Niveau B1 de démonstration : ordre et prérequis, brouillon, contrôle de complétude, publication sans redéploiement.
+// Niveau de démonstration : ordre et prérequis, brouillon, contrôle de complétude, publication sans redéploiement. La recette
+// le place en C1 (créé s'il manque, 5e position) : les vrais niveaux A1, A2 et B1 viennent de l'import des contenus, et un
+// niveau ajouté au catalogue apparaît sans modifier le code.
+const demoLevel = 'c1';
+const DEMO = demoLevel.toUpperCase();
+const demoSettings = (prerequisiteLevelId) => ({ title: 'Allemand C1 (démonstration)', description: 'Parcours de démonstration de la recette.',
+  position: 5, prerequisiteLevelId });
+if (!(await api('/catalogue/levels', staffToken)).some((level) => level.id === demoLevel)) {
+  await post('/levels', teacher.token, { code: DEMO, title: demoSettings(null).title }, 403);
+  const createdDemo = await post('/levels', admin.token, { code: DEMO, title: demoSettings(null).title, description: demoSettings(null).description }, 201);
+  assert.deepEqual([createdDemo.id, createdDemo.code], [demoLevel, DEMO]);
+}
 await api('/catalogue/levels', teacher.token, { status: 403 });
 await api('/catalogue/levels', learnerToken, { status: 403 });
 await put('/catalogue/levels/a1', staffToken, { title: 'Allemand A1', description: '', position: 1, prerequisiteLevelId: 'a2' }, 400);
-let catalogueLevels = await put('/catalogue/levels/b1', staffToken,
-  { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: null });
-let b1Level = catalogueLevels.find((level) => level.id === 'b1');
-assert.equal(b1Level.prerequisiteLevelId, null);
-const openDraft = b1Level.versions.find((version) => version.status === 'draft');
-const b1Draft = openDraft ? await api(`/catalogue/versions/${openDraft.id}`, staffToken)
-  : await post('/catalogue/levels/b1/versions', staffToken, {}, 201);
-assert.equal(b1Draft.status, 'draft');
-await post('/catalogue/levels/b1/versions', staffToken, {}, 409);
-await api(`/catalogue/versions/${b1Draft.id}`, teacher.token, { status: 403 });
+let catalogueLevels = await put(`/catalogue/levels/${demoLevel}`, staffToken, demoSettings(null));
+let demoCatalogue = catalogueLevels.find((level) => level.id === demoLevel);
+assert.equal(demoCatalogue.prerequisiteLevelId, null);
+const openDraft = demoCatalogue.versions.find((version) => version.status === 'draft');
+const demoDraft = openDraft ? await api(`/catalogue/versions/${openDraft.id}`, staffToken)
+  : await post(`/catalogue/levels/${demoLevel}/versions`, staffToken, {}, 201);
+assert.equal(demoDraft.status, 'draft');
+await post(`/catalogue/levels/${demoLevel}/versions`, staffToken, {}, 409);
+await api(`/catalogue/versions/${demoDraft.id}`, teacher.token, { status: 403 });
 const picturePlacement = (version) => ({
   assetId, assetVersion: version, usage: 'illustration', alt: 'Un bretzel doré.', caption: 'die Brezel', transcriptVisibility: 'hidden',
   decorative: false, questionId: null, optionId: null,
 });
-const b1Content = (pictureVersion, objective = 'Commander une spécialité à la boulangerie.') => ({
+const demoContent = (pictureVersion, objective = 'Commander une spécialité à la boulangerie.') => ({
   settings: { expectedCompetences: ['lecture', 'ecoute'], successCriteria: 'Réussir 60 % du bilan.', passPercent: 60,
     reviewMinutes: 10, midtermMinutes: 30, finalMinutes: 60 },
   diagnostic: null,
   modules: [{ id: 'baeckerei', title: 'À la boulangerie', objective, prerequisites: [], activities: [
-    { id: 'b1-lecon', kind: 'lesson', title: 'Chez le boulanger', estimatedMinutes: 10, competences: ['lecture'],
+    { id: 'demo-lecon', kind: 'lesson', title: 'Chez le boulanger', estimatedMinutes: 10, competences: ['lecture'],
       lesson: { title: 'Chez le boulanger', description: 'Ich hätte gern eine Brezel.', transcript: null }, questions: [],
       placements: [picturePlacement(pictureVersion)] },
-    { id: 'b1-quiz', kind: 'exercise', title: 'Que demande-t-on ?', estimatedMinutes: 5, competences: ['lecture'],
+    { id: 'demo-quiz', kind: 'exercise', title: 'Que demande-t-on ?', estimatedMinutes: 5, competences: ['lecture'],
       lesson: { title: 'Que demande-t-on ?', description: 'Choisissez la bonne réponse.', transcript: null },
       questions: [{ id: 'brezel', prompt: 'Que veut dire « eine Brezel » ?', moduleRef: null, options: [
         { id: 'a', label: 'Un bretzel', correct: true }, { id: 'b', label: 'Une baguette', correct: false }] }],
       placements: [{ ...picturePlacement(pictureVersion), questionId: 'brezel', optionId: 'a', caption: null }] },
   ] }],
-  assessments: [{ kind: 'midterm', title: 'Bilan B1', description: '', parts: [
+  assessments: [{ kind: 'midterm', title: `Bilan ${DEMO}`, description: '', parts: [
     { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Lisez puis répondez.', criteria: [], placements: [],
       questions: [{ id: 'bilan-1', prompt: 'Brezel ?', moduleRef: null, options: [
         { id: 'a', label: 'Bretzel', correct: true }, { id: 'b', label: 'Pain', correct: false }] }] },
@@ -670,45 +680,45 @@ const b1Content = (pictureVersion, objective = 'Commander une spécialité à la
       questions: [], placements: [], criteria: [{ id: 'clarte', label: 'La demande est claire', maxPoints: 5 }] },
   ] }],
 });
-const incomplete = await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1, ''));
+const incomplete = await put(`/catalogue/versions/${demoDraft.id}`, staffToken, demoContent(1, ''));
 assert.equal(incomplete.checks.publishable, false);
 assert.deepEqual(incomplete.checks.issues.map((issue) => issue.path), ['modules[0].objective']);
-await post(`/catalogue/versions/${b1Draft.id}/publish`, staffToken, {}, 409);
-await put(`/catalogue/versions/${b1Draft.id}`, staffToken, { ...b1Content(1), modules: [{ ...b1Content(1).modules[0], id: 'Bad Id' }] }, 400);
-const saved = await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1));
+await post(`/catalogue/versions/${demoDraft.id}/publish`, staffToken, {}, 409);
+await put(`/catalogue/versions/${demoDraft.id}`, staffToken, { ...demoContent(1), modules: [{ ...demoContent(1).modules[0], id: 'Bad Id' }] }, 400);
+const saved = await put(`/catalogue/versions/${demoDraft.id}`, staffToken, demoContent(1));
 assert.equal(saved.checks.publishable, true, JSON.stringify(saved.checks.issues));
 assert.equal(saved.version.assessments[0].parts[1].criteria[0].maxPoints, 5);
-const draftLesson = `b1-v${b1Draft.number}-b1-lecon`;
+const draftLesson = `${demoLevel}-v${demoDraft.number}-demo-lecon`;
 await api(`/lessons/${draftLesson}`, learnerToken, { status: 404 });
 assert.equal((await api(`/lessons/${draftLesson}`, staffToken)).title, 'Chez le boulanger');
 assert.ok((await api('/lessons/commander-au-cafe', staffToken)).transcript, 'L’éditeur relit la transcription');
-const publishedB1 = await post(`/catalogue/versions/${b1Draft.id}/publish`, staffToken);
-assert.equal(publishedB1.version.status, 'published');
-assert.deepEqual(publishedB1.media, [{ assetId, version: 1 }]);
-await put(`/catalogue/versions/${b1Draft.id}`, staffToken, b1Content(1), 409);
+const publishedDemo = await post(`/catalogue/versions/${demoDraft.id}/publish`, staffToken);
+assert.equal(publishedDemo.version.status, 'published');
+assert.deepEqual(publishedDemo.media, [{ assetId, version: 1 }]);
+await put(`/catalogue/versions/${demoDraft.id}`, staffToken, demoContent(1), 409);
 library = await api('/media', staffToken);
 assert.equal(library.find((asset) => asset.id === assetId).versions[0].status, 'published', 'Les fichiers du parcours sont publiés avec lui');
-const b1Track = (await api('/tracks', teacher.token)).find((track) => track.levelCode === 'B1');
-assert.equal(b1Track.versionId, b1Draft.id, 'Le B1 publié est attribuable sans redéploiement');
-assert.equal(b1Track.prerequisiteLevelCode, null);
+const demoTrack = (await api('/tracks', teacher.token)).find((track) => track.levelCode === DEMO);
+assert.equal(demoTrack.versionId, demoDraft.id, 'Le niveau publié est attribuable sans redéploiement');
+assert.equal(demoTrack.prerequisiteLevelCode, null);
 
 // Un élève inscrit sur la version 1 garde ses fichiers quand le média est remplacé dans la version suivante.
-const learnerB1 = await createAccount('eleve-b1', 'learner', teacher.id);
-const enrollB1 = async (learnerId, trackVersionId) => {
+const demoLearner = await createAccount('eleve-demo', 'learner', teacher.id);
+const enrollDemo = async (learnerId, trackVersionId) => {
   const goal = await post('/learning/enrollments', teacher.token,
-    { learnerId, trackVersionId, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+    { learnerId, trackVersionId, startLevel: 'B2', template: 'intensive', startDate: inDays(1) }, 201);
   const plan = await post(goalPath(goal.id, 'proposal/validate'), teacher.token, { number: goal.proposal.number });
   return plan.sessions[0].id;
 };
-const firstSessionB1 = await enrollB1(learnerB1.id, b1Draft.id);
+const firstDemoSession = await enrollDemo(demoLearner.id, demoDraft.id);
 const placementsOf = async (sessionId, token) => (await api(`/learning/sessions/${sessionId}`, token)).activities
   .flatMap((activity) => activity.placements.map((placement) => ({ ...placement, activityId: activity.id })));
-let oldPlacements = await placementsOf(firstSessionB1, learnerB1.token);
-const lessonPicture = oldPlacements.find((placement) => placement.activityId === 'b1-lecon');
+let oldPlacements = await placementsOf(firstDemoSession, demoLearner.token);
+const lessonPicture = oldPlacements.find((placement) => placement.activityId === 'demo-lecon');
 assert.equal(lessonPicture.assetVersion, 1);
 assert.ok(lessonPicture.url.includes(reserved.id), 'La séance pointe vers le fichier de la version 1');
 assert.deepEqual(Buffer.from(await (await fetch(lessonPicture.url)).arrayBuffer()), firstPicture);
-const optionPicture = oldPlacements.find((placement) => placement.activityId === 'b1-quiz');
+const optionPicture = oldPlacements.find((placement) => placement.activityId === 'demo-quiz');
 assert.deepEqual([optionPicture.questionId, optionPicture.optionId], ['brezel', 'a'], 'Un support peut illustrer un choix de réponse');
 
 const replacement = await post('/media/uploads', staffToken, { ...pictureRequest(), assetId, title: '', size: secondPicture.length }, 201);
@@ -716,35 +726,36 @@ assert.equal(replacement.replaces, true);
 assert.ok((await sendFile(replacement, secondPicture, 'image/png', staffToken)).ok);
 const replaced = await post(`/media/uploads/${replacement.id}/finalize`, staffToken);
 assert.deepEqual([replaced.assetId, replaced.version, replaced.title], [assetId, 2, 'Bretzel']);
-const b1Next = await post('/catalogue/levels/b1/versions', staffToken, { fromVersionId: b1Draft.id }, 201);
-assert.equal(b1Next.number, b1Draft.number + 1);
-assert.equal(b1Next.modules[0].activities[0].placements[0].assetVersion, 1, 'La copie reprend les versions figées des fichiers');
-assert.equal(b1Next.assessments.length, 1);
-await api(`/lessons/b1-v${b1Next.number}-b1-lecon`, learnerB1.token, { status: 404 });
-await api(`/media/${assetId}/versions/2`, learnerB1.token, { status: 403 });
-const nextSaved = await put(`/catalogue/versions/${b1Next.id}`, staffToken, b1Content(2));
+const demoNext = await post(`/catalogue/levels/${demoLevel}/versions`, staffToken, { fromVersionId: demoDraft.id }, 201);
+assert.equal(demoNext.number, demoDraft.number + 1);
+assert.equal(demoNext.modules[0].activities[0].placements[0].assetVersion, 1, 'La copie reprend les versions figées des fichiers');
+assert.equal(demoNext.assessments.length, 1);
+await api(`/lessons/${demoLevel}-v${demoNext.number}-demo-lecon`, demoLearner.token, { status: 404 });
+await api(`/media/${assetId}/versions/2`, demoLearner.token, { status: 403 });
+const nextSaved = await put(`/catalogue/versions/${demoNext.id}`, staffToken, demoContent(2));
 assert.equal(nextSaved.checks.publishable, true);
-await post(`/catalogue/versions/${b1Next.id}/publish`, staffToken);
+await post(`/catalogue/versions/${demoNext.id}/publish`, staffToken);
 catalogueLevels = await api('/catalogue/levels', staffToken);
-b1Level = catalogueLevels.find((level) => level.id === 'b1');
-assert.equal(b1Level.versions.find((version) => version.id === b1Draft.id).status, 'retired');
-assert.equal((await api('/tracks', teacher.token)).find((track) => track.levelCode === 'B1').versionId, b1Next.id);
+demoCatalogue = catalogueLevels.find((level) => level.id === demoLevel);
+assert.equal(demoCatalogue.versions.find((version) => version.id === demoDraft.id).status, 'retired');
+assert.equal((await api('/tracks', teacher.token)).find((track) => track.levelCode === DEMO).versionId, demoNext.id);
 
-oldPlacements = await placementsOf(firstSessionB1, learnerB1.token);
-const oldPicture = oldPlacements.find((placement) => placement.activityId === 'b1-lecon');
+oldPlacements = await placementsOf(firstDemoSession, demoLearner.token);
+const oldPicture = oldPlacements.find((placement) => placement.activityId === 'demo-lecon');
 assert.equal(oldPicture.assetVersion, 1);
 assert.ok(oldPicture.url.includes(reserved.id), 'L’ancien élève garde le fichier de sa version');
 assert.deepEqual(Buffer.from(await (await fetch(oldPicture.url)).arrayBuffer()), firstPicture);
-const learnerB1Next = await createAccount('eleve-b1-v2', 'learner', teacher.id);
-const nextPicture = (await placementsOf(await enrollB1(learnerB1Next.id, b1Next.id), learnerB1Next.token))
-  .find((placement) => placement.activityId === 'b1-lecon');
+const demoLearnerNext = await createAccount('eleve-demo-v2', 'learner', teacher.id);
+const nextPicture = (await placementsOf(await enrollDemo(demoLearnerNext.id, demoNext.id), demoLearnerNext.token))
+  .find((placement) => placement.activityId === 'demo-lecon');
 assert.equal(nextPicture.assetVersion, 2);
 assert.ok(nextPicture.url.includes(replacement.id), 'Un nouvel élève lit le fichier remplacé');
 assert.deepEqual(Buffer.from(await (await fetch(nextPicture.url)).arrayBuffer()), secondPicture);
-await post(`/catalogue/versions/${b1Next.id}/retire`, staffToken);
-assert.ok(!(await api('/tracks', teacher.token)).some((track) => track.levelCode === 'B1'), 'Une version retirée n’est plus attribuable');
-assert.equal((await placementsOf(firstSessionB1, learnerB1.token)).length, 2, 'Le retrait ne coupe pas l’accès des élèves inscrits');
-await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: 'a2' });
+await post(`/catalogue/versions/${demoNext.id}/retire`, staffToken);
+assert.ok(!(await api('/tracks', teacher.token)).some((track) => track.levelCode === DEMO), 'Une version retirée n’est plus attribuable');
+assert.ok(!(await api('/levels', learnerToken)).some((level) => level.code === DEMO), 'Sans version publiée, le niveau repasse en brouillon');
+assert.equal((await placementsOf(firstDemoSession, demoLearner.token)).length, 2, 'Le retrait ne coupe pas l’accès des élèves inscrits');
+await put(`/catalogue/levels/${demoLevel}`, staffToken, demoSettings('b2'));
 console.log('Recette du catalogue réussie · niveaux et prérequis, brouillon repris, contrôle de complétude, bilan avec grille, '
   + 'publication et retrait sans redéploiement, nouvelle version avec média remplacé, ancien élève sur son fichier, brouillons inaccessibles.');
 
@@ -752,13 +763,13 @@ console.log('Recette du catalogue réussie · niveaux et prérequis, brouillon r
 const choice = (id, right = 'a') => ({ id, prompt: `Question ${id} ?`, moduleRef: null, options: [
   { id: 'a', label: 'Réponse A', correct: right === 'a' }, { id: 'b', label: 'Réponse B', correct: right === 'b' }] });
 // L'exercice du module travaille aussi l'oral : il sera proposé en révision si l'oral reste sous le seuil.
-const examModules = b1Content(2).modules.map((module) => ({ ...module, activities: module.activities.map((activity) =>
-  activity.id === 'b1-quiz' ? { ...activity, competences: ['lecture', 'expression-orale'] } : activity) }));
-const examContent = { ...b1Content(2), modules: examModules, assessments: [
-  { kind: 'midterm', title: 'Bilan B1', description: 'Lecture des modules travaillés.', parts: [
+const examModules = demoContent(2).modules.map((module) => ({ ...module, activities: module.activities.map((activity) =>
+  activity.id === 'demo-quiz' ? { ...activity, competences: ['lecture', 'expression-orale'] } : activity) }));
+const examContent = { ...demoContent(2), modules: examModules, assessments: [
+  { kind: 'midterm', title: `Bilan ${DEMO}`, description: 'Lecture des modules travaillés.', parts: [
     { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Lisez puis répondez.',
       questions: [choice('m1'), choice('m2', 'b')], criteria: [], placements: [] }] },
-  { kind: 'final', title: 'Examen blanc B1', description: 'Lecture, écrit et oral.', parts: [
+  { kind: 'final', title: `Examen blanc ${DEMO}`, description: 'Lecture, écrit et oral.', parts: [
     { id: 'lecture', competence: 'lecture', mode: 'closed', title: 'Lecture', instructions: 'Répondez aux questions.',
       questions: [choice('l1'), choice('l2', 'b')], criteria: [], placements: [] },
     { id: 'ecrit', competence: 'expression-ecrite', mode: 'written', title: 'Écrire une commande',
@@ -768,10 +779,11 @@ const examContent = { ...b1Content(2), modules: examModules, assessments: [
       instructions: 'Enregistrez votre commande.', questions: [], placements: [],
       criteria: [{ id: 'aisance', label: 'Aisance', maxPoints: 10 }] }] },
 ] };
-await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: null });
-const examVersion = await post('/catalogue/levels/b1/versions', staffToken, { fromVersionId: b1Next.id }, 201);
+await put(`/catalogue/levels/${demoLevel}`, staffToken, demoSettings(null));
+const examVersion = await post(`/catalogue/levels/${demoLevel}/versions`, staffToken, { fromVersionId: demoNext.id }, 201);
 assert.equal((await put(`/catalogue/versions/${examVersion.id}`, staffToken, examContent)).checks.publishable, true);
 await post(`/catalogue/versions/${examVersion.id}/publish`, staffToken);
+assert.ok((await api('/levels', learnerToken)).some((level) => level.code === DEMO), 'Le niveau republié réapparaît pour les élèves');
 
 const enrollmentOf = async (token) => (await api('/learning/enrollment', token));
 const webm = Buffer.concat([Buffer.from([0x1a, 0x45, 0xdf, 0xa3]), Buffer.alloc(2_044, 7)]);
@@ -789,7 +801,7 @@ const submitExam = (exam, token, key = randomUUID()) => api(`/assessments/exams/
 // Examen accompagné : l'élève passe le bilan puis l'examen blanc, son professeur référent corrige.
 const examLearner = await createAccount('eleve-examen', 'learner', teacher.id);
 const examGoal = await post('/learning/enrollments', teacher.token,
-  { learnerId: examLearner.id, trackVersionId: examVersion.id, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+  { learnerId: examLearner.id, trackVersionId: examVersion.id, startLevel: 'B2', template: 'intensive', startDate: inDays(1) }, 201);
 await post(goalPath(examGoal.id, 'proposal/validate'), teacher.token, { number: examGoal.proposal.number });
 assert.deepEqual(await api(`/assessments/exams?enrollmentId=${examGoal.id}`, examLearner.token), []);
 await post('/assessments/exams', teacher.token, { enrollmentId: examGoal.id, kind: 'midterm' }, 403);
@@ -806,7 +818,7 @@ const midtermResult = await submitExam(midterm, examLearner.token, midtermKey);
 assert.equal(midtermResult.status, 'graded', 'Un bilan sans production est corrigé immédiatement');
 assert.equal(midtermResult.result.decision, 'completed');
 assert.deepEqual(midtermResult.result.scores.lecture, { points: 1, max: 2, percent: 50 });
-assert.ok(midtermResult.result.review.some((item) => item.activityId === 'b1-lecon'), 'Les activités de lecture sont à revoir');
+assert.ok(midtermResult.result.review.some((item) => item.activityId === 'demo-lecon'), 'Les activités de lecture sont à revoir');
 assert.equal((await submitExam(midterm, examLearner.token, midtermKey)).submittedAt, midtermResult.submittedAt, 'La remise rejouée ne compte qu’une fois');
 await post('/assessments/exams', examLearner.token, { enrollmentId: examGoal.id, kind: 'midterm' }, 409);
 const midtermSlot = (await enrollmentOf(examLearner.token)).sessions.flatMap((session) => session.activities)
@@ -890,7 +902,7 @@ const examAutonomous = await createAccount('autonome-examen', 'learner', null);
 await put(`/admin/users/${staff.id}/permissions`, admin.token, { permissions: ['catalogue', 'correction'] });
 await put(`/admin/users/${examAutonomous.id}/reviewer`, admin.token, { reviewerId: staff.id });
 const autoGoal = await post('/learning/enrollments', admin.token,
-  { learnerId: examAutonomous.id, trackVersionId: examVersion.id, startLevel: 'A2', template: 'intensive', startDate: inDays(1) }, 201);
+  { learnerId: examAutonomous.id, trackVersionId: examVersion.id, startLevel: 'B2', template: 'intensive', startDate: inDays(1) }, 201);
 await post(goalPath(autoGoal.id, 'proposal/validate'), examAutonomous.token, { number: autoGoal.proposal.number });
 const autoFinal = await post('/assessments/exams', examAutonomous.token, { enrollmentId: autoGoal.id, kind: 'final' }, 201);
 await put(`/assessments/exams/${autoFinal.id}/answers`, examAutonomous.token,
@@ -906,7 +918,10 @@ const validated = await post(`/assessments/exams/${autoFinal.id}/grading`, staff
   parts: { ecrit: { points: { clarte: 5, langue: 4 } }, oral: { points: { aisance: 8 } } }, feedback: 'Très bien.' });
 assert.equal(validated.result.decision, 'validated');
 assert.equal((await enrollmentOf(examAutonomous.token)).goal.status, 'validated');
-await put('/catalogue/levels/b1', staffToken, { title: 'Allemand B1', description: 'Parcours de démonstration.', position: 3, prerequisiteLevelId: 'a2' });
+// Le niveau de démonstration est retiré pour la suite : seuls A1, A2 et B1 restent publiés ; les inscrits gardent leur version.
+await post(`/catalogue/versions/${examVersion.id}/retire`, staffToken);
+await put(`/catalogue/levels/${demoLevel}`, staffToken, demoSettings('b2'));
+assert.ok(!(await api('/levels', learnerToken)).some((level) => level.code === DEMO), 'Le niveau de démonstration retiré n’est plus proposé');
 console.log('Recette des évaluations réussie · bilan corrigé immédiatement, examen blanc avec écrit et oral privé, remise idempotente, '
   + 'file et grille du référent, remise à temps corrigée après l’échéance, résultat à consolider puis nouvelle tentative, '
   + 'correcteur désigné d’un élève autonome, refus d’accès des tiers.');
@@ -1144,15 +1159,19 @@ localSql(local.container, readFileSync(new URL('db-isolation.sql', import.meta.u
 console.log('Recette des comptes réussie · premier admin, invitations, réémission, annulation, expiration, équipe et permissions, '
   + 'correcteur, réaffectation, désactivation, événements et isolation des rôles SQL.');
 
-// --- Contenus A1/A2 : import, publication, parcours intensif accompagné et parcours autonome (incrément 9) ---
+// --- Contenus A1, A2 et B1 : import, publication, parcours intensif accompagné et parcours autonome (incrément 9) ---
 const { importContent } = await import('../content/import-content.mjs');
-const { loadLevel } = await import('../content/content-lib.mjs');
+const { availableLevels, loadLevel } = await import('../content/content-lib.mjs');
+assert.deepEqual(availableLevels(), ['a1', 'a2', 'b1'], 'Contenus construits : A1, A2 et B1 (content/de/b1, génération du lot S3)');
 const contentA1 = loadLevel('a1');
 const contentA2 = loadLevel('a2');
+const contentB1 = loadLevel('b1');
 const importState = join(tmpdir(), `linguacap-import-${suffix}.json`);
+const importStarted = Date.now();
 const imported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
   publish: true, statePath: importState, log: () => {} });
-assert.deepEqual(imported.map((result) => [result.levelId, result.published]), [['a1', true], ['a2', true]]);
+const importSeconds = Math.round((Date.now() - importStarted) / 1000);
+assert.deepEqual(imported.map((result) => [result.levelId, result.published]), [['a1', true], ['a2', true], ['b1', true]]);
 const reimported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
   publish: true, statePath: importState, log: () => {} });
 assert.ok(reimported.every((result) => result.unchanged), 'Un second import reconnaît les médias et les versions déjà publiés');
@@ -1161,10 +1180,12 @@ await post(`/catalogue/versions/${imported[0].versionId}/publish`, staffToken, {
 const contentTracks = await api('/tracks', teacher.token);
 const trackA1 = contentTracks.find((track) => track.levelCode === 'A1');
 const trackA2 = contentTracks.find((track) => track.levelCode === 'A2');
+const trackB1 = contentTracks.find((track) => track.levelCode === 'B1');
 assert.equal(trackA1.versionId, imported[0].versionId, 'La version A1 importée est celle proposée à l’attribution');
 assert.equal(trackA2.versionId, imported[1].versionId);
+assert.equal(trackB1.versionId, imported[2].versionId);
 const activitiesOf = (level) => level.modules.flatMap((module) => module.activities);
-for (const [level, result] of [[contentA1, imported[0]], [contentA2, imported[1]]]) {
+for (const [level, result] of [[contentA1, imported[0]], [contentA2, imported[1]], [contentB1, imported[2]]]) {
   assert.ok(level.format >= 4, `Contenu V4 importé (${level.levelId})`);
   assert.deepEqual(activitiesOf(level).filter((activity) => activity.id.endsWith('-correction')).map((activity) => activity.id), [],
     'Aucune activité « -correction » : le corrigé s’affiche après la remise');
@@ -1176,12 +1197,33 @@ assert.equal(trackA1.activityCount, activitiesOf(contentA1).length);
 assert.equal(trackA1.totalMinutes, activitiesOf(contentA1).reduce((sum, activity) => sum + activity.estimatedMinutes, 0));
 assert.equal(trackA2.activityCount, activitiesOf(contentA2).length);
 assert.equal(trackA2.prerequisiteLevelCode, 'A1', 'Le parcours A2 requiert le niveau A1');
+// B1 au format 5 : bloc catalogue appliqué par l'importeur, prérequis A2, missions notées sur grille (4 ou 5 critères, 20 points).
+assert.equal(contentB1.format, 5, 'Contenu B1 au format 5');
+const b1Level = (await api('/catalogue/levels', staffToken)).find((level) => level.id === 'b1');
+assert.deepEqual([b1Level.title, b1Level.position, b1Level.prerequisiteLevelId, b1Level.status],
+  [contentB1.catalogue.title, 3, 'a2', 'published'], 'Le niveau B1 du catalogue suit le bloc « catalogue » de level.json');
+assert.equal(contentB1.catalogue.position, 3);
+assert.equal(trackB1.prerequisiteLevelCode, 'A2', 'Le parcours B1 requiert le niveau A2');
+assert.equal(trackB1.activityCount, activitiesOf(contentB1).length);
+assert.equal(trackB1.totalMinutes, activitiesOf(contentB1).reduce((sum, activity) => sum + activity.estimatedMinutes, 0));
+const b1Document = await api(`/catalogue/versions/${trackB1.versionId}`, staffToken);
+const b1Missions = b1Document.modules.flatMap((module) => module.activities).filter((activity) => activity.kind === 'mission');
+assert.ok(b1Missions.length >= 24, `Missions B1 : ${b1Missions.length}`);
+for (const activity of b1Missions) {
+  const criteria = activity.mission.criteria ?? [];
+  assert.ok([4, 5].includes(criteria.length) && criteria.reduce((sum, criterion) => sum + criterion.maxPoints, 0) === 20,
+    `Mission ${activity.id} : grille de 4 ou 5 critères sur 20 points`);
+}
+for (const activity of b1Document.modules.flatMap((module) => module.activities).filter((item) => item.kind === 'exercise')) {
+  for (const question of activity.questions) assert.ok(question.prompt.includes(' [fr] '), `${activity.id}/${question.id} : énoncé bilingue au catalogue`);
+}
 
 // Corrigés lus dans les fichiers de contenu. Diagnostic et examens restent à choix unique : activité → question → bon choix.
 // Les exercices (questions typées, répétitions orales) sont répondus par smoke-answers.mjs à partir du contenu et de la vue.
 const keyOf = (questions) => Object.fromEntries((questions ?? []).map((question) =>
   [question.id, question.options.find((option) => option.correct).id]));
-const contentActivities = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2)].map((activity) => [activity.id, activity]));
+const contentActivities = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2), ...activitiesOf(contentB1)]
+  .map((activity) => [activity.id, activity]));
 const sourceOf = (activity) => {
   const source = contentActivities.get(activity.contentActivityId ?? activity.id);
   assert.ok(source, `Contenu connu pour ${activity.id}`);
@@ -1356,7 +1398,9 @@ try {
   localSql(local.container, `delete from tracking.goals where enrollment_id = '${previousGoal}';`);
 }
 assert.equal((await api('/learning/enrollment', a2Learner.token)).goal.status, 'validated');
-console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1 et ${trackA2.activityCount} A2 `
+console.log(`Import des contenus : ${importSeconds} s pour A1, A2 et B1 (délai de la recette éphémère : 35 min).`);
+console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1, ${trackA2.activityCount} A2 `
+  + `et ${trackB1.activityCount} B1 `
   + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (débutant sans diagnostic, module déclaré acquis, deux séances par jour, retard '
   + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
 
@@ -1778,8 +1822,9 @@ const lexiconPath = `/learning/library/${trackA1.versionId}/modules/${missionWor
 await checkLexicon(await api(lexiconPath, followedToken), 'Bibliothèque');
 await checkLexicon(await api(`${lexiconPath}?learnerId=${followedMe.id}`, teacher.token), 'Bibliothèque vue du référent');
 await api(`${lexiconPath}?learnerId=${followedMe.id}`, otherTeacher.token, { status: 403 });
-// Seuls les niveaux importés depuis la V4 portent un lexique ; le B1 fabriqué par la recette du catalogue n'en a pas.
-for (const level of (await api('/learning/library', followedToken)).levels.filter((item) => ['A1', 'A2'].includes(item.levelCode))) {
+// Chaque niveau importé (A1, A2, B1) porte un lexique par module ; le niveau de démonstration de la recette n'en a pas.
+const importedCodes = imported.map((result) => result.levelId.toUpperCase());
+for (const level of (await api('/learning/library', followedToken)).levels.filter((item) => importedCodes.includes(item.levelCode))) {
   assert.deepEqual(level.modules.filter((module) => !(module.vocabularyCount > 0)).map((module) => module.id), [],
     `Lexique annoncé pour chaque module ${level.levelCode}`);
 }
@@ -1796,6 +1841,242 @@ await runJob();
 console.log('Recette V4 réussie · corrigé par question sans fuite, quiz refusé sur une leçon typée, répétition orale à revoir puis '
   + 'reprise, enregistrement validé par le référent, missions (référent, tiers refusé, à reprendre, correcteur désigné, '
   + 'auto-vérification, séance), lexiques et événements.');
+
+// --- Cours B1 : niveaux dynamiques, consignes bilingues, parcours A2 → B1, missions sur grille, test de niveau -------------
+// Le B1 importé plus haut (content/de/b1, format 5) est le vrai niveau publié ; B2 existe au catalogue en brouillon ; le
+// niveau de démonstration C1 de la recette a été retiré à la fin de la section des évaluations.
+const codesOf = (levels) => levels.map((level) => level.code);
+const glossedB1 = (prompt) => prompt.includes(' [fr] ') && !prompt.includes('[fr?]');
+
+// 1. Route publique : sans session, niveaux publiés seulement, dans l'ordre des positions, mise en cache cinq minutes.
+const publicResponse = await fetch(`${gateway}/api/v1/public/languages`, { signal: AbortSignal.timeout(12_000) });
+assert.equal(publicResponse.status, 200, 'GET /public/languages répond sans session');
+assert.equal(publicResponse.headers.get('cache-control'), 'public, max-age=300', 'La liste publique se met en cache cinq minutes');
+const publicLanguages = await publicResponse.json();
+assert.deepEqual(publicLanguages.map((language) => language.id), ['de'], 'Seules les langues ayant un niveau publié sont listées');
+const publicGerman = publicLanguages[0].levels;
+assert.deepEqual(codesOf(publicGerman), ['A1', 'A2', 'B1'], 'A1, A2 et B1 publiés, dans l’ordre ; ni B2 (brouillon) ni le C1 retiré');
+assert.deepEqual(publicGerman.map((level) => level.position), [1, 2, 3]);
+assert.ok(publicGerman.every((level) => level.moduleCount > 0 && level.plannedMinutes > 0), 'Modules et durée prévue de chaque niveau');
+assert.deepEqual(Object.keys(publicGerman[2]).sort(), ['code', 'moduleCount', 'plannedMinutes', 'position', 'title'],
+  'La route publique ne donne que des données publiques');
+await api('/public/languages?level=B1', null, { status: 400 });
+
+// 2. GET /languages : tous les niveaux du catalogue, leur position, leur prérequis et les paliers du test publié.
+const germanCatalogue = (await api('/languages', teacher.token)).find((language) => language.id === 'de');
+const catalogueLevel = (code) => germanCatalogue.levels.find((level) => level.code === code);
+const positionsOf = germanCatalogue.levels.map((level) => level.position ?? Number.MAX_SAFE_INTEGER);
+assert.deepEqual(positionsOf, [...positionsOf].sort((a, b) => a - b), 'Niveaux dans l’ordre du catalogue');
+const plannedOf = (level) => activitiesOf(level).reduce((sum, activity) => sum + activity.estimatedMinutes, 0)
+  + level.settings.reviewMinutes * level.modules.filter((module) => module.activities.length).length
+  + level.settings.midtermMinutes + level.settings.finalMinutes;
+const languageB1 = catalogueLevel('B1');
+assert.deepEqual([languageB1.published, languageB1.position, languageB1.prerequisiteCode, languageB1.trackVersionId],
+  [true, 3, 'A2', trackB1.versionId], 'B1 publié, en position 3, après A2');
+assert.equal(languageB1.plannedMinutes, plannedOf(contentB1), 'Durée prévue du B1 : activités, révisions, bilan et examen blanc');
+assert.equal(languageB1.moduleCount, contentB1.modules.length);
+assert.deepEqual([catalogueLevel('B2')?.published, catalogueLevel('B2')?.position, catalogueLevel('B2')?.prerequisiteCode],
+  [false, 4, 'B1'], 'B2 au catalogue, en brouillon');
+assert.equal(catalogueLevel(DEMO)?.published, false, 'Le niveau de démonstration retiré n’est plus publié');
+assert.deepEqual(germanCatalogue.placementTiers, ['A1', 'A2'], 'Paliers de la banque publiée (recette)');
+const learnerLevels = codesOf(await api('/levels', learnerToken));
+assert.ok(learnerLevels.includes('B1') && !learnerLevels.includes('B2') && !learnerLevels.includes(DEMO), 'Un élève ne voit que les niveaux ouverts');
+
+// 3. Modèles de rythme : A1 et A2 calibrés, tout autre niveau selon la formule (minutes prévues × 1,25 / capacité / 4,345).
+const rhythmTemplates = await api('/learning/templates', learnerToken);
+const b1Months = {};
+for (const [id, weekly, a1Months, a2Months] of [['standard', 150, 5, 5], ['intensive', 630, 1, 2]]) {
+  const model = rhythmTemplates.find((template) => template.id === id);
+  assert.deepEqual(model.durations.map((duration) => duration.levelCode), ['A1', 'A2', 'B1'], `${id} : une durée par niveau publié`);
+  const months = Object.fromEntries(model.durations.map((duration) => [duration.levelCode, duration.months]));
+  assert.deepEqual([months.A1, months.A2], [a1Months, a2Months], `${id} : durées A1 et A2 inchangées`);
+  assert.equal(model.durations.find((duration) => duration.levelCode === 'B1').plannedMinutes, languageB1.plannedMinutes);
+  assert.equal(months.B1, Math.max(1, Math.ceil((languageB1.plannedMinutes * 1.25) / weekly / 4.345)), `${id} : durée B1 selon la formule`);
+  assert.ok(typeof model.a1Duration === 'string' && typeof model.a2Duration === 'string', 'Les anciens champs restent servis');
+  b1Months[id] = months.B1;
+}
+
+// 4. Bibliothèque B1 : énoncés bilingues transmis tels quels, aucun corrigé, grille des missions avant la remise.
+const b1Reader = await createAccount('b1-lecteur', 'learner', teacher.id);
+localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b1Reader.id}';`);
+const readerB1 = (await api('/learning/library', b1Reader.token)).levels.find((level) => level.levelCode === 'B1');
+assert.equal(readerB1?.trackVersionId, trackB1.versionId, 'La bibliothèque propose le B1 publié');
+assert.deepEqual(readerB1.modules.map((module) => module.id), contentB1.modules.map((module) => module.id));
+let glossedPrompts = 0;
+for (const module of readerB1.modules) {
+  assert.ok(module.vocabularyCount > 0, `Lexique annoncé pour ${module.id}`);
+  for (const [index, item] of module.activities.filter((activity) => activity.kind !== 'lesson').entries()) {
+    const served = await api(`/learning/library/${trackB1.versionId}/activities/${item.id}`, b1Reader.token);
+    assertNoLeak([served], `Bibliothèque B1 (${item.id})`);
+    const source = contentActivities.get(item.id);
+    for (const question of served.questions) {
+      assert.equal(question.prompt, source.questions.find((entry) => entry.id === question.id).prompt, `${item.id}/${question.id} : énoncé transmis tel quel`);
+      assert.ok(glossedB1(question.prompt), `${item.id}/${question.id} : consigne allemande et traduction [fr]`);
+      glossedPrompts++;
+    }
+    if (served.kind === 'mission') {
+      const grid = served.mission?.criteria ?? [];
+      assert.ok([4, 5].includes(grid.length) && grid.reduce((sum, criterion) => sum + criterion.maxPoints, 0) === 20,
+        `${item.id} : grille de 20 points servie avant la remise`);
+      assert.ok(!JSON.stringify(served).includes('"points"'), `${item.id} : aucun point avant le retour`);
+    }
+    // Aperçu de la leçon (route des leçons) : vues élève sans corrigé, sur le premier exercice de chaque module.
+    if (index === 0) assert.deepEqual(leaks((await api(`/lessons/${item.lessonId}`, b1Reader.token)).questions), [], `Aperçu de ${item.id} sans corrigé`);
+  }
+}
+assert.ok(glossedPrompts >= 300, `Énoncés B1 bilingues contrôlés : ${glossedPrompts}`);
+
+// 5. Parcours A2 → B1 : estimation, attribution avec le prérequis A2 confirmé par le diagnostic, séances B1 travaillées.
+const b1Learner = await createAccount('b1-parcours', 'learner', teacher.id);
+localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b1Learner.id}';`);
+const b1Estimate = await post('/learning/paths/estimate', b1Learner.token,
+  { startLevel: 'A2', targetLevel: 'B1', startDate: inDays(1), targetDate: inDays(240) });
+assert.deepEqual(b1Estimate.allowedTargets, ['B1'], 'Depuis A2 : B1 seulement, B2 n’est pas publié');
+assert.deepEqual(b1Estimate.levels.map((level) => [level.levelCode, level.trackVersionId]), [['B1', trackB1.versionId]]);
+await post('/learning/paths/estimate', b1Learner.token, { startLevel: 'B1', targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(240) }, 409);
+await post('/learning/enrollments', otherTeacher.token, { learnerId: b1Learner.id, trackVersionId: trackB1.versionId, startLevel: 'A2',
+  template: 'standard', startDate: inDays(1) }, 403);
+const b1Course = await post('/learning/enrollments', teacher.token, { learnerId: b1Learner.id, trackVersionId: trackB1.versionId,
+  startLevel: 'A2', template: 'standard', startDate: inDays(1) }, 201);
+assert.deepEqual([b1Course.goal.prerequisiteLevel, b1Course.goal.prerequisiteMet], ['A2', false], 'Le B1 exige l’A2 : à confirmer par le diagnostic');
+assert.ok(contentB1.diagnostic.questions.some((question) => question.moduleRef === 'prerequis'), 'Le diagnostic B1 évalue les acquis A2');
+const b1Diagnostic = await api(goalPath(b1Course.id, 'diagnostic'), b1Learner.token);
+const b1DiagnosticGrade = await api('/assessments/diagnostics', b1Learner.token, { method: 'POST',
+  headers: { 'Idempotency-Key': randomUUID() }, body: { lessonId: b1Diagnostic.lessonId, answers: diagnosticAnswers(contentB1, ['prerequis']) } });
+const b1Diagnosed = await post(goalPath(b1Course.id, 'diagnostic'), b1Learner.token, { attemptId: b1DiagnosticGrade.id });
+assert.equal(b1Diagnosed.goal.diagnosticPrerequisite, true, 'Le diagnostic confirme les acquis A2');
+// Élève suivi : le diagnostic propose, le référent confirme le point de départ (comme en A2).
+const b1Confirmed = await put(goalPath(b1Course.id, 'starting-point'), teacher.token,
+  { acquiredModules: b1Diagnosed.goal.diagnosticModules ?? [], prerequisiteMet: true });
+assert.equal(b1Confirmed.goal.prerequisiteMet, true, 'Le référent confirme le prérequis A2');
+const b1Proposal = await api(goalPath(b1Course.id, 'proposal'), teacher.token);
+assert.equal(b1Proposal.overflowCount, 0, 'Le B1 tient dans la durée conseillée du modèle standard');
+const b1Plan = await post(goalPath(b1Course.id, 'proposal/validate'), teacher.token, { number: b1Proposal.number });
+assert.equal(b1Plan.goal.status, 'active');
+await checkSupports(await api(`/learning/sessions/${b1Plan.sessions[0].id}`, b1Learner.token));
+const b1Types = new Set();
+let b1Worked = 0;
+for (const session of b1Plan.sessions) {
+  if ((b1Types.has('speak') && b1Types.has('dictation')) || b1Worked >= 12) break;
+  const before = await api(`/learning/sessions/${session.id}`, b1Learner.token);
+  if (before.activities.some((activity) => activity.kind === 'assessment')) continue;
+  for (const activity of before.activities) {
+    for (const question of activity.questions ?? []) assert.ok(glossedB1(question.prompt), `Séance B1 : ${activity.id}/${question.id} bilingue`);
+  }
+  const worked = await workSession(session.id, b1Learner.token);
+  assert.equal(worked.session.status, 'completed', `Séance B1 ${session.id} terminée`);
+  for (const activity of worked.activities.filter((item) => item.kind === 'exercise')) {
+    for (const question of sourceOf(activity).questions ?? []) b1Types.add(question.type ?? 'choice');
+  }
+  b1Worked++;
+}
+assert.ok(b1Types.has('speak') && b1Types.has('dictation'), `Séances B1 travaillées (${b1Worked}) : répétitions et dictées réussies`);
+
+// Parcours A0 → B1 en trois étapes : le prérequis de chaque étape vient du catalogue, pas du rang dans l'échelle.
+const stepLearner = await createAccount('b1-etapes', 'learner', teacher.id);
+localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${stepLearner.id}';`);
+const stepBeginner = await post('/assessments/placements', stepLearner.token, { declaredBeginner: true }, 201);
+let stepPath = await post('/learning/paths', stepLearner.token,
+  { placementAttemptId: stepBeginner.id, targetLevel: 'B1', startDate: inDays(1), targetDate: inDays(540) }, 201);
+assert.deepEqual(stepPath.steps.map((step) => step.levelCode), ['A1', 'A2', 'B1'], 'Parcours A1 → B1 en trois étapes');
+const stepProposal = await put(`/learning/paths/${stepPath.id}/availability`, stepLearner.token, { days: fiveDays(60) });
+assert.equal(stepProposal.validatable, true, stepProposal.blockingReason);
+assert.deepEqual(stepProposal.levels.map((level) => level.levelCode), ['A1', 'A2', 'B1']);
+stepPath = await post(`/learning/paths/${stepPath.id}/proposal/validate`, stepLearner.token, { number: stepProposal.number });
+stepPath = await post(`/learning/paths/${stepPath.id}/contracts/1/accept`, teacher.token, { note: 'Bon parcours jusqu’au B1.' });
+stepPath = await post(`/learning/paths/${stepPath.id}/advance`, teacher.token, {});
+assert.deepEqual([stepPath.steps.map((step) => step.status), (await api('/learning/enrollment', stepLearner.token)).goal.prerequisiteLevel],
+  [['completed', 'active', 'planned'], 'A1'], 'Étape A2 ouverte, prérequis A1 lu dans le catalogue');
+const b1Catalogue = { title: contentB1.catalogue.title, description: contentB1.catalogue.description, position: contentB1.catalogue.position };
+await put('/catalogue/levels/b1', staffToken, { ...b1Catalogue, prerequisiteLevelId: 'a1' });
+try {
+  stepPath = await post(`/learning/paths/${stepPath.id}/advance`, teacher.token, {});
+  const stepB1 = await api('/learning/enrollment', stepLearner.token);
+  assert.deepEqual([stepB1.levelCode, stepB1.goal.prerequisiteLevel], ['B1', 'A1'], 'Le prérequis de l’étape B1 suit le catalogue, pas le rang (A2)');
+} finally {
+  await put('/catalogue/levels/b1', staffToken, { ...b1Catalogue, prerequisiteLevelId: 'a2' });
+}
+assert.equal((await api('/tracks', teacher.token)).find((track) => track.levelCode === 'B1').prerequisiteLevelCode, 'A2', 'Prérequis rétabli');
+
+// 6. Missions sur grille : écrit noté critère par critère par le référent, oral élargi, mission A2 sans grille inchangée.
+const missionsB1 = activitiesOf(contentB1).filter((activity) => activity.kind === 'mission');
+for (const module of contentB1.modules.filter((item) => item.id.endsWith('-atelier'))) {
+  assert.deepEqual(module.activities.filter((activity) => activity.kind === 'mission').map((activity) => activity.id.split('-').at(-1)).sort(),
+    ['schreiben', 'sprechen'], `${module.id} : une mission écrite et une mission orale`);
+}
+const writtenB1 = missionsB1.find((activity) => activity.mission.written && !activity.mission.oral);
+const oralB1 = missionsB1.filter((activity) => activity.mission.oral && !activity.mission.written)
+  .sort((a, b) => b.mission.oral.maxSeconds - a.mission.oral.maxSeconds)[0];
+assert.ok(writtenB1 && oralB1, 'Missions écrites et orales B1');
+assert.ok(oralB1.mission.oral.maxSeconds > 120, `Bornes élargies : oral B1 de ${oralB1.mission.oral.maxSeconds} s`);
+const writtenDraft = await post('/assessments/missions', b1Learner.token, { trackVersionId: trackB1.versionId, activityId: writtenB1.id }, 201);
+assert.deepEqual([writtenDraft.review, writtenDraft.definition.criteria], [null, writtenB1.mission.criteria], 'La grille est figée dans la remise');
+await put(`/assessments/missions/${writtenDraft.id}`, b1Learner.token, { text: 'x'.repeat(3_001) }, 400);
+await put(`/assessments/missions/${writtenDraft.id}`, b1Learner.token, { text: 'x'.repeat(writtenB1.mission.written.maxChars + 1) }, 400);
+const writtenSent = await completeMission({ api, token: b1Learner.token, mission: writtenDraft });
+assert.deepEqual([writtenSent.status, writtenSent.reviewerKind], ['submitted', 'teacher'], 'L’écrit B1 arrive chez le référent');
+assert.ok((await api('/assessments/reviews', teacher.token)).some((item) => item.kind === 'mission' && item.id === writtenDraft.id
+  && item.levelCode === 'B1'), 'Il figure dans la file du référent');
+const grid = writtenDraft.definition.criteria;
+const fullPoints = Object.fromEntries(grid.map((criterion) => [criterion.id, criterion.maxPoints]));
+const reviewWritten = (body, status) => post(`/assessments/missions/${writtenDraft.id}/review`, teacher.token, body, status);
+await reviewWritten({ decision: 'validated', comment: 'Bien.' }, 400);
+await reviewWritten({ decision: 'validated', comment: 'Bien.', points: Object.fromEntries(Object.entries(fullPoints).slice(1)) }, 400);
+await reviewWritten({ decision: 'validated', comment: 'Bien.', points: { ...fullPoints, [grid[0].id]: grid[0].maxPoints + 1 } }, 400);
+await reviewWritten({ decision: 'validated', comment: 'Bien.', points: { ...fullPoints, [grid[0].id]: -1 } }, 400);
+await reviewWritten({ decision: 'validated', comment: 'Bien.', points: { ...fullPoints, inconnu: 1 } }, 400);
+await reviewWritten({ decision: 'to_redo', comment: '', points: fullPoints }, 400);
+await post(`/assessments/missions/${writtenDraft.id}/review`, otherTeacher.token, { decision: 'validated', comment: 'Bien.', points: fullPoints }, 403);
+const givenPoints = { ...fullPoints, [grid[0].id]: grid[0].maxPoints - 2 };
+const gridComment = 'Points forts : message clair et bien organisé.\nÀ retravailler : place du verbe après « weil » (St).\nRelance : quelle question poseriez-vous ?';
+const reviewedB1 = await reviewWritten({ decision: 'validated', comment: gridComment, points: givenPoints });
+assert.deepEqual([reviewedB1.status, reviewedB1.review.decision, reviewedB1.review.score, reviewedB1.review.maxScore], ['reviewed', 'validated', 18, 20]);
+const seenB1 = await api(`/assessments/missions/${writtenDraft.id}`, b1Learner.token);
+assert.deepEqual([seenB1.review.points, seenB1.review.score, seenB1.review.comment], [givenPoints, 18, gridComment], 'L’élève voit points, score et commentaire');
+const summaryB1 = (await api('/assessments/missions', b1Learner.token)).find((item) => item.id === writtenDraft.id);
+assert.deepEqual([summaryB1.score, summaryB1.maxScore], [18, 20]);
+assert.equal(localQuery(local.container, `select concat(data->>'score', '/', data->>'maxScore') from assessment.outbox_events
+  where type = 'assessment.mission_reviewed' and subject_id = '${writtenDraft.id}';`), '18/20', 'L’événement du retour porte le score');
+const oralSent = await sendMission({ api, token: b1Learner.token, upload: uploadRecording(b1Learner.token),
+  open: { trackVersionId: trackB1.versionId, activityId: oralB1.id } });
+assert.deepEqual([oralSent.status, oralSent.definition.oral.maxSeconds, oralSent.definition.criteria.length],
+  ['submitted', oralB1.mission.oral.maxSeconds, oralB1.mission.criteria.length], 'L’oral B1 enregistré part chez le référent avec sa grille');
+const a2Sent = await sendMission({ api, token: b1Learner.token, upload: uploadRecording(b1Learner.token),
+  open: { trackVersionId: trackA2.versionId, activityId: missionA2.id } });
+assert.deepEqual(a2Sent.definition.criteria, [], 'Mission A2 sans grille');
+await post(`/assessments/missions/${a2Sent.id}/review`, teacher.token, { decision: 'validated', comment: 'Bien.', points: { aufgabe: 3 } }, 400);
+await post(`/assessments/missions/${a2Sent.id}/review`, teacher.token, { decision: 'validated', comment: 'Bien.', points: {} }, 400);
+const a2Reviewed = await post(`/assessments/missions/${a2Sent.id}/review`, teacher.token, { decision: 'validated', comment: 'Bien.' });
+assert.deepEqual([a2Reviewed.review.points, a2Reviewed.review.score, a2Reviewed.review.maxScore], [null, null, null], 'Retour A2 inchangé');
+
+// 7. Test de niveau à trois paliers : B1 réussi, B2 annoncé « bientôt » et jamais comme ouvert.
+const tieredBank = await post('/catalogue/placement-tests', staffToken, { languageId: 'de' }, 201);
+const tieredSaved = await put(`/catalogue/placement-tests/${tieredBank.id}`, staffToken,
+  { title: 'Test de niveau de recette (trois paliers)', description: 'Trois paliers de lecture.', tiers: [bankTier('A1'), bankTier('A2'), bankTier('B1')] });
+assert.equal(tieredSaved.checks.publishable, true, JSON.stringify(tieredSaved.checks.issues));
+await post(`/catalogue/placement-tests/${tieredBank.id}/publish`, staffToken);
+assert.deepEqual((await api('/languages', teacher.token)).find((language) => language.id === 'de').placementTiers, ['A1', 'A2', 'B1'],
+  'Les paliers suivent la banque publiée');
+const tierLearner = await createAccount('b1-test-niveau', 'learner', null);
+await put('/me/language', tierLearner.token, { languageId: 'de' });
+let tiered = await post('/assessments/placements', tierLearner.token, {}, 201);
+for (const code of ['A1', 'A2', 'B1']) {
+  assert.equal(tiered.currentTier, code);
+  tiered = await api(`/assessments/placements/${tiered.id}/submit`, tierLearner.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+    body: { tier: code, answers: Object.fromEntries(tiered.questions.map((question) => [question.id, 'a'])) } });
+}
+assert.deepEqual([tiered.status, tiered.result.placedLevel], ['completed', 'B1'], 'Trois paliers réussis : niveau B1');
+assert.match(tiered.result.summary, /B2 arrive bientôt/, 'Le niveau suivant non publié est annoncé « bientôt »');
+assert.doesNotMatch(tiered.result.summary, /commencer au niveau B2/, 'B2 n’est jamais présenté comme ouvert');
+
+// 8. Indicateurs : filtre B1 accepté, parcours B1 comptés.
+await runJob();
+const b1Kpis = await api('/tracking/kpis' + horizon + '&level=B1', admin.token);
+assert.ok(b1Kpis.goals >= 1, 'Les parcours B1 de la recette sont comptés');
+console.log(`Recette B1 réussie · route publique (A1, A2, B1) mise en cache, niveaux dynamiques (B2 en brouillon, C1 retiré), durées B1 de `
+  + `${b1Months.standard} mois en standard et ${b1Months.intensive} en intensif, ${glossedPrompts} énoncés bilingues sans corrigé, prérequis A2 par `
+  + `le diagnostic, ${b1Worked} séances B1 justes (répétitions, dictées, missions), étapes A1 → B1 au prérequis du catalogue, écrit noté 18/20 sur `
+  + `grille (refus contrôlés), oral de ${oralB1.mission.oral.maxSeconds} s, mission A2 inchangée, test de niveau B1 et indicateurs B1.`);
 
 // --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
 
@@ -1969,8 +2250,8 @@ if (process.argv.includes('--browser')) {
     await uploadDialog.getByRole('button', { name: 'Déposer' }).click();
     await expect(editorPage.getByText('« Bretzel du navigateur » est disponible en version 1.')).toBeVisible({ timeout: 15_000 });
     await editorNav.getByRole('link', { name: 'Catalogue' }).click();
-    await editorPage.getByRole('link', { name: `Ouvrir B1 version ${b1Next.number}` }).click();
-    await expect(editorPage.getByRole('heading', { name: `B1 · version ${b1Next.number}` })).toBeVisible();
+    await editorPage.getByRole('link', { name: `Ouvrir ${DEMO} version ${demoNext.number}` }).click();
+    await expect(editorPage.getByRole('heading', { name: `${DEMO} · version ${demoNext.number}` })).toBeVisible();
     await expect(editorPage.getByText('Cette version est figée')).toBeVisible();
     await editorPage.getByLabel('Activité à prévisualiser').selectOption({ label: 'Chez le boulanger' });
     await editorPage.getByRole('button', { name: 'Ouvrir l’aperçu élève' }).click();
@@ -1986,7 +2267,7 @@ if (process.argv.includes('--browser')) {
     await examPage.getByRole('button', { name: 'Se connecter', exact: true }).click();
     await expect(examPage.getByText('Ma prochaine séance')).toBeVisible({ timeout: 15_000 });
     await examPage.goto(`http://127.0.0.1:5186/espace/evaluation/${examGoal.id}/final`);
-    await expect(examPage.getByRole('heading', { name: 'Examen blanc B1' })).toBeVisible({ timeout: 15_000 });
+    await expect(examPage.getByRole('heading', { name: `Examen blanc ${DEMO}` })).toBeVisible({ timeout: 15_000 });
     await expect(examPage.getByRole('heading', { name: 'Commander à l’oral' })).toBeVisible();
     await expect(examPage.getByText('Déposer un fichier').first()).toBeVisible();
     await expect(examPage.getByText('Tentative 1')).toBeVisible();
@@ -2078,7 +2359,12 @@ if (process.argv.includes('--browser')) {
     await welcome.getByRole('link', { name: 'Aller à mon accueil' }).click();
     await expect(welcome).toHaveURL(/\/espace$/);
     await expect(welcome.getByRole('navigation', { name: 'Raccourcis mobiles' }).getByRole('link', { name: /^Bibliothèque/ })).toBeVisible();
-    console.log('Recette navigateur réussie · accueil de l’élève autonome sur mobile : langue, test à paliers, niveau, objectif, jours, planning, départ.');
+    // Niveaux dynamiques : la bibliothèque ouvre l'onglet B1 publié et montre B2 (brouillon du catalogue) « Bientôt ».
+    await welcome.getByRole('navigation', { name: 'Raccourcis mobiles' }).getByRole('link', { name: /^Bibliothèque/ }).click();
+    await expect(welcome.getByRole('button', { name: /B1/ }).first()).toBeVisible({ timeout: 15_000 });
+    await expect(welcome.locator('.lib-level.is-soon').filter({ hasText: 'B2' })).toContainText('Bientôt');
+    console.log('Recette navigateur réussie · accueil de l’élève autonome sur mobile : langue, test à paliers, niveau, objectif, jours, planning, '
+      + 'départ, bibliothèque avec l’onglet B1 et B2 « Bientôt ».');
 
     // (b) Nouveau professeur : questionnaire d'accueil en plein écran jusqu'à « Valider mon profil ».
     const newTeacher = await createStaff('navigateur-prof', 'teacher');

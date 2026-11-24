@@ -706,3 +706,34 @@ fieldset:disabled .ed-switch { cursor: default; }
   .ed-drawer-actions > .btn { flex: 1 1 auto; }
   .ed-preview-nav .btn { padding-inline: .7rem; }
 }
+
+/* ---------- Niveaux B : marqueurs bilingues et grille des missions ---------- */
+/* Aide aux marqueurs : visible pendant la saisie du champ, ou dès que le texte porte un marqueur. */
+.ed-markers { display: none; align-items: flex-start; gap: .35rem; color: var(--muted); font-size: var(--text-xs); font-weight: 500; line-height: 1.5; }
+.ed-markers svg { flex-shrink: 0; margin-top: .15rem; color: var(--brand-600); }
+.ed-markers code { padding: .05rem .25rem; border-radius: 5px; background: var(--brand-50); color: var(--brand-700); font-size: .72rem; font-weight: 800; white-space: pre; }
+.ed-markers.is-used, label:focus-within > .ed-markers, .ed-text:focus-within + .ed-markers, .ed-fields:focus-within > .ed-markers {
+  display: flex; animation: lc-fade-up var(--t-base) var(--ease) both; }
+.ed-criteria > header { flex-wrap: wrap; }
+.ed-criteria-standard { margin-left: auto; }
+.ed-criteria-list { gap: .45rem; }
+.ed-criterion.ed-mission-criterion { display: grid; grid-template-columns: auto minmax(0, 1fr) 6.5rem auto; grid-template-areas: "id label points remove";
+  align-items: center; gap: .5rem .6rem; padding: .5rem .55rem; border: 1px solid var(--line); border-radius: var(--r-md); background: var(--surface-2);
+  animation: lc-fade-up var(--t-base) var(--ease) both; }
+.ed-mission-criterion .ed-criterion-id { grid-area: id; }
+.ed-mission-criterion .ed-criterion-label { grid-area: label; }
+.ed-mission-criterion .ed-criterion-points { grid-area: points; width: auto; }
+.ed-mission-criterion .ed-icon-action { grid-area: remove; }
+.ed-mission-criterion textarea { min-height: 2.6rem; padding: .45rem .7rem; line-height: 1.4; resize: vertical; field-sizing: content; }
+.ed-mission-criterion .ed-icon-action { margin-bottom: 0; }
+.ed-mission-criterion input { background: var(--surface); }
+.ed-criterion-id { min-width: 5.6rem; padding: .3rem .5rem; border-radius: var(--r-sm); background: var(--violet-50); color: var(--violet); font-size: .72rem;
+  font-weight: 800; letter-spacing: .02em; text-align: center; }
+.ed-criterion-points { position: relative; }
+.ed-criterion-points input { padding-right: 2.4rem; font-variant-numeric: tabular-nums; }
+.ed-points-suffix { position: absolute; top: 50%; right: .7rem; transform: translateY(-50%); color: var(--muted); font-size: var(--text-xs); font-weight: 700; pointer-events: none; }
+@media (max-width: 620px) {
+  .ed-criterion.ed-mission-criterion { grid-template-columns: minmax(0, 1fr) 6rem auto; grid-template-areas: "id points remove" "label label label"; }
+  .ed-criterion-id { justify-self: start; }
+  .ed-criteria-standard { margin-left: 0; }
+}

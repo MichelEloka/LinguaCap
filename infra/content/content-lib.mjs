@@ -1,5 +1,5 @@
 // Lecture des contenus pédagogiques (content/de) partagée par l'importeur, le rendu des images et les contrôles.
-import { existsSync, readFileSync } from 'node:fs';
+import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -15,7 +15,53 @@ export const baseDir = join(root, 'content', 'base', 'de');
 export const baseAudioDir = join(baseDir, 'media', 'audio');
 /** Extraits des ressources sous licence libre (non versionnés) : enregistrements et images de Deutsch im Blick. */
 export const sourcesDir = join(root, 'resource-langue', 'extraits');
-export const courseLevelIds = ['a1', 'a2', 'b1'];
+/** Fichiers téléchargés sous licence libre (Commons, Wikinews…), non versionnés ; registre versionné dans content/b/libre. */
+export const libreDir = join(root, 'resource-langue', 'libre');
+export const registryFile = join(root, 'content', 'b', 'libre', 'registre.json');
+/** Identifiant de niveau de parcours (échelle CECRL) : un dossier content/de/<id> avec level.json est un niveau disponible. */
+export const LEVEL_ID = /^[abc][12]$/;
+
+/**
+ * Fichier source d'un enregistrement natif ou d'une photo : « libre/… » se lit sous resource-langue/libre (téléchargements
+ * sous licence libre), tout autre chemin sous resource-langue/extraits (Deutsch im Blick).
+ */
+export function sourceFile(path) {
+  const value = String(path ?? '');
+  return value.startsWith('libre/') ? join(root, 'resource-langue', value) : join(sourcesDir, value);
+}
+export const isLibre = (path) => String(path ?? '').startsWith('libre/');
+
+/** Registre des fichiers téléchargés : chemin « libre/… » → entrée (empreinte, source, auteur, licence, URL…). */
+export function loadRegistry(file = registryFile) {
+  if (!existsSync(file)) return new Map();
+  const registry = JSON.parse(readFileSync(file, 'utf8'));
+  return new Map((registry.files ?? []).map((entry) => [entry.path, entry]));
+}
+
+/**
+ * Voix de synthèse : nom employé dans les scripts → { model, speaker? }. Les quatre voix de base (Kerstin, Thorsten) sont
+ * toujours connues ; infra/content/tts/voices.json (lot médias) ajoute les voix des niveaux B. Sans ce fichier, les voix
+ * prévues (frau2, frau3, mann2, mann3) restent admises et sont synthétisées par les voix de base (repli signalé).
+ */
+export const voicesFile = join(root, 'infra', 'content', 'tts', 'voices.json');
+export const BASE_VOICES = {
+  frau: { model: 'de_DE-kerstin-medium' }, sprecherin: { model: 'de_DE-kerstin-medium' },
+  mann: { model: 'de_DE-thorsten-medium' }, sprecher: { model: 'de_DE-thorsten-medium' },
+};
+export const PLANNED_VOICES = {
+  frau2: { model: 'de_DE-kerstin-medium' }, frau3: { model: 'de_DE-kerstin-medium' },
+  mann2: { model: 'de_DE-thorsten-medium' }, mann3: { model: 'de_DE-thorsten-medium' },
+};
+export function loadVoices(file = voicesFile) {
+  if (!existsSync(file)) return { voices: { ...BASE_VOICES, ...PLANNED_VOICES }, configured: false };
+  const configured = JSON.parse(readFileSync(file, 'utf8'));
+  const voices = { ...BASE_VOICES };
+  for (const [name, value] of Object.entries(configured)) {
+    if (name.startsWith('_') || !value || typeof value !== 'object' || typeof value.model !== 'string') continue;
+    voices[name] = { model: value.model, ...(Number.isInteger(value.speaker) ? { speaker: value.speaker } : {}) };
+  }
+  return { voices, configured: true };
+}
 
 /** Types de question du format 4 ; une question sans type est un choix (formats antérieurs, B1). */
 export const QUESTION_TYPES = ['choice', 'fill', 'order', 'match', 'dictation', 'speak'];
@@ -49,8 +95,15 @@ export function loadLevel(levelId, base = contentDir) {
   return { ...level, moduleFiles: level.modules, modules };
 }
 
-export function availableLevels() {
-  return courseLevelIds.filter((levelId) => existsSync(join(contentDir, levelId, 'level.json')));
+/**
+ * Niveaux disponibles : dossiers <base>/<id> (a1 … c2) qui ont un level.json, dans l'ordre de l'échelle CECRL. Un niveau
+ * construit partiellement (aperçu « --only » de build-b, « partial: true ») n'est jamais un niveau disponible de content/de.
+ */
+export function availableLevels(base = contentDir) {
+  if (!existsSync(base)) return [];
+  return readdirSync(base, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && LEVEL_ID.test(entry.name) && existsSync(join(base, entry.name, 'level.json')))
+    .map((entry) => entry.name).sort();
 }
 
 /** Tous les médias d'un niveau, modules et évaluations, avec leur niveau. */

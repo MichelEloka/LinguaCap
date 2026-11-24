@@ -1,14 +1,16 @@
 #!/usr/bin/env node
-// Import des parcours A1/A2 (DEV-093, DEV-095) par l'API publique, avec un compte autorisé à éditer le catalogue :
-// les sons et images sont déposés dans la médiathèque (réutilisés s'ils n'ont pas changé), puis le brouillon du niveau
-// reçoit modules, diagnostic, bilan et examen blanc ; il est publié si --publish est demandé et que le contrôle passe.
+// Import des parcours (DEV-093, DEV-095 ; niveaux de content/de : A1, A2, B1…) par l'API publique, avec un compte autorisé à
+// éditer le catalogue : le niveau du catalogue est aligné sur le bloc « catalogue » de level.json (format 5 : titre,
+// description, position, prérequis ; créé s'il manque, avec un compte administrateur), les sons et images sont déposés
+// dans la médiathèque (réutilisés s'ils n'ont pas changé), puis le brouillon du niveau reçoit modules, diagnostic, bilan
+// et examen blanc ; il est publié si --publish est demandé et que le contrôle passe.
 // Avec --placement, c'est le test de niveau (content/de/placement/placement.json) qui est importé de la même façon :
 // sons d'écoute déposés, brouillon de la banque enregistré, contrôlé, puis publié avec ses médias.
 //
 // Usage :
 //   node infra/content/import-content.mjs --dry-run [--placement]
 //   node infra/content/import-content.mjs --api https://linguacap.emichfer.org/api/v1 \
-//     --supabase https://<projet>.supabase.co --publishable-key <clé publique> --email <adresse> [--level a1] [--publish]
+//     --supabase https://<projet>.supabase.co --publishable-key <clé publique> --email <adresse> [--level b1] [--publish]
 //   node infra/content/import-content.mjs --api … --supabase … --publishable-key … --email … --placement [--publish]
 // Le mot de passe est demandé sans écho (ou LINGUACAP_PASSWORD) ; LINGUACAP_TOKEN permet de fournir un jeton de session.
 import { createHash } from 'node:crypto';
@@ -21,8 +23,9 @@ import {
   placementMedia, questionType, root, transcriptOf,
 } from './content-lib.mjs';
 
-/** Taille maximale d'un document envoyé (passerelle, catalogue et importeur : 2 Mo). */
+/** Taille maximale d'un document envoyé (passerelle, catalogue et importeur : 2 Mo), signalée à 85 % (1,7 Mo). */
 export const MAX_BODY = 2 * 1024 * 1024;
+const WARN_BODY = MAX_BODY * 0.85;
 const sha256 = (data) => createHash('sha256').update(data).digest('hex');
 
 /** Titre de l'élément de médiathèque : titre du contenu suivi de sa clé, unique et retrouvable. */
@@ -75,6 +78,8 @@ function vocabularyAudio(entry, assets, manifest) {
  * Document de version attendu par PUT /catalogue/versions/{id}, les médias étant résolus en (assetId, version).
  * Au format 4, les questions portent leur type, leur explication et leur clé (spec), les choix leur retour, les
  * activités « mission » leur mission et les modules leur vocabulaire (segments du son du lexique, d'après manifest).
+ * Au format 5, une mission porte sa grille (criteria) : envoyée seulement si elle n'est pas vide, pour qu'un catalogue
+ * antérieur reste compatible avec les niveaux A1 et A2. Les marqueurs de consigne bilingue passent tels quels.
  */
 export function buildDocument(level, assets, { manifest = {} } = {}) {
   const v4 = levelFormat(level) >= 4;
@@ -131,6 +136,8 @@ export function buildDocument(level, assets, { manifest = {} } = {}) {
           written: activity.mission?.written ? { prompt: activity.mission.written.prompt,
             maxChars: activity.mission.written.maxChars ?? 1500, minWords: activity.mission.written.minWords ?? 0 } : null,
           checklist: activity.mission?.checklist ?? [],
+          ...(activity.mission?.criteria?.length ? { criteria: activity.mission.criteria.map(({ id, label, maxPoints }) =>
+            ({ id, label, maxPoints })) } : {}),
         } : null } : {}),
       })),
       ...(v4 ? { vocabulary: (module.vocabulary ?? []).map((entry) => ({
@@ -278,17 +285,59 @@ export async function uploadMedia({ call, token, publishable, mediaList, state, 
   return assets;
 }
 
+/**
+ * Niveau du catalogue aligné sur le bloc « catalogue » de level.json (format 5) : créé s'il manque (POST /levels, compte
+ * administrateur), puis titre, description, position et prérequis mis à jour s'ils diffèrent (PUT /catalogue/levels/{id},
+ * droit d'éditeur). Sans bloc (A1, A2 au format 4), le niveau doit exister ; un prérequis qui n'est pas le niveau
+ * disponible précédent est seulement signalé.
+ */
+export async function ensureLevel({ call, levelId, wanted, expectedPrerequisite, log = console.log }) {
+  const code = levelId.toUpperCase();
+  let current = (await call('/catalogue/levels')).find((item) => item.id === levelId);
+  if (!current) {
+    if (!wanted) throw new Error(`Niveau ${levelId} absent du catalogue.`);
+    try {
+      await call('/levels', { method: 'POST', expect: [201], body: { code, title: wanted.title, description: wanted.description ?? '' } });
+    } catch (error) {
+      throw new Error(`Niveau ${code} absent du catalogue : seul un compte administrateur peut le créer (${error.message}). `
+        + 'Créez-le dans Catalogue › niveaux ou relancez l’import avec un compte administrateur.');
+    }
+    log(`${code} · niveau créé dans le catalogue.`);
+    current = (await call('/catalogue/levels')).find((item) => item.id === levelId);
+    if (!current) throw new Error(`Niveau ${levelId} introuvable après sa création.`);
+  }
+  if (!wanted) {
+    if (expectedPrerequisite && current.prerequisiteLevelId !== expectedPrerequisite) {
+      log(`Attention : le niveau ${code} ne requiert pas encore le niveau ${expectedPrerequisite.toUpperCase()} (Catalogue › niveaux).`);
+    }
+    return current;
+  }
+  const target = {
+    title: wanted.title ?? current.title, description: wanted.description ?? current.description ?? '',
+    position: wanted.position ?? current.position ?? null,
+    prerequisiteLevelId: wanted.prerequisiteLevelId === undefined ? current.prerequisiteLevelId ?? null : wanted.prerequisiteLevelId,
+  };
+  const changed = Object.keys(target).filter((key) => (target[key] ?? null) !== (current[key] ?? null));
+  if (changed.length) {
+    await call(`/catalogue/levels/${levelId}`, { method: 'PUT', body: target });
+    log(`${code} · niveau du catalogue mis à jour (${changed.join(', ')}).`);
+  }
+  return { ...current, ...target };
+}
+
 export async function importContent({ api, token, publishable, levels = availableLevels(), publish = false,
   statePath, log = console.log }) {
   const { state, save } = importState(statePath);
   const call = apiClient(api, token);
-  const catalogue = await call('/catalogue/levels');
-  const a2 = catalogue.find((level) => level.id === 'a2');
-  if (a2 && a2.prerequisiteLevelId !== 'a1') log('Attention : le niveau A2 ne requiert pas encore le niveau A1 (Catalogue › niveaux).');
   const results = [];
+  const available = availableLevels();
 
   for (const levelId of levels) {
     const level = loadLevel(levelId);
+    if (level.partial) throw new Error(`${levelId.toUpperCase()} : construction partielle (build-b --only), à reconstruire en entier avant l’import.`);
+    // Prérequis attendu d'un niveau sans bloc catalogue : le niveau disponible qui le précède (A2 → A1).
+    const previous = available[available.indexOf(levelId) - 1] ?? null;
+    await ensureLevel({ call, levelId, wanted: level.catalogue ?? null, expectedPrerequisite: level.catalogue ? null : previous, log });
     const assets = await uploadMedia({ call, token, publishable, mediaList: allMedia(level), state, save,
       label: levelId.toUpperCase(), log });
 
@@ -399,7 +448,8 @@ function dryRun(label, mediaList, build, check = () => 0) {
   const size = Buffer.byteLength(JSON.stringify(document));
   const silent = check(document);
   console.log(`${label} · ${assets.size} médias (${(bytes / 1048576).toFixed(1)} Mo) · document ${(size / 1024).toFixed(0)} Ko`
-    + (size > MAX_BODY ? ' — TROP VOLUMINEUX' : '') + (silent ? ` · ${silent} mot(s) du lexique sans segment audio` : ''));
+    + (size > MAX_BODY ? ' — TROP VOLUMINEUX' : size > WARN_BODY ? ' — proche de la limite de 2 Mo' : '')
+    + (silent ? ` · ${silent} mot(s) du lexique sans segment audio` : ''));
   for (const line of missing.slice(0, 10)) console.error(`  Fichier manquant · ${line}`);
   if (missing.length > 10) console.error(`  … et ${missing.length - 10} autre(s).`);
   return missing.length === 0 && size <= MAX_BODY && !silent;
@@ -422,6 +472,11 @@ async function main() {
     }
     for (const levelId of levels) {
       const level = loadLevel(levelId);
+      if (level.partial) {
+        console.error(`${levelId.toUpperCase()} · construction partielle (build-b --only) : à reconstruire en entier avant l’import.`);
+        process.exitCode = 1;
+        continue;
+      }
       const ready = dryRun(levelId.toUpperCase(), allMedia(level), (assets) => buildDocument(level, assets, { manifest: audioManifest() }),
         (document) => unresolvedVocabulary(level, document));
       if (!ready) process.exitCode = 1;

@@ -13,6 +13,7 @@ import { Badge, Dialog } from '../../components/ui';
 import { AudioPlayer, Callout, Facts, ProgressRing, SkeletonCard, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { competenceLabels, examKindLabels, type PracticePart, type PracticeView } from '../../integration/v2';
+import { BilingualText, germanOf } from '../pilot/bilingual';
 import { LessonContent } from '../pilot/LessonContent';
 import { QuestionCard } from '../pilot/study-question';
 import { errorText, momentText } from '../onboarding/onboarding-kit';
@@ -165,7 +166,7 @@ export function PracticeExamPage({ token }: { token: string }) {
         <div className="px-hero-text">
           <p className="eyebrow">Entraînement · {examKindLabels[exam.kind]} · niveau {exam.levelCode}</p>
           <h1 id="practice-title">{exam.definition.title}</h1>
-          {exam.definition.description && <p className="px-hero-desc">{exam.definition.description}</p>}
+          {exam.definition.description && <p className="px-hero-desc"><BilingualText text={exam.definition.description} /></p>}
           <div className="px-hero-badges">
             <Badge tone={exam.status === 'submitted' ? 'green' : 'blue'}>{exam.status === 'submitted' ? 'Remis' : 'En cours'}</Badge>
             <Badge tone="violet"><EyeOff size={12} aria-hidden="true" /> Sans corrigé détaillé</Badge>
@@ -291,7 +292,7 @@ export function PracticeExamPage({ token }: { token: string }) {
                     Cette partie n’est pas corrigée pendant l’entraînement. {part.mode === 'oral'
                       ? 'Entraînez-vous à voix haute, en vous chronométrant, puis réécoutez les modèles des leçons.'
                       : 'Rédigez votre texte sur papier ou dans un brouillon, puis relisez-le avec les leçons du module.'}
-                    {part.criteria.length > 0 && <> Critères : {part.criteria.map((criterion) => criterion.label).join(', ')}.</>}
+                    {part.criteria.length > 0 && <> Critères : {part.criteria.map((criterion) => germanOf(criterion.label)).join(', ')}.</>}
                   </Callout>
                 )}
               </section>

@@ -3,6 +3,8 @@
  * trous, phrase à remettre en ordre, associations, dictée, répétition orale), sauvegarde de l'état, remise par
  * POST /assessments/exercises puis corrigé question par question. Une tentative déjà remise est relue par
  * GET /assessments/exercises/{attemptId} ; si le corrigé n'est pas disponible, les réponses verrouillées restent visibles.
+ * Niveaux B : consignes bilingues (bilingual.tsx) ; le réglage « Toujours afficher l'aide en français » est proposé une
+ * fois en tête quand une consigne porte une aide repliée.
  */
 import { useEffect, useMemo, useRef, useState, type FormEvent } from 'react';
 import { CheckCircle2, Clock3, Flag } from 'lucide-react';
@@ -12,6 +14,7 @@ import {
   asQuestionView, newRoundId, questionTypeLabels, readExerciseState, type ExerciseAnswer, type ExerciseAnswers, type ExerciseResult,
   type ExerciseState, type ExerciseSubmitRequest, type QuestionView,
 } from '../../integration/v4';
+import { FrenchHelpSwitch, hasFoldedHelp } from './bilingual';
 import { LessonContent } from './LessonContent';
 import type { ActivityDetail, Grade } from './LearnerSession';
 import { MediaPlacement, MediaSequence, Transcript } from './study-media';
@@ -117,6 +120,8 @@ export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, o
   const showResult = completed || Boolean(grade) || Boolean(result);
   const shownGrade = result?.grade ?? grade;
   const typed = questions.some((question) => question.type !== 'choice');
+  // Aide repliée dans les consignes des questions seulement : le réglage n'est pas déjà proposé par la description.
+  const helpSwitch = !hasFoldedHelp(activity.lesson?.description) && questions.some((question) => hasFoldedHelp(question.prompt));
 
   // Tentative déjà remise (reprise de la séance) : relire son corrigé.
   useEffect(() => {
@@ -261,6 +266,7 @@ export function ExerciseActivity({ activity, sessionId, token, grade, onRenew, o
   return (
     <form className="study-body sx-exercise" onSubmit={submit} noValidate>
       {activity.lesson?.description && <LessonContent text={activity.lesson.description} />}
+      {helpSwitch && <FrenchHelpSwitch />}
       <MediaSequence placements={activityPlacements(activity)} onRenew={onRenew} after={!showResult && activity.transcript ? <Transcript text={activity.transcript} /> : undefined} />
       {reviewReady && result && (
         <>

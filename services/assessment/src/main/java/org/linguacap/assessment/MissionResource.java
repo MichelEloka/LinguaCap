@@ -108,7 +108,7 @@ public class MissionResource {
         return view(mission, callerId, MissionRules.SUBMITTED.equals(mission.status()), true);
     }
 
-    /** Brouillon : texte (1 500 caractères au plus) et points cochés de la liste. */
+    /** Brouillon : texte (3 000 caractères au plus, et la limite de la mission) et points cochés de la liste. */
     @PUT
     @Path("/{missionId}")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -179,7 +179,11 @@ public class MissionResource {
         return view(submitted, learnerId, false, true);
     }
 
-    /** Retour du correcteur habilité (403 pour un professeur tiers) : « validée » ou « à reprendre ». */
+    /**
+     * Retour du correcteur habilité (403 pour un professeur tiers) : « validée » ou « à reprendre ». Une mission à
+     * grille exige les points de chaque critère (400 sinon) ; une mission sans grille les refuse. La décision reste
+     * celle du correcteur, quel que soit le score.
+     */
     @POST
     @Path("/{missionId}/review")
     @Consumes(MediaType.APPLICATION_JSON)
@@ -191,7 +195,8 @@ public class MissionResource {
         }
         if (request == null) throw HttpError.badRequest("Indiquez « validée » ou « à reprendre ».");
         String comment = MissionRules.checkReview(request.decision(), request.comment());
-        return view(store.review(missionId, callerId, request.decision(), comment), callerId, false, true);
+        MissionRules.Grade grade = MissionRules.checkPoints(mission.definition(), request.points());
+        return view(store.review(missionId, callerId, request.decision(), comment, grade), callerId, false, true);
     }
 
     private MissionStore.Mission owned(UUID learnerId, UUID missionId) {
@@ -248,7 +253,8 @@ public class MissionResource {
             recording = new Recording(mission.recordingId(), mimeType, url);
         }
         Review review = mission.reviewedAt() == null ? null
-                : new Review(mission.decision(), mission.comment(), text(mission.reviewedAt()));
+                : new Review(mission.decision(), mission.comment(), text(mission.reviewedAt()), mission.points(),
+                        mission.score(), mission.maxScore());
         return new MissionView(mission.id(), mission.learnerId(), mission.trackVersionId(), mission.levelCode(),
                 mission.moduleId(), mission.activityId(), mission.sessionId(), mission.sessionActivityId(),
                 mission.number(), mission.definition().path("title").asText(""),
@@ -260,7 +266,7 @@ public class MissionResource {
     private static MissionSummary summary(MissionStore.Mission mission) {
         return new MissionSummary(mission.id(), mission.activityId(), mission.definition().path("title").asText(""),
                 mission.levelCode(), mission.moduleId(), mission.status(), mission.decision(), text(mission.submittedAt()),
-                text(mission.reviewedAt()), mission.sessionId());
+                text(mission.reviewedAt()), mission.sessionId(), mission.score(), mission.maxScore());
     }
 
     private static String text(OffsetDateTime value) {
@@ -274,17 +280,25 @@ public class MissionResource {
 
     public record RecordingRequest(String mimeType, long size) {}
 
-    public record ReviewRequest(String decision, String comment) {}
+    /** points : {idCritère: entier de 0 à maxPoints}, exigé pour une mission à grille et refusé sans grille. */
+    public record ReviewRequest(String decision, String comment, JsonNode points) {}
 
-    public record Review(String decision, String comment, String reviewedAt) {}
+    /** Retour du correcteur ; points, score et maxScore : notation sur grille, null pour une mission sans grille. */
+    public record Review(String decision, String comment, String reviewedAt, JsonNode points, Integer score,
+                         Integer maxScore) {}
 
-    /** definition : {description, oral|null, written|null, checklist} ; canReview : l'appelant peut donner son retour. */
+    /**
+     * definition : {description, oral|null, written|null, checklist, criteria} (criteria : [] sans grille) ;
+     * canReview : l'appelant peut donner son retour.
+     */
     public record MissionView(UUID id, UUID learnerId, UUID trackVersionId, String levelCode, String moduleId,
                               String activityId, UUID sessionId, String sessionActivityId, int number, String title,
                               JsonNode definition, String status, String text, List<Integer> checklist,
                               Recording recording, String reviewerKind, String submittedAt, Review review,
                               boolean canReview, String createdAt, String updatedAt) {}
 
+    /** score et maxScore : retour sur grille, null sans grille ou avant le retour. */
     public record MissionSummary(UUID id, String activityId, String title, String levelCode, String moduleId,
-                                 String status, String decision, String submittedAt, String reviewedAt, UUID sessionId) {}
+                                 String status, String decision, String submittedAt, String reviewedAt, UUID sessionId,
+                                 Integer score, Integer maxScore) {}
 }

@@ -17,6 +17,7 @@ import org.linguacap.catalogue.QuestionSpecs.Blank;
 import org.linguacap.catalogue.QuestionSpecs.Pair;
 import org.linguacap.catalogue.QuestionSpecs.Spec;
 import org.linguacap.catalogue.VersionDocument.Activity;
+import org.linguacap.catalogue.VersionDocument.Criterion;
 import org.linguacap.catalogue.VersionDocument.Diagnostic;
 import org.linguacap.catalogue.VersionDocument.Lesson;
 import org.linguacap.catalogue.VersionDocument.MediaRef;
@@ -365,7 +366,11 @@ class VersionDocumentTest {
                 new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
                         new Mission(new Oral("Parlez.", 10), null, List.of("a", "b"))),
                 new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
-                        new Mission(null, new Written("Écrivez.", 3000, 25), List.of("a", "b"))),
+                        new Mission(new Oral("Parlez.", 301), null, List.of("a", "b"))),
+                new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
+                        new Mission(null, new Written("Écrivez.", 3001, 25), List.of("a", "b"))),
+                new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
+                        new Mission(null, new Written("Écrivez.", 1500, 401), List.of("a", "b"))),
                 new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
                         new Mission(null, new Written("Écrivez.", 1500, 25), java.util.Collections.nCopies(7, "point"))),
                 new Activity("x", "mission", "M", 5, List.of(), null, List.of(), List.of(),
@@ -377,6 +382,88 @@ class VersionDocumentTest {
         Module ok = new Module("m", "M", "O", List.of(), List.of(new Activity("x", "mission", "M", 5, List.of(), null,
                 List.of(), List.of(), valid)));
         assertDoesNotThrow(() -> VersionDocument.checkStructure(SETTINGS, null, List.of(ok)));
+        // Bornes élargies pour les niveaux B : 300 s, 3 000 caractères et 400 mots acceptés.
+        Mission longest = new Mission(new Oral("Sprechen Sie.", 300), new Written("Schreiben Sie.", 3000, 400), List.of("a", "b"));
+        Module wide = new Module("m", "M", "O", List.of(), List.of(new Activity("x", "mission", "M", 5, List.of(), null,
+                List.of(), List.of(), longest)));
+        assertDoesNotThrow(() -> VersionDocument.checkStructure(SETTINGS, null, List.of(wide)));
+    }
+
+    private static final List<Criterion> GRID_B1 = List.of(
+            new Criterion("aufgabe", "Tâche : tous les points sont traités", 5),
+            new Criterion("kohaerenz", "Cohérence : texte organisé, connecteurs variés", 5),
+            new Criterion("wortschatz", "Vocabulaire : précis et assez varié", 5),
+            new Criterion("strukturen", "Structures : verbe à la bonne place", 5));
+
+    private static Module missionModule(Mission mission) {
+        return new Module("m", "Module", "Objectif.", List.of(), List.of(new Activity("b1-wohnen-schreiben", "mission",
+                "Mission : écrire à la régie", 25, List.of("expression-ecrite"),
+                new Lesson("Mission", "Schreiben Sie an die Hausverwaltung. [fr] Écrivez à la régie.", null), List.of(),
+                List.of(), mission)));
+    }
+
+    @Test
+    void laGrilleDUneMissionEstFacultativeEtBornée() {
+        Written written = new Written("Schreiben Sie eine E-Mail. [fr] Écrivez un courriel.", 1500, 100);
+        List<String> checklist = List.of("Ich nenne das Problem.", "Ich schlage eine Lösung vor.");
+        Mission graded = new Mission(null, written, checklist, GRID_B1);
+        assertDoesNotThrow(() -> VersionDocument.checkStructure(SETTINGS, null, List.of(missionModule(graded))));
+        assertTrue(VersionDocument.check(SETTINGS, null, List.of(missionModule(graded))).publishable());
+        assertEquals(List.of(), new Mission(null, written, checklist, null).criteria(), "sans grille : []");
+        assertTrue(VersionDocument.check(SETTINGS, null, List.of(missionModule(new Mission(null, written, checklist))))
+                .publishable(), "une mission A1/A2 sans grille reste publiable");
+
+        Criterion fifth = new Criterion("aussprache", "Prononciation", 4);
+        Criterion sixth = new Criterion("interaktion", "Interaction", 4);
+        Criterion seventh = new Criterion("extra", "Critère de trop", 1);
+        List<List<Criterion>> refused = List.of(
+                List.of(GRID_B1.get(0), GRID_B1.get(1), GRID_B1.get(2), GRID_B1.get(3), fifth, sixth, seventh),
+                List.of(GRID_B1.get(0), new Criterion("aufgabe", "Doublon", 5)),
+                List.of(new Criterion("aufgabe", "Tâche", 0)),
+                List.of(new Criterion("aufgabe", "Tâche", 21)),
+                List.of(new Criterion("Aufgabe", "Tâche", 5)),
+                List.of(new Criterion("a".repeat(41), "Tâche", 5)),
+                List.of(new Criterion("aufgabe", "x".repeat(201), 5)),
+                java.util.Arrays.asList(GRID_B1.get(0), null));
+        for (List<Criterion> criteria : refused) {
+            Module module = missionModule(new Mission(null, written, checklist, criteria));
+            assertEquals(400, assertThrows(WebApplicationException.class,
+                    () -> VersionDocument.checkStructure(SETTINGS, null, List.of(module))).getResponse().getStatus(),
+                    () -> "grille refusée : " + criteria);
+        }
+        List<Criterion> six = List.of(GRID_B1.get(0), GRID_B1.get(1), GRID_B1.get(2), GRID_B1.get(3), fifth, sixth);
+        assertDoesNotThrow(() -> VersionDocument.checkStructure(SETTINGS, null,
+                List.of(missionModule(new Mission(null, written, checklist, six)))), "six critères au plus");
+
+        Mission blank = new Mission(null, written, checklist, List.of(GRID_B1.get(0), new Criterion("kohaerenz", " Ko ", 5)));
+        assertDoesNotThrow(() -> VersionDocument.checkStructure(SETTINGS, null, List.of(missionModule(blank))),
+                "un brouillon peut garder un critère à rédiger");
+        List<String> paths = VersionDocument.check(SETTINGS, null, List.of(missionModule(blank))).issues().stream()
+                .map(VersionDocument.Issue::path).toList();
+        assertEquals(List.of("modules[0].activities[0].mission.criteria[1].label"), paths);
+
+        Mission padded = new Mission(null, written, checklist, List.of(new Criterion("aufgabe", "  Tâche : tout est traité  ", 5)))
+                .normalized();
+        assertEquals(List.of(new Criterion("aufgabe", "Tâche : tout est traité", 5)), padded.criteria());
+    }
+
+    @Test
+    void laGrilleSeLitStrictementEtSonAbsenceVautUneGrilleVide() throws Exception {
+        String a2 = """
+                {"oral": null, "written": {"prompt": "Écrivez.", "maxChars": 1500, "minWords": 25},
+                 "checklist": ["Je salue.", "Je propose une date."]}
+                """;
+        Mission old = STRICT.readValue(a2, Mission.class);
+        assertEquals(List.of(), old.criteria(), "mission A1/A2 stockée sans grille");
+        JsonNode served = STRICT.valueToTree(old);
+        assertTrue(served.path("criteria").isArray() && served.path("criteria").isEmpty(), "servie avec criteria = []");
+
+        String b1 = a2.replace("\"checklist\"",
+                "\"criteria\": [{\"id\": \"aufgabe\", \"label\": \"Aufgabe [fr] Tâche\", \"maxPoints\": 5}], \"checklist\"");
+        Mission graded = STRICT.readValue(b1, Mission.class);
+        assertEquals(List.of(new Criterion("aufgabe", "Aufgabe [fr] Tâche", 5)), graded.criteria());
+        String unknown = b1.replace("\"maxPoints\": 5", "\"maxPoints\": 5, \"weight\": 2");
+        assertThrows(Exception.class, () -> STRICT.readValue(unknown, Mission.class), "champ inconnu refusé");
     }
 
     @Test

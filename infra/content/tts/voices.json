@@ -1,0 +1,11 @@
+{
+  "_info": "Voix de synthèse Piper (plan B §3.5). frau, mann, sprecherin et sprecher gardent leur modèle d'origine sans réglage (empreinte des sons A1/A2 inchangée). frau2, frau3, mann2, mann3 : personnages secondaires tirés des deux voix fiables (Kerstin et Thorsten, CC0) par un décalage de hauteur à débit constant (pitch, 0,85 à 1,15). Les locuteurs du modèle multilocuteur de_DE-mls-medium (CC BY 4.0), d'abord retenus après audition, ont été écartés le 24/11/2026 : sur les 283 sons B1, la reconnaissance vocale signalait la moitié des sons MLS (58 sur 116, dont tous les cas graves, souvent inintelligibles), contre 9 sur 197 pour Kerstin et Thorsten ; le second avis Whisper medium confirmait. Rendus d'audition MLS : target/voix-audition/.",
+  "frau": { "model": "de_DE-kerstin-medium" },
+  "sprecherin": { "model": "de_DE-kerstin-medium" },
+  "mann": { "model": "de_DE-thorsten-medium" },
+  "sprecher": { "model": "de_DE-thorsten-medium" },
+  "frau2": { "model": "de_DE-kerstin-medium", "pitch": 1.07, "note": "féminine, plus claire que Kerstin" },
+  "frau3": { "model": "de_DE-kerstin-medium", "pitch": 0.94, "note": "féminine, plus grave que Kerstin" },
+  "mann2": { "model": "de_DE-thorsten-medium", "pitch": 0.92, "note": "masculine, plus grave que Thorsten" },
+  "mann3": { "model": "de_DE-thorsten-medium", "pitch": 1.06, "note": "masculine, plus claire que Thorsten" }
+}

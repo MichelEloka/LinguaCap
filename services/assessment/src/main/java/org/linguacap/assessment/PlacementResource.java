@@ -20,6 +20,7 @@ import java.time.OffsetDateTime;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
@@ -136,9 +137,31 @@ public class PlacementResource {
     private PlacementView view(PlacementStore.Attempt attempt, UUID callerId) {
         boolean owner = callerId.equals(attempt.learnerId());
         Map<String, PlacementRules.MediaFile> media = owner ? mediaFiles(attempt, callerId) : Map.of();
-        OffsetDateTime retake = "completed".equals(attempt.status())
+        boolean completed = "completed".equals(attempt.status());
+        OffsetDateTime retake = completed
                 ? PlacementRules.retakeAvailableAt(attempt, store.lastTested(attempt.learnerId(), attempt.languageId())) : null;
-        return PlacementRules.view(attempt, owner, media, retake);
+        Set<String> published = completed && !attempt.declaredBeginner()
+                ? publishedLevels(callerId, attempt.languageId()) : null;
+        return PlacementRules.view(attempt, owner, media, retake, published);
+    }
+
+    /**
+     * Niveaux publiés de la langue, lus chez Catalogue (GET /v1/tracks, versions publiées) pour que le résumé du test
+     * n'annonce jamais un niveau non publié ; null si le catalogue ne répond pas (le résumé n'annonce alors rien).
+     */
+    private Set<String> publishedLevels(UUID callerId, String languageId) {
+        try {
+            var result = services.exchange(catalogueUrl, "/v1/tracks", "GET", callerId, null, "", "", false,
+                    actor.requestId());
+            if (result.status() != 200 || !result.body().isArray()) {
+                LOG.warnf("Catalogue tracks returned HTTP %d for a placement summary", result.status());
+                return null;
+            }
+            return PlacementRules.publishedLevels(result.body(), languageId);
+        } catch (WebApplicationException unavailable) {
+            LOG.warn("Catalogue tracks unavailable for a placement summary");
+            return null;
+        }
     }
 
     /** Adresses temporaires des sons et images du palier en cours, avec le jeton de l'élève (politiques Storage). */

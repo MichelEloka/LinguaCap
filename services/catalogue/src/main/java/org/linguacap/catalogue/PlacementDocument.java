@@ -11,6 +11,7 @@ import org.linguacap.catalogue.VersionDocument.Checks;
 import org.linguacap.catalogue.VersionDocument.Issue;
 import org.linguacap.catalogue.VersionDocument.MediaRef;
 import org.linguacap.catalogue.VersionDocument.Option;
+import org.linguacap.common.Cefr;
 import org.linguacap.common.HttpError;
 
 /**
@@ -21,7 +22,6 @@ import org.linguacap.common.HttpError;
 public record PlacementDocument(UUID id, String languageId, int number, String status, String title, String description,
                                 List<Tier> tiers, String updatedAt, String publishedAt) {
 
-    static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
     static final Set<String> COMPETENCES = Set.of("lecture", "ecoute");
     static final Set<String> USAGES = Set.of("audio", "illustration");
     static final Set<String> TRANSCRIPTS = Set.of("hidden", "on_demand", "after_answer");
@@ -62,11 +62,11 @@ public record PlacementDocument(UUID id, String languageId, int number, String s
             throw HttpError.badRequest("Le titre compte 120 caractères au plus, la présentation 2 000.");
         }
         List<Tier> tiers = nonNull(content.tiers());
-        if (tiers.size() > LEVELS.size()) throw HttpError.badRequest("Un test de niveau compte six paliers au plus.");
+        if (tiers.size() > Cefr.LEVELS.size()) throw HttpError.badRequest("Un test de niveau compte six paliers au plus.");
         Set<String> codes = new HashSet<>();
         Set<String> questionIds = new HashSet<>();
         for (Tier tier : tiers) {
-            if (tier == null || tier.code() == null || !LEVELS.contains(tier.code()) || !codes.add(tier.code())) {
+            if (tier == null || tier.code() == null || !Cefr.isLevel(tier.code()) || !codes.add(tier.code())) {
                 throw HttpError.badRequest("Chaque palier porte un niveau distinct parmi A1, A2, B1, B2, C1 et C2.");
             }
             if (text(tier.title()).length() > 120 || tier.passPercent() < 1 || tier.passPercent() > 100
@@ -142,7 +142,7 @@ public record PlacementDocument(UUID id, String languageId, int number, String s
             if (t == 0 && !"A1".equals(code)) {
                 issues.add(new Issue(at + ".code", "Le test commence au palier A1 : un élève qui échoue au premier palier est débutant."));
             }
-            if (t > 0 && LEVELS.indexOf(code) != LEVELS.indexOf(tiers.get(t - 1).code()) + 1) {
+            if (t > 0 && Cefr.rank(code) != Cefr.rank(tiers.get(t - 1).code()) + 1) {
                 issues.add(new Issue(at + ".code", "Les paliers se suivent sans trou (A1, A2, B1…) : le palier " + code
                         + " ne peut pas suivre le palier " + tiers.get(t - 1).code() + "."));
             }

@@ -10,11 +10,13 @@ import java.time.ZoneId;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import org.linguacap.common.HttpError;
+import org.linguacap.learning.CourseResource.MissionCriterion;
 import org.linguacap.learning.CourseResource.MissionDefinition;
 import org.linguacap.learning.CourseResource.MissionOral;
 import org.linguacap.learning.CourseResource.MissionWritten;
@@ -37,6 +39,8 @@ final class CourseRules {
     static final Set<String> ANSWER_KEYS = Set.of("correct", "accept", "answers", "pairs", "explanation", "feedback", "spec");
     /** Seuil de réussite par défaut d'une version (catalogue antérieur aux réglages de planification). */
     static final int DEFAULT_PASS_PERCENT = 60;
+    /** Grille d'une mission : six critères au plus (bornes du catalogue). */
+    static final int MAX_CRITERIA = 6;
 
     private CourseRules() {}
 
@@ -110,7 +114,11 @@ final class CourseRules {
         if (node.isContainerNode()) node.forEach(CourseRules::strip);
     }
 
-    /** Définition d'une mission (activité « mission » du catalogue), ou null pour les autres activités. */
+    /**
+     * Définition d'une mission (activité « mission » du catalogue), ou null pour les autres activités. La grille de
+     * critères est recopiée telle que le catalogue la sert, pour que l'élève la voie avant la remise ([] sans grille,
+     * missions A1 et A2 ou catalogue antérieur aux grilles).
+     */
     static MissionDefinition missionDefinition(JsonNode content) {
         JsonNode mission = content == null ? null : content.path("mission");
         if (mission == null || !mission.isObject()) return null;
@@ -122,7 +130,20 @@ final class CourseRules {
                 oral.isObject() ? new MissionOral(oral.path("prompt").asText(""), oral.path("maxSeconds").asInt(120)) : null,
                 written.isObject() ? new MissionWritten(written.path("prompt").asText(""),
                         written.path("maxChars").asInt(1500), written.path("minWords").asInt(0)) : null,
-                List.copyOf(checklist));
+                List.copyOf(checklist), missionCriteria(mission.path("criteria")));
+    }
+
+    /** Critères d'une grille : identifiant, libellé et points, sans doublon d'identifiant (6 au plus). */
+    static List<MissionCriterion> missionCriteria(JsonNode criteria) {
+        List<MissionCriterion> list = new ArrayList<>();
+        Set<String> ids = new HashSet<>();
+        for (JsonNode criterion : criteria) {
+            String id = criterion.path("id").asText("");
+            int maxPoints = criterion.path("maxPoints").asInt(0);
+            if (id.isEmpty() || maxPoints < 1 || !ids.add(id) || list.size() == MAX_CRITERIA) continue;
+            list.add(new MissionCriterion(id, criterion.path("label").asText(""), maxPoints));
+        }
+        return List.copyOf(list);
     }
 
     /**

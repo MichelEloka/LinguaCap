@@ -7,6 +7,7 @@ import {
 import { Badge, Dialog } from '../../components/ui';
 import { AudioPlayer, Callout, Card, Facts, ProgressRing, SkeletonCard, Timeline, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { BilingualText } from './bilingual';
 import { LessonContent } from './LessonContent';
 import type { Enrollment } from './LearnerSession';
 import { OralRecorder } from './exams-recorder';
@@ -49,7 +50,7 @@ function QuestionCard({ part, exam, index, onAnswer }: {
   return (
     <div className={`ev-question${chosen ? ' is-answered' : ''}`}>
       <fieldset>
-        <legend><span className="ev-q-head"><span className="ev-q-num">{index + 1}</span><span className="ev-q-prompt">{question.prompt}</span></span></legend>
+        <legend><span className="ev-q-head"><span className="ev-q-num">{index + 1}</span><span className="ev-q-prompt"><BilingualText text={question.prompt} /></span></span></legend>
         <ExamMedia part={part} exam={exam} questionId={question.id} />
         <div className="ev-choices">
           {question.options.map((option, position) => {
@@ -127,8 +128,8 @@ function ExamHero({ kind, exam }: { kind: ExamKind; exam: ExamView | null }) {
         <div className="ev-hero-text">
           <p className="eyebrow">{examNames[kind]}{level ? ` · niveau ${level}` : ''}</p>
           <h1 id="exam-title">{exam?.definition.title ?? examNames[kind]}</h1>
-          <p className="ev-hero-desc">{exam?.definition.description || (kind === 'final'
-            ? 'Lecture, écoute, écrit et oral, dans les conditions de l’examen.' : 'Un point d’étape sur les modules déjà travaillés.')}</p>
+          <p className="ev-hero-desc"><BilingualText text={exam?.definition.description || (kind === 'final'
+            ? 'Lecture, écoute, écrit et oral, dans les conditions de l’examen.' : 'Un point d’étape sur les modules déjà travaillés.')} /></p>
           {exam && (
             <div className="ev-hero-badges">
               {statusBadge({ status: exam.status, decision: exam.result?.decision ?? null })}

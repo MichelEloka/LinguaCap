@@ -199,14 +199,66 @@ class PlacementRulesTest {
         assertEquals("completed", done.status());
         assertNull(done.currentTier());
         assertEquals("A1", done.placedLevel(), "Niveau placé : dernier palier réussi");
-        PlacementResource.PlacementResult result = PlacementRules.result(done);
+        PlacementResource.PlacementResult result = PlacementRules.result(done, Set.of("A1", "A2"));
         assertEquals("A1 · Découverte", result.label());
         assertFalse(result.beyondTest());
-        assertTrue(result.summary().contains("A2"));
+        assertTrue(result.summary().contains("peut commencer au niveau A2"), result.summary());
         assertEquals(List.of("passed", "failed", "locked"),
                 PlacementRules.tiers(done).stream().map(PlacementResource.PlacementTier::status).toList());
         assertEquals(409, status(() -> PlacementRules.submit(JSON, done, "remise-b1-0001", "B1", JSON.createObjectNode())),
                 "Le test terminé ne prend plus de remise");
+    }
+
+    /** Tentative terminée sur une banque A1, A2, B1 : paliers réussis jusqu'à {@code passedUpTo} inclus. */
+    private static PlacementStore.Attempt completedUpTo(String passedUpTo) {
+        PlacementStore.Attempt attempt = attempt(PlacementRules.draw(JSON, test("A1", "A2", "B1"), new Random(11)));
+        int key = 0;
+        while (!"completed".equals(attempt.status())) {
+            String code = attempt.currentTier();
+            JsonNode tier = PlacementRules.tier(attempt.definition(), code);
+            boolean pass = org.linguacap.common.Cefr.rank(code) <= org.linguacap.common.Cefr.rank(passedUpTo);
+            attempt = apply(attempt, PlacementRules.submit(JSON, attempt, "remise-" + code.toLowerCase() + "-000" + key++,
+                    code, pass ? answers(tier, 8, 4) : answers(tier, 1, 0)));
+        }
+        return attempt;
+    }
+
+    @Test
+    void leRésuméNAnnonceQuUnNiveauPublié() {
+        // Paliers A1, A2 et B1 réussis : B1 est le dernier palier ; B2 n'est pas publié, il arrive bientôt.
+        PlacementStore.Attempt top = completedUpTo("B1");
+        assertEquals("B1", top.placedLevel());
+        PlacementResource.PlacementResult beyond = PlacementRules.result(top, Set.of("A1", "A2", "B1"));
+        assertTrue(beyond.beyondTest());
+        assertFalse(beyond.summary().contains("niveau B2"), "B2 non publié n'est jamais annoncé comme ouvert");
+        assertTrue(beyond.summary().endsWith("Le parcours B2 arrive bientôt."), beyond.summary());
+        assertFalse(PlacementRules.result(top, Set.of("A1", "A2", "B1", "B2")).summary().contains("bientôt"));
+
+        // Palier A2 validé, B1 échoué : B1 publié, le parcours peut y commencer ; non publié, il arrive bientôt.
+        PlacementStore.Attempt a2 = completedUpTo("A2");
+        assertEquals("A2", a2.placedLevel());
+        assertEquals("Vous avez validé le palier A2 : votre parcours peut commencer au niveau B1.",
+                PlacementRules.result(a2, Set.of("A1", "A2", "B1")).summary());
+        assertEquals("Vous avez validé le palier A2 : le parcours B1 arrive bientôt.",
+                PlacementRules.result(a2, Set.of("A1", "A2")).summary());
+        // Catalogue indisponible : aucune annonce.
+        assertEquals("Vous avez validé le palier A2.", PlacementRules.result(a2, null).summary());
+        assertEquals("Vous avez validé le palier A2.", PlacementRules.result(a2).summary());
+        JsonNode view = JSON.valueToTree(PlacementRules.view(a2, true, Map.of(), NOW, Set.of("A1", "A2", "B1")));
+        assertTrue(view.path("result").path("summary").asText().contains("niveau B1"));
+    }
+
+    @Test
+    void lesNiveauxPubliésSeLisentDansLesParcoursDuCatalogue() {
+        JsonNode tracks = JSON.createArrayNode()
+                .add(JSON.createObjectNode().put("levelCode", "A1").put("languageId", "de"))
+                .add(JSON.createObjectNode().put("levelCode", "B1").put("languageId", "de"))
+                .add(JSON.createObjectNode().put("levelCode", "A2").putNull("languageId"))
+                .add(JSON.createObjectNode().put("levelCode", "B2").put("languageId", "en"))
+                .add(JSON.createObjectNode().put("levelCode", "Z9").put("languageId", "de"));
+        assertEquals(Set.of("A1", "A2", "B1"), PlacementRules.publishedLevels(tracks, "de"));
+        assertEquals(Set.of("B2"), PlacementRules.publishedLevels(tracks, "en"));
+        assertEquals(Set.of(), PlacementRules.publishedLevels(JSON.createObjectNode(), "de"));
     }
 
     @Test

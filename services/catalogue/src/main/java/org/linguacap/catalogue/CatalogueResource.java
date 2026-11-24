@@ -28,6 +28,19 @@ import java.util.Map;
 @Produces(MediaType.APPLICATION_JSON)
 public class CatalogueResource {
     private static final String LEVEL_COLUMNS = "id, code, title, status, description, version";
+    /**
+     * Leçon lisible hors édition (alias l : leçon, n : niveau, v : version jointe à gauche) : leçon d'une version
+     * publiée ou retirée (les élèves inscrits gardent leur version, même si le niveau est repassé en brouillon au
+     * retrait de sa dernière version publiée), ou leçon historique sans version d'un niveau publié.
+     */
+    static final String READABLE_LESSON =
+            "(l.version_id is not null and v.status in ('published', 'retired') or l.version_id is null and n.status = 'published')";
+    /**
+     * Leçon dont le corrigé des questions à choix est servi à Évaluations : comme avant, toute leçon d'un niveau
+     * publié, et aussi celles d'une version publiée ou retirée d'un niveau repassé en brouillon (élèves inscrits).
+     */
+    static final String KEYED_LESSON =
+            "(n.status = 'published' or l.version_id is not null and v.status in ('published', 'retired'))";
 
     @Inject
     AgroalDataSource dataSource;
@@ -38,12 +51,17 @@ public class CatalogueResource {
     @Inject
     IdentityClient identities;
 
+    /**
+     * Niveaux du catalogue dans l'ordre de leur position (sans position : en dernier, par code). Un niveau est publié
+     * tant qu'il a une version publiée : le retrait de sa dernière version le repasse en brouillon (AuthoringStore).
+     * Les éditeurs voient aussi les brouillons.
+     */
     @GET
     @Path("/levels")
     public List<Level> levels() {
         boolean admin = isAdmin();
         String sql = "select " + LEVEL_COLUMNS + " from catalogue.levels"
-                + " where status = 'published' or ? order by code";
+                + " where status = 'published' or ? order by position nulls last, code";
         try (var connection = dataSource.getConnection();
              var query = connection.prepareStatement(sql)) {
             query.setBoolean(1, admin);
@@ -109,8 +127,8 @@ public class CatalogueResource {
                      from catalogue.lessons l
                      join catalogue.levels n on n.id = l.level_id
                      left join catalogue.track_versions v on v.id = l.version_id
-                     where l.id = ? and (? or n.status = 'published' and (l.version_id is null or v.status <> 'draft'))
-                     """)) {
+                     where l.id = ? and (? or %s)
+                     """.formatted(READABLE_LESSON))) {
             query.setString(1, id);
             query.setBoolean(2, admin);
             try (var rows = query.executeQuery()) {
@@ -146,15 +164,17 @@ public class CatalogueResource {
                      join catalogue.questions q on q.lesson_id = o.lesson_id and q.id = o.question_id
                      join catalogue.lessons l on l.id = o.lesson_id
                      join catalogue.levels n on n.id = l.level_id
-                     where o.lesson_id = ? and o.correct and q.type = 'choice' and n.status = 'published'
-                     """);
+                     left join catalogue.track_versions v on v.id = l.version_id
+                     where o.lesson_id = ? and o.correct and q.type = 'choice' and %s
+                     """.formatted(KEYED_LESSON));
              var typedQuery = connection.prepareStatement("""
                      select exists (
                          select 1 from catalogue.questions q
                          join catalogue.lessons l on l.id = q.lesson_id
                          join catalogue.levels n on n.id = l.level_id
-                         where q.lesson_id = ? and q.type <> 'choice' and n.status = 'published')
-                     """)) {
+                         left join catalogue.track_versions v on v.id = l.version_id
+                         where q.lesson_id = ? and q.type <> 'choice' and %s)
+                     """.formatted(KEYED_LESSON))) {
             query.setString(1, id);
             typedQuery.setString(1, id);
             boolean typed;

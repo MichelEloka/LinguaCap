@@ -5,14 +5,18 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import org.linguacap.common.HttpError;
 
 /**
  * Règles d'une mission (EVO-044) : définition figée à l'ouverture (consigne, partie orale, partie écrite, liste
- * d'auto-vérification), brouillon, conditions de remise, destinataire, retour du professeur et reprise.
+ * d'auto-vérification et, aux niveaux B, grille de critères), brouillon, conditions de remise, destinataire, retour du
+ * professeur (noté critère par critère quand la mission a une grille) et reprise.
  * « On ne fait pas confiance » : ce que l'élève affirme avoir fait est remis (texte, enregistrement) ou coché.
  */
 final class MissionRules {
@@ -24,10 +28,22 @@ final class MissionRules {
     static final String TO_REDO = "to_redo";
     static final String TEACHER = "teacher";
     static final String REVIEWER = "reviewer";
-    static final int MAX_TEXT = 1500;
+    /** Bornes techniques communes (catalogue, Évaluations, base, interface) : 3 000 caractères, 300 s, 400 mots. */
+    static final int MAX_TEXT = 3000;
+    static final int MIN_SECONDS = 30;
+    static final int MAX_SECONDS = 300;
+    static final int DEFAULT_SECONDS = 120;
+    static final int MIN_CHARS = 200;
+    static final int DEFAULT_CHARS = 1500;
+    static final int MAX_MIN_WORDS = 400;
     static final int MAX_COMMENT = 2000;
     static final int MAX_CHECKLIST = 6;
     static final int MAX_ITEM = 160;
+    /** Grille : six critères au plus, de 1 à 20 points chacun, libellé de 200 caractères au plus. */
+    static final int MAX_CRITERIA = 6;
+    static final int MAX_CRITERION_POINTS = 20;
+    static final int MAX_CRITERION_LABEL = 200;
+    private static final Pattern CRITERION_ID = Pattern.compile("[a-z0-9]+(-[a-z0-9]+)*");
 
     private static final JsonNodeFactory JSON = JsonNodeFactory.instance;
 
@@ -37,8 +53,15 @@ final class MissionRules {
     record Recipient(String status, UUID reviewerId, String kind) {}
 
     /**
+     * Notation sur grille d'un retour : points par critère (dans l'ordre de la grille), score et score maximal.
+     * Sans grille, aucune notation (null).
+     */
+    record Grade(ObjectNode points, int score, int maxScore) {}
+
+    /**
      * Définition figée à partir du contenu de l'activité servi par Catalogue (route interne des activités) :
-     * {title, description, oral:{prompt,maxSeconds}|null, written:{prompt,maxChars,minWords}|null, checklist}.
+     * {title, description, oral:{prompt,maxSeconds}|null, written:{prompt,maxChars,minWords}|null, checklist,
+     * criteria:[{id,label,maxPoints}]} ; criteria vaut [] pour une mission sans grille (A1, A2).
      */
     static ObjectNode definition(JsonNode content) {
         JsonNode activity = content.path("activity");
@@ -53,15 +76,15 @@ final class MissionRules {
         JsonNode oral = mission.path("oral");
         if (oral.isObject()) {
             definition.putObject("oral").put("prompt", oral.path("prompt").asText(""))
-                    .put("maxSeconds", bounded(oral.path("maxSeconds"), 30, 120, 120));
+                    .put("maxSeconds", bounded(oral.path("maxSeconds"), MIN_SECONDS, MAX_SECONDS, DEFAULT_SECONDS));
         } else {
             definition.putNull("oral");
         }
         JsonNode written = mission.path("written");
         if (written.isObject()) {
             definition.putObject("written").put("prompt", written.path("prompt").asText(""))
-                    .put("maxChars", bounded(written.path("maxChars"), 200, MAX_TEXT, MAX_TEXT))
-                    .put("minWords", bounded(written.path("minWords"), 0, 200, 0));
+                    .put("maxChars", bounded(written.path("maxChars"), MIN_CHARS, MAX_TEXT, DEFAULT_CHARS))
+                    .put("minWords", bounded(written.path("minWords"), 0, MAX_MIN_WORDS, 0));
         } else {
             definition.putNull("written");
         }
@@ -75,7 +98,66 @@ final class MissionRules {
                 checklist.add(text.length() > MAX_ITEM ? text.substring(0, MAX_ITEM) : text);
             }
         }
+        // Grille du correcteur, recopiée du catalogue (qui l'a déjà contrôlée) : identifiants uniques, 6 critères au plus.
+        ArrayNode criteria = definition.putArray("criteria");
+        Set<String> ids = new HashSet<>();
+        for (JsonNode criterion : mission.path("criteria")) {
+            String id = criterion.path("id").asText("");
+            if (!CRITERION_ID.matcher(id).matches() || !ids.add(id) || criteria.size() == MAX_CRITERIA) continue;
+            String label = criterion.path("label").asText("").strip();
+            criteria.addObject().put("id", id)
+                    .put("label", label.length() > MAX_CRITERION_LABEL ? label.substring(0, MAX_CRITERION_LABEL) : label)
+                    .put("maxPoints", bounded(criterion.path("maxPoints"), 1, MAX_CRITERION_POINTS, 1));
+        }
         return definition;
+    }
+
+    /** Grille figée d'une remise ([] pour une mission sans grille ou figée avant les grilles). */
+    static JsonNode criteria(JsonNode definition) {
+        JsonNode criteria = definition == null ? null : definition.path("criteria");
+        return criteria != null && criteria.isArray() ? criteria : JSON.arrayNode();
+    }
+
+    /**
+     * Points du correcteur (400 sinon) : avec une grille, un entier de 0 à maxPoints pour chaque critère et aucune clé
+     * inconnue ; sans grille, aucun point (points absent ou null). Renvoie la notation, ou null sans grille. La
+     * décision reste celle du correcteur, quel que soit le score.
+     */
+    static Grade checkPoints(JsonNode definition, JsonNode points) {
+        JsonNode criteria = criteria(definition);
+        boolean given = points != null && !points.isNull() && !points.isMissingNode();
+        if (criteria.isEmpty()) {
+            if (given) throw HttpError.badRequest("Cette mission n’a pas de grille : envoyez le retour sans points.");
+            return null;
+        }
+        if (!given || !points.isObject()) {
+            throw HttpError.badRequest("Notez chaque critère de la grille avant d’envoyer le retour.");
+        }
+        Set<String> known = new HashSet<>();
+        criteria.forEach(criterion -> known.add(criterion.path("id").asText()));
+        points.fieldNames().forEachRemaining(name -> {
+            if (!known.contains(name)) {
+                throw HttpError.badRequest("Le critère « " + name + " » n’appartient pas à la grille de cette mission.");
+            }
+        });
+        ObjectNode ordered = JSON.objectNode();
+        int score = 0;
+        int maxScore = 0;
+        for (JsonNode criterion : criteria) {
+            String id = criterion.path("id").asText();
+            String label = criterion.path("label").asText(id);
+            int maxPoints = criterion.path("maxPoints").asInt();
+            JsonNode value = points.get(id);
+            if (value == null || value.isNull()) throw HttpError.badRequest("Notez le critère « " + label + " ».");
+            if (!value.isIntegralNumber() || !value.canConvertToInt() || value.asInt() < 0 || value.asInt() > maxPoints) {
+                throw HttpError.badRequest("Le critère « " + label + " » se note par un nombre entier de 0 à "
+                        + maxPoints + ".");
+            }
+            ordered.put(id, value.asInt());
+            score += value.asInt();
+            maxScore += maxPoints;
+        }
+        return new Grade(ordered, score, maxScore);
     }
 
     /** Longueur comptée comme la base (caractères Unicode). */
@@ -93,11 +175,11 @@ final class MissionRules {
         return count;
     }
 
-    /** Texte du brouillon : 1 500 caractères au plus (et la limite de la mission), seulement s'il y a un écrit (400). */
+    /** Texte du brouillon : 3 000 caractères au plus (et la limite de la mission), seulement s'il y a un écrit (400). */
     static String checkText(JsonNode definition, String text) {
         if (text == null) return null;
         if (length(text) > MAX_TEXT) {
-            throw HttpError.badRequest("Le texte de la mission compte " + MAX_TEXT + " caractères au plus.");
+            throw HttpError.badRequest("Le texte de la mission compte 3 000 caractères au plus.");
         }
         JsonNode written = definition.path("written");
         if (!written.isObject()) {
@@ -192,13 +274,17 @@ final class MissionRules {
         };
     }
 
-    /** Définition montrée à l'élève et au correcteur : consigne, parties et liste (le titre est à part). */
+    /**
+     * Définition montrée à l'élève et au correcteur : consigne, parties, liste et grille (le titre est à part). La
+     * grille est visible dès l'ouverture ; les points n'apparaissent que dans le retour.
+     */
     static ObjectNode visibleDefinition(JsonNode definition) {
         ObjectNode visible = JSON.objectNode();
         visible.put("description", definition.path("description").asText(""));
         visible.set("oral", definition.path("oral").isObject() ? definition.get("oral").deepCopy() : JSON.nullNode());
         visible.set("written", definition.path("written").isObject() ? definition.get("written").deepCopy() : JSON.nullNode());
         visible.set("checklist", definition.path("checklist").isArray() ? definition.get("checklist").deepCopy() : JSON.arrayNode());
+        visible.set("criteria", criteria(definition).deepCopy());
         return visible;
     }
 

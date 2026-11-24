@@ -3,7 +3,8 @@ import { AlertTriangle, CalendarCheck2, CircleCheck, Hourglass, Loader2, Message
 import { EmptyState, ProgressBar } from '../../components/ui';
 import { Bars, Callout, Card, Drawer, ProgressRing, Segmented, SkeletonCard } from '../../design/kit';
 import { requestApi } from '../../integration/api';
-import type { TeacherOnboardingStats as TeacherStats } from '../../integration/v2';
+import { useLanguages } from '../../integration/languages';
+import { levelCodes, type LevelCode, type TeacherOnboardingStats as TeacherStats } from '../../integration/v2';
 import { formatRelative, getError } from './admin-common';
 import { TeacherOnboardingStats } from './TeacherOnboardingStats';
 import './admin.css';
@@ -92,10 +93,24 @@ function Freshness({ freshness }: { freshness: Dashboard['freshness'] }) {
   );
 }
 
+/**
+ * Niveaux des filtres : tous ceux du catalogue (publiés, en préparation ou retirés, car des parcours peuvent déjà y
+ * exister), toutes langues confondues, dans l'ordre de l'échelle ; l'échelle entière si le catalogue ne répond pas.
+ */
+function useKpiLevels(token: string): readonly LevelCode[] {
+  const { languages, failed } = useLanguages(token);
+  if (!languages?.length) return failed ? levelCodes : [];
+  const codes = new Set(languages.flatMap((language) => language.levels.map((level) => level.code)));
+  return levelCodes.filter((code) => codes.has(code));
+}
+
 /** Champs de filtre, dans la barre (bureau) ou dans le panneau latéral (mobile) ; chaque choix s'applique aussitôt. */
-function FilterFields({ filters, period, onChange }: {
-  filters: Filters; period?: { from: string; to: string }; onChange: (key: keyof Filters) => (value: string) => void;
+function FilterFields({ filters, period, levels, onChange }: {
+  filters: Filters; period?: { from: string; to: string }; levels: readonly LevelCode[];
+  onChange: (key: keyof Filters) => (value: string) => void;
 }) {
+  // Un filtre déjà choisi reste affiché même si son niveau a quitté la liste.
+  const withChosen = (value: string) => (value && !(levels as readonly string[]).includes(value) ? [...levels, value] : levels);
   return (
     <>
       <div className="admin-kpi-period">
@@ -105,10 +120,12 @@ function FilterFields({ filters, period, onChange }: {
           onChange={(event) => onChange('to')(event.target.value)} /></label>
       </div>
       <label>Niveau de départ<select name="startLevel" value={filters.startLevel} onChange={(event) => onChange('startLevel')(event.target.value)}>
-        <option value="">Tous</option><option value="A0">Débutant</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option>
+        <option value="">Tous</option><option value="A0">Débutant</option>
+        {withChosen(filters.startLevel).filter((code) => code !== 'A0').map((code) => <option key={code} value={code}>{code}</option>)}
       </select></label>
       <label>Niveau cible<select name="level" value={filters.level} onChange={(event) => onChange('level')(event.target.value)}>
-        <option value="">Tous</option><option value="A1">A1</option><option value="A2">A2</option><option value="B1">B1</option><option value="B2">B2</option>
+        <option value="">Tous</option>
+        {withChosen(filters.level).map((code) => <option key={code} value={code}>{code}</option>)}
       </select></label>
       <label>Cadence<select name="template" value={filters.template} onChange={(event) => onChange('template')(event.target.value)}>
         <option value="">Toutes</option><option value="intensive">Intensif</option><option value="standard">Standard</option><option value="custom">Personnalisée</option>
@@ -149,6 +166,7 @@ export function KpiPanel({ token }: { token: string }) {
   }, [query, token, refresh]);
 
   const [filtersOpen, setFiltersOpen] = useState(false);
+  const levels = useKpiLevels(token);
   const set = (key: keyof Filters) => (value: string) => setFilters((current) => ({ ...current, [key]: value }));
   const filtered = filterKeys.some((key) => filters[key]);
   const activeCount = filterKeys.filter((key) => filters[key]).length;
@@ -160,7 +178,7 @@ export function KpiPanel({ token }: { token: string }) {
   return (
     <div className={`admin-kpi lc-enter${loading && data ? ' is-loading' : ''}`}>
       <form className="admin-kpi-bar" aria-label="Filtrer les indicateurs" onSubmit={(event) => event.preventDefault()}>
-        <FilterFields filters={filters} period={data?.filters} onChange={set} />
+        <FilterFields filters={filters} period={data?.filters} levels={levels} onChange={set} />
         {filtered && <button type="button" className="btn btn-ghost btn-sm admin-kpi-reset" onClick={() => setFilters(emptyFilters)}>
           <RotateCcw size={15} aria-hidden="true" /> Réinitialiser</button>}
       </form>
@@ -177,7 +195,7 @@ export function KpiPanel({ token }: { token: string }) {
             <button type="button" className="btn btn-primary" onClick={() => setFiltersOpen(false)}>Voir les indicateurs</button>
           </>}>
           <form className="admin-kpi-sheet" aria-label="Filtrer les indicateurs" onSubmit={(event) => { event.preventDefault(); setFiltersOpen(false); }}>
-            <FilterFields filters={filters} period={data?.filters} onChange={set} />
+            <FilterFields filters={filters} period={data?.filters} levels={levels} onChange={set} />
           </form>
         </Drawer>
       )}

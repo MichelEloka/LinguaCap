@@ -53,12 +53,17 @@ class MissionRulesTest {
         JsonNode definition = MissionRules.definition(CONTENT);
         assertEquals("Mission : déplacer un rendez-vous", definition.path("title").asText());
         assertEquals("Vous êtes malade et devez déplacer votre rendez-vous chez le médecin.", definition.path("description").asText());
-        assertEquals(120, definition.path("oral").path("maxSeconds").asInt(), "deux minutes au plus");
+        assertEquals(300, definition.path("oral").path("maxSeconds").asInt(), "cinq minutes au plus (niveaux B)");
         assertEquals(600, definition.path("written").path("maxChars").asInt());
         assertEquals(12, definition.path("written").path("minWords").asInt());
         assertEquals(3, definition.path("checklist").size());
         JsonNode visible = MissionRules.visibleDefinition(definition);
         assertTrue(visible.has("oral") && visible.has("written") && visible.has("checklist") && !visible.has("title"));
+        assertTrue(definition.path("criteria").isArray() && definition.path("criteria").isEmpty(), "A1 : aucune grille");
+        assertTrue(visible.path("criteria").isArray() && visible.path("criteria").isEmpty(), "servie avec criteria = []");
+        JsonNode frozenBefore = json("{'description':'D','oral':null,'written':{'prompt':'P','maxChars':600,'minWords':0},'checklist':['a']}");
+        assertTrue(MissionRules.visibleDefinition(frozenBefore).path("criteria").isArray(),
+                "une remise figée avant les grilles est servie avec criteria = []");
 
         assertEquals(409, status(() -> MissionRules.definition(json("{'activity':{'kind':'exercise'}}"))));
         assertEquals(503, status(() -> MissionRules.definition(
@@ -67,6 +72,107 @@ class MissionRulesTest {
                 "{'activity':{'kind':'mission','title':'Mission'},'mission':{'oral':{'prompt':'Stellen Sie sich vor.','maxSeconds':10},'checklist':['a','b']}}"));
         assertEquals(30, oralOnly.path("oral").path("maxSeconds").asInt());
         assertTrue(oralOnly.path("written").isNull());
+        JsonNode tooLong = MissionRules.definition(json(
+                "{'activity':{'kind':'mission'},'mission':{'oral':{'prompt':'Sprechen Sie.','maxSeconds':301},'checklist':['a','b']}}"));
+        assertEquals(300, tooLong.path("oral").path("maxSeconds").asInt(), "301 s ramené à 300 s (le catalogue le refuse)");
+        JsonNode defaults = MissionRules.definition(json(
+                "{'activity':{'kind':'mission'},'mission':{'oral':{'prompt':'P'},'written':{'prompt':'W','minWords':500},'checklist':['a','b']}}"));
+        assertEquals(120, defaults.path("oral").path("maxSeconds").asInt(), "deux minutes par défaut, comme en V4");
+        assertEquals(1500, defaults.path("written").path("maxChars").asInt(), "1 500 caractères par défaut, comme en V4");
+        assertEquals(400, defaults.path("written").path("minWords").asInt(), "400 mots au plus");
+    }
+
+    /** Mission B1 « écrire à la régie » servie par Catalogue : écrit de 1 500 caractères, grille de 4 critères. */
+    private static final JsonNode B1_CONTENT = json("""
+            {'moduleId':'b1-wohnen-atelier','levelCode':'B1',
+             'activity':{'id':'b1-wohnen-atelier-schreiben','kind':'mission','title':'Mission : écrire à la régie',
+                         'estimatedMinutes':25,'competences':['expression-ecrite'],'lessonId':'b1-wohnen-atelier-schreiben'},
+             'lesson':{'id':'b1-wohnen-atelier-schreiben','title':'Écrire à la régie',
+                       'description':'Ihre Heizung funktioniert nicht. [fr] Votre chauffage ne fonctionne pas.','transcript':null},
+             'mission':{'oral':null,
+                        'written':{'prompt':'Schreiben Sie an die Hausverwaltung. [fr] Écrivez à la régie.','maxChars':1500,'minWords':100},
+                        'checklist':['Ich beschreibe das Problem.','Ich bitte um einen Termin.'],
+                        'criteria':[{'id':'aufgabe','label':' Tâche : tous les points sont traités ','maxPoints':5},
+                                    {'id':'kohaerenz','label':'Cohérence : texte organisé','maxPoints':5},
+                                    {'id':'wortschatz','label':'Vocabulaire : précis et varié','maxPoints':5},
+                                    {'id':'strukturen','label':'Structures : verbe à la bonne place','maxPoints':5}]},
+             'questions':[],'placements':[]}
+            """);
+
+    @Test
+    void laGrilleEstFigéeDansLaDéfinitionEtMontréeAvantLaRemise() {
+        JsonNode definition = MissionRules.definition(B1_CONTENT);
+        JsonNode criteria = definition.path("criteria");
+        assertEquals(4, criteria.size());
+        assertEquals("aufgabe", criteria.get(0).path("id").asText());
+        assertEquals("Tâche : tous les points sont traités", criteria.get(0).path("label").asText(), "libellé sans espaces de bord");
+        assertEquals(5, criteria.get(3).path("maxPoints").asInt());
+        assertEquals(criteria, MissionRules.visibleDefinition(definition).path("criteria"), "l'élève voit la grille");
+
+        JsonNode noisy = MissionRules.definition(json("""
+                {'activity':{'kind':'mission'},'mission':{'written':{'prompt':'W'},'checklist':['a','b'],
+                 'criteria':[{'id':'a','label':'A','maxPoints':50},{'id':'a','label':'Doublon','maxPoints':2},
+                             {'id':'B','label':'Invalide','maxPoints':2},{'id':'c','label':'C','maxPoints':2},
+                             {'id':'d','label':'D','maxPoints':2},{'id':'e','label':'E','maxPoints':2},
+                             {'id':'f','label':'F','maxPoints':2},{'id':'g','label':'G','maxPoints':2},
+                             {'id':'h','label':'H','maxPoints':2}]}}
+                """));
+        assertEquals(6, noisy.path("criteria").size(), "six critères au plus, doublons et identifiants invalides écartés");
+        assertEquals(20, noisy.path("criteria").get(0).path("maxPoints").asInt(), "20 points au plus par critère");
+    }
+
+    @Test
+    void leRetourSurGrilleExigeChaqueCritèreDansSesBornes() {
+        JsonNode definition = MissionRules.definition(B1_CONTENT);
+        MissionRules.Grade grade = MissionRules.checkPoints(definition,
+                json("{'strukturen':2,'aufgabe':5,'wortschatz':3,'kohaerenz':4}"));
+        assertEquals(14, grade.score());
+        assertEquals(20, grade.maxScore());
+        assertEquals("{\"aufgabe\":5,\"kohaerenz\":4,\"wortschatz\":3,\"strukturen\":2}", grade.points().toString(),
+                "points rangés dans l'ordre de la grille");
+        assertEquals(0, MissionRules.checkPoints(definition, json("{'aufgabe':0,'kohaerenz':0,'wortschatz':0,'strukturen':0}"))
+                .score(), "zéro est une note");
+
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, null)), "points exigés");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, JSON.nullNode())));
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, json("[5,4,3,2]"))));
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, json("{'aufgabe':5,'kohaerenz':4,'wortschatz':3}"))),
+                "critère manquant");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':6,'kohaerenz':4,'wortschatz':3,'strukturen':2}"))), "au-delà de maxPoints");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':-1,'kohaerenz':4,'wortschatz':3,'strukturen':2}"))), "négatif");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':4.5,'kohaerenz':4,'wortschatz':3,'strukturen':2}"))), "pas un entier");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':'4','kohaerenz':4,'wortschatz':3,'strukturen':2}"))), "pas un nombre");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':4,'kohaerenz':4,'wortschatz':3,'strukturen':2,'aussprache':4}"))), "clé inconnue");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition,
+                json("{'aufgabe':4,'kohaerenz':4,'wortschatz':3,'strukturen':null}"))), "critère non noté");
+    }
+
+    @Test
+    void uneMissionSansGrilleSeCorrigeCommeEnV4() {
+        JsonNode definition = MissionRules.definition(CONTENT);
+        assertNull(MissionRules.checkPoints(definition, null), "A1/A2 : aucun point, aucune note");
+        assertNull(MissionRules.checkPoints(definition, JSON.nullNode()), "points: null vaut absence");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, json("{'aufgabe':3}"))), "points refusés");
+        assertEquals(400, status(() -> MissionRules.checkPoints(definition, json("{}"))), "même vides");
+        JsonNode frozenBefore = json("{'description':'D','oral':null,'written':{'prompt':'P','maxChars':600,'minWords':0},'checklist':['a']}");
+        assertNull(MissionRules.checkPoints(frozenBefore, null), "remise figée avant les grilles");
+    }
+
+    @Test
+    void laDécisionResteAuCorrecteurQuelQueSoitLeScore() {
+        JsonNode definition = MissionRules.definition(B1_CONTENT);
+        MissionRules.Grade low = MissionRules.checkPoints(definition, json("{'aufgabe':1,'kohaerenz':1,'wortschatz':1,'strukturen':1}"));
+        assertEquals(4, low.score());
+        assertEquals("", MissionRules.checkReview("validated", null), "validée malgré un score bas : décision libre");
+        MissionRules.Grade high = MissionRules.checkPoints(definition, json("{'aufgabe':5,'kohaerenz':5,'wortschatz':5,'strukturen':5}"));
+        assertEquals(20, high.score());
+        assertEquals("Reprenez la formule de politesse.", MissionRules.checkReview("to_redo", "Reprenez la formule de politesse."),
+                "à reprendre malgré un score haut, avec un commentaire");
     }
 
     @Test
@@ -74,11 +180,12 @@ class MissionRulesTest {
         JsonNode definition = MissionRules.definition(CONTENT);
         assertEquals(TEXT, MissionRules.checkText(definition, TEXT));
         assertEquals(400, status(() -> MissionRules.checkText(definition, "a".repeat(601))), "limite de la mission");
-        JsonNode long1500 = MissionRules.definition(json(
+        JsonNode long3000 = MissionRules.definition(json(
                 "{'activity':{'kind':'mission'},'mission':{'written':{'prompt':'Schreiben Sie.','maxChars':5000},'checklist':['a','b']}}"));
-        assertEquals(1500, long1500.path("written").path("maxChars").asInt());
-        assertEquals(400, status(() -> MissionRules.checkText(long1500, "ä".repeat(1501))), "texte > 1 500 caractères");
-        MissionRules.checkText(long1500, "ä".repeat(1500));
+        assertEquals(3000, long3000.path("written").path("maxChars").asInt(), "3 000 caractères au plus");
+        assertEquals(400, status(() -> MissionRules.checkText(long3000, "ä".repeat(3001))), "texte de 3 001 caractères refusé");
+        assertEquals("ä".repeat(3000), MissionRules.checkText(long3000, "ä".repeat(3000)));
+        assertEquals(400, status(() -> MissionRules.checkText(definition, "a".repeat(3001))), "borne commune avant la limite");
         JsonNode oralOnly = MissionRules.definition(json(
                 "{'activity':{'kind':'mission'},'mission':{'oral':{'prompt':'Sprechen Sie.'},'checklist':['a','b']}}"));
         assertEquals(400, status(() -> MissionRules.checkText(oralOnly, "Hallo")));
@@ -100,6 +207,10 @@ class MissionRulesTest {
         assertTrue(MissionRules.submitRefusal(definition, "", all, RECORDING).contains("Rédigez"));
         assertTrue(MissionRules.submitRefusal(definition, "Ich bin krank.", all, RECORDING).contains("12 mots"));
         assertTrue(MissionRules.submitRefusal(definition, TEXT, all, null).contains("Enregistrez"));
+        JsonNode b1 = MissionRules.definition(B1_CONTENT);
+        String hundredWords = "Sehr geehrte Damen und Herren, ".repeat(25).strip();
+        assertNull(MissionRules.submitRefusal(b1, hundredWords, List.of(0, 1), null), "écrit B1 de 100 mots");
+        assertTrue(MissionRules.submitRefusal(b1, "Sehr geehrte Damen und Herren.", List.of(0, 1), null).contains("100 mots"));
         assertEquals(23, MissionRules.words(TEXT));
         assertEquals(0, MissionRules.words(" – … "));
     }

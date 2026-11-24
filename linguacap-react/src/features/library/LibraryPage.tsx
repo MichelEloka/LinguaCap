@@ -1,5 +1,6 @@
 /**
- * Bibliothèque de l'élève (/espace/bibliotheque) : tous les niveaux de sa langue (les niveaux non publiés sont grisés),
+ * Bibliothèque de l'élève (/espace/bibliotheque) : tous les niveaux de sa langue, dans l'ordre du catalogue (GET /languages ;
+ * les niveaux non publiés sont grisés et marqués « Bientôt »),
  * modules et activités avec le dernier score et la marque « À revoir », lexique et missions de chaque module, recherche,
  * et entraînement au bilan intermédiaire (sans corrigé). L'examen blanc, qui valide un niveau, n'est jamais proposé ici :
  * il se passe dans le parcours.
@@ -13,8 +14,9 @@ import {
 import { Badge, PageHeading } from '../../components/ui';
 import { Callout, Card, ListItem, ProgressRing, SearchField, Skeleton, SplitView, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { catalogueOrder, languageById, useLanguages } from '../../integration/languages';
 import {
-  competenceLabels, examKindLabels, formatMinutes, levelCodes, type Language, type LevelCode, type Library, type LibraryActivityItem,
+  competenceLabels, examKindLabels, formatMinutes, type LevelCode, type Library, type LibraryActivityItem,
   type LibraryLevel, type LibraryModule, type PracticeSummary, type PracticeView,
 } from '../../integration/v2';
 import { missionDecisionLabels, missionStatusLabels, missionStatusTones, type MissionSummary } from '../../integration/v4';
@@ -169,7 +171,8 @@ function ModuleDetail({ level, module, token, onBack }: { level: LibraryLevel; m
 export function LibraryPage({ token }: { token: string }) {
   const [params, setParams] = useSearchParams();
   const [library, setLibrary] = useState<Library | null>(null);
-  const [languages, setLanguages] = useState<Language[]>([]);
+  // Niveaux du catalogue (publiés ou non), gardés pour la session ; sans eux, les onglets suivent la bibliothèque seule.
+  const { languages } = useLanguages(token);
   const [history, setHistory] = useState<PracticeSummary[]>([]);
   const [missions, setMissions] = useState<MissionSummary[]>([]);
   const [failure, setFailure] = useState('');
@@ -181,13 +184,11 @@ export function LibraryPage({ token }: { token: string }) {
     setFailure('');
     Promise.all([
       requestApi<Library>('/learning/library', token),
-      requestApi<Language[]>('/languages', token).catch(() => [] as Language[]),
       requestApi<PracticeSummary[]>('/assessments/practice', token).catch(() => [] as PracticeSummary[]),
       requestApi<MissionSummary[]>('/assessments/missions', token).catch(() => [] as MissionSummary[]),
-    ]).then(([lib, langs, practice, sent]) => {
+    ]).then(([lib, practice, sent]) => {
       if (!active) return;
       setLibrary(lib);
-      setLanguages(langs);
       setHistory(practice);
       setMissions(sent);
     }).catch((error: unknown) => { if (active) setFailure(errorText(error)); });
@@ -200,14 +201,16 @@ export function LibraryPage({ token }: { token: string }) {
     return latest;
   }, [missions]);
 
+  // Onglets : niveaux du catalogue dans l'ordre de `position` (un niveau sans version publiée est « Bientôt »), plus un niveau
+  // de la bibliothèque que le catalogue ne listerait pas (rangé à la fin, par rang).
   const tabs = useMemo<LevelTab[]>(() => {
     if (!library) return [];
-    const language = languages.find((item) => item.id === library.languageId);
-    const codes = new Set<LevelCode>([...library.levels.map((level) => level.levelCode), ...(language?.levels.map((level) => level.code) ?? [])]);
-    return levelCodes.filter((code) => codes.has(code)).map((code) => {
+    const catalogue = languageById(languages, library.languageId)?.levels ?? [];
+    const extra = library.levels.filter((level) => !catalogue.some((item) => item.code === level.levelCode))
+      .map((level) => ({ code: level.levelCode, title: level.levelTitle, position: null }));
+    return catalogueOrder<{ code: LevelCode; title: string; position: number | null }>([...catalogue, ...extra]).map(({ code, title }) => {
       const level = library.levels.find((item) => item.levelCode === code) ?? null;
-      const known = language?.levels.find((item) => item.code === code);
-      return { code, title: level?.levelTitle ?? known?.title ?? levelName(code), level, published: Boolean(level) };
+      return { code, title: level?.levelTitle ?? title ?? levelName(code), level, published: Boolean(level) };
     });
   }, [library, languages]);
 

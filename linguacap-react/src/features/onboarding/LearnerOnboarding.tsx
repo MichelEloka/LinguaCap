@@ -12,9 +12,10 @@ import {
 } from 'lucide-react';
 import { Callout } from '../../design/kit';
 import { requestApi, supabase } from '../../integration/api';
-import { languages as staticLanguages, languageName } from '../../domain/languages';
+import { languageName } from '../../domain/languages';
+import { languageById, useLanguages } from '../../integration/languages';
 import {
-  onboardingStepLabels, type Day, type Language, type OnboardingState, type OnboardingStepId, type PathProposal, type PathView, type PlacementView,
+  onboardingStepLabels, type Day, type OnboardingState, type OnboardingStepId, type PathProposal, type PathView, type PlacementView,
 } from '../../integration/v2';
 import { JourneyMark, JourneyShell, JourneyStage, prefersReducedMotion, type JourneyDirection, type JourneyStep } from '../journey';
 import { errorText } from './onboarding-kit';
@@ -40,14 +41,23 @@ const stepOfSlug = Object.fromEntries(Object.entries(onboardingSlugs).map(([id, 
 /** Étapes figées une fois le parcours démarré : on ne revient plus sur l'objectif, les jours ou le planning. */
 const frozenOnceStarted: OnboardingStepId[] = ['objective', 'days', 'planning'];
 
-/** Langues de secours quand GET /languages ne répond pas : liste statique, allemand A1 et A2 publiés. */
-function fallbackLanguages(): Language[] {
-  return staticLanguages.map((language) => ({
-    id: language.id, name: language.name, nativeName: language.nativeName, status: language.status, position: language.position,
-    placementAvailable: language.status === 'available',
-    levels: language.levels.map((code) => ({ code: code as Language['levels'][number]['code'], title: `${language.name} ${code}`, published: true,
-      trackVersionId: null, plannedMinutes: null, moduleCount: 0 })),
-  }));
+/**
+ * Liste des langues indisponible (GET /languages en échec, sans réponse gardée) : aucun niveau n'est présumé ouvert, l'élève
+ * peut réessayer.
+ */
+function SceneUnavailable({ busy, onRetry }: { busy: boolean; onRetry: () => void }) {
+  return (
+    <JourneyStage>
+      <div className="lo-failure is-inline" role="alert">
+        <Callout tone="warning" title="Langues et niveaux indisponibles">
+          <p>La liste des langues et de leurs niveaux n’a pas pu être chargée. Vérifiez votre connexion, puis réessayez.</p>
+          <button type="button" className="btn btn-outline btn-sm" onClick={onRetry} disabled={busy}>
+            <RotateCcw size={15} aria-hidden="true" /> {busy ? 'Nouvel essai…' : 'Réessayer'}
+          </button>
+        </Callout>
+      </div>
+    </JourneyStage>
+  );
 }
 
 /** Scène d'attente (chargement initial, planning en préparation) : le L respire au centre de la scène. */
@@ -67,7 +77,8 @@ export function LearnerOnboarding({ token, name, state, reload }: {
 }) {
   const { '*': splat = '' } = useParams();
   const navigate = useNavigate();
-  const [languages, setLanguages] = useState<Language[] | null>(null);
+  // Langues et niveaux du catalogue (GET /languages, gardés pour la session) : jamais de niveau publié par défaut.
+  const { languages, failed: languagesFailed, loading: languagesLoading, retry: retryLanguages } = useLanguages(token);
   const [attempt, setAttempt] = useState<PlacementView | null>(null);
   const [path, setPath] = useState<PathView | null>(null);
   const [proposal, setProposal] = useState<PathProposal | null>(null);
@@ -83,14 +94,6 @@ export function LearnerOnboarding({ token, name, state, reload }: {
 
   const attemptId = state.placement?.attemptId ?? null;
   const pathId = state.path?.id ?? null;
-
-  useEffect(() => {
-    let active = true;
-    requestApi<Language[]>('/languages', token)
-      .then((list) => { if (active) setLanguages(list.length ? list : fallbackLanguages()); })
-      .catch(() => { if (active) setLanguages(fallbackLanguages()); });
-    return () => { active = false; };
-  }, [token]);
 
   // Tentative du test et parcours en brouillon : rechargés quand l'état d'accueil en désigne de nouveaux.
   useEffect(() => {
@@ -179,7 +182,7 @@ export function LearnerOnboarding({ token, name, state, reload }: {
     };
   });
 
-  const language = languages?.find((item) => item.id === (state.languageId ?? 'de')) ?? null;
+  const language = languageById(languages, state.languageId ?? 'de');
   const languageLabel = language?.name ?? languageName(state.languageId ?? 'de');
   const carnet: CarnetData = {
     language: state.languageId ? { id: state.languageId, name: languageLabel } : null,
@@ -191,18 +194,21 @@ export function LearnerOnboarding({ token, name, state, reload }: {
     days: (step === 'days' ? draftDays : null) ?? proposal?.availability ?? path?.availability ?? [],
   };
 
-  const scene = !ready ? <SceneLoading label="Préparation de votre accueil…" />
+  const scene = languagesFailed ? <SceneUnavailable busy={languagesLoading} onRetry={retryLanguages} />
+    : !ready ? <SceneLoading label="Préparation de votre accueil…" />
     : step === 'language' ? (
       <StepLanguage token={token} state={state} name={name} languages={languages ?? []} placementStarted={Boolean(state.placement)}
         onDone={() => advance('placement')} />
     )
     : step === 'placement' ? (
-      <StepPlacement token={token} state={state} attempt={attempt} languageName={languageLabel} onBack={() => go('language')}
+      <StepPlacement token={token} state={state} attempt={attempt} languageName={languageLabel} tiers={language?.placementTiers ?? []}
+        onBack={() => go('language')}
         onShowResult={() => go('result')} onAttempt={setAttempt} onStarted={async (view) => { setAttempt(view); await reload(); }}
         onCompleted={async (view) => { setAttempt(view); await advance('result'); }} />
     )
     : step === 'result' && attempt ? (
-      <StepResult attempt={attempt} state={state} languageName={languageLabel} onBack={() => go('placement')} onContinue={() => go('objective')} />
+      <StepResult attempt={attempt} state={state} language={language} languageName={languageLabel} onBack={() => go('placement')}
+        onContinue={() => go('objective')} />
     )
     : step === 'objective' && attempt ? (
       <StepObjective token={token} attempt={attempt} language={language} path={draft} onBack={() => go('result')}

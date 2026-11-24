@@ -16,6 +16,12 @@
  * - Contenus V4 d'exemple : modules « a1-hallo », « a1-zahlen » et « a2-gesundheit » (questions de chaque type, répétition
  *   orale, missions, lexique) ; Léa (élève suivie) a un exercice « à revoir » et une mission à reprendre, Yanis une mission
  *   et une répétition enregistrée en attente chez Marie Weber.
+ * - Niveaux dynamiques (cours B1 et B2) : les niveaux du catalogue (`LEVELS_META` : titre, position, prérequis) et leurs
+ *   versions publiées (`VERSIONS`) alimentent toutes les routes de niveaux (/languages, /public/languages sans session,
+ *   /tracks, /levels, /catalogue/levels, modèles de rythme). B1 est publié (24 modules du gabarit « thème + atelier »),
+ *   B2 existe en brouillon (« Bientôt »). Module B1 détaillé : « b1-arbeit » (consignes bilingues ` [fr] `, exercices,
+ *   répétition, lexique) et ses missions sur grille dans « b1-arbeit-atelier » ; Léa a une mission orale B1 corrigée sur
+ *   grille (points, score sur 20). Une mission écrite B1 remise depuis la bibliothèque arrive chez Marie Weber.
  */
 import type {
   Addition, AdditionCreated, AdditionRemoved, CompetenceScore, Contract, ContractProposer, ContractStatus, ContractTerms,
@@ -23,18 +29,31 @@ import type {
   LibraryActivity, OnboardingState, OnboardingStep, PathPermissions, PathProposal, PathSession, PathStatus, PathStep, PathView,
   PendingContract, PlacementAttemptStatus, PlacementCompetence, PlacementQuestionContent, PlacementSummary, PlacementTestDocument,
   PlacementTestSummary, PlacementTier, PlacementTierContent, PlacementView, PlanItem, PlannedSession, PracticePart, PracticeSummary,
-  CourseCreationMode, LearnerLearningState, PracticeView, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats, TeacherProfile,
+  CourseCreationMode, LearnerLearningState, PracticeView, PublicLanguage, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats,
+  TeacherProfile, TemplateView,
 } from './v2';
-import { difficultyCodes, difficultyLabels, difficultyThresholds, gradingDelays, levelCodes, levelLabels, PLACEMENT_DONT_KNOW } from './v2';
+import { difficultyCodes, difficultyLabels, difficultyThresholds, gradingDelays, levelCodes, levelLabels, levelRank, PLACEMENT_DONT_KNOW } from './v2';
 import type {
   AnswerNotice, DictationSpec, DictationWord, DraftQuestionV4, ExerciseResult, FillSpec, Grade, Lexicon,
-  LexiconEntry, MatchSpec, MissionDecision, MissionDefinition, MissionSnapshot, MissionStatus, MissionSummary, MissionView, OrderSpec,
-  QuestionItem, QuestionReview, QuestionView, RecordingRef, ReviewerKind, ReviewItem, ReviewQueueItem, SpeakSpec, SpeechAttemptView,
+  LexiconEntry, MatchSpec, MissionCriterion, MissionDecision, MissionDefinition, MissionSnapshot, MissionStatus, MissionSummary, MissionView,
+  OrderSpec, QuestionItem, QuestionReview, QuestionView, RecordingRef, ReviewerKind, ReviewItem, ReviewQueueItem, SpeakSpec, SpeechAttemptView,
   SpeechMode, SpeechReviewStatus,
 } from './v4';
-import { countWords, exerciseLimits, missionLimits, speechLimits } from './v4';
+import { countWords, exerciseLimits, missionCriteriaOf, missionLimits, missionMaxScore, speechLimits } from './v4';
 import { pilotToday } from './pilot-day';
-import { findLanguage, languages as staticLanguages } from '../domain/languages';
+
+/**
+ * Langues du catalogue (`catalogue.languages`, migration 20261128000100) : le simulateur a sa propre table, comme le serveur,
+ * et ne lit pas la liste statique de l'interface (domain/languages.ts, réservée au mode démonstration).
+ */
+interface MockLanguage { id: string; name: string; nativeName: string; status: 'available' | 'coming_soon'; position: number }
+const staticLanguages: MockLanguage[] = ([
+  ['de', 'Allemand', 'Deutsch', 'available'], ['en', 'Anglais', 'English'], ['es', 'Espagnol', 'Español'], ['it', 'Italien', 'Italiano'],
+  ['pt', 'Portugais', 'Português'], ['nl', 'Néerlandais', 'Nederlands'], ['fr', 'Français langue étrangère', 'Français'], ['ar', 'Arabe', 'العربية'],
+  ['zh', 'Chinois (mandarin)', '中文'], ['ja', 'Japonais', '日本語'], ['ru', 'Russe', 'Русский'], ['ko', 'Coréen', '한국어'], ['tr', 'Turc', 'Türkçe'],
+  ['pl', 'Polonais', 'Polski'],
+] as const).map(([id, name, nativeName, status], index) => ({ id, name, nativeName, status: status ?? 'coming_soon', position: index + 1 }));
+const findLanguage = (id: string | null | undefined) => (id ? staticLanguages.find((language) => language.id === id) : undefined);
 
 type Method = 'GET' | 'POST' | 'PUT';
 type Role = 'learner' | 'teacher' | 'admin' | 'staff';
@@ -142,13 +161,30 @@ interface MockVocabulary {
   translation: string; example: string | null; note: string | null;
 }
 
+/** Versions publiées, par niveau : un niveau est ouvert si et seulement s'il en a une (comme le catalogue). */
 const VERSIONS: Record<string, { id: string; number: number; publishedAt: string }> = {
   A1: { id: 'b1000000-0000-4000-8000-0000000000a1', number: 2, publishedAt: '2026-11-12T09:00:00.000Z' },
   A2: { id: 'b1000000-0000-4000-8000-0000000000a2', number: 2, publishedAt: '2026-11-12T09:00:00.000Z' },
+  B1: { id: 'b1000000-0000-4000-8000-0000000000b1', number: 1, publishedAt: '2026-11-24T09:00:00.000Z' },
 };
+/**
+ * Niveaux d'allemand du catalogue (`catalogue.levels`) : titre, description, position et prérequis. Publiés ou non : B2 est
+ * un brouillon sans version (« Bientôt »). L'échelle `levelCodes` sert seulement à valider et à classer un code.
+ */
+interface LevelMeta { code: LevelCode; title: string; description: string; position: number; prerequisite: LevelCode | null }
+const LEVELS_META: LevelMeta[] = [
+  { code: 'A1', title: 'Allemand A1', description: 'S’exprimer dans des situations simples du quotidien.', position: 1, prerequisite: null },
+  { code: 'A2', title: 'Allemand A2', description: 'Préparer des échanges simples sur sa vie de tous les jours.', position: 2, prerequisite: 'A1' },
+  { code: 'B1', title: 'Allemand B1', description: 'Raconter, expliquer, défendre un avis et agir dans la vie courante et au travail.', position: 3, prerequisite: 'A2' },
+  { code: 'B2', title: 'Allemand B2', description: 'Argumenter, nuancer et comprendre des textes complexes.', position: 4, prerequisite: 'B1' },
+];
 const MIDTERM = 'bilan-intermediaire';
 const FINAL = 'examen-blanc';
-const levelTitle = (code: string) => `Allemand ${code}`;
+const levelMeta = (code: string) => LEVELS_META.find((level) => level.code === code);
+const levelTitle = (code: string) => levelMeta(code)?.title ?? `Allemand ${code}`;
+/** Niveaux du catalogue dans l'ordre de leur position. */
+const catalogueLevels = () => [...LEVELS_META].sort((a, b) => a.position - b.position);
+const prerequisiteOf = (code: string): LevelCode | null => levelMeta(code)?.prerequisite ?? null;
 
 function levelContent(code: string): MockLevelContent | undefined {
   return CONTENT.find((level) => level.code === code);
@@ -171,7 +207,8 @@ function plannedMinutes(code: string): number {
   const activities = level.modules.reduce((sum, module) => sum + module.activities.reduce((total, [, , , minutes]) => total + minutes, 0), 0);
   return activities + level.modules.length * level.settings.reviewMinutes + level.settings.midtermMinutes + level.settings.finalMinutes;
 }
-const publishedLevels = (): LevelCode[] => levelCodes.filter((code) => VERSIONS[code]);
+/** Niveaux ouverts (une version publiée), dans l'ordre du catalogue. */
+const publishedLevels = (): LevelCode[] => catalogueLevels().filter((level) => VERSIONS[level.code]).map((level) => level.code);
 const rankOf = (code: string) => ['A0', ...levelCodes].indexOf(code as StartLevel);
 /** Cibles autorisées : niveaux publiés consécutifs au-dessus du niveau de départ. */
 function allowedTargets(start: StartLevel): LevelCode[] {
@@ -256,6 +293,8 @@ interface MissionRec {
   text: string; checklist: number[]; recording: RecordingRef | null; uploads: Record<string, string>;
   reviewerId: string | null; reviewerKind: ReviewerKind | null; submitKey: string | null; submittedAt: string | null;
   decision: MissionDecision | null; comment: string | null; reviewedBy: string | null; reviewedAt: string | null; createdAt: string; updatedAt: string;
+  /** Retour sur grille (niveaux B) : points par critère, score et total ; null sans grille ou avant le retour. */
+  points: Record<string, number> | null; score: number | null; maxScore: number | null;
 }
 interface ExamRec {
   id: string; enrollmentId: string; learnerId: string; levelCode: LevelCode; kind: ExamKind; number: number; status: 'in_progress' | 'submitted' | 'graded';
@@ -273,8 +312,11 @@ interface State {
   catalogueDrafts?: Json[];
 }
 
-/** 2 : V4 (exercices typés, répétitions orales, missions). Un état enregistré d'une autre version est abandonné. */
-const STATE_VERSION = 3;
+/**
+ * 2 : V4 (exercices typés, répétitions orales, missions) ; 4 : niveaux B (B1 publié, missions sur grille). Un état enregistré
+ * d'une autre version est abandonné.
+ */
+const STATE_VERSION = 4;
 const STORAGE_KEY = 'linguacap-mock-state';
 const IDS = {
   autonome: fixedId(0x101), suivi: fixedId(0x102), yanis: fixedId(0x103), awa: fixedId(0x104), parcours: fixedId(0x105),
@@ -407,15 +449,56 @@ function teacherCard(actor: UserRec): TeacherCard | null {
 // Langues et banque du test de niveau
 // ---------------------------------------------------------------------------------------------------------------------
 
+/** Banque du test de niveau publiée d'une langue (la plus récente). */
+const publishedTest = (languageId: string) => state().placementTests.filter((test) => test.languageId === languageId && test.status === 'published')
+  .sort((a, b) => b.number - a.number)[0];
+
+/** GET /languages : tous les niveaux du catalogue (publiés ou non), dans l'ordre des positions, et les paliers du test. */
 function languagesView(): Language[] {
   return staticLanguages.map((language) => ({
     id: language.id, name: language.name, nativeName: language.nativeName, status: language.status, position: language.position,
-    placementAvailable: language.id === 'de' && state().placementTests.some((test) => test.languageId === 'de' && test.status === 'published'),
-    levels: language.id === 'de' ? levelCodes.map((code) => ({
-      code, title: levelTitle(code), published: Boolean(VERSIONS[code]), trackVersionId: VERSIONS[code]?.id ?? null,
-      plannedMinutes: VERSIONS[code] ? plannedMinutes(code) : null, moduleCount: levelContent(code)?.modules.length ?? 0,
+    placementAvailable: Boolean(publishedTest(language.id)),
+    levels: language.id === 'de' ? catalogueLevels().map(({ code, title, position, prerequisite }) => ({
+      code, title, published: Boolean(VERSIONS[code]), trackVersionId: VERSIONS[code]?.id ?? null,
+      plannedMinutes: VERSIONS[code] ? plannedMinutes(code) : null, moduleCount: VERSIONS[code] ? levelContent(code)?.modules.length ?? 0 : 0,
+      position, prerequisiteCode: prerequisite,
     })) : [],
+    placementTiers: publishedTest(language.id)?.tiers.map((tier) => tier.code) ?? [],
   }));
+}
+
+/** GET /public/languages (sans session) : langues ayant un niveau publié, et leurs seuls niveaux publiés. */
+function publicLanguagesView(): PublicLanguage[] {
+  return languagesView().flatMap((language) => {
+    const levels = language.levels.filter((level) => level.published).map(({ code, title, position, moduleCount, plannedMinutes: minutes }) =>
+      ({ code, title, position, moduleCount, plannedMinutes: minutes }));
+    return levels.length ? [{ id: language.id, name: language.name, nativeName: language.nativeName, position: language.position, levels }] : [];
+  });
+}
+
+/**
+ * GET /learning/templates : durées par niveau publié. A1 et A2 gardent leurs durées calibrées ; tout autre niveau suit la
+ * formule d'Apprentissage, max(1, ceil(minutes prévues × 1,25 / minutes par semaine / 4,345)).
+ */
+function templatesView(): TemplateView[] {
+  const templates = [
+    { id: 'standard' as const, name: 'Standard', description: 'Une séance de 30 minutes du lundi au vendredi.', sessions: 1, minutes: 30, days: 5,
+      overrides: { A1: 5, A2: 5 } as Record<string, number> },
+    { id: 'intensive' as const, name: 'Intensif', description: 'Deux séances de 45 minutes chaque jour ; durée selon le niveau.', sessions: 2, minutes: 45, days: 7,
+      overrides: { A1: 1, A2: 2 } as Record<string, number> },
+  ];
+  return templates.map((template) => {
+    const weekly = template.days * template.sessions * template.minutes;
+    return {
+      id: template.id, name: template.name, description: template.description,
+      days: Array.from({ length: template.days }, (_, index) => ({ weekday: index + 1, sessions: template.sessions, minutes: template.minutes })),
+      durations: publishedLevels().map((code) => {
+        const minutes = plannedMinutes(code);
+        return { levelCode: code, plannedMinutes: minutes, months: template.overrides[code] ?? Math.max(1, Math.ceil((minutes * 1.25) / weekly / 4.345)) };
+      }),
+      a1Duration: `P${template.overrides.A1}M`, a2Duration: `P${template.overrides.A2}M`,
+    };
+  });
 }
 
 const questionCount = (test: PlacementTestDocument) => test.tiers.reduce((sum, tier) => sum + tier.questions.length, 0);
@@ -498,12 +581,23 @@ function publishPlacementTest(actor: UserRec, id: string) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 const RESULTS: Record<StartLevel, string> = {
-  A0: 'Vous débutez : votre parcours commencera par le niveau A1, pas à pas.',
-  A1: 'Vous comprenez des phrases simples du quotidien : vous pouvez viser le niveau A2.',
-  A2: 'Vous vous débrouillez dans les situations courantes : le niveau B1 est votre prochaine étape.',
-  B1: 'Vous comprenez l’essentiel de textes et de conversations variés : bravo !',
-  B2: 'Niveau avancé.', C1: 'Niveau autonome.', C2: 'Niveau maîtrise.',
+  A0: 'Vous débutez',
+  A1: 'Vous comprenez des phrases simples du quotidien',
+  A2: 'Vous vous débrouillez dans les situations courantes',
+  B1: 'Vous comprenez l’essentiel de textes et de conversations variés',
+  B2: 'Vous comprenez des textes complexes et argumentés', C1: 'Vous vous exprimez avec aisance', C2: 'Vous maîtrisez la langue',
 };
+/**
+ * Résumé du test de niveau, comme Évaluations : seul le niveau suivant **publié** est annoncé comme une étape ; un niveau
+ * suivant non publié « arrive bientôt » ; sans niveau suivant au catalogue, aucune annonce.
+ */
+function placementResultText(placed: StartLevel): string {
+  const next = catalogueLevels().find((level) => (placed === 'A0' ? level.prerequisite === null : level.prerequisite === placed));
+  if (!next) return `${RESULTS[placed]}.`;
+  if (!VERSIONS[next.code]) return `Vous avez validé le palier ${placed} : le parcours ${next.code} arrive bientôt.`;
+  return placed === 'A0' ? `${RESULTS.A0} : votre parcours commencera par le niveau ${next.code}, pas à pas.`
+    : `${RESULTS[placed]} : le niveau ${next.code} est votre prochaine étape.`;
+}
 
 function placementView(attempt: PlacementRec, actor: UserRec): PlacementView {
   const owner = actor.id === attempt.learnerId;
@@ -526,7 +620,7 @@ function placementView(attempt: PlacementRec, actor: UserRec): PlacementView {
       .filter(([questionId]) => attempt.questions.some((question) => question.id === questionId && question.tier === attempt.currentTier))) : {},
     result: attempt.status === 'completed' && placed ? {
       placedLevel: placed, label: levelLabels[placed], summary: attempt.declaredBeginner
-        ? 'Vous avez indiqué n’avoir jamais étudié la langue : votre parcours commencera par le niveau A1.' : RESULTS[placed],
+        ? 'Vous avez indiqué n’avoir jamais étudié la langue : votre parcours commencera par le niveau A1.' : placementResultText(placed),
       beyondTest: attempt.tiers.length > 0 && attempt.tiers.every((tier) => tier.status === 'passed'), declaredBeginner: attempt.declaredBeginner,
     } : null,
     startedAt: attempt.startedAt, completedAt: attempt.completedAt,
@@ -1419,9 +1513,13 @@ function removeCourse(actor: UserRec, path: PathRec, additionId: string): Additi
 // ---------------------------------------------------------------------------------------------------------------------
 
 /** Questions d'exemple d'un exercice sans contenu détaillé : la deuxième proposition est toujours juste. */
-function syntheticQuestions(title: string): DraftQuestionV4[] {
+/** Niveaux B : consignes en allemand simple avec la traduction française à côté (marqueur ` [fr] `). */
+const bilingualLevel = (code: string) => levelRank(code) >= levelRank('B1');
+function syntheticQuestions(title: string, levelCode: string): DraftQuestionV4[] {
   return [1, 2, 3].map((number) => ({
-    id: `q${number}`, type: 'choice', prompt: `Question ${number} sur « ${title} » : choisissez la bonne réponse.`, moduleRef: null,
+    id: `q${number}`, type: 'choice', moduleRef: null,
+    prompt: bilingualLevel(levelCode) ? `Frage ${number} zu „${title}“: Wählen Sie die richtige Antwort. [fr] Question ${number} sur « ${title} » : choisissez la bonne réponse.`
+      : `Question ${number} sur « ${title} » : choisissez la bonne réponse.`,
     explanation: 'Dans le simulateur, la deuxième proposition est toujours la réponse attendue ; la vraie API sert l’explication rédigée pour chaque question.',
     options: [
       { id: 'a', label: 'Première proposition', correct: false, feedback: null },
@@ -1445,12 +1543,19 @@ function activityContent(level: MockLevelContent, activityId: string) {
   const detail = DETAILS[id];
   const questions: DraftQuestionV4[] = v4 ? v4.questions
     : detail?.questions.length ? detail.questions.map((question) => legacyQuestion(id, question))
-      : kind === 'exercise' ? syntheticQuestions(title) : [];
+      : kind === 'exercise' ? syntheticQuestions(title, level.code) : [];
+  // Mission d'un niveau B sans contenu détaillé : définition courte, notée sur la grille standard du niveau.
+  const fallback = !v4 && kind === 'mission' && bilingualLevel(level.code) ? summaryMission(id, title) : undefined;
+  const source = v4 ?? fallback;
+  const summary = bilingualLevel(level.code)
+    ? `${found.module.objective}\n\nDer Simulator zeigt eine Zusammenfassung dieser Lektion. [fr] Le simulateur présente un résumé de cette leçon, « ${title} » : la vraie API sert la leçon complète, avec ses médias.`
+    : `${found.module.objective}\n\nCette leçon, « ${title} », fait partie du module « ${found.module.title} ». Le simulateur en présente un résumé : la vraie API sert la leçon complète, avec ses médias.`;
   return {
     module: found.module, level, id, kind, title, minutes, competences, questions,
-    mission: v4?.mission ? { description: v4.lesson?.description ?? '', ...v4.mission } : null,
-    lesson: v4?.lesson ?? detail?.lesson ?? (kind === 'lesson' ? { title, description: `${found.module.objective}\n\nCette leçon, « ${title} », fait partie du module « ${found.module.title} ». Le simulateur en présente un résumé : la vraie API sert la leçon complète, avec ses médias.` } : null),
-    transcript: v4?.transcript ?? detail?.transcript ?? null,
+    // Comme Apprentissage : la grille est toujours servie avec la mission ([] sans grille).
+    mission: source?.mission ? { description: source.lesson?.description ?? '', ...source.mission, criteria: missionCriteriaOf(source.mission) } : null,
+    lesson: source?.lesson ?? detail?.lesson ?? (kind === 'lesson' ? { title, description: summary } : null),
+    transcript: source?.transcript ?? detail?.transcript ?? null,
   };
 }
 type MockContent = NonNullable<ReturnType<typeof activityContent>>;
@@ -1934,13 +2039,16 @@ function missionView(mission: MissionRec, actor: UserRec): MissionView {
     activityId: mission.activityId, sessionId: mission.sessionId, sessionActivityId: mission.sessionActivityId, number: mission.number, title: mission.title,
     definition: mission.definition, status: mission.status, text: mission.text, checklist: mission.checklist, recording: recordingView(mission.recording),
     reviewerKind: mission.reviewerKind, submittedAt: mission.submittedAt,
-    review: mission.status === 'reviewed' && mission.decision ? { decision: mission.decision, comment: mission.comment, reviewedAt: mission.reviewedAt as string } : null,
+    // Les points n'apparaissent qu'avec le retour, jamais avant.
+    review: mission.status === 'reviewed' && mission.decision ? { decision: mission.decision, comment: mission.comment, reviewedAt: mission.reviewedAt as string,
+      points: mission.points, score: mission.score, maxScore: mission.maxScore } : null,
     canReview: canReviewMission(actor, mission), createdAt: mission.createdAt, updatedAt: mission.updatedAt,
   };
 }
 const missionSummary = (mission: MissionRec): MissionSummary => ({
   id: mission.id, activityId: mission.activityId, title: mission.title, levelCode: mission.levelCode, moduleId: mission.moduleId, status: mission.status,
   decision: mission.decision, submittedAt: mission.submittedAt, reviewedAt: mission.reviewedAt, sessionId: mission.sessionId,
+  score: mission.status === 'reviewed' ? mission.score : null, maxScore: mission.status === 'reviewed' ? mission.maxScore : null,
 });
 function findMission(actor: UserRec, id: string) {
   const mission = state().missions.find((item) => item.id === id);
@@ -1990,7 +2098,7 @@ function openMission(actor: UserRec, body: Json) {
     lessonId: lessonIdOf(content.id), sessionId, sessionActivityId, number: (mine[0]?.number ?? 0) + 1, status: 'draft', title: content.title,
     definition: { ...content.mission, description: content.lesson?.description ?? '' }, text: body.restart === true ? mine[0]?.text ?? '' : '',
     checklist: [], recording: null, uploads: {}, reviewerId: null, reviewerKind: null, submitKey: null, submittedAt: null, decision: null, comment: null,
-    reviewedBy: null, reviewedAt: null, createdAt: stamp, updatedAt: stamp,
+    reviewedBy: null, reviewedAt: null, createdAt: stamp, updatedAt: stamp, points: null, score: null, maxScore: null,
   };
   state().missions.push(mission);
   return { status: 201, body: missionView(mission, actor) };
@@ -1998,7 +2106,13 @@ function openMission(actor: UserRec, body: Json) {
 function saveMission(actor: UserRec, id: string, body: Json): MissionView {
   const mission = ownDraft(actor, id);
   if (body.text !== undefined) {
-    if (typeof body.text !== 'string' || body.text.length > missionLimits.textChars) throw invalid('Le texte compte 1 500 caractères au plus.');
+    // Comme Évaluations : 3 000 caractères au plus, la limite de la mission, et pas de texte sans partie écrite.
+    if (typeof body.text !== 'string' || body.text.length > missionLimits.textChars) {
+      throw invalid(`Le texte compte ${missionLimits.textChars.toLocaleString('fr-FR')} caractères au plus.`);
+    }
+    const written = mission.definition.written;
+    if (!written && body.text.trim()) throw invalid('Cette mission n’attend pas de texte écrit.');
+    if (written && body.text.length > written.maxChars) throw invalid(`Le texte de cette mission compte ${written.maxChars} caractères au plus.`);
     mission.text = body.text;
   }
   if (body.checklist !== undefined) {
@@ -2055,8 +2169,34 @@ function reviewMission(actor: UserRec, id: string, body: Json): MissionView {
   if (body.decision !== 'validated' && body.decision !== 'to_redo') throw invalid('Décision attendue : validated ou to_redo.');
   if (typeof body.comment !== 'string' || body.comment.length > missionLimits.commentChars) throw invalid('Commentaire de 2 000 caractères au plus.');
   if (body.decision === 'to_redo' && !body.comment.trim()) throw invalid('Expliquez à l’élève ce qu’il doit reprendre.');
-  Object.assign(mission, { status: 'reviewed', decision: body.decision, comment: body.comment.trim() || null, reviewedBy: actor.id, reviewedAt: now(), updatedAt: now() });
+  const { points, score, maxScore } = rubricPoints(mission.definition, body.points);
+  Object.assign(mission, { status: 'reviewed', decision: body.decision, comment: body.comment.trim() || null, reviewedBy: actor.id, reviewedAt: now(), updatedAt: now(),
+    points, score, maxScore });
   return missionView(mission, actor);
+}
+/**
+ * Points d'un retour, comme Évaluations : avec une grille, un entier de 0 à maxPoints pour chaque critère, aucune clé
+ * inconnue ; sans grille, aucun point. La décision reste celle du correcteur.
+ */
+function rubricPoints(definition: MissionSnapshot, given: unknown) {
+  const criteria = missionCriteriaOf(definition);
+  if (!criteria.length) {
+    if (given !== undefined && given !== null) throw invalid('Cette mission n’est pas notée sur une grille : envoyez la décision sans points.');
+    return { points: null, score: null, maxScore: null };
+  }
+  if (typeof given !== 'object' || given === null || Array.isArray(given)) throw invalid('Notez chaque critère de la grille avant d’envoyer le retour.');
+  const values = given as Json;
+  const unknown = Object.keys(values).filter((key) => !criteria.some((criterion) => criterion.id === key));
+  if (unknown.length) throw invalid(`Critère inconnu dans la notation : ${unknown.join(', ')}.`);
+  const points: Record<string, number> = {};
+  for (const criterion of criteria) {
+    const value = values[criterion.id];
+    if (typeof value !== 'number' || !Number.isInteger(value) || value < 0 || value > criterion.maxPoints) {
+      throw invalid(`Notez le critère « ${criterion.label} » de 0 à ${criterion.maxPoints} points.`);
+    }
+    points[criterion.id] = value;
+  }
+  return { points, score: Object.values(points).reduce((sum, value) => sum + value, 0), maxScore: missionMaxScore(criteria) };
 }
 
 // --- Catalogue : documents de version au format 4 (éditeur) -------------------------------------------------------------
@@ -2083,7 +2223,8 @@ function versionDocument(code: LevelCode): Json {
           // Le retour d'un choix est absent (et non nul) quand il n'y en a pas, comme dans le catalogue.
           questions: content.questions.map((question) => ({ ...question,
             options: question.options.map(({ feedback, ...option }) => (feedback ? { ...option, feedback } : option)) })),
-          placements: [], mission: V4_DETAILS[id]?.mission ?? null,
+          placements: [], mission: content.mission ? { oral: content.mission.oral, written: content.mission.written,
+            checklist: content.mission.checklist, criteria: missionCriteriaOf(content.mission) } : null,
         };
       }),
     })),
@@ -2098,14 +2239,21 @@ function catalogueVersion(actor: UserRec, id: string): Json {
   if (!code) throw notFound('Version introuvable.');
   return versionDocument(code as LevelCode);
 }
-/** POST /catalogue/levels/{levelId}/versions : brouillon copié de la version publiée. */
+/** POST /catalogue/levels/{levelId}/versions : brouillon copié de la version publiée, ou vide pour un niveau pas encore publié. */
 function createCatalogueDraft(actor: UserRec, levelId: string) {
   const code = levelId.toUpperCase();
-  if (!VERSIONS[code]) throw notFound('Niveau introuvable.');
-  const existing = catalogueVersion(actor, VERSIONS[code].id);
+  const meta = levelMeta(code);
+  if (!meta) throw notFound('Niveau introuvable.');
+  if (!canEditCatalogue(actor)) throw forbidden('Réservé aux éditeurs du catalogue.');
+  const existing: Json = VERSIONS[code] ? catalogueVersion(actor, VERSIONS[code].id) : {
+    levelId: code.toLowerCase(), levelCode: code, levelTitle: meta.title,
+    settings: { expectedCompetences: ['lecture', 'ecoute', 'expression-ecrite', 'expression-orale'], successCriteria: '', reviewMinutes: 15,
+      midtermMinutes: 60, finalMinutes: 120, passPercent: 60 },
+    diagnostic: null, modules: [], assessments: [],
+  };
   const drafts = (state().catalogueDrafts ??= []);
   if (drafts.some((item) => item.levelCode === code)) throw conflict('Un brouillon existe déjà pour ce niveau.');
-  const draft: Json = { ...structuredClone(existing), id: newId(), number: VERSIONS[code].number + 1, status: 'draft', publishedAt: null, updatedAt: now() };
+  const draft: Json = { ...structuredClone(existing), id: newId(), number: (VERSIONS[code]?.number ?? 0) + 1, status: 'draft', publishedAt: null, updatedAt: now() };
   drafts.push(draft);
   return { status: 201, body: draft };
 }
@@ -2328,37 +2476,98 @@ function pathOfEnrollment(actor: UserRec, enrollmentId: string) {
 // ---------------------------------------------------------------------------------------------------------------------
 
 const option = (labels: string[]) => labels.map((label, index) => ({ id: 'abcd'[index], label }));
-function examParts(levelCode: LevelCode, kind: ExamKind, practice: boolean): PracticePart[] {
-  const a2 = levelCode !== 'A1';
-  const parts: PracticePart[] = [
-    { id: 'lecture', competence: 'lecture', mode: 'closed', title: a2 ? 'Lire une annonce de logement' : 'Lire un message', criteria: [], selfPractice: false, placements: [],
-      instructions: a2
-        ? 'Lisez l’annonce, puis répondez aux questions.\n\nSchöne 2-Zimmer-Wohnung in Leipzig-Gohlis, 58 m², Balkon, 4. Stock ohne Aufzug.\nMiete: 620 € warm. Frei ab 1. März. Haustiere nach Absprache.\nBesichtigung: Samstag, 10 bis 12 Uhr.'
-        : 'Lisez le message de Lena, puis répondez aux questions.\n\nHallo Paula,\nich bin heute im Café am Markt. Ich möchte einen Kaffee und eine Brezel.\nKommst du auch? Wir sind um drei Uhr da.\nLiebe Grüße, Lena',
-      questions: a2 ? [
-        { id: 'q1', prompt: 'Combien de pièces a l’appartement ?', options: option(['Deux', 'Trois', 'Quatre']) },
-        { id: 'q2', prompt: 'Que comprend le loyer ?', options: option(['Les charges', 'Le garage', 'L’électricité seulement']) },
-        { id: 'q3', prompt: 'Quand peut-on visiter ?', options: option(['Le samedi matin', 'Le vendredi soir', 'Tous les jours']) },
-      ] : [
+type ExamQuestion = PracticePart['questions'][number];
+interface ExamContent {
+  readingTitle: string; reading: string; readingQuestions: ExamQuestion[]; listening: string; listeningQuestions: ExamQuestion[];
+  writing: string; writingCriteria: MissionCriterion[]; speaking: string; speakingCriteria: MissionCriterion[];
+}
+/**
+ * Parties d'évaluation du simulateur, par niveau de contenu : celles du niveau le plus proche en dessous (A1, A2 ou B1).
+ * B1 : consignes en allemand avec la traduction française (` [fr] `) et grilles d'écrit et d'oral du niveau (20 points).
+ * La première option est toujours la bonne réponse (CLOSED_ANSWERS).
+ */
+function examContent(levelCode: LevelCode): ExamContent {
+  const shared = {
+    listeningQuestions: [
+      { id: 'q4', prompt: 'Où se passe la conversation ?', options: option(['Dans un magasin', 'À l’école', 'Chez le médecin']) },
+      { id: 'q5', prompt: 'Que décide la personne ?', options: option(['Elle revient demain', 'Elle achète tout de suite', 'Elle appelle un ami']) },
+    ],
+    listening: 'Écoutez le dialogue deux fois, puis répondez. (Le simulateur fournit un son muet.)',
+    writingCriteria: [{ id: 'consigne', label: 'Respect de la consigne', maxPoints: 4 }, { id: 'vocabulaire', label: 'Vocabulaire', maxPoints: 3 },
+      { id: 'grammaire', label: 'Grammaire et orthographe', maxPoints: 3 }],
+    speaking: 'Entraînez-vous à voix haute : présentez-vous et racontez votre journée pendant une minute.',
+    speakingCriteria: [{ id: 'aisance', label: 'Aisance et clarté', maxPoints: 5 }, { id: 'prononciation', label: 'Prononciation', maxPoints: 5 }],
+  };
+  if (bilingualLevel(levelCode)) {
+    return {
+      readingTitle: 'Lesen : eine Nachricht im Büro',
+      reading: 'Lesen Sie die Nachricht. Beantworten Sie dann die Fragen. [fr] Lisez le message, puis répondez aux questions.\n\n'
+        + 'Liebe Kolleginnen und Kollegen,\nab Montag gilt in unserem Büro eine neue Regel: Wer zu Hause arbeiten möchte, trägt das bis Freitagmittag '
+        + 'in den gemeinsamen Kalender ein. So wissen alle, wer im Haus ist, und wir können Besprechungen besser planen. Wichtig: Die Teamsitzung '
+        + 'am Mittwoch um 9 Uhr findet weiterhin im Büro statt.\nViele Grüße\nAnna Brandt',
+      readingQuestions: [
+        { id: 'q1', prompt: 'Was ist neu? [fr] Qu’est-ce qui change ?',
+          options: option(['Man trägt die Tage im Homeoffice in einen Kalender ein.', 'Niemand darf mehr zu Hause arbeiten.', 'Die Teamsitzung findet jetzt online statt.']) },
+        { id: 'q2', prompt: 'Bis wann muss man sich eintragen? [fr] Jusqu’à quand faut-il s’inscrire ?',
+          options: option(['bis Freitagmittag', 'bis Montagmorgen', 'bis Mittwoch um 9 Uhr']) },
+        { id: 'q3', prompt: 'Wo findet die Teamsitzung statt? [fr] Où a lieu la réunion d’équipe ?', options: option(['im Büro', 'zu Hause', 'online']) },
+      ],
+      listening: 'Hören Sie das Gespräch zweimal. Beantworten Sie dann die Fragen. [fr] Écoutez la conversation deux fois, puis répondez. '
+        + '(Le simulateur fournit un son muet.)',
+      listeningQuestions: [
+        { id: 'q4', prompt: 'Warum ruft die Frau an? [fr] Pourquoi la femme appelle-t-elle ?',
+          options: option(['Sie möchte einen Termin verschieben.', 'Sie möchte eine Rechnung bezahlen.', 'Sie sucht eine Wohnung.']) },
+        { id: 'q5', prompt: 'Was schlägt der Mann vor? [fr] Que propose l’homme ?',
+          options: option(['einen Termin am Donnerstagnachmittag', 'einen Termin am Montagmorgen', 'einen Rückruf am Abend']) },
+      ],
+      writing: 'Schreiben Sie Anna Brandt eine kurze Antwort: Sie können am Mittwoch nicht ins Büro kommen. Nennen Sie den Grund und machen Sie '
+        + 'einen Vorschlag (80 bis 100 Wörter). [fr] Répondez brièvement à Anna Brandt : vous ne pouvez pas venir au bureau mercredi. Donnez la '
+        + 'raison et faites une proposition (80 à 100 mots).',
+      writingCriteria: B1_GRIDS.schreiben,
+      speaking: 'Sprechen Sie etwa zwei Minuten: Wo arbeiten Sie am liebsten, im Büro oder zu Hause? Begründen Sie Ihre Meinung. '
+        + '[fr] Parlez environ deux minutes : où préférez-vous travailler, au bureau ou chez vous ? Justifiez votre avis.',
+      speakingCriteria: B1_GRIDS.sprechen,
+    };
+  }
+  if (levelCode === 'A1') {
+    return {
+      ...shared, readingTitle: 'Lire un message',
+      reading: 'Lisez le message de Lena, puis répondez aux questions.\n\nHallo Paula,\nich bin heute im Café am Markt. Ich möchte einen Kaffee und eine Brezel.\nKommst du auch? Wir sind um drei Uhr da.\nLiebe Grüße, Lena',
+      readingQuestions: [
         { id: 'q1', prompt: 'Où est Lena aujourd’hui ?', options: option(['Au café', 'À la gare', 'Au supermarché']) },
         { id: 'q2', prompt: 'Que veut-elle commander ?', options: option(['Un café et un bretzel', 'Un thé et un gâteau', 'Une soupe']) },
         { id: 'q3', prompt: 'À quelle heure Paula peut-elle venir ?', options: option(['À trois heures', 'À deux heures', 'À quatre heures']) },
-      ] },
-    { id: 'ecoute', competence: 'ecoute', mode: 'closed', title: 'Écouter un dialogue', criteria: [], selfPractice: false,
-      instructions: 'Écoutez le dialogue deux fois, puis répondez. (Le simulateur fournit un son muet.)',
+      ],
+      writing: 'Présentez-vous en 30 à 50 mots : prénom, âge, ville, ce que vous aimez manger.',
+    };
+  }
+  return {
+    ...shared, readingTitle: 'Lire une annonce de logement',
+    reading: 'Lisez l’annonce, puis répondez aux questions.\n\nSchöne 2-Zimmer-Wohnung in Leipzig-Gohlis, 58 m², Balkon, 4. Stock ohne Aufzug.\nMiete: 620 € warm. Frei ab 1. März. Haustiere nach Absprache.\nBesichtigung: Samstag, 10 bis 12 Uhr.',
+    readingQuestions: [
+      { id: 'q1', prompt: 'Combien de pièces a l’appartement ?', options: option(['Deux', 'Trois', 'Quatre']) },
+      { id: 'q2', prompt: 'Que comprend le loyer ?', options: option(['Les charges', 'Le garage', 'L’électricité seulement']) },
+      { id: 'q3', prompt: 'Quand peut-on visiter ?', options: option(['Le samedi matin', 'Le vendredi soir', 'Tous les jours']) },
+    ],
+    writing: 'Vous répondez à l’annonce : présentez-vous et proposez une date de visite (50 à 70 mots).',
+  };
+}
+function examParts(levelCode: LevelCode, kind: ExamKind, practice: boolean): PracticePart[] {
+  const content = examContent(levelCode);
+  const b = bilingualLevel(levelCode);
+  const parts: PracticePart[] = [
+    { id: 'lecture', competence: 'lecture', mode: 'closed', title: content.readingTitle, criteria: [], selfPractice: false, placements: [],
+      instructions: content.reading, questions: content.readingQuestions },
+    { id: 'ecoute', competence: 'ecoute', mode: 'closed', title: b ? 'Hören : ein Telefongespräch' : 'Écouter un dialogue', criteria: [], selfPractice: false,
+      instructions: content.listening,
       placements: [{ position: 1, assetId: `${levelCode.toLowerCase()}-${kind}-ecoute`, assetVersion: 1, usage: 'audio', alt: null, caption: 'Im Alltag' }],
-      questions: [
-        { id: 'q4', prompt: 'Où se passe la conversation ?', options: option(['Dans un magasin', 'À l’école', 'Chez le médecin']) },
-        { id: 'q5', prompt: 'Que décide la personne ?', options: option(['Elle revient demain', 'Elle achète tout de suite', 'Elle appelle un ami']) },
-      ] },
-    { id: 'ecrit', competence: 'expression-ecrite', mode: 'written', title: 'Écrire un court message', questions: [], placements: [], selfPractice: practice,
-      instructions: a2 ? 'Vous répondez à l’annonce : présentez-vous et proposez une date de visite (50 à 70 mots).' : 'Présentez-vous en 30 à 50 mots : prénom, âge, ville, ce que vous aimez manger.',
-      criteria: [{ id: 'consigne', label: 'Respect de la consigne', maxPoints: 4 }, { id: 'vocabulaire', label: 'Vocabulaire', maxPoints: 3 }, { id: 'grammaire', label: 'Grammaire et orthographe', maxPoints: 3 }] },
+      questions: content.listeningQuestions },
+    { id: 'ecrit', competence: 'expression-ecrite', mode: 'written', title: b ? 'Schreiben : eine kurze Antwort' : 'Écrire un court message', questions: [], placements: [],
+      selfPractice: practice, instructions: content.writing, criteria: content.writingCriteria },
   ];
   if (practice) {
-    parts.push({ id: 'oral', competence: 'expression-orale', mode: 'oral', title: 'Parler une minute', questions: [], placements: [], selfPractice: true,
-      instructions: 'Entraînez-vous à voix haute : présentez-vous et racontez votre journée pendant une minute.',
-      criteria: [{ id: 'aisance', label: 'Aisance et clarté', maxPoints: 5 }, { id: 'prononciation', label: 'Prononciation', maxPoints: 5 }] });
+    parts.push({ id: 'oral', competence: 'expression-orale', mode: 'oral', title: b ? 'Sprechen : seine Meinung sagen' : 'Parler une minute', questions: [], placements: [],
+      selfPractice: true, instructions: content.speaking, criteria: content.speakingCriteria });
   }
   return parts;
 }
@@ -2695,6 +2904,8 @@ const routes: [Method, RegExp, Handler][] = [
   ['GET', /^\/me\/teacher$/, ({ actor }) => teacherCard(actor)],
   ['GET', /^\/languages$/, () => languagesView()],
   ['GET', /^\/health$/, () => ({ status: 'ok' })],
+  // Seule route lue sans session (vitrine, connexion) : niveaux publiés seulement.
+  ['GET', /^\/public\/languages$/, () => publicLanguagesView()],
 
   // Banque du test de niveau (éditeurs)
   ['GET', /^\/catalogue\/placement-tests$/, ({ actor }) => {
@@ -2805,7 +3016,7 @@ const routes: [Method, RegExp, Handler][] = [
   ['POST', new RegExp(`^/learning/enrollments/${ANY}/resume$`), ({ actor, params, body }) => resumePath(actor, pathOfEnrollment(actor, params[0]), body)],
   ['GET', new RegExp(`^/learning/enrollments/${ANY}/diagnostic$`), ({ actor, params }) => diagnosticRefused(pathOfEnrollment(actor, params[0]))],
   ['POST', new RegExp(`^/learning/enrollments/${ANY}/diagnostic$`), ({ actor, params }) => diagnosticRefused(pathOfEnrollment(actor, params[0]))],
-  ['GET', /^\/learning\/templates$/, () => []],
+  ['GET', /^\/learning\/templates$/, () => templatesView()],
 
   // Examens (bilan intermédiaire et examen blanc simplifiés)
   ['GET', /^\/assessments\/exams$/, ({ actor, query }) => {
@@ -2888,16 +3099,21 @@ const routes: [Method, RegExp, Handler][] = [
     return { versionId: VERSIONS[code].id, levelId: code.toLowerCase(), levelCode: code, levelTitle: levelTitle(code), language: 'de', languageId: 'de',
       number: VERSIONS[code].number, publishedAt: VERSIONS[code].publishedAt, moduleCount: level.modules.length,
       activityCount: level.modules.reduce((sum, module) => sum + module.activities.length, 0), totalMinutes: plannedMinutes(code),
-      prerequisiteLevelCode: code === 'A1' ? null : levelCodes[rankOf(code) - 2], successCriteria: `Obtenir au moins ${level.settings.passPercent} % à l’examen blanc ${code}.` };
+      prerequisiteLevelCode: prerequisiteOf(code), successCriteria: `Obtenir au moins ${level.settings.passPercent} % à l’examen blanc ${code}.` };
   })],
-  ['GET', /^\/levels$/, () => publishedLevels().map((code, index) => ({ id: code.toLowerCase(), code, title: levelTitle(code), description: '', position: index + 1 }))],
-  ['GET', /^\/catalogue\/levels$/, () => publishedLevels().map((code, index) => ({
-    id: code.toLowerCase(), code, title: levelTitle(code), description: '', position: index + 1, status: 'published',
-    prerequisiteLevelId: index ? levelCodes[index - 1].toLowerCase() : null, prerequisiteLevelCode: index ? levelCodes[index - 1] : null,
+  // Comme le catalogue : /levels ne liste que les niveaux ouverts, /catalogue/levels tous les niveaux (brouillons compris).
+  ['GET', /^\/levels$/, () => publishedLevels().map((code) => {
+    const meta = levelMeta(code) as LevelMeta;
+    return { id: code.toLowerCase(), code, title: meta.title, description: meta.description, position: meta.position };
+  })],
+  ['GET', /^\/catalogue\/levels$/, () => catalogueLevels().map(({ code, title, description, position, prerequisite }) => ({
+    id: code.toLowerCase(), code, title, description, position, status: VERSIONS[code] ? 'published' : 'draft',
+    prerequisiteLevelId: prerequisite?.toLowerCase() ?? null, prerequisiteLevelCode: prerequisite,
     versions: [
       ...(state().catalogueDrafts ?? []).filter((draft) => draft.levelCode === code).map((draft) => ({ id: draft.id, number: draft.number, status: 'draft',
         publishedAt: null, retiredAt: null, updatedAt: draft.updatedAt })),
-      { id: VERSIONS[code].id, number: VERSIONS[code].number, status: 'published', publishedAt: VERSIONS[code].publishedAt, retiredAt: null, updatedAt: VERSIONS[code].publishedAt }],
+      ...(VERSIONS[code] ? [{ id: VERSIONS[code].id, number: VERSIONS[code].number, status: 'published', publishedAt: VERSIONS[code].publishedAt, retiredAt: null,
+        updatedAt: VERSIONS[code].publishedAt }] : [])],
   }))],
   // Documents de version au format 4 (questions typées, missions, lexique) pour l'éditeur du catalogue.
   ['GET', new RegExp(`^/catalogue/versions/${UUID}$`), ({ actor, params }) => catalogueVersion(actor, params[0])],
@@ -2930,7 +3146,8 @@ export async function mockRequest<T>(path: string, token?: string,
   try {
     const route = routes.find(([verb, pattern]) => verb === method && pattern.test(url.pathname));
     if (!route) throw notFound(`Route non simulée : ${method} ${url.pathname}.`);
-    const actor = url.pathname === '/health' ? (undefined as unknown as UserRec) : actorOf(token);
+    // /health et /public/languages se lisent sans session (comme la passerelle).
+    const actor = url.pathname === '/health' || url.pathname === '/public/languages' ? (undefined as unknown as UserRec) : actorOf(token);
     const body = (options ? options.body ?? {} : {}) as Json;
     if (method !== 'GET' && (typeof body !== 'object' || body === null || Array.isArray(body))) throw invalid('Un objet JSON est attendu.');
     const params = (route[1].exec(url.pathname) ?? []).slice(1);
@@ -3144,6 +3361,18 @@ function seedV4() {
     'apercu-awa-mission');
   reviewMission(weber, awaMission.id, { decision: 'validated', comment: 'Parfait, Awa : la subordonnée avec « weil » est juste et la formule de politesse aussi. Bravo !' });
   Object.assign(missionRec(awaMission.id), { createdAt: ago(6, 17), submittedAt: ago(6, 18), reviewedAt: ago(5, 10), updatedAt: ago(5, 10) });
+
+  // Léa : mission orale B1 de la bibliothèque, corrigée sur la grille (16 / 20, validée), avec le modèle de commentaire.
+  const interview = openMission(lea, { trackVersionId: VERSIONS.B1.id, activityId: 'b1-arbeit-atelier-sprechen' }).body;
+  saveMission(lea, interview.id, { checklist: interview.definition.checklist.map((_, index) => index) });
+  const take = reserveMissionRecording(lea, interview.id, { mimeType: 'audio/webm', size: 1_400_000 });
+  finalizeMissionRecording(lea, interview.id, take.id);
+  const answered = submitMission(lea, interview.id, 'apercu-lea-mission-b1');
+  reviewMission(weber, answered.id, { decision: 'validated', points: { aufgabe: 4, kohaerenz: 3, wortschatz: 3, strukturen: 3, aussprache: 3 },
+    comment: 'Points forts : trois réponses complètes et une question finale très polie (« Könnten Sie mir sagen, wann die Probezeit endet? »).\n'
+      + 'À retravailler : après « weil », le verbe va à la fin (St : « weil ich gern mit Menschen arbeite ») ; l’accent de « Erfahrung » tombe sur « fah ».\n'
+      + 'Relance : quelle question poseriez-vous sur l’équipe ou sur les horaires ?' });
+  Object.assign(missionRec(answered.id), { createdAt: ago(3, 17), submittedAt: ago(3, 18), reviewedAt: ago(2, 9), updatedAt: ago(2, 9) });
 }
 
 /** Données initiales : allonge les séances jusqu'à ce que le planning tienne (aucun débordement). */
@@ -3426,3 +3655,400 @@ for (const [moduleId, after, activity] of V4_ACTIVITIES) {
   const index = module.activities.findIndex(([id]) => id === after);
   module.activities.splice(index < 0 ? module.activities.length : index + 1, 0, activity);
 }
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Niveau B1 (cours B1 et B2) : gabarit « thème + atelier » du plan B (12 thèmes × 2 modules, identifiants d'activité fixés),
+// module « b1-arbeit » détaillé (consignes bilingues, exercices typés, répétition, lexique) et missions sur grille de son
+// atelier. Les autres activités B1 sont résumées par le simulateur (questions et missions courtes, consignes bilingues).
+// ---------------------------------------------------------------------------------------------------------------------
+
+/** Consigne B1 : allemand simple, puis la traduction française affichée à côté (comme `bi()` de content/b/lib.mjs). */
+function bi(de: string, fr: string) { return `${de} [fr] ${fr}`; }
+
+/** Grilles standard des missions B1 (`GRIDS.b1` de content/b/lib.mjs) : 4 critères à l'écrit, 5 à l'oral, 20 points. */
+const B1_GRIDS: { schreiben: MissionCriterion[]; sprechen: MissionCriterion[] } = {
+  schreiben: [
+    { id: 'aufgabe', label: 'Tâche : tous les points sont traités, destinataire et registre (du / Sie) respectés', maxPoints: 5 },
+    { id: 'kohaerenz', label: 'Cohérence : texte organisé (début, développement, fin), connecteurs variés', maxPoints: 5 },
+    { id: 'wortschatz', label: 'Vocabulaire : précis et assez varié pour le thème, formules adaptées', maxPoints: 5 },
+    { id: 'strukturen', label: 'Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension', maxPoints: 5 },
+  ],
+  sprechen: [
+    { id: 'aufgabe', label: 'Tâche : tous les points sont traités dans le temps imparti', maxPoints: 4 },
+    { id: 'kohaerenz', label: 'Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations', maxPoints: 4 },
+    { id: 'wortschatz', label: 'Vocabulaire : précis, formules d’usage adaptées', maxPoints: 4 },
+    { id: 'strukturen', label: 'Structures : phrases variées, verbe à la bonne place', maxPoints: 4 },
+    { id: 'aussprache', label: 'Prononciation et intonation : compréhensible, accent de phrase juste', maxPoints: 4 },
+  ],
+};
+
+/** Consignes standard B1 (`C` de content/b/lib.mjs). */
+const B1_C = {
+  lesen: bi('Lesen Sie den Text. Beantworten Sie dann die Fragen.', 'Lisez le texte, puis répondez aux questions.'),
+  richtigFalsch: 'Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?',
+  sprechen: bi('Hören Sie und sprechen Sie nach.', 'Écoutez, puis répétez à voix haute.'),
+};
+
+/** Répétition B1 : consigne bilingue, seuil 75 (70 au-delà de 10 mots), nombres acceptés aussi en chiffres. */
+const bSpeak = (id: string, text: string, explanation: string, accept: string[] = [text]): DraftQuestionV4 =>
+  typed(id, 'speak', B1_C.sprechen, explanation, { text, accept, threshold: countWords(text) > 10 ? 70 : 75 });
+/** Choix « richtig / falsch / steht nicht im Text » : l'affirmation, puis la consigne traduite. */
+const richtigFalsch = (id: string, statement: string, answer: 0 | 1 | 2, explanation: string): DraftQuestionV4 =>
+  choice(id, `${statement} ${B1_C.richtigFalsch}`, explanation,
+    (['richtig', 'falsch', 'steht nicht im Text'] as const).map((label, index) => [label, index === answer, null]));
+
+/**
+ * Thèmes B1 (annexe modules du plan B) : identifiant, titre et objectif du module thème, second document, titre et objectif
+ * de l'atelier, missions écrite et orale.
+ */
+const B1_THEMES: [string, string, string, 'hoeren2' | 'lesen2', string, string, string, string][] = [
+  ['neuanfang', 'Neuanfang : raconter un nouveau départ',
+    'Raconter dans l’ordre une étape de sa vie, situer les moments (als, nachdem, bevor, seitdem) et réagir au récit de quelqu’un.', 'hoeren2',
+    'Neuanfang, atelier : se présenter à un nouveau groupe', 'Écrire à un nouveau groupe pour se présenter et raconter à l’oral un tournant de sa vie.',
+    'se présenter au nouveau groupe', 'raconter un tournant'],
+  ['beziehungen', 'Beziehungen : parler de ses relations et de ses sentiments',
+    'Décrire une amitié ou une relation familiale, dire ce que l’on ressent et montrer de la compréhension (sich freuen auf, sich ärgern über, darauf, worüber).', 'lesen2',
+    'Beziehungen, atelier : conseiller une amie, régler un malentendu', 'Répondre à une amie qui demande conseil, s’excuser et proposer une solution.',
+    'conseiller une amie', 's’excuser et proposer une solution'],
+  ['wohnen', 'Wohnen : vivre ensemble dans un immeuble',
+    'Comprendre un règlement intérieur, décrire un problème du logement et préciser de qui ou de quoi l’on parle (relatives).', 'hoeren2',
+    'Wohnen, atelier : signaler un problème et proposer un accord', 'Écrire à la régie pour signaler un problème et trouver un accord avec un voisin.',
+    'écrire à la régie', 'trouver un accord avec un voisin'],
+  ['arbeit', 'Arbeit : comprendre une offre et préparer un entretien',
+    'Comprendre une offre d’emploi, présenter ses compétences avec un exemple et poser des questions polies (Könnten Sie mir sagen, … ?).', 'lesen2',
+    'Arbeit, atelier : postuler et se présenter en entretien', 'Écrire une candidature formelle par courriel et répondre à trois questions d’entretien.',
+    'postuler par courriel', 'répondre à trois questions d’entretien'],
+  ['gesundheit', 'Gesundheit : prendre soin de sa santé',
+    'Décrire des symptômes et leur évolution, comprendre des conseils et un message du cabinet, poser une condition (wenn, falls).', 'hoeren2',
+    'Gesundheit, atelier : organiser un rendez-vous et donner des conseils', 'Déplacer un rendez-vous par un message formel court et conseiller un ami sur sa santé.',
+    'déplacer un rendez-vous au cabinet', 'donner des conseils santé à un ami'],
+  ['lernen', 'Lernen : choisir une formation',
+    'Comparer des offres de cours, exprimer un but (um … zu, damit) et comprendre les conditions d’inscription.', 'lesen2',
+    'Lernen, atelier : se renseigner et motiver son choix', 'Se renseigner par écrit auprès d’une école et comparer deux formations à l’oral.',
+    'se renseigner auprès d’une école', 'comparer deux formations'],
+  ['unterwegs', 'Unterwegs : voyager malgré les imprévus',
+    'Comprendre une annonce de perturbation, comparer deux options de trajet et exprimer une concession (obwohl, trotzdem).', 'hoeren2',
+    'Unterwegs, atelier : prévenir un groupe et réorganiser le trajet', 'Prévenir un groupe d’un changement de programme et planifier un trajet à deux.',
+    'prévenir le groupe d’un changement', 'planifier un trajet à deux'],
+  ['konsum', 'Konsum : acheter, réclamer, obtenir une solution',
+    'Comprendre des conditions de retour et de garantie, décrire un défaut et comprendre qui fait quoi (passif, etwas reparieren lassen).', 'lesen2',
+    'Konsum, atelier : écrire une réclamation efficace', 'Écrire une réclamation structurée et négocier une solution au téléphone.',
+    'écrire une réclamation', 'négocier une solution au téléphone'],
+  ['medien', 'Medien : s’informer et vérifier une information',
+    'Distinguer fait, opinion et rumeur, rapporter ce qu’une source dit (dass, ob, laut) et comprendre une émission de radio locale.', 'lesen2',
+    'Medien, atelier : relayer une information fiable', 'Donner son avis sur un forum et présenter une information avec sa source.',
+    'donner son avis sur un forum', 'présenter une information et sa source'],
+  ['umwelt', 'Umwelt : agir pour son quartier et l’environnement',
+    'Comprendre des propositions, comparer des options, faire une hypothèse et dire ce que l’on ferait (Konjunktiv II, je … desto).', 'hoeren2',
+    'Umwelt, atelier : défendre une proposition, présenter un thème', 'Écrire une proposition au conseil de quartier et présenter un thème en trois minutes.',
+    'faire une proposition au conseil de quartier', 'présenter un thème en trois minutes'],
+  ['gesellschaft', 'Gesellschaft : s’engager dans une association',
+    'Comprendre une annonce d’association et ses conditions, s’informer sur l’engagement bénévole et faire une démarche simple.', 'lesen2',
+    'Gesellschaft, atelier : transmettre une information à un groupe', 'Proposer sa candidature comme bénévole et réagir à un exposé.',
+    'proposer sa candidature comme bénévole', 'réagir à un exposé'],
+  ['kultur', 'Kultur : sorties culturelles et fêtes',
+    'Comprendre un programme culturel, nuancer un avis, recommander une sortie et parler de traditions.', 'lesen2',
+    'Kultur, atelier : organiser un événement et faire le bilan', 'Inviter et faire le bilan d’une fête par écrit, organiser une fête à deux à l’oral.',
+    'inviter et faire le bilan d’une fête', 'organiser une fête à deux'],
+];
+
+/** Titres propres au module détaillé « b1-arbeit » (les autres modules prennent les titres du gabarit). */
+const B1_TITLES: Record<string, string> = {
+  'b1-arbeit-einstieg': 'Mise en route : chercher un nouveau poste',
+  'b1-arbeit-lesen': 'Comprendre : une offre d’emploi',
+  'b1-arbeit-hoeren': 'Comprendre : l’appel de la responsable du recrutement',
+  'b1-arbeit-entdecken': 'Découvrir : demander poliment',
+  'b1-arbeit-regel': 'À retenir : questions polies et indirectes',
+  'b1-arbeit-grammatik': 'S’entraîner : questions polies et indirectes',
+  'b1-arbeit-wortschatz': 'S’entraîner : le vocabulaire de la candidature',
+  'b1-arbeit-redemittel': 'Répéter à voix haute : se présenter en entretien',
+  'b1-arbeit-lesen2': 'Comprendre : une passation de poste',
+  'b1-arbeit-kontrolle': 'Vérifier : Arbeit',
+};
+
+/** Les 24 modules B1, prérequis en chaîne, activités et durées du gabarit (thème 126 min, atelier 118 min). */
+function b1Modules(): MockModule[] {
+  const modules: MockModule[] = [];
+  for (const [theme, title, objective, second, atelierTitle, atelierObjective, written, oral] of B1_THEMES) {
+    const id = `b1-${theme}`;
+    const name = title.split(' : ')[1] ?? title;
+    const entry = (suffix: string, kind: 'lesson' | 'exercise' | 'mission', label: string, minutes: number, competences: string[]):
+      MockModule['activities'][number] => [`${id}-${suffix}`, kind, B1_TITLES[`${id}-${suffix}`] ?? label, minutes, competences];
+    modules.push({ id, title, objective, prerequisites: modules.length ? [modules[modules.length - 1].id] : [], activities: [
+      entry('einstieg', 'lesson', `Mise en route : ${name}`, 10, ['lecture', 'expression-orale']),
+      entry('lesen', 'exercise', 'Comprendre : un texte', 20, ['lecture']),
+      entry('hoeren', 'exercise', 'Comprendre : une conversation', 18, ['ecoute']),
+      entry('entdecken', 'exercise', 'Découvrir : la règle', 10, ['lecture']),
+      entry('regel', 'lesson', 'À retenir : la règle', 8, ['lecture']),
+      entry('grammatik', 'exercise', 'S’entraîner : grammaire', 12, ['lecture', 'expression-ecrite']),
+      entry('wortschatz', 'exercise', 'S’entraîner : vocabulaire et formules', 12, ['lecture', 'expression-ecrite']),
+      entry('redemittel', 'exercise', 'Répéter à voix haute : formules utiles', 9, ['expression-orale']),
+      entry(second, 'exercise', second === 'hoeren2' ? 'Comprendre : un message enregistré' : 'Comprendre : un second texte', 15,
+        [second === 'hoeren2' ? 'ecoute' : 'lecture']),
+      entry('kontrolle', 'exercise', `Vérifier : ${title.split(' : ')[0]}`, 12, ['lecture', 'ecoute']),
+    ] });
+    const atelier = `${id}-atelier`;
+    const step = (suffix: string, kind: 'lesson' | 'exercise' | 'mission', label: string, minutes: number, competences: string[]):
+      MockModule['activities'][number] => [`${atelier}-${suffix}`, kind, label, minutes, competences];
+    modules.push({ id: atelier, title: atelierTitle, objective: atelierObjective, prerequisites: [id], activities: [
+      step('modell', 'lesson', 'Un modèle : bien écrire et bien dire', 12, ['lecture', 'ecoute']),
+      step('interaktion', 'exercise', 'Réagir en situation', 10, ['ecoute', 'expression-orale']),
+      step('mediation', 'exercise', 'Médiation : transmettre l’essentiel', 15, ['lecture', 'expression-ecrite']),
+      step('korrektur', 'exercise', 'Corriger : les erreurs typiques', 10, ['lecture', 'expression-ecrite']),
+      step('pruefung', 'exercise', 'Entraînement au format de l’examen', 20, ['lecture']),
+      step('schreiben', 'mission', `Mission : ${written}`, 25, ['expression-ecrite']),
+      step('sprechen', 'mission', `Mission : ${oral}`, 20, ['expression-orale']),
+      step('bilan', 'lesson', 'Faire le point', 6, ['lecture']),
+    ] });
+  }
+  return modules;
+}
+
+/** Mission B1 résumée par le simulateur : consigne courte et grille standard du niveau. */
+function summaryMission(activityId: string, title: string): MockV4Detail {
+  const oral = activityId.endsWith('-sprechen');
+  return {
+    lesson: { title: title.replace(/^Mission : /, ''), description: bi('Der Simulator zeigt diese Mission in Kurzform. Lesen Sie die Aufgabe und die Bewertungskriterien.',
+      'Le simulateur présente cette mission en version courte. Lisez la consigne et les critères d’évaluation.') },
+    transcript: null, questions: [],
+    mission: oral
+      ? { oral: { prompt: bi('Nehmen Sie Ihren Beitrag auf (etwa zwei Minuten).', 'Enregistrez votre intervention (environ deux minutes).'), maxSeconds: 150 },
+        written: null, checklist: ['J’ai traité chaque point de la consigne.', 'J’ai relié mes idées (zuerst, außerdem, deshalb, zum Schluss).',
+          'J’ai parlé de façon suivie, sans lire un texte.'], criteria: B1_GRIDS.sprechen }
+      : { oral: null, written: { prompt: bi('Schreiben Sie Ihren Text (100 bis 150 Wörter).', 'Écrivez votre texte (100 à 150 mots).'), maxChars: 1500, minWords: 100 },
+        checklist: ['J’ai traité chaque point de la consigne.', 'J’ai choisi le registre (du ou Sie) et les formules d’appel et de fin qui conviennent.',
+          'J’ai relu la place du verbe et les terminaisons.'], criteria: B1_GRIDS.schreiben },
+  };
+}
+
+/** Module « b1-arbeit » et son atelier : consignes bilingues, questions de chaque type, missions sur grille. */
+const B1_DETAILS: Record<string, MockV4Detail> = {
+  'b1-arbeit-einstieg': {
+    lesson: { title: 'Eine neue Stelle — Un nouveau poste', description: [
+      'Herr Diallo arbeitet seit drei Jahren in einem Supermarkt. Jetzt sucht er eine neue Stelle mit festen Arbeitszeiten.',
+      '[fr] M. Diallo travaille depuis trois ans dans un supermarché. Il cherche maintenant un poste avec des horaires fixes.',
+      '',
+      'FRAGEN ZUM EINSTIEG',
+      '[fr] Questions pour commencer',
+      '• Wo haben Sie schon gearbeitet? [fr] Où avez-vous déjà travaillé ?',
+      '• Was ist Ihnen bei einer Stelle wichtig: das Gehalt, die Kollegen oder die Arbeitszeiten? [fr] Qu’est-ce qui compte pour vous dans un poste : le salaire, les collègues ou les horaires ?',
+      '• Wie bereiten Sie sich auf ein Vorstellungsgespräch vor? [fr] Comment vous préparez-vous à un entretien d’embauche ?',
+      '',
+      'DAS KÖNNEN SIE NACH DIESEM MODUL',
+      '[fr] Ce que vous saurez faire après ce module',
+      '• Ich kann eine Stellenanzeige verstehen. [fr] Je peux comprendre une offre d’emploi.',
+      '• Ich kann meine Kenntnisse mit einem Beispiel vorstellen. [fr] Je peux présenter mes compétences avec un exemple.',
+      '• Ich kann im Gespräch höflich Fragen stellen. [fr] Je peux poser des questions polies pendant un entretien.',
+      '',
+      'WICHTIGE WÖRTER',
+      '[fr] Mots-clés',
+      '• die Stellenanzeige — l’offre d’emploi',
+      '• sich bewerben um + Akk. — postuler à',
+      '• die Berufserfahrung — l’expérience professionnelle',
+      '• die Kenntnisse — les connaissances, les compétences',
+      '• in Vollzeit, in Teilzeit — à temps plein, à temps partiel',
+      '• die Probezeit — la période d’essai',
+      '• das Gehalt — le salaire',
+      '• der Kollege, die Kollegin — le collègue, la collègue',
+    ].join('\n') },
+    transcript: null, questions: [],
+  },
+  'b1-arbeit-lesen': {
+    lesson: { title: 'Eine Stellenanzeige — Une offre d’emploi', description: [
+      B1_C.lesen,
+      '',
+      'STRATEGIE',
+      '[fr] Stratégie',
+      'Lesen Sie zuerst nur die Überschrift und die erste Zeile: Welche Stelle wird angeboten?',
+      '[fr] Lisez d’abord seulement le titre et la première ligne : quel poste est proposé ?',
+      'Lesen Sie dann die Fragen und suchen Sie die Antworten im Text.',
+      '[fr] Lisez ensuite les questions et cherchez les réponses dans le texte.',
+      '',
+      'Biomarkt am Lindenplatz, Leipzig: Wir suchen eine Verkäuferin oder einen Verkäufer (m/w/d) in Teilzeit.',
+      'Wir sind ein kleiner Biomarkt im Leipziger Westen und suchen ab dem 1. März Verstärkung für unser Team.',
+      'Bei uns beraten Sie unsere Kundinnen und Kunden, räumen Waren ein und arbeiten an der Kasse.',
+      'Sie haben Erfahrung im Verkauf, sprechen gut Deutsch und arbeiten gern im Team. Kenntnisse über Bio-Produkte sind ein Plus, aber keine Voraussetzung.',
+      'Wir bieten Ihnen 25 Stunden pro Woche, feste Arbeitszeiten von Montag bis Freitag, eine Probezeit von drei Monaten und 10 % Rabatt auf unsere Produkte.',
+      'Interessiert? Dann schicken Sie Ihre Bewerbung mit Lebenslauf bis zum 15. Februar per E-Mail an Frau Keller: bewerbung@biomarkt-lindenplatz.example',
+    ].join('\n') },
+    transcript: null,
+    questions: [
+      choice('q1', bi('Was sucht der Biomarkt?', 'Que cherche le magasin bio ?'),
+        'La première ligne annonce « eine Verkäuferin oder einen Verkäufer (m/w/d) in Teilzeit » : un poste de vente à temps partiel (25 heures par semaine). La caisse n’est qu’une des tâches, et le poste n’est pas à temps plein. « m/w/d » (männlich, weiblich, divers) figure dans toutes les offres allemandes.', [
+          ['eine Kassiererin oder einen Kassierer in Vollzeit', false, 'Le travail en caisse est une des tâches, mais le poste est à temps partiel (« in Teilzeit », 25 heures).'],
+          ['eine Verkäuferin oder einen Verkäufer in Teilzeit', true, null],
+          ['eine Auszubildende oder einen Auszubildenden', false, 'L’annonce ne parle pas de formation (Ausbildung) : elle demande de l’expérience dans la vente.'],
+        ]),
+      richtigFalsch('q2', 'Man muss Erfahrung mit Bio-Produkten haben.', 1,
+        'Faux : « Kenntnisse über Bio-Produkte sind ein Plus, aber keine Voraussetzung » : c’est un atout, pas une condition (Voraussetzung). Ce n’est pas « non mentionné », puisque le texte en parle.'),
+      richtigFalsch('q3', 'Die Arbeitszeiten sind jede Woche anders.', 1,
+        'Faux : l’annonce promet des « feste Arbeitszeiten von Montag bis Freitag », des horaires fixes du lundi au vendredi.'),
+      richtigFalsch('q4', 'Neue Mitarbeiter bekommen ein Monatsticket für Bus und Bahn.', 2,
+        'Non mentionné : l’employeur offre 10 % de réduction sur les produits, mais le texte ne dit rien d’un abonnement de transport. « Faux » serait trop fort : le texte ne dit pas non plus le contraire.'),
+      typed('q5', 'fill', bi('Ergänzen Sie die Angaben aus der Anzeige.', 'Complétez avec les informations de l’annonce.'),
+        '« 25 Stunden pro Woche » ; « eine Probezeit von drei Monaten » devient ici « drei Monate » (accusatif de durée après « dauert ») ; « per E-Mail ». Les nombres peuvent s’écrire en chiffres ou en lettres.',
+        { text: 'Die Stelle hat [[1]] Stunden pro Woche. Die Probezeit dauert drei [[2]]. Man schickt die Bewerbung per [[3]].',
+          blanks: [{ id: '1', accept: ['25', 'fünfundzwanzig'], size: 6, hint: null }, { id: '2', accept: ['Monate'], size: 8, hint: null },
+            { id: '3', accept: ['E-Mail', 'Mail', 'Email'], size: 7, hint: null }] }),
+      typed('q6', 'match', bi('Ordnen Sie zu: Was bedeuten die Wörter aus der Anzeige?', 'Associez chaque mot de l’annonce à son explication.'),
+        '« Teilzeit » : moins d’heures qu’un poste complet ; « Probezeit » : les premiers mois dans un nouveau poste ; « Voraussetzung » : ce qu’il faut absolument avoir ; « Verstärkung » : une personne de plus pour l’équipe.',
+        { pairs: [{ left: 'die Teilzeit', right: 'weniger Stunden als eine volle Stelle' }, { left: 'die Probezeit', right: 'die ersten Monate in einer neuen Stelle' },
+          { left: 'die Voraussetzung', right: 'etwas, das man unbedingt haben muss' }, { left: 'die Verstärkung', right: 'eine neue Person für das Team' }] }),
+    ],
+  },
+  'b1-arbeit-regel': {
+    lesson: { title: 'Höflich fragen — Demander poliment', description: [
+      'À RETENIR',
+      '• Pour demander poliment : Könnten Sie …? Würden Sie …? Ich hätte gern … Wäre es möglich, …?',
+      '• Le Konjunktiv II de politesse : können → könnte, haben → hätte, sein → wäre ; pour les autres verbes, würde + infinitif à la fin.',
+      '• Question indirecte avec un mot interrogatif : …, wann, wo, wie lange + sujet + compléments + verbe conjugué à la fin.',
+      '• Question indirecte sans mot interrogatif (réponse oui ou non) : …, ob + sujet + compléments + verbe conjugué à la fin.',
+      '',
+      'EXEMPLES',
+      '• Können Sie mir helfen? → Könnten Sie mir helfen?',
+      '• Wann beginnt das Gespräch? → Könnten Sie mir sagen, wann das Gespräch beginnt?',
+      '• Ist die Stelle noch frei? → Ich möchte wissen, ob die Stelle noch frei ist.',
+      '',
+      'ATTENTION',
+      '« ob » traduit le « si » d’une question indirecte. « wenn » exprime une condition ou une répétition : « Ich möchte wissen, wenn … » est faux.',
+    ].join('\n') },
+    transcript: null, questions: [],
+  },
+  'b1-arbeit-grammatik': {
+    lesson: { title: 'Höfliche und indirekte Fragen — Questions polies et indirectes', description: [
+      'Ergänzen Sie und bilden Sie Sätze. [fr] Complétez et formez des phrases.',
+      '',
+      'RAPPEL',
+      '• Könnten Sie …? Würden Sie …? Ich hätte gern … Es wäre schön, wenn …',
+      '• Question indirecte : le verbe conjugué va à la fin (…, wann das Gespräch beginnt).',
+      '• Sans mot interrogatif : ob (…, ob die Stelle noch frei ist).',
+    ].join('\n') },
+    transcript: null,
+    questions: [
+      typed('g1', 'fill', bi('Ergänzen Sie die höfliche Form.', 'Complétez avec la forme polie.'),
+        '« Könnten Sie … ? » (ou « Würden Sie … ? ») rend la demande polie ; l’infinitif « schicken » reste à la fin. « Ich hätte gern … » est la forme polie de « Ich will … » : « hätte » est le Konjunktiv II de « haben ».',
+        { text: '[[1]] Sie mir bitte die Adresse schicken? Ich [[2]] gern mehr Informationen über die Stelle.',
+          blanks: [{ id: '1', accept: ['Könnten', 'Würden'], size: 9, hint: 'können' }, { id: '2', accept: ['hätte'], size: 7, hint: 'haben' }] }),
+      typed('g2', 'order', bi('Bilden Sie eine indirekte Frage.', 'Formez une question indirecte.'),
+        'Dans une question indirecte, le mot interrogatif « wann » ouvre la subordonnée et le verbe conjugué « beginnt » va à la fin. Erreur fréquente : garder l’ordre de la question directe (« wann beginnt das Gespräch »).',
+        { answers: [['Könnten Sie mir sagen,', 'wann', 'das', 'Gespräch', 'beginnt?']] }),
+      typed('g3', 'order', bi('Bilden Sie eine indirekte Frage mit „ob“.', 'Formez une question indirecte avec « ob ».'),
+        'La question directe « Ist die Stelle noch frei? » n’a pas de mot interrogatif : la question indirecte commence par « ob » (si) et le verbe « ist » passe à la fin.',
+        { answers: [['Ich möchte wissen,', 'ob', 'die', 'Stelle', 'noch', 'frei', 'ist.']] }),
+      choice('g4', bi('Welche Frage ist höflich und richtig?', 'Quelle question est polie et correcte ?'),
+        'Après « Könnten Sie mir sagen, … », la question devient indirecte : le verbe conjugué « muss » va à la fin. La deuxième phrase garde l’ordre de la question directe ; la troisième est un ordre, peu poli en entretien.', [
+          ['Könnten Sie mir sagen, wo ich mich anmelden muss?', true, null],
+          ['Könnten Sie mir sagen, wo muss ich mich anmelden?', false, 'Dans la question indirecte, le verbe conjugué « muss » se place à la fin.'],
+          ['Sagen Sie mir, wo ich mich anmelden muss!', false, 'La phrase est correcte, mais c’est un ordre : en entretien, on demande au Konjunktiv II.'],
+        ]),
+      typed('g5', 'fill', bi('Ergänzen Sie „wäre“ oder „würde“.', 'Complétez avec « wäre » ou « würde ».'),
+        '« Es wäre schön, wenn … » (ce serait bien si…) : « wäre » est le Konjunktiv II de « sein ». « Ich würde gern … arbeiten » exprime un souhait poli : « würde » + infinitif à la fin.',
+        { text: 'Es [[1]] schön, wenn ich am Montag anfangen könnte. Ich [[2]] auch gern im Team arbeiten.',
+          blanks: [{ id: '1', accept: ['wäre'], size: 7, hint: null }, { id: '2', accept: ['würde'], size: 7, hint: null }] }),
+      choice('g6', bi('Was passt? „Ich ___ gern einen Termin am Vormittag.“', 'Qu’est-ce qui convient ?'),
+        '« Ich hätte gern + accusatif » demande poliment quelque chose (ici, un rendez-vous). « würde » demande un infinitif (Ich würde gern … kommen) et « wäre » ne prend pas de complément d’objet.', [
+          ['würde', false, '« würde » s’emploie avec un infinitif à la fin : « Ich würde gern am Vormittag kommen. »'],
+          ['hätte', true, null],
+          ['wäre', false, '« wäre » (serait) ne peut pas avoir « einen Termin » comme complément d’objet.'],
+        ]),
+    ],
+  },
+  'b1-arbeit-redemittel': {
+    lesson: { title: 'Im Vorstellungsgespräch — En entretien', description: [
+      B1_C.sprechen,
+      'Diese Sätze helfen Ihnen im Vorstellungsgespräch. [fr] Ces phrases vous aideront pendant l’entretien.',
+    ].join('\n') },
+    transcript: null,
+    questions: [
+      bSpeak('r1', 'Ich habe drei Jahre Erfahrung im Verkauf.',
+        '« Erfahrung » s’emploie ici sans article. L’accent tombe sur « fah » : Er-FAH-rung. Le nombre peut aussi être reconnu en chiffres.',
+        ['Ich habe drei Jahre Erfahrung im Verkauf.', 'Ich habe 3 Jahre Erfahrung im Verkauf.']),
+      bSpeak('r2', 'Ich arbeite gern im Team und bin zuverlässig.',
+        '« zuverlässig » (fiable) : le « z » se prononce [ts] et l’accent tombe sur la première syllabe, ZU-verlässig.'),
+      bSpeak('r3', 'Könnten Sie mir sagen, wann die Probezeit endet?',
+        'Question indirecte polie : « wann » ouvre la subordonnée et le verbe « endet » va à la fin. Faites monter la voix sur la fin de la question.'),
+      bSpeak('r4', 'Wäre es möglich, schon im März anzufangen?',
+        '« anzufangen » : avec un verbe séparable, « zu » se place entre la particule et le verbe (an-zu-fangen).'),
+      bSpeak('r5', 'Ich würde mich sehr freuen, von Ihnen zu hören.',
+        'Formule de fin d’entretien ou de courriel. « würde » + infinitif à la fin : « freuen » ; « mich » est le pronom réfléchi de « sich freuen ».'),
+    ],
+  },
+  'b1-arbeit-atelier-schreiben': {
+    lesson: { title: 'Bewerbung per E-Mail — Candidature par courriel', description: [
+      'Sie haben die Anzeige des Biomarkts am Lindenplatz gelesen (Verkäufer/in in Teilzeit). Sie möchten sich um die Stelle bewerben.',
+      '[fr] Vous avez lu l’annonce du magasin bio du Lindenplatz (vendeur ou vendeuse à temps partiel). Vous voulez postuler.',
+      '',
+      'Schreiben Sie eine E-Mail an Frau Keller (120 bis 150 Wörter).',
+      '[fr] Écrivez un courriel à Mme Keller (120 à 150 mots).',
+      '• Warum schreiben Sie? [fr] Pourquoi écrivez-vous ?',
+      '• Welche Erfahrung haben Sie? Nennen Sie ein Beispiel. [fr] Quelle expérience avez-vous ? Donnez un exemple.',
+      '• Warum passt die Stelle zu Ihnen? [fr] Pourquoi le poste vous convient-il ?',
+      '• Stellen Sie eine höfliche Frage, zum Beispiel zur Probezeit. [fr] Posez une question polie, par exemple sur la période d’essai.',
+      '',
+      'Achten Sie auf Anrede und Gruß: Sie schreiben formell.',
+      '[fr] Soignez la formule d’appel et la formule finale : vous écrivez dans un registre formel.',
+    ].join('\n') },
+    transcript: null, questions: [],
+    mission: {
+      oral: null,
+      written: { prompt: bi('Schreiben Sie Ihre Bewerbung per E-Mail (120 bis 150 Wörter).', 'Écrivez votre candidature par courriel (120 à 150 mots).'),
+        maxChars: 1500, minWords: 120 },
+      checklist: [
+        'J’ai salué Mme Keller avec une formule formelle (Sehr geehrte Frau Keller,).',
+        'J’ai dit pourquoi j’écris et présenté une expérience avec un exemple.',
+        'J’ai posé une question polie au Konjunktiv II (Könnten Sie …, Wäre es möglich, …).',
+        'J’ai terminé par une formule finale (Mit freundlichen Grüßen) et relu la place du verbe.',
+      ],
+      criteria: B1_GRIDS.schreiben,
+    },
+  },
+  'b1-arbeit-atelier-sprechen': {
+    lesson: { title: 'Vorstellungsgespräch — Entretien d’embauche', description: [
+      'Frau Keller ruft Sie an und stellt Ihnen drei Fragen. Antworten Sie in einer Aufnahme (etwa zwei Minuten).',
+      '[fr] Mme Keller vous appelle et vous pose trois questions. Répondez dans un enregistrement (environ deux minutes).',
+      '',
+      '1. Erzählen Sie kurz etwas über sich. [fr] Présentez-vous brièvement.',
+      '2. Warum möchten Sie bei uns arbeiten? [fr] Pourquoi voulez-vous travailler chez nous ?',
+      '3. Haben Sie noch Fragen an uns? [fr] Avez-vous des questions à nous poser ?',
+    ].join('\n') },
+    transcript: null, questions: [],
+    mission: {
+      oral: { prompt: bi('Nehmen Sie Ihre Antworten auf (höchstens zweieinhalb Minuten).', 'Enregistrez vos réponses (deux minutes et demie au plus).'), maxSeconds: 150 },
+      written: null,
+      checklist: [
+        'Je me suis présenté(e) en quelques phrases : formation et expérience.',
+        'J’ai donné deux raisons, reliées par « weil » ou « denn ».',
+        'J’ai posé une question polie (Könnten Sie mir sagen, … ?).',
+        'J’ai parlé de façon suivie, sans lire un texte.',
+      ],
+      criteria: B1_GRIDS.sprechen,
+    },
+  },
+};
+
+const B1_VOCABULARY: Record<string, MockVocabulary[]> = {
+  'b1-arbeit': [
+    word('stellenanzeige', 'Stellenanzeige', 'noun', 'l’offre d’emploi', 'Ich habe die Stellenanzeige gestern gelesen.', { article: 'die', plural: 'Stellenanzeigen' }),
+    word('sich-bewerben', 'sich bewerben', 'verb', 'postuler', 'Ich bewerbe mich um die Stelle als Verkäufer.', { note: '+ um (accusatif) ; ich habe mich beworben' }),
+    word('bewerbung', 'Bewerbung', 'noun', 'la candidature', 'Bitte schicken Sie Ihre Bewerbung per E-Mail.', { article: 'die', plural: 'Bewerbungen' }),
+    word('lebenslauf', 'Lebenslauf', 'noun', 'le CV', 'Ich schicke Ihnen meinen Lebenslauf.', { article: 'der', plural: 'Lebensläufe' }),
+    word('berufserfahrung', 'Berufserfahrung', 'noun', 'l’expérience professionnelle', 'Haben Sie Berufserfahrung im Verkauf?', { article: 'die' }),
+    word('kenntnisse', 'Kenntnisse', 'noun', 'les connaissances, les compétences', 'Gute Deutschkenntnisse sind wichtig.',
+      { note: 'presque toujours au pluriel : die Kenntnisse' }),
+    word('vollzeit', 'Vollzeit', 'noun', 'le temps plein', 'Ich möchte nicht in Vollzeit arbeiten.', { article: 'die', note: 'in Vollzeit arbeiten' }),
+    word('teilzeit', 'Teilzeit', 'noun', 'le temps partiel', 'Die Stelle ist in Teilzeit.', { article: 'die', note: 'in Teilzeit arbeiten' }),
+    word('probezeit', 'Probezeit', 'noun', 'la période d’essai', 'Die Probezeit dauert drei Monate.', { article: 'die', plural: 'Probezeiten' }),
+    word('gehalt', 'Gehalt', 'noun', 'le salaire', 'Das Gehalt kommt am Ende des Monats.', { article: 'das', plural: 'Gehälter' }),
+    word('kollege', 'Kollege', 'noun', 'le collègue', 'Ich frage meinen Kollegen.', { article: 'der', plural: 'Kollegen', note: 'n-Deklination : den, dem, des Kollegen ; féminin : die Kollegin' }),
+    word('vorstellungsgespraech', 'Vorstellungsgespräch', 'noun', 'l’entretien d’embauche', 'Morgen habe ich ein Vorstellungsgespräch.', { article: 'das', plural: 'Vorstellungsgespräche' }),
+    word('zuverlaessig', 'zuverlässig', 'adjective', 'fiable', 'Ich bin pünktlich und zuverlässig.'),
+    word('erfahrung-sammeln', 'Erfahrung sammeln', 'expression', 'acquérir de l’expérience', 'Ich habe im Hotel Erfahrung gesammelt.'),
+    word('koennten-sie', 'Könnten Sie mir sagen, …?', 'expression', 'Pourriez-vous me dire… ?', 'Könnten Sie mir sagen, wann ich anfangen kann?',
+      { note: 'question indirecte : le verbe conjugué va à la fin' }),
+  ],
+};
+
+// Le niveau B1 rejoint les contenus du simulateur (réglages du plan B : révision 15 min, bilan 60, examen blanc 120).
+CONTENT.push({ code: 'B1', settings: { reviewMinutes: 15, midtermMinutes: 60, finalMinutes: 120, passPercent: 60 }, modules: b1Modules() });
+Object.assign(V4_DETAILS, B1_DETAILS);
+Object.assign(VOCABULARY, B1_VOCABULARY);

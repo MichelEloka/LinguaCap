@@ -3,6 +3,7 @@ package org.linguacap.learning;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import org.linguacap.common.Cefr;
 
 /**
  * Règles pures de l'accueil de l'élève, partagées par l'écran de l'élève (GET /learning/onboarding) et par la vue du
@@ -10,7 +11,7 @@ import java.util.UUID;
  */
 final class OnboardingRules {
     /** Point de départ d'un débutant (déclaré ou placé par le test). */
-    static final String BEGINNER = "A0";
+    static final String BEGINNER = Cefr.BEGINNER;
 
     private OnboardingRules() {}
 

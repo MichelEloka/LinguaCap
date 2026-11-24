@@ -85,6 +85,23 @@ class LibraryContentTest {
     }
 
     @Test
+    void lesParcoursDeLaBibliothequeSuiventLOrdreDuCatalogue() {
+        // GET /v1/tracks trie par langue puis position du niveau : un C1 placé avant B1 au catalogue le reste, sans
+        // retri par l'échelle ; un code hors de l'échelle et une autre langue sont écartés.
+        JsonNode tracks = json("""
+                [{'levelCode': 'A1', 'languageId': 'de'}, {'levelCode': 'A2', 'languageId': 'de'},
+                 {'levelCode': 'C1', 'languageId': 'de'}, {'levelCode': 'B1', 'languageId': 'de'},
+                 {'levelCode': 'X9', 'languageId': 'de'}, {'levelCode': 'A1', 'languageId': 'en'},
+                 {'levelCode': 'B2', 'languageId': null}]
+                """);
+        assertEquals(List.of("A1", "A2", "C1", "B1", "B2"), LibraryContent.publishedTracks(tracks, "de").stream()
+                .map(track -> track.path("levelCode").asText()).toList());
+        assertEquals(List.of("A1"), LibraryContent.publishedTracks(tracks, "en").stream()
+                .map(track -> track.path("levelCode").asText()).toList());
+        assertTrue(LibraryContent.publishedTracks(json("{}"), "de").isEmpty());
+    }
+
+    @Test
     void uneVersionSansLangueEstEnAllemand() {
         assertEquals("de", LibraryContent.languageOf(TRACK));
         assertEquals("en", LibraryContent.languageOf(json("{'languageId': 'en'}")));

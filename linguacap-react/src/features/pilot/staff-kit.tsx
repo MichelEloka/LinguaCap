@@ -6,7 +6,8 @@ import { useCallback, useEffect, useRef, useState, type FormEvent } from 'react'
 import { AlertTriangle, CircleCheck, Loader2, RefreshCw, Send } from 'lucide-react';
 import { Avatar, Callout, Chip, Drawer, useToast } from '../../design/kit';
 import { requestApi, type Profile } from '../../integration/api';
-import { levelCodes, type LearnerLearningState, type LevelCode, type StartLevel } from '../../integration/v2';
+import { languageById, nextPublishedLevel, peekLanguages, useLanguages } from '../../integration/languages';
+import { levelCodes, levelRank, type LearnerLearningState, type LevelCode, type StartLevel } from '../../integration/v2';
 import type { ReviewQueueItem } from '../../integration/v4';
 import type { BadgeTone } from '../../components/ui';
 
@@ -86,9 +87,15 @@ export function learnerStatusOf(learning: LearnerLearningState | null | undefine
   return { code: fallback ?? 'none', ...goalStatusOf(fallback) };
 }
 
-/** Niveau qui suit un point de départ : premier niveau d'un parcours au brouillon (A0 → A1). */
-export function firstLevelAfter(start: StartLevel): LevelCode | null {
-  return levelCodes[levelCodes.indexOf(start as LevelCode) + 1] ?? null;
+/**
+ * Premier niveau d'un parcours au brouillon : le premier niveau publié de la langue au-dessus du départ (catalogue gardé
+ * pour la session, voir `useOverview`), sinon le niveau suivant de l'échelle ; jamais au-delà de la cible.
+ */
+export function firstLevelAfter(start: StartLevel, languageId?: string | null, target?: LevelCode | null): LevelCode | null {
+  const catalogue = peekLanguages();
+  const language = languageById(catalogue, languageId) ?? (catalogue?.length === 1 ? catalogue[0] : null);
+  const next = (language ? nextPublishedLevel(language, start)?.code : null) ?? levelCodes[levelCodes.indexOf(start as LevelCode) + 1] ?? null;
+  return next && target && levelRank(next) > levelRank(target) ? target : next;
 }
 
 export const shortDate = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
@@ -150,7 +157,8 @@ export function openAlert(learner: LearnerOverview) {
 /** Niveau en cours : lu en direct (premier niveau d'un brouillon), sinon synthèse du Suivi ou ancien objectif. */
 export function levelOf(learner: LearnerOverview) {
   const path = learner.learning?.path;
-  const live = path ? path.activeLevel ?? (path.status === 'draft' ? firstLevelAfter(path.startLevel) : null) : null;
+  const live = path ? path.activeLevel
+    ?? (path.status === 'draft' ? firstLevelAfter(path.startLevel, learner.learning?.languageId, path.targetLevel) : null) : null;
   return live ?? learner.tracking?.levelCode ?? learner.progress?.goal?.level ?? null;
 }
 
@@ -192,6 +200,8 @@ export function useOverview(token: string) {
   const [freshness, setFreshness] = useState<TrackingFreshness | null>(null);
   const [error, setError] = useState('');
   const [refresh, setRefresh] = useState(0);
+  // Catalogue gardé pour la session : `levelOf` y lit le premier niveau publié d'un parcours au brouillon.
+  useLanguages(token);
 
   useEffect(() => {
     let active = true;

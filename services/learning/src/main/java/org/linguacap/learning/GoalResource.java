@@ -12,6 +12,7 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.WebApplicationException;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import java.time.LocalDate;
@@ -52,13 +53,24 @@ public class GoalResource {
     @ConfigProperty(name = "lingua.services.assessment")
     String assessmentUrl;
 
-    /** Modèles Standard et Intensif, modifiables (DEV-038). */
+    /**
+     * Modèles Standard et Intensif, modifiables (DEV-038), avec la durée conseillée de chaque niveau publié du
+     * catalogue (durations). Si le catalogue ne répond pas, les modèles restent servis sans durées par niveau.
+     */
     @GET
     @Path("/templates")
     public List<TemplateView> templates() {
-        actor.id();
+        UUID callerId = actor.id();
+        JsonNode languages;
+        try {
+            languages = services.request(catalogueUrl, "/v1/languages", "GET", callerId, null);
+        } catch (WebApplicationException unavailable) {
+            languages = null;
+        }
+        JsonNode catalogue = languages;
         return GoalRules.TEMPLATES.stream().map(template -> new TemplateView(template.id(), template.name(),
-                template.description(), template.days(), template.a1().toString(), template.a2().toString())).toList();
+                template.description(), template.days(), GoalRules.durations(template, catalogue),
+                template.a1().toString(), template.a2().toString())).toList();
     }
 
     /** Parcours, objectif, disponibilités, proposition en cours et séances de l'élève, ou null. */
@@ -91,7 +103,9 @@ public class GoalResource {
         String levelCode = track.path("levelCode").asText();
         LocalDate today = LocalDate.now(CourseRules.PILOT_ZONE);
         LocalDate start = request.startDate() == null ? today : date(request.startDate());
-        LocalDate target = request.targetDate() == null ? GoalRules.defaultTarget(template, levelCode, start) : date(request.targetDate());
+        LocalDate target = request.targetDate() == null
+                ? GoalRules.defaultTarget(template, levelCode, GoalRules.plannedMinutes(track), start)
+                : date(request.targetDate());
         GoalRules.checkDates(start, target, today);
         String startLevel = GoalRules.checkStartLevel(request.startLevel());
 
@@ -455,8 +469,15 @@ public class GoalResource {
 
     public record StartingPointRequest(List<String> acquiredModules, Boolean prerequisiteMet) {}
 
-    public record TemplateView(String id, String name, String description, List<Day> days, String a1Duration,
-                               String a2Duration) {}
+    /**
+     * Modèle de rythme. durations : durée conseillée de chaque niveau publié ; a1Duration et a2Duration (ISO 8601,
+     * « P5M ») restent servis pour les écrans antérieurs, obsolètes.
+     */
+    public record TemplateView(String id, String name, String description, List<Day> days,
+                               List<TemplateDuration> durations, String a1Duration, String a2Duration) {}
+
+    /** Durée conseillée d'un niveau publié pour un modèle : mois entiers (au moins 1) et durée prévue de sa version. */
+    public record TemplateDuration(String levelCode, int months, int plannedMinutes) {}
 
     public record PlannedSession(LocalDate date, int slot, String dueAt, String title, String moduleId, int minutes,
                                  int capacity, List<Planner.Item> items) {}

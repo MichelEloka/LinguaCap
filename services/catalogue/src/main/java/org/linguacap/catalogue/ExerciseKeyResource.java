@@ -40,9 +40,9 @@ public class ExerciseKeyResource {
                     from catalogue.lessons l
                     join catalogue.levels n on n.id = l.level_id
                     left join catalogue.track_versions v on v.id = l.version_id
-                    where l.id = ? and n.status = 'published' and (l.version_id is null or v.status <> 'draft')
+                    where l.id = ? and %s
                       and not exists (select 1 from catalogue.track_versions d where d.diagnostic_lesson_id = l.id)
-                    """)) {
+                    """.formatted(CatalogueResource.READABLE_LESSON))) {
                 query.setString(1, lessonId);
                 try (var rows = query.executeQuery()) {
                     if (!rows.next()) throw HttpError.notFound("Corrigé indisponible pour cette leçon.");

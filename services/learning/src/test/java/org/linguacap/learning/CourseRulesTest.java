@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 import org.junit.jupiter.api.Test;
 import org.linguacap.learning.CourseResource.ActivityDetail;
+import org.linguacap.learning.CourseResource.MissionCriterion;
 import org.linguacap.learning.CourseResource.MissionDefinition;
 import org.linguacap.learning.CourseResource.MissionOral;
 import org.linguacap.learning.CourseResource.MissionWritten;
@@ -158,13 +159,43 @@ class CourseRulesTest {
                              'checklist': ['Je salue.', 'Je propose une date.']}}
                 """);
         assertEquals(new MissionDefinition("Vous devez déplacer un rendez-vous.", new MissionOral("Appelez le cabinet.", 90),
-                null, List.of("Je salue.", "Je propose une date.")), CourseRules.missionDefinition(content));
+                null, List.of("Je salue.", "Je propose une date."), List.of()), CourseRules.missionDefinition(content),
+                "mission A1 sans grille : criteria = []");
         JsonNode written = json("{'lesson': {'description': 'Situation.'}, 'mission': {'written': {'prompt': 'Écrivez.'},"
                 + " 'checklist': []}}");
         assertEquals(new MissionWritten("Écrivez.", 1500, 0), CourseRules.missionDefinition(written).written(),
                 "valeurs par défaut");
         assertNull(CourseRules.missionDefinition(json("{'activity': {'kind': 'exercise'}, 'mission': null}")));
         assertNull(CourseRules.missionDefinition(json("{'activity': {'kind': 'lesson'}}")), "catalogue antérieur aux missions");
+    }
+
+    @Test
+    void laGrilleDUneMissionBEstServieAvantLaRemise() {
+        JsonNode content = json("""
+                {'activity': {'id': 'b1-wohnen-schreiben', 'kind': 'mission'},
+                 'lesson': {'id': 'l', 'title': 'Mission', 'description': 'Ihre Heizung ist kaputt. [fr] Votre chauffage est en panne.'},
+                 'mission': {'oral': null, 'written': {'prompt': 'Schreiben Sie an die Hausverwaltung.', 'maxChars': 1500, 'minWords': 100},
+                             'checklist': ['Ich nenne das Problem.', 'Ich bitte um einen Termin.'],
+                             'criteria': [
+                               {'id': 'aufgabe', 'label': 'Tâche : tous les points sont traités', 'maxPoints': 5},
+                               {'id': 'kohaerenz', 'label': 'Cohérence : texte organisé', 'maxPoints': 5},
+                               {'id': 'wortschatz', 'label': 'Vocabulaire : précis', 'maxPoints': 5},
+                               {'id': 'strukturen', 'label': 'Structures : verbe à la bonne place', 'maxPoints': 5},
+                               {'id': 'aufgabe', 'label': 'Doublon ignoré', 'maxPoints': 5}]}}
+                """);
+        MissionDefinition definition = CourseRules.missionDefinition(content);
+        assertEquals(List.of("aufgabe", "kohaerenz", "wortschatz", "strukturen"),
+                definition.criteria().stream().map(MissionCriterion::id).toList());
+        assertEquals(new MissionCriterion("aufgabe", "Tâche : tous les points sont traités", 5), definition.criteria().get(0));
+        assertEquals(20, definition.criteria().stream().mapToInt(MissionCriterion::maxPoints).sum());
+        assertEquals(new MissionWritten("Schreiben Sie an die Hausverwaltung.", 1500, 100), definition.written());
+
+        // La grille est la même en séance et en bibliothèque, et n'est pas un corrigé : elle reste servie.
+        JsonNode served = JSON.valueToTree(definition);
+        assertEquals(4, served.path("criteria").size());
+        assertTrue(JSON.valueToTree(CourseRules.missionDefinition(json(
+                "{'lesson': {'description': 'S.'}, 'mission': {'oral': {'prompt': 'Parlez.'}, 'checklist': []}}")))
+                .path("criteria").isArray(), "criteria = [] explicite sans grille");
     }
 
     private static final JsonNode TRACK = json("""

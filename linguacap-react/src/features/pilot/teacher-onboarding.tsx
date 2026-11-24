@@ -7,7 +7,8 @@ import {
 import { Avatar, Skeleton, useToast } from '../../design/kit';
 import { LanguageFlag, LanguagePicker } from '../../components/LanguagePicker';
 import { requestApi, supabase, type Profile } from '../../integration/api';
-import { availableLanguages, findLanguage, languageName } from '../../domain/languages';
+import { availableLanguages, languageName } from '../../domain/languages';
+import { joinFrench, publishedCodes, useLanguages } from '../../integration/languages';
 import {
   gradingDelayLabels, gradingDelays, levelCodes, levelLabel,
   type CurrentProfileV2, type GradingDelayHours, type LevelCode, type TeacherProfile,
@@ -82,7 +83,6 @@ const delayIcons: Record<GradingDelayHours, ReactNode> = {
 const MAX_BIO = 500;
 const CLASSROOM = 30;
 const CELEBRATION_MS = 2800;
-const pilotLevels = new Set(findLanguage('de')?.levels ?? []);
 
 interface Answers {
   languages: string[]; levels: LevelCode[]; maxLearners: number | null; gradingDelayHours: GradingDelayHours | null; bio: string;
@@ -102,7 +102,8 @@ function initialAnswers(initial: TeacherProfile | null): Answers {
   const languages = existing ? initial?.languages ?? [] : (initial?.languages ?? []).filter((id) => open.has(id));
   return {
     languages: languages.length ? languages : availableLanguages.slice(0, 1).map((language) => language.id),
-    levels: initial?.levels?.length ? initial.levels : ['A1', 'A2'],
+    // Par défaut, les niveaux publiés des langues choisies, posés dès que le catalogue répond (voir TeacherOnboarding).
+    levels: initial?.levels ?? [],
     maxLearners: existing ? initial?.maxLearners ?? null : initial?.maxLearners ?? 10,
     gradingDelayHours: existing ? initial?.gradingDelayHours ?? null : initial?.gradingDelayHours ?? 48,
     bio: initial?.bio ?? '',
@@ -241,7 +242,13 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
   const [furthest, setFurthest] = useState(0);
   const finishing = useRef(false);
   const timers = useRef<number[]>([]);
+  const levelsTouched = useRef(Boolean(initial?.levels?.length));
   const updating = Boolean(initial?.onboardedAt);
+  // Catalogue : langues avec leurs niveaux, et niveaux publiés (« Parcours prêt ») des langues choisies.
+  const { languages: catalogue } = useLanguages(token);
+  const chosenLanguages = catalogue?.filter((language) => answers.languages.includes(language.id)) ?? [];
+  const readyLevels = publishedCodes(chosenLanguages);
+  const readyKey = readyLevels.join();
   const baseQuestions = updating && initial ? missingPreferences(initial) : firstTimeQuestions;
   const showCard = answers.acceptingNewStudents === true;
   const askBio = showCard && (!updating || baseQuestions.includes('availability'));
@@ -253,6 +260,10 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
   const toInvitations = answers.acceptingNewStudents === false;
 
   useEffect(() => { setFurthest((value) => Math.max(value, index)); }, [index]);
+  // Niveaux proposés par défaut : ceux dont le parcours est publié, tant que le professeur n'a pas fait son propre choix.
+  useEffect(() => {
+    if (!levelsTouched.current && readyKey) setAnswers((current) => ({ ...current, levels: readyKey.split(',') as LevelCode[] }));
+  }, [readyKey]);
   useEffect(() => () => timers.current.forEach((timer) => window.clearTimeout(timer)), []);
 
   const set = (change: Partial<Answers>) => setAnswers((current) => ({ ...current, ...change }));
@@ -372,7 +383,8 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     languages: {
       eyebrow: '', title: 'Quelles langues enseignez-vous ?',
       lead: 'Choisissez une ou plusieurs langues. Les autres langues arrivent bientôt sur LinguaCap.',
-      body: <LanguagePicker multiple label="Langues enseignées" hideLabel value={answers.languages} onChange={(languages) => set({ languages })} />,
+      body: <LanguagePicker multiple label="Langues enseignées" hideLabel languages={catalogue ?? undefined} value={answers.languages}
+        onChange={(languages) => set({ languages })} />,
     },
     availability: {
       eyebrow: '', title: availabilityQuestion,
@@ -401,13 +413,17 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     },
     levels: {
       eyebrow: '', title: 'Quels niveaux accompagnez-vous ?',
-      lead: 'Sélectionnez tous les niveaux que vous pouvez enseigner. Les parcours A1 et A2 sont disponibles aujourd’hui.',
+      lead: `Sélectionnez tous les niveaux que vous pouvez enseigner.${readyLevels.length > 1
+        ? ` Les parcours ${joinFrench(readyLevels)} sont disponibles aujourd’hui.`
+        : readyLevels.length ? ` Le parcours ${readyLevels[0]} est disponible aujourd’hui.` : ''}`,
       body: (
+        // Toute l'échelle reste proposée (un professeur peut déclarer un niveau sans parcours) ; l'étiquette suit le catalogue.
         <ChoiceGrid<LevelCode> multiple legend="Niveaux enseignés" hideLegend layout="tile" columns={3} className="tob-levels"
-          value={answers.levels} onChange={(levels) => set({ levels })}
+          value={answers.levels} onChange={(levels) => { levelsTouched.current = true; set({ levels }); }}
           options={levelCodes.map((level) => ({
             value: level, title: <span className="tob-level-code">{level}</span>, description: levelLabel(level).split(' · ')[1],
-            tag: pilotLevels.has(level) ? 'Parcours prêt' : 'Bientôt', tagTone: pilotLevels.has(level) ? 'success' : 'neutral',
+            tag: catalogue ? readyLevels.includes(level) ? 'Parcours prêt' : 'Bientôt' : undefined,
+            tagTone: readyLevels.includes(level) ? 'success' : 'neutral',
           }))} />
       ),
     },
@@ -492,7 +508,7 @@ export function TeacherOnboarding({ name, token, initial, onDone }: {
     id, label: stepLabels[id], icon: stepIcons[id], reachable: !saved && !busy && position < index,
   }));
   const shortcutsHint = ['availability', 'courses', 'delay', 'levels'].includes(step)
-    ? <><kbd>1</kbd>–<kbd>{step === 'levels' ? 6 : step === 'delay' ? 4 : 2}</kbd> pour choisir · <kbd>Entrée</kbd> pour continuer</>
+    ? <><kbd>1</kbd>–<kbd>{step === 'levels' ? levelCodes.length : step === 'delay' ? 4 : 2}</kbd> pour choisir · <kbd>Entrée</kbd> pour continuer</>
     : undefined;
 
   return (

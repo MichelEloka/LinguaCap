@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -2786,6 +2786,46 @@
             "$ref": "#/components/responses/Error"
           },
           "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/public/languages": {
+      "get": {
+        "operationId": "listPublicLanguages",
+        "summary": "Langues et niveaux publiés, sans compte (vitrine)",
+        "description": "Seule route métier lue sans session : données publiques en lecture seule. La passerelle exige le secret de liaison du proxy, ne relaie aucun paramètre et répond avec Cache-Control: public, max-age=300. Une langue sans niveau publié est absente ; un niveau sans version publiée aussi.",
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Langues ayant au moins un niveau publié, dans l’ordre de position",
+            "headers": {
+              "Cache-Control": {
+                "description": "public, max-age=300",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/PublicLanguage"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "503": {
             "$ref": "#/components/responses/Error"
           }
         }
@@ -7627,7 +7667,8 @@
           "id",
           "name",
           "description",
-          "days"
+          "days",
+          "durations"
         ],
         "properties": {
           "id": {
@@ -7650,12 +7691,47 @@
             }
           },
           "a1Duration": {
-            "type": "string"
+            "type": "string",
+            "deprecated": true,
+            "description": "Obsolète : durée ISO 8601 (P5M) du niveau A1 ; lire durations."
           },
           "a2Duration": {
-            "type": "string"
+            "type": "string",
+            "deprecated": true,
+            "description": "Obsolète : durée ISO 8601 (P5M) du niveau A2 ; lire durations."
+          },
+          "durations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TemplateDuration"
+            },
+            "description": "Un élément par niveau publié, dans l’ordre du catalogue."
           }
         }
+      },
+      "TemplateDuration": {
+        "type": "object",
+        "required": [
+          "levelCode",
+          "months",
+          "plannedMinutes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "months": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "plannedMinutes": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Durée prévue de la version publiée du niveau."
+          }
+        },
+        "description": "Durée conseillée d’un niveau publié pour ce modèle. A1 et A2 gardent leurs durées calibrées (standard 5 et 5 mois, intensif 1 et 2 mois) ; tout autre niveau : max(1, ceil(plannedMinutes × 1,25 / minutes par semaine du modèle / 4,345)), avec 150 min en standard et 630 en intensif."
       },
       "ProposalSummary": {
         "type": "object",
@@ -9968,7 +10044,9 @@
           "published",
           "trackVersionId",
           "plannedMinutes",
-          "moduleCount"
+          "moduleCount",
+          "position",
+          "prerequisiteCode"
         ],
         "properties": {
           "code": {
@@ -10000,8 +10078,28 @@
           "moduleCount": {
             "type": "integer",
             "minimum": 0
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1,
+            "description": "Position au catalogue (ordre des niveaux) ; null si elle n’est pas renseignée (trié en dernier)."
+          },
+          "prerequisiteCode": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Niveau prérequis au catalogue (A2 pour B1) ; null pour un premier niveau."
           }
-        }
+        },
+        "description": "Niveau d’une langue, dans l’ordre de position. published : une version attribuable existe (seule source de la disponibilité d’un niveau)."
       },
       "Language": {
         "type": "object",
@@ -10012,7 +10110,8 @@
           "status",
           "position",
           "placementAvailable",
-          "levels"
+          "levels",
+          "placementTiers"
         ],
         "properties": {
           "id": {
@@ -10043,8 +10142,89 @@
             "items": {
               "$ref": "#/components/schemas/LanguageLevel"
             }
+          },
+          "placementTiers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LevelCode"
+            },
+            "description": "Codes des paliers de la banque de test publiée, dans l’ordre (par exemple A1, A2, B1) ; vide sans banque publiée."
           }
         }
+      },
+      "PublicLanguageLevel": {
+        "type": "object",
+        "required": [
+          "code",
+          "title",
+          "position",
+          "moduleCount",
+          "plannedMinutes"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "code": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "position": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
+          },
+          "moduleCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "plannedMinutes": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Durée prévue de la version publiée : activités, révisions, bilan et examen blanc."
+          }
+        },
+        "description": "Niveau publié (au moins une version publiée)."
+      },
+      "PublicLanguage": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "nativeName",
+          "position",
+          "levels"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "nativeName": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "levels": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "$ref": "#/components/schemas/PublicLanguageLevel"
+            },
+            "description": "Niveaux publiés seulement, dans l’ordre de position."
+          }
+        },
+        "description": "Langue ayant au moins un niveau publié, vue sans compte (vitrine, page de connexion, pied de page)."
       },
       "PlacementTestStatus": {
         "type": "string",
@@ -14324,9 +14504,10 @@
           "maxSeconds": {
             "type": "integer",
             "minimum": 30,
-            "maximum": 120
+            "maximum": 300
           }
-        }
+        },
+        "description": "Enregistrement de 30 à 300 s. Fourchettes par niveau (contrôle des contenus) : A1-A2 30 à 120, B1 90 à 180, B2 120 à 300."
       },
       "MissionWritten": {
         "type": "object",
@@ -14344,14 +14525,44 @@
           "maxChars": {
             "type": "integer",
             "minimum": 200,
-            "maximum": 1500
+            "maximum": 3000
           },
           "minWords": {
             "type": "integer",
             "minimum": 0,
-            "maximum": 200
+            "maximum": 400
           }
-        }
+        },
+        "description": "Fourchettes par niveau (contrôle des contenus) : A1-A2 200 à 1 500 caractères et 0 à 200 mots, B1 1 000 à 1 500 et 40 à 120, B2 1 500 à 3 000 et 100 à 220."
+      },
+      "MissionCriterion": {
+        "type": "object",
+        "required": [
+          "id",
+          "label",
+          "maxPoints"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+            "maxLength": 40,
+            "description": "Unique dans la grille (aufgabe, kohaerenz, wortschatz, strukturen, aussprache…)."
+          },
+          "label": {
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 200,
+            "description": "Peut porter le marqueur bilingue « [fr] » (B1) ou « [fr?] » (B2)."
+          },
+          "maxPoints": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 20
+          }
+        },
+        "description": "Critère de la grille d’une mission, noté de 0 à maxPoints par le correcteur."
       },
       "MissionDefinition": {
         "type": "object",
@@ -14391,9 +14602,17 @@
             },
             "minItems": 2,
             "maxItems": 6
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MissionCriterion"
+            },
+            "maxItems": 6,
+            "description": "Grille de 0 à 6 critères aux identifiants uniques (4 ou 5 en B1 et B2, 20 points). Absente ou vide : mission sans grille, comportement V4 (A1, A2). Le catalogue doit être déployé avant tout import qui l’envoie."
           }
         },
-        "description": "Au moins une partie (orale ou écrite). La situation et la consigne sont la description de la leçon."
+        "description": "Au moins une partie (orale ou écrite). La situation et la consigne sont la description de la leçon. Bornes communes : 30 à 300 s, 200 à 3 000 caractères, 0 à 400 mots."
       },
       "MissionSnapshot": {
         "type": "object",
@@ -14401,7 +14620,8 @@
           "description",
           "oral",
           "written",
-          "checklist"
+          "checklist",
+          "criteria"
         ],
         "properties": {
           "description": {
@@ -14432,6 +14652,14 @@
             "items": {
               "type": "string"
             }
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MissionCriterion"
+            },
+            "maxItems": 6,
+            "description": "Grille figée dans la remise ([] sans grille) ; servie aussi avec l’activité, avant la remise."
           }
         },
         "description": "Définition figée dans la remise, avec la consigne."
@@ -14487,7 +14715,7 @@
         "properties": {
           "text": {
             "type": "string",
-            "maxLength": 1500
+            "maxLength": 3000
           },
           "checklist": {
             "type": "array",
@@ -14541,6 +14769,16 @@
           "comment": {
             "type": "string",
             "maxLength": 2000
+          },
+          "points": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 20
+            },
+            "maxProperties": 6,
+            "description": "Points par critère ({idCritère: entier de 0 à maxPoints}). Exigé pour chaque critère quand la définition a une grille (clé manquante, inconnue ou hors bornes : 400) ; refusé sans grille, même vide ({} : 400). La décision reste libre ; commentaire exigé pour to_redo."
           }
         }
       },
@@ -14661,7 +14899,10 @@
             "required": [
               "decision",
               "comment",
-              "reviewedAt"
+              "reviewedAt",
+              "points",
+              "score",
+              "maxScore"
             ],
             "properties": {
               "decision": {
@@ -14676,6 +14917,33 @@
               "reviewedAt": {
                 "type": "string",
                 "format": "date-time"
+              },
+              "points": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "additionalProperties": {
+                  "type": "integer",
+                  "minimum": 0
+                },
+                "description": "Points par critère ; null sans grille."
+              },
+              "score": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 0,
+                "description": "Somme des points ; null sans grille."
+              },
+              "maxScore": {
+                "type": [
+                  "integer",
+                  "null"
+                ],
+                "minimum": 1,
+                "description": "Somme des maxPoints de la grille (20 en B1 et B2) ; null sans grille."
               }
             }
           },
@@ -14704,7 +14972,9 @@
           "decision",
           "submittedAt",
           "reviewedAt",
-          "sessionId"
+          "sessionId",
+          "score",
+          "maxScore"
         ],
         "properties": {
           "id": {
@@ -14758,6 +15028,21 @@
                 "type": "null"
               }
             ]
+          },
+          "score": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 0,
+            "description": "Score du retour sur grille ; null sans grille ou avant le retour."
+          },
+          "maxScore": {
+            "type": [
+              "integer",
+              "null"
+            ],
+            "minimum": 1
           }
         }
       },

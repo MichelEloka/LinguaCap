@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { createClient, type Session } from '@supabase/supabase-js';
 import { apiBase, isApiMode, supabaseKey, supabaseUrl } from '../app/config';
-import type { CurrentProfileV2, LevelCode, TeacherProfile } from './v2';
+import { levelCodes, type CurrentProfileV2, type LevelCode, type TeacherProfile } from './v2';
 
 /**
  * Simulateur (`npm run dev:mock`) : en développement seulement, l'API et Supabase Auth sont remplacés par un simulateur
@@ -194,7 +194,8 @@ export async function checkHealth(): Promise<'ok' | 'degraded'> {
   throw new Error('La réponse de santé ne correspond pas au contrat attendu.');
 }
 
-const levelSet = new Set<string>(['A1', 'A2', 'B1', 'B2', 'C1', 'C2']);
+/** Échelle CECRL : sert seulement à valider un code déclaré par un professeur (un niveau non publié reste déclarable). */
+const levelSet = new Set<string>(levelCodes);
 const nullableString = (value: unknown) => (typeof value === 'string' ? value : null);
 const strings = (value: unknown) => (Array.isArray(value) ? value.filter((item): item is string => typeof item === 'string') : []);
 

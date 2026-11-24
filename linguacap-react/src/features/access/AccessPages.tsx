@@ -8,6 +8,7 @@ import { Badge, PageHeading } from '../../components/ui';
 import { apiBase, authLinkParams, isApiMode } from '../../app/config';
 import { checkHealth, fetchProfile, roleNames, sessionExpiredEvent, supabase } from '../../integration/api';
 import type { Profile } from '../../integration/api';
+import { levelSeries, usePublicOffer } from '../../integration/languages';
 import { staffWorkspaceLinks } from '../pilot/staff-navigation';
 import { WorkspaceFrame } from '../workspace/WorkspaceFrame';
 import './access.css';
@@ -33,14 +34,22 @@ function linkError(): string {
 const LearnerPilot = lazy(() => import('../pilot/LearnerPilot').then((module) => ({ default: module.LearnerPilot })));
 const StaffPilot = lazy(() => import('../pilot/StaffPilot').then((module) => ({ default: module.StaffPilot })));
 
-/** Écran d'accès en deux panneaux : présentation de l'application et formulaire (empilés sur mobile). */
+/**
+ * Écran d'accès en deux panneaux : présentation de l'application et formulaire (empilés sur mobile). Les niveaux annoncés
+ * sont ceux du catalogue (« Allemand · niveaux A1, A2 et B1 ») ; sans la liste, « Parcours d’allemand ».
+ */
 function AccessLayout({ children }: { children: ReactNode }) {
+  const offer = usePublicOffer();
+  const kicker = offer.codes.length
+    ? `${offer.languages} · ${offer.codes.length > 1 ? 'niveaux' : 'niveau'} ${levelSeries(offer.codes)}` : `Parcours ${offer.of}`;
   return (
     <div className="acc">
       <aside className="acc-brand">
         <Link to="/" className="acc-logo" aria-label="LinguaCap, page d’accueil"><img src="/favicon.svg" alt="" /><span>Lingua<b>Cap</b></span></Link>
         <div className="acc-pitch">
-          <p className="acc-kicker">Allemand · niveaux A1 et A2</p>
+          {offer.pending
+            ? <p className="acc-kicker" aria-hidden="true" style={{ visibility: 'hidden' }}>{kicker}</p>
+            : <p className="acc-kicker lc-enter">{kicker}</p>}
           <h2>Votre parcours d’allemand, séance après séance.</h2>
           <ul>
             <li><CalendarCheck2 size={18} aria-hidden="true" />Un planning adapté à votre rythme</li>

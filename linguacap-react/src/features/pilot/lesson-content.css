@@ -78,3 +78,17 @@
 .lc-fields > div { display: grid; gap: .1rem; padding: .55rem .8rem; background: var(--surface); }
 .lc-fields dt { color: var(--muted); font-size: var(--text-xs); font-weight: 700; }
 .lc-fields dd { margin: 0; color: var(--ink); font-weight: 600; }
+
+/* Consignes bilingues des niveaux B (bilingual.tsx) : allemand en tête, traduction ou aide repliée dessous */
+.lc-instruction { display: grid; gap: .1rem; max-width: 72ch; }
+.lc-instruction > p { color: var(--ink); font-weight: 600; }
+.lc-instruction > .bi-fr { margin-top: .25rem; }
+.lc-heading-fr { color: var(--muted); font-size: var(--text-sm); font-weight: 600; letter-spacing: 0; }
+.lc-heading-fr.is-fold { align-self: center; }
+.lc-callout-fr { margin-left: .45rem; font-weight: 600; letter-spacing: 0; text-transform: none; opacity: .85; }
+.lc-callout-fr.is-fold { opacity: 1; }
+.lc-callout-line { display: grid; gap: .05rem; }
+.lc-callout-line + p, .lc-callout-line + .lc-callout-line, p + .lc-callout-line { margin-top: .3rem; }
+.lc-callout .bi-fr { color: inherit; opacity: .86; border-left-color: color-mix(in srgb, currentColor 28%, transparent); }
+.lc-bullets .bi-fr, .lc-steps .bi-fr { margin-top: .15rem; }
+.lc-lesson > .bi-switch-row { margin-bottom: .1rem; }

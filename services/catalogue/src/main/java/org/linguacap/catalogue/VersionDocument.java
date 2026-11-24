@@ -33,6 +33,21 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
     /** Un exercice typé se remet en une fois (POST /assessments/exercises) : 30 questions au plus. */
     static final int MAX_TYPED_QUESTIONS = 30;
     static final int MAX_VOCABULARY = 100;
+    /**
+     * Bornes techniques d'une mission, communes au catalogue, à Évaluations, à la base et à l'interface. Les
+     * fourchettes propres à chaque niveau (B1 : 90 à 180 s, 1 000 à 1 500 caractères…) sont imposées par le contrôle
+     * des contenus.
+     */
+    static final int MISSION_MIN_SECONDS = 30;
+    static final int MISSION_MAX_SECONDS = 300;
+    static final int MISSION_MIN_CHARS = 200;
+    static final int MISSION_MAX_CHARS = 3000;
+    static final int MISSION_MAX_MIN_WORDS = 400;
+    static final int MISSION_MAX_CRITERIA = 6;
+    static final int MISSION_CRITERION_MAX_ID = 40;
+    static final int MISSION_CRITERION_MIN_LABEL = 3;
+    static final int MISSION_CRITERION_MAX_LABEL = 200;
+    static final int MISSION_CRITERION_MAX_POINTS = 20;
 
     public record Settings(List<String> expectedCompetences, String successCriteria, int passPercent, int reviewMinutes,
                            int midtermMinutes, int finalMinutes) {}
@@ -83,9 +98,20 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
 
     /**
      * Mission : production orale (oral) et/ou écrite (written) remise dans l'application, avec la liste de
-     * vérification que l'élève coche avant l'envoi. La situation et la consigne sont dans la leçon de l'activité.
+     * vérification que l'élève coche avant l'envoi et, aux niveaux B, la grille de critères notée par le correcteur
+     * (criteria : 0 à 6 critères ; absente ou vide, la mission se corrige sans grille comme en A1 et A2). La situation
+     * et la consigne sont dans la leçon de l'activité.
      */
-    public record Mission(Oral oral, Written written, List<String> checklist) {
+    public record Mission(Oral oral, Written written, List<String> checklist, List<Criterion> criteria) {
+        /** L'absence de grille vaut une grille vide : la mission est toujours servie avec criteria ([] sans grille). */
+        public Mission {
+            criteria = criteria == null ? List.of() : criteria;
+        }
+
+        public Mission(Oral oral, Written written, List<String> checklist) {
+            this(oral, written, checklist, List.of());
+        }
+
         /** Valeurs par défaut (2 min, 1 500 caractères, aucun minimum de mots) et textes sans espaces de bord. */
         Mission normalized() {
             return new Mission(
@@ -93,14 +119,16 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
                     written == null ? null : new Written(text(written.prompt()),
                             written.maxChars() == null ? 1500 : written.maxChars(),
                             written.minWords() == null ? 0 : written.minWords()),
-                    nonNull(checklist).stream().map(VersionDocument::text).toList());
+                    nonNull(checklist).stream().map(VersionDocument::text).toList(),
+                    criteria.stream().map(criterion -> new Criterion(criterion.id(), text(criterion.label()),
+                            criterion.maxPoints())).toList());
         }
     }
 
-    /** Partie orale : enregistrement de 30 à 120 secondes. */
+    /** Partie orale : enregistrement de 30 à 300 secondes. */
     public record Oral(String prompt, Integer maxSeconds) {}
 
-    /** Partie écrite : texte de 200 à 1 500 caractères au plus, avec un nombre minimal de mots (0 à 200). */
+    /** Partie écrite : texte de 200 à 3 000 caractères au plus, avec un nombre minimal de mots (0 à 400). */
     public record Written(String prompt, Integer maxChars, Integer minWords) {}
 
     /**
@@ -221,15 +249,34 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
         if (mission == null) return;
         Oral oral = mission.oral();
         Written written = mission.written();
-        if (oral != null && (text(oral.prompt()).length() > 1000
-                || oral.maxSeconds() != null && (oral.maxSeconds() < 30 || oral.maxSeconds() > 120))
-                || written != null && (text(written.prompt()).length() > 1000
-                || written.maxChars() != null && (written.maxChars() < 200 || written.maxChars() > 1500)
-                || written.minWords() != null && (written.minWords() < 0 || written.minWords() > 200))
+        if (oral != null && (text(oral.prompt()).length() > 1000 || oral.maxSeconds() != null
+                && (oral.maxSeconds() < MISSION_MIN_SECONDS || oral.maxSeconds() > MISSION_MAX_SECONDS))
+                || written != null && (text(written.prompt()).length() > 1000 || written.maxChars() != null
+                && (written.maxChars() < MISSION_MIN_CHARS || written.maxChars() > MISSION_MAX_CHARS)
+                || written.minWords() != null && (written.minWords() < 0 || written.minWords() > MISSION_MAX_MIN_WORDS))
                 || nonNull(mission.checklist()).size() > 6
                 || nonNull(mission.checklist()).stream().anyMatch(item -> item == null || text(item).length() > 160)) {
-            throw HttpError.badRequest("Vérifiez la mission " + activity.id()
-                    + " : enregistrement de 30 à 120 s, texte de 200 à 1 500 caractères, 6 points de vérification au plus.");
+            throw HttpError.badRequest("Vérifiez la mission " + activity.id() + " : enregistrement de 30 à 300 s, texte de"
+                    + " 200 à 3 000 caractères avec un minimum de 0 à 400 mots, 6 points de vérification au plus.");
+        }
+        List<Criterion> criteria = mission.criteria();
+        if (criteria.size() > MISSION_MAX_CRITERIA) {
+            throw HttpError.badRequest("La grille de la mission " + activity.id() + " compte " + MISSION_MAX_CRITERIA
+                    + " critères au plus.");
+        }
+        Set<String> criterionIds = new HashSet<>();
+        for (Criterion criterion : criteria) {
+            requireId(criterion == null ? null : criterion.id(), "critère");
+            if (!criterionIds.add(criterion.id())) {
+                throw HttpError.badRequest("Deux critères de la mission " + activity.id() + " portent l’identifiant "
+                        + criterion.id() + ".");
+            }
+            if (criterion.id().length() > MISSION_CRITERION_MAX_ID
+                    || text(criterion.label()).length() > MISSION_CRITERION_MAX_LABEL || criterion.maxPoints() < 1
+                    || criterion.maxPoints() > MISSION_CRITERION_MAX_POINTS) {
+                throw HttpError.badRequest("Vérifiez le critère " + criterion.id() + " de la mission " + activity.id()
+                        + " : identifiant de 40 caractères et libellé de 200 caractères au plus, de 1 à 20 points.");
+            }
         }
     }
 
@@ -426,6 +473,16 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
         List<String> checklist = nonNull(mission.checklist());
         if (checklist.size() < 2 || checklist.size() > 6 || checklist.stream().anyMatch(item -> text(item).isBlank())) {
             issues.add(new Issue(at + ".mission.checklist", "La mission " + name + " compte 2 à 6 points de vérification rédigés."));
+        }
+        // Grille facultative (A1, A2) ; si elle est présente, chaque critère est rédigé (l'unicité des identifiants
+        // et les points sont contrôlés à l'enregistrement).
+        List<Criterion> criteria = mission.criteria();
+        for (int c = 0; c < criteria.size(); c++) {
+            Criterion criterion = criteria.get(c);
+            if (criterion != null && text(criterion.label()).length() < MISSION_CRITERION_MIN_LABEL) {
+                issues.add(new Issue(at + ".mission.criteria[" + c + "].label", "Rédigez le critère « " + criterion.id()
+                        + " » de la grille de la mission " + name + " (3 caractères au moins)."));
+            }
         }
     }
 

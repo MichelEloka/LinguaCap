@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { Badge, EmptyState, type BadgeTone } from '../../components/ui';
 import { AudioPlayer, Card, ProgressRing, Timeline, type TimelineEntry } from '../../design/kit';
+import { BilingualText } from './bilingual';
 
 export type ExamKind = 'midterm' | 'final';
 export type Mode = 'closed' | 'written' | 'oral';
@@ -144,7 +145,7 @@ export function ClosedAnswers({ part, exam }: { part: ExamPart; exam: ExamView }
         return (
           <li key={question.id}>
             <span className="ev-q-num" aria-hidden="true">{index + 1}</span>
-            <div><p>{question.prompt}</p>{chosen ? <strong>{chosen.label}</strong> : <em>Sans réponse</em>}</div>
+            <div><p><BilingualText text={question.prompt} /></p>{chosen ? <strong>{chosen.label}</strong> : <em>Sans réponse</em>}</div>
           </li>
         );
       })}

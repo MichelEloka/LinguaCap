@@ -1,8 +1,10 @@
 /*
- * Liste statique des langues de LinguaCap, alignée sur `catalogue.languages` (migration 20261128000100).
- * Elle sert là où l'API n'est pas interrogée (vitrine publique, démonstration, valeurs par défaut) ; les écrans
- * connectés lisent la liste à jour par GET /languages. Le pilote n'ouvre que l'allemand.
+ * Liste statique des langues de LinguaCap, alignée sur `catalogue.languages` (migration 20261128000100) : noms, ordre et
+ * ouverture des langues (réglage du service Identités). Elle ne dit pas quels niveaux sont ouverts : en mode API, la
+ * vitrine lit GET /public/languages et les écrans connectés GET /languages (integration/languages.ts). Ses niveaux ne
+ * valent qu'en mode démonstration, qui n'interroge pas le catalogue. Le pilote n'ouvre que l'allemand.
  */
+import { isApiMode } from '../app/config';
 
 export type LanguageStatus = 'available' | 'coming_soon';
 
@@ -15,12 +17,18 @@ export interface StaticLanguage {
   nativeName: string;
   status: LanguageStatus;
   position: number;
-  /** Niveaux proposés aujourd'hui (vide tant que la langue n'est pas ouverte). */
+  /**
+   * Niveaux de la démonstration (vide en mode API : les niveaux ouverts viennent du catalogue, jamais de cette liste ;
+   * vide aussi tant que la langue n'est pas ouverte).
+   */
   levels: string[];
 }
 
+/** Niveaux du mode démonstration seulement (données fictives du `DemoProvider`). */
+const demoLevels = isApiMode ? [] : ['A1', 'A2'];
+
 export const languages: readonly StaticLanguage[] = [
-  { id: 'de', name: 'Allemand', nativeName: 'Deutsch', status: 'available', position: 1, levels: ['A1', 'A2'] },
+  { id: 'de', name: 'Allemand', nativeName: 'Deutsch', status: 'available', position: 1, levels: demoLevels },
   { id: 'en', name: 'Anglais', nativeName: 'English', status: 'coming_soon', position: 2, levels: [] },
   { id: 'es', name: 'Espagnol', nativeName: 'Español', status: 'coming_soon', position: 3, levels: [] },
   { id: 'it', name: 'Italien', nativeName: 'Italiano', status: 'coming_soon', position: 4, levels: [] },

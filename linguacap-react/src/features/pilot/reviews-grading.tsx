@@ -3,23 +3,30 @@
  * page Corrections, puis file et détail côte à côte. Une mission se lit (consigne, enregistrement, texte, liste cochée)
  * puis reçoit une décision — validée ou à reprendre — avec un retour ; une répétition orale envoyée en enregistrement
  * (navigateur sans reconnaissance vocale) s'écoute puis se valide ou se refuse.
+ * Niveaux B : la mission se note sur sa grille (un champ par critère, total en direct) ; la décision est présélectionnée
+ * d'après le score (60 %) et reste au correcteur ; le commentaire part d'un modèle (« Points forts / À retravailler /
+ * Relance »), avec la légende des codes de correction. « Envoyer » attend que chaque critère soit noté.
  */
 import { useCallback, useEffect, useRef, useState, type FormEvent, type ReactNode } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, Check, CheckCircle2, ClipboardCheck, Target, LoaderCircle, Mic, RotateCcw, Send, ThumbsDown, ThumbsUp,
+  ArrowLeft, ArrowRight, Check, CheckCircle2, ClipboardCheck, Target, LoaderCircle, Mic, Minus, Plus, RotateCcw, Scale, Send, ThumbsDown, ThumbsUp,
+  WandSparkles,
 } from 'lucide-react';
 import { Badge, EmptyState } from '../../components/ui';
 import {
-  AudioPlayer, Avatar, Callout, Card, Facts, SearchField, SkeletonCard, SplitView, Tabs, useToast, type TabItem,
+  AudioPlayer, Avatar, Callout, Card, Facts, ProgressRing, SearchField, SkeletonCard, SplitView, Tabs, useToast, type TabItem,
 } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { levelRank } from '../../integration/v2';
 import {
-  missionLimits, speechReviewStatusLabels, type MissionDecision, type MissionView, type ReviewQueueItem, type ReviewQueueKind,
-  type SpeechAttemptView,
+  missionCommentTemplate, missionCriteriaOf, missionLimits, missionMaxScore, missionPassPercent, missionScore, speechReviewStatusLabels,
+  suggestedMissionDecision, type MissionCriterion, type MissionDecision, type MissionReviewRequest, type MissionView, type ReviewQueueItem,
+  type ReviewQueueKind, type SpeechAttemptView,
 } from '../../integration/v4';
+import { glossUnits, hasGloss } from './bilingual';
 import { LessonContent } from './LessonContent';
-import { MissionBadge, MissionFeedback, MissionWork } from './study-mission';
+import { CorrectionCodes, criterionParts, MissionBadge, MissionFeedback, MissionWork, passScore } from './study-mission';
 import './reviews.css';
 
 export type CorrectionSection = 'copies' | 'missions' | 'oral';
@@ -128,7 +135,54 @@ const suggestions = [
   'Parlez un peu plus lentement, en articulant.',
 ];
 
-/** Mission ouverte : travail de l'élève, puis décision et retour. */
+/** Intertitres du modèle de commentaire (« Points forts : »…) : une ligne réduite à l'un d'eux n'a pas été remplie. */
+const templateHeads = missionCommentTemplate.split('\n').map((line) => line.trim()).filter(Boolean);
+/** Commentaire envoyé : les intertitres du modèle restés vides sont retirés. */
+const cleanComment = (text: string) => text.split('\n').filter((line) => !templateHeads.includes(line.trim())).join('\n').trim();
+
+/** Libellé d'un critère vu par le correcteur : nom, précision et traduction toujours visible (écrans en français). */
+function CriterionText({ label }: { label: string }) {
+  const parts = criterionParts(label);
+  const french = hasGloss(label) ? glossUnits(label)[0]?.fr : null;
+  return (
+    <span className="rv-crit-text">
+      <strong lang={french ? 'de' : undefined}>{parts.name}</strong>
+      {parts.detail && <small lang={french ? 'de' : undefined}>{parts.detail}</small>}
+      {french && <small className="rv-crit-fr" lang="fr">{french}</small>}
+    </span>
+  );
+}
+
+/** Note d'un critère : moins et plus autour du nombre, curseur pour aller vite (présentation des copies d'examen). */
+function CriterionScore({ id, criterion, value, onChange, disabled }: {
+  id: string; criterion: MissionCriterion; value: number | null; onChange: (value: number | null) => void; disabled: boolean;
+}) {
+  const max = criterion.maxPoints;
+  const name = criterionParts(criterion.label).name;
+  const set = (next: number) => onChange(Math.max(0, Math.min(max, Math.round(next))));
+  return (
+    <div className={`ev-criterion rv-criterion${value !== null ? ' is-set' : ''}`}>
+      <div className="ev-criterion-head">
+        <label htmlFor={id}><CriterionText label={criterion.label} /></label>
+        <span className="ev-criterion-max">sur {max}</span>
+      </div>
+      <div className="ev-criterion-controls">
+        <div className="ev-stepper">
+          <button type="button" onClick={() => set(value === null ? 0 : value - 1)} disabled={disabled || value === 0} aria-label={`Retirer un point · ${name}`}>
+            <Minus size={16} aria-hidden="true" /></button>
+          <input id={id} type="number" min={0} max={max} step={1} inputMode="numeric" placeholder="–" value={value ?? ''} disabled={disabled}
+            onChange={(event) => (event.target.value === '' ? onChange(null) : set(Number(event.target.value)))} />
+          <button type="button" onClick={() => set(value === null ? 1 : value + 1)} disabled={disabled || (value !== null && value >= max)} aria-label={`Ajouter un point · ${name}`}>
+            <Plus size={16} aria-hidden="true" /></button>
+        </div>
+        <input type="range" className="ev-slider" min={0} max={max} step={1} value={value ?? 0} disabled={disabled} aria-label={`Curseur · ${name}`}
+          style={{ ['--p' as string]: `${value === null ? 0 : (value / max) * 100}%` }} onChange={(event) => set(Number(event.target.value))} />
+      </div>
+    </div>
+  );
+}
+
+/** Mission ouverte : travail de l'élève, puis grille (niveaux B), décision et retour. */
 function MissionReview({ token, id, item, next, onReviewed }: {
   token: string; id: string; item: ReviewQueueItem | undefined; next: ReviewQueueItem | undefined; onReviewed: () => void;
 }) {
@@ -137,6 +191,9 @@ function MissionReview({ token, id, item, next, onReviewed }: {
   const [mission, setMission] = useState<MissionView | null>(null);
   const [error, setError] = useState('');
   const [decision, setDecision] = useState<MissionDecision | null>(null);
+  // La décision suit le score tant que le correcteur ne l'a pas choisie lui-même.
+  const [decisionChosen, setDecisionChosen] = useState(false);
+  const [points, setPoints] = useState<Record<string, number | null>>({});
   const [comment, setComment] = useState('');
   const [busy, setBusy] = useState(false);
   const [missing, setMissing] = useState(false);
@@ -148,22 +205,48 @@ function MissionReview({ token, id, item, next, onReviewed }: {
   useEffect(() => {
     let active = true;
     requestApi<MissionView>(`/assessments/missions/${encodeURIComponent(id)}`, token).then(
-      (view) => { if (active) setMission(view); },
+      (view) => {
+        if (!active) return;
+        setMission(view);
+        // Mission sur grille : le modèle de commentaire préremplit le champ.
+        if (missionCriteriaOf(view.definition).length && view.status === 'submitted') setComment((current) => current || missionCommentTemplate);
+      },
       (failure: unknown) => { if (active) setError(errorText(failure)); },
     );
     return () => { active = false; };
   }, [id, token]);
 
+  const criteria = mission ? missionCriteriaOf(mission.definition) : [];
+  const graded = criteria.length > 0;
+  const maxScore = missionMaxScore(criteria);
+  const score = graded ? missionScore(criteria, points) : null;
+  const filled = criteria.filter((criterion) => typeof points[criterion.id] === 'number').length;
+  const earned = criteria.reduce((sum, criterion) => sum + (points[criterion.id] ?? 0), 0);
+  const written = cleanComment(comment);
+  const suggested = suggestedMissionDecision(score, maxScore);
+
+  function score_(criterionId: string, value: number | null) {
+    const next = { ...points, [criterionId]: value };
+    setPoints(next);
+    if (!decisionChosen) setDecision(suggestedMissionDecision(missionScore(criteria, next), maxScore));
+  }
+  function choose(value: MissionDecision) {
+    setDecision(value);
+    setDecisionChosen(true);
+    setMissing(false);
+  }
+
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!mission || busy) return;
-    if (!decision || (decision === 'to_redo' && !comment.trim())) { setMissing(true); return; }
+    if (!mission || busy || (graded && score === null)) return;
+    if (!decision || (decision === 'to_redo' && !written)) { setMissing(true); return; }
     setBusy(true);
     setError('');
+    const body: MissionReviewRequest = graded
+      ? { decision, comment: written, points: Object.fromEntries(criteria.map((criterion) => [criterion.id, points[criterion.id] as number])) }
+      : { decision, comment: comment.trim() };
     try {
-      const reviewed = await requestApi<MissionView>(`/assessments/missions/${encodeURIComponent(mission.id)}/review`, token, {
-        method: 'POST', body: { decision, comment: comment.trim() },
-      });
+      const reviewed = await requestApi<MissionView>(`/assessments/missions/${encodeURIComponent(mission.id)}/review`, token, { method: 'POST', body });
       setMission(reviewed);
       toast(decision === 'validated' ? `Mission validée${name.current ? ` pour ${name.current}` : ''}.` : `Retour envoyé${name.current ? ` à ${name.current}` : ''} : la mission est à reprendre.`);
       onReviewed();
@@ -173,7 +256,6 @@ function MissionReview({ token, id, item, next, onReviewed }: {
       setBusy(false);
     }
   }
-
   const back = <Link className="text-link ev-copy-back" to={kindTexts.mission.path}><ArrowLeft size={16} aria-hidden="true" /> {kindTexts.mission.back}</Link>;
   if (!mission) {
     return (
@@ -210,44 +292,95 @@ function MissionReview({ token, id, item, next, onReviewed }: {
         <aside className="rv-decision" aria-label="Décision">
           {open ? (
             <form className="rv-form" onSubmit={(event) => void submit(event)} noValidate>
+              {graded && (
+                <fieldset className="ev-rubric rv-rubric" disabled={busy}>
+                  <legend><Scale size={17} aria-hidden="true" /> Grille de correction</legend>
+                  {criteria.map((criterion) => (
+                    <CriterionScore key={criterion.id} id={`rv-${mission.id}-${criterion.id}`} criterion={criterion} value={points[criterion.id] ?? null}
+                      disabled={busy} onChange={(value) => score_(criterion.id, value)} />
+                  ))}
+                  <div className={`rv-total${score !== null ? (score >= passScore(maxScore) ? ' is-pass' : ' is-low') : ''}`} role="status">
+                    <ProgressRing value={maxScore ? (earned / maxScore) * 100 : 0} size={46} stroke={5}
+                      color={score === null ? 'var(--brand)' : score >= passScore(maxScore) ? 'var(--success)' : 'var(--warning)'}
+                      label={`Total : ${earned} sur ${maxScore}`}>
+                      <small>{maxScore ? Math.round((earned / maxScore) * 100) : 0}%</small>
+                    </ProgressRing>
+                    <span className="rv-total-text">
+                      <strong>Total : {earned} / {maxScore}</strong>
+                      <small>{score === null
+                        ? `${filled}/${criteria.length} critères notés`
+                        : `Validée à partir de ${passScore(maxScore)}/${maxScore} (${missionPassPercent} %)`}</small>
+                    </span>
+                  </div>
+                </fieldset>
+              )}
               <fieldset className={`rv-choices${missing && !decision ? ' is-missing' : ''}`} disabled={busy}>
                 <legend>Votre décision</legend>
                 <label className={`rv-choice is-validated${decision === 'validated' ? ' is-checked' : ''}`}>
-                  <input type="radio" name="decision" value="validated" checked={decision === 'validated'} onChange={() => { setDecision('validated'); setMissing(false); }} />
+                  <input type="radio" name="decision" value="validated" checked={decision === 'validated'} onChange={() => choose('validated')} />
                   <span className="rv-choice-icon" aria-hidden="true"><CheckCircle2 size={20} /></span>
                   <span><strong>Valider la mission</strong><small>La tâche est réalisée : l’élève passe à la suite.</small></span>
                 </label>
                 <label className={`rv-choice is-redo${decision === 'to_redo' ? ' is-checked' : ''}`}>
-                  <input type="radio" name="decision" value="to_redo" checked={decision === 'to_redo'} onChange={() => { setDecision('to_redo'); setMissing(false); }} />
+                  <input type="radio" name="decision" value="to_redo" checked={decision === 'to_redo'} onChange={() => choose('to_redo')} />
                   <span className="rv-choice-icon" aria-hidden="true"><RotateCcw size={20} /></span>
                   <span><strong>À reprendre</strong><small>L’élève refait la mission avec votre retour.</small></span>
                 </label>
+                {graded && !decisionChosen && suggested && (
+                  <p className="rv-suggested"><WandSparkles size={14} aria-hidden="true" />
+                    Présélection d’après le score ({score}/{maxScore}) : la décision vous revient.</p>
+                )}
               </fieldset>
               <label className="rv-comment">
                 <span>Retour à l’élève{decision === 'to_redo' ? ' (obligatoire)' : ''}</span>
-                <textarea rows={6} maxLength={missionLimits.commentChars} value={comment} disabled={busy}
-                  aria-invalid={missing && decision === 'to_redo' && !comment.trim() ? true : undefined}
+                {graded && (
+                  <small className="rv-comment-hint">
+                    {levelRank(mission.levelCode) >= levelRank('B2')
+                      ? 'En allemand de préférence (B2). Citez les codes ci-dessous ; deux points à retravailler au plus.'
+                      : 'En français ou en allemand (B1). Citez les codes ci-dessous ; deux points à retravailler au plus.'}
+                  </small>
+                )}
+                <textarea rows={graded ? 7 : 6} maxLength={missionLimits.commentChars} value={comment} disabled={busy}
+                  aria-invalid={missing && decision === 'to_redo' && !written ? true : undefined}
                   placeholder="Ce qui est réussi, ce qu’il faut améliorer, un conseil pour la suite…" onChange={(event) => setComment(event.target.value)} />
                 <small className="rv-comment-count">{comment.length} / {missionLimits.commentChars}</small>
               </label>
-              <div className="rv-suggestions" role="group" aria-label="Formules rapides">
-                {suggestions.map((text) => (
-                  <button key={text} type="button" className="rv-suggestion" disabled={busy}
-                    onClick={() => setComment((current) => (current.trim() ? `${current.trimEnd()} ${text}` : text).slice(0, missionLimits.commentChars))}>
-                    + {text}
-                  </button>
-                ))}
-              </div>
-              {missing && (!decision || (decision === 'to_redo' && !comment.trim())) && (
+              {graded ? (
+                <>
+                  {!comment.includes(templateHeads[0]) && (
+                    <button type="button" className="rv-suggestion rv-template" disabled={busy}
+                      onClick={() => setComment((current) => (current.trim() ? `${missionCommentTemplate}\n${current.trim()}` : missionCommentTemplate).slice(0, missionLimits.commentChars))}>
+                      + Modèle « Points forts / À retravailler / Relance »
+                    </button>
+                  )}
+                  <CorrectionCodes />
+                </>
+              ) : (
+                <div className="rv-suggestions" role="group" aria-label="Formules rapides">
+                  {suggestions.map((text) => (
+                    <button key={text} type="button" className="rv-suggestion" disabled={busy}
+                      onClick={() => setComment((current) => (current.trim() ? `${current.trimEnd()} ${text}` : text).slice(0, missionLimits.commentChars))}>
+                      + {text}
+                    </button>
+                  ))}
+                </div>
+              )}
+              {missing && (!decision || (decision === 'to_redo' && !written)) && (
                 <p className="inline-message warning" role="alert">
                   {!decision ? 'Choisissez une décision.' : 'Expliquez à l’élève ce qu’il doit reprendre.'}
                 </p>
               )}
               {error && <p className="inline-message warning" role="alert">{error}</p>}
-              <button type="submit" className="btn btn-primary btn-block" disabled={busy}>
+              <button type="submit" className="btn btn-primary btn-block" disabled={busy || (graded && score === null)}
+                aria-describedby={graded && score === null ? `rv-left-${mission.id}` : undefined}>
                 {busy ? <LoaderCircle size={17} className="rv-spin" aria-hidden="true" /> : <Send size={17} aria-hidden="true" />}
                 {busy ? 'Envoi…' : decision === 'to_redo' ? 'Demander une reprise' : decision === 'validated' ? 'Valider la mission' : 'Envoyer le retour'}
               </button>
+              {graded && score === null && (
+                <p className="rv-left" id={`rv-left-${mission.id}`}>
+                  Notez chaque critère pour envoyer ({criteria.length - filled > 1 ? `${criteria.length - filled} critères restants` : '1 critère restant'}).
+                </p>
+              )}
             </form>
           ) : (
             <div className="rv-done">

@@ -3,15 +3,18 @@ import { Check, Clock3, Globe2, Lock } from 'lucide-react';
 import { languages as staticLanguages, languageStatusLabels, type LanguageStatus } from '../domain/languages';
 import './language-picker.css';
 
-/** Langue affichable : la liste statique (`domain/languages.ts`) ou la réponse de GET /languages conviennent. */
+/**
+ * Langue affichable : la réponse de GET /languages (niveaux du catalogue) ou la liste statique (`domain/languages.ts`, sans
+ * niveau en mode API : la carte dit alors seulement « Disponible »).
+ */
 export interface PickerLanguage {
   id: string;
   name: string;
   nativeName: string;
   status: LanguageStatus;
   position?: number;
-  /** Niveaux ouverts (codes, ou niveaux de GET /languages : seuls les publiés sont annoncés). */
-  levels?: readonly (string | { code: string; published?: boolean })[];
+  /** Niveaux de la langue (codes de la démonstration, ou niveaux de GET /languages : seuls les publiés sont annoncés). */
+  levels?: readonly (string | { code: string; published?: boolean; position?: number | null })[];
 }
 
 interface BaseProps {
@@ -20,7 +23,10 @@ interface BaseProps {
   /** Légende visuellement masquée quand l'écran porte déjà le titre (elle reste lue par les lecteurs d'écran). */
   hideLabel?: boolean;
   description?: ReactNode;
-  /** Langues proposées (défaut : liste statique). Rangées par `position` quand elle est fournie. */
+  /**
+   * Langues proposées, de préférence celles du catalogue (`useLanguages`) pour annoncer leurs niveaux publiés
+   * (défaut : liste statique, sans niveau en mode API). Rangées par `position` quand elle est fournie.
+   */
   languages?: readonly PickerLanguage[];
   /**
    * Restreint les langues sélectionnables (par exemple les langues du professeur pour une invitation).
@@ -79,10 +85,14 @@ function displayNames(language: PickerLanguage) {
   return { short, second, secondIsNative: second === native };
 }
 
+/** Niveaux ouverts d'une langue, dans l'ordre du catalogue (`position`) quand il est connu. */
 function openLevels(language: PickerLanguage) {
   return (language.levels ?? [])
-    .filter((level) => typeof level === 'string' || level.published !== false)
-    .map((level) => (typeof level === 'string' ? level : level.code));
+    .map((level, index) => (typeof level === 'string' ? { code: level, published: true, order: index }
+      : { code: level.code, published: level.published !== false, order: level.position ?? Infinity }))
+    .filter((level) => level.published)
+    .sort((a, b) => a.order - b.order)
+    .map((level) => level.code);
 }
 
 /**

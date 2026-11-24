@@ -2,19 +2,18 @@
 // Prépare un dépôt minimal autonome dans target, à partir de la V2 de référence (content/base/de) et des sources V3/V4.
 // Usage : node infra/content/build-v3.mjs [--v4]. La V4 officielle (content/de) est construite par build-v4.mjs, qui
 // reprend la composition des niveaux exportée ici (composeLevel) avant d'y fusionner les couches pédagogiques.
-import { copyFileSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { baseCredits, voiceAttribution } from './build-common.mjs';
 import { allMedia, baseDir, imageFile, loadLevel, root } from './content-lib.mjs';
 import { renderWorkbook } from './render-v3-workbook.mjs';
 import sounds from '../../content/v3/source/a1-sons.mjs';
 
 const sourceNote = 'LinguaCap V3, textes et exercices originaux inspirés par la progression de Deutsch im Blick (COERLL) et Der und mehr (KSU).';
 const levels = ['a1', 'a2'];
-export const voiceAttribution = {
-  credit: 'LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)',
-  license: 'Jeux de données des voix : CC0 et CC BY 4.0',
-};
+// Crédit des voix et crédits du kit : définis dans build-common.mjs (partagés avec build-v4 et build-b).
+export { voiceAttribution };
 
 function write(file, data) {
   mkdirSync(dirname(file), { recursive: true });
@@ -198,21 +197,8 @@ export async function composeLevel(levelId, { edition = 'v3' } = {}) {
   return { level, modules, specs };
 }
 
-/** Crédits des médias du kit, d'après ceux de la V2 de référence. */
-export function composeCredits(edition) {
-  const credits = JSON.parse(readFileSync(join(baseDir, 'media', 'credits.json'), 'utf8'));
-  credits.sources[0].changes += ' ; tempo de plusieurs enregistrements adapté au niveau en V3, hauteur conservée';
-  const voices = credits.sources.find(({ name }) => name.startsWith('Piper'));
-  Object.assign(voices, {
-    name: 'Piper 1.8 · Thorsten et Kerstin',
-    author: 'Thorsten Müller, OHF Voice et Cori Samuel (Hi-Fi TTS, locutrice 92)',
-    license: 'Données Thorsten et modèle de base rdh : CC0. Données Kerstin : CC0. Voix de base Hi-Fi TTS de Cori Samuel : CC BY 4.0.',
-    url: 'https://huggingface.co/rhasspy/piper-voices/tree/cf910fb59f1d79ab3b625a63993a108751c6c25d/de/de_DE',
-    licenseUrl: 'https://creativecommons.org/licenses/by/4.0/',
-    used: `Toutes les synthèses vocales du kit ${edition.toUpperCase()}, avec débits progressifs par niveau.`,
-  });
-  return credits;
-}
+/** Crédits des médias du kit, d'après ceux de la V2 de référence (V3, ou V4 avant les couches). */
+export const composeCredits = (edition) => baseCredits(edition);
 
 async function compileLevel(levelId, edition, bundle) {
   const content = join(bundle, 'content', 'de');
@@ -238,7 +224,7 @@ async function main() {
   const kitDirectory = edition === 'v4' ? 'linguacap-cours-v4-complete-kit' : 'linguacap-cours-v3-kit';
   const bundle = join(root, 'target', kitDirectory);
   for (const level of levels) await compileLevel(level, edition, bundle);
-  const kit = ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'icons.txt'];
+  const kit = ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'level-profiles.mjs', 'icons.txt'];
   for (const name of kit) copy(join(root, 'infra', 'content', name), join(bundle, 'infra', 'content', name));
   write(join(bundle, 'content', 'de', 'media', 'credits.json'), composeCredits(edition));
   copy(join(root, 'content', edition, 'README.md'), join(bundle, 'README.md'));

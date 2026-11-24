@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.ws.rs.WebApplicationException;
 import java.time.LocalDate;
 import java.util.List;
@@ -25,6 +27,14 @@ class PathRulesTest {
     private static final Caller TEACHER = new Caller(false, true, false, true);
     private static final Caller ADMIN = new Caller(false, false, true, true);
 
+    private static JsonNode json(String text) {
+        try {
+            return new ObjectMapper().readTree(text.replace('\'', '"'));
+        } catch (Exception error) {
+            throw new IllegalArgumentException(error);
+        }
+    }
+
     private static int status(org.junit.jupiter.api.function.Executable rule) {
         return assertThrows(WebApplicationException.class, rule).getResponse().getStatus();
     }
@@ -41,7 +51,25 @@ class PathRulesTest {
     }
 
     @Test
+    void lePrerequisDUneEtapeEstLuDansLeCatalogueEtNonDeduitDuRang() {
+        JsonNode b1 = json("{'levelCode': 'B1', 'planning': {'prerequisiteLevelCode': 'A2'}}");
+        assertEquals("A2", PathRules.prerequisiteOf(b1));
+        // Le catalogue décide : un B1 dont le prérequis a été changé en A1 n'exige plus A2 (le rang dirait A2).
+        JsonNode changed = json("{'levelCode': 'B1', 'planning': {'prerequisiteLevelCode': 'A1'}}");
+        assertEquals("A1", PathRules.prerequisiteOf(changed));
+        // Un niveau sans prérequis au catalogue (C1 de démonstration, premier niveau) n'en a pas, quel que soit son rang.
+        assertNull(PathRules.prerequisiteOf(json("{'levelCode': 'C1', 'planning': {'prerequisiteLevelCode': null}}")));
+        assertNull(PathRules.prerequisiteOf(json("{'levelCode': 'A1', 'planning': {}}")));
+        assertNull(PathRules.prerequisiteOf(json("{'levelCode': 'B1', 'planning': {'prerequisiteLevelCode': 'b1'}}")),
+                "un code hors de l'échelle est ignoré");
+        assertNull(PathRules.prerequisiteOf(null));
+    }
+
+    @Test
     void lesCiblesAutoriseesSontLesNiveauxPubliesConsecutifsAuDessusDuDepart() {
+        assertEquals(List.of("A2", "B1"), PathRules.allowedTargets("A1", Set.of("A1", "A2", "B1")), "B1 publié : proposé");
+        assertEquals(List.of("A2", "B1"), PathRules.allowedTargets("A1", Set.of("A1", "A2", "B1", "C1")),
+                "l'enchaînement s'arrête au premier niveau non publié (B2)");
         assertEquals(List.of("A1", "A2"), PathRules.allowedTargets("A0", Set.of("A1", "A2")));
         assertEquals(List.of("A2"), PathRules.allowedTargets("A1", Set.of("A1", "A2", "B2")));
         assertEquals(List.of(), PathRules.allowedTargets("A2", Set.of("A1", "A2")));

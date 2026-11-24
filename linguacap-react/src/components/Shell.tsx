@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { Activity, BookOpen, CalendarDays, ChartNoAxesCombined, ClipboardList, Files, LayoutDashboard, Menu, MessageSquare, Users, X } from 'lucide-react';
 import { isApiMode } from '../app/config';
 import type { Role } from '../domain/types';
+import { levelSeries, usePublicOffer } from '../integration/languages';
 
 const primaryLinks = [
   { path: '/', title: 'Accueil', end: true },
@@ -64,11 +65,13 @@ export function Header() {
 }
 
 export function Footer() {
+  // Niveaux publiés lus dans le catalogue (« Allemand · A1, A2 et B1 ») ; sans la liste, la langue seule.
+  const offer = usePublicOffer();
   return (
     <footer className="site-footer">
       <div className="container footer-inner">
         <Logo footer />
-        <span>Allemand · A1 et A2 · Apprendre à son rythme</span>
+        <span>{offer.languages}{offer.codes.length ? ` · ${levelSeries(offer.codes)}` : ''} · Apprendre à son rythme</span>
         <Link to="/integration"><Activity size={15} /> État du service</Link>
         {!isApiMode && <span className="footer-mode">Données de démonstration</span>}
       </div>

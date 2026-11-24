@@ -27,14 +27,40 @@ export const startLevels: readonly StartLevel[] = ['A0', ...levelCodes];
 // Catalogue
 // ---------------------------------------------------------------------------------------------------------------------
 
+/**
+ * Niveau d'une langue au catalogue (GET /languages), dans l'ordre de `position`. Source de vérité de la disponibilité :
+ * `published` (une version attribuable existe). L'échelle `levelCodes` ne dit jamais qu'un niveau est ouvert.
+ */
 export interface LanguageLevel {
   code: LevelCode; title: string; published: boolean; trackVersionId: string | null;
   plannedMinutes: number | null; moduleCount: number;
+  /** Position au catalogue (1 = premier niveau) ; null si elle n'est pas renseignée (trié en dernier). */
+  position: number | null;
+  /** Niveau prérequis au catalogue (`A2` pour `B1`) ; null pour un premier niveau. */
+  prerequisiteCode: LevelCode | null;
 }
-/** GET /languages */
+/** GET /languages (utilisateur connecté). */
 export interface Language {
   id: string; name: string; nativeName: string; status: 'available' | 'coming_soon';
   position: number; placementAvailable: boolean; levels: LanguageLevel[];
+  /** Codes des paliers de la banque de test publiée, dans l'ordre (`['A1','A2','B1']`) ; [] sans banque publiée. */
+  placementTiers: LevelCode[];
+}
+/** Niveau publié d'une langue, vu sans compte (vitrine, connexion, pied de page). */
+export interface PublicLanguageLevel {
+  code: LevelCode; title: string;
+  /** Position au catalogue ; null si elle n'est pas renseignée (trié en dernier). */
+  position: number | null;
+  moduleCount: number;
+  /** Durée prévue de la version publiée (activités, révisions, bilan et examen blanc). */
+  plannedMinutes: number | null;
+}
+/**
+ * GET /public/languages (sans authentification, `Cache-Control: public, max-age=300`) : langues ayant au moins un
+ * niveau publié, et leurs seuls niveaux publiés dans l'ordre de `position`. Une langue sans niveau publié est absente.
+ */
+export interface PublicLanguage {
+  id: string; name: string; nativeName: string; position: number; levels: PublicLanguageLevel[];
 }
 export type PlacementTestStatus = 'draft' | 'published' | 'retired';
 /** GET /catalogue/placement-tests */
@@ -225,6 +251,22 @@ export interface Estimate {
   requiredWeeklyMinutes: number; requiredDailyMinutes: { fiveDays: number; sevenDays: number }; difficulty: Difficulty;
   bands: DifficultyBand[]; allowedTargets: LevelCode[]; minTargetDate: string; maxTargetDate: string; suggestedAvailability: Day[];
 }
+/** Durée conseillée d'un niveau publié pour un modèle de rythme (mois entiers, au moins 1). */
+export interface TemplateDuration { levelCode: LevelCode; months: number; plannedMinutes: number }
+/**
+ * Élément de GET /learning/templates (modèles Standard et Intensif). `durations` : un élément par niveau publié, dans
+ * l'ordre du catalogue. A1 et A2 gardent leurs durées calibrées ; tout autre niveau suit
+ * `max(1, ceil(plannedMinutes × 1,10 / minutes par semaine du modèle / 4,345))`.
+ */
+export interface TemplateView {
+  id: 'standard' | 'intensive'; name: string; description: string; days: Day[];
+  durations: TemplateDuration[];
+  /** @deprecated Durée ISO 8601 (`P5M`) du niveau A1 : lire `durations`. */
+  a1Duration: string;
+  /** @deprecated Durée ISO 8601 (`P5M`) du niveau A2 : lire `durations`. */
+  a2Duration: string;
+}
+
 export type OnboardingStepId = 'language' | 'placement' | 'result' | 'objective' | 'days' | 'planning' | 'start';
 export interface OnboardingStep { id: OnboardingStepId; status: 'done' | 'current' | 'todo' | 'skipped' | 'blocked' }
 export type OnboardingBlockedReason = 'language_unavailable' | 'placement_unavailable' | 'no_target_available';

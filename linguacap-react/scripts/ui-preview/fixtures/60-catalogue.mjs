@@ -117,7 +117,11 @@ const catalogue = [
     status: 'published', prerequisiteLevelId: 'a1', prerequisiteLevelCode: 'A1', versions: [
       { id: 'v-a2-2', number: 2, status: 'published', publishedAt: day(-12), retiredAt: null, updatedAt: day(-12) },
       { id: 'v-a2-1', number: 1, status: 'retired', publishedAt: day(-70), retiredAt: day(-12), updatedAt: day(-70) }] },
-  { id: 'b1', code: 'B1', title: 'Allemand B1', description: null, position: 3, status: 'draft', prerequisiteLevelId: 'a2', prerequisiteLevelCode: 'A2', versions: [] },
+  { id: 'b1', code: 'B1', title: 'Allemand B1', description: 'Raconter, expliquer, défendre un avis et agir dans la vie courante et au travail.', position: 3,
+    status: 'published', prerequisiteLevelId: 'a2', prerequisiteLevelCode: 'A2', versions: [
+      { id: 'v-b1-1', number: 1, status: 'published', publishedAt: day(0, 9), retiredAt: null, updatedAt: day(0, 9) }] },
+  { id: 'b2', code: 'B2', title: 'Allemand B2', description: 'Argumenter, nuancer et comprendre des textes complexes.', position: 4, status: 'draft',
+    prerequisiteLevelId: 'b1', prerequisiteLevelCode: 'B1', versions: [] },
 ];
 
 // Médiathèque : le module « Essen » complet et quelques médias d'autres modules.

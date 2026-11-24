@@ -3,7 +3,6 @@ package org.linguacap.identity;
 import java.time.Duration;
 import java.time.OffsetDateTime;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -12,6 +11,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.UUID;
 import java.util.regex.Pattern;
+import org.linguacap.common.Cefr;
 import org.linguacap.common.HttpError;
 import org.linguacap.identity.IdentityResource.TeacherProfileRequest;
 
@@ -25,8 +25,6 @@ final class AccountRules {
     /** Langues connues du catalogue (codes ISO 639-1). Seules les langues ouvertes peuvent être choisies. */
     static final Set<String> KNOWN_LANGUAGES = Set.of("de", "en", "es", "it", "pt", "nl", "fr", "ar", "zh", "ja", "ru",
             "ko", "tr", "pl");
-    /** Niveaux du cadre européen, dans l'ordre de progression. */
-    static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
     static final Set<Integer> GRADING_DELAYS = Set.of(24, 48, 72, 168);
     static final int MAX_BIO_LENGTH = 500;
     private static final Pattern EMAIL = Pattern.compile("[^\\s@]+@[^\\s@]+\\.[^\\s@]+");
@@ -216,10 +214,11 @@ final class AccountRules {
         if (languages.isEmpty()) {
             throw HttpError.badRequest("Indiquez au moins une langue enseignée.");
         }
-        Set<String> levels = new TreeSet<>(Comparator.comparingInt(LEVELS::indexOf));
+        // Échelle du CECRL (Cefr) : un professeur peut déclarer un niveau que le catalogue ne propose pas encore.
+        Set<String> levels = new TreeSet<>(Cefr.ORDER);
         for (String level : request.levels()) {
             String code = level == null ? "" : level.strip().toUpperCase(Locale.ROOT);
-            if (!LEVELS.contains(code)) {
+            if (!Cefr.isLevel(code)) {
                 throw HttpError.badRequest("Les niveaux enseignés vont de A1 à C2.");
             }
             levels.add(code);

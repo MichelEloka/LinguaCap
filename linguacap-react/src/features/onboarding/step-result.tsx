@@ -1,14 +1,16 @@
 /**
  * Étape 3 : révélation du niveau. Le L arrive sur la station « Votre niveau », puis la médaille du niveau apparaît avec
- * éclat ; viennent ensuite le détail par palier et par compétence, et l'accès à l'objectif.
+ * éclat ; viennent ensuite le détail par palier et par compétence, et l'accès à l'objectif. Le parcours suivant est lu dans
+ * le catalogue (GET /languages) : premier niveau publié au-dessus du niveau atteint, ou niveau en préparation (« bientôt »).
  */
 import type { CSSProperties } from 'react';
 import { ArrowRight, BookOpen, Headphones, Info, LibraryBig, Sparkles, Sprout } from 'lucide-react';
 import { Badge } from '../../components/ui';
 import { Callout, ProgressRing } from '../../design/kit';
+import { nextCatalogueLevel, nextPublishedLevel } from '../../integration/languages';
 import {
-  competenceLabels, onboardingBlockedMessages, placementTierStatusLabels, type CompetenceScore, type OnboardingState, type PlacementTier,
-  type PlacementView,
+  competenceLabels, onboardingBlockedMessages, placementTierStatusLabels, type CompetenceScore, type Language, type OnboardingState,
+  type PlacementTier, type PlacementView,
 } from '../../integration/v2';
 import { JourneyActions, JourneyQuestion, JourneyStage } from '../journey';
 import { LevelMark, levelName, momentText, ofLanguage } from './onboarding-kit';
@@ -57,14 +59,18 @@ function TierCard({ tier, index }: { tier: PlacementTier; index: number }) {
   );
 }
 
-export function StepResult({ attempt, state, languageName, onBack, onContinue }: {
-  attempt: PlacementView; state: OnboardingState; languageName: string; onBack: () => void; onContinue: () => void;
+export function StepResult({ attempt, state, language, languageName, onBack, onContinue }: {
+  attempt: PlacementView; state: OnboardingState; language: Language | null; languageName: string; onBack: () => void; onContinue: () => void;
 }) {
   const { direction, leave } = useScene();
   const result = attempt.result;
   const placed = result?.placedLevel ?? 'A0';
   const beginner = placed === 'A0';
   const blocked = state.blockedReason === 'no_target_available';
+  // Parcours suivant (repli du résumé du serveur) : publié, sinon le niveau du catalogue en préparation, jamais présenté
+  // comme ouvert.
+  const next = nextPublishedLevel(language, placed);
+  const upcoming = next ? null : nextCatalogueLevel(language, placed);
   const reached = attempt.tiers.filter((tier) => tier.percent !== null || tier.status !== 'locked');
   return (
     <JourneyStage className="lo-result">
@@ -84,6 +90,7 @@ export function StepResult({ attempt, state, languageName, onBack, onContinue }:
             <h2 id="lo-reveal-title">{result?.label ?? levelName(placed)}</h2>
             <p>{result?.summary || (beginner
               ? 'Vous partez du tout début : le parcours vous fera découvrir la langue pas à pas, sans prérequis.'
+              : next ? `Votre parcours commencera au niveau ${next.code}, juste au-dessus du vôtre, pour ne pas refaire ce que vous savez déjà.`
               : 'Votre parcours commencera juste au-dessus de ce niveau, pour ne pas refaire ce que vous savez déjà.')}</p>
             <div className="lo-reveal-tags">
               {result?.declaredBeginner && <span>Débutant déclaré</span>}
@@ -103,8 +110,10 @@ export function StepResult({ attempt, state, languageName, onBack, onContinue }:
         )}
 
         {blocked && (
-          <Callout tone="info" title="Aucun parcours au-dessus de votre niveau pour l’instant">
-            <p>{onboardingBlockedMessages.no_target_available}</p>
+          <Callout tone="info" title={upcoming ? `Le parcours ${upcoming.code} arrive bientôt` : 'Aucun parcours au-dessus de votre niveau pour l’instant'}>
+            <p>{upcoming
+              ? `Votre niveau dépasse les parcours publiés pour le moment : le parcours ${upcoming.code} est en préparation et apparaîtra dans votre bibliothèque dès sa publication. D’ici là, la bibliothèque reste à votre disposition.`
+              : onboardingBlockedMessages.no_target_available}</p>
           </Callout>
         )}
         <p className="lo-note"><Info size={15} aria-hidden="true" /> {result?.declaredBeginner

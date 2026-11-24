@@ -46,7 +46,8 @@ class ContractRoutesTest {
         }
     }
 
-    record Operation(String method, String template, String path, boolean declared) {}
+    /** `open` : opération déclarée sans authentification (`security: []`), relayée sans session. */
+    record Operation(String method, String template, String path, boolean declared, boolean open) {}
 
     static JsonNode contract() throws IOException {
         return new ObjectMapper().readTree(CONTRACT.toFile());
@@ -89,7 +90,9 @@ class ContractRoutesTest {
             }
             matcher.appendTail(concrete);
             for (String method : METHODS) {
-                operations.add(new Operation(method, template, concrete.toString(), item.has(method)));
+                JsonNode security = item.path(method).path("security");
+                boolean open = item.has(method) && security.isArray() && security.isEmpty();
+                operations.add(new Operation(method, template, concrete.toString(), item.has(method), open));
             }
         }
         return operations;
@@ -100,21 +103,41 @@ class ContractRoutesTest {
         return method.equals("get") ? spec : spec.contentType(ContentType.JSON).body("{}");
     }
 
+    /**
+     * Une route déclarée répond 401 sans session ; une route publique (`security: []`) est relayée sans session et répond
+     * ici 503, car ce profil ne configure pas le secret interne des services ; une méthode non déclarée répond 404.
+     */
     @TestFactory
     Stream<DynamicTest> laPasserelleRouteExactementLeContrat() throws IOException {
         List<Operation> operations = operations();
         assertFalse(operations.stream().noneMatch(Operation::declared), "Le contrat ne déclare aucune route.");
         return operations.stream().map(operation -> DynamicTest.dynamicTest(
                 operation.method().toUpperCase() + " " + operation.template()
-                        + (operation.declared() ? " est routée" : " est refusée"),
+                        + (operation.open() ? " est relayée sans session" : operation.declared() ? " est routée" : " est refusée"),
                 () -> request(operation.method())
                         .when().request(operation.method().toUpperCase(), "/api/v1" + operation.path())
                         .then()
-                        .statusCode(operation.declared() ? 401 : 404)
+                        .statusCode(operation.open() ? 503 : operation.declared() ? 401 : 404)
                         .contentType(ContentType.JSON)
                         .header("Cache-Control", "no-store")
-                        .body("code", equalTo(operation.declared() ? "UNAUTHENTICATED" : "NOT_FOUND"))
+                        .body("code", equalTo(operation.open() ? "UNAVAILABLE" : operation.declared() ? "UNAUTHENTICATED" : "NOT_FOUND"))
                         .body("message", not(emptyOrNullString()))));
+    }
+
+    @Test
+    void leContratNeDeclareQueDeuxRoutesSansSession() throws IOException {
+        JsonNode paths = contract().path("paths");
+        List<String> open = new ArrayList<>();
+        for (Map.Entry<String, JsonNode> entry : paths.properties()) {
+            for (String method : METHODS) {
+                JsonNode security = entry.getValue().path(method).path("security");
+                if (entry.getValue().has(method) && security.isArray() && security.isEmpty()) {
+                    open.add(method.toUpperCase() + " " + entry.getKey());
+                }
+            }
+        }
+        org.junit.jupiter.api.Assertions.assertEquals(List.of("GET /health", "GET /public/languages"), open,
+                "Toute route sans session doit être examinée : données publiques en lecture seule uniquement.");
     }
 
     @Test

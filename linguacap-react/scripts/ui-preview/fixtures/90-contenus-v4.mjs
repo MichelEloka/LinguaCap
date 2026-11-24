@@ -16,7 +16,7 @@ const A1 = 'b1000000-0000-4000-8000-0000000000a1';
 let bundle = null;
 let generation = 0;
 
-async function freshMock() {
+export async function freshMock() {
   if (!bundle) {
     const { build } = require('esbuild');
     const result = await build({ entryPoints: [join(app, 'src', 'integration', 'mock-api.ts')], bundle: true, format: 'esm', platform: 'neutral', write: false, logLevel: 'silent' });
@@ -67,7 +67,7 @@ async function gradedPractice(mock) {
 }
 
 /** Détourne l'API de la page vers le simulateur sous le rôle donné, ouvre l'écran puis joue les gestes éventuels. */
-function scenario(role, prepare, path, then) {
+export function scenario(role, prepare, path, then) {
   return async (page) => {
     const mock = await freshMock();
     const data = await prepare(mock);
@@ -97,7 +97,7 @@ const openActivity = (title) => async (page) => {
   await page.getByRole('button', { name: new RegExp(title.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')) }).first().click();
   await page.waitForTimeout(900);
 };
-const scrollTo = (text) => async (page) => {
+export const scrollTo = (text) => async (page) => {
   await page.getByText(text).first().scrollIntoViewIfNeeded({ timeout: 3_000 }).catch(() => undefined);
   await page.waitForTimeout(500);
 };
@@ -156,7 +156,7 @@ function draftVersion(mock) {
   return mock.as('equipe')('/catalogue/levels/a1/versions', { method: 'POST', body: {} });
 }
 /** Clic tolérant : l'écran est capturé même si l'élément n'existe pas (l'aperçu signale alors l'écart à l'œil). */
-function tryClick(role, name) {
+export function tryClick(role, name) {
   return async (page) => {
     await page.getByRole(role, { name }).first().click({ timeout: 3_000 }).catch(() => undefined);
     await page.waitForTimeout(700);

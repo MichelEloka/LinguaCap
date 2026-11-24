@@ -13,10 +13,11 @@ import {
 import { Badge, EmptyState, PageHeading, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
 import { Avatar, Callout, Card, Drawer, Facts, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { languageById, nextPublishedLevel, publishedLevels, targetChoices, useLanguages } from '../../integration/languages';
 import { pilotToday } from '../../integration/pilot-day';
 import {
   competenceLabels, contractStatusLabels, contractStatusTones, difficultyCodes, difficultyLabels,
-  difficultyThresholds, difficultyTones, feasibilityLabels, formatMinutes, levelCodes, levelLabel, levelRank, placementTierStatusLabels,
+  difficultyThresholds, difficultyTones, feasibilityLabels, formatMinutes, levelLabel, levelRank, placementTierStatusLabels,
   startLevels, weekdayLabels, weekdayShortLabels, weeklyCapacity,
   type Contract, type ContractTerms, type Day, type Difficulty, type DifficultyBand, type Estimate, type LevelCode, type LevelSpan,
   type PathProposal, type PathView, type PendingContract, type PlacementSummary, type PlacementView, type StartLevel,
@@ -321,10 +322,11 @@ function MinutesStepper({ label, value, onChange, min = 30, max = 2520, step = 1
 /**
  * Formulaire de contrat : niveau de départ, niveau visé, date cible, engagement hebdomadaire, jours et note, avec
  * l'estimation du serveur recalculée à chaque changement. `kind` : contre-proposition (contrat en attente du
- * professeur) ou avenant (contrat en vigueur).
+ * professeur) ou avenant (contrat en vigueur). Niveaux visés : ceux publiés dans la langue de l'élève (`languageId`,
+ * GET /languages) au-dessus du départ ; le serveur dit lesquels sont permis (`allowedTargets`).
  */
-export function ContractForm({ learnerId, learnerName, pathId, base, token, formId, kind, onBusy, onSent }: {
-  learnerId: string; learnerName: string; pathId: string; base: ContractTerms; token: string; formId: string;
+export function ContractForm({ learnerId, learnerName, pathId, languageId, base, token, formId, kind, onBusy, onSent }: {
+  learnerId: string; learnerName: string; pathId: string; languageId: string | null; base: ContractTerms; token: string; formId: string;
   kind: 'counter' | 'amendment'; onBusy: (busy: boolean) => void; onSent: (contract: Contract) => void;
 }) {
   const [startLevel, setStartLevel] = useState<StartLevel>(base.startLevel);
@@ -368,7 +370,10 @@ export function ContractForm({ learnerId, learnerName, pathId, base, token, form
   const unrealistic = estimate?.difficulty.code === 'unrealistic';
   const unchanged = startLevel === base.startLevel && targetLevel === base.targetLevel && targetDate === base.targetDate && weekly === base.weeklyMinutes;
   const ready = Boolean(estimate) && !estimateError && !unrealistic && targetAllowed && !unchanged && targetDate >= minDate;
-  const targets = levelCodes.filter((code) => levelRank(code) > levelRank(startLevel));
+  const { languages } = useLanguages(token);
+  const language = languageById(languages, languageId);
+  const open = new Set(publishedLevels(language).map((level) => level.code));
+  const targets = targetChoices(language, startLevel, [...(allowed ?? []), targetLevel]);
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -408,7 +413,7 @@ export function ContractForm({ learnerId, learnerName, pathId, base, token, form
           <select value={startLevel} onChange={(event) => {
             const next = event.target.value as StartLevel;
             setStartLevel(next);
-            if (levelRank(targetLevel) <= levelRank(next)) setTargetLevel(levelCodes.find((code) => levelRank(code) > levelRank(next)) ?? targetLevel);
+            if (levelRank(targetLevel) <= levelRank(next)) setTargetLevel(nextPublishedLevel(language, next)?.code ?? targetLevel);
           }}>
             {startLevels.filter((level) => level !== 'C2').map((level) => <option key={level} value={level}>{levelLabel(level)}</option>)}
           </select>
@@ -423,10 +428,13 @@ export function ContractForm({ learnerId, learnerName, pathId, base, token, form
         <div className="sct-pills" role="radiogroup" aria-label="Niveau visé">
           {targets.map((code) => {
             const disabled = Boolean(allowed && !allowed.includes(code));
+            // Connu du catalogue et non publié : « Non publié » ; publié mais refusé depuis ce départ : « Indisponible ».
+            const unpublished = Boolean(language) && !open.has(code);
             return (
               <button key={code} type="button" role="radio" aria-checked={targetLevel === code} className="sct-pill" disabled={disabled}
-                onClick={() => setTargetLevel(code)} title={disabled ? 'Parcours non publié pour ce niveau' : undefined}>
-                <strong>{code}</strong><small>{disabled ? 'Non publié' : levelLabel(code).split(' · ')[1] ?? ''}</small>
+                onClick={() => setTargetLevel(code)}
+                title={disabled ? unpublished ? 'Parcours non publié pour ce niveau' : 'Niveau indisponible depuis ce point de départ' : undefined}>
+                <strong>{code}</strong><small>{disabled ? unpublished ? 'Non publié' : 'Indisponible' : levelLabel(code).split(' · ')[1] ?? ''}</small>
               </button>
             );
           })}
@@ -454,7 +462,8 @@ export function ContractForm({ learnerId, learnerName, pathId, base, token, form
               <DifficultyGauge difficulty={estimate.difficulty} bands={estimate.bands}
                 caption={<>Environ <strong>{formatMinutes(estimate.requiredDailyMinutes.fiveDays)}</strong> par jour sur cinq jours, ou {formatMinutes(estimate.requiredDailyMinutes.sevenDays)} sur sept, pendant {plural(Math.round(estimate.weeks), 'semaine', 'semaines')}.</>} />
               {unrealistic && <Callout tone="warning" title="Objectif irréaliste">Repoussez la date cible ou visez un niveau plus proche : ce contrat serait refusé.</Callout>}
-              {!targetAllowed && <Callout tone="warning">Ce niveau n’a pas encore de parcours publié.</Callout>}
+              {!targetAllowed && <Callout tone="warning">{language && !open.has(targetLevel)
+                ? 'Ce niveau n’a pas encore de parcours publié.' : 'Ce niveau n’est pas proposé depuis ce point de départ.'}</Callout>}
             </>
           )}
       </section>
@@ -545,8 +554,10 @@ function PlanningSection({ pathId, terms, token }: { pathId: string; terms: Cont
  * Fiche de décision d'un contrat en attente, dans un panneau latéral large. Sans contrat (`contract: null`), le panneau
  * s'ouvre directement sur le formulaire d'avenant à partir des conditions en vigueur (`base`).
  */
-export function ContractDecision({ pathId, learnerId, learnerName, contract, base, token, onClose, onDone }: {
+export function ContractDecision({ pathId, learnerId, learnerName, languageId = null, contract, base, token, onClose, onDone }: {
   pathId: string; learnerId: string; learnerName: string; contract: Contract | null; base: ContractTerms; token: string;
+  /** Langue de l'élève, pour proposer ses niveaux publiés ; lue dans son parcours si elle n'est pas fournie. */
+  languageId?: string | null;
   onClose: () => void; onDone: () => void;
 }) {
   const toast = useToast();
@@ -559,7 +570,8 @@ export function ContractDecision({ pathId, learnerId, learnerName, contract, bas
   const pid = encodeURIComponent(pathId);
   const id = encodeURIComponent(learnerId);
   const first = learnerName.trim().split(/\s+/)[0] || learnerName;
-  const path = useLoad<PathView | null>(() => contract ? requestApi<PathView | null>(`/learning/path?learnerId=${id}`, token) : Promise.resolve(null), [id, token, Boolean(contract)]);
+  const needsPath = Boolean(contract) || !languageId;
+  const path = useLoad<PathView | null>(() => needsPath ? requestApi<PathView | null>(`/learning/path?learnerId=${id}`, token) : Promise.resolve(null), [id, token, needsPath]);
   const history = useLoad<Contract[]>(() => contract ? requestApi<Contract[]>(`/learning/paths/${pid}/contracts`, token) : Promise.resolve([]), [pid, token, Boolean(contract)]);
   const decidable = Boolean(contract && (contract.canAccept || contract.canReject) && contract.status === 'pending_teacher');
 
@@ -609,7 +621,8 @@ export function ContractDecision({ pathId, learnerId, learnerName, contract, bas
         ? `Contrat n° ${contract.number} · proposé ${proposerPhrases[contract.proposedBy]} le ${formatDay(contract.createdAt)}`
         : undefined}>
       {proposing ? (
-        <ContractForm learnerId={learnerId} learnerName={learnerName} pathId={pathId} base={terms} token={token} formId={formId}
+        <ContractForm learnerId={learnerId} learnerName={learnerName} pathId={pathId} languageId={languageId ?? path.data?.languageId ?? null}
+          base={terms} token={token} formId={formId}
           kind={contract ? 'counter' : 'amendment'} onBusy={setBusy} onSent={(sent) => {
             toast(contract ? `Contre-proposition envoyée à ${learnerName} (contrat n° ${sent.number}).` : `Avenant envoyé à ${learnerName} (contrat n° ${sent.number}).`);
             onDone();
@@ -779,7 +792,7 @@ export function ContractsPage({ admin, token }: { admin: boolean; token: string 
 
       {opened && (
         <ContractDecision key={`${opened.pathId}-${opened.contract.number}`} pathId={opened.pathId} learnerId={opened.learnerId}
-          learnerName={opened.learnerName} contract={opened.contract} base={opened.contract.terms} token={token}
+          learnerName={opened.learnerName} languageId={opened.languageId} contract={opened.contract} base={opened.contract.terms} token={token}
           onClose={() => open(null)} onDone={() => { open(null); pending.reload(); }} />
       )}
     </div>

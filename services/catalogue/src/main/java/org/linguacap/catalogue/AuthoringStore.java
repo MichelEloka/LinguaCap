@@ -439,15 +439,32 @@ class AuthoringStore {
         });
     }
 
-    /** Retire une version des nouvelles attributions ; les élèves inscrits gardent l'accès à leur version. */
+    /**
+     * Retire une version des nouvelles attributions ; les élèves inscrits gardent l'accès à leur version. Le niveau
+     * reflète sa disponibilité : sans autre version publiée, il repasse en brouillon (GET /levels ne le propose plus,
+     * GET /languages le marque non publié) jusqu'à la prochaine publication.
+     */
     VersionSummary retire(UUID versionId) {
         return transaction("retire version", connection -> {
+            String levelId;
             try (var update = connection.prepareStatement("""
                     update catalogue.track_versions set status = 'retired', retired_at = now()
                     where id = ? and status = 'published'
+                    returning level_id
                     """)) {
                 update.setObject(1, versionId);
-                if (update.executeUpdate() == 0) throw HttpError.conflict("Seule une version publiée peut être retirée.");
+                try (var rows = update.executeQuery()) {
+                    if (!rows.next()) throw HttpError.conflict("Seule une version publiée peut être retirée.");
+                    levelId = rows.getString("level_id");
+                }
+            }
+            try (var level = connection.prepareStatement("""
+                    update catalogue.levels l set status = 'draft'
+                    where l.id = ? and l.status = 'published'
+                      and not exists (select 1 from catalogue.track_versions v where v.level_id = l.id and v.status = 'published')
+                    """)) {
+                level.setString(1, levelId);
+                level.executeUpdate();
             }
             return summary(connection, versionId);
         });

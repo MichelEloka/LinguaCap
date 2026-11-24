@@ -11,8 +11,9 @@ import {
 import { Badge, Dialog, PageHeading } from '../../components/ui';
 import { Avatar, Callout, Card, Drawer, Skeleton, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { languageById, publishedLevels, targetChoices, useLanguages } from '../../integration/languages';
 import {
-  contractProposerLabels, contractStatusTones, formatMinutes, gradingDelayLabels, levelCodes, levelRank,
+  contractProposerLabels, contractStatusTones, formatMinutes, gradingDelayLabels,
   type Contract, type ContractTerms, type Estimate, type GradingDelayHours, type LevelCode, type PathView, type TeacherCard,
 } from '../../integration/v2';
 import {
@@ -122,7 +123,11 @@ function ContractForm({ token, path, base, title, description, accompanied, onCl
   const unrealistic = estimate?.difficulty.code === 'unrealistic';
   const below = Boolean(estimate) && weeklyMinutes < needed;
   const unchanged = targetLevel === base.targetLevel && targetDate === base.targetDate && weeklyMinutes === base.weeklyMinutes;
-  const targets = levelCodes.filter((code) => levelRank(code) > levelRank(path.startLevel));
+  // Niveaux visés : ceux publiés dans la langue du parcours au-dessus du départ (et la cible en cours, toujours visible).
+  const { languages } = useLanguages(token);
+  const language = languageById(languages, path.languageId);
+  const open = new Set(publishedLevels(language).map((level) => level.code));
+  const targets = targetChoices(language, path.startLevel, [...(estimate?.allowedTargets ?? []), base.targetLevel, targetLevel]);
 
   async function send() {
     setBusy(true);
@@ -151,8 +156,10 @@ function ContractForm({ token, path, base, title, description, accompanied, onCl
         <div className="lct-targets">
           {targets.map((code) => {
             const allowed = estimate ? estimate.allowedTargets.includes(code) : code === targetLevel;
+            const unpublished = Boolean(language) && !open.has(code);
             return (
-              <button key={code} type="button" className={`lct-target lvl-${code}`} aria-pressed={targetLevel === code} disabled={!allowed} onClick={() => setTargetLevel(code)}>
+              <button key={code} type="button" className={`lct-target lvl-${code}`} aria-pressed={targetLevel === code} disabled={!allowed} onClick={() => setTargetLevel(code)}
+                title={allowed ? undefined : unpublished ? 'Parcours non publié pour ce niveau' : 'Niveau indisponible depuis votre point de départ'}>
                 <LevelMark code={code} size="sm" state={allowed ? undefined : 'locked'} /> {code}
               </button>
             );

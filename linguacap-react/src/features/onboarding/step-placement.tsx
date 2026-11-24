@@ -10,6 +10,7 @@ import {
 } from 'lucide-react';
 import { AudioPlayer, Callout, ProgressRing } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { countWord } from '../../integration/languages';
 import {
   levelLabel, onboardingBlockedMessages, PLACEMENT_DONT_KNOW, placementTierStatusLabels, type LevelCode, type OnboardingState,
   type PlacementQuestion, type PlacementTier, type PlacementView,
@@ -32,18 +33,27 @@ function tierTitle(code: string, title?: string | null) {
   return text || (levelLabel(code).split(' · ')[1] ?? '');
 }
 const LETTERS = 'ABCDEFGH';
-const introTiers: LevelCode[] = ['A1', 'A2', 'B1'];
 
-export function StepPlacement({ token, state, attempt, languageName, onBack, onShowResult, onAttempt, onStarted, onCompleted }: {
-  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; onBack: () => void; onShowResult: () => void;
+/** Durée annoncée du test : environ 8 minutes par palier, au moins dix minutes (« 10 à 25 minutes » pour trois paliers). */
+function testDuration(tierCount: number) {
+  return `10 à ${Math.max(15, Math.ceil((tierCount * 25) / 3 / 5) * 5)} minutes`;
+}
+
+/**
+ * `tiers` : paliers de la banque de test publiée (GET /languages, `placementTiers`), du plus simple au plus exigeant. Ils
+ * illustrent l'introduction ; pendant le test, palier courant et suivant viennent de la tentative.
+ */
+export function StepPlacement({ token, state, attempt, languageName, tiers, onBack, onShowResult, onAttempt, onStarted, onCompleted }: {
+  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; tiers: readonly LevelCode[];
+  onBack: () => void; onShowResult: () => void;
   onAttempt: (view: PlacementView) => void; onStarted: (view: PlacementView) => Promise<void>; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
   if (attempt?.status === 'in_progress') {
     return <PlacementQuiz key={`${attempt.id}-${attempt.currentTier ?? ''}`} token={token} attempt={attempt} onAttempt={onAttempt} onCompleted={onCompleted} />;
   }
   return (
-    <PlacementIntro token={token} state={state} attempt={attempt} languageName={languageName} onBack={onBack} onShowResult={onShowResult}
-      onStarted={onStarted} onCompleted={onCompleted} />
+    <PlacementIntro token={token} state={state} attempt={attempt} languageName={languageName} tiers={tiers} onBack={onBack}
+      onShowResult={onShowResult} onStarted={onStarted} onCompleted={onCompleted} />
   );
 }
 
@@ -51,9 +61,9 @@ export function StepPlacement({ token, state, attempt, languageName, onBack, onS
 // Introduction
 // ---------------------------------------------------------------------------------------------------------------------
 
-function PlacementIntro({ token, state, attempt, languageName, onBack, onShowResult, onStarted, onCompleted }: {
-  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; onBack: () => void; onShowResult: () => void;
-  onStarted: (view: PlacementView) => Promise<void>; onCompleted: (view: PlacementView) => Promise<void>;
+function PlacementIntro({ token, state, attempt, languageName, tiers, onBack, onShowResult, onStarted, onCompleted }: {
+  token: string; state: OnboardingState; attempt: PlacementView | null; languageName: string; tiers: readonly LevelCode[];
+  onBack: () => void; onShowResult: () => void; onStarted: (view: PlacementView) => Promise<void>; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
   const { direction } = useScene();
   const [busy, setBusy] = useState<'test' | 'beginner' | null>(null);
@@ -79,8 +89,11 @@ function PlacementIntro({ token, state, attempt, languageName, onBack, onShowRes
     }
   }
 
+  const count = tiers.length;
+  const tierCount = count > 1 ? `${countWord(count).replace(/^./, (letter) => letter.toUpperCase())} paliers au plus`
+    : count === 1 ? 'Un seul palier' : 'Quelques paliers';
   const tips = [
-    { icon: <Timer size={18} />, title: '10 à 25 minutes', text: 'Trois paliers au plus, une question à la fois.' },
+    { icon: <Timer size={18} />, title: count ? testDuration(count) : 'À votre rythme', text: `${tierCount}, une question à la fois.` },
     { icon: <Headphones size={18} />, title: 'Lecture et écoute', text: 'Prévoyez des écouteurs : chaque son se réécoute.' },
     { icon: <CircleHelp size={18} />, title: 'Le droit de ne pas savoir', text: 'Mieux vaut l’avouer que deviner : le résultat sera plus juste.' },
     { icon: <CloudCheck size={18} />, title: 'Rien n’est perdu', text: 'Chaque réponse est enregistrée : reprenez quand vous voulez.' },
@@ -97,15 +110,18 @@ function PlacementIntro({ token, state, attempt, languageName, onBack, onShowRes
         eyebrow={`Test de niveau · ${languageName}`}
         title={completed ? 'Votre test est terminé' : `Situons votre niveau ${ofLanguage(languageName)}`} description={description}>
         {!completed && (
-          <div className="lo-test-intro">
-            <ol className="lo-stairs" aria-label="Paliers du test">
-              {introTiers.map((code, index) => (
-                <li key={code} className={`lvl-${code}`} style={{ '--step': index } as CSSProperties}>
-                  <LevelMark code={code} size="lg" />
-                  <span className="lo-stair-text"><strong>Palier {code}</strong><small>{levelLabel(code).split(' · ')[1]}</small></span>
-                </li>
-              ))}
-            </ol>
+          <div className="lo-test-intro" style={count ? undefined : { gridTemplateColumns: 'minmax(0, 1fr)' }}>
+            {count > 0 && (
+              <ol className="lo-stairs" aria-label="Paliers du test" style={{ gridTemplateColumns: `repeat(${count}, minmax(0, 1fr))` }}>
+                {tiers.map((code, index) => (
+                  // Marches de 46 % à 94 % de la hauteur quel que soit le nombre de paliers (`--step` de 0 à 2, pas de 24 %).
+                  <li key={code} className={`lvl-${code}`} style={{ '--step': count > 1 ? (index * 2) / (count - 1) : 2 } as CSSProperties}>
+                    <LevelMark code={code} size="lg" />
+                    <span className="lo-stair-text"><strong>Palier {code}</strong><small>{levelLabel(code).split(' · ')[1]}</small></span>
+                  </li>
+                ))}
+              </ol>
+            )}
             <ul className="lo-tips lc-stagger">
               {tips.map((tip) => (
                 <li key={tip.title}>
@@ -241,7 +257,8 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
   token: string; attempt: PlacementView; onAttempt: (view: PlacementView) => void; onCompleted: (view: PlacementView) => Promise<void>;
 }) {
   const { direction: sceneDirection } = useScene();
-  const tier = attempt.currentTier ?? attempt.tiers.find((item) => item.status === 'current')?.code ?? 'A1';
+  // Palier en cours lu dans la tentative (le premier palier de la banque si le serveur ne le désigne pas).
+  const tier: LevelCode | null = attempt.currentTier ?? attempt.tiers.find((item) => item.status === 'current')?.code ?? attempt.tiers[0]?.code ?? null;
   const questions = attempt.questions;
   const titleId = useId();
   const [answers, setAnswers] = useState<Record<string, string>>(() => ({ ...attempt.savedAnswers }));
@@ -251,7 +268,7 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
   const [save, setSave] = useState<SaveStatus>('idle');
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
-  const [passed, setPassed] = useState<{ tier: PlacementTier; next: PlacementView } | null>(null);
+  const [passed, setPassed] = useState<{ tier: PlacementTier; next: PlacementView; nextCode: LevelCode } | null>(null);
   const timer = useRef<number | undefined>(undefined);
   const advanceTimer = useRef<number | undefined>(undefined);
   const swapTimer = useRef<number | undefined>(undefined);
@@ -350,7 +367,7 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
       submitKey.current = null;
       if (view.status === 'completed') { await onCompleted(view); return; }
       const result = view.tiers.find((item) => item.code === tier);
-      if (result && view.currentTier && view.currentTier !== tier) setPassed({ tier: result, next: view });
+      if (result && view.currentTier && view.currentTier !== tier) setPassed({ tier: result, next: view, nextCode: view.currentTier });
       else onAttempt(view);
       setBusy(false);
     } catch (failure) {
@@ -361,10 +378,10 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
 
   if (passed) return <TierPassed passed={passed} onNext={() => onAttempt(passed.next)} />;
 
-  if (!question) {
+  if (!question || !tier) {
     return (
       <JourneyStage>
-        <JourneyQuestion stepKey="quiz-empty" direction={sceneDirection} eyebrow={tierName(tier, tierInfo?.title)} title="Aucune question pour ce palier"
+        <JourneyQuestion stepKey="quiz-empty" direction={sceneDirection} eyebrow={tier ? tierName(tier, tierInfo?.title) : 'Test de niveau'} title="Aucune question pour ce palier"
           description="Ce palier ne contient pas de question. Réessayez plus tard." />
       </JourneyStage>
     );
@@ -446,9 +463,9 @@ function PlacementQuiz({ token, attempt, onAttempt, onCompleted }: {
 }
 
 /** Palier réussi : médaille du score, échelle des paliers et passage au palier suivant. */
-function TierPassed({ passed, onNext }: { passed: { tier: PlacementTier; next: PlacementView }; onNext: () => void }) {
+function TierPassed({ passed, onNext }: { passed: { tier: PlacementTier; next: PlacementView; nextCode: LevelCode }; onNext: () => void }) {
   const { direction } = useScene();
-  const nextCode = passed.next.currentTier ?? 'A2';
+  const { nextCode } = passed;
   const nextTier = passed.next.tiers.find((item) => item.code === nextCode);
   const score = passed.tier.percent ?? 0;
   return (

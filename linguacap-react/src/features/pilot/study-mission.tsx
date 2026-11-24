@@ -1,23 +1,30 @@
 /**
  * Missions (V4) : tâche de communication réelle, faite et remise dans l'application. L'élève lit la situation, enregistre
- * sa réponse orale (2 minutes au plus), rédige son texte (1 500 caractères au plus, avec les lettres allemandes), coche
+ * sa réponse orale (5 minutes au plus), rédige son texte (3 000 caractères au plus, avec les lettres allemandes), coche
  * sa liste d'auto-vérification, puis envoie la mission à son professeur (ou à son correcteur). Il voit ensuite le statut
  * (envoyée, validée, à reprendre), le retour du professeur, et peut reprendre la mission. Les mêmes blocs de lecture
  * servent à la fiche élève et aux résultats (`MissionWork`, `MissionDetailDrawer`).
+ *
+ * Niveaux B : la mission a une grille de critères (20 points). L'élève la voit avant la remise (« Comment votre production
+ * sera évaluée ») ; après le retour, il voit ses points par critère, son score, la décision et le commentaire, avec la
+ * légende des codes de correction. Sans correcteur (mission `sent`), la grille lui sert d'auto-évaluation, non
+ * enregistrée. Consignes, liste de vérification et critères sont bilingues (bilingual.tsx).
  */
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 import {
   AlertTriangle, ArrowRight, Check, CheckCircle2, Circle, CloudCheck, Target, GraduationCap, Hourglass, ListChecks, LoaderCircle, Mic,
-  PenLine, RotateCcw, Send, Sparkles,
+  PenLine, RotateCcw, Scale, Send, Sparkles,
 } from 'lucide-react';
 import { Badge, type BadgeTone } from '../../components/ui';
-import { AudioPlayer, Callout, Drawer, Facts, ProgressRing, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
+import { AudioPlayer, Callout, Drawer, Facts, ProgressRing, Segmented, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import {
-  countWords, missionLimits, type MissionDefinition, type MissionStartRequest, type MissionStatus, type MissionSummary,
-  type MissionUpdateRequest, type MissionView, type UploadReservation,
+  correctionCodes, countWords, missionCriteriaOf, missionLimits, missionMaxScore, missionPassPercent, missionScore, type MissionCriterion,
+  type MissionDefinition, type MissionStartRequest, type MissionStatus, type MissionSummary, type MissionUpdateRequest, type MissionView,
+  type UploadReservation,
 } from '../../integration/v4';
+import { BilingualText, FrenchHelpSwitch, GlossNote, glossUnits, hasFoldedHelp, hasGloss, type GlossMode } from './bilingual';
 import { LessonContent } from './LessonContent';
 import type { Placement } from './LearnerSession';
 import { MediaSequence } from './study-media';
@@ -90,12 +97,298 @@ export function MissionBadge({ mission, viewer = 'learner' }: { mission: Paramet
 
 /** Repères de la mission : parties demandées et liste de vérification. */
 function MissionChips({ definition }: { definition: MissionDefinition }) {
+  const criteria = missionCriteriaOf(definition);
   return (
     <ul className="ms-chips" aria-label="Ce que demande la mission">
       {definition.oral && <li><Mic size={14} aria-hidden="true" /> Oral · {duration(definition.oral.maxSeconds)} au plus</li>}
       {definition.written && <li><PenLine size={14} aria-hidden="true" /> Écrit{definition.written.minWords ? ` · ${definition.written.minWords} mots au moins` : ''}</li>}
       <li><ListChecks size={14} aria-hidden="true" /> {plural(definition.checklist.length, 'point', 'points')} à vérifier</li>
+      {criteria.length > 0 && <li><Scale size={14} aria-hidden="true" /> Grille sur {missionMaxScore(criteria)} points</li>}
     </ul>
+  );
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Grille de critères (niveaux B) : avant la remise, après le retour, en auto-évaluation
+// ---------------------------------------------------------------------------------------------------------------------
+
+/** Libellé d'un critère : nom (« Tâche »), précision (« tous les points sont traités… ») et traduction éventuelle. */
+export function criterionParts(label: string): { name: string; detail: string; fr: string | null; mode: GlossMode } {
+  const unit = hasGloss(label) ? glossUnits(label)[0] : null;
+  const main = unit ? unit.de.join(' ') : label;
+  const match = main.match(/^(.{2,60}?)\s?:\s+(.+)$/s);
+  const detail = match ? match[2].trim() : '';
+  return {
+    name: (match ? match[1] : main).trim(), detail: detail.charAt(0).toLocaleUpperCase('fr') + detail.slice(1),
+    fr: unit?.fr ?? null, mode: unit?.mode ?? 'beside',
+  };
+}
+
+/** Nom, précision et traduction d'un critère. */
+export function CriterionLabel({ label }: { label: string }) {
+  const parts = criterionParts(label);
+  const lang = parts.fr ? 'de' : undefined;
+  return (
+    <span className="ms-crit-label">
+      <strong lang={lang}>{parts.name}</strong>
+      {parts.detail && <span className="ms-crit-detail" lang={lang}>{parts.detail}</span>}
+      {parts.fr && <GlossNote fr={parts.fr} mode={parts.mode} />}
+    </span>
+  );
+}
+
+const points = (count: number) => `${count} pt${count > 1 ? 's' : ''}`;
+/** Score minimal pour la présélection « validée » (12 sur 20). */
+export const passScore = (maxScore: number) => Math.ceil((maxScore * missionPassPercent) / 100);
+
+/** Grille vue par l'élève avant la remise : « Comment votre production sera évaluée ». */
+export function MissionGrid({ criteria, autonomous = false }: { criteria: readonly MissionCriterion[]; autonomous?: boolean }) {
+  const max = missionMaxScore(criteria);
+  const titleId = useId();
+  return (
+    <section className="ms-grid" aria-labelledby={titleId}>
+      <header className="ms-grid-head">
+        <span className="ms-grid-icon" aria-hidden="true"><Scale size={18} /></span>
+        <div>
+          <h3 id={titleId}>Comment votre production sera évaluée</h3>
+          <p>{plural(criteria.length, 'critère')} · {max} points</p>
+        </div>
+      </header>
+      <ol className="ms-rubric is-plan">
+        {criteria.map((criterion) => (
+          <li key={criterion.id} className="ms-crit">
+            <CriterionLabel label={criterion.label} />
+            <span className="ms-crit-max">{points(criterion.maxPoints)}</span>
+          </li>
+        ))}
+      </ol>
+      <p className="ms-grid-note">
+        {autonomous
+          ? 'Si aucun correcteur ne suit vos missions, vous vous évaluerez vous-même avec cette grille après l’envoi.'
+          : `Votre professeur note chaque critère et vous écrit un retour. Repère : ${passScore(max)}/${max} (${missionPassPercent} %) pour valider la mission ; la décision lui revient.`}
+      </p>
+    </section>
+  );
+}
+
+/** Points par critère et score après le retour du correcteur. */
+export function MissionResult({ criteria, points: given, score, maxScore, decision }: {
+  criteria: readonly MissionCriterion[]; points: Record<string, number>; score: number; maxScore: number; decision?: string | null;
+}) {
+  const percent = maxScore ? Math.round((score / maxScore) * 100) : 0;
+  const tone = percent >= missionPassPercent ? 'success' : 'warning';
+  return (
+    <section className={`ms-result is-${tone}`} aria-label="Points par critère">
+      <div className="ms-result-total">
+        <ProgressRing value={percent} size={78} stroke={7} color={`var(--${tone})`} label={`Score : ${score} sur ${maxScore}`}>
+          <strong className="ms-result-score">{score}<small>/{maxScore}</small></strong>
+        </ProgressRing>
+        <div className="ms-result-text">
+          <p className="ms-result-kicker">Score sur la grille</p>
+          <p className="ms-result-line"><b>{score} / {maxScore}</b> points · {percent} %</p>
+          {decision && <Badge tone={decision === 'to_redo' ? 'amber' : 'green'}>{decision === 'to_redo' ? 'À reprendre' : 'Validée'}</Badge>}
+        </div>
+      </div>
+      <ol className="ms-rubric is-result">
+        {criteria.map((criterion) => {
+          const value = given[criterion.id] ?? 0;
+          const ratio = criterion.maxPoints ? value / criterion.maxPoints : 0;
+          return (
+            <li key={criterion.id} className={`ms-crit${ratio < missionPassPercent / 100 ? ' is-low' : ''}`}>
+              <CriterionLabel label={criterion.label} />
+              <span className="ms-crit-score">
+                <span className="ms-crit-bar" aria-hidden="true"><i style={{ ['--v' as string]: `${Math.max(4, ratio * 100)}%` }} /></span>
+                <span className="ms-crit-value"><b>{value}</b>/{criterion.maxPoints}<span className="sr-only"> points</span></span>
+              </span>
+            </li>
+          );
+        })}
+      </ol>
+    </section>
+  );
+}
+
+/**
+ * Auto-évaluation sur la grille, pour l'élève sans correcteur (mission `sent`) : rien n'est enregistré, le total se
+ * calcule en direct. Elle s'accompagne de la recommandation d'un correcteur pour les niveaux B.
+ */
+export function SelfAssessment({ criteria, missionId }: { criteria: readonly MissionCriterion[]; missionId: string }) {
+  const [given, setGiven] = useState<Record<string, number>>({});
+  const max = missionMaxScore(criteria);
+  const score = missionScore(criteria, given);
+  const filled = criteria.filter((criterion) => given[criterion.id] !== undefined).length;
+  const total = criteria.reduce((sum, criterion) => sum + (given[criterion.id] ?? 0), 0);
+  const weakest = score === null ? null : [...criteria].sort((a, b) => (given[a.id] ?? 0) / a.maxPoints - (given[b.id] ?? 0) / b.maxPoints)[0];
+  return (
+    <section className="ms-self" aria-labelledby={`ms-self-${missionId}`}>
+      <header className="ms-grid-head">
+        <span className="ms-grid-icon is-self" aria-hidden="true"><Scale size={18} /></span>
+        <div>
+          <h4 id={`ms-self-${missionId}`}>Évaluez-vous avec la grille</h4>
+          <p>Pour vous seul : cette auto-évaluation n’est pas enregistrée.</p>
+        </div>
+      </header>
+      <ol className="ms-rubric is-self">
+        {criteria.map((criterion) => (
+          <li key={criterion.id} className="ms-crit">
+            <CriterionLabel label={criterion.label} />
+            <fieldset className="ms-self-scale">
+              <legend className="sr-only">{criterionParts(criterion.label).name} : vos points sur {criterion.maxPoints}</legend>
+              {Array.from({ length: criterion.maxPoints + 1 }, (_, value) => (
+                <label key={value} className={`ms-self-pill${given[criterion.id] === value ? ' is-checked' : ''}`}>
+                  <input type="radio" name={`ms-self-${missionId}-${criterion.id}`} value={value} checked={given[criterion.id] === value}
+                    onChange={() => setGiven((current) => ({ ...current, [criterion.id]: value }))} />
+                  <span>{value}</span>
+                </label>
+              ))}
+            </fieldset>
+          </li>
+        ))}
+      </ol>
+      <div className={`ms-self-total${score !== null ? (score >= passScore(max) ? ' is-pass' : ' is-low') : ''}`} role="status">
+        <span className="ms-self-sum"><b>{filled ? total : '–'}</b>/{max}</span>
+        <span>
+          {score === null
+            ? `${filled}/${criteria.length} critères évalués : notez chaque critère pour obtenir votre total.`
+            : score >= passScore(max)
+              ? `Selon votre grille, la tâche est réussie (${passScore(max)}/${max} au moins).${weakest ? ` Point à soigner : ${criterionParts(weakest.label).name.toLowerCase()}.` : ''}`
+              : `Selon votre grille, la mission est à reprendre${weakest ? ` : travaillez d’abord ${criterionParts(weakest.label).name.toLowerCase()}` : ''}, puis refaites-la.`}
+        </span>
+      </div>
+      <Callout tone="tip" title="Un correcteur pour les niveaux B">
+        Aux niveaux B, un professeur ou un correcteur vous fait progresser plus vite : il note chaque critère et vous dit quoi
+        retravailler. Demandez à être suivi pour vos prochaines missions.
+      </Callout>
+    </section>
+  );
+}
+
+/** Légende des codes de correction de l'écrit, la même pour le correcteur et pour l'élève. */
+export function CorrectionCodes({ title = 'Codes de correction' }: { title?: string }) {
+  return (
+    <div className="ms-codes">
+      <p className="ms-codes-title">{title}</p>
+      <ul className="ms-codes-list">
+        {correctionCodes.map((entry) => <li key={entry.code}><b>{entry.code}</b><span>{entry.label}</span></li>)}
+      </ul>
+    </div>
+  );
+}
+
+/** Score d'une remise notée sur grille (« 14/20 »), coloré selon le seuil de 60 %. */
+export function MissionScoreTag({ mission }: { mission: Pick<MissionSummary, 'score' | 'maxScore'> }) {
+  if (mission.score === null || !mission.maxScore) return null;
+  const pass = mission.score >= passScore(mission.maxScore);
+  return (
+    <span className={`ms-score-tag${pass ? ' is-pass' : ' is-low'}`} title="Score sur la grille">
+      {mission.score}<small>/{mission.maxScore}</small><span className="sr-only"> points sur la grille</span>
+    </span>
+  );
+}
+
+/** Remises notées sur grille relues une fois (leurs points ne changent plus après le retour). */
+const scoredViews = new Map<string, MissionView>();
+
+/**
+ * Points par critère des missions notées sur grille : GET /assessments/missions/{id} pour chaque remise de la liste
+ * qui a un score. `null` pendant la lecture.
+ */
+export function useScoredMissions(token: string | null | undefined, missions: MissionSummary[] | null) {
+  const key = (missions ?? []).filter((mission) => mission.score !== null && mission.maxScore).map((mission) => mission.id).join(',');
+  const [views, setViews] = useState<MissionView[] | null>(null);
+  useEffect(() => {
+    if (!token || !key) { setViews([]); return; }
+    let active = true;
+    Promise.all(key.split(',').map((id) => {
+      const known = scoredViews.get(id);
+      if (known) return Promise.resolve(known);
+      return requestApi<MissionView>(`/assessments/missions/${encodeURIComponent(id)}`, token)
+        .then((view) => { scoredViews.set(id, view); return view; }, () => null);
+    })).then((list) => { if (active) setViews(list.filter((view): view is MissionView => Boolean(view?.review?.points))); });
+    return () => { active = false; };
+  }, [token, key]);
+  return views;
+}
+
+interface CriterionAverage { id: string; name: string; earned: number; max: number; percent: number; count: number }
+interface LevelAverages { level: string; missions: number; score: number; maxScore: number; latest: number; criteria: CriterionAverage[] }
+
+/** Moyenne par critère et par niveau (en pourcentage des points possibles : l'écrit compte sur 5, l'oral sur 4). */
+function averagesByLevel(views: MissionView[]): LevelAverages[] {
+  const levels = new Map<string, LevelAverages & { byId: Map<string, CriterionAverage> }>();
+  for (const view of views) {
+    const review = view.review;
+    if (!review?.points) continue;
+    const entry = levels.get(view.levelCode) ?? { level: view.levelCode, missions: 0, score: 0, maxScore: 0, latest: 0, criteria: [], byId: new Map() };
+    entry.missions += 1;
+    entry.score += review.score ?? 0;
+    entry.maxScore += review.maxScore ?? 0;
+    entry.latest = Math.max(entry.latest, new Date(review.reviewedAt).getTime());
+    for (const criterion of missionCriteriaOf(view.definition)) {
+      const value = review.points[criterion.id];
+      if (typeof value !== 'number') continue;
+      const average = entry.byId.get(criterion.id) ?? { id: criterion.id, name: criterionParts(criterion.label).name, earned: 0, max: 0, percent: 0, count: 0 };
+      average.earned += value;
+      average.max += criterion.maxPoints;
+      average.count += 1;
+      entry.byId.set(criterion.id, average);
+    }
+    levels.set(view.levelCode, entry);
+  }
+  return [...levels.values()].map(({ byId, ...level }) => ({
+    ...level,
+    criteria: [...byId.values()].map((average) => ({ ...average, percent: average.max ? Math.round((average.earned / average.max) * 100) : 0 })),
+  })).sort((a, b) => b.latest - a.latest);
+}
+
+const decimal = new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 1 });
+
+/**
+ * Moyenne par critère des missions notées sur grille, niveau par niveau : repère une faiblesse durable (la cohérence,
+ * par exemple). Rien ne s'affiche tant qu'aucune mission n'est notée sur grille.
+ */
+export function MissionCriteriaAverages({ views, viewer = 'staff' }: { views: MissionView[] | null; viewer?: 'learner' | 'staff' }) {
+  const levels = useMemo(() => averagesByLevel(views ?? []), [views]);
+  const [chosen, setChosen] = useState<string | null>(null);
+  const current = levels.find((level) => level.level === chosen) ?? levels[0];
+  if (!current) return null;
+  const ordered = current.criteria;
+  const weakest = ordered.reduce<CriterionAverage | null>((low, item) => (!low || item.percent < low.percent ? item : low), null);
+  const strongest = ordered.reduce<CriterionAverage | null>((high, item) => (!high || item.percent > high.percent ? item : high), null);
+  const average = current.maxScore ? (current.score / current.maxScore) * 20 : 0;
+  return (
+    <section className="ms-avg" aria-label={viewer === 'learner' ? 'Mes critères sur la grille' : 'Moyenne par critère'}>
+      <header className="ms-avg-head">
+        <span className="ms-grid-icon" aria-hidden="true"><Scale size={18} /></span>
+        <div>
+          <h3>{viewer === 'learner' ? 'Mes critères sur la grille' : 'Moyenne par critère'}</h3>
+          <p>{plural(current.missions, 'mission notée', 'missions notées')} · score moyen {decimal.format(average)}/20</p>
+        </div>
+        {levels.length > 1 && (
+          <Segmented label="Niveau" value={current.level} onChange={setChosen}
+            options={levels.map((level) => ({ value: level.level, label: level.level }))} />
+        )}
+      </header>
+      <ul className="ms-avg-list">
+        {ordered.map((item) => {
+          const low = item.percent < missionPassPercent;
+          const isWeakest = weakest?.id === item.id && low && ordered.length > 1;
+          const isStrongest = strongest?.id === item.id && item.percent >= 75 && ordered.length > 1;
+          return (
+            <li key={item.id} className={`ms-avg-row${low ? ' is-low' : ''}`}>
+              <span className="ms-avg-name">
+                <strong>{item.name}</strong>
+                {isWeakest && <Badge tone="amber">{viewer === 'learner' ? 'À travailler' : 'Point faible'}</Badge>}
+                {isStrongest && <Badge tone="green">Point fort</Badge>}
+              </span>
+              <span className="ms-avg-meter" aria-hidden="true"><i style={{ ['--v' as string]: `${Math.max(3, item.percent)}%` }} /><b style={{ ['--t' as string]: `${missionPassPercent}%` }} /></span>
+              <span className="ms-avg-value"><b>{item.percent} %</b>{item.count !== current.missions && <small>{plural(item.count, 'mission')}</small>}</span>
+            </li>
+          );
+        })}
+      </ul>
+      <p className="ms-avg-note">Points obtenus sur les points possibles, toutes missions de {current.level} notées sur grille ; repère à {missionPassPercent} %.</p>
+    </section>
   );
 }
 
@@ -109,7 +402,7 @@ export function MissionWork({ mission, viewer = 'learner' }: { mission: MissionV
       {definition.oral && (
         <section className="ms-work-part" aria-label="Production orale">
           <header><span className="ms-part-icon is-oral" aria-hidden="true"><Mic size={16} /></span><h4>{mine ? 'Mon enregistrement' : 'Production orale'}</h4></header>
-          {definition.oral.prompt && <p className="ms-work-prompt">{definition.oral.prompt}</p>}
+          {definition.oral.prompt && <p className="ms-work-prompt"><BilingualText text={definition.oral.prompt} /></p>}
           {mission.recording?.url
             ? <div className="ms-audio"><AudioPlayer src={mission.recording.url} title={mine ? 'Mon enregistrement' : 'Enregistrement de l’élève'} /></div>
             : <p className="ms-work-empty">{mission.recording ? 'Enregistrement reçu : son adresse d’écoute a expiré, rouvrez la page.' : 'Aucun enregistrement.'}</p>}
@@ -121,7 +414,7 @@ export function MissionWork({ mission, viewer = 'learner' }: { mission: MissionV
             <span className="ms-part-icon is-written" aria-hidden="true"><PenLine size={16} /></span><h4>{mine ? 'Mon texte' : 'Production écrite'}</h4>
             <span className="ms-work-count">{plural(words, 'mot')} · {thousands.format(mission.text.length)} caractères</span>
           </header>
-          {definition.written.prompt && <p className="ms-work-prompt">{definition.written.prompt}</p>}
+          {definition.written.prompt && <p className="ms-work-prompt"><BilingualText text={definition.written.prompt} /></p>}
           <div className="ms-paper" lang="de">
             {mission.text.trim()
               ? mission.text.replace(/\r/g, '').split('\n').map((line, index) => (line.trim() ? <p key={index}>{line}</p> : <span key={index} className="ms-paper-gap" />))
@@ -141,7 +434,7 @@ export function MissionWork({ mission, viewer = 'learner' }: { mission: MissionV
             return (
               <li key={index} className={done ? 'is-done' : undefined}>
                 {done ? <CheckCircle2 size={17} aria-hidden="true" /> : <Circle size={17} aria-hidden="true" />}
-                <span>{item}</span><span className="sr-only">{done ? ' : coché' : ' : non coché'}</span>
+                <span><BilingualText text={item} /></span><span className="sr-only">{done ? ' : coché' : ' : non coché'}</span>
               </li>
             );
           })}
@@ -156,19 +449,54 @@ function TeacherMark() {
   return <span className="ms-teacher" aria-hidden="true"><GraduationCap size={20} /></span>;
 }
 
-/** Retour du professeur ou du correcteur. */
-export function MissionFeedback({ mission, viewer = 'learner' }: { mission: MissionView; viewer?: 'learner' | 'staff' }) {
-  if (!mission.review) return null;
-  const redo = mission.review.decision === 'to_redo';
-  const who = viewer === 'staff' ? 'Retour envoyé à l’élève' : mission.reviewerKind === 'reviewer' ? 'Retour de votre correcteur' : 'Retour de votre professeur';
+/** Intertitres du modèle de commentaire (« Points forts », « À retravailler », « Relance »), mis en valeur dans le retour. */
+const COMMENT_HEADS = /^(Points forts|À retravailler|Relance|Stärken|Zu überarbeiten|Weiterdenken)(\s*\([^)]*\))?\s*:\s*/;
+
+function CommentText({ text }: { text: string }) {
+  if (!text.split('\n').some((line) => COMMENT_HEADS.test(line))) return <>{text}</>;
   return (
+    <>
+      {text.split('\n').map((line, index) => {
+        const head = line.match(COMMENT_HEADS);
+        return (
+          <span key={index} className={`ms-comment-line${head ? ' has-head' : ''}`}>
+            {head ? <><strong>{head[1]}</strong>{line.slice(head[0].length)}</> : line}
+          </span>
+        );
+      })}
+    </>
+  );
+}
+
+/** Retour du professeur ou du correcteur. */
+export function MissionFeedback({ mission, viewer = 'learner', decision = false }: {
+  mission: MissionView; viewer?: 'learner' | 'staff';
+  /** Rappeler la décision à côté du score (panneau de détail, où le statut n'est pas déjà affiché en grand). */
+  decision?: boolean;
+}) {
+  const review = mission.review;
+  if (!review) return null;
+  const redo = review.decision === 'to_redo';
+  const who = viewer === 'staff' ? 'Retour envoyé à l’élève' : mission.reviewerKind === 'reviewer' ? 'Retour de votre correcteur' : 'Retour de votre professeur';
+  const criteria = missionCriteriaOf(mission.definition);
+  const scored = criteria.length > 0 && review.points && review.score !== null && review.maxScore;
+  const bubble = (
     <figure className={`ms-feedback${redo ? ' is-redo' : ' is-validated'}`}>
       <TeacherMark />
       <div className="ms-feedback-bubble">
-        <figcaption><strong>{who}</strong><time dateTime={mission.review.reviewedAt}>{dayTime.format(new Date(mission.review.reviewedAt))}</time></figcaption>
-        {mission.review.comment ? <blockquote>{mission.review.comment}</blockquote> : <p className="ms-work-empty">Sans commentaire.</p>}
+        <figcaption><strong>{who}</strong><time dateTime={review.reviewedAt}>{dayTime.format(new Date(review.reviewedAt))}</time></figcaption>
+        {review.comment ? <blockquote><CommentText text={review.comment} /></blockquote> : <p className="ms-work-empty">Sans commentaire.</p>}
       </div>
     </figure>
+  );
+  if (!criteria.length) return bubble;
+  return (
+    <div className="ms-review">
+      {scored && <MissionResult criteria={criteria} points={review.points ?? {}} score={review.score ?? 0} maxScore={review.maxScore ?? 0}
+        decision={decision ? review.decision : null} />}
+      {bubble}
+      <CorrectionCodes title={viewer === 'staff' ? 'Codes de correction' : 'Codes utilisés dans le retour'} />
+    </div>
   );
 }
 
@@ -185,6 +513,7 @@ function SaveIndicator({ status, at }: { status: SaveStatus; at: Date | null }) 
 /** Bandeau de statut d'une mission remise : envoyée, validée ou à reprendre, avec les étapes et la reprise. */
 function MissionStatusPanel({ mission, busy, onRestart, preview }: { mission: MissionView; busy: boolean; onRestart: () => void; preview: boolean }) {
   const recipient = mission.reviewerKind === 'reviewer' ? 'votre correcteur' : 'votre professeur';
+  const criteria = missionCriteriaOf(mission.definition);
   const redo = mission.status === 'reviewed' && mission.review?.decision === 'to_redo';
   const validated = mission.status === 'reviewed' && !redo;
   const content = validated
@@ -192,7 +521,9 @@ function MissionStatusPanel({ mission, busy, onRestart, preview }: { mission: Mi
     : redo
       ? { tone: 'is-redo', icon: <RotateCcw size={24} />, title: 'Mission à reprendre', text: 'Lisez le retour, puis reprenez la mission : votre texte précédent est repris dans le nouveau brouillon.' }
       : mission.status === 'sent'
-        ? { tone: 'is-sent', icon: <CheckCircle2 size={24} />, title: 'Mission enregistrée', text: 'Vous apprenez en autonomie : aucun professeur ne corrige cette mission. Relisez-vous avec la liste de vérification, et refaites-la quand vous voulez.' }
+        ? { tone: 'is-sent', icon: <CheckCircle2 size={24} />, title: 'Mission enregistrée', text: criteria.length
+          ? 'Vous apprenez en autonomie : aucun professeur ne corrige cette mission. Évaluez-vous avec la grille ci-dessous, puis refaites-la quand vous voulez.'
+          : 'Vous apprenez en autonomie : aucun professeur ne corrige cette mission. Relisez-vous avec la liste de vérification, et refaites-la quand vous voulez.' }
         : { tone: 'is-submitted', icon: <Send size={22} />, title: `Mission envoyée à ${recipient}`, text: `${recipient === 'votre correcteur' ? 'Votre correcteur' : 'Votre professeur'} vous répondra ici. En attendant, continuez votre séance.` };
   const steps: TimelineEntry[] = [
     { id: 'draft', title: 'Mission préparée', meta: dayTime.format(new Date(mission.createdAt)), tone: 'success', icon: <Check size={14} /> },
@@ -214,6 +545,7 @@ function MissionStatusPanel({ mission, busy, onRestart, preview }: { mission: Mi
         </div>
       </div>
       <MissionFeedback mission={mission} />
+      {mission.status === 'sent' && criteria.length > 0 && <SelfAssessment criteria={criteria} missionId={mission.id} />}
       <Timeline items={steps} />
       {(redo || mission.status === 'sent') && !preview && (
         <div className="ms-status-actions">
@@ -375,6 +707,10 @@ export function MissionActivity({ activity, token, sessionId, preview = false, o
 
   const written = definition.written;
   const oral = definition.oral;
+  const criteria = missionCriteriaOf(definition);
+  // Aide repliée (B2) hors de la situation : le réglage « Toujours afficher » est proposé une fois, sous la situation.
+  const helpSwitch = !hasFoldedHelp(activity.lesson?.description)
+    && [oral?.prompt, written?.prompt, ...definition.checklist, ...criteria.map((criterion) => criterion.label)].some((text) => hasFoldedHelp(text));
   const maxChars = Math.min(written?.maxChars ?? missionLimits.textChars, missionLimits.textChars);
   const words = countWords(text);
   const recorded = Boolean(mission?.recording);
@@ -446,6 +782,7 @@ export function MissionActivity({ activity, token, sessionId, preview = false, o
   const intro = (
     <>
       {activity.lesson?.description && <LessonContent text={activity.lesson.description} />}
+      {helpSwitch && <FrenchHelpSwitch />}
       {placements.length > 0 && <MediaSequence placements={placements} onRenew={onRenew ?? (() => undefined)} />}
     </>
   );
@@ -471,7 +808,10 @@ export function MissionActivity({ activity, token, sessionId, preview = false, o
         {actionError && <p className="inline-message warning" role="alert">{actionError}</p>}
         <details className="ms-recall">
           <summary><span>Revoir la situation et la consigne</span></summary>
-          <div className="ms-recall-body">{intro}</div>
+          <div className="ms-recall-body">
+            {intro}
+            {criteria.length > 0 && mission.status !== 'sent' && !mission.review && <MissionGrid criteria={criteria} />}
+          </div>
         </details>
         <section className="ms-sent-work" aria-label="Ce que vous avez envoyé">
           <h3>Ce que vous avez envoyé</h3>
@@ -497,6 +837,7 @@ export function MissionActivity({ activity, token, sessionId, preview = false, o
           <MissionChips definition={definition} />
         </div>
       </section>
+      {criteria.length > 0 && <MissionGrid criteria={criteria} autonomous={!preview && hasTeacher === false} />}
 
       <ol className="ms-steps">
         {oral && (
@@ -562,13 +903,30 @@ export function MissionActivity({ activity, token, sessionId, preview = false, o
           </header>
           <fieldset className="ms-checklist" disabled={preview}>
             <legend className="sr-only">Liste d’auto-vérification</legend>
-            {definition.checklist.map((item, index) => (
-              <label key={index} className={`ms-check${checked.includes(index) ? ' is-checked' : ''}`}>
-                <input type="checkbox" checked={checked.includes(index)} onChange={() => toggle(index)} />
-                <span className="ms-check-box" aria-hidden="true"><Check size={14} strokeWidth={3} /></span>
-                <span className="ms-check-text">{item}</span>
-              </label>
-            ))}
+            {definition.checklist.map((item, index) => {
+              const box = (
+                <>
+                  <input type="checkbox" checked={checked.includes(index)} onChange={() => toggle(index)} />
+                  <span className="ms-check-box" aria-hidden="true"><Check size={14} strokeWidth={3} /></span>
+                </>
+              );
+              // Aide repliée (B2) : son bouton reste hors de l'étiquette de la case.
+              const folded = hasFoldedHelp(item) ? glossUnits(item)[0] : null;
+              if (folded?.fr) {
+                return (
+                  <div key={index} className={`ms-check has-help${checked.includes(index) ? ' is-checked' : ''}`}>
+                    <label className="ms-check-hit">{box}<span className="ms-check-text" lang="de">{folded.de.join(' ')}</span></label>
+                    <span className="ms-check-help"><GlossNote fr={folded.fr} mode="fold" /></span>
+                  </div>
+                );
+              }
+              return (
+                <label key={index} className={`ms-check${checked.includes(index) ? ' is-checked' : ''}`}>
+                  {box}
+                  <span className="ms-check-text"><BilingualText text={item} /></span>
+                </label>
+              );
+            })}
           </fieldset>
         </li>
       </ol>
@@ -650,7 +1008,10 @@ export function MissionDetailDrawer({ token, missionId, viewer, onClose }: {
             {mission.definition.description && (
               <details className="ms-recall">
                 <summary><span>Situation et consigne</span></summary>
-                <div className="ms-recall-body"><LessonContent text={mission.definition.description} compact /></div>
+                <div className="ms-recall-body">
+                  <LessonContent text={mission.definition.description} compact />
+                  {missionCriteriaOf(mission.definition).length > 0 && !mission.review && <MissionGrid criteria={missionCriteriaOf(mission.definition)} />}
+                </div>
               </details>
             )}
             <MissionWork mission={mission} viewer={viewer} />

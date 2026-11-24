@@ -131,6 +131,36 @@ export const levels = [
       { id: 'v-a1-1', number: 1, status: 'retired', publishedAt: day(-30), retiredAt: day(-1), updatedAt: day(-30) }] },
   { id: 'a2', code: 'A2', title: 'Allemand A2', description: 'Échanges du quotidien', position: 2, status: 'published', prerequisiteLevelId: 'a1', prerequisiteLevelCode: 'A1',
     versions: [{ id: 'v-a2-2', number: 2, status: 'published', publishedAt: day(-1), retiredAt: null, updatedAt: day(-1) }] },
+  { id: 'b1', code: 'B1', title: 'Allemand B1', description: 'Raconter, expliquer, défendre un avis et agir dans la vie courante et au travail.', position: 3,
+    status: 'published', prerequisiteLevelId: 'a2', prerequisiteLevelCode: 'A2',
+    versions: [{ id: 'v-b1-1', number: 1, status: 'published', publishedAt: day(0, 9), retiredAt: null, updatedAt: day(0, 9) }] },
+  { id: 'b2', code: 'B2', title: 'Allemand B2', description: 'Argumenter, nuancer et comprendre des textes complexes.', position: 4, status: 'draft',
+    prerequisiteLevelId: 'b1', prerequisiteLevelCode: 'B1', versions: [] },
+];
+/**
+ * Niveaux dynamiques (cours B1 et B2) : A1, A2 et B1 publiés, B2 en brouillon (« Bientôt »). GET /languages (connecté) liste
+ * tous les niveaux du catalogue, GET /public/languages (sans compte) les seuls niveaux publiés.
+ */
+const languageLevel = (code, position, prerequisiteCode, published, plannedMinutes, moduleCount) => ({
+  code, title: `Allemand ${code}`, published, trackVersionId: published ? `v-${code.toLowerCase()}-${code === 'B1' ? 1 : 2}` : null,
+  plannedMinutes: published ? plannedMinutes : null, moduleCount: published ? moduleCount : 0, position, prerequisiteCode,
+});
+export const languages = [
+  { id: 'de', name: 'Allemand', nativeName: 'Deutsch', status: 'available', position: 1, placementAvailable: true, placementTiers: ['A1', 'A2', 'B1'],
+    levels: [languageLevel('A1', 1, null, true, 2596, 23), languageLevel('A2', 2, 'A1', true, 2410, 22),
+      languageLevel('B1', 3, 'A2', true, 3540, 24), languageLevel('B2', 4, 'B1', false)] },
+  { id: 'en', name: 'Anglais', nativeName: 'English', status: 'coming_soon', position: 2, placementAvailable: false, placementTiers: [], levels: [] },
+];
+export const publicLanguages = [{ id: 'de', name: 'Allemand', nativeName: 'Deutsch', position: 1,
+  levels: languages[0].levels.filter((level) => level.published).map(({ code, title, position, moduleCount, plannedMinutes }) => ({ code, title, position, moduleCount, plannedMinutes })) }];
+/** Modèles de rythme : durées par niveau publié (A1 et A2 calibrées, B1 par la formule : 6 mois et 2 mois). */
+export const templates = [
+  { id: 'standard', name: 'Standard', description: 'Une séance de 30 minutes du lundi au vendredi.', a1Duration: 'P5M', a2Duration: 'P5M',
+    days: [1, 2, 3, 4, 5].map((weekday) => ({ weekday, sessions: 1, minutes: 30 })),
+    durations: [{ levelCode: 'A1', months: 5, plannedMinutes: 2596 }, { levelCode: 'A2', months: 5, plannedMinutes: 2410 }, { levelCode: 'B1', months: 6, plannedMinutes: 3540 }] },
+  { id: 'intensive', name: 'Intensif', description: 'Deux séances de 45 minutes chaque jour ; durée selon le niveau.', a1Duration: 'P1M', a2Duration: 'P2M',
+    days: [1, 2, 3, 4, 5, 6, 7].map((weekday) => ({ weekday, sessions: 2, minutes: 45 })),
+    durations: [{ levelCode: 'A1', months: 1, plannedMinutes: 2596 }, { levelCode: 'A2', months: 2, plannedMinutes: 2410 }, { levelCode: 'B1', months: 2, plannedMinutes: 3540 }] },
 ];
 export const assets = [...media.values()].slice(0, 10).map((item, index) => ({
   id: item.key, kind: item.kind, title: `${item.title} [${item.key}]`, mimeType: item.kind === 'audio' ? 'audio/mpeg' : 'image/png',
@@ -143,9 +173,9 @@ export const queue = [
 ];
 export const missions = [
   { id: 'm-1', activityId: 'a1-essen-sprechen', title: 'Mission : mes habitudes alimentaires', levelCode: 'A1', moduleId: 'a1-essen', status: 'reviewed',
-    decision: 'validated', submittedAt: day(-2, 19), reviewedAt: day(-1, 9), sessionId: 's2' },
+    decision: 'validated', submittedAt: day(-2, 19), reviewedAt: day(-1, 9), sessionId: 's2', score: null, maxScore: null },
   { id: 'm-2', activityId: 'a1-hallo-sprechen', title: 'Mission : se présenter au groupe', levelCode: 'A1', moduleId: 'a1-hallo', status: 'submitted',
-    decision: null, submittedAt: day(0, 8), reviewedAt: null, sessionId: 's3' },
+    decision: null, submittedAt: day(0, 8), reviewedAt: null, sessionId: 's3', score: null, maxScore: null },
 ];
 export const reviews = [
   { kind: 'mission', id: 'm-2', learnerId: 'u-l1', learnerName: 'Camille Martin', title: 'Mission : se présenter au groupe', levelCode: 'A1', context: 'session', submittedAt: day(0, 8) },
@@ -189,7 +219,9 @@ export function api(role, method, rawPath) {
   }
   if (/\/progress$/.test(path)) return { session: sessions[2], enrollmentId: 'e1', levelCode: 'A1', activities: activitiesOf(['a1-essen-wortschatz', 'a1-essen-dialog', 'a1-essen-esskultur']) };
   if (/^\/learning\/enrollments\/[^/]+\/proposal$/.test(path)) return proposal;
-  if (path === '/learning/templates') return [];
+  if (path === '/learning/templates') return templates;
+  if (path === '/languages') return languages;
+  if (path === '/public/languages') return publicLanguages;
   if (path === '/tracking/overview') return overview;
   if (/^\/tracking\/learners\//.test(path)) return sheet;
   if (path === '/assessments/grading') return queue;

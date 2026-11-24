@@ -10,7 +10,7 @@ import { Bars, Callout, Card, ProgressRing } from '../../design/kit';
 import { supabase } from '../../integration/api';
 import type { PathSession } from '../../integration/v2';
 import type { MissionSummary } from '../../integration/v4';
-import { MissionBadge, MissionDetailDrawer, useMissions } from './study-mission';
+import { MissionBadge, MissionCriteriaAverages, MissionDetailDrawer, MissionScoreTag, useMissions, useScoredMissions } from './study-mission';
 import { ExerciseReviewDrawer } from './study-review';
 import type { Grade, SessionSummary } from './LearnerSession';
 import { addDays, dayHeading, dayKey, daysFromToday, formatClock, formatDayLong, formatMonthDay, relativeMoment, startOfWeek } from './learner-calendar';
@@ -173,14 +173,21 @@ function useAccessToken(given?: string) {
 
 const missionDay = new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'short' });
 
-/** « Mes missions » : chaque remise avec son statut ; un clic ouvre le détail, le retour du professeur et la reprise. */
-function MissionsCard({ missions, onOpen }: { missions: MissionSummary[]; onOpen: (id: string) => void }) {
+/**
+ * « Mes missions » : chaque remise avec son statut ; un clic ouvre le détail, le retour du professeur et la reprise.
+ * Niveaux B : score de chaque mission notée sur grille et moyenne par critère (toutes les remises notées, reprises comprises).
+ */
+function MissionsCard({ missions, all, onOpen, token }: {
+  missions: MissionSummary[]; all: MissionSummary[]; onOpen: (id: string) => void; token: string | null;
+}) {
   const redo = missions.filter((mission) => mission.status === 'reviewed' && mission.decision === 'to_redo').length;
   const waiting = missions.filter((mission) => mission.status === 'submitted').length;
+  const scored = useScoredMissions(token, all);
   return (
     <Card flush className="ld-results-missions ms-results-missions" title="Mes missions" icon={<Target size={19} />}
       description={redo ? `${plural(redo, 'mission', 'missions')} à reprendre` : waiting ? `${plural(waiting, 'mission', 'missions')} en attente de retour`
         : plural(missions.length, 'mission', 'missions')}>
+      <MissionCriteriaAverages views={scored} viewer="learner" />
       <ul className="kit-list ld-list">
         {missions.map((mission) => {
           const reviewed = mission.status === 'reviewed';
@@ -192,7 +199,7 @@ function MissionsCard({ missions, onOpen }: { missions: MissionSummary[]; onOpen
               <button type="button" className="kit-list-item ms-results-row" onClick={() => onOpen(mission.id)} aria-label={`Ouvrir la mission ${mission.title}`}>
                 <span className={`ms-results-icon is-${reviewed ? mission.decision ?? 'validated' : mission.status}`} aria-hidden="true"><Target size={18} /></span>
                 <span className="kit-list-main"><strong>{mission.title}</strong><small>{mission.levelCode} · {meta}</small></span>
-                <span className="kit-list-end"><MissionBadge mission={mission} /><ChevronRight size={17} aria-hidden="true" /></span>
+                <span className="kit-list-end"><MissionScoreTag mission={mission} /><MissionBadge mission={mission} /><ChevronRight size={17} aria-hidden="true" /></span>
               </button>
             </li>
           );
@@ -220,7 +227,7 @@ export function ResultsView({ results, sessions, token }: { results: Grade[]; se
   if (results.length === 0) {
     return mine.length > 0 ? (
       <div className="ld-results-only lc-stagger">
-        <MissionsCard missions={mine} onOpen={setMissionOpen} />
+        <MissionsCard missions={mine} all={missions ?? []} onOpen={setMissionOpen} token={accessToken} />
         <Card className="ld-empty-card">
           <EmptyScene art="chart" title="Aucun exercice corrigé" description="Terminez un exercice pour retrouver votre score et suivre vos progrès ici."
             action={<Link className="btn btn-primary" to="/espace">Aller à mes séances <ArrowRight size={16} aria-hidden="true" /></Link>} />
@@ -288,7 +295,7 @@ export function ResultsView({ results, sessions, token }: { results: Grade[]; se
         <Bars data={bars} height={210} max={100} label="Scores des derniers exercices" />
         <p className="ld-chart-note"><span className="ld-swatch is-pass" aria-hidden="true" /> Réussi <span className="ld-swatch is-retry" aria-hidden="true" /> À reprendre (moins de 70 %)</p>
       </Card>
-      {mine.length > 0 && <MissionsCard missions={mine} onOpen={setMissionOpen} />}
+      {mine.length > 0 && <MissionsCard missions={mine} all={missions ?? []} onOpen={setMissionOpen} token={accessToken} />}
       <Card flush className="ld-results-list" title="Tous mes résultats" description={`${plural(results.length, 'exercice corrigé', 'exercices corrigés')} · touchez un exercice pour voir le corrigé`}
         icon={<ChartNoAxesCombined size={19} />}>
         {(flagged > 0 || waiting > 0) && (

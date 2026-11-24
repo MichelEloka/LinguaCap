@@ -57,6 +57,30 @@
   transition: border-color var(--t-fast) ease, color var(--t-fast) ease, background var(--t-fast) ease; }
 .rv-suggestion:hover:not(:disabled) { border-color: var(--brand); background: var(--brand-50); color: var(--brand-700); }
 
+/* Grille d'une mission (niveaux B) : présentation des copies d'examen (exams.css : ev-rubric, ev-criterion) */
+.rv-rubric { position: static; gap: .6rem; padding: .85rem; }
+.rv-rubric legend { display: inline-flex; align-items: center; gap: .45rem; margin-bottom: .1rem; }
+.rv-rubric legend svg { color: var(--violet); }
+.rv-criterion { gap: .5rem; padding: .7rem .8rem; }
+.rv-criterion .ev-criterion-head { align-items: flex-start; }
+.rv-crit-text { display: grid; gap: .08rem; min-width: 0; }
+.rv-crit-text strong { color: var(--ink); font-size: var(--text-sm); font-weight: 800; }
+.rv-crit-text small { color: var(--muted); font-size: var(--text-xs); font-weight: 500; line-height: 1.4; }
+.rv-crit-text .rv-crit-fr { color: var(--ink-2); font-style: italic; }
+.rv-total { display: flex; align-items: center; gap: .75rem; padding: .6rem .8rem; border-radius: var(--r-md); background: var(--brand-50);
+  transition: background var(--t-base) ease; }
+.rv-total small { font-size: .7rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.rv-total-text { display: grid; gap: .05rem; min-width: 0; }
+.rv-total-text strong { color: var(--ink); font-family: var(--font-display); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.rv-total-text small { color: var(--muted); font-size: var(--text-xs); font-weight: 600; }
+.rv-total.is-pass { background: var(--success-50); }
+.rv-total.is-low { background: var(--warning-50); }
+.rv-suggested { display: flex; align-items: flex-start; gap: .35rem; margin-top: .1rem; color: var(--violet); font-size: var(--text-xs); font-weight: 600; line-height: 1.4; }
+.rv-suggested svg { flex-shrink: 0; margin-top: .1rem; }
+.rv-comment-hint { color: var(--muted); font-size: var(--text-xs); font-weight: 500; line-height: 1.4; }
+.rv-template { justify-self: start; }
+.rv-left { color: var(--muted); font-size: var(--text-xs); text-align: center; }
+
 .rv-done { display: grid; gap: .8rem; min-width: 0; }
 .rv-done-title { display: inline-flex; align-items: center; gap: .45rem; color: var(--success); font-weight: 800; }
 

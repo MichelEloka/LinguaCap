@@ -18,53 +18,34 @@
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { basename, dirname, join, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { CONTROL_DESCRIPTION, composeCredits, composeLevel, voiceAttribution } from './build-v3.mjs';
+import {
+  clip, clone, composeCredits, isObject, normalizeActivity, normalizePlacement, pruneMedia, questionMedia, reporter, vocabulary,
+  voiceAttribution, writeJson, writeLevel,
+} from './build-common.mjs';
+import { CONTROL_DESCRIPTION, composeLevel } from './build-v3.mjs';
 import {
   QUESTION_TYPES, allMedia, audioFile, availableLevels, contentDir, imageFile, loadLevel, loadPlacement, placementMedia, root,
 } from './content-lib.mjs';
+import { PROFILES } from './level-profiles.mjs';
 import { renderWorkbook } from './render-v3-workbook.mjs';
 
+// Fonctions communes avec build-b.mjs, réexportées pour les outils qui les importaient d'ici.
+export { defaultThreshold, lexiconLine, slugOf, writeLevel } from './build-common.mjs';
+
 export const FORMAT = 4;
+// Le constructeur V4 ne vaut que pour les sources V4 (A1, A2) ; les niveaux B sont construits par build-b.mjs.
 const LEVELS = ['a1', 'a2'];
 /** Fourchettes de durée des activités (EVO-041), remplacées par minutes de _level.mjs. */
-export const BUDGETS = { a1: { min: 2200, max: 2300 }, a2: { min: 2050, max: 2200 } };
-/** Mots minimum de la partie écrite d'une mission, si la couche ne le précise pas. */
-const MIN_WORDS = { a1: 25, a2: 40 };
+export const BUDGETS = { a1: PROFILES.a1.budget, a2: PROFILES.a2.budget };
 const V4_CONTROL_DESCRIPTION = 'Faites une première écoute pour la situation générale. Lisez les questions, puis réécoutez pour les détails. Répondez de mémoire aux questions de réemploi. Après la validation, chaque question affiche la réponse attendue et une explication.';
-const SLOW_PROFILE = 'a1-debut';
-const LEXICON_PAUSE = 0.9;
-// Voix du lexique : Thorsten (sprecher). Sur des mots isolés, Kerstin est mal reconnue (contrôle par reconnaissance
-// vocale du lexique a1-abc : 19 % de mots en écart contre 3 % pour Thorsten) ; sur des phrases, l'écart est faible.
-const LEXICON_VOICE = 'sprecher';
+// Profil lent (A1), voix et profil du lexique, mots minimum des missions : level-profiles.mjs. Voix du lexique : Thorsten
+// (sprecher). Sur des mots isolés, Kerstin est mal reconnue (contrôle par reconnaissance vocale du lexique a1-abc : 19 % de
+// mots en écart contre 3 % pour Thorsten) ; sur des phrases, l'écart est faible.
 
 const LAYER_KEYS = new Set(['module', 'title', 'objective', 'grammarFocus', 'vocabulary', 'media', 'activities', 'add', 'order']);
 const PATCH_KEYS = new Set(['kind', 'title', 'estimatedMinutes', 'competences', 'lesson', 'explanations', 'feedback', 'questions',
   'addQuestions', 'removeQuestions', 'placements', 'mission']);
 const LEVEL_KEYS = new Set(['order', 'minutes', 'settings', 'midtermTitle', 'midtermDescription', 'finalTitle', 'finalDescription']);
-
-const clone = (value) => (value === undefined ? undefined : JSON.parse(JSON.stringify(value)));
-const isObject = (value) => value !== null && typeof value === 'object' && !Array.isArray(value);
-const words = (text) => String(text ?? '').trim().split(/\s+/).filter(Boolean);
-const clip = (text, max) => (text.length <= max ? text : `${text.slice(0, max - 1).trimEnd()}…`);
-
-/** Identifiant d'une entrée de lexique tiré du mot : minuscules, translittération, tirets. */
-export function slugOf(text) {
-  return String(text).toLowerCase().replace(/ä/g, 'ae').replace(/ö/g, 'oe').replace(/ü/g, 'ue').replace(/ß/g, 'ss')
-    .normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '') || 'mot';
-}
-
-/** Ligne prononcée pour une entrée de lexique : « der Kopf, die Köpfe », « anfangen », « die Eltern ». */
-export function lexiconLine(entry) {
-  if (entry.partOfSpeech !== 'noun') return entry.word.trim();
-  const article = entry.article ?? (/pluriel/i.test(entry.note ?? '') ? 'die' : null);
-  const head = article ? `${article} ${entry.word.trim()}` : entry.word.trim();
-  const plural = typeof entry.plural === 'string' ? entry.plural.trim() : '';
-  if (!plural || /^[-–—]$/.test(plural)) return head;
-  return `${head}, ${/^die\s/i.test(plural) ? plural : `die ${plural}`}`;
-}
-
-/** Seuil par défaut d'une répétition : 80 jusqu'à 3 mots, 75 au-delà. */
-export const defaultThreshold = (text) => (words(text).length <= 3 ? 80 : 75);
 
 /**
  * Mission provisoire tirée de la tâche d'un atelier : préparation, partie orale, partie écrite et vérification.
@@ -103,7 +84,7 @@ export function missionFromTask(task, levelId) {
     if (model && parts.oral) parts.oral = `${parts.oral}\n\n${model}`;
     if (success) parts.verify = [parts.verify, success].filter(Boolean).join(' ');
   }
-  const minWords = Number(/(\d+)\s*à\s*\d+\s*mots/.exec(parts.written ?? '')?.[1] ?? MIN_WORDS[levelId] ?? 25);
+  const minWords = Number(/(\d+)\s*à\s*\d+\s*mots/.exec(parts.written ?? '')?.[1] ?? PROFILES[levelId]?.build.missionMinWords ?? 25);
   const sentences = (parts.verify ?? '').split(/(?<=[.!?])\s+/).map((sentence) => sentence.trim())
     .filter((sentence) => sentence.length >= 10 && sentence.length <= 160);
   const checklist = sentences.slice(0, 6);
@@ -120,17 +101,6 @@ export function missionFromTask(task, levelId) {
       written: parts.written ? { prompt: clip(parts.written, 1000), maxChars: 1500, minWords: Math.min(200, minWords) } : null,
       checklist,
     },
-  };
-}
-
-/** Collecte des problèmes : les erreurs empêchent l'écriture, les avertissements sont affichés. */
-function reporter() {
-  const errors = [];
-  const warnings = [];
-  return {
-    errors, warnings,
-    fail: (where, message) => errors.push(`${where} : ${message}`),
-    warn: (where, message) => warnings.push(`${where} : ${message}`),
   };
 }
 
@@ -203,37 +173,6 @@ function workshopMission(module, spec, levelId) {
   activity.draft = 'mission provisoire tirée de la tâche de l’atelier : à relire et à réécrire dans la couche';
 }
 
-function normalizePlacement(placement, mediaByKey) {
-  const media = mediaByKey.get(placement.media);
-  const usage = placement.usage ?? (media?.kind === 'audio' ? 'audio' : 'illustration');
-  return {
-    ...placement, usage,
-    transcriptVisibility: placement.transcriptVisibility ?? (usage === 'audio' ? 'on_demand' : 'hidden'),
-    decorative: Boolean(placement.decorative),
-  };
-}
-
-/** Champs par défaut d'une question typée ; les champs fournis par la couche sont conservés tels quels. */
-function normalizeQuestion(question) {
-  const type = question.type ?? 'choice';
-  const normalized = { ...question, type };
-  if (type === 'choice') {
-    normalized.options = (question.options ?? []).map((option) => ({ ...option }));
-  } else if (type === 'fill') {
-    normalized.blanks = (question.blanks ?? []).map((blank) => ({
-      ...blank, id: String(blank.id),
-      size: blank.size ?? Math.min(30, Math.max(3, ...(blank.accept ?? []).map((value) => String(value).length + 1))),
-      hint: blank.hint ?? null,
-    }));
-  } else if (type === 'dictation') {
-    normalized.showWordCount = question.showWordCount ?? true;
-  } else if (type === 'speak') {
-    normalized.accept = question.accept ?? (question.text ? [question.text] : []);
-    normalized.threshold = question.threshold ?? defaultThreshold(question.text);
-  }
-  return normalized;
-}
-
 /** Applique la retouche d'une activité (couche) ; null retire l'activité. */
 function patchActivity(activity, patch, where, report, mediaByKey) {
   for (const key of Object.keys(patch)) if (!PATCH_KEYS.has(key)) report.fail(where, `clé « ${key} » inconnue`);
@@ -284,29 +223,6 @@ function patchActivity(activity, patch, where, report, mediaByKey) {
     if (patch.kind === undefined && patch.mission) activity.kind = 'mission';
     delete activity.draft;
   }
-}
-
-function normalizeActivity(activity) {
-  const kind = activity.kind ?? ((activity.questions ?? []).length ? 'exercise' : activity.mission ? 'mission' : 'lesson');
-  const normalized = {
-    ...activity, kind,
-    lesson: { title: activity.lesson?.title ?? activity.title, description: activity.lesson?.description ?? '',
-      transcript: activity.lesson?.transcript ?? null },
-    questions: kind === 'exercise' ? (activity.questions ?? []).map(normalizeQuestion) : [],
-    placements: activity.placements ?? [],
-  };
-  if (kind === 'mission') {
-    const mission = activity.mission ?? {};
-    normalized.mission = {
-      oral: mission.oral ? { ...mission.oral, maxSeconds: mission.oral.maxSeconds ?? 120 } : null,
-      written: mission.written ? { ...mission.written, maxChars: mission.written.maxChars ?? 1500 } : null,
-      checklist: mission.checklist ?? [],
-    };
-  } else {
-    delete normalized.mission;
-    delete normalized.draft;
-  }
-  return normalized;
 }
 
 /** Couche d'un module : titre, objectif, médias, retouches, ajouts et ordre des activités, vocabulaire. */
@@ -455,77 +371,9 @@ function reconcilePlacements(module, imageMeta, report) {
   }
 }
 
-/** Sons des questions dictation et speak : un MP3 par question, support rattaché à la question. */
-function questionMedia(module, levelId) {
-  for (const activity of module.activities) {
-    for (const question of activity.questions) {
-      if (!['dictation', 'speak'].includes(question.type)) continue;
-      const key = `${activity.id}-${question.id}`;
-      const text = question.type === 'dictation' ? question.accept?.[0] : question.text;
-      if (!module.media.some((item) => item.key === key) && typeof text === 'string' && text.trim()) {
-        module.media.push({
-          key, kind: 'audio',
-          title: clip(`${question.type === 'dictation' ? 'Dictée' : 'Modèle à répéter'} ${question.id} · ${activity.title}`, 120),
-          script: [{ voice: question.voice ?? 'sprecherin', text: text.trim() }],
-          ...(levelId === 'a1' ? { audioProfile: SLOW_PROFILE } : {}),
-          ...voiceAttribution,
-        });
-      }
-      if (!activity.placements.some((placement) => placement.media === key)) {
-        activity.placements.push({
-          media: key, usage: 'audio', questionId: question.id,
-          transcriptVisibility: question.type === 'dictation' ? 'after_answer' : 'on_demand', decorative: false,
-        });
-      }
-    }
-  }
-}
-
-/** Vocabulaire : identifiants, champs par défaut et son du lexique (une réplique par entrée, segments). */
-function vocabulary(module, report) {
-  const entries = module.vocabulary ?? [];
-  const key = `${module.id}-lexique`;
-  const seen = new Set();
-  module.vocabulary = entries.map((entry, line) => {
-    let id = entry.id ?? slugOf(entry.word ?? `mot-${line + 1}`);
-    if (!entry.id) for (let rank = 2; seen.has(id); rank++) id = `${slugOf(entry.word ?? 'mot')}-${rank}`;
-    if (seen.has(id)) report.fail(`${module.id} › vocabulaire`, `identifiant « ${id} » en double`);
-    seen.add(id);
-    if (entry.audio) report.fail(`${module.id} › vocabulaire › ${id}`, 'audio est calculé par la construction : ne pas l’indiquer');
-    return {
-      id, word: entry.word, article: entry.article ?? null, plural: entry.plural ?? null, partOfSpeech: entry.partOfSpeech,
-      translation: entry.translation, example: entry.example ?? null, note: entry.note ?? null, audio: { media: key, line },
-    };
-  });
-  module.media = module.media.filter((item) => item.key !== key);
-  if (!module.vocabulary.length) return;
-  module.media.push({
-    key, kind: 'audio', title: clip(`Lexique · ${module.title}`, 120), segments: true, audioProfile: SLOW_PROFILE,
-    script: module.vocabulary.flatMap((entry, index) => [
-      ...(index ? [{ pause: LEXICON_PAUSE }] : []),
-      { voice: LEXICON_VOICE, text: lexiconLine(entry) },
-    ]),
-    ...voiceAttribution,
-  });
-}
-
-/** Médias du kit qui ne servent plus après les couches (activité retirée…) ; ceux d'une couche restent signalés. */
-function pruneMedia(module, layerMedia, imageMeta, report) {
-  const used = new Set(module.activities.flatMap((activity) => activity.placements.map((placement) => placement.media)));
-  module.media = module.media.filter((item) => {
-    if (used.has(item.key) || item.key === `${module.id}-lexique`) return true;
-    if (layerMedia.has(item.key)) {
-      report.warn(`${module.id} › média ${item.key}`, 'déclaré par la couche mais jamais placé');
-      return true;
-    }
-    // Une illustration V4 dessinée pour ce module ne doit pas disparaître sans qu'on le voie (liste de supports remplacée…).
-    if (imageMeta.has(item.key)) report.warn(`${module.id} › média ${item.key}`, 'illustration V4 plus placée par la couche : retirée');
-    return false;
-  });
-}
-
 /** Construit un niveau : composition du kit, illustrations V4, couches, médias générés, ordre et prérequis. */
 export async function buildLevel(levelId, { pedagogyDir = join(root, 'content', 'v4', 'pedagogy'), images = null, report }) {
+  const profile = PROFILES[levelId];
   const { level, modules: kitModules, specs } = await composeLevel(levelId, { edition: 'v4' });
   const { layers, levelLayer } = await loadLayers(pedagogyDir, levelId, report);
   // Activités « -correction » retirées : la correction s'affiche désormais après la remise de l'exercice.
@@ -556,10 +404,10 @@ export async function buildLevel(levelId, { pedagogyDir = join(root, 'content', 
     const layer = layers.get(module.id);
     const layerMedia = layer ? applyLayer(module, layer, levelId, report) : new Set();
     module.layer = layer ? layer.where : null;
-    module.activities = module.activities.map(normalizeActivity);
+    module.activities = module.activities.map((activity) => normalizeActivity(activity, profile));
     reconcilePlacements(module, imageMeta, report);
-    questionMedia(module, levelId);
-    vocabulary(module, report);
+    questionMedia(module, profile);
+    vocabulary(module, report, profile);
     const mediaByKey = new Map(module.media.map((item) => [item.key, item]));
     for (const activity of module.activities) {
       activity.placements = activity.placements.map((placement) => normalizePlacement(placement, mediaByKey));
@@ -605,23 +453,6 @@ export async function buildLevel(levelId, { pedagogyDir = join(root, 'content', 
   };
 }
 
-function writeJson(file, data) {
-  mkdirSync(dirname(file), { recursive: true });
-  writeFileSync(file, JSON.stringify(data, null, 2) + '\n');
-}
-
-/** Écrit le niveau dans <sortie>/<niveau> ; les fichiers de modules d'une construction précédente sont supprimés. */
-export function writeLevel(output, { level, modules }) {
-  const directory = join(output, level.levelId);
-  const files = modules.map(({ id }, index) => ({ id, file: `${String(index + 1).padStart(2, '0')}-${id}.json` }));
-  mkdirSync(directory, { recursive: true });
-  const keep = new Set(['level.json', ...files.map(({ file }) => file)]);
-  for (const name of readdirSync(directory)) if (name.endsWith('.json') && !keep.has(name)) rmSync(join(directory, name));
-  writeJson(join(directory, 'level.json'), { ...level, modules: files });
-  modules.forEach((module, index) => writeJson(join(directory, files[index].file), module));
-  return files;
-}
-
 /**
  * Kit hors ligne (A1.html, A2.html, JSON, médias et outils d'import) à partir de la V4 construite ; les sons et images
  * sont copiés depuis content/de/media, à produire avant (synthesize-v3.py, render-images.mjs).
@@ -646,8 +477,8 @@ export function writeKit(kit, built) {
   }
   const manifest = join(contentDir, 'media', 'audio', 'manifest-v3.json');
   if (existsSync(manifest)) copyFileSync(manifest, join(content, 'media', 'audio', 'manifest-v3.json'));
-  writeJson(join(content, 'media', 'credits.json'), composeCredits('v4'));
-  for (const name of ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'icons.txt']) {
+  writeJson(join(content, 'media', 'credits.json'), composeCredits(content));
+  for (const name of ['check-content.mjs', 'content-lib.mjs', 'import-content.mjs', 'level-profiles.mjs', 'icons.txt']) {
     mkdirSync(join(kit, 'infra', 'content'), { recursive: true });
     copyFileSync(join(root, 'infra', 'content', name), join(kit, 'infra', 'content', name));
   }
@@ -717,7 +548,8 @@ async function main() {
       + `${questions} questions dont ${typed} typées · ${activities.filter((activity) => activity.kind === 'mission').length} missions · `
       + `${result.modules.reduce((total, module) => total + module.vocabulary.length, 0)} mots`);
   }
-  writeJson(join(output, 'media', 'credits.json'), composeCredits('v4'));
+  // Crédits de la V4 et, s'ils sont construits dans la même sortie, des niveaux B (build-b.mjs) : rien n'est effacé.
+  writeJson(join(output, 'media', 'credits.json'), composeCredits(output));
   console.log(`Écrit dans ${relative(root, output).replace(/\\/g, '/') || '.'} (types : ${QUESTION_TYPES.join(', ')}).`);
   if (values('kit')[0]) writeKit(resolve(values('kit')[0]), built);
   if (args.includes('--prune-audio')) {

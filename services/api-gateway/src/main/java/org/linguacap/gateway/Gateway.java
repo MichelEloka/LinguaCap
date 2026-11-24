@@ -34,6 +34,10 @@ public class Gateway {
             "startLevel", "A0|[ABC][12]", "level", "[ABC][12]", "template", "standard|intensive|custom",
             "kind", "accompanied|autonomous");
     private static final UUID HEALTH_ACTOR = new UUID(0, 0);
+    /** Acteur anonyme des lectures publiques (aucune session) : le service appelé ne lit jamais d'identité. */
+    private static final UUID PUBLIC_ACTOR = new UUID(0, 0);
+    /** Réponse publique réussie : données en lecture seule, mises en cache cinq minutes par le navigateur et le proxy. */
+    private static final String PUBLIC_CACHE = "public, max-age=300";
 
     @Inject ServiceClient services;
     @Inject SupabaseAuth auth;
@@ -59,6 +63,23 @@ public class Gateway {
                         .exceptionally(failure -> false)).toList();
         boolean ready = checks.stream().map(CompletableFuture::join).reduce(true, Boolean::logicalAnd);
         return response(200, Map.of("status", ready ? "ok" : "degraded"), requestId);
+    }
+
+    /**
+     * Langues et niveaux publiés, sans session (vitrine, page de connexion, pied de page) : seule route métier relayée
+     * sans {@code auth.verify}. Le secret de liaison du proxy reste exigé ; aucun paramètre n'est relayé ; ni jeton
+     * d'utilisateur ni adresse ne partent vers le catalogue.
+     */
+    @GET
+    @Path("public/languages")
+    public Response publicLanguages() {
+        verifyOrigin();
+        if (!uri.getQueryParameters().isEmpty()) throw HttpError.badRequest("Paramètre de recherche invalide.");
+        String requestId = RequestLog.current();
+        var result = services.exchange(catalogue, "/v1/public/languages", "GET", PUBLIC_ACTOR, null, "", "", false, requestId);
+        return Response.status(result.status()).type(MediaType.APPLICATION_JSON_TYPE)
+                .header("Cache-Control", result.status() == 200 ? PUBLIC_CACHE : "no-store")
+                .header("X-Request-Id", requestId).entity(result.body()).build();
     }
 
     @GET

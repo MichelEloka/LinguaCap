@@ -2,7 +2,8 @@ import type { CSSProperties } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, CalendarDays, Check, CheckCircle2, ClipboardCheck, Clock3, Flame, GraduationCap, Headphones, LayoutDashboard, MessageSquare, Play, Sparkles, Target, Users } from 'lucide-react';
 import { isApiMode } from '../../app/config';
-import { languages, languageStatusLabels } from '../../domain/languages';
+import { availableLanguages, languages, languageStatusLabels } from '../../domain/languages';
+import { countWord, levelRange, levelSeries, usePublicLanguages, usePublicOffer } from '../../integration/languages';
 import { levelLabel } from '../../integration/v2';
 import './home.css';
 
@@ -12,7 +13,7 @@ const roles = [
   { title: 'Accompagner', name: 'Espace professeur', path: '/professeur', icon: Users, tone: 'is-violet',
     description: 'Invitez vos élèves, fixez leurs objectifs, repérez les retards et corrigez leurs évaluations.' },
   { title: 'Organiser', name: 'Administration', path: '/administration', icon: LayoutDashboard, tone: 'is-accent',
-    description: 'Gérez les accès, enrichissez le catalogue A1 et A2 et suivez les indicateurs du pilote.' },
+    description: 'Gérez les accès, enrichissez le catalogue niveau par niveau et suivez les indicateurs du pilote.' },
 ];
 
 const steps = [
@@ -22,11 +23,18 @@ const steps = [
 ];
 
 const week = ['L', 'M', 'M', 'J', 'V', 'S', 'D'];
-const openLanguages = languages.filter((language) => language.status === 'available');
-const soonLanguages = languages.filter((language) => language.status !== 'available');
 
-/** Langues de LinguaCap (liste statique) : les langues ouvertes en avant, les suivantes annoncées. */
+/**
+ * Langues de LinguaCap : les langues ouvertes en avant avec leurs niveaux publiés (catalogue, GET /public/languages), les
+ * suivantes annoncées. Sans la liste publique, les langues ouvertes s'affichent sans niveau.
+ */
 function LanguagesSection() {
+  const { languages: published } = usePublicLanguages();
+  const openLanguages = published?.length
+    ? published.map((language) => ({ ...language, levels: language.levels.map((level) => level.code) }))
+    : availableLanguages.map((language) => ({ ...language, levels: [] as string[] }));
+  const open = new Set(openLanguages.map((language) => language.id));
+  const soonLanguages = languages.filter((language) => !open.has(language.id) && language.status !== 'available');
   return (
     <section className="home-section is-tinted" id="langues">
       <div className="container">
@@ -44,9 +52,11 @@ function LanguagesSection() {
               </div>
               <h3>{language.name}</h3>
               <p className="home-lang-native" lang={language.id}>{language.nativeName}</p>
-              <ul className="home-lang-levels" aria-label="Niveaux proposés">
-                {language.levels.map((level) => <li key={level}><GraduationCap size={15} aria-hidden="true" />{levelLabel(level)}</li>)}
-              </ul>
+              {language.levels.length > 0 && (
+                <ul className="home-lang-levels lc-stagger" aria-label="Niveaux proposés">
+                  {language.levels.map((level) => <li key={level}><GraduationCap size={15} aria-hidden="true" />{levelLabel(level)}</li>)}
+                </ul>
+              )}
               <p className="home-lang-text">Test de niveau, parcours sur mesure jusqu’à votre objectif et professeur qui vous accompagne.</p>
             </article>
           ))}
@@ -103,6 +113,32 @@ function AppMockup() {
   );
 }
 
+/** Preuves du héros : les niveaux publiés (« A1 → B1 · trois niveaux complets »), puis les voix et le professeur. */
+function HeroProof() {
+  const offer = usePublicOffer();
+  const count = offer.codes.length;
+  const levels = count
+    ? <><b>{levelRange(offer.codes)}</b><span>{countWord(count)} niveau{count > 1 ? 'x' : ''} complet{count > 1 ? 's' : ''}</span></>
+    : <><b>Pas à pas</b><span>niveau après niveau</span></>;
+  return (
+    <ul className="home-proof">
+      {offer.pending ? <li aria-hidden="true" style={{ visibility: 'hidden' }}>{levels}</li> : <li className="lc-enter">{levels}</li>}
+      <li><b>Voix natives</b><span>dans chaque leçon</span></li>
+      <li><b>1 professeur</b><span>qui suit vos progrès</span></li>
+    </ul>
+  );
+}
+
+/** Pastille du héros : « Pilote d’allemand A1, A2 et B1 sur invitation » (démonstration : « Parcours d’allemand A1 et A2 »). */
+function HeroPill() {
+  const offer = usePublicOffer();
+  const levels = offer.codes.length ? ` ${levelSeries(offer.codes)}` : '';
+  const label = isApiMode ? `Pilote ${offer.of}${levels} sur invitation` : `Parcours ${offer.of}${levels}`;
+  return offer.pending
+    ? <p className="home-pill" aria-hidden="true" style={{ visibility: 'hidden' }}><Sparkles size={14} /> {label}</p>
+    : <p className="home-pill lc-enter"><Sparkles size={14} /> {label}</p>;
+}
+
 export default function HomePage() {
   const primary = isApiMode
     ? <Link className="btn btn-primary btn-lg" to="/connexion">Se connecter <ArrowRight size={18} /></Link>
@@ -113,18 +149,14 @@ export default function HomePage() {
       <section className="home-hero">
         <div className="container home-hero-grid">
           <div className="home-hero-copy">
-            <p className="home-pill"><Sparkles size={14} /> {isApiMode ? 'Pilote d’allemand A1 et A2 sur invitation' : 'Parcours d’allemand A1 et A2'}</p>
+            <HeroPill />
             <h1>Un objectif clair.<br /><span>Un parcours qui s’adapte.</span></h1>
             <p className="home-intro">Apprenez l’allemand à votre rythme : votre planning organise leçons, exercices et évaluations, et votre professeur vous accompagne séance après séance.</p>
             <div className="home-actions">
               {primary}
               <a className="btn btn-secondary btn-lg" href="#parcours">Découvrir le parcours</a>
             </div>
-            <ul className="home-proof">
-              <li><b>A1 → A2</b><span>deux niveaux complets</span></li>
-              <li><b>Voix natives</b><span>dans chaque leçon</span></li>
-              <li><b>1 professeur</b><span>qui suit vos progrès</span></li>
-            </ul>
+            <HeroProof />
           </div>
           <AppMockup />
         </div>

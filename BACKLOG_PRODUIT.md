@@ -54,7 +54,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-050 | Comptes gratuits avec avis obligatoire, avis facultatif pour les autres | P2 | M | — |
 | EVO-016 | Inscription publique validée par l’administration | P2 | M | EVO-036, EVO-033 |
 | EVO-017 | Examens de passage de niveau exigeants, en plusieurs variantes | P2 | XL | — |
-| EVO-051 | Cours B1 complets | P3 | XL | EVO-041 |
+| EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · B1 en cours | XL | EVO-041 |
 | EVO-052 | Le professeur construit ses cours | P3 | XL | EVO-033, EVO-014 |
 | EVO-053 | Ressources classées par niveau | P3 | S | — |
 | EVO-054 | Clés API : automatisation de l’administration et services tiers | P3 | L | — |
@@ -169,7 +169,28 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 
 ## P3 · Avant l’ouverture publique
 
-- **EVO-051 Cours B1.** Parcours B1 complet au même niveau de qualité que l’A1 et l’A2 : modules, activités, médias, diagnostic, bilan et examen.
+- **EVO-051 Cours B1 et B2.** Parcours B1 puis B2 complets, au même niveau de qualité que l’A1 et l’A2 : modules, activités,
+  médias, diagnostic, bilan et examen. Demande du responsable produit : « les cours doivent être adaptés au niveau, même la
+  manière de faire cours » ; « on n’est plus sur du A1 et A2 seulement ». **En cours : phase 1 (B1)**, phase 2 (B2) ensuite,
+  sur le même socle ; aucun déploiement à ce stade. Choix retenus (24 novembre 2026) :
+  - **Niveaux dynamiques partout** : l’échelle CECRL ne sert qu’à valider, classer et nommer un niveau ; ce qui est ouvert se lit
+    dans le catalogue (`GET /languages`, nouvelle route publique `GET /public/languages` pour la vitrine, `GET /tracks`). Un
+    niveau publié apparaît sans modifier le code ; un niveau non publié n’est jamais proposé (« Bientôt » là où il donne une
+    perspective). Le niveau B2 est créé au catalogue en brouillon.
+  - **Gabarit B** : 12 thèmes × 2 modules (thème, puis atelier), environ 24 modules et 50 h par niveau ; textes et écoutes
+    plus longs avec stratégie, grammaire inductive, *Redemittel*, médiation et entraînement au format d’examen dans chaque
+    atelier ; dictées et répétitions réduites.
+  - **Consignes progressives** par balisage dans le texte : B1 en allemand simple avec la traduction française à côté (`[fr]`),
+    B2 en allemand avec l’aide française repliée (`[fr?]`) ; aucune migration, contrôlé par le contrôle des contenus.
+  - **Missions sur grille** : 4 critères à l’écrit, 5 à l’oral, 20 points ; la décision reste au professeur, préremplie à 60 %
+    (12/20) ; l’élève voit la grille avant la remise, puis les points, le score et le commentaire. Élève autonome sans
+    correcteur : grille en auto-évaluation non enregistrée et recommandation d’un correcteur. Bornes élargies : oral jusqu’à
+    5 min, écrit jusqu’à 3 000 caractères.
+  - **Médias** : voix libres (Piper, MLS après audition, 4 au plus) ; contenus téléchargés sous licence libre seulement,
+    CC BY-SA acceptée pour les médias, chacun crédité dans un registre ; textes originaux ou Wikinews de préférence.
+  - **Recette** : le niveau de démonstration passe en C1 ; contrôles des niveaux dynamiques, de l’import B1, des consignes
+    bilingues, des missions sur grille, du parcours A2 → B1 et du test de niveau. Test de niveau : palier B2 en phase 2.
+  - Le brouillon B1 de Codex (`content/b1-v1/`) sert de matière première, puis est supprimé en fin de phase 1.
 - **EVO-052 Le professeur construit ses cours.** Choix proposé à l’accueil (EVO-033). Le professeur peut, au choix :
   - composer le parcours d’un élève à partir du catalogue : modules, activités, ordre, rythme ;
   - créer ses propres leçons et exercices (texte, images, sons) dans un éditeur, réservés à ses élèves.
@@ -245,8 +266,9 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 puis import de la V4 par l'administration ; mesurer la durée de l'import et de la publication d'une version V4 (délais de 7 s
 entre services et de 10 s au Worker) et celle de la vue d'ensemble de l'administration avec une cinquantaine d'élèves.
 
-**Reste à faire, rattaché à EVO-051 (B1)** : les niveaux ouverts (A1, A2) sont écrits en dur dans la vitrine, le questionnaire
-du professeur et l'introduction du test de niveau ; les lire dans `GET /languages` et le test publié lors de l'ouverture du B1.
+**Rattaché à EVO-051 (B1), en cours** : les niveaux ouverts (A1, A2), écrits en dur dans la vitrine, le questionnaire du
+professeur et l'introduction du test de niveau, sont désormais lus dans le catalogue (`GET /public/languages`,
+`GET /languages` et ses paliers du test publié) : c'est le socle « niveaux dynamiques » de la phase 1 du chantier B1/B2.
 
 ## Questions encore ouvertes
 

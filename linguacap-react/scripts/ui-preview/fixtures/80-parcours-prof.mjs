@@ -109,7 +109,7 @@ const estimate = (body = {}) => {
   return { languageId: 'de', startLevel: body.startLevel ?? 'A0', targetLevel: body.targetLevel ?? 'A2', startDate: terms.startDate, targetDate: target,
     weeks: weeksCount, requiredMinutes: 2540, levels: [], requiredWeeklyMinutes: weekly,
     requiredDailyMinutes: { fiveDays: Math.ceil(weekly / 5), sevenDays: Math.ceil(weekly / 7) }, difficulty: { code, label, requiredWeeklyMinutes: weekly },
-    bands: [], allowedTargets: ['A1', 'A2'], minTargetDate: iso(10), maxTargetDate: iso(700),
+    bands: [], allowedTargets: ['A1', 'A2', 'B1'], minTargetDate: iso(10), maxTargetDate: iso(700),
     suggestedAvailability: [1, 2, 3, 4, 5].map((weekday) => ({ weekday, sessions: 1, minutes: Math.max(15, Math.ceil(weekly * 1.15 / 25) * 5) })) };
 };
 

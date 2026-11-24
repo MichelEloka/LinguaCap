@@ -3,20 +3,23 @@
  * évaluations. Le document reste celui du service Catalogue ; seules la présentation et la saisie sont ici.
  * V4 : questions typées (choix, compléter, remettre en ordre, associer, dictée, répétition orale) avec explication et
  * retour par choix, activité « mission » et vocabulaire du module.
+ * Niveaux B : aide aux marqueurs bilingues (` [fr] `, ` [fr?] `) sous les champs qui les acceptent, grille de critères des
+ * missions (bouton « Grille B1 standard ») et bornes élargies (5 min d'oral, 3 000 caractères, 400 mots).
  */
 import { createContext, useContext, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   ArrowDownUp, BookA, BookOpen, BookOpenText, Check, ChevronDown, ChevronRight, CircleAlert, ClipboardCheck, Clock, Ear, Eye, EyeOff, Flag,
-  GraduationCap, Headphones, ImagePlus, Images, Layers, Lightbulb, Link2, ListChecks, MessageSquareText, Mic, PencilLine, Plus, RotateCcw, Scale,
-  Settings2, SquareDashedBottom, Stethoscope, Target, TextCursorInput, Trash2, Volume2, type LucideIcon,
+  GraduationCap, Headphones, ImagePlus, Images, Languages, Layers, Lightbulb, Link2, ListChecks, MessageSquareText, Mic, PencilLine, Plus, RotateCcw,
+  Scale, Settings2, SquareDashedBottom, Stethoscope, Target, TextCursorInput, Trash2, Volume2, WandSparkles, type LucideIcon,
 } from 'lucide-react';
 import { Badge, EmptyState } from '../../components/ui';
 import { Bars, Callout, Card, ProgressRing, SearchField, Segmented } from '../../design/kit';
 import {
-  countWords, defaultSpeakThreshold, fillSegments, missionLimits, partOfSpeechLabels, partsOfSpeech, questionTypeLabels, questionTypeOf, questionTypes,
-  type ActivityKind, type DictationSpec, type DraftVocabularyEntry, type FillBlankSpec, type FillSpec, type GermanArticle, type MatchSpec,
-  type MissionDefinition, type OrderSpec, type PartOfSpeech, type QuestionSpec, type QuestionType, type SpeakSpec,
+  countWords, defaultSpeakThreshold, fillSegments, missionCriteriaOf, missionLimits, missionMaxScore, partOfSpeechLabels, partsOfSpeech, questionTypeLabels,
+  questionTypeOf, questionTypes, type ActivityKind, type DictationSpec, type DraftVocabularyEntry, type FillBlankSpec, type FillSpec, type GermanArticle,
+  type MatchSpec, type MissionCriterion, type MissionDefinition, type OrderSpec, type PartOfSpeech, type QuestionSpec, type QuestionType, type SpeakSpec,
 } from '../../integration/v4';
+import { hasGloss } from './bilingual';
 import { latestVersion, MediaPreview, versionStatus, type Asset } from './MediaLibrary';
 import { MediaPicker, MediaThumb } from './editor-media';
 import { Collapsible, ConfirmDialog, Disclosure, IconAction, MoveTools, TextWithPreview, ToggleChips } from './editor-parts';
@@ -152,6 +155,19 @@ export function newActivity(kind: Kind, moduleId: string, taken: string[]): Draf
     competences: kind === 'mission' ? ['expression-orale', 'expression-ecrite'] : [],
     lesson: { title: '', description: '', transcript: null }, questions: [], placements: [], mission: kind === 'mission' ? defaultMission() : null,
   };
+}
+
+/**
+ * Aide aux marqueurs bilingues des niveaux B, sous un champ qui les accepte : visible pendant la saisie du champ, ou dès
+ * que le texte en porte un.
+ */
+function MarkerHelp({ value }: { value?: string | null }) {
+  return (
+    <small className={`ed-markers${hasGloss(value) ? ' is-used' : ''}`}>
+      <Languages size={13} aria-hidden="true" />
+      <span>Niveaux B · marqueurs : <code> [fr] </code> traduction affichée (B1), <code> [fr?] </code> aide repliée (B2). Allemand avant, français après.</span>
+    </small>
+  );
 }
 
 function AddCard({ icon: Icon = Plus, children, onClick, disabled }: { icon?: LucideIcon; children: ReactNode; onClick: () => void; disabled?: boolean }) {
@@ -520,7 +536,7 @@ export function QuestionsEditor({ questions, onChange, moduleRefs, path, typed =
               <label data-path={`${at}.prompt`}>{typed ? 'Consigne de la question' : 'Énoncé'}<textarea rows={2} maxLength={500} value={question.prompt}
                 placeholder={type === 'choice' ? undefined : type === 'fill' ? 'Complétez avec le connecteur qui convient.' : type === 'order' ? 'Remettez les mots dans l’ordre.'
                   : type === 'match' ? 'Associez chaque verbe à sa construction.' : type === 'dictation' ? 'Écoutez et écrivez la phrase.' : 'Écoutez, puis répétez à voix haute.'}
-                onChange={(event) => update({ prompt: event.target.value })} /></label>
+                onChange={(event) => update({ prompt: event.target.value })} /><MarkerHelp value={question.prompt} /></label>
               {moduleRefs && (
                 <label data-path={`${at}.moduleRef`}>Module évalué<select value={question.moduleRef ?? ''} onChange={(event) => update({ moduleRef: event.target.value || null })}>
                   <option value="">À choisir</option>
@@ -577,6 +593,7 @@ export function QuestionsEditor({ questions, onChange, moduleRefs, path, typed =
                     onChange={(event) => update({ explanation: event.target.value || null })} />
                   <small className={`ed-help ed-counter${(question.explanation ?? '').length > 400 ? ' is-long' : ''}`}>
                     {(question.explanation ?? '').length} / 400 caractères conseillés</small>
+                  <MarkerHelp value={question.explanation} />
                 </label>
               )}
             </fieldset>
@@ -751,6 +768,7 @@ export function ActivityEditor({ activity, path, moduleLabel, index, count, onCh
           <TextWithPreview label={isMission ? 'Situation et consigne' : graded ? 'Consigne' : 'Texte'} rows={graded ? 3 : isMission ? 5 : 8} readOnly={readOnly}
             disabled={locked} value={lesson.description} onChange={(value) => update({ lesson: { ...lesson, description: value } })}
             placeholder={isMission ? 'Situation : vous avez rendez-vous chez le médecin demain, mais vous ne pouvez pas venir…' : undefined} />
+          <MarkerHelp value={lesson.description} />
           <fieldset className="ed-fields" disabled={locked}>
             <label>Transcription des sons<textarea rows={3} lang="de" value={lesson.transcript ?? ''}
               onChange={(event) => update({ lesson: { ...lesson, transcript: event.target.value || null } })} /></label>
@@ -896,12 +914,89 @@ export function ModuleEditor({ module, modules, index, path, onChange, onMove, o
 
 const secondsLabel = (seconds: number) => (seconds % 60 ? `${Math.floor(seconds / 60)} min ${seconds % 60} s` : `${seconds / 60} min`);
 
-/** Définition d'une mission : partie orale, partie écrite (au moins l'une des deux) et liste de vérification. */
+/** Grilles B1 standard (plan B, §2.2) : 4 critères à l'écrit (5 points), 5 à l'oral (4 points), 20 points. */
+const standardGrids: Record<'schreiben' | 'sprechen', MissionCriterion[]> = {
+  schreiben: [
+    { id: 'aufgabe', label: 'Tâche : tous les points sont traités, destinataire et registre (du / Sie) respectés', maxPoints: 5 },
+    { id: 'kohaerenz', label: 'Cohérence : texte organisé (début, développement, fin), connecteurs variés', maxPoints: 5 },
+    { id: 'wortschatz', label: 'Vocabulaire : précis et assez varié pour le thème, formules adaptées', maxPoints: 5 },
+    { id: 'strukturen', label: 'Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension', maxPoints: 5 },
+  ],
+  sprechen: [
+    { id: 'aufgabe', label: 'Tâche : tous les points sont traités dans le temps imparti', maxPoints: 4 },
+    { id: 'kohaerenz', label: 'Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations', maxPoints: 4 },
+    { id: 'wortschatz', label: 'Vocabulaire : précis, formules d’usage adaptées', maxPoints: 4 },
+    { id: 'strukturen', label: 'Structures : phrases variées, verbe à la bonne place', maxPoints: 4 },
+    { id: 'aussprache', label: 'Prononciation et intonation : compréhensible, accent de phrase juste', maxPoints: 4 },
+  ],
+};
+
+/** Grille de correction d'une mission (niveaux B) : critères, points, grille standard. Sans critère : mission V4. */
+function CriteriaEditor({ mission, path, onChange }: { mission: MissionDefinition; path: string; onChange: (criteria: MissionCriterion[]) => void }) {
+  const { readOnly, locked } = useEditor();
+  const [replacing, setReplacing] = useState(false);
+  const criteria = missionCriteriaOf(mission);
+  const total = missionMaxScore(criteria);
+  const grid = mission.oral && !mission.written ? 'sprechen' : 'schreiben';
+  const gridName = grid === 'sprechen' ? 'oral' : 'écrit';
+  const warning = criteria.length > 0 && (criteria.length < 4 || criteria.length > 5 || total !== 20);
+  const apply = () => onChange(standardGrids[grid].map((criterion) => ({ ...criterion })));
+  return (
+    <section className="ed-subsection ed-criteria" data-path={`${path}.mission.criteria`}>
+      <header>
+        <h4>Grille de correction</h4>
+        <span className="ed-count">{total} pt{total > 1 ? 's' : ''}</span>
+        {warning && <span className="ed-issue-flag"><CircleAlert size={13} aria-hidden="true" />Niveaux B : 4 ou 5 critères, 20 points</span>}
+        {!readOnly && (
+          <button type="button" className="btn btn-soft btn-sm ed-criteria-standard" disabled={locked}
+            onClick={() => (criteria.length ? setReplacing(true) : apply())}>
+            <WandSparkles size={15} aria-hidden="true" /> Grille B1 standard ({gridName})
+          </button>
+        )}
+      </header>
+      <small className="ed-help">
+        Niveaux B : le correcteur note chaque critère (4 à l’écrit, 5 à l’oral, 20 points) ; la décision est proposée à partir de 60 %.
+        Sans critère, la mission est seulement validée ou à reprendre (A1, A2).
+      </small>
+      {criteria.length > 0 && (
+        <fieldset className="ed-fields ed-criteria-list" disabled={locked}>
+          <legend className="sr-only">Critères de la grille</legend>
+          {criteria.map((criterion, index) => (
+            <div className="ed-criterion ed-mission-criterion" key={index}>
+              <span className="ed-criterion-id" title="Identifiant du critère">{criterion.id}</span>
+              <label className="ed-criterion-label"><span className="sr-only">Critère {index + 1}</span>
+                <textarea rows={2} maxLength={missionLimits.criterionLabelChars} value={criterion.label} placeholder="Tâche : tous les points sont traités…"
+                  onChange={(event) => onChange(replaceAt(criteria, index, { ...criterion, label: event.target.value.replace(/\s*\n\s*/g, ' ') }))} /></label>
+              <label className="ed-criterion-points"><span className="sr-only">Points du critère {index + 1}</span>
+                <input type="number" min={1} max={missionLimits.criterionMaxPoints} value={criterion.maxPoints}
+                  onChange={(event) => onChange(replaceAt(criteria, index, { ...criterion, maxPoints: Number(event.target.value) }))} />
+                <span className="ed-points-suffix" aria-hidden="true">pts</span></label>
+              {!readOnly && <IconAction icon={Trash2} tone="danger" label={`Supprimer le critère ${index + 1}`}
+                onClick={() => onChange(criteria.filter((_, position) => position !== index))} />}
+            </div>
+          ))}
+          <MarkerHelp value={criteria.map((criterion) => criterion.label).join('\n')} />
+        </fieldset>
+      )}
+      {!readOnly && <AddCard disabled={locked || criteria.length >= missionLimits.criteriaMax} onClick={() => onChange([...criteria, {
+        id: uniqueId(`critere-${criteria.length + 1}`, criteria.map((item) => item.id)), label: '', maxPoints: 5,
+      }])}>Ajouter un critère</AddCard>}
+      {replacing && (
+        <ConfirmDialog title="Remplacer la grille ?" confirm="Remplacer" onConfirm={apply} onClose={() => setReplacing(false)}>
+          <p>Les {criteria.length} critères actuels seront remplacés par la grille B1 standard de l’{gridName} ({standardGrids[grid].length} critères, 20 points).</p>
+        </ConfirmDialog>
+      )}
+    </section>
+  );
+}
+
+/** Définition d'une mission : partie orale, partie écrite (au moins l'une des deux), liste de vérification et grille. */
 function MissionEditor({ mission, path, onChange }: { mission: MissionDefinition; path: string; onChange: (mission: MissionDefinition) => void }) {
   const { readOnly, locked } = useEditor();
   const update = (value: Partial<MissionDefinition>) => onChange({ ...mission, ...value });
   const parts = (mission.oral ? 1 : 0) + (mission.written ? 1 : 0);
   const checklistOk = mission.checklist.length >= missionLimits.checklistMin && mission.checklist.length <= missionLimits.checklistMax;
+  const span = missionLimits.maxSeconds - missionLimits.minSeconds;
   return (
     <div className="ed-mission" data-path={`${path}.mission`}>
       {parts === 0 && <Callout tone="warning">Une mission demande au moins une partie : orale, écrite ou les deux.</Callout>}
@@ -917,14 +1012,15 @@ function MissionEditor({ mission, path, onChange }: { mission: MissionDefinition
             <div className="ed-mission-part-body">
               <label>Consigne de l’oral<textarea rows={3} maxLength={1000} value={mission.oral.prompt}
                 placeholder="Appelez le cabinet médical : présentez-vous, expliquez pourquoi vous ne pouvez pas venir et proposez un autre jour."
-                onChange={(event) => update({ oral: { ...mission.oral!, prompt: event.target.value } })} /></label>
+                onChange={(event) => update({ oral: { ...mission.oral!, prompt: event.target.value } })} /><MarkerHelp value={mission.oral.prompt} /></label>
               <div className="ed-threshold-line">
                 <label htmlFor={`${path}-seconds`}>Durée maximale</label>
                 <input id={`${path}-seconds`} type="range" className="ed-range" min={missionLimits.minSeconds} max={missionLimits.maxSeconds} step={10}
-                  value={mission.oral.maxSeconds} style={{ ['--p' as string]: `${((mission.oral.maxSeconds - 30) / 90) * 100}%` }}
+                  value={mission.oral.maxSeconds} style={{ ['--p' as string]: `${((mission.oral.maxSeconds - missionLimits.minSeconds) / span) * 100}%` }}
                   onChange={(event) => update({ oral: { ...mission.oral!, maxSeconds: Number(event.target.value) } })} />
                 <strong>{secondsLabel(mission.oral.maxSeconds)}</strong>
               </div>
+              <small className="ed-help">Repères : 2 min au plus en A1 et A2, 1 min 30 à 3 min en B1, 2 à 5 min en B2.</small>
             </div>
           )}
         </section>
@@ -939,13 +1035,14 @@ function MissionEditor({ mission, path, onChange }: { mission: MissionDefinition
             <div className="ed-mission-part-body">
               <label>Consigne de l’écrit<textarea rows={3} maxLength={1000} value={mission.written.prompt}
                 placeholder="Écrivez un court message au cabinet pour confirmer le nouveau rendez-vous."
-                onChange={(event) => update({ written: { ...mission.written!, prompt: event.target.value } })} /></label>
+                onChange={(event) => update({ written: { ...mission.written!, prompt: event.target.value } })} /><MarkerHelp value={mission.written.prompt} /></label>
               <div className="ed-grid-2">
                 <label>Caractères au plus<input type="number" min={missionLimits.writtenMinChars} max={missionLimits.writtenMaxChars} step={50} value={mission.written.maxChars}
                   onChange={(event) => update({ written: { ...mission.written!, maxChars: Number(event.target.value) } })} /></label>
                 <label>Mots au moins<input type="number" min={0} max={missionLimits.minWordsMax} value={mission.written.minWords}
                   onChange={(event) => update({ written: { ...mission.written!, minWords: Number(event.target.value) } })} /></label>
               </div>
+              <small className="ed-help">Repères : 1 500 caractères au plus en A1 et A2, 1 000 à 1 500 en B1, 1 500 à 3 000 en B2.</small>
             </div>
           )}
         </section>
@@ -967,10 +1064,12 @@ function MissionEditor({ mission, path, onChange }: { mission: MissionDefinition
                 onRemove={() => update({ checklist: mission.checklist.filter((_, position) => position !== index) })} />}
             </div>
           ))}
+          {mission.checklist.length > 0 && <MarkerHelp value={mission.checklist.join('\n')} />}
         </fieldset>
         {!readOnly && <AddCard disabled={locked || mission.checklist.length >= missionLimits.checklistMax}
           onClick={() => update({ checklist: [...mission.checklist, ''] })}>Ajouter un point</AddCard>}
       </section>
+      <CriteriaEditor mission={mission} path={path} onChange={(criteria) => update({ criteria })} />
     </div>
   );
 }
@@ -1143,6 +1242,7 @@ export function DiagnosticEditor({ diagnostic, modules, levelCode, onChange }: {
           </fieldset>
           <TextWithPreview label="Présentation" rows={4} readOnly={readOnly} disabled={locked} value={diagnostic.description}
             onChange={(value) => onChange({ ...diagnostic, description: value })} />
+          <MarkerHelp value={diagnostic.description} />
         </Card>
         <Card title="Questions" icon={<ListChecks size={18} />} description="Chaque question est rattachée au module qu’elle permet de valider.">
           <QuestionsEditor questions={diagnostic.questions} moduleRefs={moduleRefs} path="diagnostic" onChange={(questions) => onChange({ ...diagnostic, questions })} />
@@ -1183,6 +1283,7 @@ function PartEditor({ part, path, onChange }: { part: Part; path: string; onChan
       <div data-path={`${path}.instructions`}>
         <TextWithPreview label="Consigne" rows={4} maxLength={4000} readOnly={readOnly} disabled={locked} value={part.instructions}
           onChange={(value) => update({ instructions: value })} />
+        <MarkerHelp value={part.instructions} />
       </div>
       {production ? (
         <section className="ed-subsection" data-path={`${path}.criteria`}>
@@ -1247,6 +1348,7 @@ export function AssessmentEditor({ kind, assessment, path, onChange }: {
         </fieldset>
         <TextWithPreview label="Présentation" rows={3} maxLength={2000} readOnly={readOnly} disabled={locked} value={assessment.description}
           onChange={(value) => update({ description: value })} />
+        <MarkerHelp value={assessment.description} />
       </Card>
       <div className="ed-parts" data-path={`${path}.parts`}>
         {assessment.parts.map((part, index) => {

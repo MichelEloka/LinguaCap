@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.linguacap.common.Actor;
@@ -355,7 +356,9 @@ public class PathResource {
         if (!viewer.educator() && !PathRules.SUBMITTED_FINAL.contains(active.goalStatus())) {
             throw HttpError.conflict("Le niveau suivant s’ouvre à la remise de l’examen blanc du niveau en cours.");
         }
-        if (paths.activateNext(pathId, null, callerId, today()) != null) afterActivation(pathId, callerId);
+        if (paths.activateNext(pathId, null, callerId, today(), prerequisites(steps, callerId)) != null) {
+            afterActivation(pathId, callerId);
+        }
         return view(paths.byId(pathId), viewer);
     }
 
@@ -489,7 +492,7 @@ public class PathResource {
     void validateProposal(PathRow path, Viewer viewer, int number) {
         if ("draft".equals(path.status())) {
             if (!viewer.learner()) throw HttpError.forbidden("L’élève valide lui-même son planning pour démarrer son parcours.");
-            paths.start(path.id(), number, viewer.accompanied());
+            paths.start(path.id(), number, viewer.accompanied(), prerequisites(paths.steps(path.id()), viewer.callerId()));
             return;
         }
         if (!"active".equals(path.status())) throw HttpError.conflict("Ce parcours n’est plus actif.");
@@ -563,7 +566,9 @@ public class PathResource {
         if (step == null) return;
         switch (PathRules.examFollowUp(step.status(), nextStep(steps, step) != null, kind, event, decision)) {
             case ACTIVATE_NEXT -> {
-                if (paths.activateNext(path.id(), step.id(), callerId, today()) != null) afterActivation(path.id(), callerId);
+                if (paths.activateNext(path.id(), step.id(), callerId, today(), prerequisites(steps, callerId)) != null) {
+                    afterActivation(path.id(), callerId);
+                }
             }
             case COMPLETE_PATH -> paths.complete(enrollmentId);
             case NONE -> { }
@@ -701,6 +706,18 @@ public class PathResource {
             slots.add(new Slot(rank, level, track.versionId(), track.number(), "planned", null, null, List.of()));
         }
         return slots;
+    }
+
+    /**
+     * Prérequis du niveau de chaque version, lu dans le catalogue (planning.prerequisiteLevelCode) et non déduit du
+     * rang : les versions des niveaux prévus sont lues avant la transaction qui ouvre un niveau, qui ne fait alors que
+     * consulter ce cache (une version inattendue est lue à la demande).
+     */
+    Function<UUID, String> prerequisites(List<StepRow> steps, UUID callerId) {
+        Catalogue catalogue = catalogue(callerId);
+        steps.stream().filter(step -> "planned".equals(step.status())).findFirst()
+                .ifPresent(step -> catalogue.track(step.trackVersionId()));
+        return versionId -> PathRules.prerequisiteOf(catalogue.track(versionId));
     }
 
     /** Niveaux prévus à enregistrer pour une liste de niveaux (les niveaux ouverts ou terminés sont conservés). */

@@ -134,6 +134,8 @@ export function PathProposalView({ proposal, busy = false, onApply, onValidate, 
   const levelsInWeek = current ? [...new Set(proposal.sessions
     .filter((session) => { const date = localDate(session.date); return date >= current.start && date < addDays(current.start, 7); })
     .map((session) => session.levelCode).filter(Boolean))] as LevelCode[] : [];
+  // Séance sans niveau (révision commune…) : couleur du premier niveau du parcours, sinon teinte neutre.
+  const firstLevel = proposal.levels[0]?.levelCode ?? 'A0';
 
   return (
     <div className="pp">
@@ -216,7 +218,7 @@ export function PathProposalView({ proposal, busy = false, onApply, onValidate, 
                   {items.length > 0 && (
                     <div className="pp-day-items">
                       {items.map((session) => (
-                        <button key={`${session.date}-${session.slot}`} type="button" className={`pp-session lvl-${session.levelCode ?? 'A1'}`} onClick={() => setOpened(session)}>
+                        <button key={`${session.date}-${session.slot}`} type="button" className={`pp-session lvl-${session.levelCode ?? firstLevel}`} onClick={() => setOpened(session)}>
                           <strong>{session.title}</strong>
                           <small>{session.levelCode ? `${session.levelCode} · ` : ''}{formatMinutes(session.minutes)}</small>
                           <span className="sr-only">, {session.items.length} activité{session.items.length > 1 ? 's' : ''}</span>

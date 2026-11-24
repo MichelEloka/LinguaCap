@@ -6,6 +6,25 @@ function escape(value = '') {
   })[char]);
 }
 
+/**
+ * Texte d'une consigne avec ses marqueurs de traduction (format 5) : « allemand [fr] français » affiche le français sous
+ * l'allemand, « allemand [fr?] français » le replie sous « Aide en français » ; une ligne « [fr] … » traduit le bloc
+ * précédent. Un texte sans marqueur est rendu tel quel (A1, A2).
+ */
+function gloss(value = '') {
+  const source = String(value ?? '');
+  if (!/\[fr\??\]/.test(source)) return escape(source);
+  return source.split('\n').map((line) => {
+    const match = /^(.*?)(?:^| )\[fr(\?)?\] (.*)$/.exec(line);
+    if (!match) return escape(line);
+    const [, german, folded, french] = match;
+    const translation = folded
+      ? `<details class="aide"><summary>Aide en français</summary><span lang="fr">${escape(french)}</span></details>`
+      : `<span class="fr" lang="fr">${escape(french)}</span>`;
+    return german.trim() ? `<span lang="de">${escape(german)}</span>${folded ? '' : '\n'}${translation}` : translation;
+  }).join('\n');
+}
+
 /** Ordre d'affichage des jetons d'une question « order » : alphabétique, décalé d'un cran s'il donne la solution. */
 function shuffledTokens(answers) {
   const tokens = [...answers[0]].sort((left, right) => left.localeCompare(right, 'de'));
@@ -86,23 +105,26 @@ export function renderWorkbook(level, edition = 'V3') {
       const choices = questionType(question) === 'choice' ? `<ol type="a">${(question.options ?? []).map((option) => `<li>${escape(option.label)}
         ${placements.filter((item) => item.questionId === question.id && item.optionId === option.id)
           .map((item) => support(item, showTranscript)).join('')}</li>`).join('')}</ol>` : '';
-      return `<li><p class="text">${escape(question.prompt)}</p>
+      return `<li><p class="text">${gloss(question.prompt)}</p>
       ${placements.filter((item) => item.questionId === question.id && !item.optionId).map((item) => support(item, showTranscript)).join('')}
       ${body(question)}${choices}</li>`;
     });
     const answers = list.map((question) => `<li>${escape(expected(question))}${question.explanation
-      ? `<br><span class="why">${escape(question.explanation)}</span>` : ''}</li>`);
+      ? `<br><span class="why">${gloss(question.explanation)}</span>` : ''}</li>`);
     return `<ol class="questions">${prompts.join('')}</ol><details><summary>Voir les réponses</summary><ol>${answers.join('')}</ol></details>`;
   }
 
   function mission(activity) {
-    const { oral, written, checklist } = activity.mission ?? {};
+    const { oral, written, checklist, criteria } = activity.mission ?? {};
     if (!activity.mission) return '';
+    const total = (criteria ?? []).reduce((sum, criterion) => sum + criterion.maxPoints, 0);
     return `<div class="mission">
-      ${oral ? `<h4>À l’oral · ${duration(oral.maxSeconds ?? 120)} au plus</h4><p class="text">${escape(oral.prompt)}</p>` : ''}
+      ${oral ? `<h4>À l’oral · ${duration(oral.maxSeconds ?? 120)} au plus</h4><p class="text">${gloss(oral.prompt)}</p>` : ''}
       ${written ? `<h4>À l’écrit · ${written.minWords ? `${written.minWords} mots au moins, ` : ''}${written.maxChars ?? 1500} caractères au plus</h4>
-        <p class="text">${escape(written.prompt)}</p>` : ''}
-      ${checklist?.length ? `<h4>Avant d’envoyer</h4><ul class="check">${checklist.map((item) => `<li>${escape(item)}</li>`).join('')}</ul>` : ''}
+        <p class="text">${gloss(written.prompt)}</p>` : ''}
+      ${checklist?.length ? `<h4>Avant d’envoyer</h4><ul class="check">${checklist.map((item) => `<li>${gloss(item)}</li>`).join('')}</ul>` : ''}
+      ${criteria?.length ? `<h4>Comment votre production sera évaluée · ${total} points</h4><ul>${criteria.map(({ label, maxPoints }) =>
+        `<li>${gloss(label)} · ${maxPoints} pt</li>`).join('')}</ul>` : ''}
     </div>`;
   }
 
@@ -121,20 +143,20 @@ export function renderWorkbook(level, edition = 'V3') {
     <h2>${index + 1}. ${escape(module.title)}</h2><p>${escape(module.objective)}</p>
     ${module.activities.map((activity) => `<details class="activity">
       <summary>${escape(activity.title)} <span>${activity.estimatedMinutes} min</span></summary>
-      <p class="text">${escape(activity.lesson.description)}</p>
+      <p class="text">${gloss(activity.lesson.description)}</p>
       ${mainSupports(activity.placements, true)}
       ${activity.kind === 'mission' ? mission(activity) : questions(activity.questions, activity.placements)}
       </details>`).join('')}
     ${lexicon(module)}
     </section>`);
   const assessments = level.assessments.map(({ title, description, parts }) => `<section>
-    <h2>${escape(title)}</h2><p>${escape(description)}</p>
+    <h2>${escape(title)}</h2><p>${gloss(description)}</p>
     ${parts.map((part) => `<details class="activity"><summary>${escape(part.title)}</summary>
-      <p class="text">${escape(part.instructions)}</p>
+      <p class="text">${gloss(part.instructions)}</p>
       ${mainSupports(part.placements, false)}
       ${questions(part.questions, part.placements, false)}
       ${part.criteria?.length ? `<h3>Grille</h3><ul>${part.criteria.map(({ label, maxPoints }) =>
-        `<li>${escape(label)} · ${maxPoints} pt</li>`).join('')}</ul>` : ''}
+        `<li>${gloss(label)} · ${maxPoints} pt</li>`).join('')}</ul>` : ''}
       </details>`).join('')}
     </section>`);
   return `<!doctype html>
@@ -154,6 +176,7 @@ export function renderWorkbook(level, edition = 'V3') {
   figure{margin:1rem 0}figcaption{color:#455d54}audio,img{display:block;max-width:100%}img{max-height:20rem;object-fit:contain}
   .blank{display:inline-block;min-width:4em;border-bottom:2px solid #455d54}.tokens span{display:inline-block;border:1px solid #b9cbc3;
     border-radius:.5rem;padding:.1rem .5rem;margin:.15rem}.match{display:flex;gap:2rem;flex-wrap:wrap}.hint,.muted,.why{color:#455d54}
+  .fr{color:#455d54;font-style:italic}.aide{display:inline-block;margin-left:.4rem;color:#455d54}.aide summary{font-weight:400}
   .mission h4{margin:.75rem 0 .25rem}.check{list-style:"☐ "}.lexicon{width:100%;border-collapse:collapse}
   .lexicon th,.lexicon td{text-align:left;vertical-align:top;padding:.35rem;border-bottom:1px solid #d8e3de}
   @media print{body{width:100%;margin:0}header,section,nav{border:0;padding:.5rem}}
@@ -167,7 +190,7 @@ export function renderWorkbook(level, edition = 'V3') {
   <ol>${level.modules.map(({ id, title }) => `<li><a href="#${escape(id)}">${escape(title)}</a></li>`).join('')}</ol></nav>
 <main>
   <section id="diagnostic"><h2>${escape(level.diagnostic.title)}</h2>
-    <p>${escape(level.diagnostic.description)}</p>
+    <p>${gloss(level.diagnostic.description)}</p>
     <details><summary>Ouvrir le diagnostic</summary>${questions(level.diagnostic.questions)}</details>
   </section>
   ${modules.join('\n')}

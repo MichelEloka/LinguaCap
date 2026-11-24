@@ -1,11 +1,13 @@
 package org.linguacap.learning;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import org.linguacap.common.Cefr;
 import org.linguacap.common.HttpError;
 import org.linguacap.learning.Planner.Day;
 
@@ -14,8 +16,6 @@ import org.linguacap.learning.Planner.Day;
  * d'un objectif, disponibilités proposées, faisabilité d'un planning et droits calculés renvoyés au front.
  */
 final class PathRules {
-    /** Niveaux du cadre européen, dans l'ordre : A1 a le rang 1, C2 le rang 6 (A0 = 0, débutant). */
-    static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
     /** Horizon d'un parcours : trois ans au plus entre le début et la date cible. */
     static final int MAX_PATH_DAYS = 1095;
     static final Set<String> SUBMITTED_FINAL = Set.of("awaiting_grading", "validated", "to_consolidate");
@@ -44,19 +44,27 @@ final class PathRules {
                        boolean canProposeContract, boolean canDecideContract, boolean canPause, boolean canAddCourses,
                        boolean canAdvance) {}
 
-    /** Rang d'un niveau : A0 = 0, A1 = 1 … C2 = 6, -1 si inconnu. */
+    /** Rang d'un niveau sur l'échelle du CECRL : A0 = 0, A1 = 1 … C2 = 6, -1 si inconnu. */
     static int rank(String level) {
-        if ("A0".equals(level)) return 0;
-        int index = level == null ? -1 : LEVELS.indexOf(level);
-        return index < 0 ? -1 : index + 1;
+        return Cefr.rank(level);
     }
 
     static String levelOfRank(int rank) {
-        return rank >= 1 && rank <= LEVELS.size() ? LEVELS.get(rank - 1) : null;
+        return Cefr.levelOfRank(rank);
+    }
+
+    /**
+     * Prérequis d'une étape de parcours : celui du niveau au catalogue (planning.prerequisiteLevelCode de la version),
+     * jamais déduit du rang. Null pour un niveau sans prérequis ou une structure illisible.
+     */
+    static String prerequisiteOf(JsonNode track) {
+        if (track == null) return null;
+        String code = track.path("planning").path("prerequisiteLevelCode").asText("");
+        return Cefr.isLevel(code) ? code : null;
     }
 
     static String checkStartLevel(String level) {
-        if (level == null || rank(level) < 0 || "C2".equals(level)) {
+        if (!Cefr.isStartLevel(level)) {
             throw HttpError.badRequest("Indiquez le niveau de départ : A0 pour un débutant, ou A1 à C1.");
         }
         return level;
@@ -77,7 +85,7 @@ final class PathRules {
     /** Cibles autorisées : niveaux publiés consécutifs au-dessus du niveau de départ. */
     static List<String> allowedTargets(String startLevel, Set<String> publishedLevels) {
         List<String> allowed = new ArrayList<>();
-        for (int rank = Math.max(1, rank(startLevel) + 1); rank <= LEVELS.size(); rank++) {
+        for (int rank = Math.max(1, rank(startLevel) + 1); rank <= Cefr.LEVELS.size(); rank++) {
             String level = levelOfRank(rank);
             if (!publishedLevels.contains(level)) break;
             allowed.add(level);

@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.UUID;
+import java.util.function.Function;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
 import org.linguacap.learning.Planner.Day;
@@ -321,8 +322,9 @@ class PathStore {
     /**
      * Démarrage d'un brouillon par l'élève : inscription du premier niveau, séances, parcours actif et contrat n°1
      * (en attente du professeur pour un élève suivi, qui peut commencer tout de suite ; accepté d'office sinon).
+     * prerequisiteOf : prérequis du niveau d'une version, lu dans le catalogue (jamais déduit du rang).
      */
-    void start(UUID pathId, int number, boolean accompanied) {
+    void start(UUID pathId, int number, boolean accompanied, Function<UUID, String> prerequisiteOf) {
         transaction("start path", connection -> {
             PathRow path = lock(connection, pathId);
             if (!"draft".equals(path.status())) throw HttpError.conflict("Ce parcours a déjà démarré.");
@@ -334,7 +336,7 @@ class PathStore {
             List<Day> days = PathPlanner.parseDays(revision.availability());
             List<PathPlanner.PlannedSession> planned = PathPlanner.parseSessions(revision.plan().path("sessions"), first.levelCode());
             LocalDate levelTarget = levelTarget(path, steps, first, planned, revision.startDate());
-            String prerequisite = PathRules.levelOfRank(first.rank() - 1);
+            String prerequisite = prerequisiteOf.apply(first.trackVersionId());
             UUID enrollmentId = goals.insertEnrollment(connection, path.learnerId(), first.levelCode(),
                     first.trackVersionId(), first.trackVersionNumber(), path.learnerId(), path.startLevel(),
                     revision.startDate(), levelTarget, "custom", "active", prerequisite, true, days);
@@ -415,8 +417,10 @@ class PathStore {
      * Ouvre le niveau suivant : l'inscription du niveau en cours se termine, celle du niveau suivant est créée en
      * préparation (goal_set) et le niveau devient actif. {@code expectedStep} : niveau dont l'examen blanc vient d'être
      * remis (null pour un passage forcé). Renvoie le niveau ouvert, ou null si ce niveau n'est plus le niveau actif.
+     * prerequisiteOf : prérequis du niveau d'une version, lu dans le catalogue ; il est réputé acquis, le parcours
+     * menant au niveau suivant.
      */
-    UUID activateNext(UUID pathId, UUID expectedStep, UUID by, LocalDate today) {
+    UUID activateNext(UUID pathId, UUID expectedStep, UUID by, LocalDate today, Function<UUID, String> prerequisiteOf) {
         return transaction("activate next level", connection -> {
             PathRow path = lock(connection, pathId);
             if (!"active".equals(path.status())) throw HttpError.conflict("Ce parcours n’est plus actif.");
@@ -453,7 +457,7 @@ class PathStore {
             LocalDate levelTarget = levelTarget(path, steps, next, planned, today);
             UUID enrollmentId = goals.insertEnrollment(connection, path.learnerId(), next.levelCode(),
                     next.trackVersionId(), next.trackVersionNumber(), by, current.levelCode(), today, levelTarget,
-                    "custom", "preparing", current.levelCode(), true, availability(connection, pathId));
+                    "custom", "preparing", prerequisiteOf.apply(next.trackVersionId()), true, availability(connection, pathId));
             activateStep(connection, next.id(), enrollmentId);
             return next.id();
         });

@@ -173,6 +173,15 @@ class AccountRulesTest {
     }
 
     @Test
+    void lesNiveauxEnseignesSuiventLEchelleEtPeuventPrecederLeCatalogue() {
+        // L'échelle du CECRL valide et trie ; un niveau que le catalogue ne propose pas encore (C1) reste déclarable.
+        TeacherProfileRequest profile = AccountRules.checkTeacherProfile(
+                teacherProfile(List.of("de"), List.of("c1", "B2", "a2", "B1", "C2"), null, null, ""), OPEN);
+        assertEquals(List.of("A2", "B1", "B2", "C1", "C2"), profile.levels());
+        assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of("de"), List.of("A0"), null, null, ""), OPEN));
+    }
+
+    @Test
     void leQuestionnaireDuProfesseurRefuseLesReponsesInvalides() {
         assertRefused(400, () -> AccountRules.checkTeacherProfile(null, OPEN));
         assertRefused(400, () -> AccountRules.checkTeacherProfile(teacherProfile(List.of(), List.of("A1"), null, null, ""), OPEN));

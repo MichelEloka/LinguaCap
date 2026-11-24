@@ -9,7 +9,6 @@ import jakarta.ws.rs.WebApplicationException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -20,6 +19,7 @@ import java.util.UUID;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.linguacap.common.Actor;
+import org.linguacap.common.Cefr;
 import org.linguacap.common.HttpError;
 import org.linguacap.common.ServiceClient;
 import org.linguacap.learning.LibraryResource.LastResult;
@@ -39,7 +39,6 @@ import org.linguacap.learning.LibraryResource.Practice;
 @ApplicationScoped
 class LibraryContent {
     private static final Logger LOG = Logger.getLogger(LibraryContent.class);
-    static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
     /**
      * Leçons, exercices et missions sont en accès libre : révisions et évaluations restent dans le parcours. Une
      * mission remise depuis la bibliothèque est envoyée au correcteur de l'élève (Évaluations).
@@ -65,16 +64,22 @@ class LibraryContent {
         static final PathVersions NONE = new PathVersions(null, Set.of());
     }
 
-    /** Versions publiées de la langue, de la plus élémentaire à la plus avancée. */
+    /** Versions publiées de la langue, dans l'ordre des niveaux au catalogue (position). */
     List<JsonNode> publishedTracks(UUID callerId, String languageId) {
-        List<JsonNode> tracks = new ArrayList<>();
-        for (JsonNode track : services.request(catalogueUrl, "/v1/tracks", "GET", callerId, null)) {
-            if (languageId.equals(languageOf(track)) && LEVELS.contains(track.path("levelCode").asText())) {
-                tracks.add(track);
-            }
+        return publishedTracks(services.request(catalogueUrl, "/v1/tracks", "GET", callerId, null), languageId);
+    }
+
+    /**
+     * Versions publiées d'une langue, parmi celles de GET /v1/tracks (déjà triées par langue puis position du niveau) :
+     * l'ordre du catalogue est gardé, l'échelle ne sert qu'à écarter un code de niveau inconnu.
+     */
+    static List<JsonNode> publishedTracks(JsonNode tracks, String languageId) {
+        List<JsonNode> published = new ArrayList<>();
+        if (tracks == null || !tracks.isArray()) return published;
+        for (JsonNode track : tracks) {
+            if (languageId.equals(languageOf(track)) && Cefr.isLevel(track.path("levelCode").asText())) published.add(track);
         }
-        tracks.sort(Comparator.comparingInt(track -> LEVELS.indexOf(track.path("levelCode").asText())));
-        return tracks;
+        return published;
     }
 
     /** Structure d'une version (modules, activités, statut), ou null si elle n'est plus lisible. */

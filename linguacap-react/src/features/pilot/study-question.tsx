@@ -3,10 +3,12 @@
  * (`QuestionFrame`) et question à choix (`QuestionCard`), choix en tuiles.
  * Chaque choix reste un bouton radio natif dont le nom accessible est le texte du choix ; l'image d'un choix
  * illustré fait partie de la tuile (un clic dessus sélectionne la réponse), son enregistrement reste à côté.
+ * Niveaux B : la consigne porte sa traduction (` [fr] `, affichée dessous) ou une aide repliée (` [fr?] `), voir bilingual.tsx.
  */
 import { useRef } from 'react';
 import type { ReactNode, Ref } from 'react';
 import { AlertCircle, Check } from 'lucide-react';
+import { BilingualText } from './bilingual';
 import './learner-session.css';
 
 export interface ChoiceExtra { label?: string; picture?: ReactNode; audio?: ReactNode }
@@ -34,7 +36,7 @@ export function QuestionFrame({ index, prompt, tag, answered = false, locked = f
       <legend className="study-question-head">
         <span className="study-question-num" aria-hidden="true">{answered && !locked ? <Check size={15} strokeWidth={3} /> : index + 1}</span>
         <span className="sr-only">Question {index + 1} : </span>
-        <span className="study-question-prompt">{prompt}</span>
+        <span className="study-question-prompt"><BilingualText text={prompt} /></span>
         {tag && <span className="study-question-tag">{tag}</span>}
       </legend>
       {media && <div className="study-question-media">{media}</div>}

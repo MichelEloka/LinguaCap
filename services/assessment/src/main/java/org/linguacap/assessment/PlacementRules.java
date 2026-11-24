@@ -26,6 +26,7 @@ import org.linguacap.assessment.PlacementResource.PlacementTier;
 import org.linguacap.assessment.PlacementResource.PlacementView;
 import org.linguacap.assessment.PlacementResource.QuestionOption;
 import org.linguacap.assessment.PlacementResource.QuestionPlacement;
+import org.linguacap.common.Cefr;
 import org.linguacap.common.HttpError;
 
 /**
@@ -35,9 +36,8 @@ import org.linguacap.common.HttpError;
  */
 final class PlacementRules {
     static final String DONT_KNOW = "dontknow";
-    static final String BEGINNER = "A0";
+    static final String BEGINNER = Cefr.BEGINNER;
     static final Duration RETAKE_DELAY = Duration.ofHours(24);
-    static final List<String> LEVELS = List.of("A1", "A2", "B1", "B2", "C1", "C2");
     static final int DEFAULT_PASS_PERCENT = 67;
     static final int DEFAULT_MIN_COMPETENCE_PERCENT = 34;
     static final int DEFAULT_DRAW_COUNT = 12;
@@ -45,8 +45,6 @@ final class PlacementRules {
     private static final ZoneId PILOT_ZONE = ZoneId.of("Europe/Paris");
     private static final String[] MONTHS = {"janvier", "février", "mars", "avril", "mai", "juin", "juillet", "août",
         "septembre", "octobre", "novembre", "décembre"};
-    private static final Map<String, String> LABELS = Map.of(BEGINNER, "Débutant", "A1", "A1 · Découverte",
-            "A2", "A2 · Survie", "B1", "B1 · Seuil", "B2", "B2 · Avancé", "C1", "C1 · Autonome", "C2", "C2 · Maîtrise");
 
     private PlacementRules() {}
 
@@ -93,10 +91,10 @@ final class PlacementRules {
         Map<String, JsonNode> byCode = new LinkedHashMap<>();
         for (JsonNode tier : test.path("tiers")) {
             String code = tier.path("code").asText("");
-            if (LEVELS.contains(code) && !byCode.containsKey(code)) byCode.put(code, tier);
+            if (Cefr.isLevel(code) && !byCode.containsKey(code)) byCode.put(code, tier);
         }
         List<String> codes = new ArrayList<>(byCode.keySet());
-        codes.sort(Comparator.comparingInt(LEVELS::indexOf));
+        codes.sort(Cefr.ORDER);
         for (String code : codes) {
             JsonNode tier = byCode.get(code);
             List<JsonNode> bank = new ArrayList<>();
@@ -394,11 +392,36 @@ final class PlacementRules {
     // --- Vues -------------------------------------------------------------------------------------------------
 
     static String label(String level) {
-        return LABELS.getOrDefault(level, level);
+        return Cefr.label(level);
     }
 
-    /** Résultat d'une tentative terminée, avec un résumé bienveillant ; null tant que le test est en cours. */
+    /**
+     * Niveaux publiés d'une langue d'après GET /v1/tracks (une version publiée par niveau) ; une version sans langue
+     * date d'avant les parcours multi-langues : elle est en allemand.
+     */
+    static Set<String> publishedLevels(JsonNode tracks, String languageId) {
+        Set<String> levels = new HashSet<>();
+        if (tracks == null || !tracks.isArray()) return levels;
+        for (JsonNode track : tracks) {
+            String language = track.hasNonNull("languageId") ? track.path("languageId").asText() : "de";
+            String code = track.path("levelCode").asText("");
+            if (language.equals(languageId) && Cefr.isLevel(code)) levels.add(code);
+        }
+        return levels;
+    }
+
+    /** Résultat sans connaître les niveaux publiés (catalogue indisponible) : aucun niveau suivant n'est annoncé. */
     static PlacementResult result(PlacementStore.Attempt attempt) {
+        return result(attempt, null);
+    }
+
+    /**
+     * Résultat d'une tentative terminée, avec un résumé bienveillant ; null tant que le test est en cours.
+     * published : niveaux publiés de la langue (catalogue), ou null s'ils sont inconnus. Le résumé n'annonce un niveau
+     * comme ouvert que s'il est publié ; un niveau suivant non publié est annoncé « bientôt » ; sans catalogue, aucun
+     * niveau suivant n'est annoncé.
+     */
+    static PlacementResult result(PlacementStore.Attempt attempt, Set<String> published) {
         if (!"completed".equals(attempt.status())) return null;
         String placed = attempt.placedLevel();
         if (attempt.declaredBeginner()) {
@@ -411,16 +434,21 @@ final class PlacementRules {
         String summary;
         if (BEGINNER.equals(placed)) {
             String first = firstTier(attempt.definition());
-            summary = "Le palier " + (first == null ? "A1" : first) + " n’est pas encore acquis : votre parcours "
-                    + "commencera par les bases, pas à pas.";
+            summary = "Le palier " + (first == null ? Cefr.levelOfRank(1) : first) + " n’est pas encore acquis : votre "
+                    + "parcours commencera par les bases, pas à pas.";
         } else if (beyond) {
+            String next = Cefr.next(placed);
             summary = "Vous avez validé tous les paliers du test, jusqu’à " + placed + " : votre niveau dépasse peut-être "
-                    + "ce qu’il mesure. Un professeur pourra l’affiner avec vous.";
+                    + "ce qu’il mesure. Un professeur pourra l’affiner avec vous."
+                    + (next != null && published != null && !published.contains(next)
+                            ? " Le parcours " + next + " arrive bientôt." : "");
         } else {
-            int rank = LEVELS.indexOf(placed);
-            String next = rank >= 0 && rank + 1 < LEVELS.size() ? LEVELS.get(rank + 1) : null;
-            summary = "Vous avez validé le palier " + placed + (next == null ? "." : " : votre parcours peut commencer au niveau "
-                    + next + ".");
+            String next = Cefr.next(placed);
+            String announce;
+            if (next == null || published == null) announce = ".";
+            else if (published.contains(next)) announce = " : votre parcours peut commencer au niveau " + next + ".";
+            else announce = " : le parcours " + next + " arrive bientôt.";
+            summary = "Vous avez validé le palier " + placed + announce;
         }
         return new PlacementResult(placed, label(placed), summary, beyond, false);
     }
@@ -431,6 +459,12 @@ final class PlacementRules {
      */
     static PlacementView view(PlacementStore.Attempt attempt, boolean owner, Map<String, MediaFile> media,
                               OffsetDateTime retakeAvailableAt) {
+        return view(attempt, owner, media, retakeAvailableAt, null);
+    }
+
+    /** Vue avec les niveaux publiés de la langue (null : inconnus), pour le résumé du résultat. */
+    static PlacementView view(PlacementStore.Attempt attempt, boolean owner, Map<String, MediaFile> media,
+                              OffsetDateTime retakeAvailableAt, Set<String> published) {
         boolean open = owner && "in_progress".equals(attempt.status());
         List<PlacementQuestion> questions = new ArrayList<>();
         Map<String, String> saved = new LinkedHashMap<>();
@@ -444,7 +478,7 @@ final class PlacementRules {
         }
         return new PlacementView(attempt.id(), attempt.learnerId(), attempt.languageId(), attempt.testId(),
                 attempt.testNumber(), attempt.status(), attempt.currentTier(), tiers(attempt), questions, saved,
-                result(attempt), text(attempt.startedAt()), text(attempt.completedAt()), text(retakeAvailableAt));
+                result(attempt, published), text(attempt.startedAt()), text(attempt.completedAt()), text(retakeAvailableAt));
     }
 
     static List<PlacementTier> tiers(PlacementStore.Attempt attempt) {

@@ -11,6 +11,7 @@ import java.sql.Array;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -22,8 +23,9 @@ import org.linguacap.common.Outbox;
 
 /**
  * Remises de missions (EVO-044) : brouillon unique par mission, remise horodatée vers le professeur référent ou le
- * correcteur désigné, retour « validée » ou « à reprendre », reprise numérotée. Les événements
- * assessment.mission_submitted et assessment.mission_reviewed sont écrits dans la même transaction.
+ * correcteur désigné, retour « validée » ou « à reprendre » (avec les points par critère, le score et le score maximal
+ * d'une mission à grille), reprise numérotée. Les événements assessment.mission_submitted et
+ * assessment.mission_reviewed sont écrits dans la même transaction.
  */
 @ApplicationScoped
 class MissionStore {
@@ -42,7 +44,7 @@ class MissionStore {
                    JsonNode definition, String text, List<Integer> checklist, UUID recordingId, String recordingMime,
                    UUID reviewerId, String reviewerKind, String submitKey, OffsetDateTime submittedAt, String decision,
                    String comment, UUID reviewedBy, OffsetDateTime reviewedAt, OffsetDateTime createdAt,
-                   OffsetDateTime updatedAt) {}
+                   OffsetDateTime updatedAt, JsonNode points, Integer score, Integer maxScore) {}
 
     /** Mission du catalogue à ouvrir : niveau, module, leçon de consigne et définition figée. */
     record Draft(String levelCode, String moduleId, String lessonId, ObjectNode definition) {}
@@ -187,8 +189,11 @@ class MissionStore {
         });
     }
 
-    /** Retour du correcteur : « validée » ou « à reprendre », avec son commentaire. */
-    Mission review(UUID id, UUID reviewerId, String decision, String comment) {
+    /**
+     * Retour du correcteur : « validée » ou « à reprendre », avec son commentaire et, pour une mission à grille, les
+     * points par critère, le score et le score maximal (grade null : mission sans grille).
+     */
+    Mission review(UUID id, UUID reviewerId, String decision, String comment, MissionRules.Grade grade) {
         return transaction("review mission", connection -> {
             Mission mission = find(connection, id, true);
             if (mission == null) throw HttpError.notFound("Mission introuvable.");
@@ -196,13 +201,17 @@ class MissionStore {
             if (refusal != null) throw HttpError.conflict(refusal);
             try (var update = connection.prepareStatement("""
                     update assessment.mission_submissions
-                    set status = 'reviewed', decision = ?, comment = ?, reviewed_by = ?, reviewed_at = now(), updated_at = now()
+                    set status = 'reviewed', decision = ?, comment = ?, reviewed_by = ?, reviewed_at = now(), updated_at = now(),
+                        points = ?::jsonb, score = ?, max_score = ?
                     where id = ?
                     """)) {
                 update.setString(1, decision);
                 update.setString(2, comment == null || comment.isBlank() ? null : comment);
                 update.setObject(3, reviewerId);
-                update.setObject(4, id);
+                update.setString(4, grade == null ? null : grade.points().toString());
+                update.setObject(5, grade == null ? null : grade.score(), Types.INTEGER);
+                update.setObject(6, grade == null ? null : grade.maxScore(), Types.INTEGER);
+                update.setObject(7, id);
                 update.executeUpdate();
             }
             Mission reviewed = find(connection, id, false);
@@ -221,6 +230,8 @@ class MissionStore {
                 .put("sessionActivityId", mission.sessionActivityId())
                 .put("submittedAt", text(mission.submittedAt()));
         if (mission.reviewedAt() != null) data.put("decision", mission.decision()).put("reviewedAt", text(mission.reviewedAt()));
+        // Retour sur grille : score et score maximal (clés facultatives, absentes sans grille), jamais les points.
+        if (mission.score() != null) data.put("score", mission.score()).put("maxScore", mission.maxScore());
         Outbox.emit(connection, "assessment.outbox_events", type, "mission", mission.id().toString(), mission.learnerId(),
                 null, data);
     }
@@ -305,7 +316,8 @@ class MissionStore {
                         rows.getString("submit_key"), rows.getObject("submitted_at", OffsetDateTime.class),
                         rows.getString("decision"), rows.getString("comment"), rows.getObject("reviewed_by", UUID.class),
                         rows.getObject("reviewed_at", OffsetDateTime.class), rows.getObject("created_at", OffsetDateTime.class),
-                        rows.getObject("updated_at", OffsetDateTime.class)));
+                        rows.getObject("updated_at", OffsetDateTime.class), node(rows.getString("points")),
+                        (Integer) rows.getObject("score"), (Integer) rows.getObject("max_score")));
             }
             return missions;
         }

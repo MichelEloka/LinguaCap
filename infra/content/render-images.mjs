@@ -1,13 +1,14 @@
 #!/usr/bin/env node
 // Illustrations des contenus (DEV-094) : pictogrammes Lucide (licence ISC) composés en vignettes, en image seule ou
 // en scène avec personnages et bulles, puis capturés en PNG par le navigateur de test. Les photos et dessins repris de
-// Deutsch im Blick (CC BY 4.0) sont recadrés et réduits en JPEG.
-// Usage : node infra/content/render-images.mjs [--force] [clé …]   (PLAYWRIGHT_CHANNEL=msedge sous Windows)
+// Deutsch im Blick (CC BY 4.0) et les photos téléchargées sous licence libre (« libre/… », niveaux B) sont recadrés et
+// réduits en JPEG. Tous les niveaux disponibles de content/de (A1, A2, B1…) sont parcourus.
+// Usage : node infra/content/render-images.mjs [--force] [--content <dossier>] [clé …]   (PLAYWRIGHT_CHANNEL=msedge sous Windows)
 import { createHash } from 'node:crypto';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { createRequire } from 'node:module';
-import { join } from 'node:path';
-import { allMedia, availableLevels, imageDir, imageFile, loadLevel, root, sourcesDir } from './content-lib.mjs';
+import { join, resolve } from 'node:path';
+import { allMedia, availableLevels, imageDir, imageFile, loadLevel, root, sourceFile } from './content-lib.mjs';
 
 const require = createRequire(join(root, 'linguacap-react', 'package.json'));
 const lucide = require('lucide-react');
@@ -493,19 +494,138 @@ function datesLayout(image, seed) {
     </style><div class="canvas">${cells}</div>` };
 }
 
+// Gabarits des niveaux B : article de presse (surtitre, titre, signature, chapeau, paragraphes), graphique en barres
+// horizontales (valeurs affichées, une barre mise en avant) et fil de forum (messages signés).
+const number = (value) => String(value).replace('.', ',');
+
+function articleLayout(image, seed) {
+  const color = colorOf(image, seed);
+  const paragraphs = image.paragraphs.map((paragraph) => `<p>${rich(paragraph, color)}</p>`).join('');
+  return { width: 960, height: 640, html: `<style>${STYLE}
+    .canvas{width:960px;height:640px;background:${backgroundOf(image)};padding:32px 56px;display:flex}
+    .paper{${CARD};flex:1;display:flex;flex-direction:column;padding:28px 40px;min-width:0}
+    .masthead{display:flex;align-items:center;gap:12px;color:${color};font-size:19px;font-weight:800;letter-spacing:.08em;
+      text-transform:uppercase;padding-bottom:12px;border-bottom:3px solid ${color};margin-bottom:16px}
+    .title{font-size:36px;font-weight:800;color:${INK};line-height:1.12;margin-bottom:8px}
+    .byline{font-size:18px;font-weight:600;color:${MUTED};margin-bottom:12px}
+    .body{flex:1;min-height:0;overflow:hidden;font-size:${image.size ?? 23}px;color:${INK};line-height:1.42}
+    .lead{font-weight:700;margin-bottom:.55em}.body p{margin:0 0 .5em}</style>
+    <div class="canvas"><div class="paper"><div class="masthead">${icon(image.icon ?? 'newspaper', 26, color, 2)}
+    <span>${escape(image.kicker ?? 'Lokales')}</span></div><div class="title">${rich(image.title, color)}</div>
+    ${image.byline ? `<div class="byline">${escape(image.byline)}</div>` : ''}
+    <div class="body" data-fit>${image.lead ? `<div class="lead">${rich(image.lead, color)}</div>` : ''}${paragraphs}</div>
+    </div></div>${FIT}` };
+}
+
+function chartLayout(image, seed) {
+  const color = colorOf(image, seed);
+  const bars = image.bars;
+  const top = Math.max(...bars.map((bar) => bar.value), 1);
+  const height = bars.length <= 3 ? 400 : 640;
+  const rows = bars.map((bar, index) => {
+    const on = image.highlight === index;
+    const width = Math.max(1.5, (bar.value / top) * 82).toFixed(1);
+    return `<div class="bar${on ? ' on' : ''}"><div class="blabel">${rich(bar.label, color)}</div><div class="track">
+      <div class="fill" style="width:${width}%;background:${on ? color : `${color}66`}"></div>
+      <span class="bvalue">${escape(number(bar.value))}${image.unit ? `&nbsp;${escape(image.unit)}` : ''}</span></div></div>`;
+  }).join('');
+  return { width: 960, height, html: `<style>${STYLE}
+    .canvas{width:960px;height:${height}px;background:${backgroundOf(image)};padding:30px 56px;display:flex}
+    .paper{${CARD};flex:1;display:flex;flex-direction:column;padding:26px 38px;min-width:0}
+    .chead{display:flex;align-items:center;gap:16px;margin-bottom:18px}
+    .cbadge{width:64px;height:64px;border-radius:50%;background:${color}1a;display:grid;place-items:center;flex:none}
+    .ctitle{font-size:29px;font-weight:800;color:${INK};line-height:1.15}
+    .bars{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px}
+    .bar{display:grid;grid-template-columns:250px 1fr;align-items:center;gap:18px}
+    .blabel{font-size:23px;font-weight:600;color:${INK};text-align:right;line-height:1.15}
+    .track{position:relative;height:40px;display:flex;align-items:center}
+    .fill{height:100%;border-radius:0 12px 12px 0;min-width:6px}
+    .bvalue{margin-left:12px;font-size:23px;font-weight:800;color:${INK};white-space:nowrap}
+    .bar.on .blabel{font-weight:800;color:${color}}
+    .source{font-size:18px;color:${MUTED};margin-top:14px;padding-top:10px;border-top:2px dashed #e3e8ef}</style>
+    <div class="canvas"><div class="paper"><div class="chead"><div class="cbadge">${icon('chart-bar', 36, color)}</div>
+    <div class="ctitle">${rich(image.title, color)}</div></div><div class="bars">${rows}</div>
+    ${image.source ? `<div class="source">${escape(image.source)}</div>` : ''}</div></div>` };
+}
+
+function forumLayout(image, seed) {
+  const color = colorOf(image, seed);
+  const posts = image.posts.map((post, index) => {
+    const tint = PALETTE[(index * 2 + seed + 1) % PALETTE.length];
+    return `<div class="post"><div class="avatar" style="background:${tint}">${escape(post.author.trim().charAt(0).toUpperCase())}</div>
+      <div class="pbody"><div class="pmeta"><b>${escape(post.author)}</b>${post.date ? ` · ${escape(post.date)}` : ''}</div>
+      <div class="ptext">${rich(post.text, color)}</div></div></div>`;
+  }).join('');
+  return { width: 960, height: 640, html: `<style>${STYLE}${PAPER_STYLE}
+    .canvas{width:960px;height:640px;background:${backgroundOf(image)};padding:32px 56px;display:flex}
+    .paper{${CARD};flex:1;display:flex;flex-direction:column;padding:24px 34px;min-width:0}
+    .head{margin-bottom:12px;padding-bottom:12px}
+    .body{font-size:${image.size ?? 22}px;display:flex;flex-direction:column;gap:.55em}
+    .post{display:flex;gap:.7em;align-items:flex-start;background:#f6f8fb;border-radius:18px;padding:.6em .8em}
+    .avatar{width:2.1em;height:2.1em;border-radius:50%;color:#fff;font-weight:800;display:grid;place-items:center;flex:none}
+    .pbody{min-width:0}.pmeta{font-size:.8em;color:${MUTED};margin-bottom:.15em}.pmeta b{color:${INK}}
+    .ptext{color:${INK};line-height:1.34}</style>
+    <div class="canvas"><div class="paper">${paperHead({ title: image.title, subtitle: image.subtitle, icon: image.icon ?? 'messages-square' }, color, 68)}
+    <div class="body" data-fit>${posts}</div></div></div>${FIT}` };
+}
+
 const LAYOUTS = {
   grid, single, scene, document: documentLayout, cards: cardsLayout, form: formLayout, table: tableLayout,
   messages: messagesLayout, receipt: receiptLayout, ticket: ticketLayout, clocks: clocksLayout, route: routeLayout,
   plan: planLayout, words: wordsLayout, letters: lettersLayout, dates: datesLayout,
+  article: articleLayout, chart: chartLayout, forum: forumLayout,
 };
 
-// Photo ou dessin d'un manuel : recadrage en fractions, réduction à 960 × 640 au plus, sans agrandir au-delà de 1,5.
+/**
+ * Dimensions d'un JPEG lues dans son marqueur de début d'image (SOF0 à SOF3, sans dépendance) ; une orientation EXIF de 5
+ * à 8 (photo tournée d'un quart de tour) inverse largeur et hauteur, le navigateur appliquant l'orientation au rendu.
+ */
+function jpegSize(buffer, label) {
+  let offset = 2;
+  let orientation = 1;
+  while (offset + 9 < buffer.length) {
+    if (buffer[offset] !== 0xff) throw new Error(`${label} : JPEG illisible (marqueur attendu à l’octet ${offset})`);
+    const marker = buffer[offset + 1];
+    if (marker === 0xff) {
+      offset += 1;
+      continue;
+    }
+    if (marker === 0xd8 || marker === 0x01 || (marker >= 0xd0 && marker <= 0xd7)) {
+      offset += 2;
+      continue;
+    }
+    const length = buffer.readUInt16BE(offset + 2);
+    if (marker === 0xe1 && buffer.toString('latin1', offset + 4, offset + 10) === 'Exif\0\0') {
+      const tiff = offset + 10;
+      const little = buffer.toString('latin1', tiff, tiff + 2) === 'II';
+      const read16 = (at) => (little ? buffer.readUInt16LE(at) : buffer.readUInt16BE(at));
+      const read32 = (at) => (little ? buffer.readUInt32LE(at) : buffer.readUInt32BE(at));
+      const ifd = tiff + read32(tiff + 4);
+      for (let entry = 0; entry < read16(ifd) && ifd + 2 + entry * 12 + 12 <= offset + 2 + length; entry++) {
+        const at = ifd + 2 + entry * 12;
+        if (read16(at) === 0x0112) orientation = read16(at + 8);
+      }
+    }
+    if (marker >= 0xc0 && marker <= 0xc3) {
+      const height = buffer.readUInt16BE(offset + 5);
+      const width = buffer.readUInt16BE(offset + 7);
+      return orientation >= 5 && orientation <= 8 ? { width: height, height: width } : { width, height };
+    }
+    offset += 2 + length;
+  }
+  throw new Error(`${label} : dimensions du JPEG introuvables`);
+}
+
+// Photo ou dessin (manuel sous licence libre, ou fichier téléchargé « libre/… » listé au registre), PNG ou JPEG :
+// recadrage en fractions, réduction à 960 × 640 au plus, sans agrandir au-delà de 1,5. Pas de SVG (risque de script).
 function photo(media) {
-  const file = join(sourcesDir, media.photo.file);
+  const file = sourceFile(media.photo.file);
   const buffer = readFileSync(file);
-  if (buffer.readUInt32BE(0) !== 0x89504e47) throw new Error(`${media.key} : PNG attendu pour ${media.photo.file}`);
-  const width = buffer.readUInt32BE(16);
-  const height = buffer.readUInt32BE(20);
+  const png = buffer.length > 24 && buffer.readUInt32BE(0) === 0x89504e47;
+  const jpeg = buffer.length > 4 && buffer[0] === 0xff && buffer[1] === 0xd8 && buffer[2] === 0xff;
+  if (!png && !jpeg) throw new Error(`${media.key} : PNG ou JPEG attendu pour ${media.photo.file}`);
+  const { width, height } = png ? { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) } : jpegSize(buffer, media.key);
+  const mime = png ? 'image/png' : 'image/jpeg';
   const [x, y, w, h] = media.photo.crop ?? [0, 0, 1, 1];
   const cropWidth = width * w;
   const cropHeight = height * h;
@@ -516,30 +636,36 @@ function photo(media) {
     html: `<style>*{margin:0}.canvas{position:relative;overflow:hidden;width:${outWidth}px;height:${outHeight}px;background:#fff}
     .canvas img{position:absolute;left:${(-x * width * scale).toFixed(1)}px;top:${(-y * height * scale).toFixed(1)}px;
     width:${(width * scale).toFixed(1)}px;height:${(height * scale).toFixed(1)}px}</style>
-    <div class="canvas"><img src="data:image/png;base64,${buffer.toString('base64')}" alt=""></div>` };
+    <div class="canvas"><img src="data:${mime};base64,${buffer.toString('base64')}" alt=""></div>` };
 }
 
 const args = process.argv.slice(2);
 const force = args.includes('--force');
-const only = args.filter((value) => !value.startsWith('--'));
-mkdirSync(imageDir, { recursive: true });
-const manifestFile = join(imageDir, 'manifest.json');
+// --content <dossier> : niveaux construits ailleurs (aperçu de build-b), images écrites dans <dossier>/media/images.
+const contentIndex = args.indexOf('--content');
+const base = contentIndex >= 0 ? resolve(args[contentIndex + 1]) : null;
+const only = args.filter((value, index) => !value.startsWith('--') && (contentIndex < 0 || index !== contentIndex + 1));
+const outputDir = base ? join(base, 'media', 'images') : imageDir;
+const outputFile = (media) => (base ? join(outputDir, `${media.key}.${media.photo ? 'jpg' : 'png'}`) : imageFile(media));
+mkdirSync(outputDir, { recursive: true });
+const manifestFile = join(outputDir, 'manifest.json');
 const manifest = existsSync(manifestFile) ? JSON.parse(readFileSync(manifestFile, 'utf8')) : {};
 // Illustrations des modules ajoutés en V4, décrites dans content/v4/source/images-v4.json et rendues dans le même dossier.
 const v4File = join(root, 'content', 'v4', 'source', 'images-v4.json');
-const v4Media = existsSync(v4File) ? JSON.parse(readFileSync(v4File, 'utf8')).images
+const v4Media = existsSync(v4File) && !base ? JSON.parse(readFileSync(v4File, 'utf8')).images
   .map((entry) => ({ key: entry.media, kind: 'image', image: entry.image })) : [];
 const jobs = [];
 // La V4 officielle (content/de) reprend les illustrations de images-v4.json : chaque clé n'est rendue qu'une fois.
 const seen = new Set();
-for (const media of [...availableLevels().flatMap((levelId) => allMedia(loadLevel(levelId))), ...v4Media]) {
+const levelMedia = availableLevels(base ?? undefined).flatMap((levelId) => allMedia(loadLevel(levelId, base ?? undefined)));
+for (const media of [...levelMedia, ...v4Media]) {
   if (media.kind !== 'image' || (only.length && !only.includes(media.key)) || seen.has(media.key)) continue;
   seen.add(media.key);
   let rendered;
   let digest;
   if (media.photo) {
-    if (!existsSync(join(sourcesDir, media.photo.file))) {
-      if (!existsSync(imageFile(media))) throw new Error(`${media.key} : source ${media.photo.file} absente`);
+    if (!existsSync(sourceFile(media.photo.file))) {
+      if (!existsSync(outputFile(media)) && !existsSync(imageFile(media))) throw new Error(`${media.key} : source ${media.photo.file} absente`);
       continue; // image déjà préparée et versionnée, ressources non disponibles sur ce poste
     }
     rendered = photo(media);
@@ -551,7 +677,7 @@ for (const media of [...availableLevels().flatMap((levelId) => allMedia(loadLeve
     rendered = layout(media.image, seed);
     digest = createHash('sha256').update(rendered.html).digest('hex');
   }
-  if (!force && manifest[media.key] === digest && existsSync(imageFile(media))) continue;
+  if (!force && manifest[media.key] === digest && existsSync(outputFile(media))) continue;
   jobs.push({ media, rendered, digest });
 }
 if (jobs.length) {
@@ -562,8 +688,8 @@ if (jobs.length) {
     await page.setContent(`<!doctype html><html><head><meta charset="utf-8"></head><body>${rendered.html}</body></html>`);
     await page.waitForLoadState('load');
     await page.locator('.canvas').screenshot(rendered.type === 'jpeg'
-      ? { path: imageFile(media), type: 'jpeg', quality: 85 }
-      : { path: imageFile(media), omitBackground: true });
+      ? { path: outputFile(media), type: 'jpeg', quality: 85 }
+      : { path: outputFile(media), omitBackground: true });
     manifest[media.key] = digest;
   }
   await browser.close();
