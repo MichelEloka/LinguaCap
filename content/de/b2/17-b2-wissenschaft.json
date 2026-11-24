@@ -1,0 +1,2512 @@
+{
+  "id": "b2-wissenschaft",
+  "title": "Wissenschaft: Forschung, Technik und Innovation",
+  "objective": "Comprendre un article de vulgarisation sur la fiabilité des études scientifiques et une émission sur la science participative, distinguer le passif d’action du passif d’état (wird geprüft / ist geprüft), passer du style verbal au style nominal et inversement, et relier les idées d’un texte scientifique.",
+  "prerequisites": [
+    "b2-wirtschaft-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, émission, projet de comptage et études citées sont fictifs ; les principes de méthode (corrélation et causalité, échantillon, évaluation par les pairs, prépublications, reproduction) sont des connaissances générales."
+  ],
+  "grammarFocus": [
+    "zustandspassiv",
+    "nominalstil"
+  ],
+  "layer": "content/b/source/b2/b2-wissenschaft.mjs",
+  "vocabulary": [
+    {
+      "id": "forschung",
+      "word": "Forschung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la recherche (scientifique)",
+      "example": "Forschung findet nicht nur im Labor statt.",
+      "note": "sans pluriel au sens général · forschen : faire de la recherche",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "studie",
+      "word": "Studie",
+      "article": "die",
+      "plural": "Studien",
+      "partOfSpeech": "noun",
+      "translation": "l’étude",
+      "example": "Die Studie ist in einer Fachzeitschrift veröffentlicht.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "untersuchung",
+      "word": "Untersuchung",
+      "article": "die",
+      "plural": "Untersuchungen",
+      "partOfSpeech": "noun",
+      "translation": "l’examen, l’enquête, l’étude",
+      "example": "Eine Untersuchung mit zwanzig Personen ist meist zu klein.",
+      "note": "untersuchen : examiner, étudier",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "ergebnis",
+      "word": "Ergebnis",
+      "article": "das",
+      "plural": "Ergebnisse",
+      "partOfSpeech": "noun",
+      "translation": "le résultat",
+      "example": "Die Ergebnisse sind noch nicht überprüft.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "erkenntnis",
+      "word": "Erkenntnis",
+      "article": "die",
+      "plural": "Erkenntnisse",
+      "partOfSpeech": "noun",
+      "translation": "la connaissance, le constat",
+      "example": "Eine neue Erkenntnis muss von anderen Teams bestätigt werden.",
+      "note": "Erkenntnisse gewinnen : acquérir des connaissances",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "stichprobe",
+      "word": "Stichprobe",
+      "article": "die",
+      "plural": "Stichproben",
+      "partOfSpeech": "noun",
+      "translation": "l’échantillon",
+      "example": "Die Stichprobe ist für allgemeine Aussagen zu klein.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "zusammenhang",
+      "word": "Zusammenhang",
+      "article": "der",
+      "plural": "Zusammenhänge",
+      "partOfSpeech": "noun",
+      "translation": "le lien, la corrélation",
+      "example": "Ein Zusammenhang ist noch keine Ursache.",
+      "note": "einen Zusammenhang nachweisen : démontrer un lien",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "ursache",
+      "word": "Ursache",
+      "article": "die",
+      "plural": "Ursachen",
+      "partOfSpeech": "noun",
+      "translation": "la cause",
+      "example": "Ist der Kaffee wirklich die Ursache?",
+      "note": "verursachen : causer",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "kontrollgruppe",
+      "word": "Kontrollgruppe",
+      "article": "die",
+      "plural": "Kontrollgruppen",
+      "partOfSpeech": "noun",
+      "translation": "le groupe témoin",
+      "example": "Man vergleicht die Versuchsgruppe mit einer Kontrollgruppe.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "fachzeitschrift",
+      "word": "Fachzeitschrift",
+      "article": "die",
+      "plural": "Fachzeitschriften",
+      "partOfSpeech": "noun",
+      "translation": "la revue scientifique",
+      "example": "Der Artikel erscheint in einer angesehenen Fachzeitschrift.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "veroeffentlichen",
+      "word": "veröffentlichen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "publier",
+      "example": "Das Team will seine Daten bald veröffentlichen.",
+      "note": "die Veröffentlichung : la publication",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "begutachten",
+      "word": "begutachten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "évaluer, expertiser (par des pairs)",
+      "example": "Unabhängige Fachleute begutachten die Studie.",
+      "note": "das Gutachten : l’expertise",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "auswerten",
+      "word": "auswerten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "analyser, exploiter (des données)",
+      "example": "Im Herbst werten wir alle Daten aus.",
+      "note": "séparable : aus|werten · die Auswertung",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "daten-erheben",
+      "word": "Daten erheben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "collecter des données",
+      "example": "Allein hätte das Team nie so viele Daten erheben können.",
+      "note": "die Datenerhebung",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "nachweisen",
+      "word": "nachweisen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prouver, démontrer",
+      "example": "Eine Ursache lässt sich nur mit einem Experiment nachweisen.",
+      "note": "séparable : nach|weisen · der Nachweis",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "ueberpruefen",
+      "word": "überprüfen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "vérifier, contrôler",
+      "example": "Alle Fotos werden von Fachleuten überprüft.",
+      "note": "non séparable · die Überprüfung",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-durchsetzen",
+      "word": "sich durchsetzen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’imposer",
+      "example": "Manche Erfindungen setzen sich erst nach Jahrzehnten durch.",
+      "note": "séparable : durch|setzen",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "laie",
+      "word": "Laie",
+      "article": "der",
+      "plural": "Laien",
+      "partOfSpeech": "noun",
+      "translation": "le profane, le non-spécialiste",
+      "example": "Auch Laien können zur Forschung beitragen.",
+      "note": "n-Deklination : den, dem, des Laien",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "buergerwissenschaft",
+      "word": "Bürgerwissenschaft",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la science participative",
+      "example": "Bürgerwissenschaft ergänzt die klassische Forschung.",
+      "note": "sans pluriel · aussi : Citizen Science",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "anonymisiert",
+      "word": "anonymisiert",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "anonymisé",
+      "example": "Die Daten sind anonymisiert.",
+      "note": "anonymisieren : anonymiser",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "erfindung",
+      "word": "Erfindung",
+      "article": "die",
+      "plural": "Erfindungen",
+      "partOfSpeech": "noun",
+      "translation": "l’invention",
+      "example": "Nicht jede Erfindung wird zu einer Innovation.",
+      "note": "erfinden : inventer · entdecken : découvrir",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "beitragen-zu",
+      "word": "beitragen zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "contribuer à",
+      "example": "Jeder kann etwas zur Forschung beitragen.",
+      "note": "+ datif · séparable : bei|tragen",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "zu-dem-schluss-kommen",
+      "word": "zu dem Schluss kommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "arriver à la conclusion",
+      "example": "Die Forschenden kommen zu dem Schluss, dass weitere Studien nötig sind.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "erfolgen",
+      "word": "erfolgen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir lieu, s’effectuer (style administratif)",
+      "example": "Die Auswertung erfolgt im Herbst.",
+      "note": "verbe du style nominal : = wird durchgeführt",
+      "audio": {
+        "media": "b2-wissenschaft-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-wissenschaft-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Wissenschaft im Alltag",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Wissenschaft im Alltag",
+        "description": "FORSCHUNG, TECHNIK, INNOVATION\n[fr?] Recherche, technique, innovation\n„Forscher haben herausgefunden …“: Solche Meldungen lesen wir fast jeden Tag. Doch was beweist eine Studie wirklich? Und kann man auch ohne Studium zur Forschung beitragen? Darum geht es in diesem Modul. [fr?] « Des chercheurs ont découvert … » : nous lisons ce genre de nouvelle presque tous les jours. Que prouve vraiment une étude ? Et peut-on contribuer à la recherche sans être scientifique ? C’est le sujet de ce module.\n\nFRAGEN ZUM EINSTIEG\n[fr?] Questions pour commencer\n• Welche wissenschaftliche Meldung haben Sie zuletzt gelesen oder gehört? Haben Sie ihr geglaubt? [fr?] Quelle nouvelle scientifique avez-vous lue ou entendue récemment ? L’avez-vous crue ?\n• Welche Erfindung der letzten hundert Jahre hat Ihren Alltag am stärksten verändert? [fr?] Quelle invention du siècle dernier a le plus changé votre quotidien ?\n• Würden Sie bei einem Forschungsprojekt mitmachen, zum Beispiel Vögel zählen oder Daten sammeln? Warum (nicht)? [fr?] Participeriez-vous à un projet de recherche, par exemple pour compter des oiseaux ou collecter des données ? Pourquoi ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Sätze auf Deutsch und begründen Sie Ihre Meinung. [fr?] Pour chaque question, préparez mentalement deux ou trois phrases en allemand et justifiez votre avis.\n\nZIELE\n[fr?] Objectifs\n• Ich kann einen populärwissenschaftlichen Artikel verstehen und seine Argumentation nachvollziehen. [fr?] Je peux comprendre un article de vulgarisation et suivre son argumentation.\n• Ich kann einem Radiogespräch über ein Forschungsprojekt folgen und die wichtigsten Fakten festhalten. [fr?] Je peux suivre une émission sur un projet de recherche et retenir les faits essentiels.\n• Ich kann zwischen einem Vorgang und einem Zustand unterscheiden: „Die Daten werden geprüft“ – „Die Daten sind geprüft“. [fr?] Je peux distinguer un processus d’un état.\n• Ich kann Sätze vom Verbalstil in den Nominalstil umformen und umgekehrt. [fr?] Je peux passer du style verbal au style nominal, et inversement.\n• Ich kann eine wissenschaftliche Meldung kritisch prüfen: Wer wurde untersucht, und was ist wirklich belegt? [fr?] Je peux examiner une nouvelle scientifique d’un œil critique.\n\nWICHTIGE WÖRTER\n[fr?] Mots-clés\n• die Studie, die Untersuchung — l’étude\n• das Ergebnis, die Erkenntnis — le résultat, la connaissance\n• die Stichprobe — l’échantillon\n• der Zusammenhang, die Ursache — le lien, la cause\n• veröffentlichen, begutachten — publier, évaluer\n• Daten erheben, auswerten — collecter, analyser des données\n• der Laie — le profane\n• die Erfindung — l’invention",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Forschung im Labor",
+          "media": "b2-wissenschaft-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-wissenschaft-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Artikel über wissenschaftliche Studien",
+      "estimatedMinutes": 23,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Artikel über wissenschaftliche Studien",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Lesen Sie Überschrift und Vorspann: Welche Frage stellt der Text, und welche Art Text ist es? [fr?] Lisez le titre et le chapeau : quelle question le texte pose-t-il, et de quel genre de texte s’agit-il ?\n2. Der Text ist klar gegliedert („ein zweiter Punkt“, „drittens“). Suchen Sie diese Signale und fassen Sie jeden Absatz in Gedanken in einem Satz zusammen. [fr?] Repérez les marqueurs d’organisation (« ein zweiter Punkt », « drittens ») et résumez chaque paragraphe en une phrase.\n3. Achten Sie auf vorsichtige Formulierungen: „könnte“, „im Durchschnitt“, „gilt als“. Sie zeigen, wie sicher eine Aussage ist. [fr?] Repérez les formulations prudentes : elles indiquent le degré de certitude.\n\nWAS EINE STUDIE BEWEIST – UND WAS NICHT\nKaffee verlängert das Leben, Schokolade macht klug, Smartphones machen einsam: Fast jede Woche meldet eine Schlagzeile eine neue Erkenntnis. Wie viel davon stimmt? Eine Anleitung zum kritischen Lesen.\nVon Leonie Brandauer\n\n(A) Die Meldung klang verlockend: Wer täglich drei Tassen Kaffee trinkt, lebt länger. So stand es im vergangenen Frühjahr in zahlreichen Zeitungen. Die Studie dahinter war seriös, in einer angesehenen Fachzeitschrift veröffentlicht und von unabhängigen Fachleuten begutachtet. Und trotzdem bewies sie nicht, was die Schlagzeilen behaupteten. Denn die Forschenden hatten nur festgestellt, dass Kaffeetrinker im Durchschnitt etwas länger lebten, nicht aber, dass der Kaffee der Grund dafür ist.\n\n(B) Der Unterschied zwischen einem Zusammenhang und einer Ursache gehört zu den wichtigsten Prinzipien der Wissenschaft und wird zugleich am häufigsten übersehen. Ein einfaches Beispiel: An Tagen, an denen viel Eis verkauft wird, gibt es auch mehr Sonnenbrände. Trotzdem verursacht Eis keinen Sonnenbrand; beides hängt vom Wetter ab. Forschende sprechen dann von einer Korrelation, nicht von einer Kausalität. Beim Kaffee könnte es ähnlich sein. Vielleicht trinken gesunde Menschen einfach mehr Kaffee, weil sie ihn besser vertragen. „Um eine Ursache nachzuweisen, braucht man in der Regel ein Experiment, bei dem man eine Versuchsgruppe mit einer Kontrollgruppe vergleicht“, erklärt die Statistikerin Miriam Sauerbrey. „Beim Kaffee ist das über Jahrzehnte praktisch unmöglich.“\n\n(C) Ein zweiter Punkt ist die Größe der Stichprobe. Eine Untersuchung mit zwanzig Teilnehmenden kann interessante Hinweise liefern, ist aber für allgemeine Aussagen meist zu klein: Schon wenige Zufälle können das Ergebnis verfälschen. Auch die Auswahl der Teilnehmenden spielt eine Rolle: Wer nur Studierende befragt, weiß wenig über ältere Menschen. Wer eine Meldung liest, sollte deshalb nachsehen, wie viele Personen untersucht wurden und ob es sich überhaupt um Menschen handelte oder um Versuche mit Zellen oder Mäusen. Was im Labor bei Mäusen wirkt, ist beim Menschen noch lange nicht bewiesen.\n\n(D) Drittens lohnt ein Blick darauf, ob eine Studie überhaupt schon geprüft ist. Seit einigen Jahren werden viele Arbeiten als sogenannte Preprints ins Internet gestellt, bevor andere Fachleute sie begutachtet haben. Das beschleunigt den Austausch, birgt aber Risiken: Die Ergebnisse sind zwar öffentlich, aber noch nicht abgesichert. Ein Preprint ist also mit einem Entwurf vergleichbar, der zwar veröffentlicht, aber noch nicht korrigiert ist. Und selbst eine begutachtete Studie ist kein Endpunkt. Erst wenn andere Teams die Untersuchung wiederholt und ähnliche Ergebnisse erzielt haben, gilt eine Erkenntnis als einigermaßen gesichert.\n\n(E) Heißt das, man sollte keiner Schlagzeile mehr trauen? Nein. Wissenschaft liefert keine endgültigen Wahrheiten, sondern das beste Wissen, das zu einem bestimmten Zeitpunkt verfügbar ist. Gerade darin liegt ihre Stärke: Sie korrigiert sich selbst. Problematisch wird es erst, wenn vorsichtige Formulierungen auf dem Weg in die Medien verloren gehen. Manche Redaktionen arbeiten deshalb inzwischen mit Fachleuten zusammen, die solche Meldungen vor der Veröffentlichung prüfen. Aus „Bei Kaffeetrinkern wurde eine etwas höhere Lebenserwartung beobachtet“ wird dann „Kaffee verlängert das Leben“. Leserinnen und Leser können sich schützen, indem sie drei Fragen stellen: Wer wurde untersucht? Ist das Ergebnis geprüft? Und ist wirklich eine Ursache belegt oder nur ein Zusammenhang?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-lesen-artikel",
+          "caption": "Der Artikel (Anfang)",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was ist das Hauptziel des Artikels? [fr?] Quel est le but principal de l’article ?",
+          "explanation": "Der Vorspann kündigt „eine Anleitung zum kritischen Lesen“ an, und der Text endet mit drei Fragen für Leserinnen und Leser. Die Kaffeestudie ist nur ein Beispiel; den Forschenden wirft der Text nichts vor, und er sagt ausdrücklich, man solle Schlagzeilen nicht grundsätzlich misstrauen. [fr?] Un guide pour lire les nouvelles scientifiques avec esprit critique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er beweist, dass Kaffee gesund ist und das Leben tatsächlich verlängert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er zeigt, wie man Meldungen über Studien kritisch prüfen kann.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er kritisiert, dass Forschende ihre Ergebnisse absichtlich falsch darstellen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er erklärt, warum man wissenschaftlichen Studien grundsätzlich nicht trauen kann.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie bewertet die Autorin die Wissenschaft im letzten Absatz? [fr?] Comment l’autrice juge-t-elle la science dans le dernier paragraphe ?",
+          "explanation": "„Wissenschaft liefert keine endgültigen Wahrheiten, sondern das beste Wissen, das zu einem bestimmten Zeitpunkt verfügbar ist. Gerade darin liegt ihre Stärke: Sie korrigiert sich selbst.“ Das Problem sieht die Autorin nicht in der Wissenschaft, sondern in vereinfachten Schlagzeilen. [fr?] Un savoir provisoire, dont l’autocorrection fait la force.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie liefert endgültige Wahrheiten, wenn die Studien nur groß genug sind.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ist unzuverlässig, weil sich ihre Ergebnisse ständig wieder ändern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie liefert vorläufiges Wissen, und gerade ihre Selbstkorrektur ist eine Stärke.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie wäre viel zuverlässiger, wenn es keine Preprints mehr im Internet gäbe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum nennt der Text das Beispiel mit Eis und Sonnenbrand? [fr?] Pourquoi le texte cite-t-il l’exemple de la glace et des coups de soleil ?",
+          "explanation": "Eisverkauf und Sonnenbrände steigen gleichzeitig, aber beides hat eine gemeinsame dritte Ursache: das Wetter. Genauso könnte es beim Kaffee eine andere Erklärung geben, etwa die Gesundheit der Kaffeetrinker. Ein Zusammenhang (Korrelation) beweist keine Ursache (Kausalität). [fr?] Corrélation n’est pas causalité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um zu zeigen, dass man an heißen Sommertagen besser ganz auf Eis verzichten sollte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um zu zeigen, dass genaue Wetterdaten für die medizinische Forschung besonders wichtig sind.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um zu zeigen, dass Kaffee an heißen Tagen der Gesundheit schaden kann.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Um zu zeigen, dass zwei Dinge gemeinsam auftreten können, ohne dass eins das andere bewirkt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Die Kaffeestudie war von unabhängigen Fachleuten begutachtet worden.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: Die Studie war „in einer angesehenen Fachzeitschrift veröffentlicht und von unabhängigen Fachleuten begutachtet“. Der Fehler lag also nicht in der Studie, sondern in den Schlagzeilen. [fr?] L’étude était sérieuse ; ce sont les titres qui exagéraient.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Laut Miriam Sauerbrey lässt sich die Wirkung von Kaffee leicht mit einem Experiment prüfen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Beim Kaffee ist das über Jahrzehnte praktisch unmöglich.“ Man müsste zwei Gruppen jahrzehntelang vergleichen, eine mit und eine ohne Kaffee. [fr?] Une telle expérience serait pratiquement impossible.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Die meisten Preprints enthalten falsche Ergebnisse.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Der Artikel sagt nur, dass Preprints noch nicht begutachtet sind und deshalb Risiken bergen. Wie viele davon falsch sind, wird nicht gesagt. [fr?] Le texte parle de risques, pas d’une proportion d’erreurs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "Die Signalwörter helfen: A erzählt die Kaffeemeldung, B erklärt den Unterschied zwischen Zusammenhang und Ursache, C beginnt mit „Ein zweiter Punkt ist die Größe der Stichprobe“, D mit „Drittens“ (Preprints, Begutachtung), E schließt mit drei Fragen. [fr?] Les mots d’organisation structurent le texte.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Eine verlockende Schlagzeile"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Zusammenhang ist nicht Ursache"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Auf die Stichprobe kommt es an"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Geprüft oder nur veröffentlicht?"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Drei Fragen für kritische Leser"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Welches Wort aus dem Text passt? Ergänzen Sie. [fr?] Quel mot du texte convient ? Complétez.",
+          "text": "Absatz C: Die Gruppe der Personen, die in einer Studie untersucht werden, heißt [[1]]. · Absatz D: Eine Erkenntnis gilt erst als gesichert, wenn andere Teams die Untersuchung [[2]] und ähnliche Ergebnisse erzielt haben.",
+          "explanation": "„Die Stichprobe“ ist die Auswahl von Personen oder Fällen, die untersucht wird. „Eine Untersuchung wiederholen“: Ein anderes Team führt sie noch einmal durch; erst dann gilt ein Ergebnis als „einigermaßen gesichert“. [fr?] l’échantillon ; reproduire une étude.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Stichprobe",
+                "die Stichprobe"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wiederholt"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: ein Radiogespräch über Bürgerwissenschaft",
+      "estimatedMinutes": 23,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Radiogespräch über Bürgerwissenschaft",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\n[fr?] La situation\nIn der Sendung „Wissen um sechs“ sprechen die Biologin Johanna Riedl und der Rentner Werner Danielsen über das Projekt „Summ mit“, bei dem Bürgerinnen und Bürger Insekten zählen. [fr?] Dans l’émission « Wissen um sechs », une biologiste et un retraité parlent d’un projet où des citoyens comptent les insectes.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Erstes Hören: Wie funktioniert das Projekt, und welche Rolle haben die beiden Gäste? [fr?] Première écoute : comment fonctionne le projet, et quel rôle ont les deux invités ?\n2. Lesen Sie die Notizen und überlegen Sie: Fehlt eine Zahl, ein Monat, ein Fachwort? [fr?] Lisez les notes : manque-t-il un nombre, un mois, un terme technique ?\n3. Zweites Hören: Ergänzen Sie die Notizen mit Stichwörtern. Achten Sie besonders auf die Antwort zur Zuverlässigkeit der Daten. [fr?] Deuxième écoute : complétez avec des mots-clés ; soyez attentif à la réponse sur la fiabilité des données.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-hoeren-audio",
+          "caption": "Wissen um sechs: Forschen im eigenen Garten",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Notizen zum ersten Teil: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Notes sur la première partie : complétez avec des mots-clés.",
+          "text": "Projekt „Summ mit“: Bürger zählen [[1]] und andere Insekten · Beobachtung: [[2]] Minuten an einer blühenden Fläche · am besten mit einem [[3]] · App: kostenlos, freigeschaltet ab dem 1. [[4]] · Teilnehmende im letzten Sommer: rund [[5]] · Herr Danielsen kam durch seine [[6]] zum Projekt",
+          "explanation": "Gezählt werden „Wildbienen und andere Insekten“, fünfzehn Minuten lang, „am besten mit einem Foto“. Die App ist „ab dem ersten Juni freigeschaltet“; im letzten Sommer zählten „rund zwölftausend“ Menschen mit. Herr Danielsen ist „durch meine Enkelin“ dazugekommen. [fr?] Notez les chiffres en chiffres ou en lettres.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wildbienen",
+                "Bienen"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "15",
+                "fünfzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Foto"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Juni"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "12.000",
+                "12000",
+                "12 000",
+                "zwölftausend"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Enkelin"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Notizen zum zweiten Teil: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Notes sur la seconde partie : complétez avec des mots-clés.",
+          "text": "Qualität: alle Fotos werden von [[1]] geprüft · korrigiert wird etwa jede [[2]] Meldung · Datenschutz: die Daten sind [[3]] · Ergebnis: in Gärten mit [[4]] Pflanzen fast doppelt so viele Wildbienen · Grenze: auf dem [[5]] zählen viel weniger Menschen · Bericht für alle Teilnehmenden im [[6]]",
+          "explanation": "Alle Fotos „werden von Fachleuten geprüft“, „ungefähr jede zehnte Meldung“ wird korrigiert, die Daten „sind anonymisiert“ (ein Zustand). Heimische Pflanzen locken fast doppelt so viele Wildbienen an. Grenze: In den Städten zählen viel mehr Menschen „als auf dem Land“. Der Bericht kommt „im Dezember“. [fr?] werden geprüft : processus ; sind anonymisiert : état.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Fachleuten",
+                "Fachleute",
+                "Experten",
+                "Expertinnen und Experten"
+              ],
+              "size": 25,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zehnte",
+                "10."
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "anonymisiert"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "heimischen"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Land"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Dezember"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum macht Herr Danielsen mit? [fr?] Pourquoi M. Danielsen participe-t-il ?",
+          "explanation": "Er ist „durch meine Enkelin dazu gekommen“, und „inzwischen hat es mich richtig gepackt“: Er erkennt heute zwanzig Bienenarten und hat „das Gefühl, dass man etwas Sinnvolles beiträgt“. Biologin ist Frau Riedl. [fr?] « Es hat mich gepackt » : je me suis pris au jeu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er ist Biologe und arbeitet seit Jahren für das Projekt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Seine Enkelin hat ihn darauf gebracht, und heute macht ihm das Zählen Freude.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er möchte mit seinen schönsten Fotos von Wildbienen einen Wettbewerb gewinnen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Gemeinde hat alle Gartenbesitzer zur Teilnahme verpflichtet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was ist laut Frau Riedl der größte Vorteil der Bürgerwissenschaft? [fr?] Selon Mme Riedl, quel est le principal avantage de la science participative ?",
+          "explanation": "„Ein Forschungsteam schafft vielleicht zweihundert Standorte, die Bürgerinnen und Bürger schaffen Tausende.“ Dass Laiendaten genauer sind, sagt sie nicht, im Gegenteil: Jede zehnte Meldung wird korrigiert. Klassische Untersuchungen bleiben nötig. [fr?] Bien plus de données, à bien plus d’endroits.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man kann viel mehr Daten an viel mehr Orten sammeln.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Daten von Laien sind genauer als die der Fachleute.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Forschung wird dadurch fast vollständig kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Man braucht danach keine klassischen Untersuchungen mehr.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was hat das Team überrascht? [fr?] Qu’est-ce qui a surpris l’équipe ?",
+          "explanation": "„In Gärten mit heimischen Pflanzen haben wir fast doppelt so viele Wildbienen gezählt wie in Gärten mit exotischen Zierpflanzen.“ Auch Balkone können „einen Unterschied machen“. In den Städten zählen mehr Menschen als auf dem Land, nicht weniger. [fr?] Les plantes indigènes attirent près de deux fois plus d’abeilles sauvages.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass auf Balkonen überhaupt keine Wildbienen zu finden sind",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass Anfänger nur sehr selten Bienenarten verwechseln",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass in Städten weniger Menschen mitzählen als auf dem Land",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "dass heimische Pflanzen fast doppelt so viele Wildbienen anlocken",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Haltung hat Frau Riedl zur Bürgerwissenschaft? [fr?] Quelle position Mme Riedl a-t-elle sur la science participative ?",
+          "explanation": "„Bürgerwissenschaft ersetzt die Forschung nicht, aber sie ergänzt sie.“ Sie nimmt die Frage nach der Zuverlässigkeit ernst, löst sie aber durch Kontrolle der Fotos. Für manche Fragen braucht man weiterhin klassische Untersuchungen. [fr?] Un complément précieux, pas un remplacement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hält sie für eine wichtige Ergänzung, aber nicht für einen Ersatz der Forschung.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hält die Daten von Laien für viel zu ungenau, um sie wissenschaftlich wirklich zu nutzen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie glaubt, dass Bürger die Forschung bald ganz übernehmen werden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie findet das Projekt nett, aber für die Wissenschaft unwichtig.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Vorgang, Zustand und Nominalstil",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Vorgang, Zustand und Nominalstil",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus dem Radiogespräch. Achten Sie auf die Hilfsverben „werden“ und „sein“ und auf die Nomen auf -ung. [fr?] Lisez ces phrases de l’article et de l’émission. Observez les auxiliaires « werden » et « sein » et les noms en -ung.\n\nSÄTZE\n[fr?] Le corpus\n(1) Die Studie war in einer angesehenen Fachzeitschrift veröffentlicht.\n(2) Seit einigen Jahren werden viele Arbeiten als Preprints ins Internet gestellt.\n(3) Die Ergebnisse sind zwar öffentlich, aber noch nicht abgesichert.\n(4) Die App ist kostenlos und ab dem ersten Juni freigeschaltet.\n(5) Deshalb werden alle Fotos von Fachleuten geprüft, bevor sie in die Auswertung eingehen.\n(6) Die Auswertung erfolgt dann im Herbst.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions. Les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 2 und 5: Was beschreibt „werden … gestellt“ und „werden … geprüft“? [fr?] Phrases 2 et 5 : que décrivent ces formes avec « werden » ?",
+          "explanation": "„Werden“ + Partizip II ist das Vorgangspassiv: Es beschreibt den Prozess, die Handlung selbst (Fachleute prüfen die Fotos). Wer handelt, kann mit „von“ genannt werden: „von Fachleuten geprüft“. Mit Futur I hat „werden“ hier nichts zu tun, denn danach folgt ein Partizip, kein Infinitiv. [fr?] werden + participe : le passif d’action, le processus.",
+          "options": [
+            {
+              "id": "a",
+              "label": "einen Vorgang: Jemand tut etwas, die Handlung läuft ab",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "einen Zustand: Die Handlung ist schon lange abgeschlossen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine Vermutung über etwas, das wahrscheinlich passiert ist",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "einen Plan für die Zukunft, wie im Futur I",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 1, 3 und 4: Was beschreibt „sein“ + Partizip II? [fr?] Phrases 1, 3 et 4 : que décrit « sein » + participe II ?",
+          "explanation": "„Sein“ + Partizip II ist das Zustandspassiv: Die Handlung ist abgeschlossen, man beschreibt ihr Ergebnis. Erst wird die App freigeschaltet (Vorgang), dann ist sie freigeschaltet (Zustand). Das Partizip funktioniert hier fast wie ein Adjektiv: „Die App ist kostenlos und freigeschaltet.“ [fr?] sein + participe : le passif d’état, le résultat.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Handlung, die gerade in diesem Moment noch abläuft und andauert",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Handlung, die in der Zukunft passieren wird",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "einen Zustand: das Ergebnis einer abgeschlossenen Handlung",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "eine höfliche Bitte an die Hörerinnen und Hörer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Was bedeutet der Satz? Ordnen Sie zu. [fr?] Que signifie chaque phrase ? Associez.",
+          "explanation": "Vorgangspassiv (wird/werden + Partizip II): Die Handlung läuft. Zustandspassiv (ist/sind + Partizip II): Die Handlung ist fertig, ihr Ergebnis ist sichtbar. Im Französischen sagt « est fermé » beides; im Deutschen muss man wählen. [fr?] « est fermé » : wird geschlossen (on ferme) ou ist geschlossen (c’est fermé).",
+          "pairs": [
+            {
+              "left": "Das Labor wird gerade geschlossen.",
+              "right": "Jemand schließt es in diesem Moment."
+            },
+            {
+              "left": "Das Labor ist geschlossen.",
+              "right": "Man kann im Moment nicht hinein."
+            },
+            {
+              "left": "Die Proben werden beschriftet.",
+              "right": "Jemand schreibt gerade Namen darauf."
+            },
+            {
+              "left": "Die Proben sind beschriftet.",
+              "right": "Auf allen steht schon ein Name."
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 6: „Die Auswertung erfolgt im Herbst.“ Welcher Satz sagt dasselbe im Verbalstil? [fr?] Phrase 6 : quelle phrase dit la même chose au style verbal ?",
+          "explanation": "Im Nominalstil steckt die Handlung im Nomen („die Auswertung“), und ein fast inhaltsleeres Verb („erfolgen“) trägt den Satz. Im Verbalstil wird das Nomen wieder zum Verb: „auswerten“ → „Die Daten werden ausgewertet.“ Nominalstil ist typisch für Berichte und Behörden, Verbalstil ist leichter zu verstehen. [fr?] Le style nominal met l’action dans un nom ; le style verbal la remet dans un verbe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Auswerter erfolgen im Herbst.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Daten sind im Herbst bereits erfolgt worden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Im Herbst erfolgt man die Daten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Daten werden im Herbst ausgewertet.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wissenschaft-regel",
+      "kind": "lesson",
+      "title": "Regel: Zustandspassiv und Nominalstil",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Zustandspassiv und Nominalstil",
+        "description": "REGEL — VORGANGSPASSIV UND ZUSTANDSPASSIV\n[fr?] Règle : passif d’action et passif d’état\nDas Vorgangspassiv (werden + Partizip II) beschreibt einen Prozess, das Zustandspassiv (sein + Partizip II) sein Ergebnis.\n[fr?] werden + participe = l’action en cours ; sein + participe = l’état qui en résulte.\n• Vorgang: Die Fotos werden von Fachleuten geprüft. (Jemand prüft sie.) [fr?] Les photos sont vérifiées par des spécialistes (on les vérifie).\n• Zustand: Die Fotos sind geprüft. (Die Prüfung ist abgeschlossen.) [fr?] Les photos sont vérifiées (c’est fait).\n• Zeiten des Zustandspassivs: Präsens „ist geprüft“, Präteritum „war geprüft“; andere Zeiten sind selten. [fr?] Surtout au présent et au prétérit.\n• Nur Verben, deren Handlung ein sichtbares Ergebnis hat, bilden ein Zustandspassiv: öffnen, schließen, veröffentlichen, prüfen, anonymisieren. Nicht: helfen, lachen, warten. [fr?] Seuls les verbes dont l’action produit un résultat ont un passif d’état.\n\nREGEL — NOMINALSTIL UND VERBALSTIL\n[fr?] Règle : style nominal et style verbal\nWissenschaftliche, juristische und behördliche Texte verpacken Handlungen oft in Nomen. Das macht sie kurz und sachlich, aber schwerer verständlich.\n[fr?] Le style nominal est concis et objectif, mais plus difficile à comprendre.\n• nachdem die Daten ausgewertet worden sind → nach der Auswertung der Daten [fr?] après l’analyse des données\n• um Fehler zu vermeiden → zur Vermeidung von Fehlern [fr?] pour éviter les erreurs\n• während der Versuch durchgeführt wird → während der Durchführung des Versuchs [fr?] pendant la réalisation de l’expérience\n• weil sich die Lieferung verzögert → wegen der Verzögerung der Lieferung [fr?] en raison du retard de livraison\n• obwohl die Studie kritisiert wurde → trotz der Kritik an der Studie [fr?] malgré les critiques\nSo bildet man den Nominalstil: Das Verb wird zum Nomen (auswerten → die Auswertung, vergleichen → der Vergleich, messen → die Messung). Das Objekt kommt in den Genitiv (die Daten auswerten → die Auswertung der Daten), der Handelnde steht nach „durch“ (Fachleute prüfen → die Prüfung durch Fachleute). Verben wie „erfolgen“ oder „durchführen“ tragen den Satz: Die Auswertung erfolgt im Herbst. [fr?] Le verbe devient un nom, son complément passe au génitif, l’agent est introduit par « durch ».\n\nREGEL — TEXTE VERBINDEN\n[fr?] Règle : relier les phrases d’un texte\nWörter wie „dabei“, „daraus“, „somit“, „dies“ oder „diese Ergebnisse“ greifen einen vorherigen Satz auf und machen einen Text zusammenhängend: Die Forschenden haben nur vierzig Personen untersucht. Somit ist die Stichprobe zu klein. [fr?] Ces mots reprennent l’idée précédente et assurent la cohésion du texte.\n\nACHTUNG\n[fr?] Attention : pièges des francophones\n• Das französische « est publié » kann Vorgang oder Zustand sein. Im Deutschen entscheiden Sie: „Die Studie wird gerade veröffentlicht“ oder „Die Studie ist (seit Montag) veröffentlicht“. [fr?] Le français ne distingue pas toujours ; l’allemand oblige à choisir.\n• „Die Studie ist veröffentlicht“ (Zustand) und „Die Studie ist veröffentlicht worden“ (Perfekt des Vorgangspassivs) sind nicht dasselbe: Das zweite erzählt, dass es passiert ist. [fr?] Sans « worden » : état ; avec « worden » : passé composé du passif d’action.\n• Übertreiben Sie den Nominalstil nicht: „Die Durchführung der Überprüfung der Daten erfolgte“ ist schwer lesbar. Besser: „Die Daten wurden überprüft.“ [fr?] Évitez les chaînes de noms : préférez le verbe quand vous expliquez.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-wissenschaft-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Zustandspassiv und Nominalstil",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Zustandspassiv und Nominalstil",
+        "description": "Üben Sie den Unterschied zwischen Vorgang und Zustand und die Umformung zwischen Verbalstil und Nominalstil. [fr?] Entraînez-vous à distinguer processus et état, et à passer du style verbal au style nominal.\n\nMERKE\n[fr?] À retenir\n• werden + Partizip II = Vorgang · sein + Partizip II = Zustand [fr?] werden = processus ; sein = état\n• Nominalstil: nach / vor / bei / wegen / trotz / zur + Nomen; Objekt im Genitiv; Handelnder mit „durch“ [fr?] Style nominal : préposition + nom ; complément au génitif ; agent avec durch",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "„werden“ oder „sein“? Ergänzen Sie die richtige Form. [fr?] « werden » ou « sein » ? Complétez avec la bonne forme.",
+          "text": "Im Moment [[1]] die Daten noch ausgewertet. · Endlich! Die Auswertung [[2]] abgeschlossen. · Die Studie [[3]] seit gestern online veröffentlicht.",
+          "explanation": "„Im Moment … noch“ zeigt einen laufenden Prozess: Vorgangspassiv mit „werden“. „Endlich … abgeschlossen“ und „seit gestern“ beschreiben einen erreichten Zustand: „ist“. [fr?] Processus en cours : werden ; résultat acquis : sein.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "werden"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ist"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ist"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Zustandspassiv. [fr?] Formez le passif d’état.",
+          "text": "Das Labor [[1]] am Wochenende [[2]]. · Alle Proben [[3]] schon [[4]].",
+          "explanation": "Zustandspassiv: konjugiertes „sein“ + Partizip II am Satzende. „Schließen“ → geschlossen, „beschriften“ → beschriftet (Verben auf be- haben kein „ge-“ im Partizip). Singular „ist“ für „das Labor“, Plural „sind“ für „alle Proben“. [fr?] Les verbes en be- n’ont pas de ge- au participe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ist"
+              ],
+              "hint": "sein",
+              "size": 4
+            },
+            {
+              "id": "2",
+              "accept": [
+                "geschlossen"
+              ],
+              "hint": "schließen",
+              "size": 12
+            },
+            {
+              "id": "3",
+              "accept": [
+                "sind"
+              ],
+              "hint": "sein",
+              "size": 5
+            },
+            {
+              "id": "4",
+              "accept": [
+                "beschriftet"
+              ],
+              "hint": "beschriften",
+              "size": 12
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welcher Satz beschreibt einen Zustand? [fr?] Quelle phrase décrit un état ?",
+          "explanation": "Nur „ist … vorbereitet“ (sein + Partizip II) beschreibt das Ergebnis: Alles ist bereit. Die anderen Sätze stehen im Vorgangspassiv (wird, wurde) und beschreiben die Vorbereitung als Handlung, jetzt, gestern oder morgen. [fr?] « est bien préparée » au sens de « prête » : Zustandspassiv.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Versuch wird gerade vorbereitet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Versuch wurde gestern vorbereitet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Versuch ist gut vorbereitet.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Der Versuch wird morgen vorbereitet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wir",
+              "beginnen",
+              "erst,",
+              "wenn",
+              "alle Geräte",
+              "richtig",
+              "eingestellt",
+              "sind."
+            ]
+          ],
+          "explanation": "Im Nebensatz mit „wenn“ stehen Partizip II und das konjugierte „sind“ am Ende. „Eingestellt sind“ beschreibt den Zustand, den man vor Beginn braucht. „Erst“ betont: nicht vorher. [fr?] « Nous ne commençons que lorsque tous les appareils sont bien réglés. »"
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Bilden Sie den Nominalstil. [fr?] Passez au style nominal.",
+          "text": "nachdem die Daten ausgewertet worden sind → nach der [[1]] der Daten · um Fehler zu vermeiden → zur [[2]] von Fehlern · während der Versuch durchgeführt wird → während der [[3]] des Versuchs · weil sich die Lieferung verzögert → wegen der [[4]] der Lieferung",
+          "explanation": "Aus dem Verb wird ein Nomen auf -ung (immer feminin): auswerten → die Auswertung, vermeiden → die Vermeidung, durchführen → die Durchführung, verzögern → die Verzögerung. Das Objekt steht im Genitiv („der Daten“) oder mit „von“ ohne Artikel („von Fehlern“). [fr?] Les noms en -ung sont tous féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Auswertung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Vermeidung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Durchführung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Verzögerung"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Formen Sie in den Verbalstil um. [fr?] Passez au style verbal.",
+          "text": "Nach der Veröffentlichung der Studie gab es viel Kritik. → Nachdem die Studie [[1]] worden war, gab es viel Kritik. · Trotz intensiver Suche fanden sie den Fehler nicht. → Obwohl sie intensiv [[2]], fanden sie den Fehler nicht.",
+          "explanation": "Die Präposition wird zur Konjunktion: nach → nachdem, trotz → obwohl. Das Nomen wird wieder zum Verb: die Veröffentlichung → veröffentlichen (hier im Passiv: veröffentlicht worden war), die Suche → suchen (suchten oder, vorzeitig, gesucht hatten). [fr?] La préposition devient conjonction, le nom redevient verbe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "veröffentlicht"
+              ],
+              "hint": "veröffentlichen",
+              "size": 15
+            },
+            {
+              "id": "2",
+              "accept": [
+                "suchten",
+                "gesucht hatten"
+              ],
+              "hint": "suchen",
+              "size": 15
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Auswertung",
+              "der",
+              "gesammelten",
+              "Daten",
+              "wird",
+              "im Herbst",
+              "durch ein unabhängiges Team",
+              "vorgenommen."
+            ],
+            [
+              "Die Auswertung",
+              "der",
+              "gesammelten",
+              "Daten",
+              "wird",
+              "durch ein unabhängiges Team",
+              "im Herbst",
+              "vorgenommen."
+            ]
+          ],
+          "explanation": "Typischer Nominalstil: Das Subjekt ist eine Nominalgruppe mit Genitiv („die Auswertung der gesammelten Daten“), „wird“ steht an zweiter Stelle, das Funktionsverb „vorgenommen“ am Ende, der Handelnde folgt nach „durch“. Zeitangabe und „durch“-Gruppe können die Plätze tauschen. [fr?] « L’analyse des données recueillies est effectuée à l’automne par une équipe indépendante. »"
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welcher Satz im Nominalstil passt zu „Weil das Gerät defekt war, wurde der Versuch abgebrochen“? [fr?] Quelle phrase au style nominal correspond à cette phrase ?",
+          "explanation": "„Weil“ (Grund) wird im Nominalstil zu „wegen“ + Genitiv. „Trotz“ entspricht „obwohl“, „nach“ entspricht „nachdem“ und dreht hier die Reihenfolge um, „zur Vermeidung“ entspricht „um … zu vermeiden“ (Ziel). [fr?] weil → wegen ; obwohl → trotz ; nachdem → nach ; um … zu → zur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Trotz eines Defekts des Geräts wurde der Versuch abgebrochen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wegen eines Defekts des Geräts wurde der Versuch abgebrochen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nach dem Abbruch des Versuchs war das Gerät plötzlich defekt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zur Vermeidung eines Defekts wurde der Versuch abgebrochen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "match",
+          "prompt": "Welche Präposition im Nominalstil entspricht welcher Konjunktion? Ordnen Sie zu. [fr?] Quelle préposition du style nominal correspond à quelle conjonction ? Associez.",
+          "explanation": "Diese Paare braucht man ständig, um Fachtexte zu verstehen und sie in einfaches Deutsch zu übertragen: nach ↔ nachdem, vor ↔ bevor, bei ↔ als/wenn, wegen ↔ weil, trotz ↔ obwohl, zur ↔ um … zu. [fr?] Correspondances entre prépositions et conjonctions.",
+          "pairs": [
+            {
+              "left": "nach dem Versuch",
+              "right": "nachdem …"
+            },
+            {
+              "left": "vor dem Versuch",
+              "right": "bevor …"
+            },
+            {
+              "left": "bei dem Versuch",
+              "right": "als … / wenn …"
+            },
+            {
+              "left": "wegen des Versuchs",
+              "right": "weil …"
+            },
+            {
+              "left": "trotz des Versuchs",
+              "right": "obwohl …"
+            },
+            {
+              "left": "zur Durchführung des Versuchs",
+              "right": "um … zu …"
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ? (« L’article est publié depuis hier. »)",
+          "explanation": "„Seit gestern“ beschreibt einen Zustand, der bis heute andauert: Zustandspassiv „ist veröffentlicht“. „Wird veröffentlicht“ wäre ein laufender Prozess, „ist veröffentlicht worden“ erzählt das Ereignis und passt nicht zu „seit“, „hat veröffentlicht“ ist Aktiv ohne Objekt. [fr?] seit + état : ist veröffentlicht.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Artikel wird seit gestern veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Artikel ist seit gestern veröffentlicht worden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Artikel hat seit gestern veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Artikel ist seit gestern veröffentlicht.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wissenschaft-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Forschung und Methode",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Forschung und Methode",
+        "description": "Lernen Sie die Wörter in Verbindungen: Nomen mit Verb, Wortfamilien und vorsichtige Formulierungen. [fr?] Apprenez les mots en contexte : nom et verbe, familles de mots et formulations prudentes.\n\nTIPP\n[fr?] Conseil\nIn der Wissenschaft formuliert man vorsichtig: „Die Daten deuten darauf hin, dass …“, „Es spricht vieles dafür, dass …“. Ein Wort wie „bewiesen“ ist für wirklich gesicherte Ergebnisse reserviert. [fr?] En science, on formule avec prudence ; « bewiesen » est réservé aux résultats vraiment établis.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "eine Hypothese aufstellen, Daten erheben, ein Experiment durchführen, zu einem Ergebnis kommen, einen Zusammenhang nachweisen. Diese Verbindungen sind typisch für wissenschaftliche Texte und Berichte. [fr?] formuler une hypothèse, collecter des données, mener une expérience, aboutir à un résultat, démontrer un lien.",
+          "pairs": [
+            {
+              "left": "eine Hypothese",
+              "right": "aufstellen"
+            },
+            {
+              "left": "Daten",
+              "right": "erheben"
+            },
+            {
+              "left": "ein Experiment",
+              "right": "durchführen"
+            },
+            {
+              "left": "zu einem Ergebnis",
+              "right": "kommen"
+            },
+            {
+              "left": "einen Zusammenhang",
+              "right": "nachweisen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das passende Nomen. [fr?] Formez le nom correspondant.",
+          "text": "forschen → die [[1]] · untersuchen → die [[2]] · erkennen → die [[3]] · entdecken → die [[4]] · erfinden → die [[5]]",
+          "explanation": "Die meisten Nomen haben die Endung -ung und sind feminin. Eine Ausnahme ist „die Erkenntnis“ mit -nis (Plural: die Erkenntnisse). Achtung: Man entdeckt, was schon da ist (eine neue Bienenart), man erfindet, was es noch nicht gibt (ein Gerät). [fr?] la recherche, l’étude, la connaissance, la découverte, l’invention.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Forschung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Untersuchung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Erkenntnis"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Entdeckung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Erfindung"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Wie heißen die Personen? Ergänzen Sie. [fr?] Comment s’appellent ces personnes ? Complétez.",
+          "text": "Wer forscht, ist ein [[1]] oder eine Forscherin. · Wer kein Fachmann ist, ist ein [[2]]. · Wer an einer Studie teilnimmt, ist ein [[3]] oder eine Teilnehmerin.",
+          "explanation": "der Forscher, der Laie (n-Deklination: den Laien, dem Laien), der Teilnehmer; in der Medizin sagt man auch „der Proband“. Für gemischte Gruppen verwendet man oft das Partizip: die Forschenden, die Teilnehmenden. [fr?] le chercheur, le profane, le participant.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Forscher"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Laie"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Teilnehmer",
+                "Proband"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welches Verb passt? „Die Forscherin hat im Regenwald eine bisher unbekannte Bienenart …“ [fr?] Quel verbe convient ?",
+          "explanation": "Etwas, das schon existiert, aber noch unbekannt war, entdeckt man. Erfinden kann man nur etwas Neues, das der Mensch schafft (ein Gerät, ein Verfahren); „herstellen“ heißt produzieren, „erstellen“ anfertigen (eine Liste, einen Bericht). [fr?] entdecken = découvrir ; erfinden = inventer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "erfunden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "entdeckt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "hergestellt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "erstellt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie formuliert man ein Ergebnis wissenschaftlich vorsichtig? [fr?] Comment formuler un résultat avec une prudence scientifique ?",
+          "explanation": "„Die Daten deuten darauf hin, dass …“ gibt ein Ergebnis wieder, ohne mehr zu behaupten, als belegt ist. „Endgültig bewiesen“, „jeder weiß“ und „immer und überall“ übertreiben, genau wie die Schlagzeilen, die der Artikel kritisiert. [fr?] « Les données suggèrent que … » : formulation prudente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es ist endgültig bewiesen, dass heimische Pflanzen mehr Bienen anlocken.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Jeder weiß doch, dass heimische Pflanzen mehr Bienen anlocken.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Daten deuten darauf hin, dass heimische Pflanzen mehr Bienen anlocken.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Heimische Pflanzen locken immer und überall mehr Bienen an, Punkt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was ist ein „Zusammenhang“ im Sinne des Artikels? [fr?] Qu’est-ce qu’un « Zusammenhang » au sens de l’article ?",
+          "explanation": "Ein Zusammenhang (Korrelation) bedeutet nur, dass zwei Dinge gemeinsam auftreten, wie Eisverkauf und Sonnenbrand. Ob das eine das andere verursacht (Kausalität), muss erst ein Experiment zeigen. Die anderen Antworten beschreiben ein Experiment, die Begutachtung und eine Zusammenarbeit. [fr?] Zusammenhang = corrélation ; Ursache = cause.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zwei Dinge treten oft gemeinsam auf, ohne dass klar ist, ob eins das andere bewirkt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ein Experiment beweist eindeutig und endgültig, welche Ursache eine bestimmte Wirkung hat.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Studie wird von anderen Fachleuten gelesen und ausführlich bewertet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mehrere Forschungsteams arbeiten gemeinsam an demselben großen Projekt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Was bedeuten die Ausdrücke? Ordnen Sie zu. [fr?] Que signifient ces expressions ? Associez.",
+          "explanation": "Diese Ausdrücke beschreiben, wie Forschung funktioniert: Man stößt auf ein Phänomen, stellt eine Annahme in Frage, belegt sie mit Daten und kommt schließlich zu einem Schluss. [fr?] tomber sur, arriver à la conclusion, remettre en question, prouver.",
+          "pairs": [
+            {
+              "left": "auf etwas stoßen",
+              "right": "etwas zufällig finden"
+            },
+            {
+              "left": "zu dem Schluss kommen",
+              "right": "als Ergebnis feststellen"
+            },
+            {
+              "left": "etwas in Frage stellen",
+              "right": "an etwas zweifeln"
+            },
+            {
+              "left": "etwas belegen",
+              "right": "etwas mit Daten beweisen"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wissenschaft-hoeren2",
+      "kind": "exercise",
+      "title": "Verstehen: Wie verlässlich ist die Wettervorhersage? (Originaltext)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: Wie verlässlich ist die Wettervorhersage? (Originaltext)",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nORIGINALTEXT\n[fr?] Document authentique\nSie hören einen Ausschnitt aus dem Wikipedia-Artikel „Wettervorhersage“ (Fassung von 2007), vorgelesen von einer synthetischen Stimme. [fr?] Vous entendez un extrait de l’article Wikipédia « Wettervorhersage » (version de 2007), lu par une voix de synthèse.\nDie Angaben beschreiben den Stand von 2007; seitdem sind die Vorhersagen noch genauer geworden. [fr?] Les données décrivent la situation en 2007 ; depuis, les prévisions sont devenues encore plus précises.\n\nWICHTIGE WÖRTER\n[fr?] Mots utiles\n• die Treffsicherheit [fr?] la fiabilité, le taux de réussite\n• das Wettergeschehen [fr?] les phénomènes météorologiques\n• unseriös [fr?] peu sérieux\n• der Laie [fr?] le profane, le non-spécialiste\n• die Beobachtungsgabe [fr?] le sens de l’observation\n\nSTRATEGIE\n[fr?] Stratégie\nBeim ersten Hören: Welche Gründe für Fehler nennt der Text? [fr?] Première écoute : quelles causes d’erreur le texte cite-t-il ?\nBeim zweiten Hören achten Sie auf die Prozentzahlen und die Zeiträume. [fr?] À la deuxième écoute, soyez attentif aux pourcentages et aux durées.\nDie Transkription sehen Sie nach Ihren Antworten. [fr?] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-hoeren2-audio",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-hoeren2-foto",
+          "usage": "illustration",
+          "caption": "Thermometer und Barometer in einer alten Wetterstation",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Wochenprognose heute so gut wie vor [[1]] Jahren für einen Tag · 24 Stunden: gut [[2]] Prozent · drei Tage: etwas mehr als [[3]] Prozent · keine Methode reicht über [[4]] Tage · „heute wie gestern“: [[5]] bis 70 Prozent",
+          "explanation": "„so zuverlässig, wie sie es vor dreißig Jahren für den nächsten Tag war“, „gut neunzig Prozent“, „etwas mehr als 75 %“, „über zwanzig Tage“, „zu 50 bis 70 Prozent“. [fr?] Les chiffres sont donnés dans cet ordre dans le texte.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "dreißig",
+                "30",
+                "dreissig"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "neunzig",
+                "90"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "75",
+                "fünfundsiebzig"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "zwanzig",
+                "20"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "50",
+                "fünfzig"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Grund für ungenaue Vorhersagen wird NICHT genannt? [fr?] Quelle cause de prévisions imprécises n’est PAS citée ?",
+          "explanation": "Der Text nennt drei Ursachen: unvollständige Kenntnis der Erdatmosphäre, den chaotischen Anteil im Wettergeschehen und zu ungenaue rechnerische Modelle. Von Personalmangel ist nicht die Rede. [fr?] Les trois causes citées sont les données incomplètes, la part chaotique du temps et les modèles de calcul imprécis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "unvollständige Daten über die Atmosphäre",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "der chaotische Anteil des Wetters",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "zu wenige Fachleute in den Wetterdiensten",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "zu ungenaue Rechenmodelle",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was sagt der Text über saisonale Wetterprognosen? [fr?] Que dit le texte des prévisions saisonnières ?",
+          "explanation": "Weil keine Methode über zwanzig Tage hinausreicht, sind saisonale Prognosen „nur noch unseriös“ und werden „von den meisten Wetterberichterstattungen im Fernsehen und Radio auch gemieden“. [fr?] Au-delà de vingt jours, les prévisions ne sont plus sérieuses ; la télévision et la radio les évitent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sind so zuverlässig wie Tagesprognosen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sind unseriös und werden meist nicht gesendet.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie werden nur für Landwirte erstellt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie werden im Radio inzwischen immer häufiger gesendet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum verändern lokale Einflüsse die Vorhersage so stark? [fr?] Pourquoi les influences locales modifient-elles autant la prévision ?",
+          "explanation": "Die Theorie ist „weitgehend geklärt“, aber „kleinräumige Effekte“ wie Temperaturunterschiede über hellen und dunklen Flächen lassen sich nicht genau genug berechnen. [fr?] La théorie est connue, mais les effets très locaux (surfaces claires ou sombres, versants) sont difficiles à calculer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil Gebirge die Messgeräte der Wetterdienste stören.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil kleinräumige Effekte kaum genau zu berechnen sind.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil die Theorie der Meteorologie noch weitgehend unklar ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil man Wälder und Äcker nicht von oben beobachten kann.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was sagt der Text über Prognosen von Laien? [fr?] Que dit le texte des prévisions faites par des profanes ?",
+          "explanation": "Ein „erfahrener Laie“ kann für seine Umgebung eine Prognose erstellen, die einer Prognose für ein ganzes Bundesland „an lokaler Verlässlichkeit gleichkommt“; dafür reichen Thermometer, Barometer und Beobachtung. Eine Nachfrage beim Wetterdienst bringt aber eine höhere Trefferquote. [fr?] Un profane expérimenté peut prévoir le temps local aussi bien qu’un bulletin régional, avec un thermomètre, un baromètre et de l’observation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie brauchen dafür teure Messgeräte und Computer.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sind besser als jede Vorhersage eines Wetterdienstes.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sind grundsätzlich weniger zuverlässig als ein Zufall.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Erfahrene Laien schaffen lokal recht gute Prognosen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Für einen Landwirt kann sich eine Nachfrage bei einem Wetterdienst lohnen.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Richtig: Eine Nachfrage „etwa von einem Landwirt“ bringt „immer eine höhere Trefferquote … als das einheitliche Fernsehwetter“. [fr?] Vrai : un agriculteur obtient de meilleures prévisions en interrogeant directement un service météo.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Studien, Zustände und Nominalstil",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Studien, Zustände und Nominalstil",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nHören Sie eine kurze Wissenschaftsmeldung. Sie hilft Ihnen bei den Fragen 1 bis 4. [fr?] Écoutez une brève nouvelle scientifique. Elle vous aide pour les questions 1 à 4.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-kontrolle-audio",
+          "caption": "Wissenschaft in Kürze",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was weiß man über den Stand der Studie? [fr?] Que sait-on de l’état de l’étude ?",
+          "explanation": "„Die Studie ist als Preprint im Internet veröffentlicht und noch nicht von anderen Fachleuten begutachtet.“ Das Zustandspassiv „ist veröffentlicht“ zeigt: Die Veröffentlichung ist erfolgt; die Begutachtung steht noch aus. [fr?] Publiée en prépublication, pas encore évaluée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie ist in einer Fachzeitschrift erschienen und schon von mehreren Teams bestätigt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ist online veröffentlicht, aber noch nicht von anderen Fachleuten geprüft.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie wird gerade durchgeführt, Ergebnisse gibt es noch keine.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie wurde abgebrochen, weil zu wenige Studierende teilnahmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Schlussfolgerung passt zu der Meldung? [fr?] Quelle conclusion correspond à la nouvelle ?",
+          "explanation": "Vierzig Studierende sind eine kleine Stichprobe, und die Studie ist noch nicht begutachtet. Die Forschenden sagen selbst, dass „größere Studien“ das Ergebnis bestätigen müssen. Genau das empfiehlt auch der Artikel: auf Stichprobe und Prüfung achten. [fr?] Petit échantillon, étude non évaluée : simple indice.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Mittagsschlaf verbessert das Gedächtnis bei allen Menschen deutlich.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Studierende sollten jeden Tag zwanzig Minuten Mittagsschlaf machen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mit nur vierzig Personen ist das Ergebnis ein erster Hinweis, mehr nicht.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das Lesen einer Zeitschrift schadet dem Gedächtnis beim Vokabellernen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "„werden“ oder „sein“? Ergänzen Sie. [fr?] « werden » ou « sein » ? Complétez.",
+          "text": "Die Studie [[1]] schon als Preprint veröffentlicht. · Im Moment [[2]] sie von zwei Fachleuten begutachtet.",
+          "explanation": "Die Veröffentlichung ist abgeschlossen: Zustandspassiv „ist veröffentlicht“. Die Begutachtung läuft „im Moment“: Vorgangspassiv „wird begutachtet“. [fr?] Publication faite : ist ; évaluation en cours : wird.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ist"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wird"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die",
+              "Ergebnisse",
+              "müssen",
+              "noch",
+              "durch",
+              "größere Studien",
+              "bestätigt",
+              "werden."
+            ],
+            [
+              "Die",
+              "Ergebnisse",
+              "müssen",
+              "durch",
+              "größere Studien",
+              "noch",
+              "bestätigt",
+              "werden."
+            ]
+          ],
+          "explanation": "Passiv mit Modalverb: „müssen“ an zweiter Stelle, am Ende Partizip II + „werden“ (bestätigt werden). Wer etwas bestätigt, steht nach „durch“. „Noch“ kann vor oder nach „durch größere Studien“ stehen. [fr?] Modal + participe + werden à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz bedeutet „Nach Abschluss der Messungen wurden die Daten veröffentlicht“? [fr?] Quelle phrase a le même sens ?",
+          "explanation": "„Nach Abschluss der Messungen“ wird im Verbalstil zu „Nachdem die Messungen abgeschlossen waren“. „Bevor“ kehrt die Reihenfolge um, „obwohl“ drückt einen Gegensatz aus, und der dritte Satz vertauscht Ursache und Folge. [fr?] nach + nom = nachdem + verbe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bevor die Messungen ganz abgeschlossen waren, wurden die Daten schon veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Obwohl die Messungen abgeschlossen waren, wurden die Daten veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil die Daten veröffentlicht waren, wurden die Messungen abgeschlossen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Nachdem die Messungen abgeschlossen waren, wurden die Daten veröffentlicht.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Laut Artikel lassen sich Ergebnisse aus Versuchen mit Mäusen direkt auf Menschen übertragen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Was im Labor bei Mäusen wirkt, ist beim Menschen noch lange nicht bewiesen.“ Deshalb soll man bei Meldungen prüfen, ob überhaupt Menschen untersucht wurden. [fr?] Ce qui marche chez la souris n’est pas prouvé chez l’humain.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Fachwörter aus dem Modul. [fr?] Complétez avec les termes du module.",
+          "text": "Eine Studie, die schon online steht, aber noch nicht von anderen Fachleuten geprüft wurde, ist ein [[1]]. · Die Gruppe, mit der man die Versuchsgruppe vergleicht, heißt [[2]].",
+          "explanation": "Ein Preprint ist eine Vorabveröffentlichung ohne Begutachtung. Die Kontrollgruppe bekommt die untersuchte Behandlung nicht; in der Meldung war das die Gruppe, die eine Zeitschrift las, statt zu schlafen. [fr?] la prépublication ; le groupe témoin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Preprint"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kontrollgruppe"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welches Wort verbindet die Sätze am besten? „Die Forschenden haben nur vierzig Personen untersucht. … ist die Stichprobe für allgemeine Aussagen zu klein.“ [fr?] Quel mot relie le mieux les deux phrases ?",
+          "explanation": "„Somit“ (= daraus folgt) zieht eine Schlussfolgerung aus dem vorherigen Satz. „Trotzdem“ und „dennoch“ drücken einen Gegensatz aus, „stattdessen“ eine Alternative; beides passt nicht zur Logik. Solche Verbindungswörter machen einen Text zusammenhängend. [fr?] somit = par conséquent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Trotzdem",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Somit",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Stattdessen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dennoch",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-wissenschaft-lesen-artikel",
+      "kind": "image",
+      "title": "Article de vulgarisation : ce que prouve une étude",
+      "alt": "Début de l’article « Was eine Studie beweist – und was nicht » : surtitre, titre, signature, chapeau et premier paragraphe sur une étude consacrée au café.",
+      "image": {
+        "layout": "article",
+        "kicker": "Wissenschaft verstehen",
+        "title": "Was eine Studie beweist – und was nicht",
+        "icon": "microscope",
+        "byline": "Von Leonie Brandauer",
+        "lead": "Kaffee verlängert das Leben, Schokolade macht klug, Smartphones machen einsam: Fast jede Woche meldet eine Schlagzeile eine neue Erkenntnis. Wie viel davon stimmt? Eine Anleitung zum kritischen Lesen.",
+        "paragraphs": [
+          "Die Meldung klang verlockend: Wer täglich drei Tassen Kaffee trinkt, lebt länger. So stand es im vergangenen Frühjahr in zahlreichen Zeitungen. Die Studie dahinter war seriös, in einer angesehenen Fachzeitschrift veröffentlicht und von unabhängigen Fachleuten begutachtet."
+        ]
+      }
+    },
+    {
+      "key": "b2-wissenschaft-hoeren-audio",
+      "kind": "audio",
+      "title": "Émission de radio : la science participative",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Willkommen bei „Wissen um sechs“. Forschung findet nicht nur im Labor statt, sondern manchmal auch im eigenen Garten. Beim Projekt „Summ mit“ zählen Bürgerinnen und Bürger jeden Sommer Wildbienen und andere Insekten."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Bei mir sind die Biologin Johanna Riedl, die das Projekt leitet, und Werner Danielsen, der seit drei Jahren mitzählt. Frau Riedl, wie funktioniert das genau?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Ganz einfach: Man sucht sich eine blühende Fläche, etwa ein Beet oder einen Balkonkasten, und beobachtet sie fünfzehn Minuten lang. Jedes Insekt, das auf einer Blüte landet, wird gezählt, am besten mit einem Foto. Die Ergebnisse gibt man dann in unsere App ein. Die App ist kostenlos und ab dem ersten Juni freigeschaltet."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Und wie viele Menschen machen mit?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Im letzten Sommer waren es rund zwölftausend, von Schulklassen bis zu Rentnern. Allein hätten wir niemals so viele Daten erheben können. Ein Forschungsteam schafft vielleicht zweihundert Standorte, die Bürgerinnen und Bürger schaffen Tausende."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Herr Danielsen, warum zählen Sie mit?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Danielsen",
+          "text": "Ehrlich gesagt bin ich durch meine Enkelin dazu gekommen. Sie hat das Projekt in der Schule kennengelernt. Inzwischen hat es mich richtig gepackt. Ich erkenne heute zwanzig Bienenarten, die ich früher gar nicht wahrgenommen habe. Und man hat das Gefühl, dass man etwas Sinnvolles beiträgt."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Und wie viel Zeit kostet Sie das?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Danielsen",
+          "text": "Im Sommer vielleicht eine Stunde pro Woche. Ich zähle meistens am Vormittag, wenn es warm wird, denn bei Regen und Wind fliegen kaum Insekten. Beim Bestimmen hilft mir oft meine Enkelin. Mit der App ist sie viel schneller als ich."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Frau Riedl, sind die Daten von Laien überhaupt zuverlässig?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Das ist die wichtigste Frage, und wir nehmen sie sehr ernst. Anfänger verwechseln manche Arten, das ist ganz normal. Deshalb werden alle Fotos von Fachleuten geprüft, bevor sie in die Auswertung eingehen. Ungefähr jede zehnte Meldung korrigieren wir."
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Außerdem sind die Daten anonymisiert: Wir wissen, in welchem Ort gezählt wurde, aber nicht, in welchem Garten."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Gibt es denn schon Ergebnisse?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Ja, und eines hat uns überrascht. In Gärten mit heimischen Pflanzen haben wir fast doppelt so viele Wildbienen gezählt wie in Gärten mit exotischen Zierpflanzen. Selbst kleine Balkone können einen Unterschied machen, wenn dort die richtigen Pflanzen stehen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Danielsen",
+          "text": "Das kann ich bestätigen. Ich habe vor zwei Jahren einen Teil des Rasens in meinem Vorgarten durch eine Wildblumenwiese ersetzt. Seitdem ist dort im Sommer richtig was los."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Wo liegen die Grenzen eines solchen Projekts?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Die Daten sind nicht gleichmäßig verteilt. In den Städten zählen viel mehr Menschen als auf dem Land, und große Agrarflächen sind kaum erfasst. Für manche Fragen brauchen wir deshalb weiterhin klassische Untersuchungen mit festen Standorten. Bürgerwissenschaft ersetzt die Forschung nicht, aber sie ergänzt sie."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Und wann wird gezählt?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Riedl",
+          "text": "Die Zählwochen laufen vom ersten Juni bis Ende August. Die Auswertung erfolgt dann im Herbst, und alle Teilnehmenden bekommen im Dezember einen Bericht mit den Ergebnissen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Frau Riedl, Herr Danielsen, vielen Dank. Und Sie, liebe Hörerinnen und Hörer: Vielleicht zählen Sie im nächsten Sommer ja selbst mit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-kontrolle-audio",
+      "kind": "audio",
+      "title": "Brève scientifique : la sieste et la mémoire",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Nachrichten",
+          "text": "Wissenschaft in Kürze. Macht ein Mittagsschlaf klüger? Ein Forschungsteam hat untersucht, ob ein kurzer Schlaf am Mittag das Gedächtnis verbessert. Vierzig Studierende lernten am Vormittag Vokabeln; die Hälfte schlief danach zwanzig Minuten, die andere Hälfte las eine Zeitschrift."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Nachrichten",
+          "text": "Am Abend erinnerte sich die Gruppe mit Mittagsschlaf an etwas mehr Wörter. Die Studie ist als Preprint im Internet veröffentlicht und noch nicht von anderen Fachleuten begutachtet. Die Forschenden betonen selbst, dass ihre Ergebnisse durch größere Studien bestätigt werden müssen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-einstieg-foto",
+      "kind": "image",
+      "title": "Un microscope de laboratoire",
+      "alt": "Gros plan sur un microscope optique de laboratoire, avec ses deux oculaires et ses objectifs, sur une paillasse.",
+      "photo": {
+        "file": "libre/commons/wissenschaft-mikroskop.jpg",
+        "crop": [
+          0,
+          0.04,
+          0.74,
+          0.92
+        ]
+      },
+      "credit": "Ajay Kumar Chaurasiya, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Compound_Microscope_Image.jpg"
+    },
+    {
+      "key": "b2-wissenschaft-hoeren2-audio",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Wettervorhersage (extrait)",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Verlässlichkeit"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Heute ist eine Prognose für die kommende Woche ungefähr so zuverlässig, wie sie es vor dreißig Jahren für den nächsten Tag war. Die 24-Stunden-Vorhersage erreicht eine Eintreffgenauigkeit von gut neunzig Prozent. Die Treffsicherheit für die kommenden 3 Tage beträgt etwas mehr als 75%.",
+          "say": "Heute ist eine Prognose für die kommende Woche ungefähr so zuverlässig, wie sie es vor dreißig Jahren für den nächsten Tag war. Die Vierundzwanzig-Stunden-Vorhersage erreicht eine Eintreffgenauigkeit von gut neunzig Prozent. Die Treffsicherheit für die kommenden drei Tage beträgt etwas mehr als fünfundsiebzig Prozent."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Teilweise ist die Wettervorhersage nicht so verlässlich, wie die Allgemeinheit und verschiedene Fachgebiete es sich wünschen. Dies hängt vor allem mit drei Ursachen zusammen:"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "• der unvollständigen Kenntnis des tatsächlichen Geschehens in der Erdatmosphäre (unvollständige Daten bzw. aus einem zu weitmaschigen Netz)",
+          "say": "der unvollständigen Kenntnis des tatsächlichen Geschehens in der Erdatmosphäre (unvollständige Daten beziehungsweise aus einem zu weitmaschigen Netz)"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "• dem chaotischen (nicht vorhersehbaren) Anteil im Wettergeschehen",
+          "say": "dem chaotischen (nicht vorhersehbaren) Anteil im Wettergeschehen"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "• der (noch immer) unzureichenden Genauigkeit der rechnerischen Modelle: aus Gründen der Rechenzeit und der großen anfallenden Datenmengen können die beteiligten Luft- und Wassermassen noch nicht mit zufriedenstellender Genauigkeit berücksichtigt werden.",
+          "say": "der (noch immer) unzureichenden Genauigkeit der rechnerischen Modelle: aus Gründen der Rechenzeit und der großen anfallenden Datenmengen können die beteiligten Luft- und Wassermassen noch nicht mit zufriedenstellender Genauigkeit berücksichtigt werden."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es spielen zu viele einzelne Faktoren eine Rolle, deren Zusammenspiel man bis dato und auch in näherer Zukunft nicht vollständig analysieren kann."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Daher machen lokale Einflüsse wie Gebirge und ihre unregelmäßig geformten Hänge, Effekte unterschiedlicher Einstrahlung durch „falsch“ berechnete Bewölkung, der Bewuchs (Wald zu Acker!) oder das Gestein so viel aus, dass die Treffsicherheit für die nächsten 4 bis 7 Tage erheblich sinkt.",
+          "say": "Daher machen lokale Einflüsse wie Gebirge und ihre unregelmäßig geformten Hänge, Effekte unterschiedlicher Einstrahlung durch „falsch“ berechnete Bewölkung, der Bewuchs (Wald zu Acker!) oder das Gestein so viel aus, dass die Treffsicherheit für die nächsten vier bis sieben Tage erheblich sinkt."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Keine der heute verwendeten Methoden reicht über zwanzig Tage in die Zukunft hinaus, so dass längere Vorhersagen, z. B. saisonale Wetterprognosen, nur noch unseriös sind und von den meisten Wetterberichterstattungen im Fernsehen und Radio auch gemieden werden.",
+          "say": "Keine der heute verwendeten Methoden reicht über zwanzig Tage in die Zukunft hinaus, so dass längere Vorhersagen, zum Beispiel saisonale Wetterprognosen, nur noch unseriös sind und von den meisten Wetterberichterstattungen im Fernsehen und Radio auch gemieden werden."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die Theorie der Meteorologie ist zwar durch die Gasgesetze, die Thermodynamik und die Strömungslehre weitgehend geklärt, kann aber durch kleinräumige Effekte von bis zu Kilometer-Dimensionen nicht alle Luftbewegungen mit ausreichender Genauigkeit berechnen."
+        },
+        {
+          "voice": "sprecher",
+          "text": "So kann beispielsweise an einem sonnigen Tag die Temperatur über dunklen und hellen Flächen um mehrere Grad differieren, ähnliches tritt zwischen Sonnenseite und Schattenseite eines Gebirgskammes auf oder zwischen Gewässern und festem Boden."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Prognosen durch Laien"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bis zu gewissem Maß kann auch ein erfahrener Laie eine Prognose für seine Umgebung erstellen, die jener eines ganzen Bundeslandes an lokaler Verlässlichkeit gleichkommt."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wer das erlernen will, findet im Buchhandel kurzgefasste Anleitungen zur Deutung von Temperatur und Luftdruck und zur Beobachtung von Wind und Wolken – die viel über die horizontalen und vertikalen Luftbewegungen erkennen lassen."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Neben Thermometer und Barometer braucht man dazu nur eine „gesunde Beobachtungsgabe“ – denn Wind und Art der Wolken sagen fast alles über die horizontalen und vertikalen Luftbewegungen."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Doch auch „einfache Wetterstationen“ für den Schreibtisch plus Außenfühler können programmierte Prognosen mit 60-75 % Zutreffenswahrscheinlichkeit abgeben.",
+          "say": "Doch auch „einfache Wetterstationen“ für den Schreibtisch plus Außenfühler können programmierte Prognosen mit sechzig bis fünfundsiebzig Prozent Zutreffenswahrscheinlichkeit abgeben."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Für die nächsten 1-3 Stunden kann man – z. B. bei der Frage nach örtlichem Regen, klarem Sternhimmel oder Eintreten von Frost – auf 80 bis 90 Prozent kommen. Selbst die einfachste aller Prognosen – heute wird’s so wie gestern – trifft in Mitteleuropa zu 50 bis 70 Prozent zu.",
+          "say": "Für die nächsten ein bis drei Stunden kann man – zum Beispiel bei der Frage nach örtlichem Regen, klarem Sternhimmel oder Eintreten von Frost – auf achtzig bis neunzig Prozent kommen. Selbst die einfachste aller Prognosen – heute wird es so wie gestern – trifft in Mitteleuropa zu fünfzig bis siebzig Prozent zu."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Deshalb kann eine nähere Nachfrage bei einem Wetterdienst, etwa von einem Landwirt oder einer Versicherung bei Gewitterlagen, immer eine höhere Trefferquote bringen als das „einheitliche Fernsehwetter für ein ganzes Bundesland“."
+        }
+      ],
+      "credit": "Texte : article « Wettervorhersage » de la Wikipédia en allemand (révision 38550168), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=38550168"
+    },
+    {
+      "key": "b2-wissenschaft-hoeren2-foto",
+      "kind": "image",
+      "title": "Une station météo ancienne",
+      "alt": "Une ancienne station météo publique en bois et en verre : trois cadrans (baromètre, hygromètre) en haut, des thermomètres en dessous.",
+      "photo": {
+        "file": "libre/commons/wissenschaft-wetterhaeuschen.jpg",
+        "crop": [
+          0.1,
+          0.04,
+          0.8,
+          0.9
+        ]
+      },
+      "credit": "Radler59, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grein_Wetterstation-04.jpg"
+    },
+    {
+      "key": "b2-wissenschaft-lexique",
+      "kind": "audio",
+      "title": "Lexique · Wissenschaft: Forschung, Technik und Innovation",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Forschung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Studie, die Studien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Untersuchung, die Untersuchungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Ergebnis, die Ergebnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erkenntnis, die Erkenntnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Stichprobe, die Stichproben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Zusammenhang, die Zusammenhänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ursache, die Ursachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kontrollgruppe, die Kontrollgruppen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fachzeitschrift, die Fachzeitschriften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "veröffentlichen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "begutachten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "auswerten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Daten erheben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachweisen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "überprüfen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich durchsetzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Laie, die Laien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bürgerwissenschaft"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "anonymisiert"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erfindung, die Erfindungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beitragen zu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zu dem Schluss kommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erfolgen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

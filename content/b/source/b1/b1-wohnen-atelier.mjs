@@ -11,7 +11,7 @@ const situation = (question) => ({ media: `b1-wohnen-atelier-interaktion-${quest
 
 export default {
   id: 'b1-wohnen-atelier',
-  title: 'Atelier Wohnen : signaler un problème et proposer un accord',
+  title: 'Wohnen, atelier : signaler un problème et proposer un accord',
   objective: 'Écrire à la régie pour signaler un problème et proposer une solution, négocier un arrangement avec un voisin, réagir poliment et expliquer simplement un règlement à quelqu’un qui débute.',
   grammarFocus: ['relativsaetze', 'wechselpraepositionen'],
   sources: [

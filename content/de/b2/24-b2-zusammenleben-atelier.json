@@ -1,0 +1,1653 @@
+{
+  "id": "b2-zusammenleben-atelier",
+  "title": "Zusammenleben – Werkstatt: vermitteln, schlichten, gemeinsam entscheiden",
+  "objective": "Rédiger un courriel formel de médiation, reformuler avec neutralité des positions opposées, réagir avec diplomatie dans une réunion tendue, réviser lecture et écoute dans les conditions de l’examen et défendre un point de vue dans une discussion finale avant la Probeprüfung.",
+  "prerequisites": [
+    "b2-zusammenleben"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap (personnages fictifs)."
+  ],
+  "layer": "content/b/source/b2/b2-zusammenleben-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "wenn-ich-sie-richtig-verstehe",
+      "word": "Wenn ich Sie richtig verstehe, …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Si je vous comprends bien…",
+      "example": "Wenn ich Sie richtig verstehe, geht es Ihnen vor allem um Ruhe.",
+      "note": "verbe de la principale en tête : …, geht es …",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "ihnen-ist-also-wichtig-dass",
+      "word": "Ihnen ist also wichtig, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ce qui compte pour vous, c’est donc que…",
+      "example": "Ihnen ist also wichtig, dass die Kinder draußen spielen können.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "ich-habe-den-eindruck-dass",
+      "word": "Ich habe den Eindruck, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "J’ai l’impression que…",
+      "example": "Ich habe den Eindruck, dass beide Seiten eine Lösung wollen.",
+      "note": "message en « je »",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "koennten-wir-uns-darauf-einigen-dass",
+      "word": "Könnten wir uns darauf einigen, dass …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Pourrions-nous convenir que… ?",
+      "example": "Könnten wir uns darauf einigen, dass wir die Regel vier Wochen testen?",
+      "note": "sich einigen auf + accusatif",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "waere-es-denkbar-dass",
+      "word": "Wäre es denkbar, dass …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Serait-il envisageable que… ?",
+      "example": "Wäre es denkbar, dass die Familien den Gießdienst am Wochenende übernehmen?",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "aufeinander-zugehen",
+      "word": "aufeinander zugehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "faire un pas l’un vers l’autre",
+      "example": "Wenn beide Seiten aufeinander zugehen, findet sich eine Lösung.",
+      "note": "séparable : zu|gehen",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "sichtweise",
+      "word": "Sichtweise",
+      "article": "die",
+      "plural": "Sichtweisen",
+      "partOfSpeech": "noun",
+      "translation": "le point de vue",
+      "example": "Zuerst hören wir uns beide Sichtweisen an.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "anliegen",
+      "word": "Anliegen",
+      "article": "das",
+      "plural": "Anliegen",
+      "partOfSpeech": "noun",
+      "translation": "la demande, la préoccupation",
+      "example": "Ich habe Ihr Anliegen an die Hausverwaltung weitergegeben.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "beduerfnis",
+      "word": "Bedürfnis",
+      "article": "das",
+      "plural": "Bedürfnisse",
+      "partOfSpeech": "noun",
+      "translation": "le besoin",
+      "example": "Hinter jeder Forderung steht ein Bedürfnis, zum Beispiel nach Ruhe.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "neutral",
+      "word": "neutral",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "neutre",
+      "example": "Als Vermittlerin muss ich neutral bleiben.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sachlich",
+      "word": "sachlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "objectif, factuel",
+      "example": "Bitte bleiben Sie sachlich, auch wenn Sie verärgert sind.",
+      "note": "contraire : persönlich, emotional",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "schlichten",
+      "word": "schlichten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "arbitrer, apaiser (un conflit)",
+      "example": "Konfliktlotsen helfen, Streit unter Schülern zu schlichten.",
+      "note": "die Schlichtung",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "herunterschlucken",
+      "word": "herunterschlucken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "ravaler (sa colère, une remarque)",
+      "example": "Man sollte Ärger nicht zu lange herunterschlucken.",
+      "note": "séparable : herunter|schlucken (familier)",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "arbeitssprache",
+      "word": "Arbeitssprache",
+      "article": "die",
+      "plural": "Arbeitssprachen",
+      "partOfSpeech": "noun",
+      "translation": "la langue de travail",
+      "example": "In unserem Team ist Deutsch die Arbeitssprache.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sich-verstaendigen",
+      "word": "sich verständigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se faire comprendre, communiquer",
+      "example": "Im Team verständigen wir uns meistens auf Deutsch.",
+      "note": "auch : sich verständigen auf (+ acc.) : convenir de",
+      "audio": {
+        "media": "b2-zusammenleben-atelier-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-zusammenleben-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: eine Vermittlungs-E-Mail und eine Zusammenfassung",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: eine Vermittlungs-E-Mail und eine Zusammenfassung",
+        "description": "MODELL 1: EINE FORMELLE VERMITTLUNGS-E-MAIL\nIm Gemeinschaftsgarten „Hinterhof Nord“ gibt es Streit zwischen der Gießgruppe und einigen Familien. Die Vorsitzende Gudrun Seifert schreibt allen Mitgliedern. Achten Sie auf den Aufbau und auf die neutralen, diplomatischen Formulierungen. [fr?] Dans un jardin partagé, la présidente écrit à tous les membres après un conflit ; observez la structure et les formulations neutres.\n\nBetreff: Unser Garten – Vorschlag für ein gutes Miteinander\nLiebe Mitglieder des Gemeinschaftsgartens,\nin den letzten Wochen hat es im Garten mehrfach Ärger gegeben, und mehrere von Ihnen haben sich bei mir gemeldet. Ich möchte das Thema deshalb offen zur Sprache bringen, bevor sich die Fronten verhärten.\nDie Gießgruppe ist besorgt, weil Beete beim Spielen beschädigt wurden und abends Grillrauch über die Pflanzen zieht. Für viele Familien ist der Garten dagegen der einzige Ort, an dem ihre Kinder draußen spielen können, denn in der Nähe gibt es keinen Spielplatz. Beide Anliegen sind aus meiner Sicht berechtigt.\nIch würde deshalb Folgendes vorschlagen: Wir trennen die Wiese hinter dem Schuppen als Spielfläche ab, gegrillt wird nur noch freitags auf dem Grillplatz, und die Familien übernehmen am Wochenende den Gießdienst. Diese Regeln könnten wir zunächst bis zum Herbst ausprobieren.\nDamit alle mitreden können, lade ich Sie herzlich zu einem Treffen am Donnerstag, dem 5. Juni, um 19 Uhr im Gartenhaus ein. Wenn Sie nicht kommen können, schreiben Sie mir gern Ihre Meinung.\nMit freundlichen Grüßen\nGudrun Seifert, Vorsitzende\n\nAUFBAU\n1. Anlass: Was ist passiert, und warum schreibe ich? [fr?] L’occasion : ce qui s’est passé et pourquoi j’écris.\n2. Beide Sichtweisen neutral wiedergeben, ohne Schuldige zu nennen. [fr?] Les deux points de vue, sans désigner de coupable.\n3. Anerkennen: Beide Anliegen sind berechtigt. [fr?] Reconnaître la légitimité des deux demandes.\n4. Konkreter Vorschlag, vorsichtig im Konjunktiv II, mit Probezeit. [fr?] Une proposition concrète, prudente, à l’essai.\n5. Einladung zum Gespräch und formeller Schluss. [fr?] Invitation à en parler et formule finale.\n\nANLASS NENNEN\n• Ich möchte das Thema offen zur Sprache bringen. · Mehrere von Ihnen haben sich bei mir gemeldet.\nSICHTWEISEN WIEDERGEBEN\n• Die Gießgruppe ist besorgt, weil … · Für viele Familien ist … dagegen … · Beide Anliegen sind berechtigt.\nVORSCHLAGEN\n• Ich würde Folgendes vorschlagen: … · Wäre es denkbar, dass …? · Diese Regeln könnten wir zunächst ausprobieren.\nEINLADEN UND ABSCHLIESSEN\n• Damit alle mitreden können, lade ich Sie … ein. · Ich freue mich auf ein offenes Gespräch.\n\nMODELL 2: POSITIONEN MÜNDLICH ZUSAMMENFASSEN\nHören Sie, wie Gudrun Seifert beim Treffen die beiden Positionen zusammenfasst. Sie dankt, spiegelt die Interessen beider Seiten, nennt das Gemeinsame und macht dann einen vorsichtigen Vorschlag. [fr?] Écoutez la présidente résumer les deux positions : remercier, reformuler les intérêts, souligner le point commun, proposer prudemment.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-atelier-modell-audio",
+          "caption": "Gudrun Seifert fasst zusammen",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-zusammenleben-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: diplomatisch reagieren",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: diplomatisch reagieren",
+        "description": "Wie reagieren Sie? Wählen Sie die passende Antwort. [fr?] Comment réagissez-vous ? Choisissez la réponse qui convient.\n\nSITUATION\nIn einer Wohngemeinschaft gibt es eine WG-Besprechung zum Putzplan. Die Stimmung ist angespannt. Sie möchten helfen, dass die Diskussion sachlich bleibt. In der WG duzen sich alle. [fr?] Réunion tendue de colocation sur le planning de ménage ; vous voulez garder un ton apaisé (tutoiement).\nHören Sie jede Äußerung und wählen Sie die Reaktion, die zur genannten Absicht passt. Sprechen Sie danach die vier Reaktionen laut nach. [fr?] Écoutez chaque réplique, choisissez la réaction qui correspond à l’intention indiquée, puis répétez les quatre réactions.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-a1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-a2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-a3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-a4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Äußerung 1: Sie möchten Jaspers Ärger anerkennen und die Diskussion beruhigen. Was sagen Sie? [fr?] Vous voulez reconnaître la colère de Jasper et apaiser. Que dites-vous ?",
+          "explanation": "„Ich verstehe, dass du dich ärgerst“ erkennt das Gefühl an, ohne Schuld zuzugeben oder zu streiten. „Lass uns …“ lenkt den Blick auf eine gemeinsame Lösung. Die anderen Reaktionen rechtfertigen sich, provozieren oder werfen Jasper selbst etwas vor („immer“). [fr?] Reconnaître l’émotion, puis orienter vers une solution commune.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das stimmt doch gar nicht, ich habe letzten Monat auch einmal geputzt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Dann putz eben nicht mehr, wenn es dich so sehr stört, Jasper.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich verstehe, dass du dich ärgerst. Lass uns einen fairen Plan machen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Immer musst du dich beschweren, das ist doch wirklich anstrengend.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Äußerung 2: Sie möchten herausfinden, was Pia braucht. Was fragen Sie? [fr?] Vous voulez savoir de quoi Pia a besoin. Que demandez-vous ?",
+          "explanation": "Hinter Pias Position („nicht jeden Samstag“) steht ein Interesse: Sie braucht Zeiten, die zu ihrer Arbeit passen. Die offene Frage nach passenden Tagen sucht dieses Interesse. Die anderen Fragen zweifeln ihre Situation an oder schieben das Problem zurück. [fr?] Une question ouverte sur ses disponibilités révèle l’intérêt derrière la position.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Welche Tage würden dir denn besser passen, wenn du abends arbeitest?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Warum suchst du dir nicht einfach einen anderen Job mit besseren Zeiten?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist dein Problem, wir haben schließlich alle viel zu tun.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Musst du wirklich jeden Abend bis zehn Uhr im Restaurant arbeiten?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Äußerung 3: Sie möchten die Verallgemeinerung zurückweisen, ohne Levent anzugreifen. Was sagen Sie? [fr?] Vous voulez refuser la généralisation sans attaquer Levent. Que dites-vous ?",
+          "explanation": "Die Antwort lehnt das Klischee klar ab („ungern über ganze Gruppen sprechen“), ohne Levent als Person zu verurteilen, und führt das Gespräch zur Sache zurück. Die erste Reaktion bricht das Gespräch ab, die zweite bestätigt das Vorurteil, die dritte antwortet mit einem Gegenklischee. [fr?] Refuser le cliché sans attaquer la personne, puis revenir aux faits.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist rassistisch, und mit dir rede ich heute ganz sicher nicht mehr weiter.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Stimmt, das kenne ich auch von vielen Leuten aus dem Süden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Und Leute aus dem Norden sind ja bekanntlich alle Putzteufel, oder etwa nicht?",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich würde ungern über ganze Gruppen sprechen. Bleiben wir bei den Aufgaben.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Äußerung 4: Sie möchten das Ergebnis zusammenfassen und eine Vereinbarung vorschlagen. Was sagen Sie? [fr?] Vous voulez résumer et proposer un accord. Que dites-vous ?",
+          "explanation": "„Wenn ich zusammenfassen darf“ ist eine höfliche Einleitung, und der Vorschlag ist konkret und begrenzt: ein Plan, vier Wochen, dann neu sprechen. Eine Probezeit macht es leichter, zuzustimmen. Die anderen Antworten geben die Schuld, resignieren oder verschieben das Problem. [fr?] Résumer poliment et proposer un accord concret, limité dans le temps.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nein, wir haben gar nichts, und das liegt nur an Jasper.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn ich zusammenfassen darf: Wir testen einen Putzplan vier Wochen lang.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Keine Ahnung, mir ist das inzwischen eigentlich völlig egal.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dann machen wir eben einfach weiter wie bisher, das ist doch am einfachsten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Ich verstehe, dass du dich ärgerst. Lass uns einen fairen Plan machen.",
+          "accept": [
+            "Ich verstehe, dass du dich ärgerst. Lass uns einen fairen Plan machen."
+          ],
+          "explanation": "Ruhig und langsam sprechen. Betonen Sie „verstehe“ und „fairen“. „Fair“ spricht man wie im Englischen: fär. [fr?] Débit calme ; « fair » se prononce comme en anglais.",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Welche Tage würden dir denn besser passen, wenn du abends arbeitest?",
+          "accept": [
+            "Welche Tage würden dir denn besser passen, wenn du abends arbeitest?"
+          ],
+          "explanation": "W-Frage mit fallender Melodie. Die Modalpartikel „denn“ bleibt unbetont und macht die Frage interessiert und freundlich. [fr?] Intonation descendante ; « denn » inaccentué rend la question bienveillante.",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Ich würde ungern über ganze Gruppen sprechen. Bleiben wir bei den Aufgaben.",
+          "accept": [
+            "Ich würde ungern über ganze Gruppen sprechen. Bleiben wir bei den Aufgaben."
+          ],
+          "explanation": "Der erste Satz ist vorsichtig (Konjunktiv II, „ungern“), der zweite klar. Betonen Sie „Gruppen“ und „Aufgaben“, den Kontrast der beiden Sätze. [fr?] Accentuez Gruppen et Aufgaben pour marquer le contraste.",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Wenn ich zusammenfassen darf: Wir testen einen Putzplan vier Wochen lang.",
+          "accept": [
+            "Wenn ich zusammenfassen darf: Wir testen einen Putzplan vier Wochen lang.",
+            "Wenn ich zusammenfassen darf: Wir testen einen Putzplan 4 Wochen lang."
+          ],
+          "explanation": "Nach dem Doppelpunkt eine kurze Pause. In „zusammenfassen“ trägt die zweite Silbe den Hauptakzent: zu-SAM-men-fas-sen. [fr?] Pause après les deux-points ; accent sur -SAM- dans zusammenfassen.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: zwei Positionen neutral wiedergeben",
+      "estimatedMinutes": 16,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: zwei Positionen neutral wiedergeben",
+        "description": "SITUATION\nSie sind Teamsprecherin oder Teamsprecher im Kundenservice. Zwei Kollegen haben Ihnen geschrieben. In der Teambesprechung am Mittwoch sollen Sie beide Positionen neutral vorstellen, damit das Team eine Lösung finden kann. [fr?] Porte-parole d’équipe, vous devez présenter avec neutralité deux positions opposées en réunion.\n\nNACHRICHT VON OLE HINZE\nIch halte das nicht mehr aus. Frau Nwosu telefoniert den ganzen Vormittag, und zwar so laut, dass ich keinen klaren Gedanken fassen kann. Ich muss bis Monatsende die Abrechnung fertig machen und mache nur noch Fehler. Ich verlange, dass Telefonate im Großraumbüro verboten werden.\n\nNACHRICHT VON NGOZI NWOSU\nIch habe gehört, dass sich Herr Hinze über mich beschwert hat. Ehrlich gesagt bin ich verletzt, dass er nicht direkt mit mir spricht. Ich betreue sechzig Kunden, und die meisten rufen vormittags an. Der kleine Besprechungsraum ist fast immer belegt, und das Headset, das ich beantragt habe, ist bis heute nicht da. Ich telefoniere nicht zum Spaß.\n\nUnterscheiden Sie zuerst Positionen (was jemand fordert) und Interessen (was jemand braucht). Formulieren Sie dann neutral: ohne Wertung, ohne Vorwürfe, in der dritten Person. [fr?] Distinguez positions (ce qu’on exige) et intérêts (ce dont on a besoin), puis reformulez sans jugement, à la troisième personne.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-atelier-mediation-nachrichten",
+          "caption": "Zwei Nachrichten an die Teamsprecherin",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Notizen. [fr?] Complétez vos notes.",
+          "text": "Herr Hinze: Position: Telefonate im Großraumbüro [[1]] · Interesse: Ruhe, um bis Monatsende die [[2]] ohne Fehler zu schaffen · Frau Nwosu: Position: Sie muss weiter telefonieren · Interesse: ihre [[3]] Kunden erreichen, die meist [[4]] anrufen · Hindernisse: der Besprechungsraum ist oft [[5]], das beantragte [[6]] fehlt",
+          "explanation": "Die Position ist die Forderung (Telefonate verbieten, weiter telefonieren), das Interesse der Grund dahinter (Konzentration für die Abrechnung, Erreichbarkeit für sechzig Kunden). Die Hindernisse zeigen, wo eine Lösung ansetzen kann: Raum und Headset. [fr?] Position = exigence ; intérêt = besoin ; les obstacles indiquent des pistes de solution.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "verbieten",
+                "verboten"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Abrechnung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "60",
+                "sechzig"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "vormittags",
+                "am Vormittag"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "belegt",
+                "besetzt"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Headset"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Welche neutrale Formulierung passt zu welcher Aussage? [fr?] Associez chaque phrase à sa reformulation neutre.",
+          "explanation": "Neutral wiedergeben heißt: Gefühle und Forderungen sachlich benennen, in der dritten Person, ohne zu übertreiben oder zu bewerten. Aus einer Forderung wird ein Wunsch, aus einem Vorwurf ein Bedürfnis („hätte sich … gewünscht“, Konjunktiv II der Vergangenheit). [fr?] Reformuler sans juger : émotions et exigences deviennent souhaits et besoins.",
+          "pairs": [
+            {
+              "left": "„Ich halte das nicht mehr aus.“",
+              "right": "Herr Hinze fühlt sich durch die Telefonate stark belastet."
+            },
+            {
+              "left": "„Ich verlange, dass Telefonate verboten werden.“",
+              "right": "Herr Hinze wünscht sich eine klare Regel für Telefonate."
+            },
+            {
+              "left": "„Ich telefoniere nicht zum Spaß.“",
+              "right": "Für Frau Nwosu gehören die Telefonate zu ihren Kernaufgaben."
+            },
+            {
+              "left": "„Ich bin verletzt, dass er nicht mit mir spricht.“",
+              "right": "Frau Nwosu hätte sich ein direktes Gespräch gewünscht."
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welche Formulierung ist für Ihre Zusammenfassung NICHT neutral? [fr?] Quelle formulation n’est PAS neutre ?",
+          "explanation": "„Übertreibt maßlos“ und „hetzt auf“ bewerten Herrn Hinze und ergreifen Partei. Wer vermittelt, beschreibt Tatsachen und Bedürfnisse, nicht Charaktere. Die anderen Sätze sind sachlich und überprüfbar; der erste nennt sogar das gemeinsame Interesse. [fr?] Juger une personne (« übertreibt maßlos ») n’est pas neutre ; on décrit faits et besoins.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Beide Kollegen möchten gut und konzentriert arbeiten können.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Herr Hinze übertreibt maßlos und hetzt das ganze Team auf.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Frau Nwosu wartet seit einiger Zeit auf ein Headset.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Besprechungsraum ist vormittags meistens belegt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welche Lösung berücksichtigt die Interessen beider? [fr?] Quelle solution tient compte des intérêts des deux ?",
+          "explanation": "Mit dem Headset telefoniert Frau Nwosu leiser, und ein reservierter Raum am Vormittag gibt ihr einen Ort für lange Gespräche: Ihre Kunden bleiben erreichbar, Herr Hinze hat mehr Ruhe. Die anderen Lösungen erfüllen nur die Interessen einer Seite oder suchen einen Schuldigen. [fr?] Une solution « gagnant-gagnant » répond aux besoins des deux parties.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Frau Nwosu betreut ihre Kunden in Zukunft nur noch per E-Mail.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Herr Hinze trägt Ohrstöpsel und beschwert sich nicht mehr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ganze Team stimmt darüber ab, wer in diesem Streit eigentlich im Recht ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das Headset wird sofort bestellt und vormittags ein Raum reserviert.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Formulieren Sie Ihren Vorschlag für die Besprechung. [fr?] Formulez votre proposition pour la réunion.",
+          "answers": [
+            [
+              "Ich",
+              "würde",
+              "vorschlagen,",
+              "dass",
+              "wir",
+              "zuerst",
+              "beide Sichtweisen",
+              "anhören",
+              "und",
+              "dann",
+              "gemeinsam",
+              "nach Lösungen",
+              "suchen."
+            ],
+            [
+              "Ich",
+              "würde",
+              "vorschlagen,",
+              "dass",
+              "wir",
+              "beide Sichtweisen",
+              "zuerst",
+              "anhören",
+              "und",
+              "dann",
+              "gemeinsam",
+              "nach Lösungen",
+              "suchen."
+            ]
+          ],
+          "explanation": "„Ich würde vorschlagen, dass …“ leitet den Vorschlag diplomatisch ein. Im Nebensatz stehen die beiden Verben jeweils am Ende ihres Satzteils: „anhören“ und „suchen“. „Zuerst … und dann …“ ordnet die Schritte; „zuerst“ kann vor oder nach dem Objekt stehen. [fr?] Ich würde vorschlagen, dass … : verbes en fin de chaque partie ; « zuerst … dann » pour les étapes."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Sätze für Ihre Zusammenfassung. [fr?] Complétez les phrases de votre synthèse.",
+          "text": "Herr Hinze möchte das Thema Lärm in der Besprechung zur [[1]] bringen. · Frau Nwosu bittet darum, ihre Situation in [[2]] zu ziehen. · Ziel ist, dass beide Seiten am Ende eine [[3]] treffen.",
+          "explanation": "Sachliche Funktionsverbgefüge passen gut zu einer neutralen Zusammenfassung: etwas zur Sprache bringen, etwas in Betracht ziehen, eine Vereinbarung (oder Entscheidung) treffen. Sie klingen distanziert und vermeiden Wertungen. [fr?] Les locutions verbo-nominales donnent un ton neutre et formel.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Sprache"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Betracht"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Vereinbarung",
+                "Entscheidung"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler beim Vermitteln",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler beim Vermitteln",
+        "description": "Diese Sätze stammen aus Vermittlungs-E-Mails von Kursteilnehmenden. Finden Sie die richtige Form. [fr?] Ces phrases viennent de courriels de médiation d’apprenants ; trouvez la forme correcte.\n\nKORREKTURZEICHEN\nG Grammatik · W Wortschatz · St Satzstellung · R Rechtschreibung · A Ausdruck und Register. [fr?] Codes de correction : grammaire, vocabulaire, place des mots, orthographe, registre.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "W: Welcher Satz ist richtig? [fr?] W : quelle phrase est correcte ?",
+          "explanation": "Die feste Verbindung heißt „eine Entscheidung treffen“. „Machen“ ist ein typischer Lehnfehler aus dem Französischen (« prendre » oder « faire »). Funktionsverbgefüge muss man als Ganzes lernen. [fr?] eine Entscheidung treffen ; jamais « machen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir müssen bis zum Freitag eine Entscheidung machen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wir müssen bis Freitag eine Entscheidung tun.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wir müssen bis Freitag eine Entscheidung treffen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Wir müssen bis Freitag eine Entscheidung geben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "W: Ergänzen Sie das Verb. [fr?] W : complétez avec le verbe.",
+          "text": "Darf ich Ihnen eine Frage [[1]]? · Herr Hinze hat Kritik an der Raumplanung [[2]].",
+          "explanation": "Eine Frage stellt man, Kritik übt man (an + Dativ). „Eine Frage fragen“ und „Kritik machen“ sind falsch. Im Perfekt: Er hat Kritik geübt. [fr?] eine Frage stellen, Kritik üben (Perfekt : geübt).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "stellen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "geübt"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "Bei „haben“ bildet man den Konjunktiv II mit der eigenen Form „hätte“, nicht mit „würde haben“. „Ich hätte eine Bitte“ ist eine typische höfliche Einleitung. „Hätte gehabt“ wäre Vergangenheit und steht außerdem an der falschen Stelle. [fr?] Konjunktiv II de haben : hätte (pas « würde haben »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich würde haben eine Bitte an Sie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich hätte eine Bitte an Sie.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich habe würde eine Bitte an Sie.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich hätte gehabt eine Bitte an Sie.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "A: Sie schreiben zum ersten Mal an Herrn Pfeiffer, den Sie nicht kennen. Welche Anrede passt? [fr?] A : vous écrivez pour la première fois à M. Pfeiffer, que vous ne connaissez pas. Quelle formule d’appel ?",
+          "explanation": "In einem ersten formellen Schreiben an eine unbekannte Person ist „Sehr geehrter Herr …,“ der Standard, mit Komma; die nächste Zeile beginnt klein. „Hallo“ und „Hi“ sind zu locker, „Lieber Herr …“ setzt eine persönliche Beziehung voraus. [fr?] Premier courrier formel : « Sehr geehrter Herr …, » suivi d’une minuscule.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo Herr Pfeiffer!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sehr geehrter Herr Pfeiffer,",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Hi Herr Pfeiffer,",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Lieber Herr Pfeiffer, wie geht’s?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr?] St : quelle phrase est correcte ?",
+          "explanation": "Der Nomenteil „zur Sprache“ steht am Ende des Mittelfelds direkt vor dem Infinitiv „bringen“, wie eine Verbpartikel. Das Objekt „ein Problem“ steht davor. Im Französischen folgt das Objekt dem Verb, deshalb ist diese Stellung schwierig. [fr?] « zur Sprache » juste avant l’infinitif ; l’objet avant.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich möchte heute zur Sprache ein Problem bringen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich möchte heute ein Problem bringen zur Sprache.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich möchte zur Sprache bringen heute ein Problem.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich möchte heute ein Problem zur Sprache bringen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie „nicht“ oder „kein“. [fr?] G : complétez avec nicht ou kein.",
+          "text": "Leider hat er [[1]] Rücksicht auf die Nachbarn genommen. · Ein Verbot kommt für mich [[2]] in Frage.",
+          "explanation": "Ein Nomen ohne Artikel wie „Rücksicht“ verneint man mit „kein“: keine Rücksicht nehmen. Ein Nomen mit Präposition verneint man mit „nicht“: nicht in Frage kommen. Achtung: „in Frage kommen“ (möglich sein) ist nicht dasselbe wie „in Frage stellen“. [fr?] keine Rücksicht nehmen ; nicht in Frage kommen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "keine"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "nicht"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-zusammenleben-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: Generalprobe Lesen und Hören",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: Generalprobe Lesen und Hören",
+        "description": "GENERALPROBE VOR DER PROBEPRÜFUNG\nDiese Übung ist wie ein kleiner Teil der Prüfung. Arbeiten Sie ohne Wörterbuch, ohne Pause und halten Sie die Zeit ein. Teil 1: Lesen Sie den Artikel und beantworten Sie die Fragen 1 bis 4. Teil 2: Hören Sie den Radiobeitrag zweimal und beantworten Sie die Fragen 5 bis 8. [fr?] Comme une petite partie de l’examen : sans dictionnaire, sans pause, en respectant le temps. Partie 1 : questions 1 à 4 ; partie 2 : écoutez deux fois, questions 5 à 8.\n\nZEIT\nTeil 1: 8 Minuten. Teil 2: 9 Minuten. Kontrolle: 3 Minuten. [fr?] Partie 1 : 8 minutes ; partie 2 : 9 minutes ; vérification : 3 minutes.\n\nSTRATEGIE\n• Lesen Sie immer zuerst die Aufgaben: Dann wissen Sie, was Sie suchen. [fr?] Lisez toujours d’abord les questions.\n• Bleiben Sie nicht zu lange bei einer Frage. Kreuzen Sie im Zweifel die wahrscheinlichste Antwort an und kommen Sie am Ende zurück. [fr?] Ne bloquez pas : répondez au plus probable et revenez-y à la fin.\n• Beim Hören: Im ersten Durchgang den Inhalt verstehen, im zweiten die Antworten prüfen. [fr?] Première écoute pour comprendre, seconde pour vérifier.\n\nTEIL 1 · KONFLIKTLOTSEN: WENN SCHÜLERINNEN UND SCHÜLER STREIT SCHLICHTEN\nAn der Gesamtschule Wendelstedt-Ost gibt es seit drei Jahren ein besonderes Team: zwölf Schülerinnen und Schüler der neunten und zehnten Klassen, die als Konfliktlotsen arbeiten. Wenn sich Jüngere auf dem Schulhof streiten, können sie sich an die Lotsen wenden, statt gleich zur Lehrkraft zu gehen. In einem ruhigen Raum hören die Lotsen beide Seiten an, achten darauf, dass niemand unterbrochen wird, und helfen, eine Lösung zu finden. Entscheiden dürfen sie nichts.\nAusgebildet werden die Lotsen in einem Kurs von vierzig Stunden, den die Schulsozialarbeiterin Katrin Möller leitet. „Am schwersten ist es für die Jugendlichen, neutral zu bleiben“, sagt sie, „vor allem, wenn ein Freund an dem Streit beteiligt ist.“ In solchen Fällen übernimmt ein anderes Team.\nDie Bilanz fällt positiv aus: Von etwa sechzig Konflikten im letzten Schuljahr endeten über fünfzig mit einer Vereinbarung. Lehrkräfte berichten, dass es in den Pausen ruhiger geworden ist. Doch nicht jeder Streit gehört zu den Lotsen: Bei Gewalt oder Mobbing schalten sie sofort Erwachsene ein.\nAuch die Lotsen selbst profitieren. „Ich habe gelernt, zuzuhören, bevor ich etwas sage“, erzählt die Zehntklässlerin Defne. „Das hilft mir inzwischen auch zu Hause.“\n\nTEIL 2 · RADIOBEITRAG: EIN HAUS FÜR ALLE GENERATIONEN\nEine Reporterin besucht ein Mehrgenerationenhaus und spricht mit zwei Bewohnern. [fr?] Une reporter visite une maison intergénérationnelle et interroge deux habitants.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-atelier-pruefung-artikel",
+          "caption": "Konfliktlotsen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b2-zusammenleben-atelier-pruefung-radio",
+          "caption": "Ein Haus für alle Generationen",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Teil 1: Was ist die Aufgabe der Konfliktlotsen? [fr?] Partie 1 : quelle est la mission des élèves médiateurs ?",
+          "explanation": "Die Lotsen „hören beide Seiten an, achten darauf, dass niemand unterbrochen wird, und helfen, eine Lösung zu finden. Entscheiden dürfen sie nichts.“ Sie arbeiten also wie Mediatoren: Sie strafen und urteilen nicht. [fr?] Comme des médiateurs : ils écoutent et aident, sans juger ni sanctionner.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie bestrafen Schüler, die sich auf dem Schulhof streiten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie helfen Streitenden, selbst eine Lösung zu finden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie unterrichten jüngere Klassen im Fach Sozialkunde.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie entscheiden, wer in einem Streit im Recht ist.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "„Wenn ein Lotse mit einer Streitpartei befreundet ist, übernimmt ein anderes Team.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „vor allem, wenn ein Freund an dem Streit beteiligt ist.“ In solchen Fällen übernimmt ein anderes Team. Der Grund: Neutralität ist das Schwierigste und das Wichtigste bei der Vermittlung. [fr?] Vrai : un autre binôme prend le relais pour garantir la neutralité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Teil 1: Welche Konflikte bearbeiten die Lotsen nicht? [fr?] Partie 1 : quels conflits ne traitent-ils pas ?",
+          "explanation": "„Bei Gewalt oder Mobbing schalten sie sofort Erwachsene ein.“ Das ist die Grenze ihrer Aufgabe. Streit auf dem Schulhof oder in der Pause unter Jüngeren ist dagegen genau ihr Arbeitsbereich. [fr?] Violence et harcèlement relèvent des adultes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Streit zwischen Schülern verschiedener Klassen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Konflikte, die in der Pause entstehen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Fälle von Gewalt oder Mobbing",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Streit unter jüngeren Schülerinnen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Teil 1: Was sagt die Bilanz des letzten Schuljahres? [fr?] Partie 1 : que montre le bilan de l’année ?",
+          "explanation": "„Von etwa sechzig Konflikten im letzten Schuljahr endeten über fünfzig mit einer Vereinbarung.“ Das ist die große Mehrheit. Über die Zahl der Konflikte in früheren Jahren sagt der Text nichts, und die Lehrkräfte berichten Positives. [fr?] Plus de cinquante conflits sur soixante ont abouti à un accord.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Etwa die Hälfte der Konflikte blieb am Ende ungelöst.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es gab weniger Konflikte als in früheren Jahren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Lehrkräfte wollen das Projekt beenden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die meisten Fälle endeten mit einer Vereinbarung.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Teil 2: Wie ist das Haus organisiert? [fr?] Partie 2 : comment la maison est-elle organisée ?",
+          "explanation": "„Jede Partei hat ihre eigene Wohnung, aber Küche, Garten und Werkstatt teilen sich alle.“ Es ist also keine große Wohngemeinschaft, und es wohnen Menschen „zwischen zwei und einundachtzig Jahren“ dort, nicht nur ältere. [fr?] Logements privés, cuisine, jardin et atelier communs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Alle wohnen in einer großen Wohngemeinschaft.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Jede Partei hat eine Wohnung, manche Räume teilen alle.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nur ältere Menschen wohnen dort, Familien helfen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Jede Familie hat ein eigenes kleines Haus mit Garten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Teil 2: Was tauscht Frau Dahlmann mit der Nachbarfamilie? [fr?] Partie 2 : quel échange Mme Dahlmann fait-elle avec ses voisins ?",
+          "explanation": "„Ich passe zweimal in der Woche auf die Kinder von nebenan auf, und dafür kauft die Familie für mich ein.“ „Dafür“ zeigt hier den Tausch: eine Leistung gegen eine andere. [fr?] Garde des enfants contre courses ; « dafür » marque l’échange.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kocht für die Familie, dafür putzt die Familie.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie gibt Nachhilfe, dafür repariert die Familie ihr Rad.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie betreut die Kinder, dafür kauft die Familie für sie ein.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie leiht der Familie ihr Auto, dafür gießt sie den Garten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Teil 2: Wie lösen die Bewohner Konflikte normalerweise? [fr?] Partie 2 : comment les habitants règlent-ils d’habitude leurs conflits ?",
+          "explanation": "„Inzwischen haben wir einmal im Monat eine Hausversammlung. Da kommt alles auf den Tisch.“ Eine Mediatorin holen sie nur, wenn sie sich nicht einigen, „bisher zweimal“. Eine Hausverwaltung erwähnt Tilman nicht. [fr?] Réunion mensuelle ; la médiatrice seulement en cas de blocage.",
+          "options": [
+            {
+              "id": "a",
+              "label": "in einer monatlichen Hausversammlung",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "mit Hilfe der Hausverwaltung",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "durch eine schriftliche Hausordnung",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "mit einer Mediatorin bei jedem Streit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Teil 2: Was meint Tilman mit „Wichtig ist, dass man nichts zu lange herunterschluckt“? [fr?] Partie 2 : que veut dire Tilman ?",
+          "explanation": "„Etwas herunterschlucken“ ist hier bildlich: Man sagt nichts, obwohl einen etwas stört. Tilman meint also, man sollte Ärger früh zur Sprache bringen. Die wörtliche Bedeutung mit dem Essen ist eine Falle. [fr?] Sens figuré : ne pas taire trop longtemps ce qui dérange.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte beim Essen in der Küche langsam sein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man sollte keinen Streit vor anderen austragen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man sollte Probleme früh ansprechen, statt zu schweigen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Man sollte Kritik möglichst schnell wieder vergessen.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: eine formelle Vermittlungs-E-Mail",
+      "estimatedMinutes": 27,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: eine formelle Vermittlungs-E-Mail",
+        "description": "SITUATION\nSie sind Sprecherin oder Sprecher der Hausgemeinschaft in der Ahornstraße 7. Zwischen der Wohngemeinschaft im dritten Stock und dem Ehepaar Pfeiffer im zweiten Stock gibt es Streit. [fr?] Porte-parole des locataires, vous intervenez dans un conflit entre une colocation et un couple âgé.\n\nWAS SIE WISSEN\n• Die WG (drei Studierende) feiert etwa zweimal im Monat am Wochenende, oft bis zwei Uhr nachts. [fr?] La colocation fait la fête deux fois par mois, souvent jusqu’à 2 h.\n• Herr und Frau Pfeiffer (beide über siebzig) haben sich bei der Hausverwaltung beschwert. Frau Pfeiffer ist herzkrank und braucht nachts Ruhe. [fr?] Le couple s’est plaint ; Mme Pfeiffer, malade du cœur, a besoin de calme la nuit.\n• Die WG sagt, sie habe von der Beschwerde erst durch die Hausverwaltung erfahren. Sie hätte lieber direkt mit den Nachbarn gesprochen. [fr?] La colocation regrette de l’avoir appris par la gérance.\n• In der Hausordnung steht: Nachtruhe von 22 bis 6 Uhr. Im Hof gibt es einen Gemeinschaftsraum, den man mieten kann. [fr?] Règlement : calme de 22 h à 6 h ; une salle commune se loue dans la cour.\n\nSO GEHEN SIE VOR\n1. Planen (6 Minuten): Überlegen Sie sich Stichwörter zu beiden Sichtweisen und zu zwei möglichen Lösungen. [fr?] Planifier : les deux points de vue, deux solutions.\n2. Schreiben (16 Minuten): Folgen Sie dem Aufbau aus dem Modell von Gudrun Seifert. [fr?] Écrire en suivant la structure du modèle.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste noch einmal. [fr?] Relire avec la liste de vérification.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine formelle E-Mail an beide Parteien (180 bis 220 Wörter). Nennen Sie den Anlass, geben Sie beide Sichtweisen neutral wieder, machen Sie mindestens zwei konkrete Vorschläge und laden Sie zu einem gemeinsamen Gespräch ein. [fr?] Écrivez un courriel formel aux deux parties (180 à 220 mots) : occasion, deux points de vue neutres, au moins deux propositions concrètes, invitation à une rencontre.",
+          "maxChars": 2200,
+          "minWords": 150
+        },
+        "checklist": [
+          "Betreff, formelle Anrede und Grußformel [fr?] Objet, formule d’appel et formule finale formelles",
+          "Beide Sichtweisen neutral, ohne Schuldige zu nennen [fr?] Les deux points de vue, sans coupable",
+          "Zwei konkrete Vorschläge, vorsichtig im Konjunktiv II [fr?] Deux propositions concrètes au Konjunktiv II",
+          "Mindestens zwei Funktionsverbgefüge (zur Sprache bringen, eine Vereinbarung treffen …) [fr?] Au moins deux locutions verbo-nominales",
+          "Einladung mit Datum, Uhrzeit und Ort [fr?] Invitation avec date, heure et lieu"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: Anlass, beide Sichtweisen neutral, zwei Vorschläge, Einladung; formelles Register [fr?] Tâche : occasion, points de vue neutres, propositions, invitation",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-zusammenleben-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: Diskussion über die Arbeitssprache im Team",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: Diskussion über die Arbeitssprache im Team",
+        "description": "SITUATION\nIhr Team im Kundenservice ist international geworden. Die Teamleiterin möchte klären, ob die Besprechungen in Zukunft auf Englisch stattfinden sollen. Hören Sie die beiden Positionen. Dann bittet die Teamleiterin Sie um Ihre Meinung und um einen Vorschlag. [fr?] Votre équipe est devenue internationale ; la responsable demande si les réunions doivent passer à l’anglais. Écoutez les deux positions, puis donnez votre avis et une proposition.\n\nDIE POSITIONEN\n• Herr Kirchner: für Englisch. Fast alle sprechen gut Englisch, Besprechungen wären schneller, die Partnerfirmen schreiben ohnehin auf Englisch. [fr?] Pour l’anglais : réunions plus rapides, entreprises associées anglophones.\n• Frau Nwosu: für Deutsch. Die Kunden sprechen Deutsch, Neue lernen die Sprache im Alltag, und nicht alle sprechen gut Englisch. [fr?] Pour l’allemand : clients germanophones, apprentissage, personne exclu.\n\nVORBEREITUNG\nNehmen Sie sich fünf Minuten Zeit und überlegen Sie sich Stichwörter: Welche Argumente beider Seiten überzeugen Sie? Wo widersprechen Sie? Welcher Kompromiss wäre für alle annehmbar? [fr?] Préparez en cinq minutes des mots-clés : arguments convaincants, désaccords, compromis acceptable par tous.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-atelier-sprechen-runde",
+          "caption": "Teambesprechung: Englisch oder Deutsch?",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Nehmen Sie Ihren Beitrag auf (zwei bis drei Minuten). Fassen Sie beide Positionen kurz und neutral zusammen, nehmen Sie diplomatisch Stellung, widersprechen Sie in mindestens einem Punkt und schlagen Sie einen Kompromiss vor. [fr?] Enregistrez votre intervention (deux à trois minutes) : résumez les deux positions avec neutralité, prenez position avec diplomatie, contredisez sur un point et proposez un compromis.",
+          "maxSeconds": 180
+        },
+        "written": null,
+        "checklist": [
+          "Ich fasse beide Positionen neutral zusammen („Wenn ich richtig verstehe …“). [fr?] Je résume les deux positions avec neutralité.",
+          "Ich nehme Stellung und begründe meine Meinung. [fr?] Je prends position et je justifie.",
+          "Ich widerspreche höflich in einem Punkt. [fr?] Je contredis poliment sur un point.",
+          "Ich schlage einen Kompromiss im Konjunktiv II vor. [fr?] Je propose un compromis au Konjunktiv II."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: Positionen neutral zusammengefasst, Stellungnahme, Widerspruch, Kompromiss, 2–3 Minuten [fr?] Tâche : synthèse neutre, avis, désaccord, compromis",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-zusammenleben-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: Zusammenleben und Ihr Weg zur Probeprüfung",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: Zusammenleben und Ihr Weg zur Probeprüfung",
+        "description": "Lesen Sie die Ziele der beiden Module „Zusammenleben“ und die Checkliste für die Probeprüfung. Was können Sie schon sicher? Was möchten Sie vorher noch einmal üben? [fr?] Relisez les objectifs des modules « Zusammenleben » et la liste avant l’examen blanc : qu’est-ce qui est acquis, que revoir ?\n\nICH KANN …\n• Ich kann in einem Konflikt beide Sichtweisen neutral wiedergeben und Positionen von Interessen unterscheiden. [fr?] Je peux reformuler deux points de vue avec neutralité.\n• Ich kann Bitten, Kritik und Vorschläge diplomatisch formulieren, auch in angespannten Situationen. [fr?] Je peux m’exprimer avec diplomatie dans une situation tendue.\n• Ich kann eine formelle Vermittlungs-E-Mail schreiben. [fr?] Je peux écrire un courriel formel de médiation.\n• Ich kann in einer Diskussion Stellung nehmen und einen Kompromiss vorschlagen. [fr?] Je peux prendre position et proposer un compromis.\n\nVOR DER PROBEPRÜFUNG\n• Lesen: zuerst die Aufgaben, dann global, selektiv und im Detail lesen; nach Synonymen suchen, nicht nach gleichen Wörtern. [fr?] Lire d’abord les questions ; chercher les synonymes.\n• Hören: beim ersten Hören das Thema und die Sprecher erfassen, beim zweiten die Notizen ergänzen; auf Signalwörter achten (aber, allerdings, da muss ich widersprechen). [fr?] Repérer thème, locuteurs et mots-signaux.\n• Schreiben: fünf Minuten planen, mit Absätzen und Konnektoren schreiben, Register prüfen (du oder Sie), am Ende die Zeit für die Kontrolle einplanen. [fr?] Planifier, structurer, vérifier le registre et garder du temps pour relire.\n• Sprechen: frei sprechen mit Stichwörtern, anknüpfen, begründen, Beispiele geben, höflich widersprechen. [fr?] Parler à partir de mots-clés, rebondir, justifier, illustrer.\n\nNOCH NICHT SICHER?\nFunktionsverbgefüge und Konjunktiv II: Lesen Sie noch einmal die Regel im Modul „Zusammenleben“. Redemittel der Diskussion: Wiederholen Sie die Übungen „Diskutieren“ der Module Gesellschaft, Kultur und Zusammenleben. Prüfungsformate: Machen Sie die Übungen „Prüfungstraining“ der letzten Module noch einmal unter Zeitdruck. [fr?] Relisez la règle du module, refaites les exercices de discussion et les entraînements à l’examen en temps limité.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-zusammenleben-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : reformuler les positions en réunion",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Gudrun Seifert",
+          "text": "Danke, dass Sie beide Ihre Sicht so offen geschildert haben. Ich versuche einmal zusammenzufassen, und bitte korrigieren Sie mich, wenn ich etwas falsch verstanden habe."
+        },
+        {
+          "voice": "frau2",
+          "name": "Gudrun Seifert",
+          "text": "Herr Thiele, Ihnen ist wichtig, dass die Beete nicht beschädigt werden, weil Sie viel Zeit und Arbeit hineinstecken. Frau Kampmann, für Sie ist der Garten auch ein Ort für die Kinder, weil es in der Nähe keinen Spielplatz gibt."
+        },
+        {
+          "voice": "frau2",
+          "name": "Gudrun Seifert",
+          "text": "Ich habe den Eindruck, dass Sie beide denselben Garten lieben, nur auf unterschiedliche Weise. Wäre es denkbar, dass wir eine Ecke als Spielwiese abtrennen und dafür einen gemeinsamen Gießplan machen? Was meinen Sie?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-a1",
+      "kind": "audio",
+      "title": "Réplique 1",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Jasper",
+          "text": "Ich putze hier als Einziger das Bad, und zwar seit Wochen. Ihr seid echt unmöglich!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-a2",
+      "kind": "audio",
+      "title": "Réplique 2",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Pia",
+          "text": "Ich arbeite abends bis zehn im Restaurant. Ich kann nicht jeden Samstag putzen, das geht einfach nicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-a3",
+      "kind": "audio",
+      "title": "Réplique 3",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Levent",
+          "text": "Na ja, Leute aus dem Süden nehmen das mit der Ordnung eben nicht so ernst."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-a4",
+      "kind": "audio",
+      "title": "Réplique 4",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Merve",
+          "text": "Wir diskutieren jetzt seit einer Stunde. Haben wir eigentlich schon eine Lösung?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-mediation-nachrichten",
+      "kind": "image",
+      "title": "Deux messages adressés à l’équipe",
+      "alt": "Deux messages au responsable d’équipe : Ole Hinze se plaint des appels téléphoniques bruyants dans l’open space ; Ngozi Nwosu explique qu’elle doit appeler ses clients et attend un casque depuis des semaines.",
+      "image": {
+        "layout": "messages",
+        "icon": "mail",
+        "title": "Team Kundenservice",
+        "subtitle": "Nachrichten an die Teamsprecherin",
+        "messages": [
+          {
+            "from": "Ole Hinze",
+            "time": "Mo 9:12",
+            "text": "Ich halte das nicht mehr aus. Frau Nwosu telefoniert den ganzen Vormittag, und zwar so laut, dass ich keinen klaren Gedanken fassen kann. Ich muss bis Monatsende die Abrechnung fertig machen und mache nur noch Fehler. Ich verlange, dass Telefonate im Großraumbüro verboten werden."
+          },
+          {
+            "from": "Ngozi Nwosu",
+            "time": "Mo 11:47",
+            "text": "Ich habe gehört, dass sich Herr Hinze über mich beschwert hat. Ehrlich gesagt bin ich verletzt, dass er nicht direkt mit mir spricht. Ich betreue sechzig Kunden, und die meisten rufen vormittags an. Der kleine Besprechungsraum ist fast immer belegt, und das Headset, das ich beantragt habe, ist bis heute nicht da. Ich telefoniere nicht zum Spaß."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-zusammenleben-atelier-pruefung-artikel",
+      "kind": "image",
+      "title": "Article « Konfliktlotsen »",
+      "alt": "Article de journal sur des élèves médiateurs dans une école : leur rôle, leur formation, le bilan de l’année et les limites de leur mission.",
+      "image": {
+        "layout": "article",
+        "kicker": "Schule",
+        "icon": "school",
+        "title": "Konfliktlotsen: Wenn Schülerinnen und Schüler Streit schlichten",
+        "lead": "An der Gesamtschule Wendelstedt-Ost gibt es seit drei Jahren ein besonderes Team: zwölf Schülerinnen und Schüler der neunten und zehnten Klassen, die als Konfliktlotsen arbeiten.",
+        "paragraphs": [
+          "Wenn sich Jüngere auf dem Schulhof streiten, können sie sich an die Lotsen wenden, statt gleich zur Lehrkraft zu gehen."
+        ]
+      }
+    },
+    {
+      "key": "b2-zusammenleben-atelier-pruefung-radio",
+      "kind": "audio",
+      "title": "Reportage radio : une maison pour toutes les générations",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "In der Lindenstraße in Wendelstedt wohnen seit zwei Jahren zwanzig Menschen zwischen zwei und einundachtzig Jahren unter einem Dach. Jede Partei hat ihre eigene Wohnung, aber Küche, Garten und Werkstatt teilen sich alle. Wie klappt das Zusammenleben?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Dahlmann",
+          "text": "Besser, als ich dachte. Ich passe zweimal in der Woche auf die Kinder von nebenan auf, und dafür kauft die Familie für mich ein. Allein in meiner alten Wohnung habe ich manchmal tagelang mit niemandem gesprochen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Gibt es auch Streit?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Tilman",
+          "text": "Natürlich. Am Anfang haben wir fast jede Woche über die Gemeinschaftsküche diskutiert: wer aufräumt, wie laut es abends sein darf. Inzwischen haben wir einmal im Monat eine Hausversammlung. Da kommt alles auf den Tisch, und wir entscheiden gemeinsam."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Und wenn man sich nicht einigt?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Tilman",
+          "text": "Dann holen wir uns Hilfe von außen, eine Mediatorin. Das war bisher zweimal nötig. Wichtig ist, dass man nichts zu lange herunterschluckt."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Dahlmann",
+          "text": "Und dass man auch mal über sich selbst lachen kann. Ich bin ja auch nicht immer pflegeleicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-sprechen-runde",
+      "kind": "audio",
+      "title": "Réunion d’équipe : quelle langue de travail ?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Teamleiterin",
+          "text": "In unserem Team arbeiten inzwischen Kolleginnen und Kollegen aus neun Ländern. Deshalb möchte ich heute eine Frage klären: Sollen unsere Besprechungen in Zukunft auf Englisch stattfinden? Herr Kirchner, bitte."
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Kirchner",
+          "text": "Ich bin klar dafür. Fast alle sprechen gut Englisch, die Besprechungen wären schneller, und niemand müsste sich mit dem Deutschen quälen. Unsere Partnerfirmen schreiben uns ohnehin auf Englisch."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Teamleiterin",
+          "text": "Frau Nwosu?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Ngozi Nwosu",
+          "text": "Ich sehe das anders. Unsere Kunden sprechen Deutsch, und wer neu ist, lernt die Sprache am schnellsten im Alltag. Außerdem sprechen nicht alle gut Englisch. Ich möchte nicht, dass einige Kolleginnen in den Besprechungen plötzlich schweigen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Teamleiterin",
+          "text": "Zwei Positionen also. Wie sehen Sie das? Und hätten Sie vielleicht einen Vorschlag, mit dem alle leben könnten?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: diplomatisch reagieren",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich verstehe, dass du dich ärgerst. Lass uns einen fairen Plan machen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: diplomatisch reagieren",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Welche Tage würden dir denn besser passen, wenn du abends arbeitest?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: diplomatisch reagieren",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich würde ungern über ganze Gruppen sprechen. Bleiben wir bei den Aufgaben."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: diplomatisch reagieren",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wenn ich zusammenfassen darf: Wir testen einen Putzplan vier Wochen lang."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Zusammenleben – Werkstatt: vermitteln, schlichten, gemeinsam entscheiden",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wenn ich Sie richtig verstehe, …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ihnen ist also wichtig, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich habe den Eindruck, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Könnten wir uns darauf einigen, dass …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wäre es denkbar, dass …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "aufeinander zugehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Sichtweise, die Sichtweisen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Anliegen, die Anliegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Bedürfnis, die Bedürfnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "neutral"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sachlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schlichten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "herunterschlucken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Arbeitssprache, die Arbeitssprachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verständigen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

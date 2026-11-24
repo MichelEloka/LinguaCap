@@ -1,0 +1,2410 @@
+{
+  "id": "b2-wohnen",
+  "title": "Wohnen: Stadt, Land und steigende Mieten",
+  "objective": "Comprendre un reportage argumentatif sur la gentrification d’un quartier et un débat radiophonique « ville ou campagne ? », distinguer les points de vue, employer les prépositions au génitif (aufgrund, infolge, angesichts, innerhalb, außerhalb) et les locutions verbo-nominales (eine Entscheidung treffen, in Anspruch nehmen, zur Verfügung stellen) d’un registre soutenu.",
+  "prerequisites": [
+    "b2-gesundheit-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Le quartier, la commune, les personnes et l’émission sont fictifs ; les mécanismes décrits (gentrification, encadrement des loyers, zones de protection) sont présentés de façon simplifiée."
+  ],
+  "grammarFocus": [
+    "genitivpraepositionen",
+    "nomen-verb-verbindungen"
+  ],
+  "layer": "content/b/source/b2/b2-wohnen.mjs",
+  "vocabulary": [
+    {
+      "id": "gentrifizierung",
+      "word": "Gentrifizierung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la gentrification",
+      "example": "Die Gentrifizierung verändert viele alte Arbeiterviertel.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "viertel",
+      "word": "Viertel",
+      "article": "das",
+      "plural": "Viertel",
+      "partOfSpeech": "noun",
+      "translation": "le quartier",
+      "example": "Das Viertel ist in den letzten Jahren sehr beliebt geworden.",
+      "note": "aussi : das Stadtviertel",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "verdraengen",
+      "word": "verdrängen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "évincer, chasser (d’un lieu)",
+      "example": "Hohe Mieten verdrängen viele langjährige Bewohner.",
+      "note": "die Verdrängung",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "sanieren",
+      "word": "sanieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rénover, réhabiliter (un bâtiment)",
+      "example": "Der neue Eigentümer hat das ganze Haus saniert.",
+      "note": "die Sanierung",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "altbau",
+      "word": "Altbau",
+      "article": "der",
+      "plural": "Altbauten",
+      "partOfSpeech": "noun",
+      "translation": "l’immeuble ancien",
+      "example": "Sie wohnt in einem Altbau mit hohen Decken.",
+      "note": "contraire : der Neubau",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "eigentumswohnung",
+      "word": "Eigentumswohnung",
+      "article": "die",
+      "plural": "Eigentumswohnungen",
+      "partOfSpeech": "noun",
+      "translation": "l’appartement dont on est propriétaire",
+      "example": "Viele Mietwohnungen wurden in Eigentumswohnungen umgewandelt.",
+      "note": "die Mietwohnung : l’appartement loué",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "kaltmiete",
+      "word": "Kaltmiete",
+      "article": "die",
+      "plural": "Kaltmieten",
+      "partOfSpeech": "noun",
+      "translation": "le loyer hors charges",
+      "example": "Die Kaltmiete beträgt 780 Euro im Monat.",
+      "note": "die Warmmiete : charges et chauffage compris",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "mietspiegel",
+      "word": "Mietspiegel",
+      "article": "der",
+      "plural": "Mietspiegel",
+      "partOfSpeech": "noun",
+      "translation": "le barème local des loyers de référence",
+      "example": "Laut Mietspiegel ist die Miete für diese Wohnung zu hoch.",
+      "note": null,
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "leerstand",
+      "word": "Leerstand",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les locaux ou logements vacants",
+      "example": "In der Dorfmitte gab es früher viel Leerstand.",
+      "note": "leer stehen : être inoccupé",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "wohnungsnot",
+      "word": "Wohnungsnot",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la pénurie de logements",
+      "example": "Angesichts der Wohnungsnot baut die Stadt neue Wohnungen.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "zuzug",
+      "word": "Zuzug",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’arrivée de nouveaux habitants",
+      "example": "Der Zuzug junger Familien belebt das Dorf.",
+      "note": "zuziehen : venir s’installer",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "pendeln",
+      "word": "pendeln",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire la navette (domicile-travail)",
+      "example": "Sie pendelt jeden Tag eine Stunde in die Stadt.",
+      "note": "der Pendler, die Pendlerin",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "anbindung",
+      "word": "Anbindung",
+      "article": "die",
+      "plural": "Anbindungen",
+      "partOfSpeech": "noun",
+      "translation": "la desserte (transports)",
+      "example": "Das Dorf hat eine schlechte Anbindung an die Bahn.",
+      "note": "gut angebunden sein : être bien desservi",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "bezahlbar",
+      "word": "bezahlbar",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "abordable",
+      "example": "Bezahlbare Wohnungen sind in der Innenstadt selten.",
+      "note": null,
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "angesagt",
+      "word": "angesagt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "à la mode, branché",
+      "example": "Das alte Hafenviertel ist plötzlich angesagt.",
+      "note": "familier",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "aufgrund",
+      "word": "aufgrund",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "en raison de, à cause de",
+      "example": "Aufgrund der hohen Mieten ziehen viele weg.",
+      "note": "+ génitif ; sans article : aufgrund von + datif",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "infolge",
+      "word": "infolge",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "par suite de, à la suite de",
+      "example": "Infolge der Sanierung ist die Miete gestiegen.",
+      "note": "+ génitif",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "angesichts",
+      "word": "angesichts",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "face à, vu, compte tenu de",
+      "example": "Angesichts der Wohnungsnot muss die Stadt handeln.",
+      "note": "+ génitif",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "innerhalb",
+      "word": "innerhalb",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "à l’intérieur de ; en l’espace de",
+      "example": "Innerhalb eines Jahres sind drei Läden geschlossen worden.",
+      "note": "+ génitif ; sans article : innerhalb von + datif",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "ausserhalb",
+      "word": "außerhalb",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "en dehors de, à l’extérieur de",
+      "example": "Außerhalb der Stadt sind die Mieten niedriger.",
+      "note": "+ génitif",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "eine-entscheidung-treffen",
+      "word": "eine Entscheidung treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre une décision",
+      "example": "Die Gemeinde hat eine klare Entscheidung getroffen.",
+      "note": "traf, hat getroffen",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "in-anspruch-nehmen",
+      "word": "in Anspruch nehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir recours à, utiliser (un service)",
+      "example": "Den Coworking-Raum können alle Bürger in Anspruch nehmen.",
+      "note": null,
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "zur-verfuegung-stehen",
+      "word": "zur Verfügung stehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être à disposition",
+      "example": "Der Raum steht allen Bewohnern zur Verfügung.",
+      "note": "zur Verfügung stellen : mettre à disposition",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "kritik-ueben-an",
+      "word": "Kritik üben an",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "critiquer, formuler des critiques contre",
+      "example": "Die Mieter üben scharfe Kritik an den Plänen.",
+      "note": "+ datif ; registre soutenu",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "in-kraft-treten",
+      "word": "in Kraft treten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "entrer en vigueur",
+      "example": "Die neue Regel tritt am 1. Januar in Kraft.",
+      "note": "trat, ist getreten",
+      "audio": {
+        "media": "b2-wohnen-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-wohnen-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Wo und wie wollen wir wohnen?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Wo und wie wollen wir wohnen?",
+        "description": "WOHNEN – EIN GRUNDBEDÜRFNIS WIRD ZUR STREITFRAGE\n[fr?] Le logement, un besoin fondamental devenu un sujet de débat\nIn vielen Städten steigen die Mieten schneller als die Löhne. Beliebte Viertel verändern sich, und manche Familien ziehen aufs Land. In diesem Modul geht es um die Frage, wer wo wohnen kann – und um eine Sprache, mit der man in Briefen und Diskussionen sachlich und präzise argumentiert. [fr?] Dans beaucoup de villes, les loyers augmentent plus vite que les salaires. Des quartiers prisés se transforment, des familles partent à la campagne. Ce module traite de la question : qui peut habiter où ? Il travaille aussi une langue précise et soutenue pour les lettres et les débats.\n\nFRAGEN ZUM EINSTIEG\n[fr?] Questions pour commencer\n• Wohnen Sie lieber in der Stadt oder auf dem Land? Warum? [fr?] Préférez-vous vivre en ville ou à la campagne ? Pourquoi ?\n• Hat sich Ihr Viertel in den letzten Jahren verändert? Wie? [fr?] Votre quartier a-t-il changé ces dernières années ? Comment ?\n• Sollte der Staat in den Wohnungsmarkt eingreifen, zum Beispiel mit Mietobergrenzen? [fr?] L’État devrait-il intervenir sur le marché du logement, par exemple en plafonnant les loyers ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Sätze und mindestens ein Argument. [fr?] Préparez mentalement deux ou trois phrases et au moins un argument pour chaque question.\n\nZIELE\n[fr?] Objectifs\n• Ich kann eine Reportage mit verschiedenen Standpunkten verstehen und die Positionen unterscheiden. [fr?] Je peux comprendre un reportage présentant plusieurs points de vue et distinguer les positions.\n• Ich kann einer Radiodiskussion über Stadt und Land Argumente und Zahlen entnehmen. [fr?] Je peux tirer d’un débat radiophonique sur la ville et la campagne des arguments et des chiffres.\n• Ich kann Gründe und Umstände mit Präpositionen im Genitiv ausdrücken: aufgrund, infolge, angesichts, innerhalb. [fr?] Je peux exprimer causes et circonstances avec des prépositions au génitif.\n• Ich kann Nomen-Verb-Verbindungen verstehen und in formellen Texten verwenden. [fr?] Je peux comprendre et employer des locutions verbo-nominales dans des textes formels.\n\nWICHTIGE WÖRTER\n[fr?] Mots-clés\n• die Gentrifizierung — la gentrification\n• verdrängen — évincer, chasser\n• sanieren — rénover\n• die Kaltmiete — le loyer hors charges\n• der Leerstand — les logements vacants\n• die Wohnungsnot — la pénurie de logements\n• pendeln — faire la navette\n• die Anbindung — la desserte",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Neue Wohnungen mitten in der Stadt",
+          "media": "b2-wohnen-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-wohnen-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: eine Reportage über ein Viertel im Wandel",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Reportage über ein Viertel im Wandel",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Eine Reportage mischt Fakten, Stimmen von Betroffenen und Bewertungen. Fragen Sie bei jedem Absatz: Wer spricht hier, und welche Position hat diese Person? [fr?] Un reportage mêle faits, témoignages et jugements. À chaque paragraphe, demandez-vous : qui parle, et quelle est sa position ?\n2. Die Meinung der Autorin oder des Autors steht oft am Ende. Lesen Sie den letzten Absatz besonders genau. [fr?] L’avis de l’auteur se trouve souvent à la fin : lisez le dernier paragraphe avec attention.\n\nWEM GEHÖRT DAS VIERTEL?\nWenn ein altes Arbeiterviertel plötzlich angesagt ist, freuen sich nicht alle\n\n(A) Vor zehn Jahren wollte kaum jemand ins Färberviertel ziehen. Die Altbauten bröckelten, im Erdgeschoss standen viele Läden leer, und abends war es auf den Straßen still. Heute gibt es hier Cafés mit selbst gerösteten Bohnen, eine Kletterhalle in der alten Spinnerei und Wohnungen, für die sich bei jeder Besichtigung dreißig Interessenten anstellen. Auf dem Wochenmarkt hört man inzwischen fast so oft Englisch wie Deutsch. Was nach einer Erfolgsgeschichte klingt, hat eine Kehrseite: Aufgrund der stark gestiegenen Mieten können sich viele langjährige Bewohnerinnen und Bewohner ihr Viertel nicht mehr leisten.\n\n(B) Fachleute nennen diesen Prozess Gentrifizierung, und er verläuft fast überall ähnlich. Zuerst ziehen Studierende und Künstlerinnen in ein günstiges Viertel, weil die Innenstadt für sie zu teuer ist. Ihnen folgen Cafés, Galerien und kleine Läden, die das Viertel bekannt machen. Infolge der neuen Beliebtheit kaufen Investoren Häuser, sanieren sie und vermieten die Wohnungen deutlich teurer oder verkaufen sie als Eigentumswohnungen. Am Ende wohnen dort vor allem Menschen mit hohem Einkommen – und oft nicht einmal mehr die Studierenden, mit denen alles begann. Stadtforscher sprechen deshalb von einem Kreislauf, der sich kaum aufhalten lässt, wenn die Politik nicht eingreift.\n\n(C) Gisela Bormann wohnt seit 1979 im Färberviertel. Im vergangenen Jahr wurde ihr Haus saniert; seitdem zahlt sie fast zweihundert Euro mehr Miete im Monat. „Neue Fenster und ein Aufzug sind ja schön“, sagt die Rentnerin. „Aber ich habe nie um einen Aufzug gebeten.“ Ihre Nachbarn aus dem zweiten Stock sind innerhalb eines Jahres ausgezogen, an den Stadtrand. Auch der kleine Gemüseladen an der Ecke hat geschlossen; an seiner Stelle verkauft heute ein Geschäft Designermöbel. „Ich kenne hier kaum noch jemanden“, sagt Frau Bormann. „Das ist das Schlimmste.“\n\n(D) Nicht alle sehen die Entwicklung so negativ. Deniz Aktaş, der vor drei Jahren ein Café in der Färberstraße eröffnet hat, erinnert daran, wie es früher aussah: „Hier standen ganze Häuser leer. Ohne Investitionen wären viele Gebäude heute Ruinen.“ Auch die Stadtverwaltung verweist auf Fortschritte: Die Zahl der Einbrüche ist gesunken, und die Grundschule im Viertel hat wieder mehr Anmeldungen. Angesichts der Wohnungsnot in der ganzen Stadt hält man es im Rathaus außerdem für richtig, dass in alten Fabrikhallen neue Wohnungen entstehen. Und selbst manche Alteingesessene sehen Vorteile: Seit das Viertel belebter ist, fühlen sie sich abends auf der Straße sicherer.\n\n(E) Die Frage ist also nicht, ob sich ein Viertel verändern darf, sondern für wen es sich verändert. Städte haben dafür durchaus Instrumente: Sie können sogenannte Milieuschutzgebiete ausweisen, in denen aufwendige Modernisierungen genehmigt werden müssen, selbst Wohnungen bauen oder Investoren verpflichten, einen Teil der Wohnungen günstig zu vermieten. Solche Maßnahmen kosten Geld, und Eigentümer üben oft scharfe Kritik an ihnen. Erfahrungen aus anderen Städten zeigen zudem, dass sie die Entwicklung nicht stoppen, sondern höchstens verlangsamen. Doch wer nichts unternimmt, trifft auch eine Entscheidung: die Entscheidung, dass in den beliebten Vierteln bald nur noch wohnt, wer es sich leisten kann.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wohnen-lesen-artikel",
+          "caption": "Wem gehört das Viertel?",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche Position vertritt der Text im letzten Absatz? [fr?] Quelle position le texte défend-il dans le dernier paragraphe ?",
+          "explanation": "„Die Frage ist also nicht, ob sich ein Viertel verändern darf, sondern für wen.“ Danach nennt der Text Instrumente der Städte und kritisiert das Nichtstun. Veränderung an sich lehnt er nicht ab, und Investoren will er nicht verbannen, sondern verpflichten. [fr?] Le texte accepte le changement, mais veut que la ville décide pour qui il se fait.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Viertel sollte sich möglichst überhaupt nicht verändern.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Investoren sollten grundsätzlich aus den Vierteln verbannt werden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Stadt sollte steuern, für wen sich ein Viertel verändert.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Gegen steigende Mieten kann eine Stadt nichts tun.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was meint Frau Bormann mit dem Satz „Aber ich habe nie um einen Aufzug gebeten“? [fr?] Que veut dire Mme Bormann par cette phrase ?",
+          "explanation": "Der Satz steht direkt nach der Mieterhöhung von fast zweihundert Euro. Frau Bormann sagt damit indirekt: Die Sanierung war nicht ihr Wunsch, aber sie muss sie mitbezahlen. Über Angst oder die Größe des Aufzugs sagt sie nichts. [fr?] Elle paie une amélioration qu’elle n’a pas demandée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie bezahlt für eine Verbesserung, die sie nicht wollte.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hat Angst, mit dem neuen Aufzug zu fahren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat den Einbau des Aufzugs selbst beantragt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie findet den neuen Aufzug viel zu klein und zu laut.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Die ersten neuen Bewohner des Viertels waren Investoren mit viel Geld.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Zuerst ziehen Studierende und Künstlerinnen in ein günstiges Viertel.“ Die Investoren kommen erst später, „infolge der neuen Beliebtheit“. [fr?] Faux : d’abord les étudiants et les artistes, puis les investisseurs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Frau Bormanns Nachbarn aus dem zweiten Stock wohnen jetzt am Stadtrand.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Ihre Nachbarn aus dem zweiten Stock sind innerhalb eines Jahres ausgezogen, an den Stadtrand.“ [fr?] Vrai : ils ont déménagé en périphérie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Die Stadt hat im Färberviertel bereits ein Milieuschutzgebiet ausgewiesen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Absatz E sagt nur, dass Städte solche Gebiete ausweisen „können“. Ob die Stadt das im Färberviertel getan hat, erfahren wir nicht. [fr?] Non mentionné : le texte dit seulement que les villes « peuvent » le faire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A beschreibt den Wandel des Viertels; B erklärt den typischen Ablauf; C lässt eine Betroffene zu Wort kommen; D bringt Gegenstimmen (Café-Besitzer, Stadtverwaltung); E nennt Instrumente der Städte und zieht ein Fazit. [fr?] A : la transformation ; B : le processus ; C : un témoignage ; D : l’autre point de vue ; E : les outils des villes.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Vom Problemviertel zum Szeneviertel"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Wie Gentrifizierung abläuft"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Eine Bewohnerin erzählt"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Die andere Seite"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Was Städte tun können"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Warum kommt im Text auch Deniz Aktaş zu Wort? [fr?] Pourquoi le texte donne-t-il aussi la parole à Deniz Aktaş ?",
+          "explanation": "Absatz D beginnt mit „Nicht alle sehen die Entwicklung so negativ“: Eine gute Reportage zeigt mehrere Seiten. Herr Aktaş erinnert an den früheren Leerstand. Dass alle zufrieden sind, behauptet der Text gerade nicht. [fr?] Un bon reportage montre plusieurs points de vue.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um zu zeigen, dass Cafés die Mieten erhöhen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um seine Preise und sein Angebot zu bewerben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um eine Gegenposition zu Frau Bormann zu zeigen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Um zu beweisen, dass alle Bewohner zufrieden sind.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen aus dem Text. [fr?] Complétez avec les prépositions du texte.",
+          "text": "[[1]] der stark gestiegenen Mieten können sich viele ihr Viertel nicht mehr leisten. · [[2]] der neuen Beliebtheit kaufen Investoren Häuser. · [[3]] der Wohnungsnot hält man neue Wohnungen in alten Fabrikhallen für richtig.",
+          "explanation": "Alle drei Präpositionen verlangen den Genitiv (der Mieten, der Beliebtheit, der Wohnungsnot). „Aufgrund“ nennt einen Grund, „infolge“ die Ursache einer Folge, „angesichts“ einen Umstand, den man berücksichtigt. [fr?] aufgrund = en raison de ; infolge = à la suite de ; angesichts = face à.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Aufgrund"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Infolge"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Angesichts"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wohnen-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: eine Radiodiskussion über Stadt und Land",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Radiodiskussion über Stadt und Land",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\n[fr?] La situation\nIn der Sendung „Stadtgespräch“ diskutiert der Moderator Paul Rehberg mit Gesa Ruhnke, Bürgermeisterin der Gemeinde Oberwiesach, und mit Lena Wiechert, die mit ihrer Familie aus der Stadt aufs Land gezogen ist. Das Gespräch dauert etwa dreieinhalb Minuten. [fr?] Dans l’émission « Stadtgespräch », l’animateur Paul Rehberg débat avec Gesa Ruhnke, maire de la commune d’Oberwiesach, et Lena Wiechert, partie s’installer à la campagne avec sa famille. L’échange dure environ trois minutes et demie.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Unterscheiden Sie die Rollen: Die Bürgermeisterin wirbt für ihr Dorf, Frau Wiechert berichtet aus Erfahrung, der Moderator fragt kritisch nach. [fr?] Distinguez les rôles : la maire défend sa commune, Mme Wiechert témoigne, l’animateur pose des questions critiques.\n2. Zahlen kommen schnell: Lesen Sie die Notizen vorher und achten Sie auf Einwohner, Familien, Minuten und Uhrzeiten. [fr?] Les nombres passent vite : lisez les notes avant l’écoute et guettez habitants, familles, minutes et heures.\n3. Achten Sie auf Zugeständnisse: „Aber ich gebe zu …“, „Natürlich …“. Dort zeigen die Sprecherinnen die Grenzen ihrer Position. [fr?] Repérez les concessions : c’est là que chacune reconnaît les limites de sa position.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wohnen-hoeren-audio",
+          "caption": "Stadtgespräch: Stadt oder Land?",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Oberwiesach: etwa [[1]] Einwohner · in den letzten fünf Jahren: fast [[2]] neue Familien · Grund: viele arbeiten an zwei oder drei Tagen von [[3]] · Coworking-Raum in der alten [[4]], [[5]] Euro pro Tag",
+          "explanation": "„Oberwiesach hat etwa zweitausendvierhundert Einwohner. Innerhalb der letzten fünf Jahre sind fast sechzig Familien zu uns gezogen.“ Viele arbeiten „zwei oder drei Tage pro Woche von zu Hause“. Der Coworking-Raum ist „in unserer alten Schule“ und kostet „fünf Euro am Tag“. [fr?] Chiffres clés de la commune et télétravail (« von zu Hause »).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "2400",
+                "2.400",
+                "2 400",
+                "zweitausendvierhundert"
+              ],
+              "size": 23,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "60",
+                "sechzig"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "zu Hause",
+                "zuhause",
+                "Zuhause",
+                "daheim"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Schule"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "5",
+                "fünf"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum ziehen laut Bürgermeisterin heute mehr Familien nach Oberwiesach? [fr?] Pourquoi, selon la maire, davantage de familles s’installent-elles à Oberwiesach ?",
+          "explanation": "Sie nennt zwei Gründe: „Zum einen die Arbeitswelt“ (Homeoffice nach der Pandemie) und „zum anderen“ die Investitionen der Gemeinde (Glasfaser, Coworking-Raum). Von neuen Arbeitsplätzen oder einer besseren Bahnverbindung spricht sie nicht, im Gegenteil: Der Verkehr ist die „größte Baustelle“. [fr?] « Zum einen … zum anderen … » : deux raisons, le télétravail et les investissements.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil es dort inzwischen mehr Arbeitsplätze als in der Stadt gibt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil Homeoffice und Investitionen der Gemeinde das Dorf attraktiver machen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil die Bahn seit letztem Jahr jede halbe Stunde in die Stadt fährt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die jungen Leute aus dem Dorf alle wieder zurückgekommen sind.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie bewertet Lena Wiechert ihr Leben auf dem Land insgesamt? [fr?] Comment Lena Wiechert juge-t-elle sa vie à la campagne dans l’ensemble ?",
+          "explanation": "Sie lobt Platz, Garten und Nachbarschaft („eine ganz andere Lebensqualität“), nennt aber auch lange Fahrzeiten und die Abhängigkeit vom Auto. Auf die Frage, ob sie wieder so entscheiden würde, antwortet sie: „für diese Lebensphase auf jeden Fall“. [fr?] Bilan nuancé : satisfaite, mais lucide sur les inconvénients.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie bereut den Umzug und möchte so schnell wie möglich zurück.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie findet es dort perfekt und sieht überhaupt keine Nachteile.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie ist zufrieden, nennt aber auch deutliche Nachteile.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie findet das Leben dort teurer als in der Großstadt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Frau Wiechert: in der Stadt drei Zimmer für [[1]] Personen · Weg ins Büro: eine Stunde und [[2]] Minuten pro Strecke · nach [[3]] Uhr kein Bus mehr · Bürgerbus: [[4]] täglich in die Kreisstadt",
+          "explanation": "„Drei Zimmer für vier Personen“; „eine Stunde und zehn Minuten unterwegs, pro Strecke“; „Nach neunzehn Uhr fährt kein Bus mehr“; der Bürgerbus „fährt dreimal täglich in die Kreisstadt“. [fr?] pro Strecke = par trajet ; die Kreisstadt = le chef-lieu.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "vier",
+                "4"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zehn",
+                "10"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "19",
+                "neunzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "dreimal",
+                "3-mal",
+                "3 mal",
+                "drei Mal"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was gibt die Bürgermeisterin zu? [fr?] Que reconnaît la maire ?",
+          "explanation": "„Aber ich gebe zu: Das ersetzt keinen richtigen Nahverkehr.“ Mit „ich gebe zu“ macht sie ein Zugeständnis. Die Bauplätze sind laut ihr gerade „günstig“, und über die Nutzung des Coworking-Raums sagt sie nichts. [fr?] « ich gebe zu » = je reconnais ; une concession.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Coworking-Raum wird kaum genutzt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Bürgerbus ersetzt keinen echten Nahverkehr.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Bauplätze sind für Familien zu teuer.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das Glasfasernetz funktioniert noch nicht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was ist die Kernaussage von Frau Wiechert am Ende des Gesprächs? [fr?] Quel est le message principal de Mme Wiechert à la fin ?",
+          "explanation": "„Die Frage ist nicht: Stadt oder Land? Sondern: Was brauche ich gerade in meinem Leben?“ Sie verallgemeinert nicht; sie weiß nicht einmal, ob die Familie bleibt, wenn die Kinder aus dem Haus sind. [fr?] Pas de vérité générale : tout dépend de la période de la vie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Auf dem Land lebt man grundsätzlich besser als in der Stadt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wer Kinder hat, sollte auf keinen Fall in der Stadt wohnen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Wohnfrage sollte am besten der Staat für alle entscheiden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Welche Wohnform passt, hängt von der Lebensphase ab.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wohnen-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+        "description": "Lesen Sie die Sätze aus der Reportage und aus der Radiodiskussion. Achten Sie auf die markierten Präpositionen und auf die Verbindungen aus Nomen und Verb. [fr?] Lisez les phrases du reportage et du débat. Observez les prépositions et les associations nom + verbe.\n\nSÄTZE\n[fr?] Le corpus\n(1) Aufgrund der stark gestiegenen Mieten können sich viele ihr Viertel nicht mehr leisten.\n(2) Infolge der neuen Beliebtheit kaufen Investoren Häuser.\n(3) Ihre Nachbarn sind innerhalb eines Jahres ausgezogen.\n(4) Angesichts des Ärztemangels auf dem Land ziehen ältere Menschen wieder in die Stadt.\n(5) Wir haben als Gemeinde eine klare Entscheidung getroffen.\n(6) Den Coworking-Raum können alle Bürgerinnen und Bürger in Anspruch nehmen.\n(7) Die Gemeinde stellt jungen Familien günstige Bauplätze zur Verfügung.\n(8) Eigentümer üben oft scharfe Kritik an solchen Maßnahmen.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions : les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 bis 4: In welchem Kasus steht das Nomen nach diesen Präpositionen? [fr?] Phrases 1 à 4 : à quel cas est le nom après ces prépositions ?",
+          "explanation": "Der Mieten, der Beliebtheit, eines Jahres, des Ärztemangels: Das sind Genitivformen. Typisch sind die Artikel „des“ und „der“ und die Endung -s oder -es bei maskulinen und neutralen Nomen (des Jahres, des Ärztemangels). [fr?] Génitif : des / der, et -s / -es au masculin et au neutre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "im Akkusativ",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "im Dativ",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "im Nominativ",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "im Genitiv",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Was drückt die Präposition aus? Ordnen Sie zu. [fr?] Qu’exprime la préposition ? Associez.",
+          "explanation": "„Aufgrund“ entspricht „weil“, „infolge“ betont die Folge eines Ereignisses, „angesichts“ heißt „wenn man … betrachtet“, „innerhalb“ nennt einen Zeitraum (innerhalb eines Jahres) oder einen Raum (innerhalb der Stadt). [fr?] cause, conséquence, circonstance prise en compte, cadre temporel ou spatial.",
+          "pairs": [
+            {
+              "left": "aufgrund",
+              "right": "den Grund (weil …)"
+            },
+            {
+              "left": "infolge",
+              "right": "die Ursache, aus der etwas folgt"
+            },
+            {
+              "left": "angesichts",
+              "right": "einen Umstand, den man berücksichtigt"
+            },
+            {
+              "left": "innerhalb",
+              "right": "einen zeitlichen oder räumlichen Rahmen"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz 5: Welches einfache Verb hat ungefähr dieselbe Bedeutung wie „eine Entscheidung treffen“? [fr?] Phrase 5 : quel verbe simple a à peu près le même sens ?",
+          "explanation": "In einer Nomen-Verb-Verbindung trägt das Nomen die Bedeutung (die Entscheidung → entscheiden). Das Verb „treffen“ hat hier kaum eigene Bedeutung; es heißt nicht „rencontrer“. Solche Verbindungen klingen formeller als das einfache Verb. [fr?] Le nom porte le sens ; le verbe « treffen » est presque vide de sens ici.",
+          "options": [
+            {
+              "id": "a",
+              "label": "treffen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "entscheiden",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "erreichen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "bedeuten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Sätze 6 bis 8: Welches einfache Verb passt? Ordnen Sie zu. [fr?] Phrases 6 à 8 : quel verbe simple correspond ? Associez.",
+          "explanation": "Nomen-Verb-Verbindungen sind typisch für Zeitungen, Behörden und formelle Briefe. Sie haben feste Präpositionen und Artikel (zur Verfügung, in Anspruch, an + Dativ) und müssen als Ganzes gelernt werden. [fr?] Expressions figées du registre soutenu : à apprendre en bloc.",
+          "pairs": [
+            {
+              "left": "in Anspruch nehmen",
+              "right": "nutzen"
+            },
+            {
+              "left": "zur Verfügung stellen",
+              "right": "bereitstellen"
+            },
+            {
+              "left": "Kritik üben an",
+              "right": "kritisieren"
+            },
+            {
+              "left": "eine Entscheidung treffen",
+              "right": "entscheiden"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wohnen-regel",
+      "kind": "lesson",
+      "title": "Regel: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+        "description": "REGEL — PRÄPOSITIONEN MIT GENITIV\n[fr?] Règle : prépositions suivies du génitif\nIn formellen Texten stehen viele Präpositionen mit dem Genitiv. Wichtig für B2:\n[fr?] Dans les textes formels, beaucoup de prépositions régissent le génitif.\n• Grund und Folge: aufgrund, infolge, angesichts – Aufgrund der hohen Mieten ziehen viele weg. [fr?] Cause et conséquence : en raison de, à la suite de, face à.\n• Ort und Zeit: innerhalb, außerhalb – Außerhalb der Stadt sind die Mieten niedriger. Innerhalb eines Jahres ist alles anders. [fr?] Lieu et temps : à l’intérieur de, en dehors de, en l’espace de.\n• Wiederholung aus B1: wegen, trotz, während, statt – Trotz der Kritik wird gebaut. [fr?] Rappel B1 : à cause de, malgré, pendant, au lieu de.\n• Weitere häufige Präpositionen: anlässlich (bei Gelegenheit), bezüglich (was … betrifft), mithilfe (mit Hilfe von). [fr?] Autres : à l’occasion de, concernant, à l’aide de.\n\nREGEL — „VON“ + DATIV OHNE ARTIKEL\n[fr?] Règle : von + datif sans article\nOhne Artikel oder Adjektiv ist der Genitiv oft nicht erkennbar. Dann steht „von“ + Dativ.\n[fr?] Quand le génitif ne se voit pas (pas d’article), on emploie von + datif.\n• innerhalb von drei Tagen · aufgrund von Bauarbeiten · außerhalb von Großstädten [fr?] en trois jours ; en raison de travaux ; en dehors des grandes villes\n• Aber: innerhalb der nächsten drei Tage · aufgrund der Bauarbeiten [fr?] Mais avec article : génitif.\n\nREGEL — NOMEN-VERB-VERBINDUNGEN\n[fr?] Règle : les locutions verbo-nominales\nEin Nomen trägt die Bedeutung, das Verb (treffen, nehmen, stehen, stellen, üben, treten, bringen) ist fast leer. Die Verbindungen klingen formell und sachlich. Präposition und Artikel sind fest.\n[fr?] Le nom porte le sens, le verbe est presque vide. Registre soutenu ; préposition et article figés.\n• eine Entscheidung treffen = entscheiden · Kritik üben an + Dativ = kritisieren [fr?] prendre une décision ; critiquer\n• in Anspruch nehmen = nutzen · Rücksicht nehmen auf + Akkusativ = rücksichtsvoll sein [fr?] avoir recours à ; tenir compte de, ménager\n• zur Verfügung stehen (passiv) ↔ zur Verfügung stellen (aktiv): Der Raum steht allen zur Verfügung. Die Gemeinde stellt den Raum zur Verfügung. [fr?] être à disposition ↔ mettre à disposition\n• in Kraft treten = gültig werden · zur Diskussion stellen = öffentlich diskutieren lassen [fr?] entrer en vigueur ; soumettre à la discussion\n\nACHTUNG\n[fr?] Attention : pièges des francophones\n• Nicht wörtlich übersetzen: Man trifft eine Entscheidung, man „macht“ sie nicht. Man stellt eine Frage und übt Kritik. [fr?] On ne « fait » pas une décision : eine Entscheidung treffen, eine Frage stellen, Kritik üben.\n• Im Hauptsatz steht das Verb an zweiter Stelle, das Nomen bleibt am Ende: Die Regel tritt am 1. Januar in Kraft. [fr?] Le verbe en 2e position, la partie nominale à la fin (comme une particule).\n• Im gesprochenen Deutsch hört man oft „wegen dem“ statt „wegen des“. In formellen Texten schreiben Sie den Genitiv. [fr?] À l’oral, « wegen dem » est fréquent ; à l’écrit formel, employez le génitif.\n• Genitiv bei maskulinen und neutralen Nomen: -s oder -es nicht vergessen: des Jahres, des Viertels, des Ärztemangels. [fr?] Au génitif masculin et neutre, n’oubliez pas -s / -es.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-wohnen-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Genitivpräpositionen und Nomen-Verb-Verbindungen",
+        "description": "Üben Sie die Präpositionen mit Genitiv und die festen Verbindungen aus Nomen und Verb. [fr?] Entraînez-vous aux prépositions avec génitif et aux locutions verbo-nominales.\n\nMERKE\n[fr?] À retenir\n• aufgrund, infolge, angesichts, innerhalb, außerhalb + Genitiv; ohne Artikel: von + Dativ [fr?] génitif ; sans article : von + datif\n• Nomen-Verb-Verbindung: Verb an Position 2, Nomen am Satzende [fr?] verbe en 2e position, partie nominale à la fin",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Artikel im Genitiv. [fr?] Complétez avec l’article au génitif.",
+          "text": "Aufgrund [[1]] hohen Mieten ziehen viele weg. · Innerhalb [[2]] nächsten Jahres entstehen hundert neue Wohnungen. · Außerhalb [[3]] Stadtzentrums gibt es noch bezahlbare Wohnungen. · Angesichts [[4]] Wohnungsnot muss die Stadt handeln.",
+          "explanation": "Genitiv Plural und feminin: der (der Mieten, der Wohnungsnot). Genitiv maskulin und neutral: des, und das Nomen bekommt -s oder -es (des Jahres, des Stadtzentrums). [fr?] Pluriel et féminin : der ; masculin et neutre : des + -s / -es.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "des"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "des",
+                "eines"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "der",
+                "einer"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Präposition passt? „___ eines Jahres sind drei Familien ausgezogen.“ [fr?] Quelle préposition convient ?",
+          "explanation": "Gesucht ist ein Zeitraum: innerhalb eines Jahres. „Aufgrund eines Jahres“ und „angesichts eines Jahres“ ergeben keinen Sinn, „außerhalb“ bezeichnet hier keinen Zeitraum. [fr?] Un cadre temporel : innerhalb eines Jahres = en l’espace d’un an.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aufgrund",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Angesichts",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Innerhalb",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Außerhalb",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Formulieren Sie den Satz um: Präposition mit Genitiv statt „weil“. [fr?] Reformulez : préposition + génitif au lieu de « weil ».",
+          "text": "Weil die Mieten stark gestiegen sind, ziehen viele weg. → [[1]] [[2]] stark gestiegenen Mieten ziehen viele weg.",
+          "explanation": "Aus dem weil-Satz wird eine Nominalgruppe: die Mieten sind gestiegen → der gestiegenen Mieten (Genitiv Plural). „Aufgrund“, „wegen“ und „infolge“ sind hier möglich; „aufgrund“ klingt am sachlichsten. [fr?] La subordonnée devient un groupe nominal au génitif : style plus soutenu.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Aufgrund",
+                "Wegen",
+                "Infolge"
+              ],
+              "hint": "Grund",
+              "size": 9
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "hint": "Artikel",
+              "size": 4
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Aufgrund",
+              "der hohen Mieten",
+              "ziehen",
+              "immer mehr",
+              "junge Familien",
+              "in die Dörfer",
+              "außerhalb",
+              "der Stadt."
+            ]
+          ],
+          "explanation": "Die Präpositionalgruppe „aufgrund der hohen Mieten“ steht auf Position 1, das Verb „ziehen“ folgt sofort, dann das Subjekt. „Außerhalb der Stadt“ beschreibt die Dörfer genauer und steht deshalb direkt danach. [fr?] Groupe prépositionnel en tête, puis le verbe, puis le sujet."
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Welches einfache Verb hat dieselbe Bedeutung? Ordnen Sie zu. [fr?] Quel verbe simple a le même sens ? Associez.",
+          "explanation": "Die Nomen-Verb-Verbindungen sind formeller, die einfachen Verben neutraler. In einem Brief an die Stadtverwaltung passen die Verbindungen gut, in einer Nachricht an Freunde eher die einfachen Verben. [fr?] Même sens, registre différent.",
+          "pairs": [
+            {
+              "left": "eine Entscheidung treffen",
+              "right": "entscheiden"
+            },
+            {
+              "left": "in Anspruch nehmen",
+              "right": "nutzen"
+            },
+            {
+              "left": "Kritik üben an",
+              "right": "kritisieren"
+            },
+            {
+              "left": "zur Verfügung stellen",
+              "right": "bereitstellen"
+            },
+            {
+              "left": "in Kraft treten",
+              "right": "gültig werden"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Verb in der richtigen Form. [fr?] Complétez avec le verbe à la bonne forme.",
+          "text": "Der Gemeinderat hat gestern eine wichtige Entscheidung [[1]]. · Die neue Regel [[2]] am 1. Januar in Kraft. · Viele Mieterinnen [[3]] die kostenlose Beratung in Anspruch.",
+          "explanation": "Eine Entscheidung treffen, Partizip II: getroffen. In Kraft treten, 3. Person Singular: tritt (mit Vokalwechsel e → i). In Anspruch nehmen, 3. Person Plural: nehmen. Das Nomen steht am Satzende. [fr?] treffen → getroffen ; treten → tritt ; nehmen → nehmen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "getroffen"
+              ],
+              "hint": "treffen",
+              "size": 10
+            },
+            {
+              "id": "2",
+              "accept": [
+                "tritt"
+              ],
+              "hint": "treten",
+              "size": 6
+            },
+            {
+              "id": "3",
+              "accept": [
+                "nehmen"
+              ],
+              "hint": "nehmen",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "Die Wohnungen selbst handeln nicht: Sie „stehen“ jemandem (Dativ) „zur Verfügung“. „Zur Verfügung stellen“ braucht eine Person oder Institution als Subjekt (Die Stadt stellt die Wohnungen zur Verfügung). Die Präposition ist immer „zur“. [fr?] stehen (passif) ≠ stellen (actif) ; toujours « zur Verfügung ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Wohnungen stellen ab März den Studierenden zur Verfügung.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Wohnungen stehen ab März den Studierenden in Verfügung.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Wohnungen stehen ab März für die Studierenden zu Verfügung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Wohnungen stehen ab März den Studierenden zur Verfügung.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welches Verb passt? „Wir müssen auf die älteren Nachbarn Rücksicht ___.“ [fr?] Quel verbe convient ?",
+          "explanation": "Die feste Verbindung heißt „Rücksicht nehmen auf + Akkusativ“ (tenir compte de, ménager). Das Verb lässt sich nicht aus dem Französischen ableiten; man muss es mit dem Nomen lernen. [fr?] Rücksicht nehmen auf = avoir des égards pour.",
+          "options": [
+            {
+              "id": "a",
+              "label": "machen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "geben",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nehmen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "halten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Genitiv oder „von“ + Dativ? Ergänzen Sie. [fr?] Génitif ou « von » + datif ? Complétez.",
+          "text": "Bitte antworten Sie innerhalb [[1]] drei Tagen. · Außerhalb [[2]] Stadtzentrums ist das Parken kostenlos. · Aufgrund [[3]] starken Regenfällen ist die Straße gesperrt.",
+          "explanation": "„Drei Tagen“ und „starken Regenfällen“ sind Dativ Plural (Endung -n), ohne Artikel: Der Genitiv wäre nicht erkennbar, deshalb „von“ + Dativ. „Stadtzentrums“ hat die Genitivendung -s: Davor steht der Artikel im Genitiv, des (oder eines). [fr?] Sans article (datif pluriel en -n) : von ; nom au génitif en -s : des.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "von"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "des",
+                "eines"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "von"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz klingt am formellsten, zum Beispiel in einem Brief an die Stadt? [fr?] Quelle phrase est la plus formelle, par exemple dans une lettre à la mairie ?",
+          "explanation": "„In Betracht ziehen“ ist eine Nomen-Verb-Verbindung des formellen Stils und bedeutet „ernsthaft prüfen“. Die Partikeln „mal“, „doch“ und „einfach“ machen die anderen Sätze umgangssprachlich. [fr?] « in Betracht ziehen » = prendre en considération ; « mal », « doch » = registre familier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir bitten Sie, unseren Vorschlag in Betracht zu ziehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Wir bitten Sie, über unseren Vorschlag mal nachzudenken.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Schauen Sie sich unseren Vorschlag doch einfach mal an.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Denken Sie doch bitte mal kurz über unseren Vorschlag nach.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wohnen-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Wohnungsmarkt, Stadt und Land",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Wohnungsmarkt, Stadt und Land",
+        "description": "Lernen Sie die Wörter des Wohnungsmarkts genau: In Anzeigen, Verträgen und Diskussionen kommt es auf Details an. [fr?] Apprenez précisément le vocabulaire du logement : dans les annonces, les contrats et les débats, les détails comptent.\n\nTIPP\n[fr?] Conseil\nBei einer Wohnungsanzeige immer fragen: Ist das die Kaltmiete oder die Warmmiete? Der Unterschied kann mehrere Hundert Euro betragen. [fr?] Devant une annonce, demandez toujours s’il s’agit du loyer hors charges ou charges comprises : l’écart peut atteindre plusieurs centaines d’euros.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Was bedeutet das? Ordnen Sie zu. [fr?] Que signifient ces mots ? Associez.",
+          "explanation": "Diese Begriffe stehen in fast jeder Anzeige und in jedem Mietvertrag. Die Kaution bekommt man beim Auszug zurück, wenn die Wohnung in Ordnung ist. [fr?] loyer hors charges / charges comprises, logements vacants, loyers de référence, dépôt de garantie.",
+          "pairs": [
+            {
+              "left": "die Kaltmiete",
+              "right": "Miete ohne Heizung und Nebenkosten"
+            },
+            {
+              "left": "die Warmmiete",
+              "right": "Miete mit Heizung und Nebenkosten"
+            },
+            {
+              "left": "der Leerstand",
+              "right": "Wohnungen, in denen niemand wohnt"
+            },
+            {
+              "left": "der Mietspiegel",
+              "right": "Übersicht über die üblichen Mieten"
+            },
+            {
+              "left": "die Kaution",
+              "right": "Geld als Sicherheit beim Einzug"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "sanieren → die [[1]] · verdrängen → die [[2]] · zuziehen → der [[3]] · pendeln → der [[4]] (die Person)",
+          "explanation": "Viele Verben bilden ein feminines Nomen auf -ung (Sanierung, Verdrängung). „Zuziehen“ bildet ein maskulines Nomen ohne Endung mit Vokalwechsel: der Zuzug. Die Person, die pendelt, ist der Pendler (die Pendlerin). [fr?] -ung ; der Zuzug (comme der Umzug) ; der Pendler.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Sanierung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Verdrängung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Zuzug"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Pendler"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was bedeutet: „Das Viertel ist gerade sehr angesagt“? [fr?] Que signifie cette phrase ?",
+          "explanation": "„Angesagt“ ist umgangssprachlich und heißt: im Trend, sehr beliebt. Mit „ansagen“ im Sinn von „ankündigen“ hat es hier nichts zu tun. [fr?] angesagt = à la mode, branché.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Viertel ist gerade bei vielen sehr beliebt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das Viertel wird bald vollständig abgerissen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Stadt hat das Viertel neu benannt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Im Viertel wurden neue Regeln angekündigt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie wollen in einem Text zwei Seiten einer Frage zeigen. Welche Formulierung passt? [fr?] Vous voulez montrer deux aspects d’une question. Quelle formule convient ?",
+          "explanation": "„Einerseits …, andererseits …“ stellt zwei Aspekte gegenüber: ein Vorteil, ein Nachteil. Die anderen Sätze zählen nur auf oder behaupten einen Zusammenhang von Grund und Folge, der nicht logisch ist. [fr?] einerseits … andererseits = d’un côté … de l’autre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Einerseits sind die Mieten niedrig, andererseits fehlt eine gute Anbindung.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Erstens sind die Mieten niedrig, und zweitens fehlt dann noch eine gute Anbindung.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil die Mieten niedrig sind, fehlt deshalb eine gute Anbindung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Mieten sind niedrig, sodass eine gute Anbindung fehlt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr?] Complétez avec la préposition.",
+          "text": "Die Mieter beschweren sich [[1]] den Baulärm. · Die Bürgerinitiative übt Kritik [[2]] dem Bauprojekt. · Über hundert Personen haben sich [[3]] die Wohnung beworben.",
+          "explanation": "Sich beschweren über + Akkusativ, Kritik üben an + Dativ, sich bewerben um + Akkusativ. Diese Präpositionen sind fest und lassen sich nicht aus dem Französischen ableiten. [fr?] se plaindre de → über ; critiquer → Kritik üben an ; postuler à → sich bewerben um.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "um"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Erklärung passt? Ordnen Sie zu. [fr?] Quelle explication convient ? Associez.",
+          "explanation": "Diese Adjektive beschreiben Wohnungen und Orte in Anzeigen und Diskussionen: bezahlbar (abordable), gut angebunden (bien desservi), begehrt (convoité), abgelegen (isolé). [fr?] abordable, bien desservi, convoité, isolé.",
+          "pairs": [
+            {
+              "left": "bezahlbar",
+              "right": "nicht zu teuer"
+            },
+            {
+              "left": "gut angebunden",
+              "right": "mit Bus und Bahn leicht erreichbar"
+            },
+            {
+              "left": "begehrt",
+              "right": "von vielen gewünscht"
+            },
+            {
+              "left": "abgelegen",
+              "right": "weit weg von anderen Orten"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wohnen-hoeren2",
+      "kind": "exercise",
+      "title": "Verstehen: eine Siedlung aus der Krise (Originaltext)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Siedlung aus der Krise (Originaltext)",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nORIGINALTEXT\n[fr?] Document authentique\nSie hören einen Ausschnitt aus dem Wikipedia-Artikel „Stadtrandsiedlung Am Taubenberg“ (Fassung von 2013), vorgelesen von einer synthetischen Stimme. [fr?] Vous entendez un extrait de l’article Wikipédia « Stadtrandsiedlung Am Taubenberg » (version de 2013), lu par une voix de synthèse.\nDie Siedlung liegt in Radeberg, einer Kleinstadt bei Dresden. Sie entstand in den 1930er Jahren für Familien, die von der Wirtschaftskrise betroffen waren. [fr?] La cité se trouve à Radeberg, petite ville près de Dresde ; elle a été construite dans les années 1930 pour des familles touchées par la crise économique.\n\nWICHTIGE WÖRTER\n[fr?] Mots utiles\n• die Weltwirtschaftskrise [fr?] la crise économique mondiale (1929)\n• die Selbstversorgung [fr?] l’autosuffisance alimentaire\n• das Losverfahren [fr?] le tirage au sort\n• der Bauabschnitt [fr?] la tranche de travaux\n• die Landflucht [fr?] l’exode rural\n• das Behelfsheim [fr?] l’abri provisoire\n\nSTRATEGIE\n[fr?] Stratégie\nBeim ersten Hören: Warum entstand die Siedlung, und wie wurde sie gebaut? [fr?] Première écoute : pourquoi la cité a-t-elle été créée, et comment a-t-elle été construite ?\nBeim zweiten Hören achten Sie auf Jahreszahlen und Zahlen. [fr?] À la deuxième écoute, soyez attentif aux dates et aux nombres.\nDie Transkription sehen Sie nach Ihren Antworten. [fr?] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wohnen-hoeren2-audio",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b2-wohnen-hoeren2-foto",
+          "usage": "illustration",
+          "caption": "Häuser einer Stadtrandsiedlung in Radeberg",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Auslöser: Weltwirtschaftskrise ab [[1]] · Ziel: Arbeit, Unterkünfte und Selbstversorgung durch eigene [[2]] und Kleintiere · Baubeschluss: [[3]] · erster Bauabschnitt: zehn [[4]] · Spottname in der Zeitung: [[5]]",
+          "explanation": "„Durch die 1929 einsetzende Weltwirtschaftskrise …“, „durch eigene Gärten und Kleintierhaltung“, „wurde 1932 der Bau der Siedlung … beschlossen“, „zehn Doppelhäuser“, „abschätzig als Hundehütten“ bezeichnet. [fr?] Réponses tirées du texte ; « Hundehütten » (niches à chien) est le surnom moqueur donné par le journal local.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "1929",
+                "neunzehnhundertneunundzwanzig"
+              ],
+              "size": 30,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Gärten"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "1932",
+                "neunzehnhundertzweiunddreißig"
+              ],
+              "size": 30,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Doppelhäuser"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Hundehütten"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum wurden die Grundstücke erst nach der Fertigstellung verlost? [fr?] Pourquoi les terrains n’ont-ils été tirés au sort qu’une fois terminés ?",
+          "explanation": "Man wollte „verhindern, dass die Handwerker nur auf ihrer eigenen Parzelle ordentlich arbeiteten“: Wer nicht weiß, welches Haus er bekommt, arbeitet überall sorgfältig. [fr?] Les artisans ne savaient pas quelle parcelle ils obtiendraient : ils avaient donc intérêt à bien travailler partout.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil sich zu viele Familien beworben hatten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil die Finanzierung noch nicht geklärt war.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Damit die Handwerker überall gleich gut arbeiteten.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Damit die künftigen Nachbarn die Bewohner auswählen konnten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was mussten die Interessenten nachweisen? [fr?] Que devaient prouver les candidats ?",
+          "explanation": "Sie mussten „nachweisen, dass sie dem Bau oder dem Leben in der künftigen Ortslage nützlich sein würden“. Von Geld oder einer früheren Wohnung ist nicht die Rede. [fr?] Ils devaient montrer qu’ils seraient utiles à la construction ou à la vie de la future cité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass sie schon in Radeberg eine Wohnung hatten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass sie die Häuser selbst bezahlen konnten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass sie seit mehreren Jahren arbeitslos waren",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "dass sie für den Bau oder die Siedlung nützlich waren",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wie änderte sich der Zweck der Siedlung ab 1933? [fr?] Comment l’objectif de la cité a-t-il changé à partir de 1933 ?",
+          "explanation": "Nach 1933 „sollte [der Ausbau] vor allem der Verhinderung der Landflucht dienen und billigsten Wohnraum schaffen“. [fr?] Après 1933, la cité devait surtout freiner l’exode rural et offrir des logements très bon marché.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sollte die Landflucht bremsen und billig Wohnraum schaffen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie wurde zu einer reinen Siedlung für einheimische Handwerker.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sollte nun vor allem Arbeitslosen aus anderen Städten helfen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie wurde ausschließlich für Familien mit Kindern reserviert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Der fünfte Bauabschnitt wurde wegen des Krieges nie verwirklicht.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Richtig: Der fünfte Bauabschnitt „wurde aufgrund des Zweiten Weltkriegs nicht realisiert“; auf der Fläche entstanden nur Behelfsheime. [fr?] Vrai : la cinquième tranche n’a pas été réalisée à cause de la guerre ; on y a seulement construit des abris provisoires.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Die Bewohner der Nachbargebiete unterstützten den Bau von Anfang an.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Falsch: Vor dem Baubeschluss mussten erst „die Widersprüche der Bewohner angrenzender Gebiete geklärt“ werden. [fr?] Faux : il a d’abord fallu régler les objections des habitants des quartiers voisins.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wohnen-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Wohnen, Genitiv und feste Verbindungen",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Prüfen: Wohnen, Genitiv und feste Verbindungen",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Lesen, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : lecture, grammaire et vocabulaire.\n\nFür die Fragen 1 und 2 lesen Sie einen Aushang in einem Mietshaus. [fr?] Pour les questions 1 et 2, lisez un avis affiché dans un immeuble.\n\nMITTEILUNG DER HAUSVERWALTUNG\nAufgrund von Sanierungsarbeiten steht der Aufzug innerhalb der nächsten zwei Wochen nicht zur Verfügung.\nBewohnerinnen und Bewohner, die Hilfe beim Tragen ihrer Einkäufe in Anspruch nehmen möchten, melden sich bitte beim Hausmeister.\nWir bitten um Ihr Verständnis.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wohnen-kontrolle-aushang",
+          "caption": "Aushang im Treppenhaus",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was teilt die Hausverwaltung mit? [fr?] Qu’annonce la régie ?",
+          "explanation": "„Steht … nicht zur Verfügung“ heißt: Man kann ihn nicht benutzen. „Innerhalb der nächsten zwei Wochen“ nennt den Zeitraum. Von einem Abbau oder von zwei Monaten ist nicht die Rede. [fr?] « nicht zur Verfügung stehen » = ne pas être disponible.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Aufzug wird in zwei Wochen vollständig abgebaut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zwei Wochen lang kann man den Aufzug nicht nutzen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Der Aufzug ist ab jetzt nur noch für Einkäufe gedacht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Sanierung des Hauses dauert noch zwei Monate.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was können Bewohner beim Hausmeister bekommen? [fr?] Que peuvent obtenir les habitants auprès du gardien ?",
+          "explanation": "„Bewohnerinnen und Bewohner, die Hilfe beim Tragen ihrer Einkäufe in Anspruch nehmen möchten, melden sich bitte beim Hausmeister.“ „In Anspruch nehmen“ heißt hier: nutzen, bekommen wollen. [fr?] « in Anspruch nehmen » = avoir recours à.",
+          "options": [
+            {
+              "id": "a",
+              "label": "einen Schlüssel für den Lastenaufzug",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Hilfe beim Tragen der Einkäufe",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine Senkung der Miete für zwei Wochen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Liste der Handwerksfirmen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Stadt",
+              "hat",
+              "im März",
+              "aufgrund",
+              "der großen Wohnungsnot",
+              "eine",
+              "wichtige",
+              "Entscheidung",
+              "getroffen."
+            ],
+            [
+              "Die Stadt",
+              "hat",
+              "aufgrund",
+              "der großen Wohnungsnot",
+              "im März",
+              "eine",
+              "wichtige",
+              "Entscheidung",
+              "getroffen."
+            ]
+          ],
+          "explanation": "Das Hilfsverb „hat“ steht an Position 2, das Partizip „getroffen“ am Ende. Die Angaben zu Zeit und Grund stehen im Mittelfeld vor dem Objekt; meist steht die Zeit vor dem Grund, beide Reihenfolgen sind möglich. [fr?] Auxiliaire en 2e position, participe à la fin ; temps et cause avant l’objet."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Artikel im Genitiv. [fr?] Complétez avec l’article au génitif.",
+          "text": "Infolge [[1]] Sanierung ist die Miete gestiegen. · Innerhalb [[2]] Monats haben drei Läden geschlossen.",
+          "explanation": "„Die Sanierung“ ist feminin: Genitiv „der Sanierung“. „Ein Monat“ ist maskulin: Genitiv „eines Monats“ mit der Endung -s am Nomen. [fr?] féminin : der ; masculin indéfini : eines … -s.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "der",
+                "einer"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "eines",
+                "des"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Verb der Nomen-Verb-Verbindung. [fr?] Complétez avec le verbe de la locution.",
+          "text": "Die Mieterinnen und Mieter [[1]] scharfe Kritik an dem Bauprojekt. · Die Stadt will die Pläne nächste Woche zur Diskussion [[2]].",
+          "explanation": "„Kritik üben an“ + Dativ und „zur Diskussion stellen“ sind feste Verbindungen. Im zweiten Satz steht der Infinitiv nach dem Modalverb „will“ am Ende. [fr?] Kritik üben ; zur Diskussion stellen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "üben",
+                "übten"
+              ],
+              "hint": "üben",
+              "size": 6
+            },
+            {
+              "id": "2",
+              "accept": [
+                "stellen"
+              ],
+              "hint": "stellen",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Präposition passt? „___ der Stadt gibt es kaum noch Arztpraxen.“ [fr?] Quelle préposition convient ?",
+          "explanation": "Gesucht ist ein Ort: außerhalb der Stadt. Mit „aufgrund“, „infolge“ oder „angesichts“ wäre „die Stadt“ die Ursache, was keinen Sinn ergibt. [fr?] Un lieu : außerhalb.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aufgrund",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Infolge",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Außerhalb",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Angesichts",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Was ist die Warmmiete? [fr?] Qu’est-ce que la « Warmmiete » ?",
+          "explanation": "Die Warmmiete umfasst die Kaltmiete und die Nebenkosten, also Heizung, Wasser, Müllabfuhr usw. Mit der Jahreszeit hat das Wort nichts zu tun. [fr?] Loyer charges et chauffage compris.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Miete im Winter",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Miete mit Heizung und Nebenkosten",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Miete ohne Nebenkosten",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Miete für ein Haus mit Garten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Genitiv oder „von“ + Dativ? Ergänzen Sie. [fr?] Génitif ou « von » + datif ?",
+          "text": "Aufgrund [[1]] dringenden Reparaturen bleibt der Aufzug geschlossen. · Infolge [[2]] Sturms sind im Park mehrere Bäume umgestürzt.",
+          "explanation": "„Dringenden Reparaturen“ ist Dativ Plural ohne Artikel: aufgrund von + Dativ. „Sturms“ zeigt mit der Endung -s den Genitiv maskulin: infolge des Sturms. [fr?] Datif pluriel sans article : von ; génitif en -s : des.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "von"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "des"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-wohnen-lesen-artikel",
+      "kind": "image",
+      "title": "Reportage : « Wem gehört das Viertel? »",
+      "alt": "Page de journal intitulée « Wem gehört das Viertel? » : un ancien quartier ouvrier devenu à la mode, où les loyers ont fortement augmenté.",
+      "image": {
+        "layout": "article",
+        "kicker": "Stadtleben",
+        "title": "Wem gehört das Viertel?",
+        "icon": "building",
+        "lead": "Wenn ein altes Arbeiterviertel plötzlich angesagt ist, freuen sich nicht alle",
+        "paragraphs": [
+          "Vor zehn Jahren wollte kaum jemand ins Färberviertel ziehen. Die Altbauten bröckelten, im Erdgeschoss standen viele Läden leer, und abends war es auf den Straßen still."
+        ]
+      }
+    },
+    {
+      "key": "b2-wohnen-hoeren-audio",
+      "kind": "audio",
+      "title": "Émission de radio : ville ou campagne ?",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Guten Abend und willkommen beim „Stadtgespräch“. Heute geht es um eine Frage, die sich viele stellen: Stadt oder Land? Aufgrund der hohen Mieten ziehen immer mehr Familien aus den Großstädten weg. Bei mir im Studio sind Gesa Ruhnke, Bürgermeisterin der Gemeinde Oberwiesach, und die Architektin Lena Wiechert."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Frau Wiechert ist vor zwei Jahren mit ihrer Familie aufs Land gezogen. Frau Ruhnke, spüren Sie diesen Trend?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Gesa Ruhnke",
+          "text": "Ja, sehr deutlich. Oberwiesach hat etwa zweitausendvierhundert Einwohner. Innerhalb der letzten fünf Jahre sind fast sechzig Familien zu uns gezogen, viele davon aus der Stadt. Vor zehn Jahren hatten wir noch das umgekehrte Problem: Die Jungen sind weggezogen, und in der Dorfmitte standen Häuser leer."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Was hat sich geändert?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Gesa Ruhnke",
+          "text": "Zum einen die Arbeitswelt. Infolge der Pandemie arbeiten viele Menschen zwei oder drei Tage pro Woche von zu Hause. Dann ist eine Stunde Fahrt in die Stadt kein tägliches Problem mehr."
+        },
+        {
+          "voice": "frau2",
+          "name": "Gesa Ruhnke",
+          "text": "Zum anderen haben wir als Gemeinde eine klare Entscheidung getroffen: Wir investieren in die Zukunft. Seit letztem Jahr hat jedes Haus einen Glasfaseranschluss, und in unserer alten Schule gibt es jetzt einen Coworking-Raum. Den können alle Bürgerinnen und Bürger für fünf Euro am Tag in Anspruch nehmen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Frau Wiechert, Sie sind mit Ihrer Familie nach Oberwiesach gezogen. Warum?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Lena Wiechert",
+          "text": "Ganz ehrlich: wegen des Platzes. In der Stadt hatten wir drei Zimmer für vier Personen, und für eine größere Wohnung hätten wir fast das Doppelte zahlen müssen. Jetzt haben wir ein altes Bauernhaus mit Garten, für weniger Geld. Die Kinder spielen draußen, die Nachbarn kennen uns. Das ist schon eine ganz andere Lebensqualität."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Das klingt fast zu schön. Gibt es auch Nachteile?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Lena Wiechert",
+          "text": "Natürlich. Ich fahre an zwei Tagen pro Woche ins Büro, und dann bin ich eine Stunde und zehn Minuten unterwegs, pro Strecke. Ohne Auto geht hier praktisch nichts. Nach neunzehn Uhr fährt kein Bus mehr, sodass ich meine Kinder zum Training und zu Freunden fahren muss. Manchmal fühle ich mich wie ein Taxiunternehmen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Und wie hat das Dorf Sie aufgenommen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Lena Wiechert",
+          "text": "Erstaunlich gut. Am Anfang waren manche skeptisch, weil viele Neue nur zum Schlafen ins Dorf kommen. Aber wir sind in den Sportverein eingetreten, und ich helfe jedes Jahr beim Dorffest. Wer sich engagiert, gehört schnell dazu."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Frau Ruhnke, zurück zum Verkehr. Das ist ein typischer Kritikpunkt. Was sagen Sie dazu?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Gesa Ruhnke",
+          "text": "Frau Wiechert hat völlig recht, der Verkehr ist unsere größte Baustelle. Wir haben einen Bürgerbus eingeführt, der von Ehrenamtlichen gefahren wird. Er fährt dreimal täglich in die Kreisstadt. Aber ich gebe zu: Das ersetzt keinen richtigen Nahverkehr. Dafür brauchen wir die Unterstützung des Landes."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Und wie sieht es mit Ärzten aus? Angesichts des Ärztemangels auf dem Land hört man oft, dass ältere Menschen wieder in die Stadt ziehen."
+        },
+        {
+          "voice": "frau2",
+          "name": "Gesa Ruhnke",
+          "text": "Das ist leider so. Unser Hausarzt hört nächstes Jahr auf, und bisher gibt es keine Nachfolge. Wir bieten einer jungen Ärztin oder einem jungen Arzt die Praxisräume kostenlos an. Außerdem stellt die Gemeinde jungen Familien günstige Bauplätze zur Verfügung, damit das Dorf nicht nur aus Rentnern besteht."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Frau Wiechert, würden Sie die Entscheidung noch einmal so treffen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Lena Wiechert",
+          "text": "Ja, für diese Lebensphase auf jeden Fall. Ob wir hier bleiben, wenn die Kinder aus dem Haus sind, weiß ich nicht. Ich glaube, die Frage ist nicht: Stadt oder Land? Sondern: Was brauche ich gerade in meinem Leben?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul Rehberg",
+          "text": "Ein schönes Schlusswort. Vielen Dank Ihnen beiden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wohnen-kontrolle-aushang",
+      "kind": "image",
+      "title": "Avis de la régie : ascenseur hors service",
+      "alt": "Avis de la régie : en raison de travaux de rénovation, l’ascenseur ne sera pas disponible pendant les deux prochaines semaines ; aide possible pour les courses.",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "icon": "triangle-alert",
+        "title": "Mitteilung der Hausverwaltung",
+        "lines": [
+          "Aufgrund von Sanierungsarbeiten steht der Aufzug innerhalb der nächsten zwei Wochen nicht zur Verfügung.",
+          "Bewohnerinnen und Bewohner, die Hilfe beim Tragen ihrer Einkäufe in Anspruch nehmen möchten, melden sich bitte beim Hausmeister.",
+          "Wir bitten um Ihr Verständnis."
+        ]
+      }
+    },
+    {
+      "key": "b2-wohnen-einstieg-foto",
+      "kind": "image",
+      "title": "Un chantier entre des immeubles anciens",
+      "alt": "Une grue jaune sur un chantier, entre des immeubles anciens à balcons ; au premier plan, des palettes de matériaux et des barrières de chantier.",
+      "photo": {
+        "file": "libre/commons/wohnen-baustelle.jpg"
+      },
+      "credit": "VSchagow, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:2021082501_Baustelle_mit_Kran_Rohbau_Henricistrasse_Ecke_Teichstrasse_2020.jpg"
+    },
+    {
+      "key": "b2-wohnen-hoeren2-audio",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Stadtrandsiedlung Am Taubenberg (extrait)",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Vorgeschichte"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Durch die 1929 einsetzende Weltwirtschaftskrise kam es zu Schließungen zahlreicher Unternehmen, welche zu einer hohen Arbeitslosigkeit führten. In vielen deutschen Städten wurden daraufhin sogenannte Stadtrandsiedlungen errichtet.",
+          "say": "Durch die neunzehnhundertneunundzwanzig einsetzende Weltwirtschaftskrise kam es zu Schließungen zahlreicher Unternehmen, welche zu einer hohen Arbeitslosigkeit führten. In vielen deutschen Städten wurden daraufhin sogenannte Stadtrandsiedlungen errichtet."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Diese Wohngebiete schufen zum einen Arbeit und Unterkünfte für die von der Krise betroffene Bevölkerung, zum anderen waren sie so angelegt, dass sie sich durch eigene Gärten und Kleintierhaltung selbst mit Nahrungsmitteln versorgen konnten."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Da die Krise auch in Radeberg zu einer hohen Arbeitslosenquote führte, welche die Wohn- und Versorgungslage im Stadtgebiet drastisch verschlechterte, gab es 1931 die ersten konkreten Pläne zum Bau einer solchen Siedlung.",
+          "say": "Da die Krise auch in Radeberg zu einer hohen Arbeitslosenquote führte, welche die Wohn- und Versorgungslage im Stadtgebiet drastisch verschlechterte, gab es neunzehnhunderteinunddreißig die ersten konkreten Pläne zum Bau einer solchen Siedlung."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Nachdem die Bedenken der Stadt bezüglich der Finanzierung und die Widersprüche der Bewohner angrenzender Gebiete geklärt waren, wurde 1932 der Bau der Siedlung am Taubenberg beschlossen.",
+          "say": "Nachdem die Bedenken der Stadt bezüglich der Finanzierung und die Widersprüche der Bewohner angrenzender Gebiete geklärt waren, wurde neunzehnhundertzweiunddreißig der Bau der Siedlung am Taubenberg beschlossen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Baugeschichte"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Um die Wohnflächen in der Siedlung (Siedlerstellen) mussten sich alle Interessenten bewerben und nachweisen, dass sie dem Bau oder dem Leben in der künftigen Ortslage nützlich sein würden."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie bei Stadtrandsiedlungen üblich, wurden die Arbeiten an den Gebäuden und Grundstücken ausschließlich von einheimischen Handwerkern, die später auch Bewohner der Siedlung wurden, ausgeführt."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Um die Qualität der Arbeit entsprechend hoch zu halten und zu verhindern, dass die Handwerker nur auf ihrer eigenen Parzelle ordentlich arbeiteten, wurden die Grundstücke erst nach ihrer Fertigstellung per Losverfahren verteilt."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die Siedlung wurde in fünf Bauabschnitten errichtet. Als sechster Bauabschnitt gilt der Wiederauf- und Ausbau nach dem Zweiten Weltkrieg bis in die 2000er Jahre. Im ersten Bauabschnitt wurden Ende 1932 zehn Doppelhäuser errichtet.",
+          "say": "Die Siedlung wurde in fünf Bauabschnitten errichtet. Als sechster Bauabschnitt gilt der Wiederauf- und Ausbau nach dem Zweiten Weltkrieg bis in die Zweitausender Jahre. Im ersten Bauabschnitt wurden Ende neunzehnhundertzweiunddreißig zehn Doppelhäuser errichtet."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die lokale Radeberger Zeitung bezeichnete die neuen Häuser angesichts ihrer kargen Ausstattung und geringen Größe abschätzig als Hundehütten. Im zweiten Bauabschnitt wurden 1933/34 sieben weitere Doppelhäuser erbaut. Mit der Machtergreifung der NSDAP änderte sich die Auffassung des typischen Siedlers.",
+          "say": "Die lokale Radeberger Zeitung bezeichnete die neuen Häuser angesichts ihrer kargen Ausstattung und geringen Größe abschätzig als Hundehütten. Im zweiten Bauabschnitt wurden neunzehnhundertdreiunddreißig und vierunddreißig sieben weitere Doppelhäuser erbaut. Mit der Machtergreifung der N S D A P änderte sich die Auffassung des typischen Siedlers."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Der weitere Ausbau sollte vor allem der Verhinderung der Landflucht dienen und billigsten Wohnraum schaffen. Im dritten Bauabschnitt wurden 1936/37 zwölf Siedlerstellen geschaffen, im vierten Bauabschnitt folgten 1937/38 24 weitere.",
+          "say": "Der weitere Ausbau sollte vor allem der Verhinderung der Landflucht dienen und billigsten Wohnraum schaffen. Im dritten Bauabschnitt wurden neunzehnhundertsechsunddreißig und siebenunddreißig zwölf Siedlerstellen geschaffen, im vierten Bauabschnitt folgten neunzehnhundertsiebenunddreißig und achtunddreißig vierundzwanzig weitere."
+        },
+        {
+          "voice": "sprecher",
+          "text": "Der fünfte Bauabschnitt, welcher ab 1940 in Planung war, wurde aufgrund des Zweiten Weltkriegs nicht realisiert. In den Monaten vor und nach dem Ende des Kriegs wurden auf der vorgesehenen Fläche mit einfachsten Mitteln und Baustoffen provisorische Behelfsheime und ein Gemeinschaftshaus erbaut.",
+          "say": "Der fünfte Bauabschnitt, welcher ab neunzehnhundertvierzig in Planung war, wurde aufgrund des Zweiten Weltkriegs nicht realisiert. In den Monaten vor und nach dem Ende des Kriegs wurden auf der vorgesehenen Fläche mit einfachsten Mitteln und Baustoffen provisorische Behelfsheime und ein Gemeinschaftshaus erbaut."
+        }
+      ],
+      "credit": "Texte : article « Stadtrandsiedlung Am Taubenberg » de la Wikipédia en allemand (révision 124460261), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=124460261"
+    },
+    {
+      "key": "b2-wohnen-hoeren2-foto",
+      "kind": "image",
+      "title": "Maisons d’une cité de la périphérie de Radeberg",
+      "alt": "Petites maisons individuelles aux toits rouges, entourées de jardins et d’arbres, le long d’une route de campagne, à la sortie d’une ville.",
+      "photo": {
+        "file": "libre/commons/wohnen-stadtrandsiedlung.jpg"
+      },
+      "credit": "Maddl79, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Radeberg_Stadtrandsiedlung.jpg"
+    },
+    {
+      "key": "b2-wohnen-lexique",
+      "kind": "audio",
+      "title": "Lexique · Wohnen: Stadt, Land und steigende Mieten",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Gentrifizierung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Viertel, die Viertel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verdrängen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sanieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Altbau, die Altbauten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Eigentumswohnung, die Eigentumswohnungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kaltmiete, die Kaltmieten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Mietspiegel, die Mietspiegel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Leerstand"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wohnungsnot"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Zuzug"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "pendeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Anbindung, die Anbindungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bezahlbar"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "angesagt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "aufgrund"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "infolge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "angesichts"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "innerhalb"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "außerhalb"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Entscheidung treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in Anspruch nehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zur Verfügung stehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Kritik üben an"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in Kraft treten"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

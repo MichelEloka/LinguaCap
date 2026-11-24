@@ -11,7 +11,7 @@ const sound = (activity, question) => ({ media: `b1-beziehungen-atelier-${activi
 
 export default {
   id: 'b1-beziehungen-atelier',
-  title: 'Atelier Beziehungen : conseiller une amie, régler un malentendu',
+  title: 'Beziehungen, atelier : conseiller une amie, régler un malentendu',
   objective: 'Donner des conseils par écrit à une amie, s’excuser et proposer une solution à l’oral, réagir avec naturel (doch, mal, ja) et transmettre en allemand un message reçu en français.',
   grammarFocus: ['verben-mit-praepositionen', 'da-wo-pronominaladverb'],
   sources: [

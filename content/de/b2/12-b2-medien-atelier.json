@@ -1,0 +1,1663 @@
+{
+  "id": "b2-medien-atelier",
+  "title": "Medien – Werkstatt: Stellung beziehen und Aussagen wiedergeben",
+  "objective": "Écrire une contribution argumentée à un forum (150 à 250 mots) en rapportant l’avis d’un autre participant, défendre un point de vue dans une discussion sur l’identité en ligne, rapporter une interview au discours indirect, s’entraîner au format Hören (débat : qui dit quoi ?) et préparer la Zwischenbilanz des modules 1 à 12.",
+  "prerequisites": [
+    "b2-medien"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, forum, interview, émission et entreprise fictives ; les effets de la disparition des journaux locaux sont évoqués de façon générale."
+  ],
+  "layer": "content/b/source/b2/b2-medien-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "ich-verfolge-diese-diskussion-schon-eine-weile",
+      "word": "Ich verfolge diese Diskussion schon eine Weile.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je suis cette discussion depuis un moment.",
+      "example": "Ich verfolge diese Diskussion schon eine Weile und möchte etwas beitragen.",
+      "note": "entrée en matière d’un message de forum",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "schreibt-sei",
+      "word": "… schreibt, … sei …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "… écrit que … serait …",
+      "example": "Holger schreibt, ein Verbot sei die einzige Lösung.",
+      "note": "rapporter un avis : Konjunktiv I",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "ich-halte-fuer",
+      "word": "Ich halte … für …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je considère … comme …",
+      "example": "Ein generelles Verbot halte ich für den falschen Weg.",
+      "note": "halten für + accusatif",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "zwar-aber",
+      "word": "Zwar …, aber …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Certes …, mais …",
+      "example": "Zwar stören Handys im Unterricht, aber ein Verbot löst das Problem nicht.",
+      "note": "concéder, puis objecter",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "kurz-gesagt",
+      "word": "Kurz gesagt: …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "En bref : …",
+      "example": "Kurz gesagt: Regeln ja, Verbot nein.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "was-meint-ihr",
+      "word": "Was meint ihr?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Qu’en pensez-vous ?",
+      "example": "Was meint ihr, wäre so ein Kompromiss umsetzbar?",
+      "note": "dans un forum, on se tutoie souvent",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "meinungsfreiheit",
+      "word": "Meinungsfreiheit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la liberté d’expression",
+      "example": "Die Meinungsfreiheit ist ein Grundrecht.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "zensur",
+      "word": "Zensur",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la censure",
+      "example": "Ist das Löschen von Falschmeldungen schon Zensur?",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "kennzeichnen",
+      "word": "kennzeichnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "signaler, étiqueter",
+      "example": "Falschmeldungen sollten deutlich gekennzeichnet werden.",
+      "note": "die Kennzeichnung",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "klarname",
+      "word": "Klarname",
+      "article": "der",
+      "plural": "Klarnamen",
+      "partOfSpeech": "noun",
+      "translation": "le vrai nom (en ligne)",
+      "example": "Sollte man im Netz nur mit seinem Klarnamen schreiben dürfen?",
+      "note": "die Klarnamenpflicht",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "anonymitaet",
+      "word": "Anonymität",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’anonymat",
+      "example": "Die Anonymität schützt Menschen, die Missstände melden.",
+      "note": "anonym : anonyme",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "beleidigen",
+      "word": "beleidigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "insulter, offenser",
+      "example": "Wer andere im Netz beleidigt, kann angezeigt werden.",
+      "note": "die Beleidigung",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "recherchieren",
+      "word": "recherchieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "enquêter, se documenter",
+      "example": "Für den Artikel hat sie zwei Wochen recherchiert.",
+      "note": "die Recherche",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "redaktion",
+      "word": "Redaktion",
+      "article": "die",
+      "plural": "Redaktionen",
+      "partOfSpeech": "noun",
+      "translation": "la rédaction",
+      "example": "Die Lokalredaktion berichtet über die Gemeinderatssitzung.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "eingestellt-werden",
+      "word": "eingestellt werden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "cesser de paraître, être arrêté",
+      "example": "Die Lokalzeitung wurde im letzten Jahr eingestellt.",
+      "note": "einstellen : arrêter (aussi : embaucher)",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "gut-schlecht-abschneiden",
+      "word": "gut / schlecht abschneiden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "obtenir de bons / mauvais résultats",
+      "example": "Bei solchen Tests wollen alle gut abschneiden.",
+      "note": "séparable : ab|schneiden ; hat abgeschnitten",
+      "audio": {
+        "media": "b2-medien-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-medien-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: ein Forumsbeitrag und ein Diskussionsbeitrag",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: ein Forumsbeitrag und ein Diskussionsbeitrag",
+        "description": "MODELL: EIN FORUMSBEITRAG MIT EIGENER MEINUNG\n[fr?] Modèle : une contribution argumentée à un forum\nIm Forum einer Stadtzeitung wird diskutiert, ob Smartphones an Schulen verboten werden sollten. Holger hat geschrieben: „Ein komplettes Verbot ist die einzige Lösung. Die Kinder können sich sonst nicht konzentrieren.“ Lesen Sie die Antwort von Carlotta und achten Sie darauf, wie sie Holgers Meinung wiedergibt. [fr?] Sur le forum d’un journal local, on débat de l’interdiction des smartphones à l’école. Lisez la réponse de Carlotta et observez comment elle rapporte l’avis de Holger.\n\nRe: Handyverbot an Schulen?\nIch verfolge diese Diskussion schon eine Weile und möchte nun auch meine Sicht beitragen. Holger schreibt, ein komplettes Verbot sei die einzige Lösung, weil sich die Kinder sonst nicht konzentrieren könnten. Dass Handys im Unterricht stören, sehe ich genauso. Ein generelles Verbot halte ich trotzdem für den falschen Weg.\nErstens lernen Jugendliche den verantwortungsvollen Umgang mit dem Smartphone nicht, indem man es ihnen einfach wegnimmt. Gerade in der Schule könnten sie üben, Quellen zu prüfen und Falschmeldungen zu erkennen. Zweitens nutzen viele Lehrkräfte das Handy sinnvoll im Unterricht, zum Beispiel für kurze Umfragen oder Recherchen.\nZwar brauchen Kinder auch Pausen vom Bildschirm, aber dafür reichen klare Regeln: Im Unterricht bleibt das Handy in der Tasche, außer die Lehrkraft erlaubt es ausdrücklich, und in den Pausen der unteren Klassen gilt eine handyfreie Zeit.\nKurz gesagt: Regeln ja, Verbot nein. Was meint ihr, wäre so ein Kompromiss an euren Schulen umsetzbar?\nCarlotta M.\n\nAUFBAU\n[fr?] Structure\n1. Einstieg: an die Diskussion anknüpfen. [fr?] Entrée en matière : se rattacher à la discussion.\n2. Fremde Meinung wiedergeben, im Konjunktiv I: „Holger schreibt, … sei …“. [fr?] Rapporter l’avis d’un autre au Konjunktiv I.\n3. Eigene Position klar nennen. [fr?] Annoncer clairement sa position.\n4. Zwei Argumente mit Beispielen („Erstens …, zweitens …“). [fr?] Deux arguments avec exemples.\n5. Gegenargument einräumen und entkräften („Zwar …, aber …“). [fr?] Concéder un contre-argument, puis le réfuter.\n6. Fazit und Frage an das Forum. [fr?] Conclusion et question au forum.\n\nREDEMITTEL\n[fr?] Formules utiles\n• Anknüpfen: Ich verfolge diese Diskussion schon eine Weile. · Ich möchte auf den Beitrag von … eingehen. [fr?] Se rattacher à la discussion.\n• Wiedergeben: … schreibt, … sei … · Laut … · … ist der Meinung, man müsse … [fr?] Rapporter un avis.\n• Position: Ich halte … für … · Meiner Ansicht nach … [fr?] Prendre position.\n• Einräumen: Zwar …, aber … · Es stimmt, dass …, trotzdem … [fr?] Concéder.\n• Schließen: Kurz gesagt: … · Was meint ihr? [fr?] Conclure.\n\nMODELL: IN EINER DISKUSSION WIEDERGEBEN UND ANTWORTEN\n[fr?] Modèle : rapporter et répondre dans un débat\nBei einer Podiumsdiskussion geht es darum, ob Plattformen Falschmeldungen löschen müssen. Hören Sie, wie Bente Marquardt die Aussage von Herrn Gräf wiedergibt, teilweise zustimmt, widerspricht, ein Beispiel gibt und einen Vorschlag macht. [fr?] Lors d’un débat public sur la suppression des fausses informations, écoutez comment Bente Marquardt rapporte, concède, objecte, illustre et propose.\n• Wiedergeben: Herr Gräf hat vorhin gesagt, jedes Löschen sei Zensur. [fr?] Rapporter.\n• Verständnis zeigen: Ich verstehe, dass ihm … wichtig ist. Das ist sie mir auch. [fr?] Montrer de la compréhension.\n• Widersprechen: Aber eine erfundene Behauptung ist keine Meinung. [fr?] Objecter.\n• Vorschlagen: Mein Vorschlag wäre: … So schützen wir … und … [fr?] Proposer.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-modell-audio",
+          "caption": "Der Beitrag von Bente Marquardt",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-medien-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+        "description": "Hören Sie das Argument. Welche Reaktion passt am besten? [fr?] Écoutez l’argument. Quelle réaction convient le mieux ?\n\nSITUATION\n[fr?] La situation\nBei einer Podiumsdiskussion in der Stadtbibliothek geht es um Falschmeldungen im Netz. Hören Sie jede Äußerung und wählen Sie die Reaktion, die sachlich, höflich und konstruktiv ist. [fr?] Lors d’un débat public à la bibliothèque municipale sur les fausses informations, choisissez à chaque fois la réaction factuelle, polie et constructive.\nSprechen Sie danach vier Reaktionen laut nach. [fr?] Répétez ensuite quatre réactions à voix haute.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-diskussion-satz1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-satz2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-satz3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-satz4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-medien-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Äußerung 1 (Herr Gräf): Was antworten Sie? [fr?] Intervention 1 (M. Gräf) : que répondez-vous ?",
+          "explanation": "Die passende Reaktion erkennt den Wert der Meinungsfreiheit an und unterscheidet dann zwischen Meinung und erfundener Tatsache. Die anderen Antworten übertreiben, wischen das Argument weg oder greifen die Person an. [fr?] Distinguer opinion et fait inventé, sans attaquer la personne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Genau, und deshalb sollte man im Internet am besten gar nichts mehr schreiben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zensur gibt es bei uns nicht, das ist doch völliger Unsinn, Herr Gräf.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Meinungsfreiheit ist wichtig, aber erfundene Tatsachen sind keine Meinung.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Was Sie denken, interessiert hier ehrlich gesagt niemanden so richtig.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Äußerung 2 (Frau Mensah): Was antworten Sie? [fr?] Intervention 2 (Mme Mensah) : que répondez-vous ?",
+          "explanation": "Frau Mensah spricht nur von sich selbst. Eine gute Reaktion lässt ihre Erfahrung gelten („Das mag für Sie gelten“) und erweitert den Blick auf andere Menschen. Die übrigen Antworten verallgemeinern, schließen sie aus oder reden von sich. [fr?] Admettre son cas, puis élargir à la situation générale.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das mag für Sie gelten, aber viele informieren sich nur über soziale Netzwerke.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Seriöse Zeitungen lügen doch genauso, das weiß inzwischen wirklich jeder hier.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dann haben Sie ja Glück gehabt und brauchen hier eigentlich nicht mitzureden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zeitungen lese ich nie, dafür habe ich neben der Arbeit einfach keine Zeit.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Äußerung 3 (Herr Hollmann): Was antworten Sie? [fr?] Intervention 3 (M. Hollmann) : que répondez-vous ?",
+          "explanation": "Die beste Antwort räumt einen Teil ein (Überzeugte ändern ihre Meinung selten) und widerspricht dann mit einem Unterschied: Wer noch unentschlossen ist, kann sich durch Fakten überzeugen lassen. Die anderen Antworten stimmen ohne Nachdenken zu, weichen aus oder unterstellen etwas. [fr?] Concéder une partie, puis nuancer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Stimmt, Lügen sind eben einfach viel spannender als die langweilige Wahrheit.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Faktenchecks lese ich auch nie, die sind mir meistens viel zu lang und kompliziert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Woher wollen Sie das denn wissen? Sie verbreiten doch selbst ständig Lügen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Überzeugte vielleicht nicht, aber viele Unentschlossene lassen sich überzeugen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Äußerung 4 (Moderatorin): Was antworten Sie? [fr?] Intervention 4 (animatrice) : que répondez-vous ?",
+          "explanation": "Gesucht ist eine Lösung, die zwei Ziele verbindet: Falschmeldungen bremsen und die Meinungsfreiheit schützen. Kennzeichnen statt löschen tut beides. Ein Totalverbot widerspricht der Meinungsfreiheit, die anderen Antworten weichen aus. [fr?] Une solution qui concilie les deux objectifs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Lösung gibt es nicht, deshalb sollten wir lieber aufhören zu diskutieren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man könnte Falschmeldungen deutlich kennzeichnen, statt sie sofort zu löschen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Am besten verbieten wir die sozialen Netzwerke einfach ganz und für immer.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Darüber sollen die Politiker entscheiden, nicht wir hier in diesem Saal.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Meinungsfreiheit ist wichtig, aber erfundene Tatsachen sind keine Meinung.",
+          "accept": [
+            "Meinungsfreiheit ist wichtig, aber erfundene Tatsachen sind keine Meinung."
+          ],
+          "explanation": "Betonen Sie die Gegenüberstellung: „MEInungsfreiheit … erFUNdene TATsachen … keine MEInung“. Vor „aber“ eine kurze Pause. [fr?] Accentuez l’opposition ; pause avant « aber ».",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Das mag für Sie gelten, aber viele informieren sich nur über soziale Netzwerke.",
+          "accept": [
+            "Das mag für Sie gelten, aber viele informieren sich nur über soziale Netzwerke."
+          ],
+          "explanation": "„Das mag für Sie gelten“ ist eine höfliche Einräumung: Die Stimme bleibt oben, dann folgt das Gegenargument. „Netzwerke“ wird auf der ersten Silbe betont. [fr?] Concession polie ; accent sur NETZ-werke.",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Überzeugte vielleicht nicht, aber viele Unentschlossene lassen sich durchaus überzeugen.",
+          "accept": [
+            "Überzeugte vielleicht nicht, aber viele Unentschlossene lassen sich durchaus überzeugen."
+          ],
+          "explanation": "Achten Sie auf die Wortfamilie: überzeugt, überzeugen; „Unentschlossene“ wird auf der ersten Silbe betont: UN-entschlossene. „Durchaus“ verstärkt die Aussage. [fr?] Accent sur UN- ; « durchaus » = tout à fait.",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Man könnte Falschmeldungen deutlich kennzeichnen, statt sie sofort zu löschen.",
+          "accept": [
+            "Man könnte Falschmeldungen deutlich kennzeichnen, statt sie sofort zu löschen."
+          ],
+          "explanation": "Ein Vorschlag im Konjunktiv II (könnte). Nach „statt“ folgt ein Infinitiv mit „zu“ am Satzende. „Kennzeichnen“ wird auf der ersten Silbe betont. [fr?] Proposition au Konjunktiv II ; statt … zu + infinitif.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: ein Interview in indirekter Rede wiedergeben",
+      "estimatedMinutes": 16,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: ein Interview in indirekter Rede wiedergeben",
+        "description": "SITUATION\n[fr?] La situation\nIhr Sprachkurs gibt einen Newsletter heraus. Sie haben ein Interview mit der Faktenprüferin Ida Kirchhoff gelesen und sollen für den Newsletter darüber berichten. Im Bericht stehen ihre Aussagen in indirekter Rede. [fr?] Votre cours de langue publie une lettre d’information. Vous rapportez une interview de la vérificatrice de faits Ida Kirchhoff, au discours indirect.\n\nDAS INTERVIEW\n[fr?] L’interview\nFrage: Wie viele Meldungen prüfen Sie pro Tag?\nIda Kirchhoff: Unser Team prüft etwa zwanzig Meldungen am Tag. Die meisten kommen von Leserinnen und Lesern, die uns etwas Verdächtiges schicken.\nFrage: Wie gehen Sie vor?\nIda Kirchhoff: Zuerst suchen wir die ursprüngliche Quelle. Bei Fotos machen wir eine Rückwärtssuche. Oft zeigt sich, dass ein Bild schon Jahre alt ist oder aus einem anderen Land stammt.\nFrage: Was ist die größte Schwierigkeit?\nIda Kirchhoff: Die Zeit. Eine Lüge ist in zehn Sekunden geteilt, für eine gründliche Prüfung brauchen wir manchmal zwei Tage.\nFrage: Was raten Sie den Menschen?\nIda Kirchhoff: Teilen Sie nichts, nur weil es Sie wütend macht. Fragen Sie sich: Wer hat das geschrieben, und woher weiß diese Person das?\nFrage: Werden Sie oft angegriffen?\nIda Kirchhoff: Ja, leider. Wir bekommen fast jeden Tag beleidigende Nachrichten. Aber ich habe gelernt, damit umzugehen.\n\nSTRATEGIE\n[fr?] Stratégie\n• Nicht jede Frage wiedergeben, sondern die wichtigsten Antworten zusammenfassen. [fr?] Ne pas reprendre chaque question : résumer les réponses principales.\n• Abwechslungsreiche Redeverben benutzen: erklären, betonen, raten, einräumen. [fr?] Varier les verbes introducteurs.\n• Perspektive anpassen: „unser Team“ → ihr Team, „ich“ → sie. [fr?] Adapter les pronoms.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-mediation-interview",
+          "caption": "Interview mit Ida Kirchhoff",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Bericht mit den Verben im Konjunktiv. [fr?] Complétez le compte rendu avec les verbes au subjonctif.",
+          "text": "Frau Kirchhoff erklärte, ihr Team [[1]] etwa zwanzig Meldungen am Tag. Die meisten [[2]] von Leserinnen und Lesern. Zuerst [[3]] man die ursprüngliche Quelle. Oft zeige sich, dass ein Bild schon Jahre alt [[4]] oder aus einem anderen Land [[5]].",
+          "explanation": "Singular: Konjunktiv I aus Stamm + -e (prüfe, suche, stamme), bei „sein“: sei. „Die meisten kommen“ ist Plural; der Konjunktiv I „kommen“ sähe aus wie der Indikativ, deshalb Konjunktiv II: kämen. Aus „wir suchen“ wird im Bericht „man suche“. [fr?] prüfe, suche, stamme, sei ; pluriel : kämen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "prüfe"
+              ],
+              "hint": "prüfen",
+              "size": 6
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kämen"
+              ],
+              "hint": "kommen",
+              "size": 6
+            },
+            {
+              "id": "3",
+              "accept": [
+                "suche"
+              ],
+              "hint": "suchen",
+              "size": 6
+            },
+            {
+              "id": "4",
+              "accept": [
+                "sei"
+              ],
+              "hint": "sein",
+              "size": 4
+            },
+            {
+              "id": "5",
+              "accept": [
+                "stamme"
+              ],
+              "hint": "stammen",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Satz gibt ihren Rat richtig wieder? [fr?] Quelle phrase rapporte correctement son conseil ?",
+          "explanation": "Eine Aufforderung gibt man mit „solle“ + Infinitiv wieder; das „Sie“ der direkten Anrede wird zu „man“ bzw. „einen“. Die erste Antwort behält den Imperativ, die dritte mischt Indikativ und direkte Anrede, die vierte verändert die Bedeutung. [fr?] Conseil rapporté : man solle … ; « Sie » devient « man / einen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie riet, teilen Sie nichts, nur weil es Sie wütend macht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie riet, man solle nichts teilen, nur weil es einen wütend mache.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie riet, man soll nichts teilen, nur weil es Sie wütend gemacht hat.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie riet, man hätte nichts geteilt, weil es einen wütend mache.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz für den Bericht. [fr?] Formez une phrase pour le compte rendu.",
+          "answers": [
+            [
+              "Sie",
+              "betonte,",
+              "dass",
+              "ihr Team",
+              "für eine gründliche Prüfung",
+              "manchmal",
+              "zwei Tage",
+              "brauche."
+            ],
+            [
+              "Sie",
+              "betonte,",
+              "dass",
+              "ihr Team",
+              "manchmal",
+              "für eine gründliche Prüfung",
+              "zwei Tage",
+              "brauche."
+            ]
+          ],
+          "explanation": "Mit „dass“ steht das Verb im Konjunktiv I am Ende: brauche. Aus „wir“ wird „ihr Team“. Die Angaben „für eine gründliche Prüfung“ und „manchmal“ können im Mittelfeld ihre Reihenfolge tauschen. [fr?] Avec « dass », verbe à la fin ; deux ordres possibles au milieu."
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Wie werden diese Stellen aus dem Interview im Bericht wiedergegeben? Ordnen Sie zu. [fr?] Comment ces passages de l’interview sont-ils rapportés ? Associez.",
+          "explanation": "Im Bericht spricht nicht mehr Frau Kirchhoff, sondern die Berichtende: unser → ihr, ich → sie, wir → sie. Im Singular steht der Konjunktiv I (prüfe, habe), im Plural der Konjunktiv II, weil der Konjunktiv I dem Indikativ gleicht (kämen, bekämen). Eine Aufforderung wird mit „solle“ wiedergegeben. [fr?] Pronoms adaptés ; Konjunktiv I au singulier, Konjunktiv II au pluriel ; ordre rapporté avec « solle ».",
+          "pairs": [
+            {
+              "left": "Unser Team prüft …",
+              "right": "Ihr Team prüfe …"
+            },
+            {
+              "left": "Die meisten kommen von Lesern.",
+              "right": "Die meisten kämen von Lesern."
+            },
+            {
+              "left": "Teilen Sie nichts!",
+              "right": "Man solle nichts teilen."
+            },
+            {
+              "left": "Wir bekommen beleidigende Nachrichten.",
+              "right": "Sie bekämen beleidigende Nachrichten."
+            },
+            {
+              "left": "Ich habe gelernt, damit umzugehen.",
+              "right": "Sie habe gelernt, damit umzugehen."
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Werden Sie oft angegriffen?“ Wie lautet die Frage im Bericht? [fr?] Comment la question est-elle rapportée ?",
+          "explanation": "Eine Ja-Nein-Frage gibt man mit „ob“ wieder, das Verb steht am Ende im Konjunktiv I: ob sie oft angegriffen werde. „Wenn“ ist eine Bedingung, „dass“ leitet keine Fragen ein. [fr?] Question fermée rapportée : ob.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Journalistin fragte, dass sie oft angegriffen werde.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Journalistin fragte, wenn sie oft angegriffen werde.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Journalistin fragte, was sie oft angegriffen werde.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Journalistin fragte, ob sie oft angegriffen werde.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz fasst ihre Antwort zu den Angriffen richtig zusammen? [fr?] Quelle phrase résume correctement sa réponse sur les attaques ?",
+          "explanation": "„Wir bekommen fast jeden Tag beleidigende Nachrichten. Aber ich habe gelernt, damit umzugehen.“ Die Zusammenfassung muss beides wiedergeben. Die anderen Sätze verdrehen die Aussage oder widersprechen dem Interview. [fr?] Résumer fidèlement les deux idées.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sagte, sie bekomme fast täglich Beleidigungen, könne aber damit umgehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie sagte, sie bekomme fast nie Beleidigungen, weil sie gut damit umgehe.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sagte, sie prüfe wegen der vielen Angriffe keine Meldungen mehr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sagte, ihr Team bekomme kaum Nachrichten von Lesern und Leserinnen.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler in Berichten und Forumsbeiträgen",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler in Berichten und Forumsbeiträgen",
+        "description": "Diese Sätze stammen aus Berichten und Forumsbeiträgen von Kursteilnehmenden. Finden Sie die richtige Form. [fr?] Ces phrases viennent de comptes rendus et de messages de forum d’apprenants. Trouvez la forme correcte.\n\nKORREKTURZEICHEN\n[fr?] Les codes de correction\nSt = Stellung im Satz · G = Grammatik · W = Wortschatz · R = Rechtschreibung · A = Register (du oder Sie) [fr?] St = place des mots ; G = grammaire ; W = vocabulaire ; R = orthographe ; A = registre",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie den Konjunktiv I. [fr?] G : complétez au Konjunktiv I.",
+          "text": "Der Minister sagte, er [[1]] keine Zeit für ein Interview. · Die Sprecherin meinte, die Zahlen [[2]] noch nicht bekannt.",
+          "explanation": "Für die 3. Person Singular von „haben“ heißt der Konjunktiv I „habe“. „Sein“ bildet im Plural „seien“, das sich deutlich vom Indikativ „sind“ unterscheidet und deshalb bleibt. [fr?] er habe ; sie seien.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "habe"
+              ],
+              "hint": "haben",
+              "size": 5
+            },
+            {
+              "id": "2",
+              "accept": [
+                "seien"
+              ],
+              "hint": "sein",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie die Ersatzform im Konjunktiv II. [fr?] G : complétez avec la forme de remplacement.",
+          "text": "Die Schülerinnen erklärten, sie [[1]] zu wenig Zeit für Hausaufgaben. · Viele Nutzer sagen, sie [[2]] nicht, wer ihre Daten speichert.",
+          "explanation": "Im Plural sind „sie haben“ und „sie wissen“ im Konjunktiv I identisch mit dem Indikativ. Deshalb nimmt man den Konjunktiv II: hätten, wüssten. Ein typischer Fehler ist, den Indikativ stehen zu lassen. [fr?] sie haben → hätten ; sie wissen → wüssten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hätten"
+              ],
+              "hint": "haben",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wüssten"
+              ],
+              "hint": "wissen",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "St: Bilden Sie den Satz richtig. [fr?] St : remettez les mots dans le bon ordre.",
+          "answers": [
+            [
+              "Der Studie",
+              "zufolge",
+              "erkennen",
+              "viele",
+              "Jugendliche",
+              "Falschmeldungen",
+              "nur selten",
+              "im Netz."
+            ],
+            [
+              "Der Studie",
+              "zufolge",
+              "erkennen",
+              "viele",
+              "Jugendliche",
+              "nur selten",
+              "Falschmeldungen",
+              "im Netz."
+            ]
+          ],
+          "explanation": "„Zufolge“ steht nach dem Nomen: der Studie zufolge. Die ganze Gruppe steht auf Position 1, das Verb „erkennen“ folgt sofort. Ein typischer Fehler ist „Zufolge der Studie …“ nach dem Muster von „laut“. [fr?] « zufolge » se place après le nom."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "W: Ergänzen Sie die Präposition. [fr?] W : complétez avec la préposition.",
+          "text": "Eine Leserin hat die Redaktion [[1]] einen Fehler im Artikel hingewiesen. · Man sollte sich nicht blind [[2]] Suchmaschinen verlassen.",
+          "explanation": "Beide Verben verlangen „auf“ + Akkusativ: jemanden auf etwas hinweisen, sich auf etwas verlassen. Die Präposition lässt sich nicht aus dem Französischen ableiten. [fr?] signaler quelque chose à quelqu’un = jemanden auf etwas hinweisen ; compter sur = sich verlassen auf.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "A: Welcher Einstieg passt zu einem sachlichen Forumsbeitrag? [fr?] A : quelle entrée en matière convient à un message de forum argumenté ?",
+          "explanation": "Ein Forumsbeitrag ist persönlich, aber sachlich: Er knüpft an die Diskussion an und kündigt eine abgewogene Position an. Die erste und vierte Antwort sind abwertend oder nachlässig, die dritte ist für ein Forum zu förmlich (Brief an eine Behörde). [fr?] Registre : personnel mais argumenté.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo Leute, schon wieder so ein total dummes Thema hier im Forum!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich kann die Sorge vieler Eltern verstehen, sehe aber auch Chancen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sehr geehrte Damen und Herren, hiermit teile ich Ihnen mit, dass …",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Also, ich sag mal so: Keine Ahnung, aber ich schreib trotzdem was.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "Vergangenheit in der indirekten Rede: habe + Partizip II (geteilt). „Teilen“ bildet das Perfekt mit „haben“, daher nicht „sei“. „Hätte … geteilt haben“ verdoppelt das Hilfsverb, „habe … teilen“ hat kein Partizip. [fr?] er habe … geteilt.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er behauptete, er hätte die Nachricht nicht geteilt haben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er behauptete, er habe die Nachricht nicht teilen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er behauptete, er habe die Nachricht nicht geteilt.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er behauptete, er sei die Nachricht nicht geteilt.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-medien-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: eine Radiodebatte – wer sagt was?",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: eine Radiodebatte – wer sagt was?",
+        "description": "PRÜFUNGSTRAINING HÖREN\n[fr?] Entraînement à l’examen : écoute\nSie hören eine Diskussion im Radio zum Thema „Brauchen wir die Lokalzeitung noch?“. Die Moderatorin Katja Hensel diskutiert mit dem Lokalredakteur Rüdiger Feldmann und mit Dana Kaltenbach, Gründerin einer Nachbarschafts-App. Wer sagt was? Zu jeder Aussage passt genau eine Person. [fr?] Vous entendez un débat radio : « A-t-on encore besoin du journal local ? ». Qui dit quoi ? Une seule personne par affirmation.\n\nZEIT\n[fr?] Temps\nEtwa 20 Minuten: zwei Minuten, um die Aussagen zu lesen, dann die Diskussion (etwa drei Minuten) zweimal. [fr?] Environ 20 minutes : deux minutes de lecture, puis le débat (trois minutes environ) deux fois.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Lesen Sie die Aussagen vorher und überlegen Sie: Wer würde das wahrscheinlich sagen? [fr?] Lisez les affirmations avant et anticipez : qui dirait cela ?\n2. Achtung: Die Aussagen benutzen andere Wörter als die Sprechenden. Auch die Moderatorin kann eine Meinung äußern, zum Beispiel in einer kritischen Frage. [fr?] Les affirmations reformulent ; l’animatrice peut aussi exprimer un point de vue dans une question critique.\n3. Wenn jemand zustimmt („Da widerspreche ich gar nicht“), gehört die ursprüngliche Aussage trotzdem der anderen Person. [fr?] Quand quelqu’un approuve, l’idée appartient toujours à celui qui l’a formulée.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-pruefung-audio",
+          "caption": "Streitfrage: Brauchen wir die Lokalzeitung noch?",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Ohne Lokalredaktion kontrolliert niemand mehr, was in der Gemeinde passiert.“ [fr?] Qui dit cela ?",
+          "explanation": "Feldmann: „Wer berichtet denn über die Sitzung des Gemeinderats …?“ und „die Verwaltung [wird] schlechter kontrolliert“. Kaltenbach stimmt zwar zu („Da widerspreche ich gar nicht“), aber die Aussage stammt von ihm. [fr?] Idée de Feldmann, approuvée ensuite par Kaltenbach.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Auch der Austausch unter Nachbarn ist eine Form lokaler Information.“ [fr?] Qui dit cela ?",
+          "explanation": "Kaltenbach über ihre App: „Das ist doch auch lokale Information.“ Feldmann widerspricht direkt: „Das ist Austausch, aber kein Journalismus.“ [fr?] Kaltenbach défend la valeur des échanges entre voisins.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Staatliches Geld für Medien, die den Staat kontrollieren, wirkt widersprüchlich.“ [fr?] Qui dit cela ?",
+          "explanation": "Die Moderatorin fragt kritisch: „Eine Förderung vom Staat für Zeitungen, die den Staat kontrollieren sollen: Ist das nicht ein Widerspruch?“ Feldmann antwortet darauf und verteidigt die Förderung. [fr?] La question critique vient de l’animatrice.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wer sagt das? „In einer App kann jeder unbelegte Behauptungen verbreiten.“ [fr?] Qui dit cela ?",
+          "explanation": "Feldmann: „In Ihrer App kann jeder alles behaupten. Wer prüft denn, ob eine Meldung stimmt?“ Kaltenbach antwortet, die Nutzer korrigierten sich gegenseitig. [fr?] Critique de Feldmann envers l’appli.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Werbeeinnahmen allein reichen nicht, um Journalismus zu bezahlen.“ [fr?] Qui dit cela ?",
+          "explanation": "Kaltenbach: „Die Frage ist nur, wer das bezahlt. Werbung allein reicht dafür nicht.“ Feldmann sagt danach allgemeiner, gute Recherche koste Geld, spricht aber nicht über Werbung. [fr?] C’est Kaltenbach qui parle de la publicité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Öffentliche Finanzierung und Unabhängigkeit schließen sich nicht aus.“ [fr?] Qui dit cela ?",
+          "explanation": "Feldmann nennt als Beispiel den öffentlich-rechtlichen Rundfunk: Öffentliches Geld und Unabhängigkeit „müssen sich nicht ausschließen“. Kaltenbach ist „skeptischer“. [fr?] Feldmann cite l’exemple de l’audiovisuel public.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Viele Leser würden für Berichte über ihr eigenes Viertel bezahlen.“ [fr?] Qui dit cela ?",
+          "explanation": "Kaltenbach: „Viele zahlen gern ein paar Euro im Monat, wenn sie merken, dass die Berichte ihr eigenes Viertel betreffen.“ Sie setzt auf Stiftungen und Leser statt auf staatliche Förderung. [fr?] Financement par les lecteurs : idée de Kaltenbach.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Moderatorin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rüdiger Feldmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dana Kaltenbach",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: ein Forumsbeitrag zu sozialen Netzwerken",
+      "estimatedMinutes": 28,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: ein Forumsbeitrag zu sozialen Netzwerken",
+        "description": "SITUATION\n[fr?] La situation\nDas Onlinemagazin Ihrer Stadt stellt jede Woche eine Frage zur Diskussion. Diese Woche lautet sie: „Sollen soziale Netzwerke erst ab 16 Jahren erlaubt sein?“ Zwei Personen haben schon geantwortet. [fr?] Le magazine en ligne de votre ville soumet chaque semaine une question au débat : « Les réseaux sociaux devraient-ils être autorisés seulement à partir de 16 ans ? » Deux personnes ont déjà répondu.\n\nDIE BEITRÄGE\n[fr?] Les messages\nAntje, Mutter von zwei Kindern: Ja, unbedingt! Meine Tochter ist zwölf und hängt jeden Abend stundenlang am Handy. Seit sie in sozialen Netzwerken ist, vergleicht sie sich ständig mit anderen. Eine klare Altersgrenze würde uns Eltern helfen, Nein zu sagen.\nLevin, 17: Ein Verbot bringt nichts. Wer unter 16 ist, gibt einfach ein falsches Alter an. Außerdem halten viele von uns über die Netzwerke Kontakt zu Freunden, die weit weg wohnen. Besser wäre es, in der Schule zu lernen, wie man die Apps vernünftig nutzt.\n\nSO GEHEN SIE VOR\n[fr?] Démarche\n1. Planen (6 Minuten): Wie ist Ihre Position? Welches Argument von Antje oder Levin greifen Sie auf? Welche zwei eigenen Argumente haben Sie? [fr?] Planifier (6 minutes) : votre position, l’argument repris, deux arguments personnels.\n2. Schreiben (17 Minuten): Folgen Sie dem Aufbau aus Carlottas Beitrag. [fr?] Écrire (17 minutes) : suivez la structure de la contribution de Carlotta.\n3. Prüfen (5 Minuten): Lesen Sie mit der Checkliste. Stimmen die Formen der indirekten Rede? [fr?] Vérifier (5 minutes) : relisez avec la liste ; les formes du discours indirect sont-elles justes ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-schreiben-forum",
+          "caption": "Diskussion der Woche",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie einen Beitrag für das Forum (150 bis 250 Wörter). Nennen Sie Ihre Meinung zur Altersgrenze. Geben Sie die Meinung von Antje oder Levin in indirekter Rede wieder und reagieren Sie darauf. Begründen Sie Ihre Position mit mindestens zwei Argumenten und einem Beispiel, gehen Sie auf ein Gegenargument ein und schließen Sie mit einem Fazit. [fr?] Écrivez une contribution de 150 à 250 mots : votre avis, l’opinion d’Antje ou de Levin rapportée au discours indirect et votre réaction, deux arguments et un exemple, un contre-argument pris en compte, une conclusion.",
+          "maxChars": 2400,
+          "minWords": 150
+        },
+        "checklist": [
+          "Ich knüpfe an die Diskussion an und nenne meine Position. [fr?] Je me rattache à la discussion et j’annonce ma position.",
+          "Ich gebe eine Meinung aus dem Forum in indirekter Rede wieder. [fr?] Je rapporte un avis du forum au discours indirect.",
+          "Ich begründe mit zwei Argumenten und einem Beispiel. [fr?] Je justifie avec deux arguments et un exemple.",
+          "Ich gehe auf ein Gegenargument ein („Zwar …, aber …“). [fr?] Je prends en compte un contre-argument.",
+          "Mein Beitrag hat Absätze und ein klares Fazit. [fr?] Ma contribution a des paragraphes et une conclusion claire."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabe: Position, eine Forumsmeinung in indirekter Rede, zwei Argumente mit Beispiel, Gegenargument, Fazit [fr?] Tâche : position, avis rapporté, arguments, contre-argument, conclusion",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-medien-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: eine Diskussion über Klarnamen im Netz",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: eine Diskussion über Klarnamen im Netz",
+        "description": "SITUATION\n[fr?] La situation\nIn einer Diskussionsrunde der Volkshochschule geht es um die Frage, ob man im Internet nur noch mit seinem echten Namen schreiben dürfen sollte. Hören Sie die beiden Positionen. Dann sind Sie an der Reihe. [fr?] Dans un débat organisé par l’université populaire, on se demande s’il faudrait écrire en ligne uniquement sous son vrai nom. Écoutez les deux positions ; ensuite, c’est à vous.\n\nDIE POSITIONEN\n[fr?] Les positions\n• Herr Hollmann: für eine Klarnamenpflicht, weil Menschen mit echtem Namen weniger beleidigen. [fr?] M. Hollmann : pour l’obligation du vrai nom, qui réduirait les insultes.\n• Frau Mensah: dagegen, weil manche Menschen den Schutz der Anonymität brauchen und Beleidigungen auch mit echtem Namen vorkommen. [fr?] Mme Mensah : contre, car certains ont besoin de l’anonymat et on insulte aussi sous son vrai nom.\n\nIHR BEITRAG\n[fr?] Votre intervention\n• Geben Sie die beiden Positionen kurz wieder, auch im Konjunktiv I: „Herr Hollmann meint, …“. [fr?] Résumez brièvement les deux positions, au Konjunktiv I.\n• Sagen Sie Ihre Meinung und begründen Sie sie mit mindestens zwei Argumenten. [fr?] Donnez votre avis avec au moins deux arguments.\n• Gehen Sie auf einen Einwand ein und schlagen Sie einen Kompromiss vor. [fr?] Répondez à une objection et proposez un compromis.\n\nVORBEREITUNG\n[fr?] Préparation\nHören Sie noch einmal das Modell von Bente Marquardt. Überlegen Sie sich Stichwörter, aber sprechen Sie frei, etwa zwei bis drei Minuten. [fr?] Réécoutez le modèle de Bente Marquardt. Préparez des mots-clés, mais parlez librement, deux à trois minutes environ.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-atelier-sprechen-positionen",
+          "caption": "Diskussionsrunde: Klarnamen im Netz?",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Nehmen Sie an der Diskussion teil (zwei bis drei Minuten). Geben Sie die Positionen von Herrn Hollmann und Frau Mensah kurz wieder, sagen Sie begründet Ihre Meinung, reagieren Sie auf einen Einwand und machen Sie einen Kompromissvorschlag. [fr?] Participez au débat (deux à trois minutes) : rapportez les deux positions, donnez votre avis argumenté, répondez à une objection et proposez un compromis.",
+          "maxSeconds": 180
+        },
+        "written": null,
+        "checklist": [
+          "Ich gebe beide Positionen wieder („… meint, … sei …“). [fr?] Je rapporte les deux positions.",
+          "Ich begründe meine Meinung mit zwei Argumenten. [fr?] Je justifie mon avis par deux arguments.",
+          "Ich reagiere höflich auf einen Einwand. [fr?] Je réponds poliment à une objection.",
+          "Ich schlage einen konkreten Kompromiss vor. [fr?] Je propose un compromis concret."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabe: beide Positionen wiedergegeben, Meinung mit zwei Argumenten, Einwand und Kompromiss [fr?] Tâche : positions rapportées, avis argumenté, objection, compromis",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-medien-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: Medien und Vorbereitung auf die Zwischenbilanz",
+      "estimatedMinutes": 7,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: Medien und Vorbereitung auf die Zwischenbilanz",
+        "description": "Lesen Sie die Ziele der beiden Module „Medien“. Was können Sie schon sicher? Was möchten Sie noch üben? [fr?] Relisez les objectifs des deux modules « Medien ». Qu’est-ce qui est acquis ? Que voulez-vous encore travailler ?\n\nICH KANN …\n[fr?] Je peux…\n• Ich kann Artikel und Meldungen über Medien verstehen und erkennen, wer was behauptet. [fr?] Je peux comprendre articles et dépêches sur les médias et repérer qui affirme quoi.\n• Ich kann wiedergeben, was andere gesagt haben, im Konjunktiv I und mit „laut“ oder „zufolge“. [fr?] Je peux rapporter des propos au Konjunktiv I et avec laut ou zufolge.\n• Ich kann einen argumentierenden Forumsbeitrag schreiben und dabei auf andere Beiträge eingehen. [fr?] Je peux écrire une contribution argumentée à un forum en réagissant aux autres messages.\n• Ich kann in einer Diskussion Positionen wiedergeben, widersprechen und einen Kompromiss vorschlagen. [fr?] Je peux rapporter des positions, objecter et proposer un compromis dans un débat.\n• Ich kann in einer Radiodebatte erkennen, wer welche Meinung vertritt. [fr?] Je peux repérer qui défend quelle opinion dans un débat radio.\n\nNÄCHSTER SCHRITT: DIE ZWISCHENBILANZ\n[fr?] Prochaine étape : le bilan intermédiaire\nNach diesem Modul kommt die Zwischenbilanz zu den Modulen 1 bis 12: Lebenswege, Arbeitswelt, Bildung, Gesundheit, Wohnen und Medien. Sie dauert 75 Minuten und prüft Lesen, Hören, Schreiben und Sprechen. Sie entscheidet nicht über das Bestehen, sondern zeigt Ihnen, was Sie vor der zweiten Hälfte des Kurses wiederholen sollten. [fr?] Après ce module vient le bilan intermédiaire sur les modules 1 à 12. Il dure 75 minutes et porte sur la lecture, l’écoute, l’écrit et l’oral. Il ne valide rien : il montre ce qu’il faut revoir avant la seconde moitié du cours.\n\nSO BEREITEN SIE SICH VOR\n[fr?] Comment vous préparer\n• Grammatik: Lesen Sie die Regeln der sechs Themenmodule noch einmal: Konjunktiv II der Vergangenheit (Lebenswege), Passiv mit Modalverb und Passiversatz (Arbeitswelt), Partizipialattribut und Nominalisierung (Bildung), indem, sodass und subjektive Modalverben (Gesundheit), Genitivpräpositionen und Nomen-Verb-Verbindungen (Wohnen), Konjunktiv I (Medien). [fr?] Grammaire : relisez les règles des six modules de thème.\n• Schreiben: Wiederholen Sie die Modelle der Werkstätten: E-Mail mit Rat, formeller Brief, Forumsbeitrag. Achten Sie auf Aufbau und Register. [fr?] Écrit : revoyez les modèles des ateliers (courriel de conseil, lettre formelle, forum).\n• Sprechen: Üben Sie einen Vortrag mit Gliederung und einen Diskussionsbeitrag mit Einwand und Kompromiss. [fr?] Oral : entraînez-vous à un exposé structuré et à une intervention avec objection et compromis.\n• Hören und Lesen: Machen Sie die Prüfungstrainings noch einmal und achten Sie auf Ihre Zeit. [fr?] Écoute et lecture : refaites les entraînements à l’examen en surveillant le temps.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-medien-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : une intervention qui rapporte et répond",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Bente Marquardt",
+          "text": "Herr Gräf hat vorhin gesagt, jedes Löschen sei Zensur. Ich verstehe, dass ihm die Meinungsfreiheit wichtig ist. Das ist sie mir auch. Aber eine erfundene Behauptung ist keine Meinung."
+        },
+        {
+          "voice": "frau3",
+          "name": "Bente Marquardt",
+          "text": "Wenn jemand schreibt, das Leitungswasser in unserer Stadt sei vergiftet, dann kann das Panik auslösen, und zwar ganz real. Trotzdem bin ich nicht dafür, dass die Plattformen alles allein entscheiden."
+        },
+        {
+          "voice": "frau3",
+          "name": "Bente Marquardt",
+          "text": "Mein Vorschlag wäre: Falschmeldungen werden deutlich gekennzeichnet, und gelöscht wird nur, was gegen Gesetze verstößt. So schützen wir die Meinungsfreiheit und bremsen trotzdem die Lügen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-satz1",
+      "kind": "audio",
+      "title": "Débat : argument 1",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Gräf",
+          "text": "Wenn Plattformen Beiträge löschen, ist das Zensur. Jeder muss sagen dürfen, was er denkt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-satz2",
+      "kind": "audio",
+      "title": "Débat : argument 2",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Mensah",
+          "text": "Ich lese sowieso nur seriöse Zeitungen. Falschmeldungen betreffen mich überhaupt nicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-satz3",
+      "kind": "audio",
+      "title": "Débat : argument 3",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Herr Hollmann",
+          "text": "Faktenchecks bringen nichts. Wer an eine Lüge glauben will, glaubt sie trotzdem."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-satz4",
+      "kind": "audio",
+      "title": "Débat : question de l’animatrice",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Moderatorin",
+          "text": "Was wäre aus Ihrer Sicht eine Lösung, die auch die Meinungsfreiheit schützt?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-mediation-interview",
+      "kind": "image",
+      "title": "Interview avec une vérificatrice de faits",
+      "alt": "Interview écrite d’Ida Kirchhoff, vérificatrice de faits : vingt vérifications par jour, recherche de la source d’origine, manque de temps, conseils, messages insultants.",
+      "image": {
+        "layout": "messages",
+        "title": "Interview: Ida Kirchhoff, Faktenprüferin",
+        "icon": "search",
+        "messages": [
+          {
+            "side": "left",
+            "text": "Wie viele Meldungen prüfen Sie pro Tag?"
+          },
+          {
+            "side": "right",
+            "text": "Unser Team prüft etwa zwanzig Meldungen am Tag. Die meisten kommen von Leserinnen und Lesern, die uns etwas Verdächtiges schicken."
+          },
+          {
+            "side": "left",
+            "text": "Wie gehen Sie vor?"
+          },
+          {
+            "side": "right",
+            "text": "Zuerst suchen wir die ursprüngliche Quelle. Bei Fotos machen wir eine Rückwärtssuche. Oft zeigt sich, dass ein Bild schon Jahre alt ist oder aus einem anderen Land stammt."
+          },
+          {
+            "side": "left",
+            "text": "Was ist die größte Schwierigkeit?"
+          },
+          {
+            "side": "right",
+            "text": "Die Zeit. Eine Lüge ist in zehn Sekunden geteilt, für eine gründliche Prüfung brauchen wir manchmal zwei Tage."
+          },
+          {
+            "side": "left",
+            "text": "Was raten Sie den Menschen? Und werden Sie oft angegriffen?"
+          },
+          {
+            "side": "right",
+            "text": "Teilen Sie nichts, nur weil es Sie wütend macht. Fragen Sie sich: Wer hat das geschrieben? – Und ja, leider. Wir bekommen fast jeden Tag beleidigende Nachrichten. Aber ich habe gelernt, damit umzugehen."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-medien-atelier-pruefung-audio",
+      "kind": "audio",
+      "title": "Débat radiophonique : a-t-on encore besoin du journal local ?",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Willkommen zur „Streitfrage“. Immer mehr Lokalzeitungen werden eingestellt; in manchen Landkreisen gibt es gar keine mehr. Ist das ein Verlust für die Demokratie, oder informieren wir uns heute einfach anders? Darüber diskutiere ich mit Rüdiger Feldmann, seit fünfundzwanzig Jahren Lokalredakteur, und mit Dana Kaltenbach, die eine Nachbarschafts-App gegründet hat."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Herr Feldmann, warum braucht es die Lokalzeitung noch?"
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Weil sonst niemand mehr hinschaut. Wer berichtet denn über die Sitzung des Gemeinderats am Dienstagabend, wenn es keine Lokalredaktion mehr gibt? Untersuchungen deuten darauf hin, dass dort, wo Lokalzeitungen verschwinden, weniger Menschen wählen gehen und die Verwaltung schlechter kontrolliert wird."
+        },
+        {
+          "voice": "frau3",
+          "name": "Dana Kaltenbach",
+          "text": "Da widerspreche ich gar nicht. Aber seien wir ehrlich: Die meisten jungen Leute lesen keine Zeitung mehr, weder auf Papier noch online. In unserer App tauschen sich jeden Tag über zwanzigtausend Menschen aus: über Baustellen, Veranstaltungen, verlorene Katzen. Das ist doch auch lokale Information."
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Das ist Austausch, aber kein Journalismus. In Ihrer App kann jeder alles behaupten. Wer prüft denn, ob eine Meldung stimmt?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Dana Kaltenbach",
+          "text": "Unsere Nutzerinnen und Nutzer korrigieren sich oft gegenseitig, und offensichtliche Falschmeldungen löschen wir. Aber Sie haben recht: Eine Recherche über die Finanzen der Stadt kann eine App nicht leisten."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Herr Feldmann, sind die Lokalzeitungen an ihrer Lage nicht auch selbst schuld? Viele haben das Internet lange verschlafen."
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Das will ich gar nicht bestreiten. Wir haben zu lange gedacht, die Leute würden die gedruckte Zeitung schon weiter abonnieren. Heute machen wir Podcasts und einen Newsletter, und gerade der Newsletter wird erstaunlich gut gelesen."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Frau Kaltenbach, wäre es denkbar, dass beides zusammenkommt? Also Journalistinnen und Journalisten, die in Ihrer App arbeiten?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Dana Kaltenbach",
+          "text": "Absolut. Wir sprechen gerade mit einer Redaktion über eine Zusammenarbeit. Die Frage ist nur, wer das bezahlt. Werbung allein reicht dafür nicht."
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Und genau da liegt das Problem. Gute Recherche kostet Geld. Ich halte es deshalb für richtig, über eine öffentliche Förderung für Lokaljournalismus nachzudenken, unabhängig organisiert, damit die Politik keinen Einfluss nimmt."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Eine Förderung vom Staat für Zeitungen, die den Staat kontrollieren sollen: Ist das nicht ein Widerspruch?"
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Auf den ersten Blick schon. Aber der öffentlich-rechtliche Rundfunk zeigt ja, dass öffentliches Geld und Unabhängigkeit sich nicht ausschließen müssen."
+        },
+        {
+          "voice": "frau3",
+          "name": "Dana Kaltenbach",
+          "text": "Da bin ich skeptischer. Ich würde eher auf Stiftungen und auf die Leserinnen und Leser selbst setzen. Viele zahlen gern ein paar Euro im Monat, wenn sie merken, dass die Berichte ihr eigenes Viertel betreffen."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Zum Schluss: Was wünschen Sie sich in fünf Jahren?"
+        },
+        {
+          "voice": "mann",
+          "name": "Rüdiger Feldmann",
+          "text": "Dass jede Region mindestens eine unabhängige Redaktion hat."
+        },
+        {
+          "voice": "frau3",
+          "name": "Dana Kaltenbach",
+          "text": "Und dass diese Redaktion dort ist, wo die Menschen ohnehin sind: auf dem Handy."
+        },
+        {
+          "voice": "frau",
+          "name": "Katja Hensel",
+          "text": "Vielen Dank Ihnen beiden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-schreiben-forum",
+      "kind": "image",
+      "title": "Forum : les réseaux sociaux à partir de 16 ans ?",
+      "alt": "Fil de forum « Soziale Netzwerke erst ab 16? » : une mère favorable à une limite d’âge, un lycéen de 17 ans opposé à une interdiction.",
+      "image": {
+        "layout": "forum",
+        "title": "Diskussion der Woche: Soziale Netzwerke erst ab 16?",
+        "posts": [
+          {
+            "author": "Antje, Mutter von zwei Kindern",
+            "text": "Ja, unbedingt! Meine Tochter ist zwölf und hängt jeden Abend stundenlang am Handy. Seit sie in sozialen Netzwerken ist, vergleicht sie sich ständig mit anderen. Eine klare Altersgrenze würde uns Eltern helfen, Nein zu sagen."
+          },
+          {
+            "author": "Levin, 17",
+            "text": "Ein Verbot bringt nichts. Wer unter 16 ist, gibt einfach ein falsches Alter an. Außerdem halten viele von uns über die Netzwerke Kontakt zu Freunden, die weit weg wohnen. Besser wäre es, in der Schule zu lernen, wie man die Apps vernünftig nutzt."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-medien-atelier-sprechen-positionen",
+      "kind": "audio",
+      "title": "Débat : faut-il imposer son vrai nom en ligne ?",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Moderatorin",
+          "text": "Unser Thema heute: Sollte man im Internet nur noch mit seinem echten Namen schreiben dürfen? Herr Hollmann, bitte."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Hollmann",
+          "text": "Ich bin klar für eine Klarnamenpflicht. Wer mit seinem echten Namen schreibt, überlegt sich zweimal, ob er andere beleidigt. Die Anonymität macht viele Menschen im Netz rücksichtslos."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Mensah",
+          "text": "Ich halte das für gefährlich. Menschen, die über eine Krankheit sprechen oder Missstände in ihrer Firma melden, brauchen den Schutz der Anonymität. Und wer beleidigen will, tut das oft auch mit seinem echten Namen."
+        },
+        {
+          "voice": "frau",
+          "name": "Moderatorin",
+          "text": "Zwei klare Positionen. Und wie sehen Sie das?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Meinungsfreiheit ist wichtig, aber erfundene Tatsachen sind keine Meinung."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das mag für Sie gelten, aber viele informieren sich nur über soziale Netzwerke."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Überzeugte vielleicht nicht, aber viele Unentschlossene lassen sich durchaus überzeugen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: Sollen Plattformen Falschmeldungen löschen?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Man könnte Falschmeldungen deutlich kennzeichnen, statt sie sofort zu löschen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Medien – Werkstatt: Stellung beziehen und Aussagen wiedergeben",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich verfolge diese Diskussion schon eine Weile."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "… schreibt, … sei …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich halte … für …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zwar …, aber …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Kurz gesagt: …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Was meint ihr?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Meinungsfreiheit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Zensur"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kennzeichnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Klarname, die Klarnamen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Anonymität"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beleidigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "recherchieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Redaktion, die Redaktionen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eingestellt werden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gut / schlecht abschneiden"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

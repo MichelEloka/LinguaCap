@@ -1,0 +1,1628 @@
+{
+  "id": "b2-wissenschaft-atelier",
+  "title": "Wissenschaft – Werkstatt: berichten, vereinfachen, vortragen",
+  "objective": "Rédiger le compte rendu d’une conférence à partir de notes, vulgariser un texte scientifique pour un collégien, défendre un point de vue nuancé sur la recherche spatiale, s’entraîner à l’écoute d’un exposé (format B2) et présenter une invention en trois à quatre minutes.",
+  "prerequisites": [
+    "b2-wissenschaft"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, conférence et notes sont fictives.",
+    "Texte de médiation sur le sens magnétique des oiseaux migrateurs rédigé pour LinguaCap d’après l’état général des connaissances (mécanisme encore à l’étude). Repères historiques arrondis : voitures électriques vers 1900, visiophonie présentée dans les années 1960."
+  ],
+  "layer": "content/b/source/b2/b2-wissenschaft-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "bericht",
+      "word": "Bericht",
+      "article": "der",
+      "plural": "Berichte",
+      "partOfSpeech": "noun",
+      "translation": "le compte rendu, le rapport",
+      "example": "Für den Kursblog schreibe ich einen Bericht über den Vortrag.",
+      "note": "berichten über + accusatif",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "vortrag",
+      "word": "Vortrag",
+      "article": "der",
+      "plural": "Vorträge",
+      "partOfSpeech": "noun",
+      "translation": "la conférence, l’exposé",
+      "example": "Der Vortrag war gut besucht.",
+      "note": "einen Vortrag halten : faire un exposé",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "referent",
+      "word": "Referent",
+      "article": "der",
+      "plural": "Referenten",
+      "partOfSpeech": "noun",
+      "translation": "l’intervenant, le conférencier",
+      "example": "Der Referent beantwortete im Anschluss viele Fragen.",
+      "note": "n-Deklination : den, dem, des Referenten · féminin : die Referentin",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "im-mittelpunkt-stand",
+      "word": "Im Mittelpunkt stand …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "au centre se trouvait …",
+      "example": "Im Mittelpunkt stand die Frage, warum sich manche Erfindungen spät durchsetzen.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "erlaeutern",
+      "word": "erläutern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "expliquer (en détail)",
+      "example": "Die Referentin erläuterte, wie das Projekt funktioniert.",
+      "note": "die Erläuterung",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "betonen",
+      "word": "betonen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "souligner",
+      "example": "Er betonte, dass eine Idee allein nicht genüge.",
+      "note": "souvent suivi du discours indirect (Konjunktiv I)",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "laut",
+      "word": "laut",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "selon, d’après",
+      "example": "Laut dem Referenten fuhr um 1900 jedes dritte Auto elektrisch.",
+      "note": "+ datif (ou génitif) ; souvent sans article : laut Studie",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "im-anschluss-an",
+      "word": "im Anschluss an",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à la suite de, après",
+      "example": "Im Anschluss an den Vortrag wurden viele Fragen gestellt.",
+      "note": "+ accusatif · im Anschluss : ensuite",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "zusammenfassend-laesst-sich-sagen-dass",
+      "word": "Zusammenfassend lässt sich sagen, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "en résumé, on peut dire que …",
+      "example": "Zusammenfassend lässt sich sagen, dass der Vortrag sehr anschaulich war.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "innovation",
+      "word": "Innovation",
+      "article": "die",
+      "plural": "Innovationen",
+      "partOfSpeech": "noun",
+      "translation": "l’innovation",
+      "example": "Eine Innovation ist eine Erfindung, die sich verbreitet.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-verbreiten",
+      "word": "sich verbreiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se répandre",
+      "example": "Die Videotelefonie hat sich sehr schnell verbreitet.",
+      "note": "die Verbreitung",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "voraussetzung",
+      "word": "Voraussetzung",
+      "article": "die",
+      "plural": "Voraussetzungen",
+      "partOfSpeech": "noun",
+      "translation": "la condition préalable",
+      "example": "Schnelles Internet war die Voraussetzung für Videoanrufe.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "veranschaulichen",
+      "word": "veranschaulichen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "illustrer, rendre concret",
+      "example": "Ein Beispiel veranschaulicht die Idee.",
+      "note": "anschaulich : concret, parlant",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "vereinfachen",
+      "word": "vereinfachen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "simplifier",
+      "example": "Für Kinder muss man einen Fachtext stark vereinfachen.",
+      "note": "die Vereinfachung",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "fachbegriff",
+      "word": "Fachbegriff",
+      "article": "der",
+      "plural": "Fachbegriffe",
+      "partOfSpeech": "noun",
+      "translation": "le terme technique",
+      "example": "Erklären Sie jeden Fachbegriff mit einfachen Worten.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "mit-anderen-worten",
+      "word": "Mit anderen Worten: …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "autrement dit : …",
+      "example": "Mit anderen Worten: Die Vögel sehen das Magnetfeld vielleicht.",
+      "note": "pour reformuler",
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "etwas-auf-den-punkt-bringen",
+      "word": "etwas auf den Punkt bringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "résumer l’essentiel en peu de mots",
+      "example": "Am Ende bringt die Referentin alles auf den Punkt.",
+      "note": null,
+      "audio": {
+        "media": "b2-wissenschaft-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-wissenschaft-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: ein Bericht und ein Kurzvortrag",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: ein Bericht und ein Kurzvortrag",
+        "description": "MODELL: EIN BERICHT ÜBER EINEN VORTRAG\n[fr?] Modèle : le compte rendu d’une conférence\nLesen Sie den Bericht von Aleksandra Brzezińska für den Blog ihres Sprachkurses. Achten Sie darauf, wie sie den Rahmen nennt, den Inhalt wiedergibt und ihre eigene Meinung kennzeichnet. [fr?] Lisez le compte rendu d’Aleksandra Brzezińska pour le blog de son cours. Observez comment elle présente le cadre, rapporte le contenu et signale son avis personnel.\n\nForschen kann jeder – ein Abend über Bürgerwissenschaft\nAm vergangenen Donnerstag fand in der Stadtbibliothek ein Vortrag zum Thema Bürgerwissenschaft statt. Referentin war die Biologin Johanna Riedl, die das Projekt „Summ mit“ leitet. Der Saal war mit rund achtzig Gästen gut gefüllt.\nIm Mittelpunkt stand die Frage, wie Laien zur Forschung beitragen können. Zunächst erläuterte Frau Riedl, wie das Projekt funktioniert: Freiwillige beobachten im Sommer fünfzehn Minuten lang eine blühende Fläche und melden die Insekten über eine App. Anschließend ging sie auf die Qualität der Daten ein. Sie betonte, alle Fotos würden von Fachleuten geprüft; etwa jede zehnte Meldung werde korrigiert.\nBesonders interessant fand ich ein erstes Ergebnis: In Gärten mit heimischen Pflanzen wurden fast doppelt so viele Wildbienen gezählt wie in Gärten mit exotischen Zierpflanzen.\nIm Anschluss an den Vortrag wurden zahlreiche Fragen gestellt, etwa zum Datenschutz. Laut Frau Riedl sind die Daten anonymisiert.\nZusammenfassend lässt sich sagen, dass der Vortrag verständlich und anschaulich war. Wer selbst mitmachen möchte: Die App ist ab dem 1. Juni freigeschaltet.\n\nAUFBAU\n[fr?] Structure\n1. Überschrift: Thema, gern mit einem kurzen Zitat oder einer Frage. [fr?] Titre : le sujet, éventuellement une citation ou une question.\n2. Rahmen: wann, wo, wer, wie viele Gäste (im Präteritum). [fr?] Cadre : quand, où, qui, combien de personnes (au prétérit).\n3. Thema: „Im Mittelpunkt stand …“ [fr?] Sujet : « Au centre se trouvait … »\n4. Inhalt in der Reihenfolge des Vortrags, neutral wiedergegeben: „erläuterte“, „betonte“, „laut …“, oft im Konjunktiv I. [fr?] Contenu dans l’ordre, rapporté de façon neutre, souvent au Konjunktiv I.\n5. Eigene Bewertung, deutlich markiert: „Besonders interessant fand ich …“ [fr?] Avis personnel, clairement signalé.\n6. Schluss: Fazit und ein praktischer Hinweis. [fr?] Conclusion : bilan et information pratique.\n\nRAHMEN NENNEN\n[fr?] Présenter le cadre\n• Am vergangenen Donnerstag fand in … ein Vortrag zum Thema … statt. [fr?] Jeudi dernier a eu lieu à … une conférence sur …\n• Referentin war …, die … [fr?] L’intervenante était …, qui …\nINHALT WIEDERGEBEN\n[fr?] Rapporter le contenu\n• Zunächst erläuterte sie, wie … · Anschließend ging sie auf … ein. [fr?] Elle a d’abord expliqué comment … · Elle a ensuite abordé …\n• Sie betonte, die Daten seien anonymisiert. · Laut Frau Riedl … [fr?] Elle a souligné que … (Konjunktiv I) · Selon Mme Riedl …\nBEWERTEN UND SCHLIESSEN\n[fr?] Évaluer et conclure\n• Besonders interessant / überzeugend fand ich … [fr?] J’ai trouvé particulièrement intéressant / convaincant …\n• Zusammenfassend lässt sich sagen, dass … [fr?] En résumé, on peut dire que …\n\nMODELL: EINE ERFINDUNG VORSTELLEN\n[fr?] Modèle : présenter une invention\nHören Sie den Kurzvortrag von Clara Ostrowski über den Reißverschluss. Achten Sie auf den Einstieg mit einer Frage, die einfache Erklärung, den Vergleich zwischen früher und heute, die Nachteile und den Schluss mit der eigenen Meinung. [fr?] Écoutez l’exposé de Clara Ostrowski sur la fermeture éclair : question d’ouverture, explication simple, avant et maintenant, inconvénients, conclusion personnelle.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-modell-audio",
+          "caption": "Clara Ostrowski: Der Reißverschluss",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-wissenschaft-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: Raumfahrt, ja oder nein?",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: Raumfahrt, ja oder nein?",
+        "description": "SITUATION\n[fr?] La situation\nIn einer Podiumsdiskussion an der Volkshochschule geht es um die Frage: Ist Raumfahrt Geldverschwendung oder eine Investition in die Zukunft? Sie finden, dass öffentliche Weltraumforschung sinnvoll ist, nehmen aber Kritik ernst. [fr?] Lors d’un débat public, la question est : la recherche spatiale est-elle un gaspillage ou un investissement d’avenir ? Vous la trouvez utile, mais vous prenez les critiques au sérieux.\nHören Sie das Argument. Welche Reaktion passt am besten? [fr?] Écoutez l’argument. Quelle réaction convient le mieux ?\nSprechen Sie danach die guten Reaktionen laut nach. [fr?] Répétez ensuite les bonnes réactions à voix haute.\n\nTIPP\n[fr?] Conseil\nGehen Sie auf das Argument ein, bevor Sie widersprechen. Ein konkretes Beispiel (Wettervorhersage, Navigation) überzeugt mehr als eine allgemeine Behauptung. [fr?] Répondez à l’argument avant de le contredire ; un exemple concret convainc davantage.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-argument1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-argument2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-argument3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-argument4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-wissenschaft-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Argument 1: Welche Reaktion passt am besten? [fr?] Argument 1 : quelle réaction convient le mieux ?",
+          "explanation": "Die gute Reaktion erkennt das Argument an und zeigt mit einem konkreten Beispiel, dass Raumfahrt auch auf der Erde nützt. Die erste weicht aus, die dritte gibt die eigene Position auf, die vierte zieht einen unlogischen Schluss („deshalb“ passt nicht). [fr?] Reconnaître, puis montrer une utilité concrète sur Terre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Krankenhäuser sind doch heute Abend gar nicht unser Thema, also bleiben wir bitte strikt bei der Raumfahrt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist ein wichtiger Punkt. Allerdings nützen Satelliten auch uns hier, etwa bei der Wettervorhersage.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Da haben Sie recht, Geld für Forschung ist eigentlich immer und überall reine Verschwendung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das ist ein wichtiger Punkt, deshalb sollten wir noch viel mehr Raketen ins All schicken.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Argument 2: Welche Reaktion passt am besten? [fr?] Argument 2 : quelle réaction convient le mieux ?",
+          "explanation": "Die gute Reaktion unterscheidet: Weltraumtourismus (privat, für Reiche) ist nicht dasselbe wie öffentliche Forschung. So stimmt man teilweise zu und widerlegt trotzdem den Kern des Arguments. Die vierte Antwort behauptet etwas offensichtlich Falsches. [fr?] Distinguer le tourisme spatial privé de la recherche publique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Den Weltraumtourismus sehe ich auch kritisch, aber die öffentliche Forschung hat ganz andere Ziele.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Reiche Leute haben eben Glück gehabt, und das muss man ihnen ehrlich gesagt auch einfach gönnen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Den Weltraumtourismus sehe ich auch kritisch, deshalb sollten wir die Forschung sofort beenden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das stimmt nicht, denn ins All fliegen heute schon fast alle Menschen, die das möchten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Argument 3: Welche Reaktion passt am besten? [fr?] Argument 3 : quelle réaction convient le mieux ?",
+          "explanation": "„Mag sein“ lässt die Zukunftsfrage offen; „aber“ verschiebt das Gespräch auf den Nutzen heute. Achten Sie im Argument auf das Futur II („werden … tot sein“): eine Prognose über einen Zeitpunkt in der Zukunft. Die vierte Antwort ist unsinnig, die erste weicht aus. [fr?] Concéder, puis parler de l’utilité actuelle.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das kann ich Ihnen leider auch nicht sagen, das müssen die Fachleute irgendwann entscheiden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie haben völlig recht, dann sollten wir lieber gar nicht mehr in die ferne Zukunft investieren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mag sein. Aber manche Technik aus der Raumfahrt ist heute schon in unserem Alltag angekommen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Mag sein, aber bis dahin werden wir den Mars sicher schon längst verlassen haben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Argument 4: Welche Reaktion passt am besten? [fr?] Argument 4 : quelle réaction convient le mieux ?",
+          "explanation": "Auf eine offene Frage antwortet man mit einem begründeten Vorschlag im Konjunktiv II: „Ich fände es sinnvoll, wenn … würden.“ Unabhängige Bewertung ist ein sachliches Kriterium; Losverfahren, Spontanentscheidungen oder Gleichgültigkeit sind es nicht. [fr?] Proposer un critère au Konjunktiv II : une évaluation indépendante.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am besten entscheiden wir das einfach spontan, ohne lange und kompliziert darüber nachzudenken.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist mir ehrlich gesagt egal, Hauptsache, es fliegen auch in Zukunft weiter Raketen ins All.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich fände es sinnvoll, wenn wir einfach jedes Jahr per Los ein Projekt auswählen würden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich fände es sinnvoll, wenn unabhängige Fachleute die Projekte regelmäßig bewerten würden.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Das ist ein wichtiger Punkt. Allerdings nützen Satelliten auch uns hier, etwa bei der Wettervorhersage.",
+          "accept": [
+            "Das ist ein wichtiger Punkt. Allerdings nützen Satelliten auch uns hier, etwa bei der Wettervorhersage."
+          ],
+          "explanation": "„Satelliten“ wird auf der dritten Silbe betont: sa-tel-LI-ten. In „Wettervorhersage“ liegt der Hauptakzent auf dem ersten Teil: WET-ter-vor-her-sa-ge. „Allerdings“ betonen Sie auf der ersten Silbe. [fr?] Accent sur LI dans « Satelliten », sur WET dans « Wettervorhersage ».",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Den Weltraumtourismus sehe ich auch kritisch, aber die öffentliche Forschung hat ganz andere Ziele.",
+          "accept": [
+            "Den Weltraumtourismus sehe ich auch kritisch, aber die öffentliche Forschung hat ganz andere Ziele."
+          ],
+          "explanation": "„Weltraumtourismus“ hat den Hauptakzent auf „Welt“, „kritisch“ ein kurzes i. Das „ö“ in „öffentliche“ ist kurz und offen, die Lippen sind gerundet. Machen Sie vor „aber“ eine kleine Pause. [fr?] « ö » bref et arrondi ; petite pause avant « aber ».",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Mag sein. Aber manche Technik aus der Raumfahrt ist heute schon in unserem Alltag angekommen.",
+          "accept": [
+            "Mag sein. Aber manche Technik aus der Raumfahrt ist heute schon in unserem Alltag angekommen."
+          ],
+          "explanation": "„Mag sein“ klingt gelassen: kurze Pause danach. „Raumfahrt“ wird auf „Raum“ betont, das a in „-fahrt“ ist lang. „Angekommen“: AN-ge-kom-men, das trennbare Präfix trägt den Akzent. [fr?] Les préfixes séparables portent l’accent : AN-gekommen.",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Ich fände es sinnvoll, wenn unabhängige Fachleute die Projekte regelmäßig bewerten würden.",
+          "accept": [
+            "Ich fände es sinnvoll, wenn unabhängige Fachleute die Projekte regelmäßig bewerten würden."
+          ],
+          "explanation": "„Fände“ ist Konjunktiv II von „finden“, mit offenem ä wie in « mère ». „Unabhängige“ wird auf „un“ betont, „regelmäßig“ auf der ersten Silbe mit langem e: RE-gel-mä-ßig. [fr?] « fände » : ä ouvert ; accent sur UN et sur RE.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: einen Fachtext für ein Kind vereinfachen",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: einen Fachtext für ein Kind vereinfachen",
+        "description": "SITUATION\n[fr?] La situation\nIhr Cousin Noah ist dreizehn und muss in der Schule ein Referat über Zugvögel halten. In einem Fachbuch hat er den folgenden Abschnitt gefunden und versteht fast nichts. Erklären Sie ihm das Wichtigste. [fr?] Votre cousin Noah, 13 ans, prépare un exposé sur les oiseaux migrateurs. Il a trouvé ce passage dans un ouvrage spécialisé et n’y comprend presque rien. Expliquez-lui l’essentiel.\n\nORIENTIERUNG BEI ZUGVÖGELN (AUSZUG AUS EINEM FACHBUCH)\nDie Orientierung von Zugvögeln beruht auf mehreren Informationsquellen. Neben dem Sonnenstand und dem Sternenhimmel nutzen viele Arten das Erdmagnetfeld. Als wahrscheinliche Grundlage dieses Magnetsinns gilt ein lichtabhängiger Prozess in der Netzhaut, an dem das Protein Cryptochrom beteiligt ist. Bei der Absorption von blauem Licht entstehen in diesem Protein kurzlebige Molekülpaare, deren Reaktionen durch die Ausrichtung des Magnetfelds beeinflusst werden. Experimentelle Befunde zeigen, dass die Orientierung unter Licht bestimmter Wellenlängen sowie bei schwachen elektromagnetischen Störfeldern beeinträchtigt ist. Ein abschließender Nachweis des Mechanismus steht jedoch noch aus.\n\nAUFGABE\n[fr?] Votre tâche\nWählen Sie aus, was Noah für sein Referat wirklich braucht, ersetzen Sie Fachwörter durch Alltagswörter und formulieren Sie kurze Sätze im Verbalstil. [fr?] Choisissez ce dont Noah a vraiment besoin, remplacez les termes techniques par des mots courants et formulez des phrases courtes au style verbal.\nTIPP\n[fr?] Conseil\nEin Vergleich aus dem Alltag hilft: „eine Art Kompass im Auge“. Sagen Sie aber auch ehrlich, was die Forschung noch nicht weiß. [fr?] Une comparaison du quotidien aide ; dites aussi honnêtement ce que la recherche ignore encore.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-mediation-fachtext",
+          "caption": "Der Abschnitt aus dem Fachbuch",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Machen Sie einfache Notizen für Noah. Ergänzen Sie. [fr?] Prenez des notes simples pour Noah. Complétez.",
+          "text": "Zugvögel orientieren sich an der [[1]], an den Sternen und am [[2]] der Erde · den Magnetsinn haben sie wahrscheinlich im [[3]] · dafür brauchen sie [[4]], vor allem blaues · ganz sicher weiß man das noch [[5]]",
+          "explanation": "Aus „Sonnenstand und Sternenhimmel“ werden „die Sonne“ und „die Sterne“, aus „Netzhaut“ einfach „das Auge“, aus „lichtabhängiger Prozess“ der Satz „dafür brauchen sie Licht“. „Ein abschließender Nachweis steht noch aus“ heißt: Man weiß es noch nicht sicher. [fr?] Remplacer chaque terme technique par un mot courant.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Sonne",
+                "Sonnenstand"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Magnetfeld",
+                "Erdmagnetfeld"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Auge",
+                "in der Netzhaut",
+                "Netzhaut"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Licht"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "nicht"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist für Noahs Referat am wichtigsten? [fr?] Qu’est-ce qui est le plus important pour l’exposé de Noah ?",
+          "explanation": "Für ein Schulreferat zählt die Kernaussage: Vögel nutzen das Magnetfeld, wahrscheinlich über die Augen, und die Forschung ist noch nicht abgeschlossen. Proteinnamen und Wellenlängen sind für einen Dreizehnjährigen zu speziell; die Zahl der Arten steht nicht im Text. [fr?] Garder le message central et l’incertitude de la recherche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der genaue Name des Proteins und die exakte Wellenlänge des blauen Lichts im Auge",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass Vögel das Magnetfeld wohl mit den Augen wahrnehmen und die Forschung noch läuft",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "welche Geräte im Alltag schwache elektromagnetische Felder erzeugen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "wie viele verschiedene Arten von Zugvögeln es heute auf der ganzen Welt überhaupt gibt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Formulieren Sie für Noah einfach: Bilden Sie den Satz. [fr?] Formulez simplement pour Noah : remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Forscher",
+              "glauben,",
+              "dass",
+              "Vögel",
+              "das Magnetfeld",
+              "mit den Augen",
+              "wahrnehmen",
+              "können."
+            ],
+            [
+              "Forscher",
+              "glauben,",
+              "dass",
+              "Vögel",
+              "mit den Augen",
+              "das Magnetfeld",
+              "wahrnehmen",
+              "können."
+            ]
+          ],
+          "explanation": "Aus dem Nominalstil („Als wahrscheinliche Grundlage gilt ein lichtabhängiger Prozess in der Netzhaut“) wird ein einfacher Satz: „Forscher glauben, dass …“ zeigt, dass es eine Vermutung ist. Im dass-Satz stehen Infinitiv und „können“ am Ende; Objekt und Ortsangabe können die Plätze tauschen. [fr?] « Les chercheurs pensent que les oiseaux perçoivent le champ magnétique avec leurs yeux. »"
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Erklären Sie zwei Ausdrücke aus dem Fachtext. Ergänzen Sie. [fr?] Expliquez deux expressions du texte. Complétez.",
+          "text": "„Die Orientierung ist beeinträchtigt“ heißt: Die Vögel finden den Weg dann [[1]]. · „Ein Nachweis steht noch aus“ heißt: Es ist noch nicht [[2]].",
+          "explanation": "„Beeinträchtigt“ ist ein Zustandspassiv: Die Orientierung funktioniert schlechter. „Etwas steht noch aus“ bedeutet: Es fehlt noch. Ein Nachweis fehlt, also ist der Mechanismus nicht bewiesen. [fr?] beeinträchtigt = perturbé ; aussteht = manque encore.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "schlechter",
+                "nicht mehr so gut",
+                "nicht richtig"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bewiesen",
+                "sicher",
+                "nachgewiesen"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz ist für Noah eine gute Erklärung? [fr?] Quelle phrase est une bonne explication pour Noah ?",
+          "explanation": "Ein Vergleich aus dem Alltag („eine Art Kompass“) und die Anrede mit „du“ passen zu einem Dreizehnjährigen. Der erste Satz übernimmt nur den Fachtext, der zweite ist falsch (der Text spricht vom Auge und sagt, dass noch nichts endgültig bewiesen ist), der dritte hilft Noah nicht. [fr?] Une image du quotidien, le tutoiement, et rien de faux.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bei der Absorption von blauem Licht entstehen in einem Protein kurzlebige Molekülpaare.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Vögel haben einen kleinen Magneten im Schnabel, das ist schon lange bewiesen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist viel zu kompliziert für dich, frag lieber einfach deine Lehrerin danach.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Stell dir vor, die Vögel haben im Auge eine Art Kompass, der mit Licht funktioniert.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler in Berichten",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler in Berichten",
+        "description": "Diese Sätze stammen aus Berichten von Kursteilnehmenden. Finden Sie jeweils die richtige Form. [fr?] Ces phrases viennent de comptes rendus d’apprenants. Trouvez chaque fois la forme correcte.\n\nKORREKTURZEICHEN\n[fr?] Les codes de correction\nSt (Wortstellung), G (Grammatik), W (Wortschatz), R (Rechtschreibung), A (Register). Jede Frage übt eines davon. [fr?] Place des mots, grammaire, vocabulaire, orthographe, registre : chaque question en travaille un.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "„Seit Montag“ beschreibt einen Zustand bis heute: Zustandspassiv mit „sind“ + Partizip II. Die erste Form mischt „werden“ und „worden“, die zweite ist Aktiv ohne Objekt, die vierte hat den Infinitiv statt des Partizips. [fr?] « sont publiés depuis lundi » : état → sind veröffentlicht.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Seit Montag werden die Ergebnisse online veröffentlicht worden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Seit Montag haben die Ergebnisse online veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seit Montag sind die Ergebnisse online veröffentlicht.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Seit Montag sind die Ergebnisse online veröffentlichen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "G: Geben Sie die Aussagen im Konjunktiv I wieder. [fr?] G : rapportez les propos au Konjunktiv I.",
+          "text": "Die Referentin erklärte, die Daten [[1]] anonymisiert. · Sie betonte, Bürgerwissenschaft [[2]] die Forschung nicht.",
+          "explanation": "In Berichten gibt man Aussagen anderer oft im Konjunktiv I wieder: sein → sie seien (Plural), ersetzen → sie ersetze (3. Person Singular, Endung -e). So zeigt der Bericht, dass es sich um die Meinung der Referentin handelt. [fr?] Konjunktiv I : discours rapporté, sans prendre position.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "seien"
+              ],
+              "hint": "sein",
+              "size": 6
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ersetze"
+              ],
+              "hint": "ersetzen",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "W: Ergänzen Sie. [fr?] W : complétez.",
+          "text": "[[1]] der Referentin nehmen jedes Jahr mehr Menschen teil. · [[2]] Mittelpunkt des Vortrags stand die Frage, wie Laien forschen können.",
+          "explanation": "„Laut“ (+ Dativ oder Genitiv) nennt die Quelle einer Aussage, ebenso „nach Angaben“. „Im Mittelpunkt stand …“ ist eine feste Wendung, um das Thema zu nennen: „im“ = „in dem“. [fr?] laut = selon ; im Mittelpunkt = au centre.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Laut",
+                "Nach Angaben",
+                "Nach"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Im"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "A: Welche Formulierung passt in einen Bericht? [fr?] A : quelle formulation convient dans un compte rendu ?",
+          "explanation": "Ein Bericht ist sachlich und steht meist im Präteritum: „Der Referent erläuterte …“. „Der Typ“, „quatschen“, „halt“, „und so“ und „voll“ sind Umgangssprache und passen nicht in einen geschriebenen Bericht. [fr?] Registre neutre et prétérit dans un compte rendu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Typ hat dann noch ewig und total begeistert über Autos gequatscht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Referent erläuterte anschließend die Rolle der Infrastruktur.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dann redet er halt so über Tankstellen und Ladesäulen und so.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Und dann kam noch voll das spannende Beispiel.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie den Artikel im Genitiv. [fr?] G : complétez avec l’article au génitif.",
+          "text": "Nach der Begrüßung [[1]] Gäste begann der Vortrag. · Im Anschluss an die Präsentation [[2]] Ergebnisse gab es viele Fragen. · Die Auswertung [[3]] Daten erfolgt im Herbst.",
+          "explanation": "Im Nominalstil steht die Ergänzung eines Nomens im Genitiv. Im Plural ist der Artikel immer „der“: die Begrüßung der Gäste, die Präsentation der Ergebnisse, die Auswertung der Daten. Ein häufiger Fehler ist „von die“ statt des Genitivs. [fr?] Génitif pluriel : der (de les → der).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr?] St : quelle phrase est correcte ?",
+          "explanation": "„Im Anschluss“ besetzt Position 1, das konjugierte „wurden“ folgt sofort, das Subjekt kommt danach, und das Partizip „gestellt“ steht am Satzende. Die erste Antwort übernimmt die französische Wortstellung, die dritte häuft Hilfsverben an. [fr?] Verbe en deuxième position, participe à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Im Anschluss zahlreiche Fragen wurden gestellt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Im Anschluss wurden gestellt zahlreiche Fragen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Im Anschluss sind zahlreiche Fragen gestellt worden sein.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Im Anschluss wurden zahlreiche Fragen gestellt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Der Vortrag",
+              "war",
+              "gut",
+              "besucht,",
+              "und",
+              "alle Plätze",
+              "waren",
+              "besetzt."
+            ]
+          ],
+          "explanation": "Zwei Hauptsätze mit „und“ verbunden, beide im Zustandspassiv: „war gut besucht“, „waren besetzt“. Nach „und“ bleibt die normale Wortstellung: Subjekt, Verb, Partizip. [fr?] « La conférence était bien fréquentée, et toutes les places étaient occupées. »"
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-wissenschaft-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: Hören, ein Vortrag",
+      "estimatedMinutes": 22,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: Hören, ein Vortrag",
+        "description": "PRÜFUNGSTRAINING HÖREN\n[fr?] Entraînement à l’examen : compréhension orale\nSie hören einen Vortrag am Tag der offenen Hochschule. Lösen Sie die Aufgaben 1 bis 7. Sie hören den Vortrag zweimal. [fr?] Vous écoutez une conférence lors d’une journée portes ouvertes. Faites les exercices 1 à 7. Vous l’entendez deux fois.\nZEIT\n[fr?] Temps\nEtwa 20 Minuten. Lesen Sie die Aufgaben vor dem ersten Hören eine Minute lang. [fr?] Environ 20 minutes. Lisez les questions pendant une minute avant la première écoute.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Ein Vortrag ist gegliedert: Achten Sie auf die Ankündigung („Mein Vortrag hat drei Teile“) und auf „erstens“, „zweitens“, „drittens“. [fr?] Une conférence est structurée : repérez l’annonce du plan et les mots « erstens », « zweitens », « drittens ».\n2. Beispiele dienen einer Aussage. Fragen Sie sich beim Hören: Was soll dieses Beispiel zeigen? [fr?] Les exemples illustrent une idée : demandez-vous ce que chaque exemple doit montrer.\n3. Beim zweiten Hören prüfen Sie vor allem die Antworten, bei denen Sie unsicher waren. [fr?] À la deuxième écoute, vérifiez surtout les réponses dont vous n’étiez pas sûr.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-pruefung-audio",
+          "caption": "Vortrag: Warum sich manche Erfindungen spät durchsetzen",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "1. Womit beginnt der Referent seinen Vortrag? [fr?] 1. Par quoi le conférencier commence-t-il ?",
+          "explanation": "Er beginnt mit einer Frage: „Wussten Sie, dass … um das Jahr neunzehnhundert in den USA mehr als jedes dritte Auto elektrisch fuhr?“ Ein überraschender Einstieg weckt das Interesse des Publikums. Über heutige Verkaufszahlen oder sein eigenes Auto spricht er nicht. [fr?] Un fait historique surprenant pour capter l’attention.",
+          "options": [
+            {
+              "id": "a",
+              "label": "mit einer überraschenden Tatsache aus der Geschichte des Autos",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "mit einer persönlichen Geschichte über sein erstes eigenes Auto",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "mit einer Statistik über die Elektroautos, die heute verkauft werden",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "2. Wann spricht der Referent von einer „Innovation“? [fr?] 2. Quand le conférencier parle-t-il d’« innovation » ?",
+          "explanation": "„Von einer Innovation sprechen wir erst, wenn eine neue Technik tatsächlich genutzt wird und sich verbreitet.“ Technisch ausgereift sind viele Erfindungen, aber „sie finden keinen Markt“. Von Patenten ist nicht die Rede. [fr?] Une invention devient innovation quand elle se diffuse.",
+          "options": [
+            {
+              "id": "a",
+              "label": "sobald eine neue Technik zum ersten Mal irgendwo offiziell patentiert worden ist",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "wenn eine Erfindung technisch fehlerfrei und ausgereift ist",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wenn eine neue Technik tatsächlich genutzt wird und sich verbreitet",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "3. Warum verschwanden die frühen Elektroautos? [fr?] 3. Pourquoi les premières voitures électriques ont-elles disparu ?",
+          "explanation": "„Als das Benzinauto in großen Stückzahlen und damit billiger produziert wurde und überall Tankstellen entstanden, war das Elektroauto nicht mehr konkurrenzfähig.“ Die Elektroautos waren im Gegenteil „leise, sauber“. Ein Verbot wird nicht erwähnt. [fr?] Prix plus bas et stations-service partout.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Elektroautos lauter und schmutziger waren als Benzinautos.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil Benzinautos billiger wurden und überall Tankstellen entstanden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil ein Gesetz Elektroautos in den großen Städten verboten hatte.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "4. Was gehört laut Vortrag zum „Umfeld“ einer Innovation? [fr?] 4. D’après l’exposé, qu’est-ce qui fait partie de l’« environnement » d’une innovation ?",
+          "explanation": "„Dazu gehören die Infrastruktur, also Straßen, Leitungen, Tankstellen oder Ladesäulen, außerdem der Preis und die Gewohnheiten der Menschen.“ Achten Sie auf Signalwörter wie „dazu gehören“: Danach folgt oft eine Aufzählung, nach der gefragt wird. [fr?] « dazu gehören » annonce une énumération.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Infrastruktur, der Preis und die Gewohnheiten der Menschen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "vor allem die Erfahrung, das Alter und der gute Ruf des Erfinders",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Zahl der Patente und die Größe der beteiligten Forschungslabore",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "5. Was zeigt das Beispiel der Videotelefonie? [fr?] 5. Que montre l’exemple de la visiophonie ?",
+          "explanation": "Die Technik „war schon vor über sechzig Jahren vorgestellt worden“, wurde aber erst mit schnellem Internet und Smartphones alltäglich. Die Pandemie hat sie nur schnell verbreitet, nicht erfunden. [fr?] Une technique peut exister des décennies avant de se banaliser.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Videotelefonie wurde erst während der Pandemie überhaupt erfunden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Technik kann jahrzehntelang existieren, bevor sie alltäglich wird.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Smartphones haben die Qualität von Videoanrufen kaum spürbar verbessert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "6. Welche Schlussfolgerung zieht der Referent für heute? [fr?] 6. Quelle conclusion le conférencier tire-t-il pour aujourd’hui ?",
+          "explanation": "„Wir müssen gleichzeitig die Infrastruktur aufbauen, die Kosten senken und Vertrauen schaffen.“ Gerade „von selbst“ setzt sich nach seiner Analyse nichts durch. Das Beispiel der Wärmepumpe zeigt: Es braucht auch genug Fachleute für den Einbau. [fr?] Infrastructure, coûts plus bas et confiance, en même temps.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Klimafreundliche Technik setzt sich von selbst durch, wenn sie gut ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wir sollten auf neue Erfindungen warten, statt alte Technik zu fördern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Neue Technik braucht zugleich Infrastruktur, niedrigere Kosten und Vertrauen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "7. Was meint der Referent mit dem Satz „Die Geschichte der Technik ist keine gerade Linie“? [fr?] 7. Que veut dire le conférencier par cette phrase ?",
+          "explanation": "Direkt danach erklärt er: „Ideen verschwinden und kommen zurück, wenn die Zeit reif ist.“ Das Elektroauto ist das beste Beispiel dafür. Ein bildlicher Ausdruck wird in einem Vortrag oft im nächsten Satz erklärt. [fr?] Les idées peuvent disparaître puis revenir quand le contexte est favorable.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Technische Entwicklungen verlaufen immer schneller und ganz ohne jeden Rückschritt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die meisten Erfinder haben ihre Ideen von anderen Erfindern übernommen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ideen können verschwinden und später unter besseren Bedingungen zurückkommen.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-wissenschaft-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: einen Bericht über einen Vortrag schreiben",
+      "estimatedMinutes": 27,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: einen Bericht über einen Vortrag schreiben",
+        "description": "SITUATION\n[fr?] La situation\nSie waren am Samstag beim Tag der offenen Hochschule und haben den Vortrag von Ben Hollstein gehört (siehe Prüfungstraining). Ihr Sprachkurs hat einen Blog, und Sie sollen einen Bericht darüber schreiben. Grundlage sind Ihre Notizen. [fr?] Samedi, vous avez assisté à la conférence de Ben Hollstein lors d’une journée portes ouvertes. Vous écrivez un compte rendu pour le blog de votre cours, à partir de vos notes.\n\nMEINE NOTIZEN\n[fr?] Mes notes\n• Hörsaal 3, ca. 120 Gäste, Vortrag: 45 Minuten\n• Ben Hollstein, Technikhistoriker: Warum setzen sich manche Erfindungen erst spät durch?\n• Elektroautos um 1900: mehr als jedes dritte Auto in den USA → verschwunden → 100 Jahre später zurück\n• Erfindung ≠ Innovation · entscheidend: das Umfeld (Infrastruktur, Preis, Gewohnheiten)\n• Videotelefonie: über 60 Jahre alt, alltäglich erst mit Internet und Smartphone\n• heute: z. B. Wärmepumpen → brauchen genug Fachleute für den Einbau\n• Fragen aus dem Publikum: Ladesäulen auf dem Land? Wasserstoff?\n\nSO GEHEN SIE VOR\n[fr?] Démarche\n1. Planen (7 Minuten): Ordnen Sie die Notizen nach dem Aufbau des Modells: Rahmen, Thema, Inhalt, Bewertung, Schluss. [fr?] Planifier (7 minutes) : classez les notes selon la structure du modèle.\n2. Schreiben (15 Minuten): Machen Sie aus den Stichwörtern ganze Sätze. Geben Sie Aussagen des Referenten mit „laut“, „erläuterte“ oder im Konjunktiv I wieder. [fr?] Écrire (15 minutes) : transformez les mots-clés en phrases ; rapportez les propos avec « laut », « erläuterte » ou au Konjunktiv I.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste. Achten Sie auf das Präteritum und auf Ihre eigene Meinung, die klar markiert sein soll. [fr?] Vérifier (5 minutes) : relisez avec la liste ; prétérit et avis personnel bien signalé.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-schreiben-notizen",
+          "caption": "Meine Notizen zum Vortrag",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie einen Bericht über den Vortrag für den Blog Ihres Sprachkurses (180 bis 250 Wörter). Nennen Sie den Rahmen und das Thema, geben Sie die drei Hauptgedanken mit je einem Beispiel wieder, erwähnen Sie die Fragen aus dem Publikum und schließen Sie mit einer kurzen, deutlich markierten eigenen Bewertung. [fr?] Écrivez un compte rendu de la conférence pour le blog de votre cours (180 à 250 mots) : cadre et sujet, trois idées principales avec un exemple chacune, questions du public, et une brève appréciation personnelle clairement signalée.",
+          "maxChars": 2400,
+          "minWords": 170
+        },
+        "checklist": [
+          "Überschrift und Rahmen: wann, wo, wer, wie viele Gäste [fr?] Titre et cadre : quand, où, qui, combien",
+          "Das Thema ist genannt: „Im Mittelpunkt stand …“ [fr?] Le sujet est annoncé.",
+          "Drei Hauptgedanken, je mit einem Beispiel aus den Notizen [fr?] Trois idées principales, chacune avec un exemple",
+          "Aussagen des Referenten sind neutral wiedergegeben (laut, erläuterte, Konjunktiv I). [fr?] Les propos de l’intervenant sont rapportés de façon neutre.",
+          "Eigene Bewertung am Schluss, klar gekennzeichnet [fr?] Un avis personnel à la fin, clairement signalé"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabe: Rahmen, Thema, drei Hauptgedanken mit Beispielen, Publikum, Bewertung; sachlicher Bericht [fr?] Tâche : cadre, sujet, trois idées, public, avis ; compte rendu neutre",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-wissenschaft-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: eine Erfindung vorstellen",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: eine Erfindung vorstellen",
+        "description": "SITUATION\n[fr?] La situation\nIn Ihrem Deutschkurs gibt es eine Reihe von Kurzvorträgen: „Eine Erfindung, die unseren Alltag verändert hat“. Wählen Sie eine Erfindung und stellen Sie sie in drei bis vier Minuten vor. [fr?] Votre cours organise une série d’exposés : « Une invention qui a changé notre quotidien ». Choisissez-en une et présentez-la en trois à quatre minutes.\n\nZUR AUSWAHL\n[fr?] Au choix\n• die Waschmaschine · das Navigationsgerät · der Kühlschrank · das Internet · eine eigene Idee [fr?] le lave-linge, le GPS, le réfrigérateur, internet, ou votre idée\n\nAUFBAU\n[fr?] Structure\n1. Einstieg mit einer Frage oder einem Beispiel aus dem Alltag [fr?] Ouverture par une question ou un exemple du quotidien\n2. Wie funktioniert die Erfindung? Einfach erklärt, ohne viele Fachwörter [fr?] Comment fonctionne l’invention ? Expliquée simplement\n3. Wie hat sie den Alltag verändert? Vergleichen Sie früher und heute. [fr?] Comment a-t-elle changé le quotidien ? Comparez avant et maintenant.\n4. Nachteile und Kritik: „Zwar …, aber …“ [fr?] Inconvénients et critiques\n5. Ihre Meinung und ein Schluss: „Zusammenfassend lässt sich sagen …“ [fr?] Votre avis et une conclusion\n\nVORBEREITUNG\n[fr?] Préparation\nNehmen Sie sich acht Minuten Zeit und überlegen Sie sich Stichwörter zu jedem Teil. Wie Clara Ostrowski im Modell können Sie mit einer Frage an das Publikum beginnen. [fr?] Prenez huit minutes pour préparer des mots-clés ; vous pouvez ouvrir par une question au public, comme dans le modèle.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-wissenschaft-atelier-sprechen-folie",
+          "caption": "Kurzvortrag: eine Erfindung",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Stellen Sie in drei bis vier Minuten eine Erfindung vor, die unseren Alltag verändert hat. Folgen Sie den fünf Teilen, erklären Sie die Funktion einfach, vergleichen Sie früher und heute und nennen Sie mindestens einen Nachteil, bevor Sie Ihre Meinung sagen. [fr?] Présentez en trois à quatre minutes une invention qui a changé le quotidien : suivez les cinq parties, expliquez simplement son fonctionnement, comparez avant et maintenant et citez au moins un inconvénient avant de donner votre avis.",
+          "maxSeconds": 240
+        },
+        "written": null,
+        "checklist": [
+          "Ich beginne mit einer Frage oder einem Beispiel. [fr?] Je commence par une question ou un exemple.",
+          "Ich erkläre die Funktion einfach und ohne viele Fachwörter. [fr?] J’explique le fonctionnement simplement.",
+          "Ich vergleiche den Alltag früher und heute. [fr?] Je compare le quotidien d’avant et d’aujourd’hui.",
+          "Ich nenne mindestens einen Nachteil („Zwar …, aber …“). [fr?] Je cite au moins un inconvénient.",
+          "Ich schließe mit meiner Meinung und bedanke mich. [fr?] Je conclus par mon avis et je remercie."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabe: fünf Teile in drei bis vier Minuten, einfache Erklärung, Vergleich, Nachteil, Meinung [fr?] Tâche : cinq parties, explication simple, comparaison, inconvénient, avis",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-wissenschaft-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: Wissenschaft und Vermittlung",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: Wissenschaft und Vermittlung",
+        "description": "Lesen Sie die Ziele der beiden Module „Wissenschaft“. Was können Sie schon gut? Was möchten Sie noch üben? [fr?] Relisez les objectifs des deux modules « Wissenschaft ». Que savez-vous déjà bien faire ? Que voulez-vous encore travailler ?\n\nICH KANN …\n[fr?] Je peux…\n• Ich kann eine wissenschaftliche Meldung kritisch lesen und Zusammenhang und Ursache unterscheiden. [fr?] Je peux lire une nouvelle scientifique avec esprit critique.\n• Ich kann einen sachlichen Bericht über einen Vortrag schreiben und Aussagen neutral wiedergeben. [fr?] Je peux écrire un compte rendu neutre d’une conférence.\n• Ich kann einen Fachtext für ein Kind oder einen Laien vereinfachen. [fr?] Je peux simplifier un texte spécialisé pour un enfant ou un profane.\n• Ich kann einem Vortrag folgen und seine Gliederung und Beispiele verstehen. [fr?] Je peux suivre une conférence, son plan et ses exemples.\n• Ich kann eine Erfindung in einem strukturierten Kurzvortrag vorstellen. [fr?] Je peux présenter une invention dans un exposé structuré.\n\nSTRATEGIEN\n[fr?] Stratégies\n• Vermitteln: Fachwörter ersetzen, Nominalstil in kurze Verbalsätze umformen, ehrlich sagen, was unsicher ist. [fr?] Médiation : remplacer les termes techniques, passer au style verbal, signaler l’incertitude.\n• Berichten: Rahmen, Thema, Inhalt in der Reihenfolge, eigene Meinung erst am Ende und deutlich markiert. [fr?] Compte rendu : cadre, sujet, contenu dans l’ordre, avis à la fin.\n• Prüfung Hören: auf die Gliederung achten und sich fragen, was ein Beispiel zeigen soll. [fr?] Examen d’écoute : suivre le plan et la fonction des exemples.\n\nNOCH NICHT SICHER?\n[fr?] Pas encore sûr ?\nZustandspassiv und Nominalstil: Wiederholen Sie die Regel und die Übungen im Modul „Wissenschaft“. Wiedergabe von Aussagen: Lesen Sie den Bericht von Aleksandra Brzezińska noch einmal. Wortstellung in Berichten: Wiederholen Sie die Übung „Korrigieren“. [fr?] Revoyez la règle et les exercices du module « Wissenschaft », relisez le compte rendu modèle et refaites l’exercice de correction.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-wissenschaft-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : extrait d’un exposé sur la fermeture éclair",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Clara Ostrowski",
+          "text": "Guten Tag! Wie oft haben Sie heute schon einen Reißverschluss benutzt? Wahrscheinlich öfter, als Sie denken: an der Jacke, an der Tasche, vielleicht am Mäppchen. Ich möchte Ihnen heute diese kleine Erfindung vorstellen, die unseren Alltag stärker verändert hat, als man glaubt."
+        },
+        {
+          "voice": "frau",
+          "name": "Clara Ostrowski",
+          "text": "Zuerst kurz zur Funktion: Ein Reißverschluss besteht aus zwei Reihen kleiner Zähne und einem Schieber. Wird der Schieber nach oben gezogen, greifen die Zähne ineinander; zieht man ihn nach unten, werden sie wieder getrennt. Das Prinzip ist einfach, aber es hat lange gedauert, bis es zuverlässig funktionierte."
+        },
+        {
+          "voice": "frau",
+          "name": "Clara Ostrowski",
+          "text": "Erfunden wurde der Reißverschluss vor etwa hundertdreißig Jahren. Durchgesetzt hat er sich aber erst Jahrzehnte später, als er billig in großen Mengen hergestellt werden konnte. Vorher schloss man Kleidung mit Knöpfen, Haken oder Bändern, und das dauerte deutlich länger."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau",
+          "name": "Clara Ostrowski",
+          "text": "Natürlich hat die Erfindung auch Nachteile. Wenn ein Reißverschluss kaputtgeht, ist oft das ganze Kleidungsstück unbrauchbar, und viele Menschen werfen es weg, statt es reparieren zu lassen. Zwar ist eine Reparatur meist nicht teuer, aber sie ist mühsam."
+        },
+        {
+          "voice": "frau",
+          "name": "Clara Ostrowski",
+          "text": "Zusammenfassend lässt sich sagen: Der Reißverschluss ist ein gutes Beispiel dafür, dass nicht nur große Erfindungen unseren Alltag prägen. Ich persönlich finde, wir sollten solche kleinen Dinge öfter reparieren, statt sie wegzuwerfen. Vielen Dank fürs Zuhören!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-argument1",
+      "kind": "audio",
+      "title": "Argument 1 : l’argent sur Terre",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Brettschneider",
+          "text": "Wir sollten das Geld lieber für Probleme hier auf der Erde ausgeben, zum Beispiel für Krankenhäuser."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-argument2",
+      "kind": "audio",
+      "title": "Argument 2 : le tourisme spatial",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Lindemann",
+          "text": "Die Raumfahrt bringt doch nur reichen Leuten teure Abenteuerreisen ins All."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-argument3",
+      "kind": "audio",
+      "title": "Argument 3 : Mars, un projet lointain",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Herr Petzold",
+          "text": "Bis Menschen auf dem Mars leben, werden wir alle längst tot sein. Was bringt uns das heute?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-argument4",
+      "kind": "audio",
+      "title": "Argument 4 : choisir les projets",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Frau Oyelaran",
+          "text": "Und wie sollen wir entscheiden, welche Projekte sich wirklich lohnen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-mediation-fachtext",
+      "kind": "image",
+      "title": "Texte scientifique : le sens magnétique des oiseaux migrateurs",
+      "alt": "Extrait d’un ouvrage spécialisé, en allemand technique, sur l’orientation des oiseaux migrateurs grâce au champ magnétique terrestre et sur un mécanisme possible dans la rétine.",
+      "image": {
+        "layout": "document",
+        "icon": "book-open-text",
+        "title": "Orientierung bei Zugvögeln",
+        "subtitle": "Auszug aus einem Fachbuch",
+        "lines": [
+          "Die Orientierung von Zugvögeln beruht auf mehreren Informationsquellen. Neben dem Sonnenstand und dem Sternenhimmel nutzen viele Arten das Erdmagnetfeld.",
+          "Als wahrscheinliche Grundlage dieses Magnetsinns gilt ein lichtabhängiger Prozess in der Netzhaut, an dem das Protein Cryptochrom beteiligt ist.",
+          "Bei der Absorption von blauem Licht entstehen in diesem Protein kurzlebige Molekülpaare, deren Reaktionen durch die Ausrichtung des Magnetfelds beeinflusst werden.",
+          "Experimentelle Befunde zeigen, dass die Orientierung unter Licht bestimmter Wellenlängen sowie bei schwachen elektromagnetischen Störfeldern beeinträchtigt ist. Ein abschließender Nachweis des Mechanismus steht jedoch noch aus."
+        ]
+      }
+    },
+    {
+      "key": "b2-wissenschaft-atelier-pruefung-audio",
+      "kind": "audio",
+      "title": "Exposé : pourquoi certaines inventions s’imposent tard",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Herzlich willkommen zum Tag der offenen Hochschule. Unser nächster Vortrag beschäftigt sich mit der Frage, warum sich manche Erfindungen erst spät durchsetzen. Es spricht der Technikhistoriker Ben Hollstein."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Vielen Dank. Meine Damen und Herren, wussten Sie, dass nach Schätzungen um das Jahr neunzehnhundert in den USA mehr als jedes dritte Auto elektrisch fuhr? Elektroautos waren leise, sauber und leicht zu bedienen. Trotzdem verschwanden sie innerhalb von zwanzig Jahren fast vollständig. Erst hundert Jahre später kamen sie zurück. Wie kann das sein?"
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Mein Vortrag hat drei Teile. Zuerst zeige ich, dass eine gute Idee allein nicht genügt. Dann spreche ich über die Bedingungen, unter denen sich eine Innovation durchsetzt. Und zum Schluss frage ich, was wir daraus für heutige Technologien lernen können."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Erstens: Eine Erfindung ist noch keine Innovation. Von einer Innovation sprechen wir erst, wenn eine neue Technik tatsächlich genutzt wird und sich verbreitet. Viele Erfindungen sind technisch ausgereift, aber sie finden keinen Markt. Beim Elektroauto von damals waren die Batterien schwer und teuer, die Reichweite war gering, und außerhalb der Städte gab es kaum Strom."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Zweitens: Ob sich eine Innovation durchsetzt, hängt weniger von der Technik selbst ab als von ihrem Umfeld. Dazu gehören die Infrastruktur, also Straßen, Leitungen, Tankstellen oder Ladesäulen, außerdem der Preis und die Gewohnheiten der Menschen. Gewohnheiten ändern sich besonders langsam: Viele Menschen kaufen lieber das, was ihre Nachbarn schon haben und kennen."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Als das Benzinauto in großen Stückzahlen und damit billiger produziert wurde und überall Tankstellen entstanden, war das Elektroauto nicht mehr konkurrenzfähig."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Ein zweites Beispiel ist die Videotelefonie. Die Technik war schon vor über sechzig Jahren vorgestellt worden, aber sie war teuer, und kaum jemand hatte ein passendes Gerät. Erst mit schnellem Internet, günstigen Kameras und Smartphones wurde sie alltäglich, und während der Pandemie innerhalb weniger Wochen für Millionen Menschen selbstverständlich."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Drittens: Was folgt daraus für heute? Wenn wir wollen, dass sich klimafreundliche Technologien schnell verbreiten, reicht es nicht, sie zu erfinden. Wir müssen gleichzeitig die Infrastruktur aufbauen, die Kosten senken und Vertrauen schaffen. Eine Wärmepumpe ist nur dann attraktiv, wenn es genug Fachleute gibt, die sie einbauen können."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ben Hollstein",
+          "text": "Lassen Sie mich mit einem Gedanken schließen: Die Geschichte der Technik ist keine gerade Linie. Ideen verschwinden und kommen zurück, wenn die Zeit reif ist. Unsere Aufgabe ist es, die Bedingungen dafür zu schaffen, dass das schneller geht als beim Elektroauto. Vielen Dank für Ihre Aufmerksamkeit."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Vielen Dank, Herr Hollstein. Wir haben jetzt noch etwa zehn Minuten Zeit für Ihre Fragen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-schreiben-notizen",
+      "kind": "image",
+      "title": "Notes prises pendant l’exposé",
+      "alt": "Notes manuscrites sur l’exposé de Ben Hollstein à la journée portes ouvertes : cadre, thème, exemples des voitures électriques et de la visiophonie, conclusions et questions du public.",
+      "image": {
+        "layout": "document",
+        "icon": "notebook-pen",
+        "title": "Meine Notizen zum Vortrag",
+        "subtitle": "Tag der offenen Hochschule, Samstag",
+        "lines": [
+          "Hörsaal 3, ca. 120 Gäste, Vortrag: 45 Minuten",
+          "Ben Hollstein, Technikhistoriker: Warum setzen sich manche Erfindungen erst spät durch?",
+          "Elektroautos um 1900: mehr als jedes dritte Auto in den USA → verschwunden → 100 Jahre später zurück",
+          "Erfindung ≠ Innovation · entscheidend: das Umfeld (Infrastruktur, Preis, Gewohnheiten)",
+          "Videotelefonie: über 60 Jahre alt, alltäglich erst mit Internet und Smartphone",
+          "heute: z. B. Wärmepumpen → brauchen genug Fachleute für den Einbau",
+          "Fragen aus dem Publikum: Ladesäulen auf dem Land? Wasserstoff?"
+        ]
+      }
+    },
+    {
+      "key": "b2-wissenschaft-atelier-sprechen-folie",
+      "kind": "image",
+      "title": "Support de l’exposé : une invention du quotidien",
+      "alt": "Support d’exposé : présenter une invention qui a changé le quotidien (lave-linge, GPS, réfrigérateur, internet ou autre), en cinq parties.",
+      "image": {
+        "layout": "document",
+        "icon": "lightbulb",
+        "title": "Eine Erfindung, die unseren Alltag verändert hat",
+        "subtitle": "Kurzvortrag: 3 bis 4 Minuten",
+        "lines": [
+          "Zur Auswahl: die Waschmaschine · das Navigationsgerät · der Kühlschrank · das Internet · eine eigene Idee",
+          "1. Einstieg mit einer Frage oder einem Beispiel",
+          "2. Wie funktioniert die Erfindung? (einfach erklärt)",
+          "3. Wie hat sie den Alltag verändert? (früher – heute)",
+          "4. Nachteile und Kritik · 5. Ihre Meinung und Schluss"
+        ]
+      }
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: Raumfahrt, ja oder nein?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das ist ein wichtiger Punkt. Allerdings nützen Satelliten auch uns hier, etwa bei der Wettervorhersage."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: Raumfahrt, ja oder nein?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Den Weltraumtourismus sehe ich auch kritisch, aber die öffentliche Forschung hat ganz andere Ziele."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: Raumfahrt, ja oder nein?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mag sein. Aber manche Technik aus der Raumfahrt ist heute schon in unserem Alltag angekommen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: Raumfahrt, ja oder nein?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich fände es sinnvoll, wenn unabhängige Fachleute die Projekte regelmäßig bewerten würden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-wissenschaft-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Wissenschaft – Werkstatt: berichten, vereinfachen, vortragen",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Bericht, die Berichte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vortrag, die Vorträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Referent, die Referenten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Im Mittelpunkt stand …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erläutern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "betonen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "laut"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Anschluss an"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zusammenfassend lässt sich sagen, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Innovation, die Innovationen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verbreiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Voraussetzung, die Voraussetzungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "veranschaulichen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vereinfachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fachbegriff, die Fachbegriffe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mit anderen Worten: …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "etwas auf den Punkt bringen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

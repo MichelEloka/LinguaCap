@@ -1,0 +1,1495 @@
+{
+  "id": "b2-lebenswege-atelier",
+  "title": "Lebenswege – Werkstatt: Erfahrungen erzählen und über Mehrsprachigkeit sprechen",
+  "objective": "Rédiger un récit d’expérience commenté avec le recul, présenter un exposé structuré sur le plurilinguisme, réagir à des arguments dans une discussion, faire le portrait d’une personne à partir de deux sources (allemande et française) et s’entraîner à la lecture d’un article d’opinion.",
+  "prerequisites": [
+    "b2-lebenswege"
+  ],
+  "audioProfile": "b2-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap."
+  ],
+  "layer": "content/b/source/b2/b2-lebenswege-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "erfahrungsbericht",
+      "word": "Erfahrungsbericht",
+      "article": "der",
+      "plural": "Erfahrungsberichte",
+      "partOfSpeech": "noun",
+      "translation": "le récit d’expérience",
+      "example": "Das Magazin sammelt Erfahrungsberichte zum Thema Auswandern.",
+      "note": null,
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "eine-entscheidung-treffen",
+      "word": "eine Entscheidung treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre une décision",
+      "example": "Vor sieben Jahren habe ich eine Entscheidung getroffen, die mein Leben verändert hat.",
+      "note": "jamais « eine Entscheidung nehmen »",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "damals-haette-ich-nie-gedacht-dass",
+      "word": "Damals hätte ich nie gedacht, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À l’époque, je n’aurais jamais pensé que …",
+      "example": "Damals hätte ich nie gedacht, dass ich einmal ein Team leiten würde.",
+      "note": "verbe à la fin après dass",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "rueckblickend-wuerde-ich-sagen",
+      "word": "Rückblickend würde ich sagen, …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Avec le recul, je dirais …",
+      "example": "Rückblickend würde ich sagen, dass es die richtige Entscheidung war.",
+      "note": null,
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "das-hat-mich-viel-kraft-gekostet",
+      "word": "Das hat mich viel Kraft gekostet.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Cela m’a demandé beaucoup d’énergie.",
+      "example": "Die Anerkennung meines Abschlusses hat mich viel Kraft gekostet.",
+      "note": "kosten + accusatif de la personne",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "formalitaeten",
+      "word": "Formalitäten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les formalités",
+      "example": "Klären Sie die Formalitäten so früh wie möglich.",
+      "note": "toujours au pluriel dans ce sens · die Formalität",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "einplanen",
+      "word": "einplanen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prévoir (du temps, de l’argent)",
+      "example": "Planen Sie für die ersten Monate mehr Zeit ein, als Sie glauben.",
+      "note": "séparable : ein|planen",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "geduld-haben-mit",
+      "word": "Geduld haben mit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être patient avec",
+      "example": "Haben Sie Geduld mit sich selbst.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "mein-rat-an-alle-die",
+      "word": "Mein Rat an alle, die …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Mon conseil à tous ceux qui …",
+      "example": "Mein Rat an alle, die auswandern wollen: Lernen Sie die Sprache vorher.",
+      "note": null,
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "in-meinem-vortrag-geht-es-um",
+      "word": "In meinem Vortrag geht es um …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Mon exposé porte sur …",
+      "example": "In meinem Vortrag geht es um Mehrsprachigkeit.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "lassen-sie-mich-mit-beginnen",
+      "word": "Lassen Sie mich mit … beginnen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Permettez-moi de commencer par …",
+      "example": "Lassen Sie mich mit einer persönlichen Erfahrung beginnen.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "ich-komme-jetzt-zu-meinem-naechsten-punkt",
+      "word": "Ich komme jetzt zu meinem nächsten Punkt.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "J’en viens à mon point suivant.",
+      "example": "Ich komme jetzt zu meinem nächsten Punkt: den Vorteilen.",
+      "note": null,
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "zusammenfassend-laesst-sich-sagen-dass",
+      "word": "Zusammenfassend lässt sich sagen, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "En résumé, on peut dire que …",
+      "example": "Zusammenfassend lässt sich sagen, dass Mehrsprachigkeit vor allem eine Chance ist.",
+      "note": "verbe à la fin après dass",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "da-muss-ich-widersprechen",
+      "word": "Da muss ich widersprechen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Là, je dois vous contredire.",
+      "example": "Da muss ich widersprechen: Kinder lernen Deutsch auch in der Kita.",
+      "note": "jemandem widersprechen (datif) · inséparable",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "kurz-gesagt",
+      "word": "Kurz gesagt: …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "En bref : …",
+      "example": "Kurz gesagt: Jede Familie muss ihren eigenen Weg finden.",
+      "note": null,
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "wie-erzaehlt",
+      "word": "Wie … erzählt, …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Comme le raconte …",
+      "example": "Wie seine Schwester erzählt, reparierte er schon als Kind Fahrräder.",
+      "note": "indiquer la source d’une information",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "stolz-sein-auf",
+      "word": "stolz sein auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être fier de",
+      "example": "Sein Vater ist heute sehr stolz auf ihn.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-lebenswege-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-lebenswege-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: ein Erfahrungsbericht und der Anfang eines Vortrags",
+      "estimatedMinutes": 13,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: ein Erfahrungsbericht und der Anfang eines Vortrags",
+        "description": "MODELL 1: EIN ERFAHRUNGSBERICHT\n[fr?] Modèle 1 : un récit d’expérience commenté\nLesen Sie den Beitrag von Ivana Marić im Leserforum eines Magazins. Thema: „Eine Entscheidung, die mein Leben verändert hat“. Achten Sie auf den Aufbau und auf die Formulierungen, mit denen sie zurückblickt. [fr?] Lisez la contribution d’Ivana Marić au forum des lecteurs d’un magazine, sur le thème « Une décision qui a changé ma vie ». Observez la structure et les formules qui lui servent à regarder en arrière.\n\nVor sieben Jahren habe ich eine Entscheidung getroffen, die mein Leben gründlich verändert hat: Ich habe meine Stelle als Bauingenieurin in Split gekündigt und bin nach Stuttgart gezogen. Ein früherer Kollege hatte mir von einer offenen Stelle erzählt, und ich hatte nur drei Wochen Zeit, mich zu entscheiden.\nDie ersten Monate waren schwieriger, als ich erwartet hatte. Mein Abschluss musste erst anerkannt werden, und bis dahin durfte ich nur als Assistentin arbeiten. Außerdem hatte ich Heimweh, vor allem nach dem Meer. Rückblickend hätte ich mich vor dem Umzug besser informieren sollen: Wenn ich gewusst hätte, wie lange die Anerkennung dauert, hätte ich den Antrag schon von Split aus gestellt.\nTrotzdem bereue ich meine Entscheidung nicht. Heute leite ich ein kleines Team, ich habe Freunde gefunden und spreche fast fließend Deutsch. Ich bin froh, diesen Schritt gewagt zu haben, auch wenn er mich viel Kraft gekostet hat.\nMein Rat an alle, die über einen Umzug ins Ausland nachdenken: Klären Sie die Formalitäten so früh wie möglich, und planen Sie für die ersten Monate mehr Zeit und Geld ein, als Sie glauben. Und haben Sie Geduld mit sich selbst.\n\nAUFBAU\n1. Einleitung: die Entscheidung, der Zeitpunkt und die Situation damals. [fr?] Introduction : la décision, le moment et la situation de départ.\n2. Erfahrung: Was ist danach passiert? Was war schwierig? Konkrete Beispiele. [fr?] L’expérience : la suite, les difficultés, des exemples concrets.\n3. Rückblick: Was hätten Sie anders machen sollen? Hier steht der Konjunktiv II der Vergangenheit. [fr?] Le regard rétrospectif : ce que vous auriez dû faire autrement, au Konjunktiv II passé.\n4. Bewertung: Wie sehen Sie die Entscheidung heute? [fr?] Le bilan : comment jugez-vous cette décision aujourd’hui ?\n5. Schluss: ein Rat an die Leserinnen und Leser. [fr?] Conclusion : un conseil aux lecteurs.\n\nEINLEITEN\n[fr?] Introduire\n• Vor … Jahren habe ich eine Entscheidung getroffen, die …\n• Damals hätte ich nie gedacht, dass …\nZURÜCKBLICKEN\n[fr?] Regarder en arrière\n• Rückblickend hätte ich … sollen.\n• Wenn ich gewusst hätte, dass …, hätte ich …\n• Im Nachhinein war das …\nBEWERTEN\n[fr?] Juger\n• Trotzdem bereue ich meine Entscheidung nicht.\n• Ich bin froh, … zu haben, auch wenn …\nRATEN\n[fr?] Conseiller\n• Mein Rat an alle, die …: …\n• Planen Sie … ein, und haben Sie Geduld mit sich selbst.\n\nMODELL 2: DER ANFANG EINES VORTRAGS\n[fr?] Modèle 2 : le début d’un exposé\nHören Sie, wie Mateus Pereira seinen Vortrag über Mehrsprachigkeit beginnt. Er nennt das Thema, beginnt mit einer persönlichen Erfahrung und kündigt dann die drei Teile seines Vortrags an. [fr?] Écoutez comment Mateus Pereira commence son exposé sur le plurilinguisme : il annonce le sujet, part d’une expérience personnelle, puis présente les trois parties de son exposé.\n\nVORTRAGEN\n[fr?] Structurer un exposé\n• In meinem Vortrag geht es um …\n• Lassen Sie mich mit einer persönlichen Erfahrung beginnen.\n• Mein Vortrag hat drei Teile. Zuerst …, danach … und zum Schluss …\n• Ich komme jetzt zu meinem nächsten Punkt.\n• Zusammenfassend lässt sich sagen, dass …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-lebenswege-atelier-modell-audio",
+          "caption": "Mateus Pereira beginnt seinen Vortrag",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-lebenswege-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+        "description": "SITUATION\nIm Stadtteilzentrum findet ein Gesprächsabend statt. Das Thema: „Sollen zugewanderte Familien mit ihren Kindern zu Hause Deutsch sprechen?“ Sie hören vier Beiträge. Wählen Sie jeweils die Reaktion, die am besten passt. [fr?] Une soirée-débat a lieu au centre de quartier sur le thème : « Les familles immigrées doivent-elles parler allemand à la maison avec leurs enfants ? » Vous entendez quatre interventions. Choisissez chaque fois la réaction qui convient le mieux.\nSprechen Sie danach die vier Reaktionen laut nach. Sprechen Sie ruhig und freundlich, auch wenn Sie widersprechen. [fr?] Répétez ensuite les quatre réactions à voix haute, calmement et aimablement, même pour contredire.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-lebenswege-atelier-diskussion-beitrag1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-beitrag2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-beitrag3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-beitrag4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-lebenswege-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Beitrag 1: Sie sind anderer Meinung. Welche Reaktion widerspricht höflich und mit einem Argument? [fr?] Intervention 1 : vous n’êtes pas d’accord. Quelle réaction contredit poliment, avec un argument ?",
+          "explanation": "„Da muss ich widersprechen“ kündigt den Widerspruch höflich an, und nach dem Doppelpunkt folgt das Argument. Die erste Reaktion stimmt zu, die zweite greift die Person an, und die vierte widerspricht, ohne etwas zu begründen. [fr?] On annonce poliment son désaccord, puis on donne un argument après les deux-points. Les autres réactions approuvent, attaquent la personne ou contredisent sans justifier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Genau, und in der Pause sollten die Kinder dann auch wirklich nur Deutsch sprechen dürfen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist doch Unsinn, davon haben Sie offensichtlich überhaupt keine Ahnung.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Da muss ich widersprechen: Deutsch lernen die Kinder auch in der Kita und in der Schule.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Da muss ich widersprechen, aber darüber möchte ich heute lieber nicht reden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Beitrag 2: Sie haben in einer Radiosendung gehört, dass Fachleute das Mischen von Sprachen bei Kindern für normal halten. Sie möchten Herrn Castillo damit beruhigen. Was sagen Sie? [fr?] Intervention 2 : vous avez entendu à la radio que, pour les spécialistes, il est normal qu’un enfant mélange les langues. Vous voulez rassurer M. Castillo avec cette information. Que dites-vous ?",
+          "explanation": "Zuerst zeigen Sie Verständnis („Das verstehe ich“), dann geben Sie die Information weiter: Für Fachleute ist das Mischen kein Zeichen von Verwirrung. Die zweite und die dritte Reaktion widersprechen genau dem, was die Fachleute sagen; die vierte beruhigt niemanden. [fr?] On montre d’abord de la compréhension, puis on transmet l’information des spécialistes : mélanger les langues est normal. Deux réponses la contredisent, la dernière ne rassure personne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das verstehe ich, aber Fachleute sagen, dass das Mischen ganz normal ist.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das verstehe ich, deshalb sollten Sie ab sofort nur noch Deutsch sprechen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ihre Sorge ist berechtigt: Mit drei Sprachen ist jedes Kind überfordert.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das ist Ihre Sache, dazu möchte ich mich lieber nicht äußern.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Beitrag 3: Sie möchten Frau Saarinen mit einer eigenen Erfahrung Mut machen. Welche Reaktion passt? [fr?] Intervention 3 : vous voulez encourager Mme Saarinen en racontant votre propre expérience. Quelle réaction convient ?",
+          "explanation": "„Bei uns war es ähnlich“ zeigt, dass Sie die Situation kennen, und der zweite Satz macht Mut: Es gibt einen Weg zurück zur Familiensprache. Die erste Reaktion macht ihr Vorwürfe, die zweite und die dritte haben mit ihrem Problem nichts zu tun. [fr?] On montre qu’on connaît la situation, puis on encourage : une solution existe. Les autres réactions font des reproches ou sont hors sujet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, da hätten Sie wirklich viel strenger sein müssen, jetzt ist es zu spät.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bei uns war es anders: Unsere Kinder haben nie richtig Deutsch gelernt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das kenne ich gar nicht, meine Kinder sprechen bis heute alle Sprachen perfekt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Bei uns war es ähnlich. Erst die Ferien bei den Großeltern haben das geändert.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Beitrag 4: Der Moderator bittet um eine Zusammenfassung. Was antworten Sie? [fr?] Intervention 4 : le modérateur demande un résumé. Que répondez-vous ?",
+          "explanation": "Eine Zusammenfassung nennt die eigene Position in einem klaren Satz. Die erste Antwort weicht aus, die dritte hat keine Position, und die vierte zählt nur Stichwörter auf, ohne etwas zu behaupten. [fr?] Un résumé formule sa position en une phrase claire. Les autres réponses esquivent, n’ont pas d’avis ou énumèrent des mots sans rien affirmer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kurz gesagt: Es ist ein schwieriges Thema, und alle haben irgendwie ein bisschen recht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kurz gesagt: Eltern sollten die Sprache sprechen, in der sie sich zu Hause fühlen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Kurz gesagt: Dazu habe ich eigentlich gar keine eigene Meinung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Kurz gesagt: erstens die Kita, zweitens die Schule und drittens die Familie.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Da muss ich widersprechen: Deutsch lernen die Kinder auch in der Kita und in der Schule.",
+          "accept": [
+            "Da muss ich widersprechen: Deutsch lernen die Kinder auch in der Kita und in der Schule."
+          ],
+          "explanation": "„widersprechen“ ist untrennbar, die Betonung liegt auf „-spre-“. „Kita“ betonen Sie auf der ersten Silbe, mit langem i. Den Satzakzent setzen Sie auf „auch“: Das ist Ihr Gegenargument. [fr?] widersprechen est inséparable : accent sur « -spre- ». Kita : accent sur la première syllabe, i long. Accent de phrase sur « auch ».",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Das verstehe ich, aber Fachleute sagen, dass das Mischen ganz normal ist.",
+          "accept": [
+            "Das verstehe ich, aber Fachleute sagen, dass das Mischen ganz normal ist."
+          ],
+          "explanation": "„Fachleute“: Betonung auf „Fach-“, das ch klingt wie in „Bach“. „normal“ betonen Sie auf der zweiten Silbe, mit langem a. Nach „Das verstehe ich“ machen Sie eine kleine Pause. [fr?] Accent sur « Fach- » (ch guttural, comme dans « Bach ») ; « normal » accentué sur la deuxième syllabe, a long. Petite pause après « Das verstehe ich ».",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Bei uns war es ähnlich. Erst die Ferien bei den Großeltern haben das geändert.",
+          "accept": [
+            "Bei uns war es ähnlich. Erst die Ferien bei den Großeltern haben das geändert."
+          ],
+          "explanation": "„ähnlich“ mit langem ä und dem ich-Laut am Ende. „Großeltern“: Betonung auf „Groß-“, langes o. „geändert“: Betonung auf „-än-“, hier ist das ä kurz. [fr?] ä long dans « ähnlich », terminé par le son ich ; accent sur « Groß- » (o long) ; dans « geändert », accent sur « -än- », ä bref.",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Kurz gesagt: Eltern sollten die Sprache sprechen, in der sie sich zu Hause fühlen.",
+          "accept": [
+            "Kurz gesagt: Eltern sollten die Sprache sprechen, in der sie sich zu Hause fühlen."
+          ],
+          "explanation": "Nach „Kurz gesagt“ machen Sie eine kleine Pause. „fühlen“ mit langem ü, „zu Hause“ mit Betonung auf „Hau-“. Am Ende geht die Stimme nach unten: Sie stellen Ihre Position fest. [fr?] Petite pause après « Kurz gesagt » ; ü long dans « fühlen » ; accent sur « Hau- ». Voix descendante à la fin : vous affirmez votre position.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-lebenswege-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: ein Porträt aus zwei Quellen",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: ein Porträt aus zwei Quellen",
+        "description": "SITUATION\nDas „Stadtteilblatt Leipzig-Ost“ stellt in jeder Ausgabe einen Menschen aus dem Viertel vor. Sie schreiben das nächste Porträt über Ousmane Sarr, der aus dem Senegal stammt. Sie haben zwei Quellen: einen Auszug aus einem Interview und eine E-Mail seiner Schwester Awa auf Französisch. [fr?] Le journal de quartier présente dans chaque numéro un habitant. Vous écrivez le prochain portrait, celui d’Ousmane Sarr, originaire du Sénégal. Vous disposez de deux sources : un extrait d’interview et un courriel de sa sœur Awa, en français.\nFassen Sie die wichtigsten Informationen aus beiden Quellen auf Deutsch zusammen. Übersetzen Sie nicht Wort für Wort, und sagen Sie, woher eine Information stammt. [fr?] Résumez en allemand les informations essentielles des deux sources. Ne traduisez pas mot à mot, et indiquez d’où vient chaque information.\n\nQUELLE 1: AUS DEM INTERVIEW\n[fr?] Source 1 : extrait de l’interview\n„Ich bin 2009 zum Studium nach Leipzig gekommen, Maschinenbau. Ehrlich gesagt hatte ich mir Deutschland wärmer vorgestellt, und damit meine ich nicht nur das Wetter. Im ersten Winter wäre ich fast zurückgeflogen. Geblieben bin ich wegen meiner Lerngruppe: Drei Kommilitonen haben mich zu sich nach Hause eingeladen, mit mir für die Prüfungen gelernt und mir geholfen, eine Wohnung zu finden.\nNach dem Studium habe ich sechs Jahre bei einem Zulieferer für die Autoindustrie gearbeitet. 2021 habe ich gekündigt und mit zwei Freunden eine Fahrradwerkstatt im Leipziger Osten eröffnet. Dort bilden wir auch junge Geflüchtete aus. Ich will etwas von dem zurückgeben, was ich damals bekommen habe.“\n\nQUELLE 2: E-MAIL VON AWA SARR\n[fr?] Source 2 : le courriel d’Awa Sarr (en français)\nBonjour, merci pour votre message. Mon frère a toujours aimé réparer les choses : à douze ans, il démontait déjà les vélos de tout le quartier, à Thiès ! Notre père voulait qu’il devienne médecin, et il a été très déçu quand Ousmane a choisi la mécanique. Aujourd’hui, il est très fier de lui. Ce qu’Ousmane ne vous dira pas lui-même : chaque année, il envoie des pièces de vélo à une école professionnelle de Thiès, et il y anime un atelier de deux semaines pendant ses vacances. Il parle wolof, français, allemand et un peu d’anglais.\nBien cordialement, Awa Sarr\n\nSTRATEGIE\nSuchen Sie zuerst, was nur in einer Quelle steht. Achten Sie dann darauf, was Ousmane selbst sagt und was andere über ihn erzählen. [fr?] Repérez d’abord ce qui ne figure que dans une source. Distinguez ensuite ce qu’Ousmane dit lui-même et ce que d’autres racontent de lui.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-lebenswege-atelier-mediation-interview",
+          "caption": "Quelle 1: Auszug aus dem Interview",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Notizen für das Porträt. [fr?] Complétez les notes pour le portrait.",
+          "text": "Herkunft: [[1]] im Senegal · in Leipzig seit: [[2]] · Studium: [[3]] · Grund zu bleiben: seine [[4]] · heute: eine eigene [[5]] im Leipziger Osten, bildet junge Geflüchtete aus",
+          "explanation": "Die Herkunft steht nur in der E-Mail („à Thiès“). Alles andere steht im Interview: „2009 zum Studium“, „Maschinenbau“, „Geblieben bin ich wegen meiner Lerngruppe“ und „eine Fahrradwerkstatt im Leipziger Osten“. [fr?] La ville d’origine ne figure que dans le courriel. Le reste vient de l’interview : arrivée en 2009, études de génie mécanique, le groupe d’étude, l’atelier de vélos.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Thiès",
+                "Thies"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "2009"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Maschinenbau"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Lerngruppe",
+                "Kommilitonen",
+                "Lerngruppe an der Uni"
+              ],
+              "size": 22,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Fahrradwerkstatt",
+                "Werkstatt"
+              ],
+              "size": 17,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Was steht nur in der E-Mail? Geben Sie es auf Deutsch wieder. [fr?] Qu’est-ce qui ne figure que dans le courriel ? Transmettez-le en allemand.",
+          "text": "Schon mit [[1]] Jahren reparierte er die Fahrräder seines Viertels. · Sein Vater wollte, dass er [[2]] wird, und war zuerst enttäuscht. · Jedes Jahr schickt er Fahrradteile an eine [[3]] in Thiès und gibt dort im Urlaub einen zweiwöchigen [[4]].",
+          "explanation": "„à douze ans“ → mit zwölf Jahren; „médecin“ → Arzt; „une école professionnelle“ → eine Berufsschule; „un atelier de deux semaines“ → hier kein Ort, sondern ein Kurs: ein zweiwöchiger Workshop oder Kurs. Achtung: „atelier“ heißt hier nicht „Werkstatt“. [fr?] « Atelier » désigne ici une formation, pas un local : un Workshop ou un Kurs. Médecin se dit Arzt ; une école professionnelle, eine Berufsschule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zwölf",
+                "12"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Arzt",
+                "Mediziner"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Berufsschule",
+                "Berufsfachschule",
+                "berufsbildende Schule",
+                "Fachschule"
+              ],
+              "size": 22,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Workshop",
+                "Kurs",
+                "Lehrgang"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Ousmane erzählt im Interview nichts von seinem Engagement in Thiès. Wie gehen Sie im Porträt damit um? [fr?] Ousmane ne parle pas dans l’interview de son engagement à Thiès. Comment le traitez-vous dans le portrait ?",
+          "explanation": "Eine gute Mediation sagt, woher eine Information kommt. Awa schreibt ausdrücklich, dass Ousmane davon selbst nicht erzählen würde: Man darf es ihm also nicht in den Mund legen. Weglassen wäre schade, und ein französisches Zitat verstehen die Leser des Stadtteilblatts nicht. [fr?] Une bonne médiation indique la source. On ne peut pas attribuer à Ousmane ce qu’il ne dit pas lui-même ; l’omettre serait dommage, et une citation en français serait incompréhensible pour les lecteurs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie schreiben es so, als hätte Ousmane es Ihnen selbst erzählt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie erwähnen es und nennen die Quelle: „Wie seine Schwester erzählt, …“",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie lassen es weg, weil die Information nur auf Französisch vorliegt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie zitieren die ganze E-Mail von Awa Sarr im Original.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Wie geben Sie diese Stellen aus der E-Mail auf Deutsch wieder? Ordnen Sie zu. [fr?] Comment rendre ces passages du courriel en allemand ? Associez.",
+          "explanation": "„démonter“ heißt hier „auseinandernehmen“ (trennbar: er nahm … auseinander). „stolz sein auf“ steht mit Akkusativ. Für „ne vous dira pas“ passt im Deutschen der Konjunktiv II: „was er selbst nicht erzählen würde“. [fr?] démonter : auseinandernehmen (séparable) ; être fier de : stolz sein auf + accusatif ; « ne vous dira pas » se rend bien par le Konjunktiv II.",
+          "pairs": [
+            {
+              "left": "il démontait déjà les vélos",
+              "right": "er nahm schon Fahrräder auseinander"
+            },
+            {
+              "left": "il a été très déçu",
+              "right": "er war sehr enttäuscht"
+            },
+            {
+              "left": "il est très fier de lui",
+              "right": "er ist sehr stolz auf ihn"
+            },
+            {
+              "left": "ce qu’Ousmane ne vous dira pas lui-même",
+              "right": "was Ousmane selbst nicht erzählen würde"
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz fasst beide Quellen richtig zusammen? [fr?] Quelle phrase résume correctement les deux sources ?",
+          "explanation": "Im Interview sagt Ousmane, er wolle „etwas von dem zurückgeben“, was er bekommen hat; deshalb bildet er junge Geflüchtete aus. Vor der Werkstatt arbeitete er sechs Jahre bei einem Zulieferer, sein Vater wollte einen Arzt, und nach dem ersten Winter wäre er nur „fast“ zurückgeflogen. [fr?] Il veut rendre ce qu’il a reçu. Les autres phrases se trompent : six ans dans l’industrie avant l’atelier, un père qui le voulait médecin, et un départ seulement envisagé (« fast »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ousmane Sarr kam 2009 zum Studium nach Leipzig und eröffnete gleich danach eine Werkstatt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sein Vater wollte, dass er Mechaniker wird, und ist heute sehr stolz auf ihn.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Aus Dankbarkeit für die Hilfe im Studium bildet er heute selbst junge Menschen aus.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Nach dem ersten Winter verließ er Leipzig und kam erst nach Jahren zurück.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Bilden Sie den Schlusssatz des Porträts. [fr?] Formez la phrase finale du portrait.",
+          "answers": [
+            [
+              "Was",
+              "er",
+              "damals",
+              "bekommen hat,",
+              "gibt",
+              "er",
+              "heute",
+              "an junge Menschen",
+              "weiter."
+            ]
+          ],
+          "explanation": "Der Nebensatz mit „was“ steht auf Position 1, das Verb „bekommen hat“ an seinem Ende. Danach folgt direkt das Verb des Hauptsatzes: „gibt er“. „Weitergeben“ ist trennbar: „weiter“ steht ganz am Ende. [fr?] La relative en « was » occupe la première place ; le verbe principal suit immédiatement (gibt er), et la particule « weiter » ferme la phrase."
+        }
+      ]
+    },
+    {
+      "id": "b2-lebenswege-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler im Erfahrungsbericht",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler im Erfahrungsbericht",
+        "description": "Diese Sätze stammen aus Erfahrungsberichten von Kursteilnehmenden. Finden Sie die richtige Form. [fr?] Ces phrases viennent de récits d’expérience d’apprenants. Trouvez la forme correcte.\n\nKORREKTURZEICHEN\n[fr?] Les codes de correction\nIhre Lehrkraft verwendet diese Zeichen: G (Grammatik), W (Wortschatz), St (Satzstellung), R (Rechtschreibung), A (Ausdruck und Register). [fr?] Votre professeur utilise ces codes : G grammaire, W vocabulaire, St place des mots, R orthographe, A registre.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "Beide Teile stehen im Konjunktiv II der Vergangenheit: „gewusst hätte“ (Perfekt mit „haben“) und „wäre gekommen“ (Perfekt mit „sein“). „Gewusst würde“ ist keine Form, „hätte gekommen“ hat das falsche Hilfsverb, und „gewusst habe“ ist Indikativ. [fr?] Les deux propositions sont au Konjunktiv II passé, chacune avec l’auxiliaire de son parfait : gewusst hätte, wäre gekommen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn ich das gewusst würde, wäre ich früher gekommen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn ich das gewusst hätte, wäre ich früher gekommen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wenn ich das gewusst hätte, hätte ich früher gekommen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Wenn ich das gewusst habe, wäre ich früher gekommen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie das Modalverb in der richtigen Form. [fr?] G : complétez avec le verbe de modalité à la bonne forme.",
+          "text": "Ich hätte den Antrag früher stellen [[1]]. · Wir hätten nicht so lange warten [[2]].",
+          "explanation": "Mit einem zweiten Verb bleibt das Modalverb im Infinitiv: „hätte … stellen müssen“, „hätten … warten sollen“. „Gemusst“ und „gesollt“ sind hier falsch, auch wenn viele Lernende sie aus dem Perfekt ableiten. [fr?] Avec un autre verbe, le modal reste à l’infinitif : jamais gemusst ni gesollt dans ce cas.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "müssen"
+              ],
+              "hint": "müssen",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "sollen"
+              ],
+              "hint": "sollen",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "St: „Sie schreibt, …“ Welcher Nebensatz ist richtig? [fr?] St : quelle subordonnée est correcte ?",
+          "explanation": "Im Nebensatz mit zwei Infinitiven steht „hätte“ direkt vor den Infinitiven, nicht am Ende und nicht vor dem Mittelfeld. Die vierte Antwort mischt Indikativ und ein falsches Partizip. [fr?] Dans la subordonnée, hätte se place juste avant le double infinitif : ni à la fin, ni avant le reste de la proposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "…, dass sie sich früher um die Anerkennung hätte kümmern sollen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "…, dass sie sich früher um die Anerkennung kümmern sollen hätte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "…, dass sie hätte sich früher um die Anerkennung kümmern sollen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "…, dass sie sich früher um die Anerkennung hat kümmern gesollt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "W: Sie sind vor sieben Jahren umgezogen und wohnen immer noch dort. Welcher Satz ist richtig? [fr?] W : vous avez déménagé il y a sept ans et vous y habitez toujours. Quelle phrase est correcte ?",
+          "explanation": "Der Umzug ist ein einmaliges Ereignis in der Vergangenheit: „vor sieben Jahren“. „Seit“ passt nur zu einem Zustand, der noch andauert („Ich wohne seit sieben Jahren in Stuttgart“). „Für sieben Jahre“ nennt eine geplante Dauer, „in sieben Jahren“ liegt in der Zukunft. [fr?] « Il y a sept ans » : vor. Seit exige un état qui dure (ich wohne seit …) ; für indique une durée prévue, in un moment futur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich bin seit sieben Jahren nach Stuttgart gezogen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich bin für sieben Jahre nach Stuttgart gezogen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich bin in sieben Jahren nach Stuttgart gezogen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich bin vor sieben Jahren nach Stuttgart gezogen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "G: „als“, „wenn“ oder „wann“? Ergänzen Sie. [fr?] G : « als », « wenn » ou « wann » ? Complétez.",
+          "text": "[[1]] ich nach Stuttgart kam, sprach ich kaum Deutsch. · Ich weiß nicht mehr genau, [[2]] ich meinen ersten Kurs besucht habe. · [[3]] ich heute Heimweh habe, rufe ich meine Schwester an.",
+          "explanation": "„Als“ steht für ein einmaliges Ereignis in der Vergangenheit, „wenn“ für eine Wiederholung oder für die Gegenwart, „wann“ für eine indirekte Frage nach dem Zeitpunkt. [fr?] als : fait unique dans le passé ; wenn : répétition ou présent ; wann : question indirecte portant sur le moment.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Als"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wann"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Wenn"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "A: Welcher Satz passt in einen sachlichen Erfahrungsbericht für ein Magazin? [fr?] A : quelle phrase convient dans un récit d’expérience publié dans un magazine ?",
+          "explanation": "Ein Erfahrungsbericht ist persönlich, aber sachlich formuliert. Die erste Antwort ist Jugendsprache, die dritte klingt wie ein Behördenbrief, und die vierte ist gesprochene Sprache mit Füllwörtern. [fr?] Registre personnel mais soigné. Les autres phrases sont trop familières, trop administratives ou relèvent de l’oral.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Echt krass, das war mega die beste Entscheidung überhaupt!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Rückblickend war es die beste Entscheidung meines Lebens.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Hiermit teile ich Ihnen mit, dass meine Entscheidung richtig war.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Also, äh, ich würde sagen, das war schon irgendwie gut so.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-lebenswege-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: Lesen, ein Artikel mit mehreren Standpunkten",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: Lesen, ein Artikel mit mehreren Standpunkten",
+        "description": "PRÜFUNGSTRAINING LESEN\nLesen Sie den Zeitungsartikel. Wählen Sie bei jeder Aufgabe die richtige Antwort: a, b oder c. [fr?] Lisez l’article de presse. Pour chaque question, choisissez la bonne réponse : a, b ou c.\nZEIT\nEtwa 18 Minuten, ohne Wörterbuch. [fr?] Environ 18 minutes, sans dictionnaire.\n\nSTRATEGIE\n1. Lesen Sie zuerst Titel und Vorspann und überfliegen Sie dann den Text: Wer kommt zu Wort? [fr?] Lisez d’abord le titre et le chapeau, puis parcourez le texte : qui prend la parole ?\n2. Die Aufgaben folgen der Reihenfolge des Textes. Suchen Sie für jede Aufgabe die passende Stelle. [fr?] Les questions suivent l’ordre du texte : cherchez pour chacune le passage correspondant.\n3. Unterscheiden Sie genau: Was ist Tatsache, was ist Meinung, und wessen Meinung ist es? [fr?] Distinguez bien les faits des opinions, et demandez-vous à qui appartient chaque opinion.\n\nRENTE UNTER PALMEN – UND DANN?\n[fr?] Article : « La retraite sous les palmiers, et après ? »\nVon Theresa Kuhlmann\nJedes Jahr ziehen Tausende Menschen im Ruhestand aus Deutschland ins Ausland. Viele finden dort, was sie gesucht haben. Andere kehren nach einigen Jahren zurück. Was unterscheidet die beiden Gruppen?\nAls Dieter Assmann vor neun Jahren in Rente ging, stand der Plan längst fest. Das Haus in Kassel wurde verkauft, und das Ehepaar zog an die Algarve, wo es schon zwanzig Jahre lang Urlaub gemacht hatte. „Wir dachten, wir kennen das Land“, erzählt Brigitte Assmann. „Aber Urlaub und Alltag sind zwei verschiedene Dinge.“ Ohne Portugiesisch wurde jeder Gang zum Amt zum Abenteuer, und die ersten Freundschaften entstanden fast nur mit anderen Deutschen. Heute, nach zwei Sprachkursen und vielen Missverständnissen, fühlen sich die beiden angekommen. Hätten sie sich besser vorbereiten können? „Natürlich“, sagt Dieter Assmann und lacht. „Aber vielleicht hätten wir uns dann gar nicht getraut.“\nDer Soziologe Ansgar Mahler beschäftigt sich seit Jahren mit Menschen, die im Alter auswandern. Er hält das Phänomen weder für eine Flucht noch für ein Privileg der Reichen. „Die meisten suchen nicht nur die Sonne, sondern einen neuen Lebensabschnitt mit einer Aufgabe“, sagt er. Entscheidend für das Gelingen ist seiner Ansicht nach weniger das Geld als das soziale Netz: Wer nur unter Deutschen bleibt, lebt nach einigen Jahren oft isolierter als zu Hause. Kritisch wird es nach Mahlers Beobachtung vor allem, wenn einer der Partner stirbt oder pflegebedürftig wird. Dann fehlt häufig die Familie, und das Gesundheitssystem bleibt fremd.\nMit solchen Situationen hat Gesine Brüggemann täglich zu tun. Sie berät Menschen, die ins Ausland ziehen wollen, und zunehmend auch solche, die zurückkommen möchten. „Viele unterschätzen, wie kompliziert die Rückkehr ist“, sagt sie. Die Wohnung ist verkauft, der Freundeskreis hat sich aufgelöst, und die Krankenversicherung muss neu geregelt werden. Brüggemann rät deshalb, die ersten Jahre im Ausland als eine Art Probezeit zu betrachten: „Mieten Sie zunächst, statt zu kaufen. Und behalten Sie, wenn möglich, einen Fuß in Deutschland.“\nDie Geschichten der Rückkehrer sollten niemanden abschrecken. Sie zeigen nur, dass ein Neuanfang im Alter ebenso viel Mut und Planung verlangt wie in jungen Jahren, vielleicht sogar mehr. Die Assmanns jedenfalls wollen bleiben. Ihr Rat an alle, die es ihnen nachmachen möchten, klingt einfach: „Lernen Sie die Sprache, bevor Sie sie brauchen.“",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was erfahren wir über die Vorbereitung des Ehepaars Assmann? [fr?] Qu’apprend-on sur la préparation du couple Assmann ?",
+          "explanation": "„… an die Algarve, wo es schon zwanzig Jahre lang Urlaub gemacht hatte“ und „Urlaub und Alltag sind zwei verschiedene Dinge“. Portugiesisch lernten sie erst später („nach zwei Sprachkursen“), und das Haus wurde verkauft, nicht vermietet. [fr?] Ils connaissaient la région par les vacances, pas la vie quotidienne. Le portugais est venu après ; la maison a été vendue.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hatten vor dem Umzug Portugiesisch gelernt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hatten ihr Haus in Kassel vorsichtshalber zunächst nur vermietet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie kannten die Region aus dem Urlaub, aber nicht den Alltag.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was meint Dieter Assmann mit dem Satz „Aber vielleicht hätten wir uns dann gar nicht getraut“? [fr?] Que veut dire Dieter Assmann par cette phrase ?",
+          "explanation": "„dann“ bezieht sich auf die bessere Vorbereitung: Hätten sie alle Schwierigkeiten gekannt, hätten sie den Schritt vielleicht nicht gewagt. Von Angst vor der Reise spricht er nicht, und die beiden wollen bleiben. [fr?] « dann » renvoie à une meilleure préparation : en connaissant toutes les difficultés, ils n’auraient peut-être pas osé. Ils ne regrettent rien et restent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit mehr Wissen über die Probleme hätte ihnen der Mut gefehlt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hatten vor der langen Reise an die Algarve große Angst.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie bereuen den Umzug inzwischen und wollen zurück.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was ist laut Ansgar Mahler entscheidend dafür, ob das Leben im Ausland gelingt? [fr?] Selon Ansgar Mahler, qu’est-ce qui décide de la réussite de la vie à l’étranger ?",
+          "explanation": "„Entscheidend für das Gelingen ist seiner Ansicht nach weniger das Geld als das soziale Netz: Wer nur unter Deutschen bleibt, lebt … oft isolierter.“ „Weniger … als …“ stellt Geld und soziales Netz gegenüber, und die Sonne suchen die meisten „nicht nur“. [fr?] « weniger … als … » : moins l’argent que le réseau social ; rester entre Allemands isole. Le soleil n’est pas le critère décisif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein ausreichend hohes Einkommen im Ruhestand",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kontakte, die über andere Deutsche hinausgehen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "ein Land mit warmem Klima und viel Sonne",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "In welcher Situation wird es nach Mahler besonders schwierig? [fr?] Dans quelle situation cela devient-il particulièrement difficile, selon Mahler ?",
+          "explanation": "„Kritisch wird es … vor allem, wenn einer der Partner stirbt oder pflegebedürftig wird.“ Die dritte Antwort dreht seine Aussage um: Gerade wer nur unter Deutschen bleibt, wird isoliert. [fr?] Le moment critique : le décès ou la dépendance d’un des partenaires. La troisième réponse inverse son propos.",
+          "options": [
+            {
+              "id": "a",
+              "label": "wenn ein Partner stirbt oder Pflege braucht",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "wenn die Kinder nicht regelmäßig zu Besuch kommen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wenn man zu wenig Kontakt zu anderen Deutschen hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welche Haltung vertritt Gesine Brüggemann? [fr?] Quelle position Gesine Brüggemann défend-elle ?",
+          "explanation": "Sie rät, die ersten Jahre „als eine Art Probezeit“ zu betrachten, zuerst zu mieten und „einen Fuß in Deutschland“ zu behalten: Die Rückkehr soll möglich bleiben. Vom Auswandern rät sie nicht ab, und vom Kaufen rät sie gerade ab. [fr?] Elle conseille de considérer les premières années comme une période d’essai, de louer d’abord et de garder « un pied en Allemagne ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ältere Menschen sollten besser gar nicht auswandern.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Immobilie im Ausland ist eine sichere Geldanlage.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man sollte sich die Rückkehr zunächst offenhalten.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Absicht verfolgt die Autorin im letzten Absatz? [fr?] Quelle intention l’autrice poursuit-elle dans le dernier paragraphe ?",
+          "explanation": "„Die Geschichten der Rückkehrer sollten niemanden abschrecken“: Die Autorin ermutigt, betont aber, dass ein Neuanfang „Mut und Planung“ verlangt. Sie warnt also nicht, und die Beratung kritisiert sie nicht. [fr?] L’autrice encourage tout en rappelant qu’un nouveau départ exige courage et préparation. Elle ne met pas en garde et ne critique personne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie warnt eindringlich vor dem Auswandern im Alter.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ermutigt zu einem gut vorbereiteten Neuanfang.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie kritisiert die Arbeit der Beratungsstellen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-lebenswege-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: einen Erfahrungsbericht schreiben",
+      "estimatedMinutes": 28,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: einen Erfahrungsbericht schreiben",
+        "description": "SITUATION\nDas Online-Magazin „Neue Wege“ sammelt im Leserforum Erfahrungsberichte zum Thema „Eine Entscheidung, die mein Leben verändert hat“. Die besten Beiträge werden in der nächsten Ausgabe veröffentlicht. [fr?] Le magazine en ligne « Neue Wege » recueille dans son forum des récits sur le thème « Une décision qui a changé ma vie ». Les meilleurs seront publiés dans le prochain numéro.\nDie Entscheidung kann groß oder klein sein: ein Umzug, eine neue Stelle, eine Ausbildung, eine neue Sprache, eine Rückkehr. [fr?] La décision peut être importante ou modeste : un déménagement, un nouvel emploi, une formation, une nouvelle langue, un retour.\n\nSO GEHEN SIE VOR\n1. Planen (6 Minuten): Überlegen Sie sich Stichwörter zu den fünf Teilen aus dem Modell von Ivana Marić. [fr?] Planifier (6 minutes) : trouvez des mots-clés pour les cinq parties du modèle d’Ivana Marić.\n2. Schreiben (17 Minuten): Schreiben Sie in Absätzen und verbinden Sie Ihre Sätze mit Konnektoren. [fr?] Écrire (17 minutes) : rédigez en paragraphes et reliez vos phrases par des connecteurs.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste. Achten Sie besonders auf „hätte“ und „wäre“. [fr?] Relire (5 minutes) : vérifiez votre texte avec la liste, en particulier hätte et wäre.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie einen Erfahrungsbericht für das Forum (150 bis 250 Wörter). Beschreiben Sie die Entscheidung und die Situation damals, erzählen Sie, was danach passiert ist, kommentieren Sie im Rückblick, was Sie anders gemacht hätten, und geben Sie den Leserinnen und Lesern zum Schluss einen Rat. [fr?] Écrivez un récit d’expérience pour le forum (150 à 250 mots) : la décision et la situation de départ, la suite, votre regard rétrospectif (ce que vous auriez fait autrement) et, pour finir, un conseil aux lecteurs.",
+          "maxChars": 2400,
+          "minWords": 150
+        },
+        "checklist": [
+          "Entscheidung, Zeitpunkt und Situation stehen in der Einleitung. [fr?] La décision, le moment et la situation sont dans l’introduction.",
+          "Ich erzähle die Folgen mit konkreten Beispielen. [fr?] Je raconte les conséquences avec des exemples concrets.",
+          "Mindestens zwei Sätze im Konjunktiv II der Vergangenheit (hätte … sollen, wäre …) [fr?] Au moins deux phrases au Konjunktiv II passé",
+          "Ein Satz mit Infinitiv Perfekt: „Ich bin froh, … zu haben.“ [fr?] Une phrase à l’infinitif passé",
+          "Absätze, verschiedene Konnektoren und ein Rat zum Schluss [fr?] Des paragraphes, des connecteurs variés et un conseil final"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: Entscheidung, Folgen, Rückblick mit Bewertung und Rat; Erfahrungsbericht, sachliches Register [fr?] Tâche : décision, suites, regard rétrospectif, conseil ; registre soigné",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-lebenswege-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: ein Referat über Mehrsprachigkeit halten",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: ein Referat über Mehrsprachigkeit halten",
+        "description": "SITUATION\nIn Ihrem Deutschkurs hält jede Person ein kurzes Referat. Ihr Thema: „Mehrsprachigkeit – Chance oder Belastung?“ Sie sprechen drei bis vier Minuten. [fr?] Dans votre cours d’allemand, chacun présente un court exposé. Votre sujet : « Le plurilinguisme, une chance ou un fardeau ? » Vous parlez trois à quatre minutes.\n\nINHALT\n1. Einleitung: Thema nennen und Aufbau ankündigen. [fr?] Introduction : annoncer le sujet et le plan.\n2. Eine persönliche Erfahrung mit Sprachen: in der Familie, in der Schule, bei der Arbeit. [fr?] Une expérience personnelle avec les langues : en famille, à l’école, au travail.\n3. Vorteile und Schwierigkeiten, jeweils mit einem Beispiel. [fr?] Avantages et difficultés, chacun avec un exemple.\n4. Die Situation in Ihrem Herkunftsland: Welche Sprachen spricht man dort, und wie werden sie gelernt? [fr?] La situation dans votre pays d’origine : quelles langues y parle-t-on, et comment les apprend-on ?\n5. Schluss: Ihre Meinung und eine kurze Zusammenfassung. [fr?] Conclusion : votre avis et un bref résumé.\n\nVORBEREITUNG\nNehmen Sie sich zehn Minuten Zeit. Überlegen Sie sich zu jedem Teil nur Stichwörter, keine ganzen Sätze. Verwenden Sie die Formulierungen aus dem Modell von Mateus Pereira, um den Aufbau anzukündigen und von Punkt zu Punkt überzuleiten. [fr?] Prenez dix minutes. Pour chaque partie, cherchez seulement des mots-clés, pas des phrases entières. Reprenez les formules du modèle de Mateus Pereira pour annoncer le plan et passer d’un point à l’autre.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": {
+          "prompt": "Halten Sie Ihr Referat „Mehrsprachigkeit – Chance oder Belastung?“ frei und ohne abzulesen (drei bis vier Minuten). Kündigen Sie den Aufbau an, sprechen Sie über Ihre eigenen Erfahrungen, über Vorteile und Schwierigkeiten und über Ihr Herkunftsland, und schließen Sie mit Ihrer Meinung. [fr?] Présentez votre exposé librement, sans lire (trois à quatre minutes) : annoncez le plan, parlez de votre expérience, des avantages et des difficultés, de votre pays d’origine, et concluez par votre avis.",
+          "maxSeconds": 240
+        },
+        "written": null,
+        "checklist": [
+          "Ich nenne das Thema und kündige den Aufbau an. [fr?] J’annonce le sujet et le plan.",
+          "Ich erzähle eine persönliche Erfahrung mit Sprachen. [fr?] Je raconte une expérience personnelle avec les langues.",
+          "Ich nenne Vorteile und Schwierigkeiten mit Beispielen. [fr?] Je présente avantages et difficultés avec des exemples.",
+          "Ich leite von Punkt zu Punkt über: „Ich komme jetzt zu …“ [fr?] Je fais des transitions entre les parties.",
+          "Ich schließe mit meiner Meinung und einer Zusammenfassung. [fr?] Je conclus par mon avis et un résumé."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: alle fünf Teile in drei bis vier Minuten, klarer Aufbau, begründete Meinung [fr?] Tâche : les cinq parties en trois à quatre minutes, plan clair, avis justifié",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-lebenswege-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: Lebenswege",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: Lebenswege",
+        "description": "Lesen Sie die Ziele der beiden Module „Lebenswege“. Was können Sie schon sicher? Was möchten Sie noch üben? [fr?] Relisez les objectifs des deux modules « Lebenswege ». Que maîtrisez-vous déjà ? Que voulez-vous encore travailler ?\n\nICH KANN …\n• Ich kann einen Artikel mit mehreren Standpunkten verstehen und die Meinung der Autorin erkennen. [fr?] Je peux comprendre un article qui présente plusieurs points de vue et y reconnaître l’avis de l’autrice.\n• Ich kann einem längeren Radiogespräch folgen und dabei Notizen machen. [fr?] Je peux suivre une longue émission de radio en prenant des notes.\n• Ich kann von einer wichtigen Entscheidung erzählen und sie im Rückblick bewerten. [fr?] Je peux raconter une décision importante et la juger avec le recul.\n• Ich kann ein Referat mit klarem Aufbau halten und von Punkt zu Punkt überleiten. [fr?] Je peux présenter un exposé bien construit, avec des transitions.\n• Ich kann Informationen aus einer deutschen und einer französischen Quelle auf Deutsch zusammenfassen. [fr?] Je peux résumer en allemand les informations d’une source allemande et d’une source française.\n\nSTRATEGIEN\n• Beim Lesen: Tatsachen und Meinungen trennen und fragen, wessen Meinung es ist. [fr?] En lecture : séparer faits et opinions, et se demander à qui appartient l’opinion.\n• Bei der Mediation: die Quelle nennen („Wie seine Schwester erzählt, …“). [fr?] En médiation : citer la source.\n• Im Referat: den Aufbau ankündigen und am Ende zusammenfassen. [fr?] Dans un exposé : annoncer le plan et résumer à la fin.\n\nNOCH NICHT SICHER?\nKonjunktiv II der Vergangenheit und Infinitiv Perfekt: Lesen Sie noch einmal „Regel“ und machen Sie „Üben“ im Modul „Lebenswege“. Formulierungen für Bericht und Referat: Lesen Sie die beiden Modelle und den Wortschatz dieser Werkstatt. Satzstellung mit „hätte … sollen“ im Nebensatz: Wiederholen Sie „Korrigieren“. [fr?] Konjunktiv II passé et infinitif passé : revoyez « Regel » puis « Üben » du module Lebenswege. Formules du récit et de l’exposé : relisez les deux modèles et le lexique de cet atelier. Place de hätte … sollen en subordonnée : refaites « Korrigieren ».",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-lebenswege-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : le début d’un exposé sur le plurilinguisme",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Mateus Pereira",
+          "text": "Guten Tag zusammen. In meinem Vortrag geht es um Mehrsprachigkeit, also um die Frage, was es bedeutet, mit mehr als einer Sprache zu leben. Lassen Sie mich mit einer persönlichen Erfahrung beginnen."
+        },
+        {
+          "voice": "mann",
+          "name": "Mateus Pereira",
+          "text": "Meine Eltern kommen aus Porto, ich bin in Mannheim aufgewachsen. Zu Hause haben wir Portugiesisch gesprochen, in der Schule Deutsch. Als Kind fand ich das oft peinlich. Heute bin ich froh, beide Sprachen behalten zu haben, und im Nachhinein hätte ich gern auch noch Spanisch gelernt."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Mateus Pereira",
+          "text": "Mein Vortrag hat drei Teile. Zuerst erkläre ich kurz, was Fachleute unter Mehrsprachigkeit verstehen. Danach spreche ich über die Vorteile, aber auch über die Schwierigkeiten, die mehrsprachige Menschen erleben. Zum Schluss sage ich Ihnen, wie ich selbst dazu stehe, und ich freue mich auf Ihre Fragen."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "mann",
+          "name": "Mateus Pereira",
+          "text": "Ich komme also zu meinem ersten Punkt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-beitrag1",
+      "kind": "audio",
+      "title": "Intervention 1 : parler allemand à la maison",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Frau Ostermann",
+          "text": "Ich finde, wer in Deutschland lebt, sollte auch zu Hause Deutsch sprechen. Sonst haben die Kinder in der Schule von Anfang an einen Nachteil, und den holen sie nie mehr auf."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-beitrag2",
+      "kind": "audio",
+      "title": "Intervention 2 : un père inquiet",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Herr Castillo",
+          "text": "Bei uns zu Hause sprechen wir Spanisch, Deutsch und manchmal Englisch, alles durcheinander. Meine Tochter mischt ständig die Sprachen. Ich mache mir Sorgen, dass sie am Ende keine Sprache richtig kann."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-beitrag3",
+      "kind": "audio",
+      "title": "Intervention 3 : des enfants qui ne répondent plus qu’en allemand",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Saarinen",
+          "text": "Ich bin in Finnland aufgewachsen und habe mit meinen Kindern immer Finnisch gesprochen. Trotzdem antworten sie mir heute nur noch auf Deutsch. Hätte ich strenger sein sollen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-beitrag4",
+      "kind": "audio",
+      "title": "Intervention 4 : le modérateur demande un résumé",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Moderator",
+          "text": "Wir haben leider nur noch wenig Zeit. Können Sie Ihre Position bitte in einem Satz zusammenfassen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-mediation-interview",
+      "kind": "image",
+      "title": "Extrait d’interview : Ousmane Sarr",
+      "alt": "Extrait d’une interview dans un journal de quartier de Leipzig : Ousmane Sarr raconte ses études, son premier hiver, l’aide de son groupe d’étude et l’atelier de vélos qu’il a ouvert.",
+      "image": {
+        "layout": "article",
+        "kicker": "Menschen aus unserem Viertel",
+        "icon": "bike",
+        "title": "„Ich will etwas zurückgeben“",
+        "byline": "Stadtteilblatt Leipzig-Ost · Aus dem Interview mit Ousmane Sarr",
+        "paragraphs": [
+          "„Ich bin 2009 zum Studium nach Leipzig gekommen, Maschinenbau. Ehrlich gesagt hatte ich mir Deutschland wärmer vorgestellt, und damit meine ich nicht nur das Wetter. Im ersten Winter wäre ich fast zurückgeflogen. Geblieben bin ich wegen meiner Lerngruppe: Drei Kommilitonen haben mich zu sich nach Hause eingeladen, mit mir für die Prüfungen gelernt und mir geholfen, eine Wohnung zu finden.",
+          "Nach dem Studium habe ich sechs Jahre bei einem Zulieferer für die Autoindustrie gearbeitet. 2021 habe ich gekündigt und mit zwei Freunden eine Fahrradwerkstatt im Leipziger Osten eröffnet. Dort bilden wir auch junge Geflüchtete aus. Ich will etwas von dem zurückgeben, was ich damals bekommen habe.“"
+        ]
+      }
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Da muss ich widersprechen: Deutsch lernen die Kinder auch in der Kita und in der Schule."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das verstehe ich, aber Fachleute sagen, dass das Mischen ganz normal ist."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Bei uns war es ähnlich. Erst die Ferien bei den Großeltern haben das geändert."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: Sollen Familien zu Hause Deutsch sprechen?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Kurz gesagt: Eltern sollten die Sprache sprechen, in der sie sich zu Hause fühlen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-lebenswege-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Lebenswege – Werkstatt: Erfahrungen erzählen und über Mehrsprachigkeit sprechen",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Erfahrungsbericht, die Erfahrungsberichte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Entscheidung treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Damals hätte ich nie gedacht, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Rückblickend würde ich sagen, …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das hat mich viel Kraft gekostet."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Formalitäten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einplanen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Geduld haben mit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mein Rat an alle, die …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "In meinem Vortrag geht es um …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Lassen Sie mich mit … beginnen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich komme jetzt zu meinem nächsten Punkt."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zusammenfassend lässt sich sagen, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Da muss ich widersprechen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Kurz gesagt: …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie … erzählt, …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "stolz sein auf"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

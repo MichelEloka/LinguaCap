@@ -12,7 +12,7 @@ const lines = (...items) => items.join('\n');
 
 export default {
   id: 'b1-umwelt-atelier',
-  title: 'Umwelt (atelier) : défendre une proposition, présenter un thème',
+  title: 'Umwelt, atelier : défendre une proposition, présenter un thème',
   objective: 'Présenter un thème en cinq parties, répondre aux questions du public, expliquer un graphique à une voisine et défendre par écrit un projet devant le conseil de quartier.',
   sources: [
     'Textes, dialogues et exercices originaux LinguaCap.',

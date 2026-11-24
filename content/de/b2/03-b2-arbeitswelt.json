@@ -1,0 +1,2299 @@
+{
+  "id": "b2-arbeitswelt",
+  "title": "Arbeitswelt: Homeoffice, künstliche Intelligenz und Erreichbarkeit",
+  "objective": "Comprendre un article argumenté sur l’intelligence artificielle au bureau et distinguer les points de vue, suivre un reportage radio sur le droit à la déconnexion en prenant des notes, dire ce qui doit (ou aurait dû) être fait avec le passif et ses équivalents (muss geprüft werden, lässt sich lösen, ist einzuhalten).",
+  "prerequisites": [
+    "b2-lebenswege-atelier"
+  ],
+  "audioProfile": "b2-debut",
+  "sources": [
+    "Textes, reportage radio, dépêche et exercices originaux LinguaCap."
+  ],
+  "grammarFocus": [
+    "passiv-modalverb-perfekt",
+    "passiversatz"
+  ],
+  "layer": "content/b/source/b2/b2-arbeitswelt.mjs",
+  "vocabulary": [
+    {
+      "id": "arbeitswelt",
+      "word": "Arbeitswelt",
+      "article": "die",
+      "plural": "Arbeitswelten",
+      "partOfSpeech": "noun",
+      "translation": "le monde du travail",
+      "example": "Die Arbeitswelt verändert sich durch künstliche Intelligenz schnell.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "kuenstliche-intelligenz",
+      "word": "künstliche Intelligenz",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "l’intelligence artificielle (IA)",
+      "example": "In vielen Büros gehört künstliche Intelligenz längst zum Alltag.",
+      "note": "die künstliche Intelligenz · abréviation : die KI",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "homeoffice",
+      "word": "Homeoffice",
+      "article": "das",
+      "plural": "Homeoffices",
+      "partOfSpeech": "noun",
+      "translation": "le télétravail",
+      "example": "Sie arbeitet zwei Tage pro Woche im Homeoffice.",
+      "note": "im Homeoffice arbeiten · prononciation anglaise",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "erreichbarkeit",
+      "word": "Erreichbarkeit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le fait d’être joignable",
+      "example": "Ständige Erreichbarkeit macht viele Beschäftigte müde.",
+      "note": "sans pluriel · erreichbar : joignable",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "feierabend",
+      "word": "Feierabend",
+      "article": "der",
+      "plural": "Feierabende",
+      "partOfSpeech": "noun",
+      "translation": "la fin de la journée de travail, la soirée libre",
+      "example": "Nach Feierabend liest er keine dienstlichen E-Mails mehr.",
+      "note": "Feierabend machen : finir sa journée",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "abschalten",
+      "word": "abschalten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "décrocher, se détendre (aussi : éteindre)",
+      "example": "Am Wochenende kann ich endlich abschalten.",
+      "note": "séparable : ab|schalten",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "betriebsrat",
+      "word": "Betriebsrat",
+      "article": "der",
+      "plural": "Betriebsräte",
+      "partOfSpeech": "noun",
+      "translation": "le comité d’entreprise, l’élu du personnel",
+      "example": "Der Betriebsrat hat eine neue Vereinbarung durchgesetzt.",
+      "note": "désigne l’instance ou l’un de ses membres",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "vereinbarung",
+      "word": "Vereinbarung",
+      "article": "die",
+      "plural": "Vereinbarungen",
+      "partOfSpeech": "noun",
+      "translation": "l’accord",
+      "example": "Die Vereinbarung gilt seit Januar für alle Beschäftigten.",
+      "note": "eine Vereinbarung schließen : conclure un accord",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "geschaeftsleitung",
+      "word": "Geschäftsleitung",
+      "article": "die",
+      "plural": "Geschäftsleitungen",
+      "partOfSpeech": "noun",
+      "translation": "la direction (de l’entreprise)",
+      "example": "Die Geschäftsleitung hat die neuen Regeln vorgestellt.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "beschaeftigte",
+      "word": "Beschäftigte",
+      "article": "die",
+      "plural": "Beschäftigten",
+      "partOfSpeech": "noun",
+      "translation": "la salariée, l’employée",
+      "example": "Alle Beschäftigten wurden zu den neuen Regeln befragt.",
+      "note": "adjectif substantivé : ein Beschäftigter, eine Beschäftigte",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "automatisieren",
+      "word": "automatisieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "automatiser",
+      "example": "Viele Routinetätigkeiten lassen sich automatisieren.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "routinetaetigkeit",
+      "word": "Routinetätigkeit",
+      "article": "die",
+      "plural": "Routinetätigkeiten",
+      "partOfSpeech": "noun",
+      "translation": "la tâche routinière",
+      "example": "Die Software übernimmt vor allem Routinetätigkeiten.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "ersetzen",
+      "word": "ersetzen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "remplacer",
+      "example": "Urteilsvermögen lässt sich kaum ersetzen.",
+      "note": "ersetzbar : remplaçable",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "fachkraeftemangel",
+      "word": "Fachkräftemangel",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la pénurie de main-d’œuvre qualifiée",
+      "example": "Wegen des Fachkräftemangels bleiben viele Stellen frei.",
+      "note": "sans pluriel · die Fachkraft : le professionnel qualifié",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "schulen",
+      "word": "schulen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "former (le personnel)",
+      "example": "Die Beschäftigten hätten früher geschult werden müssen.",
+      "note": "die Schulung : la formation",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "weiterbildung",
+      "word": "Weiterbildung",
+      "article": "die",
+      "plural": "Weiterbildungen",
+      "partOfSpeech": "noun",
+      "translation": "la formation continue",
+      "example": "Weiterbildung sollte während der Arbeitszeit stattfinden.",
+      "note": "sich weiterbilden : se former",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "einfuehren",
+      "word": "einführen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "introduire, mettre en place",
+      "example": "Die Software wurde vor einem Jahr eingeführt.",
+      "note": "séparable : ein|führen · die Einführung",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "nachvollziehbar",
+      "word": "nachvollziehbar",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "compréhensible, transparent",
+      "example": "Die Entscheidung ist für alle nachvollziehbar.",
+      "note": "= kann nachvollzogen werden",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "kernarbeitszeit",
+      "word": "Kernarbeitszeit",
+      "article": "die",
+      "plural": "Kernarbeitszeiten",
+      "partOfSpeech": "noun",
+      "translation": "les plages horaires fixes (présence obligatoire)",
+      "example": "Besprechungen finden nur in der Kernarbeitszeit statt.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "bereitschaft",
+      "word": "Bereitschaft",
+      "article": "die",
+      "plural": "Bereitschaften",
+      "partOfSpeech": "noun",
+      "translation": "l’astreinte",
+      "example": "Wer Bereitschaft hat, bekommt einen Zuschlag.",
+      "note": "Bereitschaft haben : être d’astreinte",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "ueberstunden",
+      "word": "Überstunden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les heures supplémentaires",
+      "example": "Im Dezember hat sie viele Überstunden gemacht.",
+      "note": "toujours au pluriel dans ce sens · Überstunden machen",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "erschoepfung",
+      "word": "Erschöpfung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’épuisement",
+      "example": "Die Zahl der Krankmeldungen wegen Erschöpfung ist gestiegen.",
+      "note": "sans pluriel · erschöpft : épuisé",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "bevormunden",
+      "word": "bevormunden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "infantiliser, mettre sous tutelle",
+      "example": "Viele fühlen sich durch strenge Regeln bevormundet.",
+      "note": "bevormundend : paternaliste",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "viertagewoche",
+      "word": "Viertagewoche",
+      "article": "die",
+      "plural": "Viertagewochen",
+      "partOfSpeech": "noun",
+      "translation": "la semaine de quatre jours",
+      "example": "Die Firma hat die Viertagewoche ein halbes Jahr lang getestet.",
+      "note": null,
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "eine-regelung-treffen",
+      "word": "eine Regelung treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "adopter une disposition, une règle",
+      "example": "Für die Chats muss noch eine Regelung getroffen werden.",
+      "note": "die Regelung : la règle, le dispositif",
+      "audio": {
+        "media": "b2-arbeitswelt-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-arbeitswelt-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Arbeit im Wandel",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Arbeit im Wandel",
+        "description": "ARBEITSWELT\n[fr?] Le monde du travail\nHomeoffice, künstliche Intelligenz, ständige Erreichbarkeit: Die Arbeitswelt verändert sich schnell. In diesem Modul geht es darum, was sich verändert, wer davon profitiert und welche Regeln es dafür braucht. [fr?] Télétravail, intelligence artificielle, joignabilité permanente : le monde du travail change vite. Ce module se demande ce qui change, à qui cela profite et quelles règles il faut fixer.\n\nFRAGEN ZUM EINSTIEG\n• Wie hat sich Ihre Arbeit oder Ihre Ausbildung in den letzten Jahren verändert? [fr?] Comment votre travail ou votre formation a-t-il changé ces dernières années ?\n• Lesen Sie nach Feierabend berufliche Nachrichten? Warum oder warum nicht? [fr?] Lisez-vous des messages professionnels après le travail ? Pourquoi ?\n• Welche Aufgaben könnte Ihnen eine Software abnehmen, welche auf keinen Fall? [fr?] Quelles tâches un logiciel pourrait-il faire à votre place, et lesquelles en aucun cas ?\nAntworten Sie in Gedanken auf Deutsch, jeweils in drei oder vier Sätzen. [fr?] Répondez mentalement en allemand, en trois ou quatre phrases à chaque fois.\n\nZIELE\n• Ich kann einen Artikel über künstliche Intelligenz im Büro verstehen und die Positionen der Beteiligten unterscheiden. [fr?] Je peux comprendre un article sur l’IA au bureau et distinguer les positions des personnes concernées.\n• Ich kann einer Radioreportage über Erreichbarkeit folgen und dabei Notizen machen. [fr?] Je peux suivre un reportage radio sur la joignabilité en prenant des notes.\n• Ich kann sagen, was getan werden muss oder hätte getan werden müssen. [fr?] Je peux dire ce qui doit être fait ou ce qui aurait dû être fait (passif avec verbe de modalité).\n• Ich kann Alternativen zum Passiv verwenden: „Das lässt sich lösen.“ „Die Regeln sind einzuhalten.“ [fr?] Je peux employer des équivalents du passif : « cela peut se résoudre », « les règles sont à respecter ».\n\nWICHTIGE WÖRTER\n• die Erreichbarkeit — man kann jemanden jederzeit kontaktieren\n• der Feierabend — die Zeit nach dem Ende der Arbeit\n• die künstliche Intelligenz — Software, die Aufgaben selbstständig löst\n• der Betriebsrat — die gewählte Vertretung der Beschäftigten\n• die Vereinbarung — eine Regel, auf die sich zwei Seiten geeinigt haben\n• automatisieren — eine Arbeit von Maschinen erledigen lassen\n• die Weiterbildung — Lernen im Beruf, nach der Ausbildung\n• abschalten — nach der Arbeit zur Ruhe kommen",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Der Arbeitsplatz zu Hause",
+          "media": "b2-arbeitswelt-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-arbeitswelt-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: künstliche Intelligenz im Büro",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: künstliche Intelligenz im Büro",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n1. Global: Lesen Sie Titel, Vorspann und den letzten Absatz. Welche Frage stellt der Artikel, und wie beantwortet ihn die Autorin? [fr?] Lecture globale : lisez le titre, le chapeau et le dernier paragraphe. Quelle question l’article pose-t-il, et quelle réponse l’autrice donne-t-elle ?\n2. Selektiv: Vier Personen kommen zu Wort. Markieren Sie in Gedanken, wer welche Position vertritt: Angestellte, Betriebsrat, Geschäftsführerin, Forscher. [fr?] Lecture sélective : quatre personnes s’expriment. Repérez qui défend quelle position : employée, élu du personnel, dirigeante, chercheur.\n3. Detailliert: Achten Sie auf Wörter, die eine Haltung zeigen: „allerdings“, „im Gegenteil“, „zwar … aber“, „mit einer Einschränkung“. [fr?] Lecture détaillée : repérez les mots qui marquent une position : allerdings, im Gegenteil, zwar … aber, mit einer Einschränkung.\n\nWENN DIE SOFTWARE MITSCHREIBT\n[fr?] Article de magazine : quand le logiciel prend la plume\nWie künstliche Intelligenz den Büroalltag verändert · Von Dörte Reimers\nSie fasst Besprechungen zusammen, beantwortet Kundenanfragen und schreibt Berichte vor. In vielen Büros gehört künstliche Intelligenz längst zum Alltag. Doch wer kontrolliert eigentlich, was sie tut?\n(A) Natalia Wróbel erinnert sich noch gut an ihren ersten Arbeitstag mit dem neuen Programm. Seit fünfzehn Jahren bearbeitet sie bei einer Versicherung in Hannover Schadensmeldungen. Früher musste jeder Brief einzeln gelesen, sortiert und beantwortet werden. Heute schlägt eine Software für jede Meldung eine Antwort vor. „Am Anfang hatte ich Angst, dass ich bald überflüssig bin“, sagt sie. „Inzwischen sehe ich das anders. Die Standardfälle erledigt das Programm, und ich habe mehr Zeit für die schwierigen Fälle, in denen Menschen wirklich Hilfe brauchen.“ Ganz ohne Kontrolle geht es allerdings nicht: Jeder Vorschlag ist von einem Menschen zu prüfen, bevor er verschickt wird.\n(B) Genau hier sieht Konrad Hofstetter das Problem. Er vertritt als Betriebsrat die Beschäftigten eines großen Logistikunternehmens und beobachtet, dass die Arbeit zwar anders, aber nicht unbedingt leichter wird. „Wer zwanzig Vorschläge pro Stunde prüfen soll, prüft irgendwann nicht mehr richtig“, warnt er. Hinzu kommt ein neuer Leistungsdruck: „Was gestern als gute Leistung galt, gilt heute als Mindestmaß.“ In seinem Betrieb wurde eine ähnliche Software vor einem Jahr eingeführt, ohne dass die Belegschaft vorher ausreichend informiert worden war. „Die Kolleginnen und Kollegen hätten viel früher geschult werden müssen“, sagt Hofstetter. Inzwischen hat der Betriebsrat eine Vereinbarung durchgesetzt: Was die Software tut, muss für alle nachvollziehbar sein, und keine Leistung darf heimlich gemessen werden.\n(C) Ulrike Eichhorn leitet eine Steuerberatungskanzlei mit sechzig Angestellten. Sie hält die Sorgen für verständlich, aber übertrieben. „Wir haben niemanden entlassen. Im Gegenteil: Ohne die neuen Werkzeuge hätten wir die vielen Steuererklärungen gar nicht mehr bearbeiten können, weil wir seit Jahren keine Fachkräfte finden.“ Für sie ist künstliche Intelligenz vor allem ein Mittel gegen den Fachkräftemangel. Seit die Software die Belege vorsortiert, haben ihre Angestellten wieder mehr Zeit für persönliche Gespräche mit der Kundschaft. „Genau dafür haben die meisten diesen Beruf gewählt“, sagt sie. Dass nicht alles reibungslos lief, gibt sie offen zu: Ein Projekt zur automatischen Prüfung von Belegen hat nicht rechtzeitig abgeschlossen werden können, weil die Daten zu ungenau waren.\n(D) Der Arbeitsforscher Arne Lütjens hält beide Perspektiven für berechtigt. Seine Untersuchungen zeigen, dass sich vor allem Routinetätigkeiten automatisieren lassen: Daten übertragen, Texte zusammenfassen, Termine koordinieren. Was sich dagegen kaum ersetzen lässt, sind Urteilsvermögen, Einfühlungsvermögen und Verantwortung. Lütjens warnt außerdem davor, die Technik zu überschätzen: Viele Programme liefern Ergebnisse, die überzeugend klingen, aber nicht immer stimmen. Jede Antwort ist deshalb kritisch zu prüfen, so überzeugend sie auch formuliert sein mag. „Die entscheidende Frage ist nicht, ob Arbeitsplätze verschwinden, sondern wie sie sich verändern“, sagt Lütjens. Nach seinen Beobachtungen gibt es in Unternehmen, die ihre Beschäftigten früh einbeziehen, deutlich weniger Konflikte.\n(E) Ich halte diese Sicht für die vernünftigste, allerdings mit einer Einschränkung. Dass Technik die Arbeit verändert, ist nichts Neues; neu ist das Tempo. Wenn Programme alle paar Monate neue Funktionen bekommen, reicht eine einmalige Schulung nicht aus. Weiterbildung muss Teil der Arbeitszeit werden und darf nicht in den Feierabend verschoben werden. Sonst profitieren am Ende nur diejenigen, die ohnehin Zeit und Energie haben, sich selbst weiterzubilden. Die Software schreibt mit. Was sie schreibt, sollten aber weiterhin Menschen verantworten.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-arbeitswelt-lesen-artikel",
+          "caption": "Artikel aus einem Wirtschaftsmagazin",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel vor allem? [fr?] De quoi l’article parle-t-il surtout ?",
+          "explanation": "Der Vorspann fragt: „Doch wer kontrolliert eigentlich, was sie tut?“ Alle Absätze behandeln die Veränderung der Büroarbeit durch KI. Die Versicherung hat die Software nicht entwickelt, sondern benutzt sie; Zahlen über Arbeitsplätze und Bedienungstipps kommen nicht vor. [fr?] Le chapeau pose la question du contrôle de l’IA, et chaque paragraphe traite de ses effets sur le travail de bureau. L’assurance utilise le logiciel sans l’avoir créé ; il n’y a ni chiffres sur les emplois ni conseils d’utilisation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um eine neue Software, die eine Hannoveraner Versicherung entwickelt hat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um die Zahl der Büroarbeitsplätze, die bis 2030 verschwinden werden",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "um die Frage, wie KI die Büroarbeit verändert und wer sie kontrolliert",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "um Tipps, wie man KI-Programme im Büroalltag richtig bedient",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Position vertritt die Autorin im letzten Absatz? [fr?] Quelle position l’autrice défend-elle dans le dernier paragraphe ?",
+          "explanation": "„Ich halte diese Sicht für die vernünftigste, allerdings mit einer Einschränkung“: Sie teilt die Sicht von Lütjens. Ihre Einschränkung: „Weiterbildung muss Teil der Arbeitszeit werden.“ Eine einmalige Schulung reicht für sie gerade nicht aus, und ein Verbot fordert sie nicht. [fr?] Elle partage l’avis de Lütjens, avec une réserve : la formation continue doit faire partie du temps de travail. Une formation unique ne suffit justement pas, et elle ne demande aucune interdiction.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie stimmt Lütjens zu, verlangt aber Weiterbildung während der Arbeitszeit.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hält die Sorgen der Beschäftigten wie Frau Eichhorn für übertrieben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie fordert, den Einsatz von KI in Büros gesetzlich zu verbieten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie meint, dass eine einmalige Schulung für alle Beschäftigten ausreicht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Natalia Wróbel hat heute noch Angst, dass die Software sie überflüssig macht.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Am Anfang hatte ich Angst … Inzwischen sehe ich das anders.“ „Am Anfang“ und „inzwischen“ zeigen, dass sich ihre Meinung geändert hat. [fr?] Faux : elle avait peur au début, mais « inzwischen » (entre-temps) elle voit les choses autrement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Laut der Vereinbarung in Hofstetters Betrieb darf die Leistung der Beschäftigten nicht heimlich gemessen werden.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „… und keine Leistung darf heimlich gemessen werden.“ Das ist ein Passiv mit Modalverb: Niemand darf die Leistung heimlich messen. [fr?] Vrai : l’accord interdit de mesurer en secret la performance des salariés (passif avec verbe de modalité).",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was lässt sich aus Ulrike Eichhorns Aussagen schließen? [fr?] Que peut-on déduire des propos d’Ulrike Eichhorn ?",
+          "explanation": "„Ohne die neuen Werkzeuge hätten wir die vielen Steuererklärungen gar nicht mehr bearbeiten können, weil wir seit Jahren keine Fachkräfte finden.“ Daraus folgt: Die KI gleicht fehlendes Personal aus. Entlassen hat sie niemanden, das Projekt wurde nicht rechtzeitig fertig, und sie findet die Sorgen „verständlich“. [fr?] Sans ces outils, son cabinet n’aurait pas pu traiter les dossiers faute de personnel qualifié. Elle n’a licencié personne, le projet a pris du retard, et elle juge les inquiétudes compréhensibles, donc pas totalement infondées.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihre Kanzlei hat wegen der KI mehrere Stellen abgebaut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Projekt zur Prüfung der Belege war ein voller Erfolg.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hält die Ängste der Beschäftigten für völlig unbegründet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ohne KI würde ihrer Kanzlei noch mehr Personal fehlen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Arne Lütjens hat selbst eine Software für Büros entwickelt.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Lütjens ist Arbeitsforscher, und es ist von seinen Untersuchungen die Rede. Ob er selbst Software entwickelt hat, sagt der Artikel nicht. [fr?] Non mentionné : on sait seulement qu’il étudie le travail ; rien n’est dit sur un logiciel qu’il aurait développé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A: Wróbel hat dank der Software mehr Zeit für schwierige Fälle. B: Wer zwanzig Vorschläge pro Stunde prüfen soll, arbeitet „im Akkord“, also unter Zeitdruck. C: Eichhorn sieht KI als Mittel gegen den Fachkräftemangel. D: Urteilsvermögen und Verantwortung lassen sich kaum ersetzen. E: Weiterbildung gehört in die Arbeitszeit. [fr?] A : plus de temps pour les cas difficiles ; B : contrôler à la chaîne (im Akkord) ; C : un remède à la pénurie de personnel ; D : ce qui ne se remplace pas ; E : se former ne doit pas empiéter sur le temps libre.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Mehr Zeit für die schwierigen Fälle"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Prüfen im Akkord"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Ein Mittel gegen den Fachkräftemangel"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Was sich nicht ersetzen lässt"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Lernen darf nicht die Freizeit kosten"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Welches Wort aus dem Text passt? Ergänzen Sie. [fr?] Quel mot du texte convient ? Complétez.",
+          "text": "Absatz A: Jeder Vorschlag der Software ist von einem [[1]] zu prüfen. · Absatz B: Hofstetter vertritt als [[2]] die Beschäftigten eines Logistikunternehmens. · Absatz D: Kaum ersetzen lassen sich Urteilsvermögen, Einfühlungsvermögen und [[3]].",
+          "explanation": "„von einem Menschen“: Dativ mit n-Deklination (der Mensch, dem Menschen). „Betriebsrat“ bezeichnet das Gremium und auch seine Mitglieder. Absatz D nennt drei Fähigkeiten, die sich kaum ersetzen lassen; die dritte ist die Verantwortung. [fr?] Mensch suit la n-Deklination : von einem Menschen. Betriebsrat désigne l’instance comme ses membres. La troisième capacité citée est la responsabilité.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Menschen"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Betriebsrat",
+                "Betriebsratsmitglied"
+              ],
+              "size": 21,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Verantwortung"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-arbeitswelt-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: eine Reportage über das Recht auf Feierabend",
+      "estimatedMinutes": 22,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Reportage über das Recht auf Feierabend",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\nIn einer Radioreportage besucht Larissa Ahrens ein Maschinenbauunternehmen, das neue Regeln für die Erreichbarkeit eingeführt hat. Sie spricht mit einem Ingenieur, mit der Personalleiterin und mit einem Mitglied des Betriebsrats. [fr?] Dans un reportage radio, Larissa Ahrens visite une entreprise de construction mécanique qui a instauré de nouvelles règles sur la joignabilité. Elle interroge un ingénieur, la DRH et un élu du personnel.\n\nSTRATEGIE\n1. Erstes Hören: Welche Regeln gibt es, und wer bewertet sie wie? [fr?] Première écoute : quelles sont les règles, et qui les juge comment ?\n2. Lesen Sie dann die Notizen. Zahlen und Uhrzeiten hören Sie in Wörtern: „neunzehn Uhr“ können Sie als „19“ schreiben. [fr?] Lisez ensuite les notes. Les nombres et les heures sont dits en toutes lettres : vous pouvez écrire « 19 » pour « neunzehn Uhr ».\n3. Zweites Hören: Achten Sie auf Signalwörter wie „erstens“, „zweitens“, „aber“ und „trotzdem“. [fr?] Deuxième écoute : repérez les mots-signaux comme « erstens », « zweitens », « aber » et « trotzdem ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-arbeitswelt-hoeren-audio",
+          "caption": "Radioreportage: Recht auf Feierabend",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Neue Regeln seit: [[1]] · keine E-Mails zwischen [[2]] und sieben Uhr · Kernarbeitszeit: [[3]] bis fünfzehn Uhr, nur dann Besprechungen · Homeoffice: [[4]] Tage pro Woche · echte Notfälle: das [[5]]",
+          "explanation": "„Seit Januar gelten dort neue Regeln.“ „Zwischen neunzehn und sieben Uhr werden keine E-Mails zugestellt.“ Kernarbeitszeit „von zehn bis fünfzehn Uhr“; Homeoffice „an zwei Tagen pro Woche“; „Für echte Notfälle gibt es ein Bereitschaftstelefon.“ [fr?] Depuis janvier ; pas de courriels entre 19 h et 7 h ; plages fixes de 10 h à 15 h ; deux jours de télétravail ; un téléphone d’astreinte pour les urgences.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Januar"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "neunzehn",
+                "19",
+                "19 Uhr",
+                "neunzehn Uhr"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "zehn",
+                "10",
+                "10 Uhr",
+                "zehn Uhr"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "zwei",
+                "2"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Bereitschaftstelefon",
+                "Bereitschaftshandy"
+              ],
+              "size": 21,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Befragung: fast jeder [[1]] war nach Feierabend erreichbar · mehr Krankmeldungen wegen [[2]] · Produktion: flexiblere [[3]] statt Homeoffice · Kritik des Betriebsrats: Die Regeln gelten nur für [[4]], nicht für Chats · zweite Befragung im [[5]]",
+          "explanation": "Frau Raabe: „fast jeder Dritte“ war erreichbar, und es gab mehr Krankmeldungen „wegen Erschöpfung“. Für die Produktion gibt es „flexiblere Schichtpläne“. Herr Kerner: Die Regeln „gelten bisher nur für E-Mails“. Die zweite Befragung findet „im Juli“ statt. [fr?] Presque un salarié sur trois était joignable le soir ; plus d’arrêts maladie pour épuisement ; des plannings d’équipe plus souples en production ; les règles ne visent que les courriels ; nouvelle enquête en juillet.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Dritte"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Erschöpfung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Schichtpläne"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "E-Mails",
+                "Mails",
+                "E-Mail"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Juli"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie fand Ömer Çelik die E-Mail-Pause am Anfang? [fr?] Qu’a pensé Ömer Çelik de la pause des courriels au début ?",
+          "explanation": "„Am Anfang fand ich das ehrlich gesagt bevormundend. Ich bin erwachsen, ich kann selbst entscheiden, wann ich arbeite.“ Erst später merkte er, wie oft er abends gearbeitet hatte. Er las also durchaus abends Mails. [fr?] Il trouvait la règle paternaliste : adulte, il voulait décider seul. Ce n’est qu’ensuite qu’il a vu combien il travaillait le soir.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er war sofort begeistert, weil er abends nie arbeiten wollte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er fand sie bevormundend, weil er selbst entscheiden wollte.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er hielt sie für unnötig, weil er abends nie Mails las.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er hatte Angst, wichtige Kundenanfragen zu verpassen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum hat das Unternehmen die neuen Regeln eingeführt? [fr?] Pourquoi l’entreprise a-t-elle instauré ces règles ?",
+          "explanation": "Frau Raabe nennt zwei Gründe: Fast jeder Dritte war erreichbar, „obwohl das niemand ausdrücklich verlangt hatte“, und die Krankmeldungen „wegen Erschöpfung“ sind gestiegen. Die Schichtpläne sind eine Folge der Regeln, kein Grund dafür. [fr?] Deux raisons : beaucoup restaient joignables sans qu’on le leur demande, et les arrêts pour épuisement augmentaient. Les nouveaux plannings sont une conséquence, pas une cause.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil der Betriebsrat mit einem Streik gedroht hatte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil sich mehrere Kunden über zu späte Antworten beschwert hatten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil viele ungefragt erreichbar waren und Erschöpfung zunahm.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Weil die Produktion neue Schichtpläne brauchte.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was gilt laut Annette Raabe für Beschäftigte ohne Bereitschaft? [fr?] Selon Annette Raabe, qu’en est-il des salariés qui ne sont pas d’astreinte ?",
+          "explanation": "„Alle anderen müssen nicht reagieren, und das darf ihnen auch nicht negativ angerechnet werden.“ Den Zuschlag bekommen nur die Beschäftigten mit Bereitschaft. Das Handy in der Schublade ist die persönliche Regel von Herrn Çelik. [fr?] Ils n’ont pas à répondre, et on ne peut pas le leur reprocher. La prime est réservée à l’astreinte ; le téléphone dans le tiroir est la règle personnelle de M. Çelik.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie müssen nicht reagieren, und das darf ihnen nicht schaden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie müssen Notfälle am nächsten Morgen sofort bearbeiten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie bekommen einen Zuschlag, wenn sie trotzdem antworten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie dürfen ihr Diensthandy nicht mit nach Hause nehmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was kritisiert Fabian Kerner an der Vereinbarung? [fr?] Que reproche Fabian Kerner à l’accord ?",
+          "explanation": "„Aber sie gelten bisher nur für E-Mails. Über die Chatgruppen … kommen abends immer noch Nachrichten. Das hätte von Anfang an mitgeregelt werden müssen.“ Er hat die Vereinbarung selbst „mit ausgehandelt“ und nennt sie „einen großen Fortschritt“. [fr?] Les règles ne couvrent que les courriels, pas les messageries : c’est une lacune. Il a lui-même négocié l’accord et le juge comme un grand progrès.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kommt für die Beschäftigten der Produktion viel zu spät.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie schränkt die Freiheit der Beschäftigten zu stark ein.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie wurde ohne den Betriebsrat ausgehandelt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie lässt mit den Chats eine wichtige Lücke offen.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-arbeitswelt-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Was muss getan werden?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Was muss getan werden?",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus der Reportage. Achten Sie auf die Verben und auf „zu“, „lassen“ und „-bar“. [fr?] Lisez ces phrases de l’article et du reportage. Observez les verbes, ainsi que « zu », « lassen » et « -bar ».\n\nSÄTZE\n(1) Früher musste jeder Brief einzeln gelesen, sortiert und beantwortet werden.\n(2) Jeder Vorschlag ist von einem Menschen zu prüfen.\n(3) Die Kolleginnen und Kollegen hätten viel früher geschult werden müssen.\n(4) Ein Projekt hat nicht rechtzeitig abgeschlossen werden können.\n(5) … dass sich vor allem Routinetätigkeiten automatisieren lassen.\n(6) Was die Software tut, muss für alle nachvollziehbar sein.\n(7) Natürlich lässt sich nicht jede Tätigkeit von zu Hause erledigen.\n(8) Das hätte von Anfang an mitgeregelt werden müssen.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions : les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1, 3, 4 und 8: Was haben sie gemeinsam? [fr?] Phrases 1, 3, 4 et 8 : qu’ont-elles en commun ?",
+          "explanation": "In allen vier Sätzen wird gesagt, was getan werden muss, kann oder musste, ohne dass der Handelnde wichtig ist: gelesen werden musste, geschult werden müssen, abgeschlossen werden können, mitgeregelt werden müssen. Partizip II + „werden“ ist das Passiv, dazu kommt ein Modalverb. [fr?] Dans les quatre phrases, on dit ce qui doit ou peut être fait, sans insister sur qui agit : participe II + werden (passif) + verbe de modalité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aktiv mit Modalverb: Das Subjekt handelt selbst.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zustandspassiv: sein + Partizip II, ein Ergebnis wird beschrieben",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Konjunktiv I: Jemand gibt die Aussage einer anderen Person wieder.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Passiv mit Modalverb: Partizip II + werden + Modalverb",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "In welcher Zeitform steht das Passiv mit Modalverb? Ordnen Sie zu. [fr?] À quel temps est ce passif avec verbe de modalité ? Associez.",
+          "explanation": "Nur das Modalverb ändert sich: müssen (Präsens), musste (Präteritum), hat … können (Perfekt), hätten … müssen (Konjunktiv II der Vergangenheit). Im Perfekt und im Konjunktiv II stehen am Ende drei Verben: Partizip II + werden + Modalverb im Infinitiv. [fr?] Seul le verbe de modalité change de temps. Au parfait et au Konjunktiv II passé, trois verbes finissent la phrase : participe + werden + modal à l’infinitif.",
+          "pairs": [
+            {
+              "left": "Die Ergebnisse müssen geprüft werden.",
+              "right": "Präsens"
+            },
+            {
+              "left": "… musste beantwortet werden (Satz 1)",
+              "right": "Präteritum"
+            },
+            {
+              "left": "… hat nicht abgeschlossen werden können (Satz 4)",
+              "right": "Perfekt"
+            },
+            {
+              "left": "… hätten geschult werden müssen (Satz 3)",
+              "right": "Konjunktiv II der Vergangenheit"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz 2: Wie kann man „ist … zu prüfen“ mit einem Passiv ausdrücken? [fr?] Phrase 2 : comment exprimer « ist … zu prüfen » avec un passif ?",
+          "explanation": "„sein + zu + Infinitiv“ ersetzt ein Passiv mit „müssen“ (oder „können“). Hier geht es um eine Pflicht: Jeder Vorschlag muss geprüft werden. „Ist schon geprüft worden“ bedeutet etwas anderes: Die Prüfung ist schon passiert. [fr?] sein + zu + infinitif équivaut à un passif avec müssen (ou können) : ici une obligation. « ist geprüft worden » signifierait que le contrôle a déjà eu lieu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jeder Vorschlag ist schon geprüft worden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Jeder Vorschlag muss geprüft werden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Jeder Vorschlag wird geprüft haben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Jeder Vorschlag hat geprüft werden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sätze 5 und 7: Was bedeutet „sich … lassen“ hier? [fr?] Phrases 5 et 7 : que signifie « sich … lassen » ici ?",
+          "explanation": "„Routinetätigkeiten lassen sich automatisieren“ = Sie können automatisiert werden. „Nicht jede Tätigkeit lässt sich von zu Hause erledigen“ = Nicht jede Tätigkeit kann von zu Hause erledigt werden. Ohne „sich“ hat „lassen“ andere Bedeutungen: erlauben oder machen lassen. [fr?] sich lassen + infinitif = passif avec können. Sans pronom réfléchi, lassen signifie « permettre » ou « faire faire ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man kann etwas tun: Es kann (nicht) gemacht werden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Man erlaubt einer Person, etwas zu tun.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man beauftragt eine andere Person mit einer Arbeit.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Etwas passiert ganz von selbst, ohne Menschen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-arbeitswelt-regel",
+      "kind": "lesson",
+      "title": "Regel: Passiv mit Modalverb und Alternativen zum Passiv",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Passiv mit Modalverb und Alternativen zum Passiv",
+        "description": "REGEL: PASSIV MIT MODALVERB\n[fr?] Règle : le passif avec un verbe de modalité\nMit dem Passiv mit Modalverb sagen Sie, was getan werden muss, kann, soll oder darf. Wer es tut, ist nicht wichtig. Das Modalverb ist konjugiert, am Ende stehen das Partizip II und „werden“. [fr?] Le passif avec verbe de modalité dit ce qui doit, peut ou devrait être fait, sans préciser qui agit. Le modal est conjugué ; le participe et werden ferment la phrase.\n\nFORMEN\n• Präsens: Die Daten müssen geschützt werden. [fr?] Présent : « les données doivent être protégées ».\n• Präteritum: Die Daten mussten geschützt werden. [fr?] Prétérit : « les données devaient être protégées ».\n• Perfekt: Das Projekt hat nicht abgeschlossen werden können. [fr?] Parfait : hat + participe + werden + modal à l’infinitif (« n’a pas pu être achevé »).\n• Konjunktiv II der Vergangenheit: Die Beschäftigten hätten früher geschult werden müssen. [fr?] Konjunktiv II passé : « auraient dû être formés plus tôt ».\n• Nebensatz: Das konjugierte Verb steht vor den drei Verben. …, weil das Projekt nicht hat abgeschlossen werden können. …, dass sie früher hätten geschult werden müssen. [fr?] Subordonnée : hat ou hätten se place devant les trois verbes, pas à la fin.\nTipp: Im Alltag hört man statt des Perfekts meist das Präteritum: Das Projekt konnte nicht abgeschlossen werden. [fr?] Conseil : à l’oral, on préfère souvent le prétérit, plus léger que le parfait.\n\nREGEL: ALTERNATIVEN ZUM PASSIV\n[fr?] Règle : les équivalents du passif\n• sein + zu + Infinitiv = Passiv mit „müssen“ oder „können“: Die Regeln sind einzuhalten. Das Problem ist leicht zu lösen. [fr?] sein + zu + infinitif : obligation (« les règles sont à respecter ») ou possibilité (« le problème est facile à résoudre »).\n• sich lassen + Infinitiv = Passiv mit „können“: Das lässt sich ändern. Nicht jede Arbeit lässt sich automatisieren. [fr?] sich lassen + infinitif = « peut être fait » : « cela peut se changer ».\n• Adjektive auf -bar oder -lich = Passiv mit „können“: machbar, ersetzbar, nachvollziehbar; verständlich, unvermeidlich. [fr?] Adjectifs en -bar / -lich = « qui peut être … » : faisable, remplaçable, compréhensible, inévitable.\n• man + Aktiv: Man muss die Ergebnisse prüfen. [fr?] man + actif, comme « on » en français.\n\nACHTUNG\n[fr?] Attention : les pièges des francophones\n• Mit einem zweiten Verb steht das Modalverb im Infinitiv: hat … werden können, nicht „hat … werden gekonnt“. [fr?] Avec un autre verbe, le modal reste à l’infinitif : jamais gekonnt ni gemusst ici.\n• „sein + zu“ kann „müssen“ oder „können“ bedeuten: Der Kontext entscheidet. Der Antrag ist bis Freitag abzugeben (müssen). Die Aufgabe ist leicht zu lösen (können). [fr?] sein + zu peut exprimer l’obligation ou la possibilité : c’est le contexte qui tranche.\n• Ein Dativ bleibt Dativ: Den Kunden muss geholfen werden. Es gibt dann kein Subjekt. [fr?] Avec un verbe au datif (helfen), le datif reste : « den Kunden muss geholfen werden », sans sujet.\n• „Das lässt sich machen“ (Das kann gemacht werden) ist nicht dasselbe wie „Ich lasse das machen“ (Ich beauftrage jemanden). [fr?] « sich machen lassen » = pouvoir être fait ; « etwas machen lassen » = faire faire quelque chose.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-arbeitswelt-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Passiv mit Modalverb und Passiversatz",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Passiv mit Modalverb und Passiversatz",
+        "description": "Üben Sie die Formen. Lesen Sie jede Erklärung, auch wenn Ihre Antwort richtig ist. [fr?] Entraînez-vous aux formes. Lisez chaque explication, même si votre réponse est juste.\n\nMERKE\n• Modalverb + Partizip II + werden · Perfekt: hat + Partizip II + werden + Modalverb\n• sein + zu + Infinitiv · sich lassen + Infinitiv · Adjektiv auf -bar / -lich",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Partizip II. [fr?] Complétez avec le participe passé.",
+          "text": "Die Ergebnisse müssen sorgfältig [[1]] werden. · Viele Routineaufgaben können heute [[2]] werden. · Persönliche Daten dürfen nicht ohne Erlaubnis [[3]] werden.",
+          "explanation": "Passiv mit Modalverb: Modalverb + Partizip II + „werden“. Verben auf „-ieren“ bilden das Partizip ohne „ge-“ (automatisiert); bei trennbaren Verben steht „ge-“ zwischen Präfix und Stamm (weiter-ge-geben). [fr?] Modal + participe + werden. Les verbes en -ieren n’ont pas de ge- ; pour les verbes séparables, ge- se glisse entre la particule et le radical.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "geprüft"
+              ],
+              "hint": "prüfen",
+              "size": 8
+            },
+            {
+              "id": "2",
+              "accept": [
+                "automatisiert"
+              ],
+              "hint": "automatisieren",
+              "size": 14
+            },
+            {
+              "id": "3",
+              "accept": [
+                "weitergegeben"
+              ],
+              "hint": "weitergeben",
+              "size": 14
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Formen von „können“. [fr?] Complétez avec les formes de « können ».",
+          "text": "Präteritum: Der Bericht [[1]] nicht rechtzeitig abgeschlossen werden. · Perfekt: Der Bericht [[2]] nicht rechtzeitig abgeschlossen werden [[3]].",
+          "explanation": "Im Präteritum wird nur das Modalverb konjugiert: konnte. Im Perfekt steht „hat“, und am Ende folgen drei Verben: abgeschlossen werden können. Das Modalverb steht dabei im Infinitiv, nicht als Partizip („gekonnt“). [fr?] Au prétérit : konnte. Au parfait : hat … abgeschlossen werden können, avec le modal à l’infinitif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "konnte"
+              ],
+              "hint": "können",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "hat"
+              ],
+              "hint": "haben",
+              "size": 4
+            },
+            {
+              "id": "3",
+              "accept": [
+                "können"
+              ],
+              "hint": "können",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Beschäftigten",
+              "hätten",
+              "viel",
+              "früher",
+              "über die Software",
+              "informiert",
+              "werden",
+              "müssen."
+            ],
+            [
+              "Die Beschäftigten",
+              "hätten",
+              "über die Software",
+              "viel",
+              "früher",
+              "informiert",
+              "werden",
+              "müssen."
+            ]
+          ],
+          "explanation": "Konjunktiv II der Vergangenheit im Passiv: „hätten“ auf Position 2, am Ende Partizip II + „werden“ + Modalverb im Infinitiv: informiert werden müssen. Die Angaben „viel früher“ und „über die Software“ stehen im Mittelfeld. [fr?] Konjunktiv II passé au passif : hätten en deuxième position, puis informiert werden müssen à la fin ; les compléments restent au milieu."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Chefin",
+              "erklärt,",
+              "dass",
+              "das Projekt",
+              "nicht",
+              "rechtzeitig",
+              "hat",
+              "abgeschlossen",
+              "werden",
+              "können."
+            ]
+          ],
+          "explanation": "Im Nebensatz steht „hat“ nicht am Ende, sondern vor den drei Verben: …, dass das Projekt nicht rechtzeitig hat abgeschlossen werden können. Gleiche Regel wie beim Konjunktiv II mit zwei Infinitiven. [fr?] Dans la subordonnée, hat précède les trois verbes au lieu d’aller à la fin, comme avec le double infinitif."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "Perfekt Passiv mit Modalverb: haben + Partizip II + „werden“ + Modalverb im Infinitiv. „Gekonnt“ ist mit einem zweiten Verb falsch, „worden“ gehört zum Passiv ohne Modalverb, und „können werden“ hat die falsche Reihenfolge. [fr?] haben + participe + werden + modal à l’infinitif. Pas de gekonnt, pas de worden ici, et l’ordre est fixe : übertragen werden können.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Daten haben nicht rechtzeitig übertragen werden gekonnt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Daten sind nicht rechtzeitig übertragen worden können.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Daten haben nicht rechtzeitig übertragen werden können.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Daten haben nicht rechtzeitig übertragen können werden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welcher Satz bedeutet dasselbe? Ordnen Sie zu. [fr?] Quelle phrase a le même sens ? Associez.",
+          "explanation": "„sind einzuhalten“ drückt eine Pflicht aus (müssen); „ist leicht zu lösen“ eine Möglichkeit (können), erkennbar an „leicht“. „Lässt sich vereinfachen“ und „nachvollziehbar“ entsprechen immer einem Passiv mit „können“. [fr?] sein + zu : obligation ou possibilité selon le contexte (« leicht » indique la possibilité). sich lassen et -bar correspondent toujours à können.",
+          "pairs": [
+            {
+              "left": "Die Regeln sind einzuhalten.",
+              "right": "Die Regeln müssen eingehalten werden."
+            },
+            {
+              "left": "Das Problem ist leicht zu lösen.",
+              "right": "Das Problem kann leicht gelöst werden."
+            },
+            {
+              "left": "Der Ablauf lässt sich vereinfachen.",
+              "right": "Der Ablauf kann vereinfacht werden."
+            },
+            {
+              "left": "Die Entscheidung ist nachvollziehbar.",
+              "right": "Die Entscheidung kann nachvollzogen werden."
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Bilden Sie ein Adjektiv auf -bar oder -lich. [fr?] Formez un adjectif en -bar ou -lich.",
+          "text": "Was man machen kann, ist [[1]]. · Was man nicht vermeiden kann, ist [[2]]. · Was man gut verstehen kann, ist gut [[3]].",
+          "explanation": "Verbstamm + „-bar“: machbar, unvermeidbar. Daneben gibt es Adjektive auf „-lich“: unvermeidlich, verständlich. Beide Endungen bedeuten hier: Es kann gemacht, vermieden oder verstanden werden. „Unvermeidbar“ und „unvermeidlich“ sind beide richtig. [fr?] Radical + -bar ou -lich : « faisable », « inévitable » (deux formes correctes), « compréhensible ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "machbar"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "unvermeidbar",
+                "unvermeidlich"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "verständlich"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welcher Satz bedeutet: „Dieser Fehler kann nicht korrigiert werden.“? [fr?] Quelle phrase signifie : « cette erreur ne peut pas être corrigée » ?",
+          "explanation": "„sich lassen“ + Infinitiv = Passiv mit „können“. Ohne „sich“ ist der Satz unvollständig, „ist bis heute nicht korrigiert worden“ beschreibt eine Tatsache, und nach „lassen“ steht der Infinitiv, nicht das Partizip. [fr?] sich lassen + infinitif. Sans sich, la phrase est incomplète ; « ist bis heute nicht korrigiert worden » constate un fait ; après lassen, infinitif et non participe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dieser Fehler lässt sich nicht korrigieren.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Dieser Fehler lässt nicht korrigieren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dieser Fehler ist bis heute nicht korrigiert worden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dieser Fehler lässt sich nicht korrigiert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Formulieren Sie mit „sein + zu“. [fr?] Reformulez avec « sein + zu ».",
+          "text": "Man muss die Anträge bis Freitag einreichen. → Die Anträge sind bis Freitag [[1]]. · Man kann das Formular online herunterladen. → Das Formular ist online [[2]].",
+          "explanation": "Das Akkusativobjekt wird Subjekt („die Anträge“, „das Formular“), dann folgt „sein + zu + Infinitiv“. Bei trennbaren Verben steht „zu“ zwischen Präfix und Stamm: ein-zu-reichen, herunter-zu-laden. [fr?] Le complément devient sujet, puis sein + zu + infinitif. Avec un verbe séparable, zu se place entre la particule et le radical.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "einzureichen"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "herunterzuladen"
+              ],
+              "size": 16,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "„helfen“ verlangt den Dativ (den Kolleginnen helfen). Im Passiv bleibt der Dativ erhalten, und es gibt kein Subjekt: Das Verb steht deshalb im Singular, „muss … geholfen werden“. [fr?] helfen régit le datif, qui reste au passif ; sans sujet, le verbe est au singulier : muss … geholfen werden.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die neuen Kolleginnen müssen bei der Einarbeitung geholfen werden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Den neuen Kolleginnen muss bei der Einarbeitung geholfen werden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Den neuen Kolleginnen müssen bei der Einarbeitung geholfen werden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die neuen Kolleginnen muss bei der Einarbeitung geholfen werden.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-arbeitswelt-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: über Arbeit und Regeln sprechen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: über Arbeit und Regeln sprechen",
+        "description": "Lernen Sie die Wörter in festen Verbindungen, in Wortfamilien und mit ihren Präpositionen. [fr?] Apprenez les mots dans des expressions figées, des familles de mots et avec leurs prépositions.\n\nTIPP\nIn der Arbeitswelt gibt es viele feste Verbindungen aus Nomen und Verb: eine Vereinbarung schließen, Überstunden abbauen, Rücksicht nehmen. Lernen Sie sie immer zusammen. [fr?] Le vocabulaire du travail compte beaucoup d’expressions nom + verbe : apprenez-les toujours ensemble.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "Eine Vereinbarung schließen (sich einigen), Überstunden abbauen (weniger Überstunden haben), Rücksicht nehmen (auf andere achten), klare Grenzen ziehen (deutlich sagen, was nicht geht), eine Schulung besuchen. [fr?] Conclure un accord, réduire les heures supplémentaires, avoir des égards, poser des limites claires, suivre une formation.",
+          "pairs": [
+            {
+              "left": "eine Vereinbarung",
+              "right": "schließen"
+            },
+            {
+              "left": "Überstunden",
+              "right": "abbauen"
+            },
+            {
+              "left": "Rücksicht",
+              "right": "nehmen"
+            },
+            {
+              "left": "klare Grenzen",
+              "right": "ziehen"
+            },
+            {
+              "left": "eine Schulung",
+              "right": "besuchen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "erreichbar → die [[1]] · belasten → die [[2]] · erschöpft → die [[3]] · vereinbaren → die [[4]]",
+          "explanation": "Adjektive auf „-bar“ bilden Nomen auf „-keit“: die Erreichbarkeit. Verben bilden Nomen auf „-ung“: die Belastung, die Vereinbarung. „Erschöpft“ ist ein Partizip von „erschöpfen“, daher: die Erschöpfung. Alle diese Nomen sind feminin. [fr?] Adjectif en -bar → nom en -keit ; verbe → nom en -ung. Tous ces noms sont féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Erreichbarkeit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Belastung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Erschöpfung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Vereinbarung"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Nach Feierabend kann ich endlich abschalten.“ Was bedeutet „abschalten“ hier? [fr?] Que signifie « abschalten » dans cette phrase ?",
+          "explanation": "„Abschalten“ hat zwei Bedeutungen: ein Gerät ausschalten und, im übertragenen Sinn, zur Ruhe kommen. „Endlich“ und „nach Feierabend“ zeigen, dass hier die übertragene Bedeutung gemeint ist. [fr?] Au sens propre, abschalten veut dire « éteindre » ; au sens figuré, « décrocher ». « endlich » et « nach Feierabend » imposent le sens figuré.",
+          "options": [
+            {
+              "id": "a",
+              "label": "den Computer und das Licht im Büro ausmachen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "sich entspannen und nicht mehr an die Arbeit denken",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Arbeitsstelle kündigen und etwas Neues suchen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "das Telefon auf lautlos stellen und weiterarbeiten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten in einer E-Mail an die Geschäftsleitung höflich einen Vorschlag machen. Welche Formulierung passt? [fr?] Vous voulez faire poliment une proposition à la direction par courriel. Quelle formulation convient ?",
+          "explanation": "„einen Vorschlag unterbreiten“ ist eine formelle, höfliche Wendung. „Einfach mal was“ ist umgangssprachlich, „anordnen“ steht nur einer vorgesetzten Person zu, und „sofort ändern“ klingt wie eine Forderung. [fr?] « einen Vorschlag unterbreiten » (soumettre une proposition) est la formule polie du registre formel. Les autres sont familières, autoritaires ou trop exigeantes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir schlagen Ihnen jetzt einfach mal was vor:",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Hiermit ordnen wir für unser Team folgende neue Regelung an:",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wir hätten gern, dass Sie das sofort ändern:",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Wir möchten Ihnen daher folgenden Vorschlag unterbreiten:",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Was bedeuten die Wörter? Ordnen Sie zu. [fr?] Que signifient ces mots ? Associez.",
+          "explanation": "Die Kernarbeitszeit und das Bereitschaftstelefon kommen in der Reportage vor, Betriebsrat und Fachkräftemangel im Artikel. „Bereitschaft“ hat außerhalb der Arbeitswelt auch die Bedeutung „Wille, etwas zu tun“. [fr?] Plages fixes, astreinte, comité d’entreprise, pénurie de personnel qualifié. Hors du travail, Bereitschaft veut aussi dire « disposition à faire quelque chose ».",
+          "pairs": [
+            {
+              "left": "die Kernarbeitszeit",
+              "right": "Zeit, in der alle anwesend sein müssen"
+            },
+            {
+              "left": "die Bereitschaft",
+              "right": "Zeit, in der man für Notfälle erreichbar ist"
+            },
+            {
+              "left": "der Betriebsrat",
+              "right": "die gewählte Vertretung der Beschäftigten"
+            },
+            {
+              "left": "der Fachkräftemangel",
+              "right": "Es fehlen qualifizierte Arbeitskräfte."
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr?] Complétez avec les prépositions.",
+          "text": "Der Betriebsrat hat sich [[1]] klare Regeln eingesetzt. · Viele leiden [[2]] der ständigen Erreichbarkeit. · Die Firma reagiert [[3]] den Fachkräftemangel.",
+          "explanation": "sich einsetzen für + Akkusativ, leiden unter + Dativ, reagieren auf + Akkusativ. Diese Präpositionen lassen sich nicht aus der Muttersprache ableiten: Lernen Sie Verb und Präposition zusammen. [fr?] S’engager pour (sich einsetzen für), souffrir de (leiden unter + datif), réagir à (reagieren auf).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "unter"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Am Anfang fand ich die Regel bevormundend.“ Was bedeutet „bevormundend“? [fr?] Que signifie « bevormundend » ?",
+          "explanation": "Ein Vormund entscheidet für eine Person, die das nicht selbst darf, zum Beispiel für ein Kind. Wer sich „bevormundet“ fühlt, hat den Eindruck, wie ein Kind behandelt zu werden. Herr Çelik sagt dazu: „Ich bin erwachsen.“ [fr?] Un Vormund est un tuteur : se sentir « bevormundet », c’est avoir l’impression d’être traité comme un enfant. D’où la remarque « ich bin erwachsen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "so, als dürfte man nicht selbst entscheiden",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "sehr praktisch und modern für alle Beschäftigten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "anstrengend für Körper und Kopf",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ungerecht gegenüber den Kolleginnen und Kollegen",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-arbeitswelt-lesen2",
+      "kind": "exercise",
+      "title": "Verstehen: eine Meldung über die Viertagewoche",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Meldung über die Viertagewoche",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nTIPP\nEine Nachrichtenmeldung beantwortet im ersten Absatz die wichtigsten W-Fragen: Wer? Was? Wann? Wo? Die Details und die Stimmen der Beteiligten folgen danach. [fr?] Une dépêche répond dès le premier paragraphe aux questions essentielles : qui, quoi, quand, où ? Les détails et les témoignages viennent ensuite.\n\nVIER TAGE ARBEIT, VOLLER LOHN: GROSSHÄNDLER ZIEHT BILANZ\n[fr?] Dépêche : la semaine de quatre jours à l’essai\nKassel, 14. März – Ein Kasseler Großhändler für Sanitärbedarf hat ein halbes Jahr lang die Viertagewoche getestet und am Montag erste Ergebnisse vorgestellt. Während des Versuchs arbeiteten die rund 120 Beschäftigten bei vollem Lohn 34 statt 38 Stunden pro Woche, verteilt auf vier Tage.\nNach Angaben des Unternehmens ist die Zahl der Krankheitstage im Vergleich zum Vorjahreszeitraum um etwa ein Viertel gesunken. Der Umsatz konnte trotz der kürzeren Arbeitszeit gehalten werden. Auch bei der Suche nach neuem Personal hat sich der Versuch ausgezahlt: Die Zahl der Bewerbungen hat sich verdoppelt.\n„Wir waren skeptisch, ob sich die Arbeit in vier Tagen überhaupt erledigen lässt“, sagte Geschäftsführer Wolfram Ehlers. „Viele Abläufe mussten neu organisiert werden. Besprechungen wurden zum Beispiel auf dreißig Minuten begrenzt.“ Damit die Kundschaft auch freitags jemanden erreicht, wechseln sich die Teams im Innendienst ab.\nBei der Kundschaft stieß das Modell zunächst auf Skepsis. Einige Handwerksbetriebe befürchteten, freitags niemanden mehr zu erreichen. Nach Angaben des Unternehmens gingen die Beschwerden jedoch nach wenigen Wochen zurück, als sich die neue Freitagsbesetzung eingespielt hatte.\nNicht alle Bereiche profitierten gleichermaßen. Im Lager, wo die Arbeit körperlich anstrengend ist, wurden die längeren Arbeitstage von vielen als belastend empfunden. „Der freie Freitag ist großartig, aber nach mehr als acht Stunden mit schweren Kartons bin ich am Donnerstag völlig fertig“, sagte die Lagerarbeiterin Jule Martens. Für das Lager soll deshalb ein anderes Modell geprüft werden, etwa fünf kürzere Arbeitstage mit einem freien Nachmittag.\nIm Innendienst wird die Viertagewoche zunächst für ein weiteres Jahr fortgesetzt. Eine endgültige Entscheidung will die Geschäftsführung im kommenden Frühjahr treffen, nachdem die Beschäftigten erneut befragt worden sind. Ähnliche Versuche laufen derzeit auch in anderen Betrieben der Region. Ob sich das Modell auf größere Unternehmen übertragen lässt, ist unter Fachleuten allerdings umstritten.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was wurde bei dem Versuch getestet? [fr?] Qu’a-t-on testé pendant cet essai ?",
+          "explanation": "Der erste Absatz beantwortet die W-Fragen: Die Beschäftigten arbeiteten „bei vollem Lohn 34 statt 38 Stunden pro Woche, verteilt auf vier Tage“. Homeoffice und Öffnungszeiten sind nicht das Thema. [fr?] Le premier paragraphe le dit : 34 heures au lieu de 38, sur quatre jours, sans perte de salaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "vier Arbeitstage pro Woche bei vollem Lohn",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "eine Viertagewoche mit weniger Lohn für alle",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "mehr Homeoffice für die Teams im Innendienst",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "längere Öffnungszeiten für die Kundschaft",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "„Während des Versuchs verdienten die Beschäftigten weniger als vorher.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: Sie arbeiteten „bei vollem Lohn“. „Voller Lohn“ heißt: der ganze, unveränderte Lohn, obwohl weniger Stunden gearbeitet wurden. [fr?] Faux : le salaire était maintenu en totalité (« bei vollem Lohn »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welches Ergebnis nennt das Unternehmen? [fr?] Quel résultat l’entreprise annonce-t-elle ?",
+          "explanation": "„Die Zahl der Krankheitstage ist … um etwa ein Viertel gesunken.“ Der Umsatz ist nicht gestiegen, sondern wurde „gehalten“. Freitags wechseln sich die Teams ab, damit die Kundschaft jemanden erreicht. [fr?] Les jours de maladie ont baissé d’environ un quart. Le chiffre d’affaires a été maintenu, pas augmenté ; le vendredi, des équipes assurent une permanence.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Umsatz ist um ein Viertel gestiegen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Freitags war niemand mehr erreichbar.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es gab etwa ein Viertel weniger Krankheitstage.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Zwei Teams haben das Unternehmen verlassen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum soll für das Lager ein anderes Modell geprüft werden? [fr?] Pourquoi faut-il étudier un autre modèle pour l’entrepôt ?",
+          "explanation": "„Im Lager … wurden die längeren Arbeitstage von vielen als belastend empfunden.“ Frau Martens bestätigt: Nach mehr als acht Stunden mit schweren Kartons ist sie „völlig fertig“. Deshalb sollen dort kürzere Tage geprüft werden. [fr?] Le travail physique rend les longues journées pénibles ; d’où l’idée de journées plus courtes sur cinq jours.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil das Lager freitags immer geöffnet sein muss.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil die Lagerarbeiter lieber mehr Lohn wollen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil im Lager mehr Krankheitstage gezählt wurden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil dort die langen Tage als zu belastend galten.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Informationen aus der Meldung. [fr?] Complétez avec les informations de la dépêche.",
+          "text": "Dauer des Versuchs: ein [[1]] Jahr · Wochenarbeitszeit: [[2]] statt 38 Stunden · Bewerbungen: haben sich [[3]] · Besprechungen: höchstens [[4]] Minuten",
+          "explanation": "„ein halbes Jahr lang“; „34 statt 38 Stunden“; „Die Zahl der Bewerbungen hat sich verdoppelt“; „Besprechungen wurden … auf dreißig Minuten begrenzt.“ [fr?] Six mois (« ein halbes Jahr ») ; 34 heures ; les candidatures ont doublé ; réunions limitées à 30 minutes.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "halbes"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "34",
+                "vierunddreißig"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "verdoppelt"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "30",
+                "dreißig"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-arbeitswelt-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: die zweite Befragung",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: die zweite Befragung",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nAnnette Raabe aus der Personalabteilung hat allen Beschäftigten eine Sprachnachricht geschickt. Hören Sie sie für die Fragen 1 bis 3. [fr?] Annette Raabe, du service du personnel, a envoyé un message vocal à tous les salariés. Écoutez-le pour les questions 1 à 3.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-arbeitswelt-kontrolle-audio",
+          "caption": "Nachricht aus der Personalabteilung",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum bittet Frau Raabe? [fr?] Que demande Mme Raabe ?",
+          "explanation": "„Der Fragebogen … muss bis Freitag nächster Woche ausgefüllt werden.“ Die Betriebsversammlung findet erst im September statt, und Freitag ist die Frist für den Fragebogen, nicht für einen Rückruf. [fr?] Il s’agit de remplir un questionnaire avant vendredi prochain. L’assemblée du personnel a lieu en septembre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "einen Fragebogen zu den neuen Regeln auszufüllen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "an einer Betriebsversammlung im Juli teilzunehmen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die neuen Regeln im Intranet zu kommentieren",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "sie bis Freitag nächster Woche zurückzurufen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was erfahren Sie über die Befragung? [fr?] Qu’apprenez-vous sur l’enquête ?",
+          "explanation": "„Er dauert ungefähr zehn Minuten.“ „Die Befragung ist anonym.“ Die Produktion „interessiert uns besonders“, befragt werden aber alle. Die Ergebnisse kommen im September. [fr?] L’enquête est anonyme et dure dix minutes environ. La production intéresse particulièrement, mais tout le monde est interrogé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Diesmal wird nur die Produktion befragt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Ergebnisse werden schon im Juli vorgestellt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie ist anonym und dauert etwa zehn Minuten.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Man muss seinen Namen für Rückfragen angeben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Passiv mit Modalverb aus der Nachricht. [fr?] Complétez avec le passif du message.",
+          "text": "Der Fragebogen muss bis Freitag [[1]] werden. · Die Antworten können nicht einzelnen Personen [[2]] werden. · Die Ergebnisse sollen im September [[3]] werden.",
+          "explanation": "Modalverb + Partizip II + „werden“. Bei trennbaren Verben steht „ge-“ zwischen Präfix und Stamm: aus-ge-füllt, zu-ge-ordnet, vor-ge-stellt. [fr?] Modal + participe + werden ; ge- s’intercale dans les verbes séparables.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ausgefüllt"
+              ],
+              "hint": "ausfüllen",
+              "size": 11
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zugeordnet"
+              ],
+              "hint": "zuordnen",
+              "size": 11
+            },
+            {
+              "id": "3",
+              "accept": [
+                "vorgestellt"
+              ],
+              "hint": "vorstellen",
+              "size": 12
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Herr Kerner",
+              "findet,",
+              "dass",
+              "auch",
+              "die Chats",
+              "von Anfang an",
+              "hätten",
+              "geregelt",
+              "werden",
+              "müssen."
+            ],
+            [
+              "Herr Kerner",
+              "findet,",
+              "dass",
+              "die Chats",
+              "auch",
+              "von Anfang an",
+              "hätten",
+              "geregelt",
+              "werden",
+              "müssen."
+            ],
+            [
+              "Herr Kerner",
+              "findet,",
+              "dass",
+              "von Anfang an",
+              "auch",
+              "die Chats",
+              "hätten",
+              "geregelt",
+              "werden",
+              "müssen."
+            ]
+          ],
+          "explanation": "Konjunktiv II der Vergangenheit im Passiv, im Nebensatz: „hätten“ steht vor den drei Verben „geregelt werden müssen“. Im Mittelfeld können „auch die Chats“ und „von Anfang an“ ihre Plätze tauschen. [fr?] Dans la subordonnée, hätten précède geregelt werden müssen ; les compléments du milieu peuvent permuter."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz bedeutet: „Die Formulare müssen bis Freitag abgegeben werden.“? [fr?] Quelle phrase a le même sens ?",
+          "explanation": "„sein + zu + Infinitiv“ drückt hier eine Pflicht aus. „Lassen sich abgeben“ bedeutet „können abgegeben werden“, „sind abgegeben“ beschreibt einen Zustand, und „haben … zu“ verlangt eine Person als Subjekt. [fr?] sein + zu exprime ici l’obligation. sich lassen = possibilité ; « sind abgegeben » décrit un état ; « haben … zu » suppose une personne comme sujet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Formulare lassen sich bis Freitag abgeben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Formulare sind bis Freitag abgegeben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Formulare haben bis Freitag abzugeben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Formulare sind bis Freitag abzugeben.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Wörter aus dem Modul. [fr?] Complétez avec des mots du module.",
+          "text": "Wer nach Feierabend nicht mehr an die Arbeit denkt, kann [[1]]. · Wer nachts für Notfälle erreichbar sein muss, hat [[2]]. · Die Zeit, in der alle anwesend sein müssen, heißt [[3]].",
+          "explanation": "„abschalten“ im übertragenen Sinn: zur Ruhe kommen. „Bereitschaft haben“: für Notfälle erreichbar sein. „Die Kernarbeitszeit“: In dieser Zeit finden die Besprechungen statt. [fr?] abschalten : décrocher ; Bereitschaft haben : être d’astreinte ; Kernarbeitszeit : plages de présence obligatoire.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "abschalten"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bereitschaft",
+                "Bereitschaftsdienst"
+              ],
+              "size": 20,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Kernarbeitszeit",
+                "die Kernarbeitszeit"
+              ],
+              "size": 20,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welches Adjektiv passt? „Die Entscheidung ist für alle ___: Sie wurde gut begründet.“ [fr?] Quel adjectif convient ?",
+          "explanation": "„nachvollziehbar“: Man kann die Gründe verstehen und nachvollziehen. Der Doppelpunkt kündigt die Begründung an. Eine gut begründete Entscheidung ist weder „unverständlich“ noch „unvorhersehbar“, und „wiederverwertbar“ sagt man von Material, nicht von Entscheidungen. [fr?] « compréhensible » : on peut en suivre le raisonnement. Une décision bien justifiée n’est ni incompréhensible ni imprévisible, et « recyclable » ne convient pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "unverständlich",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nachvollziehbar",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "wiederverwertbar",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "unvorhersehbar",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-arbeitswelt-lesen-artikel",
+      "kind": "image",
+      "title": "Article : quand le logiciel prend la plume",
+      "alt": "Début d’un article de magazine intitulé « Wenn die Software mitschreibt » : une employée d’assurance raconte comment un logiciel propose désormais une réponse à chaque déclaration de sinistre.",
+      "image": {
+        "layout": "article",
+        "kicker": "Arbeitswelt",
+        "icon": "laptop",
+        "title": "Wenn die Software mitschreibt",
+        "byline": "Wie künstliche Intelligenz den Büroalltag verändert · Von Dörte Reimers",
+        "lead": "Sie fasst Besprechungen zusammen, beantwortet Kundenanfragen und schreibt Berichte vor. In vielen Büros gehört künstliche Intelligenz längst zum Alltag. Doch wer kontrolliert eigentlich, was sie tut?",
+        "paragraphs": [
+          "Natalia Wróbel erinnert sich noch gut an ihren ersten Arbeitstag mit dem neuen Programm. Seit fünfzehn Jahren bearbeitet sie bei einer Versicherung in Hannover Schadensmeldungen. Früher musste jeder Brief einzeln gelesen, sortiert und beantwortet werden. Heute schlägt eine Software für jede Meldung eine Antwort vor."
+        ]
+      }
+    },
+    {
+      "key": "b2-arbeitswelt-hoeren-audio",
+      "kind": "audio",
+      "title": "Reportage radio : le droit à la déconnexion dans une entreprise",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Abends noch schnell die Mails lesen, am Wochenende kurz ans Diensthandy gehen: Für viele Beschäftigte ist das längst normal. Ein Maschinenbauunternehmen in der Nähe von Ulm will damit Schluss machen. Seit Januar gelten dort neue Regeln. Unsere Reporterin Larissa Ahrens hat sich umgehört."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Es ist kurz nach sieben Uhr abends in der Konstruktionsabteilung. Ömer Çelik fährt seinen Rechner herunter. Früher hätte er zu Hause noch einmal ins Postfach geschaut. Heute geht das nicht mehr: Zwischen neunzehn und sieben Uhr werden keine E-Mails zugestellt. Sie bleiben auf dem Server und kommen erst am nächsten Morgen an."
+        },
+        {
+          "voice": "mann2",
+          "name": "Ömer Çelik",
+          "text": "Am Anfang fand ich das ehrlich gesagt bevormundend. Ich bin erwachsen, ich kann selbst entscheiden, wann ich arbeite. Aber nach ein paar Wochen habe ich gemerkt, wie oft ich abends nur deshalb gearbeitet habe, weil gerade eine Nachricht kam. Inzwischen schlafe ich besser. Und meine Frau sagt, beim Abendessen bin ich endlich wieder ansprechbar."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Die Regel ist Teil einer Vereinbarung, die Geschäftsleitung und Betriebsrat im letzten Herbst geschlossen haben. Annette Raabe leitet die Personalabteilung."
+        },
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Wir hatten bei einer internen Befragung festgestellt, dass fast jeder Dritte regelmäßig nach Feierabend erreichbar war, obwohl das niemand ausdrücklich verlangt hatte. Gleichzeitig ist die Zahl der Krankmeldungen wegen Erschöpfung gestiegen. So konnte es nicht weitergehen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Neben der E-Mail-Pause gibt es zwei weitere Neuerungen. Erstens eine Kernarbeitszeit von zehn bis fünfzehn Uhr: Nur in diesem Zeitraum dürfen Besprechungen angesetzt werden. Zweitens dürfen alle, deren Tätigkeit es erlaubt, an zwei Tagen pro Woche im Homeoffice arbeiten."
+        },
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Natürlich lässt sich nicht jede Tätigkeit von zu Hause erledigen. In der Produktion geht das nicht. Deshalb haben wir dort andere Lösungen gesucht, zum Beispiel flexiblere Schichtpläne, die von den Teams selbst gestaltet werden können."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Und was passiert, wenn es doch einmal brennt, wenn zum Beispiel ein Kunde nachts eine dringende Frage hat?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Für echte Notfälle gibt es ein Bereitschaftstelefon. Wer Bereitschaft hat, bekommt dafür einen Zuschlag. Alle anderen müssen nicht reagieren, und das darf ihnen auch nicht negativ angerechnet werden."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Für die Personalleiterin hängt der Erfolg vor allem von den Führungskräften ab."
+        },
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Wenn die Chefin um zehn Uhr abends noch Nachrichten schreibt, nützt die beste Regel nichts. Deshalb haben alle Führungskräfte eine Schulung bekommen. Dort wurde auch geübt, wie Aufgaben so geplant werden können, dass abends nichts mehr erledigt werden muss."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Ganz zufrieden ist trotzdem nicht jeder. Fabian Kerner sitzt im Betriebsrat und hat die Vereinbarung mit ausgehandelt."
+        },
+        {
+          "voice": "mann3",
+          "name": "Fabian Kerner",
+          "text": "Die Regeln sind ein großer Fortschritt, keine Frage. Aber sie gelten bisher nur für E-Mails. Über die Chatgruppen auf dem Diensthandy kommen abends immer noch Nachrichten, manchmal sogar mehr als früher. Das hätte von Anfang an mitgeregelt werden müssen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Fabian Kerner",
+          "text": "Wir verhandeln gerade darüber. Mein Ziel ist, dass bis zum Sommer auch die Chats in der Ruhezeit stumm bleiben."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Und Ömer Çelik? Er hat für sich noch eine eigene Regel eingeführt."
+        },
+        {
+          "voice": "mann2",
+          "name": "Ömer Çelik",
+          "text": "Das Diensthandy bleibt nach Feierabend in der Schublade. Wenn etwas wirklich wichtig ist, gibt es ja das Bereitschaftstelefon."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Larissa Ahrens",
+          "text": "Nach einem halben Jahr will das Unternehmen Bilanz ziehen, mit einer zweiten Befragung im Juli. Dann wird sich zeigen, ob aus der Ausnahme eine neue Normalität geworden ist."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-arbeitswelt-kontrolle-audio",
+      "kind": "audio",
+      "title": "Message vocal du service du personnel",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Guten Tag, hier spricht Annette Raabe aus der Personalabteilung. Ich melde mich wegen der zweiten Befragung zu unseren neuen Arbeitszeitregeln. Der Fragebogen ist ab heute im Intranet freigeschaltet und muss bis Freitag nächster Woche ausgefüllt werden. Er dauert ungefähr zehn Minuten."
+        },
+        {
+          "voice": "frau3",
+          "name": "Annette Raabe",
+          "text": "Die Befragung ist anonym: Die Antworten können nicht einzelnen Personen zugeordnet werden. Besonders interessiert uns diesmal, wie die Regeln in der Produktion funktionieren. Die Ergebnisse sollen im September auf einer Betriebsversammlung vorgestellt werden. Vielen Dank für Ihre Unterstützung!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-arbeitswelt-einstieg-foto",
+      "kind": "image",
+      "title": "Un bureau à domicile",
+      "alt": "Un petit bureau blanc devant une fenêtre : une lampe articulée, une plante grasse en pot et le bord d’un ordinateur portable fermé.",
+      "photo": {
+        "file": "libre/commons/arbeitswelt-homeoffice.jpg",
+        "crop": [
+          0.4,
+          0,
+          0.6,
+          1
+        ]
+      },
+      "credit": "Tatiana Lapina (veila), Wikimedia Commons",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Laptop_and_lamp_on_table_(Unsplash).jpg"
+    },
+    {
+      "key": "b2-arbeitswelt-lexique",
+      "kind": "audio",
+      "title": "Lexique · Arbeitswelt: Homeoffice, künstliche Intelligenz und Erreichbarkeit",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Arbeitswelt, die Arbeitswelten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "künstliche Intelligenz"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Homeoffice, die Homeoffices"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erreichbarkeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Feierabend, die Feierabende"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abschalten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Betriebsrat, die Betriebsräte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Vereinbarung, die Vereinbarungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Geschäftsleitung, die Geschäftsleitungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Beschäftigte, die Beschäftigten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "automatisieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Routinetätigkeit, die Routinetätigkeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ersetzen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Fachkräftemangel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Weiterbildung, die Weiterbildungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einführen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachvollziehbar"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kernarbeitszeit, die Kernarbeitszeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bereitschaft, die Bereitschaften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Überstunden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erschöpfung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bevormunden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Viertagewoche, die Viertagewochen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Regelung treffen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

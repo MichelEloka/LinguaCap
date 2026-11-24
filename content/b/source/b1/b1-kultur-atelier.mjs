@@ -14,7 +14,7 @@ const lines = (...items) => items.join('\n');
 
 export default {
   id: 'b1-kultur-atelier',
-  title: 'Kultur (atelier) : organiser une fête et faire le bilan',
+  title: 'Kultur, atelier : organiser une fête et faire le bilan',
   objective: 'Inviter à une fête en tirant le bilan de la précédente (Wir hätten … sollen), planifier un événement à deux, transmettre en allemand un programme rédigé en français et s’entraîner à l’examen en lecture et en écoute.',
   sources: [
     'Textes, dialogues et exercices originaux LinguaCap.',

@@ -1,0 +1,2474 @@
+{
+  "id": "b2-umwelt",
+  "title": "Umwelt: Klimaschutz und Energiewende",
+  "objective": "Comprendre un article de fond et un débat radio sur la transition énergétique, reconnaître le point de vue d’une autrice et les positions d’un débat, formuler prévisions et suppositions au Futur II et concéder une objection sans renoncer à son avis (auch wenn, selbst wenn, wenngleich, zwar … aber).",
+  "prerequisites": [
+    "b2-medien-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, lieux de l’émission et copropriété sont fictifs.",
+    "Repères publics arrondis : objectif de neutralité climatique de l’Allemagne en 2045, prix national du CO₂ croissant depuis 2021, part du chauffage dans la consommation d’énergie (environ un tiers)."
+  ],
+  "grammarFocus": [
+    "futur2-vermutung",
+    "konzessiv-auch-wenn"
+  ],
+  "layer": "content/b/source/b2/b2-umwelt.mjs",
+  "vocabulary": [
+    {
+      "id": "klimawandel",
+      "word": "Klimawandel",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le changement climatique",
+      "example": "Die Folgen des Klimawandels sind auch in Deutschland spürbar.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "energiewende",
+      "word": "Energiewende",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la transition énergétique",
+      "example": "Die Energiewende entscheidet sich auch in den Heizungskellern.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "erneuerbare-energien",
+      "word": "erneuerbare Energien",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "les énergies renouvelables",
+      "example": "Der Anteil erneuerbarer Energien am Strom wächst jedes Jahr.",
+      "note": "die Erneuerbaren (familier, au pluriel)",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "waermepumpe",
+      "word": "Wärmepumpe",
+      "article": "die",
+      "plural": "Wärmepumpen",
+      "partOfSpeech": "noun",
+      "translation": "la pompe à chaleur",
+      "example": "Im Herbst soll die alte Gasheizung einer Wärmepumpe weichen.",
+      "note": null,
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "windrad",
+      "word": "Windrad",
+      "article": "das",
+      "plural": "Windräder",
+      "partOfSpeech": "noun",
+      "translation": "l’éolienne",
+      "example": "Die Windräder sollen über zweihundert Meter hoch sein.",
+      "note": "die Windkraftanlage (terme technique)",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ausstoss",
+      "word": "Ausstoß",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les émissions, le rejet",
+      "example": "Der Ausstoß von CO₂ soll bis 2045 auf null sinken.",
+      "note": "sans pluriel · aus|stoßen : émettre, rejeter",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "verbrauch",
+      "word": "Verbrauch",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la consommation",
+      "example": "Nach der Dämmung sank der Verbrauch um ein Viertel.",
+      "note": "verbrauchen : consommer",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "genossenschaft",
+      "word": "Genossenschaft",
+      "article": "die",
+      "plural": "Genossenschaften",
+      "partOfSpeech": "noun",
+      "translation": "la coopérative",
+      "example": "Jede Einwohnerin kann Mitglied der Genossenschaft werden.",
+      "note": null,
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "gutachten",
+      "word": "Gutachten",
+      "article": "das",
+      "plural": "Gutachten",
+      "partOfSpeech": "noun",
+      "translation": "l’expertise, le rapport d’expert",
+      "example": "Die Verwalterin hat ein unabhängiges Gutachten in Auftrag gegeben.",
+      "note": "ein Gutachten in Auftrag geben : commander une expertise",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "eigentuemer",
+      "word": "Eigentümer",
+      "article": "der",
+      "plural": "Eigentümer",
+      "partOfSpeech": "noun",
+      "translation": "le propriétaire",
+      "example": "Die Eigentümer stimmen im März über die neue Heizung ab.",
+      "note": "féminin : die Eigentümerin",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sanieren",
+      "word": "sanieren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rénover (un bâtiment)",
+      "example": "Mit den Einnahmen will die Gemeinde den Kindergarten sanieren.",
+      "note": "die Sanierung : la rénovation",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "daemmen",
+      "word": "dämmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "isoler (thermiquement)",
+      "example": "Wenn man das Dach dämmt, sinkt der Energiebedarf.",
+      "note": "die Dämmung : l’isolation",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "einsparen",
+      "word": "einsparen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "économiser",
+      "example": "Mit der neuen Heizung sparen wir viel Energie ein.",
+      "note": "séparable : ein|sparen",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "foerdern",
+      "word": "fördern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "subventionner, encourager",
+      "example": "Der Staat fördert den Einbau von Wärmepumpen.",
+      "note": "die Förderung · das Fördergeld : la subvention",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sich-auszahlen",
+      "word": "sich auszahlen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être rentable, porter ses fruits",
+      "example": "Die Investition zahlt sich erst in fünfzehn Jahren aus.",
+      "note": "séparable : aus|zahlen · synonymes : sich lohnen, sich rechnen",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "verzichten-auf",
+      "word": "verzichten auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "renoncer à",
+      "example": "Viele wollen nicht auf ihr Auto verzichten.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-auswirken-auf",
+      "word": "sich auswirken auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir des répercussions sur",
+      "example": "Der CO₂-Preis wirkt sich auf die Heizkosten aus.",
+      "note": "+ accusatif · séparable : aus|wirken",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "bedenken-aeussern",
+      "word": "Bedenken äußern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "exprimer des réserves",
+      "example": "Viele Nachbarn haben in der Versammlung Bedenken geäußert.",
+      "note": "die Bedenken (pluriel) : les réserves, les craintes",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "etwas-in-kauf-nehmen",
+      "word": "etwas in Kauf nehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "accepter (un inconvénient)",
+      "example": "Für sauberen Strom nehmen wir den Anblick der Windräder in Kauf.",
+      "note": null,
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "auf-lange-sicht",
+      "word": "auf lange Sicht",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à long terme",
+      "example": "Auf lange Sicht ist die Wärmepumpe günstiger.",
+      "note": "synonyme : langfristig",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "klimaneutral",
+      "word": "klimaneutral",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "neutre en carbone",
+      "example": "Spätestens 2045 soll Deutschland klimaneutral sein.",
+      "note": null,
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "ohnehin",
+      "word": "ohnehin",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "de toute façon",
+      "example": "Die alte Heizung muss ohnehin bald ersetzt werden.",
+      "note": "synonyme familier : sowieso",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "buergerbeteiligung",
+      "word": "Bürgerbeteiligung",
+      "article": "die",
+      "plural": "Bürgerbeteiligungen",
+      "partOfSpeech": "noun",
+      "translation": "la participation citoyenne",
+      "example": "Ohne echte Bürgerbeteiligung fühlen sich viele übergangen.",
+      "note": null,
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "einwand",
+      "word": "Einwand",
+      "article": "der",
+      "plural": "Einwände",
+      "partOfSpeech": "noun",
+      "translation": "l’objection",
+      "example": "Die Einwände der Skeptiker sind schnell aufgezählt.",
+      "note": "einwenden : objecter",
+      "audio": {
+        "media": "b2-umwelt-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-umwelt-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Klima und Energie im Alltag",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Klima und Energie im Alltag",
+        "description": "KLIMA UND ENERGIE\n[fr?] Climat et énergie\nHitzesommer, steigende Energiepreise, neue Heizungen und Windräder vor dem Dorf: Der Klimawandel verändert unseren Alltag, und über die richtigen Antworten wird überall heftig gestritten. [fr?] Étés caniculaires, prix de l’énergie en hausse, nouveaux chauffages, éoliennes près des villages : le changement climatique transforme le quotidien, et les réponses à y apporter font débat partout.\n\nFRAGEN ZUM EINSTIEG\n[fr?] Questions pour commencer\n• Welche Folgen des Klimawandels bemerken Sie selbst, dort wo Sie leben? [fr?] Quelles conséquences du changement climatique remarquez-vous là où vous vivez ?\n• Wie wird Ihre Wohnung geheizt, und was würden Sie ändern, wenn Sie selbst entscheiden könnten? [fr?] Comment votre logement est-il chauffé, et que changeriez-vous si vous pouviez décider ?\n• In der Nähe Ihres Wohnorts soll ein Windpark entstehen. Welche Fragen und welche Bedenken hätten Sie? [fr?] Un parc éolien doit être construit près de chez vous. Quelles questions et quelles réserves auriez-vous ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Sätze auf Deutsch: ein Argument und ein Beispiel. [fr?] Pour chaque question, préparez mentalement deux ou trois phrases en allemand : un argument et un exemple.\n\nZIELE\n[fr?] Objectifs\n• Ich kann einen Hintergrundartikel über die Energiewende verstehen und die Haltung der Autorin erkennen. [fr?] Je peux comprendre un article de fond sur la transition énergétique et reconnaître la position de l’autrice.\n• Ich kann einer Radiodiskussion folgen, die Positionen unterscheiden und die wichtigsten Fakten festhalten. [fr?] Je peux suivre un débat radio, distinguer les positions et retenir les faits essentiels.\n• Ich kann Prognosen und Vermutungen mit dem Futur II formulieren: „Bis 2045 werden die meisten … ausgetauscht haben.“ [fr?] Je peux formuler prévisions et suppositions au Futur II.\n• Ich kann einen Einwand anerkennen und trotzdem meinen Standpunkt vertreten: „Auch wenn …, …“ [fr?] Je peux concéder une objection tout en défendant mon point de vue.\n\nWICHTIGE WÖRTER\n[fr?] Mots-clés\n• der Klimawandel — le changement climatique\n• die Energiewende — la transition énergétique\n• erneuerbare Energien — les énergies renouvelables\n• die Wärmepumpe, die Wärmepumpen — la pompe à chaleur\n• das Windrad, die Windräder — l’éolienne\n• der CO₂-Ausstoß — les émissions de CO₂\n• sanieren, dämmen — rénover, isoler\n• Bedenken äußern — exprimer des réserves",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Windräder vor dem Dorf",
+          "media": "b2-umwelt-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-umwelt-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Hintergrundartikel zur Wärmewende",
+      "estimatedMinutes": 23,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Hintergrundartikel zur Wärmewende",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Lesen Sie zuerst Überschrift, Vorspann und letzten Absatz: Worum geht es, und wohin will der Text? [fr?] Lisez d’abord le titre, le chapeau et le dernier paragraphe : de quoi s’agit-il, et où le texte veut-il en venir ?\n2. Unterscheiden Sie beim zweiten Lesen: Wer spricht? Was sind Fakten, was sind Einwände, wo bewertet die Autorin selbst? [fr?] À la deuxième lecture, distinguez : qui parle ? Qu’est-ce qui relève des faits, des objections, du jugement de l’autrice ?\n3. Achten Sie auf Signalwörter wie „doch“, „dabei“, „hinzu kommt“ und „auch wenn“: Sie zeigen, wie die Argumente zusammenhängen. [fr?] Repérez les mots signaux (« doch », « dabei », « hinzu kommt », « auch wenn ») : ils montrent comment s’enchaînent les arguments.\n\nDIE WENDE BEGINNT IM HEIZUNGSKELLER\nIn einem Kasseler Mehrfamilienhaus soll die alte Gasheizung einer Wärmepumpe weichen. Die Eigentümer streiten seit Monaten – ein Lehrstück darüber, warum die Energiewende so mühsam ist.\nVon Katharina Steinbrecher\n\n(A) Wer verstehen will, warum der Klimaschutz in Deutschland nur langsam vorankommt, sollte nicht nur auf Windparks und Solarfelder schauen, sondern auch in die Keller der Mehrfamilienhäuser. Auf Heizung und Warmwasser entfällt rund ein Drittel des gesamten Energieverbrauchs, und noch immer wird ein Großteil dieser Wärme mit Öl und Gas erzeugt. In der Lessingstraße 14 brummt seit 1994 ein Gaskessel. Ginge es nach der Hausverwalterin Petra Holmgren, würde er im kommenden Herbst durch eine Wärmepumpe ersetzt. Doch dafür braucht sie die Zustimmung der zwölf Eigentümerinnen und Eigentümer – und die ist alles andere als sicher.\n\n(B) Die Einwände der Skeptiker sind schnell aufgezählt. Die neue Anlage koste mit allen Umbauten im Keller rund 150 000 Euro, rechnet Gerd Brauer vor, der seit vierzig Jahren im Erdgeschoss wohnt. „Auch wenn es Fördergeld gibt, bleibt für jede Wohnung ein Betrag von mehreren tausend Euro übrig. Ich bin 74. Bis sich das rechnet, werde ich längst ausgezogen sein.“ Andere bezweifeln, dass eine Wärmepumpe in einem Altbau mit kaum gedämmten Wänden überhaupt funktioniert. Sie fürchten, im Winter zu frieren oder am Ende hohe Stromrechnungen zu bezahlen.\n\n(C) Petra Holmgren kennt diese Bedenken. Sie hat ein unabhängiges Gutachten in Auftrag gegeben, und dessen Ergebnis hat selbst sie überrascht: Weil die Heizkörper groß genug sind, könnte eine Wärmepumpe das Haus schon heute zuverlässig warm halten, wenngleich der Stromverbrauch in sehr kalten Wochen deutlich steigen würde. Würde man zusätzlich das Dach dämmen, sänke der Energiebedarf um ein weiteres Viertel. „Die Technik ist nicht das Problem“, sagt die Verwalterin. „Das Problem ist, dass niemand gern heute für etwas bezahlt, das sich erst in fünfzehn Jahren auszahlt.“\n\n(D) Dabei dürfte gerade das Abwarten am Ende teuer werden. Seit 2021 steigt in Deutschland der Preis für den Ausstoß von CO₂ schrittweise, und Fachleute rechnen damit, dass das Heizen mit Gas in den kommenden Jahren deutlich mehr kosten wird. Hinzu kommt: Spätestens 2045 soll Deutschland klimaneutral sein. Bis dahin werden die meisten Eigentümer ihre alten Heizungen ohnehin ausgetauscht haben. Die Frage ist nur, ob freiwillig und gut geplant oder unter Zeitdruck, wenn der alte Kessel an einem Januarmorgen plötzlich ausfällt. Wer heute noch eine neue Gasheizung einbaut, legt sich für zwanzig Jahre auf einen Brennstoff fest, dessen Preis niemand vorhersagen kann.\n\n(E) Bei der Eigentümerversammlung im März soll abgestimmt werden. Holmgren hat einen Kompromiss vorbereitet: Die Wärmepumpe wird im Herbst eingebaut, die Dämmung des Daches folgt in fünf Jahren, und wer seinen Anteil nicht auf einmal bezahlen kann, darf ihn in Raten begleichen. Ob das reicht, weiß niemand. Gerd Brauer jedenfalls will „nicht derjenige sein, der alles blockiert“. Wer ihm zuhört, merkt: Er wird lange über die Zahlen nachgedacht haben. Selbst wenn er am Ende dagegen stimmen sollte, will er das Ergebnis akzeptieren. Vielleicht ist das die eigentliche Lehre aus der Lessingstraße: Die Energiewende entscheidet sich nicht nur in Berlin, sondern auch in unzähligen kleinen Versammlungen, in denen Nachbarn lernen müssen, gemeinsam zu rechnen – und einander zuzuhören.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-umwelt-lesen-artikel",
+          "caption": "Der Artikel (Anfang)",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel vor allem? [fr?] De quoi l’article traite-t-il avant tout ?",
+          "explanation": "Der Vorspann nennt den Konflikt in der Lessingstraße „ein Lehrstück darüber, warum die Energiewende so mühsam ist“: Das Haus ist ein Beispiel für ein allgemeines Problem. Laut Gutachten funktioniert die Technik; ein Verbot bis 2030 wird nicht erwähnt, und aus dem Jahr 1994 stammt nur der Kessel. [fr?] Le cas de l’immeuble illustre un problème général : la lenteur de la transition, pas un défaut technique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um die Frage, warum Wärmepumpen in Altbauten technisch nicht funktionieren",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um die Pläne der Bundesregierung, sämtliche Gasheizungen schon bis 2030 zu verbieten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "um einen Streit, der zeigt, warum der Umbau der Heizungen so langsam vorankommt",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "um ein Haus in Kassel, in dem seit 1994 überhaupt nichts mehr renoviert worden ist",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Haltung nimmt die Autorin ein? [fr?] Quelle position l’autrice adopte-t-elle ?",
+          "explanation": "In Absatz D bewertet die Autorin selbst: „Dabei dürfte gerade das Abwarten am Ende teuer werden.“ Gleichzeitig gibt sie die Einwände von Herrn Brauer verständnisvoll wieder und schließt mit dem Appell, „einander zuzuhören“. Eine eigene Meinung hat sie also; Kritik an der Verwalterin äußert sie nicht. [fr?] « dürfte … teuer werden » révèle son avis ; la fin plaide pour l’écoute mutuelle.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hält den Umbau für sinnvoll und nimmt zugleich die Sorgen der Eigentümer ernst.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie lehnt den Umbau ab, weil er für ältere Eigentümer finanziell nicht tragbar ist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie gibt nur Zahlen und Zitate wieder und vermeidet in ihrem Text jede eigene Bewertung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie wirft der Hausverwalterin vor, die Eigentümer mit dem Gutachten unter Druck zu setzen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was meint Petra Holmgren mit dem Satz „Das Problem ist, dass niemand gern heute für etwas bezahlt, das sich erst in fünfzehn Jahren auszahlt“? [fr?] Que veut dire Petra Holmgren par cette phrase ?",
+          "explanation": "„Sich auszahlen“ bedeutet: sich finanziell lohnen. Holmgren erklärt das Zögern der Eigentümer: Man bezahlt jetzt, profitiert aber erst nach vielen Jahren von niedrigeren Heizkosten. Über die Lebensdauer der Anlage oder den Zeitpunkt der Förderung sagt sie nichts. [fr?] « sich auszahlen » = être rentable : on paie maintenant, le gain vient plus tard.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Wärmepumpe ist nach fünfzehn Jahren kaputt und muss dann ersetzt werden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Eigentümer haben in den letzten fünfzehn Jahren insgesamt viel zu wenig Geld gespart.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Fördergelder werden erst in fünfzehn Jahren an die Eigentümer ausgezahlt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Kosten entstehen sofort, der finanzielle Vorteil zeigt sich erst langfristig.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Laut Gutachten könnte eine Wärmepumpe das Haus auch ohne neue Dämmung zuverlässig heizen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Weil die Heizkörper groß genug sind, könnte eine Wärmepumpe das Haus schon heute zuverlässig warm halten.“ Die Dämmung des Daches würde den Bedarf nur zusätzlich senken („sänke … um ein weiteres Viertel“). [fr?] La pompe fonctionnerait déjà ; l’isolation réduirait seulement la consommation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Die meisten Wohnungen in der Lessingstraße 14 sind vermietet.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Der Artikel spricht von zwölf Eigentümerinnen und Eigentümern, sagt aber nicht, ob sie selbst dort wohnen oder vermieten. Nur von Herrn Brauer wissen wir, dass er im Erdgeschoss wohnt. [fr?] Rien n’est dit sur la location : ne déduisez pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Nach dem Kompromiss sollen Wärmepumpe und Dachdämmung gleichzeitig eingebaut werden.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: Die Wärmepumpe kommt im Herbst, „die Dämmung des Daches folgt in fünf Jahren“. Der Kompromiss verteilt die Kosten also auf zwei Zeitpunkte, und Ratenzahlung ist möglich. [fr?] La pompe d’abord, l’isolation du toit cinq ans plus tard.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A stellt das Haus als Beispiel für den langsamen Klimaschutz vor. B sammelt die Gegenargumente (Kosten, Alter, Zweifel an der Technik). C nennt das Ergebnis des Gutachtens. D erklärt, warum Nichtstun teurer werden dürfte (CO₂-Preis, Ziel 2045). E beschreibt den Kompromiss und die Abstimmung im März. [fr?] Cherchez dans chaque paragraphe le mot-clé : Beispiel, Einwände, Gutachten, CO₂-Preis, Kompromiss.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Ein Kessel als Beispiel für ein ganzes Land"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Die Einwände der Skeptiker"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Was eine Untersuchung ergeben hat"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Warum Abwarten teuer werden könnte"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Ein Kompromiss vor der Abstimmung"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Welches Wort aus dem Text passt? Ergänzen Sie. [fr?] Quel mot du texte convient ? Complétez.",
+          "text": "Absatz C: Eine unabhängige Fachperson hat das Haus untersucht und ein [[1]] geschrieben. · Absatz E: Wer seinen Anteil nicht auf einmal bezahlen kann, darf ihn in [[2]] begleichen.",
+          "explanation": "„Das Gutachten“ ist die schriftliche Bewertung durch eine Expertin oder einen Experten; man gibt es „in Auftrag“. „In Raten“ zahlt man in mehreren Teilbeträgen statt auf einmal. [fr?] das Gutachten = l’expertise ; in Raten = en plusieurs versements.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Gutachten"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Raten"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-umwelt-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: eine Radiodiskussion über einen Windpark",
+      "estimatedMinutes": 23,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Radiodiskussion über einen Windpark",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\n[fr?] La situation\nIn der Radiosendung „Streitfrage“ diskutieren die Bürgermeisterin von Krähenbrück und ein Sprecher der Bürgerinitiative über fünf geplante Windräder. [fr?] Dans l’émission « Streitfrage », la maire de Krähenbrück et un porte-parole d’une initiative citoyenne débattent de cinq éoliennes en projet.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Erstes Hören: Wer vertritt welche Position? Hören Sie nur auf die großen Linien. [fr?] Première écoute : qui défend quelle position ? N’écoutez que les grandes lignes.\n2. Lesen Sie dann die Notizen. Was fehlt: eine Zahl, eine Maßnahme, ein Wochentag? [fr?] Lisez ensuite les notes. Que manque-t-il : un nombre, une mesure, un jour de la semaine ?\n3. Zweites Hören: Ergänzen Sie die Notizen mit Stichwörtern. Achten Sie auch darauf, wo jemand einen Punkt zugibt („Da hat … zum Teil recht“). [fr?] Deuxième écoute : complétez avec des mots-clés. Repérez aussi les moments où quelqu’un concède un point.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-umwelt-hoeren-audio",
+          "caption": "Streitfrage: Windräder für Krähenbrück?",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Notizen zum ersten Teil: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Notes sur la première partie : complétez avec des mots-clés.",
+          "text": "Projekt: [[1]] Windräder (vorher sechs geplant) · Bauherr: eine [[2]] der Bürger · Mitglied ab [[3]] Euro · Abstand zu den ersten Häusern: [[4]] Meter · Höhe der Anlagen: über [[5]] Meter",
+          "explanation": "Fünf Anlagen statt sechs (ein Standort wurde wegen der Vögel gestrichen). Bauherr ist „eine Genossenschaft der Bürgerinnen und Bürger“, Mitglied wird man „ab fünfhundert Euro“. Herr Hagemeister nennt „achthundert Meter“ Abstand und „über zweihundert Meter“ Höhe. [fr?] Notez les chiffres en chiffres ou en lettres : les deux sont acceptés.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "5",
+                "fünf"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Genossenschaft",
+                "Bürgergenossenschaft",
+                "Energiegenossenschaft"
+              ],
+              "size": 22,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "500",
+                "fünfhundert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "800",
+                "achthundert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "200",
+                "zweihundert"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Notizen zum zweiten Teil: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Notes sur la seconde partie : complétez avec des mots-clés.",
+          "text": "Lärm: nachts laufen die Anlagen [[1]] · Schattenwurf: das Windrad schaltet sich automatisch [[2]] · Rotmilane: Gutachten, [[3]] Jahre beobachtet · bei der Mahd: Windräder stehen tagsüber [[4]] · Information: Sprechstunde jeden ersten [[5]] im Monat · Baubeginn: im [[6]] Jahr",
+          "explanation": "„Nachts laufen die Anlagen langsamer, damit sie leiser sind.“ Beim Schattenwurf „schaltet sich das Windrad automatisch ab“. Das Vogelgutachten dauerte zwei Jahre; bei der Mahd „stehen die Windräder tagsüber still“. Die Sprechstunde ist „jeden ersten Montag im Monat“, der Bau beginnt „im übernächsten Jahr“. [fr?] übernächst- = dans deux ans (l’année d’après la prochaine).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "langsamer",
+                "leiser"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ab"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "2",
+                "zwei"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "still"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Montag"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "übernächsten"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie steht Herr Hagemeister grundsätzlich zur Windenergie? [fr?] Quelle est, au fond, la position de M. Hagemeister sur l’éolien ?",
+          "explanation": "Gleich am Anfang sagt er: „Ich bin nicht gegen erneuerbare Energien“ – er hat sogar eine Solaranlage. Er kritisiert den Abstand, die Höhe, den Schutz der Vögel und dass man die Bürger „zu spät gefragt“ hat. Eine Meinung hat er also; zur Sprechstunde geht er, um mitzureden. [fr?] Il est favorable aux renouvelables mais critique l’emplacement et la procédure.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er lehnt jede Form von Windkraft ab, weil sie die Landschaft zerstört.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er unterstützt erneuerbare Energien, kritisiert aber Standort und Verfahren.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er ist nur dafür, wenn die Anlagen weit draußen auf dem Meer gebaut werden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er hat noch keine Meinung und will sich erst in der Sprechstunde informieren.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was räumt die Bürgermeisterin ein? [fr?] Que concède la maire ?",
+          "explanation": "„Da hat Herr Hagemeister zum Teil recht. Wir hätten früher informieren müssen.“ Mit „hätte … müssen“ gibt sie einen Fehler in der Vergangenheit zu. Den Abstand verteidigt sie dagegen als gesetzeskonform, und das Gutachten stellt sie als gründlich dar. [fr?] Elle concède un manque d’information : « wir hätten … müssen » = nous aurions dû.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Abstände zu den Häusern sind kleiner, als es das Gesetz eigentlich erlaubt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Vogelgutachten hat einige wichtige Fragen leider offengelassen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Gemeinde hätte die Einwohner früher informieren müssen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Genossenschaft wird dem Ort weniger Geld bringen als geplant.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was will die Bürgermeisterin mit den „sieben Jahren“ zeigen? [fr?] Que veut montrer la maire avec les « sept ans » ?",
+          "explanation": "„Das zeigt übrigens auch, wie langsam solche Genehmigungsverfahren in Deutschland immer noch sind.“ Die sieben Jahre sind für sie ein Beispiel für zu langsame Verfahren, keine Kritik an der Bürgerinitiative. Achten Sie auf das Futur II: „werden wir sieben Jahre lang geplant … haben“. [fr?] Elle critique la lenteur des procédures d’autorisation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass die Gemeinde besonders gründlich und vorsichtig gearbeitet hat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass Genehmigungsverfahren in Deutschland noch immer zu lange dauern",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "dass die Bürgerinitiative das Projekt jahrelang blockiert hat",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "dass die Windräder schon nach sieben Jahren wieder vollständig abgebaut werden",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Wie lässt sich das Ende des Gesprächs zusammenfassen? [fr?] Comment résumer la fin de l’entretien ?",
+          "explanation": "Hagemeister will zur Sprechstunde gehen, damit die Leute „mitreden und mitverdienen“ – aber „wenn wir schon Windräder bekommen“ zeigt, dass er nicht begeistert ist. Die Moderatorin spricht von einem „versöhnlichen Schlusswort“, nicht von völliger Einigkeit. [fr?] Il veut participer, sans avoir levé toutes ses réserves.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Herr Hagemeister will sich beteiligen, obwohl er nicht alle Bedenken aufgegeben hat.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Herr Hagemeister kündigt an, gegen das Projekt vor Gericht zu klagen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Beide Gäste sind sich am Ende in allen wichtigen Punkten völlig einig.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Bürgermeisterin verschiebt die Abstimmung auf unbestimmte Zeit.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-umwelt-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Futur II und Einwände",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Futur II und Einwände",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus der Radiodiskussion. Achten Sie auf die Verbformen und auf die Wörter am Anfang der Nebensätze. [fr?] Lisez ces phrases de l’article et du débat radio. Observez les formes verbales et les mots qui ouvrent les subordonnées.\n\nSÄTZE\n[fr?] Le corpus\n(1) Bis sich das rechnet, werde ich längst ausgezogen sein.\n(2) Bis dahin werden die meisten Eigentümer ihre alten Heizungen ohnehin ausgetauscht haben.\n(3) Viele von Ihnen werden die Diskussion schon in der Zeitung verfolgt haben.\n(4) Wer ihm zuhört, merkt: Er wird lange über die Zahlen nachgedacht haben.\n(5) Auch wenn es Fördergeld gibt, bleibt für jede Wohnung ein Betrag von mehreren tausend Euro übrig.\n(6) Selbst wenn er am Ende dagegen stimmen sollte, will er das Ergebnis akzeptieren.\n(7) Eine Wärmepumpe könnte das Haus warm halten, wenngleich der Stromverbrauch in sehr kalten Wochen deutlich steigen würde.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions. Les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 und 2: Was drücken „werde … ausgezogen sein“ und „werden … ausgetauscht haben“ aus? [fr?] Phrases 1 et 2 : qu’expriment ces formes verbales ?",
+          "explanation": "Beide Sätze blicken auf einen Zeitpunkt in der Zukunft („bis sich das rechnet“, „bis dahin“ = 2045) und sagen: Dann ist die Handlung schon vorbei. Das ist das Futur II: werden + Partizip II + haben oder sein. Das Hilfsverb ist dasselbe wie im Perfekt: ausziehen → ist ausgezogen, austauschen → hat ausgetauscht. [fr?] C’est le futur antérieur : « j’aurai déménagé », « ils auront remplacé ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Handlung, die zu einem Zeitpunkt in der Zukunft schon abgeschlossen sein wird",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "eine Handlung, die in der Vergangenheit begonnen hat und bis heute andauert",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "einen Wunsch, der sich nach Meinung des Sprechers kaum erfüllen wird",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Handlung, die gerade jetzt, im Moment des Sprechens, stattfindet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 3 und 4: Welche Bedeutung hat das Futur II hier? [fr?] Phrases 3 et 4 : quel sens a ici le Futur II ?",
+          "explanation": "„Viele von Ihnen werden die Diskussion verfolgt haben“ heißt: Wahrscheinlich haben viele sie verfolgt. Es geht nicht um die Zukunft, sondern um eine Vermutung über Vergangenes; „wohl“, „sicher“ oder „bestimmt“ verstärken sie oft. Für eine Vermutung über die Gegenwart genügt das Futur I: „Sie wird (wohl) noch im Rathaus sein.“ [fr?] Comme « il aura oublié » = il a sans doute oublié : supposition sur le passé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Sprecher kündigen an, was die Leute später tun werden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Sprecher fordern die Leute höflich zu etwas auf.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Sprecher vermuten, dass etwas schon passiert ist.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Sprecher geben wieder, was andere gesagt haben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Was drückt der Satz aus? Ordnen Sie zu. [fr?] Qu’exprime chaque phrase ? Associez.",
+          "explanation": "Futur II mit einem Zeitpunkt in der Zukunft („bis 2030“): Abschluss. Futur II ohne Zukunftsbezug: Vermutung über Vergangenes. Futur I mit „jetzt“ und „wohl“: Vermutung über die Gegenwart. Futur I mit einer Zeitangabe in der Zukunft: Plan oder Vorhersage. [fr?] Le contexte (bis 2030, jetzt, wohl, im Frühjahr) décide du sens.",
+          "pairs": [
+            {
+              "left": "Bis 2030 wird die Stadt ihre Emissionen halbiert haben.",
+              "right": "Abschluss in der Zukunft"
+            },
+            {
+              "left": "Herr Hagemeister wird den Artikel gelesen haben.",
+              "right": "Vermutung über die Vergangenheit"
+            },
+            {
+              "left": "Frau Rautenberg wird jetzt wohl im Rathaus sein.",
+              "right": "Vermutung über die Gegenwart"
+            },
+            {
+              "left": "Im Frühjahr werden alle Einwohner abstimmen.",
+              "right": "Plan für die Zukunft"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sätze 5 bis 7: Was haben „auch wenn“, „selbst wenn“ und „wenngleich“ gemeinsam? [fr?] Phrases 5 à 7 : qu’ont en commun ces trois conjonctions ?",
+          "explanation": "Alle drei sind konzessiv wie „obwohl“: Der Nebensatz nennt etwas, das eigentlich dagegen spricht, und trotzdem gilt der Hauptsatz (es gibt Fördergeld – trotzdem bleibt ein Betrag übrig). Steht der Nebensatz vorn, beginnt der Hauptsatz mit dem Verb („bleibt“, „will“). „Selbst wenn“ verstärkt und ist oft hypothetisch („sollte“), „wenngleich“ klingt schriftlich. [fr?] Ce sont des concessives : « même si », « bien que ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie nennen eine Bedingung: Nur wenn sie erfüllt ist, gilt der Hauptsatz.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie nennen einen Grund, der den Hauptsatz erklärt, wie „weil“.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie leiten eine Folge ein, die sich aus dem Hauptsatz ergibt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie nennen einen Gegengrund, der die Aussage des Hauptsatzes nicht verhindert.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-umwelt-regel",
+      "kind": "lesson",
+      "title": "Regel: Futur II und konzessive Sätze",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Futur II und konzessive Sätze",
+        "description": "REGEL — DAS FUTUR II\n[fr?] Règle : le Futur II (futur antérieur)\nForm: werden (konjugiert) + Partizip II + haben oder sein (Infinitiv). Das Hilfsverb ist dasselbe wie im Perfekt.\n[fr?] werden conjugué + participe II + haben ou sein : même auxiliaire qu’au Perfekt.\n• Bis 2045 werden die meisten Eigentümer ihre Heizungen ausgetauscht haben. [fr?] D’ici 2045, la plupart des propriétaires auront remplacé leur chauffage.\n• Bis sich das rechnet, werde ich längst ausgezogen sein. [fr?] Avant que ce soit rentable, j’aurai déménagé depuis longtemps.\n• Im Nebensatz steht „werden“ ganz am Ende: …, weil die Stadt bis dahin alle Busse umgestellt haben wird. [fr?] En subordonnée, werden se place tout à la fin.\n\nREGEL — WOZU BRAUCHT MAN DAS FUTUR II?\n[fr?] Règle : les emplois du Futur II\n1. Abschluss in der Zukunft, meist mit „bis“ oder einem Zeitpunkt: Bis Freitag werde ich den Bericht geschrieben haben. [fr?] Action achevée à un moment futur, souvent avec « bis ».\n2. Vermutung über Vergangenes, oft mit „wohl“, „sicher“, „bestimmt“: Er wird den Zug verpasst haben. = Er hat ihn wahrscheinlich verpasst. [fr?] Supposition sur le passé : « il aura raté son train ».\nEine Vermutung über die Gegenwart drückt das Futur I aus: Sie wird (wohl) noch im Büro sein. [fr?] Supposition sur le présent : Futur I.\nSie kennen schon: Er muss den Zug verpasst haben (fast sicher), er dürfte ihn verpasst haben (wahrscheinlich). Das Futur II klingt ähnlich wie „dürfte“. [fr?] Rappel du module Gesundheit : le Futur II exprime une probabilité proche de « dürfte ».\nIn der gesprochenen Sprache ersetzt man das Futur II mit der Bedeutung 1 oft durch das Perfekt und eine Zeitangabe: Bis Freitag habe ich den Bericht geschrieben. [fr?] À l’oral, le Perfekt + une indication de temps remplace souvent le Futur II.\n\nREGEL — EINWÄNDE EINRÄUMEN: KONZESSIVE SÄTZE\n[fr?] Règle : concéder une objection\n• auch wenn – Gegengrund, real oder gedacht: Auch wenn es Fördergeld gibt, bleibt ein Betrag übrig. [fr?] même si : objection réelle ou imaginée.\n• selbst wenn – verstärkt („sogar in diesem Fall“), oft hypothetisch mit Konjunktiv II oder „sollte“: Selbst wenn wir heute alle Heizungen austauschen würden, wäre das Klimaziel noch nicht erreicht. [fr?] même si (renforcé), souvent hypothétique.\n• obwohl, obgleich, wenngleich – Tatsache, die eigentlich dagegen spricht; „obgleich“ und „wenngleich“ klingen schriftlich. [fr?] bien que, quoique ; obgleich et wenngleich sont soutenus.\n• Wortstellung: Im Nebensatz steht das Verb am Ende. Steht der Nebensatz vorn, beginnt der Hauptsatz mit dem Verb: Auch wenn es regnet, findet das Fest statt. [fr?] Verbe à la fin de la subordonnée, puis verbe en tête de la principale.\n• Im Hauptsatz: trotzdem oder dennoch (das Verb folgt direkt) und zwar … aber: Die Anlage ist zwar teuer, aber sie lohnt sich. [fr?] trotzdem, dennoch = pourtant, malgré tout ; zwar … aber = certes … mais.\n\nACHTUNG\n[fr?] Attention : pièges des francophones\n• Nach dem vorangestellten Nebensatz steht kein Subjekt vor dem Verb. Falsch: „Auch wenn es regnet, das Fest findet statt.“ [fr?] Après la subordonnée, pas de sujet avant le verbe.\n• Nach „wenn“ und „sobald“ steht für eine abgeschlossene Handlung in der Zukunft das Perfekt, nicht das Futur II: Wenn ich den Bericht geschrieben habe, rufe ich dich an. [fr?] « Quand j’aurai fini » se traduit par le Perfekt : wenn ich fertig bin / … geschrieben habe.\n• „Sogar wenn“ hört man selten. Sagen Sie „auch wenn“ oder „selbst wenn“. [fr?] « même si » = auch wenn ou selbst wenn.\n• Ausziehen, einschlafen, ankommen bilden das Perfekt mit „sein“, also auch das Futur II: Ich werde ausgezogen sein. [fr?] Les verbes avec sein au Perfekt gardent sein au Futur II.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-umwelt-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Futur II und konzessive Sätze",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Futur II und konzessive Sätze",
+        "description": "Üben Sie das Futur II und die konzessiven Sätze. Lesen Sie jeden Satz bis zum Ende, bevor Sie antworten. [fr?] Entraînez-vous au Futur II et aux concessives. Lisez chaque phrase jusqu’au bout avant de répondre.\n\nMERKE\n[fr?] À retenir\n• Futur II: werden + Partizip II + haben/sein – Abschluss in der Zukunft oder Vermutung über Vergangenes [fr?] action achevée dans le futur ou supposition sur le passé\n• auch wenn, selbst wenn, obwohl, wenngleich + Verb am Ende; danach Hauptsatz mit dem Verb zuerst [fr?] concessives : verbe à la fin, puis verbe en tête de la principale",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Futur II (Abschluss in der Zukunft). [fr?] Complétez au Futur II (action achevée dans le futur).",
+          "text": "Bis 2030 [[1]] die Stadtwerke alle Busse auf Elektroantrieb [[2]] [[3]].",
+          "explanation": "Futur II = werden (konjugiert, an Position 2) + Partizip II + haben/sein am Satzende. „Umstellen“ bildet das Perfekt mit „haben“ (sie haben umgestellt), also: werden … umgestellt haben. Beim trennbaren Verb steht „-ge-“ zwischen Präfix und Stamm. [fr?] « auront converti » : werden + participe + haben.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "werden"
+              ],
+              "hint": "werden",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "umgestellt"
+              ],
+              "hint": "umstellen",
+              "size": 11
+            },
+            {
+              "id": "3",
+              "accept": [
+                "haben"
+              ],
+              "hint": "haben oder sein?",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Formulieren Sie eine Vermutung über die Vergangenheit. [fr?] Formulez une supposition sur le passé.",
+          "text": "Tarek ist noch nicht da. Er [[1]] den Zug [[2]] [[3]]. · Die Straße ist nass. Es [[4]] in der Nacht [[5]] [[6]].",
+          "explanation": "Mit dem Futur II vermutet man, was wahrscheinlich schon passiert ist: Er wird den Zug verpasst haben = Er hat ihn wahrscheinlich verpasst. „Verpassen“ und „regnen“ bilden das Perfekt mit „haben“. Oft steht noch „wohl“ oder „sicher“ dabei. [fr?] Comme « il aura raté son train », « il aura plu ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wird"
+              ],
+              "hint": "werden",
+              "size": 5
+            },
+            {
+              "id": "2",
+              "accept": [
+                "verpasst"
+              ],
+              "hint": "verpassen",
+              "size": 9
+            },
+            {
+              "id": "3",
+              "accept": [
+                "haben"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "wird"
+              ],
+              "hint": "werden",
+              "size": 5
+            },
+            {
+              "id": "5",
+              "accept": [
+                "geregnet"
+              ],
+              "hint": "regnen",
+              "size": 9
+            },
+            {
+              "id": "6",
+              "accept": [
+                "haben"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "„haben“ oder „sein“? Ergänzen Sie. [fr?] « haben » ou « sein » ? Complétez.",
+          "text": "Wenn wir ankommen, wird der Vortrag schon [[1]] [[2]]. · Bis du zurückkommst, werde ich längst [[3]] [[4]].",
+          "explanation": "Das Hilfsverb im Futur II ist dasselbe wie im Perfekt: Der Vortrag hat angefangen → wird angefangen haben; ich bin eingeschlafen → werde eingeschlafen sein. Verben der Zustandsveränderung wie einschlafen, ausziehen, ankommen bilden das Perfekt mit „sein“. [fr?] Même auxiliaire qu’au Perfekt : hat angefangen, ist eingeschlafen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "angefangen"
+              ],
+              "hint": "anfangen",
+              "size": 11
+            },
+            {
+              "id": "2",
+              "accept": [
+                "haben"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "eingeschlafen"
+              ],
+              "hint": "einschlafen",
+              "size": 14
+            },
+            {
+              "id": "4",
+              "accept": [
+                "sein"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Bis",
+              "die Anlage",
+              "Strom",
+              "liefert,",
+              "werden",
+              "wir",
+              "sieben Jahre lang",
+              "geplant",
+              "haben."
+            ]
+          ],
+          "explanation": "Der Nebensatz mit „bis“ steht vorn, sein Verb „liefert“ am Ende. Danach beginnt der Hauptsatz mit dem konjugierten „werden“, es folgt das Subjekt „wir“; Partizip II und „haben“ schließen die Satzklammer am Ende. [fr?] Subordonnée, puis verbe conjugué, sujet, et participe + haben à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Auch wenn",
+              "die Anlage",
+              "zunächst",
+              "teuer",
+              "ist,",
+              "lohnt",
+              "sie",
+              "sich",
+              "auf lange Sicht."
+            ],
+            [
+              "Auch wenn",
+              "zunächst",
+              "die Anlage",
+              "teuer",
+              "ist,",
+              "lohnt",
+              "sie",
+              "sich",
+              "auf lange Sicht."
+            ]
+          ],
+          "explanation": "Konzessiver Nebensatz: „Auch wenn“ + Subjekt … Verb am Ende („ist“). Der Hauptsatz beginnt direkt nach dem Komma mit dem Verb („lohnt“), dann folgen das Subjektpronomen „sie“ und das Reflexivpronomen „sich“. [fr?] Après la subordonnée, le verbe principal vient en premier."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "Im Nebensatz steht das Verb am Ende („regnet“), im folgenden Hauptsatz an erster Stelle („findet … statt“). Der erste Satz übernimmt die französische Wortstellung mit dem Subjekt vor dem Verb, der dritte stellt das Verb im Nebensatz nach vorn, der vierte setzt das Verb nach „so“ ans Ende. [fr?] Le calque du français (sujet avant le verbe) est l’erreur la plus fréquente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Selbst wenn es morgen regnet, die Demonstration findet statt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Selbst wenn es morgen regnet, findet die Demonstration statt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Selbst wenn regnet es morgen, findet die Demonstration statt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Selbst wenn es morgen regnet, so die Demonstration stattfindet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welche Fortsetzung ist richtig? „Selbst wenn wir heute alle Ölheizungen austauschen würden, …“ [fr?] Quelle suite est correcte ?",
+          "explanation": "„Selbst wenn“ mit Konjunktiv II („austauschen würden“) beschreibt einen gedachten Fall. Der Hauptsatz steht deshalb auch im Konjunktiv II und beginnt mit dem Verb: „hätten wir … erreicht“. In der letzten Fortsetzung fehlt die Inversion, die zweite passt nicht zur Konzession, die dritte ist kein Hauptsatz. [fr?] Hypothèse : Konjunktiv II des deux côtés, verbe en tête de la principale.",
+          "options": [
+            {
+              "id": "a",
+              "label": "… hätten wir die Klimaziele damit noch nicht erreicht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "… haben wir die Klimaziele damit schon erreicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "… weil wir die Klimaziele damit nicht erreichen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "… wir hätten die Klimaziele damit noch nicht erreicht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "match",
+          "prompt": "Welche Sätze bedeuten dasselbe? Ordnen Sie zu. [fr?] Quelles phrases ont le même sens ? Associez.",
+          "explanation": "„Zwar … aber“, „dennoch“ und „trotzdem“ drücken den Gegensatz im Hauptsatz aus, „auch wenn“ und „wenngleich“ im Nebensatz. Das Futur II bedeutet je nach Kontext Vermutung (er wird vergessen haben = wahrscheinlich hat er vergessen) oder Abschluss bis zu einem Zeitpunkt (bis Freitag … geschrieben haben). [fr?] Même sens, autres moyens : connecteurs de principale ou subordonnants.",
+          "pairs": [
+            {
+              "left": "Auch wenn es teuer ist, machen wir mit.",
+              "right": "Es ist zwar teuer, aber wir machen mit."
+            },
+            {
+              "left": "Er wird den Termin vergessen haben.",
+              "right": "Wahrscheinlich hat er den Termin vergessen."
+            },
+            {
+              "left": "Bis Freitag werde ich den Bericht geschrieben haben.",
+              "right": "Spätestens am Freitag ist mein Bericht fertig."
+            },
+            {
+              "left": "Wir stimmen zu, wenngleich wir Bedenken haben.",
+              "right": "Wir haben Bedenken. Dennoch stimmen wir zu."
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Wort. [fr?] Complétez avec le mot qui convient.",
+          "text": "[[1]] die Wärmepumpe teuer ist, lohnt sie sich. · Die Wärmepumpe ist teuer. [[2]] lohnt sie sich. · Die Wärmepumpe ist [[3]] teuer, aber sie lohnt sich.",
+          "explanation": "Nebensatz mit dem Verb am Ende: obwohl, auch wenn, wenngleich, obgleich. Adverb im Hauptsatz mit dem Verb direkt danach: trotzdem, dennoch. Zweiteiliger Konnektor: zwar …, aber … [fr?] bien que / même si → subordonnée ; pourtant → trotzdem ; certes … mais → zwar … aber.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Obwohl",
+                "Auch wenn",
+                "Wenngleich",
+                "Obgleich",
+                "Selbst wenn"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Trotzdem",
+                "Dennoch"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "zwar"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig und klingt natürlich? [fr?] Quelle phrase est correcte et naturelle ? (« Quand j’aurai fini le rapport, je t’appellerai. »)",
+          "explanation": "Nach dem zeitlichen „wenn“ steht für eine abgeschlossene Handlung in der Zukunft das Perfekt, im Hauptsatz das Präsens: „Wenn ich … geschrieben habe, rufe ich dich an.“ Das französische Futur antérieur übersetzt man hier nicht mit dem Futur II. In der ersten und vierten Antwort fehlt die Inversion, die zweite mischt Vergangenheit und Gegenwart. [fr?] « quand j’aurai fini » = wenn ich fertig bin / … geschrieben habe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn ich den Bericht fertig geschrieben haben werde, ich werde dich anrufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Als ich den Bericht fertig geschrieben hatte, rufe ich dich an.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wenn ich den Bericht fertig geschrieben habe, rufe ich dich an.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Wenn ich den Bericht fertig schreibe, ich rufe dich dann an.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-umwelt-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Klima, Energie und Argumente",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Klima, Energie und Argumente",
+        "description": "Lernen Sie Wörter in Verbindungen: Nomen mit Verb, Wortfamilien und Formulierungen für die Diskussion. [fr?] Apprenez les mots en contexte : nom et verbe, familles de mots et formules pour débattre.\n\nTIPP\n[fr?] Conseil\nViele Verbindungen lassen sich nicht wörtlich übersetzen: Man „äußert“ Bedenken, man „schließt“ einen Kompromiss, man „gibt“ ein Gutachten „in Auftrag“. Lernen Sie sie immer als Block. [fr?] Ces collocations ne se traduisent pas mot à mot : apprenez-les en bloc.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "Bedenken äußern, Energie einsparen, einen Kompromiss schließen (oder finden), auf etwas verzichten (+ Akkusativ), ein Gutachten in Auftrag geben, Nachteile in Kauf nehmen. Diese Verbindungen sind typisch für Artikel und Diskussionen über Klimaschutz. [fr?] exprimer des réserves, économiser l’énergie, conclure un compromis, renoncer à, commander une expertise, accepter des inconvénients.",
+          "pairs": [
+            {
+              "left": "Bedenken",
+              "right": "äußern"
+            },
+            {
+              "left": "Energie",
+              "right": "einsparen"
+            },
+            {
+              "left": "einen Kompromiss",
+              "right": "schließen"
+            },
+            {
+              "left": "auf das Auto",
+              "right": "verzichten"
+            },
+            {
+              "left": "ein Gutachten",
+              "right": "in Auftrag geben"
+            },
+            {
+              "left": "Nachteile",
+              "right": "in Kauf nehmen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das passende Nomen. [fr?] Formez le nom correspondant.",
+          "text": "verbrauchen → der [[1]] · sanieren → die [[2]] · fördern → die [[3]] · dämmen → die [[4]] · ausstoßen → der [[5]]",
+          "explanation": "Nomen auf -ung sind feminin: die Sanierung, die Förderung, die Dämmung. Andere entstehen aus dem Verbstamm ohne Endung und sind maskulin: verbrauchen → der Verbrauch, ausstoßen → der Ausstoß (mit ß nach langem o). Solche Nomen sind typisch für Berichte und Statistiken. [fr?] la consommation, la rénovation, la subvention, l’isolation, les émissions.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Verbrauch"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Sanierung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Förderung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Dämmung"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Ausstoß"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Adjektive. [fr?] Complétez les adjectifs.",
+          "text": "Ein Haus, das unter dem Strich kein CO₂ mehr verursacht, ist [[1]]. · Ein Produkt, das der Umwelt kaum schadet, ist [[2]]. · Einwegplastik ist [[3]]. · Energie aus Sonne und Wind ist [[4]].",
+          "explanation": "-neutral: unter dem Strich weder Plus noch Minus (klimaneutral); -freundlich oder -schonend: positiv für die Umwelt; -schädlich: negativ. „Erneuerbar“ kommt von „erneuern“: Die Quelle geht nicht zu Ende. [fr?] neutre en carbone, écologique, nocif pour l’environnement, renouvelable.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "klimaneutral"
+              ],
+              "hint": "klima…",
+              "size": 13
+            },
+            {
+              "id": "2",
+              "accept": [
+                "umweltfreundlich",
+                "umweltschonend"
+              ],
+              "hint": "umwelt…",
+              "size": 17
+            },
+            {
+              "id": "3",
+              "accept": [
+                "umweltschädlich"
+              ],
+              "hint": "umwelt…",
+              "size": 16
+            },
+            {
+              "id": "4",
+              "accept": [
+                "erneuerbar"
+              ],
+              "hint": "erneuern",
+              "size": 11
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie wollen einem Argument teilweise zustimmen und dann widersprechen. Was passt? [fr?] Vous voulez approuver en partie un argument, puis le contredire. Que dites-vous ?",
+          "explanation": "„Da ist (durchaus) etwas dran“ heißt: Das ist teilweise richtig; „allerdings“ leitet die Einschränkung ein. Die erste Antwort stimmt ganz zu, die dritte widerspricht unhöflich und vollständig, die vierte stimmt am Ende doch zu. Das Muster „Zustimmung + Einschränkung“ wirkt sachlich und überzeugend. [fr?] « Il y a du vrai, toutefois… » : concéder puis nuancer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Da haben Sie völlig recht, dazu gibt es nichts mehr zu sagen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Da ist durchaus etwas dran, allerdings übersehen Sie einen Punkt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das stimmt überhaupt nicht, Sie haben das Problem nicht verstanden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das kann sein, und deshalb bin ich ganz Ihrer Meinung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz drückt eine vorsichtige Prognose aus? [fr?] Quelle phrase exprime une prévision prudente ?",
+          "explanation": "„Es ist damit zu rechnen, dass …“ (= Man muss erwarten, dass …) formuliert eine begründete Prognose, ohne sie als sichere Tatsache hinzustellen. Ähnlich: „Fachleute gehen davon aus, dass …“. Die anderen Sätze berichten über die Vergangenheit, stellen eine Forderung auf oder erklären eine Ursache. [fr?] « Il faut s’attendre à ce que… » : prévision prudente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Strompreise sind im letzten Jahr deutlich gestiegen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Strompreise müssen sofort und deutlich gesenkt werden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es ist damit zu rechnen, dass die Strompreise weiter steigen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Strompreise steigen, weil die Nachfrage nach Strom ständig wächst.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was bedeutet „etwas in Kauf nehmen“? [fr?] Que signifie « etwas in Kauf nehmen » ?",
+          "explanation": "„Höhere Kosten in Kauf nehmen“ heißt: Man akzeptiert sie bewusst, weil das Ziel wichtiger ist. Mit „kaufen“ im wörtlichen Sinn hat der Ausdruck nichts zu tun. Beispiel: „Für sauberen Strom nehmen wir den Anblick der Windräder in Kauf.“ [fr?] accepter un inconvénient en connaissance de cause.",
+          "options": [
+            {
+              "id": "a",
+              "label": "etwas im Geschäft kaufen, obwohl es eigentlich zu teuer ist",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "einen Nachteil akzeptieren, um ein wichtigeres Ziel zu erreichen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "sich öffentlich und laut über einen Nachteil beschweren",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "für eine größere Anschaffung einen Kredit aufnehmen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Was bedeuten die Wörter? Ordnen Sie zu. [fr?] Que signifient ces mots ? Associez.",
+          "explanation": "Diese Ausdrücke strukturieren Argumente und Prognosen: „Auf lange Sicht lohnt es sich“, „Die Heizung muss ohnehin ersetzt werden“, „Der Preis steigt schrittweise“, „Ich werde längst ausgezogen sein“, „spätestens 2045“. [fr?] à long terme, de toute façon, progressivement, depuis longtemps, au plus tard.",
+          "pairs": [
+            {
+              "left": "auf lange Sicht",
+              "right": "langfristig"
+            },
+            {
+              "left": "ohnehin",
+              "right": "sowieso"
+            },
+            {
+              "left": "schrittweise",
+              "right": "nach und nach"
+            },
+            {
+              "left": "längst",
+              "right": "schon lange"
+            },
+            {
+              "left": "spätestens",
+              "right": "nicht später als"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-umwelt-hoeren2",
+      "kind": "exercise",
+      "title": "Verstehen: Trinkwasser, Verbrauch und Qualität (Originaltext)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: Trinkwasser, Verbrauch und Qualität (Originaltext)",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nORIGINALTEXT\n[fr?] Document authentique\nSie hören einen Ausschnitt aus dem Wikipedia-Artikel „Trinkwasser“ (Fassung von 2016), vorgelesen von einer synthetischen Stimme. [fr?] Vous entendez un extrait de l’article Wikipédia « Trinkwasser » (version de 2016), lu par une voix de synthèse.\nDie Zahlen stammen aus der Zeit der Aufnahme; heute können sie anders sein. [fr?] Les chiffres datent de l’enregistrement ; ils peuvent avoir changé depuis.\n\nWICHTIGE WÖRTER\n[fr?] Mots utiles\n• der Verbrauch [fr?] la consommation\n• die Meerwasserentsalzung [fr?] le dessalement de l’eau de mer\n• das Grundwasser [fr?] la nappe phréatique\n• die Gülle [fr?] le lisier (engrais agricole)\n• die Kläranlage [fr?] la station d’épuration\n• der Säugling [fr?] le nourrisson\n\nSTRATEGIE\n[fr?] Stratégie\nBeim ersten Hören: Der Text hat zwei Teile. Worum geht es in jedem Teil? [fr?] Première écoute : le texte a deux parties. De quoi parle chacune ?\nBeim zweiten Hören achten Sie auf die Zahlen: Wer verbraucht wie viel? [fr?] À la deuxième écoute, soyez attentif aux chiffres : qui consomme combien ?\nDie Transkription sehen Sie nach Ihren Antworten. [fr?] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-umwelt-hoeren2-audio",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b2-umwelt-hoeren2-foto",
+          "usage": "illustration",
+          "caption": "Leitungswasser: das am besten kontrollierte Lebensmittel",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "WHO bei hohem Bedarf: etwa [[1]] Liter pro Tag (Erwachsene, 60 kg) · Deutschland 2011: [[2]] Liter pro Kopf und Tag · Italien: [[3]] Liter · Dubai: [[4]] Liter · Gefahr für Säuglinge: zu viel [[5]] im Grundwasser",
+          "explanation": "„etwa zwei Litern je Tag“, „durchschnittlich 122 Liter“, Italien „mit 260 Litern“, Dubai „sogar mit 500 Litern“; gefährlich ist der „Nitrateintrag in das Grundwasser“. [fr?] Chiffres donnés dans le texte ; le danger pour les nourrissons vient des nitrates.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zwei",
+                "2"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "122",
+                "hundertzweiundzwanzig"
+              ],
+              "size": 22,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "260",
+                "zweihundertsechzig"
+              ],
+              "size": 19,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "500",
+                "fünfhundert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Nitrat"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum ist der Wasserverbrauch in Deutschland seit 1990 gesunken? [fr?] Pourquoi la consommation d’eau a-t-elle baissé en Allemagne depuis 1990 ?",
+          "explanation": "Der Verbrauch ist „durch einen bewussten Umgang mit Wasser seit 1990 beinahe kontinuierlich gesunken“. Von Preisen oder Wassermangel in Deutschland spricht der Text nicht. [fr?] La baisse s’explique par un usage plus conscient de l’eau.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil Wasser in Deutschland knapp geworden ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil die Menschen bewusster mit Wasser umgehen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil die Preise für Wasser stark gestiegen sind.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die WHO weniger Wasser empfiehlt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was zeigen neuere Studien über den Flüssigkeitsbedarf? [fr?] Que montrent des études plus récentes sur les besoins en liquide ?",
+          "explanation": "Der Bedarf kann „auch durch ausreichenden Verzehr von Getränken wie etwa Saft, Milch oder auch Kaffee gedeckt werden“ und „variiert individuell stark“. [fr?] Les besoins peuvent aussi être couverts par d’autres boissons, et ils varient beaucoup d’une personne à l’autre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte mindestens drei Liter Wasser trinken.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kaffee erhöht den Bedarf an Wasser deutlich.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Auch Saft, Milch oder Kaffee können ihn decken.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er ist bei allen Menschen fast gleich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Woher kommen die Probleme für das Grundwasser vor allem? [fr?] D’où viennent surtout les problèmes pour la nappe phréatique ?",
+          "explanation": "Genannt werden „zu starke Gülledüngung“ in Gebieten mit intensiver Landwirtschaft und „alte Kläranlagen“, die Nitrat ins Grundwasser bringen. [fr?] Le texte cite l’épandage excessif de lisier dans les zones agricoles et les vieilles stations d’épuration.",
+          "options": [
+            {
+              "id": "a",
+              "label": "aus der Landwirtschaft und alten Kläranlagen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "aus alten, rostigen Wasserleitungen in den Wohnhäusern",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "aus Fabriken für Mineralwasser",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "aus dem Salz des Meerwassers",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„In Deutschland wird kein Lebensmittel so streng kontrolliert wie das Trinkwasser.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Richtig: Trinkwasser ist dort „das am intensivsten kontrollierte Lebensmittel“. [fr?] Vrai : l’eau potable y est l’aliment le plus contrôlé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Dubai will seinen Wasserverbrauch in Zukunft noch steigern.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Falsch: Dubai „strebt … eine notwendige Verbrauchssenkung an“, will den Verbrauch also senken. [fr?] Faux : Dubaï cherche à réduire sa consommation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-umwelt-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Prognosen, Vermutungen und Einwände",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Prognosen, Vermutungen und Einwände",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nEinige Wochen nach der Sendung hat Krähenbrück abgestimmt. Hören Sie die Kurzmeldung für die Fragen 1 und 2. [fr?] Quelques semaines après l’émission, Krähenbrück a voté. Écoutez la brève pour les questions 1 et 2.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-umwelt-kontrolle-audio",
+          "caption": "Kurzmeldung aus Krähenbrück",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wie ist die Befragung ausgegangen? [fr?] Quel est le résultat de la consultation ?",
+          "explanation": "„Fast zwei Drittel der Teilnehmenden“ waren dafür. Die 71 Prozent beziehen sich auf die Zahl der Wahlberechtigten, die überhaupt abgestimmt haben – eine typische Falle beim Hören von Zahlen. [fr?] 71 % = taux de participation ; près de deux tiers = les voix pour.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine knappe Mehrheit hat sich gegen den Windpark ausgesprochen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Fast zwei Drittel waren für eine Beteiligung der Gemeinde.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Einundsiebzig Prozent waren für eine Beteiligung der Gemeinde.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Befragung wurde wegen zu geringer Beteiligung verschoben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie reagiert die Bürgerinitiative? [fr?] Comment réagit l’initiative citoyenne ?",
+          "explanation": "„… das Ergebnis zu akzeptieren, auch wenn sie weiterhin einen größeren Abstand zu den Häusern fordert“: Sie nimmt das Ergebnis an, gibt ihre Forderung aber nicht auf. „Auch wenn“ leitet den Gegengrund ein. [fr?] Elle accepte le résultat tout en maintenant sa revendication.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie will gegen das Ergebnis der Befragung vor Gericht ziehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie löst sich auf, weil sie ihr eigentliches Ziel inzwischen erreicht hat.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie fordert eine zweite Abstimmung im kommenden Frühjahr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie akzeptiert das Ergebnis, hält aber an einer Forderung fest.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Vermutung im Futur II. [fr?] Complétez la supposition au Futur II.",
+          "text": "Herr Hagemeister war am Sonntag nicht im Wahllokal. Er [[1]] wohl schon per Brief [[2]] [[3]].",
+          "explanation": "Vermutung über Vergangenes: werden + Partizip II + haben. „Abstimmen“ bildet das Perfekt mit „haben“ (er hat abgestimmt); beim trennbaren Verb steht „-ge-“ in der Mitte: abgestimmt. „Wohl“ verstärkt die Vermutung. [fr?] « Il aura sans doute déjà voté par correspondance. »",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wird"
+              ],
+              "hint": "werden",
+              "size": 5
+            },
+            {
+              "id": "2",
+              "accept": [
+                "abgestimmt"
+              ],
+              "hint": "abstimmen",
+              "size": 11
+            },
+            {
+              "id": "3",
+              "accept": [
+                "haben"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Initiative",
+              "akzeptiert",
+              "das Ergebnis,",
+              "auch wenn",
+              "sie",
+              "weiterhin",
+              "einen größeren Abstand",
+              "fordert."
+            ],
+            [
+              "Die Initiative",
+              "akzeptiert",
+              "das Ergebnis,",
+              "auch wenn",
+              "sie",
+              "einen größeren Abstand",
+              "weiterhin",
+              "fordert."
+            ]
+          ],
+          "explanation": "Zuerst der Hauptsatz (Verb an Position 2), dann der Nebensatz mit „auch wenn“: das Subjekt „sie“ direkt nach der Konjunktion, das Verb „fordert“ am Ende. „Weiterhin“ steht meist vor der Ergänzung, kann aber auch danach stehen. [fr?] Principale, puis subordonnée concessive avec le verbe à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz drückt eine Vermutung über die Vergangenheit aus? [fr?] Quelle phrase exprime une supposition sur le passé ?",
+          "explanation": "Nur dieser Satz verbindet das Futur II (werden … gelesen haben) mit einer Vermutung: Wahrscheinlich haben viele es gelesen. Zwei Sätze stehen im Futur I (Plan, Vorhersage), einer im Konjunktiv II (Wunsch). [fr?] « auront lu » = ont probablement lu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Gemeinde wird jeden Monat über die Planung informieren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Viele Einwohner werden das Ergebnis in der Zeitung gelesen haben.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Im Herbst wird die Genossenschaft die ersten Anteile verkaufen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Bürgermeisterin würde gern schon früher mit dem Bau beginnen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Wort aus dem Modul. [fr?] Complétez avec le mot du module qui convient.",
+          "text": "Wenn Einwohner bei einem Projekt mitreden und mitentscheiden dürfen, spricht man von [[1]]. · Wer Geld investiert, möchte, dass sich die Investition auf lange Sicht [[2]].",
+          "explanation": "„Die Bürgerbeteiligung“: Einwohner reden mit und entscheiden mit. „Sich lohnen“, „sich auszahlen“ und „sich rechnen“ bedeuten alle: finanziell vorteilhaft sein; alle drei Verben sind reflexiv. [fr?] la participation citoyenne ; être rentable.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Bürgerbeteiligung",
+                "Beteiligung"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "lohnt",
+                "auszahlt",
+                "rechnet"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Ein Nachbar sagt: „Windräder zerstören unsere Landschaft.“ Welche Reaktion passt in einer sachlichen Diskussion am besten? [fr?] Quelle réaction convient le mieux dans un débat posé ?",
+          "explanation": "Die erste Antwort erkennt den Einwand an („auch wenn sich das Landschaftsbild verändert“) und setzt ein Gegenargument dagegen – typisch für eine sachliche Diskussion. Die zweite verweigert das Gespräch, die dritte ist unlogisch (der Gegengrund passt nicht), die vierte wertet ab. [fr?] Concéder, puis contre-argumenter.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Auch wenn sich das Landschaftsbild verändert, profitiert der ganze Ort von den Einnahmen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das stimmt einfach nicht, und darüber möchte ich mit Ihnen auch gar nicht diskutieren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Selbst wenn die Landschaft schön ist, haben Sie mit Ihrem Einwand völlig recht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Landschaft ist mir ehrlich gesagt völlig egal, Hauptsache billiger Strom für alle hier.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-umwelt-lesen-artikel",
+      "kind": "image",
+      "title": "Article de fond : le chauffage d’une copropriété",
+      "alt": "Début de l’article « Die Wende beginnt im Heizungskeller » : surtitre, titre, signature, chapeau et premier paragraphe sur une chaudière à gaz que l’on veut remplacer par une pompe à chaleur à Kassel.",
+      "image": {
+        "layout": "article",
+        "kicker": "Klimaschutz im Altbau",
+        "title": "Die Wende beginnt im Heizungskeller",
+        "icon": "heater",
+        "byline": "Von Katharina Steinbrecher",
+        "lead": "In einem Kasseler Mehrfamilienhaus soll die alte Gasheizung einer Wärmepumpe weichen. Die Eigentümer streiten seit Monaten – ein Lehrstück darüber, warum die Energiewende so mühsam ist.",
+        "paragraphs": [
+          "Wer verstehen will, warum der Klimaschutz in Deutschland nur langsam vorankommt, sollte nicht nur auf Windparks und Solarfelder schauen, sondern auch in die Keller der Mehrfamilienhäuser. Auf Heizung und Warmwasser entfällt rund ein Drittel des gesamten Energieverbrauchs, und noch immer wird ein Großteil dieser Wärme mit Öl und Gas erzeugt."
+        ]
+      }
+    },
+    {
+      "key": "b2-umwelt-hoeren-audio",
+      "kind": "audio",
+      "title": "Débat radio : un parc éolien citoyen",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Guten Abend und herzlich willkommen zur „Streitfrage“. Viele von Ihnen werden die Diskussion schon in der Zeitung verfolgt haben: In der Gemeinde Krähenbrück sollen fünf Windräder gebaut werden, und zwar nicht von einem großen Energiekonzern, sondern von einer Genossenschaft der Bürgerinnen und Bürger."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Bei mir im Studio sind Bürgermeisterin Heike Rautenberg und Bernd Hagemeister von der Bürgerinitiative „Gegenwind Krähenbrück“. Frau Rautenberg, warum braucht Krähenbrück Windräder?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Weil wir nicht nur über Klimaschutz reden, sondern auch etwas dafür tun wollen. Die fünf Anlagen werden rechnerisch rund zwanzigtausend Haushalte mit Strom versorgen. Und das Besondere ist: Das Geld bleibt im Ort. Jede Einwohnerin und jeder Einwohner kann ab fünfhundert Euro Mitglied der Genossenschaft werden und bekommt jedes Jahr einen Teil des Gewinns."
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Außerdem erhält die Gemeinde Einnahmen, mit denen wir zum Beispiel den Kindergarten sanieren können."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Herr Hagemeister, das klingt eigentlich gut. Was stört Sie?"
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Hagemeister",
+          "text": "Ich bin nicht gegen erneuerbare Energien, das möchte ich gleich am Anfang sagen. Ich habe selbst eine Solaranlage auf dem Dach. Aber die Anlagen sollen nur achthundert Meter von den ersten Häusern entfernt stehen, und sie werden über zweihundert Meter hoch sein. Viele Nachbarn haben Angst vor dem Lärm und vor dem Schattenwurf."
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Hagemeister",
+          "text": "Und wer hier wohnt, ist oft gerade wegen der Landschaft hierhergezogen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Frau Rautenberg, sind achthundert Meter nicht wirklich zu nah?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Der Abstand entspricht den gesetzlichen Vorgaben. Nachts laufen die Anlagen langsamer, damit sie leiser sind. Und beim Schattenwurf gibt es eine klare Regel: Wenn der Schatten ein Haus zu lange trifft, schaltet sich das Windrad automatisch ab. Auch wenn ich die Sorgen ernst nehme: Viele Befürchtungen haben sich in anderen Gemeinden nicht bestätigt."
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Hagemeister",
+          "text": "Das mag sein. Aber eine Frage hat uns bisher niemand richtig beantwortet: Was passiert mit den Vögeln? Hier in der Nähe brüten Rotmilane, und die gelten als besonders gefährdet."
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Dazu gibt es ein Gutachten, für das zwei Jahre lang beobachtet wurde. Das Ergebnis: Ein Standort wurde gestrichen, deshalb planen wir jetzt fünf statt sechs Anlagen. Und wenn die Felder gemäht werden, stehen die Windräder tagsüber still, weil die Greifvögel dann besonders oft dort jagen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Herr Hagemeister, wäre das für Sie ein Kompromiss?"
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Hagemeister",
+          "text": "Ehrlich gesagt hat mich das Gutachten zum Teil beruhigt. Trotzdem finde ich, dass man die Bürger zu spät gefragt hat. Als wir von dem Projekt erfahren haben, waren die Pachtverträge mit den Landwirten schon unterschrieben. Selbst wenn das Projekt am Ende gut ist: Viele fühlen sich übergangen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Ein Vorwurf, den man oft hört. Frau Rautenberg?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Da hat Herr Hagemeister zum Teil recht. Wir hätten früher informieren müssen. Deshalb gibt es jetzt jeden ersten Montag im Monat eine offene Sprechstunde im Gemeindehaus, und im Frühjahr können alle Einwohner über die Beteiligung der Gemeinde abstimmen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Wie geht es jetzt weiter? Wann könnten sich die Räder drehen?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Rautenberg",
+          "text": "Wenn alles gut läuft, beginnen die Bauarbeiten im übernächsten Jahr. Bis die Anlagen den ersten Strom liefern, werden wir dann sieben Jahre lang geplant, geprüft und diskutiert haben. Das zeigt übrigens auch, wie langsam solche Genehmigungsverfahren in Deutschland immer noch sind."
+        },
+        {
+          "voice": "mann",
+          "name": "Herr Hagemeister",
+          "text": "Sieben Jahre – bis dahin werden sich viele hier an den Gedanken gewöhnt haben. Ich werde jedenfalls zur Sprechstunde gehen. Wenn wir schon Windräder bekommen, dann sollen die Leute im Ort auch mitreden und mitverdienen."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Ein versöhnliches Schlusswort. Frau Rautenberg, Herr Hagemeister, vielen Dank für das Gespräch. Und Sie, liebe Hörerinnen und Hörer: Was meinen Sie? Schreiben Sie uns auf unserer Internetseite."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-umwelt-kontrolle-audio",
+      "kind": "audio",
+      "title": "Brève d’information : le vote de Krähenbrück",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Nachrichten",
+          "text": "Krähenbrück. Bei der Bürgerbefragung zum geplanten Windpark haben sich am Sonntag fast zwei Drittel der Teilnehmenden für eine Beteiligung der Gemeinde ausgesprochen. Rund einundsiebzig Prozent der Wahlberechtigten haben abgestimmt."
+        },
+        {
+          "voice": "frau3",
+          "name": "Nachrichten",
+          "text": "Die Bürgerinitiative „Gegenwind Krähenbrück“ kündigte an, das Ergebnis zu akzeptieren, auch wenn sie weiterhin einen größeren Abstand zu den Häusern fordert. Bürgermeisterin Rautenberg rechnet damit, dass die ersten Anteile der Genossenschaft im Herbst verkauft werden. Bis zum Baubeginn will die Gemeinde jeden Monat über den Stand der Planung informieren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-umwelt-einstieg-foto",
+      "kind": "image",
+      "title": "Des éoliennes dans un champ de colza",
+      "alt": "Plusieurs éoliennes blanches se dressent derrière un champ de colza en fleur, sous un ciel bleu sans nuage.",
+      "photo": {
+        "file": "libre/commons/umwelt-windpark.jpg"
+      },
+      "credit": "Kora27, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Windpark_Bernsdorf-Gersdorf_in_Sachsen_2H1A4559WI.jpg"
+    },
+    {
+      "key": "b2-umwelt-hoeren2-audio",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Trinkwasser (extrait)",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wasserbedarf"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Der Wasserbedarf des Menschen variiert je nach körperlicher Verfassung, Körpermasse, Aktivität und Klima. Der Mensch nimmt Wasser in Form von Getränken und Speisen zu sich und gibt es mit Urin, Kot, Schweiß und Atemluft ab. Wasser entsteht im Körper auch beim oxidativen Abbau von organischen Nahrungsstoffen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die WHO gibt bei „hohem Bedarf“ eine Trinkwasserbedarfsschätzung von etwa zwei Litern je Tag für einen 60 kg schweren Erwachsenen und von einem Liter für ein Kind mit 10 kg Körpergewicht an.",
+          "say": "Die W H O gibt bei „hohem Bedarf“ eine Trinkwasserbedarfsschätzung von etwa zwei Litern je Tag für einen sechzig Kilogramm schweren Erwachsenen und von einem Liter für ein Kind mit zehn Kilogramm Körpergewicht an."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Allerdings weisen neuere Studien darauf hin, dass der Flüssigkeitsbedarf auch durch ausreichenden Verzehr von Getränken wie etwa Saft, Milch oder auch Kaffee gedeckt werden kann und individuell stark variiert."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Leitungswasser wird auch für andere Zwecke, wie Wäschewaschen, Toilettenspülung, Körper-, Geschirr- und Wohnungsreinigung verwendet. In den letzten Jahrzehnten wurde mit einem Verbrauch an Trinkwasser von 140 bis 160 Liter pro Tag und Einwohner gerechnet.",
+          "say": "Leitungswasser wird auch für andere Zwecke, wie Wäschewaschen, Toilettenspülung, Körper-, Geschirr- und Wohnungsreinigung verwendet. In den letzten Jahrzehnten wurde mit einem Verbrauch an Trinkwasser von hundertvierzig bis hundertsechzig Liter pro Tag und Einwohner gerechnet."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Der Pro-Kopf-Verbrauch von Trinkwasser ist in Deutschland laut einer Statistik des Bundesverbands der Energie- und Wasserwirtschaft e. V. (BDEW) durch einen bewussten Umgang mit Wasser seit 1990 beinahe kontinuierlich gesunken.",
+          "say": "Der Pro-Kopf-Verbrauch von Trinkwasser ist in Deutschland laut einer Statistik des Bundesverbands der Energie- und Wasserwirtschaft eingetragener Verein, B D E W, durch einen bewussten Umgang mit Wasser seit neunzehnhundertneunzig beinahe kontinuierlich gesunken."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Im Jahr 2011 verbrauchten die Bundesbürger durchschnittlich 122 Liter Wasser je Tag und Einwohner (Stand 2011).",
+          "say": "Im Jahr zweitausendelf verbrauchten die Bundesbürger durchschnittlich hundertzweiundzwanzig Liter Wasser je Tag und Einwohner (Stand zweitausendelf)."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "In anderen Ländern ist der Verbrauch teilweise weitaus höher, der Verbrauch in Italien wird mit 260 Litern pro Tag und Einwohner angegeben und die Wüstenstadt Dubai zählt sogar mit 500 Litern je Tag und Kopf zu den Spitzenreitern und strebt bei der dortigen Herstellung des Trinkwassers durch Meerwasserentsalzung eine notwendige Verbrauchssenkung an.",
+          "say": "In anderen Ländern ist der Verbrauch teilweise weitaus höher, der Verbrauch in Italien wird mit zweihundertsechzig Litern pro Tag und Einwohner angegeben und die Wüstenstadt Dubai zählt sogar mit fünfhundert Litern je Tag und Kopf zu den Spitzenreitern und strebt bei der dortigen Herstellung des Trinkwassers durch Meerwasserentsalzung eine notwendige Verbrauchssenkung an."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Qualität des Trinkwassers"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "In Deutschland, Österreich, der Schweiz, Frankreich und den Niederlanden ist Trinkwasser das am intensivsten kontrollierte Lebensmittel und damit zum Verzehr uneingeschränkt geeignet."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Probleme bei der Qualität des Trinkwassers aus Grundwasser können in der Regel durch die ordnungsgemäße Ausweisung von Schutzgebieten vermieden werden. Teilweise ist die Unterschutzstellung in Gebieten mit intensiver konventioneller landwirtschaftlicher Nutzung jedoch nicht ausreichend."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Insbesondere durch zu starke Gülledüngung oder durch alte Kläranlagen und den dadurch verursachten Nitrateintrag in das Grundwasser kann das daraus gewonnene Trinkwasser für Säuglinge und Kleinkinder gefährlich sein."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "In diesen Fällen muss der Wasserversorger die Nitratkonzentration durch Aufbereitung, tiefere Brunnen und Kooperationen mit der Landwirtschaft senken."
+        }
+      ],
+      "credit": "Texte : article « Trinkwasser » de la Wikipédia en allemand (révision 152370829), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=152370829"
+    },
+    {
+      "key": "b2-umwelt-hoeren2-foto",
+      "kind": "image",
+      "title": "Un robinet ouvert",
+      "alt": "Gros plan sur un robinet chromé d’où coule un mince filet d’eau claire, devant un mur blanc.",
+      "photo": {
+        "file": "libre/commons/umwelt-wasserhahn.jpg"
+      },
+      "credit": "Vien Hoang, Wikimedia Commons",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tap-gb0fe5d2cc_1920.jpg"
+    },
+    {
+      "key": "b2-umwelt-lexique",
+      "kind": "audio",
+      "title": "Lexique · Umwelt: Klimaschutz und Energiewende",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Klimawandel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Energiewende"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erneuerbare Energien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wärmepumpe, die Wärmepumpen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Windrad, die Windräder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausstoß"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Verbrauch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Genossenschaft, die Genossenschaften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gutachten, die Gutachten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Eigentümer, die Eigentümer"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sanieren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "dämmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einsparen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "fördern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich auszahlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verzichten auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich auswirken auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bedenken äußern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "etwas in Kauf nehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "auf lange Sicht"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "klimaneutral"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ohnehin"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bürgerbeteiligung, die Bürgerbeteiligungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Einwand, die Einwände"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

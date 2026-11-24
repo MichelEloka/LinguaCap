@@ -13,7 +13,7 @@ const situation = (question) => ({ media: `b1-neuanfang-atelier-interaktion-${qu
 
 export default {
   id: 'b1-neuanfang-atelier',
-  title: 'Atelier Neuanfang : se présenter à un nouveau groupe',
+  title: 'Neuanfang, atelier : se présenter à un nouveau groupe',
   objective: 'Se présenter par écrit à un nouveau groupe, raconter à l’oral un tournant de sa vie, réagir au récit des autres et relayer les informations d’un courriel d’accueil.',
   grammarFocus: ['praeteritum-perfekt', 'als-wenn'],
   sources: [

@@ -1,0 +1,2468 @@
+{
+  "id": "b2-bildung",
+  "title": "Bildung: Studium, Ausbildung und lebenslanges Lernen",
+  "objective": "Comprendre un article argumentatif sur le choix entre études et formation professionnelle, suivre une réunion d’information sur les études en parallèle d’un emploi en prenant des notes, lire et reformuler le style nominal des textes informatifs (participe épithète étendu, nominalisation).",
+  "prerequisites": [
+    "b2-arbeitswelt-atelier"
+  ],
+  "audioProfile": "b2-debut",
+  "sources": [
+    "Textes, réunion d’information, message et exercices originaux LinguaCap."
+  ],
+  "grammarFocus": [
+    "partizipialattribut",
+    "nominalisierung"
+  ],
+  "layer": "content/b/source/b2/b2-bildung.mjs",
+  "vocabulary": [
+    {
+      "id": "studium",
+      "word": "Studium",
+      "article": "das",
+      "plural": "Studien",
+      "partOfSpeech": "noun",
+      "translation": "les études (supérieures)",
+      "example": "Nach dem Studium möchte sie im Ausland arbeiten.",
+      "note": "ein Studium beginnen, abschließen, abbrechen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "ausbildung",
+      "word": "Ausbildung",
+      "article": "die",
+      "plural": "Ausbildungen",
+      "partOfSpeech": "noun",
+      "translation": "la formation professionnelle, l’apprentissage",
+      "example": "Er macht eine Ausbildung zum Mechatroniker.",
+      "note": "eine Ausbildung zum / zur … machen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "duale-ausbildung",
+      "word": "duale Ausbildung",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "la formation en alternance (entreprise et école professionnelle)",
+      "example": "In der dualen Ausbildung lernt man im Betrieb und in der Berufsschule.",
+      "note": "die duale Ausbildung · das duale Studium",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "ausbildungsbetrieb",
+      "word": "Ausbildungsbetrieb",
+      "article": "der",
+      "plural": "Ausbildungsbetriebe",
+      "partOfSpeech": "noun",
+      "translation": "l’entreprise formatrice",
+      "example": "Ihr Ausbildungsbetrieb hat ihr das Studium empfohlen.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "berufsschule",
+      "word": "Berufsschule",
+      "article": "die",
+      "plural": "Berufsschulen",
+      "partOfSpeech": "noun",
+      "translation": "l’école professionnelle (en alternance)",
+      "example": "Zwei Tage pro Woche geht sie in die Berufsschule.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "abschluss",
+      "word": "Abschluss",
+      "article": "der",
+      "plural": "Abschlüsse",
+      "partOfSpeech": "noun",
+      "translation": "le diplôme, la fin (d’une formation)",
+      "example": "Nach Abschluss der Ausbildung hat er ein Jahr im Betrieb gearbeitet.",
+      "note": "einen Abschluss machen / erwerben",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "hochschule",
+      "word": "Hochschule",
+      "article": "die",
+      "plural": "Hochschulen",
+      "partOfSpeech": "noun",
+      "translation": "l’établissement d’enseignement supérieur",
+      "example": "Die Hochschule bietet drei berufsbegleitende Studiengänge an.",
+      "note": "die Fachhochschule : université de sciences appliquées",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "studiengang",
+      "word": "Studiengang",
+      "article": "der",
+      "plural": "Studiengänge",
+      "partOfSpeech": "noun",
+      "translation": "la filière, le cursus",
+      "example": "Der Studiengang dauert acht Semester.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "berufsbegleitend",
+      "word": "berufsbegleitend",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "en parallèle d’un emploi",
+      "example": "Sie studiert berufsbegleitend Soziale Arbeit.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "weiterbildung",
+      "word": "Weiterbildung",
+      "article": "die",
+      "plural": "Weiterbildungen",
+      "partOfSpeech": "noun",
+      "translation": "la formation continue",
+      "example": "Viele Betriebe bezahlen ihren Mitarbeitenden eine Weiterbildung.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-weiterbilden",
+      "word": "sich weiterbilden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se former, se perfectionner",
+      "example": "Wer sich regelmäßig weiterbildet, bleibt auf dem Arbeitsmarkt gefragt.",
+      "note": "séparable : weiter|bilden",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "fachkraft",
+      "word": "Fachkraft",
+      "article": "die",
+      "plural": "Fachkräfte",
+      "partOfSpeech": "noun",
+      "translation": "le travailleur qualifié, la travailleuse qualifiée",
+      "example": "Im Handwerk fehlen überall Fachkräfte.",
+      "note": "der Fachkräftemangel : la pénurie de main-d’œuvre qualifiée",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "durchlaessigkeit",
+      "word": "Durchlässigkeit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la perméabilité (passerelles entre filières)",
+      "example": "Die Durchlässigkeit des Bildungssystems ist größer geworden.",
+      "note": "sans pluriel · durchlässig : perméable",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "zulassung",
+      "word": "Zulassung",
+      "article": "die",
+      "plural": "Zulassungen",
+      "partOfSpeech": "noun",
+      "translation": "l’admission",
+      "example": "Für die Zulassung brauchen Sie drei Jahre Berufserfahrung.",
+      "note": "zulassen : admettre",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "voraussetzung",
+      "word": "Voraussetzung",
+      "article": "die",
+      "plural": "Voraussetzungen",
+      "partOfSpeech": "noun",
+      "translation": "la condition préalable",
+      "example": "Unter bestimmten Voraussetzungen kann man ohne Abitur studieren.",
+      "note": "unter dieser Voraussetzung : à cette condition",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "anrechnen",
+      "word": "anrechnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "valider, prendre en compte (des acquis)",
+      "example": "Kann die Hochschule Module aus meiner Ausbildung anrechnen?",
+      "note": "séparable : an|rechnen · jemandem etwas anrechnen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "studiengebuehr",
+      "word": "Studiengebühr",
+      "article": "die",
+      "plural": "Studiengebühren",
+      "partOfSpeech": "noun",
+      "translation": "les frais de scolarité",
+      "example": "Für das berufsbegleitende Studium fallen Studiengebühren an.",
+      "note": "surtout au pluriel",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "studienabbruch",
+      "word": "Studienabbruch",
+      "article": "der",
+      "plural": "Studienabbrüche",
+      "partOfSpeech": "noun",
+      "translation": "l’abandon des études",
+      "example": "Die meisten Studienabbrüche passieren im ersten Jahr.",
+      "note": "ein Studium abbrechen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "quereinsteiger",
+      "word": "Quereinsteiger",
+      "article": "der",
+      "plural": "Quereinsteiger",
+      "partOfSpeech": "noun",
+      "translation": "la personne en reconversion (venue d’un autre métier)",
+      "example": "Als Quereinsteiger bringt er viel Praxiserfahrung mit.",
+      "note": "die Quereinsteigerin · der Quereinstieg",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "lebenslanges-lernen",
+      "word": "lebenslanges Lernen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "l’apprentissage tout au long de la vie",
+      "example": "Lebenslanges Lernen ist in vielen Berufen selbstverständlich geworden.",
+      "note": "das lebenslange Lernen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "wissen-vermitteln",
+      "word": "Wissen vermitteln",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "transmettre des connaissances",
+      "example": "Eine gute Lehrerin vermittelt nicht nur Wissen, sondern auch Neugier.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "eine-pruefung-ablegen",
+      "word": "eine Prüfung ablegen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "passer un examen",
+      "example": "Am Ende des Semesters legen die Studierenden eine Prüfung ab.",
+      "note": "bestehen : réussir · durchfallen : échouer",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "akademisierung",
+      "word": "Akademisierung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la hausse de la part des diplômés du supérieur",
+      "example": "Fachleute sprechen von einer Akademisierung der Gesellschaft.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "chancengleichheit",
+      "word": "Chancengleichheit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’égalité des chances",
+      "example": "Gute Beratung ist eine Frage der Chancengleichheit.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "entscheidungsdruck",
+      "word": "Entscheidungsdruck",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la pression de devoir décider",
+      "example": "Viele Jugendliche stehen nach dem Abitur unter großem Entscheidungsdruck.",
+      "note": "sans pluriel · unter Druck stehen",
+      "audio": {
+        "media": "b2-bildung-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-bildung-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Bildungswege",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Bildungswege",
+        "description": "BILDUNG\n[fr?] Formation et éducation\nStudium oder Ausbildung, Vollzeit oder neben dem Beruf, mit zwanzig oder mit fünfzig: In diesem Modul geht es um Bildungswege und um die Frage, wie man im Leben weiterlernt. [fr?] Études ou apprentissage, à temps plein ou en parallèle d’un emploi, à vingt ou à cinquante ans : ce module parle des parcours de formation et de la manière de continuer à apprendre toute sa vie.\n\nFRAGEN ZUM EINSTIEG\n• Welchen Bildungsweg sind Sie gegangen, und warum? [fr?] Quel parcours de formation avez-vous suivi, et pourquoi ?\n• Hat in Ihrem Herkunftsland ein Studium mehr Ansehen als eine Ausbildung? [fr?] Dans votre pays d’origine, les études ont-elles plus de prestige qu’une formation professionnelle ?\n• Was haben Sie zuletzt gelernt, das nichts mit der Schule zu tun hatte? [fr?] Qu’avez-vous appris récemment qui n’avait rien à voir avec l’école ?\nAntworten Sie in Gedanken auf Deutsch, jeweils in drei oder vier Sätzen. [fr?] Répondez mentalement en allemand, en trois ou quatre phrases à chaque fois.\n\nZIELE\n• Ich kann einen argumentativen Artikel über Bildungswege verstehen und die Positionen unterscheiden. [fr?] Je peux comprendre un article argumentatif sur les parcours de formation et en distinguer les positions.\n• Ich kann einer Informationsveranstaltung folgen und dabei ausführliche Notizen machen. [fr?] Je peux suivre une réunion d’information en prenant des notes détaillées.\n• Ich kann Partizipialattribute verstehen: „die seit Jahren steigende Zahl“. [fr?] Je peux comprendre les participes épithètes étendus : « le nombre qui augmente depuis des années ».\n• Ich kann Nominalstil in Verbalstil umformen und umgekehrt: „nach Abschluss der Ausbildung“. [fr?] Je peux passer du style nominal au style verbal et inversement : « après la fin de la formation ».\n\nWICHTIGE WÖRTER\n• die duale Ausbildung — Lernen im Betrieb und in der Berufsschule\n• das Studium — Lernen an einer Hochschule oder Universität\n• der Abschluss — das Zeugnis am Ende einer Schule, Ausbildung oder eines Studiums\n• berufsbegleitend — neben der Arbeit\n• die Weiterbildung — Lernen nach der ersten Ausbildung, oft für den Beruf\n• anrechnen — schon Gelerntes offiziell berücksichtigen\n• die Zulassung — die Erlaubnis, ein Studium zu beginnen\n• der Quereinsteiger — jemand, der aus einem ganz anderen Beruf kommt",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein Hörsaal vor der Vorlesung",
+          "media": "b2-bildung-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-bildung-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: Studium oder Ausbildung?",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: Studium oder Ausbildung?",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n1. Global: Lesen Sie Titel, Vorspann und letzten Absatz. Welche Frage stellt der Artikel, und welche Antwort gibt die Autorin? [fr?] Lecture globale : lisez le titre, le chapeau et le dernier paragraphe. Quelle question l’article pose-t-il, et quelle réponse l’autrice donne-t-elle ?\n2. Selektiv: Drei Personen kommen zu Wort. Markieren Sie in Gedanken, wer was sagt. [fr?] Lecture sélective : trois personnes s’expriment. Repérez mentalement qui dit quoi.\n3. Detailliert: Lange Nomengruppen wie „die für den Herbst ausgeschriebenen Ausbildungsplätze“ lesen Sie am besten vom Artikel direkt zum Nomen und dann zurück. [fr?] Lecture détaillée : lisez les longs groupes nominaux de l’article directement jusqu’au nom, puis revenez aux compléments.\n\nSTUDIUM ODER AUSBILDUNG?\n[fr?] Article de magazine : études ou formation professionnelle ?\nWarum die Frage oft falsch gestellt wird · Von Swantje Eckhard\nJedes Jahr stehen Hunderttausende junge Menschen vor derselben Entscheidung: Hochschule oder Betrieb? Doch die scheinbar klare Alternative verliert an Bedeutung.\n(A) Lange galt in Deutschland eine einfache Regel: Wer Abitur hat, studiert; wer keines hat, macht eine Ausbildung. Diese Regel stimmt schon lange nicht mehr. Die seit Jahren steigende Zahl der Studienanfänger hat dazu geführt, dass inzwischen etwa ebenso viele junge Menschen ein Studium beginnen wie eine duale Ausbildung. Fachleute sprechen von einer „Akademisierung“ der Gesellschaft. Gleichzeitig bleiben in vielen Handwerksbetrieben die für den Herbst ausgeschriebenen Ausbildungsplätze unbesetzt.\n(B) Moritz Hagedorn kennt dieses Problem aus nächster Nähe. Der Ausbildungsleiter eines mittelständischen Metallbaubetriebs in Kassel konnte in diesem Jahr nur vier seiner acht Ausbildungsplätze besetzen. „Viele Eltern halten eine Ausbildung immer noch für die zweite Wahl“, sagt er. „Dabei verdienen unsere Meister oft mehr als mancher Kollege mit Bachelorabschluss.“ Ein Argument hört er in Gesprächen mit Eltern besonders oft: Wer studiert, hat später mehr Möglichkeiten. Hagedorn lässt das nur teilweise gelten. „Nach Abschluss der Ausbildung kann man bei uns den Meister machen oder ein Studium anschließen. Die Türen stehen in beide Richtungen offen.“ Seit zwei Jahren stellt sich sein Betrieb deshalb an Gymnasien vor, bisher mit mäßigem Erfolg.\n(C) Genau diese Durchlässigkeit des Bildungssystems hält die Bildungsforscherin Yasemin Ertürk für entscheidend. „Die eigentliche Frage lautet nicht: Studium oder Ausbildung? Sie lautet: Was passt zu mir, und wie komme ich später weiter?“, sagt sie. Ertürk verweist auf die wachsende Zahl dualer Studiengänge, in denen Studierende abwechselnd an der Hochschule und im Betrieb lernen. Auch ohne Abitur kann man heute unter bestimmten Voraussetzungen studieren, etwa nach einer abgeschlossenen Ausbildung und mehreren Jahren Berufserfahrung. Viele junge Menschen wissen das allerdings nicht, kritisiert Ertürk: „Die Berufsorientierung an den Gymnasien konzentriert sich zu sehr auf das Studium und zu wenig auf die vielen Wege, die es daneben gibt.“\n(D) Merit Thiel ist ein Beispiel für einen solchen Weg. Nach der Realschule begann die heute 22-Jährige eine Ausbildung zur Mechatronikerin. „Mit sechzehn hatte ich genug von der Schule, ich wollte endlich etwas mit den Händen machen“, erzählt sie. Ihre Eltern waren anfangs alles andere als begeistert: Sie hätten es lieber gesehen, wenn ihre Tochter Abitur gemacht hätte. Nach der Ausbildung arbeitete sie ein Jahr lang im Betrieb und merkte, dass sie die Anlagen nicht nur reparieren, sondern auch verstehen wollte. Heute studiert sie Elektrotechnik an einer Fachhochschule, die ihr einen Teil der in der Ausbildung erworbenen Kenntnisse angerechnet hat. „Im Labor bin ich den anderen oft einen Schritt voraus. Dafür musste ich im ersten Semester Mathe mühsam nachholen.“\n(E) Was bedeutet das für Eltern und Schulen? Vor allem weniger Prestigedenken und mehr Information. Schulen sollten Betriebe ebenso selbstverständlich einladen wie Hochschulen, und Eltern sollten ihren Kindern zuhören, statt ihre eigenen Erwartungen auf sie zu übertragen. Ich halte es für einen Fehler, Ausbildung und Studium gegeneinander auszuspielen, wie es in vielen Debatten geschieht. Beide Wege haben ihre Berechtigung, und immer öfter verbinden sie sich in einem einzigen Lebenslauf. Wer mit sechzehn oder neunzehn eine Entscheidung trifft, legt sich damit nicht für immer fest. Das ist vielleicht die wichtigste Botschaft an eine Generation, die unter großem Entscheidungsdruck steht: Der erste Abschluss ist nicht der letzte.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-lesen-artikel",
+          "caption": "Artikel aus einem Bildungsmagazin",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was ist die zentrale Aussage des Artikels? [fr?] Quelle est l’idée centrale de l’article ?",
+          "explanation": "Titel („Warum die Frage oft falsch gestellt wird“) und Absatz E geben die Antwort: Beide Wege „verbinden sich in einem einzigen Lebenslauf“, und „der erste Abschluss ist nicht der letzte“. Der Text bevorzugt keinen Weg und kritisiert die Zulassung ohne Abitur nicht. [fr?] Le titre et le paragraphe E le disent : les deux voies se combinent de plus en plus, et le premier diplôme n’est pas le dernier. L’article ne préfère aucune voie et ne critique pas l’admission sans baccalauréat.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Ausbildung ist heute in jedem Fall die bessere Wahl als ein Studium.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Studium und Ausbildung schließen sich nicht mehr für das ganze Leben aus.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Junge Menschen sollten erst nach einigen Berufsjahren an die Hochschule gehen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Hochschulen nehmen inzwischen zu viele Studierende ohne Abitur auf.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Position vertritt die Autorin im letzten Absatz? [fr?] Quelle position l’autrice défend-elle dans le dernier paragraphe ?",
+          "explanation": "„Ich halte es für einen Fehler, Ausbildung und Studium gegeneinander auszuspielen.“ Mit „Ich halte es für …“ äußert sie ihre eigene Meinung; sie ist also nicht neutral. Ein späteres Alter für die Entscheidung fordert sie nicht: Sie sagt nur, dass man sich nicht „für immer“ festlegt. [fr?] Elle donne son avis à la première personne : opposer les deux voies est une erreur. Elle ne demande pas de décider plus tard ; elle dit seulement qu’une décision n’engage pas pour toujours.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hält das Studium für den sichereren Weg in einen gut bezahlten Beruf.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie fordert, dass Jugendliche sich später für einen Bildungsweg entscheiden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie bleibt neutral und gibt nur die Meinungen der Fachleute wieder.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie hält es für falsch, die beiden Bildungswege gegeneinander auszuspielen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Moritz Hagedorn konnte in diesem Jahr alle Ausbildungsplätze in seinem Betrieb besetzen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: Er „konnte in diesem Jahr nur vier seiner acht Ausbildungsplätze besetzen“. Die Hälfte der Plätze bleibt also frei; das passt zu Absatz A („unbesetzt“). [fr?] Faux : il n’a pourvu que quatre de ses huit places d’apprentissage ; la moitié reste vacante.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was will Moritz Hagedorn mit seinem Hinweis auf das Gehalt der Meister zeigen? [fr?] Que veut montrer Moritz Hagedorn en évoquant le salaire des maîtres artisans ?",
+          "explanation": "Er widerspricht den Eltern, die eine Ausbildung „für die zweite Wahl“ halten: „Dabei verdienen unsere Meister oft mehr als mancher Kollege mit Bachelorabschluss.“ „Oft“ und „mancher“ zeigen: Er sagt nicht, dass ein Studium sich „nie“ lohnt. [fr?] Il répond aux parents qui voient l’apprentissage comme un second choix. « oft » et « mancher » nuancent : il ne prétend pas que les études ne rapportent jamais.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass eine Ausbildung keineswegs eine schlechtere Wahl sein muss",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "dass die Meister in seinem Betrieb zu viel Geld verdienen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass sich ein Bachelorabschluss finanziell nie lohnt",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "dass er bald keine Meister mehr für seinen Betrieb findet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Yasemin Ertürk meint, dass die Gymnasien zu wenig über die verschiedenen Bildungswege informieren.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Die Berufsorientierung an den Gymnasien konzentriert sich zu sehr auf das Studium und zu wenig auf die vielen Wege, die es daneben gibt.“ Die Aussage gibt diese Kritik mit anderen Worten wieder. [fr?] Vrai : selon elle, l’orientation dans les lycées se concentre trop sur les études et pas assez sur les autres voies.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Merit Thiel möchte nach dem Studium in ihren Ausbildungsbetrieb zurückkehren.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Wir erfahren, was sie gemacht hat und was sie heute studiert, aber nichts über ihre Pläne nach dem Studium. [fr?] Non mentionné : le texte parle de son parcours et de ses études actuelles, pas de ses projets après le diplôme.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A: Die Regel „Abitur, also Studium“ stimmt nicht mehr. B: Hagedorn findet nicht genug Auszubildende. C: Ertürk nennt Wege, die viele nicht kennen. D: Merit geht von der Ausbildung zum Studium. E: das Fazit der Autorin. [fr?] A : la vieille règle ; B : des places vacantes ; C : des voies méconnues ; D : de l’atelier au laboratoire ; E : la conclusion de l’autrice.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Eine alte Regel gilt nicht mehr"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Leere Plätze im Betrieb"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Mehr Wege, als viele wissen"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Von der Werkstatt ins Labor"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Der erste Abschluss ist nicht der letzte"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Welches Wort aus dem Text passt? Ergänzen Sie. [fr?] Quel mot du texte convient ? Complétez.",
+          "text": "Absatz A: Dass immer mehr junge Menschen studieren, nennen Fachleute eine [[1]] der Gesellschaft. · Absatz C: Wer abwechselnd an der Hochschule und im Betrieb lernt, macht ein [[2]] Studium. · Absatz D: Die Fachhochschule hat Merit einen Teil ihrer Kenntnisse [[3]].",
+          "explanation": "„Akademisierung“: Immer mehr Menschen erwerben einen Hochschulabschluss. Ein Studium mit Phasen im Betrieb heißt „dual“; vor dem neutralen Nomen „Studium“ mit „ein“ endet das Adjektiv auf „-es“. „Anrechnen“: schon Gelerntes offiziell berücksichtigen. [fr?] Akademisierung : la part croissante de diplômés du supérieur. « ein duales Studium » : adjectif en -es devant un neutre après ein. anrechnen : valider des acquis.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Akademisierung"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "duales"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "angerechnet"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-bildung-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: ein Informationsabend zum Studium neben dem Beruf",
+      "estimatedMinutes": 22,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Informationsabend zum Studium neben dem Beruf",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\nAn der Hochschule Nordhafen stellt Merle Fröhlich von der Studienberatung die berufsbegleitenden Studiengänge vor. Danach stellen zwei Interessierte Fragen. [fr?] À la Hochschule Nordhafen, Merle Fröhlich, du service d’orientation, présente les études en parallèle d’un emploi. Deux personnes intéressées posent ensuite des questions.\n\nSTRATEGIE\n1. Lesen Sie vor dem Hören die Notizen. Überlegen Sie: Welche Information fehlt? Eine Zahl, ein Datum, ein Nomen? [fr?] Avant d’écouter, lisez les notes et demandez-vous ce qui manque : un nombre, une date, un nom ?\n2. Zahlen kommen oft schnell und nacheinander. Achten Sie auf das Wort danach: Semester, Euro, Stunden, Module. [fr?] Les nombres s’enchaînent vite : soyez attentif au mot qui suit (semestres, euros, heures, modules).\n3. Beim zweiten Hören: Achten Sie auch darauf, wie die Personen reagieren. Begeisterung und Zweifel hört man oft an kleinen Wörtern wie „Hm“ oder „allerdings“. [fr?] À la deuxième écoute, observez aussi les réactions : l’enthousiasme ou le doute s’entendent souvent dans de petits mots comme « Hm » ou « allerdings ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-hoeren-audio",
+          "caption": "Informationsabend an der Hochschule Nordhafen",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Studiengänge: Maschinenbau, Betriebswirtschaft, [[1]] · Dauer: [[2]] Semester · Präsenz: ein [[3]] pro Monat und eine Blockwoche im Sommer · Kosten: [[4]] Euro im Monat · Tipp: im eigenen [[5]] nach einer Beteiligung fragen · Abschluss: derselbe wie im [[6]]",
+          "explanation": "Die drei Studiengänge sind „Maschinenbau, Betriebswirtschaft und Soziale Arbeit“. Sie dauern „acht Semester, also vier Jahre“. Präsenz: „ein Samstag pro Monat“. Kosten: „zweihundertneunzig Euro im Monat“. Viele Arbeitgeber zahlen mit: „im eigenen Betrieb nachzufragen“. Der Abschluss ist „genau derselbe wie im Vollzeitstudium“. [fr?] Travail social, huit semestres, un samedi par mois, 290 euros par mois ; il faut demander une participation à son entreprise ; le diplôme est le même qu’à temps plein.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Soziale Arbeit",
+                "soziale Arbeit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "acht",
+                "8"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Samstag"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "290",
+                "zweihundertneunzig"
+              ],
+              "size": 19,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Betrieb",
+                "Unternehmen",
+                "Firma"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Vollzeitstudium"
+              ],
+              "size": 16,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Zulassung ohne Abitur: abgeschlossene [[1]] und mindestens [[2]] Jahre Berufserfahrung · empfohlen: kostenloser [[3]] in Mathematik · Anrechnung: bis zu [[4]] Module · Zeitaufwand: [[5]] bis zwanzig Stunden pro Woche · Bewerbungsschluss: [[6]] Juli",
+          "explanation": "„Mit einer abgeschlossenen Berufsausbildung und mindestens drei Jahren Berufserfahrung“ gibt es die Zulassung ohne Abitur. Empfohlen wird der kostenlose „Vorkurs in Mathematik“. Angerechnet werden „bis zu zwei Module“. Zeitaufwand: „fünfzehn bis zwanzig Stunden pro Woche“. Bewerbungsschluss: „am fünfzehnten Juli“. [fr?] Formation terminée et au moins trois ans d’expérience ; cours préparatoire gratuit en maths ; jusqu’à deux modules validés ; quinze à vingt heures par semaine ; date limite le 15 juillet.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Berufsausbildung",
+                "Ausbildung"
+              ],
+              "size": 17,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "drei",
+                "3"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Vorkurs"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "zwei",
+                "2"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "fünfzehn",
+                "15"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "15.",
+                "15",
+                "fünfzehnter",
+                "fünfzehnten",
+                "am 15.",
+                "am fünfzehnten"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie spricht Frau Fröhlich über den Zeitaufwand des Studiums? [fr?] Comment Mme Fröhlich parle-t-elle du temps que demandent les études ?",
+          "explanation": "„Das ist neben einer Vollzeitstelle viel, das möchte ich ganz ehrlich sagen.“ Sie erwähnt sogar die Studienabbrüche im ersten Jahr, „weil die Leute die Belastung unterschätzt haben“. Sie nennt außerdem konkrete Zahlen (fünfzehn bis zwanzig Stunden). [fr?] Elle est franche : c’est beaucoup à côté d’un temps plein, et beaucoup abandonnent la première année pour avoir sous-estimé la charge. Elle donne des chiffres précis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "beruhigend: Die meisten Teilnehmenden schaffen es problemlos",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "werbend: Vor allem die Online-Phasen machen alles leicht",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "offen: Sie warnt davor, die Belastung zu unterschätzen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "ausweichend: Sie nennt keine konkreten Zahlen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was erfährt Herr Rieger über die Anrechnung seiner Ausbildung? [fr?] Qu’apprend M. Rieger sur la validation de sa formation ?",
+          "explanation": "„Bei Industriemechanikern rechnen wir häufig bis zu zwei Module an … Ein ganzes Semester sparen Sie dadurch allerdings nicht.“ Von einer zusätzlichen Prüfung ist keine Rede; er muss nur sein Zeugnis und eine Beschreibung seiner Tätigkeiten einreichen. [fr?] Jusqu’à deux modules peuvent être validés, mais il ne gagne pas un semestre entier. Aucun examen supplémentaire : il suffit de fournir son certificat et une description de ses activités.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Einzelne Module können angerechnet werden, ein Semester sparen kann er nicht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Seine Ausbildung ersetzt das erste Studienjahr vollständig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Anrechnung ist nur für Studierende mit Abitur möglich.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Für jedes angerechnete Modul muss er zusätzlich eine Prüfung ablegen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie reagiert Frau Zielińska auf die Antwort zur Kinderbetreuung? [fr?] Comment Mme Zielińska réagit-elle à la réponse sur la garde d’enfants ?",
+          "explanation": "„Hm, das macht es für mich schwierig.“ Sie zweifelt, gibt aber nicht auf: Sie fragt gleich nach dem Bewerbungsschluss. Sie beschwert sich auch nicht; Frau Fröhlich sagt ja, dass die Hochschule an einer Lösung arbeitet. [fr?] Elle doute (« cela complique les choses pour moi ») mais demande aussitôt la date limite : elle ne renonce pas et ne se plaint pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie ist erleichtert, weil sie einen Samstag pro Semester versäumen darf.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie entscheidet sich sofort gegen ein Studium.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie beschwert sich, dass die Hochschule nichts für Eltern tut.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie zweifelt, ob das Studium für sie machbar ist.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Frau Fröhlich empfiehlt, vor der Bewerbung ein persönliches Beratungsgespräch zu vereinbaren.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Richtig: „Mein Tipp: Kommen Sie vorher zu einem persönlichen Beratungsgespräch.“ „Vorher“ bedeutet hier: vor dem Bewerbungsschluss, also vor der Bewerbung. [fr?] Vrai : elle conseille de venir avant à un entretien personnel, c’est-à-dire avant de postuler.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-bildung-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: lange Nomengruppen",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: lange Nomengruppen",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus dem Informationsabend. Achten Sie auf die Wörter vor und nach den Nomen. [fr?] Lisez ces phrases de l’article et de la réunion d’information. Observez les mots placés avant et après les noms.\n\nSÄTZE\n(1) Die seit Jahren steigende Zahl der Studienanfänger hat dazu geführt, dass …\n(2) Gleichzeitig bleiben in vielen Handwerksbetrieben die für den Herbst ausgeschriebenen Ausbildungsplätze unbesetzt.\n(3) … einen Teil der in der Ausbildung erworbenen Kenntnisse.\n(4) Nach Abschluss der Ausbildung kann man bei uns den Meister machen oder ein Studium anschließen.\n(5) Genau diese Durchlässigkeit des Bildungssystems hält die Bildungsforscherin Yasemin Ertürk für entscheidend.\n(6) Mit einer abgeschlossenen Berufsausbildung und mindestens drei Jahren Berufserfahrung bekommen Sie bei uns die Zulassung auch ohne Abitur.\n(7) Die meisten Studienabbrüche passieren im ersten Jahr, …\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions : les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Satz 1: Was bedeutet „die seit Jahren steigende Zahl“? [fr?] Phrase 1 : que signifie « die seit Jahren steigende Zahl » ?",
+          "explanation": "„Steigend“ ist ein Partizip I (Infinitiv + d). Es hat aktive Bedeutung und beschreibt etwas, das gleichzeitig abläuft: Die Zahl steigt, und zwar seit Jahren. „Gestiegen“ wäre abgeschlossen, „man steigert“ hätte ein anderes Subjekt. [fr?] steigend est un participe présent (infinitif + d) : sens actif, action en cours. Le nombre augmente depuis des années ; « gestiegen » exprimerait une action achevée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Zahl, die seit Jahren gestiegen ist",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Zahl, die seit Jahren steigt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Zahl, die man seit Jahren steigert",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Zahl, die seit Jahren steigen soll",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Welcher Relativsatz entspricht welcher Nomengruppe? Ordnen Sie zu. [fr?] Quelle relative correspond à quel groupe nominal ? Associez.",
+          "explanation": "Partizip I (steigend) entspricht einem aktiven Relativsatz im Präsens. Partizip II eines Verbs mit Akkusativobjekt (ausgeschrieben, erworben, abgeschlossen) entspricht einem Passiv oder einer abgeschlossenen Handlung. Die Wörter zwischen Artikel und Partizip werden im Relativsatz zu Ergänzungen des Verbs. [fr?] Participe présent = relative active au présent ; participe passé d’un verbe transitif = sens passif ou action achevée. Les mots placés entre l’article et le participe deviennent les compléments du verbe de la relative.",
+          "pairs": [
+            {
+              "left": "die seit Jahren steigende Zahl",
+              "right": "die Zahl, die seit Jahren steigt"
+            },
+            {
+              "left": "die für den Herbst ausgeschriebenen Plätze",
+              "right": "die Plätze, die für den Herbst ausgeschrieben wurden"
+            },
+            {
+              "left": "die in der Ausbildung erworbenen Kenntnisse",
+              "right": "die Kenntnisse, die man in der Ausbildung erworben hat"
+            },
+            {
+              "left": "eine abgeschlossene Berufsausbildung",
+              "right": "eine Berufsausbildung, die man abgeschlossen hat"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 1 bis 3: Wo stehen die zusätzlichen Informationen („seit Jahren“, „für den Herbst“, „in der Ausbildung“)? [fr?] Phrases 1 à 3 : où se trouvent les informations supplémentaires ?",
+          "explanation": "Das erweiterte Partizipialattribut hat die Form: Artikel + Erweiterung + Partizip + Nomen. „die | seit Jahren | steigende | Zahl“. Beim Lesen springt man deshalb vom Artikel zum Nomen und liest dann die Erweiterung. [fr?] Article + compléments + participe + nom : les compléments se placent entre l’article et le participe. Pour lire, on saute de l’article au nom, puis on revient aux compléments.",
+          "options": [
+            {
+              "id": "a",
+              "label": "nach dem Nomen, wie in einem Relativsatz",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "vor dem Artikel, am Anfang der Gruppe",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "zwischen dem Artikel und dem Partizip",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "am Ende des Satzes, nach dem Verb",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sätze 4, 5 und 7: Was haben „Abschluss“, „Durchlässigkeit“ und „Studienabbrüche“ gemeinsam? [fr?] Phrases 4, 5 et 7 : qu’ont en commun ces trois mots ?",
+          "explanation": "abschließen → der Abschluss, durchlässig → die Durchlässigkeit, abbrechen → der Abbruch. Solche Nominalisierungen machen Sachtexte knapp (Nominalstil). Oft folgt ein Genitiv: „der Ausbildung“, „des Bildungssystems“. Im Verbalstil hieße Satz 4: Nachdem man die Ausbildung abgeschlossen hat, … [fr?] Ce sont des noms tirés de verbes ou d’adjectifs : c’est le style nominal, souvent suivi d’un génitif. En style verbal : « Nachdem man die Ausbildung abgeschlossen hat, … ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es sind Nomen, die aus Verben oder Adjektiven gebildet sind.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Es sind Partizipien, die wie Adjektive dekliniert werden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es sind Lehnwörter aus dem Englischen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es sind Verben, die im Passiv stehen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-bildung-regel",
+      "kind": "lesson",
+      "title": "Regel: Partizipialattribut und Nominalstil",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Partizipialattribut und Nominalstil",
+        "description": "REGEL: DAS ERWEITERTE PARTIZIPIALATTRIBUT\n[fr?] Règle : le participe épithète étendu\nIn Sachtexten ersetzt ein Partizip vor dem Nomen oft einen Relativsatz. Das Partizip wird wie ein Adjektiv dekliniert. [fr?] Dans les textes informatifs, un participe placé devant le nom remplace souvent une relative ; il se décline comme un adjectif. Le français n’a pas cette construction : on traduit par une relative.\n\nFORMEN\n• Partizip I (Infinitiv + d): aktiv und gleichzeitig. die steigende Zahl = die Zahl, die steigt. [fr?] Participe présent : sens actif, action simultanée ou en cours.\n• Partizip II von Verben mit Akkusativobjekt: passiv. die ausgeschriebenen Plätze = die Plätze, die ausgeschrieben wurden. [fr?] Participe passé d’un verbe transitif : sens passif (ou action achevée).\n• Partizip II von Verben mit Perfekt auf „sein“: aktiv und abgeschlossen. die gestiegenen Preise = die Preise, die gestiegen sind. [fr?] Participe passé d’un verbe qui se conjugue avec sein : sens actif, action achevée.\n• zu + Partizip I: Notwendigkeit oder Möglichkeit. die zu erwartenden Kosten = die Kosten, die man erwarten muss. [fr?] zu + participe présent : ce qui doit ou peut être fait, « les coûts à prévoir ».\n\nSTELLUNG\n[fr?] Place des éléments\n• Artikel + Erweiterung + Partizip + Nomen: das von der Stadt finanzierte Programm. [fr?] Article + compléments + participe + nom ; les compléments gardent l’ordre qu’ils auraient dans la relative.\n• Lesetipp: Springen Sie vom Artikel direkt zum Nomen. Lesen Sie dann die Erweiterung. [fr?] Astuce de lecture : passez de l’article au nom, puis lisez les compléments.\n\nREGEL: NOMINALSTIL UND VERBALSTIL\n[fr?] Règle : style nominal et style verbal\nSachtexte verwandeln Verben oft in Nomen. Der Nominalstil ist knapp und sachlich; der Verbalstil ist leichter zu verstehen und typisch für die gesprochene Sprache. [fr?] Les textes informatifs transforment souvent les verbes en noms. Le style nominal est concis ; le style verbal est plus facile à comprendre et typique de l’oral.\n• nach + Nomen ↔ nachdem: Nach Abschluss der Ausbildung … ↔ Nachdem man die Ausbildung abgeschlossen hat, … [fr?] nach + nom ↔ nachdem + verbe (antériorité).\n• bei + Nomen ↔ wenn: Bei der Anmeldung … ↔ Wenn man sich anmeldet, … [fr?] bei + nom ↔ wenn (« lors de », « quand »).\n• wegen + Nomen ↔ weil: wegen der Erhöhung der Gebühren ↔ weil die Gebühren erhöht wurden. [fr?] wegen + nom ↔ weil (cause).\n• zu / zur + Nomen ↔ um … zu: zur Verbesserung der Beratung ↔ um die Beratung zu verbessern. [fr?] zur + nom ↔ um … zu (but).\n• trotz + Nomen ↔ obwohl: trotz der hohen Kosten ↔ obwohl die Kosten hoch sind. [fr?] trotz + nom ↔ obwohl (concession).\n• Das Akkusativobjekt wird zum Genitivattribut: die Gebühren erhöhen → die Erhöhung der Gebühren. Das Subjekt folgt mit „durch“: die Finanzierung durch die Stadt. [fr?] Le complément d’objet devient un génitif ; l’agent est introduit par durch.\n\nNOMEN BILDEN\n[fr?] Former des noms\n• -ung: erhöhen → die Erhöhung · Verbstamm: abschließen → der Abschluss, abbrechen → der Abbruch · Infinitiv: lernen → das Lernen · -heit, -keit: durchlässig → die Durchlässigkeit [fr?] -ung, radical du verbe, infinitif substantivé (neutre, avec majuscule), -heit / -keit.\n\nACHTUNG\n[fr?] Attention : les pièges des francophones\n• Das Partizip bekommt die Endung eines Adjektivs: mit der seit Jahren steigenden Zahl (Dativ). [fr?] Le participe prend la terminaison d’un adjectif épithète : n’oubliez pas la déclinaison.\n• Nomen auf -ung, -heit und -keit sind immer feminin; der substantivierte Infinitiv ist immer neutral und großgeschrieben: das Lernen. [fr?] Les noms en -ung, -heit, -keit sont féminins ; l’infinitif substantivé est neutre et prend une majuscule.\n• Beim Sprechen und in E-Mails klingen lange Partizipialattribute steif. Nehmen Sie dort lieber einen Relativsatz. [fr?] À l’oral et dans un courriel, les longs participes épithètes paraissent raides : préférez une relative.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-bildung-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Partizipialattribut und Nominalisierung",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Partizipialattribut und Nominalisierung",
+        "description": "Üben Sie die Formen. Lesen Sie jede Erklärung, auch wenn Ihre Antwort richtig ist. [fr?] Entraînez-vous aux formes. Lisez chaque explication, même si votre réponse est juste.\n\nMERKE\n• Artikel + Erweiterung + Partizip + Nomen: die seit Jahren steigende Zahl\n• Partizip I aktiv · Partizip II passiv oder abgeschlossen · zu + Partizip I: muss oder kann\n• nach + Nomen ↔ nachdem · bei ↔ wenn · wegen ↔ weil · zur ↔ um … zu · trotz ↔ obwohl",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Partizip mit der richtigen Endung. [fr?] Complétez avec le participe et la bonne terminaison.",
+          "text": "die [[1]] Kosten · die im letzten Jahr [[2]] Reform · das erfolgreich [[3]] Studium",
+          "explanation": "Steigen → Partizip I „steigend“; Plural mit „die“ → „-en“. Einführen → Partizip II „eingeführt“; Femininum Singular mit „die“ → „-e“. Abschließen → „abgeschlossen“; Neutrum mit „das“ → „-e“. Die Endungen sind die des Adjektivs nach dem bestimmten Artikel. [fr?] Participe présent ou passé, puis terminaison de l’adjectif après l’article défini : -en au pluriel, -e au nominatif singulier.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "steigenden"
+              ],
+              "hint": "steigen (Partizip I)",
+              "size": 11
+            },
+            {
+              "id": "2",
+              "accept": [
+                "eingeführte"
+              ],
+              "hint": "einführen (Partizip II)",
+              "size": 12
+            },
+            {
+              "id": "3",
+              "accept": [
+                "abgeschlossene"
+              ],
+              "hint": "abschließen (Partizip II)",
+              "size": 15
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die",
+              "seit dem letzten Jahr",
+              "von der Stadt",
+              "finanzierte",
+              "Beratung",
+              "ist",
+              "für alle Interessierten",
+              "kostenlos."
+            ],
+            [
+              "Die",
+              "von der Stadt",
+              "seit dem letzten Jahr",
+              "finanzierte",
+              "Beratung",
+              "ist",
+              "für alle Interessierten",
+              "kostenlos."
+            ]
+          ],
+          "explanation": "Artikel „Die“, dann die Erweiterungen, dann das Partizip „finanzierte“ direkt vor dem Nomen „Beratung“. Danach folgt das Verb „ist“ an zweiter Stelle. Die beiden Erweiterungen dürfen die Plätze tauschen. [fr?] L’article, puis les compléments, puis le participe juste devant le nom. Le verbe conjugué vient ensuite en deuxième position. Les deux compléments peuvent permuter."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Machen Sie aus dem Relativsatz ein Partizipialattribut. [fr?] Transformez la relative en participe épithète.",
+          "text": "die Studierenden, die neben dem Beruf lernen → die neben dem Beruf [[1]] Studierenden · die Gebühren, die im Juli erhöht wurden → die im Juli [[2]] Gebühren · die Fragen, die noch geklärt werden müssen → die noch zu [[3]] Fragen",
+          "explanation": "Aktiv und gleichzeitig → Partizip I: „lernend“. Passiv → Partizip II: „erhöht“. „Müssen“ + Passiv → „zu“ + Partizip I: „zu klärend“. Nach „die“ im Plural endet alles auf „-en“. [fr?] Actif et simultané : participe présent ; passif : participe passé ; nécessité au passif : zu + participe présent. Au pluriel après die : -en.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "lernenden"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "erhöhten"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "klärenden"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welche Nomengruppe entspricht „die Studentin, die gerade ihre Abschlussarbeit schreibt“? [fr?] Quel groupe nominal correspond à cette relative ?",
+          "explanation": "Die Studentin schreibt (aktiv, gleichzeitig) → Partizip I „schreibend“. Femininum Singular, Nominativ, nach „die“ → „-e“. Das Partizip steht direkt vor dem Nomen. „Geschrieben“ wäre passiv: Die Studentin wird nicht geschrieben. [fr?] Actif et en cours : participe présent, terminaison -e (féminin, nominatif). Le participe se place juste devant le nom ; « geschrieben » serait passif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die gerade ihre Abschlussarbeit geschriebene Studentin",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die gerade ihre Abschlussarbeit schreibenden Studentin",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Studentin gerade ihre Abschlussarbeit schreibende",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die gerade ihre Abschlussarbeit schreibende Studentin",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Nominalstil und Verbalstil: Ordnen Sie zu. [fr?] Style nominal et style verbal : associez.",
+          "explanation": "Jede Präposition hat eine passende Konjunktion: nach ↔ nachdem (vorher), bei ↔ wenn (gleichzeitig), wegen ↔ weil (Grund), zur ↔ um … zu (Ziel), trotz ↔ obwohl (Gegengrund). Aus dem Nomen wird wieder ein Verb, aus dem Genitiv das Objekt. [fr?] Chaque préposition a sa conjonction : nach/nachdem, bei/wenn, wegen/weil, zur/um … zu, trotz/obwohl. Le nom redevient verbe et le génitif redevient complément.",
+          "pairs": [
+            {
+              "left": "nach Abschluss des Studiums",
+              "right": "nachdem man das Studium abgeschlossen hat"
+            },
+            {
+              "left": "bei der Anmeldung",
+              "right": "wenn man sich anmeldet"
+            },
+            {
+              "left": "wegen der Erhöhung der Gebühren",
+              "right": "weil die Gebühren erhöht wurden"
+            },
+            {
+              "left": "zur Verbesserung der Beratung",
+              "right": "um die Beratung zu verbessern"
+            },
+            {
+              "left": "trotz der guten Noten",
+              "right": "obwohl die Noten gut sind"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Formulieren Sie im Nominalstil. [fr?] Reformulez en style nominal.",
+          "text": "Weil die Hochschule die Gebühren erhöht hat, … → Wegen der [[1]] der Gebühren … · Nachdem sie die Prüfung bestanden hatte, … → Nach dem [[2]] der Prüfung … · Um die Chancen zu verbessern, … → Zur [[3]] der Chancen …",
+          "explanation": "erhöhen → die Erhöhung, verbessern → die Verbesserung (-ung, feminin). „Bestehen“ hat kein Nomen auf „-ung“: Man nimmt den substantivierten Infinitiv, „das Bestehen“, Dativ „dem Bestehen“. Das Objekt wird jeweils zum Genitiv: der Gebühren, der Prüfung, der Chancen. [fr?] -ung pour erhöhen et verbessern ; pour bestehen, l’infinitif substantivé « das Bestehen ». Le complément devient un génitif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Erhöhung"
+              ],
+              "hint": "erhöhen",
+              "size": 9
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bestehen"
+              ],
+              "hint": "bestehen",
+              "size": 9
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Verbesserung"
+              ],
+              "hint": "verbessern",
+              "size": 13
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Formulieren Sie im Verbalstil. [fr?] Reformulez en style verbal.",
+          "text": "Nach Abschluss der Ausbildung arbeitete sie ein Jahr im Betrieb. → Nachdem sie die Ausbildung [[1]] hatte, arbeitete sie ein Jahr im Betrieb. · Trotz der hohen Belastung gibt er nicht auf. → Obwohl die Belastung hoch [[2]], gibt er nicht auf.",
+          "explanation": "„Nach Abschluss“ wird zu „nachdem“ + Plusquamperfekt, weil die Handlung vor dem Arbeiten im Betrieb liegt: „abgeschlossen hatte“ („beendet hatte“ ist auch richtig). „Trotz“ wird zu „obwohl“, das Verb steht am Ende: „obwohl die Belastung hoch ist“. [fr?] nach + nom → nachdem + plus-que-parfait (antériorité) ; trotz + nom → obwohl, verbe en fin de subordonnée.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "abgeschlossen",
+                "beendet"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ist"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Das Akkusativobjekt wird im Nominalstil zum Genitiv. Welche Form ist richtig? „Man verlängert die Bewerbungsfrist.“ [fr?] Quelle forme est correcte ?",
+          "explanation": "„Die Bewerbungsfrist“ ist feminin; der Genitiv lautet „der Bewerbungsfrist“, ohne Endung am Nomen. „Des“ und die Endung „-es“ gibt es nur bei maskulinen und neutralen Nomen (des Studiums, des Abschlusses). [fr?] Frist est féminin : génitif « der Bewerbungsfrist », sans terminaison sur le nom. des et -es ne valent que pour le masculin et le neutre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Verlängerung die Bewerbungsfrist",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Verlängerung des Bewerbungsfrist",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Verlängerung der Bewerbungsfrist",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "die Verlängerung der Bewerbungsfristes",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "choice",
+          "prompt": "Was bedeutet „die zu erwartenden Kosten“? [fr?] Que signifie « die zu erwartenden Kosten » ?",
+          "explanation": "„zu“ + Partizip I drückt eine Notwendigkeit oder Möglichkeit im Passiv aus: Die Kosten müssen erwartet werden, man muss mit ihnen rechnen. Es geht also um die Zukunft, nicht um bereits bezahlte oder unerwartete Kosten. [fr?] zu + participe présent : ce qui doit être fait, au passif. Les coûts « à prévoir » : il faut s’y attendre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Kosten, die man schon bezahlt hat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Kosten, mit denen man rechnen muss",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Kosten, die gerade sinken",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Kosten, die niemand erwartet hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Partizip mit der richtigen Endung. [fr?] Complétez avec le participe et la bonne terminaison.",
+          "text": "Mit der seit Jahren [[1]] Nachfrage hat niemand gerechnet. · In den neu [[2]] Studiengängen gibt es noch freie Plätze.",
+          "explanation": "„Mit der … Nachfrage“ ist Dativ Singular feminin, „in den … Studiengängen“ Dativ Plural: Nach dem bestimmten Artikel enden beide Partizipien auf „-en“. „Wachsend“ ist aktiv (Partizip I), „gegründet“ passiv (Partizip II). [fr?] Datif après l’article défini : -en dans les deux cas. wachsend (actif, participe présent), gegründet (passif, participe passé).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wachsenden"
+              ],
+              "hint": "wachsen",
+              "size": 11
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gegründeten"
+              ],
+              "hint": "gründen",
+              "size": 12
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-bildung-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: über Bildung sprechen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: über Bildung sprechen",
+        "description": "Lernen Sie die Wörter in festen Verbindungen und in Wortfamilien. [fr?] Apprenez les mots dans des expressions figées et des familles de mots.\n\nTIPP\nAuf Deutsch „passiert“ man keine Prüfung: Man legt sie ab, man schreibt sie, und am Ende besteht man sie oder fällt durch. Lernen Sie deshalb immer Nomen und Verb zusammen. [fr?] En allemand, on ne « passe » pas un examen avec un calque : on le présente (ablegen), on l’écrit, puis on le réussit (bestehen) ou on échoue (durchfallen). Apprenez toujours le nom avec son verbe.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "Eine Prüfung ablegen, Wissen vermitteln (weitergeben), Lücken schließen (Fehlendes nachholen), den Lebensunterhalt verdienen (Geld zum Leben), Entscheidungen treffen. Diese Verbindungen sind fest und lassen sich nicht wörtlich übersetzen. [fr?] Passer un examen, transmettre des connaissances, combler des lacunes, gagner sa vie, prendre des décisions.",
+          "pairs": [
+            {
+              "left": "eine Prüfung",
+              "right": "ablegen"
+            },
+            {
+              "left": "Wissen",
+              "right": "vermitteln"
+            },
+            {
+              "left": "Lücken",
+              "right": "schließen"
+            },
+            {
+              "left": "den Lebensunterhalt",
+              "right": "verdienen"
+            },
+            {
+              "left": "Entscheidungen",
+              "right": "treffen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "studieren → das [[1]] · ausbilden → die [[2]] · durchlässig → die [[3]] · abbrechen → der [[4]] · zulassen → die [[5]]",
+          "explanation": "Studieren → das Studium (unregelmäßig, Plural: die Studien). Verb + „-ung“: die Ausbildung, die Zulassung. Adjektiv auf „-ig“ + „-keit“: die Durchlässigkeit. Verbstamm mit Vokalwechsel: abbrechen → der Abbruch. [fr?] das Studium (irrégulier) ; -ung pour ausbilden et zulassen ; -keit après un adjectif en -ig ; radical avec changement de voyelle : der Abbruch.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Studium"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Ausbildung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Durchlässigkeit"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Abbruch"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Zulassung"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „Viele Betriebe finden keine Mitarbeitenden mit passender Ausbildung. Man spricht vom …“ [fr?] Quel mot convient ?",
+          "explanation": "„Der Fachkräftemangel“: Es fehlen qualifizierte Arbeitskräfte. „Leistungsdruck“ ist der Druck, gute Ergebnisse zu bringen, ein „Studienabbruch“ das vorzeitige Ende eines Studiums und ein „Quereinstieg“ der Wechsel aus einem anderen Beruf. [fr?] Fachkräftemangel : la pénurie de main-d’œuvre qualifiée. Les autres mots désignent la pression de la performance, l’abandon des études et la reconversion.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Fachkräftemangel",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Leistungsdruck",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Studienabbruch",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Quereinstieg",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie stimmen einem Argument nur teilweise zu. Welche Formulierung passt? [fr?] Vous n’êtes d’accord qu’en partie avec un argument. Quelle formulation convient ?",
+          "explanation": "„Etwas gelten lassen“ heißt „etwas als richtig anerkennen“; „nur teilweise“ schränkt ein. So reagiert Hagedorn im Artikel. Die anderen Sätze drücken volle Zustimmung, klare Ablehnung oder keine Meinung aus. [fr?] « Das lasse ich nur teilweise gelten » : je ne l’admets qu’en partie. Les autres phrases expriment un accord total, un désaccord net ou un refus de répondre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das sehe ich genauso, ohne jede Einschränkung.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Dem kann ich überhaupt nicht zustimmen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Darüber möchte ich lieber nicht sprechen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das lasse ich nur teilweise gelten, denn …",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Was bedeuten die Wörter? Ordnen Sie zu. [fr?] Que signifient ces mots ? Associez.",
+          "explanation": "Alle vier Wörter kommen im Informationsabend vor: Herr Rieger möchte berufsbegleitend studieren, bekommt die Zulassung ohne Abitur, und die Hochschule rechnet Module aus seiner Ausbildung an. Als Industriemechaniker im Maschinenbau ist er aber kein Quereinsteiger. [fr?] Ces mots apparaissent dans la réunion d’information : études en parallèle d’un emploi, reconversion, admission, validation des acquis.",
+          "pairs": [
+            {
+              "left": "berufsbegleitend",
+              "right": "neben der Arbeit"
+            },
+            {
+              "left": "der Quereinsteiger",
+              "right": "jemand, der aus einem anderen Beruf kommt"
+            },
+            {
+              "left": "die Zulassung",
+              "right": "die Erlaubnis, ein Studium zu beginnen"
+            },
+            {
+              "left": "anrechnen",
+              "right": "schon Gelerntes offiziell berücksichtigen"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr?] Complétez avec les prépositions.",
+          "text": "Sie bewirbt sich [[1]] einen Studienplatz. · Er hat sich [[2]] ein duales Studium entschieden. · Viele Eltern halten eine Ausbildung [[3]] die zweite Wahl.",
+          "explanation": "Sich bewerben um + Akkusativ, sich entscheiden für + Akkusativ, etwas halten für + Akkusativ (eine Meinung über etwas haben). Lernen Sie diese Verben immer mit ihrer Präposition. [fr?] Postuler à (sich bewerben um), choisir (sich entscheiden für), considérer comme (halten für), tous suivis de l’accusatif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "um"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Was meint die Autorin mit „weniger Prestigedenken“ (Absatz E)? [fr?] Que veut dire l’autrice par « weniger Prestigedenken » ?",
+          "explanation": "„Das Prestige“ ist das Ansehen in der Gesellschaft. Die Autorin kritisiert die Haltung, eine Ausbildung sei „die zweite Wahl“ (Absatz B). Weniger Prestigedenken heißt: Wege nach ihrem Nutzen bewerten, nicht nach ihrem Ruf. [fr?] Le prestige, c’est la considération sociale. L’autrice critique l’idée que l’apprentissage serait un second choix : il faut juger les voies sur leur utilité, pas sur leur réputation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte weniger Geld für teure Hochschulen ausgeben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Schulen sollten weniger über das Abitur informieren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bildungswege sollte man nicht nach ihrem Ansehen bewerten.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Jugendliche sollten weniger über ihre Zukunft nachdenken.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-bildung-hoeren2",
+      "kind": "exercise",
+      "title": "Verstehen: Kindheit und Schule im Mittelalter (Originaltext)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: Kindheit und Schule im Mittelalter (Originaltext)",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nORIGINALTEXT\n[fr?] Document authentique\nSie hören einen Ausschnitt aus dem Wikipedia-Artikel „Kindheit“ (Fassung von 2013), vorgelesen von einer synthetischen Stimme. [fr?] Vous entendez un extrait de l’article Wikipédia « Kindheit » (version de 2013), lu par une voix de synthèse.\nSie hören zwei Ausschnitte: Teil 1 über die Phasen der Kindheit, Teil 2 über Schulen und Klöster im Mittelalter. [fr?] Vous entendez deux extraits : la partie 1 sur les étapes de l’enfance, la partie 2 sur les écoles et les couvents au Moyen Âge.\n\nWICHTIGE WÖRTER\n[fr?] Mots utiles\n• der weltliche Weg [fr?] la voie laïque (hors de l’Église)\n• das Schulgeld [fr?] les frais de scolarité\n• der Ministrant [fr?] l’enfant de chœur\n• die Mitgift [fr?] la dot\n• die Novizin [fr?] la novice (jeune religieuse)\n• das Erbe [fr?] l’héritage\n\nSTRATEGIE\n[fr?] Stratégie\nTeil 1: Achten Sie auf das Alter der Kinder. [fr?] Partie 1 : soyez attentif à l’âge des enfants.\nTeil 2: Wer durfte welche Schule besuchen, und wer kam ins Kloster? [fr?] Partie 2 : qui pouvait fréquenter quelle école, et qui entrait au couvent ?\nDie Transkription sehen Sie nach Ihren Antworten. [fr?] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-hoeren2-teil1",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "caption": "Teil 1: Kindheit in drei Phasen",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-hoeren2-teil2",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "caption": "Teil 2: Schule und Kloster",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-hoeren2-foto",
+          "usage": "illustration",
+          "caption": "Unterricht im Spätmittelalter (Wandteppich)",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Drei Phasen von je etwa [[1]] Jahren · mit sieben: kirchlicher oder [[2]] Weg · Beginn der Schulzeit oder [[3]] · Töchter: Ausbildung für das Führen des [[4]] · frühe Schulen: privat, mit [[5]] · Unterrichtssprache zuerst [[6]]",
+          "explanation": "Teil 1: „Jede dauerte ungefähr sieben Jahre“, „einen kirchlichen oder weltlichen Weg“, „der Beginn der Schulzeit oder Ausbildung“, „auf das Führen des Haushalts hin ausgebildet“. Teil 2: „private Einrichtungen, für die Schulgeld bezahlt werden musste“, „Unterrichtssprache war zunächst Latein“. [fr?] Toutes les réponses sont des mots du texte ; « weltlich » s’oppose à « kirchlich » (religieux).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sieben",
+                "7"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "weltlicher",
+                "weltlichen"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Ausbildung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Haushalts",
+                "Haushaltes"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Schulgeld"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Latein"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Teil 1: Was war in Bauern- und Handwerkerfamilien oft schon mit vier bis fünf Jahren normal? [fr?] Partie 1 : qu’est-ce qui était souvent normal dès quatre ou cinq ans chez les paysans et les artisans ?",
+          "explanation": "Mit vier bis fünf Jahren mussten Kinder „ihre Mutter bei den täglichen Pflichten entlasten“. Die Ausbildung beim Vater begann erst „ab dem siebten Lebensjahr“. [fr?] Dès 4 ou 5 ans, les enfants aidaient leur mère ; la formation par le père ne commençait qu’à 7 ans.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Kinder begannen schon eine Ausbildung beim Vater.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Kinder halfen der Mutter bei der Arbeit.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Kinder kamen in ein Waisenhaus.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Kinder gingen zum ersten Mal zur Schule.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Teil 2: Wie bekamen einige begabte Kinder Unterricht, ohne zu bezahlen? [fr?] Partie 2 : comment certains enfants doués recevaient-ils un enseignement sans payer ?",
+          "explanation": "„Dorfpfarrer gaben gewöhnlich aber ein bis zwei begabten Kindern kostenlosen Unterricht. Zum Ausgleich waren die Kinder zu Ministrantendiensten … oder zur Haushaltshilfe bei ihrem Lehrer verpflichtet.“ Die Hochschule kam erst ab sechzehn, und nur für sehr wenige. [fr?] Le curé du village enseignait gratuitement à un ou deux enfants doués, qui en échange servaient la messe ou l’aidaient dans sa maison.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein reicher Nachbar bezahlte ihr Schulgeld.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie lernten zu Hause bei ihren Eltern Lesen und Latein.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie besuchten sofort eine Hochschule.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Pfarrer unterrichtete sie, sie halfen ihm dafür.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Teil 2: Welche Söhne kamen in reichen und adligen Familien oft ins Kloster? [fr?] Partie 2 : quels fils entraient souvent au couvent dans les familles riches et nobles ?",
+          "explanation": "Ins Kloster kamen „vor allem Jungen …, die zu schwach für eine Ritterausbildung erschienen“, und jüngere Geschwister ohne Aussicht auf das Erbe; die Erben blieben also gerade nicht im Kloster. [fr?] Au couvent entraient surtout les garçons jugés trop faibles pour devenir chevaliers, et les cadets sans part d’héritage.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die zu schwach für eine Ritterausbildung schienen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die ältesten Söhne, die später das Erbe bekommen sollten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die in der Lateinschule die Besten waren",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die sich schon früh verlobt hatten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Teil 2: Was sagt der Text über die Mitgift einer Novizin? [fr?] Partie 2 : que dit le texte de la dot d’une novice ?",
+          "explanation": "„Für solche Novizinnen mussten die Eltern eine Mitgift zahlen. Sie fiel aber kleiner aus als bei einer Eheschließung.“ [fr?] Les parents payaient une dot pour la novice, mais plus petite que pour un mariage.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie war höher als bei einer Hochzeit.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie war niedriger als bei einer Hochzeit.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das Kloster bezahlte sie den Eltern.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Für Novizinnen gab es keine Mitgift.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Mädchen durften im Mittelalter keine Schule besuchen.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Nicht gesagt: Der Text spricht über die Ausbildung der Töchter im Haushalt und über Mädchen im Kloster, aber er sagt nicht, dass Mädchen keine Schule besuchen durften. [fr?] Non dit : le texte parle de la formation des filles au foyer et au couvent, sans dire qu’elles n’avaient pas le droit d’aller à l’école.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-bildung-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: eine Nachricht von der Weiterbildungsberatung",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: eine Nachricht von der Weiterbildungsberatung",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nSie haben sich bei der Weiterbildungsberatung Ihrer Stadt nach einem Studium erkundigt. Frau Lamm hat Ihnen eine Sprachnachricht hinterlassen. Hören Sie sie für die Fragen 1 bis 3. [fr?] Vous vous êtes renseigné auprès du service de conseil en formation de votre ville. Mme Lamm vous a laissé un message vocal. Écoutez-le pour les questions 1 à 3.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-kontrolle-audio",
+          "caption": "Nachricht von Frederike Lamm",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Warum ruft Frau Lamm an? [fr?] Pourquoi Mme Lamm appelle-t-elle ?",
+          "explanation": "„Für das von Ihnen gewünschte Beratungsgespräch hätte ich am Donnerstag um sechzehn Uhr einen Termin frei.“ Der Termin wird angeboten und soll bestätigt werden; die Unterlagen bringt man zum Gespräch mit. [fr?] Elle propose un rendez-vous jeudi à 16 h, à confirmer ; les documents sont à apporter à l’entretien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sagt einen bereits vereinbarten Termin ab.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie bietet einen Termin für ein Beratungsgespräch an.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie bittet darum, die Unterlagen per Post zu schicken.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie teilt mit, dass die Bewerbung angenommen wurde.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum soll man Zeugnisse und einen Lebenslauf mitbringen? [fr?] Pourquoi faut-il apporter ses certificats et un CV ?",
+          "explanation": "„… damit wir prüfen können, welche Leistungen angerechnet werden können.“ Über die Förderprogramme will Frau Lamm erst im Gespräch sprechen; von einer Einschreibung sagt sie nichts. [fr?] Pour vérifier quels acquis peuvent être validés. Les aides financières seront seulement abordées pendant l’entretien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "damit man sich gleich für das Studium einschreiben kann",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "damit die Förderung schon beantragt werden kann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "damit Frau Lamm einen neuen Lebenslauf schreiben kann",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "damit geprüft werden kann, was angerechnet werden kann",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Machen Sie aus dem Relativsatz ein Partizipialattribut. [fr?] Transformez la relative en participe épithète.",
+          "text": "der Termin, der am Donnerstag stattfindet → der am Donnerstag [[1]] Termin · die Unterlagen, die mitgebracht werden müssen → die [[2]] Unterlagen · die Leistungen, die bereits erbracht wurden → die bereits [[3]] Leistungen",
+          "explanation": "Aktiv und gleichzeitig → Partizip I: „stattfindend“, nach „der“ im Nominativ → „-e“. Notwendigkeit im Passiv → „zu“ + Partizip I; bei trennbaren Verben steht „zu“ zwischen Präfix und Stamm: „mitzubringend“. Passiv → Partizip II „erbracht“. Im Plural nach „die“ → „-en“. [fr?] Participe présent pour l’actif ; zu + participe présent pour la nécessité, avec zu inséré dans les verbes séparables (mitzubringend) ; participe passé pour le passif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "stattfindende"
+              ],
+              "hint": "stattfinden",
+              "size": 14
+            },
+            {
+              "id": "2",
+              "accept": [
+                "mitzubringenden"
+              ],
+              "hint": "mitbringen",
+              "size": 16
+            },
+            {
+              "id": "3",
+              "accept": [
+                "erbrachten"
+              ],
+              "hint": "erbringen",
+              "size": 11
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Formulieren Sie mit „weil“: „Wegen der Erhöhung der Gebühren haben sich weniger Studierende angemeldet.“ [fr?] Reformulez avec « weil ».",
+          "answers": [
+            [
+              "Weil",
+              "die Gebühren",
+              "erhöht",
+              "wurden,",
+              "haben",
+              "sich",
+              "weniger",
+              "Studierende",
+              "angemeldet."
+            ]
+          ],
+          "explanation": "„Wegen der Erhöhung der Gebühren“ wird zu einem Nebensatz im Passiv: „Weil die Gebühren erhöht wurden“. Das Verb steht am Ende des Nebensatzes. Danach beginnt der Hauptsatz direkt mit dem Verb „haben“; das Reflexivpronomen „sich“ folgt gleich danach. [fr?] Le groupe nominal devient une subordonnée au passif, verbe en fin de proposition. La principale commence ensuite par le verbe conjugué, suivi du pronom réfléchi."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was bedeutet „die neu gegründete Fachhochschule“? [fr?] Que signifie « die neu gegründete Fachhochschule » ?",
+          "explanation": "„Gegründet“ ist ein Partizip II von „gründen“ (Verb mit Akkusativobjekt): Es hat passive Bedeutung. Die Fachhochschule wurde gegründet. Eine Notwendigkeit („muss“) würde man mit „zu“ + Partizip I ausdrücken: die neu zu gründende Fachhochschule. [fr?] Participe passé d’un verbe transitif : sens passif, l’école a été fondée. La nécessité s’exprimerait avec zu + participe présent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Fachhochschule, die neu gegründet wurde",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Fachhochschule, die gerade etwas gründet",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Fachhochschule, die man neu gründen muss",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die Fachhochschule, die selbst Firmen gründet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Wörter aus dem Modul. [fr?] Complétez avec des mots du module.",
+          "text": "Wer neben dem Beruf studiert, studiert [[1]]. · Wer ein Studium vorzeitig beendet, [[2]] es ab. · Wer aus einem ganz anderen Beruf kommt, ist ein [[3]].",
+          "explanation": "„berufsbegleitend“ studieren; ein Studium „abbrechen“ (er bricht ab, Vokalwechsel e → i); „der Quereinsteiger“ kommt aus einem anderen Beruf. [fr?] Étudier en parallèle d’un emploi ; abandonner ses études (er bricht ab) ; la personne en reconversion.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "berufsbegleitend"
+              ],
+              "size": 17,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bricht"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Quereinsteiger"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welcher Satz sagt dasselbe im Nominalstil? „Wenn Sie sich anmelden, brauchen Sie Ihr Zeugnis.“ [fr?] Quelle phrase dit la même chose en style nominal ?",
+          "explanation": "„Wenn“ (gleichzeitig) entspricht „bei“ + Nomen: bei der Anmeldung. „Nach“ verlegt die Handlung auf später, „wegen“ nennt einen Grund und „trotz“ einen Gegengrund: Alle drei verändern den Sinn. [fr?] wenn (simultanéité) ↔ bei + nom. nach, wegen et trotz changent le sens (après, à cause de, malgré).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nach der Anmeldung brauchen Sie Ihr Zeugnis.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wegen der Anmeldung brauchen Sie Ihr Zeugnis.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bei der Anmeldung brauchen Sie Ihr Zeugnis.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Trotz der Anmeldung brauchen Sie Ihr Zeugnis.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-bildung-lesen-artikel",
+      "kind": "image",
+      "title": "Article : études ou formation professionnelle ?",
+      "alt": "Début d’un article de magazine intitulé « Studium oder Ausbildung? » : le nombre d’étudiants augmente depuis des années, tandis que des places d’apprentissage restent vacantes dans l’artisanat.",
+      "image": {
+        "layout": "article",
+        "kicker": "Bildung",
+        "icon": "graduation-cap",
+        "title": "Studium oder Ausbildung?",
+        "byline": "Warum die Frage oft falsch gestellt wird · Von Swantje Eckhard",
+        "lead": "Jedes Jahr stehen Hunderttausende junge Menschen vor derselben Entscheidung: Hochschule oder Betrieb? Doch die scheinbar klare Alternative verliert an Bedeutung.",
+        "paragraphs": [
+          "Lange galt in Deutschland eine einfache Regel: Wer Abitur hat, studiert; wer keines hat, macht eine Ausbildung. Diese Regel stimmt schon lange nicht mehr. Die seit Jahren steigende Zahl der Studienanfänger hat dazu geführt, dass inzwischen etwa ebenso viele junge Menschen ein Studium beginnen wie eine duale Ausbildung. Fachleute sprechen von einer „Akademisierung“ der Gesellschaft. Gleichzeitig bleiben in vielen Handwerksbetrieben die für den Herbst ausgeschriebenen Ausbildungsplätze unbesetzt."
+        ]
+      }
+    },
+    {
+      "key": "b2-bildung-hoeren-audio",
+      "kind": "audio",
+      "title": "Réunion d’information : étudier en parallèle d’un emploi",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Guten Abend und herzlich willkommen an der Hochschule Nordhafen. Mein Name ist Merle Fröhlich, ich leite die Studienberatung. Schön, dass so viele von Ihnen nach der Arbeit gekommen sind. Heute geht es um unsere berufsbegleitenden Studiengänge, also um ein Studium, das man neben dem Beruf absolviert."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Wir bieten zurzeit drei solche Studiengänge an: Maschinenbau, Betriebswirtschaft und Soziale Arbeit. Alle drei schließen mit einem Bachelor ab und dauern in der Regel acht Semester, also vier Jahre. Das ist etwas länger als ein Vollzeitstudium, dafür verdienen Sie weiter Ihr Gehalt."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Wie läuft das konkret ab? Der größte Teil des Studiums findet online statt: Sie arbeiten mit Lernmaterialien und Videos, wann es Ihnen passt. Dazu kommen Präsenzphasen an der Hochschule, und zwar ein Samstag pro Monat und einmal im Jahr eine Blockwoche im Sommer."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Zu den Kosten: Das berufsbegleitende Studium ist bei uns gebührenpflichtig. Sie zahlen zweihundertneunzig Euro im Monat. Viele Arbeitgeber beteiligen sich an diesen Kosten, es lohnt sich also, im eigenen Betrieb nachzufragen. Und noch etwas: Der Abschluss ist genau derselbe wie im Vollzeitstudium. Auf Ihrem Zeugnis steht nicht, dass Sie berufsbegleitend studiert haben."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "So, jetzt haben Sie sicher Fragen. Ja, bitte, der Herr in der zweiten Reihe."
+        },
+        {
+          "voice": "mann3",
+          "name": "Valentin Rieger",
+          "text": "Guten Abend, Valentin Rieger. Ich bin Industriemechaniker und arbeite seit zwölf Jahren im Schichtdienst. Ein Abitur habe ich nicht. Kann ich mich trotzdem für Maschinenbau bewerben?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Ja, das können Sie. Mit einer abgeschlossenen Berufsausbildung und mindestens drei Jahren Berufserfahrung in einem passenden Bereich bekommen Sie bei uns die Zulassung auch ohne Abitur. Wir empfehlen Ihnen allerdings dringend unseren Vorkurs in Mathematik. Er beginnt sechs Wochen vor dem Semester und ist kostenlos."
+        },
+        {
+          "voice": "mann3",
+          "name": "Valentin Rieger",
+          "text": "Und wird meine Ausbildung angerechnet? Ich habe ja schon vieles gelernt, was im Studium vorkommt."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Das prüfen wir im Einzelfall. Bei Industriemechanikern rechnen wir häufig bis zu zwei Module an, zum Beispiel Werkstoffkunde und technisches Zeichnen. Dafür reichen Sie Ihr Zeugnis und eine Beschreibung Ihrer Tätigkeiten ein. Ein ganzes Semester sparen Sie dadurch allerdings nicht."
+        },
+        {
+          "voice": "mann3",
+          "name": "Valentin Rieger",
+          "text": "Und wie viel Zeit muss ich pro Woche einplanen?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Rechnen Sie mit fünfzehn bis zwanzig Stunden pro Woche. Das ist neben einer Vollzeitstelle viel, das möchte ich ganz ehrlich sagen. Die meisten Studienabbrüche passieren im ersten Jahr, weil die Leute die Belastung unterschätzt haben. Sprechen Sie vorher mit Ihrer Familie, und klären Sie mit Ihrem Arbeitgeber, ob Sie Ihre Arbeitszeit reduzieren können."
+        },
+        {
+          "voice": "mann3",
+          "name": "Valentin Rieger",
+          "text": "Und wenn ich merke, dass es zu viel wird? Kann ich dann eine Pause machen?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Ja. Sie können sich für ein oder zwei Semester beurlauben lassen, zum Beispiel bei Krankheit oder wenn ein Kind kommt. In dieser Zeit zahlen Sie keine Gebühren."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Ja, bitte, Sie haben auch eine Frage?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Paulina Zielińska",
+          "text": "Ja, Paulina Zielińska. Ich bin Erzieherin und interessiere mich für Soziale Arbeit. Ich habe zwei kleine Kinder. Sind die Samstage Pflicht? Und gibt es an diesen Tagen eine Kinderbetreuung?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Die Präsenztage sind Pflicht, weil dort die Prüfungen und die praktischen Übungen stattfinden. Sie dürfen aber pro Semester einen Termin versäumen. Eine Kinderbetreuung bieten wir samstags leider noch nicht an. Wir arbeiten daran, aber versprechen kann ich Ihnen nichts."
+        },
+        {
+          "voice": "frau3",
+          "name": "Paulina Zielińska",
+          "text": "Hm, das macht es für mich schwierig. Wann ist denn der Bewerbungsschluss?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Für das Wintersemester ist Bewerbungsschluss am fünfzehnten Juli. Mein Tipp: Kommen Sie vorher zu einem persönlichen Beratungsgespräch. Dann schauen wir gemeinsam, ob das Studium zu Ihrer Lebenssituation passt. Termine können Sie auf der Internetseite der Studienberatung buchen."
+        },
+        {
+          "voice": "frau2",
+          "name": "Merle Fröhlich",
+          "text": "Vielen Dank für Ihre Aufmerksamkeit. Im Foyer liegen Broschüren für Sie bereit, und ich bleibe gern noch für weitere Fragen hier."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-kontrolle-audio",
+      "kind": "audio",
+      "title": "Message vocal du service de conseil en formation",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Frederike Lamm",
+          "text": "Guten Tag, hier spricht Frederike Lamm von der Weiterbildungsberatung der Stadt. Sie hatten uns wegen eines berufsbegleitenden Studiums geschrieben. Vielen Dank für Ihre Nachricht."
+        },
+        {
+          "voice": "frau",
+          "name": "Frederike Lamm",
+          "text": "Für das von Ihnen gewünschte Beratungsgespräch hätte ich am Donnerstag um sechzehn Uhr einen Termin frei. Bringen Sie bitte Ihre Zeugnisse und einen kurzen Lebenslauf mit, damit wir prüfen können, welche Leistungen angerechnet werden können."
+        },
+        {
+          "voice": "frau",
+          "name": "Frederike Lamm",
+          "text": "Und noch ein Hinweis: Für Weiterbildungen gibt es verschiedene Förderprogramme. Darüber sprechen wir dann am Donnerstag. Bitte bestätigen Sie den Termin bis morgen Mittag per E-Mail. Vielen Dank und bis bald!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-einstieg-foto",
+      "kind": "image",
+      "title": "Un amphithéâtre vide",
+      "alt": "Un amphithéâtre universitaire vide : des rangées de bancs en bois clair montent vers le fond, un pupitre et une table de démonstration au premier plan.",
+      "photo": {
+        "file": "libre/commons/bildung-hoersaal.jpg"
+      },
+      "credit": "Uni EF, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hörsaal_der_Universität_Erfurt.jpg"
+    },
+    {
+      "key": "b2-bildung-hoeren2-teil1",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Kindheit, partie 1 : les étapes de l’enfance",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Kindheit teilte sich im Mittelalter generell in drei Phasen: infantia, puertia und adolescentia. Jede dauerte ungefähr sieben Jahre. Die ersten sieben Jahre verbrachte der Nachwuchs zuhause. Sie sind am ehesten mit heutigen Vorstellungen von Kindheit zu vergleichen.",
+          "say": "Die Kindheit teilte sich im Mittelalter generell in drei Phasen: infantia, pueritia und adolescentia. Jede dauerte ungefähr sieben Jahre. Die ersten sieben Jahre verbrachte der Nachwuchs zuhause. Sie sind am ehesten mit heutigen Vorstellungen von Kindheit zu vergleichen."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die Kleinen wurden zuhause von ihren Eltern erzogen und noch weitgehend aus den häuslichen Pflichten herausgehalten."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Mit sieben Jahren stand die endgültige Entscheidung an, ob der Sohn einen kirchlichen oder weltlichen Weg einschlagen sollte. In jedem Fall stand mit sieben der Beginn der Schulzeit oder Ausbildung an. Auch in den Waisenhäusern ließ man Kindern bis zum siebten Lebensjahr Fürsorge zuteilwerden."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Mit sieben waren sie dann aber auf sich alleine gestellt. In vielen Bauern- oder Handwerkerfamilien war es allerdings auch schon mit vier bis fünf Jahren für Kinder an der Tagesordnung, ihre Mutter bei den täglichen Pflichten zu entlasten. Ab dem siebten Lebensjahr übernahm dann der Vater die Ausbildung seiner Söhne."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Töchter wurden in der Regel auf das Führen des Haushalts hin ausgebildet. Allerdings gab es gerade in jungen Jahren sehr viele Tätigkeiten, die Jungen wie Mädchen gleichermaßen zu verrichten hatten. Später mussten schließlich auch die Frauen auf dem Feld mitarbeiten."
+        }
+      ],
+      "credit": "Texte : article « Kindheit » de la Wikipédia en allemand (révision 114757883), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=114757883"
+    },
+    {
+      "key": "b2-bildung-hoeren2-teil2",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Kindheit, partie 2 : écoles et couvents",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Schulen waren im frühen Mittelalter private Einrichtungen, für die Schulgeld bezahlt werden musste. Dorfpfarrer gaben gewöhnlich aber ein bis zwei begabten Kindern kostenlosen Unterricht. Zum Ausgleich waren die Kinder zu Ministrantendiensten in der Kirche oder zur Haushaltshilfe bei ihrem Lehrer verpflichtet."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Unterrichtssprache war zunächst Latein. Erst ab dem 13. Jahrhundert kam Unterricht in Volkssprache auf. Mit dem dritten und vierten Laterankonzil erleichterte sich zudem der Zugang zu kirchlichen Schulen. Kindern ärmerer Familien wurde das Schulgeld erlassen.",
+          "say": "Unterrichtssprache war zunächst Latein. Erst ab dem dreizehnten Jahrhundert kam Unterricht in Volkssprache auf. Mit dem dritten und vierten Laterankonzil erleichterte sich zudem der Zugang zu kirchlichen Schulen. Kindern ärmerer Familien wurde das Schulgeld erlassen."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Unterrichtsinhalt war Lesen, Schreiben und ein wenig Mathematik. Begabte Schüler oder solche von reichen Familien konnten nach der Elementarschule höhere Lateinschulen besuchen. Ziel war hier vor allem das flüssige Erlernen der Gelehrtensprache Latein. Erst ab dem 16. Lebensjahr war der Besuch einer Hochschule üblich.",
+          "say": "Unterrichtsinhalt war Lesen, Schreiben und ein wenig Mathematik. Begabte Schüler oder solche von reichen Familien konnten nach der Elementarschule höhere Lateinschulen besuchen. Ziel war hier vor allem das flüssige Erlernen der Gelehrtensprache Latein. Erst ab dem sechzehnten Lebensjahr war der Besuch einer Hochschule üblich."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Dies war aber nur sehr wenigen vorbehalten."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Neben der weltlichen war auch eine kirchliche Laufbahn für Kinder möglich. Vor allem reiche und adlige Familien gaben häufig eines oder mehrere ihrer Kinder in ein Kloster. Dafür wurden vor allem Jungen ausgewählt, die zu schwach für eine Ritterausbildung erschienen."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Oft waren es auch jüngere Geschwister, die keine Aussicht mehr auf einen Teil des Erbes hatten. Auch Mädchen wurden ins Kloster gegeben, wenn sie nicht für eine Heirat vorgesehen waren. Für solche Novizinnen mussten die Eltern eine Mitgift zahlen. Sie fiel aber kleiner aus als bei einer Eheschließung."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Auch die Ausbildung zum Priester blieb meist den Sprösslingen des Adels oder der städtischen Bevölkerung vorbehalten. Schon mit sieben Jahren konnten Kinder die ersten, niederen Weihen empfangen."
+        }
+      ],
+      "credit": "Texte : article « Kindheit » de la Wikipédia en allemand (révision 114757883), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=114757883"
+    },
+    {
+      "key": "b2-bildung-hoeren2-foto",
+      "kind": "image",
+      "title": "Une scène d’école sur une tapisserie médiévale",
+      "alt": "Tapisserie de la fin du Moyen Âge : un maître assis sur une chaire tient une verge et un livre ; devant lui, des enfants agenouillés lisent dans leurs livres.",
+      "photo": {
+        "file": "libre/commons/bildung-schulszene.jpg"
+      },
+      "credit": "Reinhard Dietrich, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Adelphus-Teppiche_1-3_Schulszene.jpg"
+    },
+    {
+      "key": "b2-bildung-lexique",
+      "kind": "audio",
+      "title": "Lexique · Bildung: Studium, Ausbildung und lebenslanges Lernen",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "das Studium, die Studien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ausbildung, die Ausbildungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "duale Ausbildung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausbildungsbetrieb, die Ausbildungsbetriebe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Berufsschule, die Berufsschulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Abschluss, die Abschlüsse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hochschule, die Hochschulen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Studiengang, die Studiengänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "berufsbegleitend"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Weiterbildung, die Weiterbildungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich weiterbilden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fachkraft, die Fachkräfte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Durchlässigkeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Zulassung, die Zulassungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Voraussetzung, die Voraussetzungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "anrechnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Studiengebühr, die Studiengebühren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Studienabbruch, die Studienabbrüche"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Quereinsteiger, die Quereinsteiger"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "lebenslanges Lernen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wissen vermitteln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Prüfung ablegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Akademisierung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Chancengleichheit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Entscheidungsdruck"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

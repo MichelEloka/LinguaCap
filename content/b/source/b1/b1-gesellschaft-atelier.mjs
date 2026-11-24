@@ -15,7 +15,7 @@ const who = (id, statement, speaker, explanation) => choice(id, bi(`Wer sagt das
 
 export default {
   id: 'b1-gesellschaft-atelier',
-  title: 'Gesellschaft (atelier) : transmettre une information, réagir à un exposé',
+  title: 'Gesellschaft, atelier : transmettre une information, réagir à un exposé',
   objective: 'Postuler par écrit pour une activité bénévole, reformuler une information compliquée pour un nouveau venu, suivre une discussion à la radio et réagir à un exposé par un retour et une question.',
   sources: [
     'Textes, dialogues et exercices originaux LinguaCap.',

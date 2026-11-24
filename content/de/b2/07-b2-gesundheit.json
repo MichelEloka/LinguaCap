@@ -1,0 +1,2317 @@
+{
+  "id": "b2-gesundheit",
+  "title": "Gesundheit: Stress, Schlaf und Erholung",
+  "objective": "Comprendre un article argumentatif sur le manque de sommeil et une émission sur le stress au travail, s’orienter dans le système de santé, dire comment on atteint un but (indem) et quelle en est la conséquence (sodass, so … dass), exprimer une supposition avec les verbes de modalité au sens subjectif (muss, dürfte, kann, soll).",
+  "prerequisites": [
+    "b2-bildung-atelier"
+  ],
+  "audioProfile": "b2-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, émission et enquête sont fictives ; les chiffres sont arrondis. Les conseils de santé restent généraux et ne remplacent pas un avis médical."
+  ],
+  "grammarFocus": [
+    "indem-sodass",
+    "modalverben-subjektiv"
+  ],
+  "layer": "content/b/source/b2/b2-gesundheit.mjs",
+  "vocabulary": [
+    {
+      "id": "schlafmangel",
+      "word": "Schlafmangel",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le manque de sommeil",
+      "example": "Schlafmangel kann auf Dauer krank machen.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "erschoepfung",
+      "word": "Erschöpfung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’épuisement",
+      "example": "Nach der Nachtschicht spürte sie eine tiefe Erschöpfung.",
+      "note": "erschöpft sein : être épuisé",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "belastung",
+      "word": "Belastung",
+      "article": "die",
+      "plural": "Belastungen",
+      "partOfSpeech": "noun",
+      "translation": "la charge, la pression (psychique ou physique)",
+      "example": "Die Belastung in der Pflege ist seit Jahren hoch.",
+      "note": "belasten : peser sur, accabler",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "erholung",
+      "word": "Erholung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le repos, la récupération",
+      "example": "Ohne Erholungsphasen wird Stress gefährlich.",
+      "note": "sich erholen : se reposer, récupérer",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "warnsignal",
+      "word": "Warnsignal",
+      "article": "das",
+      "plural": "Warnsignale",
+      "partOfSpeech": "noun",
+      "translation": "le signal d’alarme",
+      "example": "Schlechter Schlaf ist oft das erste Warnsignal.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ursache",
+      "word": "Ursache",
+      "article": "die",
+      "plural": "Ursachen",
+      "partOfSpeech": "noun",
+      "translation": "la cause",
+      "example": "Die Ursachen liegen oft nicht im Schlafzimmer.",
+      "note": "die Folge : la conséquence",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "folge",
+      "word": "Folge",
+      "article": "die",
+      "plural": "Folgen",
+      "partOfSpeech": "noun",
+      "translation": "la conséquence",
+      "example": "Die Folgen von Schlafmangel sind gut erforscht.",
+      "note": "zur Folge haben : avoir pour conséquence",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "schichtdienst",
+      "word": "Schichtdienst",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le travail posté, les horaires en équipes",
+      "example": "Im Schichtdienst ist ein fester Schlafrhythmus schwierig.",
+      "note": "die Nachtschicht : l’équipe de nuit",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "rhythmus",
+      "word": "Rhythmus",
+      "article": "der",
+      "plural": "Rhythmen",
+      "partOfSpeech": "noun",
+      "translation": "le rythme",
+      "example": "Der Körper braucht einen festen Rhythmus.",
+      "note": "der Schlafrhythmus",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "abschalten",
+      "word": "abschalten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "décrocher, se déconnecter (mentalement) ; éteindre",
+      "example": "Am Wochenende kann ich einfach nicht mehr abschalten.",
+      "note": "séparable : ab|schalten",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "stress-abbauen",
+      "word": "Stress abbauen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "réduire le stress, évacuer le stress",
+      "example": "Viele bauen Stress ab, indem sie Sport treiben.",
+      "note": "séparable : ab|bauen",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "unter-druck-stehen",
+      "word": "unter Druck stehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être sous pression",
+      "example": "Im Kundenservice stehen viele ständig unter Druck.",
+      "note": "stand, hat gestanden",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "erreichbar-sein",
+      "word": "erreichbar sein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être joignable",
+      "example": "Nach Feierabend muss niemand erreichbar sein.",
+      "note": "die Erreichbarkeit : le fait d’être joignable",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "nachlassen",
+      "word": "nachlassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "diminuer, baisser (force, attention)",
+      "example": "Nach einer kurzen Nacht lässt die Konzentration schnell nach.",
+      "note": "séparable : nach|lassen",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sich-auswirken-auf",
+      "word": "sich auswirken auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir des effets sur",
+      "example": "Stress wirkt sich auch auf den Schlaf aus.",
+      "note": "+ accusatif ; séparable : aus|wirken",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "leiden-unter",
+      "word": "leiden unter",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "souffrir de (une situation)",
+      "example": "Viele Beschäftigte leiden unter Zeitdruck.",
+      "note": "+ datif ; litt, hat gelitten ; leiden an : souffrir d’une maladie",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "vorbeugen",
+      "word": "vorbeugen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prévenir (une maladie, un risque)",
+      "example": "Bewegung beugt Rückenschmerzen vor.",
+      "note": "+ datif ; séparable : vor|beugen",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "gereizt",
+      "word": "gereizt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "irritable, à cran",
+      "example": "Wer zu wenig schläft, ist oft gereizt.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "ausgeschlafen",
+      "word": "ausgeschlafen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "reposé (après avoir assez dormi)",
+      "example": "Heute bin ich endlich einmal ausgeschlafen.",
+      "note": "ausschlafen : faire la grasse matinée, dormir assez",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "umstritten",
+      "word": "umstritten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "controversé",
+      "example": "Ob ein Mittagsschlaf die Leistung steigert, ist umstritten.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "bereitschaftsdienst",
+      "word": "Bereitschaftsdienst",
+      "article": "der",
+      "plural": "Bereitschaftsdienste",
+      "partOfSpeech": "noun",
+      "translation": "le service médical de garde",
+      "example": "Am Wochenende hilft der ärztliche Bereitschaftsdienst.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "notaufnahme",
+      "word": "Notaufnahme",
+      "article": "die",
+      "plural": "Notaufnahmen",
+      "partOfSpeech": "noun",
+      "translation": "les urgences (service de l’hôpital)",
+      "example": "Die Notaufnahme ist für echte Notfälle da.",
+      "note": "der Notfall : l’urgence",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "indem",
+      "word": "indem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "en (+ participe présent), par le fait de",
+      "example": "Man baut Stress ab, indem man regelmäßig Pausen macht.",
+      "note": "le moyen ; verbe à la fin",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "sodass",
+      "word": "sodass",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "si bien que, de sorte que",
+      "example": "Er arbeitet nachts, sodass er tagsüber schlafen muss.",
+      "note": "aussi : so dass ; la conséquence ; verbe à la fin",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "vermutlich",
+      "word": "vermutlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "probablement",
+      "example": "Vermutlich hat sie den Termin vergessen.",
+      "note": "même sens : wahrscheinlich ; sie dürfte … vergessen haben",
+      "audio": {
+        "media": "b2-gesundheit-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-gesundheit-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Gesundheit zwischen Stress und Erholung",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Gesundheit zwischen Stress und Erholung",
+        "description": "GESUND BLEIBEN IN EINER GESTRESSTEN WELT\n[fr?] Rester en bonne santé dans un monde stressé\nTermine, Mails, Verpflichtungen: Viele Menschen fühlen sich dauerhaft unter Druck und schlafen zu wenig. In diesem Modul geht es um Stress, Schlaf und die Frage, wo man in Deutschland die richtige Hilfe findet. [fr?] Rendez-vous, courriels, obligations : beaucoup se sentent sous pression en permanence et dorment trop peu. Ce module traite du stress, du sommeil et de la question : où trouver la bonne aide en Allemagne ?\n\nFRAGEN ZUM EINSTIEG\n[fr?] Questions pour commencer\n• Wie viele Stunden schlafen Sie in einer normalen Woche? Reicht Ihnen das? [fr?] Combien d’heures dormez-vous dans une semaine normale ? Est-ce suffisant pour vous ?\n• Was stresst Sie im Alltag am meisten, und was tun Sie dagegen? [fr?] Qu’est-ce qui vous stresse le plus au quotidien, et que faites-vous contre ?\n• Ist Stress Privatsache, oder tragen auch Arbeitgeber Verantwortung? [fr?] Le stress est-il une affaire privée, ou les employeurs en sont-ils aussi responsables ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Sätze auf Deutsch und begründen Sie Ihre Meinung. [fr?] Préparez mentalement deux ou trois phrases en allemand par question et justifiez votre avis.\n\nZIELE\n[fr?] Objectifs\n• Ich kann einen argumentierenden Artikel verstehen und die Position des Textes erkennen. [fr?] Je peux comprendre un article argumentatif et reconnaître la position qu’il défend.\n• Ich kann einem Radiogespräch über Stress die wichtigsten Informationen entnehmen und dabei Notizen machen. [fr?] Je peux tirer d’une émission de radio sur le stress les informations essentielles, en prenant des notes.\n• Ich kann sagen, wie man ein Ziel erreicht („indem“) und welche Folge etwas hat („sodass“, „so … dass“). [fr?] Je peux dire comment on atteint un but (« indem ») et quelle conséquence a une chose (« sodass », « so … dass »).\n• Ich kann Vermutungen abstufen: „Das muss …“, „Das dürfte …“, „Das kann …“, „Er soll …“. [fr?] Je peux nuancer une supposition : certitude, probabilité, possibilité, ouï-dire.\n• Ich kann entscheiden, an welche Stelle im Gesundheitssystem ich mich wenden sollte. [fr?] Je peux choisir à quel service de santé m’adresser.\n\nWICHTIGE WÖRTER\n[fr?] Mots-clés\n• der Schlafmangel — le manque de sommeil\n• die Erschöpfung — l’épuisement\n• abschalten — décrocher, se déconnecter\n• Stress abbauen — réduire le stress\n• unter Druck stehen — être sous pression\n• erreichbar sein — être joignable\n• der Bereitschaftsdienst — le service médical de garde\n• die Notaufnahme — les urgences (à l’hôpital)",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Abschalten und erholen",
+          "media": "b2-gesundheit-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-gesundheit-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Artikel über Schlafmangel",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Artikel über Schlafmangel",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Lesen Sie Überschrift, Unterzeile und den letzten Absatz: Welche Position vertritt der Text? [fr?] Lisez le titre, le sous-titre et le dernier paragraphe : quelle position le texte défend-il ?\n2. Achten Sie auf Signalwörter wie „allerdings“, „doch“, „zwar … aber“: Dort widerspricht der Text oft einer verbreiteten Meinung. [fr?] Repérez les mots signaux (« allerdings », « doch », « zwar … aber ») : c’est souvent là que le texte contredit une idée reçue.\n3. Unterscheiden Sie Fakten (Zahlen, Studien) von Meinungen und Bewertungen. [fr?] Distinguez les faits (chiffres, études) des opinions et des jugements.\n\nSCHLAF IST KEIN LUXUS\nWarum so viele Menschen zu wenig schlafen – und weshalb das nicht nur ein privates Problem ist\n\n(A) Wer morgens in der U-Bahn in die Gesichter der Mitreisenden schaut, sieht selten ausgeschlafene Menschen. Das ist kein Zufall. Nach einer Umfrage einer großen Krankenkasse schläft rund ein Drittel der Erwachsenen regelmäßig schlecht; jeder Zehnte fühlt sich sogar fast jeden Tag erschöpft. Lange galt Schlafmangel als Privatsache: Wer zu wenig schläft, so die verbreitete Meinung, ist selbst schuld und sollte eben früher ins Bett gehen. Diese Sicht dürfte allerdings zu einfach sein.\n\n(B) Denn die Ursachen liegen oft nicht im Schlafzimmer. Viele Beschäftigte sind auch nach Feierabend erreichbar und lesen abends noch dienstliche E-Mails. Andere arbeiten im Schichtdienst, sodass ihr Körper nie einen festen Rhythmus findet. Hinzu kommen lange Pendelwege, Sorgen um die Miete und Bildschirme, die bis kurz vor dem Einschlafen leuchten. Auch Eltern kleiner Kinder kennen das Problem: Wer nachts mehrmals aufsteht, kommt selten auf sieben Stunden Schlaf. Manche sind abends so erschöpft, dass sie schon vor dem Fernseher einschlafen – und liegen dann um drei Uhr nachts hellwach im Bett. „Der Körper lässt sich nicht auf Knopfdruck abschalten“, erklärt die Schlafforscherin Regine Lohmann. „Wer bis 23 Uhr Mails beantwortet, darf sich nicht wundern, wenn er um Mitternacht noch grübelt.“\n\n(C) Die Folgen sind besser erforscht, als viele denken. Schon nach wenigen Nächten mit fünf statt sieben Stunden Schlaf lassen Konzentration und Reaktionsfähigkeit deutlich nach. Wer übermüdet Auto fährt, reagiert ähnlich langsam wie jemand, der Alkohol getrunken hat. Auf Dauer steigt außerdem das Risiko für Bluthochdruck, Übergewicht und Depressionen. Besonders tückisch ist, dass viele Betroffene ihre Müdigkeit irgendwann gar nicht mehr bemerken: Sie halten den Zustand für normal. Schlafmangel ist also nicht nur unangenehm, er kann krank machen. Und er kostet die Wirtschaft jedes Jahr Milliarden, weil übermüdete Menschen mehr Fehler machen und häufiger ausfallen.\n\n(D) Was hilft? Die üblichen Ratschläge kennt fast jeder: regelmäßige Schlafenszeiten, kein schweres Essen am Abend, das Handy aus dem Schlafzimmer verbannen. Solche Tipps sind sinnvoll, greifen aber zu kurz, solange die Arbeitsbedingungen gleich bleiben. Einige Unternehmen gehen deshalb neue Wege. Sie schützen den Feierabend ihrer Belegschaft, indem sie E-Mails nach 19 Uhr erst am nächsten Morgen zustellen. Andere bieten flexible Arbeitszeiten an oder richten Ruheräume ein, in denen man sich mittags zwanzig Minuten hinlegen kann. In manchen Ländern sollen solche Räume schon lange üblich sein. Ob ein kurzer Mittagsschlaf tatsächlich die Leistung steigert, ist unter Fachleuten zwar umstritten. Klar ist aber: Wer seine Leute nachts in Ruhe lässt, hat tagsüber wachere Kolleginnen und Kollegen.\n\n(E) Natürlich kann kein Arbeitgeber und kein Staat einem Menschen das Schlafen abnehmen. Jeder trägt auch selbst Verantwortung für seine Abende. Doch es wäre ein Fehler, Schlaf weiterhin als Luxus zu betrachten, den man sich erst gönnt, wenn alle Aufgaben erledigt sind. Eine Gesellschaft, die stolz darauf ist, mit wenig Schlaf auszukommen, sollte sich fragen, welchen Preis sie dafür bezahlt. Vielleicht beginnt gesunder Schlaf nicht mit einem teuren Kissen, sondern mit einer einfachen Frage im Büro: Muss das wirklich heute Abend noch sein?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesundheit-lesen-artikel",
+          "caption": "Schlaf ist kein Luxus",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche Position vertritt der Text insgesamt? [fr?] Quelle position le texte défend-il dans l’ensemble ?",
+          "explanation": "Der Text widerspricht der Meinung, Schlafmangel sei Privatsache (A), nennt Ursachen in der Arbeitswelt (B) und Kosten für die Wirtschaft (C). Absatz E betont zwar die Eigenverantwortung, fordert aber ein Umdenken der Gesellschaft. Ein Mittagsschlaf wird nirgends gefordert, und das „teure Kissen“ ist gerade nicht die Lösung. [fr?] Le texte rejette l’idée d’une affaire purement privée et appelle la société à changer de regard. La sieste n’est jamais imposée, et l’« oreiller coûteux » n’est justement pas la solution.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Schlafmangel ist vor allem eine Frage der persönlichen Disziplin.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Schlafmangel hat auch gesellschaftliche Ursachen und geht alle an.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Firmen sollten ihren Leuten einen Mittagsschlaf vorschreiben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Gegen Schlafmangel hilft vor allem ein besseres Bett zu Hause.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie ist der Satz „Diese Sicht dürfte allerdings zu einfach sein“ (Absatz A) gemeint? [fr?] Comment comprendre la phrase « Diese Sicht dürfte allerdings zu einfach sein » (paragraphe A) ?",
+          "explanation": "„Diese Sicht“ bezieht sich auf die Meinung davor: Wer schlecht schläft, ist selbst schuld. „Dürfte“ drückt eine Vermutung aus (wahrscheinlich), „allerdings“ einen Widerspruch. Die Umfrage selbst wird nicht in Frage gestellt. [fr?] « Diese Sicht » renvoie à l’opinion qui précède (chacun est responsable de son manque de sommeil). « dürfte » = probablement ; « allerdings » marque l’objection. L’enquête n’est pas mise en doute.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Umfrage der Krankenkasse ist vermutlich nicht korrekt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Früh ins Bett zu gehen, fällt den meisten Menschen leicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wahrscheinlich ist es falsch, nur dem Einzelnen die Schuld zu geben.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Über Schlafmangel sollte man in der Öffentlichkeit nicht sprechen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Laut der Umfrage fühlt sich jeder zehnte Erwachsene fast täglich erschöpft.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „jeder Zehnte fühlt sich sogar fast jeden Tag erschöpft“. Achtung, nicht verwechseln: Schlecht schläft rund ein Drittel der Erwachsenen. [fr?] Vrai : un adulte sur dix se sent épuisé presque tous les jours ; un tiers dort mal.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Fachleute sind sich einig, dass ein kurzer Mittagsschlaf die Leistung steigert.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Ob ein kurzer Mittagsschlaf tatsächlich die Leistung steigert, ist unter Fachleuten zwar umstritten.“ Umstritten heißt: Die Fachleute sind sich gerade nicht einig. [fr?] Faux : « umstritten » = controversé ; les spécialistes ne sont pas d’accord.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Frauen schlafen laut der Umfrage schlechter als Männer.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Die Umfrage wird nur mit zwei Zahlen zitiert (ein Drittel schläft schlecht, jeder Zehnte ist fast täglich erschöpft). Unterschiede zwischen Frauen und Männern werden nicht erwähnt. [fr?] Non mentionné : aucune différence entre femmes et hommes n’est évoquée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A stellt das Problem vor und kritisiert die Sicht „Privatsache“; B nennt Ursachen (Erreichbarkeit, Schichtdienst, Pendeln); C beschreibt die Folgen für Gesundheit und Wirtschaft; D zeigt, was Unternehmen ändern; E zieht ein Fazit über unsere Einstellung zum Schlaf. [fr?] A : le problème ; B : les causes ; C : les conséquences ; D : ce que changent les entreprises ; E : la conclusion sur notre rapport au sommeil.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Ein unterschätztes Problem"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Ursachen außerhalb des Schlafzimmers"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Was zu wenig Schlaf anrichtet"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Wenn Betriebe umdenken"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Eine Frage der Haltung"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Informationen aus Absatz D. [fr?] Complétez avec des informations du paragraphe D.",
+          "text": "Einige Firmen stellen E-Mails, die nach [[1]] Uhr geschrieben werden, erst am nächsten Morgen zu. · „Solche Räume“ sind [[2]], in denen man sich mittags hinlegen kann.",
+          "explanation": "„Indem sie E-Mails nach 19 Uhr erst am nächsten Morgen zustellen“: So schützen die Firmen den Feierabend. „Solche Räume“ verweist zurück auf die „Ruheräume“ im Satz davor; solche Verweise helfen, einen Text zu verstehen. [fr?] « Solche Räume » renvoie aux « Ruheräume » (salles de repos) de la phrase précédente.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "19",
+                "neunzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Ruheräume"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Warum endet der Text mit der Frage „Muss das wirklich heute Abend noch sein?“ [fr?] Pourquoi le texte se termine-t-il par cette question ?",
+          "explanation": "Die rhetorische Frage soll zum Nachdenken anregen: Vieles, was abends noch erledigt wird, ist nicht dringend. Der Text fordert kein Gesetz („kein Staat kann einem Menschen das Schlafen abnehmen“) und behauptet nirgends, Abendarbeit steigere die Leistung. [fr?] Une question rhétorique invite à réfléchir : beaucoup de tâches du soir ne sont pas urgentes. Aucune loi n’est réclamée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er kritisiert Menschen, die abends zu früh ins Bett gehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er fordert ein Gesetz, das Arbeit nach 19 Uhr verbietet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er erklärt, warum Arbeit am Abend die Leistung steigert.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er regt an, Arbeit am Abend kritisch zu hinterfragen.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-gesundheit-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: ein Radiogespräch über Stress im Beruf",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Radiogespräch über Stress im Beruf",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\n[fr?] La situation\nIn der Sendung „Gesundheit heute“ spricht die Moderatorin Ruth Engelhard mit dem Arbeitspsychologen Volker Imhof. Eine Hörerin, die Krankenpflegerin Nadja Ewert, ruft an. Das Gespräch dauert etwa vier Minuten. [fr?] Dans l’émission « Gesundheit heute », l’animatrice Ruth Engelhard reçoit le psychologue du travail Volker Imhof. Une auditrice, l’infirmière Nadja Ewert, appelle. L’échange dure environ quatre minutes.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Lesen Sie vor dem Hören die Notizen: Welche Art von Information fehlt (Zahl, Nomen, Adjektiv)? [fr?] Avant l’écoute, lisez les notes : quel type d’information manque (nombre, nom, adjectif) ?\n2. Beim ersten Hören reichen Stichwörter: Ganze Sätze kosten zu viel Zeit. [fr?] À la première écoute, des mots-clés suffisent : des phrases entières prennent trop de temps.\n3. Achten Sie beim zweiten Hören auf Meinungen und Einschränkungen: „Aber ist das nicht …?“, „Da haben Sie recht, aber …“. [fr?] À la deuxième écoute, repérez les opinions et les nuances : « Aber ist das nicht … ? », « Da haben Sie recht, aber … ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesundheit-hoeren-audio",
+          "caption": "Gesundheit heute: Stress im Beruf",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Kurzer Stress: macht wacher und [[1]] · Warnsignale: schlechter Schlaf, man ist [[2]], vergisst Dinge, Kopf- oder Rückenschmerzen · besonders belastet: Pflege, Erziehung, [[3]] · Frau Ewert: auf der Station fehlen [[4]] Kolleginnen · neue Arbeitszeit: [[5]] Prozent",
+          "explanation": "Kurzfristiger Stress macht „wacher und konzentrierter“. Warnsignal: Man ist „gereizt“. Stark belastet sind Pflege, Erziehung und „Kundenservice“. Auf der Station fehlen drei Kolleginnen; Frau Ewert hat ihre Stunden „von hundert auf achtzig Prozent“ reduziert. [fr?] konzentrierter : plus concentré ; gereizt : irritable ; der Kundenservice : le service client.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "konzentrierter"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gereizt"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Kundenservice",
+                "im Kundenservice",
+                "der Kundenservice"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "drei",
+                "3"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "80",
+                "achtzig"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Haltung hat Herr Imhof zum Thema Stress? [fr?] Quelle est la position de M. Imhof sur le stress ?",
+          "explanation": "„Kurzfristiger Stress ist sogar nützlich … Problematisch wird es erst, wenn der Stress zum Dauerzustand wird und die Erholungsphasen fehlen.“ Die Pflege nennt er als ein Beispiel unter mehreren, und er sagt ausdrücklich, dass auch im Büro der Druck zugenommen hat. [fr?] Le stress ponctuel peut être utile ; c’est le stress permanent sans récupération qui pose problème.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Stress ist immer schädlich und sollte ganz vermieden werden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Stress betrifft heute fast nur noch Beschäftigte in der Pflege.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Stress ist vor allem eine Frage der richtigen Einstellung.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Kurzer Stress kann helfen, Dauerstress ohne Erholung schadet.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum hat Frau Ewert ihre Arbeitszeit reduziert? [fr?] Pourquoi Mme Ewert a-t-elle réduit son temps de travail ?",
+          "explanation": "„Letzten Winter war ich so erschöpft, dass ich nach dem Dienst im Auto eingeschlafen bin … Da habe ich gemerkt: So geht es nicht weiter.“ Sie hat mit ihrer Hausärztin gesprochen, von einem Verbot ist nicht die Rede. Die Stellen sind nicht gestrichen, sondern nur nicht besetzt. [fr?] Elle s’est endormie au volant, épuisée. Le médecin ne lui a rien interdit ; les postes ne sont pas supprimés mais vacants.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie war so erschöpft, dass sie im Auto eingeschlafen ist.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ihre Hausärztin hat ihr verboten, weiter Vollzeit zu arbeiten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Auf ihrer Station wurden mehrere Stellen dauerhaft gestrichen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie möchte mehr Zeit haben, um eine Weiterbildung zu machen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was kritisiert die Moderatorin mit der Frage „Aber ist das nicht ein bisschen zu einfach?“ [fr?] Que critique l’animatrice avec cette question ?",
+          "explanation": "Sie ergänzt: „Wenn auf der Station Personal fehlt, hilft auch kein Spaziergang.“ Sie zweifelt also nicht an den Tipps selbst, sondern daran, dass sie ohne bessere Arbeitsbedingungen genügen. Herr Imhof gibt ihr recht: „Individuelle Tipps sind kein Ersatz …“ [fr?] Elle doute que des conseils individuels suffisent quand il manque du personnel.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bewegung und Pausen sind wissenschaftlich nicht bewiesen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Persönliche Tipps lösen das Problem des Personalmangels nicht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Herr Imhof hat die Frage der Hörerin nicht beantwortet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Spaziergänge sind für Pflegekräfte zeitlich nicht möglich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Was Arbeitgeber tun können: realistische [[1]] und klare Regeln für die [[2]] · Ergebnis in solchen Betrieben: weniger [[3]] · professionelle Hilfe suchen, wenn die Beschwerden länger als zwei bis [[4]] Wochen anhalten",
+          "explanation": "„Indem sie zum Beispiel realistische Dienstpläne machen und klare Regeln für die Erreichbarkeit einführen“; dann „sinken die Krankmeldungen deutlich“. Hilfe sucht man, „wenn die Beschwerden länger als zwei bis drei Wochen anhalten“. [fr?] der Dienstplan : le planning de service ; die Erreichbarkeit : le fait d’être joignable ; die Krankmeldung : l’arrêt maladie déclaré.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Dienstpläne"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Erreichbarkeit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Krankmeldungen"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "drei",
+                "3"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Herr Imhof sagt zu Frau Ewert: „Sie dürften damals schon über Wochen zu wenig geschlafen haben.“ Was drückt er damit aus? [fr?] Que veut dire M. Imhof par cette phrase ?",
+          "explanation": "„Dürfte“ + Infinitiv Perfekt (geschlafen haben) ist eine Vermutung über die Vergangenheit: wahrscheinlich, aber nicht sicher. Mit „dürfen“ im Sinn von Erlaubnis hat das nichts zu tun. Einen Vorwurf macht er nicht, im Gegenteil: Er lobt später, dass sie früh Hilfe gesucht hat. [fr?] « dürfte » + infinitif passé = supposition probable sur le passé, pas une permission.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er weiß es genau, weil sie es ihm erzählt hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er erlaubt ihr nachträglich, weniger zu schlafen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er vermutet es, ist sich aber nicht ganz sicher.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er wirft ihr vor, dass sie zu spät reagiert hat.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-gesundheit-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Mittel, Folge und Vermutung",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Mittel, Folge und Vermutung",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus dem Radiogespräch. Achten Sie auf die markierten Wörter und auf die Stellung der Verben. [fr?] Lisez les phrases de l’article et de l’émission. Observez les mots clés et la place des verbes.\n\nSÄTZE\n[fr?] Le corpus\n(1) Andere arbeiten im Schichtdienst, sodass ihr Körper nie einen festen Rhythmus findet.\n(2) Letzten Winter war ich so erschöpft, dass ich im Auto eingeschlafen bin.\n(3) Frau Ewert hat richtig gehandelt, indem sie früh Hilfe gesucht hat.\n(4) Man baut Stress nicht ab, indem man am Wochenende alles nachholt.\n(5) Diese Sicht dürfte allerdings zu einfach sein.\n(6) Sie dürften damals schon über Wochen zu wenig geschlafen haben.\n(7) In manchen Ländern sollen solche Räume schon lange üblich sein.\n(8) Das muss also auch im Interesse der Unternehmen liegen.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions : les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 3 und 4: Auf welche Frage antwortet der Nebensatz mit „indem“? [fr?] Phrases 3 et 4 : à quelle question répond la subordonnée avec « indem » ?",
+          "explanation": "„Indem“ nennt das Mittel: Wie hat sie richtig gehandelt? – Indem sie früh Hilfe gesucht hat. Das Verb steht am Ende des Nebensatzes. Im Französischen entspricht das meist einem Gérondif. [fr?] indem = le moyen, souvent « en + participe présent » : « en cherchant de l’aide tôt ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wann? (Zeitpunkt)",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Warum? (Grund)",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wie? (Mittel, Methode)",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Wozu? (Ziel)",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 1 und 2: Was steht im Nebensatz mit „sodass“ bzw. „so …, dass“? [fr?] Phrases 1 et 2 : qu’exprime la subordonnée avec « sodass » ou « so …, dass » ?",
+          "explanation": "Der Nebensatz nennt die Folge: Schichtdienst → kein fester Rhythmus; so erschöpft → im Auto eingeschlafen. Bei „so …, dass“ steht „so“ im Hauptsatz vor dem Adjektiv (so erschöpft). Ein Ziel würde man mit „damit“ oder „um … zu“ ausdrücken. [fr?] sodass / so … dass = la conséquence (si bien que, si … que), pas le but (damit).",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein Ziel, das man erreichen will",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Folge, ein Ergebnis",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine Bedingung",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ein Gegensatz",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Was drückt das Modalverb in diesen Sätzen aus? Ordnen Sie zu. [fr?] Qu’exprime le verbe de modalité dans ces phrases ? Associez.",
+          "explanation": "Hier geht es nicht um Pflicht oder Erlaubnis, sondern darum, wie sicher die Sprecherin ist: muss (fast sicher) – dürfte (wahrscheinlich) – kann/könnte (möglich). „Sollen“ gibt etwas wieder, das andere sagen (Hörensagen). [fr?] Sens subjectif : degré de certitude du locuteur. soll = on dit que, il paraît que.",
+          "pairs": [
+            {
+              "left": "Satz 5: „dürfte … sein“",
+              "right": "Das ist wahrscheinlich."
+            },
+            {
+              "left": "Satz 7: „sollen … sein“",
+              "right": "Das sagt man, das wird berichtet."
+            },
+            {
+              "left": "Satz 8: „muss … liegen“",
+              "right": "Das ist fast sicher, ein logischer Schluss."
+            },
+            {
+              "left": "„Das kann auch am Wetter liegen.“",
+              "right": "Das ist möglich."
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 6: Worauf bezieht sich die Vermutung, und wie wird sie gebildet? [fr?] Phrase 6 : sur quoi porte la supposition, et comment est-elle formée ?",
+          "explanation": "„Dürften … geschlafen haben“: Das Modalverb steht in der Gegenwart (die Vermutung ist jetzt), das Ereignis liegt in der Vergangenheit (Partizip II + haben/sein am Satzende). Ebenso: Er muss den Zug verpasst haben. [fr?] Supposition actuelle sur un fait passé : modal + participe II + haben/sein (« elle a dû mal dormir »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf die Zukunft: Modalverb + werden",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf die Gegenwart: Modalverb + Infinitiv",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "auf eine Pflicht: Modalverb im Präteritum",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "auf die Vergangenheit: Modalverb + Infinitiv Perfekt",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesundheit-regel",
+      "kind": "lesson",
+      "title": "Regel: indem, sodass und subjektive Modalverben",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: indem, sodass und subjektive Modalverben",
+        "description": "REGEL — INDEM: DAS MITTEL\n[fr?] Règle : indem exprime le moyen\n„Indem“ antwortet auf die Frage „Wie? Auf welche Weise?“. Der Nebensatz nennt das Mittel oder die Methode, das konjugierte Verb steht am Ende. Haupt- und Nebensatz haben meist dasselbe Subjekt. Gleiche Bedeutung: „dadurch, dass …“.\n[fr?] « indem » correspond souvent au gérondif français « en + participe présent » (en bougeant, en dormant). Verbe conjugué à la fin.\n• Man baut Stress ab, indem man sich regelmäßig bewegt. [fr?] On réduit le stress en bougeant régulièrement.\n• Indem sie früh Hilfe gesucht hat, hat sie Schlimmeres verhindert. [fr?] En cherchant de l’aide tôt, elle a évité le pire.\n• Man baut Stress dadurch ab, dass man sich regelmäßig bewegt. [fr?] Même sens, avec « dadurch, dass ».\n\nREGEL — SODASS UND SO … DASS: DIE FOLGE\n[fr?] Règle : la conséquence\n„Sodass“ (auch „so dass“) leitet eine Folge ein. Der Nebensatz steht immer nach dem Hauptsatz. Bei „so …, dass“ steht „so“ im Hauptsatz direkt vor dem Adjektiv oder Adverb, das betont wird.\n[fr?] sodass = si bien que, de sorte que ; so + adjectif …, dass = si … que. La conséquence suit toujours la principale.\n• Sie arbeitet im Schichtdienst, sodass sie keinen festen Rhythmus hat. [fr?] Elle travaille en équipes alternées, si bien qu’elle n’a pas de rythme fixe.\n• Ich war so erschöpft, dass ich im Auto eingeschlafen bin. [fr?] J’étais si épuisée que je me suis endormie dans la voiture.\n• Wiederholung „je … desto/umso“: Je länger man wach bleibt, desto schlechter konzentriert man sich. [fr?] Rappel : plus on reste éveillé, moins on se concentre. Après « desto » + comparatif vient directement le verbe.\n\nREGEL — MODALVERBEN MIT SUBJEKTIVER BEDEUTUNG\n[fr?] Règle : les verbes de modalité au sens subjectif\nModalverben drücken nicht nur Pflicht, Erlaubnis oder Fähigkeit aus. Sie zeigen auch, wie sicher die Sprecherin ist oder woher eine Information kommt.\n[fr?] Ils indiquent aussi le degré de certitude du locuteur ou l’origine d’une information.\n• muss – fast sicher, logischer Schluss: Sein Büro ist seit Tagen dunkel. Er muss krank sein. [fr?] Il doit être malade (j’en suis presque sûr).\n• dürfte – wahrscheinlich: Das dürfte zu einfach sein. [fr?] C’est probablement trop simple.\n• kann / könnte – möglich: Das kann (könnte) auch am Stress liegen. [fr?] Cela peut aussi venir du stress.\n• soll – man sagt es, es wird berichtet: In manchen Ländern sollen Ruheräume üblich sein. [fr?] Il paraît que, selon certaines sources.\n• will – die Person behauptet es selbst: Er will nie krank gewesen sein. [fr?] Il prétend n’avoir jamais été malade.\n\nREGEL — VERMUTUNGEN ÜBER DIE VERGANGENHEIT\n[fr?] Règle : supposer à propos du passé\nModalverb (Gegenwart) + Partizip II + „haben“ oder „sein“ am Satzende (Infinitiv Perfekt).\n[fr?] Le verbe de modalité reste au présent ; c’est l’infinitif qui passe au passé.\n• Sie dürfte zu wenig geschlafen haben. [fr?] Elle a probablement trop peu dormi.\n• Er muss im Zug eingeschlafen sein. [fr?] Il a dû s’endormir dans le train.\n\nACHTUNG\n[fr?] Attention : pièges des francophones\n• Ein französisches Gérondif, das einen Zeitpunkt nennt, übersetzt man nicht mit „indem“, sondern mit „als“: Als ich nach Hause kam, habe ich sie gesehen. „Indem“ nennt nur das Mittel. [fr?] « En rentrant, je l’ai vue » indique le moment : als (ou beim + nom), jamais indem.\n• „Damit“ nennt ein Ziel, „sodass“ eine Folge: Ich gehe früh ins Bett, damit ich fit bin. – Ich war müde, sodass ich früh ins Bett ging. [fr?] damit = but (pour que) ; sodass = conséquence (si bien que).\n• Eine sichere Vermutung drückt „muss“ aus: Er muss krank sein. „Er soll krank sein“ bedeutet dagegen: Man sagt, dass er krank ist. [fr?] « Il doit être malade » (supposition) = Er muss krank sein ; « Er soll krank sein » = il paraît qu’il est malade.\n• „Sie dürfte zu Hause sein“ ist eine Vermutung, keine Erlaubnis. Die Erlaubnis heißt: „Sie darf nach Hause gehen.“ [fr?] « dürfte » = probablement ; « darf » = a le droit.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-gesundheit-grammatik",
+      "kind": "exercise",
+      "title": "Üben: indem, sodass und Vermutungen",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: indem, sodass und Vermutungen",
+        "description": "Üben Sie Mittel, Folge und Vermutung. Lesen Sie jeden Satz bis zum Ende, bevor Sie antworten. [fr?] Entraînez-vous au moyen, à la conséquence et à la supposition. Lisez chaque phrase jusqu’au bout avant de répondre.\n\nMERKE\n[fr?] À retenir\n• indem + Verb am Ende = das Mittel (Wie?) · sodass / so …, dass = die Folge · damit = das Ziel [fr?] indem = moyen ; sodass / so … dass = conséquence ; damit = but\n• muss (fast sicher) · dürfte (wahrscheinlich) · kann/könnte (möglich) · soll (man sagt) · will (behauptet selbst) [fr?] degrés de certitude et ouï-dire\n• Vergangenheit: Modalverb + Partizip II + haben/sein [fr?] passé : modal + participe II + haben/sein",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „indem“, „sodass“ oder „damit“. [fr?] Complétez avec « indem », « sodass » ou « damit ».",
+          "text": "[[1]] ich abends besser einschlafe, lasse ich das Handy in der Küche. · Wie hat er seinen Schlaf verbessert? Er hat ihn verbessert, [[2]] er abends nicht mehr fernsieht. · Auf der Station war es nachts sehr laut, [[3]] niemand schlafen konnte.",
+          "explanation": "Satz 1 nennt ein Ziel (damit); ein Nebensatz mit „sodass“ kann außerdem nie am Satzanfang stehen. Satz 2 antwortet auf „Wie?“: indem. Satz 3 nennt die Folge des Lärms: sodass (auch „so dass“). [fr?] 1 : but (damit) ; 2 : moyen (indem) ; 3 : conséquence (sodass).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Damit"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "indem"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "sodass",
+                "so dass"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Man",
+              "kann",
+              "Stress",
+              "abbauen,",
+              "indem",
+              "man",
+              "regelmäßig",
+              "kurze Pausen",
+              "macht."
+            ]
+          ],
+          "explanation": "Hauptsatz mit Modalverb an zweiter Stelle und Infinitiv am Ende (kann … abbauen), dann der Nebensatz: „indem“ + Subjekt + Ergänzungen, das konjugierte Verb „macht“ steht ganz am Ende. [fr?] Principale : modal en 2e position, infinitif à la fin ; subordonnée : verbe conjugué en dernier."
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Kollegin",
+              "war",
+              "so",
+              "erschöpft,",
+              "dass",
+              "sie",
+              "im Zug",
+              "eingeschlafen",
+              "ist."
+            ]
+          ],
+          "explanation": "„So“ steht im Hauptsatz direkt vor dem Adjektiv, das betont wird (so erschöpft). Im dass-Satz steht das Hilfsverb am Ende, nach dem Partizip: eingeschlafen ist. [fr?] « so » précède l’adjectif ; dans la subordonnée, l’auxiliaire « ist » vient en dernier."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welcher deutsche Satz entspricht dem französischen Satz « Il paraît qu’elle a changé de poste » ? [fr?] Quelle phrase allemande correspond à cette phrase française ?",
+          "explanation": "„Soll“ + Infinitiv Perfekt gibt eine Information wieder, die man gehört hat. „Muss … haben“ wäre ein sicherer Schluss, „will … haben“ eine eigene Behauptung der Frau, „sollte … wechseln“ ein Rat. [fr?] soll = ouï-dire ; muss = déduction ; will = elle le prétend ; sollte = conseil.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie muss die Stelle gewechselt haben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie will die Stelle gewechselt haben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie soll die Stelle gewechselt haben.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie sollte die Stelle wechseln.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Formulieren Sie die Vermutung mit einem Modalverb. [fr?] Exprimez la supposition avec un verbe de modalité.",
+          "text": "Wahrscheinlich ist er krank. → Er [[1]] krank sein. · Ich bin mir fast sicher, dass sie im Büro ist. → Sie [[2]] im Büro sein. · Vielleicht liegt es am Wetter. → Es [[3]] am Wetter liegen.",
+          "explanation": "Wahrscheinlich → dürfte (Konjunktiv II von „dürfen“). Fast sicher → muss. Vielleicht, möglich → kann oder könnte. Die Modalverben stehen hier in der Gegenwart, weil die Vermutung sich auf jetzt bezieht. [fr?] probablement → dürfte ; presque sûr → muss ; peut-être → kann / könnte.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "dürfte"
+              ],
+              "hint": "wahrscheinlich",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "muss"
+              ],
+              "hint": "fast sicher",
+              "size": 5
+            },
+            {
+              "id": "3",
+              "accept": [
+                "kann",
+                "könnte"
+              ],
+              "hint": "möglich",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Wie sicher ist die Sprecherin? Ordnen Sie zu. [fr?] Quel est le degré de certitude ? Associez.",
+          "explanation": "Die Skala reicht von „muss“ (fast sicher) über „dürfte“ (wahrscheinlich) bis „könnte“ (möglich). „Soll“ gibt fremde Aussagen wieder, „will“ die eigene Behauptung des Subjekts, oft mit Zweifel der Sprecherin. [fr?] Échelle de certitude, puis ouï-dire (soll) et prétention (will).",
+          "pairs": [
+            {
+              "left": "Er muss den Zug verpasst haben.",
+              "right": "Ich bin mir fast sicher."
+            },
+            {
+              "left": "Er dürfte den Zug verpasst haben.",
+              "right": "Das ist wahrscheinlich."
+            },
+            {
+              "left": "Er könnte den Zug verpasst haben.",
+              "right": "Das ist möglich."
+            },
+            {
+              "left": "Er soll den Zug verpasst haben.",
+              "right": "Das habe ich gehört."
+            },
+            {
+              "left": "Er will den Zug verpasst haben.",
+              "right": "Das behauptet er selbst."
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Vermutungen über die Vergangenheit: Ergänzen Sie. [fr?] Suppositions sur le passé : complétez.",
+          "text": "Sicher hat sie den Termin vergessen. → Sie muss den Termin [[1]] [[2]]. · Wahrscheinlich ist er schon nach Hause gegangen. → Er dürfte schon nach Hause [[3]] [[4]].",
+          "explanation": "Infinitiv Perfekt am Satzende: Partizip II + haben oder sein. „Vergessen“ bildet das Perfekt mit „haben“, „gehen“ als Bewegungsverb mit „sein“. Das Modalverb bleibt in der Gegenwart. [fr?] vergessen → haben ; gehen → sein (verbe de déplacement).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "vergessen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "haben"
+              ],
+              "hint": "haben oder sein?",
+              "size": 6
+            },
+            {
+              "id": "3",
+              "accept": [
+                "gegangen"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "sein"
+              ],
+              "hint": "haben oder sein?",
+              "size": 5
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "„Je später ich ins Bett gehe, …“ Wie geht der Satz richtig weiter? [fr?] Comment la phrase continue-t-elle correctement ?",
+          "explanation": "Nach „desto“ (oder „umso“) folgt zuerst der Komparativ (müder), dann sofort das konjugierte Verb (bin) und erst dann das Subjekt. Im je-Satz steht das Verb am Ende (gehe). [fr?] desto + comparatif + verbe + sujet : « desto müder bin ich ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "desto ich bin müder am nächsten Morgen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "desto müder ich bin am nächsten Morgen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ich bin desto müder am nächsten Morgen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "desto müder bin ich am nächsten Morgen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "choice",
+          "prompt": "Welcher deutsche Satz entspricht dem französischen Satz « En rentrant du travail, j’ai rencontré ma voisine » ? [fr?] Quelle phrase allemande correspond à cette phrase française ?",
+          "explanation": "Hier bezeichnet der französische Gérondif einen Zeitpunkt, kein Mittel: Man trifft die Nachbarin nicht „durch“ das Nachhausekommen. Deshalb „als“. „Indem“ würde ein Mittel nennen, „sodass“ und „damit“ passen inhaltlich und grammatisch nicht. [fr?] Ici le gérondif indique le moment (als), pas le moyen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Als ich von der Arbeit kam, habe ich meine Nachbarin getroffen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Indem ich von der Arbeit kam, habe ich meine Nachbarin getroffen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sodass ich von der Arbeit kam, habe ich meine Nachbarin getroffen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Damit ich von der Arbeit kam, habe ich meine Nachbarin getroffen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "Der sodass-Satz steht nach dem Hauptsatz, und das konjugierte Verb (konnte) steht am Ende des Nebensatzes. „Sodass“ am Satzanfang ist nicht möglich, und weder Verbzweitstellung noch Hauptsatzstellung ist nach „sodass“ korrekt. [fr?] sodass : toujours après la principale, verbe conjugué à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sodass er nicht schlafen konnte, trank er abends Kaffee.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er trank abends Kaffee, sodass konnte er nicht schlafen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er trank abends Kaffee, sodass er nicht schlafen konnte.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er trank abends Kaffee, sodass er konnte nicht schlafen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesundheit-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Stress, Erholung und feste Wendungen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Stress, Erholung und feste Wendungen",
+        "description": "Lernen Sie Wörter in Verbindungen: Nomen mit Verb, Wortfamilien, Verben mit Präposition und Formulierungen zum Abwägen. [fr?] Apprenez les mots en contexte : nom + verbe, familles de mots, verbes à préposition et formules pour nuancer.\n\nTIPP\n[fr?] Conseil\nViele Nomen zum Thema enden auf -ung, -heit oder -keit und sind feminin: die Belastung, die Müdigkeit, die Erreichbarkeit. Lernen Sie das Verb oder Adjektiv gleich mit. [fr?] Beaucoup de noms du thème se terminent en -ung, -heit, -keit et sont féminins. Apprenez le verbe ou l’adjectif de base avec eux.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "Feste Verbindungen lernt man am besten als Ganzes: Stress abbauen, unter Druck stehen, eine Pause einlegen, Warnsignale ernst nehmen, Überstunden machen. „Eine Pause machen“ ist auch korrekt, „Überstunden einlegen“ aber nicht: Deshalb gehört „machen“ hier zu den Überstunden. [fr?] réduire le stress, être sous pression, faire une pause, prendre les signaux au sérieux, faire des heures supplémentaires.",
+          "pairs": [
+            {
+              "left": "Stress",
+              "right": "abbauen"
+            },
+            {
+              "left": "unter Druck",
+              "right": "stehen"
+            },
+            {
+              "left": "eine Pause",
+              "right": "einlegen"
+            },
+            {
+              "left": "Warnsignale",
+              "right": "ernst nehmen"
+            },
+            {
+              "left": "Überstunden",
+              "right": "machen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen mit Artikel „die“. [fr?] Formez le nom (féminin).",
+          "text": "müde → die [[1]] · erschöpft → die [[2]] · belasten → die [[3]] · erreichbar → die [[4]] · leistungsfähig → die [[5]]",
+          "explanation": "Adjektive auf -ig und -bar bilden Nomen auf -keit (Müdigkeit, Erreichbarkeit, Leistungsfähigkeit). Aus Verben und Partizipien werden Nomen auf -ung (Erschöpfung, Belastung). Alle sind feminin. [fr?] -ig / -bar → -keit ; verbes → -ung ; tous féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Müdigkeit"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Erschöpfung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Belastung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Erreichbarkeit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Leistungsfähigkeit"
+              ],
+              "size": 19,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Solche Tipps greifen zu kurz.“ Was bedeutet das? [fr?] Que signifie « Solche Tipps greifen zu kurz » ?",
+          "explanation": "„Zu kurz greifen“ heißt: nicht weit genug gehen, das Problem nur teilweise lösen. Im Artikel: Die Tipps sind sinnvoll, aber ohne bessere Arbeitsbedingungen genügen sie nicht. [fr?] « zu kurz greifen » = être insuffisant, ne pas aller assez loin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Tipps reichen allein nicht aus.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Tipps sind viel zu kompliziert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Tipps wirken nur sehr kurz.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Tipps sind inzwischen veraltet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten einem Argument nur teilweise zustimmen. Welche Formulierung passt? [fr?] Vous voulez approuver un argument en partie seulement. Quelle formule convient ?",
+          "explanation": "„Da ist etwas dran, aber …“ erkennt einen Teil des Arguments an und bringt dann einen Einwand: typisch für eine sachliche Diskussion auf B2-Niveau. Die anderen Formulierungen lehnen ganz ab, stimmen ganz zu oder weichen aus. [fr?] « Da ist etwas dran, aber … » = il y a du vrai, mais …",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch völliger Unsinn, denn man muss sehen, dass …",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Da haben Sie hundertprozentig recht, denn man sieht, dass …",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dazu möchte ich lieber gar nichts sagen, weil man sieht, dass …",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Da ist etwas dran, aber man muss auch sehen, dass …",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Was bedeutet das? Ordnen Sie zu. [fr?] Que signifient ces mots ? Associez.",
+          "explanation": "Diese Adjektive kommen im Artikel und im Radiogespräch vor. Bei einem umstrittenen Thema gibt es unter Fachleuten verschiedene Meinungen; wer gereizt ist, reagiert schnell ärgerlich; wer ausgeschlafen ist, hat genug geschlafen; wer erschöpft ist, hat keine Kraft mehr. [fr?] umstritten : controversé ; gereizt : irritable ; ausgeschlafen : reposé ; erschöpft : épuisé.",
+          "pairs": [
+            {
+              "left": "umstritten",
+              "right": "Fachleute sind sich nicht einig."
+            },
+            {
+              "left": "gereizt",
+              "right": "schnell nervös und ärgerlich"
+            },
+            {
+              "left": "ausgeschlafen",
+              "right": "nach genug Schlaf wach und fit"
+            },
+            {
+              "left": "erschöpft",
+              "right": "völlig ohne Kraft"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr?] Complétez avec la préposition.",
+          "text": "Schlafmangel wirkt sich negativ [[1]] die Konzentration aus. · Viele Beschäftigte leiden [[2]] ständigem Zeitdruck. · Die Patientin klagt seit Tagen [[3]] Kopfschmerzen.",
+          "explanation": "Sich auswirken auf + Akkusativ, leiden unter + Dativ (eine Situation; bei einer Krankheit auch „leiden an“), klagen über + Akkusativ. Die Präposition gehört zum Verb und muss mitgelernt werden. [fr?] sich auswirken auf ; leiden unter ; klagen über.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "unter"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesundheit-lesen2",
+      "kind": "exercise",
+      "title": "Verstehen: ein Ratgeber zum Gesundheitssystem",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Ratgeber zum Gesundheitssystem",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\nEin Ratgeber liest sich selektiv: Lesen Sie zuerst die Zwischenüberschriften und suchen Sie dann gezielt die Stelle, die zur Aufgabe passt. [fr?] Un guide se lit de façon sélective : lisez d’abord les intertitres, puis cherchez le passage utile à chaque question.\n\nWOHIN MIT WELCHEN BESCHWERDEN?\nEin Ratgeber für alle, die neu in Deutschland sind\n\n1. Die Hausarztpraxis\nErste Anlaufstelle bei fast allen gesundheitlichen Problemen ist die Hausarztpraxis. Hausärztinnen und Hausärzte kennen Ihre Krankengeschichte, behandeln die meisten Beschwerden selbst und überweisen Sie bei Bedarf an eine Fachpraxis. Wer sich krank fühlt, ruft am besten gleich morgens an. Viele Praxen bieten inzwischen auch eine offene Sprechstunde ohne Termin oder eine Videosprechstunde an.\n\n2. Die Facharztpraxis\nFür Augen, Haut, Herz oder Zähne gibt es Fachärztinnen und Fachärzte. Zur Zahnarzt-, Augenarzt- oder Frauenarztpraxis gehen Sie direkt, ohne Überweisung. Bei anderen Fachrichtungen ist eine Überweisung von der Hausärztin oft nicht vorgeschrieben, aber sinnvoll: Die Fachpraxis erfährt dann, was schon untersucht wurde. Planen Sie Zeit ein, denn auf manche Facharzttermine wartet man mehrere Wochen.\n\n3. Abends und am Wochenende\nSind die Praxen geschlossen, hilft der ärztliche Bereitschaftsdienst. Unter der bundesweiten Nummer 116 117 erfahren Sie, welche Bereitschaftspraxis in Ihrer Nähe geöffnet ist. In manchen Fällen kommt auch eine Ärztin zu Ihnen nach Hause. Der Bereitschaftsdienst ist für Beschwerden gedacht, mit denen Sie normalerweise zur Hausärztin gehen würden, die aber nicht bis zum nächsten Werktag warten können, etwa hohes Fieber oder starke Ohrenschmerzen.\n\n4. Der Notfall\nBei lebensbedrohlichen Situationen, zum Beispiel bei Atemnot, starken Brustschmerzen, einem schweren Unfall oder Anzeichen eines Schlaganfalls, wählen Sie sofort die 112. Die Notaufnahmen der Krankenhäuser sind für solche echten Notfälle da. Weil dort aber immer mehr Menschen mit leichten Beschwerden erscheinen, müssen Schwerkranke manchmal länger warten. Viele Kliniken prüfen deshalb bei der Ankunft zuerst, wie dringend ein Fall ist. Wer mit einer einfachen Erkältung kommt, sitzt dann unter Umständen viele Stunden im Wartebereich.\n\n5. Die Apotheke\nBei kleineren Beschwerden wie Schnupfen oder leichten Kopfschmerzen lohnt sich oft zuerst der Weg in die Apotheke. Apothekerinnen und Apotheker beraten kostenlos und sagen Ihnen auch, wann Sie besser ärztliche Hilfe suchen sollten. Nachts und am Wochenende hat in jeder Region eine Notdienst-Apotheke geöffnet. Welche das ist, steht auf einem Aushang an der Tür jeder Apotheke.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesundheit-lesen2-karten",
+          "caption": "Wohin mit welchen Beschwerden?",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Wohin wenden sich diese Personen am besten? Ordnen Sie zu. [fr?] À quel service ces personnes doivent-elles s’adresser ? Associez.",
+          "explanation": "Hohes Fieber am Wochenende kann nicht bis Montag warten, ist aber nicht lebensbedrohlich: Bereitschaftsdienst. Brustschmerzen und Atemnot: sofort 112. Leichter Schnupfen: Beratung in der Apotheke. Lang anhaltende Beschwerden: zuerst die Hausarztpraxis. Zur Zahnarztpraxis geht man direkt. [fr?] Fièvre le dimanche : service de garde ; douleur thoracique : 112 ; rhume : pharmacie ; mal de dos durable : médecin traitant ; dentiste : en direct.",
+          "pairs": [
+            {
+              "left": "Sonntagabend, 39,5 Grad Fieber, aber kein Notfall",
+              "right": "ärztlicher Bereitschaftsdienst"
+            },
+            {
+              "left": "plötzlich starke Brustschmerzen und Atemnot",
+              "right": "Notruf 112"
+            },
+            {
+              "left": "seit gestern ein leichter Schnupfen",
+              "right": "Apotheke"
+            },
+            {
+              "left": "seit Wochen Rückenschmerzen",
+              "right": "Hausarztpraxis"
+            },
+            {
+              "left": "jährliche Kontrolle der Zähne",
+              "right": "Zahnarztpraxis"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum müssen Schwerkranke in der Notaufnahme manchmal länger warten? [fr?] Pourquoi les grands malades attendent-ils parfois plus longtemps aux urgences ?",
+          "explanation": "„Weil dort aber immer mehr Menschen mit leichten Beschwerden erscheinen, müssen Schwerkranke manchmal länger warten.“ Von Personalmangel in der Nacht oder einer Überweisung für die Notaufnahme steht nichts im Text. [fr?] Les urgences sont encombrées par des cas bénins.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil es nachts in den Kliniken zu wenig Ärztinnen gibt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil viele Menschen mit leichten Beschwerden dorthin kommen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weil man dort zuerst eine Überweisung vorzeigen muss.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die Notaufnahmen nur am Wochenende geöffnet sind.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was rät der Ratgeber indirekt? [fr?] Que conseille implicitement le guide ?",
+          "explanation": "Der Text sagt nicht direkt „Gehen Sie nicht in die Notaufnahme“, aber er erklärt, wofür sie da ist („für solche echten Notfälle“) und dass man mit einer Erkältung dort „viele Stunden“ wartet. Daraus folgt der indirekte Rat. [fr?] Conseil implicite : réserver les urgences aux vraies urgences.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bei jeder Erkältung sofort einen Facharzt aufzusuchen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Abends grundsätzlich die Notaufnahme zu wählen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Notaufnahme nur bei echten Notfällen aufzusuchen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Vor jedem Arztbesuch die Apotheke anzurufen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Für einen Termin bei der Augenärztin braucht man eine Überweisung.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Zur Zahnarzt-, Augenarzt- oder Frauenarztpraxis gehen Sie direkt, ohne Überweisung.“ [fr?] Faux : on va chez l’ophtalmologue sans lettre d’orientation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Die Beratung in der Apotheke kostet nichts.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Apothekerinnen und Apotheker beraten kostenlos.“ Kostenlos heißt: Man muss nichts bezahlen. [fr?] Vrai : le conseil en pharmacie est gratuit.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Wörtern aus dem Ratgeber. [fr?] Complétez avec des mots du guide.",
+          "text": "Der Bereitschaftsdienst ist für Beschwerden da, die nicht bis zum nächsten [[1]] warten können. · Welche Apotheke Notdienst hat, steht auf einem [[2]] an der Tür.",
+          "explanation": "Der Werktag: ein Tag von Montag bis Samstag, an dem normal gearbeitet wird; hier vor allem der nächste Tag, an dem die Praxen öffnen. Der Aushang: ein Zettel, der öffentlich hängt, zum Beispiel an einer Tür. [fr?] der Werktag : jour ouvrable ; der Aushang : l’affiche, l’avis affiché.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Werktag"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Aushang"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-gesundheit-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Stress, Schlaf und Vermutungen",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Stress, Schlaf und Vermutungen",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nFür die Fragen 1 und 2 hören Sie eine Durchsage in Ihrer Firma. [fr?] Pour les questions 1 et 2, écoutez une annonce dans votre entreprise.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesundheit-kontrolle-audio",
+          "caption": "Durchsage: Gesundheitstag",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie die Durchsage und ergänzen Sie die Notiz. [fr?] Écoutez l’annonce et complétez la note.",
+          "text": "Gesundheitstag am 12. März · Beginn des Vortrags über gesunden Schlaf: [[1]] · Anmeldung bis [[2]] im Intranet",
+          "explanation": "„Der Vortrag beginnt um halb zwölf“: halb zwölf ist 11.30 Uhr, nicht 12.30 Uhr. „Bitte melden Sie sich bis Montag im Intranet an.“ [fr?] halb zwölf = 11 h 30 (et non 12 h 30).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "11.30 Uhr",
+                "11:30 Uhr",
+                "11.30",
+                "11:30",
+                "halb zwölf",
+                "halb 12",
+                "11 Uhr 30",
+                "elf Uhr dreißig"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Montag"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was sagt die Durchsage über die Teilnahme? [fr?] Que dit l’annonce sur la participation ?",
+          "explanation": "„Die Teilnahme gilt selbstverständlich als Arbeitszeit.“ Die Beratung ist kostenlos, und von einer Pflicht ist nicht die Rede: Man muss sich anmelden, weil die Plätze begrenzt sind. [fr?] La participation compte comme temps de travail ; elle est gratuite et facultative.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kostet zehn Euro pro Person.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ist nur für die Pflegekräfte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie zählt als Arbeitszeit.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie ist für alle verpflichtend.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Sie",
+              "hat",
+              "ihren Stress",
+              "abgebaut,",
+              "indem",
+              "sie",
+              "jeden Tag eine halbe Stunde",
+              "spazieren gegangen",
+              "ist."
+            ]
+          ],
+          "explanation": "Hauptsatz im Perfekt (hat … abgebaut), dann der indem-Satz mit dem Mittel. Im Nebensatz steht das Hilfsverb „ist“ am Ende, nach „spazieren gegangen“. [fr?] Le moyen (indem) suit la principale ; « ist » en fin de subordonnée."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Vermutung über die Vergangenheit. [fr?] Complétez la supposition sur le passé.",
+          "text": "Ich bin mir fast sicher: Sie hat die Mail nicht gelesen. → Sie [[1]] die Mail nicht gelesen [[2]].",
+          "explanation": "Fast sicher → „muss“, in der Gegenwart. Die Handlung liegt in der Vergangenheit: Partizip II + „haben“ am Ende (Infinitiv Perfekt). [fr?] presque sûr → muss … gelesen haben.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "muss"
+              ],
+              "hint": "Modalverb",
+              "size": 5
+            },
+            {
+              "id": "2",
+              "accept": [
+                "haben"
+              ],
+              "hint": "haben oder sein?",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Ihr Kollege ist seit einer Woche nicht im Büro. Man erzählt sich, dass er im Urlaub ist. Was sagen Sie? [fr?] Votre collègue est absent depuis une semaine ; on raconte qu’il est en vacances. Que dites-vous ?",
+          "explanation": "Eine Information vom Hörensagen gibt man mit „sollen“ wieder: Er soll im Urlaub sein, das erzählt man sich. „Muss“ wäre ein eigener sicherer Schluss, „will“ seine eigene Behauptung, „darf“ eine Erlaubnis. [fr?] Ouï-dire → soll.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er darf im Urlaub sein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er will im Urlaub sein.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er muss im Urlaub sein.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er soll im Urlaub sein.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Der Lärm war ___ laut, ___ niemand schlafen konnte.“ Was passt? [fr?] Qu’est-ce qui convient ?",
+          "explanation": "„So“ betont das Adjektiv im Hauptsatz (so laut), der dass-Satz nennt die Folge: so laut, dass niemand schlafen konnte. „Je … desto“ verlangt zwei Komparative. [fr?] si bruyant que … : so … dass.",
+          "options": [
+            {
+              "id": "a",
+              "label": "so … dass",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "sodass … so",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "indem … dass",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "je … desto",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Bilden Sie das passende Nomen. [fr?] Formez le nom qui convient.",
+          "text": "Die ständige [[1]] nach Feierabend ist für viele eine große [[2]].",
+          "explanation": "Aus „erreichbar“ wird „die Erreichbarkeit“ (-keit), aus „belasten“ wird „die Belastung“ (-ung). Beide Nomen sind feminin: „die ständige …“, „eine große …“. [fr?] erreichbar → die Erreichbarkeit ; belasten → die Belastung.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Erreichbarkeit"
+              ],
+              "hint": "erreichbar",
+              "size": 15
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Belastung"
+              ],
+              "hint": "belasten",
+              "size": 10
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Was bedeutet „abschalten“ im Satz „Am Wochenende kann ich nicht mehr abschalten“? [fr?] Que signifie « abschalten » ici ?",
+          "explanation": "„Abschalten“ kann wörtlich „ein Gerät ausmachen“ bedeuten. In diesem Satz geht es aber um den Kopf: Man kann die Gedanken an die Arbeit nicht loslassen und sich nicht erholen. [fr?] Ici, sens figuré : décrocher mentalement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "das Handy und den Laptop ausmachen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Arbeit innerlich loslassen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "auch am Wochenende arbeiten",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "früher am Abend schlafen gehen",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-gesundheit-lesen-artikel",
+      "kind": "image",
+      "title": "Article : « Schlaf ist kein Luxus »",
+      "alt": "Page de magazine intitulée « Schlaf ist kein Luxus » : pourquoi tant de gens dorment trop peu, et pourquoi ce n’est pas seulement un problème privé.",
+      "image": {
+        "layout": "article",
+        "kicker": "Gesundheit",
+        "title": "Schlaf ist kein Luxus",
+        "icon": "moon",
+        "lead": "Warum so viele Menschen zu wenig schlafen – und weshalb das nicht nur ein privates Problem ist",
+        "paragraphs": [
+          "Wer morgens in der U-Bahn in die Gesichter der Mitreisenden schaut, sieht selten ausgeschlafene Menschen. Das ist kein Zufall."
+        ]
+      }
+    },
+    {
+      "key": "b2-gesundheit-hoeren-audio",
+      "kind": "audio",
+      "title": "Émission de radio : le stress au travail",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Guten Tag und herzlich willkommen zu „Gesundheit heute“. Unser Thema: Stress im Beruf. Fast jeder kennt Tage, an denen einfach alles zu viel ist. Aber wann wird Stress gefährlich, und was kann man dagegen tun? Darüber spreche ich mit dem Arbeitspsychologen Doktor Volker Imhof. Guten Tag, Herr Imhof."
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Guten Tag, Frau Engelhard. Danke für die Einladung."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Herr Imhof, ist Stress eigentlich immer schlecht?"
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Nein, und das ist mir wichtig. Kurzfristiger Stress ist sogar nützlich. Vor einer Prüfung oder einem wichtigen Gespräch schüttet der Körper Hormone aus, sodass wir wacher und konzentrierter sind. Problematisch wird es erst, wenn der Stress zum Dauerzustand wird und die Erholungsphasen fehlen."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Woran merkt man denn, dass es zu viel wird?"
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Die ersten Warnsignale sind oft unspektakulär. Man schläft schlechter, ist gereizt und vergisst Dinge, die man früher nie vergessen hätte. Viele bekommen Kopf- oder Rückenschmerzen. Und typisch ist, dass man selbst am Wochenende nicht mehr abschalten kann. Wer schon am Sonntag Bauchschmerzen hat, weil er an den Montag denkt, sollte das ernst nehmen."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Sind bestimmte Berufe stärker betroffen als andere?"
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "In unseren Befragungen berichten vor allem Beschäftigte in der Pflege, in der Erziehung und im Kundenservice von hoher Belastung. Dort kommen viel Verantwortung und wenig Einfluss auf den eigenen Arbeitstag zusammen. Aber ehrlich gesagt: Auch im Büro hat der Druck zugenommen. Mit Smartphone und Laptop ist die Arbeit immer dabei."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Wir haben eine Hörerin am Telefon. Frau Ewert, Sie arbeiten als Krankenpflegerin. Wie erleben Sie das?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Nadja Ewert",
+          "text": "Ja, hallo. Also, bei uns auf der Station ist es seit zwei Jahren extrem. Es fehlen drei Kolleginnen, und die Stellen werden einfach nicht besetzt. Letzten Winter war ich so erschöpft, dass ich nach dem Dienst im Auto eingeschlafen bin, noch auf dem Parkplatz. Da habe ich gemerkt: So geht es nicht weiter."
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Das klingt nach einer sehr ernsten Situation. Sie dürften damals schon über Wochen zu wenig geschlafen haben."
+        },
+        {
+          "voice": "frau3",
+          "name": "Nadja Ewert",
+          "text": "Ja, bestimmt. Ich habe dann mit meiner Hausärztin gesprochen und meine Stunden reduziert, von hundert auf achtzig Prozent. Finanziell ist das nicht leicht, aber ich schlafe wieder."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Herr Imhof, was raten Sie Menschen wie Frau Ewert?"
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Zunächst einmal: Frau Ewert hat genau richtig gehandelt, indem sie früh Hilfe gesucht hat. Viele warten viel zu lange. Ansonsten gilt: Man baut Stress nicht ab, indem man am Wochenende alles nachholt. Wirksamer sind kleine, regelmäßige Pausen: fünf Minuten an der frischen Luft, bewusst langsam atmen, das Handy in der Mittagspause in der Tasche lassen."
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Und dann Bewegung. Schon dreimal pro Woche eine halbe Stunde zügiges Gehen senkt das Stressniveau messbar."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Aber ist das nicht ein bisschen zu einfach? Wenn auf der Station Personal fehlt, hilft auch kein Spaziergang."
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Da haben Sie völlig recht. Individuelle Tipps sind kein Ersatz für bessere Arbeitsbedingungen. Arbeitgeber können sehr viel tun, indem sie zum Beispiel realistische Dienstpläne machen und klare Regeln für die Erreichbarkeit einführen. In Betrieben, die das ernsthaft angehen, sinken die Krankmeldungen deutlich. Das muss also auch im Interesse der Unternehmen liegen."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Eine letzte Frage: Woran erkennt man, dass man professionelle Hilfe braucht?"
+        },
+        {
+          "voice": "mann",
+          "name": "Volker Imhof",
+          "text": "Wenn die Beschwerden länger als zwei bis drei Wochen anhalten, wenn man sich morgens nicht mehr aufraffen kann oder wenn Freunde sagen: Du bist nicht mehr du selbst. Dann sollte man mit der Hausärztin oder dem Hausarzt sprechen. Das ist keine Schwäche, sondern vernünftig."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ruth Engelhard",
+          "text": "Herzlichen Dank, Herr Imhof. Und Ihnen, Frau Ewert, alles Gute! Nach den Nachrichten geht es weiter mit dem Thema Ernährung im Schichtdienst."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-gesundheit-lesen2-karten",
+      "kind": "image",
+      "title": "Guide : où consulter ?",
+      "alt": "Quatre fiches : cabinet du médecin traitant, service de garde (116 117), urgences et appel au 112, pharmacie de garde.",
+      "image": {
+        "layout": "cards",
+        "cards": [
+          {
+            "title": "Hausarztpraxis",
+            "icon": "stethoscope",
+            "lines": [
+              "Erste Anlaufstelle bei fast allen Beschwerden",
+              "Überweist bei Bedarf an eine Fachpraxis"
+            ]
+          },
+          {
+            "title": "Bereitschaftsdienst 116 117",
+            "icon": "phone",
+            "lines": [
+              "Abends und am Wochenende",
+              "Wenn es nicht bis zum nächsten Werktag warten kann"
+            ]
+          },
+          {
+            "title": "Notruf 112",
+            "icon": "ambulance",
+            "lines": [
+              "Nur bei lebensbedrohlichen Notfällen",
+              "Atemnot, Brustschmerzen, schwerer Unfall"
+            ]
+          },
+          {
+            "title": "Apotheke",
+            "icon": "pill",
+            "lines": [
+              "Kostenlose Beratung bei kleineren Beschwerden",
+              "Notdienst: Aushang an jeder Apotheke"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-gesundheit-kontrolle-audio",
+      "kind": "audio",
+      "title": "Annonce interne : la journée santé",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Ansage",
+          "text": "Liebe Kolleginnen und Kollegen, am Donnerstag, dem zwölften März, findet unser Gesundheitstag statt. Von zehn bis fünfzehn Uhr können Sie sich im Erdgeschoss kostenlos beraten lassen: Es gibt einen Rückencheck, eine Ernährungsberatung und einen kurzen Vortrag zum Thema gesunder Schlaf."
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Ansage",
+          "text": "Der Vortrag beginnt um halb zwölf im großen Besprechungsraum. Bitte melden Sie sich bis Montag im Intranet an, denn die Plätze sind begrenzt. Die Teilnahme gilt selbstverständlich als Arbeitszeit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-gesundheit-einstieg-foto",
+      "kind": "image",
+      "title": "Un hamac au bord d’un lac",
+      "alt": "Un hamac rouge tendu entre deux pins au bord d’un lac, au milieu des rochers et de la bruyère, sous un ciel clair.",
+      "photo": {
+        "file": "libre/commons/gesundheit-haengematte.jpg"
+      },
+      "credit": "Jarle Hammen Knudsen (dubidubno), Wikimedia Commons",
+      "license": "CC BY 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Hammock_in_the_wild.jpg"
+    },
+    {
+      "key": "b2-gesundheit-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gesundheit: Stress, Schlaf und Erholung",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Schlafmangel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erschöpfung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Belastung, die Belastungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erholung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Warnsignal, die Warnsignale"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ursache, die Ursachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Folge, die Folgen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Schichtdienst"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Rhythmus, die Rhythmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abschalten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Stress abbauen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "unter Druck stehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erreichbar sein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachlassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich auswirken auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "leiden unter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vorbeugen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gereizt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausgeschlafen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umstritten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bereitschaftsdienst, die Bereitschaftsdienste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Notaufnahme, die Notaufnahmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "indem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sodass"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vermutlich"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

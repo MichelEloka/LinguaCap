@@ -1,9 +1,9 @@
 {
   "languageId": "de",
   "title": "Test de niveau d’allemand",
-  "description": "Ce test situe votre niveau de compréhension de l’allemand, du niveau A1 au niveau B1 du Cadre européen commun de référence pour les langues. Il avance par paliers : chaque palier compte 12 questions, 8 de lecture et 4 d’écoute. Vous passez au palier suivant si vous réussissez au moins deux tiers des questions, sans compétence très en retrait. Les consignes sont en français, les textes et les enregistrements en allemand. Si vous ne connaissez pas la réponse, choisissez « Je ne sais pas » plutôt que de répondre au hasard : votre résultat sera plus juste. Comptez de 10 à 25 minutes.",
+  "description": "Ce test situe votre niveau de compréhension de l’allemand, du niveau A1 au niveau B2 du Cadre européen commun de référence pour les langues. Il avance par paliers : chaque palier compte 12 questions, 8 de lecture et 4 d’écoute. Vous passez au palier suivant si vous réussissez au moins deux tiers des questions, sans compétence très en retrait. Les consignes sont en français, les textes et les enregistrements en allemand. Si vous ne connaissez pas la réponse, choisissez « Je ne sais pas » plutôt que de répondre au hasard : votre résultat sera plus juste. Comptez de 10 à 25 minutes.",
   "sources": [
-    "Contenu original LinguaCap, rédigé d’après les descripteurs du CECRL (A1, A2, B1) et les formats de tâches des examens Goethe-Zertifikat A1, A2 et B1 (lecture et écoute) ; aucun texte ni enregistrement n’est repris."
+    "Contenu original LinguaCap, rédigé d’après les descripteurs du CECRL (A1, A2, B1, B2) et les formats de tâches des examens Goethe-Zertifikat A1, A2, B1 et B2 (lecture et écoute) ; aucun texte ni enregistrement n’est repris."
   ],
   "tiers": [
     {
@@ -680,6 +680,231 @@
           "placements": [{ "media": "placement-b1-h06", "usage": "audio", "transcriptVisibility": "hidden" }]
         }
       ]
+    },
+    {
+      "code": "B2",
+      "title": "B2 · Avancé",
+      "passPercent": 67,
+      "minCompetencePercent": 34,
+      "drawCount": 12,
+      "questions": [
+        {
+          "id": "b2-l01",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez la forme qui convient.\n\nWenn du mich gestern angerufen ___, hätte ich dich vom Bahnhof abgeholt.",
+          "options": [
+            { "id": "a", "label": "hast", "correct": false },
+            { "id": "b", "label": "hättest", "correct": true },
+            { "id": "c", "label": "würdest", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l02",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez la forme qui convient.\n\nDas Problem hätte schon längst gelöst werden ___.",
+          "options": [
+            { "id": "a", "label": "müssen", "correct": true },
+            { "id": "b", "label": "gemusst", "correct": false },
+            { "id": "c", "label": "muss", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l03",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le mot qui convient.\n\n___ der großen Nachfrage bietet das Museum im Sommer zusätzliche Führungen an.",
+          "options": [
+            { "id": "a", "label": "Trotz", "correct": false },
+            { "id": "b", "label": "Anstatt", "correct": false },
+            { "id": "c", "label": "Aufgrund", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l04",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le mot qui convient.\n\nDie neue Regelung tritt am 1. Januar in ___.",
+          "options": [
+            { "id": "a", "label": "Betrieb", "correct": false },
+            { "id": "b", "label": "Kraft", "correct": true },
+            { "id": "c", "label": "Wirkung", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l05",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le mot qui convient.\n\nMan kann viel Energie sparen, ___ man die Heizung nachts herunterdreht.",
+          "options": [
+            { "id": "a", "label": "indem", "correct": true },
+            { "id": "b", "label": "sodass", "correct": false },
+            { "id": "c", "label": "damit", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l06",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Choisissez le verbe qui convient.\n\nDer Vorschlag der Geschäftsleitung ist bei den Beschäftigten auf große Ablehnung ___.",
+          "options": [
+            { "id": "a", "label": "getroffen", "correct": false },
+            { "id": "b", "label": "gefallen", "correct": false },
+            { "id": "c", "label": "gestoßen", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l07",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet extrait de blog, puis répondez.\n\nEin Wochenende ohne Smartphone – das war mein Plan. Schon am Samstagmorgen griff ich ständig in die leere Hosentasche, und beim Frühstück fehlte mir der Blick auf die Nachrichten mehr, als ich zugeben möchte. Am Nachmittag wurde es besser: Zum ersten Mal seit Monaten las ich ein Buch in einem Zug durch. Als ich am Sonntagabend das Gerät wieder einschaltete, warteten 43 neue Nachrichten auf mich. Keine einzige davon war so dringend, dass sie nicht bis Montag hätte warten können.\n\nQue constate l’auteur en rallumant son téléphone ?",
+          "options": [
+            { "id": "a", "label": "Qu’il a manqué une information importante pendant le week-end.", "correct": false },
+            { "id": "b", "label": "Qu’aucun des messages reçus n’était vraiment urgent.", "correct": true },
+            { "id": "c", "label": "Qu’il ne pourra jamais se passer de son téléphone.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l08",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet extrait d’article, puis répondez.\n\nWer sich regelmäßig ehrenamtlich engagiert, ist im Durchschnitt zufriedener mit seinem Leben. Das zeigt eine Langzeitstudie, für die über zehn Jahre hinweg mehr als 8 000 Menschen befragt wurden. Die Forschenden warnen allerdings davor, daraus voreilige Schlüsse zu ziehen: Es lasse sich nicht sagen, ob das Ehrenamt die Menschen zufriedener mache oder ob zufriedene Menschen sich einfach häufiger engagierten. Wahrscheinlich treffe beides zu.\n\nSur quoi les chercheurs insistent-ils ?",
+          "options": [
+            { "id": "a", "label": "Le bénévolat rend les gens plus heureux, c’est désormais prouvé.", "correct": false },
+            { "id": "b", "label": "Les personnes heureuses s’engagent moins souvent que les autres.", "correct": false },
+            { "id": "c", "label": "On ne sait pas ce qui est la cause et ce qui est l’effet.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l09",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet avis de la gérance, puis répondez.\n\nSehr geehrte Mieterinnen und Mieter,\nvom 3. März bis voraussichtlich Ende April wird die Fassade unseres Hauses gedämmt. In dieser Zeit ist das Gebäude eingerüstet. Bitte halten Sie Ihre Fenster geschlossen, solange an Ihrer Wohnung gearbeitet wird; für Schäden durch Staub kann keine Haftung übernommen werden. Die Balkone dürfen während der Arbeiten nicht betreten werden. Pflanzen und Möbel sind bis zum 1. März von den Balkonen zu entfernen, andernfalls werden sie auf Kosten der Mieter eingelagert.\nIhre Hausverwaltung\n\nQue risquent les locataires qui laissent leurs meubles sur le balcon après le 1er mars ?",
+          "options": [
+            { "id": "a", "label": "Ils devront payer leur stockage.", "correct": true },
+            { "id": "b", "label": "Ils perdront leur droit au balcon jusqu’à la fin des travaux.", "correct": false },
+            { "id": "c", "label": "Ils devront payer une amende à la gérance.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l10",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez ces trois avis publiés sur un forum, puis répondez.\n\nThema: Die Vier-Tage-Woche – Zukunft oder Illusion?\n\nSabine: In meinem Team arbeiten wir seit einem Jahr nur noch vier Tage, bei gleichem Gehalt. Wir sind ausgeruhter und machen weniger Fehler. Ich würde nie mehr zurückwollen.\n\nMarkus: Als Krankenpfleger kann ich darüber nur lachen. Kranke Menschen brauchen auch am fünften Tag Hilfe, und solange überall Personal fehlt, ist das für Berufe wie meinen schlicht nicht umsetzbar. In Büros mag das anders aussehen.\n\nYusuf: Ich habe es ausprobiert und bin zur Fünf-Tage-Woche zurückgekehrt. Die gleiche Arbeit in vier Tagen zu schaffen, hat mich mehr gestresst als vorher.\n\nQui pense que la semaine de quatre jours n’est réaliste que dans certains métiers ?",
+          "options": [
+            { "id": "a", "label": "Sabine", "correct": false },
+            { "id": "b", "label": "Markus", "correct": true },
+            { "id": "c", "label": "Yusuf", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l11",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez cet extrait d’une critique de film, puis répondez.\n\nDie Bilder sind überwältigend, die Hauptdarstellerin spielt mit großer Intensität – und doch verlässt man das Kino nach zweieinhalb Stunden seltsam unberührt. Das liegt weniger an der Länge des Films als an einem Drehbuch, das jede Gefühlsregung erklärt, statt sie zu zeigen. Wo ein Blick genügt hätte, folgt ein Monolog. So bleibt ein handwerklich beeindruckender Film, dem man seinen Ehrgeiz in jeder Szene anmerkt, dessen Figuren man aber selten glaubt.\n\nQuel est le principal reproche du critique ?",
+          "options": [
+            { "id": "a", "label": "Le scénario explique les émotions au lieu de les montrer.", "correct": true },
+            { "id": "b", "label": "Le film est beaucoup trop long.", "correct": false },
+            { "id": "c", "label": "L’actrice principale ne parvient pas à rendre son rôle crédible.", "correct": false }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-l12",
+          "competence": "lecture",
+          "moduleRef": null,
+          "prompt": "Lisez ce court article, puis répondez.\n\nFast zwei Drittel der Leserinnen und Leser, die an unserer Umfrage teilgenommen haben, halten es für sinnvoll, defekte Geräte reparieren zu lassen, statt sie zu ersetzen. Tatsächlich getan hat das im vergangenen Jahr allerdings nur jeder Fünfte. Als Hauptgrund nannten die Befragten die Kosten: Eine Reparatur sei oft kaum billiger als ein neues Gerät. Fast ebenso viele gaben an, gar nicht zu wissen, wo sie eine Werkstatt finden.\n\nQue montre l’enquête ?",
+          "options": [
+            { "id": "a", "label": "La plupart des lecteurs font déjà réparer leurs appareils.", "correct": false },
+            { "id": "b", "label": "Les réparations coûtent en général plus cher qu’un appareil neuf.", "correct": false },
+            { "id": "c", "label": "Beaucoup approuvent la réparation, mais peu la pratiquent.", "correct": true }
+          ],
+          "placements": []
+        },
+        {
+          "id": "b2-h01",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez cette information à la radio, puis répondez.\n\nPourquoi la limitation à 30 km/h ne s’applique-t-elle pas en journée ?",
+          "options": [
+            { "id": "a", "label": "Pour ne pas ralentir les bus et les livraisons.", "correct": true },
+            { "id": "b", "label": "Parce que les habitants ont voté contre cette mesure.", "correct": false },
+            { "id": "c", "label": "Parce qu’il y a moins de bruit pendant la journée.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b2-h01", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b2-h02",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez le message laissé sur la boîte vocale, puis répondez.\n\nQue doit faire Mme Scholz si elle ne peut pas venir à 11 h 30 ?",
+          "options": [
+            { "id": "a", "label": "Rappeler M. Lang demain matin.", "correct": false },
+            { "id": "b", "label": "Prévenir directement Mme Weber.", "correct": true },
+            { "id": "c", "label": "Envoyer le rapport par courriel.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b2-h02", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b2-h03",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez l’extrait d’une interview, puis répondez.\n\nQue conseille la chercheuse ?",
+          "options": [
+            { "id": "a", "label": "De s’ennuyer volontairement plusieurs heures par jour.", "correct": false },
+            { "id": "b", "label": "De ne pas occuper chaque moment libre avec son téléphone.", "correct": true },
+            { "id": "c", "label": "D’éviter les tâches monotones, qui rendent moins créatif.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b2-h03", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b2-h04",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez la conversation entre deux collègues, puis répondez.\n\nPourquoi Moritz vient-il au bureau le lundi ?",
+          "options": [
+            { "id": "a", "label": "Parce qu’en face à face, les gens disent ce qu’ils pensent.", "correct": true },
+            { "id": "b", "label": "Parce que sa cheffe exige qu’il soit présent ce jour-là.", "correct": false },
+            { "id": "c", "label": "Parce que le trajet est plus rapide en début de semaine.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b2-h04", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b2-h05",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez l’extrait d’une conférence, puis répondez.\n\nQue dit l’orateur des forêts d’épicéas d’Europe centrale ?",
+          "options": [
+            { "id": "a", "label": "Elles ont été plantées par l’homme pour leur bois.", "correct": true },
+            { "id": "b", "label": "Elles résistent particulièrement bien à la sécheresse.", "correct": false },
+            { "id": "c", "label": "Elles recouvraient naturellement une grande partie de l’Europe.", "correct": false }
+          ],
+          "placements": [{ "media": "placement-b2-h05", "usage": "audio", "transcriptVisibility": "hidden" }]
+        },
+        {
+          "id": "b2-h06",
+          "competence": "ecoute",
+          "moduleRef": null,
+          "prompt": "Écoutez l’extrait d’un débat à la radio, puis répondez.\n\nSur quel point les deux invités sont-ils d’accord ?",
+          "options": [
+            { "id": "a", "label": "Les musées devraient être gratuits tous les jours.", "correct": false },
+            { "id": "b", "label": "L’entrée gratuite coûte trop cher à la ville.", "correct": false },
+            { "id": "c", "label": "Il faut ouvrir la culture à un public plus large.", "correct": true }
+          ],
+          "placements": [{ "media": "placement-b2-h06", "usage": "audio", "transcriptVisibility": "hidden" }]
+        }
+      ]
     }
   ],
   "media": [
@@ -837,6 +1062,53 @@
         { "voice": "sprecherin", "text": "Liebe Kundinnen und Kunden, wegen Umbauarbeiten bleibt unsere Filiale in der Goethestraße vom ersten bis zum fünfzehnten März geschlossen." },
         { "voice": "sprecherin", "text": "In dieser Zeit können Sie Ihre Bestellungen in unserer Filiale am Hauptbahnhof abholen, die ab sofort auch sonntags von zehn bis achtzehn Uhr geöffnet hat. Online-Bestellungen liefern wir wie gewohnt nach Hause." },
         { "voice": "sprecherin", "text": "Ab dem sechzehnten März begrüßen wir Sie dann wieder in der Goethestraße, mit einem größeren Angebot und einer neuen Bäckerei." }
+      ]
+    },
+    {
+      "key": "placement-b2-h01", "kind": "audio", "title": "Test de niveau B2 · écoute 1 : nouvelle limitation de vitesse",
+      "script": [
+        { "voice": "sprecherin", "text": "Und nun eine Meldung aus der Stadt: Ab kommendem Montag gilt in der Innenstadt ein neues Tempolimit. Auf allen Hauptstraßen innerhalb des Rings darf nur noch dreißig Kilometer pro Stunde gefahren werden, allerdings nur nachts zwischen zweiundzwanzig und sechs Uhr." },
+        { "voice": "sprecherin", "text": "Ziel ist es, die Anwohner vor Lärm zu schützen. Tagsüber bleibt es bei Tempo fünfzig, damit Busse und Lieferverkehr nicht ausgebremst werden. Die Stadt will die Regel ein Jahr lang testen und dann gemeinsam mit den Anwohnern entscheiden, ob sie dauerhaft gilt." }
+      ]
+    },
+    {
+      "key": "placement-b2-h02", "kind": "audio", "title": "Test de niveau B2 · écoute 2 : réunion déplacée",
+      "script": [
+        { "voice": "mann", "name": "Herr Lang", "text": "Hallo, Frau Scholz, hier ist Peter Lang aus der Buchhaltung. Es geht um unsere Besprechung morgen um zehn. Frau Weber kommt erst gegen elf aus Hamburg zurück, und ohne sie können wir das Budget nicht beschließen. Wir treffen uns deshalb um halb zwölf, im selben Raum." },
+        { "voice": "mann", "name": "Herr Lang", "text": "Ach, und den Bericht müssen Sie nicht ausdrucken, ich schicke ihn heute Abend allen per E-Mail. Wenn Sie es um halb zwölf nicht schaffen, sagen Sie bitte direkt Frau Weber Bescheid. Ich selbst bin morgen Vormittag nicht erreichbar." }
+      ]
+    },
+    {
+      "key": "placement-b2-h03", "kind": "audio", "title": "Test de niveau B2 · écoute 3 : interview sur l’ennui",
+      "script": [
+        { "voice": "sprecher", "name": "Moderator", "text": "Frau Doktor Roth, Sie forschen zum Thema Langeweile. Ist Langeweile wirklich so schlimm, wie viele denken?" },
+        { "voice": "frau", "name": "Frau Roth", "text": "Im Gegenteil. Wer sich langweilt, sucht nach neuen Ideen. In unseren Versuchen waren Menschen, die vorher eine eintönige Aufgabe erledigen mussten, danach deutlich kreativer als die Vergleichsgruppe." },
+        { "voice": "sprecher", "name": "Moderator", "text": "Sollten wir uns also öfter langweilen?" },
+        { "voice": "frau", "name": "Frau Roth", "text": "Ich würde es so sagen: Wir sollten nicht jede freie Minute sofort mit dem Handy füllen. Die kurzen Momente, in denen nichts passiert, sind wertvoller, als wir glauben." }
+      ]
+    },
+    {
+      "key": "placement-b2-h04", "kind": "audio", "title": "Test de niveau B2 · écoute 4 : venir au bureau le lundi",
+      "script": [
+        { "voice": "frau", "name": "Kollegin", "text": "Sag mal, Moritz, warum kommst du eigentlich montags immer ins Büro? Du könntest doch die ganze Woche von zu Hause aus arbeiten." },
+        { "voice": "mann", "name": "Moritz", "text": "Könnte ich, ja. Aber montags ist die Teambesprechung, und die ist online einfach nicht dasselbe. Wenn man sich gegenübersitzt, sagen die Leute eher, was sie wirklich denken. Am Bildschirm schweigen alle, bis die Besprechung vorbei ist." },
+        { "voice": "frau", "name": "Kollegin", "text": "Und die lange Fahrt stört dich nicht?" },
+        { "voice": "mann", "name": "Moritz", "text": "Doch, schon. Aber einmal pro Woche nehme ich sie gern in Kauf." }
+      ]
+    },
+    {
+      "key": "placement-b2-h05", "kind": "audio", "title": "Test de niveau B2 · écoute 5 : conférence sur les forêts",
+      "script": [
+        { "voice": "sprecher", "name": "Referent", "text": "Wenn wir heute an Wälder in Mitteleuropa denken, stellen wir uns meist dichte Fichtenwälder vor. Doch diese Wälder sind keineswegs natürlich. Fichten wurden vor allem im neunzehnten Jahrhundert gepflanzt, weil sie schnell wachsen und gutes Bauholz liefern." },
+        { "voice": "sprecher", "name": "Referent", "text": "Ohne den Menschen wären große Teile Mitteleuropas von Buchenwäldern bedeckt. Heute zeigt sich, dass die Fichte mit trockenen Sommern schlecht zurechtkommt. Viele Forstbetriebe pflanzen deshalb wieder Mischwälder, die widerstandsfähiger sind, auch wenn sie erst in Jahrzehnten Holz liefern." }
+      ]
+    },
+    {
+      "key": "placement-b2-h06", "kind": "audio", "title": "Test de niveau B2 · écoute 6 : débat sur l’entrée gratuite des musées",
+      "script": [
+        { "voice": "sprecherin", "name": "Moderatorin", "text": "Sollten Museen keinen Eintritt mehr verlangen? Darüber diskutieren heute ein Museumsdirektor und eine Stadträtin." },
+        { "voice": "mann", "name": "Museumsdirektor", "text": "Ich bin klar dafür. Seit unser Haus sonntags kostenlos ist, kommen viel mehr Familien und junge Leute, die vorher nie im Museum waren. Kultur darf keine Frage des Geldbeutels sein." },
+        { "voice": "frau", "name": "Stadträtin", "text": "Dass mehr Menschen kommen, bestreite ich gar nicht, und das Ziel teile ich. Aber jemand muss die Ausstellungen bezahlen. Fällt der Eintritt weg, fehlt das Geld am Ende bei den Bibliotheken oder Musikschulen. Ich wäre eher für freie Tage für bestimmte Gruppen, etwa für Schulklassen." }
       ]
     }
   ]

@@ -1,0 +1,1613 @@
+{
+  "id": "b2-kultur-atelier",
+  "title": "Kultur – Werkstatt: Werke vorstellen und bewerten",
+  "objective": "Écrire une critique structurée et nuancée, présenter oralement une œuvre, réagir aux avis d’un cercle de lecture, présenter en allemand un film d’après une critique française et s’entraîner à comprendre une critique et une interview d’artiste.",
+  "prerequisites": [
+    "b2-kultur"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap (œuvres, artistes et personnages fictifs)."
+  ],
+  "layer": "content/b/source/b2/b2-kultur-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "im-mittelpunkt-steht",
+      "word": "Im Mittelpunkt steht …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Au centre (de l’histoire), il y a…",
+      "example": "Im Mittelpunkt steht ein zwölfjähriges Mädchen.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "die-handlung-spielt-in",
+      "word": "Die Handlung spielt in …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "L’action se déroule à / dans…",
+      "example": "Die Handlung spielt in einem Dorf an der Küste.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "besonders-gelungen-ist",
+      "word": "Besonders gelungen ist …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ce qui est particulièrement réussi, c’est…",
+      "example": "Besonders gelungen ist die Kameraarbeit.",
+      "note": "gelungen : réussi",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "ueberzeugen-durch",
+      "word": "überzeugen durch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "convaincre par",
+      "example": "Die Hauptdarstellerin überzeugt durch ihr natürliches Spiel.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "weniger-ueberzeugend-ist-dagegen",
+      "word": "Weniger überzeugend ist dagegen …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Moins convaincant, en revanche, est…",
+      "example": "Weniger überzeugend ist dagegen das Drehbuch.",
+      "note": "pour nuancer après un éloge",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "trotz-dieser-schwaechen",
+      "word": "Trotz dieser Schwächen …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Malgré ces faiblesses…",
+      "example": "Trotz dieser Schwächen ist der Film sehenswert.",
+      "note": "trotz + génitif",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "sehenswert",
+      "word": "sehenswert",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "qui vaut la peine d’être vu",
+      "example": "Die Ausstellung ist absolut sehenswert.",
+      "note": "aussi : lesenswert, hörenswert",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "sich-etwas-nicht-entgehen-lassen",
+      "word": "sich etwas nicht entgehen lassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "ne pas manquer quelque chose",
+      "example": "Wer ruhige Filme mag, sollte sich diesen Film nicht entgehen lassen.",
+      "note": "sich (datif)",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "drehbuch",
+      "word": "Drehbuch",
+      "article": "das",
+      "plural": "Drehbücher",
+      "partOfSpeech": "noun",
+      "translation": "le scénario",
+      "example": "Das Drehbuch hat in der zweiten Hälfte Schwächen.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "kameraarbeit",
+      "word": "Kameraarbeit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le travail de la caméra, la photographie (d’un film)",
+      "example": "Die Kameraarbeit ist das Beste an diesem Film.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "untertitel",
+      "word": "Untertitel",
+      "article": "der",
+      "plural": "Untertitel",
+      "partOfSpeech": "noun",
+      "translation": "le sous-titre",
+      "example": "Der Film läuft im Original mit Untertiteln.",
+      "note": "im Original mit Untertiteln (OmU) : en VOST",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "ausstellung",
+      "word": "Ausstellung",
+      "article": "die",
+      "plural": "Ausstellungen",
+      "partOfSpeech": "noun",
+      "translation": "l’exposition",
+      "example": "Die Ausstellung läuft noch bis zum 15. März.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "eindringlich",
+      "word": "eindringlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "saisissant, pénétrant",
+      "example": "Gerade ihre Zurückhaltung macht die Bilder so eindringlich.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "sich-lohnen",
+      "word": "sich lohnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "valoir la peine",
+      "example": "Der Film lohnt sich, auch wenn das Ende schwach ist.",
+      "note": "es lohnt sich, … zu …",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "jemanden-praegen",
+      "word": "jemanden prägen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "marquer quelqu’un (durablement)",
+      "example": "Manche Bücher können einen Menschen ein Leben lang prägen.",
+      "note": "die Prägung",
+      "audio": {
+        "media": "b2-kultur-atelier-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-kultur-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: eine Filmkritik und eine mündliche Werkvorstellung",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: eine Filmkritik und eine mündliche Werkvorstellung",
+        "description": "MODELL 1: EINE FILMKRITIK\nLesen Sie die Kritik aus einem Kulturblog. Achten Sie darauf, wie die Autorin informiert, bewertet und einschränkt. [fr?] Lisez la critique d’un blog culturel ; observez comment l’autrice informe, évalue et nuance.\n\nWENN DAS LICHT AUSGEHT – „SOMMER OHNE STROM“ VON SANNA RITTER\nWas passiert, wenn in einem Dorf eine Woche lang der Strom ausfällt? Diese Frage stellt die Regisseurin Sanna Ritter in ihrem zweiten Spielfilm „Sommer ohne Strom“, der seit Kurzem in den Kinos läuft.\nIm Mittelpunkt steht die zwölfjährige Lotta, die mit ihrer Mutter gerade erst aufs Land gezogen ist. Als nach einem Unwetter alle Leitungen unterbrochen sind, muss das ganze Dorf improvisieren: Man kocht gemeinsam auf dem Dorfplatz, teilt das Wasser und erzählt sich abends Geschichten. Lotta, die bisher nur über ihr Handy mit der Welt verbunden war, entdeckt dabei ihre Nachbarn.\nBesonders gelungen ist die Kameraarbeit: Die Nachtszenen, nur von Kerzen und Taschenlampen beleuchtet, gehören zu den schönsten Bildern dieses Kinojahres. Auch die junge Hauptdarstellerin überzeugt durch ihr natürliches Spiel. Weniger überzeugend ist dagegen das Drehbuch in der zweiten Hälfte: Die Konflikte zwischen den Dorfbewohnern lösen sich zu schnell auf, und manche Figuren bleiben blass.\nTrotz dieser Schwächen ist „Sommer ohne Strom“ ein warmherziger Film, der zum Nachdenken darüber anregt, was wir wirklich brauchen. Wer ruhige Filme mag, sollte ihn sich nicht entgehen lassen, am besten auf der großen Leinwand.\n\nAUFBAU\n1. Einleitung: Titel, Gattung, Regie oder Autor und ein Aufhänger, zum Beispiel eine Frage. [fr?] Introduction : titre, genre, auteur et une accroche.\n2. Inhalt: kurz, im Präsens, ohne das Ende zu verraten. [fr?] Résumé bref, au présent, sans dévoiler la fin.\n3. Bewertung: Stärken mit konkreten Beispielen. [fr?] Points forts avec des exemples.\n4. Einschränkung: Schwächen sachlich nennen. [fr?] Points faibles, formulés avec mesure.\n5. Fazit und Empfehlung: Für wen lohnt sich das Werk? [fr?] Conclusion et recommandation : pour qui ?\n\nVORSTELLEN\n• … erzählt von … · Im Mittelpunkt steht … · Die Handlung spielt in …\nBEWERTEN\n• Besonders gelungen ist … · … überzeugt durch … · … gehört zu den schönsten …\nEINSCHRÄNKEN\n• Weniger überzeugend ist dagegen … · Ein kleiner Schwachpunkt ist … · Trotz dieser Schwächen …\nEMPFEHLEN\n• Wer … mag, sollte sich … nicht entgehen lassen. · … ist sehenswert / lesenswert / hörenswert.\n\nMODELL 2: EIN WERK MÜNDLICH VORSTELLEN\nHören Sie, wie Malik ein Album vorstellt, das ihn geprägt hat. Sein Vortrag folgt fünf Schritten: Werk und persönlicher Anlass, Inhalt und Besonderheit, persönliche Bedeutung, ein Kritikpunkt, Empfehlung. [fr?] Écoutez Malik présenter un album qui l’a marqué : œuvre et occasion, contenu, sens personnel, réserve, recommandation.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-atelier-modell-audio",
+          "caption": "Malik stellt ein Album vor",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-kultur-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: im Lesekreis Meinungen begegnen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: im Lesekreis Meinungen begegnen",
+        "description": "Hören Sie das Argument. Welche Reaktion passt am besten? [fr?] Écoutez l’argument. Quelle réaction convient le mieux ?\n\nSITUATION\nIm Lesekreis der Stadtbibliothek sprechen die Mitglieder über den Roman „Nachtfähre“ und seine Verfilmung. Vier Personen äußern sich. [fr?] Au cercle de lecture de la bibliothèque, quatre personnes donnent leur avis sur un roman et son adaptation.\nHören Sie jede Äußerung und wählen Sie die Reaktion, die zur genannten Absicht passt. Sprechen Sie danach die vier Reaktionen laut nach. [fr?] Écoutez chaque avis, choisissez la réaction qui correspond à l’intention indiquée, puis répétez les quatre réactions.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-atelier-diskussion-a1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-a2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-a3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-a4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Äußerung 1: Sie sehen das anders. Wie widersprechen Sie mit einer Begründung? [fr?] Vous n’êtes pas d’accord : comment contredire en justifiant ?",
+          "explanation": "„Das sehe ich anders“ widerspricht höflich, und der Doppelpunkt kündigt die Begründung an: Die ruhigen Kapitel haben eine Funktion. Die erste Antwort greift die Person an, statt zu argumentieren; die zweite stimmt zu; die vierte beendet die Diskussion. [fr?] Contredire poliment et justifier ; ne pas attaquer la personne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Langweilig? Dann hast du das Buch wohl gar nicht richtig bis zum Ende gelesen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Stimmt, nach zwanzig Seiten habe ich es auch weggelegt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das sehe ich anders: Gerade die ruhigen Kapitel bereiten das Ende vor.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Über Geschmack lässt sich nicht streiten, also lassen wir das.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Äußerung 2: Sie möchten die Verallgemeinerung relativieren. Was sagen Sie? [fr?] Vous voulez nuancer cette généralisation. Que dites-vous ?",
+          "explanation": "Gegen „grundsätzlich“ und „einfach so“ hilft ein Gegenbeispiel: „Nicht immer: Manche Filme …“. So zeigt man, dass die Regel nicht für alle Fälle gilt. Die letzte Antwort ersetzt eine Verallgemeinerung nur durch eine andere. [fr?] Relativiser une généralisation par un contre-exemple (« Nicht immer: … »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nicht immer: Manche Filme machen aus einer schwachen Vorlage etwas Besonderes.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Genau, deshalb gehe ich grundsätzlich nie mehr ins Kino, wenn ich das Buch kenne.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist eine Frechheit, so etwas darf man über Filme wirklich nicht sagen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Bücher sind doch immer und ohne Ausnahme schlechter als ihre Verfilmungen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Äußerung 3: Sie verstehen den Gedanken, haben aber einen Einwand. Was sagen Sie? [fr?] Vous comprenez l’idée mais avez une objection. Que dites-vous ?",
+          "explanation": "„Ich verstehe den Gedanken“ erkennt die Sorge um das Geld an, „aber …“ bringt den Einwand mit einem Argument: Theater ist ein Ort der Begegnung, gerade in schweren Zeiten. Die dritte Antwort ist ein persönlicher Angriff, die erste und die vierte bringen keinen Einwand. [fr?] Reconnaître l’idée, puis objecter avec un argument.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, ein Theater braucht heute wirklich niemand mehr, da gebe ich Ihnen völlig recht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich verstehe den Gedanken, aber gerade in Krisen braucht man Orte der Begegnung.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie haben ja keine Ahnung von Kultur, das merkt man sofort an Ihren Worten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ob die Stadt spart oder nicht, ist mir eigentlich egal.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Äußerung 4: Benno hat das Ende nicht verstanden. Wie erklären Sie es vorsichtig? [fr?] Benno n’a pas compris la fin. Comment l’expliquer avec prudence ?",
+          "explanation": "Die Antwort unterscheidet Film und Buch und formuliert eine Deutung vorsichtig mit „wohl“: Es ist eine Vermutung über die Absicht der Autorin. Die erste Antwort ist herablassend, die zweite hilft nicht, und die vierte erfindet ein Ende, das es nicht gibt. [fr?] Expliquer avec prudence : distinguer film et livre, supposer avec « wohl ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch ganz klar, das hätte wirklich jeder beim ersten Lesen sofort verstanden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Keine Ahnung, das Ende habe ich auch nicht mehr gelesen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Im Film schon, im Buch bleibt es offen. Die Autorin will wohl, dass wir selbst entscheiden.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Nein, sie sterben am Ende beide auf der Fähre, das steht ganz deutlich auf der letzten Seite.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Das sehe ich anders: Gerade die ruhigen Kapitel bereiten das Ende vor.",
+          "accept": [
+            "Das sehe ich anders: Gerade die ruhigen Kapitel bereiten das Ende vor."
+          ],
+          "explanation": "Betonen Sie „anders“ und „ruhigen“. Nach dem Doppelpunkt eine kurze Pause. „Kapitel“ wird auf der zweiten Silbe betont: ka-PI-tel. [fr?] Accentuez anders et ruhigen ; accent sur -PI- dans Kapitel.",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Nicht immer: Manche Filme machen aus einer schwachen Vorlage etwas Besonderes.",
+          "accept": [
+            "Nicht immer: Manche Filme machen aus einer schwachen Vorlage etwas Besonderes."
+          ],
+          "explanation": "„Nicht immer“ trägt den Kontrast: Betonen Sie „immer“. In „Besonderes“ liegt der Akzent auf der zweiten Silbe: be-SON-de-res. [fr?] Accentuez immer ; accent sur -SON- dans Besonderes.",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Ich verstehe den Gedanken, aber gerade in Krisen braucht man Orte der Begegnung.",
+          "accept": [
+            "Ich verstehe den Gedanken, aber gerade in Krisen braucht man Orte der Begegnung."
+          ],
+          "explanation": "Nach „Gedanken“ steigt die Stimme leicht, nach dem Komma kommt der Einwand. „Begegnung“ wird auf der zweiten Silbe betont: be-GEG-nung. [fr?] Légère montée avant la virgule ; accent sur -GEG- dans Begegnung.",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Im Film schon, im Buch bleibt es offen. Die Autorin will wohl, dass wir selbst entscheiden.",
+          "accept": [
+            "Im Film schon, im Buch bleibt es offen. Die Autorin will wohl, dass wir selbst entscheiden."
+          ],
+          "explanation": "Die Modalpartikel „wohl“ bleibt unbetont. Betont sind „Film“, „Buch“ und „selbst“. „Autorin“ trägt den Akzent auf der zweiten Silbe: au-TO-rin. [fr?] wohl reste inaccentué ; accent sur Film, Buch, selbst et -TO- dans Autorin.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: einen Film nach einer französischen Kritik vorstellen",
+      "estimatedMinutes": 16,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: einen Film nach einer französischen Kritik vorstellen",
+        "description": "SITUATION\nIhr Freund Clemens spricht kein gutes Französisch. Er möchte wissen, ob sich der Film „Les Jours de sel“ für ihn lohnt. Sie haben eine französische Kritik gefunden und antworten ihm auf Deutsch. [fr?] Votre ami Clemens veut savoir si le film vaut la peine pour lui ; vous lui répondez en allemand d’après une critique française.\n\nDIE KRITIK (AUF FRANZÖSISCH)\n« Les Jours de sel » : la douceur d’un été dans les marais\nPour son premier long métrage, Camille Roussel suit pendant un été une famille de paludiers de la côte atlantique, qui récolte le sel comme leurs ancêtres. Le père, fatigué, veut vendre l’exploitation ; sa fille Jeanne, vingt ans, rêve de la reprendre. Peu de dialogues, beaucoup de lumière : la caméra prend le temps de filmer les gestes, le vent, la mer. Les deux acteurs principaux sont remarquables, en particulier la jeune Salomé Kerbrat. On regrettera une fin un peu précipitée et une musique parfois envahissante. Mais ce film lumineux et sans violence, qui parle de transmission entre générations, mérite largement le déplacement. Durée : 1 h 42. En version originale sous-titrée.\n\nLesen Sie die Kritik und die Nachricht von Clemens. Machen Sie zuerst Notizen auf Deutsch, wählen Sie dann aus, was für Clemens wichtig ist, und formulieren Sie Ihre Antwort. [fr?] Lisez la critique et le message de Clemens ; prenez des notes en allemand, choisissez ce qui compte pour lui, puis rédigez votre réponse.\n\nTIPP\nBei einer Sprachmittlung übersetzt man nicht Wort für Wort. Man gibt das Wichtigste sinngemäß wieder, und zwar das, was die Person wirklich wissen will. [fr?] En médiation, on ne traduit pas mot à mot : on transmet le sens de ce qui intéresse la personne.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-atelier-mediation-nachricht",
+          "caption": "Die Nachricht von Clemens",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Machen Sie Notizen auf Deutsch. [fr?] Prenez des notes en allemand.",
+          "text": "Film „Les Jours de sel“, erster Spielfilm von Camille Roussel · Familie an der Atlantikküste, die [[1]] gewinnt · der Vater will verkaufen, die Tochter will den Betrieb [[2]] · Stärken: wenig Dialoge, schöne Bilder, sehr gute [[3]] · Schwächen: das Ende kommt zu [[4]], die Musik ist manchmal aufdringlich · Länge: 1 Stunde [[5]] Minuten · Fassung: im Original mit [[6]]",
+          "explanation": "« des paludiers … qui récolte le sel »: Die Familie gewinnt Salz. « reprendre l’exploitation » heißt hier „den Betrieb übernehmen“. « Les deux acteurs principaux sont remarquables » betrifft die Schauspieler. « une fin un peu précipitée »: ein Ende, das zu schnell kommt. « version originale sous-titrée »: im Original mit Untertiteln. [fr?] Repérez l’essentiel en français et notez-le en allemand, sans traduire mot à mot.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Salz"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "übernehmen",
+                "weiterführen",
+                "fortführen"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Schauspieler",
+                "Darsteller",
+                "Hauptdarsteller",
+                "Schauspielerinnen und Schauspieler"
+              ],
+              "size": 30,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "schnell",
+                "plötzlich",
+                "abrupt",
+                "überstürzt"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "42",
+                "zweiundvierzig"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Untertiteln"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Informationen beantworten die drei Fragen von Clemens? [fr?] Quelles informations répondent aux trois questions de Clemens ?",
+          "explanation": "Clemens nennt drei Kriterien: keine brutalen Filme, keine zu langen Filme, Untertitel. Die Kritik beantwortet alle drei: « sans violence », 1 Stunde 42 Minuten, « version originale sous-titrée ». Die anderen Informationen sind interessant, aber für seine Entscheidung zweitrangig. [fr?] Les trois critères de Clemens : violence, durée, sous-titres ; la critique répond aux trois.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der erste Film der Regisseurin, schöne Bilder, wenig Dialoge",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ohne Gewalt, nicht zu lang, im Original mit Untertiteln",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "die Familie, die Atlantikküste, das Thema der Generationen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die junge Schauspielerin, die Musik, das zu schnelle Ende",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Welche deutsche Formulierung passt? [fr?] Quelle formulation allemande convient ?",
+          "explanation": "Eine Sprachmittlung sucht die übliche deutsche Wendung, nicht die wörtliche Übersetzung: Ein « long métrage » ist ein Spielfilm, « mériter le déplacement » heißt im Deutschen „sich lohnen“, und die Originalfassung mit Untertiteln kürzt man oft „OmU“ ab. [fr?] Chercher l’expression allemande usuelle plutôt que le calque.",
+          "pairs": [
+            {
+              "left": "« premier long métrage »",
+              "right": "erster Spielfilm"
+            },
+            {
+              "left": "« une fin un peu précipitée »",
+              "right": "ein etwas überstürztes Ende"
+            },
+            {
+              "left": "« mérite largement le déplacement »",
+              "right": "lohnt sich auf jeden Fall"
+            },
+            {
+              "left": "« en version originale sous-titrée »",
+              "right": "im Original mit Untertiteln"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Formulieren Sie Ihre Empfehlung für Clemens. [fr?] Formulez votre recommandation pour Clemens.",
+          "answers": [
+            [
+              "Ich",
+              "würde",
+              "dir",
+              "den Film",
+              "auf jeden Fall",
+              "empfehlen,",
+              "weil",
+              "er",
+              "ganz ohne Gewalt",
+              "auskommt."
+            ],
+            [
+              "Ich",
+              "würde",
+              "dir",
+              "auf jeden Fall",
+              "den Film",
+              "empfehlen,",
+              "weil",
+              "er",
+              "ganz ohne Gewalt",
+              "auskommt."
+            ]
+          ],
+          "explanation": "Im Hauptsatz stehen im Mittelfeld zuerst das Pronomen „dir“, dann das Objekt und die Angabe, der Infinitiv „empfehlen“ am Ende. Nach „weil“ steht das konjugierte Verb „auskommt“ am Ende des Nebensatzes. „Ohne etwas auskommen“ heißt: etwas nicht brauchen. [fr?] Pronom en tête du Mittelfeld, infinitif à la fin ; verbe conjugué en fin de subordonnée après weil."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Antwort an Clemens. [fr?] Complétez votre réponse à Clemens.",
+          "text": "Hallo Clemens, „Les Jours de sel“ ist der erste Film von Camille Roussel. Er [[1]] von einer Familie an der Atlantikküste, die Salz gewinnt. Die Kritik lobt vor allem die Bilder und die Schauspieler, nur das Ende sei etwas [[2]]. Brutal ist er überhaupt nicht, und er dauert nur 1 Stunde 42. Und keine Sorge wegen der Sprache: Er läuft mit [[3]]. Ich finde, der Film [[4]] sich!",
+          "explanation": "„Handeln von“ oder „erzählen von“ nennt das Thema. „Das Ende sei etwas überstürzt“: Mit dem Konjunktiv I zeigt man, dass man die Meinung der Kritik wiedergibt. „Sich lohnen“ ist reflexiv: Der Film lohnt sich. [fr?] handeln / erzählen von ; Konjunktiv I pour rapporter l’avis de la critique ; sich lohnen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "handelt",
+                "erzählt"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "überstürzt",
+                "schnell",
+                "abrupt",
+                "plötzlich"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Untertiteln"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "lohnt"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler in Kritiken",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler in Kritiken",
+        "description": "Diese Sätze stammen aus Kritiken von Kursteilnehmenden. Finden Sie die richtige Form. [fr?] Ces phrases viennent de critiques d’apprenants ; trouvez la forme correcte.\n\nKORREKTURZEICHEN\nG Grammatik · W Wortschatz · St Satzstellung · R Rechtschreibung · A Ausdruck und Register. [fr?] Codes de correction : grammaire, vocabulaire, place des mots, orthographe, registre.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "Bei „gefallen“ ist das Werk das Subjekt und die Person steht im Dativ: Der Film gefällt mir. Das ist umgekehrt wie im Französischen, wo die Person das Subjekt ist. Mit der Person als Subjekt kann man sagen: Ich mochte den Film. / Ich fand den Film sehr gut. [fr?] gefallen : l’œuvre est sujet, la personne au datif (Der Film hat mir gefallen).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe den Film sehr gut gefallen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Film hat mich sehr gut gefallen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Film hat mir sehr gut gefallen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Ich habe dem Film sehr gut gefallen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "W: Welches Wort passt? „Die … des Films ist spannend und gut durchdacht.“ [fr?] W : quel mot convient ?",
+          "explanation": "Der Ablauf der Ereignisse in einem Film oder Buch heißt „die Handlung“. „Die Intrige“ ist ein falscher Freund: Im Deutschen bedeutet es ein heimliches Komplott gegen jemanden. „Die Aktion“ ist eine Unternehmung, und „die Aufführung“ sagt man beim Theater oder Konzert, nicht für den Inhalt. [fr?] Faux ami : l’intrigue d’un film = die Handlung ; die Intrige = une machination.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Intrige",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Aktion",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Aufführung",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Handlung",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "St: Ergänzen Sie die Pronomen in der richtigen Reihenfolge. [fr?] St : complétez avec les pronoms dans le bon ordre.",
+          "text": "Hast du den Roman schon gelesen? – Ja, meine Schwester hat [[1]] [[2]] letzte Woche geliehen.",
+          "explanation": "Zwei Pronomen im Mittelfeld: Akkusativ vor Dativ, also „ihn mir“ (den Roman mir). Im Französischen steht das Pronomen der Person zuerst; deshalb ist „mir ihn“ ein typischer Fehler. [fr?] Deux pronoms : accusatif puis datif (ihn mir), à l’inverse du français « elle me l’a prêté ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ihn"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "mir"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "A: Welcher Satz passt am besten in eine geschriebene Kritik? [fr?] A : quelle phrase convient le mieux à une critique écrite ?",
+          "explanation": "In einer geschriebenen Kritik bewertet man präzise und sachlich: „wirkt etwas konstruiert“ nennt die Schwäche genau, „leider“ und „etwas“ machen sie milder. Modalpartikeln wie „halt“ und Umgangssprache wie „voll“, „doof“ oder „Mist“ gehören ins Gespräch, nicht in den Text. [fr?] Écrit : évaluation précise et mesurée ; pas de particules ni de familiarités.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Ende ist halt irgendwie total doof gemacht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Ende wirkt leider etwas konstruiert.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das Ende hat echt voll genervt, ehrlich.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das Ende ist doch Mist, oder nicht?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr?] St : quelle phrase est correcte ?",
+          "explanation": "Satznegation: „nicht“ steht nach dem Pronomen „mich“ und direkt vor dem Partizip „überzeugt“. „Nicht mich“ würde nur die Person verneinen (nicht mich, sondern andere). Die französische Stellung « ne … pas » direkt beim konjugierten Verb gibt es im Deutschen nicht. [fr?] Négation de phrase : après le pronom, juste avant le participe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Musik hat nicht mich überzeugt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Musik nicht hat mich überzeugt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Musik hat mich überzeugt nicht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Musik hat mich nicht überzeugt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie „Ersterer“ oder „Letztere“. [fr?] G : complétez avec Ersterer ou Letztere.",
+          "text": "Im Film spielen ein Vater und eine Tochter die Hauptrollen. [[1]] will den Betrieb verkaufen, [[2]] will ihn übernehmen.",
+          "explanation": "„Ersterer“ meint den zuerst Genannten, den Vater (maskulin: -er). „Letztere“ meint die zuletzt Genannte, die Tochter (feminin: -e). Die Endung richtet sich nach dem Bezugswort, wie bei einem Adjektiv ohne Artikel. [fr?] Ersterer (le père, masculin), Letztere (la fille, féminin).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Ersterer"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Letztere"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-kultur-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: eine Kritik lesen, ein Interview hören",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: eine Kritik lesen, ein Interview hören",
+        "description": "PRÜFUNGSTRAINING LESEN UND HÖREN\nTeil 1: Lesen Sie die Ausstellungskritik und beantworten Sie die Fragen 1 bis 4. Teil 2: Hören Sie das Interview mit der Fotografin zweimal und beantworten Sie die Fragen 5 bis 8. [fr?] Partie 1 : lisez la critique et répondez aux questions 1 à 4. Partie 2 : écoutez deux fois l’interview et répondez aux questions 5 à 8.\n\nZEIT\nTeil 1: etwa 8 Minuten. Teil 2: etwa 10 Minuten. Arbeiten Sie ohne Wörterbuch. [fr?] Partie 1 : environ 8 minutes ; partie 2 : environ 10 minutes ; sans dictionnaire.\n\nSTRATEGIE\nLesen Sie vor dem Hören alle Fragen zu Teil 2 und markieren Sie im Kopf die Schlüsselwörter. In Interviews wiederholt die Person die Frage selten wörtlich: Achten Sie auf Synonyme. [fr?] Lisez les questions avant d’écouter ; dans une interview, cherchez les synonymes plutôt que les mots identiques.\n\nTEIL 1 · „SPUREN IM SAND“: EDDA HOLM FOTOGRAFIERT DAS VERSCHWINDEN\nWas bleibt von einer Küste, die jedes Jahr ein paar Meter verliert? Die Fotografin Edda Holm ist dieser Frage drei Jahre lang nachgegangen. Das Ergebnis ist jetzt im Kunstverein Wendelstedt zu sehen: 46 großformatige Schwarz-Weiß-Aufnahmen von der Nordseeküste, dazu kurze Texte von Menschen, die dort leben.\nHolm zeigt keine Postkartenmotive. Ihre Bilder sind leer, fast streng: eine Treppe, die im Nichts endet, ein Zaun, den die Flut halb weggerissen hat, Fußspuren, die das Wasser gleich auslöschen wird. Gerade diese Zurückhaltung macht die Ausstellung so eindringlich. Man braucht keine Statistik, um zu verstehen, was hier passiert.\nNicht ganz überzeugen kann dagegen die Hängung. Im zweiten Raum hängen die Bilder so dicht, dass sie sich gegenseitig die Wirkung nehmen. Und die Texte der Bewohnerinnen und Bewohner, die eigentlich zu den stärksten Teilen der Ausstellung gehören, stehen klein und schlecht beleuchtet neben den Türen. Wer sie lesen will, muss sich bücken.\nTrotzdem: „Spuren im Sand“ ist eine der wichtigsten Ausstellungen dieses Jahres. Sie läuft noch bis zum 15. März, dienstags bis sonntags von 11 bis 18 Uhr. Der Eintritt ist frei; jeden Sonntag um 15 Uhr gibt es eine Führung.\n\nTEIL 2 · INTERVIEW MIT EDDA HOLM\nEin Moderator des Kulturradios spricht mit der Fotografin über ihre Arbeit. [fr?] Un animateur de radio culturelle interroge la photographe sur son travail.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-atelier-pruefung-rezension",
+          "caption": "Ausstellungskritik: Spuren im Sand",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-atelier-pruefung-interview",
+          "caption": "Interview mit Edda Holm",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Teil 1: Wie beurteilt der Text die Ausstellung insgesamt? [fr?] Partie 1 : comment le texte juge-t-il l’exposition dans l’ensemble ?",
+          "explanation": "Die Kritik lobt die Bilder („so eindringlich“) und nennt die Ausstellung „eine der wichtigsten dieses Jahres“. Sie schränkt aber ein: Die Hängung und die Präsentation der Texte überzeugen nicht. Typisch für eine Rezension: positive Gesamtbewertung mit Einschränkung. [fr?] Jugement très positif, avec des réserves sur l’accrochage et la présentation des textes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "sehr positiv, mit Kritik an der Präsentation",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "überwiegend negativ, nur die Texte der Bewohner sind gut",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "neutral, ohne eigene Bewertung",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "begeistert, ohne jede Einschränkung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Teil 1: Was ist laut Text das Besondere an Holms Bildern? [fr?] Partie 1 : qu’ont de particulier les photos de Holm ?",
+          "explanation": "„Holm zeigt keine Postkartenmotive. Ihre Bilder sind leer, fast streng“, und „gerade diese Zurückhaltung macht die Ausstellung so eindringlich“. Die Bilder sind schwarz-weiß, und Statistiken braucht man laut Text gerade nicht. [fr?] Images sobres, sans « cartes postales » : c’est cette retenue qui frappe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie zeigen die Küste in leuchtenden Farben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sind zurückhaltend und zeigen keine schönen Ansichten.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie werden von genauen Statistiken zum Meeresspiegel begleitet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie zeigen vor allem Menschen bei der Arbeit.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Der Text hält die Texte der Bewohnerinnen und Bewohner für schwach.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: Die Texte „gehören eigentlich zu den stärksten Teilen der Ausstellung“. Kritisiert wird nur, wie sie präsentiert werden: klein, schlecht beleuchtet, neben den Türen. Unterscheiden Sie zwischen dem Inhalt und der Präsentation. [fr?] Faux : les textes sont jugés forts ; seule leur présentation est critiquée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Teil 1: Was kritisiert der Text an der Hängung? [fr?] Partie 1 : que reproche le texte à l’accrochage ?",
+          "explanation": "„Im zweiten Raum hängen die Bilder so dicht, dass sie sich gegenseitig die Wirkung nehmen.“ „So …, dass“ nennt die Folge: Zu viele Bilder auf engem Raum schwächen einander. Die anderen Kritikpunkte kommen nicht vor. [fr?] Dans la deuxième salle, les photos sont trop serrées.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Bilder hängen im ersten Raum zu hoch.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es gibt zu wenige Bilder für zwei so große Räume.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Bilder sind nicht nach Orten geordnet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Im zweiten Raum hängen die Bilder zu dicht.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Teil 2: Warum fotografiert Edda Holm in Schwarz-Weiß? [fr?] Partie 2 : pourquoi Edda Holm photographie-t-elle en noir et blanc ?",
+          "explanation": "„Farbe ist an der Küste unglaublich verführerisch … Aber genau das lenkt ab.“ Sie will, dass man auf die Formen und auf das, was fehlt, schaut. Außerdem wirken die Bilder in Schwarz-Weiß zeitlos. Kosten oder eine alte Kamera erwähnt sie nicht. [fr?] La couleur distrairait ; le noir et blanc rend les images intemporelles.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil Farbe vom Wesentlichen ablenken würde.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil Farbfotos im Kunstverein zu teuer sind.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil sie mit einer sehr alten Kamera arbeitet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die Küste im Winter keine Farben hat.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Teil 2: Wie ist Edda Holm bei ihrer Arbeit vorgegangen? [fr?] Partie 2 : comment Edda Holm a-t-elle travaillé ?",
+          "explanation": "Sie hat zwölf Orte „viermal im Jahr besucht, in jeder Jahreszeit einmal“, immer frühmorgens. So konnte sie zeigen, „wie sich derselbe Ort verändert“. Der Vergleich mit früher kommt nur im Gespräch mit dem Fischer vor, nicht als Methode. [fr?] Les mêmes douze lieux, à chaque saison, toujours tôt le matin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hat an jedem Tag einen anderen Ort fotografiert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat nur im Winter fotografiert, wenn es stürmt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat dieselben Orte in allen Jahreszeiten fotografiert.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie hat alte Fotos aus Archiven mit neuen Aufnahmen verglichen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Teil 2: Wie reagiert Edda Holm auf die Kritik an den Texten? [fr?] Partie 2 : comment réagit-elle à la critique sur les textes ?",
+          "explanation": "„Da hat er leider recht.“ Sie erklärt den Grund (wenig Platz) und kündigt eine Lösung an: Für die nächste Station werden die Texte größer gedruckt und direkt neben die Bilder gehängt. Sie hält die Texte für genauso wichtig wie die Fotos. [fr?] Elle reconnaît la critique et annonce une amélioration.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie weist die Kritik zurück, weil die Fotos wichtiger sind.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie gibt dem Kritiker recht und will etwas ändern.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie hält die Texte inzwischen für überflüssig.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sagt, dass sie die Kritik nicht gelesen hat.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Teil 2: Was wünscht sich Edda Holm von den Besuchern? [fr?] Partie 2 : que souhaite-t-elle de la part des visiteurs ?",
+          "explanation": "„Ich möchte niemanden belehren … Ich wünsche mir, dass die Leute einfach länger hinschauen als sonst und sich selbst fragen, was sie verlieren würden.“ Informationen und Warnungen gibt es ihrer Meinung nach schon genug. [fr?] Elle ne veut pas faire la leçon : seulement que l’on regarde plus longtemps et qu’on s’interroge.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sollen sich über den Klimawandel informieren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sollen eine Spende für die Küste geben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sollen die Bilder kaufen, um das nächste Projekt zu fördern.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sollen länger hinschauen und sich selbst Fragen stellen.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: eine Kritik für einen Kulturblog",
+      "estimatedMinutes": 27,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: eine Kritik für einen Kulturblog",
+        "description": "SITUATION\nDer Kulturblog Ihrer Stadtbibliothek sucht Kritiken von Leserinnen und Lesern. Sie dürfen über ein Werk schreiben, das Sie in letzter Zeit gesehen, gelesen oder gehört haben: einen Film, eine Serie, ein Buch, ein Konzert oder eine Ausstellung. [fr?] Le blog culturel de la bibliothèque publie des critiques de lecteurs ; choisissez une œuvre récente.\n\nSO GEHEN SIE VOR\n1. Planen (6 Minuten): Überlegen Sie sich Stichwörter zu den fünf Teilen des Modells: Einleitung, Inhalt, Stärken, Schwächen, Empfehlung. [fr?] Planifier selon les cinq parties du modèle.\n2. Schreiben (16 Minuten): Schreiben Sie den Inhalt im Präsens und verraten Sie das Ende nicht. [fr?] Écrire ; résumé au présent, sans dévoiler la fin.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste noch einmal. [fr?] Relire avec la liste de vérification.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine Kritik für den Blog (180 bis 220 Wörter). Stellen Sie das Werk vor, fassen Sie den Inhalt kurz zusammen, nennen Sie mindestens zwei Stärken und eine Schwäche mit Beispielen und sagen Sie, wem Sie das Werk empfehlen. [fr?] Écrivez une critique pour le blog (180 à 220 mots) : présentation, bref résumé, au moins deux points forts et une faiblesse illustrés, recommandation.",
+          "maxChars": 2200,
+          "minWords": 150
+        },
+        "checklist": [
+          "Titel, Gattung und Autor oder Regie stehen in der Einleitung. [fr?] Titre, genre et auteur dans l’introduction.",
+          "Der Inhalt ist kurz, im Präsens und ohne das Ende. [fr?] Résumé bref, au présent, sans la fin.",
+          "Zwei Stärken und eine Schwäche, jeweils mit Beispiel [fr?] Deux points forts et une faiblesse, avec exemples",
+          "Ich bewerte genau (fesselnd, vorhersehbar …) und ohne Umgangssprache. [fr?] Évaluation précise, sans familiarités.",
+          "Die Empfehlung sagt, für wen sich das Werk lohnt. [fr?] La recommandation précise à qui l’œuvre s’adresse."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: Werk, knapper Inhalt, zwei Stärken und eine Schwäche mit Beispielen, Empfehlung [fr?] Tâche : œuvre, résumé, points forts et faible, recommandation",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-kultur-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: ein Werk vorstellen, das Sie geprägt hat",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: ein Werk vorstellen, das Sie geprägt hat",
+        "description": "SITUATION\nIn Ihrem Kurs stellt jede Person ein Buch, einen Film, ein Lied oder ein Kunstwerk vor, das sie geprägt hat. Jetzt sind Sie an der Reihe. [fr?] Dans votre cours, chacun présente une œuvre qui l’a marqué ; c’est votre tour.\n\nAUFBAU DES VORTRAGS\n1. Einleitung: Welches Werk? Wann und wie haben Sie es kennengelernt? [fr?] Quelle œuvre, et dans quelles circonstances ?\n2. Kontext: Wer hat es geschaffen, wann ist es entstanden? [fr?] Auteur et contexte.\n3. Inhalt und Besonderheit: Worum geht es, was ist besonders daran? [fr?] Contenu et particularité.\n4. Persönliche Bedeutung: Warum hat es Sie geprägt? [fr?] Pourquoi vous a-t-elle marqué(e) ?\n5. Kritischer Blick und Empfehlung: Was überzeugt Sie weniger? Wem empfehlen Sie es? [fr?] Une réserve et une recommandation.\n\nVORBEREITUNG\nNehmen Sie sich fünf Minuten Zeit und überlegen Sie sich nur Stichwörter, keine ganzen Sätze. Hören Sie sich, wenn Sie möchten, noch einmal das Modell von Malik an. [fr?] Préparez en cinq minutes des mots-clés seulement ; réécoutez le modèle de Malik si vous le souhaitez.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": {
+          "prompt": "Halten Sie einen Vortrag von drei bis vier Minuten über ein Werk, das Sie geprägt hat. Folgen Sie den fünf Schritten, sprechen Sie frei und verbinden Sie die Teile mit passenden Überleitungen. [fr?] Faites un exposé de trois à quatre minutes sur une œuvre qui vous a marqué(e), en suivant les cinq étapes, sans lire, avec des transitions.",
+          "maxSeconds": 240
+        },
+        "written": null,
+        "checklist": [
+          "Ich nenne das Werk und den persönlichen Anlass. [fr?] Je nomme l’œuvre et l’occasion personnelle.",
+          "Ich beschreibe Inhalt und Besonderheit mit Beispielen. [fr?] Je décris contenu et particularité avec des exemples.",
+          "Ich erkläre, warum mich das Werk geprägt hat. [fr?] J’explique pourquoi l’œuvre m’a marqué(e).",
+          "Ich nenne einen Kritikpunkt und gebe eine Empfehlung. [fr?] J’exprime une réserve et une recommandation.",
+          "Überleitungen: „Zunächst …“, „Was mich besonders beeindruckt hat, …“, „Zum Schluss …“ [fr?] Transitions entre les parties"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: fünf Teile, persönliche Bedeutung begründet, Kritikpunkt, Empfehlung, 3–4 Minuten [fr?] Tâche : cinq parties, sens personnel, réserve, recommandation",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-kultur-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: über Kultur sprechen und schreiben",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: über Kultur sprechen und schreiben",
+        "description": "Lesen Sie die Ziele der beiden Module „Kultur“. Was können Sie schon sicher? Was möchten Sie noch üben? [fr?] Relisez les objectifs des deux modules « Kultur » : qu’est-ce qui est acquis, que voulez-vous encore travailler ?\n\nICH KANN …\n• Ich kann eine Kritik schreiben, die informiert, begründet bewertet und eine Empfehlung gibt. [fr?] Je peux écrire une critique structurée et argumentée.\n• Ich kann ein Werk in einem Vortrag vorstellen und erklären, was es für mich bedeutet. [fr?] Je peux présenter une œuvre à l’oral et dire ce qu’elle représente pour moi.\n• Ich kann im Gespräch auf Meinungen reagieren, Verallgemeinerungen relativieren und vorsichtig deuten. [fr?] Je peux réagir aux avis, nuancer et interpréter avec prudence.\n• Ich kann einer deutschsprachigen Person das Wichtigste aus einer französischen Kritik vermitteln. [fr?] Je peux transmettre en allemand l’essentiel d’une critique française.\n\nSTRATEGIEN\n• Kritik: Inhalt im Präsens, kein Ende verraten, jede Bewertung mit einem Beispiel belegen. [fr?] Résumé au présent, pas de fin dévoilée, chaque jugement illustré.\n• Sprachmittlung: nicht übersetzen, sondern auswählen, was die Person wissen will. [fr?] Sélectionner, pas traduire.\n• Interviews: vorher die Fragen lesen und auf Synonyme achten. [fr?] Lire les questions avant et repérer les synonymes.\n\nNOCH NICHT SICHER?\nModalpartikeln und Mittelfeld: Lesen Sie noch einmal die Regel im Modul „Kultur“ und wiederholen Sie die Übungen. Redemittel der Kritik: Lesen Sie die Kritik zu „Sommer ohne Strom“ laut. „Gefallen“ und die Stellung von „nicht“: Machen Sie die Übung „Korrigieren“ noch einmal. [fr?] Relisez la règle du module Kultur, lisez le modèle à voix haute et refaites l’exercice de correction.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-kultur-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : présenter oralement un album",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Malik",
+          "text": "Ich möchte Ihnen heute ein Album vorstellen, das mich seit fast zehn Jahren begleitet: „Zwischenräume“ von der Liedermacherin Ilka Brandner. Ich habe es zum ersten Mal gehört, als ich gerade nach Deutschland gekommen war und kaum jemanden kannte."
+        },
+        {
+          "voice": "mann3",
+          "name": "Malik",
+          "text": "Das Album besteht aus zwölf ruhigen Liedern, fast nur mit Gitarre und Stimme. Es geht um Abschiede, um Neuanfänge und um die Frage, wo man eigentlich zu Hause ist. Besonders gelungen finde ich die Texte: Sie sind einfach, aber nie banal."
+        },
+        {
+          "voice": "mann3",
+          "name": "Malik",
+          "text": "Für mich persönlich war das Album auch ein Deutschkurs. Ich habe die Texte so lange gehört, bis ich jedes Wort verstanden habe. Ein kleiner Kritikpunkt: In der zweiten Hälfte klingen manche Lieder recht ähnlich."
+        },
+        {
+          "voice": "mann3",
+          "name": "Malik",
+          "text": "Trotzdem kann ich „Zwischenräume“ allen empfehlen, die gern genau zuhören. Am besten abends, mit Kopfhörern. Vielen Dank fürs Zuhören."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-a1",
+      "kind": "audio",
+      "title": "Avis 1",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Wiebke",
+          "text": "Ich fand das Buch ehrlich gesagt total langweilig. Da passiert ja zweihundert Seiten lang fast gar nichts."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-a2",
+      "kind": "audio",
+      "title": "Avis 2",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Sander",
+          "text": "Verfilmungen sind doch grundsätzlich schlechter als die Bücher. Das ist einfach so."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-a3",
+      "kind": "audio",
+      "title": "Avis 3",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Orlova",
+          "text": "Kultur ist doch Luxus. Wenn die Stadt sparen muss, sollte sie zuerst beim Theater sparen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-a4",
+      "kind": "audio",
+      "title": "Avis 4",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Benno",
+          "text": "Ich habe das Ende, glaube ich, nicht ganz verstanden. Versöhnen sich die Geschwister nun oder nicht?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-mediation-nachricht",
+      "kind": "image",
+      "title": "Message de Clemens",
+      "alt": "Message de Clemens : il demande si le film « Les Jours de sel » vaut la peine ; il n’aime pas les films violents, ne supporte plus les films longs le soir et a besoin de sous-titres.",
+      "image": {
+        "layout": "messages",
+        "icon": "message-square",
+        "title": "Clemens",
+        "subtitle": "Französische Filmwoche",
+        "messages": [
+          {
+            "from": "Clemens",
+            "time": "19:42",
+            "text": "Hey! Nächste Woche läuft bei der Französischen Filmwoche „Les Jours de sel“. Lohnt sich das? Du kannst doch Französisch, vielleicht findest du eine Kritik."
+          },
+          {
+            "from": "Clemens",
+            "time": "19:43",
+            "text": "Drei Dinge, du kennst mich ja: Ich mag keine brutalen Filme, lange Filme schaffe ich abends nicht mehr, und mein Französisch reicht ohne Untertitel nicht."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-kultur-atelier-pruefung-rezension",
+      "kind": "image",
+      "title": "Critique de l’exposition « Spuren im Sand »",
+      "alt": "Critique d’une exposition de photographies en noir et blanc sur une côte qui recule : éloge des images, réserves sur l’accrochage et la présentation des textes des habitants.",
+      "image": {
+        "layout": "article",
+        "kicker": "Ausstellung",
+        "icon": "camera",
+        "title": "„Spuren im Sand“: Edda Holm fotografiert das Verschwinden",
+        "lead": "Was bleibt von einer Küste, die jedes Jahr ein paar Meter verliert? Die Fotografin Edda Holm ist dieser Frage drei Jahre lang nachgegangen.",
+        "paragraphs": [
+          "Das Ergebnis ist jetzt im Kunstverein Wendelstedt zu sehen: 46 großformatige Schwarz-Weiß-Aufnahmen von der Nordseeküste, dazu kurze Texte von Menschen, die dort leben."
+        ]
+      }
+    },
+    {
+      "key": "b2-kultur-atelier-pruefung-interview",
+      "kind": "audio",
+      "title": "Interview de la photographe Edda Holm",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Frau Holm, Ihre Ausstellung „Spuren im Sand“ zeigt die Nordseeküste ausschließlich in Schwarz-Weiß. Warum eigentlich keine Farbe?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Edda Holm",
+          "text": "Farbe ist an der Küste unglaublich verführerisch: der Sonnenuntergang, das blaue Wasser. Aber genau das lenkt ab. Ich wollte, dass man auf die Formen schaut, auf das, was fehlt. In Schwarz-Weiß wirken die Bilder außerdem zeitlos. Man weiß nicht genau, ob sie gestern oder vor fünfzig Jahren entstanden sind."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Drei Jahre haben Sie an dem Projekt gearbeitet. Wie muss man sich das vorstellen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Edda Holm",
+          "text": "Ich habe mir zwölf Orte ausgesucht und jeden davon viermal im Jahr besucht, in jeder Jahreszeit einmal, und zwar immer frühmorgens, wenn noch niemand unterwegs ist. So konnte ich zeigen, wie sich derselbe Ort verändert. Manchmal war ein Weg, den ich im Frühling fotografiert hatte, im Herbst einfach nicht mehr da."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Neben den Fotos gibt es Texte von Menschen, die an der Küste leben."
+        },
+        {
+          "voice": "frau3",
+          "name": "Edda Holm",
+          "text": "Ja, und ehrlich gesagt waren mir diese Gespräche am Ende genauso wichtig wie die Bilder. Ein Fischer hat mir erzählt, dass sein Großvater noch Kühe auf einer Wiese gehütet hat, wo heute Wasser ist. So etwas kann ein Foto allein nicht erzählen."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Ein Kritiker hat bemängelt, dass diese Texte in der Ausstellung etwas untergehen."
+        },
+        {
+          "voice": "frau3",
+          "name": "Edda Holm",
+          "text": "Da hat er leider recht. Der Platz war knapp, und wir haben uns für die Fotos entschieden. Für die nächste Station der Ausstellung drucken wir die Texte größer und hängen sie direkt neben die Bilder."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Was sollen die Besucherinnen und Besucher mitnehmen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Edda Holm",
+          "text": "Ich möchte niemanden belehren. Es gibt genug Zahlen und Warnungen. Ich wünsche mir, dass die Leute einfach länger hinschauen als sonst und sich selbst fragen, was sie verlieren würden. Wenn das passiert, habe ich mein Ziel erreicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: im Lesekreis Meinungen begegnen",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das sehe ich anders: Gerade die ruhigen Kapitel bereiten das Ende vor."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: im Lesekreis Meinungen begegnen",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Nicht immer: Manche Filme machen aus einer schwachen Vorlage etwas Besonderes."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: im Lesekreis Meinungen begegnen",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich verstehe den Gedanken, aber gerade in Krisen braucht man Orte der Begegnung."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: im Lesekreis Meinungen begegnen",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Im Film schon, im Buch bleibt es offen. Die Autorin will wohl, dass wir selbst entscheiden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Kultur – Werkstatt: Werke vorstellen und bewerten",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Im Mittelpunkt steht …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Die Handlung spielt in …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Besonders gelungen ist …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "überzeugen durch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Weniger überzeugend ist dagegen …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Trotz dieser Schwächen …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sehenswert"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich etwas nicht entgehen lassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Drehbuch, die Drehbücher"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kameraarbeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Untertitel, die Untertitel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ausstellung, die Ausstellungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eindringlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich lohnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "jemanden prägen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

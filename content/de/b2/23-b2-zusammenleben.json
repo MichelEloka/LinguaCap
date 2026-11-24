@@ -1,0 +1,2434 @@
+{
+  "id": "b2-zusammenleben",
+  "title": "Zusammenleben: Konflikte, Missverständnisse und Verständigung",
+  "objective": "Comprendre un article critique sur les modèles de communication interculturelle, suivre une médiation entre voisins en distinguant positions et intérêts, saisir l’ironie d’une chronique ; employer les locutions verbo-nominales et formuler demandes, critiques et propositions avec diplomatie au Konjunktiv II.",
+  "prerequisites": [
+    "b2-kultur-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap (personnages fictifs)."
+  ],
+  "grammarFocus": [
+    "funktionsverbgefuege",
+    "diplomatie-konjunktiv2"
+  ],
+  "layer": "content/b/source/b2/b2-zusammenleben.mjs",
+  "vocabulary": [
+    {
+      "id": "konflikt",
+      "word": "Konflikt",
+      "article": "der",
+      "plural": "Konflikte",
+      "partOfSpeech": "noun",
+      "translation": "le conflit",
+      "example": "Der Konflikt im Haus dauert schon seit dem Frühjahr.",
+      "note": "einen Konflikt lösen, austragen",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "missverstaendnis",
+      "word": "Missverständnis",
+      "article": "das",
+      "plural": "Missverständnisse",
+      "partOfSpeech": "noun",
+      "translation": "le malentendu",
+      "example": "Beim Mittagessen haben sie das Missverständnis ausgeräumt.",
+      "note": "ein Missverständnis ausräumen : dissiper un malentendu",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "mediation",
+      "word": "Mediation",
+      "article": "die",
+      "plural": "Mediationen",
+      "partOfSpeech": "noun",
+      "translation": "la médiation",
+      "example": "Die Stadt bietet eine kostenlose Mediation für Nachbarn an.",
+      "note": "der Mediator, die Mediatorin",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "vermitteln-zwischen",
+      "word": "vermitteln zwischen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "servir d’intermédiaire entre",
+      "example": "Frau Wolters vermittelt zwischen den beiden Nachbarn.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "vereinbarung",
+      "word": "Vereinbarung",
+      "article": "die",
+      "plural": "Vereinbarungen",
+      "partOfSpeech": "noun",
+      "translation": "l’accord, la convention",
+      "example": "Die Nachbarn haben eine Vereinbarung für vier Wochen getroffen.",
+      "note": "eine Vereinbarung treffen",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "sich-einigen-auf",
+      "word": "sich einigen auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se mettre d’accord sur",
+      "example": "Wir konnten uns auf eine Probezeit einigen.",
+      "note": "+ accusatif · die Einigung",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "ruecksicht-nehmen-auf",
+      "word": "Rücksicht nehmen auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "tenir compte de, ménager",
+      "example": "Bitte nehmen Sie Rücksicht auf die Nachbarn, die nachts arbeiten.",
+      "note": "+ accusatif · rücksichtsvoll",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "vorurteil",
+      "word": "Vorurteil",
+      "article": "das",
+      "plural": "Vorurteile",
+      "partOfSpeech": "noun",
+      "translation": "le préjugé",
+      "example": "Gemeinsame Projekte helfen, Vorurteile abzubauen.",
+      "note": "Vorurteile abbauen : faire reculer les préjugés",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "jemanden-in-eine-schublade-stecken",
+      "word": "jemanden in eine Schublade stecken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "mettre quelqu’un dans une case",
+      "example": "Man sollte niemanden wegen seiner Herkunft in eine Schublade stecken.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "sich-beschweren-ueber",
+      "word": "sich beschweren über",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se plaindre de",
+      "example": "Herr Wieczorek hat sich bei der Hausverwaltung über den Lärm beschwert.",
+      "note": "+ accusatif · bei jemandem",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "zur-sprache-bringen",
+      "word": "zur Sprache bringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "aborder, évoquer (un sujet)",
+      "example": "Ich möchte heute ein schwieriges Thema zur Sprache bringen.",
+      "note": "passif : zur Sprache kommen",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "in-frage-stellen",
+      "word": "in Frage stellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "remettre en question",
+      "example": "Niemand will Ihre Erfahrung in Frage stellen.",
+      "note": "aussi : infrage stellen · in Frage kommen : entrer en ligne de compte",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "eine-rolle-spielen",
+      "word": "eine Rolle spielen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "jouer un rôle",
+      "example": "Der Kontext spielt bei der Kommunikation eine große Rolle.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "in-kauf-nehmen",
+      "word": "in Kauf nehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "s’accommoder de (un inconvénient)",
+      "example": "Für eine ruhige Wohnung nehme ich einen längeren Weg in Kauf.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "zum-ausdruck-bringen",
+      "word": "zum Ausdruck bringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "exprimer",
+      "example": "Mit seiner Entschuldigung hat er seinen guten Willen zum Ausdruck gebracht.",
+      "note": "passif : zum Ausdruck kommen",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "in-konflikt-geraten-mit",
+      "word": "in Konflikt geraten mit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "entrer en conflit avec",
+      "example": "Ohne es zu wollen, ist er mit seinen Nachbarn in Konflikt geraten.",
+      "note": "+ datif · geraten : arriver dans (sans le vouloir)",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "unterstellen",
+      "word": "unterstellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prêter (une intention) à quelqu’un",
+      "example": "Ich will Ihnen keine böse Absicht unterstellen.",
+      "note": "jemandem etwas unterstellen · inséparable dans ce sens",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "nachfragen",
+      "word": "nachfragen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "demander des précisions",
+      "example": "Wenn mich etwas irritiert, frage ich lieber nach.",
+      "note": "séparable : nach|fragen",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "empfindlich",
+      "word": "empfindlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "sensible, susceptible",
+      "example": "Bei Kritik an seiner Arbeit ist er sehr empfindlich.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "ich-botschaft",
+      "word": "Ich-Botschaft",
+      "article": "die",
+      "plural": "Ich-Botschaften",
+      "partOfSpeech": "noun",
+      "translation": "le message en « je »",
+      "example": "Eine Ich-Botschaft beschreibt, wie es mir geht, statt den anderen anzuklagen.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "hausordnung",
+      "word": "Hausordnung",
+      "article": "die",
+      "plural": "Hausordnungen",
+      "partOfSpeech": "noun",
+      "translation": "le règlement intérieur (d’un immeuble)",
+      "example": "Laut Hausordnung gehören Fahrräder nicht in den Flur.",
+      "note": null,
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "gegenueber",
+      "word": "Gegenüber",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’interlocuteur, la personne en face",
+      "example": "Unterstellen Sie Ihrem Gegenüber zunächst eine gute Absicht.",
+      "note": "sans pluriel dans ce sens",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "sich-entschuldigen-bei-fuer",
+      "word": "sich entschuldigen bei … für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’excuser auprès de … pour",
+      "example": "Ich möchte mich bei Ihnen für die Zettel entschuldigen.",
+      "note": "bei + datif (personne), für + accusatif (chose)",
+      "audio": {
+        "media": "b2-zusammenleben-lexique",
+        "line": 22
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-zusammenleben-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Wo Menschen zusammenleben",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Wo Menschen zusammenleben",
+        "description": "ZUSAMMENLEBEN\nIm Haus, im Büro, in der Wohngemeinschaft oder im Verein: Wo Menschen zusammenleben, gibt es Konflikte. Wenn Menschen mit verschiedenen Gewohnheiten zusammenkommen, entstehen außerdem leicht Missverständnisse. Entscheidend ist, wie man darüber spricht. [fr?] Là où l’on vit ensemble naissent conflits et malentendus ; tout dépend de la manière d’en parler.\n\nFRAGEN ZUM EINSTIEG\n• Wann haben Sie zuletzt einen Konflikt erlebt, und wie wurde er gelöst? [fr?] Quel conflit avez-vous vécu récemment, et comment s’est-il réglé ?\n• Gibt es Situationen, in denen Sie die Art, wie Menschen hier kommunizieren, überrascht hat? [fr?] Une façon de communiquer vous a-t-elle déjà surpris(e) ici ?\n• Was hilft Ihrer Meinung nach am meisten, wenn sich zwei Seiten nicht einigen können? [fr?] Qu’est-ce qui aide le plus quand deux parties ne s’entendent pas ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Stichwörter und ein Beispiel. [fr?] Trouvez deux ou trois mots-clés et un exemple par question.\n\nZIELE\n• Ich kann einen Artikel über interkulturelle Kommunikation verstehen und die Kritik an einfachen Modellen nachvollziehen. [fr?] Je peux comprendre un article critique sur les modèles culturels.\n• Ich kann einem Mediationsgespräch folgen und Positionen von Interessen unterscheiden. [fr?] Je peux suivre une médiation et distinguer positions et intérêts.\n• Ich kann Bitten, Kritik und Vorschläge diplomatisch im Konjunktiv II formulieren. [fr?] Je peux formuler demandes, critiques et propositions avec diplomatie.\n• Ich kann Funktionsverbgefüge wie „zur Sprache bringen“ verstehen und verwenden. [fr?] Je peux comprendre et employer les locutions verbo-nominales.\n\nWICHTIGE WÖRTER\n• der Konflikt — le conflit\n• das Missverständnis — le malentendu\n• die Mediation — la médiation\n• sich einigen auf (+ Akk.) — se mettre d’accord sur\n• Rücksicht nehmen auf (+ Akk.) — tenir compte de, ménager\n• das Vorurteil — le préjugé\n• zur Sprache bringen — aborder un sujet\n• in Frage stellen — remettre en question",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Gute Zäune, gute Nachbarn?",
+          "media": "b2-zusammenleben-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-zusammenleben-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: Kultur, Modelle und Missverständnisse",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: Kultur, Modelle und Missverständnisse",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n1. Global: Lesen Sie Absatz A und Absatz F. Wie hängen der Anfang und das Ende zusammen? [fr?] Lisez le début et la fin : quel lien entre eux ?\n2. Argumente: Die Autorin nennt Vorteile und „Grenzen“ von Modellen. Achten Sie auf „erstens“, „zweitens“, „drittens“ und „allerdings“. [fr?] Repérez avantages et limites grâce aux connecteurs.\n3. Detail: Lesen Sie die Aufgaben und dann die passenden Stellen genau. [fr?] Lisez les questions, puis les passages utiles en détail.\n\nDIREKT, INDIREKT, MISSVERSTANDEN – WARUM KULTUR SELTEN SO EINFACH IST, WIE RATGEBER BEHAUPTEN\nVon Dr. Miriam Achterberg, Kommunikationswissenschaftlerin\n\n(A) Julien, ein junger Ingenieur aus Lyon, stellt in seiner ersten Woche bei einem Stuttgarter Zulieferer ein Konzept vor. Kaum ist er fertig, sagt ein Kollege: „Das funktioniert so nicht.“ Julien fühlt sich bloßgestellt und spricht den Rest des Tages kaum ein Wort. Er ist überzeugt, dass man ihn vor allen anderen lächerlich machen wollte. Der Kollege dagegen hat nichts Böses im Sinn: Er hält das Konzept für verbesserungswürdig, Julien selbst schätzt er sehr. Am nächsten Tag lädt er ihn zum Mittagessen ein, um gemeinsam eine Lösung zu suchen. Julien sagt ab.\n\n(B) Szenen wie diese kennt jeder, der in internationalen Teams arbeitet. Und für fast jede gibt es heute ein passendes Modell. Viele Unternehmen schicken ihre Beschäftigten deshalb vor einem Einsatz im Ausland in ein interkulturelles Training. Ratgeber und Trainings unterscheiden etwa zwischen direkter und indirekter Kommunikation oder zwischen Kulturen, in denen die Sache, und solchen, in denen die Beziehung im Vordergrund steht. Solche Modelle haben durchaus ihren Wert: Sie geben uns Wörter für Irritationen, die wir sonst nur als diffuses Unbehagen erleben, und sie zeigen, dass das Verhalten des anderen nicht unbedingt persönlich gemeint ist.\n\n(C) Allerdings haben sie auch Grenzen, die gern übersehen werden. Erstens unterscheiden sich Menschen innerhalb eines Landes oft stärker voneinander als die Durchschnittswerte zweier Länder. Eine Pflegerin aus Hamburg und ein Bankdirektor aus München kommunizieren nicht unbedingt ähnlicher als zwei Studierende aus Lyon und Leipzig. Zweitens spielt der Kontext eine große Rolle: Wer in einer Teambesprechung direkt Kritik übt, kann im Gespräch mit der Chefin äußerst vorsichtig sein.\n\n(D) Drittens, und das wiegt am schwersten, können Modelle zu Erwartungen werden, die sich selbst erfüllen. Wer gelernt hat, dass „die Deutschen“ direkt sind, hört in jedem knappen Satz eine Bestätigung und überhört die freundlichen Signale. In einem Seminar an meiner Hochschule haben wir zwei Gruppen von Studierenden auf ein internationales Projekt vorbereitet. Die erste Gruppe lernte Länderprofile auswendig, die zweite übte vor allem, nachzufragen. Am Ende berichtete die zweite Gruppe deutlich seltener von Konflikten. Vorwissen, so scheint es, hilft weniger als Neugier.\n\n(E) Was also tun? Hilfreich ist zunächst, über die Art der Kommunikation selbst zu sprechen: „Wie hast du das gemeint?“ oder „Bei uns äußert man Kritik eher unter vier Augen. Wie ist das hier?“ Wer solche Fragen stellt, bringt Unterschiede zur Sprache, ohne den anderen in eine Schublade zu stecken. Wer fragt, zeigt außerdem Interesse, und das wird fast überall geschätzt. Ebenso wichtig ist es, dem Gegenüber zunächst eine gute Absicht zu unterstellen. Und schließlich kann man in Teams Regeln vereinbaren, etwa dazu, wie Feedback gegeben wird. Solche Regeln stellen niemandes Kultur in Frage, sondern schaffen einen gemeinsamen Rahmen.\n\n(F) Julien und sein Kollege haben übrigens doch noch zusammen zu Mittag gegessen, eine Woche später. Dort haben sie das Missverständnis ausgeräumt; heute leiten sie gemeinsam ein Projekt. Kultur ist eben kein Programm, das in unseren Köpfen abläuft. Sie ist ein Vorrat an Gewohnheiten, mit denen jeder Mensch auf seine eigene Weise umgeht. Die Frage „Woher kommst du?“ verrät deshalb oft weniger als die Frage „Wie meinst du das?“.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-lesen-artikel",
+          "caption": "Direkt, indirekt, missverstanden",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche These vertritt die Autorin? [fr?] Quelle thèse l’autrice défend-elle ?",
+          "explanation": "Die Autorin erkennt den Wert der Modelle an (B: „Solche Modelle haben durchaus ihren Wert“), nennt dann drei Grenzen und zieht in D das Fazit: „Vorwissen … hilft weniger als Neugier.“ Die erste Antwort übertreibt ihre Kritik, und die vierte ist genau die Verallgemeinerung, vor der sie warnt. [fr?] Les modèles ont une valeur, mais la curiosité et les questions comptent davantage ; la quatrième réponse est le cliché qu’elle critique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kulturmodelle sind nutzlos und sollten nicht mehr gelehrt werden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kulturmodelle helfen, aber Nachfragen ist wichtiger als feste Bilder.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Missverständnisse entstehen vor allem durch schlechte Sprachkenntnisse.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Deutsche sprechen direkter als Franzosen, wie Juliens Fall beweist.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wozu dient die Geschichte von Julien in Absatz A? [fr?] À quoi sert l’histoire de Julien ?",
+          "explanation": "Der Text beginnt mit einer Szene, die das Thema anschaulich macht: Beide Seiten meinen es nicht böse, und trotzdem entsteht ein Konflikt. Die Autorin nimmt die Geschichte in Absatz F wieder auf und schließt damit den Rahmen. Sie verallgemeinert gerade nicht über „die Franzosen“ oder „die Deutschen“. [fr?] Une scène concrète illustre le thème ; elle encadre l’article (A et F) sans généraliser.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie zeigt an einem konkreten Fall, wie ein Missverständnis entsteht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie beweist, dass Ingenieure aus Frankreich empfindlicher reagieren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie kritisiert, dass der Kollege sehr unhöflich gewesen ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie erklärt, wie man ein technisches Konzept richtig präsentiert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Der Kollege hielt Juliens Konzept für völlig unbrauchbar.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Er hält das Konzept für verbesserungswürdig, Julien selbst schätzt er sehr.“ „Verbesserungswürdig“ heißt: Man kann und sollte es verbessern, nicht: Es ist wertlos. Deshalb lädt er Julien ein, „um gemeinsam eine Lösung zu suchen“. [fr?] Faux : le concept est « à améliorer », pas inutilisable.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum hält die Autorin die dritte Grenze für die wichtigste? [fr?] Pourquoi la troisième limite est-elle la plus grave selon l’autrice ?",
+          "explanation": "„Wer gelernt hat, dass ‚die Deutschen‘ direkt sind, hört in jedem knappen Satz eine Bestätigung und überhört die freundlichen Signale.“ Ein Modell kann also die Erwartung erzeugen, die es angeblich nur beschreibt: eine Erwartung, die sich selbst erfüllt. [fr?] Le modèle oriente la perception : on ne voit plus que ce qui le confirme (prophétie autoréalisatrice).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil man beim Lernen der Modelle zu viel Zeit verliert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil Länderprofile oft veraltete und falsche Zahlen enthalten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil Modelle den Blick lenken, bis man nur noch Bestätigungen sieht.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Weil Studierende solche Modelle meistens nicht auswendig lernen wollen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was zeigt das Beispiel aus dem Seminar? [fr?] Que montre l’exemple du séminaire ?",
+          "explanation": "„Die erste Gruppe lernte Länderprofile auswendig, die zweite übte vor allem, nachzufragen. Am Ende berichtete die zweite Gruppe deutlich seltener von Konflikten.“ Daraus folgert die Autorin: „Vorwissen … hilft weniger als Neugier.“ [fr?] Le groupe entraîné à poser des questions a connu moins de conflits.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wer Länderprofile lernt, versteht internationale Projekte besser.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Beide Gruppen hatten am Ende ungefähr gleich viele Konflikte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Internationale Projekte scheitern meistens an der Sprache.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Wer das Nachfragen übt, erlebt weniger Konflikte als mit Länderprofilen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? [fr?] Quel intertitre convient à quel paragraphe ?",
+          "explanation": "B: der Wert der Modelle. C: die ersten beiden Grenzen, Unterschiede im Land und Kontext. D: die dritte Grenze und das Seminar. E: praktische Ratschläge. F: Juliens Geschichte geht gut aus, und die Schlussfrage „Wie meinst du das?“. [fr?] Chaque intertitre reprend l’idée directrice du paragraphe.",
+          "pairs": [
+            {
+              "left": "Absatz B",
+              "right": "Wozu Modelle nützen"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Unterschiede innerhalb eines Landes"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Wenn Erwartungen sich erfüllen"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Nachfragen und Regeln vereinbaren"
+            },
+            {
+              "left": "Absatz F",
+              "right": "Ein gutes Ende und eine bessere Frage"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Funktionsverbgefüge aus dem Text. [fr?] Complétez avec les locutions verbo-nominales du texte.",
+          "text": "Wer nachfragt, bringt Unterschiede zur [[1]] (Absatz E). · Gemeinsame Regeln stellen niemandes Kultur in [[2]] (Absatz E). · Beim Mittagessen haben die beiden das Missverständnis [[3]] (Absatz F).",
+          "explanation": "„Zur Sprache bringen“ heißt ansprechen, „in Frage stellen“ heißt bezweifeln oder angreifen. „Ein Missverständnis ausräumen“ ist eine feste Verbindung: es klären und beseitigen. Diese Wendungen sind typisch für sachliche Texte über Kommunikation. [fr?] zur Sprache bringen (aborder), in Frage stellen (remettre en cause), ein Missverständnis ausräumen (dissiper).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Sprache"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Frage"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ausgeräumt"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "„Heute arbeiten Julien und sein Kollege an einem gemeinsamen Projekt.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Heute leiten sie gemeinsam ein Projekt.“ Nach dem Mittagessen, eine Woche später, haben sie das Missverständnis ausgeräumt. Das gute Ende unterstützt die These der Autorin: Ein Gespräch über das Gemeinte hilft mehr als ein Etikett. [fr?] Vrai : ils dirigent aujourd’hui un projet ensemble.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: eine Mediation unter Nachbarn",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Mediation unter Nachbarn",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\nHerr Wieczorek (74 Jahre, Erdgeschoss) und Frau Asante (Familie mit zwei Kindern, erster Stock) haben einen Konflikt. Die Mediatorin Frau Wolters von der Nachbarschaftsmediation der Stadt hilft ihnen, eine Lösung zu finden. [fr?] Deux voisins en conflit, accompagnés par une médiatrice municipale.\n\nSTRATEGIE\n1. Erstes Hören: Was will jede Seite (Position), und warum (Interesse)? [fr?] Première écoute : ce que chacun demande (position) et pourquoi (intérêt).\n2. Achten Sie auf die Phasen der Mediation: Regeln, Sichtweisen, Zusammenfassung, Ideen, Vereinbarung. [fr?] Repérez les étapes de la médiation.\n3. Zweites Hören: Ergänzen Sie die Notizen. Uhrzeiten dürfen Sie als Ziffern schreiben. [fr?] Deuxième écoute : complétez les notes ; les heures peuvent s’écrire en chiffres.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-hoeren-audio",
+          "caption": "Nachbarschaftsmediation",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Herr Wieczorek: wohnt seit über [[1]] Jahren im Erdgeschoss · Problem: der [[2]] knallt abends gegen sein Fenster · im Flur stehen Fahrräder und ein [[3]] · Frau Asante: der Hof ist der einzige Ort, wo sich die Kinder [[4]] können · ihr Mann arbeitet nachts im [[5]]",
+          "explanation": "Herr Wieczorek: „seit über dreißig Jahren im Erdgeschoss“, „Der Ball knallt gegen mein Fenster“, im Flur „Fahrräder und ein Kinderwagen“. Frau Asante: Der Hof ist „der einzige Ort, wo sich die Kinder bewegen können“, ihr Mann „arbeitet nachts im Krankenhaus“. [fr?] Les deux points de vue : bruit du ballon et couloir encombré ; manque de place et travail de nuit.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "30",
+                "dreißig"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Ball",
+                "Fußball"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Kinderwagen"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "bewegen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Krankenhaus"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Vereinbarung: Ballspielen nur auf der Seite am [[1]] · mit einem [[2]] Ball · werktags bis [[3]] Uhr, am Wochenende bis [[4]] · Kinderwagen: Frau Wolters fragt bei der [[5]] nach · Probezeit: [[6]] Wochen, neues Treffen am 12. Juli",
+          "explanation": "Am Ende fasst Frau Wolters die Vereinbarung zusammen: „auf der Seite am Fahrradständer, mit einem weichen Ball, werktags bis neunzehn Uhr, am Wochenende bis halb acht“. Wegen des Kinderwagens fragt sie bei der Hausverwaltung nach. Die Probezeit dauert vier Wochen. [fr?] L’accord : côté porte-vélos, ballon souple, 19 h en semaine, 19 h 30 le week-end, essai de quatre semaines.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Fahrradständer"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "weichen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "19",
+                "neunzehn",
+                "7",
+                "sieben"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "halb acht",
+                "19.30",
+                "19:30",
+                "19.30 Uhr",
+                "19:30 Uhr",
+                "halb 8"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Hausverwaltung"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "4",
+                "vier"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welche Rolle hat Frau Wolters? [fr?] Quel est le rôle de Mme Wolters ?",
+          "explanation": "„Ich bin neutral, und ich entscheide nichts. Die Lösung finden Sie selbst. Ich achte nur darauf, dass jeder ausreden kann.“ Eine Mediatorin leitet das Gespräch und hilft beiden Seiten, urteilt aber nicht. Dass Herr Wieczorek sich gemeldet hat, macht sie nicht zu seiner Beraterin. [fr?] La médiatrice est neutre : elle encadre l’échange, les parties décident.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sorgt für faire Regeln, entscheidet aber nicht selbst.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie entscheidet als Vertreterin der Stadt, wer recht hat.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie vertritt die Interessen der Hausverwaltung im Konflikt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie berät nur Herrn Wieczorek, weil er sich gemeldet hat.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wofür entschuldigt sich Herr Wieczorek? [fr?] De quoi M. Wieczorek s’excuse-t-il ?",
+          "explanation": "„Die Zettel waren von mir. Das war nicht in Ordnung, das tut mir leid.“ Frau Asante hatte erzählt, dass sie die anonymen Zettel verletzt haben. Seine Entschuldigung ist ein Wendepunkt: Danach sammeln beide gemeinsam Ideen. [fr?] Il s’excuse pour les mots anonymes, ce qui débloque la discussion.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass er sich bei der Stadt beschwert hat",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass er die Kinder im Hof angeschrien hat",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass er Zettel ohne Namen geschrieben hat",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "dass er das Radio morgens laut gestellt hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wozu sagt Frau Wolters: „Wenn ich Sie richtig verstehe, …“? [fr?] Pourquoi Mme Wolters dit-elle « Wenn ich Sie richtig verstehe, … » ?",
+          "explanation": "Die Mediatorin gibt mit eigenen Worten wieder, worum es jeder Seite eigentlich geht (Ruhe, Sicherheit im Flur, Platz zum Spielen), und fragt dann: „Habe ich das richtig zusammengefasst?“ So fühlen sich beide gehört, und aus Forderungen werden Interessen. [fr?] Reformuler les intérêts de chacun, puis vérifier : technique centrale de la médiation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kritisiert, dass beide unklar gesprochen haben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie fasst die Interessen beider zusammen und prüft ihr Verständnis.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie gibt Herrn Wieczorek recht und beendet die Diskussion.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie bittet beide, ihre Forderungen noch einmal genau zu wiederholen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was drückt Herr Wieczorek mit „Gut, damit kann ich leben“ aus? [fr?] Que signifie « Gut, damit kann ich leben » ?",
+          "explanation": "„Damit kann ich leben“ bedeutet: Das ist nicht meine Wunschlösung, aber ich akzeptiere sie. Er wollte ursprünglich ein Verbot des Ballspielens; jetzt ist er mit festen Zeiten am Wochenende einverstanden. Genau so sieht ein Kompromiss aus. [fr?] « Damit kann ich leben » = je peux m’en accommoder : il accepte le compromis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er ist begeistert, weil er alles bekommen hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er droht damit, wieder anonyme Zettel in den Briefkasten zu werfen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er will lieber in eine andere Wohnung ziehen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er akzeptiert den Kompromiss, auch wenn er nicht ideal ist.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Funktionsverbgefüge und diplomatische Formen",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Funktionsverbgefüge und diplomatische Formen",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus der Mediation. Achten Sie in den Sätzen 1 bis 5 auf die Verbindungen aus Nomen und Verb, in den Sätzen 6 bis 9 auf die Verbformen. [fr?] Lisez les phrases ; observez les combinaisons nom + verbe (1 à 5) et les formes verbales (6 à 9).\n\nSÄTZE\n(1) Ich wusste nicht, wie ich das Thema zur Sprache bringen sollte.\n(2) Solche Regeln stellen niemandes Kultur in Frage.\n(3) Wer direkt Kritik übt, kann im Gespräch mit der Chefin äußerst vorsichtig sein.\n(4) Zweitens spielt der Kontext eine große Rolle.\n(5) Beim nächsten Treffen kommt auch das Radio zur Sprache.\n(6) Ich würde vorschlagen, dass ich bei der Hausverwaltung nachfrage.\n(7) Die Kinder könnten auf der anderen Seite spielen.\n(8) Was wäre für Sie beide denkbar?\n(9) Wäre es möglich, dass Ihr Radio morgens etwas leiser läuft?\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions ; les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches einfache Verb hat ungefähr dieselbe Bedeutung? [fr?] Quel verbe simple a à peu près le même sens ?",
+          "explanation": "Bei einem Funktionsverbgefüge trägt das Nomen die Bedeutung: Sprache → ansprechen, Frage → bezweifeln, Kritik → kritisieren. Das Verb (bringen, stellen, üben, spielen, treffen) hat kaum eigene Bedeutung. Deshalb kann man es nicht wörtlich übersetzen. [fr?] Le nom porte le sens ; le verbe (bringen, stellen…) est presque vide.",
+          "pairs": [
+            {
+              "left": "zur Sprache bringen",
+              "right": "ansprechen"
+            },
+            {
+              "left": "in Frage stellen",
+              "right": "bezweifeln"
+            },
+            {
+              "left": "Kritik üben",
+              "right": "kritisieren"
+            },
+            {
+              "left": "eine Rolle spielen",
+              "right": "wichtig sein"
+            },
+            {
+              "left": "eine Vereinbarung treffen",
+              "right": "vereinbaren"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 1 und 5: Was ist der Unterschied zwischen „zur Sprache bringen“ und „zur Sprache kommen“? [fr?] Phrases 1 et 5 : quelle différence entre bringen et kommen ici ?",
+          "explanation": "In Satz 1 bringt jemand (ich) das Thema zur Sprache: aktiv. In Satz 5 „kommt“ das Thema zur Sprache, ohne dass gesagt wird, wer es anspricht: Die Bedeutung ist passiv (= wird angesprochen). Ähnliche Paare: zur Verfügung stellen / stehen, in Gang setzen / kommen. [fr?] bringen : sens actif, avec un agent ; kommen : sens passif (= wird angesprochen).",
+          "options": [
+            {
+              "id": "a",
+              "label": "„Bringen“ steht in der Vergangenheit, „kommen“ steht in der Zukunft.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "„Bringen“ hat eine handelnde Person, „kommen“ wirkt wie ein Passiv.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "„Bringen“ ist umgangssprachlich, „kommen“ ist formell.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Es gibt keinen Unterschied, beide Sätze bedeuten genau dasselbe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 6 bis 9: Warum stehen die Verben im Konjunktiv II? [fr?] Phrases 6 à 9 : pourquoi le Konjunktiv II ?",
+          "explanation": "Hier beschreibt der Konjunktiv II keine irreale Welt, sondern macht Vorschläge und Bitten höflich und offen: Die andere Person kann leichter ablehnen. „Könnten“, „wäre“ und „würde vorschlagen“ sind typische Formen der Diplomatie, besonders in Konflikten. [fr?] Ici, le Konjunktiv II n’est pas irréel : il adoucit propositions et demandes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "weil die Sätze von der Vergangenheit erzählen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "weil die Sprecher etwas Unmögliches beschreiben",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "weil sie Vorschläge und Bitten vorsichtig machen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "weil nach „dass“ immer der Konjunktiv II steht",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 9: Welche Wörter machen die Bitte zusätzlich weicher? [fr?] Phrase 9 : quels mots adoucissent encore la demande ?",
+          "explanation": "„Wäre es möglich, dass …?“ fragt nach einer Möglichkeit statt eine Forderung zu stellen, und „etwas“ (wie „ein bisschen“, „vielleicht“) schwächt die Bitte ab: Es geht nicht um Stille, nur um weniger Lautstärke. Solche Abtönungen sind Teil der Diplomatie. [fr?] « möglich » (demande sous forme de possibilité) et « etwas » (un peu) atténuent la demande.",
+          "options": [
+            {
+              "id": "a",
+              "label": "„morgens“ und „läuft“",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "„Ihr“ und „Radio“",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„dass“ und „morgens“",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "„möglich“ und „etwas“",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Satz 2: Wo steht der Nomenteil „in Frage“? [fr?] Phrase 2 : où se place « in Frage » ?",
+          "explanation": "Der Nomenteil eines Funktionsverbgefüges steht am Ende des Mittelfelds, wie die Partikel eines trennbaren Verbs: Solche Regeln stellen niemandes Kultur in Frage. Im Nebensatz steht das Verb danach: …, wie ich das Thema zur Sprache bringen sollte. [fr?] La partie nominale se place à la fin, comme une particule séparable.",
+          "options": [
+            {
+              "id": "a",
+              "label": "direkt nach dem konjugierten Verb",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "am Satzende, wie ein Verbteil",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "am Satzanfang vor dem Subjekt",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "vor dem Akkusativobjekt",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-zusammenleben-regel",
+      "kind": "lesson",
+      "title": "Regel: Funktionsverbgefüge und Diplomatie im Konjunktiv II",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Funktionsverbgefüge und Diplomatie im Konjunktiv II",
+        "description": "REGEL 1 · FUNKTIONSVERBGEFÜGE\nIm Modul „Wohnen“ haben Sie Nomen-Verb-Verbindungen kennengelernt. Bei diesen Funktionsverbgefügen trägt das Nomen die Bedeutung; das Verb (bringen, kommen, stellen, stehen, nehmen, treffen, üben, ziehen, geraten, treten) ist fast leer. Sie klingen sachlich und formell. [fr?] Rappel : le nom porte le sens, le verbe est presque vide ; registre soutenu.\n• zur Sprache bringen (ansprechen) · in Frage stellen (bezweifeln) · Kritik üben an (kritisieren)\n• eine Rolle spielen (wichtig sein) · eine Vereinbarung treffen (vereinbaren) · in Betracht ziehen (erwägen)\n• zum Ausdruck bringen (ausdrücken) · in Kauf nehmen (einen Nachteil akzeptieren) · Rücksicht nehmen auf (berücksichtigen)\n\nREGEL 2 · AKTIV UND PASSIV, ABSICHT UND ZUFALL\nViele Funktionsverbgefüge bilden Paare. Mit dem einen Verb handelt jemand, mit dem anderen geschieht etwas. [fr?] Beaucoup forment des paires : l’un est actif, l’autre a un sens passif.\n• zur Sprache bringen → zur Sprache kommen: Das Thema kommt beim Treffen zur Sprache.\n• zur Verfügung stellen → zur Verfügung stehen: Der Raum steht allen zur Verfügung.\n• zum Ausdruck bringen → zum Ausdruck kommen: Darin kommt sein guter Wille zum Ausdruck.\n• in Gang setzen → in Gang kommen · unter Druck setzen → unter Druck geraten\n„Geraten“ zeigt, dass man ungewollt in eine Situation kommt: in Konflikt geraten, in Streit geraten, in Schwierigkeiten geraten. [fr?] « geraten » : se retrouver dans une situation sans le vouloir.\n\nREGEL 3 · STELLUNG UND VERNEINUNG\n• Der Nomenteil steht am Ende des Mittelfelds, wie eine Verbpartikel: Er stellt die Regeln nicht in Frage.\n• Nomen ohne Artikel werden meist mit „kein“ verneint: keine Rücksicht nehmen, keine Kritik üben.\n• Nomen mit Präposition werden mit „nicht“ verneint: nicht in Frage kommen, nicht zur Sprache bringen.\n[fr?] La partie nominale à la fin ; négation par kein sans article, par nicht avec préposition.\n\nREGEL 4 · DIPLOMATIE IM KONJUNKTIV II\nIn Konflikten und formellen Situationen machen Konjunktiv-II-Formen eine Aussage vorsichtiger und lassen dem anderen Raum. [fr?] Le Konjunktiv II rend demandes, critiques et propositions plus prudentes.\n• Bitten: Könnten Sie …? · Würden Sie bitte …? · Wäre es möglich, dass …? · Ich hätte da eine Bitte.\n• Vorschläge: Ich würde vorschlagen, … · Wie wäre es, wenn …? · Man könnte auch …\n• Kritik und Widerspruch: Ich würde das etwas anders sehen. · Wäre es nicht besser, …? · Ich hätte gedacht, dass …\n• Formen: hätte, wäre, könnte, würde, dürfte, müsste, sollte. Höfliche Frage um Erlaubnis: Dürfte ich kurz etwas sagen?\n\nREGEL 5 · WEITERE MITTEL DER DIPLOMATIE\n• Abschwächen: vielleicht, etwas, ein bisschen, eher, eigentlich, möglicherweise\n• Ich-Botschaften statt Vorwürfe: „Ich habe den Eindruck, dass es abends oft laut ist“ statt „Sie sind immer laut“.\n• Verallgemeinerungen vermeiden: „immer“, „nie“, „ständig“ machen einen Konflikt größer.\n[fr?] Atténuer, parler en « je », éviter « toujours » et « jamais ».\n\nACHTUNG\n• Funktionsverbgefüge nicht wörtlich übersetzen: Eine Entscheidung trifft man, eine Frage stellt man, Kritik übt man. [fr?] On ne « fait » ni une décision ni une critique.\n• „Ich würde haben“ ist falsch: Bei „haben“ und „sein“ nimmt man „hätte“ und „wäre“. [fr?] Avec haben et sein : hätte, wäre.\n• Zu viel Konjunktiv wirkt unsicher. In einer klaren Bitte reicht oft eine Form: „Könnten Sie das Radio leiser stellen?“ [fr?] Trop de conditionnels nuisent à la clarté.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-zusammenleben-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Funktionsverbgefüge und Diplomatie",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Funktionsverbgefüge und Diplomatie",
+        "description": "Üben Sie die Funktionsverbgefüge und die diplomatischen Formen. Achten Sie bei jeder Aufgabe auf die Situation: Wer spricht mit wem? [fr?] Entraînez-vous aux locutions verbo-nominales et aux formes diplomatiques ; pensez à la situation.\n\nMERKE\n• Das Nomen trägt die Bedeutung, das Verb steht an Position 2, der Nomenteil am Ende. [fr?] Le nom porte le sens ; la partie nominale va à la fin.\n• bringen / setzen / stellen (aktiv) ↔ kommen / geraten / stehen (passive Bedeutung) [fr?] Paires actif / passif.\n• Könnten Sie …? · Wäre es möglich, …? · Ich würde vorschlagen, … [fr?] Formules diplomatiques.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Verb. [fr?] Complétez avec le verbe qui convient.",
+          "text": "Ich möchte heute ein Problem zur Sprache [[1]]. · Niemand hat die Hausordnung in Frage [[2]]. · [[3]] Sie bitte Rücksicht auf die Nachbarn! · Wir müssen bis Freitag eine Entscheidung [[4]].",
+          "explanation": "Die Verben gehören fest zum Nomen: zur Sprache bringen, in Frage stellen (Perfekt: gestellt), Rücksicht nehmen (Imperativ: Nehmen Sie …), eine Entscheidung treffen. Mit „machen“ oder „haben“ wären alle vier Sätze falsch. [fr?] Verbes figés : bringen, stellen, nehmen, treffen ; jamais « machen ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bringen"
+              ],
+              "hint": "Sprache",
+              "size": 8
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gestellt"
+              ],
+              "hint": "Frage",
+              "size": 9
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Nehmen"
+              ],
+              "hint": "Rücksicht",
+              "size": 7
+            },
+            {
+              "id": "4",
+              "accept": [
+                "treffen"
+              ],
+              "hint": "Entscheidung",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Was bedeuten die Funktionsverbgefüge? [fr?] Que signifient ces locutions ?",
+          "explanation": "„In Kauf nehmen“ betrifft immer etwas Negatives, das man wegen eines Vorteils akzeptiert. „In Betracht ziehen“ heißt ernsthaft überlegen. „Geraten“ zeigt, dass etwas ungewollt geschieht. „Zur Verfügung stehen“ hat passive Bedeutung (der Raum steht allen zur Verfügung). [fr?] accepter un inconvénient, envisager, exprimer, entrer en conflit sans le vouloir, être disponible.",
+          "pairs": [
+            {
+              "left": "in Kauf nehmen",
+              "right": "einen Nachteil akzeptieren"
+            },
+            {
+              "left": "in Betracht ziehen",
+              "right": "als Möglichkeit prüfen"
+            },
+            {
+              "left": "zum Ausdruck bringen",
+              "right": "deutlich zeigen oder sagen"
+            },
+            {
+              "left": "in Konflikt geraten",
+              "right": "ohne Absicht in einen Streit kommen"
+            },
+            {
+              "left": "zur Verfügung stehen",
+              "right": "für jemanden da sein, nutzbar sein"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Das Thema Lärm … bei der Versammlung zur Sprache.“ Welches Verb passt? [fr?] Quel verbe convient ?",
+          "explanation": "Der Satz hat kein handelndes Subjekt: Das Thema selbst „kommt zur Sprache“ (= wird angesprochen). „Brachte“ bräuchte jemanden, der das Thema anspricht, und ein Akkusativobjekt: Herr Wieczorek brachte das Thema zur Sprache. „Stellen“ und „nehmen“ passen nicht zu „zur Sprache“. [fr?] Sans agent, sens passif : das Thema kam zur Sprache.",
+          "options": [
+            {
+              "id": "a",
+              "label": "brachte",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "stellte",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kam",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "nahm",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Formen im Konjunktiv II. [fr?] Complétez avec le Konjunktiv II.",
+          "text": "Ich [[1]] da eine kleine Bitte. · [[2]] es möglich, die Fahrräder in den Hof zu stellen? · [[3]] Sie das Radio vielleicht etwas leiser stellen? · Wir [[4]] die Regel zunächst ausprobieren.",
+          "explanation": "haben → hätte, sein → wäre, können → könnten, sollen → sollten (ein vorsichtiger Vorschlag). Bei „haben“ und „sein“ benutzt man die eigene Form, nicht „würde haben“. In der dritten Bitte ist auch „Würden Sie … stellen?“ höflich und richtig. [fr?] hätte, wäre, könnten (ou würden), sollten ; pas de « würde haben ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hätte"
+              ],
+              "hint": "haben",
+              "size": 6
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Wäre"
+              ],
+              "hint": "sein",
+              "size": 5
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Könnten",
+                "Würden"
+              ],
+              "hint": "können",
+              "size": 8
+            },
+            {
+              "id": "4",
+              "accept": [
+                "sollten",
+                "könnten"
+              ],
+              "hint": "sollen",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Das Fahrrad Ihres Nachbarn steht wieder im Flur. Was sagen Sie am diplomatischsten? [fr?] Le vélo de votre voisin est encore dans le couloir. Que dites-vous avec le plus de diplomatie ?",
+          "explanation": "Konjunktiv II (wäre), die Frage nach einer Möglichkeit und „vielleicht“ machen die Bitte freundlich, ohne das Problem zu verschweigen. Die zweite Antwort ist ein Vorwurf („schon wieder“), die dritte ein Befehl, die vierte eine persönliche Belehrung. [fr?] Konjunktiv II + possibilité + atténuation : demande ferme mais aimable.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wäre es vielleicht möglich, das Fahrrad in den Hof zu stellen?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ihr Fahrrad steht schon wieder im Flur, so geht das nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Stellen Sie Ihr Fahrrad bitte sofort und für immer in den Hof!",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sollten endlich lernen, auf andere Rücksicht zu nehmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "würde",
+              "vorschlagen,",
+              "dass",
+              "wir",
+              "die neue Regel",
+              "zunächst",
+              "vier Wochen lang",
+              "ausprobieren."
+            ],
+            [
+              "Ich",
+              "würde",
+              "vorschlagen,",
+              "dass",
+              "wir",
+              "zunächst",
+              "die neue Regel",
+              "vier Wochen lang",
+              "ausprobieren."
+            ]
+          ],
+          "explanation": "„Ich würde vorschlagen“ leitet den Vorschlag vorsichtig ein. Im Nebensatz mit „dass“ steht das Verb „ausprobieren“ am Ende. Das Objekt „die neue Regel“ kann vor oder nach „zunächst“ stehen; die Zeitdauer „vier Wochen lang“ steht direkt vor dem Verb. [fr?] Ich würde vorschlagen, dass … + verbe à la fin de la subordonnée."
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welcher Satz ist eine Ich-Botschaft? [fr?] Quelle phrase est un message en « je » ?",
+          "explanation": "Eine Ich-Botschaft beschreibt die eigene Situation und das eigene Gefühl („Ich schlafe schlecht, wenn …“), statt die andere Person zu bewerten. Die anderen Sätze sind Du- oder Sie-Botschaften mit Vorwurf; „nie“ und „alle“ verallgemeinern zusätzlich. [fr?] Le message en « je » décrit son vécu au lieu d’accuser ; éviter « nie », « alle ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie nehmen nie Rücksicht auf die anderen Leute hier im Haus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Alle im Haus sind schon lange genervt von Ihrem lauten Radio.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ihre Kinder sind abends wirklich viel zu laut, das wissen Sie doch.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich schlafe schlecht, wenn der Ball abends gegen mein Fenster knallt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ersetzen Sie das Verb durch ein Funktionsverbgefüge. [fr?] Remplacez le verbe par une locution.",
+          "text": "kritisieren → Kritik [[1]] · ausdrücken → zum Ausdruck [[2]] · erwägen → in Betracht [[3]] · vereinbaren → eine Vereinbarung [[4]]",
+          "explanation": "Die Funktionsverben sind fest: Kritik üben (an + Dativ), zum Ausdruck bringen, in Betracht ziehen, eine Vereinbarung treffen. In formellen Briefen klingen diese Wendungen sachlicher als die einfachen Verben. [fr?] Kritik üben, zum Ausdruck bringen, in Betracht ziehen, eine Vereinbarung treffen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "üben"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bringen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ziehen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "treffen"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wir",
+              "sollten",
+              "bei der nächsten Versammlung",
+              "unbedingt",
+              "das Thema",
+              "Fahrräder",
+              "zur Sprache",
+              "bringen."
+            ],
+            [
+              "Wir",
+              "sollten",
+              "das Thema",
+              "Fahrräder",
+              "bei der nächsten Versammlung",
+              "unbedingt",
+              "zur Sprache",
+              "bringen."
+            ]
+          ],
+          "explanation": "Das Modalverb „sollten“ steht an Position 2, der Infinitiv „bringen“ am Ende. Direkt davor steht der Nomenteil „zur Sprache“, wie eine Verbpartikel. Die Zeitangabe und das Objekt können ihre Reihenfolge tauschen. [fr?] Modal en 2e position ; « zur Sprache » juste avant l’infinitif final."
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Wie kritisieren Sie einen Vorschlag sachlich und vorsichtig? [fr?] Comment critiquer une proposition de façon factuelle et prudente ?",
+          "explanation": "„Ich bin nicht sicher, ob …“ äußert Zweifel als eigene Einschätzung und lässt das Gespräch offen. Die anderen Sätze bewerten den Vorschlag pauschal, brechen die Diskussion ab oder greifen die Person an. [fr?] Exprimer un doute à la première personne garde le dialogue ouvert.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihr Vorschlag ist schlecht, das sieht doch jeder sofort.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich bin nicht sicher, ob diese Lösung für alle passt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Darüber müssen wir gar nicht erst diskutieren.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das ist mal wieder typisch für Sie, Herr Wieczorek.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-zusammenleben-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Konflikte und Verständigung",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Konflikte und Verständigung",
+        "description": "Lernen Sie die Wörter für Konflikte und ihre Lösung: feste Verbindungen, Wortfamilien, Verben mit Präposition und Redewendungen. [fr?] Apprenez le vocabulaire du conflit et de sa résolution : combinaisons, familles de mots, verbes prépositionnels, expressions.\n\nTIPP\nWer Konflikte beschreibt, braucht neutrale Wörter. Sagen Sie „Herr Wieczorek wünscht sich Ruhe am Abend“ statt „Herr Wieczorek nervt“. So bleiben Sie sachlich, auch wenn Sie selbst betroffen sind. [fr?] Pour décrire un conflit, choisissez des mots neutres.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? [fr?] Quel verbe convient ?",
+          "explanation": "Einen Konflikt beilegen (beenden), einen Kompromiss eingehen (akzeptieren), Vorurteile abbauen (verringern), ein Missverständnis ausräumen (klären), eine Vereinbarung treffen, eine Grenze ziehen (deutlich sagen, was nicht mehr geht). Diese Verbindungen sind typisch für die Sprache der Konfliktlösung. [fr?] Régler un conflit, accepter un compromis, faire reculer les préjugés, dissiper un malentendu, conclure un accord, fixer une limite.",
+          "pairs": [
+            {
+              "left": "einen Konflikt",
+              "right": "beilegen"
+            },
+            {
+              "left": "einen Kompromiss",
+              "right": "eingehen"
+            },
+            {
+              "left": "Vorurteile",
+              "right": "abbauen"
+            },
+            {
+              "left": "ein Missverständnis",
+              "right": "ausräumen"
+            },
+            {
+              "left": "eine Vereinbarung",
+              "right": "treffen"
+            },
+            {
+              "left": "eine Grenze",
+              "right": "ziehen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "falsch verstehen → das [[1]] · vermitteln → die [[2]] · tolerant → die [[3]] · sich einigen → die [[4]] · empfindlich → die [[5]]",
+          "explanation": "„Miss-“ zeigt, dass etwas falsch läuft: das Missverständnis (Plural: die Missverständnisse). Aus Verben entstehen Nomen auf -ung (die Vermittlung, die Einigung), aus Adjektiven Nomen auf -keit (die Empfindlichkeit). Das Fremdwort „tolerant“ bildet „die Toleranz“. [fr?] Miss- (erreur), -ung (action), -keit (qualité), Toleranz.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Missverständnis"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Vermittlung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Toleranz"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Einigung"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Empfindlichkeit"
+              ],
+              "size": 16,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr?] Complétez avec les prépositions.",
+          "text": "Er hat sich bei der Hausverwaltung [[1]] den Lärm beschwert. · Am Ende haben sich beide [[2]] eine Probezeit geeinigt. · Bitte nehmen Sie Rücksicht [[3]] die Nachbarn. · Leider ist er mit seiner Nachbarin [[4]] Streit geraten.",
+          "explanation": "sich beschweren über + Akkusativ (bei + Dativ für die Person), sich einigen auf + Akkusativ, Rücksicht nehmen auf + Akkusativ, in Streit geraten mit + Dativ. Die Präpositionen muss man mit dem Verb zusammen lernen. [fr?] sich beschweren über, sich einigen auf, Rücksicht nehmen auf, in Streit geraten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "in"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was bedeutet „jemandem eine gute Absicht unterstellen“? [fr?] Que signifie cette expression ?",
+          "explanation": "„Unterstellen“ heißt: jemandem eine Absicht zuschreiben, ohne sie zu kennen. Meist ist das negativ („Sie unterstellen mir eine Lüge“). Die Autorin des Artikels rät, das Gegenteil zu tun: dem Gegenüber zunächst eine gute Absicht zu unterstellen, also anzunehmen, dass es es gut meint. [fr?] « unterstellen » = prêter une intention ; ici, supposer la bonne foi de l’autre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "jemandem verbieten, etwas Gutes zu tun",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "annehmen, dass jemand es gut meint",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "jemanden um einen Gefallen bitten",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "jemandem eine Aufgabe geben",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie möchten ein mögliches Missverständnis klären. Was sagen Sie? [fr?] Vous voulez clarifier un éventuel malentendu. Que dites-vous ?",
+          "explanation": "Eine offene Frage nach dem Gemeinten („Wie haben Sie das gemeint?“) und eine Ich-Aussage („Ich möchte Sie richtig verstehen“) klären, ohne anzugreifen. Genau das empfiehlt der Artikel. Die anderen Antworten unterstellen Absicht, brechen ab oder stecken die Person in eine Schublade. [fr?] Question ouverte + message en « je » : clarifier sans accuser.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das haben Sie bestimmt absichtlich so gesagt, oder?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Darüber rede ich nicht mehr, das ist für mich erledigt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wie haben Sie das gemeint? Ich möchte Sie richtig verstehen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das ist bei Ihnen eben so, da kann man nichts machen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Man sollte niemanden in eine Schublade stecken.“ Was heißt das? [fr?] Que signifie cette phrase ?",
+          "explanation": "Die Redewendung beschreibt das Einordnen eines Menschen in eine feste Kategorie, oft nach Herkunft, Alter oder Beruf, ohne die Person selbst kennenzulernen. Das Bild: Jeder bekommt eine Schublade mit Etikett. Die wörtlichen Deutungen sind hier falsch. [fr?] « in eine Schublade stecken » = enfermer dans une case, juger d’après un cliché.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte Ordnung in seinen Unterlagen und in allen Schubladen halten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man sollte niemanden einsperren oder vor anderen verstecken.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man sollte vor Freunden und Nachbarn keine Geheimnisse haben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Man sollte Menschen nicht vorschnell nach Klischees beurteilen.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-zusammenleben-lesen2",
+      "kind": "exercise",
+      "title": "Verstehen: eine Kolumne über zwei Missverständnisse",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Kolumne über zwei Missverständnisse",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nTIPP\nEine Kolumne ist ein persönlicher, oft ironischer Text. Nicht alles ist wörtlich gemeint: Achten Sie auf Übertreibungen und Vergleiche, die einen Gedanken witzig zuspitzen. [fr?] Une chronique est personnelle et souvent ironique : repérez exagérations et comparaisons.\n\nKOMMEN SIE DOCH MAL VORBEI!\nEine Kolumne von Yannick Morel\n\nAls ich vor sechs Jahren von Marseille nach Bremen zog, hatte ich mich gut vorbereitet. Ich hatte gelesen, dass die Deutschen pünktlich sind, ihre Meinung direkt sagen und ungern über Gefühle sprechen. Mit diesem Wissen, dachte ich, könne mir nichts passieren. Ich lag gründlich falsch.\n\nDas erste Missverständnis ereignete sich im Treppenhaus. Meine neue Nachbarin, Frau Hinrichs, eine pensionierte Lehrerin, sagte nach unserem dritten Gespräch über das Wetter: „Kommen Sie doch mal vorbei!“ Bei uns im Süden ist ein solcher Satz eine Höflichkeitsformel, ungefähr so verbindlich wie ein Wetterbericht. Ich habe mich deshalb nie bei ihr gemeldet. Drei Monate später erfuhr ich vom Hausmeister, dass sie extra einen Kuchen gebacken hatte, und zwar zweimal. Ihre Einladung war ernst gemeint gewesen.\n\nDas zweite Missverständnis hatte ausgerechnet mit der Direktheit zu tun, auf die ich mich doch so gut vorbereitet hatte. Als ich meinem Kollegen Torben meine erste Präsentation zeigte, sagte er: „Nicht schlecht, aber die Folien sind zu voll.“ Ich hörte nur den zweiten Teil und war zwei Tage lang beleidigt. Torben dagegen wunderte sich, warum ich ihm in der Kantine keine Gesellschaft mehr leistete. Für ihn war „nicht schlecht“ ein großes Lob gewesen; im Norden ist das fast schon Begeisterung.\n\nIch will damit nicht sagen, dass alle Ratgeber falsch liegen. Aber sie hatten mir eine Brille aufgesetzt, durch die ich nur noch sah, was ich erwartete. Frau Hinrichs war gar nicht distanziert, und Torben war nicht unhöflich, sondern sachlich und, wie sich herausstellte, ausgesprochen herzlich.\n\nInzwischen habe ich eine einfache Regel: Wenn mich etwas irritiert, frage ich nach. „Meinen Sie das ernst mit dem Vorbeikommen?“ klingt vielleicht ungeschickt, erspart aber zwei Kuchen. Und wenn Torben heute „nicht schlecht“ sagt, lade ich ihn auf ein Bier ein.\n\nFrau Hinrichs und ich trinken übrigens seit fünf Jahren an jedem ersten Sonntag im Monat zusammen Kaffee. Den Kuchen backe inzwischen ich.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-lesen2-kolumne",
+          "caption": "Kolumne: Kommen Sie doch mal vorbei!",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in der Kolumne vor allem? [fr?] De quoi parle surtout la chronique ?",
+          "explanation": "Der Autor hatte sich mit Ratgebern „gut vorbereitet“ und erlebt gerade deshalb zwei Missverständnisse. Sein Fazit: Die Ratgeber hatten ihm „eine Brille aufgesetzt, durch die ich nur noch sah, was ich erwartete“. Das ist dieselbe Idee wie im Artikel von Dr. Achterberg. [fr?] Les attentes tirées des guides provoquent les malentendus.",
+          "options": [
+            {
+              "id": "a",
+              "label": "wie man in Bremen schnell Freunde findet",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "wie Erwartungen zu Missverständnissen führen können",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "warum Kuchen in Norddeutschland so beliebt ist",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "wie man eine gute Präsentation vorbereitet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum hat sich der Autor nie bei Frau Hinrichs gemeldet? [fr?] Pourquoi l’auteur n’est-il jamais allé chez Mme Hinrichs ?",
+          "explanation": "„Bei uns im Süden ist ein solcher Satz eine Höflichkeitsformel“: Er übertrug die Bedeutung aus seiner Heimat auf die neue Situation. Frau Hinrichs meinte die Einladung dagegen ernst und backte sogar zweimal Kuchen. [fr?] Il a pris l’invitation pour une simple formule de politesse.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er hatte keine Zeit, weil er viel arbeitete.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er fand Frau Hinrichs distanziert und ziemlich unfreundlich.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er hielt die Einladung für eine reine Höflichkeitsformel.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er wusste nicht, in welcher Wohnung sie wohnt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Ungefähr so verbindlich wie ein Wetterbericht“: Was meint der Autor? [fr?] Que veut dire l’auteur par cette comparaison ?",
+          "explanation": "Ein Wetterbericht ist eine Vorhersage ohne Garantie. Der ironische Vergleich bedeutet: Der Satz „Kommen Sie doch mal vorbei!“ ist in Marseille kaum verbindlich, man muss ihn nicht wörtlich nehmen. Das Wetter selbst spielt keine Rolle. [fr?] Comparaison ironique : la formule n’engage à rien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte die Einladung sehr ernst nehmen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Einladung hängt vom Wetter ab.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Satz verpflichtet zu nichts.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Man spricht im Süden viel über das Wetter.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Torben fand die Präsentation schlecht.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Für ihn war ‚nicht schlecht‘ ein großes Lob gewesen.“ Die Kritik an den Folien war nur ein Detail. Der Autor hörte „nur den zweiten Teil“ und verstand deshalb das Lob nicht. Die Untertreibung „nicht schlecht“ ist in Norddeutschland ein typisches Kompliment. [fr?] Faux : « nicht schlecht » était un vrai compliment (litote).",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was meint der Autor mit dem Satz „Sie hatten mir eine Brille aufgesetzt“? [fr?] Que signifie l’image des lunettes ?",
+          "explanation": "Das Bild der Brille steht für eine Sichtweise: Durch sie sah er „nur noch, was ich erwartete“. Die Ratgeber haben also nicht geholfen, klarer zu sehen, sondern seinen Blick eingeschränkt. Die anderen Antworten nehmen das Bild wörtlich oder drehen es um. [fr?] Les guides ont filtré sa perception : il ne voyait que ce qu’il attendait.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Ratgeber hatten seine Wahrnehmung gefiltert.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Er hatte wegen der vielen Bücher schlechte Augen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er wollte in Bremen intellektueller wirken.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Ratgeber hatten ihm geholfen, klarer zu sehen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Regel hat der Autor heute? [fr?] Quelle règle l’auteur suit-il aujourd’hui ?",
+          "explanation": "„Inzwischen habe ich eine einfache Regel: Wenn mich etwas irritiert, frage ich nach.“ Die Frage klingt vielleicht „ungeschickt“, aber sie „erspart zwei Kuchen“, also unnötige Missverständnisse. Das entspricht dem Rat des Artikels: „Wie meinst du das?“ [fr?] Il demande des précisions quand quelque chose le dérange.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er liest vor jeder Reise einen neuen Ratgeber.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er nimmt Einladungen grundsätzlich nicht mehr an.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er sagt Kritik nur noch unter vier Augen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er fragt nach, wenn ihn etwas irritiert.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Frau Hinrichs und der Autor treffen sich heute regelmäßig.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: Sie trinken „seit fünf Jahren an jedem ersten Sonntag im Monat zusammen Kaffee“. Die Pointe am Ende: Inzwischen backt der Autor den Kuchen, die Rollen haben sich umgekehrt. [fr?] Vrai : ils se voient chaque premier dimanche du mois.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-zusammenleben-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Konflikte, Funktionsverbgefüge und Diplomatie",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Konflikte, Funktionsverbgefüge und Diplomatie",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris : écoute, grammaire et vocabulaire.\n\nVier Wochen nach der Mediation schickt Frau Asante Herrn Wieczorek eine Sprachnachricht. Hören Sie sie für die Fragen 1 und 2. [fr?] Quatre semaines après la médiation, Mme Asante laisse un message à M. Wieczorek ; écoutez-le pour les questions 1 et 2.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-zusammenleben-kontrolle-audio",
+          "caption": "Sprachnachricht von Frau Asante",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wie beurteilt Frau Asante die ersten vier Wochen? [fr?] Comment Mme Asante juge-t-elle les quatre premières semaines ?",
+          "explanation": "„Ich habe den Eindruck, dass es gut klappt“: Die Kinder spielen mit dem weichen Ball am Fahrradständer und kommen um sieben herein. Die Vereinbarung wird also eingehalten. Ihre Ich-Botschaft („Ich habe den Eindruck …“) ist selbst ein Beispiel für vorsichtige Kommunikation. [fr?] L’accord fonctionne ; la formulation en « je » reste prudente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie findet, dass die Vereinbarung gut funktioniert.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie möchte die Vereinbarung sofort beenden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie beschwert sich, dass Herr Wieczorek sie nicht einhält.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sagt, dass die Kinder nicht mehr im Hof spielen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welches neue Anliegen bringt Frau Asante zur Sprache? [fr?] Quelle nouvelle demande formule-t-elle ?",
+          "explanation": "„Wäre es möglich, dass Ihr Radio morgens etwas leiser läuft? Mein Mann schläft nach der Nachtschicht bis mittags.“ Sie formuliert die Bitte im Konjunktiv II, schwächt sie mit „etwas“ ab und schlägt vor, darüber beim Treffen zu sprechen. [fr?] Elle demande, avec diplomatie, que la radio soit moins forte le matin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Herr Wieczorek soll den Kinderwagen im Keller lassen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Kinder sollen am Wochenende länger spielen dürfen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Radio von Herrn Wieczorek soll morgens leiser sein.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das nächste Treffen soll früher stattfinden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Funktionsverbgefüge. [fr?] Complétez les locutions.",
+          "text": "Frau Asante möchte noch ein Thema zur Sprache [[1]]. · Sie bittet Herrn Wieczorek, auf ihren Mann Rücksicht zu [[2]]. · Beim Treffen wollen beide eine neue Vereinbarung [[3]].",
+          "explanation": "Zur Sprache bringen, Rücksicht nehmen auf, eine Vereinbarung treffen. Nach „bitten“ folgt eine Infinitivgruppe mit „zu“: „Rücksicht zu nehmen“. Der Nomenteil steht vor dem Verb am Ende. [fr?] zur Sprache bringen, Rücksicht nehmen, eine Vereinbarung treffen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bringen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "nehmen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "treffen"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wäre",
+              "es",
+              "möglich,",
+              "dass",
+              "Ihr Radio",
+              "morgens",
+              "etwas",
+              "leiser",
+              "läuft?"
+            ],
+            [
+              "Wäre",
+              "es",
+              "möglich,",
+              "dass",
+              "morgens",
+              "Ihr Radio",
+              "etwas",
+              "leiser",
+              "läuft?"
+            ]
+          ],
+          "explanation": "Die diplomatische Bitte beginnt mit „Wäre es möglich, …“. Im Nebensatz mit „dass“ steht das konjugierte Verb „läuft“ am Ende, „etwas leiser“ direkt davor. Die Zeitangabe „morgens“ kann vor oder nach dem Subjekt stehen. [fr?] Wäre es möglich, dass … + verbe conjugué en fin de subordonnée."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Satz ist eine diplomatische Bitte an eine Kollegin? [fr?] Quelle phrase est une demande diplomatique à une collègue ?",
+          "explanation": "Konjunktiv II (könntest), „vielleicht“ und „etwas“ machen die Bitte weich, ohne das Problem zu verschweigen. „Schon wieder“, „gefälligst“ und „typisch für dich“ sind Vorwürfe, die einen Konflikt eher verschärfen. [fr?] Konjunktiv II + atténuateurs ; éviter reproches et généralisations.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du telefonierst schon wieder viel zu laut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Telefonier gefälligst draußen auf dem Flur!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Könntest du vielleicht etwas leiser telefonieren?",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das ist mal wieder typisch für dich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was bedeutet „ein Missverständnis ausräumen“? [fr?] Que signifie « ein Missverständnis ausräumen » ?",
+          "explanation": "„Ausräumen“ bedeutet wörtlich, etwas aus einem Raum herausnehmen. Im übertragenen Sinn räumt man Zweifel, Bedenken oder Missverständnisse aus, das heißt: Man klärt sie, bis sie nicht mehr da sind. [fr?] « ausräumen » = dissiper, éclaircir.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein Missverständnis aufschreiben",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ein Missverständnis klären und beenden",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "ein Missverständnis absichtlich verursachen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "ein Missverständnis an andere weitererzählen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Ich … gern noch etwas dazu sagen.“ Welche Form passt? [fr?] Quelle forme convient ?",
+          "explanation": "„Ich würde gern noch etwas dazu sagen“ ist eine höfliche Art, um das Wort zu bitten: würde + gern + Infinitiv. „Hätte“ und „wäre“ brauchen ein anderes Verb („Ich hätte gern das Wort“); „könnte gern“ ist keine übliche Verbindung. [fr?] « Ich würde gern … » : demander la parole poliment.",
+          "options": [
+            {
+              "id": "a",
+              "label": "hätte",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "wäre",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "würde",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "könnte",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-zusammenleben-lesen-artikel",
+      "kind": "image",
+      "title": "Article « Direkt, indirekt, missverstanden »",
+      "alt": "Article d’une spécialiste de la communication : « Direkt, indirekt, missverstanden ». À partir d’un malentendu entre un ingénieur lyonnais et un collègue allemand, elle discute l’intérêt et les limites des modèles culturels.",
+      "image": {
+        "layout": "article",
+        "kicker": "Interkulturelle Kommunikation",
+        "icon": "messages-square",
+        "title": "Direkt, indirekt, missverstanden – warum Kultur selten so einfach ist, wie Ratgeber behaupten",
+        "byline": "Dr. Miriam Achterberg, Kommunikationswissenschaftlerin",
+        "lead": "Julien, ein junger Ingenieur aus Lyon, stellt in seiner ersten Woche bei einem Stuttgarter Zulieferer ein Konzept vor. Kaum ist er fertig, sagt ein Kollege: „Das funktioniert so nicht.“",
+        "paragraphs": [
+          "Julien fühlt sich bloßgestellt und spricht den Rest des Tages kaum ein Wort. Der Kollege dagegen hat nichts Böses im Sinn: Er hält das Konzept für verbesserungswürdig, Julien selbst schätzt er sehr."
+        ]
+      }
+    },
+    {
+      "key": "b2-zusammenleben-hoeren-audio",
+      "kind": "audio",
+      "title": "Une médiation entre voisins",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Guten Tag, Frau Asante, guten Tag, Herr Wieczorek. Schön, dass Sie beide gekommen sind. Bevor wir anfangen, kurz zu meiner Rolle: Ich bin neutral, und ich entscheide nichts. Die Lösung finden Sie selbst. Ich achte nur darauf, dass jeder ausreden kann. Und alles, was hier gesagt wird, bleibt in diesem Raum. Sind Sie damit einverstanden?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Ja, einverstanden."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Ja, sicher."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Herr Wieczorek, Sie haben sich an die Nachbarschaftsmediation gewandt. Möchten Sie anfangen?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Gern. Also, ich wohne seit über dreißig Jahren im Erdgeschoss. Seit dem Frühjahr spielen die Kinder von Frau Asante fast jeden Abend Fußball im Hof, oft bis neun Uhr. Der Ball knallt gegen mein Fenster, und ich erschrecke jedes Mal. Ich bin vierundsiebzig, ich schlafe sowieso schlecht."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Und dann der Flur: Da stehen Fahrräder und ein Kinderwagen, und mit meinem Rollator komme ich kaum vorbei. Ich finde, Ballspielen sollte im Hof einfach verboten werden."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Danke, Herr Wieczorek. Frau Asante, wie sehen Sie die Situation?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Ich verstehe, dass der Ball stört, wirklich. Aber unsere Wohnung hat zweieinhalb Zimmer für vier Personen. Der Hof ist der einzige Ort, wo sich die Kinder bewegen können, ohne dass ich sie an einer großen Straße beaufsichtigen muss."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Mein Mann arbeitet nachts im Krankenhaus und schläft bis mittags. Die Kinder müssen also schon vormittags leise sein. Und was mich ehrlich gesagt verletzt hat: Wir haben im Briefkasten Zettel gefunden, ohne Namen. Darauf stand, wir sollten endlich Rücksicht nehmen. So kann man doch nicht miteinander reden."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Früher war das hier ein ruhiges Haus, das muss man auch mal sagen dürfen."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Herr Wieczorek, Sie kommen gleich noch einmal zu Wort. Lassen Sie Frau Asante bitte erst ausreden."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Ich bin eigentlich fertig. Ich wünsche mir nur, dass wir miteinander reden statt übereinander."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Wenn ich Sie richtig verstehe, Herr Wieczorek, geht es Ihnen vor allem um Ruhe am Abend und darum, dass Sie sicher durch den Flur kommen. Und Ihnen, Frau Asante, ist wichtig, dass die Kinder draußen spielen können; auch Sie brauchen zu bestimmten Zeiten Ruhe. Habe ich das richtig zusammengefasst?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Ja, das stimmt. Und, Frau Asante, die Zettel waren von mir. Das war nicht in Ordnung, das tut mir leid. Ich wusste einfach nicht, wie ich das Thema zur Sprache bringen sollte."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Danke, dass Sie das sagen. Das bedeutet mir viel."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Dann lassen Sie uns Ideen sammeln. Was wäre für Sie beide denkbar?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Die Kinder könnten auf der anderen Seite spielen, am Fahrradständer. Da ist kein Fenster. Und wir könnten einen weichen Ball kaufen."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Das wäre schon eine große Hilfe. Und vielleicht nur bis sieben Uhr? Danach brauche ich wirklich Ruhe."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Bis sieben ist in Ordnung. Am Wochenende vielleicht bis halb acht?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Gut, damit kann ich leben."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Und der Kinderwagen im Flur?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Wenn es im Keller einen Platz ohne Stufen gäbe, würde ich ihn sofort dort abstellen. Aber die Kellertreppe ist zu steil."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Und die Fahrräder? Die gehören laut Hausordnung ohnehin nicht in den Flur."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Das sind die Räder meiner Kinder. Wenn am Fahrradständer im Hof Platz ist, stellen wir sie gern dorthin."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Da ist genug Platz, ich habe gestern nachgesehen."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Ich würde vorschlagen, dass ich bei der Hausverwaltung nachfrage, ob man den Raum unter der Treppe nutzen kann. Darf ich Ihre Vereinbarung festhalten? Ballspielen nur auf der Seite am Fahrradständer, mit einem weichen Ball, werktags bis neunzehn Uhr, am Wochenende bis halb acht."
+        },
+        {
+          "voice": "frau",
+          "name": "Frau Wolters",
+          "text": "Wir probieren das vier Wochen lang aus und treffen uns am zwölften Juli wieder."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Wieczorek",
+          "text": "Einverstanden."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Ja, so machen wir es."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-lesen2-kolumne",
+      "kind": "image",
+      "title": "Chronique « Kommen Sie doch mal vorbei! »",
+      "alt": "Chronique d’un Marseillais installé à Brême : deux malentendus, avec une voisine et un collègue, et ce qu’il en a appris.",
+      "image": {
+        "layout": "article",
+        "kicker": "Kolumne",
+        "icon": "coffee",
+        "title": "Kommen Sie doch mal vorbei!",
+        "byline": "Yannick Morel",
+        "lead": "Als ich vor sechs Jahren von Marseille nach Bremen zog, hatte ich mich gut vorbereitet.",
+        "paragraphs": [
+          "Ich hatte gelesen, dass die Deutschen pünktlich sind, ihre Meinung direkt sagen und ungern über Gefühle sprechen. Mit diesem Wissen, dachte ich, könne mir nichts passieren. Ich lag gründlich falsch."
+        ]
+      }
+    },
+    {
+      "key": "b2-zusammenleben-kontrolle-audio",
+      "kind": "audio",
+      "title": "Message vocal de Mme Asante quatre semaines plus tard",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Guten Tag, Herr Wieczorek, hier ist Efua Asante aus dem ersten Stock. Ich wollte mich kurz melden, weil die vier Wochen ja bald um sind. Ich habe den Eindruck, dass es gut klappt: Die Kinder spielen mit dem weichen Ball am Fahrradständer, und um sieben kommen sie rein."
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Asante",
+          "text": "Nur eine Sache wollte ich noch zur Sprache bringen. Wäre es möglich, dass Ihr Radio morgens etwas leiser läuft? Mein Mann schläft nach der Nachtschicht bis mittags. Vielleicht können wir das beim Treffen am Zwölften kurz besprechen. Einen schönen Tag noch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-zusammenleben-einstieg-foto",
+      "kind": "image",
+      "title": "Une clôture de jardin",
+      "alt": "Une haute clôture de jardin blanche, en pointe, sur une butte d’herbe verte ; derrière, on ne voit que le toit d’une maison.",
+      "photo": {
+        "file": "libre/commons/zusammenleben-gartenzaun.jpg"
+      },
+      "credit": "Clemens Stockner, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Suchart_Wannaset_Unser_Gartenzaun_01.jpg"
+    },
+    {
+      "key": "b2-zusammenleben-lexique",
+      "kind": "audio",
+      "title": "Lexique · Zusammenleben: Konflikte, Missverständnisse und Verständigung",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Konflikt, die Konflikte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Missverständnis, die Missverständnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mediation, die Mediationen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vermitteln zwischen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Vereinbarung, die Vereinbarungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich einigen auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Rücksicht nehmen auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Vorurteil, die Vorurteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "jemanden in eine Schublade stecken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich beschweren über"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zur Sprache bringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in Frage stellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Rolle spielen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in Kauf nehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zum Ausdruck bringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in Konflikt geraten mit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "unterstellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachfragen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "empfindlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Ich-Botschaft, die Ich-Botschaften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hausordnung, die Hausordnungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gegenüber"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich entschuldigen bei … für"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

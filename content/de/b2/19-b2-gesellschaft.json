@@ -1,0 +1,2475 @@
+{
+  "id": "b2-gesellschaft",
+  "title": "Gesellschaft: Demokratie gestalten, mitreden, mitentscheiden",
+  "objective": "Comprendre une tribune argumentée sur les assemblées citoyennes et repérer la position de l’autrice, suivre une réunion publique en prenant des notes détaillées, lire une dépêche sur une pétition ; employer les relatives avec wer, was et wo(r) + préposition et le complément du nom au génitif (dessen, deren).",
+  "prerequisites": [
+    "b2-wissenschaft-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap (ville et personnages fictifs)."
+  ],
+  "grammarFocus": [
+    "relativsaetze-wer-was",
+    "genitivattribut"
+  ],
+  "layer": "content/b/source/b2/b2-gesellschaft.mjs",
+  "vocabulary": [
+    {
+      "id": "buergerbeteiligung",
+      "word": "Bürgerbeteiligung",
+      "article": "die",
+      "plural": "Bürgerbeteiligungen",
+      "partOfSpeech": "noun",
+      "translation": "la participation citoyenne",
+      "example": "Die Stadt setzt bei der Planung des Hafengeländes auf mehr Bürgerbeteiligung.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "buergerrat",
+      "word": "Bürgerrat",
+      "article": "der",
+      "plural": "Bürgerräte",
+      "partOfSpeech": "noun",
+      "translation": "l’assemblée citoyenne (tirée au sort)",
+      "example": "Der Bürgerrat hat zwölf Empfehlungen formuliert.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "losverfahren",
+      "word": "Losverfahren",
+      "article": "das",
+      "plural": "Losverfahren",
+      "partOfSpeech": "noun",
+      "translation": "le tirage au sort (procédure)",
+      "example": "Die Mitglieder des Bürgerrats werden im Losverfahren bestimmt.",
+      "note": "per Los auswählen : tirer au sort",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "wahlbeteiligung",
+      "word": "Wahlbeteiligung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le taux de participation (à une élection)",
+      "example": "Die Wahlbeteiligung lag bei der letzten Kommunalwahl unter fünfzig Prozent.",
+      "note": "sans pluriel dans ce sens",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "stimme",
+      "word": "Stimme",
+      "article": "die",
+      "plural": "Stimmen",
+      "partOfSpeech": "noun",
+      "translation": "la voix ; le suffrage",
+      "example": "Beim Bürgerhaushalt hat jede Person fünf Stimmen.",
+      "note": "seine Stimme abgeben : voter",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "abstimmen-ueber",
+      "word": "abstimmen über",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "voter sur, se prononcer par un vote",
+      "example": "Im Mai stimmen die Einwohnerinnen und Einwohner über die Vorschläge ab.",
+      "note": "+ accusatif · séparable : ab|stimmen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "sich-beteiligen-an",
+      "word": "sich beteiligen an",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "participer à",
+      "example": "Mehr als zweitausend Menschen wollen sich an der Abstimmung beteiligen.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "sich-einsetzen-fuer",
+      "word": "sich einsetzen für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’engager pour, défendre",
+      "example": "Sie setzt sich seit Jahren für bezahlbare Wohnungen ein.",
+      "note": "+ accusatif · séparable : ein|setzen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "einfluss-nehmen-auf",
+      "word": "Einfluss nehmen auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "influer sur, peser sur",
+      "example": "Mit einer Petition kann man Einfluss auf die Politik nehmen.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "petition",
+      "word": "Petition",
+      "article": "die",
+      "plural": "Petitionen",
+      "partOfSpeech": "noun",
+      "translation": "la pétition",
+      "example": "Die Petition hat in sechs Wochen fast fünftausend Unterschriften gesammelt.",
+      "note": "eine Petition starten, unterschreiben, einreichen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "unterschrift",
+      "word": "Unterschrift",
+      "article": "die",
+      "plural": "Unterschriften",
+      "partOfSpeech": "noun",
+      "translation": "la signature",
+      "example": "Wir sammeln Unterschriften für längere Öffnungszeiten.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "stadtrat",
+      "word": "Stadtrat",
+      "article": "der",
+      "plural": "Stadträte",
+      "partOfSpeech": "noun",
+      "translation": "le conseil municipal ; le conseiller municipal",
+      "example": "Der Stadtrat berät im April über den Antrag.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "antrag",
+      "word": "Antrag",
+      "article": "der",
+      "plural": "Anträge",
+      "partOfSpeech": "noun",
+      "translation": "la demande ; la motion",
+      "example": "Der Jugendbeirat hat einen Antrag auf eine neue Sportfläche gestellt.",
+      "note": "einen Antrag stellen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "empfehlung",
+      "word": "Empfehlung",
+      "article": "die",
+      "plural": "Empfehlungen",
+      "partOfSpeech": "noun",
+      "translation": "la recommandation",
+      "example": "Die Empfehlungen des Bürgerrats sind nicht bindend.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "bindend",
+      "word": "bindend",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "contraignant",
+      "example": "Das Ergebnis der Befragung ist für den Stadtrat nicht bindend.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "mehrheit",
+      "word": "Mehrheit",
+      "article": "die",
+      "plural": "Mehrheiten",
+      "partOfSpeech": "noun",
+      "translation": "la majorité",
+      "example": "Eine knappe Mehrheit hat für den neuen Park gestimmt.",
+      "note": "contraire : die Minderheit",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "kompromiss",
+      "word": "Kompromiss",
+      "article": "der",
+      "plural": "Kompromisse",
+      "partOfSpeech": "noun",
+      "translation": "le compromis",
+      "example": "Am Ende haben beide Seiten einen Kompromiss gefunden.",
+      "note": "einen Kompromiss finden, schließen, eingehen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "politikverdrossenheit",
+      "word": "Politikverdrossenheit",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le désenchantement envers la politique",
+      "example": "Echte Beteiligung kann helfen, die Politikverdrossenheit zu verringern.",
+      "note": "sans pluriel · politikverdrossen",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "verantwortung-uebernehmen",
+      "word": "Verantwortung übernehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre des responsabilités",
+      "example": "Wer im Verein Verantwortung übernimmt, lernt viel über Demokratie.",
+      "note": "für + accusatif",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "zu-wort-kommen",
+      "word": "zu Wort kommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir la parole, pouvoir s’exprimer",
+      "example": "Im Bürgerrat kommen auch Menschen zu Wort, die sonst schweigen.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "stellung-nehmen-zu",
+      "word": "Stellung nehmen zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre position sur",
+      "example": "Der Stadtrat nimmt zu jeder Empfehlung schriftlich Stellung.",
+      "note": "+ datif · die Stellungnahme : la prise de position",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "einwand",
+      "word": "Einwand",
+      "article": "der",
+      "plural": "Einwände",
+      "partOfSpeech": "noun",
+      "translation": "l’objection",
+      "example": "Diesen Einwand halte ich für berechtigt.",
+      "note": "einwenden, dass … : objecter que …",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "berechtigt",
+      "word": "berechtigt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "fondé, légitime",
+      "example": "Die Kritik an der Auswahl der Fachleute ist zum Teil berechtigt.",
+      "note": null,
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "zur-verfuegung-stellen",
+      "word": "zur Verfügung stellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "mettre à disposition",
+      "example": "Die Stadt stellt dem Stadtteil zweihunderttausend Euro zur Verfügung.",
+      "note": "jemandem (datif) etwas (accusatif)",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "ehrenamtlich",
+      "word": "ehrenamtlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "bénévole",
+      "example": "Dragana Petrović arbeitet ehrenamtlich im Mieterverein.",
+      "note": "das Ehrenamt : le bénévolat",
+      "audio": {
+        "media": "b2-gesellschaft-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-gesellschaft-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Demokratie im Alltag",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Demokratie im Alltag",
+        "description": "DEMOKRATIE IM ALLTAG\nWählen gehen, eine Petition unterschreiben, im Elternbeirat mitreden, im Verein Verantwortung übernehmen: Demokratie findet nicht nur im Parlament statt. In diesem Modul geht es um die Frage, wie Bürgerinnen und Bürger zwischen zwei Wahlen mitentscheiden können. [fr?] La démocratie ne se joue pas seulement au Parlement : ce module porte sur les façons de participer entre deux élections.\n\nFRAGEN ZUM EINSTIEG\n• Wo haben Sie selbst schon einmal mitentschieden: in der Schule, im Betrieb, in einem Verein oder in Ihrer Gemeinde? [fr?] Où avez-vous déjà participé à une décision ?\n• Was hält Menschen davon ab, sich politisch zu engagieren? [fr?] Qu’est-ce qui empêche les gens de s’engager politiquement ?\n• Sollten Bürgerinnen und Bürger öfter direkt über wichtige Fragen abstimmen? Warum, warum nicht? [fr?] Les citoyens devraient-ils voter plus souvent directement sur les grandes questions ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Stichwörter auf Deutsch und formulieren Sie in Gedanken eine begründete Antwort. [fr?] Trouvez deux ou trois mots-clés par question et formulez mentalement une réponse argumentée.\n\nZIELE\n• Ich kann einen argumentativen Text über Bürgerbeteiligung verstehen und die Position der Autorin erkennen. [fr?] Je peux comprendre un texte argumentatif et repérer la position de l’autrice.\n• Ich kann einer öffentlichen Diskussion folgen und dabei ausführliche Notizen machen. [fr?] Je peux suivre un débat public en prenant des notes détaillées.\n• Ich kann eine Meldung über eine Petition verstehen und die Positionen der Beteiligten unterscheiden. [fr?] Je peux comprendre une dépêche et distinguer les positions des acteurs.\n• Ich kann Relativsätze mit „wer“, „was“ und „wo(r)“ + Präposition sowie Genitivattribute verwenden. [fr?] Je peux employer les relatives avec wer, was, wo(r) + préposition et le génitif.\n\nWICHTIGE WÖRTER\n• die Bürgerbeteiligung — la participation citoyenne\n• der Bürgerrat, die Bürgerräte — l’assemblée citoyenne tirée au sort\n• das Losverfahren — le tirage au sort\n• die Wahlbeteiligung — le taux de participation\n• sich einsetzen für (+ Akk.) — s’engager pour\n• Einfluss nehmen auf (+ Akk.) — influer sur\n• die Politikverdrossenheit — le désenchantement envers la politique\n• Stellung nehmen zu (+ Dat.) — prendre position sur",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Wahltag: Jede Stimme zählt.",
+          "media": "b2-gesellschaft-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-gesellschaft-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Gastbeitrag über Bürgerräte",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Gastbeitrag über Bürgerräte",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n1. Global: Lesen Sie die Überschrift, den ersten und den letzten Absatz. Welche Frage stellt die Autorin, und wie beantwortet sie sie? [fr?] Lecture globale : titre, premier et dernier paragraphe. Quelle question l’autrice pose-t-elle, quelle réponse donne-t-elle ?\n2. Argumente: Achten Sie auf die Wörter, die ein Argument einleiten oder einschränken: „zunächst einmal“, „hinzu kommt“, „allerdings“, „jedoch“. [fr?] Repérez les mots qui introduisent ou nuancent un argument.\n3. Detail: Lesen Sie dann die Aufgaben und nur die passenden Stellen ganz genau. [fr?] Lisez ensuite les questions, puis seulement les passages utiles, en détail.\n\nGELOST STATT GEWÄHLT: WAS BÜRGERRÄTE LEISTEN KÖNNEN – UND WAS NICHT\nEin Gastbeitrag von Dr. Henrike Lassen, Politikwissenschaftlerin\n\n(A) Als die Stadt Wendelstedt im vergangenen Herbst vierzig Einwohnerinnen und Einwohner per Los auswählte, damit sie über die Zukunft des alten Hafengeländes berieten, war die Skepsis groß. „Wer nicht gewählt ist, hat auch keine Legitimation“, hieß es damals im Stadtrat. Ein halbes Jahr später liegt ein Gutachten des Bürgerrats auf dem Tisch, über das selbst frühere Kritiker anerkennend sprechen. Die vierzig Mitglieder – die jüngste war sechzehn, der älteste einundachtzig – empfehlen unter anderem, auf dem Gelände bezahlbare Wohnungen, einen öffentlichen Park und Werkstätten für junge Handwerksbetriebe zu verbinden. Was ist da passiert?\n\n(B) Die Idee ist alles andere als neu. Schon im antiken Athen wurden viele öffentliche Ämter durch das Los vergeben, weil man so allen Bürgern die gleiche Chance geben wollte. Heute läuft ein Bürgerrat meist folgendermaßen ab: Aus dem Melderegister wird eine Zufallsstichprobe gezogen, wobei auf eine ausgewogene Mischung nach Alter, Geschlecht, Bildungsabschluss und Wohnort geachtet wird. Die Ausgewählten treffen sich an mehreren Wochenenden, hören Fachleute an, diskutieren in kleinen Gruppen und formulieren am Ende Empfehlungen. Bindend sind diese nicht: Die Entscheidung bleibt Sache des gewählten Parlaments.\n\n(C) Was spricht für dieses Verfahren? Zunächst einmal kommen Menschen zu Wort, die sonst kaum gehört werden. Wer abends Schicht arbeitet, kleine Kinder betreut oder sich in langen Sitzungen unsicher fühlt, ist in Parteien und Ausschüssen selten vertreten. Im Bürgerrat dagegen sitzt die Pflegekraft neben dem Bankangestellten und die Schülerin neben dem Rentner. Hinzu kommt ein zweiter Vorteil: Da die Mitglieder nicht wiedergewählt werden wollen, können sie ihre Meinung ändern, ohne das Gesicht zu verlieren. Genau das ist etwas, womit viele Teilnehmende nicht gerechnet hatten. Eine Teilnehmerin, deren Familie seit drei Generationen am Hafen lebt, sagte zum Abschluss: „Ich bin mit einer festen Meinung gekommen und gehe mit einer besseren.“\n\n(D) Allerdings sollte man die Erwartungen nicht zu hoch schrauben. Ein Bürgerrat ersetzt keine Wahlen, und er kann auch nicht verhindern, dass seine Empfehlungen in einer Schublade verschwinden. Genau darin liegt die größte Gefahr: Wenn Politikerinnen und Politiker zuerst Beteiligung versprechen und die Ergebnisse dann übergehen, wächst die Enttäuschung. Was als Mittel gegen Politikverdrossenheit gedacht war, kann sie in diesem Fall sogar verstärken. Auch die Kosten sind nicht zu unterschätzen: Moderation, Fachleute und Aufwandsentschädigungen für die Teilnehmenden summieren sich schnell auf einen sechsstelligen Betrag.\n\n(E) Kritiker wenden außerdem ein, die Auswahl der Fachleute beeinflusse die Ergebnisse. Wer bestimmt, welche Expertinnen und Experten eingeladen werden? Und wer formuliert die Leitfrage, auf die der Bürgerrat antworten soll? Diese Einwände sind berechtigt. Sie sprechen jedoch nicht gegen das Verfahren an sich, sondern für klare Regeln: Die Leitfrage sollte öffentlich diskutiert, die Liste der Fachleute veröffentlicht und die Moderation einer unabhängigen Stelle übertragen werden.\n\n(F) In Wendelstedt hat der Stadtrat zugesagt, zu jeder einzelnen Empfehlung schriftlich Stellung zu nehmen – auch zu denen, die er ablehnt. Außerdem soll alles, was der Bürgerrat erarbeitet hat, im Internet veröffentlicht werden. Das klingt weniger spektakulär, als es ist. Denn ob ein Bürgerrat die Demokratie belebt, hängt nicht vom Los ab, sondern davon, was danach mit seinen Ergebnissen geschieht. Wer Menschen um ihren Rat bittet, muss auch bereit sein, ihnen zuzuhören.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesellschaft-lesen-artikel",
+          "caption": "Gastbeitrag: Gelost statt gewählt",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche Position vertritt die Autorin insgesamt? [fr?] Quelle position l’autrice défend-elle dans l’ensemble ?",
+          "explanation": "Die Autorin wägt Vorteile (C) und Risiken (D, E) ab und zieht im letzten Absatz ihr Fazit: Ob ein Bürgerrat die Demokratie belebt, hängt davon ab, „was danach mit seinen Ergebnissen geschieht“. Die erste Antwort widerspricht Absatz D („Ein Bürgerrat ersetzt keine Wahlen“). Die zweite Antwort nennt einen Einwand, den die Autorin zwar für berechtigt hält, aber nicht als Argument gegen das Verfahren gelten lässt. [fr?] Bilan nuancé : ces assemblées sont utiles si la politique tient compte de leurs résultats. La première réponse contredit le paragraphe D ; la deuxième reprend une objection qu’elle ne retient pas contre le principe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bürgerräte sollten die gewählten Parlamente langfristig ersetzen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bürgerräte bringen wenig, weil am Ende doch die Fachleute die Ergebnisse steuern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Bürgerräte sind sinnvoll, wenn die Politik ihre Ergebnisse ernst nimmt.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Bürgerräte eignen sich nur für kleine Städte wie Wendelstedt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum erwähnt die Autorin das antike Athen? [fr?] Pourquoi l’autrice mentionne-t-elle l’Athènes antique ?",
+          "explanation": "Der Absatz beginnt mit der These „Die Idee ist alles andere als neu“; Athen ist das historische Beispiel dafür. Einen Vergleich, eine Kritik an der antiken Demokratie oder eine Erklärung zum Status der Empfehlungen enthält dieser Satz nicht. „Alles andere als neu“ bedeutet übrigens „ganz und gar nicht neu“. [fr?] Athènes illustre la thèse « l’idée n’a rien de nouveau ». « alles andere als » = tout sauf.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um zu beweisen, dass Bürgerräte heute besser funktionieren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um zu kritisieren, dass damals nur Männer Bürger sein durften.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Um zu erklären, warum Empfehlungen heute nicht bindend sind.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Um zu zeigen, dass die Idee des Losverfahrens alt ist.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Das Parlament muss die Empfehlungen eines Bürgerrats umsetzen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Bindend sind diese nicht: Die Entscheidung bleibt Sache des gewählten Parlaments.“ Ein Bürgerrat berät und empfiehlt; entscheiden darf er nicht. Genau deshalb warnt die Autorin in Absatz D davor, dass Empfehlungen „in einer Schublade verschwinden“ können. [fr?] Faux : les recommandations ne sont pas contraignantes (nicht bindend), le Parlement garde la décision.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was meint die Teilnehmerin mit dem Satz „Ich bin mit einer festen Meinung gekommen und gehe mit einer besseren“? [fr?] Que veut dire la participante par cette phrase ?",
+          "explanation": "Der Satz steht direkt nach dem Vorteil, dass Mitglieder „ihre Meinung ändern können, ohne das Gesicht zu verlieren“. „Eine bessere Meinung“ heißt: eine durchdachtere, nicht die Meinung anderer. Dass sie die Position der Fachleute übernommen hätte, sagt sie nicht; und sie hat ihre Meinung gerade nicht unverändert behalten. [fr?] Elle a fait évoluer son opinion grâce aux discussions : c’est l’illustration du deuxième avantage du paragraphe C.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihre Meinung hat sich durch die Diskussionen weiterentwickelt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hat ihre erste Meinung bis zum Schluss verteidigt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat am Ende einfach die Meinung der Fachleute übernommen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie findet das Thema inzwischen zu kompliziert für eine Meinung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Worin sieht die Autorin die größte Gefahr? [fr?] Où l’autrice voit-elle le plus grand danger ?",
+          "explanation": "„Genau darin liegt die größte Gefahr: Wenn Politikerinnen und Politiker zuerst Beteiligung versprechen und die Ergebnisse dann übergehen, wächst die Enttäuschung.“ Die Kosten nennt die Autorin zwar auch, aber nur als zusätzlichen Punkt („Auch die Kosten sind nicht zu unterschätzen“), und einen Vergleich mit einer Wahl zieht sie nicht. [fr?] Le danger principal : promettre la participation puis ignorer les résultats. Les coûts ne sont qu’un point secondaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Mitglieder bringen zu wenig Fachwissen mit.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Bürgerräte kosten mehr als eine normale Wahl.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Politik verspricht Beteiligung und übergeht dann die Ergebnisse.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Zu wenige Menschen sind bereit, an einem Bürgerrat teilzunehmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Die meisten Mitglieder des Bürgerrats in Wendelstedt waren jünger als dreißig Jahre.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Wir erfahren nur das Alter des jüngsten (sechzehn) und des ältesten Mitglieds (einundachtzig) sowie das Prinzip einer „ausgewogenen Mischung nach Alter“. Wie viele Mitglieder unter dreißig waren, sagt der Text nicht. Schließen Sie nichts aus Ihrem eigenen Wissen. [fr?] Non mentionné : seuls l’âge du plus jeune et celui du plus âgé sont donnés.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? [fr?] Quel intertitre convient à quel paragraphe ?",
+          "explanation": "B: vom antiken Athen zum heutigen Ablauf. C: Menschen, die sonst nicht gehört werden, und die Freiheit, die Meinung zu ändern. D: Was ein Bürgerrat nicht kann, Enttäuschung und Kosten. E: die Kritik an Fachleuten und Leitfrage, die Antwort darauf sind Regeln. F: das Versprechen des Stadtrats und das Fazit. [fr?] Chaque intertitre résume l’idée directrice d’un paragraphe ; relisez la première et la dernière phrase de chacun.",
+          "pairs": [
+            {
+              "left": "Absatz B",
+              "right": "Ein altes Verfahren in neuer Form"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Neue Stimmen am Tisch"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Grenzen und Risiken"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Berechtigte Einwände, klare Regeln"
+            },
+            {
+              "left": "Absatz F",
+              "right": "Entscheidend ist, was danach passiert"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Worauf verweisen die Wörter? Ergänzen Sie mit Wörtern aus dem Text. [fr?] À quoi renvoient ces mots ? Complétez avec des mots du texte.",
+          "text": "Absatz B: „diese“ in „Bindend sind diese nicht“ meint die [[1]]. · Absatz E: „Diese Einwände“ betreffen die Auswahl der [[2]] und die Formulierung der [[3]].",
+          "explanation": "Ein Text bleibt zusammenhängend, weil Wörter wie „diese“ oder „diese Einwände“ auf etwas Vorheriges zurückverweisen. „Diese“ greift das letzte passende Nomen im Plural auf: „formulieren am Ende Empfehlungen“. „Diese Einwände“ fasst die beiden Fragen davor zusammen: Wer wählt die Fachleute aus, und wer formuliert die Leitfrage? [fr?] Les reprises (diese, diese Einwände) renvoient à ce qui précède : les recommandations ; le choix des experts et la formulation de la question.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Empfehlungen"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Fachleute",
+                "Expertinnen und Experten",
+                "Experten",
+                "Expertinnen"
+              ],
+              "size": 25,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Leitfrage"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-gesellschaft-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: eine Bürgerversammlung zum Bürgerhaushalt",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Bürgerversammlung zum Bürgerhaushalt",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\nIm Gemeindesaal von Wendelstedt-Süd findet eine Bürgerversammlung zum neuen Bürgerhaushalt statt. Es sprechen Imke Hansen (Moderation), Rainer Gerlach (Stadtverwaltung), Dragana Petrović (Mieterverein) und Mats Behrendt (Jugendbeirat, 17 Jahre). [fr?] Réunion publique sur le nouveau budget participatif du quartier, avec quatre intervenants.\n\nSTRATEGIE\n1. Erstes Hören: Wer vertritt welche Position? Achten Sie auf Zustimmung, Sorgen und Einwände. [fr?] Première écoute : qui défend quelle position ? Repérez accords, inquiétudes et objections.\n2. Lesen Sie dann die Notizen. Überlegen Sie bei jeder Lücke: Fehlt eine Zahl, ein Monat oder ein Nomen? [fr?] Lisez ensuite les notes : manque-t-il un nombre, un mois, un nom ?\n3. Zweites Hören: Ergänzen Sie nur Stichwörter. Zahlen dürfen Sie als Ziffern schreiben. [fr?] Deuxième écoute : complétez avec des mots-clés ; les nombres peuvent être écrits en chiffres.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesellschaft-hoeren-audio",
+          "caption": "Bürgerversammlung in Wendelstedt-Süd",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Bürgerhaushalt Wendelstedt-Süd · Budget: [[1]] Euro · Vorschläge: bis Ende [[2]], online oder im Bürgerbüro · mitmachen darf, wer im Stadtteil wohnt und mindestens [[3]] Jahre alt ist · April: Prüfung durch die [[4]] · Mai: Abstimmung mit [[5]] Stimmen pro Person",
+          "explanation": "Rainer Gerlach beschreibt drei Phasen: Vorschläge „bis Ende März“, Prüfung „im April“ durch die Verwaltung („prüfen wir in der Verwaltung“), Abstimmung „im Mai“ mit „fünf Stimmen, die sie frei verteilen kann“. Mitmachen darf, „wer im Stadtteil wohnt und mindestens vierzehn Jahre alt ist“. Das Budget nennt die Moderatorin gleich am Anfang. [fr?] Les trois phases : propositions jusqu’à fin mars, examen par l’administration en avril, vote en mai (cinq voix par personne).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "200 000",
+                "200.000",
+                "200000",
+                "zweihunderttausend"
+              ],
+              "size": 19,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "März"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "14",
+                "vierzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Verwaltung",
+                "Stadtverwaltung"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "5",
+                "fünf"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Sorge des Mietervereins: Es gewinnt, wer gut [[1]] ist. · Maßnahmen der Stadt: Unterlagen in [[2]] Sprachen, im Februar ein [[3]] in den Wohngebieten · Obergrenze pro Projekt: [[4]] Euro · Idee des Jugendbeirats: eine überdachte [[5]] hinter der Gesamtschule · im Herbst: ein [[6]] über alle Vorschläge",
+          "explanation": "Frau Petrović: „Wer gut organisiert ist und viele Leute mobilisieren kann, gewinnt.“ Herr Gerlach antwortet mit Unterlagen „in sechs Sprachen“ und einem „Infomobil“. Die Obergrenze liegt bei „achtzigtausend Euro“, also unter den hunderttausend, die die Sportfläche des Jugendbeirats kosten würde. Am Ende kündigt er einen Bericht „im Herbst“ an. [fr?] Inquiétude : les groupes bien organisés gagnent ; réponses : six langues, un véhicule d’information, plafond de 80 000 €, rapport à l’automne.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "organisiert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "6",
+                "sechs"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Infomobil"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "80 000",
+                "80.000",
+                "80000",
+                "achtzigtausend"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Sportfläche"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "Bericht"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welche Haltung hat Dragana Petrović zum Bürgerhaushalt? [fr?] Quelle est la position de Dragana Petrović sur le budget participatif ?",
+          "explanation": "„Grundsätzlich finde ich die Idee gut … Aber ich habe eine Sorge“: Sie stimmt im Prinzip zu und schränkt dann ein. Ihre Sorge betrifft Familien, die von Abstimmungen „oft erst erfahren, wenn alles vorbei ist“. „Grundsätzlich … aber“ ist ein typisches Signal für eine Zustimmung mit Vorbehalt. [fr?] Accord de principe avec réserve (« grundsätzlich …, aber ») : elle craint que certains groupes soient oubliés.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie lehnt ihn ab, weil nur die Vereine davon profitieren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie findet ihn gut, fürchtet aber, dass manche Gruppen übersehen werden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie unterstützt ihn ohne Vorbehalte, weil alle mitmachen dürfen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie hat noch keine feste Meinung, weil ihr wichtige Informationen zum Verfahren fehlen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum darf kein Projekt mehr als 80 000 Euro kosten? [fr?] Pourquoi aucun projet ne peut-il dépasser 80 000 euros ?",
+          "explanation": "„Sonst könnten zwei große Vorschläge das gesamte Budget aufbrauchen, und alle anderen gingen leer aus.“ Die Grenze soll also viele kleinere Projekte möglich machen. Für die Sportfläche bedeutet sie gerade das Gegenteil: Mit hunderttausend Euro wäre sie zu teuer. [fr?] Le plafond évite que deux gros projets absorbent tout le budget ; il empêche justement la grande aire de sport.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Verwaltung einen Teil des Geldes selbst braucht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil teurere Projekte vom Stadtrat entschieden werden müssen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Damit der Jugendbeirat seine Sportfläche bauen kann.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Damit nicht zwei große Projekte das ganze Geld bekommen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie reagiert Mats auf die Obergrenze? [fr?] Comment Mats réagit-il au plafond ?",
+          "explanation": "„Das ist schade, aber nachvollziehbar. Dann müssen wir unseren Vorschlag eben überarbeiten.“ Er bedauert die Regel („schade“), versteht sie aber („nachvollziehbar“) und denkt schon an eine kleinere Lösung: ein Dach über dem vorhandenen Basketballfeld. Die Modalpartikel „eben“ zeigt hier, dass er die Lage akzeptiert. [fr?] Il regrette (schade) mais comprend (nachvollziehbar) et veut retravailler la proposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er will sich beim Stadtrat über die Regel beschweren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er schlägt vor, die Grenze für Jugendprojekte aufzuheben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er bedauert sie, will den Vorschlag aber anpassen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Er zieht den Vorschlag des Jugendbeirats zurück.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was ist Dragana Petrović am Ende besonders wichtig? [fr?] Qu’est-ce qui compte surtout pour Dragana Petrović à la fin ?",
+          "explanation": "„Mir ist wichtig, dass die Verwaltung am Ende öffentlich erklärt, was aus den Vorschlägen geworden ist, auch aus denen, die nicht gewonnen haben.“ Ihre Begründung: Sonst machen die Leute nur einmal mit. Herr Gerlach bestätigt, dass ein Bericht geplant ist. [fr?] Elle veut une explication publique du sort de chaque proposition, même perdante, pour que les gens continuent à participer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass das Ergebnis jedes Vorschlags öffentlich erklärt wird",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "dass die Unterlagen auch in einfacher Sprache erscheinen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass die Abstimmung über mehrere Monate verteilt wird",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "dass auch Kinder unter vierzehn Jahren abstimmen dürfen",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-gesellschaft-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: wer, was, wo(r) und der Genitiv",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: wer, was, wo(r) und der Genitiv",
+        "description": "Lesen Sie die Sätze aus dem Gastbeitrag und aus der Bürgerversammlung. Achten Sie auf die markierten Wörter am Anfang der Relativsätze und auf die Nomen im Genitiv. [fr?] Lisez les phrases de la tribune et de la réunion ; observez les mots qui ouvrent les relatives et les noms au génitif.\n\nSÄTZE\n(1) Wer nicht gewählt ist, hat auch keine Legitimation.\n(2) Wer gut organisiert ist und viele Leute mobilisieren kann, gewinnt.\n(3) Außerdem soll alles, was der Bürgerrat erarbeitet hat, im Internet veröffentlicht werden.\n(4) Ein halbes Jahr später liegt ein Gutachten vor, über das selbst frühere Kritiker anerkennend sprechen.\n(5) Genau das ist etwas, womit viele Teilnehmende nicht gerechnet hatten.\n(6) Eine Teilnehmerin, deren Familie seit drei Generationen am Hafen lebt, sagte zum Abschluss: …\n(7) Die Zukunft des alten Hafengeländes · ein Gutachten des Bürgerrats · die Auswahl der Fachleute\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions ; les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 und 2: Was bedeutet „wer“ am Anfang des Satzes? [fr?] Phrases 1 et 2 : que signifie « wer » en début de phrase ?",
+          "explanation": "„Wer“ leitet hier einen Relativsatz ohne Bezugswort ein: „Wer nicht gewählt ist“ = jeder, der nicht gewählt ist. Gemeint ist keine bestimmte Person, sondern alle, für die die Beschreibung gilt. Es ist auch keine Frage: Nach dem Relativsatz folgt ein Komma und dann der Hauptsatz mit dem Verb an erster Stelle (hat, gewinnt). [fr?] « wer » = celui qui, quiconque : relative sans antécédent, suivie de la principale qui commence par le verbe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine bestimmte Person, die schon genannt wurde",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "jede Person, auf die die Beschreibung zutrifft",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine Frage nach einer unbekannten Person",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Gruppe, die erst im Hauptsatz genannt wird",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 3 und 4: Warum steht in Satz 3 „was“, in Satz 4 aber „das“? [fr?] Phrases 3 et 4 : pourquoi « was » dans la phrase 3, mais « das » dans la phrase 4 ?",
+          "explanation": "Nach unbestimmten Wörtern wie „alles“, „etwas“, „nichts“, „vieles“ steht das Relativpronomen „was“. Nach einem Nomen (das Gutachten, neutral) steht das Relativpronomen „das“, hier nach der Präposition „über“. Beide Pronomen können übrigens im Nominativ oder im Akkusativ stehen: In Satz 3 ist „was“ Akkusativobjekt von „erarbeitet“. [fr?] « was » après alles, etwas, nichts… ; « das » (der, die) après un nom : das Gutachten, über das …",
+          "options": [
+            {
+              "id": "a",
+              "label": "„Was“ bezieht sich auf ein Wort wie „alles“, „das“ auf ein Nomen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "„Was“ steht im Akkusativ, „das“ steht immer im Nominativ.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„Was“ ist gesprochene Sprache, „das“ gehört zur Schriftsprache.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "„Was“ folgt immer einem Komma, „das“ folgt immer einer Präposition.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz 5: Woraus besteht „womit“? [fr?] Phrase 5 : de quoi se compose « womit » ?",
+          "explanation": "Das Verb heißt „rechnen mit“. Bezieht sich der Relativsatz auf „etwas“, „alles“, „nichts“ oder auf einen ganzen Satz, verbindet man „wo“ mit der Präposition: womit, wofür, worüber (vor einem Vokal mit -r-). Ein Ort ist hier nicht gemeint, und „etwas“ ist Nominativ. [fr?] Verbe à préposition (rechnen mit) + antécédent du type etwas : wo(r) + préposition, ici womit.",
+          "options": [
+            {
+              "id": "a",
+              "label": "aus „wo“ und „mit“, weil es um einen Ort geht",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "aus dem Fragewort „womit“: Der Satz ist eine Frage.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "aus „wo“ und „mit“, weil „etwas“ im Dativ steht",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "aus „wo(r)“ und der Präposition, die „rechnen“ verlangt",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 6: Worauf bezieht sich „deren“? [fr?] Phrase 6 : à quoi renvoie « deren » ?",
+          "explanation": "„Deren“ ist ein Relativpronomen im Genitiv und zeigt, wem etwas gehört: die Familie der Teilnehmerin. Es richtet sich nach dem Bezugswort vor dem Komma (die Teilnehmerin, feminin), nicht nach dem folgenden Nomen. Bei einem maskulinen oder neutralen Bezugswort hieße es „dessen“: ein Teilnehmer, dessen Familie … [fr?] « deren » = dont (possession) ; il s’accorde avec l’antécédent (die Teilnehmerin), pas avec le nom qui suit.",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf „Familie“: Die Familie lebt am Hafen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf „Generationen“: Es sind mehrere Personen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "auf „Teilnehmerin“: Ihre Familie lebt am Hafen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "auf „Hafen“: Der Hafen gehört der Familie.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Welche Genitivform gehört zu welcher Grundform? [fr?] Associez chaque nom à sa forme au génitif.",
+          "explanation": "Maskuline und neutrale Nomen bekommen im Genitiv „des“ und die Endung -s oder -es (des Bürgerrats, des Hafengeländes). Feminine Nomen und der Plural haben „der“ und keine Endung am Nomen (der Moderation, der Fachleute). Das Adjektiv nach dem Artikel endet im Genitiv immer auf -en (des alten, des gewählten). [fr?] Génitif : des + -(e)s au masculin et au neutre ; der sans terminaison au féminin et au pluriel ; adjectif en -en.",
+          "pairs": [
+            {
+              "left": "der Bürgerrat",
+              "right": "des Bürgerrats"
+            },
+            {
+              "left": "das alte Hafengelände",
+              "right": "des alten Hafengeländes"
+            },
+            {
+              "left": "die Fachleute",
+              "right": "der Fachleute"
+            },
+            {
+              "left": "die Moderation",
+              "right": "der Moderation"
+            },
+            {
+              "left": "das gewählte Parlament",
+              "right": "des gewählten Parlaments"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesellschaft-regel",
+      "kind": "lesson",
+      "title": "Regel: Relativsätze mit wer, was, wo(r) und das Genitivattribut",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Relativsätze mit wer, was, wo(r) und das Genitivattribut",
+        "description": "REGEL 1 · RELATIVSÄTZE MIT „WER“\n„Wer“ leitet einen Relativsatz ohne Bezugswort ein und meint jede Person, für die die Aussage gilt (= jeder, der …). Der Relativsatz steht meistens vorn. [fr?] « wer » = celui qui, quiconque ; la relative se place en général en tête.\n• Wer sich engagiert, lernt seine Stadt besser kennen.\n• Wen das Thema interessiert, der kann am Montag kommen.\n• Wem die Abstimmung zu kompliziert ist, dem hilft das Bürgerbüro.\nBrauchen der Relativsatz und der Hauptsatz verschiedene Kasus, nimmt ein Demonstrativpronomen (der, den, dem) die Person im Hauptsatz wieder auf. Bei gleichem Kasus kann es wegfallen: Wer nicht wählt, (der) überlässt anderen die Entscheidung. [fr?] Si les cas diffèrent, la principale reprend par der / den / dem ; sinon, la reprise est facultative.\n\nREGEL 2 · RELATIVSÄTZE MIT „WAS“\n„Was“ bezieht sich nicht auf ein Nomen, sondern auf etwas Unbestimmtes oder auf einen ganzen Satz. [fr?] « was » renvoie à quelque chose d’indéterminé ou à toute une proposition.\n• nach alles, etwas, nichts, vieles, manches, weniges: Alles, was der Bürgerrat erarbeitet hat, wird veröffentlicht.\n• nach einem neutralen Superlativ: Das Beste, was wir tun können, ist zuhören.\n• nach dem Demonstrativ „das“: Das, was du sagst, stimmt nur zum Teil.\n• für einen ganzen Satz: Die Wahlbeteiligung stieg auf siebzig Prozent, was niemand erwartet hatte.\n• ohne Bezugswort am Satzanfang: Was als Mittel gegen Politikverdrossenheit gedacht war, kann sie verstärken.\n\nREGEL 3 · „WO(R)“ + PRÄPOSITION\nVerlangt das Verb eine Präposition (rechnen mit, sich ärgern über, sich einsetzen für), verbindet man nach „was“-Bezugswörtern und nach einem ganzen Satz „wo“ mit der Präposition. Vor einem Vokal steht „wor-“. [fr?] Avec un verbe prépositionnel, après etwas / alles / une proposition : wo(r) + préposition.\n• Das ist etwas, womit niemand gerechnet hatte.\n• Die Stadt veröffentlicht alle Ergebnisse, worüber sich viele freuen.\n• Bezahlbare Mieten sind das, wofür wir uns einsetzen.\nIst das Bezugswort ein Nomen, steht in geschriebenen Texten die Präposition mit dem Relativpronomen: das Gutachten, über das alle sprechen; die Idee, für die wir kämpfen. „Wo“ allein bezieht sich auf einen Ort: die Schule, wo die Versammlung stattfindet. [fr?] Après un nom : préposition + der / die / das ; « wo » seul = lieu.\n\nREGEL 4 · DAS GENITIVATTRIBUT\nEin Nomen im Genitiv steht nach einem anderen Nomen und bestimmt es genauer. [fr?] Le complément du nom au génitif suit le nom qu’il précise.\n• maskulin und neutral: des / eines + -s oder -es: die Zukunft des Hafengeländes, das Ende eines langen Abends\n• feminin und Plural: der / einer, Nomen ohne Endung: die Rolle der Moderation, die Meinung der Bürger\n• n-Deklination: die Idee des Kollegen, der Vorschlag des Nachbarn\n• Eigennamen vorn, ohne Apostroph: Annas Vorschlag, Herrn Gerlachs Antwort\nIm Gespräch hört man oft „von“ + Dativ (der Vorschlag vom Jugendbeirat). In formellen Texten wirkt der Genitiv präziser. Ohne Artikel ist „von“ die normale Form: die Meinung von Jugendlichen. [fr?] À l’oral, « von + datif » est courant ; à l’écrit soutenu, on préfère le génitif ; sans article, « von » est la norme.\n\nREGEL 5 · DESSEN UND DEREN\nDas Relativpronomen im Genitiv zeigt Besitz oder Zugehörigkeit. Es richtet sich nach dem Bezugswort; das folgende Nomen hat keinen Artikel. [fr?] dessen / deren = dont (possession) ; accord avec l’antécédent, nom suivant sans article.\n• der Verein, dessen Mitglieder … · das Projekt, dessen Kosten …\n• die Teilnehmerin, deren Familie … · die Bürger, deren Stimmen …\n\nACHTUNG\n• Ein Relativsatz ohne Bezugswort für Personen beginnt mit „wer“, nie mit „der, wer“: Wer zu spät kommt, verpasst den Anfang. [fr?] « celui qui » = wer.\n• Nach „alles“, „etwas“ und „nichts“ steht „was“, nicht „das“: alles, was ich weiß. [fr?] « ce que » = was.\n• Für ein französisches Relativpronomen mit Präposition gibt es keine feste Übersetzung: deren / dessen für den Besitz, sonst die Präposition des Verbs (das Thema, über das wir sprechen). [fr?] « dont » se traduit selon le sens : dessen / deren (possession), über das, von dem… selon le verbe.\n• Der Genitiv von Namen hat keinen Apostroph: Annas Idee. [fr?] Pas d’apostrophe : Annas Idee.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-gesellschaft-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Relativsätze und Genitivattribute",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Relativsätze und Genitivattribute",
+        "description": "Üben Sie die Relativsätze mit „wer“, „was“ und „wo(r)“ + Präposition, das Genitivattribut und „dessen“ / „deren“. Lesen Sie zuerst immer den ganzen Satz. [fr?] Entraînez-vous aux relatives avec wer, was, wo(r) + préposition, au génitif et à dessen / deren ; lisez d’abord toute la phrase.\n\nMERKE\n• wer / wen / wem: Der Kasus hängt vom Verb im Relativsatz ab. [fr?] Le cas dépend du verbe de la relative.\n• alles, etwas, nichts, ganzer Satz → was; mit Präposition → wo(r) + Präposition. [fr?] Après etwas, alles… : was, ou wo(r) + préposition.\n• des Bürgerrats, der Bürger; dessen / deren + Nomen ohne Artikel. [fr?] Génitif et relatif au génitif.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „wer“, „wen“ oder „wem“. [fr?] Complétez avec wer, wen ou wem.",
+          "text": "[[1]] sich für den Bürgerhaushalt interessiert, kommt am Montag in den Gemeindesaal. · [[2]] das Thema nicht interessiert, den laden wir trotzdem ein. · [[3]] die Abstimmung zu kompliziert ist, dem hilft das Bürgerbüro.",
+          "explanation": "Der Kasus richtet sich nach dem Verb im Relativsatz: „sich interessieren“ braucht ein Subjekt (wer), „jemanden interessieren“ einen Akkusativ (wen), „jemandem zu kompliziert sein“ einen Dativ (wem). Im Hauptsatz nehmen „den“ (einladen + Akkusativ) und „dem“ (helfen + Dativ) die Person wieder auf, weil der Kasus dort ein anderer ist. [fr?] Le cas de wer / wen / wem dépend du verbe de la relative ; den / dem reprennent la personne dans la principale.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wer"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Wen"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Wem"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „was“ oder „das“. [fr?] Complétez avec was ou das.",
+          "text": "Das ist alles, [[1]] wir bisher wissen. · Das Beste, [[2]] wir tun können, ist zuhören. · Die Wahlbeteiligung stieg auf siebzig Prozent, [[3]] niemand erwartet hatte. · Das Projekt, [[4]] die meisten Stimmen bekommt, wird im Sommer gebaut.",
+          "explanation": "„Was“ steht nach „alles“, nach einem neutralen Superlativ (das Beste) und wenn sich der Relativsatz auf den ganzen vorherigen Satz bezieht: Dass die Beteiligung stieg, hatte niemand erwartet. Im letzten Satz ist das Bezugswort ein Nomen (das Projekt): Dann steht das Relativpronomen „das“. [fr?] « was » après alles, un superlatif neutre ou toute une proposition ; « das » après un nom neutre (das Projekt).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "das"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „wo(r)“ + Präposition. [fr?] Complétez avec wo(r) + préposition.",
+          "text": "Es gibt etwas, [[1]] ich mich wirklich ärgere: Viele Vorschläge werden nie umgesetzt. · Bezahlbare Mieten sind das, [[2]] wir uns seit Jahren einsetzen. · Nichts, [[3]] wir gehofft hatten, ist passiert.",
+          "explanation": "Die Präposition kommt vom Verb: sich ärgern über, sich einsetzen für, hoffen auf. Nach „etwas“, „das“ und „nichts“ verbindet man sie mit „wo“: wofür. Beginnt die Präposition mit einem Vokal, steht ein -r- dazwischen: worüber, worauf. [fr?] La préposition vient du verbe (über, für, auf) ; devant une voyelle, on intercale -r- : worüber, worauf.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "worüber"
+              ],
+              "hint": "sich ärgern über",
+              "size": 8
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wofür"
+              ],
+              "hint": "sich einsetzen für",
+              "size": 6
+            },
+            {
+              "id": "3",
+              "accept": [
+                "worauf"
+              ],
+              "hint": "hoffen auf",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welcher Satz ist in einem geschriebenen Text korrekt? [fr?] Quelle phrase est correcte dans un texte écrit ?",
+          "explanation": "Das Bezugswort ist ein Nomen (der Vorschlag, maskulin): Präposition + Relativpronomen. „Abstimmen über“ verlangt den Akkusativ, also „über den“. „Über was“ ist umgangssprachlich und in Texten falsch; „über dem“ hat den falschen Kasus; im letzten Satz steht die Präposition an der falschen Stelle. [fr?] Antécédent nominal : préposition + relatif ; abstimmen über + accusatif → über den.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist der Vorschlag, über was wir im Mai abstimmen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist der Vorschlag, über dem wir im Mai abstimmen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist der Vorschlag, über den wir im Mai abstimmen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Das ist der Vorschlag, den wir im Mai über abstimmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Alles,",
+              "was",
+              "der Bürgerrat",
+              "erarbeitet",
+              "hat,",
+              "wird",
+              "im Internet",
+              "veröffentlicht."
+            ]
+          ],
+          "explanation": "„Alles“ ist das Bezugswort, „was“ leitet den Relativsatz ein, das konjugierte Verb „hat“ steht an dessen Ende. Der ganze Relativsatz steht zwischen zwei Kommas. Danach folgt im Hauptsatz sofort das konjugierte Verb „wird“, das Partizip „veröffentlicht“ schließt den Satz (Passiv). [fr?] alles, was … hat, wird … veröffentlicht : verbe conjugué en fin de relative, puis verbe de la principale."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Genitivformen. [fr?] Complétez avec les formes du génitif.",
+          "text": "Die Meinung [[1]] Bürgerinnen und Bürger zählt. · Der Vorschlag des Jugendbeirat[[2]] hat gewonnen. · Die Rede [[3]] Bürgermeisterin war kurz. · Die Idee unseres [[4]] hat alle überzeugt.",
+          "explanation": "Plural und Feminin: „der“ ohne Endung am Nomen (der Bürgerinnen und Bürger, der Bürgermeisterin). Maskulin: „des Jugendbeirats“ oder „des Jugendbeirates“, beide Formen sind richtig. „Nachbar“ gehört zur n-Deklination: Im Genitiv heißt es „des Nachbarn“, nicht „des Nachbars“. [fr?] Pluriel et féminin : der ; masculin : -s ou -es ; n-Deklination : des Nachbarn.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "der"
+              ],
+              "hint": "die Bürger (Plural)",
+              "size": 4
+            },
+            {
+              "id": "2",
+              "accept": [
+                "s",
+                "es"
+              ],
+              "hint": "der Jugendbeirat",
+              "size": 3
+            },
+            {
+              "id": "3",
+              "accept": [
+                "der"
+              ],
+              "hint": "die Bürgermeisterin",
+              "size": 4
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Nachbarn"
+              ],
+              "hint": "der Nachbar",
+              "size": 9
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Der Verein, … Mitglieder sich jeden Montag treffen, sucht neue Helfer.“ Welches Wort passt? [fr?] Quel mot convient ?",
+          "explanation": "Die Mitglieder gehören zum Verein: Das verlangt ein Relativpronomen im Genitiv. Es richtet sich nach dem Bezugswort „der Verein“ (maskulin, Singular), also „dessen“. „Deren“ stünde nach einem femininen Wort oder nach einem Plural; „denen“ ist ein Dativ, und „welcher“ wäre ein Nominativ ohne Sinn im Satz. [fr?] Possession (les membres du club) et antécédent masculin singulier : dessen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "deren",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dessen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "welcher",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "denen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welcher Satz passt am besten in einen formellen Bericht? [fr?] Quelle phrase convient le mieux à un rapport formel ?",
+          "explanation": "In einem formellen Text steht das Genitivattribut nach dem Nomen: der Vorschlag des Jugendbeirats. „Vom Jugendbeirat“ ist im Gespräch üblich, wirkt im Bericht aber umgangssprachlich. Ein Dativ ohne Präposition ist falsch, und vor dem Nomen stehen nur Eigennamen (Annas Vorschlag). [fr?] Écrit formel : génitif après le nom ; « vom » est oral ; seuls les noms propres se placent devant.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Vorschlag vom Jugendbeirat hat die meisten Stimmen bekommen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Vorschlag dem Jugendbeirat hat die meisten Stimmen bekommen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Jugendbeirats Vorschlag hat die meisten Stimmen bekommen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Vorschlag des Jugendbeirats hat die meisten Stimmen bekommen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Teilnehmerin,",
+              "deren",
+              "Vorschlag",
+              "gewonnen",
+              "hat,",
+              "stellt",
+              "ihn",
+              "heute Abend",
+              "vor."
+            ],
+            [
+              "Die Teilnehmerin,",
+              "deren",
+              "Vorschlag",
+              "heute Abend",
+              "gewonnen",
+              "hat,",
+              "stellt",
+              "ihn",
+              "vor."
+            ]
+          ],
+          "explanation": "Der Relativsatz beginnt mit „deren“ + Nomen ohne Artikel; das konjugierte Verb „hat“ steht am Ende. Im Hauptsatz folgt das Verb „stellt“, das Pronomen „ihn“ steht direkt danach, vor der Zeitangabe, und die Partikel „vor“ schließt den Satz. Beide Stellen der Zeitangabe sind möglich, der Sinn ändert sich leicht. [fr?] deren + nom sans article ; le pronom ihn se place tôt dans la phrase ; la particule vor ferme la principale."
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "„Wo“ allein bezieht sich auf einen Ort: die Schule, wo (= in der) die Versammlung stattfindet. Nach „alles“ steht „was“, ein Relativsatz ohne Bezugswort für Personen beginnt mit „wer“, und mit „sich freuen über“ heißt es „worüber wir uns freuen“, ohne zusätzliches „darüber“. [fr?] « wo » seul = lieu ; alles, was ; wer pour « celui qui » ; worüber sans darüber.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist die Schule, wo die Versammlung heute stattfindet.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das ist leider alles, wo wir über das Projekt wissen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wo zu spät zur Versammlung kommt, verpasst den Anfang.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das ist etwas, wo wir uns alle sehr darüber freuen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesellschaft-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Beteiligung und Diskussion",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Beteiligung und Diskussion",
+        "description": "Lernen Sie die Wörter in Verbindungen: Nomen mit Verb, Verben mit Präposition, Wortfamilien und Redemittel für die Diskussion. [fr?] Apprenez les mots en combinaisons : nom et verbe, verbe et préposition, familles de mots, formules de discussion.\n\nTIPP\nViele Verbindungen lassen sich nicht wörtlich übersetzen: Man „nimmt“ Stellung und Einfluss, man „gibt“ seine Stimme ab und „schließt“ einen Kompromiss. Lernen Sie diese Verbindungen immer als Block. [fr?] Beaucoup de combinaisons ne se traduisent pas mot à mot : apprenez-les en bloc.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? [fr?] Quel verbe va avec quel nom ?",
+          "explanation": "Diese Verbindungen sind fest: eine Petition einreichen, Unterschriften sammeln, seine Stimme abgeben (wählen), einen Kompromiss schließen (auch: finden, eingehen), Verantwortung übernehmen, Stellung nehmen zu + Dativ. Sie gehören zum Wortschatz jeder politischen Diskussion. [fr?] Combinaisons figées : déposer une pétition, recueillir des signatures, voter, conclure un compromis, prendre ses responsabilités, prendre position.",
+          "pairs": [
+            {
+              "left": "eine Petition",
+              "right": "einreichen"
+            },
+            {
+              "left": "Unterschriften",
+              "right": "sammeln"
+            },
+            {
+              "left": "seine Stimme",
+              "right": "abgeben"
+            },
+            {
+              "left": "einen Kompromiss",
+              "right": "schließen"
+            },
+            {
+              "left": "Verantwortung",
+              "right": "übernehmen"
+            },
+            {
+              "left": "zu einer Empfehlung Stellung",
+              "right": "nehmen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "beteiligen → die [[1]] · wählen → die [[2]] · vertreten → die [[3]] · verdrossen → die [[4]] · öffentlich → die [[5]]",
+          "explanation": "Aus Verben entstehen oft Nomen auf -ung (die Beteiligung, die Vertretung); „wählen“ bildet „die Wahl“ ohne Endung. Aus Adjektiven entstehen Nomen auf -heit oder -keit: verdrossen → die Verdrossenheit, öffentlich → die Öffentlichkeit (-keit nach -lich). Alle diese Nomen sind feminin. [fr?] Verbes → -ung (ou forme courte : die Wahl) ; adjectifs → -heit / -keit ; tous féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Beteiligung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Wahl"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Vertretung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Verdrossenheit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Öffentlichkeit"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr?] Complétez avec les prépositions.",
+          "text": "Sie setzt sich seit Jahren [[1]] bezahlbare Wohnungen ein. · Mit einer Petition kann man Einfluss [[2]] die Politik nehmen. · Über zweitausend Menschen haben sich [[3]] der Abstimmung beteiligt. · Im Mai stimmen alle [[4]] die Vorschläge ab. · Der Stadtrat nimmt [[5]] jeder Empfehlung Stellung.",
+          "explanation": "Die Präposition gehört zum Verb und muss mitgelernt werden: sich einsetzen für + Akkusativ, Einfluss nehmen auf + Akkusativ, sich beteiligen an + Dativ, abstimmen über + Akkusativ, Stellung nehmen zu + Dativ. Mit diesen Präpositionen bildet man auch wofür, worauf, woran, worüber und wozu. [fr?] Prépositions régies : für, auf, an, über, zu ; elles donnent aussi wofür, worauf, woran…",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "zu"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten einem Argument nur teilweise zustimmen. Was sagen Sie? [fr?] Vous voulez approuver un argument en partie seulement. Que dites-vous ?",
+          "explanation": "„Da ist etwas dran“ erkennt einen Teil des Arguments an, „aber man muss auch bedenken, dass …“ bringt die Einschränkung. Das ist die typische Struktur einer teilweisen Zustimmung. Die erste Antwort widerspricht ganz, die dritte stimmt ganz zu, die vierte weicht dem Argument aus. [fr?] « Da ist etwas dran, aber … » : accord partiel suivi d’une réserve.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Da muss ich Ihnen leider vollkommen widersprechen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Da ist etwas dran, aber man muss auch bedenken, dass …",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das sehe ich genauso, da gibt es nichts hinzuzufügen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das gehört nicht zum Thema, darüber reden wir später.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was bedeutet „Politikverdrossenheit“? [fr?] Que signifie « Politikverdrossenheit » ?",
+          "explanation": "„Verdrossen“ heißt lustlos und verärgert. Die Politikverdrossenheit ist also eine Haltung: Menschen sind von der Politik enttäuscht und beteiligen sich deshalb weniger, zum Beispiel an Wahlen. Im Gastbeitrag ist Beteiligung als „Mittel gegen Politikverdrossenheit“ gedacht. [fr?] Désenchantement envers la politique, qui pousse à moins participer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "großes Interesse an Politik und an öffentlichen Diskussionen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Pflicht, an jeder Wahl teilzunehmen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Enttäuschung über Politik und wenig Lust, mitzumachen",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "ein Streit zwischen zwei politischen Parteien",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Die Empfehlungen des Bürgerrats sind nicht bindend.“ Was heißt das? [fr?] Que signifie cette phrase ?",
+          "explanation": "„Bindend“ bedeutet verpflichtend: Eine bindende Entscheidung muss man befolgen. „Nicht bindend“ heißt also, dass der Stadtrat frei entscheidet, ob er die Empfehlungen übernimmt. Deshalb ist es so wichtig, dass er zu jeder Empfehlung Stellung nimmt. [fr?] « nicht bindend » = non contraignant : le conseil n’est pas obligé de les appliquer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Stadtrat muss sie nicht umsetzen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Empfehlungen sind noch nicht fertig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nur die Mitglieder dürfen sie lesen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie widersprechen geltenden Gesetzen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Funktion hat welcher Ausdruck in einem Argument? [fr?] Quelle fonction a chaque expression dans une argumentation ?",
+          "explanation": "Konnektoren machen die Struktur eines Textes sichtbar. Im Gastbeitrag beginnt Absatz C mit „zunächst einmal“, ergänzt mit „hinzu kommt“, und Absatz D schränkt mit „allerdings“ ein. „Folglich“ leitet eine Konsequenz ein, „alles in allem“ eine Zusammenfassung am Ende. [fr?] Connecteurs : premier argument, ajout, restriction, conséquence, conclusion.",
+          "pairs": [
+            {
+              "left": "zunächst einmal",
+              "right": "ein erstes Argument einleiten"
+            },
+            {
+              "left": "hinzu kommt",
+              "right": "ein weiteres Argument ergänzen"
+            },
+            {
+              "left": "allerdings",
+              "right": "eine Einschränkung machen"
+            },
+            {
+              "left": "folglich",
+              "right": "eine Folge nennen"
+            },
+            {
+              "left": "alles in allem",
+              "right": "ein Fazit ziehen"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesellschaft-lesen2",
+      "kind": "exercise",
+      "title": "Verstehen: eine Meldung über eine Petition",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Meldung über eine Petition",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nTIPP\nEine Meldung beantwortet zuerst die W-Fragen (Wer? Was? Wann? Wo?), danach kommen die Stimmen der Beteiligten, oft in indirekter Rede. Achten Sie darauf, wer welche Position vertritt. [fr?] Une dépêche répond d’abord aux questions essentielles, puis donne la parole aux acteurs, souvent au discours indirect.\n\nPETITION FÜR SONNTAGSÖFFNUNG DER STADTBIBLIOTHEK ERREICHT NÖTIGE UNTERSCHRIFTEN\nWendelstedt, 14. März. Eine Online-Petition, die eine Öffnung der Stadtbibliothek am Sonntag fordert, hat innerhalb von sechs Wochen 4 812 Unterschriften gesammelt. Damit ist die Schwelle von 4 000 Unterschriften überschritten, ab der sich der Stadtrat laut Satzung mit einem Anliegen der Einwohnerschaft befassen muss. Die Beratung ist für die Sitzung am 22. April geplant.\n\nGestartet hat die Petition die Lehramtsstudentin Marit Jansen. „Unter der Woche ist die Bibliothek genau dann geschlossen, wenn Berufstätige und Studierende endlich Zeit hätten“, sagte die 23-Jährige. Gerade für Kinder aus Familien, die in kleinen Wohnungen leben, sei die Bibliothek oft der einzige Ort, an dem sie in Ruhe lernen könnten. Unterstützt wird die Petition unter anderem vom Elternbeirat der Gesamtschule und vom Seniorenbeirat der Stadt.\n\nDie Leiterin der Stadtbibliothek, Dorothea Kemmerling, begrüßt das Interesse, warnt aber vor überzogenen Erwartungen. Für eine Öffnung am Sonntag brauche ihr Haus mindestens drei zusätzliche Stellen, deren Finanzierung bisher nicht gesichert sei. Außerdem müsse geprüft werden, unter welchen Bedingungen Sonntagsarbeit in einer öffentlichen Bibliothek zulässig sei.\n\nIm Stadtrat gehen die Meinungen auseinander. Die größte Fraktion hat ihre Unterstützung angekündigt, sofern die Kosten im nächsten Haushalt gedeckt werden können. Mehrere Ratsmitglieder halten dagegen, die Stadt solle zuerst die Öffnungszeiten unter der Woche verlängern, was deutlich günstiger wäre.\n\nInzwischen liegt ein Kompromissvorschlag auf dem Tisch: Die Bibliothek könnte sonntags vier Stunden lang als „offene Bibliothek“ betrieben werden. Wer einen gültigen Bibliotheksausweis besitzt, käme dann mit seiner Karte ins Gebäude, könnte Medien selbst ausleihen und zurückgeben und die Arbeitsplätze nutzen. Beratung durch Fachpersonal gäbe es in dieser Zeit allerdings nicht. Vergleichbare Modelle werden bereits in mehreren deutschen Städten erprobt.\n\nMarit Jansen zeigte sich offen für diese Lösung. „Mir geht es nicht darum, wer am Ende recht hat, sondern darum, dass die Bibliothek für alle da ist, die sie brauchen“, sagte sie. Ob der Stadtrat dem Vorschlag folgt, wird sich im April zeigen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in der Meldung vor allem? [fr?] De quoi parle surtout la dépêche ?",
+          "explanation": "Die Überschrift und der erste Absatz nennen das Thema: Eine Petition hat genug Unterschriften. Danach kommen die Reaktionen: die Initiatorin, die Leiterin der Bibliothek, der Stadtrat und ein Kompromissvorschlag. Die Sonntagsarbeit ist nur ein Detail, und die Eltern unterstützen die Petition, statt zu streiten. [fr?] Une pétition a atteint le seuil requis ; la dépêche présente ensuite les réactions des acteurs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um einen Streit zwischen der Bibliothek und den Eltern",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um eine Petition und die Reaktionen darauf",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "um neue Regeln für die Sonntagsarbeit in Deutschland",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "um die Wahl einer neuen Leiterin der Bibliothek",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Zahlen und Daten aus der Meldung. [fr?] Complétez avec les chiffres et les dates de la dépêche.",
+          "text": "Unterschriften: [[1]] · nötige Schwelle: [[2]] Unterschriften · Beratung im Stadtrat: am [[3]] · Bedarf der Bibliothek: mindestens [[4]] zusätzliche Stellen · offene Bibliothek: sonntags [[5]] Stunden",
+          "explanation": "In einer Meldung stehen die wichtigsten Zahlen meist am Anfang: 4 812 Unterschriften, Schwelle 4 000, Beratung am 22. April. Die drei Stellen nennt die Leiterin der Bibliothek, die vier Stunden stehen im Kompromissvorschlag. In deutschen Texten trennt ein schmales Leerzeichen oder ein Punkt die Tausender. [fr?] Les chiffres clés : 4 812 signatures, seuil de 4 000, débat le 22 avril, trois postes, quatre heures.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "4 812",
+                "4812",
+                "4.812"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "4 000",
+                "4000",
+                "4.000",
+                "viertausend"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "22. April",
+                "22.4.",
+                "22.04.",
+                "22. 4."
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "3",
+                "drei"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "4",
+                "vier"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Wer vertritt welche Position? [fr?] Qui défend quelle position ?",
+          "explanation": "Die Initiatorin denkt an Berufstätige, Studierende und Kinder aus kleinen Wohnungen. Die Leiterin der Bibliothek nennt drei Stellen ohne gesicherte Finanzierung und die Frage der Sonntagsarbeit. Die größte Fraktion stellt eine Bedingung („sofern“), andere Ratsmitglieder schlagen eine günstigere Alternative vor. [fr?] Chaque acteur : la demande, les objections pratiques, le soutien sous condition, l’alternative moins chère.",
+          "pairs": [
+            {
+              "left": "Marit Jansen",
+              "right": "fordert Öffnungszeiten für Berufstätige und Familien"
+            },
+            {
+              "left": "Dorothea Kemmerling",
+              "right": "sieht offene Fragen bei Personal und Recht"
+            },
+            {
+              "left": "die größte Fraktion",
+              "right": "stimmt zu, wenn das Geld vorhanden ist"
+            },
+            {
+              "left": "mehrere Ratsmitglieder",
+              "right": "wollen zuerst die Zeiten unter der Woche verlängern"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was bedeutet „sofern die Kosten im nächsten Haushalt gedeckt werden können“? [fr?] Que signifie cette condition ?",
+          "explanation": "„Sofern“ bedeutet „unter der Bedingung, dass“ und entspricht hier „wenn“. Die Fraktion unterstützt den Antrag also grundsätzlich, aber nur, wenn im nächsten Haushalt Geld dafür vorhanden ist. Von Spenden, einer Ablehnung oder einer Verschiebung ist nicht die Rede. [fr?] « sofern » = à condition que : soutien sous réserve de financement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Fraktion stimmt nur zu, wenn das nötige Geld eingeplant werden kann.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Fraktion will die Kosten mit Spenden der Bürgerinnen decken.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Fraktion lehnt den Antrag ab, weil er für die Stadt zu teuer ist.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Fraktion verschiebt die Entscheidung auf das nächste Jahr.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„In der offenen Bibliothek könnte man sonntags keine Fachleute um Rat fragen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Beratung durch Fachpersonal gäbe es in dieser Zeit allerdings nicht.“ Man könnte mit dem Ausweis ins Gebäude kommen, Medien selbst ausleihen und die Arbeitsplätze nutzen, aber niemand vom Personal wäre da. Der Konjunktiv (käme, könnte, gäbe) zeigt, dass es nur ein Vorschlag ist. [fr?] Vrai : pas de conseil par du personnel qualifié ; le Konjunktiv II signale une simple proposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Haltung zeigt Marit Jansen am Ende? [fr?] Quelle attitude Marit Jansen montre-t-elle à la fin ?",
+          "explanation": "„Marit Jansen zeigte sich offen für diese Lösung.“ Ihr Zitat bestätigt das: Es geht ihr nicht ums Rechthaben, sondern darum, dass die Bibliothek für alle da ist. Eine neue Petition, einen Rückzug oder eine harte Forderung erwähnt die Meldung nicht. [fr?] Elle se montre ouverte au compromis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie besteht auf einer Öffnung mit dem ganzen Personal.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie will eine zweite Petition gegen den Stadtrat starten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie zieht die Petition zurück, weil sie zu teuer wäre.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie ist bereit, den Kompromiss zu akzeptieren.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„… mindestens drei zusätzliche Stellen, deren Finanzierung bisher nicht gesichert sei.“ Worauf bezieht sich „deren“? [fr?] À quoi renvoie « deren » ?",
+          "explanation": "Das Relativpronomen im Genitiv bezieht sich auf das Nomen direkt vor dem Komma: die Stellen (Plural), also „deren“. Gemeint ist: Die Finanzierung der Stellen ist nicht gesichert. Nach „das Haus“ (neutral) müsste es „dessen“ heißen; „die Leiterin“ und „die Bibliothek“ stehen zu weit entfernt. [fr?] « deren » reprend le nom juste avant la virgule : die Stellen (pluriel).",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf „ihr Haus“",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf „die Leiterin“",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "auf „die Stellen“",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "auf „die Bibliothek“",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-gesellschaft-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Beteiligung, Relativsätze und Genitiv",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Beteiligung, Relativsätze und Genitiv",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nIm Lokalradio erzählt eine Hörerin von ihren Erfahrungen mit dem Bürgerhaushalt. Hören Sie den Beitrag für die Fragen 1 und 2. [fr?] À la radio locale, une auditrice raconte son expérience du budget participatif ; écoutez pour les questions 1 et 2.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-gesellschaft-kontrolle-audio",
+          "caption": "Hörertelefon im Lokalradio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wie hat sich die Haltung der Hörerin entwickelt? [fr?] Comment l’attitude de l’auditrice a-t-elle évolué ?",
+          "explanation": "Ihr Vorschlag hat nicht gewonnen, „und das hat mich zuerst ziemlich geärgert“. Am Ende sagt sie aber: „Dieses Jahr mache ich also wieder mit.“ Dazwischen erklärt sie, was ihre Meinung geändert hat. Sie hat schon im letzten Jahr mitgemacht, die vierte Antwort ist also falsch. [fr?] D’abord agacée, elle participe de nouveau cette année.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie war zuerst begeistert und ist jetzt enttäuscht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie war zuerst verärgert, macht aber wieder mit.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie war von Anfang an dagegen und bleibt dabei.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie hat nie mitgemacht, will es jetzt aber versuchen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was hat die Hörerin am Ende überzeugt? [fr?] Qu’est-ce qui a finalement convaincu l’auditrice ?",
+          "explanation": "„Und was mich am Ende überzeugt hat: Ein Teil der Bänke wird trotzdem aufgestellt, und zwar aus einem anderen Topf.“ Der Bericht der Stadt hat ihr die Gründe erklärt; einen persönlichen Brief erwähnt sie nicht. „Aus einem anderen Topf“ bedeutet: mit Geld aus einem anderen Budget. [fr?] Une partie des bancs sera installée quand même, avec un autre budget (aus einem anderen Topf).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihr Vorschlag hat im zweiten Jahr gewonnen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Stadt hat ihr persönlich geschrieben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Teil der Bänke wird trotzdem aufgestellt.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Die Obergrenze für Projekte wurde abgeschafft.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Relativpronomen. [fr?] Complétez avec les pronoms relatifs.",
+          "text": "[[1]] mitreden will, muss sich informieren. · Alles, [[2]] die Verwaltung plant, sollte öffentlich sein. · Es gibt vieles, [[3]] man sich im Stadtteil einsetzen kann. · Der Bürgerrat, [[4]] Empfehlungen nicht bindend sind, braucht eine Antwort der Politik.",
+          "explanation": "„Wer“ ohne Bezugswort = jeder, der. Nach „alles“ steht „was“. „Sich einsetzen für“ ergibt nach „vieles“ die Form „wofür“. „Dessen“ zeigt die Zugehörigkeit (die Empfehlungen des Bürgerrats) und richtet sich nach dem maskulinen Bezugswort „der Bürgerrat“. [fr?] wer (celui qui), was après alles, wofür (sich einsetzen für), dessen (masculin, possession).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wer"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "wofür"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "dessen"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Viele",
+              "fragen sich,",
+              "ob",
+              "der Stadtrat",
+              "die Empfehlungen",
+              "des Bürgerrats",
+              "ernst",
+              "nehmen",
+              "wird."
+            ]
+          ],
+          "explanation": "„Ob“ leitet eine indirekte Frage ein: Das konjugierte Verb „wird“ steht am Ende, davor der Infinitiv „nehmen“. Das Genitivattribut „des Bürgerrats“ folgt direkt auf das Nomen, zu dem es gehört (die Empfehlungen). „Ernst nehmen“ ist eine feste Verbindung. [fr?] ob + verbe conjugué en fin ; le génitif suit immédiatement le nom qu’il complète."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was ist ein „Bürgerrat“? [fr?] Qu’est-ce qu’un « Bürgerrat » ?",
+          "explanation": "Ein Bürgerrat besteht aus Menschen, die per Los ausgewählt werden, möglichst gemischt nach Alter, Geschlecht, Bildung und Wohnort. Er berät über eine Leitfrage und formuliert Empfehlungen. Er ist weder eine Partei noch ein gewähltes Gremium. [fr?] Un groupe d’habitants tirés au sort qui formule des recommandations.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Gruppe zufällig ausgewählter Einwohnerinnen und Einwohner",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "eine Partei, die sich für direkte Demokratie einsetzt",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ein gewähltes Mitglied des Stadtrats mit besonderen Aufgaben",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Beratungsstelle der Stadtverwaltung für Fragen zu Anträgen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Wort. [fr?] Complétez avec le mot qui convient.",
+          "text": "Der Stadtrat nimmt zu jeder Empfehlung [[1]]. · Die Initiatorin der Petition hat fast fünftausend Unterschriften [[2]]. · Am Ende haben beide Seiten einen [[3]] gefunden.",
+          "explanation": "Feste Verbindungen: Stellung nehmen zu + Dativ (prendre position), Unterschriften sammeln, einen Kompromiss finden (oder schließen). Diese Verbindungen sind typisch für Texte über Politik und Beteiligung. [fr?] Stellung nehmen, Unterschriften sammeln, einen Kompromiss finden.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Stellung"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gesammelt"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Kompromiss"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie möchten in einer Diskussion höflich einen Einwand formulieren. Was sagen Sie? [fr?] Vous voulez formuler poliment une objection dans une discussion. Que dites-vous ?",
+          "explanation": "„Ich verstehe Ihren Punkt“ zeigt Respekt für die andere Meinung, „gebe aber zu bedenken, dass …“ leitet den Einwand sachlich ein. Die erste Antwort ist unhöflich, die zweite stimmt zu, und die dritte verweigert die Diskussion. [fr?] Reconnaître le point de vue de l’autre, puis introduire l’objection : « gebe aber zu bedenken, dass … ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch völliger Unsinn, was Sie da erzählen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Genau, das wollte ich auch gerade sagen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Darüber möchte ich lieber gar nicht sprechen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich verstehe Ihren Punkt, gebe aber zu bedenken, dass …",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-gesellschaft-lesen-artikel",
+      "kind": "image",
+      "title": "Tribune « Gelost statt gewählt »",
+      "alt": "Tribune d’une politologue : « Gelost statt gewählt ». Une ville a tiré au sort quarante habitants pour réfléchir à l’avenir de son ancien port ; le texte pèse les avantages et les limites des assemblées citoyennes.",
+      "image": {
+        "layout": "article",
+        "kicker": "Gastbeitrag",
+        "icon": "landmark",
+        "title": "Gelost statt gewählt: Was Bürgerräte leisten können – und was nicht",
+        "byline": "Dr. Henrike Lassen, Politikwissenschaftlerin",
+        "lead": "Als die Stadt Wendelstedt vierzig Einwohnerinnen und Einwohner per Los auswählte, damit sie über die Zukunft des alten Hafengeländes berieten, war die Skepsis groß.",
+        "paragraphs": [
+          "„Wer nicht gewählt ist, hat auch keine Legitimation“, hieß es damals im Stadtrat. Ein halbes Jahr später liegt ein Gutachten des Bürgerrats auf dem Tisch, über das selbst frühere Kritiker anerkennend sprechen. Was ist da passiert?"
+        ]
+      }
+    },
+    {
+      "key": "b2-gesellschaft-hoeren-audio",
+      "kind": "audio",
+      "title": "Réunion publique sur le budget participatif",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Guten Abend und herzlich willkommen im Gemeindesaal von Wendelstedt-Süd. Heute geht es um eine Frage, die viele von Ihnen beschäftigt: Wie soll der neue Bürgerhaushalt funktionieren? Die Stadt stellt unserem Stadtteil im nächsten Jahr zweihunderttausend Euro zur Verfügung, und über die Verwendung sollen Sie selbst mitentscheiden."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Herr Gerlach, Sie sind in der Stadtverwaltung für das Verfahren zuständig. Wie soll das Ganze ablaufen?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Das Verfahren hat drei Phasen. Bis Ende März kann jeder, der im Stadtteil wohnt und mindestens vierzehn Jahre alt ist, Vorschläge einreichen, entweder online oder auf Papier im Bürgerbüro. Im April prüfen wir in der Verwaltung, ob die Vorschläge rechtlich und technisch umsetzbar sind."
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Und im Mai wird abgestimmt. Jede Person hat fünf Stimmen, die sie frei verteilen kann, also auch alle fünf auf ein einziges Projekt."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Und abgestimmt wird nur im Internet?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Nein, nicht nur. Man kann online abstimmen, aber auch an zwei Samstagen im Bürgerbüro, mit Unterstützung durch unsere Mitarbeiterinnen und Mitarbeiter. Uns ist wichtig, dass niemand ausgeschlossen wird, nur weil er keinen Computer hat."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Frau Petrović, Sie engagieren sich seit vielen Jahren ehrenamtlich im Mieterverein. Was halten Sie davon?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Dragana Petrović",
+          "text": "Grundsätzlich finde ich die Idee gut, das muss ich ganz ehrlich sagen. Aber ich habe eine Sorge: Wer gut organisiert ist und viele Leute mobilisieren kann, gewinnt. Die Kleingärtner zum Beispiel haben einen starken Verein, die Familien in den Hochhäusern am Ring dagegen nicht."
+        },
+        {
+          "voice": "frau3",
+          "name": "Dragana Petrović",
+          "text": "Viele von ihnen sprechen noch nicht so gut Deutsch und erfahren von solchen Abstimmungen oft erst, wenn alles vorbei ist. Am Ende entscheiden dann wieder dieselben Leute wie immer."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Herr Gerlach, ist das ein Problem, das Sie kennen?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Durchaus. Deshalb gibt es alle Unterlagen in sechs Sprachen, und im Februar fahren wir mit einem Infomobil direkt in die Wohngebiete, natürlich auch an den Ring. Aber ich gebe Frau Petrović recht: Wir werden nie alle erreichen. Was wir tun können, ist, die Hürden so niedrig wie möglich zu machen."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Mats, du bist siebzehn und sitzt im Jugendbeirat. Was erwartest du vom Bürgerhaushalt?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Mats Behrendt",
+          "text": "Ehrlich gesagt bin ich froh, dass man hier schon ab vierzehn mitmachen darf. Bei der Bundestagswahl dürfen wir ja noch nicht wählen. Wir im Jugendbeirat haben schon eine Idee, über die wir lange diskutiert haben: eine überdachte Sportfläche hinter der Gesamtschule, wo man auch im Winter spielen kann."
+        },
+        {
+          "voice": "mann3",
+          "name": "Mats Behrendt",
+          "text": "Mein Problem ist nur: Zweihunderttausend Euro klingen nach viel Geld, aber so eine Fläche kostet allein schon ungefähr hunderttausend."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Herr Gerlach, gibt es eine Obergrenze für einzelne Projekte?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Ja, kein einzelnes Projekt darf mehr als achtzigtausend Euro kosten. Sonst könnten zwei große Vorschläge das gesamte Budget aufbrauchen, und alle anderen gingen leer aus. Eine Sportfläche für hunderttausend Euro könnten wir also nicht fördern, es sei denn, sie wird kleiner geplant."
+        },
+        {
+          "voice": "mann3",
+          "name": "Mats Behrendt",
+          "text": "Das ist schade, aber nachvollziehbar. Dann müssen wir unseren Vorschlag eben überarbeiten. Vielleicht reicht ja auch ein Dach über dem Basketballfeld, das es schon gibt."
+        },
+        {
+          "voice": "frau3",
+          "name": "Dragana Petrović",
+          "text": "Darf ich noch etwas ergänzen? Mir ist wichtig, dass die Verwaltung am Ende öffentlich erklärt, was aus den Vorschlägen geworden ist, auch aus denen, die nicht gewonnen haben. Sonst machen die Leute einmal mit und dann nie wieder."
+        },
+        {
+          "voice": "mann2",
+          "name": "Rainer Gerlach",
+          "text": "Das ist so geplant. Im Herbst veröffentlichen wir einen Bericht, in dem jeder einzelne Vorschlag mit seinem Ergebnis und einer kurzen Begründung aufgeführt ist."
+        },
+        {
+          "voice": "frau",
+          "name": "Imke Hansen",
+          "text": "Vielen Dank Ihnen dreien. Ich fasse kurz zusammen: Der Bürgerhaushalt ist grundsätzlich willkommen, es gibt aber die Sorge, dass nicht alle erreicht werden, und den Wunsch nach Transparenz. Dann öffnen wir jetzt die Runde für Ihre Fragen. Wer möchte beginnen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-gesellschaft-kontrolle-audio",
+      "kind": "audio",
+      "title": "Une auditrice parle du budget participatif",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Und jetzt eine Stimme aus unserem Hörertelefon zum Bürgerhaushalt. Frau Ruhland, Sie haben im letzten Jahr selbst mitgemacht?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Ruhland",
+          "text": "Ja, ich habe damals einen Vorschlag eingereicht: mehr Bänke im Stadtpark, damit ältere Menschen unterwegs eine Pause machen können. Gewonnen hat mein Vorschlag nicht, und das hat mich zuerst ziemlich geärgert."
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Ruhland",
+          "text": "Aber im Herbst kam der Bericht der Stadt, in dem genau erklärt wurde, warum. Zwei andere Projekte hatten einfach mehr Stimmen. Und was mich am Ende überzeugt hat: Ein Teil der Bänke wird trotzdem aufgestellt, und zwar aus einem anderen Topf. Dieses Jahr mache ich also wieder mit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-gesellschaft-einstieg-foto",
+      "kind": "image",
+      "title": "Une urne électorale",
+      "alt": "Le couvercle gris d’une urne électorale, avec sa fente, dans un bureau de vote ; sur la table derrière, des enveloppes et des papiers.",
+      "photo": {
+        "file": "libre/commons/gesellschaft-wahlurne.jpg",
+        "crop": [
+          0,
+          0.02,
+          1,
+          0.44
+        ]
+      },
+      "credit": "DALIBRI, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bundestagswahl_2017_-_Neumarkt_2.jpg"
+    },
+    {
+      "key": "b2-gesellschaft-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gesellschaft: Demokratie gestalten, mitreden, mitentscheiden",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Bürgerbeteiligung, die Bürgerbeteiligungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bürgerrat, die Bürgerräte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Losverfahren, die Losverfahren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Wahlbeteiligung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Stimme, die Stimmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abstimmen über"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich beteiligen an"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich einsetzen für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Einfluss nehmen auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Petition, die Petitionen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Unterschrift, die Unterschriften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stadtrat, die Stadträte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Antrag, die Anträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Empfehlung, die Empfehlungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bindend"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mehrheit, die Mehrheiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kompromiss, die Kompromisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Politikverdrossenheit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Verantwortung übernehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zu Wort kommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Stellung nehmen zu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Einwand, die Einwände"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "berechtigt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zur Verfügung stellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ehrenamtlich"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

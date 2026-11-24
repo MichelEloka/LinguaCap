@@ -1,0 +1,2291 @@
+{
+  "id": "b2-medien",
+  "title": "Medien: Falschmeldungen, Netzwerke und Daten",
+  "objective": "Comprendre un article argumentatif sur la diffusion des fausses informations, une émission de radio sur les données personnelles et une dépêche rapportant une étude, distinguer faits, opinions et propos rapportés, et rapporter les paroles d’autrui au discours indirect (Konjunktiv I, Konjunktiv II de remplacement, laut, zufolge).",
+  "prerequisites": [
+    "b2-wohnen-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Personnes, émission, établissement scolaire et étude de la dépêche sont fictifs ; l’étude américaine sur la diffusion des fausses nouvelles et le règlement européen sur la protection des données sont évoqués de façon générale et simplifiée."
+  ],
+  "grammarFocus": [
+    "konjunktiv1-redewiedergabe"
+  ],
+  "layer": "content/b/source/b2/b2-medien.mjs",
+  "vocabulary": [
+    {
+      "id": "falschmeldung",
+      "word": "Falschmeldung",
+      "article": "die",
+      "plural": "Falschmeldungen",
+      "partOfSpeech": "noun",
+      "translation": "la fausse information",
+      "example": "Die Falschmeldung wurde hunderttausend Mal geteilt.",
+      "note": "aussi : die Fake News (pluriel)",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "richtigstellung",
+      "word": "Richtigstellung",
+      "article": "die",
+      "plural": "Richtigstellungen",
+      "partOfSpeech": "noun",
+      "translation": "le rectificatif",
+      "example": "Die Richtigstellung erreichte nur wenige Menschen.",
+      "note": "richtigstellen : rectifier",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "verbreiten",
+      "word": "verbreiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "diffuser, propager",
+      "example": "Falschmeldungen verbreiten sich schneller als wahre Nachrichten.",
+      "note": "sich verbreiten : se propager",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "teilen",
+      "word": "teilen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "partager",
+      "example": "Viele teilen Artikel, ohne sie gelesen zu haben.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "quelle",
+      "word": "Quelle",
+      "article": "die",
+      "plural": "Quellen",
+      "partOfSpeech": "noun",
+      "translation": "la source",
+      "example": "Prüfen Sie immer die Quelle einer Meldung.",
+      "note": "eine Quelle prüfen, angeben",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "glaubwuerdig",
+      "word": "glaubwürdig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "crédible",
+      "example": "Ist diese Seite eine glaubwürdige Quelle?",
+      "note": "die Glaubwürdigkeit",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "irrefuehrend",
+      "word": "irreführend",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "trompeur",
+      "example": "Die Überschrift ist irreführend.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "reisserisch",
+      "word": "reißerisch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "racoleur, sensationnaliste",
+      "example": "Reißerische Schlagzeilen werden besonders oft geteilt.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "schlagzeile",
+      "word": "Schlagzeile",
+      "article": "die",
+      "plural": "Schlagzeilen",
+      "partOfSpeech": "noun",
+      "translation": "le gros titre",
+      "example": "Die Schlagzeile passt nicht zum Inhalt des Artikels.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "algorithmus",
+      "word": "Algorithmus",
+      "article": "der",
+      "plural": "Algorithmen",
+      "partOfSpeech": "noun",
+      "translation": "l’algorithme",
+      "example": "Der Algorithmus zeigt bevorzugt Inhalte, die Reaktionen auslösen.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "faktencheck",
+      "word": "Faktencheck",
+      "article": "der",
+      "plural": "Faktenchecks",
+      "partOfSpeech": "noun",
+      "translation": "la vérification des faits",
+      "example": "Die Redaktion hat einen Faktencheck veröffentlicht.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "medienbildung",
+      "word": "Medienbildung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’éducation aux médias",
+      "example": "Medienbildung sollte in allen Fächern vorkommen.",
+      "note": "aussi : die Medienkompetenz",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "datenschutz",
+      "word": "Datenschutz",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la protection des données",
+      "example": "Beim Datenschutz hat die EU strenge Regeln.",
+      "note": "die Datenschutz-Grundverordnung (DSGVO) : le RGPD",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "einwilligung",
+      "word": "Einwilligung",
+      "article": "die",
+      "plural": "Einwilligungen",
+      "partOfSpeech": "noun",
+      "translation": "le consentement",
+      "example": "Eine Einwilligung kann man jederzeit widerrufen.",
+      "note": "einwilligen in + accusatif",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "widerrufen",
+      "word": "widerrufen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "révoquer, retirer",
+      "example": "Sie können Ihre Einwilligung jederzeit widerrufen.",
+      "note": "widerrief, hat widerrufen ; non séparable",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "auskunft-verlangen",
+      "word": "Auskunft verlangen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "demander des informations (officiellement)",
+      "example": "Jeder darf Auskunft über seine gespeicherten Daten verlangen.",
+      "note": "die Auskunft : le renseignement",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "loeschen",
+      "word": "löschen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "effacer, supprimer",
+      "example": "Ich habe vier Apps gelöscht.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "werbung",
+      "word": "Werbung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la publicité",
+      "example": "Für gezielte Werbung zahlen Firmen mehr Geld.",
+      "note": "gezielte Werbung : la publicité ciblée",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "behaupten",
+      "word": "behaupten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "affirmer, prétendre",
+      "example": "Er behauptet, das Foto sei echt.",
+      "note": "die Behauptung",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "einraeumen",
+      "word": "einräumen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "admettre, concéder",
+      "example": "Die Redaktion räumte ein, sie habe einen Fehler gemacht.",
+      "note": "séparable : ein|räumen",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "bestreiten",
+      "word": "bestreiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "contester, nier",
+      "example": "Der Nutzer bestreitet, das Video gefälscht zu haben.",
+      "note": "bestritt, hat bestritten",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "laut",
+      "word": "laut",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "selon, d’après",
+      "example": "Laut der Studie erkennen viele Jugendliche Falschmeldungen nicht.",
+      "note": "+ datif (ou génitif)",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "zufolge",
+      "word": "zufolge",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "selon, d’après",
+      "example": "Der Studie zufolge schneiden Jugendliche mit Projekterfahrung besser ab.",
+      "note": "placé après le nom, + datif",
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "angeblich",
+      "word": "angeblich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "soi-disant, prétendument",
+      "example": "Das Video zeigt angeblich eine Explosion.",
+      "note": null,
+      "audio": {
+        "media": "b2-medien-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-medien-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Wem glauben wir im Netz?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Wem glauben wir im Netz?",
+        "description": "INFORMIERT ODER MANIPULIERT?\n[fr?] Informés ou manipulés ?\nNachrichten erreichen uns heute vor allem über das Handy: in sozialen Netzwerken, in Chats, in Videos. Dabei ist nicht immer klar, wer etwas geschrieben hat und ob es stimmt. In diesem Modul geht es um Falschmeldungen, um unsere Daten und darum, wie man wiedergibt, was andere gesagt haben. [fr?] Aujourd’hui, l’information nous arrive surtout par le téléphone : réseaux sociaux, messageries, vidéos. On ne sait pas toujours qui a écrit quoi, ni si c’est vrai. Ce module traite des fausses informations, de nos données et de la manière de rapporter les propos d’autrui.\n\nFRAGEN ZUM EINSTIEG\n[fr?] Questions pour commencer\n• Wo informieren Sie sich über aktuelle Ereignisse? Warum gerade dort? [fr?] Où vous informez-vous sur l’actualité ? Pourquoi là ?\n• Haben Sie schon einmal eine Meldung geteilt, die sich später als falsch herausgestellt hat? [fr?] Avez-vous déjà partagé une information qui s’est révélée fausse ?\n• Welche Daten geben Sie Apps freiwillig, und welche lieber nicht? [fr?] Quelles données donnez-vous volontiers aux applis, et lesquelles pas ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Sätze und ein Beispiel. [fr?] Préparez mentalement deux ou trois phrases et un exemple par question.\n\nZIELE\n[fr?] Objectifs\n• Ich kann einen Artikel über Falschmeldungen verstehen und Fakten, Meinungen und zitierte Aussagen unterscheiden. [fr?] Je peux comprendre un article sur les fausses informations et distinguer faits, opinions et propos cités.\n• Ich kann einem Radiogespräch über Datenschutz Informationen und Ratschläge entnehmen und Notizen machen. [fr?] Je peux tirer d’une émission sur la protection des données des informations et des conseils, en prenant des notes.\n• Ich kann wiedergeben, was andere gesagt haben: im Konjunktiv I und mit „laut“, „zufolge“, „nach Angaben“. [fr?] Je peux rapporter les propos d’autrui au Konjunktiv I et avec laut, zufolge, nach Angaben.\n• Ich kann in einer Nachrichtenmeldung erkennen, wer was behauptet. [fr?] Je peux repérer dans une dépêche qui affirme quoi.\n\nWICHTIGE WÖRTER\n[fr?] Mots-clés\n• die Falschmeldung — la fausse information\n• verbreiten — diffuser, propager\n• die Quelle — la source\n• glaubwürdig — crédible\n• die Schlagzeile — le gros titre\n• der Datenschutz — la protection des données\n• die Einwilligung — le consentement\n• behaupten — affirmer, prétendre",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Hier liegen unsere Daten.",
+          "media": "b2-medien-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-medien-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Artikel über Falschmeldungen",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Artikel über Falschmeldungen",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Achten Sie darauf, wer spricht: Der Autor, eine Studie, eine Forscherin oder ein Lehrer? Zitierte Aussagen stehen in Anführungszeichen oder im Konjunktiv I (sei, gehe, habe). [fr?] Repérez qui parle : l’auteur, une étude, une chercheuse, un enseignant ? Les propos cités sont entre guillemets ou au Konjunktiv I.\n2. Die eigene Position des Textes erkennen Sie an Wertungen und Forderungen: „wäre bequem“, „müssen offenlegen“, „die einfachste Regel“. [fr?] La position du texte se lit dans les jugements et les exigences.\n\nWARUM LÜGEN SCHNELLER LAUFEN\nFalschmeldungen verbreiten sich im Netz rasant. Was dahintersteckt – und was jeder Einzelne tun kann\n\n(A) Das Foto zeigte einen Bahnhof, der knietief unter Wasser stand. „Heute Morgen in unserer Stadt – und niemand berichtet darüber!“, schrieb jemand dazu. Innerhalb von sechs Stunden wurde der Beitrag über hunderttausend Mal geteilt. Am Abend stellte sich heraus, dass das Bild acht Jahre alt war und aus einem anderen Land stammte. Die Richtigstellung erreichte nur einen Bruchteil der Menschen, die das Foto gesehen hatten. Viele, die es weitergeleitet hatten, löschten ihren Beitrag nie, und manche teilten das Bild sogar noch weiter, als die Korrektur längst bekannt war.\n\n(B) Solche Fälle sind kein Zufall. Eine viel zitierte Studie aus den USA, die Millionen von Beiträgen auf einer großen Plattform ausgewertet hat, kam zu dem Ergebnis, Falschmeldungen verbreiteten sich deutlich schneller und weiter als wahre Nachrichten. Für die Medienforscherin Carla Vossberg ist das keine Überraschung. Menschen teilten vor allem, was sie überrasche, empöre oder ängstige, erklärt sie. Die Wahrheit sei dagegen oft komplizierter, langweiliger und voller Einschränkungen. „Eine Lüge muss nicht stimmen, sie muss nur gut klingen“, sagt Vossberg. Wer sich über eine Nachricht aufregt, fragt seltener, ob sie überhaupt stimmt.\n\n(C) Eine wichtige Rolle spielt auch die Technik. Die Algorithmen der Plattformen zeigen bevorzugt Inhalte, auf die viele Menschen reagieren – mit Klicks, Kommentaren oder wütenden Emojis. Ob ein Beitrag stimmt, spielt dabei keine Rolle. Vossberg zufolge belohnt das System damit genau die Inhalte, die die Gesellschaft spalten. Hinzu komme, dass viele Nutzerinnen und Nutzer einen Artikel teilten, ohne mehr als die Überschrift gelesen zu haben. Wer eine reißerische Schlagzeile sieht, die zur eigenen Meinung passt, klickt eben schnell auf „Teilen“. Und wer einmal auf einen solchen Beitrag reagiert hat, bekommt bald noch mehr davon zu sehen.\n\n(D) Was lässt sich dagegen tun? Faktenchecks von Redaktionen helfen, doch sie kommen oft zu spät und erreichen vor allem Menschen, die ohnehin skeptisch sind. Einige Plattformen blenden inzwischen Hinweise unter umstrittenen Beiträgen ein; wie viel das bringt, ist noch offen. Deshalb setzen viele Fachleute auf Bildung. An einem Gymnasium in Norddeutschland hat der Lehrer Ole Brinkmann ein Wahlfach „Nachrichten prüfen“ eingeführt. Seine Schülerinnen und Schüler lernen, eine Bilder-Rückwärtssuche zu nutzen, Quellen zu vergleichen und Absender zu prüfen. Es gehe nicht darum, allem zu misstrauen, betont Brinkmann. Ziel sei vielmehr, zu wissen, wem man warum vertraut. Nach einem Jahr, so berichtet er, hätten seine Schüler in einem Test mehr Falschmeldungen erkannt als ihre Eltern.\n\n(E) Die Verantwortung allein bei den Einzelnen abzuladen, wäre allerdings zu bequem. Plattformen, die mit unserer Aufmerksamkeit Geld verdienen, müssen offenlegen, nach welchen Regeln sie Inhalte verbreiten, und Falschmeldungen schneller kennzeichnen. Doch auch wer nur ein Handy in der Hand hält, trägt einen Teil der Verantwortung. Die einfachste Regel ist zugleich die wirksamste: erst prüfen, dann teilen. Und wer sich nicht sicher ist, teilt im Zweifel lieber gar nicht. Die Wahrheit mag langsamer sein – aber sie kann aufholen, wenn wir ihr ein wenig Zeit geben.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-lesen-artikel",
+          "caption": "Warum Lügen schneller laufen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche Position vertritt der Text insgesamt? [fr?] Quelle position le texte défend-il dans l’ensemble ?",
+          "explanation": "Absatz E fordert zuerst etwas von den Plattformen („müssen offenlegen“, „schneller kennzeichnen“) und dann von jedem Einzelnen („erst prüfen, dann teilen“). Faktenchecks kommen laut Absatz D „oft zu spät“, und von Gesetzen oder bewusster Absicht spricht der Text nicht. [fr?] Responsabilité partagée : plateformes et utilisateurs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nur strenge Gesetze können Falschmeldungen im Netz noch stoppen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Faktenchecks sind das wirksamste Mittel gegen Falschmeldungen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wer Falschmeldungen teilt, tut das fast immer mit voller Absicht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Plattformen und Einzelne tragen gemeinsam Verantwortung.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was soll das Beispiel des Bahnhofsfotos in Absatz A vor allem zeigen? [fr?] Que doit surtout montrer l’exemple de la photo de la gare ?",
+          "explanation": "Der Absatz endet mit dem entscheidenden Punkt: „Die Richtigstellung erreichte nur einen Bruchteil der Menschen“, und viele löschten ihren Beitrag nie. Der Satz „niemand berichtet darüber“ war Teil der Falschmeldung, keine Kritik des Autors an den Medien. [fr?] Le rectificatif touche bien moins de monde que la fausse information.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Korrektur erreicht viel weniger Menschen als die Falschmeldung.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Bahnhöfe gehören bei starkem Unwetter zu den gefährlichsten Orten einer Stadt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Medien berichten insgesamt viel zu wenig über Unwetter.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Alte Fotos darf man in sozialen Netzwerken nicht mehr teilen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Laut der Studie aus den USA verbreiten sich Falschmeldungen schneller als wahre Nachrichten.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: Die Studie „kam zu dem Ergebnis, Falschmeldungen verbreiteten sich deutlich schneller und weiter als wahre Nachrichten“. Der Konjunktiv zeigt, dass der Text das Ergebnis der Studie wiedergibt. [fr?] Vrai : c’est le résultat rapporté de l’étude.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Ole Brinkmann rät seinen Schülern, grundsätzlich allen Medien zu misstrauen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: „Es gehe nicht darum, allem zu misstrauen, betont Brinkmann. Ziel sei vielmehr, zu wissen, wem man warum vertraut.“ [fr?] Faux : il ne s’agit pas de se méfier de tout.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Das Wahlfach von Herrn Brinkmann gibt es inzwischen an allen Schulen des Landes.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Der Artikel nennt nur ein Gymnasium in Norddeutschland. Ob andere Schulen das Fach übernommen haben, erfahren wir nicht. [fr?] Non mentionné : un seul lycée est cité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr?] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A erzählt ein Beispiel, B erklärt die psychologischen Gründe (überraschen, empören), C die Technik der Plattformen, D Gegenmittel, vor allem Bildung, E zieht das Fazit über Plattformen und Nutzer. [fr?] Exemple, causes psychologiques, technique, éducation, conclusion.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Ein Bild, das täuschte"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Warum wir Aufregendes teilen"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Die Rolle der Algorithmen"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Prüfen lernen in der Schule"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Geteilte Verantwortung"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Wie ist das Zitat „Eine Lüge muss nicht stimmen, sie muss nur gut klingen“ gemeint? [fr?] Comment comprendre cette citation ?",
+          "explanation": "Vossberg erklärt davor, man teile, was überrascht oder empört; die Wahrheit sei oft „komplizierter, langweiliger“. Ihr Satz fasst das zusammen: Ob etwas geteilt wird, hängt von seiner Wirkung ab, nicht davon, ob es stimmt. [fr?] Ce qui compte pour la diffusion, c’est l’effet produit, pas la vérité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wer gut formulieren kann, darf ruhig auch einmal lügen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Lügen klingen meistens viel schlechter als die Wahrheit.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Für die Verbreitung zählt die Wirkung, nicht die Wahrheit.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Nur Fachleute können Lügen von der Wahrheit unterscheiden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Verben im Konjunktiv aus dem Text. [fr?] Complétez avec les verbes au subjonctif du texte.",
+          "text": "Menschen [[1]] vor allem, was sie überrasche. · Die Wahrheit [[2]] dagegen oft komplizierter. · Es [[3]] nicht darum, allem zu misstrauen.",
+          "explanation": "Der Text gibt die Aussagen von Vossberg und Brinkmann in indirekter Rede wieder. „Sei“ und „gehe“ sind Konjunktiv I. „Teilten“ ist Konjunktiv II: Der Konjunktiv I „sie teilen“ sähe genauso aus wie der Indikativ. [fr?] Discours indirect : sei, gehe (Konjunktiv I) ; teilten remplace « teilen », identique à l’indicatif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "teilten"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "sei"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "gehe"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: ein Radiogespräch über unsere Daten",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Radiogespräch über unsere Daten",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\n[fr?] La situation\nIm Digitalmagazin „Netzwerk“ spricht der Moderator Simon Hemmer mit der Datenschutzexpertin Tabea Asmussen und mit dem 17-jährigen Linus Ohlendorf, der bei einer App seine Daten angefordert hat. Das Gespräch dauert etwa dreieinhalb Minuten. [fr?] Dans le magazine numérique « Netzwerk », l’animateur Simon Hemmer reçoit la spécialiste de la protection des données Tabea Asmussen et Linus Ohlendorf, 17 ans, qui a demandé ses données à une appli. L’échange dure environ trois minutes et demie.\n\nSTRATEGIE\n[fr?] Stratégie\n1. Beim ersten Hören: Was hat Linus erlebt, und was erklärt die Expertin? [fr?] Première écoute : qu’a vécu Linus, et qu’explique la spécialiste ?\n2. Beim zweiten Hören ergänzen Sie die Notizen. Zahlen und Aufzählungen („Erstens …, zweitens …“) helfen Ihnen. [fr?] Deuxième écoute : complétez les notes ; les nombres et les énumérations vous guident.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-hoeren-audio",
+          "caption": "Netzwerk: Was wissen Apps über uns?",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Linus: Kopie seiner Daten nach drei [[1]] · Umfang: über [[2]] Seiten · gespeichert: Nutzungszeiten, [[3]] und angesehene Videos · warum Firmen Daten sammeln: für gezielte [[4]] · Linus geht meistens zu [[5]] schlafen",
+          "explanation": "„Nach drei Wochen kam eine Datei mit über dreihundert Seiten.“ Gespeichert war, „wo ich gerade war“, also der Standort. Mit Daten „lässt sich Geld verdienen“, weil man „gezielt Werbung zeigen“ kann. Die App weiß, wann Linus schlafen geht: „meistens viel zu spät“. [fr?] der Standort : la localisation ; gezielte Werbung : publicité ciblée.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wochen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "300",
+                "dreihundert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Standort",
+                "Ort",
+                "Aufenthaltsort"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Werbung"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "spät"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was kritisiert Frau Asmussen am Beispiel der Taschenlampen-App? [fr?] Que critique Mme Asmussen avec l’exemple de l’appli lampe de poche ?",
+          "explanation": "„Viele Apps sammeln deutlich mehr Daten, als sie für ihre eigentliche Funktion brauchen. Eine Taschenlampen-App muss nicht wissen, wo Sie sich gerade befinden.“ Über Preis, Internet oder Licht sagt sie nichts. [fr?] Collecte de données inutiles à la fonction de l’appli.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Solche Apps kosten oft viel mehr Geld, als sie eigentlich wert sind.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Solche Apps funktionieren nur, wenn das Internet an ist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Apps sammeln Daten, die sie für ihre Funktion nicht brauchen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Apps zeigen nachts zu helles Licht und stören den Schlaf.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was bedeutet der Satz „Wenn eine App nichts kostet, bezahlen Sie mit Ihren Daten“? [fr?] Que signifie cette phrase ?",
+          "explanation": "Frau Asmussen erklärt davor: Je mehr eine Firma über Sie weiß, desto gezielter kann sie Werbung zeigen, und dafür zahlen Werbekunden mehr. Der Preis der App sind also Ihre Daten. Von Gebühren ist nicht die Rede. [fr?] Le « prix » d’une appli gratuite, ce sont vos données.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kostenlose Apps verlangen nach einiger Zeit doch noch eine Gebühr.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die App verdient Geld mit Werbung, die auf Ihren Daten beruht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wer seine Daten löscht, muss für die App bezahlen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Daten sind wertlos, solange eine App gratis bleibt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was hat Linus besonders überrascht? [fr?] Qu’est-ce qui a surtout surpris Linus ?",
+          "explanation": "„Ich dachte, ich bin vorsichtig. Ich poste fast nichts Persönliches. Aber die App weiß trotzdem, wann ich schlafen gehe.“ Die Firma hat seine Anfrage beantwortet, und seine Freunde hat er erst danach informiert. [fr?] Il pensait être prudent, mais l’appli sait beaucoup de choses.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dass die App ihm für seine Daten sogar Geld anbieten wollte.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Dass seine Freunde schon viel früher Bescheid wussten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dass die Firma seine Anfrage einfach abgelehnt hat.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Dass die App viel über ihn weiß, obwohl er kaum postet.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Rechte nach der Datenschutz-Grundverordnung: Auskunft verlangen, Antwort meist innerhalb eines [[1]] · Daten [[2]] lassen · Einwilligung jederzeit [[3]] · Tipp 1: einmal im Monat in den [[4]] prüfen, welche App auf Standort, Kamera und Mikrofon zugreift",
+          "explanation": "Das Unternehmen muss „in der Regel innerhalb eines Monats antworten“. Man kann verlangen, „dass Ihre Daten gelöscht werden“, und eine Einwilligung „jederzeit widerrufen“. Erster Tipp: „Prüfen Sie einmal im Monat in den Einstellungen …“ [fr?] widerrufen : retirer (un consentement) ; die Einstellungen : les réglages.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Monats"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "löschen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "widerrufen",
+                "zurückziehen"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Einstellungen"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was hat Linus nach seinem Experiment getan? [fr?] Qu’a fait Linus après son expérience ?",
+          "explanation": "„Ich habe vier Apps gelöscht und bei den anderen den Standort ausgeschaltet. Und ich habe meinen Freunden davon erzählt.“ Er hat nicht alle Netzwerke verlassen und sich auch nicht beschwert. [fr?] Il a supprimé des applis et désactivé la localisation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er hat alle sozialen Netzwerke für immer verlassen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er hat Apps gelöscht und den Standort ausgeschaltet.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er hat sich bei der Firma schriftlich über die App beschwert.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Er hat ein neues Handy ohne Kamera gekauft.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Wie gibt man wieder, was andere sagen?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Wie gibt man wieder, was andere sagen?",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus der Meldung über die Studie. Achten Sie auf die Verbformen. [fr?] Lisez les phrases de l’article et de la dépêche sur l’étude. Observez les formes verbales.\n\nSÄTZE\n[fr?] Le corpus\n(1) Menschen teilten vor allem, was sie überrasche, erklärt Vossberg.\n(2) Die Wahrheit sei dagegen oft komplizierter.\n(3) Es gehe nicht darum, allem zu misstrauen, betont Brinkmann.\n(4) Nur knapp ein Drittel habe fünf der sechs Falschmeldungen erkannt, teilte das Institut mit.\n(5) Viele hätten angegeben, sie würden einem Beitrag eher glauben, wenn er oft geteilt worden sei.\n(6) Sie forderte, das Prüfen von Quellen müsse in allen Fächern geübt werden.\n(7) Die Studie kam zu dem Ergebnis, Falschmeldungen verbreiteten sich schneller als wahre Nachrichten.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions : les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 2, 3, 4 und 6: Warum stehen die Verben im Konjunktiv (sei, gehe, habe, müsse)? [fr?] Phrases 2, 3, 4 et 6 : pourquoi ces verbes sont-ils au subjonctif ?",
+          "explanation": "Der Konjunktiv I ist das Zeichen der indirekten Rede: Der Text gibt wieder, was Vossberg, Brinkmann oder das Institut sagen, und übernimmt die Aussage nicht als eigene. Er sagt nichts darüber, ob sie wahr ist. [fr?] Le Konjunktiv I signale le discours rapporté, sans prendre position.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Aussagen sicher wahr sind.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil der Text eine Bitte ausdrückt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil der Text Aussagen anderer wiedergibt.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Weil die Sätze in der Zukunft spielen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie bildet man den Konjunktiv I in der 3. Person Singular? [fr?] Comment forme-t-on le Konjunktiv I à la 3e personne du singulier ?",
+          "explanation": "Stamm des Infinitivs + -e: geh-e, hab-e, müss-e, könn-e, werd-e. Ausnahme ist „sein“: er sei. „Er ginge“ ist Konjunktiv II, „würde + Infinitiv“ ist eine Ersatzform. [fr?] Radical de l’infinitif + -e ; exception : er sei.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Infinitiv + -te (er gehte)",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Präteritum mit Umlaut (er ginge)",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "würde + Infinitiv (er würde gehen)",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Verbstamm + -e (er gehe, er habe)",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 1, 5 und 7: Warum steht hier der Konjunktiv II (teilten, hätten, verbreiteten)? [fr?] Phrases 1, 5 et 7 : pourquoi le Konjunktiv II ?",
+          "explanation": "Der Konjunktiv I von „sie teilen“, „sie haben“, „sie verbreiten“ ist identisch mit dem Indikativ. Damit die indirekte Rede erkennbar bleibt, nimmt man den Konjunktiv II: sie teilten, sie hätten, sie verbreiteten (oder würde + Infinitiv). [fr?] Quand le Konjunktiv I = indicatif, on le remplace par le Konjunktiv II.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil der Konjunktiv I im Plural wie der Indikativ aussieht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil die Aussagen besonders höflich formuliert sein sollen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil es sich um unrealistische Wünsche handelt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil die Verben unregelmäßig sind.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 4: Worauf bezieht sich „habe … erkannt“? [fr?] Phrase 4 : à quoi renvoie « habe … erkannt » ?",
+          "explanation": "Vergangenheit in der indirekten Rede: Konjunktiv I von „haben“ oder „sein“ + Partizip II (habe erkannt, sei gewesen). Es gibt nur diese eine Vergangenheitsform; Präteritum und Perfekt der direkten Rede werden beide so wiedergegeben. [fr?] Passé : habe / sei + participe II, quelle que soit la forme directe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf eine Handlung in der Zukunft",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf eine Bitte des Instituts",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "auf eine Handlung in der Vergangenheit",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "auf eine Möglichkeit",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-medien-regel",
+      "kind": "lesson",
+      "title": "Regel: Konjunktiv I und indirekte Rede",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Konjunktiv I und indirekte Rede",
+        "description": "REGEL — WOZU DER KONJUNKTIV I?\n[fr?] Règle : à quoi sert le Konjunktiv I ?\nIn Nachrichten, Berichten und formellen Texten zeigt der Konjunktiv I, dass man fremde Aussagen wiedergibt. Die Sprecherin übernimmt keine Verantwortung dafür, ob sie stimmen.\n[fr?] Le Konjunktiv I signale un discours rapporté, surtout à l’écrit et dans les médias ; le français n’a pas de mode équivalent.\n• Direkt: „Die Wahrheit ist oft kompliziert.“ → Indirekt: Sie sagt, die Wahrheit sei oft kompliziert. [fr?] La conjonction « dass » est facultative ; sans elle, ordre de la principale.\n• Mit „dass“: Sie sagt, dass die Wahrheit oft kompliziert sei. [fr?] Avec « dass », verbe à la fin.\n\nREGEL — DIE FORMEN\n[fr?] Règle : les formes\nVerbstamm + Endung: -e, -est, -e, -en, -et, -en. Am häufigsten ist die 3. Person Singular.\n[fr?] Radical + -e, -est, -e, -en, -et, -en ; surtout à la 3e personne du singulier.\n• er/sie/es: habe, gehe, komme, könne, müsse, wolle, werde [fr?] formes courantes\n• sein: ich sei, du sei(e)st, er sei, wir seien, ihr seiet, sie seien [fr?] sein est irrégulier à toutes les personnes\n\nREGEL — ERSATZFORM KONJUNKTIV II\n[fr?] Règle : remplacement par le Konjunktiv II\nWenn der Konjunktiv I aussieht wie der Indikativ (ich habe, wir haben, sie haben), nimmt man den Konjunktiv II oder „würde“ + Infinitiv.\n[fr?] Si le Konjunktiv I se confond avec l’indicatif, on prend le Konjunktiv II ou « würde » + infinitif.\n• Sie sagen, sie hätten keine Zeit. (nicht: sie haben) [fr?] ils disent n’avoir pas le temps\n• Die Studie zeigt, Jugendliche teilten / würden Artikel ungelesen teilen. [fr?] teilten ou würden … teilen\n\nREGEL — ZEITEN, FRAGEN, AUFFORDERUNGEN\n[fr?] Règle : temps, questions, ordres\n• Vergangenheit: habe / sei + Partizip II – Er sagt, er habe das Foto geprüft. Sie sagt, sie sei krank gewesen. [fr?] Passé : habe / sei + participe II\n• Zukunft: werde + Infinitiv – Er sagt, er werde morgen antworten. [fr?] Futur : werde + infinitif\n• Fragen: ob oder Fragewort, Verb am Ende – Sie fragt, ob das Foto echt sei. Sie fragt, woher es stamme. [fr?] Questions : ob ou mot interrogatif, verbe à la fin\n• Aufforderungen: sollen (oder höflich: mögen) – Er rät, man solle zuerst die Quelle prüfen. [fr?] Ordres et conseils : solle + infinitif\n\nREGEL — PERSPEKTIVE ANPASSEN\n[fr?] Règle : adapter le point de vue\nPronomen, Possessivartikel, Orts- und Zeitangaben ändern sich: ich → er/sie, mein → sein/ihr, hier → dort, heute → an diesem Tag, morgen → am nächsten Tag. [fr?] Pronoms, possessifs, indications de lieu et de temps changent, comme en français.\n\nACHTUNG\n[fr?] Attention : pièges des francophones\n• Signale ohne Konjunktiv: laut + Dativ, … zufolge, nach Angaben + Genitiv – Laut der Polizei wurde niemand verletzt. [fr?] Après laut, zufolge, nach Angaben, l’indicatif suffit.\n• In der gesprochenen Sprache benutzen viele den Indikativ: Er hat gesagt, dass er krank ist. In Berichten und Prüfungstexten schreiben Sie den Konjunktiv. [fr?] À l’oral, l’indicatif est courant ; à l’écrit formel, employez le Konjunktiv.\n• Nicht überall „würde“: Die Formen „sei“, „habe“ (3. Person), „könne“, „müsse“ sind eindeutig und klingen besser. [fr?] Pas de « würde » partout : sei, habe, könne, müsse sont clairs.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-medien-grammatik",
+      "kind": "exercise",
+      "title": "Üben: indirekte Rede im Konjunktiv",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: indirekte Rede im Konjunktiv",
+        "description": "Üben Sie die indirekte Rede: Formen, Ersatzformen, Vergangenheit, Fragen und Aufforderungen. [fr?] Entraînez-vous au discours indirect : formes, remplacements, passé, questions et ordres.\n\nMERKE\n[fr?] À retenir\n• er habe, sei, könne, gehe · sie hätten, kämen (Ersatz) · er habe … geprüft, sie sei … gewesen [fr?] formes clés\n• Frage: ob / Fragewort + Verb am Ende · Aufforderung: solle + Infinitiv [fr?] questions et ordres rapportés",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konjunktiv I. [fr?] Complétez au Konjunktiv I.",
+          "text": "Die Ministerin sagt, sie [[1]] keine Zeit. · Der Sprecher erklärt, das Gesetz [[2]] schon fertig. · Die Forscherin meint, man [[3]] Falschmeldungen erkennen. · Der Lehrer betont, es [[4]] um Vertrauen.",
+          "explanation": "3. Person Singular: Verbstamm + -e (hab-e, könn-e, geh-e). „Sein“ ist unregelmäßig: er/sie/es sei. Diese Formen unterscheiden sich vom Indikativ (hat, ist, kann, geht) und zeigen klar die indirekte Rede. [fr?] 3e personne : radical + -e ; sein → sei.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "habe"
+              ],
+              "hint": "haben",
+              "size": 5
+            },
+            {
+              "id": "2",
+              "accept": [
+                "sei"
+              ],
+              "hint": "sein",
+              "size": 4
+            },
+            {
+              "id": "3",
+              "accept": [
+                "könne"
+              ],
+              "hint": "können",
+              "size": 6
+            },
+            {
+              "id": "4",
+              "accept": [
+                "gehe"
+              ],
+              "hint": "gehen",
+              "size": 5
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Konjunktiv I oder Ersatzform? Ergänzen Sie. [fr?] Konjunktiv I ou forme de remplacement ? Complétez.",
+          "text": "Die Schüler sagen, sie [[1]] zu wenig Zeit für Medienbildung. · Die Eltern erklären, sie [[2]] heute etwas später.",
+          "explanation": "„Sie haben“ und „sie kommen“ wären im Konjunktiv I identisch mit dem Indikativ. Deshalb nimmt man den Konjunktiv II: hätten, kämen. Möglich wäre auch „würden … kommen“, das passt aber nicht in eine Lücke. [fr?] Konjunktiv I = indicatif → Konjunktiv II : hätten, kämen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hätten"
+              ],
+              "hint": "haben",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kämen"
+              ],
+              "hint": "kommen",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Ich habe die Nachricht nicht geteilt“, sagt Tim. Welche Wiedergabe ist richtig? [fr?] Quelle version rapportée est correcte ?",
+          "explanation": "Das Pronomen wechselt (ich → er), und die Vergangenheit bildet man mit „habe“ + Partizip II, weil „teilen“ das Perfekt mit „haben“ bildet. „Sei … geteilt“ wäre falsch, „hätte … geteilt haben“ doppelt. [fr?] ich → er ; habe + participe II.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Tim sagt, ich habe die Nachricht nicht geteilt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Tim sagt, er hätte die Nachricht nicht geteilt haben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Tim sagt, er sei die Nachricht nicht geteilt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Tim sagt, er habe die Nachricht nicht geteilt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Forscherin",
+              "erklärte,",
+              "viele Nutzer",
+              "teilten",
+              "Artikel,",
+              "ohne",
+              "sie",
+              "gelesen",
+              "zu haben."
+            ]
+          ],
+          "explanation": "Indirekte Rede ohne „dass“: Nach dem Komma folgt ein Hauptsatz mit dem Verb an zweiter Stelle (viele Nutzer teilten). „Teilten“ ersetzt den Konjunktiv I „teilen“. Der Infinitivsatz mit „ohne … zu“ endet mit „gelesen zu haben“. [fr?] Sans « dass », verbe en 2e position ; « ohne … zu haben » à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Vergangenheit in der indirekten Rede: Ergänzen Sie. [fr?] Le passé au discours indirect : complétez.",
+          "text": "„Ich war gestern im Büro“, sagt er. → Er sagt, er [[1]] gestern im Büro [[2]]. · „Wir haben das Foto geprüft“, sagen sie. → Sie sagen, sie [[3]] das Foto geprüft.",
+          "explanation": "Präteritum und Perfekt werden gleich wiedergegeben: Konjunktiv von „sein“ oder „haben“ + Partizip II. „Er sei … gewesen“. Bei „sie“ (Plural) wäre „haben“ identisch mit dem Indikativ, also „hätten“. [fr?] er sei … gewesen ; sie hätten … geprüft.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sei"
+              ],
+              "hint": "sein",
+              "size": 4
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gewesen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "hätten"
+              ],
+              "hint": "haben",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Woher stammt das Foto?“, fragt die Journalistin. Welche Wiedergabe ist richtig? [fr?] Quelle version rapportée est correcte ?",
+          "explanation": "Eine W-Frage wird mit dem Fragewort eingeleitet, das Verb steht am Ende: woher das Foto stamme. „Ob“ nimmt man nur bei Ja-Nein-Fragen, „dass“ nie bei Fragen. [fr?] Question en W : mot interrogatif, verbe à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Journalistin fragt, woher stamme das Foto.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Journalistin fragt, woher das Foto stamme.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Journalistin fragt, ob das Foto woher stamme.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Journalistin fragt, dass das Foto woher stamme.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Prüfen Sie zuerst die Quelle!“, rät der Lehrer. Welche Wiedergabe ist richtig? [fr?] Quelle version rapportée est correcte ?",
+          "explanation": "Aufforderungen gibt man mit „sollen“ im Konjunktiv I wieder: man solle + Infinitiv am Ende (prüfen). Der Imperativ „Prüfen Sie“ bleibt in der indirekten Rede nicht stehen. [fr?] Ordre rapporté : solle + infinitif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Lehrer rät, man solle zuerst die Quelle prüfen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Lehrer rät, prüfen Sie zuerst die Quelle sei.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Lehrer rät, man solle die Quelle zuerst gründlich prüft.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Lehrer rät, man sei zuerst die Quelle prüfen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "match",
+          "prompt": "Was bedeuten die Redeverben? Ordnen Sie zu. [fr?] Que signifient ces verbes introducteurs ? Associez.",
+          "explanation": "Redeverben zeigen, wie die Person spricht, und machen einen Bericht genauer als „sagen“. Vorsicht: „behaupten“ klingt oft skeptisch, als ob man der Aussage nicht ganz glaubt. [fr?] affirmer, confirmer, admettre, contester, souligner.",
+          "pairs": [
+            {
+              "left": "behaupten",
+              "right": "etwas als wahr darstellen, ohne Beweis"
+            },
+            {
+              "left": "bestätigen",
+              "right": "sagen, dass etwas stimmt"
+            },
+            {
+              "left": "einräumen",
+              "right": "etwas zugeben"
+            },
+            {
+              "left": "bestreiten",
+              "right": "sagen, dass etwas nicht stimmt"
+            },
+            {
+              "left": "betonen",
+              "right": "etwas besonders hervorheben"
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Passen Sie Pronomen und Ortsangabe an. [fr?] Adaptez le possessif et l’indication de lieu.",
+          "text": "„Mein Team hat das hier geprüft“, sagt die Faktenprüferin. → Die Faktenprüferin sagt, [[1]] Team habe das [[2]] geprüft.",
+          "explanation": "Aus der Sicht der Berichtenden wird „mein“ zu „ihr“ (die Faktenprüferin ist eine Frau) und „hier“ zu „dort“, weil die Berichtende nicht am selben Ort ist. [fr?] mon → son (ihr, car c’est une femme) ; ici → là-bas.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ihr"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "dort"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „___ der Studie erkennen viele Jugendliche Falschmeldungen nicht.“ [fr?] Quel mot convient ?",
+          "explanation": "„Laut der Studie“ gibt die Quelle an. „Zufolge“ ist richtig, steht aber nach dem Nomen: der Studie zufolge. „Wegen“ und „trotz“ nennen Grund und Gegengrund, keine Quelle. [fr?] laut + nom ; zufolge se place après le nom.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zufolge",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wegen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Laut",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Trotz",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-medien-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: Nachrichten, Netz und Daten",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: Nachrichten, Netz und Daten",
+        "description": "Lernen Sie die Wörter der Medienwelt in festen Verbindungen und Wortfamilien. [fr?] Apprenez le vocabulaire des médias en collocations et en familles de mots.\n\nTIPP\n[fr?] Conseil\nViele Medienwörter sind Komposita: die Falsch-meldung, die Schlag-zeile, der Fakten-check. Zerlegen Sie ein langes Wort in seine Teile; das letzte Wort bestimmt den Artikel. [fr?] Beaucoup de mots des médias sont composés : décomposez-les ; le dernier élément donne l’article.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr?] Quel verbe convient ? Associez.",
+          "explanation": "Feste Verbindungen aus dem Modul: eine Quelle prüfen, eine Falschmeldung verbreiten, seine Daten anfordern (wie Linus), eine Einwilligung widerrufen, Aufmerksamkeit erregen. [fr?] vérifier une source, propager une fausse information, demander ses données, retirer un consentement, attirer l’attention.",
+          "pairs": [
+            {
+              "left": "eine Quelle",
+              "right": "prüfen"
+            },
+            {
+              "left": "eine Falschmeldung",
+              "right": "verbreiten"
+            },
+            {
+              "left": "seine Daten",
+              "right": "anfordern"
+            },
+            {
+              "left": "eine Einwilligung",
+              "right": "widerrufen"
+            },
+            {
+              "left": "Aufmerksamkeit",
+              "right": "erregen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen mit Artikel „die“. [fr?] Formez le nom (féminin).",
+          "text": "glaubwürdig → die [[1]] · manipulieren → die [[2]] · verbreiten → die [[3]] · einwilligen → die [[4]] · behaupten → die [[5]]",
+          "explanation": "Adjektive auf -ig bilden Nomen auf -keit (Glaubwürdigkeit). Verben auf -ieren bilden oft Nomen auf -ation (Manipulation). Die anderen Verben bilden Nomen auf -ung. Alle sind feminin. [fr?] -ig → -keit ; -ieren → -ation ; sinon -ung.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Glaubwürdigkeit"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Manipulation"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Verbreitung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Einwilligung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Behauptung"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was ist eine „reißerische Schlagzeile“? [fr?] Qu’est-ce qu’une « reißerische Schlagzeile » ?",
+          "explanation": "„Reißerisch“ beschreibt einen Stil, der mit Übertreibung und Gefühl Aufmerksamkeit erregen will. Solche Überschriften werden besonders oft geklickt und geteilt. [fr?] reißerisch = racoleur, sensationnaliste.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine sachliche Überschrift ohne jede Wertung",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine übertriebene Überschrift, die auffallen soll",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine Überschrift, die man nicht drucken darf",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Überschrift über einen Unfall",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Die Überschrift ist „irreführend“. Was bedeutet das? [fr?] Que signifie « irreführend » ?",
+          "explanation": "„Irreführend“ kommt von „in die Irre führen“: Man glaubt etwas Falsches. Eine irreführende Überschrift muss nicht direkt lügen; sie lässt aber etwas anders erscheinen, als es ist. [fr?] irreführend = trompeur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie ist sehr lang und kompliziert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie ist in einer fremden Sprache.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie ist sachlich und genau.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie erweckt einen falschen Eindruck.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr?] Complétez avec la préposition.",
+          "text": "Fachleute warnen [[1]] gefälschten Videos. · Viele zweifeln [[2]] der Glaubwürdigkeit dieser Seite. · Die Studie beruht [[3]] einer Befragung von 2 000 Jugendlichen.",
+          "explanation": "Warnen vor + Dativ, zweifeln an + Dativ, beruhen auf + Dativ. Die Präpositionen sind fest und lassen sich nicht aus dem Französischen ableiten. [fr?] mettre en garde contre = warnen vor ; douter de = zweifeln an ; reposer sur = beruhen auf.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "vor"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie möchten eine Information neutral wiedergeben. Welcher Satz passt? [fr?] Vous voulez rapporter une information de façon neutre. Quelle phrase convient ?",
+          "explanation": "„Nach Angaben der Polizei“ nennt die Quelle, ohne zu werten. „Lügt bestimmt“ und „endlich zugegeben“ enthalten eine Bewertung, und „angeblich … laut Gerüchten“ macht die Information unglaubwürdig. [fr?] « nach Angaben » = selon (source neutre).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Polizei lügt bestimmt, wenn sie behauptet, es gab keine Verletzten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Polizei hat endlich zugegeben, dass es keine Verletzten gab.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nach Angaben der Polizei gab es bei dem Brand keine Verletzten.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Angeblich soll es laut Gerüchten gar keine Verletzten gegeben haben.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-medien-lesen2",
+      "kind": "exercise",
+      "title": "Verstehen: eine Meldung über eine Studie",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: eine Meldung über eine Studie",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n[fr?] Stratégie\nEine Nachrichtenmeldung beginnt mit dem Wichtigsten. Danach kommen Einzelheiten und Stimmen. Fragen Sie bei jedem Absatz: Wer sagt das? Ist das eine Tatsache, ein Ergebnis oder eine Forderung? [fr?] Une dépêche commence par l’essentiel, puis donne détails et réactions. Demandez-vous : qui parle ? fait, résultat ou revendication ?\n\nSTUDIE: VIELE JUGENDLICHE ERKENNEN FALSCHMELDUNGEN NICHT\nForschende fordern mehr Medienbildung an den Schulen\n\nViele Jugendliche haben Schwierigkeiten, Falschmeldungen im Internet zu erkennen. Das geht aus einer Studie hervor, die ein Institut für Medienbildung am Dienstag vorgestellt hat. Für die Untersuchung hatten die Forschenden rund 2 000 Schülerinnen und Schüler zwischen 14 und 18 Jahren befragt.\n\nDie Jugendlichen bekamen zwölf Beiträge aus sozialen Netzwerken gezeigt, darunter sechs Falschmeldungen. Nur knapp ein Drittel habe mindestens fünf der sechs falschen Beiträge richtig erkannt, teilte das Institut mit. Besonders schwer sei es den Befragten gefallen, bezahlte Werbung von unabhängigen Informationen zu unterscheiden. Viele hätten außerdem angegeben, sie würden einem Beitrag eher glauben, wenn er sehr oft geteilt worden sei. Ein Beispiel aus dem Test: Ein Foto, das angeblich einen Hai auf einer überfluteten Autobahn zeigte, hielt fast die Hälfte der Befragten für echt.\n\nStudienleiterin Miriam Thalheim betonte, die Ergebnisse seien kein Grund, der jungen Generation die Schuld zu geben. „Erwachsene schneiden in ähnlichen Tests nicht besser ab“, sagte sie. Das Problem sei vielmehr, dass Medienbildung an vielen Schulen nur am Rande vorkomme. Sie forderte, das Prüfen von Quellen müsse in allen Fächern geübt werden, nicht nur im Deutschunterricht.\n\nPositiv bewertete Thalheim, dass fast drei Viertel der Befragten mehr über das Thema lernen wollten. Jugendliche, die in der Schule bereits an einem Projekt zum Thema teilgenommen hatten, schnitten der Studie zufolge deutlich besser ab.\n\nEin Sprecher des Kultusministeriums erklärte auf Nachfrage, man nehme die Ergebnisse ernst. Medienbildung sei bereits seit einigen Jahren Teil der Lehrpläne. Man prüfe derzeit, wie Lehrkräfte besser fortgebildet werden könnten. Konkrete Pläne nannte er nicht.\n\nKritik kam von einer Lehrergewerkschaft. Deren Vorsitzende sagte, die Schulen hätten weder genug Zeit noch genug Personal für zusätzliche Aufgaben. Wer mehr Medienbildung wolle, müsse auch mehr Unterrichtsstunden dafür einplanen.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-lesen2-meldung",
+          "caption": "Meldung: Studie zu Falschmeldungen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Wer sagt was? Ordnen Sie zu. [fr?] Qui dit quoi ? Associez.",
+          "explanation": "Die Meldung ordnet jede Aussage einer Quelle zu: „teilte das Institut mit“, „Sie forderte …“ (Thalheim), „Ein Sprecher des Kultusministeriums erklärte …“, „Deren Vorsitzende sagte …“. Genau darauf achtet man beim Lesen von Nachrichten. [fr?] Chaque propos est attribué à une source.",
+          "pairs": [
+            {
+              "left": "das Institut",
+              "right": "Nur ein Drittel habe fast alle Fälschungen erkannt."
+            },
+            {
+              "left": "die Studienleiterin",
+              "right": "Quellenprüfung gehöre in alle Fächer."
+            },
+            {
+              "left": "der Sprecher des Ministeriums",
+              "right": "Medienbildung stehe schon im Lehrplan."
+            },
+            {
+              "left": "die Gewerkschaftsvorsitzende",
+              "right": "Den Schulen fehlten Zeit und Personal."
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was fiel den Jugendlichen laut Studie besonders schwer? [fr?] Qu’est-ce qui a été particulièrement difficile pour les jeunes ?",
+          "explanation": "„Besonders schwer sei es den Befragten gefallen, bezahlte Werbung von unabhängigen Informationen zu unterscheiden.“ Die anderen Antworten kommen in der Meldung nicht vor. [fr?] Distinguer publicité payée et information indépendante.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Werbung von unabhängigen Informationen zu unterscheiden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "die Beiträge in der vorgegebenen Zeit zu lesen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Fotos und Videos auf dem Handy zu öffnen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Fragen über ihre eigene Mediennutzung zu beantworten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was betont Studienleiterin Thalheim? [fr?] Que souligne la responsable de l’étude ?",
+          "explanation": "Sie betont, die Ergebnisse seien „kein Grund, der jungen Generation die Schuld zu geben“; Erwachsene schnitten nicht besser ab. Das Problem sei, dass Medienbildung „nur am Rande vorkomme“, und sie fordert sie in allen Fächern, nicht nur in Deutsch. [fr?] Pas la faute des jeunes : le problème est la place de l’éducation aux médias.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Jugendlichen seien selbst schuld an den Ergebnissen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Erwachsene erkennen Fälschungen deutlich besser als Junge.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Problem liege bei der Medienbildung, nicht bei den Jugendlichen.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Der Deutschunterricht reiche für die Medienbildung an Schulen völlig aus.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Das Ministerium hat angekündigt, im nächsten Schuljahr mehr Stunden für Medienbildung einzuplanen.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Falsch: Der Sprecher sagt nur, man prüfe, wie Lehrkräfte besser fortgebildet werden könnten. „Konkrete Pläne nannte er nicht.“ Mehr Stunden fordert die Gewerkschaft. [fr?] Faux : aucun plan concret ; ce sont les enseignants qui demandent des heures.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Jugendliche, die schon an einem Schulprojekt zum Thema teilgenommen hatten, erkannten Falschmeldungen besser.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: Sie „schnitten der Studie zufolge deutlich besser ab“. „Gut / schlecht abschneiden“ heißt: ein gutes oder schlechtes Ergebnis haben. [fr?] Vrai : « besser abschneiden » = obtenir de meilleurs résultats.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Warum stehen in dieser Meldung so viele Verben im Konjunktiv (habe, sei, müsse)? [fr?] Pourquoi tant de verbes au subjonctif dans cette dépêche ?",
+          "explanation": "Der Konjunktiv I zeigt in Nachrichten: Das sagt die Quelle, nicht die Redaktion. Er ist neutral und drückt keinen Zweifel aus; Zweifel würde man zum Beispiel mit „angeblich“ zeigen. [fr?] Le Konjunktiv I est neutre : il attribue le propos à sa source.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Meldung gibt fremde Aussagen wieder, ohne sie zu bewerten.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Meldung zweifelt ganz offen an den Ergebnissen der neuen Studie.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Meldung beschreibt Ereignisse in der fernen Zukunft.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Meldung ist absichtlich sehr höflich formuliert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Wörtern aus der Meldung. [fr?] Complétez avec des mots de la dépêche.",
+          "text": "Viele würden einem Beitrag eher glauben, wenn er sehr oft [[1]] worden sei. · Ein Foto, das angeblich einen [[2]] auf einer Autobahn zeigte, hielt fast die Hälfte für echt.",
+          "explanation": "„Wenn er sehr oft geteilt worden sei“: Passiv in der Vergangenheit im Konjunktiv I. „Angeblich“ zeigt, dass das Foto nur behauptet, einen Hai zu zeigen: Es war eine Fälschung. [fr?] « angeblich » = soi-disant.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "geteilt"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Hai"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-medien-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Meldungen, Daten und indirekte Rede",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Meldungen, Daten und indirekte Rede",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nFür die Fragen 1 und 2 hören Sie eine Meldung aus den Radionachrichten. [fr?] Pour les questions 1 et 2, écoutez une brève du journal radio.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-medien-kontrolle-audio",
+          "caption": "Radionachrichten",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was sagt die Polizei über die Videos im Netz? [fr?] Que dit la police des vidéos qui circulent ?",
+          "explanation": "„Videos, die … angeblich Explosionen in der Halle zeigen, stammen nach Angaben der Polizei nicht von diesem Brand.“ „Angeblich“ zeigt schon den Zweifel. Vom Löschen ist nicht die Rede. [fr?] Les vidéos ne viennent pas de cet incendie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie zeigen Explosionen in der Lagerhalle.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie zeigen gar nicht diesen Brand.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie wurden von der Feuerwehr gedreht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie sollen sofort gelöscht werden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was sagt die Polizei zur Ursache des Brandes? [fr?] Que dit la police de la cause de l’incendie ?",
+          "explanation": "„Ein Sprecher der Polizei sagte, man schließe Brandstiftung bisher nicht aus.“ Die Ursache ist „weiter unklar“, und die Polizei sucht noch Zeugen. [fr?] La police n’exclut pas un incendie criminel.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein technischer Defekt sei die Ursache.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Ursache sei längst geklärt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Zeuge habe alles gefilmt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Brandstiftung sei nicht ausgeschlossen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Geben Sie die Aussage im Konjunktiv I wieder. [fr?] Rapportez au Konjunktiv I.",
+          "text": "„Wir prüfen alle Hinweise“, sagt die Polizei. → Die Polizei sagt, sie [[1]] alle Hinweise.",
+          "explanation": "Die Polizei ist grammatisch ein Singular (sie = die Polizei): Konjunktiv I „prüfe“. Nur wenn man an die einzelnen Polizisten denkt (Plural), heißt es „sie prüften“. [fr?] die Polizei = singulier : sie prüfe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "prüfe"
+              ],
+              "hint": "prüfen",
+              "size": 6
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Der Sprecher",
+              "der Polizei",
+              "sagte,",
+              "man",
+              "schließe",
+              "Brandstiftung",
+              "bisher nicht",
+              "aus."
+            ]
+          ],
+          "explanation": "Indirekte Rede ohne „dass“: Das Verb „schließe“ steht an zweiter Stelle, die Partikel „aus“ des trennbaren Verbs „ausschließen“ am Ende. „Nicht“ steht vor der Partikel. [fr?] Verbe à particule : « aus » à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Ersatzform. [fr?] Complétez avec la forme de remplacement.",
+          "text": "„Die Videos haben nichts mit dem Brand zu tun“, sagt die Polizei. → Die Polizei sagt, die Videos [[1]] nichts mit dem Brand zu tun.",
+          "explanation": "„Die Videos“ ist Plural: Der Konjunktiv I „haben“ sähe aus wie der Indikativ. Deshalb steht der Konjunktiv II „hätten“. [fr?] Pluriel : haben → hätten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hätten"
+              ],
+              "hint": "haben",
+              "size": 7
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was bedeutet „Videos, die im Netz kursieren“? [fr?] Que signifie « kursieren » ?",
+          "explanation": "„Kursieren“ heißt: im Umlauf sein, von vielen Menschen weitergegeben werden. Man sagt es oft von Gerüchten, Videos oder Falschmeldungen. [fr?] kursieren = circuler.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Videos, die gelöscht wurden",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Videos, die viele weitergeben",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Videos, die sehr kurz sind",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Videos, die die Polizei zeigt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Ich habe das Video nicht gefälscht“, behauptet der Nutzer. Welcher Bericht ist richtig? [fr?] Quelle version rapportée est correcte ?",
+          "explanation": "Pronomen anpassen (ich → er) und Vergangenheit mit „habe“ + Partizip II. „Fälschen“ bildet das Perfekt mit „haben“, deshalb nicht „sei“. [fr?] er habe … gefälscht.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Nutzer behauptet, er hat das Video nicht gefälscht haben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Nutzer behauptet, er habe das Video nicht gefälscht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Der Nutzer behauptet, ich habe das Video nicht gefälscht.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Nutzer behauptet, er sei das Video nicht gefälscht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welches Recht haben Sie nach der Datenschutz-Grundverordnung? [fr?] Quel droit avez-vous selon le RGPD ?",
+          "explanation": "Frau Asmussen nennt das Recht auf Auskunft, das Recht auf Löschung und das Recht, eine Einwilligung zu widerrufen. Ein Recht auf Gratis-Apps oder auf die Daten anderer gibt es nicht. [fr?] Droit d’accès à ses propres données.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie können verlangen, dass eine App immer kostenlos bleibt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie dürfen die Daten anderer Nutzer jederzeit einsehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie müssen jede Einwilligung schriftlich und per Post abgeben.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie können Auskunft über Ihre gespeicherten Daten verlangen.",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-medien-lesen-artikel",
+      "kind": "image",
+      "title": "Article : « Warum Lügen schneller laufen »",
+      "alt": "Page de magazine intitulée « Warum Lügen schneller laufen » : une fausse photo d’inondation partagée cent mille fois en six heures.",
+      "image": {
+        "layout": "article",
+        "kicker": "Digitales",
+        "title": "Warum Lügen schneller laufen",
+        "icon": "newspaper",
+        "lead": "Falschmeldungen verbreiten sich im Netz rasant. Was dahintersteckt – und was jeder Einzelne tun kann",
+        "paragraphs": [
+          "Das Foto zeigte einen Bahnhof, der knietief unter Wasser stand. „Heute Morgen in unserer Stadt – und niemand berichtet darüber!“, schrieb jemand dazu."
+        ]
+      }
+    },
+    {
+      "key": "b2-medien-hoeren-audio",
+      "kind": "audio",
+      "title": "Émission de radio : ce que les applis savent de nous",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Hallo und willkommen bei „Netzwerk“, dem Digitalmagazin. Heute fragen wir: Was wissen Apps eigentlich über uns? Im Studio ist die Datenschutzexpertin Tabea Asmussen, und am Telefon haben wir Linus Ohlendorf, siebzehn Jahre alt. Linus, du hast etwas ziemlich Ungewöhnliches gemacht. Erzähl mal!"
+        },
+        {
+          "voice": "mann3",
+          "name": "Linus Ohlendorf",
+          "text": "Ja, also, ich habe bei einer App, die ich jeden Tag benutze, eine Kopie meiner Daten angefordert. Das darf man nämlich. Nach drei Wochen kam eine Datei mit über dreihundert Seiten. Da stand drin, wann ich die App geöffnet habe, wo ich gerade war und welche Videos ich wie lange angeschaut habe. Sogar, welche Videos ich nach zwei Sekunden weggewischt habe."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "War das kompliziert, Linus?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Linus Ohlendorf",
+          "text": "Gar nicht. In den Einstellungen gibt es einen Punkt „Meine Daten herunterladen“. Man muss nur seine E-Mail-Adresse bestätigen. Am schwierigsten war eigentlich, die Datei zu lesen, weil vieles nur aus Zahlen und Abkürzungen bestand."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Frau Asmussen, ist das normal?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Leider ja. Viele Apps sammeln deutlich mehr Daten, als sie für ihre eigentliche Funktion brauchen. Eine Taschenlampen-App muss nicht wissen, wo Sie sich gerade befinden. Trotzdem fragen manche genau danach."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Warum machen die Firmen das?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Weil sich mit Daten Geld verdienen lässt. Je genauer eine Firma weiß, wer Sie sind, was Sie mögen und wann Sie müde oder gelangweilt sind, desto gezielter kann sie Ihnen Werbung zeigen. Und für gezielte Werbung zahlen die Werbekunden mehr. Man sagt deshalb oft: Wenn eine App nichts kostet, bezahlen Sie mit Ihren Daten."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Linus, hat dich das Ergebnis überrascht?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Linus Ohlendorf",
+          "text": "Ehrlich gesagt schon. Ich dachte, ich bin vorsichtig. Ich poste fast nichts Persönliches. Aber die App weiß trotzdem, wann ich schlafen gehe, nämlich meistens viel zu spät."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Frau Asmussen, welche Rechte haben Nutzerinnen und Nutzer?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "In der Europäischen Union gilt die Datenschutz-Grundverordnung. Danach dürfen Sie jederzeit Auskunft darüber verlangen, welche Daten ein Unternehmen über Sie speichert, und das Unternehmen muss in der Regel innerhalb eines Monats antworten."
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Sie können außerdem verlangen, dass Ihre Daten gelöscht werden. Und eine Einwilligung, die Sie einmal gegeben haben, können Sie jederzeit widerrufen."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Ist das nicht ein Kampf gegen Windmühlen? Die meisten klicken doch sowieso auf „Akzeptieren“."
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Das stimmt, und genau darauf setzen die Firmen. Die Fenster sind oft so gestaltet, dass der Knopf „Alle akzeptieren“ groß und bunt ist und die Ablehnung versteckt. Aber es tut sich etwas: Immer mehr Menschen nutzen ihre Rechte, und Verbraucherschützer gehen vor Gericht gegen solche Tricks vor."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Was raten Sie ganz praktisch?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Drei Dinge. Erstens: Prüfen Sie einmal im Monat in den Einstellungen, welche App auf Standort, Kamera und Mikrofon zugreifen darf. Zweitens: Klicken Sie bei den Cookie-Fenstern nicht automatisch auf „Alle akzeptieren“. Das kostet ein paar Sekunden mehr, aber die lohnen sich. Und drittens: Löschen Sie Apps, die Sie seit Monaten nicht mehr benutzt haben."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Und wie machen Sie das selbst, Frau Asmussen?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Tabea Asmussen",
+          "text": "Ich habe auf meinem Handy nur die Apps, die ich wirklich brauche. Und vor jeder Installation sehe ich nach, welche Zugriffe eine App verlangt. Das dauert zwei Minuten und erspart mir viel Ärger."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Linus, hast du nach deinem Experiment etwas geändert?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Linus Ohlendorf",
+          "text": "Ja. Ich habe vier Apps gelöscht und bei den anderen den Standort ausgeschaltet. Und ich habe meinen Freunden davon erzählt. Zwei haben auch schon ihre Daten angefordert."
+        },
+        {
+          "voice": "mann",
+          "name": "Simon Hemmer",
+          "text": "Na, dann hat sich das ja gelohnt. Vielen Dank, Linus, und vielen Dank, Frau Asmussen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-lesen2-meldung",
+      "kind": "image",
+      "title": "Dépêche : une étude sur les jeunes et les fausses informations",
+      "alt": "Dépêche intitulée « Studie: Viele Jugendliche erkennen Falschmeldungen nicht » : seul un tiers des jeunes interrogés a repéré presque toutes les fausses publications.",
+      "image": {
+        "layout": "article",
+        "kicker": "Bildung",
+        "title": "Studie: Viele Jugendliche erkennen Falschmeldungen nicht",
+        "icon": "file-text",
+        "lead": "Forschende fordern mehr Medienbildung an den Schulen",
+        "paragraphs": [
+          "Viele Jugendliche haben Schwierigkeiten, Falschmeldungen im Internet zu erkennen. Das geht aus einer Studie hervor, die ein Institut für Medienbildung am Dienstag vorgestellt hat."
+        ]
+      }
+    },
+    {
+      "key": "b2-medien-kontrolle-audio",
+      "kind": "audio",
+      "title": "Journal radio : un incendie et des vidéos trompeuses",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Nachrichten",
+          "text": "Und nun die Meldungen aus der Region. Nach dem Brand in einer Lagerhalle im Gewerbegebiet Nord ist die Ursache weiter unklar. Wie die Feuerwehr mitteilte, wurde niemand verletzt. Ein Sprecher der Polizei sagte, man schließe Brandstiftung bisher nicht aus."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Nachrichten",
+          "text": "Videos, die in sozialen Netzwerken kursieren und angeblich Explosionen in der Halle zeigen, stammen nach Angaben der Polizei nicht von diesem Brand. Die Polizei bittet Zeugen, sich zu melden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-medien-einstieg-foto",
+      "kind": "image",
+      "title": "Les serveurs d’un centre de données",
+      "alt": "De longues rangées de serveurs informatiques dans un centre de données, éclairées par des diodes bleues.",
+      "photo": {
+        "file": "libre/commons/medien-rechenzentrum.jpg"
+      },
+      "credit": "BalticServers.com, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:BalticServers_data_center.jpg"
+    },
+    {
+      "key": "b2-medien-lexique",
+      "kind": "audio",
+      "title": "Lexique · Medien: Falschmeldungen, Netzwerke und Daten",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Falschmeldung, die Falschmeldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Richtigstellung, die Richtigstellungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verbreiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "teilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Quelle, die Quellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "glaubwürdig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "irreführend"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "reißerisch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schlagzeile, die Schlagzeilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Algorithmus, die Algorithmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Faktencheck, die Faktenchecks"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Medienbildung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Datenschutz"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Einwilligung, die Einwilligungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "widerrufen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Auskunft verlangen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "löschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Werbung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "behaupten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einräumen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bestreiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "laut"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zufolge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "angeblich"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

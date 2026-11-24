@@ -1,0 +1,2432 @@
+{
+  "id": "b2-kultur",
+  "title": "Kultur: Bücher, Filme und was sie mit uns machen",
+  "objective": "Comprendre un essai argumenté sur le cinéma et en suivre les renvois, suivre une émission littéraire sur un roman et son adaptation en distinguant les points de vue, employer les particules modales à l’oral, relier les phrases d’un texte et ordonner correctement le milieu de la phrase (Mittelfeld, place de nicht).",
+  "prerequisites": [
+    "b2-gesellschaft-atelier"
+  ],
+  "audioProfile": "b2-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap (œuvres, auteurs et personnages fictifs)."
+  ],
+  "grammarFocus": [
+    "modalpartikeln",
+    "textkohaerenz",
+    "mittelfeld"
+  ],
+  "layer": "content/b/source/b2/b2-kultur.mjs",
+  "vocabulary": [
+    {
+      "id": "verfilmung",
+      "word": "Verfilmung",
+      "article": "die",
+      "plural": "Verfilmungen",
+      "partOfSpeech": "noun",
+      "translation": "l’adaptation cinématographique",
+      "example": "Die Verfilmung des Romans läuft seit Oktober im Kino.",
+      "note": "verfilmen : adapter au cinéma",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "vorlage",
+      "word": "Vorlage",
+      "article": "die",
+      "plural": "Vorlagen",
+      "partOfSpeech": "noun",
+      "translation": "l’œuvre originale, le modèle",
+      "example": "Der Film hält sich nicht eng an die literarische Vorlage.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "handlung",
+      "word": "Handlung",
+      "article": "die",
+      "plural": "Handlungen",
+      "partOfSpeech": "noun",
+      "translation": "l’intrigue, l’action",
+      "example": "Die Handlung spielt in einem einzigen Sommer.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "hauptfigur",
+      "word": "Hauptfigur",
+      "article": "die",
+      "plural": "Hauptfiguren",
+      "partOfSpeech": "noun",
+      "translation": "le personnage principal",
+      "example": "Die Hauptfigur des Romans arbeitet nachts auf einer Fähre.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "perspektive",
+      "word": "Perspektive",
+      "article": "die",
+      "plural": "Perspektiven",
+      "partOfSpeech": "noun",
+      "translation": "le point de vue (narratif)",
+      "example": "Der Roman erzählt die Geschichte aus drei Perspektiven.",
+      "note": "aus der Sicht von … : du point de vue de …",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "rezension",
+      "word": "Rezension",
+      "article": "die",
+      "plural": "Rezensionen",
+      "partOfSpeech": "noun",
+      "translation": "la critique, le compte rendu",
+      "example": "Vor dem Kinobesuch lese ich gern eine Rezension.",
+      "note": "synonyme : die Kritik",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "publikum",
+      "word": "Publikum",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le public",
+      "example": "Das Publikum hat am Ende lange applaudiert.",
+      "note": "sans pluriel · verbe au singulier",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "leinwand",
+      "word": "Leinwand",
+      "article": "die",
+      "plural": "Leinwände",
+      "partOfSpeech": "noun",
+      "translation": "l’écran (de cinéma)",
+      "example": "Diese Bilder muss man auf der großen Leinwand sehen.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "hauptrolle",
+      "word": "Hauptrolle",
+      "article": "die",
+      "plural": "Hauptrollen",
+      "partOfSpeech": "noun",
+      "translation": "le rôle principal",
+      "example": "Die Hauptrolle spielt eine bisher unbekannte Schauspielerin.",
+      "note": "eine Rolle besetzen : attribuer un rôle",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "debuet",
+      "word": "Debüt",
+      "article": "das",
+      "plural": "Debüts",
+      "partOfSpeech": "noun",
+      "translation": "le premier roman, le premier film",
+      "example": "„Nachtfähre“ ist das Debüt einer jungen Autorin.",
+      "note": "der Debütroman",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "fesselnd",
+      "word": "fesselnd",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "captivant",
+      "example": "Den fesselnden Roman habe ich in zwei Nächten gelesen.",
+      "note": "fesseln : captiver",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "langatmig",
+      "word": "langatmig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "qui traîne en longueur",
+      "example": "Der Mittelteil des Films ist etwas langatmig.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "vielschichtig",
+      "word": "vielschichtig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "complexe, à plusieurs niveaux",
+      "example": "Die Figuren sind vielschichtig und widersprüchlich.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "vorhersehbar",
+      "word": "vorhersehbar",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "prévisible",
+      "example": "Das Ende war leider ziemlich vorhersehbar.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "kitschig",
+      "word": "kitschig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "kitsch, mièvre",
+      "example": "Mit Musik und Sonnenaufgang wirkt die Schlussszene kitschig.",
+      "note": "der Kitsch",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "handeln-von",
+      "word": "handeln von",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "parler de, avoir pour sujet",
+      "example": "Der Roman handelt von zwei Geschwistern, die sich fremd geworden sind.",
+      "note": "+ datif · es handelt sich um : il s’agit de",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-auseinandersetzen-mit",
+      "word": "sich auseinandersetzen mit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se confronter à, examiner en profondeur",
+      "example": "Der Film setzt sich mit Schuld und Vergebung auseinander.",
+      "note": "+ datif · séparable : auseinander|setzen",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "kritik-ueben-an",
+      "word": "Kritik üben an",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "critiquer",
+      "example": "Der Kritiker übt vor allem am Ende des Films Kritik.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "zum-nachdenken-anregen",
+      "word": "zum Nachdenken anregen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "faire réfléchir",
+      "example": "Ein guter Film regt zum Nachdenken an.",
+      "note": "séparable : an|regen",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "eine-lanze-brechen-fuer",
+      "word": "eine Lanze brechen für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre la défense de, plaider pour",
+      "example": "Die Autorin bricht eine Lanze für das Kino.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "den-nerv-der-zeit-treffen",
+      "word": "den Nerv der Zeit treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être dans l’air du temps",
+      "example": "Mit seinem Thema trifft der Roman den Nerv der Zeit.",
+      "note": null,
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "sich-einlassen-auf",
+      "word": "sich einlassen auf",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se laisser prendre par, accepter de s’engager dans",
+      "example": "Im Kino lässt man sich ganz auf eine Geschichte ein.",
+      "note": "+ accusatif · séparable : ein|lassen",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "abweichen-von",
+      "word": "abweichen von",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’écarter de",
+      "example": "Eine Verfilmung darf von ihrer Vorlage abweichen.",
+      "note": "+ datif · séparable : ab|weichen",
+      "audio": {
+        "media": "b2-kultur-lexique",
+        "line": 22
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-kultur-einstieg",
+      "kind": "lesson",
+      "title": "Einstieg: Kultur, die bewegt",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Einstieg: Kultur, die bewegt",
+        "description": "KULTUR, DIE BEWEGT\nEin Roman, über den alle sprechen, ein Film, der lange nachwirkt, ein Lied, das man nicht mehr aus dem Kopf bekommt: Kultur verbindet Menschen und regt zum Nachdenken an. Gleichzeitig verändert das Streaming, wie wir lesen, hören und Filme sehen. [fr?] La culture relie et fait réfléchir ; le streaming change nos façons de lire, d’écouter et de voir des films.\n\nFRAGEN ZUM EINSTIEG\n• Welches Buch, welcher Film oder welches Lied hat Sie zuletzt wirklich berührt? Warum? [fr?] Quelle œuvre vous a récemment touché(e), et pourquoi ?\n• Lesen Sie Kritiken, bevor Sie ins Kino gehen oder ein Buch kaufen? [fr?] Lisez-vous des critiques avant de choisir ?\n• Erst das Buch oder erst der Film: Was ist Ihnen lieber? [fr?] D’abord le livre ou d’abord le film ?\nÜberlegen Sie sich zu jeder Frage zwei oder drei Stichwörter und eine kurze Begründung. [fr?] Trouvez deux ou trois mots-clés et une brève justification par question.\n\nZIELE\n• Ich kann einen Essay über das Kino verstehen und der Argumentation der Autorin folgen. [fr?] Je peux comprendre un essai et suivre l’argumentation de l’autrice.\n• Ich kann einem Radiogespräch über einen Roman und seine Verfilmung folgen und die Meinungen unterscheiden. [fr?] Je peux suivre une émission et distinguer les avis.\n• Ich kann Modalpartikeln wie „ja“, „doch“, „eben“ und „wohl“ verstehen und im Gespräch passend verwenden. [fr?] Je peux comprendre et employer les particules modales.\n• Ich kann Sätze mit Verweiswörtern verbinden und die Satzglieder im Mittelfeld richtig ordnen. [fr?] Je peux relier les phrases et ordonner le milieu de la phrase.\n\nWICHTIGE WÖRTER\n• die Verfilmung — l’adaptation au cinéma\n• die Vorlage — l’œuvre originale\n• die Handlung — l’intrigue\n• die Hauptfigur — le personnage principal\n• die Rezension — la critique\n• fesselnd / langatmig — captivant / qui traîne en longueur\n• von etwas abweichen — s’écarter de quelque chose\n• zum Nachdenken anregen — faire réfléchir",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein alter Kinosaal mit Bühne",
+          "media": "b2-kultur-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-kultur-lesen",
+      "kind": "exercise",
+      "title": "Verstehen: ein Plädoyer für das Kino",
+      "estimatedMinutes": 22,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Plädoyer für das Kino",
+        "description": "Lesen Sie den Text und beantworten Sie die Fragen. [fr?] Lisez le texte et répondez aux questions.\n\nSTRATEGIE\n1. Global: Lesen Sie den ersten und den letzten Absatz. Welche These vertritt die Autorin? [fr?] Lecture globale : premier et dernier paragraphe ; quelle thèse l’autrice défend-elle ?\n2. Aufbau: Die Autorin nennt „drei handfeste Gründe“. Achten Sie darauf, wo jeder Grund beginnt und wo sie ein Gegenargument aufnimmt. [fr?] Repérez le début de chacune des trois raisons et l’endroit où elle concède un contre-argument.\n3. Verweise: Wörter wie „dies“, „Ersteres“ oder „dadurch“ verweisen auf etwas, das vorher steht. Suchen Sie das Bezugswort. [fr?] Les mots de reprise renvoient à ce qui précède : cherchez à quoi.\n\nIM DUNKELN SIND WIR NICHT ALLEIN – EIN PLÄDOYER FÜR DAS KINO\nVon Vera Kronberg, Filmkritikerin\n\n(A) Noch nie war es so einfach, Filme zu sehen. Ein Abo, ein Bildschirm, ein Sofa – mehr braucht es nicht, um aus Tausenden von Titeln zu wählen. Warum sollte man da noch Geld für eine Kinokarte ausgeben, einen Parkplatz suchen und sich neben Fremde setzen, die mit Popcorn rascheln? Die Frage ist berechtigt, und viele haben sie für sich längst beantwortet: Sie bleiben zu Hause, und die Zahl der Kinobesuche ist vielerorts deutlich gesunken. Ich möchte trotzdem eine Lanze für das Kino brechen, und zwar nicht aus Nostalgie, sondern aus drei handfesten Gründen.\n\n(B) Der erste Grund ist die Aufmerksamkeit. Zu Hause sehen wir selten einen Film, ohne nebenbei aufs Handy zu schauen, die Wäsche aufzuhängen oder kurz auf Pause zu drücken. Im Kinosaal dagegen gibt es keine Pausentaste. Das klingt nach einem Nachteil, ist aber in Wahrheit ein Geschenk: Wer zwei Stunden lang nicht eingreifen kann, lässt sich auf eine Geschichte so ein, wie sie erzählt wird. Ein Film, der sich Zeit nimmt, bekommt sie im Kino auch. Gerade langsame, stille Filme entfalten erst dadurch ihre Wirkung. Auf dem Sofa hätten wir sie nach zwanzig Minuten wohl abgebrochen.\n\n(C) Der zweite Grund ist das gemeinsame Erleben. Wer schon einmal in einem vollen Saal gelacht hat, weiß, dass ein Witz dort anders wirkt als allein vor dem Laptop. Man spürt, wie das Publikum den Atem anhält, wie es unruhig wird oder plötzlich ganz still. Das Kino ist einer der letzten Orte, an denen sich Menschen, die sich nicht kennen, freiwillig für zwei Stunden auf dieselbe Sache konzentrieren. In einer Gesellschaft, die in immer kleinere Gruppen zerfällt, ist das mehr als ein Vergnügen.\n\n(D) Der dritte Grund ist der Zufall. Streamingdienste schlagen uns vor allem vor, was unserem bisherigen Geschmack entspricht. Das ist bequem, aber es macht unsere Welt kleiner. Ein gutes Programmkino zeigt dagegen auch Filme, die wir nie selbst ausgewählt hätten: einen Dokumentarfilm über Imker in den Bergen Georgiens, ein Debüt aus Westafrika, eine Komödie in Schwarz-Weiß. Dass solche Entdeckungen möglich sind, verdanken wir Menschen, die ein Programm mit Leidenschaft zusammenstellen, und nicht einem Algorithmus. Man geht wegen eines Films hin und kommt mit einem anderen im Kopf nach Hause.\n\n(E) Natürlich hat auch das Streaming seine Verdienste. Für Menschen, die auf dem Land wohnen, wo das nächste Kino eine Stunde entfernt ist, und für jene, die aus gesundheitlichen Gründen nicht ausgehen können, ist es ein echter Gewinn. Zudem hat es vielen kleinen Produktionen ein Publikum verschafft, das sie früher nie erreicht hätten. Ersteres betrifft inzwischen übrigens auch viele Kleinstädte, deren Kinos in den letzten Jahren schließen mussten. Diese Entwicklung zeigt allerdings, dass das Kino keine Selbstverständlichkeit ist: Ohne Publikum verschwindet es.\n\n(F) Ich plädiere deshalb nicht für ein Entweder-oder. Streaming und Kino können nebeneinander bestehen, so wie es Bibliotheken und Buchhandlungen seit Langem tun. Doch wer das Kino als öffentlichen Ort erhalten will, muss es eben auch besuchen: nicht jeden Abend, aber vielleicht einmal im Monat. Die Dunkelheit des Saals, in der wir nicht allein sind, ist es wert.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-lesen-essay",
+          "caption": "Essay: Im Dunkeln sind wir nicht allein",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche These vertritt die Autorin? [fr?] Quelle thèse l’autrice défend-elle ?",
+          "explanation": "In Absatz A kündigt die Autorin an, sie wolle „eine Lanze für das Kino brechen“, und nennt dann drei Gründe: Aufmerksamkeit, gemeinsames Erleben, Zufall. In Absatz F stellt sie klar, dass sie kein „Entweder-oder“ will. Die dritte Antwort ist also zu radikal, und über Preise argumentiert sie nicht. [fr?] Thèse : la salle offre des expériences que le streaming ne remplace pas ; mais l’autrice refuse le « ou bien… ou bien ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Streaming wird das Kino in wenigen Jahren vollständig ersetzen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Kino bietet Erfahrungen, die das Streaming nicht ersetzen kann.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Filme sollte man nur noch im Kino und nie mehr zu Hause sehen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Kinokarten sind zu teuer, deshalb bleiben die Menschen zu Hause.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum erwähnt die Autorin den Dokumentarfilm über Imker in Georgien? [fr?] Pourquoi l’autrice cite-t-elle le documentaire sur des apiculteurs ?",
+          "explanation": "Der Film steht in einer Aufzählung nach dem Satz „Ein gutes Programmkino zeigt dagegen auch Filme, die wir nie selbst ausgewählt hätten“. Er illustriert also den dritten Grund, den Zufall. Ein Streamingdienst hätte ihr gerade solche Filme nicht vorgeschlagen, weil er sich am „bisherigen Geschmack“ orientiert. [fr?] Exemple du troisième argument (le hasard) : un film qu’on n’aurait jamais choisi soi-même.",
+          "options": [
+            {
+              "id": "a",
+              "label": "als Beispiel für einen Film, den man ohne Kinoprogramm kaum entdecken würde",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "als Beweis dafür, dass Dokumentarfilme mehr Publikum anziehen als Spielfilme",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "als Kritik an Kinos, die zu viele ausländische Filme im Programm haben",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "als Beispiel für einen Film, den ein Streamingdienst ihr empfohlen hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Die Autorin geht mindestens einmal pro Woche ins Kino.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Steht nicht im Text: Die Autorin empfiehlt ihren Leserinnen und Lesern, das Kino „vielleicht einmal im Monat“ zu besuchen. Wie oft sie selbst ins Kino geht, sagt sie nicht. Verwechseln Sie die Empfehlung nicht mit einer Information über die Autorin. [fr?] Non mentionné : elle recommande « une fois par mois », sans parler de ses propres habitudes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was meint die Autorin mit dem Satz „Das klingt nach einem Nachteil, ist aber in Wahrheit ein Geschenk“? [fr?] Que veut dire l’autrice par cette phrase ?",
+          "explanation": "„Das“ verweist auf den vorherigen Satz: Im Kino gibt es keine Pausentaste. Die fehlende Kontrolle wirkt wie ein Nachteil, ist für die Autorin aber ein Vorteil, denn „wer zwei Stunden lang nicht eingreifen kann, lässt sich auf eine Geschichte … ein“. Langsame Filme wirken gerade im Kino besser, nicht schlechter. [fr?] « Das » renvoie à l’absence de touche pause : ne pas pouvoir interrompre aide à s’immerger dans le film.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kinobesuche sind teuer, aber man bekommt viel für sein Geld.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wer nicht unterbrechen kann, lässt sich ganz auf den Film ein.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Kinos schenken ihren Gästen manchmal eine Pause.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Langsame Filme sind im Kino schwerer zu ertragen als zu Hause.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie beurteilt die Autorin das Streaming? [fr?] Comment l’autrice juge-t-elle le streaming ?",
+          "explanation": "Absatz E beginnt mit einer Einräumung: „Natürlich hat auch das Streaming seine Verdienste“, etwa für Menschen auf dem Land. In Absatz F schreibt sie, beide könnten „nebeneinander bestehen“, aber das Kino müsse besucht werden, um zu überleben. Ihre Haltung ist also differenziert. [fr?] Position nuancée : elle reconnaît les mérites du streaming mais veut préserver le cinéma.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie lehnt es grundsätzlich ab, weil es die Kinos zerstört.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hält es für die bessere Lösung für alle, die wenig Zeit haben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie erkennt seine Vorteile an, möchte aber das Kino erhalten.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Sie findet es bequem und sieht keinen Grund zur Sorge.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? [fr?] Quel intertitre convient à quel paragraphe ?",
+          "explanation": "B: Aufmerksamkeit, weil man nicht pausieren kann. C: das gemeinsame Erleben mit Unbekannten. D: Programmkino gegen Algorithmus. E: die Einräumung, also die Verdienste des Streamings. F: das Fazit, dass beides nebeneinander bestehen soll. [fr?] Chaque intertitre reprend l’idée principale du paragraphe.",
+          "pairs": [
+            {
+              "left": "Absatz B",
+              "right": "Ohne Pausentaste"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Lachen mit Fremden"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Entdeckungen statt Empfehlungen"
+            },
+            {
+              "left": "Absatz E",
+              "right": "Was für das Streaming spricht"
+            },
+            {
+              "left": "Absatz F",
+              "right": "Kein Entweder-oder"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Worauf verweisen die Wörter? Ergänzen Sie mit Wörtern aus dem Text. [fr?] À quoi renvoient ces mots ? Complétez avec des mots du texte.",
+          "text": "Absatz E: „Ersteres“ meint die Menschen, die auf dem [[1]] wohnen. · „Diese Entwicklung“ meint, dass viele Kinos [[2]] mussten. · Absatz F: In „so wie es Bibliotheken und Buchhandlungen tun“ steht „es“ für „[[3]] bestehen“.",
+          "explanation": "„Ersteres“ greift von zwei genannten Dingen das erste auf: die Menschen auf dem Land, nicht die Kranken (das wäre „Letzteres“). „Diese Entwicklung“ fasst den vorherigen Satz zusammen: Die Kinos in Kleinstädten mussten schließen. „Es tun“ ersetzt eine ganze Verbgruppe: nebeneinander bestehen. [fr?] « Ersteres » = le premier des deux éléments cités ; « diese Entwicklung » résume la phrase précédente ; « es tun » remplace un groupe verbal.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Land"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "schließen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "nebeneinander"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "„Laut Autorin wirkt ein Witz im vollen Kinosaal anders als allein zu Hause.“ Richtig, falsch oder steht nicht im Text? [fr?] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Richtig: „Wer schon einmal in einem vollen Saal gelacht hat, weiß, dass ein Witz dort anders wirkt als allein vor dem Laptop.“ Mit diesem Beispiel begründet die Autorin den zweiten Grund, das gemeinsame Erleben. [fr?] Vrai : c’est l’exemple du deuxième argument, l’expérience partagée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-hoeren",
+      "kind": "exercise",
+      "title": "Verstehen: ein Roman und seine Verfilmung im Radio",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: ein Roman und seine Verfilmung im Radio",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nSITUATION\nIm Buchmagazin „Zwischen den Zeilen“ spricht die Moderatorin Anja Wiegand mit dem Literaturkritiker Matthias Grewe und der Buchhändlerin Hülya Demirci über den Roman „Nachtfähre“ von Teresa Wendland und seine Verfilmung. [fr?] Une émission littéraire : un critique et une libraire parlent d’un roman et de son adaptation.\n\nSTRATEGIE\n1. Erstes Hören: Worum geht es im Roman? Was halten die beiden Gäste vom Film? [fr?] Première écoute : le sujet du roman, l’avis des deux invités sur le film.\n2. Achten Sie auf Signale für Bewertungen: „großartig“, „mit gemischten Gefühlen“, „da muss ich widersprechen“, „in einem Punkt hat … recht“. [fr?] Repérez les signaux d’évaluation et d’accord ou de désaccord.\n3. Zweites Hören: Ergänzen Sie die Notizen mit Stichwörtern. [fr?] Deuxième écoute : complétez les notes avec des mots-clés.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-hoeren-audio",
+          "caption": "Zwischen den Zeilen: das Buchmagazin",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Roman „Nachtfähre“ von Teresa Wendland · Hauptfigur Ruth steuert nachts eine [[1]] · ihr [[2]] taucht nach zwanzig Jahren wieder auf · erzählt aus [[3]] Perspektiven · verkauft: über [[4]] Exemplare · Kinostart im [[5]]",
+          "explanation": "Matthias Grewe fasst die Handlung zusammen: Ruth „steuert nachts eine Fähre“, ihr Bruder „taucht plötzlich wieder auf“. Die Form: „aus drei Perspektiven“ (Ruth, der Bruder, ein Junge). Die Verkaufszahl nennt die Moderatorin, den Kinostart „im Oktober“ Hülya Demirci. [fr?] Le roman : une passeuse de nuit, le retour du frère, trois points de vue ; 200 000 exemplaires ; sortie en octobre.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Fähre"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bruder"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "3",
+                "drei"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "200 000",
+                "200.000",
+                "200000",
+                "zweihunderttausend"
+              ],
+              "size": 19,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Oktober"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "Matthias Grewe: stark sind die Bilder vom [[1]] bei Nacht und die [[2]]; aber der Film erzählt nur aus Ruths Sicht und ist ihm zu [[3]]; das neue Ende findet er [[4]] · Hülya Demirci: seit dem Film kommen viele [[5]] Leute in die Buchhandlung; ihr Fazit: Hauptsache, man wird [[6]]",
+          "explanation": "Grewe lobt „die Bilder vom Fluss bei Nacht“ und die Hauptdarstellerin („eine echte Entdeckung“), kritisiert aber, dass der Film „zu glatt“ sei und das Ende „kitschig“ wirke. Demirci beobachtet „viele junge Leute“ und schließt mit „Hauptsache, man wird neugierig“. [fr?] Le critique : belles images, actrice remarquable, mais film trop lisse et fin mièvre ; la libraire : de jeunes lecteurs, l’essentiel est la curiosité.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Fluss"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Hauptdarstellerin",
+                "Schauspielerin"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "glatt"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "kitschig"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "junge"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "6",
+              "accept": [
+                "neugierig"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was kritisiert Matthias Grewe am Ende des Films? [fr?] Que reproche Matthias Grewe à la fin du film ?",
+          "explanation": "Im Film „fallen sie sich am Ende in die Arme, mit Musik und Sonnenaufgang. Das wirkt auf mich kitschig.“ Kitschig heißt: übertrieben gefühlvoll. Offen ist das Ende nur im Roman; der Film hat es verändert. [fr?] Il trouve la réconciliation finale mièvre (kitschig) ; c’est le roman qui laisse la fin ouverte.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Versöhnung wird zu gefühlvoll inszeniert.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das Ende ist genauso offen wie im Buch.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Geschwister sehen sich am Ende nicht wieder.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Schlussszene ist zu kurz und zu dunkel.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wie begründet Hülya Demirci die Änderungen im Film? [fr?] Comment Hülya Demirci justifie-t-elle les changements ?",
+          "explanation": "„Ein Film ist eben kein Buch. Im Kino hat man zwei Stunden, nicht vierhundert Seiten.“ Deshalb findet sie die Konzentration auf eine Figur „nur konsequent“. Über die Wünsche der Autorin oder das Wissen des Regisseurs sagt sie nichts. [fr?] Un film n’est pas un livre : deux heures au lieu de quatre cents pages.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Autorin hat sich ein anderes Ende gewünscht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Buch hätte für einen Film zu viele Figuren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Regisseur kannte den Roman nicht gut genug.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ein Film hat andere Mittel und weniger Zeit als ein Roman.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Da hat der Film es sich wohl etwas leicht gemacht.“ Was drückt „wohl“ hier aus? [fr?] Que signifie « wohl » ici ?",
+          "explanation": "Die Modalpartikel „wohl“ macht eine Aussage zur Vermutung: „vermutlich“, „wahrscheinlich“. Grewe nimmt an, dass der Film den bequemen Weg gewählt hat, weiß es aber nicht sicher. Mit „sich wohlfühlen“ hat diese Partikel nichts zu tun. [fr?] « wohl » = probablement : une supposition, pas une certitude.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Grewe ist sich ganz sicher und will keinen Widerspruch.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Grewe äußert eine Vermutung, keine Gewissheit.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Grewe lobt den Film, weil er sich wohlfühlt.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Grewe zitiert eine Aussage des Regisseurs.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "In welchem Punkt sind sich beide Gäste einig? [fr?] Sur quel point les deux invités sont-ils d’accord ?",
+          "explanation": "Grewe nennt die Hauptdarstellerin „eine echte Entdeckung“, und Demirci sagt: „In einem Punkt hat Herr Grewe aber völlig recht: Die Hauptdarstellerin ist großartig.“ Beim Ende und bei der Frage „erst Buch oder Film?“ sind sie verschiedener Meinung. [fr?] Seul point d’accord : l’actrice principale ; ils divergent sur la fin et sur l’ordre livre / film.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man sollte immer zuerst das Buch lesen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das neue Ende ist eine gute Idee.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Hauptdarstellerin ist sehr gut.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Der Film ist zu lang geraten.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-entdecken",
+      "kind": "exercise",
+      "title": "Entdecken: Modalpartikeln und das Mittelfeld",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entdecken: Modalpartikeln und das Mittelfeld",
+        "description": "Lesen Sie die Sätze aus dem Radiogespräch, der Sprachnachricht und dem Essay. Achten Sie auf die kleinen, unbetonten Wörter und auf die Reihenfolge der Satzglieder. [fr?] Lisez les phrases de l’émission, du message et de l’essai ; observez les petits mots inaccentués et l’ordre des éléments.\n\nSÄTZE\n(1) Ein Film ist eben kein Buch.\n(2) Da weicht der Film ja deutlich vom Buch ab.\n(3) Lesen Sie es doch zuerst!\n(4) Worum geht es denn?\n(5) Da hat der Film es sich wohl etwas leicht gemacht.\n(6) Meld dich mal!\n(7) Ich habe den Roman letzten Sommer wegen einer Empfehlung im Zug gelesen.\n(8) Ich habe ihn ihr empfohlen. · Ich habe meiner Schwester den Roman empfohlen.\n(9) Der Film hat mir am Ende nicht gefallen.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr?] Répondez ensuite aux questions ; les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welche Funktion hat die Modalpartikel in welchem Satz? [fr?] Quelle fonction a la particule dans chaque phrase ?",
+          "explanation": "Modalpartikeln zeigen die Haltung des Sprechers: „eben“ (oder „halt“) stellt etwas Unveränderliches fest, „ja“ verweist auf gemeinsames Wissen, „doch“ im Imperativ ermuntert, „denn“ macht Fragen interessiert und freundlich, „wohl“ drückt eine Vermutung aus, „mal“ macht Bitten weniger direkt. [fr?] Les particules expriment l’attitude du locuteur : constat, savoir partagé, encouragement, intérêt, supposition, atténuation.",
+          "pairs": [
+            {
+              "left": "eben (Satz 1)",
+              "right": "Es ist so und lässt sich nicht ändern."
+            },
+            {
+              "left": "ja (Satz 2)",
+              "right": "Das ist bekannt, wir wissen es beide."
+            },
+            {
+              "left": "doch (Satz 3)",
+              "right": "eine freundliche Aufforderung, ein Rat"
+            },
+            {
+              "left": "denn (Satz 4)",
+              "right": "echtes Interesse, die Frage klingt freundlicher"
+            },
+            {
+              "left": "wohl (Satz 5)",
+              "right": "eine Vermutung"
+            },
+            {
+              "left": "mal (Satz 6)",
+              "right": "macht die Bitte beiläufig und leicht"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz 1 ohne Partikel: „Ein Film ist kein Buch.“ Was ändert sich? [fr?] Sans la particule, qu’est-ce qui change ?",
+          "explanation": "Modalpartikeln ändern weder die Grammatik noch die Information. Sie färben den Satz: Mit „eben“ klingt er wie eine Feststellung, gegen die man nichts tun kann, und beendet fast die Diskussion. Ohne Partikel ist der Satz neutral, aber er klingt in einem Gespräch oft hart. [fr?] Même information, sans la nuance d’attitude ; à l’oral, la phrase paraît plus sèche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Satz wird grammatisch falsch und unverständlich.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Information ist dieselbe, aber die Haltung fehlt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Der Satz bedeutet jetzt genau das Gegenteil.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Satz wird zu einer Frage an die Zuhörer.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz 7: In welcher Reihenfolge stehen die Angaben im Mittelfeld? [fr?] Phrase 7 : dans quel ordre viennent les compléments circonstanciels ?",
+          "explanation": "„letzten Sommer“ (Zeit, temporal), „wegen einer Empfehlung“ (Grund, kausal), „im Zug“ (Ort, lokal). Diese Reihenfolge ist im Deutschen typisch und wird oft mit „te-ka-mo-lo“ gelernt: temporal, kausal, modal, lokal. Es ist eine starke Tendenz, keine absolute Regel. [fr?] Tendance « te-ka-mo-lo » : temps, cause, manière, lieu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ort – Grund – Zeit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Grund – Zeit – Ort",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Zeit – Ort – Grund",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Zeit – Grund – Ort",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 8: Was zeigt der Vergleich der beiden Sätze? [fr?] Phrase 8 : que montre la comparaison des deux phrases ?",
+          "explanation": "Bei zwei Pronomen steht der Akkusativ vor dem Dativ: „ihn ihr“ (es ihm, sie ihnen). Bei zwei Nomen steht meist der Dativ zuerst: „meiner Schwester den Roman“. Pronomen stehen außerdem immer vor Nomen: „Ich habe ihr den Roman empfohlen.“ [fr?] Deux pronoms : accusatif puis datif ; deux noms : en général datif puis accusatif ; pronom avant nom.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Pronomen: Akkusativ vor Dativ; Nomen: meist Dativ vor Akkusativ.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Pronomen und Nomen stehen immer im Dativ vor dem Akkusativ.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Pronomen: Dativ vor Akkusativ; Nomen: meist Akkusativ vor Dativ.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Reihenfolge der Objekte ist im Deutschen ganz frei.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Satz 9: Warum steht „nicht“ direkt vor „gefallen“? [fr?] Phrase 9 : pourquoi « nicht » est-il juste avant « gefallen » ?",
+          "explanation": "Verneint „nicht“ den ganzen Satz, steht es möglichst weit hinten: nach den Pronomen, den Objekten und den meisten Zeitangaben, aber vor dem Verbteil am Ende (gefallen). Würde nur ein Satzteil verneint, stünde „nicht“ direkt davor: „nicht am Ende, sondern am Anfang“. [fr?] Négation de toute la phrase : nicht le plus tard possible, juste avant la partie verbale finale.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil „nicht“ immer direkt nach dem Subjekt steht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil nur die Zeitangabe „am Ende“ verneint wird.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil „nicht“ den ganzen Satz verneint und spät steht.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Weil „nicht“ im Perfekt immer am Satzende steht.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-kultur-regel",
+      "kind": "lesson",
+      "title": "Regel: Modalpartikeln, Textzusammenhang und Mittelfeld",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Regel: Modalpartikeln, Textzusammenhang und Mittelfeld",
+        "description": "REGEL 1 · MODALPARTIKELN\nModalpartikeln sind kleine, unbetonte Wörter. Sie ändern nicht die Information, sondern zeigen die Haltung des Sprechers. Man hört sie vor allem im Gespräch; in formellen Texten verwendet man sie sparsam. [fr?] Petits mots inaccentués qui expriment l’attitude du locuteur ; fréquents à l’oral, rares à l’écrit formel.\n• ja: Bekanntes, gemeinsames Wissen: Sie kennen den Roman ja. – Erstaunen: Das ist ja toll!\n• doch: Erinnerung, oft mit leichtem Vorwurf: Das habe ich dir doch gesagt. – im Imperativ Ermunterung: Lesen Sie es doch zuerst!\n• denn: in Fragen Interesse und Freundlichkeit: Worum geht es denn?\n• eben / halt: Es ist so, man kann es nicht ändern: Ein Film ist eben kein Buch. („halt“ ist umgangssprachlicher.)\n• mal: macht eine Bitte beiläufig: Schau mal ins Programm!\n• wohl: Vermutung: Der Film dauert wohl drei Stunden.\n• schon: Zuversicht: Das klappt schon. – Einräumen: Das stimmt schon, aber …\n• eigentlich: in Fragen ein neues Thema: Wie heißt eigentlich die Regisseurin?\nStellung: im Mittelfeld, nie auf Position 1, meist nach den Pronomen und vor der neuen Information: Lesen Sie es doch zuerst. Kombinationen sind möglich: doch mal, ja schon. [fr?] Place : au milieu de la phrase, jamais en première position, en général après les pronoms et avant l’information nouvelle.\n\nREGEL 2 · TEXTZUSAMMENHANG\nEin Text wirkt zusammenhängend, wenn die Sätze aufeinander verweisen. [fr?] Un texte est cohérent quand les phrases renvoient les unes aux autres.\n• Pronomen und Demonstrativa: der Roman → er; dieser Gedanke; dies (fasst einen ganzen Satz zusammen)\n• Wiederaufnahme mit anderen Wörtern: der Roman → das Buch → Wendlands Debüt\n• Ersteres / Letzteres: von zwei Dingen das erste / das zweite; die Endung richtet sich nach dem Bezugswort (Letzterer, Letztere, Letzteres)\n• da- und wo-Wörter: dadurch, damit, dabei, deshalb, worauf …: Der Film erzählt nur aus einer Sicht. Dadurch geht viel verloren.\n• Konnektoren: zwar … aber, dagegen, allerdings, übrigens, schließlich\n[fr?] Pronoms, reprises par synonymes, ersteres / letzteres, adverbes en da- et connecteurs assurent la cohésion.\n\nREGEL 3 · DAS MITTELFELD\nDas Mittelfeld liegt zwischen dem konjugierten Verb und dem Verbteil am Ende. Seine Ordnung folgt festen Tendenzen. [fr?] Le Mittelfeld est l’espace entre le verbe conjugué et la fin de la phrase verbale.\n• Pronomen zuerst, in der Reihenfolge Nominativ – Akkusativ – Dativ: Hat er es ihr gegeben?\n• zwei Nomen: meist Dativ vor Akkusativ: Sie hat ihrer Schwester den Roman empfohlen.\n• Pronomen vor Nomen: Sie hat ihn ihrer Schwester empfohlen. / Sie hat ihr den Roman empfohlen.\n• Angaben: Zeit – Grund – Art und Weise – Ort (te-ka-mo-lo): Ich bin gestern wegen des Regens mit dem Bus ins Kino gefahren.\n• Ergänzungen, die eng zum Verb gehören, stehen ganz hinten: ins Kino gehen, Klavier spielen, Kritik üben.\n[fr?] Pronoms d’abord (nominatif, accusatif, datif), datif avant accusatif pour deux noms, puis temps, cause, manière, lieu ; les compléments liés au verbe restent à la fin.\n\nREGEL 4 · DIE STELLUNG VON „NICHT“\n• Satznegation: „nicht“ steht möglichst spät, nach den Objekten und den meisten Zeitangaben, aber vor dem Verbteil am Ende und vor engen Ergänzungen: Ich habe den Film gestern nicht gesehen. Ich gehe heute nicht ins Kino. Das Ende ist nicht überzeugend.\n• Teilnegation: „nicht“ steht direkt vor dem verneinten Teil, oft mit „sondern“: Ich gehe nicht heute, sondern morgen ins Kino.\n[fr?] Négation de phrase : nicht le plus tard possible ; négation partielle : juste avant l’élément nié, souvent avec sondern.\n\nACHTUNG\n• Modalpartikeln lassen sich selten wörtlich übersetzen. Lernen Sie sie in typischen Sätzen und achten Sie auf die Situation. [fr?] Les particules se traduisent rarement : apprenez-les en contexte.\n• Die Verneinung steht im Deutschen nicht immer direkt beim Verb: Ich habe den Film nicht gesehen. [fr?] La négation ne se colle pas au verbe conjugué comme « ne … pas ».\n• Zwei Pronomen: Akkusativ vor Dativ. „Ich gebe ihr es“ ist falsch, richtig ist „Ich gebe es ihr“. [fr?] Deux pronoms : es ihr, pas ihr es.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-kultur-grammatik",
+      "kind": "exercise",
+      "title": "Üben: Modalpartikeln, Verweise und Mittelfeld",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Üben: Modalpartikeln, Verweise und Mittelfeld",
+        "description": "Üben Sie die Modalpartikeln, die Verweiswörter und die Reihenfolge im Mittelfeld. Lesen Sie zuerst immer den ganzen Satz und überlegen Sie, was die Person ausdrücken will. [fr?] Entraînez-vous aux particules, aux mots de reprise et à l’ordre du Mittelfeld ; lisez toute la phrase et pensez à l’intention.\n\nMERKE\n• doch (Imperativ) = Ermunterung · denn (Frage) = Interesse · wohl = Vermutung · eben / halt = unveränderlich · ja = bekannt · mal = beiläufig [fr?] Fonctions des particules.\n• Pronomen: Akkusativ vor Dativ · Nomen: Dativ vor Akkusativ · Zeit – Grund – Art – Ort · „nicht“ möglichst spät [fr?] Ordre du Mittelfeld et place de nicht.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sie möchten eine Freundin freundlich ermuntern, mitzukommen. Was sagen Sie? [fr?] Vous voulez encourager gentiment une amie à venir. Que dites-vous ?",
+          "explanation": "Im Imperativ macht unbetontes „doch“ aus einem Befehl eine freundliche Ermunterung oder einen Vorschlag. Betontes „ja“ im Imperativ klingt dagegen wie eine Warnung („Komm JA pünktlich!“). „Denn“ steht nur in Fragen, und „wohl“ drückt eine Vermutung aus. [fr?] Impératif + doch = invitation amicale ; ja accentué = mise en garde ; denn seulement dans les questions.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Komm ja mit ins Kino!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Komm denn mit ins Kino!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Komm doch mit ins Kino!",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Komm wohl mit ins Kino!",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sie sind nicht sicher, wie lang der Film ist. Was sagen Sie? [fr?] Vous n’êtes pas sûr(e) de la durée du film. Que dites-vous ?",
+          "explanation": "„Wohl“ macht aus einer Aussage eine Vermutung, ähnlich wie „wahrscheinlich“. „Denn“ ist in Aussagesätzen in dieser Funktion nicht möglich, „mal“ gehört zu Aufforderungen, und „doch“ mit „nie“ widerspricht jemandem, statt eine Vermutung auszudrücken. [fr?] « wohl » = probablement ; les autres particules ne conviennent pas à une supposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Film dauert wohl fast drei Stunden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Film dauert denn fast drei Stunden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Film dauert mal fast drei Stunden.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Der Film dauert doch nie drei Stunden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Modalpartikeln: denn, mal, ja, eben. [fr?] Complétez avec les particules : denn, mal, ja, eben.",
+          "text": "Was läuft [[1]] heute im Kino? · Schau [[2]] ins Programm, es liegt auf dem Tisch. · Das Kino ist [[3]] gleich um die Ecke, das weißt du. · Wenn der Film ausverkauft ist, dann ist das [[4]] so.",
+          "explanation": "„Denn“ macht die Frage interessiert. „Mal“ macht die Aufforderung beiläufig. „Ja“ verweist auf Bekanntes („das weißt du“). „Eben“ oder „halt“ zeigt, dass man an der Situation nichts ändern kann. Möglich sind auch „doch mal“ im zweiten und „doch“ im dritten Satz. [fr?] denn (question), mal (demande légère), ja (connu), eben / halt (on n’y peut rien).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "denn"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "mal",
+                "doch mal"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "ja",
+                "doch"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "eben",
+                "halt"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welcher Satz mit der Partikel „doch“ ist richtig? [fr?] Quelle phrase avec la particule « doch » est correcte ?",
+          "explanation": "Die Modalpartikel steht im Mittelfeld: nach dem konjugierten Verb und den Pronomen (ich, dir), vor der übrigen Information (gestern). Vor dem konjugierten Verb und am Satzende ist sie nicht möglich. Im zweiten Satz steht außerdem das Verb „habe“ nicht an Position 2. [fr?] La particule se place dans le Mittelfeld, après le verbe conjugué et les pronoms, avant le reste de l’information ; jamais avant le verbe ni en fin de phrase.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das doch habe ich dir gestern gesagt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ich habe dir doch gestern gesagt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das habe ich dir gestern gesagt doch.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das habe ich dir doch gestern gesagt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Kannst",
+              "du",
+              "es",
+              "mir",
+              "morgen",
+              "vor dem Kurs",
+              "in die Bibliothek",
+              "mitbringen?"
+            ]
+          ],
+          "explanation": "Ja-Nein-Frage: das konjugierte Verb „kannst“ steht vorn, der Infinitiv „mitbringen“ am Ende. Im Mittelfeld kommen zuerst die Pronomen (es vor mir: Akkusativ vor Dativ), dann die Zeit (morgen vor dem Kurs) und zuletzt die Richtung (in die Bibliothek), die eng zum Verb gehört. [fr?] Pronoms (es mir), puis le temps, puis la direction, juste avant l’infinitif."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr?] Quelle phrase est correcte ?",
+          "explanation": "Zwei Pronomen im Mittelfeld: Akkusativ (ihn) vor Dativ (ihr). Beide stehen direkt nach dem konjugierten Verb und vor dem Partizip am Ende. Im Französischen ist die Reihenfolge der Pronomen anders, deshalb ist „ihr ihn“ ein typischer Fehler. [fr?] Deux pronoms : accusatif puis datif (ihn ihr) ; le participe reste à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hat ihr ihn empfohlen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat ihn ihr empfohlen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie hat ihn empfohlen ihr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie hat empfohlen ihn ihr.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie haben den Film gestern gar nicht gesehen. Welcher Satz sagt das? [fr?] Vous n’avez pas du tout vu le film hier. Quelle phrase le dit ?",
+          "explanation": "Satznegation: „nicht“ steht nach dem Objekt und der Zeitangabe, direkt vor dem Partizip. „Nicht gestern“ wäre eine Teilnegation (nicht gestern, sondern an einem anderen Tag), „nicht den Film“ hieße: einen anderen Film. Vor dem konjugierten Verb steht „nicht“ nie. [fr?] Négation de phrase : après l’objet et le temps ; « nicht gestern » nierait seulement le moment.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe den Film gestern nicht gesehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich habe nicht den Film gestern gesehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe den Film nicht gestern gesehen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich nicht habe den Film gestern gesehen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Leider",
+              "hat",
+              "mir",
+              "die Verfilmung",
+              "des Romans",
+              "überhaupt",
+              "nicht",
+              "gefallen."
+            ]
+          ],
+          "explanation": "Nach „Leider“ auf Position 1 folgt das konjugierte Verb. Das Pronomen „mir“ steht vor dem Subjekt „die Verfilmung“, weil Pronomen im Mittelfeld vor Nomen stehen. Das Genitivattribut „des Romans“ folgt seinem Nomen, und „überhaupt nicht“ steht direkt vor dem Partizip. [fr?] Le pronom mir précède le sujet nominal ; überhaupt nicht juste avant le participe."
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Verweiswörter: dadurch, dies, Letztere. [fr?] Complétez avec les mots de reprise : dadurch, dies, Letztere.",
+          "text": "Teresa Wendland hat zehn Jahre an ihrem Roman gearbeitet. [[1]] erklärt, warum er so dicht wirkt. · Es gibt zwei Fassungen, eine lange und eine kurze. [[2]] ist nur als Hörbuch erschienen. · Der Film verzichtet auf zwei Erzählstimmen. [[3]] verliert er an Tiefe.",
+          "explanation": "„Dies“ fasst den ganzen vorherigen Satz zusammen (die zehn Jahre Arbeit). „Letztere“ meint von zwei Fassungen die zweite (die kurze; feminin wegen „die Fassung“). „Dadurch“ nennt die Folge des Verzichts: Auf diese Weise verliert der Film an Tiefe. [fr?] dies résume une phrase ; Letztere = la seconde (féminin, die Fassung) ; dadurch = de ce fait.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Dies",
+                "Das"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Letztere"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Dadurch",
+                "Damit"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "„Der Roman erzählt aus drei Perspektiven.“ Welcher Satz setzt den Text am besten fort? [fr?] Quelle phrase poursuit le mieux le texte ?",
+          "explanation": "„Diese Erzählweise“ greift den vorherigen Satz mit anderen Worten auf und führt den Gedanken weiter. „Letzterer“ braucht zwei vorher genannte Dinge, „deshalb“ stellt eine unlogische Folge her, und „trotzdem“ wiederholt nur den ersten Satz mit einem falschen Gegensatz. [fr?] Reprise par un groupe nominal (diese Erzählweise) ; les autres liens sont illogiques.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Letzterer ist deshalb sehr anspruchsvoll geschrieben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Deshalb ist auch der Film ein großer Erfolg geworden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Trotzdem erzählt er die Handlung aus drei Perspektiven.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Diese Erzählweise macht das Buch anspruchsvoll, aber reich.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-kultur-wortschatz",
+      "kind": "exercise",
+      "title": "Wortschatz: über Bücher und Filme sprechen",
+      "estimatedMinutes": 13,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Wortschatz: über Bücher und Filme sprechen",
+        "description": "Lernen Sie den Wortschatz der Kritik: feste Verbindungen, bewertende Adjektive, Wortbildung und Verben mit Präposition. [fr?] Apprenez le vocabulaire de la critique : combinaisons, adjectifs d’évaluation, formation des mots et verbes prépositionnels.\n\nTIPP\nEine gute Kritik bewertet genau: Statt „gut“ oder „schlecht“ sagen Sie, was gelungen ist und was nicht, zum Beispiel „fesselnd“, „vielschichtig“, „vorhersehbar“ oder „langatmig“. [fr?] Une bonne critique évalue avec précision : préférez des adjectifs exacts à « bien » ou « mauvais ».",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Ausdruck? [fr?] Quel verbe va avec quelle expression ?",
+          "explanation": "Feste Verbindungen: einen Roman verfilmen, eine Rolle besetzen (eine Schauspielerin für sie auswählen), Kritik üben an + Dativ, zum Nachdenken anregen, den Nerv der Zeit treffen (genau das Thema finden, das die Menschen beschäftigt), eine Lanze für etwas brechen (etwas verteidigen). [fr?] Combinaisons figées : adapter, distribuer un rôle, critiquer, faire réfléchir, être dans l’air du temps, prendre la défense.",
+          "pairs": [
+            {
+              "left": "einen Roman",
+              "right": "verfilmen"
+            },
+            {
+              "left": "eine Rolle",
+              "right": "besetzen"
+            },
+            {
+              "left": "Kritik",
+              "right": "üben"
+            },
+            {
+              "left": "zum Nachdenken",
+              "right": "anregen"
+            },
+            {
+              "left": "den Nerv der Zeit",
+              "right": "treffen"
+            },
+            {
+              "left": "eine Lanze für das Kino",
+              "right": "brechen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Was bedeuten die Adjektive? [fr?] Que signifient ces adjectifs ?",
+          "explanation": "Positiv: fesselnd, vielschichtig. Negativ: kitschig, vorhersehbar, langatmig. Mit solchen Adjektiven wird eine Kritik präzise. Kombinieren Sie sie mit einem Beispiel: „Der Mittelteil ist langatmig, weil …“. [fr?] Adjectifs positifs et négatifs pour une critique précise.",
+          "pairs": [
+            {
+              "left": "fesselnd",
+              "right": "so spannend, dass man nicht aufhören kann"
+            },
+            {
+              "left": "vielschichtig",
+              "right": "mit mehreren Ebenen und Bedeutungen"
+            },
+            {
+              "left": "kitschig",
+              "right": "übertrieben gefühlvoll"
+            },
+            {
+              "left": "vorhersehbar",
+              "right": "man weiß schon vorher, wie es endet"
+            },
+            {
+              "left": "langatmig",
+              "right": "mit zu vielen Längen, zu langsam"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr?] Formez le nom.",
+          "text": "verfilmen → die [[1]] · inszenieren → die [[2]] · darstellen → der [[3]] · erzählen → der [[4]] · veröffentlichen → die [[5]]",
+          "explanation": "Nomen auf -ung bezeichnen den Vorgang oder das Ergebnis und sind feminin: die Verfilmung, die Inszenierung, die Veröffentlichung. Nomen auf -er bezeichnen die Person und sind maskulin: der Darsteller, der Erzähler (feminin: die Darstellerin, die Erzählerin). [fr?] -ung : action ou résultat (féminin) ; -er : la personne (masculin).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Verfilmung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Inszenierung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Darsteller"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Erzähler"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Veröffentlichung"
+              ],
+              "size": 17,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr?] Complétez avec les prépositions.",
+          "text": "Der Roman handelt [[1]] zwei Geschwistern. · Der Film setzt sich [[2]] Schuld und Vergebung auseinander. · Der Kritiker übt vor allem [[3]] der Schlussszene Kritik. · Das Ende weicht deutlich [[4]] Buch ab.",
+          "explanation": "Die Präposition gehört zum Verb: handeln von + Dativ, sich auseinandersetzen mit + Dativ, Kritik üben an + Dativ, abweichen von + Dativ (von dem → vom). Alle vier verlangen den Dativ. [fr?] handeln von, sich auseinandersetzen mit, Kritik üben an, abweichen von : tous suivis du datif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "von"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "mit"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "vom"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie möchten Kritik vorsichtig formulieren. Was sagen Sie? [fr?] Vous voulez formuler une critique avec prudence. Que dites-vous ?",
+          "explanation": "„Mir hat nicht alles gefallen“ schränkt ein, ohne alles abzulehnen, und „vor allem das Ende“ macht die Kritik konkret. Die erste Antwort ist grob und verallgemeinert, die dritte ist keine Kritik, und die vierte vermeidet eine Bewertung. [fr?] Critique nuancée et précise : « nicht alles », « vor allem das Ende ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Film ist totaler Mist, das sieht doch wirklich jeder sofort.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mir hat nicht alles gefallen; vor allem das Ende hat mich nicht überzeugt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich finde den Film perfekt, es gibt keine Schwächen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Über Filme kann man nicht streiten, jeder sieht es anders.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Die Verfilmung hält sich eng an die Vorlage.“ Was heißt das? [fr?] Que signifie cette phrase ?",
+          "explanation": "Die Vorlage ist das Werk, auf dem der Film beruht, hier der Roman. „Sich eng an etwas halten“ bedeutet: ihm genau folgen, wenig ändern. Das Gegenteil wäre „frei mit der Vorlage umgehen“ oder „von der Vorlage abweichen“. [fr?] « sich eng an die Vorlage halten » = suivre fidèlement l’œuvre originale.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Film wurde in sehr engen Räumen gedreht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Film ist kürzer als das Buch.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Film folgt dem Buch sehr genau.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Der Film hat das Buch bekannter gemacht.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-kultur-hoeren2",
+      "kind": "exercise",
+      "title": "Verstehen: Was ist „Romantik“? (Originaltext)",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Verstehen: Was ist „Romantik“? (Originaltext)",
+        "description": "Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal. [fr?] Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.\n\nORIGINALTEXT\n[fr?] Document authentique\nSie hören einen Ausschnitt aus dem Wikipedia-Artikel „Romantik“ (Fassung von 2006), vorgelesen von einer synthetischen Stimme. [fr?] Vous entendez un extrait de l’article Wikipédia « Romantik » (version de 2006), lu par une voix de synthèse.\nEs geht um die Epoche der Romantik in Kunst, Literatur und Musik und um die Herkunft des Wortes. [fr?] Il s’agit du romantisme dans l’art, la littérature et la musique, et de l’origine du mot.\n\nWICHTIGE WÖRTER\n[fr?] Mots utiles\n• die Epoche [fr?] l’époque, la période\n• die Volkssprache [fr?] la langue vulgaire (parlée par le peuple)\n• die Abwendung von [fr?] le fait de se détourner de\n• die Sehnsucht [fr?] la nostalgie, le désir ardent\n• die Aufklärung [fr?] les Lumières\n\nSTRATEGIE\n[fr?] Stratégie\nBeim ersten Hören: Welche zwei Bedeutungen hat das Wort „romantisch“? [fr?] Première écoute : quels sont les deux sens du mot « romantique » ?\nBeim zweiten Hören achten Sie auf Gegensätze: Volkssprache und Latein, Gefühl und Vernunft. [fr?] À la deuxième écoute, repérez les oppositions : langue du peuple et latin, sentiment et raison.\nDie Transkription sehen Sie nach Ihren Antworten. [fr?] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-hoeren2-audio",
+          "usage": "audio",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b2-kultur-hoeren2-foto",
+          "usage": "illustration",
+          "caption": "Ein berühmtes Bild der Romantik: Der Wanderer über dem Nebelmeer (um 1818)",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern. [fr?] Écoutez et prenez des notes : complétez les trous avec des mots-clés.",
+          "text": "bildende Kunst: 1790 bis [[1]] · Herkunft: „in lingua [[2]]“, also Volkssprache · Gegensatz: Schriften auf [[3]] · Grundsteine: Gefühl, [[4]] und Seele · Reaktion auf die Philosophie der [[5]]",
+          "explanation": "„bildende Kunst (1790–1840)“, „in lingua romana“, Gegensatz „in lingua latina“, also auf Latein; „Gefühl, Individualität und Seele“; „Reaktion auf … die Philosophie der Aufklärung“. [fr?] Réponses tirées du texte ; « Aufklärung » désigne les Lumières.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "1840",
+                "achtzehnhundertvierzig"
+              ],
+              "size": 23,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "romana"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Latein",
+                "Lateinisch"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Individualität"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Aufklärung"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was sagt der Text über das Wort „romantisch“ im Alltag? [fr?] Que dit le texte du mot « romantique » dans la langue courante ?",
+          "explanation": "Im Alltag bedeutet „romantisch“, das Herz mit Liebe und Sehnsucht zu erfüllen, oft sogar im Sinn von Kitsch; „das hat jedoch mit der kulturgeschichtlichen Epoche nichts gemein“. [fr?] Dans la langue courante, « romantique » évoque l’amour, parfois le kitsch, et n’a rien à voir avec l’époque historique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es bezeichnet vor allem Musik des 19. Jahrhunderts.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es wird nur in der Literaturwissenschaft benutzt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es hat mit der Epoche der Romantik nichts zu tun.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Es ist ein anderes Wort für „mittelalterlich“.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum schrieben romantische Autoren gern fragmentarisch? [fr?] Pourquoi les auteurs romantiques aimaient-ils écrire par fragments ?",
+          "explanation": "Die Romantiker „wenden sich ab von klassischen Formen, was die Vorliebe für fragmentarische Schreibweise erklärt“. Die Antike nachzuahmen, ist gerade das Ziel der Klassik. [fr?] Ils se détournent des formes classiques, d’où le goût du fragment ; imiter l’Antiquité est au contraire le programme du classicisme.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil sie sich von klassischen Formen abwandten.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil sie wenig Zeit zum Schreiben hatten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil sie die Antike nachahmen wollten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Weil ihre Zeitschriften kurze Texte verlangten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wie reagierten die Vertreter der Klassik auf die Romantiker? [fr?] Comment les représentants du classicisme ont-ils réagi aux romantiques ?",
+          "explanation": "Die Klassiker „fühlten sich … massiv angegriffen und bezeichneten deren Literatur als fantastisch oder sogar als krankhaft“. Die Zeitschriften gehörten den Romantikern. [fr?] Les classiques se sont sentis attaqués et ont qualifié la littérature romantique de fantasque, voire de maladive.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie übernahmen begeistert viele der neuen romantischen Ideen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie gründeten gemeinsam mit ihnen Zeitschriften.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie lobten vor allem ihre Liebe zum Mittelalter.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Sie nannten deren Literatur fantastisch, ja krankhaft.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wo suchte die Romantik ihre Anregungen? [fr?] Où le romantisme cherchait-il son inspiration ?",
+          "explanation": "„Seine Anstöße suchte er in der Vergangenheit (vor allem im Mittelalter) und exotischen Ländern.“ Aufklärung und Antike sind gerade das, wovon sich die Romantik abwendet. [fr?] Le romantisme s’inspire du Moyen Âge et des pays lointains, en réaction aux Lumières et à l’Antiquité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "in der vernunftgerichteten Aufklärung",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "im Mittelalter und in exotischen Ländern",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "in den strengen Formen der Antike",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "in den Naturwissenschaften der Zeit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„In der Musik endete die Romantik früher als in der Literatur.“ Richtig, falsch oder nicht gesagt? [fr?] Vrai, faux ou non dit ?",
+          "explanation": "Falsch: In der Literatur dauert die Romantik von 1795 bis 1848, in der Musik von 1800 bis 1940, also viel länger. [fr?] Faux : en musique, le romantisme dure de 1800 à 1940, bien plus longtemps qu’en littérature (1795–1848).",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b2-kultur-kontrolle",
+      "kind": "exercise",
+      "title": "Prüfen: Partikeln, Verweise und Kulturwortschatz",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Prüfen: Partikeln, Verweise und Kulturwortschatz",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr?] Vérifiez ce que vous avez appris : écoute, grammaire et vocabulaire.\n\nRonja hat Ihnen nach dem Kino eine Sprachnachricht geschickt. Hören Sie sie für die Fragen 1 bis 3. [fr?] Ronja vous a laissé un message vocal après le film ; écoutez-le pour les questions 1 à 3.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-kultur-kontrolle-audio",
+          "caption": "Sprachnachricht von Ronja",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wie hat Ronja der Film gefallen? [fr?] Comment Ronja a-t-elle trouvé le film ?",
+          "explanation": "„Ich … bin, ehrlich gesagt, ein bisschen enttäuscht. Das Ende ist halt viel zu harmonisch.“ Danach aber: „Die Bilder vom Fluss sind wirklich toll.“ Ihr Urteil ist also gemischt. Sie will den Film zwar noch einmal sehen, aber vor allem, um Sie zu begleiten. [fr?] Avis mitigé : déçue par la fin, enthousiaste pour les images.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie war begeistert und will ihn sofort wiedersehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie fand ihn langweilig und ist früher gegangen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie fand ihn viel besser als das Buch.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das Ende enttäuschte sie, die Bilder fand sie toll.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was schlägt Ronja vor? [fr?] Que propose Ronja ?",
+          "explanation": "„Komm doch am Samstag mit, dann gehe ich gern ein zweites Mal.“ Die Partikel „doch“ macht aus dem Imperativ eine freundliche Einladung. Außerdem betont sie, dass man die Bilder „auf der großen Leinwand“ sehen sollte, nicht zu Hause. [fr?] Invitation au cinéma samedi (« Komm doch mit »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "am Samstag zusammen ins Kino zu gehen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "zuerst gemeinsam das Buch zu lesen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "den Film zu Hause zu streamen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Kritik für einen Blog zu schreiben",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Das Ende ist halt viel zu harmonisch.“ Was drückt „halt“ aus? [fr?] Que signifie « halt » ici ?",
+          "explanation": "„Halt“ hat dieselbe Funktion wie „eben“: Es stellt etwas fest, das man so hinnehmen muss. „Halt“ ist umgangssprachlicher und im Süden häufiger. Eine Vermutung würde man mit „wohl“ ausdrücken. [fr?] « halt » = « eben » : constat qu’on ne peut pas changer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Bitte, mit dem Film aufzuhören",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Frage nach dem Ende des Films",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine Feststellung, an der sich nichts ändern lässt",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "eine Vermutung darüber, wie das Buch wohl endet",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr?] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "habe",
+              "ihn",
+              "ihr",
+              "schon",
+              "letztes Jahr",
+              "zum Geburtstag",
+              "geschenkt."
+            ],
+            [
+              "Ich",
+              "habe",
+              "ihn",
+              "ihr",
+              "letztes Jahr",
+              "schon",
+              "zum Geburtstag",
+              "geschenkt."
+            ]
+          ],
+          "explanation": "Die Pronomen stehen direkt nach dem konjugierten Verb, Akkusativ vor Dativ: ihn ihr. Danach folgt die Zeitangabe (schon letztes Jahr), dann der Anlass, und das Partizip „geschenkt“ schließt den Satz. „Schon“ kann vor oder nach „letztes Jahr“ stehen. [fr?] Pronoms d’abord (ihn ihr), puis le temps, puis l’occasion, participe en fin de phrase."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. [fr?] Complétez.",
+          "text": "Zwei Kinos zeigen den Film: das Lux und das Apollo. [[1]] zeigt ihn auch in der Originalfassung. · Viele Kritiken waren positiv. [[2]] hat auch die Buchhändlerin überrascht. · Der Roman [[3]] von zwei Geschwistern, die sich fremd geworden sind.",
+          "explanation": "„Letzteres“ greift das zweite von zwei Dingen auf, das Apollo; die Endung -es richtet sich nach „das Kino“. „Das“ oder „dies“ fasst den ganzen vorherigen Satz zusammen. „Handeln von“ beschreibt das Thema eines Buches oder Films. [fr?] Letzteres (neutre, le second cinéma) ; das / dies résume une phrase ; handeln von = parler de.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Letzteres"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Das",
+                "Dies"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "handelt"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie haben heute keine Lust auf Kino. Was sagen Sie? [fr?] Vous n’avez pas envie d’aller au cinéma aujourd’hui. Que dites-vous ?",
+          "explanation": "Satznegation: „nicht“ steht nach der Zeitangabe „heute“, aber vor der engen Ergänzung „ins Kino“. „Nicht heute“ wäre eine Teilnegation (nicht heute, sondern an einem anderen Tag). Am Satzende oder vor dem konjugierten Verb ist „nicht“ hier falsch. [fr?] Négation de phrase : après heute, avant ins Kino.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich gehe nicht heute ins Kino.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich gehe heute ins Kino nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich gehe heute nicht ins Kino.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Ich nicht gehe heute ins Kino.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Was ist eine „Rezension“? [fr?] Qu’est-ce qu’une « Rezension » ?",
+          "explanation": "Eine Rezension beschreibt ein Buch, einen Film oder ein Konzert und bewertet es mit Argumenten. Sie hat meist einen festen Aufbau: Angaben zum Werk, kurze Inhaltsangabe, Bewertung, Empfehlung. Werbung bewertet nicht kritisch. [fr?] Une critique qui décrit et évalue une œuvre avec des arguments.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine kurze Werbung für einen neuen Film",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Liste aller Filme im Programm",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ein Interview mit der Autorin eines Buches",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "eine Kritik, die ein Werk beschreibt und bewertet",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-kultur-lesen-essay",
+      "kind": "image",
+      "title": "Essai « Im Dunkeln sind wir nicht allein »",
+      "alt": "Essai d’une critique de cinéma : « Im Dunkeln sind wir nicht allein – ein Plädoyer für das Kino ». L’autrice défend la salle de cinéma face au streaming.",
+      "image": {
+        "layout": "article",
+        "kicker": "Essay",
+        "icon": "clapperboard",
+        "title": "Im Dunkeln sind wir nicht allein – ein Plädoyer für das Kino",
+        "byline": "Vera Kronberg, Filmkritikerin",
+        "lead": "Noch nie war es so einfach, Filme zu sehen. Ein Abo, ein Bildschirm, ein Sofa – mehr braucht es nicht, um aus Tausenden von Titeln zu wählen.",
+        "paragraphs": [
+          "Warum sollte man da noch Geld für eine Kinokarte ausgeben, einen Parkplatz suchen und sich neben Fremde setzen, die mit Popcorn rascheln? Die Frage ist berechtigt, und viele haben sie für sich längst beantwortet: Sie bleiben zu Hause."
+        ]
+      }
+    },
+    {
+      "key": "b2-kultur-hoeren-audio",
+      "kind": "audio",
+      "title": "Émission littéraire : un roman et son adaptation",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Willkommen bei „Zwischen den Zeilen“, dem Buchmagazin im Kulturradio. Heute sprechen wir über einen Roman, der seit Monaten auf der Bestsellerliste steht, und über seine Verfilmung, die gerade in die Kinos gekommen ist: „Nachtfähre“ von Teresa Wendland. Bei mir im Studio sind der Literaturkritiker Matthias Grewe und die Buchhändlerin Hülya Demirci."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Herr Grewe, für alle, die das Buch noch nicht kennen: Worum geht es denn?"
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Im Mittelpunkt steht Ruth, eine Frau Anfang fünfzig, die nachts eine Fähre steuert. Sie bringt Menschen über einen Fluss, zwischen zwei Dörfern, die sich eigentlich nicht viel zu sagen haben. In einem Sommer taucht plötzlich ihr Bruder wieder auf, den sie zwanzig Jahre lang nicht gesehen hat."
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Das Besondere ist die Form: Wendland erzählt die Geschichte aus drei Perspektiven, aus der Sicht von Ruth, von ihrem Bruder und von einem Jungen, der jede Nacht mit der Fähre fährt. Man setzt das Bild erst nach und nach zusammen. Das ist anspruchsvoll, aber genau das macht den Reiz aus."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Und die Sprache?"
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Sehr knapp, fast karg. Wendland verzichtet auf große Erklärungen, vieles steht zwischen den Zeilen. Wer schnelle Spannung sucht, wird vielleicht ungeduldig. Mich hat gerade diese Zurückhaltung gefesselt."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Frau Demirci, der Roman hat sich über zweihunderttausend Mal verkauft. Merken Sie das in Ihrer Buchhandlung?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "Ja, total. Und seit dem Kinostart im Oktober noch mal ganz anders. Vorher waren es eher Leute, die sowieso viel lesen. Jetzt kommen plötzlich viele junge Leute, die den Film gesehen haben und wissen wollen, wie die Geschichte im Buch erzählt wird. Das finde ich natürlich wunderbar."
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "Viele Lesekreise haben das Buch übrigens auch schon diskutiert. Bei uns im Laden gab es im Herbst drei Leseabende dazu, alle ausverkauft."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Das klingt ja nach einem echten Erfolg. Haben Sie den Film selbst schon gesehen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "Ja, gleich in der ersten Woche, zusammen mit meiner Tochter."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Kommen wir zum Film. Regie hat Milan Hofer geführt, die Hauptrolle spielt eine bisher unbekannte Schauspielerin. Herr Grewe, wie hat Ihnen die Verfilmung gefallen?"
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Ehrlich gesagt, mit gemischten Gefühlen. Die Bilder vom Fluss bei Nacht sind großartig, das muss man dem Film lassen. Und die Hauptdarstellerin ist eine echte Entdeckung. Aber der Film erzählt nur noch aus Ruths Perspektive, und dadurch geht viel verloren. Er ist mir einfach zu glatt."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Und das Ende? Da weicht der Film ja deutlich vom Buch ab."
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Genau. Im Roman bleibt offen, ob die Geschwister sich versöhnen. Im Film fallen sie sich am Ende in die Arme, mit Musik und Sonnenaufgang. Das wirkt auf mich kitschig. Da hat der Film es sich wohl etwas leicht gemacht."
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "Da muss ich widersprechen. Ein Film ist eben kein Buch. Im Kino hat man zwei Stunden, nicht vierhundert Seiten. Dass Hofer sich auf eine Figur konzentriert, finde ich nur konsequent. Und das Ende, na ja, das Publikum will halt auch mal ein bisschen Hoffnung."
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "In einem Punkt hat Herr Grewe aber völlig recht: Die Hauptdarstellerin ist großartig. Ihretwegen haben manche Kundinnen den Film schon zweimal gesehen."
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Das mag sein. Aber Hoffnung und Kitsch sind zwei verschiedene Dinge."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Zum Schluss die Frage, die sich viele stellen: Erst das Buch oder erst der Film?"
+        },
+        {
+          "voice": "mann",
+          "name": "Matthias Grewe",
+          "text": "Für mich ganz klar: erst das Buch. Lesen Sie es doch zuerst, dann sehen Sie den Film mit anderen Augen."
+        },
+        {
+          "voice": "frau3",
+          "name": "Hülya Demirci",
+          "text": "Ich sage: Hauptsache, man wird neugierig. Wer über den Film zum Buch kommt, ist mir genauso willkommen."
+        },
+        {
+          "voice": "frau",
+          "name": "Anja Wiegand",
+          "text": "Vielen Dank Ihnen beiden. „Nachtfähre“ von Teresa Wendland ist inzwischen als Taschenbuch erschienen, und der Film läuft in vielen Programmkinos."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-kontrolle-audio",
+      "kind": "audio",
+      "title": "Message vocal de Ronja après le film",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Ronja",
+          "text": "Hallo, hier ist Ronja. Sag mal, hast du „Nachtfähre“ denn jetzt schon gesehen? Ich war gestern drin und bin, ehrlich gesagt, ein bisschen enttäuscht. Das Ende ist halt viel zu harmonisch, das passt doch gar nicht zum Buch."
+        },
+        {
+          "voice": "frau2",
+          "name": "Ronja",
+          "text": "Aber die Bilder vom Fluss sind wirklich toll, die musst du dir unbedingt auf der großen Leinwand anschauen. Komm doch am Samstag mit, dann gehe ich gern ein zweites Mal. Meld dich mal!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-kultur-einstieg-foto",
+      "kind": "image",
+      "title": "La salle d’un ancien cinéma",
+      "alt": "La salle d’un ancien cinéma : des fauteuils au premier plan, une fosse d’orchestre arrondie et une scène aux rideaux tirés, avec une échelle.",
+      "photo": {
+        "file": "libre/commons/kultur-kinosaal.jpg"
+      },
+      "credit": "Tasch Michael, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Kinosaal_mit_Orchestergraben.JPG"
+    },
+    {
+      "key": "b2-kultur-hoeren2-audio",
+      "kind": "audio",
+      "title": "Wikipédia parlée — Romantik (extrait)",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Romantik bezeichnet eine kulturgeschichtliche Epoche, die sich insbesondere auf den Gebieten der bildenden Kunst (1790–1840), der Literatur (1795–1848) sowie der Musik (1800–1940) äußert.",
+          "say": "Romantik bezeichnet eine kulturgeschichtliche Epoche, die sich insbesondere auf den Gebieten der bildenden Kunst (siebzehnhundertneunzig bis achtzehnhundertvierzig), der Literatur (siebzehnhundertfünfundneunzig bis achtzehnhundertachtundvierzig) sowie der Musik (achtzehnhundert bis neunzehnhundertvierzig) äußert."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Im heutigen, allgemeinen Sprachgebrauch bezeichnet der Begriff Romantik mit dem Adjektiv romantisch die Eigenschaft einer Sache, das Herz mit Liebe und Sehnsucht zu erfüllen, z. B. in „romantische Liebe“, „romantische Musik“ oder „ein romantischer Brief“. Oft wird der Begriff synonym zu Kitsch gebraucht.",
+          "say": "Im heutigen, allgemeinen Sprachgebrauch bezeichnet der Begriff Romantik mit dem Adjektiv romantisch die Eigenschaft einer Sache, das Herz mit Liebe und Sehnsucht zu erfüllen, zum Beispiel in „romantische Liebe“, „romantische Musik“ oder „ein romantischer Brief“. Oft wird der Begriff synonym zu Kitsch gebraucht."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Das hat jedoch mit der kulturgeschichtlichen Epoche nichts gemein."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Etymologie"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Der Begriff kommt ursprünglich von „in lingua romana“, in romanischer Sprache, also in den entsprechenden Ländern in der Volkssprache verfassten Schriften. Sie bildeten den Gegensatz zu den zuvor üblichen, „in lingua latina“ (Latein) geschriebenen Schriften."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Aus „lingua romana“ entstand der Ausdruck „Roman“, der aus dem Französischen auch zu uns kam und zu romantisch wurde."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Romantik bedeutet somit Abwendung von der Antike und von klassischen Vorbildern. Das heißt, romantische Autoren erschließen sich Themen aus ihrer eigenen Kultur und Geschichte und wenden sich ab von klassischen Formen, was die Vorliebe für fragmentarische Schreibweise erklärt."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die Hinwendung zur eigenen Kultur bedeutet zugleich eine stärkere Hinwendung zur Sagen- und Mythenwelt des Mittelalters."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die Vertreter der an der Antike orientierten Klassik fühlten sich vor allem durch die Zeitschriften der Romantiker massiv angegriffen und bezeichneten deren Literatur als fantastisch oder sogar als krankhaft."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Die Grundsteine des Romantismus sind Gefühl, Individualität (individuelles Erlebnis) und Seele (vor allem psychisch gequälte Seele). Romantismus entstand als Reaktion auf das Monopol der vernunftgerichteten Philosophie der Aufklärung, der Strenge des durch die Antike inspirierten Klassizismus."
+        },
+        {
+          "voice": "sprecherin",
+          "text": "Seine Anstöße suchte er in der Vergangenheit (vor allem im Mittelalter) und exotischen Ländern. Im Vordergrund stehen irrationale Gefühle, die Sehnsucht zu Versuchen und Erfahren, das Mysterium und das Geheimnis."
+        }
+      ],
+      "credit": "Texte : article « Romantik » de la Wikipédia en allemand (révision 24274899), lu par une voix de synthèse",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://de.wikipedia.org/w/index.php?oldid=24274899"
+    },
+    {
+      "key": "b2-kultur-hoeren2-foto",
+      "kind": "image",
+      "title": "Le Voyageur contemplant une mer de nuages",
+      "alt": "Tableau romantique : un homme vu de dos, debout sur un rocher, contemple une mer de brouillard d’où émergent des sommets.",
+      "photo": {
+        "file": "libre/commons/kultur-wanderer.jpg"
+      },
+      "credit": "Caspar David Friedrich (tableau, domaine public), Wikimedia Commons",
+      "license": "Domaine public",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Caspar_David_Friedrich_-_Wanderer_above_the_sea_of_fog.jpg"
+    },
+    {
+      "key": "b2-kultur-lexique",
+      "kind": "audio",
+      "title": "Lexique · Kultur: Bücher, Filme und was sie mit uns machen",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Verfilmung, die Verfilmungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Vorlage, die Vorlagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Handlung, die Handlungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hauptfigur, die Hauptfiguren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Perspektive, die Perspektiven"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Rezension, die Rezensionen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Publikum"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Leinwand, die Leinwände"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hauptrolle, die Hauptrollen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Debüt, die Debüts"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "fesselnd"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "langatmig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vielschichtig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vorhersehbar"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kitschig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "handeln von"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich auseinandersetzen mit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Kritik üben an"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zum Nachdenken anregen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Lanze brechen für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "den Nerv der Zeit treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich einlassen auf"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abweichen von"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

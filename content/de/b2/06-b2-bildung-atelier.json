@@ -1,0 +1,1539 @@
+{
+  "id": "b2-bildung-atelier",
+  "title": "Bildung – Werkstatt: Stellung nehmen und Bildungswege vorstellen",
+  "objective": "Écrire une contribution argumentée à un forum, réagir à des arguments dans une discussion sur l’école, résumer deux articles de points de vue différents pour un collègue, s’entraîner au texte à trous avec phrases à replacer et présenter le système éducatif de son pays.",
+  "prerequisites": [
+    "b2-bildung"
+  ],
+  "audioProfile": "b2-debut",
+  "sources": [
+    "Textes, discussions, articles et exercices originaux LinguaCap."
+  ],
+  "layer": "content/b/source/b2/b2-bildung-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "stellung-nehmen-zu",
+      "word": "Stellung nehmen zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre position sur",
+      "example": "Im Forum nehmen viele Leser Stellung zu dieser Frage.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "die-auffassung-vertreten-dass",
+      "word": "die Auffassung vertreten, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "défendre l’idée que …",
+      "example": "Ich vertrete die Auffassung, dass Weiterbildung freiwillig bleiben sollte.",
+      "note": "verbe en fin de subordonnée après dass",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "meiner-ansicht-nach",
+      "word": "Meiner Ansicht nach …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à mon avis …",
+      "example": "Meiner Ansicht nach brauchen wir ein Recht auf Weiterbildung.",
+      "note": "verbe juste après : Meiner Ansicht nach brauchen wir …",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "zwar-aber",
+      "word": "Zwar …, aber …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "certes …, mais …",
+      "example": "Zwar spricht einiges für Noten, aber sie sagen wenig über das Lernen aus.",
+      "note": "verbe juste après zwar",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "dafuer-spricht-dass",
+      "word": "Dafür spricht, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "un argument en faveur, c’est que …",
+      "example": "Dafür spricht, dass man flexibel lernen kann.",
+      "note": "contraire : Dagegen spricht, dass …",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "hinzu-kommt-dass",
+      "word": "Hinzu kommt, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à cela s’ajoute que …",
+      "example": "Hinzu kommt, dass viele Eltern wenig Zeit haben.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "unterm-strich",
+      "word": "unterm Strich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "au bout du compte, en fin de compte",
+      "example": "Unterm Strich lernt man am meisten, wenn man einen Sinn darin sieht.",
+      "note": "familier mais courant ; soutenu : alles in allem",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "etwas-gelten-lassen",
+      "word": "etwas gelten lassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "admettre, accepter (un argument)",
+      "example": "Dieses Argument lasse ich nur teilweise gelten.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "plaedieren-fuer",
+      "word": "plädieren für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "plaider pour",
+      "example": "Ich plädiere für bezahlte Lernzeit während der Arbeit.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "forumsbeitrag",
+      "word": "Forumsbeitrag",
+      "article": "der",
+      "plural": "Forumsbeiträge",
+      "partOfSpeech": "noun",
+      "translation": "la contribution à un forum",
+      "example": "Ihr Forumsbeitrag sollte etwa zweihundert Wörter lang sein.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "referat",
+      "word": "Referat",
+      "article": "das",
+      "plural": "Referate",
+      "partOfSpeech": "noun",
+      "translation": "l’exposé",
+      "example": "Im Deutschkurs hält jeder ein kurzes Referat.",
+      "note": "ein Referat halten",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "schulpflicht",
+      "word": "Schulpflicht",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la scolarité obligatoire",
+      "example": "In Frankreich beginnt die Schulpflicht mit drei Jahren.",
+      "note": "sans pluriel",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "abitur",
+      "word": "Abitur",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le baccalauréat allemand",
+      "example": "Ohne Abitur kann man unter bestimmten Voraussetzungen studieren.",
+      "note": "das Abitur machen",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "note",
+      "word": "Note",
+      "article": "die",
+      "plural": "Noten",
+      "partOfSpeech": "noun",
+      "translation": "la note (scolaire)",
+      "example": "In Deutschland ist eine Eins die beste Note.",
+      "note": "de 1 (sehr gut) à 6 (ungenügend)",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "rueckmeldung",
+      "word": "Rückmeldung",
+      "article": "die",
+      "plural": "Rückmeldungen",
+      "partOfSpeech": "noun",
+      "translation": "le retour (sur un travail), le feedback",
+      "example": "Eine schriftliche Rückmeldung hilft oft mehr als eine Note.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "lernzeit",
+      "word": "Lernzeit",
+      "article": "die",
+      "plural": "Lernzeiten",
+      "partOfSpeech": "noun",
+      "translation": "le temps consacré à apprendre",
+      "example": "Bezahlte Lernzeit macht Weiterbildung für alle möglich.",
+      "note": null,
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "im-vergleich-zu",
+      "word": "im Vergleich zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "par rapport à, comparé à",
+      "example": "Im Vergleich zu Deutschland werden die Kinder in Frankreich später getrennt.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b2-bildung-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b2-bildung-atelier-modell",
+      "kind": "lesson",
+      "title": "Modell: ein Forumsbeitrag und der Anfang eines Referats",
+      "estimatedMinutes": 13,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modell: ein Forumsbeitrag und der Anfang eines Referats",
+        "description": "MODELL 1: EIN FORUMSBEITRAG\n[fr?] Modèle 1 : une contribution argumentée à un forum\nLesen Sie den Beitrag aus dem Forum eines Bildungsmagazins. Achten Sie auf den Aufbau und auf die Formulierungen, mit denen der Autor argumentiert. [fr?] Lisez cette contribution au forum d’un magazine. Observez la structure et les formules avec lesquelles l’auteur argumente.\n\nForum „Bildung heute“ · Sollte Weiterbildung für alle Beschäftigten Pflicht sein?\nBeitrag von T. Brandl\nIn vielen Branchen verändert sich die Arbeit so schnell, dass das in der Ausbildung erworbene Wissen nach wenigen Jahren veraltet ist. Trotzdem vertrete ich die Auffassung, dass eine allgemeine Pflicht zur Weiterbildung der falsche Weg wäre.\nZwar spricht einiges für eine solche Pflicht: Wer regelmäßig dazulernt, bleibt auf dem Arbeitsmarkt gefragt, und die Betriebe müssten endlich in ihre Beschäftigten investieren. Aber Lernen unter Zwang bringt erfahrungsgemäß wenig. Ich habe selbst an einem vorgeschriebenen Onlinekurs teilgenommen, bei dem die meisten Kolleginnen und Kollegen die Videos nur nebenbei laufen ließen.\nHinzu kommt, dass eine Pflicht vor allem diejenigen belasten würde, die ohnehin wenig Zeit haben, zum Beispiel Eltern kleiner Kinder oder Beschäftigte im Schichtdienst.\nMeiner Ansicht nach brauchen wir stattdessen ein Recht auf Weiterbildung: bezahlte Lernzeit, gute Beratung und Angebote, die zur Lebenssituation passen. Unterm Strich lernen Menschen dann am meisten, wenn sie einen Sinn darin sehen, und nicht, wenn sie müssen.\n\nAUFBAU\n1. Einleitung: das Thema aufgreifen und die eigene Position nennen („Trotzdem vertrete ich die Auffassung, dass …“). [fr?] Introduction : reprendre le thème et annoncer sa position.\n2. Gegenargument anerkennen und entkräften: „Zwar …, aber …“. [fr?] Reconnaître un contre-argument, puis le réfuter : « certes …, mais … ».\n3. Eigenes Argument mit einem Beispiel aus der Erfahrung. [fr?] Un argument personnel, appuyé par un exemple vécu.\n4. Weiteres Argument: „Hinzu kommt, dass …“. [fr?] Un argument supplémentaire : « à cela s’ajoute que … ».\n5. Schluss: ein Vorschlag und ein Fazit („Meiner Ansicht nach …“, „Unterm Strich …“). [fr?] Conclusion : une proposition et un bilan.\n\nSTELLUNG NEHMEN\n[fr?] Prendre position\n• Ich vertrete die Auffassung, dass …\n• Meiner Ansicht nach …\n• Ich halte es für richtig, … zu … / Ich halte es für einen Fehler, … zu …\nABWÄGEN\n[fr?] Peser le pour et le contre\n• Zwar spricht einiges für …, aber …\n• Dafür spricht, dass … Dagegen spricht, dass …\n• Das lasse ich nur teilweise gelten, denn …\nERGÄNZEN UND BELEGEN\n[fr?] Ajouter un argument, donner un exemple\n• Hinzu kommt, dass …\n• Ein Beispiel aus meiner eigenen Erfahrung …\nSCHLUSS\n[fr?] Conclure\n• Unterm Strich …\n• Deshalb plädiere ich für …\n\nMODELL 2: DER ANFANG EINES REFERATS\n[fr?] Modèle 2 : le début d’un exposé\nHören Sie, wie Élodie Marchand ihr Referat über das Bildungssystem in Frankreich beginnt. Achten Sie darauf, wie sie das Thema nennt, den Aufbau ankündigt und mit einem Unterschied einsteigt. [fr?] Écoutez comment Élodie Marchand commence son exposé sur le système éducatif français : elle annonce le thème, puis son plan, et entre dans le sujet par une différence frappante.\nREFERAT: STRUKTUR ANKÜNDIGEN\n[fr?] Exposé : annoncer le plan\n• Mein Thema heute ist …\n• Mein Vortrag hat drei Teile. Zuerst … Danach … Zum Schluss …\n• Lassen Sie mich mit einem Unterschied beginnen, der viele überrascht.\n• Ich komme jetzt zu meinem zweiten Punkt.\n• Im Vergleich zu Deutschland …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-atelier-modell-audio",
+          "caption": "Élodie Marchand beginnt ihr Referat",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b2-bildung-atelier-diskussion",
+      "kind": "exercise",
+      "title": "Diskutieren: Sollen Schulnoten abgeschafft werden?",
+      "estimatedMinutes": 12,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Diskutieren: Sollen Schulnoten abgeschafft werden?",
+        "description": "SITUATION\nDer Elternbeirat Ihrer Schule hat zu einer Diskussionsrunde eingeladen. Das Thema: „Sollen Schulnoten bis zur neunten Klasse abgeschafft werden?“ Sie hören vier Beiträge. Wählen Sie jeweils die Reaktion, die am besten passt. [fr?] Le conseil des parents de votre école organise un débat : faut-il supprimer les notes jusqu’en neuvième classe ? Vous entendez quatre interventions. Choisissez chaque fois la réaction qui convient le mieux.\nSprechen Sie danach die vier Reaktionen laut nach. Achten Sie auf eine ruhige, sachliche Satzmelodie. [fr?] Répétez ensuite les quatre réactions à voix haute, sur un ton calme et posé.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-atelier-diskussion-beitrag1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-beitrag2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-beitrag3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-beitrag4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b2-bildung-atelier-diskussion-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Beitrag 1: Sie sind anderer Meinung. Welche Reaktion widerspricht höflich und mit einem Argument? [fr?] Intervention 1 : vous n’êtes pas d’accord. Quelle réaction contredit poliment, avec un argument ?",
+          "explanation": "„Da bin ich anderer Meinung“ leitet den Widerspruch höflich ein, und der Doppelpunkt kündigt das Argument an. Die erste Reaktion stimmt zu, die dritte greift die Person an statt das Argument, und die vierte widerspricht ohne Begründung. [fr?] On annonce poliment son désaccord, puis on donne un argument. Les autres réactions approuvent, attaquent la personne ou contredisent sans justifier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Genau, schriftliche Rückmeldungen helfen den Kindern viel mehr als jede Note.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Da bin ich anderer Meinung: Noten sind für viele Eltern die einzige klare Information.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das ist doch naiv, so etwas kann wirklich nur eine Lehrerin behaupten.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Da bin ich anderer Meinung, aber dazu möchte ich jetzt lieber nichts sagen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Beitrag 2: Sie möchten sichergehen, dass Sie Herrn Doğan richtig verstanden haben. Was sagen Sie? [fr?] Intervention 2 : vous voulez vérifier que vous avez bien compris M. Doğan. Que dites-vous ?",
+          "explanation": "Mit „Verstehe ich Sie richtig, dass …?“ fasst man die Aussage des anderen zusammen und fragt nach. Herr Doğan kritisiert, dass ein Text der Lehrerin weniger klar ist als eine Note. Sein Sohn bekommt aber Noten („eine Vier“): Die dritte Antwort hat ihn missverstanden. [fr?] « Verstehe ich Sie richtig, dass … ? » reformule pour vérifier. M. Doğan trouve les commentaires écrits moins clairs qu’une note ; son fils a bien des notes, la troisième réponse se trompe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie haben recht, eine Vier ist wirklich keine gute Note für einen Schüler.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ihr Sohn sollte einfach mehr lernen, dann haben Sie dieses Problem nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Verstehe ich Sie richtig, dass Ihr Sohn an seiner Schule schon jetzt keine Noten mehr bekommt?",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Verstehe ich Sie richtig, dass Ihnen schriftliche Rückmeldungen zu ungenau sind?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Beitrag 3: Der Vorschlag von Herrn Oswald überzeugt Sie nur teilweise. Welche Reaktion passt? [fr?] Intervention 3 : la proposition de M. Oswald ne vous convainc qu’en partie. Quelle réaction convient ?",
+          "explanation": "Teilweise zustimmen heißt: zuerst das Positive anerkennen („Das klingt vernünftig“), dann mit „allerdings“ eine Frage oder Einschränkung anschließen, die sich auf den Inhalt bezieht. Die letzte Antwort hat dieselbe Struktur, aber ihre Einschränkung hat nichts mit dem Vorschlag zu tun. [fr?] Accord partiel : on reconnaît d’abord le positif, puis « allerdings » introduit une réserve sur le fond. La dernière réponse a la même forme, mais sa réserve est hors sujet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das klingt vernünftig, allerdings frage ich mich, warum gerade ab Klasse acht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das ist der einzig richtige Weg, alle Schulen sollten ihn sofort übernehmen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das überzeugt mich überhaupt nicht, Kompromisse bringen in der Schule nie etwas.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Das klingt vernünftig, allerdings war ich selbst noch nie an Ihrer Schule.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Beitrag 4: Die Moderatorin bittet um eine Zusammenfassung. Was antworten Sie? [fr?] Intervention 4 : la modératrice demande un résumé. Que répondez-vous ?",
+          "explanation": "Eine Zusammenfassung nennt die eigene Position in einem klaren Satz. Die richtige Antwort formuliert eine Position mit Vorschlag (Passiv mit Modalverb: „sollten ergänzt werden“). Die anderen Antworten weichen aus oder zählen nur Stichwörter auf. [fr?] Un résumé exprime sa position en une phrase claire. Les autres réponses esquivent ou se contentent d’énumérer des mots.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kurz gesagt: Es gibt viele verschiedene Meinungen, und irgendwie haben alle ein bisschen recht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Kurz gesagt: Zu diesem Thema habe ich eigentlich gar keine eigene Meinung.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Kurz gesagt: Noten allein reichen nicht, sie sollten durch Gespräche ergänzt werden.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Kurz gesagt: erstens die Noten, zweitens die Eltern und drittens die Lehrkräfte.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Da bin ich anderer Meinung: Noten sind für viele Eltern die einzige klare Information.",
+          "accept": [
+            "Da bin ich anderer Meinung: Noten sind für viele Eltern die einzige klare Information."
+          ],
+          "explanation": "„Meinung“ mit „ei“ wie in „mein“; „Noten“ mit langem o. In „Information“ liegt die Betonung auf der letzten Silbe („-tion“, gesprochen etwa „tsjohn“). Den Satzakzent setzen Sie auf „einzige“. [fr?] Accent de mot sur la dernière syllabe de « Information » ; accent de phrase sur « einzige ». Le o de « Noten » est long.",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Verstehe ich Sie richtig, dass Ihnen schriftliche Rückmeldungen zu ungenau sind?",
+          "accept": [
+            "Verstehe ich Sie richtig, dass Ihnen schriftliche Rückmeldungen zu ungenau sind?"
+          ],
+          "explanation": "In „Rückmeldungen“ liegt die Betonung auf „Rück-“, in „ungenau“ auf „un-“. Am Ende geht die Stimme nach oben: Es ist eine Frage, auf die man mit Ja oder Nein antworten kann. [fr?] Accent sur « Rück- » et sur « un- ». Intonation montante à la fin : c’est une question fermée.",
+          "threshold": 70
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Das klingt vernünftig, allerdings frage ich mich, warum gerade ab Klasse acht.",
+          "accept": [
+            "Das klingt vernünftig, allerdings frage ich mich, warum gerade ab Klasse acht.",
+            "Das klingt vernünftig, allerdings frage ich mich, warum gerade ab Klasse 8."
+          ],
+          "explanation": "„vernünftig“: Betonung auf „-nünf-“, das ü ist kurz. „acht“ endet mit dem hinteren ch-Laut wie in „Bach“. Machen Sie nach „vernünftig“ eine kleine Pause: Dann kommt die Einschränkung. [fr?] Accent sur « -nünf- », ü bref ; le ch de « acht » se prononce au fond de la gorge. Petite pause avant « allerdings ».",
+          "threshold": 70
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr?] Écoutez, puis répétez à voix haute.",
+          "text": "Kurz gesagt: Noten allein reichen nicht, sie sollten durch Gespräche ergänzt werden.",
+          "accept": [
+            "Kurz gesagt: Noten allein reichen nicht, sie sollten durch Gespräche ergänzt werden."
+          ],
+          "explanation": "„Gespräche“ mit langem ä, „ergänzt“ mit Betonung auf „-gänzt“. Am Ende stehen Partizip und Infinitiv: „ergänzt werden“. Sprechen Sie das Ende deutlich und lassen Sie die Stimme fallen: Das ist Ihre Position. [fr?] ä long dans « Gespräche », accent sur « -gänzt ». Voix descendante à la fin : vous affirmez votre position.",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b2-bildung-atelier-mediation",
+      "kind": "exercise",
+      "title": "Vermitteln: zwei Artikel zur Weiterbildung zusammenfassen",
+      "estimatedMinutes": 16,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vermitteln: zwei Artikel zur Weiterbildung zusammenfassen",
+        "description": "SITUATION\nIhr Kollege Christoph bereitet eine Teambesprechung zum Thema „Weiterbildung im Betrieb“ vor. Er hat keine Zeit, zwei Artikel zu lesen, und bittet Sie um eine kurze, neutrale Zusammenfassung: Was sagen beide, und worin unterscheiden sie sich? [fr?] Votre collègue Christoph prépare une réunion d’équipe sur la formation continue. Il n’a pas le temps de lire deux articles et vous demande un résumé court et neutre : sur quoi s’accordent-ils, en quoi diffèrent-ils ?\n\nARTIKEL 1: NIE ZU ALT ZUM LERNEN\n[fr?] Article 1 : « Jamais trop vieux pour apprendre »\nImmer mehr Erwachsene bilden sich neben dem Beruf weiter. Digitale Angebote machen es möglich.\nOb Programmierkurs am Abend, Sprachkurs in der Mittagspause oder ein Zertifikat in Projektmanagement: Weiterbildung ist für viele Beschäftigte selbstverständlich geworden. Vor allem Onlinekurse haben das Lernen flexibler gemacht. Man lernt, wann und wo es passt, und kann Familie, Beruf und Bildung besser verbinden.\nAuch Ältere profitieren: Eine Fünfzigjährige, die sich in eine neue Software einarbeitet, bleibt für ihren Arbeitgeber unverzichtbar. Unternehmen, die in die Weiterbildung ihrer Mitarbeitenden investieren, berichten zudem, dass weniger Beschäftigte kündigen. Lebenslanges Lernen, so das Fazit, ist keine Last, sondern eine Chance in einer Arbeitswelt, die sich ständig verändert.\n\nARTIKEL 2: DIE WEITERBILDUNGSFALLE\n[fr?] Article 2 : « Le piège de la formation continue »\nLebenslanges Lernen gilt als Antwort auf eine Arbeitswelt, die sich immer schneller verändert. Doch die Angebote erreichen nicht alle gleichermaßen. Wer bereits einen Hochschulabschluss hat, bildet sich deutlich häufiger weiter als Beschäftigte ohne Berufsabschluss, also genau diejenigen, die eine Qualifizierung am dringendsten bräuchten.\nAuch die viel gelobten Onlinekurse helfen hier wenig: Viele Teilnehmende brechen sie nach wenigen Wochen ab, weil ihnen nach einem langen Arbeitstag die Kraft fehlt. Hinzu kommt, dass die Verantwortung zunehmend beim Einzelnen liegt. Wer nicht lernt, so die unausgesprochene Botschaft, ist selbst schuld. Sinnvoller wäre bezahlte Lernzeit während der Arbeitszeit, damit Weiterbildung nicht vom Feierabend abhängt.\n\nSTRATEGIE\nLesen Sie zuerst beide Überschriften: Sie verraten oft schon die Haltung. Suchen Sie dann in jedem Artikel das Hauptargument und die Forderung. Geben Sie die Positionen neutral wieder, ohne Ihre eigene Meinung. [fr?] Lisez d’abord les deux titres : ils trahissent souvent la position. Cherchez ensuite l’argument principal et la revendication de chaque article. Restituez les positions de façon neutre, sans votre avis.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-atelier-mediation-artikel",
+          "caption": "Artikel 1: Nie zu alt zum Lernen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Notizen zu Artikel 1. [fr?] Complétez vos notes sur l’article 1.",
+          "text": "Artikel 1 · Haltung: [[1]] · Onlinekurse machen das Lernen [[2]] · Ältere bleiben für den Arbeitgeber [[3]] · Vorteil für die Unternehmen: Weniger Beschäftigte [[4]]",
+          "explanation": "Schon die Überschrift „Nie zu alt zum Lernen“ und das Fazit („keine Last, sondern eine Chance“) zeigen die positive Haltung. Onlinekurse haben das Lernen „flexibler gemacht“; die Fünfzigjährige „bleibt für ihren Arbeitgeber unverzichtbar“; in Unternehmen, die investieren, „kündigen“ weniger Beschäftigte. [fr?] Le titre et la conclusion montrent un ton optimiste : apprentissage plus flexible, salariés âgés indispensables, moins de démissions.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "optimistisch",
+                "positiv",
+                "zuversichtlich"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "flexibler",
+                "flexibel"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "unverzichtbar",
+                "unersetzlich"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "kündigen"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Notizen zu Artikel 2. [fr?] Complétez vos notes sur l’article 2.",
+          "text": "Artikel 2 · Haltung: kritisch · Wer schon gut qualifiziert ist, bildet sich [[1]] weiter · Onlinekurse: Viele [[2]] sie nach wenigen Wochen ab · Problem: Die Verantwortung liegt beim [[3]] · Forderung: bezahlte [[4]] während der Arbeitszeit",
+          "explanation": "Menschen mit Hochschulabschluss bilden sich „deutlich häufiger“ weiter. Viele „brechen“ Onlinekurse ab (abbrechen, trennbar). Die Verantwortung liegt „beim Einzelnen“ (substantiviertes Adjektiv, großgeschrieben). Die Forderung: „bezahlte Lernzeit während der Arbeitszeit“. [fr?] Les plus qualifiés se forment plus souvent ; beaucoup abandonnent les cours en ligne ; la responsabilité repose sur l’individu ; l’article réclame du temps de formation rémunéré.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "häufiger",
+                "öfter",
+                "mehr"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "brechen"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Einzelnen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Lernzeit"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Worin sind sich beide Artikel einig? [fr?] Sur quel point les deux articles sont-ils d’accord ?",
+          "explanation": "Artikel 1 spricht von „einer Arbeitswelt, die sich ständig verändert“, Artikel 2 von „einer Arbeitswelt, die sich immer schneller verändert“: Beide halten lebenslanges Lernen für nötig. Über Onlinekurse sind sie sich gerade nicht einig, und die anderen Aussagen stehen in keinem Artikel. [fr?] Les deux partent d’un monde du travail qui change vite. Ils divergent justement sur les cours en ligne ; les autres affirmations ne figurent dans aucun article.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Onlinekurse erreichen alle Beschäftigten gleich gut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Unternehmen sollten die Weiterbildung allein bezahlen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weiterbildung ist nötig, weil sich die Arbeitswelt ständig verändert.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Ältere Beschäftigte interessieren sich heute kaum noch für eine Weiterbildung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Christoph braucht die Zusammenfassung für eine Teambesprechung. Was ist dabei am wichtigsten? [fr?] Christoph a besoin du résumé pour une réunion. Qu’est-ce qui compte le plus ?",
+          "explanation": "Christoph möchte wissen, was beide Artikel sagen und worin sie sich unterscheiden. Eine gute Zusammenfassung ist neutral, ordnet jede Position ihrem Artikel zu und konzentriert sich auf das Wichtigste, statt Satz für Satz nachzuerzählen oder wörtlich abzuschreiben. [fr?] Un bon résumé est neutre, attribue chaque position à sa source et va à l’essentiel, sans tout raconter ni recopier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "nur den Artikel zusammenfassen, der Ihrer eigenen Meinung entspricht",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Positionen beider Artikel neutral wiedergeben und klar zuordnen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "möglichst viele Formulierungen aus beiden Artikeln wörtlich übernehmen",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "die beiden Artikel Satz für Satz in der richtigen Reihenfolge nacherzählen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Wie geben Sie die Aussagen neutral wieder? Ordnen Sie zu. [fr?] Comment restituer ces propos de façon neutre ? Associez.",
+          "explanation": "Bei einer Zusammenfassung zitiert man nicht, sondern formuliert mit eigenen Worten und nennt die Quelle. Aus bildhaften oder zugespitzten Sätzen werden sachliche Aussagen: „selbst schuld“ wird zu „Die Verantwortung wird … abgeschoben“. [fr?] On ne cite pas : on reformule avec ses mots, de façon neutre et en nommant la source. Les formules imagées deviennent des constats factuels.",
+          "pairs": [
+            {
+              "left": "„… keine Last, sondern eine Chance“",
+              "right": "Der erste Artikel betont die Chancen des Lernens."
+            },
+            {
+              "left": "„Man lernt, wann und wo es passt.“",
+              "right": "Onlinekurse machen das Lernen zeitlich flexibel."
+            },
+            {
+              "left": "„… genau diejenigen, die eine Qualifizierung am dringendsten bräuchten“",
+              "right": "Gering Qualifizierte bilden sich am seltensten weiter."
+            },
+            {
+              "left": "„Wer nicht lernt, ist selbst schuld.“",
+              "right": "Die Verantwortung wird auf den Einzelnen abgeschoben."
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz für Ihre Zusammenfassung. [fr?] Formez une phrase pour votre résumé.",
+          "answers": [
+            [
+              "Während",
+              "der erste Artikel",
+              "die Chancen",
+              "betont,",
+              "warnt",
+              "der zweite",
+              "vor neuen",
+              "Ungleichheiten."
+            ]
+          ],
+          "explanation": "„Während“ stellt hier zwei Positionen gegenüber (comme « alors que »). Im Nebensatz steht das Verb „betont“ am Ende. Danach beginnt der Hauptsatz direkt mit dem Verb „warnt“; „warnen vor“ verlangt den Dativ: vor neuen Ungleichheiten. [fr?] Während oppose deux positions ; verbe en fin de subordonnée, puis la principale commence par le verbe. warnen vor + datif."
+        }
+      ]
+    },
+    {
+      "id": "b2-bildung-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Korrigieren: typische Fehler im Nominalstil",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Korrigieren: typische Fehler im Nominalstil",
+        "description": "Diese Sätze stammen aus Texten von Kursteilnehmenden. Finden Sie jeweils die richtige Form. [fr?] Ces phrases viennent de textes d’apprenants. Trouvez chaque fois la forme correcte.\n\nKORREKTURZEICHEN\n[fr?] Les codes de correction\nIhre Lehrkraft verwendet diese Zeichen: G (Grammatik), W (Wortschatz), St (Satzstellung), R (Rechtschreibung), A (Ausdruck und Register). Jede Aufgabe übt eines davon. [fr?] Votre professeur utilise ces codes : G (grammaire), W (vocabulaire), St (place des mots), R (orthographe), A (registre). Chaque question en travaille un.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr?] G : quelle phrase est correcte ?",
+          "explanation": "Das Partizip wird wie ein Adjektiv dekliniert: „mit der“ verlangt den Dativ, nach dem bestimmten Artikel endet es auf „-en“. „Gestiegenden“ mischt Partizip II und Partizip I; richtig wäre „gestiegenen“. [fr?] Le participe se décline comme un adjectif : datif après « mit der », donc -en. « gestiegenden » mélange les deux participes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit der seit Jahren steigenden Zahl der Bewerbungen hat niemand gerechnet.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Mit der seit Jahren steigende Zahl der Bewerbungen hat niemand gerechnet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mit der seit Jahren steigender Zahl der Bewerbungen hat niemand gerechnet.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Mit der seit Jahren gestiegenden Zahl der Bewerbungen hat niemand gerechnet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr?] St : quelle phrase est correcte ?",
+          "explanation": "Reihenfolge des Partizipialattributs: Artikel, Erweiterung („von der Stadt“), Partizip („finanzierte“), Nomen („Beratung“). Das Partizip steht immer direkt vor dem Nomen, die Erweiterung immer davor. [fr?] Ordre : article, complément, participe, nom. Le participe se place toujours juste devant le nom.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die finanzierte von der Stadt Beratung ist kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Beratung von der Stadt finanzierte ist kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die von der Stadt Beratung finanzierte ist kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die von der Stadt finanzierte Beratung ist kostenlos.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie den Artikel im Genitiv. [fr?] G : complétez avec l’article au génitif.",
+          "text": "Nach Abschluss [[1]] Studiums hat sie ein Jahr im Ausland gearbeitet. · Wegen [[2]] hohen Kosten verzichten viele auf eine Weiterbildung. · Zur Verbesserung [[3]] Beratung stellt die Hochschule zwei Mitarbeiterinnen ein.",
+          "explanation": "Im Nominalstil hängt am Nomen oft ein Genitiv: „des Studiums“ (Neutrum, mit „-s“ am Nomen), „der Beratung“ (Femininum). „Wegen“ verlangt in der Standardsprache ebenfalls den Genitiv: „wegen der hohen Kosten“ (Plural). [fr?] Génitif après le nom : des (neutre), der (féminin et pluriel). wegen se construit aussi avec le génitif en langue standard.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "des"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "W: Sie haben gestern eine Prüfung geschrieben. Das Ergebnis kennen Sie noch nicht. Welcher Satz passt? [fr?] W : vous avez passé un examen hier et n’en connaissez pas encore le résultat. Quelle phrase convient ?",
+          "explanation": "„Eine Prüfung ablegen“ (oder „machen“, „schreiben“) bedeutet, an ihr teilzunehmen. „Bestehen“ heißt, sie mit Erfolg abzuschließen: Das wissen Sie noch nicht. „Eine Prüfung passieren“ ist eine wörtliche Übersetzung, die es im Deutschen nicht gibt. [fr?] « Passer un examen » se dit ablegen, machen ou schreiben ; bestehen signifie le réussir. « passieren » est un calque fautif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe gestern eine Prüfung bestanden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe gestern eine Prüfung abgelegt.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich habe gestern eine Prüfung passiert.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Ich bin gestern durch eine Prüfung gegangen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "R: Ergänzen Sie das Verb als Nomen. [fr?] R : complétez avec le verbe employé comme nom.",
+          "text": "Beim [[1]] hilft mir leise Musik. · Das regelmäßige [[2]] der Vokabeln ist wichtig. · Zum [[3]] braucht man vor allem Zeit.",
+          "explanation": "Ein substantivierter Infinitiv ist ein Nomen: Er wird großgeschrieben und ist immer neutral. Man erkennt ihn am Artikel davor: beim (bei dem), das, zum (zu dem). [fr?] L’infinitif employé comme nom prend une majuscule et il est neutre ; on le repère à l’article qui le précède.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Lernen"
+              ],
+              "hint": "lernen",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Wiederholen"
+              ],
+              "hint": "wiederholen",
+              "size": 12
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Studieren"
+              ],
+              "hint": "studieren",
+              "size": 10
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "A: Welcher Satz passt in einen sachlichen Forumsbeitrag? [fr?] A : quelle phrase convient dans une contribution argumentée à un forum ?",
+          "explanation": "Ein Forumsbeitrag ist kein Brief: „Sehr geehrte Damen und Herren“ passt nicht. Er sollte aber sachlich sein und eine klare Position haben. Die erste Antwort ist zu umgangssprachlich, die letzte nimmt keine Stellung. [fr?] Une contribution de forum n’est pas une lettre formelle, mais elle reste argumentée. Les autres phrases sont trop familières, trop formelles ou sans position.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ey Leute, Studiengebühren sind echt voll der Mist!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sehr geehrte Damen und Herren, hiermit teile ich Ihnen meine Meinung mit.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Meiner Ansicht nach sollte das Studium gebührenfrei bleiben.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Studiengebühren? Keine Ahnung, ist mir eigentlich egal.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-bildung-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Prüfungstraining: Sätze in einen Text einsetzen",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Prüfungstraining: Sätze in einen Text einsetzen",
+        "description": "PRÜFUNGSTRAINING LESEN\nIn dem Zeitungstext fehlen fünf Sätze. Welcher Satz passt in welche Lücke? Ein Satz bleibt übrig. [fr?] Il manque cinq phrases dans cet article. Quelle phrase va dans quel trou ? Une phrase reste inutilisée.\nZEIT\nEtwa 18 Minuten, ohne Wörterbuch. [fr?] Environ 18 minutes, sans dictionnaire.\n\nSTRATEGIE\n1. Lesen Sie zuerst den ganzen Text, ohne die Lücken zu füllen. Worum geht es in jedem Absatz? [fr?] Lisez d’abord tout le texte sans remplir les trous : de quoi parle chaque paragraphe ?\n2. Achten Sie auf die Wörter vor und nach der Lücke: Pronomen (sie, seiner), Verweise (diesen Wunsch, deshalb) und Signalwörter (sogar, erst). [fr?] Regardez les mots avant et après le trou : pronoms, reprises (diesen Wunsch, deshalb) et mots signaux (sogar, erst).\n3. Ein Satz passt nur, wenn er mit beiden Seiten der Lücke verbunden ist. Prüfen Sie am Ende, ob der übrige Satz wirklich nirgends passt. [fr?] Une phrase ne convient que si elle s’enchaîne avec ce qui précède et ce qui suit. Vérifiez à la fin que la phrase restante ne va nulle part.\n\nMIT SIEBZIG ZURÜCK IN DEN HÖRSAAL\n[fr?] Article de journal\nIngeborg Kuhnert sitzt in der dritten Reihe und schreibt eifrig mit. Um sie herum sitzen Studierende, die ihre Enkel sein könnten. (1) ………… Die 73-Jährige ist eine von rund dreißig Gasthörerinnen und Gasthörern, die in diesem Semester Vorlesungen im Fach Geschichte besuchen.\nEin solches Seniorenstudium bieten viele deutsche Hochschulen an. Wer teilnehmen möchte, braucht weder Abitur noch eine Aufnahmeprüfung. (2) ………… Einen Abschluss erwirbt man auf diesem Weg allerdings nicht.\nFür Kuhnert spielt das keine Rolle. Vierzig Jahre lang hat sie als Steuerberaterin gearbeitet, für Geschichte blieb dabei kaum Zeit. (3) ………… „Ich wollte endlich verstehen, worüber ich früher nur nebenbei in der Zeitung gelesen habe“, sagt sie.\nNicht alle sind von den älteren Gästen begeistert. In beliebten Seminaren sind die Plätze knapp, und manche jüngere Studierende fühlen sich verdrängt. (4) ………… Die Universität hat deshalb eine Regel eingeführt: In Seminaren mit begrenzter Teilnehmerzahl haben regulär eingeschriebene Studierende Vorrang.\nKuhnerts Dozent sieht die gemischten Gruppen trotzdem positiv. (5) ………… „Wenn eine Siebzigjährige erzählt, wie sie selbst die Sechzigerjahre erlebt hat, wird Geschichte plötzlich lebendig.“\nKuhnert hat sich bereits für das nächste Semester eingeschrieben. Ihr Ziel: eine eigene Hausarbeit schreiben, „ganz freiwillig“.\n\nDIE SÄTZE\n• A „Am Anfang habe ich mich ein bisschen fremd gefühlt“, gibt sie zu, „aber das hat sich schnell gelegt.“\n• B Man meldet sich einfach als Gasthörerin oder Gasthörer an und zahlt eine Gebühr pro Semester.\n• C Erst nach dem Ende ihres Berufslebens konnte sie sich diesen Wunsch erfüllen.\n• D Ein Student beschwerte sich sogar, weil er keinen Platz in einem Pflichtseminar bekam.\n• E Seiner Erfahrung nach profitieren beide Seiten von den unterschiedlichen Perspektiven.\n• F Deshalb hat sie direkt nach der Schule Geschichte studiert.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Lücke 1: Welcher Satz passt? [fr?] Trou 1 : quelle phrase convient ?",
+          "explanation": "Satz A passt: Nach der Beschreibung (die Studierenden könnten ihre Enkel sein) erzählt Kuhnert, wie sie sich am Anfang gefühlt hat; „sie“ verweist auf Kuhnert. C braucht einen Wunsch, der vorher genannt wird, D setzt mit „sogar“ eine Beschwerde voraus, und F hat mit „deshalb“ keinen Grund. [fr?] A enchaîne sur la description : « sie » renvoie à Mme Kuhnert. C, D et F exigent un élément qui n’a pas encore été mentionné (un souhait, une plainte, une cause).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Erst nach dem Ende ihres Berufslebens konnte sie sich diesen Wunsch erfüllen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ein Student beschwerte sich sogar, weil er keinen Platz in einem Pflichtseminar bekam.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„Am Anfang habe ich mich ein bisschen fremd gefühlt“, gibt sie zu, „aber das hat sich schnell gelegt.“",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Deshalb hat sie direkt nach der Schule Geschichte studiert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Lücke 2: Welcher Satz passt? [fr?] Trou 2 : quelle phrase convient ?",
+          "explanation": "Satz B erklärt, wie man ohne Abitur und ohne Prüfung teilnimmt: Man meldet sich als Gasthörer an. Danach folgt die Einschränkung mit „allerdings“. In diesem Absatz kommt keine Person vor, auf die „sie“ (A) oder „seiner“ (E) verweisen könnte. [fr?] B explique comment on s’inscrit, avant la restriction introduite par « allerdings ». Aucune personne dans ce paragraphe ne permet de comprendre « sie » (A) ou « seiner » (E).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man meldet sich einfach als Gasthörerin oder Gasthörer an und zahlt eine Gebühr pro Semester.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "„Am Anfang habe ich mich ein bisschen fremd gefühlt“, gibt sie zu, „aber das hat sich schnell gelegt.“",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Student beschwerte sich sogar, weil er keinen Platz in einem Pflichtseminar bekam.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Seiner Erfahrung nach profitieren beide Seiten von den unterschiedlichen Perspektiven.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Lücke 3: Welcher Satz passt? [fr?] Trou 3 : quelle phrase convient ?",
+          "explanation": "„Für Geschichte blieb dabei kaum Zeit“ – „diesen Wunsch“ in Satz C greift das auf: Erst nach dem Berufsleben hat sie Zeit für Geschichte. F widerspricht dem Text, denn sie war vierzig Jahre Steuerberaterin. B ist eine allgemeine Information und gehört in Absatz 2. [fr?] C reprend l’idée : « ce souhait » ne se réalise qu’à la retraite. F contredit le texte ; B est une information générale du paragraphe 2.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Deshalb hat sie direkt nach der Schule Geschichte studiert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man meldet sich einfach als Gasthörerin oder Gasthörer an und zahlt eine Gebühr pro Semester.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seiner Erfahrung nach profitieren beide Seiten von den unterschiedlichen Perspektiven.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Erst nach dem Ende ihres Berufslebens konnte sie sich diesen Wunsch erfüllen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Lücke 4: Welcher Satz passt? [fr?] Trou 4 : quelle phrase convient ?",
+          "explanation": "Satz D führt die Kritik weiter („fühlen sich verdrängt“ → „beschwerte sich sogar“). „Sogar“ steigert die Aussage davor. Danach erklärt „deshalb“, warum die Universität eine Regel eingeführt hat: wegen der Beschwerden. [fr?] D prolonge la critique ; « sogar » renchérit. Puis « deshalb » explique la nouvelle règle : à cause de ces plaintes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "„Am Anfang habe ich mich ein bisschen fremd gefühlt“, gibt sie zu, „aber das hat sich schnell gelegt.“",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ein Student beschwerte sich sogar, weil er keinen Platz in einem Pflichtseminar bekam.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Erst nach dem Ende ihres Berufslebens konnte sie sich diesen Wunsch erfüllen.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Seiner Erfahrung nach profitieren beide Seiten von den unterschiedlichen Perspektiven.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Lücke 5: Welcher Satz passt? [fr?] Trou 5 : quelle phrase convient ?",
+          "explanation": "Satz E passt zu „sieht die gemischten Gruppen trotzdem positiv“: „Seiner“ verweist auf den Dozenten, und das Zitat danach gibt ein Beispiel für die „unterschiedlichen Perspektiven“. D wäre hier ein Gegenargument und passt nicht zu „positiv“. [fr?] E justifie le point de vue positif : « seiner » renvoie à l’enseignant, et la citation qui suit illustre les perspectives différentes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Student beschwerte sich sogar, weil er keinen Platz in einem Pflichtseminar bekam.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man meldet sich einfach als Gasthörerin oder Gasthörer an und zahlt eine Gebühr pro Semester.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Seiner Erfahrung nach profitieren beide Seiten von den unterschiedlichen Perspektiven.",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "Deshalb hat sie direkt nach der Schule Geschichte studiert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Regel gilt in Seminaren mit wenigen Plätzen? [fr?] Quelle règle s’applique dans les séminaires à places limitées ?",
+          "explanation": "„In Seminaren mit begrenzter Teilnehmerzahl haben regulär eingeschriebene Studierende Vorrang.“ „Vorrang haben“ heißt: zuerst drankommen. Gasthörer sind also nicht ausgeschlossen, und von Gebühren oder einer Verlosung ist keine Rede. [fr?] Les étudiants régulièrement inscrits sont prioritaires ; les auditeurs libres ne sont pas exclus, et il n’est question ni de frais ni de tirage au sort.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Regulär eingeschriebene Studierende haben Vorrang.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Gasthörer dürfen nur in Vorlesungen sitzen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ältere Gäste zahlen dort eine höhere Gebühr.",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "Die Plätze werden unter allen Interessierten verlost.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b2-bildung-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission: einen Forumsbeitrag schreiben",
+      "estimatedMinutes": 28,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission: einen Forumsbeitrag schreiben",
+        "description": "SITUATION\nIm Forum eines Bildungsmagazins hat eine Schülerin eine Frage gestellt. Viele Leserinnen und Leser antworten mit ihrer Meinung. Sie möchten auch einen Beitrag schreiben. [fr?] Sur le forum d’un magazine, une lycéenne a posé une question. De nombreux lecteurs répondent en donnant leur avis. Vous voulez écrire vous aussi une contribution.\n\nFORUM „BILDUNGSWEGE“\n[fr?] Le message de départ\nSmilla_18 · Ist ein Studium noch der beste Weg?\nIch mache nächstes Jahr Abitur, und alle sagen mir, dass ich studieren soll. Aber ich arbeite gern mit den Händen und könnte in einer Tischlerei eine Ausbildung anfangen. Ist ein Studium heute wirklich noch der beste Weg in den Beruf? Was meint ihr?\n\nSO GEHEN SIE VOR\n1. Planen (8 Minuten): Entscheiden Sie sich für eine Position. Überlegen Sie sich Stichwörter zu zwei Argumenten, zu einem Beispiel und zu einem Gegenargument. [fr?] Planifier (8 minutes) : choisissez une position ; trouvez des mots-clés pour deux arguments, un exemple et un contre-argument.\n2. Schreiben (15 Minuten): Folgen Sie dem Aufbau aus dem Modell: Einleitung mit Position, Gegenargument mit „zwar … aber“, Argumente, Schluss mit Rat. [fr?] Écrire (15 minutes) : suivez la structure du modèle.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste. Achten Sie auf die Stellung des Verbs und auf die Endungen. [fr?] Vérifier (5 minutes) : relisez avec la liste ; attention à la place du verbe et aux terminaisons.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b2-bildung-atelier-schreiben-forum",
+          "caption": "Forum „Bildungswege“",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie einen Forumsbeitrag (150 bis 250 Wörter). Nehmen Sie Stellung zu der Frage, ob ein Studium heute noch der beste Weg in den Beruf ist. Begründen Sie Ihre Meinung mit mindestens zwei Argumenten und einem Beispiel, gehen Sie auf ein Gegenargument ein und geben Sie Smilla zum Schluss einen Rat. [fr?] Écrivez une contribution au forum (150 à 250 mots). Prenez position : les études sont-elles encore le meilleur chemin vers un métier ? Justifiez votre avis par au moins deux arguments et un exemple, discutez un contre-argument et terminez par un conseil à Smilla.",
+          "maxChars": 2400,
+          "minWords": 150
+        },
+        "checklist": [
+          "Meine Position steht klar in der Einleitung. [fr?] Ma position est claire dès l’introduction.",
+          "Zwei Argumente, eines davon mit einem Beispiel [fr?] Deux arguments, dont un avec un exemple",
+          "Ein Gegenargument mit „zwar … aber“ oder „Dagegen spricht, dass …“ [fr?] Un contre-argument discuté",
+          "Absätze und Konnektoren: hinzu kommt, deshalb, unterm Strich [fr?] Des paragraphes et des connecteurs variés",
+          "Zum Schluss ein Rat an Smilla; im Forum ist „du“ möglich. [fr?] Pour finir, un conseil à Smilla ; le tutoiement est possible sur un forum."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: klare Position, zwei begründete Argumente, ein Gegenargument, ein Rat an Smilla [fr?] Tâche : position, arguments, contre-argument et conseil",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz: klarer Aufbau mit Absätzen, vielfältige Konnektoren [fr?] Cohérence : plan clair, paragraphes, connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und differenziert, feste Wendungen [fr?] Vocabulaire : précis et nuancé, expressions figées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, gute grammatische Kontrolle, seltene Fehler [fr?] Structures : phrases complexes, bon contrôle, erreurs rares",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b2-bildung-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission: das Bildungssystem des Herkunftslandes vorstellen",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission: das Bildungssystem des Herkunftslandes vorstellen",
+        "description": "SITUATION\nIn Ihrem Deutschkurs stellen alle Teilnehmenden das Bildungssystem ihres Herkunftslandes vor. Sie halten ein Referat von drei bis vier Minuten. [fr?] Dans votre cours d’allemand, chacun présente le système éducatif de son pays d’origine. Vous faites un exposé de trois à quatre minutes.\n\nINHALT\n1. Überblick: Schulpflicht, Schularten und wichtige Abschlüsse in Ihrem Herkunftsland [fr?] Vue d’ensemble : scolarité obligatoire, types d’écoles, diplômes importants\n2. Nach der Schule: Studium, Ausbildung oder direkt arbeiten? Was ist üblich? [fr?] Après l’école : études, formation ou travail ? Qu’est-ce qui est courant ?\n3. Vergleich mit Deutschland: zwei Unterschiede, zum Beispiel die duale Ausbildung oder den Zugang zum Studium [fr?] Comparaison avec l’Allemagne : deux différences, par exemple l’alternance ou l’accès aux études\n4. Ihre Erfahrung und Ihre Bewertung: Was finden Sie gut, was würden Sie ändern? [fr?] Votre expérience et votre jugement : qu’est-ce qui est bien, que changeriez-vous ?\n\nVORBEREITUNG\nNehmen Sie sich acht Minuten Zeit. Überlegen Sie sich nur Stichwörter, keine ganzen Sätze. Kündigen Sie am Anfang den Aufbau an, wie im Modell. [fr?] Prenez huit minutes. Préparez seulement des mots-clés, pas de phrases entières. Annoncez votre plan au début, comme dans le modèle.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": {
+          "prompt": "Halten Sie Ihr Referat frei und ohne abzulesen (drei bis vier Minuten). Nennen Sie das Thema, kündigen Sie den Aufbau an, sprechen Sie über die vier Punkte und schließen Sie mit einem kurzen Fazit. [fr?] Faites votre exposé librement, sans lire (trois à quatre minutes). Annoncez le thème et le plan, traitez les quatre points et terminez par une courte conclusion.",
+          "maxSeconds": 240
+        },
+        "written": null,
+        "checklist": [
+          "Ich nenne das Thema und kündige den Aufbau an. [fr?] J’annonce le thème et le plan.",
+          "Ich beschreibe das System meines Landes mit konkreten Beispielen. [fr?] Je décris le système de mon pays avec des exemples concrets.",
+          "Ich nenne zwei Unterschiede zu Deutschland. [fr?] Je cite deux différences avec l’Allemagne.",
+          "Ich bewerte und schließe mit einem Fazit („Unterm Strich …“). [fr?] Je donne mon avis et je conclus.",
+          "Ich spreche frei, in ganzen Sätzen, mit Verbindungswörtern. [fr?] Je parle librement, en phrases complètes, avec des connecteurs."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Aufgabenerfüllung: Aufbau angekündigt, System beschrieben, zwei Unterschiede, Bewertung und Fazit in drei bis vier Minuten [fr?] Tâche : plan, description, comparaison, avis, en 3 à 4 min",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Kohärenz und Flüssigkeit: zusammenhängend, spontan, kaum Pausen [fr?] Cohérence et aisance : discours suivi, spontané, peu de pauses",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Wortschatz: präzise und variiert, passende Redemittel [fr?] Vocabulaire : précis et varié, formules adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Strukturen: komplexe Sätze, Fehler ohne Missverständnisse [fr?] Structures : phrases complexes, erreurs sans malentendu",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Aussprache und Intonation: klar, natürliche Satzmelodie [fr?] Prononciation et intonation : claires, mélodie naturelle",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b2-bildung-atelier-bilan",
+      "kind": "lesson",
+      "title": "Bilanz: Bildung",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Bilanz: Bildung",
+        "description": "Lesen Sie die Ziele der beiden Module „Bildung“. Was können Sie schon gut? Was möchten Sie noch üben? [fr?] Relisez les objectifs des deux modules « Bildung ». Que savez-vous déjà bien faire ? Que voulez-vous encore travailler ?\n\nICH KANN …\n• Ich kann einen argumentativen Artikel verstehen und die Positionen der Personen und der Autorin unterscheiden. [fr?] Je peux comprendre un article argumentatif et distinguer les positions des personnes et de l’autrice.\n• Ich kann lange Nomengruppen und Nominalstil verstehen und in einfache Sätze umformen. [fr?] Je peux comprendre les longs groupes nominaux et le style nominal, et les reformuler simplement.\n• Ich kann in einem Forumsbeitrag Stellung nehmen, ein Gegenargument entkräften und einen Rat geben. [fr?] Je peux prendre position sur un forum, réfuter un contre-argument et donner un conseil.\n• Ich kann zwei Texte mit unterschiedlichen Positionen neutral zusammenfassen. [fr?] Je peux résumer de façon neutre deux textes aux positions différentes.\n• Ich kann in einem Referat ein Bildungssystem vorstellen und mit Deutschland vergleichen. [fr?] Je peux présenter un système éducatif dans un exposé et le comparer à celui de l’Allemagne.\n\nSTRATEGIEN\n• Lange Nomengruppen: vom Artikel zum Nomen springen, dann die Erweiterung lesen. [fr?] Longs groupes nominaux : passer de l’article au nom, puis lire les compléments.\n• Sätze einsetzen: auf Pronomen, Verweise und Signalwörter vor und nach der Lücke achten. [fr?] Phrases à replacer : observer les pronoms, les reprises et les mots signaux autour du trou.\n• Zusammenfassen: neutral bleiben, jede Position ihrer Quelle zuordnen, nicht wörtlich abschreiben. [fr?] Résumer : rester neutre, attribuer chaque position à sa source, ne pas recopier.\n\nNOCH NICHT SICHER?\nPartizipialattribut und Nominalstil: Wiederholen Sie „Regel“ und „Üben“ im Modul „Bildung“. Argumentieren: Lesen Sie noch einmal den Forumsbeitrag aus dem Modell und die Redemittel dieser Werkstatt. [fr?] Participe épithète et style nominal : reprenez la règle et les exercices du module « Bildung ». Argumentation : relisez la contribution modèle et les formules de cet atelier.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b2-bildung-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : le début d’un exposé sur l’école en France",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Élodie Marchand",
+          "text": "Guten Tag zusammen. Mein Thema heute ist das Bildungssystem in Frankreich, wo ich aufgewachsen bin, und ich möchte es mit dem deutschen System vergleichen."
+        },
+        {
+          "voice": "frau",
+          "name": "Élodie Marchand",
+          "text": "Mein Vortrag hat drei Teile. Zuerst gebe ich Ihnen einen kurzen Überblick über die Schulzeit in Frankreich. Danach vergleiche ich den Weg zum Abitur und zum Studium in beiden Ländern. Und zum Schluss erzähle ich, was ich selbst aus beiden Systemen mitgenommen habe."
+        },
+        {
+          "voice": "frau",
+          "name": "Élodie Marchand",
+          "text": "Lassen Sie mich mit einem Unterschied beginnen, der viele Deutsche überrascht: In Frankreich beginnt die Schulpflicht schon mit drei Jahren, in Deutschland erst mit sechs. Und während die Kinder in den meisten Bundesländern schon nach der vierten Klasse auf verschiedene Schulen verteilt werden, lernen in Frankreich fast alle bis etwa fünfzehn zusammen."
+        },
+        {
+          "voice": "frau",
+          "name": "Élodie Marchand",
+          "text": "Das hat Vorteile, aber auch Nachteile, auf die ich gleich zurückkomme. Ich komme also zu meinem ersten Punkt, der Schulzeit."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-beitrag1",
+      "kind": "audio",
+      "title": "Débat sur les notes : intervention 1",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Frau Hadžić",
+          "text": "Ich unterrichte seit zwanzig Jahren, und ich bin überzeugt: Noten messen vor allem, wer sich gut anpassen kann. Schriftliche Rückmeldungen würden den Kindern viel mehr helfen. Deshalb sollten wir die Noten bis zur neunten Klasse abschaffen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-beitrag2",
+      "kind": "audio",
+      "title": "Débat sur les notes : intervention 2",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Herr Doğan",
+          "text": "Mein Sohn ist in der siebten Klasse. Wenn er eine Vier schreibt, weiß ich sofort: Da muss er etwas tun. Bei einem langen Text der Lehrerin weiß ich das nicht. Ohne Noten tappen wir Eltern im Dunkeln."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-beitrag3",
+      "kind": "audio",
+      "title": "Débat sur les notes : intervention 3",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Oswald",
+          "text": "An unserer Schule haben wir einen Mittelweg gefunden. In den unteren Klassen gibt es Lernentwicklungsgespräche mit Eltern und Kindern, ab Klasse acht dann wieder Noten. Die Eltern sind damit überwiegend zufrieden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-beitrag4",
+      "kind": "audio",
+      "title": "Débat sur les notes : la modératrice",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Moderatorin",
+          "text": "Wir müssen langsam zum Schluss kommen. Können Sie Ihre Position bitte in einem Satz zusammenfassen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-mediation-artikel",
+      "kind": "image",
+      "title": "Article 1 : « Jamais trop vieux pour apprendre »",
+      "alt": "Article de magazine optimiste sur la formation continue : les cours en ligne rendent l’apprentissage plus flexible, les salariés plus âgés et les entreprises en profitent.",
+      "image": {
+        "layout": "article",
+        "kicker": "Weiterbildung",
+        "icon": "newspaper",
+        "title": "Nie zu alt zum Lernen",
+        "lead": "Immer mehr Erwachsene bilden sich neben dem Beruf weiter. Digitale Angebote machen es möglich.",
+        "paragraphs": [
+          "Ob Programmierkurs am Abend, Sprachkurs in der Mittagspause oder ein Zertifikat in Projektmanagement: Weiterbildung ist für viele Beschäftigte selbstverständlich geworden. Vor allem Onlinekurse haben das Lernen flexibler gemacht. Man lernt, wann und wo es passt, und kann Familie, Beruf und Bildung besser verbinden.",
+          "Auch Ältere profitieren: Eine Fünfzigjährige, die sich in eine neue Software einarbeitet, bleibt für ihren Arbeitgeber unverzichtbar. Unternehmen, die in die Weiterbildung ihrer Mitarbeitenden investieren, berichten zudem, dass weniger Beschäftigte kündigen. Lebenslanges Lernen, so das Fazit, ist keine Last, sondern eine Chance in einer Arbeitswelt, die sich ständig verändert."
+        ]
+      }
+    },
+    {
+      "key": "b2-bildung-atelier-schreiben-forum",
+      "kind": "image",
+      "title": "Forum : le message de départ",
+      "alt": "Message de forum d’une lycéenne : tout le monde lui conseille de faire des études, mais elle aime le travail manuel et pourrait commencer un apprentissage en menuiserie ; elle demande l’avis des lecteurs.",
+      "image": {
+        "layout": "forum",
+        "title": "Forum „Bildungswege“: Ist ein Studium noch der beste Weg?",
+        "posts": [
+          {
+            "author": "Smilla_18",
+            "date": "Mo., 19:42",
+            "text": "Ich mache nächstes Jahr Abitur, und alle sagen mir, dass ich studieren soll. Aber ich arbeite gern mit den Händen und könnte in einer Tischlerei eine Ausbildung anfangen. Ist ein Studium heute wirklich noch der beste Weg in den Beruf? Was meint ihr?"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Diskutieren: Sollen Schulnoten abgeschafft werden?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Da bin ich anderer Meinung: Noten sind für viele Eltern die einzige klare Information."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Diskutieren: Sollen Schulnoten abgeschafft werden?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Verstehe ich Sie richtig, dass Ihnen schriftliche Rückmeldungen zu ungenau sind?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Diskutieren: Sollen Schulnoten abgeschafft werden?",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das klingt vernünftig, allerdings frage ich mich, warum gerade ab Klasse acht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-diskussion-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Diskutieren: Sollen Schulnoten abgeschafft werden?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Kurz gesagt: Noten allein reichen nicht, sie sollten durch Gespräche ergänzt werden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b2-bildung-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Bildung – Werkstatt: Stellung nehmen und Bildungswege vorstellen",
+      "segments": true,
+      "audioProfile": "b2-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Stellung nehmen zu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Auffassung vertreten, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Meiner Ansicht nach …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zwar …, aber …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Dafür spricht, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Hinzu kommt, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "unterm Strich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "etwas gelten lassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "plädieren für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Forumsbeitrag, die Forumsbeiträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Referat, die Referate"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schulpflicht"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Abitur"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Note, die Noten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Rückmeldung, die Rückmeldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lernzeit, die Lernzeiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Vergleich zu"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}
