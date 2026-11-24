@@ -57,8 +57,8 @@ public class UploadResource {
         if ("image".equals(kind) && (alt == null || alt.length() > 300)) {
             throw HttpError.badRequest("Rédigez le texte alternatif de l’image (300 caractères au plus).");
         }
-        if ("audio".equals(kind) && (transcript == null || transcript.length() > 4000)) {
-            throw HttpError.badRequest("Rédigez la transcription du son (4 000 caractères au plus).");
+        if ("audio".equals(kind) && (transcript == null || transcript.length() > 12000)) {
+            throw HttpError.badRequest("Rédigez la transcription du son (12 000 caractères au plus).");
         }
         MediaStore.Upload upload = store.reserve(actorId, new MediaStore.NewUpload(assetId, title, request.mimeType(),
                 request.size(), source, license, alt, transcript));

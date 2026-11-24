@@ -62,7 +62,7 @@ public class MediaResource {
         String source = text(change.source());
         String license = text(change.license());
         if (title.isEmpty() || title.length() > 120 || source.length() > 200 || license.length() > 120
-                || text(change.alt()).length() > 300 || text(change.transcript()).length() > 4000) {
+                || text(change.alt()).length() > 300 || text(change.transcript()).length() > 12000) {
             throw HttpError.badRequest("Vérifiez le titre, la source, la licence et les textes du média.");
         }
         return store.update(id, title, source, license, nullable(change.alt()), nullable(change.transcript()));

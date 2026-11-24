@@ -323,7 +323,7 @@ function UploadDrawer({ token, replace, onClose, onDone }: {
           {kind === 'image'
             ? <label>Texte alternatif<textarea name="alt" required rows={2} maxLength={300} defaultValue={replace?.alt ?? ''}
                 aria-describedby="upload-alt-help" /><small id="upload-alt-help" className="ed-help">Décrit l’image pour les lecteurs d’écran.</small></label>
-            : <label>Transcription<textarea name="transcript" required rows={4} maxLength={4000} defaultValue={replace?.transcript ?? ''} lang="de" /></label>}
+            : <label>Transcription<textarea name="transcript" required rows={4} maxLength={12000} defaultValue={replace?.transcript ?? ''} lang="de" /></label>}
           <div className="ed-grid-2">
             <label>Source<input name="source" required maxLength={200} defaultValue={replace?.source ?? ''} placeholder="Auteur, banque d’images…" /></label>
             <label>Licence<input name="license" required maxLength={120} defaultValue={replace?.license ?? ''} placeholder="CC BY 4.0, interne…" /></label>
@@ -395,7 +395,7 @@ function AssetDrawer({ asset, token, onClose, onUpdated, onReplace }: {
           <label>Titre<input name="title" required maxLength={120} defaultValue={asset.title} /></label>
           {asset.kind === 'image'
             ? <label>Texte alternatif<textarea name="alt" rows={3} maxLength={300} defaultValue={asset.alt ?? ''} /></label>
-            : <label>Transcription<textarea name="transcript" rows={6} maxLength={4000} defaultValue={asset.transcript ?? ''} lang="de" /></label>}
+            : <label>Transcription<textarea name="transcript" rows={6} maxLength={12000} defaultValue={asset.transcript ?? ''} lang="de" /></label>}
           <div className="ed-grid-2">
             <label>Source<input name="source" maxLength={200} defaultValue={asset.source ?? ''} /></label>
             <label>Licence<input name="license" maxLength={120} defaultValue={asset.license ?? ''} /></label>

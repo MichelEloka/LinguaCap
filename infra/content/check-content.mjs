@@ -20,7 +20,7 @@ import { basename, dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
   LEVEL_ID, QUESTION_TYPES, audioManifest, availableLevels, baseAudioDir, isLibre, levelFormat, loadRegistry, loadVoices,
-  questionType, sourceFile, spokenLines,
+  questionType, sourceFile, spokenLines, transcriptOf,
 } from './content-lib.mjs';
 import { MAX_BODY, buildDocument } from './import-content.mjs';
 import { PROFILES, isAtelier, profileOf } from './level-profiles.mjs';
@@ -72,6 +72,31 @@ const NUMBER_WORD = new RegExp(`(?<!\\p{L})(?:null|eins|zwei|drei|vier|fünf|sec
 // Graphies de remplacement (ä → ae, ß → ss…) à éviter dans les réponses canoniques : l'élève apprend la graphie exacte.
 const TRANSLITERATED = /\b(fuer|ueber\w*|muess\w*|koenn\w*|moecht\w*|schoen\w*|maedchen|faehrt|frueh\w*|tuer|spaet\w*|zurueck|hoer\w*|groess\w*|natuerlich|kaese|buero|wuensch\w*|gruen\w*|fuenf\w*|zwoelf|schluessel|kueche|gemuese|muenchen|koeln|oesterreich|aerzt\w*|strasse|gross|heiss\w*|weiss|fuss\w*|gruss|suess|dreissig|schliess\w*|spass|aussen)\b/i;
 
+// --- Langue des textes (niveaux B) -------------------------------------------------------------------------------------
+// Mots-outils français absents de l'allemand (ni « du », ni « des », ni « in ») et lettres accentuées du français : deux
+// indices au moins font un texte français (les accents ne comptent qu’une fois : « Café » n’en donne qu’un).
+const FRENCH_WORDS = /(?<!\p{L})(?:le|la|les|une|est|sont|pas|vous|nous|que|qui|dans|avec|pour|sur|aux|cette|elle|ne|et|un|ce|il|ou|au|se|en)(?!\p{L})/giu;
+const FRENCH_LETTERS = /[éèêàçùœ]/giu;
+// Les passages cités („…“, »…«, « … », "…") sont exclus : une consigne allemande peut citer une phrase française à traduire.
+const QUOTED = /„[^“”"]*[“”"]|»[^«]*«|«[^»]*»|"[^"]*"/g;
+const frenchClues = (value) => {
+  const plain = String(value ?? '').replace(QUOTED, ' ');
+  return (plain.match(FRENCH_WORDS)?.length ?? 0) + Math.min(1, plain.match(FRENCH_LETTERS)?.length ?? 0);
+};
+const looksFrench = (value) => frenchClues(value) >= 2;
+/** Partie allemande d'une ligne « allemand [fr?] français » (la ligne entière sans marqueur). */
+const germanPart = (line) => {
+  const found = /\s\[fr\??\]\s/.exec(String(line ?? ''));
+  return found ? line.slice(0, found.index) : String(line ?? '');
+};
+/** Titres d'activité du B1 (français) : au B2, « Verstehen: … », « Üben: … », « Prüfen: … », « Mission: … ». */
+const FRENCH_TITLE = /^(?:Mise en route|Comprendre|Découvrir|Retenir|À retenir|S[’']entraîner|S[’']exercer|Vocabulaire|Mots et formules|Répéter|Vérifier|Modèle|Réagir|Médiation|Corriger|Entraînement|Format d[’']examen|Faire le point)(?!\p{L})|\s[:;!?](?:\s|$)/u;
+/** Consigne française en tête de ligne d'une description (au B2, l'aide française suit « [fr?] »). */
+const FRENCH_INSTRUCTION = /^(?:Lisez|Écoutez|Complétez|Choisissez|Répondez|Associez|Remettez|Écrivez|Répétez|Cochez|Relisez|Observez|Comparez|Reformulez|Résumez|Présentez|Expliquez|Soulignez|Retrouvez)(?!\p{L})/u;
+/** Choix vrai / faux / non mentionné : libellés fixes, hors des contrôles de longueur des distracteurs. */
+const TRUE_FALSE = /^(?:richtig|falsch|steht nicht im text|nicht gesagt|wird nicht gesagt|das wird nicht gesagt)\b/i;
+const listed = (ids, max = 6) => (ids.length <= max ? ids.join(', ') : `${ids.slice(0, max).join(', ')}… (${ids.length})`);
+
 /**
  * Médias du niveau contrôlé : son dossier media (content/de/media ou la sortie de build-v4), puis content/de/media et,
  * pour les enregistrements natifs, la V2 de référence dont ils sont tirés.
@@ -79,18 +104,27 @@ const TRANSLITERATED = /\b(fuer|ueber\w*|muess\w*|koenn\w*|moecht\w*|schoen\w*|m
 let mediaRoot = join(root, 'content/de/media');
 const mediaFile = (kind, name) => [join(mediaRoot, kind, name), join(root, 'content/de/media', kind, name)].find(existsSync);
 
-function checkQuestions(where, questions, { min, max, moduleRefs, typed = false, format = 3, enforced = false, profile = NEUTRAL }) {
+function checkQuestions(where, questions, { min, max, moduleRefs, typed = false, format = 3, enforced = false, profile = NEUTRAL,
+  activityId = '' }) {
   if (!Array.isArray(questions) || questions.length < min || questions.length > max) {
     fail(where, `${min} à ${max} questions attendues`);
     return;
   }
   const ids = new Set();
+  // Niveaux B : constats regroupés par activité (une ligne par règle plutôt qu'une par question).
+  const unglossed = [];
+  const frenchPrompts = [];
+  const frenchExplanations = [];
+  const unhelped = [];
+  const advisedHelp = profile.markers === 'fold'
+    && (profile.foldAdvised?.explanations ?? []).some((suffix) => activityId.endsWith(suffix));
   questions.forEach((question, index) => {
     const at = `${where} › question ${question?.id ?? index + 1}`;
     if (!ID.test(question?.id ?? '') || ids.has(question.id)) fail(at, 'identifiant invalide ou en double');
     ids.add(question.id);
     sized(at, question.prompt, 3, 500, 'l’énoncé');
-    if (format >= 5) checkPromptGloss(at, question.prompt, profile);
+    if (format >= 5 && !checkPromptGloss(at, question.prompt, profile)) unglossed.push(question.id);
+    if (format >= 5 && profile.language === 'de' && looksFrench(germanPart(question.prompt))) frenchPrompts.push(question.id);
     if (moduleRefs && !moduleRefs.has(question.moduleRef)) fail(at, `moduleRef « ${question.moduleRef} » inconnu`);
     if (format >= 4 && typed) {
       const { min: low, max: high, advised } = profile.explanation;
@@ -98,6 +132,8 @@ function checkQuestions(where, questions, { min, max, moduleRefs, typed = false,
       if (!explanation) need(at, `explication manquante (explanation, ${low} à ${high} caractères : pourquoi c’est juste)`, enforced);
       else if (explanation.length < low || explanation.length > high) fail(at, `explication de ${low} à ${high} caractères (actuellement ${explanation.length})`);
       else if (explanation.length > advised) warn(at, `explication longue (${explanation.length} caractères, ${advised} conseillés)`);
+      if (explanation && format >= 5 && profile.language === 'de' && looksFrench(germanPart(explanation))) frenchExplanations.push(question.id);
+      if (explanation && advisedHelp && !/ \[fr\?\] /.test(explanation)) unhelped.push(question.id);
     }
     const type = questionType(question);
     if (!QUESTION_TYPES.includes(type)) {
@@ -123,6 +159,12 @@ function checkQuestions(where, questions, { min, max, moduleRefs, typed = false,
     const labels = options.map((option) => text(option.label).toLowerCase());
     if (new Set(labels).size !== labels.length) fail(at, 'deux choix ont le même libellé');
   });
+  if (unglossed.length) warn(where, `énoncé sans aide française repliée (« … [fr?] … ») conseillée : ${listed(unglossed)}`);
+  if (frenchPrompts.length) warn(where, `énoncé en français : au B2, la consigne est en allemand, l’aide française suit « [fr?] » (${listed(frenchPrompts)})`);
+  if (frenchExplanations.length) {
+    warn(where, `explication en français : au B2, elle est en allemand, l’aide française suit « [fr?] » (${listed(frenchExplanations)})`);
+  }
+  if (unhelped.length) warn(where, `explication de grammaire sans aide française repliée (« … [fr?] … ») conseillée : ${listed(unhelped)}`);
 }
 
 const stringList = (value, min, max, maxLength) => Array.isArray(value) && value.length >= min && value.length <= max
@@ -155,6 +197,7 @@ const MULTI_LINE_PROMPT = /mission\.(?:oral|written)\.prompt$/;
 /** Lignes d'un champ bilingue : fautes de forme, glose orpheline, partie allemande ou française vide, mode du niveau. */
 function checkGlossText(at, value, { profile, singleLine = false, instructions = false }) {
   const lines = String(value).split('\n');
+  let wrongMode = 0;
   lines.forEach((line, index) => {
     const found = line.match(LOOSE_MARKER) ?? [];
     if (!found.length) {
@@ -179,7 +222,7 @@ function checkGlossText(at, value, { profile, singleLine = false, instructions =
     }
     const mode = token === '[fr]' ? 'beside' : 'fold';
     if (profile.markers === 'beside' && mode === 'fold') fail(at, '[fr?] (aide repliée) est réservé au B2 : au B1, la traduction s’affiche à côté ([fr])');
-    if (profile.markers === 'fold' && mode === 'beside') fail(at, '[fr] est réservé au B1 : au B2, l’aide française est repliée ([fr?])');
+    if (profile.markers === 'fold' && mode === 'beside') wrongMode++;
     if (line.startsWith(token)) {
       if (!line.startsWith(`${token} `) || !line.slice(token.length).trim()) fail(at, `glose vide ou mal séparée (« ${token} » suivi d’une espace et du français)`);
       if (singleLine) fail(at, `partie allemande vide : « allemand ${token} français » sur la même ligne`);
@@ -195,16 +238,29 @@ function checkGlossText(at, value, { profile, singleLine = false, instructions =
     }
     if (!line.slice(0, position).trim()) fail(at, 'partie allemande vide avant le marqueur');
     if (!line.slice(position + token.length + 2).trim()) fail(at, 'partie française vide après le marqueur');
+    if (looksFrench(line.slice(0, position))) warn(at, `français dans la partie allemande (« ${clipText(line.slice(0, position).trim(), 60)} »)`);
   });
+  if (wrongMode) {
+    fail(at, `[fr] est réservé au B1${wrongMode > 1 ? ` (${wrongMode} lignes)` : ''} : au B2, l’aide française est repliée ([fr?] : aide(), `
+      + 'consignes C2, speakB2() et dictationB2() de content/b/lib.mjs)');
+  }
+  // Au B2, une consigne en français sans marqueur se lirait comme la consigne elle-même : l'allemand d'abord, l'aide ensuite.
+  if (instructions && profile.language === 'de') {
+    const french = lines.map((line) => line.trim()).filter((line) => FRENCH_INSTRUCTION.test(line));
+    if (french.length) warn(at, `consigne en français sans marqueur (« ${clipText(french[0], 60)} ») : au B2, « consigne allemande [fr?] aide »`);
+  }
 }
 
 const clipText = (value, max) => (value.length <= max ? value : `${value.slice(0, max - 1)}…`);
 
-/** Énoncé d'une question : B1 « allemand [fr] français » obligatoire ; B2 « [fr?] » conseillé. */
+/**
+ * Énoncé d'une question : B1 « allemand [fr] français » obligatoire ; B2 « [fr?] » conseillé (renvoie false s'il manque,
+ * l'avertissement est regroupé par activité).
+ */
 function checkPromptGloss(at, prompt, profile) {
-  if (typeof prompt !== 'string') return;
+  if (typeof prompt !== 'string') return true;
   if (profile.markers === 'beside' && !/ \[fr\] /.test(prompt)) fail(at, 'énoncé sans traduction : « allemand [fr] français » attendu');
-  if (profile.markers === 'fold' && !/ \[fr\?\] /.test(prompt)) warn(at, 'énoncé sans aide française repliée (« … [fr?] … ») conseillée');
+  return !(profile.markers === 'fold' && !/ \[fr\?\] /.test(prompt));
 }
 
 /**
@@ -215,7 +271,8 @@ function checkMarkers(where, value, { format, profile, scope }) {
   const visit = (node, path, label) => {
     if (typeof node === 'string') {
       if (!hasMarker(node)) {
-        if (format >= 5 && profile.markers === 'beside' && /(?:description|instructions)$|mission\.(?:oral|written)\.prompt$/.test(path)) {
+        if (format >= 5 && (profile.markers === 'beside' || profile.language === 'de')
+            && /(?:description|instructions)$|mission\.(?:oral|written)\.prompt$/.test(path)) {
           checkGlossText(label, node, { profile, instructions: true });
         }
         return;
@@ -287,6 +344,10 @@ function checkTypedQuestion(at, question, type, profile = NEUTRAL) {
     const distinct = new Set(answers.map((answer) => answer.map((token) => token.trim()).join('\u0000'))).size;
     if (arrangements <= distinct) fail(at, 'toutes les dispositions des jetons sont justes : rien à remettre en ordre');
     if (answers[0].length < 3) warn(at, 'deux jetons seulement : l’exercice se réduit à un choix binaire');
+    const tokens = profile.orderTokens;
+    if (tokens && (answers[0].length < tokens[0] || answers[0].length > tokens[1])) {
+      warn(at, `phrase de ${answers[0].length} jetons : ${tokens[0]} à ${tokens[1]} conseillés à ce niveau (phrase complexe, Mittelfeld)`);
+    }
     transliterated(at, answers[0].join(' '));
   } else if (type === 'match') {
     const pairs = question.pairs;
@@ -295,6 +356,9 @@ function checkTypedQuestion(at, question, type, profile = NEUTRAL) {
       return;
     }
     if (pairs.length > 6) warn(at, `${pairs.length} paires : 6 au plus sont conseillées`);
+    else if (profile.matchPairs && pairs.length < profile.matchPairs[0]) {
+      warn(at, `${pairs.length} paires : ${profile.matchPairs[0]} à ${profile.matchPairs[1]} conseillées à ce niveau`);
+    }
     for (const pair of pairs) {
       sized(at, pair?.left, 1, 120, 'un élément de gauche');
       sized(at, pair?.right, 1, 120, 'un élément de droite');
@@ -321,6 +385,9 @@ function checkTypedQuestion(at, question, type, profile = NEUTRAL) {
     if (count < fewest || count > most) fail(at, `${fewest} à ${most} mots à répéter (actuellement ${count})`);
     if (!stringList(question.accept, 1, 5, 300)) fail(at, 'accept : 1 à 5 formulations acceptées');
     if (!Number.isInteger(question.threshold) || question.threshold < 50 || question.threshold > 100) fail(at, 'seuil (threshold) de 50 à 100');
+    else if (profile.speakThreshold && question.threshold !== profile.speakThreshold) {
+      warn(at, `seuil ${question.threshold} : ${profile.speakThreshold} attendu à ce niveau (ne pas fixer threshold, la construction le pose)`);
+    }
     if (question.voice !== undefined && !VOICES.has(question.voice)) fail(at, `voix « ${question.voice} » inconnue`);
     if (NUMBER_WORD.test(text(question.text)) && !(question.accept ?? []).some((value) => /\d/.test(value))) {
       warn(at, 'nombre en toutes lettres : ajouter dans accept une variante en chiffres (la reconnaissance vocale écrit souvent 15)');
@@ -492,6 +559,43 @@ const LAYOUTS = {
   chart: (at, image) => {
     if (!isText(image.title, 120)) fail(at, 'un graphique a un titre (120 caractères au plus)');
     if (!isText(image.unit, 20)) fail(at, 'unité (unit) de 20 caractères au plus');
+    if (image.source !== undefined && !isText(image.source, 120)) fail(at, 'source de 120 caractères au plus');
+    if (![undefined, 'bars', 'line'].includes(image.kind)) fail(at, `graphique « ${image.kind} » inconnu (bars ou line)`);
+    if (image.kind === 'line') {
+      // Courbes d'évolution (B2) : 2 à 10 dates, 1 à 3 courbes d'une valeur par date.
+      const points = image.points ?? [];
+      if (!stringList(points, 2, 10, 12)) fail(at, 'points : 2 à 10 dates ou étiquettes de 12 caractères au plus');
+      const lines = image.lines ?? [];
+      if (!Array.isArray(lines) || lines.length < 1 || lines.length > 3) fail(at, 'lines : 1 à 3 courbes { name, values }');
+      for (const line of Array.isArray(lines) ? lines : []) {
+        if (!isText(line?.name, 24)) fail(at, 'courbe : nom (name) de 24 caractères au plus');
+        if (!Array.isArray(line?.values) || line.values.length !== points.length || !line.values.every(Number.isFinite)) {
+          fail(at, `courbe « ${line?.name} » : une valeur par date (${points.length})`);
+        }
+      }
+      if (image.highlight !== undefined && !(Number.isInteger(image.highlight) && image.highlight >= 0 && image.highlight < points.length)) {
+        fail(at, `date mise en avant ${image.highlight} inexistante`);
+      }
+      if (image.bars !== undefined || image.series !== undefined) fail(at, 'une courbe n’a ni bars ni series');
+      return;
+    }
+    if (image.series !== undefined) {
+      // Barres groupées (B2) : 2 ou 3 séries (par exemple deux années), une valeur par série et par barre.
+      if (!stringList(image.series, 2, 3, 20)) fail(at, 'series : 2 ou 3 noms de série de 20 caractères au plus');
+      const width = Array.isArray(image.series) ? image.series.length : 0;
+      const bars = image.bars ?? [];
+      if (!Array.isArray(bars) || bars.length < 2 || bars.length > 6) fail(at, '2 à 6 groupes de barres');
+      for (const bar of Array.isArray(bars) ? bars : []) {
+        if (!isText(bar?.label, 30) || !Array.isArray(bar?.values) || bar.values.length !== width
+            || !bar.values.every((value) => Number.isFinite(value) && value >= 0)) {
+          fail(at, `groupe : étiquette (30 caractères) et ${width} valeurs positives (values)`);
+        }
+      }
+      if (image.highlight !== undefined && !(Number.isInteger(image.highlight) && image.highlight >= 0 && image.highlight < bars.length)) {
+        fail(at, `groupe mis en avant ${image.highlight} inexistant`);
+      }
+      return;
+    }
     const bars = image.bars ?? [];
     if (!Array.isArray(bars) || bars.length < 2 || bars.length > 8) fail(at, '2 à 8 barres');
     for (const bar of Array.isArray(bars) ? bars : []) {
@@ -500,7 +604,6 @@ const LAYOUTS = {
     if (image.highlight !== undefined && !(Number.isInteger(image.highlight) && image.highlight >= 0 && image.highlight < bars.length)) {
       fail(at, `barre mise en avant ${image.highlight} inexistante`);
     }
-    if (image.source !== undefined && !isText(image.source, 120)) fail(at, 'source de 120 caractères au plus');
   },
   forum: (at, image) => {
     if (!isText(image.title, 120)) fail(at, 'un forum a un titre (120 caractères au plus)');
@@ -577,7 +680,7 @@ function checkMedia(where, media, keys, profile = NEUTRAL) {
             || clip[1] - clip[0] > profile.nativeSeconds)) {
           fail(at, `extrait [début, fin] en secondes, ${profile.nativeSeconds / 60} minutes au plus`);
         }
-        sized(at, item.transcript, 3, 4000, 'la transcription');
+        sized(at, item.transcript, 3, 12000, 'la transcription');
         continue;
       }
       if (!Array.isArray(item.script) || !item.script.some((line) => text(line.text))) {
@@ -602,6 +705,8 @@ function checkMedia(where, media, keys, profile = NEUTRAL) {
         characters += text(line.text).length;
       }
       if (characters > profile.synthCharacters) fail(at, `son trop long (${number(profile.synthCharacters)} caractères au plus)`);
+      // La transcription envoyée à la médiathèque (répliques précédées du nom du locuteur) : 12 000 caractères au plus.
+      if (transcriptOf(item).length > 12000) fail(at, 'transcription de plus de 12 000 caractères (limite de la médiathèque)');
     } else if (item.kind === 'image') {
       sized(at, item.alt, 10, 300, 'le texte alternatif');
       const image = item.image ?? {};
@@ -658,6 +763,8 @@ function checkPlacements(where, placements, questions, keys, used) {
 const ANNOUNCES_CORRECTION = /activité suivante|\b(?:le|un|du|au|ce|les|des|aux)\s+corrigés?(?!\p{L})|^\s*corrigés?(?!\p{L})/imu;
 // Consignes à faire hors de l'application (papier, cartes, partenaire) ; « cahier » seul peut traduire das Heft.
 const OFF_APP = /\btracez|\bdessinez|sur une (?:feuille|fiche papier)|(?:dans|sur|à) (?:votre|ton|un|le|son) cahier|\bcartons\b|\bpartenaire/i;
+// Équivalents allemands (B2) : prise de notes sur papier, travail à deux ou en groupe.
+const GERMAN_OFF_APP = /\bNotieren Sie\b|\bnotiere\b|auf (?:einem|einen|ein) (?:Blatt|Zettel)|\bin (?:Ihr|Ihrem|dein|deinem) Heft\b|\bmit (?:Ihrem|Ihrer|deinem|deiner) (?:Partner|Partnerin|Nachbarn|Nachbarin|Lernpartner|Lernpartnerin|Gruppe)\b|\b(?:Partner|Gruppen)arbeit\b|\bzu zweit\b|\bin (?:der|Ihrer) Gruppe\b/i;
 // Durées conseillées par type d'activité (EVO-041) : profil du niveau (V4 : leçon 10–15, exercice 8–12, répétition 8–10,
 // mission 15–20 minutes ; niveaux B : leçon 6–15, exercice 8–20, répétition 8–10, mission 20–30).
 
@@ -681,6 +788,14 @@ function checkCriteria(at, mission, profile, enforced) {
     ids.add(criterion?.id);
     sized(at, criterion?.label, 3, 200, 'le libellé du critère');
     if (!Number.isInteger(criterion?.maxPoints) || criterion.maxPoints < 1 || criterion.maxPoints > 20) fail(at, `critère ${criterion?.id} : points de 1 à 20`);
+  }
+  if (profile.language === 'de') {
+    const french = criteria.filter((criterion) => looksFrench(germanPart(criterion?.label))).map((criterion) => criterion?.id);
+    if (french.length) need(at, `critère en français (${listed(french)}) : au B2, libellés allemands avec aide [fr?] (GRIDS.b2 de content/b/lib.mjs)`, enforced);
+  }
+  if (profile.foldAdvised?.mission) {
+    const bare = criteria.filter((criterion) => !/ \[fr\?\] /.test(criterion?.label ?? '')).map((criterion) => criterion?.id);
+    if (bare.length) warn(at, `critère sans aide française repliée (« … [fr?] … ») conseillée : ${listed(bare)}`);
   }
   if (profile.missions.criteria !== 'required') return;
   const total = criteria.reduce((sum, criterion) => sum + (Number.isInteger(criterion?.maxPoints) ? criterion.maxPoints : 0), 0);
@@ -720,6 +835,17 @@ function checkMission(at, activity, enforced, profile = NEUTRAL) {
   checkCriteria(at, mission, profile, enforced);
   if (!stringList(mission.checklist, 2, 6, 160) || mission.checklist.some((item) => item.trim().length < 3)) {
     fail(at, '2 à 6 points de vérification de 160 caractères au plus');
+  }
+  if (profile.foldAdvised?.mission) {
+    // B2 : tâche et liste de vérification en allemand, aide française repliée ; la liste reprend les objectifs « Ich kann … ».
+    const prompts = [['écrite', mission.written?.prompt], ['orale', mission.oral?.prompt]]
+      .filter(([, prompt]) => typeof prompt === 'string' && !/ \[fr\?\] |^\[fr\?\] /m.test(prompt)).map(([label]) => label);
+    if (prompts.length) warn(at, `consigne ${prompts.join(' et ')} sans aide française repliée (« … [fr?] … ») conseillée`);
+    const items = Array.isArray(mission.checklist) ? mission.checklist : [];
+    const bare = items.filter((item) => typeof item === 'string' && !/ \[fr\?\] /.test(item)).length;
+    if (bare) warn(at, `${bare} point(s) de la liste de vérification sans aide française repliée (« … [fr?] … ») conseillée`);
+    const french = items.filter((item) => looksFrench(germanPart(item)));
+    if (french.length) warn(at, `liste de vérification en français (« ${clipText(text(french[0]), 50)} ») : au B2, en allemand avec aide [fr?]`);
   }
   const competences = activity.competences ?? [];
   if (mission.oral && !competences.includes('expression-orale')) fail(at, 'une partie orale implique la compétence expression-orale');
@@ -780,6 +906,108 @@ function checkVocabulary(where, module, keys, enforced, used, profile = NEUTRAL)
   }
 }
 
+// --- Longueurs des documents des niveaux B (profil : reading, listening) ------------------------------------------------
+const DOCUMENT_ASIDE = /^(?:STRATEGIE|AUFGABE|TIPP|HINWEIS|MERKE|ZUM MERKEN|ACHTUNG|SITUATION|REGEL)(?!\p{L})/u;
+const DOCUMENT_INSTRUCTION = /^(?:Lesen|Hören|Schreiben|Sprechen|Ergänzen|Ordnen|Markieren|Wählen|Notieren|Beantworten|Verbinden|Vergleichen|Bilden|Erzählen|Begründen|Fassen|Achten|Sehen|Lösen|Unterstreichen|Antworten|Reagieren|Überlegen|Suchen|Überfliegen)\s+Sie\b/;
+/**
+ * Mots du document d'une description : hors consignes (ligne de consigne, ligne glosée ou suivie de sa glose), hors
+ * encadrés (STRATEGIE, TIPP…) et intertitres en capitales. Sur le B1 livré : 269 à 388 mots pour les textes de 250 à 400.
+ */
+function documentWords(description) {
+  let count = 0;
+  for (const block of String(description ?? '').split(/\n\s*\n/)) {
+    const lines = block.split('\n');
+    if (DOCUMENT_ASIDE.test(lines[0].trim())) continue;
+    lines.forEach((line, index) => {
+      const value = line.trim();
+      if (!value || hasMarker(value) || DOCUMENT_INSTRUCTION.test(value)) return;
+      if (index + 1 < lines.length && /^\[fr\??\] /.test(lines[index + 1])) return;
+      if (value.length < 80 && /^[\p{Lu}\d\s:–—?!.,()/-]+$/u.test(value)) return;
+      count += wordCount(value);
+    });
+  }
+  return count;
+}
+const manifests = new Map();
+/** Manifeste des sons générés : celui du dossier contrôlé, sinon celui de content/de/media. */
+function manifestEntry(key) {
+  for (const directory of [join(mediaRoot, 'audio'), join(root, 'content/de/media/audio')]) {
+    if (!manifests.has(directory)) manifests.set(directory, audioManifest(directory));
+    const entry = manifests.get(directory)[key];
+    if (entry?.seconds) return entry;
+  }
+  return null;
+}
+/**
+ * Durée d'un son en secondes : manifeste audio, sinon extrait natif [début, fin], sinon estimation d'après le script
+ * (B1 livré : 16 à 18 caractères prononcés par seconde, 0,27 s entre deux répliques, pauses du script).
+ */
+function soundSeconds(media) {
+  const entry = manifestEntry(media.key);
+  if (entry) return { seconds: entry.seconds, estimated: false };
+  const clip = media.native?.clip;
+  if (media.native) return Array.isArray(clip) && clip.length === 2 ? { seconds: clip[1] - clip[0], estimated: false } : null;
+  if (!Array.isArray(media.script)) return null;
+  const seconds = media.script.reduce((total, line) => total + ('pause' in line ? Number(line.pause) || 0
+    : text(line.text).length / 17 + 0.27), 0);
+  return { seconds, estimated: true };
+}
+/** Longueur hors de la fourchette : avertissement ; hors de 80 % du minimum à 120 % du maximum : règle de complétude. */
+function lengthRule(at, value, [low, high], message, enforced) {
+  if (value >= low && value <= high) return;
+  if (value < low * 0.8 || value > high * 1.2) need(at, message, enforced);
+  else warn(at, message);
+}
+const suffixOf = (id, suffixes) => suffixes.find((suffix) => id.endsWith(suffix));
+
+/**
+ * Règles propres aux niveaux B d'une activité (profil) : langue du titre, aide repliée des leçons de règle, longueur du
+ * texte principal et de l'écoute principale, prise de notes longue, questions d'inférence.
+ */
+function checkActivityB(at, activity, profile, keys, enforced) {
+  const id = activity.id ?? '';
+  const questions = activity.questions ?? [];
+  if (profile.language === 'de') {
+    const title = text(activity.title);
+    if (FRENCH_TITLE.test(title)) {
+      need(at, `titre en français (« ${clipText(title, 50)} ») : au B2, titre allemand (« Verstehen: … », « Üben: … », « Prüfen: … », « Mission: … »)`, enforced);
+    } else if (looksFrench(title)) warn(at, `titre en français ? (« ${clipText(title, 50)} ») : au B2, titre allemand`);
+  }
+  if (profile.foldAdvised && suffixOf(id, profile.foldAdvised.lessons ?? []) && !/(?:^| )\[fr\?\] /m.test(activity.lesson?.description ?? '')) {
+    warn(at, 'règle sans aide française repliée ([fr?]) conseillée');
+  }
+  if (profile.reading && suffixOf(id, profile.reading.suffixes)) {
+    const count = documentWords(activity.lesson?.description);
+    const [low, high] = profile.reading.words;
+    lengthRule(at, count, [low, high], `texte d’environ ${count} mots hors consignes : ${low} à ${high} attendus à ce niveau`, enforced);
+  }
+  const listening = profile.listening ? suffixOf(id, Object.keys(profile.listening)) : null;
+  if (listening) {
+    const sounds = (activity.placements ?? []).filter((placement) => placement.usage === 'audio' && !placement.questionId)
+      .map((placement) => keys.get(placement.media)).filter(Boolean).map(soundSeconds);
+    if (sounds.length && sounds.every(Boolean)) {
+      const seconds = Math.round(sounds.reduce((total, sound) => total + sound.seconds, 0));
+      const [low, high] = profile.listening[listening];
+      const how = sounds.some((sound) => sound.estimated) ? 'estimée d’après le script' : 'mesurée';
+      lengthRule(at, seconds, [low, high], `écoute de ${seconds} s (${how}) : ${low} à ${high} s attendues à ce niveau`, enforced);
+    }
+  }
+  const notes = profile.noteTaking;
+  if (notes && id.endsWith(notes.suffix)) {
+    const [fewest, most] = notes.blanks;
+    const found = questions.filter((question) => question.type === 'fill' && (question.blanks ?? []).length >= fewest
+      && (question.blanks ?? []).length <= most).length;
+    if (found < notes.fills) warn(at, `prise de notes : ${notes.fills} questions fill de ${fewest} à ${most} trous conseillées (actuellement ${found})`);
+  }
+  const inference = profile.inference;
+  if (inference && id.endsWith(inference.suffix)) {
+    const found = questions.filter((question) => questionType(question) === 'choice' && (question.options ?? []).length === 4).length;
+    if (found < inference.fourOptions) {
+      warn(at, `inférence et points de vue : ${inference.fourOptions} questions à choix à 4 options conseillées (actuellement ${found})`);
+    }
+  }
+}
+
 function checkModule(file, module, context) {
   const where = basename(file);
   const format = context.format ?? 3;
@@ -789,6 +1017,9 @@ function checkModule(file, module, context) {
   if (!ID.test(module.id ?? '') || module.id.length > 40) fail(where, 'identifiant de module invalide');
   if (context.moduleIds.has(module.id)) fail(where, `module « ${module.id} » en double`);
   sized(where, module.title, 3, 120, 'le titre');
+  if (format >= 5 && profile.language === 'de' && (FRENCH_TITLE.test(text(module.title)) || looksFrench(module.title))) {
+    warn(where, `titre de module en français ? (« ${clipText(text(module.title), 50)} ») : au B2, titre allemand`);
+  }
   sized(where, module.objective, 10, 500, 'l’objectif');
   if (!Array.isArray(module.sources) || module.sources.length === 0) fail(where, 'indiquer au moins une source');
   for (const prerequisite of module.prerequisites ?? []) {
@@ -829,7 +1060,8 @@ function checkModule(file, module, context) {
     const questions = activity.questions ?? [];
     if (activity.kind === 'exercise') {
       checkQuestions(at, questions, format >= 4
-        ? { min: profile.questions[0], max: profile.questions[1], typed: true, format, enforced, profile } : { min: 4, max: 8 });
+        ? { min: profile.questions[0], max: profile.questions[1], typed: true, format, enforced, profile, activityId: activity.id ?? '' }
+        : { min: 4, max: 8 });
       context.questions += questions.length;
     } else if (questions.length > 0) {
       fail(at, activity.kind === 'mission' ? 'une mission n’a pas de questions' : 'une leçon n’a pas de questions');
@@ -841,6 +1073,16 @@ function checkModule(file, module, context) {
       if (announce) fail(at, `le texte annonce un corrigé (« ${announce[0].trim()} ») : la correction s’affiche après la remise`);
       const offApp = OFF_APP.exec(`${lesson.description ?? ''}\n${JSON.stringify(activity.mission ?? '')}`);
       if (offApp && activity.kind !== 'exercise') warn(at, `consigne hors application (« ${offApp[0]} ») : à réécrire pour l’application`);
+      if (profile.language === 'de') {
+        // Consignes allemandes du B2 (description, énoncés, missions) : rien à faire sur papier ni avec un partenaire.
+        // Dans une description, seules les lignes de consigne comptent (glosées ou « … Sie ») : le document peut dire « zu zweit ».
+        const instructionLines = String(lesson.description ?? '').split('\n')
+          .filter((line) => hasMarker(line) || DOCUMENT_INSTRUCTION.test(line.trim()));
+        const shown = [...instructionLines, ...questions.map((question) => question.prompt), activity.mission?.oral?.prompt,
+          activity.mission?.written?.prompt, ...(activity.mission?.checklist ?? [])].map(germanPart).join('\n');
+        const german = GERMAN_OFF_APP.exec(shown);
+        if (german) need(at, `consigne hors application (« ${german[0]} ») : « Überlegen Sie sich Stichwörter », « Achten Sie auf … »`, enforced);
+      }
       if (activity.kind === 'mission') checkMission(at, activity, enforced, profile);
       else if (activity.mission !== undefined && activity.mission !== null) fail(at, 'seule une activité mission porte une mission');
       const speakOnly = activity.kind === 'exercise' && questions.length && questions.every((question) => question.type === 'speak');
@@ -850,6 +1092,7 @@ function checkModule(file, module, context) {
       }
       checkQuestionSupports(at, activity);
     }
+    if (format >= 5) checkActivityB(at, activity, profile, context.keys, enforced);
     checkPlacements(at, activity.placements, activity.questions, context.keys, used);
     const audio = (activity.placements ?? []).filter((placement) => placement.usage === 'audio');
     if (activity.competences?.includes('ecoute') && audio.length === 0) fail(at, 'une activité d’écoute a un son');
@@ -911,7 +1154,13 @@ function checkModuleCompleteness(where, module, context, enforced) {
     need(where, 'un exercice d’au moins 4 questions typées (fill, order, match ou dictation) attendu', enforced);
   }
   const drill = profile.speakDrill;
-  if (drill && inScope(drill.scope)) {
+  if (drill?.suffix && inScope(drill.scope)) {
+    // B2 : les répétitions sont dans une activité précise de l'atelier (-diskussion : choice et speak de 8 à 20 mots).
+    const [low, high] = drill.count;
+    const id = `${module.id}${drill.suffix}`;
+    const speaks = (exercises.find((activity) => activity.id === id)?.questions ?? []).filter((question) => question.type === 'speak').length;
+    if (speaks < low || speaks > high) need(where, `${id} : ${low} à ${high} questions speak attendues (actuellement ${speaks})`, enforced);
+  } else if (drill && inScope(drill.scope)) {
     const [low, high] = drill.count;
     const found = exercises.some((activity) => {
       const speaks = activity.questions.filter((question) => question.type === 'speak').length;
@@ -967,12 +1216,38 @@ function checkModuleCompleteness(where, module, context, enforced) {
   }
   if (format >= 5) {
     // La bonne réponse n'a pas de place prévisible : l'auteur la varie (choice() garde l'ordre donné).
-    const ranks = exercises.flatMap((activity) => activity.questions).filter((question) => question.type === 'choice')
-      .map((question) => (question.options ?? []).findIndex((option) => option.correct === true)).filter((rank) => rank >= 0);
+    const balance = profile.choiceBalance ?? { rankShare: 0.5 };
+    const choices = exercises.flatMap((activity) => activity.questions.map((question) => ({ activity, question })))
+      .filter(({ question }) => question.type === 'choice');
+    const ranks = choices.map(({ question }) => (question.options ?? []).findIndex((option) => option.correct === true)).filter((rank) => rank >= 0);
     const counts = ranks.reduce((total, rank) => ({ ...total, [rank]: (total[rank] ?? 0) + 1 }), {});
     const [rank, count] = Object.entries(counts).sort(([, left], [, right]) => right - left)[0] ?? [];
-    if (ranks.length >= 4 && count > ranks.length / 2) {
-      warn(where, `bonne réponse en position ${'abcd'[rank]} dans ${count} questions à choix sur ${ranks.length} : varier sa place`);
+    if (ranks.length >= 4 && count > ranks.length * balance.rankShare) {
+      warn(where, `bonne réponse en position ${'abcd'[rank]} dans ${count} questions à choix sur ${ranks.length} `
+        + `(${Math.round(balance.rankShare * 100)} % au plus) : varier sa place`);
+    }
+    // Longueur des options (hors vrai / faux / non mentionné) : la bonne réponse ne se repère pas à sa longueur.
+    const lengths = choices.map(({ activity, question }) => {
+      const options = question.options ?? [];
+      if (options.some((option) => TRUE_FALSE.test(text(option.label)))) return null;
+      const right = options.find((option) => option.correct === true);
+      const others = options.filter((option) => option !== right).map((option) => text(option.label).length);
+      if (!right || !others.length) return null;
+      const length = text(right.label).length;
+      const longest = Math.max(...others);
+      return { id: `${activity.id.slice(module.id.length + 1)}/${question.id}`, tooLong: length > longest * balance.lengthRatio && length - longest > 8,
+        longest: length > longest };
+    }).filter(Boolean);
+    if (balance.lengthRatio) {
+      const tooLong = lengths.filter((item) => item.tooLong).map((item) => item.id);
+      if (tooLong.length) {
+        warn(where, `bonne réponse plus de ${decimal(balance.lengthRatio)} fois plus longue que le plus long distracteur : ${listed(tooLong)}`);
+      }
+    }
+    const longest = lengths.filter((item) => item.longest).length;
+    if (balance.longestShare && lengths.length >= 6 && longest > lengths.length * balance.longestShare) {
+      warn(where, `bonne réponse strictement la plus longue dans ${longest} questions à choix sur ${lengths.length} `
+        + `(${Math.round(balance.longestShare * 100)} % au plus) : allonger des distracteurs`);
     }
   }
 }
@@ -1141,7 +1416,8 @@ function checkLevelV4(where, level, modules, context) {
   // Un titre ou une description qui cite des numéros de modules doit suivre le point de coupure (⌈n/2⌉).
   const bilan = (level.assessments ?? []).find((assessment) => assessment.kind === 'midterm');
   for (const [field, value] of partial ? [] : [['midtermTitle', bilan?.title], ['midtermDescription', bilan?.description]]) {
-    const range = /modules?\s+(\d+)\s*(?:à|-|–)\s*(\d+)/i.exec(value ?? '');
+    // « modules 1 à 12 » (B1) ou « Module 1 bis 12 » (titres allemands du B2).
+    const range = /modules?\s+(\d+)\s*(?:à|-|–|bis)\s*(\d+)/i.exec(value ?? '');
     if (range && Number(range[2]) !== midterm) {
       warn(`${where} › midterm`, `« ${range[0]} » alors que le bilan porte sur les modules 1 à ${midterm} : corriger ${field} dans _level.mjs`);
     }

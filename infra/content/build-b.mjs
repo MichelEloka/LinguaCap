@@ -7,7 +7,9 @@
 //   node infra/content/build-b.mjs --level b1                          content/de/b1 (modules périmés supprimés) et crédits
 //   node infra/content/build-b.mjs --level b1 --out target/b-preview    aperçu complet, sans toucher content/de
 //   node infra/content/build-b.mjs --level b1 --only b1-arbeit,b1-arbeit-atelier --out target/b-preview-r2
-//                                                                      aperçu partiel (level.json « partial: true »)
+//                                                                      aperçu partiel (level.json « partial: true ») ;
+//                                                                      les fautes de _level, _evaluations et _media n'y
+//                                                                      sont que des avertissements (fichiers d'un autre lot)
 //   options : --level (répétable ; défaut : tous les dossiers de content/b/source), --out <dossier>,
 //             --only <id,id…> (répétable, exige --out), --source <dossier> (défaut content/b/source), --quiet,
 //             --workbook <dossier> : cahier hors ligne <NIVEAU>.html (construction complète ; chemins des médias
@@ -98,8 +100,12 @@ function checkActivityShape(activity, at, report) {
   }
 }
 
-/** Sources d'un niveau : modules (tous, ou ceux de --only), _level.mjs, _evaluations.mjs et _media.mjs. */
-async function loadSources(directory, only, report) {
+/**
+ * Sources d'un niveau : modules (tous, ou ceux de --only), _level.mjs, _evaluations.mjs et _media.mjs. Les fautes des
+ * fichiers de niveau passent par levelReport : en aperçu partiel, ce sont des avertissements (un fichier en cours
+ * d'écriture chez le lot des médias et évaluations ne bloque pas un lot de rédaction).
+ */
+async function loadSources(directory, only, report, levelReport = report) {
   const modules = new Map();
   const files = readdirSync(directory).filter((name) => name.endsWith('.mjs')).sort();
   let levelSource = null;
@@ -115,21 +121,21 @@ async function loadSources(directory, only, report) {
       try {
         loaded = await importFile(file);
       } catch (error) {
-        report.fail(at, `lecture impossible (${error.message})`);
+        levelReport.fail(at, `lecture impossible (${error.message})`);
         continue;
       }
       if (name === '_level.mjs') {
-        if (!isObject(loaded.default)) report.fail(at, 'export par défaut : un objet { order, minutes, catalogue, settings… } attendu');
+        if (!isObject(loaded.default)) levelReport.fail(at, 'export par défaut : un objet { order, minutes, catalogue, settings… } attendu');
         else {
-          for (const key of unknownKeys(loaded.default, LEVEL_KEYS)) report.fail(at, `clé « ${key} » inconnue (${[...LEVEL_KEYS].join(', ')})`);
-          for (const key of unknownKeys(loaded.default.catalogue, CATALOGUE_KEYS)) report.fail(`${at} › catalogue`, `clé « ${key} » inconnue`);
+          for (const key of unknownKeys(loaded.default, LEVEL_KEYS)) levelReport.fail(at, `clé « ${key} » inconnue (${[...LEVEL_KEYS].join(', ')})`);
+          for (const key of unknownKeys(loaded.default.catalogue, CATALOGUE_KEYS)) levelReport.fail(`${at} › catalogue`, `clé « ${key} » inconnue`);
           levelSource = { ...loaded.default, where: at };
         }
       } else if (name === '_evaluations.mjs') {
-        for (const key of unknownKeys(loaded, EVALUATION_KEYS)) report.fail(at, `export « ${key} » inconnu (diagnostic, assessments, media)`);
+        for (const key of unknownKeys(loaded, EVALUATION_KEYS)) levelReport.fail(at, `export « ${key} » inconnu (diagnostic, assessments, media)`);
         evaluations = { diagnostic: loaded.diagnostic, assessments: loaded.assessments, media: loaded.media ?? [], where: at };
       } else {
-        if (!Array.isArray(loaded.default)) report.fail(at, 'export par défaut : une liste d’ajouts attendue');
+        if (!Array.isArray(loaded.default)) levelReport.fail(at, 'export par défaut : une liste d’ajouts attendue');
         else additions = loaded.default.map((entry, index) => ({ entry, at: `${at} › [${index}]` }));
       }
       continue;
@@ -225,15 +231,20 @@ export async function buildLevel(levelId, { sourceDir = join(root, 'content', 'b
     report.fail(where(directory), 'dossier de sources introuvable');
     return null;
   }
-  const { modules: sources, levelSource, evaluations, additions } = await loadSources(directory, only, report);
+  // Aperçu partiel (--only) : _level.mjs, _evaluations.mjs et _media.mjs peuvent être en cours d'écriture ou incomplets
+  // (titres du bilan et de l'examen sans _evaluations.mjs, ajout visant une activité pas encore écrite) ; leurs fautes
+  // deviennent des avertissements et l'élément fautif est ignoré. La construction complète reste stricte.
+  const levelReport = partial
+    ? { fail: (at, message) => report.warn(at, `${message} (ignoré dans l’aperçu partiel)`), warn: report.warn } : report;
+  const { modules: sources, levelSource, evaluations, additions } = await loadSources(directory, only, report, levelReport);
   const levelWhere = levelSource?.where ?? `${where(directory)}/_level.mjs`;
   if (!levelSource && !partial) report.fail(levelWhere, 'fichier de niveau manquant (ordre, budget, catalogue, réglages)');
   if (!evaluations && !partial) report.fail(`${where(directory)}/_evaluations.mjs`, 'diagnostic, bilan et examen blanc manquants');
 
   // Ordre du niveau : celui de _level.mjs (permutation exacte des modules en construction complète).
   const order = Array.isArray(levelSource?.order) ? levelSource.order : null;
-  if (levelSource && !order) report.fail(levelWhere, 'order : liste des modules attendue');
-  if (order && new Set(order).size !== order.length) report.fail(`${levelWhere} › order`, 'module en double');
+  if (levelSource && !order) levelReport.fail(levelWhere, 'order : liste des modules attendue');
+  if (order && new Set(order).size !== order.length) levelReport.fail(`${levelWhere} › order`, 'module en double');
   if (order && !partial) {
     const missing = order.filter((id) => !sources.has(id));
     const extra = [...sources.keys()].filter((id) => !order.includes(id));
@@ -249,7 +260,7 @@ export async function buildLevel(levelId, { sourceDir = join(root, 'content', 'b
   }
   const rank = new Map((order ?? ids).map((id, index) => [id, index + 1]));
 
-  mergeAdditions(additions, sources, partial, report);
+  mergeAdditions(additions, sources, partial, levelReport);
 
   const debutModules = levelSource?.audio?.debutModules ?? profile.audio?.debutModules ?? 0;
   const modules = ids.map((id, index) => {
@@ -291,9 +302,9 @@ export async function buildLevel(levelId, { sourceDir = join(root, 'content', 'b
     for (const [field, property] of [[`${kind}Title`, 'title'], [`${kind}Description`, 'description']]) {
       const value = levelSource?.[field];
       if (value === undefined) continue;
-      if (typeof value !== 'string' || !value.trim()) report.fail(`${levelWhere} › ${field}`, 'texte attendu');
+      if (typeof value !== 'string' || !value.trim()) levelReport.fail(`${levelWhere} › ${field}`, 'texte attendu');
       else if (assessment) assessment[property] = value.trim();
-      else if (evaluations) report.fail(`${levelWhere} › ${field}`, `évaluation ${kind} absente de _evaluations.mjs`);
+      else if (evaluations) levelReport.fail(`${levelWhere} › ${field}`, `évaluation ${kind} absente de _evaluations.mjs`);
     }
   }
   const minutes = levelSource?.minutes ?? profile.budget;

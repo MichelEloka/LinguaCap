@@ -31,6 +31,26 @@ export const match = (id, prompt, pairs, explanation) => ({ id, type: 'match', p
 export const dictation = (id, sentence, explanation, voice = 'sprecherin') => ({ id, type: 'dictation', prompt: C.diktat, accept: [].concat(sentence), voice, explanation });
 export const speak = (id, text, explanation, accept = [text]) => ({ id, type: 'speak', prompt: C.sprechen, text, accept, explanation });
 
+// Consignes standard (B2) : allemand, aide française repliée ([fr?] ; le marqueur [fr] est refusé au B2).
+export const C2 = {
+  lesen: aide('Lesen Sie den Text und beantworten Sie die Fragen.', 'Lisez le texte et répondez aux questions.'),
+  hoeren: aide('Hören Sie den Beitrag zuerst ganz. Lesen Sie dann die Aufgaben und hören Sie ein zweites Mal.', 'Écoutez d’abord le document en entier. Lisez ensuite les questions, puis écoutez une seconde fois.'),
+  notizen: aide('Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken mit Stichwörtern.', 'Écoutez et prenez des notes : complétez les trous avec des mots-clés.'),
+  richtigFalsch: aide('Richtig, falsch oder steht nicht im Text?', 'Vrai, faux ou non mentionné dans le texte ?'),
+  waehlen: aide('Wählen Sie die passende Antwort.', 'Choisissez la réponse qui convient.'),
+  ergaenzen: aide('Ergänzen Sie die Lücken.', 'Complétez les trous.'),
+  ordnen: aide('Bilden Sie einen Satz.', 'Remettez les mots dans l’ordre.'),
+  zuordnen: aide('Ordnen Sie zu.', 'Associez.'),
+  diktat: aide('Hören Sie und schreiben Sie den Satz.', 'Écoutez et écrivez la phrase.'),
+  sprechen: aide('Hören Sie und sprechen Sie nach.', 'Écoutez, puis répétez à voix haute.'),
+  reagieren: aide('Wie reagieren Sie? Wählen Sie die passende Antwort.', 'Comment réagissez-vous ? Choisissez la réponse qui convient.'),
+  argument: aide('Hören Sie das Argument. Welche Reaktion passt am besten?', 'Écoutez l’argument. Quelle réaction convient le mieux ?'),
+  wer: aide('Wer sagt das?', 'Qui dit cela ?'),
+};
+// Dictée et répétition du B2 : mêmes constructeurs, consigne C2 (aide repliée).
+export const dictationB2 = (id, sentence, explanation, voice = 'sprecherin') => ({ ...dictation(id, sentence, explanation, voice), prompt: C2.diktat });
+export const speakB2 = (id, text, explanation, accept = [text]) => ({ ...speak(id, text, explanation, accept), prompt: C2.sprechen });
+
 // Grilles standard des missions (20 points). À reprendre telles quelles ou à adapter dans chaque mission
 // (même identifiants, libellé précisé pour la tâche) : la construction les recopie, elles ne sont jamais modifiées ici.
 const frozen = (criteria) => Object.freeze(criteria.map((criterion) => Object.freeze({ ...criterion })));

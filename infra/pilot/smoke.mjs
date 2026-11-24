@@ -1159,19 +1159,27 @@ localSql(local.container, readFileSync(new URL('db-isolation.sql', import.meta.u
 console.log('Recette des comptes réussie · premier admin, invitations, réémission, annulation, expiration, équipe et permissions, '
   + 'correcteur, réaffectation, désactivation, événements et isolation des rôles SQL.');
 
-// --- Contenus A1, A2 et B1 : import, publication, parcours intensif accompagné et parcours autonome (incrément 9) ---
+// --- Contenus A1, A2, B1 (et B2) : import, publication, parcours intensif accompagné et parcours autonome (incrément 9) ---
 const { importContent } = await import('../content/import-content.mjs');
-const { availableLevels, loadLevel } = await import('../content/content-lib.mjs');
-assert.deepEqual(availableLevels(), ['a1', 'a2', 'b1'], 'Contenus construits : A1, A2 et B1 (content/de/b1, génération du lot S3)');
+const { availableLevels, loadLevel, loadPlacement } = await import('../content/content-lib.mjs');
+// Cours B, phase 2 : dès que content/de/b2 est construit (génération G2), le B2 est importé et publié comme les autres
+// niveaux ; avant, il reste au catalogue en brouillon et les attentes « B2 non publié » s'appliquent.
+const hasB2 = availableLevels().includes('b2');
+const builtLevels = hasB2 ? ['a1', 'a2', 'b1', 'b2'] : ['a1', 'a2', 'b1'];
+const publishedCodes = builtLevels.map((id) => id.toUpperCase());
+const listedCodes = `${publishedCodes.slice(0, -1).join(', ')} et ${publishedCodes.at(-1)}`;
+assert.deepEqual(availableLevels(), builtLevels, `Contenus construits : ${listedCodes} (content/de, générations des lots S3 et S5)`);
 const contentA1 = loadLevel('a1');
 const contentA2 = loadLevel('a2');
 const contentB1 = loadLevel('b1');
+const contentB2 = hasB2 ? loadLevel('b2') : null;
 const importState = join(tmpdir(), `linguacap-import-${suffix}.json`);
 const importStarted = Date.now();
 const imported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
   publish: true, statePath: importState, log: () => {} });
 const importSeconds = Math.round((Date.now() - importStarted) / 1000);
-assert.deepEqual(imported.map((result) => [result.levelId, result.published]), [['a1', true], ['a2', true], ['b1', true]]);
+assert.deepEqual(imported.map((result) => [result.levelId, result.published]), builtLevels.map((id) => [id, true]),
+  `Import et publication de ${listedCodes}`);
 const reimported = await importContent({ api: gateway + '/api/v1', token: staffToken, publishable: local.publishable,
   publish: true, statePath: importState, log: () => {} });
 assert.ok(reimported.every((result) => result.unchanged), 'Un second import reconnaît les médias et les versions déjà publiés');
@@ -1181,11 +1189,14 @@ const contentTracks = await api('/tracks', teacher.token);
 const trackA1 = contentTracks.find((track) => track.levelCode === 'A1');
 const trackA2 = contentTracks.find((track) => track.levelCode === 'A2');
 const trackB1 = contentTracks.find((track) => track.levelCode === 'B1');
+const trackB2 = hasB2 ? contentTracks.find((track) => track.levelCode === 'B2') : null;
 assert.equal(trackA1.versionId, imported[0].versionId, 'La version A1 importée est celle proposée à l’attribution');
 assert.equal(trackA2.versionId, imported[1].versionId);
 assert.equal(trackB1.versionId, imported[2].versionId);
+if (hasB2) assert.equal(trackB2?.versionId, imported[3].versionId, 'La version B2 importée est celle proposée à l’attribution');
 const activitiesOf = (level) => level.modules.flatMap((module) => module.activities);
-for (const [level, result] of [[contentA1, imported[0]], [contentA2, imported[1]], [contentB1, imported[2]]]) {
+for (const [level, result] of [[contentA1, imported[0]], [contentA2, imported[1]], [contentB1, imported[2]],
+  ...(hasB2 ? [[contentB2, imported[3]]] : [])]) {
   assert.ok(level.format >= 4, `Contenu V4 importé (${level.levelId})`);
   assert.deepEqual(activitiesOf(level).filter((activity) => activity.id.endsWith('-correction')).map((activity) => activity.id), [],
     'Aucune activité « -correction » : le corrigé s’affiche après la remise');
@@ -1217,13 +1228,46 @@ for (const activity of b1Missions) {
 for (const activity of b1Document.modules.flatMap((module) => module.activities).filter((item) => item.kind === 'exercise')) {
   for (const question of activity.questions) assert.ok(question.prompt.includes(' [fr] '), `${activity.id}/${question.id} : énoncé bilingue au catalogue`);
 }
+// B2 au format 5 (phase 2) : position 4 après le B1 prérequis, consignes en allemand avec aide française repliée ([fr?],
+// jamais [fr]), missions plus longues (écrit de 1 500 à 3 000 caractères, oral de 120 à 300 s) notées sur grille.
+let b2FoldedPrompts = 0;
+if (hasB2) {
+  assert.equal(contentB2.format, 5, 'Contenu B2 au format 5');
+  const b2Level = (await api('/catalogue/levels', staffToken)).find((level) => level.id === 'b2');
+  assert.deepEqual([b2Level.title, b2Level.position, b2Level.prerequisiteLevelId, b2Level.status],
+    [contentB2.catalogue.title, 4, 'b1', 'published'], 'Le niveau B2 du catalogue suit le bloc « catalogue » de level.json');
+  assert.equal(trackB2.prerequisiteLevelCode, 'B1', 'Le parcours B2 requiert le niveau B1');
+  assert.equal(trackB2.activityCount, activitiesOf(contentB2).length);
+  assert.equal(trackB2.totalMinutes, activitiesOf(contentB2).reduce((sum, activity) => sum + activity.estimatedMinutes, 0));
+  const b2Document = await api(`/catalogue/versions/${trackB2.versionId}`, staffToken);
+  assert.ok(!JSON.stringify(b2Document).includes('[fr]'), 'Aucune traduction affichée [fr] au B2 : l’aide française est repliée');
+  const b2Missions = b2Document.modules.flatMap((module) => module.activities).filter((activity) => activity.kind === 'mission');
+  assert.ok(b2Missions.length >= 24, `Missions B2 : ${b2Missions.length}`);
+  for (const activity of b2Missions) {
+    const criteria = activity.mission.criteria ?? [];
+    assert.ok([4, 5].includes(criteria.length) && criteria.reduce((sum, criterion) => sum + criterion.maxPoints, 0) === 20,
+      `Mission ${activity.id} : grille de 4 ou 5 critères sur 20 points`);
+    const { written, oral } = activity.mission;
+    if (written) {
+      assert.ok(written.maxChars >= 1500 && written.maxChars <= 3000 && written.minWords >= 100 && written.minWords <= 220,
+        `Mission ${activity.id} : écrit B2 (${written.maxChars} caractères, ${written.minWords} mots au moins)`);
+    }
+    if (oral) assert.ok(oral.maxSeconds >= 120 && oral.maxSeconds <= 300, `Mission ${activity.id} : oral B2 de ${oral.maxSeconds} s`);
+  }
+  for (const activity of b2Document.modules.flatMap((module) => module.activities).filter((item) => item.kind === 'exercise')) {
+    for (const question of activity.questions) if (question.prompt.includes(' [fr?] ')) b2FoldedPrompts++;
+  }
+  assert.ok(b2FoldedPrompts > 0, 'Des énoncés B2 portent l’aide française repliée [fr?]');
+  assert.deepEqual(loadPlacement().tiers.map((tier) => tier.code), ['A1', 'A2', 'B1', 'B2'],
+    'Le test de niveau livré avec le B2 a son palier B2 (content/de/placement/placement.json)');
+}
 
 // Corrigés lus dans les fichiers de contenu. Diagnostic et examens restent à choix unique : activité → question → bon choix.
 // Les exercices (questions typées, répétitions orales) sont répondus par smoke-answers.mjs à partir du contenu et de la vue.
 const keyOf = (questions) => Object.fromEntries((questions ?? []).map((question) =>
   [question.id, question.options.find((option) => option.correct).id]));
-const contentActivities = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2), ...activitiesOf(contentB1)]
-  .map((activity) => [activity.id, activity]));
+const contentActivities = new Map([...activitiesOf(contentA1), ...activitiesOf(contentA2), ...activitiesOf(contentB1),
+  ...(hasB2 ? activitiesOf(contentB2) : [])].map((activity) => [activity.id, activity]));
 const sourceOf = (activity) => {
   const source = contentActivities.get(activity.contentActivityId ?? activity.id);
   assert.ok(source, `Contenu connu pour ${activity.id}`);
@@ -1398,9 +1442,9 @@ try {
   localSql(local.container, `delete from tracking.goals where enrollment_id = '${previousGoal}';`);
 }
 assert.equal((await api('/learning/enrollment', a2Learner.token)).goal.status, 'validated');
-console.log(`Import des contenus : ${importSeconds} s pour A1, A2 et B1 (délai de la recette éphémère : 35 min).`);
-console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1, ${trackA2.activityCount} A2 `
-  + `et ${trackB1.activityCount} B1 `
+console.log(`Import des contenus : ${importSeconds} s pour ${listedCodes} (délai de la recette éphémère : 35 min).`);
+console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1, ${trackA2.activityCount} A2`
+  + `${hasB2 ? `, ${trackB1.activityCount} B1 et ${trackB2.activityCount} B2` : ` et ${trackB1.activityCount} B1`} `
   + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (débutant sans diagnostic, module déclaré acquis, deux séances par jour, retard '
   + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
 
@@ -1843,8 +1887,9 @@ console.log('Recette V4 réussie · corrigé par question sans fuite, quiz refus
   + 'auto-vérification, séance), lexiques et événements.');
 
 // --- Cours B1 : niveaux dynamiques, consignes bilingues, parcours A2 → B1, missions sur grille, test de niveau -------------
-// Le B1 importé plus haut (content/de/b1, format 5) est le vrai niveau publié ; B2 existe au catalogue en brouillon ; le
-// niveau de démonstration C1 de la recette a été retiré à la fin de la section des évaluations.
+// Le B1 importé plus haut (content/de/b1, format 5) est le vrai niveau publié ; le B2 l'est aussi dès que content/de/b2
+// existe (phase 2, section suivante), sinon il reste au catalogue en brouillon ; le niveau de démonstration C1 de la
+// recette a été retiré à la fin de la section des évaluations.
 const codesOf = (levels) => levels.map((level) => level.code);
 const glossedB1 = (prompt) => prompt.includes(' [fr] ') && !prompt.includes('[fr?]');
 
@@ -1855,8 +1900,9 @@ assert.equal(publicResponse.headers.get('cache-control'), 'public, max-age=300',
 const publicLanguages = await publicResponse.json();
 assert.deepEqual(publicLanguages.map((language) => language.id), ['de'], 'Seules les langues ayant un niveau publié sont listées');
 const publicGerman = publicLanguages[0].levels;
-assert.deepEqual(codesOf(publicGerman), ['A1', 'A2', 'B1'], 'A1, A2 et B1 publiés, dans l’ordre ; ni B2 (brouillon) ni le C1 retiré');
-assert.deepEqual(publicGerman.map((level) => level.position), [1, 2, 3]);
+assert.deepEqual(codesOf(publicGerman), publishedCodes,
+  `${listedCodes} publiés, dans l’ordre ; ${hasB2 ? 'ni le C1 retiré' : 'ni B2 (brouillon) ni le C1 retiré'}`);
+assert.deepEqual(publicGerman.map((level) => level.position), publishedCodes.map((_, index) => index + 1));
 assert.ok(publicGerman.every((level) => level.moduleCount > 0 && level.plannedMinutes > 0), 'Modules et durée prévue de chaque niveau');
 assert.deepEqual(Object.keys(publicGerman[2]).sort(), ['code', 'moduleCount', 'plannedMinutes', 'position', 'title'],
   'La route publique ne donne que des données publiques');
@@ -1876,22 +1922,35 @@ assert.deepEqual([languageB1.published, languageB1.position, languageB1.prerequi
 assert.equal(languageB1.plannedMinutes, plannedOf(contentB1), 'Durée prévue du B1 : activités, révisions, bilan et examen blanc');
 assert.equal(languageB1.moduleCount, contentB1.modules.length);
 assert.deepEqual([catalogueLevel('B2')?.published, catalogueLevel('B2')?.position, catalogueLevel('B2')?.prerequisiteCode],
-  [false, 4, 'B1'], 'B2 au catalogue, en brouillon');
+  [hasB2, 4, 'B1'], hasB2 ? 'B2 publié, en position 4, après B1' : 'B2 au catalogue, en brouillon');
+if (hasB2) {
+  assert.equal(catalogueLevel('B2').trackVersionId, trackB2.versionId);
+  assert.equal(catalogueLevel('B2').plannedMinutes, plannedOf(contentB2), 'Durée prévue du B2 : activités, révisions, bilan et examen blanc');
+  assert.equal(catalogueLevel('B2').moduleCount, contentB2.modules.length);
+}
 assert.equal(catalogueLevel(DEMO)?.published, false, 'Le niveau de démonstration retiré n’est plus publié');
 assert.deepEqual(germanCatalogue.placementTiers, ['A1', 'A2'], 'Paliers de la banque publiée (recette)');
 const learnerLevels = codesOf(await api('/levels', learnerToken));
-assert.ok(learnerLevels.includes('B1') && !learnerLevels.includes('B2') && !learnerLevels.includes(DEMO), 'Un élève ne voit que les niveaux ouverts');
+assert.ok(learnerLevels.includes('B1') && learnerLevels.includes('B2') === hasB2 && !learnerLevels.includes(DEMO),
+  'Un élève ne voit que les niveaux ouverts');
 
 // 3. Modèles de rythme : A1 et A2 calibrés, tout autre niveau selon la formule (minutes prévues × 1,25 / capacité / 4,345).
 const rhythmTemplates = await api('/learning/templates', learnerToken);
 const b1Months = {};
+const b2Months = {};
 for (const [id, weekly, a1Months, a2Months] of [['standard', 150, 5, 5], ['intensive', 630, 1, 2]]) {
   const model = rhythmTemplates.find((template) => template.id === id);
-  assert.deepEqual(model.durations.map((duration) => duration.levelCode), ['A1', 'A2', 'B1'], `${id} : une durée par niveau publié`);
+  assert.deepEqual(model.durations.map((duration) => duration.levelCode), publishedCodes, `${id} : une durée par niveau publié`);
   const months = Object.fromEntries(model.durations.map((duration) => [duration.levelCode, duration.months]));
   assert.deepEqual([months.A1, months.A2], [a1Months, a2Months], `${id} : durées A1 et A2 inchangées`);
   assert.equal(model.durations.find((duration) => duration.levelCode === 'B1').plannedMinutes, languageB1.plannedMinutes);
   assert.equal(months.B1, Math.max(1, Math.ceil((languageB1.plannedMinutes * 1.25) / weekly / 4.345)), `${id} : durée B1 selon la formule`);
+  if (hasB2) {
+    const plannedB2 = catalogueLevel('B2').plannedMinutes;
+    assert.equal(model.durations.find((duration) => duration.levelCode === 'B2').plannedMinutes, plannedB2);
+    assert.equal(months.B2, Math.max(1, Math.ceil((plannedB2 * 1.25) / weekly / 4.345)), `${id} : durée B2 selon la formule`);
+    b2Months[id] = months.B2;
+  }
   assert.ok(typeof model.a1Duration === 'string' && typeof model.a2Duration === 'string', 'Les anciens champs restent servis');
   b1Months[id] = months.B1;
 }
@@ -1931,9 +1990,11 @@ const b1Learner = await createAccount('b1-parcours', 'learner', teacher.id);
 localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b1Learner.id}';`);
 const b1Estimate = await post('/learning/paths/estimate', b1Learner.token,
   { startLevel: 'A2', targetLevel: 'B1', startDate: inDays(1), targetDate: inDays(240) });
-assert.deepEqual(b1Estimate.allowedTargets, ['B1'], 'Depuis A2 : B1 seulement, B2 n’est pas publié');
+assert.deepEqual(b1Estimate.allowedTargets, hasB2 ? ['B1', 'B2'] : ['B1'],
+  hasB2 ? 'Depuis A2 : B1 puis B2, tous deux publiés' : 'Depuis A2 : B1 seulement, B2 n’est pas publié');
 assert.deepEqual(b1Estimate.levels.map((level) => [level.levelCode, level.trackVersionId]), [['B1', trackB1.versionId]]);
-await post('/learning/paths/estimate', b1Learner.token, { startLevel: 'B1', targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(240) }, 409);
+// B2 non publié : aucune estimation vers B2 (la section B2 vérifie le cas publié).
+if (!hasB2) await post('/learning/paths/estimate', b1Learner.token, { startLevel: 'B1', targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(240) }, 409);
 await post('/learning/enrollments', otherTeacher.token, { learnerId: b1Learner.id, trackVersionId: trackB1.versionId, startLevel: 'A2',
   template: 'standard', startDate: inDays(1) }, 403);
 const b1Course = await post('/learning/enrollments', teacher.token, { learnerId: b1Learner.id, trackVersionId: trackB1.versionId,
@@ -2049,34 +2110,194 @@ await post(`/assessments/missions/${a2Sent.id}/review`, teacher.token, { decisio
 const a2Reviewed = await post(`/assessments/missions/${a2Sent.id}/review`, teacher.token, { decision: 'validated', comment: 'Bien.' });
 assert.deepEqual([a2Reviewed.review.points, a2Reviewed.review.score, a2Reviewed.review.maxScore], [null, null, null], 'Retour A2 inchangé');
 
-// 7. Test de niveau à trois paliers : B1 réussi, B2 annoncé « bientôt » et jamais comme ouvert.
+// 7. Test de niveau : un palier par niveau publié (A1, A2, B1, puis B2 en phase 2). Sans B2 publié, B1 réussi et B2
+//    annoncé « bientôt », jamais comme ouvert ; avec B2, quatre paliers réussis donnent B2, et un élève qui échoue au
+//    palier B2 est placé en B1 avec le B2 annoncé comme ouvert.
+const tierCodes = publishedCodes;
 const tieredBank = await post('/catalogue/placement-tests', staffToken, { languageId: 'de' }, 201);
 const tieredSaved = await put(`/catalogue/placement-tests/${tieredBank.id}`, staffToken,
-  { title: 'Test de niveau de recette (trois paliers)', description: 'Trois paliers de lecture.', tiers: [bankTier('A1'), bankTier('A2'), bankTier('B1')] });
+  { title: `Test de niveau de recette (${tierCodes.length} paliers)`, description: 'Un palier de lecture par niveau publié.',
+    tiers: tierCodes.map((code) => bankTier(code)) });
 assert.equal(tieredSaved.checks.publishable, true, JSON.stringify(tieredSaved.checks.issues));
 await post(`/catalogue/placement-tests/${tieredBank.id}/publish`, staffToken);
-assert.deepEqual((await api('/languages', teacher.token)).find((language) => language.id === 'de').placementTiers, ['A1', 'A2', 'B1'],
+assert.deepEqual((await api('/languages', teacher.token)).find((language) => language.id === 'de').placementTiers, tierCodes,
   'Les paliers suivent la banque publiée');
-const tierLearner = await createAccount('b1-test-niveau', 'learner', null);
-await put('/me/language', tierLearner.token, { languageId: 'de' });
-let tiered = await post('/assessments/placements', tierLearner.token, {}, 201);
-for (const code of ['A1', 'A2', 'B1']) {
-  assert.equal(tiered.currentTier, code);
-  tiered = await api(`/assessments/placements/${tiered.id}/submit`, tierLearner.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
-    body: { tier: code, answers: Object.fromEntries(tiered.questions.map((question) => [question.id, 'a'])) } });
+/** Passe le test de niveau à paliers : chaque palier réussi (choix « a »), sauf ceux de `failed` (choix « b »). */
+const takePlacement = async (label, failed = []) => {
+  const learner = await createAccount(label, 'learner', null);
+  await put('/me/language', learner.token, { languageId: 'de' });
+  let attempt = await post('/assessments/placements', learner.token, {}, 201);
+  const seen = [];
+  while (attempt.status === 'in_progress') {
+    const code = attempt.currentTier;
+    seen.push(code);
+    assert.equal(code, tierCodes[seen.length - 1], 'Les paliers se suivent dans l’ordre du test');
+    attempt = await api(`/assessments/placements/${attempt.id}/submit`, learner.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+      body: { tier: code, answers: Object.fromEntries(attempt.questions.map((question) => [question.id, failed.includes(code) ? 'b' : 'a'])) } });
+  }
+  return attempt;
+};
+const tiered = await takePlacement('b1-test-niveau');
+assert.deepEqual([tiered.status, tiered.result.placedLevel], ['completed', tierCodes.at(-1)], `${tierCodes.length} paliers réussis : niveau ${tierCodes.at(-1)}`);
+if (!hasB2) {
+  assert.match(tiered.result.summary, /B2 arrive bientôt/, 'Le niveau suivant non publié est annoncé « bientôt »');
+  assert.doesNotMatch(tiered.result.summary, /commencer au niveau B2/, 'B2 n’est jamais présenté comme ouvert');
+} else {
+  assert.match(tiered.result.summary, /jusqu.à B2/, 'Quatre paliers réussis : le résumé annonce le niveau B2');
+  assert.doesNotMatch(tiered.result.summary, /B2 arrive bientôt/, 'Le B2 publié n’est plus annoncé « bientôt »');
+  const stoppedAtB2 = await takePlacement('b2-test-niveau', ['B2']);
+  assert.deepEqual([stoppedAtB2.status, stoppedAtB2.result.placedLevel], ['completed', 'B1'], 'Palier B2 échoué : niveau B1');
+  assert.match(stoppedAtB2.result.summary, /peut commencer au niveau B2/, 'Le B2 publié est annoncé comme ouvert après le palier B1');
 }
-assert.deepEqual([tiered.status, tiered.result.placedLevel], ['completed', 'B1'], 'Trois paliers réussis : niveau B1');
-assert.match(tiered.result.summary, /B2 arrive bientôt/, 'Le niveau suivant non publié est annoncé « bientôt »');
-assert.doesNotMatch(tiered.result.summary, /commencer au niveau B2/, 'B2 n’est jamais présenté comme ouvert');
 
 // 8. Indicateurs : filtre B1 accepté, parcours B1 comptés.
 await runJob();
 const b1Kpis = await api('/tracking/kpis' + horizon + '&level=B1', admin.token);
 assert.ok(b1Kpis.goals >= 1, 'Les parcours B1 de la recette sont comptés');
-console.log(`Recette B1 réussie · route publique (A1, A2, B1) mise en cache, niveaux dynamiques (B2 en brouillon, C1 retiré), durées B1 de `
+console.log(`Recette B1 réussie · route publique (${publishedCodes.join(', ')}) mise en cache, niveaux dynamiques `
+  + `(${hasB2 ? 'B2 publié' : 'B2 en brouillon'}, C1 retiré), durées B1 de `
   + `${b1Months.standard} mois en standard et ${b1Months.intensive} en intensif, ${glossedPrompts} énoncés bilingues sans corrigé, prérequis A2 par `
   + `le diagnostic, ${b1Worked} séances B1 justes (répétitions, dictées, missions), étapes A1 → B1 au prérequis du catalogue, écrit noté 18/20 sur `
-  + `grille (refus contrôlés), oral de ${oralB1.mission.oral.maxSeconds} s, mission A2 inchangée, test de niveau B1 et indicateurs B1.`);
+  + `grille (refus contrôlés), oral de ${oralB1.mission.oral.maxSeconds} s, mission A2 inchangée, test de niveau à `
+  + `${tierCodes.length} paliers et indicateurs B1.`);
+
+// --- Cours B2 (phase 2) : quatre niveaux publiés, aide française repliée, parcours B1 → B2, missions B2 sur grille -------
+// Joué dès que content/de/b2 est construit et importé (génération G2) ; les attentes générales (route publique, catalogue,
+// modèles de rythme, test de niveau à quatre paliers) sont vérifiées plus haut.
+if (hasB2) {
+  const noBesideGloss = (prompt) => !prompt.includes('[fr]');
+  // 1. Bibliothèque B2 : énoncés transmis tels quels, jamais de traduction affichée [fr], aucun corrigé, grille avant la remise.
+  const b2Reader = await createAccount('b2-lecteur', 'learner', teacher.id);
+  localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b2Reader.id}';`);
+  const readerB2 = (await api('/learning/library', b2Reader.token)).levels.find((level) => level.levelCode === 'B2');
+  assert.equal(readerB2?.trackVersionId, trackB2.versionId, 'La bibliothèque propose le B2 publié');
+  assert.deepEqual(readerB2.modules.map((module) => module.id), contentB2.modules.map((module) => module.id));
+  let servedB2 = 0;
+  let foldedB2 = 0;
+  for (const module of readerB2.modules) {
+    assert.ok(module.vocabularyCount > 0, `Lexique annoncé pour ${module.id}`);
+    for (const [index, item] of module.activities.filter((activity) => activity.kind !== 'lesson').entries()) {
+      const served = await api(`/learning/library/${trackB2.versionId}/activities/${item.id}`, b2Reader.token);
+      assertNoLeak([served], `Bibliothèque B2 (${item.id})`);
+      const source = contentActivities.get(item.id);
+      for (const question of served.questions) {
+        assert.equal(question.prompt, source.questions.find((entry) => entry.id === question.id).prompt, `${item.id}/${question.id} : énoncé transmis tel quel`);
+        assert.ok(noBesideGloss(question.prompt), `${item.id}/${question.id} : au B2, aide repliée [fr?] et jamais [fr]`);
+        servedB2++;
+        if (question.prompt.includes(' [fr?] ')) foldedB2++;
+      }
+      if (served.kind === 'mission') {
+        const grid = served.mission?.criteria ?? [];
+        assert.ok([4, 5].includes(grid.length) && grid.reduce((sum, criterion) => sum + criterion.maxPoints, 0) === 20,
+          `${item.id} : grille de 20 points servie avant la remise`);
+        assert.ok(grid.every((criterion) => noBesideGloss(criterion.label)), `${item.id} : grille B2 en allemand, aide repliée`);
+        assert.ok(!JSON.stringify(served).includes('"points"'), `${item.id} : aucun point avant le retour`);
+      }
+      if (index === 0) assert.deepEqual(leaks((await api(`/lessons/${item.lessonId}`, b2Reader.token)).questions), [], `Aperçu de ${item.id} sans corrigé`);
+    }
+  }
+  assert.ok(servedB2 >= 300 && foldedB2 > 0, `Énoncés B2 contrôlés : ${servedB2}, dont ${foldedB2} avec l’aide repliée`);
+
+  // 2. Parcours B1 → B2 : estimation, attribution avec le prérequis B1 confirmé par le diagnostic, séances B2 travaillées.
+  const b2Learner = await createAccount('b2-parcours', 'learner', teacher.id);
+  localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b2Learner.id}';`);
+  const b2Estimate = await post('/learning/paths/estimate', b2Learner.token,
+    { startLevel: 'B1', targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(240) });
+  assert.deepEqual(b2Estimate.allowedTargets, ['B2'], 'Depuis B1 : B2');
+  assert.deepEqual(b2Estimate.levels.map((level) => [level.levelCode, level.trackVersionId]), [['B2', trackB2.versionId]]);
+  const twoLevels = await post('/learning/paths/estimate', b2Learner.token,
+    { startLevel: 'A2', targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(540) });
+  assert.deepEqual(twoLevels.levels.map((level) => level.levelCode), ['B1', 'B2'], 'Depuis A2 : B1 puis B2');
+  const b2Course = await post('/learning/enrollments', teacher.token, { learnerId: b2Learner.id, trackVersionId: trackB2.versionId,
+    startLevel: 'B1', template: 'standard', startDate: inDays(1) }, 201);
+  assert.deepEqual([b2Course.goal.prerequisiteLevel, b2Course.goal.prerequisiteMet], ['B1', false], 'Le B2 exige le B1 : à confirmer par le diagnostic');
+  assert.ok(contentB2.diagnostic.questions.some((question) => question.moduleRef === 'prerequis'), 'Le diagnostic B2 évalue les acquis B1');
+  const b2Diagnostic = await api(goalPath(b2Course.id, 'diagnostic'), b2Learner.token);
+  const b2DiagnosticGrade = await api('/assessments/diagnostics', b2Learner.token, { method: 'POST',
+    headers: { 'Idempotency-Key': randomUUID() }, body: { lessonId: b2Diagnostic.lessonId, answers: diagnosticAnswers(contentB2, ['prerequis']) } });
+  const b2Diagnosed = await post(goalPath(b2Course.id, 'diagnostic'), b2Learner.token, { attemptId: b2DiagnosticGrade.id });
+  assert.equal(b2Diagnosed.goal.diagnosticPrerequisite, true, 'Le diagnostic confirme les acquis B1');
+  // Élève suivi : le diagnostic propose, le référent confirme le point de départ.
+  const b2Confirmed = await put(goalPath(b2Course.id, 'starting-point'), teacher.token,
+    { acquiredModules: b2Diagnosed.goal.diagnosticModules ?? [], prerequisiteMet: true });
+  assert.equal(b2Confirmed.goal.prerequisiteMet, true, 'Le référent confirme le prérequis B1');
+  const b2Proposal = await api(goalPath(b2Course.id, 'proposal'), teacher.token);
+  assert.equal(b2Proposal.overflowCount, 0, 'Le B2 tient dans la durée conseillée du modèle standard');
+  const b2Plan = await post(goalPath(b2Course.id, 'proposal/validate'), teacher.token, { number: b2Proposal.number });
+  assert.equal(b2Plan.goal.status, 'active');
+  await checkSupports(await api(`/learning/sessions/${b2Plan.sessions[0].id}`, b2Learner.token));
+  const b2Types = new Set();
+  let b2Worked = 0;
+  for (const session of b2Plan.sessions) {
+    if (b2Types.has('speak') || b2Worked >= 14) break;
+    const before = await api(`/learning/sessions/${session.id}`, b2Learner.token);
+    if (before.activities.some((activity) => activity.kind === 'assessment')) continue;
+    for (const activity of before.activities) {
+      for (const question of activity.questions ?? []) assert.ok(noBesideGloss(question.prompt), `Séance B2 : ${activity.id}/${question.id} sans [fr]`);
+    }
+    const worked = await workSession(session.id, b2Learner.token);
+    assert.equal(worked.session.status, 'completed', `Séance B2 ${session.id} terminée`);
+    for (const activity of worked.activities.filter((item) => item.kind === 'exercise')) {
+      for (const question of sourceOf(activity).questions ?? []) b2Types.add(question.type ?? 'choice');
+    }
+    b2Worked++;
+  }
+  assert.ok(b2Types.has('speak'), `Séances B2 travaillées (${b2Worked}) : répétitions de la discussion réussies (seuil 70)`);
+
+  // 3. Parcours A0 → B2 en quatre étapes : le prérequis de chaque étape vient du catalogue.
+  const b2StepLearner = await createAccount('b2-etapes', 'learner', teacher.id);
+  localSql(local.container, `update identity.profiles set language_id = 'de' where id = '${b2StepLearner.id}';`);
+  const b2Beginner = await post('/assessments/placements', b2StepLearner.token, { declaredBeginner: true }, 201);
+  const b2Path = await post('/learning/paths', b2StepLearner.token,
+    { placementAttemptId: b2Beginner.id, targetLevel: 'B2', startDate: inDays(1), targetDate: inDays(760) }, 201);
+  assert.deepEqual(b2Path.steps.map((step) => step.levelCode), ['A1', 'A2', 'B1', 'B2'], 'Parcours A1 → B2 en quatre étapes');
+  const b2PathProposal = await put(`/learning/paths/${b2Path.id}/availability`, b2StepLearner.token, { days: fiveDays(60) });
+  assert.deepEqual(b2PathProposal.levels.map((level) => level.levelCode), ['A1', 'A2', 'B1', 'B2']);
+
+  // 4. Missions B2 : écrit de plus de 1 500 caractères accepté et noté sur grille, oral long.
+  const missionsB2 = activitiesOf(contentB2).filter((activity) => activity.kind === 'mission');
+  for (const module of contentB2.modules.filter((item) => item.id.endsWith('-atelier'))) {
+    assert.deepEqual(module.activities.filter((activity) => activity.kind === 'mission').map((activity) => activity.id.split('-').at(-1)).sort(),
+      ['schreiben', 'sprechen'], `${module.id} : une mission écrite et une mission orale`);
+  }
+  const writtenB2 = missionsB2.filter((activity) => activity.mission.written && !activity.mission.oral)
+    .sort((a, b) => b.mission.written.maxChars - a.mission.written.maxChars)[0];
+  const oralB2 = missionsB2.filter((activity) => activity.mission.oral && !activity.mission.written)
+    .sort((a, b) => b.mission.oral.maxSeconds - a.mission.oral.maxSeconds)[0];
+  assert.ok(writtenB2 && oralB2, 'Missions écrites et orales B2');
+  const b2Draft = await post('/assessments/missions', b2Learner.token, { trackVersionId: trackB2.versionId, activityId: writtenB2.id }, 201);
+  assert.deepEqual([b2Draft.review, b2Draft.definition.criteria], [null, writtenB2.mission.criteria], 'La grille B2 est figée dans la remise');
+  const maxChars = writtenB2.mission.written.maxChars;
+  await put(`/assessments/missions/${b2Draft.id}`, b2Learner.token, { text: 'x'.repeat(maxChars + 1) }, 400);
+  const longText = 'Ich halte diese Lösung für sinnvoll. '.repeat(Math.floor(maxChars / 37)).trim();
+  assert.ok(longText.length > 1500 || maxChars < 1540, 'Texte de recette au-delà de l’ancienne limite de 1 500 caractères');
+  await put(`/assessments/missions/${b2Draft.id}`, b2Learner.token, { text: longText });
+  const b2Sent = await completeMission({ api, token: b2Learner.token, mission: b2Draft });
+  assert.deepEqual([b2Sent.status, b2Sent.reviewerKind], ['submitted', 'teacher'], 'L’écrit B2 arrive chez le référent');
+  const b2Grid = b2Draft.definition.criteria;
+  const b2Points = Object.fromEntries(b2Grid.map((criterion, index) => [criterion.id, criterion.maxPoints - (index === 0 ? 3 : 0)]));
+  await post(`/assessments/missions/${b2Draft.id}/review`, teacher.token, { decision: 'validated', comment: 'Gut.' }, 400);
+  const b2Reviewed = await post(`/assessments/missions/${b2Draft.id}/review`, teacher.token,
+    { decision: 'validated', comment: 'Stärken: klarer Aufbau.\nNoch üben: Konnektoren (St).\nRückfrage: Welches Beispiel überzeugt Sie am meisten?', points: b2Points });
+  assert.deepEqual([b2Reviewed.review.score, b2Reviewed.review.maxScore], [17, 20], 'Écrit B2 noté 17/20 sur la grille');
+  assert.deepEqual((await api(`/assessments/missions/${b2Draft.id}`, b2Learner.token)).review.points, b2Points, 'L’élève voit ses points');
+  const b2Oral = await sendMission({ api, token: b2Learner.token, upload: uploadRecording(b2Learner.token),
+    open: { trackVersionId: trackB2.versionId, activityId: oralB2.id } });
+  assert.deepEqual([b2Oral.status, b2Oral.definition.oral.maxSeconds, b2Oral.definition.criteria.length],
+    ['submitted', oralB2.mission.oral.maxSeconds, oralB2.mission.criteria.length], 'L’oral B2 enregistré part chez le référent avec sa grille');
+
+  // 5. Indicateurs : filtre B2 accepté, parcours B2 comptés.
+  await runJob();
+  const b2Kpis = await api('/tracking/kpis' + horizon + '&level=B2', admin.token);
+  assert.ok(b2Kpis.goals >= 1, 'Les parcours B2 de la recette sont comptés');
+  console.log(`Recette B2 réussie · quatre niveaux publiés (route publique, catalogue, durées B2 de ${b2Months.standard} mois en standard `
+    + `et ${b2Months.intensive} en intensif), ${servedB2} énoncés B2 sans [fr] ni corrigé (${foldedB2} avec l’aide repliée, `
+    + `${b2FoldedPrompts} au catalogue), prérequis B1 par le diagnostic, ${b2Worked} séances B2 justes (répétitions de la `
+    + `discussion), étapes A1 → B2, écrit de ${longText.length} caractères noté 17/20, oral de ${oralB2.mission.oral.maxSeconds} s, `
+    + 'test de niveau à quatre paliers (B2, et B1 avec B2 ouvert) et indicateurs B2.');
+} else {
+  console.log('Recette B2 non jouée : content/de/b2 n’est pas encore construit (le B2 reste au catalogue en brouillon).');
+}
 
 // --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
 
@@ -2359,12 +2580,18 @@ if (process.argv.includes('--browser')) {
     await welcome.getByRole('link', { name: 'Aller à mon accueil' }).click();
     await expect(welcome).toHaveURL(/\/espace$/);
     await expect(welcome.getByRole('navigation', { name: 'Raccourcis mobiles' }).getByRole('link', { name: /^Bibliothèque/ })).toBeVisible();
-    // Niveaux dynamiques : la bibliothèque ouvre l'onglet B1 publié et montre B2 (brouillon du catalogue) « Bientôt ».
+    // Niveaux dynamiques : la bibliothèque ouvre l'onglet B1 publié et montre B2 « Bientôt » tant qu'il est en brouillon,
+    // comme un onglet ouvert dès qu'il est publié (phase 2).
     await welcome.getByRole('navigation', { name: 'Raccourcis mobiles' }).getByRole('link', { name: /^Bibliothèque/ }).click();
     await expect(welcome.getByRole('button', { name: /B1/ }).first()).toBeVisible({ timeout: 15_000 });
-    await expect(welcome.locator('.lib-level.is-soon').filter({ hasText: 'B2' })).toContainText('Bientôt');
+    if (hasB2) {
+      await expect(welcome.getByRole('button', { name: /B2/ }).first()).toBeVisible({ timeout: 15_000 });
+      await expect(welcome.locator('.lib-level.is-soon').filter({ hasText: 'B2' })).toHaveCount(0);
+    } else {
+      await expect(welcome.locator('.lib-level.is-soon').filter({ hasText: 'B2' })).toContainText('Bientôt');
+    }
     console.log('Recette navigateur réussie · accueil de l’élève autonome sur mobile : langue, test à paliers, niveau, objectif, jours, planning, '
-      + 'départ, bibliothèque avec l’onglet B1 et B2 « Bientôt ».');
+      + `départ, bibliothèque avec ${hasB2 ? 'les onglets B1 et B2 ouverts' : 'l’onglet B1 et B2 « Bientôt »'}.`);
 
     // (b) Nouveau professeur : questionnaire d'accueil en plein écran jusqu'à « Valider mon profil ».
     const newTeacher = await createStaff('navigateur-prof', 'teacher');
@@ -2385,7 +2612,8 @@ if (process.argv.includes('--browser')) {
     await expect(questionnaire.getByRole('heading', { name: 'Tout est prêt ?' })).toBeHidden({ timeout: 15_000 });
     const savedProfile = (await api('/me', newTeacher.token)).teacherProfile;
     assert.ok(savedProfile.onboardedAt, 'Le questionnaire est enregistré');
-    assert.deepEqual([savedProfile.languages, savedProfile.levels], [['de'], ['A1', 'A2', 'B1']]);
+    // Niveaux proposés par défaut : ceux dont le parcours est publié (A1, A2, B1, puis B2).
+    assert.deepEqual([savedProfile.languages, savedProfile.levels], [['de'], publishedCodes]);
     assert.equal(savedProfile.acceptingNewStudents, true);
     assert.equal(savedProfile.courseCreationMode, 'linguacap');
     console.log('Recette navigateur réussie · questionnaire d’accueil d’un nouveau professeur sur mobile.');

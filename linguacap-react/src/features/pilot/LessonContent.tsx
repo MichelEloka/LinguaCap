@@ -197,17 +197,19 @@ export function parseLesson(text: string): Block[] {
       continue;
     }
     if (/^[•·▪-]\s/.test(line)) {
-      flush();
       const items = line.split(/\s+[•·▪]\s+/).map((item) => item.replace(/^[•·▪-]\s*/, '').trim()).filter(Boolean);
       const last = items.length - 1;
       const pairs = items.map(pairOf);
-      if (!entry.instruction && pairs.every(Boolean)) push({ kind: 'vocab', pairs: pairs as Pair[], glossary });
+      if (!entry.instruction && pairs.every(Boolean)) { flush(); push({ kind: 'vocab', pairs: pairs as Pair[], glossary }); }
       else if (calloutTitle !== null) {
+        // Puce d'un encadré (« MERKE », « REGEL », « À RETENIR »…) : elle reste dans le même encadré, sous son titre.
         paragraph.push(...items.map((item, index) => ({ text: `• ${item}`, gloss: index === last ? entry.gloss : undefined, instruction: entry.instruction })));
-      } else push({ kind: 'bullets', items: items.map((item, index) => ({ text: item, gloss: index === last ? entry.gloss : undefined })) });
+      } else { flush(); push({ kind: 'bullets', items: items.map((item, index) => ({ text: item, gloss: index === last ? entry.gloss : undefined })) }); }
       continue;
     }
     const step = line.match(/^(\d+)[.)]\s+(.+)$/);
+    // Étapes d'un encadré (« STRATEGIE » puis « 1. … », « 2. … ») : numérotées dans l'encadré, qui garde son titre.
+    if (step && calloutTitle !== null) { paragraph.push({ ...entry, text: `${step[1]}. ${step[2]}` }); continue; }
     if (step) { flush(); push({ kind: 'steps', items: [{ text: step[2], gloss: entry.gloss }] }); continue; }
     const cue = line.match(CUES);
     if (cue) {

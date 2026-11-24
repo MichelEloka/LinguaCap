@@ -67,6 +67,9 @@ Supports (`placements`) : `{ media, caption?, alt?, usage?, transcriptVisibility
 | `dictation(id, phrase, explanation, voix = 'sprecherin')` | consigne `C.diktat` ; passez une voix (`'mann2'`, `'frau2'`…) pour varier |
 | `speak(id, texte, explanation, accept = [texte])` | consigne `C.sprechen` ; ajoutez la variante en chiffres si le texte contient un nombre |
 | `GRIDS.b1.schreiben`, `GRIDS.b1.sprechen` | grilles standard des missions (4 critères × 5 points, 5 critères × 4 points) |
+| `C2.lesen`, `C2.hoeren`, `C2.notizen`, `C2.richtigFalsch`, `C2.waehlen`, `C2.ergaenzen`, `C2.ordnen`, `C2.zuordnen`, `C2.diktat`, `C2.sprechen`, `C2.reagieren`, `C2.argument`, `C2.wer` | consignes standard du **B2** (allemand, aide repliée `[fr?]`) |
+| `speakB2(…)`, `dictationB2(…)` | mêmes arguments que `speak` et `dictation`, consigne `C2` : **au B2, jamais `speak()` ni `dictation()`**, dont la consigne porte `[fr]` (refusé) |
+| `GRIDS.b2.schreiben`, `GRIDS.b2.sprechen` | grilles B2, libellés allemands avec aide `[fr?]` |
 
 Une grille s’adapte en gardant ses identifiants et son total de 20 points : `criteria: GRIDS.b1.schreiben.map((c) => c.id === 'aufgabe' ? { ...c, label: 'Tâche : candidature complète (motif, deux compétences, disponibilité)' } : c)`. Les objets de `GRIDS` sont figés : on ne les modifie pas en place.
 
@@ -84,7 +87,7 @@ Lesen Sie zuerst nur die Überschrift und den ersten Absatz.
 
 - Un seul marqueur par ligne ; ni partie allemande ni partie française vide ; graphie exacte `[fr]` ou `[fr?]` (pas `[FR]`, `[fr ]`).
 - **B1** : `[fr]` obligatoire dans chaque énoncé de question (`prompt`) ; `[fr?]` interdit ; une ligne de consigne qui commence par `Lesen Sie`, `Hören Sie`, `Ergänzen Sie`, `Ordnen Sie`… (description, consigne de partie, consigne de mission) porte sa traduction. Explications, règles (`À RETENIR`) et titres d’activité en français (« Comprendre : … », « S’entraîner : … », « Vérifier : … », « Mission : … »).
-- **B2** : `[fr]` interdit, `[fr?]` conseillé sur les énoncés et les explications de `-grammatik` ; titres en allemand.
+- **B2** : `[fr]` interdit, `[fr?]` conseillé sur les énoncés, les explications de `-entdecken` et `-grammatik`, la règle `-regel`, les consignes, listes et grilles des missions ; consignes, règles, explications et titres en allemand (voir « Niveau B2 » ci-dessous).
 - **Champs où un marqueur est permis** : `prompt` des questions, `lesson.description`, `mission.oral.prompt`, `mission.written.prompt`, `mission.checklist[]`, `mission.criteria[].label`, consignes et descriptions du diagnostic et des évaluations (et `explanation` au B2 seulement). **Interdit** partout ailleurs : titres, objectif, choix et retours, réponses (`accept`, `answers`, `pairs`, `blanks`, `text` des trous et des répétitions), scripts des sons, lexique, `alt`, `caption`.
 - Dans une description, le texte allemand à lire (document) reste sans marqueur ; seule la consigne est traduite.
 
@@ -123,6 +126,52 @@ Contenu attendu de chaque activité : plan §1.3 et annexe des modules. Chaque m
 | Missions | 2 par atelier ; oral 90 à 180 s ; écrit `maxChars` 1 000 à 1 500, `minWords` 40 à 120 ; grille de 4 critères (écrit) ou 5 (oral), 20 points |
 | Débit (manifeste) | `lengthScale` 0,95 à 1,10 (profils `b1-debut` 1,03, `b1-suite` 1,00, `b1-lexique` 1,10) |
 
+## Niveau B2 (phase 2)
+
+**Langue.** Consignes, règles (`MERKE`, `REGEL`), explications, listes de vérification et grilles **en allemand** ; l’aide française suit ` [fr?] ` (repliée sous « Aide en français »), jamais ` [fr] `. La partie allemande ne contient pas de français (une phrase française citée entre guillemets à traduire reste permise). Les traductions du lexique restent en français. Titres d’activité en allemand, sans espace avant les deux-points : « Einstieg: … », « Verstehen: … », « Entdecken: … », « Regel: … », « Üben: … », « Wortschatz: … », « Prüfen: … », « Modell: … », « Diskutieren: … », « Vermitteln: … », « Korrigieren: … », « Prüfungstraining: … », « Mission: … », « Bilanz: … ». Un titre français (« Comprendre : … », « S’entraîner : … ») est une erreur.
+
+```js
+import { C2, aide, choice, fill, order, match, speakB2, GRIDS } from '../../lib.mjs';
+choice('q1', aide('Welche Haltung vertritt die Autorin?', 'Quelle position l’autrice défend-elle ?'),
+  [['Sie hält Homeoffice für sinnvoll, wenn Regeln vereinbart werden.', true], ['…'], ['…'], ['…']],
+  'Im dritten Absatz schreibt sie: „Ohne klare Absprachen …“. [fr?] Au troisième paragraphe, elle pose une condition.');
+speakB2('q1', 'Da muss ich Ihnen widersprechen, denn die Zahlen zeigen eher das Gegenteil.', 'Widerspruch höflich einleiten. [fr?] …');
+```
+
+**Gabarit B2** (identifiants imposés ; même découpage que le B1, sauf ce qui suit) :
+
+| Thème `b2-<t>` (9 activités, 125 à 140 min) | Type | Min | Atelier `b2-<t>-atelier` (8 activités, 115 à 130 min) | Type | Min |
+| --- | --- | --- | --- | --- | --- |
+| `-einstieg` | lesson | 10 | `-modell` | lesson | 12 |
+| `-lesen` : texte de **450 à 700 mots**, inférence et points de vue (au moins 2 `choice` à 4 options), `match` de 4 à 6 paires | exercise | 20–25 | `-diskussion` : réagir à des arguments enregistrés, `choice` et **4 `speak`** (`speakB2`, 8 à 20 mots) | exercise | 10–12 |
+| `-hoeren` : écoute de **3 à 5 min**, prise de notes longue (2 `fill` de 4 à 8 trous) | exercise | 20–25 | `-mediation` : synthèse de deux sources ou explication de données (gabarit `chart`) | exercise | 15 |
+| `-entdecken` (explications avec `[fr?]`) | exercise | 10 | `-korrektur` | exercise | 10 |
+| `-regel` (règle en allemand, aide `[fr?]`) | lesson | 8–10 | `-pruefung` | exercise | 18–25 |
+| `-grammatik` (6 questions au moins, explications avec `[fr?]`) | exercise | 12–14 | `-schreiben` : 150 à 250 mots | mission | 25–30 |
+| `-wortschatz` | exercise | 12 | `-sprechen` : exposé de 3 à 4 min ou discussion simulée de 2 à 3 min | mission | 20 |
+| `-hoeren2` (extrait authentique de 2 à 5 min) ou `-lesen2` | exercise | 15 | `-bilan` | lesson | 6 |
+| `-kontrolle` | exercise | 12–14 | | | |
+
+Pas de `-redemittel` dans le thème : les répétitions sont dans `-diskussion`. Les dictées sont facultatives (0 à 2 par thème, prise de notes en `fill` à la place). L’activité `-hoeren2` des thèmes impairs est écrite par le lot des médias dans `_media.mjs` (voir `source/b2/_level.mjs`) : tant qu’elle manque, l’aperçu signale son absence.
+
+**Profil B2** (`infra/content/level-profiles.mjs`, règles de `check-content.mjs`) :
+
+| Règle | B2 | Contrôle |
+| --- | --- | --- |
+| Marqueurs | `[fr]` interdit ; `[fr?]` conseillé (énoncés, explications de `-entdecken` et `-grammatik`, `-regel`, missions) | erreur ; avertissement |
+| Titres | allemands | erreur (titre d’activité français), avertissement (titre de module) |
+| Explication | en allemand, 10 à 1 000 caractères aide comprise (800 conseillés) | erreur hors bornes ; avertissement si français |
+| Texte `-lesen` | 450 à 700 mots hors consignes, intertitres et gloses | avertissement hors fourchette, erreur sous 360 ou au-delà de 840 |
+| Écoute `-hoeren` · `-hoeren2` | 180 à 300 s · 120 à 300 s (manifeste audio, sinon environ 17 caractères prononcés par seconde : 3 min ≈ 3 000 caractères) | avertissement hors fourchette, erreur sous 80 % ou au-delà de 120 % |
+| Durée d’une activité | 5 à 30 min ; conseillé : leçon 6–15, exercice 8–25, mission 20–30 ; module de 100 à 150 min | erreur ; avertissement |
+| `speak` | 8 à 20 mots, seuil 70 (posé par la construction : ne pas fixer `threshold`) ; 4 à 6 dans `-diskussion` | erreur |
+| `dictation` | facultative : 0 à 2 par thème, 8 à 20 mots | erreur |
+| `order` · `match` | 8 à 14 jetons · 4 à 6 paires | avertissement |
+| Choix | bonne réponse au même rang dans 43 % des questions au plus ; jamais plus de 1,35 fois plus longue que le plus long distracteur ; la plus longue dans 45 % des questions au plus (hors vrai/faux) | avertissement |
+| Son de synthèse | 5 000 caractères prononcés au plus ; extrait natif de 300 s au plus | erreur |
+| Missions | 2 par atelier ; oral 120 à 300 s ; écrit `maxChars` 1 500 à 3 000, `minWords` 100 à 220 ; grille `GRIDS.b2` (4 critères à l’écrit, 5 à l’oral, 20 points), libellés allemands | erreur |
+| Débit (manifeste) | `lengthScale` 0,92 à 1,05 (`b2-debut` 1,00, `b2-suite` 0,97, `b2-lexique` 1,05) | erreur |
+
 ## Missions
 
 ```js
@@ -148,7 +197,10 @@ La situation va dans `lesson.description`, la tâche dans `prompt` (1 000 caract
 **Images composées** (`image: { layout, … }`), pictogrammes Lucide de `infra/content/icons.txt` : gabarits V4 (`document`, `cards`, `form`, `table`, `messages`, `ticket`, `plan`, `route`, `clocks`…, voir `content/README.md`) et gabarits B :
 
 - `article` : `{ title ≤ 120, kicker? ≤ 60, byline? ≤ 80, lead? ≤ 300, paragraphs: 1 à 3 × ≤ 600, icon? }` ;
-- `chart` : `{ title ≤ 120, unit ≤ 20, bars: 2 à 8 × { label ≤ 30, value ≥ 0 }, highlight?: rang, source? ≤ 120 }`, barres horizontales, valeurs affichées ;
+- `chart` : `{ title ≤ 120, unit ≤ 20, bars: 2 à 8 × { label ≤ 30, value ≥ 0 }, highlight?: rang, source? ≤ 120 }`, barres horizontales, valeurs affichées ; au B2, deux variantes plus riches pour « expliquer des données » :
+  - barres groupées : `{ title, unit, series: ['2019', '2025'] (2 ou 3 noms ≤ 20), bars: 2 à 6 × { label ≤ 30, values: [une valeur ≥ 0 par série] }, highlight?, source? }`, légende en couleur ;
+  - courbes d’évolution : `{ kind: 'line', title, unit, points: 2 à 10 dates ≤ 12, lines: 1 à 3 × { name ≤ 24, values: [une valeur par date] }, highlight?: rang de la date, source? }`, axe gradué, valeurs écrites aux points (aux extrémités au-delà de 8 dates) ;
+  - comme pour tout document, les chiffres que la question exploite figurent aussi dans la description de l’activité (lisibilité à 390 px, accessibilité) ;
 - `forum` : `{ title ≤ 120, posts: 1 à 4 × { author ≤ 30, date? ≤ 20, text ≤ 400 } }`.
 
 Un passage entre crochets dans un texte d’image (`[weil]`) est mis en couleur. Aucune marque, aucune personne réelle.

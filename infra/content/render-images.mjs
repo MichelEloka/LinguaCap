@@ -517,8 +517,97 @@ function articleLayout(image, seed) {
     </div></div>${FIT}` };
 }
 
+// Graphiques plus riches du B2 (médiation : « expliquer des données ») : barres groupées (series : deux ou trois séries,
+// par exemple deux années ; bars[].values) et courbes d'évolution (kind: 'line' ; points : 2 à 10 dates ; lines : une à
+// trois courbes { name, values }). Le graphique simple ci-dessous est inchangé (mêmes empreintes de rendu pour le B1).
+const SERIES = ['#1f6feb', '#d9480f', '#2b8a3e'];
+const unitOf = (image) => (image.unit ? `&nbsp;${escape(image.unit)}` : '');
+const CHART_STYLE = (image, height) => `${STYLE}
+    .canvas{width:960px;height:${height}px;background:${backgroundOf(image)};padding:30px 56px;display:flex}
+    .paper{${CARD};flex:1;display:flex;flex-direction:column;padding:24px 36px;min-width:0}
+    .chead{display:flex;align-items:center;gap:16px;margin-bottom:12px}
+    .cbadge{width:60px;height:60px;border-radius:50%;display:grid;place-items:center;flex:none}
+    .ctitle{font-size:28px;font-weight:800;color:${INK};line-height:1.15}
+    .legend{display:flex;flex-wrap:wrap;gap:8px 22px;margin:0 0 10px 2px;font-size:21px;font-weight:700;color:${INK}}
+    .legend span{display:inline-flex;align-items:center;gap:8px}.legend i{width:22px;height:22px;border-radius:6px;display:inline-block}
+    .source{font-size:18px;color:${MUTED};margin-top:12px;padding-top:10px;border-top:2px dashed #e3e8ef}`;
+const legendOf = (names) => `<div class="legend">${names.map((name, index) =>
+  `<span><i style="background:${SERIES[index]}"></i>${escape(name)}</span>`).join('')}</div>`;
+
+function groupedChart(image, color) {
+  const bars = image.bars;
+  const top = Math.max(...bars.flatMap((bar) => bar.values), 1);
+  const height = bars.length * image.series.length <= 6 ? 480 : 640;
+  const rows = bars.map((bar, index) => {
+    const on = image.highlight === index;
+    const lines = bar.values.map((value, serie) => `<div class="gline"><div class="fill" style="width:${Math.max(1.5, (value / top) * 78)
+      .toFixed(1)}%;background:${SERIES[serie]}"></div><span class="bvalue">${escape(number(value))}${unitOf(image)}</span></div>`).join('');
+    return `<div class="bar${on ? ' on' : ''}"><div class="blabel">${rich(bar.label, color)}</div><div class="group">${lines}</div></div>`;
+  }).join('');
+  return { width: 960, height, html: `<style>${CHART_STYLE(image, height)}
+    .bars{flex:1;display:flex;flex-direction:column;justify-content:space-evenly;gap:10px}
+    .bar{display:grid;grid-template-columns:230px 1fr;align-items:center;gap:18px}
+    .blabel{font-size:22px;font-weight:600;color:${INK};text-align:right;line-height:1.15}
+    .group{display:flex;flex-direction:column;gap:4px}.gline{display:flex;align-items:center;height:${image.series.length > 2 ? 22 : 28}px}
+    .fill{height:100%;border-radius:0 9px 9px 0;min-width:6px}
+    .bvalue{margin-left:10px;font-size:20px;font-weight:800;color:${INK};white-space:nowrap}
+    .bar.on .blabel{font-weight:800;color:${color}}</style>
+    <div class="canvas"><div class="paper"><div class="chead"><div class="cbadge" style="background:${color}1a">${icon('chart-bar', 34, color)}</div>
+    <div class="ctitle">${rich(image.title, color)}</div></div>${legendOf(image.series)}<div class="bars">${rows}</div>
+    ${image.source ? `<div class="source">${escape(image.source)}</div>` : ''}</div></div>` };
+}
+
+function lineChart(image, color) {
+  const { points, lines: series } = image;
+  const values = series.flatMap((serie) => serie.values);
+  const low = Math.min(0, ...values);
+  const high = Math.max(...values, low + 1);
+  // Graduation arrondie (1, 2 ou 5 × 10^n) : quatre ou cinq lignes horizontales.
+  const raw = (high - low) / 4;
+  const magnitude = 10 ** Math.floor(Math.log10(raw));
+  const step = [1, 2, 5, 10].map((factor) => factor * magnitude).find((candidate) => candidate >= raw);
+  const bottom = Math.floor(low / step) * step;
+  const top = Math.ceil(high / step) * step;
+  const [width, height, left, right, upper, lower] = [776, 350, 64, 26, 30, 40];
+  // Les points extrêmes sont décalés de 34 px vers l'intérieur : leurs valeurs ne chevauchent ni l'axe ni le bord.
+  const x = (index) => left + 34 + (index * (width - left - right - 68)) / Math.max(1, points.length - 1);
+  const y = (value) => upper + ((top - value) * (height - upper - lower)) / (top - bottom);
+  const grid = [];
+  for (let value = bottom; value <= top + step / 2; value += step) {
+    grid.push(`<line x1="${left}" x2="${width - right}" y1="${y(value).toFixed(1)}" y2="${y(value).toFixed(1)}" stroke="#e3e8ef" stroke-width="2"/>`
+      + `<text x="${left - 12}" y="${(y(value) + 7).toFixed(1)}" text-anchor="end" class="tick">${escape(number(Math.round(value * 100) / 100))}</text>`);
+  }
+  const labels = points.map((point, index) => `<text x="${x(index).toFixed(1)}" y="${height - 12}" text-anchor="middle"
+    class="tick${image.highlight === index ? ' on' : ''}">${escape(point)}</text>`).join('');
+  // Valeurs écrites à chaque point (8 points au plus), sinon à la première, à la dernière et au point mis en avant.
+  const shown = (index) => points.length <= 8 || index === 0 || index === points.length - 1 || index === image.highlight;
+  // Valeurs de la première série au-dessus des points, de la deuxième au-dessous (lisibles quand les courbes se croisent).
+  const lines = series.map((serie, rank) => {
+    const tint = SERIES[rank];
+    const path = serie.values.map((value, index) => `${index ? 'L' : 'M'}${x(index).toFixed(1)},${y(value).toFixed(1)}`).join(' ');
+    const dots = serie.values.map((value, index) => `<circle cx="${x(index).toFixed(1)}" cy="${y(value).toFixed(1)}" r="7" fill="#fff"
+      stroke="${tint}" stroke-width="4"/>${shown(index) ? `<text x="${x(index).toFixed(1)}" y="${(y(value) + (rank % 2 ? 32 : -16)).toFixed(1)}"
+      text-anchor="middle" class="val" fill="${tint}">${escape(number(value))}</text>` : ''}`).join('');
+    return `<path d="${path}" fill="none" stroke="${tint}" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>${dots}`;
+  }).join('');
+  // Date mise en avant : bande claire derrière les courbes (les valeurs restent lisibles) et étiquette en couleur.
+  const mark = Number.isInteger(image.highlight) ? `<rect x="${(x(image.highlight) - 30).toFixed(1)}" y="${upper - 26}" width="60"
+    height="${height - lower - upper + 26}" rx="14" fill="${color}" fill-opacity="0.12"/>` : '';
+  return { width: 960, height: 640, html: `<style>${CHART_STYLE(image, 640)}
+    .plot{flex:1;min-height:0}.plot svg{width:100%;height:100%;overflow:visible}
+    .tick{font-size:20px;font-weight:600;fill:${MUTED}}.tick.on{fill:${color};font-weight:800}.val{font-size:20px;font-weight:800}
+    .unit{font-size:19px;font-weight:700;color:${MUTED};margin:-4px 0 4px 2px}</style>
+    <div class="canvas"><div class="paper"><div class="chead"><div class="cbadge" style="background:${color}1a">${icon('chart-line', 34, color)}</div>
+    <div class="ctitle">${rich(image.title, color)}</div></div>${series.length > 1 ? legendOf(series.map((serie) => serie.name)) : ''}
+    ${image.unit ? `<div class="unit">${escape(image.unit)}</div>` : ''}
+    <div class="plot"><svg viewBox="0 0 ${width} ${height}">${grid.join('')}${mark}${lines}${labels}</svg></div>
+    ${image.source ? `<div class="source">${escape(image.source)}</div>` : ''}</div></div>` };
+}
+
 function chartLayout(image, seed) {
   const color = colorOf(image, seed);
+  if (image.kind === 'line') return lineChart(image, color);
+  if (Array.isArray(image.series)) return groupedChart(image, color);
   const bars = image.bars;
   const top = Math.max(...bars.map((bar) => bar.value), 1);
   const height = bars.length <= 3 ? 400 : 640;
