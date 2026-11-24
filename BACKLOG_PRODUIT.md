@@ -27,7 +27,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 
 ## Vue d’ensemble (éléments à traiter)
 
-✅ livré : en production. ✅ fait, à déployer : terminé et vérifié sur `develop`, en attente du déploiement.
+✅ livré : en production. ✅ fait, à déployer : terminé et vérifié sur `develop`, en attente du déploiement. ◐ en partie / base : une partie existe déjà dans l’application (audit du code du 24 novembre 2026) ; il reste ce que décrit la fiche au-delà de cette base.
 
 | ID | Élément | Priorité | Complexité | Dépend de |
 |---|---|---|---|---|
@@ -43,35 +43,35 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-042 | Fiabiliser la mise en pause dans le suivi | P1 · ✅ fait, à déployer | S | — |
 | EVO-043 | Validation de la prononciation et de la répétition à voix haute | P2 · ✅ fait, à déployer | XL | — |
 | EVO-044 | Corrigé détaillé après un exercice (juste, faux, pourquoi) | P2 · ✅ fait, à déployer | L | — |
-| EVO-045 | Espace exercices par niveau et par type | P2 | M | — |
+| EVO-045 | Espace exercices par niveau et par type | P2 · ◐ en partie : bibliothèque par niveau, compétences, recherche, entraînement au bilan | M | — |
 | EVO-046 | Alphabet et phonétique pour les débutants totaux | P2 · ✅ fait, à déployer | M | EVO-043 |
-| EVO-047 | Cartes de révision des mots déjà appris | P2 | L | — |
-| EVO-011 | Centre de notifications | P2 | M | — |
-| EVO-012 | Messagerie dans les deux sens | P2 | M | — |
+| EVO-047 | Cartes de révision des mots déjà appris | P2 · ◐ base prête : lexique « Me tester », carnet de mots | L | EVO-055 |
+| EVO-011 | Centre de notifications | P2 · ◐ en partie : pastilles Contrats et Mon contrat, compteurs de l’accueil professeur | M | — |
+| EVO-012 | Messagerie dans les deux sens | P2 · ◐ base : encouragements du professeur vers l’élève | M | — |
 | EVO-013 | Questions sur un élément du cours | P2 | M | EVO-011, EVO-012 |
-| EVO-014 | Le professeur modifie, complète ou propose une séance à tout moment | P2 | L | — |
-| EVO-015 | Profil modifiable | P2 | S | — |
+| EVO-014 | Le professeur modifie, complète ou propose une séance à tout moment | P2 · ◐ en partie : jours, ajout et retrait de cours, avenant, pause, niveau suivant, séquence proposée | L | — |
+| EVO-015 | Profil modifiable | P2 · ◐ base : questionnaire du professeur réenregistrable (sans écran de profil) | S | — |
 | EVO-048 | Signalement d’un contenu (bogue, erreur, contenu inapproprié) | P2 | M | — |
-| EVO-049 | Suppression d’un compte | P2 | M | — |
+| EVO-049 | Suppression d’un compte | P2 · ◐ base : désactivation par l’administration | M | — |
 | EVO-050 | Comptes gratuits avec avis obligatoire, avis facultatif pour les autres | P2 | M | — |
 | EVO-016 | Inscription publique validée par l’administration | P2 | M | EVO-036, EVO-033 |
-| EVO-017 | Examens de passage de niveau exigeants, en plusieurs variantes | P2 | XL | — |
+| EVO-017 | Examens de passage de niveau exigeants, en plusieurs variantes | P2 · ◐ base : un examen blanc à 4 parties avec seuil | XL | — |
 | EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · ✅ fait, à déployer | XL | EVO-041 |
-| EVO-052 | Le professeur construit ses cours | P3 | XL | EVO-033, EVO-014 |
-| EVO-053 | Ressources classées par niveau | P3 | S | — |
+| EVO-052 | Le professeur construit ses cours | P3 · ◐ en partie : ajout de modules et d’activités, rythme, avenant | XL | EVO-033, EVO-014 |
+| EVO-053 | Ressources classées par niveau | P3 · ◐ en partie : bibliothèque et Ciné-club par niveau | S | — |
 | EVO-054 | Clés API : automatisation de l’administration et services tiers | P3 | L | — |
 | EVO-055 | Ciné-club : s’entraîner avec un film (Nicos Weg) et carnet de mots | P2 · ✅ fait, à déployer | L | EVO-051 |
-| EVO-018 | Séries d’examens blancs d’entraînement | P3 | L | EVO-017 |
+| EVO-018 | Séries d’examens blancs d’entraînement | P3 · ◐ en partie : entraînement libre au bilan intermédiaire, sans corrigé | L | EVO-017 |
 | EVO-019 | Équivalences avec les certificats connus | P3 | S | — |
 | EVO-020 | Préparation aux certificats au format réel | P3 | XL | EVO-017, EVO-018 |
 | EVO-021 | Objectif « obtenir un certificat » | P3 | M | EVO-020 |
 | EVO-022 | Suiveur d’un élève (parent, tuteur) | P3 | M | EVO-015 |
-| EVO-023 | Annuaire des professeurs et demande de suivi | P3 | L | EVO-033, EVO-015 |
+| EVO-023 | Annuaire des professeurs et demande de suivi | P3 · ◐ base : présentation et disponibilité du professeur | L | EVO-033, EVO-015 |
 | EVO-024 | Abonnements et paiement | P3 | XL | EVO-016, EVO-023 |
 | EVO-025 | Classes d’un professeur | P3 | M | — |
 | EVO-026 | Mini-jeux d’apprentissage | P3 | L | EVO-047 |
-| EVO-031 | Ouvrir une deuxième langue | P3 | M | — |
-| EVO-032 | Calibrer le test de niveau et les seuils de difficulté | P3 | S | — |
+| EVO-031 | Ouvrir une deuxième langue | P3 · ◐ en partie : langues « Bientôt », drapeaux, niveaux et test par langue, niveaux dynamiques | M | — |
+| EVO-032 | Calibrer le test de niveau et les seuils de difficulté | P3 · attend les données du pilote | S | — |
 | EVO-027 | Classement périodique entre classes | P4 | M | EVO-025, EVO-026 |
 | EVO-028 | Défis entre élèves, en direct et en différé | P4 | XL | EVO-026 |
 | EVO-029 | Écoles : directeur, professeurs, marque de l’école | P4 | XL | EVO-024, EVO-025 |
@@ -148,7 +148,7 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 
   Il peut aussi **proposer un cours à son élève à tout moment**, en dehors du planning.
 
-  *Déjà livré* : jours de l’élève modifiables par le professeur, ajout de modules ou d’activités au parcours.
+  *Déjà livré* : jours de l’élève modifiables par le professeur, ajout de modules ou d’activités au parcours et retrait d’un ajout, avenant au contrat, pause et reprise, passage au niveau suivant, séquence du Ciné-club proposée à un élève. *Reste* : ouvrir une séance à venir pour en changer la date, l’ordre ou les activités ; les ressources propres du professeur ; un cours proposé hors planning ; la note jointe à un ajout visible par l’élève.
 - **EVO-015 Profil modifiable** par chaque utilisateur : nom, photo, présentation, langues enseignées, disponibilité pour de nouveaux élèves, adresse e-mail, mot de passe, notifications.
 
 **Administration et confiance**
@@ -174,12 +174,12 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 
 - ✅ **EVO-051 Cours B1 et B2.** Parcours B1 puis B2 complets, au même niveau de qualité que l’A1 et l’A2 : modules, activités,
   médias, diagnostic, bilan et examen. Demande du responsable produit : « les cours doivent être adaptés au niveau, même la
-  manière de faire cours » ; « on n’est plus sur du A1 et A2 seulement ». **En cours : phase 1 (B1)**, phase 2 (B2) ensuite,
-  sur le même socle ; aucun déploiement à ce stade. Choix retenus (24 novembre 2026) :
+  manière de faire cours » ; « on n’est plus sur du A1 et A2 seulement ». **Fait le 24 novembre 2026 (B1 puis B2), à
+  déployer.** Choix retenus :
   - **Niveaux dynamiques partout** : l’échelle CECRL ne sert qu’à valider, classer et nommer un niveau ; ce qui est ouvert se lit
     dans le catalogue (`GET /languages`, nouvelle route publique `GET /public/languages` pour la vitrine, `GET /tracks`). Un
     niveau publié apparaît sans modifier le code ; un niveau non publié n’est jamais proposé (« Bientôt » là où il donne une
-    perspective). Le niveau B2 est créé au catalogue en brouillon.
+    perspective).
   - **Gabarit B** : 12 thèmes × 2 modules (thème, puis atelier), environ 24 modules et 50 h par niveau ; textes et écoutes
     plus longs avec stratégie, grammaire inductive, *Redemittel*, médiation et entraînement au format d’examen dans chaque
     atelier ; dictées et répétitions réduites.
@@ -189,11 +189,12 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
     (12/20) ; l’élève voit la grille avant la remise, puis les points, le score et le commentaire. Élève autonome sans
     correcteur : grille en auto-évaluation non enregistrée et recommandation d’un correcteur. Bornes élargies : oral jusqu’à
     5 min, écrit jusqu’à 3 000 caractères.
-  - **Médias** : voix libres (Piper, MLS après audition, 4 au plus) ; contenus téléchargés sous licence libre seulement,
+  - **Médias** : voix libres (Kerstin et Thorsten, personnages secondaires par décalage de hauteur ; les voix MLS ont été
+    écartées, trop souvent inintelligibles) ; contenus téléchargés sous licence libre seulement,
     CC BY-SA acceptée pour les médias, chacun crédité dans un registre ; textes originaux ou Wikinews de préférence.
   - **Recette** : le niveau de démonstration passe en C1 ; contrôles des niveaux dynamiques, de l’import B1, des consignes
-    bilingues, des missions sur grille, du parcours A2 → B1 et du test de niveau. Test de niveau : palier B2 en phase 2.
-  - Le brouillon B1 de Codex (`content/b1-v1/`) sert de matière première, puis est supprimé en fin de phase 1.
+    bilingues, des missions sur grille, des parcours A2 → B1 et B1 → B2 et du test de niveau à quatre paliers (A1 à B2).
+  - Le brouillon B1 de Codex (`content/b1-v1/`) a servi de matière première, puis a été supprimé.
 - **EVO-052 Le professeur construit ses cours.** Choix proposé à l’accueil (EVO-033). Le professeur peut, au choix :
   - composer le parcours d’un élève à partir du catalogue : modules, activités, ordre, rythme ;
   - créer ses propres leçons et exercices (texte, images, sons) dans un éditeur, réservés à ses élèves.
@@ -217,7 +218,7 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
   - École : licence, gratuite pour ses professeurs et ses élèves.
 - **EVO-025 Classes d’un professeur** : groupes de ses élèves, vue de classe.
 - **EVO-026 Mini-jeux d’apprentissage** sur le contenu des cours.
-- **EVO-031 Deuxième langue** : catalogue pleinement multi-langues, ouverture d’une langue en un seul réglage.
+- **EVO-031 Deuxième langue** : ouverture d’une langue en un seul réglage (aujourd’hui le statut en base et une variable du service Identités) et éditeur du catalogue multi-langues ; les langues « Bientôt » et les niveaux dynamiques existent déjà.
 - **EVO-032 Calibrage** du test de niveau et des seuils de difficulté avec les données du pilote.
 
 ## P4 · Croissance
@@ -269,7 +270,7 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 puis import de la V4 par l'administration ; mesurer la durée de l'import et de la publication d'une version V4 (délais de 7 s
 entre services et de 10 s au Worker) et celle de la vue d'ensemble de l'administration avec une cinquantaine d'élèves.
 
-**Ciné-club : s'entraîner avec un film** (EVO-055), sur `develop` le 25 novembre 2026 :
+**Ciné-club : s'entraîner avec un film** (EVO-055), sur `develop` le 24 novembre 2026 :
 - Les trois films *Nicos Weg* de la Deutsche Welle (A1, A2, B1), lus dans le **lecteur YouTube officiel** seulement (domaine
   youtube-nocookie, chargé après consentement de l'élève) ; rien n'est téléchargé ni recopié ; questions, contextes et
   mots-clés originaux LinguaCap ; crédit DW et lien vers son cours gratuit.
