@@ -12,9 +12,14 @@
 //   node infra/content/import-content.mjs --api https://linguacap.emichfer.org/api/v1 \
 //     --supabase https://<projet>.supabase.co --publishable-key <clé publique> --email <adresse> [--level b1] [--publish]
 //   node infra/content/import-content.mjs --api … --supabase … --publishable-key … --email … --placement [--publish]
+// Avec --films, ce sont les films du Ciné-club (content/<langue>/cine/<filmId>.json, build-cine.mjs) : document enregistré
+// par PUT /catalogue/films/{id}, publié si --publish ; --film <id> en choisit un, --force écrase un film modifié dans
+// l'éditeur depuis le dernier import (sinon l'import s'arrête) :
+//   node infra/content/import-content.mjs --dry-run --films [--film nicos-weg-a1]
+//   node infra/content/import-content.mjs --api … --supabase … --publishable-key … --email … --films [--publish] [--force]
 // Le mot de passe est demandé sans écho (ou LINGUACAP_PASSWORD) ; LINGUACAP_TOKEN permet de fournir un jeton de session.
 import { createHash } from 'node:crypto';
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { createInterface } from 'node:readline';
 import { pathToFileURL } from 'node:url';
@@ -416,6 +421,117 @@ export async function importPlacement({ api, token, publishable, publish = false
   return { testId: draft.id, number: done.test.number, published: true };
 }
 
+// --- Ciné-club (EVO-055) -------------------------------------------------------------------------------------------------
+
+/** Documents de film construits (content/<langue>/cine/<filmId>.json, build-cine.mjs), filtrés par identifiant. */
+export function loadFilms(ids = null) {
+  const base = join(root, 'content');
+  const files = existsSync(base) ? readdirSync(base, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory() && /^[a-z]{2}$/.test(entry.name) && existsSync(join(base, entry.name, 'cine')))
+    .flatMap((entry) => readdirSync(join(base, entry.name, 'cine')).filter((name) => name.endsWith('.json')).sort()
+      .map((name) => join(base, entry.name, 'cine', name))) : [];
+  const films = files.map((file) => ({ file, document: JSON.parse(readFileSync(file, 'utf8')) }))
+    .filter(({ document }) => !ids || ids.includes(document.film?.id));
+  const missing = (ids ?? []).filter((id) => !films.some(({ document }) => document.film?.id === id));
+  if (missing.length) throw new Error(`Film(s) introuvable(s) dans content/<langue>/cine : ${missing.join(', ')} (node infra/content/build-cine.mjs).`);
+  return films;
+}
+
+/**
+ * Forme comparable d'un document de film : sans les champs en lecture seule de l'éditeur (levelCode, statut, dates,
+ * lessonId, checks), sans valeurs nulles ni « approx: false » (valeur par défaut), clés triées. Sert à reconnaître un
+ * film déjà à jour et un film modifié dans l'éditeur depuis le dernier import.
+ */
+export function comparableFilm(document) {
+  const READ_ONLY = new Set(['levelCode', 'status', 'publishedAt', 'updatedAt', 'lessonId', 'checks', 'format', 'questionCount']);
+  const clean = (value) => {
+    if (Array.isArray(value)) return value.map(clean);
+    if (!value || typeof value !== 'object') return value;
+    return Object.fromEntries(Object.keys(value).sort()
+      .filter((key) => !READ_ONLY.has(key) && value[key] !== null && value[key] !== undefined && !(key === 'approx' && value[key] === false))
+      .map((key) => [key, clean(value[key])]));
+  };
+  // Une question sans type est un choix (document de version) : « type: null » et « choice » se valent.
+  const sequences = (document.sequences ?? []).map((sequence) => ({ ...sequence,
+    questions: (sequence.questions ?? []).map((question) => ({ ...question, type: question.type ?? 'choice' })) }));
+  return JSON.stringify(clean({ film: document.film, sequences }));
+}
+
+/**
+ * Films du Ciné-club : document enregistré par PUT /catalogue/films/{id} (création ou remplacement, statut conservé),
+ * contrôlé, puis publié si --publish. Idempotent : un film identique à la source, ou resté tel que le dernier import l'a
+ * laissé (état local : empreinte de la source et du document renvoyé par le catalogue), n'est pas réécrit. Un film
+ * modifié dans l'éditeur depuis (bornes ajustées en regardant, par exemple) n'est pas écrasé sans --force : reporter
+ * d'abord les changements dans la source content/cine/<langue>/<filmId>.mjs.
+ */
+export async function importFilms({ api, token, ids = null, publish = false, force = false, statePath, log = console.log }) {
+  const { state, save } = importState(statePath);
+  state.films ??= {};
+  const call = apiClient(api, token);
+  const results = [];
+  const summaries = await call('/catalogue/films');
+  for (const { document } of loadFilms(ids)) {
+    const { id } = document.film;
+    const body = JSON.stringify(document);
+    if (Buffer.byteLength(body) > MAX_BODY) throw new Error(`Film ${id} trop volumineux (${Buffer.byteLength(body)} octets).`);
+    const local = sha256(comparableFilm(document));
+    const summary = summaries.find((item) => item.id === id) ?? null;
+    let status = summary?.status ?? null;
+    const known = state.films[id] ?? null;
+    let remote = null;
+    let upToDate = false;
+    if (summary) {
+      remote = sha256(comparableFilm(await call(`/catalogue/films/${encodeURIComponent(id)}`)));
+      // À jour : le catalogue porte la source, ou rien n'a changé depuis le dernier import de cette même source.
+      upToDate = remote === local || (known?.digest === local && known?.remote === remote);
+      const edited = remote !== local && remote !== known?.remote;
+      if (edited && !force) {
+        throw new Error(`Film ${id} : le catalogue diffère de ${known ? 'votre dernier import' : 'la source'} (modifié dans l’éditeur ?). `
+          + 'Reportez les changements dans content/cine (bornes notamment), reconstruisez, ou relancez avec --force pour les écraser.');
+      }
+    }
+    if (upToDate) {
+      log(`Film ${id} · déjà à jour au catalogue (${status === 'published' ? 'publié' : 'brouillon'}).`);
+    } else {
+      const saved = await call(`/catalogue/films/${encodeURIComponent(id)}`, { method: 'PUT', body: document });
+      remote = sha256(comparableFilm(saved));
+      status = saved.film?.status ?? status ?? 'draft';
+      const issues = saved.checks?.issues ?? [];
+      log(`Film ${id} · ${summary ? 'mis à jour' : 'créé'} (${document.sequences.length} séquences, ${(body.length / 1024).toFixed(0)} Ko, `
+        + `${status === 'published' ? 'publié' : 'brouillon'})${saved.checks?.publishable === false ? ' · incomplet' : ''}.`);
+      for (const issue of issues.slice(0, 20)) log(`  · ${issue.path} : ${issue.message}`);
+      if (publish && saved.checks?.publishable === false) throw new Error(`Film ${id} : enregistré mais incomplet, publication impossible.`);
+    }
+    state.films[id] = { digest: local, remote };
+    save();
+    if (publish && status !== 'published') {
+      const done = await call(`/catalogue/films/${encodeURIComponent(id)}/publish`, { method: 'POST', body: {} });
+      status = done.status ?? 'published';
+      log(`Film ${id} · publié.`);
+    }
+    results.push({ filmId: id, status });
+  }
+  return results;
+}
+
+/** Import à blanc des films : documents présents, taille, séquences, questions, bornes approchées (sans appel à l'API). */
+function dryRunFilms(ids) {
+  let ready = true;
+  const films = loadFilms(ids);
+  if (!films.length) console.log('Ciné-club · aucun film construit (node infra/content/build-cine.mjs).');
+  for (const { document } of films) {
+    const size = Buffer.byteLength(JSON.stringify(document));
+    const questions = document.sequences.reduce((total, sequence) => total + (sequence.questions?.length ?? 0), 0);
+    const approx = document.sequences.filter((sequence) => sequence.approx).length;
+    console.log(`Film ${document.film.id} (${String(document.film.levelId).toUpperCase()}) · ${document.sequences.length} séquences · `
+      + `${questions} questions · document ${(size / 1024).toFixed(0)} Ko`
+      + (approx ? ` · ${approx} à bornes approchées` : '')
+      + (size > MAX_BODY ? ' — TROP VOLUMINEUX' : size > WARN_BODY ? ' — proche de la limite de 2 Mo' : ''));
+    if (size > MAX_BODY || !document.sequences.length) ready = false;
+  }
+  return ready;
+}
+
 async function password() {
   if (process.env.LINGUACAP_PASSWORD) return process.env.LINGUACAP_PASSWORD;
   const input = createInterface({ input: process.stdin, output: process.stdout, terminal: true });
@@ -463,7 +579,13 @@ async function main() {
   };
   const levels = option('level') ? [option('level')] : availableLevels();
   const placementOnly = args.includes('--placement');
+  const filmsOnly = args.includes('--films');
+  const filmIds = args.flatMap((value, index) => (args[index - 1] === '--film' ? value.split(',') : [])).filter(Boolean);
   if (args.includes('--dry-run')) {
+    if (filmsOnly) {
+      if (!dryRunFilms(filmIds.length ? filmIds : null)) process.exitCode = 1;
+      return;
+    }
     if (placementOnly) {
       const placement = loadPlacement();
       if (!placement) throw new Error('Test de niveau introuvable : content/de/placement/placement.json');
@@ -486,7 +608,7 @@ async function main() {
   const api = (option('api') ?? 'http://127.0.0.1:8080/api/v1').replace(/\/$/, '');
   const supabase = option('supabase');
   const publishable = option('publishable-key') ?? process.env.LINGUACAP_PUBLISHABLE_KEY;
-  if (!publishable) throw new Error('Indiquez la clé publique Supabase (--publishable-key).');
+  if (!publishable && !(filmsOnly && process.env.LINGUACAP_TOKEN)) throw new Error('Indiquez la clé publique Supabase (--publishable-key).');
   let token = process.env.LINGUACAP_TOKEN;
   if (!token) {
     const email = option('email');
@@ -501,6 +623,10 @@ async function main() {
   }
   const statePath = join(root, 'infra', 'content', '.import-state', `${new URL(api).host.replace(/[^a-z0-9.-]/gi, '_')}.json`);
   const publish = args.includes('--publish');
+  if (filmsOnly) {
+    await importFilms({ api, token, ids: filmIds.length ? filmIds : null, publish, force: args.includes('--force'), statePath });
+    return;
+  }
   if (placementOnly) {
     await importPlacement({ api, token, publishable, publish, statePath });
     return;

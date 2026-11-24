@@ -1567,10 +1567,289 @@ function checkPlacement(file) {
   }
 }
 
+// --- Ciné-club (EVO-055) : documents de film content/<langue>/cine/<filmId>.json (build-cine.mjs) -----------------------
+// Le document est le corps de PUT /catalogue/films/{id} : clés connues seulement (le catalogue refuse les autres), vidéo
+// de la liste autorisée content/cine/videos.json (chaîne, cours et crédit repris tels quels), séquences de 3 à 15 minutes
+// (6 à 10 conseillées) dans l'ordre et sans chevauchement, contexte bilingue au format du niveau avec 2 ou 3 questions
+// d'anticipation, 4 à 10 mots-clés, 5 à 8 questions corrigées (choice, fill, order, match) avec explication, aucune
+// citation de plus de 12 mots (droits : rien n'est recopié du film ni du cours de l'éditeur).
+const FILM_TOP_KEYS = new Set(['format', 'film', 'sequences']);
+const FILM_KEYS = new Set(['id', 'languageId', 'levelId', 'title', 'description', 'provider', 'videoId', 'channel', 'videoUrl',
+  'courseUrl', 'credit', 'licenseNote', 'durationSeconds', 'position']);
+const FILM_SEQUENCE_KEYS = new Set(['id', 'position', 'title', 'start', 'end', 'approx', 'context', 'keywords', 'questions']);
+const FILM_KEYWORD_KEYS = new Set(['word', 'article', 'plural', 'translation', 'note']);
+const FILM_QUESTION_KEYS = new Set(['id', 'type', 'prompt', 'moduleRef', 'explanation', 'options', 'spec']);
+const FILM_QUESTION_TYPES = new Set(['choice', 'fill', 'order', 'match']);
+const VIDEO_ID = /^[A-Za-z0-9_-]{11}$/;
+/** Citation la plus longue admise (mots), entre guillemets, dans une partie allemande (plan Ciné-club, §3). */
+const MAX_QUOTE_WORDS = 12;
+const filmRegistryFile = join(root, 'content', 'cine', 'videos.json');
+let filmRegistry = null;
+/** Liste autorisée des vidéos : videoId → { filmId, channel, courseUrl, credit… }. */
+function videoRegistry() {
+  if (!filmRegistry) {
+    filmRegistry = new Map();
+    if (existsSync(filmRegistryFile)) {
+      for (const entry of JSON.parse(readFileSync(filmRegistryFile, 'utf8')).videos ?? []) filmRegistry.set(entry.videoId, entry);
+    }
+  }
+  return filmRegistry;
+}
+/**
+ * Règles d'un film selon son niveau : explications et types de question du niveau ; consignes « allemand [fr] français »
+ * jusqu'au B1 (traduction affichée, A1 et A2 compris : la séquence montre un film en allemand), « [fr?] » à partir du B2.
+ */
+function filmProfile(levelId) {
+  const base = PROFILES[levelId] ?? profileOf(levelId) ?? PROFILES.b2;
+  const fold = !['a1', 'a2', 'b1'].includes(levelId);
+  return { ...base, markers: fold ? 'fold' : 'beside', language: fold ? 'de' : null, foldAdvised: null, orderTokens: null,
+    matchPairs: null, choiceBalance: { rankShare: 0.43, lengthRatio: 1.35, longestShare: 0.45 } };
+}
+const unknownFilmKeys = (at, value, allowed) => {
+  for (const key of Object.keys(isObject(value) ? value : {})) if (!allowed.has(key)) fail(at, `clé « ${key} » inconnue (le catalogue la refuserait)`);
+};
+/** Citations allemandes trop longues d'un texte (passages entre guillemets, hors traductions françaises). */
+function longQuotes(at, value) {
+  for (const match of String(value ?? '').matchAll(QUOTED)) {
+    const inner = match[0].slice(1, -1);
+    if (looksFrench(inner)) continue;
+    const count = wordCount(inner);
+    if (count > MAX_QUOTE_WORDS) fail(at, `citation de ${count} mots (« ${clipText(inner.trim(), 50)} ») : ${MAX_QUOTE_WORDS} au plus, rien n’est recopié du film`);
+  }
+}
+const offApp = (at, value) => {
+  const french = OFF_APP.exec(String(value ?? ''));
+  if (french) fail(at, `consigne hors application (« ${french[0]} »)`);
+  const german = GERMAN_OFF_APP.exec(String(value ?? ''));
+  if (german) fail(at, `consigne hors application (« ${german[0]} »)`);
+};
+
+function checkFilmKeywords(at, keywords) {
+  if (!Array.isArray(keywords) || keywords.length < 4 || keywords.length > 10) {
+    fail(at, `4 à 10 mots-clés attendus (actuellement ${Array.isArray(keywords) ? keywords.length : 0})`);
+    if (!Array.isArray(keywords)) return;
+  }
+  const seen = new Set();
+  keywords.forEach((keyword, index) => {
+    const here = `${at} › mot-clé ${keyword?.word ?? index + 1}`;
+    unknownFilmKeys(here, keyword, FILM_KEYWORD_KEYS);
+    sized(here, keyword?.word, 1, 80, 'le mot');
+    sized(here, keyword?.translation, 1, 160, 'la traduction');
+    if (![null, 'der', 'die', 'das'].includes(keyword?.article ?? null)) fail(here, 'article : der, die, das ou null');
+    if (keyword?.plural !== null && keyword?.plural !== undefined) sized(here, keyword.plural, 1, 80, 'le pluriel');
+    if (keyword?.note !== null && keyword?.note !== undefined) sized(here, keyword.note, 1, 120, 'la remarque');
+    if (keyword?.article && !/^\p{Lu}/u.test(text(keyword.word))) warn(here, 'un nom commence par une majuscule');
+    if (hasMarker(keyword?.word) || hasMarker(keyword?.translation)) fail(here, 'pas de marqueur [fr] dans un mot-clé');
+    const key = text(keyword?.word).toLowerCase();
+    if (seen.has(key)) fail(here, 'mot-clé en double dans la séquence');
+    seen.add(key);
+    transliterated(here, keyword?.word);
+  });
+}
+
+/** Questions d'une séquence : forme du document de version, puis règles des questions typées (checkQuestions). */
+function checkFilmQuestions(at, questions, profile) {
+  if (!Array.isArray(questions)) {
+    fail(at, 'questions : liste attendue');
+    return [];
+  }
+  const flat = questions.map((question, index) => {
+    const here = `${at} › question ${question?.id ?? index + 1}`;
+    unknownFilmKeys(here, question, FILM_QUESTION_KEYS);
+    const type = question?.type ?? 'choice';
+    if (!FILM_QUESTION_TYPES.has(type)) fail(here, `type « ${type} » : choice, fill, order ou match dans une séquence`);
+    if (question?.moduleRef !== null && question?.moduleRef !== undefined) fail(here, 'moduleRef : null dans une séquence');
+    if (type === 'choice' && question?.spec) fail(here, 'une question à choix n’a pas de clé « spec »');
+    if (type !== 'choice' && !isObject(question?.spec)) fail(here, `clé « spec » attendue pour une question ${type}`);
+    for (const option of question?.options ?? []) {
+      unknownFilmKeys(`${here} › choix ${option?.id}`, option, new Set(['id', 'label', 'correct', 'feedback']));
+    }
+    for (const value of [question?.prompt, question?.explanation, ...(question?.options ?? []).map((option) => option?.label)]) {
+      longQuotes(here, value);
+    }
+    offApp(here, question?.prompt);
+    // Les champs de la clé (text, blanks, answers, pairs) sont relus comme dans un module (format source).
+    return { ...question, ...(isObject(question?.spec) ? question.spec : {}) };
+  });
+  checkQuestions(at, flat, { min: 5, max: 8, typed: true, format: 5, enforced: true, profile, activityId: '' });
+  return flat;
+}
+
+/** Place et longueur des bonnes réponses des choix d'un film (même règle que les niveaux B). */
+function checkFilmChoices(where, questions, profile) {
+  const balance = profile.choiceBalance;
+  const choices = questions.filter(({ question }) => (question.type ?? 'choice') === 'choice');
+  const ranks = choices.map(({ question }) => (question.options ?? []).findIndex((option) => option.correct === true)).filter((rank) => rank >= 0);
+  const counts = ranks.reduce((total, rank) => ({ ...total, [rank]: (total[rank] ?? 0) + 1 }), {});
+  const [rank, count] = Object.entries(counts).sort(([, left], [, right]) => right - left)[0] ?? [];
+  if (ranks.length >= 4 && count > ranks.length * balance.rankShare) {
+    warn(where, `bonne réponse en position ${'abcd'[rank]} dans ${count} questions à choix sur ${ranks.length} `
+      + `(${Math.round(balance.rankShare * 100)} % au plus) : varier sa place`);
+  }
+  const lengths = choices.map(({ id, question }) => {
+    const options = question.options ?? [];
+    if (options.some((option) => TRUE_FALSE.test(text(option.label)))) return null;
+    const right = options.find((option) => option.correct === true);
+    const others = options.filter((option) => option !== right).map((option) => text(option.label).length);
+    if (!right || !others.length) return null;
+    const length = text(right.label).length;
+    const longest = Math.max(...others);
+    return { id, tooLong: length > longest * balance.lengthRatio && length - longest > 8, longest: length > longest };
+  }).filter(Boolean);
+  const tooLong = lengths.filter((item) => item.tooLong).map((item) => item.id);
+  if (tooLong.length) warn(where, `bonne réponse plus de ${decimal(balance.lengthRatio)} fois plus longue que le plus long distracteur : ${listed(tooLong)}`);
+  const longest = lengths.filter((item) => item.longest).length;
+  if (lengths.length >= 6 && longest > lengths.length * balance.longestShare) {
+    warn(where, `bonne réponse strictement la plus longue dans ${longest} questions à choix sur ${lengths.length} `
+      + `(${Math.round(balance.longestShare * 100)} % au plus) : allonger des distracteurs`);
+  }
+}
+
+/** Contexte « avant de regarder » : longueur, balisage du niveau, 2 ou 3 questions d'anticipation, consignes dans l'application. */
+function checkFilmContext(at, context, profile) {
+  sized(at, context, 1, 4000, 'le contexte');
+  if (typeof context !== 'string') return;
+  if (text(context).length < 200) warn(at, `contexte court (${text(context).length} caractères) : situation, questions d’anticipation, consignes`);
+  checkGlossText(at, context, { profile, instructions: true });
+  if (profile.markers === 'beside') {
+    // Toute ligne porte sa traduction, sauf les intertitres en capitales (traduits par la ligne « [fr] … » qui suit) et
+    // les consignes, déjà signalées par checkGlossText.
+    const bare = context.split('\n').filter((line) => line.trim() && !hasMarker(line) && !GERMAN_INSTRUCTION.test(line.trim())
+      && !/^\p{Lu}[\p{Lu}\s?!.:,’'-]*$/u.test(line.trim()));
+    if (bare.length) fail(at, `ligne sans traduction (« ${clipText(bare[0].trim(), 60)} ») : « allemand [fr] français »`);
+  }
+  const anticipation = context.split('\n').filter((line) => /^•\s/.test(line.trim()) && /\?\s*$/.test(germanPart(line).trim()));
+  if (anticipation.length < 2 || anticipation.length > 3) warn(at, `${anticipation.length} question(s) d’anticipation : 2 ou 3 attendues (« • Frage? [fr] … »)`);
+  longQuotes(at, context);
+  offApp(at, context);
+}
+
+function checkFilm(file) {
+  const name = basename(file);
+  let document;
+  try {
+    document = JSON.parse(readFileSync(file, 'utf8'));
+  } catch (error) {
+    fail(name, `JSON illisible : ${error.message}`);
+    return;
+  }
+  unknownFilmKeys(name, document, FILM_TOP_KEYS);
+  if (document.format !== undefined && document.format !== 1) fail(name, 'format : 1');
+  const film = document.film ?? {};
+  const where = `cine/${film.id ?? name}`;
+  unknownFilmKeys(`${where} › film`, film, FILM_KEYS);
+  if (!ID.test(film.id ?? '') || film.id.length > 48) fail(where, 'id : identifiant en minuscules et tirets, 48 caractères au plus');
+  if (`${film.id}.json` !== name) fail(where, `le fichier doit s’appeler ${film.id}.json`);
+  if (!/^[a-z]{2}$/.test(film.languageId ?? '')) fail(where, 'languageId : code de langue à deux lettres');
+  if (!LEVEL_ID.test(film.levelId ?? '')) fail(where, 'levelId : niveau a1 … c2 en minuscules');
+  else if (!existsSync(join(root, 'content', film.languageId ?? 'de', film.levelId, 'level.json'))) warn(where, `niveau ${film.levelId} absent de content/${film.languageId}`);
+  sized(where, film.title, 1, 120, 'le titre');
+  if (typeof film.description !== 'string' || film.description.length > 2000) fail(where, 'description : texte de 2 000 caractères au plus');
+  else if (text(film.description).length < 20) warn(where, 'description absente ou très courte');
+  if (film.provider !== 'youtube') fail(where, 'provider : youtube');
+  if (!VIDEO_ID.test(film.videoId ?? '')) fail(where, 'videoId : identifiant YouTube de 11 caractères');
+  const allowed = videoRegistry().get(film.videoId);
+  if (!allowed) {
+    fail(where, `vidéo ${film.videoId} hors de la liste autorisée (content/cine/videos.json)`);
+  } else {
+    if (allowed.filmId && allowed.filmId !== film.id) fail(where, `la vidéo ${film.videoId} est réservée au film ${allowed.filmId}`);
+    if (allowed.levelId && allowed.levelId !== film.levelId) fail(where, `la vidéo ${film.videoId} est inscrite au niveau ${allowed.levelId}`);
+    for (const key of ['channel', 'courseUrl', 'credit']) {
+      if (allowed[key] && film[key] !== allowed[key]) fail(where, `${key} : « ${allowed[key]} » attendu (liste autorisée)`);
+    }
+  }
+  if (film.videoUrl !== `https://www.youtube.com/watch?v=${film.videoId}`) fail(where, 'videoUrl : https://www.youtube.com/watch?v=<videoId>');
+  sized(where, film.channel, 1, 120, 'la chaîne');
+  if (!/^https:\/\/\S+$/.test(film.courseUrl ?? '') || film.courseUrl.length > 300) fail(where, 'courseUrl : adresse https de 300 caractères au plus');
+  sized(where, film.credit, 1, 300, 'le crédit');
+  if (typeof film.licenseNote !== 'string' || film.licenseNote.length > 1000) fail(where, 'licenseNote : texte de 1 000 caractères au plus');
+  else if (!text(film.licenseNote)) warn(where, 'licenseNote vide : préciser les conditions de diffusion');
+  const duration = film.durationSeconds;
+  if (!Number.isInteger(duration) || duration < 60 || duration > 14400) fail(where, 'durationSeconds : entier de 60 à 14 400');
+  if (!Number.isInteger(film.position) || film.position < 1 || film.position > 100) fail(where, 'position : entier de 1 à 100');
+
+  const profile = filmProfile(film.levelId);
+  const sequences = Array.isArray(document.sequences) ? document.sequences : [];
+  if (!Array.isArray(document.sequences)) fail(where, 'sequences : liste attendue');
+  if (sequences.length < 1 || sequences.length > 40) fail(where, `1 à 40 séquences attendues (actuellement ${sequences.length})`);
+  const ids = new Set();
+  const positions = new Set();
+  const allQuestions = [];
+  let previous = null;
+  let covered = 0;
+  let approx = 0;
+  let keywordCount = 0;
+  sequences.forEach((sequence, index) => {
+    const at = `${where} › séquence ${sequence?.id ?? index + 1}`;
+    unknownFilmKeys(at, sequence, FILM_SEQUENCE_KEYS);
+    if (!ID.test(sequence?.id ?? '') || !String(sequence.id).startsWith(`${film.id}-`) || sequence.id.length > 59) {
+      fail(at, `id : « ${film.id}-… » en minuscules et tirets, 59 caractères au plus`);
+    }
+    if (ids.has(sequence?.id)) fail(at, 'identifiant en double');
+    ids.add(sequence?.id);
+    if (!Number.isInteger(sequence?.position) || sequence.position < 1 || sequence.position > 100 || positions.has(sequence.position)) {
+      fail(at, 'position : entier de 1 à 100, unique dans le film');
+    } else if (sequence.position !== index + 1) warn(at, `position ${sequence.position} au rang ${index + 1} : numéroter dans l’ordre du film`);
+    positions.add(sequence?.position);
+    sized(at, sequence?.title, 1, 160, 'le titre');
+    if (hasMarker(sequence?.title)) fail(at, 'pas de marqueur [fr] dans un titre');
+    const { start, end } = sequence ?? {};
+    if (!Number.isInteger(start) || !Number.isInteger(end) || start < 0 || end <= start || (Number.isInteger(duration) && end > duration)) {
+      fail(at, `bornes : entiers, 0 ≤ start < end ≤ ${duration} (durée du film)`);
+    } else {
+      const length = end - start;
+      if (length < 180 || length > 900) fail(at, `durée de ${Math.round(length / 6) / 10} min : 3 à 15 minutes`);
+      else if (length < 360 || length > 600) warn(at, `durée de ${decimal(Math.round(length / 6) / 10)} min : 6 à 10 minutes conseillées`);
+      if (previous) {
+        if (start < previous.end) fail(at, `chevauche la séquence ${previous.id} (début ${start} s avant sa fin ${previous.end} s)`);
+        else if (start - previous.end > 30) warn(at, `${start - previous.end} s du film entre ${previous.id} et cette séquence ne sont dans aucune séquence`);
+      }
+      previous = { id: sequence.id, end };
+      covered += length;
+    }
+    if (sequence?.approx !== undefined && typeof sequence.approx !== 'boolean') fail(at, 'approx : true ou false');
+    if (sequence?.approx === true) approx++;
+    checkFilmContext(`${at} › contexte`, sequence?.context, profile);
+    checkFilmKeywords(at, sequence?.keywords);
+    keywordCount += Array.isArray(sequence?.keywords) ? sequence.keywords.length : 0;
+    const flat = checkFilmQuestions(at, sequence?.questions, profile);
+    allQuestions.push(...flat.map((question) => ({ id: `${String(sequence?.id).slice(film.id.length + 1)}/${question.id}`, question })));
+  });
+  checkFilmChoices(where, allQuestions, profile);
+  const size = Buffer.byteLength(JSON.stringify(document));
+  if (size > MAX_BODY) fail(where, `document de ${(size / 1024).toFixed(0)} Ko : 2 Mo au plus`);
+  console.log(`Film ${film.id} (${String(film.levelId).toUpperCase()}) · ${sequences.length} séquences · ${Math.round(covered / 60)} min sur `
+    + `${Math.round((duration ?? 0) / 60)} · ${allQuestions.length} questions · ${keywordCount} mots-clés`
+    + (approx ? ` · ${approx} séquence(s) à bornes approchées (à vérifier dans l’éditeur)` : '') + ` · ${(size / 1024).toFixed(0)} Ko`);
+}
+
+/** Films d'un dossier cine (ou de tous les content/<langue>/cine avec --films). */
+function checkFilms(directory) {
+  const files = existsSync(directory) ? readdirSync(directory).filter((name) => name.endsWith('.json')).sort() : [];
+  if (!files.length) warn(directory, 'aucun film (node infra/content/build-cine.mjs)');
+  for (const name of files) checkFilm(join(directory, name));
+}
+const filmDirectories = () => readdirSync(join(root, 'content'), { withFileTypes: true })
+  .filter((entry) => entry.isDirectory() && /^[a-z]{2}$/.test(entry.name) && existsSync(join(root, 'content', entry.name, 'cine')))
+  .map((entry) => join(root, 'content', entry.name, 'cine'));
+const isFilmDocument = (path) => {
+  try {
+    const value = JSON.parse(readFileSync(path, 'utf8'));
+    return isObject(value?.film) && Array.isArray(value?.sequences);
+  } catch {
+    return false;
+  }
+};
+
 // --level-only : contrôle level.json (diagnostic, évaluations, médias) sans relire les fichiers de modules.
+// --films : documents de film (Ciné-club) seuls, de tous les content/<langue>/cine ; un dossier « cine » ou un document de
+// film donné en argument est contrôlé de la même façon. Sans argument, le contrôle des niveaux est inchangé.
 const levelOnly = process.argv.includes('--level-only');
-const targets = process.argv.slice(2).filter((argument) => !['--level-only', '--strict'].includes(argument));
-if (targets.length === 0) {
+const filmsOnly = process.argv.includes('--films');
+const targets = process.argv.slice(2).filter((argument) => !['--level-only', '--strict', '--films'].includes(argument));
+if (filmsOnly && targets.length === 0) {
+  for (const directory of filmDirectories()) checkFilms(directory);
+} else if (targets.length === 0) {
   for (const level of availableLevels()) {
     const directory = join(root, 'content/de', level);
     checkLevel(directory);
@@ -1582,6 +1861,10 @@ if (targets.length === 0) {
     const path = resolve(target);
     if (basename(path) === 'placement.json') {
       checkPlacement(path);
+    } else if (statSync(path).isDirectory() && basename(path) === 'cine') {
+      checkFilms(path);
+    } else if (!statSync(path).isDirectory() && isFilmDocument(path)) {
+      checkFilm(path);
     } else if (statSync(path).isDirectory()) {
       checkLevel(path);
     } else {

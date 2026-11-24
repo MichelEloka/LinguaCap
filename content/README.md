@@ -14,6 +14,7 @@ content/
   v3/source/                 ateliers de réemploi et modules de sons (V3)
   v4/source/                 modules ajoutés en V4, illustrations V4 (images-v4.json)
   v4/pedagogy/a1, a2/        couches pédagogiques par module et _level.mjs (voir v4/pedagogy/README.md)
+  cine/                      Ciné-club : lib.mjs (aides), videos.json (vidéos autorisées), de/<filmId>.mjs (sources)
   b/                         niveaux B : lib.mjs (aides), README.md (guide de rédaction)
     source/b1/               un module complet par fichier, _level.mjs, _evaluations.mjs, _media.mjs
     libre/registre.json      registre des fichiers téléchargés sous licence libre (empreinte, auteur, licence, URL)
@@ -23,6 +24,7 @@ content/
     a2/…                     même organisation pour A2
     b1/…                     format 5 (build-b.mjs), même organisation, plus le bloc catalogue de level.json
     placement/placement.json test de niveau (non généré)
+    cine/<filmId>.json       films du Ciné-club (build-cine.mjs) : corps de PUT /catalogue/films/{id}
     media/audio/*.mp3        sons générés (synthèse, natifs, lexique, répétitions, dictées) et test de niveau
     media/audio/manifest-v3.json  profils, durées, empreintes et segments du lexique
     media/images/*.png|jpg   seul dépôt d’images (V2, V3, V4, B)
@@ -253,6 +255,40 @@ Au format 5 s’ajoutent `source` (dossier des sources natives) et le bloc `cata
 - **Calibrage** : descripteurs du CECRL et formats des épreuves de lecture et d’écoute du Goethe-Zertifikat A1, A2 et B1 (annonces, courriels, petites annonces à apparier, articles, règlements, messages téléphoniques, dialogues, interviews, émissions de radio), avec une difficulté croissante d’un palier à l’autre : textes plus longs, syntaxe plus complexe, réponses à inférer.
 - **Écoute** : un son par question, transcription masquée (`hidden`), 10 secondes à 1 minute. Les sons du palier A1 sont lus plus lentement, comme ceux du niveau A1.
 
+## Ciné-club (films)
+
+Le Ciné-club (EVO-055) propose, hors parcours et sans durée imposée, de **s'entraîner avec un film** : chaque film est découpé en séquences de 6 à 10 minutes, chacune en trois temps (avant de regarder : contexte et mots-clés ; regarder : lecteur YouTube et carnet de mots ; après : questions corrigées). Les trois films *Nicos Weg* de la Deutsche Welle (A1, A2, B1) sont rédigés.
+
+**Droits (non négociables).** La vidéo n'est lue que dans le lecteur YouTube officiel (`www.youtube-nocookie.com`), jamais téléchargée ; seules les vidéos de `cine/videos.json` (chaîne officielle vérifiée par le responsable produit) sont admises. Rien n'est recopié de l'éditeur du film : ni sous-titres, ni manuscrits, ni exercices, ni images. Titres, contextes, mots-clés, questions et explications sont **originaux** ; une réplique citée compte 12 mots au plus, rarement. Le crédit visible et le lien du cours gratuit de l'éditeur sont repris de `videos.json`. Aucun accès automatisé à YouTube pour préparer un film : l'intrigue et l'ordre des épisodes se lisent sur le site public de l'éditeur, comme un enseignant prépare sa fiche.
+
+**Source** `cine/<langue>/<filmId>.mjs` (aides de `cine/lib.mjs`, constructeurs de questions de `b/lib.mjs`) :
+
+```js
+import { DW, bi, choice, contexte, fill, match, mot, nom, order } from '../lib.mjs';
+export default {
+  film: { id: 'nicos-weg-a1', levelId: 'a1', title: 'Nicos Weg · A1', position: 1, videoId: '4-eDoThe6qo',
+    durationSeconds: '1:43:00', courseUrl: 'https://learngerman.dw.com/de/nicos-weg/c-36519687',
+    channel: DW.channel, credit: DW.credit, licenseNote: DW.licenseNote, description: '…' },
+  sequences: [{
+    title: 'Ankunft in Deutschland · L’arrivée en Allemagne', episodes: [1, 5], start: '0:00', end: '6:15', approx: true,
+    context: contexte({ episodes: [1, 5], situation: [[de, fr], …], questions: [[de, fr], …], focus: [[de, fr]] }),
+    keywords: [nom('der', 'Flughafen', 'Flughäfen', 'l’aéroport'), mot('weg', 'parti, disparu', 'remarque'), …],
+    questions: [choice('q1', bi('Frage?', 'Question ?'), [['…'], ['…', true], ['…']], 'Explication…'), …],
+  }],
+};
+```
+
+- **Séquences** : identifiant `<filmId>-NN` et position déduits de l'ordre ; bornes en secondes ou « m:ss », « h:mm:ss » ; contiguës, dans l'ordre, sans chevauchement, de 3 à 15 minutes (6 à 10 conseillées) ; `episodes` (folgen couvertes) ne sert qu'à la source et au contexte. **`approx: true`** marque des bornes estimées (Nicos Weg : durée de chaque folge publiée par la DW, moins le générique que le film complet ne répète pas) : l'administration les vérifie en regardant, dans l'éditeur du catalogue (« Prendre le temps actuel »), puis **reporte les bornes justes dans la source** et retire `approx`.
+- **Titre** : allemand, avec glose française « · » en A1 et A2 ; allemand seul à partir du B1. **Contexte** (`contexte()`) : situation sans dévoiler la suite, 2 ou 3 questions d'anticipation non notées, consignes de visionnage ; balisage du niveau comme les cours : « allemand [fr] français » jusqu'au B1 (A1 et A2 compris : la séquence montre un film en allemand), « [fr?] » à partir du B2.
+- **Mots-clés** : 4 à 10 (`nom(article, mot, pluriel, traduction, remarque?)`, `mot(mot, traduction, remarque?)`), remarque de 120 caractères au plus.
+- **Questions** : 5 à 8, types `choice`, `fill`, `order`, `match` seulement (corrigées par la clé d'exercice) ; énoncé « allemand [fr] français » (« [fr?] » au B2) ; une seule bonne réponse incontestable d'après la séquence ; explication en français (en allemand avec aide repliée au B2) ; place et longueur des bonnes réponses équilibrées sur le film (43 % au plus au même rang, jamais plus de 1,35 fois le plus long distracteur).
+
+**Construction** : `node infra/content/build-cine.mjs` (options `--film <id>`, `--out <dossier>`) écrit `de/cine/<filmId>.json`, document de film au format 1, exactement le corps de `PUT /catalogue/films/{id}` : fiche du film complétée (fournisseur, adresse de la vidéo), séquences, mots-clés et questions au format du document de version (`type`, `moduleRef: null`, `options`, clé `spec`). Chaque séquence devient au catalogue la leçon `cine-<sequenceId>` (sans version, niveau du film).
+
+**Contrôle** : `node infra/content/check-content.mjs --films` (ou `content/de/cine`, ou un fichier) : clés connues du catalogue seulement ; vidéo de la liste autorisée, chaîne, cours et crédit conformes ; adresse de la vidéo ; bornes, durées, ordre, recouvrement ; contexte bilingue et questions d'anticipation ; mots-clés ; questions (types, une bonne réponse, trous, ordres, paires, explications) ; consignes hors application ; citations de plus de 12 mots ; équilibre des choix ; taille du document. Sans `--films`, le contrôle des niveaux est inchangé.
+
+**Import** : `node infra/content/import-content.mjs --dry-run --films [--film <id>]` (documents, tailles, bornes approchées), puis `… --api … --films [--publish]` : `PUT /catalogue/films/{id}` (création ou remplacement, statut conservé), publication si demandée et si le film est complet. Idempotent : un film déjà à jour n'est pas réécrit. Un film **modifié dans l'éditeur** depuis le dernier import (bornes ajustées) n'est pas écrasé : l'import s'arrête, sauf `--force`.
+
 ## Vérifier et importer
 
 ```bash
@@ -260,6 +296,8 @@ node infra/content/check-content.mjs [--strict] [content/de/a1 | <module>.json |
 node infra/content/import-content.mjs --dry-run [--level a1] [--placement]     # fichiers présents, taille des documents (2 Mo au plus), segments du lexique
 node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --publish    # dépôt des médias, brouillons, contrôle, publication
 node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --placement --publish    # test de niveau
+node infra/content/build-cine.mjs && node infra/content/check-content.mjs --films && node infra/content/import-content.mjs --dry-run --films   # Ciné-club
+node infra/content/import-content.mjs --api https://<site>/api/v1 --supabase https://<projet>.supabase.co   --publishable-key <clé publique> --email <éditeur> --films --publish    # films du Ciné-club
 ```
 
 Un document au format 4 (questions typées, missions, vocabulaire) n’est accepté que par un catalogue à jour : ordre de mise en production imposé, migrations, services, passerelle, front, puis import. L’importeur refuse un niveau dont des mots du lexique n’ont pas de segment audio (sons à régénérer).
