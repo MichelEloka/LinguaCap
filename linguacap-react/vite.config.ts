@@ -4,6 +4,9 @@ import { defineConfig, loadEnv } from 'vite';
 import react from '@vitejs/plugin-react';
 
 const envDir = fileURLToPath(new URL('..', import.meta.url));
+// Comme le Worker (workers/web-proxy) : seul le lecteur YouTube sans cookie du Ciné-club peut être intégré dans un cadre.
+// Sans frame-ancestors en développement, pour garder les aperçus des outils.
+const developmentHeaders = { 'content-security-policy': "frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'" };
 
 export default defineConfig(({ mode }) => {
   const privateEnv = loadEnv(mode, envDir, 'LINGUACAP_');
@@ -28,6 +31,8 @@ export default defineConfig(({ mode }) => {
     server: {
       host: '127.0.0.1',
       proxy: apiProxy ? { '/api': { target: apiProxy, changeOrigin: true } } : undefined,
+      headers: developmentHeaders,
     },
+    preview: { headers: developmentHeaders },
   };
 });

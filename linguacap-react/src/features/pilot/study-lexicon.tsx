@@ -3,12 +3,15 @@
  * les mots du module — article coloré der/die/das, pluriel, traduction, exemple et remarque —, une recherche, un
  * filtre par nature de mot, un mode « je me teste » qui masque les traductions, et l'écoute de chaque mot : toutes les
  * entrées partagent souvent un même fichier, chacune en lit son segment (début et fin en secondes).
+ * Ciné-club (EVO-055) : pour l'élève, « Noter ce mot » ajoute l'entrée à son carnet (POST /learning/words, source
+ * `activity` = `<trackVersionId>/<moduleId>`) ; les mots déjà notés sont marqués.
  */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { BookA, Eye, EyeOff, Info, Pause, SearchX, Volume2 } from 'lucide-react';
+import { BookA, BookmarkCheck, BookmarkPlus, Eye, EyeOff, Info, Pause, SearchX, Volume2 } from 'lucide-react';
 import { EmptyState } from '../../components/ui';
 import { Chip, Drawer, SearchField, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { moduleWordSource, type LearnerWord } from '../../integration/cine';
 import { partOfSpeechLabels, type Lexicon, type LexiconEntry, type PartOfSpeech } from '../../integration/v4';
 import './study-lexicon.css';
 
@@ -94,8 +97,16 @@ function useSegmentPlayer(onError: () => void) {
   return { playing, play, stop };
 }
 
-function EntryRow({ entry, playing, hidden, revealed, onPlay, onReveal }: {
+/** Carnet de l'élève : jeton et source des mots notés depuis ce lexique (le module). */
+export interface LexiconNotebook { token: string; sourceId: string }
+
+const sameWord = (a: string, b: string) => a.trim().toLocaleLowerCase('de-DE') === b.trim().toLocaleLowerCase('de-DE');
+/** Note enregistrée avec un mot du lexique : traduction et pluriel (200 caractères au plus). */
+const lexiconNote = (entry: LexiconEntry) => `${entry.translation}${entry.plural ? ` (pl. ${entry.plural})` : ''}`.slice(0, 200);
+
+function EntryRow({ entry, playing, hidden, revealed, onPlay, onReveal, noted, onNote }: {
   entry: LexiconEntry; playing: boolean; hidden: boolean; revealed: boolean; onPlay: () => void; onReveal: () => void;
+  noted?: boolean; onNote?: () => void;
 }) {
   const masked = hidden && !revealed;
   const headword = lexiconHeadword(entry);
@@ -121,14 +132,61 @@ function EntryRow({ entry, playing, hidden, revealed, onPlay, onReveal }: {
         {entry.example && <p className="lx-example" lang="de">{entry.example}</p>}
         {entry.note && <p className="lx-note"><Info size={13} aria-hidden="true" />{entry.note}</p>}
       </div>
-      <span className="lx-pos">{partOfSpeechLabels[entry.partOfSpeech] ?? entry.partOfSpeech}</span>
+      <div className="lx-side">
+        <span className="lx-pos">{partOfSpeechLabels[entry.partOfSpeech] ?? entry.partOfSpeech}</span>
+        {onNote && (
+          <button type="button" className={`lx-save${noted ? ' is-noted' : ''}`} onClick={onNote} disabled={noted} aria-pressed={noted}
+            aria-label={noted ? `« ${headword} » est dans votre carnet` : `Noter ce mot : ${headword}`} title={noted ? 'Déjà dans votre carnet' : 'Noter ce mot'}>
+            {noted ? <BookmarkCheck size={16} aria-hidden="true" /> : <BookmarkPlus size={16} aria-hidden="true" />}
+            <span className="lx-save-label">{noted ? 'Noté' : 'Noter'}</span>
+          </button>
+        )}
+      </div>
     </li>
   );
 }
 
-/** Contenu du panneau : recherche, filtres, mode « je me teste » et liste des mots. */
-function LexiconPanel({ lexicon, onRenew }: { lexicon: Lexicon; onRenew?: () => void }) {
+/**
+ * Mots du lexique déjà notés dans le carnet de l'élève (même mot, même module) et ajout d'un mot : le carnet est lu à
+ * l'ouverture du panneau ; sans carnet (service antérieur), le bouton reste proposé et l'erreur du service est affichée.
+ */
+function useLexiconNotebook(notebook: LexiconNotebook | undefined, entries: LexiconEntry[]) {
   const toast = useToast();
+  const [words, setWords] = useState<LearnerWord[]>([]);
+  const [busy, setBusy] = useState<string | null>(null);
+  const token = notebook?.token;
+  const sourceId = notebook?.sourceId;
+  useEffect(() => {
+    if (!token) return;
+    let active = true;
+    requestApi<LearnerWord[]>('/learning/words', token).then((list) => { if (active) setWords(list); }, () => undefined);
+    return () => { active = false; };
+  }, [token]);
+  const noted = useMemo(() => new Set(entries.filter((entry) => words.some((word) => word.sourceId === sourceId
+    && sameWord(word.word, lexiconHeadword(entry)))).map((entry) => entry.id)), [entries, words, sourceId]);
+  async function note(entry: LexiconEntry) {
+    if (!token || !sourceId || busy) return;
+    const headword = lexiconHeadword(entry);
+    setBusy(entry.id);
+    try {
+      const created = await requestApi<LearnerWord>('/learning/words', token, {
+        method: 'POST', body: { word: headword, note: lexiconNote(entry), sourceKind: 'activity', sourceId },
+      });
+      setWords((list) => [created, ...list]);
+      toast(`« ${headword} » est noté dans votre carnet de mots.`);
+    } catch (failure) {
+      toast(failure instanceof Error && failure.name !== 'TimeoutError' ? failure.message : 'Le carnet est momentanément indisponible. Réessayez.', 'warning');
+    } finally {
+      setBusy(null);
+    }
+  }
+  return notebook ? { noted, note } : null;
+}
+
+/** Contenu du panneau : recherche, filtres, mode « je me teste » et liste des mots. */
+function LexiconPanel({ lexicon, onRenew, notebook }: { lexicon: Lexicon; onRenew?: () => void; notebook?: LexiconNotebook }) {
+  const toast = useToast();
+  const saving = useLexiconNotebook(notebook, lexicon.entries);
   const [search, setSearch] = useState('');
   const [group, setGroup] = useState('all');
   const [quiz, setQuiz] = useState(false);
@@ -179,7 +237,8 @@ function LexiconPanel({ lexicon, onRenew }: { lexicon: Lexicon; onRenew?: () => 
         <ul className="lx-list lc-stagger" aria-label={`Mots du module ${lexicon.moduleTitle}`}>
           {shown.map((entry) => (
             <EntryRow key={entry.id} entry={entry} playing={player.playing === entry.id} hidden={quiz} revealed={revealed.has(entry.id)}
-              onPlay={() => player.play(entry)} onReveal={() => setRevealed((current) => new Set(current).add(entry.id))} />
+              onPlay={() => player.play(entry)} onReveal={() => setRevealed((current) => new Set(current).add(entry.id))}
+              noted={saving?.noted.has(entry.id)} onNote={saving ? () => void saving.note(entry) : undefined} />
           ))}
         </ul>
       )}
@@ -188,8 +247,10 @@ function LexiconPanel({ lexicon, onRenew }: { lexicon: Lexicon; onRenew?: () => 
 }
 
 /** Bouton « Lexique du module » (rien si le module n'a pas de lexique) ; le lexique s'ouvre dans un panneau latéral. */
-export function LexiconButton({ lexicon, onOpen, onRenew, className = '' }: {
+export function LexiconButton({ lexicon, onOpen, onRenew, className = '', notebookToken }: {
   lexicon: Lexicon | null | undefined;
+  /** Élève : jeton pour « Noter ce mot » (carnet de mots, source = le module du lexique). */
+  notebookToken?: string;
   /** Appelé à l'ouverture (par exemple pour renouveler les adresses des sons). */
   onOpen?: () => void;
   /** Appelé quand un son ne peut pas être lu (adresse expirée). */
@@ -208,7 +269,8 @@ export function LexiconButton({ lexicon, onOpen, onRenew, className = '' }: {
       {open && (
         <Drawer title="Lexique du module" description={`${lexicon.moduleTitle} · ${count} mot${count > 1 ? 's' : ''} à connaître`}
           onClose={() => setOpen(false)}>
-          <LexiconPanel lexicon={lexicon} onRenew={onRenew} />
+          <LexiconPanel lexicon={lexicon} onRenew={onRenew}
+            notebook={notebookToken ? { token: notebookToken, sourceId: moduleWordSource(lexicon.trackVersionId, lexicon.moduleId) } : undefined} />
         </Drawer>
       )}
     </>
@@ -220,7 +282,11 @@ export function LexiconButton({ lexicon, onOpen, onRenew, className = '' }: {
  * Rien n'est affiché tant qu'il n'est pas chargé, ni si le module n'en a pas ; les adresses des sons (cinq minutes) sont
  * renouvelées à chaque ouverture après quatre minutes.
  */
-export function LexiconLoader({ token, versionId, moduleId, className }: { token: string; versionId: string; moduleId: string; className?: string }) {
+export function LexiconLoader({ token, versionId, moduleId, className, notebook = false }: {
+  token: string; versionId: string; moduleId: string; className?: string;
+  /** Élève : propose « Noter ce mot » (carnet de mots). */
+  notebook?: boolean;
+}) {
   const [lexicon, setLexicon] = useState<Lexicon | null>(null);
   const [reload, setReload] = useState(0);
   const loadedAt = useRef(0);
@@ -233,6 +299,6 @@ export function LexiconLoader({ token, versionId, moduleId, className }: { token
     return () => { active = false; };
   }, [token, versionId, moduleId, reload]);
   const renew = useCallback(() => setReload((value) => value + 1), []);
-  return <LexiconButton lexicon={lexicon} className={className} onRenew={renew}
+  return <LexiconButton lexicon={lexicon} className={className} onRenew={renew} notebookToken={notebook ? token : undefined}
     onOpen={() => { if (Date.now() - loadedAt.current > 4 * 60_000) renew(); }} />;
 }

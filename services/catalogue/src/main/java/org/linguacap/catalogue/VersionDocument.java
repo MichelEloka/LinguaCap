@@ -323,7 +323,7 @@ public record VersionDocument(UUID id, String levelId, String levelCode, String 
         }
     }
 
-    private static void checkQuestions(List<Question> questions, String owner) {
+    static void checkQuestions(List<Question> questions, String owner) {
         Set<String> ids = new HashSet<>();
         for (Question question : nonNull(questions)) {
             requireId(question == null ? null : question.id(), "question");

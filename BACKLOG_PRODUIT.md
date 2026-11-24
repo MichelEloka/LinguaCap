@@ -58,6 +58,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-052 | Le professeur construit ses cours | P3 | XL | EVO-033, EVO-014 |
 | EVO-053 | Ressources classées par niveau | P3 | S | — |
 | EVO-054 | Clés API : automatisation de l’administration et services tiers | P3 | L | — |
+| EVO-055 | Ciné-club : s’entraîner avec un film (Nicos Weg) et carnet de mots | P2 · prêt, à déployer | L | EVO-051 |
 | EVO-018 | Séries d’examens blancs d’entraînement | P3 | L | EVO-017 |
 | EVO-019 | Équivalences avec les certificats connus | P3 | S | — |
 | EVO-020 | Préparation aux certificats au format réel | P3 | XL | EVO-017, EVO-018 |
@@ -265,6 +266,24 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 **À surveiller au déploiement** : ordre migrations, services (Suivi juste après la migration du curseur), passerelle, front,
 puis import de la V4 par l'administration ; mesurer la durée de l'import et de la publication d'une version V4 (délais de 7 s
 entre services et de 10 s au Worker) et celle de la vue d'ensemble de l'administration avec une cinquantaine d'élèves.
+
+**Ciné-club : s'entraîner avec un film** (EVO-055), sur `develop` le 25 novembre 2026 :
+- Les trois films *Nicos Weg* de la Deutsche Welle (A1, A2, B1), lus dans le **lecteur YouTube officiel** seulement (domaine
+  youtube-nocookie, chargé après consentement de l'élève) ; rien n'est téléchargé ni recopié ; questions, contextes et
+  mots-clés originaux LinguaCap ; crédit DW et lien vers son cours gratuit.
+- **Facultatif** (hors parcours, contrat et durées) : bibliothèque « Ciné-club » par niveau ; séquence en trois temps
+  (avant : contexte et mots-clés ; regarder : lecteur et carnet à côté ; après : questions corrigées une à une).
+- **Carnet de mots** de l'élève (films, lexique des modules, saisie libre), visible par son professeur ; base des futures
+  cartes de révision (EVO-047).
+- **Professeur** : séquences faites, scores et mots notés dans la fiche élève ; « Proposer une séquence » à un élève.
+- **Éditeur** : films et séquences, aide « Prendre le temps actuel » pour fixer les bornes en regardant.
+- Contenus : A1 15 séquences (119 questions), A2 14 (112), B1 14 (112).
+- **À faire par l'administration** : vérifier les bornes des 43 séquences dans l'éditeur (toutes approximatives, calculées
+  d'après les durées des épisodes publiées par la DW) et la durée exacte des films, puis les reporter dans les sources.
+- **À faire par le responsable produit** : la DW encourage l'usage de *Nicos Weg* en classe mais ne publie pas de licence
+  pour une plateforme tierce ; demander une confirmation écrite à la DW (bildung@dw.com) avant une ouverture publique ou
+  payante (droits possibles de tiers : Bundesagentur für Arbeit, Cornelsen) ; relecture humaine des questions A2 et B1
+  signalées par le lot de contenus.
 
 **Cours B1 et B2 complets** (EVO-051), sur `develop` le 24 novembre 2026 (commits 9b5551c, 1d9d048, 81ba40e, fb0f20f) :
 - **Niveaux dynamiques** : vitrine, accueil, test de niveau, objectif, bibliothèque, questionnaire du professeur, indicateurs

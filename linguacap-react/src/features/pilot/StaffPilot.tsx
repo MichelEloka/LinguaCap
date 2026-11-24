@@ -105,7 +105,7 @@ export function StaffPilot({ profile, token }: { profile: Profile; token: string
         </>}
         {admin && <Route path="utilisateurs" element={<StaffSection title="Utilisateurs" description="Retrouvez chaque compte, son rôle, son rattachement et son accès."><UsersPanel profile={profile} token={token} /></StaffSection>} />}
         {admin && <Route path="indicateurs" element={<StaffSection title="Indicateurs" description="Usages du pilote par période, niveau, cadence et type de parcours."><KpiPanel token={token} /></StaffSection>} />}
-        {allowed('catalogue') && <Route path="catalogue/*" element={<StaffSection title="Catalogue" description="Niveaux d’allemand, ordre, prérequis et versions des parcours."><CataloguePanel token={token} /></StaffSection>} />}
+        {allowed('catalogue') && <Route path="catalogue/*" element={<StaffSection title="Catalogue" description="Niveaux d’allemand, versions des parcours et films du Ciné-club."><CataloguePanel token={token} /></StaffSection>} />}
         {allowed('mediatheque') && <Route path="mediatheque" element={<StaffSection title="Médiathèque" description="Images et sons à associer aux activités ; les parcours conservent les versions publiées."><MediaLibraryPanel token={token} /></StaffSection>} />}
         {allowed('corrections') && <Route path="corrections/*" element={<StaffSection title="Corrections" description="Copies d’évaluation, missions et répétitions orales remises, les plus anciennes d’abord."><GradingPanel token={token} /></StaffSection>} />}
         <Route path="*" element={<Navigate to="/espace" replace />} />

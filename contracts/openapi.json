@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.12.0",
+    "version": "1.13.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -5198,6 +5198,596 @@
           }
         }
       }
+    },
+    "/films": {
+      "get": {
+        "operationId": "listFilms",
+        "summary": "Ciné-club : films publiés (niveau publié), séquences sans questions",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LanguageIdQuery"
+          },
+          {
+            "$ref": "#/components/parameters/LevelCodeQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Films publiés",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Film"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/films/{filmId}": {
+      "get": {
+        "operationId": "getFilm",
+        "summary": "Ciné-club : film publié et questions « après » sans corrigé (aperçu d’un brouillon pour les éditeurs)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FilmIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Film",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Film"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/films": {
+      "get": {
+        "operationId": "listCatalogueFilms",
+        "summary": "Films du catalogue, tous statuts (administration ou permission Catalogue)",
+        "responses": {
+          "200": {
+            "description": "Films",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FilmSummary"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/films/{filmId}": {
+      "get": {
+        "operationId": "getFilmDocument",
+        "summary": "Document d’un film avec ses corrigés et ce qu’il reste à compléter",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FilmIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Document du film",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmEditorDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "put": {
+        "operationId": "saveFilm",
+        "summary": "Créer ou remplacer un film et ses séquences (import au format 1 ou éditeur)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FilmIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FilmDocumentInput"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Film enregistré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmEditorDocument"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/films/{filmId}/publish": {
+      "post": {
+        "operationId": "publishFilm",
+        "summary": "Publier un film complet (sans effet s’il l’est déjà)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FilmIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Film publié",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/catalogue/films/{filmId}/retire": {
+      "post": {
+        "operationId": "retireFilm",
+        "summary": "Retirer un film publié (il repasse en brouillon)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/FilmIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Film retiré",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmSummary"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/cine": {
+      "get": {
+        "operationId": "getCineOverview",
+        "summary": "Ciné-club d’un élève : films de sa langue, dernier résultat, mots notés et propositions en cours",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LevelCodeQuery"
+          },
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ciné-club",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CineOverview"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/words": {
+      "get": {
+        "operationId": "listLearnerWords",
+        "summary": "Carnet de mots (l’élève ; son référent, son correcteur désigné ou l’administration avec learnerId)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mots, plus récent d’abord",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/LearnerWord"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "addLearnerWord",
+        "summary": "Noter un mot dans son carnet (élève ; 3 000 mots au plus)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LearnerWordRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Mot noté",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerWord"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/words/{wordId}": {
+      "patch": {
+        "operationId": "updateLearnerWord",
+        "summary": "Modifier le mot ou la note (élève)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WordIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LearnerWordChange"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mot modifié",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerWord"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "deleteLearnerWord",
+        "summary": "Supprimer un mot du carnet (élève)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/WordIdPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mot supprimé",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LearnerWordDeleted"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/film-recommendations": {
+      "get": {
+        "operationId": "listFilmRecommendations",
+        "summary": "Séquences proposées à un élève (écartées comprises)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/LearnerIdQuery"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Propositions, plus récente d’abord",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/FilmRecommendation"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      },
+      "post": {
+        "operationId": "recommendFilmSequence",
+        "summary": "Proposer une séquence à un élève (référent, correcteur désigné ou administration ; refusé à un tiers)",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/FilmRecommendationRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Séquence proposée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmRecommendation"
+                }
+              }
+            }
+          },
+          "400": {
+            "$ref": "#/components/responses/Error"
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
+    },
+    "/learning/film-recommendations/{recommendationId}/dismiss": {
+      "post": {
+        "operationId": "dismissFilmRecommendation",
+        "summary": "Écarter une séquence proposée (élève)",
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/RecommendationIdPath"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "maxProperties": 0
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Proposition écartée",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FilmRecommendation"
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/Error"
+          },
+          "403": {
+            "$ref": "#/components/responses/Error"
+          },
+          "404": {
+            "$ref": "#/components/responses/Error"
+          }
+        }
+      }
     }
   },
   "components": {
@@ -5515,6 +6105,53 @@
           "$ref": "#/components/schemas/Slug"
         },
         "example": "a1-hallo"
+      },
+      "FilmIdPath": {
+        "name": "filmId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/FilmId"
+        },
+        "example": "nicos-weg-a1"
+      },
+      "WordIdPath": {
+        "name": "wordId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "5c3e1a2b-4d6f-4a8b-9c0d-1e2f3a4b5c6d"
+      },
+      "RecommendationIdPath": {
+        "name": "recommendationId",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "$ref": "#/components/schemas/Uuid"
+        },
+        "example": "2a4c6e8f-1b3d-4f5a-8c7e-9d0b1a2c3e4f"
+      },
+      "LanguageIdQuery": {
+        "name": "languageId",
+        "in": "query",
+        "required": false,
+        "description": "Langue des films (ex. de).",
+        "schema": {
+          "$ref": "#/components/schemas/LanguageId"
+        },
+        "example": "de"
+      },
+      "LevelCodeQuery": {
+        "name": "level",
+        "in": "query",
+        "required": false,
+        "description": "Code du niveau (ex. A1).",
+        "schema": {
+          "$ref": "#/components/schemas/LevelCode"
+        },
+        "example": "A1"
       }
     },
     "responses": {
@@ -15736,6 +16373,1203 @@
                 "format": "date-time"
               }
             }
+          }
+        }
+      },
+      "FilmId": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "maxLength": 48
+      },
+      "FilmSequenceId": {
+        "type": "string",
+        "pattern": "^[a-z0-9]+(-[a-z0-9]+)*$",
+        "maxLength": 59,
+        "description": "Commence par l’identifiant du film suivi d’un tiret ; la leçon des questions « après » est cine-<id>."
+      },
+      "FilmStatus": {
+        "type": "string",
+        "enum": [
+          "draft",
+          "published"
+        ]
+      },
+      "FilmKeyword": {
+        "type": "object",
+        "required": [
+          "word",
+          "translation"
+        ],
+        "additionalProperties": false,
+        "description": "Mot-clé original de la séquence. Servi avec article, plural et note (null s’ils sont absents).",
+        "properties": {
+          "word": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "article": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "enum": [
+              "der",
+              "die",
+              "das",
+              null
+            ]
+          },
+          "plural": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80
+          },
+          "translation": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 120
+          }
+        }
+      },
+      "FilmInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "languageId",
+          "levelId",
+          "title",
+          "provider",
+          "videoId",
+          "channel",
+          "videoUrl",
+          "credit",
+          "durationSeconds"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "levelId": {
+            "type": "string",
+            "pattern": "^[abc][12]$",
+            "description": "Niveau du catalogue (minuscules)."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "youtube"
+            ],
+            "description": "Lecteur YouTube officiel seulement (youtube-nocookie)."
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "channel": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "videoUrl": {
+            "type": "string",
+            "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$",
+            "description": "Exactement https://www.youtube.com/watch?v=<videoId>."
+          },
+          "courseUrl": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Cours gratuit du diffuseur (https), vide dans un brouillon."
+          },
+          "credit": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "description": "Crédit affiché avec le lecteur."
+          },
+          "licenseNote": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "durationSeconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 14400
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Ordre parmi les films du niveau."
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode",
+            "readOnly": true,
+            "description": "Ignoré en entrée."
+          },
+          "status": {
+            "$ref": "#/components/schemas/FilmStatus",
+            "readOnly": true,
+            "description": "Ignoré en entrée : la publication passe par /publish et /retire."
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "readOnly": true,
+            "description": "Ignoré en entrée."
+          },
+          "updatedAt": {
+            "type": "string",
+            "readOnly": true,
+            "description": "Ignoré en entrée."
+          }
+        }
+      },
+      "FilmSequenceInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "position",
+          "start",
+          "end"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 14400,
+            "description": "Début dans la vidéo, en secondes."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14400,
+            "description": "Fin dans la vidéo, en secondes : la séquence dure de 180 à 900 s."
+          },
+          "approx": {
+            "type": "boolean",
+            "description": "Bornes approximatives, à vérifier en regardant (éditeur)."
+          },
+          "context": {
+            "type": "string",
+            "maxLength": 4000,
+            "description": "Avant de regarder : situation, questions d’anticipation, consignes (balisage [fr] et [fr?] transmis tel quel)."
+          },
+          "keywords": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/FilmKeyword"
+            }
+          },
+          "questions": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "$ref": "#/components/schemas/DraftQuestion"
+            },
+            "description": "Questions « après » (choice, fill, order, match) : 5 à 8 complètes pour publier."
+          },
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug",
+            "readOnly": true,
+            "description": "Ignoré en entrée."
+          }
+        }
+      },
+      "FilmDocumentInput": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "film"
+        ],
+        "description": "Document d’import (format 1) ou document de l’éditeur renvoyé tel quel. Structure contrôlée à l’enregistrement (400) ; complétude exigée pour publier et pour enregistrer un film publié (409).",
+        "properties": {
+          "format": {
+            "type": "integer",
+            "enum": [
+              1
+            ]
+          },
+          "film": {
+            "$ref": "#/components/schemas/FilmInput"
+          },
+          "sequences": {
+            "type": "array",
+            "maxItems": 40,
+            "items": {
+              "$ref": "#/components/schemas/FilmSequenceInput"
+            }
+          },
+          "checks": {
+            "$ref": "#/components/schemas/Checks",
+            "readOnly": true,
+            "description": "Ignoré en entrée."
+          }
+        }
+      },
+      "FilmEditorFilm": {
+        "type": "object",
+        "required": [
+          "id",
+          "languageId",
+          "levelId",
+          "title",
+          "description",
+          "provider",
+          "videoId",
+          "channel",
+          "videoUrl",
+          "courseUrl",
+          "credit",
+          "licenseNote",
+          "durationSeconds",
+          "position",
+          "levelCode",
+          "status",
+          "publishedAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "levelId": {
+            "type": "string",
+            "pattern": "^[abc][12]$",
+            "description": "Niveau du catalogue (minuscules)."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "youtube"
+            ],
+            "description": "Lecteur YouTube officiel seulement (youtube-nocookie)."
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "channel": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "videoUrl": {
+            "type": "string",
+            "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$",
+            "description": "Exactement https://www.youtube.com/watch?v=<videoId>."
+          },
+          "courseUrl": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Cours gratuit du diffuseur (https), vide dans un brouillon."
+          },
+          "credit": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "description": "Crédit affiché avec le lecteur."
+          },
+          "licenseNote": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "durationSeconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 14400
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Ordre parmi les films du niveau."
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FilmStatus"
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FilmEditorSequence": {
+        "type": "object",
+        "required": [
+          "id",
+          "position",
+          "title",
+          "start",
+          "end",
+          "approx",
+          "context",
+          "keywords",
+          "lessonId",
+          "questions"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 14400,
+            "description": "Début dans la vidéo, en secondes."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14400,
+            "description": "Fin dans la vidéo, en secondes : la séquence dure de 180 à 900 s."
+          },
+          "approx": {
+            "type": "boolean",
+            "description": "Bornes approximatives, à vérifier en regardant (éditeur)."
+          },
+          "context": {
+            "type": "string",
+            "maxLength": 4000,
+            "description": "Avant de regarder : situation, questions d’anticipation, consignes (balisage [fr] et [fr?] transmis tel quel)."
+          },
+          "keywords": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/FilmKeyword"
+            }
+          },
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "questions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DraftQuestion"
+            },
+            "description": "Avec leur corrigé : éditeurs seulement."
+          }
+        }
+      },
+      "FilmEditorDocument": {
+        "type": "object",
+        "required": [
+          "film",
+          "sequences",
+          "checks"
+        ],
+        "properties": {
+          "film": {
+            "$ref": "#/components/schemas/FilmEditorFilm"
+          },
+          "sequences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilmEditorSequence"
+            }
+          },
+          "checks": {
+            "$ref": "#/components/schemas/Checks"
+          }
+        }
+      },
+      "FilmSummary": {
+        "type": "object",
+        "required": [
+          "id",
+          "languageId",
+          "levelId",
+          "levelCode",
+          "title",
+          "videoId",
+          "durationSeconds",
+          "position",
+          "status",
+          "sequenceCount",
+          "publishedAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "levelId": {
+            "type": "string",
+            "pattern": "^[abc][12]$",
+            "description": "Niveau du catalogue (minuscules)."
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "title": {
+            "type": "string"
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "durationSeconds": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "status": {
+            "$ref": "#/components/schemas/FilmStatus"
+          },
+          "sequenceCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "publishedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "FilmSequence": {
+        "type": "object",
+        "description": "Séquence servie à toute session : jamais de corrigé.",
+        "required": [
+          "id",
+          "filmId",
+          "position",
+          "title",
+          "start",
+          "end",
+          "approx",
+          "context",
+          "keywords",
+          "lessonId",
+          "questionCount",
+          "questions"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "filmId": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 14400,
+            "description": "Début dans la vidéo, en secondes."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14400,
+            "description": "Fin dans la vidéo, en secondes : la séquence dure de 180 à 900 s."
+          },
+          "approx": {
+            "type": "boolean",
+            "description": "Bornes approximatives, à vérifier en regardant (éditeur)."
+          },
+          "context": {
+            "type": "string",
+            "maxLength": 4000,
+            "description": "Avant de regarder : situation, questions d’anticipation, consignes (balisage [fr] et [fr?] transmis tel quel)."
+          },
+          "keywords": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/FilmKeyword"
+            }
+          },
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug",
+            "description": "cine-<id> : questions « après », remises par POST /assessments/exercises (sans séance)."
+          },
+          "questionCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "questions": {
+            "description": "Vues élève (sans corrigé) dans GET /films/{filmId} ; null dans GET /films.",
+            "oneOf": [
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/QuestionView"
+                }
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "Film": {
+        "type": "object",
+        "description": "Film publié du Ciné-club, lu par le lecteur YouTube officiel.",
+        "required": [
+          "id",
+          "languageId",
+          "levelId",
+          "levelCode",
+          "title",
+          "description",
+          "provider",
+          "videoId",
+          "channel",
+          "videoUrl",
+          "courseUrl",
+          "credit",
+          "licenseNote",
+          "durationSeconds",
+          "position",
+          "sequences"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "levelId": {
+            "type": "string",
+            "pattern": "^[abc][12]$",
+            "description": "Niveau du catalogue (minuscules)."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "youtube"
+            ],
+            "description": "Lecteur YouTube officiel seulement (youtube-nocookie)."
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "channel": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "videoUrl": {
+            "type": "string",
+            "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$",
+            "description": "Exactement https://www.youtube.com/watch?v=<videoId>."
+          },
+          "courseUrl": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Cours gratuit du diffuseur (https), vide dans un brouillon."
+          },
+          "credit": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "description": "Crédit affiché avec le lecteur."
+          },
+          "licenseNote": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "durationSeconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 14400
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Ordre parmi les films du niveau."
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "sequences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilmSequence"
+            }
+          }
+        }
+      },
+      "LearnerWordSourceKind": {
+        "type": "string",
+        "enum": [
+          "film",
+          "activity",
+          "manual"
+        ]
+      },
+      "LearnerWord": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "languageId",
+          "word",
+          "note",
+          "sourceKind",
+          "sourceId",
+          "createdAt",
+          "updatedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "word": {
+            "type": "string",
+            "maxLength": 80
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 200,
+            "description": "Traduction ou remarque ; vide si absente."
+          },
+          "sourceKind": {
+            "$ref": "#/components/schemas/LearnerWordSourceKind"
+          },
+          "sourceId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Séquence (film), référence d’activité (activity), null (manual)."
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "LearnerWordRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "word",
+          "sourceKind"
+        ],
+        "properties": {
+          "word": {
+            "type": "string",
+            "maxLength": 80,
+            "minLength": 1
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          },
+          "sourceKind": {
+            "$ref": "#/components/schemas/LearnerWordSourceKind"
+          },
+          "sourceId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[A-Za-z0-9][A-Za-z0-9:/._-]{0,119}$",
+            "description": "film : identifiant de séquence ; activity : référence choisie par l’interface (lexique d’un module : <trackVersionId>/<moduleId>) ; manual : null."
+          }
+        }
+      },
+      "LearnerWordChange": {
+        "type": "object",
+        "additionalProperties": false,
+        "minProperties": 1,
+        "properties": {
+          "word": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 80,
+            "minLength": 1
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 200
+          }
+        }
+      },
+      "LearnerWordDeleted": {
+        "type": "object",
+        "required": [
+          "id",
+          "deleted"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "deleted": {
+            "type": "boolean",
+            "const": true
+          }
+        }
+      },
+      "FilmRecommendationRole": {
+        "type": "string",
+        "enum": [
+          "teacher",
+          "reviewer",
+          "admin"
+        ]
+      },
+      "FilmRecommendation": {
+        "type": "object",
+        "required": [
+          "id",
+          "learnerId",
+          "filmId",
+          "sequenceId",
+          "recommendedBy",
+          "recommendedByRole",
+          "note",
+          "createdAt",
+          "dismissedAt"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "filmId": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "sequenceId": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "recommendedBy": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "recommendedByRole": {
+            "$ref": "#/components/schemas/FilmRecommendationRole"
+          },
+          "note": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dismissedAt": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "format": "date-time"
+          }
+        }
+      },
+      "FilmRecommendationRequest": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "learnerId",
+          "sequenceId"
+        ],
+        "properties": {
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "sequenceId": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "note": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "maxLength": 300
+          }
+        }
+      },
+      "CineResult": {
+        "type": "object",
+        "required": [
+          "attemptId",
+          "correct",
+          "total",
+          "submittedAt"
+        ],
+        "description": "Dernière remise des questions « après » ; corrigé par GET /assessments/exercises/{attemptId}.",
+        "properties": {
+          "attemptId": {
+            "type": "string"
+          },
+          "correct": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "total": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "submittedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        }
+      },
+      "CineSequence": {
+        "type": "object",
+        "required": [
+          "id",
+          "filmId",
+          "position",
+          "title",
+          "start",
+          "end",
+          "approx",
+          "context",
+          "keywords",
+          "lessonId",
+          "questionCount",
+          "lastResult",
+          "words",
+          "recommendation"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmSequenceId"
+          },
+          "filmId": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "start": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 14400,
+            "description": "Début dans la vidéo, en secondes."
+          },
+          "end": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 14400,
+            "description": "Fin dans la vidéo, en secondes : la séquence dure de 180 à 900 s."
+          },
+          "approx": {
+            "type": "boolean",
+            "description": "Bornes approximatives, à vérifier en regardant (éditeur)."
+          },
+          "context": {
+            "type": "string",
+            "maxLength": 4000,
+            "description": "Avant de regarder : situation, questions d’anticipation, consignes (balisage [fr] et [fr?] transmis tel quel)."
+          },
+          "keywords": {
+            "type": "array",
+            "maxItems": 10,
+            "items": {
+              "$ref": "#/components/schemas/FilmKeyword"
+            }
+          },
+          "lessonId": {
+            "$ref": "#/components/schemas/Slug"
+          },
+          "questionCount": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "lastResult": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/CineResult"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "words": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/LearnerWord"
+            },
+            "description": "Mots notés pendant la séquence, plus récent d’abord."
+          },
+          "recommendation": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/FilmRecommendation"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        }
+      },
+      "CineFilm": {
+        "type": "object",
+        "required": [
+          "id",
+          "languageId",
+          "levelId",
+          "levelCode",
+          "title",
+          "description",
+          "provider",
+          "videoId",
+          "channel",
+          "videoUrl",
+          "courseUrl",
+          "credit",
+          "licenseNote",
+          "durationSeconds",
+          "position",
+          "sequences"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "#/components/schemas/FilmId"
+          },
+          "languageId": {
+            "$ref": "#/components/schemas/LanguageId"
+          },
+          "levelId": {
+            "type": "string",
+            "pattern": "^[abc][12]$",
+            "description": "Niveau du catalogue (minuscules)."
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "maxLength": 2000
+          },
+          "provider": {
+            "type": "string",
+            "enum": [
+              "youtube"
+            ],
+            "description": "Lecteur YouTube officiel seulement (youtube-nocookie)."
+          },
+          "videoId": {
+            "type": "string",
+            "pattern": "^[A-Za-z0-9_-]{11}$"
+          },
+          "channel": {
+            "type": "string",
+            "maxLength": 120,
+            "minLength": 1
+          },
+          "videoUrl": {
+            "type": "string",
+            "pattern": "^https://www\\.youtube\\.com/watch\\?v=[A-Za-z0-9_-]{11}$",
+            "description": "Exactement https://www.youtube.com/watch?v=<videoId>."
+          },
+          "courseUrl": {
+            "type": "string",
+            "maxLength": 300,
+            "description": "Cours gratuit du diffuseur (https), vide dans un brouillon."
+          },
+          "credit": {
+            "type": "string",
+            "maxLength": 300,
+            "minLength": 1,
+            "description": "Crédit affiché avec le lecteur."
+          },
+          "licenseNote": {
+            "type": "string",
+            "maxLength": 1000
+          },
+          "durationSeconds": {
+            "type": "integer",
+            "minimum": 60,
+            "maximum": 14400
+          },
+          "position": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100,
+            "description": "Ordre parmi les films du niveau."
+          },
+          "levelCode": {
+            "$ref": "#/components/schemas/LevelCode"
+          },
+          "sequences": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CineSequence"
+            }
+          }
+        }
+      },
+      "CineOverview": {
+        "type": "object",
+        "required": [
+          "learnerId",
+          "languageId",
+          "level",
+          "films",
+          "recommendations",
+          "wordCount"
+        ],
+        "properties": {
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "description": "Langue de l’élève ; null si inconnue (tous les films publiés)."
+          },
+          "level": {
+            "type": [
+              "string",
+              "null"
+            ],
+            "pattern": "^[ABC][12]$"
+          },
+          "films": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CineFilm"
+            }
+          },
+          "recommendations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/FilmRecommendation"
+            },
+            "description": "Propositions en cours sur les films servis, plus récente d’abord."
+          },
+          "wordCount": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3000
           }
         }
       }

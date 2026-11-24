@@ -470,9 +470,11 @@ function SpeakForm({ question, at, index, placements, update }: {
 }
 
 /** Questions et corrigé. `typed` (exercices V4) : choix du type, formulaire par type, explication et retour par choix. */
-export function QuestionsEditor({ questions, onChange, moduleRefs, path, typed = false, placements }: {
+export function QuestionsEditor({ questions, onChange, moduleRefs, path, typed = false, placements, types = questionTypes }: {
   questions: DraftQuestion[]; onChange: (questions: DraftQuestion[]) => void; moduleRefs?: { id: string; label: string }[]; path: string;
   typed?: boolean; placements?: DraftPlacement[];
+  /** Types proposés (tous par défaut ; le Ciné-club exclut la dictée et la répétition orale). */
+  types?: readonly QuestionType[];
 }) {
   const { readOnly, locked, issues } = useEditor();
   // Contenu propre à chaque type, gardé si l'on revient au type précédent.
@@ -519,7 +521,7 @@ export function QuestionsEditor({ questions, onChange, moduleRefs, path, typed =
                 <fieldset className="ed-type-picker" data-path={`${at}.type`}>
                   <legend>Type de question</legend>
                   <div>
-                    {questionTypes.map((item) => {
+                    {types.map((item) => {
                       const Icon = questionTypeIcons[item];
                       return (
                         <label key={item} className={`ed-type-option is-${item}${item === type ? ' is-checked' : ''}`} title={questionTypeHints[item]}>

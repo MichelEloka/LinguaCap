@@ -13,6 +13,7 @@ import { firstName } from '../onboarding/onboarding-kit';
 import { HomeView } from './learner-home';
 import { LearnerPath } from './learner-path';
 import { MessagesView, ResultsView, SessionsByWeek } from './learner-views';
+import { CineRecommendationBanner } from '../cine/cine-banner';
 import './learner-dashboard.css';
 
 interface LearnerData { enrollment: PlannedEnrollment | null; results: Grade[]; messages: LearnerMessage[]; path: PathView | null }
@@ -113,6 +114,7 @@ export function LearnerDashboard({ token, name, view }: { token: string; name: s
     <div className="ld-page lc-enter" key={view}>
       <PageHeading title={pageTitle} description={description} />
       {errorBanner}
+      {view === 'home' && <CineRecommendationBanner token={token} />}
       {view === 'home' && <HomeView enrollment={enrollment} results={results} messages={messages} path={path} />}
       {view === 'planning' && path && <LearnerPath token={token} path={path} onChanged={refresh} />}
       {view === 'planning' && !path && (

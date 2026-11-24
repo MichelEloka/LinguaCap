@@ -497,7 +497,7 @@ class AuthoringStore {
         lessons.addBatch();
     }
 
-    private static void addQuestions(PreparedStatement questionRows, PreparedStatement optionRows, String lessonId,
+    static void addQuestions(PreparedStatement questionRows, PreparedStatement optionRows, String lessonId,
                                      List<Question> questions, boolean diagnostic) throws SQLException {
         int position = 0;
         for (Question question : VersionDocument.nonNull(questions)) {

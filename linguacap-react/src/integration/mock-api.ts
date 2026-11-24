@@ -22,6 +22,10 @@
  *   B2 existe en brouillon (« Bientôt »). Module B1 détaillé : « b1-arbeit » (consignes bilingues ` [fr] `, exercices,
  *   répétition, lexique) et ses missions sur grille dans « b1-arbeit-atelier » ; Léa a une mission orale B1 corrigée sur
  *   grille (points, score sur 20). Une mission écrite B1 remise depuis la bibliothèque arrive chez Marie Weber.
+ * - Ciné-club (EVO-055, formes de cine.ts) : un film par niveau publié (Nicos Weg A1, A2, B1), deux séquences d'exemple
+ *   chacun (questions choix, trous, ordre, paires) ; carnet de mots, recommandations des professeurs, vue /learning/cine
+ *   et éditeur (GET|PUT /catalogue/films, publication, retrait). Léa a fait la séquence A1 n° 1 (4/5), noté quatre mots
+ *   et reçu de Marie Weber la proposition de la séquence A1 n° 2.
  */
 import type {
   Addition, AdditionCreated, AdditionRemoved, CompetenceScore, Contract, ContractProposer, ContractStatus, ContractTerms,
@@ -40,6 +44,11 @@ import type {
   SpeechMode, SpeechReviewStatus,
 } from './v4';
 import { countWords, exerciseLimits, missionCriteriaOf, missionLimits, missionMaxScore, speechLimits } from './v4';
+import type {
+  CineFilm, CineOverview, Film, FilmDocument, FilmEditorDocument, FilmFields, FilmKeyword, FilmRecommendation, FilmSequence, FilmSequenceFields,
+  FilmStatus, FilmSummary, LearnerWord, WordSourceKind,
+} from './cine';
+import { cineLessonId, cineLimits, filmCompletenessIssues, filmStructureIssues, moduleWordSource } from './cine';
 import { pilotToday } from './pilot-day';
 
 /**
@@ -55,7 +64,7 @@ const staticLanguages: MockLanguage[] = ([
 ] as const).map(([id, name, nativeName, status], index) => ({ id, name, nativeName, status: status ?? 'coming_soon', position: index + 1 }));
 const findLanguage = (id: string | null | undefined) => (id ? staticLanguages.find((language) => language.id === id) : undefined);
 
-type Method = 'GET' | 'POST' | 'PUT';
+type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type Role = 'learner' | 'teacher' | 'admin' | 'staff';
 type Permission = 'catalogue' | 'correction';
 type Json = Record<string, unknown>;
@@ -310,13 +319,21 @@ interface State {
   speech: SpeechRec[]; missions: MissionRec[];
   /** Brouillons de version créés dans l'éditeur du catalogue (documents au format 4). */
   catalogueDrafts?: Json[];
+  /** Ciné-club : films du catalogue (documents d'import), carnet de mots et recommandations des professeurs. */
+  films: FilmRec[]; words: WordRec[]; filmRecommendations: RecommendationRec[];
 }
+interface FilmRec { document: FilmDocument; status: FilmStatus; updatedAt: string; publishedAt: string | null }
+interface WordRec {
+  id: string; learnerId: string; languageId: string; word: string; note: string; sourceKind: WordSourceKind; sourceId: string | null;
+  createdAt: string; updatedAt: string;
+}
+type RecommendationRec = FilmRecommendation;
 
 /**
- * 2 : V4 (exercices typés, répétitions orales, missions) ; 4 : niveaux B (B1 publié, missions sur grille). Un état enregistré
- * d'une autre version est abandonné.
+ * 2 : V4 (exercices typés, répétitions orales, missions) ; 4 : niveaux B (B1 publié, missions sur grille) ; 5 : Ciné-club
+ * (films, carnet de mots, recommandations). Un état enregistré d'une autre version est abandonné.
  */
-const STATE_VERSION = 4;
+const STATE_VERSION = 5;
 const STORAGE_KEY = 'linguacap-mock-state';
 const IDS = {
   autonome: fixedId(0x101), suivi: fixedId(0x102), yanis: fixedId(0x103), awa: fixedId(0x104), parcours: fixedId(0x105),
@@ -1848,12 +1865,20 @@ function sessionContext(actor: UserRec, sessionId: unknown, activityId: unknown)
   return { path, session, item };
 }
 
+/** Questions corrigées d'une leçon : activité d'un niveau, ou séquence d'un film publié du Ciné-club (`cine-<séquence>`). */
+function exerciseOfLesson(lessonId: string): { activityId: string | null; questions: DraftQuestionV4[] } | undefined {
+  const cine = cineSequenceOfLesson(lessonId);
+  if (cine) return cine.film.status === 'published' ? { activityId: null, questions: cine.sequence.questions } : undefined;
+  const content = contentOfLesson(lessonId);
+  return content ? { activityId: content.id, questions: content.questions } : undefined;
+}
+
 /** POST /assessments/exercises : corrige chaque question, fige le corrigé et rattache les essais de répétition. */
 function gradeExercise(actor: UserRec, body: Json, key: string | undefined): ExerciseResult {
   requireLearner(actor);
   if (typeof body.lessonId !== 'string' || !isUuid(body.roundId) || !isObject(body.answers)) throw invalid('Leçon, manche (roundId) et réponses attendues.');
   const context = sessionContext(actor, body.sessionId, body.activityId);
-  const content = contentOfLesson(body.lessonId);
+  const content = exerciseOfLesson(body.lessonId);
   if (!content || !content.questions.length) throw notFound('Exercice introuvable.');
   const existing = key ? state().grades.find((grade) => grade.key === `${actor.id}:${key}`) : undefined;
   if (existing?.review) return { grade: gradeView(existing), questions: existing.review };
@@ -1873,7 +1898,7 @@ function gradeExercise(actor: UserRec, body: Json, key: string | undefined): Exe
   const review = graded.map((item) => item.review);
   const grade: GradeRec = {
     id: newId(), key: key ? `${actor.id}:${key}` : undefined, learnerId: actor.id, lessonId: body.lessonId,
-    activityId: context ? context.item.id : content.id, sessionId: context ? context.session.id : null,
+    activityId: context ? context.item.id : content.activityId, sessionId: context ? context.session.id : null,
     correct: review.filter((item) => item.status === 'correct').length, total: review.length, submittedAt: now(),
     typed: true, roundId: body.roundId as string, review,
     pending: review.filter((item) => item.status === 'pending').length, flagged: review.filter((item) => item.status === 'flagged').map((item) => item.id),
@@ -2887,6 +2912,284 @@ function teacherOnboardingStats(from: string, to: string): TeacherOnboardingStat
 }
 
 // ---------------------------------------------------------------------------------------------------------------------
+// Ciné-club (EVO-055) : films du catalogue, leçons des séquences, carnet de mots et recommandations des professeurs
+// (formes du contrat 1.13.0, précisions « cine-contrat » du lot Services)
+// ---------------------------------------------------------------------------------------------------------------------
+
+const filmRecs = () => state().films;
+const byPosition = <T extends { position: number }>(items: T[]) => [...items].sort((a, b) => a.position - b.position);
+const filmLevel = (record: FilmRec) => record.document.film.levelId.toUpperCase() as LevelCode;
+function sequenceOf(sequenceId: string): { film: FilmRec; sequence: FilmSequenceFields } | undefined {
+  for (const film of filmRecs()) {
+    const sequence = film.document.sequences.find((item) => item.id === sequenceId);
+    if (sequence) return { film, sequence };
+  }
+  return undefined;
+}
+const cineSequenceOfLesson = (lessonId: string) => (lessonId.startsWith('cine-') ? sequenceOf(lessonId.slice(5)) : undefined);
+
+function sequenceView(filmId: string, sequence: FilmSequenceFields, withQuestions: boolean): FilmSequence {
+  const lessonId = cineLessonId(sequence.id);
+  return { id: sequence.id, filmId, position: sequence.position, title: sequence.title, start: sequence.start, end: sequence.end,
+    approx: sequence.approx, context: sequence.context, keywords: sequence.keywords.map((keyword) => ({ ...keyword })), lessonId,
+    questionCount: sequence.questions.length, questions: withQuestions ? sequence.questions.map((question) => questionView(lessonId, question)) : null };
+}
+/** Film servi aux élèves (jamais de corrigé) : questions vues élève seulement pour GET /films/{filmId}. */
+function filmView(record: FilmRec, withQuestions: boolean): Film {
+  const { film, sequences } = record.document;
+  return { ...film, levelCode: filmLevel(record), sequences: byPosition(sequences).map((sequence) => sequenceView(film.id, sequence, withQuestions)) };
+}
+/** Films publiés dont le niveau est publié, par position du niveau puis du film. */
+const publishedFilms = (languageId: string | null, level: string | null) => filmRecs()
+  .filter((record) => record.status === 'published' && VERSIONS[filmLevel(record)] && (!languageId || record.document.film.languageId === languageId)
+    && (!level || filmLevel(record) === level))
+  .sort((a, b) => (levelMeta(filmLevel(a))?.position ?? 99) - (levelMeta(filmLevel(b))?.position ?? 99) || a.document.film.position - b.document.film.position);
+
+/** GET /films/{filmId} : un film publié ; un brouillon pour un éditeur du catalogue (aperçu élève). */
+function readFilm(actor: UserRec, id: string): Film {
+  const record = filmRecs().find((item) => item.document.film.id === id);
+  if (!record || (record.status !== 'published' && !canEditCatalogue(actor))) throw notFound('Film introuvable.');
+  return filmView(record, true);
+}
+/** GET /lessons/{lessonId} : questions d'une séquence sans corrigé (leçon sans version du niveau du film). */
+function cineLesson(actor: UserRec, lessonId: string) {
+  const found = cineSequenceOfLesson(lessonId);
+  if (!found || (found.film.status !== 'published' && !canEditCatalogue(actor))) throw notFound('Leçon introuvable.');
+  return { id: lessonId, title: found.sequence.title, level: filmLevel(found.film), description: found.sequence.context, transcript: null, mediaIds: [],
+    questions: found.sequence.questions.map((question) => questionView(lessonId, question)) };
+}
+
+// --- Carnet de mots ------------------------------------------------------------------------------------------------------
+
+/** Lecture du carnet, des recommandations et de la vue Ciné-club : l'élève, son référent, son correcteur, l'administration. */
+function wordReader(actor: UserRec, query: URLSearchParams) {
+  const learnerId = query.get('learnerId');
+  if (!learnerId && actor.role !== 'learner') throw invalid('Précisez l’élève consulté (learnerId).');
+  const learner = learnerId ? learnerById(learnerId) : actor;
+  if (!(actor.id === learner.id || isReferent(actor, learner) || isGrader(actor, learner))) throw forbidden('Cet élève n’est pas suivi par votre compte.');
+  return learner;
+}
+const wordView = (word: WordRec): LearnerWord => ({ ...word });
+const wordsOf = (learnerId: string) => state().words.filter((word) => word.learnerId === learnerId).sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+const sameWord = (a: string, b: string) => a.trim().toLocaleLowerCase('de-DE') === b.trim().toLocaleLowerCase('de-DE');
+
+function checkWordFields(body: Json, partial: boolean) {
+  const word = body.word === undefined && partial ? undefined : typeof body.word === 'string' ? body.word.trim() : null;
+  const note = body.note === undefined && partial ? undefined : body.note === null ? '' : typeof body.note === 'string' ? body.note.trim() : null;
+  if (word === null || (word !== undefined && (word.length < 1 || word.length > cineLimits.wordChars))) throw invalid(`Le mot compte de 1 à ${cineLimits.wordChars} caractères.`);
+  if (note === null || (note !== undefined && note.length > cineLimits.noteChars)) throw invalid(`La note compte ${cineLimits.noteChars} caractères au plus.`);
+  return { word, note };
+}
+/** POST /learning/words (l'élève seulement) : unique par (mot sans casse, source), 3 000 mots au plus. */
+function addWord(actor: UserRec, body: Json) {
+  requireLearner(actor);
+  const { word, note } = checkWordFields(body, false);
+  const sourceKind = body.sourceKind;
+  if (sourceKind !== 'film' && sourceKind !== 'activity' && sourceKind !== 'manual') throw invalid('Source du mot invalide (film, activity ou manual).');
+  const sourceId = body.sourceId ?? null;
+  if (sourceKind === 'manual' && sourceId !== null) throw invalid('Un mot saisi librement n’a pas de source.');
+  if (sourceKind === 'activity' && (typeof sourceId !== 'string' || !/^[A-Za-z0-9][A-Za-z0-9:/._-]{0,119}$/.test(sourceId))) throw invalid('Activité d’origine invalide.');
+  if (sourceKind === 'film' && (typeof sourceId !== 'string' || !sequenceOf(sourceId))) throw notFound('Séquence introuvable.');
+  const mine = wordsOf(actor.id);
+  if (mine.some((item) => sameWord(item.word, word as string) && item.sourceId === sourceId)) throw conflict('Ce mot est déjà dans votre carnet pour cette source.');
+  if (mine.length >= cineLimits.wordsPerLearner) throw conflict(`Votre carnet compte déjà ${cineLimits.wordsPerLearner} mots : supprimez-en avant d’en ajouter.`);
+  const created = now();
+  const record: WordRec = { id: newId(), learnerId: actor.id, languageId: actor.languageId ?? 'de', word: word as string, note: note ?? '',
+    sourceKind, sourceId: sourceId as string | null, createdAt: created, updatedAt: created };
+  state().words.push(record);
+  return { status: 201, body: wordView(record) };
+}
+function ownWord(actor: UserRec, id: string) {
+  requireLearner(actor);
+  const word = state().words.find((item) => item.id === id && item.learnerId === actor.id);
+  if (!word) throw notFound('Mot introuvable dans votre carnet.');
+  return word;
+}
+/** PATCH /learning/words/{wordId} : mot et note (au moins un). */
+function updateWord(actor: UserRec, id: string, body: Json): LearnerWord {
+  const record = ownWord(actor, id);
+  const { word, note } = checkWordFields(body, true);
+  if (word === undefined && note === undefined) throw invalid('Rien à modifier : précisez le mot ou la note.');
+  if (word !== undefined && wordsOf(actor.id).some((item) => item.id !== id && sameWord(item.word, word) && item.sourceId === record.sourceId)) {
+    throw conflict('Ce mot est déjà dans votre carnet pour cette source.');
+  }
+  Object.assign(record, { ...(word !== undefined ? { word } : {}), ...(note !== undefined ? { note } : {}), updatedAt: now() });
+  return wordView(record);
+}
+/** DELETE /learning/words/{wordId} : `{ id, deleted: true }`. */
+function deleteWord(actor: UserRec, id: string) {
+  const record = ownWord(actor, id);
+  state().words = state().words.filter((item) => item !== record);
+  return { id, deleted: true };
+}
+
+// --- Recommandations -----------------------------------------------------------------------------------------------------
+
+const recommendationView = (record: RecommendationRec): FilmRecommendation => ({ ...record });
+const recommendationsOf = (learnerId: string) => state().filmRecommendations.filter((item) => item.learnerId === learnerId)
+  .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+/** POST /learning/film-recommendations : référent, correcteur désigné (Correction), administration ; 403 pour un tiers. */
+function recommendSequence(actor: UserRec, body: Json) {
+  const learner = learnerById(typeof body.learnerId === 'string' ? body.learnerId : '');
+  const role: FilmRecommendation['recommendedByRole'] | null = actor.role === 'admin' ? 'admin' : isReferent(actor, learner) ? 'teacher'
+    : learner.reviewerId === actor.id && actor.permissions.includes('correction') ? 'reviewer' : null;
+  if (!role) throw forbidden('Seul le professeur référent, le correcteur désigné ou l’administration peut proposer une séquence à cet élève.');
+  const found = typeof body.sequenceId === 'string' ? sequenceOf(body.sequenceId) : undefined;
+  if (!found || found.film.status !== 'published' || found.film.document.film.languageId !== (learner.languageId ?? 'de')) throw notFound('Séquence introuvable.');
+  const note = body.note === null || body.note === undefined ? '' : typeof body.note === 'string' ? body.note.trim() : null;
+  if (note === null || note.length > cineLimits.recommendationNoteChars) throw invalid(`La note compte ${cineLimits.recommendationNoteChars} caractères au plus.`);
+  if (recommendationsOf(learner.id).some((item) => item.sequenceId === found.sequence.id && !item.dismissedAt)) {
+    throw conflict('Cette séquence est déjà proposée à cet élève.');
+  }
+  const record: RecommendationRec = { id: newId(), learnerId: learner.id, filmId: found.film.document.film.id, sequenceId: found.sequence.id,
+    recommendedBy: actor.id, recommendedByRole: role, note, createdAt: now(), dismissedAt: null };
+  state().filmRecommendations.push(record);
+  return { status: 201, body: recommendationView(record) };
+}
+/** POST /learning/film-recommendations/{id}/dismiss : l'élève écarte la proposition. */
+function dismissRecommendation(actor: UserRec, id: string): FilmRecommendation {
+  requireLearner(actor);
+  const record = state().filmRecommendations.find((item) => item.id === id && item.learnerId === actor.id);
+  if (!record) throw notFound('Recommandation introuvable.');
+  record.dismissedAt ??= now();
+  return recommendationView(record);
+}
+
+/** GET /learning/cine?level=&learnerId= : films publiés de la langue de l'élève, dernier résultat et mots par séquence. */
+function cineView(actor: UserRec, query: URLSearchParams): CineOverview {
+  const learner = wordReader(actor, query);
+  const level = query.get('level');
+  const words = wordsOf(learner.id);
+  const active = recommendationsOf(learner.id).filter((item) => !item.dismissedAt);
+  // Un correcteur désigné ne lit pas les résultats de l'élève (Évaluations) : lastResult vaut null pour lui.
+  const scores = actor.id === learner.id || isReferent(actor, learner);
+  const grades = scores ? state().grades.filter((grade) => grade.learnerId === learner.id && grade.lessonId.startsWith('cine-'))
+    .sort((a, b) => b.submittedAt.localeCompare(a.submittedAt)) : [];
+  const films: CineFilm[] = publishedFilms(learner.languageId ?? 'de', level).map((record) => {
+    const { sequences, ...film } = filmView(record, false);
+    return { ...film, sequences: sequences.map(({ questions: _questions, ...sequence }) => {
+      const last = grades.find((grade) => grade.lessonId === sequence.lessonId);
+      const recommendation = active.find((item) => item.sequenceId === sequence.id);
+      return { ...sequence, words: words.filter((word) => word.sourceKind === 'film' && word.sourceId === sequence.id).map(wordView),
+        lastResult: last ? { attemptId: publicGradeId(last), correct: last.correct, total: last.total, submittedAt: last.submittedAt } : null,
+        recommendation: recommendation ? recommendationView(recommendation) : null };
+    }) };
+  });
+  return { learnerId: learner.id, languageId: learner.languageId, level, films, wordCount: words.length,
+    recommendations: active.filter((item) => films.some((film) => film.id === item.filmId)).map(recommendationView) };
+}
+
+// --- Éditeur du catalogue ------------------------------------------------------------------------------------------------
+
+const requireCatalogue = (actor: UserRec) => { if (!canEditCatalogue(actor)) throw forbidden('Réservé aux éditeurs du catalogue.'); };
+function filmRecord(id: string) {
+  const record = filmRecs().find((item) => item.document.film.id === id);
+  if (!record) throw notFound('Film introuvable.');
+  return record;
+}
+const filmSummary = (record: FilmRec): FilmSummary => {
+  const { film, sequences } = record.document;
+  return { id: film.id, languageId: film.languageId, levelId: film.levelId, levelCode: filmLevel(record), title: film.title, videoId: film.videoId,
+    durationSeconds: film.durationSeconds, position: film.position, status: record.status, sequenceCount: sequences.length,
+    publishedAt: record.publishedAt, updatedAt: record.updatedAt };
+};
+const filmChecks = (document: FilmDocument) => {
+  const issues = filmCompletenessIssues(document);
+  return { publishable: issues.length === 0, issues };
+};
+const filmEditorDocument = (record: FilmRec): FilmEditorDocument => {
+  const document = structuredClone(record.document);
+  return {
+    film: { ...document.film, levelCode: filmLevel(record), status: record.status, publishedAt: record.publishedAt, updatedAt: record.updatedAt },
+    sequences: byPosition(document.sequences).map((sequence) => ({ ...sequence, lessonId: cineLessonId(sequence.id) })),
+    checks: filmChecks(document),
+  };
+};
+
+const FILM_FIELDS = ['id', 'languageId', 'levelId', 'title', 'description', 'provider', 'videoId', 'channel', 'videoUrl', 'courseUrl', 'credit',
+  'licenseNote', 'durationSeconds', 'position'];
+const FILM_READ_ONLY = ['levelCode', 'status', 'publishedAt', 'updatedAt'];
+const SEQUENCE_FIELDS = ['id', 'position', 'title', 'start', 'end', 'approx', 'context', 'keywords', 'questions'];
+
+/**
+ * PUT /catalogue/films/{filmId} : document au format 1. Structure contrôlée (400 avec le premier point, champ inconnu
+ * compris), séquence d'un autre film refusée (409), complétude exigée pour un film déjà publié (409) ; statut conservé.
+ */
+function saveFilm(actor: UserRec, id: string, body: Json): FilmEditorDocument {
+  requireCatalogue(actor);
+  const { film, sequences, format } = body as { film?: Json; sequences?: unknown; format?: unknown };
+  if (!isObject(film) || !Array.isArray(sequences)) throw invalid('Document de film attendu : { film, sequences }.');
+  if (format !== undefined && format !== 1) throw invalid('Format de document inconnu (1 attendu).');
+  const unknownTop = Object.keys(body).filter((key) => !['format', 'film', 'sequences', 'checks'].includes(key));
+  const unknownFilm = Object.keys(film).filter((key) => !FILM_FIELDS.includes(key) && !FILM_READ_ONLY.includes(key));
+  const unknownSequence = sequences.flatMap((sequence) => (isObject(sequence) ? Object.keys(sequence) : ['?']))
+    .filter((key) => !SEQUENCE_FIELDS.includes(key) && key !== 'lessonId');
+  const unknown = [...unknownTop, ...unknownFilm, ...unknownSequence];
+  if (unknown.length) throw invalid(`Champ inconnu dans le document du film : ${unknown[0]}.`);
+  if (film.id !== id) throw invalid('L’identifiant du film ne correspond pas à l’adresse.');
+  const document: FilmDocument = {
+    format: 1,
+    film: Object.fromEntries(FILM_FIELDS.map((key) => [key, film[key]])) as unknown as FilmFields,
+    sequences: (sequences as Json[]).map((sequence) => ({ ...Object.fromEntries(SEQUENCE_FIELDS.map((key) => [key, sequence[key]])), approx: sequence.approx === true }) as unknown as FilmSequenceFields),
+  };
+  if (!levelMeta(String(document.film.levelId).toUpperCase())) throw invalid(`Film ${id} : niveau inconnu au catalogue.`);
+  const issues = filmStructureIssues(document);
+  if (issues.length) throw invalid(`Film ${id}, ${issues[0].path} : ${issues[0].message}`);
+  const taken = filmRecs().find((item) => item.document.film.id !== id && item.document.sequences.some((sequence) => document.sequences.some((other) => other.id === sequence.id)));
+  if (taken) throw conflict(`Une séquence appartient déjà au film « ${taken.document.film.title} ».`);
+  const existing = filmRecs().find((item) => item.document.film.id === id);
+  if (existing?.status === 'published') {
+    const missing = filmCompletenessIssues(document);
+    if (missing.length) throw conflict(`Film publié : ${missing[0].message} (${missing[0].path}).`);
+  }
+  if (existing) Object.assign(existing, { document, updatedAt: now() });
+  else filmRecs().push({ document, status: 'draft', updatedAt: now(), publishedAt: null });
+  return filmEditorDocument(filmRecord(id));
+}
+/** POST …/publish (409 si incomplet ; déjà publié : renvoyé tel quel) et …/retire (409 s'il n'est pas publié). */
+function setFilmStatus(actor: UserRec, id: string, status: FilmStatus): FilmSummary {
+  requireCatalogue(actor);
+  const record = filmRecord(id);
+  if (status === 'published') {
+    if (record.status === 'published') return filmSummary(record);
+    const missing = filmCompletenessIssues(record.document);
+    if (missing.length) throw conflict(`Publication impossible : ${missing[0].message}`);
+    record.publishedAt = now();
+  } else if (record.status !== 'published') {
+    throw conflict('Ce film n’est pas publié.');
+  }
+  record.status = status;
+  record.updatedAt = now();
+  return filmSummary(record);
+}
+
+/** Réponses d'une séquence (données initiales : un résultat déjà remis par Léa), fausses pour les questions `wrong`. */
+function cineAnswers(lessonId: string, questions: DraftQuestionV4[], wrong: string[]) {
+  return Object.fromEntries(questions.map((question) => {
+    const miss = wrong.includes(question.id);
+    switch (question.type ?? 'choice') {
+      case 'fill': return [question.id, { blanks: Object.fromEntries((question.spec as FillSpec).blanks.map((blank) => [blank.id, miss ? 'x' : blank.accept[0]])) }];
+      case 'order': {
+        const tokens = orderTokens(lessonId, question);
+        const used = new Set<string>();
+        const order = (question.spec as OrderSpec).answers[0].map((text) => {
+          const token = tokens.find((item) => item.text === text && !used.has(item.id)) as QuestionItem;
+          used.add(token.id);
+          return token.id;
+        });
+        return [question.id, { order: miss ? [...order].reverse() : order }];
+      }
+      case 'match': {
+        const { solution, right } = matchItems(lessonId, question);
+        return [question.id, { pairs: miss ? Object.fromEntries(Object.keys(solution).map((key, index) => [key, right[(index + 1) % right.length].id])) : solution }];
+      }
+      default: return [question.id, { choice: (question.options.find((option) => option.correct === !miss) ?? question.options[0]).id }];
+    }
+  }));
+}
+
+// ---------------------------------------------------------------------------------------------------------------------
 // Routage
 // ---------------------------------------------------------------------------------------------------------------------
 
@@ -3125,6 +3428,28 @@ const routes: [Method, RegExp, Handler][] = [
   ['POST', /^\/catalogue\/levels\/([abc][12])\/versions$/, ({ actor, params }) => createCatalogueDraft(actor, params[0])],
   ['GET', /^\/media$/, () => []],
   ['GET', /^\/media\/uploads$/, () => []],
+
+  // Ciné-club : films publiés, questions des séquences (leçons sans version), carnet de mots, recommandations, éditeur
+  ['GET', /^\/films$/, ({ query }) => publishedFilms(query.get('languageId'), query.get('level')).map((record) => filmView(record, false))],
+  ['GET', new RegExp(`^/films/${SLUG}$`), ({ actor, params }) => readFilm(actor, params[0])],
+  ['GET', /^\/lessons\/(cine-[a-z0-9][a-z0-9-]{0,79})$/, ({ actor, params }) => cineLesson(actor, params[0])],
+  ['GET', /^\/learning\/cine$/, ({ actor, query }) => cineView(actor, query)],
+  ['GET', /^\/learning\/words$/, ({ actor, query }) => wordsOf(wordReader(actor, query).id).map(wordView)],
+  ['POST', /^\/learning\/words$/, ({ actor, body }) => addWord(actor, body)],
+  ['PATCH', new RegExp(`^/learning/words/${UUID}$`), ({ actor, params, body }) => updateWord(actor, params[0], body)],
+  ['DELETE', new RegExp(`^/learning/words/${UUID}$`), ({ actor, params }) => deleteWord(actor, params[0])],
+  ['GET', /^\/learning\/film-recommendations$/, ({ actor, query }) => recommendationsOf(wordReader(actor, query).id).map(recommendationView)],
+  ['POST', /^\/learning\/film-recommendations$/, ({ actor, body }) => recommendSequence(actor, body)],
+  ['POST', new RegExp(`^/learning/film-recommendations/${UUID}/dismiss$`), ({ actor, params }) => dismissRecommendation(actor, params[0])],
+  ['GET', /^\/catalogue\/films$/, ({ actor }) => {
+    requireCatalogue(actor);
+    return [...filmRecs()].sort((a, b) => levelRank(filmLevel(a)) - levelRank(filmLevel(b)) || a.document.film.position - b.document.film.position)
+      .map(filmSummary);
+  }],
+  ['GET', new RegExp(`^/catalogue/films/${SLUG}$`), ({ actor, params }) => { requireCatalogue(actor); return filmEditorDocument(filmRecord(params[0])); }],
+  ['PUT', new RegExp(`^/catalogue/films/${SLUG}$`), ({ actor, params, body }) => saveFilm(actor, params[0], body)],
+  ['POST', new RegExp(`^/catalogue/films/${SLUG}/(publish|retire)$`), ({ actor, params }) =>
+    setFilmStatus(actor, params[0], params[1] === 'publish' ? 'published' : 'draft')],
 ];
 
 /** Compte du jeton simulé « mock-<rôle> ». */
@@ -3139,7 +3464,7 @@ function actorOf(token: string | undefined): UserRec {
 
 /** Remplace requestApi en mode simulateur : même signature, mêmes erreurs (Error avec le message de l'API). */
 export async function mockRequest<T>(path: string, token?: string,
-  options?: { method: 'POST' | 'PUT'; body?: unknown; idempotencyKey?: string }): Promise<T> {
+  options?: { method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; body?: unknown; idempotencyKey?: string }): Promise<T> {
   await new Promise((resolve) => setTimeout(resolve, 120 + Math.random() * 160));
   const method: Method = options?.method ?? 'GET';
   const url = new URL(path, 'http://simulateur.local');
@@ -3253,7 +3578,7 @@ function seed(): State {
       tiers: placementBank(), updatedAt: at(created, 9), publishedAt: at(created, 9) }],
     placements: [], paths: [], practice: [], grades: [], exams: [], messages: [],
     teacherResponses: [{ teacherId: IDS.weber, date: created, accepting: true, mode: 'linguacap' }],
-    speech: [], missions: [],
+    speech: [], missions: [], films: cineFilms(), words: [], filmRecommendations: [],
   };
   const invitation = (learner: UserRec): InvitationRec => ({ id: newId(), email: learner.email, displayName: learner.displayName, role: 'learner',
     teacherId: IDS.weber, languageId: 'de', invitedBy: IDS.weber, status: 'accepted', sendCount: 1, createdAt: at(created, 11), lastSentAt: at(created, 11),
@@ -3276,6 +3601,7 @@ function seed(): State {
   validateCurrent(awa);
   current.messages.push({ id: newId(), learnerId: IDS.awa, authorId: IDS.weber, text: 'Bravo pour cette belle régularité ! J’ai ajouté une révision du module « Essen » avant l’examen blanc.', sentAt: at(addDays(today(), -1), 9) });
   seedV4();
+  seedCine();
   return current;
 }
 
@@ -4052,3 +4378,178 @@ const B1_VOCABULARY: Record<string, MockVocabulary[]> = {
 CONTENT.push({ code: 'B1', settings: { reviewMinutes: 15, midtermMinutes: 60, finalMinutes: 120, passPercent: 60 }, modules: b1Modules() });
 Object.assign(V4_DETAILS, B1_DETAILS);
 Object.assign(VOCABULARY, B1_VOCABULARY);
+
+// ---------------------------------------------------------------------------------------------------------------------
+// Ciné-club (EVO-055) : un film par niveau publié (Nicos Weg A1, A2 et B1 de la Deutsche Welle, lus dans le lecteur
+// YouTube officiel) avec deux séquences d'exemple chacun. Contextes, mots-clés, questions et explications sont des exemples
+// originaux du simulateur, sans reprise de la DW ; les vrais contenus viennent de content/de/cine (lot Contenus).
+// Léa (élève suivie) a fait la première séquence A1, noté quelques mots et reçu une proposition de Marie Weber.
+// ---------------------------------------------------------------------------------------------------------------------
+
+const keyword = (word: string, translation: string, article: FilmKeyword['article'] = null, plural: string | null = null, note: string | null = null): FilmKeyword =>
+  ({ word, article, plural, translation, note });
+const DW_CREDIT = 'Film : Nicos Weg, Deutsche Welle (Deutsch lernen mit der DW), lecteur YouTube';
+const DW_LICENSE = 'Vidéo de la Deutsche Welle lue dans le lecteur officiel de YouTube, jamais copiée. Questions, résumés et explications : contenus LinguaCap originaux.';
+const DW_COURSE = 'https://learngerman.dw.com/de/nicos-weg/c-36519687';
+
+function cineFilm(level: LevelCode, videoId: string, minutes: number, description: string, sequences: Omit<FilmSequenceFields, 'position'>[]): FilmRec {
+  const id = `nicos-weg-${level.toLowerCase()}`;
+  return {
+    status: 'published', updatedAt: '2026-11-24T09:00:00.000Z', publishedAt: '2026-11-24T09:00:00.000Z',
+    document: { format: 1, film: { id, languageId: 'de', levelId: level.toLowerCase(), title: `Nicos Weg ${level}`, description, provider: 'youtube', videoId,
+      channel: 'Deutsch lernen mit der DW', videoUrl: `https://www.youtube.com/watch?v=${videoId}`, courseUrl: DW_COURSE, credit: DW_CREDIT,
+      licenseNote: DW_LICENSE, durationSeconds: minutes * 60, position: 1 },
+    sequences: sequences.map((sequence, index) => ({ ...sequence, position: index + 1 })) },
+  };
+}
+
+function cineFilms(): FilmRec[] {
+  return [
+    cineFilm('A1', '4-eDoThe6qo', 103, 'Nico arrive en Allemagne sans connaître personne. Premières rencontres, premiers mots, premières démarches : suivez ses débuts en allemand très simple.', [
+      { id: 'nicos-weg-a1-01', title: 'Hallo! · Bonjour !', start: 0, end: 420, approx: true,
+        context: 'Nico kommt in Deutschland an. Er kennt hier niemanden. [fr] Nico arrive en Allemagne. Il ne connaît personne ici.\n• Was glauben Sie: Wer hilft Nico? [fr] À votre avis : qui va aider Nico ?\n• Hören Sie gut zu: Wie begrüßen sich die Personen? Wie stellen sie sich vor? [fr] Écoutez bien : comment les personnes se saluent-elles ? Comment se présentent-elles ?',
+        keywords: [keyword('Hallo!', 'Salut ! Bonjour !'), keyword('heißen', 's’appeler', null, null, 'Ich heiße Nico.'), keyword('Name', 'le nom', 'der', 'Namen'),
+          keyword('kommen aus', 'venir de', null, null, 'Ich komme aus Spanien.'), keyword('Stadt', 'la ville', 'die', 'Städte'), keyword('Entschuldigung!', 'Pardon ! Excusez-moi !')],
+        questions: [
+          choice('q1', 'Comment se présente-t-on le plus simplement en allemand ?',
+            'Pour donner son prénom, on dit « Ich heiße … » (ou « Ich bin … »). « haben » signifie « avoir » et « aus » introduit l’origine.', [
+              ['Ich heiße Nico.', true, null], ['Ich habe Nico.', false, '« haben » veut dire « avoir » : on ne l’emploie pas pour son nom.'],
+              ['Ich bin aus Nico.', false, '« aus » introduit un pays ou une ville d’origine, pas un prénom.']]),
+          typed('q2', 'fill', 'Complétez la présentation.', 'Avec « ich », le verbe se termine par -e : « ich heiße ». L’origine se dit avec « aus » : « Ich komme aus Spanien ».',
+            { text: 'Ich [[1]] Nico. Ich komme [[2]] Spanien.', blanks: [{ id: '1', accept: ['heiße', 'heisse'], size: 7, hint: 'heißen' }, { id: '2', accept: ['aus'], size: 5, hint: null }] }),
+          typed('q3', 'order', 'Remettez les mots dans l’ordre pour poser la question.',
+            'Question avec un mot interrogatif : « Woher » en 1re position, le verbe conjugué « kommst » en 2e, puis le sujet « du ».', { answers: [['Woher', 'kommst', 'du?']] }),
+          typed('q4', 'match', 'Associez chaque formule à sa traduction.',
+            'Les formules de base de la politesse : saluer (Guten Tag), prendre congé (Tschüss), s’excuser (Entschuldigung), remercier (Danke).',
+            { pairs: [{ left: 'Guten Tag!', right: 'Bonjour !' }, { left: 'Tschüss!', right: 'Au revoir !' }, { left: 'Entschuldigung!', right: 'Pardon !' }, { left: 'Danke!', right: 'Merci !' }] }),
+          choice('q5', 'Vous saluez une dame âgée que vous ne connaissez pas. Que dites-vous ?',
+            '« Guten Tag! » convient à tout le monde, à toute heure de la journée. « Hallo » reste familier et « Tschüss » sert à prendre congé.', [
+              ['Guten Tag!', true, null], ['Hallo, du!', false, 'Trop familier : on ne tutoie pas une personne âgée inconnue.'],
+              ['Tschüss!', false, '« Tschüss » se dit en partant, pas en arrivant.']]),
+        ] },
+      { id: 'nicos-weg-a1-02', title: 'Wo ist …? · Où est… ?', start: 420, end: 930, approx: true,
+        context: 'Nico sucht seinen Weg in der Stadt. Er fragt Leute auf der Straße. [fr] Nico cherche son chemin en ville. Il interroge des passants.\n• Wie fragt man höflich nach dem Weg? [fr] Comment demande-t-on poliment son chemin ?\n• Achten Sie auf die Wörter links, rechts und geradeaus. [fr] Repérez les mots « à gauche », « à droite » et « tout droit ».',
+        keywords: [keyword('wo', 'où'), keyword('links', 'à gauche'), keyword('rechts', 'à droite'), keyword('geradeaus', 'tout droit'),
+          keyword('Straße', 'la rue', 'die', 'Straßen'), keyword('Bahnhof', 'la gare', 'der', 'Bahnhöfe')],
+        questions: [
+          choice('q1', 'Pour demander poliment son chemin à un inconnu, on commence par…',
+            '« Entschuldigung » attire l’attention poliment avant une question. « Tschüss » termine une conversation et « Danke » remercie.', [
+              ['Entschuldigung, …', true, null], ['Tschüss, …', false, '« Tschüss » sert à prendre congé.'], ['Danke, …', false, 'On remercie après la réponse, pas avant la question.']]),
+          typed('q2', 'match', 'Associez chaque indication à sa traduction.', '« links » : à gauche, « rechts » : à droite, « geradeaus » : tout droit, « zurück » : en arrière.',
+            { pairs: [{ left: 'links', right: 'à gauche' }, { left: 'rechts', right: 'à droite' }, { left: 'geradeaus', right: 'tout droit' }, { left: 'zurück', right: 'en arrière' }] }),
+          typed('q3', 'fill', 'Complétez la question.', '« wo » demande le lieu où se trouve quelque chose : « Wo ist der Bahnhof? ». « woher » demande l’origine.',
+            { text: 'Entschuldigung, [[1]] ist der Bahnhof?', blanks: [{ id: '1', accept: ['wo'], size: 5, hint: 'où' }] }),
+          typed('q4', 'order', 'Remettez la réponse dans l’ordre.', 'À l’impératif de politesse, le verbe vient en premier, suivi de « Sie » : « Gehen Sie hier links. ».',
+            { answers: [['Gehen', 'Sie', 'hier', 'links.']] }),
+          choice('q5', 'Que signifie « Das weiß ich leider nicht » ?',
+            '« leider » signifie « malheureusement » et « nicht » porte la négation : la personne ne connaît pas le chemin.', [
+              ['Malheureusement, je ne sais pas.', true, null], ['Je le sais très bien.', false, '« nicht » marque la négation.'],
+              ['C’est tout près d’ici.', false, 'Il n’y a ici aucune indication de lieu.']]),
+        ] },
+    ]),
+    cineFilm('A2', 'Lg5P2w_Ro1c', 111, 'Nico trouve ses repères : travail, collègues, projets. Une langue du quotidien, plus riche, pour parler de soi et de son avenir.', [
+      { id: 'nicos-weg-a2-01', title: 'Ein neuer Job · Un nouveau travail', start: 0, end: 480, approx: true,
+        context: 'Nico sucht Arbeit und schreibt Bewerbungen. Bald hat er ein Vorstellungsgespräch. [fr] Nico cherche du travail et envoie des candidatures. Il a bientôt un entretien d’embauche.\n• Welche Fragen stellt man in einem Vorstellungsgespräch? [fr] Quelles questions pose-t-on lors d’un entretien d’embauche ?\n• Achten Sie darauf, wie Nico über seine Erfahrung spricht. [fr] Repérez comment Nico parle de son expérience.',
+        keywords: [keyword('Bewerbung', 'la candidature', 'die', 'Bewerbungen'), keyword('sich bewerben um', 'postuler à', null, null, 'Ich bewerbe mich um die Stelle.'),
+          keyword('Lebenslauf', 'le CV', 'der', 'Lebensläufe'), keyword('Vorstellungsgespräch', 'l’entretien d’embauche', 'das', 'Vorstellungsgespräche'),
+          keyword('Erfahrung', 'l’expérience', 'die', 'Erfahrungen'), keyword('Stelle', 'le poste', 'die', 'Stellen')],
+        questions: [
+          choice('q1', 'Que signifie « sich bewerben » ?', '« sich bewerben (um) » : postuler à un poste. Ne le confondez pas avec « sich beschweren » (se plaindre).', [
+            ['postuler à un emploi', true, null], ['se plaindre', false, 'Se plaindre se dit « sich beschweren ».'], ['s’habiller', false, 'S’habiller se dit « sich anziehen ».']]),
+          typed('q2', 'fill', 'Complétez avec le verbe « sich bewerben ».', 'Verbe pronominal : « ich bewerbe mich ». Le « e » du radical reste : bewerb-e.',
+            { text: 'Ich [[1]] mich um die Stelle als Mechaniker.', blanks: [{ id: '1', accept: ['bewerbe'], size: 9, hint: 'sich bewerben' }] }),
+          typed('q3', 'order', 'Remettez les mots dans l’ordre.', 'Dans la subordonnée introduite par « weil », le verbe conjugué « brauche » passe à la fin.',
+            { answers: [['Ich', 'suche', 'Arbeit,', 'weil', 'ich', 'Geld', 'brauche.']] }),
+          typed('q4', 'match', 'Associez chaque mot à sa traduction.', 'Le vocabulaire de la recherche d’emploi : CV, candidature, salaire et poste.',
+            { pairs: [{ left: 'der Lebenslauf', right: 'le CV' }, { left: 'die Bewerbung', right: 'la candidature' }, { left: 'das Gehalt', right: 'le salaire' }, { left: 'die Stelle', right: 'le poste' }] }),
+          choice('q5', 'Lors d’un entretien, quelle question est polie et adaptée ?',
+            'Le subjonctif « könnte » rend la demande polie et la question porte sur le travail. Les deux autres sont familières ou déplacées.', [
+              ['Wann könnte ich anfangen?', true, null], ['Was willst du von mir?', false, 'Le tutoiement et le ton sont déplacés en entretien.'],
+              ['Wie alt bist du?', false, 'Question personnelle et tutoiement : à éviter face à un recruteur.']]),
+        ] },
+      { id: 'nicos-weg-a2-02', title: 'In der Werkstatt · À l’atelier', start: 480, end: 1020, approx: true,
+        context: 'Nico arbeitet in einer Werkstatt. Er lernt neue Kollegen und viele neue Wörter kennen. [fr] Nico travaille dans un atelier. Il fait la connaissance de nouveaux collègues et apprend beaucoup de mots.\n• Welche Werkzeuge kennen Sie schon auf Deutsch? [fr] Quels outils connaissez-vous déjà en allemand ?\n• Wer erklärt Nico die Arbeit? [fr] Qui explique le travail à Nico ?',
+        keywords: [keyword('Werkstatt', 'l’atelier', 'die', 'Werkstätten'), keyword('Werkzeug', 'l’outil', 'das', 'Werkzeuge'), keyword('reparieren', 'réparer'),
+          keyword('Kollege', 'le collègue', 'der', 'Kollegen'), keyword('pünktlich', 'à l’heure, ponctuel'), keyword('Feierabend', 'la fin de la journée de travail', 'der')],
+        questions: [
+          choice('q1', 'Que fait-on dans une « Werkstatt » ?', '« die Werkstatt » est un atelier : on y fabrique ou on y répare des objets et des véhicules.', [
+            ['On répare des objets ou des véhicules.', true, null], ['On achète des vêtements.', false, 'Un magasin de vêtements se dit « das Bekleidungsgeschäft ».'],
+            ['On réserve une chambre.', false, 'On réserve une chambre à l’hôtel (« das Hotel »).']]),
+          typed('q2', 'fill', 'Complétez la demande.', 'Avec un verbe de modalité (« kannst »), l’infinitif « geben » va à la fin de la phrase.',
+            { text: 'Kannst du mir das Werkzeug [[1]]?', blanks: [{ id: '1', accept: ['geben'], size: 7, hint: 'donner' }] }),
+          typed('q3', 'match', 'Associez chaque verbe à sa traduction.', 'Quatre verbes utiles au travail : réparer, commencer, arrêter, aider.',
+            { pairs: [{ left: 'reparieren', right: 'réparer' }, { left: 'anfangen', right: 'commencer' }, { left: 'aufhören', right: 'arrêter' }, { left: 'helfen', right: 'aider' }] }),
+          typed('q4', 'order', 'Remettez les mots dans l’ordre.', 'Le verbe de modalité « muss » est en 2e position, l’infinitif « sein » à la fin.',
+            { answers: [['Ich', 'muss', 'morgen', 'pünktlich', 'sein.']] }),
+          choice('q5', '« Feierabend! » signifie…', '« der Feierabend » désigne la fin de la journée de travail. Le piège : « die Feier » (la fête).', [
+            ['C’est la fin de la journée de travail !', true, null], ['C’est la fête !', false, '« Feier » ressemble à « fête », mais « Feierabend » désigne la fin du travail.'],
+            ['Bon appétit !', false, 'Bon appétit se dit « Guten Appetit! ».']]),
+        ] },
+    ]),
+    cineFilm('B1', 'LkufozluseI', 113, 'Nico construit sa vie en Allemagne : formation, logement, décisions. Des échanges plus longs et plus nuancés, au rythme de la vie courante.', [
+      { id: 'nicos-weg-b1-01', title: 'Neue Pläne · De nouveaux projets', start: 0, end: 540, approx: true,
+        context: 'Nico hat in Deutschland Fuß gefasst. Jetzt denkt er über seine berufliche Zukunft nach. [fr] Nico a pris ses marques en Allemagne. Il réfléchit maintenant à son avenir professionnel.\n• Welche Entscheidungen muss man treffen, wenn man eine Ausbildung beginnt? [fr] Quelles décisions faut-il prendre quand on commence une formation ?\n• Achten Sie auf Sätze mit „wenn“ und „obwohl“. [fr] Repérez les phrases avec « wenn » et « obwohl ».',
+        keywords: [keyword('Zukunft', 'l’avenir', 'die'), keyword('sich entscheiden', 'se décider'), keyword('Vertrag', 'le contrat', 'der', 'Verträge'),
+          keyword('Prüfung', 'l’examen', 'die', 'Prüfungen'), keyword('Fuß fassen', 'prendre ses marques, s’installer'), keyword('Herausforderung', 'le défi', 'die', 'Herausforderungen')],
+        questions: [
+          choice('q1', 'Was bedeutet „Fuß fassen“? [fr] Que signifie « Fuß fassen » ?', '« Fuß fassen » : trouver sa place quelque part, s’y installer durablement. Rien à voir avec la marche (« zu Fuß gehen »).', [
+            ['sich einleben und eine sichere Position finden', true, null], ['zu Fuß gehen', false, '« zu Fuß gehen » veut dire « aller à pied ».'],
+            ['jemanden festhalten', false, '« festhalten » signifie « retenir, tenir fermement ».']]),
+          typed('q2', 'fill', 'Ergänzen Sie den passenden Konnektor. [fr] Complétez avec le connecteur qui convient.',
+            '« obwohl » (bien que) introduit une concession : on va au cours malgré la fatigue. « weil » donnerait une cause, ce qui n’a pas de sens ici.',
+            { text: '[[1]] ich müde bin, gehe ich heute noch zum Kurs.', blanks: [{ id: '1', accept: ['Obwohl'], size: 8, hint: null }] }),
+          typed('q3', 'order', 'Bilden Sie einen Satz. [fr] Formez une phrase.', 'La subordonnée en « wenn » vient en tête : le verbe principal « mache » suit immédiatement la virgule, avant le sujet.',
+            { answers: [['Wenn', 'ich', 'die', 'Prüfung', 'bestehe,', 'mache', 'ich', 'eine', 'Reise.']] }),
+          typed('q4', 'match', 'Ordnen Sie zu. [fr] Associez.', '« eine Prüfung bestehen » : réussir un examen ; « kündigen » : démissionner ou résilier ; « unterschreiben » : signer.',
+            { pairs: [{ left: 'sich entscheiden', right: 'se décider' }, { left: 'eine Prüfung bestehen', right: 'réussir un examen' },
+              { left: 'unterschreiben', right: 'signer' }, { left: 'kündigen', right: 'démissionner' }] }),
+          choice('q5', 'Welcher Satz ist höflich, um um einen Termin zu bitten? [fr] Quelle phrase est polie pour demander un rendez-vous ?',
+            'Le subjonctif II « Hätten Sie … ? » formule une demande polie. « Ich will » et l’impératif sont trop directs.', [
+              ['Hätten Sie nächste Woche Zeit für ein Gespräch?', true, null], ['Ich will morgen einen Termin.', false, '« Ich will » paraît exigeant.'],
+              ['Gib mir einen Termin!', false, 'L’impératif tutoyé est impoli dans ce contexte.']]),
+        ] },
+      { id: 'nicos-weg-b1-02', title: 'Wohnungssuche · Chercher un logement', start: 540, end: 1110, approx: true,
+        context: 'Nico sucht eine neue Wohnung. In einer großen Stadt ist das nicht einfach. [fr] Nico cherche un nouveau logement. Dans une grande ville, ce n’est pas simple.\n• Welche Unterlagen braucht man für eine Wohnungsbewerbung? [fr] De quels documents a-t-on besoin pour candidater à un logement ?\n• Was ist Ihnen bei einer Wohnung wichtig? [fr] Qu’est-ce qui compte pour vous dans un logement ?',
+        keywords: [keyword('Miete', 'le loyer', 'die', 'Mieten'), keyword('Kaution', 'la caution', 'die', 'Kautionen'), keyword('Vermieter', 'le bailleur', 'der', 'Vermieter'),
+          keyword('Besichtigung', 'la visite', 'die', 'Besichtigungen'), keyword('Nebenkosten', 'les charges', null, null, 'Toujours au pluriel : die Nebenkosten.'), keyword('möbliert', 'meublé')],
+        questions: [
+          choice('q1', 'Was sind „Nebenkosten“? [fr] Que sont les « Nebenkosten » ?', 'Les « Nebenkosten » sont les charges : eau, chauffage, ordures, s’ajoutant au loyer de base (« Kaltmiete »).', [
+            ['Kosten für Wasser, Heizung und Müll, zusätzlich zur Miete', true, null], ['die Kosten für einen Umzug', false, 'Les frais de déménagement sont des « Umzugskosten ».'],
+            ['eine Strafe für zu spätes Zahlen', false, 'Une pénalité de retard se dit « die Mahngebühr ».']]),
+          typed('q2', 'fill', 'Ergänzen Sie die Präposition. [fr] Complétez avec la préposition.', '« sich interessieren für » + accusatif : « Ich interessiere mich für die Wohnung ».',
+            { text: 'Ich interessiere mich [[1]] die Wohnung in der Lindenstraße.', blanks: [{ id: '1', accept: ['für', 'fuer'], size: 5, hint: null }] }),
+          typed('q3', 'match', 'Ordnen Sie zu. [fr] Associez.', 'Le vocabulaire de la location : caution, visite, bail et loyer charges comprises (« Warmmiete »).',
+            { pairs: [{ left: 'die Kaution', right: 'la caution' }, { left: 'die Besichtigung', right: 'la visite' }, { left: 'der Mietvertrag', right: 'le bail' },
+              { left: 'die Warmmiete', right: 'le loyer charges comprises' }] }),
+          typed('q4', 'order', 'Bilden Sie eine höfliche Frage. [fr] Formez une question polie.', 'Question indirecte : après « Könnten Sie mir sagen, », le mot interrogatif « wann » ouvre une subordonnée et le verbe « ist » passe à la fin.',
+            { answers: [['Könnten', 'Sie', 'mir', 'sagen,', 'wann', 'die', 'Besichtigung', 'ist?']] }),
+          choice('q5', '„Die Wohnung ist schon vergeben.“ bedeutet… [fr] « Die Wohnung ist schon vergeben. » signifie…', '« vergeben » signifie ici « attribué » : quelqu’un d’autre a obtenu le logement. Le piège : « geben » (donner) ne veut pas dire « gratuit ».', [
+            ['Jemand anderes hat die Wohnung schon bekommen.', true, null], ['Die Wohnung ist kostenlos.', false, 'Gratuit se dit « kostenlos » ou « umsonst ».'],
+            ['Die Wohnung ist schon renoviert.', false, 'Rénové se dit « renoviert ».']]),
+        ] },
+    ]),
+  ];
+}
+
+/** Léa : première séquence A1 faite (une erreur), trois mots notés (film, cours, saisie libre) et une proposition de Marie Weber. */
+function seedCine() {
+  const store = current as State;
+  const lea = userById(IDS.suivi) as UserRec;
+  const lessonId = cineLessonId('nicos-weg-a1-01');
+  const questions = sequenceOf('nicos-weg-a1-01')?.sequence.questions ?? [];
+  const result = gradeExercise(lea, { lessonId, roundId: fixedId(0x901), answers: cineAnswers(lessonId, questions, ['q4']) }, undefined);
+  const grade = store.grades.find((item) => item.id === result.grade.id);
+  if (grade) grade.submittedAt = at(addDays(today(), -2), 18);
+  const word = (value: string, note: string, sourceKind: WordSourceKind, sourceId: string | null, daysAgo: number): WordRec => ({
+    id: newId(), learnerId: lea.id, languageId: 'de', word: value, note, sourceKind, sourceId, createdAt: at(addDays(today(), -daysAgo), 18),
+    updatedAt: at(addDays(today(), -daysAgo), 18),
+  });
+  store.words.push(
+    word('Entschuldigung', 'pardon, excusez-moi', 'film', 'nicos-weg-a1-01', 2),
+    word('Woher kommst du?', 'D’où viens-tu ?', 'film', 'nicos-weg-a1-01', 2),
+    word('der Name', 'le nom (pl. die Namen)', 'activity', moduleWordSource(VERSIONS.A1.id, 'a1-hallo'), 5),
+    word('gemütlich', 'confortable, chaleureux', 'manual', null, 1),
+  );
+  store.filmRecommendations.push({ id: fixedId(0x902), learnerId: lea.id, filmId: 'nicos-weg-a1', sequenceId: 'nicos-weg-a1-02', recommendedBy: IDS.weber,
+    recommendedByRole: 'teacher', note: 'Pour réviser les indications de chemin avant notre prochaine séance.', createdAt: at(addDays(today(), -1), 9), dismissedAt: null });
+}

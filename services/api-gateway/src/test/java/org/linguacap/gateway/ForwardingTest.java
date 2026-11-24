@@ -21,6 +21,7 @@ import java.io.UncheckedIOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -38,6 +39,7 @@ class ForwardingTest {
     static final String TOKEN = "jeton-de-session-de-test-0123456789";
     static final String USER_ID = "7d4c0a52-3f0e-4c35-9a59-2a0a1c7e6b10";
     static final String MISSION_ID = "0b6f2f1e-8f61-4f7e-9d0b-1c2d3e4f5a6b";
+    static final String WORD_ID = "5c3e1a2b-4d6f-4a8b-9c0d-1e2f3a4b5c6d";
     static final String LANGUAGES = """
             [{"id":"de","name":"Allemand","nativeName":"Deutsch","position":1,"levels":[
               {"code":"A1","title":"Allemand A1","position":1,"moduleCount":23,"plannedMinutes":2596},
@@ -73,6 +75,7 @@ class ForwardingTest {
             Map<String, String> headers = new ConcurrentHashMap<>();
             exchange.getRequestHeaders().forEach((name, values) -> headers.put(name.toLowerCase(), String.join(",", values)));
             if (query != null) headers.put(":query", query);
+            headers.put(":method", exchange.getRequestMethod());
             HEADERS.put(path, headers);
             BODIES.put(path, body);
             int status = 404;
@@ -91,6 +94,13 @@ class ForwardingTest {
             } else if (path.equals("/v1/assessments/missions/" + MISSION_ID + "/review")) {
                 status = 200;
                 answer = "{\"id\":\"" + MISSION_ID + "\",\"received\":" + body + "}";
+            } else if (path.equals("/v1/films") || path.equals("/v1/learning/cine")) {
+                status = 200;
+                answer = "[]";
+            } else if (path.equals("/v1/learning/words/" + WORD_ID)) {
+                status = 200;
+                answer = "{\"id\":\"" + WORD_ID + "\",\"method\":\"" + exchange.getRequestMethod() + "\",\"received\":"
+                        + (body.isEmpty() ? "null" : body) + "}";
             }
             byte[] bytes = answer.getBytes(StandardCharsets.UTF_8);
             exchange.getResponseHeaders().add("Content-Type", "application/json");
@@ -169,6 +179,49 @@ class ForwardingTest {
         given().header("X-Linguacap-Origin", ORIGIN).accept(ContentType.JSON)
                 .when().get("/api/v1/public/languages")
                 .then().statusCode(503).header("Cache-Control", "no-store").body("code", equalTo("UNAVAILABLE"));
+    }
+
+    @Test
+    void lesFiltresDesFilmsSontRelayesEtLesAutresRefuses() {
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN).accept(ContentType.JSON)
+                .when().get("/api/v1/films?languageId=de&level=A1")
+                .then().statusCode(200).header("Cache-Control", "no-store");
+        assertEquals(Set.of("languageId=de", "level=A1"), Set.of(Stub.HEADERS.get("/v1/films").get(":query").split("&")));
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN).accept(ContentType.JSON)
+                .when().get("/api/v1/learning/cine?level=B1&learnerId=" + USER_ID)
+                .then().statusCode(200);
+        assertEquals(Set.of("level=B1", "learnerId=" + USER_ID),
+                Set.of(Stub.HEADERS.get("/v1/learning/cine").get(":query").split("&")));
+        Stub.HEADERS.clear();
+        for (String refused : new String[] {"/api/v1/films?learnerId=" + USER_ID, "/api/v1/films?level=a1",
+                "/api/v1/films?languageId=de&languageId=en", "/api/v1/learning/cine?languageId=de",
+                "/api/v1/learning/words?level=A1"}) {
+            given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN).accept(ContentType.JSON)
+                    .when().get(refused)
+                    .then().statusCode(400).body("code", equalTo("INVALID_INPUT"));
+        }
+        assertFalse(Stub.HEADERS.containsKey("/v1/films"), "aucun relais d'un filtre refusé");
+    }
+
+    @Test
+    void leCarnetDeMotsSeModifieEnPatchEtSeVideEnDelete() throws IOException {
+        String path = "/v1/learning/words/" + WORD_ID;
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN)
+                .contentType(ContentType.JSON).accept(ContentType.JSON).body("{\"note\":\"la gare\"}")
+                .when().patch("/api/v1/learning/words/" + WORD_ID)
+                .then().statusCode(200).body("method", equalTo("PATCH")).body("received.note", equalTo("la gare"));
+        assertEquals(USER_ID, Stub.HEADERS.get(path).get("x-linguacap-actor"));
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN).accept(ContentType.JSON)
+                .when().delete("/api/v1/learning/words/" + WORD_ID)
+                .then().statusCode(200).body("method", equalTo("DELETE"));
+        assertEquals("", Stub.BODIES.get(path), "une suppression part sans corps");
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN)
+                .contentType(ContentType.JSON).body("[]")
+                .when().patch("/api/v1/learning/words/" + WORD_ID)
+                .then().statusCode(400).body("code", equalTo("INVALID_INPUT"));
+        given().header("X-Linguacap-Origin", ORIGIN).header("Authorization", "Bearer " + TOKEN).accept(ContentType.JSON)
+                .when().delete("/api/v1/learning/film-recommendations/" + WORD_ID)
+                .then().statusCode(404).body("code", equalTo("NOT_FOUND"));
     }
 
     @Test

@@ -36,7 +36,8 @@ import org.junit.jupiter.api.TestFactory;
 class ContractRoutesTest {
     static final String ORIGIN = "secret-de-liaison-de-test";
     static final String ERROR_CODE = "^[A-Z][A-Z_]*$";
-    static final List<String> METHODS = List.of("get", "post", "put");
+    /** Méthodes relayées par la passerelle ; PATCH et DELETE servent au carnet de mots du Ciné-club. */
+    static final List<String> METHODS = List.of("get", "post", "put", "patch", "delete");
     static final Path CONTRACT = Path.of("..", "..", "contracts", "openapi.json");
 
     public static class Profile implements QuarkusTestProfile {

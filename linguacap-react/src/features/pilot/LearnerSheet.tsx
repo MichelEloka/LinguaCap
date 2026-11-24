@@ -2,7 +2,7 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Activity, AlarmClock, AlertTriangle, ArrowLeft, ArrowRight, BarChart3, Bell, CalendarClock, CalendarDays, Check, CheckCircle2, ChevronRight,
-  ClipboardCheck, Clock, Compass, Eye, FileSignature, Flag, Hourglass, ListChecks, MessageCircle, MessagesSquare, Mic, Minus, PauseCircle,
+  Clapperboard, ClipboardCheck, Clock, Compass, Eye, FileSignature, Flag, Hourglass, ListChecks, MessageCircle, MessagesSquare, Mic, Minus, PauseCircle,
   Play, RefreshCw, Route, Send, ShieldCheck, Target, Timer, Trophy,
 } from 'lucide-react';
 import { Badge, EmptyState, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
@@ -25,6 +25,7 @@ import { LevelRoute, formatDay, learnersAwaitingDecision, startLabel, usePending
 import { flaggedOf, gradeTitle, pendingOf, useLessonTitles } from './learner-common';
 import { MissionBadge, MissionCriteriaAverages, MissionDetailDrawer, MissionScoreTag, useMissions, useScoredMissions } from './study-mission';
 import { ExerciseReviewDrawer } from './study-review';
+import { StaffCineTab } from '../cine/StaffCineTab';
 import './reviews.css';
 
 interface Sheet {
@@ -58,7 +59,7 @@ type SessionFilter = 'toutes' | 'a-faire' | 'retard' | 'terminees';
 const sessionFilters: { value: SessionFilter; label: string }[] = [
   { value: 'toutes', label: 'Toutes' }, { value: 'a-faire', label: 'À faire' }, { value: 'retard', label: 'En retard' }, { value: 'terminees', label: 'Terminées' },
 ];
-const tabIds = ['seances', 'parcours', 'resultats', 'messages'] as const;
+const tabIds = ['seances', 'parcours', 'resultats', 'cine', 'messages'] as const;
 type SheetTab = typeof tabIds[number];
 /** Anciennes adresses : l'onglet « Objectif et planning » est devenu « Parcours ». */
 const tabAliases: Record<string, SheetTab> = { objectif: 'parcours' };
@@ -611,6 +612,7 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
             { id: 'seances', label: 'Séances', icon: <CalendarDays size={17} aria-hidden="true" />, count: sessions.length },
             { id: 'parcours', label: 'Parcours', icon: <Route size={17} aria-hidden="true" /> },
             { id: 'resultats', label: 'Résultats', icon: <BarChart3 size={17} aria-hidden="true" />, count: sheet.results.length },
+            { id: 'cine', label: 'Ciné-club et mots', icon: <Clapperboard size={17} aria-hidden="true" /> },
             { id: 'messages', label: 'Messages', icon: <MessagesSquare size={17} aria-hidden="true" />, count: sheet.messages.length },
           ]} />
           <TabPanel id={tab} idPrefix="fiche">
@@ -621,6 +623,8 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
                 legacy={enrollment ? <GoalPanel enrollment={enrollment} token={token} viewer="staff" onChanged={refresh} /> : undefined} />
             )}
             {tab === 'resultats' && <ResultsTab sheet={sheet} learnerId={learnerId} token={token} />}
+            {tab === 'cine' && <StaffCineTab learnerId={learnerId} learnerName={sheet.profile.displayName} token={token}
+              preferredLevel={enrollment?.levelCode ?? livePath?.targetLevel ?? null} />}
             {tab === 'messages' && <MessagesTab sheet={sheet} learnerId={learnerId} token={token} canMessage={canMessage} autoFocus={focusComposer} onSent={refresh} />}
           </TabPanel>
         </>

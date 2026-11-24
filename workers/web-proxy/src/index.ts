@@ -8,13 +8,14 @@ const forwardedHeaders = ['accept', 'authorization', 'content-type', 'idempotenc
 const returnedHeaders = ['content-type', 'retry-after', 'x-request-id'] as const;
 
 // En-têtes de sécurité de toutes les réponses : HTTPS imposé, type de contenu respecté, pas d'intégration dans un
-// cadre tiers. La politique de contenu reste minimale pour ne pas gêner Supabase, les médias signés ni le micro.
+// cadre tiers. La politique de contenu reste minimale pour ne pas gêner Supabase, les médias signés ni le micro ; seul
+// le lecteur YouTube sans cookie (Ciné-club, chargé après l'accord de l'élève) peut être intégré dans un cadre.
 const securityHeaders: Record<string, string> = {
   'strict-transport-security': 'max-age=31536000',
   'x-content-type-options': 'nosniff',
   'referrer-policy': 'strict-origin-when-cross-origin',
   'x-frame-options': 'DENY',
-  'content-security-policy': "frame-ancestors 'none'; object-src 'none'; base-uri 'self'",
+  'content-security-policy': "frame-ancestors 'none'; frame-src https://www.youtube-nocookie.com; object-src 'none'; base-uri 'self'",
   'permissions-policy': 'camera=(), geolocation=(), payment=(), microphone=(self)',
 };
 

@@ -12,7 +12,7 @@ const contract = JSON.parse(readFileSync(join(appRoot, '..', 'contracts', 'opena
   components: { schemas: { Error: { required: string[] } } };
 };
 
-const methods = ['get', 'post', 'put'] as const;
+const methods = ['get', 'post', 'put', 'patch', 'delete'] as const;
 const operations = Object.entries(contract.paths).flatMap(([template, item]) => methods
   .filter((method) => method in item)
   .map((method) => ({
@@ -38,7 +38,7 @@ function apiCalls() {
       const rest = source.slice(match.index + match[0].length);
       const next = rest.indexOf('requestApi');
       const options = rest.slice(0, next === -1 ? 400 : Math.min(next, 400));
-      const method = /method:\s*'(POST|PUT)'/.exec(options)?.[1] ?? 'GET';
+      const method = /method:\s*'(POST|PUT|PATCH|DELETE)'/.exec(options)?.[1] ?? 'GET';
       const path = match[2].replace(/\$\{[^}]*\}/g, 'exemple');
       calls.push({ file: relative(appRoot, file), method, path });
     }

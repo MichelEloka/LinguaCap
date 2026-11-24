@@ -15,6 +15,8 @@ const LearnerContractPage = lazy(() => import('./learner-contract').then((module
 const LibraryPage = lazy(() => import('../library/LibraryPage').then((module) => ({ default: module.LibraryPage })));
 const LibraryActivityPage = lazy(() => import('../library/library-activity').then((module) => ({ default: module.LibraryActivityPage })));
 const PracticeExamPage = lazy(() => import('../library/practice-exam').then((module) => ({ default: module.PracticeExamPage })));
+const SequencePage = lazy(() => import('../cine/SequencePage').then((module) => ({ default: module.SequencePage })));
+const WordsPage = lazy(() => import('../cine/WordsPage').then((module) => ({ default: module.WordsPage })));
 
 /** `unavailable` : la route d'accueil ne répond pas (service antérieur à l'incrément) ; l'espace reste alors ouvert. */
 type Onboarding = OnboardingState | 'unavailable' | null;
@@ -70,7 +72,7 @@ export function LearnerPilot({ token, name }: { token: string; name: string }) {
   useEffect(() => { void reload(); }, [reload]);
 
   // Tant que l'accueil n'est pas terminé, l'accueil du jour, le planning et le contrat mènent à l'accueil en étapes ;
-  // la bibliothèque, les résultats et les messages restent ouverts.
+  // la bibliothèque (Ciné-club compris), le carnet de mots, les résultats et les messages restent ouverts.
   const guarded = (element: ReactNode) => {
     if (onboarding === null) return <Waiting label="Chargement de votre espace…" />;
     if (onboarding !== 'unavailable' && !onboarding.completed) return <Navigate to="/espace/accueil" replace />;
@@ -91,6 +93,10 @@ export function LearnerPilot({ token, name }: { token: string; name: string }) {
       <Route path="bibliotheque" element={lazyPage(<LibraryPage token={token} />)} />
       <Route path="bibliotheque/entrainement/:attemptId" element={lazyPage(<PracticeExamPage token={token} />)} />
       <Route path="bibliotheque/:versionId/:activityId" element={lazyPage(<LibraryActivityPage token={token} />)} />
+      {/* Ciné-club (facultatif, hors parcours) : séquences des films et carnet de mots, ouverts comme la bibliothèque. */}
+      <Route path="cine" element={<Navigate to="/espace/bibliotheque?vue=cine" replace />} />
+      <Route path="cine/:filmId/:sequenceId" element={lazyPage(<SequencePage token={token} />)} />
+      <Route path="mots" element={lazyPage(<WordsPage token={token} />)} />
       <Route path="resultats" element={<LearnerDashboard token={token} name={name} view="results" />} />
       <Route path="messages" element={<LearnerDashboard token={token} name={name} view="messages" />} />
       <Route path="seance/:sessionId" element={<SessionPage token={token} />} />

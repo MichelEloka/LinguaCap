@@ -92,6 +92,8 @@ export function gradeTitle(grade: Grade, sessions: SessionSummary[], titles?: Ma
   const kind = grade.kind === 'quiz' ? 'Exercice' : 'Évaluation';
   const known = titles?.get(grade.lessonId);
   if (!activity && known) return { title: known, context: session ? session.title : 'Bibliothèque' };
+  // Questions d'une séquence de film (leçon « cine-<séquence> », hors séance) : facultatif, hors parcours.
+  if (!session && grade.lessonId.startsWith('cine-')) return { title: 'Séquence du Ciné-club', context: 'Ciné-club' };
   return { title: activity?.title ?? session?.title ?? kind, context: session ? (activity ? session.title : kind) : undefined };
 }
 

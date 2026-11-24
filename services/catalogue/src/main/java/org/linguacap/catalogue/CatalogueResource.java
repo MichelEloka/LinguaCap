@@ -29,18 +29,26 @@ import java.util.Map;
 public class CatalogueResource {
     private static final String LEVEL_COLUMNS = "id, code, title, status, description, version";
     /**
+     * Leçon « après » d'une séquence d'un film du Ciné-club qui n'est pas publié (alias l : leçon) : ni lisible ni
+     * corrigée hors édition tant que le film reste en brouillon (EVO-055).
+     */
+    static final String DRAFT_FILM_LESSON = "exists (select 1 from catalogue.film_sequences fs"
+            + " join catalogue.films f on f.id = fs.film_id where fs.lesson_id = l.id and f.status <> 'published')";
+    /**
      * Leçon lisible hors édition (alias l : leçon, n : niveau, v : version jointe à gauche) : leçon d'une version
      * publiée ou retirée (les élèves inscrits gardent leur version, même si le niveau est repassé en brouillon au
-     * retrait de sa dernière version publiée), ou leçon historique sans version d'un niveau publié.
+     * retrait de sa dernière version publiée), ou leçon sans version d'un niveau publié (leçon historique, ou leçon
+     * d'une séquence de film publié du Ciné-club).
      */
-    static final String READABLE_LESSON =
-            "(l.version_id is not null and v.status in ('published', 'retired') or l.version_id is null and n.status = 'published')";
+    static final String READABLE_LESSON = "(l.version_id is not null and v.status in ('published', 'retired')"
+            + " or l.version_id is null and n.status = 'published' and not " + DRAFT_FILM_LESSON + ")";
     /**
      * Leçon dont le corrigé des questions à choix est servi à Évaluations : comme avant, toute leçon d'un niveau
-     * publié, et aussi celles d'une version publiée ou retirée d'un niveau repassé en brouillon (élèves inscrits).
+     * publié (hors leçon d'un film en brouillon), et aussi celles d'une version publiée ou retirée d'un niveau repassé
+     * en brouillon (élèves inscrits).
      */
-    static final String KEYED_LESSON =
-            "(n.status = 'published' or l.version_id is not null and v.status in ('published', 'retired'))";
+    static final String KEYED_LESSON = "(n.status = 'published' and not " + DRAFT_FILM_LESSON
+            + " or l.version_id is not null and v.status in ('published', 'retired'))";
 
     @Inject
     AgroalDataSource dataSource;

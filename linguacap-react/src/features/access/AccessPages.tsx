@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useId, useState } from 'react';
 import { createPortal } from 'react-dom';
 import type { FormEvent, ReactNode } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Handshake, Headphones, KeyRound, LayoutGrid, LibraryBig, LockKeyhole, MailCheck, MessageSquare, ShieldCheck, Sparkles, Users } from 'lucide-react';
+import { Activity, ArrowLeft, ArrowRight, BookOpen, CalendarCheck2, CalendarDays, ChartNoAxesCombined, Eye, EyeOff, Handshake, Headphones, KeyRound, LayoutGrid, LibraryBig, LockKeyhole, MailCheck, MessageSquare, NotebookPen, ShieldCheck, Sparkles, Users } from 'lucide-react';
 import type { Session } from '@supabase/supabase-js';
 import { Badge, PageHeading } from '../../components/ui';
 import { apiBase, authLinkParams, isApiMode } from '../../app/config';
@@ -22,6 +22,7 @@ const learnerLinks = [
   { path: '/espace/messages', label: 'Mes messages', icon: MessageSquare },
   { path: '/espace/contrat', label: 'Mon contrat', icon: Handshake },
   { path: '/espace/resultats', label: 'Mes résultats', icon: ChartNoAxesCombined },
+  { path: '/espace/mots', label: 'Mon carnet de mots', icon: NotebookPen },
 ];
 
 /** Erreur renvoyée par Supabase dans un lien d'invitation ou de récupération (lien expiré, déjà utilisé…). */

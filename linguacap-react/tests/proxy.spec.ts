@@ -51,6 +51,11 @@ test('le proxy impose HTTPS et ajoute les en-têtes de sécurité au site comme 
     expect(response.headers.get('x-content-type-options')).toBe('nosniff');
     expect(response.headers.get('x-frame-options')).toBe('DENY');
     expect(response.headers.get('content-security-policy')).toContain("frame-ancestors 'none'");
+    // Ciné-club : seul le lecteur YouTube sans cookie peut être intégré ; aucune autre origine de cadre.
+    const policy = response.headers.get('content-security-policy') ?? '';
+    const frames = /frame-src ([^;]+)/.exec(policy)?.[1].trim().split(/\s+/);
+    expect(frames).toEqual(['https://www.youtube-nocookie.com']);
+    expect(policy).not.toMatch(/youtube\.com(?!-)|default-src|script-src/);
     expect(response.headers.get('permissions-policy')).toContain('microphone=(self)');
   }
 });

@@ -2299,6 +2299,212 @@ if (hasB2) {
   console.log('Recette B2 non jouée : content/de/b2 n’est pas encore construit (le B2 reste au catalogue en brouillon).');
 }
 
+// --- Ciné-club : film d'essai importé par l'API, lecture sans corrigé, remise et corrigé, mots, propositions (EVO-055) ---
+// Film d'essai propre à la recette (identifiant fixe, réimporté à chaque passage, retiré à la fin) : aucun accès à YouTube,
+// l'identifiant de vidéo n'est jamais chargé. Les films réels (content/de/cine) ne sont ni lus ni modifiés.
+{
+  const filmId = 'recette-cine';
+  const cineQuestions = (extra = []) => [
+    { id: 'q1', type: 'choice', prompt: 'Où se passe la scène ?', explanation: 'Les annonces et les quais situent la scène à la gare.',
+      options: [{ id: 'a', label: 'À la gare', correct: true, feedback: 'Oui : on entend les annonces.' },
+        { id: 'b', label: 'Au café', correct: false }] },
+    { id: 'q2', type: 'choice', prompt: 'Que demande le personnage ?', explanation: 'Il demande le chemin vers son hôtel.',
+      options: [{ id: 'a', label: 'Son chemin', correct: true }, { id: 'b', label: 'Un billet', correct: false }] },
+    { id: 'q3', type: 'fill', prompt: 'Complétez la phrase.', explanation: 'ankommen est séparable : la particule va à la fin.',
+      spec: { text: 'Der Zug [[1]] um zehn Uhr an.', blanks: [{ id: '1', accept: ['kommt'] }] } },
+    { id: 'q4', type: 'order', prompt: 'Remettez les mots dans l’ordre.', explanation: 'Le verbe conjugué est en deuxième position.',
+      spec: { answers: [['Ich', 'suche', 'den', 'Bahnhof.']] } },
+    { id: 'q5', type: 'match', prompt: 'Associez chaque mot à sa traduction.', explanation: 'Vocabulaire de la séquence.',
+      spec: { pairs: [{ left: 'der Bahnhof', right: 'la gare' }, { left: 'die Fahrkarte', right: 'le billet' }] } },
+    ...extra,
+  ];
+  const cineSequence = (number, start, questions = cineQuestions()) => ({
+    id: `${filmId}-0${number}`, position: number, title: `Séquence ${number}`, start, end: start + 420, approx: number === 2,
+    context: 'Avant de regarder : le personnage arrive en ville. [fr] Que cherche-t-il ?',
+    keywords: [
+      { word: 'Bahnhof', article: 'der', plural: 'Bahnhöfe', translation: 'la gare', note: null },
+      { word: 'Fahrkarte', article: 'die', plural: 'Fahrkarten', translation: 'le billet' },
+      { word: 'ankommen', translation: 'arriver', note: 'séparable : an|kommen' },
+      { word: 'Entschuldigung', translation: 'pardon' }],
+    questions,
+  });
+  const filmDocument = (first = cineQuestions()) => ({
+    format: 1,
+    film: { id: filmId, languageId: 'de', levelId: 'a1', title: 'Film de recette', description: 'Film d’essai de la recette.',
+      provider: 'youtube', videoId: 'AbCdEfGhIj0', channel: 'Chaîne de recette', videoUrl: 'https://www.youtube.com/watch?v=AbCdEfGhIj0',
+      courseUrl: 'https://example.org/cours', credit: 'Film : recette, lecteur YouTube', licenseNote: 'Essai de recette.',
+      durationSeconds: 3600, position: 99 },
+    sequences: [cineSequence(1, 0, first), cineSequence(2, 420)],
+  });
+  const firstLesson = `cine-${filmId}-01`;
+
+  // 1. Comptes : élève accompagné, élève autonome et son correcteur désigné, professeur tiers.
+  const cineLearner = await createAccount('cine-eleve', 'learner', teacher.id);
+  const cineAuto = await createAccount('cine-autonome', 'learner', null);
+  localSql(local.container, `update identity.profiles set language_id = 'de' where id in ('${cineLearner.id}', '${cineAuto.id}');`);
+  const cineReviewer = await createStaff('cine-correcteur', 'staff');
+  await put(`/admin/users/${cineReviewer.id}/permissions`, admin.token, { permissions: ['correction'] });
+  assert.equal((await put(`/admin/users/${cineAuto.id}/reviewer`, admin.token, { reviewerId: cineReviewer.id })).user.reviewerId,
+    cineReviewer.id);
+  const cineOutsider = await createStaff('cine-tiers', 'teacher');
+
+  // 2. Import par l'API (administration) : structure contrôlée, brouillon invisible des élèves.
+  await put(`/catalogue/films/${filmId}`, cineLearner.token, filmDocument(), 403);
+  await api('/catalogue/films', teacher.token, { status: 403 });
+  const badBounds = filmDocument();
+  badBounds.sequences[0].end = 120;
+  assert.match((await put(`/catalogue/films/${filmId}`, admin.token, badBounds, 400)).message, /3 à 15 minutes/);
+  const badVideo = filmDocument();
+  badVideo.film.videoUrl = 'https://example.org/video.mp4';
+  assert.match((await put(`/catalogue/films/${filmId}`, admin.token, badVideo, 400)).message, /youtube\.com\/watch/);
+  const withTranscript = filmDocument();
+  withTranscript.sequences[0].transcript = 'Texte recopié';
+  const transcriptRefusal = await fetch(`${gateway}/api/v1/catalogue/films/${filmId}`, { method: 'PUT',
+    headers: { Authorization: `Bearer ${admin.token}`, 'Content-Type': 'application/json' },
+    body: JSON.stringify(withTranscript), signal: AbortSignal.timeout(12_000) });
+  assert.equal(transcriptRefusal.status, 400, 'Aucune transcription ne peut entrer au catalogue');
+  let imported = await put(`/catalogue/films/${filmId}`, admin.token, filmDocument());
+  if (imported.film.status === 'published') {
+    await post(`/catalogue/films/${filmId}/retire`, admin.token);
+    imported = await api(`/catalogue/films/${filmId}`, admin.token);
+  }
+  assert.deepEqual([imported.film.status, imported.checks.publishable, imported.sequences.map((sequence) => sequence.lessonId)],
+    ['draft', true, [firstLesson, `cine-${filmId}-02`]]);
+  assert.equal(imported.sequences[0].questions[0].options[0].correct, true, 'L’éditeur relit le corrigé');
+  assert.deepEqual((await put(`/catalogue/films/${filmId}`, admin.token, imported)).sequences.map((sequence) => sequence.id),
+    [`${filmId}-01`, `${filmId}-02`], 'Le document de l’éditeur fait l’aller-retour');
+  assert.ok((await api('/catalogue/films', admin.token)).some((film) => film.id === filmId && film.sequenceCount === 2));
+  await api(`/films/${filmId}`, cineLearner.token, { status: 404 });
+  await api(`/lessons/${firstLesson}`, cineLearner.token, { status: 404 });
+  await submitExercise({ api: (path, token, options) => api(path, token, { ...options, status: 404 }), token: cineLearner.token,
+    lessonId: firstLesson, roundId: randomUUID(), answers: { q1: { choice: 'a' } } });
+  assert.ok(!(await api('/films?languageId=de&level=A1', cineLearner.token)).some((film) => film.id === filmId),
+    'Un film en brouillon n’est pas proposé');
+
+  // 3. Publication et lecture sans corrigé (liste, film, leçon « après »).
+  assert.equal((await post(`/catalogue/films/${filmId}/publish`, admin.token)).status, 'published');
+  assert.equal((await post(`/catalogue/films/${filmId}/publish`, admin.token)).status, 'published', 'Publier deux fois ne change rien');
+  const listed = (await api('/films?languageId=de&level=A1', cineLearner.token)).find((film) => film.id === filmId);
+  assert.ok(listed, 'Le film publié est proposé au niveau A1');
+  assert.deepEqual([listed.sequences.length, listed.sequences[0].questions, listed.sequences[0].questionCount], [2, null, 5]);
+  assert.ok(!(await api('/films?languageId=de&level=A2', cineLearner.token)).some((film) => film.id === filmId));
+  await api('/films?level=a1', cineLearner.token, { status: 400 });
+  const servedFilm = await api(`/films/${filmId}`, cineLearner.token);
+  assert.deepEqual(leaks(servedFilm), [], 'Aucun corrigé dans le film servi');
+  assert.deepEqual([servedFilm.credit, servedFilm.videoId, servedFilm.sequences[1].approx], ['Film : recette, lecteur YouTube', 'AbCdEfGhIj0', true]);
+  const servedLesson = await api(`/lessons/${firstLesson}`, cineLearner.token);
+  assert.deepEqual(leaks(servedLesson), [], 'Aucun corrigé dans la leçon « après »');
+  assert.equal(servedLesson.transcript, null);
+  assert.deepEqual(servedLesson.questions.map((question) => question.id), servedFilm.sequences[0].questions.map((question) => question.id));
+
+  // 4. Remise hors séance et corrigé par question (clé d'exercice servie pour une leçon sans version).
+  const cineRound = await answerActivity({ api, token: cineLearner.token, content: { questions: cineQuestions() },
+    view: servedFilm.sequences[0], lessonId: firstLesson });
+  const cineResult = await submitExercise({ api, token: cineLearner.token, lessonId: firstLesson, ...cineRound });
+  assertAllRight(cineResult, 'Questions « après » du film');
+  assert.equal((await api(`/assessments/exercises/${cineResult.grade.id}`, teacher.token)).questions.length, 5,
+    'Le référent relit le corrigé');
+  const wrong = await submitExercise({ api, token: cineLearner.token, lessonId: firstLesson, roundId: randomUUID(),
+    answers: { ...cineRound.answers, q1: { choice: 'b' } } });
+  const wrongReview = wrong.questions.find((question) => question.id === 'q1');
+  assert.deepEqual([wrong.grade.correct, wrongReview.status], [4, 'incorrect'], 'Une mauvaise réponse est corrigée');
+  assert.ok(wrongReview.explanation, 'L’explication est servie après la remise');
+  // Réimport d'un film publié : la clé n'est pas figée, la nouvelle question est corrigée aussitôt.
+  const sixth = { id: 'q6', type: 'choice', prompt: 'Le personnage est-il pressé ?', explanation: 'Il court vers le quai.',
+    options: [{ id: 'a', label: 'Oui', correct: true }, { id: 'b', label: 'Non', correct: false }] };
+  assert.equal((await put(`/catalogue/films/${filmId}`, admin.token, filmDocument(cineQuestions([sixth])))).film.status, 'published');
+  const incomplete = filmDocument(cineQuestions().slice(0, 4));
+  assert.match((await put(`/catalogue/films/${filmId}`, admin.token, incomplete, 409)).message, /5 à 8 questions/,
+    'Un film publié exige un document complet');
+  const reread = await api(`/films/${filmId}`, cineLearner.token);
+  assert.equal(reread.sequences[0].questions.length, 6);
+  const sixRound = await answerActivity({ api, token: cineLearner.token, content: { questions: cineQuestions([sixth]) },
+    view: reread.sequences[0], lessonId: firstLesson });
+  const sixResult = await submitExercise({ api, token: cineLearner.token, lessonId: firstLesson, ...sixRound });
+  assertAllRight(sixResult, 'Film réimporté');
+  assert.equal(sixResult.grade.total, 6);
+
+  // 5. Carnet de mots : l'élève note, corrige et supprime ; son référent lit ; un tiers est refusé.
+  const noted = await post('/learning/words', cineLearner.token,
+    { word: ' Bahnhof ', note: 'la gare', sourceKind: 'film', sourceId: `${filmId}-01` }, 201);
+  assert.deepEqual([noted.word, noted.note, noted.sourceKind, noted.sourceId, noted.languageId],
+    ['Bahnhof', 'la gare', 'film', `${filmId}-01`, 'de']);
+  await post('/learning/words', cineLearner.token, { word: 'bahnhof', note: '', sourceKind: 'film', sourceId: `${filmId}-01` }, 409);
+  const manual = await post('/learning/words', cineLearner.token, { word: 'doch', note: 'si (réponse)', sourceKind: 'manual', sourceId: null }, 201);
+  await post('/learning/words', cineLearner.token, { word: 'Termin', note: '', sourceKind: 'activity',
+    sourceId: `${a1.versionId}/hallo` }, 201);
+  await post('/learning/words', cineLearner.token, { word: 'Zug', sourceKind: 'manual', sourceId: `${filmId}-01` }, 400);
+  await post('/learning/words', teacher.token, { word: 'Zug', sourceKind: 'manual', sourceId: null }, 403);
+  const edited = await api(`/learning/words/${noted.id}`, cineLearner.token, { method: 'PATCH', body: { note: 'la gare (f. : die Station)' } });
+  assert.equal(edited.note, 'la gare (f. : die Station)');
+  await api(`/learning/words/${noted.id}`, teacher.token, { method: 'PATCH', body: { note: 'x' }, status: 403 });
+  await api(`/learning/words/${manual.id}`, cineAuto.token, { method: 'DELETE', status: 404 });
+  assert.deepEqual(await api(`/learning/words/${manual.id}`, cineLearner.token, { method: 'DELETE' }), { id: manual.id, deleted: true });
+  const carnet = await api('/learning/words', cineLearner.token);
+  assert.deepEqual(carnet.map((word) => word.word), ['Termin', 'Bahnhof']);
+  assert.equal((await api(`/learning/words?learnerId=${cineLearner.id}`, teacher.token)).length, 2, 'Le référent lit le carnet');
+  await api(`/learning/words?learnerId=${cineLearner.id}`, cineOutsider.token, { status: 403 });
+  await api(`/learning/words?learnerId=${cineLearner.id}`, cineAuto.token, { status: 403 });
+  await api('/learning/words', teacher.token, { status: 403 });
+
+  // 6. Séquences proposées : référent, correcteur désigné et administration ; tiers et élève refusés.
+  const proposal = { learnerId: cineLearner.id, sequenceId: `${filmId}-02`, note: 'Regarde-la avant jeudi.' };
+  const proposed = await post('/learning/film-recommendations', teacher.token, proposal, 201);
+  assert.deepEqual([proposed.filmId, proposed.recommendedByRole, proposed.dismissedAt], [filmId, 'teacher', null]);
+  await post('/learning/film-recommendations', teacher.token, proposal, 409);
+  await post('/learning/film-recommendations', cineOutsider.token, proposal, 403);
+  await post('/learning/film-recommendations', cineReviewer.token, proposal, 403);
+  await post('/learning/film-recommendations', cineLearner.token, proposal, 403);
+  await post('/learning/film-recommendations', teacher.token, { ...proposal, sequenceId: 'film-inconnu-01' }, 404);
+  const byReviewer = await post('/learning/film-recommendations', cineReviewer.token,
+    { learnerId: cineAuto.id, sequenceId: `${filmId}-01`, note: '' }, 201);
+  assert.equal(byReviewer.recommendedByRole, 'reviewer');
+  assert.equal((await post('/learning/film-recommendations', admin.token,
+    { learnerId: cineAuto.id, sequenceId: `${filmId}-02` }, 201)).recommendedByRole, 'admin');
+  await api(`/learning/film-recommendations?learnerId=${cineAuto.id}`, cineOutsider.token, { status: 403 });
+  assert.equal((await api(`/learning/film-recommendations?learnerId=${cineAuto.id}`, cineReviewer.token)).length, 2);
+
+  // 7. Agrégation : dernier résultat, mots par séquence, propositions en cours ; puis l'élève écarte la proposition.
+  let cine = await api('/learning/cine?level=A1', cineLearner.token);
+  let cineFilm = cine.films.find((film) => film.id === filmId);
+  assert.deepEqual([cine.languageId, cine.level, cine.wordCount], ['de', 'A1', 2]);
+  assert.deepEqual([cineFilm.sequences[0].lastResult?.attemptId, cineFilm.sequences[0].lastResult?.total], [sixResult.grade.id, 6],
+    'Le dernier résultat est la remise la plus récente');
+  assert.deepEqual(cineFilm.sequences[0].words.map((word) => word.word), ['Bahnhof']);
+  assert.equal(cineFilm.sequences[1].recommendation?.id, proposed.id);
+  assert.ok(cine.recommendations.some((item) => item.id === proposed.id));
+  assert.deepEqual(leaks(cine.films.map((film) => film.sequences.map(({ lastResult, ...sequence }) => sequence))), [],
+    'Aucun corrigé dans l’agrégation (lastResult ne porte que le score)');
+  assert.ok(cineFilm.sequences.every((sequence) => !('questions' in sequence)));
+  const asReferent = await api(`/learning/cine?learnerId=${cineLearner.id}`, teacher.token);
+  assert.equal(asReferent.films.find((film) => film.id === filmId).sequences[0].lastResult?.attemptId, sixResult.grade.id,
+    'Le référent voit le score');
+  assert.ok((await api(`/learning/cine?level=A1&learnerId=${cineAuto.id}`, cineReviewer.token)).films
+    .find((film) => film.id === filmId).sequences[0].recommendation, 'Le correcteur désigné voit ses propositions');
+  await api(`/learning/cine?learnerId=${cineLearner.id}`, cineOutsider.token, { status: 403 });
+  await api(`/learning/cine?learnerId=${cineLearner.id}`, cineReviewer.token, { status: 403 });
+  await post(`/learning/film-recommendations/${proposed.id}/dismiss`, teacher.token, {}, 403);
+  await post(`/learning/film-recommendations/${proposed.id}/dismiss`, cineAuto.token, {}, 404);
+  assert.ok((await post(`/learning/film-recommendations/${proposed.id}/dismiss`, cineLearner.token)).dismissedAt);
+  cine = await api('/learning/cine?level=A1', cineLearner.token);
+  cineFilm = cine.films.find((film) => film.id === filmId);
+  assert.deepEqual([cineFilm.sequences[1].recommendation, cine.recommendations.some((item) => item.id === proposed.id)], [null, false]);
+  assert.ok((await api('/learning/film-recommendations', cineLearner.token)).find((item) => item.id === proposed.id).dismissedAt,
+    'La proposition écartée reste dans l’historique');
+
+  // 8. Retrait : le film n'est plus servi ni corrigé ; les remises passées gardent leur corrigé.
+  assert.equal((await post(`/catalogue/films/${filmId}/retire`, admin.token)).status, 'draft');
+  await post(`/catalogue/films/${filmId}/retire`, admin.token, {}, 409);
+  await api(`/films/${filmId}`, cineLearner.token, { status: 404 });
+  assert.equal((await api(`/films/${filmId}`, admin.token)).id, filmId, 'Aperçu de l’éditeur');
+  assert.ok(!(await api('/learning/cine', cineLearner.token)).films.some((film) => film.id === filmId));
+  assert.equal((await api(`/assessments/exercises/${cineResult.grade.id}`, cineLearner.token)).questions.length, 5);
+  console.log('Recette Ciné-club réussie · film d’essai importé par l’API (structure contrôlée, brouillon invisible), publié, '
+    + 'servi sans corrigé (liste, film, leçon « après »), remis et corrigé hors séance, réimporté avec une question de plus '
+    + 'corrigée aussitôt, carnet de mots (ajout, doublon, note, suppression), propositions du référent, du correcteur '
+    + 'désigné et de l’administration, refus des tiers, agrégation, puis retrait.');
+}
+
 // --- Indisponibilité temporaire d'un service et rattrapage du suivi (DEV-101) ------------------------------
 
 async function control(action, service) {

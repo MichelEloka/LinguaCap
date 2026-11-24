@@ -506,7 +506,7 @@ function SessionReader({ sessionId, token }: { sessionId: string; token: string 
           </div>
           {(total > 0 || detail.lexicon) && (
             <div className="study-head-side">
-              {detail.lexicon && detail.lexicon.entries.length > 0 && <LexiconButton lexicon={detail.lexicon} onRenew={renew} />}
+              {detail.lexicon && detail.lexicon.entries.length > 0 && <LexiconButton lexicon={detail.lexicon} onRenew={renew} notebookToken={token} />}
               {total > 0 && (
                 <div className="study-head-progress">
                   <p><strong>{completedCount}</strong> / {total} activités</p>

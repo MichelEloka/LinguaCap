@@ -118,21 +118,23 @@ export function canEditCatalogue(profile: Profile) {
 export async function requestApi<T = unknown>(
   path: string,
   token?: string,
-  options?: { method: 'POST' | 'PUT'; body?: unknown; idempotencyKey?: string; keepalive?: boolean },
+  options?: { method: 'POST' | 'PUT' | 'PATCH' | 'DELETE'; body?: unknown; idempotencyKey?: string; keepalive?: boolean },
 ): Promise<T> {
   if (isMockMode) {
     const { mockRequest } = await import('./mock-api');
     return mockRequest<T>(path, token, options);
   }
+  // Une suppression part sans corps (sauf corps fourni) ; les autres écritures envoient toujours un objet JSON.
+  const hasBody = Boolean(options) && (options?.method !== 'DELETE' || options.body !== undefined);
   const response = await fetch(`${apiBase}${path}`, {
     method: options?.method ?? 'GET',
     headers: {
       Accept: 'application/json',
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      ...(options ? { 'Content-Type': 'application/json' } : {}),
+      ...(hasBody ? { 'Content-Type': 'application/json' } : {}),
       ...(options?.idempotencyKey ? { 'Idempotency-Key': options.idempotencyKey } : {}),
     },
-    body: options ? JSON.stringify(options.body ?? {}) : undefined,
+    body: hasBody ? JSON.stringify(options?.body ?? {}) : undefined,
     credentials: 'same-origin',
     cache: 'no-store',
     // `keepalive` : la requête survit à la fermeture ou au rechargement de la page (sauvegardes de dernière seconde).
@@ -147,6 +149,8 @@ export async function requestApi<T = unknown>(
       'message' in details && typeof details.message === 'string' ? details.message : '';
     throw new Error(message || `La passerelle API a répondu avec le statut HTTP ${response.status}.`);
   }
+  // Suppression sans contenu (204) : rien à lire.
+  if (response.status === 204) return undefined as T;
   if (!isJson) {
     throw new Error('La route est accessible, mais elle ne renvoie pas le contrat JSON attendu.');
   }

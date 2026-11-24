@@ -2,17 +2,17 @@
  * Bibliothèque de l'élève (/espace/bibliotheque) : tous les niveaux de sa langue, dans l'ordre du catalogue (GET /languages ;
  * les niveaux non publiés sont grisés et marqués « Bientôt »),
  * modules et activités avec le dernier score et la marque « À revoir », lexique et missions de chaque module, recherche,
- * et entraînement au bilan intermédiaire (sans corrigé). L'examen blanc, qui valide un niveau, n'est jamais proposé ici :
+ * entraînement au bilan intermédiaire (sans corrigé) et onglet « Ciné-club » du niveau (?vue=cine, EVO-055). L'examen blanc, qui valide un niveau, n'est jamais proposé ici :
  * il se passe dans le parcours.
  */
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
-  ArrowLeft, ArrowRight, BookA, BookOpen, Check, ChevronRight, ClipboardCheck, Clock, Dumbbell, EyeOff, Flag, Headphones, LibraryBig, LoaderCircle,
-  Lock, Mic, PencilLine, RotateCcw, ShieldCheck, Target, Trophy,
+  ArrowLeft, ArrowRight, BookA, BookOpen, Check, ChevronRight, Clapperboard, ClipboardCheck, Clock, Dumbbell, EyeOff, Flag, Headphones, LibraryBig, LoaderCircle,
+  Lock, Mic, PencilLine, RotateCcw, ShieldCheck, Sparkles, Target, Trophy,
 } from 'lucide-react';
 import { Badge, PageHeading } from '../../components/ui';
-import { Callout, Card, ListItem, ProgressRing, SearchField, Skeleton, SplitView, useToast } from '../../design/kit';
+import { Callout, Card, ListItem, ProgressRing, SearchField, Skeleton, SplitView, TabPanel, Tabs, useToast } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { catalogueOrder, languageById, useLanguages } from '../../integration/languages';
 import {
@@ -23,6 +23,7 @@ import { missionDecisionLabels, missionStatusLabels, missionStatusTones, type Mi
 import { errorText, LevelMark, levelName, momentText } from '../onboarding/onboarding-kit';
 import { EmptyScene, LogoL, NightDecor } from '../pilot/learner-common';
 import { LexiconLoader } from '../pilot/study-lexicon';
+import { CineSection, useCine } from '../cine/CineLibrary';
 import '../pilot/learner-dashboard.css';
 import './library.css';
 
@@ -157,7 +158,7 @@ function ModuleDetail({ level, module, token, onBack }: { level: LibraryLevel; m
         </div>
         {module.vocabularyCount > 0 && (
           <div className="lib-module-tools">
-            <LexiconLoader key={`${level.trackVersionId}/${module.id}`} token={token} versionId={level.trackVersionId} moduleId={module.id} />
+            <LexiconLoader key={`${level.trackVersionId}/${module.id}`} token={token} versionId={level.trackVersionId} moduleId={module.id} notebook />
           </div>
         )}
       </header>
@@ -219,6 +220,13 @@ export function LibraryPage({ token }: { token: string }) {
     ?? tabs.find((tab) => tab.level?.current) ?? tabs.find((tab) => tab.level?.inPath) ?? tabs.find((tab) => tab.level);
   const level = selected?.level ?? null;
   const moduleParam = params.get('module');
+  // Onglet « Ciné-club » du niveau (?vue=cine) : films, séquences et propositions du professeur, lus pour le niveau choisi.
+  const view = params.get('vue') === 'cine' ? 'cine' : 'cours';
+  const cine = useCine(token, level?.levelCode ?? null);
+  const cineSequences = cine.view ? cine.view.films.reduce((sum: number, film) => sum + film.sequences.length, 0) : undefined;
+  // Propositions du professeur pour une séquence de ce niveau (bandeau sur l'onglet des cours).
+  const activeRecommendations = cine.view?.recommendations.filter((item) => !item.dismissedAt
+    && cine.view?.films.some((film) => film.id === item.filmId)).length ?? 0;
   const module = level ? level.modules.find((item) => item.id === moduleParam) ?? level.modules[0] : undefined;
 
   const select = (patch: Record<string, string | null>) => {
@@ -316,6 +324,21 @@ export function LibraryPage({ token }: { token: string }) {
             <PracticeCard level={level} history={history} token={token} />
           </div>
 
+          {view !== 'cine' && activeRecommendations > 0 && (
+            <Link className="lib-cine-banner lc-enter" to={`/espace/bibliotheque?niveau=${level.levelCode}&vue=cine`}>
+              <span className="lib-cine-banner-icon" aria-hidden="true"><Sparkles size={18} /></span>
+              <span><strong>{activeRecommendations > 1 ? `${activeRecommendations} séquences du Ciné-club vous sont proposées` : 'Une séquence du Ciné-club vous est proposée'}</strong>
+                <small>Par votre professeur, pour aller plus loin avec un film.</small></span>
+              <ArrowRight size={17} aria-hidden="true" />
+            </Link>
+          )}
+
+          <Tabs label={`Contenus du niveau ${level.levelCode}`} idPrefix="lib-vue" value={view} onChange={(id) => { select({ vue: id === 'cine' ? 'cine' : null }); setQuery(''); }} tabs={[
+            { id: 'cours', label: 'Cours', icon: <LibraryBig size={17} aria-hidden="true" />, count: level.modules.length },
+            { id: 'cine', label: 'Ciné-club', icon: <Clapperboard size={17} aria-hidden="true" />, count: cineSequences },
+          ]} />
+          <TabPanel id={view} idPrefix="lib-vue">
+          {view === 'cine' ? <CineSection token={token} level={level.levelCode} cine={cine} /> : <div className="lib-courses">
           <div className="lib-toolbar">
             <div className="lib-toolbar-intro">
               <span className="lib-toolbar-icon" aria-hidden="true"><LibraryBig size={19} /></span>
@@ -356,6 +379,8 @@ export function LibraryPage({ token }: { token: string }) {
           ) : (
             <Card><EmptyScene art="books" title="Ce niveau n’a pas encore de module" description="Ses modules apparaîtront ici dès leur publication." /></Card>
           )}
+          </div>}
+          </TabPanel>
         </>
       )}
     </div>

@@ -54,7 +54,7 @@ export function WorkspaceFrame({ links, title, name, children, onSignOut, signin
   const mobileCount = links.length > 5 ? 4 : links.length;
   // Écrans hors de la navigation (séance, évaluation, diagnostic) : le fil d'Ariane les nomme quand même.
   const screen = active?.label ?? (/\/seance\//.test(pathname) ? 'Séance' : /\/evaluation\//.test(pathname) ? 'Évaluation'
-    : /\/diagnostic/.test(pathname) ? 'Diagnostic' : undefined);
+    : /\/diagnostic/.test(pathname) ? 'Diagnostic' : /\/cine\//.test(pathname) ? 'Ciné-club' : undefined);
 
   useEffect(() => { localStorage.setItem(COLLAPSED_KEY, collapsed ? '1' : '0'); }, [collapsed]);
   useEffect(() => { setMenuOpen(false); }, [pathname]);
