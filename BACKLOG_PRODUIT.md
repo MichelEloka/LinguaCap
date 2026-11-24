@@ -54,7 +54,7 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-050 | Comptes gratuits avec avis obligatoire, avis facultatif pour les autres | P2 | M | — |
 | EVO-016 | Inscription publique validée par l’administration | P2 | M | EVO-036, EVO-033 |
 | EVO-017 | Examens de passage de niveau exigeants, en plusieurs variantes | P2 | XL | — |
-| EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · B1 en cours | XL | EVO-041 |
+| EVO-051 | Cours B1 et B2 complets, niveaux dynamiques | P3 · prêt, à déployer | XL | EVO-041 |
 | EVO-052 | Le professeur construit ses cours | P3 | XL | EVO-033, EVO-014 |
 | EVO-053 | Ressources classées par niveau | P3 | S | — |
 | EVO-054 | Clés API : automatisation de l’administration et services tiers | P3 | L | — |
@@ -266,9 +266,25 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 puis import de la V4 par l'administration ; mesurer la durée de l'import et de la publication d'une version V4 (délais de 7 s
 entre services et de 10 s au Worker) et celle de la vue d'ensemble de l'administration avec une cinquantaine d'élèves.
 
-**Rattaché à EVO-051 (B1), en cours** : les niveaux ouverts (A1, A2), écrits en dur dans la vitrine, le questionnaire du
-professeur et l'introduction du test de niveau, sont désormais lus dans le catalogue (`GET /public/languages`,
-`GET /languages` et ses paliers du test publié) : c'est le socle « niveaux dynamiques » de la phase 1 du chantier B1/B2.
+**Cours B1 et B2 complets** (EVO-051), sur `develop` le 24 novembre 2026 (commits 9b5551c, 1d9d048, 81ba40e, fb0f20f) :
+- **Niveaux dynamiques** : vitrine, accueil, test de niveau, objectif, bibliothèque, questionnaire du professeur, indicateurs
+  et contrats lisent les niveaux publiés du catalogue ; un niveau publié apparaît partout sans modifier le code.
+- **Manière de faire cours adaptée aux niveaux B** : 12 thèmes de deux modules (thème : textes et écoutes longs avec
+  stratégie, grammaire découverte puis consolidée, collocations et formules d'usage ; atelier : médiation, entraînement au
+  format d'examen, un écrit et un oral notés sur grille). Consignes en allemand simple avec la traduction française (B1),
+  en allemand avec l'aide française repliée (B2).
+- **Rôle du professeur** : missions notées critère par critère sur 20 points, décision préremplie à 60 % ; auto-évaluation
+  pour l'élève autonome sans correcteur ; moyenne par critère dans la fiche élève.
+- **B1** : 24 modules, 216 activités, 2 966 min, 940 questions, 24 missions, 494 mots, 283 sons, 52 images.
+- **B2** : 24 modules, 204 activités, 3 050 min, 906 questions, 24 missions, 495 mots, 185 sons, 60 images ; palier B2 du
+  test de niveau.
+- Durées conseillées : 7 mois au rythme standard, 2 en intensif, pour chacun des deux niveaux.
+- **À faire par le responsable produit** : relecture par un germanophone d'au moins 20 % des modules et de toutes les
+  évaluations avant publication ; décision sur les six écoutes authentiques de la Wikipédia parlée (Commons refuse le
+  téléchargement automatique : téléchargement manuel des six fichiers, ou identification conforme à la politique de
+  Wikimedia), lues en synthèse en attendant.
+- **Au déploiement** : catalogue et front avant l'import B1/B2 (critères de mission, balisage bilingue) ; import des
+  niveaux B1 et B2 par l'administration (`publier-production.ps1`), palier B2 du test avec la publication du B2.
 
 ## Questions encore ouvertes
 
