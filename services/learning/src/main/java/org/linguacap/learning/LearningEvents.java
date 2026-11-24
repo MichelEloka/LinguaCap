@@ -23,9 +23,9 @@ import org.linguacap.common.HttpError;
 import org.linguacap.common.Outbox;
 
 /**
- * Événements d'Apprentissage (DEV-073) : objectif fixé, planning validé, pause, activité, séance terminée et état
- * de l'objectif ; parcours, niveaux, contrats et ajouts de cours (sujets « path » et « contract », sans clé
- * enrollmentId). Ils sont écrits dans la transaction de l'action et exportés pour Suivi en route interne.
+ * Événements d'Apprentissage (DEV-073) : objectif fixé, planning validé, pause, reprise prévue, activité, séance
+ * terminée et état de l'objectif ; parcours, niveaux, contrats et ajouts de cours (sujets « path » et « contract », sans
+ * clé enrollmentId). Ils sont écrits dans la transaction de l'action et exportés pour Suivi en route interne.
  */
 @ApplicationScoped
 @Path("/v1/internal/learning/events")
@@ -38,12 +38,14 @@ public class LearningEvents {
     @Inject AgroalDataSource dataSource;
     @Inject Actor actor;
 
-    /** Lot d'événements après le numéro donné, pour Suivi. */
+    /** Lot d'événements après le curseur (ou, pendant la transition, après le numéro donné), pour Suivi. */
     @GET
-    public ObjectNode export(@QueryParam("after") @DefaultValue("0") long after, @QueryParam("limit") @DefaultValue("100") int limit) {
+    public ObjectNode export(@QueryParam("cursor") String cursor, @QueryParam("after") @DefaultValue("0") long after,
+                             @QueryParam("limit") @DefaultValue("100") int limit) {
         actor.id();
+        Outbox.Cursor from = Outbox.cursorParam(cursor);
         try (Connection connection = dataSource.getConnection()) {
-            return Outbox.read(connection, json, TABLE, "learning", Math.max(0, after), limit);
+            return Outbox.export(connection, json, TABLE, "learning", from, after, limit);
         } catch (SQLException error) {
             LOG.errorf("Learning event export failed (SQLSTATE %s)", error.getSQLState());
             throw HttpError.unavailable("Les événements d’apprentissage sont temporairement indisponibles.");
@@ -74,20 +76,28 @@ public class LearningEvents {
         }
     }
 
-    /** Planning validé : séances actives avec leur échéance et le jalon qu'elles portent. */
+    /**
+     * Planning validé : séances actives avec leur échéance et le jalon qu'elles portent, et l'état de l'objectif après
+     * la validation (goalStatus). Une replanification ne change pas un objectif en attente de correction, validé ou à
+     * consolider : Suivi reprend cet état au lieu de supposer « active ». Lu sous le verrou de l'inscription, que prend
+     * aussi tout changement d'état : l'état porté suit l'horloge de l'objectif.
+     */
     void planValidated(Connection connection, UUID enrollmentId, int revision) throws SQLException {
         UUID learnerId;
         String targetDate;
-        try (var query = connection.prepareStatement("select learner_id, target_date from learning.enrollments where id = ?")) {
+        String goalStatus;
+        try (var query = connection.prepareStatement(
+                "select learner_id, target_date, goal_status from learning.enrollments where id = ? for update")) {
             query.setObject(1, enrollmentId);
             try (var rows = query.executeQuery()) {
                 if (!rows.next()) return;
                 learnerId = rows.getObject("learner_id", UUID.class);
                 targetDate = text(rows.getObject("target_date", LocalDate.class));
+                goalStatus = rows.getString("goal_status");
             }
         }
         ObjectNode data = json.createObjectNode().put("enrollmentId", enrollmentId.toString()).put("revision", revision)
-                .put("targetDate", targetDate);
+                .put("targetDate", targetDate).put("goalStatus", goalStatus);
         ArrayNode sessions = data.putArray("sessions");
         try (var query = connection.prepareStatement("""
                 select s.id, s.due_at, s.completed_at,
@@ -112,9 +122,14 @@ public class LearningEvents {
                 learnerId, data);
     }
 
+    /**
+     * État de l'objectif : learning.goal_paused, learning.goal_resumed (reprise prévue : l'objectif reste « paused »
+     * avec sa date de reprise, jusqu'à la validation du planning de reprise) et learning.goal_status_changed.
+     * {@code status} : état annoncé, ou null pour l'état enregistré.
+     */
     void goalStatus(Connection connection, UUID enrollmentId, String type, String status) throws SQLException {
         try (var query = connection.prepareStatement(
-                "select learner_id, goal_status, resume_date, target_date from learning.enrollments where id = ?")) {
+                "select learner_id, goal_status, resume_date, target_date from learning.enrollments where id = ? for update")) {
             query.setObject(1, enrollmentId);
             try (var rows = query.executeQuery()) {
                 if (!rows.next()) return;
@@ -129,11 +144,11 @@ public class LearningEvents {
     }
 
     /**
-     * Événement d'état de l'objectif, horodaté par l'horloge de l'objectif (EVO-042). La valeur par défaut de la
-     * table, now(), est l'heure du DÉBUT de la transaction : elle ne suit pas toujours l'ordre réel des actions sur un
-     * objectif (horloge du serveur recalée en arrière, transactions qui se chevauchent), et Suivi, qui garde l'état le
-     * plus récent selon occurredAt, écartait alors l'action la plus récente, par exemple une pause qui suit la
-     * validation du planning. L'heure est lue sous le verrou de l'inscription, que toute action sur l'état de l'objectif
+     * Événement d'état de l'objectif (goal_set, plan_validated, goal_paused, goal_resumed, goal_status_changed),
+     * horodaté par l'horloge de l'objectif (EVO-042). La valeur par défaut de la table, now(), est l'heure du DÉBUT de la
+     * transaction : elle ne suit pas toujours l'ordre réel des actions sur un objectif (horloge du serveur recalée en
+     * arrière, transactions qui se chevauchent), et Suivi, qui garde l'état le plus récent selon occurredAt, écartait
+     * alors l'action la plus récente, par exemple une pause qui suit la validation du planning. L'heure est lue sous le verrou de l'inscription, que toute action sur l'état de l'objectif
      * prend avant d'émettre : elle suit l'ordre des séquences et reste strictement croissante pour un même objectif.
      * L'enveloppe ne change pas (mêmes colonnes que {@link Outbox#emit}, heure fournie au lieu de la valeur par défaut).
      */

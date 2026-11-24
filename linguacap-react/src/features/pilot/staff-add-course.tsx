@@ -40,8 +40,9 @@ function localImpact(path: PathView, added: number) {
 
 function ActivityIcon({ kind }: { kind: LibraryActivityItem['kind'] }) {
   const Icon = kindIcons[kind] ?? PencilLine;
-  // La feuille de la fiche ne connaît pas encore les missions : leur teinte est donnée ici, avec les jetons.
-  const tone = kind === 'mission' ? { color: 'var(--violet)', background: 'var(--violet-50)' } : undefined;
+  // Mêmes teintes que la séance et la bibliothèque : leçon bleue, exercice violet, mission verte.
+  const tone = kind === 'mission' ? { color: 'var(--success)', background: 'var(--success-50)' }
+    : kind === 'exercise' ? { color: 'var(--violet)', background: 'var(--violet-50)' } : undefined;
   return <span className={`sac-kind is-${kind}`} style={tone} aria-hidden="true"><Icon size={15} /></span>;
 }
 

@@ -1,16 +1,18 @@
 /**
  * Diagnostic initial en mode étude : présentation, une question à la fois avec sa progression, puis résultat.
- * Les réponses sont corrigées par module puis transmises au parcours (DEV-036).
+ * Les réponses sont corrigées par module puis transmises au parcours (DEV-036). Un débutant n'en a pas (EVO-038) :
+ * l'accès direct à la page le lui dit, sans rien proposer.
  */
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, Compass, Send } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Compass, Send, Sprout } from 'lucide-react';
 import { EmptyState } from '../../components/ui';
 import { Facts, ProgressRing, SkeletonCard, Steps } from '../../design/kit';
 import { requestApi } from '../../integration/api';
 import { LessonContent } from './LessonContent';
-import type { Enrollment, Grade } from './LearnerSession';
+import { diagnosticOffered, type PlannedEnrollment } from './GoalPanel';
+import type { Grade } from './LearnerSession';
 import { QuestionCard } from './study-question';
 import './learner-session.css';
 
@@ -58,13 +60,19 @@ export function DiagnosticPage({ token }: { token: string }) {
   const [index, setIndex] = useState(0);
   const [direction, setDirection] = useState<'next' | 'prev'>('next');
   const [result, setResult] = useState<{ grade: Grade; outcome: DiagnosticOutcome | null } | null>(null);
+  /** Pas de diagnostic : débutant (départ A0) ou parcours sans diagnostic initial. */
+  const [skipped, setSkipped] = useState<'beginner' | 'adapted' | null>(null);
   const key = useRef<string | null>(null);
   const advance = useRef<number | undefined>(undefined);
 
   useEffect(() => {
     let active = true;
-    requestApi<Enrollment | null>('/learning/enrollment', token).then(async (enrollment) => {
+    requestApi<PlannedEnrollment | null>('/learning/enrollment', token).then(async (enrollment) => {
       if (!enrollment) throw new Error('Aucun parcours ne vous est encore attribué.');
+      if (!diagnosticOffered(enrollment.goal)) {
+        if (active) setSkipped(enrollment.goal.startLevel === 'A0' ? 'beginner' : 'adapted');
+        return;
+      }
       const diagnostic = await requestApi<DiagnosticContent>(`/learning/enrollments/${encodeURIComponent(enrollment.id)}/diagnostic`, token);
       if (!active) return;
       setEnrollmentId(enrollment.id);
@@ -131,7 +139,16 @@ export function DiagnosticPage({ token }: { token: string }) {
         </div>
       </header>
 
-      {!content ? (
+      {skipped ? (
+        <section className="study-diag-card" aria-label="Diagnostic initial">
+          <EmptyState icon={<Sprout size={26} />}
+            title={skipped === 'beginner' ? 'Pas de diagnostic pour vous' : 'Pas de diagnostic à passer'}
+            description={skipped === 'beginner'
+              ? 'Vous débutez : votre parcours commence par les toutes premières bases. Il est déjà adapté, sans question supplémentaire.'
+              : 'Votre parcours est déjà adapté à votre point de départ.'}
+            action={<Link className="btn btn-primary" to="/espace">Retour à mon espace</Link>} />
+        </section>
+      ) : !content ? (
         error
           ? <section className="study-diag-card"><EmptyState title="Diagnostic indisponible" description={error} icon={<Compass size={26} />}
               action={<Link className="btn btn-outline" to="/espace">Retour à mon espace</Link>} /><p className="sr-only" role="alert">{error}</p></section>

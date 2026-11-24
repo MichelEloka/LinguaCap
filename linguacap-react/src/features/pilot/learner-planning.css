@@ -129,7 +129,9 @@
 .lp-item-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; color: var(--brand-600); background: var(--brand-50); }
 .lp-item-icon.is-exercise { color: var(--violet); background: var(--violet-50); }
 .lp-item-icon.is-review { color: var(--accent); background: var(--accent-50); }
-.lp-item-icon.is-assessment { color: var(--success); background: var(--success-50); }
+/* Mêmes teintes que la séance et la bibliothèque : évaluation orange, mission verte. */
+.lp-item-icon.is-assessment { color: var(--warning); background: var(--warning-50); }
+.lp-item-icon.is-mission { color: var(--success); background: var(--success-50); }
 .lp-item-minutes { color: var(--muted); font-size: var(--text-sm); font-weight: 700; white-space: nowrap; }
 
 /* Éditeur de disponibilités (dans le panneau latéral) */

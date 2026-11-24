@@ -7,6 +7,7 @@ import {
 import { Badge, Dialog } from '../../components/ui';
 import { Callout, Card, Drawer, Facts, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { pilotToday } from '../../integration/pilot-day';
 import type { Enrollment } from './LearnerSession';
 import { daysFromToday, localDate } from './learner-calendar';
 import { AvailabilityEditor, hours, ProposalView, weekdayNames, type Day, type Proposal, type Suggestion } from './Planning';
@@ -20,6 +21,8 @@ export interface Goal {
   initialTargetDate: string | null;
   template: string;
   status: 'preparing' | 'active' | 'paused' | 'awaiting_assessment' | 'awaiting_grading' | 'validated' | 'to_consolidate';
+  /** Début de la pause en cours (null hors pause). */
+  pausedAt?: string | null;
   resumeDate: string | null;
   successCriteria: string | null;
   expectedCompetences: string[];
@@ -59,6 +62,15 @@ const competences: Record<string, { name: string; icon: ReactNode }> = {
 };
 const dateFormat = new Intl.DateTimeFormat('fr-FR', { dateStyle: 'medium' });
 
+/**
+ * Diagnostic initial proposé : le parcours en a un et l'élève ne débute pas. Un débutant (départ A0 du niveau ou du
+ * parcours) a un parcours déjà adapté, sans diagnostic ni question supplémentaire (EVO-038) : le serveur ne renvoie
+ * alors pas de diagnosticLessonId et refuse le diagnostic (409).
+ */
+export function diagnosticOffered(goal: Pick<Goal, 'startLevel' | 'diagnosticLessonId'>, pathStartLevel?: string | null) {
+  return Boolean(goal.diagnosticLessonId) && goal.startLevel !== 'A0' && pathStartLevel !== 'A0';
+}
+
 export function showDate(value: string | null) {
   if (!value) return '—';
   return dateFormat.format(localDate(value));
@@ -72,11 +84,9 @@ function errorText(error: unknown) {
   return error instanceof Error ? error.message : 'Cette action est temporairement indisponible.';
 }
 
+/** Jour du pilote (fuseau du serveur), décalé de quelques jours : pause, reprise et date cible se comparent à ce jour. */
 function today(offset = 0) {
-  const date = new Date();
-  date.setDate(date.getDate() + offset);
-  const pad = (value: number) => String(value).padStart(2, '0');
-  return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+  return pilotToday(offset);
 }
 
 function LevelPath({ from, to, done, total }: { from: string; to: string; done: number; total: number }) {
@@ -270,7 +280,7 @@ export function GoalPanel({ enrollment, token, viewer, onChanged }: {
         </article>
 
         <div className="lp-goal-side">
-          {goal.diagnosticLessonId && (
+          {diagnosticOffered(goal) && (
             <Card className="lp-diagnostic" title="Diagnostic initial" icon={<ClipboardList size={19} />}
               action={<Badge tone={diagnosticDone ? 'green' : 'amber'}>{diagnosticDone ? 'Passé' : 'À passer'}</Badge>}>
               {!diagnosticDone ? (

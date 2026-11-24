@@ -117,9 +117,11 @@ public class CatalogueResource {
                 if (!rows.next()) {
                     throw HttpError.notFound("Leçon introuvable.");
                 }
+                // La transcription d'un exercice peut contenir la réponse (dictée, écoute) : l'élève la reçoit par sa
+                // séance ou la bibliothèque, qui appliquent sa visibilité ; cette route ne la sert qu'aux éditeurs.
                 return new Lesson(rows.getString("id"), rows.getString("title"),
                         rows.getString("code"), rows.getString("description"),
-                        rows.getString("transcript"),
+                        admin ? rows.getString("transcript") : null,
                         List.of((String[]) rows.getArray("media_ids").getArray()),
                         readQuestions(connection, id));
             }

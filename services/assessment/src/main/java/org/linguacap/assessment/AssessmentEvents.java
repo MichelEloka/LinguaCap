@@ -27,11 +27,14 @@ public class AssessmentEvents {
     @Inject AgroalDataSource dataSource;
     @Inject ObjectMapper json;
 
+    /** Lot d'événements après le curseur (ou, pendant la transition, après le numéro donné). */
     @GET
-    public ObjectNode export(@QueryParam("after") @DefaultValue("0") long after, @QueryParam("limit") @DefaultValue("100") int limit) {
+    public ObjectNode export(@QueryParam("cursor") String cursor, @QueryParam("after") @DefaultValue("0") long after,
+                             @QueryParam("limit") @DefaultValue("100") int limit) {
         actor.id();
+        Outbox.Cursor from = Outbox.cursorParam(cursor);
         try (Connection connection = dataSource.getConnection()) {
-            return Outbox.read(connection, json, "assessment.outbox_events", "assessment", Math.max(0, after), limit);
+            return Outbox.export(connection, json, "assessment.outbox_events", "assessment", from, after, limit);
         } catch (SQLException error) {
             LOG.errorf("Assessment event export failed (SQLSTATE %s)", error.getSQLState());
             throw HttpError.unavailable("Les événements d’évaluation sont temporairement indisponibles.");

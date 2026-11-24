@@ -5,32 +5,41 @@ import { Bell, ClipboardList, FileSignature, MessageCircle, RefreshCw, SearchX, 
 import { Badge, EmptyState, PageHeading, ProgressBar } from '../../components/ui';
 import { Avatar, Card, Chip, SearchField, Segmented, SkeletonCard, Toolbar } from '../../design/kit';
 import {
-  EncourageDrawer, StaffError, dateTime, dayOffset, dueWithinWeek, goalStatusNames, goalStatusOf, learnerUrl, levelOf, openAlert,
-  plural, relativeDay, shortDate, successRate, useOverview, type LearnerOverview,
+  EncourageDrawer, LearningUnavailableNotice, StaffError, StaffFreshness, correctionsText, dayOffset, dueWithinWeek, isPaused,
+  learnerStatusNames, learnerUrl, learningUnavailable, levelOf, openAlert, overviewStatusOf, pendingCorrections, plural, relativeDay,
+  shortDate, successRate, useCorrections, useOverview, type LearnerCorrections, type LearnerOverview,
 } from './staff-kit';
 import { learnersAwaitingDecision, usePendingContracts } from './staff-contracts';
 
 interface Filter { id: string; label: string; test: (learner: LearnerOverview) => boolean }
 
-const baseFilters: Filter[] = [
-  { id: 'tous', label: 'Tous', test: () => true },
-  { id: 'alerte', label: 'Alerte ouverte', test: (learner) => Boolean(openAlert(learner)) },
-  { id: 'retard', label: 'En retard', test: (learner) => (learner.tracking?.lateSessions ?? 0) > 0 },
-  { id: 'semaine', label: 'Échéance sous 7 jours', test: (learner) => dueWithinWeek(learner) },
-  { id: 'copies', label: 'Copies à corriger', test: (learner) => (learner.tracking?.pendingGrading ?? 0) > 0 },
-];
+/** Filtres de base ; « À corriger » compte les remises en attente des files de correction (copies, missions, oral). */
+function baseFilters(corrections: Map<string, LearnerCorrections> | null): Filter[] {
+  return [
+    { id: 'tous', label: 'Tous', test: () => true },
+    { id: 'alerte', label: 'Alerte ouverte', test: (learner) => Boolean(openAlert(learner)) },
+    { id: 'retard', label: 'En retard', test: (learner) => !isPaused(learner) && (learner.tracking?.lateSessions ?? 0) > 0 },
+    { id: 'semaine', label: 'Échéance sous 7 jours', test: (learner) => dueWithinWeek(learner) },
+    { id: 'copies', label: 'À corriger', test: (learner) => pendingCorrections(learner, corrections) > 0 },
+  ];
+}
 
-function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview; contract: boolean; onMessage?: (learner: LearnerOverview) => void }) {
+function LearnerRow({ learner, contract, corrections, onMessage }: {
+  learner: LearnerOverview; contract: boolean; corrections: Map<string, LearnerCorrections> | null; onMessage?: (learner: LearnerOverview) => void;
+}) {
   const tracking = learner.tracking ?? {};
   const name = learner.profile.displayName;
   const level = levelOf(learner);
-  const status = goalStatusOf(tracking.goalStatus);
+  const status = overviewStatusOf(learner);
+  const paused = status.code === 'paused';
   const alert = openAlert(learner);
-  const late = tracking.lateSessions ?? 0;
-  const pending = tracking.pendingGrading ?? 0;
+  const late = paused ? 0 : tracking.lateSessions ?? 0;
+  const pending = pendingCorrections(learner, corrections);
   const rate = successRate(learner);
-  const done = tracking.sessionsCompleted ?? learner.progress.completedCount;
+  const done = tracking.sessionsCompleted ?? learner.progress?.completedCount ?? 0;
   const due = tracking.nextDueAt ?? null;
+  const path = learner.learning?.path ?? null;
+  const target = tracking.targetDate ?? path?.targetDate ?? null;
   return (
     <tr className={alert ? 'has-alert' : undefined}>
       <th scope="row" className="staff-cell-person">
@@ -38,7 +47,8 @@ function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview
           <Avatar name={name} size={38} />
           <span className="staff-person-text">
             <Link className="staff-person-link" to={learnerUrl(learner.learnerId)}>{name}</Link>
-            <small>{tracking.lastActivityAt ? `Actif ${relativeDay(tracking.lastActivityAt)}` : 'Pas encore d’activité'}</small>
+            <small>{tracking.lastActivityAt ? `Actif ${relativeDay(tracking.lastActivityAt)}`
+              : path?.status === 'draft' ? `Parcours créé ${relativeDay(path.createdAt)}` : 'Pas encore d’activité'}</small>
           </span>
         </span>
       </th>
@@ -49,7 +59,8 @@ function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview
           <Badge tone={status.tone}>{status.label}</Badge>
           {alert && <Badge tone="red"><Bell size={12} aria-hidden="true" /> Alerte</Badge>}
           {contract && <Badge tone="amber"><FileSignature size={12} aria-hidden="true" /> Contrat à valider</Badge>}
-          {pending > 0 && <Badge tone="violet">{plural(pending, 'copie', 'copies')}</Badge>}
+          {pending > 0 && <span title={corrections ? correctionsText(corrections.get(learner.learnerId)) : undefined}>
+            <Badge tone="violet">{pending} à corriger</Badge></span>}
         </span>
       </td>
       <td className="staff-cell-progress">
@@ -63,13 +74,17 @@ function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview
         </span>
       </td>
       <td className="staff-cell-due">
-        {due ? (
+        {paused ? (
+          tracking.resumeDate
+            ? <span className="staff-due"><strong>{shortDate.format(new Date(tracking.resumeDate))}</strong><small>Reprise prévue</small></span>
+            : <span className="staff-due"><strong>En pause</strong><small>Reprise à fixer</small></span>
+        ) : due ? (
           <span className={`staff-due${late ? ' is-late' : dayOffset(due) <= 0 ? ' is-today' : ''}`}>
             <strong>{shortDate.format(new Date(due))}</strong>
             <small>{late ? plural(late, 'séance en retard', 'séances en retard') : relativeDay(due)}</small>
           </span>
-        ) : tracking.targetDate ? (
-          <span className="staff-due"><strong>{shortDate.format(new Date(tracking.targetDate))}</strong><small>Date cible</small></span>
+        ) : target ? (
+          <span className="staff-due"><strong>{shortDate.format(new Date(target))}</strong><small>Date cible</small></span>
         ) : <span className="staff-muted">—</span>}
       </td>
       <td className="staff-cell-actions">
@@ -89,6 +104,7 @@ function LearnerRow({ learner, contract, onMessage }: { learner: LearnerOverview
 
 export function LearnersPage({ admin, token }: { admin: boolean; token: string }) {
   const { learners, freshness, error, reload } = useOverview(token);
+  const corrections = useCorrections(token);
   const contracts = usePendingContracts(token);
   const awaiting = learnersAwaitingDecision(contracts.data);
   const [params, setParams] = useSearchParams();
@@ -96,13 +112,12 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
   const [query, setQuery] = useState('');
   const [level, setLevel] = useState('tous');
   const all = learners ?? [];
-  const statuses = [...new Set(all.map((learner) => learner.tracking?.goalStatus).filter((code): code is string => Boolean(code)))]
-    .filter((code) => code in goalStatusNames);
+  const statuses = [...new Set(all.map((learner) => overviewStatusOf(learner).code))].filter((code) => code in learnerStatusNames);
   const filters: Filter[] = [
-    ...baseFilters.slice(0, 2),
+    ...baseFilters(corrections.byLearner).slice(0, 2),
     { id: 'contrat', label: 'Contrat à valider', test: (learner: LearnerOverview) => awaiting.has(learner.learnerId) },
-    ...baseFilters.slice(2),
-    ...statuses.map((code) => ({ id: `etat-${code}`, label: goalStatusNames[code], test: (learner: LearnerOverview) => learner.tracking?.goalStatus === code })),
+    ...baseFilters(corrections.byLearner).slice(2),
+    ...statuses.map((code) => ({ id: `etat-${code}`, label: learnerStatusNames[code], test: (learner: LearnerOverview) => overviewStatusOf(learner).code === code })),
   ].filter((filter) => filter.id === 'tous' || all.some(filter.test));
   const filter = filters.find((item) => item.id === params.get('filtre')) ?? filters[0];
   const levels = [...new Set(all.flatMap((learner) => levelOf(learner) ?? []))].sort();
@@ -112,10 +127,10 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
     && (!search || learner.profile.displayName.toLocaleLowerCase('fr').includes(search)))
     .sort((a, b) => Number(Boolean(openAlert(b))) - Number(Boolean(openAlert(a)))
       || Number(awaiting.has(b.learnerId)) - Number(awaiting.has(a.learnerId))
-      || (b.tracking?.pendingGrading ?? 0) - (a.tracking?.pendingGrading ?? 0)
+      || pendingCorrections(b, corrections.byLearner) - pendingCorrections(a, corrections.byLearner)
       || a.profile.displayName.localeCompare(b.profile.displayName, 'fr'));
   const description = learners
-    ? `${plural(learners.length, 'élève', 'élèves')}${freshness ? ` · suivi actualisé le ${dateTime.format(new Date(freshness))}` : ''}`
+    ? <span className="staff-heading-meta">{plural(learners.length, 'élève', 'élèves')}<StaffFreshness freshness={freshness} /></span>
     : undefined;
 
   function choose(id: string) {
@@ -125,7 +140,7 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
   return (
     <div className="staff-page">
       <PageHeading title={admin ? 'Élèves' : 'Mes élèves'} description={description} action={<>
-        <button className="btn btn-outline" type="button" onClick={reload}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
+        <button className="btn btn-outline" type="button" onClick={() => { reload(); corrections.reload(); }}><RefreshCw size={17} aria-hidden="true" /> Actualiser</button>
         <Link className="btn btn-primary" to="/espace/invitations"><UserPlus size={17} aria-hidden="true" /> Inviter</Link>
       </>} />
 
@@ -138,6 +153,7 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
           </Card>
         ) : (
           <div className="staff-page-body">
+            {learningUnavailable(learners) && <LearningUnavailableNotice onRetry={reload} />}
             <div className="staff-filters">
               <Toolbar>
                 <SearchField value={query} onChange={setQuery} label="Rechercher un élève" placeholder="Rechercher un élève" />
@@ -167,7 +183,7 @@ export function LearnersPage({ admin, token }: { admin: boolean; token: string }
                       </tr>
                     </thead>
                     <tbody className="lc-stagger">
-                      {visible.map((learner) => <LearnerRow key={learner.learnerId} learner={learner} contract={awaiting.has(learner.learnerId)} onMessage={admin ? undefined : setMessageTo} />)}
+                      {visible.map((learner) => <LearnerRow key={learner.learnerId} learner={learner} contract={awaiting.has(learner.learnerId)} corrections={corrections.byLearner} onMessage={admin ? undefined : setMessageTo} />)}
                     </tbody>
                   </table>
                 </div>

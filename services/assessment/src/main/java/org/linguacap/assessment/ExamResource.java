@@ -63,7 +63,9 @@ public class ExamResource {
         UUID callerId = actor.id();
         if (enrollmentId == null) throw HttpError.badRequest("Indiquez le parcours.");
         context(callerId, enrollmentId);
-        return store.forEnrollment(enrollmentId).stream().map(ExamResource::summary).toList();
+        List<ExamStore.Attempt> attempts = store.forEnrollment(enrollmentId);
+        attempts.forEach(attempt -> reconcile(attempt, callerId));
+        return attempts.stream().map(ExamResource::summary).toList();
     }
 
     /** Ouvre la tentative de l'élève, ou reprend la tentative en cours. */
@@ -79,6 +81,9 @@ public class ExamResource {
         if (!learnerId.toString().equals(context.path("learnerId").asText())) {
             throw HttpError.forbidden("Seul l’élève passe son évaluation.");
         }
+        // Une remise dont Apprentissage n'a pas été informé laisse le créneau « à faire » : l'élève qui revient l'ouvrir
+        // rattrape la notification, même si l'ouverture est ensuite refusée (bilan déjà remis).
+        store.forEnrollment(request.enrollmentId()).forEach(attempt -> reconcile(attempt, learnerId));
         String kind = request.kind();
         String refusal = startRefusal(context, kind);
         if (refusal != null) throw HttpError.conflict(refusal);
@@ -112,10 +117,10 @@ public class ExamResource {
     public ExamView exam(@PathParam("id") UUID id) {
         UUID callerId = actor.id();
         ExamStore.Attempt attempt = store.find(id);
-        if (callerId.equals(attempt.learnerId())) return view(attempt, callerId, true, false);
+        if (callerId.equals(attempt.learnerId())) return view(reconcile(attempt, callerId), callerId, true, false);
         boolean grader = canGrade(callerId, attempt.learnerId());
         if (!grader) context(callerId, attempt.enrollmentId());
-        return view(attempt, callerId, grader, grader);
+        return view(reconcile(attempt, callerId), callerId, grader, grader);
     }
 
     /** Enregistre les réponses en cours : la tentative reprend là où l'élève l'a laissée. */
@@ -175,7 +180,7 @@ public class ExamResource {
         UUID learnerId = actor.id();
         ExamStore.Attempt attempt = owned(learnerId, id);
         if (key == null || !REQUEST_KEY.matcher(key).matches()) throw HttpError.badRequest("Clé de remise invalide.");
-        if (!"in_progress".equals(attempt.status())) return view(attempt, learnerId, false, false);
+        if (!"in_progress".equals(attempt.status())) return view(reconcile(attempt, learnerId), learnerId, false, false);
         List<String> missing = ExamRules.missing(attempt.definition(), attempt.texts(), attempt.recordings());
         if (!missing.isEmpty()) throw HttpError.conflict(missing.get(0));
         ExamRules.Result result = ExamRules.needsGrading(attempt.definition()) ? null
@@ -306,7 +311,11 @@ public class ExamResource {
         return result.body();
     }
 
-    /** Termine le créneau du calendrier et met à jour l'objectif ; un échec est journalisé sans annuler la remise. */
+    /**
+     * Termine le créneau du calendrier et met à jour l'objectif. Un échec est journalisé sans annuler la remise ;
+     * l'accusé de réception manquant fait renvoyer la notification à la lecture suivante ({@link #reconcile}). Une
+     * remise corrigée d'emblée (sans écrit ni oral) porte sa décision : elle vaut aussi notification de la correction.
+     */
     private void notifyLearning(ExamStore.Attempt attempt, String event, UUID callerId) {
         Map<String, Object> body = new HashMap<>();
         body.put("kind", attempt.kind());
@@ -316,10 +325,26 @@ public class ExamResource {
         try {
             var result = services.exchange(learningUrl, "/v1/internal/learning/enrollments/" + attempt.enrollmentId()
                     + "/exam-events", "POST", callerId, body, "", "", false, actor.requestId());
-            if (result.status() != 200) LOG.warnf("Learning exam event returned HTTP %d", result.status());
+            if (result.status() == 200) {
+                store.acknowledge(attempt.id(), "graded".equals(attempt.status()) ? "graded" : "submitted");
+            } else {
+                LOG.warnf("Learning exam event returned HTTP %d", result.status());
+            }
         } catch (WebApplicationException error) {
             LOG.warn("Learning exam event unavailable");
         }
+    }
+
+    /**
+     * Notification perdue (Apprentissage indisponible au moment de la remise ou de la correction) : renvoyée à la
+     * lecture de la tentative ou de la liste, ou à une nouvelle ouverture, jusqu'à l'accusé de réception.
+     * Apprentissage traite chaque événement de façon idempotente.
+     */
+    private ExamStore.Attempt reconcile(ExamStore.Attempt attempt, UUID callerId) {
+        if ("in_progress".equals(attempt.status()) || "graded".equals(attempt.learningAcked())) return attempt;
+        if (attempt.learningAcked() == null) notifyLearning(attempt, "submitted", callerId);
+        else if ("graded".equals(attempt.status())) notifyLearning(attempt, "graded", callerId);
+        return attempt;
     }
 
     private ExamView view(ExamStore.Attempt attempt, UUID callerId, boolean withFiles, boolean grader) {

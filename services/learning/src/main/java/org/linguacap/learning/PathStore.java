@@ -515,21 +515,29 @@ class PathStore {
         });
     }
 
-    /** Date de reprise d'un parcours en pause ; la proposition calculée à partir de ce jour la confirmera. */
+    /**
+     * Date de reprise d'un parcours en pause ; la proposition calculée à partir de ce jour la confirmera. L'objectif du
+     * niveau actif reste en pause : learning.goal_resumed annonce la reprise prévue à Suivi (EVO-042).
+     */
     void planResume(UUID pathId, LocalDate resumeDate) {
         transaction("plan path resume", connection -> {
             PathRow path = lock(connection, pathId);
             if (path.pausedAt() == null) throw HttpError.conflict("Ce parcours n’est pas en pause.");
             execute(connection, "update learning.paths set resume_date = ?, updated_at = now() where id = ?", resumeDate, pathId);
+            List<UUID> resumed = new ArrayList<>();
             try (var update = connection.prepareStatement("""
                     update learning.enrollments set resume_date = ?
                     where id in (select enrollment_id from learning.path_steps where path_id = ? and status = 'active')
                       and goal_status = 'paused'
+                    returning id
                     """)) {
                 update.setObject(1, resumeDate);
                 update.setObject(2, pathId);
-                update.executeUpdate();
+                try (var rows = update.executeQuery()) {
+                    while (rows.next()) resumed.add(rows.getObject(1, UUID.class));
+                }
             }
+            for (UUID enrollmentId : resumed) events.goalStatus(connection, enrollmentId, "learning.goal_resumed", "paused");
             return null;
         });
     }

@@ -10,7 +10,7 @@ import { Callout, Card, ProgressRing, Sparkline } from '../../design/kit';
 import { languageName } from '../../domain/languages';
 import { formatMinutes, type PathView } from '../../integration/v2';
 import { LevelMark, levelName, longDate, ofLanguage, shortDate } from '../onboarding/onboarding-kit';
-import { goalStatus, paceLabel, showDate, type PlannedEnrollment } from './GoalPanel';
+import { diagnosticOffered, goalStatus, paceLabel, showDate, type PlannedEnrollment } from './GoalPanel';
 import { sessionStatus, type Grade, type SessionSummary } from './LearnerSession';
 import {
   addDays, CalendarLegend, capitalize, daysFromToday, formatClock, formatMonthDay, localDate, relativeDay, relativeMoment, sameDay,
@@ -336,7 +336,8 @@ export function HomeView({ enrollment, results, messages, path = null }: {
   const sessions = enrollment?.sessions ?? [];
   const next = sessions.find((session) => session.status !== 'completed');
   const goal = enrollment?.goal;
-  const diagnosticPending = Boolean(goal?.diagnosticLessonId && !goal.diagnosticAttemptId);
+  // Un débutant (départ A0) n'a pas de diagnostic : son parcours est déjà adapté (EVO-038).
+  const diagnosticPending = Boolean(goal && diagnosticOffered(goal, path?.startLevel) && !goal.diagnosticAttemptId);
   return (
     <div className="ld-home">
       {path && <ContractBanner path={path} />}

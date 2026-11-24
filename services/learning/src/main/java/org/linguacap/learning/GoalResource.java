@@ -204,12 +204,13 @@ public class GoalResource {
         return propose(goals.byId(enrollmentId), callerId, resume);
     }
 
-    /** Questions du diagnostic initial, sans corrigé (DEV-036). */
+    /** Questions du diagnostic initial, sans corrigé (DEV-036) ; un débutant n'en a pas (EVO-038, 409). */
     @GET
     @Path("/enrollments/{id}/diagnostic")
     public JsonNode diagnostic(@PathParam("id") UUID enrollmentId) {
         UUID callerId = actor.id();
         GoalStore.EnrollmentRow row = readable(callerId, enrollmentId);
+        requireDiagnostic(row);
         return services.request(catalogueUrl, "/v1/internal/tracks/" + row.trackVersionId() + "/diagnostic",
                 "GET", callerId, null);
     }
@@ -226,6 +227,7 @@ public class GoalResource {
         GoalStore.EnrollmentRow row = goals.byId(enrollmentId);
         if (row == null || !learnerId.equals(row.learnerId())) throw HttpError.notFound("Parcours introuvable.");
         active(row);
+        requireDiagnostic(row);
         if (request == null || request.attemptId() == null) throw HttpError.badRequest("Remettez le diagnostic avant de le transmettre.");
         JsonNode track = track(row.trackVersionId(), learnerId);
         String diagnosticLesson = text(track.path("planning").path("diagnosticLessonId"));
@@ -361,7 +363,8 @@ public class GoalResource {
                 row.goalStatus(), row.pausedAt() == null ? null : row.pausedAt().toString(),
                 row.resumeDate() == null ? null : row.resumeDate().toString(), text(planning.path("successCriteria")),
                 planning.path("expectedCompetences"), planning.path("passPercent").asInt(60), row.prerequisiteLevel(),
-                row.prerequisiteMet(), row.acquiredModules(), text(planning.path("diagnosticLessonId")),
+                row.prerequisiteMet(), row.acquiredModules(),
+                beginner(row, path) ? null : text(planning.path("diagnosticLessonId")),
                 row.diagnosticAttemptId() == null ? null : row.diagnosticAttemptId().toString(), row.diagnosticModules(),
                 row.diagnosticPrerequisite(), row.startingPointConfirmedAt() == null ? null : row.startingPointConfirmedAt().toString(),
                 row.validatedRevision(), accompanied(callerId, row));
@@ -410,6 +413,17 @@ public class GoalResource {
 
     private static void active(GoalStore.EnrollmentRow row) {
         if (!"active".equals(row.status())) throw HttpError.conflict("Ce parcours n’est plus actif.");
+    }
+
+    /** Débutant (niveau ou parcours partant de A0) : parcours déjà adapté, sans diagnostic initial (EVO-038). */
+    private boolean beginner(GoalStore.EnrollmentRow row, PathStore.PathRow path) {
+        return OnboardingRules.beginner(row.startLevel(), path == null ? null : path.startLevel());
+    }
+
+    private void requireDiagnostic(GoalStore.EnrollmentRow row) {
+        if (beginner(row, pathResource.pathOfEnrollment(row.id()))) {
+            throw HttpError.conflict("Pas de diagnostic pour un débutant : le parcours commence par les toutes premières bases.");
+        }
     }
 
     private JsonNode track(UUID versionId, UUID callerId) {

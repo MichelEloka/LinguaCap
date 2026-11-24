@@ -237,6 +237,26 @@ export interface OnboardingState {
   steps: OnboardingStep[]; completed: boolean;
   blockedReason: null | OnboardingBlockedReason;
 }
+
+/**
+ * Accueil et parcours d'un élève lus en direct par Suivi auprès d'Apprentissage (EVO-039) : champ `learning` de
+ * GET /tracking/overview (chaque élève) et GET /tracking/learners/{id}. `null` quand Apprentissage n'a pas répondu :
+ * la vue reste servie avec la synthèse du Suivi. Le parcours est visible dès sa création, brouillon compris.
+ */
+export interface LearnerLearningState {
+  learnerId: string; languageId: string | null;
+  onboarding: {
+    /** Mêmes étapes que GET /learning/onboarding ; `completed` : le parcours a démarré. */
+    steps: OnboardingStep[]; completed: boolean; blockedReason: null | OnboardingBlockedReason;
+    /** Dernière tentative du test de niveau ; `declaredBeginner` : « débutant déclaré », sans test. */
+    placement: { attemptId: string; status: PlacementAttemptStatus; placedLevel: StartLevel | null; declaredBeginner: boolean; completedAt: string | null } | null;
+  };
+  /** Parcours ouvert (brouillon ou en cours), sinon le plus récent. Niveau, inscription et état : null pour un brouillon. */
+  path: {
+    id: string; status: Exclude<PathStatus, 'withdrawn'>; startLevel: StartLevel; targetLevel: LevelCode; targetDate: string;
+    activeLevel: LevelCode | null; enrollmentId: string | null; goalStatus: string | null; validatedRevision: number; createdAt: string;
+  } | null;
+}
 /** Corps de POST /learning/paths. */
 export interface PathCreateRequest { placementAttemptId: string; targetLevel: LevelCode; startDate: string; targetDate: string; startLevel?: StartLevel }
 /** Corps de PUT /learning/paths/{pathId}/objective (brouillon seulement). */

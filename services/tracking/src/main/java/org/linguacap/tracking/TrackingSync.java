@@ -18,12 +18,16 @@ import java.util.UUID;
 import org.eclipse.microprofile.config.inject.ConfigProperty;
 import org.jboss.logging.Logger;
 import org.linguacap.common.HttpError;
+import org.linguacap.common.Outbox;
 import org.linguacap.common.ServiceClient;
 
 /**
  * Projection des événements dans Suivi (DEV-074, DEV-075, DEV-079, DEV-080) : lecture par lots depuis chaque
  * producteur avec point de reprise, déduplication par identifiant, synthèses par objectif, puis contrôle des alertes.
  * Un lot en échec n'avance pas le point de reprise : il est relu au passage suivant.
+ * Le point de reprise est le curseur (transaction, séquence) du producteur (EVO-042) : un événement validé en retard
+ * par une transaction concurrente n'est plus jamais sauté. Les synthèses ne dépendent pas de l'ordre d'arrivée : un
+ * événement relu, arrivé en retard ou rattrapé ne remplace ni un état, ni un planning, ni un résultat plus récents.
  */
 @ApplicationScoped
 class TrackingSync {
@@ -106,19 +110,19 @@ class TrackingSync {
 
     private record Producer(String name, String base, String path) {}
 
-    private record Event(UUID id, String type, OffsetDateTime occurredAt, UUID learnerId, JsonNode data) {}
+    record Event(UUID id, String type, OffsetDateTime occurredAt, UUID learnerId, JsonNode data) {}
 
     private int pull(Producer producer) {
         int imported = 0;
         for (int page = 0; page < MAX_PAGES; page++) {
-            long after = checkpoint(producer.name());
-            JsonNode batch = services.request(producer.base(), producer.path() + "?after=" + after + "&limit=100",
-                    "GET", SYSTEM, null);
+            Outbox.Cursor from = checkpoint(producer.name());
+            JsonNode batch = services.request(producer.base(), pagePath(producer.path(), from), "GET", SYSTEM, null);
             JsonNode items = batch.path("items");
             if (!items.isArray() || items.isEmpty()) {
                 clearFailure(producer.name());
                 return imported;
             }
+            Outbox.Cursor next = nextCursor(from, batch);
             imported += transaction("import events", connection -> {
                 int fresh = 0;
                 for (JsonNode item : items) {
@@ -146,13 +150,18 @@ class TrackingSync {
                     apply(connection, event);
                     fresh++;
                 }
+                // Le point de reprise n'avance que dans l'ordre (transaction, séquence), jamais en arrière.
                 try (var update = connection.prepareStatement("""
-                        update tracking.checkpoints set last_sequence = greatest(last_sequence, ?), updated_at = now(),
-                            failures = 0, last_error = null
+                        update tracking.checkpoints
+                        set last_sequence = case when (last_tx, last_sequence) < (?, ?) then ? else last_sequence end,
+                            last_tx = greatest(last_tx, ?), updated_at = now(), failures = 0, last_error = null
                         where producer = ?
                         """)) {
-                    update.setLong(1, batch.path("last").asLong());
-                    update.setString(2, producer.name());
+                    update.setLong(1, next.tx());
+                    update.setLong(2, next.sequence());
+                    update.setLong(3, next.sequence());
+                    update.setLong(4, next.tx());
+                    update.setString(5, producer.name());
                     update.executeUpdate();
                 }
                 return fresh;
@@ -161,8 +170,38 @@ class TrackingSync {
         return imported;
     }
 
+    /**
+     * Lot suivant d'un producteur : le curseur fait foi ; after accompagne la demande pour un producteur pas encore
+     * passé au curseur (déploiement dans le désordre), qui répond alors avec l'ancienne lecture.
+     */
+    static String pagePath(String path, Outbox.Cursor from) {
+        return path + "?cursor=" + from + "&after=" + from.sequence() + "&limit=100";
+    }
+
+    /**
+     * Point de reprise après un lot : le curseur renvoyé par le producteur. Sans curseur (ancienne lecture), seule la
+     * séquence avance, comme avant. Le point de reprise ne recule jamais.
+     */
+    static Outbox.Cursor nextCursor(Outbox.Cursor from, JsonNode batch) {
+        JsonNode cursor = batch.path("cursor");
+        Outbox.Cursor next = cursor.isTextual() ? Outbox.Cursor.parse(cursor.asText())
+                : new Outbox.Cursor(from.tx(), Math.max(from.sequence(), batch.path("last").asLong()));
+        return next.max(from);
+    }
+
+    /**
+     * État de l'objectif porté par un événement. plan_validated porte goalStatus depuis EVO-042 (une replanification
+     * garde un objectif en attente de correction, validé ou à consolider) ; un événement plus ancien vaut « active ».
+     * Pour les autres événements d'état, null garde l'état connu.
+     */
+    static String goalStatusOf(String type, JsonNode data) {
+        String status = data.path("goalStatus").asText(null);
+        if (status != null && status.isBlank()) status = null;
+        return status == null && "learning.plan_validated".equals(type) ? "active" : status;
+    }
+
     /** Applique un événement aux synthèses ; un événement arrivé tard ne remplace pas un état plus récent. */
-    private void apply(Connection connection, Event event) throws SQLException {
+    void apply(Connection connection, Event event) throws SQLException {
         JsonNode data = event.data();
         if (event.type().startsWith("identity.")) return;
         UUID enrollmentId = data.hasNonNull("enrollmentId") ? UUID.fromString(data.path("enrollmentId").asText()) : null;
@@ -171,8 +210,10 @@ class TrackingSync {
                 enrollmentId, event.learnerId());
         switch (event.type()) {
             case "learning.goal_set" -> {
+                // Un goal_set rattrapé après un état plus récent ne ramène ni l'état ni la date cible en arrière.
                 try (var update = connection.prepareStatement("""
-                        update tracking.goals set level_code = ?, start_level = ?, template = ?, target_date = ?,
+                        update tracking.goals set level_code = ?, start_level = ?, template = ?,
+                            target_date = case when status_at is null or status_at <= ? then ? else target_date end,
                             initial_target_date = ?, assigned_at = ?, accompanied = coalesce(?::boolean, accompanied),
                             goal_status = case when status_at is null or status_at <= ? then 'preparing' else goal_status end,
                             status_at = greatest(status_at, ?), updated_at = now()
@@ -181,52 +222,79 @@ class TrackingSync {
                     update.setString(1, data.path("levelCode").asText(null));
                     update.setString(2, data.path("startLevel").asText(null));
                     update.setString(3, data.path("template").asText(null));
-                    update.setObject(4, date(data.path("targetDate")));
-                    update.setObject(5, date(data.path("initialTargetDate")));
-                    update.setObject(6, instant(data.path("assignedAt")));
-                    update.setObject(7, null);
-                    update.setObject(8, event.occurredAt());
+                    update.setObject(4, event.occurredAt());
+                    update.setObject(5, date(data.path("targetDate")));
+                    update.setObject(6, date(data.path("initialTargetDate")));
+                    update.setObject(7, instant(data.path("assignedAt")));
+                    update.setObject(8, null);
                     update.setObject(9, event.occurredAt());
-                    update.setObject(10, enrollmentId);
+                    update.setObject(10, event.occurredAt());
+                    update.setObject(11, enrollmentId);
                     update.executeUpdate();
                 }
             }
             case "learning.plan_validated" -> {
+                int revision = data.path("revision").asInt();
+                // Révision plus ancienne que celle déjà projetée (événement rattrapé ou arrivé en retard) : ses séances
+                // sont gardées comme remplacées, sans rouvrir ni remplacer celles du planning en vigueur.
+                boolean current;
+                try (var advance = connection.prepareStatement("""
+                        update tracking.goals set plan_revision = ?
+                        where enrollment_id = ? and (plan_revision is null or plan_revision <= ?)
+                        """)) {
+                    advance.setInt(1, revision);
+                    advance.setObject(2, enrollmentId);
+                    advance.setInt(3, revision);
+                    current = advance.executeUpdate() > 0;
+                }
                 List<UUID> ids = new ArrayList<>();
                 for (JsonNode session : data.path("sessions")) {
                     UUID sessionId = UUID.fromString(session.path("id").asText());
                     ids.add(sessionId);
-                    try (var upsert = connection.prepareStatement("""
+                    try (var upsert = connection.prepareStatement(current ? """
                             insert into tracking.sessions (session_id, enrollment_id, learner_id, revision, due_at, completed_at, milestone)
                             values (?, ?, ?, ?, ?, ?, ?)
                             on conflict (session_id) do update set due_at = excluded.due_at, revision = excluded.revision,
                                 milestone = excluded.milestone, superseded = false, superseded_at = null,
                                 completed_at = coalesce(tracking.sessions.completed_at, excluded.completed_at)
+                            """ : """
+                            insert into tracking.sessions (session_id, enrollment_id, learner_id, revision, due_at, completed_at,
+                                milestone, superseded, superseded_at)
+                            values (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                            on conflict (session_id) do nothing
                             """)) {
+                        OffsetDateTime completedAt = instant(session.path("completedAt"));
                         upsert.setObject(1, sessionId);
                         upsert.setObject(2, enrollmentId);
                         upsert.setObject(3, event.learnerId());
-                        upsert.setInt(4, data.path("revision").asInt());
+                        upsert.setInt(4, revision);
                         upsert.setObject(5, instant(session.path("dueAt")));
-                        upsert.setObject(6, instant(session.path("completedAt")));
+                        upsert.setObject(6, completedAt);
                         upsert.setString(7, session.path("milestone").asText(null));
+                        if (!current) {
+                            upsert.setBoolean(8, completedAt == null);
+                            upsert.setObject(9, completedAt == null ? event.occurredAt() : null);
+                        }
                         upsert.executeUpdate();
                     }
                 }
-                try (var supersede = connection.prepareStatement("""
-                        update tracking.sessions set superseded = true, superseded_at = coalesce(superseded_at, ?)
-                        where enrollment_id = ? and completed_at is null and revision < ? and not (session_id = any(?))
-                        """)) {
-                    supersede.setObject(1, event.occurredAt());
-                    supersede.setObject(2, enrollmentId);
-                    supersede.setInt(3, data.path("revision").asInt());
-                    supersede.setArray(4, connection.createArrayOf("uuid", ids.toArray()));
-                    supersede.executeUpdate();
+                if (current) {
+                    try (var supersede = connection.prepareStatement("""
+                            update tracking.sessions set superseded = true, superseded_at = coalesce(superseded_at, ?)
+                            where enrollment_id = ? and completed_at is null and revision < ? and not (session_id = any(?))
+                            """)) {
+                        supersede.setObject(1, event.occurredAt());
+                        supersede.setObject(2, enrollmentId);
+                        supersede.setInt(3, revision);
+                        supersede.setArray(4, connection.createArrayOf("uuid", ids.toArray()));
+                        supersede.executeUpdate();
+                    }
                 }
-                status(connection, enrollmentId, "active", event.occurredAt(), date(data.path("targetDate")), null);
+                status(connection, enrollmentId, goalStatusOf(event.type(), data), event.occurredAt(),
+                        date(data.path("targetDate")), null);
             }
             case "learning.goal_paused", "learning.goal_resumed", "learning.goal_status_changed" ->
-                    status(connection, enrollmentId, data.path("goalStatus").asText(), event.occurredAt(),
+                    status(connection, enrollmentId, goalStatusOf(event.type(), data), event.occurredAt(),
                             date(data.path("targetDate")), date(data.path("resumeDate")));
             case "learning.activity_progressed" -> {
                 try (var insert = connection.prepareStatement("""
@@ -256,14 +324,16 @@ class TrackingSync {
                     update.setObject(3, enrollmentId);
                     update.executeUpdate();
                 }
-                // Première activité qui suit un encouragement : la reprise est enregistrée (DEV-082).
+                // Première activité qui suit un encouragement : la reprise est enregistrée (DEV-082). La plus ancienne
+                // activité postérieure à l'envoi l'emporte, quel que soit l'ordre d'arrivée des événements.
                 try (var resumed = connection.prepareStatement("""
                         update tracking.encouragements set resumed_at = ?
-                        where learner_id = ? and resumed_at is null and sent_at <= ?
+                        where learner_id = ? and sent_at <= ? and (resumed_at is null or resumed_at > ?)
                         """)) {
                     resumed.setObject(1, event.occurredAt());
                     resumed.setObject(2, event.learnerId());
                     resumed.setObject(3, event.occurredAt());
+                    resumed.setObject(4, event.occurredAt());
                     resumed.executeUpdate();
                 }
             }
@@ -292,25 +362,36 @@ class TrackingSync {
                 }
             }
             case "assessment.attempt_submitted" -> {
+                // Une remise rattrapée après sa correction n'est plus en attente.
                 if (data.path("needsGrading").asBoolean()) {
-                    execute(connection, "update tracking.goals set pending_grading = pending_grading + 1, updated_at = now() where enrollment_id = ? and ?::uuid is not null",
-                            enrollmentId, event.learnerId());
+                    execute(connection, """
+                            update tracking.goals set pending_grading = pending_grading + 1, updated_at = now()
+                            where enrollment_id = ? and not exists (
+                                select 1 from tracking.event_log graded
+                                where graded.producer = 'assessment' and graded.type = 'assessment.attempt_graded'
+                                  and graded.subject_id = ?)
+                            """, enrollmentId, data.path("attemptId").asText());
                 }
             }
             case "assessment.attempt_graded" -> {
+                // Le résultat d'une tentative rattrapée ne remplace pas celui d'une tentative plus récente.
                 try (var update = connection.prepareStatement("""
                         update tracking.goals set pending_grading = greatest(0, pending_grading - ?),
-                            results = jsonb_set(results, array[?], ?::jsonb), updated_at = now()
+                            results = case when coalesce((results -> ? ->> 'number')::int, 0) <= ?
+                                           then jsonb_set(results, array[?], ?::jsonb) else results end,
+                            updated_at = now()
                         where enrollment_id = ?
                         """)) {
                     update.setInt(1, data.path("wasPending").asBoolean() ? 1 : 0);
                     update.setString(2, data.path("kind").asText());
-                    update.setString(3, json.createObjectNode().put("attemptId", data.path("attemptId").asText())
+                    update.setInt(3, data.path("number").asInt());
+                    update.setString(4, data.path("kind").asText());
+                    update.setString(5, json.createObjectNode().put("attemptId", data.path("attemptId").asText())
                             .put("number", data.path("number").asInt()).put("percent", data.path("percent").asInt())
                             .put("decision", data.path("decision").asText()).put("onTime", data.path("onTime").asBoolean())
                             .put("submittedAt", data.path("submittedAt").asText(null)).put("gradedAt", data.path("gradedAt").asText(null))
                             .set("scores", data.path("scores")).toString());
-                    update.setObject(4, enrollmentId);
+                    update.setObject(6, enrollmentId);
                     update.executeUpdate();
                 }
             }
@@ -318,19 +399,29 @@ class TrackingSync {
         }
     }
 
+    /**
+     * État le plus récent selon l'horloge de l'objectif ; goalStatus null garde l'état connu. paused_at retient l'entrée
+     * en pause : l'annonce d'une reprise prévue (l'objectif reste en pause) ne la déplace pas, la reprise l'efface.
+     */
     private void status(Connection connection, UUID enrollmentId, String goalStatus, OffsetDateTime at, LocalDate target,
                         LocalDate resume) throws SQLException {
         try (var update = connection.prepareStatement("""
-                update tracking.goals set goal_status = ?, status_at = ?, target_date = coalesce(?, target_date),
-                    resume_date = ?, updated_at = now()
+                update tracking.goals set goal_status = coalesce(?, goal_status), status_at = ?, target_date = coalesce(?, target_date),
+                    resume_date = ?,
+                    paused_at = case when coalesce(?, goal_status) <> 'paused' then null
+                                     when goal_status = 'paused' then coalesce(paused_at, ?) else ? end,
+                    updated_at = now()
                 where enrollment_id = ? and (status_at is null or status_at <= ?)
                 """)) {
             update.setString(1, goalStatus);
             update.setObject(2, at);
             update.setObject(3, target);
             update.setObject(4, resume);
-            update.setObject(5, enrollmentId);
+            update.setString(5, goalStatus);
             update.setObject(6, at);
+            update.setObject(7, at);
+            update.setObject(8, enrollmentId);
+            update.setObject(9, at);
             update.executeUpdate();
         }
     }
@@ -420,12 +511,13 @@ class TrackingSync {
         });
     }
 
-    private long checkpoint(String producer) {
+    private Outbox.Cursor checkpoint(String producer) {
         return transaction("read checkpoint", connection -> {
-            try (var query = connection.prepareStatement("select last_sequence from tracking.checkpoints where producer = ?")) {
+            try (var query = connection.prepareStatement(
+                    "select last_tx, last_sequence from tracking.checkpoints where producer = ?")) {
                 query.setString(1, producer);
                 try (var rows = query.executeQuery()) {
-                    return rows.next() ? rows.getLong(1) : 0L;
+                    return rows.next() ? new Outbox.Cursor(rows.getLong(1), rows.getLong(2)) : Outbox.Cursor.START;
                 }
             }
         });

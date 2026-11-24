@@ -85,43 +85,45 @@ public class PathResource {
         PathRow path = paths.latest(callerId);
         if (path != null && "withdrawn".equals(path.status())) path = null;
         JsonNode placement = latestPlacement(callerId, callerId, languageId);
-        boolean placed = placement != null && "completed".equals(placement.path("status").asText());
-        String placedLevel = placed ? text(placement.path("placedLevel")) : null;
         if (languageId == null && path != null) languageId = path.languageId();
 
         JsonNode language = languageId == null ? null : language(callerId, languageId);
-        boolean started = path != null && !"draft".equals(path.status());
+        OnboardingProgress progress = onboardingProgress(catalogue(callerId), languageId, language,
+                path == null ? null : path.status(), path != null && path.availabilityConfirmedAt() != null, placement);
+        // Identités ne bloque pas le changement de langue : elle se verrouille dès que le parcours démarre ou que
+        // l'élève est suivi (langue choisie par le professeur).
+        return new OnboardingState(viewer.accompanied(), languageId, viewer.accompanied() || progress.started(), teacher,
+                placement == null ? null : new OnboardingPlacement(placement.path("id").asText(),
+                        placement.path("status").asText(), progress.placedLevel(), text(placement.path("completedAt"))),
+                path == null ? null : new OnboardingPath(path.id().toString(), path.status(), path.validatedRevision()),
+                progress.steps(), progress.started(), progress.blocked());
+    }
+
+    /**
+     * Calcul de l'accueil d'un élève, partagé avec la vue du professeur (LearnerStateResource) : étapes, démarrage et
+     * blocage. pathStatus : parcours ouvert ou le plus récent, null sans parcours (ou retiré) ; language : langue du
+     * catalogue (null si le catalogue ne la décrit pas) ; placement : dernière tentative du test de niveau, ou null.
+     */
+    OnboardingProgress onboardingProgress(Catalogue catalogue, String languageId, JsonNode language, String pathStatus,
+                                          boolean availabilityConfirmed, JsonNode placement) {
+        boolean placed = placement != null && "completed".equals(placement.path("status").asText());
+        String placedLevel = placed ? text(placement.path("placedLevel")) : null;
+        boolean started = pathStatus != null && !"draft".equals(pathStatus);
         String blocked = null;
         if (!started && language != null) {
             if (!"available".equals(language.path("status").asText("available"))) blocked = "language_unavailable";
             else if (!placed && !language.path("placementAvailable").asBoolean(true)) blocked = "placement_unavailable";
         }
-        if (!started && blocked == null && placed && path == null && languageId != null
-                && PathRules.allowedTargets(placedLevel, catalogue(callerId).published(languageId).keySet()).isEmpty()) {
+        if (!started && blocked == null && placed && pathStatus == null && languageId != null
+                && PathRules.allowedTargets(placedLevel, catalogue.published(languageId).keySet()).isEmpty()) {
             blocked = "no_target_available";
         }
-
-        List<OnboardingStep> steps = new ArrayList<>();
-        boolean confirmed = path != null && path.availabilityConfirmedAt() != null;
-        steps.add(new OnboardingStep("language", languageId != null ? "done"
-                : "language_unavailable".equals(blocked) ? "blocked" : "current"));
-        steps.add(new OnboardingStep("placement", placed ? "done" : started ? "skipped"
-                : "placement_unavailable".equals(blocked) || "language_unavailable".equals(blocked) ? "blocked"
-                : languageId != null ? "current" : "todo"));
-        steps.add(new OnboardingStep("result", path != null ? (placed ? "done" : "skipped")
-                : "no_target_available".equals(blocked) ? "blocked" : placed ? "current" : "todo"));
-        steps.add(new OnboardingStep("objective", path != null ? "done" : "todo"));
-        steps.add(new OnboardingStep("days", started || confirmed ? "done" : path != null ? "current" : "todo"));
-        steps.add(new OnboardingStep("planning", started ? "done" : confirmed ? "current" : "todo"));
-        steps.add(new OnboardingStep("start", started ? "done" : "todo"));
-        // Identités ne bloque pas le changement de langue : elle se verrouille dès que le parcours démarre ou que
-        // l'élève est suivi (langue choisie par le professeur).
-        return new OnboardingState(viewer.accompanied(), languageId, viewer.accompanied() || started, teacher,
-                placement == null ? null : new OnboardingPlacement(placement.path("id").asText(),
-                        placement.path("status").asText(), placedLevel, text(placement.path("completedAt"))),
-                path == null ? null : new OnboardingPath(path.id().toString(), path.status(), path.validatedRevision()),
-                steps, started, blocked);
+        return new OnboardingProgress(OnboardingRules.steps(languageId != null, placed, pathStatus, availabilityConfirmed,
+                blocked), started, blocked, placedLevel);
     }
+
+    /** Étapes de l'accueil, démarrage du parcours, blocage éventuel et niveau placé par le test. */
+    record OnboardingProgress(List<OnboardingStep> steps, boolean started, String blocked, String placedLevel) {}
 
     /** Charge et difficulté d'un objectif, bandes du barème, cibles autorisées et jours proposés. */
     @POST
@@ -992,14 +994,20 @@ public class PathResource {
 
     /** Langue du catalogue (statut, test de niveau disponible), ou null si le catalogue ne la décrit pas. */
     private JsonNode language(UUID callerId, String languageId) {
+        return languages(callerId).get(languageId);
+    }
+
+    /** Langues du catalogue par identifiant ; vide si le catalogue ne répond pas (l'accueil n'est alors pas bloqué). */
+    Map<String, JsonNode> languages(UUID callerId) {
+        Map<String, JsonNode> languages = new HashMap<>();
         try {
             for (JsonNode language : services.request(catalogueUrl, "/v1/languages", "GET", callerId, null)) {
-                if (languageId.equals(language.path("id").asText())) return language;
+                languages.put(language.path("id").asText(), language);
             }
         } catch (WebApplicationException unavailable) {
             LOG.warn("Catalogue languages unavailable for onboarding");
         }
-        return null;
+        return languages;
     }
 
     private String teacherName(UUID callerId) {
@@ -1024,8 +1032,8 @@ public class PathResource {
         throw HttpError.notFound("Test de niveau introuvable.");
     }
 
-    /** Dernière tentative (en cours ou terminée) de la langue, ou null. */
-    private JsonNode latestPlacement(UUID callerId, UUID learnerId, String languageId) {
+    /** Dernière tentative (en cours ou terminée) de la langue, ou null (aussi si Évaluations ne répond pas). */
+    JsonNode latestPlacement(UUID callerId, UUID learnerId, String languageId) {
         try {
             JsonNode latest = null;
             for (JsonNode attempt : placements(callerId, learnerId)) {

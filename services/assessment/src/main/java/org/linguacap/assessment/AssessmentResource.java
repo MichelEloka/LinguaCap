@@ -73,6 +73,10 @@ public class AssessmentResource {
             throw new WebApplicationException(Response.status(keyResult.status()).entity(keyResult.body()).build());
         }
         JsonNode key = keyResult.body();
+        if (key.path("modules").isObject() && !key.path("modules").isEmpty()) {
+            // Un diagnostic remis comme un quiz donnerait son score à volonté, donc ses réponses par essais successifs.
+            throw HttpError.conflict("Ce questionnaire est un diagnostic : il se passe depuis votre objectif.");
+        }
         if (key.path("typed").asBoolean(false)) {
             // Une leçon typée (trous, ordre, association, dictée, répétition) se remet avec sa correction détaillée.
             throw HttpError.conflict("Cet exercice se remet avec sa correction détaillée : utilisez /assessments/exercises.");

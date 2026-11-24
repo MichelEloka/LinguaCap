@@ -2,7 +2,7 @@
   "openapi": "3.1.0",
   "info": {
     "title": "LinguaCap API publique",
-    "version": "1.9.0",
+    "version": "1.11.0",
     "description": "Contrat de l'API exposée par la passerelle sous /api/v1. Chaque route déclarée ici doit être routée par la passerelle Quarkus et seules ces routes peuvent être appelées par l'interface React. Les tests des deux côtés lisent ce fichier."
   },
   "servers": [
@@ -255,6 +255,7 @@
       "get": {
         "operationId": "getLesson",
         "summary": "Leçon sans corrigé",
+        "description": "La transcription n'est servie qu'aux éditeurs du catalogue.",
         "parameters": [
           {
             "$ref": "#/components/parameters/LessonIdPath"
@@ -481,6 +482,7 @@
       "post": {
         "operationId": "submitQuiz",
         "summary": "Remettre un quiz (idempotent)",
+        "description": "Leçon à choix uniquement. 409 pour une leçon à questions typées (à remettre par /assessments/exercises) et pour un diagnostic (il se passe depuis l'objectif, par /assessments/diagnostics).",
         "parameters": [
           {
             "$ref": "#/components/parameters/IdempotencyKey"
@@ -1624,8 +1626,12 @@
           },
           "404": {
             "$ref": "#/components/responses/Error"
+          },
+          "409": {
+            "$ref": "#/components/responses/Error"
           }
-        }
+        },
+        "description": "Un débutant (point de départ A0 du niveau ou du parcours) a un parcours déjà adapté, sans diagnostic : la route répond 409 et le parcours (goal.diagnosticLessonId) ne propose aucun diagnostic."
       },
       "post": {
         "operationId": "submitDiagnostic",
@@ -1680,7 +1686,8 @@
           "409": {
             "$ref": "#/components/responses/Error"
           }
-        }
+        },
+        "description": "Un débutant (point de départ A0 du niveau ou du parcours) a un parcours déjà adapté, sans diagnostic : la route répond 409 et le parcours (goal.diagnosticLessonId) ne propose aucun diagnostic."
       }
     },
     "/learning/enrollments/{enrollmentId}/starting-point": {
@@ -4425,6 +4432,7 @@
       "post": {
         "operationId": "submitExercise",
         "summary": "Remettre un exercice typé et recevoir le corrigé de chaque question (idempotent)",
+        "description": "404 si la leçon n'a pas de clé de correction : leçon inconnue, version au brouillon ou diagnostic (un diagnostic n'a pas de corrigé détaillé).",
         "parameters": [
           {
             "$ref": "#/components/parameters/IdempotencyKey"
@@ -5774,7 +5782,8 @@
             "type": "string"
           },
           "transcript": {
-            "type": "string"
+            "type": ["string", "null"],
+            "description": "Réservée aux éditeurs du catalogue (null pour un élève) : la transcription d'un exercice peut contenir la réponse ; l'élève la reçoit par sa séance ou la bibliothèque, qui appliquent sa visibilité."
           },
           "mediaIds": {
             "type": "array",
@@ -6408,7 +6417,15 @@
                   "$ref": "#/components/schemas/Profile"
                 },
                 "progress": {
-                  "$ref": "#/components/schemas/Progress"
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/Progress"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "null si Apprentissage n’a pas répondu ; results est alors vide."
                 },
                 "results": {
                   "type": "array",
@@ -6418,6 +6435,17 @@
                 },
                 "tracking": {
                   "$ref": "#/components/schemas/TrackingSummary"
+                },
+                "learning": {
+                  "oneOf": [
+                    {
+                      "$ref": "#/components/schemas/LearnerLearningState"
+                    },
+                    {
+                      "type": "null"
+                    }
+                  ],
+                  "description": "Lu en direct chez Apprentissage ; null si Apprentissage n’a pas répondu (la vue reste servie avec la synthèse du Suivi)."
                 }
               }
             }
@@ -7552,6 +7580,17 @@
           },
           "freshness": {
             "$ref": "#/components/schemas/Freshness"
+          },
+          "learning": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LearnerLearningState"
+              },
+              {
+                "type": "null"
+              }
+            ],
+            "description": "Lu en direct chez Apprentissage ; null si Apprentissage n’a pas répondu (la vue reste servie avec la synthèse du Suivi)."
           }
         }
       },
@@ -9549,16 +9588,19 @@
             "type": "integer"
           },
           "pendingGrading": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Copies d’examen en attente de correction, sur tous les niveaux de l’élève."
           },
           "lateSessions": {
-            "type": "integer"
+            "type": "integer",
+            "description": "Séances échues non terminées ; objectif en pause : seulement celles échues avant la pause."
           },
           "nextDueAt": {
             "type": [
               "string",
               "null"
-            ]
+            ],
+            "description": "Prochaine séance ; objectif en pause : début du jour de reprise prévu, sinon null."
           },
           "alert": {
             "oneOf": [
@@ -9610,6 +9652,13 @@
           "results": {
             "type": "object",
             "description": "Dernier résultat du bilan (midterm) et de l’examen blanc (final), par compétence."
+          },
+          "resultsByLevel": {
+            "type": "object",
+            "description": "Fiche élève : résultats du bilan et de l’examen blanc de chaque niveau (clé : code du niveau).",
+            "additionalProperties": {
+              "type": "object"
+            }
           }
         }
       },
@@ -15197,6 +15246,213 @@
           }
         },
         "description": "Son en lecture seule : segment du média de lexique du module, résolu à l’import."
+      },
+      "LearnerLearningState": {
+        "type": "object",
+        "description": "Accueil et parcours d’un élève lus en direct par Suivi auprès d’Apprentissage (EVO-039) : le parcours est visible dès sa création, brouillon compris, sans attendre la synchronisation périodique.",
+        "required": [
+          "learnerId",
+          "languageId",
+          "onboarding",
+          "path"
+        ],
+        "properties": {
+          "learnerId": {
+            "$ref": "#/components/schemas/Uuid"
+          },
+          "languageId": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/LanguageId"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "onboarding": {
+            "type": "object",
+            "required": [
+              "steps",
+              "completed",
+              "placement",
+              "blockedReason"
+            ],
+            "properties": {
+              "steps": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": [
+                    "id",
+                    "status"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": "string",
+                      "enum": [
+                        "language",
+                        "placement",
+                        "result",
+                        "objective",
+                        "days",
+                        "planning",
+                        "start"
+                      ]
+                    },
+                    "status": {
+                      "type": "string",
+                      "enum": [
+                        "done",
+                        "current",
+                        "todo",
+                        "skipped",
+                        "blocked"
+                      ]
+                    }
+                  }
+                }
+              },
+              "completed": {
+                "type": "boolean",
+                "description": "Le parcours a démarré."
+              },
+              "placement": {
+                "type": [
+                  "object",
+                  "null"
+                ],
+                "description": "Dernière tentative du test de niveau ; declaredBeginner : « débutant déclaré », sans test.",
+                "required": [
+                  "attemptId",
+                  "status",
+                  "placedLevel",
+                  "declaredBeginner",
+                  "completedAt"
+                ],
+                "properties": {
+                  "attemptId": {
+                    "$ref": "#/components/schemas/Uuid"
+                  },
+                  "status": {
+                    "$ref": "#/components/schemas/PlacementAttemptStatus"
+                  },
+                  "placedLevel": {
+                    "oneOf": [
+                      {
+                        "$ref": "#/components/schemas/StartLevel"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ]
+                  },
+                  "declaredBeginner": {
+                    "type": "boolean"
+                  },
+                  "completedAt": {
+                    "type": [
+                      "string",
+                      "null"
+                    ],
+                    "format": "date-time"
+                  }
+                }
+              },
+              "blockedReason": {
+                "oneOf": [
+                  {
+                    "type": "string",
+                    "enum": [
+                      "language_unavailable",
+                      "placement_unavailable",
+                      "no_target_available"
+                    ]
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              }
+            }
+          },
+          "path": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "description": "Parcours ouvert (brouillon ou en cours), sinon le plus récent ; un parcours retiré ne compte pas. activeLevel, enrollmentId et goalStatus : niveau ouvert, sinon le dernier terminé ; null pour un brouillon.",
+            "required": [
+              "id",
+              "status",
+              "startLevel",
+              "targetLevel",
+              "targetDate",
+              "activeLevel",
+              "enrollmentId",
+              "goalStatus",
+              "validatedRevision",
+              "createdAt"
+            ],
+            "properties": {
+              "id": {
+                "$ref": "#/components/schemas/Uuid"
+              },
+              "status": {
+                "type": "string",
+                "enum": [
+                  "draft",
+                  "active",
+                  "completed"
+                ]
+              },
+              "startLevel": {
+                "$ref": "#/components/schemas/StartLevel"
+              },
+              "targetLevel": {
+                "$ref": "#/components/schemas/LevelCode"
+              },
+              "targetDate": {
+                "type": "string",
+                "format": "date"
+              },
+              "activeLevel": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/LevelCode"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "enrollmentId": {
+                "oneOf": [
+                  {
+                    "$ref": "#/components/schemas/Uuid"
+                  },
+                  {
+                    "type": "null"
+                  }
+                ]
+              },
+              "goalStatus": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "validatedRevision": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "createdAt": {
+                "type": "string",
+                "format": "date-time"
+              }
+            }
+          }
+        }
       }
     }
   }

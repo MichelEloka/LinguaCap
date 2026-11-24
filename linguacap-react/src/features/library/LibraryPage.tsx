@@ -4,7 +4,7 @@
  * et entraînement au bilan intermédiaire (sans corrigé). L'examen blanc, qui valide un niveau, n'est jamais proposé ici :
  * il se passe dans le parcours.
  */
-import { useEffect, useMemo, useState } from 'react';
+import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   ArrowLeft, ArrowRight, BookA, BookOpen, Check, ChevronRight, ClipboardCheck, Clock, Dumbbell, EyeOff, Flag, Headphones, LibraryBig, LoaderCircle,
@@ -17,6 +17,7 @@ import {
   competenceLabels, examKindLabels, formatMinutes, levelCodes, type Language, type LevelCode, type Library, type LibraryActivityItem,
   type LibraryLevel, type LibraryModule, type PracticeSummary, type PracticeView,
 } from '../../integration/v2';
+import { missionDecisionLabels, missionStatusLabels, missionStatusTones, type MissionSummary } from '../../integration/v4';
 import { errorText, LevelMark, levelName, momentText } from '../onboarding/onboarding-kit';
 import { EmptyScene, LogoL, NightDecor } from '../pilot/learner-common';
 import { LexiconLoader } from '../pilot/study-lexicon';
@@ -35,7 +36,18 @@ export function activityHref(level: Pick<LibraryLevel, 'trackVersionId'>, activi
   return `/espace/bibliotheque/${encodeURIComponent(level.trackVersionId)}/${encodeURIComponent(activity.id)}`;
 }
 
+/** Dernière mission de l'élève par activité (la liste d'Évaluations arrive de la plus récente à la plus ancienne). */
+const LatestMissions = createContext<ReadonlyMap<string, MissionSummary>>(new Map());
+
+function MissionState({ mission }: { mission: MissionSummary }) {
+  if (mission.status === 'reviewed' && mission.decision) {
+    return <Badge tone={mission.decision === 'validated' ? 'green' : 'amber'}>{missionDecisionLabels[mission.decision]}</Badge>;
+  }
+  return <Badge tone={missionStatusTones[mission.status]}>{missionStatusLabels[mission.status]}</Badge>;
+}
+
 function ActivityRow({ level, activity, module }: { level: LibraryLevel; activity: LibraryActivityItem; module?: string }) {
+  const mission = useContext(LatestMissions).get(activity.id);
   const Icon = kindIcons[activity.kind] ?? BookOpen;
   const score = activity.lastResult ? scorePercent(activity.lastResult) : null;
   const toReview = Boolean(activity.toReview);
@@ -49,6 +61,7 @@ function ActivityRow({ level, activity, module }: { level: LibraryLevel; activit
         {toReview && <span className="lib-review-mark"><Flag size={12} aria-hidden="true" /> À revoir</span>}
         {score !== null && activity.lastResult
           ? <Badge tone={score >= 70 ? 'green' : 'amber'}>{activity.lastResult.correct}/{activity.lastResult.total}</Badge>
+          : activity.kind === 'mission' && mission ? <MissionState mission={mission} />
           : activity.kind === 'exercise' || activity.kind === 'mission' ? <span className="lib-todo">À faire</span> : null}
         <ChevronRight size={18} aria-hidden="true" />
       </>} />
@@ -158,6 +171,7 @@ export function LibraryPage({ token }: { token: string }) {
   const [library, setLibrary] = useState<Library | null>(null);
   const [languages, setLanguages] = useState<Language[]>([]);
   const [history, setHistory] = useState<PracticeSummary[]>([]);
+  const [missions, setMissions] = useState<MissionSummary[]>([]);
   const [failure, setFailure] = useState('');
   const [retry, setRetry] = useState(0);
   const [query, setQuery] = useState('');
@@ -169,14 +183,22 @@ export function LibraryPage({ token }: { token: string }) {
       requestApi<Library>('/learning/library', token),
       requestApi<Language[]>('/languages', token).catch(() => [] as Language[]),
       requestApi<PracticeSummary[]>('/assessments/practice', token).catch(() => [] as PracticeSummary[]),
-    ]).then(([lib, langs, practice]) => {
+      requestApi<MissionSummary[]>('/assessments/missions', token).catch(() => [] as MissionSummary[]),
+    ]).then(([lib, langs, practice, sent]) => {
       if (!active) return;
       setLibrary(lib);
       setLanguages(langs);
       setHistory(practice);
+      setMissions(sent);
     }).catch((error: unknown) => { if (active) setFailure(errorText(error)); });
     return () => { active = false; };
   }, [token, retry]);
+
+  const latestMissions = useMemo(() => {
+    const latest = new Map<string, MissionSummary>();
+    for (const mission of missions) if (!latest.has(mission.activityId)) latest.set(mission.activityId, mission);
+    return latest;
+  }, [missions]);
 
   const tabs = useMemo<LevelTab[]>(() => {
     if (!library) return [];
@@ -241,6 +263,7 @@ export function LibraryPage({ token }: { token: string }) {
   const average = scored.length ? Math.round(scored.reduce((sum, activity) => sum + scorePercent(activity.lastResult ?? { correct: 0, total: 0 }), 0) / scored.length) : null;
 
   return (
+    <LatestMissions.Provider value={latestMissions}>
     <div className="lib-page lc-enter">
       {heading}
       <nav className="lib-levels lc-stagger" aria-label="Niveaux">
@@ -333,5 +356,6 @@ export function LibraryPage({ token }: { token: string }) {
         </>
       )}
     </div>
+    </LatestMissions.Provider>
   );
 }

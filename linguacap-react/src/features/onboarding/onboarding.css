@@ -227,7 +227,9 @@ button.pp-level:hover { border-color: var(--lvl); transform: translateY(-1px); }
 .pp-item-icon { display: grid; place-items: center; width: 36px; height: 36px; flex-shrink: 0; border-radius: 10px; color: var(--brand-600); background: var(--brand-50); }
 .pp-item-icon.is-exercise { color: var(--violet); background: var(--violet-50); }
 .pp-item-icon.is-review { color: var(--accent); background: var(--accent-50); }
-.pp-item-icon.is-assessment { color: var(--success); background: var(--success-50); }
+/* Mêmes teintes que la séance et la bibliothèque : évaluation orange, mission verte. */
+.pp-item-icon.is-assessment { color: var(--warning); background: var(--warning-50); }
+.pp-item-icon.is-mission { color: var(--success); background: var(--success-50); }
 .pp-item-minutes { color: var(--muted); font-size: var(--text-sm); font-weight: 700; white-space: nowrap; }
 .pp-added { display: inline-flex; align-items: center; gap: .2rem; margin-left: .4rem; color: var(--violet); font-weight: 700; }
 @container pp (max-width: 1080px) {

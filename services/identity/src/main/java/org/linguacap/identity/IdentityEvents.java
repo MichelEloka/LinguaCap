@@ -23,12 +23,15 @@ public class IdentityEvents {
     @Inject Accounts accounts;
     @Inject IdentityStore store;
 
+    /** Lot d'événements après le curseur (ou, pendant la transition, après le numéro donné). */
     @GET
     @Path("/events")
-    public ObjectNode export(@QueryParam("after") @DefaultValue("0") long after, @QueryParam("limit") @DefaultValue("100") int limit) {
+    public ObjectNode export(@QueryParam("cursor") String cursor, @QueryParam("after") @DefaultValue("0") long after,
+                             @QueryParam("limit") @DefaultValue("100") int limit) {
         actor.id();
+        Outbox.Cursor from = Outbox.cursorParam(cursor);
         return db.read("export events", connection ->
-                Outbox.read(connection, json, "identity.outbox_events", "identity", Math.max(0, after), limit));
+                Outbox.export(connection, json, "identity.outbox_events", "identity", from, after, limit));
     }
 
     @GET

@@ -23,7 +23,7 @@ import type {
   LibraryActivity, OnboardingState, OnboardingStep, PathPermissions, PathProposal, PathSession, PathStatus, PathStep, PathView,
   PendingContract, PlacementAttemptStatus, PlacementCompetence, PlacementQuestionContent, PlacementSummary, PlacementTestDocument,
   PlacementTestSummary, PlacementTier, PlacementTierContent, PlacementView, PlanItem, PlannedSession, PracticePart, PracticeSummary,
-  CourseCreationMode, PracticeView, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats, TeacherProfile,
+  CourseCreationMode, LearnerLearningState, PracticeView, StartLevel, Suggestion, TeacherCard, TeacherOnboardingStats, TeacherProfile,
 } from './v2';
 import { difficultyCodes, difficultyLabels, difficultyThresholds, gradingDelays, levelCodes, levelLabels, PLACEMENT_DONT_KNOW } from './v2';
 import type {
@@ -33,6 +33,7 @@ import type {
   SpeechMode, SpeechReviewStatus,
 } from './v4';
 import { countWords, exerciseLimits, missionLimits, speechLimits } from './v4';
+import { pilotToday } from './pilot-day';
 import { findLanguage, languages as staticLanguages } from '../domain/languages';
 
 type Method = 'GET' | 'POST' | 'PUT';
@@ -58,7 +59,8 @@ function parseDate(iso: string) {
   const [year, month, day] = iso.split('-').map(Number);
   return new Date(year, month - 1, day);
 }
-const today = () => isoDate(new Date());
+// Jour du pilote, comme le serveur (fuseau de Paris), quel que soit le fuseau du navigateur.
+const today = () => pilotToday();
 function addDays(iso: string, days: number) {
   const date = parseDate(iso);
   date.setDate(date.getDate() + days);
@@ -2203,7 +2205,8 @@ function libraryActivity(actor: UserRec, versionId: string, activityId: string):
   return {
     id: content.id, position: content.module.activities.findIndex(([id]) => id === content.id) + 1, kind: content.kind, title: content.title,
     estimatedMinutes: content.minutes, competences: content.competences, status: 'todo', state: {}, completedAt: null, attemptId: null,
-    lesson: content.lesson ? { id: lessonIdOf(content.id), ...content.lesson } : null, transcript: content.transcript,
+    // Comme l'API : la transcription d'un exercice attend la réponse (elle contient souvent la solution).
+    lesson: content.lesson ? { id: lessonIdOf(content.id), ...content.lesson } : null, transcript: content.kind === 'exercise' ? null : content.transcript,
     questions: content.questions.map((question) => questionView(lessonIdOf(content.id), question)),
     placements: questionPlacements(content.id, content.questions, false), trackVersionId: versionId, levelCode: level.code,
     moduleId: content.module.id, moduleTitle: content.module.title, mission: content.mission,
@@ -2246,7 +2249,7 @@ function sessionDetail(actor: UserRec, sessionId: string) {
         status, state: progress?.state ?? {}, completedAt: progress?.completedAt ?? null, attemptId: progress?.attemptId ?? null,
         lesson: content?.lesson ? { id: lessonIdOf(content.id), ...content.lesson }
           : item.kind === 'review' ? { id: `lecon-${item.id}`, title: item.title, description: 'Reprenez le vocabulaire et les phrases clés du module, puis refaites les exercices où vous avez hésité.' } : null,
-        transcript: content?.transcript ?? null,
+        transcript: content?.kind === 'exercise' && status !== 'completed' ? null : content?.transcript ?? null,
         questions: content ? content.questions.map((question) => questionView(lessonIdOf(content.id), question)) : [],
         placements: content ? questionPlacements(content.id, content.questions, status === 'completed') : [],
         mission: content?.mission ?? null,
@@ -2550,14 +2553,42 @@ function trackingOf(user: UserRec) {
   const step = path && activeStep(path);
   const sessions = path ? pathSessions(path).filter((session) => !session.locked) : [];
   const done = sessions.filter((session) => session.status === 'completed');
+  // En pause : seules les séances échues avant la pause sont en retard, la prochaine échéance est la reprise.
+  const paused = step?.goalStatus === 'paused' ? path?.pausedAt ?? now() : null;
   return {
     enrollmentId: step?.enrollmentId ?? null, levelCode: step?.levelCode ?? null, goalStatus: step?.goalStatus ?? null,
-    nextDueAt: sessions.find((session) => session.status !== 'completed')?.dueAt ?? null,
-    lateSessions: sessions.filter((session) => session.status === 'late').length,
+    resumeDate: path?.resumeDate ?? null,
+    nextDueAt: paused ? (path?.resumeDate ? `${path.resumeDate}T00:00:00+01:00` : null)
+      : sessions.find((session) => session.status !== 'completed')?.dueAt ?? null,
+    lateSessions: sessions.filter((session) => session.status === 'late' && (!paused || new Date(session.dueAt) < new Date(paused))).length,
     pendingGrading: state().exams.filter((exam) => exam.learnerId === user.id && exam.status === 'submitted').length, alert: null,
     practiceMinutes: done.reduce((sum, session) => sum + session.estimatedMinutes, 0), sessionsCompleted: done.length, sessionsOnTime: done.length,
     lastActivityAt: done.at(-1)?.completedAt ?? null, alerts: [],
   };
+}
+/**
+ * Accueil et parcours lus « en direct » (champ `learning` de /tracking/overview et /tracking/learners/{id}, EVO-039) :
+ * le parcours est visible dès sa création, brouillon compris, sans attendre la synchronisation du Suivi.
+ */
+function learningState(user: UserRec): LearnerLearningState {
+  const welcome = onboarding(user);
+  const attempt = welcome.placement ? learnerPlacements(user.id).find((item) => item.id === welcome.placement?.attemptId) : undefined;
+  const latest = latestPath(user.id);
+  const path = latest && latest.status !== 'withdrawn' ? latest : null;
+  const shown = path && (activeStep(path) ?? [...path.steps].filter((step) => step.status === 'completed').sort((a, b) => b.position - a.position)[0]);
+  return {
+    learnerId: user.id, languageId: user.languageId ?? path?.languageId ?? null,
+    onboarding: { steps: welcome.steps, completed: welcome.completed, blockedReason: welcome.blockedReason,
+      placement: welcome.placement ? { ...welcome.placement, declaredBeginner: Boolean(attempt?.declaredBeginner) } : null },
+    path: path ? { id: path.id, status: path.status as 'draft' | 'active' | 'completed', startLevel: path.startLevel, targetLevel: path.targetLevel,
+      targetDate: path.targetDate, activeLevel: shown?.levelCode ?? null, enrollmentId: shown?.enrollmentId ?? null, goalStatus: shown?.goalStatus ?? null,
+      validatedRevision: path.validatedRevision, createdAt: path.createdAt } : null,
+  };
+}
+/** Débutant (départ A0) : parcours déjà adapté, sans diagnostic (EVO-038). Le simulateur ne propose aucun diagnostic. */
+function diagnosticRefused(path: PathRec): never {
+  if (path.startLevel === 'A0') throw conflict('Pas de diagnostic pour un débutant : le parcours commence par les toutes premières bases.');
+  throw notFound('Le simulateur ne propose pas de diagnostic initial.');
 }
 function overview(actor: UserRec) {
   if (actor.role === 'learner') throw forbidden();
@@ -2565,7 +2596,7 @@ function overview(actor: UserRec) {
     const tracking = trackingOf(user);
     const results = state().grades.filter((grade) => grade.learnerId === user.id).map(gradeView);
     return { learnerId: user.id, profile: learnerRow(user), progress: { completedCount: tracking.sessionsCompleted, goal: tracking.levelCode ? { level: tracking.levelCode } : null },
-      results, tracking };
+      results, tracking, learning: learningState(user) };
   });
   return { learners, learnerCount: learners.length, goalsCount: learners.filter((row) => row.tracking.levelCode).length,
     learnersWithResults: learners.filter((row) => row.results.length).length, freshness: { syncedAt: now() } };
@@ -2578,7 +2609,7 @@ function learnerSheet(actor: UserRec, learnerId: string) {
     profile: learnerRow(learner), enrollment, goal: enrollment ? { level: enrollment.levelCode, targetDate: enrollment.goal.targetDate } : null,
     results: state().grades.filter((grade) => grade.learnerId === learner.id).map(gradeView), completedCount: tracking.sessionsCompleted,
     messages: state().messages.filter((message) => message.learnerId === learner.id).map((message) => ({ id: message.id, text: message.text, sentAt: message.sentAt, resumedAt: null })),
-    tracking, freshness: { syncedAt: now() },
+    tracking, learning: learningState(learner), freshness: { syncedAt: now() },
   };
 }
 function invitationView(invitation: InvitationRec) {
@@ -2772,6 +2803,8 @@ const routes: [Method, RegExp, Handler][] = [
   }],
   ['POST', new RegExp(`^/learning/enrollments/${ANY}/pause$`), ({ actor, params }) => pausePath(actor, pathOfEnrollment(actor, params[0]))],
   ['POST', new RegExp(`^/learning/enrollments/${ANY}/resume$`), ({ actor, params, body }) => resumePath(actor, pathOfEnrollment(actor, params[0]), body)],
+  ['GET', new RegExp(`^/learning/enrollments/${ANY}/diagnostic$`), ({ actor, params }) => diagnosticRefused(pathOfEnrollment(actor, params[0]))],
+  ['POST', new RegExp(`^/learning/enrollments/${ANY}/diagnostic$`), ({ actor, params }) => diagnosticRefused(pathOfEnrollment(actor, params[0]))],
   ['GET', /^\/learning\/templates$/, () => []],
 
   // Examens (bilan intermédiaire et examen blanc simplifiés)
@@ -3156,9 +3189,9 @@ function seedPath(learner: UserRec, options:{ placed: StartLevel; target: LevelC
     if (session.date > addDays(today(), options.doneUntil)) continue;
     for (const item of session.items) {
       if (item.kind === 'assessment') continue;
-      path.progress[progressKey(session.levelCode, item.id)] = { status: 'completed', completedAt: at(session.date, 19), state: {} };
+      path.progress[progressKey(session.levelCode, item.id)] = { status: 'completed', completedAt: at(session.date, 17), state: {} };
     }
-    if (session.items.every((item) => itemDone(path, session.levelCode, item.id))) session.completedAt = at(session.date, 19);
+    if (session.items.every((item) => itemDone(path, session.levelCode, item.id))) session.completedAt = at(session.date, 17);
   }
   for (const grade of path.liveSessions.filter((session) => session.completedAt).flatMap((session) => session.items.filter((item) => item.kind === 'exercise'
     && !(V4_DETAILS[item.id] && isTyped(V4_DETAILS[item.id].questions)))

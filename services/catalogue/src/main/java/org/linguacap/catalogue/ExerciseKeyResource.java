@@ -18,7 +18,9 @@ import org.linguacap.common.HttpError;
  * Clé de correction d'un exercice, toutes questions typées comprises (route interne pour Évaluations, jamais
  * exposée par la passerelle). Elle reprend les identifiants opaques et l'ordre affiché de la vue élève : Évaluations
  * corrige la remise sans recalculer la vue. frozen : la version de la leçon est publiée ou retirée, donc figée ; la
- * clé peut être gardée en cache.
+ * clé peut être gardée en cache. Aucune clé pour une leçon de brouillon (aucun élève ne la reçoit, l'aperçu de
+ * l'éditeur ne remet rien) ni pour un diagnostic, qui se remet sans corrigé : sinon une remise d'essai par
+ * /assessments/exercises révélerait ses réponses avant le vrai passage.
  */
 @Path("/v1")
 @Produces(MediaType.APPLICATION_JSON)
@@ -33,24 +35,23 @@ public class ExerciseKeyResource {
         if (!lessonId.matches("[a-z0-9-]{1,64}")) throw HttpError.badRequest("Identifiant de leçon invalide.");
         try (var connection = dataSource.getConnection()) {
             UUID versionId;
-            boolean frozen;
             try (var query = connection.prepareStatement("""
-                    select l.version_id, v.status
+                    select l.version_id
                     from catalogue.lessons l
                     join catalogue.levels n on n.id = l.level_id
                     left join catalogue.track_versions v on v.id = l.version_id
-                    where l.id = ? and n.status = 'published'
+                    where l.id = ? and n.status = 'published' and (l.version_id is null or v.status <> 'draft')
+                      and not exists (select 1 from catalogue.track_versions d where d.diagnostic_lesson_id = l.id)
                     """)) {
                 query.setString(1, lessonId);
                 try (var rows = query.executeQuery()) {
                     if (!rows.next()) throw HttpError.notFound("Corrigé indisponible pour cette leçon.");
                     versionId = rows.getObject("version_id", UUID.class);
-                    frozen = versionId == null || !"draft".equals(rows.getString("status"));
                 }
             }
             List<KeyQuestion> questions = QuestionViews.key(lessonId, QuestionViews.read(connection, lessonId));
             if (questions.isEmpty()) throw HttpError.notFound("Corrigé indisponible pour cette leçon.");
-            return new ExerciseKey(lessonId, versionId, frozen, questions);
+            return new ExerciseKey(lessonId, versionId, true, questions);
         } catch (SQLException error) {
             throw HttpError.unavailable("Le corrigé est temporairement indisponible.");
         }

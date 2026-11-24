@@ -10,6 +10,7 @@ import {
   weekdayShortLabels, weeklyCapacity, type Day, type DifficultyBand, type DifficultyCode, type FeasibilityCode, type StartLevel,
 } from '../../integration/v2';
 import { localDate } from '../pilot/learner-calendar';
+import { pilotToday } from '../../integration/pilot-day';
 import './onboarding.css';
 
 // ---------------------------------------------------------------------------------------------------------------------
@@ -18,8 +19,9 @@ import './onboarding.css';
 
 const pad = (value: number) => String(value).padStart(2, '0');
 
-/** Date locale au format « AAAA-MM-JJ ». */
-export function isoDay(date = new Date()) {
+/** Date locale au format « AAAA-MM-JJ » ; sans argument, le jour du pilote (fuseau du serveur). */
+export function isoDay(date?: Date) {
+  if (!date) return pilotToday();
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 

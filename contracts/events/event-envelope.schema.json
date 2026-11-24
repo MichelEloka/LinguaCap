@@ -18,11 +18,38 @@
       "required": ["kind", "id"],
       "additionalProperties": false,
       "properties": {
-        "kind": { "type": "string", "enum": ["account", "invitation", "goal", "plan_revision", "session", "attempt", "grading", "encouragement", "path", "contract"] },
+        "kind": { "type": "string", "enum": ["account", "invitation", "goal", "plan_revision", "session", "attempt", "grading", "encouragement", "path", "contract", "exercise", "mission"] },
         "id": { "type": "string", "minLength": 1 }
       }
     },
     "learnerId": { "type": "string", "format": "uuid" },
     "data": { "type": "object", "description": "Identifiants, états et horodatages utiles au type d'événement." }
+  },
+  "$defs": {
+    "page": {
+      "title": "Lot d'événements servi à Suivi",
+      "description": "Réponse de GET /v1/internal/{service}/events. Avec cursor=<tx>:<séquence> : événements après ce curseur dans l'ordre (tx, séquence), seulement ceux des transactions terminées, et cursor à renvoyer. Avec after=<séquence> (transition) : ancienne lecture par séquence, sans tx ni cursor.",
+      "type": "object",
+      "required": ["items", "last"],
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "required": ["sequence", "event"],
+            "additionalProperties": false,
+            "properties": {
+              "sequence": { "type": "integer", "minimum": 1, "description": "Numéro attribué à l'insertion dans la table de sortie." },
+              "tx": { "type": "integer", "minimum": 0, "description": "Transaction qui a écrit l'événement (0 pour les événements antérieurs au curseur transactionnel)." },
+              "event": { "$ref": "#" }
+            }
+          }
+        },
+        "last": { "type": "integer", "minimum": 0, "description": "Séquence du dernier événement servi (celle de la demande si le lot est vide)." },
+        "cursor": { "type": "string", "pattern": "^[0-9]{1,19}:[0-9]{1,19}$", "description": "Point de reprise <tx>:<séquence> après ce lot (celui de la demande si le lot est vide)." }
+      }
+    }
   }
 }

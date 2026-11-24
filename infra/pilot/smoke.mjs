@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { randomBytes, randomUUID } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -168,6 +168,7 @@ await api('/learners/' + learner.id, otherTeacher.token, { status: 403 });
 
 const lesson = await api('/lessons/commander-au-cafe', learnerToken);
 assert.equal(lesson.level, 'A1');
+assert.equal(lesson.transcript, null, 'La transcription passe par la séance, qui applique sa visibilité');
 assert.ok(lesson.questions.every((question) => question.options.every((option) => !('correct' in option))));
 await api('/internal/lessons/commander-au-cafe/answer-key', learnerToken, { status: 404 });
 for (const assetId of lesson.mediaIds) {
@@ -501,6 +502,11 @@ await put(goalPath(a2Goal.id, 'starting-point'), teacher.token, { acquiredModule
 const diagnostic = await api(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token);
 assert.equal(diagnostic.lessonId, 'diagnostic-a2');
 assert.ok(diagnostic.questions.every((question) => question.options.every((option) => !('correct' in option))));
+// Le diagnostic ne se corrige ni comme un exercice (sa clé détaillée n'est pas servie) ni comme un quiz (score à volonté).
+await api('/assessments/exercises', learnerA2.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'diagnostic-a2', roundId: randomUUID(), answers: { 'diag-prerequis': { choice: 'cafe' } } }, status: 404 });
+await api('/assessments/quiz', learnerA2.token, { method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'diagnostic-a2', answers: { 'diag-prerequis': 'cafe', 'diag-journee': 'sept' } }, status: 409 });
 const diagGrade = await api('/assessments/diagnostics', learnerA2.token, {
   method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
   body: { lessonId: 'diagnostic-a2', answers: { 'diag-prerequis': 'cafe', 'diag-journee': 'sept' } },
@@ -522,22 +528,35 @@ assert.ok(!a2Items.includes('raconter-sa-journee'), 'Les modules acquis ne sont 
 assert.ok(a2Items.includes('examen-blanc'));
 assert.equal((await post(goalPath(a2Goal.id, 'proposal/validate'), teacher.token, { number: a2Proposal.number })).goal.status, 'active');
 
-// Élève autonome : son diagnostic s'applique directement et il valide lui-même son planning.
+// Élève autonome débutant (A0) : parcours adapté d'office, ni diagnostic ni question (EVO-038).
 const learnerAuto = await createAccount('autonome-a1', 'learner', null);
 const a1Goal = await post('/learning/enrollments', admin.token,
   { learnerId: learnerAuto.id, trackVersionId: a1.versionId, startLevel: 'A0', template: 'standard' }, 201);
 assert.equal(a1Goal.goal.template, 'standard');
+assert.equal(a1Goal.goal.diagnosticLessonId, null, 'Un débutant n’a pas de diagnostic');
+await api(goalPath(a1Goal.id, 'diagnostic'), learnerAuto.token, { status: 409 });
 const a1Diag = await api('/assessments/diagnostics', learnerAuto.token, {
   method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
   body: { lessonId: 'diagnostic-a1', answers: { 'diag-cafe-1': 'cafe', 'diag-cafe-2': 'bitte' } },
 });
 await post(goalPath(a2Goal.id, 'diagnostic'), learnerA2.token, { attemptId: a1Diag.id }, 409);
-const applied = await post(goalPath(a1Goal.id, 'diagnostic'), learnerAuto.token, { attemptId: a1Diag.id });
-assert.deepEqual(applied.goal.acquiredModules, ['au-cafe'], 'Le diagnostic d’un élève autonome s’applique directement');
+await post(goalPath(a1Goal.id, 'diagnostic'), learnerAuto.token, { attemptId: a1Diag.id }, 409);
 const a1Proposal = await api(goalPath(a1Goal.id, 'proposal'), learnerAuto.token);
-assert.ok(!a1Proposal.sessions.some((session) => session.items.some((item) => item.id === 'commander-au-cafe')));
+assert.ok(a1Proposal.sessions.some((session) => session.items.some((item) => item.id === 'commander-au-cafe')), 'Le débutant suit tout le niveau');
 await post(goalPath(a1Goal.id, 'proposal/validate'), teacher.token, { number: a1Proposal.number }, 403);
 assert.equal((await post(goalPath(a1Goal.id, 'proposal/validate'), learnerAuto.token, { number: a1Proposal.number })).goal.status, 'active');
+// Élève autonome qui part de A1 : son diagnostic A2 s'applique directement, prérequis compris.
+const learnerAutoA2 = await createAccount('autonome-a2-diag', 'learner', null);
+const autoA2Goal = await post('/learning/enrollments', admin.token,
+  { learnerId: learnerAutoA2.id, trackVersionId: a2.versionId, startLevel: 'A1', template: 'standard' }, 201);
+assert.equal(autoA2Goal.goal.diagnosticLessonId, 'diagnostic-a2');
+const autoA2Diag = await api('/assessments/diagnostics', learnerAutoA2.token, {
+  method: 'POST', headers: { 'Idempotency-Key': randomUUID() },
+  body: { lessonId: 'diagnostic-a2', answers: { 'diag-prerequis': 'cafe', 'diag-journee': 'sept' } },
+});
+const applied = await post(goalPath(autoA2Goal.id, 'diagnostic'), learnerAutoA2.token, { attemptId: autoA2Diag.id });
+assert.deepEqual(applied.goal.acquiredModules, ['ma-journee'], 'Le diagnostic d’un élève autonome s’applique directement');
+assert.equal(applied.goal.prerequisiteMet, true);
 console.log('Recette du planning réussie · modèles, charge hebdomadaire, débordement et ajustements, proposition périmée, '
   + 'replanification après retard, pause et reprise, diagnostic, prérequis A2 et validation par le référent ou l’élève autonome.');
 
@@ -662,6 +681,7 @@ assert.equal(saved.version.assessments[0].parts[1].criteria[0].maxPoints, 5);
 const draftLesson = `b1-v${b1Draft.number}-b1-lecon`;
 await api(`/lessons/${draftLesson}`, learnerToken, { status: 404 });
 assert.equal((await api(`/lessons/${draftLesson}`, staffToken)).title, 'Chez le boulanger');
+assert.ok((await api('/lessons/commander-au-cafe', staffToken)).transcript, 'L’éditeur relit la transcription');
 const publishedB1 = await post(`/catalogue/versions/${b1Draft.id}/publish`, staffToken);
 assert.equal(publishedB1.version.status, 'published');
 assert.deepEqual(publishedB1.media, [{ assetId, version: 1 }]);
@@ -817,6 +837,14 @@ assert.equal(submitted.status, 'submitted');
 assert.equal(submitted.onTime, true);
 assert.equal((await enrollmentOf(examLearner.token)).goal.status, 'awaiting_grading');
 await post(`/assessments/exams/${final.id}/recordings`, examLearner.token, { partId: 'oral', mimeType: 'audio/webm', size: webm.length }, 409);
+// Replanifier un objectif en attente de correction le garde en attente : plan_validated porte l'état (EVO-042).
+const gradingReplan = await put(goalPath(examGoal.id, 'availability'), teacher.token, { days: intensive.days, targetDate: null });
+assert.equal(gradingReplan.validatable, true);
+const gradingReplanned = await post(goalPath(examGoal.id, 'proposal/validate'), teacher.token, { number: gradingReplan.number });
+assert.equal(gradingReplanned.goal.status, 'awaiting_grading', 'La replanification garde l’attente de correction');
+assert.equal(localQuery(local.container, `select data->>'goalStatus' from learning.outbox_events
+  where type = 'learning.plan_validated' and data->>'enrollmentId' = '${examGoal.id}' order by sequence desc limit 1;`),
+  'awaiting_grading', 'plan_validated porte l’état de l’objectif');
 
 // File des corrections : le référent voit la remise, le professeur tiers et le correcteur d'un autre élève non.
 assert.ok((await api('/assessments/grading', teacher.token)).some((item) => item.id === final.id));
@@ -899,9 +927,43 @@ assert.ok(firstRun.imported > 0, 'Les événements des services sont importés')
 assert.deepEqual(firstRun.errors, {});
 const sequences = (producer) => Number(localQuery(local.container,
   `select last_sequence from tracking.checkpoints where producer = '${producer}';`));
-assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')),
-  'Le point de reprise suit le dernier événement lu');
+// Point de reprise (transaction, séquence) : le dernier événement servi dans l'ordre (tx, sequence) (EVO-042).
+const checkpoint = (producer) => localQuery(local.container,
+  `select last_tx || ':' || last_sequence from tracking.checkpoints where producer = '${producer}';`);
+const lastEvent = (producer) => localQuery(local.container,
+  `select tx || ':' || sequence from ${producer}.outbox_events order by tx desc, sequence desc limit 1;`);
+for (const producer of ['identity', 'learning', 'assessment']) {
+  assert.equal(checkpoint(producer), lastEvent(producer), `Le point de reprise suit le dernier événement lu (${producer})`);
+}
 assert.equal((await runJob()).imported, 0, 'Un second passage ne réimporte rien');
+
+// Un événement validé en retard par une transaction concurrente n'est jamais sauté. Deux sessions psql : la lente prend
+// le plus petit numéro puis attend 6 s avant de valider ; la rapide valide aussitôt.
+const probeEvent = (label) => `insert into learning.outbox_events (id, type, subject_kind, subject_id, learner_id, data)
+  values (gen_random_uuid(), 'learning.recette_concurrence', 'path', '${label}-${suffix}', '${teacher.id}', '{"probe": "${label}"}');`;
+const probesImported = () => localQuery(local.container, `select coalesce(string_agg(subject_id, ',' order by subject_id), '')
+  from tracking.event_log where type = 'learning.recette_concurrence' and subject_id like '%-${suffix}';`);
+const slowSession = spawn('docker', ['exec', '-i', local.container, 'psql', '-U', 'postgres', '-d', 'postgres', '-X', '-q',
+  '-v', 'ON_ERROR_STOP=1'], { stdio: ['pipe', 'ignore', 'inherit'] });
+const slowDone = new Promise((resolve, reject) => slowSession.on('exit',
+  (code) => (code === 0 ? resolve() : reject(new Error(`La transaction lente a échoué (code ${code})`)))));
+slowSession.stdin.end(`begin;\n${probeEvent('lente')}\nselect pg_sleep(6);\ncommit;\n`);
+const slowSleeping = () => Number(localQuery(local.container,
+  "select count(*) from pg_stat_activity where query like 'select pg_sleep(6)%' and pid <> pg_backend_pid();"));
+for (let tries = 0; slowSleeping() === 0; tries += 1) {
+  assert.ok(tries < 50, 'La transaction lente a pris son numéro');
+  await new Promise((resolve) => setTimeout(resolve, 100));
+}
+localSql(local.container, probeEvent('rapide'));
+await runJob();
+assert.equal(probesImported(), '', 'Pendant la transaction lente, l’événement rapide attend : aucun numéro n’est dépassé');
+await slowDone;
+await runJob();
+assert.equal(probesImported(), `lente-${suffix},rapide-${suffix}`, 'L’événement validé en retard est importé, sans perte');
+assert.equal(localQuery(local.container, `select (select sequence from learning.outbox_events where subject_id = 'lente-${suffix}')
+  < (select sequence from learning.outbox_events where subject_id = 'rapide-${suffix}');`), 't',
+  'La transaction lente avait le plus petit numéro : l’ancienne lecture « sequence > dernier vu » l’aurait sautée');
+assert.equal(checkpoint('learning'), lastEvent('learning'));
 
 const followLearner = async (label) => {
   const account = await createAccount(label, 'learner', teacher.id);
@@ -983,11 +1045,32 @@ await runJob();
 const pausedTracking = await trackingOf(pausedLearner.id);
 assert.equal(pausedTracking.goalStatus, 'paused');
 assert.equal(pausedTracking.alert.status, 'suspended', 'L’alerte est suspendue pendant la pause');
+// En pause, seules les séances échues avant la pause sont en retard ; pas d'échéance tant que la reprise n'est pas prévue.
+localSql(local.container, `update tracking.sessions s set due_at = g.status_at + (now() - g.status_at) / 2
+  from tracking.goals g where g.enrollment_id = s.enrollment_id and s.session_id = (select session_id from tracking.sessions
+    where enrollment_id = '${pausedLearner.enrollmentId}' and not superseded and session_id <> '${pausedLearner.firstSession}'
+    order by due_at limit 1);`);
+const pausedNow = await trackingOf(pausedLearner.id);
+assert.equal(pausedNow.lateSessions, 1, 'La séance échue pendant la pause ne compte pas en retard');
+assert.equal(pausedNow.nextDueAt, null, 'Pas d’échéance tant que la reprise n’est pas prévue');
+// Reprise prévue visible dans le Suivi (EVO-042) ; l'objectif reste en pause jusqu'à la validation du planning de reprise.
+const pauseResumeDate = inDays(1);
+const pausedResume = await post(goalPath(pausedLearner.enrollmentId, 'resume'), teacher.token, { resumeDate: pauseResumeDate });
+assert.equal(localQuery(local.container, `select data->>'goalStatus' || ' ' || (data->>'resumeDate') from learning.outbox_events
+  where type = 'learning.goal_resumed' and data->>'enrollmentId' = '${pausedLearner.enrollmentId}' order by sequence desc limit 1;`),
+  `paused ${pauseResumeDate}`, 'Apprentissage annonce la reprise prévue (learning.goal_resumed)');
+await runJob();
+let resumeTracking = await trackingOf(pausedLearner.id);
+assert.equal(resumeTracking.goalStatus, 'paused', 'L’objectif reste en pause jusqu’à la validation du planning de reprise');
+assert.equal(resumeTracking.resumeDate, pauseResumeDate, 'La date de reprise est visible dans le suivi');
+assert.equal(resumeTracking.lateSessions, 1, 'L’annonce de la reprise ne déplace pas l’instant de la pause');
+assert.ok(resumeTracking.nextDueAt, 'La prochaine échéance devient la reprise prévue');
+assert.equal(resumeTracking.alert.status, 'suspended');
 
 // Reprise après coupure et reconstruction : relire depuis le début ne double rien ; la projection se reconstruit.
-localSql(local.container, "update tracking.checkpoints set last_sequence = 0 where producer = 'learning';");
+localSql(local.container, "update tracking.checkpoints set last_tx = 0, last_sequence = 0 where producer = 'learning';");
 assert.equal((await runJob()).imported, 0, 'Les événements déjà traités sont dédupliqués par identifiant');
-assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')));
+assert.equal(checkpoint('learning'), lastEvent('learning'));
 const rebuilt = await runJob('rebuild');
 assert.equal(rebuilt.imported, Number(localQuery(local.container, 'select count(*) from tracking.event_log;')));
 const afterRebuild = await trackingOf(lateLearner.id);
@@ -995,8 +1078,17 @@ assert.equal(afterRebuild.sessionsCompleted, 1);
 assert.equal(afterRebuild.goalStatus, 'active');
 assert.equal(afterRebuild.alert, null);
 assert.equal((await trackingOf(pausedLearner.id)).alert.status, 'suspended');
+assert.equal((await trackingOf(pausedLearner.id)).resumeDate, pauseResumeDate, 'La reconstruction retrouve la reprise prévue');
 assert.ok((await api(`/tracking/messages?learnerId=${lateLearner.id}`, teacher.token)).find((message) => message.id === relance.id).resumedAt,
   'La reconstruction retrouve la reprise après encouragement');
+// Le planning de reprise validé reprend l'objectif dans le suivi.
+assert.equal(pausedResume.validatable, true);
+const resumedPlan = await post(goalPath(pausedLearner.enrollmentId, 'proposal/validate'), teacher.token, { number: pausedResume.number });
+assert.equal(resumedPlan.goal.status, 'active');
+await runJob();
+resumeTracking = await trackingOf(pausedLearner.id);
+assert.equal(resumeTracking.goalStatus, 'active', 'Le planning de reprise validé reprend l’objectif dans le suivi');
+assert.equal(resumeTracking.resumeDate, null);
 await api('/tracking/overview', staffToken, { status: 403 });
 console.log('Recette du suivi réussie · import par lots avec point de reprise, déduplication, retard et alerte, second contrôle '
   + 'sans doublon, relance liée à l’alerte, reprise puis clôture, événement tardif, pause suspendant l’alerte, reconstruction.');
@@ -1152,17 +1244,13 @@ const checkSupports = async (session) => {
   if (first) assert.ok((await fetch(first.url, { signal: AbortSignal.timeout(8_000) })).ok, 'Le premier support est lisible');
 };
 
-// A1 intensif accompagné : diagnostic, point de départ confirmé, deux séances par jour, séances faites, retard replanifié.
+// A1 intensif accompagné : débutant sans diagnostic, module déclaré acquis par le référent, deux séances par jour, séances
+// faites, retard replanifié.
 const a1Learner = await createAccount('eleve-a1-contenu', 'learner', teacher.id);
 const a1Course = await post('/learning/enrollments', teacher.token,
   { learnerId: a1Learner.id, trackVersionId: trackA1.versionId, startLevel: 'A0', template: 'intensive', startDate: inDays(1) }, 201);
-const a1Diagnostic = await api(goalPath(a1Course.id, 'diagnostic'), a1Learner.token);
-assert.equal(a1Diagnostic.questions.length, contentA1.diagnostic.questions.length);
-const a1DiagnosticGrade = await api('/assessments/diagnostics', a1Learner.token, { method: 'POST',
-  headers: { 'Idempotency-Key': randomUUID() },
-  body: { lessonId: a1Diagnostic.lessonId, answers: diagnosticAnswers(contentA1, ['a1-hallo']) } });
-const a1Diagnosed = await post(goalPath(a1Course.id, 'diagnostic'), a1Learner.token, { attemptId: a1DiagnosticGrade.id });
-assert.deepEqual(a1Diagnosed.goal.diagnosticModules, ['a1-hallo'], 'Le diagnostic repère le module déjà maîtrisé');
+assert.equal(a1Course.goal.diagnosticLessonId, null, 'Départ A0 : pas de diagnostic');
+await api(goalPath(a1Course.id, 'diagnostic'), a1Learner.token, { status: 409 });
 await put(goalPath(a1Course.id, 'starting-point'), teacher.token, { acquiredModules: ['a1-hallo'] });
 const courseA1Proposal = await api(goalPath(a1Course.id, 'proposal'), teacher.token);
 assert.equal(courseA1Proposal.overflowCount, 0, 'Le programme A1 tient dans le mois intensif');
@@ -1209,7 +1297,10 @@ const courseA2Plan = await post(goalPath(a2Course.id, 'proposal/validate'), a2Le
 await checkSupports(await api(`/learning/sessions/${courseA2Plan.sessions[0].id}`, a2Learner.token));
 assert.equal((await workSession(courseA2Plan.sessions[0].id, a2Learner.token)).session.status, 'completed');
 
-const answerExam = async (kind) => {
+const midtermDone = () => localQuery(local.container, `select count(*) from learning.activity_progress p
+  join learning.sessions s on s.id = p.session_id
+  where s.enrollment_id = '${a2Course.id}' and p.activity_id = 'bilan-intermediaire' and p.completed_at is not null;`);
+const answerExam = async (kind, { learningDown = false } = {}) => {
   const exam = await post('/assessments/exams', a2Learner.token, { enrollmentId: a2Course.id, kind }, 201);
   const definition = contentA2.assessments.find((assessment) => assessment.kind === kind);
   const listening = exam.definition.parts.find((part) => part.competence === 'ecoute');
@@ -1225,7 +1316,17 @@ const answerExam = async (kind) => {
     headers: { Authorization: `Bearer ${a2Learner.token}`, apikey: local.publishable, 'Content-Type': 'audio/webm', 'x-upsert': 'false' } });
   assert.ok(sent.ok);
   await post(`/assessments/exams/${exam.id}/recordings/${reservation.id}/finalize`, a2Learner.token);
+  if (learningDown) await control('stop', 'learning');
   assert.equal((await submitExam(exam, a2Learner.token)).status, 'submitted');
+  if (learningDown) {
+    // Apprentissage indisponible pendant la remise : elle est enregistrée, le créneau attend la notification, que la
+    // lecture suivante de la tentative rattrape (accusé de réception).
+    await control('start', 'learning');
+    await ready(8084);
+    assert.equal(midtermDone(), '0', 'La notification perdue laisse le créneau du bilan à faire');
+    await api(`/assessments/exams/${exam.id}`, a2Learner.token);
+    assert.equal(midtermDone(), '1', 'La relecture de la tentative termine le créneau du bilan');
+  }
   assert.ok((await api('/assessments/grading', staffToken)).some((item) => item.id === exam.id), 'Le correcteur désigné reçoit la copie');
   const full = (part) => ({ points: Object.fromEntries(part.criteria.map((criterion) => [criterion.id, criterion.maxPoints])) });
   const graded = await post(`/assessments/exams/${exam.id}/grading`, staffToken, {
@@ -1236,11 +1337,27 @@ const answerExam = async (kind) => {
   }
   return graded;
 };
-assert.equal((await answerExam('midterm')).result.decision, 'completed', 'Le bilan intermédiaire est corrigé');
+assert.equal((await answerExam('midterm', { learningDown: true })).result.decision, 'completed', 'Le bilan intermédiaire est corrigé');
 assert.equal((await answerExam('final')).result.decision, 'validated', 'L’examen blanc A2 est validé');
+// Copies en attente sur tous les niveaux de l'élève et résultats par niveau (revue des cas similaires, constat A).
+await runJob();
+const beforeLevels = (await api(`/tracking/learners/${a2Learner.id}`, admin.token)).tracking;
+const previousGoal = randomUUID();
+localSql(local.container, `insert into tracking.goals (enrollment_id, learner_id, level_code, goal_status, assigned_at, pending_grading, results)
+  values ('${previousGoal}', '${a2Learner.id}', 'A1', 'awaiting_grading', now() - interval '90 days', 1,
+    '{"final": {"percent": 72, "decision": "validated", "onTime": true, "scores": {}}}'::jsonb);`);
+try {
+  const afterLevels = (await api(`/tracking/learners/${a2Learner.id}`, admin.token)).tracking;
+  assert.equal(afterLevels.pendingGrading, beforeLevels.pendingGrading + 1, 'La copie du niveau précédent reste comptée');
+  assert.equal(afterLevels.levelCode, 'A2', 'La synthèse reste celle du niveau en cours');
+  assert.deepEqual(Object.keys(afterLevels.resultsByLevel).sort(), ['A1', 'A2']);
+  assert.equal(afterLevels.resultsByLevel.A1.final.percent, 72);
+} finally {
+  localSql(local.container, `delete from tracking.goals where enrollment_id = '${previousGoal}';`);
+}
 assert.equal((await api('/learning/enrollment', a2Learner.token)).goal.status, 'validated');
 console.log(`Recette des contenus réussie · import idempotent de ${trackA1.activityCount} activités A1 et ${trackA2.activityCount} A2 `
-  + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (diagnostic, deux séances par jour, retard '
+  + 'avec leurs médias, publication et prérequis A2, A1 intensif accompagné (débutant sans diagnostic, module déclaré acquis, deux séances par jour, retard '
   + 'replanifié), A2 autonome de l’attribution à la correction du bilan et de l’examen blanc.');
 
 // --- Parcours multi-niveaux : langues, test de niveau, objectif, contrat, ajouts et bibliothèque (incrément Parcours) ---
@@ -1364,6 +1481,19 @@ assert.equal((await api('/learning/path', solo.token)).targetDate, inDays(200));
 // 8. Parcours A0 → A2 de l'élève suivi : brouillon, débordement, deux niveaux sans mélange, démarrage.
 let followedPath = await post('/learning/paths', followedToken,
   { placementAttemptId: beginner.id, targetLevel: 'A2', startDate: inDays(1), targetDate: inDays(241) }, 201);
+// EVO-039 : le professeur voit l'accueil et le parcours au brouillon tout de suite, sans traitement du Suivi.
+const followedLive = (await api('/tracking/overview', teacher.token)).learners.find((row) => row.learnerId === followedMe.id);
+assert.deepEqual([followedLive.learning.path.id, followedLive.learning.path.status, followedLive.learning.path.startLevel,
+  followedLive.learning.path.activeLevel], [followedPath.id, 'draft', 'A0', null], 'Le parcours au brouillon est visible');
+assert.equal(followedLive.learning.onboarding.placement.declaredBeginner, true, 'Débutant déclaré, sans test');
+assert.deepEqual(followedLive.learning.onboarding.steps.map((step) => `${step.id}:${step.status}`),
+  ['language:done', 'placement:done', 'result:done', 'objective:done', 'days:current', 'planning:todo', 'start:todo']);
+assert.equal(followedLive.learning.onboarding.completed, false);
+const followedSheet = await api(`/tracking/learners/${followedMe.id}`, teacher.token);
+assert.deepEqual([followedSheet.learning.path.status, followedSheet.enrollment], ['draft', null], 'La fiche montre le brouillon');
+assert.equal(localQuery(local.container, `select count(*) from tracking.goals where learner_id = '${followedMe.id}';`), '0',
+  'Rien dans la projection du Suivi : la vue vient d’Apprentissage');
+assert.ok(!(await api('/tracking/overview', otherTeacher.token)).learners.some((row) => row.learnerId === followedMe.id));
 assert.deepEqual(followedPath.steps.map((step) => [step.levelCode, step.status]), [['A1', 'planned'], ['A2', 'planned']]);
 const overloaded = await put(`/learning/paths/${followedPath.id}/availability`, followedToken,
   { days: [{ weekday: 1, sessions: 1, minutes: 10 }], targetDate: inDays(240) });
@@ -1379,6 +1509,22 @@ assert.ok(followedProposal.sessions.every((session) => session.items.every((item
 assert.deepEqual(followedProposal.levels.map((level) => level.levelCode), ['A1', 'A2']);
 await post(`/learning/paths/${followedPath.id}/proposal/validate`, teacher.token, { number: followedProposal.number }, 403);
 followedPath = await post(`/learning/paths/${followedPath.id}/proposal/validate`, followedToken, { number: followedProposal.number });
+const startedLive = (await api('/tracking/overview', teacher.token)).learners.find((row) => row.learnerId === followedMe.id).learning;
+assert.deepEqual([startedLive.path.status, startedLive.path.activeLevel, startedLive.path.goalStatus, startedLive.onboarding.completed],
+  ['active', 'A1', 'active', true], 'Démarrage visible sans passage du Suivi');
+// EVO-039 : Apprentissage arrêté, la vue d'ensemble et la fiche restent servies (learning null, synthèse du Suivi).
+await control('stop', 'learning');
+try {
+  const degraded = await api('/tracking/overview', teacher.token);
+  assert.ok(degraded.learners.length > 0 && degraded.learners.every((row) => row.learning === null && row.progress === null
+    && Array.isArray(row.results)), 'Sans Apprentissage : learning null, vue servie');
+  const degradedSheet = await api(`/tracking/learners/${followedMe.id}`, teacher.token);
+  assert.deepEqual([degradedSheet.learning, degradedSheet.enrollment, degradedSheet.results], [null, null, []]);
+  assert.ok(degradedSheet.tracking && degradedSheet.freshness, 'La synthèse du Suivi reste servie');
+} finally {
+  await control('start', 'learning');
+  await ready(8084);
+}
 assert.deepEqual(followedPath.steps.map((step) => step.status), ['active', 'planned'], 'Niveau 1 actif, niveau 2 prévu');
 assert.ok(followedPath.sessions.some((session) => session.levelCode === 'A2' && session.locked && session.id === null),
   'Les séances A2 sont une projection verrouillée');
@@ -1704,7 +1850,7 @@ await ready(8084);
 const caughtUp = await runJob();
 assert.deepEqual(caughtUp.errors, {});
 assert.ok(caughtUp.imported >= 1, 'Les événements produits avant la coupure sont rattrapés');
-assert.equal(sequences('learning'), Number(localQuery(local.container, 'select max(sequence) from learning.outbox_events;')));
+assert.equal(checkpoint('learning'), lastEvent('learning'));
 console.log('Recette des indisponibilités réussie · séance lisible sans la médiathèque puis supports rétablis, '
   + 'sonde dégradée puis rétablie, suivi interrompu sans perte puis rattrapé après le retour de l’Apprentissage.');
 

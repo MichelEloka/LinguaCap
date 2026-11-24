@@ -13,6 +13,7 @@ import {
 import { Badge, EmptyState, PageHeading, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
 import { Avatar, Callout, Card, Drawer, Facts, SkeletonCard, Timeline, useToast, type TimelineEntry } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { pilotToday } from '../../integration/pilot-day';
 import {
   competenceLabels, contractStatusLabels, contractStatusTones, difficultyCodes, difficultyLabels,
   difficultyThresholds, difficultyTones, feasibilityLabels, formatMinutes, levelCodes, levelLabel, levelRank, placementTierStatusLabels,
@@ -37,10 +38,9 @@ export function isoDate(date: Date) {
   return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
 }
 
+/** Jour du pilote (fuseau du serveur), décalé de quelques jours. */
 export function todayIso(offsetDays = 0) {
-  const date = new Date();
-  date.setDate(date.getDate() + offsetDays);
-  return isoDate(date);
+  return pilotToday(offsetDays);
 }
 
 /** Date « AAAA-MM-JJ » décalée de quelques mois (le jour est conservé autant que possible). */
@@ -111,7 +111,7 @@ export function startLabel(level: StartLevel | string) {
 export function LevelRoute({ from, to }: { from: StartLevel | string; to: LevelCode | string }) {
   return (
     <span className="sct-route" aria-label={`De ${levelLabel(from)} à ${levelLabel(to)}`}>
-      <b aria-hidden="true">{from}</b><ArrowRight size={13} aria-hidden="true" /><b aria-hidden="true" className="is-target">{to}</b>
+      <b aria-hidden="true">{startLabel(from)}</b><ArrowRight size={13} aria-hidden="true" /><b aria-hidden="true" className="is-target">{to}</b>
     </span>
   );
 }
@@ -225,7 +225,7 @@ export function ContractHistory({ contracts, limit }: { contracts: readonly Cont
       title: `Contrat n° ${contract.number} · ${contractStatusLabels[contract.status]}`,
       meta: (
         <span className="sct-history-meta">
-          <span>Proposé {proposerPhrases[contract.proposedBy]} le {formatDay(contract.createdAt)} · {contract.terms.startLevel} → {contract.terms.targetLevel}, {formatShortDay(contract.terms.targetDate)}, {formatMinutes(contract.terms.weeklyMinutes)} par semaine</span>
+          <span>Proposé {proposerPhrases[contract.proposedBy]} le {formatDay(contract.createdAt)} · {startLabel(contract.terms.startLevel)} → {contract.terms.targetLevel}, {formatShortDay(contract.terms.targetDate)}, {formatMinutes(contract.terms.weeklyMinutes)} par semaine</span>
           {contract.note && <q>{contract.note}</q>}
           {contract.decisionNote && <span className="sct-history-decision">Réponse : « {contract.decisionNote} »</span>}
         </span>

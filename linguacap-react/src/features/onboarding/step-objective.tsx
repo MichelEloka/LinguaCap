@@ -7,6 +7,7 @@ import { useEffect, useMemo, useRef, useState, type CSSProperties } from 'react'
 import { ArrowRight, CalendarRange, ChevronDown, Clock, Flag, Gauge, LoaderCircle, Target, TriangleAlert } from 'lucide-react';
 import { Callout, Segmented } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import { notBefore } from '../../integration/pilot-day';
 import {
   difficultyLabels, formatMinutes, levelCodes, levelRank, type Estimate, type Language, type LevelCode, type PathView, type PlacementView,
   type StartLevel,
@@ -32,8 +33,9 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
   const firstTarget = (from: StartLevel) => (levels.find((level) => level.published && levelRank(level.code) > levelRank(from))?.code
     ?? levelCodes.find((code) => levelRank(code) > levelRank(from)) ?? 'A1') as LevelCode;
   const [targetLevel, setTargetLevel] = useState<LevelCode>(path?.targetLevel ?? firstTarget(path?.startLevel ?? placed));
-  const [startDate, setStartDate] = useState(path?.startDate ?? isoDay());
-  const [targetDate, setTargetDate] = useState(path?.targetDate ?? addMonthsIso(path?.startDate ?? isoDay(), 3));
+  // Un brouillon repris des jours plus tard ne peut pas commencer dans le passé : son début est ramené à aujourd'hui.
+  const [startDate, setStartDate] = useState(() => notBefore(path?.startDate ?? isoDay(), isoDay()));
+  const [targetDate, setTargetDate] = useState(() => path?.targetDate ?? addMonthsIso(isoDay(), 3));
   const [estimate, setEstimate] = useState<Estimate | null>(null);
   const [estimating, setEstimating] = useState(false);
   const [estimateError, setEstimateError] = useState('');
@@ -46,7 +48,7 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
     setEstimating(true);
     const timer = window.setTimeout(() => {
       requestApi<Estimate>('/learning/paths/estimate', token, {
-        method: 'POST', body: { startLevel, targetLevel, startDate, targetDate, ...(path ? { pathId: path.id } : {}) },
+        method: 'POST', body: { startLevel, targetLevel, startDate: notBefore(startDate, isoDay()), targetDate, ...(path ? { pathId: path.id } : {}) },
       }).then((next) => {
         if (ticket !== sequence.current) return;
         setEstimate(next);
@@ -92,7 +94,9 @@ export function StepObjective({ token, attempt, language, path, onBack, onSaved 
     if (!ready || busy) return;
     setBusy(true);
     setError('');
-    const body = { targetLevel, startDate, targetDate, startLevel };
+    // Page restée ouverte après minuit : le début d'hier devient aujourd'hui, la durée choisie est conservée.
+    const start = notBefore(startDate, isoDay());
+    const body = { targetLevel, startDate: start, targetDate: months !== null ? addMonthsIso(start, months) : targetDate, startLevel };
     try {
       const view = path
         ? await requestApi<PathView>(`/learning/paths/${encodeURIComponent(path.id)}/objective`, token, { method: 'PUT', body })

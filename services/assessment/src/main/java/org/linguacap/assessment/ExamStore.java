@@ -34,7 +34,7 @@ class ExamStore {
                           String status, JsonNode definition, int passPercent, JsonNode answers, JsonNode texts,
                           JsonNode recordings, OffsetDateTime dueAt, OffsetDateTime startedAt, OffsetDateTime submittedAt,
                           String submitKey, OffsetDateTime gradedAt, UUID graderId, JsonNode grading, JsonNode scores,
-                          Integer percent, String decision, JsonNode review, String feedback) {
+                          Integer percent, String decision, JsonNode review, String feedback, String learningAcked) {
         /** Une remise au plus tard à l'échéance reste à temps, même corrigée après. */
         boolean onTime() {
             return submittedAt != null && (dueAt == null || !submittedAt.isAfter(dueAt));
@@ -51,6 +51,18 @@ class ExamStore {
 
     List<Attempt> forEnrollment(UUID enrollmentId) {
         return list("select * from assessment.exam_attempts where enrollment_id = ? order by kind, number desc", enrollmentId);
+    }
+
+    /** Apprentissage a reçu la remise (submitted) ou la correction (graded) ; une correction reçue ne régresse pas. */
+    void acknowledge(UUID id, String state) {
+        transaction("acknowledge learning", connection -> {
+            try (var query = connection.prepareStatement("update assessment.exam_attempts set learning_acked = ? "
+                    + "where id = ? and learning_acked is distinct from 'graded'")) {
+                query.setString(1, state);
+                query.setObject(2, id);
+                return query.executeUpdate();
+            }
+        });
     }
 
     /** Remises en attente de correction, les plus anciennes d'abord. */
@@ -245,7 +257,7 @@ class ExamStore {
                 rows.getString("submit_key"), rows.getObject("graded_at", OffsetDateTime.class),
                 rows.getObject("grader_id", UUID.class), node(rows.getString("grading")), node(rows.getString("scores")),
                 (Integer) rows.getObject("percent"), rows.getString("decision"), node(rows.getString("review")),
-                rows.getString("feedback"));
+                rows.getString("feedback"), rows.getString("learning_acked"));
     }
 
     private JsonNode node(String value) throws SQLException {

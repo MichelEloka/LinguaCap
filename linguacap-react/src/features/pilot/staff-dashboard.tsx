@@ -10,8 +10,9 @@ import { Avatar, Callout, Card, ProgressRing, SkeletonCard, Timeline, type Timel
 import type { Profile } from '../../integration/api';
 import { staffWorkspaceLinks } from './staff-navigation';
 import {
-  DateTile, EncourageDrawer, StaffError, dayOffset, dueWithinWeek, formatMinutes, goalStatusOf, learnerUrl, levelOf,
-  needsFollowUp, openAlert, plural, relativeDay, useOverview, type LearnerOverview,
+  DateTile, EncourageDrawer, LearningUnavailableNotice, StaffError, StaffFreshness, correctionsText, dayOffset, dueWithinWeek,
+  formatMinutes, isPaused, learnerUrl, learningUnavailable, levelOf, needsFollowUp, openAlert, overviewStatusOf, plural, relativeDay,
+  useCorrections, useOverview, type LearnerOverview,
 } from './staff-kit';
 import { LevelRoute, formatShortDay, usePendingContracts } from './staff-contracts';
 import { difficultyTones, formatMinutes as minutesLabel, type PendingContract } from '../../integration/v2';
@@ -132,7 +133,8 @@ function DashboardSkeleton() {
 }
 
 function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) {
-  const { learners, error, reload } = useOverview(token);
+  const { learners, freshness, error, reload } = useOverview(token);
+  const queues = useCorrections(token);
   const pendingContracts = usePendingContracts(token);
   const [messageTo, setMessageTo] = useState<LearnerOverview | null>(null);
 
@@ -151,14 +153,22 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
   const followUp = learners.filter(needsFollowUp).sort((a, b) =>
     Number(Boolean(openAlert(b))) - Number(Boolean(openAlert(a))) || (b.tracking?.lateSessions ?? 0) - (a.tracking?.lateSessions ?? 0));
   const alerts = learners.filter((learner) => openAlert(learner)).length;
-  const corrections = learners.reduce((sum, learner) => sum + (learner.tracking?.pendingGrading ?? 0), 0);
+  // Remises à corriger lues dans les files en direct (copies, missions, répétitions orales), comme la page Corrections ;
+  // repli sur les copies de la synthèse du Suivi si une file ne répond pas.
+  const corrections = queues.total?.total ?? learners.reduce((sum, learner) => sum + (learner.tracking?.pendingGrading ?? 0), 0);
+  const correctionsNote = queues.total ? correctionsText(queues.total) : corrections ? 'En attente de correction' : 'Rien en attente';
   const thisWeek = learners.filter((learner) => dueWithinWeek(learner));
-  const active = learners.filter((learner) => learner.tracking?.goalStatus === 'active').length;
-  const paused = learners.filter((learner) => !needsFollowUp(learner) && learner.tracking?.goalStatus === 'paused').length;
-  const withoutTrack = learners.filter((learner) => !needsFollowUp(learner) && !learner.tracking?.goalStatus).length;
-  const upToDate = learners.length - followUp.length - paused - withoutTrack;
+  // États lus en direct (parcours au brouillon compris), sinon la synthèse du Suivi. Un élève en pause n'est jamais
+  // « à relancer » : il compte « En pause ».
+  const settled = learners.filter((learner) => !needsFollowUp(learner)).map((learner) => overviewStatusOf(learner).code);
+  const active = learners.filter((learner) => overviewStatusOf(learner).code === 'active').length;
+  const paused = settled.filter((code) => code === 'paused').length;
+  const preparing = settled.filter((code) => code === 'preparing').length;
+  const onboarding = settled.filter((code) => code === 'onboarding').length;
+  const withoutTrack = settled.filter((code) => code === 'none').length;
+  const upToDate = learners.length - followUp.length - paused - preparing - onboarding - withoutTrack;
   const health = Math.round((upToDate / learners.length) * 100);
-  const upcoming = learners.filter((learner) => learner.tracking?.nextDueAt)
+  const upcoming = learners.filter((learner) => learner.tracking?.nextDueAt && !isPaused(learner))
     .sort((a, b) => new Date(a.tracking?.nextDueAt ?? 0).getTime() - new Date(b.tracking?.nextDueAt ?? 0).getTime()).slice(0, 5);
   const activity = recentActivity(learners);
   const toDecide = (pendingContracts.data ?? []).filter((item) => item.contract.status === 'pending_teacher')
@@ -166,7 +176,7 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
   const shortcuts: Shortcut[] = [
     { to: '/espace/contrats', label: 'Valider les contrats', hint: toDecide.length ? plural(toDecide.length, 'contrat en attente', 'contrats en attente') : 'Rien en attente', icon: FileSignature, count: toDecide.length },
     { to: '/espace/invitations', label: admin ? 'Inviter un utilisateur' : 'Inviter un élève', hint: 'Lien valable sept jours', icon: UserPlus },
-    { to: '/espace/corrections', label: 'Corriger les copies', hint: corrections ? plural(corrections, 'copie en attente', 'copies en attente') : 'Rien en attente', icon: ClipboardCheck, count: corrections },
+    { to: '/espace/corrections', label: 'Corriger les remises', hint: corrections ? plural(corrections, 'remise en attente', 'remises en attente') : 'Rien en attente', icon: ClipboardCheck, count: corrections },
     { to: '/espace/alertes', label: 'Traiter les alertes', hint: alerts ? plural(alerts, 'alerte ouverte', 'alertes ouvertes') : 'Aucune alerte', icon: Bell, count: alerts },
     ...(admin ? [
       { to: '/espace/utilisateurs', label: 'Gérer les utilisateurs', hint: 'Rôles, référents, accès', icon: UserRoundCog },
@@ -177,15 +187,18 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
 
   return (
     <div className="staff-page-body">
+      {learningUnavailable(learners) && <LearningUnavailableNotice onRetry={reload} />}
+      <p className="staff-freshness-row"><StaffFreshness freshness={freshness} /></p>
       <div className="staff-kpis lc-stagger">
         <KpiLink to="/espace/eleves" tone="brand">
-          <StatCard label={admin ? 'Élèves inscrits' : 'Mes élèves'} value={learners.length} note={`${active} en cours`} icon={<Users size={20} />} />
+          <StatCard label={admin ? 'Élèves inscrits' : 'Mes élèves'} value={learners.length}
+            note={`${active} en cours${preparing ? ` · ${preparing} en préparation` : ''}`} icon={<Users size={20} />} />
         </KpiLink>
         <KpiLink to="/espace/alertes" tone="warning">
           <StatCard label="À relancer" value={followUp.length} note={alerts ? plural(alerts, 'alerte ouverte', 'alertes ouvertes') : 'Aucune alerte'} icon={<BellRing size={20} />} />
         </KpiLink>
         <KpiLink to="/espace/corrections" tone="violet">
-          <StatCard label="Copies à corriger" value={corrections} note={corrections ? 'En attente de correction' : 'Rien en attente'} icon={<ClipboardCheck size={20} />} />
+          <StatCard label="À corriger" value={corrections} note={correctionsNote} icon={<ClipboardCheck size={20} />} />
         </KpiLink>
         <KpiLink to="/espace/eleves?filtre=semaine" tone="success">
           <StatCard label="Cette semaine" value={thisWeek.length} note="Échéances sous 7 jours" icon={<CalendarDays size={20} />} />
@@ -210,7 +223,7 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
                 {upcoming.map((learner) => {
                   const due = learner.tracking?.nextDueAt ?? '';
                   const offset = dayOffset(due);
-                  const status = goalStatusOf(learner.tracking?.goalStatus);
+                  const status = overviewStatusOf(learner);
                   return (
                     <li key={learner.learnerId}>
                       <Link className="staff-agenda-item" to={learnerUrl(learner.learnerId)}>
@@ -243,6 +256,8 @@ function EducatorDashboard({ admin, token }: { admin: boolean; token: string }) 
                 <li><i className="is-success" aria-hidden="true" />À jour<b>{upToDate}</b></li>
                 <li><i className="is-warning" aria-hidden="true" />À relancer<b>{followUp.length}</b></li>
                 <li><i className="is-neutral" aria-hidden="true" />En pause<b>{paused}</b></li>
+                {preparing > 0 && <li><i className="is-violet" aria-hidden="true" />Parcours en préparation<b>{preparing}</b></li>}
+                {onboarding > 0 && <li><i className="is-brand" aria-hidden="true" />Accueil en cours<b>{onboarding}</b></li>}
                 {withoutTrack > 0 && <li><i className="is-subtle" aria-hidden="true" />Sans parcours<b>{withoutTrack}</b></li>}
               </ul>
             </div>

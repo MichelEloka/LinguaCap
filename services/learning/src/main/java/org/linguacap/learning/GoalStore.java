@@ -244,6 +244,8 @@ class GoalStore {
     /**
      * Valide une proposition fondée sur le planning en vigueur : les séances non terminées sont remplacées
      * (leur échéance et un éventuel retard restent dans l'historique), les séances terminées sont conservées.
+     * L'objectif reprend (« active ») s'il était en préparation ou en pause ; un objectif en attente de correction,
+     * validé ou à consolider garde son état, comme dans un parcours (PathStore).
      */
     void validate(UUID enrollmentId, int number, UUID validatedBy) {
         transaction("validate plan", connection -> {
@@ -299,8 +301,10 @@ class GoalStore {
             }
             try (var goal = connection.prepareStatement("""
                     update learning.enrollments e
-                    set validated_revision = ?, goal_status = 'active', paused_at = null, resume_date = null,
-                        target_date = r.target_date
+                    set validated_revision = ?,
+                        goal_status = case when e.goal_status in ('preparing', 'paused', 'active') then 'active'
+                                           else e.goal_status end,
+                        paused_at = null, resume_date = null, target_date = r.target_date
                     from learning.plan_revisions r
                     where e.id = ? and r.enrollment_id = e.id and r.number = ?
                     """)) {
@@ -328,6 +332,7 @@ class GoalStore {
         });
     }
 
+    /** Date de reprise d'un objectif en pause : il reste en pause, Suivi affiche la reprise prévue (goal_resumed). */
     void planResume(UUID enrollmentId, LocalDate resumeDate, LocalDate targetDate) {
         transaction("plan resume", connection -> {
             try (var update = connection.prepareStatement("""
@@ -339,6 +344,7 @@ class GoalStore {
                 update.setObject(3, enrollmentId);
                 if (update.executeUpdate() == 0) throw HttpError.conflict("Ce parcours n’est pas en pause.");
             }
+            events.goalStatus(connection, enrollmentId, "learning.goal_resumed", "paused");
             return null;
         });
     }

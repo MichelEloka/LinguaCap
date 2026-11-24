@@ -34,13 +34,13 @@ Règle de priorité fixée par le responsable produit : **l’interface passe av
 | EVO-035 | Accueil et espace élève : interface du même niveau d’exigence | P0 · livré | M | — |
 | EVO-036 | Drapeaux dans le choix des langues | P0 · livré | S | — |
 | EVO-037 | Réponses d’accueil des professeurs visibles par l’administration et dans les statistiques | P0 · livré | S | EVO-033 |
-| EVO-038 | Débutant déclaré : parcours adapté d’office, sans diagnostic | P1 | S | — |
-| EVO-039 | Parcours d’un élève invisible côté professeur | P1 | M | — |
-| EVO-040 | Voix de synthèse A1 ralenties | P1 | M | — |
-| EVO-041 | Organisation des cours rendue cohérente | P1 | L | — |
-| EVO-042 | Fiabiliser la mise en pause dans le suivi | P1 | S | — |
-| EVO-043 | Validation de la prononciation et de la répétition à voix haute | P2 | XL | — |
-| EVO-044 | Corrigé détaillé après un exercice (juste, faux, pourquoi) | P2 | L | — |
+| EVO-038 | Débutant déclaré : parcours adapté d’office, sans diagnostic | P1 · prêt, à déployer | S | — |
+| EVO-039 | Parcours d’un élève invisible côté professeur | P1 · prêt, à déployer | M | — |
+| EVO-040 | Voix de synthèse A1 ralenties | P1 · prêt, à déployer | M | — |
+| EVO-041 | Organisation des cours rendue cohérente | P1 · prêt, à déployer | L | — |
+| EVO-042 | Fiabiliser la mise en pause dans le suivi | P1 · prêt, à déployer | S | — |
+| EVO-043 | Validation de la prononciation et de la répétition à voix haute | P2 · prêt, à déployer | XL | — |
+| EVO-044 | Corrigé détaillé après un exercice (juste, faux, pourquoi) | P2 · prêt, à déployer | L | — |
 | EVO-045 | Espace exercices par niveau et par type | P2 | M | — |
 | EVO-046 | Alphabet et phonétique pour les débutants totaux | P2 | M | EVO-043 |
 | EVO-047 | Cartes de révision des mots déjà appris | P2 | L | — |
@@ -214,6 +214,39 @@ La création de la fiche prépare l’annuaire prévu en EVO-023. La constructio
 7. **« Ouverture »** : EVO-031, 051, 052, 053, 054, 024, 023, 022.
 8. **« Motivation »** : EVO-025, 026, 027.
 9. **« Écoles et défis »** : EVO-029, 030, 028, 020, 021.
+
+## Prêt, en attente de déploiement
+
+**Contenus V4 et pédagogie** (EVO-040, 041, 043, 044), sur `develop` depuis le 23 novembre 2026 :
+- V4 officielle A1 et A2 : 43 modules, 358 activités, 590 questions typées, 43 missions, 862 mots de lexique,
+  134 illustrations, voix A1 ralenties, ordre des modules revu.
+- Exercices variés (compléter, remettre en ordre, associer, dictée, répétition orale validée avec trois essais puis « à revoir »),
+  corrigé par question après la remise (le modèle oral se réécoute dans le corrigé), missions remises dans l'application avec
+  retour du professeur, lexique par module.
+
+**Correctifs P1** (EVO-038, 039, 042), sur `develop` le 24 novembre 2026 :
+- Débutant (départ A0, déclaré ou choisi par le professeur) : ni diagnostic ni bandeau ; les routes du diagnostic répondent 409.
+  Un professeur qui veut faire passer le diagnostic à un faux débutant choisit le départ A1 ou déclare les modules acquis.
+- Le professeur voit en direct l'accueil de l'élève (langue, test ou débutant déclaré, objectif, jours, planning) et son
+  parcours dès le brouillon, sans attendre la synchronisation du Suivi ; la vue reste servie si Apprentissage est indisponible.
+- Événements : lecture des tables de sortie sans perte (curseur par transaction), état de l'objectif porté par la validation
+  du planning, reprise prévue annoncée et visible dans le Suivi, projections du Suivi indépendantes de l'ordre d'arrivée.
+
+**Manquements similaires corrigés** (revue du 24 novembre 2026) :
+- Transcriptions des exercices (réponses des dictées) servies à tout élève par la route publique des leçons ; corrigé détaillé du
+  diagnostic obtenu en le remettant comme exercice ; corrigé des versions au brouillon.
+- Remise d'évaluation perdue si Apprentissage était indisponible à cet instant : accusé de réception et renvoi automatique.
+- Compteur « Copies à corriger » (missions et répétitions comprises, tous niveaux), élève en pause compté « à relancer »,
+  fiche élève mêlant chiffres en direct et chiffres périodiques (fraîcheur désormais affichée).
+- Fuseau horaire : un élève hors d'Europe ne pouvait pas valider son objectif le soir (jour de Paris côté serveur).
+- Bibliothèque : état réel des missions ; « Débutant » au lieu de « A0 » dans les contrats.
+
+**À surveiller au déploiement** : ordre migrations, services (Suivi juste après la migration du curseur), passerelle, front,
+puis import de la V4 par l'administration ; mesurer la durée de l'import et de la publication d'une version V4 (délais de 7 s
+entre services et de 10 s au Worker) et celle de la vue d'ensemble de l'administration avec une cinquantaine d'élèves.
+
+**Reste à faire, rattaché à EVO-051 (B1)** : les niveaux ouverts (A1, A2) sont écrits en dur dans la vitrine, le questionnaire
+du professeur et l'introduction du test de niveau ; les lire dans `GET /languages` et le test publié lors de l'ouverture du B1.
 
 ## Questions encore ouvertes
 

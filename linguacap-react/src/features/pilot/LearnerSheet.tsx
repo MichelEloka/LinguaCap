@@ -2,23 +2,26 @@ import { useEffect, useState, type ReactNode } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import {
   Activity, AlarmClock, AlertTriangle, ArrowLeft, ArrowRight, BarChart3, Bell, CalendarClock, CalendarDays, Check, CheckCircle2, ChevronRight,
-  ClipboardCheck, Clock, Eye, FileSignature, Flag, ListChecks, MessageCircle, MessagesSquare, Mic, PauseCircle, Play, RefreshCw, Route,
-  Send, ShieldCheck, Target, Timer, Trophy,
+  ClipboardCheck, Clock, Compass, Eye, FileSignature, Flag, Hourglass, ListChecks, MessageCircle, MessagesSquare, Mic, Minus, PauseCircle,
+  Play, RefreshCw, Route, Send, ShieldCheck, Target, Timer, Trophy,
 } from 'lucide-react';
 import { Badge, EmptyState, ProgressBar, StatCard, type BadgeTone } from '../../components/ui';
 import {
   Avatar, Bars, Card, ProgressRing, Segmented, Skeleton, SkeletonCard, TabPanel, Tabs, Timeline, type TimelineEntry,
 } from '../../design/kit';
 import { requestApi } from '../../integration/api';
+import type { LearnerLearningState, OnboardingStep } from '../../integration/v2';
 import type { MissionSummary } from '../../integration/v4';
+import { languageName } from '../../domain/languages';
 import { formatDue, sessionStatus, type Grade, type SessionSummary } from './LearnerSession';
 import { GoalPanel, type PlannedEnrollment } from './GoalPanel';
 import { StaffPathTab } from './staff-path';
 import type { TrackingAlert, TrackingSummary } from './StaffPilot';
 import {
-  DateTile, StaffComposer, StaffError, dateTime, dayOffset, errorText, formatMinutes, goalStatusOf, mediumDate, plural, relativeDay, shortDate,
+  DateTile, LearningUnavailableNotice, StaffComposer, StaffError, StaffFreshness, correctionsText, dateTime, dayOffset, errorText, formatMinutes,
+  learnerStatusOf, mediumDate, plural, relativeDay, shortDate, useCorrections, type TrackingFreshness,
 } from './staff-kit';
-import { learnersAwaitingDecision, usePendingContracts } from './staff-contracts';
+import { LevelRoute, formatDay, learnersAwaitingDecision, startLabel, usePendingContracts } from './staff-contracts';
 import { flaggedOf, gradeTitle, pendingOf, useLessonTitles } from './learner-common';
 import { MissionBadge, MissionDetailDrawer, useMissions } from './study-mission';
 import { ExerciseReviewDrawer } from './study-review';
@@ -32,6 +35,9 @@ interface Sheet {
   completedCount: number;
   messages: { id: string; text: string; sentAt: string; resumedAt?: string | null; alertId?: string | null }[];
   tracking?: TrackingSummary & { alerts?: TrackingAlert[] };
+  /** Accueil et parcours lus en direct (EVO-039) ; null si Apprentissage n'a pas répondu, absent avant le déploiement. */
+  learning?: LearnerLearningState | null;
+  freshness?: TrackingFreshness;
 }
 
 const competenceNames: Record<string, string> = {
@@ -88,9 +94,79 @@ function SessionRow({ session }: { session: SessionSummary }) {
   );
 }
 
+type StepState = OnboardingStep['status'];
+const stepTones: Record<StepState, TimelineEntry['tone']> = { done: 'success', current: 'brand', blocked: 'warning', skipped: undefined, todo: undefined };
+const stepIcons: Record<StepState, ReactNode> = {
+  done: <Check size={15} strokeWidth={3} />, current: <Hourglass size={14} />, blocked: <AlertTriangle size={14} />,
+  skipped: <Minus size={14} />, todo: null,
+};
+const stepStateNames: Record<StepState, string> = { done: 'fait', current: 'en cours', blocked: 'bloqué', skipped: 'sans objet', todo: 'à venir' };
+
+/** Étapes de l'accueil vues par le professeur : langue, test ou débutant déclaré, objectif, jours, planning. */
+export function onboardingRows(learning: LearnerLearningState) {
+  const { onboarding, path } = learning;
+  const step = (id: OnboardingStep['id']): StepState => onboarding.steps.find((item) => item.id === id)?.status ?? 'todo';
+  const placement = onboarding.placement;
+  const result = step('result');
+  const objective: StepState = step('objective') === 'done' ? 'done' : result === 'blocked' ? 'blocked' : result === 'current' ? 'current' : 'todo';
+  const planning: StepState = step('start') === 'done' ? 'done' : step('planning');
+  const placed = placement?.status === 'completed' ? placement : null;
+  const placementDetail = placement?.declaredBeginner ? 'Débutant déclaré, sans test'
+    : placed ? `Test passé · ${placed.placedLevel === 'A0' || !placed.placedLevel ? 'débutant' : `niveau ${placed.placedLevel}`}${placed.completedAt ? `, le ${mediumDate.format(new Date(placed.completedAt))}` : ''}`
+    : placement?.status === 'in_progress' ? 'Test commencé, pas encore terminé'
+    : step('placement') === 'skipped' ? 'Sans test : parcours attribué'
+    : step('placement') === 'blocked' ? 'Test pas encore disponible pour cette langue' : 'À passer';
+  return [
+    { id: 'language', title: 'Langue', state: step('language'),
+      detail: learning.languageId ? languageName(learning.languageId) : step('language') === 'blocked' ? 'Langue pas encore ouverte' : 'À choisir' },
+    { id: 'placement', title: 'Test de niveau', state: step('placement'), detail: placementDetail },
+    { id: 'objective', title: 'Objectif', state: objective,
+      detail: path ? `${startLabel(path.startLevel)} → ${path.targetLevel}, pour le ${formatDay(path.targetDate)}`
+        : objective === 'blocked' ? 'Aucun niveau publié au-delà du sien' : 'À choisir' },
+    { id: 'days', title: 'Jours d’étude', state: step('days'),
+      detail: step('days') === 'done' ? 'Jours confirmés' : step('days') === 'current' ? 'À choisir' : 'À venir' },
+    { id: 'planning', title: 'Planning', state: planning,
+      detail: planning === 'done' ? `Planning validé${path?.validatedRevision ? ` (version ${path.validatedRevision})` : ''} · parcours démarré`
+        : planning === 'current' ? 'Proposition à valider par l’élève' : 'À venir' },
+  ];
+}
+
+/** Carte « Accueil » : avancement de l'accueil de l'élève et état du parcours, lus en direct (EVO-039). */
+function OnboardingCard({ learning, onPath }: { learning: LearnerLearningState; onPath: () => void }) {
+  const rows = onboardingRows(learning);
+  const done = rows.filter((row) => row.state === 'done' || row.state === 'skipped').length;
+  const status = learnerStatusOf(learning);
+  const path = learning.path;
+  return (
+    <Card title="Accueil" icon={<Compass size={18} />} className="staff-onboarding"
+      description={learning.onboarding.completed ? 'Accueil terminé : le parcours a démarré' : `${done} étape${done > 1 ? 's' : ''} sur ${rows.length}`}
+      action={<Badge tone={status.tone}>{status.label}</Badge>}>
+      <ProgressBar value={(done / rows.length) * 100} label={`Accueil : ${done} étapes faites sur ${rows.length}`} />
+      <Timeline items={rows.map((row) => ({
+        id: row.id, tone: stepTones[row.state], icon: stepIcons[row.state],
+        title: <>{row.title}<span className="sr-only"> ({stepStateNames[row.state]})</span></>, meta: row.detail,
+      }))} />
+      {path && (
+        <div className="staff-onboarding-path">
+          <span className="staff-onboarding-path-text">
+            <small>Parcours créé le {mediumDate.format(new Date(path.createdAt))}</small>
+            <LevelRoute from={path.startLevel} to={path.targetLevel} />
+          </span>
+          <button type="button" className="btn btn-soft btn-sm" onClick={onPath}>Voir le parcours <ArrowRight size={15} aria-hidden="true" /></button>
+        </div>
+      )}
+    </Card>
+  );
+}
+
 function SessionsTab({ sheet, onPath }: { sheet: Sheet; onPath: () => void }) {
   const [filter, setFilter] = useState<SessionFilter>('toutes');
   const enrollment = sheet.enrollment;
+  const learning = sheet.learning ?? null;
+  // Accueil en cours (pas encore de parcours démarré) : la carte « Accueil » passe en tête.
+  const welcoming = Boolean(learning && !learning.onboarding.completed);
+  const draft = learning?.path?.status === 'draft';
+  const first = sheet.profile.displayName.trim().split(/\s+/)[0] || sheet.profile.displayName;
   const sessions = enrollment?.sessions ?? [];
   const visible = sessions.filter((session) => filter === 'toutes' ? true
     : filter === 'terminees' ? session.status === 'completed'
@@ -101,28 +177,40 @@ function SessionsTab({ sheet, onPath }: { sheet: Sheet; onPath: () => void }) {
   const alerts = sheet.tracking?.alerts ?? [];
   const late = sessions.filter((session) => session.status === 'late').length;
 
+  const sessionsCard = (
+    <Card title="Séances" className="staff-sessions-card"
+      description={enrollment ? `Attribué le ${mediumDate.format(new Date(enrollment.assignedAt))}${enrollment.supersededSessions > 0
+        ? ` · ${plural(enrollment.supersededSessions, 'séance replanifiée', 'séances replanifiées')}` : ''}` : undefined}
+      action={sessions.length > 0 && <Segmented label="Filtrer les séances" value={filter} onChange={setFilter} options={sessionFilters} />}>
+      {!enrollment ? (
+        <EmptyState icon={<Route size={26} />} title={draft ? 'Parcours en préparation' : 'Pas encore de séances'}
+          description={draft ? `${first} a créé son parcours : les séances seront publiées dès la validation de son planning.`
+            : 'Les séances apparaîtront dès que l’élève aura construit et validé son parcours.'}
+          action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le parcours</button>} />
+      ) : sessions.length === 0 ? (
+        <EmptyState icon={<CalendarClock size={26} />} title="Séances bientôt publiées" description="Les séances seront publiées à la validation du planning."
+          action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le planning</button>} />
+      ) : visible.length === 0 ? (
+        <EmptyState icon={<CheckCircle2 size={26} />} title="Aucune séance dans ce filtre" />
+      ) : (
+        <ol className="staff-sessions lc-stagger">
+          {visible.map((session) => <SessionRow key={session.id} session={session} />)}
+        </ol>
+      )}
+    </Card>
+  );
+
   return (
     <div className="staff-sheet-grid">
-      <Card title="Séances" className="staff-sessions-card"
-        description={enrollment ? `Attribué le ${mediumDate.format(new Date(enrollment.assignedAt))}${enrollment.supersededSessions > 0
-          ? ` · ${plural(enrollment.supersededSessions, 'séance replanifiée', 'séances replanifiées')}` : ''}` : undefined}
-        action={sessions.length > 0 && <Segmented label="Filtrer les séances" value={filter} onChange={setFilter} options={sessionFilters} />}>
-        {!enrollment ? (
-          <EmptyState icon={<Route size={26} />} title="Pas encore de séances" description="Les séances apparaîtront dès que l’élève aura construit et validé son parcours."
-            action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le parcours</button>} />
-        ) : sessions.length === 0 ? (
-          <EmptyState icon={<CalendarClock size={26} />} title="Séances bientôt publiées" description="Les séances seront publiées à la validation du planning."
-            action={<button type="button" className="btn btn-outline" onClick={onPath}>Voir le planning</button>} />
-        ) : visible.length === 0 ? (
-          <EmptyState icon={<CheckCircle2 size={26} />} title="Aucune séance dans ce filtre" />
-        ) : (
-          <ol className="staff-sessions lc-stagger">
-            {visible.map((session) => <SessionRow key={session.id} session={session} />)}
-          </ol>
-        )}
-      </Card>
+      {welcoming && learning ? (
+        <div className="staff-col">
+          <OnboardingCard learning={learning} onPath={onPath} />
+          {sessionsCard}
+        </div>
+      ) : sessionsCard}
 
       <div className="staff-col staff-sheet-side">
+        {!welcoming && learning && <OnboardingCard learning={learning} onPath={onPath} />}
         <Card title="Prochaine séance" icon={<CalendarClock size={18} />}>
           {next ? (
             <div className="staff-next">
@@ -239,7 +327,11 @@ function ResultsTab({ sheet, learnerId, token }: { sheet: Sheet; learnerId: stri
   const [reviewing, setReviewing] = useState<string | null>(null);
   const [missionOpen, setMissionOpen] = useState<string | null>(null);
   const sessions = sheet.enrollment?.sessions ?? [];
-  const exams = Object.entries(sheet.tracking?.results ?? {});
+  // Résultats d'examen de chaque niveau (l'examen blanc A1 reste visible une fois l'A2 ouvert), sinon ceux du dernier objectif.
+  const byLevel = Object.entries(sheet.tracking?.resultsByLevel ?? {});
+  const exams = byLevel.length
+    ? byLevel.flatMap(([level, results]) => Object.entries(results).map(([kind, result]) => ({ key: `${level}-${kind}`, level, kind, result })))
+    : Object.entries(sheet.tracking?.results ?? {}).map(([kind, result]) => ({ key: kind, level: null as string | null, kind, result }));
   const grades = [...sheet.results].sort((a, b) => new Date(a.submittedAt).getTime() - new Date(b.submittedAt).getTime());
   const percent = (grade: Grade) => grade.total ? Math.round((grade.correct / grade.total) * 100) : 0;
   const totalCorrect = grades.reduce((sum, grade) => sum + grade.correct, 0);
@@ -280,10 +372,10 @@ function ResultsTab({ sheet, learnerId, token }: { sheet: Sheet; learnerId: stri
 
       {exams.length > 0 && (
         <div className="staff-exams">
-          {exams.map(([kind, result]) => {
+          {exams.map(({ key, level, kind, result }) => {
             const decision = decisions[result.decision] ?? { label: result.decision, tone: 'neutral' as const };
             return (
-              <Card key={kind} title={kind === 'final' ? 'Examen blanc' : 'Bilan intermédiaire'} icon={<ClipboardCheck size={18} />}
+              <Card key={key} title={`${kind === 'final' ? 'Examen blanc' : 'Bilan intermédiaire'}${level ? ` ${level}` : ''}`} icon={<ClipboardCheck size={18} />}
                 action={<span className="staff-tags">
                   <Badge tone={result.onTime ? 'green' : 'amber'}>{result.onTime ? 'Remis à temps' : 'Remis après l’échéance'}</Badge>
                   <Badge tone={decision.tone}>{decision.label}</Badge>
@@ -408,11 +500,12 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
   const [reload, setReload] = useState(0);
   const [focusComposer, setFocusComposer] = useState(false);
   const id = encodeURIComponent(learnerId);
-  const refresh = () => setReload((value) => value + 1);
+  const refresh = () => { setReload((value) => value + 1); corrections.reload(); };
   const requested = params.get('onglet') ?? '';
   const tab: SheetTab = tabIds.find((item) => item === requested) ?? tabAliases[requested] ?? 'seances';
   const pending = usePendingContracts(token);
   const contractToDecide = learnersAwaitingDecision(pending.data).has(learnerId);
+  const corrections = useCorrections(token);
 
   function openTab(next: string) {
     setFocusComposer(false);
@@ -434,10 +527,25 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
   const sessions = enrollment?.sessions ?? [];
   const done = sessions.filter((session) => session.status === 'completed').length;
   const completion = sessions.length ? Math.round((done / sessions.length) * 100) : 0;
-  const status = goalStatusOf(enrollment?.goal.status ?? tracking?.goalStatus);
+  // État lu en direct (parcours au brouillon compris), sinon l'inscription ou la synthèse du Suivi.
+  const status = learnerStatusOf(sheet?.learning, enrollment?.goal.status ?? tracking?.goalStatus);
+  const livePath = sheet?.learning?.path ?? null;
   const openAlert = tracking?.alert?.status === 'open' ? tracking.alert : null;
-  const late = tracking?.lateSessions ?? sessions.filter((session) => session.status === 'late').length;
-  const completed = tracking?.sessionsCompleted ?? done;
+  // Retard et séances à temps lus en direct sur les séances de l'inscription, comme l'anneau : une séance rattrapée
+  // n'attend plus la synchronisation. En pause, seules les séances échues avant la pause comptent en retard. Sans
+  // réponse d'Apprentissage, la synthèse du Suivi prend le relais.
+  const live = sheet?.learning !== null;
+  const pausedAt = enrollment?.goal.status === 'paused' && enrollment.goal.pausedAt ? new Date(enrollment.goal.pausedAt).getTime() : null;
+  const late = live
+    ? sessions.filter((session) => session.status === 'late' && (pausedAt === null || new Date(session.dueAt).getTime() < pausedAt)).length
+    : status.code === 'paused' ? 0 : tracking?.lateSessions ?? 0;
+  const finished = sessions.filter((session) => session.status === 'completed');
+  const onTime = live
+    ? finished.filter((session) => session.completedAt && new Date(session.completedAt).getTime() <= new Date(session.dueAt).getTime()).length
+    : tracking?.sessionsOnTime;
+  const completed = live ? finished.length : tracking?.sessionsCompleted ?? done;
+  const learnerCorrections = corrections.byLearner?.get(learnerId);
+  const toCorrect = corrections.byLearner ? learnerCorrections?.total ?? 0 : tracking?.pendingGrading ?? 0;
 
   return (
     <div className="staff-page staff-sheet">
@@ -452,7 +560,8 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
               <div className="staff-profile-id">
                 <h1>{sheet.profile.displayName}</h1>
                 <span className="staff-tags">
-                  {enrollment ? <Badge tone="blue">Allemand {enrollment.levelCode} · version {enrollment.trackVersionNumber}</Badge>
+                  {enrollment ? <Badge tone="blue">{languageName(sheet.learning?.languageId ?? 'de')} {enrollment.levelCode} · version {enrollment.trackVersionNumber}</Badge>
+                    : livePath ? <Badge tone="blue">{languageName(sheet.learning?.languageId ?? 'de')} · objectif {livePath.targetLevel}</Badge>
                     : sheet.goal && <Badge tone="blue">Objectif {sheet.goal.level}</Badge>}
                   <Badge tone={status.tone}>{status.label}</Badge>
                   {openAlert && <Badge tone="red"><Bell size={12} aria-hidden="true" /> Alerte ouverte</Badge>}
@@ -478,14 +587,18 @@ export function LearnerSheetPage({ learnerId, token, canMessage = false }: { lea
                 </ProgressRing>
                 <span><strong>{done} / {sessions.length}</strong><small>séances terminées</small></span>
               </div>
-              <Figure icon={<Timer size={18} />} label="Séances à temps" value={tracking?.sessionsOnTime !== undefined ? `${tracking.sessionsOnTime} / ${completed}` : '—'} />
+              <Figure icon={<Timer size={18} />} label="Séances à temps" value={onTime !== undefined ? `${onTime} / ${completed}` : '—'} />
               <Figure icon={<AlarmClock size={18} />} label="Retard" tone={late ? 'warning' : 'success'}
                 value={late ? plural(late, 'séance', 'séances') : 'À jour'} />
               <Figure icon={<Clock size={18} />} label="Pratique estimée" value={formatMinutes(tracking?.practiceMinutes ?? 0)} />
               <Figure icon={<Activity size={18} />} label="Dernière activité" value={tracking?.lastActivityAt ? relativeDay(tracking.lastActivityAt) : 'Aucune'} />
-              <Figure icon={<ClipboardCheck size={18} />} label="Copies à corriger" value={tracking?.pendingGrading ?? 0} />
+              <Figure icon={<ClipboardCheck size={18} />} label="À corriger"
+                value={<span title={corrections.byLearner ? correctionsText(learnerCorrections) : undefined}>{toCorrect}</span>} />
             </div>
+            <p className="staff-figures-note"><StaffFreshness freshness={sheet.freshness} />
+              <small>Pratique, dernière activité et alertes suivent cette actualisation ; le reste de la fiche est lu en direct.</small></p>
           </section>
+          {sheet.learning === null && <LearningUnavailableNotice onRetry={refresh} />}
 
           <Tabs label="Sections de la fiche" idPrefix="fiche" value={tab} onChange={openTab} tabs={[
             { id: 'seances', label: 'Séances', icon: <CalendarDays size={17} aria-hidden="true" />, count: sessions.length },
