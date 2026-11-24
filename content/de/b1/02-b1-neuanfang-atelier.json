@@ -1,0 +1,1430 @@
+{
+  "id": "b1-neuanfang-atelier",
+  "title": "Atelier Neuanfang : se présenter à un nouveau groupe",
+  "objective": "Se présenter par écrit à un nouveau groupe, raconter à l’oral un tournant de sa vie, réagir au récit des autres et relayer les informations d’un courriel d’accueil.",
+  "prerequisites": [
+    "b1-neuanfang"
+  ],
+  "audioProfile": "b1-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Tâches de production reprises et réécrites du brouillon B1 V1 (LinguaCap) : message après le premier cours, récit d’un nouveau départ."
+  ],
+  "grammarFocus": [
+    "praeteritum-perfekt",
+    "als-wenn"
+  ],
+  "layer": "content/b/source/b1/b1-neuanfang-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "sich-vorstellen",
+      "word": "sich vorstellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se présenter",
+      "example": "Darf ich mich kurz vorstellen?",
+      "note": "séparable : vor|stellen · sich vorstellen (accusatif) : se présenter",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "mitmachen",
+      "word": "mitmachen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "participer, faire partie de",
+      "example": "Ich möchte gern bei euch in der Theatergruppe mitmachen.",
+      "note": "séparable : mit|machen · bei + datif",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "mitglied",
+      "word": "Mitglied",
+      "article": "das",
+      "plural": "Mitglieder",
+      "partOfSpeech": "noun",
+      "translation": "le membre",
+      "example": "Wir freuen uns über neue Mitglieder.",
+      "note": "neutre, même pour une personne : das Mitglied",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "treffen",
+      "word": "Treffen",
+      "article": "das",
+      "plural": "Treffen",
+      "partOfSpeech": "noun",
+      "translation": "la rencontre, la réunion",
+      "example": "Das erste Treffen ist am Donnerstag um 19 Uhr.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "probe",
+      "word": "Probe",
+      "article": "die",
+      "plural": "Proben",
+      "partOfSpeech": "noun",
+      "translation": "la répétition (théâtre, musique)",
+      "example": "Die Probe beginnt heute im Raum 3.",
+      "note": "proben : répéter (une pièce)",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "bescheid-sagen",
+      "word": "Bescheid sagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prévenir, tenir au courant",
+      "example": "Sag Malte bitte Bescheid, wenn du nicht kommen kannst.",
+      "note": "jemandem (datif) Bescheid sagen",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "absagen",
+      "word": "absagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "annuler, se décommander",
+      "example": "Ich muss das Treffen am Donnerstag leider absagen.",
+      "note": "séparable : ab|sagen · contraire : zusagen",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "zusagen",
+      "word": "zusagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "accepter (une offre, une invitation)",
+      "example": "Kannst du bis Freitag zusagen?",
+      "note": "séparable : zu|sagen",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "zoegern",
+      "word": "zögern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "hésiter",
+      "example": "Ich habe keinen Moment gezögert.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "sich-trauen",
+      "word": "sich trauen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "oser",
+      "example": "Am Anfang habe ich mich nicht getraut, Fragen zu stellen.",
+      "note": "sich trauen + zu + infinitif",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "grund",
+      "word": "Grund",
+      "article": "der",
+      "plural": "Gründe",
+      "partOfSpeech": "noun",
+      "translation": "la raison",
+      "example": "Der Grund für meinen Umzug war die Arbeit.",
+      "note": "der Grund für + accusatif",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "im-nachhinein",
+      "word": "im Nachhinein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avec le recul, après coup",
+      "example": "Im Nachhinein war der Umzug die beste Entscheidung.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "ich-bin-neu-in",
+      "word": "Ich bin neu in …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je suis nouveau / nouvelle dans …",
+      "example": "Hallo zusammen, ich bin neu in der Laufgruppe.",
+      "note": "in + datif : in der Gruppe, im Kurs",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ich-freue-mich-darauf",
+      "word": "Ich freue mich darauf, …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je me réjouis de …",
+      "example": "Ich freue mich darauf, euch kennenzulernen.",
+      "note": "sich freuen auf (accusatif) : darauf annonce la suite",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "wie-kam-es-dazu",
+      "word": "Wie kam es dazu?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Comment en es-tu arrivé(e) là ?",
+      "example": "Du hast gekündigt? Wie kam es dazu?",
+      "note": "relance pour demander la raison",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "erzaehl-mal",
+      "word": "Erzähl mal!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Raconte !",
+      "example": "Du warst ein Jahr in Kanada? Erzähl mal!",
+      "note": "à quelqu’un qu’on tutoie ; vouvoiement : Erzählen Sie mal!",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "das-kann-ich-gut-verstehen",
+      "word": "Das kann ich gut verstehen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je comprends bien.",
+      "example": "Du hattest Heimweh? Das kann ich gut verstehen.",
+      "note": "pour montrer de l’empathie",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "viele-gruesse",
+      "word": "Viele Grüße",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Amitiés, bien à vous (fin de message)",
+      "example": "Viele Grüße und bis Donnerstag!",
+      "note": "neutre : convient au tutoiement et au vouvoiement",
+      "audio": {
+        "media": "b1-neuanfang-atelier-lexique",
+        "line": 17
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-neuanfang-atelier-modell",
+      "kind": "lesson",
+      "title": "Découvrir : un message de présentation modèle",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : un message de présentation modèle",
+        "description": "Lesen Sie die Nachricht von Jonas an seine neue Theatergruppe. Hören Sie danach Samirs Bericht über einen Wendepunkt. Beide Texte sind Modelle für Ihre Missionen. [fr] Lisez le message de Jonas à sa nouvelle troupe de théâtre. Écoutez ensuite le récit de Samir sur un tournant de sa vie. Ces deux textes sont des modèles pour vos missions.\n\nNACHRICHT AN DIE THEATERGRUPPE\nHallo zusammen,\nich bin Jonas, 31, und seit dieser Woche neu in der Theatergruppe. Rosa hat mich gebeten, mich kurz vorzustellen.\nIch komme aus Belgien und bin vor vier Monaten nach Freiburg gezogen, weil ich hier eine Stelle als Krankenpfleger bekommen habe. Am Anfang war das nicht leicht: Ich kannte niemanden, und nach der Arbeit war ich oft allein. Als ich dann euer Plakat im Stadtteilzentrum sah, dachte ich sofort an meine alte Theatergruppe in Lüttich. Dort habe ich sechs Jahre lang gespielt.\nIch freue mich darauf, mit euch zu spielen und neue Leute kennenzulernen. Eine Frage habe ich noch: Muss man für die Proben schon Text auswendig lernen?\nViele Grüße und bis Donnerstag\nJonas\n\nAUFBAU\n[fr] Structure du message\n• Begrüßung : « Hallo zusammen » ; on tutoie un groupe d’amateurs (ihr, euch, euer).\n• Wer bin ich ? : nom, âge, depuis quand on est dans le groupe et pourquoi on écrit.\n• Meine Geschichte : d’où l’on vient, le déménagement et sa raison (weil), les débuts difficiles (kannte, war), le déclic (Als ich … sah, …).\n• Warum diese Gruppe ? : ce qu’on attend du groupe (Ich freue mich darauf, …).\n• Frage und Gruß : une question concrète, puis « Viele Grüße und bis Donnerstag ».\n\nREDEMITTEL\n[fr] Formules par fonction\nEINLEITEN\n[fr] Commencer\n• Hallo zusammen, ich bin … und seit … neu in … / Ich möchte mich kurz vorstellen.\nERZÄHLEN\n[fr] Raconter dans l’ordre\n• Vor vier Monaten … / Am Anfang … / Als ich …, … / Nachdem ich …, … / Seitdem …\nBEGRÜNDEN\n[fr] Justifier\n• …, weil ich hier eine Stelle bekommen habe. / Deshalb habe ich … / Der Grund dafür war …\nBEISPIEL\n[fr] Donner un exemple\n• Zum Beispiel … / Einmal ist mir Folgendes passiert: …\nSCHLUSS\n[fr] Conclure\n• Ich freue mich darauf, euch kennenzulernen. / Eine Frage habe ich noch: … / Viele Grüße und bis …\n\nSAMIRS BERICHT\n[fr] Le récit de Samir\nHören Sie Samirs Bericht. Er erzählt in vier Schritten: vorher, der Wendepunkt, danach, heute. [fr] Écoutez le récit de Samir. Il raconte en quatre temps : avant, le tournant, après, aujourd’hui.\n• vorher : Vor vier Jahren arbeitete ich als Buchhalter …\n• der Wendepunkt : Dann kam ein Abend, den ich nie vergesse …\n• danach : Nachdem ich … gekocht hatte, traf ich eine Entscheidung …\n• heute : Heute arbeite ich in einem Restaurant … Im Nachhinein war das die beste Entscheidung.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-atelier-modell-aufbau",
+          "caption": "Aufbau der Nachricht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-interaktion",
+      "kind": "exercise",
+      "title": "S’entraîner : réagir et relancer la conversation",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "S’entraîner : réagir et relancer la conversation",
+        "description": "Sie sind neu in einer Gruppe. Hören Sie, was die anderen sagen, und wählen Sie die passende Reaktion. [fr] Vous êtes nouveau dans un groupe. Écoutez ce que disent les autres et choisissez la réplique qui convient.\nDanach sprechen Sie drei Reaktionen nach. [fr] Ensuite, répétez trois réactions à voix haute.\n\nTIPP\n[fr] Astuce\nEine gute Reaktion hat zwei Teile: Zeigen Sie, dass Sie zugehört haben, und stellen Sie dann eine Frage. [fr] Une bonne réaction a deux parties : montrez que vous avez écouté, puis posez une question.\n• Du warst also am Anfang allein. Wer hat dir dann geholfen?\n• Das klingt spannend! Wie kam es dazu?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie möchten Clara begrüßen und ihr eine Frage stellen. Was passt? [fr] Écoutez. Vous voulez accueillir Clara et lui poser une question. Quelle réplique convient ?",
+          "explanation": "Seule la première réplique accueille Clara (Herzlich willkommen) et lui pose une question sur ses débuts. Les deux autres parlent de soi : elles ne relancent pas la conversation sur elle.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Herzlich willkommen! Wie gefällt es dir bisher hier?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich bin schon seit drei Jahren in der Gruppe.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Lyon? Da war ich letzten Sommer im Urlaub.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Hören Sie. Wie zeigen Sie Verständnis und fragen weiter? [fr] Écoutez. Comment montrez-vous de la compréhension tout en relançant ?",
+          "explanation": "« Das kann ich gut verstehen » reprend ce que Ben ressent, et « Was hat dir dann geholfen? » l’invite à poursuivre. Changer de sujet ignore son récit ; le contredire, même pour le complimenter, nie ce qu’il a vécu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aha. Und was machst du beruflich?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das kann ich gut verstehen. Was hat dir dann geholfen?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dein Deutsch ist doch super, das stimmt gar nicht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie möchten nach dem Grund für Noras Entscheidung fragen. Was passt? [fr] Écoutez. Vous voulez demander à Nora la raison de sa décision. Quelle réplique convient ?",
+          "explanation": "Nora a commencé sa formation il y a deux ans et a quitté le bureau : les deux premières questions montrent qu’on n’a pas écouté. « Wie kam es zu dieser Entscheidung? » demande la raison sans être indiscret.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Spannend! Wann fängst du mit der Ausbildung an?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Spannend! Wie lange arbeitest du schon in dem Büro?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Spannend! Wie kam es zu dieser Entscheidung?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Hören Sie. Was antworten Sie freundlich? [fr] Écoutez. Que répondez-vous aimablement ?",
+          "explanation": "Paul demande votre prénom : on le redonne simplement (« Kein Problem! Ich heiße … ») et on vérifie le sien avec « …, oder? ». La provenance ne répond pas à la question, et la dernière réplique n’a pas de sens.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kein Problem! Ich heiße Lea. Und du bist Paul, oder?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich komme aus Frankreich, aus Nantes.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nein, du hast meinen Namen nicht vergessen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Herzlich willkommen! Wie gefällt es dir bisher hier?",
+          "accept": [
+            "Herzlich willkommen! Wie gefällt es dir bisher hier?"
+          ],
+          "explanation": "Pour accueillir un nouveau venu. Intonation montante sur « willkommen », puis descendante à la fin de la question avec « wie ». Accent sur « will-KOM-men ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das kann ich gut verstehen. Was hat dir dann geholfen?",
+          "accept": [
+            "Das kann ich gut verstehen. Was hat dir dann geholfen?"
+          ],
+          "explanation": "Montrer de l’empathie, puis relancer. Accent sur « ver-STE-hen » : le préfixe ver- n’est jamais accentué. Dans « geholfen », le h s’entend.",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Spannend! Wie kam es zu dieser Entscheidung?",
+          "accept": [
+            "Spannend! Wie kam es zu dieser Entscheidung?"
+          ],
+          "explanation": "Relance pour demander une raison. « Entscheidung » : accent sur « SCHEI », et le ei se prononce [aï]. Le z de « zu » se dit [ts].",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-neuanfang-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : informer une nouvelle venue",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : informer une nouvelle venue",
+        "description": "Situation: Ihre Mitbewohnerin Sofia möchte auch in der Theatergruppe mitmachen. Sie hat die E-Mail nicht bekommen und bittet Sie um Hilfe. [fr] Situation : votre colocataire Sofia veut elle aussi rejoindre la troupe de théâtre. Elle n’a pas reçu le courriel et vous demande de l’aide.\nLesen Sie die E-Mail. Machen Sie dann Notizen für Sofia und beantworten Sie ihre Fragen: kurz, einfach und auf Deutsch. [fr] Lisez le courriel. Prenez ensuite des notes pour Sofia et répondez à ses questions : brièvement, simplement et en allemand.\n\nSTRATEGIE\n[fr] Stratégie\nWas muss Sofia wissen? Suchen Sie nur das Wichtigste: Wann? Wo? Was mitbringen? Was kostet es? Wen informieren? [fr] Que doit savoir Sofia ? Ne cherchez que l’essentiel : quand ? où ? quoi apporter ? combien ? qui prévenir ?\n\nBETREFF: WILLKOMMEN BEI „BÜHNE FREI“\nLiebe neue Mitglieder,\nschön, dass ihr dabei seid! Unser erstes Treffen nach der Sommerpause findet am Donnerstag, dem 12. September, um 19 Uhr statt. Wir proben wie immer im Stadtteilzentrum in der Gartenstraße 8, aber diesmal nicht im großen Saal, sondern im Raum 3 im ersten Stock, weil der Saal renoviert wird.\nBitte bringt bequeme Kleidung und Hausschuhe oder dicke Socken mit, denn wir arbeiten viel auf dem Boden. Getränke gibt es vor Ort, Snacks sind immer willkommen.\nDer Mitgliedsbeitrag beträgt 5 Euro im Monat. Ihr zahlt ihn aber erst ab Oktober: Die ersten zwei Treffen sind zum Kennenlernen kostenlos.\nWer am 12. September nicht kann, sagt bitte bis Dienstag Malte in unserer Chatgruppe Bescheid. Dann schicken wir euch die Texte für das neue Stück.\nWir freuen uns auf euch!\nHerzliche Grüße\nRosa und Malte",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Notizen für Sofia. [fr] Complétez les notes pour Sofia.",
+          "text": "Erstes Treffen: Donnerstag, [[1]] September, 19 Uhr. Ort: Stadtteilzentrum, Raum [[2]]. Mitbringen: bequeme Kleidung und [[3]]. Kosten: 5 Euro im Monat, aber erst ab [[4]]. Wer nicht kommen kann, sagt [[5]] Bescheid.",
+          "explanation": "Toutes les informations utiles sont dans le courriel : le jeudi 12 septembre, la salle 3 (et non la grande salle, en travaux), des chaussons ou de grosses chaussettes, la cotisation à partir d’octobre et Malte à prévenir avant mardi.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "12.",
+                "12",
+                "zwölften"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "3",
+                "drei"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Hausschuhe",
+                "dicke Socken",
+                "Hausschuhe oder dicke Socken",
+                "Socken"
+              ],
+              "size": 29,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Oktober"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Malte"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sofia fragt: „Muss ich beim ersten Treffen schon bezahlen?“ Was antworten Sie? [fr] Sofia demande : « Est-ce que je dois déjà payer à la première rencontre ? » Que répondez-vous ?",
+          "explanation": "Le courriel précise : « Die ersten zwei Treffen sind zum Kennenlernen kostenlos » et la cotisation de 5 euros n’est due qu’à partir d’octobre. Le groupe n’est donc pas gratuit pour toujours.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, 5 Euro, und zwar bar.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, die ersten zwei Treffen sind kostenlos.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nein, die Gruppe ist immer kostenlos.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sofia hat am 12. September vielleicht keine Zeit. Was ist für sie besonders wichtig? [fr] Sofia ne sera peut-être pas libre le 12 septembre. Qu’est-ce qui est particulièrement important pour elle ?",
+          "explanation": "Le courriel demande de prévenir Malte avant mardi, dans le groupe de discussion ; en échange, on reçoit les textes de la nouvelle pièce. Rosa n’est pas la personne à contacter, et venir sans prévenir ferait manquer les textes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie muss Malte bis Dienstag Bescheid sagen, dann bekommt sie die Texte.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie kann einfach eine Woche später kommen, ohne etwas zu sagen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie muss Rosa eine E-Mail schreiben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum trifft sich die Gruppe diesmal nicht im großen Saal? [fr] Pourquoi le groupe ne se retrouve-t-il pas dans la grande salle cette fois ?",
+          "explanation": "« … weil der Saal renoviert wird » : la grande salle est en travaux. Le courriel ne parle ni de concert ni de la taille du groupe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Gruppe zu groß ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil im Saal ein Konzert stattfindet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil der Saal renoviert wird.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Erklären Sie Sofia den neuen Ort. Bilden Sie einen Satz. [fr] Expliquez à Sofia le nouveau lieu. Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wir",
+              "proben",
+              "im Raum 3,",
+              "weil",
+              "der Saal",
+              "renoviert",
+              "wird."
+            ]
+          ],
+          "explanation": "Principale d’abord (Wir proben im Raum 3), puis la subordonnée avec weil : le verbe conjugué wird va tout à la fin, après le participe renoviert. C’est la reformulation la plus simple de la phrase du courriel."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Nachricht an Sofia gibt die E-Mail richtig wieder? [fr] Quel message à Sofia restitue correctement le courriel ?",
+          "explanation": "Le deuxième message reprend la date, l’heure, la salle 3 et ce qu’il faut apporter. Le premier se trompe de salle et demande d’apporter à boire (les boissons sont fournies) ; le troisième confond la date limite (mardi) avec la rencontre et la cotisation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es geht am 12. um 19 Uhr los, im Saal. Bring etwas zu trinken mit!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es geht am 12. um 19 Uhr los, im Raum 3. Bring bequeme Sachen und dicke Socken mit!",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Es geht am Dienstag um 19 Uhr los, im Raum 3. Du musst gleich 5 Euro bezahlen.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : les erreurs fréquentes dans un récit",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : les erreurs fréquentes dans un récit",
+        "description": "Diese Fehler machen viele Französischsprachige. Wählen Sie die richtige Form oder ergänzen Sie. [fr] Ces erreurs sont fréquentes chez les francophones. Choisissez la bonne forme ou complétez.\nLesen Sie danach jede Erklärung genau: Sie hilft Ihnen bei der Mission. [fr] Lisez ensuite attentivement chaque explication : elle vous aidera pour la mission.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Dans une principale, le verbe conjugué est en 2e position. Si la phrase commence par un complément (Letztes Jahr), le sujet passe après le verbe : bin ich. Le français « L’an dernier, je … » pousse à l’erreur de la première phrase.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Letztes Jahr ich bin nach Bremen gezogen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Letztes Jahr bin ich nach Bremen gezogen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Letztes Jahr ich nach Bremen gezogen bin.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Korrigieren Sie den Fehler: „Ich habe vor drei Monaten umgezogen.“ [fr] Corrigez l’erreur : « Ich habe vor drei Monaten umgezogen. »",
+          "text": "Ich [[1]] vor drei Monaten umgezogen.",
+          "explanation": "umziehen (déménager) exprime un changement de lieu : Perfekt avec sein, donc ich bin umgezogen. Le participe était juste (verbe fort séparable : um-ge-zogen) ; seul l’auxiliaire haben était faux.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bin"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „… ich in Hamburg ankam, regnete es.“ [fr] Quel mot convient ? « Quand je suis arrivé à Hambourg, il pleuvait. »",
+          "explanation": "Le français « quand » a trois équivalents. Fait unique au passé : als. Wenn : chaque fois (ou une condition). Wann : seulement dans une question. L’arrivée à Hambourg est un fait unique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wann",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Als",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Verb „wohnen“ in der richtigen Zeitform. [fr] Complétez avec « wohnen » au bon temps : « J’habite à Fribourg depuis deux ans. »",
+          "text": "Ich [[1]] seit zwei Jahren in Freiburg.",
+          "explanation": "Avec seit, une situation qui dure encore se dit au présent, comme en français : Ich wohne seit zwei Jahren hier. « Ich habe … gewohnt » signifierait que ce n’est plus le cas.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wohne"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Korrigieren Sie den Fehler: „Nachdem ich die Prüfung bestanden habe, suchte ich eine Stelle.“ [fr] Corrigez l’erreur : « Nachdem ich die Prüfung bestanden habe, suchte ich eine Stelle. »",
+          "text": "Nachdem ich die Prüfung bestanden [[1]], suchte ich eine Stelle.",
+          "explanation": "La principale est au Präteritum (suchte) : l’action antérieure, introduite par nachdem, passe au Plusquamperfekt, avec l’auxiliaire au Präteritum : hatte bestanden. « habe bestanden » (Perfekt) mélange les temps. La principale commence bien par son verbe : suchte ich.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hatte"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Verb im Perfekt. [fr] Complétez avec le verbe qui convient au Perfekt : « Après la formation, je suis devenu infirmier. »",
+          "text": "Nach der Ausbildung bin ich Krankenpfleger [[1]].",
+          "explanation": "« devenir » se dit werden : ich bin … geworden (Perfekt avec sein). Faux ami : bekommen veut dire « recevoir », jamais « devenir ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "geworden"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie schreiben an Ihre neue Laufgruppe. Alle duzen sich. Wie beginnen Sie? [fr] Vous écrivez à votre nouveau groupe de course à pied. Tout le monde se tutoie. Comment commencez-vous ?",
+          "explanation": "« Hallo zusammen » salue tout un groupe qu’on tutoie. « Sehr geehrte Damen und Herren » est réservé aux courriers formels, et « Liebe Frau Hartmann » s’adresse à une seule personne qu’on vouvoie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sehr geehrte Damen und Herren,",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Hallo zusammen,",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Liebe Frau Hartmann,",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : lire un récit personnel",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : lire un récit personnel",
+        "description": "PRÜFUNGSTRAINING: LESEN\n[fr] Entraînement à l’examen : lecture\nZeit: 12 Minuten. Lesen Sie den Text und die Aussagen 1 bis 6. Ist die Aussage richtig oder falsch, oder steht das nicht im Text? [fr] Durée : 12 minutes. Lisez le texte et les affirmations 1 à 6. Chaque affirmation est-elle vraie ou fausse, ou le texte n’en dit-il rien ?\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst die Aussagen und merken Sie sich die Schlüsselwörter. [fr] Lisez d’abord les affirmations et retenez les mots-clés.\nDie Aussagen folgen meistens der Reihenfolge des Textes. [fr] Les affirmations suivent le plus souvent l’ordre du texte.\nVorsicht bei Wörtern wie „immer“, „nie“ oder „alle“: Prüfen Sie genau. [fr] Méfiez-vous des mots comme « toujours », « jamais » ou « tous » : vérifiez précisément.\n„Falsch“ heißt: Der Text sagt etwas anderes. „Steht nicht im Text“ heißt: Der Text sagt dazu nichts. [fr] « Faux » : le texte dit autre chose. « Non mentionné » : le texte n’en dit rien.\n\nVOM SCHREIBTISCH IN DEN GARTEN\nEin Beitrag von Heike, 46, aus Kassel\n\nZwanzig Jahre lang saß ich jeden Tag von acht bis fünf in einem Versicherungsbüro. Ich verdiente gut, meine Kolleginnen waren nett, und trotzdem war ich nicht wirklich zufrieden. Wenn ich abends nach Hause kam, ging ich als Erstes in meinen kleinen Garten. Dort konnte ich stundenlang Pflanzen umsetzen, Gemüse ernten oder einfach nur Unkraut zupfen. Das war meine Art, mich zu erholen.\n\nVor drei Jahren hatte unsere Firma große Probleme, und viele Stellen wurden gestrichen, auch meine. Am Anfang war ich schockiert. Ich hatte keine Ahnung, was ich jetzt machen sollte. Aber nachdem der erste Schreck vorbei war, sprach ich lange mit meinem Mann. Er fragte mich: „Was machst du eigentlich am liebsten?“ Die Antwort war einfach.\n\nMit 43 Jahren begann ich eine Ausbildung zur Gärtnerin. In meiner Klasse waren fast alle zwanzig Jahre jünger als ich. Die Arbeit war körperlich hart, und im ersten Winter hatte ich oft kalte Hände und Rückenschmerzen. Mehr als einmal wollte ich aufhören. Meine Mitschüler haben mich aber immer wieder motiviert, und im letzten Juli habe ich die Prüfung bestanden.\n\nHeute arbeite ich in einer Gärtnerei am Stadtrand. Ich verdiene weniger als früher, aber ich bin jeden Tag an der frischen Luft und sehe am Abend, was ich geschafft habe. Meine alten Kolleginnen besuchen mich manchmal und kaufen Blumen bei mir. Sie sagen, ich sehe zehn Jahre jünger aus. Ob das stimmt, weiß ich nicht. Aber eines weiß ich: Ich habe meinen Neuanfang nie bereut.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Im Versicherungsbüro hatte Heike unfreundliche Kolleginnen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « meine Kolleginnen waren nett ». Heike n’était pas satisfaite malgré de bonnes conditions (« trotzdem war ich nicht wirklich zufrieden »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Heike hat schon vor ihrer Ausbildung gern im Garten gearbeitet. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : le soir, elle allait d’abord dans son jardin et y passait des heures ; c’était sa manière de se détendre. Wenn + Präteritum décrit cette habitude.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Heike hat ihre Stelle selbst gekündigt. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : l’entreprise avait de gros problèmes et « viele Stellen wurden gestrichen, auch meine » : son poste a été supprimé. Elle n’a pas démissionné.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Heikes Mann hat auch eine neue Ausbildung begonnen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Le mari de Heike lui pose une question décisive, mais le texte ne dit rien de sa propre vie professionnelle : non mentionné.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Während der Ausbildung wollte Heike manchmal aufgeben. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « Mehr als einmal wollte ich aufhören. » aufhören et aufgeben veulent dire ici la même chose : arrêter, abandonner. Ses camarades l’ont motivée à continuer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Heike möchte später eine eigene Gärtnerei eröffnen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Heike travaille aujourd’hui dans une jardinerie, mais elle ne parle d’aucun projet d’ouvrir la sienne : non mentionné. Attention à ne pas compléter le texte avec ce qui semble logique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : se présenter au nouveau groupe",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : se présenter au nouveau groupe",
+        "description": "SITUATION\n[fr] Situation\nSie sind neu in einer Gruppe: Theater, Chor, Sport oder Sprachcafé, wie Sie möchten. Die Leiterin bittet alle neuen Mitglieder, sich in der Chatgruppe kurz vorzustellen. [fr] Vous êtes nouveau dans un groupe : théâtre, chorale, sport ou café linguistique, au choix. La responsable demande à tous les nouveaux membres de se présenter brièvement dans la discussion du groupe.\n\nAUFGABE\n[fr] Consigne\nSchreiben Sie eine Nachricht an die Gruppe (90 bis 130 Wörter). [fr] Écrivez un message au groupe (90 à 130 mots).\n• Wer sind Sie, und seit wann sind Sie in der Stadt oder in der Gruppe? [fr] Qui êtes-vous, et depuis quand êtes-vous dans la ville ou dans le groupe ?\n• Erzählen Sie von einem Neuanfang in Ihrem Leben: Was war vorher, was ist dann passiert? [fr] Racontez un nouveau départ dans votre vie : qu’y avait-il avant, que s’est-il passé ensuite ?\n• Warum möchten Sie in dieser Gruppe mitmachen? [fr] Pourquoi voulez-vous participer à ce groupe ?\n• Stellen Sie der Gruppe eine Frage. [fr] Posez une question au groupe.\n\nTIPP\n[fr] Astuce\nNehmen Sie das Modell vom Anfang des Moduls: Begrüßung, Ihre Geschichte, Ihre Erwartungen, eine Frage, ein Gruß. [fr] Reprenez le modèle du début du module : salutation, votre histoire, vos attentes, une question, une formule finale.\nErzählen Sie im Präteritum oder im Perfekt und verbinden Sie die Etappen mit als, nachdem und seitdem. [fr] Racontez au Präteritum ou au Perfekt et reliez les étapes avec als, nachdem et seitdem.\nSie schreiben an eine Gruppe, die sich duzt: ihr, euch, euer. [fr] Vous écrivez à un groupe qui se tutoie : ihr, euch, euer.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie Ihre Vorstellung an die neue Gruppe (90 bis 130 Wörter): wer Sie sind, Ihr Neuanfang, warum diese Gruppe, eine Frage. [fr] Écrivez votre présentation au nouveau groupe (90 à 130 mots) : qui vous êtes, votre nouveau départ, pourquoi ce groupe, une question.",
+          "maxChars": 1200,
+          "minWords": 90
+        },
+        "checklist": [
+          "Ich begrüße die Gruppe und duze alle: Hallo zusammen, ihr, euch. [fr] Je salue le groupe et je tutoie tout le monde.",
+          "Ich sage, wer ich bin und seit wann ich hier bin. [fr] Je dis qui je suis et depuis quand je suis là.",
+          "Ich erzähle meinen Neuanfang der Reihe nach, mit als, nachdem oder seitdem. [fr] Je raconte mon nouveau départ dans l’ordre.",
+          "Ich erkläre mit weil oder deshalb, warum ich mitmachen möchte. [fr] J’explique pourquoi je veux participer.",
+          "Ich stelle der Gruppe eine Frage und ende mit einem Gruß: Viele Grüße. [fr] Je pose une question au groupe et je termine par une formule."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : présentation, nouveau départ, motivation et question au groupe ; tutoiement (ihr, euch) respecté",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : raconter un tournant de sa vie",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : raconter un tournant de sa vie",
+        "description": "SITUATION\n[fr] Situation\nIm Deutschkurs erzählt jede Person von einem Wendepunkt in ihrem Leben. Sie nehmen Ihre Geschichte auf, etwa zwei Minuten lang. [fr] Au cours d’allemand, chacun raconte un tournant de sa vie. Vous enregistrez votre récit, environ deux minutes.\n\nAUFGABE\n[fr] Consigne\n• Wie war Ihr Leben vorher? [fr] Comment était votre vie avant ?\n• Was ist passiert? Was war der Wendepunkt? [fr] Que s’est-il passé ? Quel a été le tournant ?\n• Was war danach schwierig, und was hat Ihnen geholfen? [fr] Qu’est-ce qui a été difficile ensuite, et qu’est-ce qui vous a aidé ?\n• Wie geht es Ihnen heute damit? [fr] Où en êtes-vous aujourd’hui ?\n\nVORBEREITUNG\n[fr] Préparation\nÜberlegen Sie sich fünf Stichwörter, keine ganzen Sätze. Hören Sie noch einmal Samirs Bericht. [fr] Préparez mentalement cinq mots-clés, pas de phrases entières. Réécoutez le récit de Samir.\nSprechen Sie frei und verbinden Sie die Etappen: vorher, als, nachdem, seitdem, heute. [fr] Parlez librement et reliez les étapes : vorher, als, nachdem, seitdem, heute.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Erzählen Sie von einem Wendepunkt in Ihrem Leben: vorher, der Wendepunkt, danach, heute (etwa zwei Minuten). [fr] Racontez un tournant de votre vie : avant, le tournant, après, aujourd’hui (environ deux minutes).",
+          "maxSeconds": 120
+        },
+        "written": null,
+        "checklist": [
+          "Ich beschreibe im Präteritum oder im Perfekt, wie es vorher war: damals, vorher. [fr] Je présente au passé ma situation de départ.",
+          "Ich erzähle den Wendepunkt mit als oder nachdem; das Verb steht am Ende. [fr] Je raconte le tournant ; dans la subordonnée, le verbe est à la fin.",
+          "Ich sage, was schwierig war und was mir geholfen hat. [fr] Je dis ce qui a été difficile et ce qui m’a aidé.",
+          "Ich ende in der Gegenwart: Wie geht es mir heute? (seitdem, heute) [fr] Je termine au présent : où j’en suis aujourd’hui.",
+          "Ich spreche frei mit Stichwörtern und lese keinen Text vor. [fr] Je parle librement à partir de mots-clés, sans lire."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : avant, tournant, après et aujourd’hui sont racontés en deux minutes environ",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-neuanfang-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : Neuanfang",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : Neuanfang",
+        "description": "FAIRE LE POINT\nWas können Sie jetzt? Lesen Sie die Sätze und prüfen Sie sich selbst. [fr] Que savez-vous faire maintenant ? Lisez les phrases et évaluez-vous.\n• Ich kann eine wichtige Etappe in meinem Leben der Reihe nach erzählen. [fr] Je peux raconter dans l’ordre une étape importante de ma vie.\n• Ich kann sagen, wann etwas passiert ist: als, nachdem, seitdem. [fr] Je peux situer les moments d’un récit : als, nachdem, seitdem.\n• Ich kann auf die Geschichte von anderen reagieren und nachfragen. [fr] Je peux réagir au récit de quelqu’un et poser des questions.\n• Ich kann mich einer neuen Gruppe schriftlich vorstellen. [fr] Je peux me présenter par écrit à un nouveau groupe.\n• Ich kann die wichtigen Informationen aus einer E-Mail für eine andere Person notieren. [fr] Je peux noter pour une autre personne les informations importantes d’un courriel.\n\nSTRATÉGIES À GARDER\n• Lecture : d’abord le titre et la première phrase de chaque paragraphe, puis le détail ; « steht nicht im Text » quand le texte n’en dit rien.\n• Écoute : une première écoute globale (qui ? où ?), une deuxième écoute avec des mots-clés.\n• Production : un plan simple (avant, tournant, après, aujourd’hui) et des mots de liaison temporels.\n• Médiation : ne transmettre que ce dont la personne a besoin, en phrases courtes.\n\nÀ REVOIR SI BESOIN\n• Le Präteritum des verbes forts : exercice « S’entraîner : Präteritum, Plusquamperfekt, als ou wenn » du module Neuanfang.\n• als, wenn ou wann : leçon « Retenir » du module Neuanfang et exercice « Corriger » de cet atelier.\n• Le vocabulaire : der Umzug, sich eingewöhnen, Anschluss finden, Heimweh haben, eine Entscheidung treffen, Bescheid sagen (lexique sonore des deux modules).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-neuanfang-atelier-modell-aufbau",
+      "kind": "image",
+      "title": "Plan du message de présentation",
+      "alt": "Schéma en cinq étapes du message de Jonas : Begrüßung, Wer bin ich ?, Meine Geschichte, Warum diese Gruppe ?, Frage und Gruß.",
+      "image": {
+        "layout": "route",
+        "title": "Aufbau: eine Nachricht an die neue Gruppe",
+        "stepWidth": 160,
+        "steps": [
+          {
+            "icon": "hand",
+            "label": "Begrüßung",
+            "sub": "Hallo\nzusammen,"
+          },
+          {
+            "icon": "user",
+            "label": "Wer bin ich?",
+            "sub": "Name, seit\nwann dabei"
+          },
+          {
+            "icon": "route",
+            "label": "Meine\nGeschichte",
+            "sub": "vorher, als,\nseitdem"
+          },
+          {
+            "icon": "heart",
+            "label": "Warum diese\nGruppe?",
+            "sub": "Ich freue\nmich darauf …"
+          },
+          {
+            "icon": "message-circle",
+            "label": "Frage\nund Gruß",
+            "sub": "Viele Grüße"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-neuanfang-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle oral : Samir raconte un tournant",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Samir",
+          "text": "Ich möchte euch von einem Wendepunkt in meinem Leben erzählen. Vor vier Jahren arbeitete ich als Buchhalter in einer großen Firma in Lille. Die Arbeit war sicher, aber ich saß den ganzen Tag allein vor dem Computer, und das machte mich nicht glücklich."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Samir",
+          "text": "Dann kam ein Abend, den ich nie vergesse: Ein Freund hatte mich zu einem Kochkurs mitgenommen, und ich merkte plötzlich, wie viel Spaß mir das Kochen machte."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Samir",
+          "text": "Nachdem ich ein paar Monate lang jeden Samstag gekocht hatte, traf ich eine Entscheidung: Ich kündigte und machte eine Ausbildung zum Koch, hier in Deutschland. Das war nicht leicht. Ich musste Deutsch lernen, und am Anfang verstand ich in der Küche fast nichts."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann",
+          "name": "Samir",
+          "text": "Aber seitdem habe ich viel gelernt. Heute arbeite ich in einem Restaurant in Köln, und ich bin sehr froh, dass ich damals den Mut hatte. Im Nachhinein war das die beste Entscheidung meines Lebens."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q1",
+      "kind": "audio",
+      "title": "Réplique : Clara se présente",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Clara",
+          "text": "Hallo! Ich bin Clara. Ich bin auch neu hier, ich bin erst letzte Woche aus Lyon hergezogen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q2",
+      "kind": "audio",
+      "title": "Réplique : Ben parle de ses débuts",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Ben",
+          "text": "Am Anfang war es echt schwer für mich. Ich kannte niemanden, und mein Deutsch war noch nicht so gut."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q3",
+      "kind": "audio",
+      "title": "Réplique : Nora a changé de métier",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Nora",
+          "text": "Vor zwei Jahren habe ich meinen Job im Büro gekündigt und eine Ausbildung als Krankenpflegerin angefangen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q4",
+      "kind": "audio",
+      "title": "Réplique : Paul a oublié un prénom",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Paul",
+          "text": "Entschuldige, ich habe deinen Namen schon wieder vergessen. Wie heißt du noch mal?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · S’entraîner : réagir et relancer la conversation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Herzlich willkommen! Wie gefällt es dir bisher hier?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · S’entraîner : réagir et relancer la conversation",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das kann ich gut verstehen. Was hat dir dann geholfen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · S’entraîner : réagir et relancer la conversation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Spannend! Wie kam es zu dieser Entscheidung?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Atelier Neuanfang : se présenter à un nouveau groupe",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "sich vorstellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitmachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Mitglied, die Mitglieder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Treffen, die Treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Probe, die Proben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bescheid sagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "absagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zusagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zögern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich trauen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Grund, die Gründe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Nachhinein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich bin neu in …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich freue mich darauf, …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie kam es dazu?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Erzähl mal!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das kann ich gut verstehen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Viele Grüße"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

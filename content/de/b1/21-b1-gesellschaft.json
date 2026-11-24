@@ -1,0 +1,2334 @@
+{
+  "id": "b1-gesellschaft",
+  "title": "Gesellschaft : s’engager dans une association",
+  "objective": "Comprendre une annonce d’association et ses conditions, s’informer sur le bénévolat et faire une démarche simple, en reliant les idées avec des connecteurs doubles (sowohl … als auch, weder … noch) et des relatives (alles, was …).",
+  "prerequisites": [
+    "b1-umwelt-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : le Sprachcafé d’une association, un changement d’organisation."
+  ],
+  "grammarFocus": [
+    "zweiteilige-konnektoren",
+    "relativsaetze-was-wo"
+  ],
+  "layer": "content/b/source/b1/b1-gesellschaft.mjs",
+  "vocabulary": [
+    {
+      "id": "ehrenamt",
+      "word": "Ehrenamt",
+      "article": "das",
+      "plural": "Ehrenämter",
+      "partOfSpeech": "noun",
+      "translation": "le bénévolat, la fonction bénévole",
+      "example": "Sie hat seit drei Jahren ein Ehrenamt im Sportverein.",
+      "note": "ein Ehrenamt übernehmen",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "ehrenamtlich",
+      "word": "ehrenamtlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "bénévole",
+      "example": "Er arbeitet ehrenamtlich in der Hausaufgabenhilfe.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "verein",
+      "word": "Verein",
+      "article": "der",
+      "plural": "Vereine",
+      "partOfSpeech": "noun",
+      "translation": "l’association, le club",
+      "example": "Der Verein hilft Menschen, die neu in der Stadt sind.",
+      "note": "e. V. = eingetragener Verein (association déclarée)",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "mitglied",
+      "word": "Mitglied",
+      "article": "das",
+      "plural": "Mitglieder",
+      "partOfSpeech": "noun",
+      "translation": "le membre",
+      "example": "Man muss kein Mitglied sein, um zu helfen.",
+      "note": "Mitglied werden : adhérer",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "mitgliedsbeitrag",
+      "word": "Mitgliedsbeitrag",
+      "article": "der",
+      "plural": "Mitgliedsbeiträge",
+      "partOfSpeech": "noun",
+      "translation": "la cotisation",
+      "example": "Der Mitgliedsbeitrag kostet 24 Euro im Jahr.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "sich-engagieren-fuer",
+      "word": "sich engagieren für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’engager pour",
+      "example": "Viele Rentner engagieren sich für Kinder und Familien.",
+      "note": "+ accusatif · prononcé « angaschieren »",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "freiwillig",
+      "word": "freiwillig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "volontaire, de son plein gré",
+      "example": "Die Mitarbeit im Verein ist freiwillig.",
+      "note": "der/die Freiwillige : le/la bénévole",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "behoerde",
+      "word": "Behörde",
+      "article": "die",
+      "plural": "Behörden",
+      "partOfSpeech": "noun",
+      "translation": "l’administration, le service public",
+      "example": "Marta begleitet Familien zu den Behörden.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "antrag",
+      "word": "Antrag",
+      "article": "der",
+      "plural": "Anträge",
+      "partOfSpeech": "noun",
+      "translation": "la demande officielle",
+      "example": "Für das Führungszeugnis muss man einen Antrag stellen.",
+      "note": "einen Antrag stellen auf + accusatif",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "buergeramt",
+      "word": "Bürgeramt",
+      "article": "das",
+      "plural": "Bürgerämter",
+      "partOfSpeech": "noun",
+      "translation": "le guichet municipal (mairie de quartier)",
+      "example": "Das Bürgeramt ist montags bis 18 Uhr geöffnet.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "fuehrungszeugnis",
+      "word": "Führungszeugnis",
+      "article": "das",
+      "plural": "Führungszeugnisse",
+      "partOfSpeech": "noun",
+      "translation": "l’extrait de casier judiciaire",
+      "example": "Für die Arbeit mit Kindern braucht man ein Führungszeugnis.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "bestaetigung",
+      "word": "Bestätigung",
+      "article": "die",
+      "plural": "Bestätigungen",
+      "partOfSpeech": "noun",
+      "translation": "l’attestation, la confirmation",
+      "example": "Bringen Sie bitte die Bestätigung des Vereins mit.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "voraussetzung",
+      "word": "Voraussetzung",
+      "article": "die",
+      "plural": "Voraussetzungen",
+      "partOfSpeech": "noun",
+      "translation": "la condition (préalable)",
+      "example": "Eine Ausbildung ist keine Voraussetzung.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "zuverlaessig",
+      "word": "zuverlässig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "fiable, sérieux",
+      "example": "Wir suchen zuverlässige Helferinnen und Helfer.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "beitreten",
+      "word": "beitreten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "adhérer à, entrer dans",
+      "example": "Ich bin dem Verein letztes Jahr beigetreten.",
+      "note": "+ datif · séparable : bei|treten · Perfekt : ist beigetreten",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "teilnehmen-an",
+      "word": "teilnehmen an",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "participer à",
+      "example": "Alle können am Sprachcafé teilnehmen.",
+      "note": "+ datif · séparable : teil|nehmen",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "hausaufgabenhilfe",
+      "word": "Hausaufgabenhilfe",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’aide aux devoirs",
+      "example": "Die Hausaufgabenhilfe findet montags statt.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "begleiten",
+      "word": "begleiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "accompagner",
+      "example": "Sie begleitet eine Familie zum Bürgeramt.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "bescheid-geben",
+      "word": "Bescheid geben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prévenir, tenir au courant",
+      "example": "Gib mir bitte Bescheid, wenn du später kommst.",
+      "note": "jemandem Bescheid geben (+ datif)",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "einspringen",
+      "word": "einspringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "remplacer quelqu’un au pied levé",
+      "example": "Kannst du am Mittwoch für Lena einspringen?",
+      "note": "séparable : ein|springen · Perfekt : ist eingesprungen",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "sowohl-als-auch",
+      "word": "sowohl … als auch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "aussi bien … que, et … et",
+      "example": "Wir suchen sowohl Studierende als auch Rentner.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "weder-noch",
+      "word": "weder … noch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "ni … ni",
+      "example": "Sie müssen weder Mitglied sein noch etwas bezahlen.",
+      "note": "déjà négatif : sans nicht ni kein",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "entweder-oder",
+      "word": "entweder … oder",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "soit … soit, ou bien … ou bien",
+      "example": "Sie können entweder mittwochs oder samstags helfen.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "nicht-nur-sondern-auch",
+      "word": "nicht nur …, sondern auch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "non seulement …, mais aussi",
+      "example": "Das hilft nicht nur den Gästen, sondern auch den Helfern.",
+      "note": "virgule avant sondern",
+      "audio": {
+        "media": "b1-gesellschaft-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-gesellschaft-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : s’engager pour les autres",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : s’engager pour les autres",
+        "description": "GEMEINSAM STATT EINSAM\n[fr] Ensemble plutôt que seul\n\nIn Deutschland engagieren sich viele Menschen ehrenamtlich: im Sportverein, in der Schule, bei der Feuerwehr oder in der Nachbarschaft. [fr] En Allemagne, beaucoup de gens s’engagent bénévolement : au club de sport, à l’école, chez les pompiers volontaires ou dans le voisinage.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Sind Sie Mitglied in einem Verein oder in einer Gruppe? [fr] Êtes-vous membre d’une association ou d’un groupe ?\n• Wem würden Sie gern helfen: Kindern, älteren Menschen, Tieren? [fr] Qui aimeriez-vous aider : des enfants, des personnes âgées, des animaux ?\n• Wie viel Zeit hätten Sie pro Woche für ein Ehrenamt? [fr] Combien de temps auriez-vous par semaine pour du bénévolat ?\n\nAntworten Sie laut und in ganzen Sätzen. [fr] Répondez à voix haute, par des phrases complètes.\n\nDAS LERNEN SIE\n[fr] Objectifs\n• Ich kann die Anzeige eines Vereins und ihre Bedingungen verstehen. [fr] Je peux comprendre l’annonce d’une association et ses conditions.\n• Ich kann mich über ein Ehrenamt informieren. [fr] Je peux m’informer sur une activité bénévole.\n• Ich kann eine einfache Sache bei einer Behörde erledigen. [fr] Je peux faire une démarche simple dans une administration.\n• Ich kann Ideen verbinden: sowohl … als auch, weder … noch. [fr] Je peux relier des idées : et … et, ni … ni.\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• das Ehrenamt — le bénévolat\n• der Verein — l’association\n• das Mitglied — le membre\n• der Mitgliedsbeitrag — la cotisation\n• sich engagieren für — s’engager pour\n• freiwillig — volontaire\n• die Behörde — l’administration\n• der Antrag — la demande officielle",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein Gemeinschaftsgarten: Hier gärtnern Nachbarn zusammen.",
+          "media": "b1-gesellschaft-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-gesellschaft-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : l’annonce d’une association",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : l’annonce d’une association",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst die Überschrift und den ersten Absatz: Wer schreibt? Für wen? [fr] Lisez d’abord le titre et le premier paragraphe : qui écrit ? pour qui ?\nSuchen Sie bei Bedingungen kleine Wörter wie „müssen“, „brauchen“, „nur“ oder „kein“. [fr] Pour repérer les conditions, cherchez les petits mots comme « müssen », « brauchen », « nur » ou « kein ».\n\nMitmachen bei Türklinke e. V. – Nachbarn helfen Nachbarn\n\n(1) Türklinke ist ein Verein im Westviertel. Seit 2015 helfen wir Menschen, die neu in der Stadt sind. Unsere Mitglieder sind sowohl Studierende als auch Berufstätige und Rentner. Wir sind weder eine Partei noch eine religiöse Gruppe: Bei uns ist jeder willkommen.\n\n(2) Jeden zweiten Mittwoch findet in der Stadtbibliothek unser Sprachcafé statt. Dort sprechen Gäste und Helfer eine Stunde lang Deutsch, ohne Druck und ohne Noten. Außerdem gibt es montags und donnerstags eine Hausaufgabenhilfe für Kinder der Klassen 3 bis 6. Wer Fragen zu Formularen hat, kann einen Termin bei unseren Behördenlotsen bekommen: Sie erklären Briefe und begleiten Menschen zu den Ämtern.\n\n(3) Wir suchen Freiwillige, die regelmäßig Zeit haben, zum Beispiel einmal pro Woche oder zweimal im Monat. Sie brauchen keine pädagogische Ausbildung. Wichtig ist nur, dass Sie zuverlässig sind und gern mit Menschen arbeiten. Sie können entweder im Sprachcafé oder bei der Hausaufgabenhilfe anfangen.\n\n(4) Als Helferin oder Helfer müssen Sie weder Mitglied sein noch einen Beitrag zahlen. Wer den Verein unterstützen möchte, kann aber gern Mitglied werden: Der Beitrag kostet 24 Euro im Jahr, für Studierende und Menschen ohne Einkommen 12 Euro. Mitglieder dürfen auf der Jahresversammlung mitbestimmen, was der Verein im nächsten Jahr plant.\n\n(5) Für die Arbeit mit Kindern brauchen Sie ein erweitertes Führungszeugnis. Sie beantragen es im Bürgeramt. Für Ehrenamtliche ist es kostenlos, wenn Sie eine Bestätigung des Vereins mitbringen. Während Ihres Einsatzes sind Sie über den Verein versichert, und Fahrtkosten zahlen wir Ihnen zurück.\n\nInteresse? Dann kommen Sie zu unserem Infoabend am 3. März um 18 Uhr in die Stadtbibliothek, Raum 2. Wir freuen uns auf Sie!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-lesen-steckbrief",
+          "caption": "Türklinke e. V. auf einen Blick",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was für ein Text ist das? [fr] De quel type de texte s’agit-il ?",
+          "explanation": "Le titre « Mitmachen bei Türklinke » et le paragraphe 3 (« Wir suchen Freiwillige … ») montrent qu’il s’agit d’une annonce pour recruter des bénévoles. Le texte précise même que l’association n’est pas un parti (« weder eine Partei … »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Zeitungsartikel über eine neue Partei.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Anzeige, mit der ein Verein Helfer sucht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ein Formular für einen Antrag im Bürgeramt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Für wen ist der Text vor allem geschrieben? [fr] À qui le texte s’adresse-t-il surtout ?",
+          "explanation": "Le texte s’adresse à de futurs bénévoles : il dit ce qu’ils peuvent faire, ce qu’il leur faut et les invite à la soirée d’information. Les enfants profitent de l’aide aux devoirs, mais ils ne sont pas les lecteurs visés.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Für Kinder, die Hilfe bei den Hausaufgaben brauchen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Für Mitarbeiter des Bürgeramts.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Für Menschen, die ehrenamtlich helfen möchten.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Für die Hausaufgabenhilfe braucht man eine pädagogische Ausbildung.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Sie brauchen keine pädagogische Ausbildung » (paragraphe 3). Il faut seulement être fiable et aimer travailler avec les gens, plus un extrait de casier judiciaire pour travailler avec des enfants.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Mitglieder können mitentscheiden, was der Verein plant.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « Mitglieder dürfen auf der Jahresversammlung mitbestimmen, was der Verein … plant » (paragraphe 4). « mitbestimmen » et « mitentscheiden » ont le même sens.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Der Verein bekommt Geld von der Stadt.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Non mentionné : le texte parle des cotisations des membres et du remboursement des frais de transport, mais jamais d’une subvention de la ville.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was muss man für die Arbeit mit Kindern tun? [fr] Que faut-il faire pour travailler avec des enfants ?",
+          "explanation": "Paragraphe 5 : « Für die Arbeit mit Kindern brauchen Sie ein erweitertes Führungszeugnis. Sie beantragen es im Bürgeramt. » La cotisation et l’adhésion sont facultatives pour les bénévoles (paragraphe 4).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Führungszeugnis im Bürgeramt beantragen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Einen Beitrag von 24 Euro im Jahr an den Verein zahlen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Mitglied im Verein werden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? [fr] Quel intertitre va avec quel paragraphe ?",
+          "explanation": "Repérez l’idée de chaque paragraphe : présentation de l’association (1), Sprachcafé, aide aux devoirs et accompagnement (2), profil des bénévoles (3), adhésion et cotisation (4), démarches pratiques, assurance et frais (5).",
+          "pairs": [
+            {
+              "left": "Absatz 1",
+              "right": "Wer wir sind"
+            },
+            {
+              "left": "Absatz 2",
+              "right": "Unsere Angebote"
+            },
+            {
+              "left": "Absatz 3",
+              "right": "Wen wir suchen"
+            },
+            {
+              "left": "Absatz 4",
+              "right": "Mitglied werden: muss das sein?"
+            },
+            {
+              "left": "Absatz 5",
+              "right": "Gut zu wissen"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Wörtern aus dem Text. [fr] Complétez avec des mots du texte.",
+          "text": "„Sie erklären Briefe und begleiten Menschen zu den Ämtern“ (Absatz 2): „Sie“ sind die [[1]]. Für Ehrenamtliche ist das Führungszeugnis [[2]].",
+          "explanation": "« Sie » reprend le dernier nom au pluriel de la phrase précédente : « unseren Behördenlotsen » (les guides pour les démarches administratives). L’extrait de casier est « kostenlos » (gratuit) pour les bénévoles qui apportent l’attestation de l’association.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Behördenlotsen"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kostenlos",
+                "gratis",
+                "umsonst"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : un changement d’organisation",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : un changement d’organisation",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Was ändert sich? Achten Sie nur auf das Wichtigste. [fr] Première écoute : qu’est-ce qui change ? Retenez seulement l’essentiel.\nBeim zweiten Hören: Achten Sie auf Uhrzeiten und Orte. [fr] Deuxième écoute : soyez attentif aux heures et aux lieux.\n\nDIE SITUATION\n[fr] La situation\nNadine organisiert das Sprachcafé des Vereins Türklinke. Sie ruft Samir an, einen neuen Helfer. [fr] Nadine organise le Sprachcafé de l’association Türklinke. Elle appelle Samir, un nouveau bénévole.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-hoeren-anruf",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Raum frei: ab Viertel vor [[1]] · Schlüssel und [[2]]: an der Information · Eingang: [[3]] · Ideen sammeln: um [[4]] Uhr",
+          "explanation": "Nadine : « erst um Viertel vor sechs » (17 h 45), « die Namensschilder » sont à l’accueil avec la clé, l’entrée se fait « in der Lindenstraße » car la cour est fermée, et « um sieben sammeln wir Ideen ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sechs",
+                "6"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Namensschilder",
+                "die Namensschilder"
+              ],
+              "size": 19,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Lindenstraße",
+                "in der Lindenstraße",
+                "Lindenstrasse"
+              ],
+              "size": 20,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "sieben",
+                "7",
+                "19"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum kann man nicht durch den Hof gehen? [fr] Pourquoi ne peut-on pas passer par la cour ?",
+          "explanation": "« Der Hof ist gesperrt, weil dort gebaut wird » : il y a des travaux. La lecture a lieu dans la salle (jusqu’à 17 h 30), et l’ascenseur de derrière est seulement inaccessible.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil dort eine Lesung stattfindet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil der Aufzug kaputt ist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil dort gebaut wird.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was soll Samir am Anfang machen? [fr] Que doit faire Samir au début ?",
+          "explanation": "Lena, qui accueille d’habitude les invités, arrive à 18 h 20. Nadine demande donc : « Könntest du am Anfang an der Tür stehen? ». Les boissons, il y en a déjà assez.",
+          "options": [
+            {
+              "id": "a",
+              "label": "An der Tür stehen und die Gäste begrüßen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Vorher Getränke für alle Gäste kaufen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Lena nach der Arbeit mit dem Auto abholen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was gilt für neue Gäste? [fr] Qu’est-ce qui vaut pour les nouveaux invités ?",
+          "explanation": "« Man muss sich weder anmelden noch etwas bezahlen. Die Leute können einfach kommen. » « weder … noch » exclut les deux choses à la fois.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie müssen sich vorher bei Nadine anmelden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie müssen sich weder anmelden noch etwas bezahlen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie zahlen einen kleinen Beitrag an der Tür.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was erzählt Samir über eine Frau aus seinem Kurs? [fr] Que dit Samir d’une femme de son cours ?",
+          "explanation": "« Eine Frau aus meinem Deutschkurs sitzt im Rollstuhl » : c’est pour elle qu’il demande s’il y a un ascenseur à l’entrée de la Lindenstraße. Nadine répond qu’il se trouve juste à droite de l’entrée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie möchte als Helferin mitmachen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie kommt später, weil sie am Mittwoch länger arbeitet.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sitzt im Rollstuhl und braucht einen Aufzug.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Worüber freut sich Nadine besonders? [fr] De quoi Nadine se réjouit-elle particulièrement ?",
+          "explanation": "« Diesmal kommen übrigens sowohl neue Gäste als auch zwei neue Helferinnen. Darüber freue ich mich sehr. » « darüber » reprend toute l’information qui précède.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es kommen sowohl neue Gäste als auch neue Helferinnen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Bibliothek gibt dem Verein einen größeren Raum.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Samir bringt Getränke mit.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : relier deux idées, préciser avec was et wo",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : relier deux idées, préciser avec was et wo",
+        "description": "Lesen Sie die Sätze aus der Anzeige und aus dem Telefongespräch. Beantworten Sie dann die Fragen. [fr] Lisez les phrases tirées de l’annonce et de l’appel, puis répondez aux questions.\n\nSatz 1: Unsere Mitglieder sind sowohl Studierende als auch Berufstätige.\nSatz 2: Sie müssen weder Mitglied sein noch einen Beitrag zahlen.\nSatz 3: Sie können entweder im Sprachcafé oder bei der Hausaufgabenhilfe anfangen.\nSatz 4: Wir sind weder eine Partei noch eine religiöse Gruppe.\nSatz 5: Mitglieder dürfen mitbestimmen, was der Verein im nächsten Jahr plant.\nSatz 6: Das ist der Teil, der mir am wichtigsten ist.\nSatz 7: In der Bibliothek, wo das Sprachcafé stattfindet, gibt es einen Aufzug.\n\nAchten Sie auf die Wörter, die zusammengehören, und auf die Wörter am Anfang der Nebensätze. [fr] Observez les mots qui vont par deux et les mots qui ouvrent les subordonnées.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Was bedeuten die Konnektoren? [fr] Que signifient ces connecteurs ?",
+          "explanation": "Ces connecteurs vont toujours par deux. Phrase 1 : étudiants et actifs à la fois. Phrases 2 et 4 : aucune des deux choses. Phrase 3 : l’une ou l’autre. « nicht nur …, sondern auch » ajoute un second élément en le mettant en valeur.",
+          "pairs": [
+            {
+              "left": "sowohl … als auch",
+              "right": "et … et (les deux)"
+            },
+            {
+              "left": "weder … noch",
+              "right": "ni … ni"
+            },
+            {
+              "left": "entweder … oder",
+              "right": "soit … soit (l’un des deux)"
+            },
+            {
+              "left": "nicht nur …, sondern auch",
+              "right": "non seulement …, mais aussi"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 2 und 4: Braucht man mit „weder … noch“ noch „nicht“ oder „kein“? [fr] Phrases 2 et 4 : faut-il ajouter « nicht » ou « kein » avec « weder … noch » ?",
+          "explanation": "« weder … noch » contient déjà la négation, comme « ni … ni ». On dit « Sie müssen weder Mitglied sein noch … zahlen », sans « nicht » ni « kein ». Ajouter une seconde négation est une erreur fréquente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, nach „weder“ steht immer „kein“.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, „weder … noch“ ist schon negativ.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ja, am Satzende steht „nicht“.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 5 und 7: Wann benutzt man „was“ und „wo“? [fr] Phrases 5 et 7 : quand emploie-t-on « was » et « wo » ?",
+          "explanation": "« was » ouvre une subordonnée qui ne reprend pas un nom précis (« mitbestimmen, was … », « alles, was … », « das, was … »). « wo » reprend un lieu (« in der Bibliothek, wo … »). Après un nom ordinaire (« der Teil »), on garde der, die, das.",
+          "options": [
+            {
+              "id": "a",
+              "label": "„was“ nach einem Ort, „wo“ nach einer Person.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "„was“ und „wo“ ersetzen „der, die, das“ nach jedem Nomen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„was“ für eine Sache ohne Nomen, „wo“ nach einem Ort.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 6: Warum steht hier „der“ und nicht „was“? [fr] Phrase 6 : pourquoi a-t-on « der » et non « was » ici ?",
+          "explanation": "Le pronom relatif reprend le nom « der Teil » (masculin, sujet de la relative) : « der Teil, der … ». « was » ne s’emploie que sans nom précis à reprendre, après alles, etwas, nichts, das ou un superlatif (« das Beste, was … »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil der Relativsatz das Nomen „der Teil“ beschreibt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil nach „das ist“ im Relativsatz immer „der“ steht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil man „was“ nur in Fragen und nie im Relativsatz benutzt.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesellschaft-regel",
+      "kind": "lesson",
+      "title": "Retenir : connecteurs doubles et relatives avec was et wo",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Retenir : connecteurs doubles et relatives avec was et wo",
+        "description": "À RETENIR — 1. LES CONNECTEURS DOUBLES\nIls relient deux mots, deux groupes ou deux propositions. Les deux éléments vont toujours ensemble.\n• sowohl … als auch → et … et : Wir suchen sowohl Studierende als auch Rentner.\n• weder … noch → ni … ni (déjà négatif) : Ich habe weder Zeit noch Geld.\n• entweder … oder → soit … soit : Wir treffen uns entweder am Mittwoch oder am Samstag.\n• nicht nur …, sondern auch → non seulement …, mais aussi : Das hilft nicht nur den Gästen, sondern auch den Helfern.\n• zwar …, aber → certes …, mais : Die Arbeit ist zwar anstrengend, aber sie macht Spaß.\n\nQuand ils relient deux sujets, le verbe se met au pluriel avec sowohl … als auch : Sowohl Lena als auch Samir helfen mit.\n« zwar » se place après le verbe conjugué ; « aber » ouvre la seconde proposition sans changer l’ordre des mots : aber sie macht Spaß.\n\nÀ RETENIR — 2. LES RELATIVES AVEC WAS ET WO\n• was reprend une chose sans nom précis, après alles, etwas, nichts, vieles, das, ou un superlatif employé comme nom.\nDas ist alles, was ich weiß.\nDas Beste, was du tun kannst, ist mitmachen.\n• wo reprend un lieu (ville, pays, bâtiment, « dort ») ; on peut aussi employer préposition + pronom relatif.\nIn der Bibliothek, wo das Café stattfindet, gibt es einen Aufzug.\nIn der Bibliothek, in der das Café stattfindet, gibt es einen Aufzug.\n\nÀ RETENIR — 3. RAPPEL : RELATIVES AVEC PRÉPOSITION\nLa préposition vient avant le pronom relatif ; le cas dépend de la préposition, le genre du nom repris.\nDer Verein, für den ich mich engagiere, sucht Helfer.\nDie Kinder, mit denen ich lerne, sind in der vierten Klasse.\n\nATTENTION\n• « ce que » se traduit par was, jamais par das : Das ist alles, was ich weiß.\n• « le jour où » ne se dit pas « der Tag, wo » à l’écrit soigné, mais der Tag, an dem … ou als … : Ich erinnere mich an den Tag, an dem ich angekommen bin.\n• Pas de double négation : « Ich habe weder Zeit noch Geld », jamais « weder keine Zeit ».\n• Virgule obligatoire devant sondern et devant aber ; jamais de virgule devant als auch, noch ou oder dans un connecteur double qui relie deux mots.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-gesellschaft-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : connecteurs doubles et relatives",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : connecteurs doubles et relatives",
+        "description": "Üben Sie die Konnektoren und die Relativsätze. Lesen Sie zuerst den ganzen Satz. [fr] Entraînez-vous aux connecteurs et aux relatives. Lisez d’abord toute la phrase.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konnektor: Nur eine von zwei Möglichkeiten passt. [fr] Complétez avec le connecteur « soit … soit ».",
+          "text": "Ich kann [[1]] am Mittwoch [[2]] am Samstag helfen.",
+          "explanation": "« entweder … oder » propose deux possibilités dont une seule sera retenue. Ici, il relie deux compléments de temps.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "entweder"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "oder"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konnektor: Beide Gruppen sind gemeint. [fr] Complétez avec le connecteur « et … et ».",
+          "text": "Wir suchen [[1]] Studierende [[2]] auch Rentnerinnen und Rentner.",
+          "explanation": "« sowohl … als auch » : les deux groupes sont concernés. Ne confondez pas avec « als » du comparatif : ici, « als auch » forme un tout.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "sowohl"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "als"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welcher Satz bedeutet: Man muss kein Mitglied sein und keinen Beitrag zahlen? [fr] Quelle phrase signifie : on ne doit pas être membre ni payer de cotisation ?",
+          "explanation": "« weder … noch » exclut les deux éléments : ni membre, ni cotisation. « entweder … oder » imposerait l’un des deux, « sowohl … als auch » les deux.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man muss entweder Mitglied sein oder einen Beitrag zahlen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Man muss sowohl Mitglied sein als auch einen Beitrag zahlen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man muss weder Mitglied sein noch einen Beitrag zahlen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Arbeit",
+              "ist",
+              "zwar",
+              "anstrengend,",
+              "aber",
+              "sie",
+              "macht",
+              "Spaß."
+            ]
+          ],
+          "explanation": "« zwar » suit le verbe conjugué « ist ». Après la virgule, « aber » n’occupe aucune place dans la proposition : on a ensuite l’ordre normal sujet + verbe (« sie macht Spaß »)."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konnektor: Das Zweite kommt noch dazu. [fr] Complétez : « non seulement …, mais aussi ».",
+          "text": "Das Sprachcafé hilft nicht [[1]] den Gästen, [[2]] auch den Helfern.",
+          "explanation": "« nicht nur …, sondern auch » : le second élément s’ajoute au premier. Après une négation, « mais » se dit « sondern » (et non « aber »), précédé d’une virgule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "nur"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "sondern"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Konnektoren passen? „Ich habe … Zeit … Lust, heute mitzukommen.“ [fr] Quels connecteurs conviennent ? (Je n’ai ni le temps ni l’envie de venir aujourd’hui.)",
+          "explanation": "La phrase française contient « ni … ni » : on choisit « weder … noch ». Avec « sowohl … als auch », la personne aurait au contraire le temps et l’envie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "entweder … oder",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "weder … noch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "sowohl … als auch",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Relativpronomen. [fr] Complétez avec le pronom relatif.",
+          "text": "Das ist alles, [[1]] ich über den Verein weiß. In der Stadt, [[2]] ich wohne, gibt es viele Vereine.",
+          "explanation": "Après « alles », on emploie « was ». Pour reprendre un lieu, « wo » convient ; « in der » (préposition + pronom relatif, die Stadt) est aussi juste.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wo",
+                "in der"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? „Der Verein, … ich mich engagiere, sucht Helfer.“ [fr] Quelle forme est juste ? (L’association pour laquelle je m’engage cherche des bénévoles.)",
+          "explanation": "« sich engagieren für + accusatif » : la préposition passe devant le pronom relatif. « der Verein » est masculin, donc « für den ». « was » ne reprend pas un nom précis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "für den",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "für das",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "was",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "match",
+          "prompt": "Welche Satzteile passen zusammen? [fr] Quelles parties de phrase vont ensemble ?",
+          "explanation": "« das Beste » (superlatif employé comme nom) → was ; une ville → wo ; « die Kollegin » (féminin, mit + datif) → mit der ; « der Verein » (masculin, für + accusatif) → für den.",
+          "pairs": [
+            {
+              "left": "Das Beste,",
+              "right": "was du tun kannst, ist mitmachen."
+            },
+            {
+              "left": "In Leipzig,",
+              "right": "wo meine Schwester wohnt, gibt es viele Vereine."
+            },
+            {
+              "left": "Die Kollegin,",
+              "right": "mit der ich arbeite, kommt aus Polen."
+            },
+            {
+              "left": "Der Verein,",
+              "right": "für den ich spende, hilft Kindern."
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Das",
+              "ist",
+              "die Frau,",
+              "mit",
+              "der",
+              "ich",
+              "im Sprachcafé",
+              "arbeite."
+            ]
+          ],
+          "explanation": "Relative avec préposition : « mit » + « der » (die Frau, datif féminin) ouvre la relative, et le verbe conjugué « arbeite » va à la fin."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesellschaft-wortschatz",
+      "kind": "exercise",
+      "title": "Mots et formules : bénévolat et démarches",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mots et formules : bénévolat et démarches",
+        "description": "Lernen Sie die Wörter in festen Verbindungen. [fr] Apprenez les mots dans leurs associations fixes.\n\nREDEMITTEL\n[fr] Formules utiles\n• s’informer : Ich interessiere mich für … Was muss ich mitbringen?\n• demander une condition : Muss man dafür Mitglied sein? Braucht man Erfahrung?\n• au guichet : Ich möchte einen Antrag auf … stellen.\n• proposer son aide : Ich könnte einmal pro Woche helfen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? [fr] Quel verbe va avec quel nom ?",
+          "explanation": "Associations figées : ein Ehrenamt übernehmen (prendre une fonction bénévole), einen Antrag stellen (déposer une demande), Mitglied werden (adhérer), einen Beitrag zahlen, jemandem Bescheid geben (prévenir quelqu’un).",
+          "pairs": [
+            {
+              "left": "ein Ehrenamt",
+              "right": "übernehmen"
+            },
+            {
+              "left": "einen Antrag",
+              "right": "stellen"
+            },
+            {
+              "left": "Mitglied",
+              "right": "werden"
+            },
+            {
+              "left": "einen Beitrag",
+              "right": "zahlen"
+            },
+            {
+              "left": "jemandem Bescheid",
+              "right": "geben"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie ein Wort aus derselben Familie. [fr] Complétez avec un mot de la même famille.",
+          "text": "das Ehrenamt → [[1]] (bénévole, adjectif) · freiwillig → die [[2]] (les bénévoles) · das Mitglied → die [[3]] (l’adhésion)",
+          "explanation": "Le suffixe -lich forme un adjectif : ehrenamtlich. L’adjectif devient un nom décliné : der/die Freiwillige, die Freiwilligen. Le suffixe -schaft forme un nom féminin : die Mitgliedschaft.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ehrenamtlich"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Freiwilligen"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Mitgliedschaft"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr] Complétez avec la préposition.",
+          "text": "sich engagieren [[1]] (+ Akk.) · sich bewerben [[2]] eine Stelle (+ Akk.) · teilnehmen [[3]] (+ Dat.)",
+          "explanation": "Verbes à préposition (thème 2) : sich engagieren für etwas, sich bewerben um eine Stelle, teilnehmen an einem Kurs. La préposition est figée : apprenez-la avec le verbe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "um"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten sich über ein Ehrenamt informieren. Was sagen Sie? [fr] Vous voulez vous renseigner sur une activité bénévole. Que dites-vous ?",
+          "explanation": "On se présente avec « Ich interessiere mich für … » (+ accusatif), puis on pose une question pratique. La troisième phrase est un ordre impoli ; la première raconte une expérience au lieu de demander une information.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe gestern zum ersten Mal bei der Hausaufgabenhilfe gearbeitet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich interessiere mich für die Hausaufgabenhilfe. Was muss ich mitbringen?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Geben Sie mir bitte sofort eine Stelle bei der Hausaufgabenhilfe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie fragen höflich nach einer Bedingung. Was passt? [fr] Vous demandez poliment une condition. Quelle phrase convient ?",
+          "explanation": "« Muss man dafür … ? » demande une condition de façon neutre (« dafür » = pour cela). La deuxième phrase est une affirmation, la troisième une critique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Muss man dafür Mitglied im Verein sein?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich bin kein Mitglied und möchte auch keins werden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Warum gibt es so viele Regeln?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Im Bürgeramt: Was sagen Sie am Schalter? [fr] Au guichet municipal : que dites-vous ?",
+          "explanation": "Formule administrative : « einen Antrag auf + accusatif stellen ». Au guichet, on vouvoie : « gib mir » (tutoiement) ne convient pas. La deuxième phrase ne correspond pas à la situation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo, gib mir bitte schnell ein Führungszeugnis für den Verein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Guten Tag, ich habe mein altes Führungszeugnis leider verloren.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Guten Tag, ich möchte einen Antrag auf ein Führungszeugnis stellen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. [fr] Complétez.",
+          "text": "Ich kann leider nicht kommen. Kannst du für mich [[1]]? Gib mir bitte [[2]], ob das klappt.",
+          "explanation": "« für jemanden einspringen » : remplacer quelqu’un au pied levé (verbe séparable, ici à l’infinitif après « kannst du »). « jemandem Bescheid geben » : prévenir, donner une réponse.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "einspringen"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bescheid"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesellschaft-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : se renseigner et proposer son aide",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : se renseigner et proposer son aide",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\n\nSprechen Sie zuerst langsam, dann im normalen Tempo. [fr] Répétez d’abord lentement, puis à vitesse normale.\nBetonen Sie beide Teile der Konnektoren: entweder … oder, zwar … aber. [fr] Accentuez les deux parties des connecteurs : entweder … oder, zwar … aber.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich interessiere mich für ein Ehrenamt im Sprachcafé.",
+          "accept": [
+            "Ich interessiere mich für ein Ehrenamt im Sprachcafé."
+          ],
+          "explanation": "« sich interessieren für » + accusatif. L’accent de « Ehrenamt » porte sur la première syllabe : EHrenamt.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Muss man dafür Mitglied im Verein sein?",
+          "accept": [
+            "Muss man dafür Mitglied im Verein sein?"
+          ],
+          "explanation": "Question fermée : la voix monte à la fin. « dafür » reprend l’activité dont on parle.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich kann entweder mittwochs oder samstags helfen.",
+          "accept": [
+            "Ich kann entweder mittwochs oder samstags helfen."
+          ],
+          "explanation": "Accentuez « mittwochs » et « samstags », les deux possibilités. Les jours avec -s (mittwochs) signifient « le mercredi » (chaque semaine).",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich habe zwar wenig Erfahrung, aber viel Motivation.",
+          "accept": [
+            "Ich habe zwar wenig Erfahrung, aber viel Motivation."
+          ],
+          "explanation": "« zwar … aber » : on concède un point faible, puis on met en avant un point fort. La voix monte légèrement sur « Erfahrung » et retombe sur « Motivation ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das ist genau das, was ich suche.",
+          "accept": [
+            "Das ist genau das, was ich suche."
+          ],
+          "explanation": "Relative avec « was » après « das ». Accentuez « genau ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich möchte einen Antrag auf ein Führungszeugnis stellen.",
+          "accept": [
+            "Ich möchte einen Antrag auf ein Führungszeugnis stellen."
+          ],
+          "explanation": "Formule de guichet. « Führungszeugnis » : accent sur la première syllabe, le « ü » se prononce lèvres arrondies.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-gesellschaft-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-lesen2",
+      "kind": "exercise",
+      "title": "Comprendre : le portrait d’une bénévole",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : le portrait d’une bénévole",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nDie Fragen 5 und 6 sind Diktate: Hören Sie die Sätze und schreiben Sie sie. [fr] Les questions 5 et 6 sont des dictées : écoutez les phrases et écrivez-les.\n\nPORTRÄT: EINE STUNDE, DIE ZÄHLT\n[fr] Portrait : une heure qui compte\n\nMarta Nowak ist 41, Krankenpflegerin und Mutter von zwei Kindern. Freizeit hat sie wenig. Trotzdem verbringt sie jeden Montagnachmittag in der Grundschule am Westpark, wo der Verein Türklinke eine Hausaufgabenhilfe organisiert. „Viele denken, dass man für ein Ehrenamt sehr viel Zeit braucht“, sagt sie. „Aber man braucht weder Erfahrung noch viel Zeit, nur ein bisschen Geduld.“\n\nVor zwölf Jahren ist Marta selbst aus Polen nach Deutschland gekommen. Damals verstand sie die Briefe von den Ämtern kaum. „Eine Nachbarin hat mir geholfen, alle Formulare auszufüllen. Das ist etwas, was ich nie vergessen habe.“ Heute gibt Marta diese Hilfe weiter. Montags betreut sie drei Kinder aus der vierten Klasse. Sie üben sowohl Lesen als auch Rechnen. „Das Schönste ist, wenn ein Kind plötzlich allein einen ganzen Satz lesen kann.“ Einmal im Monat begleitet sie außerdem Familien zum Bürgeramt, wenn sie Hilfe bei einem Antrag brauchen.\n\nIst das nicht anstrengend? „Doch, manchmal schon“, sagt Marta und lacht. „Nach einer Nachtschicht bin ich zwar müde, aber die Kinder geben mir viel Energie zurück.“ Nicht nur die Kinder, sondern auch Marta selbst lernt dabei etwas: „Ich bin geduldiger geworden, und mein Deutsch ist auch noch besser geworden!“\n\nIhr Tipp für alle, die sich engagieren möchten: „Fangen Sie klein an. Eine Stunde pro Woche ist mehr, als viele denken.“",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Porträt? [fr] De quoi parle le portrait ?",
+          "explanation": "Marta est infirmière (« Krankenpflegerin ») et aide bénévolement des enfants et des familles en plus de son travail. Elle n’est pas enseignante : elle intervient à l’école dans le cadre de l’association.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um eine Lehrerin, die an einer Grundschule arbeitet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um eine Frau, die neben ihrem Beruf Kindern und Familien hilft.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Um eine Familie, die gerade nach Deutschland gekommen ist.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "„Marta hat in Polen einer Nachbarin mit Formularen geholfen.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : c’est l’inverse. Quand Marta est arrivée en Allemagne, « eine Nachbarin hat mir geholfen, alle Formulare auszufüllen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Marta arbeitet manchmal nachts.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : elle parle d’une « Nachtschicht » (garde de nuit) après laquelle elle est fatiguée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum begleitet Marta Familien zum Bürgeramt? [fr] Pourquoi Marta accompagne-t-elle des familles au guichet municipal ?",
+          "explanation": "« Heute gibt Marta diese Hilfe weiter » : elle transmet l’aide reçue de sa voisine. Le texte ne dit pas qu’elle a travaillé à la mairie, et le bénévolat n’est pas rémunéré.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil sie früher selbst lange im Bürgeramt gearbeitet hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil der Verein sie für diese Begleitung gut bezahlt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil sie am Anfang selbst Hilfe bekommen hat.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Marta hilft den Kindern sowohl beim Lesen als auch beim Rechnen."
+          ],
+          "voice": "frau2",
+          "explanation": "« sowohl … als auch » relie les deux activités. « beim Lesen », « beim Rechnen » : infinitifs employés comme noms, donc avec majuscule (bei + dem = beim).",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Wer sich engagieren möchte, sollte zuerst mit einer Stunde pro Woche anfangen."
+          ],
+          "voice": "sprecher",
+          "explanation": "« Wer … möchte, sollte … » : la relative en « wer » joue le rôle de sujet, puis le verbe « sollte » ouvre la principale. « anfangen » reste en un mot à l’infinitif.",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-gesellschaft-lesen2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-lesen2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : association, démarches, connecteurs et relatives",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : association, démarches, connecteurs et relatives",
+        "description": "Hören Sie die Nachricht für die Fragen 1 und 2. Lösen Sie dann die anderen Aufgaben. [fr] Écoutez le message pour les questions 1 et 2, puis faites les autres exercices.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-kontrolle-nachricht",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wo kann Frau Diallo mitmachen? [fr] Où Mme Diallo peut-elle participer ?",
+          "explanation": "« Sie können sowohl im Sprachcafé als auch bei der Hausaufgabenhilfe mitmachen » : les deux activités lui sont ouvertes, avec une condition pour l’aide aux devoirs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nur im Sprachcafé.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sowohl im Sprachcafé als auch bei der Hausaufgabenhilfe.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Weder im Sprachcafé noch bei der Hausaufgabenhilfe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was muss sie für das Führungszeugnis ins Bürgeramt mitbringen? [fr] Que doit-elle apporter au guichet pour l’extrait de casier ?",
+          "explanation": "« Für Ehrenamtliche ist es kostenlos, wenn Sie unsere Bestätigung mitbringen. » Nadine lui envoie cette attestation par courriel. Aucun frais n’est à payer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine Bestätigung des Vereins.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Eine Gebühr von dreizehn Euro.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Foto und ihren Mietvertrag.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konnektor. [fr] Complétez avec le connecteur.",
+          "text": "Sie können [[1]] Mitglied werden [[2]] einfach nur mithelfen. Beides ist möglich.",
+          "explanation": "Deux possibilités, au choix : « entweder … oder ». « Beides ist möglich » confirme qu’il ne s’agit pas de « weder … noch ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "entweder"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "oder"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Relativpronomen. [fr] Complétez avec le pronom relatif.",
+          "text": "Das Bürgeramt, [[1]] man das Führungszeugnis beantragt, ist in der Hauptstraße. Das ist alles, [[2]] Sie wissen müssen.",
+          "explanation": "Un lieu : « wo » (ou « in dem », « bei dem », das Bürgeramt étant neutre). Après « alles » : « was ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wo",
+                "in dem",
+                "bei dem"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "suche",
+              "einen Verein,",
+              "in",
+              "dem",
+              "ich",
+              "Kindern",
+              "helfen",
+              "kann."
+            ]
+          ],
+          "explanation": "Relative avec préposition : « in dem » (der Verein, datif masculin). Dans la relative, le verbe conjugué « kann » va tout à la fin, après l’infinitif « helfen »."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "« weder … noch » est déjà négatif : aucune autre négation (kein, nicht) ne s’ajoute.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe weder keine Zeit noch kein Geld.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe nicht weder Zeit noch Geld.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe weder Zeit noch Geld.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Was ist ein „Ehrenamt“? [fr] Qu’est-ce qu’un « Ehrenamt » ?",
+          "explanation": "Un Ehrenamt est une activité bénévole, non rémunérée, au service des autres. Le mot « Amt » (fonction) peut faire penser à une administration, mais « ehren- » (l’honneur) indique qu’on le fait sans salaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Eine bezahlte Stelle in einem Verein.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Arbeit ohne Lohn für die Gemeinschaft.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ein Büro in der Stadtverwaltung für alle Vereine der Stadt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. [fr] Complétez.",
+          "text": "Für die Arbeit mit Kindern muss ich im Bürgeramt einen [[1]] auf ein Führungszeugnis stellen.",
+          "explanation": "Collocation administrative : « einen Antrag (auf + accusatif) stellen », déposer une demande. Le nom est masculin : der Antrag, die Anträge.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Antrag"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-gesellschaft-lesen-steckbrief",
+      "kind": "image",
+      "title": "Fiche de l’association Türklinke",
+      "alt": "Fiche « Türklinke e. V. – Nachbarn helfen Nachbarn » : Sprachcafé un mercredi sur deux à la bibliothèque, aide aux devoirs lundi et jeudi, accompagnement aux administrations sur rendez-vous, soirée d’information le 3 mars à 18 h.",
+      "image": {
+        "layout": "document",
+        "icon": "hand-heart",
+        "title": "Türklinke e. V.",
+        "subtitle": "Nachbarn helfen Nachbarn",
+        "rows": [
+          [
+            "Sprachcafé",
+            "jeden zweiten Mittwoch, Stadtbibliothek"
+          ],
+          [
+            "Hausaufgabenhilfe",
+            "montags und donnerstags, Klassen 3 bis 6"
+          ],
+          [
+            "Behördenlotsen",
+            "nach Termin"
+          ],
+          [
+            "Infoabend",
+            "3. März, 18 Uhr, Stadtbibliothek, Raum 2"
+          ]
+        ]
+      }
+    },
+    {
+      "key": "b1-gesellschaft-hoeren-anruf",
+      "kind": "audio",
+      "title": "Appel de Nadine avant le Sprachcafé",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Hallo Samir, hier ist Nadine von Türklinke. Hast du kurz Zeit? Es geht um das Sprachcafé am Mittwoch. Es gibt leider ein paar Änderungen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Hallo Nadine! Ja, klar. Was ist los?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Die Bibliothek hat am Mittwoch bis halb sechs eine Lesung in unserem Raum. Wir können deshalb erst um Viertel vor sechs rein. Das Café beginnt aber trotzdem um sechs."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Okay, das ist knapp. Und wo bekomme ich den Schlüssel?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "An der Information im Erdgeschoss. Dort liegen auch die Namensschilder, die wir für die Gäste brauchen. Kannst du sie mitnehmen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Mache ich. Soll ich auch Getränke kaufen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Nein, danke, Getränke haben wir genug. Aber es gibt noch etwas: Der Hof ist gesperrt, weil dort gebaut wird. Man kann also weder durch den Hof gehen noch den Aufzug hinten benutzen. Alle müssen den Eingang in der Lindenstraße nehmen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Gibt es dort auch einen Aufzug? Eine Frau aus meinem Deutschkurs sitzt im Rollstuhl, und sie möchte gern kommen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Ja, gleich rechts neben dem Eingang. Sag ihr das bitte. Und noch etwas: Lena, die normalerweise die Gäste begrüßt, kommt erst um zwanzig nach sechs, weil sie länger arbeiten muss. Könntest du am Anfang an der Tür stehen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Gern. Und was mache ich, wenn die Gäste da sind? Ich war ja noch nie dabei."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Keine Sorge. Wir haben Karten mit Themen, zum Beispiel Arbeit, Wohnen oder Freizeit. Du kannst entweder eine kleine Gruppe übernehmen oder mit einzelnen Gästen sprechen. Wichtig ist nur, dass alle zu Wort kommen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Verstanden. Und was sage ich, wenn jemand fragt, ob man sich anmelden muss?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Das ist ja das Gute: Man muss sich weder anmelden noch etwas bezahlen. Die Leute können einfach kommen. Diesmal kommen übrigens sowohl neue Gäste als auch zwei neue Helferinnen. Darüber freue ich mich sehr."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Super. Und wann ist Schluss?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Um halb acht. Aber um sieben sammeln wir Ideen für das nächste Treffen. Das ist der Teil, der mir am wichtigsten ist. Wenn du früher gehen musst, gib mir einfach Bescheid."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Samir",
+          "text": "Nein, ich bleibe bis zum Schluss. Dann bis Mittwoch!"
+        },
+        {
+          "pause": 0.3
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Danke, Samir. Bis Mittwoch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-kontrolle-nachricht",
+      "kind": "audio",
+      "title": "Message vocal de l’association",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Guten Tag, Frau Diallo, hier ist Nadine Haas vom Verein Türklinke. Vielen Dank für Ihre E-Mail! Sie können sowohl im Sprachcafé als auch bei der Hausaufgabenhilfe mitmachen. Für die Hausaufgabenhilfe brauchen wir aber ein Führungszeugnis."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Das beantragen Sie im Bürgeramt. Für Ehrenamtliche ist es kostenlos, wenn Sie unsere Bestätigung mitbringen. Ich schicke sie Ihnen heute noch per E-Mail. Bis bald!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-einstieg-foto",
+      "kind": "image",
+      "title": "Un jardin partagé",
+      "alt": "Un jardin partagé en ville : des bacs en bois remplis de légumes et de fleurs, avec la ville et le ciel bleu à l’arrière-plan.",
+      "photo": {
+        "file": "libre/commons/gesellschaft-gemeinschaftsgarten.jpg"
+      },
+      "credit": "Ciara Ní Riain, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Urban_community_gardens_Aarhus_City_Park_Pier_2_Aarhus_Denmark_3.jpg"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich interessiere mich für ein Ehrenamt im Sprachcafé."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Muss man dafür Mitglied im Verein sein?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich kann entweder mittwochs oder samstags helfen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich habe zwar wenig Erfahrung, aber viel Motivation."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das ist genau das, was ich suche."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : se renseigner et proposer son aide",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich möchte einen Antrag auf ein Führungszeugnis stellen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-lesen2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : le portrait d’une bénévole",
+      "script": [
+        {
+          "voice": "frau2",
+          "text": "Marta hilft den Kindern sowohl beim Lesen als auch beim Rechnen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-lesen2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : le portrait d’une bénévole",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wer sich engagieren möchte, sollte zuerst mit einer Stunde pro Woche anfangen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gesellschaft : s’engager dans une association",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "das Ehrenamt, die Ehrenämter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ehrenamtlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Verein, die Vereine"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Mitglied, die Mitglieder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Mitgliedsbeitrag, die Mitgliedsbeiträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich engagieren für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "freiwillig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Behörde, die Behörden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Antrag, die Anträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Bürgeramt, die Bürgerämter"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Führungszeugnis, die Führungszeugnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bestätigung, die Bestätigungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Voraussetzung, die Voraussetzungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zuverlässig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beitreten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "teilnehmen an"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hausaufgabenhilfe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "begleiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Bescheid geben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einspringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sowohl … als auch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "weder … noch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "entweder … oder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nicht nur …, sondern auch"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

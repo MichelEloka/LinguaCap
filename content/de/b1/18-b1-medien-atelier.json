@@ -1,0 +1,1386 @@
+{
+  "id": "b1-medien-atelier",
+  "title": "Medien, atelier : relayer une information fiable",
+  "objective": "Corriger une information erronée à partir de la source officielle, réagir à une rumeur, s’entraîner à lire un article de presse, puis écrire une contribution d’opinion à un forum et présenter une information et sa source.",
+  "prerequisites": [
+    "b1-medien"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, publications, article et exercices originaux LinguaCap.",
+    "Tâches reprises et réécrites du brouillon B1 V1 (LinguaCap) : corriger une annonce, vérifier avant de transmettre."
+  ],
+  "layer": "content/b/source/b1/b1-medien-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "meiner-meinung-nach",
+      "word": "meiner Meinung nach",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à mon avis",
+      "example": "Meiner Meinung nach brauchen wir eine Lokalzeitung.",
+      "note": "en tête : inversion (Meiner Meinung nach ist …)",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "der-meinung-sein",
+      "word": "der Meinung sein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être d’avis",
+      "example": "Ich bin der Meinung, dass soziale Medien nützlich sind.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "einerseits-andererseits",
+      "word": "einerseits … andererseits",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "d’un côté… de l’autre",
+      "example": "Einerseits ist das praktisch, andererseits auch gefährlich.",
+      "note": "inversion après chacun des deux mots",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "gegenargument",
+      "word": "Gegenargument",
+      "article": "das",
+      "plural": "Gegenargumente",
+      "partOfSpeech": "noun",
+      "translation": "le contre-argument",
+      "example": "Ein Gegenargument ist der Preis.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "erstens",
+      "word": "erstens",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "premièrement",
+      "example": "Erstens ist die Lokalzeitung genau.",
+      "note": "zweitens, drittens · inversion après erstens",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ausserdem",
+      "word": "außerdem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "en outre, de plus",
+      "example": "Außerdem prüfen die Journalisten ihre Quellen.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "alles-in-allem",
+      "word": "alles in allem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "dans l’ensemble, en somme",
+      "example": "Alles in allem finde ich die Idee gut.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "zustimmen",
+      "word": "zustimmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "approuver, être d’accord avec",
+      "example": "Da kann ich dir nur zustimmen.",
+      "note": "séparable : zu|stimmen · + datif",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "widersprechen",
+      "word": "widersprechen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "contredire",
+      "example": "Da muss ich dir leider widersprechen.",
+      "note": "inséparable · + datif",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "hinweis",
+      "word": "Hinweis",
+      "article": "der",
+      "plural": "Hinweise",
+      "partOfSpeech": "noun",
+      "translation": "l’indication, le signalement",
+      "example": "Danke für den Hinweis!",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "richtigstellen",
+      "word": "richtigstellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rectifier",
+      "example": "Ich möchte eine Information richtigstellen.",
+      "note": "séparable : richtig|stellen",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "falschmeldung",
+      "word": "Falschmeldung",
+      "article": "die",
+      "plural": "Falschmeldungen",
+      "partOfSpeech": "noun",
+      "translation": "la fausse information",
+      "example": "Das war leider eine Falschmeldung.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "abonnement",
+      "word": "Abonnement",
+      "article": "das",
+      "plural": "Abonnements",
+      "partOfSpeech": "noun",
+      "translation": "l’abonnement",
+      "example": "Ein Abonnement der Zeitung kostet zwölf Euro im Monat.",
+      "note": "familier : das Abo",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "nachfragen",
+      "word": "nachfragen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se renseigner, demander des précisions",
+      "example": "Ich frage lieber noch einmal bei der Stadt nach.",
+      "note": "séparable : nach|fragen",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "wie-seht-ihr-das",
+      "word": "Wie seht ihr das?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Qu’en pensez-vous ?",
+      "example": "Ich finde das gut. Wie seht ihr das?",
+      "note": "poli : Wie sehen Sie das?",
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "pressestelle",
+      "word": "Pressestelle",
+      "article": "die",
+      "plural": "Pressestellen",
+      "partOfSpeech": "noun",
+      "translation": "le service de presse",
+      "example": "Die Pressestelle der Stadt hat die Mitteilung veröffentlicht.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-medien-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : une contribution d’opinion à un forum",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : une contribution d’opinion à un forum",
+        "description": "Lesen und hören Sie den Forumsbeitrag. Achten Sie auf den Aufbau und auf die markierten Wendungen. [fr] Lisez et écoutez la contribution au forum. Observez sa structure et les tournures relevées.\n\nSITUATION\n[fr] Situation\nIm Forum eines Stadtmagazins diskutieren die Leserinnen und Leser: „Brauchen wir noch eine Lokalzeitung?“ Samira schreibt ihre Meinung. [fr] Sur le forum d’un magazine de la ville, les lecteurs débattent : « Avons-nous encore besoin d’un journal local ? » Samira donne son avis.\n\nBRAUCHEN WIR NOCH EINE LOKALZEITUNG?\nBeitrag von Samira K.\nIch lese seit drei Jahren jeden Morgen unsere Lokalzeitung, und zwar online. Meiner Meinung nach brauchen wir sie heute mehr als früher.\nErstens erfährt man dort, was direkt vor der eigenen Haustür passiert: Baustellen, neue Geschäfte oder Entscheidungen des Stadtrats. Zum Beispiel habe ich nur durch die Zeitung erfahren, dass unsere Straße im Sommer gesperrt wird.\nZweitens prüfen Journalistinnen und Journalisten ihre Quellen, bevor sie etwas veröffentlichen. In sozialen Netzwerken ist das leider nicht immer so.\nNatürlich gibt es auch Nachteile: Ein Abonnement kostet Geld, und manche Artikel erscheinen später als im Netz.\nTrotzdem finde ich: Eine gute Lokalzeitung ist ihr Geld wert. Wie seht ihr das?\n\nAUFBAU\n[fr] Structure\n1. Einleitung: eigene Erfahrung und Meinung („Ich lese seit … Meiner Meinung nach …“). [fr] Introduction : expérience personnelle et avis.\n2. Erstes Argument mit Beispiel („Erstens … Zum Beispiel …“). [fr] Premier argument, avec un exemple.\n3. Zweites Argument („Zweitens …“). [fr] Deuxième argument.\n4. Gegenargument („Natürlich gibt es auch Nachteile: …“). [fr] Contre-argument : on montre qu’on voit l’autre côté.\n5. Schluss: Fazit und Frage an die anderen („Trotzdem finde ich … Wie seht ihr das?“). [fr] Conclusion : bilan et question aux autres lecteurs.\n\nEINLEITEN\n[fr] Introduire\n• Ich lese / nutze seit … — Je lis / j’utilise depuis…\n• Meiner Meinung nach … / Ich bin der Meinung, dass … — À mon avis… / Je pense que…\n\nBEGRÜNDEN\n[fr] Justifier\n• Erstens …, zweitens … — Premièrement…, deuxièmement…\n• Ein wichtiger Grund ist, dass … — Une raison importante, c’est que…\n• Außerdem … — En outre…\n\nBEISPIEL\n[fr] Donner un exemple\n• Zum Beispiel habe ich … — Par exemple, j’ai…\n• Das sieht man zum Beispiel daran, dass … — On le voit par exemple au fait que…\n\nGEGENARGUMENT\n[fr] Nuancer\n• Natürlich gibt es auch Nachteile: … — Bien sûr, il y a aussi des inconvénients : …\n• Einerseits …, andererseits … — D’un côté…, de l’autre…\n\nSCHLUSS\n[fr] Conclure\n• Trotzdem finde ich … / Alles in allem … — Malgré tout, je trouve… / Dans l’ensemble…\n• Wie seht ihr das? — Qu’en pensez-vous ?\n\nATTENTION\n• Après erstens, außerdem, trotzdem, meiner Meinung nach, le verbe vient juste après : Erstens erfährt man …, Trotzdem finde ich …\n• Un forum n’est ni une lettre formelle ni un message à un ami : pas de « Sehr geehrte… », pas d’abréviations de messagerie.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-medien-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : rumeurs et informations",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : rumeurs et informations",
+        "description": "Hören Sie vier kurze Situationen. Wählen Sie jeweils die passende Reaktion. [fr] Écoutez quatre courtes situations. Choisissez chaque fois la réplique qui convient.\nDanach sprechen Sie drei nützliche Sätze nach. [fr] Ensuite, répétez trois phrases utiles.\n\nSTRATEGIE\n[fr] Stratégie\nBei einer unsicheren Information: nicht sofort glauben, nicht sofort widersprechen, sondern nach der Quelle fragen. [fr] Face à une information incertaine : ne pas croire tout de suite, ne pas contredire tout de suite, mais demander la source.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-atelier-interaktion-s1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-s2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-s3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-s4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Situation 1: Eine Freundin erzählt eine Neuigkeit. Was antworten Sie? [fr] Situation 1 : une amie raconte une nouvelle. Que répondez-vous ?",
+          "explanation": "Lisa dit « angeblich » : l’information n’est pas vérifiée. La bonne réaction demande la source. Les deux autres répliques ne répondent pas à ce qu’elle dit.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wirklich? Woher hast du das?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nein, ich gehe heute nicht ins Kino.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Gern geschehen!",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Situation 2: Ein Kollege nennt eine Information aus der Zeitung. Was antworten Sie? [fr] Situation 2 : un collègue cite une information du journal. Que répondez-vous ?",
+          "explanation": "Le collègue cite une source (« Laut Zeitung ») : on remercie et on demande une précision utile. Ce n’est pas une opinion mais une information sourcée, et « gern geschehen » répond à un merci.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch nur deine Meinung, das glaube ich nicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Danke für die Info! Weißt du auch, wie lange?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Gern geschehen, das mache ich gern für dich!",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Situation 3: Eine Moderatorin macht eine Umfrage auf der Straße. Was antworten Sie? [fr] Situation 3 : une animatrice fait un micro-trottoir. Que répondez-vous ?",
+          "explanation": "À une question ouverte (« Wie …? »), on répond par des moyens concrets. La première réplique parle de la ville, pas de la façon de s’informer ; « Ja » ne répond pas à une question en wie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "In meiner Stadt passiert eigentlich jeden Tag sehr viel.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ja, ich informiere mich sehr gern über meine Stadt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Meistens lese ich die Lokalzeitung online oder höre Radio.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Situation 4: Ein Nachbar zeigt Ihnen ein Foto. Was antworten Sie? [fr] Situation 4 : un voisin vous montre une photo. Que répondez-vous ?",
+          "explanation": "On accepte la possibilité (« Vielleicht ») tout en proposant de vérifier avant de partager : réaction nuancée et polie. Les deux autres jugent trop vite : l’une partage sans vérifier, l’autre rejette tout sans vérifier non plus.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Stimmt, es sieht echt aus. Teilen wir es gleich mit allen!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vielleicht, aber bevor wir es teilen, sollten wir die Quelle prüfen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nein, das ist sicher falsch. Alle Fotos im Netz sind gefälscht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Gibt es dafür eine offizielle Quelle?",
+          "accept": [
+            "Gibt es dafür eine offizielle Quelle?"
+          ],
+          "explanation": "Question fermée : la voix monte à la fin. « offizielle » : accent sur « -ELL » (offi-zi-ELL-e), « z » prononcé « ts ». « Quelle » : « kv ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich würde lieber warten, bis die Stadt es bestätigt.",
+          "accept": [
+            "Ich würde lieber warten, bis die Stadt es bestätigt."
+          ],
+          "explanation": "Konjunktiv II poli (« würde lieber ») puis subordonnée avec bis : « bestätigt » à la fin, accent sur « STÄ ».",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Danke für den Hinweis, ich schaue gleich nach.",
+          "accept": [
+            "Danke für den Hinweis, ich schaue gleich nach."
+          ],
+          "explanation": "Formule pour accueillir une information avant de la vérifier. « nachschauen » est séparable : « schaue … nach ». « Hinweis » : accent sur « HIN ».",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-medien-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : corriger une annonce erronée",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : corriger une annonce erronée",
+        "description": "SITUATION\n[fr] Situation\nIn Ihrer Nachbarschaftsgruppe hat Kai eine Nachricht geteilt. Rosa macht sich Sorgen. Sie finden die offizielle Mitteilung der Stadt. [fr] Dans votre groupe de quartier, Kai a partagé un message. Rosa s’inquiète. Vous trouvez le communiqué officiel de la ville.\nVergleichen Sie Kais Nachricht mit der Mitteilung. Korrigieren Sie dann freundlich und mit einfachen Worten. [fr] Comparez le message de Kai et le communiqué. Corrigez ensuite aimablement, avec des mots simples.\n\nNACHBARSCHAFTSGRUPPE NORDVIERTEL\nKai_B (Fr., 21:10): Achtung, Leute! Ab Montag ist das Bürgerbüro für drei Wochen zu! Termine gibt’s nur noch online. Teilt das bitte!\nRosa M. (Fr., 21:25): Oh nein, ich brauche doch nächste Woche einen neuen Ausweis. Weiß jemand mehr?\n\nMITTEILUNG DER STADT NEUSTADT\nBürgerbüro Nord vorübergehend geschlossen\nWegen Umbauarbeiten bleibt das Bürgerbüro Nord vom 4. bis 8. März geschlossen. In dieser Zeit können Bürgerinnen und Bürger das Bürgerbüro Mitte im Rathaus (Erdgeschoss) besuchen. Termine können wie gewohnt online oder telefonisch vereinbart werden. Ausweise und Pässe, die schon im Bürgerbüro Nord abholbereit sind, können ab dem 11. März dort abgeholt werden. Ab dem 11. März gelten wieder die normalen Öffnungszeiten.\nStadt Neustadt, Pressestelle, 28. Februar\n\nSTRATEGIE\n[fr] Stratégie\nVergleichen Sie Punkt für Punkt: Welcher Ort? Wie lange? Was kann man tun? Was ist in Kais Nachricht falsch oder fehlt? [fr] Comparez point par point : quel lieu ? combien de temps ? que peut-on faire ? qu’est-ce qui est faux ou manque dans le message de Kai ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-atelier-mediation-gruppe",
+          "caption": "Nachbarschaftsgruppe Nordviertel",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wie lange ist das Bürgerbüro Nord wirklich geschlossen? [fr] Combien de temps le bureau des citoyens Nord est-il vraiment fermé ?",
+          "explanation": "Le communiqué dit « vom 4. bis 8. März » : une semaine de travaux, puis réouverture le 11 mars. Kai a exagéré (« für drei Wochen »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "drei Wochen, ab Montag",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "eine Woche, vom 4. bis 8. März",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "zwei Wochen, vom 4. bis 18. März",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Rosa braucht nächste Woche einen neuen Ausweis. Was ist für sie wichtig? [fr] Rosa a besoin d’une nouvelle carte d’identité la semaine prochaine. Qu’est-ce qui compte pour elle ?",
+          "explanation": "Pendant les travaux, « können Bürgerinnen und Bürger das Bürgerbüro Mitte im Rathaus besuchen ». Kai a oublié cette information, la plus utile pour Rosa.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kann ins Bürgerbüro Mitte im Rathaus gehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie muss drei Wochen warten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie kann nur online einen Ausweis bekommen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Korrektur für die Gruppe. [fr] Complétez votre correction pour le groupe.",
+          "text": "Kleine Korrektur: Laut [[1]] der Stadt ist nur das Bürgerbüro Nord geschlossen, und zwar nur vom 4. bis [[2]] März. In dieser Zeit könnt ihr ins Bürgerbüro [[3]] im Rathaus gehen. Termine gibt es online oder [[4]].",
+          "explanation": "On cite la source (laut Mitteilung der Stadt), on rectifie la durée (du 4 au 8 mars), on donne l’alternative (Bürgerbüro Mitte) et on corrige le dernier point : rendez-vous en ligne ou par téléphone, pas seulement en ligne.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Mitteilung",
+                "Pressemitteilung",
+                "Internetseite",
+                "Website"
+              ],
+              "size": 17,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "8.",
+                "8",
+                "achten"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Mitte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "telefonisch",
+                "per Telefon",
+                "am Telefon"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Beginnen Sie Ihre Korrektur höflich: Bilden Sie den Satz. [fr] Commencez poliment votre correction : remettez la phrase dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "glaube,",
+              "dass",
+              "das",
+              "nicht",
+              "ganz",
+              "stimmt."
+            ]
+          ],
+          "explanation": "« Ich glaube, dass das nicht ganz stimmt. » Une correction prudente (nicht ganz : pas tout à fait) évite de vexer. Après dass, le verbe stimmt va à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie korrigieren Sie Kai freundlich? [fr] Comment corrigez-vous Kai aimablement ?",
+          "explanation": "On remercie pour le signalement, puis on corrige en citant la source (laut Mitteilung). La première réplique corrige, mais de façon blessante ; la deuxième diffuse l’erreur au lieu de la corriger.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist totaler Unsinn, Kai! Lies die Mitteilung doch mal richtig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Danke, Kai! Ich teile deine Nachricht gleich mit allen Nachbarn.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Danke für den Hinweis! Laut Mitteilung ist aber nur das Bürgerbüro Nord eine Woche zu.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Sagen Sie es einfacher: „Termine können wie gewohnt online oder telefonisch vereinbart werden.“ Bilden Sie den Satz. [fr] Dites-le plus simplement : remettez la phrase dans l’ordre.",
+          "answers": [
+            [
+              "Ihr",
+              "könnt",
+              "Termine",
+              "wie immer",
+              "online oder am Telefon",
+              "machen."
+            ],
+            [
+              "Ihr",
+              "könnt",
+              "wie immer",
+              "Termine",
+              "online oder am Telefon",
+              "machen."
+            ]
+          ],
+          "explanation": "Simplifier : passer du passif (können … vereinbart werden) à l’actif avec « ihr », et remplacer les mots difficiles (wie gewohnt → wie immer, vereinbaren → machen). « Termine » et « wie immer » peuvent s’échanger."
+        }
+      ]
+    },
+    {
+      "id": "b1-medien-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : erreurs typiques des francophones",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : erreurs typiques des francophones",
+        "description": "Diese Fehler machen viele Französischsprachige, wenn sie Informationen weitergeben. Finden Sie die richtige Form. [fr] Beaucoup de francophones font ces erreurs quand ils transmettent une information. Trouvez la forme correcte.\nAchten Sie auf dass, ob, laut und auf die Zeitangaben. [fr] Faites attention à dass, ob, laut et aux indications de temps.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "order",
+          "prompt": "Viele schreiben: „Er sagt, dass der Markt zieht um.“ Bilden Sie den Satz richtig. [fr] Beaucoup écrivent cette phrase fautive. Remettez-la dans le bon ordre.",
+          "answers": [
+            [
+              "Er",
+              "sagt,",
+              "dass",
+              "der Markt",
+              "umzieht."
+            ]
+          ],
+          "explanation": "Après dass, le verbe conjugué va à la fin, et un verbe séparable se ressoude : « dass der Markt umzieht ». En français, « qu’il déménage » garde l’ordre de la principale ; pas en allemand."
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Satz: „Ich weiß nicht, … die Information stimmt.“ [fr] Complétez la phrase : « Je ne sais pas si l’information est vraie. »",
+          "text": "Ich weiß nicht, [[1]] die Information stimmt.",
+          "explanation": "« si » se traduit par ob quand il introduit une question (je me demande si…) et par wenn quand il pose une condition (s’il pleut…). Ici, c’est une question : ob.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ob"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sie möchten Ihre eigene Meinung sagen. Welcher Satz ist richtig? [fr] Vous voulez donner votre propre avis. Quelle phrase est correcte ?",
+          "explanation": "« Selon moi » ne se dit pas *laut mir* : laut sert à citer une source extérieure (laut der Stadt). Pour son avis : meiner Meinung nach, suivi de l’inversion (ist diese Information).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Laut mir ist diese Information falsch.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nach mir diese Information ist falsch.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Meiner Meinung nach ist diese Information falsch.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie vor oder bevor. [fr] Complétez avec vor ou bevor.",
+          "text": "[[1]] der Sitzung lese ich die Zeitung. [[2]] ich etwas teile, prüfe ich die Quelle.",
+          "explanation": "« Avant » + nom : vor (+ datif : vor der Sitzung). « Avant de / avant que » + verbe : la conjonction bevor, avec le verbe à la fin (bevor ich etwas teile).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Vor"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bevor"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Satz: „… ich diese App benutze, … ich mehr Nachrichten.“ [fr] Complétez la phrase : « Depuis que j’utilise cette appli, je lis plus d’informations. »",
+          "text": "[[1]] ich diese App benutze, [[2]] ich mehr Nachrichten.",
+          "explanation": "Seitdem (ou seit) + subordonnée au présent pour une situation qui dure encore, comme « depuis que » en français. Puis la principale commence par son verbe : « lese ich ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Seitdem",
+                "Seit"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "lese"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie sind derselben Meinung wie Ihr Freund. Welcher Satz ist richtig? [fr] Vous êtes du même avis que votre ami. Quelle phrase est correcte ?",
+          "explanation": "« Être d’accord » : einverstanden sein (avec sein, pas haben), mit + datif (mit dir). On peut aussi dire « Ich stimme dir zu ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich bin mit dir einverstanden.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich habe mit dir einverstanden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich bin einverstanden mit dich.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : Lesen, article de presse",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : Lesen, article de presse",
+        "description": "PRÜFUNGSTRAINING: LESEN\n[fr] Entraînement à l’examen : compréhension écrite\nLesen Sie den Zeitungsartikel und die Aufgaben. Wählen Sie für jede Aufgabe die richtige Antwort: a, b oder c. [fr] Lisez l’article de journal et les questions. Choisissez pour chaque question la bonne réponse : a, b ou c.\nZeit: 20 Minuten. [fr] Durée : 20 minutes.\n\nSTRATEGIE\n[fr] Stratégie\n1. Lesen Sie zuerst den Titel und die Aufgaben. Die Aufgaben folgen der Reihenfolge des Textes. [fr] Lisez d’abord le titre et les questions. Les questions suivent l’ordre du texte.\n2. Suchen Sie die passende Stelle und lesen Sie sie genau. Die falschen Antworten nehmen oft Wörter aus dem Text, sagen aber etwas anderes. [fr] Cherchez le passage et lisez-le en détail. Les mauvaises réponses reprennent souvent des mots du texte, mais disent autre chose.\n3. Achten Sie auf Verneinungen und auf Wörter wie nur, eher, nicht. [fr] Attention aux négations et aux mots comme nur, eher, nicht.\n\nNACHRICHTEN AUS DEM HANDY – ABER WOHER GENAU?\nNeustadt. Zeitung, Radio oder Fernsehen? Für die meisten jungen Leute in Neustadt kommen die Nachrichten heute vor allem aus dem Handy. Das zeigt eine kleine Umfrage, die Schülerinnen und Schüler der Gesamtschule Nord im Frühjahr gemacht haben. Sie haben 240 Jugendliche zwischen 14 und 19 Jahren gefragt, wie sie sich informieren.\n\nFast drei Viertel der Befragten sagen, dass sie Nachrichten vor allem in sozialen Netzwerken lesen oder sehen. Eine gedruckte Zeitung liest nur jeder Zehnte regelmäßig, meistens bei den Eltern oder Großeltern. „Das hat uns nicht überrascht“, sagt die 17-jährige Lara, die bei dem Projekt mitgearbeitet hat. „Überrascht hat uns eher, wie selten die Leute prüfen, woher eine Nachricht kommt.“\n\nTatsächlich sagen nur 30 Prozent, dass sie die Quelle kontrollieren, bevor sie einen Beitrag teilen. Viele wussten auch nicht, ob ein Video echt oder bearbeitet war. „Sobald etwas lustig oder spannend aussieht, wird es weitergeschickt“, erklärt Lara.\n\nLehrer Thomas Berger, der das Projekt betreut hat, sieht darin aber keinen Grund zur Panik. „Junge Menschen sind nicht weniger klug als Erwachsene. Auch viele Ältere teilen Gerüchte, ohne nachzudenken.“ Wichtig ist aus seiner Sicht, dass man in der Schule übt, wie man Informationen prüft.\n\nDie Schülerinnen und Schüler haben deshalb einen kleinen Ratgeber geschrieben: Wer hat die Nachricht veröffentlicht? Gibt es ein Datum? Berichten auch andere Medien darüber? Der Ratgeber wird ab nächster Woche in allen Neustädter Schulen verteilt. Außerdem planen die Jugendlichen im Herbst einen Workshop in der Stadtbibliothek, und zwar für alle Generationen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was zeigt die Umfrage vor allem? [fr] Que montre surtout l’enquête ?",
+          "explanation": "Premier paragraphe : les nouvelles « kommen … vor allem aus dem Handy ». Seul un sur dix lit un journal imprimé, et rien ne dit que les jeunes se désintéressent de l’actualité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die meisten Jugendlichen lesen jeden Tag Zeitung.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die meisten Jugendlichen informieren sich vor allem über das Handy.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Jugendliche interessieren sich nicht für Nachrichten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wer hat die Umfrage gemacht? [fr] Qui a réalisé l’enquête ?",
+          "explanation": "« eine kleine Umfrage, die Schülerinnen und Schüler der Gesamtschule Nord … gemacht haben ». La bibliothèque n’apparaît qu’à la fin, pour l’atelier prévu en automne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Schülerinnen und Schüler einer Schule",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "das Team der Stadtbibliothek",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine Journalistin der Lokalzeitung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was hat die Gruppe überrascht? [fr] Qu’est-ce qui a surpris le groupe ?",
+          "explanation": "« Das hat uns nicht überrascht » porte sur le journal imprimé ; « Überrascht hat uns eher, wie selten die Leute prüfen, woher eine Nachricht kommt. » Piège : la première réponse reprend une information du texte, mais justement non surprenante.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass nur wenige Jugendliche eine gedruckte Zeitung lesen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "dass viele Jugendliche lustige Videos teilen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass viele nicht prüfen, woher eine Nachricht kommt",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wie sieht Herr Berger die Ergebnisse? [fr] Comment M. Berger voit-il les résultats ?",
+          "explanation": "« keinen Grund zur Panik … Auch viele Ältere teilen Gerüchte, ohne nachzudenken. » Il relativise et propose d’apprendre à vérifier à l’école, pas d’interdire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er macht sich große Sorgen um die Jugendlichen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er meint, dass auch Erwachsene ähnliche Fehler machen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er findet, dass soziale Netzwerke verboten werden sollten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was passiert mit dem Ratgeber? [fr] Que va-t-il se passer avec le guide ?",
+          "explanation": "« Der Ratgeber wird ab nächster Woche in allen Neustädter Schulen verteilt. » Passif au présent avec valeur de futur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er wird in der Zeitung veröffentlicht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er wird nur im Internet gezeigt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er wird in allen Schulen der Stadt verteilt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Für wen ist der Workshop in der Stadtbibliothek? [fr] À qui s’adresse l’atelier à la bibliothèque ?",
+          "explanation": "« für alle Generationen » : pour tous les âges. Les deux autres réponses ajoutent « nur », qui contredit le texte.",
+          "options": [
+            {
+              "id": "a",
+              "label": "für Menschen jeden Alters",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "nur für Schülerinnen und Schüler",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "nur für Eltern und Großeltern",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : donner son avis sur les réseaux sociaux",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : donner son avis sur les réseaux sociaux",
+        "description": "SITUATION\n[fr] Situation\nIm Online-Forum des Stadtmagazins „Neustadt aktuell“ diskutieren die Leserinnen und Leser über die Frage: „Soziale Medien als Nachrichtenquelle: praktisch oder gefährlich?“ [fr] Sur le forum en ligne du magazine de la ville « Neustadt aktuell », les lecteurs débattent : « Les réseaux sociaux comme source d’information : pratiques ou dangereux ? »\n\nAUFGABE\n[fr] Consigne\nSchreiben Sie einen Forumsbeitrag (100 bis 130 Wörter). [fr] Écrivez une contribution au forum (100 à 130 mots).\n• Erzählen Sie kurz, wie Sie sich selbst informieren. [fr] Dites brièvement comment vous vous informez vous-même.\n• Nennen Sie einen Vorteil sozialer Medien als Nachrichtenquelle. [fr] Donnez un avantage des réseaux sociaux comme source d’information.\n• Nennen Sie einen Nachteil oder eine Gefahr, mit einem Beispiel. [fr] Donnez un inconvénient ou un danger, avec un exemple.\n• Sagen Sie Ihre Meinung und geben Sie einen Tipp, wie man Informationen prüft. [fr] Donnez votre avis et un conseil pour vérifier une information.\n\nNehmen Sie das Modell dieses Ateliers als Hilfe, aber schreiben Sie Ihren eigenen Text. [fr] Aidez-vous du modèle de cet atelier, mais écrivez votre propre texte.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie einen Forumsbeitrag (100–130 Wörter): wie Sie sich informieren, ein Vorteil, ein Nachteil mit Beispiel, Ihre Meinung und ein Tipp zum Prüfen von Informationen. [fr] Écrivez une contribution au forum de 100 à 130 mots : comment vous vous informez, un avantage, un inconvénient avec un exemple, votre avis et un conseil pour vérifier une information.",
+          "maxChars": 1200,
+          "minWords": 100
+        },
+        "checklist": [
+          "Ich beginne mit meiner eigenen Erfahrung. [fr] Je commence par ma propre expérience.",
+          "Ich nenne einen Vorteil und einen Nachteil mit Beispiel. [fr] Je donne un avantage et un inconvénient avec un exemple.",
+          "Meine Meinung ist klar (Meiner Meinung nach …, Ich finde, dass …). [fr] Mon avis est clair.",
+          "Ich verbinde die Ideen (erstens, außerdem, trotzdem, alles in allem). [fr] Je relie les idées avec des connecteurs.",
+          "Am Ende gebe ich einen Tipp oder stelle eine Frage an die anderen. [fr] Je termine par un conseil ou une question aux autres."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : expérience personnelle, un avantage, un inconvénient illustré, avis clair et conseil ; ton adapté à un forum",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-medien-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : présenter une information et sa source",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : présenter une information et sa source",
+        "description": "SITUATION\n[fr] Situation\nIn Ihrem Deutschkurs stellt jede Person eine Nachricht aus der Stadt vor. Sie haben zwei Texte gefunden: eine Mitteilung der Verkehrsbetriebe und einen Beitrag in einer Gruppe. [fr] Dans votre cours d’allemand, chacun présente une nouvelle de la ville. Vous avez trouvé deux textes : un communiqué des transports et une publication dans un groupe.\n\nMITTEILUNG DER VERKEHRSBETRIEBE\nNeustadt, 12. Mai\nAb 1. Juli: Schülerticket für 1 Euro pro Tag\nGilt für alle Busse und Straßenbahnen der Stadt\nKauf in der App oder am Automaten\n\nBEITRAG IN EINER GRUPPE\ngepostet von „StadtNews_24“\nAb Juli fahren alle Schüler gratis Bus!!!\nTeilt das, bevor es gelöscht wird!\n\nAUFGABE\n[fr] Consigne\nStellen Sie die Nachricht vor (etwa 2 Minuten). [fr] Présentez la nouvelle (environ 2 minutes).\n• Sagen Sie, worum es geht: was, für wen, ab wann. [fr] Dites de quoi il s’agit : quoi, pour qui, à partir de quand.\n• Nennen Sie die Quelle und sagen Sie, warum sie glaubwürdig ist. [fr] Indiquez la source et dites pourquoi elle est fiable.\n• Vergleichen Sie mit dem Beitrag in der Gruppe: Was ist dort falsch? [fr] Comparez avec la publication du groupe : qu’est-ce qui y est faux ?\n• Sagen Sie Ihre Meinung zu der Neuigkeit. [fr] Donnez votre avis sur cette nouveauté.\n\nREDEMITTEL\n[fr] Formules utiles\n• In meiner Präsentation geht es um … — Ma présentation porte sur…\n• Laut den Verkehrsbetrieben … / In der Mitteilung steht, dass … — Selon les transports… / Le communiqué dit que…\n• Im Netz liest man, dass … Das stimmt aber nicht, denn … — En ligne, on lit que… Mais c’est faux, car…\n• Ich finde die Idee gut, weil … — Je trouve l’idée bonne parce que…\n• Zum Schluss möchte ich sagen: … — Pour finir, je voudrais dire : …\n\nÜberlegen Sie sich vorher Stichwörter, aber lesen Sie nicht ab: Sprechen Sie frei. [fr] Pensez d’abord à quelques mots-clés, mais ne lisez pas : parlez librement.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-atelier-sprechen-karten",
+          "caption": "Mitteilung und Gruppenbeitrag",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Stellen Sie die Nachricht vor (etwa 2 Minuten): worum es geht, die Quelle und warum sie glaubwürdig ist, was im Gruppenbeitrag falsch ist, und Ihre Meinung. [fr] Présentez la nouvelle en 2 minutes environ : de quoi il s’agit, la source et sa fiabilité, l’erreur de la publication du groupe, et votre avis.",
+          "maxSeconds": 120
+        },
+        "written": null,
+        "checklist": [
+          "Ich sage, worum es geht: was, für wen, ab wann. [fr] Je dis de quoi il s’agit : quoi, pour qui, depuis quand.",
+          "Ich nenne die Quelle mit laut oder „In der Mitteilung steht, dass …“. [fr] Je cite la source avec laut ou une phrase avec dass.",
+          "Ich korrigiere den falschen Beitrag. [fr] Je corrige la publication erronée.",
+          "Ich sage meine Meinung und begründe sie. [fr] Je donne mon avis et je le justifie.",
+          "Ich spreche frei und deutlich, ohne abzulesen. [fr] Je parle librement et distinctement, sans lire."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : la nouvelle (quoi, pour qui, quand), la source et sa fiabilité, l’erreur corrigée, un avis, en 2 minutes",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-medien-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : Medien",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : Medien",
+        "description": "ICH KANN JETZT …\n[fr] Maintenant, je peux…\n• Tatsache, Meinung und Gerücht unterscheiden. [fr] distinguer un fait, une opinion et une rumeur.\n• eine Quelle nennen und berichten, was sie sagt (dass, ob, laut). [fr] citer une source et rapporter ce qu’elle dit (dass, ob, laut).\n• eine falsche Information freundlich korrigieren. [fr] corriger aimablement une information fausse.\n• in einem Forum meine Meinung mit Argumenten und Beispiel schreiben. [fr] donner mon avis dans un forum avec des arguments et un exemple.\n• eine Nachricht und ihre Quelle mündlich vorstellen. [fr] présenter oralement une nouvelle et sa source.\n\nSTRATÉGIES À GARDER\n• Avant de partager : qui a publié ? quand ? d’autres sources le disent-elles ?\n• Médiation : comparez point par point (lieu, durée, ce qu’on peut faire), puis corrigez en citant la source officielle.\n• Écrit : expérience, arguments avec exemple, contre-argument, conclusion et question ; le verbe juste après erstens, außerdem, trotzdem.\n• Lesen : les questions suivent l’ordre du texte ; méfiez-vous des réponses qui reprennent des mots du texte pour dire autre chose.\n\nÀ REVOIR SI BESOIN\n• dass, ob, laut et les subordonnées de temps : « À retenir » et « S’entraîner » du module Medien.\n• Les noms en -ung, -heit, -keit : « S’entraîner » et le lexique du module, avec le son.\n• La radio du quartier : réécoutez l’émission sans lire la transcription.\n• Les missions : relisez le commentaire de votre correcteur et reprenez le point « À retravailler ».",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-medien-atelier-modell-audio",
+      "kind": "audio",
+      "title": "La contribution de Samira lue à voix haute",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Samira",
+          "text": "Brauchen wir noch eine Lokalzeitung? Ich lese seit drei Jahren jeden Morgen unsere Lokalzeitung, und zwar online. Meiner Meinung nach brauchen wir sie heute mehr als früher."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Samira",
+          "text": "Erstens erfährt man dort, was direkt vor der eigenen Haustür passiert: Baustellen, neue Geschäfte oder Entscheidungen des Stadtrats. Zum Beispiel habe ich nur durch die Zeitung erfahren, dass unsere Straße im Sommer gesperrt wird."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Samira",
+          "text": "Zweitens prüfen Journalistinnen und Journalisten ihre Quellen, bevor sie etwas veröffentlichen. In sozialen Netzwerken ist das leider nicht immer so."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Samira",
+          "text": "Natürlich gibt es auch Nachteile: Ein Abonnement kostet Geld, und manche Artikel erscheinen später als im Netz. Trotzdem finde ich: Eine gute Lokalzeitung ist ihr Geld wert. Wie seht ihr das?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-s1",
+      "kind": "audio",
+      "title": "Situation 1 : une amie a entendu une rumeur",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Lisa",
+          "text": "Hast du schon gehört? Das Kino am Markt macht angeblich zu!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-s2",
+      "kind": "audio",
+      "title": "Situation 2 : un collègue a lu le journal",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Kollege",
+          "text": "Laut Zeitung wird die Brücke ab Montag gesperrt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-s3",
+      "kind": "audio",
+      "title": "Situation 3 : une question de la radio",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Moderatorin",
+          "text": "Wie informieren Sie sich über das, was in Ihrer Stadt passiert?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-s4",
+      "kind": "audio",
+      "title": "Situation 4 : une photo étonnante",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Nachbar",
+          "text": "Ich glaube, das Foto ist echt. Es sieht doch ganz realistisch aus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-mediation-gruppe",
+      "kind": "image",
+      "title": "Une annonce erronée dans le groupe du quartier",
+      "alt": "Groupe de quartier « Nordviertel » : Kai écrit que le bureau des citoyens ferme trois semaines dès lundi et que les rendez-vous ne se prennent plus qu’en ligne ; Rosa s’inquiète, car elle a besoin d’une nouvelle carte d’identité la semaine prochaine.",
+      "image": {
+        "layout": "forum",
+        "title": "Nachbarschaftsgruppe Nordviertel",
+        "posts": [
+          {
+            "author": "Kai_B",
+            "date": "Fr., 21:10",
+            "text": "Achtung, Leute! Ab Montag ist das Bürgerbüro für drei Wochen zu! Termine gibt’s nur noch online. Teilt das bitte!"
+          },
+          {
+            "author": "Rosa M.",
+            "date": "Fr., 21:25",
+            "text": "Oh nein, ich brauche doch nächste Woche einen neuen Ausweis. Weiß jemand mehr?"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-medien-atelier-sprechen-karten",
+      "kind": "image",
+      "title": "Un communiqué et une publication",
+      "alt": "Deux documents : un communiqué des transports de Neustadt du 12 mai annonçant dès le 1er juillet un billet scolaire à 1 euro par jour, en vente dans l’appli ou aux distributeurs ; une publication anonyme affirmant que les élèves voyageront gratuitement.",
+      "image": {
+        "layout": "cards",
+        "cards": [
+          {
+            "title": "Mitteilung der Verkehrsbetriebe",
+            "subtitle": "Neustadt, 12. Mai",
+            "icon": "bus",
+            "lines": [
+              "Ab 1. Juli: Schülerticket für 1 Euro pro Tag",
+              "Gilt für alle Busse und Straßenbahnen der Stadt",
+              "Kauf in der App oder am Automaten"
+            ]
+          },
+          {
+            "title": "Beitrag in einer Gruppe",
+            "subtitle": "gepostet von „StadtNews_24“",
+            "icon": "message-circle",
+            "lines": [
+              "Ab Juli fahren alle Schüler gratis Bus!!!",
+              "Teilt das, bevor es gelöscht wird!"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : rumeurs et informations",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Gibt es dafür eine offizielle Quelle?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : rumeurs et informations",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich würde lieber warten, bis die Stadt es bestätigt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : rumeurs et informations",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Danke für den Hinweis, ich schaue gleich nach."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Medien, atelier : relayer une information fiable",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "meiner Meinung nach"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Meinung sein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einerseits … andererseits"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gegenargument, die Gegenargumente"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erstens"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "außerdem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "alles in allem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zustimmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "widersprechen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Hinweis, die Hinweise"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "richtigstellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Falschmeldung, die Falschmeldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Abonnement, die Abonnements"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachfragen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie seht ihr das?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Pressestelle, die Pressestellen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

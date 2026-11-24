@@ -1,0 +1,1470 @@
+{
+  "id": "b1-arbeit-atelier",
+  "title": "Arbeit, atelier : postuler et se présenter en entretien",
+  "objective": "Écrire une candidature formelle par courriel, répondre aux questions d’un entretien avec des exemples, relayer des consignes à un collègue et s’entraîner à associer des annonces à des personnes.",
+  "prerequisites": [
+    "b1-arbeit"
+  ],
+  "audioProfile": "b1-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : passation pour l’équipe du matin, entretien pour un poste d’accueil."
+  ],
+  "layer": "content/b/source/b1/b1-arbeit-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "sehr-geehrte-damen-und-herren",
+      "word": "Sehr geehrte Damen und Herren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Madame, Monsieur (formule d’appel)",
+      "example": "Sehr geehrte Damen und Herren, hiermit bewerbe ich mich um die Stelle am Empfang.",
+      "note": "quand on ne connaît pas le nom",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "sehr-geehrte-frau",
+      "word": "Sehr geehrte Frau …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Madame … (formule d’appel avec le nom)",
+      "example": "Sehr geehrte Frau Brenner, vielen Dank für Ihre schnelle Antwort.",
+      "note": "au masculin : Sehr geehrter Herr …",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "mit-grossem-interesse",
+      "word": "mit großem Interesse",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avec beaucoup d’intérêt",
+      "example": "Mit großem Interesse habe ich Ihre Anzeige gelesen.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "sich-bewerben-als",
+      "word": "sich bewerben als",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "postuler comme, au poste de",
+      "example": "Hiermit bewerbe ich mich als Mitarbeiterin am Empfang.",
+      "note": "+ nominatif · sich um eine Stelle bewerben",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "zurzeit",
+      "word": "zurzeit",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "actuellement",
+      "example": "Zurzeit arbeite ich an der Rezeption eines Hotels.",
+      "note": "en un mot · verbe juste après : Zurzeit arbeite ich …",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "erfahrung-mitbringen",
+      "word": "Erfahrung mitbringen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir de l’expérience (à apporter)",
+      "example": "Ich bringe drei Jahre Erfahrung im Kundenservice mit.",
+      "note": "séparable : mit|bringen",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "es-macht-mir-spass-zu",
+      "word": "Es macht mir Spaß, … zu …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "j’aime… (+ infinitif avec zu)",
+      "example": "Es macht mir Spaß, mit Menschen zu arbeiten.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "meine-staerke-ist",
+      "word": "Meine Stärke ist …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "mon point fort est …",
+      "example": "Meine Stärke ist, dass ich auch unter Stress ruhig bleibe.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "ein-beispiel-dafuer",
+      "word": "Ein Beispiel dafür: …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "en voici un exemple : …",
+      "example": "Ich organisiere gern. Ein Beispiel dafür: Letzten Sommer habe ich ein Fest geplant.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "im-anhang",
+      "word": "im Anhang",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "en pièce jointe",
+      "example": "Im Anhang finden Sie meinen Lebenslauf und meine Zeugnisse.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-ueber-eine-einladung-freuen",
+      "word": "sich über eine Einladung freuen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être heureux d’être invité",
+      "example": "Über eine Einladung zu einem Gespräch würde ich mich sehr freuen.",
+      "note": "sich über + accusatif freuen",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "mit-freundlichen-gruessen",
+      "word": "Mit freundlichen Grüßen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Cordialement (formule finale formelle)",
+      "example": "Am Ende der E-Mail schreibe ich „Mit freundlichen Grüßen“ und meinen Namen.",
+      "note": "formule finale formelle (Sie), sans virgule après",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "ab-sofort",
+      "word": "ab sofort",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "dès maintenant, immédiatement",
+      "example": "Ich kann ab sofort bei Ihnen anfangen.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "das-ist-eine-gute-frage",
+      "word": "Das ist eine gute Frage.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "C’est une bonne question (pour gagner du temps).",
+      "example": "Das ist eine gute Frage. Ich glaube, meine größte Stärke ist meine Geduld.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "habe-ich-richtig-verstanden-dass",
+      "word": "Habe ich richtig verstanden, dass …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ai-je bien compris que … ?",
+      "example": "Habe ich richtig verstanden, dass ich auch samstags arbeite?",
+      "note": "verbe à la fin après dass",
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "in-diesem-fall-wuerde-ich",
+      "word": "In diesem Fall würde ich …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Dans ce cas, je … (hypothèse)",
+      "example": "In diesem Fall würde ich zuerst meine Kollegin fragen.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "vorrang-haben",
+      "word": "Vorrang haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir la priorité",
+      "example": "Der Rückruf hat Vorrang, die Anmeldungen haben Zeit bis Freitag.",
+      "note": null,
+      "audio": {
+        "media": "b1-arbeit-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-arbeit-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : une candidature et une présentation en entretien",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : une candidature et une présentation en entretien",
+        "description": "MODELL: EINE BEWERBUNG PER E-MAIL\n[fr] Modèle : une candidature par courriel\nLesen Sie die Bewerbung von Nadia Benali. Achten Sie auf den Aufbau und auf die festen Formulierungen. [fr] Lisez la candidature de Nadia Benali. Observez la structure et les formules toutes faites.\n\nBetreff: Bewerbung als Mitarbeiterin am Empfang, Ihre Anzeige vom 2. April\nSehr geehrte Frau Brenner,\nmit großem Interesse habe ich Ihre Stellenanzeige gelesen und bewerbe mich hiermit um die Stelle am Empfang in Teilzeit.\nZurzeit arbeite ich an der Rezeption eines Hotels in Hannover. Dort begrüße ich jeden Tag Gäste aus vielen Ländern, beantworte Fragen am Telefon und organisiere Reservierungen. Ich bleibe auch ruhig, wenn viele Menschen gleichzeitig etwas brauchen. Ein Beispiel dafür: Letzten Sommer habe ich an einem Abend allein zwei Reisegruppen eingecheckt, weil eine Kollegin krank war.\nIch spreche Französisch, Arabisch und gut Deutsch. Die Arbeit mit Kursteilnehmenden interessiert mich besonders, weil ich selbst seit zwei Jahren Kurse besuche und weiß, wie wichtig ein freundlicher Empfang ist. Ich könnte ab dem 1. Mai anfangen.\nÜber eine Einladung zu einem Vorstellungsgespräch würde ich mich sehr freuen.\nMit freundlichen Grüßen\nNadia Benali\nAnhang: Lebenslauf, Zeugnisse\n\nAUFBAU\n[fr] Structure\n1. Betreff: Stelle und Anzeige nennen. [fr] Objet : nommer le poste et l’annonce.\n2. Anrede: „Sehr geehrte Frau …“ oder „Sehr geehrte Damen und Herren“, dann ein Komma. Die nächste Zeile beginnt klein. [fr] Formule d’appel suivie d’une virgule ; la ligne suivante commence par une minuscule.\n3. Einleitung: Warum schreiben Sie? [fr] Introduction : pourquoi écrivez-vous ?\n4. Hauptteil: Erfahrung, ein konkretes Beispiel, Sprachen, Motivation. [fr] Développement : expérience, un exemple concret, langues, motivation.\n5. Schluss: Starttermin, Bitte um ein Gespräch, Grußformel. [fr] Conclusion : date de début, demande d’entretien, formule finale.\n\nEINLEITEN\n[fr] Introduire\n• Mit großem Interesse habe ich Ihre Anzeige gelesen. — J’ai lu votre annonce avec beaucoup d’intérêt.\n• Hiermit bewerbe ich mich um die Stelle als … — Par la présente, je postule au poste de …\nBEGRÜNDEN\n[fr] Justifier\n• Die Stelle interessiert mich, weil … — Ce poste m’intéresse parce que …\n• Ich bringe Erfahrung im Kundenservice mit. — J’ai de l’expérience dans le service client.\nBEISPIEL\n[fr] Donner un exemple\n• Ein Beispiel dafür: Letzten Sommer habe ich … — En voici un exemple : l’été dernier, j’ai …\n• Zum Beispiel habe ich … — Par exemple, j’ai …\nSCHLUSS\n[fr] Conclure\n• Ich könnte ab dem 1. Mai anfangen. — Je pourrais commencer le 1er mai.\n• Über eine Einladung würde ich mich sehr freuen. — Je serais heureux(se) d’être invité(e) à un entretien.\n• Mit freundlichen Grüßen — Cordialement (formule finale formelle)\n\nMODELL: SICH IM GESPRÄCH VORSTELLEN\n[fr] Modèle : se présenter en entretien\nHören Sie, wie Nadia auf die erste Frage antwortet. Ihre Antwort hat drei Teile: wer sie ist, was sie kann (mit Beispiel) und warum sie diese Stelle möchte. [fr] Écoutez comment Nadia répond à la première question. Sa réponse a trois parties : qui elle est, ce qu’elle sait faire (avec un exemple) et pourquoi elle veut ce poste.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-arbeit-atelier-modell-audio",
+          "caption": "Nadia stellt sich vor",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-arbeit-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : répondre aux questions d’un recruteur",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : répondre aux questions d’un recruteur",
+        "description": "Was passt? Wählen Sie die passende Reaktion. [fr] Quelle réplique convient ?\n\nSITUATION\n[fr] La situation\nSie sind im Vorstellungsgespräch beim Bildungszentrum Nord. Herr Yilmaz stellt Ihnen Fragen. Hören Sie jede Frage und wählen Sie die beste Antwort. [fr] Vous êtes en entretien au Bildungszentrum Nord. M. Yilmaz vous pose des questions. Écoutez chaque question et choisissez la meilleure réponse.\nSprechen Sie danach die guten Antworten laut nach. [fr] Répétez ensuite les bonnes réponses à voix haute.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-arbeit-atelier-interaktion-frage1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-frage2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-frage3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-frage4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-arbeit-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Frage 1: Was antworten Sie? [fr] Question 1 : que répondez-vous ?",
+          "explanation": "La question est hypothétique (« Was würden Sie tun, wenn … bräuchten? ») : on répond au Konjunktiv II, « Ich würde … ». La première réponse raconte un fait passé qui n’a pas eu lieu ; la troisième refuse de répondre, ce qui fait mauvaise impression.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe beiden Besuchern sofort geholfen, und das war für mich gar kein Problem.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich würde beide kurz begrüßen und ihnen dann nacheinander helfen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das weiß ich nicht, das ist nicht meine Aufgabe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Frage 2: Was antworten Sie? [fr] Question 2 : que répondez-vous ?",
+          "explanation": "M. Yilmaz demande pourquoi (warum), pas quand : la première réponse est hors sujet. Critiquer son employeur actuel est une maladresse classique en entretien ; mieux vaut une raison positive, tournée vers le nouveau poste.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich wechsle die Stelle am ersten Mai.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil mein Chef im Hotel sehr unfreundlich ist und ich keine Lust mehr auf ihn habe.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich möchte mehr mit Menschen arbeiten, die etwas lernen wollen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Frage 3: Was antworten Sie? [fr] Question 3 : que répondez-vous ?",
+          "explanation": "Une question préparée et polie montre votre intérêt : Könnten Sie mir sagen, wie … (verbe à la fin). « Tschüss » est trop familier, et des questions directes sur l’argent et les congés paraissent brutales à la fin d’un premier entretien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja: Könnten Sie mir sagen, wie die Einarbeitung organisiert ist?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nein, ich habe keine Fragen. Tschüss!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja: Wann bekomme ich mein Geld, und wie viele Urlaubstage habe ich im ersten Jahr?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Herr Yilmaz beendet das Gespräch. Was sagen Sie? [fr] M. Yilmaz termine l’entretien. Que dites-vous ?",
+          "explanation": "On remercie pour l’entretien et on dit qu’on attend la réponse avec plaisir : « Ich freue mich auf Ihre Nachricht » (sich freuen auf + accusatif, pour un événement à venir). Protester contre le délai serait impoli ; la troisième réplique n’a pas de sens.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bis Ende nächster Woche? Das ist mir ehrlich gesagt viel zu spät, ich brauche die Antwort früher.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vielen Dank für das Gespräch. Ich freue mich auf Ihre Nachricht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Danke, ich habe mich schon bei Ihnen gemeldet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich würde beide kurz begrüßen und ihnen dann nacheinander helfen.",
+          "accept": [
+            "Ich würde beide kurz begrüßen und ihnen dann nacheinander helfen."
+          ],
+          "explanation": "Réponse hypothétique : « würde » + infinitifs à la fin (begrüßen, helfen). « Nacheinander » : l’un après l’autre ; accent sur -AN-.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnten Sie mir sagen, wie die Einarbeitung organisiert ist?",
+          "accept": [
+            "Könnten Sie mir sagen, wie die Einarbeitung organisiert ist?"
+          ],
+          "explanation": "Question indirecte : le verbe « ist » ferme la phrase. Faites monter légèrement la voix à la fin : c’est une question polie.",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Vielen Dank für das Gespräch. Ich freue mich auf Ihre Nachricht.",
+          "accept": [
+            "Vielen Dank für das Gespräch. Ich freue mich auf Ihre Nachricht."
+          ],
+          "explanation": "Formule de clôture d’un entretien. « Gespräch » : le ä est long ; « freue » se prononce « froï-e ».",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b1-arbeit-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : transmettre les priorités à un collègue",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : transmettre les priorités à un collègue",
+        "description": "SITUATION\n[fr] La situation\nSie arbeiten am Empfang. Ihre Chefin Lea hat heute Abend drei lange Nachrichten an das Team geschickt. Morgen früh ist Ihr neuer Kollege Tim von 8:30 bis 11:30 Uhr allein am Empfang. Er braucht nur das Wichtigste, kurz und einfach. [fr] Vous travaillez à l’accueil. Votre cheffe Lea a envoyé ce soir trois longs messages à l’équipe. Demain matin, votre nouveau collègue Tim sera seul à l’accueil de 8 h 30 à 11 h 30. Il n’a besoin que de l’essentiel, court et simple.\n\nDIE NACHRICHT VON LEA\n[fr] Le message de Lea\nHallo zusammen, morgen kommen die ersten Besucher schon um neun Uhr. Bevor ihr die Tür öffnet, legt bitte die Namensschilder neben die Teilnehmerliste. Die Ersatzschilder sind in der unteren Schublade.\nPrüft danach, ob im Seminarraum drei Tische stehen. Wenn ein Tisch fehlt, sagt bitte zuerst Herrn Berger Bescheid. Er weiß, wo die zusätzlichen Möbel sind. Die Anmeldungen für nächste Woche haben Zeit bis Freitag.\nEine Teilnehmerin aus dem Montagskurs hat um einen Rückruf gebeten. Ihre Nummer steht auf dem Zettel neben dem Telefon. Ruft sie bitte bis elf Uhr zurück, denn sie muss sich bis zwölf Uhr für einen Kurs entscheiden. Um halb zwölf übernehme ich den Empfang. Schreibt mir bitte kurz auf, was dann noch offen ist. Danke! Lea\n\nAUFGABE\n[fr] Votre tâche\nMachen Sie Notizen für Tim, wählen Sie die wichtigen Informationen und formulieren Sie einfache Sätze mit „du“. [fr] Prenez des notes pour Tim, choisissez les informations importantes et formulez des phrases simples avec « du ».\nTIPP\n[fr] Conseil\nBei einer Mediation geben Sie nicht alles weiter, sondern nur das, was die Person wirklich braucht. [fr] En médiation, on ne transmet pas tout : seulement ce dont la personne a vraiment besoin.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-arbeit-atelier-mediation-nachricht",
+          "caption": "Die Nachricht von Lea",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Notizen für Tim. [fr] Complétez les notes pour Tim.",
+          "text": "Vor 9 Uhr: Namensschilder neben die [[1]] legen · danach: im Seminarraum [[2]] Tische prüfen · fehlt ein Tisch: [[3]] Bescheid sagen · bis [[4]] Uhr: Teilnehmerin aus dem Montagskurs zurückrufen",
+          "explanation": "Les trois priorités de la matinée, dans l’ordre de Lea : les badges près de la liste des participants avant l’ouverture, les trois tables (avec M. Berger si l’une manque), puis le rappel avant onze heures.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Teilnehmerliste",
+                "Liste"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "drei",
+                "3"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Herrn Berger",
+                "Herr Berger",
+                "Berger"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "elf",
+                "11"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist für Tim morgen NICHT wichtig? [fr] Qu’est-ce qui n’est PAS important pour Tim demain ?",
+          "explanation": "« Die Anmeldungen für nächste Woche haben Zeit bis Freitag » : ce n’est pas une tâche du matin. Pour Tim, seul à l’accueil, l’important est ce qui doit être fait avant 11 h 30.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Namensschilder vor 9 Uhr",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "der Rückruf bis elf Uhr",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "die Anmeldungen für nächste Woche",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Tim fragt: „Es fehlen zwei Namensschilder. Wo finde ich neue?“ Ergänzen Sie Ihre Antwort. [fr] Tim demande où trouver d’autres badges. Complétez votre réponse.",
+          "text": "Neue Namensschilder findest du in der [[1]] Schublade, und die Nummer der Teilnehmerin liegt neben dem [[2]].",
+          "explanation": "« Die Ersatzschilder sind in der unteren Schublade » : les badges de rechange sont dans le tiroir du bas (in der unteren Schublade, datif féminin, d’où -en). Le numéro de la participante est sur le papier près du téléphone (neben dem Telefon).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "unteren"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Telefon"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Formulieren Sie für Tim einfach: Bilden Sie den Satz. [fr] Reformulez simplement pour Tim : remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wenn",
+              "ein Tisch",
+              "fehlt,",
+              "sagst",
+              "du",
+              "Herrn Berger",
+              "Bescheid."
+            ]
+          ],
+          "explanation": "Wenn ouvre la subordonnée, son verbe « fehlt » va à la fin. La principale suit la virgule et commence par le verbe : sagst du. Le tutoiement (du) convient entre collègues ; Lea écrivait au groupe avec ihr (sagt)."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Nachricht an Tim. [fr] Complétez votre message à Tim.",
+          "text": "Und zum Schluss: Um [[1]] kommt Lea und übernimmt den [[2]]. Schreib ihr kurz auf, was noch offen ist.",
+          "explanation": "« Um halb zwölf übernehme ich den Empfang » : halb zwölf = 11 h 30 (la demi-heure avant midi). Übernehmen : prendre le relais. Tim doit noter ce qui reste à faire.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "halb zwölf",
+                "11.30",
+                "11:30",
+                "11.30 Uhr",
+                "11:30 Uhr"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Empfang"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-arbeit-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : les erreurs fréquentes dans une candidature",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : les erreurs fréquentes dans une candidature",
+        "description": "Diese Sätze kommen aus Bewerbungen von Kursteilnehmenden. Finden Sie die richtige Form. [fr] Ces phrases viennent de candidatures d’apprenants. Trouvez la forme correcte.\n\nKORREKTURZEICHEN\n[fr] Les codes de correction\nVotre professeur emploie ces codes dans ses commentaires : St (place des mots), G (grammaire), W (vocabulaire), R (orthographe), A (registre : du ou Sie). Ici, chaque question en travaille un.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr] St : quelle phrase est correcte ?",
+          "explanation": "Le verbe conjugué est toujours en deuxième position : si « Zurzeit » ouvre la phrase, le sujet passe après le verbe (arbeite ich). Calquer l’ordre français « actuellement je travaille » est l’erreur la plus fréquente des francophones.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zurzeit ich arbeite in einem Hotel.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zurzeit arbeite ich in einem Hotel.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Zurzeit ich arbeiten in einem Hotel.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "G: Sie wohnen schon drei Jahre in Hannover. Welcher Satz ist richtig? [fr] G : vous habitez à Hanovre depuis trois ans. Quelle phrase est correcte ?",
+          "explanation": "Une situation qui dure encore : seit + datif (drei Jahren) et le présent, comme en français (« j’habite depuis »). « Für drei Jahre » signifie « pour trois ans » (durée prévue) ; le Perfekt laisserait entendre que c’est fini.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich wohne für drei Jahre in Hannover.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe seit drei Jahren in Hannover gewohnt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich wohne seit drei Jahren in Hannover.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "W: Ergänzen Sie die Präpositionen. [fr] W : complétez avec les prépositions.",
+          "text": "Ich bewerbe mich [[1]] die Stelle [[2]] Mitarbeiterin am Empfang.",
+          "explanation": "Sich um eine Stelle bewerben (postuler à un poste, accusatif) ; als + nom de métier pour la fonction (comme, en tant que). « Sich für eine Stelle bewerben » s’entend à l’oral, mais um est la construction standard, attendue dans une candidature écrite.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "um"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "als"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "A: Welcher Satz passt in eine E-Mail an Frau Brenner? [fr] A : quelle phrase convient dans un courriel à Mme Brenner ?",
+          "explanation": "Avec une personne qu’on vouvoie, le possessif est Ihr, avec une majuscule : Ihre Nachricht, Ihre Einladung. Deine appartient au tutoiement ; « dich » est un pronom, pas un possessif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vielen Dank für deine Nachricht und deine Einladung.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vielen Dank für Ihre Nachricht und Ihre Einladung.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Danke für dich Nachricht und die Einladung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "G und St: Ergänzen Sie. [fr] G et St : complétez.",
+          "text": "Ich interessiere mich [[1]] diese Stelle, weil ich gern mit Menschen [[2]].",
+          "explanation": "Sich interessieren für + accusatif (s’intéresser à). Après weil, le verbe conjugué va à la fin : …, weil ich gern mit Menschen arbeite.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "arbeite"
+              ],
+              "hint": "arbeiten",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "G: Welcher Satz beendet die Bewerbung richtig? [fr] G : quelle phrase termine correctement la candidature ?",
+          "explanation": "Sich freuen auf + accusatif : se réjouir d’une chose à venir (la réponse n’est pas encore arrivée). Sich freuen über : se réjouir de ce qui est déjà là. « Für » et « an » sont des calques fautifs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich freue mich auf Ihre Antwort.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich freue mich für Ihre Antwort.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich freue mich an Ihre Antwort.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-arbeit-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Format d’examen : associer des annonces à des personnes",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Format d’examen : associer des annonces à des personnes",
+        "description": "PRÜFUNGSTRAINING LESEN\n[fr] Entraînement à l’examen : lecture\nFünf Personen suchen eine Arbeit. Lesen Sie die drei Anzeigen. Welche Anzeige passt zu welcher Person? Für manche Personen gibt es keine passende Anzeige. [fr] Cinq personnes cherchent un emploi. Lisez les trois annonces. Quelle annonce convient à quelle personne ? Pour certaines personnes, aucune annonce ne convient.\nZEIT\n[fr] Temps\nEtwa 15 Minuten. Arbeiten Sie ohne Wörterbuch. [fr] Environ 15 minutes. Travaillez sans dictionnaire.\n\nSTRATEGIE\n[fr] Stratégie\n1. Lesen Sie zuerst die Personen. Merken Sie sich zwei oder drei Bedingungen: Zeit, Ort, Sprache, Erfahrung. [fr] Lisez d’abord les personnes. Retenez deux ou trois conditions : horaires, lieu, langue, expérience.\n2. Suchen Sie dann in den Anzeigen. Eine Anzeige passt nur, wenn alle Bedingungen stimmen. [fr] Cherchez ensuite dans les annonces. Une annonce ne convient que si toutes les conditions sont remplies.\n3. Vorsicht bei gleichen Wörtern: Ein Wort aus der Anzeige in der Beschreibung der Person heißt noch nicht, dass die Anzeige passt. [fr] Attention aux mots identiques : un même mot dans l’annonce et chez la personne ne suffit pas.\n\nANZEIGE A\nDas Café am Stadtpark sucht eine Aushilfe (m/w/d) für das Wochenende: samstags und sonntags von 8 bis 14 Uhr. Erfahrung im Service ist erwünscht, gute Deutschkenntnisse sind nötig. Wir zahlen 14 Euro pro Stunde. Ab sofort. Bitte bewerben Sie sich persönlich im Café.\nANZEIGE B\nEine Sprachschule sucht eine Mitarbeiterin oder einen Mitarbeiter (m/w/d) für das Sekretariat, 15 Stunden pro Woche, montags bis mittwochs am Nachmittag. Sie sprechen Deutsch und Französisch, arbeiten gern am Computer und haben Freude am Kontakt mit Menschen. Bewerbung per E-Mail.\nANZEIGE C\nEine Logistikfirma sucht Lagerhelfer (m/w/d) in Vollzeit. Wir arbeiten im Schichtdienst: Frühschicht ab 6 Uhr oder Spätschicht bis 22 Uhr. Ein Staplerschein ist wünschenswert, aber nicht nötig, denn wir bilden Sie selbst aus. Gute Bezahlung und Zuschuss zum Monatsticket.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-arbeit-atelier-pruefung-anzeigen",
+          "caption": "Drei Anzeigen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Person 1: Amira studiert Informatik und sucht einen Job für 10 bis 15 Stunden pro Woche. Montags bis mittwochs hat sie ab 13 Uhr frei. Sie spricht Arabisch, Französisch und Deutsch. Welche Anzeige passt? [fr] Quelle annonce convient ?",
+          "explanation": "Annonce B : 15 heures par semaine (Amira en cherche 10 à 15), du lundi au mercredi l’après-midi (elle est libre dès 13 h ces jours-là), allemand et français exigés. Toutes les conditions sont remplies.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Anzeige A",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Anzeige B",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Anzeige C",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "keine Anzeige",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Person 2: Lukas sucht eine Stelle im Büro in Teilzeit. Er kann nur vormittags arbeiten, weil er nachmittags seine Tochter betreut. Welche Anzeige passt? [fr] Quelle annonce convient ?",
+          "explanation": "Aucune annonce : le seul travail de bureau (B, secrétariat) a lieu l’après-midi, du lundi au mercredi, justement quand Lukas garde sa fille. A (café) et C (entrepôt) ne sont pas des postes de bureau.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Anzeige A",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Anzeige B",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Anzeige C",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "keine Anzeige",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Person 3: Fatou hat zwei Jahre in einem Restaurant gearbeitet. Unter der Woche macht sie eine Ausbildung, aber am Wochenende möchte sie etwas Geld verdienen. Welche Anzeige passt? [fr] Quelle annonce convient ?",
+          "explanation": "Annonce A : un extra le samedi et le dimanche, expérience en service souhaitée. Fatou est en formation en semaine et a deux ans d’expérience en restaurant.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Anzeige A",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Anzeige B",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Anzeige C",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "keine Anzeige",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Person 4: Marek möchte eine feste Stelle mit vielen Stunden. Er arbeitet gern körperlich und kann auch sehr früh anfangen. Einen Staplerschein hat er nicht. Welche Anzeige passt? [fr] Quelle annonce convient ?",
+          "explanation": "Annonce C : temps plein (Vollzeit), travail physique en entrepôt, équipe du matin dès 6 h. Le permis de cariste (Staplerschein) n’est « pas nécessaire » : l’entreprise forme elle-même.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Anzeige A",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Anzeige B",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Anzeige C",
+              "correct": true
+            },
+            {
+              "id": "d",
+              "label": "keine Anzeige",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Person 5: Elena sucht eine Stelle als Kellnerin am Abend, am liebsten von Montag bis Freitag. Sie hat drei Jahre Erfahrung im Service. Welche Anzeige passt? [fr] Quelle annonce convient ?",
+          "explanation": "Aucune annonce : le café (A) cherche quelqu’un le week-end, de 8 h à 14 h, alors qu’Elena veut travailler le soir en semaine. L’expérience en service ne suffit pas si les horaires ne vont pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Anzeige A",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Anzeige B",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Anzeige C",
+              "correct": false
+            },
+            {
+              "id": "d",
+              "label": "keine Anzeige",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-arbeit-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : postuler par courriel",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : postuler par courriel",
+        "description": "SITUATION\n[fr] La situation\nSie suchen eine neue Stelle und haben zwei Anzeigen gefunden. Wählen Sie eine Anzeige und bewerben Sie sich per E-Mail. [fr] Vous cherchez un nouvel emploi et avez trouvé deux annonces. Choisissez-en une et postulez par courriel.\n\nANZEIGE 1\nDas Hotel am Stadtpark sucht eine Rezeptionistin oder einen Rezeptionisten (m/w/d) in Teilzeit, ab dem 1. Juni. Früh- und Spätdienst, auch am Wochenende. Gute Deutsch- und Englischkenntnisse sind wichtig. Ihr Ansprechpartner ist Herr Wagner.\nANZEIGE 2\nEin Bio-Supermarkt im Stadtzentrum sucht eine Verkäuferin oder einen Verkäufer (m/w/d) in Vollzeit. Sie beraten unsere Kundinnen und Kunden und arbeiten an der Kasse. Erfahrung im Verkauf ist ein Plus. Ihre Ansprechpartnerin ist Frau Lorenz.\n\nSO GEHEN SIE VOR\n[fr] Démarche\n1. Planen (5 Minuten): Überlegen Sie sich Stichwörter zu Ihrer Erfahrung, zu einem Beispiel und zu Ihren Sprachen. [fr] Planifier (5 minutes) : trouvez des mots-clés sur votre expérience, un exemple et vos langues.\n2. Schreiben (15 Minuten): Folgen Sie dem Aufbau aus dem Modell von Nadia. [fr] Écrire (15 minutes) : suivez la structure du modèle de Nadia.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste noch einmal. [fr] Vérifier (5 minutes) : relisez votre texte avec la liste de vérification.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine Bewerbung per E-Mail an die Person aus der Anzeige (120 bis 150 Wörter). Nennen Sie die Stelle, Ihre Erfahrung mit einem konkreten Beispiel, Ihre Sprachkenntnisse und ab wann Sie anfangen können. Bitten Sie am Ende um ein Gespräch. [fr] Écrivez un courriel de candidature à la personne indiquée dans l’annonce (120 à 150 mots). Nommez le poste, votre expérience avec un exemple concret, vos langues et votre date de début possible. Demandez un entretien pour finir.",
+          "maxChars": 1500,
+          "minWords": 120
+        },
+        "checklist": [
+          "Betreff, Anrede mit Namen und Grußformel [fr] Objet, formule d’appel avec le nom, formule finale",
+          "Die Stelle und die Anzeige sind genannt. [fr] Le poste et l’annonce sont nommés.",
+          "Erfahrung mit einem konkreten Beispiel [fr] Expérience avec un exemple concret",
+          "Sprachkenntnisse und Starttermin [fr] Langues et date de début",
+          "Immer „Sie“ und „Ihr“; nach „weil“ steht das Verb am Ende. [fr] Toujours « Sie » ; après « weil », verbe à la fin."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : poste et annonce nommés, expérience avec un exemple, langues, date de début et demande d’entretien ; registre formel (Sie)",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-arbeit-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : répondre à trois questions d’entretien",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : répondre à trois questions d’entretien",
+        "description": "SITUATION\n[fr] La situation\nSie haben ein Vorstellungsgespräch für eine Stelle am Empfang. Herr Yilmaz stellt Ihnen drei Fragen. Hören Sie die Fragen und nehmen Sie Ihre Antworten auf. [fr] Vous passez un entretien pour un poste d’accueil. M. Yilmaz vous pose trois questions. Écoutez-les et enregistrez vos réponses.\n\nDIE FRAGEN\n[fr] Les questions\n1. Erzählen Sie bitte kurz etwas über sich und über Ihre Berufserfahrung. [fr] Parlez brièvement de vous et de votre expérience professionnelle.\n2. Beschreiben Sie eine Situation, in der Sie mehrere Aufgaben gleichzeitig erledigen mussten. [fr] Décrivez une situation où vous avez dû faire plusieurs tâches à la fois.\n3. Was würden Sie tun, wenn ein Kursteilnehmer am Empfang sehr unfreundlich wäre? [fr] Que feriez-vous si un participant était très désagréable à l’accueil ?\nZum Schluss stellen Sie selbst eine höfliche Frage zur Stelle. [fr] Pour finir, posez vous-même une question polie sur le poste.\n\nVORBEREITUNG\n[fr] Préparation\nNehmen Sie sich fünf Minuten Zeit und überlegen Sie sich nur Stichwörter, keine ganzen Sätze. Frage 2: Problem, Handlung, Ergebnis. Frage 3: „Ich würde zuerst …, dann …“. [fr] Prenez cinq minutes pour trouver des mots-clés, pas des phrases entières. Question 2 : problème, action, résultat. Question 3 : « Ich würde zuerst …, dann … ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-arbeit-atelier-sprechen-fragen",
+          "caption": "Die Fragen von Herrn Yilmaz",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Beantworten Sie die drei Fragen nacheinander, frei und ohne abzulesen (zusammen etwa zwei Minuten). Stellen Sie am Ende eine höfliche Frage zur Stelle. [fr] Répondez aux trois questions l’une après l’autre, librement et sans lire (environ deux minutes en tout). Posez pour finir une question polie sur le poste.",
+          "maxSeconds": 150
+        },
+        "written": null,
+        "checklist": [
+          "Ich stelle mich kurz vor: Name, Herkunft, jetzige Arbeit. [fr] Je me présente : nom, origine, emploi actuel.",
+          "Ich erzähle ein Beispiel: Problem, Handlung, Ergebnis. [fr] Je raconte un exemple : problème, action, résultat.",
+          "Frage 3 beantworte ich mit „Ich würde …“. [fr] Je réponds à la question 3 avec « Ich würde … ».",
+          "Ich stelle eine höfliche indirekte Frage. [fr] Je pose une question indirecte polie."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : trois réponses complètes (présentation, exemple vécu, réaction hypothétique) et une question polie, dans le temps imparti",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-arbeit-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : travail et candidature",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : travail et candidature",
+        "description": "Lesen Sie die Ziele der Module Arbeit. Was können Sie schon gut? Was möchten Sie noch üben? [fr] Relisez les objectifs des modules Arbeit. Que savez-vous déjà bien faire ? Que voulez-vous encore travailler ?\n\nICH KANN …\n[fr] Je peux…\n• Ich kann eine Stellenanzeige verstehen und prüfen, ob sie zu mir passt. [fr] Je peux comprendre une offre d’emploi et vérifier si elle me convient.\n• Ich kann eine formelle Bewerbung per E-Mail schreiben. [fr] Je peux écrire une candidature formelle par courriel.\n• Ich kann im Gespräch meine Erfahrung mit einem Beispiel erklären. [fr] Je peux expliquer mon expérience avec un exemple pendant un entretien.\n• Ich kann höflich nachfragen: „Könnten Sie mir sagen, ob …?“ [fr] Je peux demander poliment : « Könnten Sie mir sagen, ob … ? »\n• Ich kann einer Kollegin oder einem Kollegen die wichtigsten Aufgaben weitergeben. [fr] Je peux transmettre les tâches essentielles à un ou une collègue.\n\nSTRATEGIEN\n[fr] Stratégies\n• Beim Lesen von Anzeigen: alle Bedingungen prüfen, nicht nur gleiche Wörter suchen. [fr] En lisant des annonces : vérifier toutes les conditions, pas seulement les mots identiques.\n• Im Gespräch: Beispiel in drei Schritten erzählen (Problem, Handlung, Ergebnis). [fr] En entretien : raconter un exemple en trois étapes (problème, action, résultat).\n• Bei einer Mediation: nur das Wichtigste weitergeben, in einfachen Sätzen. [fr] En médiation : ne transmettre que l’essentiel, en phrases simples.\n\nNOCH NICHT SICHER?\n[fr] Pas encore sûr ?\nKonjunktiv II de politesse et questions indirectes : reprenez « À retenir » puis « S’entraîner » du module Arbeit. Formules de la candidature : relisez le modèle de Nadia et le lexique de cet atelier. Erreurs de place du verbe (St) : refaites l’exercice « Corriger ».",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-arbeit-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : se présenter au début d’un entretien",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Frau Benali, erzählen Sie doch bitte zuerst etwas über sich."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia Benali",
+          "text": "Gern. Ich heiße Nadia Benali, ich komme aus Marseille und lebe seit vier Jahren in Hannover. Zurzeit arbeite ich an der Rezeption eines Hotels."
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia Benali",
+          "text": "Meine Stärke ist, dass ich auch in stressigen Situationen freundlich bleibe. Ein Beispiel dafür: Letzten Sommer war eine Kollegin krank, und ich habe an einem Abend allein zwei Reisegruppen eingecheckt."
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia Benali",
+          "text": "Ich habe zuerst die Gruppe informiert, die schon wartete, und dann die zweite Gruppe. Am Ende hatten alle ihre Zimmer, und niemand hat sich beschwert."
+        },
+        {
+          "voice": "frau",
+          "name": "Nadia Benali",
+          "text": "Ihre Stelle interessiert mich, weil ich gern mit Menschen arbeite, die etwas Neues lernen. Ich besuche selbst seit zwei Jahren Kurse und weiß, wie wichtig ein freundlicher Empfang ist."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-frage1",
+      "kind": "audio",
+      "title": "Question 1 du recruteur",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Was würden Sie tun, wenn zwei Besucher gleichzeitig Hilfe bräuchten?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-frage2",
+      "kind": "audio",
+      "title": "Question 2 du recruteur",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Warum möchten Sie Ihre Stelle im Hotel wechseln?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-frage3",
+      "kind": "audio",
+      "title": "Question 3 du recruteur",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "So, das war es von unserer Seite. Haben Sie noch Fragen an uns?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-frage4",
+      "kind": "audio",
+      "title": "Fin de l’entretien",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Gut. Wir melden uns bis Ende nächster Woche bei Ihnen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-mediation-nachricht",
+      "kind": "image",
+      "title": "Message de Lea pour l’équipe du matin",
+      "alt": "Trois messages envoyés par Lea ce soir pour demain matin : préparer les badges avant 9 heures, vérifier les trois tables, rappeler une participante avant 11 heures.",
+      "image": {
+        "layout": "messages",
+        "icon": "message-square",
+        "title": "Lea · Empfang",
+        "subtitle": "Für morgen früh",
+        "messages": [
+          {
+            "from": "Lea",
+            "time": "21:14",
+            "text": "Hallo zusammen, morgen kommen die ersten Besucher schon um neun Uhr. Bevor ihr die Tür öffnet, legt bitte die Namensschilder neben die Teilnehmerliste. Die Ersatzschilder sind in der unteren Schublade."
+          },
+          {
+            "from": "Lea",
+            "time": "21:15",
+            "text": "Prüft danach, ob im Seminarraum drei Tische stehen. Wenn ein Tisch fehlt, sagt bitte zuerst Herrn Berger Bescheid. Er weiß, wo die zusätzlichen Möbel sind. Die Anmeldungen für nächste Woche haben Zeit bis Freitag."
+          },
+          {
+            "from": "Lea",
+            "time": "21:17",
+            "text": "Eine Teilnehmerin aus dem Montagskurs hat um einen Rückruf gebeten. Ihre Nummer steht auf dem Zettel neben dem Telefon. Ruft sie bitte bis elf Uhr zurück, denn sie muss sich bis zwölf Uhr für einen Kurs entscheiden. Um halb zwölf übernehme ich den Empfang. Schreibt mir bitte kurz auf, was dann noch offen ist. Danke! Lea"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-arbeit-atelier-pruefung-anzeigen",
+      "kind": "image",
+      "title": "Trois petites annonces",
+      "alt": "Trois annonces : A, un café cherche un extra le week-end ; B, une école de langues cherche une personne pour son secrétariat ; C, une entreprise de logistique cherche un manutentionnaire à temps plein.",
+      "image": {
+        "layout": "cards",
+        "cards": [
+          {
+            "title": "Anzeige A",
+            "subtitle": "Café am Stadtpark",
+            "icon": "coffee",
+            "lines": [
+              "Aushilfe (m/w/d) am Wochenende",
+              "Sa + So, 8–14 Uhr",
+              "Erfahrung im Service erwünscht",
+              "14 € pro Stunde · ab sofort"
+            ]
+          },
+          {
+            "title": "Anzeige B",
+            "subtitle": "Sprachschule",
+            "icon": "languages",
+            "lines": [
+              "Sekretariat (m/w/d), 15 Std./Woche",
+              "Mo–Mi nachmittags",
+              "Deutsch und Französisch",
+              "Bewerbung per E-Mail"
+            ]
+          },
+          {
+            "title": "Anzeige C",
+            "subtitle": "Logistikfirma",
+            "icon": "forklift",
+            "lines": [
+              "Lagerhelfer (m/w/d) in Vollzeit",
+              "Früh- oder Spätschicht",
+              "Staplerschein nicht nötig",
+              "Zuschuss zum Monatsticket"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-arbeit-atelier-sprechen-fragen",
+      "kind": "audio",
+      "title": "Les trois questions de l’entretien",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Erste Frage: Erzählen Sie bitte kurz etwas über sich und über Ihre Berufserfahrung."
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Zweite Frage: Beschreiben Sie eine Situation, in der Sie mehrere Aufgaben gleichzeitig erledigen mussten. Was haben Sie gemacht?"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Dritte Frage: Was würden Sie tun, wenn ein Kursteilnehmer am Empfang sehr unfreundlich wäre?"
+        },
+        {
+          "pause": 2
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Yilmaz",
+          "text": "Und zum Schluss: Haben Sie noch Fragen an uns?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : répondre aux questions d’un recruteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich würde beide kurz begrüßen und ihnen dann nacheinander helfen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : répondre aux questions d’un recruteur",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Könnten Sie mir sagen, wie die Einarbeitung organisiert ist?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : répondre aux questions d’un recruteur",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Vielen Dank für das Gespräch. Ich freue mich auf Ihre Nachricht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-arbeit-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Arbeit, atelier : postuler et se présenter en entretien",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Sehr geehrte Damen und Herren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Sehr geehrte Frau …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mit großem Interesse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich bewerben als"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zurzeit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Erfahrung mitbringen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es macht mir Spaß, … zu …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Meine Stärke ist …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ein Beispiel dafür: …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Anhang"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich über eine Einladung freuen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mit freundlichen Grüßen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ab sofort"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das ist eine gute Frage."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Habe ich richtig verstanden, dass …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "In diesem Fall würde ich …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vorrang haben"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

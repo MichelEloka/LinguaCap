@@ -1,0 +1,2341 @@
+{
+  "id": "b1-neuanfang",
+  "title": "Neuanfang : raconter un nouveau départ",
+  "objective": "Raconter dans l’ordre une étape de sa vie (déménagement, nouveau travail), situer les moments avec als, wenn, nachdem et seitdem, et réagir au récit de quelqu’un.",
+  "prerequisites": [],
+  "audioProfile": "b1-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : portrait de Selin, dialogue d’Aylin et Tobias."
+  ],
+  "grammarFocus": [
+    "praeteritum-perfekt",
+    "plusquamperfekt-nachdem",
+    "als-wenn"
+  ],
+  "layer": "content/b/source/b1/b1-neuanfang.mjs",
+  "vocabulary": [
+    {
+      "id": "umzug",
+      "word": "Umzug",
+      "article": "der",
+      "plural": "Umzüge",
+      "partOfSpeech": "noun",
+      "translation": "le déménagement",
+      "example": "Nach dem Umzug kannte ich in Leipzig fast niemanden.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "umziehen",
+      "word": "umziehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "déménager",
+      "example": "Im Mai wollen wir nach Leipzig umziehen.",
+      "note": "séparable : um|ziehen · Perfekt avec sein : ist umgezogen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "neuanfang",
+      "word": "Neuanfang",
+      "article": "der",
+      "plural": "Neuanfänge",
+      "partOfSpeech": "noun",
+      "translation": "le nouveau départ",
+      "example": "Der Neuanfang war nicht leicht, aber spannend.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "wendepunkt",
+      "word": "Wendepunkt",
+      "article": "der",
+      "plural": "Wendepunkte",
+      "partOfSpeech": "noun",
+      "translation": "le tournant",
+      "example": "Der Lauftreff war ein Wendepunkt in meinem ersten Jahr.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "herausforderung",
+      "word": "Herausforderung",
+      "article": "die",
+      "plural": "Herausforderungen",
+      "partOfSpeech": "noun",
+      "translation": "le défi",
+      "example": "Die Sprache war für mich die größte Herausforderung.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "erfahrung",
+      "word": "Erfahrung",
+      "article": "die",
+      "plural": "Erfahrungen",
+      "partOfSpeech": "noun",
+      "translation": "l’expérience",
+      "example": "Das war eine wichtige Erfahrung für mich.",
+      "note": "Erfahrungen sammeln : acquérir de l’expérience",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "stelle",
+      "word": "Stelle",
+      "article": "die",
+      "plural": "Stellen",
+      "partOfSpeech": "noun",
+      "translation": "le poste, l’emploi",
+      "example": "Meine Firma hat mir in Hamburg eine Stelle angeboten.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "gegend",
+      "word": "Gegend",
+      "article": "die",
+      "plural": "Gegenden",
+      "partOfSpeech": "noun",
+      "translation": "le coin, le quartier, la région",
+      "example": "Ich kenne die Gegend noch nicht gut.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "sich-eingewoehnen",
+      "word": "sich eingewöhnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prendre ses marques, s’acclimater",
+      "example": "Ich habe mich schnell in der neuen Stadt eingewöhnt.",
+      "note": "séparable : ein|gewöhnen · sich in + datif eingewöhnen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "sich-gewoehnen",
+      "word": "sich gewöhnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’habituer",
+      "example": "Langsam habe ich mich an das Wetter gewöhnt.",
+      "note": "sich an + accusatif gewöhnen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-zurechtfinden",
+      "word": "sich zurechtfinden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’y retrouver, se repérer",
+      "example": "Am Anfang fand ich mich in der Universität kaum zurecht.",
+      "note": "séparable : zurecht|finden",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "anschluss-finden",
+      "word": "Anschluss finden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "se faire des contacts, trouver sa place",
+      "example": "Im Lauftreff habe ich schnell Anschluss gefunden.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "heimweh-haben",
+      "word": "Heimweh haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir le mal du pays",
+      "example": "In den ersten Wochen hatte ich oft Heimweh.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "eine-entscheidung-treffen",
+      "word": "eine Entscheidung treffen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre une décision",
+      "example": "Nach zwei Wochen habe ich eine Entscheidung getroffen.",
+      "note": "treffen, traf, hat getroffen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "vermissen",
+      "word": "vermissen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "regretter l’absence de (… me manque)",
+      "example": "Ich vermisse meine Familie.",
+      "note": "Ich vermisse dich = tu me manques (sujet inversé)",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "kuendigen",
+      "word": "kündigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "démissionner, résilier",
+      "example": "Im März kündigte ich meine Stelle.",
+      "note": "die Stelle / die Wohnung kündigen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "ankommen",
+      "word": "ankommen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "arriver",
+      "example": "Unser Zug soll um acht Uhr in Leipzig ankommen.",
+      "note": "séparable : an|kommen · ist angekommen",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "sich-veraendern",
+      "word": "sich verändern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "changer, évoluer",
+      "example": "Seit dem Umzug hat sich viel verändert.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "sich-anmelden",
+      "word": "sich anmelden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’inscrire",
+      "example": "Ich möchte mich für den Lauftreff anmelden.",
+      "note": "séparable : an|melden · sich für + accusatif / bei + datif",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "damals",
+      "word": "damals",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "à l’époque",
+      "example": "Damals hatte ich noch keine Wohnung.",
+      "note": null,
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "seitdem",
+      "word": "seitdem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "depuis (ce moment-là)",
+      "example": "Seitdem gehe ich jede Woche zum Lauftreff.",
+      "note": "adverbe : verbe juste après (Seitdem gehe ich …)",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "nachdem",
+      "word": "nachdem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "après que",
+      "example": "Nachdem ich die Wohnung gefunden hatte, war alles leichter.",
+      "note": "+ Plusquamperfekt si la principale est au passé ; verbe final",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "als",
+      "word": "als",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "quand, lorsque (une fois, au passé)",
+      "example": "Als ich ankam, kannte ich niemanden.",
+      "note": "fait unique au passé ; wenn = chaque fois",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "unsicher",
+      "word": "unsicher",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "pas sûr de soi, hésitant",
+      "example": "Beim ersten Treffen war ich ziemlich unsicher.",
+      "note": "contraire : selbstsicher",
+      "audio": {
+        "media": "b1-neuanfang-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-neuanfang-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : un nouveau départ",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : un nouveau départ",
+        "description": "EIN NEUANFANG\n[fr] Un nouveau départ\nEine neue Stadt, eine neue Arbeit, neue Menschen: Ein Neuanfang ist spannend, aber nicht immer leicht. [fr] Une nouvelle ville, un nouveau travail, de nouvelles personnes : un nouveau départ est passionnant, mais pas toujours facile.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Wann haben Sie zum letzten Mal etwas ganz Neues angefangen? [fr] Quand avez-vous commencé pour la dernière fois quelque chose de tout nouveau ?\n• Was war am Anfang schwierig, was war schön? [fr] Qu’est-ce qui était difficile au début, qu’est-ce qui était agréable ?\n• Wer oder was hat Ihnen geholfen, sich einzugewöhnen? [fr] Qui ou qu’est-ce qui vous a aidé à prendre vos marques ?\nAntworten Sie in Gedanken auf Deutsch, in zwei oder drei einfachen Sätzen. [fr] Répondez mentalement en allemand, en deux ou trois phrases simples.\n\nZIELE\n[fr] Objectifs\n• Ich kann eine wichtige Etappe in meinem Leben der Reihe nach erzählen. [fr] Je peux raconter dans l’ordre une étape importante de ma vie.\n• Ich kann sagen, wann etwas passiert ist: als, nachdem, seitdem. [fr] Je peux situer les moments d’un récit : als, nachdem, seitdem.\n• Ich kann einen Blog und ein Gespräch über einen Neuanfang verstehen. [fr] Je peux comprendre un blog et une conversation sur un nouveau départ.\n• Ich kann auf die Geschichte von anderen reagieren und nachfragen. [fr] Je peux réagir au récit de quelqu’un et poser des questions.\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• der Umzug — le déménagement\n• umziehen — déménager\n• sich eingewöhnen — prendre ses marques\n• Heimweh haben — avoir le mal du pays\n• Anschluss finden — se faire des contacts\n• sich zurechtfinden — s’y retrouver\n• die Herausforderung — le défi\n• der Wendepunkt — le tournant",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein Umzugskarton: Alles beginnt neu.",
+          "media": "b1-neuanfang-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-neuanfang-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : le blog de Selin, un an à Leipzig",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : le blog de Selin, un an à Leipzig",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst nur den Titel und den ersten Satz von jedem Absatz. Worum geht es? [fr] Lisez d’abord seulement le titre et la première phrase de chaque paragraphe. De quoi s’agit-il ?\nLesen Sie dann den ganzen Text genau. Suchen Sie für jede Aussage die passende Stelle im Text. [fr] Lisez ensuite tout le texte en détail. Pour chaque affirmation, cherchez le passage qui correspond.\n„Steht nicht im Text“ bedeutet: Der Text sagt dazu nichts. [fr] « Non mentionné » signifie : le texte n’en dit rien.\n\nMEIN ERSTES JAHR IN LEIPZIG\nEin Blogbeitrag von Selin, 29\n\n(1) Vor genau einem Jahr stand ich mit zwei Koffern am Leipziger Hauptbahnhof. Es regnete, es war kalt, und ich kannte in der ganzen Stadt nur meine Cousine Derya. Vorher hatte ich sechs Jahre lang in einem kleinen Hotel in Izmir an der Rezeption gearbeitet. Die Arbeit gefiel mir, aber ich wollte schon lange in Deutschland studieren. Als die Zusage von der Universität kam, zögerte ich keinen Moment: Ich kündigte meine Stelle und buchte den Flug.\n\n(2) Die ersten Wochen waren schwieriger, als ich gedacht hatte. In der großen Universität fand ich mich kaum zurecht, und in den Seminaren sprachen alle sehr schnell. Wenn ich abends allein in meinem Zimmer saß, hatte ich oft Heimweh. Dann rief ich meine Mutter an oder schrieb meinen Freundinnen lange Nachrichten. Am meisten vermisste ich das Meer und unser gemeinsames Frühstück am Sonntag.\n\n(3) Im November kam der Wendepunkt. Eine Kommilitonin erzählte mir von einem Lauftreff im Park. Nachdem ich mich dort angemeldet hatte, lief ich jeden Dienstag mit zehn anderen Leuten durch den Park. Beim ersten Treffen war ich sehr nervös und sagte fast nichts. Aber nach dem Training gingen wir zusammen etwas trinken, und eine Läuferin fragte mich nach meinem Studium. So fand ich langsam Anschluss. Seitdem treffe ich zwei Leute aus der Gruppe auch am Wochenende.\n\n(4) Heute fühle ich mich in Leipzig fast zu Hause. Natürlich vermisse ich meine Familie noch, aber ich habe mich an das neue Leben gewöhnt, sogar an das Wetter. Mein Tipp für alle, die neu in einer Stadt sind: Wartet nicht, bis euch jemand anspricht. Sucht euch eine Gruppe, die zu euch passt, zum Beispiel einen Sportverein, einen Chor oder ein Sprachcafé. Die ersten Treffen sind immer ein bisschen komisch, aber es lohnt sich!",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Blogbeitrag vor allem? [fr] De quoi parle surtout ce billet de blog ?",
+          "explanation": "Les quatre paragraphes suivent l’année de Selin à Leipzig, de l’arrivée (« Vor genau einem Jahr ») à aujourd’hui (« Heute »). L’hôtel n’est que le point de départ du paragraphe 1, et le Lauftreff un épisode du paragraphe 3.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um Selins Arbeit in einem Hotel in Izmir",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um Selins erstes Jahr in einer neuen Stadt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "um einen Lauftreff, der neue Mitglieder sucht",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie hat sich Selins Situation im Laufe des Jahres verändert? [fr] Comment la situation de Selin a-t-elle évolué au cours de l’année ?",
+          "explanation": "Le paragraphe 2 décrit des débuts difficiles (« kaum zurecht », « oft Heimweh ») et le paragraphe 4 conclut : « Heute fühle ich mich in Leipzig fast zu Hause ». Elle ne veut pas repartir : elle conseille au contraire aux nouveaux venus de chercher un groupe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am Anfang war sie begeistert, heute möchte sie zurück nach Izmir.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat sich von Anfang an in Leipzig zu Hause gefühlt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Am Anfang fühlte sie sich fremd, heute fühlt sie sich fast zu Hause.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Selin hatte vor ihrem Umzug in einem Hotel gearbeitet. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Paragraphe 1 : « Vorher hatte ich sechs Jahre lang in einem kleinen Hotel … gearbeitet ». Le Plusquamperfekt (hatte gearbeitet) situe ce travail avant le départ pour Leipzig.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "An der Universität fand Selin schnell neue Freunde. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "C’est faux : à l’université, elle « fand sich kaum zurecht » et passait ses soirées seule. Elle a trouvé des contacts plus tard, en novembre, grâce au Lauftreff.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Selin besucht ihre Cousine jede Woche. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Le texte dit seulement qu’à son arrivée, Selin ne connaissait que sa cousine Derya. Il ne dit rien de visites régulières : non mentionné. « Falsch » supposerait que le texte dise le contraire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Derya hat Selin den Lauftreff empfohlen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Eine Kommilitonin erzählte mir von einem Lauftreff ». C’est une camarade d’études (die Kommilitonin), pas la cousine Derya. Piège classique : le nom de Derya apparaît, mais au paragraphe 1.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "Paragraphe 1 : la décision prise sans hésiter (« zögerte ich keinen Moment »). Paragraphe 2 : la solitude des débuts (Heimweh). Paragraphe 3 : le Lauftreff et les premiers contacts (Anschluss). Paragraphe 4 : le conseil aux nouveaux venus (« Mein Tipp für alle … »).",
+          "pairs": [
+            {
+              "left": "Absatz 1",
+              "right": "Eine schnelle Entscheidung"
+            },
+            {
+              "left": "Absatz 2",
+              "right": "Allein in der neuen Stadt"
+            },
+            {
+              "left": "Absatz 3",
+              "right": "Endlich neue Kontakte"
+            },
+            {
+              "left": "Absatz 4",
+              "right": "Ein Rat für Neue"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Wörter aus dem Text. [fr] Complétez avec les mots du texte.",
+          "text": "Abends hatte Selin oft [[1]]. Im November fand sie beim Lauftreff langsam [[2]].",
+          "explanation": "« Heimweh haben » : avoir le mal du pays (paragraphe 2). « Anschluss finden » : se faire des contacts, trouver sa place dans un groupe (paragraphe 3). Les deux sont des noms : majuscule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Heimweh"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Anschluss"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : deux nouveaux avant le cours",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : deux nouveaux avant le cours",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSituation: Vor dem ersten Abend im Deutschkurs warten Aylin und Tobias vor dem Kursraum. [fr] Situation : avant la première soirée du cours d’allemand, Aylin et Tobias attendent devant la salle.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Wer spricht? Wo sind die Personen? Wie ist die Stimmung? [fr] Première écoute : qui parle ? où sont les personnes ? quelle est l’ambiance ?\nBeim zweiten Hören achten Sie nur auf Stichwörter, zum Beispiel Zahlen, Orte und Gründe. [fr] À la deuxième écoute, concentrez-vous seulement sur des mots-clés, par exemple des nombres, des lieux et des raisons.\nDie Transkription sehen Sie nach Ihren Antworten. [fr] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-hoeren-audio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Aylin wohnt seit [[1]] Wochen in der Stadt. Vorher hat sie in [[2]] gewohnt. Grund für den Umzug: eine neue [[3]]. Tobias hat Anschluss in einem [[4]] gefunden. Aylin kann bis Ende [[5]] in ihrem möblierten Zimmer bleiben.",
+          "explanation": "Aylin : « erst vor drei Wochen hierhergezogen », « fast zehn Jahre in Marseille », « man hat mir dort eine Stelle angeboten ». Tobias : « ein Fußballverein ». Le meublé : « nur bis Ende März ». Pour les notes, les chiffres suffisent : 3 vaut drei.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "drei",
+                "3"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Marseille"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Stelle",
+                "Arbeit",
+                "Arbeitsstelle"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Fußballverein",
+                "Verein",
+                "Fußballklub",
+                "Fußballclub"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "März"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie hat Aylin die Entscheidung für den Umzug getroffen? [fr] Comment Aylin a-t-elle pris la décision de déménager ?",
+          "explanation": "Aylin dit : « Ich habe zwei Wochen lang überlegt, dann habe ich zugesagt. Das war keine leichte Entscheidung. » Elle n’a donc pas accepté tout de suite ; l’entreprise lui a proposé le poste, mais c’est elle qui a décidé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie hat sofort zugesagt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ihre Firma hat für sie entschieden.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat zwei Wochen lang überlegt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wann hatte Aylin besonders Heimweh? [fr] Quand Aylin a-t-elle eu particulièrement le mal du pays ?",
+          "explanation": "« Als ich am ersten Sonntag allein durch die Stadt gelaufen bin, hatte ich richtig Heimweh. » Als marque un moment unique. Les visites d’appartements n’ont pas encore eu lieu : elles sont prévues samedi.",
+          "options": [
+            {
+              "id": "a",
+              "label": "an ihrem ersten Sonntag in der Stadt",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "jeden Abend, wenn sie allein von der Arbeit kam",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "als sie ihre erste Wohnung besichtigt hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was hat Tobias beim Deutschlernen besonders geholfen? [fr] Qu’est-ce qui a surtout aidé Tobias à progresser en allemand ?",
+          "explanation": "Tobias raconte : « wenn wir nach dem Training zusammen gegessen haben, musste ich Deutsch sprechen ». Wenn indique ici une habitude du passé (chaque fois que). Il ne parle ni d’un autre cours ni d’un tandem.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein Abendkurs an der Volkshochschule",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Gespräche beim Essen nach dem Training",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "ein Tandem mit einer Kollegin",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was bietet Tobias Aylin am Ende an? [fr] Que propose Tobias à Aylin à la fin ?",
+          "explanation": "« Wenn du willst, gebe ich dir nach dem Kurs ein paar Tipps für die Wohnungssuche. » Il lui conseille de chercher un club (« Mach das unbedingt! »), mais ne lui propose pas de place dans le sien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "einen Platz in seinem Fußballverein",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ein Zimmer in seiner Wohnung",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Tipps für die Wohnungssuche",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-neuanfang-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : raconter le passé avec als, wenn et nachdem",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : raconter le passé avec als, wenn et nachdem",
+        "description": "Lesen Sie die Sätze aus dem Blog und aus dem Gespräch. Achten Sie auf die Verben und auf als, wenn und nachdem. [fr] Lisez ces phrases du blog et de la conversation. Observez les verbes ainsi que als, wenn et nachdem.\n\n(1) Als die Zusage von der Universität kam, zögerte ich keinen Moment.\n(2) Als ich am ersten Sonntag allein durch die Stadt gelaufen bin, hatte ich richtig Heimweh.\n(3) Wenn ich abends allein in meinem Zimmer saß, hatte ich oft Heimweh.\n(4) Wenn wir nach dem Training zusammen gegessen haben, musste ich Deutsch sprechen.\n(5) Vorher hatte ich sechs Jahre lang in einem kleinen Hotel gearbeitet.\n(6) Nachdem ich mich dort angemeldet hatte, lief ich jeden Dienstag durch den Park.\n(7) In der großen Universität fand ich mich kaum zurecht.\n\nBeantworten Sie dann die Fragen. So finden Sie die Regel selbst. [fr] Répondez ensuite aux questions : vous trouverez ainsi la règle vous-même.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze (1) und (2): Wie oft ist das passiert? [fr] Phrases (1) et (2) : combien de fois cela s’est-il passé ?",
+          "explanation": "La réponse de l’université n’est arrivée qu’une fois, et le premier dimanche n’a eu lieu qu’une fois. Pour un fait unique (ou une période unique) du passé, on emploie als. Les phrases (3) et (4), elles, décrivent des habitudes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "nur einmal, in einem bestimmten Moment",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "oft, immer wieder, wie eine Gewohnheit",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "jetzt, in der Gegenwart, nicht in der Vergangenheit",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze (3) und (4): Was bedeutet „wenn“ hier? [fr] Phrases (3) et (4) : que signifie « wenn » ici ?",
+          "explanation": "Les mots « abends » et « oft », puis la répétition des entraînements, montrent une habitude : wenn signifie ici « chaque fois que ». Au passé, wenn s’emploie seulement pour un fait répété ; pour un fait unique, c’est als.",
+          "options": [
+            {
+              "id": "a",
+              "label": "nur ein einziges Mal",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falls, vielleicht",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "jedes Mal, wenn …",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz (6): Was ist zuerst passiert? [fr] Phrase (6) : qu’est-ce qui s’est passé en premier ?",
+          "explanation": "Nachdem introduit l’action antérieure : d’abord l’inscription (hatte angemeldet, Plusquamperfekt), ensuite les courses du mardi (lief, Präteritum). Le Plusquamperfekt sert justement à marquer ce « passé du passé ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Selin ist jeden Dienstag durch den Park gelaufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Selin hat sich beim Lauftreff angemeldet.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Beides ist zur gleichen Zeit passiert.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Ordnen Sie die Verbformen den Zeitformen zu. [fr] Associez les formes verbales aux temps.",
+          "explanation": "Präteritum : une seule forme, souvent avec changement de voyelle pour les verbes forts (kommen → kam, sitzen → saß, finden → fand). Perfekt : haben ou sein au présent + participe II. Plusquamperfekt : haben ou sein au Präteritum (hatte, war) + participe II.",
+          "pairs": [
+            {
+              "left": "kam, saß, fand",
+              "right": "Präteritum"
+            },
+            {
+              "left": "bin … gelaufen, haben … gegessen",
+              "right": "Perfekt"
+            },
+            {
+              "left": "hatte … gearbeitet, hatte … angemeldet",
+              "right": "Plusquamperfekt"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-regel",
+      "kind": "lesson",
+      "title": "Retenir : Präteritum, Plusquamperfekt, als ou wenn",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Retenir : Präteritum, Plusquamperfekt, als ou wenn",
+        "description": "À RETENIR\n• Präteritum : le temps du récit écrit (blog, lettre, article). À l’oral, on l’emploie surtout pour sein, haben et les verbes de modalité : ich war, ich hatte, ich musste, ich wollte.\n• Perfekt : le temps du récit oral et des messages : Ich bin umgezogen. Wir haben zusammen gegessen.\n• Plusquamperfekt : une action antérieure à une autre action passée. hatte ou war + participe II : Ich hatte gekündigt. Sie war schon angekommen.\n\nLES FORMES DU PRÄTERITUM\n• Verbes faibles : radical + -te. ich kaufte, du kauftest, er kaufte, wir kauften, ihr kauftet, sie kauften.\n• Verbes forts : changement de voyelle, sans -te ; ich et er n’ont pas de terminaison : ich kam, er kam, wir kamen.\n• Verbes mixtes : changement de voyelle et -te : kennen, kannte ; denken, dachte ; bringen, brachte ; wissen, wusste.\n• À apprendre : gehen, ging ; kommen, kam ; finden, fand ; stehen, stand ; sitzen, saß ; schreiben, schrieb ; bleiben, blieb ; ziehen, zog ; laufen, lief ; sprechen, sprach.\n\nALS, WENN, NACHDEM\n• als : un fait unique ou une période unique du passé. Als ich in Leipzig ankam, regnete es. Als ich Kind war, wohnten wir in Lyon.\n• wenn : « chaque fois que » au passé, ou « si, quand » au présent et au futur. Wenn ich Heimweh hatte, rief ich meine Mutter an.\n• nachdem : « après que ». Si la principale est au passé, la subordonnée est au Plusquamperfekt. Nachdem ich mich angemeldet hatte, lief ich jeden Dienstag.\n• Dans les trois cas, le verbe conjugué va à la fin de la subordonnée. Quand la subordonnée vient en premier, la principale commence par son verbe : Als ich ankam, kannte ich niemanden.\n\nATTENTION\n• « quand » n’est pas toujours wann : wann sert seulement aux questions (Wann bist du angekommen?).\n• Après nachdem, pas de Perfekt devant une principale au Präteritum : Nachdem ich gekündigt hatte, zog ich um.\n• « J’habite ici depuis un an » se dit au présent : Ich wohne seit einem Jahr hier.\n• umziehen, ankommen, laufen, gehen : Perfekt et Plusquamperfekt avec sein (ich bin umgezogen, ich war angekommen).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-regel-zeitstrahl",
+          "caption": "Plusquamperfekt, Präteritum, Perfekt, Präsens",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-neuanfang-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : Präteritum, Plusquamperfekt, als ou wenn",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : Präteritum, Plusquamperfekt, als ou wenn",
+        "description": "Üben Sie das Präteritum, das Plusquamperfekt und die Konjunktionen als, wenn und nachdem. [fr] Entraînez-vous au Präteritum, au Plusquamperfekt et aux conjonctions als, wenn et nachdem.\nLesen Sie bei einem Fehler die Erklärung und schauen Sie noch einmal in die Regel. [fr] En cas d’erreur, lisez l’explication et revoyez la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Verben im Präteritum. [fr] Complétez avec les verbes au Präteritum.",
+          "text": "Vor einem Jahr [[1]] (ankommen) ich in Leipzig an. Ich [[2]] (kennen) nur meine Cousine. Die ersten Wochen [[3]] (sein) schwierig, und ich [[4]] (finden) mich kaum zurecht.",
+          "explanation": "ankommen est fort et séparable : ich kam … an. kennen est mixte : kannte (voyelle changée et -te). sein : waren au pluriel (die Wochen). finden est fort : fand, sans terminaison à la 1re personne.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kam"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kannte"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "waren"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "fand"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „hatte“ oder „war“. [fr] Complétez avec « hatte » ou « war ».",
+          "text": "Nachdem ich die Wohnung gefunden [[1]], kaufte ich Möbel. Nachdem Aylin in der Stadt angekommen [[2]], suchte sie einen Verein.",
+          "explanation": "Le Plusquamperfekt garde l’auxiliaire du Perfekt, mis au Präteritum : ich habe gefunden → ich hatte gefunden ; sie ist angekommen → sie war angekommen (déplacement : sein). Le verbe conjugué ferme la subordonnée.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hatte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "war"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „… ich ein Kind war, wohnten wir in Lyon.“ [fr] Quel mot convient ? « … j’étais enfant, nous habitions à Lyon. »",
+          "explanation": "L’enfance est une période unique du passé : als. Wenn au passé exprimerait une répétition (« chaque fois que »), et wann ne s’emploie que pour poser une question.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Als",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wann",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „Immer … ich Heimweh hatte, rief ich meine Schwester an.“ [fr] Quel mot convient ? « Chaque fois que j’avais le mal du pays, j’appelais ma sœur. »",
+          "explanation": "« Immer » signale une habitude : immer wenn = chaque fois que. Als ne convient que pour un fait unique ; wann est réservé aux questions directes ou indirectes (Ich weiß nicht, wann …).",
+          "options": [
+            {
+              "id": "a",
+              "label": "wann",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "als",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wenn",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. Beginnen Sie mit „Nachdem“. [fr] Remettez les mots dans l’ordre en commençant par « Nachdem ».",
+          "answers": [
+            [
+              "Nachdem",
+              "ich",
+              "mich",
+              "beim Lauftreff",
+              "angemeldet",
+              "hatte,",
+              "lief",
+              "ich",
+              "jeden Dienstag",
+              "durch den Park."
+            ]
+          ],
+          "explanation": "Dans la subordonnée, le sujet suit nachdem, le pronom réfléchi vient tôt (ich mich) et le verbe conjugué hatte ferme la proposition. La principale commence ensuite par son verbe : lief ich … Erreur fréquente : « nachdem ich hatte mich angemeldet »."
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Verben im Präteritum. [fr] Complétez avec les verbes au Präteritum.",
+          "text": "In Izmir [[1]] (müssen) ich jeden Morgen um sechs aufstehen, und ich [[2]] (haben) kaum Freizeit. Deshalb [[3]] (wollen) ich etwas Neues.",
+          "explanation": "Verbes de modalité au Präteritum : pas d’Umlaut, terminaison -te : müssen → musste, wollen → wollte. haben → hatte. À la 1re et à la 3e personne du singulier, pas de -e ajouté : ich musste, er musste.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "musste"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "hatte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "wollte"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "La principale est au Präteritum (zog) : la subordonnée avec nachdem passe au Plusquamperfekt (hatte gekündigt), et le verbe conjugué hatte va à la fin. La première phrase mélange les temps, la deuxième place mal l’auxiliaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nachdem er gekündigt hat, zog er nach Wien.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nachdem er hatte gekündigt, zog er nach Wien.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nachdem er gekündigt hatte, zog er nach Wien.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "match",
+          "prompt": "Ordnen Sie den Infinitiv dem Präteritum zu. [fr] Associez l’infinitif à sa forme de Präteritum.",
+          "explanation": "Ces verbes forts changent de voyelle : gehen → ging, schreiben → schrieb, bleiben → blieb, ziehen → zog. denken est un verbe mixte : voyelle et consonne changent, et il prend -te (dachte). À apprendre avec le participe : gegangen, geschrieben, geblieben, gezogen, gedacht.",
+          "pairs": [
+            {
+              "left": "gehen",
+              "right": "ging"
+            },
+            {
+              "left": "schreiben",
+              "right": "schrieb"
+            },
+            {
+              "left": "ziehen",
+              "right": "zog"
+            },
+            {
+              "left": "denken",
+              "right": "dachte"
+            },
+            {
+              "left": "bleiben",
+              "right": "blieb"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-wortschatz",
+      "kind": "exercise",
+      "title": "S’entraîner : mots et formules pour raconter un nouveau départ",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : mots et formules pour raconter un nouveau départ",
+        "description": "Lernen Sie Wörter zusammen: Nomen mit Verb, Wortfamilien und feste Formulierungen. [fr] Apprenez les mots ensemble : nom et verbe, familles de mots et formules toutes faites.\n\nREDEMITTEL\n[fr] Formules utiles\n• pour commencer : Alles fing damit an, dass … / Vor einem Jahr habe ich beschlossen, …\n• pour enchaîner : Am Anfang … / Kurz danach … / Nachdem ich …, … / Seitdem …\n• pour dire ce qui a changé : Das war ein echter Wendepunkt. / Seitdem hat sich viel verändert.\n• pour réagir au récit de quelqu’un : Das kann ich gut verstehen. / Wie ging es dann weiter? / Was hat dir geholfen?",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? Ordnen Sie zu. [fr] Quel verbe va avec quel nom ? Associez.",
+          "explanation": "Ce sont des collocations figées : eine Entscheidung treffen (prendre une décision, et non « machen »), Erfahrungen sammeln (acquérir de l’expérience), Heimweh haben, Anschluss finden (se faire des contacts), den Mietvertrag kündigen (résilier le bail).",
+          "pairs": [
+            {
+              "left": "eine Entscheidung",
+              "right": "treffen"
+            },
+            {
+              "left": "Erfahrungen",
+              "right": "sammeln"
+            },
+            {
+              "left": "Heimweh",
+              "right": "haben"
+            },
+            {
+              "left": "Anschluss",
+              "right": "finden"
+            },
+            {
+              "left": "den Mietvertrag",
+              "right": "kündigen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen aus dem Verb. [fr] Formez le nom à partir du verbe.",
+          "text": "Der [[1]] (umziehen) war anstrengend. Die [[2]] (entscheiden) war nicht leicht. Das war eine wichtige [[3]] (erfahren). Seitdem gab es viele [[4]] (sich verändern).",
+          "explanation": "umziehen → der Umzug (nom masculin sans suffixe). entscheiden → die Entscheidung, erfahren → die Erfahrung, verändern → die Veränderung : le suffixe -ung donne un nom féminin. Après viele, il faut le pluriel : Veränderungen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Umzug"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Entscheidung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Erfahrung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Veränderungen"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sie möchten Ihre Geschichte beginnen. Welche Formulierung passt? [fr] Vous voulez commencer votre récit. Quelle formule convient ?",
+          "explanation": "« Alles fing damit an, dass … » (tout a commencé quand …) ouvre un récit. « Zum Schluss » sert à conclure, et « Ich bin der Meinung, dass … » donne un avis, pas le début d’une histoire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zum Schluss möchte ich sagen, dass ich zufrieden bin.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Alles fing damit an, dass ich eine neue Stelle bekam.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich bin der Meinung, dass Umzüge schwierig sind.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Ihre Kollegin erzählt von ihren schwierigen ersten Wochen. Wie reagieren Sie verständnisvoll? [fr] Votre collègue raconte ses premières semaines difficiles. Comment réagissez-vous avec compréhension ?",
+          "explanation": "« Das kann ich gut verstehen » montre de l’empathie, et la suite justifie. « Das stimmt doch nicht » conteste son récit ; « Da hast du aber Glück gehabt … » (tu as eu de la chance) suppose que tout a été facile.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das kann ich gut verstehen. Am Anfang ist alles neu.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das stimmt doch nicht, so schwer war das sicher nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Da hast du aber Glück gehabt, dass alles so leicht war!",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welche Präposition passt? „Ich habe mich langsam … das kalte Wetter gewöhnt.“ [fr] Quelle préposition convient ? « Je me suis peu à peu habitué au froid. »",
+          "explanation": "sich gewöhnen se construit avec an + accusatif : sich an das Wetter gewöhnen. Le français « s’habituer à » pousse vers une autre préposition : apprenez le verbe avec sa préposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "an",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "auf",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "über",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Verb: „Ma famille me manque.“ [fr] Complétez le verbe : « Ma famille me manque. »",
+          "text": "Ich [[1]] meine Familie.",
+          "explanation": "vermissen inverse la construction française : en allemand, celui qui ressent le manque est le sujet. Ich vermisse meine Familie = ma famille me manque. On peut aussi dire « Meine Familie fehlt mir », avec fehlen + datif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "vermisse"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Für mich war die Sprache die größte Herausforderung.“ Was bedeutet das? [fr] « Pour moi, la langue a été le plus grand défi. » Qu’est-ce que cela veut dire ?",
+          "explanation": "die Herausforderung, c’est le défi : ce qui demande le plus d’efforts. La phrase ne dit donc ni que la langue était amusante ni qu’elle a été apprise vite.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Sprache hat mir am meisten Spaß gemacht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe die Sprache sehr schnell gelernt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Sprache war für mich am schwierigsten.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-neuanfang-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : raconter un tournant",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : raconter un tournant",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\nAchten Sie auf die Betonung: Das wichtigste Wort im Satz ist etwas lauter. [fr] Faites attention à l’accent : le mot le plus important de la phrase est un peu plus appuyé.\nSprechen Sie in Wortgruppen, nicht Wort für Wort, und machen Sie beim Komma eine kleine Pause. [fr] Parlez par groupes de mots, pas mot à mot, et marquez une petite pause à la virgule.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Alles fing damit an, dass ich eine neue Stelle bekam.",
+          "accept": [
+            "Alles fing damit an, dass ich eine neue Stelle bekam."
+          ],
+          "explanation": "Formule pour commencer un récit. Petite pause après « an » ; dans « Stelle », le st se prononce [cht] en début de mot, et l’accent tombe sur « STEL-le ».",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Als ich ankam, kannte ich hier fast niemanden.",
+          "accept": [
+            "Als ich ankam, kannte ich hier fast niemanden."
+          ],
+          "explanation": "Als + fait unique, puis la principale commence par le verbe (kannte). Accentuez « AN-kam » (verbe séparable : accent sur la particule) et « NIE-manden ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Am Anfang hatte ich oft Heimweh.",
+          "accept": [
+            "Am Anfang hatte ich oft Heimweh."
+          ],
+          "explanation": "Phrase courte et naturelle pour parler des débuts. Le h de « hatte » et de « Heimweh » s’entend : soufflez-le. « Heimweh » : accent sur « HEIM ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Nachdem ich mich eingewöhnt hatte, ging es mir viel besser.",
+          "accept": [
+            "Nachdem ich mich eingewöhnt hatte, ging es mir viel besser."
+          ],
+          "explanation": "Plusquamperfekt avec nachdem, puis principale au Präteritum. Accent sur « EIN-gewöhnt » ; le ö se prononce lèvres arrondies, comme dans « peu ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das war ein echter Wendepunkt in meinem Leben.",
+          "accept": [
+            "Das war ein echter Wendepunkt in meinem Leben."
+          ],
+          "explanation": "Pour souligner un tournant. Le ch de « echter » est doux, comme un chuintement léger ; accent sur « WEN-de-punkt ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wie ist es dir in den ersten Wochen ergangen?",
+          "accept": [
+            "Wie ist es dir in den ersten Wochen ergangen?"
+          ],
+          "explanation": "Question pour relancer quelqu’un sur ses débuts (es ist mir gut ergangen : cela s’est bien passé pour moi). Intonation descendante : c’est une question avec mot interrogatif.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-neuanfang-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-neuanfang-hoeren2",
+      "kind": "exercise",
+      "title": "Comprendre : le message vocal de Mira",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : le message vocal de Mira",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSituation: Mira ist für eine neue Stelle nach Hamburg gezogen. Nach der ersten Woche schickt sie ihrer Freundin Jana eine Sprachnachricht. [fr] Situation : Mira a déménagé à Hambourg pour un nouveau poste. Après la première semaine, elle envoie un message vocal à son amie Jana.\n\nSTRATEGIE\n[fr] Stratégie\nEine Sprachnachricht ist oft schnell und nicht geordnet. Achten Sie auf die Zeitangaben: am Montag, am Donnerstag, am Wochenende. [fr] Un message vocal est souvent rapide et peu ordonné. Repérez les indications de temps : lundi, jeudi, le week-end.\nDie zwei letzten Fragen sind Diktate. Schreiben Sie genau, mit Großbuchstaben und Kommas. [fr] Les deux dernières questions sont des dictées. Écrivez exactement, avec les majuscules et les virgules.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-hoeren2-audio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-hoeren2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-neuanfang-hoeren2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Warum war Mira am Montag so früh im Büro? [fr] Pourquoi Mira était-elle si tôt au bureau lundi ?",
+          "explanation": "« Am Montag war ich schon um halb acht im Büro, weil ich so nervös war. » Weil donne la raison. La cheffe arrive plus tard, et les formations n’ont lieu que mardi et mercredi.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihre Chefin wollte sie früh sehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie war sehr nervös.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie musste eine Schulung vorbereiten.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist am Donnerstag passiert? [fr] Que s’est-il passé jeudi ?",
+          "explanation": "Mira a vouvoyé un collègue toute la journée (gesiezt), puis il lui a expliqué « dass sich hier alle duzen » : ici, tout le monde se tutoie. Les noms, au contraire, elle ne les a pas retenus (« keinen einzigen Namen »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mira hat erfahren, dass sich im Team alle duzen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Mira hat die Namen aller Kollegen gelernt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Kollege hat Mira zum Essen eingeladen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was erfahren wir über Miras Wohnung? [fr] Qu’apprend-on sur le logement de Mira ?",
+          "explanation": "« Mein Zimmer in der WG ist klein, aber hell, und meine Mitbewohnerin ist super nett. » Une WG (Wohngemeinschaft) est une colocation : elle n’est donc ni seule ni à la recherche d’un logement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sucht noch ein Zimmer.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie wohnt allein in einer großen Wohnung.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie wohnt in einer WG mit einer netten Mitbewohnerin.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Worum bittet Mira ihre Freundin am Ende? [fr] Que demande Mira à son amie à la fin ?",
+          "explanation": "« Ruf mich mal an, dann planen wir das zusammen » : Jana doit appeler pour organiser sa visite de mai. Le week-end, c’est la colocataire qui fera visiter la ville à Mira.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Jana soll sie anrufen, damit sie den Besuch im Mai planen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Jana soll schon am Wochenende nach Hamburg kommen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jana soll ihr eine lange Nachricht schreiben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Als meine Chefin kam, hat sie mir das ganze Team vorgestellt."
+          ],
+          "voice": "frau3",
+          "explanation": "Als + fait unique ; le verbe kam ferme la subordonnée, puis la principale commence par l’auxiliaire hat. Majuscules : Chefin, Team. Virgule entre les deux propositions.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Wenn ich abends nach Hause kam, war ich sehr müde."
+          ],
+          "voice": "sprecher",
+          "explanation": "Wenn au passé : une habitude (chaque soir). Attention à « nach Hause » (h majuscule : c’est un nom) et à la virgule avant la principale, qui commence par le verbe war.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-neuanfang-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : raconter un nouveau départ",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : raconter un nouveau départ",
+        "description": "Hier prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr] Vérifiez ici ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\nHören Sie zuerst Karims Geschichte. Sie brauchen sie für die Fragen 1 bis 3. [fr] Écoutez d’abord l’histoire de Karim : elle sert pour les questions 1 à 3.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-neuanfang-kontrolle-audio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was machte Karim im ersten Jahr in Wien? [fr] Que faisait Karim pendant sa première année à Vienne ?",
+          "explanation": "« Deshalb arbeitete ich ein Jahr lang in einer Bäckerei. » Il avait étudié l’informatique avant, à Tunis (hatte studiert : Plusquamperfekt), et il n’est redevenu programmeur qu’après son examen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er studierte Informatik.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er arbeitete als Programmierer.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er arbeitete in einer Bäckerei.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie übte Karim Deutsch? [fr] Comment Karim s’entraînait-il en allemand ?",
+          "explanation": "« Wenn ich frühmorgens Brötchen verkaufte, übte ich mit den Kunden Deutsch. » Wenn indique une habitude du passé : chaque matin. Il ne parle pas de cours, et la société informatique vient plus tard.",
+          "options": [
+            {
+              "id": "a",
+              "label": "im Gespräch mit den Kunden",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "in einem Abendkurs",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "mit Kollegen in der IT-Firma",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Satz aus Karims Geschichte. [fr] Complétez la phrase de l’histoire de Karim.",
+          "text": "Nachdem Karim seine Prüfung bestanden [[1]], [[2]] er sich wieder als Programmierer.",
+          "explanation": "Nachdem + Plusquamperfekt (hatte bestanden), puis la principale au Präteritum. sich bewerben est fort : bewarb, beworben. La principale commence par le verbe parce que la subordonnée occupe la première place.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hatte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bewarb"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „… ich letztes Jahr nach Graz kam, war alles neu für mich.“ [fr] Quel mot convient ? « Quand je suis arrivé à Graz l’an dernier, tout était nouveau pour moi. »",
+          "explanation": "L’arrivée à Graz est un fait unique du passé (letztes Jahr) : als. Wenn indiquerait une répétition, et wann pose une question.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Als",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Wenn",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wann",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Als",
+              "ich",
+              "in Leipzig",
+              "ankam,",
+              "kannte",
+              "ich",
+              "nur meine Cousine."
+            ],
+            [
+              "Als",
+              "ich",
+              "ankam,",
+              "kannte",
+              "ich",
+              "in Leipzig",
+              "nur meine Cousine."
+            ]
+          ],
+          "explanation": "La subordonnée avec als commence la phrase : son verbe ankam va à la fin, devant la virgule. La principale commence par le verbe kannte, puis le sujet ich. « in Leipzig » peut aller dans la subordonnée ou dans la principale."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Form passt? „Ich habe mich schnell an die neue Arbeit …“ [fr] Quelle forme convient ? « Je me suis vite habitué à mon nouveau travail. »",
+          "explanation": "sich an etwas gewöhnen : participe gewöhnt (avec ö). gewohnt est le participe de wohnen (habiter) ou l’adjectif « habituel » ; gewöhnen est l’infinitif, impossible après « habe ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "gewohnt",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "gewöhnt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "gewöhnen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Ihr Freund erzählt: „Nach dem Umzug hatte ich oft Heimweh.“ Was antworten Sie? [fr] Votre ami raconte : « Après le déménagement, j’avais souvent le mal du pays. » Que répondez-vous ?",
+          "explanation": "On montre de la compréhension, puis on relance le récit avec « Wie ging es dann weiter? » (et ensuite ?). Les félicitations ignorent ce qu’il vient de dire, et la troisième réplique répond à autre chose.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Herzlichen Glückwunsch zum Umzug! Das klingt super.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Schade, dass du keine Zeit hast. Vielleicht nächste Woche?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das verstehe ich gut. Wie ging es dann weiter?",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-neuanfang-hoeren-audio",
+      "kind": "audio",
+      "title": "Avant le cours : Aylin et Tobias font connaissance",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Entschuldigung, ist das hier der Raum für den Deutschkurs am Donnerstagabend?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Ja, ich glaube schon. Ich warte auch, aber die Tür ist noch zu. Ich bin übrigens Aylin."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Freut mich, ich heiße Tobias. Bist du auch neu in der Stadt? Ich habe dich hier noch nie gesehen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Ganz neu! Ich bin erst vor drei Wochen hierhergezogen. Vorher habe ich fast zehn Jahre in Marseille gewohnt."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Oh, das ist ja ein großer Schritt. Warum bist du umgezogen? Wegen der Arbeit?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Ja, genau. Meine Firma hat hier ein neues Büro eröffnet, und man hat mir dort eine Stelle angeboten. Ich habe zwei Wochen lang überlegt, dann habe ich zugesagt. Das war keine leichte Entscheidung."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Das glaube ich dir. Und wie geht es dir bis jetzt?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Gemischt. Die Arbeit gefällt mir, aber ich kenne noch fast niemanden. Als ich am ersten Sonntag allein durch die Stadt gelaufen bin, hatte ich richtig Heimweh."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Das kenne ich gut. Ich bin vor zwei Jahren aus Polen gekommen, und am Anfang war es bei mir genauso."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Und was hat dir geholfen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Ehrlich gesagt: ein Fußballverein. Nachdem ich mich dort angemeldet hatte, war ich jeden Mittwoch mit anderen Leuten zusammen. Und wenn wir nach dem Training zusammen gegessen haben, musste ich Deutsch sprechen, auch mit vielen Fehlern."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Gute Idee. In Marseille habe ich früher Volleyball gespielt. Vielleicht suche ich mir hier auch einen Verein."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Mach das unbedingt! Und hast du schon eine Wohnung gefunden?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Noch nicht. Im Moment wohne ich in einem möblierten Zimmer, aber nur bis Ende März. Am Samstag habe ich zwei Besichtigungen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Tobias",
+          "text": "Dann drücke ich dir die Daumen! Wenn du willst, gebe ich dir nach dem Kurs ein paar Tipps für die Wohnungssuche."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Frau Brandt",
+          "text": "Guten Abend zusammen! Entschuldigen Sie bitte die Verspätung. Ich bin Frau Brandt, Ihre Kursleiterin. Kommen Sie herein, wir fangen gleich an. Heute erzählt jeder zuerst kurz, wie er hierhergekommen ist."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Na, dann haben wir ja schon geübt!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-regel-zeitstrahl",
+      "kind": "image",
+      "title": "Frise : avant, pendant, après",
+      "alt": "Frise chronologique en quatre étapes : « Ich hatte gekündigt » (Plusquamperfekt), « Ich zog nach Leipzig » (Präteritum), « Ich habe Anschluss gefunden » (Perfekt), « Heute bin ich zu Hause » (Präsens).",
+      "image": {
+        "layout": "route",
+        "variant": "timeline",
+        "title": "Vorher, dann, danach, heute",
+        "stepWidth": 190,
+        "steps": [
+          {
+            "icon": "briefcase",
+            "label": "Plusquamperfekt",
+            "sub": "Ich hatte\ngekündigt."
+          },
+          {
+            "icon": "luggage",
+            "label": "Präteritum",
+            "sub": "Ich zog\nnach Leipzig."
+          },
+          {
+            "icon": "users",
+            "label": "Perfekt",
+            "sub": "Ich habe Anschluss\ngefunden."
+          },
+          {
+            "icon": "home",
+            "label": "Präsens",
+            "sub": "Heute bin ich\nzu Hause."
+          }
+        ],
+        "note": "Nachdem ich gekündigt hatte, zog ich um.",
+        "noteIcon": "info"
+      }
+    },
+    {
+      "key": "b1-neuanfang-hoeren2-audio",
+      "kind": "audio",
+      "title": "Message vocal de Mira après sa première semaine",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Mira",
+          "text": "Hallo Jana, hier ist Mira! Tut mir leid, dass ich mich erst jetzt melde, aber die erste Woche in Hamburg war total voll. Also, ich erzähle dir kurz alles."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mira",
+          "text": "Am Montag war ich schon um halb acht im Büro, weil ich so nervös war. Natürlich war noch niemand da! Als meine Chefin dann kam, hat sie mir das ganze Team vorgestellt. Das sind zwölf Leute, und ich habe mir keinen einzigen Namen gemerkt."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mira",
+          "text": "Am Dienstag und am Mittwoch hatte ich Schulungen. Das war ziemlich anstrengend, aber auch interessant. Und am Donnerstag ist etwas Lustiges passiert: Nachdem ich einen Kollegen den ganzen Tag gesiezt hatte, erklärte er mir, dass sich hier alle duzen. Ich war so rot im Gesicht!"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mira",
+          "text": "Wenn ich abends nach Hause gekommen bin, war ich so müde, dass ich nur noch Nudeln gekocht habe. Mein Zimmer in der WG ist klein, aber hell, und meine Mitbewohnerin ist super nett. Am Wochenende zeigt sie mir die Stadt."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mira",
+          "text": "Ach ja, du wolltest doch im Mai kommen, oder? Ruf mich mal an, dann planen wir das zusammen. Bis bald, tschüss!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-kontrolle-audio",
+      "kind": "audio",
+      "title": "Karim raconte son arrivée à Vienne",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Karim",
+          "text": "Ich heiße Karim. Als ich vor fünf Jahren nach Wien kam, sprach ich kaum Deutsch. Ich hatte in Tunis Informatik studiert, aber hier fand ich zuerst keine Stelle."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann3",
+          "name": "Karim",
+          "text": "Deshalb arbeitete ich ein Jahr lang in einer Bäckerei. Wenn ich frühmorgens Brötchen verkaufte, übte ich mit den Kunden Deutsch."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann3",
+          "name": "Karim",
+          "text": "Nachdem ich meine Deutschprüfung bestanden hatte, bewarb ich mich wieder als Programmierer. Seit drei Jahren arbeite ich jetzt in einer kleinen IT-Firma. Die Zeit in der Bäckerei vermisse ich trotzdem manchmal."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-einstieg-foto",
+      "kind": "image",
+      "title": "Un carton de déménagement",
+      "alt": "Un carton de déménagement ouvert, vide, prêt à être rempli, sur un fond clair.",
+      "photo": {
+        "file": "libre/commons/neuanfang-umzugskarton.jpg",
+        "crop": [
+          0,
+          0.17,
+          1,
+          0.75
+        ]
+      },
+      "credit": "HornM201, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Umzugskarton.jpg"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Alles fing damit an, dass ich eine neue Stelle bekam."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Als ich ankam, kannte ich hier fast niemanden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Am Anfang hatte ich oft Heimweh."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Nachdem ich mich eingewöhnt hatte, ging es mir viel besser."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das war ein echter Wendepunkt in meinem Leben."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : raconter un tournant",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wie ist es dir in den ersten Wochen ergangen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-hoeren2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : le message vocal de Mira",
+      "script": [
+        {
+          "voice": "frau3",
+          "text": "Als meine Chefin kam, hat sie mir das ganze Team vorgestellt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-hoeren2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : le message vocal de Mira",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wenn ich abends nach Hause kam, war ich sehr müde."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-neuanfang-lexique",
+      "kind": "audio",
+      "title": "Lexique · Neuanfang : raconter un nouveau départ",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "der Umzug, die Umzüge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umziehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Neuanfang, die Neuanfänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Wendepunkt, die Wendepunkte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Herausforderung, die Herausforderungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erfahrung, die Erfahrungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Stelle, die Stellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Gegend, die Gegenden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich eingewöhnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich gewöhnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich zurechtfinden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Anschluss finden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Heimweh haben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eine Entscheidung treffen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vermissen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "kündigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ankommen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verändern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich anmelden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "damals"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "seitdem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachdem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "als"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "unsicher"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

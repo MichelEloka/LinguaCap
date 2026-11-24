@@ -1,0 +1,2264 @@
+{
+  "id": "b1-medien",
+  "title": "Medien : s’informer et vérifier une information",
+  "objective": "Distinguer fait, opinion et rumeur, rapporter ce que dit une source (dass, ob, laut), situer des événements dans le temps (bevor, während, seitdem, bis, sobald) et comprendre une émission de radio locale.",
+  "prerequisites": [
+    "b1-konsum-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, émission de radio, publications et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : communiqué de la bibliothèque, radio locale sur la piscine."
+  ],
+  "grammarFocus": [
+    "dass-ob-redewiedergabe",
+    "temporale-nebensaetze",
+    "nominalisierung"
+  ],
+  "layer": "content/b/source/b1/b1-medien.mjs",
+  "vocabulary": [
+    {
+      "id": "quelle",
+      "word": "Quelle",
+      "article": "die",
+      "plural": "Quellen",
+      "partOfSpeech": "noun",
+      "translation": "la source (d’une information)",
+      "example": "Gibt es für diese Nachricht eine Quelle?",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "meldung",
+      "word": "Meldung",
+      "article": "die",
+      "plural": "Meldungen",
+      "partOfSpeech": "noun",
+      "translation": "l’information, la dépêche",
+      "example": "Die Meldung kam am Montag im Radio.",
+      "note": "melden : signaler, annoncer",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "geruecht",
+      "word": "Gerücht",
+      "article": "das",
+      "plural": "Gerüchte",
+      "partOfSpeech": "noun",
+      "translation": "la rumeur",
+      "example": "Das ist nur ein Gerücht.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "nachricht",
+      "word": "Nachricht",
+      "article": "die",
+      "plural": "Nachrichten",
+      "partOfSpeech": "noun",
+      "translation": "la nouvelle, le message",
+      "example": "Ich höre morgens die Nachrichten im Radio.",
+      "note": "die Nachrichten : les informations (radio, télé)",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "mitteilung",
+      "word": "Mitteilung",
+      "article": "die",
+      "plural": "Mitteilungen",
+      "partOfSpeech": "noun",
+      "translation": "le communiqué, l’avis",
+      "example": "Laut Mitteilung der Stadt bleibt das kleine Becken offen.",
+      "note": "mitteilen : faire savoir",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "tatsache",
+      "word": "Tatsache",
+      "article": "die",
+      "plural": "Tatsachen",
+      "partOfSpeech": "noun",
+      "translation": "le fait",
+      "example": "Das ist eine Tatsache, keine Meinung.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "meinung",
+      "word": "Meinung",
+      "article": "die",
+      "plural": "Meinungen",
+      "partOfSpeech": "noun",
+      "translation": "l’opinion, l’avis",
+      "example": "Meiner Meinung nach ist der Artikel gut recherchiert.",
+      "note": "meiner Meinung nach : à mon avis",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "bestaetigen",
+      "word": "bestätigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "confirmer",
+      "example": "Die Stadt hat die Meldung bestätigt.",
+      "note": "inséparable : hat bestätigt",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "behaupten",
+      "word": "behaupten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "affirmer, prétendre",
+      "example": "Mia behauptet, dass das Fest ausfällt.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "berichten",
+      "word": "berichten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "rendre compte, faire un reportage",
+      "example": "Die Zeitung berichtet über die neue Bibliothek.",
+      "note": "über + accusatif",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "veroeffentlichen",
+      "word": "veröffentlichen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "publier",
+      "example": "Die Zeitung hat den Artikel gestern veröffentlicht.",
+      "note": "inséparable : hat veröffentlicht",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "teilen",
+      "word": "teilen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "partager",
+      "example": "Viele haben das Foto im Netz geteilt.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "weiterleiten",
+      "word": "weiterleiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "transférer (un message)",
+      "example": "Bitte leite die Nachricht nicht weiter.",
+      "note": "séparable : weiter|leiten",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ueberpruefen",
+      "word": "überprüfen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "vérifier",
+      "example": "Bevor ich etwas teile, überprüfe ich die Quelle.",
+      "note": "inséparable : hat überprüft",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "artikel",
+      "word": "Artikel",
+      "article": "der",
+      "plural": "Artikel",
+      "partOfSpeech": "noun",
+      "translation": "l’article",
+      "example": "Der Artikel ist in der Lokalzeitung erschienen.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "beitrag",
+      "word": "Beitrag",
+      "article": "der",
+      "plural": "Beiträge",
+      "partOfSpeech": "noun",
+      "translation": "la publication, la contribution (forum)",
+      "example": "Ihr Beitrag im Forum hat viele Kommentare bekommen.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "schlagzeile",
+      "word": "Schlagzeile",
+      "article": "die",
+      "plural": "Schlagzeilen",
+      "partOfSpeech": "noun",
+      "translation": "le gros titre",
+      "example": "Die Schlagzeile war falsch, der Artikel war richtig.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "soziale-medien",
+      "word": "soziale Medien",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "les réseaux sociaux",
+      "example": "In den sozialen Medien wird viel geteilt.",
+      "note": "aussi : soziale Netzwerke",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "glaubwuerdig",
+      "word": "glaubwürdig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "crédible, fiable",
+      "example": "Die Mitteilung der Stadt ist glaubwürdig.",
+      "note": "die Glaubwürdigkeit : la crédibilité",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "angeblich",
+      "word": "angeblich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "soi-disant, paraît-il",
+      "example": "Angeblich schließt das Kino am Markt.",
+      "note": "signale une information non vérifiée",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "laut",
+      "word": "laut",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "selon, d’après",
+      "example": "Laut der Stadt bleibt das Bad offen.",
+      "note": "+ datif ; souvent sans article : laut Mitteilung",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "verbreiten",
+      "word": "verbreiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "répandre, diffuser",
+      "example": "Die falsche Nachricht wurde schnell im Netz verbreitet.",
+      "note": "inséparable : hat verbreitet · ein Gerücht verbreiten",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "bevor",
+      "word": "bevor",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "avant que, avant de",
+      "example": "Bevor ich etwas teile, lese ich den ganzen Artikel.",
+      "note": "≠ vor + nom (vor dem Essen)",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "seitdem",
+      "word": "seitdem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "depuis que",
+      "example": "Seitdem die Bibliothek renoviert wurde, kommen mehr Besucher.",
+      "note": "aussi : seit ; verbe à la fin",
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "sobald",
+      "word": "sobald",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "dès que",
+      "example": "Sobald die Arbeiten fertig sind, öffnet das Bad.",
+      "note": null,
+      "audio": {
+        "media": "b1-medien-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-medien-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : s’informer, mais comment ?",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : s’informer, mais comment ?",
+        "description": "MEDIEN\n[fr] Les médias\nZeitung, Radio, Internet, Gruppen auf dem Handy: Nachrichten kommen von überall. Aber was stimmt wirklich? [fr] Journal, radio, internet, groupes sur le téléphone : les nouvelles viennent de partout. Mais qu’est-ce qui est vrai ?\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Wie informieren Sie sich über das, was in Ihrer Stadt passiert? [fr] Comment vous informez-vous sur ce qui se passe dans votre ville ?\n• Haben Sie schon einmal eine Nachricht geteilt, die nicht gestimmt hat? [fr] Avez-vous déjà partagé une nouvelle qui était fausse ?\n• Woran erkennen Sie, dass eine Information glaubwürdig ist? [fr] À quoi reconnaissez-vous qu’une information est fiable ?\nAntworten Sie laut auf Deutsch, in zwei oder drei Sätzen. [fr] Répondez à voix haute en allemand, en deux ou trois phrases.\n\nICH KANN …\n[fr] Je peux…\n• Tatsache, Meinung und Gerücht unterscheiden [fr] distinguer un fait, une opinion et une rumeur\n• sagen, was eine Quelle berichtet (dass, ob, laut) [fr] rapporter ce que dit une source (dass, ob, laut)\n• eine Sendung im Lokalradio verstehen [fr] comprendre une émission de radio locale\n• sagen, wann etwas passiert (bevor, während, seitdem, bis, sobald) [fr] dire quand quelque chose se passe (bevor, während, seitdem, bis, sobald)\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• die Quelle — la source\n• die Meldung — l’information, la dépêche\n• das Gerücht — la rumeur\n• bestätigen — confirmer\n• behaupten — affirmer, prétendre\n• berichten über — rendre compte de\n• glaubwürdig — crédible, fiable\n• angeblich — soi-disant",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Im Studio vom Lokalradio",
+          "media": "b1-medien-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-medien-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : un article de la presse locale",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : un article de la presse locale",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nEin Zeitungsartikel beantwortet die W-Fragen: Was? Wer? Wann? Wo? Warum? Suchen Sie die Antworten zuerst im ersten Absatz. [fr] Un article de presse répond aux questions : quoi ? qui ? quand ? où ? pourquoi ? Cherchez d’abord les réponses dans le premier paragraphe.\nAchten Sie darauf, wer spricht: die Stadt, die Bibliotheksleiterin oder die sozialen Netzwerke. [fr] Observez qui parle : la ville, la directrice de la bibliothèque ou les réseaux sociaux.\n„Steht nicht im Text“ bedeutet: Der Text sagt dazu nichts. [fr] « Non mentionné » signifie : le texte n’en dit rien.\n\nMEHR ZEIT ZUM LESEN: STADTBIBLIOTHEK ÖFFNET ZWEI ABENDE LÄNGER\nNeustädter Rundschau, Lokales\n\n(A) Ab dem 3. Juni bleibt die Hauptbibliothek in der Neustädter Innenstadt dienstags und donnerstags bis 20 Uhr geöffnet. Das hat die Stadtverwaltung am Montag mitgeteilt. Laut Mitteilung handelt es sich zunächst um einen Versuch für die Monate Juni und Juli. Für die längeren Öffnungszeiten werden zwei zusätzliche Mitarbeiterinnen eingestellt. Die drei kleinen Stadtteilbibliotheken behalten ihre bisherigen Öffnungszeiten, und sonntags bleiben alle Standorte wie bisher geschlossen.\n\n(B) Seitdem die Bibliothek vor zwei Jahren renoviert wurde, kommen deutlich mehr Besucherinnen und Besucher, vor allem Studierende und Berufstätige. „Viele haben uns gefragt, ob wir nicht auch abends öffnen können“, sagt Bibliotheksleiterin Petra Albers. „Wer bis 18 Uhr arbeitet, hatte bisher kaum eine Möglichkeit, in Ruhe Bücher auszuleihen.“ Besonders in der Prüfungszeit war der Lesesaal schon am Nachmittag oft voll.\n\n(C) Allerdings gibt es eine Einschränkung: Der Lesesaal ist bis 20 Uhr zugänglich, die Ausleihe endet aber schon um 19.45 Uhr. Einen Termin braucht man für die Abendstunden nicht. Auch das Café im Erdgeschoss bleibt an diesen Abenden bis 19 Uhr geöffnet. Ob es abends auch Veranstaltungen wie Lesungen geben wird, ist laut Albers noch offen. „Bevor wir so etwas planen, wollen wir sehen, wie das neue Angebot angenommen wird.“\n\n(D) Im August wertet die Stadt die Besucherzahlen aus. Erst danach wird entschieden, ob die neuen Zeiten bleiben. Bis die Entscheidung fällt, können Bürgerinnen und Bürger ihre Meinung über das Kontaktformular auf der Internetseite der Stadt mitteilen. In sozialen Netzwerken wurde die Nachricht übrigens schon am Wochenende verbreitet, allerdings oft falsch: Dort hieß es, dass die Bibliothek ab sofort jeden Abend geöffnet ist. Das stimmt nicht, betont die Stadt. Sie bittet deshalb, Informationen immer auf ihrer Internetseite zu prüfen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel? [fr] De quoi parle l’article ?",
+          "explanation": "Le premier paragraphe donne l’essentiel : ouverture jusqu’à 20 h le mardi et le jeudi, « zunächst … ein Versuch » (d’abord un essai) en juin et juillet. Il n’est question ni de fermeture ni de construction.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Stadtbibliothek schließt im Sommer für zwei Monate.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Stadtbibliothek testet längere Öffnungszeiten an zwei Abenden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Stadt baut im Juni eine neue Bibliothek in der Innenstadt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was will der Artikel vor allem? [fr] Que veut surtout l’article ?",
+          "explanation": "L’article informe sur les nouveaux horaires et, au paragraphe D, corrige la rumeur des réseaux sociaux (« Das stimmt nicht, betont die Stadt »). La directrice est citée, pas critiquée, et les lectures du soir ne sont pas annoncées : elles sont « noch offen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "für neue Lesungen am Abend werben",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Bibliotheksleiterin und ihr Team kritisieren",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "informieren und eine falsche Meldung richtigstellen",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Alle Bibliotheken der Stadt sind dienstags und donnerstags länger geöffnet. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : seule la bibliothèque centrale ouvre plus tard ; « Die drei kleinen Stadtteilbibliotheken behalten ihre bisherigen Öffnungszeiten ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Für die Abendstunden braucht man keinen Termin. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Paragraphe C : « Einen Termin braucht man für die Abendstunden nicht. » Le complément placé en tête (Einen Termin) n’en change pas le sens.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Man kann abends bis 20 Uhr Bücher ausleihen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : la salle de lecture est accessible jusqu’à 20 h, mais « die Ausleihe endet aber schon um 19.45 Uhr ». Piège classique : 20 h est bien dans le texte, mais pour autre chose.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Die Renovierung der Bibliothek hat zwei Millionen Euro gekostet. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Le texte dit seulement que la bibliothèque a été rénovée il y a deux ans ; il ne donne aucun prix : non mentionné.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A annonce la décision et son caractère d’essai ; B en donne la raison (la demande des visiteurs) ; C précise la limite (le prêt s’arrête à 19 h 45) ; D parle de la suite (bilan en août) et de la fausse information en ligne.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Zwei Abende mehr, zunächst als Test"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Warum die Bibliothek länger öffnet"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Lesesaal ja, Ausleihe nur bis 19.45 Uhr"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Wie es weitergeht und was im Netz falsch war"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Absatz D: „Das stimmt nicht, betont die Stadt.“ Was stimmt nicht? Ergänzen Sie. [fr] Paragraphe D : qu’est-ce qui est faux ? Complétez.",
+          "text": "Es stimmt nicht, dass die Bibliothek ab sofort jeden [[1]] geöffnet ist.",
+          "explanation": "« Das » reprend la phrase précédente : sur les réseaux, on disait que la bibliothèque était ouverte « ab sofort jeden Abend ». En réalité, seulement deux soirs (mardi et jeudi), à partir du 3 juin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Abend"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : la radio du quartier vérifie une rumeur",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : la radio du quartier vérifie une rumeur",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSituation: Im Netz wird ein Foto geteilt: Das Hallenbad soll geschlossen sein. Das Stadtteilradio hat nachgefragt. [fr] Situation : une photo circule en ligne : la piscine serait fermée. La radio du quartier s’est renseignée.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Was sagt das Gerücht? Was sagt die Stadt? [fr] Première écoute : que dit la rumeur ? que dit la ville ?\nBeim zweiten Hören achten Sie auf Signalwörter: nur, bestätigt, ob, bevor, sobald. [fr] Deuxième écoute : repérez les mots-signaux nur, bestätigt, ob, bevor, sobald.\nDie Transkription sehen Sie nach Ihren Antworten. [fr] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-hoeren-radio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Gerücht im Netz: Das Hallenbad ist ab Montag [[1]]. · Wirklich geschlossen: nur das große [[2]] (Montag und Dienstag) · Grund: Die [[3]] wird erneuert. · Fortgeschrittene: Nachricht bis [[4]] · wieder alles offen: voraussichtlich ab [[5]]",
+          "explanation": "La photo dit « dass das Hallenbad ab Montag geschlossen ist ». La ville précise : « nur das große Becken », car « die Beleuchtung » est remplacée. Les avancés auront un message « bis Sonntagabend », et tout rouvre « voraussichtlich ab Mittwoch ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "geschlossen",
+                "zu"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Becken"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Beleuchtung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Sonntagabend",
+                "Sonntag"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Mittwoch"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Woher hat Jonas seine Informationen? [fr] D’où Jonas tient-il ses informations ?",
+          "explanation": "Jonas « hat bei der Stadt nachgefragt » et a parlé avec Mme Krüger « vom Sportamt » : deux sources officielles. La photo vient des groupes en ligne, et les parents posent des questions.",
+          "options": [
+            {
+              "id": "a",
+              "label": "aus einer Gruppe im Netz",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "von der Stadt und vom Sportamt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "von den Eltern",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was gilt für die Anfängerkurse der Kinder? [fr] Qu’en est-il des cours pour enfants débutants ?",
+          "explanation": "« Die Anfängerkurse für Kinder finden wie immer statt, und zwar im kleinen Becken. » La décision encore ouverte concerne l’entraînement des avancés, pas les débutants.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie fallen am Montag und am Dienstag aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie finden wie immer statt, im großen Becken.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie finden wie immer statt, im kleinen Becken.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was rät die Moderatorin am Ende? [fr] Que conseille l’animatrice à la fin ?",
+          "explanation": "« Bevor ihr ein Foto weiterleitet, schaut bitte, woher es kommt. » Elle renvoie ensuite au communiqué complet sur le site de la radio.",
+          "options": [
+            {
+              "id": "a",
+              "label": "vor dem Weiterleiten zu prüfen, woher ein Foto kommt",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "am Montag lieber nicht ins Hallenbad zu gehen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "bei Fragen direkt beim Sportamt anzurufen",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-medien-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : rapporter et situer dans le temps",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : rapporter et situer dans le temps",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus der Radiosendung. Beantworten Sie dann die Fragen. [fr] Lisez les phrases tirées de l’article et de l’émission de radio, puis répondez aux questions.\nAchten Sie auf die Wörter dass, ob, laut und auf die Wörter am Satzanfang der Sätze 4 bis 8. [fr] Observez dass, ob, laut et les mots qui ouvrent les phrases 4 à 8.\n\nSÄTZE AUS DEN TEXTEN\n[fr] Phrases tirées des textes\n1. Die Stadt bestätigt, dass nur das große Becken geschlossen bleibt.\n2. Einige Eltern wollen wissen, ob die Kurse ausfallen.\n3. Laut Mitteilung handelt es sich um einen Versuch.\n4. Seitdem die Bibliothek renoviert wurde, kommen mehr Besucher.\n5. Bevor wir entscheiden, sprechen wir mit dem Schwimmverein.\n6. Sobald die Arbeiten fertig sind, ist wieder alles offen.\n7. Während die Techniker die Lampen austauschen, darf niemand ins große Becken.\n8. Bis die Entscheidung fällt, können Bürgerinnen und Bürger ihre Meinung mitteilen.\n\nNOMEN AUS DEN TEXTEN\n[fr] Noms tirés des textes\ndie Mitteilung, die Entscheidung, die Möglichkeit, die Sicherheit",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 und 2: Wann benutzt man „dass“, wann „ob“? [fr] Phrases 1 et 2 : quand emploie-t-on « dass », quand « ob » ?",
+          "explanation": "Dass rapporte une affirmation (la ville confirme que…). Ob rapporte une question fermée, à laquelle on répondrait par oui ou non (les parents veulent savoir si…). Dans les deux cas, le verbe conjugué va à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "„dass“ für eine Aussage, „ob“ für eine Ja-Nein-Frage",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "„dass“ für eine Frage, „ob“ für eine Aussage",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Beide bedeuten dasselbe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz 3: Was bedeutet „laut Mitteilung“? [fr] Phrase 3 : que signifie « laut Mitteilung » ?",
+          "explanation": "La préposition laut (+ datif) signifie « selon, d’après » : elle cite la source. Rien à voir avec l’adjectif laut (fort, bruyant). Souvent sans article : laut Mitteilung, laut Polizei.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Mitteilung ist sehr laut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "So steht es in der Mitteilung.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "gegen die Mitteilung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Sätze 4 bis 8: Was bedeuten die Wörter? Ordnen Sie zu. [fr] Phrases 4 à 8 : que signifient ces mots ? Associez.",
+          "explanation": "Ce sont des conjonctions de temps : elles ouvrent une subordonnée, donc le verbe conjugué va à la fin (renoviert wurde, entscheiden, sind, austauschen, fällt). Quand la subordonnée vient d’abord, la principale commence par son verbe.",
+          "pairs": [
+            {
+              "left": "seitdem",
+              "right": "depuis que"
+            },
+            {
+              "left": "bevor",
+              "right": "avant que, avant de"
+            },
+            {
+              "left": "sobald",
+              "right": "dès que"
+            },
+            {
+              "left": "während",
+              "right": "pendant que"
+            },
+            {
+              "left": "bis",
+              "right": "jusqu’à ce que"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Aus welchem Wort kommt das Nomen? Ordnen Sie zu. [fr] De quel mot vient ce nom ? Associez.",
+          "explanation": "Un verbe donne un nom en -ung (mitteilen → die Mitteilung) ; un adjectif donne un nom en -heit ou -keit (sicher → die Sicherheit, möglich → die Möglichkeit). Tous ces noms sont féminins et prennent -en au pluriel.",
+          "pairs": [
+            {
+              "left": "die Mitteilung",
+              "right": "mitteilen"
+            },
+            {
+              "left": "die Entscheidung",
+              "right": "entscheiden"
+            },
+            {
+              "left": "die Möglichkeit",
+              "right": "möglich"
+            },
+            {
+              "left": "die Sicherheit",
+              "right": "sicher"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-regel",
+      "kind": "lesson",
+      "title": "À retenir : rapporter, situer dans le temps, former des noms",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "À retenir : rapporter, situer dans le temps, former des noms",
+        "description": "À RETENIR — rapporter ce que dit une source\n• dass + affirmation : Die Stadt schreibt, dass das Bad am Mittwoch öffnet.\n• ob + question fermée (oui ou non) : Ich weiß nicht, ob die Meldung stimmt.\n• mot interrogatif + question ouverte : Kannst du mir sagen, wann das Fest beginnt?\n• Dans les trois cas, virgule devant la subordonnée et verbe conjugué à la fin.\n• laut + datif cite une source : laut der Stadt, laut Polizei, laut Mitteilung (souvent sans article).\n\nLES SUBORDONNÉES DE TEMPS\n• bevor (avant que, avant de) : Bevor ich etwas teile, prüfe ich die Quelle.\n• während (pendant que) : Während die Arbeiten laufen, ist das Becken zu.\n• seitdem ou seit (depuis que) : Seitdem ich die App habe, lese ich mehr Nachrichten.\n• bis (jusqu’à ce que) : Warte, bis die Stadt es bestätigt.\n• sobald (dès que) : Sobald ich mehr weiß, rufe ich dich an.\nAvec seitdem, une action qui dure encore se met au présent, comme avec « depuis que ».\n\nFORMER DES NOMS\n• verbe → -ung : mitteilen → die Mitteilung, entscheiden → die Entscheidung, bestätigen → die Bestätigung\n• adjectif → -heit : sicher → die Sicherheit, frei → die Freiheit\n• adjectif en -ig, -lich, -bar → -keit : möglich → die Möglichkeit, glaubwürdig → die Glaubwürdigkeit\nCes noms sont toujours féminins, avec un pluriel en -en.\n\nATTENTION\n• ob n’est pas wenn : les deux se traduisent par « si ». ob = question (Ich frage, ob er kommt) ; wenn = condition (Wenn er kommt, essen wir).\n• bevor n’est pas vor : vor + nom (vor der Sitzung), bevor + verbe (bevor die Sitzung beginnt).\n• Pas d’inversion après dass : Er sagt, dass der Markt umzieht (et non *dass der Markt zieht um*). Le verbe séparable se ressoude à la fin.\n• laut sert pour une source extérieure. Pour son propre avis : meiner Meinung nach (et non *laut mir*).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-medien-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : dass, ob, laut et les subordonnées de temps",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : dass, ob, laut et les subordonnées de temps",
+        "description": "Üben Sie dass, ob und laut, die Nebensätze mit bevor, seitdem, bis und sobald und die Nomen auf -ung, -heit und -keit. [fr] Entraînez-vous avec dass, ob et laut, les subordonnées avec bevor, seitdem, bis et sobald et les noms en -ung, -heit et -keit.\nAchten Sie immer auf das Verb am Ende des Nebensatzes. [fr] Faites toujours attention au verbe à la fin de la subordonnée.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "„Ich weiß nicht, … die Meldung stimmt.“ Welches Wort passt? [fr] Quel mot convient ?",
+          "explanation": "Ne pas savoir quelque chose, c’est une question ouverte de type oui ou non : ob. Dass affirmerait que la nouvelle est vraie ; wenn exprime une condition (« au cas où »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "dass",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "ob",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "wenn",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie dass oder ob. [fr] Complétez avec dass ou ob.",
+          "text": "Die Stadt bestätigt, [[1]] das Bad am Mittwoch wieder öffnet. Viele fragen, [[2]] die Kurse stattfinden. Ich habe gelesen, [[3]] die Bibliothek länger offen ist. Weißt du, [[4]] das stimmt?",
+          "explanation": "Après bestätigen et lesen (une information affirmée) : dass. Après fragen et « Weißt du … ? » (une question fermée) : ob.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "dass"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ob"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "dass"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "ob"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie eine höfliche indirekte Frage. [fr] Formez une question indirecte polie.",
+          "answers": [
+            [
+              "Können",
+              "Sie",
+              "mir",
+              "sagen,",
+              "ob",
+              "der Kurs",
+              "am Montag",
+              "stattfindet?"
+            ],
+            [
+              "Können",
+              "Sie",
+              "mir",
+              "sagen,",
+              "ob",
+              "am Montag",
+              "der Kurs",
+              "stattfindet?"
+            ]
+          ],
+          "explanation": "« Können Sie mir sagen, ob der Kurs am Montag stattfindet? » Dans la subordonnée avec ob, le verbe séparable se ressoude à la fin : stattfindet."
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz mit „laut“. [fr] Formez une phrase avec « laut ».",
+          "answers": [
+            [
+              "Laut",
+              "der Stadt",
+              "ist",
+              "das kleine Becken",
+              "am Montag",
+              "geöffnet."
+            ],
+            [
+              "Laut",
+              "der Stadt",
+              "ist",
+              "am Montag",
+              "das kleine Becken",
+              "geöffnet."
+            ]
+          ],
+          "explanation": "« Laut der Stadt » occupe la 1re position, puis vient le verbe ist. Le sujet et le complément de temps peuvent s’échanger ; le participe geöffnet reste à la fin."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„… du ein Foto teilst, prüf bitte die Quelle.“ Welches Wort passt? [fr] Quel mot convient ?",
+          "explanation": "On vérifie la source avant de partager : bevor. Sobald (dès que) placerait la vérification après le partage, trop tard ; seitdem (depuis que) ne convient pas à un conseil.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bevor",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Seitdem",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sobald",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie bevor, seitdem, bis oder sobald. [fr] Complétez avec bevor, seitdem, bis ou sobald.",
+          "text": "[[1]] ich die App habe, lese ich jeden Morgen Nachrichten. Ich rufe dich an, [[2]] ich etwas Neues weiß. Warte bitte, [[3]] die Stadt die Meldung bestätigt. [[4]] ich etwas teile, lese ich den ganzen Artikel.",
+          "explanation": "Seitdem : depuis que j’ai l’appli (et ça continue, d’où le présent). Sobald : dès que j’en sais plus. Bis : jusqu’à ce que la ville confirme. Bevor : avant de partager. En tête de phrase, majuscule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Seitdem",
+                "Seit"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "sobald",
+                "wenn"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "bis"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Bevor"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr] Formez le nom.",
+          "text": "bestätigen → die [[1]] · möglich → die [[2]] · frei → die [[3]] · ehrlich → die [[4]]",
+          "explanation": "Verbe → -ung (die Bestätigung). Adjectif en -lich → -keit (die Möglichkeit, die Ehrlichkeit). Adjectif court → -heit (die Freiheit). Majuscule et article féminin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Bestätigung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Möglichkeit"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Freiheit"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Ehrlichkeit"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welcher Satz gibt die Quelle richtig an? [fr] Quelle phrase cite correctement la source ?",
+          "explanation": "Laut + datif : der Stadt. Le groupe « Laut der Stadt » compte comme 1er élément, donc le verbe bleibt vient juste après. La première phrase a un accusatif, la deuxième oublie l’inversion.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Laut die Stadt bleibt das Bad offen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Laut der Stadt das Bad bleibt offen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Laut der Stadt bleibt das Bad am Montag offen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Sobald",
+              "die Arbeiten",
+              "fertig",
+              "sind,",
+              "öffnet",
+              "das große Becken",
+              "wieder."
+            ]
+          ],
+          "explanation": "« Sobald die Arbeiten fertig sind, öffnet das große Becken wieder. » Subordonnée d’abord (verbe sind à la fin), puis la principale commence par son verbe öffnet."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-wortschatz",
+      "kind": "exercise",
+      "title": "Vocabulaire : sources, faits et rumeurs",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vocabulaire : sources, faits et rumeurs",
+        "description": "Lernen Sie die Wörter der Medien in festen Verbindungen und mit ihrer Wortfamilie. [fr] Apprenez les mots des médias dans leurs groupes figés et avec leur famille.\nHören Sie den Wortschatz des Moduls in der Wortliste. [fr] Écoutez le vocabulaire du module dans le lexique.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? Ordnen Sie zu. [fr] Quel verbe va avec quel nom ? Associez.",
+          "explanation": "Groupes figés : eine Frage stellen (poser une question), eine Entscheidung treffen (prendre une décision), einen Artikel veröffentlichen (publier un article), eine Quelle angeben (indiquer une source), seine Meinung äußern (exprimer son avis).",
+          "pairs": [
+            {
+              "left": "eine Frage",
+              "right": "stellen"
+            },
+            {
+              "left": "eine Entscheidung",
+              "right": "treffen"
+            },
+            {
+              "left": "einen Artikel",
+              "right": "veröffentlichen"
+            },
+            {
+              "left": "eine Quelle",
+              "right": "angeben"
+            },
+            {
+              "left": "seine Meinung",
+              "right": "äußern"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Nomen aus derselben Wortfamilie. [fr] Complétez avec le nom de la même famille.",
+          "text": "Die Stadt hat die Nachricht bestätigt: Es gibt eine offizielle [[1]]. Die Zeitung berichtet über das Bad: Der [[2]] ist sehr genau. Diese Quelle ist glaubwürdig: Ihre [[3]] ist hoch.",
+          "explanation": "bestätigen → die Bestätigung (-ung) ; berichten → der Bericht (nom masculin sans suffixe) ; glaubwürdig → die Glaubwürdigkeit (-keit après -ig).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Bestätigung"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Bericht"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Glaubwürdigkeit"
+              ],
+              "size": 16,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sie wollen höflich nach der Quelle fragen. Was sagen Sie? [fr] Vous voulez demander poliment la source. Que dites-vous ?",
+          "explanation": "« Woher hast du diese Information? » demande la source sans accuser. « Das ist doch Quatsch » (n’importe quoi) est agressif ; « Ich habe das auch gehört » relaie la rumeur au lieu de la vérifier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch Quatsch!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Woher hast du diese Information?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich habe das auch gehört.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie sind nicht sicher. Welche Formulierung passt? [fr] Vous n’êtes pas sûr. Quelle formulation convient ?",
+          "explanation": "Pour exprimer un doute : « Ich bin mir nicht sicher, ob … » (avec ob et le verbe à la fin). Les deux autres phrases affirment une certitude.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es ist bewiesen, dass das stimmt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ganz klar, das ist richtig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich bin mir nicht sicher, ob das stimmt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Angeblich schließt das Kino am Markt für immer.“ Was ist das? [fr] De quoi s’agit-il ?",
+          "explanation": "Angeblich (soi-disant, paraît-il) signale une information non vérifiée : une rumeur. Une opinion exprimerait un jugement (ich finde …), un fait serait confirmé par une source.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ein Gerücht",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "eine Meinung",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine Tatsache",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Was bedeutet das? Ordnen Sie die Erklärungen zu. [fr] Que signifient ces mots ? Associez les définitions.",
+          "explanation": "Définir un mot en allemand simple est utile pour la médiation. Die Quelle désigne aussi, au sens propre, la source d’une rivière.",
+          "pairs": [
+            {
+              "left": "die Quelle",
+              "right": "woher eine Information kommt"
+            },
+            {
+              "left": "das Gerücht",
+              "right": "eine Information, die niemand bestätigt hat"
+            },
+            {
+              "left": "die Meldung",
+              "right": "eine kurze Nachricht in den Medien"
+            },
+            {
+              "left": "glaubwürdig",
+              "right": "so, dass man es glauben kann"
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr] Complétez avec la préposition.",
+          "text": "Die Zeitung berichtet [[1]] die neue Bibliothek. Viele diskutieren [[2]] die Öffnungszeiten. Ich höre die Nachrichten morgens [[3]] Radio.",
+          "explanation": "berichten über + accusatif, diskutieren über + accusatif : de quoi on parle. « im Radio » (in dem) : à la radio ; de même im Fernsehen, in der Zeitung.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "im"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-medien-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : citer, douter, vérifier",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : citer, douter, vérifier",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\nHören Sie zuerst das Modell. Sprechen Sie dann den ganzen Satz ruhig und deutlich. [fr] Écoutez d’abord le modèle. Dites ensuite toute la phrase calmement et distinctement.\nMit diesen Sätzen nennen Sie eine Quelle, drücken Zweifel aus und korrigieren eine Information. [fr] Ces phrases servent à citer une source, à exprimer un doute et à corriger une information.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Laut der Stadt bleibt nur das große Becken geschlossen.",
+          "accept": [
+            "Laut der Stadt bleibt nur das große Becken geschlossen."
+          ],
+          "explanation": "« nur » porte l’accent : c’est l’information qui corrige la rumeur. « geschlossen » : accent sur « SCHLOS », « o » bref.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich weiß noch nicht, ob die Meldung stimmt.",
+          "accept": [
+            "Ich weiß noch nicht, ob die Meldung stimmt."
+          ],
+          "explanation": "Petite pause à la virgule, puis « ob » ; le verbe « stimmt » termine la phrase. « Meldung » : « e » long, « ung » nasal sans le « g » français.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Woher hast du diese Information?",
+          "accept": [
+            "Woher hast du diese Information?"
+          ],
+          "explanation": "Question ouverte : la voix descend à la fin. « Woher » : accent sur « HER ». « Information » : accent sur « TION », prononcé « tsion ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Bevor ich etwas teile, prüfe ich die Quelle.",
+          "accept": [
+            "Bevor ich etwas teile, prüfe ich die Quelle."
+          ],
+          "explanation": "Subordonnée puis inversion « prüfe ich ». « prüfe » : « ü » long, lèvres arrondies ; « Quelle » : « qu » se prononce « kv ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "In der Mitteilung steht, dass die Kurse stattfinden.",
+          "accept": [
+            "In der Mitteilung steht, dass die Kurse stattfinden."
+          ],
+          "explanation": "« stattfinden » en un mot à la fin, accent sur « STATT ». « Mitteilung » : accent sur « MIT ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das ist nur ein Gerücht, das ist nicht bestätigt.",
+          "accept": [
+            "Das ist nur ein Gerücht, das ist nicht bestätigt."
+          ],
+          "explanation": "« Gerücht » : accent sur « RÜCHT », « ch » doux comme dans « ich ». Accent de phrase sur « nur » et « nicht ».",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-medien-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-medien-lesen2",
+      "kind": "exercise",
+      "title": "Comprendre : une rumeur dans le groupe du quartier",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : une rumeur dans le groupe du quartier",
+        "description": "Lesen Sie die Beiträge in der Nachbarschaftsgruppe. Beantworten Sie dann die Fragen. [fr] Lisez les publications du groupe de quartier, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nFragen Sie bei jedem Beitrag: Wer schreibt? Ist das eine Tatsache, eine Meinung oder ein Gerücht? Gibt es eine Quelle? [fr] Pour chaque publication, demandez-vous : qui écrit ? est-ce un fait, une opinion ou une rumeur ? y a-t-il une source ?\nDie letzten zwei Aufgaben sind Diktate: Schreiben Sie genau, was Sie hören. [fr] Les deux dernières questions sont des dictées : écrivez exactement ce que vous entendez.\n\nNACHBARSCHAFTSGRUPPE LINDENVIERTEL\nMia L. (Mo., 18:02): Hab gerade gehört, dass das Sommerfest am Samstag ausfällt. Angeblich wegen des Wetters. Schade!\nHerr Okafor (Mo., 18:40): Woher weißt du das, Mia? Auf der Seite des Bürgervereins steht nichts davon. Gibt es dafür eine Quelle?\nBürgerverein Lindenviertel (Mo., 19:15): Liebe Nachbarinnen und Nachbarn, das Sommerfest findet statt! Wegen des Regens ziehen wir nur in die Turnhalle der Grundschule um. Beginn wie geplant um 15 Uhr.\nMia L. (Mo., 19:30): Oh, sorry! Da hatte ich etwas falsch verstanden. Danke für die Info, dann bis Samstag in der Turnhalle!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-lesen2-gruppe",
+          "caption": "Nachbarschaftsgruppe Lindenviertel",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-lesen2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-medien-lesen2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was hat Mia zuerst geschrieben? [fr] Qu’a écrit Mia en premier ?",
+          "explanation": "Mia : « Hab gerade gehört, dass das Sommerfest am Samstag ausfällt. » Elle l’a seulement entendu dire (gehört), sans source.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Fest findet in der Turnhalle statt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Fest fällt aus.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das Fest beginnt später.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Information ist offiziell bestätigt? [fr] Quelle information est officiellement confirmée ?",
+          "explanation": "L’association, organisatrice de la fête, écrit : « das Sommerfest findet statt … in die Turnhalle … Beginn wie geplant um 15 Uhr ». C’est la source officielle ; il n’est jamais question de dimanche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Fest fällt wegen des Wetters aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Fest wird auf Sonntag verschoben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Fest findet um 15 Uhr in der Turnhalle statt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie reagiert Herr Okafor? [fr] Comment réagit M. Okafor ?",
+          "explanation": "« Woher weißt du das, Mia? … Gibt es dafür eine Quelle? » Il vérifie avant de croire : le bon réflexe face à une rumeur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er fragt nach der Quelle.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Er teilt die Nachricht weiter.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er beschwert sich über das Wetter.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welches Wort zeigt, dass Mias Information unsicher war? [fr] Quel mot montre que l’information de Mia était incertaine ?",
+          "explanation": "Angeblich (soi-disant) indique qu’on rapporte une information non vérifiée. Gerade (à l’instant) donne le moment, et Schade (dommage) un sentiment.",
+          "options": [
+            {
+              "id": "a",
+              "label": "„gerade“",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "„angeblich“",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "„Schade“",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Bevor man eine Nachricht weiterleitet, sollte man die Quelle prüfen."
+          ],
+          "voice": "sprecher",
+          "explanation": "Subordonnée avec bevor : verbe « weiterleitet » en un mot à la fin, puis virgule et inversion « sollte man ». Nachricht et Quelle : noms, donc majuscule.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Laut Bürgerverein findet das Fest trotz des Regens in der Turnhalle statt."
+          ],
+          "voice": "frau",
+          "explanation": "Laut sans article devant le nom de la source ; trotz + génitif (des Regens). Le verbe séparable stattfinden se coupe : « findet … statt ».",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-medien-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : s’informer et vérifier une information",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : s’informer et vérifier une information",
+        "description": "Hier wiederholen Sie das ganze Modul: Grammatik, Wörter und Hören. [fr] Ici, vous révisez tout le module : grammaire, vocabulaire et écoute.\nFür die Fragen 1 und 2 hören Sie eine kurze Meldung aus dem Lokalradio. [fr] Pour les questions 1 et 2, écoutez une courte information de la radio locale.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-medien-kontrolle-nachrichten",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Hören Sie die Meldung: Wo findet der Markt ab nächster Woche statt? [fr] Écoutez l’information : où le marché a-t-il lieu à partir de la semaine prochaine ?",
+          "explanation": "« dass der Wochenmarkt ab nächster Woche auf dem Rathausplatz stattfindet ». Le Marktplatz est cité, mais c’est là qu’on construit la fontaine.",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf dem Marktplatz",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf dem Rathausplatz",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "vor dem Bahnhof",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist noch offen? [fr] Qu’est-ce qui n’est pas encore décidé ?",
+          "explanation": "« Ob der Markt danach … zurückkehrt, ist noch nicht entschieden. » Les horaires (7 h à 13 h) et la raison (la fontaine) sont connus.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ob der Markt danach auf den Marktplatz zurückkehrt",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "an welchen Tagen und wann der Markt geöffnet ist",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "warum der Markt auf den Rathausplatz umzieht",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Die Stadt",
+              "hat",
+              "bestätigt,",
+              "dass",
+              "der Markt",
+              "auf dem Rathausplatz",
+              "stattfindet."
+            ],
+            [
+              "Die Stadt",
+              "hat",
+              "bestätigt,",
+              "dass",
+              "auf dem Rathausplatz",
+              "der Markt",
+              "stattfindet."
+            ]
+          ],
+          "explanation": "« Die Stadt hat bestätigt, dass der Markt auf dem Rathausplatz stattfindet. » Principale au parfait (hat … bestätigt), puis dass avec le verbe séparable ressoudé à la fin."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie ob und das Nomen von „entscheiden“. [fr] Complétez avec ob et le nom formé sur « entscheiden ».",
+          "text": "Ich weiß nicht, [[1]] die [[2]] schon gefallen ist.",
+          "explanation": "Ne pas savoir → question fermée → ob. entscheiden → die Entscheidung (-ung, féminin). « Eine Entscheidung fällt » : une décision est prise.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ob"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Entscheidung"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„… der Brunnen fertig ist, kann der Markt vielleicht zurückkommen.“ Welches Wort passt? [fr] Quel mot convient ?",
+          "explanation": "Le retour est possible dès que la fontaine est terminée : sobald. Bevor (avant que) contredit le sens, et während (pendant que) ne va pas avec un état achevé (fertig sein).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bevor",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Während",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sobald",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Ich finde, der Rathausplatz ist viel schöner für den Markt.“ Was ist das? [fr] De quoi s’agit-il ?",
+          "explanation": "« Ich finde, … » introduit un jugement personnel : une opinion. Elle n’est ni vraie ni fausse, contrairement à un fait ou à une rumeur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eine Meinung",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "eine Tatsache",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ein Gerücht",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welcher Satz passt zu welcher Absicht? Ordnen Sie zu. [fr] Quelle phrase convient à quelle intention ? Associez.",
+          "explanation": "Les quatre gestes du thème : citer (laut), douter (ob), demander la source (woher), corriger poliment en renvoyant au texte officiel.",
+          "pairs": [
+            {
+              "left": "eine Quelle nennen",
+              "right": "Laut der Stadt findet der Markt dienstags statt."
+            },
+            {
+              "left": "Zweifel ausdrücken",
+              "right": "Ich bin nicht sicher, ob das stimmt."
+            },
+            {
+              "left": "nach der Quelle fragen",
+              "right": "Woher weißt du das?"
+            },
+            {
+              "left": "eine Information korrigieren",
+              "right": "Das stimmt so nicht: In der Mitteilung steht etwas anderes."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-medien-hoeren-radio",
+      "kind": "audio",
+      "title": "Radio de quartier : une fermeture à préciser",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Hanna",
+          "text": "Guten Morgen, hier ist das Stadtteilradio Neustadt, es ist acht Uhr. Seit gestern Abend wird in mehreren Gruppen im Netz ein Foto geteilt. Darauf steht, dass das Hallenbad ab Montag geschlossen ist."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Hanna",
+          "text": "Viele von euch haben uns gefragt, ob das stimmt. Unser Reporter Jonas hat bei der Stadt nachgefragt. Jonas, was hast du herausgefunden?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Also, das Foto zeigt nur einen Teil des Aushangs. Die Stadt bestätigt, dass am Montag und Dienstag nur das große Becken geschlossen bleibt. Dort wird die Beleuchtung erneuert. Während die Techniker die Lampen austauschen, darf aus Sicherheitsgründen niemand ins große Becken. Das kleine Becken und die Sauna sind ganz normal geöffnet."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Hanna",
+          "text": "Was bedeutet das für die Schwimmkurse? Einige Eltern wollen wissen, ob die Kurse am Montagnachmittag ausfallen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Dazu habe ich mit Frau Krüger vom Sportamt gesprochen. Hören wir mal rein."
+        },
+        {
+          "pause": 0.7
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Krüger",
+          "text": "Die Anfängerkurse für Kinder finden wie immer statt, und zwar im kleinen Becken. Die Eltern müssen also nichts ändern. Beim Training für Fortgeschrittene ist es schwieriger. Bevor wir entscheiden, sprechen wir noch mit dem Schwimmverein. Die Gruppen bekommen bis Sonntagabend eine Nachricht."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Hanna",
+          "text": "Und ab wann ist wieder alles offen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Sobald die Arbeiten fertig sind, ist wieder alles offen, also voraussichtlich ab Mittwoch. Falls es Verzögerungen gibt, meldet die Stadt das auf ihrer Internetseite."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Hanna",
+          "text": "Danke, Jonas. Liebe Hörerinnen und Hörer: Bevor ihr ein Foto weiterleitet, schaut bitte, woher es kommt. Die vollständige Mitteilung der Stadt findet ihr auf unserer Internetseite. Und jetzt: Musik!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-lesen2-gruppe",
+      "kind": "image",
+      "title": "Publication dans un groupe de quartier",
+      "alt": "Fil d’un groupe de quartier : Mia écrit que la fête d’été de samedi est annulée, paraît-il à cause du temps ; M. Okafor demande sa source ; l’association de quartier répond que la fête a lieu au gymnase de l’école à 15 h ; Mia s’excuse.",
+      "image": {
+        "layout": "forum",
+        "title": "Nachbarschaftsgruppe Lindenviertel",
+        "posts": [
+          {
+            "author": "Mia L.",
+            "date": "Mo., 18:02",
+            "text": "Hab gerade gehört, dass das Sommerfest am Samstag ausfällt. Angeblich wegen des Wetters. Schade!"
+          },
+          {
+            "author": "Herr Okafor",
+            "date": "Mo., 18:40",
+            "text": "Woher weißt du das, Mia? Auf der Seite des Bürgervereins steht nichts davon. Gibt es dafür eine Quelle?"
+          },
+          {
+            "author": "Bürgerverein Lindenviertel",
+            "date": "Mo., 19:15",
+            "text": "Liebe Nachbarinnen und Nachbarn, das Sommerfest findet statt! Wegen des Regens ziehen wir nur in die Turnhalle der Grundschule um. Beginn wie geplant um 15 Uhr."
+          },
+          {
+            "author": "Mia L.",
+            "date": "Mo., 19:30",
+            "text": "Oh, sorry! Da hatte ich etwas falsch verstanden. Danke für die Info, dann bis Samstag in der Turnhalle!"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-medien-kontrolle-nachrichten",
+      "kind": "audio",
+      "title": "Informations locales : le marché déménage",
+      "script": [
+        {
+          "voice": "mann3",
+          "text": "Und nun die Lokalnachrichten. Die Stadt Neustadt hat bestätigt, dass der Wochenmarkt ab nächster Woche auf dem Rathausplatz stattfindet. Der Grund: Auf dem Marktplatz wird bis Ende Oktober ein neuer Brunnen gebaut."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann3",
+          "text": "Ob der Markt danach auf den Marktplatz zurückkehrt, ist noch nicht entschieden. Die Marktzeiten bleiben gleich: dienstags und freitags von sieben bis dreizehn Uhr."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-einstieg-foto",
+      "kind": "image",
+      "title": "Un micro de studio",
+      "alt": "Gros plan sur un micro de studio de radio, suspendu dans son support élastique, sur fond clair.",
+      "photo": {
+        "file": "libre/commons/medien-mikrofon.jpg",
+        "crop": [
+          0,
+          0.2,
+          1,
+          0.75
+        ]
+      },
+      "credit": "Kreuzschnabel, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:XLR-microphone.jpg"
+    },
+    {
+      "key": "b1-medien-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Laut der Stadt bleibt nur das große Becken geschlossen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich weiß noch nicht, ob die Meldung stimmt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Woher hast du diese Information?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Bevor ich etwas teile, prüfe ich die Quelle."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "In der Mitteilung steht, dass die Kurse stattfinden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : citer, douter, vérifier",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das ist nur ein Gerücht, das ist nicht bestätigt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-lesen2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : une rumeur dans le groupe du quartier",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Bevor man eine Nachricht weiterleitet, sollte man die Quelle prüfen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-lesen2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : une rumeur dans le groupe du quartier",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Laut Bürgerverein findet das Fest trotz des Regens in der Turnhalle statt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-medien-lexique",
+      "kind": "audio",
+      "title": "Lexique · Medien : s’informer et vérifier une information",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Quelle, die Quellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Meldung, die Meldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Gerücht, die Gerüchte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nachricht, die Nachrichten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mitteilung, die Mitteilungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tatsache, die Tatsachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Meinung, die Meinungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bestätigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "behaupten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "berichten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "veröffentlichen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "teilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "weiterleiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "überprüfen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Artikel, die Artikel"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Beitrag, die Beiträge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Schlagzeile, die Schlagzeilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "soziale Medien"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "glaubwürdig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "angeblich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "laut"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verbreiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bevor"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "seitdem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sobald"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

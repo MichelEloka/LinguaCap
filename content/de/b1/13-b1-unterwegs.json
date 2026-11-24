@@ -1,0 +1,2528 @@
+{
+  "id": "b1-unterwegs",
+  "title": "Unterwegs : voyager malgré les imprévus",
+  "objective": "Comprendre une annonce de perturbation et un échange au guichet, comparer deux trajets, exprimer une concession (obwohl, trotzdem) et employer wegen, trotz, statt et während avec le génitif.",
+  "prerequisites": [
+    "b1-lernen-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues, annonces et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : avis de perturbation, dialogue du train supprimé avant le concert."
+  ],
+  "grammarFocus": [
+    "obwohl-trotzdem",
+    "genitiv-praepositionen"
+  ],
+  "layer": "content/b/source/b1/b1-unterwegs.mjs",
+  "vocabulary": [
+    {
+      "id": "verspaetung",
+      "word": "Verspätung",
+      "article": "die",
+      "plural": "Verspätungen",
+      "partOfSpeech": "noun",
+      "translation": "le retard",
+      "example": "Der Zug hat heute zwanzig Minuten Verspätung.",
+      "note": "Verspätung haben : être en retard (train, bus)",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "sich-verspaeten",
+      "word": "sich verspäten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être en retard, avoir du retard",
+      "example": "Der Bus verspätet sich um zehn Minuten.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "ausfall",
+      "word": "Ausfall",
+      "article": "der",
+      "plural": "Ausfälle",
+      "partOfSpeech": "noun",
+      "translation": "la suppression (d’un train), l’annulation",
+      "example": "Wegen des Ausfalls fahren heute Busse.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "ausfallen",
+      "word": "ausfallen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être supprimé, être annulé",
+      "example": "Der Zug nach Talheim fällt heute aus.",
+      "note": "séparable : aus|fallen · Perfekt : ist ausgefallen",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "schienenersatzverkehr",
+      "word": "Schienenersatzverkehr",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le service de bus de remplacement",
+      "example": "Am Wochenende gibt es zwischen Wiesenbach und Talheim Schienenersatzverkehr.",
+      "note": "souvent abrégé SEV",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "ersatzbus",
+      "word": "Ersatzbus",
+      "article": "der",
+      "plural": "Ersatzbusse",
+      "partOfSpeech": "noun",
+      "translation": "le bus de remplacement",
+      "example": "Der Ersatzbus fährt am Ausgang West ab.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "den-anschluss-verpassen",
+      "word": "den Anschluss verpassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "rater la correspondance",
+      "example": "Wegen der Verspätung haben wir den Anschluss verpasst.",
+      "note": "der Anschluss : la correspondance",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "umsteigen",
+      "word": "umsteigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "changer (de train, de bus)",
+      "example": "In Neudorf steigen Sie in den Regionalexpress um.",
+      "note": "séparable : um|steigen · Perfekt : ist umgestiegen",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "verbindung",
+      "word": "Verbindung",
+      "article": "die",
+      "plural": "Verbindungen",
+      "partOfSpeech": "noun",
+      "translation": "la liaison, le trajet (en transports)",
+      "example": "Ich habe eine schnellere Verbindung gefunden.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "strecke",
+      "word": "Strecke",
+      "article": "die",
+      "plural": "Strecken",
+      "partOfSpeech": "noun",
+      "translation": "la ligne, le trajet",
+      "example": "Auf der Strecke nach Talheim wird gebaut.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "stoerung",
+      "word": "Störung",
+      "article": "die",
+      "plural": "Störungen",
+      "partOfSpeech": "noun",
+      "translation": "la panne, l’incident technique",
+      "example": "Wegen einer Störung fällt der Zug aus.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "baustelle",
+      "word": "Baustelle",
+      "article": "die",
+      "plural": "Baustellen",
+      "partOfSpeech": "noun",
+      "translation": "le chantier",
+      "example": "Wegen einer großen Baustelle fahren weniger Züge.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "durchsage",
+      "word": "Durchsage",
+      "article": "die",
+      "plural": "Durchsagen",
+      "partOfSpeech": "noun",
+      "translation": "l’annonce (au haut-parleur)",
+      "example": "Haben Sie die Durchsage am Bahnsteig verstanden?",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "bahnsteig",
+      "word": "Bahnsteig",
+      "article": "der",
+      "plural": "Bahnsteige",
+      "partOfSpeech": "noun",
+      "translation": "le quai",
+      "example": "Der Zug hält im vorderen Bereich des Bahnsteigs.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "umweg",
+      "word": "Umweg",
+      "article": "der",
+      "plural": "Umwege",
+      "partOfSpeech": "noun",
+      "translation": "le détour",
+      "example": "Wegen der Baustelle mussten wir einen Umweg fahren.",
+      "note": "einen Umweg fahren / machen",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "fahrgastrechte",
+      "word": "Fahrgastrechte",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les droits des voyageurs",
+      "example": "Die Fahrgastrechte gelten auch für Monatskarten.",
+      "note": "toujours au pluriel ici : die Fahrgastrechte",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "monatskarte",
+      "word": "Monatskarte",
+      "article": "die",
+      "plural": "Monatskarten",
+      "partOfSpeech": "noun",
+      "translation": "l’abonnement mensuel",
+      "example": "Mit meiner Monatskarte fahre ich jeden Tag in die Stadt.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "gelten",
+      "word": "gelten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "être valable",
+      "example": "Gelten die Fahrkarten auch im Ersatzbus?",
+      "note": "es gilt, galt, hat gegolten",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "einen-antrag-stellen",
+      "word": "einen Antrag stellen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "faire une demande (officielle)",
+      "example": "Nach einer Stunde Verspätung können Sie einen Antrag stellen.",
+      "note": "der Antrag : la demande, le formulaire",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "pendeln",
+      "word": "pendeln",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire la navette (domicile-travail)",
+      "example": "Miriam pendelt jeden Tag in die Stadt.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "pendler",
+      "word": "Pendler",
+      "article": "der",
+      "plural": "Pendler",
+      "partOfSpeech": "noun",
+      "translation": "le navetteur",
+      "example": "Viele Pendler fahren morgens mit dem Zug.",
+      "note": "féminin : die Pendlerin, die Pendlerinnen",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "im-stau-stehen",
+      "word": "im Stau stehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être pris dans les bouchons",
+      "example": "Im Winter steht Jonas oft im Stau.",
+      "note": "der Stau : l’embouteillage",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "rechtzeitig",
+      "word": "rechtzeitig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "à temps",
+      "example": "Trotz der Störung sind wir rechtzeitig angekommen.",
+      "note": null,
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "obwohl",
+      "word": "obwohl",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "bien que, alors que",
+      "example": "Obwohl es regnet, fährt Jonas mit dem Rad.",
+      "note": "subordonnée : verbe conjugué à la fin",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "trotzdem",
+      "word": "trotzdem",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "quand même, malgré cela",
+      "example": "Der Bus war voll. Trotzdem sind wir eingestiegen.",
+      "note": "adverbe en tête : verbe juste après (Trotzdem sind wir …)",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 24
+      }
+    },
+    {
+      "id": "wegen",
+      "word": "wegen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "à cause de",
+      "example": "Wegen des Regens nehmen wir den Bus.",
+      "note": "+ génitif (à l’oral, souvent + datif)",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 25
+      }
+    },
+    {
+      "id": "trotz",
+      "word": "trotz",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "malgré",
+      "example": "Trotz des Regens fahre ich mit dem Rad.",
+      "note": "+ génitif",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 26
+      }
+    },
+    {
+      "id": "statt",
+      "word": "statt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "au lieu de",
+      "example": "Statt des Zuges nehmen wir den Bus.",
+      "note": "+ génitif ; aussi : anstatt",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 27
+      }
+    },
+    {
+      "id": "waehrend",
+      "word": "während",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "preposition",
+      "translation": "pendant",
+      "example": "Während der Fahrt lese ich die Zeitung.",
+      "note": "+ génitif ; aussi conjonction : pendant que",
+      "audio": {
+        "media": "b1-unterwegs-lexique",
+        "line": 28
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-unterwegs-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : en route malgré les imprévus",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : en route malgré les imprévus",
+        "description": "UNTERWEGS\n[fr] En route\nZug, Bus, Fahrrad oder Auto: Unterwegs passiert oft etwas Unerwartetes. [fr] Train, bus, vélo ou voiture : en route, il arrive souvent quelque chose d’inattendu.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Wie kommen Sie jeden Tag zur Arbeit oder zum Kurs? Wie lange brauchen Sie? [fr] Comment allez-vous chaque jour au travail ou en cours ? Combien de temps vous faut-il ?\n• Was war Ihre längste Verspätung? Was haben Sie dann gemacht? [fr] Quel a été votre plus long retard ? Qu’avez-vous fait alors ?\n• Was ist Ihnen unterwegs am wichtigsten: Zeit, Geld oder Komfort? [fr] Qu’est-ce qui compte le plus pour vous en route : le temps, l’argent ou le confort ?\nAntworten Sie laut auf Deutsch, in zwei oder drei Sätzen. [fr] Répondez à voix haute en allemand, en deux ou trois phrases.\n\nICH KANN …\n[fr] Je peux…\n• eine Durchsage über eine Störung verstehen [fr] comprendre une annonce de perturbation\n• zwei Verbindungen vergleichen und mich entscheiden [fr] comparer deux trajets et choisir\n• sagen, was trotz eines Problems passiert (obwohl, trotzdem) [fr] dire ce qui se passe malgré un problème (obwohl, trotzdem)\n• einen Grund oder eine Alternative nennen (wegen, statt) [fr] donner une cause ou une alternative (wegen, statt)\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• die Verspätung — le retard\n• der Ausfall — la suppression (d’un train)\n• der Schienenersatzverkehr — le bus de remplacement\n• den Anschluss verpassen — rater la correspondance\n• die Durchsage — l’annonce (au haut-parleur)\n• der Umweg — le détour\n• pendeln — faire la navette (domicile-travail)\n• die Fahrgastrechte — les droits des voyageurs",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Der Zugzielanzeiger am Gleis",
+          "media": "b1-unterwegs-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-unterwegs-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : un article sur les navetteurs",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : un article sur les navetteurs",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\nLesen Sie auch den Aushang am Bahnhof von Wiesenbach unter dem Bericht. [fr] Lisez aussi l’affiche de la gare de Wiesenbach, sous l’article.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst den Titel und den ersten Satz von jedem Absatz. Worum geht es? [fr] Lisez d’abord le titre et la première phrase de chaque paragraphe. De quoi s’agit-il ?\nLesen Sie dann die Aussagen und suchen Sie die passende Stelle im Text. [fr] Lisez ensuite les affirmations et cherchez le passage qui correspond.\n„Steht nicht im Text“ bedeutet: Der Text sagt dazu nichts. [fr] « Non mentionné » signifie : le texte n’en dit rien.\n\nJEDEN TAG UNTERWEGS\nEin Bericht aus der Regionalzeitung\n\n(A) Fast jeden Morgen um 6.40 Uhr steht Miriam Köhler am Bahnhof von Wiesenbach. Die 34-jährige Krankenpflegerin arbeitet in einer Klinik in der Stadt, 48 Kilometer entfernt. Wie sie fahren viele Menschen aus der Region jeden Tag zur Arbeit in die Stadt und abends wieder zurück; manche sind mehr als eine Stunde pro Strecke unterwegs. „Obwohl die Fahrt lang ist, möchte ich nicht in die Stadt ziehen“, sagt Miriam. „Auf dem Land sind die Mieten niedriger, und meine Eltern wohnen gleich nebenan.“\n\n(B) Leicht ist das Pendeln nicht immer. Wegen einer großen Baustelle fällt der Zug zurzeit oft aus. Dann fahren Ersatzbusse, und die Fahrt dauert eine halbe Stunde länger. „Letzte Woche habe ich wegen einer Störung auch noch den Anschluss verpasst und bin zu spät zum Dienst gekommen“, erzählt sie. Trotzdem bleibt sie gelassen. Sie liest, hört Musik oder plant ihren Tag. „Während der Fahrt habe ich Zeit nur für mich. Das ist fast wie eine kleine Pause.“\n\n(C) Ihr Kollege Jonas Brandt hat sich anders entschieden. Statt des Zuges nimmt er seit einem Jahr das E-Bike, zumindest von April bis Oktober. Für die 18 Kilometer aus seinem Dorf braucht er etwa 50 Minuten. „Trotz des Regens fahre ich fast immer. Danach bin ich wacher als nach jeder Bahnfahrt“, sagt er und lacht. Im Winter nimmt er allerdings das Auto, obwohl er dann oft im Stau steht.\n\n(D) Wer pendelt, sollte seine Rechte kennen. Wer mit mehr als einer Stunde Verspätung am Ziel ankommt, kann in vielen Fällen einen Teil des Fahrpreises zurückbekommen. Diese Fahrgastrechte gelten auch für Monatskarten. Viele Fahrgäste wissen das aber nicht und stellen keinen Antrag. Miriam hat es einmal ausprobiert: „Das Formular war in zehn Minuten ausgefüllt. Ein paar Wochen später war das Geld auf meinem Konto.“\n\nAUSHANG AM BAHNHOF WIESENBACH\nBauarbeiten – Zugausfall zwischen Wiesenbach und Talheim\nInformation für Fahrgäste\n• Wann? Samstag, 6 Uhr, bis Montag, 4 Uhr\n• Statt der Züge: Busse (Schienenersatzverkehr)\n• Abfahrt: vor dem Bahnhof, Ausgang Nord\n• Fahrzeit: ca. 30 Minuten länger\n• Fahrräder können im Bus nicht mitgenommen werden.\n• Ihre Fahrkarte gilt auch im Bus.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-unterwegs-lesen-aushang",
+          "caption": "Aushang am Bahnhof Wiesenbach",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Bericht vor allem? [fr] De quoi parle surtout cet article ?",
+          "explanation": "Les paragraphes A à C suivent Miriam et son collègue Jonas sur leur trajet quotidien, et D donne un conseil aux navetteurs. Personne ne déménage en ville : Miriam dit justement qu’elle ne veut pas y habiter. Le travail dans le train n’est pas évoqué.",
+          "options": [
+            {
+              "id": "a",
+              "label": "wie zwei Menschen ihren langen Weg zur Arbeit erleben",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "warum immer mehr Menschen in die Stadt ziehen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wie man im Zug am besten arbeiten kann",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Lesen Sie den Aushang: Was kündigt er an? [fr] Lisez l’affiche : qu’annonce-t-elle ?",
+          "explanation": "L’affiche annonce des travaux du samedi au lundi matin et un « Schienenersatzverkehr » : des bus à la place des trains. Le lundi à 4 h, les trains reprennent, et le billet reste valable dans le bus (« Ihre Fahrkarte gilt auch im Bus »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ab Montag fahren keine Züge mehr nach Talheim.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Am Wochenende braucht man für den Bus eine neue Fahrkarte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Am Wochenende fahren zwischen Wiesenbach und Talheim Busse statt Züge.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Miriam möchte in die Stadt ziehen, weil die Fahrt so lang ist. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Obwohl die Fahrt lang ist, möchte ich nicht in die Stadt ziehen ». Obwohl introduit l’obstacle (le long trajet), mais la conclusion est l’inverse : elle reste à la campagne, où les loyers sont plus bas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wegen einer Baustelle fahren zurzeit manchmal Busse statt Züge. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Paragraphe B : « Wegen einer großen Baustelle fällt der Zug zurzeit oft aus. Dann fahren Ersatzbusse ». Wegen donne la cause, et les Ersatzbusse remplacent le train.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Jonas’ Arbeitgeber hat ihm das E-Bike bezahlt. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Le texte dit seulement que Jonas prend son vélo électrique d’avril à octobre. Qui l’a payé n’est jamais dit : non mentionné. « Falsch » supposerait que le texte dise le contraire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Mit einer Monatskarte bekommt man bei Verspätung kein Geld zurück. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : paragraphe D, « Diese Fahrgastrechte gelten auch für Monatskarten ». Les droits des voyageurs valent aussi pour les abonnés, même si beaucoup ne le savent pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A : Miriam explique pourquoi elle reste à la campagne (loyers, parents). B : les suppressions de trains et le bus de remplacement. C : Jonas et son vélo électrique (« auf zwei Rädern »). D : les droits des voyageurs et le remboursement.",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Warum Miriam auf dem Land bleibt"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Wenn der Zug nicht kommt"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Eine Alternative auf zwei Rädern"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Geld zurück bei Verspätung"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Absatz D: „Viele Fahrgäste wissen das aber nicht.“ Was wissen sie nicht? Ergänzen Sie. [fr] Paragraphe D : que ne savent-ils pas ? Complétez.",
+          "text": "Sie kennen ihre [[1]] nicht: Bei mehr als einer Stunde Verspätung bekommen sie einen Teil des [[2]] zurück.",
+          "explanation": "« das » reprend toute l’information qui précède : les droits des voyageurs (die Fahrgastrechte) et le remboursement d’une partie du prix du billet. « einen Teil des Fahrpreises » : génitif, d’où le -es final.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Rechte",
+                "Fahrgastrechte"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Fahrpreises",
+                "Preises",
+                "Ticketpreises",
+                "Geldes"
+              ],
+              "size": 14,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-unterwegs-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : un train supprimé avant le concert",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : un train supprimé avant le concert",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSituation: Mila und Paul wollen am Samstag zu einem Konzert nach Rosenau fahren. Am Bahnhof gibt es ein Problem. [fr] Situation : Mila et Paul veulent aller samedi à un concert à Rosenau. À la gare, il y a un problème.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Wer spricht? Wo sind die Personen? Was ist das Problem? [fr] Première écoute : qui parle ? où sont les personnes ? quel est le problème ?\nLesen Sie dann die Notizen: Welche Information fehlt – eine Uhrzeit, ein Ort, eine Zahl? [fr] Lisez ensuite les notes : quel type d’information manque – une heure, un lieu, un nombre ?\nBeim zweiten Hören notieren Sie nur Stichwörter, keine ganzen Sätze. [fr] À la deuxième écoute, notez seulement des mots-clés, pas des phrases entières.\nDie Transkription sehen Sie nach Ihren Antworten. [fr] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-unterwegs-hoeren-dialog",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Grund für den Ausfall: eine [[1]] · Ersatzbus: Abfahrt um [[2]] am Ausgang [[3]] · Regionalexpress: umsteigen in [[4]] · Fußweg vom Marktplatz zur Konzerthalle: [[5]] Minuten",
+          "explanation": "Mila lit « wegen einer Signalstörung » sur le panneau. L’employée annonce le bus « um fünfzehn Uhr dreißig am Ausgang West » et le changement « in Neudorf ». Mila calcule ensuite : du Marktplatz à la salle, « nur zehn Minuten » (contre quarante depuis la gare).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Signalstörung",
+                "Störung",
+                "Störung am Signal"
+              ],
+              "size": 18,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "15.30 Uhr",
+                "15:30 Uhr",
+                "15.30",
+                "15:30",
+                "15 Uhr 30",
+                "fünfzehn Uhr dreißig",
+                "halb vier"
+              ],
+              "size": 21,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "West"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Neudorf"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "10",
+                "zehn"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum nehmen Mila und Paul den Bus und nicht den Regionalexpress? [fr] Pourquoi Mila et Paul prennent-ils le bus et pas le RE ?",
+          "explanation": "Le train arrive à 16 h 55 à la gare, puis il faut marcher près de 40 minutes : arrivée vers 17 h 35, après la fin des entrées (17 h 30). Le bus arrive vers 16 h 30 au Marktplatz, à 10 minutes de la salle. D’où « Obwohl der Zug schneller fährt, sind wir mit dem Bus früher an der Halle ». Le prix n’est jamais comparé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Bus ist billiger als der Zug.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit dem Zug wären sie zu spät an der Konzerthalle.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Im Zug gibt es keine freien Plätze mehr.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was sagt die Mitarbeiterin über die Fahrkarte? [fr] Que dit l’employée à propos du billet ?",
+          "explanation": "« Ihre Fahrkarte gilt auch im Ersatzbus, Sie brauchen kein neues Ticket ». Le remboursement n’est pas immédiat : il faut remplir un formulaire, et seulement en cas de retard de plus d’une heure.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Fahrkarte gilt auch im Ersatzbus.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Man muss für den Bus ein neues Ticket kaufen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man bekommt das Geld sofort zurück.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wann können die beiden ein Formular für die Fahrgastrechte ausfüllen? [fr] Quand peuvent-ils remplir un formulaire de droits des voyageurs ?",
+          "explanation": "« Falls Sie wegen der Störung mehr als eine Stunde später ankommen, können Sie ein Formular … ausfüllen ». La condition est le retard à l’arrivée, pas la suppression du train en elle-même.",
+          "options": [
+            {
+              "id": "a",
+              "label": "sofort, wenn ihr Zug ausgefallen ist",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nur, wenn sie eine Monatskarte haben",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "wenn sie über eine Stunde später ankommen",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was macht Paul am Ende? [fr] Que fait Paul à la fin ?",
+          "explanation": "« Ich schreibe schnell Lena, dass wir den Bus nehmen ». Le taxi est écarté par Mila (« dauert sicher zu lange »), et la question sur le chemin porte sur la sortie West, posée par Mila.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er bestellt ein Taxi.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er schreibt Lena eine Nachricht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er fragt nach dem Weg zum Marktplatz.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-unterwegs-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : obwohl, trotzdem et le génitif",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : obwohl, trotzdem et le génitif",
+        "description": "Lesen Sie die Sätze aus dem Bericht und aus dem Gespräch. Beantworten Sie dann die Fragen. [fr] Lisez les phrases tirées de l’article et du dialogue, puis répondez aux questions.\nAchten Sie auf die Wörter obwohl, trotzdem, wegen, trotz, statt und während. [fr] Observez les mots obwohl, trotzdem, wegen, trotz, statt et während.\n\nSÄTZE AUS DEN TEXTEN\n[fr] Phrases tirées des textes\n1. Obwohl die Fahrt lang ist, möchte ich nicht in die Stadt ziehen.\n2. Im Winter nimmt er das Auto, obwohl er dann oft im Stau steht.\n3. Miriam hat den Anschluss verpasst. Trotzdem bleibt sie gelassen.\n4. Obwohl der Zug schneller fährt, sind wir mit dem Bus früher an der Halle.\n5. Wegen einer großen Baustelle fällt der Zug zurzeit oft aus.\n6. Trotz des Regens fahre ich fast immer.\n7. Statt des Zuges nimmt er das E-Bike.\n8. Während der Fahrt habe ich Zeit nur für mich.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1, 2 und 4: Wo steht das konjugierte Verb im Satzteil mit „obwohl“? [fr] Phrases 1, 2 et 4 : où est le verbe conjugué dans la partie avec « obwohl » ?",
+          "explanation": "Obwohl introduit une subordonnée : le verbe conjugué va à la fin (« obwohl die Fahrt lang ist », « obwohl er … im Stau steht »). Quand la subordonnée ouvre la phrase (1 et 4), la principale commence par son verbe : « …, möchte ich », « …, sind wir ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "direkt nach „obwohl“",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "an zweiter Position, wie im Hauptsatz",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "am Ende des Satzteils",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz 3: Was kommt direkt nach „trotzdem“? [fr] Phrase 3 : qu’est-ce qui vient juste après « trotzdem » ?",
+          "explanation": "Trotzdem n’est pas une conjonction mais un adverbe : il occupe la première place de la phrase, le verbe reste en 2e position et le sujet passe après (« Trotzdem bleibt sie gelassen »). « Trotzdem sie bleibt » est la faute typique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "das konjugierte Verb, dann das Subjekt",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "das Subjekt, dann das konjugierte Verb",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "das Subjekt, und das Verb steht am Ende",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Was bedeuten die Präpositionen? Ordnen Sie zu. [fr] Que signifient ces prépositions ? Associez.",
+          "explanation": "Phrase 5 : la cause (wegen einer Baustelle). Phrase 6 : l’obstacle qui n’empêche rien (trotz des Regens). Phrase 7 : le remplacement (statt des Zuges). Phrase 8 : la durée (während der Fahrt). Trotz (malgré + nom) est le cousin de trotzdem (malgré cela).",
+          "pairs": [
+            {
+              "left": "wegen",
+              "right": "à cause de"
+            },
+            {
+              "left": "trotz",
+              "right": "malgré"
+            },
+            {
+              "left": "statt",
+              "right": "au lieu de"
+            },
+            {
+              "left": "während",
+              "right": "pendant"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sätze 5 bis 8: Welcher Kasus folgt auf wegen, trotz, statt und während? [fr] Phrases 5 à 8 : quel cas suit wegen, trotz, statt et während ?",
+          "explanation": "On reconnaît le génitif : des Regens, des Zuges (masculin : des + nom en -s ou -es), der Fahrt, einer Baustelle (féminin : der, einer). Le datif serait « dem Regen », « dem Zug », qu’on entend à l’oral mais pas dans un texte écrit soigné.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Dativ",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "der Genitiv",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "der Akkusativ",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-unterwegs-regel",
+      "kind": "lesson",
+      "title": "À retenir : la concession et les prépositions du génitif",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "À retenir : la concession et les prépositions du génitif",
+        "description": "À RETENIR — obwohl et trotzdem\nLes deux expriment une concession : quelque chose se passe malgré un obstacle.\n• obwohl (bien que, alors que) introduit une subordonnée : le verbe conjugué va à la fin. Ich bleibe ruhig, obwohl der Zug Verspätung hat.\n• Si la subordonnée vient en premier, la principale commence par son verbe : Obwohl es regnet, fahre ich mit dem Rad.\n• trotzdem (quand même, malgré cela) est un adverbe qui renvoie à la phrase précédente. En tête, il est suivi du verbe, puis du sujet : Der Zug hat Verspätung. Trotzdem bleibe ich ruhig.\n• trotzdem peut aussi se placer après le verbe : Ich bleibe trotzdem ruhig.\n\nLES PRÉPOSITIONS DU GÉNITIF\nwegen (à cause de), trotz (malgré), statt (au lieu de) et während (pendant) sont suivies du génitif.\n• Masculin et neutre : des + nom en -s ou -es → wegen des Regens, statt des Zuges, während des Konzerts\n• Féminin et pluriel : der → wegen der Baustelle, trotz der Verspätung, während der Ferien\n• Article indéfini : eines, einer → wegen eines Unfalls, wegen einer Störung\n• Adjectif après l’article : -en → trotz des starken Regens, wegen der langen Fahrt\n\nDEUX FAÇONS DE DIRE LA MÊME CHOSE\n• Obwohl es stark regnet, fahren wir los. = Trotz des starken Regens fahren wir los.\n• Der Zug fällt aus, weil gebaut wird. = Wegen der Bauarbeiten fällt der Zug aus.\nLa préposition + nom est plus courte et plus écrite ; la subordonnée est plus fréquente à l’oral.\n\nATTENTION\n• « malgré » + nom se dit trotz, jamais obwohl : trotz des Streiks (et non *obwohl des Streiks*).\n• Après trotzdem, pas de virgule ni de subordonnée : Trotzdem fahren wir (et non *Trotzdem wir fahren*).\n• À l’oral, on entend souvent wegen dem Regen (datif). À l’écrit et à l’examen, employez le génitif : wegen des Regens.\n• während est aussi une conjonction (pendant que) : Während ich warte, lese ich. Vous la retrouverez au thème Medien.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-unterwegs-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : obwohl, trotzdem et le génitif",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : obwohl, trotzdem et le génitif",
+        "description": "Üben Sie obwohl, trotzdem und die Präpositionen mit Genitiv. [fr] Entraînez-vous avec obwohl, trotzdem et les prépositions suivies du génitif.\nAchten Sie auf die Position des Verbs und auf die Artikel. [fr] Faites attention à la place du verbe et aux articles.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie obwohl oder trotzdem. [fr] Complétez avec obwohl ou trotzdem.",
+          "text": "Der Zug hatte zwanzig Minuten Verspätung. [[1]] haben wir den Anschluss erreicht. – [[2]] der Zug zwanzig Minuten Verspätung hatte, haben wir den Anschluss erreicht.",
+          "explanation": "Première phrase : le verbe « haben » suit directement le mot manquant, c’est donc l’adverbe trotzdem. Seconde phrase : le verbe « hatte » est à la fin de la subordonnée, c’est donc la conjonction obwohl. Le sens est le même.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Trotzdem",
+                "Dennoch"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Obwohl",
+                "Auch wenn"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz mit „obwohl“. [fr] Formez une phrase avec « obwohl ».",
+          "answers": [
+            [
+              "Obwohl",
+              "es",
+              "stark",
+              "regnet,",
+              "fährt",
+              "Jonas",
+              "mit dem Rad",
+              "zur Arbeit."
+            ]
+          ],
+          "explanation": "« Obwohl es stark regnet, fährt Jonas mit dem Rad zur Arbeit. » Dans la subordonnée, « regnet » est à la fin ; la principale commence ensuite par son verbe « fährt », puis le sujet Jonas."
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Der Bus war voll. Bilden Sie den zweiten Satz mit „trotzdem“. [fr] Le bus était plein. Formez la deuxième phrase avec « trotzdem ».",
+          "answers": [
+            [
+              "Trotzdem",
+              "haben",
+              "wir",
+              "noch",
+              "zwei Plätze",
+              "gefunden."
+            ]
+          ],
+          "explanation": "« Trotzdem haben wir noch zwei Plätze gefunden. » Trotzdem occupe la 1re place : l’auxiliaire « haben » suit immédiatement, puis le sujet « wir » ; le participe « gefunden » ferme la phrase."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Deux règles à la fois : verbe à la fin après obwohl (« keine Zeit hatte »), puis inversion dans la principale (« bin ich gekommen »). La première phrase oublie la première règle, la troisième oublie la seconde.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Obwohl ich hatte keine Zeit, bin ich gekommen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Obwohl ich keine Zeit hatte, bin ich gekommen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Obwohl ich keine Zeit hatte, ich bin gekommen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Artikel im Genitiv. [fr] Complétez avec l’article au génitif.",
+          "text": "Wegen [[1]] Streiks fahren heute keine Busse. Trotz [[2]] Verspätung haben wir das Konzert nicht verpasst. Während [[3]] Fahrt habe ich gelesen. Statt [[4]] Autos nehme ich heute das Fahrrad.",
+          "explanation": "Der Streik et das Auto (masculin, neutre) : des + nom en -s (des Streiks, des Autos). Die Verspätung et die Fahrt (féminin) : der, sans terminaison sur le nom. Au génitif, le féminin ne prend jamais de -s.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "des"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "des"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Was passt zusammen? Ordnen Sie zu. [fr] Qu’est-ce qui va ensemble ? Associez.",
+          "explanation": "Wegen annonce une conséquence logique (la neige, donc des trains supprimés) ; trotz, un résultat inattendu (la neige, et pourtant à l’heure) ; statt, un remplacement (le bus au lieu du train) ; während, une activité pendant le trajet.",
+          "pairs": [
+            {
+              "left": "Wegen des Schnees",
+              "right": "fallen heute viele Züge aus."
+            },
+            {
+              "left": "Trotz des Schnees",
+              "right": "ist unser Zug pünktlich angekommen."
+            },
+            {
+              "left": "Statt des Zuges",
+              "right": "nehmen wir heute den Bus."
+            },
+            {
+              "left": "Während der Fahrt",
+              "right": "kann man im Zug gut lesen."
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Wählen Sie die richtige Form: „Wir sind trotz … zu Fuß gegangen.“ [fr] Choisissez la bonne forme.",
+          "explanation": "Trotz demande le génitif : der Regen (masculin) devient des Regens, et l’adjectif prend -en après l’article (des starken Regens). « der starke Regen » est le nominatif, « den starken Regen » l’accusatif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der starke Regen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "den starken Regen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "des starken Regens",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Während",
+              "der",
+              "Bauarbeiten",
+              "fahren",
+              "zwischen Wiesenbach und Talheim",
+              "Busse."
+            ]
+          ],
+          "explanation": "« Während der Bauarbeiten fahren zwischen Wiesenbach und Talheim Busse. » Ici während est une préposition (+ génitif : der Bauarbeiten, pluriel). Le groupe prépositionnel occupe la 1re place, le verbe « fahren » la 2e."
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Verbinden Sie die Sätze mit „obwohl“: Die Fahrkarte war teuer. Wir haben sie gekauft. [fr] Reliez les phrases avec « obwohl ».",
+          "text": "Obwohl die Fahrkarte teuer [[1]], haben wir sie [[2]].",
+          "explanation": "Dans la subordonnée, « war » passe à la fin. La principale garde son Perfekt : « haben wir sie gekauft », avec l’auxiliaire juste après la virgule et le participe à la fin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "war"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "gekauft"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-unterwegs-wortschatz",
+      "kind": "exercise",
+      "title": "Vocabulaire : trajets, retards et formules utiles",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Vocabulaire : trajets, retards et formules utiles",
+        "description": "Lernen Sie Wörter in festen Verbindungen: Nomen und Verb gehören oft zusammen. [fr] Apprenez les mots dans des groupes figés : nom et verbe vont souvent ensemble.\nHören Sie den Wortschatz des Moduls in der Wortliste. [fr] Écoutez le vocabulaire du module dans le lexique.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? Ordnen Sie zu. [fr] Quel verbe va avec quel nom ? Associez.",
+          "explanation": "Ce sont des groupes figés à apprendre en bloc : den Anschluss verpassen (rater la correspondance), einen Antrag stellen (faire une demande), im Stau stehen (être dans les bouchons), einen Sitzplatz reservieren, einen Umweg fahren (faire un détour).",
+          "pairs": [
+            {
+              "left": "den Anschluss",
+              "right": "verpassen"
+            },
+            {
+              "left": "einen Antrag",
+              "right": "stellen"
+            },
+            {
+              "left": "im Stau",
+              "right": "stehen"
+            },
+            {
+              "left": "einen Sitzplatz",
+              "right": "reservieren"
+            },
+            {
+              "left": "einen Umweg",
+              "right": "fahren"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Nomen aus derselben Wortfamilie. [fr] Complétez avec le nom de la même famille.",
+          "text": "Der Zug fährt um 8 Uhr ab: Die [[1]] ist um 8 Uhr. Er kommt um 9 Uhr an: Die [[2]] ist um 9 Uhr. Heute fällt der Zug aus: Der Grund für den [[3]] ist eine Störung. Der Zug verspätet sich: Er hat zehn Minuten [[4]].",
+          "explanation": "abfahren → die Abfahrt, ankommen → die Ankunft (forme irrégulière à retenir), ausfallen → der Ausfall, sich verspäten → die Verspätung (-ung, toujours féminin). Les noms prennent une majuscule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Abfahrt"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Ankunft"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Ausfall"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Verspätung"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sie möchten am Schalter höflich nach dem nächsten Zug fragen. Was sagen Sie? [fr] Vous voulez demander poliment au guichet le prochain train. Que dites-vous ?",
+          "explanation": "La question indirecte au Konjunktiv II (« Könnten Sie mir sagen, wann … fährt? ») est la formule polie standard ; le verbe « fährt » va à la fin. L’impératif avec « sofort » sonne comme un ordre ; la troisième phrase garde l’ordre de la question directe après wann, ce qui est faux.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sagen Sie mir sofort, wann der nächste Zug fährt!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Könnten Sie mir sagen, wann der nächste Zug fährt?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Können Sie mir sagen, wann fährt der nächste Zug?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten eine Alternative vorschlagen. Welche Formulierung passt? [fr] Vous voulez proposer une alternative. Quelle formulation convient ?",
+          "explanation": "« Wie wäre es, wenn … ? » (et si … ?) est la formule pour proposer ; « stattdessen » signifie « à la place ». La première phrase refuse le bus, la deuxième exprime un regret sur le passé : aucune ne propose quelque chose.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich bin dagegen, dass wir heute den Bus nehmen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wir hätten gestern lieber den Bus nehmen sollen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wie wäre es, wenn wir stattdessen den Bus nehmen?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie sehen einen Nachteil, entscheiden sich aber trotzdem für den Bus. Welcher Satz passt? [fr] Vous voyez un inconvénient mais choisissez quand même le bus. Quelle phrase convient ?",
+          "explanation": "« zwar …, aber … » (certes …, mais …) admet l’inconvénient puis donne l’argument décisif. Deshalb et weil expriment une cause, ce qui rend les deux autres phrases illogiques : on ne prend pas le bus parce qu’il est plus lent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Bus braucht zwar länger, aber er hält direkt vor der Halle.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Bus braucht länger, deshalb hält er vor der Halle.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil der Bus länger braucht, nehmen wir ihn.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition. [fr] Complétez avec la préposition.",
+          "text": "Wir warten schon lange [[1]] den Zug. In Neudorf steigen wir [[2]] den Regionalexpress um. Der Bus hält direkt [[3]] Marktplatz.",
+          "explanation": "warten auf + accusatif (attendre quelque chose) ; umsteigen in + accusatif (monter dans un autre train, mouvement) ; halten an + datif (lieu où l’on s’arrête) : an dem → am.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "in"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "am",
+                "an dem"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Was bedeutet das? Ordnen Sie die Erklärungen zu. [fr] Que signifient ces mots ? Associez les définitions.",
+          "explanation": "Définir un mot en allemand simple est une compétence d’examen et de médiation. Schienenersatzverkehr : « Schiene » (le rail) + « Ersatz » (le remplacement) + « Verkehr » (la circulation).",
+          "pairs": [
+            {
+              "left": "der Schienenersatzverkehr",
+              "right": "Busse fahren statt der Züge."
+            },
+            {
+              "left": "die Durchsage",
+              "right": "eine Information über den Lautsprecher"
+            },
+            {
+              "left": "der Umweg",
+              "right": "ein längerer Weg als normal"
+            },
+            {
+              "left": "pendeln",
+              "right": "jeden Tag zur Arbeit und zurück fahren"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-unterwegs-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : formules du voyage",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : formules du voyage",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\nHören Sie zuerst das Modell. Sprechen Sie dann den ganzen Satz flüssig und mit der richtigen Betonung. [fr] Écoutez d’abord le modèle. Dites ensuite toute la phrase d’un trait, avec la bonne accentuation.\nDiese Sätze helfen Ihnen am Schalter, am Telefon und in der Mission dieses Themas. [fr] Ces phrases vous serviront au guichet, au téléphone et dans la mission de ce thème.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnten Sie mir sagen, wo der Ersatzbus abfährt?",
+          "accept": [
+            "Könnten Sie mir sagen, wo der Ersatzbus abfährt?"
+          ],
+          "explanation": "Question indirecte polie : « abfährt » en un seul mot à la fin. Accent sur « Ersatz » (ER-satz-bus) et sur la particule « ab » (AB-fährt).",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Obwohl der Zug schneller ist, nehmen wir lieber den Bus.",
+          "accept": [
+            "Obwohl der Zug schneller ist, nehmen wir lieber den Bus."
+          ],
+          "explanation": "Marquez la virgule par une courte pause après « ist », puis enchaînez sur le verbe « nehmen ». Le « ü » de « Zug » n’existe pas : c’est un « u » long.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wegen einer Störung haben wir den Anschluss verpasst.",
+          "accept": [
+            "Wegen einer Störung haben wir den Anschluss verpasst."
+          ],
+          "explanation": "Störung : « ö » long, lèvres arrondies comme pour « eu » dans « deux ». Anschluss : accent sur « AN ». Verpasst : la syllabe « ver » n’est pas accentuée.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Gilt meine Fahrkarte auch im Ersatzbus?",
+          "accept": [
+            "Gilt meine Fahrkarte auch im Ersatzbus?"
+          ],
+          "explanation": "Question fermée : la voix monte à la fin. « Gilt » avec un « i » bref, comme « il » ; « Fahrkarte » : accent sur « FAHR », « h » muet qui allonge le « a ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wie wäre es, wenn wir stattdessen den nächsten Zug nehmen?",
+          "accept": [
+            "Wie wäre es, wenn wir stattdessen den nächsten Zug nehmen?"
+          ],
+          "explanation": "Formule de proposition. « wäre » : « ä » long et ouvert ; « stattdessen » : accent sur « DES ». Le « ch » de « nächsten » se prononce comme dans « ich », pas comme « sch ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Trotz der Verspätung kommen wir noch rechtzeitig zum Konzert.",
+          "accept": [
+            "Trotz der Verspätung kommen wir noch rechtzeitig zum Konzert."
+          ],
+          "explanation": "Trotz : « tz » se prononce « ts ». Rechtzeitig : accent sur « RECHT », « ch » doux. Laissez retomber la voix à la fin : c’est une affirmation.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-unterwegs-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-unterwegs-hoeren2",
+      "kind": "exercise",
+      "title": "Comprendre : annonces en gare",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : annonces en gare",
+        "description": "Sie sind am Bahnhof und hören vier Durchsagen. Hören Sie jede Durchsage und beantworten Sie die Frage dazu. [fr] Vous êtes à la gare et entendez quatre annonces. Écoutez chaque annonce et répondez à la question correspondante.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst die Frage: Was müssen Sie wissen – ein Gleis, eine Uhrzeit, eine Zahl? [fr] Lisez d’abord la question : que devez-vous savoir – une voie, une heure, un nombre ?\nAchten Sie auf Signalwörter wie Achtung, wegen, statt, heute, leider. [fr] Repérez les mots-signaux comme Achtung, wegen, statt, heute, leider.\n\nDie letzten zwei Aufgaben sind Diktate: Schreiben Sie genau, was Sie hören. [fr] Les deux dernières questions sont des dictées : écrivez exactement ce que vous entendez.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-unterwegs-hoeren2-d1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-hoeren2-d2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-hoeren2-d3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-hoeren2-d4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "usage": "illustration",
+          "caption": "Die Bahnhofsuhr",
+          "media": "b1-unterwegs-hoeren2-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-hoeren2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-unterwegs-hoeren2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Durchsage 1: Was ändert sich heute für den Zug nach Talheim? [fr] Annonce 1 : qu’est-ce qui change aujourd’hui pour le train de Talheim ?",
+          "explanation": "« Dieser Zug fährt heute ausnahmsweise von Gleis sieben ab » : il part de la voie 7 au lieu de la voie 4 (der Gleiswechsel). L’heure (10 h 12) et la destination (Talheim) restent les mêmes.",
+          "options": [
+            {
+              "id": "a",
+              "label": "die Abfahrtszeit",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "das Gleis",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "das Ziel",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Durchsage 2: Wie viel Verspätung hat die Regionalbahn nach Neudorf? [fr] Annonce 2 : quel est le retard du train régional pour Neudorf ?",
+          "explanation": "On entend « etwa fünfundzwanzig Minuten Verspätung ». En allemand, l’unité se dit avant la dizaine : fünf-und-zwanzig = 25. La cause est « eine Reparatur am Zug ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "etwa 15 Minuten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "etwa 35 Minuten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "etwa 25 Minuten",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Durchsage 3: Was sollen die Fahrgäste nach Wiesenbach tun? [fr] Annonce 3 : que doivent faire les voyageurs pour Wiesenbach ?",
+          "explanation": "« Statt des Zuges fährt ein Bus. Er fährt am Busbahnhof vor dem Ausgang Nord ab. » Le train de 10 h 30 est supprimé : attendre sur le quai ne sert à rien. L’annonce ne parle pas de billet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "den Bus vor dem Ausgang Nord nehmen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "am Gleis auf den nächsten Zug warten",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "eine neue Fahrkarte kaufen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Durchsage 4: Was ist heute anders? [fr] Annonce 4 : qu’est-ce qui est différent aujourd’hui ?",
+          "explanation": "« hält heute zusätzlich in Neudorf » : il fait un arrêt supplémentaire (zusätzlich = en plus). La voie 3 est la voie habituelle, et le train n’est pas supprimé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Regionalexpress nach Hamburg fällt aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Regionalexpress nach Hamburg fährt von einem anderen Gleis.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Regionalexpress nach Hamburg hält auch in Neudorf.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Wegen einer Störung hat der Zug nach Neudorf etwa zwanzig Minuten Verspätung.",
+            "Wegen einer Störung hat der Zug nach Neudorf etwa 20 Minuten Verspätung."
+          ],
+          "voice": "sprecher",
+          "explanation": "Wegen + génitif : « einer Störung » (féminin). Störung et Verspätung prennent une majuscule et s’écrivent avec ö et ä. Le nombre peut s’écrire en lettres ou en chiffres.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Obwohl der Zug ausfällt, können Sie mit Ihrer Fahrkarte den Ersatzbus nehmen."
+          ],
+          "voice": "frau",
+          "explanation": "Virgule après la subordonnée, verbe « ausfällt » en un mot à la fin, puis « können Sie » inversé. « Ihrer » prend une majuscule : c’est le vouvoiement (Sie).",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-unterwegs-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : en route malgré les imprévus",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : en route malgré les imprévus",
+        "description": "Hier wiederholen Sie das ganze Modul: Grammatik, Wörter und Hören. [fr] Ici, vous révisez tout le module : grammaire, vocabulaire et écoute.\nFür die Fragen 4 und 5 hören Sie eine Sprachnachricht von Lena, der Freundin von Mila und Paul. [fr] Pour les questions 4 et 5, écoutez un message vocal de Lena, l’amie de Mila et Paul.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-unterwegs-kontrolle-nachricht",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie wegen, trotzdem oder obwohl. [fr] Complétez avec wegen, trotzdem ou obwohl.",
+          "text": "[[1]] des Gewitters fiel der Zug aus. [[2]] kamen wir pünktlich an, [[3]] wir einen Umweg fahren mussten.",
+          "explanation": "Devant un nom au génitif (des Gewitters) : la préposition wegen. Devant un verbe en 2e position (kamen wir) : l’adverbe trotzdem. Devant une subordonnée au verbe final (fahren mussten) : la conjonction obwohl, en minuscule après la virgule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Wegen",
+                "Aufgrund"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Trotzdem",
+                "Dennoch"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "obwohl",
+                "auch wenn"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "nehme",
+              "den Bus,",
+              "obwohl",
+              "er",
+              "länger",
+              "braucht."
+            ]
+          ],
+          "explanation": "« Ich nehme den Bus, obwohl er länger braucht. » La principale d’abord (verbe en 2e position), puis la subordonnée avec obwohl et le verbe « braucht » à la fin."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wählen Sie die richtige Form: „Statt … nehme ich heute das Rad.“ [fr] Choisissez la bonne forme.",
+          "explanation": "Statt est suivi du génitif : das Auto (neutre) devient des Autos. « statt dem Auto » s’entend parfois à l’oral, mais la forme correcte à l’écrit est le génitif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "dem Auto",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "des Autos",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "das Auto",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Hören Sie die Nachricht: Wo wartet Lena? [fr] Écoutez le message : où Lena attend-elle ?",
+          "explanation": "« Ich warte nicht am Marktplatz, sondern direkt am Eingang der Konzerthalle. » Avec « nicht …, sondern … », l’information juste vient après sondern. Le Marktplatz est cité, mais pour être exclu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "am Marktplatz, wie geplant",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "am Bahnhof, Ausgang West",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "am Eingang der Konzerthalle",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Warum wartet Lena nicht am Marktplatz? [fr] Pourquoi Lena n’attend-elle pas sur la place du marché ?",
+          "explanation": "« Am Marktplatz ist wegen des Regens alles voll » : à cause de la pluie, tout le monde s’y abrite. Lena a déjà les billets (« Eure Karten habe ich schon »), et le bus s’arrête bien au Marktplatz.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dort ist es wegen des Regens zu voll.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Bus hält heute nicht am Marktplatz.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat die Karten noch nicht.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Ihr Zug fällt aus. Sie schreiben Ihrer Gruppe. Welcher Satz passt am besten? [fr] Votre train est supprimé. Vous écrivez à votre groupe. Quelle phrase convient le mieux ?",
+          "explanation": "Le bon message dit le problème puis la solution, avec une heure précise. Les deux autres sont illogiques : on ne peut pas prendre un train supprimé, et prendre le bus n’est pas un obstacle à la suppression du train.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Unser Zug fällt aus. Trotzdem nehmen wir den Zug.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Leider fällt unser Zug aus, obwohl wir den Bus nehmen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Leider fällt unser Zug aus. Wir nehmen stattdessen den Bus um 15.30 Uhr.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welcher Satz passt zu welcher Situation? Ordnen Sie zu. [fr] Quelle phrase convient à quelle situation ? Associez.",
+          "explanation": "À chaque situation sa formule : demander une information (question indirecte polie), faire valoir ses droits après plus d’une heure de retard (einen Antrag stellen), chercher une solution après une correspondance ratée, justifier un choix avec obwohl.",
+          "pairs": [
+            {
+              "left": "Sie wissen nicht, wo der Bus abfährt.",
+              "right": "Könnten Sie mir sagen, wo der Bus abfährt?"
+            },
+            {
+              "left": "Ihr Zug kam mit 70 Minuten Verspätung an.",
+              "right": "Ich möchte einen Antrag auf Erstattung stellen."
+            },
+            {
+              "left": "Sie haben in Neudorf den Anschluss verpasst.",
+              "right": "Wann fährt die nächste Verbindung nach Rosenau?"
+            },
+            {
+              "left": "Der Bus ist langsamer, aber praktischer.",
+              "right": "Obwohl der Bus länger braucht, nehme ich ihn."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-unterwegs-lesen-aushang",
+      "kind": "image",
+      "title": "Affiche : travaux et bus de remplacement",
+      "alt": "Affiche « Bauarbeiten : Zugausfall zwischen Wiesenbach und Talheim » : du samedi 6 h au lundi 4 h, des bus remplacent les trains, départ devant la gare (sortie nord), environ 30 minutes de plus ; pas de vélo dans le bus ; le billet reste valable.",
+      "image": {
+        "layout": "document",
+        "variant": "sign",
+        "icon": "construction",
+        "title": "Bauarbeiten: Zugausfall zwischen Wiesenbach und Talheim",
+        "subtitle": "Information für Fahrgäste",
+        "rows": [
+          [
+            "Wann?",
+            "Samstag, 6 Uhr, bis Montag, 4 Uhr"
+          ],
+          [
+            "Statt der Züge",
+            "Busse (Schienenersatzverkehr)"
+          ],
+          [
+            "Abfahrt",
+            "vor dem Bahnhof, Ausgang Nord"
+          ],
+          [
+            "Fahrzeit",
+            "ca. 30 Minuten länger"
+          ]
+        ],
+        "lines": [
+          {
+            "icon": "bike",
+            "text": "Fahrräder können im Bus nicht mitgenommen werden."
+          },
+          {
+            "icon": "ticket",
+            "text": "Ihre Fahrkarte gilt auch im Bus."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-unterwegs-hoeren-dialog",
+      "kind": "audio",
+      "title": "Au guichet : un train supprimé avant le concert",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Paul, schau mal auf die Anzeige! Unser Zug nach Rosenau fällt aus. Wegen einer Signalstörung."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Paul",
+          "text": "Ach nein, nicht schon wieder! Das Konzert fängt um sechs an, und der Einlass endet schon um halb sechs. Was machen wir jetzt?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Komm, wir fragen am Infoschalter. Die wissen sicher mehr."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Guten Tag, was kann ich für Sie tun?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Guten Tag. Unser Regionalzug nach Rosenau um fünfzehn Uhr zehn fällt aus. Könnten Sie uns sagen, wie wir jetzt am besten dorthin kommen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Sie haben zwei Möglichkeiten. Statt des Zuges fährt ein Ersatzbus. Er fährt um fünfzehn Uhr dreißig am Ausgang West ab und braucht ungefähr eine Stunde. In Rosenau hält er direkt am Marktplatz."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Paul",
+          "text": "Und fährt heute gar kein Zug mehr nach Rosenau?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Doch. Um sechzehn Uhr zehn fährt ein Regionalexpress nach Neudorf. Dort steigen Sie um und sind um sechzehn Uhr fünfundfünfzig am Bahnhof Rosenau."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Paul",
+          "text": "Der Zug ist doch schneller. Den würde ich nehmen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Moment mal. Vom Bahnhof Rosenau bis zur Konzerthalle läuft man fast vierzig Minuten. Vom Marktplatz sind es nur zehn Minuten."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Paul",
+          "text": "Stimmt. Obwohl der Zug schneller fährt, sind wir mit dem Bus früher an der Halle. Und wenn wir in Neudorf den Anschluss verpassen, ist sowieso alles zu spät."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Gilt unsere Fahrkarte eigentlich auch im Bus?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Ja, Ihre Fahrkarte gilt auch im Ersatzbus, Sie brauchen kein neues Ticket. Und falls Sie wegen der Störung mehr als eine Stunde später ankommen, können Sie ein Formular für die Fahrgastrechte ausfüllen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Vielen Dank! Und wo genau ist der Ausgang West?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Gehen Sie hier links an Gleis eins vorbei und dann die Treppe hinunter. Dort sehen Sie die Busse schon."
+        },
+        {
+          "pause": 0.7
+        },
+        {
+          "voice": "mann2",
+          "name": "Paul",
+          "text": "Danke schön! Ich schreibe schnell Lena, dass wir den Bus nehmen. Trotz der Störung schaffen wir es also noch rechtzeitig."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Mila",
+          "text": "Hoffentlich! Obwohl es regnet, laufen wir vom Marktplatz zu Fuß. Ein Taxi zu finden dauert sicher zu lange."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-d1",
+      "kind": "audio",
+      "title": "Annonce 1 : changement de voie",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Gleis vier. Information zum Regionalexpress nach Talheim, Abfahrt zehn Uhr zwölf. Dieser Zug fährt heute ausnahmsweise von Gleis sieben ab. Bitte beachten Sie den Gleiswechsel."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-d2",
+      "kind": "audio",
+      "title": "Annonce 2 : un train en retard",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Achtung an Gleis zwei. Die Regionalbahn nach Neudorf, planmäßige Abfahrt zehn Uhr zwanzig, hat heute etwa fünfundzwanzig Minuten Verspätung. Grund ist eine Reparatur am Zug. Wir bitten um Entschuldigung."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-d3",
+      "kind": "audio",
+      "title": "Annonce 3 : un bus à la place du train",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Information für Fahrgäste in Richtung Wiesenbach. Wegen Bauarbeiten fällt der Zug um zehn Uhr dreißig aus. Statt des Zuges fährt ein Bus. Er fährt am Busbahnhof vor dem Ausgang Nord ab."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-d4",
+      "kind": "audio",
+      "title": "Annonce 4 : un arrêt supplémentaire",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ein Hinweis für alle Fahrgäste. Der Regionalexpress nach Hamburg, Abfahrt zehn Uhr fünfundvierzig von Gleis drei, hält heute zusätzlich in Neudorf. Fahrgäste nach Neudorf können also auch diesen Zug nehmen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-kontrolle-nachricht",
+      "kind": "audio",
+      "title": "Message vocal de Lena",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Lena",
+          "text": "Hallo ihr zwei, hier ist Lena! Ich habe eure Nachricht gerade gelesen. Super, dass ihr trotz der Störung noch kommt!"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Lena",
+          "text": "Ich warte nicht am Marktplatz, sondern direkt am Eingang der Konzerthalle. Am Marktplatz ist wegen des Regens alles voll, da findet ihr mich nie."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Lena",
+          "text": "Eure Karten habe ich schon. Falls euer Bus Verspätung hat, schreibt mir bitte kurz. Bis gleich!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-einstieg-foto",
+      "kind": "image",
+      "title": "Un afficheur de quai",
+      "alt": "Un afficheur bleu au-dessus d’un quai de gare : prochain train à 20 h 13 pour Karlsruhe, puis deux autres départs.",
+      "photo": {
+        "file": "libre/commons/unterwegs-zugzielanzeiger.jpg",
+        "crop": [
+          0,
+          0.08,
+          1,
+          0.885
+        ]
+      },
+      "credit": "Mkkagain, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Zugzielanzeiger_Kassel-Wilhelmshöhe,_Gleis_1_-_ICE_273_nach_Karlsruhe_Hbf.jpg"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-foto",
+      "kind": "image",
+      "title": "Une horloge de gare",
+      "alt": "Une horloge de gare ronde et ancienne, à chiffres romains, fixée à un mur blanc sous une voûte.",
+      "photo": {
+        "file": "libre/commons/unterwegs-bahnhofsuhr.jpg"
+      },
+      "credit": "Geogast, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bahnhofsuhr,_Bergbahnhof_Wendelsteinbahn.jpg"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnten Sie mir sagen, wo der Ersatzbus abfährt?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Obwohl der Zug schneller ist, nehmen wir lieber den Bus."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wegen einer Störung haben wir den Anschluss verpasst."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Gilt meine Fahrkarte auch im Ersatzbus?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie wäre es, wenn wir stattdessen den nächsten Zug nehmen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : formules du voyage",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Trotz der Verspätung kommen wir noch rechtzeitig zum Konzert."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : annonces en gare",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wegen einer Störung hat der Zug nach Neudorf etwa zwanzig Minuten Verspätung."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-hoeren2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : annonces en gare",
+      "script": [
+        {
+          "voice": "frau",
+          "text": "Obwohl der Zug ausfällt, können Sie mit Ihrer Fahrkarte den Ersatzbus nehmen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-unterwegs-lexique",
+      "kind": "audio",
+      "title": "Lexique · Unterwegs : voyager malgré les imprévus",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Verspätung, die Verspätungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verspäten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ausfall, die Ausfälle"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausfallen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Schienenersatzverkehr"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Ersatzbus, die Ersatzbusse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "den Anschluss verpassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umsteigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Verbindung, die Verbindungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Strecke, die Strecken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Störung, die Störungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Baustelle, die Baustellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Durchsage, die Durchsagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Bahnsteig, die Bahnsteige"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Umweg, die Umwege"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Fahrgastrechte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Monatskarte, die Monatskarten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "gelten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einen Antrag stellen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "pendeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Pendler, die Pendler"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Stau stehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "rechtzeitig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "obwohl"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "trotzdem"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "trotz"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "statt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "während"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

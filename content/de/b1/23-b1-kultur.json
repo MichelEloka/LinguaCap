@@ -1,0 +1,2398 @@
+{
+  "id": "b1-kultur",
+  "title": "Kultur : sorties culturelles et fêtes",
+  "objective": "Comprendre un programme culturel et une critique, nuancer un avis, recommander une sortie et parler de traditions, en décrivant avec précision (adjectifs déclinés, participes) et en parlant de l’avenir (Futur I).",
+  "prerequisites": [
+    "b1-gesellschaft-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : exposition de photos du quartier, visite guidée ou textes, nuancer une préférence."
+  ],
+  "grammarFocus": [
+    "adjektivdeklination",
+    "partizip-als-adjektiv",
+    "futur-1"
+  ],
+  "layer": "content/b/source/b1/b1-kultur.mjs",
+  "vocabulary": [
+    {
+      "id": "ausstellung",
+      "word": "Ausstellung",
+      "article": "die",
+      "plural": "Ausstellungen",
+      "partOfSpeech": "noun",
+      "translation": "l’exposition",
+      "example": "Die Ausstellung zeigt Fotos vom alten Viertel.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "auffuehrung",
+      "word": "Aufführung",
+      "article": "die",
+      "plural": "Aufführungen",
+      "partOfSpeech": "noun",
+      "translation": "la représentation (théâtre, concert)",
+      "example": "Nach der Aufführung haben alle lange geklatscht.",
+      "note": "aufführen : jouer, représenter",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "vorstellung",
+      "word": "Vorstellung",
+      "article": "die",
+      "plural": "Vorstellungen",
+      "partOfSpeech": "noun",
+      "translation": "la séance, la représentation",
+      "example": "Die Vorstellung beginnt um halb acht.",
+      "note": "aussi : la présentation, l’idée",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "veranstaltung",
+      "word": "Veranstaltung",
+      "article": "die",
+      "plural": "Veranstaltungen",
+      "partOfSpeech": "noun",
+      "translation": "l’événement, la manifestation",
+      "example": "Alle Veranstaltungen stehen im Programm.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "fuehrung",
+      "word": "Führung",
+      "article": "die",
+      "plural": "Führungen",
+      "partOfSpeech": "noun",
+      "translation": "la visite guidée",
+      "example": "Die Führung beginnt samstags um elf Uhr.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "theaterstueck",
+      "word": "Theaterstück",
+      "article": "das",
+      "plural": "Theaterstücke",
+      "partOfSpeech": "noun",
+      "translation": "la pièce de théâtre",
+      "example": "Das Theaterstück ist eine Komödie.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "buehne",
+      "word": "Bühne",
+      "article": "die",
+      "plural": "Bühnen",
+      "partOfSpeech": "noun",
+      "translation": "la scène",
+      "example": "Auf der Bühne stehen nur ein paar Koffer.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "publikum",
+      "word": "Publikum",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "le public",
+      "example": "Das Publikum hat viel gelacht.",
+      "note": "singulier en allemand : das Publikum lacht",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "eintritt",
+      "word": "Eintritt",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’entrée (prix)",
+      "example": "Der Eintritt ist für Kinder frei.",
+      "note": "Eintritt frei : entrée libre",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "ermaessigt",
+      "word": "ermäßigt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "à tarif réduit",
+      "example": "Für Studierende ist der Eintritt ermäßigt.",
+      "note": "die Ermäßigung : la réduction",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "ausverkauft",
+      "word": "ausverkauft",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "complet (plus de billets)",
+      "example": "Die Vorstellung am Samstag ist leider ausverkauft.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "empfehlenswert",
+      "word": "empfehlenswert",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "recommandable, à voir",
+      "example": "Das Konzert ist sehr empfehlenswert.",
+      "note": "empfehlen : recommander",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "unterhaltsam",
+      "word": "unterhaltsam",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "divertissant",
+      "example": "Wir haben einen unterhaltsamen Abend verbracht.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "sich-lohnen",
+      "word": "sich lohnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "valoir la peine",
+      "example": "Die Ausstellung lohnt sich wirklich.",
+      "note": "Es lohnt sich, früh zu kommen.",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "stattfinden",
+      "word": "stattfinden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "avoir lieu",
+      "example": "Das Fest findet auf dem Dorfplatz statt.",
+      "note": "séparable : statt|finden · Perfekt : hat stattgefunden",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "klatschen",
+      "word": "klatschen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "applaudir",
+      "example": "Am Ende klatschten die Zuschauer minutenlang.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "veranstaltungskalender",
+      "word": "Veranstaltungskalender",
+      "article": "der",
+      "plural": "Veranstaltungskalender",
+      "partOfSpeech": "noun",
+      "translation": "l’agenda culturel",
+      "example": "Im Veranstaltungskalender steht, wann das Konzert ist.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "fest",
+      "word": "Fest",
+      "article": "das",
+      "plural": "Feste",
+      "partOfSpeech": "noun",
+      "translation": "la fête",
+      "example": "Das Fest beginnt am 1. Mai um elf Uhr.",
+      "note": "ein Fest feiern",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "feiern",
+      "word": "feiern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "fêter, faire la fête",
+      "example": "Nach dem Aufstellen wird bis spät gefeiert.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "brauch",
+      "word": "Brauch",
+      "article": "der",
+      "plural": "Bräuche",
+      "partOfSpeech": "noun",
+      "translation": "la coutume",
+      "example": "Den Maibaum zu stehlen ist ein alter Brauch.",
+      "note": "synonyme : die Tradition",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "feiertag",
+      "word": "Feiertag",
+      "article": "der",
+      "plural": "Feiertage",
+      "partOfSpeech": "noun",
+      "translation": "le jour férié",
+      "example": "Der 1. Mai ist in Deutschland ein Feiertag.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "tradition",
+      "word": "Tradition",
+      "article": "die",
+      "plural": "Traditionen",
+      "partOfSpeech": "noun",
+      "translation": "la tradition",
+      "example": "Das Maifest hat im Dorf eine lange Tradition.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "umzug",
+      "word": "Umzug",
+      "article": "der",
+      "plural": "Umzüge",
+      "partOfSpeech": "noun",
+      "translation": "le défilé (dans une fête)",
+      "example": "Beim Umzug fahren geschmückte Wagen durch die Stadt.",
+      "note": "aussi : le déménagement",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "sich-verkleiden",
+      "word": "sich verkleiden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se déguiser",
+      "example": "Im Karneval verkleiden sich viele Menschen.",
+      "note": "das Kostüm : le costume, le déguisement",
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "kritik",
+      "word": "Kritik",
+      "article": "die",
+      "plural": "Kritiken",
+      "partOfSpeech": "noun",
+      "translation": "la critique (article)",
+      "example": "Die Kritik in der Zeitung war sehr positiv.",
+      "note": null,
+      "audio": {
+        "media": "b1-kultur-lexique",
+        "line": 24
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-kultur-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : sorties, fêtes et traditions",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : sorties, fêtes et traditions",
+        "description": "KULTUR FÜR ALLE\n[fr] La culture pour tous\n\nTheater, Konzerte, Ausstellungen, Volksfeste: In Deutschland gibt es fast jedes Wochenende eine Veranstaltung in der Nähe. [fr] Théâtre, concerts, expositions, fêtes populaires : en Allemagne, il y a presque chaque week-end un événement près de chez soi.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Wann waren Sie zum letzten Mal im Theater, im Kino oder in einer Ausstellung? [fr] Quand êtes-vous allé pour la dernière fois au théâtre, au cinéma ou dans une exposition ?\n• Welches Fest feiern Sie am liebsten? Warum? [fr] Quelle fête préférez-vous célébrer ? Pourquoi ?\n• Welche Veranstaltung würden Sie einem Freund empfehlen? [fr] Quel événement recommanderiez-vous à un ami ?\n\nAntworten Sie laut und in ganzen Sätzen. [fr] Répondez à voix haute, par des phrases complètes.\n\nDAS LERNEN SIE\n[fr] Objectifs\n• Ich kann ein Kulturprogramm verstehen. [fr] Je peux comprendre un programme culturel.\n• Ich kann meine Meinung nuancieren: zwar …, aber … [fr] Je peux nuancer mon avis : certes …, mais …\n• Ich kann eine Veranstaltung empfehlen und genau beschreiben. [fr] Je peux recommander un événement et le décrire avec précision.\n• Ich kann über Feste und Traditionen sprechen. [fr] Je peux parler de fêtes et de traditions.\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• die Ausstellung — l’exposition\n• die Aufführung — la représentation\n• der Eintritt — l’entrée (le prix)\n• ermäßigt — à tarif réduit\n• die Veranstaltung — l’événement\n• der Brauch — la coutume\n• der Feiertag — le jour férié\n• empfehlenswert — à recommander",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Der Zuschauerraum eines Stadttheaters",
+          "media": "b1-kultur-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-kultur-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : un programme et une critique de théâtre",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : un programme et une critique de théâtre",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nIm Programm suchen Sie gezielt: Tag, Uhrzeit, Ort, Preis. Sie müssen nicht alles lesen. [fr] Dans un programme, cherchez de façon ciblée : jour, heure, lieu, prix. Inutile de tout lire.\nIn der Kritik achten Sie auf Wörter, die eine Meinung zeigen: leider, besonders, zwar … aber, trotzdem. [fr] Dans la critique, repérez les mots qui montrent une opinion : leider, besonders, zwar … aber, trotzdem.\n\nPROGRAMM DER KULTURWOCHE (12. BIS 18. MAI)\n[fr] Programme de la semaine culturelle\n• Montag, 19:30 Uhr: Theater „Der vertauschte Koffer“, Kleine Bühne, 14 Euro, ermäßigt (Schüler und Studierende) 8 Euro\n• Mittwoch, 18:00 Uhr: Fotoausstellung „Alte Bilder, neue Wege“ mit Führung, Stadtbibliothek, Eintritt frei\n• Freitag, 20:00 Uhr: Konzert des Chors „Westwind“, Alte Markthalle, 10 Euro\n• Samstag, 15:00 Uhr: Lesung für Kinder ab 6 Jahren, Stadtbibliothek, Eintritt frei\n• Sonntag, 11:00 Uhr: Stadtführung „Das Viertel früher“, Treffpunkt am Marktbrunnen, 5 Euro\n\nTheaterkritik: Ein Koffer voller Überraschungen\n\n(1) Was passiert, wenn man am Bahnhof aus Versehen den falschen Koffer mitnimmt? Diese einfache Frage steht im Mittelpunkt der neuen Komödie „Der vertauschte Koffer“, die am Samstag auf der Kleinen Bühne Premiere hatte. Paul, ein schüchterner Lehrer aus der Provinz, findet in dem fremden Koffer nicht seine Hemden, sondern ein rotes Kleid, eine alte Landkarte und einen Brief ohne Absender. Neugierig macht er sich auf die Suche nach der Besitzerin und erlebt die verrücktesten drei Tage seines Lebens.\n\n(2) Die junge Regisseurin Mira Lindner erzählt die Geschichte mit viel Tempo und mit großem Gespür für Humor. Das einfache Bühnenbild besteht nur aus ein paar Koffern, die immer wieder neue Orte zeigen: einen Bahnhof, ein Hotelzimmer, ein kleines Café am Meer. Das ist überraschend und sehr gelungen.\n\n(3) Besonders überzeugend ist Jonas Kehl in der Rolle des Paul. Mit seinem leisen Humor bringt er das Publikum immer wieder zum Lachen. Seine Partnerin Ella Marten spielt die geheimnisvolle Besitzerin des Koffers zwar etwas zu laut, aber mit viel Energie.\n\n(4) Leider hat das Stück auch Schwächen: Nach der Pause wird die Handlung langsamer, und manche Witze wiederholen sich. Auch das Ende ist ziemlich vorhersehbar. Trotzdem verbringt man zwei unterhaltsame Stunden. Die lachenden Zuschauer klatschten am Ende minutenlang.\n\n(5) Unser Fazit: kein großes Kunstwerk, aber ein gelungener, empfehlenswerter Abend für alle, die gern lachen. Viele Zuschauer werden diesen Abend sicher nicht so schnell vergessen. Das Stück läuft noch bis Ende Juni. Für die Vorstellungen am Wochenende sollte man rechtzeitig Karten reservieren.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-kultur-lesen-programm",
+          "caption": "Kulturwoche im Westviertel",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was für ein Text ist „Ein Koffer voller Überraschungen“? [fr] Quel type de texte est « Ein Koffer voller Überraschungen » ?",
+          "explanation": "Le texte résume l’histoire, juge la mise en scène et les acteurs, puis donne un « Fazit » (bilan) : c’est une critique. On ne voit ni questions ni réponses, comme dans une interview.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Interview mit einer Regisseurin.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Anzeige für einen Theaterkurs.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Kritik über ein Theaterstück.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie findet der Autor das Stück insgesamt? [fr] Que pense l’auteur de la pièce dans l’ensemble ?",
+          "explanation": "Le bilan est nuancé : « kein großes Kunstwerk, aber ein gelungener, empfehlenswerter Abend ». Le paragraphe 4 cite des faiblesses (« Leider hat das Stück auch Schwächen »), mais l’ensemble reste divertissant.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Unterhaltsam, aber nicht perfekt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Langweilig und viel zu lang.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein großes Kunstwerk ohne Schwächen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Paul findet in dem fremden Koffer seine eigenen Hemden.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : il trouve « nicht seine Hemden, sondern ein rotes Kleid, eine alte Landkarte und einen Brief ». « nicht …, sondern … » corrige une attente.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Ella Marten spielt etwas zu laut.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : elle joue « zwar etwas zu laut, aber mit viel Energie ». « zwar … aber » concède un défaut avant de souligner une qualité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Die Regisseurin hat früher selbst als Schauspielerin gearbeitet.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Non mentionné : le texte dit seulement qu’elle est jeune et qu’elle a le sens de l’humour, rien sur son passé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Programm: Wie viel bezahlen Studierende für das Theater am Montag? [fr] Programme : combien paient les étudiants pour le théâtre de lundi ?",
+          "explanation": "Le programme indique « 14 Euro, ermäßigt (Schüler und Studierende) 8 Euro » : le tarif réduit s’applique aux étudiants. L’entrée libre concerne l’exposition et la lecture pour enfants.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vierzehn Euro.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Acht Euro.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nichts, der Eintritt ist frei.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Veranstaltung passt zu welcher Person? [fr] Quel événement convient à quelle personne ?",
+          "explanation": "Lecture pour enfants dès 6 ans → Lina ; exposition de photos gratuite → M. Graf ; concert de chorale → Mme Okoye ; visite à pied le dimanche à 11 h → Tom.",
+          "pairs": [
+            {
+              "left": "Lina ist sieben und möchte eine Geschichte hören.",
+              "right": "Lesung am Samstag"
+            },
+            {
+              "left": "Herr Graf interessiert sich für Fotografie, hat aber wenig Geld.",
+              "right": "Ausstellung am Mittwoch"
+            },
+            {
+              "left": "Frau Okoye singt selbst gern im Chor.",
+              "right": "Konzert am Freitag"
+            },
+            {
+              "left": "Tom möchte am Sonntagvormittag zu Fuß durch das Viertel gehen.",
+              "right": "Stadtführung am Sonntag"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Wörtern aus der Kritik. [fr] Complétez avec des mots de la critique.",
+          "text": "Das Stück ist eine [[1]]: Man lacht viel. Am Ende klatschten die [[2]] Zuschauer minutenlang. Für die Vorstellungen am Wochenende sollte man rechtzeitig [[3]] reservieren.",
+          "explanation": "« die Komödie » (paragraphe 1) ; « die lachenden Zuschauer » : participe I employé comme adjectif, avec la terminaison -en après « die » au pluriel ; « Karten reservieren » : réserver des billets.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Komödie"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "lachenden"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Karten",
+                "Tickets"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-kultur-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : visite guidée ou audioguide ?",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : visite guidée ou audioguide ?",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Welche zwei Möglichkeiten gibt es? Wer wählt was? [fr] Première écoute : quelles sont les deux possibilités ? Qui choisit quoi ?\nBeim zweiten Hören: Achten Sie auf Uhrzeiten, Zahlen und Preise. [fr] Deuxième écoute : soyez attentif aux heures, aux nombres et aux prix.\n\nDIE SITUATION\n[fr] La situation\nJasmin und Leon möchten die Fotoausstellung „Alte Bilder, neue Wege“ in der Stadtbibliothek besuchen. Sie fragen Frau Weber an der Information. [fr] Jasmin et Leon veulent visiter l’exposition de photos de la bibliothèque. Ils se renseignent auprès de Mme Weber, à l’accueil.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-kultur-hoeren-ausstellung",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Führung: samstags um [[1]] Uhr · Plätze pro Führung: [[2]] · Audioguide: [[3]] Euro · donnerstags geöffnet bis [[4]] Uhr",
+          "explanation": "Frau Weber : la visite a lieu « jeden Samstag um elf Uhr », il y a « nur zwölf Plätze », l’audioguide « kostet zwei Euro » et la bibliothèque ouvre « donnerstags sogar bis zwanzig Uhr ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "11",
+                "elf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "12",
+                "zwölf"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "2",
+                "zwei"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "20",
+                "zwanzig"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wer macht die Führung? [fr] Qui fait la visite guidée ?",
+          "explanation": "« Die Führung macht eine ehemalige Buchhändlerin, die seit fünfzig Jahren im Viertel lebt. » « ehemalig » = « früher » (ancien). La grand-mère de Leon a travaillé au cinéma, elle ne fait pas la visite.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Leons Großmutter, die früher im Kino gearbeitet hat.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine frühere Buchhändlerin aus dem Viertel.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Frau Weber, die an der Information arbeitet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum möchte Leon zur Führung gehen? [fr] Pourquoi Leon veut-il suivre la visite guidée ?",
+          "explanation": "Sa grand-mère a travaillé « im alten Kino an der Ecke » et il espère que la libraire en saura quelque chose : « Solche Geschichten stehen auf keinem Schild. » Il ne parle ni du prix ni de jeudi.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er hofft, etwas über das Kino seiner Großmutter zu erfahren.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Er findet den Audioguide mit zwei Euro zu teuer.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er kann am Donnerstagabend nicht in die Bibliothek kommen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum nimmt Jasmin den Audioguide? [fr] Pourquoi Jasmin prend-elle l’audioguide ?",
+          "explanation": "« Samstags muss ich arbeiten » ; avec l’audioguide, elle peut venir jeudi après le travail, car la bibliothèque est ouverte jusqu’à 20 heures. La visite n’est pas complète, puisque Leon s’y inscrit encore, et Jasmin ne dit rien contre les visites en groupe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Führung am Samstag ist schon ausverkauft.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie findet Führungen mit vielen Leuten anstrengend.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie arbeitet samstags und kann donnerstags länger kommen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was plant Leon für nächsten Monat? [fr] Que prévoit Leon pour le mois prochain ?",
+          "explanation": "« Wenn die Führung gut ist, werde ich nächsten Monat mit meiner Großmutter noch einmal hingehen. » Le Futur I (« werde … hingehen ») exprime ici un projet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Einen Audioguide für seine Großmutter kaufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mit seiner Großmutter noch einmal hingehen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Selbst eine Führung durch das Viertel machen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was zeigt die Ausstellung? [fr] Que montre l’exposition ?",
+          "explanation": "Frau Weber : « über hundert Fotos von Geschäften, Kinos und Werkstätten, die es früher hier im Viertel gab ». Le cinéma n’est qu’un des lieux photographiés ; les affiches et les jeunes artistes ne sont pas mentionnés.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Fotos von Geschäften, Kinos und Werkstätten von früher.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Bilder von jungen Künstlern, die im Viertel wohnen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Alte Kinoplakate aus der Sammlung von Leons Großmutter.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-kultur-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : décrire avec précision et parler de l’avenir",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : décrire avec précision et parler de l’avenir",
+        "description": "Lesen Sie die Sätze aus der Kritik und aus dem Gespräch. Beantworten Sie dann die Fragen. [fr] Lisez les phrases tirées de la critique et de la conversation, puis répondez aux questions.\n\nSatz 1: Paul ist ein schüchterner Lehrer aus der Provinz.\nSatz 2: Er findet ein rotes Kleid und einen Brief ohne Absender.\nSatz 3: Die junge Regisseurin erzählt die Geschichte mit großem Gespür für Humor.\nSatz 4: Die lachenden Zuschauer klatschten am Ende minutenlang.\nSatz 5: Die neue Komödie heißt „Der vertauschte Koffer“.\nSatz 6: Unser Fazit: ein gelungener, empfehlenswerter Abend.\nSatz 7: Am Samstag wird es bestimmt voll sein.\nSatz 8: Ich werde nächsten Monat mit meiner Großmutter noch einmal hingehen.\n\nAchten Sie auf die Endungen der Adjektive und auf das Verb „werden“. [fr] Observez les terminaisons des adjectifs et le verbe « werden ».",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 und 2: „ein schüchterner Lehrer“, „ein rotes Kleid“: Warum -er und -es? [fr] Phrases 1 et 2 : pourquoi -er et -es ?",
+          "explanation": "« ein » est identique au masculin et au neutre : c’est donc l’adjectif qui porte la marque du genre (der → -er, das → -es). Avec « der » ou « das », l’article montre déjà le genre et l’adjectif prend -e : der schüchterne Lehrer, das rote Kleid.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nach „ein“ endet ein Adjektiv immer auf -en, wie nach „den“.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Adjektiv übernimmt immer die Endung des Nomens.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„ein“ zeigt das Genus nicht, also zeigt es das Adjektiv.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz 3: „mit großem Gespür“: Warum -em? [fr] Phrase 3 : pourquoi -em ?",
+          "explanation": "Sans article, l’adjectif prend la terminaison qu’aurait eue l’article : mit dem Gespür → mit großem Gespür (datif neutre). Avec un article, on aurait « mit dem großen Gespür ». « das Gespür » est neutre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ohne Artikel übernimmt das Adjektiv die Endung von „dem“.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nach „mit“ und „bei“ endet jedes Adjektiv auf -en.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "„Gespür“ ist feminin, darum endet das Adjektiv auf -em.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Was bedeuten die Partizipien? [fr] Que signifient ces participes ?",
+          "explanation": "Le participe I (lachend) décrit une action en cours, au sens actif : les spectateurs rient. Le participe II (vertauscht, gelungen) décrit un résultat ou un sens passif : la valise a été échangée, la soirée a réussi. Tous deux se déclinent comme des adjectifs.",
+          "pairs": [
+            {
+              "left": "die lachenden Zuschauer",
+              "right": "les spectateurs qui rient"
+            },
+            {
+              "left": "der vertauschte Koffer",
+              "right": "la valise échangée par erreur"
+            },
+            {
+              "left": "ein gelungener Abend",
+              "right": "une soirée réussie"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sätze 7 und 8: Was drückt „werden“ + Infinitiv hier aus? [fr] Phrases 7 et 8 : qu’exprime « werden » + infinitif ici ?",
+          "explanation": "C’est le Futur I : « werden » conjugué en 2e position, l’infinitif à la fin. Phrase 7 : une supposition (« bestimmt » = sûrement). Phrase 8 : un projet. Le souhait poli s’exprime au Konjunktiv II (ich würde gern …).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Etwas, was am Wochenende schon passiert ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Eine Vermutung oder einen Plan für die Zukunft.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Einen höflichen Wunsch, wie „ich hätte gern“.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-kultur-regel",
+      "kind": "lesson",
+      "title": "Retenir : déclinaison de l’adjectif, participes et Futur I",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Retenir : déclinaison de l’adjectif, participes et Futur I",
+        "description": "À RETENIR — 1. LA DÉCLINAISON DE L’ADJECTIF ÉPITHÈTE\nDevant un nom, l’adjectif prend toujours une terminaison. Principe : la marque du genre et du cas (-r, -s, -m, -e…) apparaît une fois, sur l’article ou, si l’article ne la montre pas, sur l’adjectif.\n\nAPRÈS DER, DIE, DAS (ET DIESER, JEDER, WELCHER)\n• nominatif : der neue Film, die neue Bühne, das neue Stück, die neuen Filme\n• accusatif : den neuen Film, die neue Bühne, das neue Stück, die neuen Filme\n• datif : dem neuen Film, der neuen Bühne, dem neuen Stück, den neuen Filmen\nSeulement deux terminaisons : -e (nominatif singulier, accusatif féminin et neutre) et -en partout ailleurs.\n\nAPRÈS EIN, KEIN, MEIN (ET LES AUTRES POSSESSIFS)\n• nominatif : ein neuer Film, eine neue Bühne, ein neues Stück, keine neuen Filme\n• accusatif : einen neuen Film, eine neue Bühne, ein neues Stück, keine neuen Filme\n• datif : einem neuen Film, einer neuen Bühne, einem neuen Stück, keinen neuen Filmen\nLà où « ein » ne montre pas le genre (nominatif masculin, nominatif et accusatif neutres), l’adjectif prend -er ou -es.\n\nSANS ARTICLE (L’ADJECTIF PREND LA TERMINAISON DE L’ARTICLE)\n• nominatif : guter Kaffee, frische Luft, kaltes Wasser, warme Getränke\n• accusatif : guten Kaffee, frische Luft, kaltes Wasser, warme Getränke\n• datif : mit gutem Kaffee, mit frischer Luft, mit kaltem Wasser, mit warmen Getränken\n\nÀ RETENIR — 2. LES PARTICIPES EMPLOYÉS COMME ADJECTIFS\n• Participe I = infinitif + d : lachen → lachend. Sens actif, action en cours : die lachenden Zuschauer (qui rient).\n• Participe II : vertauschen → vertauscht. Sens passif ou action terminée : der vertauschte Koffer (échangé par erreur), ein gelungener Abend (réussi).\n• Ils se déclinent comme tous les adjectifs : die wartenden Gäste, mit frisch gebackenen Brezeln.\n\nÀ RETENIR — 3. LE FUTUR I : WERDEN + INFINITIF\n• ich werde, du wirst, er/sie wird, wir werden, ihr werdet, sie/Sie werden + infinitif à la fin\n• projet ou promesse : Ich werde dich am Sonntag anrufen.\n• prévision : Morgen wird es regnen.\n• supposition sur le présent, souvent avec wohl, sicher, bestimmt : Sie wird wohl im Stau stehen.\n• dans une subordonnée, werden va à la fin : Ich glaube, dass es voll sein wird.\n• avec une indication de temps, le présent suffit souvent : Morgen gehe ich ins Theater.\n\nATTENTION\n• Après le verbe (attribut), pas de terminaison : Der Film ist neu, mais der neue Film.\n• « Ich werde kommen » = je viendrai ; « Ich will kommen » = je veux venir. Ne confondez pas werden et wollen.\n• werden employé seul signifie « devenir » : Sie wird Schauspielerin.\n• Le participe I garde -end- avant la terminaison : das lächelnde Gesicht.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-kultur-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : adjectifs, participes et Futur I",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : adjectifs, participes et Futur I",
+        "description": "Bestimmen Sie zuerst: Gibt es einen Artikel? Welcher Fall? Ergänzen Sie dann die Endung. [fr] Déterminez d’abord : y a-t-il un article ? Quel cas ? Puis complétez la terminaison.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Endung nach „der, die, das“. [fr] Complétez la terminaison après « der, die, das ».",
+          "text": "Hast du die [[1]] Ausstellung schon gesehen (neu)? Im [[2]] Saal hängen Fotos von früher (groß).",
+          "explanation": "Accusatif féminin après « die » : -e (die neue Ausstellung). Datif après « im » (= in dem) : toujours -en (im großen Saal).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "neue"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "großen"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Endung nach „ein“. [fr] Complétez la terminaison après « ein ».",
+          "text": "Gestern habe ich einen [[1]] Film gesehen (spannend), und meine Schwester war in einem [[2]] Konzert (klassisch).",
+          "explanation": "Accusatif masculin après « einen » : -en. Datif après « einem » : -en. Avec ein, seuls le nominatif masculin (-er) et le nominatif et l’accusatif neutres (-es) sont différents.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "spannenden"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "klassischen"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Endung ohne Artikel. [fr] Complétez la terminaison sans article.",
+          "text": "Bei [[1]] Wetter (schön) feiern wir draußen. Es gibt [[2]] Getränke (kalt) und [[3]] Kuchen (frisch).",
+          "explanation": "Sans article, l’adjectif prend la marque de l’article : bei dem Wetter → bei schönem Wetter ; die Getränke → kalte Getränke ; den Kuchen (accusatif après « es gibt ») → frischen Kuchen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "schönem"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kalte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "frischen"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? „Wir suchen ein … Restaurant in der Nähe.“ (gemütlich) [fr] Quelle forme est juste ? (Nous cherchons un restaurant agréable à proximité.)",
+          "explanation": "« das Restaurant » est neutre ; à l’accusatif, « ein » ne montre pas le genre : l’adjectif prend -es. Avec l’article défini, on dirait « das gemütliche Restaurant ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "gemütliche",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "gemütliches",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "gemütlichen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "match",
+          "prompt": "Was bedeutet dasselbe? [fr] Qu’est-ce qui a le même sens ?",
+          "explanation": "Le participe I (lachend, spielend) remplace une relative active au présent. Le participe II (geschmückt, empfohlen) remplace une relative passive ou au passé. Les participes rendent la phrase plus courte.",
+          "pairs": [
+            {
+              "left": "die lachenden Kinder",
+              "right": "die Kinder, die lachen"
+            },
+            {
+              "left": "der geschmückte Baum",
+              "right": "der Baum, den man geschmückt hat"
+            },
+            {
+              "left": "die empfohlene Ausstellung",
+              "right": "die Ausstellung, die man empfohlen hat"
+            },
+            {
+              "left": "das spielende Orchester",
+              "right": "das Orchester, das gerade spielt"
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Bilden Sie das Partizip mit Endung. [fr] Formez le participe avec sa terminaison.",
+          "text": "Die Kinder singen. → die [[1]] Kinder · Man hat die Karten reserviert. → die [[2]] Karten",
+          "explanation": "Participe I : singen + d → singend, puis -en (pluriel après « die »). Participe II : reserviert, puis -en : die reservierten Karten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "singenden"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "reservierten"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "glaube,",
+              "dass",
+              "das Fest",
+              "sehr",
+              "voll",
+              "sein",
+              "wird."
+            ]
+          ],
+          "explanation": "Dans une subordonnée en « dass », l’auxiliaire du futur « wird » va tout à la fin, après l’infinitif « sein »."
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "„Sie wird wohl im Stau stehen.“ Was bedeutet das? [fr] Que signifie cette phrase ?",
+          "explanation": "Futur I avec « wohl » : une supposition sur le présent (elle doit être dans les bouchons). Ce n’est ni une volonté (wollen) ni un fait passé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie will heute unbedingt im Stau stehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie stand gestern auf dem Heimweg im Stau.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wahrscheinlich steht sie gerade im Stau.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „werden“ in der richtigen Form. [fr] Complétez avec la bonne forme de « werden ».",
+          "text": "Morgen [[1]] es regnen. Wir [[2]] das Fest deshalb in die Halle verlegen.",
+          "explanation": "Futur I : « werden » conjugué en 2e position (es wird, wir werden), infinitif à la fin (regnen, verlegen).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wird"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "werden"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? „Mit den … Gästen haben wir bis Mitternacht gefeiert.“ (neu) [fr] Quelle forme est juste ? (Nous avons fait la fête jusqu’à minuit avec les nouveaux invités.)",
+          "explanation": "Datif pluriel après « den » : -en (et -n aussi au nom : den Gästen). Au datif, l’adjectif précédé d’un article prend toujours -en.",
+          "options": [
+            {
+              "id": "a",
+              "label": "neue",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "neuer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "neuen",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-kultur-wortschatz",
+      "kind": "exercise",
+      "title": "Mots et formules : sortir, recommander, nuancer",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mots et formules : sortir, recommander, nuancer",
+        "description": "Lernen Sie die Wörter in festen Verbindungen. [fr] Apprenez les mots dans leurs associations fixes.\n\nREDEMITTEL\n[fr] Formules utiles\n• recommander : Das lohnt sich wirklich! / Geh unbedingt hin! / Das ist sehr empfehlenswert.\n• nuancer : Das Stück war zwar etwas lang, aber … / Trotzdem hat es mir gefallen.\n• se renseigner : Wissen Sie, wann die Führung anfängt? / Gibt es eine Ermäßigung?\n• déconseiller poliment : Ich würde eher … empfehlen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? [fr] Quel verbe va avec quel nom ?",
+          "explanation": "Associations courantes : eine Ausstellung besuchen, Karten reservieren, ein Fest feiern, einen Brauch pflegen (entretenir une coutume), sich ein Theaterstück ansehen (aller voir une pièce).",
+          "pairs": [
+            {
+              "left": "eine Ausstellung",
+              "right": "besuchen"
+            },
+            {
+              "left": "Karten",
+              "right": "reservieren"
+            },
+            {
+              "left": "ein Fest",
+              "right": "feiern"
+            },
+            {
+              "left": "einen Brauch",
+              "right": "pflegen"
+            },
+            {
+              "left": "sich ein Theaterstück",
+              "right": "ansehen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Adjektiv. [fr] Complétez avec l’adjectif qui convient.",
+          "text": "Studierende zahlen weniger: Für sie ist der Eintritt [[1]]. Alle Karten sind verkauft: Die Vorstellung ist [[2]]. Man muss nichts bezahlen: Der Eintritt ist [[3]].",
+          "explanation": "« ermäßigt » : à tarif réduit ; « ausverkauft » : complet ; « Eintritt frei » : entrée libre (« kostenlos » est aussi juste).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "ermäßigt"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "ausverkauft"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "frei",
+                "kostenlos"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Bilden Sie Nomen mit -ung. [fr] Formez des noms en -ung.",
+          "text": "aufführen → die [[1]] · veranstalten → die [[2]] · empfehlen → die [[3]]",
+          "explanation": "Radical du verbe + -ung : un nom féminin. die Aufführung (la représentation), die Veranstaltung (l’événement), die Empfehlung (la recommandation).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Aufführung"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Veranstaltung"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Empfehlung"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie empfehlen einer Freundin eine Ausstellung. Was sagen Sie? [fr] Vous recommandez une exposition à une amie. Que dites-vous ?",
+          "explanation": "« sich lohnen » (valoir la peine) et « geh unbedingt hin! » (vas-y absolument) forment une vraie recommandation. Les deux autres phrases ne recommandent rien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Ausstellung lohnt sich wirklich, geh unbedingt hin!",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Ausstellung habe ich leider noch nicht gesehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich gehe eigentlich nie in Ausstellungen, sie sind teuer.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie möchten Ihre Meinung nuancieren. Was passt? [fr] Vous voulez nuancer votre avis. Quelle phrase convient ?",
+          "explanation": "« zwar …, aber … » concède un défaut puis souligne une qualité : c’est un avis nuancé. Les deux autres phrases sont des jugements sans nuance.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Stück war super, die Schauspieler waren einfach perfekt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Stück war zwar lang, aber die Schauspieler waren toll.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Das Stück war total schlecht und viel zu lang.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie fragen höflich nach dem Programm. Was passt? [fr] Vous vous renseignez poliment sur le programme. Quelle phrase convient ?",
+          "explanation": "Question indirecte polie : « Wissen Sie, wann … ? », avec le verbe « anfängt » à la fin. Les deux autres phrases ne demandent pas l’heure de la visite.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wissen Sie, wann die Führung anfängt?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Führung hat schon angefangen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wann haben Sie angefangen?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. [fr] Complétez.",
+          "text": "Der 3. Oktober ist in Deutschland ein [[1]]: Viele Menschen haben frei. Einen Maibaum aufzustellen ist ein alter [[2]].",
+          "explanation": "« der Feiertag » : jour férié (le 3 octobre, fête de l’Unité allemande). « der Brauch », pluriel « die Bräuche » : la coutume, synonyme de « die Tradition ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Feiertag"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Brauch"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-kultur-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : recommander, nuancer, prévoir",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : recommander, nuancer, prévoir",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\n\nAchten Sie auf die Endungen der Adjektive: Sprechen Sie sie deutlich aus. [fr] Soyez attentif aux terminaisons des adjectifs : prononcez-les distinctement.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Die Ausstellung lohnt sich wirklich, geh unbedingt hin!",
+          "accept": [
+            "Die Ausstellung lohnt sich wirklich, geh unbedingt hin!"
+          ],
+          "explanation": "Recommandation enthousiaste. Accentuez « wirklich » et « unbedingt ». « geh … hin » : impératif du verbe séparable hingehen.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das Stück war zwar etwas lang, aber sehr lustig.",
+          "accept": [
+            "Das Stück war zwar etwas lang, aber sehr lustig."
+          ],
+          "explanation": "Avis nuancé avec « zwar … aber ». La voix monte sur « lang » et redescend sur « lustig ».",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Für Studierende ist der Eintritt ermäßigt.",
+          "accept": [
+            "Für Studierende ist der Eintritt ermäßigt."
+          ],
+          "explanation": "« ermäßigt » : accent sur la deuxième syllabe (erMÄßigt), le « ß » se prononce comme un « s » dur.",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich werde nächstes Jahr bestimmt wieder dabei sein.",
+          "accept": [
+            "Ich werde nächstes Jahr bestimmt wieder dabei sein."
+          ],
+          "explanation": "Futur I : « werde » en 2e position, « sein » à la fin. « dabei sein » : être de la partie.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Bei schönem Wetter findet das Fest im Park statt.",
+          "accept": [
+            "Bei schönem Wetter findet das Fest im Park statt."
+          ],
+          "explanation": "Adjectif sans article au datif : « bei schönem Wetter ». Faites bien entendre le -m final. « findet … statt » : verbe séparable.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Kannst du mir einen guten Film empfehlen?",
+          "accept": [
+            "Kannst du mir einen guten Film empfehlen?"
+          ],
+          "explanation": "« einen guten Film » : accusatif masculin après « einen », terminaison -en. La voix monte à la fin de la question.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-kultur-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-kultur-lesen2",
+      "kind": "exercise",
+      "title": "Comprendre : un article sur une fête de village",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : un article sur une fête de village",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nDie Fragen 5 und 6 sind Diktate: Hören Sie die Sätze und schreiben Sie sie. [fr] Les questions 5 et 6 sont des dictées : écoutez les phrases et écrivez-les.\n\nDORFLEBEN: EIN BAUM FÜR DAS GANZE DORF\n[fr] La vie au village : un arbre pour tout le village\n\nIn vielen Orten in Bayern und Österreich, aber auch in anderen Regionen, gehört der Maibaum zum Frühling. Auch im kleinen Dorf Lindach wird jedes Jahr am 1. Mai ein neuer Maibaum aufgestellt.\n\nSchon Wochen vorher suchen die Mitglieder des Heimatvereins im Wald einen langen, geraden Baum aus. Sie entfernen die Rinde und bemalen den Stamm in den Farben der Region, meistens weiß und blau. In der Nacht vor dem Fest bewachen junge Leute den geschmückten Baum. Warum? Nach einem alten Brauch versuchen junge Männer aus dem Nachbardorf, den Baum zu stehlen. Wenn sie es schaffen, muss das bestohlene Dorf ihn zurückkaufen, meistens mit Bier und einer deftigen Brotzeit.\n\nAm 1. Mai um elf Uhr beginnt das eigentliche Fest. Mit Seilen, langen Holzstangen und viel Muskelkraft stellen etwa zwanzig Helfer den Baum auf, ganz ohne Kran. Das dauert oft zwei Stunden. Die wartenden Zuschauer feuern sie an, und die Blaskapelle spielt. Am Ende steht der über 25 Meter hohe Baum in der Mitte des Dorfplatzes. Danach wird gefeiert: Es gibt Musik und Tanz, frisch gebackene Brezeln und für die Kinder ein Puppentheater.\n\n„Für uns ist der Maibaum nicht nur eine Tradition, sondern auch ein Zeichen, dass das Dorf zusammenhält“, sagt Klara Huber vom Heimatverein. Der Baum wird bis zum Herbst auf dem Platz stehen. Und auch nächstes Jahr wird Lindach wieder feiern, bei Sonne oder bei Regen.\n\nKLEINES WÖRTERBUCH\n[fr] Petit lexique\n• der Maibaum — l’arbre de mai\n• die Rinde — l’écorce\n• bewachen — surveiller, garder\n• die Brotzeit — le casse-croûte (sud de l’Allemagne)\n• die Blaskapelle — la fanfare",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel? [fr] De quoi parle l’article ?",
+          "explanation": "L’article décrit la tradition de l’arbre de mai à Lindach : préparation, nuit de garde, fête du 1er mai. Le « vol » de l’arbre est un jeu traditionnel, pas une vraie dispute, et la fête a lieu « jedes Jahr ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Um einen Streit zwischen zwei Dörfern über einen Wald.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Um einen alten Brauch und ein Fest am 1. Mai in einem Dorf.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Um ein neues Fest, das es erst seit diesem Jahr gibt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "„Den Baum stellt man mit einem Kran auf.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : une vingtaine d’aides dressent l’arbre « mit Seilen, langen Holzstangen und viel Muskelkraft …, ganz ohne Kran ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Im Nachbardorf gibt es auch einen Maibaum.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Non mentionné : on sait seulement que des jeunes du village voisin essaient de voler l’arbre de Lindach. Le texte ne dit pas si ce village a son propre arbre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum bewachen junge Leute den Baum in der Nacht? [fr] Pourquoi des jeunes gardent-ils l’arbre la nuit ?",
+          "explanation": "« Nach einem alten Brauch versuchen junge Männer aus dem Nachbardorf, den Baum zu stehlen. » Si le vol réussit, le village volé doit racheter son arbre avec de la bière et un casse-croûte.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil der Baum in der Nacht noch bemalt werden muss.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Weil in der Nacht schon das große Fest beginnt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil junge Männer aus dem Nachbardorf ihn stehlen wollen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Der geschmückte Baum bleibt bis zum Herbst auf dem Dorfplatz stehen."
+          ],
+          "voice": "mann2",
+          "explanation": "« der geschmückte Baum » : participe II employé comme adjectif, -e après « der ». « stehen bleiben » se sépare ici : bleibt … stehen.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Bei schönem Wetter tanzen die Leute bis spät in die Nacht."
+          ],
+          "voice": "frau3",
+          "explanation": "« bei schönem Wetter » : adjectif sans article au datif, terminaison -em. « in die Nacht » : accusatif de direction après « bis … in ».",
+          "showWordCount": true
+        }
+      ],
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein Maibaum auf dem Dorfplatz",
+          "media": "b1-kultur-lesen2-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-lesen2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-kultur-lesen2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-kultur-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : sorties, adjectifs, participes et futur",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : sorties, adjectifs, participes et futur",
+        "description": "Hören Sie die Nachricht von Ines für die Fragen 1 und 2. Lösen Sie dann die anderen Aufgaben. [fr] Écoutez le message d’Ines pour les questions 1 et 2, puis faites les autres exercices.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-kultur-kontrolle-nachricht",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was gibt es am Samstag um drei Uhr? [fr] Qu’y a-t-il samedi à trois heures ?",
+          "explanation": "« Um drei Uhr gibt es einen Umzug mit bunt geschmückten Wagen. » Le concert a lieu le soir (« abends »). Ici, « der Umzug » est un défilé, pas un déménagement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Einen Umzug mit geschmückten Wagen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ein Konzert auf der großen Bühne.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Führung durch die Altstadt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wo möchte Ines Paula treffen? [fr] Où Ines veut-elle retrouver Paula ?",
+          "explanation": "« Wir könnten uns um halb drei am Brunnen treffen. » La scène est l’endroit du concert du soir.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vor der großen Bühne.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Am Brunnen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Bei Paula zu Hause.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Adjektivendung. [fr] Complétez la terminaison de l’adjectif.",
+          "text": "Wir haben einen [[1]] Abend erlebt (wunderbar), und die [[2]] Band hat toll gespielt (jung).",
+          "explanation": "Accusatif masculin après « einen » : -en (einen wunderbaren Abend). Nominatif féminin après « die » : -e (die junge Band).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wunderbaren"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "junge"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Bilden Sie das Partizip I mit Endung. [fr] Formez le participe I avec sa terminaison.",
+          "text": "Die [[1]] Zuschauer (warten) wurden langsam ungeduldig.",
+          "explanation": "warten + d → wartend (participe I, action en cours), puis -en au pluriel après « die » : die wartenden Zuschauer (les spectateurs qui attendent).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "wartenden"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "glaube,",
+              "dass",
+              "es",
+              "am Samstag",
+              "regnen",
+              "wird."
+            ]
+          ],
+          "explanation": "Subordonnée en « dass » : le pronom sujet « es » vient tout de suite après la conjonction, et l’auxiliaire du futur « wird » va à la fin, après l’infinitif « regnen »."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Ich werde dich morgen anrufen.“ Was bedeutet das? [fr] Que signifie cette phrase ?",
+          "explanation": "Futur I à la 1re personne : une promesse ou un projet. Ce n’est ni un fait passé ni une demande adressée à l’autre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe dich gestern angerufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich will, dass du mich morgen am Vormittag anrufst.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich verspreche, dass ich dich morgen anrufe.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? „Hier gibt es … Brezeln.“ (frisch) [fr] Quelle forme est juste ? (Ici, il y a des bretzels frais.)",
+          "explanation": "Pluriel sans article, à l’accusatif (après « es gibt ») : -e, comme l’article « die ». On dirait « die frischen Brezeln » avec l’article.",
+          "options": [
+            {
+              "id": "a",
+              "label": "frische",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "frischen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "frischer",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Sie empfehlen ein Konzert. Was passt? [fr] Vous recommandez un concert. Quelle phrase convient ?",
+          "explanation": "« empfehlenswert » (qui mérite d’être recommandé) suivi d’un argument concret (le prix) : une bonne recommandation. Les autres phrases n’en sont pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Konzert war leider schon lange ausverkauft.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Konzert ist sehr empfehlenswert und nicht teuer.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich weiß nicht genau, ob es am Samstag ein Konzert gibt.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-kultur-lesen-programm",
+      "kind": "image",
+      "title": "Programme de la semaine culturelle",
+      "alt": "Tableau « Kulturwoche im Westviertel » : lundi théâtre (14 €, réduit 8 €), mercredi exposition de photos avec visite (gratuit), vendredi concert de chorale (10 €), samedi lecture pour enfants (gratuit), dimanche visite du quartier (5 €).",
+      "image": {
+        "layout": "table",
+        "icon": "theater",
+        "title": "Kulturwoche im Westviertel",
+        "subtitle": "12. bis 18. Mai",
+        "columns": [
+          "Wann?",
+          "Was?",
+          "Wo?",
+          "Eintritt"
+        ],
+        "rows": [
+          [
+            "Mo 19:30",
+            "Theater: „Der vertauschte Koffer“",
+            "Kleine Bühne",
+            "14 €, ermäßigt 8 €"
+          ],
+          [
+            "Mi 18:00",
+            "Fotoausstellung „Alte Bilder, neue Wege“ mit Führung",
+            "Stadtbibliothek",
+            "frei"
+          ],
+          [
+            "Fr 20:00",
+            "Konzert: Chor „Westwind“",
+            "Alte Markthalle",
+            "10 €"
+          ],
+          [
+            "Sa 15:00",
+            "Lesung für Kinder ab 6 Jahren",
+            "Stadtbibliothek",
+            "frei"
+          ],
+          [
+            "So 11:00",
+            "Stadtführung „Das Viertel früher“",
+            "Marktbrunnen",
+            "5 €"
+          ]
+        ],
+        "rowIcons": [
+          "drama",
+          "camera",
+          "music",
+          "book-open",
+          "map"
+        ]
+      }
+    },
+    {
+      "key": "b1-kultur-hoeren-ausstellung",
+      "kind": "audio",
+      "title": "À l’accueil de l’exposition",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Weber",
+          "text": "Guten Tag! Kann ich Ihnen helfen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Jasmin",
+          "text": "Ja, gern. Wir möchten die Fotoausstellung sehen. Was kann man da genau sehen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Weber",
+          "text": "Die Ausstellung zeigt über hundert Fotos von Geschäften, Kinos und Werkstätten, die es früher hier im Viertel gab. Die ältesten Bilder sind fast hundert Jahre alt. Neben jedem Foto steht nur die Jahreszahl, deshalb bieten wir zwei Möglichkeiten an, mehr zu erfahren."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Jasmin",
+          "text": "Gibt es denn eine Führung?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Weber",
+          "text": "Ja, jeden Samstag um elf Uhr. Die Führung macht eine ehemalige Buchhändlerin, die seit fünfzig Jahren im Viertel lebt. Sie kennt zu fast jedem Foto eine Geschichte. Es gibt aber nur zwölf Plätze, deshalb sollten Sie sich vorher anmelden."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Leon",
+          "text": "Und wenn wir lieber allein durch die Ausstellung gehen möchten?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Weber",
+          "text": "Dann können Sie unseren Audioguide benutzen. Sie bekommen ihn hier an der Information, er kostet zwei Euro, für Kinder ist er kostenlos. Zu jedem Foto gibt es eine kurze Erklärung von etwa einer Minute. Den Audioguide gibt es während der ganzen Öffnungszeit, donnerstags sogar bis zwanzig Uhr."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Jasmin",
+          "text": "Vielen Dank! Was meinst du, Leon?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Leon",
+          "text": "Ich würde lieber zur Führung gehen. Meine Großmutter hat früher im alten Kino an der Ecke gearbeitet. Vielleicht weiß die Buchhändlerin etwas darüber. Solche Geschichten stehen auf keinem Schild."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Jasmin",
+          "text": "Das verstehe ich. Aber samstags muss ich arbeiten, und zwölf Plätze sind schnell weg. Ich nehme lieber den Audioguide. Dann kann ich am Donnerstag nach der Arbeit kommen und mir so viel Zeit nehmen, wie ich will."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Leon",
+          "text": "Gut, dann machen wir es so: Ich melde mich für die Führung am Samstag an, und du kommst am Donnerstagabend. Danach erzählen wir uns, was wir gesehen haben."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Jasmin",
+          "text": "Gute Idee! Am Samstag wird es bestimmt voll sein. Ich werde dich am Sonntag anrufen, dann kannst du mir alles erzählen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann",
+          "name": "Leon",
+          "text": "Und wenn die Führung gut ist, werde ich nächsten Monat mit meiner Großmutter noch einmal hingehen. Das wird ihr bestimmt gefallen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Weber",
+          "text": "Dann trage ich Sie gleich ein. Wie ist Ihr Name, bitte?"
+        },
+        {
+          "pause": 0.3
+        },
+        {
+          "voice": "mann",
+          "name": "Leon",
+          "text": "Leon Hartmann. Vielen Dank!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-kontrolle-nachricht",
+      "kind": "audio",
+      "title": "Message vocal d’Ines sur la fête de la ville",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Ines",
+          "text": "Hallo Paula, hier ist Ines. Am Samstag ist doch das Stadtfest! Ich habe gerade das Programm gelesen. Um drei Uhr gibt es einen Umzug mit bunt geschmückten Wagen, und abends spielt eine junge Band aus der Region auf der großen Bühne am Markt."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Ines",
+          "text": "Der Eintritt ist frei! Ich werde auf jeden Fall hingehen. Kommst du mit? Wir könnten uns um halb drei am Brunnen treffen. Ruf mich zurück!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-einstieg-foto",
+      "kind": "image",
+      "title": "La salle d’un théâtre",
+      "alt": "La salle d’un théâtre municipal ancien : rideau rouge, balcons dorés et éclairés, fauteuils rouges vides.",
+      "photo": {
+        "file": "libre/commons/kultur-theater.jpg"
+      },
+      "credit": "Andreas Praefcke, Wikimedia Commons",
+      "license": "CC BY 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fürth_Stadttheater_Zuschauerraum.jpg"
+    },
+    {
+      "key": "b1-kultur-lesen2-foto",
+      "kind": "image",
+      "title": "Un arbre de mai",
+      "alt": "Un très haut arbre de mai, mât peint surmonté d’une couronne et d’un petit sapin, au milieu d’une place de village, sous un ciel bleu.",
+      "photo": {
+        "file": "libre/commons/kultur-maibaum.jpg",
+        "crop": [
+          0,
+          0.08,
+          1,
+          0.75
+        ]
+      },
+      "credit": "Liuthalas, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Maibaum_Semriach_2020_01.jpg"
+    },
+    {
+      "key": "b1-kultur-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Die Ausstellung lohnt sich wirklich, geh unbedingt hin!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das Stück war zwar etwas lang, aber sehr lustig."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Für Studierende ist der Eintritt ermäßigt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich werde nächstes Jahr bestimmt wieder dabei sein."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Bei schönem Wetter findet das Fest im Park statt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : recommander, nuancer, prévoir",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Kannst du mir einen guten Film empfehlen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-lesen2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : un article sur une fête de village",
+      "script": [
+        {
+          "voice": "mann2",
+          "text": "Der geschmückte Baum bleibt bis zum Herbst auf dem Dorfplatz stehen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-lesen2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : un article sur une fête de village",
+      "script": [
+        {
+          "voice": "frau3",
+          "text": "Bei schönem Wetter tanzen die Leute bis spät in die Nacht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-kultur-lexique",
+      "kind": "audio",
+      "title": "Lexique · Kultur : sorties culturelles et fêtes",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Ausstellung, die Ausstellungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Aufführung, die Aufführungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Vorstellung, die Vorstellungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Veranstaltung, die Veranstaltungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Führung, die Führungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Theaterstück, die Theaterstücke"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bühne, die Bühnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Publikum"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Eintritt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ermäßigt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausverkauft"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "empfehlenswert"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "unterhaltsam"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich lohnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "stattfinden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "klatschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Veranstaltungskalender, die Veranstaltungskalender"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fest, die Feste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "feiern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Brauch, die Bräuche"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Feiertag, die Feiertage"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Tradition, die Traditionen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Umzug, die Umzüge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verkleiden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Kritik, die Kritiken"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

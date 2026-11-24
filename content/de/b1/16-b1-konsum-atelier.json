@@ -1,0 +1,1447 @@
+{
+  "id": "b1-konsum-atelier",
+  "title": "Konsum, atelier : écrire une réclamation efficace",
+  "objective": "Écrire une réclamation formelle qui permet d’agir, réagir poliment au magasin et au téléphone, expliquer en allemand des conditions de retour rédigées en français et repérer l’avis de lecteurs sur un forum.",
+  "prerequisites": [
+    "b1-konsum"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, messages, avis et exercices originaux LinguaCap.",
+    "Tâches reprises et réécrites du brouillon B1 V1 (LinguaCap) : écrire une réclamation, négocier une solution au téléphone."
+  ],
+  "layer": "content/b/source/b1/b1-konsum-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "sehr-geehrte-damen-und-herren",
+      "word": "Sehr geehrte Damen und Herren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Madame, Monsieur (formule d’appel)",
+      "example": "Sehr geehrte Damen und Herren, ich schreibe Ihnen wegen meiner Bestellung.",
+      "note": "suivi d’une virgule ; la phrase suivante commence par une minuscule",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "mit-freundlichen-gruessen",
+      "word": "Mit freundlichen Grüßen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "formule finale d’une lettre formelle (Cordialement)",
+      "example": "Mit freundlichen Grüßen, Nadia Haddad",
+      "note": "sans virgule après la formule dans une lettre",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "betreff",
+      "word": "Betreff",
+      "article": "der",
+      "plural": "Betreffe",
+      "partOfSpeech": "noun",
+      "translation": "l’objet (d’un courriel)",
+      "example": "Im Betreff steht die Bestellnummer.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "anhang",
+      "word": "Anhang",
+      "article": "der",
+      "plural": "Anhänge",
+      "partOfSpeech": "noun",
+      "translation": "la pièce jointe",
+      "example": "Im Anhang finden Sie ein Foto des Schadens.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "mitteilen",
+      "word": "mitteilen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "faire savoir, informer",
+      "example": "Leider muss ich Ihnen mitteilen, dass das Kabel fehlt.",
+      "note": "séparable : mit|teilen · jdm. etwas mitteilen",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "schaden",
+      "word": "Schaden",
+      "article": "der",
+      "plural": "Schäden",
+      "partOfSpeech": "noun",
+      "translation": "le dommage, les dégâts",
+      "example": "Auf dem Foto sehen Sie den Schaden.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "beschaedigt",
+      "word": "beschädigt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "endommagé",
+      "example": "Der Karton war beschädigt.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "fehlen",
+      "word": "fehlen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "manquer",
+      "example": "In dem Paket fehlt die Bedienungsanleitung.",
+      "note": "Es fehlt … : il manque …",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "bitten",
+      "word": "bitten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "demander, prier",
+      "example": "Ich bitte Sie um eine schnelle Antwort.",
+      "note": "jdn. um + accusatif bitten · bat, hat gebeten",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "frist",
+      "word": "Frist",
+      "article": "die",
+      "plural": "Fristen",
+      "partOfSpeech": "noun",
+      "translation": "le délai",
+      "example": "Ich setze Ihnen eine Frist bis zum 30. März.",
+      "note": "eine Frist setzen : fixer un délai",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "loesung",
+      "word": "Lösung",
+      "article": "die",
+      "plural": "Lösungen",
+      "partOfSpeech": "noun",
+      "translation": "la solution",
+      "example": "Wir haben eine gute Lösung gefunden.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "kompromiss",
+      "word": "Kompromiss",
+      "article": "der",
+      "plural": "Kompromisse",
+      "partOfSpeech": "noun",
+      "translation": "le compromis",
+      "example": "Am Telefon haben wir einen Kompromiss gefunden.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "bedingung",
+      "word": "Bedingung",
+      "article": "die",
+      "plural": "Bedingungen",
+      "partOfSpeech": "noun",
+      "translation": "la condition",
+      "example": "Ich bin einverstanden, aber unter einer Bedingung.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "schriftlich",
+      "word": "schriftlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adverb",
+      "translation": "par écrit",
+      "example": "Könnten Sie mir das bitte schriftlich bestätigen?",
+      "note": "contraire : mündlich (oralement)",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "ich-haette-lieber-mein-geld-zurueck",
+      "word": "Ich hätte lieber mein Geld zurück.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je préférerais être remboursé(e).",
+      "example": "Danke für den Gutschein, aber ich hätte lieber mein Geld zurück.",
+      "note": "hätte lieber : Konjunktiv II poli",
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "vielen-dank-im-voraus",
+      "word": "Vielen Dank im Voraus",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Merci d’avance",
+      "example": "Vielen Dank im Voraus für Ihre Hilfe.",
+      "note": null,
+      "audio": {
+        "media": "b1-konsum-atelier-lexique",
+        "line": 15
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-konsum-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : une réclamation qui permet d’agir",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : une réclamation qui permet d’agir",
+        "description": "Lesen und hören Sie die Reklamation. Achten Sie auf den Aufbau und auf die markierten Wendungen. [fr] Lisez et écoutez la réclamation. Observez sa structure et les tournures relevées.\n\nSITUATION\n[fr] Situation\nNadia Haddad hat online eine Stehlampe bestellt. Die Lampe ist beschädigt, und ein Teil fehlt. Sie schreibt dem Shop. [fr] Nadia Haddad a commandé un lampadaire en ligne. Il est abîmé et une pièce manque. Elle écrit au magasin.\n\nBetreff: Reklamation zur Bestellung Nr. 7162 (Stehlampe)\nSehr geehrte Damen und Herren,\nam 14. März habe ich in Ihrem Onlineshop eine Stehlampe für 79 Euro bestellt (Bestellnummer 7162). Die Lampe wurde am 18. März geliefert. Leider muss ich Ihnen mitteilen, dass es zwei Probleme gibt: Der Lampenschirm hat einen Riss, und das Stromkabel fehlt. Ein Foto des Schadens finden Sie im Anhang.\nAm 19. März habe ich bei Ihrem Kundenservice angerufen. Man hat mir eine Antwort innerhalb von zwei Tagen versprochen, aber bis heute habe ich nichts gehört.\nIch möchte die Lampe gern behalten. Deshalb bitte ich Sie, mir einen neuen Lampenschirm und das fehlende Kabel zu schicken. Falls das nicht möglich ist, möchte ich die Lampe zurückgeben und den Kaufpreis zurückbekommen.\nIch bitte Sie um eine Antwort bis zum 30. März.\nMit freundlichen Grüßen\nNadia Haddad\n\nAUFBAU\n[fr] Structure\n1. Betreff: worum es geht, mit Bestellnummer und Produkt. [fr] Objet : de quoi il s’agit, avec numéro de commande et produit.\n2. Anrede: „Sehr geehrte Damen und Herren,“ [fr] Formule d’appel formelle.\n3. Kauf: was, wann, wo, Preis und Bestellnummer. [fr] L’achat : quoi, quand, où, prix et numéro de commande.\n4. Problem: die Mängel genau beschreiben und einen Beweis nennen (Foto im Anhang). [fr] Le problème : décrire précisément les défauts et citer une preuve (photo jointe).\n5. Bisherige Schritte: der Anruf und das Datum. [fr] Les démarches déjà faites : l’appel et sa date.\n6. Forderung und Alternative: „Deshalb bitte ich Sie, … Falls das nicht möglich ist, …“ [fr] La demande et une solution de repli.\n7. Frist und Gruß: „Ich bitte Sie um eine Antwort bis zum … Mit freundlichen Grüßen“ [fr] Le délai et la formule finale.\n\nEINLEITEN\n[fr] Introduire\n• Am … habe ich bei Ihnen … bestellt. — Le …, j’ai commandé … chez vous.\n• Ich schreibe Ihnen wegen … — Je vous écris au sujet de…\n\nPROBLEM BESCHREIBEN\n[fr] Décrire le problème\n• Leider muss ich Ihnen mitteilen, dass … — Je dois malheureusement vous informer que…\n• Das Gerät funktioniert seit … nicht mehr. — L’appareil ne fonctionne plus depuis…\n• Beim Auspacken habe ich festgestellt, dass … — En déballant, j’ai constaté que…\n\nFORDERN\n[fr] Demander une solution\n• Deshalb bitte ich Sie, mir … zu schicken. — Je vous prie donc de m’envoyer…\n• Ich möchte das Gerät umtauschen. — Je souhaite échanger l’appareil.\n• Falls das nicht möglich ist, … — Si ce n’est pas possible, …\n\nSCHLUSS\n[fr] Conclure\n• Ich bitte Sie um eine Antwort bis zum … — Je vous prie de me répondre d’ici le…\n• Vielen Dank im Voraus. — Merci d’avance.\n• Mit freundlichen Grüßen — Cordialement (formule finale)\n\nATTENTION\n• Registre formel du début à la fin : Sie, Ihnen, Ihr avec majuscule ; jamais « Hallo » ni « Tschüss ».\n• Les faits d’abord (dates, numéros, défauts), sans reproches ni majuscules de colère : une réclamation calme obtient plus vite une solution.\n• Une demande claire, une solution de repli et un délai : le service sait exactement quoi faire.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-konsum-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-konsum-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : au magasin et au téléphone",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : au magasin et au téléphone",
+        "description": "Hören Sie vier kurze Situationen im Geschäft und am Telefon. Wählen Sie jeweils die passende Reaktion. [fr] Écoutez quatre courtes situations au magasin et au téléphone. Choisissez chaque fois la réplique qui convient.\nDanach sprechen Sie drei nützliche Sätze nach. [fr] Ensuite, répétez trois phrases utiles.\n\nSTRATEGIE\n[fr] Stratégie\nBleiben Sie höflich, aber klar: Sagen Sie, was Sie möchten, und fragen Sie nach Details. [fr] Restez poli, mais clair : dites ce que vous voulez et demandez des précisions.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-konsum-atelier-interaktion-s1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-s2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-s3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-s4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-konsum-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Situation 1: Die Verkäuferin stellt eine Frage. Was antworten Sie? [fr] Situation 1 : la vendeuse pose une question. Que répondez-vous ?",
+          "explanation": "La vendeuse demande le ticket de caisse (der Kassenbon) : on le montre et on donne la date d’achat. La deuxième réplique répond à une autre question (un sac) ; « gern geschehen » répond à un merci.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, hier ist er. Ich habe das Gerät vor einer Woche gekauft.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nein danke, ich brauche heute keine Tüte für das Gerät.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja, gern geschehen. Ich komme dann morgen wieder vorbei.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Situation 2: Der Servicemitarbeiter nennt eine lange Wartezeit. Was antworten Sie? [fr] Situation 2 : le technicien annonce une longue attente. Que répondez-vous ?",
+          "explanation": "Trois semaines, c’est long : on le dit poliment et on propose une autre solution au Konjunktiv II (« Wäre ein Umtausch möglich? »). La première réplique contredit la situation, la troisième mélange passé et futur.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Super, dann ist es ja schnell fertig.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist leider zu spät für mich. Wäre ein Umtausch möglich?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wurde das Gerät schon in drei Wochen repariert?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Situation 3: Die Mitarbeiterin bietet etwas an. Was antworten Sie? [fr] Situation 3 : l’employée propose quelque chose. Que répondez-vous ?",
+          "explanation": "On remercie, puis on dit poliment ce qu’on préfère : « Ich hätte lieber … » (Konjunktiv II). La première réplique répond à côté ; la deuxième comprend mal l’offre : c’est le magasin qui offre un bon de 20 euros, le client ne paie rien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe keinen Gutschein, nur den Kassenbon.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Gut, dann bezahle ich die zwanzig Euro sofort.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Danke, aber ich hätte lieber mein Geld zurück.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Situation 4: Der Verkäufer stellt eine Frage mit „oder“. Was antworten Sie? [fr] Situation 4 : le vendeur pose une question avec « oder ». Que répondez-vous ?",
+          "explanation": "À une question « A oder B? », on ne répond pas « Ja, gern » : on choisit. La bonne réplique choisit (reparieren lassen) et pose une condition. « habe … repariert worden » mélange actif et passif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, gern. Vielen Dank für Ihre schnelle Hilfe!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Lieber reparieren lassen, wenn es nicht zu lange dauert.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich habe es schon gestern repariert worden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich hätte lieber mein Geld zurück.",
+          "accept": [
+            "Ich hätte lieber mein Geld zurück."
+          ],
+          "explanation": "Refus poli au Konjunktiv II. « hätte » : « ä » bref ; « zurück » : accent sur « RÜCK », « ü » bref, lèvres arrondies.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnten Sie mir das bitte schriftlich bestätigen?",
+          "accept": [
+            "Könnten Sie mir das bitte schriftlich bestätigen?"
+          ],
+          "explanation": "Demande de confirmation écrite. « schriftlich » : « sch » puis « ch » doux de « ich » ; « bestätigen » : accent sur « STÄ ».",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wie lange dauert die Reparatur ungefähr?",
+          "accept": [
+            "Wie lange dauert die Reparatur ungefähr?"
+          ],
+          "explanation": "Question ouverte : la voix descend à la fin. « ungefähr » : accent sur « UN », « ä » long. « Reparatur » : accent sur « TUR ».",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-konsum-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : expliquer un retour à une voisine",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : expliquer un retour à une voisine",
+        "description": "SITUATION\n[fr] Situation\nIhre Nachbarin, Frau Becker, hat in einem französischen Onlineshop Schuhe bestellt. Sie sind zu klein. Frau Becker spricht kein Französisch und schreibt Ihnen. [fr] Votre voisine, Mme Becker, a commandé des chaussures sur un site français. Elles sont trop petites. Elle ne parle pas français et vous écrit.\nLesen Sie die Rückgabebedingungen auf Französisch. Erklären Sie Frau Becker dann auf Deutsch, was sie tun muss. Übersetzen Sie nicht Wort für Wort: Sagen Sie das Wichtige mit einfachen Sätzen. [fr] Lisez les conditions de retour en français. Expliquez ensuite en allemand à Mme Becker ce qu’elle doit faire. Ne traduisez pas mot à mot : dites l’essentiel avec des phrases simples.\n\nNACHRICHTEN VON FRAU BECKER\nFrau Becker (9:14): Guten Morgen! Die Schuhe aus dem französischen Shop sind leider zu klein.\nFrau Becker (9:15): Wissen Sie, wie ich sie zurückschicken kann? Ich verstehe die Seite nicht, alles ist auf Französisch.\nFrau Becker (9:16): Und bekomme ich mein Geld dann bar zurück?\nIch (9:20): Ich schaue mir das gleich an und erkläre es Ihnen!\n\nRETOURS ET REMBOURSEMENTS\nVous disposez de 30 jours à compter de la réception de votre colis pour nous retourner un article.\n1. Connectez-vous à votre compte client et cliquez sur « Retourner un article ».\n2. Imprimez l’étiquette de retour : elle est gratuite pour la France et l’Allemagne.\n3. Remettez l’article dans son emballage d’origine, avec toutes ses étiquettes.\n4. Déposez le colis dans un point relais ou un bureau de poste.\nLe remboursement est effectué sous 14 jours après réception de votre retour, sur le moyen de paiement utilisé lors de la commande. Les articles soldés ne sont ni repris ni échangés.\n\nSTRATEGIE\n[fr] Stratégie\nNotieren Sie zuerst die Zahlen und die Schritte. Fragen Sie sich dann: Was will Frau Becker wissen? [fr] Notez d’abord les chiffres et les étapes. Demandez-vous ensuite : que veut savoir Mme Becker ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-konsum-atelier-mediation-nachricht",
+          "caption": "Nachrichten von Frau Becker",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Notieren Sie die wichtigsten Informationen auf Deutsch. [fr] Notez les informations essentielles en allemand.",
+          "text": "Rückgabe: innerhalb von [[1]] Tagen nach Erhalt des Pakets · Rücksendeetikett: [[2]] · Geld zurück: innerhalb von [[3]] Tagen · reduzierte Artikel: kein Umtausch und keine [[4]]",
+          "explanation": "« 30 jours à compter de la réception » : innerhalb von 30 Tagen nach Erhalt. « gratuite » : kostenlos ou gratis. « sous 14 jours » : innerhalb von 14 Tagen. « ni repris ni échangés » : kein Umtausch und keine Rückgabe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "30",
+                "dreißig"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kostenlos",
+                "gratis",
+                "kostenfrei",
+                "umsonst"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "14",
+                "vierzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Rückgabe",
+                "Rücknahme",
+                "Erstattung",
+                "Rückerstattung"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bringen Sie die Schritte für Frau Becker in die Reihenfolge der Anleitung. [fr] Remettez les étapes dans l’ordre du document pour Mme Becker.",
+          "answers": [
+            [
+              "im Kundenkonto auf „Artikel zurückschicken“ klicken",
+              "das Rücksendeetikett ausdrucken",
+              "die Schuhe in die Originalverpackung legen",
+              "das Paket in einem Paketshop oder bei der Post abgeben"
+            ]
+          ],
+          "explanation": "L’ordre suit les étapes 1 à 4 du document : se connecter et cliquer, imprimer l’étiquette, remettre les chaussures dans leur emballage d’origine, déposer le colis. « point relais » se dit Paketshop en Allemagne."
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Frau Becker hat die Schuhe vor 25 Tagen bekommen. Was sagen Sie ihr? [fr] Mme Becker a reçu les chaussures il y a 25 jours. Que lui dites-vous ?",
+          "explanation": "Le délai de 30 jours court à partir de la réception du colis : 30 − 25 = 5 jours. Elle n’est pas en retard, mais elle doit se dépêcher.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sind leider zu spät.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie haben noch fünf Tage Zeit.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie haben noch dreißig Tage Zeit.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Frau Becker fragt: „Bekomme ich mein Geld bar zurück?“ Was antworten Sie? [fr] Mme Becker demande si elle sera remboursée en espèces. Que répondez-vous ?",
+          "explanation": "« sur le moyen de paiement utilisé lors de la commande » : le remboursement revient sur la carte ou le compte utilisés pour payer. Il n’est question ni d’espèces ni de bon d’achat.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, im Paketshop bekommen Sie das Geld sofort bar zurück.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, Sie bekommen nach 14 Tagen einen Gutschein per Post.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Nein, das Geld kommt auf die Karte, mit der Sie bezahlt haben.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Erklärung für Frau Becker. [fr] Complétez votre explication pour Mme Becker.",
+          "text": "Sie müssen das Rücksendeetikett nicht [[1]]. Das Geld [[2]] Ihnen innerhalb von 14 Tagen [[3]] (erstatten).",
+          "explanation": "L’étiquette est gratuite : elle n’a pas à la payer. Puis un passif, comme dans les conditions de retour : « Das Geld wird Ihnen … erstattet » (werden + participe II à la fin).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bezahlen",
+                "zahlen",
+                "kaufen"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wird"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "erstattet",
+                "zurückerstattet"
+              ],
+              "size": 16,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Erklären Sie den letzten Satz der Bedingungen einfach auf Deutsch: Bilden Sie den Satz. [fr] Expliquez simplement en allemand la dernière phrase des conditions (« Les articles soldés ne sont ni repris ni échangés ») : remettez la phrase dans l’ordre.",
+          "answers": [
+            [
+              "Reduzierte Artikel",
+              "können",
+              "nicht",
+              "zurückgegeben",
+              "oder",
+              "umgetauscht",
+              "werden."
+            ],
+            [
+              "Reduzierte Artikel",
+              "können",
+              "nicht",
+              "umgetauscht",
+              "oder",
+              "zurückgegeben",
+              "werden."
+            ]
+          ],
+          "explanation": "Passif avec verbe de modalité : können en 2e position, puis les deux participes reliés par oder et werden à la fin. Les deux participes peuvent s’échanger."
+        }
+      ]
+    },
+    {
+      "id": "b1-konsum-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : erreurs typiques des francophones",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : erreurs typiques des francophones",
+        "description": "Diese Fehler machen viele Französischsprachige in Reklamationen. Finden Sie die richtige Form. [fr] Beaucoup de francophones font ces erreurs dans leurs réclamations. Trouvez la forme correcte.\nAchten Sie auf lassen, werden, bekommen und auf die Zeitangaben. [fr] Faites attention à lassen, werden, bekommen et aux indications de temps.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Ein Mechaniker hat Ihr Fahrrad repariert. Welcher Satz ist richtig? [fr] Un mécanicien a réparé votre vélo. Quelle phrase est correcte ?",
+          "explanation": "« Faire réparer » : reparieren lassen, avec lassen à l’infinitif à la fin, même au parfait. Le calque « reparieren machen » n’existe pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe mein Fahrrad reparieren gemacht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe mein Fahrrad reparieren lassen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich habe mein Fahrrad gelassen reparieren.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Satz bedeutet: Morgen bringt jemand das Paket? [fr] Quelle phrase veut dire : demain, quelqu’un apporte le colis ?",
+          "explanation": "L’action (la livraison) se dit au passif avec werden : « wird geliefert ». « ist geliefert » décrit un résultat ; « hat geliefert » ferait du colis celui qui livre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Paket ist morgen geliefert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das Paket hat morgen geliefert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das Paket wird morgen geliefert.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie bekommen oder werden in der richtigen Form. [fr] Complétez avec bekommen ou werden à la bonne forme.",
+          "text": "Ich [[1]] mein Geld in zwei Wochen zurück. Hoffentlich [[2]] das Gerät bald repariert.",
+          "explanation": "Faux ami : bekommen veut dire « recevoir », pas « devenir ». Je reçois mon argent : ich bekomme. Pour le passif (l’appareil est réparé), on emploie werden : wird repariert.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bekomme"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wird"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Wort „Kunde“ in der richtigen Form. [fr] Complétez avec le mot « Kunde » à la bonne forme.",
+          "text": "Der Verkäufer hat den [[1]] sofort zurückgerufen. Wir danken jedem [[2]] für seine Geduld.",
+          "explanation": "Der Kunde suit la n-Deklination : il prend -n à tous les cas sauf au nominatif singulier (den Kunden à l’accusatif, jedem Kunden au datif). Comme der Kollege, der Nachbar.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Kunden"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Kunden"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie beginnen Sie eine formelle Reklamation? [fr] Comment commencez-vous une réclamation formelle ?",
+          "explanation": "Quand on ne connaît pas le nom du destinataire, la formule formelle est « Sehr geehrte Damen und Herren, ». « Hallo … » est trop familier pour une réclamation formelle, et « geehrter » est faux : devant « Damen und Herren » (pluriel, sans article), l’adjectif prend -e.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo liebes Kundenservice-Team,",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sehr geehrte Damen und Herren,",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sehr geehrter Damen und Herren,",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie haben die Lampe am 1. März bestellt. Heute ist der 15. März. Welcher Satz ist richtig? [fr] Vous avez commandé la lampe le 1er mars. Nous sommes le 15. Quelle phrase est correcte ?",
+          "explanation": "« Il y a deux semaines » (un moment du passé) : vor + datif. Seit marque une durée qui continue (Ich warte seit zwei Wochen), et für une durée prévue (für zwei Wochen mieten).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe die Lampe vor zwei Wochen bestellt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich habe die Lampe seit zwei Wochen bestellt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe die Lampe für zwei Wochen bestellt.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-konsum-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : Lesen, avis de lecteurs",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : Lesen, avis de lecteurs",
+        "description": "PRÜFUNGSTRAINING: LESEN\n[fr] Entraînement à l’examen : compréhension écrite\nSie lesen in einer Zeitung Kommentare zu der Frage: Sollen Rücksendungen im Onlinehandel kostenlos bleiben? Ist die Person dafür oder dagegen, oder hat sie keine klare Meinung? [fr] Vous lisez dans un journal des commentaires sur la question : les retours dans le commerce en ligne doivent-ils rester gratuits ? La personne est-elle pour, contre, ou n’a-t-elle pas d’avis tranché ?\nZeit: 15 Minuten. [fr] Durée : 15 minutes.\n\nSTRATEGIE\n[fr] Stratégie\n1. Lesen Sie zuerst die Frage genau: Wofür oder wogegen ist man hier? [fr] Lisez d’abord précisément la question : pour ou contre quoi est-on ?\n2. Die Meinung steht oft am Ende des Kommentars. Achten Sie auf Wörter wie sollte, ein Muss, fair, unsicher. [fr] L’avis est souvent à la fin du commentaire. Repérez des mots comme sollte, ein Muss, fair, unsicher.\n3. Vorsicht: Wer Argumente beider Seiten nennt und sich nicht entscheidet, hat keine klare Meinung. [fr] Attention : qui cite les arguments des deux camps sans trancher n’a pas d’avis tranché.\n\nLESERFORUM: SOLLEN RÜCKSENDUNGEN KOSTENLOS BLEIBEN?\nViele Onlineshops nehmen Waren kostenlos zurück. Einige Händler wollen dafür jetzt Geld verlangen. Wir haben unsere Leserinnen und Leser gefragt.\n\nAnna, 34: „Ich bestelle oft Kleidung online, weil ich nur abends Zeit habe. Dann sind die Geschäfte schon zu. Wenn ich für jede Rücksendung bezahlen müsste, würde ich viel weniger bestellen. Für mich sind kostenlose Rücksendungen ein Muss.“\n\nHerr Kowalski, 58: „Viele Leute bestellen eine Hose in drei Größen und schicken zwei zurück. Diese Pakete fahren quer durch das ganze Land. Das ist schlecht für die Umwelt und am Ende teuer für alle. Wer etwas zurückschickt, sollte dafür bezahlen.“\n\nLea, 22: „Ehrlich gesagt habe ich darüber noch nie nachgedacht. Ich kaufe fast alles im Laden bei mir um die Ecke und schicke so gut wie nie etwas zurück. Das Thema betrifft mich also kaum.“\n\nMurat, 41: „Ich habe selbst einen kleinen Onlineshop. Jede Rücksendung muss ausgepackt, geprüft und neu verpackt werden. Manchmal kann man die Ware gar nicht mehr verkaufen. Gratis ist das nur für die Kunden, nicht für uns. Eine kleine Gebühr wäre fair.“\n\nFrau Neumann, 67: „Ich gehe nicht mehr gern in die Stadt, weil mir das Laufen schwerfällt. Deshalb bin ich froh, dass ich Schuhe zu Hause anprobieren und ohne Kosten zurückschicken kann. Das soll bitte so bleiben!“\n\nJonas, 29: „Einerseits verstehe ich die Kundinnen und Kunden, andererseits auch die Händler. Vielleicht gibt es eine Lösung, die für beide gut ist, aber welche? Da bin ich wirklich unsicher.“",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Anna: Ist sie für kostenlose Rücksendungen? [fr] Anna est-elle pour les retours gratuits ?",
+          "explanation": "Anna conclut : « Für mich sind kostenlose Rücksendungen ein Muss » (indispensables). Elle explique aussi qu’elle commanderait moins si elle devait payer.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Herr Kowalski: Ist er für kostenlose Rücksendungen? [fr] M. Kowalski est-il pour les retours gratuits ?",
+          "explanation": "« Wer etwas zurückschickt, sollte dafür bezahlen » : il veut des retours payants, à cause de l’environnement et des coûts. Il est donc contre la gratuité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Lea: Ist sie für kostenlose Rücksendungen? [fr] Lea est-elle pour les retours gratuits ?",
+          "explanation": "Lea n’y a « jamais réfléchi » et achète en magasin : « Das Thema betrifft mich also kaum. » Elle ne donne aucun avis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Murat: Ist er für kostenlose Rücksendungen? [fr] Murat est-il pour les retours gratuits ?",
+          "explanation": "Murat, commerçant, décrit le coût des retours et conclut : « Eine kleine Gebühr wäre fair. » Une petite taxe, donc contre la gratuité. « Gratis ist das nur für die Kunden » n’est pas un avis favorable : c’est une critique.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Frau Neumann: Ist sie für kostenlose Rücksendungen? [fr] Mme Neumann est-elle pour les retours gratuits ?",
+          "explanation": "« Deshalb bin ich froh, dass ich … ohne Kosten zurückschicken kann. Das soll bitte so bleiben! » Elle veut que la gratuité continue.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Jonas: Ist er für kostenlose Rücksendungen? [fr] Jonas est-il pour les retours gratuits ?",
+          "explanation": "« Einerseits …, andererseits … » présente les deux côtés, puis « Da bin ich wirklich unsicher » : il ne tranche pas. Piège classique : citer un argument n’est pas prendre position.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ja, dafür",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "nein, dagegen",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "keine klare Meinung",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-konsum-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : écrire une réclamation",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : écrire une réclamation",
+        "description": "SITUATION\n[fr] Situation\nSie haben am 2. Mai im Onlineshop „Küche & Co.“ eine Kaffeemaschine für 89 Euro bestellt (Bestellnummer 20573). Sie wurde am 6. Mai geliefert. [fr] Le 2 mai, vous avez commandé une machine à café à 89 euros sur la boutique en ligne « Küche & Co. » (commande n° 20573). Elle a été livrée le 6 mai.\n• Die Glaskanne war zerbrochen. [fr] La verseuse en verre était cassée.\n• Die Bedienungsanleitung fehlt. [fr] Le mode d’emploi manque.\nAm 7. Mai haben Sie beim Kundenservice angerufen. Man hat Ihnen einen Rückruf versprochen, aber niemand hat sich gemeldet. [fr] Le 7 mai, vous avez appelé le service client. On vous a promis de vous rappeler, mais personne ne s’est manifesté.\n\nAUFGABE\n[fr] Consigne\nSchreiben Sie eine Reklamation an den Kundenservice (120 bis 150 Wörter). [fr] Écrivez une réclamation au service client (120 à 150 mots).\n• Nennen Sie Kauf, Datum und Bestellnummer. [fr] Indiquez l’achat, la date et le numéro de commande.\n• Beschreiben Sie die Mängel genau. [fr] Décrivez précisément les défauts.\n• Erwähnen Sie Ihren Anruf. [fr] Mentionnez votre appel.\n• Sagen Sie, welche Lösung Sie möchten, nennen Sie eine Alternative und setzen Sie eine Frist. [fr] Dites quelle solution vous souhaitez, proposez une alternative et fixez un délai.\nDenken Sie an Betreff, Anrede und Gruß. [fr] Pensez à l’objet, à la formule d’appel et à la formule finale.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine Reklamation (120–150 Wörter): Kauf, Datum und Bestellnummer, die zwei Mängel, Ihr Anruf, die gewünschte Lösung mit Alternative und eine Frist. Betreff, Anrede und Gruß sind formell. [fr] Écrivez une réclamation de 120 à 150 mots : achat, date et numéro de commande, les deux défauts, votre appel, la solution souhaitée avec une alternative et un délai. Objet, formule d’appel et salutation formels.",
+          "maxChars": 1500,
+          "minWords": 120
+        },
+        "checklist": [
+          "Betreff, Anrede und Gruß sind formell (Sie). [fr] L’objet, l’appel et la salutation sont formels.",
+          "Kauf, Datum und Bestellnummer stehen am Anfang. [fr] L’achat, la date et le numéro sont au début.",
+          "Ich beschreibe beide Mängel genau. [fr] Je décris précisément les deux défauts.",
+          "Ich erwähne meinen Anruf vom 7. Mai. [fr] Je mentionne mon appel du 7 mai.",
+          "Ich fordere eine Lösung, nenne eine Alternative und setze eine Frist. [fr] Je demande une solution, une alternative et un délai."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : achat identifié, deux défauts décrits, appel mentionné, solution, alternative et délai ; registre formel (Sie)",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-konsum-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : négocier une solution au téléphone",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : négocier une solution au téléphone",
+        "description": "SITUATION\n[fr] Situation\nNach Ihrer Reklamation ruft Frau Roth vom Kundenservice an. Sie bietet Ihnen drei Lösungen an. Hören Sie das Gespräch; Sie können es mehrmals hören und die Transkription lesen. [fr] Après votre réclamation, Mme Roth, du service client, vous appelle. Elle vous propose trois solutions. Écoutez ; vous pouvez réécouter et lire la transcription.\n\nAUFGABE\n[fr] Consigne\nAntworten Sie Frau Roth (etwa 2 Minuten). [fr] Répondez à Mme Roth (environ 2 minutes).\n• Bedanken Sie sich und reagieren Sie auf jedes Angebot. [fr] Remerciez et réagissez à chaque offre.\n• Wählen Sie eine Lösung oder schlagen Sie einen Kompromiss vor, und begründen Sie Ihre Wahl. [fr] Choisissez une solution ou proposez un compromis, et justifiez votre choix.\n• Fragen Sie nach einem Detail: Wann? Wie? Was kostet das? [fr] Demandez une précision : quand ? comment ? combien ?\n• Bitten Sie um eine schriftliche Bestätigung. [fr] Demandez une confirmation écrite.\n\nREDEMITTEL\n[fr] Formules utiles\n• Vielen Dank für Ihren Anruf. — Merci pour votre appel.\n• Die erste Lösung wäre gut, aber zehn Tage sind ziemlich lang. — La première solution serait bien, mais dix jours, c’est long.\n• Ich hätte lieber … / Wäre es möglich, dass …? — Je préférerais… / Serait-il possible que…?\n• Ich schlage einen Kompromiss vor: … — Je propose un compromis : …\n• Könnten Sie mir das bitte schriftlich bestätigen? — Pourriez-vous me le confirmer par écrit ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-konsum-atelier-sprechen-roth",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Antworten Sie Frau Roth (etwa 2 Minuten): Reagieren Sie auf die drei Angebote, wählen Sie eine Lösung oder schlagen Sie einen Kompromiss vor, fragen Sie nach einem Detail und bitten Sie um eine schriftliche Bestätigung. [fr] Répondez à Mme Roth en 2 minutes environ : réagissez aux trois offres, choisissez une solution ou proposez un compromis, demandez une précision et une confirmation écrite.",
+          "maxSeconds": 120
+        },
+        "written": null,
+        "checklist": [
+          "Ich bedanke mich und reagiere auf jedes Angebot. [fr] Je remercie et je réagis à chaque offre.",
+          "Ich wähle eine Lösung oder einen Kompromiss und begründe meine Wahl. [fr] Je choisis une solution ou un compromis et je justifie.",
+          "Ich frage nach einem Detail (wann, wie, Kosten). [fr] Je demande une précision (quand, comment, coût).",
+          "Ich bitte um eine schriftliche Bestätigung. [fr] Je demande une confirmation écrite.",
+          "Ich bleibe höflich: Könnten Sie …? Ich hätte lieber … [fr] Je reste poli : Könnten Sie…? Ich hätte lieber…"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : réaction aux trois offres, choix ou compromis justifié, question de détail, confirmation écrite demandée, en 2 minutes",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-konsum-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : Konsum",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : Konsum",
+        "description": "ICH KANN JETZT …\n[fr] Maintenant, je peux…\n• Rückgabe- und Garantiebedingungen verstehen. [fr] comprendre des conditions de retour et de garantie.\n• einen Defekt genau beschreiben und eine Lösung verlangen. [fr] décrire précisément un défaut et demander une solution.\n• eine formelle Reklamation mit Frist schreiben. [fr] écrire une réclamation formelle avec un délai.\n• am Telefon höflich verhandeln und eine Bestätigung verlangen. [fr] négocier poliment au téléphone et demander une confirmation.\n• französische Informationen auf Deutsch einfach erklären. [fr] expliquer simplement en allemand des informations lues en français.\n\nSTRATÉGIES À GARDER\n• Réclamation : les faits (date, numéro, défaut, preuve), puis une demande, une solution de repli et un délai.\n• Passif : dans une réponse officielle, cherchez qui agit (von uns, vom Kundenservice) et ce que vous devez faire vous-même.\n• Médiation : notez d’abord les chiffres et les étapes, puis répondez à la question précise de la personne.\n• Lesen : l’avis est souvent à la fin ; « einerseits … andererseits » sans conclusion signale l’absence d’avis tranché.\n\nÀ REVOIR SI BESOIN\n• Le passif et lassen : « À retenir » et « S’entraîner » du module Konsum.\n• Les formules de la réclamation : le modèle de cet atelier, rubriques EINLEITEN à SCHLUSS.\n• Le vocabulaire (Reklamation, Umtausch, Rückerstattung, Kassenbon…) : lexique des deux modules, avec le son.\n• Les missions : relisez le commentaire de votre correcteur et reprenez le point « À retravailler ».",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-konsum-atelier-modell-audio",
+      "kind": "audio",
+      "title": "La réclamation de Nadia Haddad lue à voix haute",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Nadia Haddad",
+          "text": "Sehr geehrte Damen und Herren, am vierzehnten März habe ich in Ihrem Onlineshop eine Stehlampe für neunundsiebzig Euro bestellt, Bestellnummer sieben eins sechs zwei. Die Lampe wurde am achtzehnten März geliefert."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Nadia Haddad",
+          "text": "Leider muss ich Ihnen mitteilen, dass es zwei Probleme gibt: Der Lampenschirm hat einen Riss, und das Stromkabel fehlt. Ein Foto des Schadens finden Sie im Anhang."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Nadia Haddad",
+          "text": "Am neunzehnten März habe ich bei Ihrem Kundenservice angerufen. Man hat mir eine Antwort innerhalb von zwei Tagen versprochen, aber bis heute habe ich nichts gehört."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Nadia Haddad",
+          "text": "Ich möchte die Lampe gern behalten. Deshalb bitte ich Sie, mir einen neuen Lampenschirm und das fehlende Kabel zu schicken. Falls das nicht möglich ist, möchte ich die Lampe zurückgeben und den Kaufpreis zurückbekommen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Nadia Haddad",
+          "text": "Ich bitte Sie um eine Antwort bis zum dreißigsten März. Mit freundlichen Grüßen, Nadia Haddad."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-s1",
+      "kind": "audio",
+      "title": "Situation 1 : au magasin",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Verkäuferin",
+          "text": "Haben Sie den Kassenbon noch?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-s2",
+      "kind": "audio",
+      "title": "Situation 2 : au téléphone avec le service",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Servicemitarbeiter",
+          "text": "Das Gerät kann leider erst in drei Wochen repariert werden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-s3",
+      "kind": "audio",
+      "title": "Situation 3 : une proposition de bon d’achat",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Mitarbeiterin",
+          "text": "Wir können Ihnen einen Gutschein über zwanzig Euro anbieten."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-s4",
+      "kind": "audio",
+      "title": "Situation 4 : réparer ou remplacer",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Verkäufer",
+          "text": "Möchten Sie das Gerät reparieren lassen oder lieber ein neues?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-mediation-nachricht",
+      "kind": "image",
+      "title": "Les messages de Mme Becker",
+      "alt": "Messages de la voisine, Mme Becker : les chaussures commandées sur un site français sont trop petites ; elle ne comprend pas la page de retour et demande si elle sera remboursée en espèces.",
+      "image": {
+        "layout": "messages",
+        "icon": "smartphone",
+        "title": "Frau Becker (Nachbarin)",
+        "messages": [
+          {
+            "from": "Frau Becker",
+            "time": "9:14",
+            "text": "Guten Morgen! Die Schuhe aus dem französischen Shop sind leider zu klein."
+          },
+          {
+            "from": "Frau Becker",
+            "time": "9:15",
+            "text": "Wissen Sie, wie ich sie zurückschicken kann? Ich verstehe die Seite nicht, alles ist auf Französisch."
+          },
+          {
+            "from": "Frau Becker",
+            "time": "9:16",
+            "text": "Und bekomme ich mein Geld dann bar zurück?"
+          },
+          {
+            "from": "Ich",
+            "time": "9:20",
+            "side": "right",
+            "text": "Ich schaue mir das gleich an und erkläre es Ihnen!"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-konsum-atelier-sprechen-roth",
+      "kind": "audio",
+      "title": "Le service client propose trois solutions",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Frau Roth",
+          "text": "Kundenservice Küche und Co., mein Name ist Roth. Ich habe Ihre Reklamation zur Kaffeemaschine gelesen, das tut mir sehr leid. Ich kann Ihnen drei Lösungen anbieten."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Roth",
+          "text": "Erstens: Wir schicken Ihnen eine neue Glaskanne und die Bedienungsanleitung. Das dauert etwa zehn Tage."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Roth",
+          "text": "Zweitens: Sie schicken die ganze Maschine zurück und bekommen eine neue. Das Modell ist aber gerade nicht lieferbar, es kommt erst in drei Wochen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Roth",
+          "text": "Drittens: Sie behalten die Maschine, und wir erstatten Ihnen zwanzig Prozent des Kaufpreises. Eine neue Kanne müssten Sie dann allerdings selbst kaufen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Roth",
+          "text": "Was ist Ihnen am liebsten? Oder haben Sie vielleicht noch einen anderen Vorschlag?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : au magasin et au téléphone",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich hätte lieber mein Geld zurück."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : au magasin et au téléphone",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Könnten Sie mir das bitte schriftlich bestätigen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : au magasin et au téléphone",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie lange dauert die Reparatur ungefähr?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-konsum-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Konsum, atelier : écrire une réclamation efficace",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Sehr geehrte Damen und Herren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mit freundlichen Grüßen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Betreff, die Betreffe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Anhang, die Anhänge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mitteilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Schaden, die Schäden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beschädigt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "fehlen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "bitten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Frist, die Fristen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lösung, die Lösungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Kompromiss, die Kompromisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bedingung, die Bedingungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "schriftlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich hätte lieber mein Geld zurück."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vielen Dank im Voraus"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

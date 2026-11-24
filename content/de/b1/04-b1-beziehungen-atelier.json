@@ -1,0 +1,1567 @@
+{
+  "id": "b1-beziehungen-atelier",
+  "title": "Atelier Beziehungen : conseiller une amie, régler un malentendu",
+  "objective": "Donner des conseils par écrit à une amie, s’excuser et proposer une solution à l’oral, réagir avec naturel (doch, mal, ja) et transmettre en allemand un message reçu en français.",
+  "prerequisites": [
+    "b1-beziehungen"
+  ],
+  "audioProfile": "b1-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Thème nouveau du parcours B1 (sans reprise du brouillon B1 V1)."
+  ],
+  "grammarFocus": [
+    "verben-mit-praepositionen",
+    "da-wo-pronominaladverb"
+  ],
+  "layer": "content/b/source/b1/b1-beziehungen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "du-solltest",
+      "word": "Du solltest …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Tu devrais …",
+      "example": "Du solltest offen mit ihr reden.",
+      "note": "conseil ; infinitif à la fin",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "an-deiner-stelle-wuerde-ich",
+      "word": "An deiner Stelle würde ich …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À ta place, je …",
+      "example": "An deiner Stelle würde ich sie anrufen.",
+      "note": "infinitif à la fin",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "wie-waere-es-wenn",
+      "word": "Wie wäre es, wenn …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Et si … ?",
+      "example": "Wie wäre es, wenn ihr zusammen etwas unternehmt?",
+      "note": "proposition ; verbe à la fin après wenn",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "das-kann-ich-gut-nachvollziehen",
+      "word": "Das kann ich gut nachvollziehen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je comprends tout à fait.",
+      "example": "Du bist enttäuscht? Das kann ich gut nachvollziehen.",
+      "note": "nachvollziehen : séparable, nach|vollziehen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "einen-rat-geben",
+      "word": "einen Rat geben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "donner un conseil",
+      "example": "Kannst du mir einen Rat geben?",
+      "note": "jemandem (datif) einen Rat geben",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "sich-zeit-nehmen",
+      "word": "sich Zeit nehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "prendre le temps",
+      "example": "Nimm dir Zeit für ein ruhiges Gespräch.",
+      "note": "pronom au datif (mir, dir) ; für + accusatif",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "vorwuerfe-machen",
+      "word": "Vorwürfe machen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "faire des reproches",
+      "example": "Mach ihr keine Vorwürfe, sprich lieber über deine Gefühle.",
+      "note": "jemandem (datif) Vorwürfe machen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "es-tut-mir-leid-dass",
+      "word": "Es tut mir leid, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je suis désolé(e) que …",
+      "example": "Es tut mir leid, dass ich nicht gekommen bin.",
+      "note": "verbe à la fin après dass",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "das-war-nicht-so-gemeint",
+      "word": "Das war nicht so gemeint.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ce n’était pas mon intention.",
+      "example": "Entschuldige, das war nicht so gemeint.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "vorschlagen",
+      "word": "vorschlagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "proposer",
+      "example": "Ich schlage vor, dass wir uns am Samstag treffen.",
+      "note": "séparable : vor|schlagen · schlug vor, hat vorgeschlagen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "vorschlag",
+      "word": "Vorschlag",
+      "article": "der",
+      "plural": "Vorschläge",
+      "partOfSpeech": "noun",
+      "translation": "la proposition",
+      "example": "Darf ich einen Vorschlag machen?",
+      "note": "einen Vorschlag machen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "wiedergutmachen",
+      "word": "wiedergutmachen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "réparer (une faute)",
+      "example": "Wie kann ich das wiedergutmachen?",
+      "note": "séparable : wieder|gut|machen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "verzeihen",
+      "word": "verzeihen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "pardonner",
+      "example": "Kannst du mir noch einmal verzeihen?",
+      "note": "+ datif · verzieh, hat verziehen",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "doch",
+      "word": "doch",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "other",
+      "translation": "donc, voyons (particule : invitation, rappel)",
+      "example": "Komm doch mit ins Kino!",
+      "note": "particule modale : rend une invitation plus engageante",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "mal",
+      "word": "mal",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "other",
+      "translation": "un peu, donc (particule : demande adoucie)",
+      "example": "Ruf mich mal an, wenn du Zeit hast.",
+      "note": "particule modale : rend une demande plus légère",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "das-ist-ja-toll",
+      "word": "Das ist ja toll!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "C’est vraiment génial !",
+      "example": "Du hast die Prüfung bestanden? Das ist ja toll!",
+      "note": "ja, particule modale : étonnement ou évidence partagée",
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "kopf-hoch",
+      "word": "Kopf hoch!",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Courage ! Ne te laisse pas abattre !",
+      "example": "Kopf hoch, das wird schon wieder!",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-beziehungen-atelier-modell",
+      "kind": "lesson",
+      "title": "Découvrir : une réponse pleine de conseils",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Découvrir : une réponse pleine de conseils",
+        "description": "Leonie hat ihrer Freundin Hanna von ihrem Problem mit Jana erzählt. Lesen Sie Hannas Antwort. Hören Sie danach Felix: Er entschuldigt sich bei Lisa. Beide Texte sind Modelle für Ihre Missionen. [fr] Leonie a parlé à son amie Hanna de son problème avec Jana. Lisez la réponse de Hanna. Écoutez ensuite Felix, qui s’excuse auprès de Lisa. Ces deux textes sont des modèles pour vos missions.\n\nHANNAS ANTWORT\nLiebe Leonie,\ndanke für deine Nachricht. Es tut mir so leid, dass es dir gerade nicht gut geht. Das kann ich gut verstehen: Wenn die beste Freundin plötzlich keine Zeit mehr hat, ist man natürlich enttäuscht.\nAn deiner Stelle würde ich nicht mehr lange warten. Du solltest mit Jana sprechen, am besten persönlich und nicht per Nachricht. Erzähl ihr ehrlich, wie du dich fühlst, aber mach ihr keine Vorwürfe. Wie wäre es, wenn ihr euch einmal im Monat einen festen Abend nur für euch nehmt? So hat sie Zeit für ihren Freund und für dich.\nIch bin sicher, dass eure Freundschaft das schafft. Kopf hoch, und melde dich, wenn du reden willst!\nLiebe Grüße\nHanna\n\nAUFBAU\n[fr] Structure de la réponse\n• Anrede : « Liebe Leonie, » ; après la virgule, la ligne suivante commence par une minuscule (danke …).\n• Verständnis zeigen : remercier pour le message et montrer qu’on comprend (Das kann ich gut verstehen).\n• Ratschläge mit Grund : deux ou trois conseils, chacun avec une raison ou un exemple (So hat sie Zeit für …).\n• Mut machen : encourager (Ich bin sicher, dass …, Kopf hoch!).\n• Gruß : « Liebe Grüße » et le prénom.\n\nREDEMITTEL\n[fr] Formules par fonction\nEINLEITEN\n[fr] Commencer\n• Danke für deine Nachricht. / Schön, dass du mir geschrieben hast.\nVERSTÄNDNIS ZEIGEN\n[fr] Montrer de la compréhension\n• Das kann ich gut verstehen. / Das kann ich gut nachvollziehen. / Das tut mir leid für dich.\nRAT GEBEN\n[fr] Conseiller\n• Du solltest … / An deiner Stelle würde ich … / Wie wäre es, wenn …? / Hast du schon mal versucht, … zu …?\nBEGRÜNDEN\n[fr] Justifier\n• So kann sie … / Dann weiß sie, … / Das hat mir auch geholfen, als …\nSCHLUSS\n[fr] Conclure\n• Ich bin sicher, dass … / Kopf hoch! / Melde dich, wenn … / Liebe Grüße\n\nFELIX ENTSCHULDIGT SICH\n[fr] Felix s’excuse\nHören Sie Felix. Seine Nachricht hat vier Teile: Entschuldigung, Erklärung, Verständnis, Lösung. [fr] Écoutez Felix. Son message a quatre parties : excuse, explication, compréhension, solution.\n• Entschuldigung : Es tut mir wirklich leid, dass ich gestern nicht … gekommen bin.\n• Erklärung : Ehrlich gesagt habe ich den Termin vergessen, weil …\n• Verständnis : Ich kann gut verstehen, dass du sauer bist.\n• Lösung : Wie wäre es, wenn ich am Samstag vorbeikomme und dir … helfe?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-atelier-modell-aufbau",
+          "caption": "Aufbau der Antwort",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-beziehungen-atelier-interaktion",
+      "kind": "exercise",
+      "title": "S’entraîner : réagir avec doch, mal et ja",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "S’entraîner : réagir avec doch, mal et ja",
+        "description": "Hören Sie, was Ihre Freunde sagen, und wählen Sie die passende Reaktion. Danach sprechen Sie drei Reaktionen nach. [fr] Écoutez ce que disent vos amis et choisissez la réplique qui convient. Ensuite, répétez trois réactions à voix haute.\n\nTIPP\n[fr] Astuce\nKleine Wörter wie doch, mal und ja machen Ihre Sätze freundlicher und natürlicher. [fr] De petits mots comme doch, mal et ja rendent vos phrases plus aimables et plus naturelles.\n• doch : rend une proposition plus engageante. Komm doch mit!\n• mal : adoucit une demande. Ruf mich mal an!\n• ja : exprime l’étonnement ou une évidence partagée. Das ist ja toll!",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie möchten Sophie freundlich einladen. Was passt? [fr] Écoutez. Vous voulez inviter Sophie aimablement. Quelle réplique convient ?",
+          "explanation": "« Komm doch mit! » : doch rend l’invitation chaleureuse et insistante. « Bleib halt zu Hause » sonne indifférent, et la troisième réplique ne l’invite pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dann komm doch mit ins Kino! Das wird bestimmt lustig.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Dann bleib halt zu Hause und schau einen Film.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich gehe heute Abend allein ins Kino, das ist entspannter.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie sind überrascht und freuen sich mit Erik. Was passt? [fr] Écoutez. Vous êtes surpris et heureux pour Erik. Quelle réplique convient ?",
+          "explanation": "ja exprime ici l’étonnement admiratif : « Das ist ja super! ». « Na und? » minimise l’exploit, et « Schade » montre qu’on a compris le contraire : Erik a réussi.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Na und? Das schaffe ich auch.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das ist ja super! Herzlichen Glückwunsch!",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Schade, vielleicht klappt es nächstes Mal.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie möchten Ines einen Rat geben. Was passt? [fr] Écoutez. Vous voulez donner un conseil à Ines. Quelle réplique convient ?",
+          "explanation": "« Ruf ihn doch mal an! » : doch et mal rendent le conseil amical, et l’explication possible rassure. La première réplique se réjouit d’un souci, la deuxième inquiète encore plus Ines.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist ja schön, dann hast du endlich Ruhe.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Mach dir keine Sorgen, er hat dich bestimmt vergessen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ruf ihn doch mal an! Vielleicht ist sein Handy kaputt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Hören Sie. Sie reagieren verständnisvoll und schlagen einen neuen Termin vor. Was passt? [fr] Écoutez. Vous réagissez avec compréhension et proposez une autre date. Quelle réplique convient ?",
+          "explanation": "« Kein Problem » rassure Max, et « Wie wäre es mit …? » propose une autre date. Les deux autres répliques sont des reproches : ja souligne ici l’agacement (« typisch für dich »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kein Problem. Wie wäre es mit nächster Woche?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das ist ja typisch für dich!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Gut, dann koche ich eben nie wieder für dich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Komm doch mit, das wird bestimmt lustig!",
+          "accept": [
+            "Komm doch mit, das wird bestimmt lustig!"
+          ],
+          "explanation": "Invitation chaleureuse avec doch. Accent sur « MIT » et sur « LUS-tig » ; doch reste léger, sans accent.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ruf ihn doch mal an, vielleicht ist sein Handy kaputt.",
+          "accept": [
+            "Ruf ihn doch mal an, vielleicht ist sein Handy kaputt."
+          ],
+          "explanation": "Conseil amical avec doch mal. Accent sur « AN » (verbe séparable anrufen) et sur « ka-PUTT ». Le h de « Handy » s’entend.",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Kein Problem. Wie wäre es mit nächster Woche?",
+          "accept": [
+            "Kein Problem. Wie wäre es mit nächster Woche?"
+          ],
+          "explanation": "Rassurer, puis proposer. « wäre » : ä long, comme dans « mère ». Intonation montante sur « Problem », descendante à la fin de la question.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-beziehungen-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : transmettre des excuses en allemand",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : transmettre des excuses en allemand",
+        "description": "Situation: Ihre französische Freundin Camille hat Ihnen eine Sprachnachricht auf Französisch geschickt. Ihr gemeinsamer Freund Lukas spricht kein Französisch. Geben Sie ihm die wichtigen Informationen auf Deutsch weiter. [fr] Situation : votre amie française Camille vous a envoyé un message vocal en français. Votre ami commun Lukas ne parle pas français. Transmettez-lui en allemand les informations importantes.\n\nSTRATEGIE\n[fr] Stratégie\nÜbersetzen Sie nicht Wort für Wort. Was muss Lukas wissen? Was ist passiert, was möchte Camille, wann und wo? [fr] Ne traduisez pas mot à mot. Que doit savoir Lukas ? Que s’est-il passé, que veut Camille, quand et où ?\n\nLE MESSAGE DE CAMILLE (TRANSCRIPTION)\n« Coucou, c’est Camille ! Dis, j’ai un petit souci avec Lukas et j’ai besoin de toi. Samedi, à la fête d’anniversaire de Paula, j’ai fait une blague sur son nouveau travail devant tout le monde. Je voulais juste être drôle, mais je crois qu’il l’a mal pris : il est parti sans me dire au revoir, et depuis, il ne répond plus à mes messages. Je suis vraiment désolée, je ne voulais pas le blesser. Est-ce que tu peux lui dire que je m’excuse ? J’aimerais l’inviter au restaurant jeudi soir, vers 19 h 30, pour en parler tranquillement. S’il préfère, on peut aussi simplement aller se promener au bord du lac. Merci, tu es un ange ! »",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie Ihre Nachricht an Lukas. [fr] Complétez votre message à Lukas.",
+          "text": "Hallo Lukas, Camille hat mir eine Nachricht geschickt. Sie möchte sich bei dir [[1]]. Am Samstag auf Paulas Party hat sie einen Witz über deine neue [[2]] gemacht. Sie wollte nur lustig sein und dich nicht [[3]]. Sie möchte dich am [[4]] um halb acht zum Essen einladen. Wenn dir das lieber ist, könnt ihr auch am See [[5]] gehen.",
+          "explanation": "« je m’excuse » : sich entschuldigen (bei dir). « son nouveau travail » : deine neue Arbeit ou Stelle (féminin ; Job, masculin, ne va pas avec « neue »). « blesser » au sens moral : verletzen ou kränken. Jeudi : Donnerstag. « se promener » : spazieren gehen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "entschuldigen"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Arbeit",
+                "Stelle",
+                "Arbeitsstelle"
+              ],
+              "size": 14,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "verletzen",
+                "kränken",
+                "beleidigen"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Donnerstag",
+                "Donnerstagabend"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "spazieren"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist für Lukas am wichtigsten? [fr] Qu’est-ce qui est le plus important pour Lukas ?",
+          "explanation": "Le cœur du message : Camille regrette sa plaisanterie et veut en parler avec Lukas. Ce n’est pas elle qui est fâchée, et la fête de Paula n’est que le cadre de l’incident.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Camille hat sich über ihn geärgert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Camille tut der Witz leid, und sie möchte mit ihm reden.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Camille möchte Paulas Geburtstag noch einmal feiern.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie geben Sie Camilles Bitte am besten weiter? [fr] Comment transmettez-vous le mieux la demande de Camille ?",
+          "explanation": "La troisième phrase restitue fidèlement l’excuse (« je suis vraiment désolée ») et l’intention (« je ne voulais pas le blesser »). Les deux autres ajoutent un reproche ou une décision que Camille n’a pas exprimés.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Camille sagt, dass du zu empfindlich bist und den Witz falsch verstanden hast.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Camille sagt, dass sie dir nicht mehr schreiben will.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Camille sagt, dass es ihr leidtut und dass sie dich nicht verletzen wollte.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Erklären Sie Lukas, warum Sie schreiben. Bilden Sie einen Satz. Beginnen Sie mit „Camille“. [fr] Expliquez à Lukas pourquoi vous écrivez. Remettez les mots dans l’ordre en commençant par « Camille ».",
+          "answers": [
+            [
+              "Camille",
+              "hat",
+              "mich",
+              "gebeten,",
+              "dir",
+              "zu",
+              "sagen,",
+              "dass",
+              "es",
+              "ihr",
+              "leidtut."
+            ]
+          ],
+          "explanation": "jemanden bitten, etwas zu tun : l’infinitif avec zu (dir zu sagen) suit la principale. Puis la subordonnée en dass : les pronoms es (sujet) et ihr (datif) viennent juste après dass, et le verbe leidtut, écrit en un mot, ferme la phrase."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr] Complétez avec les prépositions.",
+          "text": "Camille lädt dich [[1]] Donnerstag [[2]] Essen ein.",
+          "explanation": "Pour un jour de la semaine : am (an dem) Donnerstag. einladen zu + datif : zum (zu dem) Essen. Le verbe séparable einladen place sa particule ein à la fin.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "am"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "zum"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : prépositions et pronoms qui piègent",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : prépositions et pronoms qui piègent",
+        "description": "Diese Fehler machen viele Französischsprachige. Ergänzen Sie oder wählen Sie die richtige Form. [fr] Ces erreurs sont fréquentes chez les francophones. Complétez ou choisissez la bonne forme.\nLesen Sie danach jede Erklärung genau: Sie hilft Ihnen bei den Missionen. [fr] Lisez ensuite attentivement chaque explication : elle vous aidera pour les missions.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition: „J’attends mon ami.“ [fr] Complétez avec la préposition : « J’attends mon ami. »",
+          "text": "Ich warte [[1]] meinen Freund.",
+          "explanation": "En français, « attendre » se construit sans préposition ; en allemand, warten demande auf + accusatif : Ich warte auf meinen Freund. « Ich warte meinen Freund » est une erreur fréquente.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition: „Je pense souvent à toi.“ [fr] Complétez avec la préposition : « Je pense souvent à toi. »",
+          "text": "Ich denke oft [[1]] dich.",
+          "explanation": "denken an + accusatif : penser à. La préposition « zu », calquée sur le français « à », ne convient pas ici.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präposition: „Nous nous sommes disputés à propos des vacances.“ [fr] Complétez avec la préposition : « Nous nous sommes disputés à propos des vacances. »",
+          "text": "Wir haben uns [[1]] den Urlaub gestritten.",
+          "explanation": "sich streiten über + accusatif : le sujet de la dispute. La personne avec qui l’on se dispute est introduite par mit + datif : Ich habe mich mit ihm über den Urlaub gestritten.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Reflexivpronomen: „Je m’achète un nouveau portable.“ [fr] Complétez avec le pronom réfléchi : « Je m’achète un nouveau portable. »",
+          "text": "Ich kaufe [[1]] ein neues Handy.",
+          "explanation": "Le verbe a déjà un complément à l’accusatif (ein neues Handy) : le pronom réfléchi passe au datif, mir. « mich » serait l’accusatif, impossible ici.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "mir"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie sprechen über Ihre Kollegin Anna: „Ich ärgere mich oft …“ [fr] Vous parlez de votre collègue Anna : « Je suis souvent énervé contre elle. »",
+          "explanation": "Anna est une personne : préposition + pronom personnel, über sie. darüber ne reprend qu’une chose ou une idée, et « über es » n’est pas employé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "darüber.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "über sie.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "über es.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? „Je me souviens de lui.“ [fr] Quelle phrase est correcte ? « Je me souviens de lui. »",
+          "explanation": "sich erinnern an + accusatif, avec le pronom réfléchi à l’accusatif (mich). « von » calque le français « de » ; « mir » serait un datif, sans raison ici.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich erinnere mich von ihm.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich erinnere mir an ihn.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich erinnere mich an ihn.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welche Präposition passt? „Ich möchte mich … meiner Nachbarin entschuldigen.“ [fr] Quelle préposition convient ? « Je voudrais m’excuser auprès de ma voisine. »",
+          "explanation": "sich entschuldigen bei + datif (meiner Nachbarin) pour la personne, für + accusatif pour la raison. « auprès de » se traduit ici par bei ; für n’introduit que la raison, et mit ne convient pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "für",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "bei",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "mit",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : messages et annonces",
+      "estimatedMinutes": 20,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : messages et annonces",
+        "description": "PRÜFUNGSTRAINING: HÖREN\n[fr] Entraînement à l’examen : écoute\nZeit: etwa 10 Minuten. Sie hören sechs kurze Texte: Nachrichten auf dem Anrufbeantworter, Ansagen und eine Radiosendung. Zu jedem Text gibt es eine Aufgabe. Wählen Sie a, b oder c. [fr] Durée : environ 10 minutes. Vous entendez six textes courts : messages sur répondeur, annonces et une émission de radio. Chaque texte a une question. Choisissez a, b ou c.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst die Aufgabe und die drei Antworten. Was müssen Sie hören: einen Ort, eine Zeit, einen Grund? [fr] Lisez d’abord la question et les trois réponses. Que devez-vous entendre : un lieu, une heure, une raison ?\nVorsicht: Oft kommen alle drei Antworten im Text vor. Achten Sie auf Wörter wie „nicht“, „sondern“ oder „doch“. [fr] Attention : souvent, les trois réponses apparaissent dans le texte. Repérez les mots comme « nicht », « sondern » ou « doch ».\nHören Sie jeden Text zweimal: beim ersten Mal global, beim zweiten Mal genau. [fr] Écoutez chaque texte deux fois : la première fois globalement, la seconde en détail.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q5",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-pruefung-q6",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Text 1: Wo trifft sich die Familie am Sonntag? [fr] Texte 1 : où la famille se retrouve-t-elle dimanche ?",
+          "explanation": "« nicht wie geplant um zwölf bei mir, sondern um eins im Restaurant am Marktplatz » : nicht … sondern annule le premier lieu. La cuisine de Gisela est en travaux.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bei Gisela zu Hause in der Küche",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "im Restaurant am Marktplatz",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "bei Ben im Garten",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Text 2: Was passiert mit dem Kurs am Mittwoch? [fr] Texte 2 : que devient le cours de mercredi ?",
+          "explanation": "Le cours est annulé mais « wird eine Woche später nachgeholt, zur gleichen Zeit und im gleichen Raum » : il est rattrapé une semaine plus tard. Le prix ne change pas, il n’y a donc pas de remboursement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er findet eine Woche später statt.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Er findet in einem anderen Raum statt.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er fällt ganz aus, und man bekommt das Geld zurück.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Text 3: Warum ruft Elias an? [fr] Texte 3 : pourquoi Elias appelle-t-il ?",
+          "explanation": "Elias demande si Mira est encore fâchée, explique qu’il ne voulait pas la critiquer devant tout le monde et dit « Es tut mir leid ». C’est Mira qui est fâchée, pas lui.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er möchte Mira zu einer Party einladen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er ist sauer auf Mira.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er möchte sich für gestern entschuldigen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Text 4: Was rät die Expertin den Eltern? [fr] Texte 4 : que conseille l’experte aux parents ?",
+          "explanation": "« Eltern müssen sich nicht bei jedem Streit einmischen » : les enfants apprennent à trouver des compromis. Les parents n’interviennent que si un enfant perd toujours ou si quelqu’un est blessé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sollen jeden Streit sofort beenden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sollen sich meistens nicht einmischen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie sollen mit den Kindern zu einer Beratung gehen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Text 5: Warum ruft Frau Okafor an? [fr] Texte 5 : pourquoi Mme Okafor appelle-t-elle ?",
+          "explanation": "« Ich wollte mich … bedanken, dass Sie sich letzte Woche um meine Katze gekümmert haben » : le service a déjà eu lieu. Le gâteau est un remerciement, pas une invitation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie bedankt sich für die Hilfe mit ihrer Katze.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie bittet Herrn Lindner, ihre Katze zu füttern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie lädt Herrn Lindner zum Kaffee ein.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Text 6: Was ändert sich beim Picknick? [fr] Texte 6 : qu’est-ce qui change pour le pique-nique ?",
+          "explanation": "À cause de la pluie annoncée, on se retrouve « nicht im Park, sondern bei Anna in der Wohnung ». Le jour reste samedi et « die Uhrzeit bleibt gleich ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Tag",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "die Uhrzeit",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "der Ort",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-beziehungen-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : conseiller une amie par écrit",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : conseiller une amie par écrit",
+        "description": "SITUATION\n[fr] Situation\nIhre Freundin Mara hat Ihnen eine Nachricht geschrieben. Sie hat ein Problem mit ihrer Mitbewohnerin und bittet Sie um Rat. [fr] Votre amie Mara vous a écrit. Elle a un problème avec sa colocataire et vous demande conseil.\n\nMARAS NACHRICHT\nHallo du! Ich muss dir was erzählen. Meine Mitbewohnerin und ich streiten uns seit Wochen über das Putzen. Ich mache fast alles allein, und sie sagt immer nur: „Später!“ Gestern bin ich richtig laut geworden, und jetzt redet sie nicht mehr mit mir. Ausziehen will ich aber nicht, die Wohnung ist super. Was soll ich tun? Hast du einen Rat für mich?\n\nAUFGABE\n[fr] Consigne\nSchreiben Sie Mara eine Antwort (100 bis 130 Wörter). [fr] Écrivez une réponse à Mara (100 à 130 mots).\n• Zeigen Sie Verständnis für Maras Situation. [fr] Montrez que vous comprenez la situation de Mara.\n• Geben Sie zwei Ratschläge und begründen Sie sie. [fr] Donnez deux conseils et justifiez-les.\n• Erzählen Sie kurz von einer eigenen Erfahrung oder geben Sie ein Beispiel. [fr] Racontez brièvement une expérience personnelle ou donnez un exemple.\n• Machen Sie Mara Mut und verabschieden Sie sich. [fr] Encouragez Mara et terminez votre message.\n\nTIPP\n[fr] Astuce\nNehmen Sie Hannas Antwort als Modell: Anrede, Verständnis, Ratschläge mit Grund, Mut machen, Gruß. [fr] Prenez la réponse de Hanna comme modèle : salutation, compréhension, conseils justifiés, encouragement, formule finale.\nVerwenden Sie Verben mit Präposition: sich ärgern über, sprechen mit … über, sich kümmern um. [fr] Employez des verbes à préposition : sich ärgern über, sprechen mit … über, sich kümmern um.\nMara ist Ihre Freundin: Schreiben Sie mit „du“. [fr] Mara est votre amie : écrivez en la tutoyant (du).",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-atelier-schreiben-nachricht",
+          "caption": "Maras Nachricht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Antworten Sie Mara (100 bis 130 Wörter): Verständnis zeigen, zwei Ratschläge mit Begründung, eine eigene Erfahrung oder ein Beispiel, Mut machen. [fr] Répondez à Mara (100 à 130 mots) : montrer de la compréhension, deux conseils justifiés, une expérience personnelle ou un exemple, des encouragements.",
+          "maxChars": 1300,
+          "minWords": 100
+        },
+        "checklist": [
+          "Ich beginne mit „Liebe Mara,“ und danke ihr für die Nachricht. [fr] Je commence par « Liebe Mara, » et je la remercie de son message.",
+          "Ich zeige Verständnis: Das kann ich gut verstehen. [fr] Je montre que je comprends sa situation.",
+          "Ich gebe zwei Ratschläge mit Grund: Du solltest …, An deiner Stelle würde ich … [fr] Je donne deux conseils, chacun avec une raison.",
+          "Ich erzähle eine eigene Erfahrung oder gebe ein Beispiel. [fr] Je raconte une expérience ou je donne un exemple.",
+          "Ich benutze mindestens zwei Verben mit Präposition: sich ärgern über, sprechen über … [fr] J’emploie au moins deux verbes à préposition.",
+          "Ich mache Mara Mut und ende mit einem Gruß: Kopf hoch! Liebe Grüße [fr] Je l’encourage et je termine par une formule."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : compréhension, deux conseils justifiés, expérience ou exemple et encouragement ; tutoiement respecté",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-beziehungen-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : s’excuser et proposer une solution",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : s’excuser et proposer une solution",
+        "description": "SITUATION\n[fr] Situation\nSie waren heute mit Ihrem Freund Lukas am Bahnhof verabredet, aber Sie sind nicht gekommen. Hören Sie seine Sprachnachricht. [fr] Vous aviez rendez-vous aujourd’hui à la gare avec votre ami Lukas, mais vous n’êtes pas venu. Écoutez son message vocal.\n\nAUFGABE\n[fr] Consigne\nAntworten Sie Lukas mit einer Sprachnachricht (etwa eineinhalb Minuten). [fr] Répondez à Lukas par un message vocal (environ une minute et demie).\n• Entschuldigen Sie sich. [fr] Excusez-vous.\n• Erklären Sie, warum Sie nicht gekommen sind. Den Grund wählen Sie selbst. [fr] Expliquez pourquoi vous n’êtes pas venu. Vous choisissez la raison.\n• Zeigen Sie, dass Sie seine Enttäuschung verstehen. [fr] Montrez que vous comprenez sa déception.\n• Schlagen Sie eine Lösung vor, um es wiedergutzumachen. [fr] Proposez une solution pour vous faire pardonner.\n\nVORBEREITUNG\n[fr] Préparation\nHören Sie noch einmal die Nachricht von Felix im Modell. Überlegen Sie sich vier Stichwörter: Entschuldigung, Grund, Verständnis, Lösung. [fr] Réécoutez le message de Felix dans le modèle. Préparez mentalement quatre mots-clés : excuse, raison, compréhension, solution.\nSprechen Sie frei und freundlich. Verwenden Sie: Es tut mir leid, dass … / Ich kann verstehen, dass … / Wie wäre es, wenn …? [fr] Parlez librement et aimablement. Utilisez : Es tut mir leid, dass … / Ich kann verstehen, dass … / Wie wäre es, wenn …?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-atelier-sprechen-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Antworten Sie Lukas: Entschuldigen Sie sich, erklären Sie den Grund, zeigen Sie Verständnis und schlagen Sie eine Lösung vor (etwa eineinhalb Minuten). [fr] Répondez à Lukas : excusez-vous, donnez la raison, montrez de la compréhension et proposez une solution (environ une minute et demie).",
+          "maxSeconds": 90
+        },
+        "written": null,
+        "checklist": [
+          "Ich entschuldige mich klar: Es tut mir wirklich leid, dass … [fr] Je m’excuse clairement.",
+          "Ich erkläre den Grund mit weil; das Verb steht am Ende. [fr] J’explique la raison avec weil, verbe à la fin.",
+          "Ich zeige Verständnis für seine Enttäuschung: Ich kann gut verstehen, dass … [fr] Je montre que je comprends sa déception.",
+          "Ich schlage eine konkrete Lösung vor: wann, wo, was? Wie wäre es, wenn …? [fr] Je propose une solution concrète : quand, où, quoi.",
+          "Zum Schluss bitte ich ihn, mich zurückzurufen oder mir zu antworten. [fr] Pour finir, je lui demande de me rappeler ou de me répondre."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : excuse, raison, compréhension et solution concrète en une minute et demie environ",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-beziehungen-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : Beziehungen",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : Beziehungen",
+        "description": "FAIRE LE POINT\nWas können Sie jetzt? Lesen Sie die Sätze und prüfen Sie sich selbst. [fr] Que savez-vous faire maintenant ? Lisez les phrases et évaluez-vous.\n• Ich kann eine Freundschaft oder eine Beziehung in der Familie beschreiben. [fr] Je peux décrire une amitié ou une relation familiale.\n• Ich kann sagen, was ich fühle: Freude, Ärger, Enttäuschung. [fr] Je peux dire ce que je ressens : la joie, la colère, la déception.\n• Ich kann Verständnis zeigen und einer Freundin Ratschläge geben. [fr] Je peux montrer de la compréhension et donner des conseils à une amie.\n• Ich kann mich entschuldigen und eine Lösung vorschlagen. [fr] Je peux m’excuser et proposer une solution.\n• Ich kann eine Nachricht auf Französisch für eine andere Person auf Deutsch zusammenfassen. [fr] Je peux résumer en allemand, pour une autre personne, un message reçu en français.\n\nSTRATÉGIES À GARDER\n• Lecture : repérer ce que reprennent darüber, damit, darauf ; cela évite les contresens.\n• Écoute : lire la question avant d’écouter et se méfier de « nicht …, sondern … » qui annule la première information.\n• Production : une réponse en cinq temps (salutation, compréhension, conseils justifiés, encouragement, formule finale).\n• Médiation : ne pas traduire mot à mot, transmettre ce que la personne doit savoir et faire.\n\nÀ REVOIR SI BESOIN\n• Verbes à préposition, da- et wo- : leçon « Retenir » et exercice « S’entraîner » du module Beziehungen.\n• Pronoms réfléchis au datif (mir, dir) : exercice « Corriger » de cet atelier.\n• Formules de conseil et d’excuse : modèle de cet atelier et lexique sonore (Du solltest …, An deiner Stelle würde ich …, Es tut mir leid, dass …).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-beziehungen-atelier-modell-aufbau",
+      "kind": "image",
+      "title": "Plan d’une réponse avec des conseils",
+      "alt": "Schéma en cinq étapes de la réponse de Hanna : Anrede, Verständnis zeigen, Ratschläge mit Grund, Mut machen, Gruß.",
+      "image": {
+        "layout": "route",
+        "title": "Aufbau: eine Antwort mit Ratschlägen",
+        "stepWidth": 160,
+        "steps": [
+          {
+            "icon": "mail",
+            "label": "Anrede",
+            "sub": "Liebe Leonie,"
+          },
+          {
+            "icon": "heart-handshake",
+            "label": "Verständnis\nzeigen",
+            "sub": "Das kann ich\ngut verstehen."
+          },
+          {
+            "icon": "lightbulb",
+            "label": "Ratschläge\nmit Grund",
+            "sub": "An deiner Stelle\nwürde ich …"
+          },
+          {
+            "icon": "thumbs-up",
+            "label": "Mut machen",
+            "sub": "Kopf hoch!"
+          },
+          {
+            "icon": "smile",
+            "label": "Gruß",
+            "sub": "Liebe Grüße"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-beziehungen-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle oral : Felix s’excuse auprès de Lisa",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Felix",
+          "text": "Hallo Lisa, hier ist Felix. Ich rufe an, weil ich mich bei dir entschuldigen möchte. Es tut mir wirklich leid, dass ich gestern nicht zu deinem Umzug gekommen bin. Ich hatte es dir fest versprochen, und du hast dich auf mich verlassen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Felix",
+          "text": "Ehrlich gesagt habe ich den Termin einfach vergessen, weil ich die ganze Woche so viel Stress bei der Arbeit hatte. Das ist keine Entschuldigung, ich weiß. Ich kann gut verstehen, dass du sauer bist."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Felix",
+          "text": "Ich möchte das gern wiedergutmachen. Wie wäre es, wenn ich am Samstag vorbeikomme und dir beim Aufbauen der Möbel helfe? Ich bringe auch Pizza mit. Oder sag mir einfach, was du sonst noch brauchst. Ruf mich bitte zurück, ja? Bis bald!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q1",
+      "kind": "audio",
+      "title": "Réplique : Sophie se sent seule",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Sophie",
+          "text": "Ich habe heute Abend keine Lust, allein zu Hause zu sitzen. Ich fühle mich ein bisschen einsam."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q2",
+      "kind": "audio",
+      "title": "Réplique : Erik a couru un semi-marathon",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Erik",
+          "text": "Stell dir vor, ich habe gestern zum ersten Mal einen Halbmarathon geschafft!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q3",
+      "kind": "audio",
+      "title": "Réplique : Ines s’inquiète pour son frère",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Ines",
+          "text": "Mein Bruder antwortet seit zwei Wochen nicht auf meine Nachrichten. Ich mache mir langsam Sorgen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q4",
+      "kind": "audio",
+      "title": "Réplique : Max annule",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Max",
+          "text": "Du, sei mir bitte nicht böse, aber ich kann morgen doch nicht zum Kochen kommen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q1",
+      "kind": "audio",
+      "title": "Examen, texte 1 : message de Gisela",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Gisela",
+          "text": "Hallo Ben, hier ist Gisela. Danke noch mal für die schönen Blumen zu meinem Geburtstag, ich habe mich riesig darüber gefreut! Du, am Sonntag ist doch unser Familienessen. Wir treffen uns nicht wie geplant um zwölf bei mir, sondern um eins im Restaurant am Marktplatz, weil meine Küche gerade renoviert wird. Bis Sonntag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q2",
+      "kind": "audio",
+      "title": "Examen, texte 2 : annonce d’un cours",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Ansage",
+          "text": "Eine Information für die Teilnehmerinnen und Teilnehmer des Kurses „Gut kommunizieren in Familie und Beruf“: Der Kurs am Mittwoch fällt leider aus, weil die Kursleiterin krank ist. Der Termin wird eine Woche später nachgeholt, zur gleichen Zeit und im gleichen Raum. Die Kursgebühr bleibt gleich."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q3",
+      "kind": "audio",
+      "title": "Examen, texte 3 : message d’Elias",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Elias",
+          "text": "Hey Mira, ich bin es, Elias. Sag mal, bist du noch sauer wegen gestern? Ich wollte dich wirklich nicht vor allen kritisieren. Ich glaube, ich war einfach müde. Es tut mir leid. Können wir heute Abend kurz telefonieren? Ich bin ab acht zu Hause. Melde dich, ja?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q4",
+      "kind": "audio",
+      "title": "Examen, texte 4 : conseil à la radio",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Und hier ist wieder unser Ratgeber am Nachmittag. Heute geht es um Streit unter Geschwistern. Unsere Expertin meint: Eltern müssen sich nicht bei jedem Streit einmischen. Beim Streiten lernen Kinder, wie man Kompromisse findet. Nur wenn ein Kind immer verliert oder wenn jemand verletzt wird, sollten die Eltern helfen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q5",
+      "kind": "audio",
+      "title": "Examen, texte 5 : message d’une voisine",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Frau Okafor",
+          "text": "Guten Tag, Herr Lindner, hier spricht Okafor aus dem zweiten Stock. Ich wollte mich noch einmal herzlich bei Ihnen bedanken, dass Sie sich letzte Woche um meine Katze gekümmert haben. Als kleines Dankeschön habe ich Ihnen einen Kuchen vor die Tür gestellt. Ich hoffe, Sie mögen Apfelkuchen!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-pruefung-q6",
+      "kind": "audio",
+      "title": "Examen, texte 6 : changement de programme",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Karl",
+          "text": "Hallo Leute, hier ist Karl. Kleine Änderung für unser Picknick am Samstag: Laut Wetterbericht soll es regnen. Deshalb treffen wir uns nicht im Park, sondern bei Anna in der Wohnung. Die Uhrzeit bleibt gleich, also um drei. Bringt bitte trotzdem etwas zu essen mit!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-schreiben-nachricht",
+      "kind": "image",
+      "title": "Le message de Mara",
+      "alt": "Message de Mara sur une messagerie : elle se dispute depuis des semaines avec sa colocataire au sujet du ménage, celle-ci ne lui parle plus, et Mara demande un conseil.",
+      "image": {
+        "layout": "messages",
+        "title": "Mara",
+        "icon": "message-circle",
+        "messages": [
+          {
+            "from": "Mara",
+            "time": "21:14",
+            "text": "Hallo du! Ich muss dir was erzählen. Meine Mitbewohnerin und ich streiten uns seit Wochen über das Putzen. Ich mache fast alles allein, und sie sagt immer nur: „Später!“"
+          },
+          {
+            "from": "Mara",
+            "time": "21:15",
+            "text": "Gestern bin ich richtig laut geworden, und jetzt redet sie nicht mehr mit mir. Ausziehen will ich aber nicht, die Wohnung ist super."
+          },
+          {
+            "from": "Mara",
+            "time": "21:16",
+            "text": "Was soll ich tun? Hast du einen Rat für mich?"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-beziehungen-atelier-sprechen-audio",
+      "kind": "audio",
+      "title": "Message vocal de Lukas",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Lukas",
+          "text": "Hey, hier ist Lukas. Sag mal, wo warst du denn heute? Wir waren um zwei am Bahnhof verabredet, um zusammen zum Konzert nach Hamburg zu fahren. Ich habe fast eine Stunde gewartet und dann den Zug ohne dich genommen. Ich habe dich fünfmal angerufen! Ich bin echt enttäuscht. Melde dich bitte."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · S’entraîner : réagir avec doch, mal et ja",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Komm doch mit, das wird bestimmt lustig!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · S’entraîner : réagir avec doch, mal et ja",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ruf ihn doch mal an, vielleicht ist sein Handy kaputt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · S’entraîner : réagir avec doch, mal et ja",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Kein Problem. Wie wäre es mit nächster Woche?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Atelier Beziehungen : conseiller une amie, régler un malentendu",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Du solltest …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "An deiner Stelle würde ich …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Wie wäre es, wenn …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das kann ich gut nachvollziehen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einen Rat geben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich Zeit nehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vorwürfe machen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Es tut mir leid, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das war nicht so gemeint."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vorschlagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vorschlag, die Vorschläge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wiedergutmachen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verzeihen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "doch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "mal"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Das ist ja toll!"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Kopf hoch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

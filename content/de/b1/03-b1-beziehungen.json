@@ -1,0 +1,2354 @@
+{
+  "id": "b1-beziehungen",
+  "title": "Beziehungen : parler de ses relations et de ses sentiments",
+  "objective": "Décrire une amitié ou une relation familiale, dire ce que l’on ressent, montrer de la compréhension et s’excuser, avec les verbes à préposition et les mots en da- et wo-.",
+  "prerequisites": [
+    "b1-neuanfang-atelier"
+  ],
+  "audioProfile": "b1-debut",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Thème nouveau du parcours B1 (sans reprise du brouillon B1 V1)."
+  ],
+  "grammarFocus": [
+    "verben-mit-praepositionen",
+    "da-wo-pronominaladverb",
+    "reflexive-verben"
+  ],
+  "layer": "content/b/source/b1/b1-beziehungen.mjs",
+  "vocabulary": [
+    {
+      "id": "freundschaft",
+      "word": "Freundschaft",
+      "article": "die",
+      "plural": "Freundschaften",
+      "partOfSpeech": "noun",
+      "translation": "l’amitié",
+      "example": "Eine echte Freundschaft braucht Zeit.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "vertrauen",
+      "word": "Vertrauen",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la confiance",
+      "example": "Ohne Vertrauen gibt es keine Freundschaft.",
+      "note": "Vertrauen zu + datif : Ich habe Vertrauen zu ihr.",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "streit",
+      "word": "Streit",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la dispute",
+      "example": "Nach dem Streit haben wir lange nicht miteinander gesprochen.",
+      "note": "pluriel rare (die Streite) ; on dit plutôt die Streitigkeiten",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "missverstaendnis",
+      "word": "Missverständnis",
+      "article": "das",
+      "plural": "Missverständnisse",
+      "partOfSpeech": "noun",
+      "translation": "le malentendu",
+      "example": "Zum Glück war alles nur ein Missverständnis.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "beziehung",
+      "word": "Beziehung",
+      "article": "die",
+      "plural": "Beziehungen",
+      "partOfSpeech": "noun",
+      "translation": "la relation",
+      "example": "Ich habe eine sehr gute Beziehung zu meiner Schwester.",
+      "note": "eine Beziehung zu + datif",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "rat",
+      "word": "Rat",
+      "article": "der",
+      "plural": "Ratschläge",
+      "partOfSpeech": "noun",
+      "translation": "le conseil",
+      "example": "Wenn ich ein Problem habe, frage ich meine Schwester um Rat.",
+      "note": "jemanden um Rat fragen · pluriel : die Ratschläge",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "sich-streiten",
+      "word": "sich streiten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se disputer",
+      "example": "Mein Bruder und ich streiten uns oft über die Musik.",
+      "note": "mit + datif (avec qn) ; über + accusatif (à propos de) · stritt, hat gestritten",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "sich-versoehnen",
+      "word": "sich versöhnen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se réconcilier",
+      "example": "Nach einer Woche haben sie sich wieder versöhnt.",
+      "note": "sich mit + datif versöhnen",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "sich-verlassen",
+      "word": "sich verlassen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "compter sur, se fier à",
+      "example": "Auf meine beste Freundin kann ich mich immer verlassen.",
+      "note": "sich auf + accusatif verlassen · verließ, hat verlassen",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "sich-kuemmern",
+      "word": "sich kümmern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’occuper de",
+      "example": "Wer kümmert sich um deine Katze, wenn du weg bist?",
+      "note": "sich um + accusatif kümmern",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "sich-aergern",
+      "word": "sich ärgern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’énerver, être contrarié",
+      "example": "Ich ärgere mich über die ständigen Verspätungen.",
+      "note": "sich über + accusatif ärgern",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "sich-freuen",
+      "word": "sich freuen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se réjouir",
+      "example": "Ich freue mich schon auf deinen Besuch.",
+      "note": "auf + acc. : à venir ; über + acc. : déjà là",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "angst-haben",
+      "word": "Angst haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir peur",
+      "example": "Viele Menschen haben Angst vor Konflikten.",
+      "note": "Angst vor + datif haben",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "sich-entschuldigen",
+      "word": "sich entschuldigen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’excuser",
+      "example": "Ich möchte mich bei dir für gestern entschuldigen.",
+      "note": "bei + datif (auprès de qn) ; für + accusatif (de qch)",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sich-bedanken",
+      "word": "sich bedanken",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "remercier",
+      "example": "Sie hat sich bei mir für die Hilfe bedankt.",
+      "note": "bei + datif (qn) ; für + accusatif (qch)",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "sich-sorgen-machen",
+      "word": "sich Sorgen machen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "se faire du souci",
+      "example": "Ich mache mir Sorgen um meinen Bruder.",
+      "note": "pronom au datif (mir, dir) ; um + accusatif",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-wuenschen",
+      "word": "sich wünschen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "souhaiter (pour soi)",
+      "example": "Ich wünsche mir mehr Zeit mit meinen Freunden.",
+      "note": "pronom au datif : ich wünsche mir etwas",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "sich-melden",
+      "word": "sich melden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "donner des nouvelles, se manifester",
+      "example": "Melde dich mal wieder bei mir!",
+      "note": "sich bei + datif melden",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "zuhoeren",
+      "word": "zuhören",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "écouter (qn)",
+      "example": "Eine gute Freundin kann gut zuhören.",
+      "note": "séparable : zu|hören · + datif",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "verstaendnis-haben",
+      "word": "Verständnis haben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "avoir de la compréhension",
+      "example": "Ich habe Verständnis für deine Situation.",
+      "note": "Verständnis für + accusatif haben",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "enttaeuscht",
+      "word": "enttäuscht",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "déçu",
+      "example": "Ich war sehr enttäuscht von ihm.",
+      "note": "von + datif (qn) ; über + accusatif (qch)",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "erleichtert",
+      "word": "erleichtert",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "soulagé",
+      "example": "Nach dem Gespräch war ich total erleichtert.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "stolz",
+      "word": "stolz",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "fier",
+      "example": "Meine Eltern sind stolz auf mich.",
+      "note": "stolz auf + accusatif",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "eifersuechtig",
+      "word": "eifersüchtig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "jaloux",
+      "example": "Mein kleiner Bruder ist eifersüchtig auf das neue Baby.",
+      "note": "eifersüchtig auf + accusatif",
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 23
+      }
+    },
+    {
+      "id": "beleidigt",
+      "word": "beleidigt",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "vexé",
+      "example": "Sie war beleidigt, weil ich ihren Geburtstag vergessen hatte.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 24
+      }
+    },
+    {
+      "id": "nachtragend",
+      "word": "nachtragend",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "rancunier",
+      "example": "Zum Glück ist meine Freundin nicht nachtragend.",
+      "note": null,
+      "audio": {
+        "media": "b1-beziehungen-lexique",
+        "line": 25
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-beziehungen-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : amis, famille et sentiments",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : amis, famille et sentiments",
+        "description": "BEZIEHUNGEN\n[fr] Les relations\nFreunde, Familie, Kollegen, Nachbarn: Beziehungen machen uns glücklich, aber manchmal auch traurig oder wütend. [fr] Amis, famille, collègues, voisins : les relations nous rendent heureux, mais parfois aussi tristes ou en colère.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Wer ist für Sie ein besonders wichtiger Mensch, und warum? [fr] Qui est pour vous une personne particulièrement importante, et pourquoi ?\n• Worüber streiten sich Freunde oder Familien oft? [fr] À propos de quoi les amis ou les familles se disputent-ils souvent ?\n• Was ist Ihnen in einer Freundschaft am wichtigsten? [fr] Qu’est-ce qui compte le plus pour vous dans une amitié ?\nAntworten Sie in Gedanken auf Deutsch, in zwei oder drei einfachen Sätzen. [fr] Répondez mentalement en allemand, en deux ou trois phrases simples.\n\nZIELE\n[fr] Objectifs\n• Ich kann eine Freundschaft oder eine Beziehung in der Familie beschreiben. [fr] Je peux décrire une amitié ou une relation familiale.\n• Ich kann sagen, was ich fühle: Freude, Ärger, Enttäuschung. [fr] Je peux dire ce que je ressens : la joie, la colère, la déception.\n• Ich kann Verständnis zeigen und mich entschuldigen. [fr] Je peux montrer de la compréhension et m’excuser.\n• Ich kann einen Zeitschriftenartikel und ein Gespräch über Freundschaft verstehen. [fr] Je peux comprendre un article de magazine et une conversation sur l’amitié.\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• die Freundschaft — l’amitié\n• das Vertrauen — la confiance\n• der Streit — la dispute\n• das Missverständnis — le malentendu\n• sich streiten — se disputer\n• sich versöhnen — se réconcilier\n• enttäuscht — déçu\n• erleichtert — soulagé",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Zeit für einen Kaffee zu zweit",
+          "media": "b1-beziehungen-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-beziehungen-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : ce qui fait une bonne amitié",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : ce qui fait une bonne amitié",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst den Titel und die Zitate. Wer spricht? Worum geht es? [fr] Lisez d’abord le titre et les citations. Qui parle ? De quoi s’agit-il ?\nAchten Sie beim genauen Lesen auf Wörter wie „darüber“ oder „damit“: Sie zeigen auf etwas, das schon im Text steht. [fr] En lecture détaillée, faites attention aux mots comme « darüber » ou « damit » : ils renvoient à quelque chose qui est déjà dans le texte.\n„Steht nicht im Text“ bedeutet: Der Text sagt dazu nichts. [fr] « Non mentionné » signifie : le texte n’en dit rien.\n\nWAS MACHT EINE GUTE FREUNDSCHAFT AUS?\nAus einem Stadtmagazin, Rubrik „Psychologie“\n\n(1) Fast jeder Mensch wünscht sich gute Freunde. Aber was macht eine gute Freundschaft eigentlich aus? Eine Psychologin hat für eine Studie über 500 Menschen zwischen 20 und 70 Jahren befragt. Das Ergebnis ist eindeutig: An erster Stelle steht das Vertrauen. „Meine beste Freundin ist immer für mich da. Auf sie kann ich mich hundertprozentig verlassen“, erzählt Lena, 34. Viele Befragte sagen außerdem, dass sie mit guten Freunden über alles sprechen können, auch über Probleme in der Familie oder bei der Arbeit.\n\n(2) Interessant ist, worüber sich Freunde am häufigsten ärgern: nicht über Streit, sondern über fehlendes Interesse. Viele stört es, wenn sich jemand nur dann meldet, wenn er Hilfe braucht. Andere ärgern sich, wenn ein Freund beim Treffen ständig auf sein Handy schaut. „Darüber kann ich mich wirklich aufregen“, sagt Murat, 27. „Ich erwarte nicht, dass wir uns jeden Tag sehen. Aber wenn wir uns treffen, möchte ich, dass er mir zuhört.“\n\n(3) Und was passiert, wenn es doch einmal Streit gibt? Laut der Studie ist ein Streit für eine Freundschaft nicht unbedingt gefährlich. Wichtig ist, wie man damit umgeht. Wer sich nach einem Konflikt ehrlich entschuldigt und über seine Gefühle spricht, kann die Freundschaft sogar stärken. Gefährlicher sind Missverständnisse, wenn niemand darüber redet. „Ich war einmal sehr enttäuscht von einer Freundin, weil sie meinen Geburtstag vergessen hatte“, erzählt Sabine, 58. „Ein Jahr lang habe ich nichts gesagt. Erst viel später habe ich erfahren, dass sie damals im Krankenhaus lag. Ich habe mich so geschämt!“\n\n(4) Am Ende ihrer Studie gibt die Psychologin drei Tipps. Erstens: sich regelmäßig bei Freunden melden, nicht nur zum Geburtstag. Zweitens: sich für das Leben der anderen interessieren und Fragen stellen. Drittens: nicht zu lange warten, wenn einen etwas stört. „Sprechen Sie das Problem an, solange es noch klein ist“, rät die Expertin. „Viele Freundschaften gehen nicht an einem großen Streit kaputt, sondern an vielen kleinen Dingen, über die man nie gesprochen hat.“",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel vor allem? [fr] De quoi parle surtout cet article ?",
+          "explanation": "L’article présente une étude sur ce qui fait une bonne amitié (confiance, intérêt, manière de gérer les disputes) et se termine par des conseils pour la garder. Il ne raconte pas une seule dispute et n’explique pas comment se faire de nouveaux amis.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um einen Streit zwischen zwei Freundinnen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um Tipps, wie man neue Freunde findet",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "um die Frage, was Freundschaften stark macht",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was sagt der Artikel über Streit unter Freunden? [fr] Que dit l’article des disputes entre amis ?",
+          "explanation": "Paragraphe 3 : une dispute « ist … nicht unbedingt gefährlich » ; s’excuser et parler de ses sentiments « kann die Freundschaft sogar stärken ». Le danger, ce sont les malentendus dont personne ne parle.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Streit kann eine Freundschaft sogar stärken, wenn man gut damit umgeht.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nach einem Streit ist eine Freundschaft meistens vorbei.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Gute Freunde streiten sich nie.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Für die meisten Befragten ist Vertrauen das Wichtigste in einer Freundschaft. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « An erster Stelle steht das Vertrauen » (paragraphe 1). « An erster Stelle » signifie « en première place », donc le plus important.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Murat möchte seine Freunde jeden Tag sehen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : Murat dit au contraire « Ich erwarte nicht, dass wir uns jeden Tag sehen ». Ce qui compte pour lui, c’est qu’on l’écoute quand on se voit.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sabine hat sich mit ihrer Freundin wieder versöhnt. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Sabine raconte sa déception, puis sa honte quand elle a appris la vérité. Le texte ne dit pas si elles se sont réconciliées : non mentionné. Ne complétez pas avec ce qui vous semble probable.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sabine hat ein Jahr lang nicht über ihre Enttäuschung gesprochen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « Ein Jahr lang habe ich nichts gesagt. » C’est justement l’exemple d’un malentendu dont personne ne parle, que l’article juge dangereux.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "Paragraphe 1 : le résultat principal de l’étude, la confiance. Paragraphe 2 : ce qui énerve les amis (le manque d’intérêt). Paragraphe 3 : bien gérer une dispute et éviter les malentendus. Paragraphe 4 : les trois conseils de la psychologue.",
+          "pairs": [
+            {
+              "left": "Absatz 1",
+              "right": "Vertrauen an erster Stelle"
+            },
+            {
+              "left": "Absatz 2",
+              "right": "Was Freunde wirklich stört"
+            },
+            {
+              "left": "Absatz 3",
+              "right": "Streiten, aber richtig"
+            },
+            {
+              "left": "Absatz 4",
+              "right": "Drei Tipps der Expertin"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Wörter aus dem Text. [fr] Complétez avec les mots du texte.",
+          "text": "Interessant ist, [[1]] sich Freunde am häufigsten ärgern. „[[2]] kann ich mich wirklich aufregen“, sagt Murat.",
+          "explanation": "sich ärgern über : pour poser la question sur une chose, on emploie wo(r)- + préposition, ici dans une interrogative indirecte (worüber). Darüber reprend une chose déjà nommée : le téléphone regardé sans arrêt. Le r s’ajoute devant une voyelle : wor-über, dar-über.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "worüber"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Darüber"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : Nele et Deniz après un malentendu",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : Nele et Deniz après un malentendu",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSituation: Nele hat sich über ihren Freund Deniz geärgert. Jetzt treffen sich die beiden in einem Café und sprechen darüber. [fr] Situation : Nele s’est fâchée contre son ami Deniz. Ils se retrouvent maintenant dans un café et en parlent.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Wie fühlt sich Nele am Anfang, wie am Ende? [fr] Première écoute : comment Nele se sent-elle au début, et à la fin ?\nBeim zweiten Hören achten Sie nur auf Stichwörter: Tage, Orte, Gründe. [fr] À la deuxième écoute, concentrez-vous seulement sur des mots-clés : jours, lieux, raisons.\nDie Transkription sehen Sie nach Ihren Antworten. [fr] Vous verrez la transcription après vos réponses.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-hoeren-audio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Nele hat sich am [[1]] über Deniz geärgert. Deniz ist nach [[2]] gefahren, weil seine Mutter im Krankenhaus war. Seine Nachricht ist in der Gruppe vom [[3]] gelandet. Nele hatte Angst, dass ihre [[4]] kaputt ist. Neues Treffen: am [[5]] beim Italiener.",
+          "explanation": "Nele : « Ich habe mich am Samstag ziemlich über dich geärgert ». Deniz : « ich bin sofort nach Köln gefahren », « in der Gruppe vom Volleyballteam gelandet ». Nele : « Angst davor, dass unsere Freundschaft kaputt ist ». Le nouveau rendez-vous : jeudi.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Samstag",
+                "Samstagabend"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Köln"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Volleyballteam",
+                "Volleyball-Team"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Freundschaft"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "Donnerstag"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum ist Deniz nicht zum Geburtstagsessen gekommen? [fr] Pourquoi Deniz n’est-il pas venu au dîner d’anniversaire ?",
+          "explanation": "Sa mère a eu un accident de vélo et a dû aller à l’hôpital ; il est parti tout de suite à Cologne. « Keine Lust » est seulement ce que Nele avait imaginé, à cause du message égaré.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er hatte keine Lust auf Neles Party und ist zu Hause geblieben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er musste zu seiner Mutter ins Krankenhaus fahren.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er hatte das Datum des Geburtstagsessens vergessen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum hat Nele Deniz nicht angerufen? [fr] Pourquoi Nele n’a-t-elle pas appelé Deniz ?",
+          "explanation": "« Ich war beleidigt, und ich wollte nicht als Erste anrufen. Das war blöd von mir. » Nele reconnaît sa part d’erreur ; elle n’évoque ni problème de numéro ni maladie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie war beleidigt und wollte nicht als Erste anrufen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hatte seine neue Handynummer nicht und konnte ihn nicht erreichen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie war das ganze Wochenende krank und lag im Bett.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was schlägt Deniz am Ende vor? [fr] Que propose Deniz à la fin ?",
+          "explanation": "« Ich lade dich zum Essen ein, und wir feiern deinen Geburtstag noch einmal, nur wir zwei. » Cologne est l’endroit où il rend visite à sa mère, et l’équipe de volley n’est citée qu’à cause du message égaré.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sollen zusammen nach Köln fahren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sollen mit dem Volleyballteam feiern.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er möchte Nele zum Essen einladen, nur sie beide.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wie fühlt sich Nele am Ende des Gesprächs? [fr] Comment Nele se sent-elle à la fin de la conversation ?",
+          "explanation": "Nele dit « ich bin so erleichtert, dass alles nur ein Missverständnis war » et accepte l’invitation avec joie : « Sehr gern! Darauf freue ich mich. » Sa déception appartient au passé (« Ich war richtig enttäuscht »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "immer noch enttäuscht",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "erleichtert und froh",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eifersüchtig auf das Volleyballteam",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-beziehungen-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : darauf, worüber, auf sie",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : darauf, worüber, auf sie",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus dem Gespräch. Achten Sie auf die Präpositionen und auf die Wörter mit da- und wo-. [fr] Lisez ces phrases de l’article et de la conversation. Observez les prépositions et les mots en da- et wo-.\n\n(1) Auf sie kann ich mich hundertprozentig verlassen. (Lena über ihre beste Freundin)\n(2) Ich kümmere mich jetzt ein bisschen um sie. (Deniz über seine Mutter)\n(3) Interessant ist, worüber sich Freunde am häufigsten ärgern.\n(4) Darüber kann ich mich wirklich aufregen. (Murat über das Handy beim Treffen)\n(5) Ich hatte schon Angst davor, dass unsere Freundschaft kaputt ist.\n(6) Darauf freue ich mich. (Nele über das Essen mit Deniz)\n(7) Fast jeder Mensch wünscht sich gute Freunde.\n\nBeantworten Sie dann die Fragen. So finden Sie die Regel selbst. [fr] Répondez ensuite aux questions : vous trouverez ainsi la règle vous-même.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze (1) und (2): Wofür steht „sie“ nach der Präposition? [fr] Phrases (1) et (2) : que représente « sie » après la préposition ?",
+          "explanation": "« auf sie » renvoie à la meilleure amie, « um sie » à la mère : des personnes. Pour une personne, on garde la préposition et on ajoute le pronom personnel (auf sie, um ihn, mit dir).",
+          "options": [
+            {
+              "id": "a",
+              "label": "für eine Person",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "für eine Sache",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "für einen Ort",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz (4): Wofür steht „darüber“? [fr] Phrase (4) : que représente « darüber » ?",
+          "explanation": "Darüber reprend une chose déjà nommée : regarder son téléphone pendant une rencontre. Pour une chose ou une idée, on remplace « über + nom » par da(r)- + préposition. Pour une personne, on dirait « über ihn » ou « über sie ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "für Murat, also für eine Person",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "für das Handy beim Treffen, also eine Sache",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "für die Psychologin, die die Studie gemacht hat",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz (5): Was macht „davor“ hier? [fr] Phrase (5) : quel est le rôle de « davor » ici ?",
+          "explanation": "Angst haben vor + datif. Quand la « chose » dont on a peur est une subordonnée (dass …) ou un infinitif (zu …), da(r)- + préposition l’annonce dans la principale : Angst davor, dass …. Il ne s’agit ni de temps ni de lieu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es bedeutet „vorher“, also früher.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es zeigt auf einen Ort vor dem Haus.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Es kündigt den dass-Satz an.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Welche Präposition gehört zu welchem Ausdruck? Ordnen Sie zu. [fr] Quelle préposition va avec quelle expression ? Associez.",
+          "explanation": "Ces prépositions sont fixes et souvent différentes du français : compter sur (auf), s’énerver de (über), avoir peur de (vor + datif), s’occuper de (um). On les apprend avec le verbe, comme un seul bloc.",
+          "pairs": [
+            {
+              "left": "sich verlassen",
+              "right": "auf + Akkusativ"
+            },
+            {
+              "left": "sich ärgern",
+              "right": "über + Akkusativ"
+            },
+            {
+              "left": "Angst haben",
+              "right": "vor + Dativ"
+            },
+            {
+              "left": "sich kümmern",
+              "right": "um + Akkusativ"
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-regel",
+      "kind": "lesson",
+      "title": "Retenir : verbes à préposition, da- et wo-, pronoms réfléchis",
+      "estimatedMinutes": 8,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Retenir : verbes à préposition, da- et wo-, pronoms réfléchis",
+        "description": "À RETENIR\n• Beaucoup de verbes ont une préposition fixe, avec un cas fixe. On les apprend en bloc : sich freuen auf + acc. (ce qui va venir) et über + acc. (ce qui est là), sich ärgern über + acc., sich kümmern um + acc., sich verlassen auf + acc., Angst haben vor + dat., sich streiten mit + dat. (über + acc.), sich entschuldigen bei + dat. (für + acc.), sich bedanken bei + dat. (für + acc.), sich interessieren für + acc., denken an + acc.\n\nUNE CHOSE OU UNE PERSONNE ?\n• Chose ou idée : da- + préposition (dar- devant une voyelle). Ich freue mich auf das Essen, ich freue mich darauf.\n• Question sur une chose : wo- + préposition (wor- devant une voyelle). Worauf freust du dich? Worüber ärgerst du dich?\n• Personne : préposition + pronom. Ich verlasse mich auf sie. Question : Auf wen verlässt du dich? Über wen ärgerst du dich?\n• da- peut aussi annoncer une subordonnée ou un infinitif : Ich freue mich darauf, dass du kommst. Ich habe Angst davor, allein zu sein.\n\nPRONOMS RÉFLÉCHIS : ACCUSATIF OU DATIF ?\n• En général, accusatif : ich ärgere mich, du ärgerst dich, er ärgert sich, wir ärgern uns, ihr ärgert euch, sie ärgern sich.\n• Datif quand le verbe a déjà un complément d’objet à l’accusatif : ich wünsche mir ein Fahrrad, du machst dir Sorgen, ich kaufe mir ein Buch.\n• Seuls ich et du changent : mich devient mir, dich devient dir. Les autres formes restent identiques (sich, uns, euch).\n• Comparez : Ich wasche mich. Ich wasche mir die Hände.\n\nATTENTION\n• Jamais de da- pour une personne : Ich warte auf Paul, ich warte auf ihn (et non « darauf »).\n• « penser à » : denken an + acc. Ich denke an dich. Ich denke daran.\n• « se fâcher contre quelqu’un » : sich über jemanden ärgern (über + accusatif).\n• « avoir peur de » : Angst vor + datif, et non « von ».\n• Dans une question indirecte, wo- reste : Ich weiß nicht, worüber er sich ärgert.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-regel-tabelle",
+          "caption": "Sache: da- / wo- · Person: Präposition + Pronomen",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-beziehungen-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : prépositions, da- et wo-, pronoms réfléchis",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : prépositions, da- et wo-, pronoms réfléchis",
+        "description": "Üben Sie die Verben mit Präposition, die Wörter mit da- und wo- und die Reflexivpronomen. [fr] Entraînez-vous aux verbes à préposition, aux mots en da- et wo- et aux pronoms réfléchis.\nFragen Sie sich immer: Geht es um eine Sache oder um eine Person? [fr] Demandez-vous toujours : s’agit-il d’une chose ou d’une personne ?",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Präpositionen. [fr] Complétez avec les prépositions.",
+          "text": "Ich freue mich schon [[1]] die Ferien. Meine Schwester kümmert sich [[2]] unseren Hund. Viele Kinder haben Angst [[3]] der Dunkelheit. Gestern habe ich mich [[4]] den Lärm geärgert.",
+          "explanation": "sich freuen auf + accusatif (les vacances sont à venir), sich kümmern um, Angst haben vor + datif (der Dunkelheit), sich ärgern über + accusatif (den Lärm). Le cas de l’article confirme la préposition : der Dunkelheit est au datif.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "auf"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "um"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "vor"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "über"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Fragewörter. [fr] Complétez avec les mots interrogatifs.",
+          "text": "„[[1]] wartest du?“ – „Auf den Bus.“ „[[2]] denkst du gerade?“ – „An meinen Urlaub.“",
+          "explanation": "Pour une chose, la question se forme avec wo- + préposition, et wor- devant une voyelle : warten auf → Worauf?, denken an → Woran? « Auf was » s’entend à l’oral familier, mais n’est pas la forme standard.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Worauf"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Woran"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Ich ärgere mich über meinen Kollegen.“ Wie fragt man nach dieser Person? [fr] « Je suis énervé contre mon collègue. » Comment pose-t-on la question sur cette personne ?",
+          "explanation": "Pour une personne, on garde la préposition et on emploie wen (accusatif) : Über wen? Worüber et « über was » interrogent sur une chose, pas sur le collègue.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Worüber ärgerst du dich?",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Über wen ärgerst du dich?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Über was ärgerst du dich?",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Freust du dich auf das Konzert?“ – „Ja, ich freue mich sehr …“ [fr] « Tu te réjouis d’aller au concert ? » – « Oui, je m’en réjouis beaucoup. »",
+          "explanation": "Le concert est une chose : on le reprend avec da(r)- + préposition, darauf. « auf es » n’existe pas dans ce sens, et worauf sert à poser une question.",
+          "options": [
+            {
+              "id": "a",
+              "label": "auf es.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "darauf.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "worauf.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Reflexivpronomen. [fr] Complétez avec les pronoms réfléchis.",
+          "text": "Zum Geburtstag wünsche ich [[1]] ein neues Fahrrad. Du machst [[2]] zu viele Sorgen. Am Sonntag treffen wir [[3]] im Park.",
+          "explanation": "wünschen et Sorgen machen ont déjà un complément à l’accusatif (ein Fahrrad, Sorgen) : le pronom réfléchi passe au datif, mir et dir. Pour wir, accusatif et datif sont identiques : uns.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "mir"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "dir"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "uns"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Angst haben vor : l’infinitif avec zu est annoncé par da(r)- + la même préposition, davor. Une préposition seule (vor) ne peut pas annoncer la suite, et « davon » ne correspond pas à Angst haben.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe Angst vor, allein in eine neue Stadt zu ziehen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich habe Angst davon, allein in eine neue Stadt zu ziehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe Angst davor, allein in eine neue Stadt zu ziehen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "freue",
+              "mich",
+              "darauf,",
+              "dass",
+              "du",
+              "am Wochenende",
+              "kommst."
+            ]
+          ],
+          "explanation": "darauf annonce la subordonnée avec dass, qui précise la chose attendue. Dans la subordonnée, le sujet suit dass et le verbe conjugué kommst va à la fin."
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "Welche Präpositionen passen? „Ich möchte mich … dir … gestern entschuldigen.“ [fr] Quelles prépositions conviennent ? « Je voudrais m’excuser auprès de toi pour hier. »",
+          "explanation": "sich entschuldigen bei + datif (la personne : bei dir) et für + accusatif (la raison : für gestern). Les autres combinaisons calquent d’autres verbes et ne conviennent pas ici.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bei … für",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "an … über",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "mit … wegen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "match",
+          "prompt": "Welche Antwort passt zu welcher Frage? Ordnen Sie zu. [fr] Quelle réponse va avec quelle question ? Associez.",
+          "explanation": "wo- + préposition interroge sur une chose (le bus, le film) ; préposition + wen interroge sur une personne (ma sœur, notre professeur). La préposition reste la même dans la question et dans la réponse.",
+          "pairs": [
+            {
+              "left": "Worauf wartest du?",
+              "right": "Auf den Bus."
+            },
+            {
+              "left": "Auf wen wartest du?",
+              "right": "Auf meine Schwester."
+            },
+            {
+              "left": "Worüber sprecht ihr?",
+              "right": "Über den Film."
+            },
+            {
+              "left": "Über wen sprecht ihr?",
+              "right": "Über unseren Lehrer."
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-wortschatz",
+      "kind": "exercise",
+      "title": "S’entraîner : mots et formules pour parler des relations",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : mots et formules pour parler des relations",
+        "description": "Lernen Sie Wörter zusammen: Nomen mit Verb, Wortfamilien und feste Formulierungen. [fr] Apprenez les mots ensemble : nom et verbe, familles de mots et formules toutes faites.\n\nREDEMITTEL\n[fr] Formules utiles\n• pour dire ce qu’on ressent : Ich bin enttäuscht, dass … / Ich habe mich sehr darüber gefreut, dass … / Das hat mich wirklich geärgert.\n• pour montrer de la compréhension : Das kann ich gut verstehen. / Das kann ich gut nachvollziehen. / Das tut mir leid für dich.\n• pour s’excuser : Es tut mir wirklich leid, dass … / Entschuldige bitte, das war nicht so gemeint.\n• pour se réconcilier : Lass uns noch einmal in Ruhe darüber reden. / Wollen wir das einfach vergessen?",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? Ordnen Sie zu. [fr] Quel verbe va avec quel nom ? Associez.",
+          "explanation": "Collocations fixes : einen Rat geben (donner un conseil), Rücksicht nehmen (avoir des égards), ein Geheimnis verraten (trahir un secret), einen Fehler zugeben (reconnaître une erreur), Kontakt halten (garder le contact).",
+          "pairs": [
+            {
+              "left": "jemandem einen Rat",
+              "right": "geben"
+            },
+            {
+              "left": "Rücksicht",
+              "right": "nehmen"
+            },
+            {
+              "left": "ein Geheimnis",
+              "right": "verraten"
+            },
+            {
+              "left": "einen Fehler",
+              "right": "zugeben"
+            },
+            {
+              "left": "Kontakt",
+              "right": "halten"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie: stolz, enttäuscht, erleichtert. [fr] Complétez avec : stolz, enttäuscht, erleichtert.",
+          "text": "Ich habe die Prüfung bestanden und bin richtig [[1]] auf mich. Mein Freund hat mich angelogen: Ich bin sehr [[2]] von ihm. Zum Glück war alles nur ein Missverständnis. Ich bin total [[3]].",
+          "explanation": "stolz auf + accusatif : fier de (soi-même ici). enttäuscht von + datif : déçu par quelqu’un qui a menti. erleichtert : soulagé, quand une inquiétude disparaît, comme à la fin d’un malentendu.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "stolz"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "enttäuscht"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "erleichtert"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr] Formez le nom.",
+          "text": "Nach dem [[1]] (sich streiten) haben wir uns versöhnt. Ohne [[2]] (vertrauen) gibt es keine Freundschaft. Die [[3]] (sich freuen) war groß. Seine [[4]] (eifersüchtig) nervt mich.",
+          "explanation": "streiten donne der Streit, vertrauen donne das Vertrauen (infinitif employé comme nom), sich freuen donne die Freude, eifersüchtig donne die Eifersucht. Tous les noms prennent une majuscule.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Streit"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Vertrauen"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Freude"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Eifersucht"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Ihre Freundin hat Liebeskummer. Wie zeigen Sie Verständnis? [fr] Votre amie a un chagrin d’amour. Comment montrez-vous votre compréhension ?",
+          "explanation": "« Das kann ich gut nachvollziehen » (je comprends tout à fait) reconnaît ce que ressent l’autre. La deuxième réplique dit le contraire de la compréhension, la troisième fait un reproche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das kann ich gut nachvollziehen. Das tut bestimmt weh.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich verstehe nicht, warum du so traurig bist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Selbst schuld, das habe ich dir gleich gesagt.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie möchten sich entschuldigen. Welche Formulierung passt? [fr] Vous voulez vous excuser. Quelle formule convient ?",
+          "explanation": "« Es tut mir leid, dass … » est la formule d’excuse ; « wirklich » la renforce. « Es ist mir egal » montre de l’indifférence, et « sich bedanken » sert à remercier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es ist mir egal, dass ich dich nicht angerufen habe.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es tut mir wirklich leid, dass ich dich nicht angerufen habe.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich bedanke mich, dass ich dich nicht angerufen habe.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Meine Freundin ist sehr nachtragend.“ Was bedeutet das? [fr] « Mon amie est très rancunière. » Que veut dire « nachtragend » ?",
+          "explanation": "nachtragend : quelqu’un qui garde longtemps en mémoire une dispute ou une offense, qui est rancunier. S’excuser vite serait presque le contraire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kommt oft zu spät nach Hause.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie entschuldigt sich sehr schnell.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie vergisst einen Streit lange nicht.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welche Präposition passt? „Mein kleiner Bruder ist eifersüchtig … das neue Baby.“ [fr] Quelle préposition convient ? « Mon petit frère est jaloux du nouveau bébé. »",
+          "explanation": "eifersüchtig auf + accusatif, comme stolz auf. Le français « jaloux de » pousse à chercher une autre préposition : apprenez l’adjectif avec sa préposition.",
+          "options": [
+            {
+              "id": "a",
+              "label": "über",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "auf",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "für",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-beziehungen-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : dire ce qu’on ressent",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : dire ce qu’on ressent",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\nSprechen Sie mit Gefühl: Freude, Verständnis oder Bedauern hört man an der Stimme. [fr] Parlez avec expression : la joie, la compréhension ou le regret s’entendent dans la voix.\nAchten Sie auf die Betonung von „darauf“ und „darüber“: Der Akzent liegt auf der zweiten Silbe. [fr] Faites attention à l’accent de « darauf » et « darüber » : il porte sur la deuxième syllabe.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich habe mich sehr darüber gefreut, dass du gekommen bist.",
+          "accept": [
+            "Ich habe mich sehr darüber gefreut, dass du gekommen bist."
+          ],
+          "explanation": "Pour dire sa joie. « darüber » annonce la subordonnée ; accent sur « da-RÜ-ber ». Le ü se prononce lèvres arrondies, comme dans « rue ».",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das kann ich gut verstehen, das war bestimmt nicht leicht.",
+          "accept": [
+            "Das kann ich gut verstehen, das war bestimmt nicht leicht."
+          ],
+          "explanation": "Pour montrer de la compréhension. Accent sur « ver-STE-hen » et sur « LEICHT ». Le ch de « leicht » est doux, comme un souffle.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Es tut mir wirklich leid, dass ich mich nicht gemeldet habe.",
+          "accept": [
+            "Es tut mir wirklich leid, dass ich mich nicht gemeldet habe."
+          ],
+          "explanation": "Formule d’excuse complète. Après « dass », le verbe conjugué « habe » va à la fin. Accent sur « LEID » et sur « ge-MEL-det ».",
+          "threshold": 70
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Auf dich kann ich mich immer verlassen.",
+          "accept": [
+            "Auf dich kann ich mich immer verlassen."
+          ],
+          "explanation": "Pour une personne : préposition + pronom (auf dich), placés en tête pour insister. Accent sur « DICH » et sur « ver-LAS-sen ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Lass uns noch einmal in Ruhe darüber reden.",
+          "accept": [
+            "Lass uns noch einmal in Ruhe darüber reden."
+          ],
+          "explanation": "Pour proposer de se réconcilier. « Lass uns … » équivaut à « parlons-en ». Le h de « Ruhe » est muet : on dit [rou-e].",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Worüber hast du dich denn so geärgert?",
+          "accept": [
+            "Worüber hast du dich denn so geärgert?"
+          ],
+          "explanation": "Question avec wo- + préposition, adoucie par la particule « denn ». Intonation descendante ; dans « geärgert », on marque une légère coupure entre ge- et ärgert.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-beziehungen-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-beziehungen-lesen2",
+      "kind": "exercise",
+      "title": "Comprendre : un forum « Rat gesucht »",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : un forum « Rat gesucht »",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSituation: Leonie schreibt in einem Forum über ein Problem mit ihrer besten Freundin. Zwei Personen antworten ihr. [fr] Situation : Leonie écrit sur un forum à propos d’un problème avec sa meilleure amie. Deux personnes lui répondent.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst Leonies Beitrag: Was ist ihr Problem? Lesen Sie dann die Antworten: Welchen Rat gibt jede Person? [fr] Lisez d’abord le message de Leonie : quel est son problème ? Lisez ensuite les réponses : quel conseil donne chaque personne ?\nDie zwei letzten Fragen sind Diktate. Schreiben Sie genau, mit Großbuchstaben und Kommas. [fr] Les deux dernières questions sont des dictées. Écrivez exactement, avec les majuscules et les virgules.\n\nRAT GESUCHT: MEINE BESTE FREUNDIN HAT KEINE ZEIT MEHR FÜR MICH\n\nLeonie_22: Hallo zusammen, ich brauche euren Rat. Meine beste Freundin Jana hat seit drei Monaten einen neuen Freund. Seitdem sagt sie fast jedes Treffen ab. Letzte Woche hat sie sogar meinen Geburtstag vergessen. Ich bin total enttäuscht, aber ich weiß nicht, ob ich mit ihr darüber sprechen soll. Ich habe Angst, dass wir uns dann streiten. Was würdet ihr machen?\n\nTom_B: Hi Leonie, das kann ich gut verstehen. Mir ist das mit meinem besten Freund auch passiert. Ich habe lange nichts gesagt und mich nur still geärgert. Am Ende haben wir uns fast ein Jahr nicht gesehen. Heute bereue ich das. Mein Tipp: Ruf sie an und sag ihr ehrlich, wie du dich fühlst. Aber mach ihr keine Vorwürfe!\n\nMama_von_drei: Liebe Leonie, hab ein bisschen Geduld! Am Anfang einer Beziehung ist man oft sehr verliebt und vergisst alles andere. Das geht meistens von selbst vorbei. Vielleicht kannst du Jana vorschlagen, dass ihr einmal im Monat einen Abend nur zu zweit verbringt. Ich bin sicher, sie freut sich darüber.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-lesen2-forum",
+          "caption": "Forum: Rat gesucht",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-lesen2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-beziehungen-lesen2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was ist Leonies Problem? [fr] Quel est le problème de Leonie ?",
+          "explanation": "Depuis que Jana a un nouveau copain, elle annule presque toutes les rencontres. Attention à l’inversion : c’est Jana qui a oublié l’anniversaire de Leonie, pas l’inverse.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ihre beste Freundin hat kaum noch Zeit für sie.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Sie hat sich mit ihrem Freund gestritten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie hat den Geburtstag ihrer Freundin vergessen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was rät Tom? [fr] Que conseille Tom ?",
+          "explanation": "« Ruf sie an und sag ihr ehrlich, wie du dich fühlst. » Tom parle d’expérience : se taire lui a coûté presque un an d’amitié. La patience, c’est le conseil de « Mama_von_drei ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Leonie soll Geduld haben und warten, bis Jana sich wieder meldet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Leonie soll den Kontakt zu Jana abbrechen und neue Freundinnen suchen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Leonie soll Jana anrufen und ehrlich über ihre Gefühle sprechen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "match",
+          "prompt": "Wer sagt oder erlebt was? Ordnen Sie zu. [fr] Qui dit ou vit quoi ? Associez.",
+          "explanation": "Leonie : « Ich habe Angst, dass wir uns dann streiten. » Jana a un nouveau copain depuis trois mois. Tom : « Mir ist das … auch passiert. » « Mama_von_drei » : « Das geht meistens von selbst vorbei. »",
+          "pairs": [
+            {
+              "left": "Leonie",
+              "right": "hat Angst vor einem Streit"
+            },
+            {
+              "left": "Jana",
+              "right": "hat einen neuen Freund"
+            },
+            {
+              "left": "Tom",
+              "right": "hat so etwas selbst erlebt"
+            },
+            {
+              "left": "Mama_von_drei",
+              "right": "glaubt, dass das Problem von selbst vorbeigeht"
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Wort aus Leonies Beitrag. [fr] Complétez avec le mot du message de Leonie.",
+          "text": "Leonie weiß nicht, ob sie mit Jana [[1]] sprechen soll.",
+          "explanation": "sprechen über + accusatif. Darüber reprend la chose dont il est question : la déception de Leonie et l’attitude de Jana. Pour une personne, on dirait « über sie ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "darüber"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Nach unserem Streit haben wir uns zum Glück schnell wieder versöhnt."
+          ],
+          "voice": "frau3",
+          "explanation": "sich versöhnen : pronom réfléchi uns juste après le sujet dans la principale inversée. « Streit » prend une majuscule (nom) ; « zum Glück » : heureusement.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Auf eine gute Freundin kann man sich immer verlassen."
+          ],
+          "voice": "sprecher",
+          "explanation": "sich verlassen auf + accusatif : « auf eine gute Freundin » en tête de phrase, puis le verbe kann en 2e position. Majuscule à Freundin ; deux s dans « verlassen ».",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-beziehungen-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : relations et sentiments",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : relations et sentiments",
+        "description": "Hier prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr] Vérifiez ici ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\nHören Sie zuerst, was Jakob über seine Schwester erzählt. Sie brauchen es für die Fragen 1 bis 3. [fr] Écoutez d’abord ce que Jakob raconte sur sa sœur : cela sert pour les questions 1 à 3.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-beziehungen-kontrolle-audio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worüber haben sich Jakob und Mia früher gestritten? [fr] À propos de quoi Jakob et Mia se disputaient-ils autrefois ?",
+          "explanation": "« meistens über ganz kleine Dinge: das Badezimmer, die Fernbedienung, die laute Musik ». La politique est le sujet sur lequel ils se disputent encore aujourd’hui, et l’argent n’est pas cité.",
+          "options": [
+            {
+              "id": "a",
+              "label": "über kleine Dinge im Alltag",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "über Politik und Geld",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "über ihre Freunde",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie ist die Beziehung heute? [fr] Comment est leur relation aujourd’hui ?",
+          "explanation": "« Heute verstehen wir uns super. Wir telefonieren jeden Sonntag. » Mia a quitté la maison à dix-huit ans et rien n’indique qu’ils vivent de nouveau ensemble.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sprechen kaum noch miteinander, nur an Geburtstagen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie verstehen sich gut und telefonieren regelmäßig.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie wohnen wieder zusammen in derselben Wohnung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Sätze nach Jakobs Bericht. [fr] Complétez les phrases d’après le récit de Jakob.",
+          "text": "Wenn Jakob ein Problem hat, fragt er zuerst Mia um [[1]]. Über Politik sprechen sie nicht so gern, denn [[2]] streiten sie sich immer noch.",
+          "explanation": "jemanden um Rat fragen : demander conseil à quelqu’un. Darüber reprend « Politik », une chose déjà nommée : da(r)- + über, car on dit sich streiten über.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Rat"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "darüber"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Ich interessiere mich sehr für Fotografie.“ Ergänzen Sie die Frage: „… interessierst du dich?“ [fr] « Je m’intéresse beaucoup à la photographie. » Complétez la question : « À quoi t’intéresses-tu ? »",
+          "explanation": "sich interessieren für + accusatif ; la photographie est une chose, donc wo- + für : Wofür? « Für wen » interroge sur une personne, et « wovon » ne correspond pas à la préposition du verbe.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Für wen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wovon",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wofür",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "habe",
+              "mich",
+              "darüber",
+              "geärgert,",
+              "dass",
+              "du",
+              "nicht",
+              "angerufen",
+              "hast."
+            ]
+          ],
+          "explanation": "Principale au Perfekt : habe … geärgert, avec le pronom réfléchi juste après l’auxiliaire. darüber annonce la subordonnée en dass, dont le verbe conjugué hast va à la fin."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "sich Sorgen machen : Sorgen est déjà à l’accusatif, donc le pronom réfléchi est au datif (mir). La préposition est um : sich Sorgen um jemanden machen.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich mache mich Sorgen um dich.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich mache mir Sorgen um dich.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich mache mir Sorgen für dich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie haben endlich mit Ihrer Freundin gesprochen, und alles ist wieder gut. Wie fühlen Sie sich? [fr] Vous avez enfin parlé avec votre amie, et tout va de nouveau bien. Comment vous sentez-vous ?",
+          "explanation": "erleichtert : soulagé, quand une inquiétude disparaît. beleidigt (vexé) et eifersüchtig (jaloux) décrivent des sentiments négatifs qui ne correspondent pas à une réconciliation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "eifersüchtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "beleidigt",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "erleichtert",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-beziehungen-hoeren-audio",
+      "kind": "audio",
+      "title": "Nele et Deniz : un malentendu",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Hallo Deniz. Schön, dass du Zeit hast. Ehrlich gesagt war ich nicht sicher, ob du überhaupt kommst."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Hallo Nele. Klar komme ich! Aber du klingst irgendwie komisch. Ist etwas los?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Na ja, ich muss dir etwas sagen. Ich habe mich am Samstag ziemlich über dich geärgert. Ich hatte doch alle zu meinem Geburtstagsessen eingeladen, und du bist einfach nicht gekommen. Ich habe den ganzen Abend auf dich gewartet."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Moment mal. Ich habe dir doch am Freitag geschrieben, dass ich nicht kann! Meine Mutter musste ins Krankenhaus, und ich bin sofort nach Köln gefahren."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Was? Davon weiß ich nichts. Ich habe keine Nachricht von dir bekommen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Warte, ich schaue mal nach. Oh nein! Die Nachricht ist in der Gruppe vom Volleyballteam gelandet, nicht bei dir. Das tut mir wirklich leid, Nele."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Ach, so war das! Und ich habe gedacht, du hast einfach keine Lust auf meine Party. Ich war richtig enttäuscht. Aber sag mal, wie geht es denn deiner Mutter?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Zum Glück wieder besser. Sie hatte einen Unfall mit dem Fahrrad, aber nach drei Tagen durfte sie nach Hause. Ich kümmere mich jetzt ein bisschen um sie und fahre am Wochenende immer nach Köln."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Gut, dass es ihr besser geht. Und ich bin so erleichtert, dass alles nur ein Missverständnis war. Ehrlich, ich hatte schon Angst davor, dass unsere Freundschaft kaputt ist."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Quatsch! Auf mich kannst du dich doch verlassen. Aber warum hast du mich nicht einfach angerufen?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Ich war beleidigt, und ich wollte nicht als Erste anrufen. Das war blöd von mir, ich weiß."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Wir haben beide einen Fehler gemacht. Weißt du was? Ich lade dich zum Essen ein, und wir feiern deinen Geburtstag noch einmal, nur wir zwei. Was hältst du davon?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Nele",
+          "text": "Sehr gern! Darauf freue ich mich. Wie wäre es mit Donnerstag?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Deniz",
+          "text": "Donnerstag passt mir gut. Ich reserviere einen Tisch beim Italiener am Markt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-regel-tabelle",
+      "kind": "image",
+      "title": "Chose ou personne : da-, wo- ou pronom",
+      "alt": "Tableau à deux colonnes. Chose : « Worauf wartest du? Ich warte darauf. Worüber ärgerst du dich? Ich ärgere mich darüber. » Personne : « Auf wen wartest du? Ich warte auf ihn. Über wen ärgerst du dich? Ich ärgere mich über sie. »",
+      "image": {
+        "layout": "table",
+        "title": "Sache oder Person?",
+        "icon": "scale",
+        "columns": [
+          "",
+          "Sache",
+          "Person"
+        ],
+        "rows": [
+          [
+            "Frage",
+            "[Worauf] wartest du?",
+            "[Auf wen] wartest du?"
+          ],
+          [
+            "Antwort",
+            "Ich warte [darauf].",
+            "Ich warte [auf ihn]."
+          ],
+          [
+            "Frage",
+            "[Worüber] ärgerst du dich?",
+            "[Über wen] ärgerst du dich?"
+          ],
+          [
+            "Antwort",
+            "Ich ärgere mich [darüber].",
+            "Ich ärgere mich [über sie]."
+          ]
+        ]
+      }
+    },
+    {
+      "key": "b1-beziehungen-lesen2-forum",
+      "kind": "image",
+      "title": "Forum : « Rat gesucht »",
+      "alt": "Fil de forum « Rat gesucht » : le message de Leonie sur son amie Jana, puis les réponses de Tom et de « Mama_von_drei ».",
+      "image": {
+        "layout": "forum",
+        "title": "Rat gesucht: Meine beste Freundin hat keine Zeit mehr für mich",
+        "posts": [
+          {
+            "author": "Leonie_22",
+            "date": "Mo., 18:42",
+            "text": "Hallo zusammen, ich brauche euren Rat. Meine beste Freundin Jana hat seit drei Monaten einen neuen Freund. Seitdem sagt sie fast jedes Treffen ab. Letzte Woche hat sie sogar meinen Geburtstag vergessen. Ich bin total enttäuscht, aber ich weiß nicht, ob ich mit ihr darüber sprechen soll. Ich habe Angst, dass wir uns dann streiten. Was würdet ihr machen?"
+          },
+          {
+            "author": "Tom_B",
+            "date": "Mo., 19:15",
+            "text": "Hi Leonie, das kann ich gut verstehen. Mir ist das mit meinem besten Freund auch passiert. Ich habe lange nichts gesagt und mich nur still geärgert. Am Ende haben wir uns fast ein Jahr nicht gesehen. Heute bereue ich das. Mein Tipp: Ruf sie an und sag ihr ehrlich, wie du dich fühlst. Aber mach ihr keine Vorwürfe!"
+          },
+          {
+            "author": "Mama_von_drei",
+            "date": "Di., 08:05",
+            "text": "Liebe Leonie, hab ein bisschen Geduld! Am Anfang einer Beziehung ist man oft sehr verliebt und vergisst alles andere. Das geht meistens von selbst vorbei. Vielleicht kannst du Jana vorschlagen, dass ihr einmal im Monat einen Abend nur zu zweit verbringt. Ich bin sicher, sie freut sich darüber."
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-beziehungen-kontrolle-audio",
+      "kind": "audio",
+      "title": "Jakob parle de sa sœur",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Jakob",
+          "text": "Mit meiner Schwester Mia habe ich mich früher ständig gestritten, meistens über ganz kleine Dinge: das Badezimmer, die Fernbedienung, die laute Musik. Als sie mit achtzehn ausgezogen ist, war ich zuerst froh. Aber nach ein paar Wochen habe ich sie richtig vermisst."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann3",
+          "name": "Jakob",
+          "text": "Heute verstehen wir uns super. Wir telefonieren jeden Sonntag, und wenn ich ein Problem habe, frage ich zuerst sie um Rat. Nur über Politik sprechen wir nicht so gern, denn darüber streiten wir uns immer noch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-einstieg-foto",
+      "kind": "image",
+      "title": "Deux cafés partagés",
+      "alt": "Vue de dessus : deux personnes, dont on ne voit que les bras, tiennent chacune une tasse de café noir sur une table ronde en marbre.",
+      "photo": {
+        "file": "libre/commons/beziehungen-kaffee.jpg"
+      },
+      "credit": "Joshua Ness (theexplorerdad), Wikimedia Commons",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Coffee_Talks_(Unsplash).jpg"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich habe mich sehr darüber gefreut, dass du gekommen bist."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Das kann ich gut verstehen, das war bestimmt nicht leicht."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Es tut mir wirklich leid, dass ich mich nicht gemeldet habe."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Auf dich kann ich mich immer verlassen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Lass uns noch einmal in Ruhe darüber reden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : dire ce qu’on ressent",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Worüber hast du dich denn so geärgert?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-lesen2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : un forum « Rat gesucht »",
+      "script": [
+        {
+          "voice": "frau3",
+          "text": "Nach unserem Streit haben wir uns zum Glück schnell wieder versöhnt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-lesen2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : un forum « Rat gesucht »",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Auf eine gute Freundin kann man sich immer verlassen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-beziehungen-lexique",
+      "kind": "audio",
+      "title": "Lexique · Beziehungen : parler de ses relations et de ses sentiments",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Freundschaft, die Freundschaften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Vertrauen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Streit"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Missverständnis, die Missverständnisse"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Beziehung, die Beziehungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Rat, die Ratschläge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich streiten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich versöhnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich verlassen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich kümmern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich ärgern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich freuen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Angst haben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich entschuldigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich bedanken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich Sorgen machen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich wünschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich melden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zuhören"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Verständnis haben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "enttäuscht"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "erleichtert"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "stolz"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "eifersüchtig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beleidigt"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachtragend"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

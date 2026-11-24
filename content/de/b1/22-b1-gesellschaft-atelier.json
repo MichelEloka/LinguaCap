@@ -1,0 +1,1495 @@
+{
+  "id": "b1-gesellschaft-atelier",
+  "title": "Gesellschaft (atelier) : transmettre une information, réagir à un exposé",
+  "objective": "Postuler par écrit pour une activité bénévole, reformuler une information compliquée pour un nouveau venu, suivre une discussion à la radio et réagir à un exposé par un retour et une question.",
+  "prerequisites": [
+    "b1-gesellschaft"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : reformuler pour un nouveau venu, informer les bénévoles."
+  ],
+  "layer": "content/b/source/b1/b1-gesellschaft-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "bewerbung",
+      "word": "Bewerbung",
+      "article": "die",
+      "plural": "Bewerbungen",
+      "partOfSpeech": "noun",
+      "translation": "la candidature",
+      "example": "Vielen Dank für Ihre Bewerbung!",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "sich-bewerben-als",
+      "word": "sich bewerben als",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "postuler comme, se porter candidat comme",
+      "example": "Ich möchte mich als Lesepatin bewerben.",
+      "note": "sich bewerben um eine Stelle (+ accusatif)",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "anzeige",
+      "word": "Anzeige",
+      "article": "die",
+      "plural": "Anzeigen",
+      "partOfSpeech": "noun",
+      "translation": "l’annonce",
+      "example": "Ich habe Ihre Anzeige in der Stadtteilzeitung gelesen.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "betreff",
+      "word": "Betreff",
+      "article": "der",
+      "plural": "Betreffe",
+      "partOfSpeech": "noun",
+      "translation": "l’objet (d’un courriel)",
+      "example": "Im Betreff steht: Bewerbung als Lesepatin.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "zur-verfuegung-stehen",
+      "word": "zur Verfügung stehen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être disponible",
+      "example": "Ich stehe dienstags ab 15 Uhr zur Verfügung.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "erfahrung-sammeln",
+      "word": "Erfahrung sammeln",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "acquérir de l’expérience",
+      "example": "In einem Sportverein habe ich viel Erfahrung gesammelt.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "einarbeitung",
+      "word": "Einarbeitung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la formation de départ, la prise de poste",
+      "example": "Gibt es eine Einarbeitung für neue Helfer?",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "lesepatin",
+      "word": "Lesepatin",
+      "article": "die",
+      "plural": "Lesepatinnen",
+      "partOfSpeech": "noun",
+      "translation": "la bénévole qui lit avec des enfants",
+      "example": "Als Lesepatin lese ich einmal pro Woche mit Kindern.",
+      "note": "der Lesepate (n-Deklination : den Lesepaten)",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "rueckmeldung",
+      "word": "Rückmeldung",
+      "article": "die",
+      "plural": "Rückmeldungen",
+      "partOfSpeech": "noun",
+      "translation": "le retour, l’avis (feedback)",
+      "example": "Danke für deine Rückmeldung!",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "mir-hat-besonders-gefallen-dass",
+      "word": "Mir hat besonders gefallen, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Ce qui m’a particulièrement plu, c’est que …",
+      "example": "Mir hat besonders gefallen, dass du viele Beispiele gebracht hast.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "ich-haette-noch-eine-frage-zu",
+      "word": "Ich hätte noch eine Frage zu …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "J’aurais encore une question sur …",
+      "example": "Ich hätte noch eine Frage zu den Kosten.",
+      "note": "zu + datif",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "einwand",
+      "word": "Einwand",
+      "article": "der",
+      "plural": "Einwände",
+      "partOfSpeech": "noun",
+      "translation": "l’objection",
+      "example": "Das ist ein berechtigter Einwand.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "pflicht",
+      "word": "Pflicht",
+      "article": "die",
+      "plural": "Pflichten",
+      "partOfSpeech": "noun",
+      "translation": "l’obligation, le devoir",
+      "example": "Ein soziales Jahr ist in Deutschland keine Pflicht.",
+      "note": "verpflichtend : obligatoire",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "freiwilligendienst",
+      "word": "Freiwilligendienst",
+      "article": "der",
+      "plural": "Freiwilligendienste",
+      "partOfSpeech": "noun",
+      "translation": "le service volontaire",
+      "example": "Nach dem Abitur hat er einen Freiwilligendienst gemacht.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "verantwortung",
+      "word": "Verantwortung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la responsabilité",
+      "example": "Bei dieser Arbeit lernt man, Verantwortung zu übernehmen.",
+      "note": "Verantwortung übernehmen",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "in-einfacher-sprache",
+      "word": "in einfacher Sprache",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "en langage simple",
+      "example": "Kannst du das in einfacher Sprache erklären?",
+      "note": null,
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "mit-freundlichen-gruessen",
+      "word": "Mit freundlichen Grüßen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Veuillez agréer mes salutations distinguées (lettre formelle)",
+      "example": "Mit freundlichen Grüßen, Inès Morel",
+      "note": "pas de virgule après la formule en allemand",
+      "audio": {
+        "media": "b1-gesellschaft-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-gesellschaft-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : une candidature pour une activité bénévole",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : une candidature pour une activité bénévole",
+        "description": "Lesen Sie die Anzeige und die Bewerbung. Hören Sie die Bewerbung auch an. Achten Sie auf den Aufbau. [fr] Lisez l’annonce et la candidature, écoutez aussi la candidature. Observez sa structure.\n\nDIE ANZEIGE\n[fr] L’annonce\nLesepatinnen und Lesepaten gesucht! Die Stadtbibliothek sucht Freiwillige, die einmal pro Woche mit Kindern zwischen 6 und 10 Jahren lesen. Wir bieten eine Einarbeitung und im Sommer ein kleines Dankeschön-Fest. Bewerbung per E-Mail an Frau Kern.\n\nDIE BEWERBUNG\n[fr] La candidature\nBetreff: Bewerbung als Lesepatin\n\nSehr geehrte Frau Kern,\nin der Stadtteilzeitung habe ich Ihre Anzeige gelesen, und ich möchte mich gern als Lesepatin bewerben.\nIch bin 34 Jahre alt, komme aus Belgien und lebe seit drei Jahren in Leipzig. In meiner Heimat habe ich zwei Jahre lang in einer Schulbibliothek mitgeholfen. Ich lese nicht nur selbst sehr gern, sondern ich habe auch viel Geduld mit Kindern.\nIch stehe dienstags und donnerstags ab 15 Uhr zur Verfügung. Ich hätte noch eine Frage: Gibt es eine Einarbeitung für neue Lesepaten?\nÜber eine Antwort würde ich mich sehr freuen.\nMit freundlichen Grüßen\nInès Morel\n\nAUFBAU\n[fr] Structure\n• Betreff : l’objet dit en quelques mots pourquoi on écrit.\n• Anrede : Sehr geehrte Frau Kern, (virgule, puis minuscule à la ligne suivante).\n• Einleitung : où l’on a lu l’annonce et ce que l’on veut.\n• Über mich : âge, origine, expérience, qualités, avec un exemple concret.\n• Zeit und Frage : disponibilités, puis une question précise.\n• Schluss : formule de politesse et nom complet.\n\nREDEMITTEL\n[fr] Formules utiles\nEINLEITEN\n[fr] Introduire\n• Ich habe Ihre Anzeige in … gelesen. / Ich schreibe Ihnen, weil …\nBEGRÜNDEN\n[fr] Justifier\n• Ich möchte mich engagieren, weil … / Für diese Aufgabe bringe ich … mit.\nBEISPIEL\n[fr] Donner un exemple\n• In meiner Heimat habe ich … / Zum Beispiel habe ich …\nSCHLUSS\n[fr] Conclure\n• Über eine Antwort würde ich mich freuen. / Mit freundlichen Grüßen\n\nÀ REMARQUER\n• Dans une lettre formelle, Sie, Ihnen et Ihre prennent toujours une majuscule.\n• « nicht nur …, sondern auch » met en valeur deux qualités : c’est le connecteur double du module thème.\n• On ne met pas de virgule après « Mit freundlichen Grüßen ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-gesellschaft-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : accueillir, rassurer, remplacer, donner un retour",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : accueillir, rassurer, remplacer, donner un retour",
+        "description": "Was passt? Wählen Sie die passende Reaktion. [fr] Quelle réplique convient ?\n\nSie helfen im Sprachcafé von Türklinke. Hören Sie jede Situation und wählen Sie die passende Antwort. Sprechen Sie dann die Sätze nach. [fr] Vous aidez au Sprachcafé de Türklinke. Écoutez chaque situation, choisissez la réponse qui convient, puis répétez les phrases.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-f1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-f2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-f3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-f4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Situation 1: Was antworten Sie? [fr] Situation 1 : que répondez-vous ?",
+          "explanation": "La question porte sur une expérience bénévole : on répond par un exemple précis, au Perfekt. Un emploi de bureau n’est pas du bénévolat, et « je n’ai pas le temps » contredit votre présence au Sprachcafé.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, ich arbeite seit drei Jahren in einem Büro im Zentrum.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ja, in meiner Heimatstadt habe ich in einem Sportverein geholfen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nein, dafür habe ich neben der Arbeit leider keine Zeit.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Situation 2: Was antworten Sie? [fr] Situation 2 : que répondez-vous ?",
+          "explanation": "On rassure (« keine Sorge ») et on donne l’information exacte : le Sprachcafé est gratuit. Les 24 euros sont la cotisation facultative des membres, pas un prix d’entrée.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nein, keine Sorge, das Sprachcafé ist kostenlos.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ja, das Café kostet 24 Euro im Jahr für alle Gäste.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das weiß ich leider nicht. Fragen Sie bitte jemand anderen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Situation 3: Was antworten Sie? [fr] Situation 3 : que répondez-vous ?",
+          "explanation": "Lena demande si vous pouvez la remplacer (« einspringen »). On accepte, on souhaite un bon rétablissement (« Gute Besserung! ») et on pose la question pratique utile.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Schade, dann fällt das Sprachcafé am Mittwoch eben aus.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, am Mittwoch bin ich leider auch krank, tut mir leid.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Klar, das mache ich. Gute Besserung! Wo liegt der Schlüssel?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Situation 4: Was antworten Sie? [fr] Situation 4 : que répondez-vous ?",
+          "explanation": "Après un exposé, on remercie et on donne un retour positif précis (« Mir hat besonders gefallen, dass … »). Une critique sèche sans remerciement est impolie, et parler de soi ne répond pas à la question.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, ich habe letzte Woche auch eine Präsentation über Musik gemacht.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Danke! Mir hat besonders gefallen, dass Sie Beispiele gebracht haben.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nein. Das war leider viel zu lang und nicht sehr interessant.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Mir hat besonders gut gefallen, dass Sie so viele Beispiele gebracht haben.",
+          "accept": [
+            "Mir hat besonders gut gefallen, dass Sie so viele Beispiele gebracht haben."
+          ],
+          "explanation": "Retour positif : « gefallen » + datif (mir). Dans la subordonnée en « dass », l’auxiliaire « haben » va à la fin, après le participe « gebracht ».",
+          "threshold": 70
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich hätte noch eine Frage zu den Kosten.",
+          "accept": [
+            "Ich hätte noch eine Frage zu den Kosten."
+          ],
+          "explanation": "Question polie au Konjunktiv II (« ich hätte »). « zu » + datif pluriel : zu den Kosten.",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnten Sie das bitte noch einmal genauer erklären?",
+          "accept": [
+            "Könnten Sie das bitte noch einmal genauer erklären?"
+          ],
+          "explanation": "Demande de précision polie au Konjunktiv II. Accentuez « genauer » ; la voix monte légèrement à la fin.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : simplifier un courriel pour un nouveau venu",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : simplifier un courriel pour un nouveau venu",
+        "description": "Lesen Sie die E-Mail an das Team. Helfen Sie dann Herrn Haddad. [fr] Lisez le courriel adressé à l’équipe, puis aidez M. Haddad.\n\nDIE SITUATION\n[fr] La situation\nHerr Haddad lernt seit einem Jahr Deutsch und möchte zum ersten Mal ins Sprachcafé kommen. Er versteht einfache Sätze, aber die E-Mail von Nadine ist für ihn zu schwer. [fr] M. Haddad apprend l’allemand depuis un an et veut venir pour la première fois au Sprachcafé. Il comprend des phrases simples, mais le courriel de Nadine est trop difficile pour lui.\n\nDIE E-MAIL AN DAS TEAM\n[fr] Le courriel à l’équipe\nLiebes Team,\naufgrund der Bauarbeiten im Innenhof, die voraussichtlich bis Ende Juni andauern, ist der hintere Zugang zur Bibliothek vorübergehend nicht nutzbar. Gäste und Helfer werden daher gebeten, ausschließlich den Haupteingang in der Lindenstraße zu benutzen; der Aufzug befindet sich unmittelbar rechts davon. Da die Lesung in Raum 2 erst um 17:30 Uhr endet, können wir mit dem Aufbau nicht vor 17:45 Uhr beginnen. Den Schlüssel sowie die Namensschilder holt Samir an der Information ab. Das Sprachcafé selbst beginnt wie gewohnt um 18 Uhr, ist für Gäste weiterhin kostenlos und erfordert keine Anmeldung. Lena übernimmt ab 18:20 Uhr die Begrüßung.\nViele Grüße\nNadine\n\nSTRATEGIE\n[fr] Stratégie\nFragen Sie sich: Was muss Herr Haddad wissen, um pünktlich am richtigen Ort zu sein? [fr] Demandez-vous : que doit savoir M. Haddad pour être à l’heure au bon endroit ?\nLassen Sie Details für das Team weg. Benutzen Sie kurze Sätze. [fr] Laissez de côté les détails destinés à l’équipe. Faites des phrases courtes.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Notizen für Herrn Haddad: Ergänzen Sie. [fr] Notes pour M. Haddad : complétez.",
+          "text": "Sprachcafé am Mittwoch um [[1]] Uhr · Eingang: [[2]] · Aufzug: rechts neben dem Eingang · Kosten: [[3]] Euro · Anmeldung: nicht [[4]]",
+          "explanation": "Seules comptent pour M. Haddad l’heure de début (18 h), l’entrée de la Lindenstraße, la gratuité et l’absence d’inscription. L’heure du montage (17 h 45) ne concerne que les bénévoles.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "18",
+                "achtzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Lindenstraße",
+                "in der Lindenstraße",
+                "Haupteingang",
+                "Lindenstrasse"
+              ],
+              "size": 20,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "0",
+                "null",
+                "keine"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "nötig",
+                "notwendig"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welche Information ist für Herrn Haddad wichtig? [fr] Quelle information est importante pour M. Haddad ?",
+          "explanation": "Sans cette information, M. Haddad irait vers la cour fermée. La clé et le montage sont des détails d’organisation interne.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Samir holt den Schlüssel an der Information ab.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er muss den Eingang in der Lindenstraße nehmen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Helfer beginnen um 17:45 Uhr mit dem Aufbau.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Welche Information braucht Herr Haddad nicht? [fr] De quelle information M. Haddad n’a-t-il pas besoin ?",
+          "explanation": "Qui accueille à 18 h 20 ne change rien pour un invité. La gratuité et l’absence d’inscription, en revanche, le rassurent et lui évitent une démarche inutile.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Lena übernimmt ab 18:20 Uhr die Begrüßung.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das Sprachcafé ist für die Gäste kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Gäste müssen sich vorher nicht anmelden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welche Formulierung ist für Herrn Haddad am einfachsten? [fr] Quelle formulation est la plus simple pour M. Haddad ?",
+          "explanation": "Deux phrases courtes, des mots courants (« gesperrt », « Eingang ») et une consigne claire. Les autres versions gardent le style administratif (« aufgrund », « nutzbar ») ou empilent les relatives.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Aufgrund der Bauarbeiten ist der hintere Zugang nicht nutzbar.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Zugang, der wegen der Arbeiten, die bis Juni dauern, gesperrt ist, ist hinten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Hof ist gesperrt. Bitte kommen Sie durch den Eingang in der Lindenstraße.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen einfachen Satz für Herrn Haddad. [fr] Formez une phrase simple pour M. Haddad.",
+          "answers": [
+            [
+              "Sie",
+              "müssen",
+              "sich",
+              "nicht",
+              "anmelden",
+              "und",
+              "nichts",
+              "bezahlen."
+            ]
+          ],
+          "explanation": "Une seule phrase pour deux informations rassurantes : le verbe de modalité « müssen » en deuxième position, les deux infinitifs en fin de groupe, reliés par « und »."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesellschaft-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : les erreurs typiques des francophones",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : les erreurs typiques des francophones",
+        "description": "Diese Sätze schreiben französischsprachige Lernende oft falsch. Finden Sie die richtige Form. [fr] Les francophones se trompent souvent dans ces phrases. Trouvez la forme correcte.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das fehlende Wort. [fr] Complétez le mot qui manque.",
+          "text": "Ich habe leider weder Zeit [[1]] Geld für einen Sprachkurs.",
+          "explanation": "« ni … ni » se dit « weder … noch ». « weder … oder » mélange deux connecteurs ; « und » ne convient pas non plus.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "noch"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "« weder … noch » porte déjà la négation. Comme en français « ni … ni », on n’ajoute pas « nicht » (en français, on ajoute « ne » : je ne sais ni … ni …, d’où l’erreur).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich kann weder nicht schwimmen noch Rad fahren.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich kann weder schwimmen noch Rad fahren.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich kann nicht weder schwimmen noch Rad fahren.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Relativpronomen. [fr] Complétez avec le pronom relatif.",
+          "text": "Das ist alles, [[1]] ich über das Sprachcafé weiß.",
+          "explanation": "« tout ce que » : alles, was … Le calque « alles, das » est une erreur fréquente : après alles, etwas, nichts, on emploie « was ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "was"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. Achtung: nicht „wo“! [fr] Complétez. Attention : pas « wo » !",
+          "text": "Ich erinnere mich gut an den Tag, [[1]] ich nach Deutschland gekommen bin.",
+          "explanation": "« le jour où » : der Tag, an dem … (ou als, pour un fait unique au passé). « wo » ne reprend qu’un lieu dans la langue soignée.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "an dem",
+                "als"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Relativpronomen. Das Verb ist „helfen“ (+ Dativ). [fr] Complétez avec le pronom relatif. Le verbe est « helfen » (+ datif).",
+          "text": "Die Kinder, [[1]] ich bei den Hausaufgaben helfe, sind in der vierten Klasse.",
+          "explanation": "« helfen » se construit avec le datif. Au pluriel, le pronom relatif datif est « denen » (et non « den », qui serait l’article).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "denen"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "interessiere",
+              "mich",
+              "nicht nur",
+              "für Sport,",
+              "sondern auch",
+              "für Musik."
+            ]
+          ],
+          "explanation": "« nicht nur » se place juste avant l’élément qu’il met en valeur (für Sport), puis « sondern auch » introduit le second, après une virgule."
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? „Ich danke … für Ihre schnelle Antwort.“ [fr] Quelle forme est juste ? (Je vous remercie de votre réponse rapide.)",
+          "explanation": "« danken » se construit avec le datif : Ihnen (vouvoiement, toujours avec majuscule ; « ihnen » en minuscule signifie « à eux »). « Sie » est un accusatif, et « euch » (vous, tutoiement pluriel) ne va pas avec « Ihre » dans la même phrase.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ihnen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "euch",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesellschaft-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : une discussion à la radio (Hören)",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : une discussion à la radio (Hören)",
+        "description": "PRÜFUNGSTRAINING HÖREN · EINE DISKUSSION IM RADIO\n[fr] Entraînement à l’examen, compréhension orale : une discussion à la radio\n\nSie hören eine Diskussion im Radio. Sie hören sie zweimal. [fr] Vous entendez une discussion à la radio. Vous l’entendez deux fois.\nWer sagt was? Wählen Sie bei jeder Aussage: der Moderator, Frau Lehmann oder Herr Brandt. [fr] Qui dit quoi ? Pour chaque affirmation, choisissez : l’animateur, Mme Lehmann ou M. Brandt.\n\nZEIT\n[fr] Temps\nLesen Sie zuerst die sechs Aussagen: eine Minute. Dann hören Sie die Diskussion zweimal. Insgesamt etwa 12 Minuten. [fr] Lisez d’abord les six affirmations : une minute. Puis écoutez deux fois la discussion. En tout, environ 12 minutes.\n\nSTRATEGIE\n[fr] Stratégie\nDie Aussagen benutzen andere Wörter als die Personen. Achten Sie auf die Bedeutung. [fr] Les affirmations n’emploient pas les mêmes mots que les personnes : soyez attentif au sens.\nAchten Sie beim ersten Hören darauf: Wer ist für das Pflichtjahr, wer ist dagegen? [fr] À la première écoute, repérez qui est pour l’année obligatoire et qui est contre.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-atelier-pruefung-sprecher",
+          "caption": "Im Studio",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesellschaft-atelier-pruefung-radio",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Es ist heute schwer, Freiwillige zu finden.“ [fr] Qui dit cela ?",
+          "explanation": "Mme Lehmann : « Wir finden kaum noch Freiwillige. » « kaum noch » (presque plus) correspond à « schwer zu finden ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Wer eine Arbeit machen muss, macht sie nicht gern.“ [fr] Qui dit cela ?",
+          "explanation": "M. Brandt : « Wer gezwungen wird, macht die Arbeit nicht mit Freude. » « gezwungen werden » (être obligé) = « machen müssen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Bei dieser Arbeit lernt man, Verantwortung zu übernehmen.“ [fr] Qui dit cela ?",
+          "explanation": "Mme Lehmann : les jeunes apprennent « etwas, was man in keiner Schule lernt: Verantwortung ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Mit mehr Geld gäbe es mehr Freiwillige.“ [fr] Qui dit cela ?",
+          "explanation": "M. Brandt : « Wenn die Bezahlung besser wäre, würden sich sicher mehr junge Menschen melden. » Il propose d’améliorer le volontariat plutôt que d’imposer une obligation.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Die Hörer sind nicht einer Meinung.“ [fr] Qui dit cela ?",
+          "explanation": "L’animateur résume le sondage : « Die Meinungen sind sehr unterschiedlich: Ungefähr die Hälfte ist für ein Pflichtjahr, die andere Hälfte dagegen. »",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Wer sagt das? „Ich habe nach der Schule mit kleinen Kindern gearbeitet.“ [fr] Qui dit cela ?",
+          "explanation": "M. Brandt a fait une année de volontariat « in einer Kita » (une crèche) après le baccalauréat. Mme Lehmann parle des jeunes qui travaillent dans sa maison de retraite, pas d’elle-même.",
+          "options": [
+            {
+              "id": "a",
+              "label": "der Moderator",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Frau Lehmann",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Herr Brandt",
+              "correct": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-gesellschaft-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : postuler pour une activité bénévole",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : postuler pour une activité bénévole",
+        "description": "Lesen Sie die zwei Anzeigen. Wählen Sie eine Anzeige und schreiben Sie eine Bewerbung. [fr] Lisez les deux annonces. Choisissez-en une et écrivez une candidature.\n\nANZEIGE A\n[fr] Annonce A\nTürklinke e. V. sucht Helferinnen und Helfer für die Hausaufgabenhilfe: montags und donnerstags von 15 bis 17 Uhr, Kinder der Klassen 3 bis 6. Bewerbung bitte per E-Mail an Frau Haas.\n\nANZEIGE B\n[fr] Annonce B\nDas Seniorenheim „Lindenhof“ sucht Freiwillige, die mit unseren Bewohnern spazieren gehen, vorlesen oder spielen. Die Zeiten sind flexibel, mindestens zwei Stunden pro Woche. Bewerbung bitte per E-Mail an Herrn Yıldız.\n\nREDEMITTEL\n[fr] Formules utiles\n• Betreff: Bewerbung als Helferin / Helfer in der Hausaufgabenhilfe\n• Sehr geehrte Frau Haas, / Sehr geehrter Herr Yıldız,\n• Ich habe Ihre Anzeige … gelesen und möchte mich als … bewerben.\n• In meiner Heimat habe ich … / Ich habe Erfahrung mit …\n• Ich bin nicht nur …, sondern auch …\n• Ich stehe … zur Verfügung.\n• Ich hätte noch eine Frage: …\n• Über eine Antwort würde ich mich freuen. Mit freundlichen Grüßen\n\nPlanen Sie 5 Minuten, schreiben Sie 15 Minuten und lesen Sie Ihren Text 5 Minuten lang noch einmal. [fr] Prévoyez 5 minutes de plan, 15 minutes de rédaction et 5 minutes de relecture.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Wählen Sie Anzeige A oder B und schreiben Sie eine Bewerbung per E-Mail (80 bis 120 Wörter). [fr] Choisissez l’annonce A ou B et écrivez une candidature par courriel (80 à 120 mots).\nSagen Sie, wo Sie die Anzeige gelesen haben und warum Sie sich engagieren möchten. [fr] Dites où vous avez lu l’annonce et pourquoi vous voulez vous engager.\nStellen Sie sich vor: Erfahrung, Sprachen, Eigenschaften. [fr] Présentez-vous : expérience, langues, qualités.\nSagen Sie, wann Sie Zeit haben, und stellen Sie eine Frage zur Aufgabe. [fr] Dites quand vous êtes disponible et posez une question sur la mission.",
+          "maxChars": 1200,
+          "minWords": 80
+        },
+        "checklist": [
+          "Ich schreibe einen Betreff und eine formelle Anrede. [fr] J’écris un objet et une formule d’appel formelle.",
+          "Ich sage, wo ich die Anzeige gelesen habe und warum ich helfen möchte. [fr] Je dis où j’ai lu l’annonce et pourquoi je veux aider.",
+          "Ich beschreibe meine Erfahrung mit einem Beispiel. [fr] Je présente mon expérience avec un exemple.",
+          "Ich sage, wann ich Zeit habe, und stelle eine Frage. [fr] J’indique mes disponibilités et je pose une question.",
+          "Ich benutze einen Konnektor mit zwei Teilen (nicht nur …, sondern auch …). [fr] J’emploie un connecteur double.",
+          "Ich sieze (Sie, Ihnen) und schließe mit „Mit freundlichen Grüßen“. [fr] Je vouvoie et je termine par la formule finale."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : annonce citée, motivation, expérience, disponibilités et question ; lettre formelle complète (objet, appel, formule finale, Sie)",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-gesellschaft-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : réagir à un exposé",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : réagir à un exposé",
+        "description": "DIE SITUATION\n[fr] La situation\nIn einer Versammlung des Vereins stellt Leonie ein neues Projekt vor. Danach bittet sie um Rückmeldungen und Fragen. [fr] Lors d’une réunion de l’association, Leonie présente un nouveau projet. Ensuite, elle demande des retours et des questions.\nHören Sie die Präsentation. Sie können sie auch zweimal hören. [fr] Écoutez l’exposé. Vous pouvez aussi l’écouter deux fois.\n\nREDEMITTEL\n[fr] Formules utiles\n• remercier : Vielen Dank für die interessante Präsentation!\n• retour positif : Mir hat besonders gefallen, dass … / Ich finde es toll, dass …\n• point à préciser : Mir ist noch nicht ganz klar, wie … / Was passiert, wenn …?\n• question : Ich hätte noch eine Frage zu … / Kannst du noch erklären, …?\n• proposition : Wie wäre es, wenn …? / Vielleicht könnte man …\n\nBereiten Sie sich 5 Minuten vor. Nehmen Sie dann Ihre Reaktion auf. [fr] Préparez-vous 5 minutes, puis enregistrez votre réaction.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesellschaft-atelier-sprechen-praesentation",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Hören Sie die Präsentation von Leonie. Reagieren Sie dann etwa 90 Sekunden lang. [fr] Écoutez l’exposé de Leonie, puis réagissez pendant environ 90 secondes.\nBedanken Sie sich und sagen Sie, was Ihnen besonders gefallen hat. [fr] Remerciez-la et dites ce qui vous a particulièrement plu.\nNennen Sie einen Punkt, der Ihnen nicht ganz klar ist, oder ein mögliches Problem. [fr] Citez un point qui ne vous paraît pas clair ou un problème possible.\nStellen Sie eine Frage und machen Sie einen Vorschlag für den Transport. [fr] Posez une question et faites une proposition pour le transport.",
+          "maxSeconds": 90
+        },
+        "written": null,
+        "checklist": [
+          "Ich bedanke mich und sage genau, was mir gefallen hat. [fr] Je remercie et je dis précisément ce qui m’a plu.",
+          "Ich nenne höflich einen Punkt, der mir nicht ganz klar ist. [fr] Je cite poliment un point à préciser.",
+          "Ich stelle eine Frage (Ich hätte noch eine Frage zu …). [fr] Je pose une question.",
+          "Ich mache einen Vorschlag für den Transport (Wie wäre es, wenn …?). [fr] Je propose une solution pour le transport.",
+          "Ich spreche etwa 90 Sekunden und verbinde meine Ideen. [fr] Je parle environ 90 secondes en reliant mes idées."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : remerciement et retour positif précis, point à préciser, question et proposition, en environ 90 secondes",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-gesellschaft-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : s’engager et transmettre",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : s’engager et transmettre",
+        "description": "FAIRE LE POINT\nRelisez ces objectifs. Si l’un d’eux vous fait hésiter, refaites l’exercice indiqué.\n\nDAS KANN ICH JETZT\n[fr] Ce que je sais faire maintenant\n• Ich kann die Anzeige eines Vereins verstehen. [fr] Je peux comprendre l’annonce d’une association (module thème, « Comprendre »).\n• Ich kann mich schriftlich für ein Ehrenamt bewerben. [fr] Je peux poser ma candidature par écrit pour du bénévolat (« Modèle », mission écrite).\n• Ich kann eine schwierige Information einfach erklären. [fr] Je peux expliquer simplement une information difficile (« Médiation »).\n• Ich kann einer Diskussion folgen und sagen, wer was meint. [fr] Je peux suivre une discussion et dire qui pense quoi (« Entraînement à l’examen »).\n• Ich kann auf eine Präsentation reagieren: Dank, Rückmeldung, Frage. [fr] Je peux réagir à un exposé : remerciement, retour, question (mission orale).\n\nMES STRATÉGIES\n• Médiation : se demander ce dont la personne a besoin pour agir, et laisser de côté le reste.\n• Écoute d’un débat : noter d’abord qui est pour et qui est contre, puis les arguments.\n• Lettre formelle : objet, appel, motivation, expérience, disponibilités, question, formule finale.\n\nÀ REVOIR\n• Les connecteurs doubles et les relatives avec was et wo (module thème, « Retenir » et « S’entraîner »).\n• Les formules de la candidature et du retour sur un exposé (lexique de ce module).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-gesellschaft-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Candidature modèle lue à voix haute",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Inès",
+          "text": "Betreff: Bewerbung als Lesepatin."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau3",
+          "name": "Inès",
+          "text": "Sehr geehrte Frau Kern, in der Stadtteilzeitung habe ich Ihre Anzeige gelesen, und ich möchte mich gern als Lesepatin bewerben."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau3",
+          "name": "Inès",
+          "text": "Ich bin vierunddreißig Jahre alt, komme aus Belgien und lebe seit drei Jahren in Leipzig. In meiner Heimat habe ich zwei Jahre lang in einer Schulbibliothek mitgeholfen. Ich lese nicht nur selbst sehr gern, sondern ich habe auch viel Geduld mit Kindern."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau3",
+          "name": "Inès",
+          "text": "Ich stehe dienstags und donnerstags ab fünfzehn Uhr zur Verfügung. Ich hätte noch eine Frage: Gibt es eine Einarbeitung für neue Lesepaten?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau3",
+          "name": "Inès",
+          "text": "Über eine Antwort würde ich mich sehr freuen. Mit freundlichen Grüßen, Inès Morel."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-f1",
+      "kind": "audio",
+      "title": "Réplique 1 : accueil au Sprachcafé",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Nadine",
+          "text": "Schön, dass Sie da sind! Haben Sie schon einmal ehrenamtlich gearbeitet?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-f2",
+      "kind": "audio",
+      "title": "Réplique 2 : un nouvel invité",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Gast",
+          "text": "Entschuldigung, ich bin neu hier. Muss ich etwas bezahlen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-f3",
+      "kind": "audio",
+      "title": "Réplique 3 : une collègue malade",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Lena",
+          "text": "Ich bin leider krank. Kannst du am Mittwoch für mich einspringen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-f4",
+      "kind": "audio",
+      "title": "Réplique 4 : après un exposé",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Referent",
+          "text": "Das war meine Präsentation. Haben Sie noch Fragen oder Anmerkungen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-pruefung-sprecher",
+      "kind": "image",
+      "title": "Les trois personnes de la discussion",
+      "alt": "Trois fiches : Jan Krüger, animateur de l’émission ; Mme Lehmann, directrice d’une maison de retraite ; M. Brandt, étudiant en travail social.",
+      "image": {
+        "layout": "cards",
+        "cards": [
+          {
+            "icon": "mic",
+            "title": "Jan Krüger",
+            "intro": [
+              {
+                "text": "Moderator"
+              }
+            ]
+          },
+          {
+            "icon": "heart-handshake",
+            "title": "Frau Lehmann",
+            "intro": [
+              {
+                "text": "leitet ein Seniorenheim"
+              }
+            ]
+          },
+          {
+            "icon": "graduation-cap",
+            "title": "Herr Brandt",
+            "intro": [
+              {
+                "text": "studiert Sozialarbeit"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-gesellschaft-atelier-pruefung-radio",
+      "kind": "audio",
+      "title": "Discussion radio : une année obligatoire pour la société ?",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Guten Abend und willkommen beim Stadtgespräch. Unser Thema heute: Sollte jeder junge Mensch nach der Schule ein Jahr für die Gesellschaft arbeiten, zum Beispiel im Krankenhaus, im Altenheim oder im Umweltschutz? Bei mir im Studio sind Frau Lehmann, sie leitet ein Seniorenheim, und Herr Brandt, er studiert Sozialarbeit. Frau Lehmann, Sie sind für ein Pflichtjahr. Warum?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Lehmann",
+          "text": "Ganz einfach: Wir finden kaum noch Freiwillige. In meinem Haus helfen zurzeit drei junge Leute. Sie gehen mit den Bewohnern spazieren, lesen ihnen vor oder helfen beim Essen. Ohne sie hätten unsere Pflegekräfte für solche Dinge keine Zeit. Und die jungen Leute lernen dabei etwas, was man in keiner Schule lernt: Verantwortung."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Herr Brandt, Sie sehen das anders."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Brandt",
+          "text": "Ja. Ich habe nach dem Abitur selbst ein freiwilliges Jahr gemacht, in einer Kita, und das war eine tolle Erfahrung. Aber gerade deshalb bin ich gegen eine Pflicht. Wer gezwungen wird, macht die Arbeit nicht mit Freude. Und die Menschen im Heim merken das sofort."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Lehmann",
+          "text": "Das sehe ich nicht so. Viele junge Leute wissen einfach nicht, was es alles gibt. Ein Pflichtjahr würde ihnen zeigen, wie unsere Gesellschaft funktioniert. Und manche bleiben danach sogar im sozialen Bereich."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Brandt",
+          "text": "Mag sein. Aber dann sollten wir das freiwillige Jahr attraktiver machen. Im Moment bekommt man nur ein kleines Taschengeld. Davon kann man in einer großen Stadt kaum leben. Wenn die Bezahlung besser wäre, würden sich sicher mehr junge Menschen melden."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Da sind wir beim Geld. Frau Lehmann, wer soll das bezahlen?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Frau Lehmann",
+          "text": "Der Staat natürlich. Das Geld wäre gut investiert, weil wir alle davon profitieren."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Moderator",
+          "text": "Wir haben auch unsere Hörerinnen und Hörer gefragt. Die Meinungen sind sehr unterschiedlich: Ungefähr die Hälfte ist für ein Pflichtjahr, die andere Hälfte dagegen. Viele wünschen sich aber, dass freiwilliges Engagement mehr anerkannt wird. Frau Lehmann, Herr Brandt, vielen Dank für das Gespräch!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-sprechen-praesentation",
+      "kind": "audio",
+      "title": "Exposé de Leonie : l’aide aux courses du quartier",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Leonie",
+          "text": "Hallo zusammen! Ich möchte euch heute kurz unser neues Projekt vorstellen: die Einkaufshilfe im Viertel. Viele ältere Menschen können nicht mehr gut laufen, und der nächste Supermarkt ist zwei Kilometer entfernt. Deshalb kaufen Freiwillige einmal pro Woche für sie ein."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau3",
+          "name": "Leonie",
+          "text": "Die Bewohner rufen montags bei uns an und sagen, was sie brauchen. Am Dienstag bringen wir die Einkäufe nach Hause, und das Geld bekommen wir bar zurück. Im Moment machen zwölf Freiwillige mit, und wir helfen schon dreißig Menschen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau3",
+          "name": "Leonie",
+          "text": "Aber wir haben noch ein Problem: Wir haben kein Auto, und schwere Sachen wie Wasserkisten sind mit dem Fahrrad schwierig. Wir suchen also sowohl neue Helfer als auch eine Lösung für den Transport. Vielen Dank fürs Zuhören! Habt ihr Fragen oder Ideen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : accueillir, rassurer, remplacer, donner un retour",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Mir hat besonders gut gefallen, dass Sie so viele Beispiele gebracht haben."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : accueillir, rassurer, remplacer, donner un retour",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich hätte noch eine Frage zu den Kosten."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : accueillir, rassurer, remplacer, donner un retour",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnten Sie das bitte noch einmal genauer erklären?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesellschaft-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gesellschaft (atelier) : transmettre une information, réagir à un exposé",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Bewerbung, die Bewerbungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich bewerben als"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Anzeige, die Anzeigen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Betreff, die Betreffe"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "zur Verfügung stehen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Erfahrung sammeln"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Einarbeitung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lesepatin, die Lesepatinnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Rückmeldung, die Rückmeldungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mir hat besonders gefallen, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich hätte noch eine Frage zu …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Einwand, die Einwände"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Pflicht, die Pflichten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Freiwilligendienst, die Freiwilligendienste"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Verantwortung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "in einfacher Sprache"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Mit freundlichen Grüßen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

@@ -1,0 +1,1365 @@
+{
+  "id": "b1-lernen-atelier",
+  "title": "Lernen, atelier : se renseigner et motiver son choix",
+  "objective": "Écrire une demande d’information formelle à une école de langues, comparer deux offres et justifier son choix à l’oral, transmettre en allemand une brochure lue en français et préparer une contribution d’opinion à un forum.",
+  "prerequisites": [
+    "b1-lernen"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : justifier le choix d’une formation, comparer deux offres avec un conseiller."
+  ],
+  "layer": "content/b/source/b1/b1-lernen-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "ich-interessiere-mich-fuer",
+      "word": "Ich interessiere mich für …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je m’intéresse à …",
+      "example": "Ich interessiere mich für Ihren Intensivkurs im Juli.",
+      "note": "+ accusatif",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "ich-wuerde-gern-wissen-ob",
+      "word": "Ich würde gern wissen, ob …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "J’aimerais savoir si …",
+      "example": "Ich würde gern wissen, ob die Prüfung im Preis enthalten ist.",
+      "note": "verbe à la fin après ob",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "koennten-sie-mir-bitte-mitteilen",
+      "word": "Könnten Sie mir bitte mitteilen, …?",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Pourriez-vous m’indiquer … ?",
+      "example": "Könnten Sie mir bitte mitteilen, wie viele Personen in einer Gruppe sind?",
+      "note": "séparable : mit|teilen",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "im-preis-enthalten-sein",
+      "word": "im Preis enthalten sein",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "être compris dans le prix",
+      "example": "Das Lehrbuch ist im Preis enthalten.",
+      "note": null,
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "fuer-mich-ist-wichtig-dass",
+      "word": "Für mich ist wichtig, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Pour moi, il est important que …",
+      "example": "Für mich ist wichtig, dass der Kurs abends stattfindet.",
+      "note": "verbe à la fin après dass",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "im-vergleich-zu",
+      "word": "im Vergleich zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "par rapport à, comparé à",
+      "example": "Im Vergleich zu Kurs A ist Kurs B billiger.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "ein-vorteil-ist-dass",
+      "word": "Ein Vorteil ist, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Un avantage, c’est que …",
+      "example": "Ein Vorteil ist, dass man zu Hause lernen kann.",
+      "note": "contraire : Ein Nachteil ist, dass …",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "sich-entscheiden-fuer",
+      "word": "sich entscheiden für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se décider pour, choisir",
+      "example": "Am Ende habe ich mich für den Abendkurs entschieden.",
+      "note": "+ accusatif · entschied, hat entschieden",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "meiner-meinung-nach",
+      "word": "Meiner Meinung nach …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À mon avis …",
+      "example": "Meiner Meinung nach ist eine Lerngruppe sehr hilfreich.",
+      "note": "le verbe suit directement : Meiner Meinung nach ist …",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "ich-bin-der-meinung-dass",
+      "word": "Ich bin der Meinung, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je suis d’avis que …",
+      "example": "Ich bin der Meinung, dass Apps einen Kurs nicht ersetzen.",
+      "note": null,
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "einerseits-andererseits",
+      "word": "einerseits …, andererseits …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "d’un côté …, de l’autre …",
+      "example": "Einerseits sind Apps billig, andererseits fehlt der Kontakt zu anderen.",
+      "note": "verbe juste après chaque connecteur",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "alles-in-allem",
+      "word": "Alles in allem …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Tout compte fait …, en résumé …",
+      "example": "Alles in allem finde ich den Präsenzkurs besser.",
+      "note": null,
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "vielen-dank-im-voraus",
+      "word": "Vielen Dank im Voraus.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Merci d’avance.",
+      "example": "Vielen Dank im Voraus für Ihre Antwort.",
+      "note": null,
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ich-freue-mich-auf-ihre-antwort",
+      "word": "Ich freue mich auf Ihre Antwort.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Dans l’attente de votre réponse.",
+      "example": "Ich freue mich auf Ihre Antwort und grüße Sie herzlich.",
+      "note": "sich freuen auf + accusatif",
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "anzahlung",
+      "word": "Anzahlung",
+      "article": "die",
+      "plural": "Anzahlungen",
+      "partOfSpeech": "noun",
+      "translation": "l’acompte",
+      "example": "Bei der Anmeldung zahlt man eine Anzahlung von 100 Euro.",
+      "note": null,
+      "audio": {
+        "media": "b1-lernen-atelier-lexique",
+        "line": 14
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-lernen-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : une demande d’information et une comparaison orale",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : une demande d’information et une comparaison orale",
+        "description": "MODELL: EINE ANFRAGE AN EINE SPRACHSCHULE\n[fr] Modèle : une demande d’information à une école de langues\nLesen Sie die E-Mail von Amina Ndiaye. Sie stellt ihre Fragen höflich und indirekt. [fr] Lisez le courriel d’Amina Ndiaye. Elle pose ses questions de façon polie et indirecte.\n\nBetreff: Anfrage zum Intensivkurs Deutsch B1 im Juli\nSehr geehrte Damen und Herren,\nauf Ihrer Internetseite habe ich gelesen, dass Sie im Juli einen Intensivkurs Deutsch B1 anbieten. Ich interessiere mich sehr für diesen Kurs, weil ich im Herbst eine Ausbildung als Pflegefachfrau beginnen möchte und dafür ein B1-Zertifikat brauche.\nDazu hätte ich einige Fragen. Könnten Sie mir bitte mitteilen, wie viele Personen in einer Gruppe sind? Außerdem würde ich gern wissen, ob die Prüfung am Ende im Kurspreis enthalten ist. Da ich vormittags arbeite, möchte ich auch fragen, ob es eine Nachmittagsgruppe gibt. Gibt es eine Ermäßigung für Personen ohne festes Einkommen?\nÜber eine baldige Antwort würde ich mich sehr freuen. Vielen Dank im Voraus.\nMit freundlichen Grüßen\nAmina Ndiaye\n\nAUFBAU\n[fr] Structure\n1. Betreff: Kurs und Anliegen nennen. [fr] Objet : nommer le cours et l’objet de la demande.\n2. Einleitung: Woher kennen Sie das Angebot? Warum interessiert es Sie? [fr] Introduction : où avez-vous vu l’offre ? Pourquoi vous intéresse-t-elle ?\n3. Hauptteil: zwei bis vier Fragen, höflich und indirekt gestellt. [fr] Développement : deux à quatre questions, posées de façon polie et indirecte.\n4. Schluss: Bitte um Antwort, Dank und Grußformel ohne Komma. [fr] Conclusion : demande de réponse, remerciement et formule finale, sans virgule après celle-ci.\n\nEINLEITEN\n[fr] Introduire\n• Auf Ihrer Internetseite habe ich gelesen, dass … — J’ai lu sur votre site que …\n• Ich interessiere mich sehr für … — Je m’intéresse beaucoup à …\nBEGRÜNDEN\n[fr] Justifier\n• …, weil ich ein B1-Zertifikat brauche. — … parce que j’ai besoin d’un certificat B1.\n• Da ich vormittags arbeite, … — Comme je travaille le matin, …\nFRAGEN\n[fr] Demander\n• Könnten Sie mir bitte mitteilen, wie viele …? — Pourriez-vous m’indiquer combien … ?\n• Ich würde gern wissen, ob … — J’aimerais savoir si …\nSCHLUSS\n[fr] Conclure\n• Über eine baldige Antwort würde ich mich sehr freuen. — Une réponse rapide me ferait très plaisir.\n• Vielen Dank im Voraus. — Merci d’avance.\n\nMODELL: ZWEI ANGEBOTE VERGLEICHEN\n[fr] Modèle : comparer deux offres\nHören Sie, wie Daniel zwei Kurse vergleicht. Er stellt beide Kurse vor, nennt Vor- und Nachteile, entscheidet sich und stellt am Ende eine Frage. [fr] Écoutez comment Daniel compare deux cours. Il présente les deux cours, cite avantages et inconvénients, fait son choix et pose une question pour finir.\n• Ein Vorteil von Kurs A ist, dass … · Ein Nachteil ist … — Un avantage du cours A, c’est que … · Un inconvénient, c’est …\n• Im Vergleich zu Kurs A ist Kurs B billiger. — Par rapport au cours A, le cours B est moins cher.\n• Für mich ist wichtiger, dass … — Pour moi, ce qui compte le plus, c’est que …\n• Deshalb habe ich mich für … entschieden. — C’est pourquoi j’ai choisi …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-lernen-atelier-modell-audio",
+          "caption": "Daniel vergleicht zwei Kurse",
+          "usage": "audio",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-lernen-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : se renseigner au téléphone",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : se renseigner au téléphone",
+        "description": "Was passt? Wählen Sie die passende Reaktion. [fr] Quelle réplique convient ?\n\nSITUATION\n[fr] La situation\nSie möchten im Juli einen Intensivkurs machen und rufen bei der Sprachschule am Markt an. Frau Wendt ist am Telefon. Hören Sie jeden Satz und wählen Sie die beste Reaktion. [fr] Vous voulez suivre un cours intensif en juillet et vous appelez l’école de langues. Mme Wendt répond. Écoutez chaque réplique et choisissez la meilleure réaction.\nSprechen Sie danach die Sätze laut nach. [fr] Répétez ensuite les phrases à voix haute.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-lernen-atelier-interaktion-satz1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-satz2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-satz3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-satz4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-lernen-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Satz 1: Was antworten Sie? [fr] Réplique 1 : que répondez-vous ?",
+          "explanation": "On salue, on annonce le sujet de l’appel (ich interessiere mich für …) et on prépare ses questions (ich hätte ein paar Fragen). La première réponse est exigeante ; la troisième ne répond pas à « Was kann ich für Sie tun? ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Guten Tag, ich möchte sofort einen Platz, und zwar im besten Kurs, den Sie haben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Guten Tag, ich interessiere mich für Ihren B1-Kurs im Juli und hätte ein paar Fragen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ja, das können Sie gern für mich machen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Satz 2: Was antworten Sie? [fr] Réplique 2 : que répondez-vous ?",
+          "explanation": "Accepter la liste d’attente et demander ses chances est une réaction utile. « Voll » se rapporte au cours (complet), pas à vous ; et on n’attend évidemment pas au téléphone qu’une place se libère.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, gern. Wie groß sind meine Chancen, noch einen Platz zu bekommen?",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Nein danke, voll bin ich heute zum Glück noch nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja, dann warte ich hier am Telefon, bis ein Platz frei wird.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Satz 3: Was antworten Sie? [fr] Réplique 3 : que répondez-vous ?",
+          "explanation": "Avant de décider, on se renseigne poliment (question indirecte, verbe « trifft » à la fin). Raccrocher sèchement est impoli ; dire « oui » tout en étant toujours fatigué le soir est incohérent.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nein, Alternativen interessieren mich überhaupt nicht. Auf Wiederhören.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ja, am Abend bin ich immer sehr müde.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vielleicht. Könnten Sie mir sagen, wie oft man sich online trifft?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 4: Was antworten Sie? [fr] Réplique 4 : que répondez-vous ?",
+          "explanation": "« Das wäre sehr nett » (ce serait très gentil) accepte poliment au Konjunktiv II ; proposer d’épeler son adresse évite les erreurs. La première réplique inverse les rôles ; la troisième rend l’échange inutile.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich schicke Ihnen auch gern alle Informationen per E-Mail.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Das wäre sehr nett. Soll ich Ihnen meine Adresse buchstabieren?",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Nein, E-Mails lese ich nie, schicken Sie mir lieber gar nichts.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wie groß sind meine Chancen, noch einen Platz zu bekommen?",
+          "accept": [
+            "Wie groß sind meine Chancen, noch einen Platz zu bekommen?"
+          ],
+          "explanation": "Question sur ses chances : « noch einen Platz zu bekommen » est un infinitif avec zu qui complète « Chancen ». Question ouverte (wie) : l’intonation redescend à la fin.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnten Sie mir sagen, wie oft man sich online trifft?",
+          "accept": [
+            "Könnten Sie mir sagen, wie oft man sich online trifft?"
+          ],
+          "explanation": "Question indirecte : le verbe « trifft » (de treffen, se retrouver) ferme la phrase ; le pronom « sich » suit le sujet « man ».",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das wäre sehr nett. Soll ich Ihnen meine Adresse buchstabieren?",
+          "accept": [
+            "Das wäre sehr nett. Soll ich Ihnen meine Adresse buchstabieren?"
+          ],
+          "explanation": "Accepter poliment avec « Das wäre … » ; « buchstabieren » : épeler, accent sur -BIE-. Pour épeler, entraînez-vous aussi à l’alphabet : A wie Anton…",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-lernen-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : expliquer une brochure française à une amie",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : expliquer une brochure française à une amie",
+        "description": "SITUATION\n[fr] La situation\nIhre Freundin Jana aus Leipzig möchte im Juli eine Woche in Frankreich einen Fotokurs machen. Sie spricht nur ein bisschen Französisch, hat keine eigene Kamera und kann höchstens 400 Euro ausgeben. Sie haben eine Broschüre auf Französisch gefunden. Erklären Sie Jana auf Deutsch, was darin steht. [fr] Votre amie Jana, de Leipzig, veut suivre un stage photo d’une semaine en France en juillet. Elle parle un peu français, n’a pas d’appareil photo et peut dépenser 400 euros au maximum. Vous avez trouvé une brochure en français : expliquez-lui en allemand ce qu’elle contient.\n\nDIE BROSCHÜRE\n[fr] La brochure (en français)\nAtelier d’été : photographie urbaine à Lyon\nDu lundi 7 au vendredi 11 juillet, de 9 h à 16 h, avec une heure de pause pour le déjeuner.\nGroupes de dix participants au maximum, niveau débutant ou intermédiaire.\nLe cours est donné en français ; la formatrice parle aussi anglais.\nPrix : 380 €, déjeuners non compris. Réduction de 10 % pour les étudiants.\nApportez votre appareil photo. Un prêt est possible sur demande, mais le nombre d’appareils est limité.\nInscription avant le 15 mai, en ligne ou par téléphone. Un acompte de 100 € est demandé à l’inscription. En cas d’annulation après le 15 juin, l’acompte n’est pas remboursé.\n\nTIPP\n[fr] Conseil\nÜbersetzen Sie nicht Wort für Wort. Sagen Sie Jana nur, was für sie wichtig ist, mit einfachen deutschen Sätzen. [fr] Ne traduisez pas mot à mot. Dites à Jana seulement ce qui compte pour elle, avec des phrases allemandes simples.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Notizen für Jana auf Deutsch. [fr] Complétez les notes pour Jana, en allemand.",
+          "text": "Fotokurs in Lyon: vom [[1]] bis 11. Juli, von 9 bis [[2]] Uhr · höchstens [[3]] Personen pro Gruppe · Preis: 380 Euro, Mittagessen [[4]] inklusive · Anmeldung bis zum [[5]] Mai",
+          "explanation": "On reporte les informations de la brochure dans des notes allemandes : du 7 au 11 juillet, de 9 h à 16 h, dix personnes au maximum, 380 euros sans les déjeuners (déjeuners non compris = Mittagessen nicht inklusive), inscription avant le 15 mai.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "7.",
+                "7",
+                "siebten"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "16",
+                "sechzehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "10",
+                "zehn"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "nicht"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "15.",
+                "15",
+                "fünfzehnten"
+              ],
+              "size": 12,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Jana hat keine eigene Kamera. Was sagen Sie ihr? [fr] Jana n’a pas d’appareil photo. Que lui dites-vous ?",
+          "explanation": "« Un prêt est possible sur demande, mais le nombre d’appareils est limité » : on peut emprunter un appareil (leihen), mais il y en a peu. Le conseil de demander tôt est une bonne médiation : il aide Jana à agir.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kameras sind im Preis inklusive, das ist kein Problem.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Du kannst eine Kamera leihen, aber es gibt nur wenige. Frag am besten früh.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ohne eigene Kamera kannst du leider nicht teilnehmen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Jana spricht nur wenig Französisch. Was sagen Sie ihr? [fr] Jana parle peu français. Que lui dites-vous ?",
+          "explanation": "« Le cours est donné en français ; la formatrice parle aussi anglais. » Le cours n’est pas en anglais, et l’allemand n’est pas mentionné : ne promettez jamais plus que ce que dit le document.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Kurs ist auf Französisch, aber die Kursleiterin spricht auch Englisch.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Kurs ist auf Englisch, Französisch brauchst du gar nicht.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Kursleiterin spricht auch Deutsch, das ist praktisch für dich.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Erklären Sie Jana die Regel für die Anzahlung. Bilden Sie den Satz. [fr] Expliquez à Jana la règle de l’acompte. Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wenn",
+              "du",
+              "nach dem 15. Juni",
+              "absagst,",
+              "bekommst",
+              "du",
+              "die Anzahlung",
+              "nicht",
+              "zurück."
+            ]
+          ],
+          "explanation": "Une phrase simple avec wenn pour « En cas d’annulation après le 15 juin » : verbe « absagst » à la fin de la subordonnée, puis « bekommst du … zurück ». Die Anzahlung : l’acompte."
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Passt der Kurs zu Janas Budget von 400 Euro? [fr] Le stage entre-t-il dans le budget de 400 euros de Jana ?",
+          "explanation": "380 euros, c’est moins que 400, mais « déjeuners non compris » : les repas de midi sont en plus. Pour Jana, l’information importante est justement ce coût supplémentaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Nein, der Kurs kostet mehr als 400 Euro.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ja, und das Mittagessen ist sogar schon im Preis enthalten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja, aber das Mittagessen muss sie selbst bezahlen.",
+              "correct": true
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-lernen-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : les erreurs fréquentes dans une demande",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : les erreurs fréquentes dans une demande",
+        "description": "Diese Sätze kommen aus Anfragen von Kursteilnehmenden. Finden Sie die richtige Form. [fr] Ces phrases viennent de demandes d’apprenants. Trouvez la forme correcte.\n\nKORREKTURZEICHEN\n[fr] Les codes de correction\nRappel : St (place des mots), G (grammaire), W (vocabulaire), R (orthographe), A (registre : du ou Sie). Dans une demande d’information, les erreurs les plus fréquentes touchent la question indirecte (St) et le but (G).",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "St: Welcher Satz ist richtig? [fr] St : quelle phrase est correcte ?",
+          "explanation": "Question indirecte fermée : ob, puis le verbe à la fin, avec la particule ressoudée (stattfindet). La première phrase garde l’ordre de la question directe ; wenn (condition) ne convient pas après « wissen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich würde gern wissen, ob findet der Kurs am Abend statt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich würde gern wissen, ob der Kurs am Abend stattfindet.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich würde gern wissen, wenn der Kurs am Abend stattfindet.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr] G : quelle phrase est correcte ?",
+          "explanation": "Après un comparatif, on emploie als : billiger als. Wie sert à l’égalité (so billig wie). « Mehr billig » imite « plus cher » : en allemand, le comparatif se forme avec -er.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Onlinekurs ist billiger als der Abendkurs.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Der Onlinekurs ist billiger wie der Abendkurs.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Onlinekurs ist mehr billig als der Abendkurs.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "W: Ergänzen Sie die Präpositionen. [fr] W : complétez avec les prépositions.",
+          "text": "Ich interessiere mich [[1]] Ihren Kurs. · Wie viele Personen nehmen [[2]] dem Kurs teil?",
+          "explanation": "Sich interessieren für + accusatif ; teilnehmen an + datif (an dem Kurs, souvent contracté en am Kurs). Ces prépositions ne se devinent pas à partir du français : apprenez-les avec le verbe.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "an"
+              ],
+              "size": 3,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "G: Welcher Satz ist richtig? [fr] G : quelle phrase est correcte ?",
+          "explanation": "Le but avec le même sujet : um … zu + infinitif à la fin, précédé d’une virgule. Für ne s’emploie pas devant un verbe ; sans zu, la construction avec um est incomplète.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich lerne Deutsch für in Deutschland zu arbeiten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich lerne Deutsch, um in Deutschland arbeiten.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich lerne Deutsch, um in Deutschland zu arbeiten.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "G: Ergänzen Sie den Infinitiv mit „zu“. [fr] G : complétez avec l’infinitif précédé de « zu ».",
+          "text": "Ich habe vor, mich nächste Woche für den Kurs [[1]].",
+          "explanation": "Vorhaben (avoir l’intention de) est suivi de zu + infinitif. Anmelden a une particule séparable : zu se place au milieu, en un seul mot.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "anzumelden"
+              ],
+              "hint": "anmelden",
+              "size": 11
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "order",
+          "prompt": "St: Bilden Sie den Satz. [fr] St : remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Da",
+              "ich",
+              "vormittags",
+              "arbeite,",
+              "suche",
+              "ich",
+              "eine Nachmittagsgruppe."
+            ]
+          ],
+          "explanation": "Da (comme, puisque) introduit une subordonnée : verbe « arbeite » à la fin. La principale suit avec son verbe en tête : suche ich … Même règle qu’après wenn ou weil en début de phrase."
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-lernen-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Format d’examen : préparer un avis pour un forum",
+      "estimatedMinutes": 18,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Format d’examen : préparer un avis pour un forum",
+        "description": "PRÜFUNGSTRAINING SCHREIBEN\n[fr] Entraînement à l’examen : expression écrite\nIn der Prüfung schreiben Sie oft Ihre Meinung zu einem Thema in einem Forum. Hier trainieren Sie die Vorbereitung: Aufbau, Konnektoren und Redemittel. [fr] À l’examen, on donne souvent son avis sur un thème dans un forum. Vous vous entraînez ici à le préparer : structure, connecteurs et formules.\nZEIT\n[fr] Temps\nFür einen ganzen Beitrag planen Sie etwa 25 Minuten: 5 Minuten planen, 15 Minuten schreiben, 5 Minuten prüfen. [fr] Pour une contribution complète, prévoyez environ 25 minutes : 5 pour planifier, 15 pour écrire, 5 pour vérifier.\n\nSTRATEGIE\n[fr] Stratégie\n1. Lesen Sie die Frage im Forum genau: Wozu genau sollen Sie Ihre Meinung sagen? [fr] Lisez précisément la question du forum : sur quoi exactement devez-vous donner votre avis ?\n2. Planen Sie: Meinung, zwei Argumente mit Beispiel, ein Gegenargument, Schluss. [fr] Planifiez : avis, deux arguments avec un exemple, un contre-argument, conclusion.\n3. Verbinden Sie Ihre Sätze mit Konnektoren: erstens, außerdem, aber, trotzdem, deshalb. [fr] Reliez vos phrases avec des connecteurs : erstens, außerdem, aber, trotzdem, deshalb.\n\nDER BEITRAG VON TIMO\n[fr] La contribution de Timo\nIch lerne seit einem Jahr Spanisch nur mit einer App, jeden Tag zehn Minuten im Bus. Das ist billig und praktisch, und ich kenne schon viele Wörter. Ich glaube, in ein paar Jahren braucht niemand mehr einen Sprachkurs. Was meint ihr?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-lernen-atelier-pruefung-forum",
+          "caption": "Lernen mit Apps",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "order",
+          "prompt": "Bringen Sie die Sätze der Antwort in die richtige Reihenfolge. [fr] Remettez les phrases de la réponse dans le bon ordre.",
+          "answers": [
+            [
+              "Ich habe den Beitrag von Timo mit Interesse gelesen.",
+              "Meiner Meinung nach können Apps den Unterricht nicht ersetzen.",
+              "Erstens fehlt bei einer App das freie Sprechen.",
+              "Zweitens korrigiert eine App nicht alle Fehler.",
+              "Trotzdem finde ich Apps gut, um Vokabeln zu wiederholen.",
+              "Alles in allem empfehle ich eine Mischung aus Kurs und App."
+            ]
+          ],
+          "explanation": "Une contribution claire suit le plan : référence au message, avis, deux arguments annoncés par erstens et zweitens, une concession (trotzdem), puis une conclusion (alles in allem). Les connecteurs montrent l’ordre logique."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welches Wort passt? „Apps sind praktisch, … sie ersetzen keine Lehrerin.“ [fr] Quel mot convient ?",
+          "explanation": "Après la virgule, la suite garde l’ordre sujet + verbe (sie ersetzen) : il faut un connecteur qui ne change pas l’ordre des mots, comme aber. Deshalb demanderait le verbe tout de suite (deshalb ersetzen sie), weil le verbe à la fin ; le sens d’opposition appelle aussi aber.",
+          "options": [
+            {
+              "id": "a",
+              "label": "deshalb",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "aber",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "weil",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Redemittel. [fr] Complétez les formules.",
+          "text": "[[1]] Meinung nach ist eine Lerngruppe wichtig. · Ich bin [[2]] Meinung, dass Apps helfen können. · Einerseits sind Apps billig, [[3]] fehlt der Kontakt zu anderen.",
+          "explanation": "Meiner Meinung nach (à mon avis) : datif, et le verbe suit directement. Ich bin der Meinung, dass … (je suis d’avis que). Einerseits … andererseits … (d’un côté … de l’autre), avec le verbe juste après chaque connecteur.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Meiner"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "der"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "andererseits"
+              ],
+              "size": 13,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Welche Formulierung passt zu welcher Funktion? Ordnen Sie zu. [fr] Quelle formule correspond à quelle fonction ? Associez.",
+          "explanation": "Classez vos formules par fonction, comme dans le modèle : donner son avis, introduire un argument, nuancer, conclure. À l’examen, varier ces formules compte pour la cohérence et le vocabulaire.",
+          "pairs": [
+            {
+              "left": "eine Meinung sagen",
+              "right": "Ich finde, dass …"
+            },
+            {
+              "left": "ein Argument einleiten",
+              "right": "Ein wichtiger Grund ist …"
+            },
+            {
+              "left": "ein Gegenargument nennen",
+              "right": "Andererseits muss man sagen, dass …"
+            },
+            {
+              "left": "zum Schluss kommen",
+              "right": "Alles in allem …"
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Welcher Schluss passt am besten zu der Antwort? [fr] Quelle conclusion convient le mieux à la réponse ?",
+          "explanation": "La conclusion reprend l’avis et le nuance : une aide, pas un remplacement. Les deux autres phrases sortent du sujet : à l’examen, chaque phrase doit servir la tâche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ich habe jetzt leider keine Zeit mehr zum Schreiben, tschüss!",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich hoffe, dass das Wetter morgen besser wird als heute.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Deshalb finde ich: Apps sind eine gute Hilfe, aber kein Ersatz für einen Kurs.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Konnektoren. [fr] Complétez avec les connecteurs.",
+          "text": "Apps sind praktisch. [[1]] lerne ich jeden Morgen im Bus zehn Minuten. [[2]] brauche ich einen Kurs, denn eine App korrigiert meine Aussprache nicht.",
+          "explanation": "Deshalb (c’est pourquoi) introduit une conséquence ; trotzdem (malgré tout) une opposition. Comme tous les adverbes en tête de phrase, ils sont suivis directement du verbe : deshalb lerne ich, trotzdem brauche ich.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Deshalb",
+                "Darum",
+                "Daher",
+                "Deswegen"
+              ],
+              "hint": "conséquence",
+              "size": 9
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Trotzdem",
+                "Dennoch"
+              ],
+              "hint": "opposition",
+              "size": 9
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-lernen-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : écrire une demande à une école de langues",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : écrire une demande à une école de langues",
+        "description": "SITUATION\n[fr] La situation\nSie möchten Ihr Deutsch verbessern und haben diese Anzeige gefunden. Bevor Sie sich anmelden, schreiben Sie der Sprachschule eine E-Mail mit Ihren Fragen. [fr] Vous voulez améliorer votre allemand et avez trouvé cette annonce. Avant de vous inscrire, vous écrivez un courriel à l’école avec vos questions.\n\nDIE ANZEIGE\nSprachschule am Markt: Sommer-Intensivkurse Deutsch (B1 und B2). Vier Wochen, Montag bis Freitag, Vormittags- und Nachmittagsgruppen. Prüfung am Ende möglich. Ihre Ansprechpartnerin ist Frau Wendt.\n\nSO GEHEN SIE VOR\n[fr] Démarche\n1. Planen (5 Minuten): Überlegen Sie sich Stichwörter: Warum schreiben Sie? Was ist Ihr Ziel? Welche drei Fragen haben Sie? [fr] Planifier (5 minutes) : trouvez des mots-clés. Pourquoi écrivez-vous ? Quel est votre objectif ? Quelles sont vos trois questions ?\n2. Schreiben (15 Minuten): Folgen Sie dem Aufbau aus dem Modell von Amina. [fr] Écrire (15 minutes) : suivez la structure du modèle d’Amina.\n3. Prüfen (5 Minuten): Lesen Sie Ihren Text mit der Checkliste noch einmal. [fr] Vérifier (5 minutes) : relisez votre texte avec la liste de vérification.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine E-Mail an Frau Wendt (120 bis 150 Wörter). Sagen Sie, warum Sie schreiben und was Ihr Ziel ist (um … zu, damit oder weil). Stellen Sie mindestens drei höfliche Fragen, zum Beispiel zur Gruppengröße, zu den Zeiten, zur Prüfung oder zum Preis. Bitten Sie am Ende um eine Antwort. [fr] Écrivez un courriel à Mme Wendt (120 à 150 mots). Dites pourquoi vous écrivez et quel est votre objectif (um … zu, damit ou weil). Posez au moins trois questions polies, par exemple sur la taille des groupes, les horaires, l’examen ou le prix. Demandez une réponse pour finir.",
+          "maxChars": 1500,
+          "minWords": 120
+        },
+        "checklist": [
+          "Betreff, Anrede und Grußformel ohne Komma [fr] Objet, formule d’appel, formule finale sans virgule",
+          "Mein Ziel mit „um … zu“, „damit“ oder „weil“ [fr] Mon objectif avec « um … zu », « damit » ou « weil »",
+          "Mindestens drei Fragen, davon zwei indirekt (ob, wie viele …) [fr] Au moins trois questions, dont deux indirectes",
+          "Bitte um Antwort und Dank [fr] Demande de réponse et remerciement",
+          "Verb am Ende nach „ob“, „dass“, „weil“ [fr] Verbe à la fin après « ob », « dass », « weil »"
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : raison et objectif exposés, au moins trois questions précises, demande de réponse ; registre formel (Sie)",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-lernen-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : comparer deux cours et choisir",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : comparer deux cours et choisir",
+        "description": "SITUATION\n[fr] La situation\nSie möchten Ihr Deutsch verbessern, zum Beispiel für die Arbeit oder für eine Prüfung. Die Sprachschule bietet zwei Kurse an. Vergleichen Sie die Angebote und entscheiden Sie sich. [fr] Vous voulez améliorer votre allemand, par exemple pour le travail ou pour un examen. L’école propose deux cours. Comparez-les et faites votre choix.\n\nDIE ANGEBOTE\nAngebot A ist ein Präsenzkurs am Dienstag und Donnerstag von 18:00 bis 20:15 Uhr, zehn Wochen lang, für 290 Euro. In einer Gruppe sind bis zu zwölf Personen. Am Ende gibt es ein Zertifikat, die Prüfung ist inklusive.\nAngebot B ist ein Onlinekurs mit Live-Stunden am Samstag von 9:00 bis 12:00 Uhr, acht Wochen lang, für 210 Euro. In einer Gruppe sind bis zu acht Personen. Am Ende gibt es eine Teilnahmebestätigung.\n\nIHRE PRÄSENTATION\n[fr] Votre présentation\n• Stellen Sie beide Angebote kurz vor. [fr] Présentez brièvement les deux offres.\n• Nennen Sie mindestens zwei Vorteile und Nachteile. [fr] Citez au moins deux avantages et inconvénients.\n• Entscheiden Sie sich und begründen Sie Ihre Wahl mit Ihrem Ziel (um … zu, damit, weil). [fr] Faites votre choix et justifiez-le par votre objectif (um … zu, damit, weil).\n• Stellen Sie am Ende eine Frage, die noch offen ist. [fr] Posez pour finir une question qui reste ouverte.\n\nVORBEREITUNG\n[fr] Préparation\nHören Sie noch einmal das Modell von Daniel. Überlegen Sie sich Stichwörter, aber sprechen Sie frei. [fr] Réécoutez le modèle de Daniel. Préparez des mots-clés, mais parlez librement.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-lernen-atelier-sprechen-angebote",
+          "caption": "Zwei Angebote",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "mission": {
+        "oral": {
+          "prompt": "Vergleichen Sie die zwei Angebote und entscheiden Sie sich (etwa zweieinhalb Minuten). Nennen Sie Vor- und Nachteile, begründen Sie Ihre Wahl mit Ihrem Ziel und stellen Sie am Ende eine offene Frage. [fr] Comparez les deux offres et faites votre choix (environ deux minutes et demie). Citez avantages et inconvénients, justifiez votre choix par votre objectif et posez pour finir une question ouverte.",
+          "maxSeconds": 150
+        },
+        "written": null,
+        "checklist": [
+          "Ich stelle beide Angebote kurz vor. [fr] Je présente brièvement les deux offres.",
+          "Ich vergleiche: „im Vergleich zu“, „billiger als“, „Ein Vorteil ist …“ [fr] Je compare : « im Vergleich zu », « billiger als », « Ein Vorteil ist … »",
+          "Ich begründe meine Wahl mit meinem Ziel. [fr] Je justifie mon choix par mon objectif.",
+          "Ich stelle am Ende eine offene Frage. [fr] Je pose pour finir une question ouverte."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : deux offres présentées, avantages et inconvénients, choix justifié par un objectif, une question finale, dans le temps imparti",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "questions": []
+    },
+    {
+      "id": "b1-lernen-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : formation, puis bilan intermédiaire",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : formation, puis bilan intermédiaire",
+        "description": "Lesen Sie die Ziele der Module Lernen. Was können Sie schon gut? Was möchten Sie noch üben? [fr] Relisez les objectifs des modules Lernen. Que savez-vous déjà bien faire ? Que voulez-vous encore travailler ?\n\nICH KANN …\n[fr] Je peux…\n• Ich kann Kursangebote vergleichen und mich begründet entscheiden. [fr] Je peux comparer des offres de cours et faire un choix motivé.\n• Ich kann eine formelle Anfrage mit höflichen Fragen schreiben. [fr] Je peux écrire une demande formelle avec des questions polies.\n• Ich kann sagen, wozu ich etwas mache: „um … zu“, „damit“. [fr] Je peux dire dans quel but je fais quelque chose : « um … zu », « damit ».\n• Ich kann einer Freundin auf Deutsch erklären, was in einem französischen Text steht. [fr] Je peux expliquer en allemand à une amie ce que dit un texte français.\n• Ich kann einen Forumsbeitrag mit Meinung und Argumenten planen. [fr] Je peux planifier une contribution de forum avec un avis et des arguments.\n\nNÄCHSTER SCHRITT: DER ZWISCHENTEST\n[fr] Prochaine étape : le bilan intermédiaire\nNach diesem Modul kommt der Zwischentest zu den Modulen 1 bis 12: Lesen, Hören, Schreiben und Sprechen. [fr] Après ce module vient le bilan intermédiaire sur les modules 1 à 12 : lecture, écoute, écrit et oral.\nAvant de le commencer, revoyez les points de grammaire de chaque thème, dans les leçons « À retenir » : le récit au passé (Neuanfang), les verbes à préposition (Beziehungen), les relatives (Wohnen), le Konjunktiv II de politesse et les questions indirectes (Arbeit), wenn, falls et sollte (Gesundheit), um … zu et damit (Lernen). Relisez aussi les modèles des ateliers : courriel formel, message amical, avis.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-lernen-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Modèle : comparer deux offres et choisir",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Daniel",
+          "text": "Ich habe zwei Kursangebote verglichen. Kurs A ist ein Abendkurs im Bildungszentrum, zweimal pro Woche. Kurs B ist ein Onlinekurs am Samstagvormittag."
+        },
+        {
+          "voice": "mann2",
+          "name": "Daniel",
+          "text": "Ein Vorteil von Kurs A ist, dass ich die anderen jede Woche sehe und viel spreche. Ein Nachteil ist der lange Weg: Mit dem Bus brauche ich fast eine Stunde."
+        },
+        {
+          "voice": "mann2",
+          "name": "Daniel",
+          "text": "Im Vergleich zu Kurs A ist Kurs B dreißig Euro billiger, aber man bekommt kein Zertifikat. Für mich ist wichtiger, dass ich am Ende ein Zertifikat habe, denn ich brauche es für meine Arbeit."
+        },
+        {
+          "voice": "mann2",
+          "name": "Daniel",
+          "text": "Deshalb habe ich mich für Kurs A entschieden. Eine Frage habe ich aber noch: Kann man eine Stunde nachholen, wenn man krank ist?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-satz1",
+      "kind": "audio",
+      "title": "Au téléphone avec l’école : réplique 1",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Wendt",
+          "text": "Sprachschule am Markt, Sie sprechen mit Frau Wendt. Was kann ich für Sie tun?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-satz2",
+      "kind": "audio",
+      "title": "Au téléphone avec l’école : réplique 2",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Wendt",
+          "text": "Der Intensivkurs im Juli ist leider schon voll. Möchten Sie auf die Warteliste?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-satz3",
+      "kind": "audio",
+      "title": "Au téléphone avec l’école : réplique 3",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Wendt",
+          "text": "Wir haben auch einen Onlinekurs am Abend. Wäre das eine Alternative für Sie?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-satz4",
+      "kind": "audio",
+      "title": "Au téléphone avec l’école : réplique 4",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Frau Wendt",
+          "text": "Gut, dann schicke ich Ihnen alle Informationen per E-Mail."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-pruefung-forum",
+      "kind": "image",
+      "title": "Forum : « Lernen mit Apps »",
+      "alt": "Message de forum de Timo : il apprend l’espagnol seulement avec une application et pense que bientôt personne n’aura plus besoin de cours de langue.",
+      "image": {
+        "layout": "forum",
+        "title": "Lernen mit Apps – brauchen wir bald keine Sprachkurse mehr?",
+        "posts": [
+          {
+            "author": "Timo_B",
+            "date": "12. Mai",
+            "text": "Ich lerne seit einem Jahr Spanisch nur mit einer App, jeden Tag zehn Minuten im Bus. Das ist billig und praktisch, und ich kenne schon viele Wörter. Ich glaube, in ein paar Jahren braucht niemand mehr einen Sprachkurs. Was meint ihr?"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-lernen-atelier-sprechen-angebote",
+      "kind": "image",
+      "title": "Deux offres de cours à comparer",
+      "alt": "Tableau de deux offres : A, cours sur place le mardi et le jeudi soir, 290 €, certificat compris ; B, cours en ligne le samedi matin, 210 €, attestation de participation.",
+      "image": {
+        "layout": "table",
+        "icon": "graduation-cap",
+        "title": "Deutsch B1 · zwei Angebote",
+        "subtitle": "Sprachschule am Markt",
+        "columns": [
+          "",
+          "Angebot A",
+          "Angebot B"
+        ],
+        "rows": [
+          [
+            "Kursart",
+            "Präsenzkurs",
+            "Onlinekurs mit Live-Stunden"
+          ],
+          [
+            "Zeit",
+            "Di + Do, 18:00–20:15",
+            "Sa, 9:00–12:00"
+          ],
+          [
+            "Dauer",
+            "10 Wochen",
+            "8 Wochen"
+          ],
+          [
+            "Preis",
+            "290 €",
+            "210 €"
+          ],
+          [
+            "Gruppe",
+            "bis 12 Personen",
+            "bis 8 Personen"
+          ],
+          [
+            "Abschluss",
+            "Zertifikat (Prüfung inklusive)",
+            "Teilnahmebestätigung"
+          ]
+        ]
+      }
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : se renseigner au téléphone",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wie groß sind meine Chancen, noch einen Platz zu bekommen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : se renseigner au téléphone",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Könnten Sie mir sagen, wie oft man sich online trifft?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : se renseigner au téléphone",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das wäre sehr nett. Soll ich Ihnen meine Adresse buchstabieren?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-lernen-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Lernen, atelier : se renseigner et motiver son choix",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich interessiere mich für …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich würde gern wissen, ob …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Könnten Sie mir bitte mitteilen, …?"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Preis enthalten sein"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Für mich ist wichtig, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Vergleich zu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ein Vorteil ist, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich entscheiden für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Meiner Meinung nach …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich bin der Meinung, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einerseits …, andererseits …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Alles in allem …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Vielen Dank im Voraus."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich freue mich auf Ihre Antwort."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Anzahlung, die Anzahlungen"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

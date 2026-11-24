@@ -1,0 +1,1489 @@
+{
+  "id": "b1-umwelt-atelier",
+  "title": "Umwelt (atelier) : défendre une proposition, présenter un thème",
+  "objective": "Présenter un thème en cinq parties, répondre aux questions du public, expliquer un graphique à une voisine et défendre par écrit un projet devant le conseil de quartier.",
+  "prerequisites": [
+    "b1-umwelt"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Tâches reprises et réécrites du brouillon B1 V1 (LinguaCap) : écrire au conseil du quartier, défendre un choix en réunion."
+  ],
+  "layer": "content/b/source/b1/b1-umwelt-atelier.mjs",
+  "vocabulary": [
+    {
+      "id": "grafik",
+      "word": "Grafik",
+      "article": "die",
+      "plural": "Grafiken",
+      "partOfSpeech": "noun",
+      "translation": "le graphique",
+      "example": "Die Grafik zeigt, woraus der Restmüll besteht.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "anteil",
+      "word": "Anteil",
+      "article": "der",
+      "plural": "Anteile",
+      "partOfSpeech": "noun",
+      "translation": "la part, la proportion",
+      "example": "Der Anteil von Bioabfall ist sehr hoch.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "haelfte",
+      "word": "Hälfte",
+      "article": "die",
+      "plural": "Hälften",
+      "partOfSpeech": "noun",
+      "translation": "la moitié",
+      "example": "Fast die Hälfte des Mülls ist Bioabfall.",
+      "note": "ein Drittel, ein Viertel : un tiers, un quart",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "restmuell",
+      "word": "Restmüll",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les ordures ménagères (non triées)",
+      "example": "Batterien gehören nicht in den Restmüll.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "biotonne",
+      "word": "Biotonne",
+      "article": "die",
+      "plural": "Biotonnen",
+      "partOfSpeech": "noun",
+      "translation": "la poubelle à biodéchets",
+      "example": "Kaffeesatz und Essensreste kommen in die Biotonne.",
+      "note": "der Bioabfall : les biodéchets",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "den-muell-trennen",
+      "word": "den Müll trennen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "trier les déchets",
+      "example": "Bei uns im Haus trennen alle den Müll.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "stadtteilrat",
+      "word": "Stadtteilrat",
+      "article": "der",
+      "plural": "Stadtteilräte",
+      "partOfSpeech": "noun",
+      "translation": "le conseil de quartier",
+      "example": "Der Stadtteilrat entscheidet im Juni.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "gemeinschaftsgarten",
+      "word": "Gemeinschaftsgarten",
+      "article": "der",
+      "plural": "Gemeinschaftsgärten",
+      "partOfSpeech": "noun",
+      "translation": "le jardin partagé",
+      "example": "Im Gemeinschaftsgarten pflanzen Nachbarn zusammen Gemüse.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "beantragen",
+      "word": "beantragen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "demander officiellement (une aide, une autorisation)",
+      "example": "Wir möchten Geld für einen Trinkbrunnen beantragen.",
+      "note": "der Antrag : la demande officielle",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "im-vergleich-zu",
+      "word": "im Vergleich zu",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "par rapport à, en comparaison de",
+      "example": "Im Vergleich zu Paris gibt es hier mehr Radwege.",
+      "note": "+ datif",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "ich-moechte-heute-ueber-sprechen",
+      "word": "Ich möchte heute über … sprechen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je voudrais parler aujourd’hui de …",
+      "example": "Ich möchte heute über Mülltrennung sprechen.",
+      "note": "über + accusatif",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "dafuer-spricht-dass",
+      "word": "Dafür spricht, dass …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Un argument en faveur de cela, c’est que …",
+      "example": "Dafür spricht, dass ein Garten wenig kostet.",
+      "note": "contraire : Dagegen spricht, dass …",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "meiner-meinung-nach",
+      "word": "Meiner Meinung nach …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "À mon avis …",
+      "example": "Meiner Meinung nach überwiegen die Vorteile.",
+      "note": "verbe juste après : Meiner Meinung nach ist …",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "ueberwiegen",
+      "word": "überwiegen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "l’emporter, prédominer",
+      "example": "Die Vorteile überwiegen klar.",
+      "note": "non séparable : die Vorteile überwiegen",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "zum-schluss",
+      "word": "Zum Schluss …",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Pour finir …, en conclusion …",
+      "example": "Zum Schluss möchte ich mich bedanken.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "sehr-geehrte-damen-und-herren",
+      "word": "Sehr geehrte Damen und Herren,",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Madame, Monsieur, (lettre formelle)",
+      "example": "Sehr geehrte Damen und Herren, ich wohne seit drei Jahren im Viertel.",
+      "note": "après la virgule, minuscule : ich …",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "ich-wuerde-mich-ueber-eine-antwort-freuen",
+      "word": "Ich würde mich über eine Antwort freuen.",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "Je serais heureux/heureuse d’avoir une réponse.",
+      "example": "Ich würde mich über eine baldige Antwort freuen.",
+      "note": "sich freuen über + accusatif",
+      "audio": {
+        "media": "b1-umwelt-atelier-lexique",
+        "line": 16
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-umwelt-atelier-modell",
+      "kind": "lesson",
+      "title": "Modèle : présenter un thème en cinq parties",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Modèle : présenter un thème en cinq parties",
+        "description": "Hören Sie die Präsentation und lesen Sie mit. Achten Sie auf den Aufbau und auf die Redemittel. [fr] Écoutez la présentation en suivant le texte. Observez la structure et les formules.\n\nDIE SITUATION\n[fr] La situation\nAmélie lernt Deutsch und präsentiert in ihrem Kurs ein Thema: „Leitungswasser oder Wasser aus Flaschen?“ [fr] Amélie apprend l’allemand et présente un thème à son cours : « L’eau du robinet ou l’eau en bouteille ? »\n\nTEIL 1 · DAS THEMA VORSTELLEN\n[fr] Partie 1 · annoncer le thème et le plan\nIch möchte heute über ein Thema sprechen, das uns alle betrifft: Trinken wir Leitungswasser oder Wasser aus Flaschen? Zuerst erzähle ich von meiner Erfahrung, dann spreche ich über die Situation in meinem Heimatland. Am Ende sage ich meine Meinung.\n\nTEIL 2 · EIGENE ERFAHRUNG\n[fr] Partie 2 · une expérience personnelle\nIch selbst habe früher immer Wasser in Plastikflaschen gekauft. Die Kisten waren schwer, und jede Woche hatte ich einen großen Sack Plastikmüll. Seit zwei Jahren trinke ich nur noch Leitungswasser, und ich vermisse nichts.\n\nTEIL 3 · DIE SITUATION IM HEIMATLAND\n[fr] Partie 3 · la situation dans son pays\nIn meiner Familie in Frankreich trinken fast alle Wasser aus Flaschen, obwohl das Leitungswasser gut ist. In Deutschland ist es ähnlich. Aber hier gibt es in vielen Büros und Schulen Wasserspender, und ich habe den Eindruck, dass junge Leute öfter Leitungswasser trinken.\n\nTEIL 4 · VOR- UND NACHTEILE, MEINUNG\n[fr] Partie 4 · avantages, inconvénients, avis\nDafür spricht, dass Leitungswasser viel billiger ist und keinen Müll macht. Man muss auch keine schweren Kisten tragen. Ein Nachteil ist, dass manche Leute den Geschmack nicht mögen. Meiner Meinung nach sind die Vorteile aber viel größer.\n\nTEIL 5 · SCHLUSS\n[fr] Partie 5 · conclusion\nZum Schluss möchte ich sagen: Wenn alle eine eigene Trinkflasche dabeihätten, gäbe es viel weniger Plastikmüll. Vielen Dank fürs Zuhören! Haben Sie Fragen?\n\nREDEMITTEL\n[fr] Formules utiles\nEINLEITEN\n[fr] Introduire\n• Ich möchte heute über … sprechen. / Mein Thema ist …\n• Zuerst …, dann …, am Ende …\nBEISPIEL\n[fr] Raconter, donner un exemple\n• Ich selbst habe … / Zum Beispiel …\n• In meinem Heimatland ist es anders / ähnlich: …\nBEGRÜNDEN\n[fr] Justifier\n• Dafür spricht, dass … / Ein Nachteil ist, dass …\n• Meiner Meinung nach …, weil …\nSCHLUSS\n[fr] Conclure\n• Zum Schluss möchte ich sagen, … / Vielen Dank fürs Zuhören!\n\nÀ REMARQUER\n• Chaque partie dure de 30 à 40 secondes : trois minutes en tout.\n• Les mots zuerst, dann et am Ende annoncent le plan et guident l’auditeur.\n• La conclusion réemploie le Konjunktiv II du module thème : Wenn alle … dabeihätten, gäbe es …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-atelier-modell-audio",
+          "transcriptVisibility": "on_demand",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-umwelt-atelier-interaktion",
+      "kind": "exercise",
+      "title": "Réagir : répondre aux questions du public",
+      "estimatedMinutes": 10,
+      "competences": [
+        "ecoute",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Réagir : répondre aux questions du public",
+        "description": "Was passt? Wählen Sie die passende Reaktion. [fr] Quelle réplique convient ?\n\nDIE SITUATION\n[fr] La situation\nSie haben im Nachbarschaftshaus den Leihladen vorgestellt. Jetzt stellen die Zuhörer Fragen oder machen Einwände. [fr] Vous avez présenté le magasin de prêt à la maison de quartier. Le public pose maintenant des questions ou fait des objections.\nHören Sie jede Frage und wählen Sie eine passende Antwort. Sprechen Sie dann die Sätze nach. [fr] Écoutez chaque question et choisissez une réponse adaptée, puis répétez les phrases.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-atelier-interaktion-f1",
+          "questionId": "q1",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-f2",
+          "questionId": "q2",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-f3",
+          "questionId": "q3",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-f4",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-interaktion-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Frage 1: Was antworten Sie? [fr] Question 1 : que répondez-vous ?",
+          "explanation": "On remercie pour la question (« Gute Frage »), puis on répond précisément : la caution couvre ce risque. La troisième réplique donne raison à l’objection sans défendre le projet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Gute Frage. Dafür gibt es ein Pfand von zehn Euro.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das weiß ich leider nicht. Das ist nicht mein Problem.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja, Sie haben recht, die Geräte sind viel zu teuer.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Frage 2: Was antworten Sie? [fr] Question 2 : que répondez-vous ?",
+          "explanation": "La personne demande les horaires : on répète volontiers (« ich wiederhole gern »). La deuxième réponse donne le lieu au lieu des horaires, la première est impolie.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das habe ich doch schon gesagt.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Laden ist im Keller, gleich neben dem Eingang zum Hof.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Natürlich, ich wiederhole gern: dienstags und samstags.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Frage 3: Was antworten Sie? [fr] Question 3 : que répondez-vous ?",
+          "explanation": "Face à une objection, on reconnaît le point de vue (« Ich verstehe Ihren Punkt »), puis on avance son argument avec « trotzdem ». Dénigrer l’autre projet ou couper court n’argumente pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil der Radweg eine schlechte und für die Stadt viel zu teure Idee ist.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich verstehe Ihren Punkt. Trotzdem hilft der Leihladen mehr Leuten.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Dann stimmen Sie doch einfach für den Radweg, kein Problem.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Frage 4: Was antworten Sie? [fr] Question 4 : que répondez-vous ?",
+          "explanation": "On répond à la question « Gibt es so ein Projekt schon woanders? » par un exemple vécu, au prétérit (« gab es », « war »). Les deux autres réponses ne parlent pas du projet.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ja, ich fahre jeden Tag mit dem Rad durch das Viertel.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nein, ich habe dazu leider keine weiteren Fragen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ja, in meiner alten Stadt gab es einen Leihladen, er war beliebt.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Das ist eine gute Frage. Darauf komme ich gleich zurück.",
+          "accept": [
+            "Das ist eine gute Frage. Darauf komme ich gleich zurück."
+          ],
+          "explanation": "Pour gagner du temps poliment : « Darauf komme ich gleich zurück » (j’y reviens tout de suite). L’accent porte sur « gleich ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich verstehe Ihren Punkt, aber ich sehe das etwas anders.",
+          "accept": [
+            "Ich verstehe Ihren Punkt, aber ich sehe das etwas anders."
+          ],
+          "explanation": "Désaccord poli : on reconnaît d’abord l’avis de l’autre. Accentuez « verstehe » puis « anders ».",
+          "threshold": 75
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Habe ich Ihre Frage damit beantwortet?",
+          "accept": [
+            "Habe ich Ihre Frage damit beantwortet?"
+          ],
+          "explanation": "Question de vérification à la fin d’une réponse. Question fermée : la voix monte à la fin.",
+          "threshold": 75
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-atelier-mediation",
+      "kind": "exercise",
+      "title": "Médiation : expliquer un graphique à une voisine",
+      "estimatedMinutes": 15,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Médiation : expliquer un graphique à une voisine",
+        "description": "Lesen Sie die Situation und sehen Sie sich die Grafik an. Beantworten Sie dann die Fragen. [fr] Lisez la situation et regardez le graphique, puis répondez aux questions.\n\nDIE SITUATION\n[fr] La situation\nDie Bürgerinitiative hat eine Woche lang die Restmülltonnen im Viertel kontrolliert. Ihre Nachbarin, Frau Kovač, versteht die Grafik nicht gut. Sie möchte vor allem wissen, was sie selbst tun kann. [fr] Le collectif a contrôlé pendant une semaine les poubelles d’ordures ménagères du quartier. Votre voisine, Mme Kovač, comprend mal le graphique. Elle veut surtout savoir ce qu’elle peut faire elle-même.\n\nSTRATEGIE\n[fr] Stratégie\nNennen Sie zuerst das Thema der Grafik, dann die wichtigste Zahl. Sagen Sie zum Schluss, was die Person tun kann. [fr] Dites d’abord le thème du graphique, puis le chiffre le plus important. Terminez par ce que la personne peut faire.\nBenutzen Sie einfache Wörter: fast die Hälfte, ein Viertel, der größte Teil. [fr] Employez des mots simples : presque la moitié, un quart, la plus grande partie.\n\nWICHTIGE WÖRTER\n[fr] Mots utiles\n• der Restmüll — les ordures ménagères non triées\n• der Bioabfall — les biodéchets\n• die Biotonne — la poubelle à biodéchets\n• die Verpackung — l’emballage",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-atelier-mediation-grafik",
+          "caption": "Restmüll im Nordring",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was zeigt die Grafik? [fr] Que montre le graphique ?",
+          "explanation": "Le titre le dit : « Was landet im Nordring im Restmüll? ». Les barres donnent la composition des ordures ménagères en pourcentages, pas des quantités par famille ni une évolution dans le temps.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wie viel Müll jede Familie pro Jahr produziert.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Woraus der Restmüll im Viertel besteht.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wie sich der Müll seit zehn Jahren verändert hat.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Satz beschreibt die Grafik richtig? [fr] Quelle phrase décrit correctement le graphique ?",
+          "explanation": "Les biodéchets représentent 39 %, donc presque 40 %. Le verre n’en fait que 6 %, et les emballages 15 %, bien moins que la moitié.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Glas ist der größte Teil des Restmülls.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Verpackungen aus Plastik machen mehr als die Hälfte des Mülls aus.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Fast vierzig Prozent des Restmülls sind Bioabfall.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was ist für Frau Kovač am wichtigsten? [fr] Qu’est-ce qui compte le plus pour Mme Kovač ?",
+          "explanation": "Mme Kovač veut savoir ce qu’elle peut faire. Le plus gros poste est celui des biodéchets : les mettre dans la Biotonne allège le plus la poubelle. La durée du contrôle est un détail qui ne l’aide pas.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie kann ihre Essensreste in die Biotonne werfen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Kontrolle der Bürgerinitiative hat eine ganze Woche gedauert.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Glas macht nur sechs Prozent aus.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Erklärung für Frau Kovač. [fr] Complétez l’explication pour Mme Kovač.",
+          "text": "Die Grafik zeigt, was bei uns im [[1]] landet. Der größte Teil ist Bioabfall: fast [[2]] Prozent. Nur etwas mehr als ein [[3]] ist wirklich Restmüll. Je besser wir den Müll trennen, [[4]] weniger landet in der Restmülltonne.",
+          "explanation": "Le thème d’abord (der Restmüll), puis le chiffre clé (39 %, presque 40), puis une comparaison simple : 28 %, c’est un peu plus d’un quart (ein Viertel). « je … desto » (ou « umso ») relie l’effort et son effet.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Restmüll"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "40",
+                "vierzig"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Viertel"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "desto",
+                "umso"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen einfachen Satz für Frau Kovač. [fr] Formez une phrase simple pour Mme Kovač.",
+          "answers": [
+            [
+              "Wenn",
+              "Sie",
+              "den Bioabfall",
+              "trennen,",
+              "sparen",
+              "Sie",
+              "Platz",
+              "in der Restmülltonne."
+            ]
+          ],
+          "explanation": "Une phrase courte et concrète, au vouvoiement : la subordonnée en « wenn » se termine par « trennen », puis la principale commence par le verbe « sparen » suivi du sujet « Sie »."
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-atelier-korrektur",
+      "kind": "exercise",
+      "title": "Corriger : les erreurs typiques des francophones",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Corriger : les erreurs typiques des francophones",
+        "description": "Diese Sätze schreiben französischsprachige Lernende oft falsch. Finden Sie die richtige Form. [fr] Les francophones se trompent souvent dans ces phrases. Trouvez la forme correcte.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Deux pièges : « wenn ich würde haben » (on dit « hätte ») et l’ordre « ich würde » après la virgule. La subordonnée occupe la première place : la principale commence donc par le verbe, « würde ich ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn ich würde mehr Geld haben, ich würde ein Lastenrad kaufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn ich mehr Geld hätte, ich würde ein Lastenrad kaufen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wenn ich mehr Geld hätte, würde ich ein Lastenrad kaufen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das fehlende Wort. [fr] Complétez le mot qui manque.",
+          "text": "Für die Kinder ist der Radweg wichtiger [[1]] der Leihladen.",
+          "explanation": "Après un comparatif, « que » se dit « als » : wichtiger als. « wie » sert à l’égalité : so wichtig wie. « dass » est une conjonction de subordination, sans rapport avec la comparaison.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "als"
+              ],
+              "size": 4,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Komparativ von „gut“ mit der richtigen Endung. [fr] Complétez avec le comparatif de « gut » et la bonne terminaison.",
+          "text": "Dieses Jahr brauchen wir eine [[1]] Lösung als letztes Jahr.",
+          "explanation": "gut → besser (irrégulier), puis -e après « eine » (féminin, accusatif). Placé devant un nom, le comparatif prend toujours une terminaison : « eine besser Lösung » est faux, et le calque du français « plus bonne » (« mehr gute ») n’existe pas.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bessere"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Je",
+              "mehr",
+              "wir",
+              "recyceln,",
+              "desto",
+              "weniger",
+              "Müll",
+              "verbrennen",
+              "wir."
+            ]
+          ],
+          "explanation": "La partie en « je » est une subordonnée : le verbe « recyceln » va à la fin. La partie en « desto » est une principale : « desto weniger Müll » occupe la première place, puis viennent le verbe « verbrennen » et le sujet « wir ». Erreur fréquente : garder l’ordre du français (« desto wir verbrennen … »)."
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Form von „viel“. [fr] Complétez avec la forme de « viel ».",
+          "text": "Heute gibt es in unserer Stadt [[1]] Radwege als vor zehn Jahren.",
+          "explanation": "« viel » → « mehr », toujours invariable : mehr Radwege, mehr Zeit. « mehrere » signifie « plusieurs » et ne s’emploie pas pour comparer.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "mehr"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "« deshalb » est un adverbe qui occupe la première place de la proposition : le verbe suit immédiatement (« nehme »), puis le sujet. Ce n’est pas une conjonction de subordination : le verbe ne va pas à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Bus fährt selten, deshalb ich nehme das Auto.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Der Bus fährt selten, deshalb nehme ich das Auto.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Der Bus fährt selten, deshalb ich das Auto nehme.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie schreiben an den Stadtteilrat. Welche Anrede passt? [fr] Vous écrivez au conseil de quartier. Quelle formule d’appel convient ?",
+          "explanation": "Pour un courrier formel à une institution dont on ne connaît pas les membres : « Sehr geehrte Damen und Herren, ». « Hallo liebe Leute vom Stadtteilrat » est familier, et « Liebe Stadtteilrat » est faux (der Rat : « Lieber Stadtteilrat ») et trop familier.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Hallo liebe Leute vom Stadtteilrat,",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sehr geehrte Damen und Herren,",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Liebe Stadtteilrat,",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-umwelt-atelier-pruefung",
+      "kind": "exercise",
+      "title": "Entraînement à l’examen : présenter un thème (Sprechen)",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Entraînement à l’examen : présenter un thème (Sprechen)",
+        "description": "PRÜFUNGSTRAINING SPRECHEN · EIN THEMA PRÄSENTIEREN\n[fr] Entraînement à l’examen, oral : présenter un thème\n\nIn dieser Aufgabe präsentieren Sie allein ein Thema, etwa drei Minuten lang. [fr] Dans cette épreuve, vous présentez seul un thème pendant environ trois minutes.\nIhre Präsentation hat fünf Teile. Die Folie zeigt sie. [fr] Votre présentation comporte cinq parties, indiquées sur le support.\n\nZEIT\n[fr] Temps\nVorbereitung: etwa 10 Minuten. Präsentation: etwa 3 Minuten, also 30 bis 40 Sekunden pro Teil. [fr] Préparation : environ 10 minutes. Exposé : environ 3 minutes, soit 30 à 40 secondes par partie.\n\nSTRATEGIE\n[fr] Stratégie\nÜberlegen Sie sich zu jedem Teil nur zwei oder drei Stichwörter, keine ganzen Sätze. [fr] Pour chaque partie, prévoyez seulement deux ou trois mots-clés, pas de phrases complètes.\nNennen Sie am Anfang den Aufbau Ihrer Präsentation. [fr] Annoncez au début le plan de votre exposé.\nSprechen Sie frei und langsam genug. [fr] Parlez librement et assez lentement.\n\nLösen Sie jetzt die Aufgaben zum Thema „Autofreie Innenstadt?“. [fr] Faites maintenant les exercices sur le thème « Un centre-ville sans voitures ? ».",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-atelier-pruefung-folie",
+          "caption": "Folie: Autofreie Innenstadt?",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-pruefung-q7",
+          "usage": "audio",
+          "questionId": "q7",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-atelier-pruefung-q8",
+          "usage": "audio",
+          "questionId": "q8",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "order",
+          "prompt": "Bringen Sie die Teile der Präsentation in die richtige Reihenfolge. [fr] Remettez les parties de l’exposé dans l’ordre.",
+          "answers": [
+            [
+              "Mein Thema heute: Brauchen wir eine autofreie Innenstadt?",
+              "Ich selbst fahre seit Jahren mit dem Rad ins Zentrum.",
+              "In meinem Heimatland gibt es nur wenige Fußgängerzonen.",
+              "Dafür spricht die saubere Luft, dagegen der lange Weg für ältere Menschen.",
+              "Zum Schluss: Ich wäre für einen Versuch von einem Jahr. Danke!"
+            ]
+          ],
+          "explanation": "L’ordre suit le support : thème, expérience personnelle (« Ich selbst … »), pays d’origine (« In meinem Heimatland … »), pour et contre (« Dafür spricht …, dagegen … »), conclusion (« Zum Schluss … »)."
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Mit welchem Satz beginnen Sie die Präsentation am besten? [fr] Par quelle phrase commencez-vous le mieux l’exposé ?",
+          "explanation": "On commence en annonçant le thème : « Ich möchte heute über … sprechen ». La première phrase donne un avis sans présenter le sujet, la troisième sert à conclure.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Also, Autos sind schlecht für die Stadt, das ist klar.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ich möchte heute über das Thema „autofreie Innenstadt“ sprechen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Zum Schluss möchte ich mich für Ihre Aufmerksamkeit bedanken.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Teil 3: Welcher Satz beschreibt die Situation im Heimatland? [fr] Partie 3 : quelle phrase décrit la situation dans votre pays ?",
+          "explanation": "« Bei uns … als hier » compare votre pays et l’Allemagne, ce qu’attend la partie 3. Les deux autres phrases sont des formules d’introduction et de conclusion.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Bei uns fahren mehr Menschen mit dem Auto ins Zentrum als hier.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Ich finde das Thema sehr interessant und auch wichtig.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Vielen Dank, dass Sie mir alle so lange und aufmerksam zugehört haben.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Teil 4: Welcher Satz nennt einen Nachteil? [fr] Partie 4 : quelle phrase cite un inconvénient ?",
+          "explanation": "« Ein Nachteil wäre, dass … » annonce un inconvénient, au Konjunktiv II puisque la ville sans voitures est imaginée. « Dafür spricht » introduit un avantage.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dafür spricht, dass die Luft sauberer wäre.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "In meinem Heimatland gibt es in fast jeder Stadt viele Fußgängerzonen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Nachteil wäre, dass manche Geschäfte weniger Kunden hätten.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Teil 4: Wie sagen Sie Ihre Meinung? [fr] Partie 4 : comment donnez-vous votre avis ?",
+          "explanation": "« Meiner Meinung nach … , weil … » donne un avis personnel et le justifie. Rapporter l’avis des autres ou décrire sa situation ne suffit pas pour la partie 4.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Meiner Meinung nach überwiegen die Vorteile, weil es ruhiger wäre.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Viele Leute in meiner Straße sagen, dass Autos zu laut sind.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ich habe selbst ein Auto und auch ein Fahrrad im Keller.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was ist ein guter Schluss? [fr] Quelle est une bonne conclusion ?",
+          "explanation": "Une bonne conclusion résume la position (« Zusammengefasst … ») et remercie. « Das war’s … Tschüss » est trop familier, et la troisième phrase ouvre une partie au lieu de conclure.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Zusammengefasst: Ich bin für einen Versuch. Vielen Dank fürs Zuhören!",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Das war’s eigentlich schon. Tschüss und bis zum nächsten Mal!",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Jetzt erzähle ich Ihnen noch kurz von meiner eigenen Erfahrung.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich möchte heute über ein wichtiges Thema sprechen.",
+          "accept": [
+            "Ich möchte heute über ein wichtiges Thema sprechen."
+          ],
+          "explanation": "Première phrase d’un exposé. « über » + accusatif ; l’infinitif « sprechen » termine la phrase.",
+          "threshold": 75
+        },
+        {
+          "id": "q8",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Zum Schluss möchte ich sagen, dass ich für einen Versuch bin.",
+          "accept": [
+            "Zum Schluss möchte ich sagen, dass ich für einen Versuch bin."
+          ],
+          "explanation": "Conclusion : après « dass », le verbe « bin » va à la fin. Marquez une petite pause après « sagen ».",
+          "threshold": 70
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-atelier-schreiben",
+      "kind": "mission",
+      "title": "Mission : proposer un projet au conseil de quartier",
+      "estimatedMinutes": 25,
+      "competences": [
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mission : proposer un projet au conseil de quartier",
+        "description": "DIE SITUATION\n[fr] La situation\nDer Stadtteilrat Nordring sammelt Ideen für das nächste Jahr. Er hat wieder 8000 Euro für ein Umweltprojekt. Jede Bewohnerin und jeder Bewohner kann einen Vorschlag schicken. [fr] Le conseil de quartier du Nordring recueille des idées pour l’an prochain. Il dispose de nouveau de 8 000 euros pour un projet écologique. Chaque habitant peut envoyer une proposition.\n\nIDEEN\n[fr] Idées\n• ein Gemeinschaftsgarten — un jardin partagé\n• ein Reparaturtreff — un atelier de réparation entre voisins\n• ein Trinkbrunnen auf dem Marktplatz — une fontaine d’eau potable sur la place du marché\n• Lastenräder zum Ausleihen — des vélos cargos à emprunter\n• Ihre eigene Idee — votre propre idée\n\nREDEMITTEL\n[fr] Formules utiles\n• Sehr geehrte Damen und Herren, ich wohne seit … im Nordring und möchte Ihnen ein Projekt vorschlagen.\n• Mein Vorschlag ist … / Ich schlage vor, dass …\n• Ein großer Vorteil wäre, dass … / Außerdem …\n• Natürlich gibt es auch einen Nachteil: … Aber …\n• Wenn wir …, könnten wir … / Je mehr …, desto …\n• Als ersten Schritt könnten wir …\n• Ich würde mich über eine Antwort freuen. Mit freundlichen Grüßen\n\nPlanen Sie 5 Minuten, schreiben Sie 15 Minuten und lesen Sie Ihren Text dann 5 Minuten lang noch einmal. [fr] Prévoyez 5 minutes de plan, 15 minutes de rédaction et 5 minutes de relecture.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": null,
+        "written": {
+          "prompt": "Schreiben Sie eine E-Mail an den Stadtteilrat (120 bis 150 Wörter). [fr] Écrivez un courriel au conseil de quartier (120 à 150 mots).\nStellen Sie sich kurz vor und sagen Sie, warum Sie schreiben. [fr] Présentez-vous brièvement et dites pourquoi vous écrivez.\nBeschreiben Sie Ihr Projekt: Was? Wo? Für wen? [fr] Décrivez votre projet : quoi ? où ? pour qui ?\nNennen Sie zwei Vorteile und einen möglichen Nachteil. [fr] Citez deux avantages et un inconvénient possible.\nSchlagen Sie einen ersten Schritt vor. [fr] Proposez une première étape concrète.",
+          "maxChars": 1500,
+          "minWords": 120
+        },
+        "checklist": [
+          "Ich beginne mit „Sehr geehrte Damen und Herren,“ und sieze bis zum Ende. [fr] J’écris « Sehr geehrte … » et je vouvoie jusqu’au bout.",
+          "Ich beschreibe mein Projekt: was, wo, für wen. [fr] Je décris mon projet : quoi, où, pour qui.",
+          "Ich nenne zwei Vorteile und einen Nachteil, mit einem Komparativ. [fr] Deux avantages, un inconvénient, un comparatif.",
+          "Ich mache eine Hypothese: Wenn wir …, könnten wir … [fr] Je fais une hypothèse au Konjunktiv II.",
+          "Ich schlage einen ersten Schritt vor und schließe mit „Mit freundlichen Grüßen“. [fr] Je propose une première étape et je conclus poliment."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : projet décrit (quoi, où, pour qui), deux avantages et un inconvénient, première étape proposée, registre formel (Sie)",
+            "maxPoints": 5
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+            "maxPoints": 5
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+            "maxPoints": 5
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+            "maxPoints": 5
+          }
+        ]
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Ein Projekt im Viertel: ein mobiler Garten",
+          "media": "b1-umwelt-atelier-schreiben-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-umwelt-atelier-sprechen",
+      "kind": "mission",
+      "title": "Mission : présenter un thème en trois minutes",
+      "estimatedMinutes": 20,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mission : présenter un thème en trois minutes",
+        "description": "DIE SITUATION\n[fr] La situation\nSie präsentieren in Ihrem Deutschkurs ein Thema. Wählen Sie eins von zwei Themen. [fr] Vous présentez un thème dans votre cours d’allemand. Choisissez l’un des deux thèmes.\n\nTHEMA A: KAUFEN ODER REPARIEREN?\n[fr] Thème A : acheter ou réparer ?\n• Was machen Sie, wenn etwas kaputtgeht? [fr] Que faites-vous quand un objet tombe en panne ?\n• Gibt es in Ihrem Heimatland Reparaturtreffs? [fr] Existe-t-il des ateliers de réparation entre voisins dans votre pays ?\n\nTHEMA B: MIT DEM AUTO IN DIE STADT?\n[fr] Thème B : aller en ville en voiture ?\n• Wie kommen Sie ins Zentrum? [fr] Comment allez-vous au centre-ville ?\n• Wie ist der Verkehr in Ihrem Heimatland? [fr] Comment est la circulation dans votre pays ?\n\nDIE FÜNF TEILE\n[fr] Les cinq parties\n• Thema vorstellen [fr] Annoncer le thème et le plan\n• Eigene Erfahrung [fr] Raconter une expérience personnelle\n• Situation im Heimatland [fr] Décrire la situation dans votre pays\n• Vor- und Nachteile, Ihre Meinung [fr] Avantages, inconvénients et avis\n• Schluss und Dank [fr] Conclure et remercier\n\nBereiten Sie sich 10 Minuten vor: Überlegen Sie sich zu jedem Teil zwei oder drei Stichwörter. Nehmen Sie dann Ihre Präsentation auf. [fr] Préparez-vous 10 minutes en prévoyant deux ou trois mots-clés par partie, puis enregistrez votre exposé.",
+        "transcript": null
+      },
+      "mission": {
+        "oral": {
+          "prompt": "Präsentieren Sie Thema A oder Thema B, etwa drei Minuten lang. [fr] Présentez le thème A ou le thème B pendant environ trois minutes.\nSprechen Sie über alle fünf Teile: Thema, Erfahrung, Heimatland, Vor- und Nachteile mit Ihrer Meinung, Schluss. [fr] Traitez les cinq parties : thème, expérience, pays, avantages et inconvénients avec votre avis, conclusion.\nSprechen Sie frei, ohne einen Text abzulesen. [fr] Parlez librement, sans lire de texte.",
+          "maxSeconds": 180
+        },
+        "written": null,
+        "checklist": [
+          "Ich nenne mein Thema und den Aufbau meiner Präsentation. [fr] J’annonce mon thème et mon plan.",
+          "Ich erzähle eine eigene Erfahrung mit einem Beispiel. [fr] Je raconte une expérience personnelle avec un exemple.",
+          "Ich vergleiche mit meinem Heimatland (Bei uns …, Im Vergleich zu …). [fr] Je compare avec mon pays.",
+          "Ich nenne Vor- und Nachteile und begründe meine Meinung. [fr] Je donne le pour, le contre et mon avis justifié.",
+          "Ich schließe mit einem Dank und spreche etwa drei Minuten. [fr] Je conclus et je remercie, en trois minutes environ."
+        ],
+        "criteria": [
+          {
+            "id": "aufgabe",
+            "label": "Tâche : les cinq parties sont présentes (thème, expérience, pays, pour et contre avec avis, conclusion), en environ 3 minutes",
+            "maxPoints": 4
+          },
+          {
+            "id": "kohaerenz",
+            "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+            "maxPoints": 4
+          },
+          {
+            "id": "wortschatz",
+            "label": "Vocabulaire : précis, formules d’usage adaptées",
+            "maxPoints": 4
+          },
+          {
+            "id": "strukturen",
+            "label": "Structures : phrases variées, verbe à la bonne place",
+            "maxPoints": 4
+          },
+          {
+            "id": "aussprache",
+            "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+            "maxPoints": 4
+          }
+        ]
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-umwelt-atelier-bilan",
+      "kind": "lesson",
+      "title": "Faire le point : environnement et présentation",
+      "estimatedMinutes": 6,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Faire le point : environnement et présentation",
+        "description": "FAIRE LE POINT\nRelisez ces objectifs. Si l’un d’eux vous fait hésiter, refaites l’exercice indiqué.\n\nDAS KANN ICH JETZT\n[fr] Ce que je sais faire maintenant\n• Ich kann Vorschläge für mein Viertel verstehen und vergleichen. [fr] Je peux comprendre et comparer des propositions pour mon quartier (module thème, « Comprendre : deux idées pour le quartier »).\n• Ich kann sagen, was ich tun würde: Wenn ich …, würde ich … [fr] Je peux dire ce que je ferais (module thème, « S’entraîner »).\n• Ich kann eine Grafik einfach erklären. [fr] Je peux expliquer simplement un graphique (« Médiation »).\n• Ich kann ein Thema in fünf Teilen präsentieren. [fr] Je peux présenter un thème en cinq parties (« Entraînement à l’examen »).\n• Ich kann einen Vorschlag schriftlich begründen. [fr] Je peux justifier une proposition par écrit (mission écrite).\n\nMES STRATÉGIES\n• Lire : d’abord le titre et le premier paragraphe, puis seulement les passages utiles.\n• Exposé : deux ou trois mots-clés par partie, jamais un texte rédigé à lire.\n• Graphique : le thème, puis le chiffre le plus important, puis ce que cela change pour la personne.\n\nÀ REVOIR\n• Le lexique des deux modules : Müll vermeiden, nachhaltig, der Verbrauch, der Anteil, die Hälfte…\n• Les formules de l’exposé : Ich möchte heute über … sprechen. Dafür spricht, dass … Zum Schluss …\n• En cas de doute : la leçon « Retenir » du module thème (Konjunktiv II, comparatif devant le nom, je … desto).",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-umwelt-atelier-modell-audio",
+      "kind": "audio",
+      "title": "Exposé modèle : l’eau du robinet ou l’eau en bouteille ?",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Amélie",
+          "text": "Ich möchte heute über ein Thema sprechen, das uns alle betrifft: Trinken wir Leitungswasser oder Wasser aus Flaschen? Zuerst erzähle ich von meiner Erfahrung, dann spreche ich über die Situation in meinem Heimatland. Am Ende sage ich meine Meinung."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau2",
+          "name": "Amélie",
+          "text": "Ich selbst habe früher immer Wasser in Plastikflaschen gekauft. Die Kisten waren schwer, und jede Woche hatte ich einen großen Sack Plastikmüll. Seit zwei Jahren trinke ich nur noch Leitungswasser, und ich vermisse nichts."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau2",
+          "name": "Amélie",
+          "text": "In meiner Familie in Frankreich trinken fast alle Wasser aus Flaschen, obwohl das Leitungswasser gut ist. In Deutschland ist es ähnlich. Aber hier gibt es in vielen Büros und Schulen Wasserspender, und ich habe den Eindruck, dass junge Leute öfter Leitungswasser trinken."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau2",
+          "name": "Amélie",
+          "text": "Dafür spricht, dass Leitungswasser viel billiger ist und keinen Müll macht. Man muss auch keine schweren Kisten tragen. Ein Nachteil ist, dass manche Leute den Geschmack nicht mögen. Meiner Meinung nach sind die Vorteile aber viel größer."
+        },
+        {
+          "pause": 0.8
+        },
+        {
+          "voice": "frau2",
+          "name": "Amélie",
+          "text": "Zum Schluss möchte ich sagen: Wenn alle eine eigene Trinkflasche dabeihätten, gäbe es viel weniger Plastikmüll. Vielen Dank fürs Zuhören! Haben Sie Fragen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-f1",
+      "kind": "audio",
+      "title": "Question du public 1",
+      "script": [
+        {
+          "voice": "mann",
+          "name": "Zuhörer",
+          "text": "Die Idee ist gut. Aber wer bezahlt, wenn ein teures Gerät kaputtgeht?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-f2",
+      "kind": "audio",
+      "title": "Question du public 2",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Zuhörerin",
+          "text": "Entschuldigung, das habe ich nicht ganz verstanden. Wann genau ist der Laden geöffnet?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-f3",
+      "kind": "audio",
+      "title": "Question du public 3",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Zuhörer",
+          "text": "Ich finde den Radweg wichtiger. Warum sollte ich für Ihren Laden stimmen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-f4",
+      "kind": "audio",
+      "title": "Question du public 4",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Zuhörerin",
+          "text": "Gibt es so ein Projekt schon woanders? Funktioniert das wirklich?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-mediation-grafik",
+      "kind": "image",
+      "title": "Graphique : ce que contiennent les poubelles du quartier",
+      "alt": "Diagramme en barres « Was landet im Nordring im Restmüll? » : Bioabfall 39 %, echter Restmüll 28 %, Verpackungen 15 %, Papier und Pappe 12 %, Glas 6 %.",
+      "image": {
+        "layout": "chart",
+        "title": "Was landet im Nordring im Restmüll?",
+        "unit": "%",
+        "bars": [
+          {
+            "label": "Bioabfall",
+            "value": 39
+          },
+          {
+            "label": "echter Restmüll",
+            "value": 28
+          },
+          {
+            "label": "Verpackungen",
+            "value": 15
+          },
+          {
+            "label": "Papier und Pappe",
+            "value": 12
+          },
+          {
+            "label": "Glas",
+            "value": 6
+          }
+        ],
+        "highlight": 0,
+        "source": "Kontrolle der Bürgerinitiative, eine Woche im März"
+      }
+    },
+    {
+      "key": "b1-umwelt-atelier-pruefung-folie",
+      "kind": "image",
+      "title": "Support de l’exposé : cinq parties",
+      "alt": "Support d’exposé « Thema: Autofreie Innenstadt? » avec cinq parties numérotées : thème, expérience, pays d’origine, avantages et inconvénients, conclusion.",
+      "image": {
+        "layout": "document",
+        "icon": "presentation",
+        "title": "Thema: Autofreie Innenstadt?",
+        "subtitle": "Präsentation, etwa 3 Minuten",
+        "lines": [
+          {
+            "icon": "megaphone",
+            "text": "1 · Thema vorstellen und Aufbau nennen"
+          },
+          {
+            "icon": "user-round",
+            "text": "2 · Eigene Erfahrung"
+          },
+          {
+            "icon": "map",
+            "text": "3 · Situation im Heimatland"
+          },
+          {
+            "icon": "list-checks",
+            "text": "4 · Vor- und Nachteile, Ihre Meinung"
+          },
+          {
+            "icon": "star",
+            "text": "5 · Schluss und Dank"
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-umwelt-atelier-schreiben-foto",
+      "kind": "image",
+      "title": "Un jardin mobile sur une place",
+      "alt": "Sur une place de quartier pavée, un grand bac en bois planté de verdure, abrité par une toile, avec des arbres autour.",
+      "photo": {
+        "file": "libre/commons/umwelt-mobiler-garten.jpg"
+      },
+      "credit": "Singlespeedfahrer, Wikimedia Commons",
+      "license": "CC0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mobiler_Garten_Admiralstraße_Berlin-Kreuzberg.jpg"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Réagir : répondre aux questions du public",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Das ist eine gute Frage. Darauf komme ich gleich zurück."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Réagir : répondre aux questions du public",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich verstehe Ihren Punkt, aber ich sehe das etwas anders."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-interaktion-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Réagir : répondre aux questions du public",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Habe ich Ihre Frage damit beantwortet?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-pruefung-q7",
+      "kind": "audio",
+      "title": "Modèle à répéter q7 · Entraînement à l’examen : présenter un thème (Sprechen)",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Ich möchte heute über ein wichtiges Thema sprechen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-pruefung-q8",
+      "kind": "audio",
+      "title": "Modèle à répéter q8 · Entraînement à l’examen : présenter un thème (Sprechen)",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Zum Schluss möchte ich sagen, dass ich für einen Versuch bin."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-atelier-lexique",
+      "kind": "audio",
+      "title": "Lexique · Umwelt (atelier) : défendre une proposition, présenter un thème",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Grafik, die Grafiken"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Anteil, die Anteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Hälfte, die Hälften"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Restmüll"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Biotonne, die Biotonnen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "den Müll trennen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stadtteilrat, die Stadtteilräte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Gemeinschaftsgarten, die Gemeinschaftsgärten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "beantragen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "im Vergleich zu"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich möchte heute über … sprechen."
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Dafür spricht, dass …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Meiner Meinung nach …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "überwiegen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Zum Schluss …"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Sehr geehrte Damen und Herren,"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Ich würde mich über eine Antwort freuen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

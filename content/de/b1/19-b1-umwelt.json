@@ -1,0 +1,2385 @@
+{
+  "id": "b1-umwelt",
+  "title": "Umwelt : agir pour son quartier et l’environnement",
+  "objective": "Comprendre et comparer des propositions écologiques pour le quartier, faire des hypothèses et dire ce que l’on ferait (Wenn wir mehr Zeit hätten, würden wir …).",
+  "prerequisites": [
+    "b1-medien-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : deux idées pour le quartier, objection et compromis."
+  ],
+  "grammarFocus": [
+    "konjunktiv2-irreal",
+    "komparativ-attributiv",
+    "je-desto"
+  ],
+  "layer": "content/b/source/b1/b1-umwelt.mjs",
+  "vocabulary": [
+    {
+      "id": "muell-vermeiden",
+      "word": "Müll vermeiden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "éviter les déchets",
+      "example": "Mit Mehrwegflaschen können wir viel Müll vermeiden.",
+      "note": "der Müll : les déchets (sans pluriel)",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "energie-sparen",
+      "word": "Energie sparen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "économiser l’énergie",
+      "example": "Wir sparen Energie, wenn wir das Licht ausmachen.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "nachhaltig",
+      "word": "nachhaltig",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "durable (écologiquement)",
+      "example": "Ein Leihladen ist eine nachhaltige Idee.",
+      "note": "die Nachhaltigkeit : la durabilité",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "umweltfreundlich",
+      "word": "umweltfreundlich",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "écologique, respectueux de l’environnement",
+      "example": "Das Fahrrad ist umweltfreundlicher als das Auto.",
+      "note": "contraire : umweltschädlich",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "mehrwegflasche",
+      "word": "Mehrwegflasche",
+      "article": "die",
+      "plural": "Mehrwegflaschen",
+      "partOfSpeech": "noun",
+      "translation": "la bouteille réutilisable (consignée)",
+      "example": "Ich kaufe Milch nur noch in Mehrwegflaschen.",
+      "note": "contraire : die Einwegflasche",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "radweg",
+      "word": "Radweg",
+      "article": "der",
+      "plural": "Radwege",
+      "partOfSpeech": "noun",
+      "translation": "la piste cyclable",
+      "example": "Der neue Radweg führt direkt zur Schule.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "buergerinitiative",
+      "word": "Bürgerinitiative",
+      "article": "die",
+      "plural": "Bürgerinitiativen",
+      "partOfSpeech": "noun",
+      "translation": "le collectif de citoyens",
+      "example": "Die Bürgerinitiative sammelt Unterschriften für mehr Bäume.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "verbrauch",
+      "word": "Verbrauch",
+      "article": "der",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la consommation",
+      "example": "Der Verbrauch von Plastik ist viel zu hoch.",
+      "note": "verbrauchen : consommer",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "vorschlag",
+      "word": "Vorschlag",
+      "article": "der",
+      "plural": "Vorschläge",
+      "partOfSpeech": "noun",
+      "translation": "la proposition",
+      "example": "Die Eltern haben einen guten Vorschlag gemacht.",
+      "note": "einen Vorschlag machen, einreichen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "vorschlagen",
+      "word": "vorschlagen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "proposer",
+      "example": "Ich schlage vor, dass wir zuerst einen Versuch machen.",
+      "note": "séparable : vor|schlagen · Perfekt : hat vorgeschlagen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "ausleihen",
+      "word": "ausleihen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "emprunter, prêter",
+      "example": "Im Leihladen kann man eine Leiter ausleihen.",
+      "note": "séparable : aus|leihen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "teilen",
+      "word": "teilen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "partager",
+      "example": "Wir teilen uns ein Auto mit den Nachbarn.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "wegwerfen",
+      "word": "wegwerfen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "jeter",
+      "example": "Wirf die Lampe nicht weg, man kann sie reparieren!",
+      "note": "séparable : weg|werfen · Perfekt : hat weggeworfen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "abstimmen-ueber",
+      "word": "abstimmen über",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "voter sur",
+      "example": "Die Bewohner stimmen über zwei Projekte ab.",
+      "note": "+ accusatif · séparable : ab|stimmen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "sich-einsetzen-fuer",
+      "word": "sich einsetzen für",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "s’engager pour",
+      "example": "Die Eltern setzen sich für einen sicheren Schulweg ein.",
+      "note": "+ accusatif · séparable : ein|setzen",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "stadtteil",
+      "word": "Stadtteil",
+      "article": "der",
+      "plural": "Stadtteile",
+      "partOfSpeech": "noun",
+      "translation": "le quartier (d’une ville)",
+      "example": "In unserem Stadtteil gibt es wenig Grün.",
+      "note": "synonyme : das Viertel",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "vorteil",
+      "word": "Vorteil",
+      "article": "der",
+      "plural": "Vorteile",
+      "partOfSpeech": "noun",
+      "translation": "l’avantage",
+      "example": "Der größte Vorteil ist der niedrige Preis.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "nachteil",
+      "word": "Nachteil",
+      "article": "der",
+      "plural": "Nachteile",
+      "partOfSpeech": "noun",
+      "translation": "l’inconvénient",
+      "example": "Ein Nachteil wäre, dass Parkplätze wegfallen.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "loesung",
+      "word": "Lösung",
+      "article": "die",
+      "plural": "Lösungen",
+      "partOfSpeech": "noun",
+      "translation": "la solution",
+      "example": "Das ist die günstigere Lösung.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "verpackung",
+      "word": "Verpackung",
+      "article": "die",
+      "plural": "Verpackungen",
+      "partOfSpeech": "noun",
+      "translation": "l’emballage",
+      "example": "Obst ohne Verpackung macht weniger Müll.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "lastenrad",
+      "word": "Lastenrad",
+      "article": "das",
+      "plural": "Lastenräder",
+      "partOfSpeech": "noun",
+      "translation": "le vélo cargo",
+      "example": "Mit dem Lastenrad kann man auch große Einkäufe transportieren.",
+      "note": null,
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "pfand",
+      "word": "Pfand",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la consigne, la caution",
+      "example": "Auf die Flasche gibt es Pfand.",
+      "note": "ein Pfand hinterlegen : laisser une caution",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 21
+      }
+    },
+    {
+      "id": "je-desto",
+      "word": "je … desto",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "plus … plus",
+      "example": "Je mehr Leute mitmachen, desto besser.",
+      "note": "aussi : je … umso",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 22
+      }
+    },
+    {
+      "id": "an-deiner-stelle",
+      "word": "an deiner Stelle",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "expression",
+      "translation": "à ta place",
+      "example": "An deiner Stelle würde ich mit dem Rad fahren.",
+      "note": "an Ihrer Stelle : à votre place",
+      "audio": {
+        "media": "b1-umwelt-lexique",
+        "line": 23
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-umwelt-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : l’environnement dans mon quartier",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : l’environnement dans mon quartier",
+        "description": "UMWELT BEGINNT VOR DER HAUSTÜR\n[fr] L’environnement commence devant sa porte\n\nDenken Sie an Ihre Straße und an Ihr Viertel. [fr] Pensez à votre rue et à votre quartier.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Was tun Sie im Alltag schon für die Umwelt? [fr] Que faites-vous déjà au quotidien pour l’environnement ?\n• Was würden Sie in Ihrem Viertel sofort ändern, wenn Sie könnten? [fr] Que changeriez-vous tout de suite dans votre quartier, si vous le pouviez ?\n• Fahren Sie lieber mit dem Rad, mit dem Bus oder mit dem Auto? Warum? [fr] Préférez-vous le vélo, le bus ou la voiture ? Pourquoi ?\n\nAntworten Sie laut und in ganzen Sätzen. Es gibt keine falschen Antworten. [fr] Répondez à voix haute, par des phrases complètes. Il n’y a pas de mauvaise réponse.\n\nDAS LERNEN SIE\n[fr] Objectifs\n• Ich kann Vorschläge für mein Viertel verstehen. [fr] Je peux comprendre des propositions pour mon quartier.\n• Ich kann zwei Möglichkeiten vergleichen. [fr] Je peux comparer deux options.\n• Ich kann eine Hypothese formulieren: Wenn wir …, würden wir … [fr] Je peux formuler une hypothèse : « Si nous …, nous … ».\n• Ich kann Ratschläge geben: An deiner Stelle würde ich … [fr] Je peux donner des conseils : « À ta place, je … ».\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• Müll vermeiden — éviter les déchets\n• Energie sparen — économiser l’énergie\n• nachhaltig — durable\n• die Mehrwegflasche — la bouteille réutilisable\n• der Radweg — la piste cyclable\n• die Bürgerinitiative — le collectif de citoyens\n• umweltfreundlich — écologique\n• der Verbrauch — la consommation",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Mit dem Rad statt mit dem Auto",
+          "media": "b1-umwelt-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-umwelt-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : deux idées pour le quartier",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : deux idées pour le quartier",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\nLesen Sie zuerst den Titel und Absatz 1: Worum geht es? [fr] Lisez d’abord le titre et le paragraphe 1 : de quoi s’agit-il ?\nLesen Sie dann eine Frage und suchen Sie nur die passende Stelle im Text. [fr] Lisez ensuite une question et cherchez seulement le passage utile.\n„Steht nicht im Text“ heißt: Der Text sagt dazu gar nichts. [fr] « Steht nicht im Text » signifie : le texte n’en dit rien du tout.\n\nZwei Ideen für den Nordring: Sie entscheiden!\n\n(1) Der Stadtteilrat Nordring hat in diesem Jahr 8000 Euro für ein Umweltprojekt im Viertel. Zwei Gruppen haben Vorschläge eingereicht. Bis zum 15. Mai können alle Bewohnerinnen und Bewohner ab 14 Jahren online oder im Nachbarschaftshaus abstimmen. Das Projekt mit den meisten Stimmen bekommt das ganze Geld.\n\n(2) Die Bürgerinitiative „Grüner Nordring“ möchte im Nachbarschaftshaus einen Leihladen eröffnen. Dort könnte man Bohrmaschinen, Leitern, Zelte oder eine Nähmaschine ausleihen, statt sie neu zu kaufen. „In fast jedem Keller liegt ein Gerät, das nur ein paar Minuten im Jahr benutzt wird“, sagt Hanna Berger, die Sprecherin der Initiative. „Wenn wir diese Dinge teilen würden, gäbe es weniger Müll, und alle würden Geld sparen. Ein Leihladen ist die billigere und umweltfreundlichere Lösung.“ Mit dem Budget würde die Initiative Regale, ein Programm für die Ausleihe und die ersten Geräte kaufen. Wer etwas ausleiht, soll ein Pfand von zehn Euro hinterlegen. Der Laden wäre zweimal pro Woche geöffnet, und Freiwillige würden dort den Dienst übernehmen.\n\n(3) Eltern der Grundschule am Park schlagen einen sichereren Schulweg vor. Heute bringen viele Eltern ihre Kinder mit dem Auto zur Schule, weil die Kanalstraße eng und gefährlich ist. Ein markierter Radweg und zwanzig neue Fahrradbügel vor der Schule könnten das ändern. „Je sicherer der Weg ist, desto mehr Kinder fahren mit dem Rad“, meint Murat Yilmaz, Vater von zwei Kindern. Ein Radweg wäre außerdem gut für alle, die mit dem Rad zur Arbeit fahren. Die Stadt würde den Radweg selbst bezahlen, wenn der Stadtteilrat die Fahrradbügel und eine Aktionswoche „Mit dem Rad zur Schule“ finanzieren würde. Allerdings würden in der Kanalstraße sechs Parkplätze wegfallen.\n\n(4) Beide Gruppen stellen ihre Ideen am Donnerstag, dem 2. Mai, um 19 Uhr im Nachbarschaftshaus vor. Dort können Sie Fragen stellen und Ihre Meinung sagen. Wer nicht kommen kann, findet alle Unterlagen auf der Internetseite des Stadtteilrats. Und vielleicht gibt es im nächsten Jahr auch Geld für die andere Idee.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-lesen-ideen",
+          "caption": "Zwei Vorschläge für den Nordring",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Text? [fr] De quoi parle le texte ?",
+          "explanation": "Le paragraphe 1 pose le cadre : 8 000 euros pour un seul projet, deux propositions et un vote des habitants jusqu’au 15 mai. Rien n’est encore construit : « könnte », « würde » et « wäre » montrent qu’il s’agit de projets. Les parents veulent au contraire moins de voitures.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Stadt hat einen Leihladen und einen Radweg gebaut.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Zwei Gruppen haben je eine Idee für das Viertel, und die Bewohner stimmen darüber ab.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Die Eltern der Grundschule möchten mehr Parkplätze, weil sie mit dem Auto kommen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was ist das Ziel des Textes? [fr] Quel est le but du texte ?",
+          "explanation": "Le texte présente les deux idées de façon neutre, puis invite à voter (« Sie entscheiden! ») et à venir jeudi (paragraphe 4). Les bénévoles du magasin de prêt ne sont qu’un détail du paragraphe 2, et le texte ne critique jamais le budget.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er sucht Freiwillige, die im neuen Leihladen mitarbeiten.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er kritisiert den Stadtteilrat, weil das Budget zu klein ist.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er stellt zwei Ideen vor und lädt zur Abstimmung ein.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Der Leihladen wäre jeden Tag geöffnet.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Der Laden wäre zweimal pro Woche geöffnet » (paragraphe 2), donc deux fois par semaine, pas tous les jours.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Die Stadt wäre bereit, den Radweg zu bezahlen.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « Die Stadt würde den Radweg selbst bezahlen, wenn … » (paragraphe 3). La ville paierait la piste à une condition : le conseil de quartier finance les arceaux et la semaine d’action.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Viele Eltern der Grundschule sind gegen den Leihladen.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Non mentionné : le texte ne donne jamais l’avis des parents sur le magasin de prêt. Ils présentent leur propre idée, ce qui ne veut pas dire qu’ils sont contre l’autre.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Was wäre ein Nachteil des Radwegs? [fr] Quel serait un inconvénient de la piste cyclable ?",
+          "explanation": "« Allerdings würden in der Kanalstraße sechs Parkplätze wegfallen » : « allerdings » annonce la limite du projet. La ville ne paierait rien de plus que la piste, et le texte ne parle pas d’un trajet plus long.",
+          "options": [
+            {
+              "id": "a",
+              "label": "In der Kanalstraße gäbe es weniger Parkplätze.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Stadt müsste 8000 Euro mehr bezahlen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Kinder hätten einen längeren Schulweg.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? [fr] Quel intertitre va avec quel paragraphe ?",
+          "explanation": "Repérez le mot-clé de chaque paragraphe : 8 000 euros et le vote (1), « ausleihen, statt sie neu zu kaufen » (2), la piste cyclable et l’école (3), la réunion de jeudi où l’on peut « Fragen stellen und Ihre Meinung sagen » (4).",
+          "pairs": [
+            {
+              "left": "Absatz 1",
+              "right": "Ein Budget für das Viertel"
+            },
+            {
+              "left": "Absatz 2",
+              "right": "Leihen statt kaufen"
+            },
+            {
+              "left": "Absatz 3",
+              "right": "Sicher mit dem Rad zur Schule"
+            },
+            {
+              "left": "Absatz 4",
+              "right": "Ihre Meinung ist gefragt"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Wörtern aus dem Text. [fr] Complétez avec des mots du texte.",
+          "text": "Im Leihladen kann man Geräte ausleihen, statt sie neu zu [[1]]. Wer etwas ausleiht, soll ein [[2]] von zehn Euro hinterlegen. Wegen der gefährlichen Kanalstraße bringen viele Eltern ihre Kinder mit dem [[3]] zur Schule.",
+          "explanation": "« statt … zu kaufen » (au lieu d’acheter) ; « das Pfand » est la caution rendue au retour de l’objet, à ne pas confondre avec un prix de location ; « mit dem Auto » : c’est la voiture que les parents veulent remplacer par le vélo.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "kaufen"
+              ],
+              "size": 7,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Pfand"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Auto"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : la réunion du collectif",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : la réunion du collectif",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSTRATEGIE\n[fr] Stratégie\nBeim ersten Hören: Wer spricht? Worum geht es? [fr] Première écoute : qui parle ? de quoi s’agit-il ?\nBeim zweiten Hören: Achten Sie vor allem auf Zahlen, Tage und Uhrzeiten. [fr] Deuxième écoute : soyez surtout attentif aux nombres, aux jours et aux heures.\n\nDIE SITUATION\n[fr] La situation\nDie Bürgerinitiative „Grüner Nordring“ bereitet die Präsentation vom Donnerstag vor. Es sprechen Hanna, Jonas und Irina. [fr] Le collectif « Grüner Nordring » prépare sa présentation de jeudi. Parlent : Hanna, Jonas et Irina.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-hoeren-sitzung",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Präsentation am Donnerstag: [[1]] Minuten · Programm für die Ausleihe: [[2]] Euro · Öffnungszeiten: dienstags 17–19 Uhr, samstags 10–[[3]] Uhr · Freiwillige: jetzt fünf, gebraucht: mindestens [[4]] · Pfand pro Gerät: [[5]] Euro",
+          "explanation": "Hanna annonce « zehn Minuten », Jonas chiffre le logiciel à « vierhundert » euros, le samedi va « von zehn bis dreizehn Uhr », il faudrait « mindestens acht Leute » et la caution est de « zehn Euro ». Chiffres ou lettres sont acceptés.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "10",
+                "zehn"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "400",
+                "vierhundert"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "13",
+                "dreizehn"
+              ],
+              "size": 9,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "8",
+                "acht"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "10",
+                "zehn"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was bietet Irina an? [fr] Que propose Irina ?",
+          "explanation": "« Ich könnte samstags helfen. Und ich kenne zwei Nachbarinnen, die auch Zeit hätten. » L’ouverture du mercredi n’est qu’une hypothèse de Hanna (« Wenn wir mehr Freiwillige hätten … »), et c’est Jonas qui a fait les calculs.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie möchte den Laden auch mittwochs öffnen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hilft samstags und fragt zwei Nachbarinnen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie rechnet die Kosten noch einmal.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Warum macht sich Jonas Sorgen? [fr] Pourquoi Jonas s’inquiète-t-il ?",
+          "explanation": "« Eine Sache macht mir Sorgen: die Eltern mit ihrem Radweg. Ihre Idee ist stark. » Il craint le projet concurrent. Le budget, lui, suffit : il reste environ 6 000 euros pour les appareils.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das Geld reicht nicht für die Regale.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es gibt im Viertel zu wenige Geräte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Idee der Eltern hat gute Chancen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Welche Idee hat Hanna für die Familien? [fr] Quelle idée Hanna a-t-elle pour les familles ?",
+          "explanation": "« Wenn wir gewinnen würden, könnten wir auch ein Lastenrad kaufen. Die Familien könnten es kostenlos ausleihen. » La semaine d’action fait partie du projet des parents, pas de celui de Hanna.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Ein Lastenrad, das man kostenlos ausleihen kann.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Einen eigenen Radweg zum Nachbarschaftshaus.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Aktionswoche zusammen mit der Schule.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was passiert, wenn ein Gerät kaputt zurückkommt? [fr] Que se passe-t-il si un appareil revient cassé ?",
+          "explanation": "Jonas : « Kleine Schäden reparieren wir selbst », avec un atelier de réparation (Reparaturtreff) une fois par mois. Il ne parle ni d’un magasin qui réparerait, ni d’un appareil à racheter : c’est le groupe lui-même qui répare.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Man muss ein neues Gerät kaufen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ein Geschäft im Viertel repariert das Gerät kostenlos.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Kleine Schäden repariert die Gruppe selbst.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Warum passt der Raum im Keller trotzdem gut? [fr] Pourquoi la salle du sous-sol convient-elle quand même ?",
+          "explanation": "Hanna reconnaît que la salle est « kleiner als der Saal oben », mais elle suffit pour quarante appareils et « hat einen eigenen Eingang zum Hof » : c’est plus pratique pour porter des objets lourds. Le loyer n’est pas mentionné.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er ist größer als der Saal oben.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Er hat einen eigenen Eingang zum Hof.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Er kostet keine Miete.",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : imaginer, comparer, enchaîner",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : imaginer, comparer, enchaîner",
+        "description": "Lesen Sie die Sätze aus dem Text und aus dem Gespräch. Beantworten Sie dann die Fragen. [fr] Lisez les phrases tirées du texte et de la réunion, puis répondez aux questions.\n\nSatz 1: Wenn wir diese Dinge teilen würden, gäbe es weniger Müll.\nSatz 2: Wenn wir mehr Freiwillige hätten, könnten wir auch mittwochs öffnen.\nSatz 3: Wenn wir gewinnen würden, könnten wir auch ein Lastenrad kaufen.\nSatz 4: Eltern der Grundschule schlagen einen sichereren Schulweg vor.\nSatz 5: Ein Leihladen ist die billigere und umweltfreundlichere Lösung.\nSatz 6: Je sicherer der Weg ist, desto mehr Kinder fahren mit dem Rad.\n\nAchten Sie auf die Verben, auf die Adjektive vor dem Nomen und auf die Wortstellung. [fr] Observez les verbes, les adjectifs placés devant le nom et l’ordre des mots.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 bis 3: Beschreiben sie die Realität oder eine Vorstellung? [fr] Phrases 1 à 3 : décrivent-elles la réalité ou une situation imaginée ?",
+          "explanation": "C’est le Konjunktiv II de l’irréel : on imagine une situation qui n’existe pas maintenant. En réalité, on ne partage pas encore les objets, il n’y a pas assez de bénévoles et le vote n’est pas gagné. Le passé, lui, s’exprimerait au Perfekt ou au Präteritum.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Realität: Es ist schon so.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Die Vergangenheit: Es war früher einmal so, heute nicht mehr.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Eine Vorstellung: Im Moment ist es nicht so.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "match",
+          "prompt": "Welche Form gehört zu welchem Infinitiv? [fr] Quelle forme correspond à quel infinitif ?",
+          "explanation": "Le Konjunktiv II se forme sur le prétérit, souvent avec un Umlaut : hatten → hätten, gab → gäbe, konnten → könnten, wurden → würden. « würden » + infinitif sert pour la plupart des autres verbes : wenn wir teilen würden.",
+          "pairs": [
+            {
+              "left": "hätten",
+              "right": "haben"
+            },
+            {
+              "left": "gäbe",
+              "right": "geben"
+            },
+            {
+              "left": "könnten",
+              "right": "können"
+            },
+            {
+              "left": "würden",
+              "right": "werden"
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 4 und 5: Was passiert mit dem Adjektiv vor dem Nomen? [fr] Phrases 4 et 5 : que devient l’adjectif placé devant le nom ?",
+          "explanation": "Devant un nom, le comparatif ajoute -er à l’adjectif, puis la terminaison habituelle : sicher → sicherer → einen sichereren Schulweg ; billig → billiger → die billigere Lösung. On ne forme jamais le comparatif avec « mehr » comme le français « plus ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Es bekommt -er und danach die normale Endung.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Es bleibt ohne Endung, wie in „Der Weg ist sicherer als …“.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Man setzt „mehr“ vor das Adjektiv.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Satz 6: Wo steht das konjugierte Verb? [fr] Phrase 6 : où se place le verbe conjugué ?",
+          "explanation": "« Je » ouvre une subordonnée : le verbe va à la fin (« je sicherer der Weg ist »). La partie avec « desto » est la principale : son premier élément est « desto mehr Kinder », puis vient le verbe (« fahren »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "In beiden Teilen steht das Verb an Position 2, wie im Hauptsatz.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Nach „je …“ am Ende, nach „desto …“ direkt nach dem Komparativ.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "In beiden Teilen steht das Verb am Ende, wie im Nebensatz.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-umwelt-regel",
+      "kind": "lesson",
+      "title": "Retenir : l’irréel, le comparatif devant le nom et je … desto",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Retenir : l’irréel, le comparatif devant le nom et je … desto",
+        "description": "À RETENIR — 1. LE KONJUNKTIV II : IMAGINER UNE AUTRE RÉALITÉ\nLe Konjunktiv II exprime une hypothèse, un souhait ou une situation imaginée qui ne correspond pas à la réalité présente. Le français met l’imparfait après « si » et le conditionnel dans la principale ; l’allemand met le Konjunktiv II dans les deux propositions.\n• haben → ich hätte, du hättest, er/sie hätte, wir hätten, ihr hättet, sie/Sie hätten\n• sein → ich wäre, du wärst, er/sie wäre, wir wären, ihr wärt, sie/Sie wären\n• verbes de modalité → ich könnte, müsste, dürfte (avec Umlaut) ; ich sollte, wollte (sans Umlaut)\n• quelques verbes fréquents → es gäbe (geben), ich käme (kommen), ich wüsste (wissen), ich bräuchte (brauchen)\n• tous les autres verbes → würde + infinitif en fin de proposition : wir würden teilen, ich würde fahren\n\nWenn wir mehr Freiwillige hätten, könnten wir auch mittwochs öffnen.\nWenn die Straße sicherer wäre, würden mehr Kinder mit dem Rad fahren.\nAn deiner Stelle würde ich das Auto stehen lassen.\n\nLa subordonnée en wenn se termine par le verbe conjugué. La principale qui suit commence par son verbe (würden, könnten…), car la subordonnée occupe déjà la première place.\n\nÀ RETENIR — 2. LE COMPARATIF ET LE SUPERLATIF DEVANT UN NOM\nDevant un nom, le comparatif ajoute -er, puis la terminaison normale de l’adjectif ; le superlatif ajoute -(e)st-, puis la terminaison.\n• ein billiger Laden → ein billigerer Laden\n• die günstige Lösung → die günstigere Lösung\n• mit einem kleinen Budget → mit einem kleineren Budget\n• der kurze Weg → der kürzeste Weg ; die gute Idee → die beste Idee\n• formes irrégulières : gut → besser → best- ; viel → mehr → meist- ; groß → größer → größt- ; hoch → höher → höchst-\n• mehr et weniger restent invariables : mehr Radwege, weniger Müll\n\nÀ RETENIR — 3. JE … DESTO : PLUS … PLUS\n« Je » + comparatif ouvre une subordonnée (verbe à la fin) ; « desto » (ou « umso ») + comparatif ouvre la principale, et le verbe conjugué suit immédiatement le groupe comparatif.\nJe mehr Leute mitmachen, desto weniger Müll gibt es.\nJe früher wir anfangen, desto mehr Geld sparen wir.\n\nATTENTION\n• « Si j’avais » ne se dit pas « wenn ich würde haben » mais « wenn ich hätte » : avec haben, sein et les verbes de modalité, on emploie la forme simple.\n• Pas de virgule oubliée : la subordonnée en wenn ou en je est toujours séparée par une virgule.\n• Après un comparatif, « que » se dit als (größer als) ; pour l’égalité, on dit so … wie (so groß wie).\n• N’oubliez pas la terminaison de l’adjectif : eine bessere Idee, jamais « eine besser Idee ».",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-umwelt-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : Konjunktiv II, comparatif et je … desto",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : Konjunktiv II, comparatif et je … desto",
+        "description": "Üben Sie die Formen aus der Regel. Lesen Sie jeden Satz bis zum Ende, bevor Sie antworten. [fr] Entraînez-vous aux formes de la règle. Lisez chaque phrase jusqu’au bout avant de répondre.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Ergänzen Sie: hätte, wäre oder würde. [fr] Complétez avec hätte, wäre ou würde.",
+          "text": "Wenn ich mehr Zeit [[1]], [[2]] ich im Gemeinschaftsgarten helfen. Das [[3]] bestimmt schön!",
+          "explanation": "« Zeit haben » → wenn ich Zeit hätte ; « helfen » n’a pas de forme simple usuelle → ich würde helfen ; « schön sein » → das wäre schön. Le piège : « wenn ich Zeit würde » n’a pas de sens, il manque le verbe haben.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "hätte"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "würde"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "wäre"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konjunktiv II. Das Verb steht in Klammern. [fr] Complétez au Konjunktiv II. Le verbe est entre parenthèses.",
+          "text": "Wenn es hier einen Radweg [[1]] (geben), [[2]] meine Kinder allein zur Schule fahren (können).",
+          "explanation": "« es gibt » devient « es gäbe » (forme courante ; « geben würde » est aussi accepté à l’oral). « können » donne « könnten » au pluriel, avec Umlaut. Sans Umlaut, « konnten » serait le prétérit : « ils pouvaient ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "gäbe",
+                "geben würde"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "könnten"
+              ],
+              "size": 8,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wenn",
+              "ich",
+              "Bürgermeisterin",
+              "wäre,",
+              "würde",
+              "ich",
+              "mehr",
+              "Bäume",
+              "pflanzen."
+            ]
+          ],
+          "explanation": "La subordonnée en wenn se termine par « wäre » ; la principale commence directement par le verbe « würde », puis le sujet « ich », et l’infinitif « pflanzen » va à la fin."
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie haben kein Fahrrad. Was sagen Sie? [fr] Vous n’avez pas de vélo. Que dites-vous ?",
+          "explanation": "Vous n’avez pas de vélo : la situation est imaginée, donc Konjunktiv II (« hätte … würde … fahren »). La première phrase décrit une condition réelle (« quand j’ai un vélo »). La troisième fait l’erreur typique « würde haben » au lieu de « hätte ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn ich ein Fahrrad habe, fahre ich zur Arbeit.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn ich ein Fahrrad hätte, würde ich zur Arbeit fahren.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wenn ich ein Fahrrad würde haben, würde ich zur Arbeit fahren.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Komparativ mit der richtigen Endung. [fr] Complétez avec le comparatif et la bonne terminaison.",
+          "text": "Wir brauchen eine [[1]] Lösung (gut). Der Leihladen ist ein [[2]] Projekt als der Radweg (klein). Mit einem [[3]] Budget könnten wir mehr machen (groß).",
+          "explanation": "gut → besser (irrégulier) + -e après « eine » ; klein → kleiner + -es pour un neutre après « ein » ; groß → größer (Umlaut) + -en au datif après « mit einem ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "bessere"
+              ],
+              "size": 8,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kleineres"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "größeren"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welche Form ist richtig? Wir suchen einen … Weg zur Schule. [fr] Quelle forme est juste ? Nous cherchons un chemin plus court pour l’école.",
+          "explanation": "kurz → kürzer (avec Umlaut), puis -en : masculin à l’accusatif après « einen ». « kürzerer » serait la terminaison du nominatif (ein kürzerer Weg ist …), et « kurzeren » oublie l’Umlaut.",
+          "options": [
+            {
+              "id": "a",
+              "label": "kurzeren",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "kürzerer",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "kürzeren",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Satzteile passen zusammen? [fr] Quelles parties de phrase vont ensemble ?",
+          "explanation": "Chaque paire relie une cause et sa conséquence logique : plus de cyclistes → moins de voitures ; un appareil solide → moins d’achats ; commencer tôt → plus de temps ; moins d’emballages → moins de plastique dans les déchets.",
+          "pairs": [
+            {
+              "left": "Je mehr Menschen Rad fahren,",
+              "right": "desto weniger Autos sind auf der Straße."
+            },
+            {
+              "left": "Je länger ein Gerät hält,",
+              "right": "desto seltener muss man ein neues kaufen."
+            },
+            {
+              "left": "Je früher wir mit der Planung anfangen,",
+              "right": "desto mehr Zeit bleibt für die Aktionswoche."
+            },
+            {
+              "left": "Je weniger Verpackung wir kaufen,",
+              "right": "desto weniger Plastik landet im Müll."
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Je",
+              "öfter",
+              "wir",
+              "Geräte",
+              "teilen,",
+              "desto",
+              "weniger",
+              "Geld",
+              "geben",
+              "wir",
+              "aus."
+            ]
+          ],
+          "explanation": "Après « je öfter », la subordonnée se termine par le verbe « teilen ». Après « desto weniger Geld », le verbe conjugué « geben » vient tout de suite, puis le sujet « wir » et la particule séparable « aus »."
+        },
+        {
+          "id": "q9",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Superlativ. [fr] Complétez avec le superlatif.",
+          "text": "Das ist die [[1]] Idee (gut) und der [[2]] Weg zur Schule (kurz).",
+          "explanation": "Superlatif devant un nom : article défini + -st- + terminaison. gut → best- (irrégulier) : die beste Idee ; kurz → kürzest- : der kürzeste Weg. « am besten » s’emploie seul, sans nom.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "beste"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "kürzeste"
+              ],
+              "size": 9,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Le verbe de la partie en « je » va à la fin (« … der Laden ist »). Dans la partie en « desto », le groupe « desto mehr Leute » occupe la première place, puis vient le verbe « kommen ». Ne séparez pas « desto » de son comparatif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Je billiger der Laden ist, desto mehr Leute kommen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Je billiger ist der Laden, desto mehr Leute kommen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Je billiger der Laden ist, desto kommen mehr Leute.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-umwelt-wortschatz",
+      "kind": "exercise",
+      "title": "Mots et formules : environnement et propositions",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Mots et formules : environnement et propositions",
+        "description": "Lernen Sie Wörter immer zusammen: Nomen mit Verb, Wortfamilien, feste Wendungen. [fr] Apprenez les mots ensemble : nom avec verbe, familles de mots, expressions toutes faites.\n\nREDEMITTEL FÜR EINE DISKUSSION\n[fr] Formules pour une discussion\n• proposer : Wie wäre es, wenn wir …? / Ich schlage vor, dass …\n• approuver : Da haben Sie recht. / Das sehe ich genauso.\n• nuancer : Das stimmt, aber man müsste auch an … denken.\n• citer un inconvénient : Ein Nachteil wäre, dass …\n• argumenter : Dafür spricht, dass … / Dagegen spricht, dass …",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt zu welchem Nomen? [fr] Quel verbe va avec quel nom ?",
+          "explanation": "Ces associations sont figées : Müll vermeiden (éviter les déchets), Energie sparen, einen Vorschlag einreichen (déposer une proposition), eine Entscheidung treffen (prendre une décision, et non « machen »), Bäume pflanzen.",
+          "pairs": [
+            {
+              "left": "Müll",
+              "right": "vermeiden"
+            },
+            {
+              "left": "Energie",
+              "right": "sparen"
+            },
+            {
+              "left": "einen Vorschlag",
+              "right": "einreichen"
+            },
+            {
+              "left": "eine Entscheidung",
+              "right": "treffen"
+            },
+            {
+              "left": "Bäume",
+              "right": "pflanzen"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie Nomen aus derselben Wortfamilie. [fr] Formez des noms de la même famille.",
+          "text": "verbrauchen → der [[1]] · nachhaltig → die [[2]] · vermeiden → die [[3]]",
+          "explanation": "verbrauchen → der Verbrauch (radical seul, masculin) ; adjectif en -ig + -keit → die Nachhaltigkeit ; verbe + -ung → die Vermeidung. Les noms en -keit et -ung sont toujours féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Verbrauch"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Nachhaltigkeit"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Vermeidung"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Gegenteil. [fr] Complétez avec le contraire.",
+          "text": "die Einwegflasche ↔ die [[1]] · umweltschädlich ↔ [[2]] · Energie verschwenden ↔ Energie [[3]]",
+          "explanation": "Einweg (à usage unique) ↔ Mehrweg (réutilisable) ; -schädlich (nuisible) ↔ -freundlich (respectueux de) ; verschwenden (gaspiller) ↔ sparen (économiser).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Mehrwegflasche"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "umweltfreundlich"
+              ],
+              "size": 17,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "sparen"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten höflich einen Vorschlag machen. Was sagen Sie? [fr] Vous voulez faire poliment une proposition. Que dites-vous ?",
+          "explanation": "« Wie wäre es, wenn … ? » (Et si … ?) est la formule type de la proposition polie, au Konjunktiv II. La première phrase annonce un fait accompli ; la deuxième ressemble à un reproche.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wir haben im Nachbarschaftshaus einen Leihladen eröffnet.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Warum gibt es in unserem Viertel noch keinen Leihladen?",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Wie wäre es, wenn wir einen Leihladen eröffnen würden?",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie sind nur zum Teil einverstanden. Was passt? [fr] Vous n’êtes qu’en partie d’accord. Quelle formule convient ?",
+          "explanation": "« Da haben Sie recht, aber … » reconnaît un point puis le nuance : c’est l’accord partiel. « Das sehe ich genauso » est un accord total, « Das ist völlig falsch » un désaccord brutal.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Da haben Sie recht, aber man müsste auch an die Kosten denken.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Genau, das sehe ich ganz genauso, die Kosten sind kein Problem.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das ist völlig falsch, über die Kosten müssen wir nicht reden.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Sie nennen einen Nachteil. Welcher Satz passt? [fr] Vous citez un inconvénient. Quelle phrase convient ?",
+          "explanation": "« Ein Nachteil wäre, dass … » présente une limite, au Konjunktiv II car le projet n’existe pas encore. « Dafür spricht » introduit au contraire un argument favorable, et « Ich bin dafür » exprime un soutien.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dafür spricht, dass Parkplätze wegfallen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Ein Nachteil wäre, dass Parkplätze wegfallen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Ich bin dafür, dass Parkplätze wegfallen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Redemittel. [fr] Complétez les formules.",
+          "text": "Ich bin [[1]] den Radweg, weil er die Kinder schützt. [[2]] spricht auch, dass er nicht viel kostet.",
+          "explanation": "« für etwas sein » : être pour quelque chose (accusatif : für den Radweg). « Dafür spricht, dass … » : un argument en faveur de cela est que … « Dagegen spricht » introduirait un argument contre.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "für"
+              ],
+              "size": 4,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Dafür"
+              ],
+              "size": 6,
+              "hint": null
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-umwelt-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : proposer, imaginer, comparer",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : proposer, imaginer, comparer",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\n\nHören Sie zuerst das Modell. Sprechen Sie dann den ganzen Satz flüssig nach. [fr] Écoutez d’abord le modèle, puis répétez toute la phrase d’un trait.\nBetonen Sie die wichtigen Wörter: hätten, mehr, desto. [fr] Accentuez les mots importants : hätten, mehr, desto.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wenn wir mehr Zeit hätten, würden wir öfter Rad fahren.",
+          "accept": [
+            "Wenn wir mehr Zeit hätten, würden wir öfter Rad fahren."
+          ],
+          "explanation": "Hypothèse irréelle : « hätten » à la fin de la subordonnée, puis « würden » en tête de la principale. Marquez une petite pause à la virgule.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wie wäre es mit einem Leihladen im Nachbarschaftshaus?",
+          "accept": [
+            "Wie wäre es mit einem Leihladen im Nachbarschaftshaus?"
+          ],
+          "explanation": "Proposition polie : « Wie wäre es mit … ? » + datif. La voix monte légèrement à la fin de la question.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Je mehr Leute mitmachen, desto besser wird das Projekt.",
+          "accept": [
+            "Je mehr Leute mitmachen, desto besser wird das Projekt."
+          ],
+          "explanation": "Accentuez « mehr » et « besser » : ce sont les deux comparatifs qui portent le sens. Le verbe « wird » suit directement « desto besser ».",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ein Nachteil wäre, dass einige Parkplätze wegfallen.",
+          "accept": [
+            "Ein Nachteil wäre, dass einige Parkplätze wegfallen."
+          ],
+          "explanation": "Pour nuancer : « Ein Nachteil wäre, dass … ». Dans « wegfallen », l’accent porte sur la particule « weg ».",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "An deiner Stelle würde ich lieber mit dem Bus fahren.",
+          "accept": [
+            "An deiner Stelle würde ich lieber mit dem Bus fahren."
+          ],
+          "explanation": "Conseil amical au Konjunktiv II : « an deiner Stelle » (à ta place). « lieber » est le comparatif de « gern ».",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Ich wäre dafür, zuerst einen Versuch von drei Monaten zu machen.",
+          "accept": [
+            "Ich wäre dafür, zuerst einen Versuch von drei Monaten zu machen.",
+            "Ich wäre dafür, zuerst einen Versuch von 3 Monaten zu machen."
+          ],
+          "explanation": "Formule de compromis : « Ich wäre dafür, … zu machen ». L’infinitif avec « zu » termine la phrase. Les chiffres (3 Monaten) sont acceptés.",
+          "threshold": 70
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-umwelt-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-hoeren2",
+      "kind": "exercise",
+      "title": "Comprendre : un micro-trottoir sur l’environnement",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : un micro-trottoir sur l’environnement",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nDIE SITUATION\n[fr] La situation\nRadio Nordring fragt auf dem Markt: Was würden Sie ändern, wenn Sie Bürgermeisterin oder Bürgermeister wären? Vier Personen antworten. [fr] Radio Nordring demande au marché : que changeriez-vous si vous étiez maire ? Quatre personnes répondent.\n\nSTRATEGIE\n[fr] Stratégie\nAchten Sie bei jeder Person nur auf eine Frage: Was wünscht sie sich? [fr] Pour chaque personne, ne retenez qu’une chose : que souhaite-t-elle ?",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-hoeren2-umfrage",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-hoeren2-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-umwelt-hoeren2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Wer wünscht sich was? [fr] Qui souhaite quoi ?",
+          "explanation": "Lukas : « Ich würde mehr Radwege bauen. » Frau Schneider : « Wenn die Busse öfter fahren würden … ». Herr Demir : « Ich würde Mehrwegbecher … einführen. » Mia : « Ich würde mehr Bäume pflanzen, vor allem an unserer Schule. »",
+          "pairs": [
+            {
+              "left": "Lukas",
+              "right": "mehr Radwege"
+            },
+            {
+              "left": "Frau Schneider",
+              "right": "mehr Busse"
+            },
+            {
+              "left": "Herr Demir",
+              "right": "Mehrwegbecher"
+            },
+            {
+              "left": "Mia",
+              "right": "mehr Bäume an der Schule"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was würde Frau Schneider tun, wenn die Busse öfter fahren würden? [fr] Que ferait Mme Schneider si les bus passaient plus souvent ?",
+          "explanation": "« … würde ich mein Auto stehen lassen » : elle laisserait sa voiture au garage. Elle ne parle ni de son travail ni du prix des billets, seulement de la fréquence des bus (toutes les trente minutes, le soir toutes les heures).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie würde schneller zur Arbeit kommen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie würde ihr Auto stehen lassen.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie würde eine billigere Fahrkarte kaufen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was sagt Herr Demir über sein Café? [fr] Que dit M. Demir de son café ?",
+          "explanation": "« Bei mir werden jeden Tag ungefähr hundert Pappbecher weggeworfen » (passif). Les gobelets réutilisables sont justement ce qu’il voudrait introduire ; la chaleur, c’est Mia qui en parle pour la cour de l’école.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Dort gibt es schon seit einem Jahr nur Mehrwegbecher.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Dort ist es im Sommer für die Gäste viel zu heiß.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Dort werden jeden Tag viele Pappbecher weggeworfen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Je mehr Radwege es gibt, desto weniger Leute nehmen das Auto."
+          ],
+          "voice": "mann2",
+          "explanation": "Après « je mehr Radwege », le verbe « gibt » est en fin de subordonnée ; après « desto weniger Leute », le verbe « nehmen » suit immédiatement. Majuscules : Radwege, Leute, Auto.",
+          "showWordCount": true
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Wenn die Busse öfter fahren würden, würde ich mein Auto stehen lassen."
+          ],
+          "voice": "frau3",
+          "explanation": "Deux fois « würde » : à la fin de la subordonnée (würden, pluriel) puis en tête de la principale (würde, 1re personne). « stehen lassen » s’écrit en deux mots.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-umwelt-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : environnement, hypothèses et comparaisons",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : environnement, hypothèses et comparaisons",
+        "description": "Hören Sie die Nachricht von Hanna für die Fragen 1 und 2. Lösen Sie dann die anderen Aufgaben. [fr] Écoutez le message de Hanna pour les questions 1 et 2, puis faites les autres exercices.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-umwelt-kontrolle-nachricht",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was ist das Ergebnis der Abstimmung? [fr] Quel est le résultat du vote ?",
+          "explanation": "« Der Radweg hat gewonnen, aber nur mit zwölf Stimmen Vorsprung » : la piste cyclable gagne de peu (knapp). Le vote est terminé (« Die Abstimmung ist vorbei »).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Der Leihladen hat gewonnen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Es gibt noch kein Ergebnis.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Der Radweg hat knapp gewonnen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Was möchte Hanna jetzt tun? [fr] Que veut faire Hanna maintenant ?",
+          "explanation": "« Ich wäre dafür, sofort mit der Planung anzufangen » : le conseil promet 3 000 euros l’an prochain pour un magasin de prêt plus petit. Hanna ne conteste pas le résultat.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sofort mit der Planung eines kleineren Leihladens anfangen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Abstimmung wiederholen lassen, weil sie so knapp war.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ein Jahr warten und dann einen großen Leihladen planen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Konjunktiv II. [fr] Complétez au Konjunktiv II.",
+          "text": "Wenn es im Viertel mehr Bäume [[1]], [[2]] die Luft im Sommer besser.",
+          "explanation": "Situation imaginée : « es gibt » → « es gäbe », « die Luft ist besser » → « die Luft wäre besser ». La principale commence par le verbe « wäre » parce que la subordonnée occupe la première place.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "gäbe",
+                "geben würde"
+              ],
+              "size": 12,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "wäre"
+              ],
+              "size": 5,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Komparativ mit Endung. [fr] Complétez avec le comparatif et sa terminaison.",
+          "text": "Wir wünschen uns einen [[1]] Radweg (breit) und [[2]] Busse (modern).",
+          "explanation": "breit → breiter + -en (masculin accusatif après « einen ») ; modern → moderner + -e (pluriel sans article, à l’accusatif).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "breiteren"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "modernere"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "würde",
+              "öfter",
+              "Rad",
+              "fahren,",
+              "wenn",
+              "es",
+              "einen",
+              "Radweg",
+              "gäbe."
+            ]
+          ],
+          "explanation": "Principale d’abord : « Ich würde öfter Rad fahren », avec l’infinitif à la fin. Puis la subordonnée en « wenn », qui se termine par le verbe conjugué « gäbe »."
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Partie en « je » : verbe à la fin (« wegwerfen », non séparé en subordonnée). Partie en « desto » : « desto sauberer », puis le verbe « wird », puis le sujet « das Viertel ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Je weniger wir wegwerfen, desto das Viertel wird sauberer.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Je weniger wir wegwerfen, desto sauberer wird das Viertel.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Je weniger werfen wir weg, desto sauberer wird das Viertel.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "Sie möchten höflich widersprechen. Was sagen Sie? [fr] Vous voulez exprimer poliment votre désaccord. Que dites-vous ?",
+          "explanation": "« Das sehe ich etwas anders, weil … » exprime un désaccord nuancé et justifié. « Das ist doch Unsinn » est blessant, et la deuxième formule exprime un accord.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Das ist doch Unsinn, das bezahlt ja niemand.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Genau, da haben Sie völlig recht, das machen wir.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Das sehe ich etwas anders, weil die Kosten hoch sind.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie. [fr] Complétez.",
+          "text": "Statt Einwegflaschen kaufen wir [[1]]. So können wir viel Müll [[2]].",
+          "explanation": "Le contraire de « Einwegflaschen » (bouteilles à usage unique) : die Mehrwegflaschen (réutilisables, pluriel). On dit « Müll vermeiden » (éviter) ; « reduzieren » et « verringern » (réduire) sont aussi justes. « Müll sparen » ne se dit pas.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Mehrwegflaschen"
+              ],
+              "size": 16,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "vermeiden",
+                "reduzieren",
+                "verringern"
+              ],
+              "size": 11,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-umwelt-lesen-ideen",
+      "kind": "image",
+      "title": "Deux idées pour le quartier",
+      "alt": "Deux fiches côte à côte : « Idee 1 · Leihladen » (emprunter au lieu d’acheter, ouvert deux fois par semaine) et « Idee 2 · Sicherer Schulweg » (piste cyclable, vingt arceaux à vélos devant l’école).",
+      "image": {
+        "layout": "cards",
+        "cards": [
+          {
+            "icon": "wrench",
+            "title": "Idee 1: Leihladen",
+            "intro": [
+              {
+                "icon": "house",
+                "text": "im Nachbarschaftshaus"
+              }
+            ],
+            "lines": [
+              {
+                "icon": "recycle",
+                "text": "Leihen statt kaufen"
+              },
+              {
+                "icon": "calendar-days",
+                "text": "zweimal pro Woche geöffnet"
+              }
+            ]
+          },
+          {
+            "icon": "bike",
+            "title": "Idee 2: Sicherer Schulweg",
+            "intro": [
+              {
+                "icon": "map-pin",
+                "text": "Kanalstraße"
+              }
+            ],
+            "lines": [
+              {
+                "icon": "bike",
+                "text": "markierter Radweg"
+              },
+              {
+                "icon": "school",
+                "text": "20 Fahrradbügel an der Schule"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "b1-umwelt-hoeren-sitzung",
+      "kind": "audio",
+      "title": "Réunion du collectif « Grüner Nordring »",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Also, am Donnerstag stellen wir den Leihladen vor. Wir haben zehn Minuten. Ich würde vorschlagen, dass ich zuerst die Idee erkläre und dass ihr dann über die Details sprecht. Seid ihr einverstanden?"
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Ja, klar. Ich habe die Kosten noch einmal durchgerechnet. Die Regale kosten ungefähr fünfzehnhundert Euro, das Programm für die Ausleihe vierhundert. Für die ersten Geräte bleiben also etwa sechstausend Euro. Damit könnten wir mit ungefähr vierzig Geräten anfangen."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Irina",
+          "text": "Und wann wäre der Laden geöffnet? Das werden die Leute als Erstes fragen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Dienstags von siebzehn bis neunzehn Uhr und samstags von zehn bis dreizehn Uhr. Wenn wir mehr Freiwillige hätten, könnten wir auch mittwochs öffnen. Im Moment sind wir nur fünf. Wir bräuchten mindestens acht Leute."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Irina",
+          "text": "Ich könnte samstags helfen. Und ich kenne zwei Nachbarinnen, die auch Zeit hätten. Ich frage sie morgen. Noch eine Frage: Ist der Raum im Keller nicht zu klein?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Er ist kleiner als der Saal oben, aber für vierzig Geräte reicht er. Außerdem hat er einen eigenen Eingang zum Hof. Das ist die praktischere Lösung für alle, die schwere Sachen tragen."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Super. Und wenn die beiden Nachbarinnen mitmachen würden, wären wir schon sieben. Eine Person finden wir bestimmt noch. Aber eine Sache macht mir Sorgen: die Eltern mit ihrem Radweg. Ihre Idee ist stark. Viele Leute sagen: Je sicherer die Straßen sind, desto besser ist es für alle."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Das stimmt. Aber wir sind doch keine Konkurrenten. Ich hätte eine Idee: Wenn wir gewinnen würden, könnten wir auch ein Lastenrad kaufen. Die Familien könnten es kostenlos ausleihen, zum Beispiel für den Wocheneinkauf. Dann hätten auch die Eltern einen Vorteil."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau2",
+          "name": "Irina",
+          "text": "Das finde ich gut. Und was passiert, wenn jemand ein Gerät kaputt zurückbringt?"
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Wer etwas ausleiht, hinterlegt ein Pfand von zehn Euro. Kleine Schäden reparieren wir selbst. Ich würde dafür einmal im Monat einen Reparaturtreff anbieten."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Perfekt. Dann machen wir es so: Ich erkläre die Idee, Jonas spricht über die Kosten, und Irina übernimmt die Öffnungszeiten und die Freiwilligen. Zum Schluss stellen wir die Idee mit dem Lastenrad vor."
+        },
+        {
+          "pause": 0.4
+        },
+        {
+          "voice": "frau2",
+          "name": "Irina",
+          "text": "Gut. Und ich bringe einen Kuchen mit. Mit Kuchen hören die Leute lieber zu!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-hoeren2-umfrage",
+      "kind": "audio",
+      "title": "Micro-trottoir de la radio du quartier",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Guten Tag, hier ist Radio Nordring. Heute fragen wir auf dem Marktplatz: Was würden Sie in Ihrem Viertel für die Umwelt ändern, wenn Sie Bürgermeisterin oder Bürgermeister wären?"
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann2",
+          "name": "Lukas",
+          "text": "Ich würde mehr Radwege bauen. Ich fahre jeden Tag mit dem Rad zur Uni, und auf der Kanalstraße habe ich wirklich Angst. Je mehr Radwege es gibt, desto weniger Leute nehmen das Auto."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau3",
+          "name": "Frau Schneider",
+          "text": "Ich hätte gern einen besseren Busverkehr. Der Bus fährt bei uns nur alle dreißig Minuten, abends sogar nur einmal pro Stunde. Wenn die Busse öfter fahren würden, würde ich mein Auto stehen lassen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Demir",
+          "text": "Ich habe ein kleines Café am Markt. Bei mir werden jeden Tag ungefähr hundert Pappbecher weggeworfen. Ich würde Mehrwegbecher für das ganze Viertel einführen. Wenn alle Cafés mitmachen würden, wäre das ganz einfach."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau",
+          "name": "Mia",
+          "text": "Ich würde mehr Bäume pflanzen, vor allem an unserer Schule. Im Sommer ist es auf dem Schulhof viel zu heiß. Ein grünerer Schulhof wäre für alle schöner."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "sprecherin",
+          "name": "Reporterin",
+          "text": "Vier Menschen, vier Ideen. Und was würden Sie ändern? Schreiben Sie uns auf der Internetseite von Radio Nordring."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-kontrolle-nachricht",
+      "kind": "audio",
+      "title": "Message vocal de Hanna après le vote",
+      "script": [
+        {
+          "voice": "frau",
+          "name": "Hanna",
+          "text": "Hallo Jonas, hier ist Hanna. Die Abstimmung ist vorbei: Der Radweg hat gewonnen, aber nur mit zwölf Stimmen Vorsprung. Der Stadtteilrat hat trotzdem eine gute Nachricht für uns: Wenn wir einen kleineren Leihladen planen, bekommen wir nächstes Jahr dreitausend Euro. Ich wäre dafür, sofort mit der Planung anzufangen. Ruf mich doch heute Abend an!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-einstieg-foto",
+      "kind": "image",
+      "title": "Des centaines de vélos garés",
+      "alt": "Des centaines de vélos garés serrés sur des arceaux, à perte de vue.",
+      "photo": {
+        "file": "libre/commons/umwelt-fahrradstaender.jpg"
+      },
+      "credit": "Aaaatu, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bicycle_racks.jpg"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Wenn wir mehr Zeit hätten, würden wir öfter Rad fahren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wie wäre es mit einem Leihladen im Nachbarschaftshaus?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Je mehr Leute mitmachen, desto besser wird das Projekt."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ein Nachteil wäre, dass einige Parkplätze wegfallen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "An deiner Stelle würde ich lieber mit dem Bus fahren."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : proposer, imaginer, comparer",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Ich wäre dafür, zuerst einen Versuch von drei Monaten zu machen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-hoeren2-q4",
+      "kind": "audio",
+      "title": "Dictée q4 · Comprendre : un micro-trottoir sur l’environnement",
+      "script": [
+        {
+          "voice": "mann2",
+          "text": "Je mehr Radwege es gibt, desto weniger Leute nehmen das Auto."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-hoeren2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : un micro-trottoir sur l’environnement",
+      "script": [
+        {
+          "voice": "frau3",
+          "text": "Wenn die Busse öfter fahren würden, würde ich mein Auto stehen lassen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-umwelt-lexique",
+      "kind": "audio",
+      "title": "Lexique · Umwelt : agir pour son quartier et l’environnement",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Müll vermeiden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "Energie sparen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nachhaltig"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "umweltfreundlich"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Mehrwegflasche, die Mehrwegflaschen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Radweg, die Radwege"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bürgerinitiative, die Bürgerinitiativen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Verbrauch"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vorschlag, die Vorschläge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "vorschlagen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ausleihen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "teilen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "wegwerfen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "abstimmen über"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich einsetzen für"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Stadtteil, die Stadtteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Vorteil, die Vorteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "der Nachteil, die Nachteile"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Lösung, die Lösungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Verpackung, die Verpackungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Lastenrad, die Lastenräder"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Pfand"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "je … desto"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "an deiner Stelle"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}

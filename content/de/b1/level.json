@@ -1,0 +1,1764 @@
+{
+  "levelId": "b1",
+  "format": 5,
+  "layer": null,
+  "source": "content/b/source/b1",
+  "activityMinutes": {
+    "min": 2950,
+    "max": 3100
+  },
+  "catalogue": {
+    "title": "Allemand B1",
+    "description": "Raconter, expliquer, défendre un avis et agir dans la vie courante et au travail.",
+    "position": 3,
+    "prerequisiteLevelId": "a2"
+  },
+  "settings": {
+    "expectedCompetences": [
+      "lecture",
+      "ecoute",
+      "expression-ecrite",
+      "expression-orale"
+    ],
+    "successCriteria": "Obtenir au moins 60 % à l’examen blanc B1, sans compétence sous 30 % : comprendre les points essentiels d’articles, de messages et d’annonces sur des sujets familiers, suivre une conversation ou une émission en langue standard, écrire un courriel personnel ou formel et un avis argumenté, présenter un sujet, réagir et organiser une activité à l’oral avec un partenaire.",
+    "passPercent": 60,
+    "reviewMinutes": 15,
+    "midtermMinutes": 60,
+    "finalMinutes": 120
+  },
+  "diagnostic": {
+    "title": "Test de positionnement B1",
+    "description": "Dieser Test dauert etwa 15 Minuten und zählt nicht für Ihre Note. [fr] Ce test dure environ 15 minutes et ne compte pas dans votre note.\nZuerst prüft er, ob Ihre A2-Kenntnisse sicher sind: Perfekt, Nebensätze mit weil, Präpositionen, Uhrzeit. [fr] Il vérifie d’abord que vos acquis du niveau A2 sont solides : passé composé, subordonnées avec weil, prépositions, heure.\nDann zeigt er, was Sie in den Themen des B1-Kurses schon können: Neuanfang, Wohnen, Arbeit, Reisen, Einkaufen, Medien, Umwelt und Kultur. [fr] Il situe ensuite votre niveau dans les thèmes du parcours B1 : nouveau départ, logement, travail, voyages, achats, médias, environnement et culture.\nAntworten Sie ohne Hilfe und ohne Wörterbuch. Ihr Kurs wird an Ihre Ergebnisse angepasst. [fr] Répondez sans aide ni dictionnaire : votre parcours sera adapté à vos résultats.",
+    "questions": [
+      {
+        "id": "q1",
+        "moduleRef": "prerequis",
+        "prompt": "Gestern … ich mit dem Zug nach Mainz gefahren. Welche Form passt? [fr] Quelle forme convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "habe",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "bin",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "hat",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "ist",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q2",
+        "moduleRef": "prerequis",
+        "prompt": "„Die Praxis ist heute geschlossen. Termine können Sie bis morgen, 12 Uhr, online ändern.“ Bis wann kann man einen Termin online ändern? [fr] Jusqu’à quand peut-on modifier un rendez-vous en ligne ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Nur heute.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Bis heute Abend.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Bis morgen um 12 Uhr.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "Erst ab morgen um 12 Uhr.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q3",
+        "moduleRef": "prerequis",
+        "prompt": "„Seit wann wohnst du in Köln?“ Welche Antwort passt? [fr] Quelle réponse convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Seit drei Monaten.",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "Für drei Monate.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "In drei Monaten.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Nach drei Monaten.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q4",
+        "moduleRef": "prerequis",
+        "prompt": "Ich warte schon seit zehn Minuten auf … Bus. Welche Form passt? [fr] Quelle forme convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "dem",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "der",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "des",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "den",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q5",
+        "moduleRef": "prerequis",
+        "prompt": "Ich kann heute leider nicht kommen, weil … Wie geht der Satz richtig weiter? [fr] Quelle suite est correcte ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "ich muss arbeiten.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "muss ich arbeiten.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "ich arbeiten muss.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "ich arbeiten müssen.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q6",
+        "moduleRef": "prerequis",
+        "prompt": "„Der Bus fährt um Viertel vor acht.“ Wann fährt der Bus? [fr] À quelle heure part le bus ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Um 7.15 Uhr.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Um 7.45 Uhr.",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "Um 8.15 Uhr.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Um 8.45 Uhr.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q7",
+        "moduleRef": "b1-neuanfang",
+        "prompt": "… ich vor einem Jahr nach Leipzig kam, kannte ich dort niemanden. Welches Wort passt? [fr] Quel mot convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Wenn",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Als",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "Wann",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Ob",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q8",
+        "moduleRef": "b1-wohnen",
+        "prompt": "Die Wohnung, … wir gestern besichtigt haben, ist leider schon vergeben. Welches Wort passt? [fr] Quel mot convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "den",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "dem",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "der",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "die",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q9",
+        "moduleRef": "b1-arbeit",
+        "prompt": "Sie möchten Ihren Termin verschieben. Was sagen Sie höflich? [fr] Vous voulez déplacer votre rendez-vous. Que dites-vous poliment ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Ich will einen anderen Termin.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Könnten wir den Termin vielleicht verschieben?",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "Sie müssen den Termin verschieben.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Wann hatten wir den Termin?",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q10",
+        "moduleRef": "b1-unterwegs",
+        "prompt": "„Obwohl es seit dem Morgen regnet, findet der Ausflug statt.“ Was ist richtig? [fr] Qu’est-ce qui est juste ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Der Ausflug findet trotz des Regens statt.",
+            "correct": true
+          },
+          {
+            "id": "b",
+            "label": "Der Ausflug fällt wegen des Regens aus.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Der Ausflug wird auf morgen verschoben.",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "Am Morgen hat es nicht geregnet.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q11",
+        "moduleRef": "b1-konsum",
+        "prompt": "„Ihr Laptop wird gerade in unserer Werkstatt repariert.“ Was bedeutet das? [fr] Qu’est-ce que cela signifie ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "Der Laptop ist schon fertig.",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "Sie müssen den Laptop selbst reparieren.",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "Jemand repariert den Laptop im Moment.",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "Der Laptop wird morgen bestellt.",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q12",
+        "moduleRef": "b1-medien",
+        "prompt": "Weißt du, … Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "ob hat der Kurs noch freie Plätze?",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "ob der Kurs noch freie Plätze hat?",
+            "correct": true
+          },
+          {
+            "id": "c",
+            "label": "ob der Kurs hat noch freie Plätze?",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "der Kurs ob noch freie Plätze hat?",
+            "correct": false
+          }
+        ]
+      },
+      {
+        "id": "q13",
+        "moduleRef": "b1-umwelt",
+        "prompt": "Wenn ich mehr Zeit …, würde ich öfter mit dem Rad zur Arbeit fahren. Welche Form passt? [fr] Quelle forme convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "habe",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "hatte",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "gehabt",
+            "correct": false
+          },
+          {
+            "id": "d",
+            "label": "hätte",
+            "correct": true
+          }
+        ]
+      },
+      {
+        "id": "q14",
+        "moduleRef": "b1-kultur",
+        "prompt": "Wir haben gestern einen … Abend im Theater verbracht. Welche Form passt? [fr] Quelle forme convient ?",
+        "options": [
+          {
+            "id": "a",
+            "label": "schöner",
+            "correct": false
+          },
+          {
+            "id": "b",
+            "label": "schönes",
+            "correct": false
+          },
+          {
+            "id": "c",
+            "label": "schönen",
+            "correct": true
+          },
+          {
+            "id": "d",
+            "label": "schöne",
+            "correct": false
+          }
+        ]
+      }
+    ]
+  },
+  "assessments": [
+    {
+      "kind": "midterm",
+      "title": "Bilan intermédiaire B1 : modules 1 à 12",
+      "description": "Bilan de 60 minutes sur la première moitié du parcours : nouveau départ, relations, logement, travail, santé et formation. Lecture (15 min), écoute (15 min), expression écrite (20 min) et expression orale (10 min, préparation comprise). Les consignes sont en allemand, avec leur traduction en français. Les quatre compétences ont le même poids dans la note : le bilan ne valide rien, il vous montre ce qui est acquis et ce qu’il faut revoir avant la seconde moitié du parcours.",
+      "parts": [
+        {
+          "id": "bilan-lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : un courriel et un témoignage",
+          "instructions": "Lesen Sie die zwei Texte und lösen Sie die Aufgaben 1 bis 8. [fr] Lisez les deux textes et répondez aux questions 1 à 8.\nZu jeder Aufgabe gibt es nur eine richtige Lösung. Zeit: etwa 15 Minuten. [fr] Pour chaque question, une seule réponse est juste. Durée : environ 15 minutes.\n\nTEXT 1 · E-MAIL\n[fr] Texte 1 : un courriel\n\nBetreff: Abendkurs Deutsch B1 – neuer Kursraum ab Montag\n\nLiebe Teilnehmende,\n\nab nächster Woche findet unser Abendkurs an einem anderen Ort statt. Im Bildungszentrum wird der Aufzug repariert, und die Arbeiten dauern voraussichtlich drei Wochen. Damit alle den Kursraum erreichen können, ziehen wir so lange in die Stadtbibliothek in der Lindenstraße um. Der Kurs beginnt dort wie immer um 18.30 Uhr.\n\nBitte beachten Sie: Der Haupteingang der Bibliothek schließt um 19 Uhr. Unsere Kursleiterin, Frau Brandt, wartet bis 19.15 Uhr an der Seitentür im Hof. Wer später kommt, ruft bitte die Nummer an, die in der ersten Kursmail steht.\n\nDas Kursbuch brauchen Sie weiterhin. Wer noch kein eigenes Buch hat, kann in der Bibliothek ein Exemplar für eine Woche ausleihen. Schreiben Sie uns bitte bis Freitag, ob Sie ein Buch brauchen, damit wir genug Exemplare reservieren können.\n\nFür den neuen Raum müssen Sie sich nicht noch einmal anmelden. Sobald der Aufzug wieder funktioniert, informieren wir Sie per E-Mail.\n\nViele Grüße\nIhr Team vom Bildungszentrum Nord\n\nTEXT 2 · ERFAHRUNGSBERICHT\n[fr] Texte 2 : un témoignage\n\nMein neuer Weg zur Arbeit – von Nina, 34\n\nSeit drei Wochen fahre ich mit dem Bus zur Arbeit. Vorher bin ich jeden Morgen mit dem Fahrrad gefahren, denn bis zu unserem alten Büro waren es nur zwanzig Minuten. Als meine Firma im Herbst in einen anderen Stadtteil umgezogen ist, wollte ich eigentlich beim Rad bleiben. Aber die neue Strecke führt über eine große Kreuzung, an der gerade gebaut wird. Dort gibt es im Moment keinen Radweg, und das war mir zu gefährlich.\n\nIm Bus brauche ich zehn Minuten länger. Dafür kann ich unterwegs meine Nachrichten lesen oder einfach aus dem Fenster schauen. Nur wenn der Bus sehr voll ist, finde ich die Fahrt anstrengend.\n\nLetzte Woche hat mir eine Kollegin erzählt, dass es am Fluss einen ruhigen Radweg gibt. Er ist zwar etwas länger, aber man muss keine einzige Hauptstraße überqueren. Am Samstag will sie ihn mir zeigen. Wenn mir der Weg gefällt, fahre ich bei schönem Wetter wieder mit dem Rad. An Tagen, an denen ich schwere Unterlagen mitnehmen muss, nehme ich aber weiter den Bus. So kann ich jeden Morgen neu entscheiden.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Text 1: Warum findet der Kurs an einem anderen Ort statt? [fr] Texte 1 : pourquoi le cours a-t-il lieu ailleurs ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil die Gruppe zu groß geworden ist.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Weil im Bildungszentrum der Aufzug repariert wird.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Weil die Bibliothek bessere Kursräume hat.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Text 1: Was ändert sich für die Teilnehmenden? [fr] Texte 1 : qu’est-ce qui change pour les participants ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Der Ort des Kurses.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Die Uhrzeit des Kurses.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Die Kursleiterin.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Text 1: Eine Teilnehmerin kommt um 19.20 Uhr. Was soll sie tun? [fr] Texte 1 : une participante arrive à 19 h 20. Que doit-elle faire ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Zur Seitentür im Hof gehen.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Am Haupteingang auf Frau Brandt warten.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Die Nummer aus der ersten Kursmail anrufen.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Text 1: Wer soll bis Freitag antworten? [fr] Texte 1 : qui doit répondre avant vendredi ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Alle, die ein Buch brauchen.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Alle, die später kommen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Alle, die sich neu anmelden möchten.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Text 2: Ninas Firma ist im Herbst in einen anderen Stadtteil gezogen. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Richtig",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Falsch",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Steht nicht im Text",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Text 2: Nina fährt nicht mehr Rad, weil die neue Strecke zu lang ist. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Richtig",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Falsch",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Steht nicht im Text",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Text 2: Ninas Kollegin fährt jeden Tag am Fluss entlang zur Arbeit. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Richtig",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Falsch",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Steht nicht im Text",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Text 2: Der Radweg am Fluss ist kürzer als die neue Strecke. Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Richtig",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Falsch",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Steht nicht im Text",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": []
+        },
+        {
+          "id": "bilan-hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : un message et une conversation",
+          "instructions": "Sie hören zwei Texte: eine Nachricht auf der Mailbox und ein Gespräch. [fr] Vous allez entendre deux documents : un message sur une boîte vocale et une conversation.\nLesen Sie zuerst die Aufgaben. Hören Sie dann jeden Text zweimal. [fr] Lisez d’abord les questions, puis écoutez chaque document deux fois.\nDie Aufgaben 1 bis 4 gehören zu Text 1, die Aufgaben 5 bis 8 zu Text 2. [fr] Les questions 1 à 4 portent sur le document 1, les questions 5 à 8 sur le document 2.\nZu jeder Aufgabe gibt es nur eine richtige Lösung. Zeit: etwa 15 Minuten. [fr] Pour chaque question, une seule réponse est juste. Durée : environ 15 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Text 1: Warum soll Leon früher kommen? [fr] Document 1 : pourquoi Leon doit-il venir plus tôt ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil Aylin am Vormittag keine Zeit hat.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Weil er zuerst ein Formular ausfüllen muss.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Weil Aylin ihn dem ganzen Team vorstellen möchte.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Text 1: Wann soll Leon am Montag da sein? [fr] Document 1 : à quelle heure Leon doit-il être là lundi ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Um 9 Uhr.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Um halb zehn.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Um 11 Uhr.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Text 1: Was muss Leon mitbringen? [fr] Document 1 : que doit apporter Leon ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Das Formular mit seinen Kontodaten.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Seinen Personalausweis.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Seine Zugangskarte.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Text 1: Was soll Leon tun, wenn er um neun Uhr nicht kommen kann? [fr] Document 1 : que doit faire Leon s’il ne peut pas venir à 9 h ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Am Montagmorgen im Büro anrufen.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Am Nachmittag kommen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Aylin noch heute eine Nachricht schreiben.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Text 2: Warum können Rana und Paul nicht wie geplant weiterfahren? [fr] Document 2 : pourquoi Rana et Paul ne peuvent-ils pas continuer comme prévu ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Ihr Zug hat Verspätung, deshalb verpassen sie den Anschluss.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Der Zug nach Erfurt fällt heute aus.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Sie haben ihre Fahrkarten vergessen.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Text 2: Wo treffen sie ihre Freunde? [fr] Document 2 : où retrouvent-ils leurs amis ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Am Bahnhof in Erfurt.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Im Restaurant.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Bei der Stadtführung.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Text 2: Was machen sie mit der Stadtführung? [fr] Document 2 : que décident-ils pour la visite guidée ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Sie machen sie nach dem Essen.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Sie sagen sie ganz ab.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Sie machen sie am nächsten Vormittag.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Text 2: Was sagt Paul über die Fahrkarten? [fr] Document 2 : que dit Paul des billets ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Sie gelten auch im nächsten Zug.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Sie müssen neue Fahrkarten kaufen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Sie bekommen ihr Geld zurück.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "b1-bilan-hoeren-nachricht",
+              "usage": "audio",
+              "caption": "Text 1: eine Nachricht auf der Mailbox",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            },
+            {
+              "media": "b1-bilan-hoeren-gespraech",
+              "usage": "audio",
+              "caption": "Text 2: ein Gespräch im Zug",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            }
+          ]
+        },
+        {
+          "id": "bilan-schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Écrit : déplacer un rendez-vous par courriel",
+          "instructions": "SITUATION\n[fr] Situation\nSie haben am Dienstag um 11 Uhr einen Termin in der Stadtbibliothek: Sie möchten dort Ihren Bibliotheksausweis abholen. [fr] Vous avez rendez-vous mardi à 11 h à la bibliothèque municipale pour y retirer votre carte de lecteur.\nIhr Arbeitgeber hat Sie gebeten, an diesem Vormittag zu arbeiten. [fr] Votre employeur vous a demandé de travailler ce matin-là.\n\nAUFGABE\n[fr] Tâche\nSchreiben Sie eine E-Mail an die Bibliothek (80 bis 100 Wörter). [fr] Écrivez un courriel à la bibliothèque (80 à 100 mots).\n• Nennen Sie Ihren Termin. [fr] Rappelez votre rendez-vous.\n• Erklären Sie kurz, warum Sie nicht kommen können. [fr] Expliquez brièvement pourquoi vous ne pouvez pas venir.\n• Schlagen Sie zwei andere Termine vor. [fr] Proposez deux autres créneaux.\n• Fragen Sie, welche Unterlagen Sie mitbringen müssen. [fr] Demandez quels documents vous devez apporter.\n\nDenken Sie an die Anrede, den Gruß und die Sie-Form. Zeit: etwa 20 Minuten. [fr] Pensez à la formule d’appel, à la salutation et au vouvoiement. Durée : environ 20 minutes.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "aufgabe",
+              "label": "Tâche : les quatre points sont traités en 80 à 100 mots, registre formel (Sie) et formules du courriel respectés",
+              "maxPoints": 2
+            },
+            {
+              "id": "kohaerenz",
+              "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+              "maxPoints": 2
+            },
+            {
+              "id": "wortschatz",
+              "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+              "maxPoints": 2
+            },
+            {
+              "id": "strukturen",
+              "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+              "maxPoints": 2
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "bilan-sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Oral : convenir d’un rendez-vous et donner un conseil",
+          "instructions": "Hören Sie die Nachricht von Jonas aus Ihrem Deutschkurs. Antworten Sie ihm dann mit einer Sprachnachricht. [fr] Écoutez le message de Jonas, de votre cours d’allemand, puis répondez-lui par un message vocal.\nSie können sich ein paar Notizen machen, aber lesen Sie keinen fertigen Text vor. [fr] Vous pouvez prendre quelques notes, mais ne lisez pas un texte entièrement rédigé.\nNehmen Sie alles in einem Stück auf: 2 bis 3 Minuten. Zeit mit Vorbereitung: etwa 10 Minuten. [fr] Enregistrez-vous en une seule fois : 2 à 3 minutes. Durée, préparation comprise : environ 10 minutes.\n\nTEIL 1 · EINEN TERMIN FINDEN\n[fr] Partie 1 : trouver un rendez-vous (environ 1 minute)\n• Reagieren Sie auf den Vorschlag von Jonas: Am Mittwoch um 17 Uhr können Sie nicht. Sagen Sie, warum. [fr] Réagissez à la proposition de Jonas : mercredi à 17 h, vous ne pouvez pas. Dites pourquoi.\n• Schlagen Sie einen anderen Tag, eine Uhrzeit und einen Ort vor. [fr] Proposez un autre jour, une heure et un lieu.\n• Sagen Sie, was Sie zum Üben mitbringen. [fr] Dites ce que vous apportez pour vous entraîner.\n\nTEIL 2 · EINEN RAT GEBEN\n[fr] Partie 2 : donner un conseil (environ 1 à 2 minutes)\n• Antworten Sie auf die Frage von Jonas: Was raten Sie einer Person, die gerade mit Deutsch anfängt? [fr] Répondez à la question de Jonas : que conseillez-vous à une personne qui commence l’allemand ?\n• Erzählen Sie dazu von Ihrer eigenen Erfahrung und geben Sie zwei Tipps mit Begründung. [fr] Appuyez-vous sur votre propre expérience et donnez deux conseils justifiés.\n• Beenden Sie die Nachricht freundlich. [fr] Terminez le message aimablement.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "aufgabe",
+              "label": "Tâche : tous les points sont traités dans le temps imparti",
+              "maxPoints": 2
+            },
+            {
+              "id": "kohaerenz",
+              "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+              "maxPoints": 2
+            },
+            {
+              "id": "wortschatz",
+              "label": "Vocabulaire : précis, formules d’usage adaptées",
+              "maxPoints": 1
+            },
+            {
+              "id": "strukturen",
+              "label": "Structures : phrases variées, verbe à la bonne place",
+              "maxPoints": 2
+            },
+            {
+              "id": "aussprache",
+              "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+              "maxPoints": 1
+            }
+          ],
+          "placements": [
+            {
+              "media": "b1-bilan-sprechen-nachricht",
+              "usage": "audio",
+              "caption": "Die Nachricht von Jonas",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "kind": "final",
+      "title": "Examen blanc B1",
+      "description": "Examen blanc de 120 minutes sur l’ensemble du niveau B1, dans l’esprit d’un examen B1 officiel : lecture (35 min, trois textes), écoute (25 min, trois documents), expression écrite (40 min, un courriel et une contribution à un forum) et expression orale (20 min, préparation comprise : organiser une activité, présenter un sujet, réagir à une question). Les consignes sont en allemand, avec leur traduction en français. Les quatre compétences ont le même poids. Pour réussir, il faut au moins 60 % au total, sans compétence sous 30 %.",
+      "parts": [
+        {
+          "id": "examen-lesen",
+          "competence": "lecture",
+          "mode": "closed",
+          "title": "Lecture : un article, deux offres de cours et un forum",
+          "instructions": "Lesen Sie die drei Texte und lösen Sie die Aufgaben 1 bis 10. [fr] Lisez les trois textes et répondez aux questions 1 à 10.\nZu jeder Aufgabe gibt es nur eine richtige Lösung. Zeit: etwa 35 Minuten. [fr] Pour chaque question, une seule réponse est juste. Durée : environ 35 minutes.\n\nTEXT 1 · AUS DER STADTTEILZEITUNG\n[fr] Texte 1 : un article du journal de quartier\n\nDinge gemeinsam nutzen\n\nSeit dem Frühjahr kann man in der Stadtbibliothek Nord nicht nur Bücher und Spiele ausleihen, sondern auch Werkzeuge. Die Idee kam von einer Gruppe aus dem Reparaturcafé. Den Ehrenamtlichen war aufgefallen, dass viele Besucher eine Bohrmaschine besitzen, die sie nur ein paar Minuten im Jahr benutzen. „Warum soll jeder Haushalt teure Geräte kaufen, die fast das ganze Jahr im Keller liegen?“, fragt Ole Hansen vom Reparaturcafé. „Teilen spart Geld und Platz, und es ist besser für die Umwelt.“\n\nWer ein Werkzeug braucht, prüft mit seiner Bibliothekskarte online, ob es frei ist, und reserviert es. Abholen muss man es aber an der Theke, denn dort erklären die Mitarbeitenden, wie man das Gerät sicher benutzt und zurückgibt. Die Ausleihe ist kostenlos und dauert höchstens eine Woche. Wer ein Gerät zu spät zurückbringt, darf einen Monat lang keine Werkzeuge mehr ausleihen.\n\nDas Angebot ist noch klein. Besonders gefragt sind Werkzeugkoffer und Messgeräte; davon will die Bibliothek zuerst mehr kaufen. Gartengeräte kommen erst später dazu, weil im Lager im Moment der Platz fehlt. Im nächsten Monat können die Nutzer in einer Umfrage weitere Wünsche nennen.\n\nTEXT 2 · ZWEI KURSE NACH DER ARBEIT\n[fr] Texte 2 : deux offres de cours\n\nAngebot A: An zwei Samstagen (10 bis 15 Uhr) lernen Sie, kurze Videos für Ihren Verein zu drehen. Ein eigenes Gerät brauchen Sie nicht, die Kursleitung bringt Tablets mit. Die Gruppe hat höchstens acht Personen. Am zweiten Samstag zeigen alle ihr Video. Melden Sie sich bitte nur an, wenn Sie an beiden Tagen Zeit haben.\n\nAngebot B: Der Onlinekurs findet an vier Mittwochabenden statt (19 bis 20.30 Uhr). Sie lernen, Fotos für eine Webseite auszuwählen und vorzubereiten. Sie brauchen einen eigenen Computer. Wenn Sie einen Abend verpassen, können Sie die Aufzeichnung eine Woche lang ansehen. In der letzten Stunde bespricht die Kursleiterin mit jeder Person ein eigenes Foto.\n\nBeide Kurse kosten 60 Euro.\n\nTEXT 3 · FORUM: MUSIK AM SAMSTAGABEND?\n[fr] Texte 3 : un forum\n\nMara: Die Konzerte auf dem Marktplatz machen unser Viertel lebendiger. Ich verstehe aber, dass Leute, die früh arbeiten, Ruhe brauchen. Deshalb würde ich die Konzerte eine Stunde früher beginnen lassen. Dann könnten auch Familien mit Kindern länger bleiben.\n\nEmre: Ich wohne direkt am Platz und höre die Musik sogar bei geschlossenen Fenstern. Trotzdem möchte ich die Konzerte nicht ganz streichen. Ein Teil könnte im Bürgerhaus stattfinden. Dann wäre es draußen ruhiger, und bei Regen hätte man trotzdem einen Ort.\n\nJonas: Ich spiele selbst in einer Band und finde es schade, dass immer nur über die Lautstärke gesprochen wird. Für junge Leute gibt es am Wochenende sonst kaum Angebote im Viertel. Vielleicht könnte der Verein vor der neuen Saison ein Treffen mit den Nachbarn organisieren, damit alle ihre Wünsche sagen können.\n\nDie Redaktion sammelt Ihre Vorschläge bis Donnerstag und gibt sie am Freitag an den Kulturverein weiter. Der Verein entscheidet im nächsten Monat über die Orte.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Text 1: Von wem kam die Idee? [fr] Texte 1 : de qui est venue l’idée ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Von den Mitarbeitenden der Bibliothek.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Von einer Gruppe aus dem Reparaturcafé.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Von den Teilnehmenden einer Umfrage.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Text 1: Warum muss man die Werkzeuge an der Theke abholen? [fr] Texte 1 : pourquoi faut-il retirer les outils au comptoir ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil man dort erklärt bekommt, wie man das Gerät benutzt.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Weil man sie dort bezahlen muss.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Weil man sie online nicht reservieren kann.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Text 1: Was gilt für die Ausleihe? [fr] Texte 1 : quelle règle s’applique au prêt ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Man kann die Geräte einen Monat behalten.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Sie ist nur für Mitglieder des Reparaturcafés.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Sie kostet nichts und dauert höchstens eine Woche.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Text 1: Warum gibt es noch keine Gartengeräte? [fr] Texte 1 : pourquoi n’y a-t-il pas encore d’outils de jardin ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil im Lager der Platz fehlt.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Weil niemand sie ausleihen möchte.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Weil die Umfrage noch nicht fertig ist.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Text 2: Lukas möchte Videos drehen, aber er hat kein Tablet und keine Kamera. Welches Angebot passt? [fr] Texte 2 : Lukas veut tourner des vidéos, mais il n’a ni tablette ni caméra. Quelle offre lui convient ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Angebot B.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Angebot A.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Keines von beiden.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Text 2: Sara muss manchmal mittwochs bis 21 Uhr arbeiten. Was ist für sie bei Angebot B wichtig? [fr] Texte 2 : Sara doit parfois travailler le mercredi jusqu’à 21 h. Qu’est-ce qui compte pour elle dans l’offre B ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Sie kann am Samstag nachkommen.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Sie bekommt einen Computer von der Kursleitung.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Sie kann die Aufzeichnung später ansehen.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Text 2: Was ist bei beiden Angeboten gleich? [fr] Texte 2 : qu’est-ce qui est identique dans les deux offres ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Die Zahl der Termine.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Der Preis.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Das Gerät, das man braucht.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Text 3: Was schlägt Mara vor? [fr] Texte 3 : que propose Mara ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Die Konzerte früher beginnen zu lassen.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Nur noch Konzerte für Familien zu machen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Den Platz am Samstagabend zu schließen.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "prompt": "Text 3: Was möchte Emre? [fr] Texte 3 : que souhaite Emre ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Alle Konzerte absagen.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Ein Dach über den Platz bauen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Einen Teil der Konzerte ins Bürgerhaus verlegen.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q10",
+              "prompt": "Text 3: Wann wird über die Orte entschieden? [fr] Texte 3 : quand décidera-t-on des lieux ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Am Donnerstag.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Im nächsten Monat.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Am Freitag.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": []
+        },
+        {
+          "id": "examen-hoeren",
+          "competence": "ecoute",
+          "mode": "closed",
+          "title": "Écoute : un message, une annonce et un entretien à la radio",
+          "instructions": "Sie hören drei Texte: eine Nachricht auf dem Anrufbeantworter, eine Durchsage auf einem Fest und ein Interview im Radio. [fr] Vous allez entendre trois documents : un message sur un répondeur, une annonce lors d’une fête et un entretien à la radio.\nLesen Sie vor jedem Text die Aufgaben. Hören Sie jeden Text zweimal. [fr] Lisez les questions avant chaque document. Écoutez chaque document deux fois.\nDie Aufgaben 1 bis 3 gehören zu Text 1, die Aufgaben 4 bis 6 zu Text 2 und die Aufgaben 7 bis 10 zu Text 3. [fr] Les questions 1 à 3 portent sur le document 1, les questions 4 à 6 sur le document 2, les questions 7 à 10 sur le document 3.\nZu jeder Aufgabe gibt es nur eine richtige Lösung. Zeit: etwa 25 Minuten. [fr] Pour chaque question, une seule réponse est juste. Durée : environ 25 minutes.",
+          "questions": [
+            {
+              "id": "q1",
+              "prompt": "Text 1: Warum ruft die Werkstatt an? [fr] Document 1 : pourquoi l’atelier appelle-t-il ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Um ein neues Fahrrad anzubieten.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Um einen Termin für die Reparatur vorzuschlagen.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Um nach einem fehlenden Teil zu fragen.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q2",
+              "prompt": "Text 1: Was muss man tun, wenn man das Rad schon vor 10 Uhr braucht? [fr] Document 1 : que faut-il faire si l’on a besoin du vélo avant 10 h ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Am Mittwoch anrufen.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Am Montag kommen.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Das Rad schon am Mittwoch bringen.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q3",
+              "prompt": "Text 1: Was soll man der Werkstatt per E-Mail mitteilen? [fr] Document 1 : que faut-il indiquer à l’atelier par courriel ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Wie viel die Reparatur kosten darf.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Wann man das Rad abholen möchte.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Welchen Tag man für die Reparatur wählt.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q4",
+              "prompt": "Text 2: Welche Veranstaltung findet an einem anderen Ort statt? [fr] Document 2 : quel événement change de lieu ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Das Konzert am Abend.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Die Lesung um 16 Uhr.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Die Bastelwerkstatt für Kinder.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q5",
+              "prompt": "Text 2: Warum öffnet der Saal schon um halb vier? [fr] Document 2 : pourquoi la salle ouvre-t-elle dès 15 h 30 ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil es dort weniger Plätze gibt.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Weil die Lesung früher beginnt.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Weil man dort neue Karten kaufen muss.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q6",
+              "prompt": "Text 2: Was gilt für die Bastelwerkstatt? [fr] Document 2 : quelle règle s’applique à l’atelier pour enfants ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Man braucht eine Eintrittskarte.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Sie beginnt erst um 18 Uhr.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Ein Erwachsener muss die ganze Zeit dabei sein.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q7",
+              "prompt": "Text 3: Wer kann den Tauschschrank im Moment benutzen? [fr] Document 3 : qui peut utiliser l’armoire d’échange en ce moment ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Alle Leute aus dem Viertel.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Die Bewohner des Hauses.",
+                  "correct": true
+                },
+                {
+                  "id": "c",
+                  "label": "Nur die Mitglieder eines Vereins.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q8",
+              "prompt": "Text 3: Was findet man inzwischen im Schrank? [fr] Document 3 : que trouve-t-on désormais dans l’armoire ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Bücher, Spiele und Küchensachen.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Nur Bücher.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Vor allem Kleidung.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "id": "q9",
+              "prompt": "Text 3: Warum stellt man den Schrank nicht einfach vor das Haus? [fr] Document 3 : pourquoi ne pas simplement installer l’armoire devant l’immeuble ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Weil die Nachbarn dagegen sind.",
+                  "correct": false
+                },
+                {
+                  "id": "b",
+                  "label": "Weil der Schrank zu groß ist.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Weil es dort im Winter zu feucht ist.",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "id": "q10",
+              "prompt": "Text 3: Was ist der nächste Schritt? [fr] Document 3 : quelle est la prochaine étape ?",
+              "options": [
+                {
+                  "id": "a",
+                  "label": "Ein Tauschabend im Gemeinschaftsraum.",
+                  "correct": true
+                },
+                {
+                  "id": "b",
+                  "label": "Ein größerer Schrank in der Bibliothek.",
+                  "correct": false
+                },
+                {
+                  "id": "c",
+                  "label": "Ein Treffen im Radiostudio.",
+                  "correct": false
+                }
+              ]
+            }
+          ],
+          "criteria": [],
+          "placements": [
+            {
+              "media": "b1-examen-hoeren-werkstatt",
+              "usage": "audio",
+              "caption": "Text 1: eine Nachricht auf dem Anrufbeantworter",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            },
+            {
+              "media": "b1-examen-hoeren-durchsage",
+              "usage": "audio",
+              "caption": "Text 2: eine Durchsage auf dem Sommerfest",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            },
+            {
+              "media": "b1-examen-hoeren-interview",
+              "usage": "audio",
+              "caption": "Text 3: ein Interview im Radio",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            }
+          ]
+        },
+        {
+          "id": "examen-schreiben",
+          "competence": "expression-ecrite",
+          "mode": "written",
+          "title": "Écrit : un courriel et une contribution à un forum",
+          "instructions": "Schreiben Sie zwei Texte. Schreiben Sie beide Texte in das Feld unten, zuerst Aufgabe 1, dann Aufgabe 2. [fr] Écrivez deux textes, tous deux dans le champ ci-dessous : d’abord la tâche 1, puis la tâche 2.\nZeit: etwa 40 Minuten. Planen Sie am Ende 5 Minuten zum Korrigieren ein. [fr] Durée : environ 40 minutes. Gardez 5 minutes à la fin pour vous relire.\n\nAUFGABE 1 · E-MAIL (ETWA 20 MINUTEN)\n[fr] Tâche 1 : un courriel (environ 20 minutes)\nSie haben sich für einen Fotokurs am Samstag angemeldet. Jetzt hat der Kursleiter, Herr Brück, den Termin auf Freitag verschoben, aber freitags arbeiten Sie. [fr] Vous êtes inscrit à un cours de photo le samedi. Le formateur, M. Brück, a déplacé la séance au vendredi, mais vous travaillez le vendredi.\nSchreiben Sie Herrn Brück eine E-Mail (100 bis 120 Wörter). [fr] Écrivez un courriel à M. Brück (100 à 120 mots).\n• Nennen Sie Ihre Anmeldung. [fr] Rappelez votre inscription.\n• Erklären Sie Ihr Problem. [fr] Expliquez votre problème.\n• Schlagen Sie eine Lösung vor. [fr] Proposez une solution.\n• Bitten Sie um eine Bestätigung. [fr] Demandez une confirmation.\n\nAUFGABE 2 · FORUMSBEITRAG (ETWA 15 MINUTEN)\n[fr] Tâche 2 : une contribution à un forum (environ 15 minutes)\nIm Forum Ihrer Stadt lesen Sie die Frage: „Sollte die Stadtbibliothek auch am Sonntag öffnen?“ [fr] Sur le forum de votre ville, vous lisez la question : « La bibliothèque municipale devrait-elle ouvrir aussi le dimanche ? »\nSchreiben Sie Ihre Meinung (80 bis 100 Wörter). [fr] Donnez votre avis (80 à 100 mots).\n• Sagen Sie klar, was Sie denken, und begründen Sie Ihre Meinung. [fr] Dites clairement ce que vous pensez et justifiez votre avis.\n• Geben Sie ein Beispiel aus Ihrem Alltag. [fr] Donnez un exemple tiré de votre quotidien.\n• Antworten Sie kurz auf ein Gegenargument. [fr] Répondez brièvement à un argument contraire.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "aufgabe",
+              "label": "Tâche : les deux textes traitent tous les points, destinataire et registre (Sie au formateur, ton du forum) respectés",
+              "maxPoints": 3
+            },
+            {
+              "id": "kohaerenz",
+              "label": "Cohérence : texte organisé (début, développement, fin), connecteurs variés",
+              "maxPoints": 2
+            },
+            {
+              "id": "wortschatz",
+              "label": "Vocabulaire : précis et assez varié pour le thème, formules adaptées",
+              "maxPoints": 2
+            },
+            {
+              "id": "strukturen",
+              "label": "Structures : subordonnées et verbe à la bonne place ; les erreurs ne gênent pas la compréhension",
+              "maxPoints": 3
+            }
+          ],
+          "placements": []
+        },
+        {
+          "id": "examen-sprechen",
+          "competence": "expression-orale",
+          "mode": "oral",
+          "title": "Oral : planifier, présenter, réagir",
+          "instructions": "Die mündliche Prüfung hat drei Teile. Nehmen Sie alles in einem Stück auf: 5 bis 6 Minuten. [fr] L’épreuve orale compte trois parties. Enregistrez-vous en une seule fois : 5 à 6 minutes.\nBereiten Sie sich etwa 10 Minuten vor und machen Sie Notizen, aber lesen Sie keinen fertigen Text vor. [fr] Préparez-vous environ 10 minutes en prenant des notes, mais ne lisez pas un texte entièrement rédigé.\nMit einem Partner aus dem Kurs können Sie Teil 1 auch zu zweit spielen und gemeinsam aufnehmen. [fr] Avec un partenaire du cours, vous pouvez aussi jouer la partie 1 à deux et l’enregistrer ensemble.\n\nTEIL 1 · GEMEINSAM ETWAS PLANEN\n[fr] Partie 1 : organiser quelque chose ensemble (environ 2 minutes)\nHören Sie die Nachricht von Daniel, Ihrem Nachbarn. Sie wollen zusammen die neuen Familien im Haus willkommen heißen. [fr] Écoutez le message de Daniel, votre voisin. Vous voulez accueillir ensemble les nouvelles familles de l’immeuble.\n• Reagieren Sie auf das Problem mit dem Raum und machen Sie einen neuen Vorschlag: Ort und Uhrzeit. [fr] Réagissez au problème de salle et faites une nouvelle proposition : lieu et heure.\n• Sagen Sie, was Sie mitbringen, und fragen Sie, was Daniel übernimmt. [fr] Dites ce que vous apportez et demandez ce dont Daniel se charge.\n• Fassen Sie am Ende zusammen, was Sie vereinbart haben. [fr] Résumez pour finir ce que vous avez convenu.\n\nTEIL 2 · EIN THEMA PRÄSENTIEREN\n[fr] Partie 2 : présenter un thème (environ 3 minutes)\nWählen Sie ein Thema: A „In einem Verein mitmachen – lohnt sich das?“ oder B „Online lernen oder im Kurs?“ [fr] Choisissez un thème : A « S’engager dans une association, est-ce que cela vaut la peine ? » ou B « Apprendre en ligne ou en cours ? »\n• Stellen Sie Ihr Thema vor und erzählen Sie von Ihrer Erfahrung. [fr] Présentez votre thème et racontez votre expérience.\n• Beschreiben Sie die Situation in Ihrem Heimatland. [fr] Décrivez la situation dans votre pays d’origine.\n• Nennen Sie Vor- und Nachteile und sagen Sie Ihre Meinung. [fr] Citez des avantages et des inconvénients, puis donnez votre avis.\n• Beenden Sie die Präsentation mit einem kurzen Schluss. [fr] Terminez la présentation par une courte conclusion.\n\nTEIL 3 · AUF EINE FRAGE REAGIEREN\n[fr] Partie 3 : réagir à une question (environ 1 minute)\nHören Sie die Frage der Prüferin nach Ihrer Präsentation und antworten Sie mit zwei oder drei Sätzen. [fr] Écoutez la question de l’examinatrice après votre présentation et répondez en deux ou trois phrases.",
+          "questions": [],
+          "criteria": [
+            {
+              "id": "aufgabe",
+              "label": "Tâche : tous les points sont traités dans le temps imparti",
+              "maxPoints": 2
+            },
+            {
+              "id": "kohaerenz",
+              "label": "Cohérence et aisance : discours suivi, idées reliées, peu d’hésitations",
+              "maxPoints": 2
+            },
+            {
+              "id": "wortschatz",
+              "label": "Vocabulaire : précis, formules d’usage adaptées",
+              "maxPoints": 2
+            },
+            {
+              "id": "strukturen",
+              "label": "Structures : phrases variées, verbe à la bonne place",
+              "maxPoints": 2
+            },
+            {
+              "id": "aussprache",
+              "label": "Prononciation et intonation : compréhensible, accent de phrase juste",
+              "maxPoints": 2
+            }
+          ],
+          "placements": [
+            {
+              "media": "b1-examen-sprechen-planen",
+              "usage": "audio",
+              "caption": "Teil 1: die Nachricht von Daniel",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            },
+            {
+              "media": "b1-examen-sprechen-frage",
+              "usage": "audio",
+              "caption": "Teil 3: die Frage der Prüferin",
+              "transcriptVisibility": "hidden",
+              "decorative": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-bilan-hoeren-nachricht",
+      "kind": "audio",
+      "title": "Bilan B1 — message avant la prise de poste",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Hallo Leon, hier ist Aylin vom Stadtteilbüro. Ich rufe an, weil sich an deinem ersten Arbeitstag am Montag etwas ändert. Eigentlich wollten wir uns um elf Uhr treffen, aber um halb zehn hat das ganze Team eine Besprechung, und da möchte ich dich gleich allen vorstellen. Kannst du deshalb schon um neun Uhr kommen? Ich warte dann unten am Eingang auf dich."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Bring bitte deinen Personalausweis mit. Den brauchst du für deine Zugangskarte, denn ohne Karte kommst du nicht ins Gebäude. Das Formular mit deinen Kontodaten hast du uns ja schon geschickt, das ist also erledigt. Nach der Besprechung zeige ich dir die Räume und deinen Arbeitsplatz. Und wenn du noch Fragen zu deinen Arbeitszeiten hast, können wir sie am Nachmittag in Ruhe klären."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau2",
+          "name": "Aylin",
+          "text": "Falls neun Uhr für dich nicht geht, schreib mir bitte heute noch eine kurze Nachricht. Ich freue mich auf Montag. Bis dann!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-bilan-hoeren-gespraech",
+      "kind": "audio",
+      "title": "Bilan B1 — une correspondance manquée",
+      "script": [
+        {
+          "voice": "frau3",
+          "name": "Rana",
+          "text": "Paul, unsere Regionalbahn hat schon fünfzehn Minuten Verspätung. Den Anschluss in Halle schaffen wir auf keinen Fall mehr."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul",
+          "text": "Warte, ich schaue gerade in der App nach. In Halle fährt in vierzig Minuten ein Zug, der direkt nach Erfurt fährt. Dann müssen wir nicht mehr umsteigen, aber wir kommen ungefähr eine halbe Stunde später an als geplant."
+        },
+        {
+          "voice": "frau3",
+          "name": "Rana",
+          "text": "Eine halbe Stunde, das geht noch. Die Stadtführung um zwölf verpassen wir dann wahrscheinlich, aber Jana und Malte wollten ja erst um zwei Uhr essen gehen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul",
+          "text": "Genau. Ich schreibe ihnen gleich, dass wir direkt ins Restaurant kommen. Die Stadtführung gibt es übrigens jeden Tag, die können wir auch morgen Vormittag machen."
+        },
+        {
+          "voice": "frau3",
+          "name": "Rana",
+          "text": "Gute Idee, dann machen wir das morgen. Und was ist mit unseren Fahrkarten? Müssen wir für den anderen Zug neue kaufen?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Paul",
+          "text": "Nein, wegen der Verspätung gelten unsere Fahrkarten auch im nächsten Zug. Wir müssen also nichts extra bezahlen."
+        },
+        {
+          "voice": "frau3",
+          "name": "Rana",
+          "text": "Wunderbar. Dann trinken wir in Halle in Ruhe noch einen Kaffee am Bahnhof."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-bilan-sprechen-nachricht",
+      "kind": "audio",
+      "title": "Bilan B1 — message d’un camarade de cours",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Hallo, hier ist Jonas aus dem Deutschkurs. Wir müssen ja nächste Woche zusammen unsere Präsentation halten. Ich würde sie gern vorher einmal mit dir üben. Wie wäre es mit Mittwoch um siebzehn Uhr in der Bibliothek? Dort gibt es kleine Räume für Gruppen."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "mann2",
+          "name": "Jonas",
+          "text": "Ach, und noch eine Frage, weil wir in der Präsentation über das Lernen sprechen: Was würdest du einer Person raten, die gerade erst mit Deutsch anfängt? Ruf mich doch zurück, dann können wir alles besprechen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-examen-hoeren-werkstatt",
+      "kind": "audio",
+      "title": "Examen blanc B1 — message d’un atelier de vélos",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Werkstatt",
+          "text": "Guten Tag, hier ist Lena Hoff von der Fahrradwerkstatt am Ufer. Sie haben uns gestern wegen der Reparatur Ihres Fahrrads geschrieben. Das neue Teil für die Bremse ist heute angekommen, und wir können es am Donnerstag einbauen. Die Arbeit dauert ungefähr eine Stunde."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau2",
+          "name": "Werkstatt",
+          "text": "Sie können das Rad am Donnerstag ab acht Uhr bringen. Normalerweise ist es dann gegen zwölf Uhr fertig, weil wir an diesem Vormittag mehrere Räder prüfen. Wenn Sie es schon vor zehn Uhr zurückbrauchen, rufen Sie bitte am Mittwoch noch kurz an, dann reparieren wir Ihr Rad zuerst."
+        },
+        {
+          "pause": 0.6
+        },
+        {
+          "voice": "frau2",
+          "name": "Werkstatt",
+          "text": "Falls der Donnerstag gar nicht passt, hätten wir am nächsten Montag noch einen Termin frei. Bitte antworten Sie uns per E-Mail und schreiben Sie, welchen Tag Sie nehmen. Vielen Dank und auf Wiederhören!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-examen-hoeren-durchsage",
+      "kind": "audio",
+      "title": "Examen blanc B1 — annonce à une fête",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Liebe Gäste, guten Tag und herzlich willkommen zum Sommerfest im Stadtpark! Wegen des starken Windes findet die erste Veranstaltung leider nicht draußen statt: Die Lesung um sechzehn Uhr wird in den großen Saal am Haupteingang verlegt. Ihre Eintrittskarte bleibt gültig."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Im Saal gibt es allerdings weniger Plätze als auf der Wiese, deshalb öffnen wir die Türen schon um halb vier. Das Konzert am Abend beginnt wie geplant um neunzehn Uhr auf der kleinen Bühne. Sollte sich daran etwas ändern, informieren wir Sie um achtzehn Uhr noch einmal."
+        },
+        {
+          "pause": 0.5
+        },
+        {
+          "voice": "sprecher",
+          "name": "Durchsage",
+          "text": "Die Bastelwerkstatt für Kinder beginnt gleich neben dem Informationsstand. Dafür braucht man keine Karte, aber eine erwachsene Person muss die ganze Zeit dabeibleiben. Wir wünschen Ihnen einen schönen Nachmittag!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-examen-hoeren-interview",
+      "kind": "audio",
+      "title": "Examen blanc B1 — entretien à la radio du quartier",
+      "script": [
+        {
+          "voice": "mann2",
+          "name": "Tim",
+          "text": "Willkommen zurück bei Radio Lindenviertel. Bei mir im Studio ist Eva Nieber. Frau Nieber, Sie haben in Ihrem Haus einen Tauschschrank aufgestellt. Wie funktioniert das?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Eva",
+          "text": "Ganz einfach: Wer etwas nicht mehr braucht, stellt es in den Schrank, und wer dort etwas Schönes findet, nimmt es mit. Bezahlen muss niemand. Am Anfang waren es vor allem Bücher, inzwischen kommen auch Spiele und Küchensachen dazu."
+        },
+        {
+          "voice": "mann2",
+          "name": "Tim",
+          "text": "Und wer darf den Schrank im Moment benutzen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Eva",
+          "text": "Bisher nur die Leute aus unserem Haus. Der Schrank steht im Treppenhaus, und fast jeden Tag bringt jemand etwas Neues."
+        },
+        {
+          "voice": "mann2",
+          "name": "Tim",
+          "text": "Viele Hörerinnen und Hörer möchten gern mitmachen. Wollen Sie den Schrank für das ganze Viertel öffnen?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Eva",
+          "text": "Darüber haben wir im Haus lange gesprochen. Ich finde die Idee gut, aber dann müsste der Schrank nach draußen, und vor dem Haus ist es im Winter zu feucht. Eine Nachbarin hat deshalb vorgeschlagen, zuerst einen Tauschabend im Gemeinschaftsraum zu organisieren."
+        },
+        {
+          "voice": "mann2",
+          "name": "Tim",
+          "text": "Steht der Termin für diesen Tauschabend schon fest?"
+        },
+        {
+          "voice": "frau3",
+          "name": "Eva",
+          "text": "Ja, am ersten Freitag im Dezember, ab achtzehn Uhr. Alle aus dem Viertel sind herzlich eingeladen. Wenn genug Leute kommen, suchen wir danach gemeinsam einen Platz für einen größeren Schrank, vielleicht in der Bibliothek."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-examen-sprechen-planen",
+      "kind": "audio",
+      "title": "Examen blanc B1 — proposition d’un voisin",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Daniel",
+          "text": "Hallo, hier ist Daniel aus dem zweiten Stock. In unserem Haus wohnen seit diesem Monat drei neue Familien, und ich würde sie gern zusammen mit dir willkommen heißen. Mein Vorschlag: ein kleines Treffen am Samstag um fünfzehn Uhr im Gemeinschaftsraum, mit Kaffee und Kuchen."
+        },
+        {
+          "pause": 1.2
+        },
+        {
+          "voice": "mann3",
+          "name": "Daniel",
+          "text": "Ach, ich sehe gerade im Kalender der Hausverwaltung, dass der Gemeinschaftsraum am Samstag schon reserviert ist. Hast du eine andere Idee, wo oder wann wir das machen könnten? Und wer bringt was mit? Ruf mich bitte zurück."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-examen-sprechen-frage",
+      "kind": "audio",
+      "title": "Examen blanc B1 — question après la présentation",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "name": "Prüferin",
+          "text": "Vielen Dank für Ihre Präsentation. Ich habe noch eine Frage dazu: Was würden Sie ändern, damit mehr Menschen bei so etwas mitmachen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ],
+  "modules": [
+    {
+      "id": "b1-neuanfang",
+      "file": "01-b1-neuanfang.json"
+    },
+    {
+      "id": "b1-neuanfang-atelier",
+      "file": "02-b1-neuanfang-atelier.json"
+    },
+    {
+      "id": "b1-beziehungen",
+      "file": "03-b1-beziehungen.json"
+    },
+    {
+      "id": "b1-beziehungen-atelier",
+      "file": "04-b1-beziehungen-atelier.json"
+    },
+    {
+      "id": "b1-wohnen",
+      "file": "05-b1-wohnen.json"
+    },
+    {
+      "id": "b1-wohnen-atelier",
+      "file": "06-b1-wohnen-atelier.json"
+    },
+    {
+      "id": "b1-arbeit",
+      "file": "07-b1-arbeit.json"
+    },
+    {
+      "id": "b1-arbeit-atelier",
+      "file": "08-b1-arbeit-atelier.json"
+    },
+    {
+      "id": "b1-gesundheit",
+      "file": "09-b1-gesundheit.json"
+    },
+    {
+      "id": "b1-gesundheit-atelier",
+      "file": "10-b1-gesundheit-atelier.json"
+    },
+    {
+      "id": "b1-lernen",
+      "file": "11-b1-lernen.json"
+    },
+    {
+      "id": "b1-lernen-atelier",
+      "file": "12-b1-lernen-atelier.json"
+    },
+    {
+      "id": "b1-unterwegs",
+      "file": "13-b1-unterwegs.json"
+    },
+    {
+      "id": "b1-unterwegs-atelier",
+      "file": "14-b1-unterwegs-atelier.json"
+    },
+    {
+      "id": "b1-konsum",
+      "file": "15-b1-konsum.json"
+    },
+    {
+      "id": "b1-konsum-atelier",
+      "file": "16-b1-konsum-atelier.json"
+    },
+    {
+      "id": "b1-medien",
+      "file": "17-b1-medien.json"
+    },
+    {
+      "id": "b1-medien-atelier",
+      "file": "18-b1-medien-atelier.json"
+    },
+    {
+      "id": "b1-umwelt",
+      "file": "19-b1-umwelt.json"
+    },
+    {
+      "id": "b1-umwelt-atelier",
+      "file": "20-b1-umwelt-atelier.json"
+    },
+    {
+      "id": "b1-gesellschaft",
+      "file": "21-b1-gesellschaft.json"
+    },
+    {
+      "id": "b1-gesellschaft-atelier",
+      "file": "22-b1-gesellschaft-atelier.json"
+    },
+    {
+      "id": "b1-kultur",
+      "file": "23-b1-kultur.json"
+    },
+    {
+      "id": "b1-kultur-atelier",
+      "file": "24-b1-kultur-atelier.json"
+    }
+  ]
+}

@@ -1,0 +1,2325 @@
+{
+  "id": "b1-gesundheit",
+  "title": "Gesundheit : prendre soin de sa santé",
+  "objective": "Décrire des symptômes et leur évolution, comprendre des conseils de santé et un message du cabinet médical, poser une condition (wenn, falls) et conseiller avec sollte.",
+  "prerequisites": [
+    "b1-arbeit-atelier"
+  ],
+  "audioProfile": "b1-suite",
+  "sources": [
+    "Textes, dialogues et exercices originaux LinguaCap. Situations fictives : les conseils de santé restent généraux et ne remplacent pas un avis médical.",
+    "Situations reprises et réécrites du brouillon B1 V1 (LinguaCap) : message du cabinet, déplacement d’un rendez-vous, appel au secrétariat."
+  ],
+  "grammarFocus": [
+    "wenn-falls",
+    "sollte-ratschlag",
+    "brauchen-zu"
+  ],
+  "layer": "content/b/source/b1/b1-gesundheit.mjs",
+  "vocabulary": [
+    {
+      "id": "beschwerden",
+      "word": "Beschwerden",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "les troubles, les symptômes",
+      "example": "Seit wann haben Sie diese Beschwerden?",
+      "note": "presque toujours au pluriel",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 0
+      }
+    },
+    {
+      "id": "erkaeltung",
+      "word": "Erkältung",
+      "article": "die",
+      "plural": "Erkältungen",
+      "partOfSpeech": "noun",
+      "translation": "le rhume",
+      "example": "Im Winter haben viele Menschen eine Erkältung.",
+      "note": "erkältet sein : être enrhumé",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 1
+      }
+    },
+    {
+      "id": "fieber",
+      "word": "Fieber",
+      "article": "das",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la fièvre",
+      "example": "Wenn das Fieber steigt, sollten Sie zum Arzt gehen.",
+      "note": "sans pluriel · Fieber haben, Fieber messen",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 2
+      }
+    },
+    {
+      "id": "husten",
+      "word": "husten",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "tousser",
+      "example": "Mein Sohn hustet seit drei Tagen.",
+      "note": "der Husten : la toux",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 3
+      }
+    },
+    {
+      "id": "krankschreibung",
+      "word": "Krankschreibung",
+      "article": "die",
+      "plural": "Krankschreibungen",
+      "partOfSpeech": "noun",
+      "translation": "l’arrêt de travail (certificat du médecin)",
+      "example": "Für die Arbeit brauche ich eine Krankschreibung.",
+      "note": "krankschreiben : mettre en arrêt de travail",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 4
+      }
+    },
+    {
+      "id": "sich-krankmelden",
+      "word": "sich krankmelden",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se déclarer malade (auprès de l’employeur)",
+      "example": "Heute Morgen habe ich mich bei meiner Chefin krankgemeldet.",
+      "note": "séparable : krank|melden",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 5
+      }
+    },
+    {
+      "id": "ueberweisung",
+      "word": "Überweisung",
+      "article": "die",
+      "plural": "Überweisungen",
+      "partOfSpeech": "noun",
+      "translation": "la lettre d’orientation (vers un spécialiste)",
+      "example": "Für den Hautarzt brauchen Sie eine Überweisung.",
+      "note": "aussi : le virement bancaire",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 6
+      }
+    },
+    {
+      "id": "rezept",
+      "word": "Rezept",
+      "article": "das",
+      "plural": "Rezepte",
+      "partOfSpeech": "noun",
+      "translation": "l’ordonnance",
+      "example": "Mit diesem Rezept bekommen Sie das Medikament in der Apotheke.",
+      "note": "aussi : la recette de cuisine",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 7
+      }
+    },
+    {
+      "id": "verschreiben",
+      "word": "verschreiben",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prescrire",
+      "example": "Kann die Ärztin mir etwas gegen den Husten verschreiben?",
+      "note": "verschrieb, hat verschrieben",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 8
+      }
+    },
+    {
+      "id": "einnehmen",
+      "word": "einnehmen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "prendre (un médicament)",
+      "example": "Nehmen Sie die Tabletten dreimal täglich nach dem Essen ein.",
+      "note": "séparable : ein|nehmen",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 9
+      }
+    },
+    {
+      "id": "nebenwirkung",
+      "word": "Nebenwirkung",
+      "article": "die",
+      "plural": "Nebenwirkungen",
+      "partOfSpeech": "noun",
+      "translation": "l’effet secondaire",
+      "example": "Müdigkeit ist eine mögliche Nebenwirkung.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 10
+      }
+    },
+    {
+      "id": "vorsorge",
+      "word": "Vorsorge",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "la prévention, le dépistage",
+      "example": "Zur Vorsorge gehe ich einmal im Jahr zum Zahnarzt.",
+      "note": "sans pluriel · die Vorsorgeuntersuchung",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 11
+      }
+    },
+    {
+      "id": "sprechstunde",
+      "word": "Sprechstunde",
+      "article": "die",
+      "plural": "Sprechstunden",
+      "partOfSpeech": "noun",
+      "translation": "les heures de consultation",
+      "example": "Die Sprechstunde beginnt um acht Uhr.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 12
+      }
+    },
+    {
+      "id": "versichertenkarte",
+      "word": "Versichertenkarte",
+      "article": "die",
+      "plural": "Versichertenkarten",
+      "partOfSpeech": "noun",
+      "translation": "la carte d’assurance maladie",
+      "example": "Bringen Sie bitte Ihre Versichertenkarte mit.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 13
+      }
+    },
+    {
+      "id": "nuechtern",
+      "word": "nüchtern",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "à jeun",
+      "example": "Zur Blutabnahme müssen Sie nüchtern kommen.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 14
+      }
+    },
+    {
+      "id": "ansteckend",
+      "word": "ansteckend",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "adjective",
+      "translation": "contagieux",
+      "example": "Eine Grippe ist sehr ansteckend.",
+      "note": "jemanden anstecken : contaminer quelqu’un",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 15
+      }
+    },
+    {
+      "id": "sich-erholen",
+      "word": "sich erholen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se reposer, se rétablir",
+      "example": "Im Urlaub habe ich mich gut erholt.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 16
+      }
+    },
+    {
+      "id": "sich-schonen",
+      "word": "sich schonen",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se ménager",
+      "example": "Sie sollten sich ein paar Tage schonen.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 17
+      }
+    },
+    {
+      "id": "sich-ernaehren",
+      "word": "sich ernähren",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "verb",
+      "translation": "se nourrir, s’alimenter",
+      "example": "Wer sich gesund ernährt, isst viel Obst und Gemüse.",
+      "note": "die Ernährung : l’alimentation",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 18
+      }
+    },
+    {
+      "id": "immunsystem",
+      "word": "Immunsystem",
+      "article": "das",
+      "plural": "Immunsysteme",
+      "partOfSpeech": "noun",
+      "translation": "le système immunitaire",
+      "example": "Guter Schlaf stärkt das Immunsystem.",
+      "note": null,
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 19
+      }
+    },
+    {
+      "id": "bewegung",
+      "word": "Bewegung",
+      "article": "die",
+      "plural": null,
+      "partOfSpeech": "noun",
+      "translation": "l’activité physique, le mouvement",
+      "example": "Bewegung an der frischen Luft tut gut.",
+      "note": "au sens d’activité physique : sans pluriel",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 20
+      }
+    },
+    {
+      "id": "falls",
+      "word": "falls",
+      "article": null,
+      "plural": null,
+      "partOfSpeech": "conjunction",
+      "translation": "au cas où, si",
+      "example": "Falls Sie Fieber bekommen, rufen Sie uns an.",
+      "note": "verbe à la fin, comme après wenn",
+      "audio": {
+        "media": "b1-gesundheit-lexique",
+        "line": 21
+      }
+    }
+  ],
+  "activities": [
+    {
+      "id": "b1-gesundheit-einstieg",
+      "kind": "lesson",
+      "title": "Mise en route : la santé au quotidien",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture",
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Mise en route : la santé au quotidien",
+        "description": "GESUND BLEIBEN\n[fr] Rester en bonne santé\nSchlafen, essen, sich bewegen, zum Arzt gehen: Gesundheit ist ein Thema für jeden Tag, auch auf Deutsch. [fr] Dormir, manger, bouger, aller chez le médecin : la santé est un sujet de tous les jours, en allemand aussi.\n\nFRAGEN ZUM EINSTIEG\n[fr] Questions pour commencer\n• Was machen Sie, wenn Sie eine Erkältung haben? [fr] Que faites-vous quand vous avez un rhume ?\n• Wann waren Sie zum letzten Mal beim Arzt, und warum? [fr] Quand êtes-vous allé(e) chez le médecin pour la dernière fois, et pourquoi ?\n• Welcher Tipp für die Gesundheit funktioniert bei Ihnen wirklich? [fr] Quel conseil santé fonctionne vraiment pour vous ?\nAntworten Sie in Gedanken auf Deutsch, in zwei oder drei Sätzen. [fr] Répondez mentalement en allemand, en deux ou trois phrases.\n\nZIELE\n[fr] Objectifs\n• Ich kann Beschwerden beschreiben und sagen, wie sie sich entwickeln. [fr] Je peux décrire des symptômes et dire comment ils évoluent.\n• Ich kann Gesundheitstipps und eine Nachricht aus der Arztpraxis verstehen. [fr] Je peux comprendre des conseils de santé et un message du cabinet médical.\n• Ich kann eine Bedingung nennen: „Wenn …, dann …“, „Falls …“. [fr] Je peux poser une condition : « Wenn …, dann … », « Falls … ».\n• Ich kann einen Rat geben: „Du solltest …“. [fr] Je peux donner un conseil : « Du solltest … ».\n\nWICHTIGE WÖRTER\n[fr] Mots-clés\n• die Beschwerden — les troubles, les symptômes\n• die Erkältung — le rhume\n• das Rezept — l’ordonnance\n• die Überweisung — la lettre d’orientation (vers un spécialiste)\n• die Krankschreibung — l’arrêt de travail\n• nüchtern — à jeun\n• sich schonen — se ménager\n• Sie sollten … — vous devriez …",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "usage": "illustration",
+          "caption": "Beim Arzt: das Stethoskop",
+          "media": "b1-gesundheit-einstieg-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": []
+    },
+    {
+      "id": "b1-gesundheit-lesen",
+      "kind": "exercise",
+      "title": "Comprendre : un article sur la santé en hiver",
+      "estimatedMinutes": 20,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Comprendre : un article sur la santé en hiver",
+        "description": "Lesen Sie den Text. Beantworten Sie dann die Fragen. [fr] Lisez le texte, puis répondez aux questions.\n\nSTRATEGIE\n[fr] Stratégie\n1. Global: Lesen Sie die Überschrift und den ersten Absatz. Was ist das Thema? [fr] Lecture globale : lisez le titre et le premier paragraphe. Quel est le thème ?\n2. Lesen Sie dann von jedem Absatz nur den ersten Satz. Er sagt oft schon, worum es im Absatz geht. [fr] Lisez ensuite seulement la première phrase de chaque paragraphe : elle annonce souvent son sujet.\n3. Für die Details: Suchen Sie die Schlüsselwörter der Aufgabe im Text und lesen Sie dort genau. [fr] Pour les détails : cherchez dans le texte les mots-clés de la question et lisez ce passage avec précision.\n\nGESUND DURCH DEN WINTER\n[fr] Article : rester en bonne santé tout l’hiver\nKurze Tage, kalte Luft, volle Busse: Im Winter haben Erkältungen leichtes Spiel. Ganz vermeiden kann man sie nicht. Aber mit ein paar einfachen Gewohnheiten bleibt das Immunsystem stark.\n(A) Schlaf ist die beste Medizin. Wer regelmäßig sieben bis acht Stunden schläft, wird seltener krank. Fachleute empfehlen, jeden Abend ungefähr zur gleichen Zeit ins Bett zu gehen. Das Handy sollte man mindestens eine halbe Stunde vorher weglegen, denn das helle Licht macht wach.\n(B) Auch wenn es draußen grau und kalt ist: Bewegung an der frischen Luft tut gut. Schon ein Spaziergang von zwanzig Minuten in der Mittagspause bringt den Kreislauf in Schwung. Dafür brauchen Sie kein Fitnessstudio und keine teure Sportkleidung, warme Schuhe genügen. Wenn Sie wenig Zeit haben, steigen Sie einfach eine Haltestelle früher aus und gehen den Rest zu Fuß. Oder Sie verabreden sich mit Kolleginnen und Kollegen zu einem kurzen Spaziergang nach dem Essen.\n(C) Im Winter essen viele Menschen schwerer und weniger frisch. Dabei sind gerade jetzt Obst und Gemüse wichtig: Kohl, Karotten, Äpfel und Orangen enthalten viele Vitamine. Wer sich abwechslungsreich ernährt, braucht meistens keine Vitamintabletten zu nehmen. Und vergessen Sie das Trinken nicht: Auch im Winter braucht der Körper etwa anderthalb Liter am Tag.\n(D) Und wenn es Sie doch erwischt? Bei einer normalen Erkältung müssen Sie nicht sofort zum Arzt. Ruhen Sie sich aus, trinken Sie viel und bleiben Sie ein paar Tage zu Hause, damit Sie niemanden anstecken. Falls das Fieber über 39 Grad steigt oder Sie nach einer Woche immer noch starke Beschwerden haben, sollten Sie aber in die Sprechstunde gehen. Viele Praxen bieten im Winter auch eine Telefonsprechstunde an.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesundheit-lesen-artikel",
+          "caption": "Gesund durch den Winter",
+          "usage": "illustration",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        },
+        {
+          "usage": "illustration",
+          "caption": "Ein heißer Tee hilft im Winter.",
+          "media": "b1-gesundheit-lesen-foto",
+          "transcriptVisibility": "hidden",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Worum geht es in dem Artikel? [fr] De quoi parle l’article ?",
+          "explanation": "Le titre (« Gesund durch den Winter ») et le chapeau (« mit ein paar einfachen Gewohnheiten bleibt das Immunsystem stark ») annoncent des conseils pratiques. Aucun médicament nouveau n’est présenté.",
+          "options": [
+            {
+              "id": "a",
+              "label": "um ein neues Medikament gegen Erkältungen",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "um Tipps, wie man im Winter gesund bleibt",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "um die Arbeit in einer Arztpraxis im Winter",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Welcher Satz fasst die Botschaft des Artikels am besten zusammen? [fr] Quelle phrase résume le mieux le message de l’article ?",
+          "explanation": "Le texte dit qu’on ne peut pas éviter tous les rhumes, mais que le sommeil, la marche, l’alimentation et quelques règles aident beaucoup. Il ne dit pas que tout le monde tombe malade, et il précise qu’une salle de sport n’est pas nécessaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Mit einfachen Gewohnheiten kann man viel für seine Gesundheit tun.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Im Winter wird jeder Mensch mindestens einmal richtig krank.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Ohne Sport im Fitnessstudio wird man im Winter schnell krank.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Für Bewegung im Winter braucht man ein Fitnessstudio.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Dafür brauchen Sie kein Fitnessstudio und keine teure Sportkleidung, warme Schuhe genügen. » Une promenade de vingt minutes suffit déjà.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "„Wer sich gut ernährt, muss meistens keine Vitamintabletten nehmen.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Vrai : « Wer sich abwechslungsreich ernährt, braucht meistens keine Vitamintabletten zu nehmen. » « Nicht / keine … zu brauchen » a le même sens que « nicht müssen » : ce n’est pas nécessaire.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "„Joggen am Morgen ist laut Artikel gesünder als Joggen am Abend.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Non mentionné : le texte parle de promenade et d’activité au grand air, jamais de course à pied ni du meilleur moment de la journée pour faire du sport.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "„Bei einer normalen Erkältung soll man sofort zum Arzt gehen.“ Richtig, falsch oder steht nicht im Text? [fr] Vrai, faux ou non mentionné dans le texte ?",
+          "explanation": "Faux : « Bei einer normalen Erkältung müssen Sie nicht sofort zum Arzt. » On consulte seulement si la fièvre dépasse 39 degrés ou si les troubles durent plus d’une semaine.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "steht nicht im Text",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "match",
+          "prompt": "Welche Überschrift passt zu welchem Absatz? Ordnen Sie zu. [fr] Quel intertitre convient à quel paragraphe ? Associez.",
+          "explanation": "A parle du sommeil (Schlaf, ins Bett gehen), B de la marche dehors (Bewegung an der frischen Luft), C des fruits, des légumes et de l’eau, D de ce qu’on fait quand on est malade (« Und wenn es Sie doch erwischt? »).",
+          "pairs": [
+            {
+              "left": "Absatz A",
+              "right": "Früh genug ins Bett"
+            },
+            {
+              "left": "Absatz B",
+              "right": "Raus an die frische Luft"
+            },
+            {
+              "left": "Absatz C",
+              "right": "Bunt essen, genug trinken"
+            },
+            {
+              "left": "Absatz D",
+              "right": "Was tun, wenn man krank ist?"
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit Informationen aus Absatz D. [fr] Complétez avec des informations du paragraphe D.",
+          "text": "Bei Fieber über [[1]] Grad sollte man in die Sprechstunde gehen. Viele Praxen bieten im Winter auch eine [[2]] an.",
+          "explanation": "« Falls das Fieber über 39 Grad steigt » : au-delà de 39 °C, on consulte. Die Telefonsprechstunde : une consultation par téléphone, mot composé de Telefon et Sprechstunde.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "39",
+                "neununddreißig"
+              ],
+              "size": 15,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Telefonsprechstunde"
+              ],
+              "size": 20,
+              "hint": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-gesundheit-hoeren",
+      "kind": "exercise",
+      "title": "Comprendre : un message du cabinet et le rappel",
+      "estimatedMinutes": 18,
+      "competences": [
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Comprendre : un message du cabinet et le rappel",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSITUATION\n[fr] La situation\nClaire Moreau hört eine Nachricht von ihrer Arztpraxis. Dann ruft sie zurück und spricht mit Herrn Kühn am Empfang. [fr] Claire Moreau écoute un message de son cabinet médical. Elle rappelle ensuite et parle avec M. Kühn, à l’accueil.\n\nSTRATEGIE\n[fr] Stratégie\n1. Beim ersten Hören: Warum soll Frau Moreau in die Praxis kommen? [fr] Première écoute : pourquoi Mme Moreau doit-elle venir au cabinet ?\n2. Lesen Sie die Notizen. Bei Terminen hören Sie genau auf Tag, Uhrzeit und Zahlen. [fr] Lisez les notes. Pour un rendez-vous, écoutez bien le jour, l’heure et les nombres.\n3. Achtung: Die Praxis schlägt zuerst einen anderen Termin vor. In die Notizen gehört nur der Termin, der am Ende gilt. [fr] Attention : le cabinet propose d’abord un autre rendez-vous. Seul celui qui est retenu à la fin va dans les notes.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesundheit-hoeren-audio",
+          "caption": "Nachricht und Rückruf",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "fill",
+          "prompt": "Hören Sie und machen Sie Notizen: Ergänzen Sie die Lücken. [fr] Écoutez et prenez des notes : complétez les trous.",
+          "text": "Grund: ein Blutwert ist zu niedrig, wahrscheinlich das [[1]] · Beschwerden: seit ein paar Wochen sehr [[2]], manchmal Kopfschmerzen · neuer Termin: Freitag um [[3]] · mitbringen: [[4]] · absagen: mindestens [[5]] Stunden vorher",
+          "explanation": "Eisen : le fer. Müde : fatiguée. Le rendez-vous retenu est vendredi à 15 h 30 (« fünfzehn Uhr dreißig » ou « halb vier »), pas mercredi à 9 heures. À apporter : la carte d’assurance maladie. Annulation : « mindestens vierundzwanzig Stunden vorher ».",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Eisen"
+              ],
+              "size": 6,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "müde"
+              ],
+              "size": 5,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "15.30 Uhr",
+                "15:30 Uhr",
+                "15.30",
+                "15:30",
+                "halb vier",
+                "15 Uhr 30",
+                "fünfzehn Uhr dreißig"
+              ],
+              "size": 21,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Versichertenkarte",
+                "die Versichertenkarte",
+                "ihre Versichertenkarte",
+                "Ihre Versichertenkarte"
+              ],
+              "size": 23,
+              "hint": null
+            },
+            {
+              "id": "5",
+              "accept": [
+                "24",
+                "vierundzwanzig"
+              ],
+              "size": 15,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Warum ruft Frau Moreau in der Praxis an? [fr] Pourquoi Mme Moreau appelle-t-elle le cabinet ?",
+          "explanation": "« Sie haben mir heute Vormittag eine Nachricht hinterlassen » : elle rappelle après le message sur son répondeur. Ses maux de tête sont mentionnés plus tard, comme symptôme, pas comme raison de l’appel.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Weil die Praxis ihr eine Nachricht hinterlassen hat.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Weil sie starke Kopfschmerzen hat und sofort kommen möchte.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Weil sie ihre Versichertenkarte in der Praxis vergessen hat.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Wie haben sich ihre Beschwerden in den letzten Tagen entwickelt? [fr] Comment ses troubles ont-ils évolué ces derniers jours ?",
+          "explanation": "À la question « besser oder schlechter? », elle répond « Eher schlechter » : plutôt moins bien. Schlechter et schlimmer ont ici le même sens.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Sie sind besser geworden.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie sind gleich geblieben.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Sie sind eher schlimmer geworden.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Warum nimmt Frau Moreau den Termin am Mittwoch nicht? [fr] Pourquoi Mme Moreau ne prend-elle pas le rendez-vous de mercredi ?",
+          "explanation": "« Mittwochvormittag ist schwierig, da habe ich eine wichtige Besprechung. » Le cabinet n’est pas fermé ; il n’a simplement plus de place l’après-midi ce jour-là.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Am Mittwoch ist die Praxis den ganzen Tag geschlossen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Sie hat am Mittwochvormittag eine wichtige Besprechung.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Sie möchte vor dem Termin nicht frühstücken.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was soll Frau Moreau bis zum Termin tun? [fr] Que doit faire Mme Moreau d’ici le rendez-vous ?",
+          "explanation": "Le conseil de la médecin : « Wenn Sie so müde sind, sollten Sie bis zum Termin keinen Sport machen und viel schlafen. » Elle n’a pas besoin d’être à jeun : « Sie brauchen nicht nüchtern zu kommen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "viel schlafen und keinen Sport machen",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "morgens nichts essen und nichts trinken",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "jeden Tag eine halbe Stunde joggen",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "b1-gesundheit-entdecken",
+      "kind": "exercise",
+      "title": "Découvrir : condition, conseil et absence d’obligation",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "Découvrir : condition, conseil et absence d’obligation",
+        "description": "Lesen Sie die Sätze aus dem Artikel und aus dem Telefongespräch. Achten Sie auf die Verben. [fr] Lisez ces phrases de l’article et de l’appel. Observez les verbes.\n\nSÄTZE\n[fr] Le corpus\n(1) Wenn Sie wenig Zeit haben, steigen Sie einfach eine Haltestelle früher aus.\n(2) Falls das Fieber über 39 Grad steigt, sollten Sie in die Sprechstunde gehen.\n(3) Und falls ich am Freitag doch nicht kann?\n(4) Wenn Sie so müde sind, sollten Sie bis zum Termin keinen Sport machen.\n(5) Wer sich abwechslungsreich ernährt, braucht meistens keine Vitamintabletten zu nehmen.\n(6) Für diesen Termin brauchen Sie nicht nüchtern zu kommen.\n(7) Bei einer normalen Erkältung müssen Sie nicht sofort zum Arzt.\n\nBeantworten Sie dann die Fragen. Die Erklärungen formulieren die Regel. [fr] Répondez ensuite aux questions. Les explications formulent la règle.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Sätze 1 bis 4: Wo steht das Verb nach „wenn“ und „falls“? [fr] Phrases 1 à 4 : où se trouve le verbe après « wenn » et « falls » ?",
+          "explanation": "Wenn et falls sont des conjonctions de subordination : le verbe conjugué va à la fin (…, wenn Sie wenig Zeit haben ; falls das Fieber … steigt ; falls ich … nicht kann).",
+          "options": [
+            {
+              "id": "a",
+              "label": "juste après wenn ou falls",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "à la fin de la subordonnée",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "toujours en deuxième position",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Sätze 1, 2 und 4: Was steht direkt nach dem Komma? [fr] Phrases 1, 2 et 4 : qu’est-ce qui vient juste après la virgule ?",
+          "explanation": "La subordonnée occupe la première place de la phrase : le verbe de la principale arrive donc tout de suite après la virgule, puis le sujet (…, sollten Sie … gehen). C’est la règle du verbe en deuxième position.",
+          "options": [
+            {
+              "id": "a",
+              "label": "le verbe conjugué de la principale (steigen, sollten)",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "le sujet de la principale (Sie), comme en français",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "un deuxième wenn ou falls pour continuer la condition",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Sätze 2 und 4: Was drückt „sollten“ hier aus? [fr] Phrases 2 et 4 : qu’exprime « sollten » ici ?",
+          "explanation": "Sollten est le Konjunktiv II de sollen : « vous devriez ». C’est un conseil, pas un ordre ni une interdiction (qui serait « Sie dürfen nicht … »). L’infinitif (gehen, machen) va à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "une interdiction",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "une capacité",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "un conseil",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "match",
+          "prompt": "Was bedeutet das Gleiche? Ordnen Sie zu. [fr] Qu’est-ce qui veut dire la même chose ? Associez.",
+          "explanation": "Nicht brauchen … zu = nicht müssen : ce n’est pas nécessaire. Sollte = un conseil. Falls ≈ wenn pour une condition. Mais nicht dürfen = c’est interdit : ne le confondez pas avec nicht müssen.",
+          "pairs": [
+            {
+              "left": "Sie brauchen nicht nüchtern zu kommen.",
+              "right": "Sie müssen nicht nüchtern kommen."
+            },
+            {
+              "left": "Sie sollten viel schlafen.",
+              "right": "Es ist ein guter Rat, viel zu schlafen."
+            },
+            {
+              "left": "Falls Sie nicht kommen können, rufen Sie an.",
+              "right": "Wenn Sie nicht kommen können, rufen Sie an."
+            },
+            {
+              "left": "Sie dürfen vorher nichts essen.",
+              "right": "Essen ist vorher verboten."
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesundheit-regel",
+      "kind": "lesson",
+      "title": "À retenir : wenn et falls, sollte, nicht brauchen … zu",
+      "estimatedMinutes": 10,
+      "competences": [
+        "lecture"
+      ],
+      "lesson": {
+        "title": "À retenir : wenn et falls, sollte, nicht brauchen … zu",
+        "description": "À RETENIR — LA CONDITION : WENN ET FALLS\nWenn et falls introduisent une condition (« si », « au cas où »). Ce sont des conjonctions de subordination : le verbe conjugué va à la fin de la subordonnée. Si la subordonnée ouvre la phrase, la principale commence par son verbe.\n• Wenn Sie Fieber haben, bleiben Sie zu Hause. — Si vous avez de la fièvre, restez à la maison.\n• Falls der Termin nicht passt, rufen Sie uns an. — Au cas où le rendez-vous ne conviendrait pas, appelez-nous.\n• Ich gehe zum Arzt, wenn es nicht besser wird. — J’irai chez le médecin si ça ne va pas mieux.\nFalls insiste sur l’éventualité ; wenn est plus courant et signifie aussi « quand, chaque fois que ».\n\nÀ RETENIR — CONSEILLER : SOLLTE\nPour donner un conseil, on emploie sollen au Konjunktiv II : sollte (« devrais », « devriez »). L’infinitif va à la fin.\n• ich sollte, du solltest, er/sie sollte — je devrais, tu devrais, il/elle devrait\n• wir sollten, ihr solltet, Sie sollten — nous devrions, vous devriez\n• Du solltest mehr trinken. — Tu devrais boire davantage.\n• Sie sollten sich ein paar Tage schonen. — Vous devriez vous ménager quelques jours.\nAutres formules de conseil : An deiner Stelle würde ich … (à ta place, je …) · Wie wäre es, wenn du …? (et si tu … ?)\n\nÀ RETENIR — CE N’EST PAS NÉCESSAIRE : NICHT MÜSSEN, NICHT BRAUCHEN … ZU\n• Sie müssen nicht nüchtern kommen. — Vous n’êtes pas obligé(e) de venir à jeun.\n• Sie brauchen nicht nüchtern zu kommen. — Même sens, avec brauchen.\nBrauchen se construit avec zu + infinitif, surtout avec une négation (nicht, kein) ou avec nur : Sie brauchen keinen Termin zu machen. Sie brauchen nur anzurufen. Avec un verbe à particule, zu se glisse entre la particule et le verbe : anzurufen, mitzubringen.\n\nATTENTION — LES PIÈGES DES FRANCOPHONES\n• « Vous ne devez pas » est ambigu en français. En allemand : Sie müssen nicht = ce n’est pas nécessaire ; Sie dürfen nicht = c’est interdit. « Sie dürfen nicht rauchen » et « Sie müssen nicht rauchen » n’ont pas du tout le même sens.\n• Le « si » d’une question indirecte se dit ob, pas wenn : Die Ärztin fragt, ob ich Allergien habe.\n• Après une subordonnée en tête de phrase, le sujet ne passe pas devant le verbe : « Wenn ich Fieber habe, ich bleibe zu Hause » est faux ; on dit bleibe ich.\n• Avec brauchen, gardez le zu à l’écrit : Du brauchst nicht zu kommen.",
+        "transcript": null
+      },
+      "placements": [],
+      "questions": []
+    },
+    {
+      "id": "b1-gesundheit-grammatik",
+      "kind": "exercise",
+      "title": "S’entraîner : wenn, falls, sollte et brauchen … zu",
+      "estimatedMinutes": 14,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’entraîner : wenn, falls, sollte et brauchen … zu",
+        "description": "Üben Sie Bedingungen, Ratschläge und „nicht brauchen … zu“. [fr] Entraînez-vous aux conditions, aux conseils et à « nicht brauchen … zu ».\n\nMERKE\n[fr] À retenir\n• wenn / falls … verbe à la fin, puis verbe de la principale juste après la virgule.\n• sollte + infinitif à la fin : un conseil.\n• nicht brauchen … zu + infinitif = nicht müssen.",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Wenn",
+              "du",
+              "Fieber",
+              "hast,",
+              "solltest",
+              "du",
+              "zu Hause",
+              "bleiben."
+            ]
+          ],
+          "explanation": "La subordonnée avec wenn se termine par son verbe (hast). Après la virgule viennent le verbe de la principale (solltest), puis le sujet (du) ; l’infinitif « bleiben » ferme la phrase."
+        },
+        {
+          "id": "q2",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "gehe",
+              "zum Arzt,",
+              "falls",
+              "die Schmerzen",
+              "nicht",
+              "besser",
+              "werden."
+            ]
+          ],
+          "explanation": "Ici la principale vient d’abord, avec le verbe en deuxième position (gehe). Après falls, le verbe « werden » va à la fin ; la négation nicht se place devant « besser »."
+        },
+        {
+          "id": "q3",
+          "type": "fill",
+          "prompt": "Ergänzen Sie „sollte“ in der richtigen Form. [fr] Complétez avec « sollte » à la bonne forme.",
+          "text": "Du [[1]] mehr Wasser trinken. · Ihr [[2]] früher ins Bett gehen. · Herr Okoro, Sie [[3]] sich ein paar Tage schonen.",
+          "explanation": "Sollte se conjugue comme un prétérit faible : du solltest, ihr solltet, Sie sollten. Pas d’Umlaut : « söllte » n’existe pas (contrairement à könnte, müsste).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "solltest"
+              ],
+              "hint": "sollen",
+              "size": 9
+            },
+            {
+              "id": "2",
+              "accept": [
+                "solltet"
+              ],
+              "hint": "sollen",
+              "size": 8
+            },
+            {
+              "id": "3",
+              "accept": [
+                "sollten"
+              ],
+              "hint": "sollen",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie mit „zu“ oder der Form mit „zu“. [fr] Complétez avec « zu » ou la forme avec « zu ».",
+          "text": "Sie brauchen keinen Termin [[1]] machen. · Morgen brauchst du nicht früh [[2]].",
+          "explanation": "Brauchen + négation + zu + infinitif : « vous n’avez pas besoin de prendre rendez-vous ». Avec un verbe à particule, zu se place entre la particule et le verbe, en un seul mot : aufzustehen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "zu"
+              ],
+              "size": 3,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "aufzustehen"
+              ],
+              "hint": "aufstehen",
+              "size": 12
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was bedeutet: „Sie müssen nicht nüchtern kommen.“? [fr] Que signifie : « Sie müssen nicht nüchtern kommen » ?",
+          "explanation": "Nicht müssen = ne pas être obligé : vous pouvez manger normalement. La première traduction exprime une interdiction, qui se dirait « Sie dürfen vorher nichts essen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "Vous ne devez rien manger avant de venir.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Vous pouvez manger avant de venir.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Vous devez venir le matin.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Ihr Kollege hustet seit zwei Wochen. Was sagen Sie? [fr] Votre collègue tousse depuis deux semaines. Que dites-vous ?",
+          "explanation": "Un conseil : du solltest + infinitif à la fin. « Du musst nicht » dirait que ce n’est pas nécessaire, le contraire du conseil voulu. « Du brauchst zum Arzt gehen » est incorrect : brauchen + infinitif s’emploie avec une négation et zu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du solltest zum Arzt gehen.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Du musst nicht zum Arzt gehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du brauchst zum Arzt gehen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "choice",
+          "prompt": "„Die Ärztin fragt, … ich Allergien habe.“ Welches Wort passt? [fr] Quel mot convient ?",
+          "explanation": "C’est une question indirecte (« Haben Sie Allergien? ») : on emploie ob. Wenn et falls expriment une condition et ne conviennent pas après « fragen ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "wenn",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falls",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "ob",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "fill",
+          "prompt": "Ergänzen Sie die Verben in der richtigen Form. [fr] Complétez avec les verbes à la bonne forme.",
+          "text": "Wenn du dich nicht gut [[1]], [[2]] du besser zu Hause.",
+          "explanation": "Dans la subordonnée, « fühlst » va à la fin. La principale commence par son verbe conjugué : bleibst du. Les deux verbes s’accordent avec du (-st).",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "fühlst"
+              ],
+              "hint": "fühlen",
+              "size": 7
+            },
+            {
+              "id": "2",
+              "accept": [
+                "bleibst"
+              ],
+              "hint": "bleiben",
+              "size": 8
+            }
+          ]
+        },
+        {
+          "id": "q9",
+          "type": "match",
+          "prompt": "Was passt zusammen? Ordnen Sie zu. [fr] Qu’est-ce qui va ensemble ? Associez.",
+          "explanation": "Chaque condition appelle sa conséquence logique : forte fièvre → consultation ; cabinet fermé → service de garde (Bereitschaftsdienst) ; bon sommeil → moins de maladies ; effets secondaires → arrêter le médicament. Remarquez le verbe en tête de chaque principale.",
+          "pairs": [
+            {
+              "left": "Wenn Sie hohes Fieber haben,",
+              "right": "sollten Sie in die Sprechstunde gehen."
+            },
+            {
+              "left": "Falls die Praxis geschlossen ist,",
+              "right": "rufen Sie den Bereitschaftsdienst an."
+            },
+            {
+              "left": "Wenn man genug schläft,",
+              "right": "wird man seltener krank."
+            },
+            {
+              "left": "Falls Sie Nebenwirkungen bemerken,",
+              "right": "nehmen Sie das Medikament nicht weiter."
+            }
+          ]
+        },
+        {
+          "id": "q10",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Verbe à la fin de la subordonnée (bin), puis verbe de la principale juste après la virgule (bleibe ich). La première phrase calque l’ordre français ; la troisième oublie de placer « bin » à la fin.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Wenn ich krank bin, ich bleibe zu Hause.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Wenn ich krank bin, bleibe ich zu Hause.",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Wenn ich bin krank, bleibe ich zu Hause.",
+              "correct": false
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesundheit-wortschatz",
+      "kind": "exercise",
+      "title": "S’exercer : le vocabulaire de la santé",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "S’exercer : le vocabulaire de la santé",
+        "description": "Lernen Sie Wörter zusammen: Nomen mit Verb, Wortfamilien und feste Formulierungen. [fr] Apprenez les mots ensemble : nom et verbe, familles de mots et formules toutes faites.\n\nASTUCE\nPour dire où l’on a mal, l’allemand aime les mots composés : der Kopf + die Schmerzen = die Kopfschmerzen ; der Hals (la gorge) donne die Halsschmerzen. Et beaucoup de sensations se disent avec un datif : Mir ist kalt, mir ist übel (j’ai froid, j’ai la nausée).",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "match",
+          "prompt": "Welches Verb passt? Ordnen Sie zu. [fr] Quel verbe convient ? Associez.",
+          "explanation": "Fieber messen (prendre la température), ein Medikament einnehmen (prendre un médicament ; en français on « prend » tout, en allemand non), sich schonen (se ménager), einen Termin absagen (annuler un rendez-vous), sich gesund ernähren (bien se nourrir).",
+          "pairs": [
+            {
+              "left": "Fieber",
+              "right": "messen"
+            },
+            {
+              "left": "ein Medikament",
+              "right": "einnehmen"
+            },
+            {
+              "left": "sich ein paar Tage",
+              "right": "schonen"
+            },
+            {
+              "left": "einen Termin",
+              "right": "absagen"
+            },
+            {
+              "left": "sich gesund",
+              "right": "ernähren"
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "fill",
+          "prompt": "Bilden Sie das Nomen. [fr] Formez le nom.",
+          "text": "gesund → die [[1]] · sich erkälten → die [[2]] · untersuchen → die [[3]] · krank → die [[4]]",
+          "explanation": "Les adjectifs donnent des noms en -heit (gesund → die Gesundheit, krank → die Krankheit) ; les verbes, des noms en -ung (erkälten → die Erkältung, untersuchen → die Untersuchung). Tous sont féminins.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Gesundheit"
+              ],
+              "size": 11,
+              "hint": null
+            },
+            {
+              "id": "2",
+              "accept": [
+                "Erkältung"
+              ],
+              "size": 10,
+              "hint": null
+            },
+            {
+              "id": "3",
+              "accept": [
+                "Untersuchung"
+              ],
+              "size": 13,
+              "hint": null
+            },
+            {
+              "id": "4",
+              "accept": [
+                "Krankheit"
+              ],
+              "size": 10,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "Was ist eine „Überweisung“ beim Arzt? [fr] Qu’est-ce qu’une « Überweisung » chez le médecin ?",
+          "explanation": "Chez le médecin, die Überweisung est la lettre qui vous oriente vers un spécialiste. L’ordonnance se dit das Rezept, l’arrêt de travail die Krankschreibung. À la banque, eine Überweisung est un virement.",
+          "options": [
+            {
+              "id": "a",
+              "label": "une ordonnance pour la pharmacie",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "une lettre pour consulter un spécialiste",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "un arrêt de travail pour l’employeur",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Sie möchten sagen, dass es schlimmer wird. Was sagen Sie? [fr] Vous voulez dire que ça empire. Que dites-vous ?",
+          "explanation": "« Immer + comparatif » exprime une évolution : immer stärker (de plus en plus fort). « Immer weniger » dirait le contraire ; « weg » signifie que la douleur a disparu.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Die Schmerzen werden immer stärker.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Die Schmerzen werden immer weniger.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Die Schmerzen sind seit gestern weg.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Sie geben einer Freundin einen Rat. Was passt? [fr] Vous donnez un conseil à une amie. Qu’est-ce qui convient ?",
+          "explanation": "« An deiner Stelle würde ich … » (à ta place, je …) est une formule de conseil amicale. « An deiner Stelle » occupe la première place : le verbe « würde » suit directement, avant le sujet. La première phrase est fautive (gehen se conjugue avec sein : du wärst … gegangen).",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du hättest schon letzte Woche zum Arzt gegangen.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "An deiner Stelle ich würde mal zum Arzt gehen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "An deiner Stelle würde ich mal zum Arzt gehen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "match",
+          "prompt": "Was bedeutet das? Ordnen Sie zu. [fr] Qu’est-ce que cela veut dire ? Associez.",
+          "explanation": "Schwindelig et übel se construisent avec un datif sans sujet réel : Mir ist schwindelig, mir ist übel (littéralement « il m’est … »). Erkältet sein : être enrhumé ; die Halsschmerzen : le mal de gorge.",
+          "pairs": [
+            {
+              "left": "Ich habe Halsschmerzen.",
+              "right": "J’ai mal à la gorge."
+            },
+            {
+              "left": "Mir ist schwindelig.",
+              "right": "J’ai des vertiges."
+            },
+            {
+              "left": "Ich bin erkältet.",
+              "right": "Je suis enrhumé(e)."
+            },
+            {
+              "left": "Mir ist übel.",
+              "right": "J’ai la nausée."
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das Verb. [fr] Complétez avec le verbe.",
+          "text": "Ich fühle mich nicht gut. Ich [[1]] mich heute bei meiner Chefin krank.",
+          "explanation": "Sich krankmelden est séparable : ich melde mich … krank. On se déclare malade auprès de l’employeur (bei + datif) ; le médecin, lui, établit la Krankschreibung.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "melde"
+              ],
+              "hint": "sich krankmelden",
+              "size": 6
+            }
+          ]
+        }
+      ],
+      "placements": []
+    },
+    {
+      "id": "b1-gesundheit-redemittel",
+      "kind": "exercise",
+      "title": "Répéter à voix haute : chez le médecin et entre amis",
+      "estimatedMinutes": 9,
+      "competences": [
+        "expression-orale"
+      ],
+      "lesson": {
+        "title": "Répéter à voix haute : chez le médecin et entre amis",
+        "description": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.\n\nMit diesen Sätzen beschreiben Sie Beschwerden, fragen in der Praxis nach und geben Ratschläge. [fr] Avec ces phrases, vous décrivez des symptômes, vous posez des questions au cabinet et vous donnez des conseils.\nTIPP\n[fr] Conseil\nAchten Sie auf die Umlaute: ä in „stärker“, ö in „könnte“, ü in „nüchtern“ und „frühstücken“. [fr] Soignez les voyelles infléchies : ä dans « stärker », ö dans « könnte », ü dans « nüchtern » et « frühstücken ».",
+        "transcript": null
+      },
+      "questions": [
+        {
+          "id": "q1",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Seit drei Tagen habe ich Halsschmerzen und Fieber.",
+          "accept": [
+            "Seit drei Tagen habe ich Halsschmerzen und Fieber.",
+            "Seit 3 Tagen habe ich Halsschmerzen und Fieber."
+          ],
+          "explanation": "Décrire depuis quand : seit + datif et le présent. Après « Seit drei Tagen », le verbe « habe » vient en deuxième position. Halsschmerzen : accent sur HALS-.",
+          "threshold": 75
+        },
+        {
+          "id": "q2",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Die Schmerzen sind seit gestern stärker geworden.",
+          "accept": [
+            "Die Schmerzen sind seit gestern stärker geworden."
+          ],
+          "explanation": "Décrire une évolution : werden au Perfekt avec sein (sind … geworden). « Stärker » : comparatif de stark, avec Umlaut.",
+          "threshold": 75
+        },
+        {
+          "id": "q3",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Könnte ich bitte einen Termin für diese Woche bekommen?",
+          "accept": [
+            "Könnte ich bitte einen Termin für diese Woche bekommen?"
+          ],
+          "explanation": "Demande polie au cabinet : « Könnte ich … ? » + infinitif à la fin. Attention : bekommen signifie recevoir, obtenir (pas « devenir »).",
+          "threshold": 75
+        },
+        {
+          "id": "q4",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Wenn es nicht besser wird, solltest du zum Arzt gehen.",
+          "accept": [
+            "Wenn es nicht besser wird, solltest du zum Arzt gehen."
+          ],
+          "explanation": "Une condition et un conseil : verbe « wird » à la fin de la subordonnée, puis « solltest du » juste après la virgule.",
+          "threshold": 75
+        },
+        {
+          "id": "q5",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "Muss ich nüchtern kommen, oder darf ich frühstücken?",
+          "accept": [
+            "Muss ich nüchtern kommen, oder darf ich frühstücken?"
+          ],
+          "explanation": "Question à deux options reliées par oder : la voix monte sur la première (nüchtern kommen) et redescend à la fin (frühstücken). « Nüchtern » : ü bref et arrondi, proche du u français ; ch doux, comme dans ich.",
+          "threshold": 75
+        },
+        {
+          "id": "q6",
+          "type": "speak",
+          "prompt": "Hören Sie und sprechen Sie nach. [fr] Écoutez, puis répétez à voix haute.",
+          "text": "An deiner Stelle würde ich mich ein paar Tage schonen.",
+          "accept": [
+            "An deiner Stelle würde ich mich ein paar Tage schonen."
+          ],
+          "explanation": "Conseil amical : « An deiner Stelle würde ich … ». Le pronom réfléchi « mich » suit directement le sujet ; l’infinitif « schonen » ferme la phrase.",
+          "threshold": 75
+        }
+      ],
+      "placements": [
+        {
+          "media": "b1-gesundheit-redemittel-q1",
+          "usage": "audio",
+          "questionId": "q1",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-redemittel-q2",
+          "usage": "audio",
+          "questionId": "q2",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-redemittel-q3",
+          "usage": "audio",
+          "questionId": "q3",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-redemittel-q4",
+          "usage": "audio",
+          "questionId": "q4",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-redemittel-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-redemittel-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "on_demand",
+          "decorative": false
+        }
+      ]
+    },
+    {
+      "id": "b1-gesundheit-hoeren2",
+      "kind": "exercise",
+      "title": "Comprendre : un conseil à la pharmacie",
+      "estimatedMinutes": 15,
+      "competences": [
+        "ecoute",
+        "expression-ecrite"
+      ],
+      "lesson": {
+        "title": "Comprendre : un conseil à la pharmacie",
+        "description": "Hören Sie zuerst einmal ganz. Lesen Sie dann die Fragen und hören Sie noch einmal. [fr] Écoutez d’abord en entier. Lisez ensuite les questions, puis réécoutez.\n\nSITUATION\n[fr] La situation\nHerr Okoro ist erkältet und geht in die Apotheke. Die Apothekerin berät ihn. [fr] M. Okoro est enrhumé et va à la pharmacie. La pharmacienne le conseille.\nTIPP\n[fr] Conseil\nAchten Sie auf Zahlen: Wie oft? Wie lange? Wie viel? [fr] Soyez attentif aux nombres : combien de fois ? combien de temps ? combien ?\n\nDIKTAT\n[fr] Dictée\nZum Schluss gibt die Apothekerin noch zwei Tipps. Hören Sie und schreiben Sie die Sätze. [fr] Pour finir, la pharmacienne donne encore deux conseils. Écoutez et écrivez les phrases.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesundheit-hoeren2-audio",
+          "caption": "In der Apotheke",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-hoeren2-q5",
+          "usage": "audio",
+          "questionId": "q5",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        },
+        {
+          "media": "b1-gesundheit-hoeren2-q6",
+          "usage": "audio",
+          "questionId": "q6",
+          "transcriptVisibility": "after_answer",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Welche Beschwerden hat Herr Okoro? [fr] Quels symptômes M. Okoro a-t-il ?",
+          "explanation": "« Ich habe seit zwei Tagen Halsschmerzen und Schnupfen. Fieber habe ich nicht. » Der Schnupfen : le nez qui coule.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Kopfschmerzen, Fieber und seit einer Woche Husten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Halsschmerzen und Schnupfen, aber kein Fieber",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "Fieber und starke Bauchschmerzen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Wie viele Lutschtabletten darf er höchstens am Tag nehmen? [fr] Combien de pastilles peut-il prendre au maximum par jour ?",
+          "explanation": "« Alle drei bis vier Stunden eine, aber höchstens sechs am Tag. » Trois et quatre indiquent l’intervalle en heures, pas le nombre de pastilles. Höchstens : au maximum.",
+          "options": [
+            {
+              "id": "a",
+              "label": "drei",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "vier",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "sechs",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "choice",
+          "prompt": "„Für das Nasenspray braucht Herr Okoro ein Rezept.“ Richtig, falsch oder nicht gesagt? [fr] Vrai, faux ou non dit ?",
+          "explanation": "Faux : « Nein, beides bekommen Sie ohne Rezept. » Les pastilles et le spray sont en vente libre ; ensemble, ils coûtent 11,80 euros.",
+          "options": [
+            {
+              "id": "a",
+              "label": "richtig",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "falsch",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "nicht gesagt",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q4",
+          "type": "choice",
+          "prompt": "Was rät die Apothekerin wegen der Arbeit? [fr] Que conseille la pharmacienne au sujet du travail ?",
+          "explanation": "« Mit kleinen Kindern? Dann bleiben Sie lieber zu Hause … Eine Erkältung ist ansteckend. » Elle rappelle seulement que beaucoup d’employeurs veulent un certificat après trois jours.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Er soll zu Hause bleiben, weil er mit kleinen Kindern arbeitet.",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "Er kann ruhig arbeiten, wenn er kein Fieber hat.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Er soll sofort eine Krankschreibung beim Arzt holen.",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Trinken Sie viel warmen Tee und schonen Sie sich ein paar Tage."
+          ],
+          "voice": "frau2",
+          "explanation": "Deux impératifs de politesse : Trinken Sie …, schonen Sie sich … Le pronom réfléchi « sich » suit « Sie ». « Warmen Tee » : accusatif masculin, -en.",
+          "showWordCount": true
+        },
+        {
+          "id": "q6",
+          "type": "dictation",
+          "prompt": "Hören Sie und schreiben Sie den Satz. [fr] Écoutez et écrivez la phrase.",
+          "accept": [
+            "Falls die Halsschmerzen nicht besser werden, kommen Sie bitte wieder."
+          ],
+          "voice": "sprecher",
+          "explanation": "Falls envoie « werden » à la fin ; la principale commence par le verbe (kommen Sie). « Halsschmerzen » s’écrit en un mot, avec une majuscule.",
+          "showWordCount": true
+        }
+      ]
+    },
+    {
+      "id": "b1-gesundheit-kontrolle",
+      "kind": "exercise",
+      "title": "Vérifier : le cabinet ferme pour les vacances",
+      "estimatedMinutes": 12,
+      "competences": [
+        "lecture",
+        "ecoute"
+      ],
+      "lesson": {
+        "title": "Vérifier : le cabinet ferme pour les vacances",
+        "description": "Prüfen Sie, was Sie in diesem Modul gelernt haben: Hören, Grammatik und Wortschatz. [fr] Vérifiez ce que vous avez appris dans ce module : écoute, grammaire et vocabulaire.\n\nSie rufen in der Praxis an und hören eine Ansage. Hören Sie sie für die Fragen 1 und 2. [fr] Vous appelez le cabinet et tombez sur une annonce. Écoutez-la pour les questions 1 et 2.",
+        "transcript": null
+      },
+      "placements": [
+        {
+          "media": "b1-gesundheit-kontrolle-audio",
+          "caption": "Ansage der Praxis",
+          "transcriptVisibility": "after_answer",
+          "usage": "audio",
+          "decorative": false
+        }
+      ],
+      "questions": [
+        {
+          "id": "q1",
+          "type": "choice",
+          "prompt": "Was sollen Patientinnen und Patienten in dringenden Fällen tun? [fr] Que doivent faire les patients en cas d’urgence ?",
+          "explanation": "« In dringenden Fällen wenden Sie sich bitte an unsere Vertretung, die Praxis Doktor Schmitt. » Die Vertretung : le cabinet qui remplace. Le 19 août est la date de réouverture.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bis zum neunzehnten August warten",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "zur Praxis Doktor Schmitt in der Gartenstraße gehen",
+              "correct": true
+            },
+            {
+              "id": "c",
+              "label": "eine Nachricht auf dem Anrufbeantworter hinterlassen",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q2",
+          "type": "choice",
+          "prompt": "Bis wann kann man bei Doktor Albers noch ein Rezept bestellen? [fr] Jusqu’à quand peut-on encore commander une ordonnance chez le Dr Albers ?",
+          "explanation": "« Wenn Sie ein neues Rezept brauchen, können Sie es noch bis zum ersten August bei uns bestellen. » Le cabinet est fermé du 2 au 16 août.",
+          "options": [
+            {
+              "id": "a",
+              "label": "bis zum 1. August",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "bis zum 2. August",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "bis zum 16. August",
+              "correct": false
+            }
+          ]
+        },
+        {
+          "id": "q3",
+          "type": "order",
+          "prompt": "Bilden Sie einen Satz. [fr] Remettez les mots dans l’ordre.",
+          "answers": [
+            [
+              "Ich",
+              "rufe",
+              "in der Praxis",
+              "an,",
+              "falls",
+              "das Fieber",
+              "steigt."
+            ]
+          ],
+          "explanation": "La principale « Ich rufe in der Praxis an » a un verbe séparable : la particule « an » se place à la fin de la principale, avant la virgule. Après falls, le verbe « steigt » termine la phrase."
+        },
+        {
+          "id": "q4",
+          "type": "fill",
+          "prompt": "Ergänzen Sie den Ratschlag. [fr] Complétez le conseil.",
+          "text": "Mit hohem Fieber [[1]] du nicht zur Arbeit gehen.",
+          "explanation": "Un conseil à un ami : du solltest + infinitif à la fin (gehen). Sollte est le Konjunktiv II de sollen.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "solltest"
+              ],
+              "hint": "sollen (Konjunktiv II)",
+              "size": 9
+            }
+          ]
+        },
+        {
+          "id": "q5",
+          "type": "choice",
+          "prompt": "Was bedeutet „nüchtern“ beim Arzt? [fr] Que signifie « nüchtern » chez le médecin ?",
+          "explanation": "Nüchtern kommen : venir à jeun, sans avoir mangé (souvent pour une prise de sang). Dans la vie courante, nüchtern veut aussi dire « sobre ».",
+          "options": [
+            {
+              "id": "a",
+              "label": "sans rendez-vous",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "sans avoir dormi",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "sans avoir mangé",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q6",
+          "type": "choice",
+          "prompt": "Welcher Satz ist richtig? [fr] Quelle phrase est correcte ?",
+          "explanation": "Zu se place juste devant l’infinitif, à la fin : nicht zu kommen. La négation « nicht » précède le groupe zu + infinitif.",
+          "options": [
+            {
+              "id": "a",
+              "label": "Du brauchst morgen nicht kommen zu.",
+              "correct": false
+            },
+            {
+              "id": "b",
+              "label": "Du brauchst morgen zu nicht kommen.",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "Du brauchst morgen nicht zu kommen.",
+              "correct": true
+            }
+          ]
+        },
+        {
+          "id": "q7",
+          "type": "fill",
+          "prompt": "Ergänzen Sie das passende Wort. [fr] Complétez avec le mot qui convient.",
+          "text": "In der Apotheke bekommen Sie dieses Medikament nur mit einem [[1]] von der Ärztin.",
+          "explanation": "Das Rezept : l’ordonnance (« mit einem Rezept », datif neutre). Certains médicaments sont « verschreibungspflichtig » : il faut une ordonnance.",
+          "blanks": [
+            {
+              "id": "1",
+              "accept": [
+                "Rezept"
+              ],
+              "size": 7,
+              "hint": null
+            }
+          ]
+        },
+        {
+          "id": "q8",
+          "type": "choice",
+          "prompt": "„Die Apothekerin fragt, … ich noch andere Medikamente nehme.“ Welches Wort passt? [fr] Quel mot convient ?",
+          "explanation": "La question directe « Nehmen Sie andere Medikamente? » se répond par oui ou non : la question indirecte commence par ob. Wenn exprimerait une condition ; « fragen, dass » est impossible.",
+          "options": [
+            {
+              "id": "a",
+              "label": "ob",
+              "correct": true
+            },
+            {
+              "id": "b",
+              "label": "wenn",
+              "correct": false
+            },
+            {
+              "id": "c",
+              "label": "dass",
+              "correct": false
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "media": [
+    {
+      "key": "b1-gesundheit-lesen-artikel",
+      "kind": "image",
+      "title": "Article : « Gesund durch den Winter »",
+      "alt": "Page de magazine santé intitulée « Gesund durch den Winter » : conseils pour rester en forme en hiver (sommeil, activité physique, alimentation).",
+      "image": {
+        "layout": "article",
+        "kicker": "Gesundheit",
+        "title": "Gesund durch den Winter",
+        "icon": "heart-pulse",
+        "lead": "Kurze Tage, kalte Luft, volle Busse: Im Winter haben Erkältungen leichtes Spiel. Ganz vermeiden kann man sie nicht. Aber mit ein paar einfachen Gewohnheiten bleibt das Immunsystem stark.",
+        "paragraphs": [
+          "Schlaf ist die beste Medizin. Wer regelmäßig sieben bis acht Stunden schläft, wird seltener krank. Fachleute empfehlen, jeden Abend ungefähr zur gleichen Zeit ins Bett zu gehen."
+        ]
+      }
+    },
+    {
+      "key": "b1-gesundheit-hoeren-audio",
+      "kind": "audio",
+      "title": "Un message du cabinet médical et le rappel",
+      "script": [
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Guten Tag, Frau Moreau, hier ist Kühn von der Praxis Doktor Albers. Ihre Blutwerte sind da. Es ist nichts Schlimmes, aber Frau Doktor Albers möchte gern noch einmal mit Ihnen sprechen. Bitte rufen Sie uns zurück, dann vereinbaren wir einen Termin. Wir sind heute bis achtzehn Uhr erreichbar. Vielen Dank!"
+        },
+        {
+          "pause": 1.5
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Praxis Doktor Albers, Kühn am Apparat, guten Tag."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Guten Tag, hier ist Claire Moreau. Sie haben mir heute Vormittag eine Nachricht hinterlassen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Ach ja, Frau Moreau, danke für Ihren Rückruf. Frau Doktor Albers möchte mit Ihnen über Ihre Blutwerte sprechen. Ein Wert ist etwas zu niedrig, wahrscheinlich das Eisen."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Eisen? Muss ich mir Sorgen machen?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Nein, das kommt sehr oft vor und ist meistens nicht schlimm. Frau Doktor Albers erklärt Ihnen beim Termin alles genau."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Das erklärt vielleicht einiges. Ich bin seit ein paar Wochen sehr müde, und manchmal habe ich Kopfschmerzen."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Das notiere ich für die Ärztin. Haben Sie noch andere Beschwerden, zum Beispiel Schwindel?"
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Nein, Schwindel nicht. Aber ich friere schneller als früher."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Ist es in den letzten Tagen besser oder schlechter geworden?"
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Eher schlechter. Letzte Woche war ich nach der Arbeit so müde, dass ich sofort ins Bett gegangen bin."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Verstehe. Hätten Sie am Mittwoch um neun Uhr Zeit?"
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Mittwochvormittag ist schwierig, da habe ich eine wichtige Besprechung. Wäre auch ein Termin am Nachmittag möglich?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Am Mittwoch leider nicht, aber am Freitag um fünfzehn Uhr dreißig ist noch etwas frei."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Freitag um halb vier passt sehr gut."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Gut, dann trage ich Sie ein. Bitte bringen Sie Ihre Versichertenkarte mit. Für diesen Termin brauchen Sie nicht nüchtern zu kommen, Sie können also ganz normal frühstücken."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Und falls ich am Freitag doch nicht kann?"
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Dann sagen Sie bitte mindestens vierundzwanzig Stunden vorher ab, am besten telefonisch. Und noch ein Tipp von Frau Doktor Albers: Wenn Sie so müde sind, sollten Sie bis zum Termin keinen Sport machen und viel schlafen."
+        },
+        {
+          "voice": "frau",
+          "name": "Claire Moreau",
+          "text": "Alles klar. Vielen Dank, Herr Kühn."
+        },
+        {
+          "voice": "mann3",
+          "name": "Herr Kühn",
+          "text": "Gern. Am Tag vorher bekommen Sie von uns noch eine Erinnerung per SMS. Bis Freitag, Frau Moreau. Auf Wiederhören!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-hoeren2-audio",
+      "kind": "audio",
+      "title": "Un conseil à la pharmacie",
+      "script": [
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Guten Tag, was kann ich für Sie tun?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Guten Tag. Ich habe seit zwei Tagen Halsschmerzen und Schnupfen. Fieber habe ich nicht. Haben Sie etwas, das schnell hilft?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Nehmen Sie im Moment andere Medikamente?"
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Nein, gar keine."
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Gut. Dann empfehle ich Ihnen diese Lutschtabletten gegen die Halsschmerzen. Sie können alle drei bis vier Stunden eine nehmen, aber höchstens sechs am Tag. Für die Nase gibt es dieses Spray. Das sollten Sie aber nicht länger als eine Woche benutzen."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Brauche ich dafür ein Rezept?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Nein, beides bekommen Sie ohne Rezept. Zusammen macht das elf Euro achtzig."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Und wenn es nicht besser wird?"
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Wenn Sie in drei, vier Tagen immer noch Beschwerden haben oder Fieber bekommen, sollten Sie zum Arzt gehen. Und trinken Sie viel, am besten warmen Tee."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Kann ich denn mit der Erkältung arbeiten gehen? Ich bin Erzieher in einer Kita."
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Mit kleinen Kindern? Dann bleiben Sie lieber zu Hause, bis es Ihnen besser geht. Eine Erkältung ist ansteckend. Und denken Sie daran: Viele Arbeitgeber möchten nach drei Tagen eine Krankschreibung vom Arzt sehen."
+        },
+        {
+          "voice": "mann2",
+          "name": "Herr Okoro",
+          "text": "Gut zu wissen. Vielen Dank für die Beratung!"
+        },
+        {
+          "voice": "frau2",
+          "name": "Apothekerin",
+          "text": "Gern geschehen. Gute Besserung!"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-kontrolle-audio",
+      "kind": "audio",
+      "title": "L’annonce du répondeur du cabinet",
+      "script": [
+        {
+          "voice": "sprecher",
+          "name": "Ansage",
+          "text": "Guten Tag, Sie sind mit der Praxis Doktor Albers verbunden. Vom zweiten bis zum sechzehnten August ist die Praxis wegen Urlaub geschlossen."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ansage",
+          "text": "In dringenden Fällen wenden Sie sich bitte an unsere Vertretung, die Praxis Doktor Schmitt in der Gartenstraße vierzehn. Wenn Sie ein neues Rezept brauchen, können Sie es noch bis zum ersten August bei uns bestellen."
+        },
+        {
+          "voice": "sprecher",
+          "name": "Ansage",
+          "text": "Ab dem neunzehnten August sind wir wieder für Sie da. Nachts und am Wochenende erreichen Sie den ärztlichen Bereitschaftsdienst."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-einstieg-foto",
+      "kind": "image",
+      "title": "Un stéthoscope",
+      "alt": "Un stéthoscope noir posé sur un bureau clair, dans une lumière chaude.",
+      "photo": {
+        "file": "libre/commons/gesundheit-stethoskop.jpg"
+      },
+      "credit": "Michael Movchin, Wikimedia Commons",
+      "license": "CC BY-SA 3.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Stethoskop.jpg"
+    },
+    {
+      "key": "b1-gesundheit-lesen-foto",
+      "kind": "image",
+      "title": "Une tasse de thé",
+      "alt": "Une tasse de thé chaud en verre, sur sa soucoupe, posée sur une table en bois sombre.",
+      "photo": {
+        "file": "libre/commons/gesundheit-tee.jpg",
+        "crop": [
+          0,
+          0.055,
+          1,
+          0.889
+        ]
+      },
+      "credit": "Manan Mathur, Wikimedia Commons",
+      "license": "CC BY-SA 4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Honey_Tea.JPG"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q1",
+      "kind": "audio",
+      "title": "Modèle à répéter q1 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Seit drei Tagen habe ich Halsschmerzen und Fieber."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q2",
+      "kind": "audio",
+      "title": "Modèle à répéter q2 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Die Schmerzen sind seit gestern stärker geworden."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q3",
+      "kind": "audio",
+      "title": "Modèle à répéter q3 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Könnte ich bitte einen Termin für diese Woche bekommen?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q4",
+      "kind": "audio",
+      "title": "Modèle à répéter q4 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Wenn es nicht besser wird, solltest du zum Arzt gehen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q5",
+      "kind": "audio",
+      "title": "Modèle à répéter q5 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecherin",
+          "text": "Muss ich nüchtern kommen, oder darf ich frühstücken?"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-redemittel-q6",
+      "kind": "audio",
+      "title": "Modèle à répéter q6 · Répéter à voix haute : chez le médecin et entre amis",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "An deiner Stelle würde ich mich ein paar Tage schonen."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-hoeren2-q5",
+      "kind": "audio",
+      "title": "Dictée q5 · Comprendre : un conseil à la pharmacie",
+      "script": [
+        {
+          "voice": "frau2",
+          "text": "Trinken Sie viel warmen Tee und schonen Sie sich ein paar Tage."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-hoeren2-q6",
+      "kind": "audio",
+      "title": "Dictée q6 · Comprendre : un conseil à la pharmacie",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "Falls die Halsschmerzen nicht besser werden, kommen Sie bitte wieder."
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    },
+    {
+      "key": "b1-gesundheit-lexique",
+      "kind": "audio",
+      "title": "Lexique · Gesundheit : prendre soin de sa santé",
+      "segments": true,
+      "audioProfile": "b1-lexique",
+      "script": [
+        {
+          "voice": "sprecher",
+          "text": "die Beschwerden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Erkältung, die Erkältungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Fieber"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "husten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Krankschreibung, die Krankschreibungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich krankmelden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Überweisung, die Überweisungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Rezept, die Rezepte"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "verschreiben"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "einnehmen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Nebenwirkung, die Nebenwirkungen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Vorsorge"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Sprechstunde, die Sprechstunden"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Versichertenkarte, die Versichertenkarten"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "nüchtern"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "ansteckend"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich erholen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich schonen"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "sich ernähren"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "das Immunsystem, die Immunsysteme"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "die Bewegung"
+        },
+        {
+          "pause": 0.9
+        },
+        {
+          "voice": "sprecher",
+          "text": "falls"
+        }
+      ],
+      "credit": "LinguaCap, synthèse Piper avec Thorsten Müller (CC0) et Kerstin, préentraînée sur la voix de Cori Samuel (Hi-Fi TTS, CC BY 4.0)",
+      "license": "Jeux de données des voix : CC0 et CC BY 4.0"
+    }
+  ]
+}
